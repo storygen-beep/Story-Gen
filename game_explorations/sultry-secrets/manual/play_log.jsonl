@@ -1,0 +1,11 @@
+{"ts":"2026-04-16T21:20:06.009Z","step":1,"cmd":"goto","arg":"https://mopoga.com/sultry-secrets","err":"Error: page.goto: net::ERR_CERT_AUTHORITY_INVALID at https://mopoga.com/sultry-secrets\nCall log:\n  - navigating to \"https://mopoga.com/sultry-secrets\", waiting until \"domcontentloaded\"\n"}
+{"ts":"2026-04-16T21:20:10.614Z","step":2,"cmd":"wait","arg":"4000"}
+{"ts":"2026-04-16T21:20:11.280Z","step":3,"cmd":"shot","arg":"portal","path":"/home/user/Story-Gen/game_explorations/sultry-secrets/manual/shots/003_portal.png"}
+{"ts":"2026-04-16T21:20:11.881Z","step":4,"cmd":"dump-frames","arg":"","frames":[{"url":"chrome-error://chromewebdata/","name":""}]}
+{"ts":"2026-04-16T21:20:12.494Z","step":5,"cmd":"introspect","arg":"","frame_url":"chrome-error://chromewebdata/","data":{"engine":null,"passage":null,"variables":{},"body_text":"","clickables":[],"modal_text":null},"body_file":"/home/user/Story-Gen/game_explorations/sultry-secrets/manual/shots/005_body.json"}
+{"ts":"2026-04-16T21:20:24.296Z","kind":"console","type":"error","text":"Failed to load resource: the server responded with a status of 403 ()"}
+{"ts":"2026-04-16T21:20:24.303Z","step":1,"cmd":"goto","arg":"https://mopoga.com/sultry-secrets"}
+{"ts":"2026-04-16T21:20:28.907Z","step":2,"cmd":"wait","arg":"4000"}
+{"ts":"2026-04-16T21:20:29.560Z","step":3,"cmd":"shot","arg":"portal","path":"/home/user/Story-Gen/game_explorations/sultry-secrets/manual/shots/003_portal.png"}
+{"ts":"2026-04-16T21:20:30.161Z","step":4,"cmd":"dump-frames","arg":"","frames":[{"url":"https://mopoga.com/sultry-secrets","name":""}]}
+{"ts":"2026-04-16T21:20:30.772Z","step":5,"cmd":"introspect","arg":"","frame_url":"https://mopoga.com/sultry-secrets","data":{"engine":null,"passage":null,"variables":{},"body_text":"","clickables":[],"modal_text":null},"body_file":"/home/user/Story-Gen/game_explorations/sultry-secrets/manual/shots/005_body.json"}
