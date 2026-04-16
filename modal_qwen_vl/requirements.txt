@@ -1,0 +1,8 @@
+# Modal Qwen-VL Client Requirements
+# Install with: pip install -r modal_qwen_vl/requirements.txt
+
+# Modal SDK (for deployment and SDK mode)
+modal>=0.64.0
+
+# HTTP client (for endpoint mode)
+httpx>=0.25.0

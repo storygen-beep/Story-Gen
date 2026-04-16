@@ -1,0 +1,19 @@
+{
+  "session_id": 4,
+  "start_ts": "2026-04-16T15:36:50.379Z",
+  "start_epoch_ms": 1776353810379,
+  "end_ts": "2026-04-16T15:37:25.898Z",
+  "duration_s": 36,
+  "clicks": 0,
+  "choices_explored": 0,
+  "arrow_advances": 0,
+  "unique_states_seen": 17,
+  "new_unique_states": 0,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "EXPLORATION SUMMARY (10 min session):\n\nCORE LOOP: Wake up (dream) → change to SchoolUni in Wardrobe → Living Room → Go out → Jecinda District (hub) → School → Class (Study/Study Hard/Slack off)\n\nSTATS SYSTEM (all start at 0):\n- Corruption: determines what actions Zara can do (higher=more devious)\n- Skills: Art, Science, Computer (for passing school)\n- School Reputation: determines Prom Queen eligibility, joining 'dirty' activities\n- Fitness: 1:1 scales max energy, struggle ability, walking energy cost, camming fans\n\nRESOURCES:\n- Energy (100/100 start, drained by actions)\n- Money (200 start)\n- Groceries/Snacks (5 each)\n\nTIME SYSTEM: Hour/minute, day, dayOfWeek, weekDay/weekendDay, timeOfDay\nEach passage transition: ~1 min. Outfit change: +5 min. Travel between districts: 10+ min.\n\nCLASS MECHANIC (Art class confirmed):\n- Study: -15 energy (gives +skill?)\n- Study Hard: -30 energy (gives ++skill?)\n- Slack off: -10 energy (probably corruption/rep)\n\nGATES OBSERVED:\n- Must wear SchoolUni to leave house (gate message: 'SHE NEEDS TO WEAR HER SCHOOL UNIFORM!')\n- Dream choice: Accept=+1 Corruption, Reject=likely 0 corruption\n\nDISTRICTS: Jecinda District (home), Arabella District (visible below). School is in Jecinda.\n\nLOCATIONS MAPPED: Room (bedroom), Wardrobe, Living room, Jecinda District, School hallway, Classes (Art so far)\n\nNPC ROSTER (10 chars, all object-based): dad, bro(Kyle), mom, dick, ben, jason, daniel, lisa, jessica, janet. Each has cooldownX and dailyHangX flags.\n\nPROGRESSION GATES: school1stDayEvent, school2ndDayEvent (with Offer), school3rdDayEvent\nSpecial systems: drugStatus, commissions(3), securityXIntro events, camming/drawing income, famSexUnlocked, curfew, allowance, chores\n\nGOAL: Become Prom Queen by graduation. Get known, loved, respected. Many side paths.\n\nGame is a sophisticated life-sim/corruption sandbox: calendar, time-of-day, 10 NPCs with objects (trust/love/corruption etc), income sources (art commissions, camming, allowance, chores), money sinks (gym, clothes, dildos), and layered progression gates."
+  ]
+}

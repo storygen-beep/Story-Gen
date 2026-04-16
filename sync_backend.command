@@ -1,0 +1,1 @@
+rsync -avz --exclude 'venv' --exclude '.venv' --exclude '__pycache__' --exclude '*.pyc' --exclude 'node_modules' --exclude '.git' -e "ssh -i story_gen_key.pem" . ubuntu@ec2-13-235-78-115.ap-south-1.compute.amazonaws.com:story_gen/

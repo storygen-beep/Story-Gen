@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Video Cutter for Twine Games",
+  "version": "1.0.0",
+  "description": "Developer tool for trimming video clips in local Twine game previews",
+  "permissions": [
+    "activeTab"
+  ],
+  "host_permissions": [
+    "http://localhost:8080/*",
+    "http://localhost:8000/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://localhost:8080/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

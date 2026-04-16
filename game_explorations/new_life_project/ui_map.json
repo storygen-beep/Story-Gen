@@ -1,0 +1,984 @@
+{
+  "slug": "new_life_project",
+  "url": "https://mopoga.com/new-life-project",
+  "generated_at": "2026-04-16T10:38:25.267Z",
+  "engine": "sugarcube",
+  "pregame_auto_advance": {
+    "trail": [
+      {
+        "step": 0,
+        "passage": "Beginning",
+        "action": "clicked_forward",
+        "text": "Play!",
+        "tier": 1
+      },
+      {
+        "step": 1,
+        "passage": "characterCreation",
+        "action": "clicked_forward",
+        "text": "Play!",
+        "tier": 1
+      },
+      {
+        "step": 2,
+        "passage": "playGirl",
+        "action": "clicked_forward",
+        "text": "Everything faded to black...",
+        "tier": 5
+      },
+      {
+        "step": 3,
+        "passage": "Everything faded to black...",
+        "action": "clicked_forward",
+        "text": "Continue",
+        "tier": 4
+      },
+      {
+        "step": 4,
+        "passage": "Continue",
+        "action": "clicked_forward",
+        "text": "new life?",
+        "tier": 5
+      },
+      {
+        "step": 5,
+        "passage": "newintro",
+        "action": "clicked_forward",
+        "text": "Explore the city",
+        "tier": 5
+      },
+      {
+        "step": 6,
+        "passage": "exploreIntro",
+        "action": "terminated",
+        "reason": "no_forward_pattern_match"
+      }
+    ],
+    "terminated_at": {
+      "step": 6,
+      "passage": "exploreIntro",
+      "action": "terminated",
+      "reason": "no_forward_pattern_match"
+    }
+  },
+  "regions_catalog": [
+    {
+      "pos_class": "left",
+      "id": "ui-bar",
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 281,
+        "h": 900
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [
+        {
+          "text": "New Life Project",
+          "tag": "h1",
+          "cls": ""
+        },
+        {
+          "text": "Nota Bao",
+          "tag": "h2",
+          "cls": ""
+        }
+      ],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 249,
+            "y": 3,
+            "w": 31,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 98,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 150,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "",
+          "title": "",
+          "href": "https://www.patreon.com/NotaBao",
+          "target": "",
+          "external": true,
+          "bbox": {
+            "x": 86,
+            "y": 198,
+            "w": 30,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "",
+          "title": "",
+          "href": "https://ko-fi.com/notabao",
+          "target": "",
+          "external": true,
+          "bbox": {
+            "x": 120,
+            "y": 198,
+            "w": 30,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "",
+          "title": "",
+          "href": "https://discord.gg/rPSPtFhzAv",
+          "target": "",
+          "external": true,
+          "bbox": {
+            "x": 154,
+            "y": 198,
+            "w": 40,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Backpack",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1208,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Help",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1243,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Cheats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1278,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Support",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1313,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1365,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Settings",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1400,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1435,
+            "w": 230,
+            "h": 34
+          }
+        }
+      ],
+      "passive_text_samples": [
+        "New Life Project",
+        "v0.9.easter",
+        "Nota Bao",
+        "Josephine",
+        "It is",
+        "Monday",
+        "Early morning",
+        ", Day",
+        "Money: £",
+        "🐣",
+        "Eggs:",
+        "Arousal:",
+        "Trauma:",
+        "Allure:",
+        "30",
+        "Inhibition:",
+        "125",
+        "Purity:",
+        "25",
+        "You're freshly showered, and have a fruity aroma!"
+      ]
+    },
+    {
+      "pos_class": "bottom",
+      "id": "story",
+      "bbox": {
+        "x": 320,
+        "y": 40,
+        "w": 1080,
+        "h": 889
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Perhaps check out this cute cafe",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 428,
+            "y": 725,
+            "w": 285,
+            "h": 24
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Go further down the street",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 428,
+            "y": 795,
+            "w": 231,
+            "h": 24
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Go further up the street",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 428,
+            "y": 830,
+            "w": 206,
+            "h": 24
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Just enjoy the scenery and walk along",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 428,
+            "y": 900,
+            "w": 331,
+            "h": 24
+          }
+        }
+      ],
+      "passive_text_samples": [
+        "As you're walking down the street, nothing comes to mind. Yo",
+        "You should find some way of making money."
+      ]
+    },
+    {
+      "pos_class": "sampled",
+      "id": "ui-bar-history",
+      "bbox": {
+        "x": 0,
+        "y": 3,
+        "w": 280,
+        "h": 32
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 98,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 150,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        }
+      ],
+      "passive_text_samples": []
+    },
+    {
+      "pos_class": "sampled",
+      "id": "ui-bar-body",
+      "bbox": {
+        "x": 0,
+        "y": 40,
+        "w": 280,
+        "h": 860
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [
+        {
+          "text": "New Life Project",
+          "tag": "h1",
+          "cls": ""
+        },
+        {
+          "text": "Nota Bao",
+          "tag": "h2",
+          "cls": ""
+        }
+      ],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "",
+          "title": "",
+          "href": "https://www.patreon.com/NotaBao",
+          "target": "",
+          "external": true,
+          "bbox": {
+            "x": 86,
+            "y": 198,
+            "w": 30,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "",
+          "title": "",
+          "href": "https://ko-fi.com/notabao",
+          "target": "",
+          "external": true,
+          "bbox": {
+            "x": 120,
+            "y": 198,
+            "w": 30,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "",
+          "title": "",
+          "href": "https://discord.gg/rPSPtFhzAv",
+          "target": "",
+          "external": true,
+          "bbox": {
+            "x": 154,
+            "y": 198,
+            "w": 40,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Backpack",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1208,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Help",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1243,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Cheats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1278,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Support",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1313,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1365,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Settings",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1400,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1435,
+            "w": 230,
+            "h": 34
+          }
+        }
+      ],
+      "passive_text_samples": [
+        "New Life Project",
+        "v0.9.easter",
+        "Nota Bao",
+        "Josephine",
+        "It is",
+        "Monday",
+        "Early morning",
+        ", Day",
+        "Money: £",
+        "🐣",
+        "Eggs:",
+        "Arousal:",
+        "Trauma:",
+        "Allure:",
+        "30",
+        "Inhibition:",
+        "125",
+        "Purity:",
+        "25",
+        "You're freshly showered, and have a fruity aroma!"
+      ]
+    },
+    {
+      "pos_class": "sampled",
+      "id": "passage-exploreintro",
+      "bbox": {
+        "x": 428,
+        "y": 40,
+        "w": 864,
+        "h": 889
+      },
+      "cls": "passage intro",
+      "collapsed": false,
+      "sections": [],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Perhaps check out this cute cafe",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 428,
+            "y": 725,
+            "w": 285,
+            "h": 24
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Go further down the street",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 428,
+            "y": 795,
+            "w": 231,
+            "h": 24
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Go further up the street",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 428,
+            "y": 830,
+            "w": 206,
+            "h": 24
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Just enjoy the scenery and walk along",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 428,
+            "y": 900,
+            "w": 331,
+            "h": 24
+          }
+        }
+      ],
+      "passive_text_samples": [
+        "As you're walking down the street, nothing comes to mind. Yo",
+        "You should find some way of making money."
+      ]
+    }
+  ],
+  "chrome_probes": [
+    {
+      "label": "Backpack",
+      "bbox": {
+        "x": 25,
+        "y": 1208,
+        "w": 230,
+        "h": 34
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/new_life_project/ui_probes/Backpack.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 3516
+    },
+    {
+      "label": "Help",
+      "bbox": {
+        "x": 25,
+        "y": 1243,
+        "w": 230,
+        "h": 34
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/new_life_project/ui_probes/Help.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 3462
+    },
+    {
+      "label": "Cheats",
+      "bbox": {
+        "x": 25,
+        "y": 1278,
+        "w": 230,
+        "h": 34
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/new_life_project/ui_probes/Cheats.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 4231
+    },
+    {
+      "label": "Support",
+      "bbox": {
+        "x": 25,
+        "y": 1313,
+        "w": 230,
+        "h": 34
+      },
+      "region_id": "ui-bar",
+      "skipped_reason": "external"
+    },
+    {
+      "label": "Saves",
+      "bbox": {
+        "x": 25,
+        "y": 1365,
+        "w": 230,
+        "h": 34
+      },
+      "region_id": "ui-bar",
+      "skipped_reason": "save_mutation"
+    },
+    {
+      "label": "Settings",
+      "bbox": {
+        "x": 25,
+        "y": 1400,
+        "w": 230,
+        "h": 34
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/new_life_project/ui_probes/Settings.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 701
+    },
+    {
+      "label": "Restart",
+      "bbox": {
+        "x": 25,
+        "y": 1435,
+        "w": 230,
+        "h": 34
+      },
+      "region_id": "ui-bar",
+      "skipped_reason": "destructive"
+    },
+    {
+      "label": "Perhaps check out this cute cafe",
+      "bbox": {
+        "x": 428,
+        "y": 725,
+        "w": 285,
+        "h": 24
+      },
+      "region_id": "story",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/new_life_project/ui_probes/Perhaps_check_out_this_cute_cafe.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 774
+    },
+    {
+      "label": "Go further down the street",
+      "bbox": {
+        "x": 428,
+        "y": 795,
+        "w": 231,
+        "h": 24
+      },
+      "region_id": "story",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/new_life_project/ui_probes/Go_further_down_the_street.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 3505
+    },
+    {
+      "label": "Go further up the street",
+      "bbox": {
+        "x": 428,
+        "y": 830,
+        "w": 206,
+        "h": 24
+      },
+      "region_id": "story",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/new_life_project/ui_probes/Go_further_up_the_street.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 3462
+    },
+    {
+      "label": "Just enjoy the scenery and walk along",
+      "bbox": {
+        "x": 428,
+        "y": 900,
+        "w": 331,
+        "h": 24
+      },
+      "region_id": "story",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/new_life_project/ui_probes/Just_enjoy_the_scenery_and_walk_along.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 3468
+    }
+  ],
+  "regions": [
+    {
+      "pos_class": "left",
+      "tag": "div",
+      "id": "ui-bar",
+      "cls": "",
+      "position_style": "fixed",
+      "z_index": "50",
+      "collapsed": false,
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 281,
+        "h": 900
+      },
+      "text_sample": "New Life Projectv0.9.easter  Nota BaoJosephineIt is Monday, Early morning, Day 1"
+    },
+    {
+      "pos_class": "bottom",
+      "tag": "div",
+      "id": "story",
+      "cls": "",
+      "position_style": "static",
+      "z_index": "10",
+      "collapsed": false,
+      "bbox": {
+        "x": 320,
+        "y": 40,
+        "w": 1080,
+        "h": 889
+      },
+      "text_sample": "As you're walking down the street, nothing comes to mind. You are completely and"
+    },
+    {
+      "pos_class": "sampled",
+      "tag": "div",
+      "id": "ui-bar-history",
+      "cls": "",
+      "position_style": "static",
+      "z_index": "auto",
+      "collapsed": false,
+      "bbox": {
+        "x": 0,
+        "y": 3,
+        "w": 280,
+        "h": 32
+      },
+      "text_sample": "",
+      "from_sampling": true
+    },
+    {
+      "pos_class": "sampled",
+      "tag": "div",
+      "id": "ui-bar-body",
+      "cls": "",
+      "position_style": "static",
+      "z_index": "auto",
+      "collapsed": false,
+      "bbox": {
+        "x": 0,
+        "y": 40,
+        "w": 280,
+        "h": 860
+      },
+      "text_sample": "",
+      "from_sampling": true
+    },
+    {
+      "pos_class": "sampled",
+      "tag": "div",
+      "id": "passage-exploreintro",
+      "cls": "passage intro",
+      "position_style": "static",
+      "z_index": "auto",
+      "collapsed": false,
+      "bbox": {
+        "x": 428,
+        "y": 40,
+        "w": 864,
+        "h": 889
+      },
+      "text_sample": "",
+      "from_sampling": true
+    }
+  ],
+  "main_content": null,
+  "chrome_probes_count": 8,
+  "ui_frame_hash": "ac9d53706d4ee704"
+}

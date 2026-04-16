@@ -1,0 +1,170 @@
+{
+  "player": {
+    "stats": [
+      "corruption"
+    ],
+    "vars": [
+      {
+        "name": "PlayerCorruption",
+        "stat": "corruption",
+        "profile": {
+          "types": [
+            "number"
+          ],
+          "mutation_count": 5,
+          "first_ts": 1776361290488,
+          "last_ts": 1776362761732,
+          "passages_seen_on_count": 33,
+          "number_stats": {
+            "count": 86,
+            "unique_count": 6,
+            "min": 0,
+            "max": 35,
+            "first": 0,
+            "last": 35,
+            "is_monotonic_increasing": false,
+            "is_boolean_like": false
+          }
+        }
+      }
+    ]
+  },
+  "dad": {
+    "stats": [
+      "corruption"
+    ],
+    "vars": [
+      {
+        "name": "dad.corruption",
+        "stat": "corruption",
+        "profile": {
+          "types": [
+            "number"
+          ],
+          "mutation_count": 1,
+          "first_ts": 1776361290488,
+          "last_ts": 1776362761732,
+          "passages_seen_on_count": 33,
+          "number_stats": {
+            "count": 86,
+            "unique_count": 2,
+            "min": 0,
+            "max": 1,
+            "first": 0,
+            "last": 1,
+            "is_monotonic_increasing": true,
+            "is_boolean_like": true
+          }
+        }
+      }
+    ]
+  },
+  "bro": {
+    "stats": [
+      "corruption",
+      "love",
+      "lust"
+    ],
+    "vars": [
+      {
+        "name": "bro.corruption",
+        "stat": "corruption",
+        "profile": {
+          "types": [
+            "number"
+          ],
+          "mutation_count": 1,
+          "first_ts": 1776361290488,
+          "last_ts": 1776362761732,
+          "passages_seen_on_count": 33,
+          "number_stats": {
+            "count": 86,
+            "unique_count": 2,
+            "min": 0,
+            "max": 50,
+            "first": 0,
+            "last": 50,
+            "is_monotonic_increasing": true,
+            "is_boolean_like": true
+          }
+        }
+      },
+      {
+        "name": "bro.love",
+        "stat": "love",
+        "profile": {
+          "types": [
+            "number"
+          ],
+          "mutation_count": 0,
+          "first_ts": 1776362704059,
+          "last_ts": 1776362761732,
+          "passages_seen_on_count": 4,
+          "number_stats": {
+            "count": 4,
+            "unique_count": 1,
+            "min": 50,
+            "max": 50,
+            "first": 50,
+            "last": 50,
+            "is_monotonic_increasing": true,
+            "is_boolean_like": true
+          }
+        }
+      },
+      {
+        "name": "bro.lust",
+        "stat": "lust",
+        "profile": {
+          "types": [
+            "number"
+          ],
+          "mutation_count": 0,
+          "first_ts": 1776362704059,
+          "last_ts": 1776362761732,
+          "passages_seen_on_count": 4,
+          "number_stats": {
+            "count": 4,
+            "unique_count": 1,
+            "min": 50,
+            "max": 50,
+            "first": 50,
+            "last": 50,
+            "is_monotonic_increasing": true,
+            "is_boolean_like": true
+          }
+        }
+      }
+    ]
+  },
+  "mom": {
+    "stats": [
+      "corruption"
+    ],
+    "vars": [
+      {
+        "name": "mom.corruption",
+        "stat": "corruption",
+        "profile": {
+          "types": [
+            "number"
+          ],
+          "mutation_count": 1,
+          "first_ts": 1776361290488,
+          "last_ts": 1776362761732,
+          "passages_seen_on_count": 33,
+          "number_stats": {
+            "count": 86,
+            "unique_count": 2,
+            "min": 0,
+            "max": 1,
+            "first": 0,
+            "last": 1,
+            "is_monotonic_increasing": true,
+            "is_boolean_like": true
+          }
+        }
+      }
+    ]
+  }
+}

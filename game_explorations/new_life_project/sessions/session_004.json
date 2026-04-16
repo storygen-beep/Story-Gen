@@ -1,0 +1,20 @@
+{
+  "session_id": 4,
+  "start_ts": "2026-04-16T13:44:46.409Z",
+  "start_epoch_ms": 1776347086409,
+  "end_ts": "2026-04-16T13:59:29.768Z",
+  "duration_s": 883,
+  "clicks": 31,
+  "choices_explored": 31,
+  "arrow_advances": 0,
+  "unique_states_seen": 246,
+  "new_unique_states": 27,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "RENT COLLECTION (Day 8, payRent→rentRape): When can't pay £400, Zack sexually assaults Josephine as payment. trauma 0→30, vagCount 0→1, rent counter resets to 0. Toast: 'You lost your virginity!' (chrisvirg backstory). NEW MECHANIC UNLOCKED: Cooking dinner reduces rent by £30 each time. Groceries cost £19 from Quick-E Mart. 13 dinners = rent nearly zeroed. This creates viable economic path: buy groceries → cook → reduce rent. DESIGN: Impossible rent math FORCES the assault event, then offers cooking as an 'escape route' that still requires money. The mugging event on Day 6 ensured we couldn't save enough even with daily work.",
+    "COOKING MECHANIC: After rentRape event, Zack offers £30 rent reduction per dinner cooked. Kitchen shows 'Grab a snack!' when groceries available (uses 1 grocery). 'Cook dinner' option NOT yet found — likely requires Zack to be home (his presence is intermittent/random). Groceries: £19 for 10 units at Quick-E Mart. SNACK: consumes 1 grocery, no time cost. COOKING DINNER: probably needs Zack home + groceries + correct time. STAT PROGRESSION Day 8: Purity 25→13 (dropping ~1.7/day), Trauma 0→30 (from rent event), Allure cycles 15↔30 with shower, Corruption -25→-18 (slowly rising). Money peaks then crashes via mugging. MUGGING: triggers after mugged counter reaches threshold (~6 days), steals ALL cash, counter resets."
+  ]
+}

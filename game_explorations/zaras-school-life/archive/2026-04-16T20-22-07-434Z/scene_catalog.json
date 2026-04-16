@@ -1,0 +1,18 @@
+{
+  "Welcome Page": {
+    "first_ts": 1776370653629,
+    "visit_count": 1
+  },
+  "dream1": {
+    "first_ts": 1776370675973,
+    "visit_count": 3
+  },
+  "wakeup_dream": {
+    "first_ts": 1776370677856,
+    "visit_count": 1
+  },
+  "Room": {
+    "first_ts": 1776370678756,
+    "visit_count": 1
+  }
+}

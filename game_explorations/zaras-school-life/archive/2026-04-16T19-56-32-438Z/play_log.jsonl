@@ -1,0 +1,8 @@
+{"ts":"2026-04-16T19:44:49.602Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"dream1","state_hash":"3556d4ba2e45da9b"}
+{"ts":"2026-04-16T19:46:05.931Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"dream1","state_hash":"3556d4ba2e45da9b"}
+{"ts":"2026-04-16T19:46:12.831Z","session_id":1,"cmd":"dom","args":{"filter":"continue"},"ok":true}
+{"ts":"2026-04-16T19:46:17.817Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"dream1","state_hash":"3556d4ba2e45da9b"}
+{"ts":"2026-04-16T19:46:24.843Z","session_id":1,"cmd":"click","args":{"positional":["Accept his request"]},"ok":true,"passage":"dream1","state_hash":"3556d4ba2e45da9b","clicked_text":"Accept his request","method":"visible-has-text","state_changed":false}
+{"ts":"2026-04-16T19:46:33.898Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"dream1","state_hash":"3556d4ba2e45da9b"}
+{"ts":"2026-04-16T19:46:40.524Z","session_id":1,"cmd":"click","args":{"positional":["RING RING RING RING"]},"ok":true,"passage":"wakeup_dream","state_hash":"f217f483b741f652","clicked_text":"RING RING RING RING","method":"visible-has-text","state_changed":true}
+{"ts":"2026-04-16T19:47:01.724Z","session_id":1,"cmd":"finalize","args":{},"ok":true}

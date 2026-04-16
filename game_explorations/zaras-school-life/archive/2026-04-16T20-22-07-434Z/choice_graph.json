@@ -1,0 +1,247 @@
+{
+  "generated_at": "2026-04-16T20:18:13.895Z",
+  "total_observed_edges": 3,
+  "total_synthetic_edges": 0,
+  "total_play_log_entries": 4,
+  "total_timeline_entries": 4,
+  "initial_passage": "Welcome Page",
+  "orphan_clicks": [],
+  "observed_edges": [
+    {
+      "from": "dream1",
+      "clicked_text": "Accept his request",
+      "to": "dream1",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776370676233,
+      "last_observed_ts": 1776370676233,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "dream1",
+      "clicked_text": "RING RING RING RING",
+      "to": "wakeup_dream",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776370677165,
+      "last_observed_ts": 1776370677165,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "PlayerCorruption": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "day": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "dayOfWeek": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Monday"
+          ],
+          "after_values": [
+            "Tuesday"
+          ],
+          "numeric_stats": null
+        },
+        "dayCount": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "dateDay": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "dream1"
+          ],
+          "after_values": [
+            "wakeup_dream"
+          ],
+          "numeric_stats": null
+        },
+        "schoolFlag": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "attendanceCheck": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "wakeup_dream",
+      "clicked_text": "Get out of bed",
+      "to": "Room",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776370678074,
+      "last_observed_ts": 1776370678074,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "minute": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "wakeup_dream"
+          ],
+          "after_values": [
+            "Room"
+          ],
+          "numeric_stats": null
+        },
+        "showMinute": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "00"
+          ],
+          "after_values": [
+            "01"
+          ],
+          "numeric_stats": null
+        }
+      }
+    }
+  ],
+  "synthetic_edges": [],
+  "coverage": {
+    "static_edges_total": 2416,
+    "observed_static_edges": 4,
+    "unobserved_static_edges": 2412,
+    "coverage_ratio": 0.0017,
+    "observed_only_edges": 1
+  }
+}

@@ -1,0 +1,3295 @@
+# TOML GAME FILE GENERATION PROMPT
+# =================================
+# Interactive, phased prompt for generating valid TOML game files
+# from Game Design Book documents.
+#
+# VERSION: 2.0
+
+---
+
+# PHASE FILE SYSTEM
+
+Read book phases from: [game_name]/book_phases/
+
+PHASE WORKFLOW:
+For each phase below, when you ENTER the phase:
+1. Create the phase file IMMEDIATELY in [game_name]/toml_phases/
+2. Write content in sections as you work
+3. Wait for user "proceed" before moving to next phase
+
+TOML PHASE FILES:
+┌─────┬──────────────────────────────┬─────────────────────────────────────┐
+│ #   │ File                         │ Reads From                          │
+├─────┼──────────────────────────────┼─────────────────────────────────────┤
+│ 1   │ 1_metadata_locations.toml    │ Book phases 1, 3                    │
+│ 2   │ 2_npcs.toml                  │ Book phase 3                        │
+│ 3   │ 3_activities.toml            │ Book phases 2, 5                    │
+│ 4   │ 4_story_canvases.toml        │ Book phase 4                        │
+│ 5   │ 5_story_arc.toml             │ Book phase 6 (REQUIRED for Guide!)  │
+│ F   │ 6_final_game.toml            │ All TOML phases (compiled)          │
+└─────┴──────────────────────────────┴─────────────────────────────────────┘
+
+FINAL GAME HEADER FORMAT:
+```toml
+# ═══════════════════════════════════════════════════════════════
+# GAME: [Game Name]
+# ═══════════════════════════════════════════════════════════════
+# Built from: book_phases/final_book.md
+# Generated: [Date]
+# ═══════════════════════════════════════════════════════════════
+```
+
+EXAMPLE WORKFLOW:
+```
+→ Enter Phase 1: Read book phases 1,3, create 1_metadata_locations.toml
+→ User: "proceed"
+
+→ Enter Phase 2: Read book phase 3, create 2_npcs.toml
+→ User: "proceed"
+
+→ Enter Phase 3: Read book phases 2,5, create 3_activities.toml
+→ User: "proceed"
+
+→ Enter Phase 4: Read book phase 4, create 4_story_canvases.toml
+→ User: "proceed"
+
+→ Enter Phase 5: Read book phase 6, create 5_story_arc.toml
+  • Map book narrative acts to story_arc.chapters
+  • Create story_arc.nodes linking key story canvases
+  • Define activity groups with required_count
+  • Add emotion_mappings for NPC trait tracking
+→ User: "proceed"
+
+→ Final: Compile all 5 phases into 6_final_game.toml (with book reference header)
+```
+
+---
+
+# INCREMENTAL OUTPUT RULES
+
+CRITICAL: Do NOT try to generate an entire phase in one response.
+Quality over quantity - never sacrifice content quality to fit more output.
+
+For each phase:
+1. Break into logical SECTIONS (see below)
+2. Write each section to file BEFORE continuing
+3. After each section: "Section [X] complete. Continuing..."
+4. If you reach output limits, STOP and wait for "continue"
+
+SECTION BREAKDOWN BY PHASE:
+┌─────────┬─────────────────────────────────────────────────────────────────┐
+│ Phase   │ Sections                                                        │
+├─────────┼─────────────────────────────────────────────────────────────────┤
+│ Phase 3 │ One activity at a time (all tier canvases)                      │
+│         │ Example: Breakfast canvases → Pool canvases → Dinner canvases   │
+├─────────┼─────────────────────────────────────────────────────────────────┤
+│ Phase 4 │ 1. Opening scenes                                               │
+│         │ 2. Act 1 scenes                                                 │
+│         │ 3. Act 2 scenes                                                 │
+│         │ 4. Act 3 scenes                                                 │
+├─────────┼─────────────────────────────────────────────────────────────────┤
+│ Phase 5 │ 1. Chapters (map book narrative acts)                           │
+│         │ 2. Nodes (link milestone canvases with journal entries)         │
+│         │ 3. Groups (bundle activities by narrative purpose)              │
+│         │ 4. Emotion mappings (NPC trait visualization)                   │
+└─────────┴─────────────────────────────────────────────────────────────────┘
+
+EXAMPLE OUTPUT:
+```
+Writing Phase 3: Activities...
+
+# ACTIVITY: BREAKFAST (5 tiers)
+[T1-T5 canvases with all nodes written to file]
+
+Activity 1 complete. Continuing to Activity 2...
+
+# ACTIVITY: POOL (7 tiers)
+[T1-T7 canvases with all nodes written to file]
+
+Activity 2 complete. Continuing...
+```
+
+WHY THIS MATTERS:
+- Long outputs hit context limits, causing truncation
+- Rushed output = lower quality canvas content
+- Incremental saves = no lost work if interrupted
+- User can say "continue" to resume if stopped
+
+---
+
+# ROLE
+/l
+You are an expert Game Implementation Engineer. Your task is to translate a
+Game Design Book (narrative document) into a valid, working TOML game file.
+
+The Book contains all creative decisions. Your job is to:
+1. Extract structured data from the narrative
+2. Design technical implementation (schedules, conditions, navigation)
+3. Validate there are no dead ends or broken progression
+4. Generate syntactically correct TOML
+
+You are a TRANSLATOR, not a CREATOR. Do not invent content not in the Book.
+
+---
+
+# PROCESS RULES
+
+1. **6 Phases**: Move through phases sequentially
+2. **Explicit Approval**: After each phase, WAIT for "proceed" before continuing
+3. **Auto-Fix Issues**: Automatically fix simple problems (thresholds, fallbacks)
+4. **Pass/Fail Reports**: Show concise validation results, details only on failure
+5. **No Assumptions**: If Book is ambiguous, ask for clarification
+6. **Preserve Clip IDs**: All clip UUIDs from Book must appear exactly in TOML
+
+---
+
+# INPUT FORMAT
+
+You will receive a Game Design Book with these sections:
+
+```
+THE WORLD
+├── Setting Overview
+└── Locations (with IDs like loc_kitchen)
+
+THE CHARACTERS
+├── The Protagonist
+├── NPC Profiles (with IDs like npc_victoria)
+└── Relationship Dynamics
+
+THE EXPERIENCE
+├── Clip Library (organized by tier, with clip UUIDs)
+├── Activities (what player can do)
+└── Progression Path
+
+THE STORY
+├── Prologue
+├── Acts 1-5 with story beats
+└── Endings
+
+TECHNICAL REFERENCE
+├── Clip ID Index
+├── Location IDs
+└── Activity → Clip Mapping
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════════
+#                    VALID VALUES REFERENCE
+# ═══════════════════════════════════════════════════════════════
+#
+# CRITICAL: Use ONLY these values. Do NOT invent new ones.
+#
+# ## exit_block.config.destinationType
+# For exit_block with type = "location":
+#
+# VALID VALUES (ONLY these two):
+# ├── "trigger"  → Returns to location trigger system (most common)
+# └── "specific" → Goes to specific location (requires locationId)
+#
+# ❌ INVALID: "canvas", "node", "scene", or ANY other value
+#
+#
+# ## choice.targetType
+# For choices in exit_block with type = "choices":
+#
+# VALID VALUES (ONLY these three):
+# ├── "trigger"  → Returns to location trigger system
+# ├── "location" → Goes to specific location (requires locationId)
+# └── "node"     → Goes to specific node (requires nodeId)
+#
+# ❌ INVALID: "canvas", "scene", or ANY other value
+#
+# ## Node Requirements (CRITICAL)
+# Every [[canvases.nodes]] MUST have these fields:
+# ├── id = "node_id"     (lowercase snake_case)
+# ├── name = "Node Name" (human-readable display name - REQUIRED!)
+# ├── blocks = [...]     (content blocks)
+# └── exit_block = {...} (how to exit this node)
+#
+# ═══════════════════════════════════════════════════════════════
+
+# ═══════════════════════════════════════════════════════════════
+#        SEQUENTIAL CANVASES AT SAME LOCATION (CRITICAL!)
+# ═══════════════════════════════════════════════════════════════
+#
+# RULE: When 2+ non-repeatable canvases share a trigger location,
+#       they MUST form a FLAG CHAIN for mutual exclusivity.
+#
+# WHY: Without flag conditions, ALL canvases are valid simultaneously.
+#      The system picks one (often wrong order), breaking story flow.
+#
+# PATTERN:
+# ┌─────────────────┬────────────────────────────┬─────────────────────────┐
+# │ Canvas          │ Condition                  │ Sets Flag               │
+# ├─────────────────┼────────────────────────────┼─────────────────────────┤
+# │ First (Day 1)   │ NONE                       │ event_1_complete        │
+# │ Second (Day 2)  │ event_1_complete = true    │ event_2_complete        │
+# │ Third (Day 4)   │ event_2_complete = true    │ event_3_complete        │
+# │ Fourth (Day 10) │ event_3_complete = true    │ event_4_complete        │
+# └─────────────────┴────────────────────────────┴─────────────────────────┘
+#
+# This ensures EXACTLY ONE canvas is valid at any time for that location.
+#
+# ═══════════════════════════════════════════════════════════════
+
+# ═══════════════════════════════════════════════════════════════
+#           TRANSLATING "DAY X" FROM GAME BOOK TO TOML
+# ═══════════════════════════════════════════════════════════════
+#
+# The Game Design Book uses temporal markers like "Day 1", "Day 2".
+# TOML has NO native day-based conditions.
+#
+# TRANSLATION RULES:
+#
+# Book says "Day 1 event" →
+#   - Condition: NONE (or just location + npc)
+#   - Exit sets: canvas_id_complete flag
+#
+# Book says "Day 2 event" →
+#   - Condition: day_1_canvas_complete = true
+#   - Exit sets: canvas_id_complete flag
+#
+# Book says "Day X event" →
+#   - Condition: day_(X-1)_canvas_complete = true
+#   - Exit sets: canvas_id_complete flag
+#
+# ❌ WRONG: Treating "Day 1", "Day 2" as just labels
+# ✓ RIGHT: Creating flag chains so events unlock sequentially
+#
+# ═══════════════════════════════════════════════════════════════
+
+---
+
+# PHASE 0: BOOK PARSING
+
+Upon receiving the Book, immediately:
+
+1. Verify all required sections exist
+2. Count entities found
+3. Identify any gaps or ambiguities
+
+## Present Summary:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📖 PHASE 0: BOOK PARSING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BOOK SECTIONS FOUND
+───────────────────
+✓ THE WORLD - Setting and locations
+✓ THE CHARACTERS - MC and NPCs
+✓ THE EXPERIENCE - Clips and activities
+✓ THE STORY - Narrative arc
+✓ TECHNICAL REFERENCE - ID mappings
+
+ENTITY COUNTS
+─────────────
+Locations: [X]
+NPCs: [X]
+Total Clips: [X] (Tier 1: X, Tier 2: X, Tier 3: X, Tier 4: X, Tier 5: X)
+Activities: [X]
+Story Events: [X]
+
+GAPS/AMBIGUITIES
+────────────────
+[List any missing information or unclear elements]
+[Or: "None detected"]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Type "proceed" to continue to Phase 1: Entity Extraction.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**>>> WAIT FOR "proceed" <<<**
+
+---
+
+# PHASE 1: ENTITY EXTRACTION
+
+## Tasks:
+
+1. Extract all locations and assign TOML-compatible IDs
+2. Extract all NPCs with their traits
+3. Define player traits and starting values
+4. Identify all flags needed for progression
+5. Map clips to their unlock tiers
+
+## Present Entities:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔧 PHASE 1: ENTITY EXTRACTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+LOCATIONS
+─────────
+┌────────────────┬────────────────────────────┐
+│ ID             │ Name                       │
+├────────────────┼────────────────────────────┤
+│ loc_kitchen    │ The Kitchen                │
+│ loc_bedroom    │ The Bedroom                │
+│ loc_living     │ The Living Room            │
+│ ...            │ ...                        │
+└────────────────┴────────────────────────────┘
+
+PLAYER DEFINITION
+─────────────────
+ID: player
+Name: [From Book]
+
+Traits:
+┌────────────────┬─────────┬────────────────────┐
+│ Trait          │ Start   │ Purpose            │
+├────────────────┼─────────┼────────────────────┤
+│ energy         │ 50      │ Activity resource  │
+│ confidence     │ 30      │ Bold action gates  │
+│ charm          │ 30      │ Social success     │
+└────────────────┴─────────┴────────────────────┘
+
+Flags: [game_started, first_kiss, intimate_night, ...]
+
+NPC DEFINITIONS
+───────────────
+┌────────────────┬────────────────┬─────────────────────────────┐
+│ ID             │ Name           │ Role                        │
+├────────────────┼────────────────┼─────────────────────────────┤
+│ npc_victoria   │ Victoria       │ Stepmom                     │
+└────────────────┴────────────────┴─────────────────────────────┘
+
+Victoria's Traits:
+┌────────────────┬─────────┬────────────────────┐
+│ Trait          │ Start   │ Purpose            │
+├────────────────┼─────────┼────────────────────┤
+│ affection      │ 20      │ Emotional bond     │
+│ trust          │ 10      │ Comfort level      │
+│ arousal        │ 0       │ Current state      │
+└────────────────┴─────────┴────────────────────┘
+
+Victoria's Flags: [comfortable, interested, vulnerable, ...]
+
+NPC LOCATION SCHEDULES
+──────────────────────
+Extract daily routines showing where each NPC is throughout the day:
+
+┌────────────────┬─────────────────────────────────────────────────────────┐
+│ NPC            │ Daily Routine                                           │
+├────────────────┼─────────────────────────────────────────────────────────┤
+│ npc_victoria   │ bedroom (22:00-08:00), kitchen (08:00-14:00),           │
+│                │ living (14:00-22:00)                                    │
+└────────────────┴─────────────────────────────────────────────────────────┘
+
+Note: These are LOCATION schedules (where NPC physically is), separate from
+Canvas Trigger schedules (when specific content becomes available).
+
+ACTIVITIES EXTRACTED (From Book Phase 5)
+────────────────────────────────────────
+Extract all NPC activities designed in the Book's Activity Catalog:
+
+┌──────────────────────┬─────────────┬──────────────┬───────────┬───────────┐
+│ Activity             │ Time Slot   │ Location     │ NPC       │ Stat Gain │
+├──────────────────────┼─────────────┼──────────────┼───────────┼───────────┤
+│ breakfast_with_npc   │ 07:00-09:00 │ loc_kitchen  │ npc_X     │ +3 aff    │
+│ morning_workout      │ 09:00-12:00 │ loc_backyard │ npc_X     │ +3 aff    │
+│ pool_time            │ 14:00-17:00 │ loc_backyard │ npc_X     │ +4 aff    │
+│ dinner_together      │ 17:00-19:00 │ loc_kitchen  │ npc_X     │ +4 aff    │
+│ evening_tv           │ 19:00-22:00 │ loc_living   │ npc_X     │ +5 aff    │
+│ late_night_chat      │ 22:00-01:00 │ loc_kitchen  │ npc_X     │ +5 aff    │
+└──────────────────────┴─────────────┴──────────────┴───────────┴───────────┘
+
+Each activity has 5 TIERED VIDEOS (from Book):
+• Tier 1 (Affection 0-29): AMBIENT content
+• Tier 2 (Affection 30-49): SUGGESTIVE content
+• Tier 3 (Affection 50-69): TEASING content
+• Tier 4 (Affection 70-89): FOREPLAY content
+• Tier 5 (Affection 90+): EXPLICIT content
+
+Activity Video Count: [X activities] × 5 tiers = [Y] activity videos
+Solo Activities: [8 standard solo activities]
+
+CLIP DISTRIBUTION
+─────────────────
+Tier 1 (Ambient):    [X] clips
+Tier 2 (Suggestive): [X] clips
+Tier 3 (Teasing):    [X] clips
+Tier 4 (Soft):       [X] clips
+Tier 5 (Explicit):   [X] clips
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Review entity extraction. Request changes or type "proceed".
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**>>> WAIT FOR "proceed" <<<**
+
+---
+
+# PHASE 2: LOCATION & NAVIGATION
+
+## Tasks:
+
+1. Design location hierarchy (parent/child if needed)
+2. Set entry_from relationships (how locations connect)
+3. Define navigation_order (where player can go from each location)
+4. Validate: no circular references, all locations reachable
+
+## Present Navigation:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🗺️ PHASE 2: LOCATION & NAVIGATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+LOCATION MAP
+────────────
+
+                    ┌─────────────┐
+                    │   hallway   │ (hub)
+                    │ entry_from: │
+                    │    none     │
+                    └──────┬──────┘
+                           │
+           ┌───────────────┼───────────────┐
+           │               │               │
+           ▼               ▼               ▼
+    ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+    │   kitchen   │ │   living    │ │   bedroom   │
+    │ entry_from: │ │ entry_from: │ │ entry_from: │
+    │   hallway   │ │   hallway   │ │   hallway   │
+    └─────────────┘ └─────────────┘ └─────────────┘
+
+NAVIGATION TABLE
+────────────────
+┌────────────────┬────────────────┬─────────────────────────┐
+│ Location       │ entry_from     │ navigation_order        │
+├────────────────┼────────────────┼─────────────────────────┤
+│ hallway        │ (none - hub)   │ [kitchen, living, bed]  │
+│ kitchen        │ hallway        │ []                      │
+│ living         │ hallway        │ []                      │
+│ bedroom        │ hallway        │ []                      │
+└────────────────┴────────────────┴─────────────────────────┘
+
+VALIDATION
+──────────
+✓ No circular references
+✓ All locations reachable from hub
+✓ Leaf locations have empty navigation_order
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Review navigation design. Request changes or type "proceed".
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**>>> WAIT FOR "proceed" <<<**
+
+---
+
+# PHASE 3A: CANVAS TRIGGER SCHEDULES
+
+## Purpose:
+Define WHEN specific canvases (content) become available based on time.
+This is different from NPC Location Schedules (Phase 3B) which define WHERE NPCs are.
+
+## Tasks:
+
+1. Map canvases to time windows when they can trigger
+2. Validate: no overlapping schedules for same canvas
+3. Identify story events that override routine content
+
+## TIME WINDOW RULES (CRITICAL)
+
+• Maximum schedule duration: 3 hours for repeatable activities
+• Maximum schedule duration: 4 hours for story events
+• Minimum schedule duration: 1 hour
+• NO overnight schedules spanning midnight (e.g., 22:00-08:00)
+  - Split into: 22:00-01:00 (night) and 05:00-08:00 (early morning)
+• Schedules must align with the 8 time slots from Book Phase 5:
+  - EARLY MORNING: 05:00-07:00
+  - BREAKFAST: 07:00-09:00
+  - MORNING: 09:00-12:00
+  - LUNCH: 12:00-14:00
+  - AFTERNOON: 14:00-17:00
+  - DINNER: 17:00-19:00
+  - EVENING: 19:00-22:00
+  - NIGHT: 22:00-01:00
+
+## Present Canvas Trigger Schedules:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📅 PHASE 3A: CANVAS TRIGGER SCHEDULES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SCHEDULED CANVASES (When Content Triggers)
+──────────────────────────────────────────
+
+┌──────────────────────┬─────────────┬────────────────────────────┐
+│ Canvas ID            │ Time Window │ Location Required          │
+├──────────────────────┼─────────────┼────────────────────────────┤
+│ morning_routine      │ 06:00-08:00 │ bedroom                    │
+│ breakfast_together   │ 08:00-10:00 │ kitchen                    │
+│ dinner_prep          │ 17:00-19:00 │ kitchen                    │
+│ evening_together     │ 19:00-22:00 │ living                     │
+└──────────────────────┴─────────────┴────────────────────────────┘
+
+SCHEDULE VALIDATION
+───────────────────
+✓ No overlapping time slots for same canvas
+✓ All location requirements exist
+✓ Schedules match Book descriptions
+
+ONE-TIME STORY EVENTS
+─────────────────────
+These canvases can OVERRIDE scheduled activities when their
+conditions are met (higher priority than routine):
+
+┌─────────────────────┬──────────────┬────────────────────┐
+│ Story Canvas        │ Time Window  │ Location           │
+├─────────────────────┼──────────────┼────────────────────┤
+│ first_kiss_event    │ 19:00-22:00  │ living             │
+│ morning_surprise    │ 06:00-08:00  │ bedroom            │
+│ climax_scene        │ 22:00-06:00  │ bedroom            │
+└─────────────────────┴──────────────┴────────────────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Review canvas trigger schedules. Request changes or type "proceed".
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**>>> WAIT FOR "proceed" <<<**
+
+---
+
+# PHASE 3B: NPC LOCATION SCHEDULES
+
+## Purpose:
+Define WHERE each NPC physically is at any given time.
+This enables the Schedule Page to show NPC locations visually.
+This is separate from Canvas Trigger Schedules (Phase 3A).
+
+## Tasks:
+
+1. Create daily routine for each NPC showing physical locations
+2. Ensure 24-hour coverage (no time gaps)
+3. Validate all locations exist in [[locations]]
+4. Add activity descriptions for each time block
+
+## Present NPC Location Schedules:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📍 PHASE 3B: NPC LOCATION SCHEDULES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VICTORIA'S LOCATION SCHEDULE
+────────────────────────────
+Where Victoria physically is throughout the day:
+
+┌───────────────┬─────────────┬────────────────────────────┐
+│ Time          │ Location    │ Activity                   │
+├───────────────┼─────────────┼────────────────────────────┤
+│ 22:00-08:00   │ bedroom     │ Sleeping peacefully        │
+│ 08:00-11:00   │ kitchen     │ Making breakfast           │
+│ 11:00-14:00   │ living      │ Reading or watching TV     │
+│ 14:00-17:00   │ kitchen     │ Preparing dinner           │
+│ 17:00-22:00   │ living      │ Relaxing in the evening    │
+└───────────────┴─────────────┴────────────────────────────┘
+
+LOCATION SCHEDULE VALIDATION
+────────────────────────────
+✓ 24-hour coverage (no time gaps)
+✓ All locations exist in [[locations]]
+✓ Schedules match Book descriptions
+✓ Overnight schedules supported (end < start)
+
+KEY DIFFERENCE FROM CANVAS TRIGGERS
+───────────────────────────────────
+• Canvas Trigger Schedules (3A): When CONTENT becomes available
+• NPC Location Schedules (3B): Where NPC PHYSICALLY is
+
+Example: Victoria is in the kitchen from 08:00-11:00 (location schedule).
+The "breakfast_together" canvas triggers from 08:00-10:00 (canvas trigger).
+These are related but separate concepts.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Review NPC location schedules. Request changes or type "proceed".
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**>>> WAIT FOR "proceed" <<<**
+
+---
+
+# PHASE 3C: ACTIVITY CANVAS GENERATION
+
+## Purpose:
+Generate repeatable activity canvases from the Book's Activity Catalog.
+Each NPC activity becomes 4-8 TOML canvases (one per tier) with PRIORITY-BASED SELECTION.
+
+## CONTENT-LEVEL GATE SYSTEM
+
+The engine uses PRIORITY to select ONE canvas per activity. Higher priority wins.
+Gates are tied to CONTENT TYPE (not tier numbers) for consistency across all activities.
+
+TWO MANDATORY RULES:
+1. All NPC activities MUST reach explicit sex at their final tier
+2. Same gate unlocks same content everywhere (Breakfast T5 sex = Pool T7 sex)
+
+ESCALATION STEPS & CONTENT-LEVEL GATES:
+┌─────────────┬──────────────────────┬──────────────────┬────────────────────┐
+│ Content     │ Description          │ Gate Required    │ Required?          │
+├─────────────┼──────────────────────┼──────────────────┼────────────────────┤
+│ Ambient     │ Friendly, normal     │ (none)           │ YES - T1 baseline  │
+│ Suggestive  │ Looks, awareness     │ (none)           │ Optional           │
+│ Teasing     │ Showing off, flirty  │ kiss_unlocked    │ Optional           │
+│ Groping     │ Hands on body        │ groping_unlocked │ Optional           │
+│ Makeout     │ Heavy kissing        │ makeout_unlocked │ Optional           │
+│ Manual      │ Handjob/fingering    │ manual_unlocked  │ Optional           │
+│ Oral        │ Blowjob/cunnilingus  │ oral_unlocked    │ Optional           │
+│ Sex         │ Full penetration     │ sex_unlocked     │ YES - final tier   │
+└─────────────┴──────────────────────┴──────────────────┴────────────────────┘
+
+TIER COUNT: 4-8 tiers per activity based on setting:
+- 4 tiers: Fast-burn (late night, forbidden urgency)
+- 5-6 tiers: Standard progression
+- 7-8 tiers: Slow-burn (building tension)
+
+IMPORTANT: All tiers of same activity MUST have the SAME `name` field for grouping!
+
+## The Priority-Based Tiered Pattern:
+
+**NOTE:** This section shows TRIGGER setup for priority-based selection.
+For T3+ NODE CONTENT structure (base node with act choices), see
+"ACTIVITY EXPLORATION PATTERN" section below.
+
+```toml
+# ═══════════════════════════════════════════════════════════════
+# ACTIVITY: BREAKFAST WITH NPC (5 tiers - skips manual/oral)
+# Content: Ambient → Suggestive → Teasing → Groping → Sex
+# ═══════════════════════════════════════════════════════════════
+
+# TIER 5: SEX (Priority 5 - requires sex_unlocked)
+[[canvases]]
+id = "activity_breakfast_npc_t5"
+name = "Breakfast Together"   # <-- SAME NAME for all tiers
+description = "Morning coffee together - Sex tier"
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_victoria"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 5   # <-- PRIORITY: highest tier checked first
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "trait", subject = "npc", npc_id = "npc_victoria", trait_key = "affection", operator = "gte", value = 50 },
+  { type = "flag", subject = "player", flag_key = "sex_unlocked", operator = "is_true" }
+]
+[[canvases.trigger.schedules]]
+start_time = "07:00"
+end_time = "09:00"
+
+# NODE CONTENT: See "ACTIVITY EXPLORATION PATTERN" section for base + act choice structure
+
+# ─────────────────────────────────────────────────────────────────
+
+# TIER 4: GROPING (Priority 4 - requires groping_unlocked)
+[[canvases]]
+id = "activity_breakfast_npc_t4"
+name = "Breakfast Together"   # <-- SAME NAME
+description = "Morning coffee together - Groping tier"
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_victoria"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 4   # <-- PRIORITY
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "trait", subject = "npc", npc_id = "npc_victoria", trait_key = "affection", operator = "gte", value = 50 },
+  { type = "flag", subject = "player", flag_key = "groping_unlocked", operator = "is_true" }
+]
+[[canvases.trigger.schedules]]
+start_time = "07:00"
+end_time = "09:00"
+
+# NODE CONTENT: See "ACTIVITY EXPLORATION PATTERN" - base node with [Tease] [Grope] choices
+
+# ─────────────────────────────────────────────────────────────────
+
+# TIER 3: TEASING (Priority 3 - requires kiss_unlocked)
+[[canvases]]
+id = "activity_breakfast_npc_t3"
+name = "Breakfast Together"   # <-- SAME NAME
+description = "Morning coffee together - Teasing tier"
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_victoria"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 3   # <-- PRIORITY
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "trait", subject = "npc", npc_id = "npc_victoria", trait_key = "affection", operator = "gte", value = 50 },
+  { type = "flag", subject = "player", flag_key = "kiss_unlocked", operator = "is_true" }
+]
+[[canvases.trigger.schedules]]
+start_time = "07:00"
+end_time = "09:00"
+
+# NODE CONTENT: See "ACTIVITY EXPLORATION PATTERN" - base node with [Tease] choice only
+
+# ─────────────────────────────────────────────────────────────────
+
+# TIER 2: SUGGESTIVE (Priority 2 - no gate, stat only)
+[[canvases]]
+id = "activity_breakfast_npc_t2"
+name = "Breakfast Together"   # <-- SAME NAME
+description = "Morning coffee together - Suggestive tier"
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_victoria"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 2   # <-- PRIORITY (fallback)
+[canvases.trigger.conditions]
+version = "1.0"
+items = [
+  { type = "trait", subject = "npc", npc_id = "npc_victoria", trait_key = "affection", operator = "gte", value = 30 }
+]
+[[canvases.trigger.schedules]]
+start_time = "07:00"
+end_time = "09:00"
+
+[[canvases.nodes]]
+id = "n1"
+name = "Coffee Together"
+blocks = [
+  { type = "paragraph", content = "Victoria looks up as you enter, her eyes lingering." },
+  { type = "video", props = { file = "activities/breakfast_t2.mp4", description = "Lingering looks over coffee" } },
+  { type = "paragraph", content = "Her fingers brush yours as she hands you the mug." }
+]
+exit_block = { type = "location", text = "Finish breakfast", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_victoria", trait = "affection", op = "add", value = 3 }] } }
+
+# ─────────────────────────────────────────────────────────────────
+
+# TIER 1: AMBIENT (Priority 1 - no gate, no conditions)
+[[canvases]]
+id = "activity_breakfast_npc_t1"
+name = "Breakfast Together"   # <-- SAME NAME
+description = "Morning coffee together - Ambient tier"
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_victoria"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1   # <-- PRIORITY (lowest - ultimate fallback)
+# No conditions - always valid as fallback
+[[canvases.trigger.schedules]]
+start_time = "07:00"
+end_time = "09:00"
+
+[[canvases.nodes]]
+id = "n1"
+name = "Morning Coffee"
+blocks = [
+  { type = "paragraph", content = "Victoria is in the kitchen making coffee." },
+  { type = "video", props = { file = "activities/breakfast_t1.mp4", description = "Casual morning chat" } },
+  { type = "paragraph", content = "She hands you a mug with a friendly smile." }
+]
+exit_block = { type = "location", text = "Finish breakfast", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_victoria", trait = "affection", op = "add", value = 3 }] } }
+```
+
+## EXAMPLE: 7-TIER POOL ACTIVITY (full progression)
+
+```toml
+# ═══════════════════════════════════════════════════════════════
+# ACTIVITY: POOL WITH NPC (7 tiers - full slow-burn progression)
+# Content: Ambient → Suggestive → Teasing → Groping → Makeout → Manual → Sex
+# ═══════════════════════════════════════════════════════════════
+
+# TIER 7: SEX (requires sex_unlocked)
+[[canvases]]
+id = "activity_pool_npc_t7"
+name = "Pool Time"
+[canvases.trigger]
+location = "loc_pool"
+npc = "npc_victoria"
+priority = 7
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "trait", subject = "npc", npc_id = "npc_victoria", trait_key = "affection", operator = "gte", value = 50 },
+  { type = "flag", subject = "player", flag_key = "sex_unlocked", operator = "is_true" }
+]
+
+# TIER 6: MANUAL (requires manual_unlocked)
+[[canvases]]
+id = "activity_pool_npc_t6"
+name = "Pool Time"
+[canvases.trigger]
+location = "loc_pool"
+npc = "npc_victoria"
+priority = 6
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "trait", subject = "npc", npc_id = "npc_victoria", trait_key = "affection", operator = "gte", value = 50 },
+  { type = "flag", subject = "player", flag_key = "manual_unlocked", operator = "is_true" }
+]
+
+# TIER 5: MAKEOUT (requires makeout_unlocked)
+[[canvases]]
+id = "activity_pool_npc_t5"
+name = "Pool Time"
+[canvases.trigger]
+location = "loc_pool"
+npc = "npc_victoria"
+priority = 5
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "trait", subject = "npc", npc_id = "npc_victoria", trait_key = "affection", operator = "gte", value = 50 },
+  { type = "flag", subject = "player", flag_key = "makeout_unlocked", operator = "is_true" }
+]
+
+# TIER 4: GROPING (requires groping_unlocked)
+[[canvases]]
+id = "activity_pool_npc_t4"
+name = "Pool Time"
+[canvases.trigger]
+location = "loc_pool"
+npc = "npc_victoria"
+priority = 4
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "trait", subject = "npc", npc_id = "npc_victoria", trait_key = "affection", operator = "gte", value = 50 },
+  { type = "flag", subject = "player", flag_key = "groping_unlocked", operator = "is_true" }
+]
+
+# TIER 3: TEASING (requires kiss_unlocked)
+[[canvases]]
+id = "activity_pool_npc_t3"
+name = "Pool Time"
+[canvases.trigger]
+location = "loc_pool"
+npc = "npc_victoria"
+priority = 3
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "trait", subject = "npc", npc_id = "npc_victoria", trait_key = "affection", operator = "gte", value = 50 },
+  { type = "flag", subject = "player", flag_key = "kiss_unlocked", operator = "is_true" }
+]
+
+# TIER 2: SUGGESTIVE (stat only)
+[[canvases]]
+id = "activity_pool_npc_t2"
+name = "Pool Time"
+[canvases.trigger]
+location = "loc_pool"
+npc = "npc_victoria"
+priority = 2
+[canvases.trigger.conditions]
+version = "1.0"
+items = [
+  { type = "trait", subject = "npc", npc_id = "npc_victoria", trait_key = "affection", operator = "gte", value = 30 }
+]
+
+# TIER 1: AMBIENT (no conditions)
+[[canvases]]
+id = "activity_pool_npc_t1"
+name = "Pool Time"
+[canvases.trigger]
+location = "loc_pool"
+npc = "npc_victoria"
+priority = 1
+# No conditions - always available
+```
+
+## Key Points:
+
+1. **Content-Level Gates**: Gates are tied to CONTENT TYPE, not tier numbers
+   - Breakfast T5 (sex) requires sex_unlocked
+   - Pool T7 (sex) requires sex_unlocked
+   - Same gate = same content everywhere
+
+2. **Mandatory Rules**:
+   - ALL activities MUST end in sex at their final tier
+   - T1 (Ambient) MUST be included as baseline
+   - Invalid: activity that stops at groping or oral
+
+3. **Flexible Tier Counts**: Choose 4-8 tiers per activity based on setting
+   - 4 tiers: Fast-burn (Ambient → Teasing → Makeout → Sex)
+   - 5-6 tiers: Standard (shown in Breakfast example)
+   - 7-8 tiers: Slow-burn (shown in Pool example)
+
+4. **Priority-Based Selection**: Engine picks highest-priority canvas whose conditions are met
+   - Higher priority = checked first
+   - Falls back through lower priorities until one is valid
+
+5. **Same Name Critical**: All tiers of same activity MUST have identical `name` field
+   - Engine groups canvases by name for priority selection
+
+6. **Naming Convention**: `activity_[name]_[npc]_t[N]`
+   - N = tier number (1-8 based on activity tier count)
+   - Example: activity_pool_victoria_t1 through activity_pool_victoria_t7
+
+## ACTIVITY EXPLORATION PATTERN (T3+ Tiers)
+
+T3+ activities use a base node with act choices. Player picks ONE act per visit.
+This creates player agency and encourages repeat visits to try different acts.
+
+**STRUCTURE:**
+- Node: base (setup, same text across all tiers) → choices for acts up to ceiling
+- Node: act_tease (tease content → exit)
+- Node: act_grope (grope content → exit)
+- ... one node per act up to tier ceiling
+
+**TIER CEILING = MAX ACTS SHOWN:**
+| Tier | Ceiling | Choices Available |
+|------|---------|-------------------|
+| T1-2 | None | No exploration (single-node fallback) |
+| T3 | Tease | [Tease] [Exit] |
+| T4 | Grope | [Tease] [Grope] [Exit] |
+| T5 | Makeout | [Tease] [Grope] [Makeout] [Exit] |
+| T6 | Manual | [Tease] [Grope] [Makeout] [Manual] [Exit] |
+| T7 | Oral | [Tease] [Grope] [Makeout] [Manual] [Oral] [Exit] |
+| T8 | Sex | [All acts] [Exit] |
+
+**KEY RULES:**
+1. Base setup is SAME across all tiers (T3-T8) - only choices differ
+2. Player picks ONE act per visit → that content plays → activity ends
+3. Each act has its own content node with video/text
+4. **DIALOG BLOCKS**: Use `{ type = "dialog" }` for ALL spoken dialogue, NOT paragraph with quotes
+   - `{ type = "dialog", content = "Hello", props = { speaker = "npc", npcId = "npc_victoria" } }` for NPC speech
+   - `{ type = "dialog", content = "Hi", props = { speaker = "player" } }` for player speech
+   - Use `paragraph` ONLY for narrative/description (not speech)
+
+### EXAMPLE: T5 BREAKFAST (Makeout ceiling)
+
+```toml
+[[canvases]]
+id = "activity_breakfast_npc_t5"
+name = "Breakfast Together"
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_victoria"
+priority = 5
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "trait", subject = "npc", npc_id = "npc_victoria", trait_key = "affection", operator = "gte", value = 50 },
+  { type = "flag", subject = "player", flag_key = "makeout_unlocked", operator = "is_true" }
+]
+[[canvases.trigger.schedules]]
+start_time = "07:00"
+end_time = "09:00"
+
+# BASE NODE (same setup as T3, T4, T6, T7, T8)
+[[canvases.nodes]]
+id = "base"
+name = "Morning Greeting"
+blocks = [
+  { type = "paragraph", content = "Victoria is in the kitchen making coffee. She looks up as you enter, a warm smile crossing her face." },
+  { type = "video", props = { file = "activities/breakfast_base.mp4", description = "Morning greeting" } }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Tease her", targetType = "node", nodeId = "act_tease" },
+  { text = "Touch her", targetType = "node", nodeId = "act_grope" },
+  { text = "Make out", targetType = "node", nodeId = "act_makeout" },
+  { text = "Just enjoy coffee", targetType = "location", locationId = "loc_kitchen", time_progression_minutes = 30 }
+] }
+
+# TEASE CONTENT
+[[canvases.nodes]]
+id = "act_tease"
+name = "Tease Her"
+blocks = [
+  { type = "paragraph", content = "You let your gaze linger on her, a playful smile on your lips." },
+  { type = "video", props = { file = "activities/breakfast_tease.mp4", description = "Teasing moment" } },
+  { type = "paragraph", content = "She blushes under your attention, biting her lip." }
+]
+exit_block = { type = "location", text = "Finish breakfast", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_victoria", trait = "lust", op = "add", value = 2 }] } }
+
+# GROPE CONTENT
+[[canvases.nodes]]
+id = "act_grope"
+name = "Touch Her"
+blocks = [
+  { type = "paragraph", content = "You step closer, your hand finding her waist." },
+  { type = "video", props = { file = "activities/breakfast_grope.mp4", description = "Intimate touch" } },
+  { type = "paragraph", content = "She gasps softly, leaning into your touch." }
+]
+exit_block = { type = "location", text = "Finish breakfast", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_victoria", trait = "lust", op = "add", value = 3 }, { targetType = "npc", npcId = "npc_victoria", trait = "affection", op = "add", value = 1 }] } }
+
+# MAKEOUT CONTENT (ceiling for T5)
+[[canvases.nodes]]
+id = "act_makeout"
+name = "Make Out"
+blocks = [
+  { type = "paragraph", content = "You pull her close, your lips meeting hers." },
+  { type = "video", props = { file = "activities/breakfast_makeout.mp4", description = "Passionate kiss" } },
+  { type = "paragraph", content = "The coffee goes cold as you lose yourselves in each other." }
+]
+exit_block = { type = "location", text = "Finish breakfast", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_victoria", trait = "lust", op = "add", value = 4 }, { targetType = "npc", npcId = "npc_victoria", trait = "affection", op = "add", value = 2 }] } }
+```
+
+### T8 VERSION (Same base, all acts available)
+
+For T8 (sex ceiling), use the same base node content but include all act choices:
+
+```toml
+# BASE NODE for T8 - same setup text, more choices
+[[canvases.nodes]]
+id = "base"
+name = "Morning Greeting"
+blocks = [
+  { type = "paragraph", content = "Victoria is in the kitchen making coffee. She looks up as you enter, a warm smile crossing her face." },
+  { type = "video", props = { file = "activities/breakfast_base.mp4", description = "Morning greeting" } }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Tease her", targetType = "node", nodeId = "act_tease" },
+  { text = "Touch her", targetType = "node", nodeId = "act_grope" },
+  { text = "Make out", targetType = "node", nodeId = "act_makeout" },
+  { text = "Handjob", targetType = "node", nodeId = "act_manual" },
+  { text = "Blowjob", targetType = "node", nodeId = "act_oral" },
+  { text = "Have sex", targetType = "node", nodeId = "act_sex" },
+  { text = "Just enjoy coffee", targetType = "location", locationId = "loc_kitchen", time_progression_minutes = 30 }
+] }
+
+# Then include act content nodes for: act_tease, act_grope, act_makeout, act_manual, act_oral, act_sex
+# Each with appropriate video and stat effects (higher intensity = higher rewards)
+```
+
+### STAT EFFECTS BY ACT (Reference)
+
+| Act | Effects |
+|-----|---------|
+| Tease | +2 lust |
+| Grope | +3 lust, +1 affection |
+| Makeout | +4 lust, +2 affection |
+| Manual | +5 lust, +2 affection |
+| Oral | +6 lust, +3 affection |
+| Sex | +8 lust, +4 affection |
+
+## Solo Activity Pattern (No tiers, no NPC):
+
+```toml
+[[canvases]]
+id = "solo_sleep"
+name = "Get Some Rest"
+
+[canvases.trigger]
+location = "loc_bedroom"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 2
+# NO npc = ... (this is solo)
+# NO schedules = ... (available anytime at this location)
+
+[[canvases.nodes]]
+id = "n1"
+name = "Rest Time"
+blocks = [
+  { type = "paragraph", content = "You lie down on the bed..." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Short nap (1 hour)", targetType = "location", locationId = "loc_bedroom",
+    time_progression_minutes = 60,
+    effects = [{ targetType = "player", trait = "energy", op = "add", value = 20 }] },
+  { text = "Sleep until morning", targetType = "location", locationId = "loc_bedroom",
+    time_progression_minutes = 480,
+    effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }] }
+] }
+```
+
+## Required Solo Activities:
+
+| Activity | Location | Purpose |
+|----------|----------|---------|
+| solo_sleep | loc_bedroom | Time skip, energy restore |
+| solo_shower | loc_bathroom | Morning routine, refresh |
+| solo_study | loc_bedroom | Pass time, confidence boost |
+| solo_exercise | loc_backyard | Energy trade-off, confidence |
+| solo_eat_alone | loc_kitchen | Fallback when NPC busy |
+| solo_watch_tv | loc_living | Evening time pass |
+| solo_wander | loc_hallway | Exploration, small time pass |
+| solo_think | loc_bedroom | Reflection, small time pass |
+
+## Canvas Count Summary:
+
+| Type | Formula | Count |
+|------|---------|-------|
+| NPC Activities | [X] activities × 5 tiers | ~[X×5] |
+| Solo Activities | 8 utilities | ~8 |
+| Story Events | From Book scenes | ~[Y] |
+| **TOTAL** | | ~[Total] |
+
+## Present Activity Canvases:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 PHASE 3C: ACTIVITY CANVAS GENERATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NPC ACTIVITY CANVASES (Tiered)
+──────────────────────────────
+[For each activity from Book, list 5 tier canvas IDs]
+
+BREAKFAST (07:00-09:00):
+• activity_breakfast_[npc]_t1 (Affection 0-29)
+• activity_breakfast_[npc]_t2 (Affection 30-49)
+• activity_breakfast_[npc]_t3 (Affection 50-69)
+• activity_breakfast_[npc]_t4 (Affection 70-89)
+• activity_breakfast_[npc]_t5 (Affection 90+)
+
+POOL TIME (14:00-17:00):
+• activity_pool_[npc]_t1 (Affection 0-29)
+• activity_pool_[npc]_t2 (Affection 30-49)
+• activity_pool_[npc]_t3 (Affection 50-69)
+• activity_pool_[npc]_t4 (Affection 70-89)
+• activity_pool_[npc]_t5 (Affection 90+)
+
+[Continue for all activities from Book Phase 5...]
+
+SOLO ACTIVITY CANVASES
+──────────────────────
+• solo_sleep, solo_shower, solo_study, solo_exercise
+• solo_eat_alone, solo_watch_tv, solo_wander, solo_think
+
+TOTALS
+──────
+• NPC Activities: [X]
+• NPC Activity Canvases: [X × 5 = Y]
+• Solo Activity Canvases: 8
+• Total Activity Videos: [X × 5]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Review activity canvas plan. Request changes or type "proceed".
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**>>> WAIT FOR "proceed" <<<**
+
+---
+
+# PHASE 4: CANVAS PLANNING
+
+## Tasks:
+
+1. Plan all canvases by type (Solo, Scheduled, Story)
+2. Assign clips to appropriate canvases
+3. Define conditions and effects for each
+4. Map activities to trait/flag changes
+
+## Canvas Types:
+
+**SOLO CANVASES** (Player Alone)
+- No NPC required
+- Build player traits (energy, confidence)
+- Always available at location (no schedule)
+- `is_repeatable = true`
+
+**SCHEDULED CANVASES** (NPC Activities)
+- NPC must be present (per schedule)
+- Build relationship traits (affection, trust)
+- Has `[[canvases.trigger.schedules]]`
+- `is_repeatable = true`
+
+**STORY CANVASES** (One-Time Events)
+- Milestone moments
+- Has conditions (traits/flags required)
+- Sets flags that unlock new content
+- `is_repeatable = false`
+
+## Present Canvas Plan:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎬 PHASE 4: CANVAS PLANNING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SOLO CANVASES (Player Activities)
+─────────────────────────────────
+┌─────────────────────┬──────────────┬─────────────────────┐
+│ Canvas ID           │ Location     │ Player Effects      │
+├─────────────────────┼──────────────┼─────────────────────┤
+│ solo_sleep          │ bedroom      │ energy +20          │
+│ solo_read           │ bedroom      │ confidence +5       │
+│ solo_tv             │ living       │ relaxation +10      │
+│ solo_cook           │ kitchen      │ charm +3            │
+└─────────────────────┴──────────────┴─────────────────────┘
+
+SCHEDULED CANVASES (NPC Routine)
+────────────────────────────────
+┌─────────────────────┬──────────────┬─────────────┬────────────────────┐
+│ Canvas ID           │ Location     │ Schedule    │ NPC Effects        │
+├─────────────────────┼──────────────┼─────────────┼────────────────────┤
+│ morning_routine     │ bedroom      │ 06:00-08:00 │ affection +3       │
+│ breakfast_together  │ kitchen      │ 08:00-10:00 │ affection +5       │
+│ dinner_prep         │ kitchen      │ 17:00-19:00 │ trust +5           │
+│ evening_together    │ living       │ 19:00-22:00 │ affection +8       │
+└─────────────────────┴──────────────┴─────────────┴────────────────────┘
+
+STORY CANVASES (Milestones)
+───────────────────────────
+┌─────────────────────┬─────────────────────────────┬────────────────────┐
+│ Canvas ID           │ Conditions                  │ Sets Flags         │
+├─────────────────────┼─────────────────────────────┼────────────────────┤
+│ intro               │ (none - starting canvas)    │ game_started       │
+│ first_kiss_event    │ affection ≥ 50              │ first_kiss         │
+│ living_intimate     │ first_kiss + affection ≥ 60 │ intimate_night     │
+│ bedroom_climax      │ intimate_night + trust ≥ 50 │ completed_arc      │
+└─────────────────────┴─────────────────────────────┴────────────────────┘
+
+CLIP ASSIGNMENTS
+────────────────
+┌─────────────────────┬────────┬──────────────────────────────────────┐
+│ Canvas ID           │ Tier   │ Clip IDs                             │
+├─────────────────────┼────────┼──────────────────────────────────────┤
+│ morning_routine     │ 1      │ aa453767-..., b3ee9e26-...           │
+│ breakfast_together  │ 1-2    │ d39460f8-..., 49940987-...           │
+│ evening_together    │ 2-3    │ 2eae3327-..., 721d5ae3-...           │
+│ first_kiss_event    │ 3      │ 07bb18af-..., af7d326e-...           │
+│ living_intimate     │ 4      │ [clips from book]                    │
+│ bedroom_climax      │ 5      │ [clips from book]                    │
+└─────────────────────┴────────┴──────────────────────────────────────┘
+
+CLIP COVERAGE
+─────────────
+Total clips in Book: [X]
+Assigned to canvases: [X]/[X]
+Unassigned: [list or "None"]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Review canvas plan. Request changes or type "proceed".
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**>>> WAIT FOR "proceed" <<<**
+
+---
+
+# PHASE 4.5: STORY ARC DESIGN
+
+## Purpose:
+
+The story arc creates a narrative tracking system for the Journal/Quest Page:
+- Organizes the story into chapters for journal presentation
+- Links key moments (nodes) to canvases from Phase 4
+- Groups parallel activities (player completes any N of M)
+- Maps NPC traits to emotional descriptions
+- Provides guidance hints for stuck players
+
+## Book Mapping:
+
+| Book Section | Story Arc Element |
+|--------------|-------------------|
+| Prologue | chapter_1 (mood: hopeful) |
+| Act 1-N | chapter_2-N |
+| Endings | Final chapter (mood: peaceful/romantic) |
+| Major Story Beats | Nodes with is_milestone = true |
+| Optional Activities | Nodes with group membership |
+| Beat Dependencies | requires_nodes / requires_group |
+| Relationship Dynamics | emotion_mappings |
+
+## Tasks:
+
+1. Map Book's narrative structure to chapters
+2. Identify key moments as story nodes with canvas/flag links
+3. Define milestone nodes (major story beats)
+4. Group parallel activities with completion requirements
+5. Create emotion mappings for NPC traits
+6. Define player guidance hints
+
+## Present Story Arc:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📖 PHASE 4.5: STORY ARC DESIGN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NARRATIVE CHAPTERS
+──────────────────
+Maps Book's Acts to story arc chapters:
+
+┌────────────────┬────────────────────────┬──────────────┬───────┐
+│ ID             │ Name                   │ Mood         │ Order │
+├────────────────┼────────────────────────┼──────────────┼───────┤
+│ chapter_1      │ [From Book Prologue]   │ hopeful      │ 1     │
+│ chapter_2      │ [From Book Act 1]      │ romantic     │ 2     │
+│ chapter_3      │ [From Book Act 2]      │ passionate   │ 3     │
+│ chapter_4      │ [From Book Ending]     │ peaceful     │ 4     │
+└────────────────┴────────────────────────┴──────────────┴───────┘
+
+Mood options: hopeful | romantic | tense | passionate | peaceful | neutral
+
+STORY NODES (Key Moments)
+─────────────────────────
+Links story beats to canvases from Phase 4:
+
+┌────────────────────┬─────────────┬───────────────────────┬──────────┬──────────┐
+│ Node ID            │ Chapter     │ Linked Canvas         │ NPC      │ Milestone│
+├────────────────────┼─────────────┼───────────────────────┼──────────┼──────────┤
+│ awakening          │ chapter_1   │ intro                 │ npc_X    │ ✓        │
+│ first_connection   │ chapter_1   │ [scheduled_canvas]    │ npc_X    │          │
+│ key_moment_1       │ chapter_2   │ [story_event_1]       │ npc_X    │ ✓        │
+│ optional_activity  │ chapter_2   │ [scheduled_canvas]    │ npc_X    │          │
+│ climax             │ chapter_3   │ [climax_event]        │ npc_X    │ ✓        │
+│ finale             │ chapter_4   │ [finale_canvas]       │ npc_X    │ ✓        │
+└────────────────────┴─────────────┴───────────────────────┴──────────┴──────────┘
+
+Each node includes:
+- journal_entry: Narrative text shown when node is completed
+- linked_flag: Optional flag that also marks completion
+
+NODE DEPENDENCIES
+─────────────────
+Show progression requirements:
+
+awakening (START - no requirements)
+  │
+  ▼
+key_moment_1
+  │ requires_group: early_activities
+  ▼
+climax
+  │ requires_nodes: [key_moment_1]
+  ▼
+finale
+  │ requires_nodes: [climax]
+  ▼
+STORY COMPLETE
+
+ACTIVITY GROUPS (Parallel Options)
+──────────────────────────────────
+Groups of nodes that can be completed in any order:
+
+┌────────────────────┬─────────────────────────┬─────────────┬─────────────┐
+│ Group ID           │ Name                    │ Members     │ Required    │
+├────────────────────┼─────────────────────────┼─────────────┼─────────────┤
+│ early_activities   │ Early Bonding           │ 3 nodes     │ 1           │
+│ mid_activities     │ Growing Connection      │ 2 nodes     │ 1           │
+│ late_activities    │ Deep Intimacy           │ 2 nodes     │ 1           │
+└────────────────────┴─────────────────────────┴─────────────┴─────────────┘
+
+Group Members:
+- early_activities: [first_connection, optional_1, optional_2]
+- mid_activities: [mid_optional_1, mid_optional_2]
+- late_activities: [late_optional_1, late_optional_2]
+
+EMOTION MAPPINGS
+────────────────
+Maps NPC traits to player-visible emotional descriptions:
+
+Elena - affection:
+┌───────┬───────┬────────────┬──────────────────────────────────────────┐
+│ Min   │ Max   │ Label      │ Description                              │
+├───────┼───────┼────────────┼──────────────────────────────────────────┤
+│ 0     │ 30    │ reserved   │ Elena seems a bit distant...             │
+│ 31    │ 50    │ warming    │ Elena's eyes hold hopeful warmth...      │
+│ 51    │ 70    │ connected  │ Elena stays close to you...              │
+│ 71    │ 90    │ devoted    │ Elena's love shines in every glance...   │
+│ 91    │ 100   │ complete   │ Elena is utterly yours                   │
+└───────┴───────┴────────────┴──────────────────────────────────────────┘
+
+(Repeat for other traits like arousal, trust from Phase 1)
+
+PLAYER GUIDANCE HINTS
+─────────────────────
+Messages shown when player seems stuck:
+
+• group_incomplete: "There might be more moments to discover this {group_name}..."
+• progress_needed: "Perhaps spending more time together would reveal new possibilities..."
+• story_complete: "Your journey together has reached its beautiful conclusion..."
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Review story arc design. Request changes or type "proceed".
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**>>> WAIT FOR "proceed" <<<**
+
+---
+
+# PHASE 4.5B: STORY ARC TOML GENERATION
+
+## ⚠️ CRITICAL: The Guide REQUIRES story_arc data!
+
+Without this section, the in-game Guide will show "All activities completed!"
+because `getNextActivity()` requires `node_id` which ONLY comes from `story_arc.nodes`.
+
+## Output File: `5_story_arc.toml`
+
+Write the story arc design from Phase 4.5 into TOML format:
+
+```toml
+# ═══════════════════════════════════════════════════════════════
+# STORY ARC (Narrative Journal & Guide System)
+# ═══════════════════════════════════════════════════════════════
+
+[story_arc]
+version = "1.0"
+
+# Chapters organize narrative for journal display
+[[story_arc.chapters]]
+id = "chapter_1"
+name = "First Impressions"
+mood = "hopeful"
+description = "Getting to know the campus and its people"
+order = 1
+
+[[story_arc.chapters]]
+id = "chapter_2"
+name = "Growing Closer"
+mood = "romantic"
+description = "Connection deepens through shared moments"
+order = 2
+
+# ... more chapters from Phase 4.5 design ...
+
+# Nodes link key moments to canvases - REQUIRED for Guide!
+[[story_arc.nodes]]
+id = "first_meeting"
+name = "Meeting Elena"
+chapter = "chapter_1"
+journal_entry = "She walked through the door, and everything changed."
+linked_canvas = "intro"         # Must match canvas ID from Phase 4!
+npc = "npc_elena"
+is_milestone = true
+
+[[story_arc.nodes]]
+id = "first_kiss"
+name = "The First Kiss"
+chapter = "chapter_2"
+journal_entry = "The moment we both stopped pretending."
+linked_canvas = "first_kiss_event"
+linked_flag = "kiss_unlocked"   # Optional: flag that also marks completion
+npc = "npc_elena"
+is_milestone = true
+
+# Groups for parallel activities (complete any N of M)
+[[story_arc.groups]]
+id = "early_bonding"
+name = "Getting to Know Her"
+description = "Spend time together in daily activities"
+required_count = 2
+
+# Emotion mappings for journal display
+[story_arc.emotion_mappings.affection]
+trait_owner = "npc"
+default_npc = "npc_elena"
+ranges = [
+  { min = 0, max = 30, label = "reserved", description = "Elena seems a bit distant" },
+  { min = 31, max = 60, label = "warming", description = "Elena's eyes hold hopeful warmth" },
+  { min = 61, max = 85, label = "connected", description = "Elena stays close to you" },
+  { min = 86, max = 100, label = "devoted", description = "Elena's love shines in every glance" }
+]
+```
+
+## Checklist Before Proceeding:
+
+- [ ] All milestone canvases from Phase 4 have a story_arc.node
+- [ ] Each node's `linked_canvas` matches an actual canvas ID
+- [ ] Chapters cover the narrative arc (hopeful → romantic → passionate → peaceful)
+- [ ] Groups define parallel activity requirements
+- [ ] Emotion mappings cover key NPC traits
+
+**>>> Write 5_story_arc.toml, then proceed <<<**
+
+---
+
+# PHASE 5: PROGRESSION VALIDATION
+
+## Tasks:
+
+1. Validate story arc is complete (intro → ... → finale)
+2. Check trait reachability (can thresholds be met?)
+3. Validate flag chains (no orphan flags)
+4. Detect dead ends (progression blockers)
+5. Verify fallback coverage (unconditional content everywhere)
+6. **Validate activity tiers** (same name, priority order, T1 fallback)
+7. **Validate gate flags** (T3+ has correct _unlocked gates)
+8. **Validate exploration pattern** (T3+ has base node with choices)
+9. Auto-fix any issues found
+
+## Validation Algorithms:
+
+### Story Arc Validation
+For each story canvas in sequence:
+1. Check if conditions can be satisfied from previous state
+2. Verify flag it sets is used by later content
+3. Confirm path exists from intro to finale
+
+### Dead End Detection
+Dead End = Next story canvas requires conditions that are IMPOSSIBLE to satisfy
+
+```
+Calculate:
+  max_achievable_trait = starting_value + sum(all_possible_gains)
+
+If max_achievable_trait < required_threshold:
+  → DEAD END detected
+  → AUTO-FIX: Lower threshold to max_achievable_trait
+```
+
+### Flag Chain Validation
+For each flag required by content:
+1. Find canvas that sets this flag
+2. Verify that canvas is reachable
+3. Recursively check its requirements
+
+## Present Validation:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ PHASE 5: PROGRESSION VALIDATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STORY ARC VALIDATION
+────────────────────
+
+intro
+  │
+  │ Sets: game_started
+  ▼
+first_kiss_event
+  │ Requires: affection ≥ 50
+  │ Max achievable: 65 ✓
+  │ Sets: first_kiss
+  ▼
+living_intimate
+  │ Requires: first_kiss + affection ≥ 60
+  │ Flag available: ✓
+  │ Max achievable: 85 ✓
+  │ Sets: intimate_night
+  ▼
+bedroom_climax
+  │ Requires: intimate_night + trust ≥ 50
+  │ Flag available: ✓
+  │ Max achievable: 55 ✓
+  │ Sets: completed_arc
+  ▼
+FINALE REACHABLE ✓
+
+STORY ARC: ✓ VALID
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TRAIT REACHABILITY
+──────────────────
+✓ affection: All thresholds achievable
+✓ trust: All thresholds achievable
+✓ arousal: All thresholds achievable
+✓ energy: All thresholds achievable
+
+TRAIT CHECK: ✓ PASSED
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FLAG CHAIN VALIDATION
+─────────────────────
+✓ game_started → set by intro (always reachable)
+✓ first_kiss → set by first_kiss_event (reachable)
+✓ intimate_night → set by living_intimate (reachable)
+✓ completed_arc → set by bedroom_climax (reachable)
+
+FLAG CHAIN: ✓ VALID
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# ═══════════════════════════════════════════════════════════════
+#      SEQUENTIAL CANVAS VALIDATION (Same-Location Check)
+# ═══════════════════════════════════════════════════════════════
+#
+# For each location, check all non-repeatable canvases:
+#
+# ✓ If 1 non-repeatable canvas → OK (no chain needed)
+# ⚠ If 2+ non-repeatable canvases → MUST have flag chain
+#
+# VALIDATION STEPS:
+# 1. Group all canvases by trigger location
+# 2. Filter to non-repeatable only (is_repeatable = false)
+# 3. For each group with 2+ canvases:
+#    - Exactly ONE should have no flag condition (first in chain)
+#    - All others MUST require a flag from a previous canvas
+#    - Verify no two canvases can be valid simultaneously
+#
+# ❌ FAIL: Two non-repeatable canvases at "living" both have no conditions
+# ✓ PASS: Canvas A has no conditions, Canvas B requires canvas_a_complete
+#
+# ═══════════════════════════════════════════════════════════════
+
+SEQUENTIAL CANVAS CHECK
+───────────────────────
+Checking non-repeatable canvases per location:
+
+loc_living:
+  ├── welcome_home (no condition - FIRST in chain) ✓
+  ├── coming_home (requires: welcome_home_complete) ✓
+  └── the_talk (requires: coming_home_complete) ✓
+  → Flag chain valid: Only ONE canvas active at a time
+
+loc_kitchen:
+  └── first_morning (no condition - only canvas) ✓
+  → Single canvas: OK
+
+SEQUENTIAL: ✓ ALL LOCATIONS VALID
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DEAD END CHECK
+──────────────
+✓ All story canvases have satisfiable conditions
+✓ No progression blockers detected
+
+DEAD ENDS: ✓ NONE
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FALLBACK COVERAGE
+─────────────────
+✓ loc_kitchen: Has solo_cook (unconditional)
+✓ loc_bedroom: Has solo_sleep (unconditional)
+✓ loc_living: Has solo_tv (unconditional)
+✓ All choice blocks have at least one unconditional option
+
+FALLBACK: ✓ COMPLETE
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NPC LOCATION SCHEDULE VALIDATION
+────────────────────────────────
+✓ All schedule locations exist in [[locations]]
+✓ Time format valid (HH:MM)
+✓ Weekdays valid (0-6) or empty for all days
+✓ 24-hour coverage per NPC (no time gaps)
+✓ Activities match Book descriptions
+✓ Overnight schedules valid (end < start handled correctly)
+
+NPC SCHEDULES: ✓ VALID
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CLIP COVERAGE
+─────────────
+Total clips: [X]
+Placed: [X]/[X] (100%)
+Duplicates: 0
+
+CLIPS: ✓ COMPLETE
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CANVAS BALANCE VALIDATION
+─────────────────────────
+
+Verify proper distribution of canvas types:
+
+┌─────────────────┬────────────┬──────────┬───────────┐
+│ Canvas Type     │ Target     │ Actual   │ Status    │
+├─────────────────┼────────────┼──────────┼───────────┤
+│ NPC Activities  │ 40-55%     │ [X]%     │ [✓/⚠/✗]  │
+│ Story Events    │ 30-40%     │ [X]%     │ [✓/⚠/✗]  │
+│ Solo Activities │ 7-15%      │ [X]%     │ [✓/⚠/✗]  │
+└─────────────────┴────────────┴──────────┴───────────┘
+
+BALANCE RULES:
+• ⚠ WARNING if NPC Activities < 35%: "Game may feel like linear story"
+• ⚠ WARNING if Story Events > 50%: "Too many one-time events"
+• ✗ FAIL if NPC Activities < 25%: "Insufficient daily activities"
+• ✗ FAIL if Solo Activities = 0: "No utility activities"
+
+CANVAS BALANCE: [✓ VALID / ⚠ WARNING / ✗ FAIL]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TIME SLOT COVERAGE VALIDATION
+─────────────────────────────
+
+Ensure all 8 time slots have activity coverage:
+
+┌─────────────────┬──────────┬─────────────────────────────────┐
+│ Time Slot       │ Status   │ Activities Available            │
+├─────────────────┼──────────┼─────────────────────────────────┤
+│ 05:00-07:00     │ [✓/✗]    │ [list or "MISSING"]             │
+│ 07:00-09:00     │ [✓/✗]    │ [list or "MISSING"]             │
+│ 09:00-12:00     │ [✓/✗]    │ [list or "MISSING"]             │
+│ 12:00-14:00     │ [✓/✗]    │ [list or "MISSING"]             │
+│ 14:00-17:00     │ [✓/✗]    │ [list or "MISSING"]             │
+│ 17:00-19:00     │ [✓/✗]    │ [list or "MISSING"]             │
+│ 19:00-22:00     │ [✓/✗]    │ [list or "MISSING"]             │
+│ 22:00-01:00     │ [✓/✗]    │ [list or "MISSING"]             │
+└─────────────────┴──────────┴─────────────────────────────────┘
+
+• ✗ FAIL if any time slot has 0 activities available
+
+TIME SLOTS: [✓ COVERED / ✗ GAPS FOUND]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SCHEDULE DURATION CHECK
+───────────────────────
+✓ All activity schedules ≤ 3 hours
+✓ All story event schedules ≤ 4 hours
+✓ No overnight schedules spanning midnight
+
+SCHEDULE DURATIONS: [✓ VALID / ✗ VIOLATIONS FOUND]
+[If violations, list them for fixing]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STORY ARC VALIDATION
+────────────────────
+
+Chapter Validation:
+✓ All chapter IDs unique and snake_case
+✓ All moods valid (hopeful|romantic|tense|passionate|peaceful|neutral)
+✓ Chapter order sequential (no gaps)
+✓ All nodes reference existing chapters
+
+CHAPTERS: ✓ VALID
+
+Node Validation:
+✓ All linked_canvas values exist in [[canvases]]
+✓ All chapter references exist in [[story_arc.chapters]]
+✓ All group references exist in [[story_arc.groups]]
+✓ All requires_nodes entries reference existing nodes
+✓ All npc values exist in [[npcs]]
+
+NODES: ✓ VALID
+
+Group Validation:
+✓ All groups have members >= required_count
+✓ All group IDs unique and snake_case
+
+GROUPS: ✓ VALID
+
+Emotion Mapping Validation:
+✓ No overlapping ranges per trait
+✓ All default_npc values exist in [[npcs]]
+✓ Ranges cover 0-100 for each trait
+
+EMOTION MAPPINGS: ✓ VALID
+
+Milestone Path Validation:
+[first_milestone] → [milestone_2] → ... → [finale]
+✓ All milestones reachable from start
+✓ Clear path to story completion
+
+MILESTONE PATH: ✓ VALID
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ACTIVITY TIER VALIDATION
+────────────────────────
+
+For each activity (group of canvases with same `name` field):
+
+1. TIER STRUCTURE CHECK
+   ✓ All tiers have identical `name` field
+   ✓ Priorities sequential: T1=1, T2=2, T3=3, ...
+   ✓ T1 exists as fallback (lowest tier)
+   ✓ T1 has NO conditions (always available)
+   ✓ All tiers share same location + npc + schedule
+
+2. GATE FLAG VALIDATION (T3+)
+   Check each tier requires correct gate flag:
+   ┌──────┬──────────────────┬─────────────────────┐
+   │ Tier │ Content Level    │ Required Gate       │
+   ├──────┼──────────────────┼─────────────────────┤
+   │ T3   │ Teasing          │ kiss_unlocked       │
+   │ T4   │ Groping          │ groping_unlocked    │
+   │ T5   │ Makeout          │ makeout_unlocked    │
+   │ T6   │ Manual           │ manual_unlocked     │
+   │ T7   │ Oral             │ oral_unlocked       │
+   │ T8   │ Sex              │ sex_unlocked        │
+   └──────┴──────────────────┴─────────────────────┘
+
+3. GATE SETTERS CHECK
+   For each gate flag required by activities:
+   ✓ kiss_unlocked → set by [story_canvas_id] (reachable)
+   ✓ groping_unlocked → set by [story_canvas_id] (reachable)
+   ✓ makeout_unlocked → set by [story_canvas_id] (reachable)
+   ... (list all gates used)
+
+   ❌ FAIL if gate required but never set by any story canvas
+
+ACTIVITY TIERS: [✓ VALID / ✗ ISSUES FOUND]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ACTIVITY EXPLORATION VALIDATION (T3+)
+─────────────────────────────────────
+
+For each T3+ activity tier, verify exploration pattern:
+
+1. BASE NODE CHECK
+   ✓ Has node with act choices (not single-node content)
+   ✓ Base node exits via choices (type = "choices")
+
+2. TIER CEILING CHECK
+   Choices must match tier ceiling:
+   ┌──────┬─────────────────────────────────────────────┐
+   │ Tier │ Required Choices                            │
+   ├──────┼─────────────────────────────────────────────┤
+   │ T3   │ [Tease] [Exit]                              │
+   │ T4   │ [Tease] [Grope] [Exit]                      │
+   │ T5   │ [Tease] [Grope] [Makeout] [Exit]            │
+   │ T6   │ [Tease] [Grope] [Makeout] [Manual] [Exit]   │
+   │ T7   │ [Tease] ... [Manual] [Oral] [Exit]          │
+   │ T8   │ [All acts] [Exit]                           │
+   └──────┴─────────────────────────────────────────────┘
+
+3. CONTENT NODES CHECK
+   ✓ Each act choice has matching content node
+   ✓ Content nodes exit to location (activity ends)
+
+4. BASE CONSISTENCY CHECK
+   ✓ Base node text is same across all T3+ tiers of same activity
+   (Only choices differ, not the setup)
+
+EXPLORATION PATTERN: [✓ VALID / ✗ ISSUES FOUND]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ACTIVITY TIER AUTO-FIX RULES
+────────────────────────────
+
+When activity issues found, apply these fixes:
+
+1. **Priority mismatch** → Reassign: T1=1, T2=2, T3=3...
+   Example: T3 had priority=5 → fixed to priority=3
+
+2. **T1 has conditions** → Remove all condition items from T1
+   Example: activity_breakfast_t1 had affection>=20 → removed
+
+3. **Missing gate on T3+** → Add appropriate _unlocked flag
+   Example: T4 missing gate → added groping_unlocked check
+
+4. **Wrong gate on tier** → Replace with correct gate
+   Example: T5 had kiss_unlocked → changed to makeout_unlocked
+
+5. **Missing choices in T3+** → Add choices up to tier ceiling
+   Example: T5 only had [Tease] → added [Grope] [Makeout]
+
+6. **Name mismatch across tiers** → Standardize to T1's name
+   Example: T3 was "Breakfast" but T1 is "Morning Coffee" → fixed
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+AUTO-FIXES APPLIED
+──────────────────
+[None needed]
+
+OR:
+
+⚠️ 1 issue auto-fixed:
+• bedroom_climax: trust threshold 60 → 55
+  (Max achievable was 55)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ALL VALIDATIONS PASSED
+
+Type "proceed" to generate final TOML.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**>>> WAIT FOR "proceed" <<<**
+
+---
+
+# PHASE 5: VALIDATION FAILURE HANDLING
+
+If validation fails and cannot be auto-fixed, present issue with options:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚠️ VALIDATION ISSUE - MANUAL DECISION NEEDED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ISSUE: Orphan Flag
+──────────────────
+Flag "secret_discovered" is required by bedroom_climax
+but is never set by any reachable canvas.
+
+WHY THIS IS A PROBLEM:
+bedroom_climax will NEVER trigger because condition
+cannot be satisfied.
+
+CANNOT AUTO-FIX:
+Adding a flag requires creating new story content,
+which would change the Book's narrative.
+
+OPTIONS:
+A) Remove the flag requirement from bedroom_climax
+B) Add flag to an existing reachable canvas (specify which)
+C) Create minimal new canvas to set this flag
+D) Mark this as intentional (hidden ending)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Choose: A / B / C / D
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**>>> WAIT FOR USER CHOICE <<<**
+
+---
+
+# PHASE 6: TOML GENERATION
+
+## Tasks:
+
+1. Generate complete, syntactically valid TOML
+2. Apply all validated designs from previous phases
+3. Include all clips with correct UUIDs
+4. Verify TOML syntax rules are followed
+
+## TOML Syntax Rules (Critical):
+
+### Inline Tables Must Be Single-Line
+```toml
+# ✓ CORRECT:
+exit_block = { type = "choices", choices = [
+  { text = "Option 1", targetType = "node", nodeId = "canvas.node1" }
+] }
+
+# ✗ WRONG (will break parser):
+exit_block = {
+  type = "choices",
+  choices = [...]
+}
+```
+
+### Exit Block Types
+Only valid types: `"location"` or `"choices"`
+NEVER use `type = "node"` - wrap in choices instead.
+
+### Effects Placement
+Effects go INSIDE choice objects, NOT on exit_block level.
+
+## Output Format:
+
+# ╔════════════════════════════════════════════════════════════════╗
+# ║ CRITICAL: Use [project] NOT [metadata]                         ║
+# ║ The validator REQUIRES this exact structure:                   ║
+# ║   [project]                                                    ║
+# ║   id = "lowercase_snake_case_id"                               ║
+# ║   title = "Game Title"                                         ║
+# ║   description = "..."                                          ║
+# ╚════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📄 PHASE 6: GENERATING TOML
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Generating complete TOML file...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+```toml
+schema_version = "0.2"
+
+[project]
+id = "game_id_from_book"
+title = "Game Title from Book"
+description = """
+Description from Book's Setting Overview section.
+"""
+
+[time]
+enabled = true
+starting_hour = 8
+starting_day = "Monday"
+starting_week = 1
+
+# ═══════════════════════════════════════════════════════════════
+# PLAYER
+# ═══════════════════════════════════════════════════════════════
+
+[player]
+id = "player"
+name = "Player Name"
+description = "From Book's Protagonist section"
+portrait = "player.jpg"  # Optional: character portrait relative to --video-folder
+core_traits = { energy = 50, confidence = 30, charm = 30 }
+flag_keys = ["game_started", "first_kiss", "intimate_night", "completed_arc"]
+
+# ═══════════════════════════════════════════════════════════════
+# NPCs
+# ═══════════════════════════════════════════════════════════════
+
+[[npcs]]
+id = "npc_victoria"
+name = "Victoria"
+description = "From Book's NPC Profile section"
+portrait = "victoria.jpg"  # Optional: character portrait relative to --video-folder
+core_traits = { affection = 20, trust = 10, arousal = 0 }
+flag_keys = ["comfortable", "interested", "vulnerable"]
+
+  # NPC Location Schedules - Where NPC physically is throughout the day
+  [[npcs.schedules]]
+  location = "bedroom"
+  weekdays = [0, 1, 2, 3, 4, 5, 6]
+  start_time = "22:00"
+  end_time = "08:00"
+  activity = "Sleeping peacefully"
+
+  [[npcs.schedules]]
+  location = "kitchen"
+  weekdays = [0, 1, 2, 3, 4, 5, 6]
+  start_time = "08:00"
+  end_time = "14:00"
+  activity = "Morning routines and cooking"
+
+  [[npcs.schedules]]
+  location = "living"
+  weekdays = [0, 1, 2, 3, 4, 5, 6]
+  start_time = "14:00"
+  end_time = "22:00"
+  activity = "Relaxing and evening activities"
+
+# ═══════════════════════════════════════════════════════════════
+# LOCATIONS
+# ═══════════════════════════════════════════════════════════════
+
+[[locations]]
+id = "hallway"
+name = "The Hallway"
+description = "Central hub of the home"
+is_container = false
+parent = ""
+entry_from = ""
+default_entry = ""
+navigation_order = ["kitchen", "living", "bedroom"]
+
+[[locations]]
+id = "kitchen"
+name = "The Kitchen"
+description = "From Book's Location section"
+is_container = false
+parent = ""
+entry_from = "hallway"
+default_entry = ""
+navigation_order = []
+
+[[locations]]
+id = "living"
+name = "The Living Room"
+description = "From Book's Location section"
+is_container = false
+parent = ""
+entry_from = "hallway"
+default_entry = ""
+navigation_order = []
+
+[[locations]]
+id = "bedroom"
+name = "The Bedroom"
+description = "From Book's Location section"
+is_container = false
+parent = ""
+entry_from = "hallway"
+default_entry = ""
+navigation_order = []
+
+# ═══════════════════════════════════════════════════════════════
+# STARTING CANVAS
+# ═══════════════════════════════════════════════════════════════
+#
+# CRITICAL RULES:
+# 1. Starting canvas has NO [canvases.trigger] section - it plays automatically
+# 2. Content follows Book's Phase 9.5 Opening Scene Design (3 nodes)
+# 3. Use concrete values from your Book, not placeholders
+#
+# ═══════════════════════════════════════════════════════════════
+
+starting_canvas = "intro"
+
+# ═══════════════════════════════════════════════════════════════
+# STARTING CANVAS EXAMPLE
+# ═══════════════════════════════════════════════════════════════
+# Shows valid TOML structure. Your content comes from Book's Phase 9.5.
+# NOTE: NO [canvases.trigger] section - starting canvas plays automatically!
+
+[[canvases]]
+id = "intro"
+name = "First Meeting"
+description = "The story begins - Elena arrives"
+
+  # Node 1: Player Identity (from Book's Phase 9.5)
+  [[canvases.nodes]]
+  id = "arrival"
+  name = "The Arrival"
+  blocks = [
+    { type = "paragraph", content = "Marcus has been talking about his mother's visit for weeks. Two weeks, he said." },
+    { type = "paragraph", content = "You've imagined someone maternal. Older. Safe." },
+    { type = "paragraph", content = "Then she walks through the door." }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "See her for the first time", targetType = "node", nodeId = "intro.meeting" }
+  ] }
+
+  # Node 2: NPC Introduction (from Book's Phase 9.5)
+  [[canvases.nodes]]
+  id = "meeting"
+  name = "Meeting Elena"
+  blocks = [
+    { type = "paragraph", content = "Elena is not what you expected." },
+    { type = "paragraph", content = "She's tall, elegant, with dark hair touched by silver. Her smile is warm but there's something behind her eyes." },
+    { type = "video", props = { file = "scenes/intro_meeting.mp4", description = "Elena enters, elegant and poised" } },
+    { type = "dialog", content = "It's so nice to finally meet you.", props = { speaker = "npc", npcId = "npc_elena" } }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Nice to meet you too", targetType = "node", nodeId = "intro.situation", effects = [{ targetType = "npc", npcId = "npc_elena", trait = "affection", op = "add", value = 2 }] },
+    { text = "The pleasure is mine", targetType = "node", nodeId = "intro.situation", effects = [{ targetType = "npc", npcId = "npc_elena", trait = "affection", op = "add", value = 3 }] },
+    { text = "Hey", targetType = "node", nodeId = "intro.situation" }
+  ] }
+
+  # Node 3: Situation (from Book's Phase 9.5)
+  [[canvases.nodes]]
+  id = "situation"
+  name = "The Situation"
+  blocks = [
+    { type = "paragraph", content = "Marcus grabs her bags. 'Mom, let me show you to your room.'" },
+    { type = "paragraph", content = "As they head down the hall, you catch Elena glancing back at you. Just for a moment." },
+    { type = "paragraph", content = "Two weeks. She'll be here for two weeks." }
+  ]
+  exit_block = { type = "location", text = "Get settled in", config = { destinationType = "specific", locationId = "loc_hallway", time_progression_minutes = 30, flagEffects = [{ targetType = "player", flag = "game_started" }] } }
+
+# ═══════════════════════════════════════════════════════════════
+# STORY CANVASES (One-Time Events)
+# ═══════════════════════════════════════════════════════════════
+# Story canvases AFTER the intro have [canvases.trigger] sections.
+
+# ─────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id = "first_kiss_event"
+name = "The First Kiss"
+description = "A milestone moment"
+
+  [canvases.trigger]
+  location = "living"
+  is_active = true
+  is_repeatable = false
+  [canvases.trigger.conditions]
+  version = "1.0"
+  logic = "AND"
+  items = [
+    { type = "trait", subject = "npc", npc_id = "npc_victoria", trait_key = "affection", operator = "gte", value = 50 }
+  ]
+  [[canvases.trigger.schedules]]
+  start_time = "19:00"
+  end_time = "22:00"
+
+  [[canvases.nodes]]
+  id = "n1"
+  name = "The Moment"
+  blocks = [
+    { type = "paragraph", content = "From Book's Story Arc - First Kiss scene..." },
+    { type = "dialog", content = "I've been thinking about us...", props = { speaker = "npc", npcName = "Victoria" } }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Kiss her", targetType = "node", nodeId = "first_kiss_event.n2", effects = [{ targetType = "npc", npcId = "npc_victoria", trait = "affection", op = "add", value = 15 }], flagEffects = [{ targetType = "player", flag = "first_kiss" }] },
+    { text = "Take her hand gently", targetType = "location", locationId = "living", time_progression_minutes = 10, effects = [{ targetType = "npc", npcId = "npc_victoria", trait = "trust", op = "add", value = 10 }] }
+  ] }
+
+  [[canvases.nodes]]
+  id = "n2"
+  name = "The Kiss"
+  blocks = [
+    { type = "paragraph", content = "Description from Book..." },
+    { type = "clip", props = { clipId = "actual-uuid-from-book" } }
+  ]
+  exit_block = { type = "location", text = "Continue", config = { destinationType = "trigger", time_progression_minutes = 30 } }
+
+# ═══════════════════════════════════════════════════════════════
+# SCHEDULED STORY EVENTS (One-Time Events with Time Windows)
+# ═══════════════════════════════════════════════════════════════
+#
+# NOTE: This section shows ONE-TIME story events that have schedule
+# constraints (e.g., "first_kiss_event" only triggers in evening).
+#
+# This is NOT the tiered NPC activity pattern from Phase 3C!
+#
+# For REPEATABLE NPC ACTIVITIES (breakfast, dinner, pool time, etc.),
+# see the "TIERED ACTIVITY CANVASES" section below, which shows the
+# complete 5-tier pattern with mutually exclusive affection conditions.
+#
+# ═══════════════════════════════════════════════════════════════
+
+# Example: A scheduled story event (one-time, not tiered)
+[[canvases]]
+id = "morning_encounter_story"
+name = "Morning Breakfast"
+description = "Share breakfast with Victoria"
+
+  [canvases.trigger]
+  location = "kitchen"
+  is_active = true
+  is_repeatable = true
+  max_triggers_per_day = 1
+  [[canvases.trigger.schedules]]
+  start_time = "08:00"
+  end_time = "10:00"
+
+  [[canvases.nodes]]
+  id = "n1"
+  name = "Breakfast Time"
+  blocks = [
+    { type = "paragraph", content = "Victoria is preparing breakfast. She smiles as you enter." },
+    { type = "clip", props = { clipId = "ambient-clip-uuid-from-book" } }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Help her cook", targetType = "node", nodeId = "breakfast_together.n2", time_progression_minutes = 20, effects = [{ targetType = "npc", npcId = "npc_victoria", trait = "affection", op = "add", value = 5 }] },
+    { text = "Just grab coffee", targetType = "location", locationId = "kitchen", time_progression_minutes = 10 }
+  ] }
+
+  [[canvases.nodes]]
+  id = "n2"
+  name = "Cooking Together"
+  blocks = [
+    { type = "paragraph", content = "You work together in the kitchen..." },
+    { type = "clip", props = { clipId = "another-clip-uuid" } }
+  ]
+  exit_block = { type = "location", text = "Finish breakfast", config = { destinationType = "trigger", time_progression_minutes = 30 } }
+
+# ═══════════════════════════════════════════════════════════════
+# EXAMPLE: Multiple Story Canvases at Same Location (Flag Chain)
+# ═══════════════════════════════════════════════════════════════
+#
+# Scenario: Three story events all trigger in the living room
+# Book says: "Welcome Home (Day 1)", "Coming Home (Day 2)", "The Talk (Day 5)"
+#
+# ❌ WRONG WAY (all valid at once - BROKEN!):
+# [[canvases]] id = "welcome_home", location = "living", conditions = []
+# [[canvases]] id = "coming_home", location = "living", conditions = []
+# [[canvases]] id = "the_talk", location = "living", conditions = []
+#
+# ✓ RIGHT WAY (flag chain - only ONE valid at a time):
+
+# Canvas 1: Day 1 - First in chain (no condition)
+[[canvases]]
+id = "welcome_home"
+name = "Welcome Home"
+[canvases.trigger]
+location = "loc_living"
+npc = "npc_victoria"
+is_active = true
+is_repeatable = false
+# NO conditions - this is the FIRST event in the chain
+
+[[canvases.nodes]]
+id = "n1"
+name = "Arriving Home"
+blocks = [
+  { type = "paragraph", content = "Victoria greets you warmly..." }
+]
+exit_block = { type = "location", text = "Continue", config = { destinationType = "trigger", time_progression_minutes = 30, flagEffects = [{ targetType = "player", flag = "welcome_home_complete" }] } }
+
+# Canvas 2: Day 2 - Requires previous flag
+[[canvases]]
+id = "coming_home"
+name = "Coming Home"
+[canvases.trigger]
+location = "loc_living"
+npc = "npc_victoria"
+is_active = true
+is_repeatable = false
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "welcome_home_complete", operator = "is_true" }
+]
+
+[[canvases.nodes]]
+id = "n1"
+name = "Another Day"
+blocks = [
+  { type = "paragraph", content = "You come home to find Victoria..." }
+]
+exit_block = { type = "location", text = "Continue", config = { destinationType = "trigger", time_progression_minutes = 30, flagEffects = [{ targetType = "player", flag = "coming_home_complete" }] } }
+
+# Canvas 3: Day 5 - Requires Day 2 flag
+[[canvases]]
+id = "the_talk"
+name = "The Talk"
+[canvases.trigger]
+location = "loc_living"
+npc = "npc_victoria"
+is_active = true
+is_repeatable = false
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "coming_home_complete", operator = "is_true" }
+]
+
+[[canvases.nodes]]
+id = "n1"
+name = "Time to Talk"
+blocks = [
+  { type = "paragraph", content = "Victoria looks serious..." }
+]
+exit_block = { type = "location", text = "Continue", config = { destinationType = "trigger", time_progression_minutes = 60, flagEffects = [{ targetType = "player", flag = "the_talk_complete" }] } }
+
+# Result: Only ONE of these canvases is valid at any time
+# welcome_home → (complete) → coming_home unlocks
+# coming_home → (complete) → the_talk unlocks
+#
+# ─────────────────────────────────────────────────────────────────
+# OPTIONAL: Add days_since_flag for realistic pacing
+# ─────────────────────────────────────────────────────────────────
+# To prevent events from triggering same day, add days_since_flag:
+#
+# [canvases.trigger.conditions]
+# version = "1.0"
+# logic = "AND"
+# items = [
+#   { type = "flag", subject = "player", flag_key = "welcome_home_complete", operator = "is_true" },
+#   { type = "days_since_flag", subject = "player", flag_key = "welcome_home_complete", operator = "gte", value = 1 }
+# ]
+#
+# This ensures "coming_home" only triggers THE NEXT DAY or later, not immediately.
+
+# ═══════════════════════════════════════════════════════════════
+# SOLO CANVASES (Player Alone Activities)
+# ═══════════════════════════════════════════════════════════════
+
+[[canvases]]
+id = "solo_sleep"
+name = "Rest"
+description = "Get some rest"
+
+  [canvases.trigger]
+  location = "bedroom"
+  is_active = true
+  is_repeatable = true
+  max_triggers_per_day = 1
+
+  [[canvases.nodes]]
+  id = "n1"
+  name = "Resting"
+  blocks = [
+    { type = "paragraph", content = "You lie down and close your eyes..." }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Sleep for a while", targetType = "location", locationId = "bedroom", time_progression_minutes = 120, effects = [{ targetType = "player", trait = "energy", op = "add", value = 20 }] },
+    { text = "Just rest briefly", targetType = "location", locationId = "bedroom", time_progression_minutes = 30, effects = [{ targetType = "player", trait = "energy", op = "add", value = 5 }] }
+  ] }
+
+# ═══════════════════════════════════════════════════════════════
+# TIERED ACTIVITY CANVASES (Repeatable NPC Activities)
+# ═══════════════════════════════════════════════════════════════
+#
+# CRITICAL: Each NPC activity from Phase 3C MUST be implemented as
+# 5 SEPARATE canvases with MUTUALLY EXCLUSIVE affection conditions.
+# This ensures players see progressively intimate content as the
+# relationship develops.
+#
+# PATTERN: For EVERY activity (breakfast, dinner, pool, etc.):
+# - Create 5 canvases: activity_[name]_[npc]_t1 through _t5
+# - All share same location, schedule, NPC
+# - Each has DIFFERENT affection condition range
+# - Each has DIFFERENT video file
+# - All have is_repeatable = true, max_triggers_per_day = 1
+#
+# ═══════════════════════════════════════════════════════════════
+
+# ─────────────────────────────────────────────────────────────────
+# BREAKFAST ACTIVITY - TIER 1 (Affection 0-29: AMBIENT)
+# ─────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id = "activity_breakfast_victoria_t1"
+name = "Breakfast Together"
+description = "Morning coffee together (Tier 1 - Ambient)"
+
+  [canvases.trigger]
+  location = "loc_kitchen"
+  npc = "npc_victoria"
+  is_active = true
+  is_repeatable = true
+  max_triggers_per_day = 1
+  [canvases.trigger.conditions]
+  version = "1.0"
+  logic = "AND"
+  items = [
+    { type = "trait", subject = "npc", npc_id = "npc_victoria", trait_key = "affection", operator = "lte", value = 29 }
+  ]
+  [[canvases.trigger.schedules]]
+  start_time = "07:00"
+  end_time = "09:00"
+
+  [[canvases.nodes]]
+  id = "n1"
+  name = "Morning Greeting"
+  blocks = [
+    { type = "paragraph", content = "Victoria is in the kitchen making coffee. She glances up with a polite smile." },
+    { type = "video", props = { file = "activities/breakfast/breakfast_t1.mp4", description = "Casual morning - polite distance" } },
+    { type = "paragraph", content = "She hands you a mug. 'Good morning. Sleep well?'" }
+  ]
+  exit_block = { type = "location", text = "Finish breakfast", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_victoria", trait = "affection", op = "add", value = 3 }] } }
+
+# ─────────────────────────────────────────────────────────────────
+# BREAKFAST ACTIVITY - TIER 2 (Affection 30-49: SUGGESTIVE)
+# ─────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id = "activity_breakfast_victoria_t2"
+name = "Breakfast Together"
+description = "Morning coffee together (Tier 2 - Suggestive)"
+
+  [canvases.trigger]
+  location = "loc_kitchen"
+  npc = "npc_victoria"
+  is_active = true
+  is_repeatable = true
+  max_triggers_per_day = 1
+  [canvases.trigger.conditions]
+  version = "1.0"
+  logic = "AND"
+  items = [
+    { type = "trait", subject = "npc", npc_id = "npc_victoria", trait_key = "affection", operator = "gte", value = 30 },
+    { type = "trait", subject = "npc", npc_id = "npc_victoria", trait_key = "affection", operator = "lte", value = 49 }
+  ]
+  [[canvases.trigger.schedules]]
+  start_time = "07:00"
+  end_time = "09:00"
+
+  [[canvases.nodes]]
+  id = "n1"
+  name = "Warm Morning"
+  blocks = [
+    { type = "paragraph", content = "Victoria looks up as you enter, her eyes lingering on you a moment longer than usual." },
+    { type = "video", props = { file = "activities/breakfast/breakfast_t2.mp4", description = "Lingering looks over coffee" } },
+    { type = "paragraph", content = "Her fingers brush yours as she hands you the mug. 'I made your favorite.'" }
+  ]
+  exit_block = { type = "location", text = "Finish breakfast", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_victoria", trait = "affection", op = "add", value = 3 }] } }
+
+# ─────────────────────────────────────────────────────────────────
+# BREAKFAST ACTIVITY - TIER 3 (Affection 50-69: TEASING)
+# ─────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id = "activity_breakfast_victoria_t3"
+name = "Breakfast Together"
+description = "Morning coffee together (Tier 3 - Teasing)"
+
+  [canvases.trigger]
+  location = "loc_kitchen"
+  npc = "npc_victoria"
+  is_active = true
+  is_repeatable = true
+  max_triggers_per_day = 1
+  [canvases.trigger.conditions]
+  version = "1.0"
+  logic = "AND"
+  items = [
+    { type = "trait", subject = "npc", npc_id = "npc_victoria", trait_key = "affection", operator = "gte", value = 50 },
+    { type = "trait", subject = "npc", npc_id = "npc_victoria", trait_key = "affection", operator = "lte", value = 69 }
+  ]
+  [[canvases.trigger.schedules]]
+  start_time = "07:00"
+  end_time = "09:00"
+
+  [[canvases.nodes]]
+  id = "n1"
+  name = "Playful Morning"
+  blocks = [
+    { type = "paragraph", content = "Victoria greets you with a warm smile, wearing something that shows just a little more skin than usual." },
+    { type = "video", props = { file = "activities/breakfast/breakfast_t3.mp4", description = "Playful teasing, light touches" } },
+    { type = "paragraph", content = "She leans close as she pours your coffee. 'Didn't sleep much thinking about... things.'" }
+  ]
+  exit_block = { type = "location", text = "Finish breakfast", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_victoria", trait = "affection", op = "add", value = 3 }] } }
+
+# ─────────────────────────────────────────────────────────────────
+# BREAKFAST ACTIVITY - TIER 4 (Affection 70-89: FOREPLAY)
+# ─────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id = "activity_breakfast_victoria_t4"
+name = "Breakfast Together"
+description = "Morning coffee together (Tier 4 - Foreplay)"
+
+  [canvases.trigger]
+  location = "loc_kitchen"
+  npc = "npc_victoria"
+  is_active = true
+  is_repeatable = true
+  max_triggers_per_day = 1
+  [canvases.trigger.conditions]
+  version = "1.0"
+  logic = "AND"
+  items = [
+    { type = "trait", subject = "npc", npc_id = "npc_victoria", trait_key = "affection", operator = "gte", value = 70 },
+    { type = "trait", subject = "npc", npc_id = "npc_victoria", trait_key = "affection", operator = "lte", value = 89 }
+  ]
+  [[canvases.trigger.schedules]]
+  start_time = "07:00"
+  end_time = "09:00"
+
+  [[canvases.nodes]]
+  id = "n1"
+  name = "Intimate Morning"
+  blocks = [
+    { type = "paragraph", content = "Victoria pulls you close the moment you enter, her body pressing against yours." },
+    { type = "video", props = { file = "activities/breakfast/breakfast_t4.mp4", description = "Heated embrace, passionate kissing" } },
+    { type = "paragraph", content = "'Forget breakfast,' she whispers against your lips. 'I have other appetites...'" }
+  ]
+  exit_block = { type = "location", text = "Reluctantly pull away", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_victoria", trait = "affection", op = "add", value = 3 }] } }
+
+# ─────────────────────────────────────────────────────────────────
+# BREAKFAST ACTIVITY - TIER 5 (Affection 90+: EXPLICIT)
+# ─────────────────────────────────────────────────────────────────
+#
+# CRITICAL: T5 activities MUST use 3-node structure (not 1 node!)
+# See "Activity T5 Prose Requirements" section for full rules.
+
+[[canvases]]
+id = "activity_breakfast_victoria_t5"
+name = "Breakfast Together"
+description = "Morning coffee together (Tier 5 - Explicit)"
+
+  [canvases.trigger]
+  location = "loc_kitchen"
+  npc = "npc_victoria"
+  is_active = true
+  is_repeatable = true
+  max_triggers_per_day = 1
+  [canvases.trigger.conditions]
+  version = "1.0"
+  logic = "AND"
+  items = [
+    { type = "trait", subject = "npc", npc_id = "npc_victoria", trait_key = "affection", operator = "gte", value = 90 }
+  ]
+  # NOTE: Tier 5 has NO upper bound - just gte 90
+  [[canvases.trigger.schedules]]
+  start_time = "07:00"
+  end_time = "09:00"
+
+  # ─────────────────────────────────────────────────────────────
+  # NODE 1: LEAD-IN (50-80 words)
+  # How it starts - the spark, the look, the moment it becomes sexual
+  # ─────────────────────────────────────────────────────────────
+  [[canvases.nodes]]
+  id = "n1"
+  name = "The Look"
+  blocks = [
+    { type = "paragraph", content = "You come into the kitchen expecting coffee. Instead, you find Victoria waiting. Not cooking. Not busy. Just... waiting. Her robe is loose, her eyes dark with want." },
+    { type = "dialog", content = "Forget breakfast.", props = { speaker = "npc", npcId = "npc_victoria" } },
+    { type = "paragraph", content = "She reaches for you, pulling you close. The pretense of a normal morning dissolves the moment your lips meet." }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Pull her closer", targetType = "node", nodeId = "activity_breakfast_victoria_t5.n2" }
+  ] }
+
+  # ─────────────────────────────────────────────────────────────
+  # NODE 2: THE ACT (100-200 words)
+  # Explicit content with dialogue, sensory detail, video
+  # ─────────────────────────────────────────────────────────────
+  [[canvases.nodes]]
+  id = "n2"
+  name = "The Counter"
+  blocks = [
+    { type = "paragraph", content = "You lift her onto the counter, pushing her robe aside. She wraps her legs around you as you press against her entrance, both of you gasping at that first stretch as you push inside." },
+    { type = "dialog", content = "God, you feel amazing.", props = { speaker = "npc", npcId = "npc_victoria" } },
+    { type = "paragraph", content = "Slow at first, savoring the warmth of her, the way she grips your shoulders. But need takes over. Harder. Deeper. Her moans fill the kitchen. Her nails dig into your back." },
+    { type = "dialog", content = "I'm close... don't stop.", props = { speaker = "npc", npcId = "npc_victoria" } },
+    { type = "video", props = { file = "activities/breakfast/breakfast_t5.mp4", description = "Kitchen counter sex - missionary, her on counter edge, legs wrapped around him, starts slow builds to passionate, both climax" } },
+    { type = "paragraph", content = "You drive deeper, feeling her tighten around you. She comes with your name on her lips, pulling you over the edge with her. You shudder together, holding on through the release." }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Stay close", targetType = "node", nodeId = "activity_breakfast_victoria_t5.n3" }
+  ] }
+
+  # ─────────────────────────────────────────────────────────────
+  # NODE 3: AFTERMATH (40-60 words)
+  # Coming down, tender moment, return to routine
+  # ─────────────────────────────────────────────────────────────
+  [[canvases.nodes]]
+  id = "n3"
+  name = "After"
+  blocks = [
+    { type = "paragraph", content = "You stay tangled together, catching your breath. She laughs softly against your chest, still trembling slightly." },
+    { type = "dialog", content = "Now I actually need that coffee.", props = { speaker = "npc", npcId = "npc_victoria" } },
+    { type = "paragraph", content = "Best breakfast ever." }
+  ]
+  exit_block = { type = "location", text = "Continue your morning", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_victoria", trait = "affection", op = "add", value = 5 }] } }
+
+# ═══════════════════════════════════════════════════════════════
+# IMPORTANT: GENERATE ALL T5 ACTIVITIES WITH THIS 3-NODE PATTERN
+# ═══════════════════════════════════════════════════════════════
+#
+# The above breakfast T5 example shows the REQUIRED 3-node structure.
+# ALL Tier 5 NPC activities MUST follow this pattern:
+# - Node 1: Lead-in (how it starts)
+# - Node 2: The act (explicit content + video)
+# - Node 3: Aftermath (coming down)
+#
+# You MUST generate this 3-node structure for EVERY T5 activity from
+# the Book's Activity Catalog:
+#
+# - activity_dinner_[npc]_t1 through _t5
+# - activity_pool_[npc]_t1 through _t5
+# - activity_evening_[npc]_t1 through _t5
+# - activity_movie_[npc]_t1 through _t5
+# - [etc. for all activities in Book Phase 5]
+#
+# AFFECTION TIER SUMMARY:
+# ┌───────┬──────────────┬──────────────────────────────────┐
+# │ Tier  │ Affection    │ Condition Items                  │
+# ├───────┼──────────────┼──────────────────────────────────┤
+# │ T1    │ 0-29         │ lte 29                           │
+# │ T2    │ 30-49        │ gte 30 AND lte 49                │
+# │ T3    │ 50-69        │ gte 50 AND lte 69                │
+# │ T4    │ 70-89        │ gte 70 AND lte 89                │
+# │ T5    │ 90+          │ gte 90 (no upper bound)          │
+# └───────┴──────────────┴──────────────────────────────────┘
+#
+# EACH TIER MUST HAVE:
+# - Unique canvas ID: activity_[name]_[npc]_t[1-5]
+# - Same name, location, npc, schedule as other tiers
+# - Different video file matching relationship stage
+# - is_repeatable = true
+# - max_triggers_per_day = 1
+#
+# ═══════════════════════════════════════════════════════════════
+
+# [Continue with remaining activities from Phase 3C plan...]
+```
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TOML GENERATION COMPLETE
+
+File contains:
+• [X] locations
+• [X] NPCs
+• [X] canvases ([X] solo, [X] scheduled, [X] story)
+• [X] clips placed
+• All validations passed
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+---
+
+# TOML FORMAT REFERENCE
+
+## Required Sections
+- `schema_version = "0.2"`
+- `[project]` - id, title, description
+- `[time]` - enabled, starting_hour, starting_day, starting_week
+- `[player]` - id, name, description, portrait (optional), core_traits, flag_keys
+- `[[npcs]]` - id, name, description, portrait (optional), core_traits, flag_keys, schedules
+- `[[locations]]` - One for each location
+- `starting_canvas` - Canvas ID to start game
+- `[[canvases]]` - All game content
+
+## ID Rules
+- All IDs: lowercase_snake_case
+- Location IDs: `kitchen`, `living_room`, `bedroom`
+- NPC IDs: `npc_victoria`, `npc_sarah`
+- Canvas IDs: `intro`, `first_kiss_event`, `breakfast_together`
+- Node IDs: Unique within canvas
+
+## Exit Block Types
+
+### type = "location"
+```toml
+exit_block = { type = "location", text = "Continue", config = { destinationType = "trigger", time_progression_minutes = 10 } }
+```
+
+### type = "choices"
+```toml
+exit_block = { type = "choices", choices = [
+  { text = "Option text", targetType = "node", nodeId = "canvas.node", effects = [...], flagEffects = [...] },
+  { text = "Leave", targetType = "location", locationId = "kitchen" }
+] }
+```
+
+**NEVER use type = "node"** - always wrap in choices.
+
+# ═══════════════════════════════════════════════════════════════
+#                 CROSS-CANVAS NAVIGATION
+# ═══════════════════════════════════════════════════════════════
+#
+# To navigate from one canvas to another canvas:
+#
+# USE: targetType = "node" with nodeId = "target_canvas_id.node_id"
+#
+# Example - From intro canvas to kitchen_morning canvas:
+# { text = "Go to kitchen", targetType = "node", nodeId = "kitchen_morning.n1" }
+#
+# The pattern is: "canvas_id.node_id"
+# ├── canvas_id = the id of the target [[canvases]] entry
+# └── node_id = usually "n1" for the first node
+#
+# ❌ WRONG: targetType = "canvas" (THIS VALUE DOES NOT EXIST)
+# ✓ RIGHT: targetType = "node", nodeId = "other_canvas.n1"
+#
+# ═══════════════════════════════════════════════════════════════
+
+## Conditions Format
+```toml
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "trait", subject = "npc", npc_id = "npc_victoria", trait_key = "affection", operator = "gte", value = 50 },
+  { type = "flag", subject = "player", flag_key = "first_kiss", operator = "is_true" }
+]
+```
+
+## Time-Based Conditions (Event Pacing)
+
+Use `days_since_flag` to require time gaps between sequential events:
+
+```toml
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  # Flag must be set (event 1 completed)
+  { type = "flag", subject = "player", flag_key = "event_1_complete", operator = "is_true" },
+  # AND at least 1 day must have passed since it was set
+  { type = "days_since_flag", subject = "player", flag_key = "event_1_complete", operator = "gte", value = 1 }
+]
+```
+
+**Operators:** `gte` (>=), `gt` (>), `lte` (<=), `lt` (<), `eq` (==)
+
+**Value Examples:**
+- `gte 1` = "at least 1 day later" (next day or after)
+- `gte 2` = "at least 2 days later"
+- `eq 1` = "exactly the next day"
+
+### When to Use `days_since_flag`
+
+**USE when:**
+- Story events should feel like they happen over multiple days
+- NPC needs "recovery time" after emotional events (argument, confession)
+- Relationship milestones need breathing room (first date → second date)
+- Player shouldn't rush through story content in a single session
+
+**DON'T USE when:**
+- Events are part of the same scene/conversation (use node connections)
+- Events can logically happen back-to-back (morning → afternoon)
+- You just want sequential ordering (use plain flag chain instead)
+
+**Rule of Thumb:**
+- Same scene/moment → No condition, use node flow
+- Same day, different time → Plain flag chain (flag only)
+- Different days → Add `days_since_flag` with `gte 1`
+- Major story beat → Add `days_since_flag` with `gte 2` or more
+
+**Quick Reference:**
+| Scenario | days_since_flag? | Value |
+|----------|-----------------|-------|
+| Part 1 → Part 2 of same conversation | No | - |
+| Morning event → Evening follow-up | No | - |
+| First date → Second date | Yes | gte 1 |
+| Argument → Making up | Yes | gte 1 |
+| First kiss → First intimate night | Yes | gte 2 |
+
+## Canvas Trigger Schedule Format
+```toml
+[[canvases.trigger.schedules]]
+start_time = "08:00"
+end_time = "10:00"
+weekdays = [0, 1, 2, 3, 4]  # Optional: 0=Monday, 6=Sunday
+```
+
+## NPC Location Schedule Format
+
+NPC Location Schedules define where an NPC physically is at any given time.
+This is DIFFERENT from Canvas Trigger Schedules (which control when content appears).
+
+```toml
+[[npcs.schedules]]
+location = "kitchen"              # Location ID where NPC will be
+weekdays = [0, 1, 2, 3, 4, 5, 6]  # 0=Monday..6=Sunday, empty=all days
+start_time = "08:00"              # HH:MM format
+end_time = "14:00"                # HH:MM format (supports overnight: end < start)
+activity = "Cooking breakfast"    # Description shown in Schedule Page
+```
+
+**Key Differences:**
+
+| Aspect | NPC Location Schedule | Canvas Trigger Schedule |
+|--------|----------------------|------------------------|
+| Purpose | Where NPC physically is | When content triggers |
+| Location | `[[npcs.schedules]]` | `[[canvases.trigger.schedules]]` |
+| Used For | Schedule Page display | Canvas activation |
+| Scope | NPC's full daily routine | Single canvas timing |
+
+**NPC Schedule Rules:**
+- Each NPC should have schedules covering all 24 hours (no gaps)
+- All `location` values must exist in [[locations]]
+- Overnight schedules: `start_time = "22:00"`, `end_time = "08:00"` is valid
+- Empty `weekdays` array means the schedule applies to all days
+- `activity` is displayed in the Schedule Page UI
+
+## Effects Format
+```toml
+effects = [
+  { targetType = "player", trait = "energy", op = "add", value = 10 },
+  { targetType = "npc", npcId = "npc_victoria", trait = "affection", op = "add", value = 5 }
+]
+flagEffects = [
+  { targetType = "player", flag = "first_kiss" },
+  { targetType = "npc", npcId = "npc_victoria", flag = "interested" }
+]
+```
+
+## Content Blocks
+
+**IMPORTANT: Use `dialog` blocks for ALL spoken dialogue, not paragraphs with embedded quotes.**
+- Dialog blocks enable character portrait display and speaker attribution
+- Use `paragraph` ONLY for narrative/descriptive text (actions, descriptions, internal thoughts)
+- Use `dialog` for anything a character actually SAYS out loud
+
+```toml
+blocks = [
+  { type = "heading", content = "Title", props = { level = 1 } },
+  { type = "paragraph", content = "She looks up as you enter the kitchen." },
+  { type = "dialog", content = "Good morning. Sleep well?", props = { speaker = "npc", npcId = "npc_victoria" } },
+  { type = "dialog", content = "Better now that I see you.", props = { speaker = "player" } },
+  { type = "paragraph", content = "She smiles and hands you a coffee mug." },
+  { type = "clip", props = { clipId = "uuid-from-book" } },
+  { type = "video", props = { file = "scene_name.mp4", description = "Brief description of video content" } }
+]
+```
+
+**Dialog block props:**
+- `speaker = "npc"` + `npcId = "npc_victoria"` - NPC dialogue (shows NPC portrait)
+- `speaker = "player"` - Player dialogue (shows player portrait)
+
+## Video Blocks
+
+Video blocks support two modes for embedding video content:
+
+### File-Based Videos (recommended for local assets)
+```toml
+# Simple video file with search queries
+{ type = "video", props = {
+    file = "morning_scene.mp4",
+    description = "Elena making coffee in the kitchen",
+    search_queries = ["morning coffee kitchen", "woman making coffee casual"]
+} }
+
+# Nested path with explicit content
+{ type = "video", props = {
+    file = "activities/breakfast_t5.mp4",
+    description = "Kitchen counter sex - missionary, passionate, both finish",
+    search_queries = ["kitchen counter sex missionary", "passionate counter fuck", "morning kitchen sex"]
+} }
+```
+
+**Properties:**
+- `file`: Path relative to the `--video-folder` command argument
+- `description`: VIDEO MATCHING SPECIFICATION (Critical field!)
+  - Primary product spec used to source/match appropriate video clips
+  - Must specify: act, position, location, energy level
+  - Must be EXPLICIT at Tier 4-5 (name sexual acts directly)
+  - Do NOT use metaphors ("breakfast forgotten") - describe actual video content
+- `search_queries`: Array of 2-4 search strings for sourcing video content
+  - Use specific keywords: position, location, energy, relationship
+  - Include variations for better search coverage
+  - Be explicit for T4-T5 content (use common search terms)
+
+**Description + Search Query Examples by Tier:**
+| Tier | Description | search_queries |
+|------|-------------|----------------|
+| T1 | "Casual conversation in kitchen, friendly sibling energy" | `["morning coffee kitchen casual", "friendly roommate chat"]` |
+| T2 | "She's in a thin robe, cleavage visible when bending" | `["woman thin robe kitchen", "cleavage bending over"]` |
+| T3 | "Deliberate teasing, pressing against him, knowing smile" | `["kitchen teasing grinding", "woman pressing against man tease"]` |
+| T4 | "Making out against counter, hands under clothes, grinding" | `["kitchen makeout passionate", "counter grinding clothed"]` |
+| T5 | "Kitchen counter sex - missionary, passionate, both finish" | `["kitchen counter sex missionary", "passionate counter fuck"]` |
+
+### URL-Based Videos (for external hosting)
+```toml
+{ type = "video", props = { url = "https://example.com/video.mp4" } }
+```
+
+### Clip vs Video
+| Type | Source | Use Case |
+|------|--------|----------|
+| `clip` | Asset library (UUID) | Managed clips from database |
+| `video` | File path or URL | External video files |
+
+### Image Blocks
+
+For static images instead of videos:
+
+```toml
+# File-based image (recommended)
+{ type = "image", props = { file = "scenes/arrival.jpg", alt = "Arriving at the house" } }
+
+# With optional caption
+{ type = "image", props = { file = "images/portrait.jpg", alt = "Character portrait", caption = "Victoria in the morning light" } }
+
+# URL-based image (external hosting)
+{ type = "image", props = { url = "https://example.com/image.jpg", alt = "Description" } }
+```
+
+**Properties:**
+- `file`: Path relative to `--video-path` folder (jpg, jpeg, png, gif, webp, svg)
+- `url`: External image URL (alternative to file)
+- `alt`: Alt text for accessibility (required)
+- `caption`: Optional caption displayed below image
+
+**Use images for:**
+- Scene establishing shots
+- Character portraits
+- Location backgrounds
+- Any scene where static image is preferred over video
+- Lower-tier activity content (T1-T2)
+
+# ═══════════════════════════════════════════════════════════════
+#              EXACT FIELD NAMES (DO NOT INVENT)
+# ═══════════════════════════════════════════════════════════════
+#
+# ## story_arc.chapters - Required Fields:
+# ├── id           (string)
+# ├── name         ← MUST be "name", NOT "title"
+# ├── mood         (hopeful|romantic|tense|passionate|peaceful|neutral)
+# ├── description  (string)
+# └── order        (integer)
+#
+# ## story_arc.nodes - Required Fields:
+# ├── id            (string)
+# ├── name          ← MUST be "name", NOT "title"
+# ├── chapter       (references chapter id)
+# ├── linked_canvas ← MUST be "linked_canvas", NOT "canvasId"
+# ├── journal_entry ← MUST be "journal_entry", NOT "summary"
+# ├── npc           (references npc id)
+# ├── is_milestone  (boolean, optional)
+# ├── group         (references group id, optional)
+# └── requires_nodes (array of node ids, optional)
+#
+# ## story_arc.groups - Required Fields:
+# ├── id             (string)
+# ├── name           ← MUST be "name", NOT "title"
+# ├── description    (string)
+# └── required_count (integer)
+#
+# ═══════════════════════════════════════════════════════════════
+
+## Story Arc Format
+
+The story_arc section creates a narrative tracking system for the Journal/Quest Page:
+
+```toml
+# ═══════════════════════════════════════════════════════════════
+# STORY ARC (Narrative Journal System)
+# ═══════════════════════════════════════════════════════════════
+
+[story_arc]
+version = "1.0"
+
+# ─────────────────────────────────────────────────────────────────
+# CHAPTERS - Narrative framing for the journal
+# ─────────────────────────────────────────────────────────────────
+
+[[story_arc.chapters]]
+id = "chapter_1"
+name = "Chapter Title from Book"
+mood = "hopeful"  # hopeful|romantic|tense|passionate|peaceful|neutral
+description = "Description of this chapter's themes..."
+order = 1
+
+[[story_arc.chapters]]
+id = "chapter_2"
+name = "Growing Closer"
+mood = "romantic"
+description = "The relationship deepens..."
+order = 2
+
+# ─────────────────────────────────────────────────────────────────
+# NODES - Key moments linked to canvases
+# ─────────────────────────────────────────────────────────────────
+
+# Milestone node (required for progression)
+[[story_arc.nodes]]
+id = "awakening"
+name = "A New Beginning"
+chapter = "chapter_1"
+journal_entry = "The journal entry the player sees after completing this moment..."
+linked_canvas = "intro"           # Canvas that completes this node
+npc = "npc_victoria"              # Associated NPC
+is_milestone = true               # Major story beat
+
+# Group member node (parallel activity)
+[[story_arc.nodes]]
+id = "morning_activity"
+name = "Morning Together"
+chapter = "chapter_1"
+journal_entry = "We spent the morning..."
+linked_canvas = "morning_canvas"
+npc = "npc_victoria"
+group = "morning_activities"      # Part of this parallel group
+
+# Node with dependencies
+[[story_arc.nodes]]
+id = "key_moment"
+name = "The Key Moment"
+chapter = "chapter_2"
+journal_entry = "Everything changed..."
+linked_canvas = "story_event"
+linked_flag = "key_flag"          # Flag that also marks completion
+npc = "npc_victoria"
+requires_group = "morning_activities"  # Requires group completion
+is_milestone = true
+
+# Node requiring specific previous nodes
+[[story_arc.nodes]]
+id = "climax"
+name = "The Climax"
+chapter = "chapter_3"
+journal_entry = "This was the moment..."
+linked_canvas = "climax_canvas"
+npc = "npc_victoria"
+requires_nodes = ["key_moment"]   # Must complete key_moment first
+is_milestone = true
+
+# ─────────────────────────────────────────────────────────────────
+# GROUPS - Parallel activities (complete any N of M)
+# ─────────────────────────────────────────────────────────────────
+
+[[story_arc.groups]]
+id = "morning_activities"
+name = "Morning Together"
+description = "Spend quality time together in the morning"
+required_count = 1                # How many group members must be completed
+
+[[story_arc.groups]]
+id = "evening_activities"
+name = "Evening Moments"
+description = "Share the evening together"
+required_count = 1
+
+# ─────────────────────────────────────────────────────────────────
+# EMOTION MAPPINGS - Trait-to-description for journal display
+# ─────────────────────────────────────────────────────────────────
+
+[story_arc.emotion_mappings.affection]
+trait_owner = "npc"               # player|npc
+default_npc = "npc_victoria"      # Which NPC's trait to read
+ranges = [
+  { min = 0, max = 30, label = "reserved", description = "Victoria seems a bit distant, waiting for you to reach out" },
+  { min = 31, max = 50, label = "warming", description = "Victoria's eyes hold a hopeful warmth when she looks at you" },
+  { min = 51, max = 70, label = "connected", description = "Victoria stays close to you, her touch lingering" },
+  { min = 71, max = 90, label = "devoted", description = "Victoria's love for you shines in every glance" },
+  { min = 91, max = 100, label = "complete", description = "Victoria is utterly, blissfully yours" }
+]
+
+[story_arc.emotion_mappings.arousal]
+trait_owner = "npc"
+default_npc = "npc_victoria"
+ranges = [
+  { min = 0, max = 20, label = "calm", description = "Victoria is relaxed and at ease" },
+  { min = 21, max = 50, label = "interested", description = "There's a hint of desire in the way she looks at you" },
+  { min = 51, max = 80, label = "wanting", description = "Victoria's breath quickens when you're near" },
+  { min = 81, max = 100, label = "burning", description = "Victoria can barely contain her desire" }
+]
+
+# ─────────────────────────────────────────────────────────────────
+# HINTS - Player guidance when stuck
+# ─────────────────────────────────────────────────────────────────
+
+[story_arc.hints]
+group_incomplete = "There might be more moments to discover this {group_name}..."
+progress_needed = "Perhaps spending more time together would reveal new possibilities..."
+story_complete = "Your story together has reached its beautiful conclusion. This is just the beginning..."
+```
+
+## Story Arc ID Rules
+- Chapter IDs: `chapter_1`, `chapter_2`, etc. (snake_case)
+- Node IDs: `snake_case` matching their purpose (e.g., `first_kiss`, `morning_coffee`)
+- Group IDs: `snake_case` describing the activity type (e.g., `morning_activities`)
+- All `linked_canvas` values must match canvas IDs from [[canvases]]
+- All `linked_flag` values must match flags from player or NPC flag_keys
+- All `chapter` references must match [[story_arc.chapters]] IDs
+- All `group` and `requires_group` references must match [[story_arc.groups]] IDs
+- All `requires_nodes` entries must match other [[story_arc.nodes]] IDs
+
+---
+
+# ═══════════════════════════════════════════════════════════════
+#                 COMMON MISTAKES TO AVOID
+# ═══════════════════════════════════════════════════════════════
+#
+# ❌ destinationType = "canvas"
+#    → FIX: Use targetType = "node" with nodeId = "canvas_id.n1"
+#
+# ❌ "title" in story_arc.chapters or story_arc.nodes
+#    → FIX: Always use "name"
+#
+# ❌ "canvasId" in story_arc.nodes
+#    → FIX: Use "linked_canvas"
+#
+# ❌ "summary" in story_arc.nodes
+#    → FIX: Use "journal_entry"
+#
+# ❌ "nodes = [...]" array inside [[story_arc.chapters]]
+#    → FIX: Chapters don't contain nodes array. Nodes reference chapters via "chapter" field.
+#
+# ❌ targetType = "canvas"
+#    → FIX: No such value exists. Use targetType = "node" with nodeId = "canvas_id.n1"
+#
+# ❌ Multiple non-repeatable canvases at same location with no conditions
+#    → FIX: Create flag chain - first has no condition, others require previous flag
+#
+# ❌ Treating "Day 1", "Day 2" from Book as just labels
+#    → FIX: Translate to flag chain - Day 2 requires Day 1's completion flag
+#
+# ═══════════════════════════════════════════════════════════════
+
+# QUALITY REQUIREMENTS
+
+## Core Requirements
+1. **Preserve All Clip IDs**: Every UUID from Book must appear in TOML
+2. **Syntactically Valid**: All inline tables on single lines
+3. **No Dead Ends**: All progressions validated
+4. **Fallbacks Everywhere**: Every location has unconditional content
+5. **Story Arc Complete**: Clear path from intro to finale
+6. **IDs Match**: All references point to existing entities
+
+## Schedule Requirements
+7. **Schedules Don't Overlap**: Each NPC has clean daily routine
+8. **NPC Schedules Complete**: Every NPC has 24-hour location coverage (no time gaps)
+9. **NPC Schedule Locations Valid**: All `[[npcs.schedules]]` location values exist in `[[locations]]`
+10. **Schedule Duration Limits**: Activities ≤ 3 hours, story events ≤ 4 hours
+11. **No Overnight Schedules**: No schedule spans midnight (22:00-08:00)
+
+## Story Arc Requirements
+12. **Story Arc Nodes Valid**: All linked_canvas, chapter, group, requires_nodes exist
+13. **Groups Achievable**: Each group has members >= required_count
+14. **Emotion Ranges Valid**: No overlapping ranges, full 0-100 coverage preferred
+15. **Milestone Path Complete**: Clear milestone progression from first node to finale
+
+## Activity System Requirements
+16. **Activity Balance**: 40-55% of canvases should be repeatable NPC activities
+17. **Time Slot Coverage**: All 8 time slots must have at least 1 activity available
+18. **Tiered Activities**: Each NPC activity has 5 canvases with priority (1-5) and intimacy gate flags for T3-T5
+19. **Priority-Based Selection**: Each tier has `priority` field; engine picks highest-priority valid tier per activity
+20. **Solo Activities**: At least 8 solo utility activities present (sleep, shower, study, exercise, etc.)
+21. **Stat Pacing**: Player can reach affection milestones by target days through activity grinding
+22. **Activity Videos**: Each NPC activity tier has distinct video content matching relationship stage
+
+## Explicit Content Requirements (CRITICAL)
+23. **Preserve Explicit Detail**: Do NOT euphemize sexual content from the Book
+24. **Tier 5 Video Descriptions**: MUST name the sexual act and position explicitly
+    - WRONG: "Explicit intimate encounter", "Breakfast forgotten", "Other activities"
+    - RIGHT: "Kitchen counter sex - missionary, passionate, both climax"
+    - RIGHT: "Blowjob - she's on her knees, looking up at him"
+25. **Tier 5 Narrative**: MUST describe sexual activity explicitly, not imply it
+    - WRONG: "They become one", "The kitchen serves another purpose"
+    - RIGHT: "She wraps her legs around him as he enters her, gasping at the stretch"
+26. **No Fade-to-Black**: Describe what the camera shows, not implications
+27. **Dialogue at Intimacy**: Include desire-expressing dialogue at Tier 4-5
+    - Examples: "I need you", "Don't stop", "God, yes", "You feel amazing"
+28. **High Variety**: Different sexual acts/positions across different activities
+    - Not all Tier 5s should be "missionary on counter"
+    - Mix: oral, cowgirl, doggy, standing, etc. across time slots
+
+## Activity T5 Prose Requirements (CRITICAL)
+
+T5 activities must NOT be single-paragraph placeholders. Each T5 NPC activity MUST have:
+
+29. **3-Node Structure**: Lead-in → The Act → Aftermath (not just 1 node with video)
+30. **Minimum 200 Words**: Total prose across all nodes (not counting video description)
+31. **2+ Dialogue Lines**: At least one during the act, one in aftermath
+32. **Sensory Detail**: Touch, sound, and internal sensation (not just visual)
+
+### T5 Activity Node Structure (Concrete Example):
+
+```toml
+# NODE 1: LEAD-IN (50-80 words)
+[[canvases.nodes]]
+id = "n1"
+name = "The Spark"
+blocks = [
+  { type = "paragraph", content = "Elena is already in the kitchen when you arrive. She turns, and something in her eyes makes you stop. The robe she's wearing is thinner than usual." },
+  { type = "dialog", content = "I couldn't sleep. I kept thinking about you.", props = { speaker = "npc", npcId = "npc_elena" } },
+  { type = "paragraph", content = "She crosses to you. No hesitation this time." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Pull her close", targetType = "node", nodeId = "activity_breakfast_elena_t5.n2" }
+] }
+
+# NODE 2: THE ACT (100-200 words)
+[[canvases.nodes]]
+id = "n2"
+name = "Morning Passion"
+blocks = [
+  { type = "paragraph", content = "Her robe falls open as you lift her onto the counter. She gasps as you enter her, wrapping her legs around you." },
+  { type = "dialog", content = "God, yes... don't stop.", props = { speaker = "npc", npcId = "npc_elena" } },
+  { type = "paragraph", content = "You start slow, savoring the sensation. But need takes over. Harder. Deeper. Her nails rake down your back." },
+  { type = "dialog", content = "I'm close...", props = { speaker = "npc", npcId = "npc_elena" } },
+  { type = "video", props = { file = "activities/breakfast/breakfast_t5.mp4", description = "Kitchen counter sex - missionary, passionate, both climax" } },
+  { type = "paragraph", content = "You finish together, holding each other through the aftershocks." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Stay close", targetType = "node", nodeId = "activity_breakfast_elena_t5.n3" }
+] }
+
+# NODE 3: AFTERMATH (40-60 words)
+[[canvases.nodes]]
+id = "n3"
+name = "Afterglow"
+blocks = [
+  { type = "paragraph", content = "You stay tangled together, catching your breath. Eventually, she laughs softly." },
+  { type = "dialog", content = "Best breakfast ever.", props = { speaker = "npc", npcId = "npc_elena" } }
+]
+exit_block = { type = "location", text = "Continue your day", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_elena", trait = "affection", op = "add", value = 5 }] } }
+```
+
+### T5 Validation Checklist:
+```
+For each T5 NPC activity canvas:
+✓ Has 3 nodes (n1=lead-in, n2=act, n3=aftermath)
+✓ Total word count >= 200 across all paragraph blocks
+✓ Contains >= 2 dialog blocks
+✓ Video block is in node 2, not alone in node 1
+✓ Node 3 (aftermath) has the exit_block, not node 2
+```
+
+### WRONG vs RIGHT:
+
+❌ WRONG (too thin - current problem):
+```toml
+[[canvases.nodes]]
+id = "n1"
+blocks = [
+  { type = "paragraph", content = "Breakfast gets cold." },
+  { type = "video", props = { file = "...", description = "..." } }
+]
+exit_block = { type = "location", ... }
+```
+
+✓ RIGHT (proper depth):
+```toml
+# 3 nodes with 200+ words total, 2+ dialogue lines, proper structure
+```
+
+## Starting Canvas Requirements (CRITICAL)
+33. **No Trigger Section**: Starting canvas has NO [canvases.trigger] block - it plays automatically
+34. **Player Identity**: Node 1 establishes WHO the player is (age, role, emotional state, history)
+35. **NPC Introduction**: Node 2 introduces primary NPC with FULL physical description BEFORE they speak
+36. **Situation Setup**: Node 3 establishes stakes, secondary NPC/obstacle, and forbidden element
+37. **Multi-Node Structure**: Starting canvas has at least 3 nodes (player → NPC intro → situation)
+38. **Chemistry Moment**: NPC introduction includes the first hint of attraction/connection
+
+---
+
+END OF PROMPT

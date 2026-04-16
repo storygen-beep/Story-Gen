@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "find-media run manifest",
+  "description": "Final summary written to games/<game>/.find-media/run_manifest.json after a find-media run completes. Cumulative across critique cycles. Used for telemetry and resume.",
+  "type": "object",
+  "required": ["game", "started_at", "ended_at", "mode", "totals", "items", "by_source", "by_tier"],
+  "properties": {
+    "game": { "type": "string", "description": "Game slug, e.g. two_weeks" },
+    "started_at": { "type": "string", "format": "date-time" },
+    "ended_at": { "type": "string", "format": "date-time" },
+    "duration_seconds": { "type": "number" },
+    "mode": { "type": "string", "enum": ["quick", "standard", "deep"] },
+    "skill_version": { "type": "string", "description": "Version of find-media skill that produced this manifest" },
+    "totals": {
+      "type": "object",
+      "required": ["total", "downloaded", "skipped", "failed"],
+      "properties": {
+        "total": { "type": "integer" },
+        "downloaded": { "type": "integer" },
+        "skipped": { "type": "integer", "description": "Already existed or deduped" },
+        "failed": { "type": "integer" },
+        "critique_cycles_total": { "type": "integer" }
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["item_id", "file_path", "tier", "status"],
+        "properties": {
+          "item_id": { "type": "string" },
+          "file_path": { "type": "string" },
+          "tier": { "type": "string" },
+          "content_rating": { "type": "string", "enum": ["sfw", "nsfw"] },
+          "status": { "type": "string", "enum": ["downloaded", "skipped", "failed"] },
+          "winner": {
+            "type": "object",
+            "properties": {
+              "source": { "type": "string" },
+              "url": { "type": "string" },
+              "score_total": { "type": "integer" },
+              "score_breakdown": {
+                "type": "object",
+                "properties": {
+                  "setting": { "type": "integer" },
+                  "action": { "type": "integer" },
+                  "appearance": { "type": "integer" },
+                  "quality": { "type": "integer" },
+                  "relevance": { "type": "integer" },
+                  "mood": { "type": "integer" },
+                  "composition": { "type": "integer" }
+                }
+              }
+            }
+          },
+          "critique_cycles": { "type": "integer", "description": "How many critique cycles this item needed" },
+          "queries_used": { "type": "array", "items": { "type": "string" } },
+          "fail_reason": { "type": "string", "description": "Present only when status=failed" },
+          "best_below_threshold": {
+            "type": "object",
+            "description": "Best candidate that did not pass threshold — surfaced to user for manual review",
+            "properties": {
+              "source": { "type": "string" },
+              "url": { "type": "string" },
+              "score_total": { "type": "integer" }
+            }
+          }
+        }
+      }
+    },
+    "by_source": {
+      "type": "object",
+      "description": "Per-source hit rate. Over time, informs which sources to prioritize.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "attempts": { "type": "integer" },
+          "hits": { "type": "integer" },
+          "hit_rate": { "type": "number" }
+        }
+      }
+    },
+    "by_tier": {
+      "type": "object",
+      "description": "Per-tier success rate. Reveals whether failures cluster at specific tiers.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "total": { "type": "integer" },
+          "downloaded": { "type": "integer" },
+          "failed": { "type": "integer" }
+        }
+      }
+    }
+  }
+}

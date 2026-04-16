@@ -1,0 +1,14 @@
+{
+  "Welcome Page": {
+    "first_ts": 1776370465530,
+    "visit_count": 1
+  },
+  "dream1": {
+    "first_ts": 1776370487532,
+    "visit_count": 3
+  },
+  "wakeup_dream": {
+    "first_ts": 1776370569231,
+    "visit_count": 1
+  }
+}

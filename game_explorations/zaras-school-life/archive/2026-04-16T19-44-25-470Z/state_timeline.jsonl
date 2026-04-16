@@ -1,0 +1,109 @@
+{"ts":1776363857886,"hash":"b65f08f8673b5165","passage":"Welcome Page","session":1,"kind":"start"}
+{"ts":1776363905425,"hash":"75f7e87efcd9e6db","passage":"School","session":1,"diff_changed":["PlayerMoney","PlayerEnergy","PlayerMaxEnergy","PlayerCorruption","PlayerSchoolRep","PlayerFitness","PlayerArt","PlayerSci","PlayerComp","PlayerClothes","hour","day","dayOfWeek","dayCount","dateDay","famSexUnlocked","ben.relationship","ben.metFlag","introSchool","school1stDayEvent","school2ndDayEvent","return","showHour"],"diff_added":["schoolFlag","attendanceCheck","currentSchoolClass"],"kind":"observe"}
+{"ts":1776363910624,"hash":"75f7e87efcd9e6db","passage":"School","session":1,"diff_changed":[],"diff_added":[],"kind":"observe"}
+{"ts":1776363939579,"hash":"bd06a4f4601437f2","passage":"boyswcteacher","session":1,"diff_changed":["minute","return","showMinute"],"diff_added":[],"kind":"branch"}
+{"ts":1776363981577,"hash":"e36927263dfacfd3","passage":"boyswcteacher","session":1,"diff_changed":["detentionFlag"],"diff_added":[],"kind":"branch"}
+{"ts":1776364006102,"hash":"0f54d7635ac007cd","passage":"School","session":1,"diff_changed":["minute","return","showMinute"],"diff_added":[],"kind":"branch"}
+{"ts":1776364029048,"hash":"3776c3ba0537f84b","passage":"School girls restroom","session":1,"diff_changed":["minute","return","showMinute"],"diff_added":[],"kind":"branch"}
+{"ts":1776364051348,"hash":"c80a19eb1584f59f","passage":"School girls restroom","session":1,"diff_changed":["PlayerEnergy","minute","showMinute"],"diff_added":[],"kind":"branch"}
+{"ts":1776364078509,"hash":"301bae604087b694","passage":"girlswc peak","session":1,"diff_changed":["return"],"diff_added":[],"kind":"branch"}
+{"ts":1776364131353,"hash":"6a993f013f848bb6","passage":"girlswc peak","session":1,"diff_changed":["PlayerSchoolRep"],"diff_added":[],"kind":"observe"}
+{"ts":1776364136902,"hash":"6a993f013f848bb6","passage":"girlswc peak","session":1,"diff_changed":[],"diff_added":[],"kind":"branch"}
+{"ts":1776364142183,"hash":"6a993f013f848bb6","passage":"girlswc peak","session":1,"diff_changed":[],"diff_added":[],"kind":"branch"}
+{"ts":1776364191577,"hash":"6cf38a51560c2ce1","passage":"School","session":1,"diff_changed":["minute","return","showMinute"],"diff_added":[],"kind":"branch"}
+{"ts":1776364191913,"hash":"6cf38a51560c2ce1","passage":"School","session":1,"diff_changed":[],"diff_added":[],"kind":"observe"}
+{"ts":1776364192635,"hash":"8fbb483d4c98363a","passage":"School library","session":1,"diff_changed":["minute","return","showMinute"],"diff_added":[],"kind":"branch"}
+{"ts":1776364214258,"hash":"95ebe971e4b09652","passage":"ben quest1","session":1,"diff_changed":["playerActiveQuests","minute","ben.dailyVisits","ben.activeQuest","return","showMinute"],"diff_added":[],"kind":"branch"}
+{"ts":1776364253316,"hash":"19c5c8a9c91e4e1d","passage":"ben quest1 accept","session":1,"diff_changed":["minute","return","showMinute"],"diff_added":[],"kind":"branch"}
+{"ts":1776364271487,"hash":"abb1f8d5d152896c","passage":"ben quest1 end","session":1,"diff_changed":["PlayerEnergy","minute","ben.dailyVisits","return","showMinute"],"diff_added":["benQuest1End","benQuest1Missed","benMissedTutorTimes"],"kind":"branch"}
+{"ts":1776364299756,"hash":"1c2d8f4855beee6c","passage":"School","session":1,"diff_changed":["return"],"diff_added":[],"kind":"branch"}
+{"ts":1776364300475,"hash":"b8c12522badf3a6d","passage":"School library","session":1,"diff_changed":["hour","minute","return","showMinute","showHour"],"diff_added":[],"kind":"branch"}
+{"ts":1776364301370,"hash":"3149b5e7daf2ad64","passage":"library events","session":1,"diff_changed":["PlayerEnergy","PlayerCorruption","hour","return","showHour"],"diff_added":[],"kind":"branch"}
+{"ts":1776364325668,"hash":"a42e625fa0b706af","passage":"School library","session":1,"diff_changed":["return"],"diff_added":[],"kind":"branch"}
+{"ts":1776364347784,"hash":"25d91989ee9d132f","passage":"School","session":1,"diff_changed":["minute","return","showMinute"],"diff_added":[],"kind":"branch"}
+{"ts":1776364376194,"hash":"68dcb9153e5db253","passage":"School","session":1,"diff_changed":["hour","minute","showMinute","showHour","currentSchoolClass"],"diff_added":[],"kind":"observe"}
+{"ts":1776364403713,"hash":"68dcb9153e5db253","passage":"School","session":1,"diff_changed":[],"diff_added":[],"kind":"observe"}
+{"ts":1776364432901,"hash":"68dcb9153e5db253","passage":"School","session":1,"diff_changed":[],"diff_added":[],"kind":"observe"}
+{"ts":1776364458244,"hash":"68dcb9153e5db253","passage":"School","session":1,"diff_changed":[],"diff_added":[],"kind":"observe"}
+{"ts":1776364476614,"hash":"840bf75cca94dd8e","passage":"School","session":1,"diff_changed":["hour","showHour","currentSchoolClass"],"diff_added":[],"kind":"observe"}
+{"ts":1776364493389,"hash":"56d93dec653e933c","passage":"Classes","session":1,"diff_changed":["return"],"diff_added":["isLateForAClass","classActivity","currentPassage"],"kind":"branch"}
+{"ts":1776364494263,"hash":"d7b4ab28623728ed","passage":"Classes","session":1,"diff_changed":["PlayerEnergy","PlayerArt","classActivity"],"diff_added":[],"kind":"branch"}
+{"ts":1776364495185,"hash":"f8c5e136f40bcc61","passage":"School","session":1,"diff_changed":["classAttended","minute","return","showMinute","currentSchoolClass","classActivity"],"diff_added":[],"kind":"branch"}
+{"ts":1776364515275,"hash":"6a2d999bc17ba76f","passage":"Classes","session":1,"diff_changed":["hour","minute","return","showMinute","showHour","currentSchoolClass"],"diff_added":["ScienceClassTries","counter","targetMin","targetMax","rangeMin","rangeMax","countdown"],"kind":"branch"}
+{"ts":1776364516169,"hash":"efef93a620e13386","passage":"Classes","session":1,"diff_changed":["PlayerEnergy","PlayerSci","classActivity","targetMin","targetMax","rangeMin","rangeMax"],"diff_added":[],"kind":"branch"}
+{"ts":1776364517037,"hash":"a491a45043b64ecb","passage":"School","session":1,"diff_changed":["classAttended","minute","return","showMinute","currentSchoolClass","classActivity"],"diff_added":[],"kind":"branch"}
+{"ts":1776364517954,"hash":"b0e2c2231bf84abd","passage":"Classes","session":1,"diff_changed":["hour","minute","return","showMinute","showHour","currentSchoolClass"],"diff_added":[],"kind":"branch"}
+{"ts":1776364518784,"hash":"ffdf45105f6fe91b","passage":"Classes","session":1,"diff_changed":["PlayerEnergy","PlayerComp","classActivity"],"diff_added":[],"kind":"branch"}
+{"ts":1776364519664,"hash":"48e4c6df21ab22c9","passage":"School","session":1,"diff_changed":["classAttended","minute","return","showMinute","currentSchoolClass","classActivity"],"diff_added":[],"kind":"branch"}
+{"ts":1776364520493,"hash":"ee0aa208ee8d3580","passage":"School No Energy","session":1,"diff_changed":["hour","minute","return","showMinute","showHour","currentSchoolClass"],"diff_added":[],"kind":"branch"}
+{"ts":1776364525776,"hash":"ee0aa208ee8d3580","passage":"School No Energy","session":1,"diff_changed":[],"diff_added":[],"kind":"branch"}
+{"ts":1776364562352,"hash":"c1e83bd4d80dae1b","passage":"School","session":1,"diff_changed":["minute","return","showMinute"],"diff_added":[],"kind":"branch"}
+{"ts":1776364586295,"hash":"b193762f4299db5a","passage":"School","session":1,"diff_changed":["PlayerEnergy","PlayerSchoolRep","PlayerSchoolUniSlutty","PlayerClothes","janetDetention","janetOfficeIntro"],"diff_added":[],"kind":"observe"}
+{"ts":1776364605274,"hash":"4ec1ed1fbf4539bd","passage":"Classes","session":1,"diff_changed":["return"],"diff_added":[],"kind":"branch"}
+{"ts":1776364610952,"hash":"363bc6df9c8d9871","passage":"Classes","session":1,"diff_changed":["PlayerEnergy","PlayerMaxEnergy","PlayerFitness","classActivity"],"diff_added":[],"kind":"branch"}
+{"ts":1776364611885,"hash":"eeb6eaf75657ba62","passage":"School","session":1,"diff_changed":["classAttended","minute","return","showMinute","currentSchoolClass","classActivity"],"diff_added":[],"kind":"branch"}
+{"ts":1776364633186,"hash":"f60ffe7ae680d52a","passage":"janet events detention","session":1,"diff_changed":["janetDetention","return"],"diff_added":[],"kind":"branch"}
+{"ts":1776364673701,"hash":"369640b9e6e601d8","passage":"janet events detention","session":1,"diff_changed":["PlayerEnergy","PlayerSchoolRep","jessica.reputation","janet.relationship","janet.willpower"],"diff_added":[],"kind":"branch"}
+{"ts":1776364698743,"hash":"c08e8fa479659c1d","passage":"School","session":1,"diff_changed":["hour","jessica.reputation","return","showHour"],"diff_added":[],"kind":"branch"}
+{"ts":1776364732811,"hash":"d1cd9689070c0423","passage":"School Detention","session":1,"diff_changed":["return"],"diff_added":[],"kind":"branch"}
+{"ts":1776364779740,"hash":"d1cd9689070c0423","passage":"School Detention","session":1,"diff_changed":[],"diff_added":[],"kind":"branch"}
+{"ts":1776364799664,"hash":"2f81cbc269b97987","passage":"School Detention","session":1,"diff_changed":["PlayerEnergy","PlayerSchoolRep"],"diff_added":[],"kind":"branch"}
+{"ts":1776364827641,"hash":"e36b6936e8b019cf","passage":"School","session":1,"diff_changed":["detentionFlag","hour","minute","return","showMinute","showHour"],"diff_added":[],"kind":"branch"}
+{"ts":1776364860752,"hash":"25fe74512540cee9","passage":"Jecinda District","session":1,"diff_changed":["minute","return","showMinute"],"diff_added":["walkEnergyJA"],"kind":"branch"}
+{"ts":1776364861126,"hash":"18ff8acc817306e3","passage":"Arabella District","session":1,"diff_changed":["PlayerClothes","hour","minute","return","showMinute","showHour","timeOfDay"],"diff_added":["walkEnergyAJ"],"kind":"observe"}
+{"ts":1776364884920,"hash":"5f8b7bba8c7c7da6","passage":"School","session":1,"diff_changed":["PlayerEnergy","PlayerCorruption","PlayerClothes","classAttended","hour","jason.metFlag","lisa.relationship","lisa.metFlag","return","showHour","timeOfDay","currentSchoolClass"],"diff_added":[],"kind":"observe"}
+{"ts":1776364890217,"hash":"5f8b7bba8c7c7da6","passage":"School","session":1,"diff_changed":[],"diff_added":[],"kind":"branch"}
+{"ts":1776364912939,"hash":"9cdc47e70a5c2262","passage":"Classes","session":1,"diff_changed":["return"],"diff_added":[],"kind":"branch"}
+{"ts":1776364913815,"hash":"457d09e371729149","passage":"Classes","session":1,"diff_changed":["PlayerEnergy","PlayerArt","classActivity"],"diff_added":[],"kind":"branch"}
+{"ts":1776364914693,"hash":"e741bc0d2570a62a","passage":"School","session":1,"diff_changed":["classAttended","minute","return","showMinute","currentSchoolClass","classActivity"],"diff_added":[],"kind":"branch"}
+{"ts":1776364915585,"hash":"6b2eb0fac83ba46d","passage":"Classes","session":1,"diff_changed":["hour","minute","return","showMinute","showHour","currentSchoolClass","targetMin","targetMax","rangeMin","rangeMax"],"diff_added":[],"kind":"branch"}
+{"ts":1776364916462,"hash":"977188cfbe77985e","passage":"Classes","session":1,"diff_changed":["PlayerEnergy","PlayerSci","classActivity","targetMin","targetMax","rangeMin","rangeMax"],"diff_added":[],"kind":"branch"}
+{"ts":1776364917323,"hash":"6c086a5161e4d53f","passage":"School","session":1,"diff_changed":["classAttended","minute","return","showMinute","currentSchoolClass","classActivity"],"diff_added":[],"kind":"branch"}
+{"ts":1776364918185,"hash":"5c2f1d723a3b510a","passage":"Classes","session":1,"diff_changed":["hour","minute","return","showMinute","showHour","currentSchoolClass"],"diff_added":[],"kind":"branch"}
+{"ts":1776364919101,"hash":"64992fd55ab1571e","passage":"Classes","session":1,"diff_changed":["PlayerEnergy","PlayerComp","classActivity"],"diff_added":[],"kind":"branch"}
+{"ts":1776364919981,"hash":"801e56282794d8bf","passage":"School","session":1,"diff_changed":["classAttended","minute","return","showMinute","currentSchoolClass","classActivity"],"diff_added":[],"kind":"branch"}
+{"ts":1776364920847,"hash":"5e30ed1de71ed3a3","passage":"Classes","session":1,"diff_changed":["hour","minute","return","showMinute","showHour","currentSchoolClass"],"diff_added":[],"kind":"branch"}
+{"ts":1776364939701,"hash":"8290feb126b94f4a","passage":"Classes","session":1,"diff_changed":["PlayerEnergy","PlayerMaxEnergy","PlayerFitness","classActivity"],"diff_added":[],"kind":"branch"}
+{"ts":1776364940574,"hash":"2a6744fb95090cec","passage":"School","session":1,"diff_changed":["classAttended","minute","return","showMinute","currentSchoolClass","classActivity"],"diff_added":[],"kind":"branch"}
+{"ts":1776364962081,"hash":"9389f7a15cdbd0e1","passage":"Jecinda District","session":1,"diff_changed":["hour","minute","return","showMinute","showHour"],"diff_added":[],"kind":"branch"}
+{"ts":1776364983118,"hash":"8ec56b253bf8f73f","passage":"Park","session":1,"diff_changed":["minute","return","showMinute"],"diff_added":[],"kind":"branch"}
+{"ts":1776364983786,"hash":"3905847f041a86aa","passage":"bench event5","session":1,"diff_changed":["PlayerEnergy","minute","return","showMinute"],"diff_added":[],"kind":"branch"}
+{"ts":1776365025676,"hash":"da71d46d245d8283","passage":"dickIntro","session":1,"diff_changed":["PlayerEnergy","hour","minute","dick.relationship","dick.metFlag","dick.dailyVisits","return","showMinute","showHour"],"diff_added":[],"kind":"branch"}
+{"ts":1776365050336,"hash":"eccad9c52dabe4e8","passage":"Park","session":1,"diff_changed":["return"],"diff_added":[],"kind":"branch"}
+{"ts":1776365073121,"hash":"86ea94a507f6face","passage":"dick events","session":1,"diff_changed":["PlayerEnergy","minute","dick.relationship","dick.dailyVisits","return","showMinute"],"diff_added":[],"kind":"branch"}
+{"ts":1776365095322,"hash":"6bed493da616d314","passage":"Park","session":1,"diff_changed":["return"],"diff_added":[],"kind":"branch"}
+{"ts":1776365100709,"hash":"8be787fec1018cee","passage":"Park","session":1,"diff_changed":["PlayerEnergy","PlayerCorruption","dick.relationship","dick.dailyVisits"],"diff_added":["dick.corruption","dick.lust"],"kind":"observe"}
+{"ts":1776365105903,"hash":"8be787fec1018cee","passage":"Park","session":1,"diff_changed":[],"diff_added":[],"kind":"branch"}
+{"ts":1776365125353,"hash":"036ee4769c5c3f10","passage":"dick quest1","session":1,"diff_changed":["playerActiveQuests","dick.activeQuest","return"],"diff_added":[],"kind":"observe"}
+{"ts":1776365158156,"hash":"c78f56c93312f598","passage":"dick quest1 accept","session":1,"diff_changed":["minute","return","showMinute"],"diff_added":[],"kind":"branch"}
+{"ts":1776365174523,"hash":"7575b81734067108","passage":"dick quest1 accept","session":1,"diff_changed":["minute"],"diff_added":[],"kind":"branch"}
+{"ts":1776365202663,"hash":"84bf9c50878c3e9a","passage":"dick quest1 bj","session":1,"diff_changed":["hour","minute","return","showMinute","showHour"],"diff_added":[],"kind":"branch"}
+{"ts":1776365216258,"hash":"90398e3db5247470","passage":"dick quest1 end","session":1,"diff_changed":["PlayerEnergy","playerActiveQuests","hour","minute","dick.relationship","dick.dailyVisits","dick.activeQuest","dick.lastQuest","return","showMinute","showHour"],"diff_added":[],"kind":"branch"}
+{"ts":1776365234614,"hash":"8c4104e431acb47e","passage":"Living room","session":1,"diff_changed":["return"],"diff_added":["KylePresent","MomPresent","DadPresent"],"kind":"branch"}
+{"ts":1776365235121,"hash":"52259f0c0391652e","passage":"School canteen","session":1,"diff_changed":["PlayerEnergy","classAttended","hour","minute","day","dayCount","dailyLisaCanteenCheck","return","showMinute","showHour","weekDay","weekendDay"],"diff_added":[],"kind":"observe"}
+{"ts":1776365236100,"hash":"9720dbb75c43aa94","passage":"canteen events","session":1,"diff_changed":["PlayerMoney","PlayerEnergy","hour","minute","return","showMinute","showHour"],"diff_added":[],"kind":"branch"}
+{"ts":1776365254693,"hash":"f18cc44580239ffc","passage":"lisaIntro","session":1,"diff_changed":["return"],"diff_added":[],"kind":"observe"}
+{"ts":1776365293074,"hash":"659f930689931ec2","passage":"lisa intro","session":1,"diff_changed":["return"],"diff_added":[],"kind":"observe"}
+{"ts":1776365330697,"hash":"035477e960b19831","passage":"lisa intro","session":1,"diff_changed":["minute"],"diff_added":[],"kind":"branch"}
+{"ts":1776365348407,"hash":"a79ccea6dc2ed64c","passage":"lisa intro","session":1,"diff_changed":["PlayerEnergy","PlayerSchoolRep","minute","lisa.relationship"],"diff_added":[],"kind":"branch"}
+{"ts":1776365398361,"hash":"25379e6b186038cb","passage":"jessica intro","session":1,"diff_changed":["hour","minute","dailyBully","return","showMinute","showHour"],"diff_added":[],"kind":"branch"}
+{"ts":1776365418720,"hash":"b8c4772bb74ed1c8","passage":"jason intro","session":1,"diff_changed":["return"],"diff_added":[],"kind":"observe"}
+{"ts":1776365456833,"hash":"b8c4772bb74ed1c8","passage":"jason intro","session":1,"diff_changed":[],"diff_added":[],"kind":"branch"}
+{"ts":1776365473027,"hash":"b8c4772bb74ed1c8","passage":"jason intro","session":1,"diff_changed":[],"diff_added":[],"kind":"branch"}
+{"ts":1776365495406,"hash":"27a1ec0abbd78fd1","passage":"jason intro","session":1,"diff_changed":["PlayerEnergy","detentionFlag","jasonIntroCont"],"diff_added":[],"kind":"branch"}
+{"ts":1776365513651,"hash":"1912e78ab3f2b9be","passage":"jessica intro","session":1,"diff_changed":["classAttended","minute","return","showMinute"],"diff_added":[],"kind":"branch"}
+{"ts":1776365575188,"hash":"1912e78ab3f2b9be","passage":"jessica intro","session":1,"diff_changed":[],"diff_added":[],"kind":"branch"}
+{"ts":1776365601354,"hash":"4bb9894489f5747c","passage":"jessica intro","session":1,"diff_changed":["PlayerEnergy","PlayerSchoolRep","minute","jessica.reputation","jessica.metFlag","jessIntroJessBullied"],"diff_added":[],"kind":"branch"}
+{"ts":1776365644946,"hash":"a008d7907bbe80cc","passage":"School","session":1,"diff_changed":["hour","minute","return","showMinute","showHour"],"diff_added":[],"kind":"branch"}
+{"ts":1776365670504,"hash":"2034c1493356edd4","passage":"daniel intro","session":1,"diff_changed":["return"],"diff_added":[],"kind":"observe"}
+{"ts":1776365710583,"hash":"d01a066b64d15f2e","passage":"daniel intro","session":1,"diff_changed":["minute"],"diff_added":[],"kind":"branch"}
+{"ts":1776365728066,"hash":"9b11ac5cac2fddf2","passage":"daniel intro","session":1,"diff_changed":["minute"],"diff_added":[],"kind":"branch"}
+{"ts":1776365751074,"hash":"e75ac0287f5f59e4","passage":"daniel intro","session":1,"diff_changed":["minute"],"diff_added":[],"kind":"branch"}
+{"ts":1776365770326,"hash":"609c60b80a95f38d","passage":"daniel intro","session":1,"diff_changed":["minute","daniel.rejectTimes","daniel.rejectDay"],"diff_added":["daniel.cooldown"],"kind":"branch"}
+{"ts":1776365795238,"hash":"102cc617108dd398","passage":"School","session":1,"diff_changed":["minute","return","showMinute"],"diff_added":[],"kind":"branch"}
+{"ts":1776365837745,"hash":"102cc617108dd398","passage":"School","session":1,"diff_changed":[],"diff_added":[],"kind":"observe"}
+{"ts":1776365860774,"hash":"102cc617108dd398","passage":"School","session":1,"diff_changed":[],"diff_added":[],"kind":"observe"}
+{"ts":1776365892616,"hash":"f853b3a3f1e8670d","passage":"School","session":1,"diff_changed":["PlayerEnergy","classAttended","detentionFlag","hour","minute","showMinute","showHour"],"diff_added":[],"kind":"observe"}
+{"ts":1776365922414,"hash":"13832589ed98b550","passage":"School","session":1,"diff_changed":["PlayerSchoolRep","PlayerClothes","classAttended","hour","showHour"],"diff_added":[],"kind":"observe"}
+{"ts":1776365950458,"hash":"62a9373bae4f3c8f","passage":"janet intro","session":1,"diff_changed":["detentionFlag","janetIntroOngoing","return"],"diff_added":[],"kind":"observe"}
+{"ts":1776366014850,"hash":"42b520439507fa04","passage":"School","session":1,"diff_changed":["minute","return","showMinute"],"diff_added":[],"kind":"branch"}

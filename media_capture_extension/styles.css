@@ -1,0 +1,186 @@
+/**
+ * Twine Media Capture - Styles
+ * Styling for overlay buttons, forms, and toast notifications.
+ */
+
+/* Wrapper for media elements */
+.twine-capture-wrapper {
+    position: relative !important;
+    display: inline-block;
+}
+
+/* Capture button - positioned inside media element */
+.twine-capture-btn {
+    position: absolute !important;
+    top: 8px !important;
+    left: 8px !important;
+    width: 32px !important;
+    height: 32px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: rgba(59, 130, 246, 0.9) !important;
+    border: none !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    opacity: 0 !important;
+    transition: opacity 0.2s ease, transform 0.1s ease !important;
+    z-index: 99999 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+    color: white !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    font-family: system-ui, -apple-system, sans-serif !important;
+    line-height: 1 !important;
+}
+
+/* Show button on hover */
+.twine-capture-wrapper:hover .twine-capture-btn {
+    opacity: 1 !important;
+}
+
+/* Button hover state */
+.twine-capture-btn:hover {
+    background: rgba(37, 99, 235, 1) !important;
+    transform: scale(1.1) !important;
+}
+
+/* Button active state */
+.twine-capture-btn:active {
+    transform: scale(0.95) !important;
+}
+
+/* Scene ID input form */
+.twine-capture-form {
+    position: absolute !important;
+    top: 48px !important;
+    left: 8px !important;
+    background: white !important;
+    border-radius: 8px !important;
+    padding: 12px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+    z-index: 100000 !important;
+    min-width: 220px !important;
+    font-family: system-ui, -apple-system, sans-serif !important;
+}
+
+/* Game context display */
+.twine-capture-game-context {
+    font-size: 11px !important;
+    color: #6b7280 !important;
+    background: #f3f4f6 !important;
+    padding: 6px 8px !important;
+    border-radius: 4px !important;
+    margin-bottom: 10px !important;
+}
+
+.twine-capture-game-context strong {
+    color: #3b82f6 !important;
+    font-weight: 600 !important;
+}
+
+/* Form label */
+.twine-capture-form-label {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: #374151 !important;
+    margin-bottom: 6px !important;
+}
+
+/* Text input */
+.twine-capture-input {
+    width: 100% !important;
+    padding: 8px 10px !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 6px !important;
+    margin-bottom: 10px !important;
+    font-size: 14px !important;
+    font-family: system-ui, -apple-system, sans-serif !important;
+    box-sizing: border-box !important;
+    outline: none !important;
+}
+
+.twine-capture-input:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2) !important;
+}
+
+/* Button container */
+.twine-capture-form-buttons {
+    display: flex !important;
+    gap: 8px !important;
+}
+
+/* Form buttons */
+.twine-capture-form-btn {
+    flex: 1 !important;
+    padding: 8px 12px !important;
+    border: none !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    font-family: system-ui, -apple-system, sans-serif !important;
+    transition: background 0.15s ease !important;
+}
+
+.twine-capture-form-btn.submit {
+    background: #3b82f6 !important;
+    color: white !important;
+}
+
+.twine-capture-form-btn.submit:hover {
+    background: #2563eb !important;
+}
+
+.twine-capture-form-btn.submit:disabled {
+    background: #93c5fd !important;
+    cursor: not-allowed !important;
+}
+
+.twine-capture-form-btn.cancel {
+    background: #f3f4f6 !important;
+    color: #374151 !important;
+}
+
+.twine-capture-form-btn.cancel:hover {
+    background: #e5e7eb !important;
+}
+
+/* Toast notification */
+.twine-capture-toast {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    padding: 12px 20px !important;
+    border-radius: 8px !important;
+    color: white !important;
+    font-size: 14px !important;
+    font-family: system-ui, -apple-system, sans-serif !important;
+    z-index: 100001 !important;
+    max-width: 400px !important;
+    word-break: break-word !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    animation: twine-slide-in 0.3s ease !important;
+    transition: opacity 0.3s ease !important;
+}
+
+.twine-capture-toast.success {
+    background: #22c55e !important;
+}
+
+.twine-capture-toast.error {
+    background: #ef4444 !important;
+}
+
+@keyframes twine-slide-in {
+    from {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}

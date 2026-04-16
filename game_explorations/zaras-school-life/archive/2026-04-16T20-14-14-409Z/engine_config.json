@@ -1,0 +1,120 @@
+{
+  "captured_at": "2026-04-16T20:08:01.821Z",
+  "engine": "sugarcube",
+  "version": {
+    "name": "SugarCube",
+    "major": 2,
+    "minor": 37,
+    "patch": 3,
+    "prerelease": null,
+    "build": 10338,
+    "short": "SugarCube (v2.37.3)",
+    "toString": "2.37.3+10338"
+  },
+  "config": {
+    "addVisitedLinkClass": false,
+    "cleanupWikifierOutput": false,
+    "debug": false,
+    "enableOptionalDebugging": false,
+    "loadDelay": 0,
+    "audio": {
+      "pauseOnFadeToZero": true,
+      "preloadMetadata": true
+    },
+    "history": {
+      "controls": true,
+      "maxStates": 40
+    },
+    "macros": {
+      "maxLoopIterations": 1000,
+      "typeSkipKey": " ",
+      "typeVisitedPassages": true,
+      "ifAssignmentError": "<deprecated>"
+    },
+    "navigation": {},
+    "passages": {
+      "displayTitles": false,
+      "nobr": false,
+      "start": "Welcome Page",
+      "descriptions": "<deprecated>"
+    },
+    "saves": {
+      "id": "zaras-school-life-free",
+      "maxAutoSaves": 0,
+      "maxSlotSaves": 11,
+      "version": 10,
+      "autosave": "<deprecated>",
+      "onLoad": "<deprecated>",
+      "onSave": "<deprecated>",
+      "slots": "<deprecated>",
+      "tryDiskOnMobile": true
+    },
+    "ui": {
+      "stowBarInitially": 800,
+      "updateStoryElements": true
+    }
+  },
+  "state": {
+    "turn": null,
+    "turns": 1,
+    "length": 1,
+    "bottom_title": "Welcome Page",
+    "active_title": "Welcome Page",
+    "temporary_keys": [
+      "hour",
+      "minute",
+      "minuteStr",
+      "hourStr"
+    ],
+    "prng_present": true,
+    "prng_state": null,
+    "history_length": 1,
+    "history_first_entry_shape": {
+      "keys": [
+        "title",
+        "variables"
+      ],
+      "title": "Welcome Page"
+    },
+    "history_last_entry_shape": {
+      "keys": [
+        "title",
+        "variables"
+      ],
+      "title": "Welcome Page"
+    },
+    "has_marshalForSave": true,
+    "has_unmarshalForSave": true
+  },
+  "story": {
+    "name": "Zara's School Life Free",
+    "ifid": "8cc12020-89ff-44f4-9354-6081089fa9a1",
+    "format": "SugarCube",
+    "format_version": "2.37.3",
+    "creator": "Twine",
+    "creator_version": "2.11.1",
+    "startnode": "1",
+    "options": null,
+    "tags": null,
+    "zoom": "0.6",
+    "engine_title": "Zara's School Life Free",
+    "engine_name": "Zara's School Life Free",
+    "engine_dom_id": "zaras-school-life-free"
+  },
+  "settings": {
+    "timeFormat": "24-hour",
+    "font": "Ubuntu",
+    "img": "PC"
+  },
+  "save_caps": {
+    "has_serialize": true,
+    "has_deserialize": true,
+    "has_slots": true,
+    "has_autosave": true,
+    "slot_count": 0,
+    "on_save_handlers": 0,
+    "on_load_handlers": 1,
+    "slots_metadata": [],
+    "autosave_metadata": null
+  }
+}

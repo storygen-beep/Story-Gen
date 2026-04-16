@@ -1,0 +1,103 @@
+{
+  "game": "two_weeks",
+  "output_dir": "prompts/dummy_nsfw",
+  "content_rating": "nsfw",
+  "queries": [
+    {
+      "file": "videos/activities/breakfast_ethan_t4.jpg",
+      "description": "Kitchen embrace, kissing, morning light",
+      "search_queries": ["couple kissing passionately kitchen morning", "making out kitchen counter embrace"],
+      "type": "image",
+      "canvas": "activity_breakfast_ethan",
+      "tier": "t4"
+    },
+    {
+      "file": "videos/activities/breakfast_ethan_t5.jpg",
+      "description": "Sex on kitchen counter, morning, urgent and passionate",
+      "search_queries": ["sex on kitchen counter morning urgent", "couple fucking kitchen counter passionate"],
+      "type": "video",
+      "canvas": "activity_breakfast_ethan",
+      "tier": "t5"
+    },
+    {
+      "file": "videos/activities/breakfast_ethan_t7.jpg",
+      "description": "Morning oral in kitchen, discreet, coffee nearby",
+      "search_queries": ["blowjob kitchen morning coffee", "kneeling oral morning kitchen"],
+      "type": "video",
+      "canvas": "activity_breakfast_ethan",
+      "tier": "t7"
+    },
+    {
+      "file": "videos/activities/morning_coffee_t4.jpg",
+      "description": "Close proximity, hands on shirt helping, tension building",
+      "search_queries": ["hands on shirt close faces about to kiss", "couple close touching shirt kitchen sexual"],
+      "type": "image",
+      "canvas": "activity_morning_coffee",
+      "tier": "t4"
+    },
+    {
+      "file": "videos/activities/morning_coffee_t5.jpg",
+      "description": "Morning sex in kitchen, lazy and unhurried",
+      "search_queries": ["lazy morning sex kitchen coffee", "morning fuck slow passionate kitchen"],
+      "type": "video",
+      "canvas": "activity_morning_coffee",
+      "tier": "t5"
+    },
+    {
+      "file": "videos/activities/helping_chores_t4.jpg",
+      "description": "Behind her at the sink, kissing her neck, intimate",
+      "search_queries": ["kissing her neck from behind at sink", "man kissing woman neck kitchen embrace behind"],
+      "type": "image",
+      "canvas": "activity_helping_chores",
+      "tier": "t4"
+    },
+    {
+      "file": "videos/activities/helping_chores_t5.jpg",
+      "description": "Sex on couch amid scattered laundry, playful start turning intense",
+      "search_queries": ["sex on couch surrounded by laundry", "couple fucking couch playful passionate"],
+      "type": "video",
+      "canvas": "activity_helping_chores",
+      "tier": "t5"
+    },
+    {
+      "file": "videos/activities/pool_time_t3.jpg",
+      "description": "Pool play, bodies pressed together, wet, playful",
+      "search_queries": ["couple pool play bodies pressed wet bikini", "swimming together bodies close wet flirty"],
+      "type": "image",
+      "canvas": "activity_pool_time",
+      "tier": "t3"
+    },
+    {
+      "file": "videos/activities/pool_time_t5.jpg",
+      "description": "Sex on pool lounger, moonlight, outdoor, wet skin",
+      "search_queries": ["sex on pool lounger moonlight outdoor", "couple fucking poolside outdoor night wet"],
+      "type": "video",
+      "canvas": "activity_pool_time",
+      "tier": "t5"
+    },
+    {
+      "file": "videos/activities/lunch_together_t3.jpg",
+      "description": "Feeding from fork, eye contact, intimate",
+      "search_queries": ["feeding from fork seductive eye contact", "woman eating from fork seductive eyes"],
+      "type": "image",
+      "canvas": "activity_lunch_together",
+      "tier": "t3"
+    },
+    {
+      "file": "videos/activities/lunch_together_t5.jpg",
+      "description": "Sex on kitchen counter, midday, casual passion",
+      "search_queries": ["kitchen counter sex midday casual", "fucking on counter casual passionate daytime"],
+      "type": "video",
+      "canvas": "activity_lunch_together",
+      "tier": "t5"
+    },
+    {
+      "file": "videos/activities/wine_talk_t4.jpg",
+      "description": "Making out on the couch, wine forgotten, hands exploring",
+      "search_queries": ["couple making out couch wine hands exploring", "kissing on couch evening wine glasses"],
+      "type": "image",
+      "canvas": "activity_wine_talk",
+      "tier": "t4"
+    }
+  ]
+}

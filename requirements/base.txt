@@ -1,0 +1,72 @@
+# Django Core
+Django==5.0.1
+djangorestframework==3.14.0
+djangorestframework-simplejwt==5.3.1
+
+# Database
+psycopg2-binary==2.9.9
+
+# Configuration & Environment
+python-decouple==3.8
+
+# CORS & Security
+django-cors-headers==4.3.1
+
+# API Documentation
+drf-spectacular==0.27.0
+
+# Filtering & Pagination
+django-filter==23.5
+
+# Task Queue
+celery==5.3.4
+redis==5.0.1
+
+# File Handling
+pillow==10.1.0
+
+# Image Captioning (JoyCaption2)
+transformers>=4.40.0
+accelerate>=0.33.0
+torchvision  # Fast image preprocessing (10-20x speedup)
+
+# Video processing (required for Asset Library pipeline)
+opencv-python==4.8.0.76
+scenedetect==0.6.5.1
+
+# Cloud storage (S3-compatible: Cloudflare R2)
+django-storages==1.14.4
+boto3==1.35.34
+requests==2.31.0
+
+# HTTP client for vLLM health checks
+httpx>=0.25.0
+
+# Timezone support
+pytz==2023.3
+
+# Utils
+python-slugify==8.0.1
+tomli==2.0.1
+
+# Postgres extensions (pgvector)
+pgvector==0.2.4
+
+# AI Tools & LangChain
+langchain==0.1.16
+# Use modular OpenAI package compatible with 0.1.x core
+langchain-openai<0.2.0
+# Defer anthopic integration until modular refactor (not used directly)
+# langchain-anthropic can be added later with compatible versions
+
+# OpenAI
+openai==1.102.0
+
+# Data Validation for AI Tools
+pydantic==2.6.4
+
+# Media Download (dev tools)
+yt-dlp>=2024.1.0
+
+# Media Search (dev tools)
+duckduckgo-search>=8.0.0

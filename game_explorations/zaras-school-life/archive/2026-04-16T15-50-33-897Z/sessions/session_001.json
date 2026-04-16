@@ -1,0 +1,21 @@
+{
+  "session_id": 1,
+  "start_ts": "2026-04-16T15:40:14.901Z",
+  "start_epoch_ms": 1776354014901,
+  "end_ts": "2026-04-16T15:49:36.615Z",
+  "duration_s": 562,
+  "clicks": 40,
+  "choices_explored": 40,
+  "arrow_advances": 0,
+  "unique_states_seen": 39,
+  "new_unique_states": 39,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "SCIENCE CLASS STUDY HARD = TIMING MINIGAME. UI: counter {100}, target range shown (e.g. 43-45). rangeMin/Max + targetMin/Max vars control difficulty. Flag mgSkipTiming presumably skips it. ScienceClassTries tracks attempts. Art class Study = no minigame, just +1 Art skill flat.",
+    "LIBRARY: Read science book = -50 Energy, +3 Science, +1 hour. Practice Coding/Hacking = -50 Energy, +3 Computer, +1 hour. Has CORRUPTION 25 gate for adult books ('not corrupted enough to read an adult book'). CANTEEN: Lunch -$10/+45 Energy/+40 min; Snack -$5/+15 Energy/+20 min. PE CLASS: Exercise = -20 Energy, +1 Fitness, +1 MaxEnergy (1:1 confirmed). ART CLASS STUDY: -15 Energy, +1 Art, no minigame. SCIENCE STUDY HARD: timing minigame (stop counter at target range). CLASS OPTIONS: Art/Science/CS have Study/Study Hard/Slack off; PE has Exercise/Slack off only. AFTER-PE SCHOOL HUB: Canteen, Library, Girls WC, Go out.",
+    "POST-SCHOOL JECINDA DISTRICT unlocks: Just walk around, School, Park, Go home, Walk (foot travel - uses fitness?), Take the bus $5, Freeload on the bus (triggers securityBusIntro). Morning only showed School+Go home — schoolFlag/time gates unlock the district outside of class. \n\nBEN INTRO: scripted encounter on 'Go out' from school after PE on first day (Tuesday). Reward: +1 School Rep, +1 ben.relationship, -5 Energy. Ben is classmate being bullied by Kingsley. \n\nNPC object schema confirmed: X.relationship, X.metFlag at minimum (probably X.love, X.lust, X.trust based on the 13-17 keys per char).\n\nFULL DAY 1 PROGRESSION RECIPE: Tuesday - wake, change to SchoolUni, travel (Home→LivRoom→Jecinda 10min+→School 10min = 20 min), attend 4 classes 9-1pm (Art, Science, CS, PE), lunch break at 11am for Canteen, after-school hub opens Library+Canteen+WC+Go out. Ben intro triggers on exit. Park + bus travel unlocks after school."
+  ]
+}

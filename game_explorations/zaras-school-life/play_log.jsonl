@@ -1,0 +1,5 @@
+{"ts":"2026-04-16T20:22:41.041Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"dream1","state_hash":"3556d4ba2e45da9b"}
+{"ts":"2026-04-16T20:22:47.844Z","session_id":1,"cmd":"click","args":{"positional":["Accept his request"]},"ok":true,"passage":"dream1","state_hash":"3556d4ba2e45da9b","clicked_text":"Accept his request","method":"visible-has-text","state_changed":false}
+{"ts":"2026-04-16T20:22:48.733Z","session_id":1,"cmd":"click","args":{"positional":["RING RING RING RING"]},"ok":true,"passage":"wakeup_dream","state_hash":"f217f483b741f652","clicked_text":"RING RING RING RING","method":"visible-has-text","state_changed":true}
+{"ts":"2026-04-16T20:22:49.588Z","session_id":1,"cmd":"click","args":{"positional":["Get out of bed"]},"ok":true,"passage":"Room","state_hash":"3f7a533e1224bd8e","clicked_text":"Get out of bed","method":"visible-has-text","state_changed":true}
+{"ts":"2026-04-16T20:22:55.328Z","session_id":1,"cmd":"finalize","args":{},"ok":true}

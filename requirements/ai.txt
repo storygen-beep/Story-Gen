@@ -1,0 +1,17 @@
+# AI Integration Requirements for Elora Simplified
+# These packages enable multi-model AI integration
+
+# OpenAI API client
+openai>=1.12.0
+
+# Anthropic Claude API client  
+anthropic>=0.18.0
+
+# LangGraph and LangChain for ReAct Agents
+langgraph>=0.2.0  # LangGraph orchestration framework
+langchain-core>=0.3.0  # Core LangChain components  
+langchain-openai>=0.2.0  # OpenAI integration for LangChain
+
+# Additional utilities for AI integration
+httpx>=0.24.0  # Better HTTP client for API calls
+pydantic>=2.5.0  # Data validation for AI responses

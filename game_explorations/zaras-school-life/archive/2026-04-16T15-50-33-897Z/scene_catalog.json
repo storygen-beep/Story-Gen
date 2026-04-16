@@ -1,0 +1,66 @@
+{
+  "Welcome Page": {
+    "first_ts": 1776354014905,
+    "visit_count": 1
+  },
+  "dream1": {
+    "first_ts": 1776354033438,
+    "visit_count": 7
+  },
+  "wakeup_dream": {
+    "first_ts": 1776354063090,
+    "visit_count": 2
+  },
+  "Room": {
+    "first_ts": 1776354093994,
+    "visit_count": 2
+  },
+  "Wardrobe": {
+    "first_ts": 1776354094705,
+    "visit_count": 2
+  },
+  "Living room": {
+    "first_ts": 1776354097009,
+    "visit_count": 1
+  },
+  "Jecinda District": {
+    "first_ts": 1776354097662,
+    "visit_count": 2
+  },
+  "School Intro": {
+    "first_ts": 1776354098360,
+    "visit_count": 2
+  },
+  "Quests": {
+    "first_ts": 1776354107118,
+    "visit_count": 1
+  },
+  "School": {
+    "first_ts": 1776354125275,
+    "visit_count": 13
+  },
+  "Classes": {
+    "first_ts": 1776354135490,
+    "visit_count": 15
+  },
+  "Studying Hard events": {
+    "first_ts": 1776354194224,
+    "visit_count": 5
+  },
+  "Studying Hard events done": {
+    "first_ts": 1776354259444,
+    "visit_count": 1
+  },
+  "School canteen": {
+    "first_ts": 1776354336503,
+    "visit_count": 1
+  },
+  "School library": {
+    "first_ts": 1776354490540,
+    "visit_count": 1
+  },
+  "ben intro": {
+    "first_ts": 1776354519685,
+    "visit_count": 3
+  }
+}

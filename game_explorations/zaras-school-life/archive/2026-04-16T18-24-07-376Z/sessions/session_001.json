@@ -1,0 +1,19 @@
+{
+  "session_id": 1,
+  "start_ts": "2026-04-16T15:50:44.762Z",
+  "start_epoch_ms": 1776354644762,
+  "end_ts": "2026-04-16T17:40:39.421Z",
+  "duration_s": 6595,
+  "clicks": 79,
+  "choices_explored": 79,
+  "arrow_advances": 0,
+  "unique_states_seen": 79,
+  "new_unique_states": 79,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "LAPTOP activities (bedroom): Practice Coding -20E +2 Comp +1hr | Peruse Science -20E +2 Sci +1hr | Watch porn -25E +2 Corruption +1hr. Gates: Camming requires 'HD laptop cam' (PlayerCam item); Drawing/art commissions require 'drawing tab' (PlayerTab item). Laptop skill/energy ratio (10:1) beats class (15:1). \n\nHOME ROOMS: Bedroom (Wardrobe/Take a nap/Use laptop), Living room, Kitchen (snacks), Brother's room (Kyle), Parent's room, Bathroom, TV (corner of living room). \n\nTV EVENT: +10E, +1 Corruption, watchTVtimes tracks. CHORES: daily, +choresCount, drains ~35E, can trigger Kyle events (KylePresent changed). \n\nPARK: Bench relax +15E/+30min. Jogging (requires PE attire via public toilet changing): -20E/+1 Fit. Park has corruption-gated man encounter (required 25). \n\nPE ATTIRE STORAGE: Locker rooms at school + public toilets at park (changing spots)."
+  ]
+}

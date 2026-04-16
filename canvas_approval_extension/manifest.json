@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Canvas Approval Tool",
+  "version": "1.0.0",
+  "description": "Developer tool for approving and reviewing story canvases in generated Twine games",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "http://localhost:8000/*",
+    "http://127.0.0.1:8000/*",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+repos:
+  # Standard pre-commit hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: debug-statements
+
+  # Ruff for linting and import sorting
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.9
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  # Black for code formatting
+  - repo: https://github.com/psf/black
+    rev: 23.12.1
+    hooks:
+      - id: black
+        language_version: python3.10
+
+  # MyPy for static type checking
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      - id: mypy
+        additional_dependencies: [django-stubs]
+        args: [--config-file=/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/pyproject.toml]
+
+  # Django specific checks
+  - repo: local
+    hooks:
+      - id: django-check
+        name: Django Check
+        entry: bash -c 'cd /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django && source venv/bin/activate && python manage.py check'
+        language: system
+        pass_filenames: false
+        files: \.py$
+
+      - id: django-check-migrations
+        name: Check for missing migrations
+        entry: bash -c 'cd /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django && source venv/bin/activate && python manage.py makemigrations --check --dry-run'
+        language: system
+        pass_filenames: false
+        files: \.py$
+
+  # Security checks with bandit
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.6
+    hooks:
+      - id: bandit
+        args: [-c, /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/pyproject.toml]
+        additional_dependencies: ["bandit[toml]"]

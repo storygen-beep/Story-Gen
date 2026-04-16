@@ -1,0 +1,184 @@
+---
+name: twine-game-explorer
+description: Explore online Twine/SugarCube/Harlowe/Chapbook adventure games by systematically visiting every choice (with engine-state snapshot + restore for backtracking), capturing the full game data model, and writing an in-depth mechanical analysis report. Use this skill whenever the user wants to play, analyze, map, explore, or understand an online browser-based interactive fiction game — even if they just paste a URL and say "figure out what this game does," or "map the choices in this game," or "play this and tell me the mechanics." Auto-persists session state so each invocation resumes from the last exploration frontier.
+---
+
+# Twine Game Explorer
+
+This skill drives a visible browser through a Twine-family interactive fiction game, snapshots the engine state at every decision, explores every choice by restoring state and trying alternatives, and produces a deep mechanical report. Sessions persist — each run picks up where the last left off.
+
+The core insight: **Twine engines expose the full game state as a JavaScript object** (SugarCube's `SugarCube.State.variables`, Harlowe's `State.variables`, etc.). We read that every tick and diff it between clicks to extract the game's real data model — stats, NPCs, body traits, items, flags — instead of guessing from the UI.
+
+## When to use
+
+Trigger whenever a user wants to:
+- Play and analyze an online Twine/SugarCube game
+- Map every branch / explore every choice in a browser-based interactive fiction game
+- Extract the mechanics, stat system, NPC schema, item list from a game they can't read the source of
+- Build a report "for game design improvements" referencing an existing game
+- Resume exploration on a game they've partially explored (the skill auto-detects and continues)
+
+Keywords that should trigger: *twine*, *sugarcube*, *harlowe*, *chapbook*, *interactive fiction*, *adventure game*, *explore this game*, *map the choices*, *analyze the mechanics*, *play through*, *generate a game report*, any pasted URL to a game.
+
+## High-level workflow
+
+When this skill triggers:
+
+1. **Parse inputs** from the user's prompt: URL, game_name, optional output_folder override, optional time budget.
+2. **Resolve output directory**: `{output_folder}/{game_name}/` — default output_folder is `~/twine-explorer/`.
+3. **Detect resume vs first-run**: if `{dir}/saves/latest_state.json` exists, we're resuming.
+4. **Run the explorer**: `cd $SKILL_DIR && node scripts/explore.js --url <URL> --name <name> --out <dir> --budget-ms <ms>`
+5. **Monitor**: stream the session log; surface key findings as they're detected.
+6. **Finalize report**: when the explorer exits (budget hit or frontier empty), read the generated artifacts and give the user a concise summary of what changed this session.
+
+## Setup (first time)
+
+```bash
+cd $SKILL_DIR
+npm install
+```
+
+Depends on `playwright` (and the chromium binary from the `playwright-skill` install if present — this skill will reuse it).
+
+## Running
+
+**Default invocation:**
+
+```bash
+cd $SKILL_DIR && node scripts/explore.js \
+  --url "https://example.com/some-game" \
+  --name "some_game" \
+  --out "$HOME/twine-explorer" \
+  --budget-ms 1800000
+```
+
+**With custom output folder** (project-local is often useful for game-dev work):
+
+```bash
+cd $SKILL_DIR && node scripts/explore.js \
+  --url "https://mopoga.com/back-to-freedom" \
+  --name "back_to_freedom" \
+  --out "/absolute/path/to/game_explorations"
+```
+
+The explorer auto-resumes if `{out}/{name}/saves/latest_state.json` exists. Pass `--fresh` to force a new run (moves old data to `{name}/archive/{timestamp}/`).
+
+**Budget flag** controls wall-clock per-session. Default 30 min. The script persists state continuously — you can Ctrl+C any time without losing progress.
+
+## Output directory structure
+
+Always writes to `{output_folder}/{game_name}/`:
+
+```
+{game_name}/
+├── report.md                 synthesized human-readable analysis (regenerated each session)
+├── mechanics.md              inventory of detected mechanical patterns, written for "what could my game borrow"
+├── choice_graph.json         every decision point ever seen (from → options → to)
+├── state_timeline.jsonl      append-only log of state snapshots across all sessions
+├── variable_schema.json      inferred schema of engine variables (name, type, range, co-occurrences)
+├── npcs.json                 per-NPC: stats observed, value ranges, scenes tied to them, items
+├── items.json                detected items with usage patterns
+├── body_changes.json         body / appearance trait mutations observed (if any)
+├── locations.json            location graph
+├── scene_catalog.json        every unique scene seen, classified by type
+├── coverage.md               % of known choice tree explored; unexplored frontier summary
+├── sessions/
+│   ├── session_001.json      per-session metadata (start, end, duration, clicks, new_states, completed)
+│   ├── session_002.json
+│   └── ...
+├── saves/
+│   ├── latest_state.json     engine-marshalled state for resume
+│   ├── frontier.jsonl        unexplored branch-point queue (persistent across sessions)
+│   └── explored_hashes.txt   set of state-hashes already visited (for dedup)
+├── screenshots/
+│   ├── scenes/               one per unique scene
+│   ├── choices/              one per unique decision point
+│   └── progress/             periodic during play
+├── profile/                  persistent browser profile (cookies, localStorage, IndexedDB) — lets the browser remember too
+└── session.log               append-only cross-session log
+```
+
+## What the skill should surface to the user after each run
+
+A tight summary, not a wall of text:
+
+- Session N: started HH:MM, ran X minutes, Y new unique states, Z new choices explored
+- Total coverage: explored N of M known decision points (~X%)
+- New mechanics detected this session (if any — else "no new mechanics")
+- Unexplored frontier: N entries queued for next session
+- Completion status: reached ending? (y/n)
+- Notable findings this session (new NPCs, new items, body changes, etc.)
+
+Refer them to `report.md` for depth. Don't dump the report contents into chat.
+
+## Key design decisions (explain so the skill stays coherent when the script evolves)
+
+**Why engine-state introspection:** DOM-scraped stats (sidebar HUD) are lossy — they only show what the UI chooses to render. `State.variables` is the raw model. We still scrape the DOM to correlate variable names with human-readable labels ("love" variable vs "Love with Angela" UI label), but the variables are the source of truth. See `references/engines.md` for per-engine API specifics.
+
+**Why DFS with persistent frontier:** BFS would give broader coverage per session but uses unbounded memory and can't resume cleanly. DFS with state-snapshot+restore lets us persist the frontier as "branches not yet tried" and resume from any one of them on the next session. Over enough sessions, DFS + dedup converges on full coverage — just depth-first instead of breadth-first.
+
+**Why state-hash dedup:** the same narrative state can be reached by many paths (especially with action-menu loops — BTF's sex scenes cycle through 7 options but all terminate the same way). Dedup by hash of `{current passage, sorted variable snapshot}` collapses these. See `scripts/lib/state.js`.
+
+**Why sample action menus instead of enumerating:** if a choice menu returns to itself after clicking an option (same menu re-renders), we're in an "action loop." Those are a gameplay mechanic — player cycles through — not a branching structure. Sample the menu once, log that it's an action loop, skip enumerating combinations. See `scripts/lib/choices.js`.
+
+**Why a persistent browser profile:** mopoga-style wrappers sometimes check cookies to skip disclaimers on return visits. Keeping the profile makes resume faster. localStorage-based auto-saves (the game's own "metadata") also survive here.
+
+## Feature detection checklist
+
+The explorer's job is to surface every mechanical pattern. These are the categories it watches for — they populate `mechanics.md`:
+
+1. **Player stats** — scalar vars that change with choices (money, corruption, energy, stamina, stress, arousal, willpower, skill values)
+2. **NPC relationship stats** — per-NPC love/lust/trust/respect/friendship
+3. **Inventory / items** — list-typed vars, usage counts
+4. **Body / appearance traits** — vars like `hair_length`, `breast_size`, `pregnancy`, `tattoos`, `outfit` — specifically track body-transformation patterns
+5. **Flags** — boolean vars, story milestones, route markers
+6. **Time / calendar** — day/hour/week vars, detected special days
+7. **Location graph** — passage-name transitions when a "location change" pattern is detected
+8. **NPC roster** — detected from co-mention of name + per-NPC stats
+9. **Choice type classification** — narrative branch / action-menu loop / quiz / payment choice / location transition / mini-game
+10. **Economic system** — prices parsed from choice text (regex `\$\d+`), income/expense patterns
+11. **Route commit points** — decisions that mutate many variables at once + lock-out patterns (flags that gate future choices to exclusive subsets)
+12. **Scene structure** — classify each unique scene: linear, action-loop, quiz, sandbox
+13. **Achievements / gallery** — menu scraping if sidebar buttons exist
+14. **Stat decay / time pressure** — variables that decrement without explicit player action
+15. **Pregnancy / counter mechanics** — counters that flip a state at a threshold
+
+See `references/detection_patterns.md` for the heuristics that detect each.
+
+## Engine-specific gotchas
+
+See `references/engines.md` for:
+- SugarCube: `State.marshalForSave()` / `State.unmarshalFromSave()`, variable namespace
+- Harlowe: `State.getObjectCopy()` — note Harlowe makes marshaling harder; fallback needed
+- Chapbook: different API surface
+- Custom / unknown engine: fall back to (a) in-game save slots, (b) path-replay (record click sequence, restart, replay up to branch point — slow but universal)
+
+## What *not* to include in reports
+
+The report is for **game design analysis**, not content summarization. Describe mechanics (choice structure, stat effects, scene classification), not narrative content. Don't transcribe dialogue or story text — summarize scene *shape*. If the game is adult-rated, keep the mechanical tone and skip verbatim content reproduction.
+
+## If the skill gets stuck
+
+Two failure modes to handle:
+
+**Stale-state** (clicking does nothing, no state change): escalate by (a) scrolling to bottom of content container, (b) pressing Enter/Space, (c) clicking the bottom-most interactive element, (d) trying engine-level `SugarCube.engine.play(SugarCube.State.passage)` refresh. If N consecutive ticks produce no state change, mark the branch as a dead-end and pop from frontier.
+
+**Engine not detected**: if no recognized engine object is found after the setup phase, fall back to DOM-only exploration (no state hashing beyond visible text; no backtracking beyond save slots). The report will note this clearly.
+
+## Bundled scripts
+
+- `scripts/explore.js` — entry point. Handles CLI args, orchestrates setup + explore loop + reporting.
+- `scripts/lib/engine.js` — engine detection + state marshal/unmarshal
+- `scripts/lib/setup.js` — handles disclaimers, name entry, avatar selection (adaptive)
+- `scripts/lib/choices.js` — choice detection + classification (narrative vs action-loop vs quiz)
+- `scripts/lib/state.js` — snapshot, hash, restore
+- `scripts/lib/frontier.js` — persistent priority queue
+- `scripts/lib/detector.js` — feature detection (stats, items, NPCs, body)
+- `scripts/lib/report.js` — generate report.md + mechanics.md from accumulated data
+- `scripts/lib/session.js` — session metadata tracking
+
+## Bundled references (load on demand, don't load upfront)
+
+- `references/engines.md` — per-engine API, marshaling quirks
+- `references/detection_patterns.md` — heuristics for each feature category
+- `references/report_template.md` — skeleton of report.md

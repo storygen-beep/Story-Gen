@@ -1,0 +1,844 @@
+schema_version = "0.2"
+
+# ===== STORY ARC - Narrative Journal System =====
+
+[story_arc]
+version = "1.0"
+
+# Chapters - narrative framing for the journal
+[[story_arc.chapters]]
+id = "chapter_1"
+name = "Saturday Morning"
+mood = "hopeful"
+description = "A lazy Saturday unfolds with possibilities..."
+order = 1
+
+[[story_arc.chapters]]
+id = "chapter_2"
+name = "Growing Closer"
+mood = "romantic"
+description = "Something beautiful is building between you..."
+order = 2
+
+[[story_arc.chapters]]
+id = "chapter_3"
+name = "Passion Ignites"
+mood = "passionate"
+description = "The spark has caught fire..."
+order = 3
+
+[[story_arc.chapters]]
+id = "chapter_4"
+name = "Rekindled"
+mood = "romantic"
+description = "Your love story begins anew..."
+order = 4
+
+# Story Nodes - key moments in the narrative
+[[story_arc.nodes]]
+id = "awakening"
+name = "A New Beginning"
+chapter = "chapter_1"
+journal_entry = "I woke up this Saturday with a quiet determination. No more distractions. Today, Elena comes first."
+linked_canvas = "intro"
+npc = "elena"
+is_milestone = true
+
+[[story_arc.nodes]]
+id = "morning_bedroom"
+name = "Lazy Morning"
+chapter = "chapter_1"
+journal_entry = "We lingered in the bedroom, rediscovering the simple pleasure of each other's company."
+linked_canvas = "bedroom_morning"
+npc = "elena"
+group = "morning_together"
+
+[[story_arc.nodes]]
+id = "morning_coffee"
+name = "Coffee and Connection"
+chapter = "chapter_1"
+journal_entry = "The kitchen filled with the aroma of coffee and the warmth of her smile."
+linked_canvas = "kitchen_coffee"
+npc = "elena"
+group = "morning_together"
+
+[[story_arc.nodes]]
+id = "tender_awakening"
+name = "A Tender Awakening"
+chapter = "chapter_2"
+journal_entry = "Something shifted between us today. A door opened that I didn't realize was closed. Her kiss held a promise."
+linked_canvas = "morning_connection_event"
+npc = "elena"
+requires_group = "morning_together"
+is_milestone = true
+
+[[story_arc.nodes]]
+id = "cooking_together"
+name = "Cooking Together"
+chapter = "chapter_2"
+journal_entry = "We moved around the kitchen like we used to, our bodies remembering their familiar dance."
+linked_canvas = "kitchen_afternoon"
+npc = "elena"
+group = "afternoon_moments"
+
+[[story_arc.nodes]]
+id = "heat_in_kitchen"
+name = "Heat in the Kitchen"
+chapter = "chapter_3"
+journal_entry = "The wooden table will never look the same. Neither will she. We've rediscovered something primal and beautiful."
+linked_canvas = "kitchen_escalation_event"
+linked_flag = "first_escalation"
+npc = "elena"
+requires_nodes = ["tender_awakening"]
+is_milestone = true
+
+[[story_arc.nodes]]
+id = "evening_together"
+name = "Evening Relaxation"
+chapter = "chapter_3"
+journal_entry = "Curled up together on the couch, the day's passion still humming between us."
+linked_canvas = "living_room_relax"
+npc = "elena"
+group = "evening_moments"
+
+[[story_arc.nodes]]
+id = "evening_heat"
+name = "Evening Heat"
+chapter = "chapter_3"
+journal_entry = "She stood by the window, bathed in sunset. What followed was everything I'd been longing for."
+linked_canvas = "living_room_heated"
+linked_flag = "living_tension"
+npc = "elena"
+requires_nodes = ["heat_in_kitchen"]
+is_milestone = true
+
+[[story_arc.nodes]]
+id = "rekindled"
+name = "Together Again"
+chapter = "chapter_4"
+journal_entry = "In our bedroom, wrapped in her arms, I finally understood. This weekend wasn't about one day—it was about finding our way back to each other. I promised her more weekends like this. I intend to keep that promise."
+linked_canvas = "bedroom_finale"
+linked_flag = "passion_rekindled"
+npc = "elena"
+requires_nodes = ["evening_heat"]
+is_milestone = true
+
+# Groups - parallel activities that can be done in any order
+[[story_arc.groups]]
+id = "morning_together"
+name = "Morning Together"
+description = "Spend quality time together in the morning"
+required_count = 1
+
+[[story_arc.groups]]
+id = "afternoon_moments"
+name = "Afternoon Moments"
+description = "Share the afternoon together"
+required_count = 1
+
+[[story_arc.groups]]
+id = "evening_moments"
+name = "Evening Together"
+description = "Wind down together"
+required_count = 1
+
+# Emotion mappings - how Elena's traits display in the journal
+[story_arc.emotion_mappings.affection]
+trait_owner = "npc"
+default_npc = "elena"
+ranges = [
+  { min = 0, max = 30, label = "reserved", description = "Elena seems a bit distant, waiting for you to reach out" },
+  { min = 31, max = 50, label = "warming", description = "Elena's eyes hold a hopeful warmth when she looks at you" },
+  { min = 51, max = 70, label = "connected", description = "Elena stays close to you, her touch lingering" },
+  { min = 71, max = 90, label = "devoted", description = "Elena's love for you shines in every glance" },
+  { min = 91, max = 100, label = "complete", description = "Elena is utterly, blissfully yours" }
+]
+
+[story_arc.emotion_mappings.arousal]
+trait_owner = "npc"
+default_npc = "elena"
+ranges = [
+  { min = 0, max = 15, label = "calm", description = "Elena is relaxed and at ease" },
+  { min = 16, max = 35, label = "stirring", description = "There's a hint of desire in the way she looks at you" },
+  { min = 36, max = 60, label = "wanting", description = "Elena's breath quickens when you're near" },
+  { min = 61, max = 85, label = "burning", description = "Elena can barely contain her desire for you" },
+  { min = 86, max = 100, label = "consumed", description = "Elena's passion has completely taken over" }
+]
+
+[story_arc.emotion_mappings.appreciation]
+trait_owner = "npc"
+default_npc = "elena"
+ranges = [
+  { min = 0, max = 25, label = "uncertain", description = "Elena isn't sure what to expect from you" },
+  { min = 26, max = 50, label = "noticed", description = "Elena appreciates your attention today" },
+  { min = 51, max = 75, label = "treasured", description = "Elena feels valued and cared for" },
+  { min = 76, max = 100, label = "cherished", description = "Elena knows she's the center of your world" }
+]
+
+# Narrative hints for the journal
+[story_arc.hints]
+group_incomplete = "There might be more moments to discover this {group_name}..."
+progress_needed = "Perhaps spending more time together would reveal new possibilities..."
+story_complete = "Your weekend together has rekindled everything. This is just the beginning of your renewed journey."
+
+[project]
+id = "weekend_together"
+title = "Weekend Together"
+description = """
+A lazy Saturday unfolds as you and Elena reconnect after weeks of busy schedules.
+What starts as a quiet morning together gradually builds into something more...
+Rediscover the spark that brought you together in this intimate domestic romance.
+"""
+
+[time]
+enabled = true
+starting_hour = 8
+starting_day = "Saturday"
+starting_week = 1
+
+[player]
+id = "player"
+name = "Michael"
+description = "A dedicated professional who's been working long hours. This weekend, you're committed to being fully present with Elena."
+core_traits = { energy = 30, attentiveness = 40, boldness = 25, intimacy_level = 20 }
+flag_keys = ["game_started", "morning_connection", "helped_kitchen", "romantic_gesture", "first_escalation", "kitchen_passion", "living_tension", "passion_rekindled"]
+
+[[npcs]]
+id = "elena"
+name = "Elena"
+description = "Your loving partner. She's been feeling a bit neglected lately but is eager to reconnect. Her warm smile and knowing glances hint at desires unspoken."
+core_traits = { affection = 40, arousal = 10, appreciation = 30 }
+flag_keys = ["comfortable", "interested", "vulnerable", "fully_aroused"]
+
+# ===== LOCATIONS =====
+
+[[locations]]
+id = "living_room"
+name = "Living Room"
+description = "The heart of your home. Soft morning light filters through sheer curtains, illuminating the comfortable couch and the large wall clock that marks the passing hours."
+is_container = false
+parent = ""
+entry_from = ""
+default_entry = ""
+navigation_order = ["bedroom", "kitchen"]
+
+[[locations]]
+id = "bedroom"
+name = "Master Bedroom"
+description = "Your private sanctuary. Soft sheets, warm lighting from the bedside lamp, and the faint scent of Elena's perfume lingering in the air."
+is_container = false
+parent = ""
+entry_from = "living_room"
+default_entry = ""
+navigation_order = []
+
+[[locations]]
+id = "kitchen"
+name = "Kitchen"
+description = "A modern, sunlit space with blue cabinets, a sturdy wooden table, and the aroma of fresh coffee. The heart of domestic life."
+is_container = false
+parent = ""
+entry_from = "living_room"
+default_entry = ""
+navigation_order = []
+
+# ===== CANVASES =====
+
+starting_canvas = "intro"
+
+# ========================================
+# INTRO - Game Start
+# ========================================
+
+[[canvases]]
+id = "intro"
+name = "Saturday Morning"
+description = "A new day begins with possibilities"
+
+  [[canvases.nodes]]
+  id = "n1"
+  name = "Awakening"
+  blocks = [
+    { type = "heading", content = "Saturday Morning" },
+    { type = "paragraph", content = "Sunlight filters through the bedroom curtains, warm against your face. It's Saturday—finally. No alarms, no meetings, no deadlines. Just you and Elena." },
+    { type = "paragraph", content = "You stretch slowly, becoming aware of the empty space beside you. The sheets are still warm. From somewhere in the apartment, you hear the soft sounds of movement." },
+    { type = "paragraph", content = "It's been weeks since you've had a real weekend together. Work has consumed everything. But today... today is different." }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Get up and find her", targetType = "node", nodeId = "intro.n2", time_progression_minutes = 5, effects = [{ targetType = "player", trait = "energy", op = "add", value = 5 }], flagEffects = [{ targetType = "player", flag = "game_started" }] }
+  ] }
+
+  [[canvases.nodes]]
+  id = "n2"
+  name = "First Glimpse"
+  blocks = [
+    { type = "paragraph", content = "You pad quietly through the living room, following the sounds. Through the kitchen doorway, you catch sight of her." },
+    { type = "paragraph", content = "Elena stands at the counter in that soft pink dress you love, her hair still slightly tousled from sleep. She's reaching for something in the cabinet, unaware of your presence." },
+    { type = "paragraph", content = "Something stirs in your chest. When did you last really look at her? When did you last just... be present?" },
+    { type = "dialog", content = "Morning, sleepyhead.", props = { speaker = "npc", npcName = "Elena" } },
+    { type = "paragraph", content = "She's spotted you. Her smile is warm, but there's something in her eyes—a question, perhaps. A hope." }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Cross the room and kiss her good morning", targetType = "node", nodeId = "intro.n3", time_progression_minutes = 2, effects = [{ targetType = "npc", npcId = "elena", trait = "affection", op = "add", value = 8 }, { targetType = "npc", npcId = "elena", trait = "appreciation", op = "add", value = 5 }] },
+    { text = "Smile warmly and ask about her plans", targetType = "node", nodeId = "intro.n3", time_progression_minutes = 2, effects = [{ targetType = "npc", npcId = "elena", trait = "appreciation", op = "add", value = 6 }] }
+  ] }
+
+  [[canvases.nodes]]
+  id = "n3"
+  name = "A New Beginning"
+  blocks = [
+    { type = "paragraph", content = "Her eyes light up at your attention. It's such a simple thing, but you can see how much it means to her." },
+    { type = "dialog", content = "I was thinking... maybe we could actually spend today together? Like we used to?", props = { speaker = "npc", npcName = "Elena" } },
+    { type = "paragraph", content = "There's vulnerability in her voice. She's asking for something you should have offered weeks ago." },
+    { type = "dialog", content = "I'd like that. I'd like that a lot.", props = { speaker = "player" } },
+    { type = "paragraph", content = "Her smile widens, genuine now. The day stretches ahead of you, full of possibility." }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Explore the apartment together", targetType = "location", locationId = "living_room", time_progression_minutes = 5, effects = [{ targetType = "npc", npcId = "elena", trait = "affection", op = "add", value = 5 }] }
+  ] }
+
+# ========================================
+# BEDROOM - Morning Activities
+# ========================================
+
+[[canvases]]
+id = "bedroom_morning"
+name = "Morning in the Bedroom"
+description = "The bedroom holds memories and possibilities"
+
+  [canvases.trigger]
+  location = "bedroom"
+  is_active = true
+  is_repeatable = true
+  max_triggers_per_day = 5
+  [[canvases.trigger.schedules]]
+  start_time = "08:00"
+  end_time = "12:00"
+
+  [[canvases.nodes]]
+  id = "b1"
+  name = "Bedroom Scene"
+  blocks = [
+    { type = "paragraph", content = "The bedroom is bathed in soft morning light. The rumpled sheets still hold the warmth of sleep, and Elena's makeup brushes are scattered on the vanity." },
+    { type = "paragraph", content = "She followed you in, perhaps sensing your mood. She sits on the edge of the bed, watching you with curious eyes." },
+    { type = "dialog", content = "Remember when we used to spend whole mornings in here?", props = { speaker = "npc", npcName = "Elena" } }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Sit beside her and take her hand", targetType = "node", nodeId = "bedroom_morning.b2", time_progression_minutes = 10, effects = [{ targetType = "npc", npcId = "elena", trait = "affection", op = "add", value = 6 }, { targetType = "npc", npcId = "elena", trait = "appreciation", op = "add", value = 4 }] },
+    { text = "Lie back on the bed and invite her to join you", targetType = "node", nodeId = "bedroom_morning.b3", time_progression_minutes = 15, effects = [{ targetType = "npc", npcId = "elena", trait = "affection", op = "add", value = 5 }, { targetType = "npc", npcId = "elena", trait = "arousal", op = "add", value = 3 }], conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "elena", trait_key = "affection", operator = "gte", value = 45 }] } },
+    { text = "Just enjoy the peaceful moment", targetType = "location", locationId = "bedroom", time_progression_minutes = 5, effects = [{ targetType = "player", trait = "energy", op = "add", value = 3 }] }
+  ] }
+
+  [[canvases.nodes]]
+  id = "b2"
+  name = "Hand in Hand"
+  blocks = [
+    { type = "paragraph", content = "You settle beside her, your fingers intertwining with hers. It's such a simple gesture, but she squeezes back like she's been waiting for this." },
+    { type = "dialog", content = "I've missed this. Just... being with you.", props = { speaker = "npc", npcName = "Elena" } },
+    { type = "paragraph", content = "She leans her head against your shoulder, and for a moment, everything else fades away. There's just her warmth, her presence, the steady rhythm of her breathing." }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Stay a while longer", targetType = "location", locationId = "bedroom", time_progression_minutes = 15, effects = [{ targetType = "npc", npcId = "elena", trait = "appreciation", op = "add", value = 5 }] }
+  ] }
+
+  [[canvases.nodes]]
+  id = "b3"
+  name = "Lazy Morning"
+  blocks = [
+    { type = "paragraph", content = "You stretch out on the familiar sheets, patting the space beside you. Elena's eyes sparkle with something between amusement and longing." },
+    { type = "dialog", content = "Are you trying to tempt me back to bed?", props = { speaker = "npc", npcName = "Elena" } },
+    { type = "paragraph", content = "She kicks off her shoes and crawls across the mattress toward you, her dress riding up slightly. The morning light catches the curve of her smile." },
+    { type = "clip", props = { clipId = "fcc54507-771a-42e4-a5a2-453ce924328c" } },
+    { type = "paragraph", content = "Time seems to slow as she settles against you, her body warm and inviting. Your hands find their familiar paths, relearning territory you'd almost forgotten." }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Continue exploring this connection", targetType = "location", locationId = "bedroom", time_progression_minutes = 20, effects = [{ targetType = "npc", npcId = "elena", trait = "arousal", op = "add", value = 8 }, { targetType = "npc", npcId = "elena", trait = "affection", op = "add", value = 5 }] }
+  ] }
+
+# ========================================
+# MORNING CONNECTION - Story Milestone
+# ========================================
+
+[[canvases]]
+id = "morning_connection_event"
+name = "A Tender Awakening"
+description = "The moment everything begins to change"
+
+  [canvases.trigger]
+  location = "bedroom"
+  is_active = true
+  is_repeatable = false
+  [canvases.trigger.conditions]
+  version = "1.0"
+  logic = "AND"
+  items = [
+    { type = "trait", subject = "npc", npc_id = "elena", trait_key = "affection", operator = "gte", value = 50 },
+    { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+  ]
+  [[canvases.trigger.schedules]]
+  start_time = "08:00"
+  end_time = "11:00"
+
+  [[canvases.nodes]]
+  id = "mc1"
+  name = "Something Different"
+  blocks = [
+    { type = "heading", content = "A Tender Awakening" },
+    { type = "paragraph", content = "You find her at the vanity, brush in hand, applying her makeup with practiced strokes. Morning light halos her silhouette." },
+    { type = "paragraph", content = "She catches your reflection in the mirror and pauses, brush hovering near her cheek. There's something different in her eyes today—a warmth, a wanting." },
+    { type = "clip", props = { clipId = "42c1f739-89df-4196-874a-d57850d72817" } },
+    { type = "paragraph", content = "Without words, you cross to the bed, still warm from sleep. She sets down her brush and turns to you, her expression softening." },
+    { type = "dialog", content = "I was hoping you'd wake up...", props = { speaker = "npc", npcName = "Elena" } }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Pull her into your arms", targetType = "node", nodeId = "morning_connection_event.mc2", time_progression_minutes = 5, effects = [{ targetType = "npc", npcId = "elena", trait = "affection", op = "add", value = 10 }, { targetType = "npc", npcId = "elena", trait = "arousal", op = "add", value = 8 }], flagEffects = [{ targetType = "player", flag = "morning_connection" }] },
+    { text = "Reach for her hand gently", targetType = "node", nodeId = "morning_connection_event.mc2", time_progression_minutes = 5, effects = [{ targetType = "npc", npcId = "elena", trait = "appreciation", op = "add", value = 12 }], flagEffects = [{ targetType = "player", flag = "morning_connection" }] }
+  ] }
+
+  [[canvases.nodes]]
+  id = "mc2"
+  name = "Connection Deepens"
+  blocks = [
+    { type = "paragraph", content = "She melts into your embrace, her body remembering yours. The makeup can wait. Everything can wait." },
+    { type = "dialog", content = "I've been missing you. Even when you're here, sometimes... you're not really here.", props = { speaker = "npc", npcName = "Elena" } },
+    { type = "dialog", content = "I know. I'm sorry. I want to change that.", props = { speaker = "player" } },
+    { type = "paragraph", content = "Her eyes glisten. She kisses you softly—a promise, a beginning." },
+    { type = "paragraph", content = "Something has shifted between you. A door has opened that you didn't realize was closed." }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Continue your day together, closer than before", targetType = "location", locationId = "living_room", time_progression_minutes = 10, effects = [{ targetType = "npc", npcId = "elena", trait = "affection", op = "add", value = 5 }] }
+  ] }
+
+# ========================================
+# KITCHEN - Base Activities
+# ========================================
+
+[[canvases]]
+id = "kitchen_coffee"
+name = "Morning Coffee"
+description = "Start the day with coffee and connection"
+
+  [canvases.trigger]
+  location = "kitchen"
+  is_active = true
+  is_repeatable = true
+  max_triggers_per_day = 4
+  [[canvases.trigger.schedules]]
+  start_time = "08:00"
+  end_time = "14:00"
+
+  [[canvases.nodes]]
+  id = "k1"
+  name = "Kitchen Morning"
+  blocks = [
+    { type = "paragraph", content = "The kitchen smells of fresh coffee. Sunlight streams through the windows, illuminating the wooden table where you've shared countless meals." },
+    { type = "paragraph", content = "Elena is at her laptop, perhaps checking emails or browsing something. She looks up as you enter, a small smile playing at her lips." },
+    { type = "clip", props = { clipId = "c81c0814-1337-4aad-8143-3bb1316b8907" } }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Pour coffee for both of you", targetType = "node", nodeId = "kitchen_coffee.k2", time_progression_minutes = 10, effects = [{ targetType = "npc", npcId = "elena", trait = "appreciation", op = "add", value = 5 }, { targetType = "player", trait = "energy", op = "add", value = 5 }] },
+    { text = "Come up behind her and kiss her neck", targetType = "node", nodeId = "kitchen_coffee.k3", time_progression_minutes = 5, effects = [{ targetType = "npc", npcId = "elena", trait = "affection", op = "add", value = 6 }, { targetType = "npc", npcId = "elena", trait = "arousal", op = "add", value = 4 }], conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "morning_connection", operator = "is_true" }] } },
+    { text = "Just grab a snack", targetType = "location", locationId = "kitchen", time_progression_minutes = 5, effects = [{ targetType = "player", trait = "energy", op = "add", value = 2 }] }
+  ] }
+
+  [[canvases.nodes]]
+  id = "k2"
+  name = "Coffee Together"
+  blocks = [
+    { type = "paragraph", content = "You set a steaming mug beside her laptop. She wraps her hands around it, inhaling the aroma with closed eyes." },
+    { type = "dialog", content = "You remembered how I like it.", props = { speaker = "npc", npcName = "Elena" } },
+    { type = "paragraph", content = "Of course you did. Some things you never forget." },
+    { type = "dialog", content = "Thank you. It's nice to be... taken care of.", props = { speaker = "npc", npcName = "Elena" } }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Sit with her and chat", targetType = "location", locationId = "kitchen", time_progression_minutes = 15, effects = [{ targetType = "npc", npcId = "elena", trait = "affection", op = "add", value = 4 }] }
+  ] }
+
+  [[canvases.nodes]]
+  id = "k3"
+  name = "Surprise Kiss"
+  blocks = [
+    { type = "paragraph", content = "You slip behind her, your hands finding her shoulders. She tenses for just a moment—surprise—then melts back against you." },
+    { type = "paragraph", content = "Your lips brush the curve of her neck, and you feel her shiver." },
+    { type = "clip", props = { clipId = "30d853f9-8ef8-4c16-85e3-cac133a19337" } },
+    { type = "dialog", content = "Mmm... what's gotten into you this morning?", props = { speaker = "npc", npcName = "Elena" } },
+    { type = "paragraph", content = "She turns in your arms, her eyes dancing with pleasant surprise and growing warmth." }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Tell her you've missed being close", targetType = "location", locationId = "kitchen", time_progression_minutes = 10, effects = [{ targetType = "npc", npcId = "elena", trait = "affection", op = "add", value = 8 }], flagEffects = [{ targetType = "player", flag = "helped_kitchen" }] }
+  ] }
+
+# ========================================
+# KITCHEN - Afternoon Cooking (Layers)
+# ========================================
+
+[[canvases]]
+id = "kitchen_afternoon"
+name = "Afternoon in the Kitchen"
+description = "Cooking together can lead to unexpected heat"
+
+  [canvases.trigger]
+  location = "kitchen"
+  is_active = true
+  is_repeatable = true
+  max_triggers_per_day = 3
+  [[canvases.trigger.schedules]]
+  start_time = "13:00"
+  end_time = "18:00"
+
+  [[canvases.nodes]]
+  id = "ka1"
+  name = "Afternoon Kitchen"
+  blocks = [
+    { type = "paragraph", content = "The afternoon sun fills the kitchen with golden light. Elena is prepping ingredients at the counter, her movements graceful and practiced." },
+    { type = "dialog", content = "I thought I'd make something special for dinner. Want to help?", props = { speaker = "npc", npcName = "Elena" } }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Help with the cooking", targetType = "node", nodeId = "kitchen_afternoon.ka2", time_progression_minutes = 20, effects = [{ targetType = "npc", npcId = "elena", trait = "appreciation", op = "add", value = 6 }, { targetType = "npc", npcId = "elena", trait = "affection", op = "add", value = 4 }] },
+    { text = "Come up behind her while she works", targetType = "node", nodeId = "kitchen_afternoon.ka3", time_progression_minutes = 10, effects = [{ targetType = "npc", npcId = "elena", trait = "arousal", op = "add", value = 8 }, { targetType = "npc", npcId = "elena", trait = "affection", op = "add", value = 5 }], conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "morning_connection", operator = "is_true" }] }, flagEffects = [{ targetType = "player", flag = "helped_kitchen" }] },
+    { text = "Suggest ordering takeout instead", targetType = "node", nodeId = "kitchen_afternoon.ka4", time_progression_minutes = 5, effects = [{ targetType = "npc", npcId = "elena", trait = "arousal", op = "add", value = 3 }], conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "helped_kitchen", operator = "is_true" }] } },
+    { text = "Watch her work for a moment", targetType = "location", locationId = "kitchen", time_progression_minutes = 5 }
+  ] }
+
+  [[canvases.nodes]]
+  id = "ka2"
+  name = "Cooking Together"
+  blocks = [
+    { type = "paragraph", content = "You step up beside her, accepting the knife she offers. Your arms brush as you work, a comfortable dance of domestic intimacy." },
+    { type = "dialog", content = "You know, we used to cook together all the time when we first moved in.", props = { speaker = "npc", npcName = "Elena" } },
+    { type = "dialog", content = "I remember. Saturday dinners were our thing.", props = { speaker = "player" } },
+    { type = "paragraph", content = "She smiles, bumping her hip against yours playfully. The kitchen feels warmer than it should." }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Continue cooking together", targetType = "location", locationId = "kitchen", time_progression_minutes = 30, effects = [{ targetType = "npc", npcId = "elena", trait = "affection", op = "add", value = 5 }] }
+  ] }
+
+  [[canvases.nodes]]
+  id = "ka3"
+  name = "Kitchen Embrace"
+  blocks = [
+    { type = "paragraph", content = "You move behind her, your hands finding her waist. She pauses mid-chop, a small gasp escaping her lips." },
+    { type = "clip", props = { clipId = "cab4f31f-6160-4dd2-96e0-05e4cfe293a2" } },
+    { type = "paragraph", content = "Your hands explore the familiar curves beneath her dress. She leans back into you, the knife forgotten." },
+    { type = "dialog", content = "The food can wait...", props = { speaker = "npc", npcName = "Elena" } }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Turn her around and kiss her deeply", targetType = "location", locationId = "kitchen", time_progression_minutes = 15, effects = [{ targetType = "npc", npcId = "elena", trait = "arousal", op = "add", value = 10 }, { targetType = "npc", npcId = "elena", trait = "affection", op = "add", value = 5 }], flagEffects = [{ targetType = "player", flag = "romantic_gesture" }] }
+  ] }
+
+  [[canvases.nodes]]
+  id = "ka4"
+  name = "Better Ideas"
+  blocks = [
+    { type = "paragraph", content = "You move closer, your voice dropping lower." },
+    { type = "dialog", content = "I can think of better things to do with our afternoon...", props = { speaker = "player" } },
+    { type = "paragraph", content = "Elena sets down her knife, turning to face you with flushed cheeks and bright eyes." },
+    { type = "dialog", content = "Oh? And what did you have in mind?", props = { speaker = "npc", npcName = "Elena" } },
+    { type = "clip", props = { clipId = "f022ab67-f443-47bb-9621-156772e1c598" } }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Show her exactly what you mean", targetType = "location", locationId = "kitchen", time_progression_minutes = 20, effects = [{ targetType = "npc", npcId = "elena", trait = "arousal", op = "add", value = 12 }], flagEffects = [{ targetType = "player", flag = "romantic_gesture" }] }
+  ] }
+
+# ========================================
+# KITCHEN ESCALATION - Story Milestone
+# ========================================
+
+[[canvases]]
+id = "kitchen_escalation_event"
+name = "Heat in the Kitchen"
+description = "Passion ignites where you least expected"
+
+  [canvases.trigger]
+  location = "kitchen"
+  is_active = true
+  is_repeatable = false
+  [canvases.trigger.conditions]
+  version = "1.0"
+  logic = "AND"
+  items = [
+    { type = "trait", subject = "npc", npc_id = "elena", trait_key = "affection", operator = "gte", value = 60 },
+    { type = "flag", subject = "player", flag_key = "romantic_gesture", operator = "is_true" }
+  ]
+  [[canvases.trigger.schedules]]
+  start_time = "14:00"
+  end_time = "20:00"
+
+  [[canvases.nodes]]
+  id = "ke1"
+  name = "Boiling Point"
+  blocks = [
+    { type = "heading", content = "Heat in the Kitchen" },
+    { type = "paragraph", content = "The wooden table sits between you, sturdy and familiar. But the look in Elena's eyes is anything but familiar—there's a fire there you haven't seen in months." },
+    { type = "dialog", content = "I don't want to wait anymore. I don't want to be careful.", props = { speaker = "npc", npcName = "Elena" } },
+    { type = "paragraph", content = "She moves toward you with purpose, her hands finding your chest, pushing you back against the table's edge." },
+    { type = "clip", props = { clipId = "8100b9ed-5780-457e-b60d-0533aa9c2856" } }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Lift her onto the table", targetType = "node", nodeId = "kitchen_escalation_event.ke2", time_progression_minutes = 10, effects = [{ targetType = "npc", npcId = "elena", trait = "arousal", op = "add", value = 20 }, { targetType = "player", trait = "intimacy_level", op = "add", value = 15 }], flagEffects = [{ targetType = "player", flag = "first_escalation" }] },
+    { text = "Press her against the counter", targetType = "node", nodeId = "kitchen_escalation_event.ke2", time_progression_minutes = 10, effects = [{ targetType = "npc", npcId = "elena", trait = "arousal", op = "add", value = 18 }, { targetType = "player", trait = "boldness", op = "add", value = 10 }], flagEffects = [{ targetType = "player", flag = "first_escalation" }] }
+  ] }
+
+  [[canvases.nodes]]
+  id = "ke2"
+  name = "Passion Unleashed"
+  blocks = [
+    { type = "paragraph", content = "The kitchen transforms. What was domestic becomes urgent, primal. Her dress rides up as you explore each other with new hunger." },
+    { type = "clip", props = { clipId = "bc156e32-25c3-449f-9dc0-1598ee44cd63" } },
+    { type = "paragraph", content = "She gasps your name, her body arching into your touch. The afternoon sun catches the sheen on her skin, the flush spreading down her neck." },
+    { type = "dialog", content = "Don't stop... please don't stop...", props = { speaker = "npc", npcName = "Elena" } }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Give her what she needs", targetType = "node", nodeId = "kitchen_escalation_event.ke3", time_progression_minutes = 20, effects = [{ targetType = "npc", npcId = "elena", trait = "arousal", op = "add", value = 15 }] }
+  ] }
+
+  [[canvases.nodes]]
+  id = "ke3"
+  name = "Breathless"
+  blocks = [
+    { type = "paragraph", content = "Time loses meaning. There's only sensation, connection, the rediscovery of each other's bodies. When you finally slow, you're both breathless." },
+    { type = "dialog", content = "That was...", props = { speaker = "npc", npcName = "Elena" } },
+    { type = "dialog", content = "Long overdue.", props = { speaker = "player" } },
+    { type = "paragraph", content = "She laughs, a sound full of joy and release. Her hand finds yours, fingers intertwining." },
+    { type = "dialog", content = "The day isn't over yet...", props = { speaker = "npc", npcName = "Elena" } }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Move to the living room together", targetType = "location", locationId = "living_room", time_progression_minutes = 10, effects = [{ targetType = "npc", npcId = "elena", trait = "affection", op = "add", value = 10 }], flagEffects = [{ targetType = "player", flag = "kitchen_passion" }] }
+  ] }
+
+# ========================================
+# LIVING ROOM - Base Activities
+# ========================================
+
+[[canvases]]
+id = "living_room_relax"
+name = "Evening Relaxation"
+description = "Wind down together"
+
+  [canvases.trigger]
+  location = "living_room"
+  is_active = true
+  is_repeatable = true
+  max_triggers_per_day = 3
+  [[canvases.trigger.schedules]]
+  start_time = "17:00"
+  end_time = "23:00"
+
+  [[canvases.nodes]]
+  id = "lr1"
+  name = "Living Room Evening"
+  blocks = [
+    { type = "paragraph", content = "The living room is bathed in the warm glow of sunset. The couch beckons, soft and inviting. Elena curls up on one end, looking at you with expectant eyes." },
+    { type = "dialog", content = "Come sit with me?", props = { speaker = "npc", npcName = "Elena" } }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Sit beside her", targetType = "node", nodeId = "living_room_relax.lr2", time_progression_minutes = 10, effects = [{ targetType = "npc", npcId = "elena", trait = "affection", op = "add", value = 5 }] },
+    { text = "Pull her into your lap", targetType = "node", nodeId = "living_room_relax.lr3", time_progression_minutes = 10, effects = [{ targetType = "npc", npcId = "elena", trait = "arousal", op = "add", value = 8 }, { targetType = "npc", npcId = "elena", trait = "affection", op = "add", value = 6 }], conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "first_escalation", operator = "is_true" }] } },
+    { text = "Watch some TV alone", targetType = "location", locationId = "living_room", time_progression_minutes = 30, effects = [{ targetType = "player", trait = "energy", op = "add", value = 3 }] }
+  ] }
+
+  [[canvases.nodes]]
+  id = "lr2"
+  name = "Comfortable Silence"
+  blocks = [
+    { type = "paragraph", content = "You settle in beside her, and she immediately shifts closer, tucking herself against your side. Her head finds its familiar spot on your shoulder." },
+    { type = "dialog", content = "This is nice. Just... being together.", props = { speaker = "npc", npcName = "Elena" } },
+    { type = "paragraph", content = "You wrap an arm around her, pulling her closer. The wall clock ticks softly, marking peaceful moments." },
+    { type = "clip", props = { clipId = "269f669a-b668-47df-85d6-03f55903eae3" } }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Stay and enjoy the moment", targetType = "location", locationId = "living_room", time_progression_minutes = 20, effects = [{ targetType = "npc", npcId = "elena", trait = "appreciation", op = "add", value = 6 }] }
+  ] }
+
+  [[canvases.nodes]]
+  id = "lr3"
+  name = "Closer"
+  blocks = [
+    { type = "paragraph", content = "She squeals with surprised delight as you pull her onto your lap, her dress fanning out around her. Her arms loop around your neck, face inches from yours." },
+    { type = "dialog", content = "Someone's feeling bold...", props = { speaker = "npc", npcName = "Elena" } },
+    { type = "paragraph", content = "Her hips shift against yours, a subtle movement loaded with meaning. Her eyes darken with renewed desire." }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Let the tension build", targetType = "location", locationId = "living_room", time_progression_minutes = 15, effects = [{ targetType = "npc", npcId = "elena", trait = "arousal", op = "add", value = 10 }], flagEffects = [{ targetType = "player", flag = "romantic_gesture" }] }
+  ] }
+
+# ========================================
+# LIVING ROOM HEATED - Story Milestone
+# ========================================
+
+[[canvases]]
+id = "living_room_heated"
+name = "Evening Heat"
+description = "The living room becomes a different kind of intimate"
+
+  [canvases.trigger]
+  location = "living_room"
+  is_active = true
+  is_repeatable = false
+  [canvases.trigger.conditions]
+  version = "1.0"
+  logic = "AND"
+  items = [
+    { type = "trait", subject = "npc", npc_id = "elena", trait_key = "affection", operator = "gte", value = 70 },
+    { type = "trait", subject = "npc", npc_id = "elena", trait_key = "arousal", operator = "gte", value = 30 },
+    { type = "flag", subject = "player", flag_key = "kitchen_passion", operator = "is_true" }
+  ]
+  [[canvases.trigger.schedules]]
+  start_time = "18:00"
+  end_time = "23:00"
+
+  [[canvases.nodes]]
+  id = "lh1"
+  name = "Rising Temperature"
+  blocks = [
+    { type = "heading", content = "Evening Heat" },
+    { type = "paragraph", content = "The memory of the kitchen lingers between you. Elena's movements have become more deliberate, her glances more heated." },
+    { type = "paragraph", content = "She stands by the window, backlit by the fading sun, and slowly reaches for the hem of her dress." },
+    { type = "dialog", content = "I want you to watch me...", props = { speaker = "npc", npcName = "Elena" } },
+    { type = "clip", props = { clipId = "922d4ab7-31b6-4281-a9c3-4a5acc7555b0" } }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Cross to her and take control", targetType = "node", nodeId = "living_room_heated.lh2", time_progression_minutes = 5, effects = [{ targetType = "npc", npcId = "elena", trait = "arousal", op = "add", value = 15 }, { targetType = "player", trait = "boldness", op = "add", value = 10 }], flagEffects = [{ targetType = "player", flag = "living_tension" }] },
+    { text = "Let her come to you", targetType = "node", nodeId = "living_room_heated.lh2", time_progression_minutes = 5, effects = [{ targetType = "npc", npcId = "elena", trait = "arousal", op = "add", value = 12 }], flagEffects = [{ targetType = "player", flag = "living_tension" }] }
+  ] }
+
+  [[canvases.nodes]]
+  id = "lh2"
+  name = "No More Waiting"
+  blocks = [
+    { type = "paragraph", content = "The living room becomes your private world. She surrenders to your touch, her body responding to every caress with increasing urgency." },
+    { type = "clip", props = { clipId = "fa7a366e-a6cd-454e-8d07-028143528682" } },
+    { type = "paragraph", content = "The wall clock marks time you've stopped counting. There's only sensation, connection, the sound of her voice calling your name." },
+    { type = "dialog", content = "Take me to bed... I want all of you...", props = { speaker = "npc", npcName = "Elena" } }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Carry her to the bedroom", targetType = "location", locationId = "bedroom", time_progression_minutes = 5, effects = [{ targetType = "npc", npcId = "elena", trait = "affection", op = "add", value = 10 }, { targetType = "npc", npcId = "elena", trait = "arousal", op = "add", value = 10 }] }
+  ] }
+
+# ========================================
+# BEDROOM FINALE - Story Climax
+# ========================================
+
+[[canvases]]
+id = "bedroom_finale"
+name = "Rekindled"
+description = "The night belongs to you both"
+
+  [canvases.trigger]
+  location = "bedroom"
+  is_active = true
+  is_repeatable = false
+  [canvases.trigger.conditions]
+  version = "1.0"
+  logic = "AND"
+  items = [
+    { type = "trait", subject = "npc", npc_id = "elena", trait_key = "affection", operator = "gte", value = 80 },
+    { type = "flag", subject = "player", flag_key = "living_tension", operator = "is_true" }
+  ]
+  [[canvases.trigger.schedules]]
+  start_time = "20:00"
+  end_time = "23:59"
+
+  [[canvases.nodes]]
+  id = "bf1"
+  name = "The Bedroom"
+  blocks = [
+    { type = "heading", content = "Rekindled" },
+    { type = "paragraph", content = "The bedroom feels different now—charged, alive. The soft sheets beckon, the bedside lamp casting intimate shadows." },
+    { type = "paragraph", content = "Elena stands before you, her skin flushed, her eyes holding yours with an intensity that steals your breath." },
+    { type = "dialog", content = "I love you. I've missed you so much.", props = { speaker = "npc", npcName = "Elena" } },
+    { type = "dialog", content = "I'm here now. I'm not going anywhere.", props = { speaker = "player" } }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Pull her close and kiss her deeply", targetType = "node", nodeId = "bedroom_finale.bf2", time_progression_minutes = 5, effects = [{ targetType = "npc", npcId = "elena", trait = "affection", op = "add", value = 10 }] }
+  ] }
+
+  [[canvases.nodes]]
+  id = "bf2"
+  name = "Together at Last"
+  blocks = [
+    { type = "paragraph", content = "You tumble onto the bed together, a tangle of limbs and whispered words. Everything you've been building toward culminates in this moment." },
+    { type = "clip", props = { clipId = "26824756-9fac-4058-8a18-7f5e4d6d36a0" } },
+    { type = "paragraph", content = "She moves with you, against you, her body knowing yours completely. Every touch is electric, every kiss a promise renewed." }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Give yourselves completely to each other", targetType = "node", nodeId = "bedroom_finale.bf3", time_progression_minutes = 30, effects = [{ targetType = "player", trait = "intimacy_level", op = "add", value = 25 }] }
+  ] }
+
+  [[canvases.nodes]]
+  id = "bf3"
+  name = "Passion"
+  blocks = [
+    { type = "paragraph", content = "The world outside ceases to exist. There is only her warmth, her voice, the rhythm you create together." },
+    { type = "clip", props = { clipId = "d58ad38c-9362-4ebf-88af-b0949288f3ca" } },
+    { type = "paragraph", content = "She cries out, her body arching, and you follow her into bliss. Wave after wave of sensation crashes over you both." },
+    { type = "clip", props = { clipId = "35d557ee-95e4-4568-8ba8-33eddb2d4ccb" } }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Hold her as the pleasure subsides", targetType = "node", nodeId = "bedroom_finale.bf4", time_progression_minutes = 15, effects = [{ targetType = "npc", npcId = "elena", trait = "affection", op = "set", value = 100 }], flagEffects = [{ targetType = "player", flag = "passion_rekindled" }] }
+  ] }
+
+  [[canvases.nodes]]
+  id = "bf4"
+  name = "Afterglow"
+  blocks = [
+    { type = "heading", content = "Together Again" },
+    { type = "paragraph", content = "You lie tangled together, hearts slowly calming. Elena traces lazy patterns on your chest, a contented smile on her lips." },
+    { type = "dialog", content = "Promise me something?", props = { speaker = "npc", npcName = "Elena" } },
+    { type = "dialog", content = "Anything.", props = { speaker = "player" } },
+    { type = "dialog", content = "More weekends like this. More days where it's just us. Where we remember why we chose each other.", props = { speaker = "npc", npcName = "Elena" } },
+    { type = "paragraph", content = "You kiss her forehead, pulling her closer." },
+    { type = "dialog", content = "I promise.", props = { speaker = "player" } },
+    { type = "paragraph", content = "Outside, the city hums on. But here, in your bedroom, in her arms, you've found your way back home." },
+    { type = "paragraph", content = "The passion has been rekindled. This is just the beginning." }
+  ]
+  exit_block = { type = "location", text = "The End", config = { destinationType = "specific", locationId = "bedroom", time_progression_minutes = 0 } }
+
+# ========================================
+# KITCHEN INTENSE - Post-Escalation Content
+# ========================================
+
+[[canvases]]
+id = "kitchen_passionate"
+name = "Afternoon Delight"
+description = "The kitchen holds new memories now"
+
+  [canvases.trigger]
+  location = "kitchen"
+  is_active = true
+  is_repeatable = true
+  max_triggers_per_day = 1
+  [canvases.trigger.conditions]
+  version = "1.0"
+  logic = "AND"
+  items = [
+    { type = "flag", subject = "player", flag_key = "first_escalation", operator = "is_true" }
+  ]
+  [[canvases.trigger.schedules]]
+  start_time = "14:00"
+  end_time = "20:00"
+
+  [[canvases.nodes]]
+  id = "kp1"
+  name = "Familiar Territory"
+  blocks = [
+    { type = "paragraph", content = "The wooden table sits there, innocent-looking. But the knowing smile Elena gives you says she remembers exactly what happened here." },
+    { type = "dialog", content = "See something you like?", props = { speaker = "npc", npcName = "Elena" } },
+    { type = "paragraph", content = "She leans against the table, one eyebrow raised in challenge. The afternoon light catches her curves perfectly." }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Close the distance between you", targetType = "node", nodeId = "kitchen_passionate.kp2", time_progression_minutes = 5, effects = [{ targetType = "npc", npcId = "elena", trait = "arousal", op = "add", value = 10 }] },
+    { text = "Make her wait a little longer", targetType = "location", locationId = "kitchen", time_progression_minutes = 10, effects = [{ targetType = "npc", npcId = "elena", trait = "arousal", op = "add", value = 5 }] }
+  ] }
+
+  [[canvases.nodes]]
+  id = "kp2"
+  name = "Round Two"
+  blocks = [
+    { type = "paragraph", content = "She gasps as you pin her against the table, your hands finding familiar paths. There's no hesitation now, only hunger." },
+    { type = "clip", props = { clipId = "485f9885-bb74-42b3-abdc-6c40871da1f6" } },
+    { type = "paragraph", content = "The kitchen fills with the sounds of renewed passion. She wraps herself around you, urging you on." }
+  ]
+  exit_block = { type = "choices", choices = [
+    { text = "Lose yourselves in each other again", targetType = "location", locationId = "kitchen", time_progression_minutes = 25, effects = [{ targetType = "npc", npcId = "elena", trait = "arousal", op = "add", value = 15 }, { targetType = "player", trait = "intimacy_level", op = "add", value = 10 }], flagEffects = [{ targetType = "player", flag = "kitchen_passion" }] }
+  ] }

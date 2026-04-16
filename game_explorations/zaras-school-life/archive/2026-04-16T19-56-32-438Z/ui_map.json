@@ -1,0 +1,659 @@
+{
+  "slug": "zaras-school-life",
+  "url": "https://mopoga.com/zaras-school-life",
+  "generated_at": "2026-04-16T19:44:36.623Z",
+  "engine": "sugarcube",
+  "pregame_auto_advance": {
+    "trail": [
+      {
+        "step": 0,
+        "passage": "Welcome Page",
+        "action": "clicked_forward",
+        "text": "Start your journey",
+        "tier": 1
+      },
+      {
+        "step": 1,
+        "passage": "intro",
+        "action": "clicked_forward",
+        "text": "Continue",
+        "tier": 4
+      },
+      {
+        "step": 2,
+        "passage": "intro end",
+        "action": "clicked_forward",
+        "text": "Peak into her dreams",
+        "tier": 5
+      },
+      {
+        "step": 3,
+        "passage": "dream1",
+        "action": "terminated",
+        "reason": "no_forward_pattern_match"
+      }
+    ],
+    "terminated_at": {
+      "step": 3,
+      "passage": "dream1",
+      "action": "terminated",
+      "reason": "no_forward_pattern_match"
+    }
+  },
+  "regions_catalog": [
+    {
+      "pos_class": "left",
+      "id": "ui-bar",
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 298,
+        "h": 904
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [],
+      "menu_list": [
+        "Phone",
+        "Stats",
+        "Quests",
+        "Cheats",
+        "Credits",
+        "Saves",
+        "Settings",
+        "Restart"
+      ],
+      "interactive": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 263,
+            "y": 5,
+            "w": 33,
+            "h": 34
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 105,
+            "y": 5,
+            "w": 34,
+            "h": 34
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 159,
+            "y": 5,
+            "w": 34,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "exclude-center link-external",
+          "text": "",
+          "title": "",
+          "href": "http:\\\\www.patreon.com/neospectre",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 89,
+            "y": 168,
+            "w": 30,
+            "h": 21
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "exclude-center link-external",
+          "text": "",
+          "title": "",
+          "href": "https://discord.gg/3aR3Yvkjzr",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 119,
+            "y": 168,
+            "w": 30,
+            "h": 21
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "exclude-center link-external",
+          "text": "",
+          "title": "",
+          "href": "http:\\\\www.subscribestar.adult/neospectre",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 149,
+            "y": 168,
+            "w": 30,
+            "h": 21
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "exclude-center link-external",
+          "text": "",
+          "title": "",
+          "href": "https://x.com/NeoSpectr3",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 179,
+            "y": 168,
+            "w": 30,
+            "h": 21
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Phone",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 409,
+            "w": 242,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Stats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 446,
+            "w": 242,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 483,
+            "w": 242,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Cheats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 519,
+            "w": 242,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Credits",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 556,
+            "w": 242,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 610,
+            "w": 242,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Settings",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 647,
+            "w": 242,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 683,
+            "w": 242,
+            "h": 36
+          }
+        }
+      ],
+      "passive_text_samples": [
+        "Zara's School Life",
+        "Version 0.6.7",
+        "Created by NeoSpectre",
+        "Energy:",
+        "100",
+        "100",
+        "Money:",
+        "200",
+        "Monday",
+        "March",
+        "08",
+        "00"
+      ]
+    },
+    {
+      "pos_class": "sampled",
+      "id": "ui-bar-history",
+      "bbox": {
+        "x": 2,
+        "y": 5,
+        "w": 294,
+        "h": 34
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 105,
+            "y": 5,
+            "w": 34,
+            "h": 34
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 159,
+            "y": 5,
+            "w": 34,
+            "h": 34
+          }
+        }
+      ],
+      "passive_text_samples": []
+    },
+    {
+      "pos_class": "sampled",
+      "id": "ui-bar-body",
+      "bbox": {
+        "x": 2,
+        "y": 44,
+        "w": 294,
+        "h": 858
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [],
+      "menu_list": [
+        "Phone",
+        "Stats",
+        "Quests",
+        "Cheats",
+        "Credits",
+        "Saves",
+        "Settings",
+        "Restart"
+      ],
+      "interactive": [
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "exclude-center link-external",
+          "text": "",
+          "title": "",
+          "href": "http:\\\\www.patreon.com/neospectre",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 89,
+            "y": 168,
+            "w": 30,
+            "h": 21
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "exclude-center link-external",
+          "text": "",
+          "title": "",
+          "href": "https://discord.gg/3aR3Yvkjzr",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 119,
+            "y": 168,
+            "w": 30,
+            "h": 21
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "exclude-center link-external",
+          "text": "",
+          "title": "",
+          "href": "http:\\\\www.subscribestar.adult/neospectre",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 149,
+            "y": 168,
+            "w": 30,
+            "h": 21
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "exclude-center link-external",
+          "text": "",
+          "title": "",
+          "href": "https://x.com/NeoSpectr3",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 179,
+            "y": 168,
+            "w": 30,
+            "h": 21
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Phone",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 409,
+            "w": 242,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Stats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 446,
+            "w": 242,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 483,
+            "w": 242,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Cheats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 519,
+            "w": 242,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Credits",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 556,
+            "w": 242,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 610,
+            "w": 242,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Settings",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 647,
+            "w": 242,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 683,
+            "w": 242,
+            "h": 36
+          }
+        }
+      ],
+      "passive_text_samples": [
+        "Zara's School Life",
+        "Version 0.6.7",
+        "Created by NeoSpectre",
+        "Energy:",
+        "100",
+        "100",
+        "Money:",
+        "200",
+        "Monday",
+        "March",
+        "08",
+        "00"
+      ]
+    }
+  ],
+  "chrome_probes": [],
+  "regions": [
+    {
+      "pos_class": "left",
+      "tag": "div",
+      "id": "ui-bar",
+      "cls": "",
+      "position_style": "fixed",
+      "z_index": "50",
+      "collapsed": false,
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 298,
+        "h": 904
+      },
+      "text_sample": "Zara's School LifeVersion 0.6.7Created by NeoSpectreEnergy: 100 / 100Money: 200M"
+    },
+    {
+      "pos_class": "sampled",
+      "tag": "div",
+      "id": "ui-bar-history",
+      "cls": "",
+      "position_style": "static",
+      "z_index": "auto",
+      "collapsed": false,
+      "bbox": {
+        "x": 2,
+        "y": 5,
+        "w": 294,
+        "h": 34
+      },
+      "text_sample": "",
+      "from_sampling": true
+    },
+    {
+      "pos_class": "sampled",
+      "tag": "div",
+      "id": "ui-bar-body",
+      "cls": "",
+      "position_style": "static",
+      "z_index": "auto",
+      "collapsed": false,
+      "bbox": {
+        "x": 2,
+        "y": 44,
+        "w": 294,
+        "h": 858
+      },
+      "text_sample": "",
+      "from_sampling": true
+    }
+  ],
+  "main_content": null,
+  "ui_frame_hash": "82a32ed8e1cc34e3"
+}

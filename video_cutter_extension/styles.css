@@ -1,0 +1,229 @@
+/**
+ * Video Cutter - Styles
+ */
+
+/* Wrapper for video elements */
+.video-cutter-wrapper {
+    position: relative !important;
+    display: inline-block;
+}
+
+/* Scissors button */
+.video-cutter-btn {
+    position: absolute !important;
+    top: 8px !important;
+    right: 8px !important;
+    width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: rgba(239, 68, 68, 0.9) !important;
+    border: none !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    opacity: 0 !important;
+    transition: opacity 0.2s ease, transform 0.1s ease !important;
+    z-index: 99999 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 18px !important;
+    color: white !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    font-family: system-ui, -apple-system, sans-serif !important;
+}
+
+.video-cutter-wrapper:hover .video-cutter-btn {
+    opacity: 1 !important;
+}
+
+.video-cutter-btn:hover {
+    background: rgba(220, 38, 38, 1) !important;
+    transform: scale(1.1) !important;
+}
+
+.video-cutter-btn:active {
+    transform: scale(0.95) !important;
+}
+
+/* Cut form */
+.video-cutter-form {
+    position: absolute !important;
+    top: 52px !important;
+    right: 8px !important;
+    background: white !important;
+    border-radius: 8px !important;
+    padding: 14px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+    z-index: 100000 !important;
+    min-width: 260px !important;
+    font-family: system-ui, -apple-system, sans-serif !important;
+}
+
+.video-cutter-form-header {
+    display: flex !important;
+    align-items: center !important;
+    margin-bottom: 10px !important;
+}
+
+.video-cutter-title {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #1f2937 !important;
+}
+
+.video-cutter-path {
+    font-size: 11px !important;
+    color: #6b7280 !important;
+    background: #f3f4f6 !important;
+    padding: 4px 8px !important;
+    border-radius: 4px !important;
+    margin-bottom: 8px !important;
+    word-break: break-all !important;
+}
+
+.video-cutter-duration {
+    font-size: 11px !important;
+    color: #9ca3af !important;
+    margin-bottom: 12px !important;
+}
+
+.video-cutter-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-bottom: 10px !important;
+}
+
+.video-cutter-row label {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: #374151 !important;
+    width: 40px !important;
+}
+
+.video-cutter-input {
+    flex: 1 !important;
+    padding: 6px 8px !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 4px !important;
+    font-size: 13px !important;
+    font-family: monospace !important;
+    box-sizing: border-box !important;
+    outline: none !important;
+}
+
+.video-cutter-input:focus {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2) !important;
+}
+
+.video-cutter-set-btn {
+    padding: 4px 8px !important;
+    background: #f3f4f6 !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 4px !important;
+    font-size: 11px !important;
+    color: #374151 !important;
+    cursor: pointer !important;
+}
+
+.video-cutter-set-btn:hover {
+    background: #e5e7eb !important;
+}
+
+.video-cutter-mode {
+    margin: 12px 0 !important;
+    padding-top: 8px !important;
+    border-top: 1px solid #e5e7eb !important;
+}
+
+.video-cutter-mode label {
+    font-size: 11px !important;
+    color: #6b7280 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    cursor: pointer !important;
+}
+
+.video-cutter-precise {
+    margin: 0 !important;
+}
+
+.video-cutter-form-buttons {
+    display: flex !important;
+    gap: 8px !important;
+    margin-top: 12px !important;
+}
+
+.video-cutter-form-btn {
+    flex: 1 !important;
+    padding: 8px 12px !important;
+    border: none !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    transition: background 0.15s ease !important;
+}
+
+.video-cutter-form-btn.submit {
+    background: #ef4444 !important;
+    color: white !important;
+}
+
+.video-cutter-form-btn.submit:hover {
+    background: #dc2626 !important;
+}
+
+.video-cutter-form-btn.submit:disabled {
+    background: #fca5a5 !important;
+    cursor: not-allowed !important;
+}
+
+.video-cutter-form-btn.cancel {
+    background: #f3f4f6 !important;
+    color: #374151 !important;
+}
+
+.video-cutter-form-btn.cancel:hover {
+    background: #e5e7eb !important;
+}
+
+/* Toast notification */
+.video-cutter-toast {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    padding: 12px 20px !important;
+    border-radius: 8px !important;
+    color: white !important;
+    font-size: 14px !important;
+    font-family: system-ui, -apple-system, sans-serif !important;
+    z-index: 100001 !important;
+    max-width: 400px !important;
+    word-break: break-word !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    animation: video-cutter-slide-in 0.3s ease !important;
+    transition: opacity 0.3s ease !important;
+}
+
+.video-cutter-toast.success {
+    background: #22c55e !important;
+}
+
+.video-cutter-toast.error {
+    background: #ef4444 !important;
+}
+
+@keyframes video-cutter-slide-in {
+    from {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}

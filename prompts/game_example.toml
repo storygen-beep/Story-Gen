@@ -1,0 +1,773 @@
+############################################
+# game_example.toml — schema v0.2
+# Reference example using v2 patterns:
+#   - Single-canvas activities with gated choices
+#   - 4 gate flags (kiss, groping, oral, sex)
+#   - loc_ and npc_ ID prefixes
+#   - No NPC schedules (auto-detected at runtime)
+#   - Starting canvas has NO trigger
+############################################
+
+schema_version = "0.2"
+starting_canvas = "intro_canvas"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#                              PROJECT
+# ═══════════════════════════════════════════════════════════════════════════════
+
+[project]
+id = "university_city"
+title = "University City"
+description = """
+A vibrant university town where study halls, coffee houses, and hidden
+archives interconnect. Your choices shape friendships, knowledge, and
+access to the city's secrets.
+"""
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#                              TIME
+# ═══════════════════════════════════════════════════════════════════════════════
+
+[time]
+enabled = true
+starting_hour = 9
+starting_day = "Tuesday"
+starting_week = 1
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#                              PLAYER
+# ═══════════════════════════════════════════════════════════════════════════════
+
+[player]
+id = "player"
+name = "Avery"
+description = "A driven first-year student eager to explore."
+portrait = "player_avery.jpg"
+core_traits = { intelligence = 65, charisma = 40, stamina = 55, curiosity = 72 }
+flag_keys = [
+  "game_started",
+  "met_barista",
+  "has_student_id",
+  "met_librarian",
+  "joined_study_group",
+  "first_kiss_complete",
+  "kiss_unlocked",
+  "study_session_complete",
+  "groping_unlocked",
+  "oral_unlocked",
+  "sex_unlocked"
+]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#                              NPCS
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# NPC schedules are auto-detected from canvas trigger data at runtime.
+# Do NOT define [[npcs.schedules]] — they are not needed.
+
+# NPC Customization: When customizable = true, the game shows a screen at start
+# where the player can rename this NPC and pick a relationship from relationship_options.
+# Use @elena in content blocks instead of hardcoding "Elena".
+# Use @elena.rel for relationship references (e.g., "your @elena.rel").
+
+[[npcs]]
+id = "npc_elena"
+name = "Elena"
+customizable = true
+relationship = "study partner"
+relationship_options = ["study partner", "roommate", "childhood friend"]
+description = "Graduate researcher with a knack for solving old puzzles."
+portrait = "elena.jpg"
+core_traits = { love = 20, trust = 10, expertise = 78 }
+flag_keys = []
+
+[[npcs]]
+id = "npc_marcus"
+name = "Marcus"
+description = "Campus athlete; disciplined but surprisingly thoughtful."
+core_traits = { discipline = 80, humor = 45 }
+flag_keys = []
+
+[[npcs]]
+id = "npc_mara"
+name = "Mara"
+description = "Quick-witted barista who hears all the campus rumors."
+core_traits = { wit = 68, hospitality = 75 }
+flag_keys = []
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#                              LOCATIONS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Top-level plaza (root hub)
+[[locations]]
+id = "loc_campus_plaza"
+name = "Campus Plaza"
+description = "The central square with a fountain and student booths."
+is_container = false
+entry_from = ""
+navigation_order = ["loc_library_exterior", "loc_coffeehouse_exterior", "loc_sports_complex", "loc_dorm"]
+
+# Library exterior entered from plaza
+[[locations]]
+id = "loc_library_exterior"
+name = "University Library (Exterior)"
+description = "Grand stone steps lead to heavy oak doors."
+entry_from = "loc_campus_plaza"
+
+# Coffeehouse container WITH default entry
+[[locations]]
+id = "loc_coffeehouse_exterior"
+name = "The Perch (Exterior)"
+description = "Warm glow, subdued chatter, and the scent of espresso."
+is_container = true
+entry_from = "loc_campus_plaza"
+default_entry = "loc_coffeehouse_counter"
+
+# Default entry inside coffeehouse
+[[locations]]
+id = "loc_coffeehouse_counter"
+name = "The Perch — Counter"
+description = "Mara greets students with a smile; chalkboard lists the daily roast."
+parent = "loc_coffeehouse_exterior"
+navigation_order = ["loc_coffeehouse_back_room"]
+
+# Coffeehouse back room
+[[locations]]
+id = "loc_coffeehouse_back_room"
+name = "The Perch — Back Room"
+description = "A quiet nook with mismatched chairs and thumbed-through zines."
+parent = "loc_coffeehouse_exterior"
+entry_from = "loc_coffeehouse_counter"
+
+# Sports complex container
+[[locations]]
+id = "loc_sports_complex"
+name = "Sports Complex"
+description = "Courts, fields, and a running track buzzing with energy."
+is_container = true
+entry_from = "loc_campus_plaza"
+navigation_order = ["loc_track_field", "loc_gymnasium"]
+
+[[locations]]
+id = "loc_track_field"
+name = "Track & Field"
+description = "Runners keep pace; the track lanes gleam after a fresh rain."
+parent = "loc_sports_complex"
+entry_from = "loc_sports_complex"
+
+[[locations]]
+id = "loc_gymnasium"
+name = "Gymnasium"
+description = "Echoes of sneakers and squeak of basketball drills."
+parent = "loc_sports_complex"
+entry_from = "loc_sports_complex"
+
+# Library interior container WITH default entry
+[[locations]]
+id = "loc_library_interior"
+name = "University Library (Interior)"
+description = "Quiet halls and stacks that smell of old paper."
+is_container = true
+entry_from = "loc_library_exterior"
+default_entry = "loc_library_main_hall"
+
+# Default entry inside library
+[[locations]]
+id = "loc_library_main_hall"
+name = "Library — Main Hall"
+description = "Information desk, catalog terminals, and a bulletin board."
+parent = "loc_library_interior"
+navigation_order = ["loc_reading_room", "loc_archives_door"]
+
+[[locations]]
+id = "loc_reading_room"
+name = "Library — Reading Room"
+description = "Lamplight pools across long wooden tables."
+parent = "loc_library_interior"
+entry_from = "loc_library_main_hall"
+
+[[locations]]
+id = "loc_archives_door"
+name = "Library — Archives Door"
+description = "Heavy door with a keycard reader; whispers of lost knowledge."
+parent = "loc_library_interior"
+entry_from = "loc_library_main_hall"
+navigation_order = ["loc_sealed_archives"]
+
+# Sealed archives container WITH default entry
+[[locations]]
+id = "loc_sealed_archives"
+name = "Sealed Archives"
+description = "Restricted stacks requiring authorization."
+is_container = true
+entry_from = "loc_archives_door"
+default_entry = "loc_archives_lobby"
+
+# Default entry inside sealed archives
+[[locations]]
+id = "loc_archives_lobby"
+name = "Archives — Lobby"
+description = "A security desk and a stern librarian watching closely."
+parent = "loc_sealed_archives"
+navigation_order = ["loc_archives_stacks"]
+
+[[locations]]
+id = "loc_archives_stacks"
+name = "Archives — Stacks"
+description = "Dim aisles, rare manuscripts, and fragile spines."
+parent = "loc_sealed_archives"
+entry_from = "loc_archives_lobby"
+
+# Dorm room (for time-advancement canvas)
+[[locations]]
+id = "loc_dorm"
+name = "Dorm Room"
+description = "A small but comfortable room. Your own space on campus."
+entry_from = "loc_campus_plaza"
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#                    STARTING CANVAS (Pattern: No Trigger)
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# The starting canvas has NO trigger section. It fires once at game start.
+# Sets initial flags and introduces the premise.
+
+[[canvases]]
+id = "intro_canvas"
+name = "Welcome to the Plaza"
+description = "Opening scene at the town square."
+
+# NOTE: No [canvases.trigger] — this is the starting canvas
+
+[[canvases.nodes]]
+id = "n1"
+name = "A New Day"
+blocks = [
+  { type = "heading", content = "A new day begins" },
+  { type = "paragraph", content = "You step into the plaza and feel the city wake around you. Students stream past with coffee cups and textbooks, their voices mingling with the fountain's splash." },
+  { type = "paragraph", content = "The coffeehouse across the square glows warmly. The library looms to the left. Everything feels possible." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Head to the coffeehouse", targetType = "location", locationId = "loc_coffeehouse_exterior", time_progression_minutes = 10, flagEffects = [{ targetType = "player", flag = "game_started" }, { targetType = "player", flag = "met_barista" }] },
+  { text = "Explore the plaza first", targetType = "node", nodeId = "intro_canvas.n2", time_progression_minutes = 5 }
+] }
+
+[[canvases.nodes]]
+id = "n2"
+name = "Quiet Thoughts"
+blocks = [
+  { type = "paragraph", content = "You breathe in the morning air and consider your options. The plaza bulletin board catches your eye — job postings, study groups, campus events." },
+  { type = "paragraph", content = "This is your fresh start. Time to make the most of it." }
+]
+exit_block = { type = "location", text = "Head out", config = { destinationType = "trigger", time_progression_minutes = 5, flagEffects = [{ targetType = "player", flag = "game_started" }] } }
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#                    STORY EVENT: First Kiss (Pattern F)
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# One-time event. is_repeatable = false, priority = 10.
+# Requires love >= 25. Sets first_kiss_complete flag.
+# Both branches set the same completion flag with different rewards.
+
+[[canvases]]
+id = "first_kiss_event"
+name = "A Moment of Connection"
+description = "A quiet moment in the back room becomes something more."
+
+[canvases.trigger]
+location = "loc_coffeehouse_back_room"
+npc = "npc_elena"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "trait", subject = "npc", npc_id = "npc_elena", trait_key = "love", operator = "gte", value = 25 },
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+]
+[[canvases.trigger.schedules]]
+start_time = "08:00"
+end_time = "20:00"
+
+[[canvases.nodes]]
+id = "the_moment"
+name = "The Moment"
+blocks = [
+  { type = "paragraph", content = "@elena looks up from her notes as you approach. There's something different in her eyes today." },
+  { type = "dialog", content = "I've been thinking about you.", props = { speaker = "npc", npcId = "npc_elena" } },
+  { type = "paragraph", content = "She says it softly, almost surprised by her own words. The back room is empty. Just the two of you and the muffled sounds of the cafe." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Kiss her gently", targetType = "node", nodeId = "first_kiss_event.gentle" },
+  { text = "Pull her close", targetType = "node", nodeId = "first_kiss_event.passionate" }
+] }
+
+[[canvases.nodes]]
+id = "gentle"
+name = "Gentle"
+blocks = [
+  { type = "paragraph", content = "You lean in slowly, giving her time to pull away. She doesn't." },
+  { type = "paragraph", content = "The kiss is soft, tentative, full of promise. When you part, she's smiling." },
+  { type = "dialog", content = "We probably shouldn't have done that.", props = { speaker = "npc", npcId = "npc_elena" } },
+  { type = "paragraph", content = "But she doesn't move away." }
+]
+exit_block = { type = "location", text = "Say goodbye", config = { destinationType = "trigger", time_progression_minutes = 10, effects = [{ targetType = "npc", npcId = "npc_elena", trait = "love", op = "add", value = 5 }, { targetType = "npc", npcId = "npc_elena", trait = "trust", op = "add", value = 2 }], flagEffects = [{ targetType = "player", flag = "first_kiss_complete" }] } }
+
+[[canvases.nodes]]
+id = "passionate"
+name = "Passionate"
+blocks = [
+  { type = "paragraph", content = "You don't think about it. You reach for her, and she meets you halfway." },
+  { type = "paragraph", content = "The kiss is not gentle. It's urgent, surprising. Her hand finds your arm." },
+  { type = "dialog", content = "Wow.", props = { speaker = "npc", npcId = "npc_elena" } },
+  { type = "paragraph", content = "She laughs, breathless. Everything feels different now." }
+]
+exit_block = { type = "location", text = "Walk away smiling", config = { destinationType = "trigger", time_progression_minutes = 10, effects = [{ targetType = "npc", npcId = "npc_elena", trait = "love", op = "add", value = 7 }], flagEffects = [{ targetType = "player", flag = "first_kiss_complete" }] } }
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#              GATE-SETTING EVENT: Late Study Session (Pattern G)
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# One-time event that sets kiss_unlocked AND groping_unlocked gates.
+# Uses days_since_flag for pacing — at least 2 days after first kiss.
+# Requires love >= 40 and trust >= 15.
+
+[[canvases]]
+id = "late_study_event"
+name = "Late Night in the Stacks"
+description = "A late study session alone together opens new possibilities."
+
+[canvases.trigger]
+location = "loc_reading_room"
+npc = "npc_elena"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "first_kiss_complete", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "first_kiss_complete", operator = "gte", value = 2 },
+  { type = "trait", subject = "npc", npc_id = "npc_elena", trait_key = "love", operator = "gte", value = 40 },
+  { type = "trait", subject = "npc", npc_id = "npc_elena", trait_key = "trust", operator = "gte", value = 15 }
+]
+[[canvases.trigger.schedules]]
+start_time = "18:00"
+end_time = "22:00"
+
+[[canvases.nodes]]
+id = "alone"
+name = "Alone Together"
+blocks = [
+  { type = "paragraph", content = "The reading room is nearly empty. Just you, @elena, and the lamplight. The library closes in an hour." },
+  { type = "dialog", content = "Everyone else left already. It's just us.", props = { speaker = "npc", npcId = "npc_elena" } },
+  { type = "paragraph", content = "She closes her textbook. She's not looking at notes anymore. She's looking at you." },
+  { type = "dialog", content = "I keep thinking about that day in the back room.", props = { speaker = "npc", npcId = "npc_elena" } }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Move closer", targetType = "node", nodeId = "late_study_event.closer" }
+] }
+
+[[canvases.nodes]]
+id = "closer"
+name = "Getting Closer"
+blocks = [
+  { type = "paragraph", content = "You sit next to her. Close enough that your shoulders touch. She doesn't pull away." },
+  { type = "paragraph", content = "Your hand finds hers on the desk. She turns to face you, and you kiss — longer this time, more sure." },
+  { type = "dialog", content = "I don't want to go home yet.", props = { speaker = "npc", npcId = "npc_elena" } },
+  { type = "paragraph", content = "Neither do you. The library is quiet and warm, and something has shifted between you." }
+]
+# SETS TWO GATE FLAGS: kiss_unlocked enables kiss choices,
+# groping_unlocked enables physical closeness choices
+exit_block = { type = "location", text = "Walk her home", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_elena", trait = "love", op = "add", value = 5 }, { targetType = "npc", npcId = "npc_elena", trait = "trust", op = "add", value = 3 }], flagEffects = [{ targetType = "player", flag = "study_session_complete" }, { targetType = "player", flag = "kiss_unlocked" }, { targetType = "player", flag = "groping_unlocked" }] } }
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#          ACTIVITY: Morning Coffee with Elena (Pattern A — Single Canvas)
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# V2 PATTERN: ONE canvas with gated choices on the base node.
+# Base node always shows. Choices progressively unlock with stats + flags.
+# Each choice leads to an escalation node that exits back to the world.
+#
+# Choice progression:
+#   "Just enjoy coffee"  — always available (no conditions) → trigger
+#   "Flirt with her"     — love >= 30 (stat only) → warm node
+#   "Tease her"          — love >= 50 + kiss_unlocked → tease node
+#   "Get closer"         — love >= 70 + groping_unlocked → closer node
+
+[[canvases]]
+id = "activity_coffee_elena"
+name = "Morning Coffee"
+description = "Morning coffee with Elena — choices unlock with progression"
+
+[canvases.trigger]
+location = "loc_coffeehouse_counter"
+npc = "npc_elena"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1
+[[canvases.trigger.schedules]]
+start_time = "08:00"
+end_time = "12:00"
+
+# BASE NODE — always shown when canvas fires
+[[canvases.nodes]]
+id = "morning"
+name = "Morning Greeting"
+blocks = [
+  { type = "paragraph", content = "@elena is at the counter, her usual spot. She lights up when she sees you." },
+  { type = "dialog", content = "I saved you a seat.", props = { speaker = "npc", npcId = "npc_elena" } },
+  { type = "paragraph", content = "She gestures to the stool beside her. Mara is already making your usual." }
+]
+exit_block = { type = "choices", choices = [
+  # ALWAYS AVAILABLE — no conditions
+  { text = "Just enjoy coffee", targetType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_elena", trait = "love", op = "add", value = 1 }, { targetType = "npc", npcId = "npc_elena", trait = "trust", op = "add", value = 1 }] },
+  # STAT-ONLY GATE — love >= 30
+  { text = "Flirt with her", targetType = "node", nodeId = "activity_coffee_elena.warm", conditions = { version = "1.0", items = [{ type = "trait", subject = "npc", npc_id = "npc_elena", trait_key = "love", operator = "gte", value = 30 }] } },
+  # STAT + FLAG GATE — love >= 50 AND kiss_unlocked
+  { text = "Tease her", targetType = "node", nodeId = "activity_coffee_elena.tease", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_elena", trait_key = "love", operator = "gte", value = 50 }, { type = "flag", subject = "player", flag_key = "kiss_unlocked", operator = "is_true" }] } },
+  # HIGHER STAT + FLAG GATE — love >= 70 AND groping_unlocked
+  { text = "Get closer to her", targetType = "node", nodeId = "activity_coffee_elena.closer", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_elena", trait_key = "love", operator = "gte", value = 70 }, { type = "flag", subject = "player", flag_key = "groping_unlocked", operator = "is_true" }] } }
+] }
+
+# ESCALATION NODE — love >= 30
+[[canvases.nodes]]
+id = "warm"
+name = "Warm Conversation"
+blocks = [
+  { type = "paragraph", content = "You lean in a little closer than usual. She notices, and a smile plays at the corner of her lips." },
+  { type = "dialog", content = "You're in a good mood today.", props = { speaker = "npc", npcId = "npc_elena" } },
+  { type = "paragraph", content = "Your fingers brush as she passes you the sugar. Neither of you pulls away quickly." }
+]
+exit_block = { type = "location", text = "Finish coffee", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_elena", trait = "love", op = "add", value = 2 }] } }
+
+# ESCALATION NODE — love >= 50 + kiss_unlocked
+[[canvases.nodes]]
+id = "tease"
+name = "Teasing"
+blocks = [
+  { type = "paragraph", content = "You lean in close, whispering something that makes her blush." },
+  { type = "dialog", content = "You're terrible.", props = { speaker = "npc", npcId = "npc_elena" } },
+  { type = "paragraph", content = "She pushes your shoulder playfully, but she's laughing. Mara pretends not to notice from behind the counter." }
+]
+exit_block = { type = "location", text = "Finish coffee", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_elena", trait = "love", op = "add", value = 3 }] } }
+
+# ESCALATION NODE — love >= 70 + groping_unlocked
+[[canvases.nodes]]
+id = "closer"
+name = "Getting Close"
+blocks = [
+  { type = "paragraph", content = "Under the counter, your hand finds her knee. She inhales sharply but doesn't move away." },
+  { type = "dialog", content = "Not here.", props = { speaker = "npc", npcId = "npc_elena" } },
+  { type = "paragraph", content = "But her hand covers yours. The coffee gets cold. Neither of you cares." }
+]
+exit_block = { type = "location", text = "Head out together", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_elena", trait = "love", op = "add", value = 4 }] } }
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#              UTILITY CANVAS: Shelve Books (Pattern C — Chore)
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Simplest canvas. Single node, single exit. Builds trust indirectly.
+# No NPC on trigger (solo activity).
+
+[[canvases]]
+id = "activity_shelve_books"
+name = "Shelve Books"
+description = "Help organize the library stacks — earns quiet appreciation"
+
+[canvases.trigger]
+location = "loc_library_main_hall"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1
+[canvases.trigger.conditions]
+version = "1.0"
+items = [
+  { type = "flag", subject = "player", flag_key = "met_librarian", operator = "is_true" }
+]
+[[canvases.trigger.schedules]]
+start_time = "10:00"
+end_time = "16:00"
+
+[[canvases.nodes]]
+id = "shelving"
+name = "Shelving"
+blocks = [
+  { type = "paragraph", content = "The librarian nods approvingly as you start returning books to their proper shelves. It's quiet, methodical work." },
+  { type = "paragraph", content = "@elena passes by on her way to the reading room. She notices you helping and smiles — a warm, genuine smile." }
+]
+exit_block = { type = "location", text = "Done", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_elena", trait = "trust", op = "add", value = 1 }] } }
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#          TIME-ADVANCEMENT CANVAS: Dorm Room (Pattern E)
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Always available. No conditions, no schedule, no NPC.
+# Different choices advance time by different amounts.
+
+[[canvases]]
+id = "activity_dorm_room"
+name = "Dorm Room"
+description = "Your room — rest, study, or sleep"
+
+[canvases.trigger]
+location = "loc_dorm"
+is_active = true
+is_repeatable = true
+priority = 1
+
+[[canvases.nodes]]
+id = "room"
+name = "Your Room"
+blocks = [
+  { type = "paragraph", content = "Your dorm room. Textbooks on the desk, coffee rings on the nightstand. It's small, but it's yours." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Study for a bit", targetType = "trigger", time_progression_minutes = 120, effects = [{ targetType = "player", trait = "intelligence", op = "add", value = 1 }] },
+  { text = "Take a nap", targetType = "trigger", time_progression_minutes = 180 },
+  { text = "Go to sleep", targetType = "trigger", time_progression_minutes = 540 }
+] }
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#                              STORY ARC
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Drives the Quest/Journal page. Links canvases to narrative progression.
+
+[story_arc]
+version = "1.0"
+
+# ─── CHAPTERS ───
+
+[[story_arc.chapters]]
+id = "chapter_1"
+name = "First Impressions"
+mood = "hopeful"
+description = "Getting to know the campus and its people"
+order = 1
+
+[[story_arc.chapters]]
+id = "chapter_2"
+name = "Growing Closer"
+mood = "romantic"
+description = "Connections deepen through shared experiences"
+order = 2
+
+# ─── NODES ───
+
+# Starting milestone
+[[story_arc.nodes]]
+id = "first_meeting"
+name = "Arrival on Campus"
+chapter = "chapter_1"
+journal_entry = "First day on campus. Everything feels new and possible."
+linked_canvas = "intro_canvas"
+linked_flag = "game_started"
+is_milestone = true
+
+# Activity-based bonding
+[[story_arc.nodes]]
+id = "morning_coffee_memory"
+name = "Morning Coffee Together"
+chapter = "chapter_1"
+journal_entry = "Sharing morning coffee has become our ritual."
+linked_canvas = "activity_coffee_elena"
+npc = "npc_elena"
+group = "early_bonding"
+
+[[story_arc.nodes]]
+id = "library_help"
+name = "Helping at the Library"
+chapter = "chapter_1"
+journal_entry = "She noticed me shelving books. Small things seem to matter."
+linked_canvas = "activity_shelve_books"
+npc = "npc_elena"
+group = "early_bonding"
+
+# Story event: first kiss
+[[story_arc.nodes]]
+id = "first_kiss_moment"
+name = "The First Kiss"
+chapter = "chapter_2"
+journal_entry = "We crossed a line today. Neither of us seemed to mind."
+linked_canvas = "first_kiss_event"
+linked_flag = "first_kiss_complete"
+npc = "npc_elena"
+requires_group = "early_bonding"
+is_milestone = true
+
+# Gate-setting event: late study
+[[story_arc.nodes]]
+id = "late_study_moment"
+name = "Late Night in the Stacks"
+chapter = "chapter_2"
+journal_entry = "Something shifted between us in the library that night."
+linked_canvas = "late_study_event"
+linked_flag = "study_session_complete"
+npc = "npc_elena"
+requires_nodes = ["first_kiss_moment"]
+is_milestone = true
+
+# ─── BRANCHING EXAMPLE (optional — uncomment if game has path-variant arcs) ───
+# The branch-point canvas "elena_crossroads" offers two choices:
+# - "Support her" sets flag "chose_support" + "crossroads_complete"
+# - "Ask her to stay" sets flag "chose_stay" + "crossroads_complete"
+#
+# # Shared milestone (both paths):
+# [[story_arc.nodes]]
+# id = "crossroads"
+# name = "The Crossroads"
+# chapter = "chapter_2"
+# journal_entry = "She told me about the offer. I had to choose."
+# linked_canvas = "elena_crossroads"
+# linked_flag = "crossroads_complete"
+# npc = "npc_elena"
+# is_milestone = true
+#
+# # Support path only:
+# [[story_arc.nodes]]
+# id = "support_letters"
+# name = "Letters from Afar"
+# chapter = "chapter_2"
+# journal_entry = "Her letters arrive on Tuesdays. Each one a small gift."
+# linked_canvas = "support_letters_scene"
+# linked_flag = "support_letters_complete"
+# npc = "npc_elena"
+# branch_condition = "chose_support"
+# group = "path_resolution"
+# requires_nodes = ["crossroads"]
+#
+# # Stay path only:
+# [[story_arc.nodes]]
+# id = "stay_tension"
+# name = "The Unspoken"
+# chapter = "chapter_2"
+# journal_entry = "She stayed, but something between us shifted."
+# linked_canvas = "stay_tension_scene"
+# linked_flag = "stay_tension_complete"
+# npc = "npc_elena"
+# branch_condition = "chose_stay"
+# group = "path_resolution"
+# requires_nodes = ["crossroads"]
+#
+# # Reconvergence group:
+# [[story_arc.groups]]
+# id = "path_resolution"
+# name = "Path Resolution"
+# required_count = 1
+#
+# # Shared continuation (both paths):
+# [[story_arc.nodes]]
+# id = "reunion"
+# name = "What We Built"
+# chapter = "chapter_3"
+# journal_entry = "Whatever road we took, it led here."
+# linked_canvas = "reunion_scene"
+# linked_flag = "reunion_complete"
+# npc = "npc_elena"
+# requires_group = "path_resolution"
+
+# ─── GROUPS ───
+
+[[story_arc.groups]]
+id = "early_bonding"
+name = "Getting to Know Her"
+description = "Spend time together in daily activities"
+required_count = 1
+
+# ─── EMOTION MAPPINGS ───
+
+[story_arc.emotion_mappings.love]
+trait_owner = "npc"
+default_npc = "npc_elena"
+[[story_arc.emotion_mappings.love.ranges]]
+min = 0
+max = 25
+label = "Acquaintance"
+description = "@elena is polite but reserved around you"
+[[story_arc.emotion_mappings.love.ranges]]
+min = 26
+max = 50
+label = "Friend"
+description = "@elena's eyes light up when she sees you"
+[[story_arc.emotion_mappings.love.ranges]]
+min = 51
+max = 75
+label = "Close"
+description = "@elena finds reasons to be near you"
+[[story_arc.emotion_mappings.love.ranges]]
+min = 76
+max = 100
+label = "Devoted"
+description = "@elena can't imagine her days without you"
+
+[story_arc.emotion_mappings.trust]
+trait_owner = "npc"
+default_npc = "npc_elena"
+[[story_arc.emotion_mappings.trust.ranges]]
+min = 0
+max = 20
+label = "Guarded"
+description = "@elena keeps her walls up around you"
+[[story_arc.emotion_mappings.trust.ranges]]
+min = 21
+max = 50
+label = "Open"
+description = "@elena shares what's on her mind"
+[[story_arc.emotion_mappings.trust.ranges]]
+min = 51
+max = 100
+label = "Trusting"
+description = "@elena confides in you without hesitation"
+
+# ─── HINTS ───
+
+[story_arc.hints]
+stuck_threshold_minutes = 30
+hint_style = "observation"
+
+[[story_arc.hints.templates]]
+text = "Maybe I should spend more time at the coffeehouse in the morning"
+[story_arc.hints.templates.condition]
+missing_trait = "love"
+gap_gte = 5
+
+[[story_arc.hints.templates]]
+text = "Helping around the library might show her I care"
+[story_arc.hints.templates.condition]
+missing_trait = "trust"
+gap_gte = 5
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#                              NOTES
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Usage:
+#   python manage.py package_from_toml --file apps/game_generation/game_example.toml --owner-id <UUID>
+#
+# V2 Pattern Summary:
+# - Starting canvas: NO trigger section (fires once at game start)
+# - Story events: is_repeatable = false, priority = 10, set gate flags
+# - Activities: ONE canvas per activity, gated choices on base node
+# - Utility canvases: single node, single exit (chores, study)
+# - Time-advancement: always available, choices with different durations
+# - Gate flags SET by story events only, CONSUMED by activity conditions
+# - NPC schedules auto-detected from canvas triggers — do not define them
+# - All location IDs use loc_ prefix, all NPC IDs use npc_ prefix
+# - 4 gate flags: kiss_unlocked, groping_unlocked, oral_unlocked, sex_unlocked
+#
+# ═══════════════════════════════════════════════════════════════════════════════

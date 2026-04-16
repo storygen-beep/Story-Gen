@@ -1,0 +1,145 @@
+# ============================================================
+# SECURITY — never commit
+# ============================================================
+*.pem
+story_gen_key.pem
+.env
+.env.local
+.env.*.local
+
+# ============================================================
+# Django / Python
+# ============================================================
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+local_settings.py
+db.sqlite3
+db.sqlite3-*
+db.sqlite3-journal
+media/
+staticfiles/
+.Python
+.python-version
+
+# Virtualenvs
+.env
+.venv
+venv/
+ENV/
+env/
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# ============================================================
+# Testing / type checking / lint caches
+# ============================================================
+.coverage
+.pytest_cache/
+htmlcov/
+.tox/
+coverage.xml
+*.cover
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
+test-results/
+test_clips_demo_game.html
+
+# ============================================================
+# Generated games (engine outputs — not source)
+# ============================================================
+games/
+game_books/
+angela_white/
+angelas_desire/
+before_i_do_game/
+elenas_awakening/
+seven_days_game/
+two_weeks/
+
+# ============================================================
+# Large media / video artifacts
+# ============================================================
+videos/
+output/
+output.mp4
+z_video_capture/
+the-persistent-husband_720m.mp4
+*.mp4
+*.webp
+
+# ============================================================
+# Side experiments / not part of the engine
+# ============================================================
+testing-remotion/
+testing-canva/
+testing-phaser/
+testing-algorithmic-art/
+testing-design-subhadra/
+instagram-post-creator/
+
+# ============================================================
+# Scratch / temp data
+# ============================================================
+temp.json
+media_analysis.json
+video_*_descriptions*.json
+
+# ============================================================
+# Jupyter / notebooks
+# ============================================================
+.ipynb_checkpoints/
+Untitled*.ipynb
+
+# ============================================================
+# IDE / editors
+# ============================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ============================================================
+# OS
+# ============================================================
+**/.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ============================================================
+# Logs
+# ============================================================
+logs/
+*.log
+
+# ============================================================
+# AI assistant state
+# ============================================================
+.aider*
+.aider.tags.cache.*/
+.claude/scheduled_tasks.lock
+.claude/settings.local.json

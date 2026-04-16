@@ -1,0 +1,4 @@
+{"ts":"2026-04-16T20:14:47.600Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"dream1","state_hash":"3556d4ba2e45da9b"}
+{"ts":"2026-04-16T20:16:07.116Z","session_id":1,"cmd":"click","args":{"positional":["Accept his request"]},"ok":true,"passage":"dream1","state_hash":"3556d4ba2e45da9b","clicked_text":"Accept his request","method":"visible-has-text","state_changed":false}
+{"ts":"2026-04-16T20:16:08.513Z","session_id":1,"cmd":"click","args":{"positional":["RING RING RING RING"]},"ok":true,"passage":"wakeup_dream","state_hash":"f217f483b741f652","clicked_text":"RING RING RING RING","method":"visible-has-text","state_changed":true}
+{"ts":"2026-04-16T20:17:18.919Z","session_id":1,"cmd":"finalize","args":{},"ok":true}

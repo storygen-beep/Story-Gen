@@ -1,0 +1,78 @@
+{
+  "game": "two_weeks",
+  "output_dir": "games/two_weeks/output",
+  "queries": [
+    {
+      "file": "videos/activities/breakfast_ethan_base.jpg",
+      "description": "Morning kitchen, coffee for two, warm domestic scene",
+      "search_queries": ["morning kitchen coffee two mugs domestic", "cozy breakfast kitchen morning light"],
+      "type": "image",
+      "canvas": "activity_breakfast_ethan",
+      "tier": "base"
+    },
+    {
+      "file": "videos/activities/morning_coffee_base.jpg",
+      "description": "Steam rising from mugs, quiet morning together on the porch",
+      "search_queries": ["couple morning coffee porch peaceful", "two coffee mugs morning steam cozy"],
+      "type": "image",
+      "canvas": "activity_morning_coffee",
+      "tier": "base"
+    },
+    {
+      "file": "videos/activities/lunch_together_base.jpg",
+      "description": "Casual lunch in the kitchen, sandwiches and easy conversation",
+      "search_queries": ["casual lunch kitchen couple domestic", "making sandwiches together kitchen"],
+      "type": "image",
+      "canvas": "activity_lunch_together",
+      "tier": "base"
+    },
+    {
+      "file": "videos/activities/dinner_ethan_base.jpg",
+      "description": "Evening dinner table, candles lit, intimate atmosphere",
+      "search_queries": ["candlelit dinner table intimate evening", "romantic dinner for two candles home"],
+      "type": "image",
+      "canvas": "activity_dinner_ethan",
+      "tier": "base"
+    },
+    {
+      "file": "videos/activities/helping_chores_base.jpg",
+      "description": "Doing household chores together, laundry or dishes, domestic partnership",
+      "search_queries": ["couple doing chores together domestic", "washing dishes together kitchen couple"],
+      "type": "image",
+      "canvas": "activity_helping_chores",
+      "tier": "base"
+    },
+    {
+      "file": "videos/activities/wine_talk_base.jpg",
+      "description": "Evening wine on the couch, deep conversation, low lighting",
+      "search_queries": ["couple wine couch evening conversation", "wine glasses living room intimate evening"],
+      "type": "image",
+      "canvas": "activity_wine_talk",
+      "tier": "base"
+    },
+    {
+      "file": "videos/locations/backyard.jpg",
+      "description": "Suburban backyard with patio, green lawn, fence, afternoon light",
+      "search_queries": ["suburban backyard patio afternoon", "home backyard green lawn fence patio"],
+      "type": "image",
+      "canvas": "location",
+      "tier": "location"
+    },
+    {
+      "file": "videos/locations/bathroom.jpg",
+      "description": "Clean modern bathroom, white tiles, warm lighting",
+      "search_queries": ["modern bathroom white tiles warm light", "clean home bathroom interior"],
+      "type": "image",
+      "canvas": "location",
+      "tier": "location"
+    },
+    {
+      "file": "videos/locations/garage.jpg",
+      "description": "Suburban garage interior, tools on walls, workbench, single car",
+      "search_queries": ["home garage interior workbench tools", "suburban garage organized tools"],
+      "type": "image",
+      "canvas": "location",
+      "tier": "location"
+    }
+  ]
+}
