@@ -151,3 +151,13 @@ logs/
 # ============================================================
 !.claude/skills/
 !.claude/skills/**
+
+# ============================================================
+# twine-game-explorer — runtime state (not research artifacts)
+# ============================================================
+game_explorations/*/profile/
+game_explorations/*/archive/
+game_explorations/*/screenshots/live/
+game_explorations/*/.live/
+game_explorations/*/live.log
+game_explorations/*/session.log
