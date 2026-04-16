@@ -1,0 +1,3113 @@
+{
+  "id": "s0927959306",
+  "blob": {
+    "engine": "sugarcube",
+    "mode": "state_marshal",
+    "blob": {
+      "index": 29,
+      "history": [
+        {
+          "title": "Start",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "MainMenu",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "Start",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "Intro",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "Intro",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "Untitled Passage",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "RD1",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "ND1",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "N2D1",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "HD1",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "SD1",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "SD2",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "About her mother",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "N2D2",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "Diary",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "N3D2",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "DAY 3",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "CD3",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "N4D2",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "N5D2",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "Principal room",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "N6D3",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 2,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "N7D3",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 3,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "Have sex with him",
+          "variables": {
+            "corruption": 1,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 3,
+            "rep": 0,
+            "jack": 0,
+            "havesex": false,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "HD3",
+          "variables": {
+            "corruption": 2,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 3,
+            "rep": 0,
+            "jack": 0,
+            "havesex": true,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "DAY 4",
+          "variables": {
+            "corruption": 2,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 3,
+            "rep": 0,
+            "jack": 0,
+            "havesex": true,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false
+          }
+        },
+        {
+          "title": "CD4",
+          "variables": {
+            "corruption": 2,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 3,
+            "rep": 0,
+            "jack": 0,
+            "havesex": true,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false,
+            "day4": 0,
+            "day4_cafeteria": false,
+            "day4_toilet": false
+          }
+        },
+        {
+          "title": "C2D4",
+          "variables": {
+            "corruption": 2,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 3,
+            "rep": 0,
+            "jack": 0,
+            "havesex": true,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false,
+            "day4": 0,
+            "day4_cafeteria": false,
+            "day4_toilet": false
+          }
+        },
+        {
+          "title": "C3D4",
+          "variables": {
+            "corruption": 2,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 3,
+            "rep": 0,
+            "jack": 0,
+            "havesex": true,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false,
+            "day4": 0,
+            "day4_cafeteria": false,
+            "day4_toilet": false
+          }
+        },
+        {
+          "title": "CLD4",
+          "variables": {
+            "corruption": 2,
+            "david_relation": 0,
+            "int": 10,
+            "blowjob": 3,
+            "rep": 0,
+            "jack": 0,
+            "havesex": true,
+            "day5": 0,
+            "day5_bath": false,
+            "gameStarted": false,
+            "players": [
+              {
+                "name": "Jamal",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Emily",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Sarah",
+                "gender": "female",
+                "clothes": [
+                  "Top",
+                  "Pants",
+                  "Bra",
+                  "Underwear"
+                ]
+              },
+              {
+                "name": "Max",
+                "gender": "male",
+                "clothes": [
+                  "Socks",
+                  "Shirt",
+                  "Pants",
+                  "Underwear"
+                ]
+              }
+            ],
+            "round": 1,
+            "gameOver": false,
+            "washroom_first_time": false,
+            "drunk": 0,
+            "glory_event": false,
+            "day6_kitchen": false,
+            "day6_bathroom": false,
+            "day6_drink": false,
+            "day6_forest": false,
+            "day6_job": false,
+            "day6_class": false,
+            "day6_p": false,
+            "day7_kitchen": false,
+            "day7_living": false,
+            "day7_shower": false,
+            "day7_gwen": false,
+            "day7_shop": false,
+            "day7_virgin": false,
+            "day8_shop": false,
+            "day8_shower": false,
+            "day9_principal": false,
+            "day9_toilet": false,
+            "day10_class": false,
+            "day11_drop": false,
+            "cute_photo": false,
+            "bsd11": false,
+            "pd11": false,
+            "cfd11": false,
+            "scored": false,
+            "bsd14": false,
+            "pd14": false,
+            "blacksmith": false,
+            "lake": false,
+            "guards": false,
+            "serve": 0,
+            "m01_revenge": false,
+            "m01_princess_black": false,
+            "m01_thief": false,
+            "m01_shift": 0,
+            "princess_pro": false,
+            "magistrate_m01": false,
+            "kelly_arrested": false,
+            "day4": 0,
+            "day4_cafeteria": false,
+            "day4_toilet": false
+          }
+        }
+      ]
+    },
+    "info": {
+      "engine": "sugarcube",
+      "passage": "CLD4",
+      "variables": {
+        "corruption": 2,
+        "david_relation": 0,
+        "int": 10,
+        "blowjob": 3,
+        "rep": 0,
+        "jack": 0,
+        "havesex": true,
+        "day5": 0,
+        "day5_bath": false,
+        "gameStarted": false,
+        "players": [
+          {
+            "name": "Jamal",
+            "gender": "male",
+            "clothes": [
+              "Socks",
+              "Shirt",
+              "Pants",
+              "Underwear"
+            ]
+          },
+          {
+            "name": "Emily",
+            "gender": "female",
+            "clothes": [
+              "Top",
+              "Pants",
+              "Bra",
+              "Underwear"
+            ]
+          },
+          {
+            "name": "Sarah",
+            "gender": "female",
+            "clothes": [
+              "Top",
+              "Pants",
+              "Bra",
+              "Underwear"
+            ]
+          },
+          {
+            "name": "Max",
+            "gender": "male",
+            "clothes": [
+              "Socks",
+              "Shirt",
+              "Pants",
+              "Underwear"
+            ]
+          }
+        ],
+        "round": 1,
+        "gameOver": false,
+        "washroom_first_time": false,
+        "drunk": 0,
+        "glory_event": false,
+        "day6_kitchen": false,
+        "day6_bathroom": false,
+        "day6_drink": false,
+        "day6_forest": false,
+        "day6_job": false,
+        "day6_class": false,
+        "day6_p": false,
+        "day7_kitchen": false,
+        "day7_living": false,
+        "day7_shower": false,
+        "day7_gwen": false,
+        "day7_shop": false,
+        "day7_virgin": false,
+        "day8_shop": false,
+        "day8_shower": false,
+        "day9_principal": false,
+        "day9_toilet": false,
+        "day10_class": false,
+        "day11_drop": false,
+        "cute_photo": false,
+        "bsd11": false,
+        "pd11": false,
+        "cfd11": false,
+        "scored": false,
+        "bsd14": false,
+        "pd14": false,
+        "blacksmith": false,
+        "lake": false,
+        "guards": false,
+        "serve": 0,
+        "m01_revenge": false,
+        "m01_princess_black": false,
+        "m01_thief": false,
+        "m01_shift": 0,
+        "princess_pro": false,
+        "magistrate_m01": false,
+        "kelly_arrested": false,
+        "day4": 0,
+        "day4_cafeteria": false,
+        "day4_toilet": false
+      },
+      "turns": 30,
+      "canMarshal": true,
+      "saveCaps": {
+        "stateMarshal": true,
+        "engineShow": true,
+        "serialize": true,
+        "slots": true,
+        "saveNamespace": "SugarCube.Save"
+      },
+      "body_text": "\nEmily stepped into the English classroom, the familiar scent of chalk and old books filling the air. The soft murmur of students chatting died down as the teacher entered from the other side.\n\nShe slid into her seat near the window, right beside Sarah, who greeted her with a mischievous grin.\n\n\"Welcome back, world traveler,\" Sarah whispered, nudging her playfully. \"So? You ready to stir up some chaos again or what?\"\n\n\"What do you mean?\" Emily raised an eyebrow.\n\n\"I dare you...\" </s> Sarah leaned in. \"Stick your leg out in the aisle. When the teacher walks by, she’ll trip.Let's see what panties is she wearing today\"\n\nEmily blinked, unsure if Sarah was joking—or serious. The teacher was already beginning to pace around with her lesson book in hand.\n\n\nStay focused and study\n\n\nDo what Sarah suggested\n\n\n",
+      "body_html": "<br>Emily stepped into the English classroom, the familiar scent of chalk and old books filling the air. The soft murmur of students chatting died down as the teacher entered from the other side.<br><br>She slid into her seat near the window, right beside Sarah, who greeted her with a mischievous grin.<br><br><sarah> \"Welcome back, world traveler,\" </sarah> Sarah whispered, nudging her playfully. <sarah> \"So? You ready to stir up some chaos again or what?\" </sarah><br><br><e> \"What do you mean?\" </e> Emily raised an eyebrow.<br><br><sarah> \"I dare you...\" &lt;/s&gt; Sarah leaned in. <sarah> \"Stick your leg out in the aisle. When the teacher walks by, she’ll trip.Let's see what panties is she wearing today\" </sarah><br><br>Emily blinked, unsure if Sarah was joking—or serious. The teacher was already beginning to pace around with her lesson book in hand.<br><br><a data-passage=\"Stay focused and study\" class=\"link-internal\" role=\"link\" tabindex=\"0\">Stay focused and study</a><br><a data-passage=\"Do what Sarah suggested\" class=\"link-internal\" role=\"link\" tabindex=\"0\">Do what Sarah suggested</a><br><br></sarah>",
+      "modal_text": null
+    }
+  },
+  "note": "CLD4: Sarah dare - trip teacher or study",
+  "taken_at": 1776377026690,
+  "passage": "CLD4",
+  "state_hash": "40c10bd608314b74"
+}

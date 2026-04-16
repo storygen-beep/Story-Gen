@@ -1,0 +1,1684 @@
+{
+  "generated_at": "2026-04-16T22:04:49.957Z",
+  "variables": {
+    "corruption": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 3,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "number_stats": {
+        "count": 81,
+        "unique_count": 4,
+        "min": 1,
+        "max": 4,
+        "first": 1,
+        "last": 4,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": false
+      }
+    },
+    "david_relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "number_stats": {
+        "count": 81,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "int": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "number_stats": {
+        "count": 81,
+        "unique_count": 1,
+        "min": 10,
+        "max": 10,
+        "first": 10,
+        "last": 10,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "blowjob": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "number_stats": {
+        "count": 81,
+        "unique_count": 2,
+        "min": 2,
+        "max": 3,
+        "first": 2,
+        "last": 3,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "rep": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "number_stats": {
+        "count": 81,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "jack": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "number_stats": {
+        "count": 81,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "havesex": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "day5": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "number_stats": {
+        "count": 81,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "day5_bath": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "gameStarted": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "players": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34
+    },
+    "round": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "number_stats": {
+        "count": 81,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "gameOver": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "washroom_first_time": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "drunk": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "number_stats": {
+        "count": 81,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "glory_event": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "day6_kitchen": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "day6_bathroom": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "day6_drink": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "day6_forest": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "day6_job": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "day6_class": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "day6_p": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "day7_kitchen": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "day7_living": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "day7_shower": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "day7_gwen": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "day7_shop": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "day7_virgin": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "day8_shop": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "day8_shower": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "day9_principal": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "day9_toilet": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "day10_class": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "day11_drop": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "cute_photo": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "bsd11": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "pd11": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "cfd11": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "scored": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "bsd14": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "pd14": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "blacksmith": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "lake": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "guards": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "serve": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "number_stats": {
+        "count": 81,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "m01_revenge": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "m01_princess_black": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "m01_thief": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "m01_shift": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "number_stats": {
+        "count": 81,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "princess_pro": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "magistrate_m01": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "kelly_arrested": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776376688310,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 34,
+      "bool_values": [
+        false
+      ]
+    },
+    "day4": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776376963643,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 11,
+      "number_stats": {
+        "count": 30,
+        "unique_count": 2,
+        "min": 0,
+        "max": 1,
+        "first": 0,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "day4_cafeteria": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 2,
+      "first_ts": 1776376963643,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 11,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "day4_toilet": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776376963643,
+      "last_ts": 1776377058830,
+      "passages_seen_on_count": 11,
+      "bool_values": [
+        false,
+        true
+      ]
+    }
+  },
+  "prefix_clusters": {
+    "day": [
+      "day5",
+      "day5_bath",
+      "day6_kitchen",
+      "day6_bathroom",
+      "day6_drink",
+      "day6_forest",
+      "day6_job",
+      "day6_class",
+      "day6_p",
+      "day7_kitchen",
+      "day7_living",
+      "day7_shower",
+      "day7_gwen",
+      "day7_shop",
+      "day7_virgin",
+      "day8_shop",
+      "day8_shower",
+      "day9_principal",
+      "day9_toilet",
+      "day10_class",
+      "day11_drop",
+      "day4",
+      "day4_cafeteria",
+      "day4_toilet"
+    ],
+    "bsd": [
+      "bsd11",
+      "bsd14"
+    ],
+    "pd": [
+      "pd11",
+      "pd14"
+    ]
+  },
+  "co_change": {},
+  "passages": {
+    "Start": {
+      "first_ts": 1776376688310,
+      "visit_count": 6
+    },
+    "MainMenu": {
+      "first_ts": 1776376742413,
+      "visit_count": 2
+    },
+    "Intro": {
+      "first_ts": 1776376781865,
+      "visit_count": 3
+    },
+    "Untitled Passage": {
+      "first_ts": 1776376796271,
+      "visit_count": 2
+    },
+    "RD1": {
+      "first_ts": 1776376809568,
+      "visit_count": 2
+    },
+    "ND1": {
+      "first_ts": 1776376820518,
+      "visit_count": 2
+    },
+    "N2D1": {
+      "first_ts": 1776376825964,
+      "visit_count": 2
+    },
+    "HD1": {
+      "first_ts": 1776376838389,
+      "visit_count": 2
+    },
+    "SD1": {
+      "first_ts": 1776376848349,
+      "visit_count": 2
+    },
+    "SD2": {
+      "first_ts": 1776376859281,
+      "visit_count": 2
+    },
+    "About her mother": {
+      "first_ts": 1776376865298,
+      "visit_count": 2
+    },
+    "N2D2": {
+      "first_ts": 1776376873183,
+      "visit_count": 2
+    },
+    "Diary": {
+      "first_ts": 1776376879437,
+      "visit_count": 2
+    },
+    "N3D2": {
+      "first_ts": 1776376891998,
+      "visit_count": 2
+    },
+    "DAY 3": {
+      "first_ts": 1776376897719,
+      "visit_count": 2
+    },
+    "CD3": {
+      "first_ts": 1776376903586,
+      "visit_count": 2
+    },
+    "N4D2": {
+      "first_ts": 1776376909666,
+      "visit_count": 2
+    },
+    "N5D2": {
+      "first_ts": 1776376915205,
+      "visit_count": 2
+    },
+    "Principal room": {
+      "first_ts": 1776376922381,
+      "visit_count": 2
+    },
+    "N6D3": {
+      "first_ts": 1776376928295,
+      "visit_count": 2
+    },
+    "N7D3": {
+      "first_ts": 1776376934319,
+      "visit_count": 2
+    },
+    "Have sex with him": {
+      "first_ts": 1776376943365,
+      "visit_count": 2
+    },
+    "HD3": {
+      "first_ts": 1776376956541,
+      "visit_count": 2
+    },
+    "DAY 4": {
+      "first_ts": 1776376963643,
+      "visit_count": 2
+    },
+    "CD4": {
+      "first_ts": 1776376972734,
+      "visit_count": 2
+    },
+    "C2D4": {
+      "first_ts": 1776376978491,
+      "visit_count": 2
+    },
+    "C3D4": {
+      "first_ts": 1776376984523,
+      "visit_count": 7
+    },
+    "CFD4": {
+      "first_ts": 1776376992984,
+      "visit_count": 2
+    },
+    "TD4": {
+      "first_ts": 1776377002263,
+      "visit_count": 3
+    },
+    "OD4": {
+      "first_ts": 1776377010796,
+      "visit_count": 2
+    },
+    "CLD4": {
+      "first_ts": 1776377020022,
+      "visit_count": 2
+    },
+    "Do what Sarah suggested": {
+      "first_ts": 1776377027215,
+      "visit_count": 2
+    },
+    "N2D4": {
+      "first_ts": 1776377044791,
+      "visit_count": 2
+    },
+    "PeekScene": {
+      "first_ts": 1776377051827,
+      "visit_count": 4
+    }
+  },
+  "choices": {
+    "total": 34,
+    "by_classification": {
+      "branch": 34
+    },
+    "price_observations": [],
+    "recent": [
+      {
+        "ts": 1776376796351,
+        "passage": "Intro",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Start",
+          "No I am not"
+        ],
+        "picked": "Start",
+        "prices": null,
+        "at_state_hash": "8999dcf0e27a75b7"
+      },
+      {
+        "ts": 1776376809714,
+        "passage": "Untitled Passage",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Room"
+        ],
+        "picked": "Room",
+        "prices": null,
+        "at_state_hash": "58d14e1a568647bb"
+      },
+      {
+        "ts": 1776376820630,
+        "passage": "RD1",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Next"
+        ],
+        "picked": "Next",
+        "prices": null,
+        "at_state_hash": "0976e1487b8a1c7f"
+      },
+      {
+        "ts": 1776376826102,
+        "passage": "ND1",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Next"
+        ],
+        "picked": "Next",
+        "prices": null,
+        "at_state_hash": "d554647dbdcc0cb7"
+      },
+      {
+        "ts": 1776376838477,
+        "passage": "N2D1",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Home"
+        ],
+        "picked": "Home",
+        "prices": null,
+        "at_state_hash": "2e9ddda7df2d5a13"
+      },
+      {
+        "ts": 1776376848474,
+        "passage": "HD1",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Sleep"
+        ],
+        "picked": "Sleep",
+        "prices": null,
+        "at_state_hash": "eaaefb15304118b2"
+      },
+      {
+        "ts": 1776376859419,
+        "passage": "SD1",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Shower"
+        ],
+        "picked": "Shower",
+        "prices": null,
+        "at_state_hash": "63c84c7bc6ea9488"
+      },
+      {
+        "ts": 1776376865386,
+        "passage": "SD2",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "About her mother"
+        ],
+        "picked": "About her mother",
+        "prices": null,
+        "at_state_hash": "9856d2e248181304"
+      },
+      {
+        "ts": 1776376873332,
+        "passage": "About her mother",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Next"
+        ],
+        "picked": "Next",
+        "prices": null,
+        "at_state_hash": "5bcdf57ccc759eec"
+      },
+      {
+        "ts": 1776376879520,
+        "passage": "N2D2",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Diary"
+        ],
+        "picked": "Diary",
+        "prices": null,
+        "at_state_hash": "a27a128fad2fe67c"
+      },
+      {
+        "ts": 1776376892091,
+        "passage": "Diary",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Next"
+        ],
+        "picked": "Next",
+        "prices": null,
+        "at_state_hash": "0a061d8b5da1fe0c"
+      },
+      {
+        "ts": 1776376897844,
+        "passage": "N3D2",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Sleep"
+        ],
+        "picked": "Sleep",
+        "prices": null,
+        "at_state_hash": "2d2efb478b7922cf"
+      },
+      {
+        "ts": 1776376903714,
+        "passage": "DAY 3",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "College"
+        ],
+        "picked": "College",
+        "prices": null,
+        "at_state_hash": "b56f8ea12e5a6cb4"
+      },
+      {
+        "ts": 1776376909755,
+        "passage": "CD3",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Next"
+        ],
+        "picked": "Next",
+        "prices": null,
+        "at_state_hash": "f09e1ed45e49eebd"
+      },
+      {
+        "ts": 1776376915341,
+        "passage": "N4D2",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Next"
+        ],
+        "picked": "Next",
+        "prices": null,
+        "at_state_hash": "261c22fa8d8f783b"
+      },
+      {
+        "ts": 1776376922511,
+        "passage": "N5D2",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Principal room"
+        ],
+        "picked": "Principal room",
+        "prices": null,
+        "at_state_hash": "f70420e8fd7d0ea5"
+      },
+      {
+        "ts": 1776376928414,
+        "passage": "Principal room",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Next"
+        ],
+        "picked": "Next",
+        "prices": null,
+        "at_state_hash": "72db1fc448b6f371"
+      },
+      {
+        "ts": 1776376934427,
+        "passage": "N6D3",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Next"
+        ],
+        "picked": "Next",
+        "prices": null,
+        "at_state_hash": "77f45a626197d51e"
+      },
+      {
+        "ts": 1776376943477,
+        "passage": "N7D3",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Have sex with him",
+          "Preserve your virgintiy for future"
+        ],
+        "picked": "Have sex with him",
+        "prices": null,
+        "at_state_hash": "cc8003a287308ef9"
+      },
+      {
+        "ts": 1776376956636,
+        "passage": "Have sex with him",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Home"
+        ],
+        "picked": "Home",
+        "prices": null,
+        "at_state_hash": "b7a075761148b393"
+      },
+      {
+        "ts": 1776376963767,
+        "passage": "HD3",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Sleep"
+        ],
+        "picked": "Sleep",
+        "prices": null,
+        "at_state_hash": "3e97e528b07ef443"
+      },
+      {
+        "ts": 1776376972826,
+        "passage": "DAY 4",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "College"
+        ],
+        "picked": "College",
+        "prices": null,
+        "at_state_hash": "8291614812cb4328"
+      },
+      {
+        "ts": 1776376978578,
+        "passage": "CD4",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Class"
+        ],
+        "picked": "Class",
+        "prices": null,
+        "at_state_hash": "fb1cf9eb812f38d3"
+      },
+      {
+        "ts": 1776376984601,
+        "passage": "C2D4",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Next"
+        ],
+        "picked": "Next",
+        "prices": null,
+        "at_state_hash": "cd60c7de0556586b"
+      },
+      {
+        "ts": 1776376993061,
+        "passage": "C3D4",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Classroom",
+          "Cafeteria",
+          "Toilet",
+          "Outside"
+        ],
+        "picked": "Cafeteria",
+        "prices": null,
+        "at_state_hash": "036085866830c30f"
+      },
+      {
+        "ts": 1776377002410,
+        "passage": "C3D4",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Classroom",
+          "Cafeteria",
+          "Toilet",
+          "Outside"
+        ],
+        "picked": "Toilet",
+        "prices": null,
+        "at_state_hash": "036085866830c30f"
+      },
+      {
+        "ts": 1776377010864,
+        "passage": "C3D4",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Classroom",
+          "Cafeteria",
+          "Toilet",
+          "Outside"
+        ],
+        "picked": "Outside",
+        "prices": null,
+        "at_state_hash": "036085866830c30f"
+      },
+      {
+        "ts": 1776377020111,
+        "passage": "C3D4",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Classroom",
+          "Cafeteria",
+          "Toilet",
+          "Outside"
+        ],
+        "picked": "Classroom",
+        "prices": null,
+        "at_state_hash": "036085866830c30f"
+      },
+      {
+        "ts": 1776377027327,
+        "passage": "CLD4",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Stay focused and study",
+          "Do what Sarah suggested"
+        ],
+        "picked": "Do what Sarah suggested",
+        "prices": null,
+        "at_state_hash": "40c10bd608314b74"
+      },
+      {
+        "ts": 1776377035819,
+        "passage": "Do what Sarah suggested",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Leave"
+        ],
+        "picked": "Leave",
+        "prices": null,
+        "at_state_hash": "bc19a98da0563bc2"
+      },
+      {
+        "ts": 1776377044125,
+        "passage": "C3D4",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Classroom",
+          "Cafeteria",
+          "Toilet",
+          "Outside"
+        ],
+        "picked": "Toilet",
+        "prices": null,
+        "at_state_hash": "bee75745cf62b969"
+      },
+      {
+        "ts": 1776377044869,
+        "passage": "TD4",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Next"
+        ],
+        "picked": "Next",
+        "prices": null,
+        "at_state_hash": "326a295dd09d7e80"
+      },
+      {
+        "ts": 1776377051968,
+        "passage": "N2D4",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Peek inside",
+          "Ignore and leave"
+        ],
+        "picked": "Peek inside",
+        "prices": null,
+        "at_state_hash": "7fe8f3c613ffdd26"
+      },
+      {
+        "ts": 1776377058555,
+        "passage": "PeekScene",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Patreon",
+          "Discord",
+          "Feedback form",
+          "Saves",
+          "Restart",
+          "Next"
+        ],
+        "picked": "Next",
+        "prices": null,
+        "at_state_hash": "236dfd5eb0d37ba6"
+      }
+    ]
+  },
+  "mutations": [
+    {
+      "ts": 1776376928295,
+      "passage": "N6D3",
+      "state_hash": "77f45a626197d51e",
+      "var": "blowjob",
+      "before": 2,
+      "after": 3
+    },
+    {
+      "ts": 1776376943365,
+      "passage": "Have sex with him",
+      "state_hash": "b7a075761148b393",
+      "var": "corruption",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "ts": 1776376943365,
+      "passage": "Have sex with him",
+      "state_hash": "b7a075761148b393",
+      "var": "havesex",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1776376992984,
+      "passage": "CFD4",
+      "state_hash": "5e5f0bd5550d1e72",
+      "var": "day4_cafeteria",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1776377001684,
+      "passage": "C3D4",
+      "state_hash": "036085866830c30f",
+      "var": "day4_cafeteria",
+      "before": true,
+      "after": false
+    },
+    {
+      "ts": 1776377027215,
+      "passage": "Do what Sarah suggested",
+      "state_hash": "bc19a98da0563bc2",
+      "var": "corruption",
+      "before": 2,
+      "after": 3
+    },
+    {
+      "ts": 1776377027215,
+      "passage": "Do what Sarah suggested",
+      "state_hash": "bc19a98da0563bc2",
+      "var": "day4",
+      "before": 0,
+      "after": 1
+    },
+    {
+      "ts": 1776377044791,
+      "passage": "N2D4",
+      "state_hash": "7fe8f3c613ffdd26",
+      "var": "day4_toilet",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1776377051827,
+      "passage": "PeekScene",
+      "state_hash": "236dfd5eb0d37ba6",
+      "var": "corruption",
+      "before": 3,
+      "after": 4
+    }
+  ]
+}

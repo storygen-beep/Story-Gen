@@ -1,0 +1,23 @@
+{
+  "session_id": 1,
+  "start_ts": "2026-04-16T21:58:08.309Z",
+  "start_epoch_ms": 1776376688309,
+  "end_ts": "2026-04-16T22:04:49.955Z",
+  "duration_s": 402,
+  "clicks": 34,
+  "choices_explored": 34,
+  "arrow_advances": 0,
+  "unique_states_seen": 36,
+  "new_unique_states": 36,
+  "frontier_size_start": 0,
+  "frontier_size_end": 1,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "Engine=SugarCube, Chapter 2.2. Variables reveal: stats (corruption=1, int=10, blowjob=2, rep, drunk, jack, serve); per-day flags day5..day11 with scene subkeys (_bath, _kitchen, _shop, _forest, _job, _class); fantasy subplot flags (m01_revenge, princess_pro, blacksmith, lake, guards, magistrate_m01, kelly_arrested); players=[array len=4] + round/gameOver — suggests a drinking-game minigame.",
+    "D2 Diary: Mom (Daisy) received missions from a man named Jayden; sent to Portugal to find 'treasure of Enisia, queen of Prijak Dynasty'. Next diary page torn out. Emily resolves to continue the search. Medieval subplot vars (m01_*, princess, magistrate) likely represent Daisy's flashback missions OR a medieval RPG minigame Emily enters. This explains bsd11/pd11/cfd11/bsd14/pd14 variable triplets — probably different treasure-mission branches.",
+    "Structure: D1 party→interrupted sex with David; D2 finds mom Daisy's diary (Portugal treasure of Enisia/Prijak Dynasty, from mentor Jayden, pages torn out); D3 seduces principal for Portugal transfer (virgin choice: havesex sets true→principal agrees vs preserve); D4 farewell day with Sarah/Christine, location hub (Classroom/Cafeteria/Toilet/Outside); Outside=dead-end, Cafeteria=duplicate scene, Classroom=prank branch (trip teacher - dare), Toilet=farewell-poster→PeekScene (Ella cheating)→James letter dilemma (tell truth / stay silent). Hub returns after each scene.",
+    "Variable ecology: numeric stats seeded to non-zero (corruption=1, int=10, blowjob=2) — Ch2.2 assumes carry-over from Ch1. Day5-11 keys + _bath/_shop/_shower/_forest/_job/_class — per-day sandbox scene flags. m01_* + princess_pro + magistrate + kelly_arrested + blacksmith/lake/guards = medieval/fantasy subplot (likely Portugal arc or Mom's flashbacks — Prijak Dynasty maps to this). players[4]+round+gameOver+drunk = drinking/party minigame (day5_bath evokes Truth or Dare in tub). david_relation scalar. bsd/pd/cfd-d11/d14 = distinct narrative branches per given day. No explicit stat gate seen so far — choices toggle bool flags that probably unlock late content.",
+    "Engine: SugarCube 2.x, 430 passages total (read from <tw-passagedata> DOM nodes). Passage naming: CodeDDay (RD1=Room Day1, ND1=Narration1 Day1, HD1=Home Day1, SD1=Sleep Day1, CD3=College Day3, CFD4=Cafeteria Day4, CLD4=Classroom Day4, TD4=Toilet Day4, OD4=Outside Day4, PeekScene=named scene). Principal_room is a location-named passage rather than PdN convention. Portal=mopoga iframe; requires ignoreHTTPSErrors (cert authority invalid on Playwright default)."
+  ]
+}
