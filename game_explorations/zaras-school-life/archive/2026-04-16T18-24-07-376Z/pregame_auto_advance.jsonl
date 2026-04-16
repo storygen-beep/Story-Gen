@@ -1,4 +1,0 @@
-{"ts":"2026-04-16T15:50:54.269Z","step":0,"passage":"Welcome Page","action":"clicked_forward","text":"Start your journey","tier":1}
-{"ts":"2026-04-16T15:50:54.269Z","step":1,"passage":"intro","action":"clicked_forward","text":"Continue","tier":4}
-{"ts":"2026-04-16T15:50:54.269Z","step":2,"passage":"intro end","action":"clicked_forward","text":"Peak into her dreams","tier":5}
-{"ts":"2026-04-16T15:50:54.269Z","step":3,"passage":"dream1","action":"terminated","reason":"no_forward_pattern_match"}

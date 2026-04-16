@@ -69,6 +69,10 @@ function gameDirs(slug) {
     initialState: path.join(root, 'initial_state.json'),
     engineConfig: path.join(root, 'engine_config.json'),
     sidebarSnapshots: path.join(root, 'sidebar_snapshots.jsonl'),
+    // M6.1 — navigation-intelligence data foundation (built at daemon
+    // startup from passage_catalog, not at finalize).
+    staticGraph: path.join(root, 'static_graph.json'),
+    variableIndex: path.join(root, 'variable_index.json'),
   };
 }
 
@@ -582,6 +586,35 @@ async function runDaemon(args) {
     }
   } catch (e) { dlog('passage_catalog err: ' + e.message); }
 
+  // --- M6.1: Static navigation graph + variable setter index ---
+  // Both derive from the passage catalog we just wrote. Building here —
+  // rather than at finalize inside report.js — makes the navigation-
+  // intelligence data available from turn 1, so the M6.2 query endpoints
+  // (path / requirements / reachable / setters) can operate on it live.
+  // We re-read the catalog from disk rather than hoisting `cat` out of
+  // its try scope — one extra read of a file we just wrote is cheap and
+  // keeps the passage_catalog block untouched.
+  try {
+    const staticGraphMod = require(path.join(SKILL_DIR, 'scripts/lib/static_graph'));
+    const variableIndexMod = require(path.join(SKILL_DIR, 'scripts/lib/variable_index'));
+    let catForGraph = null;
+    try { catForGraph = JSON.parse(fs.readFileSync(dirs.passageCatalog, 'utf8')); }
+    catch (e) { dlog('static_graph: could not re-read passage_catalog: ' + e.message); }
+    if (catForGraph) {
+      const sg = staticGraphMod.buildStaticGraph(catForGraph);
+      fs.writeFileSync(dirs.staticGraph, JSON.stringify(sg, null, 2));
+      dlog(`static_graph: ${sg.total_edges} edges over ${sg.total_passages} passages`);
+
+      let initialForVars = null;
+      try { initialForVars = JSON.parse(fs.readFileSync(dirs.initialState, 'utf8')); }
+      catch (e) { /* tolerate missing initial_state */ }
+
+      const vi = variableIndexMod.buildVariableIndex(catForGraph, sg, initialForVars);
+      fs.writeFileSync(dirs.variableIndex, JSON.stringify(vi, null, 2));
+      dlog(`variable_index: ${vi.total_variables} vars, coverage=${vi.indexing_coverage}`);
+    }
+  } catch (e) { dlog('static_graph/variable_index err: ' + e.message); }
+
   // --- M3: Engine configuration dump (Config, Setting, version, State-shape, save-caps, Story-ifid) ---
   // One-shot, pre-Phase-0a. Captures the engine's *declared* configuration —
   // what this game boots with, before any player action. Separate from the
@@ -946,6 +979,10 @@ async function runDaemon(args) {
       engine_config: dirs.engineConfig,
       // M4 sidebar snapshots
       sidebar_snapshots: dirs.sidebarSnapshots,
+      // M6.1 navigation-intelligence data foundation (written at startup,
+      // read by report.js at finalize — not re-derived).
+      static_graph: dirs.staticGraph,
+      variable_index: dirs.variableIndex,
     };
 
     if (writeReport) {
@@ -967,8 +1004,8 @@ async function runDaemon(args) {
           items: path.join(dirs.root, 'items.json'),
           body_changes: path.join(dirs.root, 'body_changes.json'),
           scene_catalog: path.join(dirs.root, 'scene_catalog.json'),
-          // M2 graphs
-          static_graph: path.join(dirs.root, 'static_graph.json'),
+          // M2 graphs (choice_graph is written here; static_graph is in the
+          // pre-report artifact block — written at startup per M6.1).
           choice_graph: path.join(dirs.root, 'choice_graph.json'),
         });
       } catch (e) { dlog('report err: ' + e.message); }
