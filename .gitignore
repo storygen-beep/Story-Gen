@@ -143,3 +143,9 @@ logs/
 .aider.tags.cache.*/
 .claude/scheduled_tasks.lock
 .claude/settings.local.json
+
+# twine-game-explorer: browser profiles, saves, screenshots — binary/transient
+game_explorations/*/manual/profile/
+game_explorations/*/profile/
+game_explorations/*/screenshots/live/
+game_explorations/*/archive/
