@@ -151,3 +151,12 @@ logs/
 # ============================================================
 !.claude/skills/
 !.claude/skills/**
+
+# ============================================================
+# twine-game-explorer: browser profiles, saves, screenshots
+# (binary/transient runtime output — not source)
+# ============================================================
+game_explorations/*/manual/profile/
+game_explorations/*/profile/
+game_explorations/*/screenshots/live/
+game_explorations/*/archive/
