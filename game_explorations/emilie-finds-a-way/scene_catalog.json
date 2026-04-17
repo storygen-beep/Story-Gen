@@ -1,706 +1,678 @@
 {
   "Start": {
-    "first_ts": 1776424771220,
-    "visit_count": 4
-  },
-  "Chapter2Dream1": {
-    "first_ts": 1776424803459,
-    "visit_count": 2
-  },
-  "Chapter2db": {
-    "first_ts": 1776424831756,
-    "visit_count": 2
-  },
-  "Chapter2.4": {
-    "first_ts": 1776424842192,
-    "visit_count": 2
-  },
-  "Chapter2.5": {
-    "first_ts": 1776424853443,
-    "visit_count": 1
-  },
-  "Chapter2.51": {
-    "first_ts": 1776424854980,
-    "visit_count": 2
-  },
-  "Chapter2.52": {
-    "first_ts": 1776424863969,
-    "visit_count": 4
-  },
-  "Chapter2.6": {
-    "first_ts": 1776424884868,
-    "visit_count": 4
-  },
-  "Chapter2.61": {
-    "first_ts": 1776424907418,
-    "visit_count": 2
-  },
-  "Chapter2.62": {
-    "first_ts": 1776424917048,
-    "visit_count": 2
-  },
-  "Chapter2.63": {
-    "first_ts": 1776424926350,
-    "visit_count": 5
-  },
-  "Chapter2.65": {
-    "first_ts": 1776424951227,
-    "visit_count": 4
-  },
-  "Chapter2.7": {
-    "first_ts": 1776424970365,
-    "visit_count": 6
-  },
-  "Chapter2.71": {
-    "first_ts": 1776425001238,
-    "visit_count": 2
-  },
-  "Chapter2.72": {
-    "first_ts": 1776425010731,
-    "visit_count": 2
-  },
-  "Chapter2.73": {
-    "first_ts": 1776425020104,
-    "visit_count": 2
-  },
-  "Chapter2.8": {
-    "first_ts": 1776425029997,
+    "first_ts": 1776427398205,
     "visit_count": 3
-  },
-  "Chapter2.84": {
-    "first_ts": 1776425041933,
-    "visit_count": 2
-  },
-  "Chapter2.85": {
-    "first_ts": 1776425050885,
-    "visit_count": 2
-  },
-  "Chapter2.9": {
-    "first_ts": 1776425059863,
-    "visit_count": 2
-  },
-  "Chapter2.91": {
-    "first_ts": 1776425068642,
-    "visit_count": 9
-  },
-  "3rd Chapter": {
-    "first_ts": 1776425109858,
-    "visit_count": 2
-  },
-  "Chapter3": {
-    "first_ts": 1776425119690,
-    "visit_count": 2
-  },
-  "Chapter3.1": {
-    "first_ts": 1776425130743,
-    "visit_count": 2
-  },
-  "Chapter3.2": {
-    "first_ts": 1776425141120,
-    "visit_count": 2
-  },
-  "Chapter3.3": {
-    "first_ts": 1776425150710,
-    "visit_count": 2
-  },
-  "Chapter3.4": {
-    "first_ts": 1776425160583,
-    "visit_count": 2
-  },
-  "Chapter3.5": {
-    "first_ts": 1776425170532,
-    "visit_count": 4
-  },
-  "Chapter3.55": {
-    "first_ts": 1776425190142,
-    "visit_count": 2
-  },
-  "Chapter3.6": {
-    "first_ts": 1776425199346,
-    "visit_count": 2
-  },
-  "Chapter3.65": {
-    "first_ts": 1776425208325,
-    "visit_count": 4
-  },
-  "Chapter3.7": {
-    "first_ts": 1776425228057,
-    "visit_count": 2
-  },
-  "Chapter3.71": {
-    "first_ts": 1776425237354,
-    "visit_count": 2
-  },
-  "Chapter3.72": {
-    "first_ts": 1776425246192,
-    "visit_count": 2
-  },
-  "Chapter3.73": {
-    "first_ts": 1776425255652,
-    "visit_count": 2
-  },
-  "Chapter3.74": {
-    "first_ts": 1776425265453,
-    "visit_count": 2
-  },
-  "Chapter3.75": {
-    "first_ts": 1776425274484,
-    "visit_count": 2
-  },
-  "Chapter3.8": {
-    "first_ts": 1776425285006,
-    "visit_count": 4
-  },
-  "Sport": {
-    "first_ts": 1776425294862,
-    "visit_count": 11
-  },
-  "Gym": {
-    "first_ts": 1776425306241,
-    "visit_count": 2
-  },
-  "Chapter3.84": {
-    "first_ts": 1776425336179,
-    "visit_count": 2
-  },
-  "Chapter3.85": {
-    "first_ts": 1776425346430,
-    "visit_count": 2
-  },
-  "Chapter3.87": {
-    "first_ts": 1776425355792,
-    "visit_count": 2
-  },
-  "Chapter3.86": {
-    "first_ts": 1776425365721,
-    "visit_count": 2
-  },
-  "Chapter3.9": {
-    "first_ts": 1776425375250,
-    "visit_count": 2
-  },
-  "Chapter3.91": {
-    "first_ts": 1776425384797,
-    "visit_count": 2
-  },
-  "Chapter3.92": {
-    "first_ts": 1776425393932,
-    "visit_count": 2
-  },
-  "Chapter3.94": {
-    "first_ts": 1776425403192,
-    "visit_count": 2
-  },
-  "Chapter3.96": {
-    "first_ts": 1776425412854,
-    "visit_count": 2
-  },
-  "Chapter3.961": {
-    "first_ts": 1776425423359,
-    "visit_count": 2
-  },
-  "Chapter3.98": {
-    "first_ts": 1776425432921,
-    "visit_count": 2
-  },
-  "4th Chapter": {
-    "first_ts": 1776425443344,
-    "visit_count": 2
-  },
-  "Chapter4.1": {
-    "first_ts": 1776425453619,
-    "visit_count": 2
-  },
-  "Chapter4.15": {
-    "first_ts": 1776425465075,
-    "visit_count": 2
-  },
-  "Chapter4.16": {
-    "first_ts": 1776425474267,
-    "visit_count": 2
-  },
-  "Chapter4.2": {
-    "first_ts": 1776425483794,
-    "visit_count": 2
-  },
-  "Chapter4.21": {
-    "first_ts": 1776425493447,
-    "visit_count": 7
-  },
-  "Chapter4.22": {
-    "first_ts": 1776425505955,
-    "visit_count": 6
-  },
-  "Chapter4.24": {
-    "first_ts": 1776425553555,
-    "visit_count": 3
-  },
-  "Chapter4.23": {
-    "first_ts": 1776425570841,
-    "visit_count": 3
-  },
-  "Chapter4.26": {
-    "first_ts": 1776425596458,
-    "visit_count": 3
-  },
-  "Chapter4.27": {
-    "first_ts": 1776425613222,
-    "visit_count": 2
-  },
-  "Chapter4.28": {
-    "first_ts": 1776425624830,
-    "visit_count": 6
-  },
-  "Chapter4.29": {
-    "first_ts": 1776425654308,
-    "visit_count": 2
-  },
-  "Chapter4.3": {
-    "first_ts": 1776425663550,
-    "visit_count": 4
-  },
-  "Chapter4.34": {
-    "first_ts": 1776425682040,
-    "visit_count": 2
-  },
-  "Chapter4.36": {
-    "first_ts": 1776425692035,
-    "visit_count": 2
-  },
-  "Chapter4.41": {
-    "first_ts": 1776425701940,
-    "visit_count": 2
-  },
-  "Chapter4.42": {
-    "first_ts": 1776425711592,
-    "visit_count": 4
-  },
-  "Chapter4.46": {
-    "first_ts": 1776425730989,
-    "visit_count": 4
-  },
-  "Chapter4.5": {
-    "first_ts": 1776425749119,
-    "visit_count": 2
-  },
-  "Chapter4.55": {
-    "first_ts": 1776425759402,
-    "visit_count": 2
-  },
-  "Chapter4.56": {
-    "first_ts": 1776425768910,
-    "visit_count": 2
-  },
-  "Chapter4.65": {
-    "first_ts": 1776425779314,
-    "visit_count": 2
-  },
-  "Chapter4.7": {
-    "first_ts": 1776425788951,
-    "visit_count": 2
-  },
-  "Chapter4.72": {
-    "first_ts": 1776425800768,
-    "visit_count": 2
-  },
-  "Chapter4.75": {
-    "first_ts": 1776425810322,
-    "visit_count": 2
-  },
-  "Chapter4.76": {
-    "first_ts": 1776425820832,
-    "visit_count": 2
-  },
-  "Chapter4.77": {
-    "first_ts": 1776425830208,
-    "visit_count": 2
-  },
-  "Chapter4.8": {
-    "first_ts": 1776425840066,
-    "visit_count": 2
-  },
-  "Chapter4.9": {
-    "first_ts": 1776425849939,
-    "visit_count": 2
-  },
-  "5th Chapter": {
-    "first_ts": 1776425859258,
-    "visit_count": 2
-  },
-  "Chapter5.1": {
-    "first_ts": 1776425868511,
-    "visit_count": 2
-  },
-  "Chapter5.13": {
-    "first_ts": 1776425878202,
-    "visit_count": 2
-  },
-  "Chapter5.17": {
-    "first_ts": 1776425886907,
-    "visit_count": 2
-  },
-  "Chapter5.18": {
-    "first_ts": 1776425895781,
-    "visit_count": 2
-  },
-  "Chapter5.19": {
-    "first_ts": 1776425904938,
-    "visit_count": 2
-  },
-  "Chapter5.21": {
-    "first_ts": 1776425918909,
-    "visit_count": 4
-  },
-  "Chapter5.22": {
-    "first_ts": 1776425937665,
-    "visit_count": 2
-  },
-  "Chapter5.23": {
-    "first_ts": 1776425946981,
-    "visit_count": 5
-  },
-  "Chapter5.24": {
-    "first_ts": 1776425966193,
-    "visit_count": 2
-  },
-  "Chapter5.26": {
-    "first_ts": 1776425989351,
-    "visit_count": 2
-  },
-  "Chapter5.27": {
-    "first_ts": 1776426000524,
-    "visit_count": 2
-  },
-  "Chapter5.3": {
-    "first_ts": 1776426009776,
-    "visit_count": 2
-  },
-  "Chapter5.31": {
-    "first_ts": 1776426018562,
-    "visit_count": 8
-  },
-  "Chilling": {
-    "first_ts": 1776426027389,
-    "visit_count": 6
-  },
-  "Tutoring": {
-    "first_ts": 1776426049496,
-    "visit_count": 6
-  },
-  "Tutoring1": {
-    "first_ts": 1776426058734,
-    "visit_count": 2
-  },
-  "Chapter5.32": {
-    "first_ts": 1776426087523,
-    "visit_count": 6
-  },
-  "Running": {
-    "first_ts": 1776426105517,
-    "visit_count": 2
-  },
-  "Chapter5.4": {
-    "first_ts": 1776426148160,
-    "visit_count": 2
-  },
-  "Chapter5.41": {
-    "first_ts": 1776426157401,
-    "visit_count": 2
-  },
-  "Chapter5.42": {
-    "first_ts": 1776426166731,
-    "visit_count": 3
-  },
-  "Chapter5.5": {
-    "first_ts": 1776426179056,
-    "visit_count": 2
-  },
-  "Chapter5.51": {
-    "first_ts": 1776426189192,
-    "visit_count": 2
-  },
-  "Chapter5.54": {
-    "first_ts": 1776426198106,
-    "visit_count": 2
-  },
-  "Chapter5.55": {
-    "first_ts": 1776426208124,
-    "visit_count": 3
-  },
-  "Chapter5.6": {
-    "first_ts": 1776426222078,
-    "visit_count": 4
-  },
-  "Chapter5.61": {
-    "first_ts": 1776426241690,
-    "visit_count": 5
-  },
-  "Chapter5.7": {
-    "first_ts": 1776426262872,
-    "visit_count": 2
-  },
-  "Chapter5.71": {
-    "first_ts": 1776426272421,
-    "visit_count": 2
-  },
-  "6th Chapter": {
-    "first_ts": 1776426281498,
-    "visit_count": 2
-  },
-  "Chapter6.1": {
-    "first_ts": 1776426291276,
-    "visit_count": 2
-  },
-  "Chapter6.11": {
-    "first_ts": 1776426300867,
-    "visit_count": 4
-  },
-  "Chapter6.15": {
-    "first_ts": 1776426338943,
-    "visit_count": 2
-  },
-  "Chapter6.16": {
-    "first_ts": 1776426349564,
-    "visit_count": 1
-  },
-  "Chapter6.2": {
-    "first_ts": 1776426351622,
-    "visit_count": 1
-  },
-  "Chapter6.21": {
-    "first_ts": 1776426352885,
-    "visit_count": 1
-  },
-  "Chapter6.22": {
-    "first_ts": 1776426354181,
-    "visit_count": 4
-  },
-  "Chapter6.24": {
-    "first_ts": 1776426372629,
-    "visit_count": 2
-  },
-  "Chapter6.27": {
-    "first_ts": 1776426387771,
-    "visit_count": 2
-  },
-  "Chapter6.3": {
-    "first_ts": 1776426397923,
-    "visit_count": 1
-  },
-  "Chapter6.31": {
-    "first_ts": 1776426399854,
-    "visit_count": 3
-  },
-  "Tutoring0": {
-    "first_ts": 1776426424271,
-    "visit_count": 4
-  },
-  "Tutoring2": {
-    "first_ts": 1776426453016,
-    "visit_count": 2
-  },
-  "Gab1": {
-    "first_ts": 1776426472960,
-    "visit_count": 2
-  },
-  "Chapter6.32": {
-    "first_ts": 1776426483946,
-    "visit_count": 3
-  },
-  "Yoga": {
-    "first_ts": 1776426502258,
-    "visit_count": 2
-  },
-  "Chapter6.4": {
-    "first_ts": 1776426516078,
-    "visit_count": 2
-  },
-  "Chapter6.41": {
-    "first_ts": 1776426524565,
-    "visit_count": 2
-  },
-  "Chapter6.5": {
-    "first_ts": 1776426534275,
-    "visit_count": 2
-  },
-  "Chapter6.51": {
-    "first_ts": 1776426544950,
-    "visit_count": 2
-  },
-  "Chapter6.52": {
-    "first_ts": 1776426554224,
-    "visit_count": 2
-  },
-  "Chapter6.55": {
-    "first_ts": 1776426564324,
-    "visit_count": 2
-  },
-  "Chapter6.6": {
-    "first_ts": 1776426573650,
-    "visit_count": 2
-  },
-  "Chapter6.61": {
-    "first_ts": 1776426582890,
-    "visit_count": 2
-  },
-  "Chapter6.67": {
-    "first_ts": 1776426649915,
-    "visit_count": 2
-  },
-  "Chapter6.7": {
-    "first_ts": 1776426659788,
-    "visit_count": 2
-  },
-  "Chapter6.71": {
-    "first_ts": 1776426668463,
-    "visit_count": 2
-  },
-  "Chapter6.9": {
-    "first_ts": 1776426677753,
-    "visit_count": 1
-  },
-  "Chapter6.91": {
-    "first_ts": 1776426679076,
-    "visit_count": 2
-  },
-  "7th Chapter": {
-    "first_ts": 1776426687407,
-    "visit_count": 2
-  },
-  "Chapter7.12": {
-    "first_ts": 1776426698385,
-    "visit_count": 2
-  },
-  "Chapter7.13": {
-    "first_ts": 1776426710624,
-    "visit_count": 1
-  },
-  "Chapter7.16": {
-    "first_ts": 1776426712007,
-    "visit_count": 1
-  },
-  "Chapter7.18": {
-    "first_ts": 1776426713356,
-    "visit_count": 2
-  },
-  "Chapter7.19": {
-    "first_ts": 1776426723956,
-    "visit_count": 2
-  },
-  "Chapter7.2": {
-    "first_ts": 1776426737995,
-    "visit_count": 2
-  },
-  "Chapter7.21": {
-    "first_ts": 1776426747851,
-    "visit_count": 2
-  },
-  "Chapter7.22": {
-    "first_ts": 1776426757564,
-    "visit_count": 2
-  },
-  "Chapter7.23": {
-    "first_ts": 1776426766443,
-    "visit_count": 9
-  },
-  "Chapter7.28": {
-    "first_ts": 1776426776344,
-    "visit_count": 2
-  },
-  "Chapter7.26": {
-    "first_ts": 1776426796291,
-    "visit_count": 2
-  },
-  "Chapter7.24": {
-    "first_ts": 1776426807972,
-    "visit_count": 2
-  },
-  "Chapter7.25": {
-    "first_ts": 1776426818439,
-    "visit_count": 1
-  },
-  "Chapter7.27": {
-    "first_ts": 1776426821025,
-    "visit_count": 2
-  },
-  "Chapter7.3": {
-    "first_ts": 1776426839676,
-    "visit_count": 2
-  },
-  "Chapter7.31": {
-    "first_ts": 1776426854091,
-    "visit_count": 3
-  },
-  "Chapter7.32": {
-    "first_ts": 1776426871205,
-    "visit_count": 2
-  },
-  "Chapter7.4": {
-    "first_ts": 1776426880819,
-    "visit_count": 2
-  },
-  "Chapter7.41": {
-    "first_ts": 1776426890496,
-    "visit_count": 4
-  },
-  "Chapter7.42": {
-    "first_ts": 1776426912137,
-    "visit_count": 2
-  },
-  "Chapter7.43": {
-    "first_ts": 1776426923137,
-    "visit_count": 8
-  },
-  "Chapter7.44": {
-    "first_ts": 1776426961100,
-    "visit_count": 2
-  },
-  "Chapter7.45": {
-    "first_ts": 1776426970791,
-    "visit_count": 2
-  },
-  "Chapter7.46": {
-    "first_ts": 1776426982611,
-    "visit_count": 2
-  },
-  "Chapter7.5": {
-    "first_ts": 1776426991733,
-    "visit_count": 2
-  },
-  "Chapter7.52": {
-    "first_ts": 1776427003946,
-    "visit_count": 2
-  },
-  "Chapter7.53": {
-    "first_ts": 1776427018836,
-    "visit_count": 2
-  },
-  "Chapter7.6": {
-    "first_ts": 1776427028262,
-    "visit_count": 2
-  },
-  "Chapter7.61": {
-    "first_ts": 1776427037703,
-    "visit_count": 2
-  },
-  "Chapter7.62": {
-    "first_ts": 1776427047009,
-    "visit_count": 2
-  },
-  "Chapter7.63": {
-    "first_ts": 1776427057445,
-    "visit_count": 2
-  },
-  "Chapter7.65": {
-    "first_ts": 1776427067005,
-    "visit_count": 2
-  },
-  "Chapter7.68": {
-    "first_ts": 1776427077660,
-    "visit_count": 2
   },
   "Chapter7.7": {
-    "first_ts": 1776427088035,
+    "first_ts": 1776427411693,
     "visit_count": 4
+  },
+  "Chapter7.71": {
+    "first_ts": 1776427446370,
+    "visit_count": 2
+  },
+  "Chapter7.77": {
+    "first_ts": 1776427455924,
+    "visit_count": 2
+  },
+  "Chapter7.8": {
+    "first_ts": 1776427465621,
+    "visit_count": 2
+  },
+  "Chapter7.81": {
+    "first_ts": 1776427475494,
+    "visit_count": 2
+  },
+  "Chapter7.82": {
+    "first_ts": 1776427485580,
+    "visit_count": 2
+  },
+  "Chapter7.83": {
+    "first_ts": 1776427494618,
+    "visit_count": 2
+  },
+  "Chapter8": {
+    "first_ts": 1776427509100,
+    "visit_count": 2
+  },
+  "Chapter8.1": {
+    "first_ts": 1776427518313,
+    "visit_count": 4
+  },
+  "Chapter8.14": {
+    "first_ts": 1776427540394,
+    "visit_count": 3
+  },
+  "Chapter8.16": {
+    "first_ts": 1776427554636,
+    "visit_count": 2
+  },
+  "Chapter8.17": {
+    "first_ts": 1776427564037,
+    "visit_count": 2
+  },
+  "Chapter8.18": {
+    "first_ts": 1776427572804,
+    "visit_count": 2
+  },
+  "Chapter8.13": {
+    "first_ts": 1776427582626,
+    "visit_count": 4
+  },
+  "Chapter8.19": {
+    "first_ts": 1776427604105,
+    "visit_count": 2
+  },
+  "Chapter8.2": {
+    "first_ts": 1776427614356,
+    "visit_count": 2
+  },
+  "Chapter8.22": {
+    "first_ts": 1776427624730,
+    "visit_count": 2
+  },
+  "Chapter8.25": {
+    "first_ts": 1776427634065,
+    "visit_count": 5
+  },
+  "Chapter8.24": {
+    "first_ts": 1776427645982,
+    "visit_count": 1
+  },
+  "Chapter8.26": {
+    "first_ts": 1776427648635,
+    "visit_count": 1
+  },
+  "Chapter8.27": {
+    "first_ts": 1776427658764,
+    "visit_count": 4
+  },
+  "Chapter8.28": {
+    "first_ts": 1776427679246,
+    "visit_count": 6
+  },
+  "Chapter8.3": {
+    "first_ts": 1776427715449,
+    "visit_count": 2
+  },
+  "Chapter8.31": {
+    "first_ts": 1776427725207,
+    "visit_count": 4
+  },
+  "Chapter8.32": {
+    "first_ts": 1776427734730,
+    "visit_count": 2
+  },
+  "Tutoring0": {
+    "first_ts": 1776427757993,
+    "visit_count": 8
+  },
+  "Tutoring": {
+    "first_ts": 1776427767649,
+    "visit_count": 4
+  },
+  "Tutoring3": {
+    "first_ts": 1776427778395,
+    "visit_count": 2
+  },
+  "Tutoring3b": {
+    "first_ts": 1776427788934,
+    "visit_count": 2
+  },
+  "Gab2": {
+    "first_ts": 1776427808413,
+    "visit_count": 6
+  },
+  "Chapter8.36": {
+    "first_ts": 1776427838038,
+    "visit_count": 3
+  },
+  "Sport": {
+    "first_ts": 1776427849486,
+    "visit_count": 5
+  },
+  "Gym": {
+    "first_ts": 1776427850774,
+    "visit_count": 10
+  },
+  "Chapter8.4": {
+    "first_ts": 1776427880527,
+    "visit_count": 2
+  },
+  "Chapter8.41": {
+    "first_ts": 1776427890085,
+    "visit_count": 2
+  },
+  "Chapter8.42": {
+    "first_ts": 1776427900288,
+    "visit_count": 2
+  },
+  "Chapter8.43": {
+    "first_ts": 1776427910050,
+    "visit_count": 2
+  },
+  "Chapter8.44": {
+    "first_ts": 1776427919383,
+    "visit_count": 2
+  },
+  "Chapter8.45": {
+    "first_ts": 1776427929311,
+    "visit_count": 10
+  },
+  "Chapter8.47": {
+    "first_ts": 1776427941259,
+    "visit_count": 2
+  },
+  "Chapter8.46": {
+    "first_ts": 1776427960072,
+    "visit_count": 2
+  },
+  "Chapter8.48": {
+    "first_ts": 1776427997851,
+    "visit_count": 9
+  },
+  "Chapter8.49": {
+    "first_ts": 1776428037632,
+    "visit_count": 2
+  },
+  "Chapter8.5": {
+    "first_ts": 1776428048355,
+    "visit_count": 4
+  },
+  "Chapter8.51": {
+    "first_ts": 1776428072212,
+    "visit_count": 2
+  },
+  "Chapter8.52": {
+    "first_ts": 1776428079430,
+    "visit_count": 2
+  },
+  "Chapter8.53": {
+    "first_ts": 1776428088407,
+    "visit_count": 2
+  },
+  "Chapter8.54": {
+    "first_ts": 1776428097880,
+    "visit_count": 6
+  },
+  "Chapter8.55": {
+    "first_ts": 1776428127031,
+    "visit_count": 5
+  },
+  "Chapter8.61": {
+    "first_ts": 1776428154186,
+    "visit_count": 6
+  },
+  "Chapter8.62": {
+    "first_ts": 1776428184663,
+    "visit_count": 2
+  },
+  "Chapter8.7": {
+    "first_ts": 1776428194087,
+    "visit_count": 3
+  },
+  "Chapter8.72": {
+    "first_ts": 1776428208873,
+    "visit_count": 2
+  },
+  "Chapter8.8": {
+    "first_ts": 1776428220107,
+    "visit_count": 2
+  },
+  "Chapter8.81": {
+    "first_ts": 1776428231288,
+    "visit_count": 4
+  },
+  "Chapter8.82": {
+    "first_ts": 1776428250035,
+    "visit_count": 4
+  },
+  "Chapter8.83": {
+    "first_ts": 1776428269267,
+    "visit_count": 4
+  },
+  "Chapter8.84": {
+    "first_ts": 1776428289464,
+    "visit_count": 4
+  },
+  "Chapter8.85": {
+    "first_ts": 1776428308663,
+    "visit_count": 4
+  },
+  "Chapter8.86": {
+    "first_ts": 1776428330750,
+    "visit_count": 4
+  },
+  "Chapter8.87": {
+    "first_ts": 1776428356141,
+    "visit_count": 5
+  },
+  "Chapter8.9": {
+    "first_ts": 1776428380499,
+    "visit_count": 2
+  },
+  "Chapter9": {
+    "first_ts": 1776428391237,
+    "visit_count": 1
+  },
+  "Chapter9.1": {
+    "first_ts": 1776428392570,
+    "visit_count": 1
+  },
+  "Chapter9.12": {
+    "first_ts": 1776428394020,
+    "visit_count": 2
+  },
+  "Chapter9.13": {
+    "first_ts": 1776428404790,
+    "visit_count": 4
+  },
+  "Chapter9.14": {
+    "first_ts": 1776428423394,
+    "visit_count": 2
+  },
+  "Chapter9.15": {
+    "first_ts": 1776428433686,
+    "visit_count": 3
+  },
+  "Chapter9.16": {
+    "first_ts": 1776428446025,
+    "visit_count": 2
+  },
+  "Chapter9.2": {
+    "first_ts": 1776428456422,
+    "visit_count": 2
+  },
+  "Chapter9.21": {
+    "first_ts": 1776428465549,
+    "visit_count": 2
+  },
+  "Chapter9.22": {
+    "first_ts": 1776428475042,
+    "visit_count": 2
+  },
+  "Chapter9.23": {
+    "first_ts": 1776428484721,
+    "visit_count": 2
+  },
+  "Chapter9.3": {
+    "first_ts": 1776428495231,
+    "visit_count": 5
+  },
+  "Chapter9.31": {
+    "first_ts": 1776428506172,
+    "visit_count": 1
+  },
+  "Chapter9.32": {
+    "first_ts": 1776428508842,
+    "visit_count": 1
+  },
+  "Chapter9.33": {
+    "first_ts": 1776428519289,
+    "visit_count": 4
+  },
+  "Chapter9.34": {
+    "first_ts": 1776428540341,
+    "visit_count": 2
+  },
+  "Chapter9.35": {
+    "first_ts": 1776428550089,
+    "visit_count": 2
+  },
+  "Chapter9.36": {
+    "first_ts": 1776428560794,
+    "visit_count": 2
+  },
+  "Chapter9.37": {
+    "first_ts": 1776428570663,
+    "visit_count": 2
+  },
+  "Chapter9.4": {
+    "first_ts": 1776428580163,
+    "visit_count": 2
+  },
+  "Chapter9.41": {
+    "first_ts": 1776428592696,
+    "visit_count": 5
+  },
+  "Chapter9.43": {
+    "first_ts": 1776428618811,
+    "visit_count": 2
+  },
+  "Chapter9.42": {
+    "first_ts": 1776428628081,
+    "visit_count": 2
+  },
+  "Chapter9.44": {
+    "first_ts": 1776428638028,
+    "visit_count": 4
+  },
+  "Chapter9.45": {
+    "first_ts": 1776428658551,
+    "visit_count": 4
+  },
+  "Chapter9.46": {
+    "first_ts": 1776428679356,
+    "visit_count": 2
+  },
+  "Chapter9.47": {
+    "first_ts": 1776428688903,
+    "visit_count": 2
+  },
+  "Chapter9.49": {
+    "first_ts": 1776428699725,
+    "visit_count": 4
+  },
+  "Tutoring4": {
+    "first_ts": 1776428730537,
+    "visit_count": 2
+  },
+  "Tutoring4b": {
+    "first_ts": 1776428743109,
+    "visit_count": 2
+  },
+  "Gab3": {
+    "first_ts": 1776428764605,
+    "visit_count": 6
+  },
+  "Gab3b": {
+    "first_ts": 1776428794214,
+    "visit_count": 4
+  },
+  "Gab3c": {
+    "first_ts": 1776428815081,
+    "visit_count": 4
+  },
+  "Gab3d": {
+    "first_ts": 1776428835751,
+    "visit_count": 6
+  },
+  "Chapter9.5": {
+    "first_ts": 1776428880834,
+    "visit_count": 3
+  },
+  "Gym2": {
+    "first_ts": 1776428919952,
+    "visit_count": 4
+  },
+  "Chapter9.51": {
+    "first_ts": 1776428954967,
+    "visit_count": 2
+  },
+  "Chapter9.52": {
+    "first_ts": 1776428964099,
+    "visit_count": 2
+  },
+  "Chapter9.53": {
+    "first_ts": 1776428974345,
+    "visit_count": 4
+  },
+  "Chapter9.54": {
+    "first_ts": 1776428994768,
+    "visit_count": 4
+  },
+  "Chapter9.55": {
+    "first_ts": 1776429013268,
+    "visit_count": 8
+  },
+  "Chapter9.56": {
+    "first_ts": 1776429055250,
+    "visit_count": 1
+  },
+  "Chapter9.57": {
+    "first_ts": 1776429056420,
+    "visit_count": 1
+  },
+  "Chapter9.58": {
+    "first_ts": 1776429057625,
+    "visit_count": 2
+  },
+  "Chapter9.59": {
+    "first_ts": 1776429067257,
+    "visit_count": 6
+  },
+  "Chapter9.6": {
+    "first_ts": 1776429097441,
+    "visit_count": 2
+  },
+  "Chapter9.61": {
+    "first_ts": 1776429107572,
+    "visit_count": 2
+  },
+  "Chapter9.62": {
+    "first_ts": 1776429119774,
+    "visit_count": 2
+  },
+  "Chapter9.64": {
+    "first_ts": 1776429130362,
+    "visit_count": 6
+  },
+  "Chapter9.65": {
+    "first_ts": 1776429158937,
+    "visit_count": 4
+  },
+  "Chapter10": {
+    "first_ts": 1776429181070,
+    "visit_count": 3
+  },
+  "Dream": {
+    "first_ts": 1776429198437,
+    "visit_count": 165
+  },
+  "Morning": {
+    "first_ts": 1776429207799,
+    "visit_count": 53
+  },
+  "shower": {
+    "first_ts": 1776429252708,
+    "visit_count": 15
+  },
+  "Kitchenmorning": {
+    "first_ts": 1776429283723,
+    "visit_count": 9
+  },
+  "yoga": {
+    "first_ts": 1776429303891,
+    "visit_count": 11
+  },
+  "Work Morning": {
+    "first_ts": 1776429333103,
+    "visit_count": 48
+  },
+  "Dress": {
+    "first_ts": 1776429334427,
+    "visit_count": 9
+  },
+  "car": {
+    "first_ts": 1776429356738,
+    "visit_count": 8
+  },
+  "meetcoworker": {
+    "first_ts": 1776429377675,
+    "visit_count": 8
+  },
+  "takecoffee": {
+    "first_ts": 1776429380328,
+    "visit_count": 8
+  },
+  "Work break": {
+    "first_ts": 1776429382971,
+    "visit_count": 10
+  },
+  "Work Afternoon": {
+    "first_ts": 1776429392526,
+    "visit_count": 101
+  },
+  "Late Afternoon": {
+    "first_ts": 1776429411200,
+    "visit_count": 35
+  },
+  "Selfie": {
+    "first_ts": 1776429423091,
+    "visit_count": 24
+  },
+  "Replay": {
+    "first_ts": 1776429433633,
+    "visit_count": 2
+  },
+  "chillread1": {
+    "first_ts": 1776429463796,
+    "visit_count": 9
+  },
+  "showerevening": {
+    "first_ts": 1776429485328,
+    "visit_count": 19
+  },
+  "Evening": {
+    "first_ts": 1776429500388,
+    "visit_count": 28
+  },
+  "Kitchenevening": {
+    "first_ts": 1776429509951,
+    "visit_count": 18
+  },
+  "Night": {
+    "first_ts": 1776429542447,
+    "visit_count": 9
+  },
+  "bus": {
+    "first_ts": 1776429658373,
+    "visit_count": 2
+  },
+  "photo": {
+    "first_ts": 1776429686370,
+    "visit_count": 2
+  },
+  "Early Morning": {
+    "first_ts": 1776429752706,
+    "visit_count": 2
+  },
+  "wakeself": {
+    "first_ts": 1776429762473,
+    "visit_count": 4
+  },
+  "Sister1": {
+    "first_ts": 1776429858339,
+    "visit_count": 2
+  },
+  "sister1a": {
+    "first_ts": 1776429867440,
+    "visit_count": 2
+  },
+  "sister1b": {
+    "first_ts": 1776429878185,
+    "visit_count": 2
+  },
+  "sister1c": {
+    "first_ts": 1776429887647,
+    "visit_count": 2
+  },
+  "sister1d": {
+    "first_ts": 1776429897745,
+    "visit_count": 6
+  },
+  "sister1e": {
+    "first_ts": 1776429928433,
+    "visit_count": 2
+  },
+  "sister1f": {
+    "first_ts": 1776429939202,
+    "visit_count": 4
+  },
+  "sister1i": {
+    "first_ts": 1776429958389,
+    "visit_count": 2
+  },
+  "sister1i2": {
+    "first_ts": 1776429968580,
+    "visit_count": 9
+  },
+  "sister1g": {
+    "first_ts": 1776430019615,
+    "visit_count": 2
+  },
+  "sister1h": {
+    "first_ts": 1776430028792,
+    "visit_count": 2
+  },
+  "sister1k": {
+    "first_ts": 1776430040595,
+    "visit_count": 2
+  },
+  "sister1l": {
+    "first_ts": 1776430049678,
+    "visit_count": 15
+  },
+  "cinema1": {
+    "first_ts": 1776431033678,
+    "visit_count": 8
+  },
+  "Late Night": {
+    "first_ts": 1776431069782,
+    "visit_count": 4
+  },
+  "chillread2": {
+    "first_ts": 1776431211765,
+    "visit_count": 1
+  },
+  "yoga1": {
+    "first_ts": 1776431253984,
+    "visit_count": 2
+  },
+  "Sister2": {
+    "first_ts": 1776432557054,
+    "visit_count": 2
+  },
+  "sister2a": {
+    "first_ts": 1776432565851,
+    "visit_count": 2
+  },
+  "sister2b": {
+    "first_ts": 1776432576684,
+    "visit_count": 2
+  },
+  "sister2c": {
+    "first_ts": 1776432587239,
+    "visit_count": 2
+  },
+  "sister2e": {
+    "first_ts": 1776432597356,
+    "visit_count": 2
+  },
+  "sister2e'": {
+    "first_ts": 1776432605657,
+    "visit_count": 2
+  },
+  "sister2f": {
+    "first_ts": 1776432614098,
+    "visit_count": 2
+  },
+  "sister2f'": {
+    "first_ts": 1776432625527,
+    "visit_count": 4
+  },
+  "sister2fa": {
+    "first_ts": 1776432637102,
+    "visit_count": 4
+  },
+  "Cheat": {
+    "first_ts": 1776432702519,
+    "visit_count": 20
+  },
+  "Cheataddiction": {
+    "first_ts": 1776432718765,
+    "visit_count": 4
+  },
+  "Cheatopenmind": {
+    "first_ts": 1776432734029,
+    "visit_count": 4
+  },
+  "Cheatexp": {
+    "first_ts": 1776432736438,
+    "visit_count": 2
+  },
+  "CheatSelfie": {
+    "first_ts": 1776432758868,
+    "visit_count": 5
   }
 }

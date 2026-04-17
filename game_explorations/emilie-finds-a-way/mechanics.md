@@ -6,7 +6,7 @@
 **Present.** Money-like variable(s) detected. Income events: 0. Expense events: 0.
 
 ### Time / calendar system
-_Not detected._
+**Present.** 1 time-like variable(s). Choices may be day-anchored.
 
 ### Payment choices (visible prices)
 _Not detected._
@@ -27,20 +27,20 @@ _Not detected._
 _Not detected._
 
 ## Scenes catalogued
-- Unique passages seen: 176
+- Unique passages seen: 169
 - Most-visited passages:
-  - `Sport` × 11
-  - `Chapter2.91` × 9
-  - `Chapter7.23` × 9
-  - `Chapter5.31` × 8
-  - `Chapter7.43` × 8
-  - `Chapter4.21` × 7
-  - `Chapter2.7` × 6
-  - `Chapter4.22` × 6
-  - `Chapter4.28` × 6
-  - `Chilling` × 6
-  - `Tutoring` × 6
-  - `Chapter5.32` × 6
-  - `Chapter2.63` × 5
-  - `Chapter5.23` × 5
-  - `Chapter5.61` × 5
+  - `Dream` × 165
+  - `Work Afternoon` × 101
+  - `Morning` × 53
+  - `Work Morning` × 48
+  - `Late Afternoon` × 35
+  - `Evening` × 28
+  - `Selfie` × 24
+  - `Cheat` × 20
+  - `showerevening` × 19
+  - `Kitchenevening` × 18
+  - `shower` × 15
+  - `sister1l` × 15
+  - `yoga` × 11
+  - `Gym` × 10
+  - `Chapter8.45` × 10
