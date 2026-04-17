@@ -1,6 +1,0 @@
-2026/04/16-20:31:00.462 442dc3 Reusing MANIFEST /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/new_life_project/profile/Default/Local Storage/leveldb/MANIFEST-000001
-2026/04/16-20:31:00.471 442dc3 Recovering log #21
-2026/04/16-20:31:00.471 442dc3 Reusing old log /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/new_life_project/profile/Default/Local Storage/leveldb/000021.log 
-2026/04/16-20:36:03.069 442dc9 Level-0 table #25: started
-2026/04/16-20:36:03.080 442dc9 Level-0 table #25: 64124 bytes OK
-2026/04/16-20:36:03.083 442dc9 Delete type=0 #21

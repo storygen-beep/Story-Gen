@@ -1,0 +1,222 @@
+{
+  "Beginning": {
+    "first_ts": 1776404642337,
+    "visit_count": 3
+  },
+  "Street": {
+    "first_ts": 1776404643029,
+    "visit_count": 38
+  },
+  "Cafe": {
+    "first_ts": 1776404670734,
+    "visit_count": 10
+  },
+  "cafeJob": {
+    "first_ts": 1776404671635,
+    "visit_count": 1
+  },
+  "cafeWorkImproved": {
+    "first_ts": 1776404673340,
+    "visit_count": 4
+  },
+  "cafeDefault": {
+    "first_ts": 1776404674172,
+    "visit_count": 19
+  },
+  "tableClear": {
+    "first_ts": 1776404674988,
+    "visit_count": 16
+  },
+  "Park": {
+    "first_ts": 1776404712976,
+    "visit_count": 7
+  },
+  "parkSleep": {
+    "first_ts": 1776404713811,
+    "visit_count": 5
+  },
+  "parkDreamNightmare": {
+    "first_ts": 1776404743438,
+    "visit_count": 2
+  },
+  "easterPark": {
+    "first_ts": 1776404761927,
+    "visit_count": 1
+  },
+  "a place to live...": {
+    "first_ts": 1776404764552,
+    "visit_count": 1
+  },
+  "Go to the address": {
+    "first_ts": 1776404765350,
+    "visit_count": 1
+  },
+  "Yes.": {
+    "first_ts": 1776404766127,
+    "visit_count": 1
+  },
+  "walkUp": {
+    "first_ts": 1776404766879,
+    "visit_count": 1
+  },
+  "Great.": {
+    "first_ts": 1776404767581,
+    "visit_count": 1
+  },
+  "Touch up your room": {
+    "first_ts": 1776404768409,
+    "visit_count": 2
+  },
+  "yourApartment": {
+    "first_ts": 1776404799286,
+    "visit_count": 18
+  },
+  "kitchen": {
+    "first_ts": 1776404816945,
+    "visit_count": 1
+  },
+  "Shower": {
+    "first_ts": 1776404824565,
+    "visit_count": 2
+  },
+  "showernude": {
+    "first_ts": 1776404830447,
+    "visit_count": 2
+  },
+  "yourRoom": {
+    "first_ts": 1776404838164,
+    "visit_count": 26
+  },
+  "drawer": {
+    "first_ts": 1776404856187,
+    "visit_count": 3
+  },
+  "mirror": {
+    "first_ts": 1776404862815,
+    "visit_count": 3
+  },
+  "zackTV": {
+    "first_ts": 1776404882182,
+    "visit_count": 1
+  },
+  "goingUptown": {
+    "first_ts": 1776404894207,
+    "visit_count": 1
+  },
+  "Uptown": {
+    "first_ts": 1776404894958,
+    "visit_count": 4
+  },
+  "Bar": {
+    "first_ts": 1776404895747,
+    "visit_count": 2
+  },
+  "Socialize": {
+    "first_ts": 1776404902941,
+    "visit_count": 2
+  },
+  "massageParlor": {
+    "first_ts": 1776404924606,
+    "visit_count": 3
+  },
+  "massage": {
+    "first_ts": 1776404930634,
+    "visit_count": 1
+  },
+  "dealership": {
+    "first_ts": 1776404949002,
+    "visit_count": 1
+  },
+  "nap": {
+    "first_ts": 1776404966236,
+    "visit_count": 1
+  },
+  "sleep": {
+    "first_ts": 1776404979589,
+    "visit_count": 6
+  },
+  "cafePromotion": {
+    "first_ts": 1776405100200,
+    "visit_count": 1
+  },
+  "easterCafe": {
+    "first_ts": 1776405123887,
+    "visit_count": 1
+  },
+  "goingDowntown": {
+    "first_ts": 1776405126462,
+    "visit_count": 2
+  },
+  "Downtown": {
+    "first_ts": 1776405127163,
+    "visit_count": 10
+  },
+  "easterDowntown": {
+    "first_ts": 1776405139703,
+    "visit_count": 1
+  },
+  "Mall": {
+    "first_ts": 1776405141233,
+    "visit_count": 4
+  },
+  "Quick-E Mart": {
+    "first_ts": 1776405147765,
+    "visit_count": 3
+  },
+  "clothingStore": {
+    "first_ts": 1776405167004,
+    "visit_count": 1
+  },
+  "Electric Giant": {
+    "first_ts": 1776405175632,
+    "visit_count": 1
+  },
+  "Library": {
+    "first_ts": 1776405182986,
+    "visit_count": 3
+  },
+  "easterLibrary": {
+    "first_ts": 1776405190964,
+    "visit_count": 1
+  },
+  "bookCorrupt": {
+    "first_ts": 1776405192404,
+    "visit_count": 1
+  },
+  "Cinema": {
+    "first_ts": 1776405201520,
+    "visit_count": 3
+  },
+  "easterCinema": {
+    "first_ts": 1776405208272,
+    "visit_count": 1
+  },
+  "movieSceneA": {
+    "first_ts": 1776405215755,
+    "visit_count": 1
+  },
+  "balcony": {
+    "first_ts": 1776405421531,
+    "visit_count": 1
+  },
+  "credits": {
+    "first_ts": 1776405430146,
+    "visit_count": 1
+  },
+  "Backpack": {
+    "first_ts": 1776405438931,
+    "visit_count": 1
+  },
+  "parkWalk": {
+    "first_ts": 1776405653967,
+    "visit_count": 1
+  },
+  "lake": {
+    "first_ts": 1776405666875,
+    "visit_count": 1
+  },
+  "swimLake": {
+    "first_ts": 1776405678467,
+    "visit_count": 1
+  }
+}

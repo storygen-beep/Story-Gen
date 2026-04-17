@@ -517,7 +517,8 @@ async function runDaemon(args) {
   const context = await chromium.launchPersistentContext(dirs.profile, {
     headless: !!args.headless,
     viewport: { width: 1440, height: 900 },
-    args: ['--disable-blink-features=AutomationControlled', '--disable-popup-blocking'],
+    ignoreHTTPSErrors: true,
+    args: ['--disable-blink-features=AutomationControlled', '--disable-popup-blocking', '--ignore-certificate-errors'],
   });
   const page = context.pages()[0] || await context.newPage();
   dlog('browser launched');
