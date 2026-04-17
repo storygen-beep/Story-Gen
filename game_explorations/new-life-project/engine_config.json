@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-04-17T05:18:50.013Z",
+  "captured_at": "2026-04-17T05:29:30.198Z",
   "engine": "sugarcube",
   "version": {
     "name": "SugarCube",
@@ -108,6 +108,11 @@
     "on_save_handlers": 0,
     "on_load_handlers": 0,
     "slots_metadata": [],
-    "autosave_metadata": null
+    "autosave_metadata": {
+      "id": "new-life-project-public",
+      "title": null,
+      "date": "2026-04-17T05:19:24.600Z",
+      "description": null
+    }
   }
 }

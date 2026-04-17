@@ -1,0 +1,5107 @@
+{
+  "deck": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "deckCount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 8,
+      "max": 8,
+      "first": 8,
+      "last": 8,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "chips": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "bet": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "luckyCasino": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0.49,
+      "max": 0.49,
+      "first": 0.49,
+      "last": 0.49,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "casinoSus": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "player": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "dealer": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "pot": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "discard": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "label": "body",
+    "label_confidence": "medium",
+    "tags": [
+      "body"
+    ]
+  },
+  "winAmount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "totalWinAmount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "totalBetAmount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "pMiss": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "dCheat": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "charPron.gender": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "string_samples": [
+      "non-binary"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "charPron.subject": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "string_samples": [
+      "they"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "charPron.object": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "string_samples": [
+      "them"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "charPron.possessive": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "string_samples": [
+      "their"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "charPron.reflexive": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "string_samples": [
+      "themself"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "charPron.determiner": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "string_samples": [
+      "their"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "charPron.contraction": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "string_samples": [
+      "they're"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "charPron.noun": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "string_samples": [
+      "person"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "charPron.partner": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "string_samples": [
+      "enbyfriend"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "vibeLevel": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 2,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 3,
+      "min": 0.05,
+      "max": 0.3,
+      "first": 0.3,
+      "last": 0.07500000000000001,
+      "is_monotonic_increasing": false,
+      "is_boolean_like": false
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "partner": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "string_samples": [
+      "boyfriend"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "sanity": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "countperiods": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 6,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 7,
+      "min": 0,
+      "max": 13,
+      "first": 0,
+      "last": 13,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": false
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "questmap": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "kidnapQuest": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "facilityQuest": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "questDays": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 2,
+      "min": 0,
+      "max": 2,
+      "first": 0,
+      "last": 2,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "questLetter1": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "string_samples": [
+      "unopened"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "questLetter2": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "string_samples": [
+      "unopened"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mansion": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "mansionCook": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mansionFresh": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "morrisTalk": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "constantin": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag",
+      "body"
+    ]
+  },
+  "cellarClean": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "lilyRoom": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "home": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "string_samples": [
+      "none"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "intoxic": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "allure": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 2,
+      "min": 15,
+      "max": 30,
+      "first": 30,
+      "last": 15,
+      "is_monotonic_increasing": false,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "inhib": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 2,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 3,
+      "min": 100,
+      "max": 125,
+      "first": 100,
+      "last": 117,
+      "is_monotonic_increasing": false,
+      "is_boolean_like": false
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "corrupt": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 3,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 4,
+      "min": -25,
+      "max": 0,
+      "first": 0,
+      "last": -17,
+      "is_monotonic_increasing": false,
+      "is_boolean_like": false
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "arousal": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 2,
+      "min": 0,
+      "max": 5,
+      "first": 0,
+      "last": 5,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "money": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 2,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 3,
+      "min": 0,
+      "max": 49,
+      "first": 0,
+      "last": 49,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": false
+    },
+    "label": "player_stat",
+    "label_confidence": "high",
+    "tags": [
+      "player_stat"
+    ]
+  },
+  "trauma": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "string_samples": [
+      "Josephine"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "job": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "string_samples": [
+      "No job",
+      "cafe"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "groceries": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "kitchenClean": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 2,
+      "min": -25,
+      "max": 0,
+      "first": 0,
+      "last": -25,
+      "is_monotonic_increasing": false,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "zackClean": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 2,
+      "min": -25,
+      "max": 0,
+      "first": 0,
+      "last": -25,
+      "is_monotonic_increasing": false,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "rngesus": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 21,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 9,
+      "min": 0,
+      "max": 21,
+      "first": 0,
+      "last": 7,
+      "is_monotonic_increasing": false,
+      "is_boolean_like": false
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "rent": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 2,
+      "min": 0,
+      "max": 1,
+      "first": 0,
+      "last": 1,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "id": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "alley": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "bum": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "PIProg": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "PIDays": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "cottage": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "coffeeDrunk": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "lake": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "birdwatch": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "jogger": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "cult": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "tent": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "turnDownLily": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "apt401Key": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "aptKeyLux": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "cardio": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "strength": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "player_stat",
+    "label_confidence": "high",
+    "tags": [
+      "player_stat"
+    ]
+  },
+  "yoga": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mood.Lively": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mood.Empty": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mood.Dominant": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mood.Submissive": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mood.Sensual": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mood.Romantic": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mood.Excited": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mood.Relaxed": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mood.Impulsive": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mood.Ashamed": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mood.Critical": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mood.Embarrassed": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mood.Delirious": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mood.Despairing": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mood.temp1": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mood.temp2": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "oldphone": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "oldphonePIN": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "string_samples": [
+      "6969"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "PINtimer": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "phone": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "laptop": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "cam": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "digiGPS": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "zack": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 2,
+      "min": 0,
+      "max": 5,
+      "first": 0,
+      "last": 5,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "zackSex": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "zackDates": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 1,
+      "max": 1,
+      "first": 1,
+      "last": 1,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "lily": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "lilySex": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "lilyNude": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "nudeAmount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 50,
+      "max": 50,
+      "first": 50,
+      "last": 50,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "textDad": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "dadSeen": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "dadRape": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "dad": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "brotherMissing": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "bro": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "constantinCorrupt": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag",
+      "body"
+    ]
+  },
+  "chloe": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "dating": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "string_samples": [
+      "single"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "datingCount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "chloeLove": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "npc_stat",
+    "label_confidence": "high",
+    "tags": [
+      "npc_stat"
+    ]
+  },
+  "lilyLove": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "npc_stat",
+    "label_confidence": "high",
+    "tags": [
+      "npc_stat"
+    ]
+  },
+  "broLove": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "npc_stat",
+    "label_confidence": "high",
+    "tags": [
+      "npc_stat"
+    ]
+  },
+  "dadLove": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "npc_stat",
+    "label_confidence": "high",
+    "tags": [
+      "npc_stat"
+    ]
+  },
+  "zackLove": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "npc_stat",
+    "label_confidence": "high",
+    "tags": [
+      "npc_stat"
+    ]
+  },
+  "caine": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "caineLove": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "npc_stat",
+    "label_confidence": "high",
+    "tags": [
+      "npc_stat"
+    ]
+  },
+  "roscoe": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "breakTimeL": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "breakTimeD": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "breakTimeN": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "breakTimeZ": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "waitLily": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "waitZack": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "waitDad": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "waitNoah": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "beautySeen": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "legsWaxed": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "pussyWaxed": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "makeupDone": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "body",
+    "label_confidence": "medium",
+    "tags": [
+      "body"
+    ]
+  },
+  "hairDone": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "body",
+    "label_confidence": "medium",
+    "tags": [
+      "body"
+    ]
+  },
+  "legsCheck": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "pussyCheck": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "hairCheck": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag",
+      "body"
+    ]
+  },
+  "makeupCheck": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag",
+      "body"
+    ]
+  },
+  "showerTime": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 2,
+      "min": 0,
+      "max": 1,
+      "first": 0,
+      "last": 1,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "libBook": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "dildo": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "medium",
+    "tags": [
+      "flag",
+      "item"
+    ]
+  },
+  "tail": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "buttplug": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "strapon": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "followers": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "masCount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "suckCount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "vagCount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "assCount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "doubCount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "rapeCount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "creamCount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "wButtplug": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "wTail": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "cafeBoring": {
+    "types": [
+      "number",
+      "boolean"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 16,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "cafeRR": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "cafeHarass": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 2,
+      "min": 0,
+      "max": 1,
+      "first": 0,
+      "last": 1,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "cafePressure": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 2,
+      "min": 0,
+      "max": 1,
+      "first": 0,
+      "last": 1,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "cafeRes": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "cafePromo": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "cafeCount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 2,
+      "min": 0,
+      "max": 1,
+      "first": 0,
+      "last": 1,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "barCount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "barPromo": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "officeCount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "officeTier": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "libraryCount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "nurseCount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "teacherCount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "gymCount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "managerCount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "massageCount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "day": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 2,
+      "min": 1,
+      "max": 2,
+      "first": 1,
+      "last": 2,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "time",
+    "label_confidence": "high",
+    "tags": [
+      "time"
+    ]
+  },
+  "period": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 6,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 6,
+      "min": 1,
+      "max": 6,
+      "first": 1,
+      "last": 2,
+      "is_monotonic_increasing": false,
+      "is_boolean_like": false
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "cats": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "catGend": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "catAtt": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "pet.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "string_samples": [
+      ""
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "pet.race": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "pet.gender": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "pet.attribute": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "pet.isFound": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "eggs": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 4,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "number_stats": {
+      "count": 61,
+      "unique_count": 5,
+      "min": 0,
+      "max": 4,
+      "first": 0,
+      "last": 4,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": false
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "eggLocations.cafe": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "eggLocations.gym": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "eggLocations.city": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "eggLocations.park": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "eggLocations.hospital": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "eggLocations.outskirts": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "eggLocations.downtown": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "eggLocations.uptown": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "eggLocations.library": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "eggLocations.cinema": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "easter": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "bool_values": [
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "return": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 49,
+    "first_ts": 1776403770213,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 31,
+    "string_samples": [
+      "Beginning",
+      "characterCreation",
+      "playGirl",
+      "Everything faded to black...",
+      "Street",
+      "Cafe",
+      "easterCafe",
+      "cafeJob",
+      "cafeWorkImproved",
+      "cafeDefault",
+      "tableClear",
+      "Park",
+      "easterPark",
+      "goingUptown",
+      "Uptown",
+      "easterUptown",
+      "beauty",
+      "goingDowntown",
+      "Downtown",
+      "easterDowntown"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "gender": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403785295,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 30,
+    "string_samples": [
+      "Girl"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "upbring": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403785295,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 30,
+    "string_samples": [
+      "chrisvirg"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "partnerPro1": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403799699,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 29,
+    "string_samples": [
+      "he"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "partnerPro2": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403799699,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 29,
+    "string_samples": [
+      "him"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "partnerPro3": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403799699,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 29,
+    "string_samples": [
+      "his"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "startImg": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403799699,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 29,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "introSkip": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403817095,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 27,
+    "bool_values": [
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "mugged": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776403817095,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 27,
+    "number_stats": {
+      "count": 52,
+      "unique_count": 2,
+      "min": 1,
+      "max": 2,
+      "first": 1,
+      "last": 2,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "cafePay": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776403851398,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 26,
+    "number_stats": {
+      "count": 48,
+      "unique_count": 1,
+      "min": 20,
+      "max": 20,
+      "first": 20,
+      "last": 20,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "parkVisits": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 3,
+    "first_ts": 1776403909714,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 21,
+    "number_stats": {
+      "count": 40,
+      "unique_count": 4,
+      "min": 1,
+      "max": 4,
+      "first": 1,
+      "last": 4,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": false
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "alleyStranger": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404024947,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 12,
+    "number_stats": {
+      "count": 18,
+      "unique_count": 1,
+      "min": 1,
+      "max": 1,
+      "first": 1,
+      "last": 1,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "garage.street.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "Street Parking"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "garage.street.maxSpots": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 2,
+      "max": 2,
+      "first": 2,
+      "last": 2,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "garage.street.filledSpots": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "garage.street.price": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 5,
+      "max": 5,
+      "first": 5,
+      "last": 5,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "garage.city.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "City Parking"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "garage.city.maxSpots": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 3,
+      "max": 3,
+      "first": 3,
+      "last": 3,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "garage.city.filledSpots": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "garage.city.price": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 10,
+      "max": 10,
+      "first": 10,
+      "last": 10,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "garage.mansion.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "Mansion Parking"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "garage.mansion.maxSpots": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 5,
+      "max": 5,
+      "first": 5,
+      "last": 5,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "garage.mansion.filledSpots": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "garage.mansion.price": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "garage.luxapt.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "Luxury Parking"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "garage.luxapt.maxSpots": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 5,
+      "max": 5,
+      "first": 5,
+      "last": 5,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "garage.luxapt.filledSpots": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "garage.luxapt.price": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.honda.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "Honda EV"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.honda.price": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 22700,
+      "max": 22700,
+      "first": 22700,
+      "last": 22700,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.honda.condition": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "good"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.honda.owned": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "car.honda.location": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "dealership"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.toyota.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "Toyota Hybrid"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.toyota.price": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 20500,
+      "max": 20500,
+      "first": 20500,
+      "last": 20500,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.toyota.condition": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "good"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.toyota.owned": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "car.toyota.location": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "dealership"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.audi.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "Audi"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.audi.price": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 31900,
+      "max": 31900,
+      "first": 31900,
+      "last": 31900,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.audi.condition": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "good"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.audi.owned": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "car.audi.location": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "dealership"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.hyundai.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "Hyundai"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.hyundai.price": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 22300,
+      "max": 22300,
+      "first": 22300,
+      "last": 22300,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.hyundai.condition": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "good"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.hyundai.owned": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "car.hyundai.location": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "dealership"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.bmw.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "BMW"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.bmw.price": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 36000,
+      "max": 36000,
+      "first": 36000,
+      "last": 36000,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.bmw.condition": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "good"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.bmw.owned": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "car.bmw.location": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "dealership"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.urus.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "Lamborghini Urus"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.urus.price": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 9999999,
+      "max": 9999999,
+      "first": 9999999,
+      "last": 9999999,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.urus.condition": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "good"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "car.urus.owned": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "car.urus.location": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      "patron"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "bike": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "carScene": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "string_samples": [
+      ""
+    ],
+    "label": "flag",
+    "label_confidence": "medium",
+    "tags": [
+      "flag"
+    ]
+  },
+  "gymClean": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "canteen": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "waitCaine": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "waitTommy": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "breakTimeB": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "breakTimeC": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "breakTimeT": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "orgyOrg": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "emailAmount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 10,
+      "max": 10,
+      "first": 10,
+      "last": 10,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "news": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 11,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "newspaper": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776404062481,
+    "last_ts": 1776404131433,
+    "passages_seen_on_count": 9,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  }
+}

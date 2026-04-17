@@ -1,0 +1,6449 @@
+{
+  "generated_at": "2026-04-17T05:36:17.648Z",
+  "variables": {
+    "deck": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31
+    },
+    "deckCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 8,
+        "max": 8,
+        "first": 8,
+        "last": 8,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "chips": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "bet": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "luckyCasino": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0.49,
+        "max": 0.49,
+        "first": 0.49,
+        "last": 0.49,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "casinoSus": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31
+    },
+    "dealer": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31
+    },
+    "pot": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "discard": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31
+    },
+    "winAmount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "totalWinAmount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "totalBetAmount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "pMiss": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "dCheat": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "charPron.gender": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "string_samples": [
+        "non-binary"
+      ]
+    },
+    "charPron.subject": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "string_samples": [
+        "they"
+      ]
+    },
+    "charPron.object": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "string_samples": [
+        "them"
+      ]
+    },
+    "charPron.possessive": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "string_samples": [
+        "their"
+      ]
+    },
+    "charPron.reflexive": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "string_samples": [
+        "themself"
+      ]
+    },
+    "charPron.determiner": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "string_samples": [
+        "their"
+      ]
+    },
+    "charPron.contraction": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "string_samples": [
+        "they're"
+      ]
+    },
+    "charPron.noun": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "string_samples": [
+        "person"
+      ]
+    },
+    "charPron.partner": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "string_samples": [
+        "enbyfriend"
+      ]
+    },
+    "vibeLevel": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 2,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 3,
+        "min": 0.05,
+        "max": 0.3,
+        "first": 0.3,
+        "last": 0.07500000000000001,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": false
+      }
+    },
+    "partner": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "string_samples": [
+        "boyfriend"
+      ]
+    },
+    "sanity": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        true
+      ]
+    },
+    "countperiods": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 6,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 7,
+        "min": 0,
+        "max": 13,
+        "first": 0,
+        "last": 13,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": false
+      }
+    },
+    "questmap": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31
+    },
+    "kidnapQuest": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "facilityQuest": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "questDays": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 2,
+        "min": 0,
+        "max": 2,
+        "first": 0,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "questLetter1": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "string_samples": [
+        "unopened"
+      ]
+    },
+    "questLetter2": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "string_samples": [
+        "unopened"
+      ]
+    },
+    "mansion": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "mansionCook": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mansionFresh": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "morrisTalk": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "constantin": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "cellarClean": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "lilyRoom": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "home": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "string_samples": [
+        "none"
+      ]
+    },
+    "intoxic": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "allure": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 2,
+        "min": 15,
+        "max": 30,
+        "first": 30,
+        "last": 15,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": true
+      }
+    },
+    "inhib": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 2,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 3,
+        "min": 100,
+        "max": 125,
+        "first": 100,
+        "last": 117,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": false
+      }
+    },
+    "corrupt": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 3,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 4,
+        "min": -25,
+        "max": 0,
+        "first": 0,
+        "last": -17,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": false
+      }
+    },
+    "arousal": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 2,
+        "min": 0,
+        "max": 5,
+        "first": 0,
+        "last": 5,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "money": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 2,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 3,
+        "min": 0,
+        "max": 49,
+        "first": 0,
+        "last": 49,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": false
+      }
+    },
+    "trauma": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "string_samples": [
+        "Josephine"
+      ]
+    },
+    "job": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "string_samples": [
+        "No job",
+        "cafe"
+      ]
+    },
+    "groceries": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "kitchenClean": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 2,
+        "min": -25,
+        "max": 0,
+        "first": 0,
+        "last": -25,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": true
+      }
+    },
+    "zackClean": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 2,
+        "min": -25,
+        "max": 0,
+        "first": 0,
+        "last": -25,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": true
+      }
+    },
+    "rngesus": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 21,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 9,
+        "min": 0,
+        "max": 21,
+        "first": 0,
+        "last": 7,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": false
+      }
+    },
+    "rent": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 2,
+        "min": 0,
+        "max": 1,
+        "first": 0,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "id": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "alley": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "bum": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "PIProg": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "PIDays": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "cottage": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "coffeeDrunk": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "lake": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "birdwatch": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "jogger": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "cult": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "tent": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "turnDownLily": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "apt401Key": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "aptKeyLux": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "cardio": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "strength": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "yoga": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mood.Lively": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mood.Empty": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mood.Dominant": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mood.Submissive": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mood.Sensual": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mood.Romantic": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mood.Excited": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mood.Relaxed": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mood.Impulsive": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mood.Ashamed": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mood.Critical": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mood.Embarrassed": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mood.Delirious": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mood.Despairing": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mood.temp1": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mood.temp2": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "oldphone": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "oldphonePIN": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "string_samples": [
+        "6969"
+      ]
+    },
+    "PINtimer": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "phone": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "laptop": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "cam": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "digiGPS": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "zack": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 2,
+        "min": 0,
+        "max": 5,
+        "first": 0,
+        "last": 5,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "zackSex": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "zackDates": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "lily": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "lilySex": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "lilyNude": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "nudeAmount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 50,
+        "max": 50,
+        "first": 50,
+        "last": 50,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "textDad": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "dadSeen": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "dadRape": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "dad": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "brotherMissing": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "bro": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "constantinCorrupt": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "chloe": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "dating": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "string_samples": [
+        "single"
+      ]
+    },
+    "datingCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "chloeLove": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "lilyLove": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "broLove": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "dadLove": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "zackLove": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "caine": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "caineLove": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "roscoe": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "breakTimeL": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "breakTimeD": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "breakTimeN": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "breakTimeZ": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "waitLily": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "waitZack": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "waitDad": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "waitNoah": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "beautySeen": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "legsWaxed": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "pussyWaxed": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "makeupDone": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "hairDone": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "legsCheck": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "pussyCheck": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "hairCheck": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "makeupCheck": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "showerTime": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 2,
+        "min": 0,
+        "max": 1,
+        "first": 0,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "libBook": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "dildo": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "tail": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "buttplug": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "strapon": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "followers": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "masCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "suckCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "vagCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "assCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "doubCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "rapeCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "creamCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "wButtplug": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "wTail": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "cafeBoring": {
+      "types": [
+        "number",
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 16,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      },
+      "bool_values": [
+        false
+      ]
+    },
+    "cafeRR": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "cafeHarass": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 2,
+        "min": 0,
+        "max": 1,
+        "first": 0,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "cafePressure": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 2,
+        "min": 0,
+        "max": 1,
+        "first": 0,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "cafeRes": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "cafePromo": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "cafeCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 2,
+        "min": 0,
+        "max": 1,
+        "first": 0,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "barCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "barPromo": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "officeCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "officeTier": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "libraryCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "nurseCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "teacherCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "gymCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "managerCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "massageCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 2,
+        "min": 1,
+        "max": 2,
+        "first": 1,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "period": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 6,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 6,
+        "min": 1,
+        "max": 6,
+        "first": 1,
+        "last": 2,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": false
+      }
+    },
+    "cats": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31
+    },
+    "catGend": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31
+    },
+    "catAtt": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31
+    },
+    "pet.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "string_samples": [
+        ""
+      ]
+    },
+    "pet.race": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31
+    },
+    "pet.gender": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31
+    },
+    "pet.attribute": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31
+    },
+    "pet.isFound": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "eggs": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 4,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "number_stats": {
+        "count": 61,
+        "unique_count": 5,
+        "min": 0,
+        "max": 4,
+        "first": 0,
+        "last": 4,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": false
+      }
+    },
+    "eggLocations.cafe": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "eggLocations.gym": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "eggLocations.city": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "eggLocations.park": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "eggLocations.hospital": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "eggLocations.outskirts": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "eggLocations.downtown": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "eggLocations.uptown": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "eggLocations.library": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "eggLocations.cinema": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        false
+      ]
+    },
+    "easter": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "bool_values": [
+        true
+      ]
+    },
+    "return": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 49,
+      "first_ts": 1776403770213,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 31,
+      "string_samples": [
+        "Beginning",
+        "characterCreation",
+        "playGirl",
+        "Everything faded to black...",
+        "Street",
+        "Cafe",
+        "easterCafe",
+        "cafeJob",
+        "cafeWorkImproved",
+        "cafeDefault",
+        "tableClear",
+        "Park",
+        "easterPark",
+        "goingUptown",
+        "Uptown",
+        "easterUptown",
+        "beauty",
+        "goingDowntown",
+        "Downtown",
+        "easterDowntown"
+      ]
+    },
+    "gender": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403785295,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 30,
+      "string_samples": [
+        "Girl"
+      ]
+    },
+    "upbring": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403785295,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 30,
+      "string_samples": [
+        "chrisvirg"
+      ]
+    },
+    "partnerPro1": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403799699,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 29,
+      "string_samples": [
+        "he"
+      ]
+    },
+    "partnerPro2": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403799699,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 29,
+      "string_samples": [
+        "him"
+      ]
+    },
+    "partnerPro3": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403799699,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 29,
+      "string_samples": [
+        "his"
+      ]
+    },
+    "startImg": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403799699,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 29,
+      "bool_values": [
+        false
+      ]
+    },
+    "introSkip": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403817095,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 27,
+      "bool_values": [
+        true
+      ]
+    },
+    "mugged": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776403817095,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 27,
+      "number_stats": {
+        "count": 52,
+        "unique_count": 2,
+        "min": 1,
+        "max": 2,
+        "first": 1,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "cafePay": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776403851398,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 26,
+      "number_stats": {
+        "count": 48,
+        "unique_count": 1,
+        "min": 20,
+        "max": 20,
+        "first": 20,
+        "last": 20,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "parkVisits": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 3,
+      "first_ts": 1776403909714,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 21,
+      "number_stats": {
+        "count": 40,
+        "unique_count": 4,
+        "min": 1,
+        "max": 4,
+        "first": 1,
+        "last": 4,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": false
+      }
+    },
+    "alleyStranger": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404024947,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 12,
+      "number_stats": {
+        "count": 18,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "garage.street.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "Street Parking"
+      ]
+    },
+    "garage.street.maxSpots": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 2,
+        "max": 2,
+        "first": 2,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "garage.street.filledSpots": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "garage.street.price": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 5,
+        "max": 5,
+        "first": 5,
+        "last": 5,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "garage.city.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "City Parking"
+      ]
+    },
+    "garage.city.maxSpots": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 3,
+        "max": 3,
+        "first": 3,
+        "last": 3,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "garage.city.filledSpots": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "garage.city.price": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 10,
+        "max": 10,
+        "first": 10,
+        "last": 10,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "garage.mansion.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "Mansion Parking"
+      ]
+    },
+    "garage.mansion.maxSpots": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 5,
+        "max": 5,
+        "first": 5,
+        "last": 5,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "garage.mansion.filledSpots": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "garage.mansion.price": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "garage.luxapt.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "Luxury Parking"
+      ]
+    },
+    "garage.luxapt.maxSpots": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 5,
+        "max": 5,
+        "first": 5,
+        "last": 5,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "garage.luxapt.filledSpots": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "garage.luxapt.price": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "car.honda.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "Honda EV"
+      ]
+    },
+    "car.honda.price": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 22700,
+        "max": 22700,
+        "first": 22700,
+        "last": 22700,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "car.honda.condition": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "good"
+      ]
+    },
+    "car.honda.owned": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "bool_values": [
+        false
+      ]
+    },
+    "car.honda.location": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "dealership"
+      ]
+    },
+    "car.toyota.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "Toyota Hybrid"
+      ]
+    },
+    "car.toyota.price": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 20500,
+        "max": 20500,
+        "first": 20500,
+        "last": 20500,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "car.toyota.condition": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "good"
+      ]
+    },
+    "car.toyota.owned": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "bool_values": [
+        false
+      ]
+    },
+    "car.toyota.location": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "dealership"
+      ]
+    },
+    "car.audi.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "Audi"
+      ]
+    },
+    "car.audi.price": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 31900,
+        "max": 31900,
+        "first": 31900,
+        "last": 31900,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "car.audi.condition": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "good"
+      ]
+    },
+    "car.audi.owned": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "bool_values": [
+        false
+      ]
+    },
+    "car.audi.location": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "dealership"
+      ]
+    },
+    "car.hyundai.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "Hyundai"
+      ]
+    },
+    "car.hyundai.price": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 22300,
+        "max": 22300,
+        "first": 22300,
+        "last": 22300,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "car.hyundai.condition": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "good"
+      ]
+    },
+    "car.hyundai.owned": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "bool_values": [
+        false
+      ]
+    },
+    "car.hyundai.location": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "dealership"
+      ]
+    },
+    "car.bmw.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "BMW"
+      ]
+    },
+    "car.bmw.price": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 36000,
+        "max": 36000,
+        "first": 36000,
+        "last": 36000,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "car.bmw.condition": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "good"
+      ]
+    },
+    "car.bmw.owned": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "bool_values": [
+        false
+      ]
+    },
+    "car.bmw.location": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "dealership"
+      ]
+    },
+    "car.urus.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "Lamborghini Urus"
+      ]
+    },
+    "car.urus.price": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 9999999,
+        "max": 9999999,
+        "first": 9999999,
+        "last": 9999999,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "car.urus.condition": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "good"
+      ]
+    },
+    "car.urus.owned": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "bool_values": [
+        false
+      ]
+    },
+    "car.urus.location": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "patron"
+      ]
+    },
+    "bike": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "bool_values": [
+        false
+      ]
+    },
+    "carScene": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        ""
+      ]
+    },
+    "gymClean": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "bool_values": [
+        false
+      ]
+    },
+    "canteen": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "bool_values": [
+        false
+      ]
+    },
+    "waitCaine": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "waitTommy": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "breakTimeB": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "breakTimeC": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "breakTimeT": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "orgyOrg": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "bool_values": [
+        false
+      ]
+    },
+    "emailAmount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 10,
+        "max": 10,
+        "first": 10,
+        "last": 10,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "news": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "newspaper": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776404062481,
+      "last_ts": 1776404131433,
+      "passages_seen_on_count": 9,
+      "bool_values": [
+        false
+      ]
+    }
+  },
+  "prefix_clusters": {
+    "gender": [
+      "charPron.gender",
+      "pet.gender",
+      "gender"
+    ],
+    "partner": [
+      "charPron.partner",
+      "partner"
+    ],
+    "questletter": [
+      "questLetter1",
+      "questLetter2"
+    ],
+    "name": [
+      "name",
+      "pet.name",
+      "garage.street.name",
+      "garage.city.name",
+      "garage.mansion.name",
+      "garage.luxapt.name",
+      "car.honda.name",
+      "car.toyota.name",
+      "car.audi.name",
+      "car.hyundai.name",
+      "car.bmw.name",
+      "car.urus.name"
+    ],
+    "temp": [
+      "mood.temp1",
+      "mood.temp2"
+    ],
+    "partnerpro": [
+      "partnerPro1",
+      "partnerPro2",
+      "partnerPro3"
+    ],
+    "maxspots": [
+      "garage.street.maxSpots",
+      "garage.city.maxSpots",
+      "garage.mansion.maxSpots",
+      "garage.luxapt.maxSpots"
+    ],
+    "filledspots": [
+      "garage.street.filledSpots",
+      "garage.city.filledSpots",
+      "garage.mansion.filledSpots",
+      "garage.luxapt.filledSpots"
+    ],
+    "price": [
+      "garage.street.price",
+      "garage.city.price",
+      "garage.mansion.price",
+      "garage.luxapt.price",
+      "car.honda.price",
+      "car.toyota.price",
+      "car.audi.price",
+      "car.hyundai.price",
+      "car.bmw.price",
+      "car.urus.price"
+    ],
+    "condition": [
+      "car.honda.condition",
+      "car.toyota.condition",
+      "car.audi.condition",
+      "car.hyundai.condition",
+      "car.bmw.condition",
+      "car.urus.condition"
+    ],
+    "owned": [
+      "car.honda.owned",
+      "car.toyota.owned",
+      "car.audi.owned",
+      "car.hyundai.owned",
+      "car.bmw.owned",
+      "car.urus.owned"
+    ],
+    "location": [
+      "car.honda.location",
+      "car.toyota.location",
+      "car.audi.location",
+      "car.hyundai.location",
+      "car.bmw.location",
+      "car.urus.location"
+    ]
+  },
+  "co_change": {
+    "corrupt||inhib": 2,
+    "inhib||return": 2,
+    "corrupt||return": 3,
+    "countperiods||rngesus": 4,
+    "countperiods||period": 6,
+    "countperiods||return": 6,
+    "period||rngesus": 4,
+    "return||rngesus": 21,
+    "period||return": 6,
+    "eggs||return": 4,
+    "money||return": 2,
+    "parkVisits||rngesus": 2,
+    "parkVisits||return": 3,
+    "corrupt||vibeLevel": 2,
+    "return||vibeLevel": 2
+  },
+  "passages": {
+    "Beginning": {
+      "first_ts": 1776403770213,
+      "visit_count": 4
+    },
+    "characterCreation": {
+      "first_ts": 1776403785295,
+      "visit_count": 2
+    },
+    "playGirl": {
+      "first_ts": 1776403799699,
+      "visit_count": 2
+    },
+    "Everything faded to black...": {
+      "first_ts": 1776403811579,
+      "visit_count": 1
+    },
+    "Street": {
+      "first_ts": 1776403817095,
+      "visit_count": 10
+    },
+    "Cafe": {
+      "first_ts": 1776403836830,
+      "visit_count": 4
+    },
+    "easterCafe": {
+      "first_ts": 1776403842538,
+      "visit_count": 1
+    },
+    "cafeJob": {
+      "first_ts": 1776403851398,
+      "visit_count": 1
+    },
+    "cafeWorkImproved": {
+      "first_ts": 1776403863762,
+      "visit_count": 1
+    },
+    "cafeDefault": {
+      "first_ts": 1776403869648,
+      "visit_count": 2
+    },
+    "tableClear": {
+      "first_ts": 1776403875344,
+      "visit_count": 1
+    },
+    "Park": {
+      "first_ts": 1776403909714,
+      "visit_count": 6
+    },
+    "easterPark": {
+      "first_ts": 1776403920472,
+      "visit_count": 1
+    },
+    "goingUptown": {
+      "first_ts": 1776403939327,
+      "visit_count": 1
+    },
+    "Uptown": {
+      "first_ts": 1776403944814,
+      "visit_count": 3
+    },
+    "easterUptown": {
+      "first_ts": 1776403954520,
+      "visit_count": 1
+    },
+    "beauty": {
+      "first_ts": 1776403955840,
+      "visit_count": 2
+    },
+    "goingDowntown": {
+      "first_ts": 1776403969410,
+      "visit_count": 1
+    },
+    "Downtown": {
+      "first_ts": 1776403978957,
+      "visit_count": 3
+    },
+    "easterDowntown": {
+      "first_ts": 1776403988461,
+      "visit_count": 1
+    },
+    "club": {
+      "first_ts": 1776403989988,
+      "visit_count": 1
+    },
+    "alley": {
+      "first_ts": 1776404024947,
+      "visit_count": 2
+    },
+    "alleyBuy": {
+      "first_ts": 1776404031202,
+      "visit_count": 1
+    },
+    "parkSleep": {
+      "first_ts": 1776404056409,
+      "visit_count": 1
+    },
+    "parkDream": {
+      "first_ts": 1776404062481,
+      "visit_count": 1
+    },
+    "a place to live...": {
+      "first_ts": 1776404085002,
+      "visit_count": 1
+    },
+    "Go to the address": {
+      "first_ts": 1776404090580,
+      "visit_count": 1
+    },
+    "Yes.": {
+      "first_ts": 1776404098046,
+      "visit_count": 2
+    },
+    "walkUp": {
+      "first_ts": 1776404104038,
+      "visit_count": 1
+    },
+    "Great.": {
+      "first_ts": 1776404109731,
+      "visit_count": 1
+    },
+    "Touch up your room": {
+      "first_ts": 1776404117436,
+      "visit_count": 1
+    }
+  },
+  "choices": {
+    "total": 49,
+    "by_classification": {
+      "branch": 49
+    },
+    "price_observations": [],
+    "recent": [
+      {
+        "ts": 1776403785378,
+        "passage": "Beginning",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Continue",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Support me on Patreon!",
+          "support me on Ko-Fi",
+          "Play!",
+          "Disclaimer"
+        ],
+        "picked": "Play!",
+        "prices": null,
+        "at_state_hash": "868e9a04ed0841f9"
+      },
+      {
+        "ts": 1776403799823,
+        "passage": "characterCreation",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Play!"
+        ],
+        "picked": "Play!",
+        "prices": null,
+        "at_state_hash": "98a61e735539934a"
+      },
+      {
+        "ts": 1776403811667,
+        "passage": "playGirl",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Everything faded to black..."
+        ],
+        "picked": "Everything faded to black...",
+        "prices": null,
+        "at_state_hash": "204f1036d1fdf78a"
+      },
+      {
+        "ts": 1776403817314,
+        "passage": "Everything faded to black...",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Continue",
+          "Played before? Skip intro"
+        ],
+        "picked": "Played before? Skip intro",
+        "prices": null,
+        "at_state_hash": "81bf2c70e03fe572"
+      },
+      {
+        "ts": 1776403836987,
+        "passage": "Street",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Look for an apartment",
+          "Cafe",
+          "Go to the park",
+          "Uptown",
+          "Downtown"
+        ],
+        "picked": "Cafe",
+        "prices": null,
+        "at_state_hash": "81903c606dd03367"
+      },
+      {
+        "ts": 1776403842683,
+        "passage": "Cafe",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Pick it up",
+          "Have some coffee",
+          "Apply for a job at the cafe",
+          "Go back outside"
+        ],
+        "picked": "Pick it up",
+        "prices": null,
+        "at_state_hash": "7fa93650a592a0ca"
+      },
+      {
+        "ts": 1776403850702,
+        "passage": "easterCafe",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Stand up straight"
+        ],
+        "picked": "Stand up straight",
+        "prices": null,
+        "at_state_hash": "148338c56493ab5b"
+      },
+      {
+        "ts": 1776403851550,
+        "passage": "Cafe",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Have some coffee",
+          "Apply for a job at the cafe",
+          "Go back outside"
+        ],
+        "picked": "Apply for a job at the cafe",
+        "prices": null,
+        "at_state_hash": "c0287c6225119b81"
+      },
+      {
+        "ts": 1776403858198,
+        "passage": "cafeJob",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Go back"
+        ],
+        "picked": "Go back",
+        "prices": null,
+        "at_state_hash": "eca83324dbe037d3"
+      },
+      {
+        "ts": 1776403863886,
+        "passage": "Cafe",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Have some coffee",
+          "Work",
+          "Quit your job",
+          "Go back outside"
+        ],
+        "picked": "Work",
+        "prices": null,
+        "at_state_hash": "e80efd4063d11fb7"
+      },
+      {
+        "ts": 1776403869798,
+        "passage": "cafeWorkImproved",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "work schedule",
+          "Leave"
+        ],
+        "picked": "work schedule",
+        "prices": null,
+        "at_state_hash": "15c5d04f60600a19"
+      },
+      {
+        "ts": 1776403875489,
+        "passage": "cafeDefault",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Clear tables",
+          "Finish tasks"
+        ],
+        "picked": "Clear tables",
+        "prices": null,
+        "at_state_hash": "313aa441171ea9fd"
+      },
+      {
+        "ts": 1776403888955,
+        "passage": "tableClear",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Finish shift"
+        ],
+        "picked": "Finish shift",
+        "prices": null,
+        "at_state_hash": "c04d20bd49155ed9"
+      },
+      {
+        "ts": 1776403895798,
+        "passage": "cafeDefault",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Clear tables",
+          "Finish tasks"
+        ],
+        "picked": "Finish tasks",
+        "prices": null,
+        "at_state_hash": "ecef5955314a07cd"
+      },
+      {
+        "ts": 1776403901359,
+        "passage": "Cafe",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Have some coffee",
+          "Work",
+          "Quit your job",
+          "Go back outside"
+        ],
+        "picked": "Go back outside",
+        "prices": null,
+        "at_state_hash": "31b7cb8ee4879929"
+      },
+      {
+        "ts": 1776403909829,
+        "passage": "Street",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Look for an apartment",
+          "Cafe",
+          "Go to the park",
+          "Uptown",
+          "Downtown"
+        ],
+        "picked": "Go to the park",
+        "prices": null,
+        "at_state_hash": "75298df5e25804b1"
+      },
+      {
+        "ts": 1776403920593,
+        "passage": "Park",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Join him for a jog",
+          "Pick it up",
+          "Rest on a bench",
+          "Find a restroom",
+          "Go for a walk",
+          "Leave the park"
+        ],
+        "picked": "Pick it up",
+        "prices": null,
+        "at_state_hash": "84a7cd299ec221cf"
+      },
+      {
+        "ts": 1776403921331,
+        "passage": "easterPark",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Stand up straight"
+        ],
+        "picked": "Stand up straight",
+        "prices": null,
+        "at_state_hash": "06e51b38d77137e1"
+      },
+      {
+        "ts": 1776403938604,
+        "passage": "Park",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Rest on a bench",
+          "Find a restroom",
+          "Go for a walk",
+          "Leave the park"
+        ],
+        "picked": "Leave the park",
+        "prices": null,
+        "at_state_hash": "73f458cf47f2c1f9"
+      },
+      {
+        "ts": 1776403939467,
+        "passage": "Street",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Look for an apartment",
+          "Cafe",
+          "Go to the park",
+          "Uptown",
+          "Downtown"
+        ],
+        "picked": "Uptown",
+        "prices": null,
+        "at_state_hash": "1552050aa24bf8a2"
+      },
+      {
+        "ts": 1776403944912,
+        "passage": "goingUptown",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Arrive"
+        ],
+        "picked": "Arrive",
+        "prices": null,
+        "at_state_hash": "00bde2724ca5edd3"
+      },
+      {
+        "ts": 1776403954602,
+        "passage": "Uptown",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Pick it up",
+          "Buy a handful of vegetables - £1",
+          "Bar",
+          "Beauty shop",
+          "Massage parlor",
+          "Dealership",
+          "Go back to the street"
+        ],
+        "picked": "Pick it up",
+        "prices": null,
+        "at_state_hash": "3cff3cb087939cc9"
+      },
+      {
+        "ts": 1776403955276,
+        "passage": "easterUptown",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Stand up straight"
+        ],
+        "picked": "Stand up straight",
+        "prices": null,
+        "at_state_hash": "1526a41257d43e7f"
+      },
+      {
+        "ts": 1776403955969,
+        "passage": "Uptown",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Buy a handful of vegetables - £1",
+          "Bar",
+          "Beauty shop",
+          "Massage parlor",
+          "Dealership",
+          "Go back to the street"
+        ],
+        "picked": "Beauty shop",
+        "prices": null,
+        "at_state_hash": "90c8218fc6a10fdc"
+      },
+      {
+        "ts": 1776403968026,
+        "passage": "beauty",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Leave the salon"
+        ],
+        "picked": "Leave the salon",
+        "prices": null,
+        "at_state_hash": "fc22538bc44c7ebf"
+      },
+      {
+        "ts": 1776403968760,
+        "passage": "Uptown",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Bar",
+          "Beauty shop",
+          "Massage parlor",
+          "Dealership",
+          "Go back to the street"
+        ],
+        "picked": "Go back to the street",
+        "prices": null,
+        "at_state_hash": "0f33b11cf65be418"
+      },
+      {
+        "ts": 1776403969492,
+        "passage": "Street",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Look for an apartment",
+          "Cafe",
+          "Go to the park",
+          "Uptown",
+          "Downtown"
+        ],
+        "picked": "Downtown",
+        "prices": null,
+        "at_state_hash": "c5651e824a160b22"
+      },
+      {
+        "ts": 1776403979078,
+        "passage": "goingDowntown",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Arrive"
+        ],
+        "picked": "Arrive",
+        "prices": null,
+        "at_state_hash": "e352148daf1a7b70"
+      },
+      {
+        "ts": 1776403988571,
+        "passage": "Downtown",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Pick it up",
+          "Club",
+          "Go back to the street"
+        ],
+        "picked": "Pick it up",
+        "prices": null,
+        "at_state_hash": "0feceb262ec7e852"
+      },
+      {
+        "ts": 1776403989332,
+        "passage": "easterDowntown",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Stand up straight"
+        ],
+        "picked": "Stand up straight",
+        "prices": null,
+        "at_state_hash": "2d22677dca31dd8e"
+      },
+      {
+        "ts": 1776403990088,
+        "passage": "Downtown",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Club",
+          "Go back to the street"
+        ],
+        "picked": "Club",
+        "prices": null,
+        "at_state_hash": "106b3e2013ef6050"
+      },
+      {
+        "ts": 1776404002376,
+        "passage": "club",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Leave"
+        ],
+        "picked": "Leave",
+        "prices": null,
+        "at_state_hash": "a2b1d848dc506785"
+      },
+      {
+        "ts": 1776404003146,
+        "passage": "Downtown",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Club",
+          "Go back to the street"
+        ],
+        "picked": "Go back to the street",
+        "prices": null,
+        "at_state_hash": "7cddbc7978184746"
+      },
+      {
+        "ts": 1776404025076,
+        "passage": "Street",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Go to the park",
+          "Back alley"
+        ],
+        "picked": "Back alley",
+        "prices": null,
+        "at_state_hash": "5323cdbb069b6096"
+      },
+      {
+        "ts": 1776404031339,
+        "passage": "alley",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Look at his wares",
+          "Back away"
+        ],
+        "picked": "Look at his wares",
+        "prices": null,
+        "at_state_hash": "d08ae4e3a50e2b45"
+      },
+      {
+        "ts": 1776404041212,
+        "passage": "alleyBuy",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "He closes his jacket"
+        ],
+        "picked": "He closes his jacket",
+        "prices": null,
+        "at_state_hash": "4a40a16eb3731435"
+      },
+      {
+        "ts": 1776404042050,
+        "passage": "alley",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Look at his wares",
+          "Back away"
+        ],
+        "picked": "Back away",
+        "prices": null,
+        "at_state_hash": "347d40fd8bbbabcf"
+      },
+      {
+        "ts": 1776404050560,
+        "passage": "Street",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Go to the park",
+          "Back alley"
+        ],
+        "picked": "Go to the park",
+        "prices": null,
+        "at_state_hash": "4422d5ae1879a5b9"
+      },
+      {
+        "ts": 1776404056524,
+        "passage": "Park",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Sleep on a bench",
+          "Leave the park"
+        ],
+        "picked": "Sleep on a bench",
+        "prices": null,
+        "at_state_hash": "ff097757a94ee56b"
+      },
+      {
+        "ts": 1776404062553,
+        "passage": "parkSleep",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Sleep"
+        ],
+        "picked": "Sleep",
+        "prices": null,
+        "at_state_hash": "126f35482ba6f87d"
+      },
+      {
+        "ts": 1776404075978,
+        "passage": "parkDream",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Wake up"
+        ],
+        "picked": "Wake up",
+        "prices": null,
+        "at_state_hash": "14e5366b4ab80e28"
+      },
+      {
+        "ts": 1776404084285,
+        "passage": "Park",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Go with him",
+          "Rest on a bench",
+          "Find a restroom",
+          "Go for a walk",
+          "Leave the park"
+        ],
+        "picked": "Leave the park",
+        "prices": null,
+        "at_state_hash": "c96d1836f6d12c56"
+      },
+      {
+        "ts": 1776404085120,
+        "passage": "Street",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Look for an apartment",
+          "Cafe",
+          "Go to the park",
+          "Back alley",
+          "Uptown",
+          "Downtown"
+        ],
+        "picked": "Look for an apartment",
+        "prices": null,
+        "at_state_hash": "ebac5e70f1899e69"
+      },
+      {
+        "ts": 1776404090680,
+        "passage": "a place to live...",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Go to the address"
+        ],
+        "picked": "Go to the address",
+        "prices": null,
+        "at_state_hash": "30aa35d20266673f"
+      },
+      {
+        "ts": 1776404098143,
+        "passage": "Go to the address",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Yes.",
+          "Yes.",
+          "Yes."
+        ],
+        "picked": "Yes.",
+        "prices": null,
+        "at_state_hash": "1655ccdfbdb19d20"
+      },
+      {
+        "ts": 1776404104114,
+        "passage": "Yes.",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Walk up the stairs"
+        ],
+        "picked": "Walk up the stairs",
+        "prices": null,
+        "at_state_hash": "59206efd955f1cd9"
+      },
+      {
+        "ts": 1776404109893,
+        "passage": "walkUp",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Great."
+        ],
+        "picked": "Great.",
+        "prices": null,
+        "at_state_hash": "8fc5c4b806842c8a"
+      },
+      {
+        "ts": 1776404117527,
+        "passage": "Great.",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Touch up your room"
+        ],
+        "picked": "Touch up your room",
+        "prices": null,
+        "at_state_hash": "43641020fd97f70d"
+      },
+      {
+        "ts": 1776404131634,
+        "passage": "Touch up your room",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "Go backward within the game history",
+          "Go forward within the game history",
+          "Backpack",
+          "Help",
+          "Cheats",
+          "Support",
+          "Saves",
+          "Settings",
+          "Restart",
+          "Leave apartment"
+        ],
+        "picked": "Leave apartment",
+        "prices": null,
+        "at_state_hash": "46a92c12ffcd795e"
+      }
+    ]
+  },
+  "mutations": [
+    {
+      "ts": 1776403785295,
+      "passage": "characterCreation",
+      "state_hash": "98a61e735539934a",
+      "var": "return",
+      "before": "Beginning",
+      "after": "characterCreation"
+    },
+    {
+      "ts": 1776403799699,
+      "passage": "playGirl",
+      "state_hash": "204f1036d1fdf78a",
+      "var": "inhib",
+      "before": 100,
+      "after": 125
+    },
+    {
+      "ts": 1776403799699,
+      "passage": "playGirl",
+      "state_hash": "204f1036d1fdf78a",
+      "var": "corrupt",
+      "before": 0,
+      "after": -25
+    },
+    {
+      "ts": 1776403799699,
+      "passage": "playGirl",
+      "state_hash": "204f1036d1fdf78a",
+      "var": "return",
+      "before": "characterCreation",
+      "after": "playGirl"
+    },
+    {
+      "ts": 1776403811579,
+      "passage": "Everything faded to black...",
+      "state_hash": "81bf2c70e03fe572",
+      "var": "return",
+      "before": "playGirl",
+      "after": "Everything faded to black..."
+    },
+    {
+      "ts": 1776403817095,
+      "passage": "Street",
+      "state_hash": "81903c606dd03367",
+      "var": "countperiods",
+      "before": 0,
+      "after": 2
+    },
+    {
+      "ts": 1776403817095,
+      "passage": "Street",
+      "state_hash": "81903c606dd03367",
+      "var": "rngesus",
+      "before": 0,
+      "after": 6
+    },
+    {
+      "ts": 1776403817095,
+      "passage": "Street",
+      "state_hash": "81903c606dd03367",
+      "var": "oldphone",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1776403817095,
+      "passage": "Street",
+      "state_hash": "81903c606dd03367",
+      "var": "period",
+      "before": 1,
+      "after": 3
+    },
+    {
+      "ts": 1776403817095,
+      "passage": "Street",
+      "state_hash": "81903c606dd03367",
+      "var": "return",
+      "before": "Everything faded to black...",
+      "after": "Street"
+    },
+    {
+      "ts": 1776403836830,
+      "passage": "Cafe",
+      "state_hash": "7fa93650a592a0ca",
+      "var": "return",
+      "before": "Street",
+      "after": "Cafe"
+    },
+    {
+      "ts": 1776403842538,
+      "passage": "easterCafe",
+      "state_hash": "148338c56493ab5b",
+      "var": "eggs",
+      "before": 0,
+      "after": 1
+    },
+    {
+      "ts": 1776403842538,
+      "passage": "easterCafe",
+      "state_hash": "148338c56493ab5b",
+      "var": "eggLocations.cafe",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1776403842538,
+      "passage": "easterCafe",
+      "state_hash": "148338c56493ab5b",
+      "var": "return",
+      "before": "Cafe",
+      "after": "easterCafe"
+    },
+    {
+      "ts": 1776403850551,
+      "passage": "Cafe",
+      "state_hash": "c0287c6225119b81",
+      "var": "return",
+      "before": "easterCafe",
+      "after": "Cafe"
+    },
+    {
+      "ts": 1776403851398,
+      "passage": "cafeJob",
+      "state_hash": "eca83324dbe037d3",
+      "var": "job",
+      "before": "No job",
+      "after": "cafe"
+    },
+    {
+      "ts": 1776403851398,
+      "passage": "cafeJob",
+      "state_hash": "eca83324dbe037d3",
+      "var": "return",
+      "before": "Cafe",
+      "after": "cafeJob"
+    },
+    {
+      "ts": 1776403858047,
+      "passage": "Cafe",
+      "state_hash": "e80efd4063d11fb7",
+      "var": "return",
+      "before": "cafeJob",
+      "after": "Cafe"
+    },
+    {
+      "ts": 1776403863762,
+      "passage": "cafeWorkImproved",
+      "state_hash": "15c5d04f60600a19",
+      "var": "return",
+      "before": "Cafe",
+      "after": "cafeWorkImproved"
+    },
+    {
+      "ts": 1776403869648,
+      "passage": "cafeDefault",
+      "state_hash": "313aa441171ea9fd",
+      "var": "cafeBoring",
+      "before": 0,
+      "after": false
+    },
+    {
+      "ts": 1776403869648,
+      "passage": "cafeDefault",
+      "state_hash": "313aa441171ea9fd",
+      "var": "return",
+      "before": "cafeWorkImproved",
+      "after": "cafeDefault"
+    },
+    {
+      "ts": 1776403875344,
+      "passage": "tableClear",
+      "state_hash": "c04d20bd49155ed9",
+      "var": "countperiods",
+      "before": 2,
+      "after": 3
+    },
+    {
+      "ts": 1776403875344,
+      "passage": "tableClear",
+      "state_hash": "c04d20bd49155ed9",
+      "var": "money",
+      "before": 0,
+      "after": 39
+    },
+    {
+      "ts": 1776403875344,
+      "passage": "tableClear",
+      "state_hash": "c04d20bd49155ed9",
+      "var": "cafePressure",
+      "before": 0,
+      "after": 1
+    },
+    {
+      "ts": 1776403875344,
+      "passage": "tableClear",
+      "state_hash": "c04d20bd49155ed9",
+      "var": "cafeCount",
+      "before": 0,
+      "after": 1
+    },
+    {
+      "ts": 1776403875344,
+      "passage": "tableClear",
+      "state_hash": "c04d20bd49155ed9",
+      "var": "period",
+      "before": 3,
+      "after": 4
+    },
+    {
+      "ts": 1776403875344,
+      "passage": "tableClear",
+      "state_hash": "c04d20bd49155ed9",
+      "var": "return",
+      "before": "cafeDefault",
+      "after": "tableClear"
+    },
+    {
+      "ts": 1776403888792,
+      "passage": "cafeDefault",
+      "state_hash": "ecef5955314a07cd",
+      "var": "cafeHarass",
+      "before": 0,
+      "after": 1
+    },
+    {
+      "ts": 1776403888792,
+      "passage": "cafeDefault",
+      "state_hash": "ecef5955314a07cd",
+      "var": "return",
+      "before": "tableClear",
+      "after": "cafeDefault"
+    },
+    {
+      "ts": 1776403895654,
+      "passage": "Cafe",
+      "state_hash": "31b7cb8ee4879929",
+      "var": "return",
+      "before": "cafeDefault",
+      "after": "Cafe"
+    },
+    {
+      "ts": 1776403901161,
+      "passage": "Street",
+      "state_hash": "75298df5e25804b1",
+      "var": "rngesus",
+      "before": 6,
+      "after": 0
+    },
+    {
+      "ts": 1776403901161,
+      "passage": "Street",
+      "state_hash": "75298df5e25804b1",
+      "var": "return",
+      "before": "Cafe",
+      "after": "Street"
+    },
+    {
+      "ts": 1776403909714,
+      "passage": "Park",
+      "state_hash": "84a7cd299ec221cf",
+      "var": "rngesus",
+      "before": 0,
+      "after": 2
+    },
+    {
+      "ts": 1776403909714,
+      "passage": "Park",
+      "state_hash": "84a7cd299ec221cf",
+      "var": "return",
+      "before": "Street",
+      "after": "Park"
+    },
+    {
+      "ts": 1776403920472,
+      "passage": "easterPark",
+      "state_hash": "06e51b38d77137e1",
+      "var": "eggs",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "ts": 1776403920472,
+      "passage": "easterPark",
+      "state_hash": "06e51b38d77137e1",
+      "var": "eggLocations.park",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1776403920472,
+      "passage": "easterPark",
+      "state_hash": "06e51b38d77137e1",
+      "var": "return",
+      "before": "Park",
+      "after": "easterPark"
+    },
+    {
+      "ts": 1776403921207,
+      "passage": "Park",
+      "state_hash": "73f458cf47f2c1f9",
+      "var": "rngesus",
+      "before": 2,
+      "after": 0
+    },
+    {
+      "ts": 1776403921207,
+      "passage": "Park",
+      "state_hash": "73f458cf47f2c1f9",
+      "var": "return",
+      "before": "easterPark",
+      "after": "Park"
+    },
+    {
+      "ts": 1776403921207,
+      "passage": "Park",
+      "state_hash": "73f458cf47f2c1f9",
+      "var": "parkVisits",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "ts": 1776403938408,
+      "passage": "Street",
+      "state_hash": "1552050aa24bf8a2",
+      "var": "rngesus",
+      "before": 0,
+      "after": 2
+    },
+    {
+      "ts": 1776403938408,
+      "passage": "Street",
+      "state_hash": "1552050aa24bf8a2",
+      "var": "return",
+      "before": "Park",
+      "after": "Street"
+    },
+    {
+      "ts": 1776403939327,
+      "passage": "goingUptown",
+      "state_hash": "00bde2724ca5edd3",
+      "var": "countperiods",
+      "before": 3,
+      "after": 4
+    },
+    {
+      "ts": 1776403939327,
+      "passage": "goingUptown",
+      "state_hash": "00bde2724ca5edd3",
+      "var": "rngesus",
+      "before": 2,
+      "after": 0
+    },
+    {
+      "ts": 1776403939327,
+      "passage": "goingUptown",
+      "state_hash": "00bde2724ca5edd3",
+      "var": "period",
+      "before": 4,
+      "after": 5
+    },
+    {
+      "ts": 1776403939327,
+      "passage": "goingUptown",
+      "state_hash": "00bde2724ca5edd3",
+      "var": "return",
+      "before": "Street",
+      "after": "goingUptown"
+    },
+    {
+      "ts": 1776403944814,
+      "passage": "Uptown",
+      "state_hash": "3cff3cb087939cc9",
+      "var": "rngesus",
+      "before": 0,
+      "after": 3
+    },
+    {
+      "ts": 1776403944814,
+      "passage": "Uptown",
+      "state_hash": "3cff3cb087939cc9",
+      "var": "return",
+      "before": "goingUptown",
+      "after": "Uptown"
+    },
+    {
+      "ts": 1776403954520,
+      "passage": "easterUptown",
+      "state_hash": "1526a41257d43e7f",
+      "var": "eggs",
+      "before": 2,
+      "after": 3
+    },
+    {
+      "ts": 1776403954520,
+      "passage": "easterUptown",
+      "state_hash": "1526a41257d43e7f",
+      "var": "eggLocations.uptown",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1776403954520,
+      "passage": "easterUptown",
+      "state_hash": "1526a41257d43e7f",
+      "var": "return",
+      "before": "Uptown",
+      "after": "easterUptown"
+    },
+    {
+      "ts": 1776403955180,
+      "passage": "Uptown",
+      "state_hash": "90c8218fc6a10fdc",
+      "var": "return",
+      "before": "easterUptown",
+      "after": "Uptown"
+    },
+    {
+      "ts": 1776403955840,
+      "passage": "beauty",
+      "state_hash": "fc22538bc44c7ebf",
+      "var": "return",
+      "before": "Uptown",
+      "after": "beauty"
+    },
+    {
+      "ts": 1776403967932,
+      "passage": "Uptown",
+      "state_hash": "0f33b11cf65be418",
+      "var": "rngesus",
+      "before": 3,
+      "after": 2
+    },
+    {
+      "ts": 1776403967932,
+      "passage": "Uptown",
+      "state_hash": "0f33b11cf65be418",
+      "var": "return",
+      "before": "beauty",
+      "after": "Uptown"
+    },
+    {
+      "ts": 1776403968587,
+      "passage": "Street",
+      "state_hash": "c5651e824a160b22",
+      "var": "rngesus",
+      "before": 2,
+      "after": 1
+    },
+    {
+      "ts": 1776403968587,
+      "passage": "Street",
+      "state_hash": "c5651e824a160b22",
+      "var": "return",
+      "before": "Uptown",
+      "after": "Street"
+    },
+    {
+      "ts": 1776403969410,
+      "passage": "goingDowntown",
+      "state_hash": "e352148daf1a7b70",
+      "var": "countperiods",
+      "before": 4,
+      "after": 5
+    },
+    {
+      "ts": 1776403969410,
+      "passage": "goingDowntown",
+      "state_hash": "e352148daf1a7b70",
+      "var": "rngesus",
+      "before": 1,
+      "after": 3
+    },
+    {
+      "ts": 1776403969410,
+      "passage": "goingDowntown",
+      "state_hash": "e352148daf1a7b70",
+      "var": "period",
+      "before": 5,
+      "after": 6
+    },
+    {
+      "ts": 1776403969410,
+      "passage": "goingDowntown",
+      "state_hash": "e352148daf1a7b70",
+      "var": "return",
+      "before": "Street",
+      "after": "goingDowntown"
+    },
+    {
+      "ts": 1776403978957,
+      "passage": "Downtown",
+      "state_hash": "0feceb262ec7e852",
+      "var": "rngesus",
+      "before": 3,
+      "after": 1
+    },
+    {
+      "ts": 1776403978957,
+      "passage": "Downtown",
+      "state_hash": "0feceb262ec7e852",
+      "var": "return",
+      "before": "goingDowntown",
+      "after": "Downtown"
+    },
+    {
+      "ts": 1776403988461,
+      "passage": "easterDowntown",
+      "state_hash": "2d22677dca31dd8e",
+      "var": "eggs",
+      "before": 3,
+      "after": 4
+    },
+    {
+      "ts": 1776403988461,
+      "passage": "easterDowntown",
+      "state_hash": "2d22677dca31dd8e",
+      "var": "eggLocations.downtown",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1776403988461,
+      "passage": "easterDowntown",
+      "state_hash": "2d22677dca31dd8e",
+      "var": "return",
+      "before": "Downtown",
+      "after": "easterDowntown"
+    },
+    {
+      "ts": 1776403989209,
+      "passage": "Downtown",
+      "state_hash": "106b3e2013ef6050",
+      "var": "money",
+      "before": 39,
+      "after": 49
+    },
+    {
+      "ts": 1776403989209,
+      "passage": "Downtown",
+      "state_hash": "106b3e2013ef6050",
+      "var": "rngesus",
+      "before": 1,
+      "after": 14
+    },
+    {
+      "ts": 1776403989209,
+      "passage": "Downtown",
+      "state_hash": "106b3e2013ef6050",
+      "var": "return",
+      "before": "easterDowntown",
+      "after": "Downtown"
+    },
+    {
+      "ts": 1776403989988,
+      "passage": "club",
+      "state_hash": "a2b1d848dc506785",
+      "var": "alley",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1776403989988,
+      "passage": "club",
+      "state_hash": "a2b1d848dc506785",
+      "var": "return",
+      "before": "Downtown",
+      "after": "club"
+    },
+    {
+      "ts": 1776404002265,
+      "passage": "Downtown",
+      "state_hash": "7cddbc7978184746",
+      "var": "rngesus",
+      "before": 14,
+      "after": 7
+    },
+    {
+      "ts": 1776404002265,
+      "passage": "Downtown",
+      "state_hash": "7cddbc7978184746",
+      "var": "return",
+      "before": "club",
+      "after": "Downtown"
+    },
+    {
+      "ts": 1776404002953,
+      "passage": "Street",
+      "state_hash": "5323cdbb069b6096",
+      "var": "rngesus",
+      "before": 7,
+      "after": 0
+    },
+    {
+      "ts": 1776404002953,
+      "passage": "Street",
+      "state_hash": "5323cdbb069b6096",
+      "var": "return",
+      "before": "Downtown",
+      "after": "Street"
+    },
+    {
+      "ts": 1776404024947,
+      "passage": "alley",
+      "state_hash": "d08ae4e3a50e2b45",
+      "var": "rngesus",
+      "before": 0,
+      "after": 9
+    },
+    {
+      "ts": 1776404024947,
+      "passage": "alley",
+      "state_hash": "d08ae4e3a50e2b45",
+      "var": "return",
+      "before": "Street",
+      "after": "alley"
+    },
+    {
+      "ts": 1776404031202,
+      "passage": "alleyBuy",
+      "state_hash": "4a40a16eb3731435",
+      "var": "return",
+      "before": "alley",
+      "after": "alleyBuy"
+    },
+    {
+      "ts": 1776404041062,
+      "passage": "alley",
+      "state_hash": "347d40fd8bbbabcf",
+      "var": "rngesus",
+      "before": 9,
+      "after": 6
+    },
+    {
+      "ts": 1776404041062,
+      "passage": "alley",
+      "state_hash": "347d40fd8bbbabcf",
+      "var": "return",
+      "before": "alleyBuy",
+      "after": "alley"
+    },
+    {
+      "ts": 1776404041858,
+      "passage": "Street",
+      "state_hash": "4422d5ae1879a5b9",
+      "var": "rngesus",
+      "before": 6,
+      "after": 21
+    },
+    {
+      "ts": 1776404041858,
+      "passage": "Street",
+      "state_hash": "4422d5ae1879a5b9",
+      "var": "return",
+      "before": "alley",
+      "after": "Street"
+    },
+    {
+      "ts": 1776404050440,
+      "passage": "Park",
+      "state_hash": "ff097757a94ee56b",
+      "var": "rngesus",
+      "before": 21,
+      "after": 0
+    },
+    {
+      "ts": 1776404050440,
+      "passage": "Park",
+      "state_hash": "ff097757a94ee56b",
+      "var": "return",
+      "before": "Street",
+      "after": "Park"
+    },
+    {
+      "ts": 1776404050440,
+      "passage": "Park",
+      "state_hash": "ff097757a94ee56b",
+      "var": "parkVisits",
+      "before": 2,
+      "after": 3
+    },
+    {
+      "ts": 1776404056409,
+      "passage": "parkSleep",
+      "state_hash": "126f35482ba6f87d",
+      "var": "return",
+      "before": "Park",
+      "after": "parkSleep"
+    },
+    {
+      "ts": 1776404062481,
+      "passage": "parkDream",
+      "state_hash": "14e5366b4ab80e28",
+      "var": "vibeLevel",
+      "before": 0.3,
+      "after": 0.05
+    },
+    {
+      "ts": 1776404062481,
+      "passage": "parkDream",
+      "state_hash": "14e5366b4ab80e28",
+      "var": "countperiods",
+      "before": 5,
+      "after": 12
+    },
+    {
+      "ts": 1776404062481,
+      "passage": "parkDream",
+      "state_hash": "14e5366b4ab80e28",
+      "var": "questDays",
+      "before": 0,
+      "after": 2
+    },
+    {
+      "ts": 1776404062481,
+      "passage": "parkDream",
+      "state_hash": "14e5366b4ab80e28",
+      "var": "allure",
+      "before": 30,
+      "after": 15
+    },
+    {
+      "ts": 1776404062481,
+      "passage": "parkDream",
+      "state_hash": "14e5366b4ab80e28",
+      "var": "corrupt",
+      "before": -25,
+      "after": -19
+    },
+    {
+      "ts": 1776404062481,
+      "passage": "parkDream",
+      "state_hash": "14e5366b4ab80e28",
+      "var": "kitchenClean",
+      "before": 0,
+      "after": -25
+    },
+    {
+      "ts": 1776404062481,
+      "passage": "parkDream",
+      "state_hash": "14e5366b4ab80e28",
+      "var": "zackClean",
+      "before": 0,
+      "after": -25
+    },
+    {
+      "ts": 1776404062481,
+      "passage": "parkDream",
+      "state_hash": "14e5366b4ab80e28",
+      "var": "rngesus",
+      "before": 0,
+      "after": 3
+    },
+    {
+      "ts": 1776404062481,
+      "passage": "parkDream",
+      "state_hash": "14e5366b4ab80e28",
+      "var": "rent",
+      "before": 0,
+      "after": 1
+    },
+    {
+      "ts": 1776404062481,
+      "passage": "parkDream",
+      "state_hash": "14e5366b4ab80e28",
+      "var": "showerTime",
+      "before": 0,
+      "after": 1
+    },
+    {
+      "ts": 1776404062481,
+      "passage": "parkDream",
+      "state_hash": "14e5366b4ab80e28",
+      "var": "day",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "ts": 1776404062481,
+      "passage": "parkDream",
+      "state_hash": "14e5366b4ab80e28",
+      "var": "period",
+      "before": 6,
+      "after": 1
+    },
+    {
+      "ts": 1776404062481,
+      "passage": "parkDream",
+      "state_hash": "14e5366b4ab80e28",
+      "var": "return",
+      "before": "parkSleep",
+      "after": "parkDream"
+    },
+    {
+      "ts": 1776404062481,
+      "passage": "parkDream",
+      "state_hash": "14e5366b4ab80e28",
+      "var": "mugged",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "ts": 1776404075858,
+      "passage": "Park",
+      "state_hash": "c96d1836f6d12c56",
+      "var": "return",
+      "before": "parkDream",
+      "after": "Park"
+    },
+    {
+      "ts": 1776404075858,
+      "passage": "Park",
+      "state_hash": "c96d1836f6d12c56",
+      "var": "parkVisits",
+      "before": 3,
+      "after": 4
+    },
+    {
+      "ts": 1776404084091,
+      "passage": "Street",
+      "state_hash": "ebac5e70f1899e69",
+      "var": "rngesus",
+      "before": 3,
+      "after": 21
+    },
+    {
+      "ts": 1776404084091,
+      "passage": "Street",
+      "state_hash": "ebac5e70f1899e69",
+      "var": "return",
+      "before": "Park",
+      "after": "Street"
+    },
+    {
+      "ts": 1776404085002,
+      "passage": "a place to live...",
+      "state_hash": "30aa35d20266673f",
+      "var": "return",
+      "before": "Street",
+      "after": "a place to live..."
+    },
+    {
+      "ts": 1776404090580,
+      "passage": "Go to the address",
+      "state_hash": "1655ccdfbdb19d20",
+      "var": "countperiods",
+      "before": 12,
+      "after": 13
+    },
+    {
+      "ts": 1776404090580,
+      "passage": "Go to the address",
+      "state_hash": "1655ccdfbdb19d20",
+      "var": "period",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "ts": 1776404090580,
+      "passage": "Go to the address",
+      "state_hash": "1655ccdfbdb19d20",
+      "var": "return",
+      "before": "a place to live...",
+      "after": "Go to the address"
+    },
+    {
+      "ts": 1776404098046,
+      "passage": "Yes.",
+      "state_hash": "59206efd955f1cd9",
+      "var": "return",
+      "before": "Go to the address",
+      "after": "Yes."
+    },
+    {
+      "ts": 1776404104038,
+      "passage": "walkUp",
+      "state_hash": "8fc5c4b806842c8a",
+      "var": "vibeLevel",
+      "before": 0.05,
+      "after": 0.07500000000000001
+    },
+    {
+      "ts": 1776404104038,
+      "passage": "walkUp",
+      "state_hash": "8fc5c4b806842c8a",
+      "var": "inhib",
+      "before": 125,
+      "after": 117
+    },
+    {
+      "ts": 1776404104038,
+      "passage": "walkUp",
+      "state_hash": "8fc5c4b806842c8a",
+      "var": "corrupt",
+      "before": -19,
+      "after": -17
+    },
+    {
+      "ts": 1776404104038,
+      "passage": "walkUp",
+      "state_hash": "8fc5c4b806842c8a",
+      "var": "arousal",
+      "before": 0,
+      "after": 5
+    },
+    {
+      "ts": 1776404104038,
+      "passage": "walkUp",
+      "state_hash": "8fc5c4b806842c8a",
+      "var": "zack",
+      "before": 0,
+      "after": 5
+    },
+    {
+      "ts": 1776404104038,
+      "passage": "walkUp",
+      "state_hash": "8fc5c4b806842c8a",
+      "var": "return",
+      "before": "Yes.",
+      "after": "walkUp"
+    },
+    {
+      "ts": 1776404109731,
+      "passage": "Great.",
+      "state_hash": "43641020fd97f70d",
+      "var": "return",
+      "before": "walkUp",
+      "after": "Great."
+    },
+    {
+      "ts": 1776404117436,
+      "passage": "Touch up your room",
+      "state_hash": "46a92c12ffcd795e",
+      "var": "apt401Key",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1776404117436,
+      "passage": "Touch up your room",
+      "state_hash": "46a92c12ffcd795e",
+      "var": "return",
+      "before": "Great.",
+      "after": "Touch up your room"
+    },
+    {
+      "ts": 1776404131433,
+      "passage": "Street",
+      "state_hash": "7f44fd68b53ca93d",
+      "var": "rngesus",
+      "before": 21,
+      "after": 7
+    },
+    {
+      "ts": 1776404131433,
+      "passage": "Street",
+      "state_hash": "7f44fd68b53ca93d",
+      "var": "return",
+      "before": "Touch up your room",
+      "after": "Street"
+    }
+  ]
+}

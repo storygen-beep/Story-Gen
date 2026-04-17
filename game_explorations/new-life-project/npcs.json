@@ -1,0 +1,182 @@
+{
+  "chloe": {
+    "stats": [
+      "love"
+    ],
+    "vars": [
+      {
+        "name": "chloeLove",
+        "stat": "love",
+        "profile": {
+          "types": [
+            "number"
+          ],
+          "mutation_count": 0,
+          "first_ts": 1776403770213,
+          "last_ts": 1776404131433,
+          "passages_seen_on_count": 31,
+          "number_stats": {
+            "count": 61,
+            "unique_count": 1,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0,
+            "is_monotonic_increasing": true,
+            "is_boolean_like": true
+          }
+        }
+      }
+    ]
+  },
+  "lily": {
+    "stats": [
+      "love"
+    ],
+    "vars": [
+      {
+        "name": "lilyLove",
+        "stat": "love",
+        "profile": {
+          "types": [
+            "number"
+          ],
+          "mutation_count": 0,
+          "first_ts": 1776403770213,
+          "last_ts": 1776404131433,
+          "passages_seen_on_count": 31,
+          "number_stats": {
+            "count": 61,
+            "unique_count": 1,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0,
+            "is_monotonic_increasing": true,
+            "is_boolean_like": true
+          }
+        }
+      }
+    ]
+  },
+  "bro": {
+    "stats": [
+      "love"
+    ],
+    "vars": [
+      {
+        "name": "broLove",
+        "stat": "love",
+        "profile": {
+          "types": [
+            "number"
+          ],
+          "mutation_count": 0,
+          "first_ts": 1776403770213,
+          "last_ts": 1776404131433,
+          "passages_seen_on_count": 31,
+          "number_stats": {
+            "count": 61,
+            "unique_count": 1,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0,
+            "is_monotonic_increasing": true,
+            "is_boolean_like": true
+          }
+        }
+      }
+    ]
+  },
+  "dad": {
+    "stats": [
+      "love"
+    ],
+    "vars": [
+      {
+        "name": "dadLove",
+        "stat": "love",
+        "profile": {
+          "types": [
+            "number"
+          ],
+          "mutation_count": 0,
+          "first_ts": 1776403770213,
+          "last_ts": 1776404131433,
+          "passages_seen_on_count": 31,
+          "number_stats": {
+            "count": 61,
+            "unique_count": 1,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0,
+            "is_monotonic_increasing": true,
+            "is_boolean_like": true
+          }
+        }
+      }
+    ]
+  },
+  "zack": {
+    "stats": [
+      "love"
+    ],
+    "vars": [
+      {
+        "name": "zackLove",
+        "stat": "love",
+        "profile": {
+          "types": [
+            "number"
+          ],
+          "mutation_count": 0,
+          "first_ts": 1776403770213,
+          "last_ts": 1776404131433,
+          "passages_seen_on_count": 31,
+          "number_stats": {
+            "count": 61,
+            "unique_count": 1,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0,
+            "is_monotonic_increasing": true,
+            "is_boolean_like": true
+          }
+        }
+      }
+    ]
+  },
+  "caine": {
+    "stats": [
+      "love"
+    ],
+    "vars": [
+      {
+        "name": "caineLove",
+        "stat": "love",
+        "profile": {
+          "types": [
+            "number"
+          ],
+          "mutation_count": 0,
+          "first_ts": 1776403770213,
+          "last_ts": 1776404131433,
+          "passages_seen_on_count": 31,
+          "number_stats": {
+            "count": 61,
+            "unique_count": 1,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0,
+            "is_monotonic_increasing": true,
+            "is_boolean_like": true
+          }
+        }
+      }
+    ]
+  }
+}

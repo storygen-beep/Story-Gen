@@ -37,3 +37,40 @@
 - **Go further up the street** → probed (screenshot: /home/user/Story-Gen/game_explorations/new-life-project/ui_probes/Go_further_up_the_street.png)
 - **Just enjoy the scenery and walk along** → probed (screenshot: /home/user/Story-Gen/game_explorations/new-life-project/ui_probes/Just_enjoy_the_scenery_and_walk_along.png)
 
+- [2026-04-17T05:36:13.613Z] === MAP ===
+HUBS: Street (main) → {Apartment, Cafe, Park, Uptown, Downtown, Back alley (after club), Outskirts (quest-gated)}
+UPTOWN: Bar | Beauty shop (leg wax, pussy wax, makeup, hair — all £) | Massage parlor | Dealership (Honda 22.7k, Toyota 20.5k, Audi 31.9k, Hyundai 22.3k, BMW 36k, patron-only Urus 10M)
+DOWNTOWN: Club (ID gate: fake ID from alley OR seduce bouncer [corrupt gate]) | Mall/Library/Cinema (time-gated) | local library book reading events
+PARK: jog (fitness event), bench (rest or SLEEP when homeless), restroom, walk, flash-stranger [inhib-low + corrupt-high gate]
+
+=== TIME ===
+Day has ~6 periods. Activities advance period+1. Night (period 6) closes cafe/uptown/downtown/apartment-hunt. Park bench is homeless bedroll. parkDream → day+1, period→1, huge lazy init (car/garage/email/news systems spawn).
+
+=== STATS ===
+allure (30 start, halves on homeless sleep), inhib (125 start, lowers unlock flash/slutty options), corrupt (-25 start, unlocks club seduce / flash / bad-choice branches), arousal (0-?, drives horny options), trauma (safety flag), sanity (bool), purity (25 display). Jobs have own stats: cafePressure/cafeHarass/cafeBoring/cafeCount/cafeRR/cafeRes, officeTier/count, libraryCount, bar/gym/nurse/teacher/managerCount.
+
+=== ECONOMY ===
+Job: cafe pays £20 base + £19 tips per shift (cafePay=20, explicit var). Rent £400/week at Zack's apt 401. Dealer in alley sells fake ID + raise-arousal/corruption drugs + lower-inhib/trauma drugs (all money-gated). Beauty shop converts money→allure (via wax/makeup/hair).
+
+=== MAIN ARC ===
+Start: exploreIntro → Street hub (no job, £0, home=none, partner=absent boyfriend).
+Arc 1 (happy): Cafe → Apply → Work loop (£39/shift) → save for apartment → 'a place to live...' hunt poster → Zack apt 401 → rent £400/wk → apt401Key=true → home progression.
+Arc 2 (dark): Homeless → park sleep multiple nights → mugged counter++ → strength+60 + rngesus=7 opens apartment-survival alt path (currently gated). Quote: !( eq 7 &&  gte 5 &&  gt 60).
+Arc 3 (NPCs): Zack (love stat, Clean quest, sex flag), Lily (love, nude, turnDownLily), Chloe/Caine/Dad/Bro (love stats), Dad has non-con branch (dadRape flag), brother missing quest.
+
+=== RNG ===
+rngesus re-rolled on every hub transition (seen 0,1,2,3,6,7,9,21). Gates random events. rngesus==7 is the special trigger for mugged arc. Park: parkVisits counter; cafe: cafeCount counter.
+
+=== EASTER ===
+eggs collected via 'Pick it up' on ground. eggLocations.{cafe,park,uptown,downtown...}. We grabbed 4/10 in first day: cafe, park, uptown, downtown.
+
+=== QUEST HINTS ===
+kidnapQuest / facilityQuest / brotherMissing boolean flags. questmap array. questDays counter (auto-advanced on sleep). questLetter1/2='unopened'. mansion/cottage/cellarClean — late-game locations. PI (private investigator) system with PIProg/PIDays/oldphone(PIN 6969)/digiGPS.
+
+=== GUESTED SYSTEMS ===
+Casino minigame (deck/chips/bet/pot/luckyCasino/casinoSus) — haven't unlocked
+Car/garage system (6 cars for sale, 4 parking zones, price 0-10M)
+Email/news/newspaper — 10 emails waiting on day 2
+Cats/pet system (cats[10], catGend[2], catAtt[5], pet{5})
+Sex counts: masCount/suckCount/vagCount/assCount/doubCount/rapeCount/creamCount
+Toys: dildo/buttplug/tail/strapon/wButtplug/wTail

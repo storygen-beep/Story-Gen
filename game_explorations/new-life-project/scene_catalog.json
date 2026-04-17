@@ -1,0 +1,126 @@
+{
+  "Beginning": {
+    "first_ts": 1776403770213,
+    "visit_count": 4
+  },
+  "characterCreation": {
+    "first_ts": 1776403785295,
+    "visit_count": 2
+  },
+  "playGirl": {
+    "first_ts": 1776403799699,
+    "visit_count": 2
+  },
+  "Everything faded to black...": {
+    "first_ts": 1776403811579,
+    "visit_count": 1
+  },
+  "Street": {
+    "first_ts": 1776403817095,
+    "visit_count": 10
+  },
+  "Cafe": {
+    "first_ts": 1776403836830,
+    "visit_count": 4
+  },
+  "easterCafe": {
+    "first_ts": 1776403842538,
+    "visit_count": 1
+  },
+  "cafeJob": {
+    "first_ts": 1776403851398,
+    "visit_count": 1
+  },
+  "cafeWorkImproved": {
+    "first_ts": 1776403863762,
+    "visit_count": 1
+  },
+  "cafeDefault": {
+    "first_ts": 1776403869648,
+    "visit_count": 2
+  },
+  "tableClear": {
+    "first_ts": 1776403875344,
+    "visit_count": 1
+  },
+  "Park": {
+    "first_ts": 1776403909714,
+    "visit_count": 6
+  },
+  "easterPark": {
+    "first_ts": 1776403920472,
+    "visit_count": 1
+  },
+  "goingUptown": {
+    "first_ts": 1776403939327,
+    "visit_count": 1
+  },
+  "Uptown": {
+    "first_ts": 1776403944814,
+    "visit_count": 3
+  },
+  "easterUptown": {
+    "first_ts": 1776403954520,
+    "visit_count": 1
+  },
+  "beauty": {
+    "first_ts": 1776403955840,
+    "visit_count": 2
+  },
+  "goingDowntown": {
+    "first_ts": 1776403969410,
+    "visit_count": 1
+  },
+  "Downtown": {
+    "first_ts": 1776403978957,
+    "visit_count": 3
+  },
+  "easterDowntown": {
+    "first_ts": 1776403988461,
+    "visit_count": 1
+  },
+  "club": {
+    "first_ts": 1776403989988,
+    "visit_count": 1
+  },
+  "alley": {
+    "first_ts": 1776404024947,
+    "visit_count": 2
+  },
+  "alleyBuy": {
+    "first_ts": 1776404031202,
+    "visit_count": 1
+  },
+  "parkSleep": {
+    "first_ts": 1776404056409,
+    "visit_count": 1
+  },
+  "parkDream": {
+    "first_ts": 1776404062481,
+    "visit_count": 1
+  },
+  "a place to live...": {
+    "first_ts": 1776404085002,
+    "visit_count": 1
+  },
+  "Go to the address": {
+    "first_ts": 1776404090580,
+    "visit_count": 1
+  },
+  "Yes.": {
+    "first_ts": 1776404098046,
+    "visit_count": 2
+  },
+  "walkUp": {
+    "first_ts": 1776404104038,
+    "visit_count": 1
+  },
+  "Great.": {
+    "first_ts": 1776404109731,
+    "visit_count": 1
+  },
+  "Touch up your room": {
+    "first_ts": 1776404117436,
+    "visit_count": 1
+  }
+}

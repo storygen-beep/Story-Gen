@@ -1,0 +1,3137 @@
+{
+  "generated_at": "2026-04-17T05:36:17.679Z",
+  "total_observed_edges": 47,
+  "total_synthetic_edges": 0,
+  "total_play_log_entries": 64,
+  "total_timeline_entries": 53,
+  "initial_passage": "Beginning",
+  "orphan_clicks": [],
+  "observed_edges": [
+    {
+      "from": "Street",
+      "clicked_text": "Go to the park",
+      "to": "Park",
+      "observation_count": 2,
+      "classifications": {
+        "branch": 2
+      },
+      "first_observed_ts": 1776403909302,
+      "last_observed_ts": 1776404050035,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "rngesus": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            0,
+            21
+          ],
+          "after_values": [
+            2,
+            0
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": -21,
+            "max_delta": 2,
+            "mean_delta": -9.5,
+            "always_same_delta": false
+          }
+        },
+        "return": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            "Street",
+            "Street"
+          ],
+          "after_values": [
+            "Park",
+            "Park"
+          ],
+          "numeric_stats": null
+        },
+        "parkVisits": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "added": 1,
+            "changed": 1
+          },
+          "before_values": [
+            null,
+            2
+          ],
+          "after_values": [
+            1,
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Park",
+      "clicked_text": "Leave the park",
+      "to": "Street",
+      "observation_count": 2,
+      "classifications": {
+        "branch": 2
+      },
+      "first_observed_ts": 1776403937850,
+      "last_observed_ts": 1776404083636,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "rngesus": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            0,
+            3
+          ],
+          "after_values": [
+            2,
+            21
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": 2,
+            "max_delta": 18,
+            "mean_delta": 10,
+            "always_same_delta": false
+          }
+        },
+        "return": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            "Park",
+            "Park"
+          ],
+          "after_values": [
+            "Street",
+            "Street"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Beginning",
+      "clicked_text": "Play!",
+      "to": "characterCreation",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403784718,
+      "last_observed_ts": 1776403784718,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Beginning"
+          ],
+          "after_values": [
+            "characterCreation"
+          ],
+          "numeric_stats": null
+        },
+        "gender": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "Girl"
+          ],
+          "numeric_stats": null
+        },
+        "upbring": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "chrisvirg"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "characterCreation",
+      "clicked_text": "Play!",
+      "to": "playGirl",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403799264,
+      "last_observed_ts": 1776403799264,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "inhib": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            100
+          ],
+          "after_values": [
+            125
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 25,
+            "max_delta": 25,
+            "mean_delta": 25,
+            "always_same_delta": true
+          }
+        },
+        "corrupt": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            -25
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -25,
+            "max_delta": -25,
+            "mean_delta": -25,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "characterCreation"
+          ],
+          "after_values": [
+            "playGirl"
+          ],
+          "numeric_stats": null
+        },
+        "partnerPro1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "he"
+          ],
+          "numeric_stats": null
+        },
+        "partnerPro2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "him"
+          ],
+          "numeric_stats": null
+        },
+        "partnerPro3": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "his"
+          ],
+          "numeric_stats": null
+        },
+        "startImg": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "playGirl",
+      "clicked_text": "Everything faded to black...",
+      "to": "Everything faded to black...",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403811006,
+      "last_observed_ts": 1776403811006,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "playGirl"
+          ],
+          "after_values": [
+            "Everything faded to black..."
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Everything faded to black...",
+      "clicked_text": "Played before? Skip intro",
+      "to": "Street",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403816634,
+      "last_observed_ts": 1776403816634,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "countperiods": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "rngesus": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            6
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 6,
+            "max_delta": 6,
+            "mean_delta": 6,
+            "always_same_delta": true
+          }
+        },
+        "oldphone": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "period": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Everything faded to black..."
+          ],
+          "after_values": [
+            "Street"
+          ],
+          "numeric_stats": null
+        },
+        "introSkip": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "mugged": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Street",
+      "clicked_text": "Cafe",
+      "to": "Cafe",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403836255,
+      "last_observed_ts": 1776403836255,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Street"
+          ],
+          "after_values": [
+            "Cafe"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Cafe",
+      "clicked_text": "Pick it up",
+      "to": "easterCafe",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403842071,
+      "last_observed_ts": 1776403842071,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "eggs": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "eggLocations.cafe": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Cafe"
+          ],
+          "after_values": [
+            "easterCafe"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "easterCafe",
+      "clicked_text": "Stand up straight",
+      "to": "Cafe",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403850117,
+      "last_observed_ts": 1776403850117,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "easterCafe"
+          ],
+          "after_values": [
+            "Cafe"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Cafe",
+      "clicked_text": "Apply for a job at the cafe",
+      "to": "cafeJob",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403850988,
+      "last_observed_ts": 1776403850988,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "job": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "No job"
+          ],
+          "after_values": [
+            "cafe"
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Cafe"
+          ],
+          "after_values": [
+            "cafeJob"
+          ],
+          "numeric_stats": null
+        },
+        "cafePay": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            20
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "cafeJob",
+      "clicked_text": "Go back",
+      "to": "Cafe",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403857605,
+      "last_observed_ts": 1776403857605,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "cafeJob"
+          ],
+          "after_values": [
+            "Cafe"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Cafe",
+      "clicked_text": "Work",
+      "to": "cafeWorkImproved",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403863307,
+      "last_observed_ts": 1776403863307,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Cafe"
+          ],
+          "after_values": [
+            "cafeWorkImproved"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "cafeWorkImproved",
+      "clicked_text": "work schedule",
+      "to": "cafeDefault",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403869243,
+      "last_observed_ts": 1776403869243,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "cafeBoring": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "cafeWorkImproved"
+          ],
+          "after_values": [
+            "cafeDefault"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "cafeDefault",
+      "clicked_text": "Clear tables",
+      "to": "tableClear",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403874943,
+      "last_observed_ts": 1776403874943,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "countperiods": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "money": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            39
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 39,
+            "max_delta": 39,
+            "mean_delta": 39,
+            "always_same_delta": true
+          }
+        },
+        "cafePressure": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "cafeCount": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "period": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "cafeDefault"
+          ],
+          "after_values": [
+            "tableClear"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "tableClear",
+      "clicked_text": "Finish shift",
+      "to": "cafeDefault",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403888223,
+      "last_observed_ts": 1776403888223,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "cafeHarass": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "tableClear"
+          ],
+          "after_values": [
+            "cafeDefault"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "cafeDefault",
+      "clicked_text": "Finish tasks",
+      "to": "Cafe",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403895145,
+      "last_observed_ts": 1776403895145,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "cafeDefault"
+          ],
+          "after_values": [
+            "Cafe"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Cafe",
+      "clicked_text": "Go back outside",
+      "to": "Street",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403900695,
+      "last_observed_ts": 1776403900695,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "rngesus": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            6
+          ],
+          "after_values": [
+            0
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -6,
+            "max_delta": -6,
+            "mean_delta": -6,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Cafe"
+          ],
+          "after_values": [
+            "Street"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Park",
+      "clicked_text": "Pick it up",
+      "to": "easterPark",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403920018,
+      "last_observed_ts": 1776403920018,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "eggs": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "eggLocations.park": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Park"
+          ],
+          "after_values": [
+            "easterPark"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "easterPark",
+      "clicked_text": "Stand up straight",
+      "to": "Park",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403920809,
+      "last_observed_ts": 1776403920809,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "rngesus": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2
+          ],
+          "after_values": [
+            0
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -2,
+            "max_delta": -2,
+            "mean_delta": -2,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "easterPark"
+          ],
+          "after_values": [
+            "Park"
+          ],
+          "numeric_stats": null
+        },
+        "parkVisits": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Street",
+      "clicked_text": "Uptown",
+      "to": "goingUptown",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403938898,
+      "last_observed_ts": 1776403938898,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "countperiods": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "rngesus": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2
+          ],
+          "after_values": [
+            0
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -2,
+            "max_delta": -2,
+            "mean_delta": -2,
+            "always_same_delta": true
+          }
+        },
+        "period": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            4
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Street"
+          ],
+          "after_values": [
+            "goingUptown"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "goingUptown",
+      "clicked_text": "Arrive",
+      "to": "Uptown",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403944392,
+      "last_observed_ts": 1776403944392,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "rngesus": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 3,
+            "max_delta": 3,
+            "mean_delta": 3,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "goingUptown"
+          ],
+          "after_values": [
+            "Uptown"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Uptown",
+      "clicked_text": "Pick it up",
+      "to": "easterUptown",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403954103,
+      "last_observed_ts": 1776403954103,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "eggs": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "eggLocations.uptown": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Uptown"
+          ],
+          "after_values": [
+            "easterUptown"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "easterUptown",
+      "clicked_text": "Stand up straight",
+      "to": "Uptown",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403954785,
+      "last_observed_ts": 1776403954785,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "easterUptown"
+          ],
+          "after_values": [
+            "Uptown"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Uptown",
+      "clicked_text": "Beauty shop",
+      "to": "beauty",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403955464,
+      "last_observed_ts": 1776403955464,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Uptown"
+          ],
+          "after_values": [
+            "beauty"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "beauty",
+      "clicked_text": "Leave the salon",
+      "to": "Uptown",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403967530,
+      "last_observed_ts": 1776403967530,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "rngesus": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -1,
+            "max_delta": -1,
+            "mean_delta": -1,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "beauty"
+          ],
+          "after_values": [
+            "Uptown"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Uptown",
+      "clicked_text": "Go back to the street",
+      "to": "Street",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403968210,
+      "last_observed_ts": 1776403968210,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "rngesus": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -1,
+            "max_delta": -1,
+            "mean_delta": -1,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Uptown"
+          ],
+          "after_values": [
+            "Street"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Street",
+      "clicked_text": "Downtown",
+      "to": "goingDowntown",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403969035,
+      "last_observed_ts": 1776403969035,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "countperiods": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            4
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "rngesus": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "period": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            5
+          ],
+          "after_values": [
+            6
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Street"
+          ],
+          "after_values": [
+            "goingDowntown"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "goingDowntown",
+      "clicked_text": "Arrive",
+      "to": "Downtown",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403978544,
+      "last_observed_ts": 1776403978544,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "rngesus": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -2,
+            "max_delta": -2,
+            "mean_delta": -2,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "goingDowntown"
+          ],
+          "after_values": [
+            "Downtown"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Downtown",
+      "clicked_text": "Pick it up",
+      "to": "easterDowntown",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403987935,
+      "last_observed_ts": 1776403987935,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "eggs": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "eggLocations.downtown": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Downtown"
+          ],
+          "after_values": [
+            "easterDowntown"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "easterDowntown",
+      "clicked_text": "Stand up straight",
+      "to": "Downtown",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403988779,
+      "last_observed_ts": 1776403988779,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "money": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            39
+          ],
+          "after_values": [
+            49
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 10,
+            "max_delta": 10,
+            "mean_delta": 10,
+            "always_same_delta": true
+          }
+        },
+        "rngesus": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            14
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 13,
+            "max_delta": 13,
+            "mean_delta": 13,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "easterDowntown"
+          ],
+          "after_values": [
+            "Downtown"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Downtown",
+      "clicked_text": "Club",
+      "to": "club",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776403989557,
+      "last_observed_ts": 1776403989557,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "alley": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Downtown"
+          ],
+          "after_values": [
+            "club"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "club",
+      "clicked_text": "Leave",
+      "to": "Downtown",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776404001876,
+      "last_observed_ts": 1776404001876,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "rngesus": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            14
+          ],
+          "after_values": [
+            7
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -7,
+            "max_delta": -7,
+            "mean_delta": -7,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "club"
+          ],
+          "after_values": [
+            "Downtown"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Downtown",
+      "clicked_text": "Go back to the street",
+      "to": "Street",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776404002580,
+      "last_observed_ts": 1776404002580,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "rngesus": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            7
+          ],
+          "after_values": [
+            0
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -7,
+            "max_delta": -7,
+            "mean_delta": -7,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Downtown"
+          ],
+          "after_values": [
+            "Street"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Street",
+      "clicked_text": "Back alley",
+      "to": "alley",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776404024451,
+      "last_observed_ts": 1776404024451,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "rngesus": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            9
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 9,
+            "max_delta": 9,
+            "mean_delta": 9,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Street"
+          ],
+          "after_values": [
+            "alley"
+          ],
+          "numeric_stats": null
+        },
+        "alleyStranger": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "alley",
+      "clicked_text": "Look at his wares",
+      "to": "alleyBuy",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776404030779,
+      "last_observed_ts": 1776404030779,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "alley"
+          ],
+          "after_values": [
+            "alleyBuy"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "alleyBuy",
+      "clicked_text": "He closes his jacket",
+      "to": "alley",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776404040645,
+      "last_observed_ts": 1776404040645,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "rngesus": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            9
+          ],
+          "after_values": [
+            6
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -3,
+            "max_delta": -3,
+            "mean_delta": -3,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "alleyBuy"
+          ],
+          "after_values": [
+            "alley"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "alley",
+      "clicked_text": "Back away",
+      "to": "Street",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776404041462,
+      "last_observed_ts": 1776404041462,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "rngesus": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            6
+          ],
+          "after_values": [
+            21
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 15,
+            "max_delta": 15,
+            "mean_delta": 15,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "alley"
+          ],
+          "after_values": [
+            "Street"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Park",
+      "clicked_text": "Sleep on a bench",
+      "to": "parkSleep",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776404055990,
+      "last_observed_ts": 1776404055990,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Park"
+          ],
+          "after_values": [
+            "parkSleep"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "parkSleep",
+      "clicked_text": "Sleep",
+      "to": "parkDream",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776404062070,
+      "last_observed_ts": 1776404062070,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "vibeLevel": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0.3
+          ],
+          "after_values": [
+            0.05
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -0.25,
+            "max_delta": -0.25,
+            "mean_delta": -0.25,
+            "always_same_delta": true
+          }
+        },
+        "countperiods": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            5
+          ],
+          "after_values": [
+            12
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 7,
+            "max_delta": 7,
+            "mean_delta": 7,
+            "always_same_delta": true
+          }
+        },
+        "questDays": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "allure": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            30
+          ],
+          "after_values": [
+            15
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -15,
+            "max_delta": -15,
+            "mean_delta": -15,
+            "always_same_delta": true
+          }
+        },
+        "corrupt": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            -25
+          ],
+          "after_values": [
+            -19
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 6,
+            "max_delta": 6,
+            "mean_delta": 6,
+            "always_same_delta": true
+          }
+        },
+        "kitchenClean": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            -25
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -25,
+            "max_delta": -25,
+            "mean_delta": -25,
+            "always_same_delta": true
+          }
+        },
+        "zackClean": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            -25
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -25,
+            "max_delta": -25,
+            "mean_delta": -25,
+            "always_same_delta": true
+          }
+        },
+        "rngesus": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 3,
+            "max_delta": 3,
+            "mean_delta": 3,
+            "always_same_delta": true
+          }
+        },
+        "rent": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "showerTime": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "day": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "period": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            6
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -5,
+            "max_delta": -5,
+            "mean_delta": -5,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "parkSleep"
+          ],
+          "after_values": [
+            "parkDream"
+          ],
+          "numeric_stats": null
+        },
+        "mugged": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "garage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            {
+              "street": {
+                "name": "Street Parking",
+                "maxSpots": 2,
+                "filledSpots": 0,
+                "price": 5
+              },
+              "city": {
+                "name": "City Parking",
+                "maxSpots": 3,
+                "filledSpots": 0,
+                "price": 10
+              },
+              "mansion": {
+                "name": "Mansion Parking",
+                "maxSpots": 5,
+                "filledSpots": 0,
+                "price": 0
+              },
+              "luxapt": {
+                "name": "Luxury Parking",
+                "maxSpots": 5,
+                "filledSpots": 0,
+                "price": 0
+              }
+            }
+          ],
+          "numeric_stats": null
+        },
+        "car": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            {
+              "honda": {
+                "name": "Honda EV",
+                "price": 22700,
+                "condition": "good",
+                "owned": false,
+                "location": "dealership"
+              },
+              "toyota": {
+                "name": "Toyota Hybrid",
+                "price": 20500,
+                "condition": "good",
+                "owned": false,
+                "location": "dealership"
+              },
+              "audi": {
+                "name": "Audi",
+                "price": 31900,
+                "condition": "good",
+                "owned": false,
+                "location": "dealership"
+              },
+              "hyundai": {
+                "name": "Hyundai",
+                "price": 22300,
+                "condition": "good",
+                "owned": false,
+                "location": "dealership"
+              },
+              "bmw": {
+                "name": "BMW",
+                "price": 36000,
+                "condition": "good",
+                "owned": false,
+                "location": "dealership"
+              },
+              "urus": {
+                "name": "Lamborghini Urus",
+                "price": 9999999,
+                "condition": "good",
+                "owned": false,
+                "location": "patron"
+              }
+            }
+          ],
+          "numeric_stats": null
+        },
+        "bike": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "carScene": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            ""
+          ],
+          "numeric_stats": null
+        },
+        "gymClean": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "canteen": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "waitCaine": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            0
+          ],
+          "numeric_stats": null
+        },
+        "waitTommy": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            0
+          ],
+          "numeric_stats": null
+        },
+        "breakTimeB": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            0
+          ],
+          "numeric_stats": null
+        },
+        "breakTimeC": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            0
+          ],
+          "numeric_stats": null
+        },
+        "breakTimeT": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            0
+          ],
+          "numeric_stats": null
+        },
+        "orgyOrg": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "emailAmount": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            10
+          ],
+          "numeric_stats": null
+        },
+        "news": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            0
+          ],
+          "numeric_stats": null
+        },
+        "newspaper": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "parkDream",
+      "clicked_text": "Wake up",
+      "to": "Park",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776404075319,
+      "last_observed_ts": 1776404075319,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "parkDream"
+          ],
+          "after_values": [
+            "Park"
+          ],
+          "numeric_stats": null
+        },
+        "parkVisits": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Street",
+      "clicked_text": "Look for an apartment",
+      "to": "a place to live...",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776404084578,
+      "last_observed_ts": 1776404084578,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Street"
+          ],
+          "after_values": [
+            "a place to live..."
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "a place to live...",
+      "clicked_text": "Go to the address",
+      "to": "Go to the address",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776404090152,
+      "last_observed_ts": 1776404090152,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "countperiods": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            12
+          ],
+          "after_values": [
+            13
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "period": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "a place to live..."
+          ],
+          "after_values": [
+            "Go to the address"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Go to the address",
+      "clicked_text": "Yes.",
+      "to": "Yes.",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776404097661,
+      "last_observed_ts": 1776404097661,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Go to the address"
+          ],
+          "after_values": [
+            "Yes."
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Yes.",
+      "clicked_text": "Walk up the stairs",
+      "to": "walkUp",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776404103615,
+      "last_observed_ts": 1776404103615,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "vibeLevel": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0.05
+          ],
+          "after_values": [
+            0.07500000000000001
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 0.02500000000000001,
+            "max_delta": 0.02500000000000001,
+            "mean_delta": 0.025,
+            "always_same_delta": true
+          }
+        },
+        "inhib": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            125
+          ],
+          "after_values": [
+            117
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -8,
+            "max_delta": -8,
+            "mean_delta": -8,
+            "always_same_delta": true
+          }
+        },
+        "corrupt": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            -19
+          ],
+          "after_values": [
+            -17
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 5,
+            "max_delta": 5,
+            "mean_delta": 5,
+            "always_same_delta": true
+          }
+        },
+        "zack": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 5,
+            "max_delta": 5,
+            "mean_delta": 5,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Yes."
+          ],
+          "after_values": [
+            "walkUp"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "walkUp",
+      "clicked_text": "Great.",
+      "to": "Great.",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776404109324,
+      "last_observed_ts": 1776404109324,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "walkUp"
+          ],
+          "after_values": [
+            "Great."
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Great.",
+      "clicked_text": "Touch up your room",
+      "to": "Touch up your room",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776404117020,
+      "last_observed_ts": 1776404117020,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "apt401Key": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Great."
+          ],
+          "after_values": [
+            "Touch up your room"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Touch up your room",
+      "clicked_text": "Leave apartment",
+      "to": "Street",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776404130876,
+      "last_observed_ts": 1776404130876,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "rngesus": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            21
+          ],
+          "after_values": [
+            7
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -14,
+            "max_delta": -14,
+            "mean_delta": -14,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Touch up your room"
+          ],
+          "after_values": [
+            "Street"
+          ],
+          "numeric_stats": null
+        }
+      }
+    }
+  ],
+  "synthetic_edges": [],
+  "coverage": {
+    "static_edges_total": 3586,
+    "observed_static_edges": 57,
+    "unobserved_static_edges": 3529,
+    "coverage_ratio": 0.0159,
+    "observed_only_edges": 2
+  }
+}
