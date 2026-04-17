@@ -1,4 +1,4 @@
-{"ts":"2026-04-16T21:48:53.483Z","step":0,"passage":"Welcome Page","action":"clicked_forward","text":"Start your journey","tier":1}
-{"ts":"2026-04-16T21:48:53.483Z","step":1,"passage":"intro","action":"clicked_forward","text":"Continue","tier":4}
-{"ts":"2026-04-16T21:48:53.483Z","step":2,"passage":"intro end","action":"clicked_forward","text":"Peak into her dreams","tier":5}
-{"ts":"2026-04-16T21:48:53.483Z","step":3,"passage":"dream1","action":"terminated","reason":"no_forward_pattern_match"}
+{"ts":"2026-04-16T22:22:37.486Z","step":0,"passage":"Welcome Page","action":"clicked_forward","text":"Start your journey","tier":1}
+{"ts":"2026-04-16T22:22:37.486Z","step":1,"passage":"intro","action":"clicked_forward","text":"Continue","tier":4}
+{"ts":"2026-04-16T22:22:37.486Z","step":2,"passage":"intro end","action":"clicked_forward","text":"Peak into her dreams","tier":5}
+{"ts":"2026-04-16T22:22:37.486Z","step":3,"passage":"dream1","action":"terminated","reason":"no_forward_pattern_match"}

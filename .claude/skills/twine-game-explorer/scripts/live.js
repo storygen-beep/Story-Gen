@@ -142,6 +142,11 @@ function parseArgs(argv) {
       case 'wait':     await forward('wait', args); break;
       case 'reload':   await forward('reload', args); break;
       case 'regions':  await forward('regions', args); break;
+      // M6.2 navigation-intelligence query endpoints — read-only, no click.
+      case 'path':         await forward('path', args); break;
+      case 'requirements': await forward('requirements', args); break;
+      case 'reachable':    await forward('reachable', args); break;
+      case 'setters':      await forward('setters', args); break;
       case 'finalize': await cliFinalize(args); break;
       case 'stop':     await cliStop(args); break;
       case 'status':   await cliStatus(args); break;
@@ -594,6 +599,12 @@ async function runDaemon(args) {
   // We re-read the catalog from disk rather than hoisting `cat` out of
   // its try scope — one extra read of a file we just wrote is cheap and
   // keeps the passage_catalog block untouched.
+  //
+  // M6.2: We also hold the graph + index in daemon memory (below) so the
+  // query endpoints don't re-read these multi-MB files on every call.
+  let staticGraphData = null;
+  let variableIndexData = null;
+  let pathfinderCtx = null;
   try {
     const staticGraphMod = require(path.join(SKILL_DIR, 'scripts/lib/static_graph'));
     const variableIndexMod = require(path.join(SKILL_DIR, 'scripts/lib/variable_index'));
@@ -601,17 +612,27 @@ async function runDaemon(args) {
     try { catForGraph = JSON.parse(fs.readFileSync(dirs.passageCatalog, 'utf8')); }
     catch (e) { dlog('static_graph: could not re-read passage_catalog: ' + e.message); }
     if (catForGraph) {
-      const sg = staticGraphMod.buildStaticGraph(catForGraph);
-      fs.writeFileSync(dirs.staticGraph, JSON.stringify(sg, null, 2));
-      dlog(`static_graph: ${sg.total_edges} edges over ${sg.total_passages} passages`);
+      staticGraphData = staticGraphMod.buildStaticGraph(catForGraph);
+      fs.writeFileSync(dirs.staticGraph, JSON.stringify(staticGraphData, null, 2));
+      dlog(`static_graph: ${staticGraphData.total_edges} edges over ${staticGraphData.total_passages} passages`);
 
       let initialForVars = null;
       try { initialForVars = JSON.parse(fs.readFileSync(dirs.initialState, 'utf8')); }
       catch (e) { /* tolerate missing initial_state */ }
 
-      const vi = variableIndexMod.buildVariableIndex(catForGraph, sg, initialForVars);
-      fs.writeFileSync(dirs.variableIndex, JSON.stringify(vi, null, 2));
-      dlog(`variable_index: ${vi.total_variables} vars, coverage=${vi.indexing_coverage}`);
+      variableIndexData = variableIndexMod.buildVariableIndex(catForGraph, staticGraphData, initialForVars);
+      fs.writeFileSync(dirs.variableIndex, JSON.stringify(variableIndexData, null, 2));
+      dlog(`variable_index: ${variableIndexData.total_variables} vars, coverage=${variableIndexData.indexing_coverage}`);
+
+      // Pathfinder context — adjacency map + var index reference, built once,
+      // consulted by every M6.2 query handler without rescanning the graph.
+      try {
+        const pathfinderMod = require(path.join(SKILL_DIR, 'scripts/lib/pathfinder'));
+        pathfinderCtx = pathfinderMod.buildContext(staticGraphData, variableIndexData);
+        if (pathfinderCtx) {
+          dlog(`pathfinder ready: ${pathfinderCtx.passageSet.size} passages, adjacency ${pathfinderCtx.adjacency.size}`);
+        }
+      } catch (e) { dlog('pathfinder init err: ' + e.message); }
     }
   } catch (e) { dlog('static_graph/variable_index err: ' + e.message); }
 
@@ -1388,6 +1409,85 @@ async function runDaemon(args) {
       } catch (e) {
         return { ok: false, error: e.message, stack: e.stack, screenshot: await captureScreenshot('regions_err') };
       }
+    },
+
+    // ----------------------------------------------------------------------
+    // M6.2 — Navigation intelligence query endpoints.
+    // All four are read-only lookups against the in-memory staticGraphData
+    // + variableIndexData + pathfinderCtx. They do NOT click anything and
+    // do NOT mutate daemon state. Claude uses them to plan before clicking.
+    // ----------------------------------------------------------------------
+
+    async path({ args }) {
+      if (!pathfinderCtx) return { ok: false, error: 'pathfinder unavailable — static_graph missing or empty' };
+      const pathfinderMod = require(path.join(SKILL_DIR, 'scripts/lib/pathfinder'));
+      const positional = (args._ || []).filter((a) => a !== 'path');
+      const to = positional.join(' ').trim();
+      if (!to) return { ok: false, error: 'usage: path <target_passage> [--ignore-gates] [--max-hops N]' };
+      const maxHops = args.max_hops ? Math.max(1, Math.min(50, Number(args.max_hops))) : 20;
+      const ignoreGates = !!args.ignore_gates;
+      return pathfinderMod.findPath(pathfinderCtx, {
+        from: lastState.passage,
+        to,
+        variables: lastState.variables || {},
+        maxHops,
+        ignoreGates,
+      });
+    },
+
+    async requirements({ args }) {
+      if (!pathfinderCtx) return { ok: false, error: 'pathfinder unavailable — static_graph missing or empty' };
+      const pathfinderMod = require(path.join(SKILL_DIR, 'scripts/lib/pathfinder'));
+      const positional = (args._ || []).filter((a) => a !== 'requirements');
+      const to = positional.join(' ').trim();
+      if (!to) return { ok: false, error: 'usage: requirements <target_passage>' };
+      if (!pathfinderCtx.passageSet.has(to) && to !== lastState.passage) {
+        return { ok: false, error: `target passage "${to}" not in static graph` };
+      }
+      const result = pathfinderMod.computeRequirements(pathfinderCtx, {
+        from: lastState.passage,
+        to,
+        variables: lastState.variables || {},
+      });
+      return { ok: true, ...result };
+    },
+
+    async reachable({ args }) {
+      if (!pathfinderCtx) return { ok: false, error: 'pathfinder unavailable — static_graph missing or empty' };
+      const pathfinderMod = require(path.join(SKILL_DIR, 'scripts/lib/pathfinder'));
+      const positional = (args._ || []).filter((a) => a !== 'reachable');
+      const hopsArg = args.max_hops || positional[0];
+      const maxHops = hopsArg ? Math.max(1, Math.min(15, Number(hopsArg))) : 5;
+      const result = pathfinderMod.reachableFrom(pathfinderCtx, {
+        from: lastState.passage,
+        variables: lastState.variables || {},
+        maxHops,
+      });
+      // Cap each bucket for response envelope sanity (the full data is on disk).
+      const cap = Number(args.cap) || 100;
+      return {
+        ok: true,
+        ...result,
+        open: result.open.slice(0, cap),
+        gated_satisfiable: result.gated_satisfiable.slice(0, cap),
+        gated_blocked: result.gated_blocked.slice(0, cap),
+        truncated: {
+          open: result.open.length > cap,
+          gated_satisfiable: result.gated_satisfiable.length > cap,
+          gated_blocked: result.gated_blocked.length > cap,
+        },
+      };
+    },
+
+    async setters({ args }) {
+      if (!pathfinderCtx) return { ok: false, error: 'pathfinder unavailable — variable_index missing or empty' };
+      const pathfinderMod = require(path.join(SKILL_DIR, 'scripts/lib/pathfinder'));
+      const positional = (args._ || []).filter((a) => a !== 'setters');
+      let varName = positional.join(' ').trim();
+      if (!varName) return { ok: false, error: 'usage: setters <$variable>' };
+      // Allow callers to omit the sigil — auto-add $ if missing.
+      if (!varName.startsWith('$') && !varName.startsWith('_')) varName = '$' + varName;
+      return pathfinderMod.lookupSetters(pathfinderCtx, varName);
     },
 
     async status() {

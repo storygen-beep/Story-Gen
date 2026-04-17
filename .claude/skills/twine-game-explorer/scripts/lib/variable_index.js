@@ -81,17 +81,22 @@ function splitStatements(arg) {
 }
 
 // ---------------------------------------------------------------------------
-// LHS parsing — pull the primary $variable and any dotted/bracket accessor.
+// LHS parsing — pull the primary variable and any dotted/bracket accessor.
+// SugarCube distinguishes two sigils:
+//   $var  — persistent story variable (State.variables)
+//   _var  — temporary variable, reset per render (State.temporary)
+// Both are valid <<set>> targets. We keep the sigil in the stored key so
+// downstream consumers can filter by prefix if they care about persistence.
 // ---------------------------------------------------------------------------
 
-const LHS_RE = /^\$([A-Za-z_][A-Za-z0-9_]*)((?:\.[A-Za-z_][A-Za-z0-9_]*|\[[^\]]+\])*)/;
+const LHS_RE = /^([$_])([A-Za-z_][A-Za-z0-9_]*)((?:\.[A-Za-z_][A-Za-z0-9_]*|\[[^\]]+\])*)/;
 
 function parseLhs(clause) {
   const m = clause.match(LHS_RE);
   if (!m) return null;
   return {
-    primary_var: '$' + m[1],
-    path: m[2] || null,
+    primary_var: m[1] + m[2],
+    path: m[3] || null,
     after: clause.slice(m[0].length).trimStart(),
   };
 }

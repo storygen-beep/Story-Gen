@@ -191,6 +191,137 @@ found, item acquired, time advanced significantly), glance at the sidebar quest
 text in the screenshot. If objectives changed or new quests appeared, update the
 Active quests table in notes.md and adjust your exploration strategy.
 
+## Phase 3 — Navigation intelligence (on-demand, when stuck on gates)
+
+Phases 0–2 give you the chrome map, the location map, and the quest hints.
+Phase 3 adds a fourth source of truth: a **static analysis of the entire
+game's passage graph**, computed once at daemon startup from
+`passage_catalog.json` → `static_graph.json` + `variable_index.json`. Four
+read-only endpoints consult this data in memory so you can plan before
+clicking — no exploration cost, no mutation of game state.
+
+**When to reach for it.** Don't use these on every turn. Use them when:
+- You've hit a gate (click refused, passage unchanged) and you want to know
+  *why* and *what to change* — `requirements <target>`.
+- You want to get somewhere specific without exploring the whole tree —
+  `path <target>`.
+- You've just entered a location hub and want to see what's open vs.
+  gate-blocked before clicking blindly — `reachable`.
+- You want to understand a mechanic — `setters <var>` enumerates every
+  source of change for a single variable.
+
+### `path <target_passage>`
+
+Shortest click chain from the current passage to `<target>`, with every
+enclosing `<<if>>` gate evaluated against the current variable state.
+
+```bash
+node $SKILL_DIR/scripts/live.js path "Wardrobe"
+# → 3 steps: RING RING RING RING → Get out of bed → Wardrobe.
+#   All gates satisfied.
+```
+
+If a gate is failing, you get back an actionable hint instead of a
+raw miss:
+
+```bash
+node $SKILL_DIR/scripts/live.js path "School"
+# → No path from dream1 to School — blocked by gates.
+#   Use `requirements School` to see what's needed, or
+#   `path School --ignore-gates` to see the gated path.
+```
+
+Flags:
+- `--ignore-gates` — return shortest path regardless of satisfiability
+- `--max-hops N` — bound the BFS (default 20, capped at 50)
+
+Default gate policy is `allow_unknown`: edges with fully-satisfied gates
+are traversed; edges where the gate evaluates false are skipped; edges
+where the evaluator returns `'unknown'` (expression too complex) are
+traversed — treated as possibly-satisfiable rather than assumed
+false-negative.
+
+### `requirements <target_passage>`
+
+For every blocking gate on the path to `<target>`, extract the variables
+it references, look them up in `variable_index.json`, and surface setter
+passages with reachability from the current state. Setters whose
+`value_expr` matches the gate's desired value (from `==` / `eq` clauses)
+are tagged `✓ matches gate` and sorted first.
+
+```bash
+node $SKILL_DIR/scripts/live.js requirements "School"
+# → School is NOT currently reachable. Path length 7, 2 blocking gates:
+#     step 6 (Living room → Jecinda District): !($dayCount==2 and ...)
+#       $PlayerClothes (currently "Casual", wants "SchoolUni" or "SchoolUniSlutty")
+#         setter: Wardrobe (= "SchoolUni") [✓ matches gate, 3 clicks].
+#     step 7 (Jecinda District → School): !(($weekDay eq false) || ...)
+#       $weekDay (currently true, wants false) — 2 setter(s), none reachable now.
+```
+
+Use the `✓ matches gate` setter first — its path_to_setter is the
+concrete action sequence. Other setters are fallbacks (e.g. a different
+passage that also writes the same value).
+
+### `reachable [hops]`
+
+From the current passage, partition every passage reachable within N hops
+(default 5, capped at 15) into three buckets:
+
+- **`open`** — gate-free or currently-satisfied, you can click there now
+- **`gated_satisfiable`** — gate evaluator couldn't decide; may or may
+  not be satisfiable
+- **`gated_blocked`** — gate evaluates false under current variables
+
+```bash
+node $SKILL_DIR/scripts/live.js reachable 5
+# → { open_count: 7, gated_satisfiable_count: 0, gated_blocked_count: 2,
+#     open: [...], gated_blocked: [
+#       { passage: "Weekly Allowance",
+#         blocking_gate: "$day==7 and $weeklyAllowanceCheck==false and ...",
+#         variables_involved: {...} },
+#       { passage: "Sleep", blocking_gate: "!($dayCount ==2 and $hour lt 13)", ... }
+#     ]}
+```
+
+### `setters <variable>`
+
+Direct lookup into `variable_index.json`. Lists every passage that
+`<<set>>`s or `<<unset>>`s the variable plus every wiki-link edge that
+does so. Accepts the var name with or without `$` prefix — `setters
+PlayerClothes` is equivalent to `setters '$PlayerClothes'`.
+
+```bash
+node $SKILL_DIR/scripts/live.js setters '$PlayerClothes'
+# → 13 setters including:
+#     Wardrobe (= "SchoolUni"), Wardrobe (= "Casual"),
+#     Living room (= "Casual"), Gym Locker Room (= "Gym"), ...
+```
+
+### Phase 3 limitations — know before you trust
+
+- **Parser coverage is partial.** `variable_index.json`'s
+  `indexing_coverage` field reports `"partial"` when `<<script>>` blocks,
+  widget bodies, or method-call setters (`.push()` / `.delete()`) were
+  skipped. Those setters exist but aren't in the index. For mechanics
+  that mutate state via JS, Claude still has to observe the runtime diff.
+- **Gate evaluator handles common forms only.** Comparison operators
+  (including SugarCube's `eq`/`lt`/`gte` word aliases), boolean
+  combinators, parenthesization, and negation — covers the vast majority
+  of gates in the wild. Complex expressions (method calls, ternary,
+  arithmetic on the LHS) evaluate to `'unknown'`; pathfinder still
+  traverses them, and the raw condition string comes back in the
+  response so you can read it yourself.
+- **Chrome / sidebar buttons are NOT in the graph.** Phase 0's
+  `ui_map.json` catalogs sidebar affordances separately. If a game lets
+  you open the wardrobe via a sidebar button, pathfinder only sees the
+  in-world path (Bedroom → Wardrobe). Check `ui_map.json` too.
+- **Dynamic targets** (`<<goto $dest>>`) can't be resolved statically
+  and are omitted — pathfinder won't route through them.
+- **Temp variables** (`_var`) reset every render, so their
+  "initial_value" in the index is usually missing. Treat them as
+  observe-only.
+
 ## Workflow
 
 ### 1. Start a session
@@ -253,6 +384,29 @@ node $SKILL_DIR/scripts/live.js keys Enter
 
 After every click, the response already includes the new state — no separate
 `peek` needed.
+
+### 3a. Plan before clicking when you know where you want to go
+
+If you have a concrete target (a specific passage, location, or quest
+objective) and don't want to explore blindly, reach for the Phase 3
+navigation-intelligence endpoints:
+
+```bash
+# "Can I get to Wardrobe from here?"
+node $SKILL_DIR/scripts/live.js path "Wardrobe"
+
+# "Why can't I enter School yet?"
+node $SKILL_DIR/scripts/live.js requirements "School"
+
+# "What's open right now within 3 hops?"
+node $SKILL_DIR/scripts/live.js reachable 3
+```
+
+See the **Phase 3 — Navigation intelligence** section above for the full
+reference. These endpoints are read-only (no clicks, no state mutation)
+and return data synthesized from the static passage graph + variable
+setter index — they don't replace `peek`/`click`, they tell you which
+clicks are worth making.
 
 ### 4. Capture snapshots before branching
 
@@ -379,6 +533,11 @@ All modules live under `scripts/lib/`. `scripts/live.js` imports them via explic
 - **`session.js`** — `new SessionTracker(dir)` + `aggregateSessions(dir)`. Per-run metrics + cross-run rollup.
 - **`report.js`** — `write(outDir, detector, frontier, exploredCount, sessionsSummary, meta)` generates all human-readable artifacts.
 - **`choices.js`** — `listInteractive(frame)` returns every visible clickable with text+bbox+tag.
+- **`passage_catalog.js`** — `dumpCatalog(frame)` enumerates `Story.passages` (and `<tw-passagedata>` fallback) with tags + raw Twine source; written once at daemon start.
+- **`static_graph.js`** — `buildStaticGraph(catalog)` walks the catalog and parses every `[[link]]`, `<<link>>`, `<<goto>>`, `<<return>>`, `<<include>>` into a graph of navigation edges, each tagged with the enclosing `<<if>>` gate stack.
+- **`variable_index.js`** — `buildVariableIndex(catalog, staticGraph, initialState)` parses `<<set>>` / `<<unset>>` from passage bodies (and wiki-link setter suffixes on edges) into a per-variable lookup: initial_value + setter list (passage, op, value_expr, gate) + unsetter list. `indexing_coverage` flags when `<<script>>` blocks / widget bodies / method-call setters were skipped. (M6.1)
+- **`gate_eval.js`** — `evaluateGate(condition, variables)` parses an `<<if>>` condition and returns `true` / `false` / `'unknown'` plus every `$var`/`_var` it references with current values. Handles JS operators (`===`, `==`, `&&`, `||`, `!`), SugarCube word operators (`eq`, `neq`, `lt`, `gt`, `lte`, `gte`, `and`, `or`, `not`), parens, nested negation. (M6.2)
+- **`pathfinder.js`** — `buildContext(staticGraph, variableIndex)` → reusable BFS context. `findPath` / `computeRequirements` / `reachableFrom` / `lookupSetters` power the four navigation-intelligence endpoints. Three gate policies: `strict` (only TRUE gates), `allow_unknown` (default), `ignore`. Requirements automatically ranks setters by "matches gate target" + reachability. (M6.2)
 - **`portal_adapters/`** — per-host entry recipes. `mopoga.js` handles mopoga.com's "PLAY" button. `generic.js` is the fallback. Add `<host>.js` for new portals.
 
 ## Output directory structure
@@ -414,7 +573,8 @@ Every session writes to `game_explorations/<slug>/`:
 ├── passage_catalog.json      every `Story.passages` entry with tags + raw Twine source (one-shot, at start)
 ├── scene_bodies.jsonl        one line per unique (passage, variables) hash — full body_text + body_html + variables snapshot (no truncation)
 ├── engine_config.json        SugarCube Config/Setting/version/save-caps + State.history shape + Story IFID
-├── static_graph.json         every navigation edge parsed from passage source — wiki, <<link>>, <<goto>>, <<return>>, <<include>> — with gate stacks
+├── static_graph.json         every navigation edge parsed from passage source — wiki, <<link>>, <<goto>>, <<return>>, <<include>> — with gate stacks (written at startup as of M6.1, consulted live by path/requirements/reachable)
+├── variable_index.json       every $var / _var → passages that <<set>>/<<unset>> it (passage-body + wiki-link edge setters), with enclosing <<if>> gates and initial values (M6.1)
 ├── choice_graph.json         observed edges aggregated from play_log + state_timeline, with effect_aggregate per variable and coverage vs static_graph
 ├── sidebar_snapshots.jsonl   sidebar/chrome panel content captures: phase0_probe, baseline, passive_change, manual_regions; each line carries panel innerText + structured interactive elements
 │
