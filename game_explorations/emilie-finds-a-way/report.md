@@ -1,15 +1,15 @@
 # emilie-finds-a-way — Exploration Report
 
-Generated: 2026-04-17T11:10:53.335Z
+Generated: 2026-04-17T11:58:55.913Z
 Source URL: https://mopoga.com/embed/emilie-finds-a-way/
 
 ## Session Summary
 
-- Sessions run: 1
-- Total wall-clock: 15m 52s
-- Total clicks: 67
-- Total choices explored: 67
-- Unique states seen: 56
+- Sessions run: 2
+- Total wall-clock: 55m 17s
+- Total clicks: 303
+- Total choices explored: 303
+- Unique states seen: 280
 - Unexplored frontier (queued for next session): 1
 - Any ending reached: not yet
 
@@ -23,32 +23,32 @@ Detected engine: **sugarcube**
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
 | `money` | number | 100..100 | 0 | high |
-| `charisma` | number | 10..11 | 1 | high |
-| `fitness` | number | 10..11 | 1 | high |
+| `charisma` | number | 10..15 | 4 | high |
+| `fitness` | number | 10..16 | 5 | high |
 
-### flag (86)
+### flag (95)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
 | `start` | boolean | false | 0 | high |
 | `shower` | boolean | false, true | 1 | high |
 | `tease1` | boolean | false, true | 1 | high |
-| `daddyshower1` | boolean | false | 0 | high |
-| `shopping1` | boolean | false | 0 | high |
+| `daddyshower1` | boolean | false, true | 3 | high |
+| `shopping1` | boolean | false, true | 1 | high |
 | `undress` | boolean | true | 0 | high |
 | `daddy` | boolean | false | 0 | high |
-| `sport` | boolean | false | 0 | high |
-| `gym1` | boolean | false | 0 | high |
+| `sport` | boolean | false, true | 5 | high |
+| `gym1` | boolean | false, true | 1 | high |
 | `gym2` | boolean | false | 0 | high |
 | `gym3` | boolean | false | 0 | high |
 | `gym4` | boolean | false | 0 | high |
 | `gym5` | boolean | false | 0 | high |
-| `run1` | boolean | false | 0 | high |
+| `run1` | boolean | false, true | 1 | high |
 | `run2` | boolean | false | 0 | high |
 | `run3` | boolean | false | 0 | high |
 | `run4` | boolean | false | 0 | high |
 | `run5` | boolean | false | 0 | high |
-| `yoga1` | boolean | false | 0 | high |
+| `yoga1` | boolean | false, true | 1 | high |
 | `yoga2` | boolean | false | 0 | high |
 | `yoga3` | boolean | false | 0 | high |
 | `yoga4` | boolean | false | 0 | high |
@@ -57,39 +57,45 @@ Detected engine: **sugarcube**
 | `dildo` | boolean | false | 0 | medium |
 | `lube` | boolean | false | 0 | high |
 | `selfie1` | boolean | true | 0 | high |
-| `selfie2` | boolean | false | 0 | high |
+| `selfie2` | boolean | false, true | 1 | high |
 | `selfie3` | boolean | false | 0 | high |
-| `selfie4` | boolean | false | 0 | high |
-| `selfie5` | boolean | false | 0 | high |
-| `selfie6` | boolean | false | 0 | high |
-| `selfie7` | boolean | false | 0 | high |
-| `selfie8` | boolean | false | 0 | high |
+| `selfie4` | boolean | false, true | 1 | high |
+| `selfie5` | boolean | false, true | 1 | high |
+| `selfie6` | boolean | false, true | 1 | high |
+| `selfie7` | boolean | false, true | 1 | high |
+| `selfie8` | boolean | false, true | 1 | high |
 | `selfie9` | boolean | false | 0 | high |
 | `selfie10` | boolean | false | 0 | high |
 | `selfie11` | boolean | false | 0 | high |
 | `selfie12` | boolean | false | 0 | high |
-| `selfie13` | boolean | false | 0 | high |
+| `selfie13` | boolean | false, true | 1 | high |
 | `selfie14` | boolean | false | 0 | high |
-| … | … | … | … | and 46 more |
+| … | … | … | … | and 55 more |
 
 ### scalar (14)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
-| `openminded` | number | 0..23 | 13 | low |
-| `arousal` | number | 0..32 | 17 | low |
-| `loveanal` | number | 0..3 | 2 | low |
-| `loveoral` | number | 0..4 | 4 | low |
+| `openminded` | number | 0..67 | 32 | low |
+| `arousal` | number | 0..77 | 41 | low |
+| `loveanal` | number | 0..5 | 3 | low |
+| `loveoral` | number | 0..12 | 7 | low |
 | `sharing` | number | 0..0 | 0 | low |
-| `bobbyaddiction` | number | 0..17 | 7 | low |
-| `ericaddiction` | number | 0..6 | 6 | low |
-| `francoisaddiction` | number | 0..12 | 6 | low |
-| `sophiaaddiction` | number | 3..10 | 1 | low |
-| `gabriellaaddiction` | number | 0..0 | 0 | low |
-| `marcaddiction` | number | 0..0 | 0 | low |
-| `johnaddiction` | number | 0..0 | 0 | low |
-| `coworkeraddiction` | number | 0..0 | 0 | low |
+| `bobbyaddiction` | number | 0..31 | 9 | low |
+| `ericaddiction` | number | 0..36 | 23 | low |
+| `francoisaddiction` | number | 0..12 | 1 | low |
+| `sophiaaddiction` | number | 3..10 | 8 | low |
+| `gabriellaaddiction` | number | 0..5 | 3 | low |
+| `marcaddiction` | number | 0..7 | 5 | low |
+| `johnaddiction` | number | 0..6 | 3 | low |
+| `coworkeraddiction` | number | 0..2 | 2 | low |
 | `jonathanaddiction` | number | 0..0 | 0 | low |
+
+### string (1)
+
+| name | type | range / samples | mutations | confidence |
+|---|---|---|---|---|
+| `startingpassage` | string | `Chapter3.8`, `Chapter5.31`, `Chapter5.32` | 5 | low |
 
 ## NPCs detected
 
@@ -103,7 +109,7 @@ _No body/appearance variables detected._
 
 | type | count |
 |---|---|
-| branch | 66 |
+| branch | 236 |
 
 ## Economy
 
@@ -124,21 +130,23 @@ Variables sharing a leading token — candidate entity groups (verify manually).
 - **bus** (5): `bus1`, `bus2`, `bus3`, `bus4`, `bus5`
 - **chill** (5): `Chill`, `Chill1`, `Chill2`, `Chill3`, `Chill4`
 - **gab** (5): `Gab1`, `Gab2`, `Gab3`, `Gab4`, `Gab5`
+- **chapter** (2): `Chapter5`, `Chapter6`
 
 ## Sessions
 
 | # | started | duration | clicks | choices | new states | completed |
 |---|---|---|---|---|---|---|
 | 1 | 2026-04-17T10:55:01.560Z | 15m 52s | 67 | 67 | 56 | no |
+| 2 | 2026-04-17T11:19:31.218Z | 39m 25s | 236 | 236 | 224 | no |
 
 ## Graph coverage (observed vs. static)
 
 - Static-graph edges (every navigation parsed from passage source): **1121**
-- Observed edges during play: **67** unique `(from, clicked_text, to)` tuples.
-- Static edges covered by at least one observation: **51** (a single observation covers every static edge with the same `(from, to)` pair — gated branches collapse to one observable move).
-- Observed-only edges (no matching static edge, typically self-loop `<<link>>` wrappers that `<<replace>>` in-place): **19**.
-- Coverage: **4.55%** of the static graph explored.
-- Synthetic edges (Claude's out-of-band `eval`/`keys`/`restore`/`pop`): 1
+- Observed edges during play: **302** unique `(from, clicked_text, to)` tuples.
+- Static edges covered by at least one observation: **282** (a single observation covers every static edge with the same `(from, to)` pair — gated branches collapse to one observable move).
+- Observed-only edges (no matching static edge, typically self-loop `<<link>>` wrappers that `<<replace>>` in-place): **64**.
+- Coverage: **25.16%** of the static graph explored.
+- Synthetic edges (Claude's out-of-band `eval`/`keys`/`restore`/`pop`): 2
 
 ### Static edge kinds
 | kind | count |

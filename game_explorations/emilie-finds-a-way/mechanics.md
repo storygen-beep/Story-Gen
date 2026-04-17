@@ -27,20 +27,20 @@ _Not detected._
 _Not detected._
 
 ## Scenes catalogued
-- Unique passages seen: 50
+- Unique passages seen: 176
 - Most-visited passages:
-  - `Intro2` × 12
-  - `Chapter1.2` × 8
-  - `Chapter1.3b` × 8
-  - `Intro5` × 6
-  - `1st chapter` × 6
-  - `Chapter1.4` × 6
-  - `Chapter1.45` × 6
-  - `1.Shower2` × 4
-  - `Chapter2.2` × 4
-  - `Bathroom` × 3
-  - `Spareroom` × 3
-  - `Go to the bed` × 3
-  - `Intro3` × 2
-  - `Intro4` × 2
-  - `Intro6` × 2
+  - `Sport` × 11
+  - `Chapter2.91` × 9
+  - `Chapter7.23` × 9
+  - `Chapter5.31` × 8
+  - `Chapter7.43` × 8
+  - `Chapter4.21` × 7
+  - `Chapter2.7` × 6
+  - `Chapter4.22` × 6
+  - `Chapter4.28` × 6
+  - `Chilling` × 6
+  - `Tutoring` × 6
+  - `Chapter5.32` × 6
+  - `Chapter2.63` × 5
+  - `Chapter5.23` × 5
+  - `Chapter5.61` × 5

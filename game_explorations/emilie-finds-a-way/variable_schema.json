@@ -4,9 +4,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -21,9 +21,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false,
       true
@@ -39,9 +39,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false,
       true
@@ -56,12 +56,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 3,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -73,12 +74,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -91,9 +93,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       true
     ],
@@ -108,9 +110,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -124,12 +126,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 5,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -141,12 +144,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -159,9 +163,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -176,9 +180,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -193,9 +197,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -210,9 +214,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -226,12 +230,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -244,9 +249,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -261,9 +266,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -278,9 +283,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -295,9 +300,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -311,12 +316,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -329,9 +335,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -346,9 +352,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -363,9 +369,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -380,9 +386,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -396,17 +402,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 13,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 32,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "number_stats": {
-      "count": 133,
-      "unique_count": 14,
+      "count": 459,
+      "unique_count": 33,
       "min": 0,
-      "max": 23,
+      "max": 67,
       "first": 0,
-      "last": 23,
+      "last": 67,
       "is_monotonic_increasing": true,
       "is_boolean_like": false
     },
@@ -418,17 +424,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 17,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 41,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "number_stats": {
-      "count": 133,
-      "unique_count": 17,
+      "count": 459,
+      "unique_count": 37,
       "min": 0,
-      "max": 32,
+      "max": 77,
       "first": 0,
-      "last": 24,
+      "last": 77,
       "is_monotonic_increasing": false,
       "is_boolean_like": false
     },
@@ -440,17 +446,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 2,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 3,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "number_stats": {
-      "count": 133,
-      "unique_count": 3,
+      "count": 459,
+      "unique_count": 4,
       "min": 0,
-      "max": 3,
+      "max": 5,
       "first": 0,
-      "last": 3,
+      "last": 5,
       "is_monotonic_increasing": true,
       "is_boolean_like": false
     },
@@ -462,17 +468,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 4,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 7,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "number_stats": {
-      "count": 133,
-      "unique_count": 5,
+      "count": 459,
+      "unique_count": 8,
       "min": 0,
-      "max": 4,
+      "max": 12,
       "first": 0,
-      "last": 4,
+      "last": 12,
       "is_monotonic_increasing": true,
       "is_boolean_like": false
     },
@@ -485,11 +491,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "number_stats": {
-      "count": 133,
+      "count": 459,
       "unique_count": 1,
       "min": 100,
       "max": 100,
@@ -508,19 +514,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 4,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "number_stats": {
-      "count": 133,
-      "unique_count": 2,
+      "count": 459,
+      "unique_count": 5,
       "min": 10,
-      "max": 11,
+      "max": 15,
       "first": 10,
-      "last": 11,
+      "last": 15,
       "is_monotonic_increasing": true,
-      "is_boolean_like": true
+      "is_boolean_like": false
     },
     "label": "player_stat",
     "label_confidence": "high",
@@ -532,19 +538,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 5,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "number_stats": {
-      "count": 133,
-      "unique_count": 2,
+      "count": 459,
+      "unique_count": 6,
       "min": 10,
-      "max": 11,
+      "max": 16,
       "first": 10,
-      "last": 11,
+      "last": 16,
       "is_monotonic_increasing": true,
-      "is_boolean_like": true
+      "is_boolean_like": false
     },
     "label": "player_stat",
     "label_confidence": "high",
@@ -557,11 +563,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "number_stats": {
-      "count": 133,
+      "count": 459,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -578,17 +584,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 7,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 9,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "number_stats": {
-      "count": 133,
-      "unique_count": 8,
+      "count": 459,
+      "unique_count": 10,
       "min": 0,
-      "max": 17,
+      "max": 31,
       "first": 0,
-      "last": 17,
+      "last": 31,
       "is_monotonic_increasing": true,
       "is_boolean_like": false
     },
@@ -600,17 +606,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 6,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 23,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "number_stats": {
-      "count": 133,
-      "unique_count": 7,
+      "count": 459,
+      "unique_count": 24,
       "min": 0,
-      "max": 6,
+      "max": 36,
       "first": 0,
-      "last": 6,
+      "last": 36,
       "is_monotonic_increasing": true,
       "is_boolean_like": false
     },
@@ -622,19 +628,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 6,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "number_stats": {
-      "count": 133,
-      "unique_count": 7,
+      "count": 459,
+      "unique_count": 2,
       "min": 0,
       "max": 12,
       "first": 0,
       "last": 12,
       "is_monotonic_increasing": true,
-      "is_boolean_like": false
+      "is_boolean_like": true
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -644,19 +650,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 8,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "number_stats": {
-      "count": 133,
-      "unique_count": 2,
+      "count": 459,
+      "unique_count": 8,
       "min": 3,
       "max": 10,
       "first": 10,
-      "last": 3,
+      "last": 10,
       "is_monotonic_increasing": false,
-      "is_boolean_like": true
+      "is_boolean_like": false
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -666,19 +672,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 3,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "number_stats": {
-      "count": 133,
-      "unique_count": 1,
+      "count": 459,
+      "unique_count": 4,
       "min": 0,
-      "max": 0,
+      "max": 5,
       "first": 0,
-      "last": 0,
+      "last": 5,
       "is_monotonic_increasing": true,
-      "is_boolean_like": true
+      "is_boolean_like": false
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -688,19 +694,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 5,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "number_stats": {
-      "count": 133,
-      "unique_count": 1,
+      "count": 459,
+      "unique_count": 6,
       "min": 0,
-      "max": 0,
+      "max": 7,
       "first": 0,
-      "last": 0,
+      "last": 7,
       "is_monotonic_increasing": true,
-      "is_boolean_like": true
+      "is_boolean_like": false
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -710,19 +716,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 3,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "number_stats": {
-      "count": 133,
-      "unique_count": 1,
+      "count": 459,
+      "unique_count": 4,
       "min": 0,
-      "max": 0,
+      "max": 6,
       "first": 0,
-      "last": 0,
+      "last": 6,
       "is_monotonic_increasing": true,
-      "is_boolean_like": true
+      "is_boolean_like": false
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -732,19 +738,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 2,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "number_stats": {
-      "count": 133,
-      "unique_count": 1,
+      "count": 459,
+      "unique_count": 3,
       "min": 0,
-      "max": 0,
+      "max": 2,
       "first": 0,
-      "last": 0,
+      "last": 2,
       "is_monotonic_increasing": true,
-      "is_boolean_like": true
+      "is_boolean_like": false
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -755,11 +761,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "number_stats": {
-      "count": 133,
+      "count": 459,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -777,9 +783,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -794,9 +800,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -812,9 +818,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -829,9 +835,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       true
     ],
@@ -845,12 +851,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -863,9 +870,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -879,12 +886,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -896,12 +904,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -913,12 +922,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -930,12 +940,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -947,12 +958,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -965,9 +977,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -982,9 +994,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -999,9 +1011,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1016,9 +1028,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1032,12 +1044,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1050,9 +1063,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1067,9 +1080,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1083,12 +1096,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1101,9 +1115,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1118,9 +1132,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1134,12 +1148,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1151,12 +1166,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1168,12 +1184,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1186,9 +1203,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1202,12 +1219,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1219,12 +1237,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1236,12 +1255,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1254,12 +1274,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1271,12 +1292,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1289,9 +1311,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1305,12 +1327,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 2,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1322,12 +1345,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 2,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1339,12 +1363,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1357,9 +1382,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1374,9 +1399,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1391,9 +1416,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1408,9 +1433,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1424,12 +1449,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 3,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1442,9 +1468,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1459,9 +1485,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1476,9 +1502,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1493,9 +1519,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1509,12 +1535,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 3,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1526,12 +1553,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1543,12 +1571,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1561,9 +1590,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1578,9 +1607,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1595,9 +1624,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1611,12 +1640,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 2,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1628,12 +1658,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "mutation_count": 1,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1646,9 +1677,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1663,9 +1694,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1680,9 +1711,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1697,9 +1728,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1714,9 +1745,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1731,9 +1762,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1748,9 +1779,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1765,9 +1796,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1782,9 +1813,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1799,9 +1830,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1816,9 +1847,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
     ],
@@ -1833,11 +1864,193 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776423301561,
-    "last_ts": 1776424147949,
-    "passages_seen_on_count": 50,
+    "first_ts": 1776424771220,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 176,
     "bool_values": [
       false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "startingpassage": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 5,
+    "first_ts": 1776425294862,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 139,
+    "string_samples": [
+      "Chapter3.8",
+      "Chapter5.31",
+      "Chapter5.32",
+      "Chapter6.31",
+      "Tutoring0",
+      "Chapter6.32"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "Chapter5": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776426040770,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 83,
+    "bool_values": [
+      true,
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Chapter6": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776426040770,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 83,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "dress1": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776426698385,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 34,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "breakfast1": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776426698385,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 34,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "r1": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776426757564,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 27,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "l1": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776426757564,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 27,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "k1": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776426757564,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 27,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "b1": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776426757564,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 27,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "a1": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776426757564,
+    "last_ts": 1776427105923,
+    "passages_seen_on_count": 27,
+    "bool_values": [
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",

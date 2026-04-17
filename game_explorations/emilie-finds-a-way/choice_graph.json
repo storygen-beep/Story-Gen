@@ -1,12 +1,26 @@
 {
-  "generated_at": "2026-04-17T11:10:53.333Z",
-  "total_observed_edges": 67,
-  "total_synthetic_edges": 1,
-  "total_play_log_entries": 155,
-  "total_timeline_entries": 69,
+  "generated_at": "2026-04-17T11:58:55.911Z",
+  "total_observed_edges": 302,
+  "total_synthetic_edges": 2,
+  "total_play_log_entries": 633,
+  "total_timeline_entries": 310,
   "initial_passage": "Start",
   "orphan_clicks": [],
   "observed_edges": [
+    {
+      "from": "Chapter2.4",
+      "clicked_text": "Take a Shower",
+      "to": "Chapter2.5",
+      "observation_count": 2,
+      "classifications": {
+        "branch": 2
+      },
+      "first_observed_ts": 1776424145909,
+      "last_observed_ts": 1776424852937,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
     {
       "from": "Intro2",
       "clicked_text": null,
@@ -2150,17 +2164,7066 @@
       "effect_aggregate": {}
     },
     {
-      "from": "Chapter2.4",
-      "clicked_text": "Take a Shower",
-      "to": "Chapter2.5",
+      "from": "Chapter2Dream1",
+      "clicked_text": "Dream about Bobby",
+      "to": "Chapter2db",
       "observation_count": 1,
       "classifications": {
         "branch": 1
       },
-      "first_observed_ts": 1776424145909,
-      "last_observed_ts": 1776424145909,
+      "first_observed_ts": 1776424831212,
+      "last_observed_ts": 1776424831212,
       "same_state_hits": 0,
       "is_self_loop": false,
+      "effect_aggregate": {
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            22
+          ],
+          "after_values": [
+            24
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter2db",
+      "clicked_text": "The next day",
+      "to": "Chapter2.4",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776424841589,
+      "last_observed_ts": 1776424841589,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter2.5",
+      "clicked_text": "Continue",
+      "to": "Chapter2.51",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776424854539,
+      "last_observed_ts": 1776424854539,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter2.51",
+      "clicked_text": "Continue fucking",
+      "to": "Chapter2.52",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776424863566,
+      "last_observed_ts": 1776424863566,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter2.52",
+      "clicked_text": "She teased him even more",
+      "to": "Chapter2.52",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776424873447,
+      "last_observed_ts": 1776424873447,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "bobbyaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            17
+          ],
+          "after_values": [
+            19
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter2.52",
+      "clicked_text": "make a coffee",
+      "to": "Chapter2.6",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776424884441,
+      "last_observed_ts": 1776424884441,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter2.6",
+      "clicked_text": "Feeling lucky, Eric took a good hand on Emilie's ass.",
+      "to": "Chapter2.6",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776424897065,
+      "last_observed_ts": 1776424897065,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            6
+          ],
+          "after_values": [
+            8
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter2.6",
+      "clicked_text": "Bobby went working",
+      "to": "Chapter2.61",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776424906874,
+      "last_observed_ts": 1776424906874,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter2.61",
+      "clicked_text": "make a coffee",
+      "to": "Chapter2.62",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776424916456,
+      "last_observed_ts": 1776424916456,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            8
+          ],
+          "after_values": [
+            10
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter2.62",
+      "clicked_text": "verge of crying",
+      "to": "Chapter2.63",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776424925793,
+      "last_observed_ts": 1776424925793,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            22
+          ],
+          "after_values": [
+            24
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            24
+          ],
+          "after_values": [
+            26
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            10
+          ],
+          "after_values": [
+            11
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter2.63",
+      "clicked_text": "Emilie went even closer",
+      "to": "Chapter2.63",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776424935604,
+      "last_observed_ts": 1776424935604,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter2.63",
+      "clicked_text": "Make him feel better",
+      "to": "Chapter2.65",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776424950719,
+      "last_observed_ts": 1776424950719,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter2.65",
+      "clicked_text": "Showed him the goods",
+      "to": "Chapter2.65",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776424960303,
+      "last_observed_ts": 1776424960303,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            24
+          ],
+          "after_values": [
+            26
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            26
+          ],
+          "after_values": [
+            28
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            11
+          ],
+          "after_values": [
+            13
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter2.65",
+      "clicked_text": "The door bell was Ringing",
+      "to": "Chapter2.7",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776424969835,
+      "last_observed_ts": 1776424969835,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter2.7",
+      "clicked_text": "Daydream about Gabriella",
+      "to": "Chapter2.7",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776424980267,
+      "last_observed_ts": 1776424980267,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter2.7",
+      "clicked_text": "Focus on the conversation",
+      "to": "Chapter2.7",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776424989772,
+      "last_observed_ts": 1776424989772,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "gabriellaaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "marcaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter2.7",
+      "clicked_text": "Go back inside and close the door",
+      "to": "Chapter2.71",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425000718,
+      "last_observed_ts": 1776425000718,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "charisma": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            11
+          ],
+          "after_values": [
+            12
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "fitness": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            11
+          ],
+          "after_values": [
+            12
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter2.71",
+      "clicked_text": "Time to go to the grocery store",
+      "to": "Chapter2.72",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425010198,
+      "last_observed_ts": 1776425010198,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            26
+          ],
+          "after_values": [
+            27
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            28
+          ],
+          "after_values": [
+            29
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            13
+          ],
+          "after_values": [
+            14
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter2.72",
+      "clicked_text": "Buy some food",
+      "to": "Chapter2.73",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425019570,
+      "last_observed_ts": 1776425019570,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            27
+          ],
+          "after_values": [
+            28
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            29
+          ],
+          "after_values": [
+            30
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            14
+          ],
+          "after_values": [
+            15
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter2.73",
+      "clicked_text": "Bobby returned from work",
+      "to": "Chapter2.8",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425029473,
+      "last_observed_ts": 1776425029473,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter2.8",
+      "clicked_text": "Make Bobby feel better",
+      "to": "Chapter2.84",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425041463,
+      "last_observed_ts": 1776425041463,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            30
+          ],
+          "after_values": [
+            32
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "loveoral": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            4
+          ],
+          "after_values": [
+            6
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "bobbyaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            19
+          ],
+          "after_values": [
+            21
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter2.84",
+      "clicked_text": "Time to eat",
+      "to": "Chapter2.85",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425050466,
+      "last_observed_ts": 1776425050466,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            28
+          ],
+          "after_values": [
+            29
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            32
+          ],
+          "after_values": [
+            34
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            15
+          ],
+          "after_values": [
+            16
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter2.85",
+      "clicked_text": "Movie night",
+      "to": "Chapter2.9",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425059391,
+      "last_observed_ts": 1776425059391,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            29
+          ],
+          "after_values": [
+            30
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            34
+          ],
+          "after_values": [
+            36
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            16
+          ],
+          "after_values": [
+            17
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter2.9",
+      "clicked_text": "Eric Carried her to sleep",
+      "to": "Chapter2.91",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425068227,
+      "last_observed_ts": 1776425068227,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter2.91",
+      "clicked_text": "Maybe he could touch her ? Just a little ?",
+      "to": "Chapter2.91",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425079859,
+      "last_observed_ts": 1776425079859,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            36
+          ],
+          "after_values": [
+            37
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            17
+          ],
+          "after_values": [
+            18
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter2.91",
+      "clicked_text": "Maybe grabbed it a little more ?",
+      "to": "Chapter2.91",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425089115,
+      "last_observed_ts": 1776425089115,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            37
+          ],
+          "after_values": [
+            38
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            18
+          ],
+          "after_values": [
+            19
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter2.91",
+      "clicked_text": "Go all the way ...",
+      "to": "Chapter2.91",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425099686,
+      "last_observed_ts": 1776425099686,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            30
+          ],
+          "after_values": [
+            32
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            38
+          ],
+          "after_values": [
+            40
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            19
+          ],
+          "after_values": [
+            20
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter2.91",
+      "clicked_text": "Stop and go to sleep",
+      "to": "3rd Chapter",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425109320,
+      "last_observed_ts": 1776425109320,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "3rd Chapter",
+      "clicked_text": "The next day",
+      "to": "Chapter3",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425119242,
+      "last_observed_ts": 1776425119242,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter3",
+      "clicked_text": "Go to shower",
+      "to": "Chapter3.1",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425130319,
+      "last_observed_ts": 1776425130319,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter3.1",
+      "clicked_text": "Prepare",
+      "to": "Chapter3.2",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425140688,
+      "last_observed_ts": 1776425140688,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter3.2",
+      "clicked_text": "Be playfull with him",
+      "to": "Chapter3.3",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425150124,
+      "last_observed_ts": 1776425150124,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "daddyshower1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter3.3",
+      "clicked_text": "He was ready to cum too.",
+      "to": "Chapter3.4",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425160038,
+      "last_observed_ts": 1776425160038,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            32
+          ],
+          "after_values": [
+            34
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            40
+          ],
+          "after_values": [
+            38
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -2,
+            "max_delta": -2,
+            "mean_delta": -2,
+            "always_same_delta": true
+          }
+        },
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            20
+          ],
+          "after_values": [
+            22
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter3.4",
+      "clicked_text": "Clean",
+      "to": "Chapter3.5",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425170078,
+      "last_observed_ts": 1776425170078,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "bobbyaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            21
+          ],
+          "after_values": [
+            22
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "selfie2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter3.5",
+      "clicked_text": "Put some cloth on",
+      "to": "Chapter3.5",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425179242,
+      "last_observed_ts": 1776425179242,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter3.5",
+      "clicked_text": "Go take a coffee",
+      "to": "Chapter3.55",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425189706,
+      "last_observed_ts": 1776425189706,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter3.55",
+      "clicked_text": "Go apply to the job",
+      "to": "Chapter3.6",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425198932,
+      "last_observed_ts": 1776425198932,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter3.6",
+      "clicked_text": "Go in",
+      "to": "Chapter3.65",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425207846,
+      "last_observed_ts": 1776425207846,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter3.65",
+      "clicked_text": "Go on cheat mode girl !",
+      "to": "Chapter3.65",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425218277,
+      "last_observed_ts": 1776425218277,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "charisma": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            12
+          ],
+          "after_values": [
+            14
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "johnaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter3.65",
+      "clicked_text": "Back in the car",
+      "to": "Chapter3.7",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425227552,
+      "last_observed_ts": 1776425227552,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter3.7",
+      "clicked_text": "End the call",
+      "to": "Chapter3.71",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425236844,
+      "last_observed_ts": 1776425236844,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter3.71",
+      "clicked_text": "Flirt with 'Daddy'",
+      "to": "Chapter3.72",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425245699,
+      "last_observed_ts": 1776425245699,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            34
+          ],
+          "after_values": [
+            35
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            38
+          ],
+          "after_values": [
+            40
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter3.72",
+      "clicked_text": "Continue",
+      "to": "Chapter3.73",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425255142,
+      "last_observed_ts": 1776425255142,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter3.73",
+      "clicked_text": "Continue",
+      "to": "Chapter3.74",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425264982,
+      "last_observed_ts": 1776425264982,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter3.74",
+      "clicked_text": "She tasted him with her mouth",
+      "to": "Chapter3.75",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425273999,
+      "last_observed_ts": 1776425273999,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            35
+          ],
+          "after_values": [
+            36
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "loveoral": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            6
+          ],
+          "after_values": [
+            7
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            22
+          ],
+          "after_values": [
+            24
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter3.75",
+      "clicked_text": "Back home",
+      "to": "Chapter3.8",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425284524,
+      "last_observed_ts": 1776425284524,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "selfie4": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter3.8",
+      "clicked_text": "Prepare",
+      "to": "Sport",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425294383,
+      "last_observed_ts": 1776425294383,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "startingpassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "Chapter3.8"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Sport",
+      "clicked_text": "Go to the Gym",
+      "to": "Gym",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425305778,
+      "last_observed_ts": 1776425305778,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "sport": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "gym1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            40
+          ],
+          "after_values": [
+            41
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "fitness": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            12
+          ],
+          "after_values": [
+            14
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Gym",
+      "clicked_text": "Finish and back home",
+      "to": "Sport",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425315221,
+      "last_observed_ts": 1776425315221,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Sport",
+      "clicked_text": "Go take a shower in your bathroom",
+      "to": "Chapter3.8",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425326380,
+      "last_observed_ts": 1776425326380,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter3.8",
+      "clicked_text": "Go shower",
+      "to": "Chapter3.84",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425335694,
+      "last_observed_ts": 1776425335694,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter3.84",
+      "clicked_text": "She felt him joining her in the shower.",
+      "to": "Chapter3.85",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425345854,
+      "last_observed_ts": 1776425345854,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter3.85",
+      "clicked_text": "More",
+      "to": "Chapter3.87",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425355325,
+      "last_observed_ts": 1776425355325,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter3.87",
+      "clicked_text": "Bobby was almost there.",
+      "to": "Chapter3.86",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425365216,
+      "last_observed_ts": 1776425365216,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            41
+          ],
+          "after_values": [
+            39
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -2,
+            "max_delta": -2,
+            "mean_delta": -2,
+            "always_same_delta": true
+          }
+        },
+        "bobbyaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            22
+          ],
+          "after_values": [
+            24
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter3.86",
+      "clicked_text": "Make diner",
+      "to": "Chapter3.9",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425374750,
+      "last_observed_ts": 1776425374750,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter3.9",
+      "clicked_text": "Say goodbye and go watch tv",
+      "to": "Chapter3.91",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425384302,
+      "last_observed_ts": 1776425384302,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter3.91",
+      "clicked_text": "Emilie start to masturbate",
+      "to": "Chapter3.92",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425393429,
+      "last_observed_ts": 1776425393429,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            36
+          ],
+          "after_values": [
+            37
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            39
+          ],
+          "after_values": [
+            40
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            24
+          ],
+          "after_values": [
+            26
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter3.92",
+      "clicked_text": "Call it a day",
+      "to": "Chapter3.94",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425402701,
+      "last_observed_ts": 1776425402701,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter3.94",
+      "clicked_text": "Eric had trouble to sleep",
+      "to": "Chapter3.96",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425412361,
+      "last_observed_ts": 1776425412361,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter3.96",
+      "clicked_text": "Maybe he could play a bit with her?",
+      "to": "Chapter3.961",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425422786,
+      "last_observed_ts": 1776425422786,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "loveanal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter3.961",
+      "clicked_text": "Eric went back to bed ...",
+      "to": "Chapter3.98",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425432438,
+      "last_observed_ts": 1776425432438,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "selfie5": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter3.98",
+      "clicked_text": "Dream",
+      "to": "4th Chapter",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425442819,
+      "last_observed_ts": 1776425442819,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "4th Chapter",
+      "clicked_text": "Wake up",
+      "to": "Chapter4.1",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425453129,
+      "last_observed_ts": 1776425453129,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.1",
+      "clicked_text": "Go to kitchen",
+      "to": "Chapter4.15",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425464590,
+      "last_observed_ts": 1776425464590,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.15",
+      "clicked_text": "Speak about going to go shopping with Daddy",
+      "to": "Chapter4.16",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425473782,
+      "last_observed_ts": 1776425473782,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.16",
+      "clicked_text": "Go dress in your room",
+      "to": "Chapter4.2",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425483253,
+      "last_observed_ts": 1776425483253,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.2",
+      "clicked_text": "Go to buy clothes with Daddy",
+      "to": "Chapter4.21",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425492942,
+      "last_observed_ts": 1776425492942,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "shopping1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter4.21",
+      "clicked_text": "SexShop",
+      "to": "Chapter4.22",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425505436,
+      "last_observed_ts": 1776425505436,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.22",
+      "clicked_text": "Take lube",
+      "to": "Chapter4.22",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425516167,
+      "last_observed_ts": 1776425516167,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "haslube": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter4.22",
+      "clicked_text": "Take anal plug",
+      "to": "Chapter4.22",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425522259,
+      "last_observed_ts": 1776425522259,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "hasplug": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter4.22",
+      "clicked_text": "Take dildo",
+      "to": "Chapter4.22",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425528310,
+      "last_observed_ts": 1776425528310,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "hasdildo": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter4.22",
+      "clicked_text": "Continue shopping",
+      "to": "Chapter4.21",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425543835,
+      "last_observed_ts": 1776425543835,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.21",
+      "clicked_text": "Working clothes",
+      "to": "Chapter4.24",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425553098,
+      "last_observed_ts": 1776425553098,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.24",
+      "clicked_text": "Take office outfit",
+      "to": "Chapter4.24",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425563504,
+      "last_observed_ts": 1776425563504,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "hasofficeoutfit": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter4.24",
+      "clicked_text": "Continue shopping",
+      "to": "Chapter4.21",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425569223,
+      "last_observed_ts": 1776425569223,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.21",
+      "clicked_text": "Underwears",
+      "to": "Chapter4.23",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425570394,
+      "last_observed_ts": 1776425570394,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.23",
+      "clicked_text": "Take the cute lingerie",
+      "to": "Chapter4.23",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425580360,
+      "last_observed_ts": 1776425580360,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "haslingerie1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter4.23",
+      "clicked_text": "Continue shopping",
+      "to": "Chapter4.21",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425586110,
+      "last_observed_ts": 1776425586110,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.21",
+      "clicked_text": "go in changing room",
+      "to": "Chapter4.26",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425595999,
+      "last_observed_ts": 1776425595999,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.26",
+      "clicked_text": "Take a selfie",
+      "to": "Chapter4.26",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425606223,
+      "last_observed_ts": 1776425606223,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "selfie6": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter4.26",
+      "clicked_text": "Look at the price",
+      "to": "Chapter4.27",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425612823,
+      "last_observed_ts": 1776425612823,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.27",
+      "clicked_text": "Maybe try to negociate with Bobby's dad",
+      "to": "Chapter4.28",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425624441,
+      "last_observed_ts": 1776425624441,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.28",
+      "clicked_text": "Emilie showed gratitude",
+      "to": "Chapter4.28",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425633578,
+      "last_observed_ts": 1776425633578,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            37
+          ],
+          "after_values": [
+            38
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            40
+          ],
+          "after_values": [
+            41
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            26
+          ],
+          "after_values": [
+            27
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter4.28",
+      "clicked_text": "Give him a quick head",
+      "to": "Chapter4.28",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425643235,
+      "last_observed_ts": 1776425643235,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            38
+          ],
+          "after_values": [
+            39
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            41
+          ],
+          "after_values": [
+            42
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "loveoral": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            7
+          ],
+          "after_values": [
+            8
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            27
+          ],
+          "after_values": [
+            28
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter4.28",
+      "clicked_text": "Go out the changing room",
+      "to": "Chapter4.29",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425653819,
+      "last_observed_ts": 1776425653819,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.29",
+      "clicked_text": "Finish eating and go back to the car",
+      "to": "Chapter4.3",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425663013,
+      "last_observed_ts": 1776425663013,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.3",
+      "clicked_text": "Oh yes!",
+      "to": "Chapter4.3",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425672782,
+      "last_observed_ts": 1776425672782,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.3",
+      "clicked_text": "Give him more",
+      "to": "Chapter4.34",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425681512,
+      "last_observed_ts": 1776425681512,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "loveoral": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            8
+          ],
+          "after_values": [
+            10
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter4.34",
+      "clicked_text": "Make him on your face",
+      "to": "Chapter4.36",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425691409,
+      "last_observed_ts": 1776425691409,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "selfie7": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter4.36",
+      "clicked_text": "Back in the appartment",
+      "to": "Chapter4.41",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425701427,
+      "last_observed_ts": 1776425701427,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.41",
+      "clicked_text": "Go tutoring Marc",
+      "to": "Chapter4.42",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425711072,
+      "last_observed_ts": 1776425711072,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.42",
+      "clicked_text": "Intensifie your cleaveage",
+      "to": "Chapter4.42",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425720682,
+      "last_observed_ts": 1776425720682,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "marcaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter4.42",
+      "clicked_text": "Continue the lesson",
+      "to": "Chapter4.46",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425730464,
+      "last_observed_ts": 1776425730464,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            42
+          ],
+          "after_values": [
+            43
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "marcaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter4.46",
+      "clicked_text": "Peep on Gabriella?",
+      "to": "Chapter4.46",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425739610,
+      "last_observed_ts": 1776425739610,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            43
+          ],
+          "after_values": [
+            45
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter4.46",
+      "clicked_text": "Back in the appartment",
+      "to": "Chapter4.5",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425748693,
+      "last_observed_ts": 1776425748693,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            28
+          ],
+          "after_values": [
+            29
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter4.5",
+      "clicked_text": "She started to daydream",
+      "to": "Chapter4.55",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425758953,
+      "last_observed_ts": 1776425758953,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "sport": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            true
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            39
+          ],
+          "after_values": [
+            41
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            45
+          ],
+          "after_values": [
+            47
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter4.55",
+      "clicked_text": "She went back from her fantasy",
+      "to": "Chapter4.56",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425768447,
+      "last_observed_ts": 1776425768447,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.56",
+      "clicked_text": "Go in the shower",
+      "to": "Chapter4.65",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425778876,
+      "last_observed_ts": 1776425778876,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "selfie8": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter4.65",
+      "clicked_text": "Go make diner",
+      "to": "Chapter4.7",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425788488,
+      "last_observed_ts": 1776425788488,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.7",
+      "clicked_text": "He approached her from behind",
+      "to": "Chapter4.72",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425800267,
+      "last_observed_ts": 1776425800267,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            47
+          ],
+          "after_values": [
+            48
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter4.72",
+      "clicked_text": "Daddy went further",
+      "to": "Chapter4.75",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425809819,
+      "last_observed_ts": 1776425809819,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.75",
+      "clicked_text": "Daddy went even further",
+      "to": "Chapter4.76",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425820324,
+      "last_observed_ts": 1776425820324,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            41
+          ],
+          "after_values": [
+            42
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "loveanal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            4
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter4.76",
+      "clicked_text": "Maybe help him too ?",
+      "to": "Chapter4.77",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425829647,
+      "last_observed_ts": 1776425829647,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            42
+          ],
+          "after_values": [
+            44
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            48
+          ],
+          "after_values": [
+            47
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -1,
+            "max_delta": -1,
+            "mean_delta": -1,
+            "always_same_delta": true
+          }
+        },
+        "loveoral": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            10
+          ],
+          "after_values": [
+            11
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            29
+          ],
+          "after_values": [
+            32
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 3,
+            "max_delta": 3,
+            "mean_delta": 3,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter4.77",
+      "clicked_text": "They go eat Diner",
+      "to": "Chapter4.8",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425839564,
+      "last_observed_ts": 1776425839564,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.8",
+      "clicked_text": "Have a nice conversation and go to bed",
+      "to": "Chapter4.9",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425849436,
+      "last_observed_ts": 1776425849436,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter4.9",
+      "clicked_text": "Dream",
+      "to": "5th Chapter",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425858747,
+      "last_observed_ts": 1776425858747,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "5th Chapter",
+      "clicked_text": "Wake up",
+      "to": "Chapter5.1",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425868073,
+      "last_observed_ts": 1776425868073,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.1",
+      "clicked_text": "Get out of the bed",
+      "to": "Chapter5.13",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425877822,
+      "last_observed_ts": 1776425877822,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            44
+          ],
+          "after_values": [
+            45
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter5.13",
+      "clicked_text": "Ignore and go take a breafast",
+      "to": "Chapter5.17",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425886409,
+      "last_observed_ts": 1776425886409,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.17",
+      "clicked_text": "went to get dress",
+      "to": "Chapter5.18",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425895283,
+      "last_observed_ts": 1776425895283,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.18",
+      "clicked_text": "Go in the hallway",
+      "to": "Chapter5.19",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425904459,
+      "last_observed_ts": 1776425904459,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.19",
+      "clicked_text": "Go to work with the bus",
+      "to": "Chapter5.21",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425918411,
+      "last_observed_ts": 1776425918411,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "bus1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter5.21",
+      "clicked_text": "Respond to him?",
+      "to": "Chapter5.21",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425927562,
+      "last_observed_ts": 1776425927562,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            45
+          ],
+          "after_values": [
+            46
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter5.21",
+      "clicked_text": "Go to work",
+      "to": "Chapter5.22",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425937203,
+      "last_observed_ts": 1776425937203,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.22",
+      "clicked_text": "Start working",
+      "to": "Chapter5.23",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425946539,
+      "last_observed_ts": 1776425946539,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.23",
+      "clicked_text": "Meet coworker",
+      "to": "Chapter5.24",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425965698,
+      "last_observed_ts": 1776425965698,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "charisma": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            14
+          ],
+          "after_values": [
+            15
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "coworkeraddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "meetcoworker": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter5.24",
+      "clicked_text": "Go to you desk",
+      "to": "Chapter5.23",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425978191,
+      "last_observed_ts": 1776425978191,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.23",
+      "clicked_text": "Take a coffee",
+      "to": "Chapter5.26",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425988858,
+      "last_observed_ts": 1776425988858,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "coworkeraddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "hascoffee": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter5.26",
+      "clicked_text": "Go to you desk",
+      "to": "Chapter5.23",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776425998499,
+      "last_observed_ts": 1776425998499,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.23",
+      "clicked_text": "Chat with John",
+      "to": "Chapter5.27",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426000078,
+      "last_observed_ts": 1776426000078,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "johnaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter5.27",
+      "clicked_text": "Finish Work",
+      "to": "Chapter5.3",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426009311,
+      "last_observed_ts": 1776426009311,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.3",
+      "clicked_text": "Home",
+      "to": "Chapter5.31",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426018151,
+      "last_observed_ts": 1776426018151,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.31",
+      "clicked_text": "Chill",
+      "to": "Chilling",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426026955,
+      "last_observed_ts": 1776426026955,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "Chill": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "startingpassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Chapter3.8"
+          ],
+          "after_values": [
+            "Chapter5.31"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chilling",
+      "clicked_text": "Read a book?",
+      "to": "Chilling",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426037840,
+      "last_observed_ts": 1776426037840,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chilling",
+      "clicked_text": "Whatch a bit of tv?",
+      "to": "Chilling",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426039115,
+      "last_observed_ts": 1776426039115,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chilling",
+      "clicked_text": "It is time to Marc's tutoring",
+      "to": "Chapter5.31",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426040400,
+      "last_observed_ts": 1776426040400,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "Chapter5": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "Chapter6": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter5.31",
+      "clicked_text": "Continue to teach him",
+      "to": "Tutoring",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426049104,
+      "last_observed_ts": 1776426049104,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "Tutoring": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Tutoring",
+      "clicked_text": "Poor Boy. Maybe she could help him in anyways?",
+      "to": "Tutoring1",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426058304,
+      "last_observed_ts": 1776426058304,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            46
+          ],
+          "after_values": [
+            48
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            47
+          ],
+          "after_values": [
+            49
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "marcaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "Tutoring1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Tutoring1",
+      "clicked_text": "Leave him and go back to your place.",
+      "to": "Chapter5.31",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426067994,
+      "last_observed_ts": 1776426067994,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.31",
+      "clicked_text": "Say a proper goodbye",
+      "to": "Chapter5.31",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426077627,
+      "last_observed_ts": 1776426077627,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            48
+          ],
+          "after_values": [
+            50
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            49
+          ],
+          "after_values": [
+            51
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "gabriellaaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "Gab1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter5.31",
+      "clicked_text": "Leave and go to your place",
+      "to": "Chapter5.32",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426087037,
+      "last_observed_ts": 1776426087037,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.32",
+      "clicked_text": "Go blow steam off",
+      "to": "Sport",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426095775,
+      "last_observed_ts": 1776426095775,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "startingpassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Chapter5.31"
+          ],
+          "after_values": [
+            "Chapter5.32"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Sport",
+      "clicked_text": "Go Running",
+      "to": "Running",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426105031,
+      "last_observed_ts": 1776426105031,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "sport": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "run1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            51
+          ],
+          "after_values": [
+            53
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "fitness": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            14
+          ],
+          "after_values": [
+            15
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Running",
+      "clicked_text": "Finish and go back home",
+      "to": "Sport",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426114315,
+      "last_observed_ts": 1776426114315,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Sport",
+      "clicked_text": "Go take a shower in your bathroom",
+      "to": "Chapter5.32",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426124684,
+      "last_observed_ts": 1776426124684,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.32",
+      "clicked_text": "Get out of the shower",
+      "to": "Chapter5.4",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426147747,
+      "last_observed_ts": 1776426147747,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.4",
+      "clicked_text": "Eric proposed something to her",
+      "to": "Chapter5.41",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426156964,
+      "last_observed_ts": 1776426156964,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.41",
+      "clicked_text": "Go prepare yourself",
+      "to": "Chapter5.42",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426166295,
+      "last_observed_ts": 1776426166295,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.42",
+      "clicked_text": "Take a Selfie",
+      "to": "Chapter5.42",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426177417,
+      "last_observed_ts": 1776426177417,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "selfie13": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter5.42",
+      "clicked_text": "Go to the car.",
+      "to": "Chapter5.5",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426178667,
+      "last_observed_ts": 1776426178667,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.5",
+      "clicked_text": "Get out of the car",
+      "to": "Chapter5.51",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426188804,
+      "last_observed_ts": 1776426188804,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.51",
+      "clicked_text": "Enjoy the meal innocently",
+      "to": "Chapter5.54",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426197661,
+      "last_observed_ts": 1776426197661,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.54",
+      "clicked_text": "Back in the car",
+      "to": "Chapter5.55",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426207660,
+      "last_observed_ts": 1776426207660,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.55",
+      "clicked_text": "Get off the car",
+      "to": "Chapter5.6",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426221698,
+      "last_observed_ts": 1776426221698,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.6",
+      "clicked_text": "Kiss him?",
+      "to": "Chapter5.6",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426232130,
+      "last_observed_ts": 1776426232130,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            53
+          ],
+          "after_values": [
+            55
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            32
+          ],
+          "after_values": [
+            33
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter5.6",
+      "clicked_text": "Have a last drink",
+      "to": "Chapter5.61",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426241251,
+      "last_observed_ts": 1776426241251,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.61",
+      "clicked_text": "Get close to 'Daddy' ...",
+      "to": "Chapter5.61",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426253672,
+      "last_observed_ts": 1776426253672,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.61",
+      "clicked_text": "Stop it before it's too late and go to bed",
+      "to": "Chapter5.7",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426262446,
+      "last_observed_ts": 1776426262446,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.7",
+      "clicked_text": "Go to sleep",
+      "to": "Chapter5.71",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426271903,
+      "last_observed_ts": 1776426271903,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter5.71",
+      "clicked_text": "Dream",
+      "to": "6th Chapter",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426281077,
+      "last_observed_ts": 1776426281077,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            55
+          ],
+          "after_values": [
+            56
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "6th Chapter",
+      "clicked_text": "You feel something good ...",
+      "to": "Chapter6.1",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426290829,
+      "last_observed_ts": 1776426290829,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            56
+          ],
+          "after_values": [
+            58
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter6.1",
+      "clicked_text": "Open an eye",
+      "to": "Chapter6.11",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426300444,
+      "last_observed_ts": 1776426300444,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter6.11",
+      "clicked_text": "Start to kiss",
+      "to": "Chapter6.11",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426328692,
+      "last_observed_ts": 1776426328692,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "bobbyaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            24
+          ],
+          "after_values": [
+            26
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter6.11",
+      "clicked_text": "Have enough sex for today",
+      "to": "Chapter6.15",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426338503,
+      "last_observed_ts": 1776426338503,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter6.15",
+      "clicked_text": "Go take a shower",
+      "to": "Chapter6.16",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426349145,
+      "last_observed_ts": 1776426349145,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter6.16",
+      "clicked_text": "Go make a breakfast",
+      "to": "Chapter6.2",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426351206,
+      "last_observed_ts": 1776426351206,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter6.2",
+      "clicked_text": "Get dress",
+      "to": "Chapter6.21",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426352450,
+      "last_observed_ts": 1776426352450,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            33
+          ],
+          "after_values": [
+            34
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "hascoffee": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            true
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "meetcoworker": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            true
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter6.21",
+      "clicked_text": "Go to the office with Eric",
+      "to": "Chapter6.22",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426353777,
+      "last_observed_ts": 1776426353777,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter6.22",
+      "clicked_text": "Perhaps she might make the trip worthwhile for him.",
+      "to": "Chapter6.22",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426362813,
+      "last_observed_ts": 1776426362813,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            50
+          ],
+          "after_values": [
+            52
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            58
+          ],
+          "after_values": [
+            60
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "loveoral": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            11
+          ],
+          "after_values": [
+            12
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            34
+          ],
+          "after_values": [
+            35
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter6.22",
+      "clicked_text": "The car arrived. Emilie walked into the building.",
+      "to": "Chapter6.24",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426372191,
+      "last_observed_ts": 1776426372191,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter6.24",
+      "clicked_text": "Chat with John",
+      "to": "Chapter6.27",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426387278,
+      "last_observed_ts": 1776426387278,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "johnaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            4
+          ],
+          "after_values": [
+            6
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter6.27",
+      "clicked_text": "Finish Working",
+      "to": "Chapter6.3",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426397474,
+      "last_observed_ts": 1776426397474,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "sport": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            true
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "Chill": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            true
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "Tutoring": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            true
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter6.3",
+      "clicked_text": "Home",
+      "to": "Chapter6.31",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426399460,
+      "last_observed_ts": 1776426399460,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter6.31",
+      "clicked_text": "Chill",
+      "to": "Chilling",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426400787,
+      "last_observed_ts": 1776426400787,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "Chill": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "startingpassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Chapter5.32"
+          ],
+          "after_values": [
+            "Chapter6.31"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chilling",
+      "clicked_text": "It is time to Marc's tutoring",
+      "to": "Chapter6.31",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426413277,
+      "last_observed_ts": 1776426413277,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "Chapter5": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            true
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "Chapter6": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter6.31",
+      "clicked_text": "Go to Gab and Marc's place",
+      "to": "Tutoring0",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426423813,
+      "last_observed_ts": 1776426423813,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Tutoring0",
+      "clicked_text": "Continue to teach him",
+      "to": "Tutoring",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426433884,
+      "last_observed_ts": 1776426433884,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "Tutoring": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "startingpassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Chapter6.31"
+          ],
+          "after_values": [
+            "Tutoring0"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Tutoring",
+      "clicked_text": "Ask him if he want to do 'biology' again.",
+      "to": "Tutoring",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426443503,
+      "last_observed_ts": 1776426443503,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Tutoring",
+      "clicked_text": "Maybe show him something new",
+      "to": "Tutoring2",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426452471,
+      "last_observed_ts": 1776426452471,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            52
+          ],
+          "after_values": [
+            54
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            60
+          ],
+          "after_values": [
+            62
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "marcaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            5
+          ],
+          "after_values": [
+            7
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "Tutoring2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Tutoring2",
+      "clicked_text": "Leave him and go back to your place.",
+      "to": "Tutoring0",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426462567,
+      "last_observed_ts": 1776426462567,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Tutoring0",
+      "clicked_text": "Join her",
+      "to": "Gab1",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426472441,
+      "last_observed_ts": 1776426472441,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            54
+          ],
+          "after_values": [
+            56
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "gabriellaaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "Gab1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            true
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "Gab2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Gab1",
+      "clicked_text": "Leave and go to your place",
+      "to": "Chapter6.32",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426483443,
+      "last_observed_ts": 1776426483443,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter6.32",
+      "clicked_text": "Go blow steam off",
+      "to": "Sport",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426492649,
+      "last_observed_ts": 1776426492649,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "startingpassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Tutoring0"
+          ],
+          "after_values": [
+            "Chapter6.32"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Sport",
+      "clicked_text": "Do Yoga",
+      "to": "Yoga",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426501787,
+      "last_observed_ts": 1776426501787,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "sport": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "yoga1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            56
+          ],
+          "after_values": [
+            57
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            62
+          ],
+          "after_values": [
+            63
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "fitness": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            15
+          ],
+          "after_values": [
+            16
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Yoga",
+      "clicked_text": "Finish the session",
+      "to": "Sport",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426512958,
+      "last_observed_ts": 1776426512958,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Sport",
+      "clicked_text": "Go take a shower in your bathroom",
+      "to": "Chapter6.32",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426514410,
+      "last_observed_ts": 1776426514410,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter6.32",
+      "clicked_text": "Get out of the shower",
+      "to": "Chapter6.4",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426515712,
+      "last_observed_ts": 1776426515712,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "selfie16": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter6.4",
+      "clicked_text": "Someone is ringing at the door",
+      "to": "Chapter6.41",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426524176,
+      "last_observed_ts": 1776426524176,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter6.41",
+      "clicked_text": "Finish the game and say goodbye",
+      "to": "Chapter6.5",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426533872,
+      "last_observed_ts": 1776426533872,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter6.5",
+      "clicked_text": "Start cooking",
+      "to": "Chapter6.51",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426544540,
+      "last_observed_ts": 1776426544540,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter6.51",
+      "clicked_text": "Go a bit further",
+      "to": "Chapter6.52",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426553773,
+      "last_observed_ts": 1776426553773,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            57
+          ],
+          "after_values": [
+            59
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            63
+          ],
+          "after_values": [
+            66
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 3,
+            "max_delta": 3,
+            "mean_delta": 3,
+            "always_same_delta": true
+          }
+        },
+        "bobbyaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            26
+          ],
+          "after_values": [
+            28
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            35
+          ],
+          "after_values": [
+            36
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter6.52",
+      "clicked_text": "Go to eat",
+      "to": "Chapter6.55",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426563851,
+      "last_observed_ts": 1776426563851,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter6.55",
+      "clicked_text": "End the meal",
+      "to": "Chapter6.6",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426573227,
+      "last_observed_ts": 1776426573227,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter6.6",
+      "clicked_text": "Go back in the livingroom",
+      "to": "Chapter6.61",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426582477,
+      "last_observed_ts": 1776426582477,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter6.61",
+      "clicked_text": "Watch the movie",
+      "to": "Chapter6.67",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426649402,
+      "last_observed_ts": 1776426649402,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter6.67",
+      "clicked_text": "End the movie",
+      "to": "Chapter6.7",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426659315,
+      "last_observed_ts": 1776426659315,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter6.7",
+      "clicked_text": "Go to bathroom",
+      "to": "Chapter6.71",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426668024,
+      "last_observed_ts": 1776426668024,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter6.71",
+      "clicked_text": "Go to sleep",
+      "to": "Chapter6.9",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426677261,
+      "last_observed_ts": 1776426677261,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter6.9",
+      "clicked_text": "Dream",
+      "to": "Chapter6.91",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426678634,
+      "last_observed_ts": 1776426678634,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter6.91",
+      "clicked_text": "Wake up",
+      "to": "7th Chapter",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426687007,
+      "last_observed_ts": 1776426687007,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "7th Chapter",
+      "clicked_text": "Get up",
+      "to": "Chapter7.12",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426697957,
+      "last_observed_ts": 1776426697957,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "daddyshower1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            true
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "bobbyaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            28
+          ],
+          "after_values": [
+            30
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "dress1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "breakfast1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter7.12",
+      "clicked_text": "Shower",
+      "to": "Chapter7.13",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426710176,
+      "last_observed_ts": 1776426710176,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "daddyshower1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter7.13",
+      "clicked_text": "Breakfast",
+      "to": "Chapter7.16",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426711505,
+      "last_observed_ts": 1776426711505,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "breakfast1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter7.16",
+      "clicked_text": "Dress",
+      "to": "Chapter7.18",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426712946,
+      "last_observed_ts": 1776426712946,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "dress1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter7.18",
+      "clicked_text": "Finish preparing and leave",
+      "to": "Chapter7.19",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426723545,
+      "last_observed_ts": 1776426723545,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.19",
+      "clicked_text": "Leave to Sister's house",
+      "to": "Chapter7.2",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426737536,
+      "last_observed_ts": 1776426737536,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.2",
+      "clicked_text": "Get closer",
+      "to": "Chapter7.21",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426747424,
+      "last_observed_ts": 1776426747424,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            59
+          ],
+          "after_values": [
+            61
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "sophiaaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter7.21",
+      "clicked_text": "Visist Sophia's house",
+      "to": "Chapter7.22",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426757073,
+      "last_observed_ts": 1776426757073,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "sophiaaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            4
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "r1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "l1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "k1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "b1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "a1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter7.22",
+      "clicked_text": "Help moving stuff",
+      "to": "Chapter7.23",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426765969,
+      "last_observed_ts": 1776426765969,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.23",
+      "clicked_text": "A bit of everything",
+      "to": "Chapter7.28",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426775873,
+      "last_observed_ts": 1776426775873,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "a1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter7.28",
+      "clicked_text": "Back",
+      "to": "Chapter7.23",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426785109,
+      "last_observed_ts": 1776426785109,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.23",
+      "clicked_text": "The Bathroom",
+      "to": "Chapter7.26",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426795807,
+      "last_observed_ts": 1776426795807,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "b1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter7.26",
+      "clicked_text": "Back",
+      "to": "Chapter7.23",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426806203,
+      "last_observed_ts": 1776426806203,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.23",
+      "clicked_text": "The Room",
+      "to": "Chapter7.24",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426807541,
+      "last_observed_ts": 1776426807541,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "sophiaaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            5
+          ],
+          "after_values": [
+            6
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "r1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter7.24",
+      "clicked_text": "Back",
+      "to": "Chapter7.23",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426816782,
+      "last_observed_ts": 1776426816782,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.23",
+      "clicked_text": "The Kitchen",
+      "to": "Chapter7.25",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426818032,
+      "last_observed_ts": 1776426818032,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "k1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter7.25",
+      "clicked_text": "Back",
+      "to": "Chapter7.23",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426819372,
+      "last_observed_ts": 1776426819372,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.23",
+      "clicked_text": "The Livingroom",
+      "to": "Chapter7.27",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426820646,
+      "last_observed_ts": 1776426820646,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "l1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter7.27",
+      "clicked_text": "Back",
+      "to": "Chapter7.23",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426829830,
+      "last_observed_ts": 1776426829830,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.23",
+      "clicked_text": "Time for a beer !",
+      "to": "Chapter7.3",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426839197,
+      "last_observed_ts": 1776426839197,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "sophiaaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            6
+          ],
+          "after_values": [
+            7
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter7.3",
+      "clicked_text": "Send a message to Bobby",
+      "to": "Chapter7.31",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426853597,
+      "last_observed_ts": 1776426853597,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            61
+          ],
+          "after_values": [
+            62
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "selfie19": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter7.31",
+      "clicked_text": "Send one to Eric also?",
+      "to": "Chapter7.31",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426864219,
+      "last_observed_ts": 1776426864219,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            62
+          ],
+          "after_values": [
+            63
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "selfie20": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter7.31",
+      "clicked_text": "Go to Swim",
+      "to": "Chapter7.32",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426870647,
+      "last_observed_ts": 1776426870647,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.32",
+      "clicked_text": "Someone is coming?",
+      "to": "Chapter7.4",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426880393,
+      "last_observed_ts": 1776426880393,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            66
+          ],
+          "after_values": [
+            68
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter7.4",
+      "clicked_text": "\"Forget\" to close the door",
+      "to": "Chapter7.41",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426890017,
+      "last_observed_ts": 1776426890017,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.41",
+      "clicked_text": "Sophia's play getting out of hand",
+      "to": "Chapter7.41",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426901379,
+      "last_observed_ts": 1776426901379,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            63
+          ],
+          "after_values": [
+            65
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            68
+          ],
+          "after_values": [
+            70
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "sophiaaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            7
+          ],
+          "after_values": [
+            8
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter7.41",
+      "clicked_text": "Finish the shower",
+      "to": "Chapter7.42",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426911666,
+      "last_observed_ts": 1776426911666,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.42",
+      "clicked_text": "Check the house",
+      "to": "Chapter7.43",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426922653,
+      "last_observed_ts": 1776426922653,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.43",
+      "clicked_text": "look at the pool?",
+      "to": "Chapter7.43",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426932524,
+      "last_observed_ts": 1776426932524,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.43",
+      "clicked_text": "look at the livingroom?",
+      "to": "Chapter7.43",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426940736,
+      "last_observed_ts": 1776426940736,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.43",
+      "clicked_text": "What is that sound ?",
+      "to": "Chapter7.43",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426951149,
+      "last_observed_ts": 1776426951149,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.43",
+      "clicked_text": "Go check ?",
+      "to": "Chapter7.44",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426960627,
+      "last_observed_ts": 1776426960627,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            70
+          ],
+          "after_values": [
+            71
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter7.44",
+      "clicked_text": "Leave before get caught",
+      "to": "Chapter7.45",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426970281,
+      "last_observed_ts": 1776426970281,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.45",
+      "clicked_text": "Drink more",
+      "to": "Chapter7.46",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426982148,
+      "last_observed_ts": 1776426982148,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            65
+          ],
+          "after_values": [
+            66
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            71
+          ],
+          "after_values": [
+            72
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "sophiaaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            8
+          ],
+          "after_values": [
+            9
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter7.46",
+      "clicked_text": "Go to sleep",
+      "to": "Chapter7.5",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776426991301,
+      "last_observed_ts": 1776426991301,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            66
+          ],
+          "after_values": [
+            67
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            72
+          ],
+          "after_values": [
+            73
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "bobbyaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            30
+          ],
+          "after_values": [
+            31
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "selfie21": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Chapter7.5",
+      "clicked_text": "Go under the sheets",
+      "to": "Chapter7.52",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776427003446,
+      "last_observed_ts": 1776427003446,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.52",
+      "clicked_text": "Drown to sleep",
+      "to": "Chapter7.53",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776427018339,
+      "last_observed_ts": 1776427018339,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.53",
+      "clicked_text": "Wake up",
+      "to": "Chapter7.6",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776427027767,
+      "last_observed_ts": 1776427027767,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.6",
+      "clicked_text": "Go take the breakfast with Sophia",
+      "to": "Chapter7.61",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776427037205,
+      "last_observed_ts": 1776427037205,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.61",
+      "clicked_text": "Drink your coffee",
+      "to": "Chapter7.62",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776427046505,
+      "last_observed_ts": 1776427046505,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            73
+          ],
+          "after_values": [
+            75
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter7.62",
+      "clicked_text": "Go take a shower",
+      "to": "Chapter7.63",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776427056971,
+      "last_observed_ts": 1776427056971,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            75
+          ],
+          "after_values": [
+            77
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "sophiaaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            9
+          ],
+          "after_values": [
+            10
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Chapter7.63",
+      "clicked_text": "Finish to wash and exit the shower",
+      "to": "Chapter7.65",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776427066515,
+      "last_observed_ts": 1776427066515,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.65",
+      "clicked_text": "Leave the bathroom before doing something nasty",
+      "to": "Chapter7.68",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776427077172,
+      "last_observed_ts": 1776427077172,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.68",
+      "clicked_text": "Leave and walk back home",
+      "to": "Chapter7.7",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776427087536,
+      "last_observed_ts": 1776427087536,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Chapter7.7",
+      "clicked_text": "Do some Yoga",
+      "to": "Chapter7.7",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776427104038,
+      "last_observed_ts": 1776427104038,
+      "same_state_hits": 1,
+      "is_self_loop": true,
       "effect_aggregate": {}
     }
   ],
@@ -2173,13 +9236,251 @@
       "first_observed_ts": 1776423416106,
       "last_observed_ts": 1776423416106,
       "effect_aggregate": {}
+    },
+    {
+      "cmd": "restore",
+      "from": "Start",
+      "to": "Chapter2Dream1",
+      "observation_count": 1,
+      "first_observed_ts": 1776424803081,
+      "last_observed_ts": 1776424803081,
+      "effect_aggregate": {
+        "shower": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "tease1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            22
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 22,
+            "max_delta": 22,
+            "mean_delta": 22,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            22
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 22,
+            "max_delta": 22,
+            "mean_delta": 22,
+            "always_same_delta": true
+          }
+        },
+        "loveanal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 3,
+            "max_delta": 3,
+            "mean_delta": 3,
+            "always_same_delta": true
+          }
+        },
+        "loveoral": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 4,
+            "max_delta": 4,
+            "mean_delta": 4,
+            "always_same_delta": true
+          }
+        },
+        "charisma": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            10
+          ],
+          "after_values": [
+            11
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "fitness": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            10
+          ],
+          "after_values": [
+            11
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "bobbyaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            17
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 17,
+            "max_delta": 17,
+            "mean_delta": 17,
+            "always_same_delta": true
+          }
+        },
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            6
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 6,
+            "max_delta": 6,
+            "mean_delta": 6,
+            "always_same_delta": true
+          }
+        },
+        "francoisaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            12
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 12,
+            "max_delta": 12,
+            "mean_delta": 12,
+            "always_same_delta": true
+          }
+        },
+        "sophiaaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            10
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -7,
+            "max_delta": -7,
+            "mean_delta": -7,
+            "always_same_delta": true
+          }
+        }
+      }
     }
   ],
   "coverage": {
     "static_edges_total": 1121,
-    "observed_static_edges": 51,
-    "unobserved_static_edges": 1070,
-    "coverage_ratio": 0.0455,
-    "observed_only_edges": 19
+    "observed_static_edges": 282,
+    "unobserved_static_edges": 839,
+    "coverage_ratio": 0.2516,
+    "observed_only_edges": 64
   }
 }
