@@ -74,3 +74,57 @@ Email/news/newspaper — 10 emails waiting on day 2
 Cats/pet system (cats[10], catGend[2], catAtt[5], pet{5})
 Sex counts: masCount/suckCount/vagCount/assCount/doubCount/rapeCount/creamCount
 Toys: dildo/buttplug/tail/strapon/wButtplug/wTail
+- [2026-04-17T06:02:38.803Z] === 1-HR SESSION ADDENDUM ===
+Played days 1-7, ~100 clicks, mapped all primary hubs + unlocked promotion + home arc.
+
+=== TIME/ECON PRECISION ===
+- Day = 6 periods (1=morning, 6=night). Sleep cycles day+1, period→1. Park/home both work for sleep.
+- Period advances ONLY on specific 'main' activities — most Work/shift actions trigger +1, but some like Shower/entering rooms are free (period=1 stays through shower+walk+cafe entry).
+- Home sleep preserves belongings; park sleep strips allure to 15 + mugged++. Home sleep ALSO halved allure 30→15 on day 3-4 wake — so allure decay happens from sleeping period regardless of location.
+- Rent accumulates (rent var ticks 1/day). Weekly deduction ~day 6→7 took £372→£72 implying ~£300 auto-deduction for rent + utilities. Week 1 survived with apartment intact.
+- Cafe PROMOTION unlock: 'Complain about customer harassment' appears on Cafe hub when job=='cafe' && cafeCount>=5 && cafePromo==0 && period<=5. Rob grants cafePay 20→30 (+£10/shift). cafeCount accumulates indefinitely.
+
+=== APARTMENT PROGRESSION (CONFIRMED) ===
+Street → 'Look for an apartment' (gated: period<=5) → 'Go to the address' → Yes(x3) → Walk up stairs → Meet Zack (grants zack=+5, arousal=+5, inhib=-8, corrupt=+2) → Great. → Touch up your room → apt401Key=true. Home var stays 'none' until clicking 'Make this your home' button in yourRoom → home='zackApt'.
+
+Apt rooms: yourRoom (nap, shower, drawer, mirror, balcony (corrupt-gated), poster (credits!), livingroom), Shower (allure refresh), Kitchen (food display), Livingroom (Zack on couch: 'Join him' +2 zack, advances period).
+
+=== MALL / DOWNTOWN EXPANSION ===
+Mall (£-gated from Downtown): Quick-E Mart (groceries £19→+10 food, oil £49, sunscreen £29, makeup £29, tent £599), Clothing Store (gym clothes £99, bikini £199), Electric Giant (phone £299, laptop £599, camera £199, GPS £2999), sex toy store (corrupt-gated).
+Library: Chloe the librarian — Find erotic book (+corrupt, +chloe, +3 booksRead, -1 inhib per 'bookInhib'). Other books: love, philosophy, beauty.
+Cinema: 'Yes please £5' → 3 movies (Us, Time Bomb, Sex Architect). Sex Architect: -inhib +arousal. One ticket per visit.
+
+=== LAKE (NEW DISCOVERY) ===
+Park → 'Go for a walk' → parkWalk unlocks lake=true → 'Go to the lake' appears in Park options → 'Swim nude' at lake resets showerTime=0, allure=30, arousal+15, inhib-2, vibeLevel+0.075. FREE self-care!
+
+=== NPCs MET (love stat 0→ start) ===
+Zack (roommate, zack=7 after Join on couch + walkUp meet). Rob (cafe boss, not a romance option). Chloe (librarian, chloe=1 after erotic book read). Mentioned but unmet: Lily, Caine, Dad, Bro, Tommy, Noah, Brody, Morris, Constantin (uncle).
+
+=== QUEST HOOKS ENUMERATED ===
+StoryInit flags: kidnapQuest(false, set by 'prepare' passage = cloaked men safehouse), facilityQuest(false, set by 'mountains' = Constantin research infiltration), textDad(false, set by 'messageDad' = unknown-sender text leading to dad reconciliation OR dadRape branch), brotherMissing(false, set by 'talkDad' OR 'ottoLuxBrother'), morrisTalk(false, set by 'uncle' passage = Constantin terminal reveals Morris), constantin(false), PIProg(0→1→2 via PIProg1/2 passages).
+Weekly letter system: questLetter1/2 = 'unopened' initial. Didn't trigger in 7 days without further stat/money progress.
+Outskirts unlock: textDad==true || pet.isFound==true.
+
+=== BACKPACK INVENTORY ===
+Consumables: food x10 (from groceries purchase), 4 unknown slots.
+Hard Items: old phone (PIN-locked, PIN=6969, locks with PINtimer on wrong entry, pic → oldPhoneApps/Text/Pic), 17 unknown slots.
+NSFW: 5 unknown slots. (dildo/buttplug/tail/strapon/wButtplug/wTail vars).
+
+=== GATES STUDIED ===
+Park flash: period<=5 && inhib<=50 && corrupt>=25. We're 117/-18 — need 67 inhib reduction + 43 corrupt gain.
+Back alley: alley==true (set by club visit OR sleepAlleyIntro). Alley resets on sleep? Need recheck. alleyBuy stacks: +alleyCount, max 21, OR rngesus==1 && allure>=40 alt.
+Club: need id==true OR seduce-corrupt gate.
+Weekly Allowance: day==7 && weeklyAllowanceCheck==false && [other cond]. Didn't trigger on our day 7 — may need additional flags.
+
+=== INHIB REDUCER CATALOG (76 setters) ===
+alleyBuy -10 (dealer drug), balcony jerk -8 (corrupt-gated), laptopPorn -2, cinema -inhib (movieSceneA, balconyJerk -8), Quick-E Mart -5 (oil/sunscreen use?), bookInhib -1, jerkLib -4 (library masturbation), cafeFuckC -3, cult -2, dadBDateSexActual -3, lilyLDate -3, noahCDate -1, movieSceneA (cinema -?). All clamped 0-150.
+
+=== STRENGTH/FITNESS SYSTEM (UNDISCOVERED) ===
+strength/cardio/yoga stats all 0. Gym gated on gymClothes purchase from Clothing Store (£99). Required for mugged-arc (strength>60) survival.
+
+=== SNAPS ON DISK ===
+sd1ef1eef4e = day 1 period 3, Street hub (pristine start post-intro)
+s2cd403dfb7 = exploreIntro (earlier)
+s87d412240f = day 2 period 2, apt key obtained
+s97abb6f796 = day 6 period 1, cafe promoted, money 362
+s88011f2c36 = day 7 period 2, lake swim, fresh stats
