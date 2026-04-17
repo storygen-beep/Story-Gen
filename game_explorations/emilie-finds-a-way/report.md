@@ -1,15 +1,15 @@
 # emilie-finds-a-way — Exploration Report
 
-Generated: 2026-04-17T13:34:41.562Z
+Generated: 2026-04-17T14:30:25.869Z
 Source URL: https://mopoga.com/embed/emilie-finds-a-way/
 
 ## Session Summary
 
-- Sessions run: 3
-- Total wall-clock: 146m 40s
-- Total clicks: 848
-- Total choices explored: 848
-- Unique states seen: 718
+- Sessions run: 5
+- Total wall-clock: 186m 38s
+- Total clicks: 986
+- Total choices explored: 986
+- Unique states seen: 831
 - Unexplored frontier (queued for next session): 1
 - Any ending reached: not yet
 
@@ -23,40 +23,40 @@ Detected engine: **sugarcube**
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
 | `money` | number | 100..100 | 0 | high |
-| `charisma` | number | 10..23 | 5 | high |
-| `fitness` | number | 10..20 | 3 | high |
-| `stamina` | number | 70..1170 | 59 | high |
+| `charisma` | number | 10..23 | 2 | high |
+| `fitness` | number | 10..20 | 2 | high |
+| `stamina` | number | 1200..1590 | 29 | high |
 
 ### time (1)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
-| `Day` | number | 0..10 | 14 | high |
+| `Day` | number | 5..50 | 13 | high |
 
-### flag (149)
+### flag (145)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
 | `start` | boolean | false | 0 | high |
-| `shower` | boolean | false, true | 18 | high |
-| `tease1` | boolean | false, true | 1 | high |
-| `daddyshower1` | boolean | false, true | 5 | high |
-| `shopping1` | boolean | false, true | 1 | high |
+| `shower` | boolean | false, true | 10 | high |
+| `tease1` | boolean | false, true | 2 | high |
+| `daddyshower1` | boolean | false, true | 2 | high |
+| `shopping1` | boolean | false, true | 2 | high |
 | `undress` | boolean | true | 0 | high |
 | `daddy` | boolean | false | 0 | high |
-| `sport` | boolean | false, true | 5 | high |
-| `gym1` | boolean | false, true | 1 | high |
-| `gym2` | boolean | false, true | 1 | high |
-| `gym3` | boolean | false, true | 1 | high |
+| `sport` | boolean | false, true | 2 | high |
+| `gym1` | boolean | false, true | 2 | high |
+| `gym2` | boolean | false, true | 2 | high |
+| `gym3` | boolean | false, true | 2 | high |
 | `gym4` | boolean | false | 0 | high |
 | `gym5` | boolean | false | 0 | high |
-| `run1` | boolean | false, true | 1 | high |
+| `run1` | boolean | false, true | 2 | high |
 | `run2` | boolean | false | 0 | high |
 | `run3` | boolean | false | 0 | high |
 | `run4` | boolean | false | 0 | high |
 | `run5` | boolean | false | 0 | high |
-| `yoga1` | boolean,number | 2..5 | 8 | high |
-| `yoga2` | boolean,number | 2..5 | 7 | high |
+| `yoga1` | boolean,number | 3..5 | 4 | high |
+| `yoga2` | boolean,number | 3..5 | 6 | high |
 | `yoga3` | boolean | false | 0 | high |
 | `yoga4` | boolean | false | 0 | high |
 | `yoga5` | boolean | false | 0 | high |
@@ -64,57 +64,57 @@ Detected engine: **sugarcube**
 | `dildo` | boolean | false | 0 | medium |
 | `lube` | boolean | false | 0 | high |
 | `selfie1` | boolean | true | 0 | high |
-| `selfie2` | boolean | false, true | 1 | high |
-| `selfie3` | boolean | false, true | 2 | high |
-| `selfie4` | boolean | false, true | 1 | high |
-| `selfie5` | boolean | false, true | 1 | high |
-| `selfie6` | boolean | false, true | 1 | high |
-| `selfie7` | boolean | false, true | 1 | high |
-| `selfie8` | boolean | false, true | 1 | high |
-| `selfie9` | boolean | false, true | 2 | high |
-| `selfie10` | boolean | false, true | 2 | high |
-| `selfie11` | boolean | false, true | 2 | high |
-| `selfie12` | boolean | false, true | 2 | high |
-| `selfie13` | boolean | false, true | 1 | high |
-| `selfie14` | boolean | false, true | 2 | high |
-| … | … | … | … | and 109 more |
+| `selfie2` | boolean | false, true | 2 | high |
+| `selfie3` | boolean | false | 0 | high |
+| `selfie4` | boolean | false, true | 2 | high |
+| `selfie5` | boolean | false, true | 2 | high |
+| `selfie6` | boolean | false, true | 2 | high |
+| `selfie7` | boolean | false, true | 2 | high |
+| `selfie8` | boolean | false, true | 2 | high |
+| `selfie9` | boolean | false | 0 | high |
+| `selfie10` | boolean | false | 0 | high |
+| `selfie11` | boolean | false | 0 | high |
+| `selfie12` | boolean | false | 0 | high |
+| `selfie13` | boolean | false, true | 2 | high |
+| `selfie14` | boolean | false | 0 | high |
+| … | … | … | … | and 105 more |
 
 ### scalar (26)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
-| `openminded` | number | 0..89 | 14 | low |
-| `arousal` | number | 0..95 | 12 | low |
-| `loveanal` | number | 0..7 | 5 | low |
-| `loveoral` | number | 0..23 | 10 | low |
-| `sharing` | number | 0..4 | 4 | low |
-| `bobbyaddiction` | number | 0..61 | 11 | low |
-| `ericaddiction` | number | 0..52 | 12 | low |
-| `francoisaddiction` | number | 0..14 | 5 | low |
-| `sophiaaddiction` | number,object | 10..10 | 3 | low |
-| `gabriellaaddiction` | number | 0..12 | 6 | low |
-| `marcaddiction` | number | 0..16 | 7 | low |
-| `johnaddiction` | number,object | 0..15 | 8 | low |
-| `coworkeraddiction` | number | 0..6 | 5 | low |
+| `openminded` | number | 0..89 | 2 | low |
+| `arousal` | number | 0..50 | 2 | low |
+| `loveanal` | number | 0..7 | 2 | low |
+| `loveoral` | number | 0..23 | 2 | low |
+| `sharing` | number | 0..4 | 2 | low |
+| `bobbyaddiction` | number | 0..71 | 2 | low |
+| `ericaddiction` | number | 0..62 | 2 | low |
+| `francoisaddiction` | number | 0..24 | 2 | low |
+| `sophiaaddiction` | number,object | 10..10 | 2 | low |
+| `gabriellaaddiction` | number | 0..22 | 2 | low |
+| `marcaddiction` | number | 0..26 | 2 | low |
+| `johnaddiction` | number,object | 0..0 | 2 | low |
+| `coworkeraddiction` | number | 0..6 | 2 | low |
 | `jonathanaddiction` | number | 0..0 | 0 | low |
-| `dreamb` | number | 4..16 | 8 | low |
-| `dream` | number | 2..17 | 6 | low |
-| `wakeup2` | number | 3..6 | 3 | low |
-| `showerb` | number | 1..4 | 14 | low |
-| `showermast` | number | 1..4 | 6 | low |
-| `wakeup` | number | 1..6 | 6 | low |
+| `dreamb` | number | 1..17 | 8 | low |
+| `dream` | number | 3..16 | 7 | low |
+| `wakeup2` | number | 3..6 | 2 | low |
+| `showerb` | number | 2..3 | 6 | low |
+| `showermast` | number | 2..2 | 0 | low |
+| `wakeup` | number | 2..6 | 6 | low |
 | `workbreak` | number | 1..4 | 8 | low |
-| `officework` | number | 1..8 | 34 | low |
-| `randompeeping` | number | 1..7 | 14 | low |
-| `randomchill` | number | 1..6 | 13 | low |
-| `randomflirt` | number | 1..5 | 6 | low |
+| `officework` | number | 1..9 | 14 | low |
+| `randompeeping` | number | 2..7 | 6 | low |
+| `randomchill` | number | 2..4 | 3 | low |
+| `randomflirt` | number | 3..3 | 0 | low |
 | `flirttv` | number | 2..2 | 0 | low |
 
 ### string (1)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
-| `startingpassage` | string | `Chapter6.32`, `Chapter8.31`, `Tutoring0` | 10 | low |
+| `startingpassage` | string | `Dream`, `Late Afternoon` | 2 | low |
 
 ### misc (1)
 
@@ -134,7 +134,7 @@ _No body/appearance variables detected._
 
 | type | count |
 |---|---|
-| branch | 506 |
+| branch | 89 |
 
 ## Economy
 
@@ -146,7 +146,7 @@ _No body/appearance variables detected._
 
 Variables sharing a leading token — candidate entity groups (verify manually).
 
-- **selfie** (32): `selfie1`, `selfie2`, `selfie3`, `selfie4`, `selfie5`, `selfie6`, …
+- **selfie** (27): `selfie1`, `selfie2`, `selfie3`, `selfie4`, `selfie5`, `selfie6`, …
 - **tutoring** (7): `Tutoring`, `Tutoring1`, `Tutoring2`, `Tutoring3`, `Tutoring4`, `Tutoring5`, …
 - **yoga** (6): `yoga1`, `yoga2`, `yoga3`, `yoga4`, `yoga5`, `yoga`
 - **chill** (6): `Chill`, `Chill1`, `Chill2`, `Chill3`, `Chill4`, `chill`
@@ -174,15 +174,17 @@ Variables sharing a leading token — candidate entity groups (verify manually).
 | 1 | 2026-04-17T10:55:01.560Z | 15m 52s | 67 | 67 | 56 | no |
 | 2 | 2026-04-17T11:19:31.218Z | 39m 25s | 236 | 236 | 224 | no |
 | 3 | 2026-04-17T12:03:18.204Z | 91m 23s | 545 | 545 | 438 | no |
+| 4 | 2026-04-17T13:50:00.326Z | 24m 35s | 41 | 41 | 34 | no |
+| 5 | 2026-04-17T14:15:03.073Z | 15m 23s | 97 | 97 | 79 | no |
 
 ## Graph coverage (observed vs. static)
 
 - Static-graph edges (every navigation parsed from passage source): **1121**
-- Observed edges during play: **599** unique `(from, clicked_text, to)` tuples.
-- Static edges covered by at least one observation: **488** (a single observation covers every static edge with the same `(from, to)` pair — gated branches collapse to one observable move).
-- Observed-only edges (no matching static edge, typically self-loop `<<link>>` wrappers that `<<replace>>` in-place): **156**.
-- Coverage: **43.53%** of the static graph explored.
-- Synthetic edges (Claude's out-of-band `eval`/`keys`/`restore`/`pop`): 4
+- Observed edges during play: **643** unique `(from, clicked_text, to)` tuples.
+- Static edges covered by at least one observation: **508** (a single observation covers every static edge with the same `(from, to)` pair — gated branches collapse to one observable move).
+- Observed-only edges (no matching static edge, typically self-loop `<<link>>` wrappers that `<<replace>>` in-place): **179**.
+- Coverage: **45.32%** of the static graph explored.
+- Synthetic edges (Claude's out-of-band `eval`/`keys`/`restore`/`pop`): 14
 
 ### Static edge kinds
 | kind | count |

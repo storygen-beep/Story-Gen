@@ -1,6 +1,6 @@
 # emilie-finds-a-way — Coverage
 
-- Unique states visited: 718
+- Unique states visited: 831
 - Queued for future sessions: 1
 - Deepest unexplored branch: depth 48
 

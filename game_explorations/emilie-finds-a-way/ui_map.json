@@ -1,7 +1,7 @@
 {
   "slug": "emilie-finds-a-way",
   "url": "https://mopoga.com/embed/emilie-finds-a-way/",
-  "generated_at": "2026-04-17T10:55:01.564Z",
+  "generated_at": "2026-04-17T14:15:03.076Z",
   "engine": "sugarcube",
   "pregame_auto_advance": {
     "trail": [
@@ -489,7 +489,7 @@
       "screenshot_path": "/home/user/Story-Gen/game_explorations/emilie-finds-a-way/ui_probes/Inventory.png",
       "click_ok": true,
       "error": null,
-      "duration_ms": 609,
+      "duration_ms": 545,
       "panel_text": "Inventory\n(Still under construction)\nBack",
       "dialog_text": null,
       "post_click_text": "\nEFAW\nVersion : 1.0 (chapter 10 week 1&2)\n\nCreated by ALLWORKS\n\nEmilie's stats\nOpen mind : 0\n\nCharisma : 10\nFitness : 10\nMoney : 100 €\nAnal exp: 0\nOral exp: 0\n\n\n\nINVENTORY\nPROTAGONIST\nSELFIE\nBACK TO THE BEGINING\nCHEAT\nSAVES\nRESTART\nSHARE\nInventory\n\n\n(Still under construction)\n\n\n\n\n\n\n\n\nBack",
@@ -700,7 +700,7 @@
       "screenshot_path": "/home/user/Story-Gen/game_explorations/emilie-finds-a-way/ui_probes/Protagonist.png",
       "click_ok": true,
       "error": null,
-      "duration_ms": 3529,
+      "duration_ms": 3419,
       "panel_text": "Protagonists\nBack\nName : Emilie\nMarital status : Engage to Bobby\nHair : Blond\nEthnicity : Caucasian\nI love it ... all the way\nBack\nName : Bobby\nMarital status : Engage to Emilie\nHair : Black\nEthnicity : Caucasian\nAddiction to Emilie : 0\nI have never been so much in love.\nBack\nName : Eric\nMarital status : Bobby' Father, Widowed\nHair : Black Grey\nEthnicity : Caucasian\nAddiction to Emilie : 0\nI have thoughts i could not have about you darling ...\nBack\nName : François\nMarital status : Engage to Valerie\nHair : Blond\nEthnicity : Latino\nAddiction to Emilie : 0\nI want to be faithful ... But you are too much to resist.\nBack\nName : Sophia\nMarital status : Emilie's Sister, in a relationship\nHair : Brunette\nEthnicity : Caucasian\nAddiction to Emilie : 10\nI want to enjoy life without seconds thoughts\nBack\nName : Gabriella\nMarital status : Emilie's and Bobby's neighbor and Marc godmother\nHair : Dark blond\nEthnicity : South Europe\nAddiction to Emilie : 0\nDamn ... i like the way this girl is looking at me ...\nBack\nName : Marc\nMarital status : Emilie's and Bobby's neighbor and Gabriella godson.\nHair : Dark\nEthnicity : South Europe\nAddiction to Emilie : 0\nI love video games, and maybe my tutor too ?\nBack\nName : John\nMarital status : Emilie's Boss\nHair : Dark blond\nEthnicity : American\nAddiction to Emilie : 0\nShe is good. She looks good. I want her to feel good\nBack\nName : Jonathan\nMarital status : Sophia's boyfriend\nHair : Dark blond\nEthnicity : American\nAddiction to Emilie : 0\nBoth sisters are amzing ...\nBack",
       "dialog_text": null,
       "post_click_text": "\nEFAW\nVersion : 1.0 (chapter 10 week 1&2)\n\nCreated by ALLWORKS\n\nEmilie's stats\nOpen mind : 0\n\nCharisma : 10\nFitness : 10\nMoney : 100 €\nAnal exp: 0\nOral exp: 0\n\n\n\nINVENTORY\nPROTAGONIST\nSELFIE\nBACK TO THE BEGINING\nCHEAT\nSAVES\nRESTART\nSHARE\nProtagonists\n\nBack\n\n\n\nName : Emilie\nMarital status : Engage to Bobby\nHair : Blond\nEthnicity : Caucasian\n\nI love it ... all the way\n\n\nBack\n\n\nName : Bobby\nMarital status : Engage to Emilie\nHair : Black\nEthnicity : Caucasian\nAddiction to Emilie : 0\n\nI have never been so much in love.\n\n\nBack\n\n\nName : Eric\nMarital status : Bobby' Father, Widowed\nHair : Black Grey\nEthnicity : Caucasian\nAddiction to Emilie : 0\n\nI have thoughts i could not have about you darling ...\n\n\nBack\n\n\nName : François\nMarital status : Engage to Valerie\nHair : Blond\nEthnicity : Latino\nAddiction to Emilie : 0\n\nI want to be faithful ... But you are too much to resist.\n\n\nBack\n\n\nName : Sophia\nMarital status : Emilie's Sister, in a relationship\nHair : Brunette\nEthnicity : Caucasian\nAddiction to Emilie : 10\n\nI want to enjoy life without seconds thoughts\n\n\nBack\n\n\nName : Gabriella\nMarital status : Emilie's and Bobby's neighbor and Marc godmother\nHair : Dark blond\nEthnicity : South Europe\nAddiction to Emilie : 0\n\nDamn ... i like the way this girl is looking at me ...\n\n\nBack\n\n\nName : Marc\nMarital status : Emilie's and Bobby's neighbor and Gabriella godson.\nHair : Dark\nEthnicity : South Europe\nAddiction to Emilie : 0\n\nI love video games, and maybe my tutor too ?\n\n\nBack\n\n\nName : John\nMarital status : Emilie's Boss\nHair : Dark blond\nEthnicity : American\nAddiction to Emilie : 0\n\nShe is good. She looks good. I want her to feel good\n\n\nBack\n\n\nName : Jonathan\nMarital status : Sophia's boyfriend\nHair : Dark blond\nEthnicity : American\nAddiction to Emilie : 0\n\nBoth sisters are amzing ...\n\n\n\nBack",
@@ -908,7 +908,7 @@
           "external": false,
           "bbox": {
             "x": 428,
-            "y": 497,
+            "y": 819,
             "w": 35,
             "h": 16
           }
@@ -924,7 +924,7 @@
           "external": false,
           "bbox": {
             "x": 428,
-            "y": 1181,
+            "y": 1503,
             "w": 35,
             "h": 16
           }
@@ -940,7 +940,7 @@
           "external": false,
           "bbox": {
             "x": 428,
-            "y": 1859,
+            "y": 2181,
             "w": 35,
             "h": 16
           }
@@ -956,7 +956,7 @@
           "external": false,
           "bbox": {
             "x": 428,
-            "y": 2538,
+            "y": 2859,
             "w": 35,
             "h": 16
           }
@@ -972,7 +972,7 @@
           "external": false,
           "bbox": {
             "x": 428,
-            "y": 2884,
+            "y": 3504,
             "w": 35,
             "h": 16
           }
@@ -988,7 +988,7 @@
           "external": false,
           "bbox": {
             "x": 428,
-            "y": 3568,
+            "y": 4188,
             "w": 35,
             "h": 16
           }
@@ -1004,7 +1004,7 @@
           "external": false,
           "bbox": {
             "x": 428,
-            "y": 4235,
+            "y": 4855,
             "w": 35,
             "h": 16
           }
@@ -1020,7 +1020,7 @@
           "external": false,
           "bbox": {
             "x": 428,
-            "y": 4929,
+            "y": 5549,
             "w": 35,
             "h": 16
           }
@@ -1036,7 +1036,7 @@
           "external": false,
           "bbox": {
             "x": 428,
-            "y": 5619,
+            "y": 6239,
             "w": 35,
             "h": 16
           }
@@ -1055,7 +1055,7 @@
       "screenshot_path": "/home/user/Story-Gen/game_explorations/emilie-finds-a-way/ui_probes/Selfie.png",
       "click_ok": true,
       "error": null,
-      "duration_ms": 3463,
+      "duration_ms": 3370,
       "panel_text": "PHONE\nPhoto Gallery\nBack\n+ 1 Day",
       "dialog_text": null,
       "post_click_text": "\nEFAW\nVersion : 1.0 (chapter 10 week 1&2)\n\nCreated by ALLWORKS\n\nEmilie's stats\nOpen mind : 0\n\nCharisma : 10\nFitness : 10\nMoney : 100 €\nAnal exp: 0\nOral exp: 0\n\n\n\nINVENTORY\nPROTAGONIST\nSELFIE\nBACK TO THE BEGINING\nCHEAT\nSAVES\nRESTART\nSHARE\nPHONE\n\n\nPhoto Gallery\n\n\n\n\nBack\n\n+ 1 Day",
@@ -1298,7 +1298,7 @@
       "screenshot_path": "/home/user/Story-Gen/game_explorations/emilie-finds-a-way/ui_probes/Back_to_the_Begining.png",
       "click_ok": true,
       "error": null,
-      "duration_ms": 3738,
+      "duration_ms": 3564,
       "panel_text": "... Or how to enjoy life to the fullest !\nThis game is about a girl, Emilie, who will discover love, sex, but specially pleasure. there will be a lot of kink of mine, but always in the good way. Cheating without pain or anger, groping without violence, etc. My purpose is to create a game who places the feminine MC in the same plan as the other usual porn male protagonists. She can have a lot of sex or affairs without being ashamed or disrespected. The porn world is fantastic for scenario like that because what we want is good story but specially good sex.\nAm i right?\nBegin with the Prologue\nMy awesome Patreons !\nTAIGA (The Crazy Mother Fucker !)\nBumabär (The Crazy Mother Fucker !)\nWishmacht(The Crazy Mother Fucker !)\njackie lynnerup(The Crazy Mother Fucker !)\n노 마(The Fan !)\nMopoga(The Fan !)\nscott moran (The Fan !)\nLukasz (The Fan !)\nLedrox (The Fan !)\nSiegfried Feldmann (The Fan !)\nKaguM_W (The Fan !)\nElliot Brouillard (The Fan !)\nLil T (The Fan !)\nEmeraldTank53(The Fan !)\nCurran Gill(The Fan !)\nsadqwdj220dw3qd (The very first one !)\nJames Burnett\nDylan YATES\nK-Snow\nTom\nWhoha\nBattousai_\nDakota Hammonds\nZafar Ismanov\nJawi\nAnd thank you to all the one who are helping me! You are all the fuel to my engine!\nCredits / Content\nI don't own the visual media provided in this game. If you are an owner of an image or video, please contact me and I will remove it. If you'd like me to credit you and link to your website, I will gladly do that.\nIf anyone wants to host this game elsewhere, I have no objections.\nhttps://www.patreon.com/Allworks",
       "dialog_text": null,
       "post_click_text": "\nEFAW\nVersion : 1.0 (chapter 10 week 1&2)\n\nCreated by ALLWORKS\n\nEmilie's stats\nOpen mind : 0\n\nCharisma : 10\nFitness : 10\nMoney : 100 €\nAnal exp: 0\nOral exp: 0\n\n\n\nINVENTORY\nPROTAGONIST\nSELFIE\nBACK TO THE BEGINING\nCHEAT\nSAVES\nRESTART\nSHARE\n\n\n\n\n... Or how to enjoy life to the fullest !\n\n\nThis game is about a girl, Emilie, who will discover love, sex, but specially pleasure. there will be a lot of kink of mine, but always in the good way. Cheating without pain or anger, groping without violence, etc. My purpose is to create a game who places the feminine MC in the same plan as the other usual porn male protagonists. She can have a lot of sex or affairs without being ashamed or disrespected. The porn world is fantastic for scenario like that because what we want is good story but specially good sex.\nAm i right?\n\n\n\nBegin with the Prologue\n\n\n\nMy awesome Patreons !\nTAIGA (The Crazy Mother Fucker !)\nBumabär (The Crazy Mother Fucker !)\nWishmacht(The Crazy Mother Fucker !)\njackie lynnerup(The Crazy Mother Fucker !)\n\n노 마(The Fan !)\nMopoga(The Fan !)\nscott moran (The Fan !)\nLukasz (The Fan !)\nLedrox (The Fan !)\nSiegfried Feldmann (The Fan !)\nKaguM_W (The Fan !)\nElliot Brouillard (The Fan !)\nLil T (The Fan !)\nEmeraldTank53(The Fan !)\nCurran Gill(The Fan !)\n\nsadqwdj220dw3qd (The very first one !)\n\nJames Burnett\nDylan YATES\nK-Snow\nTom\nWhoha\nBattousai_\nDakota Hammonds\nZafar Ismanov\nJawi\n\nAnd thank you to all the one who are helping me! You are all the fuel to my engine!\n\n\nCredits / Content\nI don't own the visual media provided in this game. If you are an owner of an image or video, please contact me and I will remove it. If you'd like me to credit you and link to your website, I will gladly do that.\n\nIf anyone wants to host this game elsewhere, I have no objections.\n\nhttps://www.patreon.com/Allworks\n",
@@ -1525,7 +1525,7 @@
       "screenshot_path": "/home/user/Story-Gen/game_explorations/emilie-finds-a-way/ui_probes/Cheat.png",
       "click_ok": true,
       "error": null,
-      "duration_ms": 3485,
+      "duration_ms": 3370,
       "panel_text": "Cheat\nAdd addiction\nAdd open mind\nAdd arousal\nAdd fitness and Charisma\nAdd exp\nSelfie\nBack",
       "dialog_text": null,
       "post_click_text": "\nEFAW\nVersion : 1.0 (chapter 10 week 1&2)\n\nCreated by ALLWORKS\n\nEmilie's stats\nOpen mind : 0\n\nCharisma : 10\nFitness : 10\nMoney : 100 €\nAnal exp: 0\nOral exp: 0\n\n\n\nINVENTORY\nPROTAGONIST\nSELFIE\nBACK TO THE BEGINING\nCHEAT\nSAVES\nRESTART\nSHARE\nCheat\n\nAdd addiction\n\nAdd open mind\n\nAdd arousal\n\nAdd fitness and Charisma\n\nAdd exp\n\n\nSelfie\nBack\n",
@@ -1854,7 +1854,7 @@
       "screenshot_path": "/home/user/Story-Gen/game_explorations/emilie-finds-a-way/ui_probes/Share.png",
       "click_ok": true,
       "error": null,
-      "duration_ms": 791,
+      "duration_ms": 715,
       "panel_text": "https://www.patreon.com/Allworks",
       "dialog_text": "https://www.patreon.com/Allworks",
       "post_click_text": "SHARE\n\nhttps://www.patreon.com/Allworks\n\nEFAW\nVersion : 1.0 (chapter 10 week 1&2)\n\nCreated by ALLWORKS\n\nEmilie's stats\nOpen mind : 0\n\nCharisma : 10\nFitness : 10\nMoney : 100 €\nAnal exp: 0\nOral exp: 0\n\n\n\nINVENTORY\nPROTAGONIST\nSELFIE\nBACK TO THE BEGINING\nCHEAT\nSAVES\nRESTART\nSHARE\nThey went back to Bobby's hotel room and continue to kiss, hug, caress themselves like they were addict to the skin. His smell was so good, his skin strong and softat the same time. He was muscular but thin, viril but gentle, amazing with his lips and mesmerizing with his tongue.\n\n\nThey rapidly began to discover their bodies. Caress, touch, kiss. They couldn't stop. It was so pleasant, so good.\n\nShe started to caress him, kissed him down there",
