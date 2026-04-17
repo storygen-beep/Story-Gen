@@ -461,6 +461,25 @@ Chromium profile stay on disk for resume.
 
 If you want to resume this playthrough in a future session, click the in-game Save Game button **before** `finalize` — otherwise only notes/log survive, not game state.
 
+#### Before finalize: mark any endings you reached
+
+```bash
+node $SKILL_DIR/scripts/live.js mark-ending [<passage>] [--reason "<text>"]
+```
+
+If you hit a terminal passage (explicit ending, `END OF CONTENT` scaffold, credits screen, "Thanks for playing"), run this BEFORE `finalize`. Without it, `session.completed` stays false and `report.md` shows "Endings reached: 0" regardless of what you observed. Passage defaults to the current passage. Safe to call multiple times if a game ships multiple endings.
+
+#### After finalize: sanity-check the structured outputs
+
+The auto-labeler applies regex-based heuristics. When a game's naming convention falls outside the common catalog, artifacts under-report what your notes plainly observed. Open outputs in this order:
+
+- **`npcs.json`** — if empty `{}` but your notes list NPCs, the labeler's `npcStatSuffix` regex missed the stat-suffix convention this game uses (e.g., `<name>addiction`, `<name>lewdness`, `<name>points`). Flag the gap so the regex can be extended, and hand-write the roster into `notes.md` under an `## NPCs` section so downstream readers have ground truth.
+- **`items.json`** — if `"items": []` but inventory-like flags exist in `variable_schema.json`, the labeler recognises `has<noun>` prefix + a small whitelist of common item names. Other conventions (`own_<x>`, `<name>_acquired`, numeric item counters) fall through.
+- **`mechanics.md` "Not detected" lines** — confidence flags, not factual claims. Scan your notes for the mechanic and trust notes over auto-output. Known blind spots: linkreplace chains (single-option scene progressions that look like normal clicks) aren't detected as action-loops; single-word location clicks ("Kitchen"/"Bathroom") without a "Go to" prefix aren't detected as location nav.
+- **"Endings reached: 0"** — if you reached a terminal passage, you forgot `mark-ending` before `finalize`. Re-running `finalize` on the same daemon isn't possible (it shuts down), so either restart with `--slug <same>` + `--rerun-phase0` (no `--fresh`) and re-mark, or hand-edit the session JSON.
+
+For games where the labeler misses a strong convention (like EFAW's `<name>addiction`), consider proposing the regex extension to `.claude/skills/twine-game-explorer/scripts/lib/labeler.js` after the session — one extra alternation helps every similar game.
+
 ### 7. If you need to step away
 
 ```bash

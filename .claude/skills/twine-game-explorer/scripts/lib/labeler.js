@@ -21,8 +21,10 @@ const RULES = {
   body: /(breast|bust|boob|cup|hair|body|weight|height|skin|tan|belly|pregnancy|pregnan|piercing|tattoo|scar|outfit|clothing|makeup|nails)/i,
 
   // NPC-stat suffix: <prefix><stat> where stat ∈ [love, lust, trust, ...]
-  // Prefix is the NPC name candidate.
-  npcStatSuffix: /^([a-z][a-z]{1,20}?)(love|lust|trust|respect|friendship|affection|submission|dominance|obedience|corruption|fear|jealousy|arousal)$/i,
+  // Prefix is the NPC name candidate. `addiction` and friends are common in
+  // adult-game Twines that track per-NPC escalation meters — missing them
+  // drops whole NPC rosters into the scalar fallback.
+  npcStatSuffix: /^([a-z][a-z]{1,20}?)(love|lust|trust|respect|friendship|affection|submission|dominance|obedience|corruption|fear|jealousy|arousal|addiction|infatuation|devotion|attraction|bond|intimacy)$/i,
 
   // Player-level scalar stats (exact basename match).
   playerStat: /^(money|cash|gold|energy|stamina|sleep|hunger|fatigue|willpower|composure|charisma|intelligence|strength|dexterity|fitness|beauty|reputation|fame|skill|corruption)$/i,
@@ -36,6 +38,11 @@ const RULES = {
 
   // Item names.
   item: /^(flower|flowers|chocolate|teddybear|necklace|ring|diamond|dildo|gel|weed|(blue|pink|yellow|green|red)pill|pill|gift|wine|beer|cigarette|condom|key|map|book|letter|photo|camera|receipt|ticket)s?$/i,
+
+  // Item-ownership prefix: `has<noun>` boolean flags are a strong
+  // item-possession signal in adult-game conventions (hasdildo, haslube,
+  // hasoutfit, hascoffee, hasplug). Inner noun is captured as item_name.
+  itemOwnershipPrefix: /^has([a-z][a-z_0-9]{2,})$/i,
 };
 
 /**
@@ -112,6 +119,18 @@ function labelVariable(name, profile) {
     confidence = 'medium';
   }
 
+  // `has<noun>` boolean flag → item ownership indicator. Promotes over the
+  // `flag` structural label because it carries semantic role (it IS still
+  // a flag; `item` is the more useful bucket for a reader). We require
+  // boolean type so counters like `hashistory` or `hasword` don't slip in.
+  const itemOwn = basename.match(RULES.itemOwnershipPrefix);
+  if (itemOwn && profile.bool_values && profile.bool_values.length) {
+    tags.add('item');
+    if (!primary || primary === 'flag') primary = 'item';
+    extras.item_name = itemOwn[1];
+    if (confidence === 'low') confidence = 'medium';
+  }
+
   // Structural fallbacks using profile shape
   if (!primary) {
     if (profile.types && profile.types.includes('number')) primary = 'scalar';
@@ -152,7 +171,11 @@ function labelProfile(profile) {
       npcs[npc].vars.push({ name, stat: label.extras.stat, profile: prof });
     }
     if (cat === 'body') bodyChanges.push({ name, profile: prof });
-    if (cat === 'item') items.push({ name, profile: prof });
+    if (cat === 'item') items.push({
+      name,
+      item_name: label.extras.item_name || name,
+      profile: prof,
+    });
     if (cat === 'time') time.push({ name, profile: prof });
     if (cat === 'player_stat') playerStats.push({ name, profile: prof });
     if (label.tags.includes('flag')) flags.push({ name, profile: prof });

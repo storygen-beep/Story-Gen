@@ -133,7 +133,13 @@ function write(outRoot, detector, frontier, exploredCount, sessionsSummary, extr
   lines.push(`- Total choices explored: ${sessionsSummary.totals.total_choices}`);
   lines.push(`- Unique states seen: ${exploredCount}`);
   lines.push(`- Unexplored frontier (queued for next session): ${frontier.size()}`);
-  lines.push(`- Any ending reached: ${sessionsSummary.totals.any_completed ? 'yes' : 'not yet'}`);
+  const endings = sessionsSummary.sessions.flatMap((s) => s.reached_endings || []);
+  if (endings.length) {
+    const uniq = Array.from(new Set(endings));
+    lines.push(`- Endings reached: ${endings.length} (${uniq.join(', ')})`);
+  } else {
+    lines.push(`- Endings reached: 0 (use \`live.js mark-ending <passage>\` to record a terminal passage)`);
+  }
   lines.push('');
 
   lines.push('## Engine');
@@ -278,6 +284,31 @@ function write(outRoot, detector, frontier, exploredCount, sessionsSummary, extr
     lines.push(`- Observed-only edges (no matching static edge, typically self-loop \`<<link>>\` wrappers that \`<<replace>>\` in-place): **${observedOnly}**.`);
     lines.push(`- Coverage: **${cov}** of the static graph explored.`);
     lines.push(`- Synthetic edges (Claude's out-of-band \`eval\`/\`keys\`/\`restore\`/\`pop\`): ${choiceGraph.total_synthetic_edges || 0}`);
+
+    // Playable-content partition: a raw static-graph coverage percentage
+    // under-sells sessions on in-development games where a big chunk of
+    // passages are WIP-scaffolding or empty-body placeholders. This block
+    // surfaces the distinction so readers can tell "half-done" from
+    // "explored-all-shipped-content."
+    try {
+      const catalogPath = path.join(outRoot, 'passage_catalog.json');
+      if (fs.existsSync(catalogPath)) {
+        const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
+        const passages = Array.isArray(catalog.passages) ? catalog.passages : [];
+        if (passages.length) {
+          const wip = passages.filter((p) => (p.tags || []).includes('wip')).length;
+          const empty = passages.filter((p) => !(p.source_raw || '').trim()).length;
+          const playable = Math.max(0, passages.length - wip - empty);
+          const visited = Object.keys(profile.passages).length;
+          const pct = playable ? (visited / playable * 100).toFixed(1) + '%' : 'n/a';
+          lines.push('');
+          lines.push('### Playable-content partition');
+          lines.push(`- Passages defined in source: **${passages.length}** (${wip} tagged \`wip\`, ${empty} empty-body placeholder).`);
+          lines.push(`- Implied playable (non-WIP, non-empty): **${playable}**.`);
+          lines.push(`- Distinct passages visited at least once: **${visited}** — playable-passage coverage: **${pct}**.`);
+        }
+      }
+    } catch (e) { /* silent: partition is optional */ }
     lines.push('');
     const byKind = staticGraph.edges_by_kind || {};
     if (Object.keys(byKind).length) {
@@ -359,7 +390,7 @@ function write(outRoot, detector, frontier, exploredCount, sessionsSummary, extr
     `${byCls.location} explicit "Go to X" choices.`);
 
   mech.push('## Scenes catalogued');
-  mech.push(`- Unique passages seen: ${Object.keys(profile.passages).length}`);
+  mech.push(`- Distinct passage names visited: ${Object.keys(profile.passages).length} (the "Unique states seen" count in report.md includes variable-permutations of the same passage).`);
   const top = Object.entries(profile.passages).sort((a, b) => b[1].visit_count - a[1].visit_count).slice(0, 15);
   mech.push('- Most-visited passages:');
   for (const [p, info] of top) mech.push(`  - \`${p}\` × ${info.visit_count}`);

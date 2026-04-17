@@ -149,6 +149,7 @@ function parseArgs(argv) {
       case 'setters':      await forward('setters', args); break;
       case 'finalize': await cliFinalize(args); break;
       case 'stop':     await cliStop(args); break;
+      case 'mark-ending': await cliMarkEnding(args); break;
       case 'status':   await cliStatus(args); break;
       default:
         printUsage();
@@ -224,6 +225,11 @@ function printUsage() {
 
   stop
       Close daemon without running the report (saves/ persists for resume).
+
+  mark-ending [<passage>] [--reason "<text>"]
+      Mark a terminal passage as an ending reached. If no passage is given,
+      defaults to the current passage. Sets the session's completed flag so
+      report.md's "Endings reached" count reflects what you observed.
 
   status
       Show daemon state (running / idle since when / snapshots taken).
@@ -462,6 +468,17 @@ async function cliStop(args) {
     return;
   }
   const response = await httpRequest(info.port, { cmd: 'stop', args }, { timeoutMs: 10000 }).catch((e) => ({ ok: false, error: e.message }));
+  console.log(JSON.stringify(response, null, 2));
+}
+
+async function cliMarkEnding(args) {
+  const slug = discoverSlug(args);
+  if (!slug) throw new Error('No running daemon (pass --slug to target a specific one).');
+  const info = readLockfile(slug);
+  if (!info || !pidAlive(info.pid)) throw new Error('Daemon not running.');
+  const passage = args.passage || (args._ || []).filter((a) => a !== 'mark-ending')[0] || null;
+  const reason = args.reason || null;
+  const response = await httpRequest(info.port, { cmd: 'mark-ending', args: { passage, reason } });
   console.log(JSON.stringify(response, null, 2));
 }
 
@@ -1515,6 +1532,24 @@ async function runDaemon(args) {
     async stop() {
       const result = await shutdown({ reason: 'stop', writeReport: false });
       return { ok: true, command: 'stop', ...result };
+    },
+
+    // Record a terminal passage as an ending reached. Sets the session's
+    // `completed` flag so report.md's "Endings reached" count reflects
+    // observed endings (live sessions previously had no way to do this —
+    // only the offline explore.js DFS could mark endings). Handler key
+    // matches the CLI cmd name verbatim because dispatch does `handlers[cmd]`.
+    'mark-ending': async function ({ args }) {
+      const passage = (args && args.passage) || (lastState && lastState.passage) || 'unknown';
+      const reason = (args && args.reason) || null;
+      session.recordEnding(passage);
+      const noteLine = reason
+        ? `[ending] ${passage}: ${reason}`
+        : `[ending] ${passage}`;
+      fs.appendFileSync(dirs.notes, `- [${new Date().toISOString()}] ${noteLine}\n`);
+      session.addNote(noteLine);
+      session.flush();
+      return { ok: true, command: 'mark-ending', passage, reason };
     },
   };
 
