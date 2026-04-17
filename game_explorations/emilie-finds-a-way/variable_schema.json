@@ -1,0 +1,1848 @@
+{
+  "start": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "shower": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "tease1": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "daddyshower1": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "shopping1": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "undress": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "daddy": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "sport": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "gym1": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "gym2": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "gym3": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "gym4": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "gym5": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "run1": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "run2": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "run3": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "run4": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "run5": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "yoga1": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "yoga2": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "yoga3": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "yoga4": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "yoga5": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "openminded": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 13,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "number_stats": {
+      "count": 133,
+      "unique_count": 14,
+      "min": 0,
+      "max": 23,
+      "first": 0,
+      "last": 23,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": false
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "arousal": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 17,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "number_stats": {
+      "count": 133,
+      "unique_count": 17,
+      "min": 0,
+      "max": 32,
+      "first": 0,
+      "last": 24,
+      "is_monotonic_increasing": false,
+      "is_boolean_like": false
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "loveanal": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 2,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "number_stats": {
+      "count": 133,
+      "unique_count": 3,
+      "min": 0,
+      "max": 3,
+      "first": 0,
+      "last": 3,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": false
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "loveoral": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 4,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "number_stats": {
+      "count": 133,
+      "unique_count": 5,
+      "min": 0,
+      "max": 4,
+      "first": 0,
+      "last": 4,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": false
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "money": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "number_stats": {
+      "count": 133,
+      "unique_count": 1,
+      "min": 100,
+      "max": 100,
+      "first": 100,
+      "last": 100,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "player_stat",
+    "label_confidence": "high",
+    "tags": [
+      "player_stat"
+    ]
+  },
+  "charisma": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "number_stats": {
+      "count": 133,
+      "unique_count": 2,
+      "min": 10,
+      "max": 11,
+      "first": 10,
+      "last": 11,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "player_stat",
+    "label_confidence": "high",
+    "tags": [
+      "player_stat"
+    ]
+  },
+  "fitness": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "number_stats": {
+      "count": 133,
+      "unique_count": 2,
+      "min": 10,
+      "max": 11,
+      "first": 10,
+      "last": 11,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "player_stat",
+    "label_confidence": "high",
+    "tags": [
+      "player_stat"
+    ]
+  },
+  "sharing": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "number_stats": {
+      "count": 133,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "bobbyaddiction": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 7,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "number_stats": {
+      "count": 133,
+      "unique_count": 8,
+      "min": 0,
+      "max": 17,
+      "first": 0,
+      "last": 17,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": false
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "ericaddiction": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 6,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "number_stats": {
+      "count": 133,
+      "unique_count": 7,
+      "min": 0,
+      "max": 6,
+      "first": 0,
+      "last": 6,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": false
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "francoisaddiction": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 6,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "number_stats": {
+      "count": 133,
+      "unique_count": 7,
+      "min": 0,
+      "max": 12,
+      "first": 0,
+      "last": 12,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": false
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "sophiaaddiction": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "number_stats": {
+      "count": 133,
+      "unique_count": 2,
+      "min": 3,
+      "max": 10,
+      "first": 10,
+      "last": 3,
+      "is_monotonic_increasing": false,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "gabriellaaddiction": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "number_stats": {
+      "count": 133,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "marcaddiction": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "number_stats": {
+      "count": 133,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "johnaddiction": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "number_stats": {
+      "count": 133,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "coworkeraddiction": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "number_stats": {
+      "count": 133,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "jonathanaddiction": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "number_stats": {
+      "count": 133,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "analplug": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "dildo": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "medium",
+    "tags": [
+      "flag",
+      "item"
+    ]
+  },
+  "lube": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie1": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie2": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie3": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie4": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie5": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie6": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie7": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie8": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie9": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie10": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie11": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie12": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie13": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie14": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie15": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie16": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie17": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie18": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie19": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie20": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie21": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "selfie22": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "hasdildo": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "hasplug": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "hasofficeoutfit": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag",
+      "body"
+    ]
+  },
+  "haslingerie1": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "haslube": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "hasplugon": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "hascoffee": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "meetcoworker": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "bus1": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "bus2": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "bus3": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "bus4": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "bus5": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Chill": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Chill1": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Chill2": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Chill3": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Chill4": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Tutoring": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Tutoring1": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Tutoring2": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Tutoring3": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Tutoring4": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Tutoring5": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Gab1": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Gab2": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Gab3": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Gab4": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Gab5": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Office": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Office1": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Office2": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Office3": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Office4": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Office5": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "Harem": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "read": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "game": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776423301561,
+    "last_ts": 1776424147949,
+    "passages_seen_on_count": 50,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  }
+}

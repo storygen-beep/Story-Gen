@@ -1,0 +1,3264 @@
+{
+  "generated_at": "2026-04-17T11:10:53.311Z",
+  "variables": {
+    "start": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "shower": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "tease1": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "daddyshower1": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "shopping1": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "undress": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        true
+      ]
+    },
+    "daddy": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "sport": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "gym1": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "gym2": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "gym3": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "gym4": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "gym5": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "run1": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "run2": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "run3": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "run4": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "run5": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "yoga1": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "yoga2": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "yoga3": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "yoga4": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "yoga5": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "openminded": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 13,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "number_stats": {
+        "count": 133,
+        "unique_count": 14,
+        "min": 0,
+        "max": 23,
+        "first": 0,
+        "last": 23,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": false
+      }
+    },
+    "arousal": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 17,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "number_stats": {
+        "count": 133,
+        "unique_count": 17,
+        "min": 0,
+        "max": 32,
+        "first": 0,
+        "last": 24,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": false
+      }
+    },
+    "loveanal": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 2,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "number_stats": {
+        "count": 133,
+        "unique_count": 3,
+        "min": 0,
+        "max": 3,
+        "first": 0,
+        "last": 3,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": false
+      }
+    },
+    "loveoral": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 4,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "number_stats": {
+        "count": 133,
+        "unique_count": 5,
+        "min": 0,
+        "max": 4,
+        "first": 0,
+        "last": 4,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": false
+      }
+    },
+    "money": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "number_stats": {
+        "count": 133,
+        "unique_count": 1,
+        "min": 100,
+        "max": 100,
+        "first": 100,
+        "last": 100,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "charisma": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "number_stats": {
+        "count": 133,
+        "unique_count": 2,
+        "min": 10,
+        "max": 11,
+        "first": 10,
+        "last": 11,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "fitness": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "number_stats": {
+        "count": 133,
+        "unique_count": 2,
+        "min": 10,
+        "max": 11,
+        "first": 10,
+        "last": 11,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "sharing": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "number_stats": {
+        "count": 133,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "bobbyaddiction": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 7,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "number_stats": {
+        "count": 133,
+        "unique_count": 8,
+        "min": 0,
+        "max": 17,
+        "first": 0,
+        "last": 17,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": false
+      }
+    },
+    "ericaddiction": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 6,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "number_stats": {
+        "count": 133,
+        "unique_count": 7,
+        "min": 0,
+        "max": 6,
+        "first": 0,
+        "last": 6,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": false
+      }
+    },
+    "francoisaddiction": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 6,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "number_stats": {
+        "count": 133,
+        "unique_count": 7,
+        "min": 0,
+        "max": 12,
+        "first": 0,
+        "last": 12,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": false
+      }
+    },
+    "sophiaaddiction": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "number_stats": {
+        "count": 133,
+        "unique_count": 2,
+        "min": 3,
+        "max": 10,
+        "first": 10,
+        "last": 3,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": true
+      }
+    },
+    "gabriellaaddiction": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "number_stats": {
+        "count": 133,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "marcaddiction": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "number_stats": {
+        "count": 133,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "johnaddiction": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "number_stats": {
+        "count": 133,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "coworkeraddiction": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "number_stats": {
+        "count": 133,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "jonathanaddiction": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "number_stats": {
+        "count": 133,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "analplug": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "dildo": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "lube": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "selfie1": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        true
+      ]
+    },
+    "selfie2": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "selfie3": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "selfie4": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "selfie5": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "selfie6": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "selfie7": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "selfie8": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "selfie9": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "selfie10": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "selfie11": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "selfie12": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "selfie13": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "selfie14": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "selfie15": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "selfie16": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "selfie17": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "selfie18": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "selfie19": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "selfie20": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "selfie21": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "selfie22": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "hasdildo": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "hasplug": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "hasofficeoutfit": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "haslingerie1": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "haslube": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "hasplugon": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "hascoffee": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "meetcoworker": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "bus1": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "bus2": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "bus3": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "bus4": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "bus5": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Chill": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Chill1": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Chill2": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Chill3": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Chill4": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Tutoring": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Tutoring1": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Tutoring2": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Tutoring3": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Tutoring4": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Tutoring5": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Gab1": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Gab2": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Gab3": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Gab4": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Gab5": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Office": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Office1": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Office2": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Office3": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Office4": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Office5": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "Harem": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "read": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    },
+    "game": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1776423301561,
+      "last_ts": 1776424147949,
+      "passages_seen_on_count": 50,
+      "bool_values": [
+        false
+      ]
+    }
+  },
+  "prefix_clusters": {
+    "gym": [
+      "gym1",
+      "gym2",
+      "gym3",
+      "gym4",
+      "gym5"
+    ],
+    "run": [
+      "run1",
+      "run2",
+      "run3",
+      "run4",
+      "run5"
+    ],
+    "yoga": [
+      "yoga1",
+      "yoga2",
+      "yoga3",
+      "yoga4",
+      "yoga5"
+    ],
+    "selfie": [
+      "selfie1",
+      "selfie2",
+      "selfie3",
+      "selfie4",
+      "selfie5",
+      "selfie6",
+      "selfie7",
+      "selfie8",
+      "selfie9",
+      "selfie10",
+      "selfie11",
+      "selfie12",
+      "selfie13",
+      "selfie14",
+      "selfie15",
+      "selfie16",
+      "selfie17",
+      "selfie18",
+      "selfie19",
+      "selfie20",
+      "selfie21",
+      "selfie22"
+    ],
+    "bus": [
+      "bus1",
+      "bus2",
+      "bus3",
+      "bus4",
+      "bus5"
+    ],
+    "chill": [
+      "Chill",
+      "Chill1",
+      "Chill2",
+      "Chill3",
+      "Chill4"
+    ],
+    "tutoring": [
+      "Tutoring",
+      "Tutoring1",
+      "Tutoring2",
+      "Tutoring3",
+      "Tutoring4",
+      "Tutoring5"
+    ],
+    "gab": [
+      "Gab1",
+      "Gab2",
+      "Gab3",
+      "Gab4",
+      "Gab5"
+    ],
+    "office": [
+      "Office",
+      "Office1",
+      "Office2",
+      "Office3",
+      "Office4",
+      "Office5"
+    ]
+  },
+  "co_change": {
+    "arousal||openminded": 9,
+    "loveoral||openminded": 3,
+    "bobbyaddiction||openminded": 4,
+    "arousal||bobbyaddiction": 4,
+    "bobbyaddiction||loveoral": 2,
+    "ericaddiction||openminded": 4,
+    "bobbyaddiction||ericaddiction": 2,
+    "francoisaddiction||openminded": 2,
+    "arousal||ericaddiction": 4
+  },
+  "passages": {
+    "Start": {
+      "first_ts": 1776423301561,
+      "visit_count": 1
+    },
+    "Intro2": {
+      "first_ts": 1776423323759,
+      "visit_count": 12
+    },
+    "Intro3": {
+      "first_ts": 1776423502631,
+      "visit_count": 2
+    },
+    "Intro4": {
+      "first_ts": 1776423514218,
+      "visit_count": 2
+    },
+    "Intro5": {
+      "first_ts": 1776423528947,
+      "visit_count": 6
+    },
+    "Intro6": {
+      "first_ts": 1776423569766,
+      "visit_count": 2
+    },
+    "Intro7": {
+      "first_ts": 1776423582493,
+      "visit_count": 2
+    },
+    "1st chapter": {
+      "first_ts": 1776423594974,
+      "visit_count": 6
+    },
+    "Chapter1.2": {
+      "first_ts": 1776423626859,
+      "visit_count": 8
+    },
+    "Chapter1.3": {
+      "first_ts": 1776423667761,
+      "visit_count": 2
+    },
+    "Chapter1.3b": {
+      "first_ts": 1776423677463,
+      "visit_count": 8
+    },
+    "Chapter1.4": {
+      "first_ts": 1776423727100,
+      "visit_count": 6
+    },
+    "Chapter1.45": {
+      "first_ts": 1776423754167,
+      "visit_count": 6
+    },
+    "Chapter1.5": {
+      "first_ts": 1776423782401,
+      "visit_count": 2
+    },
+    "Chapter1.51": {
+      "first_ts": 1776423823223,
+      "visit_count": 1
+    },
+    "Chapter1.6": {
+      "first_ts": 1776423831534,
+      "visit_count": 1
+    },
+    "Chapter1.7": {
+      "first_ts": 1776423832963,
+      "visit_count": 1
+    },
+    "Chapter1.73": {
+      "first_ts": 1776423834442,
+      "visit_count": 1
+    },
+    "Chapter1.74": {
+      "first_ts": 1776423835820,
+      "visit_count": 1
+    },
+    "Chapter1.76": {
+      "first_ts": 1776423837155,
+      "visit_count": 1
+    },
+    "Chapter1.8": {
+      "first_ts": 1776423838658,
+      "visit_count": 1
+    },
+    "Chapter1.85": {
+      "first_ts": 1776423840056,
+      "visit_count": 1
+    },
+    "Chapter1.9": {
+      "first_ts": 1776423841378,
+      "visit_count": 1
+    },
+    "2nd Chapter": {
+      "first_ts": 1776423842606,
+      "visit_count": 1
+    },
+    "Chapter2.1": {
+      "first_ts": 1776423843898,
+      "visit_count": 1
+    },
+    "Hallway": {
+      "first_ts": 1776423845434,
+      "visit_count": 2
+    },
+    "Do some Yoga": {
+      "first_ts": 1776423880979,
+      "visit_count": 2
+    },
+    "Yoga2": {
+      "first_ts": 1776423892746,
+      "visit_count": 2
+    },
+    "Bathroom": {
+      "first_ts": 1776423901780,
+      "visit_count": 3
+    },
+    "Shower": {
+      "first_ts": 1776423922461,
+      "visit_count": 2
+    },
+    "wardrobe": {
+      "first_ts": 1776423931930,
+      "visit_count": 2
+    },
+    "Nightwear": {
+      "first_ts": 1776423940942,
+      "visit_count": 2
+    },
+    "1.Shower2": {
+      "first_ts": 1776423950822,
+      "visit_count": 4
+    },
+    "1.Kitchen": {
+      "first_ts": 1776423977336,
+      "visit_count": 2
+    },
+    "Chapter2.2b": {
+      "first_ts": 1776423987796,
+      "visit_count": 2
+    },
+    "Chapter2.2": {
+      "first_ts": 1776423997068,
+      "visit_count": 4
+    },
+    "Spareroom": {
+      "first_ts": 1776424015418,
+      "visit_count": 3
+    },
+    "filmasturbate": {
+      "first_ts": 1776424027219,
+      "visit_count": 2
+    },
+    "Hallway2": {
+      "first_ts": 1776424036546,
+      "visit_count": 2
+    },
+    "Livingroom": {
+      "first_ts": 1776424045392,
+      "visit_count": 2
+    },
+    "Movie night": {
+      "first_ts": 1776424054813,
+      "visit_count": 2
+    },
+    "Chapter2.21": {
+      "first_ts": 1776424065331,
+      "visit_count": 2
+    },
+    "Go to the bed": {
+      "first_ts": 1776424074918,
+      "visit_count": 3
+    },
+    "Chapter2.3": {
+      "first_ts": 1776424087132,
+      "visit_count": 2
+    },
+    "Chapter2.31": {
+      "first_ts": 1776424096323,
+      "visit_count": 2
+    },
+    "Chapter2.35": {
+      "first_ts": 1776424107801,
+      "visit_count": 2
+    },
+    "Chapter2Dream1": {
+      "first_ts": 1776424117958,
+      "visit_count": 2
+    },
+    "Chapter2dfil": {
+      "first_ts": 1776424128171,
+      "visit_count": 2
+    },
+    "Chapter2.4": {
+      "first_ts": 1776424137293,
+      "visit_count": 2
+    },
+    "Chapter2.5": {
+      "first_ts": 1776424146308,
+      "visit_count": 2
+    }
+  },
+  "choices": {
+    "total": 66,
+    "by_classification": {
+      "branch": 66
+    },
+    "price_observations": [],
+    "recent": [
+      {
+        "ts": 1776423667971,
+        "passage": "Chapter1.2",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Some hours later"
+        ],
+        "picked": "Some hours later",
+        "prices": null,
+        "at_state_hash": "c45ddaa32c91dd72"
+      },
+      {
+        "ts": 1776423677661,
+        "passage": "Chapter1.3",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "The next day"
+        ],
+        "picked": "The next day",
+        "prices": null,
+        "at_state_hash": "9387948a5ea9774c"
+      },
+      {
+        "ts": 1776423687823,
+        "passage": "Chapter1.3b",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Look around."
+        ],
+        "picked": "Look around.",
+        "prices": null,
+        "at_state_hash": "75a769e13c9e0881"
+      },
+      {
+        "ts": 1776423696132,
+        "passage": "Chapter1.3b",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Look some more"
+        ],
+        "picked": "Look some more",
+        "prices": null,
+        "at_state_hash": "75a769e13c9e0881"
+      },
+      {
+        "ts": 1776423718028,
+        "passage": "Chapter1.3b",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Eat the mushroom with François."
+        ],
+        "picked": "Eat the mushroom with François.",
+        "prices": null,
+        "at_state_hash": "75a769e13c9e0881"
+      },
+      {
+        "ts": 1776423727188,
+        "passage": "Chapter1.3b",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "They are feeling weird"
+        ],
+        "picked": "They are feeling weird",
+        "prices": null,
+        "at_state_hash": "4b419d12af770aa9"
+      },
+      {
+        "ts": 1776423736245,
+        "passage": "Chapter1.4",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "she came closer to him ."
+        ],
+        "picked": "she came closer to him .",
+        "prices": null,
+        "at_state_hash": "70ff4e6103c4e707"
+      },
+      {
+        "ts": 1776423745402,
+        "passage": "Chapter1.4",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "help you this that."
+        ],
+        "picked": "help you this that.",
+        "prices": null,
+        "at_state_hash": "70ff4e6103c4e707"
+      },
+      {
+        "ts": 1776423754306,
+        "passage": "Chapter1.4",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "ready to cum."
+        ],
+        "picked": "ready to cum.",
+        "prices": null,
+        "at_state_hash": "70ff4e6103c4e707"
+      },
+      {
+        "ts": 1776423764553,
+        "passage": "Chapter1.45",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "started to lick it from her fingers."
+        ],
+        "picked": "started to lick it from her fingers.",
+        "prices": null,
+        "at_state_hash": "3aaf0febb39c18e8"
+      },
+      {
+        "ts": 1776423773532,
+        "passage": "Chapter1.45",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "starts touching herself."
+        ],
+        "picked": "starts touching herself.",
+        "prices": null,
+        "at_state_hash": "224205d8f08c5f8e"
+      },
+      {
+        "ts": 1776423782564,
+        "passage": "Chapter1.45",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "would be even harder."
+        ],
+        "picked": "would be even harder.",
+        "prices": null,
+        "at_state_hash": "224205d8f08c5f8e"
+      },
+      {
+        "ts": 1776423823446,
+        "passage": "Chapter1.5",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "she went down on him."
+        ],
+        "picked": "she went down on him.",
+        "prices": null,
+        "at_state_hash": "21c40cd4fc3f9570"
+      },
+      {
+        "ts": 1776423831755,
+        "passage": "Chapter1.51",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Then he couldnt resist anymore."
+        ],
+        "picked": "Then he couldnt resist anymore.",
+        "prices": null,
+        "at_state_hash": "a47126c087ca31cd"
+      },
+      {
+        "ts": 1776423833203,
+        "passage": "Chapter1.6",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "it again and again."
+        ],
+        "picked": "it again and again.",
+        "prices": null,
+        "at_state_hash": "30c82dc7ec73572e"
+      },
+      {
+        "ts": 1776423834628,
+        "passage": "Chapter1.7",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Missionnary",
+          "Doggy",
+          "Anal",
+          "Cumming"
+        ],
+        "picked": "Anal",
+        "prices": null,
+        "at_state_hash": "a878f25762208791"
+      },
+      {
+        "ts": 1776423836007,
+        "passage": "Chapter1.73",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Cumming"
+        ],
+        "picked": "Cumming",
+        "prices": null,
+        "at_state_hash": "94eb0b31899050d6"
+      },
+      {
+        "ts": 1776423837433,
+        "passage": "Chapter1.74",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "On tits",
+          "Facial"
+        ],
+        "picked": "Facial",
+        "prices": null,
+        "at_state_hash": "677df291a28297ce"
+      },
+      {
+        "ts": 1776423838906,
+        "passage": "Chapter1.76",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "They take their breath."
+        ],
+        "picked": "They take their breath.",
+        "prices": null,
+        "at_state_hash": "fd55c8e3f4514cd3"
+      },
+      {
+        "ts": 1776423840245,
+        "passage": "Chapter1.8",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "They saw a light in the sea"
+        ],
+        "picked": "They saw a light in the sea",
+        "prices": null,
+        "at_state_hash": "24e7cec18ea9ec8e"
+      },
+      {
+        "ts": 1776423841568,
+        "passage": "Chapter1.85",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "The boat arrived."
+        ],
+        "picked": "The boat arrived.",
+        "prices": null,
+        "at_state_hash": "afc9a89ae1735be7"
+      },
+      {
+        "ts": 1776423842839,
+        "passage": "Chapter1.9",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Few weeks pass."
+        ],
+        "picked": "Few weeks pass.",
+        "prices": null,
+        "at_state_hash": "98cfaae6eb5423db"
+      },
+      {
+        "ts": 1776423844173,
+        "passage": "2nd Chapter",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "show you the place."
+        ],
+        "picked": "show you the place.",
+        "prices": null,
+        "at_state_hash": "4c89c1aa262de98a"
+      },
+      {
+        "ts": 1776423845635,
+        "passage": "Chapter2.1",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "last kissing goodbye."
+        ],
+        "picked": "last kissing goodbye.",
+        "prices": null,
+        "at_state_hash": "431c3b6b6d38504a"
+      },
+      {
+        "ts": 1776423881151,
+        "passage": "Hallway",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Do some Yoga"
+        ],
+        "picked": "Do some Yoga",
+        "prices": null,
+        "at_state_hash": "189f045248dbc447"
+      },
+      {
+        "ts": 1776423892916,
+        "passage": "Do some Yoga",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Emilie finished her yoga session."
+        ],
+        "picked": "Emilie finished her yoga session.",
+        "prices": null,
+        "at_state_hash": "296b473f24d6c7ef"
+      },
+      {
+        "ts": 1776423901962,
+        "passage": "Yoga2",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Go to Shower"
+        ],
+        "picked": "Go to Shower",
+        "prices": null,
+        "at_state_hash": "41c0fb55740e2b50"
+      },
+      {
+        "ts": 1776423922734,
+        "passage": "Bathroom",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Let the door open",
+          "Close the door"
+        ],
+        "picked": "Let the door open",
+        "prices": null,
+        "at_state_hash": "02cd39c37f722baf"
+      },
+      {
+        "ts": 1776423932091,
+        "passage": "Shower",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "to her wardrobe"
+        ],
+        "picked": "to her wardrobe",
+        "prices": null,
+        "at_state_hash": "50327e89209197df"
+      },
+      {
+        "ts": 1776423941124,
+        "passage": "wardrobe",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Put some clothes on"
+        ],
+        "picked": "Put some clothes on",
+        "prices": null,
+        "at_state_hash": "f60a85e3e695976c"
+      },
+      {
+        "ts": 1776423950949,
+        "passage": "Nightwear",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Go to the Bathroom"
+        ],
+        "picked": "Go to the Bathroom",
+        "prices": null,
+        "at_state_hash": "f6b808be2fbf11ee"
+      },
+      {
+        "ts": 1776423967019,
+        "passage": "1.Shower2",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Take a quick look",
+          "Go prepare diner"
+        ],
+        "picked": "Take a quick look",
+        "prices": null,
+        "at_state_hash": "966c23f7c54d9c41"
+      },
+      {
+        "ts": 1776423977521,
+        "passage": "1.Shower2",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Go prepare diner"
+        ],
+        "picked": "Go prepare diner",
+        "prices": null,
+        "at_state_hash": "504bd64799074f37"
+      },
+      {
+        "ts": 1776423987994,
+        "passage": "1.Kitchen",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "his caress",
+          "to prepare the diner"
+        ],
+        "picked": "his caress",
+        "prices": null,
+        "at_state_hash": "07350f0b7d2a86de"
+      },
+      {
+        "ts": 1776423997338,
+        "passage": "Chapter2.2b",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "to prepare the diner"
+        ],
+        "picked": "to prepare the diner",
+        "prices": null,
+        "at_state_hash": "004d2edc3bcb3de8"
+      },
+      {
+        "ts": 1776424006421,
+        "passage": "Chapter2.2",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Serve"
+        ],
+        "picked": "Serve",
+        "prices": null,
+        "at_state_hash": "2f4dc33826504e57"
+      },
+      {
+        "ts": 1776424015635,
+        "passage": "Chapter2.2",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Few minutes pass"
+        ],
+        "picked": "Few minutes pass",
+        "prices": null,
+        "at_state_hash": "2f4dc33826504e57"
+      },
+      {
+        "ts": 1776424027434,
+        "passage": "Spareroom",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "What was he doing ?",
+          "Let him has his privacy"
+        ],
+        "picked": "What was he doing ?",
+        "prices": null,
+        "at_state_hash": "426b949c1a0e3d89"
+      },
+      {
+        "ts": 1776424036731,
+        "passage": "filmasturbate",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Back before get caught"
+        ],
+        "picked": "Back before get caught",
+        "prices": null,
+        "at_state_hash": "a1ece5916170b7e2"
+      },
+      {
+        "ts": 1776424045551,
+        "passage": "Hallway2",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "got closer to him"
+        ],
+        "picked": "got closer to him",
+        "prices": null,
+        "at_state_hash": "2ee776a363c1e21d"
+      },
+      {
+        "ts": 1776424055004,
+        "passage": "Livingroom",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Start the movie"
+        ],
+        "picked": "Start the movie",
+        "prices": null,
+        "at_state_hash": "9a8e2b0981338cde"
+      },
+      {
+        "ts": 1776424065551,
+        "passage": "Movie night",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Maybe she could do something about it",
+          "Go to sleep"
+        ],
+        "picked": "Maybe she could do something about it",
+        "prices": null,
+        "at_state_hash": "16f37d647b75dc6a"
+      },
+      {
+        "ts": 1776424075163,
+        "passage": "Chapter2.21",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "She was close to cumming"
+        ],
+        "picked": "She was close to cumming",
+        "prices": null,
+        "at_state_hash": "170a4fff939c1a03"
+      },
+      {
+        "ts": 1776424087319,
+        "passage": "Go to the bed",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Go to Bobby",
+          "Go to sleep"
+        ],
+        "picked": "Go to Bobby",
+        "prices": null,
+        "at_state_hash": "a945846f7fbdbf54"
+      },
+      {
+        "ts": 1776424096501,
+        "passage": "Chapter2.3",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Make it even harder for him"
+        ],
+        "picked": "Make it even harder for him",
+        "prices": null,
+        "at_state_hash": "dba1913cbc2e688b"
+      },
+      {
+        "ts": 1776424107981,
+        "passage": "Chapter2.31",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Cuni",
+          "Missionary",
+          "Doggy",
+          "Cum"
+        ],
+        "picked": "Cum",
+        "prices": null,
+        "at_state_hash": "8ffd2dda22c05469"
+      },
+      {
+        "ts": 1776424118147,
+        "passage": "Chapter2.35",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Go to sleep"
+        ],
+        "picked": "Go to sleep",
+        "prices": null,
+        "at_state_hash": "6da273663127de4b"
+      },
+      {
+        "ts": 1776424128374,
+        "passage": "Chapter2Dream1",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Dream about Bobby",
+          "Dream about Father in law"
+        ],
+        "picked": "Dream about Father in law",
+        "prices": null,
+        "at_state_hash": "74c3c86acd05ca11"
+      },
+      {
+        "ts": 1776424137534,
+        "passage": "Chapter2dfil",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "The next day"
+        ],
+        "picked": "The next day",
+        "prices": null,
+        "at_state_hash": "f1209333b4774080"
+      },
+      {
+        "ts": 1776424146538,
+        "passage": "Chapter2.4",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Inventory",
+          "Protagonist",
+          "Selfie",
+          "Back to the Begining",
+          "Cheat",
+          "Saves",
+          "Restart",
+          "Share",
+          "Take a Shower"
+        ],
+        "picked": "Take a Shower",
+        "prices": null,
+        "at_state_hash": "310e7c0dcf367fab"
+      }
+    ]
+  },
+  "mutations": [
+    {
+      "ts": 1776423476300,
+      "passage": "Intro2",
+      "state_hash": "70c1083138c29194",
+      "var": "arousal",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "ts": 1776423502631,
+      "passage": "Intro3",
+      "state_hash": "261ba41728b6830b",
+      "var": "arousal",
+      "before": 2,
+      "after": 3
+    },
+    {
+      "ts": 1776423514218,
+      "passage": "Intro4",
+      "state_hash": "97b841eddc67ed49",
+      "var": "openminded",
+      "before": 0,
+      "after": 1
+    },
+    {
+      "ts": 1776423514218,
+      "passage": "Intro4",
+      "state_hash": "97b841eddc67ed49",
+      "var": "arousal",
+      "before": 3,
+      "after": 1
+    },
+    {
+      "ts": 1776423514218,
+      "passage": "Intro4",
+      "state_hash": "97b841eddc67ed49",
+      "var": "loveoral",
+      "before": 0,
+      "after": 1
+    },
+    {
+      "ts": 1776423514218,
+      "passage": "Intro4",
+      "state_hash": "97b841eddc67ed49",
+      "var": "bobbyaddiction",
+      "before": 0,
+      "after": 1
+    },
+    {
+      "ts": 1776423557077,
+      "passage": "Intro5",
+      "state_hash": "09489d01d7f9da36",
+      "var": "openminded",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "ts": 1776423557077,
+      "passage": "Intro5",
+      "state_hash": "09489d01d7f9da36",
+      "var": "loveoral",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "ts": 1776423557077,
+      "passage": "Intro5",
+      "state_hash": "09489d01d7f9da36",
+      "var": "bobbyaddiction",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "ts": 1776423569766,
+      "passage": "Intro6",
+      "state_hash": "ba6f531f0f3a6baf",
+      "var": "bobbyaddiction",
+      "before": 2,
+      "after": 12
+    },
+    {
+      "ts": 1776423582493,
+      "passage": "Intro7",
+      "state_hash": "12c428eef8b5d951",
+      "var": "openminded",
+      "before": 2,
+      "after": 3
+    },
+    {
+      "ts": 1776423582493,
+      "passage": "Intro7",
+      "state_hash": "12c428eef8b5d951",
+      "var": "bobbyaddiction",
+      "before": 12,
+      "after": 13
+    },
+    {
+      "ts": 1776423582493,
+      "passage": "Intro7",
+      "state_hash": "12c428eef8b5d951",
+      "var": "ericaddiction",
+      "before": 0,
+      "after": 1
+    },
+    {
+      "ts": 1776423594974,
+      "passage": "1st chapter",
+      "state_hash": "90733ceecf10baeb",
+      "var": "sophiaaddiction",
+      "before": 10,
+      "after": 3
+    },
+    {
+      "ts": 1776423616799,
+      "passage": "1st chapter",
+      "state_hash": "9206eccd4c4b8f71",
+      "var": "arousal",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "ts": 1776423616799,
+      "passage": "1st chapter",
+      "state_hash": "9206eccd4c4b8f71",
+      "var": "francoisaddiction",
+      "before": 0,
+      "after": 1
+    },
+    {
+      "ts": 1776423667761,
+      "passage": "Chapter1.3",
+      "state_hash": "9387948a5ea9774c",
+      "var": "francoisaddiction",
+      "before": 1,
+      "after": 3
+    },
+    {
+      "ts": 1776423717855,
+      "passage": "Chapter1.3b",
+      "state_hash": "4b419d12af770aa9",
+      "var": "openminded",
+      "before": 3,
+      "after": 13
+    },
+    {
+      "ts": 1776423717855,
+      "passage": "Chapter1.3b",
+      "state_hash": "4b419d12af770aa9",
+      "var": "arousal",
+      "before": 2,
+      "after": 32
+    },
+    {
+      "ts": 1776423764357,
+      "passage": "Chapter1.45",
+      "state_hash": "224205d8f08c5f8e",
+      "var": "openminded",
+      "before": 13,
+      "after": 14
+    },
+    {
+      "ts": 1776423764357,
+      "passage": "Chapter1.45",
+      "state_hash": "224205d8f08c5f8e",
+      "var": "francoisaddiction",
+      "before": 3,
+      "after": 4
+    },
+    {
+      "ts": 1776423782401,
+      "passage": "Chapter1.5",
+      "state_hash": "21c40cd4fc3f9570",
+      "var": "francoisaddiction",
+      "before": 4,
+      "after": 5
+    },
+    {
+      "ts": 1776423831534,
+      "passage": "Chapter1.6",
+      "state_hash": "30c82dc7ec73572e",
+      "var": "openminded",
+      "before": 14,
+      "after": 15
+    },
+    {
+      "ts": 1776423831534,
+      "passage": "Chapter1.6",
+      "state_hash": "30c82dc7ec73572e",
+      "var": "loveoral",
+      "before": 2,
+      "after": 3
+    },
+    {
+      "ts": 1776423831534,
+      "passage": "Chapter1.6",
+      "state_hash": "30c82dc7ec73572e",
+      "var": "francoisaddiction",
+      "before": 5,
+      "after": 6
+    },
+    {
+      "ts": 1776423834442,
+      "passage": "Chapter1.73",
+      "state_hash": "94eb0b31899050d6",
+      "var": "loveanal",
+      "before": 0,
+      "after": 2
+    },
+    {
+      "ts": 1776423838658,
+      "passage": "Chapter1.8",
+      "state_hash": "24e7cec18ea9ec8e",
+      "var": "francoisaddiction",
+      "before": 6,
+      "after": 12
+    },
+    {
+      "ts": 1776423841378,
+      "passage": "Chapter1.9",
+      "state_hash": "98cfaae6eb5423db",
+      "var": "arousal",
+      "before": 32,
+      "after": 12
+    },
+    {
+      "ts": 1776423842606,
+      "passage": "2nd Chapter",
+      "state_hash": "4c89c1aa262de98a",
+      "var": "openminded",
+      "before": 15,
+      "after": 16
+    },
+    {
+      "ts": 1776423842606,
+      "passage": "2nd Chapter",
+      "state_hash": "4c89c1aa262de98a",
+      "var": "arousal",
+      "before": 12,
+      "after": 13
+    },
+    {
+      "ts": 1776423842606,
+      "passage": "2nd Chapter",
+      "state_hash": "4c89c1aa262de98a",
+      "var": "ericaddiction",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "ts": 1776423843898,
+      "passage": "Chapter2.1",
+      "state_hash": "431c3b6b6d38504a",
+      "var": "arousal",
+      "before": 13,
+      "after": 14
+    },
+    {
+      "ts": 1776423880979,
+      "passage": "Do some Yoga",
+      "state_hash": "296b473f24d6c7ef",
+      "var": "openminded",
+      "before": 16,
+      "after": 17
+    },
+    {
+      "ts": 1776423880979,
+      "passage": "Do some Yoga",
+      "state_hash": "296b473f24d6c7ef",
+      "var": "arousal",
+      "before": 14,
+      "after": 15
+    },
+    {
+      "ts": 1776423880979,
+      "passage": "Do some Yoga",
+      "state_hash": "296b473f24d6c7ef",
+      "var": "fitness",
+      "before": 10,
+      "after": 11
+    },
+    {
+      "ts": 1776423880979,
+      "passage": "Do some Yoga",
+      "state_hash": "296b473f24d6c7ef",
+      "var": "ericaddiction",
+      "before": 2,
+      "after": 3
+    },
+    {
+      "ts": 1776423892746,
+      "passage": "Yoga2",
+      "state_hash": "41c0fb55740e2b50",
+      "var": "charisma",
+      "before": 10,
+      "after": 11
+    },
+    {
+      "ts": 1776423892746,
+      "passage": "Yoga2",
+      "state_hash": "41c0fb55740e2b50",
+      "var": "ericaddiction",
+      "before": 3,
+      "after": 4
+    },
+    {
+      "ts": 1776423922461,
+      "passage": "Shower",
+      "state_hash": "50327e89209197df",
+      "var": "openminded",
+      "before": 17,
+      "after": 18
+    },
+    {
+      "ts": 1776423922461,
+      "passage": "Shower",
+      "state_hash": "50327e89209197df",
+      "var": "arousal",
+      "before": 15,
+      "after": 16
+    },
+    {
+      "ts": 1776423922461,
+      "passage": "Shower",
+      "state_hash": "50327e89209197df",
+      "var": "ericaddiction",
+      "before": 4,
+      "after": 5
+    },
+    {
+      "ts": 1776423950822,
+      "passage": "1.Shower2",
+      "state_hash": "966c23f7c54d9c41",
+      "var": "shower",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1776423966846,
+      "passage": "1.Shower2",
+      "state_hash": "504bd64799074f37",
+      "var": "openminded",
+      "before": 18,
+      "after": 19
+    },
+    {
+      "ts": 1776423966846,
+      "passage": "1.Shower2",
+      "state_hash": "504bd64799074f37",
+      "var": "arousal",
+      "before": 16,
+      "after": 18
+    },
+    {
+      "ts": 1776423987796,
+      "passage": "Chapter2.2b",
+      "state_hash": "004d2edc3bcb3de8",
+      "var": "openminded",
+      "before": 19,
+      "after": 20
+    },
+    {
+      "ts": 1776423987796,
+      "passage": "Chapter2.2b",
+      "state_hash": "004d2edc3bcb3de8",
+      "var": "arousal",
+      "before": 18,
+      "after": 19
+    },
+    {
+      "ts": 1776423987796,
+      "passage": "Chapter2.2b",
+      "state_hash": "004d2edc3bcb3de8",
+      "var": "bobbyaddiction",
+      "before": 13,
+      "after": 14
+    },
+    {
+      "ts": 1776424027219,
+      "passage": "filmasturbate",
+      "state_hash": "a1ece5916170b7e2",
+      "var": "openminded",
+      "before": 20,
+      "after": 22
+    },
+    {
+      "ts": 1776424027219,
+      "passage": "filmasturbate",
+      "state_hash": "a1ece5916170b7e2",
+      "var": "arousal",
+      "before": 19,
+      "after": 21
+    },
+    {
+      "ts": 1776424054813,
+      "passage": "Movie night",
+      "state_hash": "16f37d647b75dc6a",
+      "var": "arousal",
+      "before": 21,
+      "after": 23
+    },
+    {
+      "ts": 1776424054813,
+      "passage": "Movie night",
+      "state_hash": "16f37d647b75dc6a",
+      "var": "bobbyaddiction",
+      "before": 14,
+      "after": 15
+    },
+    {
+      "ts": 1776424054813,
+      "passage": "Movie night",
+      "state_hash": "16f37d647b75dc6a",
+      "var": "ericaddiction",
+      "before": 5,
+      "after": 6
+    },
+    {
+      "ts": 1776424074918,
+      "passage": "Go to the bed",
+      "state_hash": "a945846f7fbdbf54",
+      "var": "arousal",
+      "before": 23,
+      "after": 25
+    },
+    {
+      "ts": 1776424096323,
+      "passage": "Chapter2.31",
+      "state_hash": "8ffd2dda22c05469",
+      "var": "loveoral",
+      "before": 3,
+      "after": 4
+    },
+    {
+      "ts": 1776424107801,
+      "passage": "Chapter2.35",
+      "state_hash": "6da273663127de4b",
+      "var": "tease1",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1776424107801,
+      "passage": "Chapter2.35",
+      "state_hash": "6da273663127de4b",
+      "var": "arousal",
+      "before": 25,
+      "after": 22
+    },
+    {
+      "ts": 1776424107801,
+      "passage": "Chapter2.35",
+      "state_hash": "6da273663127de4b",
+      "var": "loveanal",
+      "before": 2,
+      "after": 3
+    },
+    {
+      "ts": 1776424107801,
+      "passage": "Chapter2.35",
+      "state_hash": "6da273663127de4b",
+      "var": "bobbyaddiction",
+      "before": 15,
+      "after": 17
+    },
+    {
+      "ts": 1776424128171,
+      "passage": "Chapter2dfil",
+      "state_hash": "f1209333b4774080",
+      "var": "openminded",
+      "before": 22,
+      "after": 23
+    },
+    {
+      "ts": 1776424128171,
+      "passage": "Chapter2dfil",
+      "state_hash": "f1209333b4774080",
+      "var": "arousal",
+      "before": 22,
+      "after": 24
+    }
+  ]
+}
