@@ -58,6 +58,23 @@ const MODAL_CLOSE_SELECTORS = [
   'a[aria-label="Close" i]',
 ];
 
+// Narrative passage containers — NEVER probe as chrome. SugarCube renders the
+// current passage under #story > #passages > .passage, where the rendered
+// passage element is `<div id="passage-<slugified-name>">`. Harlowe/Snowman/
+// Chapbook use `<tw-passage>` as the passage element. These regions may touch
+// page edges (narrative fills the main viewport in side-by-side layouts with
+// a sidebar) but they are NOT chrome and their buttons are story choices.
+// Note: `<tw-story>` is deliberately NOT matched — Harlowe's root wraps
+// sidebar chrome too.
+function isNarrativeCandidate(id, tag) {
+  const _id = (id || '').toLowerCase();
+  const _tag = (tag || '').toLowerCase();
+  if (_id === 'story' || _id === 'passages' || _id === 'passage') return true;
+  if (/^passage-/.test(_id)) return true;
+  if (_tag === 'tw-passage') return true;
+  return false;
+}
+
 // ============================================================================
 // Adaptive wait — poll engine + DOM until click takes effect
 // ============================================================================
@@ -519,6 +536,12 @@ async function scanRegions(frame) {
 
       const cls = (p.el.className && p.el.className.toString) ? p.el.className.toString() : '';
       const collapsed = /\b(stowed|collapsed|closed|hidden)\b/i.test(cls);
+      const elId = (p.el.id || '').toLowerCase();
+      const elTag = p.el.tagName.toLowerCase();
+      const isNarrative = (
+        elId === 'story' || elId === 'passages' || elId === 'passage'
+        || /^passage-/.test(elId) || elTag === 'tw-passage'
+      );
 
       candidates.push({
         pos_class: classify(p.r),
@@ -528,6 +551,7 @@ async function scanRegions(frame) {
         position_style: p.cs.position,
         z_index: p.cs.zIndex,
         collapsed,
+        is_narrative: isNarrative,
         bbox: { x: Math.round(p.r.x), y: Math.round(p.r.y), w: Math.round(p.r.width), h: Math.round(p.r.height) },
         text_sample: (p.el.textContent || '').trim().slice(0, 80),
       });
@@ -587,6 +611,7 @@ async function scanRegions(frame) {
       position_style: s.position_style,
       z_index: 'auto',
       collapsed: /\b(stowed|collapsed|closed|hidden)\b/i.test(s.cls || ''),
+      is_narrative: isNarrativeCandidate(s.id, s.tag),
       bbox: s.bbox,
       text_sample: '',
       from_sampling: true,
@@ -759,6 +784,7 @@ function buildFallbackSelector(candidate) {
 async function catalogRegions(frame, regions) {
   const idsToCatalog = (regions.candidates || [])
     .filter((c) => c.id)
+    .filter((c) => !c.is_narrative)
     .filter((c) => ['left', 'right', 'top', 'bottom', 'left_partial', 'right_partial', 'sampled', 'corner_tl', 'corner_tr', 'corner_bl', 'corner_br', 'floating'].includes(c.pos_class));
 
   const cataloged = [];
