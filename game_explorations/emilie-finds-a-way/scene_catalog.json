@@ -1,154 +1,90 @@
 {
   "Start": {
-    "first_ts": 1776435303074,
-    "visit_count": 1
+    "first_ts": 1776488105125,
+    "visit_count": 3
   },
-  "Intro2": {
-    "first_ts": 1776435323387,
-    "visit_count": 19
+  "Chapter1.72": {
+    "first_ts": 1776488116754,
+    "visit_count": 2
   },
-  "Cheat": {
-    "first_ts": 1776435409969,
-    "visit_count": 11
+  "Chapter1.73": {
+    "first_ts": 1776488128413,
+    "visit_count": 2
   },
-  "Morning": {
-    "first_ts": 1776435428333,
-    "visit_count": 12
+  "Chapter2.31": {
+    "first_ts": 1776488135699,
+    "visit_count": 2
   },
-  "ENDOFCONTENT": {
-    "first_ts": 1776435436870,
-    "visit_count": 4
+  "Chapter2.32": {
+    "first_ts": 1776488145055,
+    "visit_count": 2
+  },
+  "latedad1": {
+    "first_ts": 1776488145673,
+    "visit_count": 2
+  },
+  "sister2g": {
+    "first_ts": 1776488146206,
+    "visit_count": 2
+  },
+  "Tutoring2": {
+    "first_ts": 1776488146796,
+    "visit_count": 2
+  },
+  "Flint": {
+    "first_ts": 1776488147366,
+    "visit_count": 2
+  },
+  "latedad": {
+    "first_ts": 1776488178103,
+    "visit_count": 2
+  },
+  "latebob": {
+    "first_ts": 1776488178637,
+    "visit_count": 2
+  },
+  "Friends1": {
+    "first_ts": 1776488181140,
+    "visit_count": 2
+  },
+  "cinema2": {
+    "first_ts": 1776488183140,
+    "visit_count": 2
+  },
+  "sister3g": {
+    "first_ts": 1776488183695,
+    "visit_count": 2
+  },
+  "wakedad": {
+    "first_ts": 1776488184233,
+    "visit_count": 2
+  },
+  "Harem": {
+    "first_ts": 1776488186807,
+    "visit_count": 2
+  },
+  "sneak": {
+    "first_ts": 1776488196743,
+    "visit_count": 2
+  },
+  "cinema3": {
+    "first_ts": 1776488197324,
+    "visit_count": 2
+  },
+  "shopingSisB": {
+    "first_ts": 1776488197863,
+    "visit_count": 2
+  },
+  "sharing4": {
+    "first_ts": 1776488198412,
+    "visit_count": 2
+  },
+  "Kitchenevesharing2": {
+    "first_ts": 1776488198944,
+    "visit_count": 2
   },
   "Dream": {
-    "first_ts": 1776435449009,
-    "visit_count": 38
-  },
-  "Early Morning": {
-    "first_ts": 1776435474865,
-    "visit_count": 3
-  },
-  "shower": {
-    "first_ts": 1776435484428,
-    "visit_count": 5
-  },
-  "Kitchenmorning": {
-    "first_ts": 1776435495048,
-    "visit_count": 3
-  },
-  "yoga": {
-    "first_ts": 1776435497054,
-    "visit_count": 7
-  },
-  "Work Morning": {
-    "first_ts": 1776435508001,
-    "visit_count": 15
-  },
-  "Dress": {
-    "first_ts": 1776435508946,
-    "visit_count": 2
-  },
-  "car": {
-    "first_ts": 1776435510567,
-    "visit_count": 2
-  },
-  "meetcoworker": {
-    "first_ts": 1776435512497,
-    "visit_count": 2
-  },
-  "takecoffee": {
-    "first_ts": 1776435514442,
-    "visit_count": 3
-  },
-  "Work break": {
-    "first_ts": 1776435516713,
-    "visit_count": 15
-  },
-  "Work Afternoon": {
-    "first_ts": 1776435517663,
-    "visit_count": 5
-  },
-  "Late Afternoon": {
-    "first_ts": 1776435519418,
-    "visit_count": 14
-  },
-  "Selfie": {
-    "first_ts": 1776435520083,
-    "visit_count": 4
-  },
-  "chillread1": {
-    "first_ts": 1776435521526,
+    "first_ts": 1776488238749,
     "visit_count": 1
-  },
-  "Gab4": {
-    "first_ts": 1776435523249,
-    "visit_count": 9
-  },
-  "Gab40": {
-    "first_ts": 1776435551648,
-    "visit_count": 12
-  },
-  "showerevening": {
-    "first_ts": 1776435597676,
-    "visit_count": 9
-  },
-  "Evening": {
-    "first_ts": 1776435599712,
-    "visit_count": 16
-  },
-  "Quickie1": {
-    "first_ts": 1776435600776,
-    "visit_count": 4
-  },
-  "sharing2": {
-    "first_ts": 1776435620615,
-    "visit_count": 4
-  },
-  "sharing2a": {
-    "first_ts": 1776435629613,
-    "visit_count": 4
-  },
-  "sharing2b": {
-    "first_ts": 1776435639831,
-    "visit_count": 4
-  },
-  "sharing2c": {
-    "first_ts": 1776435648114,
-    "visit_count": 3
-  },
-  "sharing2e": {
-    "first_ts": 1776435658142,
-    "visit_count": 4
-  },
-  "sharing2g": {
-    "first_ts": 1776435667892,
-    "visit_count": 11
-  },
-  "sharing2h": {
-    "first_ts": 1776435693675,
-    "visit_count": 4
-  },
-  "randomevent1": {
-    "first_ts": 1776435768917,
-    "visit_count": 11
-  },
-  "sharing3": {
-    "first_ts": 1776435820834,
-    "visit_count": 23
-  },
-  "cinema1": {
-    "first_ts": 1776435956536,
-    "visit_count": 23
-  },
-  "Late Night": {
-    "first_ts": 1776436013182,
-    "visit_count": 3
-  },
-  "Night": {
-    "first_ts": 1776436043593,
-    "visit_count": 3
-  },
-  "eventworkmorning2": {
-    "first_ts": 1776436120501,
-    "visit_count": 19
   }
 }

@@ -1,17 +1,17 @@
 # emilie-finds-a-way — Exploration Report
 
-Generated: 2026-04-17T14:30:25.869Z
+Generated: 2026-04-18T04:57:21.771Z
 Source URL: https://mopoga.com/embed/emilie-finds-a-way/
 
 ## Session Summary
 
-- Sessions run: 5
-- Total wall-clock: 186m 38s
+- Sessions run: 6
+- Total wall-clock: 188m 55s
 - Total clicks: 986
 - Total choices explored: 986
-- Unique states seen: 831
+- Unique states seen: 852
 - Unexplored frontier (queued for next session): 1
-- Any ending reached: not yet
+- Endings reached: 1 (Dream)
 
 ## Engine
 Detected engine: **sugarcube**
@@ -23,40 +23,66 @@ Detected engine: **sugarcube**
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
 | `money` | number | 100..100 | 0 | high |
-| `charisma` | number | 10..23 | 2 | high |
-| `fitness` | number | 10..20 | 2 | high |
-| `stamina` | number | 1200..1590 | 29 | high |
+| `charisma` | number | 10..10 | 0 | high |
+| `fitness` | number | 10..10 | 0 | high |
+| `stamina` | object | — | 0 | high |
+
+### npc_stat (9)
+
+| name | type | range / samples | mutations | confidence |
+|---|---|---|---|---|
+| `bobbyaddiction` | number | 0..0 | 0 | high |
+| `ericaddiction` | number | 0..0 | 0 | high |
+| `francoisaddiction` | number | 0..0 | 0 | high |
+| `sophiaaddiction` | number | 10..10 | 0 | high |
+| `gabriellaaddiction` | number | 0..0 | 0 | high |
+| `marcaddiction` | number | 0..2 | 1 | high |
+| `johnaddiction` | number | 0..0 | 0 | high |
+| `coworkeraddiction` | number | 0..0 | 0 | high |
+| `jonathanaddiction` | number | 0..0 | 0 | high |
 
 ### time (1)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
-| `Day` | number | 5..50 | 13 | high |
+| `Day` | number | 15..15 | 0 | high |
 
-### flag (145)
+### item (7)
+
+| name | type | range / samples | mutations | confidence |
+|---|---|---|---|---|
+| `hasdildo` | boolean | false | 0 | high |
+| `hasplug` | boolean | false | 0 | high |
+| `hasofficeoutfit` | boolean | false | 0 | high |
+| `haslingerie1` | boolean | false | 0 | high |
+| `haslube` | boolean | false | 0 | high |
+| `hasplugon` | boolean | false | 0 | high |
+| `hascoffee` | boolean | false | 0 | high |
+
+### flag (92)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
 | `start` | boolean | false | 0 | high |
-| `shower` | boolean | false, true | 10 | high |
-| `tease1` | boolean | false, true | 2 | high |
-| `daddyshower1` | boolean | false, true | 2 | high |
-| `shopping1` | boolean | false, true | 2 | high |
+| `shower` | boolean | false | 0 | high |
+| `tease1` | boolean | false, true | 1 | high |
+| `daddyshower1` | boolean | false | 0 | high |
+| `shopping1` | boolean | false | 0 | high |
 | `undress` | boolean | true | 0 | high |
 | `daddy` | boolean | false | 0 | high |
-| `sport` | boolean | false, true | 2 | high |
-| `gym1` | boolean | false, true | 2 | high |
-| `gym2` | boolean | false, true | 2 | high |
-| `gym3` | boolean | false, true | 2 | high |
+| `sport` | boolean | false | 0 | high |
+| `gym1` | boolean | false | 0 | high |
+| `gym2` | boolean | false | 0 | high |
+| `gym3` | boolean | false | 0 | high |
 | `gym4` | boolean | false | 0 | high |
 | `gym5` | boolean | false | 0 | high |
-| `run1` | boolean | false, true | 2 | high |
+| `run1` | boolean | false | 0 | high |
 | `run2` | boolean | false | 0 | high |
 | `run3` | boolean | false | 0 | high |
 | `run4` | boolean | false | 0 | high |
 | `run5` | boolean | false | 0 | high |
-| `yoga1` | boolean,number | 3..5 | 4 | high |
-| `yoga2` | boolean,number | 3..5 | 6 | high |
+| `yoga1` | boolean | false | 0 | high |
+| `yoga2` | boolean | false | 0 | high |
 | `yoga3` | boolean | false | 0 | high |
 | `yoga4` | boolean | false | 0 | high |
 | `yoga5` | boolean | false | 0 | high |
@@ -64,67 +90,46 @@ Detected engine: **sugarcube**
 | `dildo` | boolean | false | 0 | medium |
 | `lube` | boolean | false | 0 | high |
 | `selfie1` | boolean | true | 0 | high |
-| `selfie2` | boolean | false, true | 2 | high |
+| `selfie2` | boolean | false | 0 | high |
 | `selfie3` | boolean | false | 0 | high |
-| `selfie4` | boolean | false, true | 2 | high |
-| `selfie5` | boolean | false, true | 2 | high |
-| `selfie6` | boolean | false, true | 2 | high |
-| `selfie7` | boolean | false, true | 2 | high |
-| `selfie8` | boolean | false, true | 2 | high |
+| `selfie4` | boolean | false | 0 | high |
+| `selfie5` | boolean | false | 0 | high |
+| `selfie6` | boolean | false | 0 | high |
+| `selfie7` | boolean | false | 0 | high |
+| `selfie8` | boolean | false | 0 | high |
 | `selfie9` | boolean | false | 0 | high |
 | `selfie10` | boolean | false | 0 | high |
 | `selfie11` | boolean | false | 0 | high |
 | `selfie12` | boolean | false | 0 | high |
-| `selfie13` | boolean | false, true | 2 | high |
+| `selfie13` | boolean | false | 0 | high |
 | `selfie14` | boolean | false | 0 | high |
-| … | … | … | … | and 105 more |
+| … | … | … | … | and 52 more |
 
-### scalar (26)
-
-| name | type | range / samples | mutations | confidence |
-|---|---|---|---|---|
-| `openminded` | number | 0..89 | 2 | low |
-| `arousal` | number | 0..50 | 2 | low |
-| `loveanal` | number | 0..7 | 2 | low |
-| `loveoral` | number | 0..23 | 2 | low |
-| `sharing` | number | 0..4 | 2 | low |
-| `bobbyaddiction` | number | 0..71 | 2 | low |
-| `ericaddiction` | number | 0..62 | 2 | low |
-| `francoisaddiction` | number | 0..24 | 2 | low |
-| `sophiaaddiction` | number,object | 10..10 | 2 | low |
-| `gabriellaaddiction` | number | 0..22 | 2 | low |
-| `marcaddiction` | number | 0..26 | 2 | low |
-| `johnaddiction` | number,object | 0..0 | 2 | low |
-| `coworkeraddiction` | number | 0..6 | 2 | low |
-| `jonathanaddiction` | number | 0..0 | 0 | low |
-| `dreamb` | number | 1..17 | 8 | low |
-| `dream` | number | 3..16 | 7 | low |
-| `wakeup2` | number | 3..6 | 2 | low |
-| `showerb` | number | 2..3 | 6 | low |
-| `showermast` | number | 2..2 | 0 | low |
-| `wakeup` | number | 2..6 | 6 | low |
-| `workbreak` | number | 1..4 | 8 | low |
-| `officework` | number | 1..9 | 14 | low |
-| `randompeeping` | number | 2..7 | 6 | low |
-| `randomchill` | number | 2..4 | 3 | low |
-| `randomflirt` | number | 3..3 | 0 | low |
-| `flirttv` | number | 2..2 | 0 | low |
-
-### string (1)
+### scalar (7)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
-| `startingpassage` | string | `Dream`, `Late Afternoon` | 2 | low |
-
-### misc (1)
-
-| name | type | range / samples | mutations | confidence |
-|---|---|---|---|---|
-| `yogaevent1` | object | — | 0 | low |
+| `openminded` | number | 0..2 | 1 | low |
+| `arousal` | number | 0..2 | 1 | low |
+| `loveanal` | number | 0..2 | 1 | low |
+| `loveoral` | number | 0..1 | 1 | low |
+| `sharing` | number | 0..0 | 0 | low |
+| `dreamb` | number | 9..9 | 0 | low |
+| `dream` | number | 17..17 | 0 | low |
 
 ## NPCs detected
 
-_No NPCs detected yet._
+| npc | stats observed | var count |
+|---|---|---|
+| bobby | addiction | 1 |
+| eric | addiction | 1 |
+| francois | addiction | 1 |
+| sophia | addiction | 1 |
+| gabriella | addiction | 1 |
+| marc | addiction | 1 |
+| john | addiction | 1 |
+| coworker | addiction | 1 |
+| jonathan | addiction | 1 |
 
 ## Body / appearance traits
 
@@ -132,9 +137,7 @@ _No body/appearance variables detected._
 
 ## Choice type distribution
 
-| type | count |
-|---|---|
-| branch | 89 |
+_No choices classified yet._
 
 ## Economy
 
@@ -146,26 +149,17 @@ _No body/appearance variables detected._
 
 Variables sharing a leading token — candidate entity groups (verify manually).
 
-- **selfie** (27): `selfie1`, `selfie2`, `selfie3`, `selfie4`, `selfie5`, `selfie6`, …
+- **selfie** (22): `selfie1`, `selfie2`, `selfie3`, `selfie4`, `selfie5`, `selfie6`, …
 - **tutoring** (7): `Tutoring`, `Tutoring1`, `Tutoring2`, `Tutoring3`, `Tutoring4`, `Tutoring5`, …
 - **yoga** (6): `yoga1`, `yoga2`, `yoga3`, `yoga4`, `yoga5`, `yoga`
 - **chill** (6): `Chill`, `Chill1`, `Chill2`, `Chill3`, `Chill4`, `chill`
 - **office** (6): `Office`, `Office1`, `Office2`, `Office3`, `Office4`, `Office5`
-- **chapter** (6): `Chapter5`, `Chapter6`, `Chapter8`, `Chapter9`, `Chapter7`, `Chapter10`
 - **gym** (5): `gym1`, `gym2`, `gym3`, `gym4`, `gym5`
 - **run** (5): `run1`, `run2`, `run3`, `run4`, `run5`
-- **sharing** (5): `sharing`, `sharing1`, `sharing2`, `sharing3`, `sharing4`
 - **bus** (5): `bus1`, `bus2`, `bus3`, `bus4`, `bus5`
 - **gab** (5): `Gab1`, `Gab2`, `Gab3`, `Gab4`, `Gab5`
-- **shower** (4): `shower`, `shower1`, `shower2`, `shower3`
-- **eventworkmorning** (4): `eventworkmorning1`, `eventworkmorning2`, `eventworkmorning3`, `eventworkmorning4`
-- **busevent** (3): `busevent1`, `busevent2`, `busevent3`
-- **carevent** (3): `carevent1`, `carevent2`, `carevent3`
-- **latedad** (3): `lateDad1`, `lateDad2`, `lateDad3`
-- **dress** (2): `dress1`, `dress`
-- **breakfast** (2): `breakfast1`, `breakfast`
-- **sisterevent** (2): `sisterevent1`, `sisterevent2`
-- **workeventafternoon** (2): `workeventafternoon1`, `workeventafternoon2`
+- **sharing** (2): `sharing`, `sharing4`
+- **shop** (2): `shop1`, `shop2`
 
 ## Sessions
 
@@ -176,6 +170,7 @@ Variables sharing a leading token — candidate entity groups (verify manually).
 | 3 | 2026-04-17T12:03:18.204Z | 91m 23s | 545 | 545 | 438 | no |
 | 4 | 2026-04-17T13:50:00.326Z | 24m 35s | 41 | 41 | 34 | no |
 | 5 | 2026-04-17T14:15:03.073Z | 15m 23s | 97 | 97 | 79 | no |
+| 6 | 2026-04-18T04:55:05.123Z | 2m 17s | 0 | 0 | 21 | yes |
 
 ## Graph coverage (observed vs. static)
 
@@ -184,7 +179,12 @@ Variables sharing a leading token — candidate entity groups (verify manually).
 - Static edges covered by at least one observation: **508** (a single observation covers every static edge with the same `(from, to)` pair — gated branches collapse to one observable move).
 - Observed-only edges (no matching static edge, typically self-loop `<<link>>` wrappers that `<<replace>>` in-place): **179**.
 - Coverage: **45.32%** of the static graph explored.
-- Synthetic edges (Claude's out-of-band `eval`/`keys`/`restore`/`pop`): 14
+- Synthetic edges (Claude's out-of-band `eval`/`keys`/`restore`/`pop`): 35
+
+### Playable-content partition
+- Passages defined in source: **619** (14 tagged `wip`, 0 empty-body placeholder).
+- Implied playable (non-WIP, non-empty): **605**.
+- Distinct passages visited at least once: **22** — playable-passage coverage: **3.6%**.
 
 ### Static edge kinds
 | kind | count |
