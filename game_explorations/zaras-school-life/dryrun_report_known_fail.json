@@ -1,0 +1,67 @@
+{
+  "slug": "zaras-school-life",
+  "seed": 1,
+  "trial_count": 3,
+  "target_strategy": "preset:.claude/skills/twine-game-explorer/scripts/tools/fixtures/known_fail_zaras.txt",
+  "max_depth": 7,
+  "generated_at": "2026-04-17T07:30:23.475Z",
+  "summary": {
+    "trial_count": 3,
+    "measurable_trials": 0,
+    "clean_completion_rate": 0,
+    "clean_completion_rate_of_total": 0,
+    "divergence_rate": 0,
+    "click_failed_rate": 0,
+    "plan_failed_rate": 1,
+    "plan_too_long_rate": 0,
+    "snap_failed_rate": 0,
+    "restore_mishap_rate": 0,
+    "divergence_breakdown": {},
+    "per_depth": {
+      "0": {
+        "trials": 3,
+        "failure_rate": 1
+      }
+    },
+    "worst_source_passages": [],
+    "median_step_ms": 0
+  },
+  "trials": [
+    {
+      "trial_id": 0,
+      "target": "Weekly Allowance",
+      "pre_trial_passage": "Room",
+      "outcome": "plan_failed",
+      "plan_length": 0,
+      "steps": [],
+      "total_ms": 5276,
+      "snap_id": "s6d8a2c264f",
+      "error": "No path from Room to Weekly Allowance — blocked by gates. Use `requirements Weekly Allowance` to see what's needed, or `path Weekly Allowance --ignore-gates` to see the gated path.",
+      "plan_response_summary": "No path from Room to Weekly Allowance — blocked by gates. Use `requirements Weekly Allowance` to see what's needed, or `path Weekly Allowance --ignore-gates` to see the gated path."
+    },
+    {
+      "trial_id": 1,
+      "target": "Punished",
+      "pre_trial_passage": "Room",
+      "outcome": "plan_failed",
+      "plan_length": 0,
+      "steps": [],
+      "total_ms": 5317,
+      "snap_id": "s323bb65669",
+      "error": "No path from Room to Punished — blocked by gates. Use `requirements Punished` to see what's needed, or `path Punished --ignore-gates` to see the gated path.",
+      "plan_response_summary": "No path from Room to Punished — blocked by gates. Use `requirements Punished` to see what's needed, or `path Punished --ignore-gates` to see the gated path."
+    },
+    {
+      "trial_id": 2,
+      "target": "School",
+      "pre_trial_passage": "Room",
+      "outcome": "plan_failed",
+      "plan_length": 0,
+      "steps": [],
+      "total_ms": 5351,
+      "snap_id": "sed8fa77ecd",
+      "error": "No path from Room to School — blocked by gates. Use `requirements School` to see what's needed, or `path School --ignore-gates` to see the gated path.",
+      "plan_response_summary": "No path from Room to School — blocked by gates. Use `requirements School` to see what's needed, or `path School --ignore-gates` to see the gated path."
+    }
+  ]
+}

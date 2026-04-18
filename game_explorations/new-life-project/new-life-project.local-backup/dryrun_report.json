@@ -1,0 +1,1649 @@
+{
+  "slug": "new-life-project",
+  "seed": 1,
+  "trial_count": 50,
+  "target_strategy": "random_reachable",
+  "max_depth": 7,
+  "generated_at": "2026-04-17T07:58:51.022Z",
+  "summary": {
+    "trial_count": 50,
+    "measurable_trials": 50,
+    "clean_completion_rate": 0.58,
+    "clean_completion_rate_of_total": 0.58,
+    "divergence_rate": 0,
+    "click_failed_rate": 0.42,
+    "plan_failed_rate": 0,
+    "plan_too_long_rate": 0,
+    "snap_failed_rate": 0,
+    "restore_mishap_rate": 0,
+    "divergence_breakdown": {},
+    "per_depth": {
+      "0": {
+        "trials": 7,
+        "failure_rate": 0
+      },
+      "1": {
+        "trials": 19,
+        "failure_rate": 0
+      },
+      "2": {
+        "trials": 15,
+        "failure_rate": 0.8666666666666667
+      },
+      "3": {
+        "trials": 9,
+        "failure_rate": 0.8888888888888888
+      }
+    },
+    "per_target_class": {
+      "open": {
+        "trials": 43,
+        "clean": 22,
+        "diverged": 0,
+        "click_failed": 21,
+        "plan_failed": 0,
+        "clean_rate": 0.5116279069767442,
+        "clean_rate_of_measurable": 0.5116279069767442
+      },
+      "gated_satisfiable": {
+        "trials": 7,
+        "clean": 7,
+        "diverged": 0,
+        "click_failed": 0,
+        "plan_failed": 0,
+        "clean_rate": 1,
+        "clean_rate_of_measurable": 1
+      }
+    },
+    "worst_source_passages": [
+      {
+        "passage": "keepExplore",
+        "divergences": 21,
+        "trials_involving": 21
+      }
+    ],
+    "median_step_ms": 482
+  },
+  "trials": [
+    {
+      "trial_id": 0,
+      "target": "jobIntroBar",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "click_failed",
+      "plan_length": 3,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 503
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "barExplore",
+          "click_text": "Explore the bar",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "click_failed",
+          "actual_passage": null,
+          "divergence_cause": null,
+          "step_ms": 5088,
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the bar', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "total_ms": 5958,
+      "snap_id": "s4d81bcc7b0",
+      "diverged_at_step": 1,
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 1,
+      "target": "introCafe",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "introCafe",
+          "click_text": "Perhaps check out this cute cafe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "introCafe",
+          "divergence_cause": null,
+          "step_ms": 441
+        }
+      ],
+      "total_ms": 786,
+      "snap_id": "s960de88c16",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 2,
+      "target": "mallExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "click_failed",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 446
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "mallExplore",
+          "click_text": "Explore the mall",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "click_failed",
+          "actual_passage": null,
+          "divergence_cause": null,
+          "step_ms": 5151,
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the mall', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "total_ms": 5952,
+      "snap_id": "sc0af44cb77",
+      "diverged_at_step": 1,
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 3,
+      "target": "exploreIntro",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 0,
+      "steps": [],
+      "total_ms": 19,
+      "snap_id": "s8bc5d5957b",
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 4,
+      "target": "exploreIntro",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 0,
+      "steps": [],
+      "total_ms": 12,
+      "snap_id": "sfc64ddf6ce",
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 5,
+      "target": "keepExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 474
+        }
+      ],
+      "total_ms": 817,
+      "snap_id": "s53a71b40d3",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 6,
+      "target": "exploreOutskirts",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 446
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "exploreOutskirts",
+          "click_text": "Explore the outskirts",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "exploreOutskirts",
+          "divergence_cause": null,
+          "step_ms": 511
+        }
+      ],
+      "total_ms": 1304,
+      "snap_id": "s15d786b8f8",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 7,
+      "target": "doctorIntro",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "click_failed",
+      "plan_length": 3,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 443
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "hospitalExplore",
+          "click_text": "Explore the hospital",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "click_failed",
+          "actual_passage": null,
+          "divergence_cause": null,
+          "step_ms": 5084,
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the hospital', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "total_ms": 5875,
+      "snap_id": "sdbc4eb8fe5",
+      "diverged_at_step": 1,
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 8,
+      "target": "hospitalExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "click_failed",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 423
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "hospitalExplore",
+          "click_text": "Explore the hospital",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "click_failed",
+          "actual_passage": null,
+          "divergence_cause": null,
+          "step_ms": 5085,
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the hospital', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "total_ms": 5854,
+      "snap_id": "sca934324d4",
+      "diverged_at_step": 1,
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 9,
+      "target": "exploreIntro",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 0,
+      "steps": [],
+      "total_ms": 14,
+      "snap_id": "s43a670a1b8",
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 10,
+      "target": "hospitalExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "click_failed",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 482
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "hospitalExplore",
+          "click_text": "Explore the hospital",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "click_failed",
+          "actual_passage": null,
+          "divergence_cause": null,
+          "step_ms": 5082,
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the hospital', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "total_ms": 5916,
+      "snap_id": "s446ab84c81",
+      "diverged_at_step": 1,
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 11,
+      "target": "mallExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "click_failed",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 494
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "mallExplore",
+          "click_text": "Explore the mall",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "click_failed",
+          "actual_passage": null,
+          "divergence_cause": null,
+          "step_ms": 5136,
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the mall', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "total_ms": 5990,
+      "snap_id": "s7355528d8c",
+      "diverged_at_step": 1,
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 12,
+      "target": "downtownExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "downtownExplore",
+          "click_text": "Go further down the street",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "downtownExplore",
+          "divergence_cause": null,
+          "step_ms": 529
+        }
+      ],
+      "total_ms": 877,
+      "snap_id": "s8816614fd6",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 13,
+      "target": "hospitalExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "click_failed",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 436
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "hospitalExplore",
+          "click_text": "Explore the hospital",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "click_failed",
+          "actual_passage": null,
+          "divergence_cause": null,
+          "step_ms": 5099,
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the hospital', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "total_ms": 5887,
+      "snap_id": "s33340a767e",
+      "diverged_at_step": 1,
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 14,
+      "target": "keepExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 439
+        }
+      ],
+      "total_ms": 784,
+      "snap_id": "s75aa607133",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 15,
+      "target": "uptownExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "uptownExplore",
+          "click_text": "Go further up the street",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "uptownExplore",
+          "divergence_cause": null,
+          "step_ms": 485
+        }
+      ],
+      "total_ms": 832,
+      "snap_id": "s6d156c2619",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 16,
+      "target": "mallExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "click_failed",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 439
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "mallExplore",
+          "click_text": "Explore the mall",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "click_failed",
+          "actual_passage": null,
+          "divergence_cause": null,
+          "step_ms": 5101,
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the mall', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "total_ms": 5902,
+      "snap_id": "s5d5eb2ebe5",
+      "diverged_at_step": 1,
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 17,
+      "target": "introCafe",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "introCafe",
+          "click_text": "Perhaps check out this cute cafe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "introCafe",
+          "divergence_cause": null,
+          "step_ms": 472
+        }
+      ],
+      "total_ms": 814,
+      "snap_id": "se882f0161b",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 18,
+      "target": "hospitalExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "click_failed",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 525
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "hospitalExplore",
+          "click_text": "Explore the hospital",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "click_failed",
+          "actual_passage": null,
+          "divergence_cause": null,
+          "step_ms": 5121,
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the hospital', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "total_ms": 5999,
+      "snap_id": "se1d80de27a",
+      "diverged_at_step": 1,
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 19,
+      "target": "doctorIntro",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "click_failed",
+      "plan_length": 3,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 506
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "hospitalExplore",
+          "click_text": "Explore the hospital",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "click_failed",
+          "actual_passage": null,
+          "divergence_cause": null,
+          "step_ms": 5140,
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the hospital', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "total_ms": 6000,
+      "snap_id": "sfd1a00713d",
+      "diverged_at_step": 1,
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 20,
+      "target": "keepExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 491
+        }
+      ],
+      "total_ms": 837,
+      "snap_id": "saad16d9866",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 21,
+      "target": "uptownExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "uptownExplore",
+          "click_text": "Go further up the street",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "uptownExplore",
+          "divergence_cause": null,
+          "step_ms": 438
+        }
+      ],
+      "total_ms": 782,
+      "snap_id": "s6f77dd3dda",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 22,
+      "target": "introCafe",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "introCafe",
+          "click_text": "Perhaps check out this cute cafe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "introCafe",
+          "divergence_cause": null,
+          "step_ms": 458
+        }
+      ],
+      "total_ms": 802,
+      "snap_id": "sa841ade28f",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 23,
+      "target": "hospitalExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 438
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "hospitalExplore",
+          "click_text": "Explore the hospital",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "hospitalExplore",
+          "divergence_cause": null,
+          "step_ms": 451
+        }
+      ],
+      "total_ms": 1237,
+      "snap_id": "sf628251275",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 24,
+      "target": "exploreOutskirts",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "click_failed",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 521
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "exploreOutskirts",
+          "click_text": "Explore the outskirts",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "click_failed",
+          "actual_passage": null,
+          "divergence_cause": null,
+          "step_ms": 5145,
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the outskirts', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "total_ms": 6028,
+      "snap_id": "s21ca0253fa",
+      "diverged_at_step": 1,
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 25,
+      "target": "exploreIntro",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 0,
+      "steps": [],
+      "total_ms": 12,
+      "snap_id": "s5a9774c037",
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 26,
+      "target": "keepExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 460
+        }
+      ],
+      "total_ms": 812,
+      "snap_id": "s3d8e5b408c",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 27,
+      "target": "uptownExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "uptownExplore",
+          "click_text": "Go further up the street",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "uptownExplore",
+          "divergence_cause": null,
+          "step_ms": 439
+        }
+      ],
+      "total_ms": 786,
+      "snap_id": "sd9e61ddfca",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 28,
+      "target": "jobIntroBar",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "click_failed",
+      "plan_length": 3,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 436
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "barExplore",
+          "click_text": "Explore the bar",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "click_failed",
+          "actual_passage": null,
+          "divergence_cause": null,
+          "step_ms": 5096,
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the bar', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "total_ms": 5881,
+      "snap_id": "sddcb15fc8f",
+      "diverged_at_step": 1,
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 29,
+      "target": "exploreOutskirts",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "click_failed",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 442
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "exploreOutskirts",
+          "click_text": "Explore the outskirts",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "click_failed",
+          "actual_passage": null,
+          "divergence_cause": null,
+          "step_ms": 5094,
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the outskirts', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "total_ms": 5886,
+      "snap_id": "s8c4f71d60a",
+      "diverged_at_step": 1,
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 30,
+      "target": "doctorIntro",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "click_failed",
+      "plan_length": 3,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 429
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "hospitalExplore",
+          "click_text": "Explore the hospital",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "click_failed",
+          "actual_passage": null,
+          "divergence_cause": null,
+          "step_ms": 5115,
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the hospital', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "total_ms": 5896,
+      "snap_id": "s5fe80e1484",
+      "diverged_at_step": 1,
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 31,
+      "target": "uptownExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "uptownExplore",
+          "click_text": "Go further up the street",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "uptownExplore",
+          "divergence_cause": null,
+          "step_ms": 438
+        }
+      ],
+      "total_ms": 785,
+      "snap_id": "s9be63a662c",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 32,
+      "target": "doctorIntro",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "click_failed",
+      "plan_length": 3,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 437
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "hospitalExplore",
+          "click_text": "Explore the hospital",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "click_failed",
+          "actual_passage": null,
+          "divergence_cause": null,
+          "step_ms": 5107,
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the hospital', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "total_ms": 5903,
+      "snap_id": "sa16d2d37ff",
+      "diverged_at_step": 1,
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 33,
+      "target": "hospitalExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "click_failed",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 446
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "hospitalExplore",
+          "click_text": "Explore the hospital",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "click_failed",
+          "actual_passage": null,
+          "divergence_cause": null,
+          "step_ms": 5069,
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the hospital', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "total_ms": 5865,
+      "snap_id": "s7cbbec9f77",
+      "diverged_at_step": 1,
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 34,
+      "target": "exploreIntro",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 0,
+      "steps": [],
+      "total_ms": 12,
+      "snap_id": "safd422a1f6",
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 35,
+      "target": "exploreIntro",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 0,
+      "steps": [],
+      "total_ms": 13,
+      "snap_id": "s10c5b968b7",
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 36,
+      "target": "keepExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 456
+        }
+      ],
+      "total_ms": 839,
+      "snap_id": "seaaf64d393",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 37,
+      "target": "doctorIntro",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "click_failed",
+      "plan_length": 3,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 467
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "hospitalExplore",
+          "click_text": "Explore the hospital",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "click_failed",
+          "actual_passage": null,
+          "divergence_cause": null,
+          "step_ms": 5084,
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the hospital', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "total_ms": 5924,
+      "snap_id": "s6344b51d71",
+      "diverged_at_step": 1,
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 38,
+      "target": "downtownExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "downtownExplore",
+          "click_text": "Go further down the street",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "downtownExplore",
+          "divergence_cause": null,
+          "step_ms": 462
+        }
+      ],
+      "total_ms": 813,
+      "snap_id": "se77307f95f",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 39,
+      "target": "barExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "click_failed",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 490
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "barExplore",
+          "click_text": "Explore the bar",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "click_failed",
+          "actual_passage": null,
+          "divergence_cause": null,
+          "step_ms": 5133,
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the bar', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "total_ms": 5983,
+      "snap_id": "s9785af1d7f",
+      "diverged_at_step": 1,
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 40,
+      "target": "hospitalExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "click_failed",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 398
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "hospitalExplore",
+          "click_text": "Explore the hospital",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "click_failed",
+          "actual_passage": null,
+          "divergence_cause": null,
+          "step_ms": 5106,
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the hospital', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "total_ms": 5852,
+      "snap_id": "sa0d0f77a40",
+      "diverged_at_step": 1,
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 41,
+      "target": "keepExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 524
+        }
+      ],
+      "total_ms": 867,
+      "snap_id": "s58c3d4b519",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 42,
+      "target": "downtownExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "downtownExplore",
+          "click_text": "Go further down the street",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "downtownExplore",
+          "divergence_cause": null,
+          "step_ms": 464
+        }
+      ],
+      "total_ms": 815,
+      "snap_id": "s4d5a4f819e",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 43,
+      "target": "doctorIntro",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "click_failed",
+      "plan_length": 3,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 440
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "hospitalExplore",
+          "click_text": "Explore the hospital",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "click_failed",
+          "actual_passage": null,
+          "divergence_cause": null,
+          "step_ms": 5080,
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the hospital', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "total_ms": 5864,
+      "snap_id": "s7949e481a4",
+      "diverged_at_step": 1,
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 44,
+      "target": "exploreOutskirts",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "click_failed",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 421
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "exploreOutskirts",
+          "click_text": "Explore the outskirts",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "click_failed",
+          "actual_passage": null,
+          "divergence_cause": null,
+          "step_ms": 5085,
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the outskirts', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "total_ms": 5853,
+      "snap_id": "s32c616c092",
+      "diverged_at_step": 1,
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 45,
+      "target": "downtownExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "downtownExplore",
+          "click_text": "Go further down the street",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "downtownExplore",
+          "divergence_cause": null,
+          "step_ms": 464
+        }
+      ],
+      "total_ms": 820,
+      "snap_id": "s329efe099e",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 46,
+      "target": "keepExplore",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 500
+        }
+      ],
+      "total_ms": 843,
+      "snap_id": "s1d154d4e0c",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 47,
+      "target": "introCafe",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "introCafe",
+          "click_text": "Perhaps check out this cute cafe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "introCafe",
+          "divergence_cause": null,
+          "step_ms": 472
+        }
+      ],
+      "total_ms": 817,
+      "snap_id": "s4670255d8b",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 48,
+      "target": "jobIntroBar",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 3,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "exploreIntro",
+          "expected_to": "keepExplore",
+          "click_text": "Just enjoy the scenery and walk along",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "keepExplore",
+          "divergence_cause": null,
+          "step_ms": 434
+        },
+        {
+          "step_index": 1,
+          "expected_from": "keepExplore",
+          "expected_to": "barExplore",
+          "click_text": "Explore the bar",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "barExplore",
+          "divergence_cause": null,
+          "step_ms": 418
+        },
+        {
+          "step_index": 2,
+          "expected_from": "barExplore",
+          "expected_to": "jobIntroBar",
+          "click_text": "Ask for a job",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "jobIntroBar",
+          "divergence_cause": null,
+          "step_ms": 420
+        }
+      ],
+      "total_ms": 1621,
+      "snap_id": "s006412af38",
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 49,
+      "target": "exploreIntro",
+      "pre_trial_passage": "exploreIntro",
+      "outcome": "clean",
+      "plan_length": 0,
+      "steps": [],
+      "total_ms": 12,
+      "snap_id": "s3dd5f8f2bc",
+      "target_class": "gated_satisfiable"
+    }
+  ]
+}

@@ -1,0 +1,1648 @@
+{
+  "slug": "zaras-school-life",
+  "seed": 1,
+  "trial_count": 50,
+  "target_strategy": "random_reachable",
+  "max_depth": 7,
+  "generated_at": "2026-04-17T07:37:06.501Z",
+  "summary": {
+    "trial_count": 50,
+    "measurable_trials": 50,
+    "clean_completion_rate": 1,
+    "clean_completion_rate_of_total": 1,
+    "divergence_rate": 0,
+    "click_failed_rate": 0,
+    "plan_failed_rate": 0,
+    "plan_too_long_rate": 0,
+    "snap_failed_rate": 0,
+    "restore_mishap_rate": 0,
+    "divergence_breakdown": {},
+    "per_depth": {
+      "1": {
+        "trials": 29,
+        "failure_rate": 0
+      },
+      "2": {
+        "trials": 21,
+        "failure_rate": 0
+      }
+    },
+    "per_target_class": {
+      "open": {
+        "trials": 50,
+        "clean": 50,
+        "diverged": 0,
+        "click_failed": 0,
+        "plan_failed": 0,
+        "clean_rate": 1,
+        "clean_rate_of_measurable": 1
+      }
+    },
+    "worst_source_passages": [],
+    "median_step_ms": 975
+  },
+  "trials": [
+    {
+      "trial_id": 0,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1332
+        },
+        {
+          "step_index": 1,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 1069
+        }
+      ],
+      "total_ms": 2814,
+      "snap_id": "sbc52c94680",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 1,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1144
+        }
+      ],
+      "total_ms": 1497,
+      "snap_id": "sb03686b484",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 2,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1162
+        },
+        {
+          "step_index": 1,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 994
+        }
+      ],
+      "total_ms": 2518,
+      "snap_id": "sb46ccbbfa0",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 3,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 975
+        },
+        {
+          "step_index": 1,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 955
+        }
+      ],
+      "total_ms": 2281,
+      "snap_id": "s76f7497fbe",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 4,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 997
+        },
+        {
+          "step_index": 1,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 949
+        }
+      ],
+      "total_ms": 2305,
+      "snap_id": "sdc30cdb812",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 5,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1005
+        }
+      ],
+      "total_ms": 1363,
+      "snap_id": "s5a5665a045",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 6,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 941
+        },
+        {
+          "step_index": 1,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 908
+        }
+      ],
+      "total_ms": 2320,
+      "snap_id": "sc369a9a7f9",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 7,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1005
+        },
+        {
+          "step_index": 1,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 889
+        }
+      ],
+      "total_ms": 2263,
+      "snap_id": "se02c07d204",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 8,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1006
+        }
+      ],
+      "total_ms": 1371,
+      "snap_id": "s19029c17b6",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 9,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 903
+        },
+        {
+          "step_index": 1,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 943
+        }
+      ],
+      "total_ms": 2222,
+      "snap_id": "s394a291219",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 10,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1048
+        }
+      ],
+      "total_ms": 1410,
+      "snap_id": "s65721bd86f",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 11,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 930
+        }
+      ],
+      "total_ms": 1433,
+      "snap_id": "sebd88e8e2f",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 12,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 974
+        }
+      ],
+      "total_ms": 1315,
+      "snap_id": "s96c830c2cf",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 13,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 974
+        }
+      ],
+      "total_ms": 1339,
+      "snap_id": "s2e927729fa",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 14,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 936
+        }
+      ],
+      "total_ms": 1298,
+      "snap_id": "s3125116bbf",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 15,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 939
+        }
+      ],
+      "total_ms": 1408,
+      "snap_id": "sb578e9775a",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 16,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1032
+        }
+      ],
+      "total_ms": 1401,
+      "snap_id": "sf510334b2d",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 17,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 910
+        }
+      ],
+      "total_ms": 1252,
+      "snap_id": "s603f647a91",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 18,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1112
+        }
+      ],
+      "total_ms": 1470,
+      "snap_id": "s74581f0a41",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 19,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1004
+        },
+        {
+          "step_index": 1,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 937
+        }
+      ],
+      "total_ms": 2314,
+      "snap_id": "s1844b908de",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 20,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 960
+        }
+      ],
+      "total_ms": 1318,
+      "snap_id": "sf16493f92c",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 21,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 957
+        }
+      ],
+      "total_ms": 1317,
+      "snap_id": "s8c82aa2651",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 22,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 993
+        }
+      ],
+      "total_ms": 1347,
+      "snap_id": "s631f0b46ef",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 23,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 911
+        }
+      ],
+      "total_ms": 1367,
+      "snap_id": "sc03bf26a6d",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 24,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1023
+        },
+        {
+          "step_index": 1,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 958
+        }
+      ],
+      "total_ms": 2334,
+      "snap_id": "sb74fa393d2",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 25,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1026
+        },
+        {
+          "step_index": 1,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 890
+        }
+      ],
+      "total_ms": 2268,
+      "snap_id": "s5bf6d592df",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 26,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1109
+        }
+      ],
+      "total_ms": 1467,
+      "snap_id": "s88e90d4b54",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 27,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 985
+        }
+      ],
+      "total_ms": 1331,
+      "snap_id": "s8f85cc58b6",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 28,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 961
+        },
+        {
+          "step_index": 1,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 990
+        }
+      ],
+      "total_ms": 2300,
+      "snap_id": "s002d0ad526",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 29,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 911
+        },
+        {
+          "step_index": 1,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 970
+        }
+      ],
+      "total_ms": 2235,
+      "snap_id": "s030e46bcd3",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 30,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 922
+        },
+        {
+          "step_index": 1,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 1057
+        }
+      ],
+      "total_ms": 2376,
+      "snap_id": "scbcef5319a",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 31,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 928
+        }
+      ],
+      "total_ms": 1279,
+      "snap_id": "s22c1793a30",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 32,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1142
+        },
+        {
+          "step_index": 1,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 1051
+        }
+      ],
+      "total_ms": 2544,
+      "snap_id": "s520a757032",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 33,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 941
+        }
+      ],
+      "total_ms": 1405,
+      "snap_id": "sc977d22606",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 34,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1132
+        },
+        {
+          "step_index": 1,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 901
+        }
+      ],
+      "total_ms": 2445,
+      "snap_id": "s531e6a23c3",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 35,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1008
+        },
+        {
+          "step_index": 1,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 875
+        }
+      ],
+      "total_ms": 2233,
+      "snap_id": "s05a4b25950",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 36,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1109
+        }
+      ],
+      "total_ms": 1467,
+      "snap_id": "s6ee755b5c1",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 37,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1057
+        },
+        {
+          "step_index": 1,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 873
+        }
+      ],
+      "total_ms": 2362,
+      "snap_id": "s2984936678",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 38,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 996
+        }
+      ],
+      "total_ms": 1354,
+      "snap_id": "s69af40a586",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 39,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 958
+        }
+      ],
+      "total_ms": 1417,
+      "snap_id": "s030244c199",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 40,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1012
+        }
+      ],
+      "total_ms": 1383,
+      "snap_id": "sccc35531f0",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 41,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 939
+        }
+      ],
+      "total_ms": 1336,
+      "snap_id": "s40ea789234",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 42,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1027
+        }
+      ],
+      "total_ms": 1498,
+      "snap_id": "s94e8da0d7d",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 43,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 888
+        },
+        {
+          "step_index": 1,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 975
+        }
+      ],
+      "total_ms": 2215,
+      "snap_id": "sbc0383e8f0",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 44,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 991
+        },
+        {
+          "step_index": 1,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 992
+        }
+      ],
+      "total_ms": 2333,
+      "snap_id": "s3c6a841e09",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 45,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 943
+        }
+      ],
+      "total_ms": 1283,
+      "snap_id": "s8f59b6857a",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 46,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 970
+        }
+      ],
+      "total_ms": 1333,
+      "snap_id": "s46f0742c76",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 47,
+      "target": "Room",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 994
+        }
+      ],
+      "total_ms": 1333,
+      "snap_id": "s304cc817b6",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 48,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1077
+        },
+        {
+          "step_index": 1,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 1056
+        }
+      ],
+      "total_ms": 2484,
+      "snap_id": "s04658a7f27",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 49,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Living room",
+      "outcome": "clean",
+      "plan_length": 2,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Living room",
+          "expected_to": "Room",
+          "click_text": "Enter bedroom",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Room",
+          "divergence_cause": null,
+          "step_ms": 1064
+        },
+        {
+          "step_index": 1,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 949
+        }
+      ],
+      "total_ms": 2365,
+      "snap_id": "s74339a8178",
+      "restore_ok": true,
+      "restore_passage": "Living room",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    }
+  ]
+}

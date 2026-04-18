@@ -1,0 +1,414 @@
+{
+  "generated_at": "2026-04-17T16:36:39.909Z",
+  "total_observed_edges": 21,
+  "total_synthetic_edges": 1,
+  "total_play_log_entries": 96,
+  "total_timeline_entries": 78,
+  "initial_passage": "Start",
+  "orphan_clicks": [],
+  "observed_edges": [
+    {
+      "from": "Start",
+      "clicked_text": null,
+      "to": "Intro",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776443219773,
+      "last_observed_ts": 1776443219773,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Intro",
+      "clicked_text": "Start",
+      "to": "Untitled Passage",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776443226811,
+      "last_observed_ts": 1776443226811,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Untitled Passage",
+      "clicked_text": "Room",
+      "to": "RD1",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776443290045,
+      "last_observed_ts": 1776443290045,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "RD1",
+      "clicked_text": "Next",
+      "to": "ND1",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776443342021,
+      "last_observed_ts": 1776443342021,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "ND1",
+      "clicked_text": "Next",
+      "to": "N2D1",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776443348819,
+      "last_observed_ts": 1776443348819,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "N2D1",
+      "clicked_text": "Home",
+      "to": "HD1",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776443430639,
+      "last_observed_ts": 1776443430639,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "HD1",
+      "clicked_text": "Sleep",
+      "to": "SD1",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776443437210,
+      "last_observed_ts": 1776443437210,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "SD1",
+      "clicked_text": "Shower",
+      "to": "SD2",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776443487184,
+      "last_observed_ts": 1776443487184,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "SD2",
+      "clicked_text": "About her mother",
+      "to": "About her mother",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776443524675,
+      "last_observed_ts": 1776443524675,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "About her mother",
+      "clicked_text": "Next",
+      "to": "N2D2",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776443555895,
+      "last_observed_ts": 1776443555895,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "N2D2",
+      "clicked_text": "Diary",
+      "to": "Diary",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776443610647,
+      "last_observed_ts": 1776443610647,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Diary",
+      "clicked_text": "Next",
+      "to": "N3D2",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776443611163,
+      "last_observed_ts": 1776443611163,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "N3D2",
+      "clicked_text": "Sleep",
+      "to": "DAY 3",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776443637866,
+      "last_observed_ts": 1776443637866,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "DAY 3",
+      "clicked_text": "College",
+      "to": "CD3",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776443685524,
+      "last_observed_ts": 1776443685524,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "CD3",
+      "clicked_text": "Next",
+      "to": "N4D2",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776443685946,
+      "last_observed_ts": 1776443685946,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "N4D2",
+      "clicked_text": "Next",
+      "to": "N5D2",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776443686375,
+      "last_observed_ts": 1776443686375,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "N5D2",
+      "clicked_text": "Principal room",
+      "to": "Principal room",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776443719908,
+      "last_observed_ts": 1776443719908,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Principal room",
+      "clicked_text": "Next",
+      "to": "N6D3",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776443720355,
+      "last_observed_ts": 1776443720355,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "blowjob": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "N6D3",
+      "clicked_text": "Next",
+      "to": "N7D3",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776443720772,
+      "last_observed_ts": 1776443720772,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "N7D3",
+      "clicked_text": "Have sex with him",
+      "to": "Have sex with him",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776443757909,
+      "last_observed_ts": 1776443757909,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "corruption": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "havesex": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "N7D3",
+      "clicked_text": "Preserve your virgintiy for future",
+      "to": "Preserve your virgintiy for future",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776443772171,
+      "last_observed_ts": 1776443772171,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    }
+  ],
+  "synthetic_edges": [
+    {
+      "cmd": "restore",
+      "from": "Have sex with him",
+      "to": "N7D3",
+      "observation_count": 1,
+      "first_observed_ts": 1776443771801,
+      "last_observed_ts": 1776443771801,
+      "effect_aggregate": {
+        "corruption": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -1,
+            "max_delta": -1,
+            "mean_delta": -1,
+            "always_same_delta": true
+          }
+        },
+        "havesex": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            true
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        }
+      }
+    }
+  ],
+  "coverage": {
+    "static_edges_total": 591,
+    "observed_static_edges": 21,
+    "unobserved_static_edges": 570,
+    "coverage_ratio": 0.0355,
+    "observed_only_edges": 0
+  }
+}

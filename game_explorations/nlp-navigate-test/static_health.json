@@ -1,0 +1,413 @@
+{
+  "generated_at": "2026-04-17T16:06:01.800Z",
+  "slug": "nlp-navigate-test",
+  "ambiguous_clicks": {
+    "total_edges_with_text": 3335,
+    "raw_duplicate_buckets": 252,
+    "definite_ambiguous_edges": 24,
+    "definite_ambiguous_rate": 0.00719640179910045,
+    "potential_ambiguous_edges": 74,
+    "potential_ambiguous_rate": 0.022188905547226388,
+    "top_definite": [
+      {
+        "from": "buffMan",
+        "text": "Clean up",
+        "edge_count": 2,
+        "distinct_firing_targets": 2,
+        "gate_true": 2,
+        "gate_unknown": 0,
+        "gate_false": 0
+      },
+      {
+        "from": "cafeDefault",
+        "text": "Finish tasks",
+        "edge_count": 2,
+        "distinct_firing_targets": 2,
+        "gate_true": 2,
+        "gate_unknown": 0,
+        "gate_false": 0
+      },
+      {
+        "from": "cafeDishes",
+        "text": "Finish shift",
+        "edge_count": 2,
+        "distinct_firing_targets": 2,
+        "gate_true": 2,
+        "gate_unknown": 0,
+        "gate_false": 0
+      },
+      {
+        "from": "cafeWait",
+        "text": "Finish shift",
+        "edge_count": 2,
+        "distinct_firing_targets": 2,
+        "gate_true": 2,
+        "gate_unknown": 0,
+        "gate_false": 0
+      },
+      {
+        "from": "crookedMan",
+        "text": "Clean up",
+        "edge_count": 2,
+        "distinct_firing_targets": 2,
+        "gate_true": 2,
+        "gate_unknown": 0,
+        "gate_false": 0
+      },
+      {
+        "from": "roudyMan",
+        "text": "Clean up",
+        "edge_count": 2,
+        "distinct_firing_targets": 2,
+        "gate_true": 2,
+        "gate_unknown": 0,
+        "gate_false": 0
+      },
+      {
+        "from": "slimMan",
+        "text": "Clean up",
+        "edge_count": 2,
+        "distinct_firing_targets": 2,
+        "gate_true": 2,
+        "gate_unknown": 0,
+        "gate_false": 0
+      },
+      {
+        "from": "tableClear",
+        "text": "Finish shift",
+        "edge_count": 2,
+        "distinct_firing_targets": 2,
+        "gate_true": 2,
+        "gate_unknown": 0,
+        "gate_false": 0
+      },
+      {
+        "from": "tallMan",
+        "text": "Clean up",
+        "edge_count": 2,
+        "distinct_firing_targets": 2,
+        "gate_true": 2,
+        "gate_unknown": 0,
+        "gate_false": 0
+      },
+      {
+        "from": "zackPhone",
+        "text": "Ask him on a date",
+        "edge_count": 2,
+        "distinct_firing_targets": 2,
+        "gate_true": 2,
+        "gate_unknown": 0,
+        "gate_false": 0
+      }
+    ],
+    "top_potential": [
+      {
+        "from": "trainDestination",
+        "text": "Step off",
+        "edge_count": 9,
+        "distinct_potential_targets": 3,
+        "gate_true": 0,
+        "gate_unknown": 9,
+        "gate_false": 0
+      },
+      {
+        "from": "trainSit",
+        "text": "Step off",
+        "edge_count": 9,
+        "distinct_potential_targets": 3,
+        "gate_true": 0,
+        "gate_unknown": 9,
+        "gate_false": 0
+      },
+      {
+        "from": "trainStand",
+        "text": "Step off",
+        "edge_count": 9,
+        "distinct_potential_targets": 3,
+        "gate_true": 0,
+        "gate_unknown": 9,
+        "gate_false": 0
+      },
+      {
+        "from": "Phone",
+        "text": "Tap to view",
+        "edge_count": 4,
+        "distinct_potential_targets": 2,
+        "gate_true": 0,
+        "gate_unknown": 2,
+        "gate_false": 2
+      },
+      {
+        "from": "swimLake",
+        "text": "Exit waters",
+        "edge_count": 3,
+        "distinct_potential_targets": 2,
+        "gate_true": 0,
+        "gate_unknown": 3,
+        "gate_false": 0
+      },
+      {
+        "from": "city",
+        "text": "Upscale apartments",
+        "edge_count": 2,
+        "distinct_potential_targets": 2,
+        "gate_true": 0,
+        "gate_unknown": 2,
+        "gate_false": 0
+      },
+      {
+        "from": "city",
+        "text": "JJ's PI",
+        "edge_count": 2,
+        "distinct_potential_targets": 2,
+        "gate_true": 0,
+        "gate_unknown": 2,
+        "gate_false": 0
+      },
+      {
+        "from": "spinJob",
+        "text": "Staff room",
+        "edge_count": 2,
+        "distinct_potential_targets": 2,
+        "gate_true": 0,
+        "gate_unknown": 2,
+        "gate_false": 0
+      },
+      {
+        "from": "lilyEndFuck",
+        "text": "Clean up",
+        "edge_count": 2,
+        "distinct_potential_targets": 2,
+        "gate_true": 0,
+        "gate_unknown": 2,
+        "gate_false": 0
+      },
+      {
+        "from": "endDayDad",
+        "text": "End your date",
+        "edge_count": 2,
+        "distinct_potential_targets": 2,
+        "gate_true": 0,
+        "gate_unknown": 2,
+        "gate_false": 0
+      }
+    ]
+  },
+  "dynamic_goto": {
+    "passages_with_dynamic_goto": 3,
+    "total_passages": 1636,
+    "dynamic_goto_rate": 0.0018337408312958435,
+    "samples": [
+      {
+        "passage": "oldPhoneText",
+        "sample": "<<goto $oldphonePIN>>"
+      },
+      {
+        "passage": "oldPhoneApps",
+        "sample": "<<goto $oldphonePIN>>"
+      },
+      {
+        "passage": "oldPhonePic",
+        "sample": "<<goto $oldphonePIN>>"
+      }
+    ]
+  },
+  "gate_eval": {
+    "gated_edges": 1920,
+    "gate_true": 225,
+    "gate_false": 768,
+    "gate_unknown": 927,
+    "gate_unknown_rate": 0.4828125,
+    "unknown_temp_only": 63,
+    "unknown_story_only": 596,
+    "unknown_mixed": 268,
+    "effective_unknown": 864,
+    "effective_unknown_rate": 0.45,
+    "unknown_story_samples": [
+      {
+        "from": "Cafe",
+        "to": "cafeJob",
+        "display": "Apply for a job at the cafe",
+        "gate": [
+          {
+            "condition": "$period lte 5",
+            "branch": "if"
+          },
+          {
+            "condition": "$job is \"No job\"",
+            "branch": "if"
+          },
+          {
+            "condition": "visited(\"cafeJob\") is 0",
+            "branch": "if"
+          }
+        ]
+      },
+      {
+        "from": "Cafe",
+        "to": "cafeJob",
+        "display": "Apply for your job back...",
+        "gate": [
+          {
+            "condition": "$period lte 5",
+            "branch": "if"
+          },
+          {
+            "condition": "$job is \"No job\"",
+            "branch": "if"
+          },
+          {
+            "condition": "!(visited(\"cafeJob\") is 0)",
+            "branch": "else"
+          }
+        ]
+      },
+      {
+        "from": "Laptop",
+        "to": "laptopMails",
+        "display": "\"Emails (\" + $emails + \")\"",
+        "gate": [
+          {
+            "condition": "$emails gte 1",
+            "branch": "if"
+          }
+        ]
+      },
+      {
+        "from": "Library",
+        "to": "chloeArch",
+        "display": "Ask Chloe about archived buildings",
+        "gate": [
+          {
+            "condition": "$doubleQuest is true && visited(\"chloeArch\") is 0",
+            "branch": "if"
+          }
+        ]
+      },
+      {
+        "from": "Library",
+        "to": "bookSex",
+        "display": "Find the Kama Sutra",
+        "gate": [
+          {
+            "condition": "$period lte 5",
+            "branch": "if"
+          },
+          {
+            "condition": "$booksRead gte 70",
+            "branch": "if"
+          }
+        ]
+      },
+      {
+        "from": "PI",
+        "to": "questPI",
+        "display": null,
+        "gate": [
+          {
+            "condition": "$questPI is true",
+            "branch": "if"
+          }
+        ]
+      },
+      {
+        "from": "Park",
+        "to": "parkBike",
+        "display": "Ride your bike around the park",
+        "gate": [
+          {
+            "condition": "$period lte 5",
+            "branch": "if"
+          },
+          {
+            "condition": "$bike is true && $bikeCond eq \"good\"",
+            "branch": "if"
+          }
+        ]
+      },
+      {
+        "from": "Phone",
+        "to": "GMA",
+        "display": "GMA Banking",
+        "gate": [
+          {
+            "condition": "$atm is true",
+            "branch": "if"
+          }
+        ]
+      },
+      {
+        "from": "Phone",
+        "to": "phoneNotes",
+        "display": "Check your notes",
+        "gate": [
+          {
+            "condition": "!(ndef $notesArray)",
+            "branch": "else"
+          }
+        ]
+      },
+      {
+        "from": "Phone",
+        "to": "messageRalph",
+        "display": "Tap to view",
+        "gate": [
+          {
+            "condition": "$ralphText is true",
+            "branch": "if"
+          }
+        ]
+      }
+    ]
+  },
+  "complex_setters": {
+    "total_variables": 668,
+    "parsed_setters": 2845,
+    "complex_setter_count": 15,
+    "parse_errors": 15,
+    "skipped_script_blocks": 20,
+    "skipped_widget_passages": 64,
+    "complex_setter_density": 0.005244755244755245,
+    "indexing_coverage": "partial"
+  },
+  "pass_bar": {
+    "checks": [
+      {
+        "name": "definite_ambiguous_rate",
+        "value": 0.00719640179910045,
+        "bar": 0.05,
+        "cmp": "lte",
+        "pass": true
+      },
+      {
+        "name": "potential_ambiguous_rate",
+        "value": 0.022188905547226388,
+        "bar": 0.2,
+        "cmp": "lte",
+        "pass": true
+      },
+      {
+        "name": "dynamic_goto_rate",
+        "value": 0.0018337408312958435,
+        "bar": 0.1,
+        "cmp": "lte",
+        "pass": true
+      },
+      {
+        "name": "effective_gate_unknown_rate",
+        "value": 0.45,
+        "bar": 0.3,
+        "cmp": "lte",
+        "pass": false
+      },
+      {
+        "name": "complex_setter_density",
+        "value": 0.005244755244755245,
+        "bar": 0.05,
+        "cmp": "lt",
+        "pass": true
+      }
+    ],
+    "overall_pass": false
+  }
+}

@@ -1,0 +1,962 @@
+{
+  "slug": "road-to-success",
+  "seed": 1,
+  "trial_count": 30,
+  "target_strategy": "random_reachable",
+  "max_depth": 7,
+  "generated_at": "2026-04-17T16:26:57.028Z",
+  "summary": {
+    "trial_count": 30,
+    "measurable_trials": 30,
+    "clean_completion_rate": 0.5,
+    "clean_completion_rate_of_total": 0.5,
+    "divergence_rate": 0,
+    "click_failed_rate": 0,
+    "plan_failed_rate": 0,
+    "plan_too_long_rate": 0,
+    "snap_failed_rate": 0,
+    "aborted_rate": 0.5,
+    "restore_mishap_rate": 0,
+    "divergence_breakdown": {},
+    "abort_reason_breakdown": {
+      "unknown_gate_blocked": 0.3,
+      "prereq_no_setter": 0.1,
+      "not_navigable": 0.1
+    },
+    "per_strategy": {
+      "navigate": {
+        "trials": 30,
+        "clean": 15,
+        "aborted": 15,
+        "diverged": 0,
+        "click_failed": 0,
+        "plan_failed": 0,
+        "plan_too_long": 0,
+        "snap_failed": 0,
+        "clean_rate_of_measurable": 0.5,
+        "clean_rate_of_total": 0.5
+      }
+    },
+    "per_depth": {
+      "0": {
+        "trials": 30,
+        "failure_rate": 0.5
+      }
+    },
+    "per_target_class": {
+      "gated_satisfiable": {
+        "trials": 15,
+        "clean": 0,
+        "diverged": 0,
+        "click_failed": 0,
+        "plan_failed": 0,
+        "clean_rate": 0,
+        "clean_rate_of_measurable": 0
+      },
+      "open": {
+        "trials": 15,
+        "clean": 15,
+        "diverged": 0,
+        "click_failed": 0,
+        "plan_failed": 0,
+        "clean_rate": 1,
+        "clean_rate_of_measurable": 1
+      }
+    },
+    "worst_source_passages": [],
+    "median_step_ms": 0,
+    "subgoals_attempted": 0,
+    "subgoals_succeeded": 0,
+    "subgoal_success_rate": null,
+    "navigate_click_events": 16,
+    "navigate_prereq_events": 0
+  },
+  "trials": [
+    {
+      "trial_id": 0,
+      "target": "BedroomMasturbate",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "unknown_gate_blocked",
+      "navigate_trace": [
+        {
+          "kind": "abort",
+          "reason": "unknown_gate_blocked",
+          "at": "Bedroom",
+          "click_text": "Masturbate 🍆",
+          "expected_to": "BedroomMasturbate",
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Masturbate 🍆', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 0,
+      "total_ms": 16429,
+      "snap_id": "s37836cfda3",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 1,
+      "target": "BedroomStudy",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "Bedroom",
+          "click_text": "Study 📖",
+          "to": "BedroomStudy",
+          "gate_result": true
+        },
+        {
+          "kind": "reached",
+          "at": "BedroomStudy"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 7349,
+      "snap_id": "s19ebf14119",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 2,
+      "target": "Laptop",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "unknown_gate_blocked",
+      "navigate_trace": [
+        {
+          "kind": "abort",
+          "reason": "unknown_gate_blocked",
+          "at": "Bedroom",
+          "click_text": "Laptop 💻",
+          "expected_to": "Laptop",
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Laptop 💻', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 0,
+      "total_ms": 16316,
+      "snap_id": "s8658344978",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 3,
+      "target": "BedroomSleep",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "prereq_no_setter",
+      "navigate_trace": [
+        {
+          "kind": "abort",
+          "reason": "prereq_no_setter",
+          "at": "Bedroom",
+          "blocking_gate": [
+            {
+              "condition": "$game.time == \"N\" || $game.time == \"LN\"",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 0,
+      "total_ms": 11070,
+      "snap_id": "se36ca06fe0",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "blocking_gate": [
+        {
+          "condition": "$game.time == \"N\" || $game.time == \"LN\"",
+          "branch": "if"
+        }
+      ],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 4,
+      "target": "BedroomSleep",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "prereq_no_setter",
+      "navigate_trace": [
+        {
+          "kind": "abort",
+          "reason": "prereq_no_setter",
+          "at": "Bedroom",
+          "blocking_gate": [
+            {
+              "condition": "$game.time == \"N\" || $game.time == \"LN\"",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 0,
+      "total_ms": 11258,
+      "snap_id": "s0c57607150",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "blocking_gate": [
+        {
+          "condition": "$game.time == \"N\" || $game.time == \"LN\"",
+          "branch": "if"
+        }
+      ],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 5,
+      "target": "OldSaveImport",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "Bedroom",
+          "click_text": "Import Old Save 💾",
+          "to": "OldSaveImport",
+          "gate_result": true
+        },
+        {
+          "kind": "reached",
+          "at": "OldSaveImport"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 7340,
+      "snap_id": "se5c6186272",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 6,
+      "target": "BedroomMasturbate",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "unknown_gate_blocked",
+      "navigate_trace": [
+        {
+          "kind": "abort",
+          "reason": "unknown_gate_blocked",
+          "at": "Bedroom",
+          "click_text": "Masturbate 🍆",
+          "expected_to": "BedroomMasturbate",
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Masturbate 🍆', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 0,
+      "total_ms": 16414,
+      "snap_id": "sa16224fd4c",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 7,
+      "target": "Birth",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "not_navigable",
+      "navigate_trace": [
+        {
+          "kind": "abort",
+          "reason": "not_navigable",
+          "at": "Bedroom",
+          "edge_kind": "goto",
+          "to": "Birth"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 0,
+      "total_ms": 5792,
+      "snap_id": "s0e7e107f37",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 8,
+      "target": "Hallway",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "Bedroom",
+          "click_text": "Hallway 🚪",
+          "to": "Hallway",
+          "gate_result": true
+        },
+        {
+          "kind": "reached",
+          "at": "Hallway"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 7619,
+      "snap_id": "sff2a4c53f0",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 9,
+      "target": "BedroomSleep",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "prereq_no_setter",
+      "navigate_trace": [
+        {
+          "kind": "abort",
+          "reason": "prereq_no_setter",
+          "at": "Bedroom",
+          "blocking_gate": [
+            {
+              "condition": "$game.time == \"N\" || $game.time == \"LN\"",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 0,
+      "total_ms": 11115,
+      "snap_id": "s5a4d45285f",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "blocking_gate": [
+        {
+          "condition": "$game.time == \"N\" || $game.time == \"LN\"",
+          "branch": "if"
+        }
+      ],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 10,
+      "target": "Laptop",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "unknown_gate_blocked",
+      "navigate_trace": [
+        {
+          "kind": "abort",
+          "reason": "unknown_gate_blocked",
+          "at": "Bedroom",
+          "click_text": "Laptop 💻",
+          "expected_to": "Laptop",
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Laptop 💻', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 0,
+      "total_ms": 16323,
+      "snap_id": "s039bd3f4ed",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 11,
+      "target": "Laptop",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "unknown_gate_blocked",
+      "navigate_trace": [
+        {
+          "kind": "abort",
+          "reason": "unknown_gate_blocked",
+          "at": "Bedroom",
+          "click_text": "Laptop 💻",
+          "expected_to": "Laptop",
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Laptop 💻', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 0,
+      "total_ms": 16317,
+      "snap_id": "sb152417a82",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 12,
+      "target": "Wardrobe",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "Bedroom",
+          "click_text": "Wardrobe 👚",
+          "to": "Wardrobe",
+          "gate_result": true
+        },
+        {
+          "kind": "reached",
+          "at": "Wardrobe"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 7167,
+      "snap_id": "sa2b8ab50fd",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 13,
+      "target": "Hallway",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "Bedroom",
+          "click_text": "Hallway 🚪",
+          "to": "Hallway",
+          "gate_result": true
+        },
+        {
+          "kind": "reached",
+          "at": "Hallway"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 7400,
+      "snap_id": "s38e6a5400c",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 14,
+      "target": "OldSaveImport",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "Bedroom",
+          "click_text": "Import Old Save 💾",
+          "to": "OldSaveImport",
+          "gate_result": true
+        },
+        {
+          "kind": "reached",
+          "at": "OldSaveImport"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 7169,
+      "snap_id": "sfd2f1b86a5",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 15,
+      "target": "Wardrobe",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "Bedroom",
+          "click_text": "Wardrobe 👚",
+          "to": "Wardrobe",
+          "gate_result": true
+        },
+        {
+          "kind": "reached",
+          "at": "Wardrobe"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 7348,
+      "snap_id": "sa9a244ea57",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 16,
+      "target": "Laptop",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "unknown_gate_blocked",
+      "navigate_trace": [
+        {
+          "kind": "abort",
+          "reason": "unknown_gate_blocked",
+          "at": "Bedroom",
+          "click_text": "Laptop 💻",
+          "expected_to": "Laptop",
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Laptop 💻', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 0,
+      "total_ms": 16463,
+      "snap_id": "s910556a06a",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 17,
+      "target": "BedroomStudy",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "Bedroom",
+          "click_text": "Study 📖",
+          "to": "BedroomStudy",
+          "gate_result": true
+        },
+        {
+          "kind": "reached",
+          "at": "BedroomStudy"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 7633,
+      "snap_id": "s6108be6d8e",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 18,
+      "target": "Hallway",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "Bedroom",
+          "click_text": "Hallway 🚪",
+          "to": "Hallway",
+          "gate_result": true
+        },
+        {
+          "kind": "reached",
+          "at": "Hallway"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 7641,
+      "snap_id": "s8819eb0c24",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 19,
+      "target": "Birth",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "not_navigable",
+      "navigate_trace": [
+        {
+          "kind": "abort",
+          "reason": "not_navigable",
+          "at": "Bedroom",
+          "edge_kind": "goto",
+          "to": "Birth"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 0,
+      "total_ms": 5836,
+      "snap_id": "sdaef68a08a",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 20,
+      "target": "OldSaveImport",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "Bedroom",
+          "click_text": "Import Old Save 💾",
+          "to": "OldSaveImport",
+          "gate_result": true
+        },
+        {
+          "kind": "reached",
+          "at": "OldSaveImport"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 7498,
+      "snap_id": "s705fc53890",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 21,
+      "target": "Wardrobe",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "Bedroom",
+          "click_text": "Wardrobe 👚",
+          "to": "Wardrobe",
+          "gate_result": true
+        },
+        {
+          "kind": "reached",
+          "at": "Wardrobe"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 7328,
+      "snap_id": "s99755448bd",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 22,
+      "target": "BedroomStudy",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "Bedroom",
+          "click_text": "Study 📖",
+          "to": "BedroomStudy",
+          "gate_result": true
+        },
+        {
+          "kind": "reached",
+          "at": "BedroomStudy"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 7299,
+      "snap_id": "s6fe21516e8",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 23,
+      "target": "Hallway",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "Bedroom",
+          "click_text": "Hallway 🚪",
+          "to": "Hallway",
+          "gate_result": true
+        },
+        {
+          "kind": "reached",
+          "at": "Hallway"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 7417,
+      "snap_id": "s92df37d44a",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 24,
+      "target": "BedroomMasturbate",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "unknown_gate_blocked",
+      "navigate_trace": [
+        {
+          "kind": "abort",
+          "reason": "unknown_gate_blocked",
+          "at": "Bedroom",
+          "click_text": "Masturbate 🍆",
+          "expected_to": "BedroomMasturbate",
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Masturbate 🍆', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 0,
+      "total_ms": 16368,
+      "snap_id": "s3b22866dda",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 25,
+      "target": "ApartmentSleep",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "not_navigable",
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "Bedroom",
+          "click_text": "Import Old Save 💾",
+          "to": "OldSaveImport",
+          "gate_result": true
+        },
+        {
+          "kind": "abort",
+          "reason": "not_navigable",
+          "at": "OldSaveImport",
+          "edge_kind": "goto",
+          "to": "ApartmentSleep"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 7432,
+      "snap_id": "s68c855b047",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 26,
+      "target": "OldSaveImport",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "Bedroom",
+          "click_text": "Import Old Save 💾",
+          "to": "OldSaveImport",
+          "gate_result": true
+        },
+        {
+          "kind": "reached",
+          "at": "OldSaveImport"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 7373,
+      "snap_id": "sace605674c",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 27,
+      "target": "Wardrobe",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "Bedroom",
+          "click_text": "Wardrobe 👚",
+          "to": "Wardrobe",
+          "gate_result": true
+        },
+        {
+          "kind": "reached",
+          "at": "Wardrobe"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 7611,
+      "snap_id": "sff3bb49b99",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 28,
+      "target": "BedroomMasturbate",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "unknown_gate_blocked",
+      "navigate_trace": [
+        {
+          "kind": "abort",
+          "reason": "unknown_gate_blocked",
+          "at": "Bedroom",
+          "click_text": "Masturbate 🍆",
+          "expected_to": "BedroomMasturbate",
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Masturbate 🍆', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 0,
+      "total_ms": 16360,
+      "snap_id": "s811ba9239c",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 29,
+      "target": "Laptop",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "unknown_gate_blocked",
+      "navigate_trace": [
+        {
+          "kind": "abort",
+          "reason": "unknown_gate_blocked",
+          "at": "Bedroom",
+          "click_text": "Laptop 💻",
+          "expected_to": "Laptop",
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Laptop 💻', { exact: true }).first()\u001b[22m\n"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 0,
+      "total_ms": 16338,
+      "snap_id": "s0087af2305",
+      "pre_trial_passage": "Bedroom",
+      "steps": [],
+      "restore_ok": true,
+      "restore_passage": "Bedroom",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    }
+  ]
+}

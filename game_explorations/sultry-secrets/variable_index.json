@@ -1,0 +1,2095 @@
+{
+  "generated_at": "2026-04-17T16:26:32.021Z",
+  "indexing_coverage": "partial",
+  "total_variables": 71,
+  "skipped_script_blocks": 0,
+  "skipped_widget_passages": 0,
+  "skipped_passages": 0,
+  "parse_errors": 3,
+  "complex_setter_count": 3,
+  "variables": {
+    "$corruption": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "N6D3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "PeekScene",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "PullDavid",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "Have sex with him",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "1",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "Max",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "N10P",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "N10P3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "SDP",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "Don't lock the door",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "Do what Sarah suggested",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "SGH1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "RGH1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "DD6",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "GD7",
+          "gate": [
+            {
+              "condition": "$day7_shop==true and $day7_bj==3",
+              "branch": "elseif"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "Join the party",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "SPD7",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "N3D7",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": 1
+    },
+    "$blowjob": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "N6D3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "2",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "SGH1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "Untitled Passage 1",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": 2
+    },
+    "$day4": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "0",
+          "passage": "DAY 4",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "Stay focused and study",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "Do what Sarah suggested",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$day4_cafeteria": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "DAY 4",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "CFD4",
+          "gate": [
+            {
+              "condition": "$day4_cafeteria== false",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$day4_toilet": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "DAY 4",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "N2D4",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$toldJames": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "PeekScene",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "PeekScene",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$david_relation": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "ChooseAnotherDress",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "D2DP",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "P4D",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "Call David, hear his voice, and catch up after everything that's happened.",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$ignoredDavidChoice": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "RevealingDress",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$havesex": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "true",
+          "passage": "Have sex with him",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "false",
+          "passage": "Preserve your virgintiy for future",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "Untitled Passage 1",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$gameStarted": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "Living room",
+          "gate": [
+            {
+              "condition": "$drunk >= 6",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$drunk": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "Kitchen",
+          "gate": [
+            {
+              "condition": "$drunk==0",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "Kitchen_Drink2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "5",
+          "passage": "Kitchen_Drunk",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "6",
+          "passage": "Exit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "StoryInit",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$hole_made": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "true",
+          "passage": "Kitchen",
+          "gate": [
+            {
+              "condition": "$search_drill is true and $hole_made is false",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "false",
+          "passage": "Toilet",
+          "gate": [
+            {
+              "condition": "$washroom_first_time is false",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$washroom_first_time": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "true",
+          "passage": "Toilet",
+          "gate": [
+            {
+              "condition": "$washroom_first_time is false",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$search_drill": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "false",
+          "passage": "Toilet",
+          "gate": [
+            {
+              "condition": "$washroom_first_time is false",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "true",
+          "passage": "Toilet",
+          "gate": [
+            {
+              "condition": "$washroom_first_time is false",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$gloryhole": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "true",
+          "passage": "Toilet",
+          "gate": [
+            {
+              "condition": "$hole_made is true",
+              "branch": "elseif"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$gloryevent": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "false",
+          "passage": "Toilet",
+          "gate": [
+            {
+              "condition": "$hole_made is true",
+              "branch": "elseif"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$int": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "10",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "-=",
+          "value_expr": "1",
+          "passage": "Drink it",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "S2D6",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "-=",
+          "value_expr": "1",
+          "passage": "DD6",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "Sudy",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": 10
+    },
+    "$rep": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "SoD6",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "Socialize",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "C2D9",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$jack": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "LD6",
+          "gate": [
+            {
+              "condition": "$day6_forest==true",
+              "branch": "elseif"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "Tease him",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$day5": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "1",
+          "passage": "Drink it",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "1",
+          "passage": "Don't drink it",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$day5_bath": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "true",
+          "passage": "SD5",
+          "gate": [
+            {
+              "condition": "$day5==1 && $day5_drink== true && $day5_bath==false",
+              "branch": "elseif"
+            }
+          ]
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$players": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "[\n    {name: \"Jamal\", gender: \"male\", clothes: [\"Socks\", \"Shirt\", \"Pants\", \"Underwear\"]},\n    {name: \"Emily\", gender: \"female\", clothes: [\"Top\", \"Pants\", \"Bra\", \"Underwear\"]},\n    {name: \"Sarah\", gender: \"female\", clothes: [\"Top\", \"Pants\", \"Bra\", \"Underwear\"]},\n    {name: \"Max\", gender: \"male\", clothes: [\"Socks\", \"Shirt\", \"Pants\", \"Underwear\"]}\n]",
+          "passage": "StoryInit",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": [
+        {
+          "name": "Jamal",
+          "gender": "male",
+          "clothes": [
+            "Socks",
+            "Shirt",
+            "Pants",
+            "Underwear"
+          ]
+        },
+        {
+          "name": "Emily",
+          "gender": "female",
+          "clothes": [
+            "Top",
+            "Pants",
+            "Bra",
+            "Underwear"
+          ]
+        },
+        {
+          "name": "Sarah",
+          "gender": "female",
+          "clothes": [
+            "Top",
+            "Pants",
+            "Bra",
+            "Underwear"
+          ]
+        },
+        {
+          "name": "Max",
+          "gender": "male",
+          "clothes": [
+            "Socks",
+            "Shirt",
+            "Pants",
+            "Underwear"
+          ]
+        }
+      ]
+    },
+    "$round": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "StoryInit",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": 1
+    },
+    "$gameOver": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$glory_event": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "true",
+          "passage": "SGH1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "true",
+          "passage": "RGH1",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$day6_kitchen": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "KD6",
+          "gate": [
+            {
+              "condition": "$day6_kitchen==false",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$day6_bathroom": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "SD6",
+          "gate": [
+            {
+              "condition": "$day6_bathroom==false",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$day6_drink": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "DD6",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$day6_forest": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "DD6",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "DDD6",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$day6_job": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "Shopd6",
+          "gate": [
+            {
+              "condition": "!($day6_drink==true and $day6_job==true)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$day6_class": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "ND6",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$day6_p": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "PCD6",
+          "gate": [
+            {
+              "condition": "$day6_class==true and $day6_p==false",
+              "branch": "elseif"
+            }
+          ]
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$day7_kitchen": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "SPD7",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "Untitled Passage 1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "Untitled Passage 1",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$day7_living": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "LD7",
+          "gate": [
+            {
+              "condition": "$day7_living==false",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "Untitled Passage 1",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$day7_shower": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$day7_gwen": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "Untitled Passage 1",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$day7_shop": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "Join the party",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "Politely refuse and leave",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "Adresses",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$day7_virgin": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "Virgin",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "Not virgin",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "Untitled Passage 1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "Untitled Passage 1",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$day8_shop": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "Delivery",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$day8_shower": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "Untitled Passage 1",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$day9_principal": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "Walk",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "P2CD9",
+          "gate": [
+            {
+              "condition": "$day9_toilet==false",
+              "branch": "elseif"
+            }
+          ]
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$day9_toilet": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "Walk",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "TCD9",
+          "gate": [
+            {
+              "condition": "$day9_principal==false",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$day10_class": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "HD10",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$day11_drop": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "She adds a drop in Jack’s drink",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$cute_photo": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "CUTEN",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$bsd11": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "BSD11",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$pd11": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "PD11",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$cfd11": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "CFD11",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$scored": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "Emily scored basket",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$bsd14": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "BSD14",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$pd14": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "PND14",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$blacksmith": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "Blowjob",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "NBM01",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$lake": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "Blowjob",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "JDM01",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$guards": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "Blowjob",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "NDM01",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$serve": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "An old man",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "Blowjob",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "NMU",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$m01_revenge": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "Day 2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "Take revenge",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$m01_princess_black": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "Day 2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "PBLMS2D1",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$m01_thief": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "Day 2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "Cock press against her entrance",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$m01_shift": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "Day 2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "Dissapeared",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "Emily went under the table",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$princess_pro": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "Day 2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "Princess as protagonist",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$magistrate_m01": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "Day 2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "Then it began to fuck her.",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$kelly_arrested": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "StoryInit",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "Day 2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "ND345",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "_loserIndex": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "random(0, $players.length - 1)",
+          "passage": "Card Game Round",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_loser": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$players[_loserIndex]",
+          "passage": "Card Game Round",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_removedCloth": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "_loser.clothes.shift()",
+          "passage": "Card Game Round",
+          "gate": [
+            {
+              "condition": "_loser.clothes.length > 1",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$keys1": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "true",
+          "passage": "Roof",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$day5_drink": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "true",
+          "passage": "Drink it",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "false",
+          "passage": "Don't drink it",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$intelligence": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "Stay focused and study",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$day7_bj": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "4",
+          "passage": "Four(She gave blowjob in gloryhole)",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "3",
+          "passage": "Three(She didn't gave blowjob in gloryhole)",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$score": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "false",
+          "passage": "She missed",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$blacksmith_m01": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "true",
+          "passage": "Suck seven cocks",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    }
+  },
+  "complex_setters": [
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$day7_shower==true",
+      "passage": "BD7",
+      "gate": [
+        {
+          "condition": "$day7_shower==false",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$day8_shower==true",
+      "passage": "BD8",
+      "gate": [
+        {
+          "condition": "$day8_shower==false",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "<<set $day7_shower=true",
+      "passage": "Untitled Passage 1",
+      "gate": []
+    }
+  ]
+}

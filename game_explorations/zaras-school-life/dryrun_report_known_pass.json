@@ -1,0 +1,83 @@
+{
+  "slug": "zaras-school-life",
+  "seed": 1,
+  "trial_count": 2,
+  "target_strategy": "preset:.claude/skills/twine-game-explorer/scripts/tools/fixtures/known_pass_zaras.txt",
+  "max_depth": 7,
+  "generated_at": "2026-04-17T07:30:00.804Z",
+  "summary": {
+    "trial_count": 2,
+    "measurable_trials": 2,
+    "clean_completion_rate": 1,
+    "clean_completion_rate_of_total": 1,
+    "divergence_rate": 0,
+    "click_failed_rate": 0,
+    "plan_failed_rate": 0,
+    "plan_too_long_rate": 0,
+    "snap_failed_rate": 0,
+    "restore_mishap_rate": 0,
+    "divergence_breakdown": {},
+    "per_depth": {
+      "1": {
+        "trials": 2,
+        "failure_rate": 0
+      }
+    },
+    "worst_source_passages": [],
+    "median_step_ms": 1129
+  },
+  "trials": [
+    {
+      "trial_id": 0,
+      "target": "Wardrobe",
+      "pre_trial_passage": "Room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Room",
+          "expected_to": "Wardrobe",
+          "click_text": "Wardrobe",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Wardrobe",
+          "divergence_cause": null,
+          "step_ms": 1129
+        }
+      ],
+      "total_ms": 1545,
+      "snap_id": "s116edf9e9c",
+      "restore_ok": true,
+      "restore_passage": "Room",
+      "restore_contamination_risk": false
+    },
+    {
+      "trial_id": 1,
+      "target": "Living room",
+      "pre_trial_passage": "Room",
+      "outcome": "clean",
+      "plan_length": 1,
+      "steps": [
+        {
+          "step_index": 0,
+          "expected_from": "Room",
+          "expected_to": "Living room",
+          "click_text": "Go to the living room",
+          "edge_kind": "wiki",
+          "gate_result": true,
+          "outcome": "match",
+          "actual_passage": "Living room",
+          "divergence_cause": null,
+          "step_ms": 963
+        }
+      ],
+      "total_ms": 1322,
+      "snap_id": "s03bfaa1e6f",
+      "restore_ok": true,
+      "restore_passage": "Room",
+      "restore_contamination_risk": false
+    }
+  ]
+}

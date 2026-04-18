@@ -1,0 +1,325 @@
+{
+  "generated_at": "2026-04-17T16:06:27.930Z",
+  "slug": "road-to-success",
+  "ambiguous_clicks": {
+    "total_edges_with_text": 372,
+    "raw_duplicate_buckets": 27,
+    "definite_ambiguous_edges": 0,
+    "definite_ambiguous_rate": 0,
+    "potential_ambiguous_edges": 10,
+    "potential_ambiguous_rate": 0.026881720430107527,
+    "top_definite": [],
+    "top_potential": [
+      {
+        "from": "ThomasParty",
+        "text": "Go to your house 🏠",
+        "edge_count": 2,
+        "distinct_potential_targets": 2,
+        "gate_true": 0,
+        "gate_unknown": 2,
+        "gate_false": 0
+      },
+      {
+        "from": "ApartmentSleep",
+        "text": "Wake up",
+        "edge_count": 2,
+        "distinct_potential_targets": 2,
+        "gate_true": 0,
+        "gate_unknown": 2,
+        "gate_false": 0
+      },
+      {
+        "from": "SleepingBrother",
+        "text": "Go to your bedroom and sleep 😴",
+        "edge_count": 2,
+        "distinct_potential_targets": 2,
+        "gate_true": 0,
+        "gate_unknown": 2,
+        "gate_false": 0
+      },
+      {
+        "from": "Laptop",
+        "text": "Shutdown 🔴",
+        "edge_count": 2,
+        "distinct_potential_targets": 2,
+        "gate_true": 0,
+        "gate_unknown": 2,
+        "gate_false": 0
+      },
+      {
+        "from": "NoEnergy",
+        "text": "Go to your house",
+        "edge_count": 2,
+        "distinct_potential_targets": 2,
+        "gate_true": 0,
+        "gate_unknown": 2,
+        "gate_false": 0
+      }
+    ]
+  },
+  "dynamic_goto": {
+    "passages_with_dynamic_goto": 4,
+    "total_passages": 358,
+    "dynamic_goto_rate": 0.0111731843575419,
+    "samples": [
+      {
+        "passage": "SchoolBathroomCabin",
+        "sample": "<<goto $bathroom>>"
+      },
+      {
+        "passage": "DevWidget",
+        "sample": "<<goto _devLocation>>"
+      },
+      {
+        "passage": "LightningKidnapping",
+        "sample": "<<goto $game.lastPassage>>"
+      },
+      {
+        "passage": "Thief",
+        "sample": "<<goto $game.lastPassage>>"
+      }
+    ]
+  },
+  "gate_eval": {
+    "gated_edges": 333,
+    "gate_true": 12,
+    "gate_false": 132,
+    "gate_unknown": 189,
+    "gate_unknown_rate": 0.5675675675675675,
+    "unknown_temp_only": 16,
+    "unknown_story_only": 30,
+    "unknown_mixed": 143,
+    "effective_unknown": 173,
+    "effective_unknown_rate": 0.5195195195195195,
+    "unknown_story_samples": [
+      {
+        "from": "BarDrink",
+        "to": "VeronicaMeet",
+        "display": "Veronica's House",
+        "gate": [
+          {
+            "condition": "getCorruptionLevel() >= 3 && getDrunkness() == 3",
+            "branch": "if"
+          },
+          {
+            "condition": "$player.trans && $npc.Veronica.relation == 0",
+            "branch": "if"
+          }
+        ]
+      },
+      {
+        "from": "BeachNight",
+        "to": "Beach",
+        "display": null,
+        "gate": [
+          {
+            "condition": "$game.time == \"N\" == false && $game.time == \"LN\" == false && $game.time == \"E\" == false",
+            "branch": "if"
+          }
+        ]
+      },
+      {
+        "from": "ClubDance",
+        "to": "JamalMeet",
+        "display": "Go with him",
+        "gate": [
+          {
+            "condition": "random(1,2) == 1",
+            "branch": "if"
+          },
+          {
+            "condition": "getCorruptionLevel() >= 2",
+            "branch": "if"
+          },
+          {
+            "condition": "checkSceneReq(\"ClubFlash\")",
+            "branch": "if"
+          },
+          {
+            "condition": "random(1,2) == 1 && $npc.Jamal.scenes.JamalMeet.unlocked == false",
+            "branch": "if"
+          }
+        ]
+      },
+      {
+        "from": "ClubDance",
+        "to": "Club",
+        "display": "No, thanks",
+        "gate": [
+          {
+            "condition": "random(1,2) == 1",
+            "branch": "if"
+          },
+          {
+            "condition": "getCorruptionLevel() >= 2",
+            "branch": "if"
+          },
+          {
+            "condition": "checkSceneReq(\"ClubFlash\")",
+            "branch": "if"
+          },
+          {
+            "condition": "random(1,2) == 1 && $npc.Jamal.scenes.JamalMeet.unlocked == false",
+            "branch": "if"
+          }
+        ]
+      },
+      {
+        "from": "OfficeInterview",
+        "to": "Office",
+        "display": "Leave the office",
+        "gate": [
+          {
+            "condition": "galleryMode() || $player.intelligence >= 10",
+            "branch": "if"
+          },
+          {
+            "condition": "!galleryMode()",
+            "branch": "if"
+          }
+        ]
+      },
+      {
+        "from": "OfficeInterview",
+        "to": "Office",
+        "display": "Leave the office",
+        "gate": [
+          {
+            "condition": "galleryMode() || $player.intelligence >= 10",
+            "branch": "if"
+          },
+          {
+            "condition": "!galleryMode()",
+            "branch": "if"
+          }
+        ]
+      },
+      {
+        "from": "OfficeInterview",
+        "to": "Office",
+        "display": "Leave the room",
+        "gate": [
+          {
+            "condition": "galleryMode() || $player.intelligence >= 10",
+            "branch": "if"
+          },
+          {
+            "condition": "getCorruptionLevel() >= 3",
+            "branch": "if"
+          },
+          {
+            "condition": "!galleryMode()",
+            "branch": "if"
+          }
+        ]
+      },
+      {
+        "from": "OfficeInterview",
+        "to": "Office",
+        "display": "Leave the room",
+        "gate": [
+          {
+            "condition": "!(galleryMode() || $player.intelligence >= 10)",
+            "branch": "else"
+          }
+        ]
+      },
+      {
+        "from": "PoolSwim",
+        "to": "PoolSwimSex",
+        "display": "Kiss him 👄",
+        "gate": [
+          {
+            "condition": "random(1,3) == 1 || $player.clothing.corruption >= 30",
+            "branch": "if"
+          },
+          {
+            "condition": "getExb() >= 10",
+            "branch": "if"
+          },
+          {
+            "condition": "checkSceneReq(\"PoolFlash\")",
+            "branch": "if"
+          },
+          {
+            "condition": "getExb() >= 15",
+            "branch": "if"
+          },
+          {
+            "condition": "getCorruptionLevel() >= 3",
+            "branch": "if"
+          },
+          {
+            "condition": "checkSceneReq(\"PoolSwimSex\")",
+            "branch": "if"
+          }
+        ]
+      },
+      {
+        "from": "ThomasParty2Floor",
+        "to": "ThomasPartySpinTheBottle",
+        "display": "Play",
+        "gate": [
+          {
+            "condition": "random(1,3) == 1 && $location.thomasHouse.scenes.ThomasPartySpinTheBottle.executedToday == false",
+            "branch": "if"
+          },
+          {
+            "condition": "getCorruptionLevel() >= 3 || getDrunkness() >= 3",
+            "branch": "if"
+          }
+        ]
+      }
+    ]
+  },
+  "complex_setters": {
+    "total_variables": 132,
+    "parsed_setters": 563,
+    "complex_setter_count": 5,
+    "parse_errors": 5,
+    "skipped_script_blocks": 22,
+    "skipped_widget_passages": 13,
+    "complex_setter_density": 0.008802816901408451,
+    "indexing_coverage": "partial"
+  },
+  "pass_bar": {
+    "checks": [
+      {
+        "name": "definite_ambiguous_rate",
+        "value": 0,
+        "bar": 0.05,
+        "cmp": "lte",
+        "pass": true
+      },
+      {
+        "name": "potential_ambiguous_rate",
+        "value": 0.026881720430107527,
+        "bar": 0.2,
+        "cmp": "lte",
+        "pass": true
+      },
+      {
+        "name": "dynamic_goto_rate",
+        "value": 0.0111731843575419,
+        "bar": 0.1,
+        "cmp": "lte",
+        "pass": true
+      },
+      {
+        "name": "effective_gate_unknown_rate",
+        "value": 0.5195195195195195,
+        "bar": 0.3,
+        "cmp": "lte",
+        "pass": false
+      },
+      {
+        "name": "complex_setter_density",
+        "value": 0.008802816901408451,
+        "bar": 0.05,
+        "cmp": "lt",
+        "pass": true
+      }
+    ],
+    "overall_pass": false
+  }
+}

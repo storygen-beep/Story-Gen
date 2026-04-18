@@ -1,2 +1,14 @@
-2026/04/16-20:08:02.542 43bf3c Creating DB /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/road-to-success/profile/Default/Session Storage since it was missing.
-2026/04/16-20:08:02.547 43bf3c Reusing MANIFEST /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/road-to-success/profile/Default/Session Storage/MANIFEST-000001
+2026/04/17-21:38:55.634 9c135 Reusing MANIFEST /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/road-to-success/profile/Default/Session Storage/MANIFEST-000001
+2026/04/17-21:38:55.634 9c135 Recovering log #3
+2026/04/17-21:38:55.634 9c135 Reusing old log /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/road-to-success/profile/Default/Session Storage/000003.log 
+2026/04/17-21:39:55.634 9c137 Level-0 table #5: started
+2026/04/17-21:39:55.636 9c137 Level-0 table #5: 91421 bytes OK
+2026/04/17-21:39:55.637 9c137 Delete type=0 #3
+2026/04/17-21:43:40.523 9c137 Level-0 table #7: started
+2026/04/17-21:43:40.530 9c137 Level-0 table #7: 90354 bytes OK
+2026/04/17-21:43:40.532 9c137 Delete type=0 #4
+2026/04/17-21:45:55.631 9c137 Level-0 table #9: started
+2026/04/17-21:45:55.633 9c137 Level-0 table #9: 90354 bytes OK
+2026/04/17-21:45:55.636 9c137 Delete type=0 #6
+2026/04/17-21:50:42.185 9c137 Level-0 table #11: started
+2026/04/17-21:50:42.187 9c137 Level-0 table #11: 90354 bytes OK

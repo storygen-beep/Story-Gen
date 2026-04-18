@@ -1,9 +1,9 @@
 {
   "session_id": 1,
-  "start_ts": "2026-04-16T14:38:19.029Z",
-  "start_epoch_ms": 1776350299029,
-  "end_ts": "2026-04-16T14:39:32.794Z",
-  "duration_s": 74,
+  "start_ts": "2026-04-17T16:05:23.319Z",
+  "start_epoch_ms": 1776441923319,
+  "end_ts": "2026-04-17T16:08:52.772Z",
+  "duration_s": 209,
   "clicks": 0,
   "choices_explored": 0,
   "arrow_advances": 0,

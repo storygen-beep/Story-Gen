@@ -1,0 +1,448 @@
+{
+  "slug": "sultry-secrets",
+  "url": "https://mopoga.com/sultry-secrets",
+  "generated_at": "2026-04-17T16:26:32.029Z",
+  "engine": "sugarcube",
+  "pregame_auto_advance": {
+    "trail": [
+      {
+        "step": 0,
+        "passage": "Start",
+        "action": "terminated",
+        "reason": "no_forward_pattern_match"
+      }
+    ],
+    "terminated_at": {
+      "step": 0,
+      "passage": "Start",
+      "action": "terminated",
+      "reason": "no_forward_pattern_match"
+    }
+  },
+  "regions_catalog": [
+    {
+      "pos_class": "left",
+      "id": "ui-bar",
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 316,
+        "h": 900
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [
+        {
+          "text": "Sultry Secrets",
+          "tag": "h1",
+          "cls": ""
+        }
+      ],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 279,
+            "y": 4,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 105,
+            "y": 4,
+            "w": 40,
+            "h": 35
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 170,
+            "y": 4,
+            "w": 40,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Patreon",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 153,
+            "w": 259,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Discord",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 192,
+            "w": 259,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Feedback form",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 231,
+            "w": 259,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 289,
+            "w": 259,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 328,
+            "w": 259,
+            "h": 38
+          }
+        }
+      ],
+      "passive_text_samples": [
+        "Sultry Secrets",
+        "Chapter 2.2"
+      ]
+    },
+    {
+      "pos_class": "sampled",
+      "id": "ui-bar-history",
+      "bbox": {
+        "x": 0,
+        "y": 4,
+        "w": 315,
+        "h": 35
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 105,
+            "y": 4,
+            "w": 40,
+            "h": 35
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 170,
+            "y": 4,
+            "w": 40,
+            "h": 35
+          }
+        }
+      ],
+      "passive_text_samples": []
+    },
+    {
+      "pos_class": "sampled",
+      "id": "ui-bar-body",
+      "bbox": {
+        "x": 0,
+        "y": 45,
+        "w": 315,
+        "h": 855
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [
+        {
+          "text": "Sultry Secrets",
+          "tag": "h1",
+          "cls": ""
+        }
+      ],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Patreon",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 153,
+            "w": 259,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Discord",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 192,
+            "w": 259,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "Feedback form",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 231,
+            "w": 259,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 289,
+            "w": 259,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 28,
+            "y": 328,
+            "w": 259,
+            "h": 38
+          }
+        }
+      ],
+      "passive_text_samples": [
+        "Sultry Secrets",
+        "Chapter 2.2"
+      ]
+    }
+  ],
+  "chrome_probes": [
+    {
+      "label": "Patreon",
+      "bbox": {
+        "x": 28,
+        "y": 153,
+        "w": 259,
+        "h": 38
+      },
+      "region_id": "ui-bar",
+      "skipped_reason": "external"
+    },
+    {
+      "label": "Discord",
+      "bbox": {
+        "x": 28,
+        "y": 192,
+        "w": 259,
+        "h": 38
+      },
+      "region_id": "ui-bar",
+      "skipped_reason": "external"
+    },
+    {
+      "label": "Feedback form",
+      "bbox": {
+        "x": 28,
+        "y": 231,
+        "w": 259,
+        "h": 38
+      },
+      "region_id": "ui-bar",
+      "skipped_reason": "external"
+    },
+    {
+      "label": "Saves",
+      "bbox": {
+        "x": 28,
+        "y": 289,
+        "w": 259,
+        "h": 38
+      },
+      "region_id": "ui-bar",
+      "skipped_reason": "save_mutation"
+    },
+    {
+      "label": "Restart",
+      "bbox": {
+        "x": 28,
+        "y": 328,
+        "w": 259,
+        "h": 38
+      },
+      "region_id": "ui-bar",
+      "skipped_reason": "destructive"
+    }
+  ],
+  "regions": [
+    {
+      "pos_class": "left",
+      "tag": "div",
+      "id": "ui-bar",
+      "cls": "",
+      "position_style": "fixed",
+      "z_index": "50",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 316,
+        "h": 900
+      },
+      "text_sample": "Sultry SecretsChapter 2.2PatreonDiscordFeedback formSavesRestart"
+    },
+    {
+      "pos_class": "sampled",
+      "tag": "div",
+      "id": "ui-bar-history",
+      "cls": "",
+      "position_style": "static",
+      "z_index": "auto",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 0,
+        "y": 4,
+        "w": 315,
+        "h": 35
+      },
+      "text_sample": "",
+      "from_sampling": true
+    },
+    {
+      "pos_class": "sampled",
+      "tag": "div",
+      "id": "ui-bar-body",
+      "cls": "",
+      "position_style": "static",
+      "z_index": "auto",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 0,
+        "y": 45,
+        "w": 315,
+        "h": 855
+      },
+      "text_sample": "",
+      "from_sampling": true
+    }
+  ],
+  "main_content": null,
+  "chrome_probes_count": 0,
+  "ui_frame_hash": "70e10f29a39eb768"
+}
