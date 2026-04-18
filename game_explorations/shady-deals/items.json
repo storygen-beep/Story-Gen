@@ -1,4 +1,37 @@
 {
   "note": "Labeled at report time from the raw variable profile. See variable_profile.json for raw evidence.",
-  "items": []
+  "items": [
+    {
+      "name": "enemy_1.photo",
+      "item_name": "enemy_1.photo",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1776504400746,
+        "last_ts": 1776504441510,
+        "passages_seen_on_count": 2,
+        "string_samples": [
+          "img/photos/gangers/15.webp"
+        ]
+      }
+    },
+    {
+      "name": "target.photo",
+      "item_name": "target.photo",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1776504412029,
+        "last_ts": 1776504937071,
+        "passages_seen_on_count": 102,
+        "string_samples": [
+          "img/photos/gangers/15.webp"
+        ]
+      }
+    }
+  ]
 }
