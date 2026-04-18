@@ -32,7 +32,12 @@
 
 const { evaluateGate, UNKNOWN } = require('./gate_eval');
 
-const NAV_KINDS = new Set(['wiki', 'link', 'goto', 'return']);
+// `button` edges are SugarCube <<button>> widgets whose label the parser
+// captures as display text and whose body gotos inherit that label — they
+// navigate identically to wiki links from the player's perspective.
+// Include them in BFS so reachable/path/requirements work on widget-heavy
+// games like road-to-success.
+const NAV_KINDS = new Set(['wiki', 'link', 'goto', 'return', 'button']);
 
 /**
  * Build a reusable context from staticGraph + variableIndex.

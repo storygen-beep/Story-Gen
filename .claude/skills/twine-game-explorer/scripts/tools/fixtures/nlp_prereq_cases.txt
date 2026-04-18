@@ -1,0 +1,26 @@
+# T3 fixture — prerequisite-resolution test cases for navigate strategy.
+# Each line is a target passage on new-life-project anchored at exploreIntro.
+#
+# Expected abort_reason or success mode in trailing comment. Navigate
+# should route to setters of the blocking vars, execute sub-goal, then
+# re-attempt the main goal.
+
+# Case A — resolvable story-var gate.
+#   Gate: $lilyQ.work is true && $job is "No job" && $turnDownLily is false
+#   Setters for $lilyQ.work: introCafe (assigns to=true under nested visited() gate).
+#   Expected: navigate enters prereq mode, pursues introCafe, resumes main goal.
+#   Realistic outcome may still abort because introCafe's setter is itself
+#   gated on visited()==2 — worth measuring.
+introAgreeCafe
+
+# Case B — gate references visited() — intrinsically unresolvable by setters.
+#   lilySleepIntro gate: !($period lte 5)  → needs period > 5.
+#   $period advances via gameplay actions, not via a discrete setter.
+#   Expected: navigate tries setters for $period, finds none that satisfy
+#   the inequality, aborts prereq_no_setter or prereq_unreachable.
+lilySleepIntro
+
+# Case C — gate chain beyond our depth limit.
+#   Two-level gated targets force navigate to nest subgoals. Test that
+#   prereq_depth_exhausted fires cleanly when chains go deeper than 2.
+introAgreeCafe

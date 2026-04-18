@@ -1,0 +1,9 @@
+# Targets behind gates that are definitely unsatisfied from the "Room"
+# baseline state (post-Phase-0, fresh game).
+#
+# Expected harness verdict: 100% plan_failed (pathfinder finds no viable
+# path) OR 100% divergence. If ANY trial reports "clean", the harness is
+# mis-classifying failures as success — the scariest class of bug.
+Weekly Allowance
+Punished
+School

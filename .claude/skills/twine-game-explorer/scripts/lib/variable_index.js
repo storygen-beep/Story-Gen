@@ -216,6 +216,33 @@ function parseEdgeSetter(setterStr) {
   return out;
 }
 
+// Tokenize <<case VAL1 VAL2 ...>> — whitespace-separated at top level,
+// respecting quoted strings. Mirrors static_graph.js's parseCaseValues.
+// Kept local so variable_index.js stays dependency-free.
+function parseCaseValuesLocal(args) {
+  const out = [];
+  let buf = '';
+  let inStr = null;
+  for (let i = 0; i < args.length; i++) {
+    const ch = args[i];
+    const prev = i > 0 ? args[i - 1] : '';
+    if (inStr) {
+      buf += ch;
+      if (ch === inStr && prev !== '\\') inStr = null;
+      continue;
+    }
+    if (ch === '"' || ch === "'") { inStr = ch; buf += ch; continue; }
+    if (/\s/.test(ch)) {
+      if (buf.trim()) out.push(buf.trim());
+      buf = '';
+      continue;
+    }
+    buf += ch;
+  }
+  if (buf.trim()) out.push(buf.trim());
+  return out;
+}
+
 // ---------------------------------------------------------------------------
 // Passage-level scanner. Tracks gate stack, emits setter + unsetter records
 // with `gate` snapshot attached.
@@ -228,6 +255,20 @@ function parsePassage(passageName, source) {
   let parseErrors = 0;
   const gateStack = [];
   const snapshotGate = () => gateStack.map((g) => ({ condition: g.condition, branch: g.branch }));
+
+  // Switch/case tracker — mirror of the one in static_graph.js. Ensures
+  // setters inside a <<case N>> block carry an appropriate
+  // `<switchExpr> is N` gate frame, so navigate's satisfier-search can
+  // correctly rule out setters whose host case won't fire on current
+  // state.
+  const switchStack = [];
+  const exitCurrentCase = () => {
+    const top = switchStack[switchStack.length - 1];
+    if (top && top.in_case) {
+      gateStack.pop();
+      top.in_case = false;
+    }
+  };
 
   let m;
   TOKEN_RE.lastIndex = 0;
@@ -256,6 +297,45 @@ function parsePassage(passageName, source) {
     }
     if ((isClose && macro === 'if') || (!isClose && macro === 'endif')) {
       gateStack.pop();
+      continue;
+    }
+
+    // Switch/case — mirror of the static_graph logic. See static_graph.js
+    // for the full rationale; here we just reuse the same shapes so
+    // setter records get the same gate frames as edge records would.
+    if (!isClose && macro === 'switch') {
+      switchStack.push({ expr: args.trim(), cases_seen: [], in_case: false });
+      continue;
+    }
+    if (!isClose && macro === 'case') {
+      const top = switchStack[switchStack.length - 1];
+      if (!top) continue;
+      exitCurrentCase();
+      const values = parseCaseValuesLocal(args);
+      if (!values.length) continue;
+      top.cases_seen.push(...values);
+      const cond = values.length === 1
+        ? `${top.expr} is ${values[0]}`
+        : '(' + values.map((v) => `${top.expr} is ${v}`).join(' or ') + ')';
+      gateStack.push({ condition: cond, branch: 'case' });
+      top.in_case = true;
+      continue;
+    }
+    if (!isClose && macro === 'default') {
+      const top = switchStack[switchStack.length - 1];
+      if (!top) continue;
+      exitCurrentCase();
+      const priorDisjunction = top.cases_seen
+        .map((v) => `${top.expr} is ${v}`)
+        .join(' or ');
+      const cond = priorDisjunction ? `!(${priorDisjunction})` : 'true';
+      gateStack.push({ condition: cond, branch: 'default' });
+      top.in_case = true;
+      continue;
+    }
+    if ((isClose && macro === 'switch') || (!isClose && macro === 'endswitch')) {
+      exitCurrentCase();
+      switchStack.pop();
       continue;
     }
 

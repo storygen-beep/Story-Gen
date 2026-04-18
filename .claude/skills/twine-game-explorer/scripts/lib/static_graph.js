@@ -100,6 +100,55 @@ function parseLinkArgs(body) {
   return { display: null, target: null };
 }
 
+// Parse the argument list of a <<button ...>> macro. Two forms:
+//   <<button 'Display' 'Target'>>       — direct navigation; emit edge here.
+//   <<button 'Display'>>...<</button>>   — wrapper; body may contain
+//       <<goto 'Target'>> (optionally under <<if>>s). Goto edges emitted
+//       with display=label so click text matches the DOM.
+// Accepts both single- and double-quoted strings for each arg.
+function parseButtonArgs(body) {
+  if (!body) return { display: null, target: null };
+  body = body.trim();
+  const quoteRe = /^(?:"((?:[^"\\]|\\.)*)"|'((?:[^'\\]|\\.)*)')/;
+  const first = body.match(quoteRe);
+  if (!first) return { display: null, target: null };
+  const display = first[1] != null ? first[1] : first[2];
+  const rest = body.slice(first[0].length).trim();
+  if (!rest) return { display, target: null };
+  const second = rest.match(quoteRe);
+  if (!second) return { display, target: null };
+  const target = second[1] != null ? second[1] : second[2];
+  return { display, target };
+}
+
+// Tokenize the args of <<case VAL1 VAL2 ...>>. Whitespace-separated at the
+// top level, respecting quoted strings (so `<<case "a b" 2>>` → ['"a b"','2']).
+// Values are preserved as-is (with quotes if present) so the synthesized
+// gate condition `<switchExpr> is "a b"` is well-formed SugarCube.
+function parseCaseValues(args) {
+  const out = [];
+  let buf = '';
+  let inStr = null;
+  for (let i = 0; i < args.length; i++) {
+    const ch = args[i];
+    const prev = i > 0 ? args[i - 1] : '';
+    if (inStr) {
+      buf += ch;
+      if (ch === inStr && prev !== '\\') inStr = null;
+      continue;
+    }
+    if (ch === '"' || ch === "'") { inStr = ch; buf += ch; continue; }
+    if (/\s/.test(ch)) {
+      if (buf.trim()) out.push(buf.trim());
+      buf = '';
+      continue;
+    }
+    buf += ch;
+  }
+  if (buf.trim()) out.push(buf.trim());
+  return out;
+}
+
 // Parse the argument of <<goto>>, <<return>>, <<include>>, <<display>>.
 // Accepts either a quoted passage name or a wiki-link form.
 function parseTargetArg(body) {
@@ -125,9 +174,36 @@ function parsePassage(passageName, source) {
   let unresolved = 0;
   // Gate stack: each entry is an array of conditions representing the current
   // if/elseif/else chain. We push on <<if>>, mutate top on <<elseif>>/<<else>>,
-  // and pop on <</if>> / <<endif>>.
+  // and pop on <</if>> / <<endif>>. <<switch>>/<<case>> also push/replace
+  // gate frames so edges inside each case carry the right condition.
   const gateStack = [];
   const snapshotGate = () => gateStack.map((g) => ({ condition: g.condition, branch: g.branch }));
+
+  // Switch tracker: one entry per open <<switch>>. Tracks the switch
+  // expression, the values of cases seen so far (so <<default>> can emit
+  // a proper negation), and whether we're currently inside a case block
+  // (so we know whether a <<case>>/<<default>>/<</switch>> must pop a
+  // previously-pushed gate frame before pushing a new one).
+  const switchStack = [];
+  const exitCurrentCase = () => {
+    const top = switchStack[switchStack.length - 1];
+    if (top && top.in_case) {
+      gateStack.pop();
+      top.in_case = false;
+    }
+  };
+
+  // Button/link wrapper tracker: when a <<button 'Label'>> or
+  // <<link 'Label'>> opens without an explicit target, push its label so
+  // any <<goto 'X'>> fired from the body carries display=label. Pop on
+  // the matching close tag. Entries are { kind: 'button'|'link', label }.
+  const wrapperStack = [];
+  const currentWrapperLabel = () => {
+    for (let i = wrapperStack.length - 1; i >= 0; i--) {
+      if (wrapperStack[i].label) return wrapperStack[i].label;
+    }
+    return null;
+  };
 
   let m;
   TOKEN_RE.lastIndex = 0;
@@ -173,11 +249,65 @@ function parsePassage(passageName, source) {
       continue;
     }
 
+    // Switch/case control flow. Every <<case ...>> synthesizes a gate
+    // frame `<switchExpr> is <value>` (or `(... or ...)` for multi-value
+    // cases). <<default>> synthesizes the negation of all prior cases.
+    // This lets downstream gate-eval correctly recognize that edges
+    // inside different cases are mutually exclusive — previously they
+    // emitted with empty gates and looked unconditionally reachable,
+    // which is why navigate's gate check was wrongly approving clicks
+    // on switch-branch content that wasn't actually rendered.
+    if (!isClose && macro === 'switch') {
+      switchStack.push({ expr: args.trim(), cases_seen: [], in_case: false });
+      continue;
+    }
+    if (!isClose && macro === 'case') {
+      const top = switchStack[switchStack.length - 1];
+      if (!top) continue;
+      exitCurrentCase();
+      const values = parseCaseValues(args);
+      if (!values.length) continue;
+      top.cases_seen.push(...values);
+      const cond = values.length === 1
+        ? `${top.expr} is ${values[0]}`
+        : '(' + values.map((v) => `${top.expr} is ${v}`).join(' or ') + ')';
+      gateStack.push({ condition: cond, branch: 'case' });
+      top.in_case = true;
+      continue;
+    }
+    if (!isClose && macro === 'default') {
+      const top = switchStack[switchStack.length - 1];
+      if (!top) continue;
+      exitCurrentCase();
+      const priorDisjunction = top.cases_seen
+        .map((v) => `${top.expr} is ${v}`)
+        .join(' or ');
+      const cond = priorDisjunction ? `!(${priorDisjunction})` : 'true';
+      gateStack.push({ condition: cond, branch: 'default' });
+      top.in_case = true;
+      continue;
+    }
+    if ((isClose && macro === 'switch') || (!isClose && macro === 'endswitch')) {
+      exitCurrentCase();
+      switchStack.pop();
+      continue;
+    }
+
     // Navigation macros
     if (!isClose && macro === 'goto') {
       const t = parseTargetArg(args);
-      if (t) edges.push({ from: passageName, to: t, display: null, setter: null, kind: 'goto', gate: snapshotGate(), index: m.index });
-      else if (args.trim()) unresolved++;
+      if (t) {
+        // If we're inside a <<button>>/<<link>> wrapper, the real click
+        // target is the wrapper — the goto inside its body fires only
+        // after the user clicks the wrapper's label. Inherit the label
+        // as display AND adopt the wrapper's kind so downstream
+        // consumers (navigate's wiki-only filter, harness classifier)
+        // treat it as a clickable edge rather than an automatic goto.
+        const wrapperTop = wrapperStack[wrapperStack.length - 1];
+        const display = wrapperTop ? wrapperTop.label : null;
+        const kind = wrapperTop ? wrapperTop.kind : 'goto';
+        edges.push({ from: passageName, to: t, display, setter: null, kind, gate: snapshotGate(), index: m.index });
+      } else if (args.trim()) unresolved++;
       continue;
     }
     if (!isClose && macro === 'return' && args.trim()) {
@@ -196,10 +326,46 @@ function parsePassage(passageName, source) {
       const { display, target } = parseLinkArgs(args);
       if (target && !looksDynamic(target)) {
         edges.push({ from: passageName, to: target, display, setter: null, kind: 'link', gate: snapshotGate(), index: m.index });
+      } else {
+        // Wrapper form — push label so embedded <<goto>> / wiki links
+        // carry it as display text. (Wiki links already self-describe,
+        // so the label primarily benefits <<goto>>-based navigation.)
+        wrapperStack.push({ kind: 'link', label: display || null });
       }
-      // Wrapper form (no explicit target) is ignored — any real navigation
-      // happens via wiki links or <<goto>> inside the link body, both picked
-      // up by our ongoing scan.
+      continue;
+    }
+    if (isClose && macro === 'link') {
+      // Pop only if the last frame is a link wrapper — explicit-target
+      // <<link>> didn't push anything.
+      const top = wrapperStack[wrapperStack.length - 1];
+      if (top && top.kind === 'link') wrapperStack.pop();
+      continue;
+    }
+    if (!isClose && macro === 'button') {
+      // Same two-form handling as <<link>>.
+      const { display, target } = parseButtonArgs(args);
+      if (target && !looksDynamic(target)) {
+        // Direct navigation form: <<button 'Label' 'Target'>>. Emit an
+        // edge immediately with kind='button' so the navigator knows it
+        // came from a widget click (same click semantics as wiki, but
+        // tagged distinctly so consumers can reason about edge-kind
+        // coverage). No body to scan either way — a two-arg button
+        // is typically self-closing in practice.
+        edges.push({
+          from: passageName, to: target, display, setter: null,
+          kind: 'button', gate: snapshotGate(), index: m.index,
+        });
+      }
+      // Always push, even for the two-arg form, so <</button>> pops a
+      // matching frame regardless of body/no-body usage. If there's a
+      // body with additional <<goto>>s, they'll be picked up with the
+      // same label via currentWrapperLabel() below.
+      wrapperStack.push({ kind: 'button', label: display || null });
+      continue;
+    }
+    if (isClose && macro === 'button') {
+      const top = wrapperStack[wrapperStack.length - 1];
+      if (top && top.kind === 'button') wrapperStack.pop();
       continue;
     }
     // Unrecognized macro / close-tag: ignored.
@@ -295,4 +461,4 @@ function tags_skip(tags) {
   return (tags || []).some((t) => SKIP_TAGS.has(t));
 }
 
-module.exports = { buildStaticGraph, parsePassage, parseWikiContent, parseLinkArgs, parseTargetArg };
+module.exports = { buildStaticGraph, parsePassage, parseWikiContent, parseLinkArgs, parseButtonArgs, parseCaseValues, parseTargetArg };
