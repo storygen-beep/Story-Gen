@@ -1,154 +1,74 @@
 {
   "Start": {
-    "first_ts": 1776435303074,
-    "visit_count": 1
-  },
-  "Intro2": {
-    "first_ts": 1776435323387,
-    "visit_count": 19
-  },
-  "Cheat": {
-    "first_ts": 1776435409969,
-    "visit_count": 11
-  },
-  "Morning": {
-    "first_ts": 1776435428333,
-    "visit_count": 12
-  },
-  "ENDOFCONTENT": {
-    "first_ts": 1776435436870,
+    "first_ts": 1776533792635,
     "visit_count": 4
-  },
-  "Dream": {
-    "first_ts": 1776435449009,
-    "visit_count": 38
-  },
-  "Early Morning": {
-    "first_ts": 1776435474865,
-    "visit_count": 3
-  },
-  "shower": {
-    "first_ts": 1776435484428,
-    "visit_count": 5
-  },
-  "Kitchenmorning": {
-    "first_ts": 1776435495048,
-    "visit_count": 3
-  },
-  "yoga": {
-    "first_ts": 1776435497054,
-    "visit_count": 7
-  },
-  "Work Morning": {
-    "first_ts": 1776435508001,
-    "visit_count": 15
-  },
-  "Dress": {
-    "first_ts": 1776435508946,
-    "visit_count": 2
-  },
-  "car": {
-    "first_ts": 1776435510567,
-    "visit_count": 2
-  },
-  "meetcoworker": {
-    "first_ts": 1776435512497,
-    "visit_count": 2
-  },
-  "takecoffee": {
-    "first_ts": 1776435514442,
-    "visit_count": 3
   },
   "Work break": {
-    "first_ts": 1776435516713,
-    "visit_count": 15
-  },
-  "Work Afternoon": {
-    "first_ts": 1776435517663,
-    "visit_count": 5
-  },
-  "Late Afternoon": {
-    "first_ts": 1776435519418,
-    "visit_count": 14
-  },
-  "Selfie": {
-    "first_ts": 1776435520083,
+    "first_ts": 1776533807368,
     "visit_count": 4
   },
-  "chillread1": {
-    "first_ts": 1776435521526,
-    "visit_count": 1
+  "Protagonist": {
+    "first_ts": 1776533863872,
+    "visit_count": 2
   },
-  "Gab4": {
-    "first_ts": 1776435523249,
-    "visit_count": 9
-  },
-  "Gab40": {
-    "first_ts": 1776435551648,
-    "visit_count": 12
-  },
-  "showerevening": {
-    "first_ts": 1776435597676,
-    "visit_count": 9
+  "Inventory": {
+    "first_ts": 1776533885022,
+    "visit_count": 2
   },
   "Evening": {
-    "first_ts": 1776435599712,
-    "visit_count": 16
+    "first_ts": 1776533901865,
+    "visit_count": 2
   },
-  "Quickie1": {
-    "first_ts": 1776435600776,
+  "eveTea": {
+    "first_ts": 1776533914253,
     "visit_count": 4
   },
-  "sharing2": {
-    "first_ts": 1776435620615,
-    "visit_count": 4
-  },
-  "sharing2a": {
-    "first_ts": 1776435629613,
-    "visit_count": 4
-  },
-  "sharing2b": {
-    "first_ts": 1776435639831,
-    "visit_count": 4
-  },
-  "sharing2c": {
-    "first_ts": 1776435648114,
-    "visit_count": 3
-  },
-  "sharing2e": {
-    "first_ts": 1776435658142,
-    "visit_count": 4
-  },
-  "sharing2g": {
-    "first_ts": 1776435667892,
-    "visit_count": 11
-  },
-  "sharing2h": {
-    "first_ts": 1776435693675,
-    "visit_count": 4
-  },
-  "randomevent1": {
-    "first_ts": 1776435768917,
-    "visit_count": 11
-  },
-  "sharing3": {
-    "first_ts": 1776435820834,
-    "visit_count": 23
-  },
-  "cinema1": {
-    "first_ts": 1776435956536,
-    "visit_count": 23
-  },
-  "Late Night": {
-    "first_ts": 1776436013182,
-    "visit_count": 3
+  "EveTea2": {
+    "first_ts": 1776533941024,
+    "visit_count": 6
   },
   "Night": {
-    "first_ts": 1776436043593,
+    "first_ts": 1776533983628,
     "visit_count": 3
   },
-  "eventworkmorning2": {
-    "first_ts": 1776436120501,
-    "visit_count": 19
+  "sneak": {
+    "first_ts": 1776534019055,
+    "visit_count": 2
+  },
+  "car1": {
+    "first_ts": 1776534031974,
+    "visit_count": 8
+  },
+  "ShoppingEric": {
+    "first_ts": 1776534076661,
+    "visit_count": 6
+  },
+  "Kitchenevent1": {
+    "first_ts": 1776534112247,
+    "visit_count": 2
+  },
+  "kitchenevent1a": {
+    "first_ts": 1776534126747,
+    "visit_count": 2
+  },
+  "kitchenevent1b": {
+    "first_ts": 1776534137761,
+    "visit_count": 6
+  },
+  "eveningtv0": {
+    "first_ts": 1776534169759,
+    "visit_count": 6
+  },
+  "eveningtv1": {
+    "first_ts": 1776534209976,
+    "visit_count": 6
+  },
+  "Early Morning": {
+    "first_ts": 1776534241927,
+    "visit_count": 4
+  },
+  "wakebob": {
+    "first_ts": 1776534266453,
+    "visit_count": 9
   }
 }

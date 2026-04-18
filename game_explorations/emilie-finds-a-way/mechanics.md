@@ -27,20 +27,20 @@ _Not detected._
 _Not detected._
 
 ## Scenes catalogued
-- Unique passages seen: 38
+- Unique passages seen: 18
 - Most-visited passages:
-  - `Dream` × 38
-  - `sharing3` × 23
-  - `cinema1` × 23
-  - `Intro2` × 19
-  - `eventworkmorning2` × 19
-  - `Evening` × 16
-  - `Work Morning` × 15
-  - `Work break` × 15
-  - `Late Afternoon` × 14
-  - `Morning` × 12
-  - `Gab40` × 12
-  - `Cheat` × 11
-  - `sharing2g` × 11
-  - `randomevent1` × 11
-  - `Gab4` × 9
+  - `wakebob` × 9
+  - `car1` × 8
+  - `EveTea2` × 6
+  - `ShoppingEric` × 6
+  - `kitchenevent1b` × 6
+  - `eveningtv0` × 6
+  - `eveningtv1` × 6
+  - `Start` × 4
+  - `Work break` × 4
+  - `eveTea` × 4
+  - `Early Morning` × 4
+  - `Night` × 3
+  - `Protagonist` × 2
+  - `Inventory` × 2
+  - `Evening` × 2

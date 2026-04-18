@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-04-17T14:30:25.864Z",
-  "total_observed_edges": 643,
-  "total_synthetic_edges": 14,
-  "total_play_log_entries": 2391,
-  "total_timeline_entries": 1671,
+  "generated_at": "2026-04-18T17:47:58.740Z",
+  "total_observed_edges": 669,
+  "total_synthetic_edges": 26,
+  "total_play_log_entries": 2480,
+  "total_timeline_entries": 1711,
   "initial_passage": "Start",
   "orphan_clicks": [],
   "observed_edges": [
@@ -21221,6 +21221,546 @@
           }
         }
       }
+    },
+    {
+      "from": "Work break",
+      "clicked_text": "Protagonist",
+      "to": "Protagonist",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776533863232,
+      "last_observed_ts": 1776533863232,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "startingpassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Late Afternoon"
+          ],
+          "after_values": [
+            "Work break"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Protagonist",
+      "clicked_text": "Back",
+      "to": "Work break",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776533882558,
+      "last_observed_ts": 1776533882558,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "stamina": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1590
+          ],
+          "after_values": [
+            1600
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 10,
+            "max_delta": 10,
+            "mean_delta": 10,
+            "always_same_delta": true
+          }
+        },
+        "workbreak": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 3,
+            "max_delta": 3,
+            "mean_delta": 3,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Work break",
+      "clicked_text": "Inventory",
+      "to": "Inventory",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776533884579,
+      "last_observed_ts": 1776533884579,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Inventory",
+      "clicked_text": "Back",
+      "to": "Work break",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776533898936,
+      "last_observed_ts": 1776533898936,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "stamina": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1600
+          ],
+          "after_values": [
+            1610
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 10,
+            "max_delta": 10,
+            "mean_delta": 10,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Evening",
+      "clicked_text": "Prepare some infusion",
+      "to": "eveTea",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776533913790,
+      "last_observed_ts": 1776533913790,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "eveInfusion": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "eveTea",
+      "clicked_text": "Eric is getting touchy",
+      "to": "eveTea",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776533924783,
+      "last_observed_ts": 1776533924783,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "randompeeping": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            7
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -6,
+            "max_delta": -6,
+            "mean_delta": -6,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "eveTea",
+      "clicked_text": "Chat with your father in law",
+      "to": "EveTea2",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776533940448,
+      "last_observed_ts": 1776533940448,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "EveTea2",
+      "clicked_text": "Get flirty",
+      "to": "EveTea2",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776533951584,
+      "last_observed_ts": 1776533951584,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "EveTea2",
+      "clicked_text": "Be a good girl",
+      "to": "EveTea2",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776533967190,
+      "last_observed_ts": 1776533967190,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "EveTea2",
+      "clicked_text": "You feel exhausted",
+      "to": "Night",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776533983178,
+      "last_observed_ts": 1776533983178,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "car1",
+      "clicked_text": "Flirt a bit ?",
+      "to": "car1",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776534041956,
+      "last_observed_ts": 1776534041956,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "car1",
+      "clicked_text": "Flirt a bit more",
+      "to": "car1",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776534052935,
+      "last_observed_ts": 1776534052935,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "car1",
+      "clicked_text": "Take him deeper",
+      "to": "car1",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776534062732,
+      "last_observed_ts": 1776534062732,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "ShoppingEric",
+      "clicked_text": "Play with Daddy?",
+      "to": "ShoppingEric",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776534086796,
+      "last_observed_ts": 1776534086796,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "ShoppingEric",
+      "clicked_text": "Take his cum",
+      "to": "ShoppingEric",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776534097455,
+      "last_observed_ts": 1776534097455,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "stamina": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1600
+          ],
+          "after_values": [
+            1580
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -20,
+            "max_delta": -20,
+            "mean_delta": -20,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Kitchenevent1",
+      "clicked_text": "Let Bobby explore",
+      "to": "kitchenevent1a",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776534126166,
+      "last_observed_ts": 1776534126166,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "kitchenevent1a",
+      "clicked_text": "Be wilder",
+      "to": "kitchenevent1b",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776534137224,
+      "last_observed_ts": 1776534137224,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "kitchenevent1b",
+      "clicked_text": "Eric still peeping",
+      "to": "kitchenevent1b",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776534147395,
+      "last_observed_ts": 1776534147395,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "kitchenevent1b",
+      "clicked_text": "Emilie wants more",
+      "to": "kitchenevent1b",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776534157391,
+      "last_observed_ts": 1776534157391,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "stamina": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1580
+          ],
+          "after_values": [
+            1550
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -30,
+            "max_delta": -30,
+            "mean_delta": -30,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "eveningtv0",
+      "clicked_text": "Just chill",
+      "to": "eveningtv0",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776534179932,
+      "last_observed_ts": 1776534179932,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "eveningtv0",
+      "clicked_text": "Let him explore",
+      "to": "eveningtv0",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776534194744,
+      "last_observed_ts": 1776534194744,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "eveningtv1",
+      "clicked_text": "Free his dick",
+      "to": "eveningtv1",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776534219613,
+      "last_observed_ts": 1776534219613,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "eveningtv1",
+      "clicked_text": "Your fiancé his coming back",
+      "to": "eveningtv1",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776534229849,
+      "last_observed_ts": 1776534229849,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "stamina": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1560
+          ],
+          "after_values": [
+            1550
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -10,
+            "max_delta": -10,
+            "mean_delta": -10,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Early Morning",
+      "clicked_text": "Is that a mroning wood ?",
+      "to": "wakebob",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776534265826,
+      "last_observed_ts": 1776534265826,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "wakebob",
+      "clicked_text": "Saves",
+      "to": "wakebob",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776534339853,
+      "last_observed_ts": 1776534339853,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "wakebob",
+      "clicked_text": null,
+      "to": "wakebob",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776534357154,
+      "last_observed_ts": 1776534357154,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
     }
   ],
   "synthetic_edges": [
@@ -29648,13 +30188,2185 @@
           }
         }
       }
+    },
+    {
+      "cmd": "restore",
+      "from": "Start",
+      "to": "Work break",
+      "observation_count": 1,
+      "first_observed_ts": 1776533807004,
+      "last_observed_ts": 1776533807004,
+      "effect_aggregate": {
+        "tease1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "daddyshower1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "shopping1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "sport": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "gym1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "gym2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "gym3": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "run1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "yoga1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": null
+        },
+        "yoga2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": null
+        },
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            89
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 89,
+            "max_delta": 89,
+            "mean_delta": 89,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            50
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 50,
+            "max_delta": 50,
+            "mean_delta": 50,
+            "always_same_delta": true
+          }
+        },
+        "loveanal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            7
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 7,
+            "max_delta": 7,
+            "mean_delta": 7,
+            "always_same_delta": true
+          }
+        },
+        "loveoral": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            23
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 23,
+            "max_delta": 23,
+            "mean_delta": 23,
+            "always_same_delta": true
+          }
+        },
+        "charisma": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            10
+          ],
+          "after_values": [
+            23
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 13,
+            "max_delta": 13,
+            "mean_delta": 13,
+            "always_same_delta": true
+          }
+        },
+        "fitness": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            10
+          ],
+          "after_values": [
+            20
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 10,
+            "max_delta": 10,
+            "mean_delta": 10,
+            "always_same_delta": true
+          }
+        },
+        "sharing": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 4,
+            "max_delta": 4,
+            "mean_delta": 4,
+            "always_same_delta": true
+          }
+        },
+        "bobbyaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            71
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 71,
+            "max_delta": 71,
+            "mean_delta": 71,
+            "always_same_delta": true
+          }
+        },
+        "ericaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            62
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 62,
+            "max_delta": 62,
+            "mean_delta": 62,
+            "always_same_delta": true
+          }
+        },
+        "francoisaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            24
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 24,
+            "max_delta": 24,
+            "mean_delta": 24,
+            "always_same_delta": true
+          }
+        },
+        "sophiaaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            10
+          ],
+          "after_values": [
+            null
+          ],
+          "numeric_stats": null
+        },
+        "gabriellaaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            22
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 22,
+            "max_delta": 22,
+            "mean_delta": 22,
+            "always_same_delta": true
+          }
+        },
+        "marcaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            26
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 26,
+            "max_delta": 26,
+            "mean_delta": 26,
+            "always_same_delta": true
+          }
+        },
+        "johnaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            null
+          ],
+          "numeric_stats": null
+        },
+        "coworkeraddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            6
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 6,
+            "max_delta": 6,
+            "mean_delta": 6,
+            "always_same_delta": true
+          }
+        },
+        "selfie2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "selfie4": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "selfie5": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "selfie6": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "selfie7": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "selfie8": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "selfie13": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "selfie16": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "selfie19": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "selfie20": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "selfie21": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "hasdildo": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "hasplug": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "hasofficeoutfit": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "haslingerie1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "haslube": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "hascoffee": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "meetcoworker": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "bus1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "Tutoring": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "Tutoring1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "Tutoring2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "Tutoring3": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "Tutoring4": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "Gab3": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "read": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "game": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "startingpassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "Late Afternoon"
+          ],
+          "numeric_stats": null
+        },
+        "Chapter5": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "Chapter6": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "dress1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "breakfast1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "r1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "l1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "k1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "b1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "a1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "Chapter8": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "selfie27": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "selfie29": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "selfie30": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "Chapter9": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "Chapter7": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "selfie32": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "Chapter10": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "Day": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            8
+          ],
+          "numeric_stats": null
+        },
+        "busevent1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "busevent2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "busevent3": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "carevent1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "carevent2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "carevent3": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "sisterevent1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "eventworkmorning1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "eventworkmorning2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "eventworkmorning3": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "eventworkmorning4": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "workeventafternoon1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "workeventafternoon2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "shower1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "shower2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "shower3": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "sharing1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "sharing2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "sharing3": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "sharing4": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "stamina": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            1590
+          ],
+          "numeric_stats": null
+        },
+        "sleeptv1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "sleeptv2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "drivetowork": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "breakfast": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "yoga": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "showerevening": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "chill": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "tutoring": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "dress": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "shop1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "shop2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "dinerisready": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "tv": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "dreamb": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            6
+          ],
+          "numeric_stats": null
+        },
+        "dream": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            9
+          ],
+          "numeric_stats": null
+        },
+        "latenight": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "wakeup2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            6
+          ],
+          "numeric_stats": null
+        },
+        "showerb": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": null
+        },
+        "showermast": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": null
+        },
+        "wakeup": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": null
+        },
+        "workbreak": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": null
+        },
+        "officework": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": null
+        },
+        "randompeeping": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            7
+          ],
+          "numeric_stats": null
+        },
+        "randomchill": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": null
+        },
+        "randomflirt": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": null
+        },
+        "flirttv": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": null
+        },
+        "kitchenmor1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "kitchenmor2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "lateDad1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "lateDad2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "lateDad3": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "yogaevent1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            null
+          ],
+          "numeric_stats": null
+        },
+        "sisterevent2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "meetDaddyHallway": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "selfie35": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Work break",
+      "to": "Evening",
+      "observation_count": 1,
+      "first_observed_ts": 1776533901563,
+      "last_observed_ts": 1776533901563,
+      "effect_aggregate": {
+        "Day": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            8
+          ],
+          "after_values": [
+            7
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -1,
+            "max_delta": -1,
+            "mean_delta": -1,
+            "always_same_delta": true
+          }
+        },
+        "showerevening": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "dinerisready": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "randomchill": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            4
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Night",
+      "to": "Night",
+      "observation_count": 1,
+      "first_observed_ts": 1776534003274,
+      "last_observed_ts": 1776534003274,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "Night",
+      "to": "sneak",
+      "observation_count": 1,
+      "first_observed_ts": 1776534018758,
+      "last_observed_ts": 1776534018758,
+      "effect_aggregate": {
+        "stamina": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1610
+          ],
+          "after_values": [
+            1600
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -10,
+            "max_delta": -10,
+            "mean_delta": -10,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "sneak",
+      "to": "car1",
+      "observation_count": 1,
+      "first_observed_ts": 1776534031738,
+      "last_observed_ts": 1776534031738,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "car1",
+      "to": "ShoppingEric",
+      "observation_count": 1,
+      "first_observed_ts": 1776534076412,
+      "last_observed_ts": 1776534076412,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "ShoppingEric",
+      "to": "Kitchenevent1",
+      "observation_count": 1,
+      "first_observed_ts": 1776534111966,
+      "last_observed_ts": 1776534111966,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "kitchenevent1b",
+      "to": "eveningtv0",
+      "observation_count": 1,
+      "first_observed_ts": 1776534169500,
+      "last_observed_ts": 1776534169500,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "eveningtv0",
+      "to": "eveningtv1",
+      "observation_count": 1,
+      "first_observed_ts": 1776534209710,
+      "last_observed_ts": 1776534209710,
+      "effect_aggregate": {
+        "stamina": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1550
+          ],
+          "after_values": [
+            1560
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 10,
+            "max_delta": 10,
+            "mean_delta": 10,
+            "always_same_delta": true
+          }
+        },
+        "tv": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "eveningtv1",
+      "to": "Early Morning",
+      "observation_count": 1,
+      "first_observed_ts": 1776534241679,
+      "last_observed_ts": 1776534241679,
+      "effect_aggregate": {
+        "Day": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            7
+          ],
+          "after_values": [
+            13
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 6,
+            "max_delta": 6,
+            "mean_delta": 6,
+            "always_same_delta": true
+          }
+        },
+        "wakeup": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2
+          ],
+          "after_values": [
+            6
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 4,
+            "max_delta": 4,
+            "mean_delta": 4,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Early Morning",
+      "to": "Early Morning",
+      "observation_count": 1,
+      "first_observed_ts": 1776534254895,
+      "last_observed_ts": 1776534254895,
+      "effect_aggregate": {
+        "Day": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            13
+          ],
+          "after_values": [
+            15
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "wakeup": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            6
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -3,
+            "max_delta": -3,
+            "mean_delta": -3,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "wakebob",
+      "to": "wakebob",
+      "observation_count": 1,
+      "first_observed_ts": 1776534401997,
+      "last_observed_ts": 1776534401997,
+      "effect_aggregate": {}
     }
   ],
   "coverage": {
     "static_edges_total": 1121,
-    "observed_static_edges": 508,
-    "unobserved_static_edges": 613,
-    "coverage_ratio": 0.4532,
-    "observed_only_edges": 179
+    "observed_static_edges": 514,
+    "unobserved_static_edges": 607,
+    "coverage_ratio": 0.4585,
+    "observed_only_edges": 199
   }
 }
