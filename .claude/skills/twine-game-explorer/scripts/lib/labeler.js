@@ -24,13 +24,17 @@ const RULES = {
   // Prefix is the NPC name candidate. `addiction` and friends are common in
   // adult-game Twines that track per-NPC escalation meters — missing them
   // drops whole NPC rosters into the scalar fallback.
-  npcStatSuffix: /^([a-z][a-z]{1,20}?)(love|lust|trust|respect|friendship|affection|submission|dominance|obedience|corruption|fear|jealousy|arousal|addiction|infatuation|devotion|attraction|bond|intimacy)$/i,
+  npcStatSuffix: /^([a-z][a-z_]{1,20}?)(?:_)?(love|lust|trust|respect|friendship|affection|submission|dominance|obedience|corruption|fear|jealousy|arousal|addiction|infatuation|devotion|attraction|bond|intimacy|relation|relationship)$/i,
 
-  // Player-level scalar stats (exact basename match).
-  playerStat: /^(money|cash|gold|energy|stamina|sleep|hunger|fatigue|willpower|composure|charisma|intelligence|strength|dexterity|fitness|beauty|reputation|fame|skill|corruption)$/i,
+  // Player-level scalar stats (exact basename match). Includes common
+  // abbreviations (int=intelligence, rep=reputation, str=strength) used
+  // in tabletop-flavored adult Twines.
+  playerStat: /^(money|cash|gold|energy|stamina|sleep|hunger|fatigue|willpower|composure|charisma|intelligence|strength|dexterity|fitness|beauty|reputation|fame|skill|corruption|int|intel|str|dex|con|wis|cha|rep|drunk|serve|sanity|hp|mp)$/i,
 
-  // Time / calendar basenames.
-  time: /^(day|hour|week|month|year|turn|time|calendar|morning|evening|night|afternoon|weekday)$/i,
+  // Time / calendar basenames. Includes day-counter convention `day\d+`
+  // (e.g. sultry-secrets's `day5`). Per-day scene flags like `day6_kitchen`
+  // stay as `flag` because flagPrefix `day\d+_` matches first.
+  time: /^(day|hour|week|month|year|turn|time|calendar|morning|evening|night|afternoon|weekday|day\d+)$/i,
 
   // Flag suffixes — story milestone indicators.
   flagSuffix: /(_unlocked|_complete|_seen|_met|_first|_started|_done|_known|scene\d*|fucked|flag)$/i,
@@ -86,8 +90,10 @@ function labelVariable(name, profile) {
     confidence = 'high';
   }
 
-  // NPC-stat nested pattern: npcs.angela.love
-  const nestedNpc = fullLower.match(/^(?:\$?(?:npcs|relations|girls|characters)\.)?([a-z][a-z_0-9]{1,20})\.(love|lust|trust|respect|friendship|affection|corruption)$/);
+  // NPC-stat nested pattern: npcs.angela.love. Suffix alternation mirrors
+  // npcStatSuffix above so dotted-namespace NPCs catch the same conventions
+  // (e.g. zaras's dick.relationship, ben.relationship).
+  const nestedNpc = fullLower.match(/^(?:\$?(?:npcs|relations|girls|characters)\.)?([a-z][a-z_0-9]{1,20})\.(love|lust|trust|respect|friendship|affection|corruption|addiction|infatuation|devotion|attraction|bond|intimacy|relation|relationship)$/);
   if (nestedNpc) {
     extras = { npc: nestedNpc[1], stat: nestedNpc[2] };
     primary = 'npc_stat';
