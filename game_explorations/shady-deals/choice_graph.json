@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-04-18T09:36:11.758Z",
-  "total_observed_edges": 22,
-  "total_synthetic_edges": 127,
-  "total_play_log_entries": 367,
-  "total_timeline_entries": 178,
+  "generated_at": "2026-04-18T17:57:11.914Z",
+  "total_observed_edges": 23,
+  "total_synthetic_edges": 137,
+  "total_play_log_entries": 441,
+  "total_timeline_entries": 209,
   "initial_passage": "Disclaimer",
   "orphan_clicks": [],
   "observed_edges": [
@@ -20,6 +20,57 @@
       "same_state_hits": 4,
       "is_self_loop": true,
       "effect_aggregate": {}
+    },
+    {
+      "from": "Disclaimer",
+      "clicked_text": "Ok.",
+      "to": "StartPage",
+      "observation_count": 3,
+      "classifications": {
+        "branch": 3
+      },
+      "first_observed_ts": 1776499721889,
+      "last_observed_ts": 1776534248996,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "city_name": {
+          "count": 3,
+          "changes_count": 3,
+          "kinds": {
+            "changed": 3
+          },
+          "before_values": [
+            "Default Name",
+            "Default Name",
+            "Default Name"
+          ],
+          "after_values": [
+            "Ambush Alley",
+            "Kickback Keys",
+            "Skullduggery Springs"
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 3,
+          "changes_count": 3,
+          "kinds": {
+            "changed": 3
+          },
+          "before_values": [
+            "Disclaimer",
+            "Disclaimer",
+            "Disclaimer"
+          ],
+          "after_values": [
+            "StartPage",
+            "StartPage",
+            "StartPage"
+          ],
+          "numeric_stats": null
+        }
+      }
     },
     {
       "from": "Home",
@@ -239,53 +290,6 @@
             "mean_delta": -4,
             "always_same_delta": true
           }
-        }
-      }
-    },
-    {
-      "from": "Disclaimer",
-      "clicked_text": "Ok.",
-      "to": "StartPage",
-      "observation_count": 2,
-      "classifications": {
-        "branch": 2
-      },
-      "first_observed_ts": 1776499721889,
-      "last_observed_ts": 1776504126640,
-      "same_state_hits": 0,
-      "is_self_loop": false,
-      "effect_aggregate": {
-        "city_name": {
-          "count": 2,
-          "changes_count": 2,
-          "kinds": {
-            "changed": 2
-          },
-          "before_values": [
-            "Default Name",
-            "Default Name"
-          ],
-          "after_values": [
-            "Ambush Alley",
-            "Kickback Keys"
-          ],
-          "numeric_stats": null
-        },
-        "return": {
-          "count": 2,
-          "changes_count": 2,
-          "kinds": {
-            "changed": 2
-          },
-          "before_values": [
-            "Disclaimer",
-            "Disclaimer"
-          ],
-          "after_values": [
-            "StartPage",
-            "StartPage"
-          ],
-          "numeric_stats": null
         }
       }
     },
@@ -2029,6 +2033,20 @@
           "numeric_stats": null
         }
       }
+    },
+    {
+      "from": "Outskirts",
+      "clicked_text": null,
+      "to": "Outskirts",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776535012463,
+      "last_observed_ts": 1776535012463,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
     }
   ],
   "synthetic_edges": [
@@ -7537,13 +7555,1027 @@
           "numeric_stats": null
         }
       }
+    },
+    {
+      "cmd": "eval",
+      "from": "StartPage",
+      "to": "StartPage",
+      "observation_count": 7,
+      "first_observed_ts": 1776534308714,
+      "last_observed_ts": 1776534395060,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "StartPage",
+      "to": "QuickStart Menu",
+      "observation_count": 1,
+      "first_observed_ts": 1776534434864,
+      "last_observed_ts": 1776534434864,
+      "effect_aggregate": {
+        "adolesence": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "Bully"
+          ],
+          "numeric_stats": null
+        },
+        "first_crime": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "Robbery"
+          ],
+          "numeric_stats": null
+        },
+        "last_crime": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "Burglary"
+          ],
+          "numeric_stats": null
+        },
+        "band_name": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Band"
+          ],
+          "after_values": [
+            "Dawg"
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "StartPage"
+          ],
+          "after_values": [
+            "QuickStart Menu"
+          ],
+          "numeric_stats": null
+        },
+        "pc_haircolor": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "brunette"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "QuickStart Menu",
+      "to": "Home",
+      "observation_count": 1,
+      "first_observed_ts": 1776534503089,
+      "last_observed_ts": 1776534503089,
+      "effect_aggregate": {
+        "cun_base": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            6
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 3,
+            "max_delta": 3,
+            "mean_delta": 3,
+            "always_same_delta": true
+          }
+        },
+        "combat_base": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            7
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 4,
+            "max_delta": 4,
+            "mean_delta": 4,
+            "always_same_delta": true
+          }
+        },
+        "first_crime": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Robbery"
+          ],
+          "after_values": [
+            "Theft"
+          ],
+          "numeric_stats": null
+        },
+        "money": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            10000
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 10000,
+            "max_delta": 10000,
+            "mean_delta": 10000,
+            "always_same_delta": true
+          }
+        },
+        "reputation": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            5000
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 5000,
+            "max_delta": 5000,
+            "mean_delta": 5000,
+            "always_same_delta": true
+          }
+        },
+        "gangs_base": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "gangs_met": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "mafia_base": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "mafia_met": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "cartel_base": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "cartel_met": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 3,
+            "max_delta": 3,
+            "mean_delta": 3,
+            "always_same_delta": true
+          }
+        },
+        "bikers_met": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "car_1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "car": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "home_type": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "p_warehouse": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "p_warehouse_size": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 5,
+            "max_delta": 5,
+            "mean_delta": 5,
+            "always_same_delta": true
+          }
+        },
+        "warehouse_rent": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            30
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 30,
+            "max_delta": 30,
+            "mean_delta": 30,
+            "always_same_delta": true
+          }
+        },
+        "p_boss": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "original_band_name": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Band"
+          ],
+          "after_values": [
+            "The Syndicate"
+          ],
+          "numeric_stats": null
+        },
+        "game_state": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "outskirts_roadblock": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            true
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "news_setup": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "QuickStart Menu"
+          ],
+          "after_values": [
+            "Home"
+          ],
+          "numeric_stats": null
+        },
+        "todayNews": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            {
+              "text": "Reports of an impromptu street race on outskirts. Police issue warnings.",
+              "tags": [
+                "fluff"
+              ]
+            }
+          ],
+          "numeric_stats": null
+        },
+        "callText": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "Reports of an impromptu street race on outskirts. Police issue warnings."
+          ],
+          "numeric_stats": null
+        },
+        "callTarget": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            null
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Home",
+      "to": "Outskirts",
+      "observation_count": 1,
+      "first_observed_ts": 1776534514976,
+      "last_observed_ts": 1776534514976,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Home"
+          ],
+          "after_values": [
+            "Outskirts"
+          ],
+          "numeric_stats": null
+        },
+        "outskirts_amount": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": null
+        },
+        "outskirts_price": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            387
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Outskirts",
+      "to": "Motor Vehicle Theft",
+      "observation_count": 1,
+      "first_observed_ts": 1776534556857,
+      "last_observed_ts": 1776534556857,
+      "effect_aggregate": {
+        "car_theft_problem": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "Car alarm turns on"
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Outskirts"
+          ],
+          "after_values": [
+            "Motor Vehicle Theft"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Motor Vehicle Theft",
+      "to": "Car Chase Lose",
+      "observation_count": 1,
+      "first_observed_ts": 1776534568193,
+      "last_observed_ts": 1776534568193,
+      "effect_aggregate": {
+        "exp_percentage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            56
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 56,
+            "max_delta": 56,
+            "mean_delta": 56,
+            "always_same_delta": true
+          }
+        },
+        "reputation": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            5000
+          ],
+          "after_values": [
+            5184
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 184,
+            "max_delta": 184,
+            "mean_delta": 184,
+            "always_same_delta": true
+          }
+        },
+        "racer_trait_progress": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            56
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 56,
+            "max_delta": 56,
+            "mean_delta": 56,
+            "always_same_delta": true
+          }
+        },
+        "race_cd": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 3,
+            "max_delta": 3,
+            "mean_delta": 3,
+            "always_same_delta": true
+          }
+        },
+        "timer_seconds": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            40
+          ],
+          "after_values": [
+            29
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -11,
+            "max_delta": -11,
+            "mean_delta": -11,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Motor Vehicle Theft"
+          ],
+          "after_values": [
+            "Car Chase Lose"
+          ],
+          "numeric_stats": null
+        },
+        "notify_array.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "You felt this thing called a freedom. On the road, of course. 31%/100% for a new trait."
+          ],
+          "numeric_stats": null
+        },
+        "notify_array.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "You could learn a thing or two about riding on such speed. Well... 56%/100% for a new trait."
+          ],
+          "numeric_stats": null
+        },
+        "chase_right_dir.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "direct"
+          ],
+          "numeric_stats": null
+        },
+        "chase_right_dir.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "right"
+          ],
+          "numeric_stats": null
+        },
+        "chase_problem": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "There’s an unexpected curve to the left coming up!"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Car Chase Lose",
+      "to": "Harbor-Dark Alleys",
+      "observation_count": 1,
+      "first_observed_ts": 1776534643434,
+      "last_observed_ts": 1776534643434,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Car Chase Lose"
+          ],
+          "after_values": [
+            "Harbor-Dark Alleys"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Harbor-Dark Alleys",
+      "to": "Dark Alleys",
+      "observation_count": 1,
+      "first_observed_ts": 1776534654684,
+      "last_observed_ts": 1776534654684,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Harbor-Dark Alleys"
+          ],
+          "after_values": [
+            "Dark Alleys"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Dark Alleys",
+      "to": "Whiteboard",
+      "observation_count": 1,
+      "first_observed_ts": 1776534759044,
+      "last_observed_ts": 1776534759044,
+      "effect_aggregate": {
+        "boss_rep_lose": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            15
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 15,
+            "max_delta": 15,
+            "mean_delta": 15,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Dark Alleys"
+          ],
+          "after_values": [
+            "Whiteboard"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Whiteboard",
+      "to": "Outskirts",
+      "observation_count": 1,
+      "first_observed_ts": 1776534987509,
+      "last_observed_ts": 1776534987509,
+      "effect_aggregate": {
+        "gameDate.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "2010-06-01T08:00:00.000Z"
+          ],
+          "after_values": [
+            "2025-01-01T22:00:00.000Z"
+          ],
+          "numeric_stats": null
+        },
+        "race_cd": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            0
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -3,
+            "max_delta": -3,
+            "mean_delta": -3,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Whiteboard"
+          ],
+          "after_values": [
+            "Outskirts"
+          ],
+          "numeric_stats": null
+        }
+      }
     }
   ],
   "coverage": {
     "static_edges_total": 2120,
-    "observed_static_edges": 39,
-    "unobserved_static_edges": 2081,
-    "coverage_ratio": 0.0184,
+    "observed_static_edges": 41,
+    "unobserved_static_edges": 2079,
+    "coverage_ratio": 0.0193,
     "observed_only_edges": 5
   }
 }
