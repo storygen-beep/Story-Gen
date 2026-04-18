@@ -1,0 +1,24 @@
+{
+  "session_id": 6,
+  "start_ts": "2026-04-18T04:55:05.123Z",
+  "start_epoch_ms": 1776488105123,
+  "end_ts": "2026-04-18T04:57:21.719Z",
+  "duration_s": 137,
+  "clicks": 0,
+  "choices_explored": 0,
+  "arrow_advances": 0,
+  "unique_states_seen": 852,
+  "new_unique_states": 21,
+  "frontier_size_start": 1,
+  "frontier_size_end": 1,
+  "reached_endings": [
+    "Dream"
+  ],
+  "completed": true,
+  "notes": [
+    "SESSION 5 — Branch-verification sweep via Engine.play() jumps. CONFIRMED unexplored content: (1) Chapter1.73 Anal = ~6 paragraphs explicit first-time anal with François on island, first lube via saliva, 'Stay in me!' dialogue, grants +2 Anal exp then → Cumming split → 1.75/1.76 tits/facial. (2) Chapter1.72 Doggy = separate scene ('she offered her rear', 'bubble butt', no pain 'destiny made them be'). (3) Chapter2.31 4-way with Bobby during phone call = Oral exp +1 branch with 'She was moaning while she licked him' → Cuni/Missionary/Doggy/Cum. (4) Chapter2.32 Cuni = Bobby worships legs, licks slowly, saliva-slime, → 69/Missionary/Doggy/Cum.",
+    "WIP/STUB VERIFICATION via direct Engine.play(): latedad = 2 lines ('Or you come to Daddy?' + sleep), latebob = 1 line scaffolding, Friends1 = just 'Dream' link, sister3g = 'Go to sleep', wakedad = 'Morning', sneak = 'Night', sharing4 = 'Night', Kitchenevesharing2 = 'Evening', shopingSisB = 'Go back home'. All confirmed pure stubs with single-line navigation. cinema3 has partial skeleton ('Cinema → Choose movie → Take sit → Film begin → Get touchy → Get back home') but no prose in between — scaffolded linkreplace chain awaiting text. Harem passage does NOT exist (only the flag variable). This definitively bounds v1.0 playable content at ~200-250 clicks through chapters 1-10 day 1-13.",
+    "NEW PASSAGE: Tutoring2 captured in full = Marc handjob scene. Emilie loosens shirt, bra visible, grasps his 'gigantic' shaft, Marc trembles unbuttoning pants, 'like a monument to desire' diction, she strokes+makes out, he roams her body. Confirms prior note that Tutoring is a nested arc Tutoring0→Tutoring→Tutoring1/2→back→Gab encounter. Tutoring2 is the H-scene climax of the Marc arc — not explicit cum, just mutual stroking/making out. Marc addiction likely ticks up here. sister2g = Jonathan-kitchen-morning flirt (Day 4 after Sister2 overnight): Emilie wakes, Jonathan bare-skinned cooking pancakes, 'Starving, actually. But I think I could be persuaded to work up an appetite' double-entendre, tension builds — leads toward park BJ event noted previously.",
+    "[ending] Dream: END OF CONTENT at Day 14 — v1.0 terminus, verified via Day=14 + Dream"
+  ]
+}

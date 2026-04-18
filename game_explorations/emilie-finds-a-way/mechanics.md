@@ -21,26 +21,26 @@ _Not detected._
 _Not detected._
 
 ### Multi-NPC parallel threads
-_Not detected._
+**Present.** 9 NPCs detected with dedicated stat vars.
 
 ### Location trilemmas / day-end navigation
 _Not detected._
 
 ## Scenes catalogued
-- Unique passages seen: 38
+- Distinct passage names visited: 22 (the "Unique states seen" count in report.md includes variable-permutations of the same passage).
 - Most-visited passages:
-  - `Dream` × 38
-  - `sharing3` × 23
-  - `cinema1` × 23
-  - `Intro2` × 19
-  - `eventworkmorning2` × 19
-  - `Evening` × 16
-  - `Work Morning` × 15
-  - `Work break` × 15
-  - `Late Afternoon` × 14
-  - `Morning` × 12
-  - `Gab40` × 12
-  - `Cheat` × 11
-  - `sharing2g` × 11
-  - `randomevent1` × 11
-  - `Gab4` × 9
+  - `Start` × 3
+  - `Chapter1.72` × 2
+  - `Chapter1.73` × 2
+  - `Chapter2.31` × 2
+  - `Chapter2.32` × 2
+  - `latedad1` × 2
+  - `sister2g` × 2
+  - `Tutoring2` × 2
+  - `Flint` × 2
+  - `latedad` × 2
+  - `latebob` × 2
+  - `Friends1` × 2
+  - `cinema2` × 2
+  - `sister3g` × 2
+  - `wakedad` × 2

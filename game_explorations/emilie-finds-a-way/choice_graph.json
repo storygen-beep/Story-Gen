@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-04-17T14:30:25.864Z",
+  "generated_at": "2026-04-18T04:57:21.765Z",
   "total_observed_edges": 643,
-  "total_synthetic_edges": 14,
-  "total_play_log_entries": 2391,
-  "total_timeline_entries": 1671,
+  "total_synthetic_edges": 35,
+  "total_play_log_entries": 2442,
+  "total_timeline_entries": 1693,
   "initial_passage": "Start",
   "orphan_clicks": [],
   "observed_edges": [
@@ -29646,6 +29646,582 @@
             "mean_delta": -1,
             "always_same_delta": true
           }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Start",
+      "to": "Chapter1.72",
+      "observation_count": 1,
+      "first_observed_ts": 1776488116497,
+      "last_observed_ts": 1776488116497,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "Chapter1.72",
+      "to": "Chapter1.73",
+      "observation_count": 1,
+      "first_observed_ts": 1776488128191,
+      "last_observed_ts": 1776488128191,
+      "effect_aggregate": {
+        "loveanal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Chapter1.73",
+      "to": "Chapter2.31",
+      "observation_count": 1,
+      "first_observed_ts": 1776488135484,
+      "last_observed_ts": 1776488135484,
+      "effect_aggregate": {
+        "loveoral": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Chapter2.31",
+      "to": "Chapter2.32",
+      "observation_count": 1,
+      "first_observed_ts": 1776488144841,
+      "last_observed_ts": 1776488144841,
+      "effect_aggregate": {
+        "tease1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Chapter2.32",
+      "to": "latedad1",
+      "observation_count": 1,
+      "first_observed_ts": 1776488145458,
+      "last_observed_ts": 1776488145458,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "latedad1",
+      "to": "sister2g",
+      "observation_count": 1,
+      "first_observed_ts": 1776488145990,
+      "last_observed_ts": 1776488145990,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "sister2g",
+      "to": "Tutoring2",
+      "observation_count": 1,
+      "first_observed_ts": 1776488146575,
+      "last_observed_ts": 1776488146575,
+      "effect_aggregate": {
+        "openminded": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "marcaddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "Tutoring": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "Tutoring2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Tutoring2",
+      "to": "Flint",
+      "observation_count": 1,
+      "first_observed_ts": 1776488147155,
+      "last_observed_ts": 1776488147155,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "Flint",
+      "to": "latedad",
+      "observation_count": 1,
+      "first_observed_ts": 1776488177883,
+      "last_observed_ts": 1776488177883,
+      "effect_aggregate": {
+        "stamina": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            null
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "latedad",
+      "to": "latebob",
+      "observation_count": 1,
+      "first_observed_ts": 1776488178406,
+      "last_observed_ts": 1776488178406,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "latebob",
+      "to": "Friends1",
+      "observation_count": 1,
+      "first_observed_ts": 1776488180050,
+      "last_observed_ts": 1776488180050,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "Friends1",
+      "to": "cinema2",
+      "observation_count": 1,
+      "first_observed_ts": 1776488182923,
+      "last_observed_ts": 1776488182923,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "cinema2",
+      "to": "sister3g",
+      "observation_count": 1,
+      "first_observed_ts": 1776488183483,
+      "last_observed_ts": 1776488183483,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "sister3g",
+      "to": "wakedad",
+      "observation_count": 1,
+      "first_observed_ts": 1776488184007,
+      "last_observed_ts": 1776488184007,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "wakedad",
+      "to": "Harem",
+      "observation_count": 1,
+      "first_observed_ts": 1776488185710,
+      "last_observed_ts": 1776488185710,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "Harem",
+      "to": "sneak",
+      "observation_count": 1,
+      "first_observed_ts": 1776488196518,
+      "last_observed_ts": 1776488196518,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "sneak",
+      "to": "cinema3",
+      "observation_count": 1,
+      "first_observed_ts": 1776488197113,
+      "last_observed_ts": 1776488197113,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "cinema3",
+      "to": "shopingSisB",
+      "observation_count": 1,
+      "first_observed_ts": 1776488197640,
+      "last_observed_ts": 1776488197640,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "shopingSisB",
+      "to": "sharing4",
+      "observation_count": 1,
+      "first_observed_ts": 1776488198199,
+      "last_observed_ts": 1776488198199,
+      "effect_aggregate": {
+        "sharing4": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "sharing4",
+      "to": "Kitchenevesharing2",
+      "observation_count": 1,
+      "first_observed_ts": 1776488198722,
+      "last_observed_ts": 1776488198722,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "Kitchenevesharing2",
+      "to": "Dream",
+      "observation_count": 1,
+      "first_observed_ts": 1776488238509,
+      "last_observed_ts": 1776488238509,
+      "effect_aggregate": {
+        "Day": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            15
+          ],
+          "numeric_stats": null
+        },
+        "drivetowork": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "breakfast": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "yoga": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "showerevening": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "chill": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "tutoring": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "dress": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "shop1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "shop2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "dinerisready": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "tv": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "dreamb": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            9
+          ],
+          "numeric_stats": null
+        },
+        "dream": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            17
+          ],
+          "numeric_stats": null
+        },
+        "latenight": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
         }
       }
     }

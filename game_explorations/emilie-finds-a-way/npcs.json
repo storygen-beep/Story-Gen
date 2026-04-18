@@ -1,1 +1,272 @@
-{}
+{
+  "bobby": {
+    "stats": [
+      "addiction"
+    ],
+    "vars": [
+      {
+        "name": "bobbyaddiction",
+        "stat": "addiction",
+        "profile": {
+          "types": [
+            "number"
+          ],
+          "mutation_count": 0,
+          "first_ts": 1776488105125,
+          "last_ts": 1776488238749,
+          "passages_seen_on_count": 22,
+          "number_stats": {
+            "count": 44,
+            "unique_count": 1,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0,
+            "is_monotonic_increasing": true,
+            "is_boolean_like": true
+          }
+        }
+      }
+    ]
+  },
+  "eric": {
+    "stats": [
+      "addiction"
+    ],
+    "vars": [
+      {
+        "name": "ericaddiction",
+        "stat": "addiction",
+        "profile": {
+          "types": [
+            "number"
+          ],
+          "mutation_count": 0,
+          "first_ts": 1776488105125,
+          "last_ts": 1776488238749,
+          "passages_seen_on_count": 22,
+          "number_stats": {
+            "count": 44,
+            "unique_count": 1,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0,
+            "is_monotonic_increasing": true,
+            "is_boolean_like": true
+          }
+        }
+      }
+    ]
+  },
+  "francois": {
+    "stats": [
+      "addiction"
+    ],
+    "vars": [
+      {
+        "name": "francoisaddiction",
+        "stat": "addiction",
+        "profile": {
+          "types": [
+            "number"
+          ],
+          "mutation_count": 0,
+          "first_ts": 1776488105125,
+          "last_ts": 1776488238749,
+          "passages_seen_on_count": 22,
+          "number_stats": {
+            "count": 44,
+            "unique_count": 1,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0,
+            "is_monotonic_increasing": true,
+            "is_boolean_like": true
+          }
+        }
+      }
+    ]
+  },
+  "sophia": {
+    "stats": [
+      "addiction"
+    ],
+    "vars": [
+      {
+        "name": "sophiaaddiction",
+        "stat": "addiction",
+        "profile": {
+          "types": [
+            "number"
+          ],
+          "mutation_count": 0,
+          "first_ts": 1776488105125,
+          "last_ts": 1776488238749,
+          "passages_seen_on_count": 22,
+          "number_stats": {
+            "count": 44,
+            "unique_count": 1,
+            "min": 10,
+            "max": 10,
+            "first": 10,
+            "last": 10,
+            "is_monotonic_increasing": true,
+            "is_boolean_like": true
+          }
+        }
+      }
+    ]
+  },
+  "gabriella": {
+    "stats": [
+      "addiction"
+    ],
+    "vars": [
+      {
+        "name": "gabriellaaddiction",
+        "stat": "addiction",
+        "profile": {
+          "types": [
+            "number"
+          ],
+          "mutation_count": 0,
+          "first_ts": 1776488105125,
+          "last_ts": 1776488238749,
+          "passages_seen_on_count": 22,
+          "number_stats": {
+            "count": 44,
+            "unique_count": 1,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0,
+            "is_monotonic_increasing": true,
+            "is_boolean_like": true
+          }
+        }
+      }
+    ]
+  },
+  "marc": {
+    "stats": [
+      "addiction"
+    ],
+    "vars": [
+      {
+        "name": "marcaddiction",
+        "stat": "addiction",
+        "profile": {
+          "types": [
+            "number"
+          ],
+          "mutation_count": 1,
+          "first_ts": 1776488105125,
+          "last_ts": 1776488238749,
+          "passages_seen_on_count": 22,
+          "number_stats": {
+            "count": 44,
+            "unique_count": 2,
+            "min": 0,
+            "max": 2,
+            "first": 0,
+            "last": 2,
+            "is_monotonic_increasing": true,
+            "is_boolean_like": true
+          }
+        }
+      }
+    ]
+  },
+  "john": {
+    "stats": [
+      "addiction"
+    ],
+    "vars": [
+      {
+        "name": "johnaddiction",
+        "stat": "addiction",
+        "profile": {
+          "types": [
+            "number"
+          ],
+          "mutation_count": 0,
+          "first_ts": 1776488105125,
+          "last_ts": 1776488238749,
+          "passages_seen_on_count": 22,
+          "number_stats": {
+            "count": 44,
+            "unique_count": 1,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0,
+            "is_monotonic_increasing": true,
+            "is_boolean_like": true
+          }
+        }
+      }
+    ]
+  },
+  "coworker": {
+    "stats": [
+      "addiction"
+    ],
+    "vars": [
+      {
+        "name": "coworkeraddiction",
+        "stat": "addiction",
+        "profile": {
+          "types": [
+            "number"
+          ],
+          "mutation_count": 0,
+          "first_ts": 1776488105125,
+          "last_ts": 1776488238749,
+          "passages_seen_on_count": 22,
+          "number_stats": {
+            "count": 44,
+            "unique_count": 1,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0,
+            "is_monotonic_increasing": true,
+            "is_boolean_like": true
+          }
+        }
+      }
+    ]
+  },
+  "jonathan": {
+    "stats": [
+      "addiction"
+    ],
+    "vars": [
+      {
+        "name": "jonathanaddiction",
+        "stat": "addiction",
+        "profile": {
+          "types": [
+            "number"
+          ],
+          "mutation_count": 0,
+          "first_ts": 1776488105125,
+          "last_ts": 1776488238749,
+          "passages_seen_on_count": 22,
+          "number_stats": {
+            "count": 44,
+            "unique_count": 1,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0,
+            "is_monotonic_increasing": true,
+            "is_boolean_like": true
+          }
+        }
+      }
+    ]
+  }
+}
