@@ -1,0 +1,1472 @@
+{
+  "generated_at": "2026-04-18T08:19:30.567Z",
+  "total_observed_edges": 7,
+  "total_synthetic_edges": 25,
+  "total_play_log_entries": 86,
+  "total_timeline_entries": 48,
+  "initial_passage": "Disclaimer",
+  "orphan_clicks": [],
+  "observed_edges": [
+    {
+      "from": "Home",
+      "clicked_text": null,
+      "to": "Home",
+      "observation_count": 2,
+      "classifications": {
+        "branch": 2
+      },
+      "first_observed_ts": 1776499936114,
+      "last_observed_ts": 1776499975252,
+      "same_state_hits": 2,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Credits Page",
+      "clicked_text": "OK",
+      "to": "Credits Page",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776499698031,
+      "last_observed_ts": 1776499698031,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Credits Page",
+      "clicked_text": "Close",
+      "to": "Disclaimer",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776499717763,
+      "last_observed_ts": 1776499717763,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Disclaimer",
+      "clicked_text": "Ok.",
+      "to": "StartPage",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776499721889,
+      "last_observed_ts": 1776499721889,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "city_name": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Default Name"
+          ],
+          "after_values": [
+            "Ambush Alley"
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Disclaimer"
+          ],
+          "after_values": [
+            "StartPage"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "CharGen3",
+      "clicked_text": "yours to control.",
+      "to": "Home",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776499841084,
+      "last_observed_ts": 1776499841084,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "money": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            200
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 200,
+            "max_delta": 200,
+            "mean_delta": 200,
+            "always_same_delta": true
+          }
+        },
+        "stat_money": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            200
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 200,
+            "max_delta": 200,
+            "mean_delta": 200,
+            "always_same_delta": true
+          }
+        },
+        "game_state": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "news_setup": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "CharGen3"
+          ],
+          "after_values": [
+            "Home"
+          ],
+          "numeric_stats": null
+        },
+        "todayNews": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            {
+              "text": "Fireworks accidentally set off in Suburbs at dawn. Residents demand answers.",
+              "tags": [
+                "fluff"
+              ]
+            }
+          ],
+          "numeric_stats": null
+        },
+        "callText": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "Fireworks accidentally set off in Suburbs at dawn. Residents demand answers."
+          ],
+          "numeric_stats": null
+        },
+        "callTarget": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            null
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Whiteboard",
+      "clicked_text": "Step away.",
+      "to": "Whiteboard",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776499883945,
+      "last_observed_ts": 1776499883945,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Whiteboard",
+      "clicked_text": null,
+      "to": "Home",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776499908027,
+      "last_observed_ts": 1776499908027,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Whiteboard"
+          ],
+          "after_values": [
+            "Home"
+          ],
+          "numeric_stats": null
+        }
+      }
+    }
+  ],
+  "synthetic_edges": [
+    {
+      "cmd": "keys",
+      "from": "StartPage",
+      "to": "CharGen",
+      "observation_count": 1,
+      "first_observed_ts": 1776499754646,
+      "last_observed_ts": 1776499754646,
+      "effect_aggregate": {
+        "adolesence": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "Bully"
+          ],
+          "numeric_stats": null
+        },
+        "first_crime": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "Robbery"
+          ],
+          "numeric_stats": null
+        },
+        "last_crime": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "Burglary"
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "StartPage"
+          ],
+          "after_values": [
+            "CharGen"
+          ],
+          "numeric_stats": null
+        },
+        "pc_haircolor": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "brunette"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "keys",
+      "from": "CharGen",
+      "to": "CharGen2",
+      "observation_count": 1,
+      "first_observed_ts": 1776499778197,
+      "last_observed_ts": 1776499778197,
+      "effect_aggregate": {
+        "cun_base": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "cun": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "combat_base": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "combat": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "p_inv.1.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "new setup.Inventory({}, [])"
+          ],
+          "after_values": [
+            "new setup.Inventory({\"Lockpick\":5}, [])"
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "CharGen"
+          ],
+          "after_values": [
+            "CharGen2"
+          ],
+          "numeric_stats": null
+        },
+        "pc_photo": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "img/photos/female/brunette/0.webp"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "keys",
+      "from": "CharGen2",
+      "to": "CharGen3",
+      "observation_count": 1,
+      "first_observed_ts": 1776499829127,
+      "last_observed_ts": 1776499829127,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "CharGen2"
+          ],
+          "after_values": [
+            "CharGen3"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "keys",
+      "from": "Home",
+      "to": "Whiteboard",
+      "observation_count": 1,
+      "first_observed_ts": 1776499864901,
+      "last_observed_ts": 1776499864901,
+      "effect_aggregate": {
+        "boss_rep_lose": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            15
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 15,
+            "max_delta": 15,
+            "mean_delta": 15,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Home"
+          ],
+          "after_values": [
+            "Whiteboard"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "keys",
+      "from": "Whiteboard",
+      "to": "Whiteboard",
+      "observation_count": 1,
+      "first_observed_ts": 1776499889552,
+      "last_observed_ts": 1776499889552,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "keys",
+      "from": "Home",
+      "to": "Home",
+      "observation_count": 2,
+      "first_observed_ts": 1776499908776,
+      "last_observed_ts": 1776499916424,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "Home",
+      "to": "Home",
+      "observation_count": 4,
+      "first_observed_ts": 1776499961327,
+      "last_observed_ts": 1776500043675,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "Home",
+      "to": "City Center",
+      "observation_count": 1,
+      "first_observed_ts": 1776500066723,
+      "last_observed_ts": 1776500066723,
+      "effect_aggregate": {
+        "gameDate.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "2010-06-01T08:00:00.000Z"
+          ],
+          "after_values": [
+            "2010-06-01T08:30:00.000Z"
+          ],
+          "numeric_stats": null
+        },
+        "arousal_tick": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            30
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 30,
+            "max_delta": 30,
+            "mean_delta": 30,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Home"
+          ],
+          "after_values": [
+            "City Center"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "City Center",
+      "to": "City Center",
+      "observation_count": 2,
+      "first_observed_ts": 1776500081000,
+      "last_observed_ts": 1776500097408,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "City Center",
+      "to": "Downtown",
+      "observation_count": 1,
+      "first_observed_ts": 1776500138190,
+      "last_observed_ts": 1776500138190,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "City Center"
+          ],
+          "after_values": [
+            "Downtown"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Downtown",
+      "to": "Harbor",
+      "observation_count": 1,
+      "first_observed_ts": 1776500139529,
+      "last_observed_ts": 1776500139529,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Downtown"
+          ],
+          "after_values": [
+            "Harbor"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Harbor",
+      "to": "Suburbs",
+      "observation_count": 1,
+      "first_observed_ts": 1776500140693,
+      "last_observed_ts": 1776500140693,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Harbor"
+          ],
+          "after_values": [
+            "Suburbs"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Suburbs",
+      "to": "Outskirts",
+      "observation_count": 1,
+      "first_observed_ts": 1776500142054,
+      "last_observed_ts": 1776500142054,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Suburbs"
+          ],
+          "after_values": [
+            "Outskirts"
+          ],
+          "numeric_stats": null
+        },
+        "outskirts_amount": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": null
+        },
+        "outskirts_price": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            516
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Outskirts",
+      "to": "Home",
+      "observation_count": 1,
+      "first_observed_ts": 1776500175132,
+      "last_observed_ts": 1776500175132,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Outskirts"
+          ],
+          "after_values": [
+            "Home"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "keys",
+      "from": "Home",
+      "to": "PC",
+      "observation_count": 1,
+      "first_observed_ts": 1776500176435,
+      "last_observed_ts": 1776500176435,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Home"
+          ],
+          "after_values": [
+            "PC"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "keys",
+      "from": "PC",
+      "to": "PC",
+      "observation_count": 1,
+      "first_observed_ts": 1776500201908,
+      "last_observed_ts": 1776500201908,
+      "effect_aggregate": {
+        "pc_page": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "PC",
+      "to": "Downtown",
+      "observation_count": 1,
+      "first_observed_ts": 1776500213794,
+      "last_observed_ts": 1776500213794,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "PC"
+          ],
+          "after_values": [
+            "Downtown"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "keys",
+      "from": "Downtown",
+      "to": "Downtown Bar",
+      "observation_count": 1,
+      "first_observed_ts": 1776500215113,
+      "last_observed_ts": 1776500215113,
+      "effect_aggregate": {
+        "gameDate.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "2010-06-01T08:30:00.000Z"
+          ],
+          "after_values": [
+            "2010-06-01T08:35:00.000Z"
+          ],
+          "numeric_stats": null
+        },
+        "arousal_tick": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            30
+          ],
+          "after_values": [
+            35
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 5,
+            "max_delta": 5,
+            "mean_delta": 5,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Downtown"
+          ],
+          "after_values": [
+            "Downtown Bar"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "keys",
+      "from": "Downtown Bar",
+      "to": "Downtown Bar Meeting",
+      "observation_count": 1,
+      "first_observed_ts": 1776500224011,
+      "last_observed_ts": 1776500224011,
+      "effect_aggregate": {
+        "gameDate.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "2010-06-01T08:35:00.000Z"
+          ],
+          "after_values": [
+            "2010-06-01T09:05:00.000Z"
+          ],
+          "numeric_stats": null
+        },
+        "exp_percentage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            7
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 7,
+            "max_delta": 7,
+            "mean_delta": 7,
+            "always_same_delta": true
+          }
+        },
+        "observer_trait_progress": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            7
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 7,
+            "max_delta": 7,
+            "mean_delta": 7,
+            "always_same_delta": true
+          }
+        },
+        "arousal_tick": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            35
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -30,
+            "max_delta": -30,
+            "mean_delta": -30,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Downtown Bar"
+          ],
+          "after_values": [
+            "Downtown Bar Meeting"
+          ],
+          "numeric_stats": null
+        },
+        "notify_array.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "You've become more keen. 7%/100% for a new trait."
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "keys",
+      "from": "Downtown Bar Meeting",
+      "to": "Downtown Bar",
+      "observation_count": 1,
+      "first_observed_ts": 1776500235685,
+      "last_observed_ts": 1776500235685,
+      "effect_aggregate": {
+        "observer_trait_progress": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            7
+          ],
+          "after_values": [
+            14
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 7,
+            "max_delta": 7,
+            "mean_delta": 7,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Downtown Bar Meeting"
+          ],
+          "after_values": [
+            "Downtown Bar"
+          ],
+          "numeric_stats": null
+        },
+        "npc_list.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            {
+              "gender": 0,
+              "id": 1776500232081,
+              "name": "Vaughn",
+              "surname": "Manning",
+              "trait": "Thief",
+              "job": "Farmer",
+              "friendship": 0,
+              "bar": true,
+              "depravity": 21,
+              "charm": 1,
+              "talk": true,
+              "hadSex": 0,
+              "combat": 2,
+              "driving": 1,
+              "farmer_trade": true,
+              "cun": 1,
+              "writer_story": true,
+              "police_action": true,
+              "marriage": false,
+              "wealth": 3,
+              "gift_status": true,
+              "sex_available": true,
+              "blackmail_try": true,
+              "offended": false,
+              "ignore": false,
+              "with_benefits": false,
+              "dom": 24,
+              "hp": 41,
+              "hp_max": 41,
+              "weapon": "Fists",
+              "photo": "img/photos/male/poor/62.webp"
+            }
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Downtown Bar",
+      "to": "Downtown",
+      "observation_count": 1,
+      "first_observed_ts": 1776500254126,
+      "last_observed_ts": 1776500254126,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Downtown Bar"
+          ],
+          "after_values": [
+            "Downtown"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "keys",
+      "from": "Downtown",
+      "to": "Downtown Butterfly Corner",
+      "observation_count": 1,
+      "first_observed_ts": 1776500255451,
+      "last_observed_ts": 1776500255451,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Downtown"
+          ],
+          "after_values": [
+            "Downtown Butterfly Corner"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Downtown Butterfly Corner",
+      "to": "Downtown",
+      "observation_count": 1,
+      "first_observed_ts": 1776500288230,
+      "last_observed_ts": 1776500288230,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Downtown Butterfly Corner"
+          ],
+          "after_values": [
+            "Downtown"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "keys",
+      "from": "Downtown",
+      "to": "Complex Burglary",
+      "observation_count": 1,
+      "first_observed_ts": 1776500289360,
+      "last_observed_ts": 1776500289360,
+      "effect_aggregate": {
+        "gameDate.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "2010-06-01T09:05:00.000Z"
+          ],
+          "after_values": [
+            "2010-06-01T09:25:00.000Z"
+          ],
+          "numeric_stats": null
+        },
+        "stam": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            6
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -1,
+            "max_delta": -1,
+            "mean_delta": -1,
+            "always_same_delta": true
+          }
+        },
+        "heat": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 3,
+            "max_delta": 3,
+            "mean_delta": 3,
+            "always_same_delta": true
+          }
+        },
+        "gangs_heat": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            6
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 6,
+            "max_delta": 6,
+            "mean_delta": 6,
+            "always_same_delta": true
+          }
+        },
+        "reputation": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            93
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 93,
+            "max_delta": 93,
+            "mean_delta": 93,
+            "always_same_delta": true
+          }
+        },
+        "p_inv.1.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "new setup.Inventory({\"Lockpick\":5}, [])"
+          ],
+          "after_values": [
+            "new setup.Inventory({\"Lockpick\":4}, [])"
+          ],
+          "numeric_stats": null
+        },
+        "stat_heat": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 3,
+            "max_delta": 3,
+            "mean_delta": 3,
+            "always_same_delta": true
+          }
+        },
+        "stat_burglary": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "arousal_tick": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            5
+          ],
+          "after_values": [
+            25
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 20,
+            "max_delta": 20,
+            "mean_delta": 20,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Downtown"
+          ],
+          "after_values": [
+            "Complex Burglary"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "keys",
+      "from": "Complex Burglary",
+      "to": "Complex Burglary",
+      "observation_count": 4,
+      "first_observed_ts": 1776500298811,
+      "last_observed_ts": 1776500331027,
+      "effect_aggregate": {
+        "gameDate.1": {
+          "count": 4,
+          "changes_count": 4,
+          "kinds": {
+            "changed": 4
+          },
+          "before_values": [
+            "2010-06-01T09:25:00.000Z",
+            "2010-06-01T09:30:00.000Z",
+            "2010-06-01T09:35:00.000Z",
+            "2010-06-01T09:40:00.000Z"
+          ],
+          "after_values": [
+            "2010-06-01T09:30:00.000Z",
+            "2010-06-01T09:35:00.000Z",
+            "2010-06-01T09:40:00.000Z",
+            "2010-06-01T09:45:00.000Z"
+          ],
+          "numeric_stats": null
+        },
+        "p_inv.1.0": {
+          "count": 4,
+          "changes_count": 4,
+          "kinds": {
+            "changed": 4
+          },
+          "before_values": [
+            "new setup.Inventory({\"Lockpick\":4}, [])",
+            "new setup.Inventory({\"Lockpick\":4,\"Junk\":1}, [])",
+            "new setup.Inventory({\"Lockpick\":4,\"Junk\":1,\"Silver Ring\":1}, [])",
+            "new setup.Inventory({\"Lockpick\":4,\"Junk\":1,\"Silver Ring\":2}, [])"
+          ],
+          "after_values": [
+            "new setup.Inventory({\"Lockpick\":4,\"Junk\":1}, [])",
+            "new setup.Inventory({\"Lockpick\":4,\"Junk\":1,\"Silver Ring\":1}, [])",
+            "new setup.Inventory({\"Lockpick\":4,\"Junk\":1,\"Silver Ring\":2}, [])",
+            "new setup.Inventory({\"Lockpick\":4,\"Junk\":2,\"Silver Ring\":2}, [])"
+          ],
+          "numeric_stats": null
+        }
+      }
+    }
+  ],
+  "coverage": {
+    "static_edges_total": 2120,
+    "observed_static_edges": 15,
+    "unobserved_static_edges": 2105,
+    "coverage_ratio": 0.0071,
+    "observed_only_edges": 2
+  }
+}

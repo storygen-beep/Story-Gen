@@ -5,3 +5,6 @@
 {"ts":"2026-04-16T22:22:56.926Z","session_id":1,"cmd":"setters","args":{"positional":["PlayerClothes"]},"ok":true}
 {"ts":"2026-04-16T22:23:04.285Z","session_id":1,"cmd":"click","args":{"positional":["RING RING RING RING"]},"ok":false,"passage":"dream1","state_hash":"3556d4ba2e45da9b","state_changed":false,"error":"locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('RING RING RING RING', { exact: true }).first()\u001b[22m\n"}
 {"ts":"2026-04-16T22:23:09.678Z","session_id":1,"cmd":"finalize","args":{},"ok":true}
+{"ts":"2026-04-18T08:05:59.042Z","session_id":2,"cmd":"peek","args":{},"ok":true,"passage":"Welcome Page","state_hash":"b65f08f8673b5165"}
+{"ts":"2026-04-18T08:06:00.171Z","session_id":2,"cmd":"peek","args":{},"ok":true,"passage":"Welcome Page","state_hash":"b65f08f8673b5165"}
+{"ts":"2026-04-18T08:06:08.026Z","session_id":2,"cmd":"stop","args":{},"ok":true}

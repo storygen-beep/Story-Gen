@@ -1,0 +1,74 @@
+{
+  "Disclaimer": {
+    "first_ts": 1776499665498,
+    "visit_count": 2
+  },
+  "Credits Page": {
+    "first_ts": 1776499678520,
+    "visit_count": 4
+  },
+  "StartPage": {
+    "first_ts": 1776499722310,
+    "visit_count": 3
+  },
+  "CharGen": {
+    "first_ts": 1776499754913,
+    "visit_count": 3
+  },
+  "CharGen2": {
+    "first_ts": 1776499778445,
+    "visit_count": 4
+  },
+  "CharGen3": {
+    "first_ts": 1776499829403,
+    "visit_count": 2
+  },
+  "Home": {
+    "first_ts": 1776499841545,
+    "visit_count": 14
+  },
+  "Whiteboard": {
+    "first_ts": 1776499865177,
+    "visit_count": 5
+  },
+  "City Center": {
+    "first_ts": 1776500066998,
+    "visit_count": 4
+  },
+  "Downtown": {
+    "first_ts": 1776500138495,
+    "visit_count": 5
+  },
+  "Harbor": {
+    "first_ts": 1776500139785,
+    "visit_count": 2
+  },
+  "Suburbs": {
+    "first_ts": 1776500140950,
+    "visit_count": 2
+  },
+  "Outskirts": {
+    "first_ts": 1776500142310,
+    "visit_count": 2
+  },
+  "PC": {
+    "first_ts": 1776500176700,
+    "visit_count": 4
+  },
+  "Downtown Bar": {
+    "first_ts": 1776500215379,
+    "visit_count": 4
+  },
+  "Downtown Bar Meeting": {
+    "first_ts": 1776500224271,
+    "visit_count": 2
+  },
+  "Downtown Butterfly Corner": {
+    "first_ts": 1776500255715,
+    "visit_count": 3
+  },
+  "Complex Burglary": {
+    "first_ts": 1776500289621,
+    "visit_count": 9
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-16T22:22:27.926Z",
+  "generated_at": "2026-04-18T08:05:58.911Z",
   "total_passages": 730,
   "skipped_passages": 0,
   "parse_errors": 0,
@@ -7,7 +7,9 @@
   "edges_by_kind": {
     "wiki": 1830,
     "include": 102,
-    "goto": 484
+    "goto": 255,
+    "link": 215,
+    "button": 14
   },
   "edges": [
     {
@@ -227,9 +229,9 @@
     {
       "from": "Sleep",
       "to": "SleepSexClothed Straight",
-      "display": null,
+      "display": "Sleep clothed",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "_randomCh>=85 and (($dad.corruption>=5 and $dad.blowjob==true) || ($bro.corruption>=10 and $bro.blowjob==true))",
@@ -241,9 +243,9 @@
     {
       "from": "Sleep",
       "to": "SleepSexClothed Lesbian",
-      "display": null,
+      "display": "Sleep clothed",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "_randomCh gte 65 and ($mom.corruption gte 10 and $mom.finger==true)",
@@ -376,9 +378,9 @@
     {
       "from": "Sleep",
       "to": "SleepSexTopless Straight",
-      "display": null,
+      "display": "Sleep topless",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption >= 45",
@@ -394,9 +396,9 @@
     {
       "from": "Sleep",
       "to": "SleepSexTopless Lesbian",
-      "display": null,
+      "display": "Sleep topless",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption >= 45",
@@ -570,9 +572,9 @@
     {
       "from": "Sleep",
       "to": "SleepSexNude Straight",
-      "display": null,
+      "display": "Sleep nude",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption >= 65",
@@ -588,9 +590,9 @@
     {
       "from": "Sleep",
       "to": "SleepSexNude Lesbian",
-      "display": null,
+      "display": "Sleep nude",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption >= 65",
@@ -805,9 +807,9 @@
     {
       "from": "Room",
       "to": "Room",
-      "display": null,
+      "display": "Take a nap",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($dayCount ==2 and $hour lt 13)",
@@ -887,9 +889,9 @@
     {
       "from": "Living room",
       "to": "TV Events",
-      "display": null,
+      "display": "Relax in front of the TV",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($dayCount ==2 and $hour lt 13)",
@@ -1232,9 +1234,9 @@
     {
       "from": "School",
       "to": "ben intro",
-      "display": null,
+      "display": "Go out",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$ben.metFlag eq false and $classAttended eq 4",
@@ -1246,9 +1248,9 @@
     {
       "from": "School",
       "to": "Jecinda District",
-      "display": null,
+      "display": "Go out",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($ben.metFlag eq false and $classAttended eq 4)",
@@ -1459,9 +1461,9 @@
     {
       "from": "Jecinda District",
       "to": "Walk Travel JA",
-      "display": null,
+      "display": "Walk",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($dayCount ==2 and $hour lt 13)",
@@ -1477,9 +1479,9 @@
     {
       "from": "Jecinda District",
       "to": "Bus Travel JA",
-      "display": null,
+      "display": "Take the bus- 5$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($dayCount ==2 and $hour lt 13)",
@@ -1495,9 +1497,9 @@
     {
       "from": "Jecinda District",
       "to": "Bus Travel JA",
-      "display": null,
+      "display": "Freeload on the bus",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($dayCount ==2 and $hour lt 13)",
@@ -1523,9 +1525,9 @@
     {
       "from": "School canteen",
       "to": "lisa events",
-      "display": null,
+      "display": "Have lunch with Lisa",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$hour>=10 and $hour<=12",
@@ -1549,9 +1551,9 @@
     {
       "from": "School canteen",
       "to": "jason canteen event",
-      "display": null,
+      "display": "Have lunch",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$hour>=10 and $hour<=12",
@@ -1575,9 +1577,9 @@
     {
       "from": "School canteen",
       "to": "canteen events",
-      "display": null,
+      "display": "Have lunch",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$hour>=10 and $hour<=12",
@@ -1593,9 +1595,9 @@
     {
       "from": "School canteen",
       "to": "School canteen",
-      "display": null,
+      "display": "Have a snack",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerMoney>=5",
@@ -1684,9 +1686,9 @@
     {
       "from": "School library",
       "to": "School library",
-      "display": null,
+      "display": "Read a book on science",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerEnergy >= 30",
@@ -1698,9 +1700,9 @@
     {
       "from": "School library",
       "to": "School library",
-      "display": null,
+      "display": "Practice Coding and Hacking",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerEnergy >= 30",
@@ -1712,9 +1714,9 @@
     {
       "from": "School library",
       "to": "library events",
-      "display": null,
+      "display": "Read an adult book",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerEnergy >= 35 and $PlayerCorruption>=2",
@@ -1781,9 +1783,9 @@
     {
       "from": "School girls restroom",
       "to": "girlswcsexevents",
-      "display": null,
+      "display": "Use the toilet",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "_chance>=60",
@@ -1795,9 +1797,9 @@
     {
       "from": "School girls restroom",
       "to": "School girls restroom",
-      "display": null,
+      "display": "Use the toilet",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!(_chance>=60)",
@@ -1938,9 +1940,9 @@
     {
       "from": "School boys restroom",
       "to": "boyswcsexevents",
-      "display": null,
+      "display": "Use the toilet",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "_chance>=60",
@@ -1952,9 +1954,9 @@
     {
       "from": "School boys restroom",
       "to": "School boys restroom",
-      "display": null,
+      "display": "Use the toilet",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!(_chance>=60)",
@@ -1980,9 +1982,9 @@
     {
       "from": "School boys restroom",
       "to": "daniel events",
-      "display": null,
+      "display": "Chat with Daniel",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$daniel.metFlag eq true",
@@ -2039,9 +2041,9 @@
     {
       "from": "School schedule",
       "to": "Classes",
-      "display": null,
+      "display": "Art Class",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$weekDay",
@@ -2057,9 +2059,9 @@
     {
       "from": "School schedule",
       "to": "Classes",
-      "display": null,
+      "display": "Art Class",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$weekDay",
@@ -2079,9 +2081,9 @@
     {
       "from": "School schedule",
       "to": "Classes",
-      "display": null,
+      "display": "Science",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$weekDay",
@@ -2101,9 +2103,9 @@
     {
       "from": "School schedule",
       "to": "Classes",
-      "display": null,
+      "display": "Science",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$weekDay",
@@ -2123,9 +2125,9 @@
     {
       "from": "School schedule",
       "to": "Classes",
-      "display": null,
+      "display": "Computer Science",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$weekDay",
@@ -2145,9 +2147,9 @@
     {
       "from": "School schedule",
       "to": "Classes",
-      "display": null,
+      "display": "Computer Science",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$weekDay",
@@ -2163,9 +2165,9 @@
     {
       "from": "School schedule",
       "to": "Classes",
-      "display": null,
+      "display": "Computer Science",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$weekDay",
@@ -2185,9 +2187,9 @@
     {
       "from": "School schedule",
       "to": "Classes",
-      "display": null,
+      "display": "Physical education",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$weekDay",
@@ -2207,9 +2209,9 @@
     {
       "from": "School schedule",
       "to": "Classes",
-      "display": null,
+      "display": "Physical education",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$weekDay",
@@ -2229,9 +2231,9 @@
     {
       "from": "School schedule",
       "to": "janet events office",
-      "display": null,
+      "display": "Go to the principal's office",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$weekDay",
@@ -2255,9 +2257,9 @@
     {
       "from": "School schedule",
       "to": "janet events detention",
-      "display": null,
+      "display": "Go to special detention",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$weekDay",
@@ -2281,9 +2283,9 @@
     {
       "from": "School schedule",
       "to": "School Detention",
-      "display": null,
+      "display": "Go to detention",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$weekDay",
@@ -2335,9 +2337,9 @@
     {
       "from": "Art Class",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$classActivity == \"Studying\"",
@@ -2385,9 +2387,9 @@
     {
       "from": "Art Class",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$classActivity == \"Studying Hard\"",
@@ -2417,9 +2419,9 @@
     {
       "from": "Art Class",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$classActivity == \"Socializing\"",
@@ -2787,9 +2789,9 @@
     {
       "from": "Science class",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$classActivity == \"Studying\"",
@@ -2837,9 +2839,9 @@
     {
       "from": "Science class",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$classActivity == \"Studying Hard\"",
@@ -2869,9 +2871,9 @@
     {
       "from": "Science class",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$classActivity == \"Socializing\"",
@@ -2911,9 +2913,9 @@
     {
       "from": "Computer class",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$classActivity == \"Studying\"",
@@ -2961,9 +2963,9 @@
     {
       "from": "Computer class",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$classActivity == \"Studying Hard\"",
@@ -2993,9 +2995,9 @@
     {
       "from": "Computer class",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$classActivity == \"Socializing\"",
@@ -3053,9 +3055,9 @@
     {
       "from": "PE class",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$classActivity == \"Studying\"",
@@ -3081,9 +3083,9 @@
     {
       "from": "PE class",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$classActivity == \"Socializing\"",
@@ -3445,9 +3447,9 @@
     {
       "from": "Laptop",
       "to": "Laptop",
-      "display": null,
+      "display": "Practice Coding and Hacking",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerEnergy >= 20",
@@ -3459,9 +3461,9 @@
     {
       "from": "Laptop",
       "to": "Laptop",
-      "display": null,
+      "display": "Peruse science based forums",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerEnergy >= 20",
@@ -3473,9 +3475,9 @@
     {
       "from": "Laptop",
       "to": "Watch Porn",
-      "display": null,
+      "display": "Watch some porn",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerEnergy >= 25",
@@ -4304,18 +4306,18 @@
     {
       "from": "socialevent1",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 1417
     },
     {
       "from": "socialevent1",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption gte 15 and $PlayerEnergy gte 15",
@@ -4327,18 +4329,18 @@
     {
       "from": "socialevent2",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 1376
     },
     {
       "from": "socialevent2",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption >= 5",
@@ -4350,9 +4352,9 @@
     {
       "from": "socialevent2",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption >= 5",
@@ -4405,9 +4407,9 @@
     {
       "from": "Punished",
       "to": "PunishedEvent",
-      "display": null,
+      "display": "Distract him",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "_present >=5",
@@ -5111,18 +5113,18 @@
     {
       "from": "pe event1",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 2630
     },
     {
       "from": "pe event1",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=25",
@@ -5138,9 +5140,9 @@
     {
       "from": "pe event1",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=25",
@@ -5156,18 +5158,18 @@
     {
       "from": "pe event3",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 2529
     },
     {
       "from": "pe event3",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=5",
@@ -5183,9 +5185,9 @@
     {
       "from": "pe event3",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=5",
@@ -5205,9 +5207,9 @@
     {
       "from": "pe event3",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=5",
@@ -5223,18 +5225,18 @@
     {
       "from": "pe event2",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 1701
     },
     {
       "from": "pe event2",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=30",
@@ -5250,9 +5252,9 @@
     {
       "from": "pe event2",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=30",
@@ -5268,18 +5270,18 @@
     {
       "from": "socialevent3",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 1283
     },
     {
       "from": "socialevent3",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption >= 30 and $PlayerEnergy gte 20",
@@ -7713,9 +7715,9 @@
     {
       "from": "PunishedSchool",
       "to": "PunishedEvent School",
-      "display": null,
+      "display": "Distract him",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$famSexUnlocked",
@@ -8218,9 +8220,9 @@
     {
       "from": "bench event5",
       "to": "dick events",
-      "display": null,
+      "display": "Pay the toll",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$dick.metFlag == false",
@@ -8250,9 +8252,9 @@
     {
       "from": "bench event5",
       "to": "dick apology",
-      "display": null,
+      "display": "Talk to him",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$dick.angryFlag == true",
@@ -8278,9 +8280,9 @@
     {
       "from": "bench event5",
       "to": "dick events",
-      "display": null,
+      "display": "Join him",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($dick.angryFlag == true)",
@@ -9324,9 +9326,9 @@
     {
       "from": "Arabella District",
       "to": "Walk Travel AJ",
-      "display": null,
+      "display": "Walk",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerEnergy >= $walkEnergyAJ",
@@ -9338,9 +9340,9 @@
     {
       "from": "Arabella District",
       "to": "Bus Travel AJ",
-      "display": null,
+      "display": "Take the bus- 5$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerMoney >= 5",
@@ -9352,9 +9354,9 @@
     {
       "from": "Arabella District",
       "to": "Bus Travel AJ",
-      "display": null,
+      "display": "Freeload on the bus",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 1567
     },
@@ -9469,9 +9471,9 @@
     {
       "from": "R&B",
       "to": "R&B Eat",
-      "display": null,
+      "display": "Have a meal - 20$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 431
     },
@@ -9587,9 +9589,9 @@
     {
       "from": "Gym Receptionist",
       "to": "Gym Membership Discount1",
-      "display": null,
+      "display": "1 Day Pass - 5$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerMoney>=5",
@@ -9605,9 +9607,9 @@
     {
       "from": "Gym Receptionist",
       "to": "Gym Reception",
-      "display": null,
+      "display": "1 Day Pass - 5$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerMoney>=5",
@@ -9619,9 +9621,9 @@
     {
       "from": "Gym Receptionist",
       "to": "Gym Membership Discount2",
-      "display": null,
+      "display": "15 Day Pass - 75$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerMoney>=75",
@@ -9633,9 +9635,9 @@
     {
       "from": "Gym Receptionist",
       "to": "Gym Membership Discount3",
-      "display": null,
+      "display": "30 Day Pass - 135$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerMoney>=135",
@@ -10703,9 +10705,9 @@
     {
       "from": "Mr. Robot",
       "to": "robot discount",
-      "display": null,
+      "display": "Buy HD laptop cam - 300$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCam == false",
@@ -10725,9 +10727,9 @@
     {
       "from": "Mr. Robot",
       "to": "robot discount",
-      "display": null,
+      "display": "Buy HD laptop cam - 200$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCam == false",
@@ -10747,9 +10749,9 @@
     {
       "from": "Mr. Robot",
       "to": "robot discount",
-      "display": null,
+      "display": "Buy Drawing Tablet - 400$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerTab == false",
@@ -10769,9 +10771,9 @@
     {
       "from": "Mr. Robot",
       "to": "robot discount",
-      "display": null,
+      "display": "Buy Drawing Tablet - 300$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerTab == false",
@@ -10791,9 +10793,9 @@
     {
       "from": "Mr. Robot",
       "to": "robot discount",
-      "display": null,
+      "display": "Buy new smartphone - 300$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerPhone == false",
@@ -10813,9 +10815,9 @@
     {
       "from": "Mr. Robot",
       "to": "robot discount",
-      "display": null,
+      "display": "Buy new smartphone - 250$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerPhone == false",
@@ -10894,9 +10896,9 @@
     {
       "from": "Colonel Clothing Shoppe",
       "to": "clothing discount",
-      "display": null,
+      "display": "Buy advanced gym attire - 400$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerFitness gte 20",
@@ -10920,9 +10922,9 @@
     {
       "from": "Colonel Clothing Shoppe",
       "to": "clothing discount",
-      "display": null,
+      "display": "Buy advanced gym attire - 300$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerFitness gte 20",
@@ -10946,9 +10948,9 @@
     {
       "from": "Colonel Clothing Shoppe",
       "to": "clothing discount",
-      "display": null,
+      "display": "Buy slutty school uniform - 500$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption gte 35",
@@ -10972,9 +10974,9 @@
     {
       "from": "Colonel Clothing Shoppe",
       "to": "clothing discount",
-      "display": null,
+      "display": "Buy slutty school uniform - 350$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption gte 35",
@@ -10998,9 +11000,9 @@
     {
       "from": "Colonel Clothing Shoppe",
       "to": "clothing discount",
-      "display": null,
+      "display": "Buy slutty attire - 500$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=35",
@@ -11024,9 +11026,9 @@
     {
       "from": "Colonel Clothing Shoppe",
       "to": "clothing discount",
-      "display": null,
+      "display": "Buy slutty attire - 350$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=35",
@@ -11095,9 +11097,9 @@
     {
       "from": "Greg's Grocery",
       "to": "Greg's Grocery",
-      "display": null,
+      "display": "Buy groceries - 15$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerGroceries<20",
@@ -11117,9 +11119,9 @@
     {
       "from": "Greg's Grocery",
       "to": "Greg's Grocery",
-      "display": null,
+      "display": "Buy groceries - 10$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerGroceries<20",
@@ -11139,9 +11141,9 @@
     {
       "from": "Greg's Grocery",
       "to": "Greg's Grocery",
-      "display": null,
+      "display": "Buy snacks - 7$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerSnacks<10",
@@ -11161,9 +11163,9 @@
     {
       "from": "Greg's Grocery",
       "to": "Greg's Grocery",
-      "display": null,
+      "display": "Buy snacks - 5$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerSnacks<10",
@@ -11228,9 +11230,9 @@
     {
       "from": "Wardrobe",
       "to": "Wardrobe",
-      "display": null,
+      "display": "Wear",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($PlayerClothes==\"Casual\")",
@@ -11242,9 +11244,9 @@
     {
       "from": "Wardrobe",
       "to": "Wardrobe",
-      "display": null,
+      "display": "Wear",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerSluttyClothes==true",
@@ -11260,9 +11262,9 @@
     {
       "from": "Wardrobe",
       "to": "Wardrobe",
-      "display": null,
+      "display": "Wear",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($PlayerClothes==\"SchoolUni\")",
@@ -11274,9 +11276,9 @@
     {
       "from": "Wardrobe",
       "to": "Wardrobe",
-      "display": null,
+      "display": "Wear",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerSchoolUniSlutty==true",
@@ -11618,9 +11620,9 @@
     {
       "from": "Kitchen",
       "to": "snack events",
-      "display": null,
+      "display": "Have some snacks",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerSnacks>=1",
@@ -11632,9 +11634,9 @@
     {
       "from": "Kitchen",
       "to": "kitchen events",
-      "display": null,
+      "display": "Make breakfast",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerGroceries>=1",
@@ -11650,9 +11652,9 @@
     {
       "from": "Kitchen",
       "to": "kitchen events",
-      "display": null,
+      "display": "Make lunch",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerGroceries>=1",
@@ -11668,9 +11670,9 @@
     {
       "from": "Kitchen",
       "to": "kitchen events",
-      "display": null,
+      "display": "Make dinner",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerGroceries>=1",
@@ -11695,27 +11697,27 @@
     {
       "from": "Bathroom",
       "to": "Bathroom",
-      "display": null,
+      "display": "Wash face",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 228
     },
     {
       "from": "Bathroom",
       "to": "Bathroom",
-      "display": null,
+      "display": "Use the toilet",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 341
     },
     {
       "from": "Bathroom",
       "to": "Shower events",
-      "display": null,
+      "display": "Take a shower",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerShower==false",
@@ -15251,9 +15253,9 @@
     {
       "from": "Phone",
       "to": "Phone",
-      "display": null,
+      "display": "Peruse science based forums",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerPhone eq true",
@@ -15269,9 +15271,9 @@
     {
       "from": "Phone",
       "to": "Phone",
-      "display": null,
+      "display": "Read an adult e-book",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerPhone eq true",
@@ -15287,9 +15289,9 @@
     {
       "from": "Phone",
       "to": "Phone",
-      "display": null,
+      "display": "Peruse computer science based forums",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerPhone eq true",
@@ -18224,9 +18226,9 @@
     {
       "from": "Drawing",
       "to": "Drawing",
-      "display": null,
+      "display": "Draw",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$commissions[0].flag == true",
@@ -18246,9 +18248,9 @@
     {
       "from": "Drawing",
       "to": "Drawing",
-      "display": null,
+      "display": "Submit",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$commissions[0].flag == true",
@@ -18264,9 +18266,9 @@
     {
       "from": "Drawing",
       "to": "Drawing",
-      "display": null,
+      "display": "Draw",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$commissions[1].flag == true",
@@ -18286,9 +18288,9 @@
     {
       "from": "Drawing",
       "to": "Drawing",
-      "display": null,
+      "display": "Submit",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$commissions[1].flag == true",
@@ -18304,9 +18306,9 @@
     {
       "from": "Drawing",
       "to": "Drawing",
-      "display": null,
+      "display": "Draw",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$commissions[2].flag == true",
@@ -18326,9 +18328,9 @@
     {
       "from": "Drawing",
       "to": "Drawing",
-      "display": null,
+      "display": "Submit",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$commissions[2].flag == true",
@@ -18344,9 +18346,9 @@
     {
       "from": "Commission",
       "to": "Drawing",
-      "display": null,
+      "display": "Accept",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 951
     },
@@ -18546,9 +18548,9 @@
     {
       "from": "Security Room",
       "to": "security ff",
-      "display": null,
+      "display": "Zara agrees",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "_eventCh == 1",
@@ -18600,9 +18602,9 @@
     {
       "from": "Security Room",
       "to": "security fuck",
-      "display": null,
+      "display": "Zara agrees",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "_eventCh==2",
@@ -18654,9 +18656,9 @@
     {
       "from": "Security Room",
       "to": "security ride",
-      "display": null,
+      "display": "Zara agrees",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "_eventCh==3",
@@ -18681,9 +18683,9 @@
     {
       "from": "Punished Stealing",
       "to": "PunishedEvent Stealing",
-      "display": null,
+      "display": "Distract him",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$famSexUnlocked == true",
@@ -19675,9 +19677,9 @@
     {
       "from": "dick quest5 pour1",
       "to": "dick quest5 pour1",
-      "display": null,
+      "display": "Stop",
       "setter": null,
-      "kind": "goto",
+      "kind": "button",
       "gate": [
         {
           "condition": "$CDstart == true and $CDstop == false",
@@ -19689,9 +19691,9 @@
     {
       "from": "dick quest5 pour1",
       "to": "dick quest5 pour1",
-      "display": null,
+      "display": "Start",
       "setter": null,
-      "kind": "goto",
+      "kind": "button",
       "gate": [
         {
           "condition": "!($CDstart == true and $CDstop == false)",
@@ -19799,9 +19801,9 @@
     {
       "from": "dick quest5 pour2",
       "to": "dick quest5 pour2",
-      "display": null,
+      "display": "Stop",
       "setter": null,
-      "kind": "goto",
+      "kind": "button",
       "gate": [
         {
           "condition": "$CDstart == true and $CDstop == false",
@@ -19813,9 +19815,9 @@
     {
       "from": "dick quest5 pour2",
       "to": "dick quest5 pour2",
-      "display": null,
+      "display": "Start",
       "setter": null,
-      "kind": "goto",
+      "kind": "button",
       "gate": [
         {
           "condition": "!($CDstart == true and $CDstop == false)",
@@ -19923,9 +19925,9 @@
     {
       "from": "dick quest5 pour3",
       "to": "dick quest5 pour3",
-      "display": null,
+      "display": "Stop",
       "setter": null,
-      "kind": "goto",
+      "kind": "button",
       "gate": [
         {
           "condition": "$CDstart == true and $CDstop == false",
@@ -19937,9 +19939,9 @@
     {
       "from": "dick quest5 pour3",
       "to": "dick quest5 pour3",
-      "display": null,
+      "display": "Start",
       "setter": null,
-      "kind": "goto",
+      "kind": "button",
       "gate": [
         {
           "condition": "!($CDstart == true and $CDstop == false)",
@@ -20209,9 +20211,9 @@
     {
       "from": "pour1",
       "to": "pour1",
-      "display": null,
+      "display": "Stop",
       "setter": null,
-      "kind": "goto",
+      "kind": "button",
       "gate": [
         {
           "condition": "$CDstart == true and $CDstop == false",
@@ -20223,9 +20225,9 @@
     {
       "from": "pour1",
       "to": "pour1",
-      "display": null,
+      "display": "Start",
       "setter": null,
-      "kind": "goto",
+      "kind": "button",
       "gate": [
         {
           "condition": "!($CDstart == true and $CDstop == false)",
@@ -20333,9 +20335,9 @@
     {
       "from": "pour2",
       "to": "pour2",
-      "display": null,
+      "display": "Stop",
       "setter": null,
-      "kind": "goto",
+      "kind": "button",
       "gate": [
         {
           "condition": "$CDstart == true and $CDstop == false",
@@ -20347,9 +20349,9 @@
     {
       "from": "pour2",
       "to": "pour2",
-      "display": null,
+      "display": "Start",
       "setter": null,
-      "kind": "goto",
+      "kind": "button",
       "gate": [
         {
           "condition": "!($CDstart == true and $CDstop == false)",
@@ -20457,9 +20459,9 @@
     {
       "from": "pour3",
       "to": "pour3",
-      "display": null,
+      "display": "Stop",
       "setter": null,
-      "kind": "goto",
+      "kind": "button",
       "gate": [
         {
           "condition": "$CDstart == true and $CDstop == false",
@@ -20471,9 +20473,9 @@
     {
       "from": "pour3",
       "to": "pour3",
-      "display": null,
+      "display": "Start",
       "setter": null,
-      "kind": "goto",
+      "kind": "button",
       "gate": [
         {
           "condition": "!($CDstart == true and $CDstop == false)",
@@ -20657,9 +20659,9 @@
     {
       "from": "drug ingredients",
       "to": "drug discount",
-      "display": null,
+      "display": "Order 1 stash - 300$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerMoney gte 300",
@@ -20671,9 +20673,9 @@
     {
       "from": "drug ingredients",
       "to": "drug discount",
-      "display": null,
+      "display": "Order 2 stash - 550$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerMoney gte 550",
@@ -20685,9 +20687,9 @@
     {
       "from": "drug ingredients",
       "to": "drug discount",
-      "display": null,
+      "display": "Order 3 stash - 800$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerMoney gte 800",
@@ -22563,9 +22565,9 @@
     {
       "from": "Gym Locker Room",
       "to": "changeback Gym",
-      "display": null,
+      "display": "Change back",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerClothes == \"Gym\" || $PlayerClothes == \"GymAdv\"",
@@ -22577,9 +22579,9 @@
     {
       "from": "Gym Locker Room",
       "to": "lockerRoom events",
-      "display": null,
+      "display": "Change into P.E. attire",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerClothes != \"Gym\" and $PlayerClothes != \"GymAdv\"",
@@ -22591,9 +22593,9 @@
     {
       "from": "Gym Locker Room",
       "to": "lockerRoom events",
-      "display": null,
+      "display": "Change into advanced gym attire",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerClothes != \"GymAdv\" and $PlayerClothes != \"Gym\" and $PlayerGymAdv == true",
@@ -22834,9 +22836,9 @@
     {
       "from": "Gym Locker Room Men",
       "to": "Gym Locker Room Men events",
-      "display": null,
+      "display": "Enter the room",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "_chance lte 75",
@@ -23098,9 +23100,9 @@
     {
       "from": "Park Public Toilet",
       "to": "changeback Park",
-      "display": null,
+      "display": "Change back",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerGymAdv == true || $PlayerGymAttire == true",
@@ -23116,9 +23118,9 @@
     {
       "from": "Park Public Toilet",
       "to": "Park Public Toilet Events Changing",
-      "display": null,
+      "display": "Change into P.E. attire",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerGymAdv == true || $PlayerGymAttire == true",
@@ -23134,9 +23136,9 @@
     {
       "from": "Park Public Toilet",
       "to": "Park Public Toilet Events Changing",
-      "display": null,
+      "display": "Change into advanced gym attire",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerGymAdv == true || $PlayerGymAttire == true",
@@ -23829,9 +23831,9 @@
     {
       "from": "Cox and Co.",
       "to": "cox discount",
-      "display": null,
+      "display": "Buy dildo - 250$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption gte 10",
@@ -23855,9 +23857,9 @@
     {
       "from": "Cox and Co.",
       "to": "cox discount",
-      "display": null,
+      "display": "Buy dildo - 200$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption gte 10",
@@ -23881,9 +23883,9 @@
     {
       "from": "Cox and Co.",
       "to": "cox discount",
-      "display": null,
+      "display": "Buy strap-on - 400$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption gte 25",
@@ -23907,9 +23909,9 @@
     {
       "from": "Cox and Co.",
       "to": "cox discount",
-      "display": null,
+      "display": "Buy strap-on - 300$",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption gte 25",
@@ -25009,9 +25011,9 @@
     {
       "from": "Studying Hard events",
       "to": "Studying Hard events",
-      "display": null,
+      "display": "Stop",
       "setter": null,
-      "kind": "goto",
+      "kind": "button",
       "gate": [
         {
           "condition": "$CDstart == true and $CDstop == false",
@@ -25023,9 +25025,9 @@
     {
       "from": "Studying Hard events",
       "to": "Studying Hard events",
-      "display": null,
+      "display": "Start",
       "setter": null,
-      "kind": "goto",
+      "kind": "button",
       "gate": [
         {
           "condition": "!($CDstart == true and $CDstop == false)",
@@ -25037,9 +25039,9 @@
     {
       "from": "Comp Studying Hard events",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "_gameWon",
@@ -25051,9 +25053,9 @@
     {
       "from": "Comp Studying Hard events",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "_gameLost",
@@ -25065,9 +25067,9 @@
     {
       "from": "Comp Studying Hard events",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($CDsec gt 0)",
@@ -25088,9 +25090,9 @@
     {
       "from": "Studying Hard events done",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$ScienceClassTries gt 4",
@@ -25116,9 +25118,9 @@
     {
       "from": "Studying Hard events done",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($drugStatusAlt==\"F\")",
@@ -25245,18 +25247,18 @@
     {
       "from": "socialevent4",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 1290
     },
     {
       "from": "socialevent4",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption >= 15 and $PlayerEnergy gte 15",
@@ -25268,9 +25270,9 @@
     {
       "from": "socialevent4",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption >= 15 and $PlayerEnergy gte 15",
@@ -25960,18 +25962,18 @@
     {
       "from": "socialevent5",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 1471
     },
     {
       "from": "socialevent5",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption >=10 and $PlayerEnergy>=15",
@@ -25983,18 +25985,18 @@
     {
       "from": "socialevent6",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 1471
     },
     {
       "from": "socialevent6",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption >=10 and $PlayerEnergy>=15",
@@ -27137,18 +27139,18 @@
     {
       "from": "jessica bully class event1",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 1742
     },
     {
       "from": "jessica bully class event1",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption gte 50",
@@ -27178,9 +27180,9 @@
     {
       "from": "jessica bully school event1",
       "to": "jessica bully school event1 revenge",
-      "display": null,
+      "display": "Take revenge",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$mgSkipStruggle eq false",
@@ -27348,9 +27350,9 @@
     {
       "from": "jessica bully PE event1",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$mgSkipStruggle eq false",
@@ -27366,9 +27368,9 @@
     {
       "from": "jessica bully PE event1",
       "to": "jessica bully PE event1 revenge",
-      "display": null,
+      "display": "Take revenge",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$mgSkipStruggle eq false",
@@ -27388,9 +27390,9 @@
     {
       "from": "jessica bully PE event1",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$mgSkipStruggle eq false",
@@ -27406,9 +27408,9 @@
     {
       "from": "jessica bully PE event1",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($mgSkipStruggle eq false)",
@@ -27424,9 +27426,9 @@
     {
       "from": "jessica bully PE event1",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($mgSkipStruggle eq false)",
@@ -27450,9 +27452,9 @@
     {
       "from": "jessica bully PE event1",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($mgSkipStruggle eq false)",
@@ -27476,9 +27478,9 @@
     {
       "from": "jessica bully PE event1",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($mgSkipStruggle eq false)",
@@ -27540,18 +27542,18 @@
     {
       "from": "pe event4",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 2630
     },
     {
       "from": "pe event4",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=25",
@@ -27567,9 +27569,9 @@
     {
       "from": "pe event4",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=25",
@@ -27585,18 +27587,18 @@
     {
       "from": "pe event5",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 2229
     },
     {
       "from": "pe event5",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=25",
@@ -27612,9 +27614,9 @@
     {
       "from": "pe event5",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=25",
@@ -27630,9 +27632,9 @@
     {
       "from": "pe event5",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=25",
@@ -27652,9 +27654,9 @@
     {
       "from": "pe event5",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=25",
@@ -29327,9 +29329,9 @@
     {
       "from": "jessica bully PE event2",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$mgSkipStruggle eq false",
@@ -29345,9 +29347,9 @@
     {
       "from": "jessica bully PE event2",
       "to": "jessica bully PE event2 revenge",
-      "display": null,
+      "display": "Take revenge",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$mgSkipStruggle eq false",
@@ -29367,9 +29369,9 @@
     {
       "from": "jessica bully PE event2",
       "to": "School",
-      "display": null,
+      "display": "Leave",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$mgSkipStruggle eq false",
@@ -29389,9 +29391,9 @@
     {
       "from": "jessica bully PE event2",
       "to": "School",
-      "display": null,
+      "display": "Return to school",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$mgSkipStruggle eq false",
@@ -29411,9 +29413,9 @@
     {
       "from": "jessica bully PE event2",
       "to": "School",
-      "display": null,
+      "display": "Return to school",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$mgSkipStruggle eq false",
@@ -29433,9 +29435,9 @@
     {
       "from": "jessica bully PE event2",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($mgSkipStruggle eq false)",
@@ -29451,9 +29453,9 @@
     {
       "from": "jessica bully PE event2",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($mgSkipStruggle eq false)",
@@ -29477,9 +29479,9 @@
     {
       "from": "jessica bully PE event2",
       "to": "School",
-      "display": null,
+      "display": "Leave",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($mgSkipStruggle eq false)",
@@ -29507,9 +29509,9 @@
     {
       "from": "jessica bully PE event2",
       "to": "School",
-      "display": null,
+      "display": "Return to school",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($mgSkipStruggle eq false)",
@@ -29537,9 +29539,9 @@
     {
       "from": "jessica bully PE event2",
       "to": "School",
-      "display": null,
+      "display": "Return to school",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($mgSkipStruggle eq false)",
@@ -29567,9 +29569,9 @@
     {
       "from": "jessica bully PE event2",
       "to": "School",
-      "display": null,
+      "display": "Leave",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($mgSkipStruggle eq false)",
@@ -29589,9 +29591,9 @@
     {
       "from": "jessica bully PE event2",
       "to": "School",
-      "display": null,
+      "display": "Return to school",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($mgSkipStruggle eq false)",
@@ -29611,9 +29613,9 @@
     {
       "from": "jessica bully PE event2",
       "to": "School",
-      "display": null,
+      "display": "Return to school",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($mgSkipStruggle eq false)",
@@ -29633,9 +29635,9 @@
     {
       "from": "jessica bully PE event3",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$mgSkipStruggle eq false",
@@ -29651,9 +29653,9 @@
     {
       "from": "jessica bully PE event3",
       "to": "jessica bully PE event3 revenge",
-      "display": null,
+      "display": "Take revenge",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$mgSkipStruggle eq false",
@@ -29673,9 +29675,9 @@
     {
       "from": "jessica bully PE event3",
       "to": "School",
-      "display": null,
+      "display": "Leave",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$mgSkipStruggle eq false",
@@ -29695,9 +29697,9 @@
     {
       "from": "jessica bully PE event3",
       "to": "School",
-      "display": null,
+      "display": "Return to school",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$mgSkipStruggle eq false",
@@ -29717,9 +29719,9 @@
     {
       "from": "jessica bully PE event3",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($mgSkipStruggle eq false)",
@@ -29735,9 +29737,9 @@
     {
       "from": "jessica bully PE event3",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($mgSkipStruggle eq false)",
@@ -29761,9 +29763,9 @@
     {
       "from": "jessica bully PE event3",
       "to": "School",
-      "display": null,
+      "display": "Leave",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($mgSkipStruggle eq false)",
@@ -29791,9 +29793,9 @@
     {
       "from": "jessica bully PE event3",
       "to": "School",
-      "display": null,
+      "display": "Return to school",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($mgSkipStruggle eq false)",
@@ -29821,9 +29823,9 @@
     {
       "from": "jessica bully PE event3",
       "to": "School",
-      "display": null,
+      "display": "Leave",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($mgSkipStruggle eq false)",
@@ -29843,9 +29845,9 @@
     {
       "from": "jessica bully PE event3",
       "to": "School",
-      "display": null,
+      "display": "Return to school",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($mgSkipStruggle eq false)",
@@ -29865,18 +29867,18 @@
     {
       "from": "pe event6",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 2747
     },
     {
       "from": "pe event6",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=25",
@@ -29892,9 +29894,9 @@
     {
       "from": "pe event6",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=25",
@@ -30019,9 +30021,9 @@
     {
       "from": "jessica bully PE event1 revenge",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$progress >= $requiredProgress",
@@ -30033,9 +30035,9 @@
     {
       "from": "jessica bully PE event1 revenge",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$countdown eq -1 and ($progress lt $requiredProgress)",
@@ -30047,9 +30049,9 @@
     {
       "from": "jessica bully PE event2 revenge",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$progress >= $requiredProgress",
@@ -30061,9 +30063,9 @@
     {
       "from": "jessica bully PE event2 revenge",
       "to": "School",
-      "display": null,
+      "display": "Leave",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$countdown eq -1 and ($progress lt $requiredProgress)",
@@ -30079,9 +30081,9 @@
     {
       "from": "jessica bully PE event2 revenge",
       "to": "School",
-      "display": null,
+      "display": "Return to school",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$countdown eq -1 and ($progress lt $requiredProgress)",
@@ -30097,9 +30099,9 @@
     {
       "from": "jessica bully PE event2 revenge",
       "to": "School",
-      "display": null,
+      "display": "Return to school",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$countdown eq -1 and ($progress lt $requiredProgress)",
@@ -30115,9 +30117,9 @@
     {
       "from": "jessica bully PE event3 revenge",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$progress >= $requiredProgress",
@@ -30129,9 +30131,9 @@
     {
       "from": "jessica bully PE event3 revenge",
       "to": "School",
-      "display": null,
+      "display": "Leave",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$countdown eq -1 and ($progress lt $requiredProgress)",
@@ -30147,9 +30149,9 @@
     {
       "from": "jessica bully PE event3 revenge",
       "to": "School",
-      "display": null,
+      "display": "Return to school",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$countdown eq -1 and ($progress lt $requiredProgress)",
@@ -30527,9 +30529,9 @@
     {
       "from": "Art Studying Hard events",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "_isCorrectOption",
@@ -30541,9 +30543,9 @@
     {
       "from": "Art Studying Hard events",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "!($isCorrect eq true)",
@@ -33610,9 +33612,9 @@
     {
       "from": "Punished ClothingMb",
       "to": "PunishedEvent ClothingMb",
-      "display": null,
+      "display": "Distract him",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$famSexUnlocked == true",
@@ -36116,18 +36118,18 @@
     {
       "from": "jason intro",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 12084
     },
     {
       "from": "jason intro",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption gte 30 and $PlayerEnergy gte 20",
@@ -39230,18 +39232,18 @@
     {
       "from": "jason quest1",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 9199
     },
     {
       "from": "jason quest1",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 13672
     },
@@ -39583,18 +39585,18 @@
     {
       "from": "pe event7",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [],
       "index": 2229
     },
     {
       "from": "pe event7",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=25",
@@ -39610,9 +39612,9 @@
     {
       "from": "pe event7",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=25",
@@ -39628,9 +39630,9 @@
     {
       "from": "pe event7",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=25",
@@ -39650,9 +39652,9 @@
     {
       "from": "pe event7",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=25",
@@ -39672,9 +39674,9 @@
     {
       "from": "pe event7",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=25",
@@ -39694,9 +39696,9 @@
     {
       "from": "pe event7",
       "to": "School",
-      "display": null,
+      "display": "Wait till the end",
       "setter": null,
-      "kind": "goto",
+      "kind": "link",
       "gate": [
         {
           "condition": "$PlayerCorruption>=25",

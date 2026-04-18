@@ -1,0 +1,1057 @@
+{
+  "slug": "shady-deals",
+  "url": "https://mopoga.com/shady-deals",
+  "generated_at": "2026-04-18T08:07:45.501Z",
+  "engine": "sugarcube",
+  "pregame_auto_advance": {
+    "trail": [
+      {
+        "step": 0,
+        "passage": "Disclaimer",
+        "action": "terminated",
+        "reason": "no_forward_pattern_match"
+      }
+    ],
+    "terminated_at": {
+      "step": 0,
+      "passage": "Disclaimer",
+      "action": "terminated",
+      "reason": "no_forward_pattern_match"
+    }
+  },
+  "regions_catalog": [
+    {
+      "pos_class": "left",
+      "id": "ui-bar",
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 281,
+        "h": 900
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [],
+      "menu_list": [
+        "Credits",
+        "Saves",
+        "Settings",
+        "Restart"
+      ],
+      "interactive": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 93,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 152,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Credits",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 280,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 332,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Settings",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 367,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 402,
+            "w": 230,
+            "h": 34
+          }
+        }
+      ],
+      "passive_text_samples": [
+        "Welcome! Proceed to character creation."
+      ]
+    },
+    {
+      "pos_class": "sampled",
+      "id": "ui-bar-history",
+      "bbox": {
+        "x": 0,
+        "y": 3,
+        "w": 280,
+        "h": 32
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 93,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 152,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        }
+      ],
+      "passive_text_samples": []
+    },
+    {
+      "pos_class": "sampled",
+      "id": "ui-bar-body",
+      "bbox": {
+        "x": 0,
+        "y": 40,
+        "w": 280,
+        "h": 860
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [],
+      "menu_list": [
+        "Credits",
+        "Saves",
+        "Settings",
+        "Restart"
+      ],
+      "interactive": [
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Credits",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 280,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 332,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Settings",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 367,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 402,
+            "w": 230,
+            "h": 34
+          }
+        }
+      ],
+      "passive_text_samples": [
+        "Welcome! Proceed to character creation."
+      ]
+    }
+  ],
+  "chrome_probes": [
+    {
+      "label": "Credits",
+      "bbox": {
+        "x": 25,
+        "y": 280,
+        "w": 230,
+        "h": 34
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/shady-deals/ui_probes/Credits.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 445,
+      "panel_text": "Download a desktop version of the game\nThanks to:\nChapelR for their macros collection. Used macros: Message, Notify, Simple Inventory and Meter Macro.\nHeadsarm for their blackjack.\nHiEv for their Keyboard Navigation code.\nAttribution for images provided under the Creative Commons framework:\nIcons from https://www.freepik.com/ by: Aranagraphics and the ones listed by Freepik themselves.\nIcons from https://www.flaticon.com/ by: Jesus Chavarria; Smartline; Adury5711; Georgy; Ylivdesign; max.icons; heisenberg_jr; Creative Stall Premium; kornkun; Us and Up; iconset.co; Three musketeers; LAB Design Studio; Darius Dan; agus raharjo; iconpro86; and a lot of icons by Freepik but downloaded on Flaticon.\nA few images from https://pngtree.com/ and https://www.pngwing.com/.\nImages from https://unsplash.com/ by: Adam Marikar; Adolfo Felix; Aleksandr Popov; Alex Ramon; Alice Pasqual; Andress Jasso; Anotia Wang; Antoine-J; Antonio Molinari; Arun Sharma; Bartlomiej Balicki; Bernard Hermant; Brock Wegner; Buchen Wang; Calvin Ma; Carson Masterson; Chris Anderson; Chris Bair; Christelle Bourgeois; Chuttersnap; Danil Aksenov; David Guliciuc; Egor Vikhrev; Emily Wang; Emma Steinhobel; Erik Andersson; Eric Mclean; Frames For Your Heart; Gurpreet Singh; Haley Owens; Hmsse Khan; Humphrey Muleba; John Fornander; Jon Tyson; Kam Idris; Kevin Schmid; Kvnga; Lotus Design'n'print; Luke Stackpoole; Mak; Mark Champs; Michael Soledad; Mike Benna; Nastuh Abootalebi; Nicolas Hoizey; Nicolas Thomas; Oliur; Ousa Chea; Patrick Tomasso; Pexels; Pim Myten; Radowan Nakif; R Architecture; Ruchindra Gunasekara; Samuel Ryde; Sanjoy Saha; Sasha Stories; Slidebean; Spacejoy; Tarik Haiga; Tim Hufner; Tyler Casey; Wesley Johnson; Wesley Tingey; Yeongkyeong; Yuriy Fomin; Honey Yanibel; Pascal Meier; Tom Def; Inga Gezalian; Andraz Lazic; Borna Hržina; Kenny Eliason; Ivan Gromov; Evan Dennis; Jay Rembert; Viktor Talashuk; Brian Patrick Tagalog; Frederick Shaw; Amir Sani; Serjan Midili; Kiwihug; Henry Co; Quino Al; Keith Misner; Khashayar Kouchpeydeh; Jp Valery; Alexander Grey; Anirudh; Kevin Escate; Lina White; Paul Cuoco; Jan Kahanek; Tuesday Temptation; Spacejoy; Kam Idris; Richard R; Izhak Agency; Robin Wersich; Igor Bispo; Hesam Link; Jc Gellidon; Aaron Burden; Kai Pilger; Stephen Holdaway; Absolutvision; Kir Pa; Shannon Potter; Hal Gatewood; Kaysha; Gwen Mamanoleas; Susan Wilkinson; Maxim Hopan; Juan Marin; Maciej Wodzynsky; Artem Labunsky; V2osk; Jeff Kingma; Oleg Ivanov; Sven Verweij; Afif Ramdhasuma; Piotr Makowski; Zoshua Colah; Eduardo Soares; Toa Heftiba; Michael Dagonakis; Pharaoh Fontain; Oleg Yeltsov; Nhlakanipho Ndwandwe; Zubair Hussain; Mahdi Chaghari; Tengyart; Mauro Savoca; Alipazani; Jergy Gorecki; Gromovataya; Joseph Kellner; Judeus Samson;\nFonts used: Chantelli Antiqua by Bernd Montag; Old Horror Films by ToughCrest; Pixel Countdown by Pixel Sagas; Schoolbell by Font Diner; Newspaper Cutout White On Black by onlygfxcom; Orange Kid by Typodermic Fonts;\nMost video media consists of promo materials and therefore retains all source watermarks. The ones without watermarks were downloaded from either pornhub, sex.com or pornpics.com.\nIf you recognize your work in this project and want it removed, contact me via email. Your work will be removed ASAP. Please, don't sue me\nMy email: shadydealsveryshady@gmail.com.\nPatreon.\nVersion: 0.22.0: Brick by Brick\nChangelog\nClose",
+      "dialog_text": null,
+      "post_click_text": "\n\n\n\nWelcome! Proceed to character creation.\n\nSAVES\nSETTINGS\nRESTART\nDownload a desktop version of the game\n\nThanks to:\nChapelR for their macros collection. Used macros: Message, Notify, Simple Inventory and Meter Macro.\nHeadsarm for their blackjack.\nHiEv for their Keyboard Navigation code.\n\nAttribution for images provided under the Creative Commons framework:\n\nIcons from https://www.freepik.com/ by: Aranagraphics and the ones listed by Freepik themselves.\nIcons from https://www.flaticon.com/ by: Jesus Chavarria; Smartline; Adury5711; Georgy; Ylivdesign; max.icons; heisenberg_jr; Creative Stall Premium; kornkun; Us and Up; iconset.co; Three musketeers; LAB Design Studio; Darius Dan; agus raharjo; iconpro86; and a lot of icons by Freepik but downloaded on Flaticon.\nA few images from https://pngtree.com/ and https://www.pngwing.com/.\nImages from https://unsplash.com/ by: Adam Marikar; Adolfo Felix; Aleksandr Popov; Alex Ramon; Alice Pasqual; Andress Jasso; Anotia Wang; Antoine-J; Antonio Molinari; Arun Sharma; Bartlomiej Balicki; Bernard Hermant; Brock Wegner; Buchen Wang; Calvin Ma; Carson Masterson; Chris Anderson; Chris Bair; Christelle Bourgeois; Chuttersnap; Danil Aksenov; David Guliciuc; Egor Vikhrev; Emily Wang; Emma Steinhobel; Erik Andersson; Eric Mclean; Frames For Your Heart; Gurpreet Singh; Haley Owens; Hmsse Khan; Humphrey Muleba; John Fornander; Jon Tyson; Kam Idris; Kevin Schmid; Kvnga; Lotus Design'n'print; Luke Stackpoole; Mak; Mark Champs; Michael Soledad; Mike Benna; Nastuh Abootalebi; Nicolas Hoizey; Nicolas Thomas; Oliur; Ousa Chea; Patrick Tomasso; Pexels; Pim Myten; Radowan Nakif; R Architecture; Ruchindra Gunasekara; Samuel Ryde; Sanjoy Saha; Sasha Stories; Slidebean; Spacejoy; Tarik Haiga; Tim Hufner; Tyler Casey; Wesley Johnson; Wesley Tingey; Yeongkyeong; Yuriy Fomin; Honey Yanibel; Pascal Meier; Tom Def; Inga Gezalian; Andraz Lazic; Borna Hržina; Kenny Eliason; Ivan Gromov; Evan Dennis; Jay Rembert; Viktor Talashuk; Brian Patrick Tagalog; Frederick Shaw; Amir Sani; Serjan Midili; Kiwihug; Henry Co; Quino Al; Keith Misner; Khashayar Kouchpeydeh; Jp Valery; Alexander Grey; Anirudh; Kevin Escate; Lina White; Paul Cuoco; Jan Kahanek; Tuesday Temptation; Spacejoy; Kam Idris; Richard R; Izhak Agency; Robin Wersich; Igor Bispo; Hesam Link; Jc Gellidon; Aaron Burden; Kai Pilger; Stephen Holdaway; Absolutvision; Kir Pa; Shannon Potter; Hal Gatewood; Kaysha; Gwen Mamanoleas; Susan Wilkinson; Maxim Hopan; Juan Marin; Maciej Wodzynsky; Artem Labunsky; V2osk; Jeff Kingma; Oleg Ivanov; Sven Verweij; Afif Ramdhasuma; Piotr Makowski; Zoshua Colah; Eduardo Soares; Toa Heftiba; Michael Dagonakis; Pharaoh Fontain; Oleg Yeltsov; Nhlakanipho Ndwandwe; Zubair Hussain; Mahdi Chaghari; Tengyart; Mauro Savoca; Alipazani; Jergy Gorecki; Gromovataya; Joseph Kellner; Judeus Samson;\n\nFonts used: Chantelli Antiqua by Bernd Montag; Old Horror Films by ToughCrest; Pixel Countdown by Pixel Sagas; Schoolbell by Font Diner; Newspaper Cutout White On Black by onlygfxcom; Orange Kid by Typodermic Fonts;\n\nMost video media consists of promo materials and therefore retains all source watermarks. The ones without watermarks were downloaded from either pornhub, sex.com or pornpics.com.\n\nIf you recognize your work in this project and want it removed, contact me via email. Your work will be removed ASAP. Please, don't sue me\nMy email: shadydealsveryshady@gmail.com.\nPatreon.\n\nVersion: 0.22.0: Brick by Brick\nChangelog\n\nClose\n\n\n",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 93,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 152,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 280,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Settings",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 315,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 350,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "Download a desktop version of the game",
+          "title": "",
+          "href": "https://shadydeals.me/patreon/archive.zip",
+          "target": "",
+          "external": true,
+          "bbox": {
+            "x": 705,
+            "y": 71,
+            "w": 310,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "ChapelR",
+          "title": "",
+          "href": "https://github.com/ChapelR/custom-macros-for-sugarcube-2",
+          "target": "",
+          "external": true,
+          "bbox": {
+            "x": 474,
+            "y": 155,
+            "w": 82,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "Simple Inventory",
+          "title": "",
+          "href": "https://twinelab.net/simple-inventory/#/",
+          "target": "",
+          "external": true,
+          "bbox": {
+            "x": 977,
+            "y": 155,
+            "w": 139,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "Headsarm",
+          "title": "",
+          "href": "https://github.com/Headsarm/twine-sugarcube-blackjack",
+          "target": "",
+          "external": true,
+          "bbox": {
+            "x": 746,
+            "y": 183,
+            "w": 94,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "HiEv",
+          "title": "",
+          "href": "https://www.patreon.com/HiEv",
+          "target": "",
+          "external": true,
+          "bbox": {
+            "x": 695,
+            "y": 211,
+            "w": 54,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "Keyboard Navigation",
+          "title": "",
+          "href": "https://hiev-heavy-ind.com/Sample_Code/Sample_Code.html#Main%20Menu",
+          "target": "",
+          "external": true,
+          "bbox": {
+            "x": 812,
+            "y": 211,
+            "w": 169,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "https://www.freepik.com/",
+          "title": "",
+          "href": "https://www.freepik.com/",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 583,
+            "y": 323,
+            "w": 193,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "https://www.flaticon.com/",
+          "title": "",
+          "href": "https://www.flaticon.com/",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 534,
+            "y": 351,
+            "w": 196,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "https://pngtree.com/",
+          "title": "",
+          "href": "https://pngtree.com/",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 725,
+            "y": 435,
+            "w": 161,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "https://www.pngwing.com/.",
+          "title": "",
+          "href": "https://www.pngwing.com/.",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 922,
+            "y": 435,
+            "w": 209,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "https://unsplash.com/",
+          "title": "",
+          "href": "https://unsplash.com/",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 544,
+            "y": 463,
+            "w": 171,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "Patreon.",
+          "title": "",
+          "href": "https://www.patreon.com/c/ShadyDeals",
+          "target": "",
+          "external": true,
+          "bbox": {
+            "x": 820,
+            "y": 1247,
+            "w": 80,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Changelog",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 821,
+            "y": 1331,
+            "w": 77,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Close",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 840,
+            "y": 1387,
+            "w": 41,
+            "h": 18
+          }
+        }
+      ]
+    },
+    {
+      "label": "Saves",
+      "bbox": {
+        "x": 25,
+        "y": 332,
+        "w": 230,
+        "h": 34
+      },
+      "region_id": "ui-bar",
+      "skipped_reason": "save_mutation"
+    },
+    {
+      "label": "Settings",
+      "bbox": {
+        "x": 25,
+        "y": 367,
+        "w": 230,
+        "h": 34
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/shady-deals/ui_probes/Settings.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 767,
+      "panel_text": "Settings\n\nGame was created with medium font size in mind. Everything else might be looking wonky.\n\nChoose a text size.\t\nSmall\nMedium\nLarge\nChoose a font.\t\nArial\nTimes_New_Roman\nComic_Sans\nAutosave interval (in days, causes lags on the EndDay passage.)\t\n1\n2\n3\n4\n5\n6\n7\n10\n14\nnever\nHeat Difficulty\n\nHeat difficulty\t\nDefault\nEasy\nFast Travel Hotkeys\n\nAssign keys to locations for quick access.\n\nHome\t\nA\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nOld Downtown\t\nA\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nSuburbs\t\nA\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nCity Center\t\nA\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nHarbor\t\nA\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nOutskirts\t\nA\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nArousal Effects\n\nControl the visual and textual feedback for arousal stages.\n\nEnable arousal visual effects\t\nOn\nOff\nEnable arousal text messages\t\nOn\nOff",
+      "dialog_text": "Settings\n\nGame was created with medium font size in mind. Everything else might be looking wonky.\n\nChoose a text size.\t\nSmall\nMedium\nLarge\nChoose a font.\t\nArial\nTimes_New_Roman\nComic_Sans\nAutosave interval (in days, causes lags on the EndDay passage.)\t\n1\n2\n3\n4\n5\n6\n7\n10\n14\nnever\nHeat Difficulty\n\nHeat difficulty\t\nDefault\nEasy\nFast Travel Hotkeys\n\nAssign keys to locations for quick access.\n\nHome\t\nA\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nOld Downtown\t\nA\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nSuburbs\t\nA\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nCity Center\t\nA\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nHarbor\t\nA\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nOutskirts\t\nA\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nArousal Effects\n\nControl the visual and textual feedback for arousal stages.\n\nEnable arousal visual effects\t\nOn\nOff\nEnable arousal text messages\t\nOn\nOff",
+      "post_click_text": "SETTINGS\nSettings\n\nGame was created with medium font size in mind. Everything else might be looking wonky.\n\nChoose a text size.\t\nSmall\nMedium\nLarge\nChoose a font.\t\nArial\nTimes_New_Roman\nComic_Sans\nAutosave interval (in days, causes lags on the EndDay passage.)\t\n1\n2\n3\n4\n5\n6\n7\n10\n14\nnever\nHeat Difficulty\n\nHeat difficulty\t\nDefault\nEasy\nFast Travel Hotkeys\n\nAssign keys to locations for quick access.\n\nHome\t\nA\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nOld Downtown\t\nA\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nSuburbs\t\nA\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nCity Center\t\nA\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nHarbor\t\nA\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nOutskirts\t\nA\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nArousal Effects\n\nControl the visual and textual feedback for arousal stages.\n\nEnable arousal visual effects\t\nOn\nOff\nEnable arousal text messages\t\nOn\nOff\n\n\n\n\nWelcome! Proceed to character creation.\n\nSAVES\nSETTINGS\nRESTART\nDownload a desktop version of the game\n\nThanks to:\nChapelR for their macros collection. Used macros: Message, Notify, Simple Inventory and Meter Macro.\nHeadsarm for their blackjack.\nHiEv for their Keyboard Navigation code.\n\nAttribution for images provided under the Creative Commons framework:\n\nIcons from https://www.freepik.com/ by: Aranagraphics and the ones listed by Freepik themselves.\nIcons from https://www.flaticon.com/ by: Jesus Chavarria; Smartline; Adury5711; Georgy; Ylivdesign; max.icons; heisenberg_jr; Creative Stall Premium; kornkun; Us and Up; iconset.co; Three musketeers; LAB Design Studio; Darius Dan; agus raharjo; iconpro86; and a lot of icons by Freepik but downloaded on Flaticon.\nA few images from https://pngtree.com/ and https://www.pngwing.com/.\nImages from https://unsplash.com/ by: Adam Marikar; Adolfo Felix; Aleksandr Popov; Alex Ramon; Alice Pasqual; Andress Jasso; Anotia Wang; Antoine-J; Antonio Molinari; Arun Sharma; Bartlomiej Balicki; Bernard Hermant; Brock Wegner; Buchen Wang; Calvin Ma; Carson Masterson; Chris Anderson; Chris Bair; Christelle Bourgeois; Chuttersnap; Danil Aksenov; David Guliciuc; Egor Vikhrev; Emily Wang; Emma Steinhobel; Erik Andersson; Eric Mclean; Frames For Your Heart; Gurpreet Singh; Haley Owens; Hmsse Khan; Humphrey Muleba; John Fornander; Jon Tyson; Kam Idris; Kevin Schmid; Kvnga; Lotus Design'n'print; Luke Stackpoole; Mak; Mark Champs; Michael Soledad; Mike Benna; Nastuh Abootalebi; Nicolas Hoizey; Nicolas Thomas; Oliur; Ousa Chea; Patrick Tomasso; Pexels; Pim Myten; Radowan Nakif; R Architecture; Ruchindra Gunasekara; Samuel Ryde; Sanjoy Saha; Sasha Stories; Slidebean; Spacejoy; Tarik Haiga; Tim Hufner; Tyler Casey; Wesley Johnson; Wesley Tingey; Yeongkyeong; Yuriy Fomin; Honey Yanibel; Pascal Meier; Tom Def; Inga Gezalian; Andraz Lazic; Borna Hržina; Kenny Eliason; Ivan Gromov; Evan Dennis; Jay Rembert; Viktor Talashuk; Brian Patrick Tagalog; Frederick Shaw; Amir Sani; Serjan Midili; Kiwihug; Henry Co; Quino Al; Keith Misner; Khashayar Kouchpeydeh; Jp Valery; Alexander Grey; Anirudh; Kevin Escate; Lina White; Paul Cuoco; Jan Kahanek; Tuesday Temptation; Spacejoy; Kam Idris; Richard R; Izhak Agency; Robin Wersich; Igor Bispo; Hesam Link; Jc Gellidon; Aaron Burden; Kai Pilger; Stephen Holdaway; Absolutvision; Kir Pa; Shannon Potter; Hal Gatewood; Kaysha; Gwen Mamanoleas; Susan Wilkinson; Maxim Hopan; Juan Marin; Maciej Wodzynsky; Artem Labunsky; V2osk; Jeff Kingma; Oleg Ivanov; Sven Verweij; Afif Ramdhasuma; Piotr Makowski; Zoshua Colah; Eduardo Soares; Toa Heftiba; Michael Dagonakis; Pharaoh Fontain; Oleg Yeltsov; Nhlakanipho Ndwandwe; Zubair Hussain; Mahdi Chaghari; Tengyart; Mauro Savoca; Alipazani; Jergy Gorecki; Gromovataya; Joseph Kellner; Judeus Samson;\n\nFonts used: Chantelli Antiqua by Bernd Montag; Old Horror Films by ToughCrest; Pixel Countdown by Pixel Sagas; Schoolbell by Font Diner; Newspaper Cutout White On Black by onlygfxcom; Orange Kid by Typodermic Fonts;\n\nMost video media consists of promo materials and therefore retains all source watermarks. The ones without watermarks were downloaded from either pornhub, sex.com or pornpics.com.\n\nIf you recognize your work in this project and want it removed, contact me via email. Your work will be removed ASAP. Please, don't sue me\nMy email: shadydealsveryshady@gmail.com.\nPatreon.\n\nVersion: 0.22.0: Brick by Brick\nChangelog\n\nClose\n\n\n",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 93,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 152,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 280,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Settings",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 315,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 350,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "Download a desktop version of the game",
+          "title": "",
+          "href": "https://shadydeals.me/patreon/archive.zip",
+          "target": "",
+          "external": true,
+          "bbox": {
+            "x": 705,
+            "y": 71,
+            "w": 310,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "ChapelR",
+          "title": "",
+          "href": "https://github.com/ChapelR/custom-macros-for-sugarcube-2",
+          "target": "",
+          "external": true,
+          "bbox": {
+            "x": 474,
+            "y": 155,
+            "w": 82,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "Simple Inventory",
+          "title": "",
+          "href": "https://twinelab.net/simple-inventory/#/",
+          "target": "",
+          "external": true,
+          "bbox": {
+            "x": 977,
+            "y": 155,
+            "w": 139,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "Headsarm",
+          "title": "",
+          "href": "https://github.com/Headsarm/twine-sugarcube-blackjack",
+          "target": "",
+          "external": true,
+          "bbox": {
+            "x": 746,
+            "y": 183,
+            "w": 94,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "HiEv",
+          "title": "",
+          "href": "https://www.patreon.com/HiEv",
+          "target": "",
+          "external": true,
+          "bbox": {
+            "x": 695,
+            "y": 211,
+            "w": 54,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "Keyboard Navigation",
+          "title": "",
+          "href": "https://hiev-heavy-ind.com/Sample_Code/Sample_Code.html#Main%20Menu",
+          "target": "",
+          "external": true,
+          "bbox": {
+            "x": 812,
+            "y": 211,
+            "w": 169,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "https://www.freepik.com/",
+          "title": "",
+          "href": "https://www.freepik.com/",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 583,
+            "y": 323,
+            "w": 193,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "https://www.flaticon.com/",
+          "title": "",
+          "href": "https://www.flaticon.com/",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 534,
+            "y": 351,
+            "w": 196,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "https://pngtree.com/",
+          "title": "",
+          "href": "https://pngtree.com/",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 725,
+            "y": 435,
+            "w": 161,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "https://www.pngwing.com/.",
+          "title": "",
+          "href": "https://www.pngwing.com/.",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 922,
+            "y": 435,
+            "w": 209,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "https://unsplash.com/",
+          "title": "",
+          "href": "https://unsplash.com/",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 544,
+            "y": 463,
+            "w": 171,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "Patreon.",
+          "title": "",
+          "href": "https://www.patreon.com/c/ShadyDeals",
+          "target": "",
+          "external": true,
+          "bbox": {
+            "x": 820,
+            "y": 1247,
+            "w": 80,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Changelog",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 821,
+            "y": 1331,
+            "w": 77,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Close",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 840,
+            "y": 1387,
+            "w": 41,
+            "h": 18
+          }
+        }
+      ]
+    },
+    {
+      "label": "Restart",
+      "bbox": {
+        "x": 25,
+        "y": 402,
+        "w": 230,
+        "h": 34
+      },
+      "region_id": "ui-bar",
+      "skipped_reason": "destructive"
+    }
+  ],
+  "regions": [
+    {
+      "pos_class": "left",
+      "tag": "div",
+      "id": "ui-bar",
+      "cls": "",
+      "position_style": "fixed",
+      "z_index": "50",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 281,
+        "h": 900
+      },
+      "text_sample": "Welcome! Proceed to character creation.CreditsSavesSettingsRestart"
+    },
+    {
+      "pos_class": "sampled",
+      "tag": "div",
+      "id": "ui-bar-history",
+      "cls": "",
+      "position_style": "static",
+      "z_index": "auto",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 0,
+        "y": 3,
+        "w": 280,
+        "h": 32
+      },
+      "text_sample": "",
+      "from_sampling": true
+    },
+    {
+      "pos_class": "sampled",
+      "tag": "div",
+      "id": "ui-bar-body",
+      "cls": "",
+      "position_style": "static",
+      "z_index": "auto",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 0,
+        "y": 40,
+        "w": 280,
+        "h": 860
+      },
+      "text_sample": "",
+      "from_sampling": true
+    }
+  ],
+  "main_content": null,
+  "chrome_probes_count": 2,
+  "ui_frame_hash": "5f9159b5de25df2e"
+}

@@ -15,9 +15,26 @@
 /**
  * Run inside the game's frame (browser context) to detect engine + pull state.
  * Returns: { engine, passage, variables, turns, canMarshal }
+ *
+ * Implementation note: the final payload is JSON-serialized inside the page
+ * (then re-parsed Node-side) to sidestep Playwright's wire format. Some
+ * games — e.g. shady-deals — stash non-plain objects (Date subclasses,
+ * custom classes) in SugarCube state. Playwright's default evaluate
+ * serializer rejects those with "expected string, got object"; JSON
+ * handles them via toJSON() / own-prop enumeration. Dates / Maps / Sets
+ * are mapped through the same `__type` tagging `deep()` uses, so
+ * downstream consumers see identical shape.
  */
 async function introspect(frame) {
-  return await frame.evaluate(() => {
+  const jsonStr = await frame.evaluate(() => {
+    const __typedReplacer = (k, v) => {
+      if (typeof v === 'function') return undefined;
+      if (v instanceof Date) return { __type: 'Date', v: v.toISOString() };
+      if (v instanceof Map) return { __type: 'Map', v: Array.from(v.entries()) };
+      if (v instanceof Set) return { __type: 'Set', v: Array.from(v.values()) };
+      return v;
+    };
+    const __introspectImpl = () => {
     // Helper to safely JSON-stringify-then-parse a structure, to strip non-serialisable
     const deep = (o) => {
       try {
@@ -188,7 +205,22 @@ async function introspect(frame) {
       body_html: fallbackBody.body_html,
       modal_text: fallbackBody.modal_text,
     };
+    };
+    // Run the impl, JSON-serialize the whole tree in the page context so
+    // Playwright only has to transport a string. Any throw is reported
+    // back as an error marker for Node-side handling.
+    try {
+      const result = __introspectImpl();
+      return JSON.stringify(result, __typedReplacer);
+    } catch (e) {
+      return JSON.stringify({ __introspect_error: String((e && e.message) || e) });
+    }
   });
+  const parsed = JSON.parse(jsonStr);
+  if (parsed && parsed.__introspect_error) {
+    throw new Error('engine.introspect failed in page: ' + parsed.__introspect_error);
+  }
+  return parsed;
 }
 
 /**
@@ -207,21 +239,40 @@ async function snapshot(frame, { pathSoFar = [] } = {}) {
     // round-trip. Works on games that reject Save.deserialize (BTF, Emilie).
     // Returns a plain JSON-friendly object (shape: {index, history, ...}).
     if (info.saveCaps && info.saveCaps.stateMarshal) {
-      const blob = await frame.evaluate(() => {
-        try { return { ok: true, data: SugarCube.State.marshalForSave() }; }
-        catch (e) { return { ok: false, error: String(e) }; }
+      // Same JSON-string transport trick as introspect(): SugarCube's
+      // marshalForSave() can return objects with non-plain fields (Dates,
+      // custom classes) that Playwright's wire format rejects. Serialize
+      // in-page, parse on Node side.
+      const jsonStr = await frame.evaluate(() => {
+        const __typedReplacer = (k, v) => {
+          if (typeof v === 'function') return undefined;
+          if (v instanceof Date) return { __type: 'Date', v: v.toISOString() };
+          if (v instanceof Map) return { __type: 'Map', v: Array.from(v.entries()) };
+          if (v instanceof Set) return { __type: 'Set', v: Array.from(v.values()) };
+          return v;
+        };
+        try { return JSON.stringify({ ok: true, data: SugarCube.State.marshalForSave() }, __typedReplacer); }
+        catch (e) { return JSON.stringify({ ok: false, error: String(e) }); }
       });
+      const blob = JSON.parse(jsonStr);
       if (blob.ok) return { engine: 'sugarcube', mode: 'state_marshal', blob: blob.data, info };
     }
     // FALLBACK: public Save API. Many games disable `Config.saves.isAllowed`
     // during certain passages (mid-scene, char creation) so we temporarily force
     // it open around the serialize call, then restore the original check.
     if (info.saveCaps && info.saveCaps.serialize) {
-      const blob = await frame.evaluate(() => {
+      const jsonStr = await frame.evaluate(() => {
+        const __typedReplacer = (k, v) => {
+          if (typeof v === 'function') return undefined;
+          if (v instanceof Date) return { __type: 'Date', v: v.toISOString() };
+          if (v instanceof Map) return { __type: 'Map', v: Array.from(v.entries()) };
+          if (v instanceof Set) return { __type: 'Set', v: Array.from(v.values()) };
+          return v;
+        };
         try {
           const S = (typeof SugarCube !== 'undefined' && SugarCube.Save) ? SugarCube.Save : (typeof Save !== 'undefined' ? Save : null);
           const CFG = (typeof SugarCube !== 'undefined' && SugarCube.Config) ? SugarCube.Config : (typeof Config !== 'undefined' ? Config : null);
-          if (!S || typeof S.serialize !== 'function') return { ok: false, error: 'Save.serialize not reachable' };
+          if (!S || typeof S.serialize !== 'function') return JSON.stringify({ ok: false, error: 'Save.serialize not reachable' });
           let original;
           if (CFG && CFG.saves) {
             original = CFG.saves.isAllowed;
@@ -229,12 +280,13 @@ async function snapshot(frame, { pathSoFar = [] } = {}) {
           }
           try {
             const data = S.serialize();
-            return { ok: true, data };
+            return JSON.stringify({ ok: true, data }, __typedReplacer);
           } finally {
             if (CFG && CFG.saves && original !== undefined) CFG.saves.isAllowed = original;
           }
-        } catch (e) { return { ok: false, error: String(e) }; }
+        } catch (e) { return JSON.stringify({ ok: false, error: String(e) }); }
       });
+      const blob = JSON.parse(jsonStr);
       if (blob.ok) return { engine: 'sugarcube', mode: 'serialize', blob: blob.data, info };
     }
   }
@@ -256,7 +308,18 @@ async function restore(page, frame, snap, { replayer = null, reloadUrl = null } 
     // loading state, we call Engine.show() to re-render the current passage
     // (Engine.play would append a new turn; we want to replace, not append).
     if (snap.mode === 'state_marshal') {
-      const result = await frame.evaluate((data) => {
+      // Blob may contain tagged Date/Map/Set markers emitted by our
+      // snapshot() JSON-string transport. Pass it as a string and revive
+      // inside the page so SugarCube.State.unmarshalForSave receives
+      // real Date/Map/Set instances, same as at save-time.
+      const blobJson = JSON.stringify(snap.blob);
+      const result = await frame.evaluate((blobJson) => {
+        const data = JSON.parse(blobJson, (k, v) => {
+          if (v && typeof v === 'object' && v.__type === 'Date') return new Date(v.v);
+          if (v && typeof v === 'object' && v.__type === 'Map') return new Map(v.v);
+          if (v && typeof v === 'object' && v.__type === 'Set') return new Set(v.v);
+          return v;
+        });
         // Step 1: load state. The actual restore — must succeed.
         if (typeof SugarCube === 'undefined' || !SugarCube.State) return { ok: false, error: 'SugarCube.State missing' };
         if (typeof SugarCube.State.unmarshalForSave !== 'function') return { ok: false, error: 'unmarshalForSave missing on this SugarCube version' };
@@ -282,7 +345,7 @@ async function restore(page, frame, snap, { replayer = null, reloadUrl = null } 
           render_warning = 'post-restore re-render threw (state restored, DOM update may be partial): ' + String(e);
         }
         return { ok: true, render_warning };
-      }, snap.blob);
+      }, blobJson);
       if (result.ok) return { ok: true, method: 'state_marshal', render_warning: result.render_warning || null };
       errors.push('state_marshal: ' + result.error);
     }

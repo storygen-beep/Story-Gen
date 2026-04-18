@@ -1,3 +1,6 @@
-2026/04/17-21:50:43.815 a0f28 Reusing MANIFEST /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/road-to-success/profile/Default/Local Storage/leveldb/MANIFEST-000001
-2026/04/17-21:50:43.820 a0f28 Recovering log #4
-2026/04/17-21:50:43.820 a0f28 Reusing old log /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/road-to-success/profile/Default/Local Storage/leveldb/000004.log 
+2026/04/18-11:51:06.482 f6575 Reusing MANIFEST /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/road-to-success/profile/Default/Local Storage/leveldb/MANIFEST-000001
+2026/04/18-11:51:06.506 f6575 Recovering log #4
+2026/04/18-11:51:06.507 f6575 Reusing old log /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/road-to-success/profile/Default/Local Storage/leveldb/000004.log 
+2026/04/18-11:56:33.875 f6575 Level-0 table #8: started
+2026/04/18-11:56:33.878 f6575 Level-0 table #8: 63701 bytes OK
+2026/04/18-11:56:33.879 f6575 Delete type=0 #4

@@ -62,6 +62,10 @@ async function fetchLiveVariables(call) {
 // `<<else>>` branches are stored as `!(prior)` and `<<elseif>>` branches
 // store their own condition. The `branch` field is informational only;
 // do not re-negate based on it. Returns true/false/'unknown'.
+//
+// This sync variant is used by `simulateSetterSatisfies` — we're
+// evaluating a HYPOTHETICAL state, so live eval (which calls real
+// game helpers against REAL state) would be a correctness bug.
 function evaluateEdgeGate(gate, variables) {
   if (!gate || !gate.length) return true;
   let combined = true;

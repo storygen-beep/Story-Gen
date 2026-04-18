@@ -1,0 +1,1224 @@
+{
+  "slug": "nlp-navigate-test",
+  "seed": 1,
+  "trial_count": 30,
+  "target_strategy": "random_reachable",
+  "max_depth": 7,
+  "generated_at": "2026-04-18T06:33:14.929Z",
+  "summary": {
+    "trial_count": 30,
+    "measurable_trials": 30,
+    "clean_completion_rate": 0.7666666666666667,
+    "clean_completion_rate_of_total": 0.7666666666666667,
+    "divergence_rate": 0,
+    "click_failed_rate": 0,
+    "plan_failed_rate": 0,
+    "plan_too_long_rate": 0,
+    "snap_failed_rate": 0,
+    "aborted_rate": 0.23333333333333334,
+    "restore_mishap_rate": 0,
+    "divergence_breakdown": {},
+    "abort_reason_breakdown": {
+      "unknown_gate_blocked": 0.23333333333333334
+    },
+    "live_eval": {
+      "invocations_attempted": 7,
+      "successes": 0,
+      "whitelist_rejections": 0,
+      "timeouts": 7,
+      "runtime_errors": 0,
+      "translation_failures": 0,
+      "dispatch_failures": 0,
+      "trials_with_live_eval": 7,
+      "success_rate": 0
+    },
+    "per_strategy": {
+      "navigate": {
+        "trials": 30,
+        "clean": 23,
+        "aborted": 7,
+        "diverged": 0,
+        "click_failed": 0,
+        "plan_failed": 0,
+        "plan_too_long": 0,
+        "snap_failed": 0,
+        "clean_rate_of_measurable": 0.7666666666666667,
+        "clean_rate_of_total": 0.7666666666666667
+      }
+    },
+    "per_depth": {
+      "0": {
+        "trials": 30,
+        "failure_rate": 0.23333333333333334
+      }
+    },
+    "per_target_class": {
+      "gated_satisfiable": {
+        "trials": 19,
+        "clean": 12,
+        "diverged": 0,
+        "click_failed": 0,
+        "plan_failed": 0,
+        "clean_rate": 0.631578947368421,
+        "clean_rate_of_measurable": 1
+      },
+      "open": {
+        "trials": 11,
+        "clean": 11,
+        "diverged": 0,
+        "click_failed": 0,
+        "plan_failed": 0,
+        "clean_rate": 1,
+        "clean_rate_of_measurable": 1
+      }
+    },
+    "worst_source_passages": [],
+    "median_step_ms": 0,
+    "subgoals_attempted": 0,
+    "subgoals_succeeded": 0,
+    "subgoal_success_rate": null,
+    "navigate_click_events": 18,
+    "navigate_prereq_events": 0
+  },
+  "trials": [
+    {
+      "trial_id": 0,
+      "target": "exploreIntro",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "reached",
+          "at": "exploreIntro"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 5440,
+      "snap_id": "s38216c4b41",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 1,
+      "target": "introCafe",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "exploreIntro",
+          "click_text": "Perhaps check out this cute cafe",
+          "to": "introCafe",
+          "gate_result": true,
+          "gate_via": "static"
+        },
+        {
+          "kind": "reached",
+          "at": "introCafe"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 6456,
+      "snap_id": "s7f445d07a2",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 2,
+      "target": "exploreIntro",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "reached",
+          "at": "exploreIntro"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 5445,
+      "snap_id": "see8ebd0fcd",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 3,
+      "target": "exploreOutskirts",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "unknown_gate_blocked",
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "exploreIntro",
+          "click_text": "Just enjoy the scenery and walk along",
+          "to": "keepExplore",
+          "gate_result": true,
+          "gate_via": "static"
+        },
+        {
+          "kind": "abort",
+          "reason": "unknown_gate_blocked",
+          "at": "keepExplore",
+          "click_text": "Explore the outskirts",
+          "expected_to": "exploreOutskirts",
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the outskirts', { exact: true }).first()\u001b[22m\n",
+          "gate_via": "static"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 17097,
+      "snap_id": "s0aea3b029f",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 1,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 1,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 4,
+      "target": "exploreOutskirts",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "unknown_gate_blocked",
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "exploreIntro",
+          "click_text": "Just enjoy the scenery and walk along",
+          "to": "keepExplore",
+          "gate_result": true,
+          "gate_via": "static"
+        },
+        {
+          "kind": "abort",
+          "reason": "unknown_gate_blocked",
+          "at": "keepExplore",
+          "click_text": "Explore the outskirts",
+          "expected_to": "exploreOutskirts",
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the outskirts', { exact: true }).first()\u001b[22m\n",
+          "gate_via": "static"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 17216,
+      "snap_id": "s4cb8a8bb8e",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 1,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 1,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 5,
+      "target": "keepExplore",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "exploreIntro",
+          "click_text": "Just enjoy the scenery and walk along",
+          "to": "keepExplore",
+          "gate_result": true,
+          "gate_via": "static"
+        },
+        {
+          "kind": "reached",
+          "at": "keepExplore"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 6283,
+      "snap_id": "s341825b3cb",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 6,
+      "target": "exploreIntro",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "reached",
+          "at": "exploreIntro"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 5346,
+      "snap_id": "s359c9c5658",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 7,
+      "target": "barExplore",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "unknown_gate_blocked",
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "exploreIntro",
+          "click_text": "Just enjoy the scenery and walk along",
+          "to": "keepExplore",
+          "gate_result": true,
+          "gate_via": "static"
+        },
+        {
+          "kind": "abort",
+          "reason": "unknown_gate_blocked",
+          "at": "keepExplore",
+          "click_text": "Explore the bar",
+          "expected_to": "barExplore",
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the bar', { exact: true }).first()\u001b[22m\n",
+          "gate_via": "static"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 17085,
+      "snap_id": "s2166fcda0f",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 1,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 1,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 8,
+      "target": "exploreIntro",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "reached",
+          "at": "exploreIntro"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 5325,
+      "snap_id": "s70f1217d15",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 9,
+      "target": "exploreOutskirts",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "unknown_gate_blocked",
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "exploreIntro",
+          "click_text": "Just enjoy the scenery and walk along",
+          "to": "keepExplore",
+          "gate_result": true,
+          "gate_via": "static"
+        },
+        {
+          "kind": "abort",
+          "reason": "unknown_gate_blocked",
+          "at": "keepExplore",
+          "click_text": "Explore the outskirts",
+          "expected_to": "exploreOutskirts",
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the outskirts', { exact: true }).first()\u001b[22m\n",
+          "gate_via": "static"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 16906,
+      "snap_id": "s3f3d12ffbf",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 1,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 1,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 10,
+      "target": "exploreIntro",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "reached",
+          "at": "exploreIntro"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 5370,
+      "snap_id": "sd3e12c0a48",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 11,
+      "target": "exploreIntro",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "reached",
+          "at": "exploreIntro"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 5309,
+      "snap_id": "s495924f8c9",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 12,
+      "target": "downtownExplore",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "exploreIntro",
+          "click_text": "Go further down the street",
+          "to": "downtownExplore",
+          "gate_result": true,
+          "gate_via": "static"
+        },
+        {
+          "kind": "reached",
+          "at": "downtownExplore"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 6249,
+      "snap_id": "s0caeae434b",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 13,
+      "target": "exploreIntro",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "reached",
+          "at": "exploreIntro"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 5286,
+      "snap_id": "s4bff4ff46f",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 14,
+      "target": "uptownExplore",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "exploreIntro",
+          "click_text": "Go further up the street",
+          "to": "uptownExplore",
+          "gate_result": true,
+          "gate_via": "static"
+        },
+        {
+          "kind": "reached",
+          "at": "uptownExplore"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 6196,
+      "snap_id": "sac8734b674",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 15,
+      "target": "downtownExplore",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "exploreIntro",
+          "click_text": "Go further down the street",
+          "to": "downtownExplore",
+          "gate_result": true,
+          "gate_via": "static"
+        },
+        {
+          "kind": "reached",
+          "at": "downtownExplore"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 6165,
+      "snap_id": "s978ad9e929",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 16,
+      "target": "exploreIntro",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "reached",
+          "at": "exploreIntro"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 5278,
+      "snap_id": "sa373a7c2a3",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 17,
+      "target": "introCafe",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "exploreIntro",
+          "click_text": "Perhaps check out this cute cafe",
+          "to": "introCafe",
+          "gate_result": true,
+          "gate_via": "static"
+        },
+        {
+          "kind": "reached",
+          "at": "introCafe"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 6204,
+      "snap_id": "s6c1abf111c",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 18,
+      "target": "exploreIntro",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "reached",
+          "at": "exploreIntro"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 5310,
+      "snap_id": "sf65e1a5edf",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 19,
+      "target": "hospitalExplore",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "unknown_gate_blocked",
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "exploreIntro",
+          "click_text": "Just enjoy the scenery and walk along",
+          "to": "keepExplore",
+          "gate_result": true,
+          "gate_via": "static"
+        },
+        {
+          "kind": "abort",
+          "reason": "unknown_gate_blocked",
+          "at": "keepExplore",
+          "click_text": "Explore the hospital",
+          "expected_to": "hospitalExplore",
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the hospital', { exact: true }).first()\u001b[22m\n",
+          "gate_via": "static"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 16890,
+      "snap_id": "s654d459b39",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 1,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 1,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 20,
+      "target": "keepExplore",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "exploreIntro",
+          "click_text": "Just enjoy the scenery and walk along",
+          "to": "keepExplore",
+          "gate_result": true,
+          "gate_via": "static"
+        },
+        {
+          "kind": "reached",
+          "at": "keepExplore"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 6285,
+      "snap_id": "sffa079c85f",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 21,
+      "target": "uptownExplore",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "exploreIntro",
+          "click_text": "Go further up the street",
+          "to": "uptownExplore",
+          "gate_result": true,
+          "gate_via": "static"
+        },
+        {
+          "kind": "reached",
+          "at": "uptownExplore"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 6146,
+      "snap_id": "s2fa7efdb8f",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 22,
+      "target": "introCafe",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "exploreIntro",
+          "click_text": "Perhaps check out this cute cafe",
+          "to": "introCafe",
+          "gate_result": true,
+          "gate_via": "static"
+        },
+        {
+          "kind": "reached",
+          "at": "introCafe"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 6268,
+      "snap_id": "s53d295277f",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 23,
+      "target": "exploreIntro",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "reached",
+          "at": "exploreIntro"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 5302,
+      "snap_id": "s5f21d19789",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 24,
+      "target": "exploreIntro",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "reached",
+          "at": "exploreIntro"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 5445,
+      "snap_id": "s793a4d714c",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 25,
+      "target": "hospitalExplore",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "unknown_gate_blocked",
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "exploreIntro",
+          "click_text": "Just enjoy the scenery and walk along",
+          "to": "keepExplore",
+          "gate_result": true,
+          "gate_via": "static"
+        },
+        {
+          "kind": "abort",
+          "reason": "unknown_gate_blocked",
+          "at": "keepExplore",
+          "click_text": "Explore the hospital",
+          "expected_to": "hospitalExplore",
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the hospital', { exact: true }).first()\u001b[22m\n",
+          "gate_via": "static"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 17032,
+      "snap_id": "s388d5127b9",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 1,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 1,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 26,
+      "target": "keepExplore",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "exploreIntro",
+          "click_text": "Just enjoy the scenery and walk along",
+          "to": "keepExplore",
+          "gate_result": true,
+          "gate_via": "static"
+        },
+        {
+          "kind": "reached",
+          "at": "keepExplore"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 6151,
+      "snap_id": "s981196adc5",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 27,
+      "target": "uptownExplore",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "exploreIntro",
+          "click_text": "Go further up the street",
+          "to": "uptownExplore",
+          "gate_result": true,
+          "gate_via": "static"
+        },
+        {
+          "kind": "reached",
+          "at": "uptownExplore"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 6204,
+      "snap_id": "s0473af2912",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "open"
+    },
+    {
+      "trial_id": 28,
+      "target": "barExplore",
+      "strategy": "navigate",
+      "outcome": "aborted",
+      "abort_reason": "unknown_gate_blocked",
+      "navigate_trace": [
+        {
+          "kind": "click",
+          "from": "exploreIntro",
+          "click_text": "Just enjoy the scenery and walk along",
+          "to": "keepExplore",
+          "gate_result": true,
+          "gate_via": "static"
+        },
+        {
+          "kind": "abort",
+          "reason": "unknown_gate_blocked",
+          "at": "keepExplore",
+          "click_text": "Explore the bar",
+          "expected_to": "barExplore",
+          "click_error": "locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Explore the bar', { exact: true }).first()\u001b[22m\n",
+          "gate_via": "static"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 16895,
+      "snap_id": "s030e756d6c",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 1,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 1,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    },
+    {
+      "trial_id": 29,
+      "target": "exploreIntro",
+      "strategy": "navigate",
+      "outcome": "clean",
+      "abort_reason": null,
+      "navigate_trace": [
+        {
+          "kind": "reached",
+          "at": "exploreIntro"
+        }
+      ],
+      "subgoal_max_depth": 0,
+      "distinct_passages_visited": 1,
+      "total_ms": 5307,
+      "snap_id": "s0916fb8c8e",
+      "pre_trial_passage": "exploreIntro",
+      "steps": [],
+      "live_eval": {
+        "invocations_attempted": 0,
+        "successes": 0,
+        "whitelist_rejections": 0,
+        "timeouts": 0,
+        "runtime_errors": 0,
+        "translation_failures": 0,
+        "dispatch_failures": 0
+      },
+      "restore_ok": true,
+      "restore_passage": "exploreIntro",
+      "restore_contamination_risk": false,
+      "target_class": "gated_satisfiable"
+    }
+  ]
+}

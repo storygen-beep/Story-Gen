@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-04-16T22:22:27.988Z",
+  "captured_at": "2026-04-18T08:05:58.974Z",
   "engine": "sugarcube",
   "version": {
     "name": "SugarCube",
@@ -111,10 +111,15 @@
     "has_deserialize": true,
     "has_slots": true,
     "has_autosave": true,
-    "slot_count": 0,
+    "slot_count": 1,
     "on_save_handlers": 0,
     "on_load_handlers": 1,
-    "slots_metadata": [],
+    "slots_metadata": [
+      {
+        "index": 0,
+        "empty": true
+      }
+    ],
     "autosave_metadata": null
   }
 }

@@ -147,6 +147,8 @@ function parseArgs(argv) {
       case 'requirements': await forward('requirements', args); break;
       case 'reachable':    await forward('reachable', args); break;
       case 'setters':      await forward('setters', args); break;
+      // M7 goal-pursuit — drives the browser via the daemon.
+      case 'navigate':     await forward('navigate', args, { timeoutMs: 300000 }); break;
       case 'finalize': await cliFinalize(args); break;
       case 'stop':     await cliStop(args); break;
       case 'mark-ending': await cliMarkEnding(args); break;
@@ -296,7 +298,7 @@ function httpRequest(port, body, { timeoutMs = 60000 } = {}) {
   });
 }
 
-async function forward(command, args) {
+async function forward(command, args, { timeoutMs } = {}) {
   const slug = discoverSlug(args);
   if (!slug) {
     console.error(JSON.stringify({ ok: false, error: 'No running daemon found. Run `live.js start` first, or pass --slug.' }, null, 2));
@@ -311,7 +313,8 @@ async function forward(command, args) {
     console.error(JSON.stringify({ ok: false, error: `Daemon PID ${info.pid} is dead. Stale lockfile; run \`start\` to relaunch.` }, null, 2));
     process.exit(1);
   }
-  const response = await httpRequest(info.port, { cmd: command, args, argv: process.argv.slice(2) });
+  const httpOpts = timeoutMs != null ? { timeoutMs } : undefined;
+  const response = await httpRequest(info.port, { cmd: command, args, argv: process.argv.slice(2) }, httpOpts);
   console.log(JSON.stringify(response, null, 2));
   if (!response.ok) process.exit(1);
 }
@@ -1506,6 +1509,78 @@ async function runDaemon(args) {
       // Allow callers to omit the sigil — auto-add $ if missing.
       if (!varName.startsWith('$') && !varName.startsWith('_')) varName = '$' + varName;
       return pathfinderMod.lookupSetters(pathfinderCtx, varName);
+    },
+
+    // M7: Goal-pursuit navigator. One call replaces Claude's
+    // peek→think→click→peek→think→click loop with daemon-side
+    // goal pursuit. The shared algorithm lives in
+    // scripts/lib/navigator.js.
+    async navigate({ args }) {
+      if (!pathfinderCtx) return { ok: false, error: 'pathfinder unavailable — static_graph/variable_index missing' };
+      const positional = (args._ || []).filter((a) => a !== 'navigate');
+      const target = positional.join(' ').trim();
+      if (!target) return { ok: false, error: 'usage: navigate <target_passage> [--prereq-depth N] [--budget N] [--narrative-tags ...]' };
+
+      const navigatorMod = require(path.join(SKILL_DIR, 'scripts/lib/navigator'));
+      const prereqDepth = args.prereq_depth != null ? Math.max(0, Number(args.prereq_depth)) : 2;
+      const budget = args.budget != null ? Math.max(1, Number(args.budget)) : 15;
+      const narrativeTags = args.narrative_tags != null ? String(args.narrative_tags) : 'scene,event,story,narrative';
+      const narrativeTagSet = new Set(
+        narrativeTags.split(',').map((t) => t.trim().toLowerCase()).filter(Boolean)
+      );
+
+      let passageCatalog = null;
+      try { passageCatalog = JSON.parse(fs.readFileSync(dirs.passageCatalog, 'utf8')); }
+      catch (e) { return { ok: false, error: 'navigate: could not read passage_catalog.json — ' + e.message }; }
+      const tagsMap = navigatorMod.buildTagsMap(passageCatalog);
+
+      async function callLocal(cmd, positionalInner = [], flags = {}) {
+        const handler = handlers[cmd];
+        if (!handler) return { ok: false, error: 'unknown cmd inside navigate: ' + cmd };
+        const innerArgs = { _: [cmd, ...positionalInner], ...flags };
+        try { return await handler({ args: innerArgs }); }
+        catch (e) { return { ok: false, error: 'handler ' + cmd + ' threw: ' + (e && e.message) }; }
+      }
+
+      const startedAt = Date.now();
+      const result = await navigatorMod.pursueGoal(target, {
+        call: callLocal,
+        tagsMap,
+        narrativeTagSet,
+        prereqDepth,
+        budget,
+      });
+      const durationMs = Date.now() - startedAt;
+
+      const finalPeek = await callLocal('peek');
+
+      return {
+        ok: true,
+        command: 'navigate',
+        target,
+        reached: !!result.reached,
+        abort_reason: result.abort_reason || null,
+        steps_used: result.steps_used,
+        subgoal_max_depth: result.subgoal_max_depth,
+        expected_to: result.expected_to || null,
+        actual_passage: result.actual_passage || null,
+        blocking_gate: result.blocking_gate || null,
+        sub_abort: result.sub_abort || null,
+        trace: result.trace || [],
+        duration_ms: durationMs,
+        prereq_depth: prereqDepth,
+        budget,
+        narrative_tags: [...narrativeTagSet],
+        final_state: finalPeek && finalPeek.ok
+          ? {
+              passage: finalPeek.passage,
+              state_hash: finalPeek.state_hash,
+              clickables: finalPeek.clickables,
+              passage_body_text: finalPeek.passage_body_text,
+              screenshot: finalPeek.screenshot,
+            }
+          : null,
+      };
     },
 
     async status() {
