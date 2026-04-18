@@ -1,12 +1,93 @@
 {
-  "generated_at": "2026-04-18T09:36:11.758Z",
-  "total_observed_edges": 22,
-  "total_synthetic_edges": 127,
-  "total_play_log_entries": 367,
-  "total_timeline_entries": 178,
+  "generated_at": "2026-04-18T10:15:11.290Z",
+  "total_observed_edges": 44,
+  "total_synthetic_edges": 200,
+  "total_play_log_entries": 655,
+  "total_timeline_entries": 318,
   "initial_passage": "Disclaimer",
   "orphan_clicks": [],
   "observed_edges": [
+    {
+      "from": "HeistMenu",
+      "clicked_text": null,
+      "to": "HeistMenu",
+      "observation_count": 7,
+      "classifications": {
+        "branch": 7
+      },
+      "first_observed_ts": 1776506719286,
+      "last_observed_ts": 1776506764703,
+      "same_state_hits": 7,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Complex Burglary",
+      "clicked_text": null,
+      "to": "Complex Burglary",
+      "observation_count": 7,
+      "classifications": {
+        "branch": 7
+      },
+      "first_observed_ts": 1776506993298,
+      "last_observed_ts": 1776507023432,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "gameDate.1": {
+          "count": 7,
+          "changes_count": 7,
+          "kinds": {
+            "changed": 7
+          },
+          "before_values": [
+            "2010-06-01T09:20:00.000Z",
+            "2010-06-01T09:25:00.000Z",
+            "2010-06-01T09:30:00.000Z",
+            "2010-06-01T09:35:00.000Z",
+            "2010-06-01T09:40:00.000Z",
+            "2010-06-01T09:45:00.000Z",
+            "2010-06-01T09:50:00.000Z"
+          ],
+          "after_values": [
+            "2010-06-01T09:25:00.000Z",
+            "2010-06-01T09:30:00.000Z",
+            "2010-06-01T09:35:00.000Z",
+            "2010-06-01T09:40:00.000Z",
+            "2010-06-01T09:45:00.000Z",
+            "2010-06-01T09:50:00.000Z",
+            "2010-06-01T09:55:00.000Z"
+          ],
+          "numeric_stats": null
+        },
+        "p_inv.1.0": {
+          "count": 7,
+          "changes_count": 7,
+          "kinds": {
+            "changed": 7
+          },
+          "before_values": [
+            "new setup.Inventory({\"Lockpick\":15,\"Car Opening Tools\":1,\"Safe-cracking kit\":1}, [])",
+            "new setup.Inventory({\"Lockpick\":15,\"Car Opening Tools\":1,\"Safe-cracking kit\":1,\"Silver Ring\":1}, [])",
+            "new setup.Inventory({\"Lockpick\":15,\"Car Opening Tools\":1,\"Safe-cracking kit\":1,\"Silver Ring\":1,\"Junk\":1}, [])",
+            "new setup.Inventory({\"Lockpick\":15,\"Car Opening Tools\":1,\"Safe-cracking kit\":1,\"Silver Ring\":1,\"Junk\":1,\"Aphrodisiac\":1}, [])",
+            "new setup.Inventory({\"Lockpick\":15,\"Car Opening Tools\":1,\"Safe-cracking kit\":1,\"Silver Ring\":1,\"Junk\":2,\"Aphrodisiac\":1}, [])",
+            "new setup.Inventory({\"Lockpick\":15,\"Car Opening Tools\":1,\"Safe-cracking kit\":1,\"Silver Ring\":1,\"Junk\":2,\"Aphrodisiac\":2}, [])",
+            "new setup.Inventory({\"Lockpick\":15,\"Car Opening Tools\":1,\"Safe-cracking kit\":1,\"Silver Ring\":2,\"Junk\":2,\"Aphrodisiac\":2}, [])"
+          ],
+          "after_values": [
+            "new setup.Inventory({\"Lockpick\":15,\"Car Opening Tools\":1,\"Safe-cracking kit\":1,\"Silver Ring\":1}, [])",
+            "new setup.Inventory({\"Lockpick\":15,\"Car Opening Tools\":1,\"Safe-cracking kit\":1,\"Silver Ring\":1,\"Junk\":1}, [])",
+            "new setup.Inventory({\"Lockpick\":15,\"Car Opening Tools\":1,\"Safe-cracking kit\":1,\"Silver Ring\":1,\"Junk\":1,\"Aphrodisiac\":1}, [])",
+            "new setup.Inventory({\"Lockpick\":15,\"Car Opening Tools\":1,\"Safe-cracking kit\":1,\"Silver Ring\":1,\"Junk\":2,\"Aphrodisiac\":1}, [])",
+            "new setup.Inventory({\"Lockpick\":15,\"Car Opening Tools\":1,\"Safe-cracking kit\":1,\"Silver Ring\":1,\"Junk\":2,\"Aphrodisiac\":2}, [])",
+            "new setup.Inventory({\"Lockpick\":15,\"Car Opening Tools\":1,\"Safe-cracking kit\":1,\"Silver Ring\":2,\"Junk\":2,\"Aphrodisiac\":2}, [])",
+            "new setup.Inventory({\"Lockpick\":15,\"Car Opening Tools\":1,\"Safe-cracking kit\":1,\"Silver Ring\":3,\"Junk\":2,\"Aphrodisiac\":2}, [])"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
     {
       "from": "CharGen2",
       "clicked_text": null,
@@ -20,6 +101,57 @@
       "same_state_hits": 4,
       "is_self_loop": true,
       "effect_aggregate": {}
+    },
+    {
+      "from": "Disclaimer",
+      "clicked_text": "Ok.",
+      "to": "StartPage",
+      "observation_count": 3,
+      "classifications": {
+        "branch": 3
+      },
+      "first_observed_ts": 1776499721889,
+      "last_observed_ts": 1776506282474,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "city_name": {
+          "count": 3,
+          "changes_count": 3,
+          "kinds": {
+            "changed": 3
+          },
+          "before_values": [
+            "Default Name",
+            "Default Name",
+            "Default Name"
+          ],
+          "after_values": [
+            "Ambush Alley",
+            "Kickback Keys",
+            "Rackettown"
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 3,
+          "changes_count": 3,
+          "kinds": {
+            "changed": 3
+          },
+          "before_values": [
+            "Disclaimer",
+            "Disclaimer",
+            "Disclaimer"
+          ],
+          "after_values": [
+            "StartPage",
+            "StartPage",
+            "StartPage"
+          ],
+          "numeric_stats": null
+        }
+      }
     },
     {
       "from": "Home",
@@ -243,33 +375,498 @@
       }
     },
     {
-      "from": "Disclaimer",
-      "clicked_text": "Ok.",
-      "to": "StartPage",
-      "observation_count": 2,
+      "from": "Contacts",
+      "clicked_text": null,
+      "to": "Contacts",
+      "observation_count": 3,
       "classifications": {
-        "branch": 2
+        "branch": 3
       },
-      "first_observed_ts": 1776499721889,
-      "last_observed_ts": 1776504126640,
+      "first_observed_ts": 1776506390895,
+      "last_observed_ts": 1776506410327,
       "same_state_hits": 0,
-      "is_self_loop": false,
+      "is_self_loop": true,
       "effect_aggregate": {
-        "city_name": {
+        "crypto_ctc": {
           "count": 2,
           "changes_count": 2,
           "kinds": {
             "changed": 2
           },
           "before_values": [
-            "Default Name",
-            "Default Name"
+            4778,
+            5651
           ],
           "after_values": [
-            "Ambush Alley",
-            "Kickback Keys"
+            5220,
+            5800
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": 149,
+            "max_delta": 442,
+            "mean_delta": 295.5,
+            "always_same_delta": false
+          }
+        },
+        "crypto_ctc_history.0": {
+          "count": 3,
+          "changes_count": 3,
+          "kinds": {
+            "changed": 3
+          },
+          "before_values": [
+            2989,
+            3710,
+            4778
+          ],
+          "after_values": [
+            3419,
+            4178,
+            5220
+          ],
+          "numeric_stats": {
+            "sample_count": 3,
+            "min_delta": 430,
+            "max_delta": 468,
+            "mean_delta": 446.6667,
+            "always_same_delta": false
+          }
+        },
+        "crypto_ctc_history.1": {
+          "count": 3,
+          "changes_count": 3,
+          "kinds": {
+            "changed": 3
+          },
+          "before_values": [
+            3419,
+            4178,
+            5220
+          ],
+          "after_values": [
+            3710,
+            4778,
+            5651
+          ],
+          "numeric_stats": {
+            "sample_count": 3,
+            "min_delta": 291,
+            "max_delta": 600,
+            "mean_delta": 440.6667,
+            "always_same_delta": false
+          }
+        },
+        "crypto_ctc_history.2": {
+          "count": 3,
+          "changes_count": 3,
+          "kinds": {
+            "changed": 3
+          },
+          "before_values": [
+            3710,
+            4778,
+            5651
+          ],
+          "after_values": [
+            4178,
+            5220,
+            5800
+          ],
+          "numeric_stats": {
+            "sample_count": 3,
+            "min_delta": 149,
+            "max_delta": 468,
+            "mean_delta": 353,
+            "always_same_delta": false
+          }
+        },
+        "crypto_ctc_history.3": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            4178,
+            5220
+          ],
+          "after_values": [
+            4778,
+            5651
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": 431,
+            "max_delta": 600,
+            "mean_delta": 515.5,
+            "always_same_delta": false
+          }
+        },
+        "crypto_ctc_history.4": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            4778,
+            5651
+          ],
+          "after_values": [
+            5220,
+            5800
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": 149,
+            "max_delta": 442,
+            "mean_delta": 295.5,
+            "always_same_delta": false
+          }
+        },
+        "contact_tab": {
+          "count": 3,
+          "changes_count": 3,
+          "kinds": {
+            "added": 1,
+            "changed": 2
+          },
+          "before_values": [
+            null,
+            "male",
+            "female"
+          ],
+          "after_values": [
+            "male",
+            "female",
+            "accomplices"
           ],
           "numeric_stats": null
+        },
+        "male_sort": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "job"
+          ],
+          "numeric_stats": null
+        },
+        "female_sort": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "job"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Mafia Headquarters",
+      "clicked_text": null,
+      "to": "Mafia Headquarters",
+      "observation_count": 3,
+      "classifications": {
+        "branch": 3
+      },
+      "first_observed_ts": 1776506607083,
+      "last_observed_ts": 1776506619727,
+      "same_state_hits": 2,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "met_mechanic": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Whiteboard",
+      "clicked_text": null,
+      "to": "Home",
+      "observation_count": 2,
+      "classifications": {
+        "branch": 2
+      },
+      "first_observed_ts": 1776499908027,
+      "last_observed_ts": 1776506382131,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "return": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            "Whiteboard",
+            "Whiteboard"
+          ],
+          "after_values": [
+            "Home",
+            "Home"
+          ],
+          "numeric_stats": null
+        },
+        "crypto_ctc": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3710
+          ],
+          "after_values": [
+            4178
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 468,
+            "max_delta": 468,
+            "mean_delta": 468,
+            "always_same_delta": true
+          }
+        },
+        "crypto_ctc_history.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2500
+          ],
+          "after_values": [
+            2534
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 34,
+            "max_delta": 34,
+            "mean_delta": 34,
+            "always_same_delta": true
+          }
+        },
+        "crypto_ctc_history.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2534
+          ],
+          "after_values": [
+            2989
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 455,
+            "max_delta": 455,
+            "mean_delta": 455,
+            "always_same_delta": true
+          }
+        },
+        "crypto_ctc_history.2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2989
+          ],
+          "after_values": [
+            3419
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 430,
+            "max_delta": 430,
+            "mean_delta": 430,
+            "always_same_delta": true
+          }
+        },
+        "crypto_ctc_history.3": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3419
+          ],
+          "after_values": [
+            3710
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 291,
+            "max_delta": 291,
+            "mean_delta": 291,
+            "always_same_delta": true
+          }
+        },
+        "crypto_ctc_history.4": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3710
+          ],
+          "after_values": [
+            4178
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 468,
+            "max_delta": 468,
+            "mean_delta": 468,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Whiteboard",
+      "clicked_text": null,
+      "to": "Whiteboard",
+      "observation_count": 2,
+      "classifications": {
+        "branch": 2
+      },
+      "first_observed_ts": 1776506365715,
+      "last_observed_ts": 1776506371205,
+      "same_state_hits": 2,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "The Distributor",
+      "clicked_text": null,
+      "to": "The Distributor",
+      "observation_count": 2,
+      "classifications": {
+        "branch": 2
+      },
+      "first_observed_ts": 1776506656971,
+      "last_observed_ts": 1776506668904,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "streaming_biz": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "harbor_state": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Striptease Club",
+      "clicked_text": null,
+      "to": "Striptease Job Applying",
+      "observation_count": 2,
+      "classifications": {
+        "branch": 2
+      },
+      "first_observed_ts": 1776506872351,
+      "last_observed_ts": 1776506889362,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "gameDate.1": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            "2010-06-01T08:20:00.000Z",
+            "2010-06-01T08:50:00.000Z"
+          ],
+          "after_values": [
+            "2010-06-01T08:50:00.000Z",
+            "2010-06-01T09:20:00.000Z"
+          ],
+          "numeric_stats": null
+        },
+        "arousal_tick": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            20,
+            50
+          ],
+          "after_values": [
+            50,
+            20
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": -30,
+            "max_delta": 30,
+            "mean_delta": 0,
+            "always_same_delta": false
+          }
         },
         "return": {
           "count": 2,
@@ -278,16 +875,50 @@
             "changed": 2
           },
           "before_values": [
-            "Disclaimer",
-            "Disclaimer"
+            "Striptease Club",
+            "Striptease Club"
           ],
           "after_values": [
-            "StartPage",
-            "StartPage"
+            "Striptease Job Applying",
+            "Striptease Job Applying"
           ],
           "numeric_stats": null
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
         }
       }
+    },
+    {
+      "from": "Striptease Job Applying",
+      "clicked_text": null,
+      "to": "Striptease Job Applying",
+      "observation_count": 2,
+      "classifications": {
+        "branch": 2
+      },
+      "first_observed_ts": 1776506909684,
+      "last_observed_ts": 1776506920598,
+      "same_state_hits": 2,
+      "is_self_loop": true,
+      "effect_aggregate": {}
     },
     {
       "from": "Credits Page",
@@ -480,35 +1111,6 @@
       "same_state_hits": 1,
       "is_self_loop": true,
       "effect_aggregate": {}
-    },
-    {
-      "from": "Whiteboard",
-      "clicked_text": null,
-      "to": "Home",
-      "observation_count": 1,
-      "classifications": {
-        "branch": 1
-      },
-      "first_observed_ts": 1776499908027,
-      "last_observed_ts": 1776499908027,
-      "same_state_hits": 0,
-      "is_self_loop": false,
-      "effect_aggregate": {
-        "return": {
-          "count": 1,
-          "changes_count": 1,
-          "kinds": {
-            "changed": 1
-          },
-          "before_values": [
-            "Whiteboard"
-          ],
-          "after_values": [
-            "Home"
-          ],
-          "numeric_stats": null
-        }
-      }
     },
     {
       "from": "StartPage",
@@ -2029,6 +2631,1876 @@
           "numeric_stats": null
         }
       }
+    },
+    {
+      "from": "StartPage",
+      "clicked_text": null,
+      "to": "QuickStart Menu",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776506283754,
+      "last_observed_ts": 1776506283754,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "adolesence": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "Bully"
+          ],
+          "numeric_stats": null
+        },
+        "first_crime": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "Robbery"
+          ],
+          "numeric_stats": null
+        },
+        "last_crime": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "Burglary"
+          ],
+          "numeric_stats": null
+        },
+        "band_name": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Band"
+          ],
+          "after_values": [
+            "Faction"
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "StartPage"
+          ],
+          "after_values": [
+            "QuickStart Menu"
+          ],
+          "numeric_stats": null
+        },
+        "pc_haircolor": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "brunette"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "QuickStart Menu",
+      "clicked_text": null,
+      "to": "Home",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776506338172,
+      "last_observed_ts": 1776506338172,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "cun_base": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "cun": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "charm_base": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "charm": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "combat_base": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "combat": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "money": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            10000
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 10000,
+            "max_delta": 10000,
+            "mean_delta": 10000,
+            "always_same_delta": true
+          }
+        },
+        "reputation": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            5000
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 5000,
+            "max_delta": 5000,
+            "mean_delta": 5000,
+            "always_same_delta": true
+          }
+        },
+        "p_inv.1.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "new setup.Inventory({}, [])"
+          ],
+          "after_values": [
+            "new setup.Inventory({\"Lockpick\":15,\"Car Opening Tools\":1,\"Safe-cracking kit\":1}, [])"
+          ],
+          "numeric_stats": null
+        },
+        "p_range.1.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "new setup.Inventory({}, [])"
+          ],
+          "after_values": [
+            "new setup.Inventory({\"Block 19\":3}, [])"
+          ],
+          "numeric_stats": null
+        },
+        "gangs_base": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "gangs_met": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "mafia_base": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "mafia_met": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "cartel_base": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "cartel_met": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 3,
+            "max_delta": 3,
+            "mean_delta": 3,
+            "always_same_delta": true
+          }
+        },
+        "bikers_met": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "rent": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            10
+          ],
+          "after_values": [
+            240
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 230,
+            "max_delta": 230,
+            "mean_delta": 230,
+            "always_same_delta": true
+          }
+        },
+        "car_1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "car": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "home_type": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "basement": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "coins_farm_size": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 5,
+            "max_delta": 5,
+            "mean_delta": 5,
+            "always_same_delta": true
+          }
+        },
+        "p_warehouse": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "p_warehouse_size": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 5,
+            "max_delta": 5,
+            "mean_delta": 5,
+            "always_same_delta": true
+          }
+        },
+        "warehouse_rent": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            30
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 30,
+            "max_delta": 30,
+            "mean_delta": 30,
+            "always_same_delta": true
+          }
+        },
+        "p_boss": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "band_strength": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            450
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 450,
+            "max_delta": 450,
+            "mean_delta": 450,
+            "always_same_delta": true
+          }
+        },
+        "original_band_name": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Band"
+          ],
+          "after_values": [
+            "Faction"
+          ],
+          "numeric_stats": null
+        },
+        "game_state": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "outskirts_roadblock": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            true
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "news_setup": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "crypto_ctc": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2534
+          ],
+          "after_values": [
+            3419
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 885,
+            "max_delta": 885,
+            "mean_delta": 885,
+            "always_same_delta": true
+          }
+        },
+        "crypto_ctc_history.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2450
+          ],
+          "after_values": [
+            2600
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 150,
+            "max_delta": 150,
+            "mean_delta": 150,
+            "always_same_delta": true
+          }
+        },
+        "crypto_ctc_history.2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2600
+          ],
+          "after_values": [
+            2534
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -66,
+            "max_delta": -66,
+            "mean_delta": -66,
+            "always_same_delta": true
+          }
+        },
+        "crypto_ctc_history.3": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2500
+          ],
+          "after_values": [
+            2989
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 489,
+            "max_delta": 489,
+            "mean_delta": 489,
+            "always_same_delta": true
+          }
+        },
+        "crypto_ctc_history.4": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2534
+          ],
+          "after_values": [
+            3419
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 885,
+            "max_delta": 885,
+            "mean_delta": 885,
+            "always_same_delta": true
+          }
+        },
+        "max_crypto_technicians": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "QuickStart Menu"
+          ],
+          "after_values": [
+            "Home"
+          ],
+          "numeric_stats": null
+        },
+        "band_events.8": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "warehouse_raid"
+          ],
+          "numeric_stats": null
+        },
+        "accomplices_list.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            {
+              "gender": 0,
+              "id": 1776506340343,
+              "name": "Nelson",
+              "surname": "Hall",
+              "trait": "Thug",
+              "temper": 16,
+              "job": "Thug",
+              "friendship": 0,
+              "bar": true,
+              "depravity": 11,
+              "charm": 7,
+              "talk": true,
+              "hadSex": 0,
+              "combat": 6,
+              "driving": 8,
+              "farmer_trade": true,
+              "cun": 3,
+              "writer_story": true,
+              "ignore": false,
+              "with_benefits": false,
+              "dom": 25,
+              "hp": 25,
+              "hp_max": 25,
+              "weapon": "Fists",
+              "sex_available": true,
+              "photo": "img/photos/male/poor/41.webp",
+              "nickname": "Fury",
+              "driving_exp": 0,
+              "combat_exp": 0,
+              "cun_exp": 0,
+              "times_rewarded": 0,
+              "training": 0,
+              "inTraining": 0
+            }
+          ],
+          "numeric_stats": null
+        },
+        "accomplices_list.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            {
+              "gender": 0,
+              "id": 1776506347265,
+              "name": "Luka",
+              "surname": "Price",
+              "trait": "Thief",
+              "temper": 86,
+              "job": "Thief",
+              "friendship": 0,
+              "bar": true,
+              "depravity": 25,
+              "charm": 7,
+              "talk": true,
+              "hadSex": 0,
+              "combat": 7,
+              "driving": 10,
+              "farmer_trade": true,
+              "cun": 6,
+              "writer_story": true,
+              "ignore": false,
+              "with_benefits": false,
+              "dom": 31,
+              "hp": 28,
+              "hp_max": 28,
+              "weapon": "Fists",
+              "sex_available": true,
+              "photo": "img/photos/male/poor/93.webp",
+              "nickname": "Loot Owl",
+              "driving_exp": 0,
+              "combat_exp": 0,
+              "cun_exp": 0,
+              "times_rewarded": 0
+            }
+          ],
+          "numeric_stats": null
+        },
+        "accomplices_list.2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            {
+              "gender": 0,
+              "id": 1776506342323,
+              "name": "Marvin",
+              "surname": "Ramos",
+              "trait": "Thief",
+              "temper": 100,
+              "job": "Thief",
+              "friendship": 0,
+              "bar": true,
+              "depravity": 16,
+              "charm": 7,
+              "talk": true,
+              "hadSex": 0,
+              "combat": 5,
+              "driving": 6,
+              "farmer_trade": true,
+              "cun": 5,
+              "writer_story": true,
+              "ignore": false,
+              "with_benefits": false,
+              "dom": 28,
+              "hp": 29,
+              "hp_max": 29,
+              "weapon": "Baseball Bat",
+              "sex_available": true,
+              "photo": "img/photos/male/poor/99.webp",
+              "nickname": "Shifty",
+              "driving_exp": 0,
+              "combat_exp": 0,
+              "cun_exp": 0,
+              "times_rewarded": 0
+            }
+          ],
+          "numeric_stats": null
+        },
+        "pc_photo": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "img/photos/female/brunette/1.webp"
+          ],
+          "numeric_stats": null
+        },
+        "todayNews": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            {
+              "text": "CartCoin gains traction on whispers of strong regional demand.",
+              "tags": [
+                "crypto_ctc_up"
+              ]
+            }
+          ],
+          "numeric_stats": null
+        },
+        "callText": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "CartCoin gains traction on whispers of strong regional demand."
+          ],
+          "numeric_stats": null
+        },
+        "callTarget": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            null
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Home",
+      "clicked_text": null,
+      "to": "Whiteboard",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776506356578,
+      "last_observed_ts": 1776506356578,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "boss_rep_lose": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            15
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 15,
+            "max_delta": 15,
+            "mean_delta": 15,
+            "always_same_delta": true
+          }
+        },
+        "crypto_ctc": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3419
+          ],
+          "after_values": [
+            3710
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 291,
+            "max_delta": 291,
+            "mean_delta": 291,
+            "always_same_delta": true
+          }
+        },
+        "crypto_ctc_history.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2600
+          ],
+          "after_values": [
+            2500
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -100,
+            "max_delta": -100,
+            "mean_delta": -100,
+            "always_same_delta": true
+          }
+        },
+        "crypto_ctc_history.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2500
+          ],
+          "after_values": [
+            2534
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 34,
+            "max_delta": 34,
+            "mean_delta": 34,
+            "always_same_delta": true
+          }
+        },
+        "crypto_ctc_history.2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2534
+          ],
+          "after_values": [
+            2989
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 455,
+            "max_delta": 455,
+            "mean_delta": 455,
+            "always_same_delta": true
+          }
+        },
+        "crypto_ctc_history.3": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2989
+          ],
+          "after_values": [
+            3419
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 430,
+            "max_delta": 430,
+            "mean_delta": 430,
+            "always_same_delta": true
+          }
+        },
+        "crypto_ctc_history.4": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3419
+          ],
+          "after_values": [
+            3710
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 291,
+            "max_delta": 291,
+            "mean_delta": 291,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Home"
+          ],
+          "after_values": [
+            "Whiteboard"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Home",
+      "clicked_text": null,
+      "to": "Contacts",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776506383274,
+      "last_observed_ts": 1776506383274,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "crypto_ctc": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            4178
+          ],
+          "after_values": [
+            4778
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 600,
+            "max_delta": 600,
+            "mean_delta": 600,
+            "always_same_delta": true
+          }
+        },
+        "crypto_ctc_history.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2534
+          ],
+          "after_values": [
+            2989
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 455,
+            "max_delta": 455,
+            "mean_delta": 455,
+            "always_same_delta": true
+          }
+        },
+        "crypto_ctc_history.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2989
+          ],
+          "after_values": [
+            3419
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 430,
+            "max_delta": 430,
+            "mean_delta": 430,
+            "always_same_delta": true
+          }
+        },
+        "crypto_ctc_history.2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3419
+          ],
+          "after_values": [
+            3710
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 291,
+            "max_delta": 291,
+            "mean_delta": 291,
+            "always_same_delta": true
+          }
+        },
+        "crypto_ctc_history.3": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3710
+          ],
+          "after_values": [
+            4178
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 468,
+            "max_delta": 468,
+            "mean_delta": 468,
+            "always_same_delta": true
+          }
+        },
+        "crypto_ctc_history.4": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            4178
+          ],
+          "after_values": [
+            4778
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 600,
+            "max_delta": 600,
+            "mean_delta": 600,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Home"
+          ],
+          "after_values": [
+            "Contacts"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Home",
+      "clicked_text": null,
+      "to": "Basement",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776506477066,
+      "last_observed_ts": 1776506477066,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "gameDate.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "2010-06-01T08:00:00.000Z"
+          ],
+          "after_values": [
+            "2010-06-01T08:05:00.000Z"
+          ],
+          "numeric_stats": null
+        },
+        "arousal_tick": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 5,
+            "max_delta": 5,
+            "mean_delta": 5,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Home"
+          ],
+          "after_values": [
+            "Basement"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Downtown",
+      "clicked_text": "Visit a Street Gangs hometurf.",
+      "to": "Downtown",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776506552304,
+      "last_observed_ts": 1776506552304,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Downtown",
+      "clicked_text": null,
+      "to": "Street Gangs",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776506568512,
+      "last_observed_ts": 1776506568512,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "gameDate.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "2010-06-01T08:05:00.000Z"
+          ],
+          "after_values": [
+            "2010-06-01T08:10:00.000Z"
+          ],
+          "numeric_stats": null
+        },
+        "arousal_tick": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            5
+          ],
+          "after_values": [
+            10
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 5,
+            "max_delta": 5,
+            "mean_delta": 5,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Downtown"
+          ],
+          "after_values": [
+            "Street Gangs"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Street Gangs",
+      "clicked_text": null,
+      "to": "Street Gangs",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776506580044,
+      "last_observed_ts": 1776506580044,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "burglar_quest": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "complex.1.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "new setup.Inventory({\"Golden Ring\":1,\"Silver Ring\":2,\"Golden Chain\":1,\"Junk\":6,\"Smartphone\":1,\"Electrical Components\":1}, [])"
+          ],
+          "after_values": [
+            "new setup.Inventory({\"Golden Ring\":1,\"Silver Ring\":1,\"Junk\":5,\"Aphrodisiac\":1,\"Smartphone\":1}, [])"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Suburbs",
+      "clicked_text": null,
+      "to": "Mafia Headquarters",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776506600828,
+      "last_observed_ts": 1776506600828,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "gameDate.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "2010-06-01T08:10:00.000Z"
+          ],
+          "after_values": [
+            "2010-06-01T08:15:00.000Z"
+          ],
+          "numeric_stats": null
+        },
+        "arousal_tick": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            10
+          ],
+          "after_values": [
+            15
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 5,
+            "max_delta": 5,
+            "mean_delta": 5,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Suburbs"
+          ],
+          "after_values": [
+            "Mafia Headquarters"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Harbor",
+      "clicked_text": null,
+      "to": "Cartel Warehouses",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776506642488,
+      "last_observed_ts": 1776506642488,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "gameDate.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "2010-06-01T08:15:00.000Z"
+          ],
+          "after_values": [
+            "2010-06-01T08:20:00.000Z"
+          ],
+          "numeric_stats": null
+        },
+        "arousal_tick": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            15
+          ],
+          "after_values": [
+            20
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 5,
+            "max_delta": 5,
+            "mean_delta": 5,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Harbor"
+          ],
+          "after_values": [
+            "Cartel Warehouses"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Cartel Warehouses",
+      "clicked_text": null,
+      "to": "The Distributor",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776506650458,
+      "last_observed_ts": 1776506650458,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Cartel Warehouses"
+          ],
+          "after_values": [
+            "The Distributor"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Striptease Job Applying",
+      "clicked_text": "Alright then.",
+      "to": "Striptease Job Applying",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776506895749,
+      "last_observed_ts": 1776506895749,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Complex Burglary",
+      "clicked_text": null,
+      "to": "Downtown",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776507035070,
+      "last_observed_ts": 1776507035070,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "gameDate.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "2010-06-01T09:55:00.000Z"
+          ],
+          "after_values": [
+            "2010-06-01T10:10:00.000Z"
+          ],
+          "numeric_stats": null
+        },
+        "stam": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            100
+          ],
+          "after_values": [
+            97
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -3,
+            "max_delta": -3,
+            "mean_delta": -3,
+            "always_same_delta": true
+          }
+        },
+        "exp_percentage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            25
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 25,
+            "max_delta": 25,
+            "mean_delta": 25,
+            "always_same_delta": true
+          }
+        },
+        "burglar_trait_progress": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            25
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 25,
+            "max_delta": 25,
+            "mean_delta": 25,
+            "always_same_delta": true
+          }
+        },
+        "arousal_tick": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            20
+          ],
+          "after_values": [
+            35
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 15,
+            "max_delta": 15,
+            "mean_delta": 15,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Complex Burglary"
+          ],
+          "after_values": [
+            "Downtown"
+          ],
+          "numeric_stats": null
+        },
+        "notify_array.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "You've raised your skills in burglary! 25%/100% for a new trait."
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Bikers Club",
+      "clicked_text": null,
+      "to": "Bikers Club",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776507074194,
+      "last_observed_ts": 1776507074194,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
     }
   ],
   "synthetic_edges": [
@@ -7537,13 +10009,3394 @@
           "numeric_stats": null
         }
       }
+    },
+    {
+      "cmd": "eval",
+      "from": "QuickStart Menu",
+      "to": "QuickStart Menu",
+      "observation_count": 4,
+      "first_observed_ts": 1776506297544,
+      "last_observed_ts": 1776506331234,
+      "effect_aggregate": {
+        "pc_photo_index": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "adolesence": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Bully"
+          ],
+          "after_values": [
+            "Leader"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Contacts",
+      "to": "Contacts",
+      "observation_count": 8,
+      "first_observed_ts": 1776506392447,
+      "last_observed_ts": 1776506461766,
+      "effect_aggregate": {
+        "crypto_ctc": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            5220
+          ],
+          "after_values": [
+            5651
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 431,
+            "max_delta": 431,
+            "mean_delta": 431,
+            "always_same_delta": true
+          }
+        },
+        "crypto_ctc_history.0": {
+          "count": 4,
+          "changes_count": 4,
+          "kinds": {
+            "changed": 4
+          },
+          "before_values": [
+            3419,
+            4178,
+            5220,
+            5651
+          ],
+          "after_values": [
+            3710,
+            4778,
+            5651,
+            5800
+          ],
+          "numeric_stats": {
+            "sample_count": 4,
+            "min_delta": 149,
+            "max_delta": 600,
+            "mean_delta": 367.75,
+            "always_same_delta": false
+          }
+        },
+        "crypto_ctc_history.1": {
+          "count": 3,
+          "changes_count": 3,
+          "kinds": {
+            "changed": 3
+          },
+          "before_values": [
+            3710,
+            4778,
+            5651
+          ],
+          "after_values": [
+            4178,
+            5220,
+            5800
+          ],
+          "numeric_stats": {
+            "sample_count": 3,
+            "min_delta": 149,
+            "max_delta": 468,
+            "mean_delta": 353,
+            "always_same_delta": false
+          }
+        },
+        "crypto_ctc_history.2": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            4178,
+            5220
+          ],
+          "after_values": [
+            4778,
+            5651
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": 431,
+            "max_delta": 600,
+            "mean_delta": 515.5,
+            "always_same_delta": false
+          }
+        },
+        "crypto_ctc_history.3": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            4778,
+            5651
+          ],
+          "after_values": [
+            5220,
+            5800
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": 149,
+            "max_delta": 442,
+            "mean_delta": 295.5,
+            "always_same_delta": false
+          }
+        },
+        "crypto_ctc_history.4": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            5220
+          ],
+          "after_values": [
+            5651
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 431,
+            "max_delta": 431,
+            "mean_delta": 431,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Contacts",
+      "to": "Home",
+      "observation_count": 1,
+      "first_observed_ts": 1776506476424,
+      "last_observed_ts": 1776506476424,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Contacts"
+          ],
+          "after_values": [
+            "Home"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Basement",
+      "to": "Basement",
+      "observation_count": 1,
+      "first_observed_ts": 1776506491625,
+      "last_observed_ts": 1776506491625,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "Basement",
+      "to": "Debug",
+      "observation_count": 1,
+      "first_observed_ts": 1776506511424,
+      "last_observed_ts": 1776506511424,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "Debug",
+      "to": "CheatGuy",
+      "observation_count": 1,
+      "first_observed_ts": 1776506512406,
+      "last_observed_ts": 1776506512406,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Basement"
+          ],
+          "after_values": [
+            "CheatGuy"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "CheatGuy",
+      "to": "CheatGuy",
+      "observation_count": 1,
+      "first_observed_ts": 1776506532885,
+      "last_observed_ts": 1776506532885,
+      "effect_aggregate": {
+        "cun_base": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            5
+          ],
+          "after_values": [
+            20
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 15,
+            "max_delta": 15,
+            "mean_delta": 15,
+            "always_same_delta": true
+          }
+        },
+        "charm_base": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            4
+          ],
+          "after_values": [
+            20
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 16,
+            "max_delta": 16,
+            "mean_delta": 16,
+            "always_same_delta": true
+          }
+        },
+        "base_energy": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            6
+          ],
+          "after_values": [
+            100
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 94,
+            "max_delta": 94,
+            "mean_delta": 94,
+            "always_same_delta": true
+          }
+        },
+        "energy": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            6
+          ],
+          "after_values": [
+            100
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 94,
+            "max_delta": 94,
+            "mean_delta": 94,
+            "always_same_delta": true
+          }
+        },
+        "stam": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            6
+          ],
+          "after_values": [
+            100
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 94,
+            "max_delta": 94,
+            "mean_delta": 94,
+            "always_same_delta": true
+          }
+        },
+        "combat_base": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            4
+          ],
+          "after_values": [
+            20
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 16,
+            "max_delta": 16,
+            "mean_delta": 16,
+            "always_same_delta": true
+          }
+        },
+        "p_hp": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            30
+          ],
+          "after_values": [
+            100
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 70,
+            "max_delta": 70,
+            "mean_delta": 70,
+            "always_same_delta": true
+          }
+        },
+        "money": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            10000
+          ],
+          "after_values": [
+            500000
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 490000,
+            "max_delta": 490000,
+            "mean_delta": 490000,
+            "always_same_delta": true
+          }
+        },
+        "dirty_money": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            200000
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 200000,
+            "max_delta": 200000,
+            "mean_delta": 200000,
+            "always_same_delta": true
+          }
+        },
+        "reputation": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            5000
+          ],
+          "after_values": [
+            20000
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 15000,
+            "max_delta": 15000,
+            "mean_delta": 15000,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "CheatGuy",
+      "to": "Downtown",
+      "observation_count": 1,
+      "first_observed_ts": 1776506539519,
+      "last_observed_ts": 1776506539519,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "CheatGuy"
+          ],
+          "after_values": [
+            "Downtown"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Street Gangs",
+      "to": "Suburbs",
+      "observation_count": 1,
+      "first_observed_ts": 1776506594571,
+      "last_observed_ts": 1776506594571,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Street Gangs"
+          ],
+          "after_values": [
+            "Suburbs"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Mafia Headquarters",
+      "to": "Harbor",
+      "observation_count": 1,
+      "first_observed_ts": 1776506634844,
+      "last_observed_ts": 1776506634844,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Mafia Headquarters"
+          ],
+          "after_values": [
+            "Harbor"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "The Distributor",
+      "to": "The Distributor",
+      "observation_count": 2,
+      "first_observed_ts": 1776506684439,
+      "last_observed_ts": 1776506695956,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "The Distributor",
+      "to": "HeistMenu",
+      "observation_count": 1,
+      "first_observed_ts": 1776506713206,
+      "last_observed_ts": 1776506713206,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "The Distributor"
+          ],
+          "after_values": [
+            "HeistMenu"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "HeistMenu",
+      "to": "HeistMenu",
+      "observation_count": 2,
+      "first_observed_ts": 1776506777409,
+      "last_observed_ts": 1776506812574,
+      "effect_aggregate": {
+        "hour": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            20
+          ],
+          "numeric_stats": null
+        },
+        "base_hour": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            20
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "HeistMenu",
+      "to": "Outskirts",
+      "observation_count": 1,
+      "first_observed_ts": 1776506818024,
+      "last_observed_ts": 1776506818024,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "HeistMenu"
+          ],
+          "after_values": [
+            "Outskirts"
+          ],
+          "numeric_stats": null
+        },
+        "outskirts_amount": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": null
+        },
+        "outskirts_price": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            350
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Outskirts",
+      "to": "Striptease Work",
+      "observation_count": 1,
+      "first_observed_ts": 1776506847419,
+      "last_observed_ts": 1776506847419,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Outskirts"
+          ],
+          "after_values": [
+            "Striptease Work"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Striptease Work",
+      "to": "Striptease Club",
+      "observation_count": 1,
+      "first_observed_ts": 1776506848267,
+      "last_observed_ts": 1776506848267,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Striptease Work"
+          ],
+          "after_values": [
+            "Striptease Club"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Striptease Club",
+      "to": "Eclipse",
+      "observation_count": 1,
+      "first_observed_ts": 1776506850004,
+      "last_observed_ts": 1776506850004,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Striptease Club"
+          ],
+          "after_values": [
+            "Eclipse"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Eclipse",
+      "to": "Stripper",
+      "observation_count": 1,
+      "first_observed_ts": 1776506850819,
+      "last_observed_ts": 1776506850819,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Eclipse"
+          ],
+          "after_values": [
+            "Stripper"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Stripper",
+      "to": "Casino Slots",
+      "observation_count": 1,
+      "first_observed_ts": 1776506851674,
+      "last_observed_ts": 1776506851674,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Stripper"
+          ],
+          "after_values": [
+            "Casino Slots"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Casino Slots",
+      "to": "Casino Escort",
+      "observation_count": 1,
+      "first_observed_ts": 1776506853554,
+      "last_observed_ts": 1776506853554,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Casino Slots"
+          ],
+          "after_values": [
+            "Casino Escort"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Casino Escort",
+      "to": "Striptease Club",
+      "observation_count": 1,
+      "first_observed_ts": 1776506871558,
+      "last_observed_ts": 1776506871558,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Casino Escort"
+          ],
+          "after_values": [
+            "Striptease Club"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Striptease Job Applying",
+      "to": "Striptease Job Applying",
+      "observation_count": 1,
+      "first_observed_ts": 1776506882153,
+      "last_observed_ts": 1776506882153,
+      "effect_aggregate": {
+        "charm_base": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            20
+          ],
+          "after_values": [
+            30
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 10,
+            "max_delta": 10,
+            "mean_delta": 10,
+            "always_same_delta": true
+          }
+        },
+        "charm": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            4
+          ],
+          "after_values": [
+            30
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 26,
+            "max_delta": 26,
+            "mean_delta": 26,
+            "always_same_delta": true
+          }
+        },
+        "pc_lips_piercing": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "pc_nipple_piercing": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "pc_navel_piercing": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "depravity": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            50
+          ],
+          "numeric_stats": null
+        },
+        "pc_boobs_size": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": null
+        },
+        "pc_ass_size": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Striptease Job Applying",
+      "to": "Striptease Club",
+      "observation_count": 2,
+      "first_observed_ts": 1776506888161,
+      "last_observed_ts": 1776506931941,
+      "effect_aggregate": {
+        "return": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            "Striptease Job Applying",
+            "Striptease Job Applying"
+          ],
+          "after_values": [
+            "Striptease Club",
+            "Striptease Club"
+          ],
+          "numeric_stats": null
+        },
+        "p_traits.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "stripper"
+          ],
+          "numeric_stats": null
+        },
+        "p_traits.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "strip_0"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Striptease Club",
+      "to": "Striptease Club",
+      "observation_count": 2,
+      "first_observed_ts": 1776506940042,
+      "last_observed_ts": 1776506951797,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "Striptease Club",
+      "to": "Burglary Success",
+      "observation_count": 1,
+      "first_observed_ts": 1776506970250,
+      "last_observed_ts": 1776506970250,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Striptease Club"
+          ],
+          "after_values": [
+            "Burglary Success"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Burglary Success",
+      "to": "Complex Burglary",
+      "observation_count": 1,
+      "first_observed_ts": 1776506971107,
+      "last_observed_ts": 1776506971107,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Burglary Success"
+          ],
+          "after_values": [
+            "Complex Burglary"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Complex Burglary",
+      "to": "Burglary Finale",
+      "observation_count": 1,
+      "first_observed_ts": 1776506972476,
+      "last_observed_ts": 1776506972476,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Complex Burglary"
+          ],
+          "after_values": [
+            "Burglary Finale"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Burglary Finale",
+      "to": "Complex Burglary",
+      "observation_count": 1,
+      "first_observed_ts": 1776506991807,
+      "last_observed_ts": 1776506991807,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Burglary Finale"
+          ],
+          "after_values": [
+            "Complex Burglary"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Downtown",
+      "to": "Bikers Club",
+      "observation_count": 1,
+      "first_observed_ts": 1776507051574,
+      "last_observed_ts": 1776507051574,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Downtown"
+          ],
+          "after_values": [
+            "Bikers Club"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Bikers Club",
+      "to": "Bikers Leader Intro",
+      "observation_count": 1,
+      "first_observed_ts": 1776507053444,
+      "last_observed_ts": 1776507053444,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Bikers Club"
+          ],
+          "after_values": [
+            "Bikers Leader Intro"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Bikers Leader Intro",
+      "to": "Bikers Deal",
+      "observation_count": 1,
+      "first_observed_ts": 1776507054298,
+      "last_observed_ts": 1776507054298,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Bikers Leader Intro"
+          ],
+          "after_values": [
+            "Bikers Deal"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Bikers Deal",
+      "to": "Volkov",
+      "observation_count": 1,
+      "first_observed_ts": 1776507055145,
+      "last_observed_ts": 1776507055145,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Bikers Deal"
+          ],
+          "after_values": [
+            "Volkov"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Volkov",
+      "to": "Bikers Club",
+      "observation_count": 1,
+      "first_observed_ts": 1776507073299,
+      "last_observed_ts": 1776507073299,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Volkov"
+          ],
+          "after_values": [
+            "Bikers Club"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Bikers Club",
+      "to": "Outskirts Landing Strip",
+      "observation_count": 1,
+      "first_observed_ts": 1776507087569,
+      "last_observed_ts": 1776507087569,
+      "effect_aggregate": {
+        "orders_reset": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            7
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 7,
+            "max_delta": 7,
+            "mean_delta": 7,
+            "always_same_delta": true
+          }
+        },
+        "orders.8": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Order for party"
+          ],
+          "after_values": [
+            "Order from IT company"
+          ],
+          "numeric_stats": null
+        },
+        "orders.9": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Order from IT company"
+          ],
+          "after_values": [
+            "Jewelry order"
+          ],
+          "numeric_stats": null
+        },
+        "order_1_inv.1.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "new setup.Inventory({}, [])"
+          ],
+          "after_values": [
+            "new setup.Inventory({\"Moonshine Shipment\":2,\"Drugs Shipment\":2}, [])"
+          ],
+          "numeric_stats": null
+        },
+        "order_2_inv.1.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "new setup.Inventory({}, [])"
+          ],
+          "after_values": [
+            "new setup.Inventory({\"Concealed Melee Shipment\":3}, [])"
+          ],
+          "numeric_stats": null
+        },
+        "order_3_inv.1.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "new setup.Inventory({}, [])"
+          ],
+          "after_values": [
+            "new setup.Inventory({\"Improvised Weapons Shipment\":3}, [])"
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Bikers Club"
+          ],
+          "after_values": [
+            "Outskirts Landing Strip"
+          ],
+          "numeric_stats": null
+        },
+        "order_1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "Order for party"
+          ],
+          "numeric_stats": null
+        },
+        "order_1_desc": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "Order for party equipment. Someone gonna have a blast in nearby future. ''2 Moonshine Shipments'' and ''2 Drugs Shipments''. Reward: 17500$. Investor: CVC$"
+          ],
+          "numeric_stats": null
+        },
+        "order_1_reward": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            17500
+          ],
+          "numeric_stats": null
+        },
+        "order_2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "Concealed Melee shipment order"
+          ],
+          "numeric_stats": null
+        },
+        "order_2_desc": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "Shady request for shady tools for shady business. No connections to customer, no bridges to you, perfect opportunity. ''3 Concealed Melee Shipments''. Reward: 19500$. Investor: KSH$"
+          ],
+          "numeric_stats": null
+        },
+        "order_2_reward": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            19500
+          ],
+          "numeric_stats": null
+        },
+        "order_3": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "Order from militia cell"
+          ],
+          "numeric_stats": null
+        },
+        "order_3_desc": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "Small militia cell preparing for uncertain times. Budget is tight, so they settle for rough solutions. ''3 Improvised Weapons Shipments''. Reward: 40000$. Investor: KSH$."
+          ],
+          "numeric_stats": null
+        },
+        "order_3_reward": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            40000
+          ],
+          "numeric_stats": null
+        },
+        "order_1_crypto": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "CVC"
+          ],
+          "numeric_stats": null
+        },
+        "order_2_crypto": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "KSH"
+          ],
+          "numeric_stats": null
+        },
+        "order_3_crypto": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "KSH"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Outskirts Landing Strip",
+      "to": "Landing Strip",
+      "observation_count": 1,
+      "first_observed_ts": 1776507089523,
+      "last_observed_ts": 1776507089523,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Outskirts Landing Strip"
+          ],
+          "after_values": [
+            "Landing Strip"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Landing Strip",
+      "to": "Bikers Landing",
+      "observation_count": 1,
+      "first_observed_ts": 1776507090351,
+      "last_observed_ts": 1776507090351,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Landing Strip"
+          ],
+          "after_values": [
+            "Bikers Landing"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Bikers Landing",
+      "to": "Casino Tables",
+      "observation_count": 1,
+      "first_observed_ts": 1776507102854,
+      "last_observed_ts": 1776507102854,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Bikers Landing"
+          ],
+          "after_values": [
+            "Casino Tables"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Casino Tables",
+      "to": "Blackjack",
+      "observation_count": 1,
+      "first_observed_ts": 1776507103688,
+      "last_observed_ts": 1776507103688,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Casino Tables"
+          ],
+          "after_values": [
+            "Blackjack"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Blackjack",
+      "to": "Casino Blackjack",
+      "observation_count": 1,
+      "first_observed_ts": 1776507105274,
+      "last_observed_ts": 1776507105274,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Blackjack"
+          ],
+          "after_values": [
+            "Casino Blackjack"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Casino Blackjack",
+      "to": "Crown Blackjack",
+      "observation_count": 1,
+      "first_observed_ts": 1776507106095,
+      "last_observed_ts": 1776507106095,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Casino Blackjack"
+          ],
+          "after_values": [
+            "Crown Blackjack"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Crown Blackjack",
+      "to": "Blackjack Start",
+      "observation_count": 1,
+      "first_observed_ts": 1776507106892,
+      "last_observed_ts": 1776507106892,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Crown Blackjack"
+          ],
+          "after_values": [
+            "Blackjack Start"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Blackjack Start",
+      "to": "Car Theft",
+      "observation_count": 1,
+      "first_observed_ts": 1776507119567,
+      "last_observed_ts": 1776507119567,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Blackjack Start"
+          ],
+          "after_values": [
+            "Car Theft"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Car Theft",
+      "to": "Downtown Car Theft",
+      "observation_count": 1,
+      "first_observed_ts": 1776507120394,
+      "last_observed_ts": 1776507120394,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Car Theft"
+          ],
+          "after_values": [
+            "Downtown Car Theft"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Downtown Car Theft",
+      "to": "Suburbs Car Theft",
+      "observation_count": 1,
+      "first_observed_ts": 1776507121188,
+      "last_observed_ts": 1776507121188,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Downtown Car Theft"
+          ],
+          "after_values": [
+            "Suburbs Car Theft"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Suburbs Car Theft",
+      "to": "CarTheft",
+      "observation_count": 1,
+      "first_observed_ts": 1776507122004,
+      "last_observed_ts": 1776507122004,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Suburbs Car Theft"
+          ],
+          "after_values": [
+            "CarTheft"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "CarTheft",
+      "to": "Motor Vehicle Theft",
+      "observation_count": 1,
+      "first_observed_ts": 1776507134180,
+      "last_observed_ts": 1776507134180,
+      "effect_aggregate": {
+        "car_theft_problem": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "Car alarm turns on"
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "CarTheft"
+          ],
+          "after_values": [
+            "Motor Vehicle Theft"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Motor Vehicle Theft",
+      "to": "Motor Vehicle Theft Success",
+      "observation_count": 1,
+      "first_observed_ts": 1776507135383,
+      "last_observed_ts": 1776507135383,
+      "effect_aggregate": {
+        "stat_car_thievery": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "timer_seconds": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            40
+          ],
+          "after_values": [
+            39
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -1,
+            "max_delta": -1,
+            "mean_delta": -1,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Motor Vehicle Theft"
+          ],
+          "after_values": [
+            "Motor Vehicle Theft Success"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Motor Vehicle Theft Success",
+      "to": "Car Chase Lose",
+      "observation_count": 1,
+      "first_observed_ts": 1776507136633,
+      "last_observed_ts": 1776507136633,
+      "effect_aggregate": {
+        "exp_percentage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            25
+          ],
+          "after_values": [
+            55
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 30,
+            "max_delta": 30,
+            "mean_delta": 30,
+            "always_same_delta": true
+          }
+        },
+        "reputation": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            20000
+          ],
+          "after_values": [
+            20217
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 217,
+            "max_delta": 217,
+            "mean_delta": 217,
+            "always_same_delta": true
+          }
+        },
+        "racer_trait_progress": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            55
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 55,
+            "max_delta": 55,
+            "mean_delta": 55,
+            "always_same_delta": true
+          }
+        },
+        "race_cd": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 3,
+            "max_delta": 3,
+            "mean_delta": 3,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Motor Vehicle Theft Success"
+          ],
+          "after_values": [
+            "Car Chase Lose"
+          ],
+          "numeric_stats": null
+        },
+        "notify_array.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "You felt this thing called a freedom. On the road, of course. 31%/100% for a new trait."
+          ],
+          "numeric_stats": null
+        },
+        "notify_array.2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "You could learn a thing or two about riding on such speed. Well... 55%/100% for a new trait."
+          ],
+          "numeric_stats": null
+        },
+        "chase_right_dir.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "left"
+          ],
+          "numeric_stats": null
+        },
+        "chase_right_dir.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "direct"
+          ],
+          "numeric_stats": null
+        },
+        "chase_problem": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "A car is tailgating you from the right side!"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Car Chase Lose",
+      "to": "Central Park",
+      "observation_count": 1,
+      "first_observed_ts": 1776507138493,
+      "last_observed_ts": 1776507138493,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Car Chase Lose"
+          ],
+          "after_values": [
+            "Central Park"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Central Park",
+      "to": "Park Meeting",
+      "observation_count": 1,
+      "first_observed_ts": 1776507140132,
+      "last_observed_ts": 1776507140132,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Central Park"
+          ],
+          "after_values": [
+            "Park Meeting"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Park Meeting",
+      "to": "Garage",
+      "observation_count": 1,
+      "first_observed_ts": 1776507141878,
+      "last_observed_ts": 1776507141878,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Park Meeting"
+          ],
+          "after_values": [
+            "Garage"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Garage",
+      "to": "Mafia Car Trade S",
+      "observation_count": 1,
+      "first_observed_ts": 1776507142710,
+      "last_observed_ts": 1776507142710,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Garage"
+          ],
+          "after_values": [
+            "Mafia Car Trade S"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Mafia Car Trade S",
+      "to": "Mafia Car Trade S",
+      "observation_count": 1,
+      "first_observed_ts": 1776507159815,
+      "last_observed_ts": 1776507159815,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "Mafia Car Trade S",
+      "to": "Striptease Private",
+      "observation_count": 1,
+      "first_observed_ts": 1776507181418,
+      "last_observed_ts": 1776507181418,
+      "effect_aggregate": {
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            0
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -1,
+            "max_delta": -1,
+            "mean_delta": -1,
+            "always_same_delta": true
+          }
+        },
+        "money": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            500000
+          ],
+          "after_values": [
+            500450
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 450,
+            "max_delta": 450,
+            "mean_delta": 450,
+            "always_same_delta": true
+          }
+        },
+        "stat_money": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            450
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 450,
+            "max_delta": 450,
+            "mean_delta": 450,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Mafia Car Trade S"
+          ],
+          "after_values": [
+            "Striptease Private"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Striptease Private",
+      "to": "Striptease Quickie",
+      "observation_count": 1,
+      "first_observed_ts": 1776507183179,
+      "last_observed_ts": 1776507183179,
+      "effect_aggregate": {
+        "stat_prostitution": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "stat_bj": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "stat_male": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Striptease Private"
+          ],
+          "after_values": [
+            "Striptease Quickie"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Striptease Quickie",
+      "to": "Dark Alleys Quickie",
+      "observation_count": 1,
+      "first_observed_ts": 1776507184885,
+      "last_observed_ts": 1776507184885,
+      "effect_aggregate": {
+        "chauffeur_sex_just_happened": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "stat_bj": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "stat_male": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Striptease Quickie"
+          ],
+          "after_values": [
+            "Dark Alleys Quickie"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Dark Alleys Quickie",
+      "to": "Marketplace Quickie",
+      "observation_count": 1,
+      "first_observed_ts": 1776507186600,
+      "last_observed_ts": 1776507186600,
+      "effect_aggregate": {
+        "stat_bj": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "stat_male": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Dark Alleys Quickie"
+          ],
+          "after_values": [
+            "Marketplace Quickie"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Marketplace Quickie",
+      "to": "Nightclub Quickie",
+      "observation_count": 1,
+      "first_observed_ts": 1776507188407,
+      "last_observed_ts": 1776507188407,
+      "effect_aggregate": {
+        "stat_bj": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "stat_male": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Marketplace Quickie"
+          ],
+          "after_values": [
+            "Nightclub Quickie"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Nightclub Quickie",
+      "to": "Motor Vehicle Quickie",
+      "observation_count": 1,
+      "first_observed_ts": 1776507190411,
+      "last_observed_ts": 1776507190411,
+      "effect_aggregate": {
+        "stat_bj": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            4
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "stat_male": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            4
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Nightclub Quickie"
+          ],
+          "after_values": [
+            "Motor Vehicle Quickie"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Motor Vehicle Quickie",
+      "to": "Crew Gangbang Intro",
+      "observation_count": 1,
+      "first_observed_ts": 1776507206917,
+      "last_observed_ts": 1776507206917,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Motor Vehicle Quickie"
+          ],
+          "after_values": [
+            "Crew Gangbang Intro"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Crew Gangbang Intro",
+      "to": "Crew Gangbang Event",
+      "observation_count": 1,
+      "first_observed_ts": 1776507207757,
+      "last_observed_ts": 1776507207757,
+      "effect_aggregate": {
+        "charm_sex_buff": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "charm": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            30
+          ],
+          "after_values": [
+            31
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "stat_prostitution": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "stat_vanilla": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 5,
+            "max_delta": 5,
+            "mean_delta": 5,
+            "always_same_delta": true
+          }
+        },
+        "stat_bj": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            5
+          ],
+          "after_values": [
+            15
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 10,
+            "max_delta": 10,
+            "mean_delta": 10,
+            "always_same_delta": true
+          }
+        },
+        "stat_anal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 5,
+            "max_delta": 5,
+            "mean_delta": 5,
+            "always_same_delta": true
+          }
+        },
+        "stat_group": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "stat_male": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            5
+          ],
+          "after_values": [
+            15
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 10,
+            "max_delta": 10,
+            "mean_delta": 10,
+            "always_same_delta": true
+          }
+        },
+        "stat_rough": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "sex_buff_duration": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Crew Gangbang Intro"
+          ],
+          "after_values": [
+            "Crew Gangbang Event"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Crew Gangbang Event",
+      "to": "Gang Anal Yap Event",
+      "observation_count": 1,
+      "first_observed_ts": 1776507209422,
+      "last_observed_ts": 1776507209422,
+      "effect_aggregate": {
+        "gameDate.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "2010-06-01T10:10:00.000Z"
+          ],
+          "after_values": [
+            "2010-06-01T10:25:00.000Z"
+          ],
+          "numeric_stats": null
+        },
+        "reputation": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            20217
+          ],
+          "after_values": [
+            20157
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -60,
+            "max_delta": -60,
+            "mean_delta": -60,
+            "always_same_delta": true
+          }
+        },
+        "stat_anal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            5
+          ],
+          "after_values": [
+            6
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "stat_male": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            15
+          ],
+          "after_values": [
+            16
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "stat_rough": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Crew Gangbang Event"
+          ],
+          "after_values": [
+            "Gang Anal Yap Event"
+          ],
+          "numeric_stats": null
+        },
+        "notify_array.3": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "Your rep has been slightly lowered because of that."
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Gang Anal Yap Event",
+      "to": "Captivity NPC Idle",
+      "observation_count": 1,
+      "first_observed_ts": 1776507211176,
+      "last_observed_ts": 1776507211176,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Gang Anal Yap Event"
+          ],
+          "after_values": [
+            "Captivity NPC Idle"
+          ],
+          "numeric_stats": null
+        },
+        "active_media": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "img/media/special/captivity/idle_b/5.webp"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Captivity NPC Idle",
+      "to": "Captivity NPC Sex",
+      "observation_count": 1,
+      "first_observed_ts": 1776507212484,
+      "last_observed_ts": 1776507212484,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Captivity NPC Idle"
+          ],
+          "after_values": [
+            "Captivity NPC Sex"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Captivity NPC Sex",
+      "to": "Yacht Party Orgy",
+      "observation_count": 1,
+      "first_observed_ts": 1776507242850,
+      "last_observed_ts": 1776507242850,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Captivity NPC Sex"
+          ],
+          "after_values": [
+            "Yacht Party Orgy"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Yacht Party Orgy",
+      "to": "Yacht Party Orgy Meeting",
+      "observation_count": 1,
+      "first_observed_ts": 1776507244623,
+      "last_observed_ts": 1776507244623,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Yacht Party Orgy"
+          ],
+          "after_values": [
+            "Yacht Party Orgy Meeting"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Yacht Party Orgy Meeting",
+      "to": "Yacht Party Orgy Offer",
+      "observation_count": 1,
+      "first_observed_ts": 1776507246341,
+      "last_observed_ts": 1776507246341,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Yacht Party Orgy Meeting"
+          ],
+          "after_values": [
+            "Yacht Party Orgy Offer"
+          ],
+          "numeric_stats": null
+        },
+        "yacht_deal_tries": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": null
+        },
+        "yacht_bargain_state": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "Start"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Yacht Party Orgy Offer",
+      "to": "Yacht Party Orgy Final",
+      "observation_count": 1,
+      "first_observed_ts": 1776507248209,
+      "last_observed_ts": 1776507248209,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Yacht Party Orgy Offer"
+          ],
+          "after_values": [
+            "Yacht Party Orgy Final"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Yacht Party Orgy Final",
+      "to": "Traits",
+      "observation_count": 1,
+      "first_observed_ts": 1776507267662,
+      "last_observed_ts": 1776507267662,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "Traits",
+      "to": "TraitsProgress",
+      "observation_count": 1,
+      "first_observed_ts": 1776507268477,
+      "last_observed_ts": 1776507268477,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Yacht Party Orgy Final"
+          ],
+          "after_values": [
+            "TraitsProgress"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "TraitsProgress",
+      "to": "Arousal Volkov Event",
+      "observation_count": 1,
+      "first_observed_ts": 1776507269269,
+      "last_observed_ts": 1776507269269,
+      "effect_aggregate": {
+        "volkov_lewd": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "stat_anal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            6
+          ],
+          "after_values": [
+            7
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "stat_male": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            16
+          ],
+          "after_values": [
+            17
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "stat_rough": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "TraitsProgress"
+          ],
+          "after_values": [
+            "Arousal Volkov Event"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Arousal Volkov Event",
+      "to": "Nightclub Arousal",
+      "observation_count": 1,
+      "first_observed_ts": 1776507271261,
+      "last_observed_ts": 1776507271261,
+      "effect_aggregate": {
+        "stat_bj": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            15
+          ],
+          "after_values": [
+            16
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "stat_male": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            17
+          ],
+          "after_values": [
+            18
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Arousal Volkov Event"
+          ],
+          "after_values": [
+            "Nightclub Arousal"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Nightclub Arousal",
+      "to": "Nightclub Arousal",
+      "observation_count": 1,
+      "first_observed_ts": 1776507285698,
+      "last_observed_ts": 1776507285698,
+      "effect_aggregate": {}
     }
   ],
   "coverage": {
     "static_edges_total": 2120,
-    "observed_static_edges": 39,
-    "unobserved_static_edges": 2081,
-    "coverage_ratio": 0.0184,
-    "observed_only_edges": 5
+    "observed_static_edges": 69,
+    "unobserved_static_edges": 2051,
+    "coverage_ratio": 0.0325,
+    "observed_only_edges": 13
   }
 }

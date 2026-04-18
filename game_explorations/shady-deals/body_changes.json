@@ -7,9 +7,9 @@
           "object"
         ],
         "mutation_count": 0,
-        "first_ts": 1776504105304,
-        "last_ts": 1776504937071,
-        "passages_seen_on_count": 111
+        "first_ts": 1776506272649,
+        "last_ts": 1776507290795,
+        "passages_seen_on_count": 70
       }
     },
     {
@@ -19,9 +19,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776504105304,
-        "last_ts": 1776504937071,
-        "passages_seen_on_count": 111,
+        "first_ts": 1776506272649,
+        "last_ts": 1776507290795,
+        "passages_seen_on_count": 70,
         "string_samples": [
           "1"
         ]
@@ -34,9 +34,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776504105304,
-        "last_ts": 1776504937071,
-        "passages_seen_on_count": 111,
+        "first_ts": 1776506272649,
+        "last_ts": 1776507290795,
+        "passages_seen_on_count": 70,
         "string_samples": [
           "2"
         ]
@@ -49,9 +49,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776504105304,
-        "last_ts": 1776504937071,
-        "passages_seen_on_count": 111,
+        "first_ts": 1776506272649,
+        "last_ts": 1776507290795,
+        "passages_seen_on_count": 70,
         "string_samples": [
           "3"
         ]
@@ -64,11 +64,11 @@
           "number"
         ],
         "mutation_count": 0,
-        "first_ts": 1776504105304,
-        "last_ts": 1776504937071,
-        "passages_seen_on_count": 111,
+        "first_ts": 1776506272649,
+        "last_ts": 1776507290795,
+        "passages_seen_on_count": 70,
         "number_stats": {
-          "count": 253,
+          "count": 259,
           "unique_count": 1,
           "min": 0,
           "max": 0,
@@ -86,9 +86,9 @@
           "object"
         ],
         "mutation_count": 0,
-        "first_ts": 1776504105304,
-        "last_ts": 1776504937071,
-        "passages_seen_on_count": 111
+        "first_ts": 1776506272649,
+        "last_ts": 1776507290795,
+        "passages_seen_on_count": 70
       }
     },
     {
@@ -97,33 +97,37 @@
         "types": [
           "string"
         ],
-        "mutation_count": 2,
-        "first_ts": 1776504158644,
-        "last_ts": 1776504937071,
-        "passages_seen_on_count": 109,
+        "mutation_count": 0,
+        "first_ts": 1776506284100,
+        "last_ts": 1776507290795,
+        "passages_seen_on_count": 68,
         "string_samples": [
-          "brunette",
-          "redhead"
+          "brunette"
         ]
+      }
+    },
+    {
+      "name": "pc_boobs_size",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1776506887246,
+        "last_ts": 1776507290795,
+        "passages_seen_on_count": 48,
+        "number_stats": {
+          "count": 137,
+          "unique_count": 1,
+          "min": 5,
+          "max": 5,
+          "first": 5,
+          "last": 5,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
       }
     }
   ],
-  "transitions": [
-    {
-      "ts": 1776504181021,
-      "passage": "CharGen",
-      "state_hash": "1eacb3420477dd24",
-      "var": "pc_haircolor",
-      "before": "brunette",
-      "after": "redhead"
-    },
-    {
-      "ts": 1776504887077,
-      "passage": "QuickStart Menu",
-      "state_hash": "bbbc4efbabac2ffe",
-      "var": "pc_haircolor",
-      "before": "redhead",
-      "after": "brunette"
-    }
-  ]
+  "transitions": []
 }
