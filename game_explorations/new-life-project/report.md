@@ -1,15 +1,15 @@
 # new-life-project — Exploration Report
 
-Generated: 2026-04-19T07:33:53.043Z
+Generated: 2026-04-19T09:58:15.381Z
 Source URL: https://mopoga.com/new-life-project
 
 ## Session Summary
 
-- Sessions run: 2
-- Total wall-clock: 30m 17s
-- Total clicks: 220
-- Total choices explored: 220
-- Unique states seen: 214
+- Sessions run: 3
+- Total wall-clock: 53m 51s
+- Total clicks: 320
+- Total choices explored: 320
+- Unique states seen: 462
 - Unexplored frontier (queued for next session): 0
 - Endings reached: 0 (use `live.js mark-ending <passage>` to record a terminal passage)
 
@@ -22,7 +22,7 @@ Detected engine: **sugarcube**
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
-| `money` | number | 0..508 | 22 | high |
+| `money` | number | 0..15001 | 17 | high |
 | `strength` | number | 0..0 | 0 | high |
 
 ### npc_stat (6)
@@ -49,24 +49,24 @@ Detected engine: **sugarcube**
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
-| `day` | number | 1..8 | 7 | high |
+| `day` | number | 1..8 | 1 | high |
 
-### flag (89)
+### flag (94)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
 | `sanity` | boolean | true | 0 | high |
 | `kidnapQuest` | boolean | false | 0 | high |
 | `facilityQuest` | boolean | false | 0 | high |
-| `mansion` | boolean | false | 0 | high |
+| `mansion` | boolean | false, true | 1 | high |
 | `mansionFresh` | boolean | false | 0 | high |
 | `morrisTalk` | boolean | false | 0 | high |
 | `constantin` | boolean | false | 0 | high |
 | `lilyRoom` | boolean | false | 0 | high |
-| `id` | boolean | false | 0 | high |
+| `id` | boolean | false, true | 1 | high |
 | `alley` | boolean | false, true | 1 | high |
 | `cottage` | boolean | false | 0 | high |
-| `coffeeDrunk` | boolean | false, true | 2 | high |
+| `coffeeDrunk` | boolean | false | 0 | high |
 | `lake` | boolean | false | 0 | high |
 | `cult` | boolean | false | 0 | high |
 | `tent` | boolean | false | 0 | high |
@@ -74,30 +74,30 @@ Detected engine: **sugarcube**
 | `apt401Key` | boolean | false, true | 1 | high |
 | `aptKeyLux` | boolean | false | 0 | high |
 | `oldphone` | boolean | false, true | 1 | high |
-| `phone` | boolean | false | 0 | high |
-| `laptop` | boolean | false | 0 | high |
-| `cam` | boolean | false | 0 | high |
+| `phone` | boolean | false, true | 1 | high |
+| `laptop` | boolean | false, true | 1 | high |
+| `cam` | boolean | false, true | 1 | high |
 | `digiGPS` | boolean | false | 0 | high |
 | `zackSex` | boolean | false | 0 | high |
 | `lilySex` | boolean | false | 0 | high |
 | `lilyNude` | boolean | false | 0 | high |
-| `textDad` | boolean | false | 0 | high |
+| `textDad` | boolean | false, true | 1 | high |
 | `dadSeen` | boolean | false | 0 | high |
 | `dadRape` | boolean | false | 0 | high |
 | `brotherMissing` | boolean | false | 0 | high |
 | `constantinCorrupt` | boolean | false | 0 | high |
 | `beautySeen` | boolean | false | 0 | high |
-| `legsCheck` | boolean | false | 0 | high |
+| `legsCheck` | boolean | false, true | 1 | high |
 | `pussyCheck` | boolean | false | 0 | high |
 | `hairCheck` | boolean | false | 0 | high |
 | `makeupCheck` | boolean | false | 0 | high |
 | `libBook` | boolean | false | 0 | high |
-| `dildo` | boolean | false | 0 | medium |
+| `dildo` | boolean | false, true | 1 | medium |
 | `tail` | boolean | false | 0 | high |
-| `buttplug` | boolean | false | 0 | high |
-| … | … | … | … | and 49 more |
+| `buttplug` | boolean | false, true | 1 | high |
+| … | … | … | … | and 54 more |
 
-### scalar (132)
+### scalar (136)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
@@ -112,26 +112,26 @@ Detected engine: **sugarcube**
 | `totalBetAmount` | number | 0..0 | 0 | low |
 | `pMiss` | number | 0..0 | 0 | low |
 | `dCheat` | number | 0..0 | 0 | low |
-| `vibeLevel` | number | 0.07500000000000001..0.3 | 2 | low |
-| `countperiods` | number | 0..85 | 35 | low |
-| `questDays` | number | 0..8 | 7 | low |
+| `vibeLevel` | number | 0.05..0.625 | 6 | low |
+| `countperiods` | number | 0..95 | 10 | low |
+| `questDays` | number | 0..8 | 1 | low |
 | `mansionCook` | number | 0..0 | 0 | low |
-| `cellarClean` | number | 0..0 | 0 | low |
+| `cellarClean` | number | 0..1 | 1 | low |
 | `intoxic` | number | 0..0 | 0 | low |
-| `allure` | number | 0..30 | 3 | low |
-| `inhib` | number | 100..117 | 1 | low |
-| `corrupt` | number | -20..0 | 8 | low |
-| `arousal` | number | 0..30 | 2 | low |
+| `allure` | number | 30..70 | 2 | low |
+| `inhib` | number | 0..100 | 7 | low |
+| `corrupt` | number | 0..178 | 9 | low |
+| `arousal` | number | 0..100 | 5 | low |
 | `trauma` | number | 0..0 | 0 | low |
 | `groceries` | number | 0..10 | 1 | low |
-| `kitchenClean` | number | -175..0 | 7 | low |
-| `zackClean` | number | -175..0 | 7 | low |
-| `rngesus` | number | 0..21 | 46 | low |
-| `rent` | number | 0..7 | 8 | low |
+| `kitchenClean` | number | -175..0 | 1 | low |
+| `zackClean` | number | -175..0 | 1 | low |
+| `rngesus` | number | 0..19 | 31 | low |
+| `rent` | number | 0..0 | 0 | low |
 | `bum` | number | 0..0 | 0 | low |
 | `PIProg` | number | 0..0 | 0 | low |
 | `PIDays` | number | 0..0 | 0 | low |
-| `birdwatch` | number | 0..0 | 0 | low |
+| `birdwatch` | number | 0..1 | 1 | low |
 | `jogger` | number | 0..1 | 1 | low |
 | `cardio` | number | 0..0 | 0 | low |
 | `yoga` | number | 0..0 | 0 | low |
@@ -141,34 +141,34 @@ Detected engine: **sugarcube**
 | `mood.Submissive` | number | 0..0 | 0 | low |
 | `mood.Sensual` | number | 0..0 | 0 | low |
 | `mood.Romantic` | number | 0..0 | 0 | low |
-| … | … | … | … | and 92 more |
+| … | … | … | … | and 96 more |
 
-### string (50)
+### string (52)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
-| `charPron.gender` | string | `non-binary`, `male` | 1 | low |
-| `charPron.subject` | string | `they`, `he` | 1 | low |
-| `charPron.object` | string | `them`, `him` | 1 | low |
-| `charPron.possessive` | string | `their`, `his` | 1 | low |
-| `charPron.reflexive` | string | `themself`, `himself` | 1 | low |
-| `charPron.determiner` | string | `their`, `his` | 1 | low |
-| `charPron.contraction` | string | `they're`, `he's` | 1 | low |
-| `charPron.noun` | string | `person`, `man` | 1 | low |
-| `charPron.partner` | string | `enbyfriend`, `boyfriend` | 1 | low |
+| `charPron.gender` | string | `female`, `male` | 1 | low |
+| `charPron.subject` | string | `she`, `he` | 1 | low |
+| `charPron.object` | string | `her`, `him` | 1 | low |
+| `charPron.possessive` | string | `her`, `his` | 1 | low |
+| `charPron.reflexive` | string | `herself`, `himself` | 1 | low |
+| `charPron.determiner` | string | `her`, `his` | 1 | low |
+| `charPron.contraction` | string | `she's`, `he's` | 1 | low |
+| `charPron.noun` | string | `woman`, `man` | 1 | low |
+| `charPron.partner` | string | `girlfriend`, `boyfriend` | 1 | low |
 | `partner` | string | `boyfriend` | 0 | low |
 | `questLetter1` | string | `unopened` | 0 | low |
 | `questLetter2` | string | `unopened` | 0 | low |
 | `home` | string | `none`, `zackApt` | 1 | low |
 | `name` | string | `Josephine` | 0 | low |
-| `job` | string | `No job`, `cafe` | 1 | low |
+| `job` | string | `No job`, `cafe`, `alley` | 3 | low |
 | `oldphonePIN` | string | `6969` | 0 | low |
 | `dating` | string | `single` | 0 | low |
 | `pet.name` | string | `` | 0 | low |
 | `pet.race` | object,string | `Sphynx` | 1 | low |
 | `pet.gender` | object,string | `male` | 1 | low |
 | `pet.attribute` | object,string | `an adventurous` | 1 | low |
-| `return` | string | `Beginning`, `Street`, `Cafe` | 157 | low |
+| `return` | string | `Beginning`, `yourRoom`, `balcony` | 86 | low |
 | `gender` | string | `Girl` | 0 | low |
 | `upbring` | string | `chrisvirg` | 0 | low |
 | `partnerPro1` | string | `he` | 0 | low |
@@ -187,7 +187,7 @@ Detected engine: **sugarcube**
 | `car.audi.name` | string | `Audi` | 0 | low |
 | `car.audi.condition` | string | `good` | 0 | low |
 | `car.audi.location` | string | `dealership` | 0 | low |
-| … | … | … | … | and 10 more |
+| … | … | … | … | and 12 more |
 
 ### misc (7)
 
@@ -224,13 +224,13 @@ Detected engine: **sugarcube**
 
 | type | count |
 |---|---|
-| branch | 166 |
+| branch | 99 |
 
 ## Economy
 
 - Price-labeled choices observed: 0
-- Money income events: 17
-- Money expense events: 5
+- Money income events: 5
+- Money expense events: 12
 
 ## Variable prefix clusters
 
@@ -262,20 +262,21 @@ Variables sharing a leading token — candidate entity groups (verify manually).
 |---|---|---|---|---|---|---|
 | 1 | 2026-04-19T07:02:14.826Z | 12m 51s | 53 | 53 | 52 | no |
 | 2 | 2026-04-19T07:16:26.685Z | 17m 26s | 167 | 167 | 162 | no |
+| 3 | 2026-04-19T09:34:41.143Z | 23m 34s | 100 | 100 | 110 | no |
 
 ## Graph coverage (observed vs. static)
 
 - Static-graph edges (every navigation parsed from passage source): **3586**
-- Observed edges during play: **123** unique `(from, clicked_text, to)` tuples.
-- Static edges covered by at least one observation: **141** (a single observation covers every static edge with the same `(from, to)` pair — gated branches collapse to one observable move).
-- Observed-only edges (no matching static edge, typically self-loop `<<link>>` wrappers that `<<replace>>` in-place): **9**.
-- Coverage: **3.93%** of the static graph explored.
-- Synthetic edges (Claude's out-of-band `eval`/`keys`/`restore`/`pop`): 5
+- Observed edges during play: **207** unique `(from, clicked_text, to)` tuples.
+- Static edges covered by at least one observation: **210** (a single observation covers every static edge with the same `(from, to)` pair — gated branches collapse to one observable move).
+- Observed-only edges (no matching static edge, typically self-loop `<<link>>` wrappers that `<<replace>>` in-place): **28**.
+- Coverage: **5.86%** of the static graph explored.
+- Synthetic edges (Claude's out-of-band `eval`/`keys`/`restore`/`pop`): 22
 
 ### Playable-content partition
 - Passages defined in source: **1636** (0 tagged `wip`, 9 empty-body placeholder).
 - Implied playable (non-WIP, non-empty): **1627**.
-- Distinct passages visited at least once: **49** — playable-passage coverage: **3.0%**.
+- Distinct passages visited at least once: **59** — playable-passage coverage: **3.6%**.
 
 ### Static edge kinds
 | kind | count |

@@ -4,9 +4,9 @@
       "object"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "label": "misc",
     "label_confidence": "low",
     "tags": []
@@ -16,11 +16,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 8,
       "max": 8,
@@ -38,11 +38,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -60,11 +60,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -82,11 +82,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0.49,
       "max": 0.49,
@@ -104,11 +104,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -126,9 +126,9 @@
       "object"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "label": "misc",
     "label_confidence": "low",
     "tags": []
@@ -138,9 +138,9 @@
       "object"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "label": "misc",
     "label_confidence": "low",
     "tags": []
@@ -150,11 +150,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -172,9 +172,9 @@
       "object"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "label": "body",
     "label_confidence": "medium",
     "tags": [
@@ -186,11 +186,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -208,11 +208,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -230,11 +230,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -252,11 +252,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -274,11 +274,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -296,11 +296,11 @@
       "string"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
-      "non-binary",
+      "female",
       "male"
     ],
     "label": "string",
@@ -312,11 +312,11 @@
       "string"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
-      "they",
+      "she",
       "he"
     ],
     "label": "string",
@@ -328,11 +328,11 @@
       "string"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
-      "them",
+      "her",
       "him"
     ],
     "label": "string",
@@ -344,11 +344,11 @@
       "string"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
-      "their",
+      "her",
       "his"
     ],
     "label": "string",
@@ -360,11 +360,11 @@
       "string"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
-      "themself",
+      "herself",
       "himself"
     ],
     "label": "string",
@@ -376,11 +376,11 @@
       "string"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
-      "their",
+      "her",
       "his"
     ],
     "label": "string",
@@ -392,11 +392,11 @@
       "string"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
-      "they're",
+      "she's",
       "he's"
     ],
     "label": "string",
@@ -408,11 +408,11 @@
       "string"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
-      "person",
+      "woman",
       "man"
     ],
     "label": "string",
@@ -424,11 +424,11 @@
       "string"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
-      "enbyfriend",
+      "girlfriend",
       "boyfriend"
     ],
     "label": "string",
@@ -439,17 +439,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 2,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 6,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 3,
-      "min": 0.07500000000000001,
-      "max": 0.3,
+      "count": 158,
+      "unique_count": 7,
+      "min": 0.05,
+      "max": 0.625,
       "first": 0.3,
-      "last": 0.2,
+      "last": 0.1,
       "is_monotonic_increasing": false,
       "is_boolean_like": false
     },
@@ -462,9 +462,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
       "boyfriend"
     ],
@@ -477,9 +477,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       true
     ],
@@ -494,17 +494,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 35,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 10,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 36,
+      "count": 158,
+      "unique_count": 11,
       "min": 0,
-      "max": 85,
+      "max": 95,
       "first": 0,
-      "last": 85,
+      "last": 95,
       "is_monotonic_increasing": true,
       "is_boolean_like": false
     },
@@ -517,9 +517,9 @@
       "object"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "label": "misc",
     "label_confidence": "low",
     "tags": []
@@ -529,9 +529,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -546,9 +546,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -562,19 +562,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 7,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 8,
+      "count": 158,
+      "unique_count": 2,
       "min": 0,
       "max": 8,
       "first": 0,
       "last": 8,
       "is_monotonic_increasing": true,
-      "is_boolean_like": false
+      "is_boolean_like": true
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -585,9 +585,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
       "unopened"
     ],
@@ -600,9 +600,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
       "unopened"
     ],
@@ -614,12 +614,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -632,11 +633,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -654,9 +655,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -671,9 +672,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -688,9 +689,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -705,17 +706,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 1,
+      "count": 158,
+      "unique_count": 2,
       "min": 0,
-      "max": 0,
+      "max": 1,
       "first": 0,
-      "last": 0,
+      "last": 1,
       "is_monotonic_increasing": true,
       "is_boolean_like": true
     },
@@ -728,9 +729,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -745,9 +746,9 @@
       "string"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
       "none",
       "zackApt"
@@ -761,11 +762,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -782,18 +783,18 @@
     "types": [
       "number"
     ],
-    "mutation_count": 3,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 2,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 4,
-      "min": 0,
-      "max": 30,
+      "count": 158,
+      "unique_count": 3,
+      "min": 30,
+      "max": 70,
       "first": 30,
-      "last": 5,
-      "is_monotonic_increasing": false,
+      "last": 70,
+      "is_monotonic_increasing": true,
       "is_boolean_like": false
     },
     "label": "scalar",
@@ -804,19 +805,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 7,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 2,
-      "min": 100,
-      "max": 117,
+      "count": 158,
+      "unique_count": 8,
+      "min": 0,
+      "max": 100,
       "first": 100,
-      "last": 117,
-      "is_monotonic_increasing": true,
-      "is_boolean_like": true
+      "last": 0,
+      "is_monotonic_increasing": false,
+      "is_boolean_like": false
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -826,18 +827,18 @@
     "types": [
       "number"
     ],
-    "mutation_count": 8,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 9,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 9,
-      "min": -20,
-      "max": 0,
+      "count": 158,
+      "unique_count": 10,
+      "min": 0,
+      "max": 178,
       "first": 0,
-      "last": -13,
-      "is_monotonic_increasing": false,
+      "last": 178,
+      "is_monotonic_increasing": true,
       "is_boolean_like": false
     },
     "label": "scalar",
@@ -848,18 +849,18 @@
     "types": [
       "number"
     ],
-    "mutation_count": 2,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 5,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 3,
+      "count": 158,
+      "unique_count": 5,
       "min": 0,
-      "max": 30,
+      "max": 100,
       "first": 0,
-      "last": 30,
-      "is_monotonic_increasing": true,
+      "last": 10,
+      "is_monotonic_increasing": false,
       "is_boolean_like": false
     },
     "label": "scalar",
@@ -870,17 +871,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 22,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 17,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 22,
+      "count": 158,
+      "unique_count": 18,
       "min": 0,
-      "max": 508,
+      "max": 15001,
       "first": 0,
-      "last": 108,
+      "last": 5188,
       "is_monotonic_increasing": false,
       "is_boolean_like": false
     },
@@ -895,11 +896,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -917,9 +918,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
       "Josephine"
     ],
@@ -931,13 +932,14 @@
     "types": [
       "string"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 3,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
       "No job",
-      "cafe"
+      "cafe",
+      "alley"
     ],
     "label": "string",
     "label_confidence": "low",
@@ -948,11 +950,11 @@
       "number"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 2,
       "min": 0,
       "max": 10,
@@ -969,19 +971,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 7,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 8,
+      "count": 158,
+      "unique_count": 2,
       "min": -175,
       "max": 0,
       "first": 0,
       "last": -175,
       "is_monotonic_increasing": false,
-      "is_boolean_like": false
+      "is_boolean_like": true
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -991,19 +993,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 7,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 8,
+      "count": 158,
+      "unique_count": 2,
       "min": -175,
       "max": 0,
       "first": 0,
       "last": -175,
       "is_monotonic_increasing": false,
-      "is_boolean_like": false
+      "is_boolean_like": true
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -1013,17 +1015,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 46,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 31,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 18,
+      "count": 158,
+      "unique_count": 16,
       "min": 0,
-      "max": 21,
+      "max": 19,
       "first": 0,
-      "last": 14,
+      "last": 1,
       "is_monotonic_increasing": false,
       "is_boolean_like": false
     },
@@ -1035,19 +1037,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 8,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 0,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 8,
+      "count": 158,
+      "unique_count": 1,
       "min": 0,
-      "max": 7,
+      "max": 0,
       "first": 0,
       "last": 0,
-      "is_monotonic_increasing": false,
-      "is_boolean_like": false
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -1057,12 +1059,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1075,9 +1078,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false,
       true
@@ -1093,11 +1096,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1115,11 +1118,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1137,11 +1140,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1159,9 +1162,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -1175,13 +1178,12 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 2,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 0,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
-      false,
-      true
+      false
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1194,9 +1196,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -1210,17 +1212,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 1,
+      "count": 158,
+      "unique_count": 2,
       "min": 0,
-      "max": 0,
+      "max": 1,
       "first": 0,
-      "last": 0,
+      "last": 1,
       "is_monotonic_increasing": true,
       "is_boolean_like": true
     },
@@ -1233,11 +1235,11 @@
       "number"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 2,
       "min": 0,
       "max": 1,
@@ -1255,9 +1257,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -1272,9 +1274,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -1289,9 +1291,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -1306,9 +1308,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false,
       true
@@ -1324,9 +1326,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -1341,11 +1343,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1363,11 +1365,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1387,11 +1389,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1409,11 +1411,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1431,11 +1433,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1453,11 +1455,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1475,11 +1477,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1497,11 +1499,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1519,11 +1521,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1541,11 +1543,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1563,11 +1565,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1585,11 +1587,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1607,11 +1609,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1629,11 +1631,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1651,11 +1653,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1673,11 +1675,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1695,11 +1697,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1717,11 +1719,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1739,11 +1741,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1761,9 +1763,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false,
       true
@@ -1779,9 +1781,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
       "6969"
     ],
@@ -1794,11 +1796,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1815,12 +1817,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1832,12 +1835,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1849,12 +1853,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -1867,9 +1872,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -1884,11 +1889,11 @@
       "number"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 2,
       "min": 0,
       "max": 5,
@@ -1906,9 +1911,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -1923,11 +1928,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 1,
       "max": 1,
@@ -1944,19 +1949,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 2,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 3,
+      "count": 158,
+      "unique_count": 2,
       "min": 0,
       "max": 6,
       "first": 0,
       "last": 6,
       "is_monotonic_increasing": true,
-      "is_boolean_like": false
+      "is_boolean_like": true
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -1967,9 +1972,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -1984,9 +1989,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -2001,11 +2006,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 50,
       "max": 50,
@@ -2022,12 +2027,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -2040,9 +2046,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -2057,9 +2063,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -2074,11 +2080,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2096,9 +2102,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -2113,11 +2119,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2135,9 +2141,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -2153,11 +2159,11 @@
       "number"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 2,
       "min": 0,
       "max": 1,
@@ -2175,9 +2181,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
       "single"
     ],
@@ -2190,11 +2196,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2212,11 +2218,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2236,11 +2242,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2260,11 +2266,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2284,11 +2290,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2308,11 +2314,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2332,11 +2338,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2354,11 +2360,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2378,11 +2384,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2400,11 +2406,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2422,11 +2428,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2444,11 +2450,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2466,11 +2472,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2488,11 +2494,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2510,11 +2516,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2532,11 +2538,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2554,11 +2560,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2576,9 +2582,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -2593,11 +2599,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2615,11 +2621,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2637,11 +2643,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2661,11 +2667,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2684,12 +2690,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -2702,9 +2709,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -2719,9 +2726,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -2737,9 +2744,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -2754,19 +2761,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 2,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 3,
+      "count": 158,
+      "unique_count": 2,
       "min": 0,
       "max": 2,
       "first": 0,
       "last": 2,
       "is_monotonic_increasing": true,
-      "is_boolean_like": false
+      "is_boolean_like": true
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -2777,9 +2784,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -2793,12 +2800,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "medium",
@@ -2812,9 +2820,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -2828,12 +2836,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -2845,12 +2854,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -2863,11 +2873,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2884,17 +2894,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 1,
+      "count": 158,
+      "unique_count": 2,
       "min": 0,
-      "max": 0,
+      "max": 1,
       "first": 0,
-      "last": 0,
+      "last": 1,
       "is_monotonic_increasing": true,
       "is_boolean_like": true
     },
@@ -2906,19 +2916,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 2,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 1,
+      "count": 158,
+      "unique_count": 3,
       "min": 0,
-      "max": 0,
+      "max": 2,
       "first": 0,
-      "last": 0,
+      "last": 2,
       "is_monotonic_increasing": true,
-      "is_boolean_like": true
+      "is_boolean_like": false
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -2928,19 +2938,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 2,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 1,
+      "count": 158,
+      "unique_count": 3,
       "min": 0,
-      "max": 0,
+      "max": 2,
       "first": 0,
-      "last": 0,
+      "last": 2,
       "is_monotonic_increasing": true,
-      "is_boolean_like": true
+      "is_boolean_like": false
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -2951,11 +2961,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2973,11 +2983,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2995,11 +3005,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3016,17 +3026,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 1,
+      "count": 158,
+      "unique_count": 2,
       "min": 0,
-      "max": 0,
+      "max": 1,
       "first": 0,
-      "last": 0,
+      "last": 1,
       "is_monotonic_increasing": true,
       "is_boolean_like": true
     },
@@ -3039,9 +3049,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -3056,9 +3066,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -3074,11 +3084,11 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 12,
+      "count": 3,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3101,11 +3111,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3122,19 +3132,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 9,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 10,
+      "count": 158,
+      "unique_count": 2,
       "min": 0,
       "max": 9,
       "first": 0,
       "last": 9,
       "is_monotonic_increasing": true,
-      "is_boolean_like": false
+      "is_boolean_like": true
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -3144,19 +3154,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 2,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 3,
+      "count": 158,
+      "unique_count": 2,
       "min": 0,
       "max": 2,
       "first": 0,
       "last": 2,
       "is_monotonic_increasing": true,
-      "is_boolean_like": false
+      "is_boolean_like": true
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -3167,11 +3177,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3189,9 +3199,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -3205,19 +3215,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 17,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 18,
+      "count": 158,
+      "unique_count": 2,
       "min": 0,
       "max": 17,
       "first": 0,
       "last": 17,
       "is_monotonic_increasing": true,
-      "is_boolean_like": false
+      "is_boolean_like": true
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -3228,11 +3238,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3250,9 +3260,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -3267,11 +3277,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3289,11 +3299,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3311,11 +3321,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3333,11 +3343,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3355,11 +3365,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3377,11 +3387,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3399,11 +3409,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3421,11 +3431,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3442,19 +3452,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 7,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 8,
+      "count": 158,
+      "unique_count": 2,
       "min": 1,
       "max": 8,
       "first": 1,
       "last": 8,
       "is_monotonic_increasing": true,
-      "is_boolean_like": false
+      "is_boolean_like": true
     },
     "label": "time",
     "label_confidence": "high",
@@ -3466,17 +3476,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 36,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 14,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
+      "count": 158,
       "unique_count": 6,
       "min": 1,
       "max": 6,
       "first": 1,
-      "last": 1,
+      "last": 5,
       "is_monotonic_increasing": false,
       "is_boolean_like": false
     },
@@ -3489,9 +3499,9 @@
       "object"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "label": "misc",
     "label_confidence": "low",
     "tags": []
@@ -3501,9 +3511,9 @@
       "object"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "label": "misc",
     "label_confidence": "low",
     "tags": []
@@ -3513,9 +3523,9 @@
       "object"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "label": "misc",
     "label_confidence": "low",
     "tags": []
@@ -3525,9 +3535,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
       ""
     ],
@@ -3541,9 +3551,9 @@
       "string"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
       "Sphynx"
     ],
@@ -3557,9 +3567,9 @@
       "string"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
       "male"
     ],
@@ -3573,9 +3583,9 @@
       "string"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
       "an adventurous"
     ],
@@ -3587,12 +3597,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -3604,19 +3615,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 5,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 1,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "number_stats": {
-      "count": 206,
-      "unique_count": 6,
+      "count": 158,
+      "unique_count": 2,
       "min": 0,
       "max": 5,
       "first": 0,
       "last": 5,
       "is_monotonic_increasing": true,
-      "is_boolean_like": false
+      "is_boolean_like": true
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -3627,9 +3638,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false,
       true
@@ -3645,9 +3656,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -3662,9 +3673,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -3679,9 +3690,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -3696,9 +3707,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -3713,9 +3724,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false
     ],
@@ -3730,9 +3741,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false,
       true
@@ -3748,9 +3759,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false,
       true
@@ -3766,9 +3777,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false,
       true
@@ -3784,9 +3795,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       false,
       true
@@ -3802,9 +3813,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "bool_values": [
       true
     ],
@@ -3818,31 +3829,31 @@
     "types": [
       "string"
     ],
-    "mutation_count": 157,
-    "first_ts": 1776582986686,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 49,
+    "mutation_count": 86,
+    "first_ts": 1776591281144,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 59,
     "string_samples": [
       "Beginning",
-      "Street",
-      "Cafe",
-      "cafeJob",
-      "easterCafe",
-      "cafeWorkImproved",
-      "cafeDefault",
-      "tableClear",
-      "alley",
-      "alleyBuy",
-      "yourApartment",
       "yourRoom",
       "balcony",
-      "sleep",
+      "balconyJerk",
+      "yourApartment",
+      "Street",
       "goingDowntown",
       "Downtown",
-      "Library",
-      "easterLibrary",
-      "bookCorrupt",
-      "exploreLib"
+      "Mall",
+      "The Filthy Vibrator",
+      "Electric Giant",
+      "club",
+      "bouncerSed",
+      "bouncerMouth",
+      "alley",
+      "alleyBuy",
+      "alleyJob",
+      "pimp",
+      "pimpMouthInit",
+      "pimpEnd"
     ],
     "label": "string",
     "label_confidence": "low",
@@ -3853,9 +3864,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "Girl"
     ],
@@ -3868,9 +3879,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "chrisvirg"
     ],
@@ -3883,9 +3894,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "he"
     ],
@@ -3898,9 +3909,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "him"
     ],
@@ -3913,9 +3924,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "his"
     ],
@@ -3928,9 +3939,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -3945,9 +3956,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -3962,9 +3973,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       true
     ],
@@ -3979,9 +3990,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       true
     ],
@@ -3996,9 +4007,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -4013,9 +4024,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -4030,9 +4041,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -4047,9 +4058,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       true
     ],
@@ -4064,9 +4075,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -4081,9 +4092,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -4098,9 +4109,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -4115,9 +4126,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -4132,9 +4143,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -4149,9 +4160,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -4166,9 +4177,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -4183,9 +4194,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "Street Parking"
     ],
@@ -4198,11 +4209,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 2,
       "max": 2,
@@ -4220,11 +4231,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -4242,11 +4253,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 5,
       "max": 5,
@@ -4264,9 +4275,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "City Parking"
     ],
@@ -4279,11 +4290,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 3,
       "max": 3,
@@ -4301,11 +4312,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -4323,11 +4334,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 10,
       "max": 10,
@@ -4345,9 +4356,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "Mansion Parking"
     ],
@@ -4360,11 +4371,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 5,
       "max": 5,
@@ -4382,11 +4393,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -4404,11 +4415,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -4426,9 +4437,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "Luxury Parking"
     ],
@@ -4441,11 +4452,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 5,
       "max": 5,
@@ -4463,11 +4474,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -4485,11 +4496,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -4507,9 +4518,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "Honda EV"
     ],
@@ -4522,11 +4533,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 22700,
       "max": 22700,
@@ -4544,9 +4555,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "good"
     ],
@@ -4559,9 +4570,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -4576,9 +4587,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "dealership"
     ],
@@ -4591,9 +4602,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "Toyota Hybrid"
     ],
@@ -4606,11 +4617,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 20500,
       "max": 20500,
@@ -4628,9 +4639,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "good"
     ],
@@ -4643,9 +4654,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -4660,9 +4671,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "dealership"
     ],
@@ -4675,9 +4686,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "Audi"
     ],
@@ -4690,11 +4701,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 31900,
       "max": 31900,
@@ -4712,9 +4723,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "good"
     ],
@@ -4727,9 +4738,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -4744,9 +4755,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "dealership"
     ],
@@ -4759,9 +4770,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "Hyundai"
     ],
@@ -4774,11 +4785,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 22300,
       "max": 22300,
@@ -4796,9 +4807,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "good"
     ],
@@ -4811,9 +4822,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -4828,9 +4839,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "dealership"
     ],
@@ -4843,9 +4854,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "BMW"
     ],
@@ -4858,11 +4869,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 36000,
       "max": 36000,
@@ -4880,9 +4891,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "good"
     ],
@@ -4895,9 +4906,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -4912,9 +4923,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "dealership"
     ],
@@ -4927,9 +4938,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "Lamborghini Urus"
     ],
@@ -4942,11 +4953,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 9999999,
       "max": 9999999,
@@ -4964,9 +4975,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "good"
     ],
@@ -4979,9 +4990,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -4996,9 +5007,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "patron"
     ],
@@ -5010,12 +5021,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "mutation_count": 1,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -5028,9 +5040,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       ""
     ],
@@ -5044,19 +5056,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 3,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "mutation_count": 0,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
-      "unique_count": 4,
-      "min": 2,
+      "count": 155,
+      "unique_count": 1,
+      "min": 5,
       "max": 5,
-      "first": 2,
+      "first": 5,
       "last": 5,
       "is_monotonic_increasing": true,
-      "is_boolean_like": false
+      "is_boolean_like": true
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -5067,9 +5079,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -5084,9 +5096,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -5101,11 +5113,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -5123,11 +5135,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -5145,11 +5157,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -5167,11 +5179,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -5189,11 +5201,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -5211,9 +5223,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -5227,19 +5239,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 5,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "mutation_count": 0,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
-      "unique_count": 6,
+      "count": 155,
+      "unique_count": 1,
       "min": 1,
-      "max": 10,
-      "first": 10,
+      "max": 1,
+      "first": 1,
       "last": 1,
-      "is_monotonic_increasing": false,
-      "is_boolean_like": false
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -5250,11 +5262,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 202,
+      "count": 155,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -5269,23 +5281,12 @@
   },
   "newspaper": {
     "types": [
-      "boolean",
-      "number"
+      "boolean"
     ],
-    "mutation_count": 4,
-    "first_ts": 1776583002954,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
-    "number_stats": {
-      "count": 4,
-      "unique_count": 1,
-      "min": 1,
-      "max": 1,
-      "first": 1,
-      "last": 1,
-      "is_monotonic_increasing": true,
-      "is_boolean_like": true
-    },
+    "mutation_count": 0,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -5300,11 +5301,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583046251,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 48,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 199,
+      "count": 155,
       "unique_count": 1,
       "min": 20,
       "max": 20,
@@ -5322,11 +5323,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583141061,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 46,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 182,
+      "count": 155,
       "unique_count": 1,
       "min": 1,
       "max": 1,
@@ -5343,16 +5344,16 @@
     "types": [
       "number"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776583265737,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 41,
+    "mutation_count": 0,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 163,
-      "unique_count": 2,
-      "min": 0,
+      "count": 155,
+      "unique_count": 1,
+      "min": 3,
       "max": 3,
-      "first": 0,
+      "first": 3,
       "last": 3,
       "is_monotonic_increasing": true,
       "is_boolean_like": true
@@ -5366,9 +5367,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583317254,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 35,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "string_samples": [
       "inhib"
     ],
@@ -5381,11 +5382,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583426399,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 31,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 132,
+      "count": 155,
       "unique_count": 1,
       "min": 5,
       "max": 5,
@@ -5404,12 +5405,11 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776583426399,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 31,
+    "mutation_count": 0,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
-      false,
       true
     ],
     "label": "flag",
@@ -5424,16 +5424,16 @@
       "number"
     ],
     "mutation_count": 4,
-    "first_ts": 1776583475490,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 26,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 123,
+      "count": 155,
       "unique_count": 5,
-      "min": 1,
-      "max": 5,
-      "first": 1,
-      "last": 5,
+      "min": 5,
+      "max": 9,
+      "first": 5,
+      "last": 9,
       "is_monotonic_increasing": true,
       "is_boolean_like": false
     },
@@ -5446,9 +5446,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583519021,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 23,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -5463,9 +5463,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583519021,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 23,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -5480,11 +5480,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583519021,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 23,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 115,
+      "count": 155,
       "unique_count": 1,
       "min": 100,
       "max": 100,
@@ -5502,9 +5502,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583519021,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 23,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "bool_values": [
       false
     ],
@@ -5519,11 +5519,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583519021,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 23,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 115,
+      "count": 155,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -5541,11 +5541,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583519021,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 23,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 115,
+      "count": 155,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -5563,11 +5563,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776583519021,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 23,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 115,
+      "count": 155,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -5584,18 +5584,18 @@
     "types": [
       "number"
     ],
-    "mutation_count": 2,
-    "first_ts": 1776583560493,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 20,
+    "mutation_count": 0,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 104,
-      "unique_count": 2,
+      "count": 155,
+      "unique_count": 1,
       "min": 0,
-      "max": 1,
+      "max": 0,
       "first": 0,
       "last": 0,
-      "is_monotonic_increasing": false,
+      "is_monotonic_increasing": true,
       "is_boolean_like": true
     },
     "label": "scalar",
@@ -5606,17 +5606,220 @@
     "types": [
       "number"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776583899569,
-    "last_ts": 1776583927722,
-    "passages_seen_on_count": 3,
+    "mutation_count": 0,
+    "first_ts": 1776591289093,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 58,
     "number_stats": {
-      "count": 4,
-      "unique_count": 2,
-      "min": 400,
+      "count": 155,
+      "unique_count": 1,
+      "min": 750,
       "max": 750,
-      "first": 400,
+      "first": 750,
       "last": 750,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "wand": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776591415369,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 55,
+    "bool_values": [
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "analbeads": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776591426492,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 55,
+    "bool_values": [
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "emails": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776591487396,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 122,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "emailPorn": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776591487396,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 54,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "virgin": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776591647871,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 45,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "bikeCond": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776591801810,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 34,
+    "string_samples": [
+      "good"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "returnAdress": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776591839170,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 28,
+    "string_samples": [
+      "Laptop"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "clue": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776591910057,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 22,
+    "number_stats": {
+      "count": 39,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "realtorMet": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776592052182,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 9,
+    "bool_values": [
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "alleyCount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776592080559,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 5,
+    "number_stats": {
+      "count": 10,
+      "unique_count": 2,
+      "min": 1,
+      "max": 2,
+      "first": 1,
+      "last": 2,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "soup": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776592118065,
+    "last_ts": 1776592131948,
+    "passages_seen_on_count": 2,
+    "number_stats": {
+      "count": 3,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
       "is_monotonic_increasing": true,
       "is_boolean_like": true
     },

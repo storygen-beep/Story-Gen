@@ -257,3 +257,155 @@ Other tracked vars: `period` (1-6 within day), `countperiods` (cumulative), `day
 - Alley job (corrupt ≥ 60) + alley kidnap arc (visit count ≥ 21)
 - Gym → cardio/strength/yoga stats (currently all 0)
 - [2026-04-19T07:33:52.897Z] Session 2 final: Day 8 morning, £108, rent paid £400, rentAmount escalated to 750. NPCs: zack=5, lily=6, chloe=1, jogger=1. eggs=5+ collected.
+- [2026-04-19T08:16:59.039Z] Session 3 — cheat-boost to corrupt=150, inhib=30, money=£15000, arousal=50 at Day 12 via eval to map gated content.
+
+---
+
+# Session 3 (stat-boosted content mapping — corrupt=150, money=£15k, inhib=30 via eval)
+
+## Widget discoveries (from passage_catalog source)
+
+- **`<<masturbate AROUSAL HIGHCORRUPT MIDCORRUPT LOWCORRUPT LOCATION>>`** — tiered label selector. Room uses `10 249 149 -25 roomJerk` → at corrupt≥249 "Fuck yourself", ≥149 "Play with yourself", ≥-25 "Masturbate", <-25 "too pure". All three tiers target the SAME passage; label is flavor only.
+- **`<<setCorruption n>>`** / `<<setInhib n>>` / `<<setArousal n>>` / etc — clamped setters. corrupt clamp is -100 to 300. inhib 0-150. arousal 0-100. allure 0-200. trauma 0-100.
+- **`<<Sleep>>` widget (called from `sleep` passage):** heavy daily tick logic:
+  - rent +=1, kitchenClean -=25, zackClean -=25, coffeeDrunk → false, questDays +=1, mugged +=1 (cap 5)
+  - **Passive corrupt floor:** if corrupt<0 → +2, if corrupt<5 → +1 (converges to 5)
+  - **Allure decay:** if allure≥15 → -15 (daily shower required to maintain)
+  - Beauty check decays: legsWaxed/pussyWaxed/makeupDone/hairDone count up, flip to reset when cap exceeded → -5 or -10 allure
+  - dadChock +=1 if dadRape is true
+  - moodreset zeroes mood dict
+  - Cat mechanic: if pet.isFound, litterTime +=1 (caps 7 → catNeglect++); if catFed not toggled → catNeglect++; catNeglect>3 → pet.isFound → false (the cat leaves)
+  - nudeAmount = 50, mansionCook = 0, mansionFresh = false, gymClean = false, emailAmount = random(1,10)
+  - Autosaves game
+- **`<<AdvancePeriod [n]>>` widget:** set $period += n (default 1). Rolls day on overflow. So cinema/kitchen-cook/park-walk etc. all call this, no hidden stat changes.
+- **`<<now>>` widget:** displays "It is [Day-of-week], [Period], Day N" in UI.
+
+## Corruption economy (verified)
+
+| Action | Corrupt | Inhib | Arousal | Other | Period |
+|---|---|---|---|---|---|
+| Masturbate (roomJerk) | +5 | -2 | — | +1 masCount, -5 trauma | 0 (doesn't advance) |
+| Cum (cumRoom) | — | — | -10 | -5 trauma | 0 |
+| Balcony strip | +2 | -8 | +5 | +vibe | +1 |
+| Balcony play (balconyJerk) | +2 | -8 | — | +1 masCount | 0 |
+| Park flash (parkFlash) | +2 | -3 | +10 | — | +1 |
+| Laptop "Watch porn" | +5 | (-inhib via widget) | +10 | — | +1 |
+| Bar drink (Get a drink) | — | — | +25 | +vibeLevel, +intoxic | +1 |
+| Cook dinner w/ Zack (kitchen) | 0 | 0 | 0 | -1 groceries, +cookRent chance | +1 |
+| Sleep (daily tick) | +1 or +2 (if <5) | — | reset | rent+1, kitchenClean-25, zackClean-25 | wakes at period 1 |
+| Masturbate @ corrupt≥149 tier | same | same | same | (identical action, different flavor label only) | 0 |
+
+## Gate thresholds (confirmed from source)
+
+| Gate | Condition | Location |
+|---|---|---|
+| Flash a stranger (Park) | `inhib ≤ 50 && corrupt ≥ 25` | Park |
+| Balcony strip (yourRoom) | `corrupt ≥ ?` (threshold unknown, triggered at 150) | Balcony |
+| Sex toy store entrance | `corrupt ≥ ?` (triggered at 150) | Mall → "The Filthy Vibrator" |
+| Club bouncer: Seduce | `corrupt ≥ 10` | Club |
+| Bouncer followup: Follow | `allure ≥ 45 && arousal ≥ 10 && corrupt ≥ 20 && inhib ≤ 70` | bouncerSed → bouncerMouth |
+| Club entry via ID | `$id is true` (£999 fake ID) | Club → clubInside |
+| Alley job offer | `corrupt ≥ 60 && job is "No job"` | alley |
+| Alley kidnap | `alleyCount ≥ 21` | alley (automatic) |
+| Alley rape | `allure ≥ 40 && rng==1` | alley (automatic) |
+| Park night rape | `period 6 && allure ≥ 45 && rng==1` | Park at night |
+| Kitchen dinner w/ Zack hand-on-thigh | `corrupt ≥ 40` | kitchen |
+| Kitchen flaunt-ass sex scene | `corrupt ≥ 80 && inhib ≤ 70` | kitchen cookZackSex |
+| Mansion cook brother incest event | `corrupt ≥ 100` | mansion kitchen |
+| Mansion snack brother scene | `corrupt ≥ 30` | mansion snack |
+| Morris fuck | `corrupt ≥ 100` | mansion |
+| Bus (Street) | `$day ≥ 14 || visited("firstTrauma") ≥ 1` | Street |
+| Outskirts | `textDad is true || pet.isFound is true` | Street |
+| Cinema suck | `corrupt ≥ 250 && inhib < 30` | Cinema ticket master |
+| School prostitution ring flash | `corrupt > 40 && inhib < 50` | (late-game school arc) |
+
+## Mall shops — full price list
+
+**Quick-E Mart:** Groceries £19 (adds **+10 groceries** not +1), Massage oil £49, Sunscreen £29, Makeup £29 (sets `makeup=true`)
+
+**Clothing Store:** Gym clothes £99, Bikini £199
+
+**Electric Giant:** Phone £299, Camera £199, Laptop £599, GPS £2999
+
+**The Filthy Vibrator (sex toy, corrupt-gated):** Dildo £99, Magic wand £699, Buttplug £199, Tailplug £299, Anal beads £399, Strap-on £499, Sybian £1499, Fuck machine £2499. Red curtain = flavor text, no additional content at boosted corrupt=150.
+
+**Animal Shelter (outskirts, pet.isFound=true required):** Cat food £19, Cat toys £199, Litter box £599. Also "Give up for adoption" option.
+
+**Beauty Shop (Uptown):** Wax legs £199 (+10 allure, `legsWaxed +=1`), Wax intimate £299 (pussyWaxed), Makeup done £99 (makeupDone), Hair done £399 (hairDone). Each wax persists 5-7 days then decays with -5/-10 allure penalty.
+
+**Massage Parlor (Uptown):** Get a massage — cost not re-checked. Lowers trauma (-trauma text shown). One-click, advances period, very plain.
+
+**Dealership (Uptown):** Bike £3999 (enables "Take bike uptown/downtown" on Street for fast travel), Honda £20500, Toyota £20500, Audi £31900, Hyundai £22300, BMW £36000.
+
+**Realtor (outskirts, mansion=true route):** Los Huevas apartment £15,000 (alt to Zack's £400/wk rent).
+
+## Laptop/phone/camera content tree
+
+- **Laptop** (yourRoom, needs `$laptop is true`):
+  - **Watch porn** (laptopPorn): +5 corrupt, +10 arousal, -inhib, +1 period. Opens "Play with yourself" (corrupt tier 149), "Keep watching", "Leave site", "Close laptop". High-efficiency corrupt grind.
+  - **Start camshow** (newCamshow): "0 followers" — progression gated. "View comments" shows default text. Higher corrupt unlocks bring-others-on. Ties to `$followers` counter.
+- **Phone** (Phone passage, needs `$phone is true`):
+  - **Open contacts** → Lily (only one unlocked at lily=6). Per-contact sub-passage (`lilyPhone`): Call for chat / Ask on date (failed at period 3) / Talk about nudes / Send nudes (`lilyNudes` — nude selfie scene, Lily responds lewdly).
+  - **Call a cab** — likely fast-travel
+  - Period 6: "too late to contact anyone" (contacts locked to period 1-5).
+- **Camera** (`$cam` = true): camshow requires the cam; usage in laptop tree implicit.
+
+## Alley job mechanics (pimp track)
+
+- Triggered by: alley → Ask for job (corrupt ≥ 60, job = "No job") → alleyJob → "Yes..." → pimp → Accept try-out → pimpMouthInit → Finish up → pimpEnd ("£350 per client, takes 2 hours") → Accept the position (`job="alley"`, -2 inhib)
+- Shift: alley → Work → workAlley (random customer "slim man") → "Offer your services" → `slimMan` passage (2-period scene: +£350, +1 vagCount, +1 creamCount, +1 alleyCount)
+- Alternative "Wait for next customer" probably cycles another client
+- +1 alleyCount per customer — caps at 21 triggering kidnap event
+
+## Mansion arc — entered via eval `$mansion=true, $textDad=true` → `trueMansion`
+
+Rooms mapped:
+- **trueMansion hub:** Livingroom / Kitchen / Bathroom / Upstairs / Downstairs / Garden / Leave to the city
+- **mansionUpstairs:** Your room / Dads room (sneak finds nothing) / Brothers room (sneak finds **+£15** "under mattress") / Upstairs Bathroom / Go back down
+- **mansionDownstairs:** Clean (progressive — 1 progress per day, `cellarClean` counter)
+- **mansionGarden:** Pool (strip + swim) / Crop garden (unmapped) / Go back inside
+- **mansionKitchen:** cook dinner (period 4) has random incest event with brother Noah — `corrupt≥100` gate for "Do something" link
+- Livingroom (unmapped — brother + dad variants on period)
+- Upstairs bedroom: "newspaper" lore, laptop content (mansionLaptop), masturbate widget `<<masturbate 20 249 149 -25 mansionJerk>>` (higher arousal req than apartment)
+- Morris butler quest: Constantin kidnapping → cult sacrifice → linear "prepare" event. Gated by `constantinCorrupt && questDays≥7 && clue=0`.
+- Morris quest arc: `clue=0` pre-start → `clue=1` post-visit → `clue=2` post-note-read → `clue=3` post-cult → `clue=4` prepare-linear
+
+## Outskirts content
+
+Gated by `textDad=true || pet.isFound=true`:
+- **Soup Kitchen:** donate groceries → `soup` counter → unlocks "Urban Agricultural Zones" farming. Has a syntax error "<<if>> outside of parent" (minor bug).
+- **Hearth & Haven Realty:** Harvey (realtor). Los Huevas apt for £15,000.
+- **Animal Shelter:** cat food/toys/litter, pet management.
+- **Dad's apartment:** (textDad=true only) — `dadApt`.
+- **Chloe's apartment:** (dating=Chloe && datingCount≥3) — `chloeApt`.
+- **Plato's/Tyson's directions:** `navFollow` / `tysonAdress` visited counts unlock these — side-quest hooks.
+- **Brothel:** `$brothel` flag gates entry — deep-corrupt late-game.
+
+## Sidebar "cafeDefault" task tree
+
+After `cafePromo=1` (trigger: "Complain about customer harassment" option at Cafe), shifts unlock **"Do dishes"** as second task:
+- **Clear tables** (tableClear): +£30 base + £19 tips = £49/shift
+- **Do dishes** (cafeDishes): +£30 + £25 tips = £55/shift (kitchen duty with Rob)
+- Promo cafePay: 20 → 30 base
+- cafeHarass / cafePressure / cafeRes / cafeRR / cafeBoring — untriggered tracked vars suggesting more cafe task branches
+
+## Confirmed saves
+
+- Slot 0: Day 8 morning, £108, post-rent, legit playthrough state
+- Slot 1: Day ~8 (same base), corrupt=150, money=£5188, + fake ID + phone + laptop + camera + bike + sex toys + alley job + beauty wax + mansion flag set
+
+## Map of untouched content (next session)
+
+- **"Urban Agricultural Zones"** farm system — soup kitchen entry point, `farmDonate` widget from Sleep
+- **Questmap letters** — `questLetter1` / `questLetter2` "unopened" — unclear trigger; likely day-gate
+- **Gym** (`job="gym"` path) — gym stats (cardio/strength/yoga) all 0; used by mugged-event defense
+- **Caine's cabin** (`caineCoffee` prereq) — park night destination
+- **Brothel** — late-game corrupt gate
+- **Kidnap / facility quests** (`kidnapQuest` / `facilityQuest` / `PIProg` / `PIDays`) — long-arc progression
+- **School arc** (`job="school"`, `schoolPre`, `schoolStaffBathroom`) — entire separate game mode
+- **Dating progression** — can date Zack/Lily/Chloe/Dad/Caine/Tommy/Noah with `dating` var + `datingCount` — multi-visit romance unlocks apartments
+- **Bike routes** — bikeUptown/bikeDowntown passages — faster nav, `bikeCond` degradation
+- **Tent / camping** — `tent=true` enables parkCamp
+- **Investing / banking** — `atm=true` triggers Interest widget + 5 stock portfolios (SPX/NVDA/DJI/TSLA/AAPL/DMI)
+- **Clue quest** — Constantin kidnapping arc, cult confrontation, "prepare" linear event
+- **Lake / cult / cottage** — `$lake` / `$cult` / `$cottage` — exact unlock conditions TBD

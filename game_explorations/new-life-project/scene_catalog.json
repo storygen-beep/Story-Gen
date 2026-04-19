@@ -1,198 +1,238 @@
 {
   "Beginning": {
-    "first_ts": 1776582986686,
-    "visit_count": 4
-  },
-  "Street": {
-    "first_ts": 1776583002954,
-    "visit_count": 34
-  },
-  "Cafe": {
-    "first_ts": 1776583037087,
-    "visit_count": 8
-  },
-  "cafeJob": {
-    "first_ts": 1776583046251,
-    "visit_count": 1
-  },
-  "easterCafe": {
-    "first_ts": 1776583056526,
-    "visit_count": 1
-  },
-  "cafeWorkImproved": {
-    "first_ts": 1776583058133,
-    "visit_count": 4
-  },
-  "cafeDefault": {
-    "first_ts": 1776583074469,
-    "visit_count": 25
-  },
-  "tableClear": {
-    "first_ts": 1776583081935,
-    "visit_count": 17
-  },
-  "alley": {
-    "first_ts": 1776583141061,
-    "visit_count": 2
-  },
-  "alleyBuy": {
-    "first_ts": 1776583141929,
-    "visit_count": 1
-  },
-  "yourApartment": {
-    "first_ts": 1776583187611,
-    "visit_count": 11
+    "first_ts": 1776591281144,
+    "visit_count": 3
   },
   "yourRoom": {
-    "first_ts": 1776583188381,
-    "visit_count": 25
-  },
-  "mirror": {
-    "first_ts": 1776583196818,
-    "visit_count": 1
+    "first_ts": 1776591289093,
+    "visit_count": 5
   },
   "balcony": {
-    "first_ts": 1776583204995,
-    "visit_count": 1
+    "first_ts": 1776591309872,
+    "visit_count": 2
   },
-  "credits": {
-    "first_ts": 1776583212541,
-    "visit_count": 1
+  "balconyJerk": {
+    "first_ts": 1776591324279,
+    "visit_count": 8
   },
-  "sleep": {
-    "first_ts": 1776583227648,
+  "yourApartment": {
+    "first_ts": 1776591386891,
+    "visit_count": 2
+  },
+  "Street": {
+    "first_ts": 1776591387692,
     "visit_count": 6
   },
   "goingDowntown": {
-    "first_ts": 1776583255800,
-    "visit_count": 2
+    "first_ts": 1776591388621,
+    "visit_count": 1
   },
   "Downtown": {
-    "first_ts": 1776583256551,
-    "visit_count": 8
-  },
-  "Library": {
-    "first_ts": 1776583265737,
-    "visit_count": 4
-  },
-  "easterLibrary": {
-    "first_ts": 1776583275811,
-    "visit_count": 1
-  },
-  "bookCorrupt": {
-    "first_ts": 1776583277351,
-    "visit_count": 1
-  },
-  "exploreLib": {
-    "first_ts": 1776583285021,
-    "visit_count": 1
-  },
-  "Cinema": {
-    "first_ts": 1776583298603,
-    "visit_count": 3
-  },
-  "easterCinema": {
-    "first_ts": 1776583306646,
-    "visit_count": 1
-  },
-  "movieSceneA": {
-    "first_ts": 1776583317254,
-    "visit_count": 1
-  },
-  "club": {
-    "first_ts": 1776583355976,
-    "visit_count": 1
-  },
-  "easterDowntown": {
-    "first_ts": 1776583364883,
-    "visit_count": 1
+    "first_ts": 1776591389298,
+    "visit_count": 9
   },
   "Mall": {
-    "first_ts": 1776583402839,
-    "visit_count": 4
-  },
-  "Quick-E Mart": {
-    "first_ts": 1776583410097,
+    "first_ts": 1776591390102,
     "visit_count": 3
   },
-  "clothingStore": {
-    "first_ts": 1776583449189,
-    "visit_count": 1
+  "The Filthy Vibrator": {
+    "first_ts": 1776591396378,
+    "visit_count": 8
   },
   "Electric Giant": {
-    "first_ts": 1776583463242,
+    "first_ts": 1776591453541,
+    "visit_count": 8
+  },
+  "club": {
+    "first_ts": 1776591548208,
+    "visit_count": 1
+  },
+  "bouncerSed": {
+    "first_ts": 1776591555327,
+    "visit_count": 1
+  },
+  "bouncerMouth": {
+    "first_ts": 1776591561516,
+    "visit_count": 1
+  },
+  "alley": {
+    "first_ts": 1776591573082,
+    "visit_count": 8
+  },
+  "alleyBuy": {
+    "first_ts": 1776591573918,
+    "visit_count": 3
+  },
+  "alleyJob": {
+    "first_ts": 1776591624151,
+    "visit_count": 1
+  },
+  "pimp": {
+    "first_ts": 1776591635329,
+    "visit_count": 2
+  },
+  "pimpMouthInit": {
+    "first_ts": 1776591647871,
+    "visit_count": 1
+  },
+  "pimpEnd": {
+    "first_ts": 1776591655748,
+    "visit_count": 1
+  },
+  "pimpAccept": {
+    "first_ts": 1776591663392,
     "visit_count": 1
   },
   "Park": {
-    "first_ts": 1776583475490,
+    "first_ts": 1776591674419,
     "visit_count": 5
   },
-  "parkRun": {
-    "first_ts": 1776583484912,
+  "parkFlash": {
+    "first_ts": 1776591681996,
     "visit_count": 1
   },
-  "parkRestroom": {
-    "first_ts": 1776583492833,
+  "birdwatcher": {
+    "first_ts": 1776591699785,
     "visit_count": 2
   },
-  "parkWalk": {
-    "first_ts": 1776583511721,
-    "visit_count": 1
-  },
-  "parkRest": {
-    "first_ts": 1776583519021,
-    "visit_count": 1
-  },
   "goingUptown": {
-    "first_ts": 1776583551033,
+    "first_ts": 1776591711195,
     "visit_count": 1
   },
   "Uptown": {
-    "first_ts": 1776583551781,
+    "first_ts": 1776591711928,
     "visit_count": 6
   },
-  "Bar": {
-    "first_ts": 1776583560493,
-    "visit_count": 3
-  },
-  "Socialize": {
-    "first_ts": 1776583567588,
+  "beauty": {
+    "first_ts": 1776591712692,
     "visit_count": 2
   },
-  "Get a drink": {
-    "first_ts": 1776583587060,
-    "visit_count": 1
-  },
-  "beauty": {
-    "first_ts": 1776583595841,
-    "visit_count": 1
+  "waxLegs": {
+    "first_ts": 1776591722089,
+    "visit_count": 7
   },
   "massageParlor": {
-    "first_ts": 1776583603807,
+    "first_ts": 1776591766134,
+    "visit_count": 4
+  },
+  "massage": {
+    "first_ts": 1776591766924,
     "visit_count": 1
   },
   "dealership": {
-    "first_ts": 1776583611234,
+    "first_ts": 1776591795930,
+    "visit_count": 2
+  },
+  "Bar": {
+    "first_ts": 1776591803575,
+    "visit_count": 2
+  },
+  "Laptop": {
+    "first_ts": 1776591824801,
+    "visit_count": 2
+  },
+  "Start camshow": {
+    "first_ts": 1776591831538,
     "visit_count": 1
   },
-  "easterUptown": {
-    "first_ts": 1776583622191,
+  "newCamshow": {
+    "first_ts": 1776591839170,
     "visit_count": 1
   },
-  "coffee": {
-    "first_ts": 1776583634795,
+  "laptopPorn": {
+    "first_ts": 1776591854357,
     "visit_count": 1
   },
-  "lilyCafe": {
-    "first_ts": 1776583649479,
+  "Phone": {
+    "first_ts": 1776591865231,
+    "visit_count": 3
+  },
+  "contacts": {
+    "first_ts": 1776591872601,
+    "visit_count": 4
+  },
+  "lilyPhone": {
+    "first_ts": 1776591891015,
+    "visit_count": 2
+  },
+  "lilyContacts": {
+    "first_ts": 1776591898605,
     "visit_count": 1
   },
-  "payRent": {
-    "first_ts": 1776583899569,
+  "trueMansion": {
+    "first_ts": 1776591910057,
+    "visit_count": 5
+  },
+  "mansionUpstairs": {
+    "first_ts": 1776591917639,
+    "visit_count": 3
+  },
+  "mansionDad": {
+    "first_ts": 1776591926248,
     "visit_count": 1
   },
-  "pay": {
-    "first_ts": 1776583906382,
+  "dadRoomSneak": {
+    "first_ts": 1776591933374,
+    "visit_count": 1
+  },
+  "mansionBrother": {
+    "first_ts": 1776591954077,
+    "visit_count": 1
+  },
+  "noahRoomSneak": {
+    "first_ts": 1776591961076,
+    "visit_count": 1
+  },
+  "mansionGarden": {
+    "first_ts": 1776591971723,
+    "visit_count": 3
+  },
+  "mansionPool": {
+    "first_ts": 1776591978276,
+    "visit_count": 1
+  },
+  "mansionDownstairs": {
+    "first_ts": 1776592000869,
+    "visit_count": 2
+  },
+  "lilyNudes": {
+    "first_ts": 1776592023474,
+    "visit_count": 1
+  },
+  "outskirts": {
+    "first_ts": 1776592037100,
+    "visit_count": 7
+  },
+  "realtor": {
+    "first_ts": 1776592044865,
+    "visit_count": 1
+  },
+  "realtorSpeak": {
+    "first_ts": 1776592052182,
+    "visit_count": 1
+  },
+  "realtorShow": {
+    "first_ts": 1776592060297,
+    "visit_count": 1
+  },
+  "losHuevas": {
+    "first_ts": 1776592071567,
+    "visit_count": 1
+  },
+  "workAlley": {
+    "first_ts": 1776592080559,
+    "visit_count": 2
+  },
+  "slimMan": {
+    "first_ts": 1776592088205,
+    "visit_count": 1
+  },
+  "animalShelter": {
+    "first_ts": 1776592109699,
+    "visit_count": 1
+  },
+  "soup": {
+    "first_ts": 1776592118065,
     "visit_count": 1
   }
 }
