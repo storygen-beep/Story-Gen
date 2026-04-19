@@ -1,15 +1,15 @@
 # road-to-success — Exploration Report
 
-Generated: 2026-04-19T10:16:30.229Z
+Generated: 2026-04-19T10:32:38.749Z
 Source URL: https://mopoga.com/road-to-success
 
 ## Session Summary
 
-- Sessions run: 4
-- Total wall-clock: 70m 52s
-- Total clicks: 90
-- Total choices explored: 90
-- Unique states seen: 281
+- Sessions run: 5
+- Total wall-clock: 82m 37s
+- Total clicks: 103
+- Total choices explored: 103
+- Unique states seen: 319
 - Unexplored frontier (queued for next session): 0
 - Endings reached: 0 (use `live.js mark-ending <passage>` to record a terminal passage)
 
@@ -22,10 +22,10 @@ Detected engine: **sugarcube**
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
-| `player.energy` | number | 90..100 | 3 | high |
+| `player.energy` | number | 90..100 | 2 | high |
 | `player.money` | number | 50..2045 | 2 | high |
-| `player.intelligence` | number | 0..10 | 4 | high |
-| `player.fitness` | number | 0..3 | 2 | high |
+| `player.intelligence` | number | 0..20 | 1 | high |
+| `player.fitness` | number | 0..0 | 0 | high |
 | `player.beauty` | number | 0..0 | 0 | high |
 | `player.clothing.beauty` | number | 0..0 | 0 | high |
 | `player.clothing.corruption` | number | 0..0 | 0 | high |
@@ -42,10 +42,10 @@ Detected engine: **sugarcube**
 | `player.scenes.HouseCleaning2.requirementsMC.corruption` | number | 30..30 | 0 | high |
 | `player.scenes.xCamPizzaDelivery.requirementsMC.corruption` | number | 45..45 | 0 | high |
 | `player.scenes.SchoolBathroomMasturbate.requirementsMC.corruption` | number | 0..0 | 0 | high |
-| `player.drugs.modifiers.energy` | number | -10..10 | 3 | high |
-| `player.drugs.modifiers.intelligence` | number | -5..5 | 3 | high |
+| `player.drugs.modifiers.energy` | number | -10..0 | 1 | high |
+| `player.drugs.modifiers.intelligence` | number | -5..0 | 1 | high |
 | `player.drugs.modifiers.fitness` | number | -5..0 | 1 | high |
-| `player.drugs.modifiers.beauty` | number | -3..0 | 2 | high |
+| `player.drugs.modifiers.beauty` | number | -3..0 | 1 | high |
 | `npc.Dad.corruption` | number | 0..0 | 0 | high |
 | `npc.Brother.corruption` | number | 0..0 | 0 | high |
 | `npc.Grandpa.corruption` | number | 0..0 | 0 | high |
@@ -69,7 +69,7 @@ Detected engine: **sugarcube**
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
 | `game.maxArousal` | number | 10..10 | 0 | high |
-| `player.drugs.drugAddiction` | number | 0..35 | 3 | high |
+| `player.drugs.drugAddiction` | number | 0..35 | 1 | high |
 
 ### body (7)
 
@@ -102,7 +102,7 @@ Detected engine: **sugarcube**
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
 | `properties.apartment.hasLateFee` | boolean | false | 0 | high |
-| `player.inventory.weed` | number | 0..5 | 2 | medium |
+| `player.inventory.weed` | number | 0..4 | 1 | medium |
 | `npc.Dad.key` | string | `Dad` | 0 | medium |
 | `npc.Brother.key` | string | `Brother` | 0 | medium |
 | `npc.Grandpa.key` | string | `Grandpa` | 0 | medium |
@@ -199,7 +199,7 @@ Detected engine: **sugarcube**
 | `game.maxEnergy` | number | 100..100 | 0 | low |
 | `game.questStartCounter` | number | 0..6 | 1 | low |
 | `game.preferences.autoSaveSlot` | number | 0..0 | 0 | low |
-| `game.random` | number | 1..30 | 63 | low |
+| `game.random` | number | 2..29 | 31 | low |
 | `items.laptop.price` | number | 800..800 | 0 | low |
 | `items.phone.price` | number | 400..400 | 0 | low |
 | `items.webcam.price` | number | 200..200 | 0 | low |
@@ -242,11 +242,11 @@ Detected engine: **sugarcube**
 | `dev.ptPw` | string | `d9f9133fb120cd609687` | 0 | low |
 | `dev.gPW` | string | `eb31c3dfedd8947dfc4a` | 0 | low |
 | `dev.galleryCode` | string | `` | 0 | low |
-| `game.randomMedia` | string | ``, `swim1.webp`, `drink2.webp` | 2 | low |
+| `game.randomMedia` | string | ``, `drink2.webp` | 1 | low |
 | `game.timeIcon` | string | `🌤️`, `☀️` | 1 | low |
 | `game.weather` | string | `clear`, `rain` | 1 | low |
 | `game.weatherIcon` | string | `☀️`, `🌧️` | 1 | low |
-| `game.lastPassage` | string | ``, `SchoolFinalExam`, `LaunderMoney` | 57 | low |
+| `game.lastPassage` | string | ``, `Menu`, `Stats` | 25 | low |
 | `game.saveVersion` | string | `0.24` | 0 | low |
 | `game.version` | string | `0.24` | 0 | low |
 | `game.activeWardrobeTab` | string | `Casual`, `school` | 1 | low |
@@ -342,13 +342,13 @@ Detected engine: **sugarcube**
 
 | type | count |
 |---|---|
-| branch | 11 |
+| branch | 12 |
 
 ## Economy
 
 - Price-labeled choices observed: 0
-- Money income events: 2
-- Money expense events: 0
+- Money income events: 1
+- Money expense events: 1
 
 ## Variable prefix clusters
 
@@ -383,20 +383,21 @@ Variables sharing a leading token — candidate entity groups (verify manually).
 | 2 | 2026-04-19T07:28:14.909Z | 29m 32s | 33 | 33 | 76 | no |
 | 3 | 2026-04-19T09:35:38.205Z | 16m 1s | 13 | 13 | 51 | no |
 | 4 | 2026-04-19T10:06:22.727Z | 10m 7s | 12 | 12 | 67 | no |
+| 5 | 2026-04-19T10:20:53.668Z | 11m 45s | 13 | 13 | 38 | no |
 
 ## Graph coverage (observed vs. static)
 
 - Static-graph edges (every navigation parsed from passage source): **496**
-- Observed edges during play: **93** unique `(from, clicked_text, to)` tuples.
+- Observed edges during play: **100** unique `(from, clicked_text, to)` tuples.
 - Static edges covered by at least one observation: **29** (a single observation covers every static edge with the same `(from, to)` pair — gated branches collapse to one observable move).
-- Observed-only edges (no matching static edge, typically self-loop `<<link>>` wrappers that `<<replace>>` in-place): **70**.
+- Observed-only edges (no matching static edge, typically self-loop `<<link>>` wrappers that `<<replace>>` in-place): **77**.
 - Coverage: **5.85%** of the static graph explored.
-- Synthetic edges (Claude's out-of-band `eval`/`keys`/`restore`/`pop`): 183
+- Synthetic edges (Claude's out-of-band `eval`/`keys`/`restore`/`pop`): 214
 
 ### Playable-content partition
 - Passages defined in source: **358** (0 tagged `wip`, 1 empty-body placeholder).
 - Implied playable (non-WIP, non-empty): **357**.
-- Distinct passages visited at least once: **54** — playable-passage coverage: **15.1%**.
+- Distinct passages visited at least once: **27** — playable-passage coverage: **7.6%**.
 
 ### Static edge kinds
 | kind | count |

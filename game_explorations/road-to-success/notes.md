@@ -644,3 +644,128 @@ Duration: 2+N hours active. Addiction accumulates cross-drug. `drugs.withdrawn` 
 | 1 | TwineExplorer Day2 Tuesday | Day 2 EM | +Waiter |
 | 2 | TwineExplorer Day3 Wed Phone+Bank+FakeID | Day 3 M | +Bartender+Bank+FakeID+Phone |
 | 3 | TwineExplorer Day3 Graduated | Day 3 | +Graduated (forced), Office/Casino/Driving unlocked |
+- [2026-04-19T10:32:22.221Z] === SESSION 5 FINDINGS ===
+- [2026-04-19T10:32:22.331Z] CAREER FLOWS (post-graduation, all jobs tested):
+OFFICE SECRETARY: OfficeInterview → 'Yes, I am' → 'Deliver your curriculum' → 'You're going to take a chance on you' → intern rank. Mr. Davis boss. With intel 20+ social 15+ it accepts. Low-stat gets 'doesn't meet our requirements'.
+STRIPPER: StripClub 'Get a job' → StripClubInterview (Strip Club Manager, leather chair) → 'Yes' → StripClubInterviewStage (spotlight+music 'Show me what you've got' 'Start Dancing').
+RESTAURANT SEDUCE: RestaurantInterviewSex is the alt corruption route for Restaurant — 'Kiss him' linkreplace (confirmed corruption-gated version of RestaurantInterview).
+PHOTO/FILM STUDIO: ModelPhotoshoot (Richard says 'stunning, can't wait to start shooting' → Strike a pose), SecondPhotoShoot (intimate apparel brand advertisement with makeup room). Jim/Richard proposals trigger from Instafame DMs.
+- [2026-04-19T10:32:22.441Z] APARTMENT RENTAL FLOW: ApartmentRent → 'Sign the lease ($300) 📝' → deducts $300, residence.currentResidence='house'→'apartment', rentedProperties=['apartment']. ApartmentHall shows 2 sub-locations: 'Your Apartment' (handleSubLocation('ApartmentHallway')) + 'Landlord's Apartment' (handleSubLocation('LandlordApartment')). Weekly rent cycle tracked via daysUntilRent countdown + accumulatedDebt + skippedRentCount + hasLateFee flags. Missing rent triggers Landlord visits (not observed this session).
+- [2026-04-19T10:32:22.559Z] PREGNANCY FULL PIPELINE tested: pregnancy.enabled true + isPregnant true + days 21 + discovered → HospitalBirth scene: 'Respond to the doctor' → 'I am ready' → 'Push' → 'Congratulations! You have a beautiful baby girl' → 'What is her name?' → baby.name set. Post-birth: player.baby = [{name, father: {name, discovered}, sex: 'Female', days: 0}]. '10% of your money will be deducted weekly to cover the baby's expenses' — RECURRING DRAIN mechanic. Can 'give the baby up for adoption at the hospital at any time'. Abortion scene costs $500 (Dr. Johnson named as Dr. Smith in scene — possible typo in game).
+- [2026-04-19T10:32:22.666Z] PRIEST + CHURCH full loop: Church → Pray (-1 corruption.points, no cost), Confessional ('You confess your sins' → advances E→N time bucket, no corruption change), PriestVisit (knock on priest's door, 'How can I help you today?' → 'Come in'), ConfessionSex (inside confessional 'What sins do you wish to confess?' → 'I became a slut' → corruption-inversion scene). The religious side has BOTH a corruption-reduction option (Pray) AND a corruption-route scene (ConfessionSex) — religious hypocrisy as game design.
+- [2026-04-19T10:32:22.774Z] CASINO ROULETTE NUMBERBOX MECHANIC: Bet input is SugarCube-bound via 'numberbox-locationcasinobetamount' ID writing to $location.casino.betAmount. Synthetic set via native HTMLInputElement.prototype.value setter + dispatch 'input' event — bet stays in state UNTIL color button click which re-renders the numberbox (re-binding back to 1). Limitation: CDP click of RED/BLACK/GREEN button fires SugarCube handler which immediately re-initializes betAmount=1 before computing win/loss. Workaround: set via state directly then directly call spin widget (not tested). Roulette state: betAmount, playerBetColor, winningNumber, winningColor. Slots state: slotsReel1/2/3, slotsResult, slotsWinAmount (9 symbols, 100x/50x/25x/20x/10x tiers).
+- [2026-04-19T10:32:22.888Z] KEY MACROS & WIDGETS DECODED (from source reads): <<AddTime N>> advances N hours. <<Energy -N>> adjusts energy. <<AddInt>>/<<AddSocial>>/<<AddBeauty>>/<<AddExb>> add 1 to stat. <<AddRelation K>> adds relation to NPC. <<AddMoney N>> adds money. <<RemoveFromInventory name>> decrements inventory. <<NotifyPhone>> + <<Notification>> for toast UI. <<UnlockLocation X>> unlocks a location. <<UnlockLocationScene X Y>> marks a location-scene unlocked. <<StartQuest K>> / <<UpdateQuest K step desc>> / <<FinishQuest K>> quest lifecycle. <<EnterLocation X>> = navigation with time/energy side effects. <<Speech NPC 'text'>> renders dialogue bubble. <<ReturnButton X>> creates back nav. <<GetNaked>> strips to naked clothes. <<UseDrugs>> renders drug-use UI in bathrooms. <<ClothShop item>>/<<TeaseBoyfriend>>/<<FlashEventClassroom>>/<<ClassLactation>>/etc. are scene widgets.
+
+# Session 5 — career ladder, apartment, pregnancy, religion, casino
+
+## Career ladder (all 4 jobs tested post-graduation)
+
+| Job | Location | Interview passage | Flow | Entry requirements |
+|---|---|---|---|---|
+| Waiter | Restaurant | RestaurantInterview | Answer right (intel) or Seduce (RestaurantInterviewSex — Kiss him) | None (starting) |
+| Bartender | Bar | BarInterview | Single-text "Apply" ("I don't have experience, willing to learn") | Bar opens at E |
+| Secretary | Office | OfficeInterview | Intel+social dialogue — "Yes, I am" / "Deliver your curriculum" → 'intern rank' | Graduation + intel/social threshold |
+| Stripper | StripClub | StripClubInterview → StripClubInterviewStage | Manager cigar interview → stage audition 'Show me what you've got' / 'Start Dancing' | Graduation + exhibitionism threshold |
+
+RestaurantInterviewSex is the 'Seduce Boss' branch for low-intel players. Kiss him → corruption-route hiring alt.
+
+PhotoStudio/FilmStudio careers via Richard/Jim Instafame DM proposals:
+- ModelPhotoshoot (Richard): "You look stunning" → Strike a pose
+- SecondPhotoShoot (Richard): intimate apparel brand advertisement + makeup room
+- Pornstar (Jim, quest #1): accept proposal → Film Studio scenes (not yet mapped)
+
+## Apartment rental (residence flip)
+
+1. Visit ApartmentRent (from Residential → Apartment tile).
+2. Landlord Mr. Henderson: "rent is $300 per week."
+3. Click "Sign the lease ($300) 📝" → money -300, `residence.currentResidence: 'house' → 'apartment'`, `rentedProperties: ['apartment']`, property.status: 'available' → 'rented', `daysUntilRent: 7`.
+4. ApartmentHall → 2 sub-locations: Your Apartment (ApartmentHallway) + Landlord's Apartment.
+5. Weekly rent cycle tracked via `daysUntilRent` countdown + `accumulatedDebt` + `skippedRentCount` + `hasLateFee`.
+
+## Pregnancy full pipeline (tested)
+
+1. Enable via Preferences (pregnancy.enabled=true) OR state-edit.
+2. Conception: sex scene with creampie + preferences.pregnancyChance % roll.
+3. `player.pregnancy` populated: isPregnant, days (countdown to birth, default 21), father: {name, discovered}, discovered.
+4. Symptoms (hasPregnancySymptoms()) → noticed via BathroomMorningSickness (early) / BathroomBellyAwareness (showing).
+5. PregnancyTest (pee on stick, from pharmacy $12) or HospitalPregnancyTest ($30) → discovered=true.
+6. Stage progression: early → showing → late — triggers different auto-events per bathroom.
+7. Pregnant-variant scenes swap in: DadShowerSexPregnant, DadWashDishesSexPregnant, BrotherBedroomPregnantSex1, MarcusBedroomSexPregnant, JoggingSexPregnant, etc.
+8. Birth at days=0: Birth passage ('A SHARP PAIN RIPS THROUGH YOUR STOMACH') → HospitalBirth delivery (Dr. Johnson, push linkreplaces) → Baby girl → name prompt → `player.baby[].push({name, father: {name, discovered}, sex, days: 0})`.
+9. **Post-birth: 10% of money weekly for baby expenses.** Give up for adoption at hospital any time.
+10. Abortion: $500, Dr. Johnson (named Dr. Smith in scene — game typo).
+11. WhoIsTheFather quest (#4): auto-starts on pregnancy confirmation; collect sperm samples from multiple NPCs to identify paternity.
+
+## Religion system (corruption inversion)
+
+| Passage | Effect | Cost |
+|---|---|---|
+| Pray (Church) | -1 corruption.points | Free, no time |
+| Confess (Church Confessional) | +1 time bucket | No corruption change |
+| PriestVisit | Story progression with Priest NPC | No direct stat |
+| ConfessionSex | +corruption (seduced by priest) | Corruption route despite Church |
+
+Church offers both a corruption-purge (Pray) and a corruption-gain (ConfessionSex) path — religious hypocrisy as design.
+
+## Casino gambling (mechanics + limitations)
+
+`location.casino.{betAmount, playerBetColor, winningNumber, winningColor, slotsReel1/2/3, slotsResult, slotsWinAmount}`
+
+- **Roulette**: GREEN 35:1 / RED 1:1 / BLACK 1:1. Bet input is a SugarCube `<<numberbox>>` macro bound to `$location.casino.betAmount`.
+- **Slots**: 9 symbols — 💎💎💎 100x / 💰💰💰 50x / 🔔🔔🔔 25x / ⭐⭐⭐ 20x / 🍒/🍋/🍊/🍇/🍓/🍎 10x / Any Pair 2x.
+
+**Automation limitation**: The numberbox re-initializes to `betAmount: 1` on every passage re-render (including color button click). CDP synthetic click fires SugarCube handler which re-renders first, losing the bet value. Workaround: direct state edit + call spin widget (not explored). This mimics a user typing a bet then clicking a color, which works in real play but races in automation.
+
+`statistics.moneyEarnedCasino` + `statistics.moneyLostCasino` counters track gambling P/L.
+
+## Macros & widgets decoded (from source reads)
+
+| Widget | Purpose |
+|---|---|
+| `<<AddTime N>>` | Advance N hours (bucket rolls internally at thresholds) |
+| `<<Energy -N>>` | Adjust energy |
+| `<<AddInt>>` / `<<AddSocial>>` / `<<AddBeauty>>` / `<<AddExb>>` | +1 stat |
+| `<<AddRelation NpcKey>>` | +1 relation to NPC |
+| `<<AddMoney N>>` / `<<RemoveFromInventory name>>` | Wallet + inventory |
+| `<<Notification level "text">>` / `<<NotifyPhone>>` | Toast UI (warning/success/info) |
+| `<<UnlockLocation X>>` / `<<UnlockLocationScene loc scene>>` | Content unlocks |
+| `<<StartQuest K>>` / `<<UpdateQuest K step "desc">>` / `<<FinishQuest K>>` | Quest lifecycle |
+| `<<EnterLocation X>>` | Navigate with time/energy side-effects |
+| `<<Speech NpcKey "text">>` | Dialogue bubble |
+| `<<ReturnButton Target>>` | Back-nav button |
+| `<<GetNaked>>` / `<<UseDrugs>>` / `<<ClothShop item>>` | Scene helpers |
+| `<<TeaseBoyfriend>>` / `<<FlashEventClassroom>>` / `<<ClassLactation>>` etc. | Named scene widgets |
+| `<<isQuestActive(K)>>` / `<<isQuestCompleted(K)>>` / `<<isQuestAvailable(K)>>` | Quest predicates |
+| `<<isBoyfriend(K)>>` | Relationship predicate |
+| `<<IsNpcAtHome(K)>>` / `<<GetNpcLocation(K)>>` | NPC location checks |
+| `<<isPregnant()>>` / `<<changeMediaPregnant()>>` / `<<hasVisibleBelly()>>` / `<<getPregnancyStage()>>` | Pregnancy state checks |
+| `<<getCorruptionLevel()>>` / `<<getExb()>>` | Stat getters |
+| `<<calculateGrade()>>` / `<<processFinalExam(grade)>>` / `<<checkGraduationRequirements()>>` | School logic |
+| `<<getDrunkness()>>` | Drunkness meter (drinks accumulate) |
+| `<<isPlayerAtHouse()>>` / `<<isPurchased(itemName)>>` | Simple checks |
+| `<<previous()>>` | Previous passage name (for conditional events) |
+
+## Phase 3 update — known non-traversable dynamic gates
+
+These gates can't be resolved by the pathfinder because they use method calls or dynamic data:
+- `isPurchased("phone")` — Bedroom Masturbate, Phone-apps unlock
+- `isQuestActive(K)` / `isQuestCompleted(K)` / `isQuestAvailable(K)` — per-quest
+- `isBoyfriend(K)` — relation gating
+- `IsNpcAtHome(K)` / `GetNpcLocation(K)` — NPC-schedule gating
+- `isPregnant()` / `hasVisibleBelly()` / `getPregnancyStage()` — pregnancy branches
+- `getCorruptionLevel()` / `getExb()` — stat-level gating
+- `getDrunkness()` — drunk state gating
+- `checkGraduationRequirements()` / `canGraduate` — graduation screen logic
+- `random(1,N) == K` — dice rolls (20+ passages)
+
+Pathfinder handles simple `$var == value` and `$var eq value` but can't evaluate these helpers. Mostly ends up with `'unknown'` — still traversable (allow_unknown default policy).
+
+## Saves on disk
+
+| Slot | Description | Day/Time | Progress |
+|---|---|---|---|
+| 0 | TwineExplorer Day1 | Day 1 EM | Pre-job |
+| 1 | TwineExplorer Day2 Tuesday | Day 2 EM | +Waiter |
+| 2 | TwineExplorer Day3 Wed Phone+Bank+FakeID | Day 3 M | +Bartender+Bank+FakeID+Phone |
+| 3 | TwineExplorer Day3 Graduated | Day 3 | +Graduated (forced) |
+| 4 | TwineExplorer Day3 Graduated+Secretary+Baby+Apt | Day 3 | +Secretary hired + Apartment rented + Baby girl delivered + Instafame account |

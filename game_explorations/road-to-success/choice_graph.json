@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-04-19T10:16:30.225Z",
-  "total_observed_edges": 93,
-  "total_synthetic_edges": 183,
-  "total_play_log_entries": 671,
-  "total_timeline_entries": 415,
+  "generated_at": "2026-04-19T10:32:38.744Z",
+  "total_observed_edges": 100,
+  "total_synthetic_edges": 214,
+  "total_play_log_entries": 773,
+  "total_timeline_entries": 483,
   "initial_passage": "Menu",
   "orphan_clicks": [],
   "observed_edges": [
@@ -219,6 +219,20 @@
           }
         }
       }
+    },
+    {
+      "from": "Menu",
+      "clicked_text": "Load 💾",
+      "to": "Menu",
+      "observation_count": 5,
+      "classifications": {
+        "branch": 5
+      },
+      "first_observed_ts": 1776583719526,
+      "last_observed_ts": 1776594063412,
+      "same_state_hits": 5,
+      "is_self_loop": true,
+      "effect_aggregate": {}
     },
     {
       "from": "RestaurantWork",
@@ -1165,18 +1179,78 @@
       }
     },
     {
-      "from": "Menu",
-      "clicked_text": "Load 💾",
-      "to": "Menu",
+      "from": "Roulette",
+      "clicked_text": "🔴 RED (1:1)",
+      "to": "Roulette",
       "observation_count": 4,
       "classifications": {
-        "branch": 4
+        "observe": 3,
+        "branch": 1
       },
-      "first_observed_ts": 1776583719526,
-      "last_observed_ts": 1776593191208,
+      "first_observed_ts": 1776594202904,
+      "last_observed_ts": 1776594295647,
       "same_state_hits": 4,
       "is_self_loop": true,
-      "effect_aggregate": {}
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Stats"
+          ],
+          "after_values": [
+            "Bedroom"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            11,
+            28
+          ],
+          "after_values": [
+            28,
+            23
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": -5,
+            "max_delta": 17,
+            "mean_delta": 6,
+            "always_same_delta": false
+          }
+        },
+        "location.casino.betAmount": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            1,
+            100
+          ],
+          "after_values": [
+            100,
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": -99,
+            "max_delta": 99,
+            "mean_delta": 0,
+            "always_same_delta": false
+          }
+        }
+      }
     },
     {
       "from": "NoEnergy",
@@ -2661,6 +2735,20 @@
       }
     },
     {
+      "from": "Bedroom",
+      "clicked_text": "💾 Save Game",
+      "to": "Bedroom",
+      "observation_count": 2,
+      "classifications": {
+        "branch": 2
+      },
+      "first_observed_ts": 1776583108944,
+      "last_observed_ts": 1776594129807,
+      "same_state_hits": 2,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
       "from": "ClothingStore",
       "clicked_text": null,
       "to": "ClothingStore",
@@ -4017,6 +4105,70 @@
       "effect_aggregate": {}
     },
     {
+      "from": "OfficeInterview",
+      "clicked_text": "Start the interview",
+      "to": "OfficeInterview",
+      "observation_count": 2,
+      "classifications": {
+        "branch": 1,
+        "observe": 1
+      },
+      "first_observed_ts": 1776593558941,
+      "last_observed_ts": 1776594370269,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "url": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "images//vipers/houseRob/houseRob5.mp4"
+          ],
+          "after_values": [
+            "images//office/officeInterview/officeInterview1.mp4"
+          ],
+          "numeric_stats": null
+        },
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Roulette"
+          ],
+          "after_values": [
+            "Office"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            29
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -27,
+            "max_delta": -27,
+            "mean_delta": -27,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
       "from": "Bedroom",
       "clicked_text": "Hallway 🚪",
       "to": "Hallway",
@@ -4941,20 +5093,6 @@
           }
         }
       }
-    },
-    {
-      "from": "Bedroom",
-      "clicked_text": "💾 Save Game",
-      "to": "Bedroom",
-      "observation_count": 1,
-      "classifications": {
-        "branch": 1
-      },
-      "first_observed_ts": 1776583108944,
-      "last_observed_ts": 1776583108944,
-      "same_state_hits": 1,
-      "is_self_loop": true,
-      "effect_aggregate": {}
     },
     {
       "from": "Menu",
@@ -11516,35 +11654,6 @@
     },
     {
       "from": "OfficeInterview",
-      "clicked_text": "Start the interview",
-      "to": "OfficeInterview",
-      "observation_count": 1,
-      "classifications": {
-        "branch": 1
-      },
-      "first_observed_ts": 1776593558941,
-      "last_observed_ts": 1776593558941,
-      "same_state_hits": 0,
-      "is_self_loop": true,
-      "effect_aggregate": {
-        "url": {
-          "count": 1,
-          "changes_count": 1,
-          "kinds": {
-            "changed": 1
-          },
-          "before_values": [
-            "images//vipers/houseRob/houseRob5.mp4"
-          ],
-          "after_values": [
-            "images//office/officeInterview/officeInterview1.mp4"
-          ],
-          "numeric_stats": null
-        }
-      }
-    },
-    {
-      "from": "OfficeInterview",
       "clicked_text": "Yes, I am",
       "to": "OfficeInterview",
       "observation_count": 1,
@@ -11683,6 +11792,181 @@
           }
         }
       }
+    },
+    {
+      "from": "Menu",
+      "clicked_text": null,
+      "to": "Menu",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776594087799,
+      "last_observed_ts": 1776594087799,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Office",
+      "clicked_text": "Apply to work 💼",
+      "to": "Office",
+      "observation_count": 1,
+      "classifications": {
+        "observe": 1
+      },
+      "first_observed_ts": 1776594337861,
+      "last_observed_ts": 1776594337861,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Bedroom"
+          ],
+          "after_values": [
+            "Roulette"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            17
+          ],
+          "after_values": [
+            29
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 12,
+            "max_delta": 12,
+            "mean_delta": 12,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "StripClub",
+      "clicked_text": "Get a job",
+      "to": "StripClub",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776594407419,
+      "last_observed_ts": 1776594407419,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "ApartmentRent",
+      "clicked_text": "Sign the lease ($300) 📝",
+      "to": "ApartmentRent",
+      "observation_count": 1,
+      "classifications": {
+        "observe": 1
+      },
+      "first_observed_ts": 1776594553301,
+      "last_observed_ts": 1776594553301,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "ModelPhotoshoot"
+          ],
+          "after_values": [
+            "SecondPhotoShoot"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            28
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -24,
+            "max_delta": -24,
+            "mean_delta": -24,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Instafame",
+      "clicked_text": "Take a selfie 🤳🏻",
+      "to": "Instafame",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776594631265,
+      "last_observed_ts": 1776594631265,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "HospitalBirth",
+      "clicked_text": "Respond to the doctor",
+      "to": "HospitalBirth",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776594659273,
+      "last_observed_ts": 1776594659273,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            16
+          ],
+          "after_values": [
+            24
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 8,
+            "max_delta": 8,
+            "mean_delta": 8,
+            "always_same_delta": true
+          }
+        }
+      }
     }
   ],
   "synthetic_edges": [
@@ -11699,37 +11983,39 @@
       "cmd": "eval",
       "from": "Bedroom",
       "to": "Bedroom",
-      "observation_count": 15,
+      "observation_count": 18,
       "first_observed_ts": 1776582629696,
-      "last_observed_ts": 1776593216072,
+      "last_observed_ts": 1776594180125,
       "effect_aggregate": {
         "game.lastPassage": {
-          "count": 5,
-          "changes_count": 5,
+          "count": 6,
+          "changes_count": 6,
           "kinds": {
-            "changed": 5
+            "changed": 6
           },
           "before_values": [
             "Vipers",
             "NoEnergy",
             "Vipers",
             "NoEnergy",
-            "SchoolFinalExam"
+            "SchoolFinalExam",
+            ""
           ],
           "after_values": [
             "JoinVipers",
             "BedroomSleep",
             "JoinVipers",
             "BedroomSleep",
-            "LaunderMoney"
+            "LaunderMoney",
+            "Menu"
           ],
           "numeric_stats": null
         },
         "game.random": {
-          "count": 6,
-          "changes_count": 6,
+          "count": 8,
+          "changes_count": 8,
           "kinds": {
-            "changed": 6
+            "changed": 8
           },
           "before_values": [
             22,
@@ -11737,7 +12023,9 @@
             23,
             18,
             15,
-            10
+            10,
+            4,
+            12
           ],
           "after_values": [
             30,
@@ -11745,13 +12033,15 @@
             18,
             9,
             19,
-            23
+            23,
+            17,
+            11
           ],
           "numeric_stats": {
-            "sample_count": 6,
+            "sample_count": 8,
             "min_delta": -9,
             "max_delta": 13,
-            "mean_delta": 2,
+            "mean_delta": 3,
             "always_same_delta": false
           }
         },
@@ -12400,9 +12690,9 @@
       "cmd": "eval",
       "from": "Menu",
       "to": "Menu",
-      "observation_count": 3,
+      "observation_count": 4,
       "first_observed_ts": 1776583792551,
-      "last_observed_ts": 1776593192349,
+      "last_observed_ts": 1776594064491,
       "effect_aggregate": {}
     },
     {
@@ -14866,42 +15156,46 @@
       "cmd": "eval",
       "from": "PhotoStudio",
       "to": "FilmStudio",
-      "observation_count": 1,
+      "observation_count": 2,
       "first_observed_ts": 1776585311703,
-      "last_observed_ts": 1776585311703,
+      "last_observed_ts": 1776594508501,
       "effect_aggregate": {
         "game.lastPassage": {
-          "count": 1,
-          "changes_count": 1,
+          "count": 2,
+          "changes_count": 2,
           "kinds": {
-            "changed": 1
+            "changed": 2
           },
           "before_values": [
-            "Casino"
+            "Casino",
+            "RestaurantInterviewSex"
           ],
           "after_values": [
+            "PhotoStudio",
             "PhotoStudio"
           ],
           "numeric_stats": null
         },
         "game.random": {
-          "count": 1,
-          "changes_count": 1,
+          "count": 2,
+          "changes_count": 2,
           "kinds": {
-            "changed": 1
+            "changed": 2
           },
           "before_values": [
-            20
+            20,
+            15
           ],
           "after_values": [
-            26
+            26,
+            14
           ],
           "numeric_stats": {
-            "sample_count": 1,
-            "min_delta": 6,
+            "sample_count": 2,
+            "min_delta": -1,
             "max_delta": 6,
-            "mean_delta": 6,
-            "always_same_delta": true
+            "mean_delta": 2.5,
+            "always_same_delta": false
           }
         }
       }
@@ -15839,9 +16133,9 @@
       "cmd": "eval",
       "from": "StripClub",
       "to": "StripClub",
-      "observation_count": 2,
+      "observation_count": 5,
       "first_observed_ts": 1776586531140,
-      "last_observed_ts": 1776586537053,
+      "last_observed_ts": 1776594446772,
       "effect_aggregate": {
         "game.random": {
           "count": 2,
@@ -16185,28 +16479,30 @@
       "cmd": "eval",
       "from": "Instafame",
       "to": "NakedLife",
-      "observation_count": 1,
+      "observation_count": 2,
       "first_observed_ts": 1776591585663,
-      "last_observed_ts": 1776591585663,
+      "last_observed_ts": 1776594637071,
       "effect_aggregate": {
         "game.random": {
-          "count": 1,
-          "changes_count": 1,
+          "count": 2,
+          "changes_count": 2,
           "kinds": {
-            "changed": 1
+            "changed": 2
           },
           "before_values": [
-            11
+            11,
+            24
           ],
           "after_values": [
-            26
+            26,
+            6
           ],
           "numeric_stats": {
-            "sample_count": 1,
-            "min_delta": 15,
+            "sample_count": 2,
+            "min_delta": -18,
             "max_delta": 15,
-            "mean_delta": 15,
-            "always_same_delta": true
+            "mean_delta": -1.5,
+            "always_same_delta": false
           }
         },
         "nlTab": {
@@ -21233,6 +21529,3551 @@
           }
         }
       }
+    },
+    {
+      "cmd": "eval",
+      "from": "Menu",
+      "to": "Bedroom",
+      "observation_count": 1,
+      "first_observed_ts": 1776594089100,
+      "last_observed_ts": 1776594089100,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "Menu"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            4
+          ],
+          "after_values": [
+            17
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 13,
+            "max_delta": 13,
+            "mean_delta": 13,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Bedroom",
+      "to": "Wardrobe",
+      "observation_count": 1,
+      "first_observed_ts": 1776594167767,
+      "last_observed_ts": 1776594167767,
+      "effect_aggregate": {
+        "%%cycles.time.1.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "new setup.Cycle({\"name\":\"time\",\"phases\":[\"EM\",\"M\",\"A\",\"E\",\"N\",\"LN\"],\"period\":2,\"increment\":1,\"active\":false,\"stack\":0}, 0)"
+          ],
+          "after_values": [
+            "new setup.Cycle({\"name\":\"time\",\"phases\":[\"EM\",\"M\",\"A\",\"E\",\"N\",\"LN\"],\"period\":2,\"increment\":1,\"active\":false,\"stack\":3}, 3)"
+          ],
+          "numeric_stats": null
+        },
+        "%%cycles.day.1.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "new setup.Cycle({\"name\":\"day\",\"phases\":[\"Monday\",\"Tuesday\",\"Wednesday\",\"Thursday\",\"Friday\",\"Saturday\",\"Sunday\"],\"period\":1,\"increment\":1,\"active\":false,\"stack\":0}, 0)"
+          ],
+          "after_values": [
+            "new setup.Cycle({\"name\":\"day\",\"phases\":[\"Monday\",\"Tuesday\",\"Wednesday\",\"Thursday\",\"Friday\",\"Saturday\",\"Sunday\"],\"period\":1,\"increment\":1,\"active\":false,\"stack\":2}, 2)"
+          ],
+          "numeric_stats": null
+        },
+        "game.days": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "game.dice": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "game.randomMedia": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "drink2.webp"
+          ],
+          "numeric_stats": null
+        },
+        "game.randomMoney": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            19
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 19,
+            "max_delta": 19,
+            "mean_delta": 19,
+            "always_same_delta": true
+          }
+        },
+        "game.time": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "EM"
+          ],
+          "after_values": [
+            "M"
+          ],
+          "numeric_stats": null
+        },
+        "game.day": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Monday"
+          ],
+          "after_values": [
+            "Wednesday"
+          ],
+          "numeric_stats": null
+        },
+        "game.timeIcon": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "🌤️"
+          ],
+          "after_values": [
+            "☀️"
+          ],
+          "numeric_stats": null
+        },
+        "game.weather": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "clear"
+          ],
+          "after_values": [
+            "rain"
+          ],
+          "numeric_stats": null
+        },
+        "game.weatherIcon": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "☀️"
+          ],
+          "after_values": [
+            "🌧️"
+          ],
+          "numeric_stats": null
+        },
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Menu"
+          ],
+          "after_values": [
+            "Stats"
+          ],
+          "numeric_stats": null
+        },
+        "game.intro": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            true
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "game.activeWardrobeTab": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Casual"
+          ],
+          "after_values": [
+            "school"
+          ],
+          "numeric_stats": null
+        },
+        "game.questStartCounter": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            6
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 6,
+            "max_delta": 6,
+            "mean_delta": 6,
+            "always_same_delta": true
+          }
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            17
+          ],
+          "after_values": [
+            12
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -5,
+            "max_delta": -5,
+            "mean_delta": -5,
+            "always_same_delta": true
+          }
+        },
+        "location.school.daysToNextTest": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            7
+          ],
+          "after_values": [
+            0
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -7,
+            "max_delta": -7,
+            "mean_delta": -7,
+            "always_same_delta": true
+          }
+        },
+        "location.school.grade": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            8
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 8,
+            "max_delta": 8,
+            "mean_delta": 8,
+            "always_same_delta": true
+          }
+        },
+        "location.school.testsCompleted": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            12
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 12,
+            "max_delta": 12,
+            "mean_delta": 12,
+            "always_same_delta": true
+          }
+        },
+        "location.school.totalGradePoints": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            96
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 96,
+            "max_delta": 96,
+            "mean_delta": 96,
+            "always_same_delta": true
+          }
+        },
+        "location.school.averageGrade": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            8
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 8,
+            "max_delta": 8,
+            "mean_delta": 8,
+            "always_same_delta": true
+          }
+        },
+        "location.school.graduated": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "location.church.open": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "location.movieTheater.open": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "location.casino.betAmount": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "player.energy": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            100
+          ],
+          "after_values": [
+            90
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -10,
+            "max_delta": -10,
+            "mean_delta": -10,
+            "always_same_delta": true
+          }
+        },
+        "player.money": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            50
+          ],
+          "after_values": [
+            2045
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1995,
+            "max_delta": 1995,
+            "mean_delta": 1995,
+            "always_same_delta": true
+          }
+        },
+        "player.exhibitionism": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            15
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 15,
+            "max_delta": 15,
+            "mean_delta": 15,
+            "always_same_delta": true
+          }
+        },
+        "player.arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            9
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 9,
+            "max_delta": 9,
+            "mean_delta": 9,
+            "always_same_delta": true
+          }
+        },
+        "player.drunkness": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "player.location": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "House"
+          ],
+          "after_values": [
+            "School"
+          ],
+          "numeric_stats": null
+        },
+        "player.clothing.name": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "default"
+          ],
+          "after_values": [
+            "school1"
+          ],
+          "numeric_stats": null
+        },
+        "player.clothing.title": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Default"
+          ],
+          "after_values": [
+            "School 1"
+          ],
+          "numeric_stats": null
+        },
+        "player.clothing.type": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "casual"
+          ],
+          "after_values": [
+            "school"
+          ],
+          "numeric_stats": null
+        },
+        "player.clothing.image": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "default.webp"
+          ],
+          "after_values": [
+            "school1.webp"
+          ],
+          "numeric_stats": null
+        },
+        "player.lastClothing.name": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "default"
+          ],
+          "after_values": [
+            "school1"
+          ],
+          "numeric_stats": null
+        },
+        "player.lastClothing.title": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Default"
+          ],
+          "after_values": [
+            "School 1"
+          ],
+          "numeric_stats": null
+        },
+        "player.lastClothing.type": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "casual"
+          ],
+          "after_values": [
+            "school"
+          ],
+          "numeric_stats": null
+        },
+        "player.lastClothing.image": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "default.webp"
+          ],
+          "after_values": [
+            "school1.webp"
+          ],
+          "numeric_stats": null
+        },
+        "player.scenes.BedroomMasturbate1.unlocked": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "player.scenes.BedroomMasturbate1.executedToday": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "player.inventory.phone": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "player.inventory.weed": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 4,
+            "max_delta": 4,
+            "mean_delta": 4,
+            "always_same_delta": true
+          }
+        },
+        "player.inventory.cocaine": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "player.inventory.heroin": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "player.inventory.fakeID": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "player.corruption.points": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "player.phone.fastJobs.jobs.DogWalking.active": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "player.gang.respect": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "player.gang.daysToWork": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "player.drugs.drugAddiction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            35
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 35,
+            "max_delta": 35,
+            "mean_delta": 35,
+            "always_same_delta": true
+          }
+        },
+        "player.drugs.duration": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 5,
+            "max_delta": 5,
+            "mean_delta": 5,
+            "always_same_delta": true
+          }
+        },
+        "player.drugs.drug": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "heroin"
+          ],
+          "numeric_stats": null
+        },
+        "player.drugs.onDrugs": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "player.drugs.modifiers.energy": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            -10
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -10,
+            "max_delta": -10,
+            "mean_delta": -10,
+            "always_same_delta": true
+          }
+        },
+        "player.drugs.modifiers.arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            8
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 8,
+            "max_delta": 8,
+            "mean_delta": 8,
+            "always_same_delta": true
+          }
+        },
+        "player.drugs.modifiers.intelligence": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            -5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -5,
+            "max_delta": -5,
+            "mean_delta": -5,
+            "always_same_delta": true
+          }
+        },
+        "player.drugs.modifiers.fitness": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            -5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -5,
+            "max_delta": -5,
+            "mean_delta": -5,
+            "always_same_delta": true
+          }
+        },
+        "player.drugs.modifiers.beauty": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            -3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -3,
+            "max_delta": -3,
+            "mean_delta": -3,
+            "always_same_delta": true
+          }
+        },
+        "player.drugs.modifiers.corruptionLevel": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "player.statistics.vaginal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "player.statistics.blowjobs": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "player.statistics.creampies": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "player.statistics.masturbations": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "player.jobs.0.xp": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "player.jobs.0.active": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "npc.Dad.location": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Kitchen"
+          ],
+          "after_values": [
+            "Work"
+          ],
+          "numeric_stats": null
+        },
+        "npc.Dad.arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "npc.Dad.sideBarText": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "❄️"
+          ],
+          "after_values": [
+            "🔥🔥"
+          ],
+          "numeric_stats": null
+        },
+        "npc.Brother.location": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Bathroom"
+          ],
+          "after_values": [
+            "School"
+          ],
+          "numeric_stats": null
+        },
+        "npc.Brother.arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "npc.Brother.sideBarText": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "❄️"
+          ],
+          "after_values": [
+            "🔥🔥"
+          ],
+          "numeric_stats": null
+        },
+        "npc.Grandpa.location": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Bedroom"
+          ],
+          "after_values": [
+            "Living Room"
+          ],
+          "numeric_stats": null
+        },
+        "npc.Grandpa.relation": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "npc.Grandpa.arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "npc.Grandpa.sideBarText": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "❄️"
+          ],
+          "after_values": [
+            "🔥🔥"
+          ],
+          "numeric_stats": null
+        },
+        "npc.Emma.relation": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "npc.Emma.talkedToday": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "npc.Thief.relation": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "npc.Thief.scenes.LightningKidnapping.unlocked": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "questList.5.completed": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "questList.6.active": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "questList.7.description": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "I need to attend math class and submit the homework"
+          ],
+          "after_values": [
+            "I need to do my math homework and hand it in to the teacher in class tomorrow"
+          ],
+          "numeric_stats": null
+        },
+        "questList.7.progress": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "questList.7.active": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "questList.8.active": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "questList.16.completed": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "questList.17.active": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "clothes.school1.isDefault": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "items.phone.purchased": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "items.fakeID.purchased": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "location.school.testsHistory.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            8
+          ],
+          "numeric_stats": null
+        },
+        "location.school.testsHistory.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            8
+          ],
+          "numeric_stats": null
+        },
+        "location.school.testsHistory.2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            8
+          ],
+          "numeric_stats": null
+        },
+        "location.school.testsHistory.3": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            8
+          ],
+          "numeric_stats": null
+        },
+        "location.school.testsHistory.4": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            8
+          ],
+          "numeric_stats": null
+        },
+        "location.school.testsHistory.5": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            8
+          ],
+          "numeric_stats": null
+        },
+        "location.school.testsHistory.6": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            8
+          ],
+          "numeric_stats": null
+        },
+        "location.school.testsHistory.7": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            8
+          ],
+          "numeric_stats": null
+        },
+        "location.school.testsHistory.8": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            8
+          ],
+          "numeric_stats": null
+        },
+        "location.school.testsHistory.9": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            8
+          ],
+          "numeric_stats": null
+        },
+        "location.school.testsHistory.10": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            8
+          ],
+          "numeric_stats": null
+        },
+        "location.school.testsHistory.11": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            8
+          ],
+          "numeric_stats": null
+        },
+        "location.school.ClassAction": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "Study"
+          ],
+          "numeric_stats": null
+        },
+        "questList.5.startedOrder": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": null
+        },
+        "questList.6.startedOrder": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": null
+        },
+        "questList.7.startedOrder": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": null
+        },
+        "questList.8.startedOrder": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            6
+          ],
+          "numeric_stats": null
+        },
+        "questList.16.startedOrder": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": null
+        },
+        "questList.17.startedOrder": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": null
+        },
+        "url": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "images//school/classroom/computerClass/computerTeacherHelp/computerTeacherHelp1.mp4"
+          ],
+          "numeric_stats": null
+        },
+        "clothingStoreCategory": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "casual"
+          ],
+          "numeric_stats": null
+        },
+        "nlTab": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "Newbie"
+          ],
+          "numeric_stats": null
+        },
+        "imagePath": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "images//tech/phone/instafame/selfies/swim1.webp"
+          ],
+          "numeric_stats": null
+        },
+        "location.church.opensAt": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "removed": 1
+          },
+          "before_values": [
+            "Morning"
+          ],
+          "after_values": [
+            null
+          ],
+          "numeric_stats": null
+        },
+        "location.movieTheater.opensAt": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "removed": 1
+          },
+          "before_values": [
+            "Morning"
+          ],
+          "after_values": [
+            null
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Wardrobe",
+      "to": "Bedroom",
+      "observation_count": 1,
+      "first_observed_ts": 1776594178836,
+      "last_observed_ts": 1776594178836,
+      "effect_aggregate": {
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            12
+          ],
+          "after_values": [
+            11
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -1,
+            "max_delta": -1,
+            "mean_delta": -1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Bedroom",
+      "to": "Roulette",
+      "observation_count": 1,
+      "first_observed_ts": 1776594201250,
+      "last_observed_ts": 1776594201250,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Stats"
+          ],
+          "after_values": [
+            "Bedroom"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            11
+          ],
+          "after_values": [
+            28
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 17,
+            "max_delta": 17,
+            "mean_delta": 17,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Roulette",
+      "to": "Roulette",
+      "observation_count": 7,
+      "first_observed_ts": 1776594216645,
+      "last_observed_ts": 1776594330090,
+      "effect_aggregate": {
+        "location.casino.betAmount": {
+          "count": 4,
+          "changes_count": 4,
+          "kinds": {
+            "changed": 4
+          },
+          "before_values": [
+            1,
+            100,
+            1,
+            100
+          ],
+          "after_values": [
+            100,
+            1,
+            100,
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 4,
+            "min_delta": -99,
+            "max_delta": 99,
+            "mean_delta": 0,
+            "always_same_delta": false
+          }
+        },
+        "game.random": {
+          "count": 3,
+          "changes_count": 3,
+          "kinds": {
+            "changed": 3
+          },
+          "before_values": [
+            28,
+            23,
+            5
+          ],
+          "after_values": [
+            23,
+            5,
+            17
+          ],
+          "numeric_stats": {
+            "sample_count": 3,
+            "min_delta": -18,
+            "max_delta": 12,
+            "mean_delta": -3.6667,
+            "always_same_delta": false
+          }
+        },
+        "location.casino.playerBetColor": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "red"
+          ],
+          "numeric_stats": null
+        },
+        "player.energy": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            90
+          ],
+          "after_values": [
+            100
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 10,
+            "max_delta": 10,
+            "mean_delta": 10,
+            "always_same_delta": true
+          }
+        },
+        "player.exhibitionism": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            15
+          ],
+          "after_values": [
+            20
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 5,
+            "max_delta": 5,
+            "mean_delta": 5,
+            "always_same_delta": true
+          }
+        },
+        "player.intelligence": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            20
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 20,
+            "max_delta": 20,
+            "mean_delta": 20,
+            "always_same_delta": true
+          }
+        },
+        "player.social": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            15
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 15,
+            "max_delta": 15,
+            "mean_delta": 15,
+            "always_same_delta": true
+          }
+        },
+        "player.corruption.level": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 3,
+            "max_delta": 3,
+            "mean_delta": 3,
+            "always_same_delta": true
+          }
+        },
+        "player.corruption.points": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2
+          ],
+          "after_values": [
+            30
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 28,
+            "max_delta": 28,
+            "mean_delta": 28,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Roulette",
+      "to": "Office",
+      "observation_count": 1,
+      "first_observed_ts": 1776594336475,
+      "last_observed_ts": 1776594336475,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Bedroom"
+          ],
+          "after_values": [
+            "Roulette"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            17
+          ],
+          "after_values": [
+            29
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 12,
+            "max_delta": 12,
+            "mean_delta": 12,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Office",
+      "to": "OfficeInterview",
+      "observation_count": 1,
+      "first_observed_ts": 1776594368499,
+      "last_observed_ts": 1776594368499,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Roulette"
+          ],
+          "after_values": [
+            "Office"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            29
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -27,
+            "max_delta": -27,
+            "mean_delta": -27,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "OfficeInterview",
+      "to": "OfficeInterview",
+      "observation_count": 2,
+      "first_observed_ts": 1776594375871,
+      "last_observed_ts": 1776594387985,
+      "effect_aggregate": {
+        "player.jobs.1.active": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "url": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "images//school/classroom/computerClass/computerTeacherHelp/computerTeacherHelp1.mp4"
+          ],
+          "after_values": [
+            "images//office/officeInterview/officeInterview6.mp4"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "OfficeInterview",
+      "to": "StripClub",
+      "observation_count": 1,
+      "first_observed_ts": 1776594400180,
+      "last_observed_ts": 1776594400180,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Office"
+          ],
+          "after_values": [
+            "OfficeInterview"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "StripClub",
+      "to": "StripClubInterview",
+      "observation_count": 1,
+      "first_observed_ts": 1776594471005,
+      "last_observed_ts": 1776594471005,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "OfficeInterview"
+          ],
+          "after_values": [
+            "StripClub"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2
+          ],
+          "after_values": [
+            28
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 26,
+            "max_delta": 26,
+            "mean_delta": 26,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "StripClubInterview",
+      "to": "StripClubInterviewStage",
+      "observation_count": 1,
+      "first_observed_ts": 1776594473254,
+      "last_observed_ts": 1776594473254,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "StripClub"
+          ],
+          "after_values": [
+            "StripClubInterview"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            28
+          ],
+          "after_values": [
+            13
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -15,
+            "max_delta": -15,
+            "mean_delta": -15,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "StripClubInterviewStage",
+      "to": "RestaurantInterviewSex",
+      "observation_count": 1,
+      "first_observed_ts": 1776594475436,
+      "last_observed_ts": 1776594475436,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "StripClubInterview"
+          ],
+          "after_values": [
+            "StripClubInterviewStage"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            13
+          ],
+          "after_values": [
+            18
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 5,
+            "max_delta": 5,
+            "mean_delta": 5,
+            "always_same_delta": true
+          }
+        },
+        "url": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "images//office/officeInterview/officeInterview6.mp4"
+          ],
+          "after_values": [
+            "images//restaurant/interview/interview1.mp4"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "RestaurantInterviewSex",
+      "to": "PhotoStudio",
+      "observation_count": 1,
+      "first_observed_ts": 1776594506393,
+      "last_observed_ts": 1776594506393,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "StripClubInterviewStage"
+          ],
+          "after_values": [
+            "RestaurantInterviewSex"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            18
+          ],
+          "after_values": [
+            15
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -3,
+            "max_delta": -3,
+            "mean_delta": -3,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "FilmStudio",
+      "to": "PhotoShoot",
+      "observation_count": 1,
+      "first_observed_ts": 1776594510367,
+      "last_observed_ts": 1776594510367,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "PhotoStudio"
+          ],
+          "after_values": [
+            "FilmStudio"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            14
+          ],
+          "after_values": [
+            13
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -1,
+            "max_delta": -1,
+            "mean_delta": -1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "PhotoShoot",
+      "to": "FilmAction",
+      "observation_count": 1,
+      "first_observed_ts": 1776594512274,
+      "last_observed_ts": 1776594512274,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "FilmStudio"
+          ],
+          "after_values": [
+            "PhotoShoot"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            13
+          ],
+          "after_values": [
+            25
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 12,
+            "max_delta": 12,
+            "mean_delta": 12,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "FilmAction",
+      "to": "ModelProposal",
+      "observation_count": 1,
+      "first_observed_ts": 1776594514284,
+      "last_observed_ts": 1776594514284,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "PhotoShoot"
+          ],
+          "after_values": [
+            "FilmAction"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            25
+          ],
+          "after_values": [
+            11
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -14,
+            "max_delta": -14,
+            "mean_delta": -14,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "ModelProposal",
+      "to": "PornstarProposal",
+      "observation_count": 1,
+      "first_observed_ts": 1776594516203,
+      "last_observed_ts": 1776594516203,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "FilmAction"
+          ],
+          "after_values": [
+            "ModelProposal"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            11
+          ],
+          "after_values": [
+            26
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 15,
+            "max_delta": 15,
+            "mean_delta": 15,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "PornstarProposal",
+      "to": "JimProposal",
+      "observation_count": 1,
+      "first_observed_ts": 1776594518254,
+      "last_observed_ts": 1776594518254,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "ModelProposal"
+          ],
+          "after_values": [
+            "PornstarProposal"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            26
+          ],
+          "after_values": [
+            21
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -5,
+            "max_delta": -5,
+            "mean_delta": -5,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "JimProposal",
+      "to": "RichardProposal",
+      "observation_count": 1,
+      "first_observed_ts": 1776594520092,
+      "last_observed_ts": 1776594520092,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "PornstarProposal"
+          ],
+          "after_values": [
+            "JimProposal"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            21
+          ],
+          "after_values": [
+            11
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -10,
+            "max_delta": -10,
+            "mean_delta": -10,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "RichardProposal",
+      "to": "ModelPhotoshoot",
+      "observation_count": 1,
+      "first_observed_ts": 1776594538465,
+      "last_observed_ts": 1776594538465,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "JimProposal"
+          ],
+          "after_values": [
+            "RichardProposal"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            11
+          ],
+          "after_values": [
+            13
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "ModelPhotoshoot",
+      "to": "SecondPhotoShoot",
+      "observation_count": 1,
+      "first_observed_ts": 1776594540898,
+      "last_observed_ts": 1776594540898,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "RichardProposal"
+          ],
+          "after_values": [
+            "ModelPhotoshoot"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            13
+          ],
+          "after_values": [
+            28
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 15,
+            "max_delta": 15,
+            "mean_delta": 15,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "SecondPhotoShoot",
+      "to": "ApartmentRent",
+      "observation_count": 1,
+      "first_observed_ts": 1776594551595,
+      "last_observed_ts": 1776594551595,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "ModelPhotoshoot"
+          ],
+          "after_values": [
+            "SecondPhotoShoot"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            28
+          ],
+          "after_values": [
+            4
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -24,
+            "max_delta": -24,
+            "mean_delta": -24,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "ApartmentRent",
+      "to": "ApartmentHall",
+      "observation_count": 1,
+      "first_observed_ts": 1776594568519,
+      "last_observed_ts": 1776594568519,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "SecondPhotoShoot"
+          ],
+          "after_values": [
+            "ApartmentRent"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            4
+          ],
+          "after_values": [
+            8
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 4,
+            "max_delta": 4,
+            "mean_delta": 4,
+            "always_same_delta": true
+          }
+        },
+        "properties.apartment.status": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "available"
+          ],
+          "after_values": [
+            "rented"
+          ],
+          "numeric_stats": null
+        },
+        "player.money": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            2045
+          ],
+          "after_values": [
+            1445
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -600,
+            "max_delta": -600,
+            "mean_delta": -600,
+            "always_same_delta": true
+          }
+        },
+        "player.location": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "School"
+          ],
+          "after_values": [
+            "Apartment"
+          ],
+          "numeric_stats": null
+        },
+        "player.residence.currentResidence": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "house"
+          ],
+          "after_values": [
+            "apartment"
+          ],
+          "numeric_stats": null
+        },
+        "player.residence.rentedProperties.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "apartment"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "ApartmentHall",
+      "to": "ApartmentHall",
+      "observation_count": 1,
+      "first_observed_ts": 1776594581506,
+      "last_observed_ts": 1776594581506,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "ApartmentHall",
+      "to": "PriestVisit",
+      "observation_count": 1,
+      "first_observed_ts": 1776594599410,
+      "last_observed_ts": 1776594599410,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "ApartmentRent"
+          ],
+          "after_values": [
+            "ApartmentHall"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            8
+          ],
+          "after_values": [
+            24
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 16,
+            "max_delta": 16,
+            "mean_delta": 16,
+            "always_same_delta": true
+          }
+        },
+        "url": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "images//restaurant/interview/interview1.mp4"
+          ],
+          "after_values": [
+            "images//church/priestVisit/priestVisit1.mp4"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "PriestVisit",
+      "to": "ConfessionSex",
+      "observation_count": 1,
+      "first_observed_ts": 1776594602091,
+      "last_observed_ts": 1776594602091,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "ApartmentHall"
+          ],
+          "after_values": [
+            "PriestVisit"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            24
+          ],
+          "after_values": [
+            6
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -18,
+            "max_delta": -18,
+            "mean_delta": -18,
+            "always_same_delta": true
+          }
+        },
+        "url": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "images//church/priestVisit/priestVisit1.mp4"
+          ],
+          "after_values": [
+            "images//church/confessionSex/confessionSex1.mp4"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "ConfessionSex",
+      "to": "ConfessionSex",
+      "observation_count": 1,
+      "first_observed_ts": 1776594614495,
+      "last_observed_ts": 1776594614495,
+      "effect_aggregate": {
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            6
+          ],
+          "after_values": [
+            24
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 18,
+            "max_delta": 18,
+            "mean_delta": 18,
+            "always_same_delta": true
+          }
+        },
+        "player.phone.instafame.account": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "player.phone.instafame.name": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "victoria_queen"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "ConfessionSex",
+      "to": "Instafame",
+      "observation_count": 1,
+      "first_observed_ts": 1776594620838,
+      "last_observed_ts": 1776594620838,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "PriestVisit"
+          ],
+          "after_values": [
+            "ConfessionSex"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "NakedLife",
+      "to": "NakedLife",
+      "observation_count": 1,
+      "first_observed_ts": 1776594648384,
+      "last_observed_ts": 1776594648384,
+      "effect_aggregate": {
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            6
+          ],
+          "after_values": [
+            8
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "player.pregnancy.isPregnant": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "player.pregnancy.days": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            21
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 21,
+            "max_delta": 21,
+            "mean_delta": 21,
+            "always_same_delta": true
+          }
+        },
+        "player.pregnancy.father.name": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "Alfred"
+          ],
+          "numeric_stats": null
+        },
+        "player.pregnancy.father.discovered": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "player.pregnancy.discovered": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "player.pregnancy.enabled": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "NakedLife",
+      "to": "HospitalBirth",
+      "observation_count": 1,
+      "first_observed_ts": 1776594650030,
+      "last_observed_ts": 1776594650030,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "ConfessionSex"
+          ],
+          "after_values": [
+            "NakedLife"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            8
+          ],
+          "after_values": [
+            16
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 8,
+            "max_delta": 8,
+            "mean_delta": 8,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "HospitalBirth",
+      "to": "HospitalBirth",
+      "observation_count": 4,
+      "first_observed_ts": 1776594668550,
+      "last_observed_ts": 1776594752933,
+      "effect_aggregate": {
+        "player.pregnancy.isPregnant": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            true
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "player.pregnancy.days": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            21
+          ],
+          "after_values": [
+            0
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -21,
+            "max_delta": -21,
+            "mean_delta": -21,
+            "always_same_delta": true
+          }
+        },
+        "player.pregnancy.father.name": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Alfred"
+          ],
+          "after_values": [
+            "Unknown"
+          ],
+          "numeric_stats": null
+        },
+        "player.pregnancy.father.discovered": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            true
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "player.pregnancy.discovered": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            true
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "player.baby.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            {
+              "name": "Baby",
+              "father": {
+                "name": "Alfred",
+                "discovered": true
+              },
+              "sex": "Female",
+              "days": 0
+            }
+          ],
+          "numeric_stats": null
+        }
+      }
     }
   ],
   "coverage": {
@@ -21240,6 +25081,6 @@
     "observed_static_edges": 29,
     "unobserved_static_edges": 467,
     "coverage_ratio": 0.0585,
-    "observed_only_edges": 70
+    "observed_only_edges": 77
   }
 }
