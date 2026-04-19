@@ -1,0 +1,82 @@
+{
+  "Menu": {
+    "first_ts": 1776582230330,
+    "visit_count": 1
+  },
+  "Bedroom": {
+    "first_ts": 1776582260104,
+    "visit_count": 17
+  },
+  "Hallway": {
+    "first_ts": 1776582361225,
+    "visit_count": 2
+  },
+  "Residential": {
+    "first_ts": 1776582409363,
+    "visit_count": 12
+  },
+  "Wardrobe": {
+    "first_ts": 1776582558016,
+    "visit_count": 9
+  },
+  "School": {
+    "first_ts": 1776582706850,
+    "visit_count": 3
+  },
+  "MathClass": {
+    "first_ts": 1776582726234,
+    "visit_count": 1
+  },
+  "ClassroomEvent": {
+    "first_ts": 1776582733598,
+    "visit_count": 1
+  },
+  "Library": {
+    "first_ts": 1776582767410,
+    "visit_count": 1
+  },
+  "Cafeteria": {
+    "first_ts": 1776582772779,
+    "visit_count": 1
+  },
+  "BusStop": {
+    "first_ts": 1776582808039,
+    "visit_count": 2
+  },
+  "Center": {
+    "first_ts": 1776582825994,
+    "visit_count": 5
+  },
+  "Restaurant": {
+    "first_ts": 1776582887466,
+    "visit_count": 1
+  },
+  "RestaurantInterview": {
+    "first_ts": 1776582895553,
+    "visit_count": 3
+  },
+  "RestaurantInterviewEnd": {
+    "first_ts": 1776582906500,
+    "visit_count": 1
+  },
+  "Kitchen": {
+    "first_ts": 1776582960533,
+    "visit_count": 2
+  },
+  "WashDishes": {
+    "first_ts": 1776582977219,
+    "visit_count": 2
+  },
+  "ApartmentKitchen": {
+    "first_ts": 1776582991957,
+    "visit_count": 2
+  },
+  "BedroomStudy": {
+    "first_ts": 1776583044910,
+    "visit_count": 8
+  },
+  "ApartmentBedroom": {
+    "first_ts": 1776583061559,
+    "visit_count": 4
+  }
+}
