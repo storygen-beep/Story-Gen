@@ -1,42 +1,14 @@
 {
   "Disclaimer": {
-    "first_ts": 1776534234407,
+    "first_ts": 1776579071556,
     "visit_count": 4
   },
-  "StartPage": {
-    "first_ts": 1776534249694,
-    "visit_count": 11
+  "HeistMenu": {
+    "first_ts": 1776579567364,
+    "visit_count": 5
   },
-  "QuickStart Menu": {
-    "first_ts": 1776534435196,
-    "visit_count": 4
-  },
-  "Home": {
-    "first_ts": 1776534503431,
-    "visit_count": 2
-  },
-  "Outskirts": {
-    "first_ts": 1776534515288,
-    "visit_count": 7
-  },
-  "Motor Vehicle Theft": {
-    "first_ts": 1776534557163,
-    "visit_count": 2
-  },
-  "Car Chase Lose": {
-    "first_ts": 1776534568487,
-    "visit_count": 2
-  },
-  "Harbor-Dark Alleys": {
-    "first_ts": 1776534643729,
-    "visit_count": 2
-  },
-  "Dark Alleys": {
-    "first_ts": 1776534654974,
-    "visit_count": 3
-  },
-  "Whiteboard": {
-    "first_ts": 1776534759361,
+  "Basement": {
+    "first_ts": 1776579952008,
     "visit_count": 2
   }
 }

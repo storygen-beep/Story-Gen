@@ -1,15 +1,15 @@
 # shady-deals — Exploration Report
 
-Generated: 2026-04-18T17:57:11.916Z
+Generated: 2026-04-19T06:26:37.211Z
 Source URL: https://mopoga.com/embed/shady-deals_022/
 
 ## Session Summary
 
-- Sessions run: 4
-- Total wall-clock: 41m 34s
-- Total clicks: 32
-- Total choices explored: 32
-- Unique states seen: 161
+- Sessions run: 5
+- Total wall-clock: 57m 0s
+- Total clicks: 34
+- Total choices explored: 34
+- Unique states seen: 195
 - Unexplored frontier (queued for next session): 0
 - Endings reached: 2 (Yacht Party Deals Final, Yacht Party Orgy Final)
 
@@ -23,10 +23,10 @@ Detected engine: **sugarcube** v(revive:eval),(function(){var prerelease=this.pr
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
 | `energy` | number | 6..6 | 0 | high |
-| `money` | number | 0..10000 | 1 | high |
-| `reputation` | number | 0..5184 | 2 | high |
+| `money` | number | 0..500000 | 1 | high |
+| `reputation` | number | 0..25000 | 1 | high |
 
-### body (7)
+### body (6)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
@@ -36,7 +36,6 @@ Detected engine: **sugarcube** v(revive:eval),(function(){var prerelease=this.pr
 | `body_3` | string | `3` | 0 | medium |
 | `hair_page` | number | 0..0 | 0 | medium |
 | `boobs_grab_yapping` | object | — | 0 | medium |
-| `pc_haircolor` | string | `brunette` | 0 | medium |
 
 ### flag (288)
 
@@ -47,13 +46,13 @@ Detected engine: **sugarcube** v(revive:eval),(function(){var prerelease=this.pr
 | `pc_nipple_piercing` | boolean | false | 0 | high |
 | `pc_navel_piercing` | boolean | false | 0 | high |
 | `gold_digger_tools` | boolean | false | 0 | high |
-| `gangs_base` | boolean | false, true | 1 | high |
-| `gangs_met` | number | 0..1 | 1 | medium |
-| `mafia_base` | boolean | false, true | 1 | high |
-| `mafia_met` | number | 0..1 | 1 | medium |
-| `cartel_base` | boolean | false, true | 1 | high |
-| `cartel_met` | number | 0..3 | 1 | medium |
-| `bikers_met` | number | 0..1 | 1 | medium |
+| `gangs_base` | boolean | false | 0 | high |
+| `gangs_met` | number | 0..0 | 0 | medium |
+| `mafia_base` | boolean | false | 0 | high |
+| `mafia_met` | number | 0..0 | 0 | medium |
+| `cartel_base` | boolean | false | 0 | high |
+| `cartel_met` | number | 0..0 | 0 | medium |
+| `bikers_met` | number | 0..0 | 0 | medium |
 | `hackers_met` | number | 0..0 | 0 | medium |
 | `strange_note_1` | boolean | false | 0 | high |
 | `strange_note_2` | boolean | false | 0 | high |
@@ -84,7 +83,7 @@ Detected engine: **sugarcube** v(revive:eval),(function(){var prerelease=this.pr
 | `news_milestone_2` | boolean | false | 0 | high |
 | … | … | … | … | and 248 more |
 
-### scalar (565)
+### scalar (563)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
@@ -95,7 +94,7 @@ Detected engine: **sugarcube** v(revive:eval),(function(){var prerelease=this.pr
 | `autosave_cd` | number | 3..3 | 0 | low |
 | `pc_photo_index` | number | 0..0 | 0 | low |
 | `daily_heal` | number | 8..8 | 0 | low |
-| `cun_base` | number | 3..6 | 1 | low |
+| `cun_base` | number | 3..3 | 0 | low |
 | `cun_mod_boss` | number | 0..0 | 0 | low |
 | `cun_scout_mod` | number | 0..0 | 0 | low |
 | `cun_arousal_mod` | number | 0..0 | 0 | low |
@@ -111,7 +110,7 @@ Detected engine: **sugarcube** v(revive:eval),(function(){var prerelease=this.pr
 | `energy_mod_boss` | number | 0..0 | 0 | low |
 | `energy_mod_car` | number | 0..0 | 0 | low |
 | `stam` | number | 6..6 | 0 | low |
-| `combat_base` | number | 3..7 | 1 | low |
+| `combat_base` | number | 3..3 | 0 | low |
 | `combat_mod_boss` | number | 0..0 | 0 | low |
 | `combat_mod_training` | number | 0..0 | 0 | low |
 | `combat_arousal_mod` | number | 0..0 | 0 | low |
@@ -128,9 +127,9 @@ Detected engine: **sugarcube** v(revive:eval),(function(){var prerelease=this.pr
 | `p_depravity` | number | 5..5 | 0 | low |
 | `heat` | number | 0..0 | 0 | low |
 | `gangs_heat` | number | 0..0 | 0 | low |
-| … | … | … | … | and 525 more |
+| … | … | … | … | and 523 more |
 
-### string (107)
+### string (105)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
@@ -144,9 +143,9 @@ Detected engine: **sugarcube** v(revive:eval),(function(){var prerelease=this.pr
 | `arousal_effects_setting` | string | `On` | 0 | low |
 | `arousal_text_setting` | string | `On` | 0 | low |
 | `boss_name` | string | `Boss` | 0 | low |
-| `adolesence` | string | ``, `Bully` | 1 | low |
-| `first_crime` | string | ``, `Robbery`, `Theft` | 2 | low |
-| `last_crime` | string | ``, `Burglary` | 1 | low |
+| `adolesence` | string | `` | 0 | low |
+| `first_crime` | string | `` | 0 | low |
+| `last_crime` | string | `` | 0 | low |
 | `dt_indoors` | string | `playful` | 0 | low |
 | `dt_outdoors` | string | `playful` | 0 | low |
 | `dt_group` | string | `playful` | 0 | low |
@@ -155,11 +154,11 @@ Detected engine: **sugarcube** v(revive:eval),(function(){var prerelease=this.pr
 | `player_text` | string | `player_pink` | 0 | low |
 | `rough_sex_attitude` | string | `ok` | 0 | low |
 | `weapon_equipped` | string | `Nothing` | 0 | low |
-| `city_name` | string | `Default Name`, `Skullduggery Springs` | 1 | low |
+| `city_name` | string | `Default Name` | 0 | low |
 | `nc_name` | string | `Swaying Bazongas` | 0 | low |
 | `boss_type` | string | `Bandit Boss` | 0 | low |
-| `band_name` | string | `Band`, `Dawg`, `The Syndicate` | 2 | low |
-| `original_band_name` | string | `Band`, `The Syndicate` | 1 | low |
+| `band_name` | string | `Band` | 0 | low |
+| `original_band_name` | string | `Band` | 0 | low |
 | `band_type` | string | `Street Gang` | 0 | low |
 | `right_hand.name` | string | `` | 0 | low |
 | `right_hand.nickname` | string | `` | 0 | low |
@@ -174,9 +173,9 @@ Detected engine: **sugarcube** v(revive:eval),(function(){var prerelease=this.pr
 | `equip.bottom.slot` | string | `bottom` | 0 | low |
 | `equip.bottom.pic` | string | `<img src=img/clothes` | 0 | low |
 | `equip.feet.item` | string | `Sneakers` | 0 | low |
-| … | … | … | … | and 67 more |
+| … | … | … | … | and 65 more |
 
-### misc (187)
+### misc (186)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
@@ -220,7 +219,7 @@ Detected engine: **sugarcube** v(revive:eval),(function(){var prerelease=this.pr
 | `job_fem_rich` | object | — | 0 | low |
 | `trait_downtown` | object | — | 0 | low |
 | `job_downtown` | object | — | 0 | low |
-| … | … | … | … | and 147 more |
+| … | … | … | … | and 146 more |
 
 ## NPCs detected
 
@@ -234,7 +233,6 @@ _No NPCs detected yet._
 - `body_3`
 - `hair_page`
 - `boobs_grab_yapping`
-- `pc_haircolor`
 
 
 ## Choice type distribution
@@ -270,9 +268,9 @@ Variables sharing a leading token — candidate entity groups (verify manually).
 - **gangs** (14): `gangs_heat`, `gangs_base`, `gangs_met`, `gangs_leaders_daily_sex`, `gangs_heat_event`, `gangs_racketeer`, …
 - **harbor** (13): `harbor_gangbang`, `harbor_stealing_from_cartel`, `harbor`, `harbor_spot_captured`, `harbor_spot_grace`, `harbor_spot_attacked`, …
 - **gold** (12): `gold_digger_tools`, `gold_digger`, `gold_digger_cd`, `gold_digger_sold`, `gold_rep_mod`, `gold_gd_price`, …
-- **outskirts** (12): `outskirts_checkpoint_known`, `outskirts_trade`, `outskirts_roadblock`, `outskirts_cars`, `outskirts_checkpoint_captured`, `outskirts_checkpoint_grace`, …
 - **scrap** (12): `scrap_shack`, `scrap_hands_amount`, `scrap_hand_productivity`, `scrap_shack_gunsmith`, `scrap_shack_gun_workbench_upgrade`, `scrap_shack_gunparts_upgrade_1`, …
 - **heist** (12): `heist_progress_mod`, `heist_progress`, `heist_progress_needed`, `heist_type`, `heist_difficulty`, `heist_mistakes`, …
+- **bank** (11): `bank_cd`, `bank_rebuilding`, `bank_heist_happened`, `bank_credit_1`, `bank_credit_1_paid`, `bank_credit_2`, …
 
 ## Sessions
 
@@ -282,20 +280,21 @@ Variables sharing a leading token — candidate entity groups (verify manually).
 | 2 | 2026-04-18T09:21:45.301Z | 14m 26s | 22 | 22 | 120 | no |
 | 3 | 2026-04-18T17:40:55.429Z | 2m 6s | 0 | 0 | 1 | no |
 | 4 | 2026-04-18T17:43:54.404Z | 13m 17s | 2 | 2 | 12 | yes |
+| 5 | 2026-04-19T06:11:11.553Z | 15m 26s | 2 | 2 | 3 | no |
 
 ## Graph coverage (observed vs. static)
 
 - Static-graph edges (every navigation parsed from passage source): **2120**
-- Observed edges during play: **23** unique `(from, clicked_text, to)` tuples.
-- Static edges covered by at least one observation: **41** (a single observation covers every static edge with the same `(from, to)` pair — gated branches collapse to one observable move).
-- Observed-only edges (no matching static edge, typically self-loop `<<link>>` wrappers that `<<replace>>` in-place): **5**.
-- Coverage: **1.93%** of the static graph explored.
-- Synthetic edges (Claude's out-of-band `eval`/`keys`/`restore`/`pop`): 137
+- Observed edges during play: **33** unique `(from, clicked_text, to)` tuples.
+- Static edges covered by at least one observation: **49** (a single observation covers every static edge with the same `(from, to)` pair — gated branches collapse to one observable move).
+- Observed-only edges (no matching static edge, typically self-loop `<<link>>` wrappers that `<<replace>>` in-place): **10**.
+- Coverage: **2.31%** of the static graph explored.
+- Synthetic edges (Claude's out-of-band `eval`/`keys`/`restore`/`pop`): 152
 
 ### Playable-content partition
 - Passages defined in source: **680** (0 tagged `wip`, 3 empty-body placeholder).
 - Implied playable (non-WIP, non-empty): **677**.
-- Distinct passages visited at least once: **10** — playable-passage coverage: **1.5%**.
+- Distinct passages visited at least once: **3** — playable-passage coverage: **0.4%**.
 
 ### Static edge kinds
 | kind | count |

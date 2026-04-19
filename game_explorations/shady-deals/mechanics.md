@@ -18,7 +18,7 @@ _Not detected._
 _Not detected._
 
 ### Body / appearance transformation
-**Present.** 7 body-like variable(s). Transitions: 0.
+**Present.** 6 body-like variable(s). Transitions: 0.
 
 ### Multi-NPC parallel threads
 _Not detected._
@@ -27,15 +27,8 @@ _Not detected._
 _Not detected._
 
 ## Scenes catalogued
-- Distinct passage names visited: 10 (the "Unique states seen" count in report.md includes variable-permutations of the same passage).
+- Distinct passage names visited: 3 (the "Unique states seen" count in report.md includes variable-permutations of the same passage).
 - Most-visited passages:
-  - `StartPage` × 11
-  - `Outskirts` × 7
+  - `HeistMenu` × 5
   - `Disclaimer` × 4
-  - `QuickStart Menu` × 4
-  - `Dark Alleys` × 3
-  - `Home` × 2
-  - `Motor Vehicle Theft` × 2
-  - `Car Chase Lose` × 2
-  - `Harbor-Dark Alleys` × 2
-  - `Whiteboard` × 2
+  - `Basement` × 2
