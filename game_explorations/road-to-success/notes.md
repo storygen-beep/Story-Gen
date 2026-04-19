@@ -344,3 +344,138 @@ Updated locations table:
 - `SugarCube.State.variables.X = val; SugarCube.Engine.show()` — mutate + re-render.
 - handleSubLocation('Key') — in-house + sub-location navigation (calls `SugarCube.Engine.play` internally; PostDisplay errors are non-fatal).
 - Sometimes a `<<button>>`-rendered macro UI doesn't fire on synthetic `.click()` (e.g. ClothingStore Buy buttons). Workaround: directly mutate `clothes.X.purchased = true; player.money -= price` via state edit when buying matters less than progress.
+- [2026-04-19T08:07:11.326Z] EXTENDED NPC SCHEDULE — Tuesday at Night (N): Dad=Bathroom, Brother=Living Room, Grandpa=Bedroom. So family rotates Bathroom→Bedroom for Dad (M=Work, N=Bathroom — preparing for sleep?). Brother goes School→Living Room→Bedroom. Grandpa Bedroom→Living Room→Bedroom. Veronica stays in Bar 24/7. Game.randomMoney: avg ~$22/Restaurant shift over 3 shifts ($66 total = 22 avg). +1 jobs.0.xp per shift.
+- [2026-04-19T08:07:11.440Z] TIME-BUCKET WORK SHIFT may skip multiple buckets when the player has high energy — 3 shifts went M→N (4 buckets, expected 3 advances to E). Need to verify if Work always +1 bucket or if it's variable based on time. Counter-evidence: shift 1 from Day 1 Bedroom EM→M was clean +1.
+- [2026-04-19T09:36:21.032Z] === SESSION 3 START === Resumed slot 1 (Day 2 Tuesday M). Direct-edited $2000 money + Phone purchased + FakeID purchased to bypass lengthy grind during exploration.
+- [2026-04-19T09:50:24.911Z] PHONE NAVIGATION (post-purchase, items.phone.purchased=true): Phone home grid renders 5-6 buttons via <<button>><<replace #phone-screen>> pattern — clicks are JS-handled inside SugarCube and DON'T trigger from CDP click() or HTMLElement.click(). Workaround: use SugarCube.Engine.play('FastJobs'/'Instafame'/'NakedLife'/'PornCenter'/'Messages') directly. All these are real passages.
+- [2026-04-19T09:50:25.023Z] FAST JOBS (post-Phone): UI shows XP-gated job grid. Dog Walking (0 XP) → Get Job → DogWalking passage (Cliente NPC asks to walk Rex, then Take Rex for a walk). House Cleaning needs 5 FastJobs XP, Baby Sitting/Elderly Care need 10. Phone XP separate from career xp.
+- [2026-04-19T09:50:25.130Z] BEDROOM with Phone owned: NEW button 'Masturbate 🍆' appears (gated on isPurchased('phone')). BedroomMasturbate scene: 5 linkreplace steps, +2 corruption.points, +1 player.statistics.masturbations, -10 energy, time stayed (no advance). Cumulative: corruption now 2.
+- [2026-04-19T09:50:25.236Z] TIME ADVANCE WIDGET (from ClassroomEvent source): Return button calls <<AddTime '2'>> + <<Energy -10>> — confirms time is hour-based internally with bucket boundaries. AddTime probably advances .hour with rollover into next bucket. Confirms: Restaurant Work probably calls AddTime with variable hours (3-6) which is why it sometimes spans buckets unevenly.
+- [2026-04-19T09:50:25.349Z] CLASSROOM EVENT BRANCH MATRIX (from source): Study auto-fires events on dice 1-3 if conditions match — TeaseBoyfriend (Marcus boyfriend + dice 2), ClassLactation (pregnant), ClassPregnancyReaction (visible belly + dice 3), ComputerClassEvent (from ComputerClass + dice 1). Socialize: FlashEventClassroom (dice 1), ThomasPartyDialog (dice 2 + ThomasParty quest), EscapeClassNatasha (dice 3 + PublicExhibitionism completed). Each Study/Socialize gives +Int or +Social via macros AddInt/AddSocial.
+- [2026-04-19T09:50:56.259Z] SCHOOL TEST/GRADUATION FLOW: Force-played SchoolTest renders 'YOUR SCORE IS: 0/10, Tests Completed: 0/12, Average Grade: 0'. Branches: grade<6 + Tutoring quest fresh → Mr. Thompson 'Hey, come to my desk' → TutoringEvent (afternoon office tutoring sets up corruption hook). grade≥8 + (Marcus boyfriend) → study at Marcus's place + UnlockLocation marcusHouse + StartQuest StudyWithMarcus. SchoolGraduation gated by 12 tests (canGraduate). SchoolFinalExam gated by '12 completed tests with average BELOW 6.0' — alternate failure-route ending.
+- [2026-04-19T09:50:56.373Z] TECH STORE corruption ladder ('Ask for Discount'): DiscountSex passage with Strange (photographer cover). Tier 1 = 5% discount for photos, Tier 2 = 10% for less clothes. Each tier asks for more (corruption ladder via consensual progression). Player can refuse via 'I can't do this 😓' (linkreplace). PHARMACY: Pregnancy Test $12, Contraceptive Pill $8 (no corruption gate). MOVIE THEATER 'Watch a Movie': costs $20, time stayed M, no time advance — pure money sink/relaxation. JETSKI Beach: silent fail (likely needs swim clothes equipped).
+- [2026-04-19T09:50:56.500Z] PASSAGE CATALOG SCAN reveals 358 total passages. Notable categories not yet visited: BusRandomEvent (3-roll: grope/flash/help-masturbating-stranger — exhibitionism transit events), CarWashChallenge (NakedLife stage), DarkAlleyRape1 (gangster scene), EmmaInvite/EmmaPlay/EmmaBathroom/EmmaBedroom/EmmaHallway (Emma is a school friend with full home content), MarcusBathroom/MarcusBedroom/MarcusParkDate/SecondDate (Marcus dating arc), HouseRob + HouseRobPrison (criminal/prison failure-route), JoinVipersEnd + VipersClean (gang ladder), JamalPoolGangbang/PoliceParkGangbang/RestaurantGangbang/ParkGangbang (high-corruption events), VeronicaCostumeParty (Bar quest), TutoringEvent + TeacherTutoring + AdditionalLesson (teacher corruption arc), Birth + Abortion + HospitalBirth (pregnancy outcomes), PriestVisit + ConfessionSex (Priest corruption inversion). 358-passage scope means this is a 100+ hour game.
+- [2026-04-19T09:51:20.048Z] BAR JOB FLOW (E-gated venue, BarBoss interview): No branched choice (unlike Restaurant which has Answer/Seduce). Single-text scene awards Bartender job (jobs[2].active=true). Bar then renders Drink/Socialize/Work/Quit job/City Center menu (mirrors Restaurant). 2nd career active concurrently with Waiter. Confirmed: multiple jobs work in parallel — player can hold all 4 (Waiter+Secretary+Bartender+Stripper) simultaneously.
+- [2026-04-19T09:51:20.161Z] BANK ACCOUNT FULL UI: Open Bank Account → text input + Deposit/Withdraw + quick amounts ($100/$500/All). 1% daily interest. Money flows freely between cash and account. Use fill --index 0 --value 'N' then click 'Deposit'/'Withdraw'.
+- [2026-04-19T09:51:20.265Z] FAKE ID + GRADUATION GATING: Both Casino + StripClub reject 'even with fake ID' — actual gate is graduation (school must be completed first). Same gate as Office and DrivingSchool. Confirmed: graduation is the major mid-game milestone unlocking adult-content venues, professional career, and driving. Fake ID alone gives club-bouncer access to underage Quest 26 (Strange's offer at AbandonedBuilding) but doesn't bypass the venue check.
+- [2026-04-19T09:51:20.386Z] CHURCH MECHANICS: Pray (-1 corruption.points each call) AND Confess (advances time bucket E→N + does NOT reset corruption). Church serves as the corruption purge counter-balance. Pray cost: 0. Confessional cost: 1 time bucket. Use Pray to undo masturbate gains, use Confess for time-skip without sleep.
+
+# Session 3 — system deep-dive (Day 2-3, Phone unlocked, careers + finance + church + Phase 3)
+
+## Bucket-by-bucket NPC schedule (FAMILY, observed across EM/M/A/N — Tuesday/Wednesday)
+
+| NPC | EM | M | A | N (Night) |
+|---|---|---|---|---|
+| Alfred (Dad) | Kitchen | **Work** | **Work** | **Bathroom** (then Bedroom @ LN?) |
+| Robert (Brother) | Bathroom | **School** | **School** | **Living Room** (then Bedroom @ LN?) |
+| William (Grandpa) | Bedroom | **Living Room** | **Kitchen** | **Bedroom** |
+
+Static (always in same location regardless of bucket):
+- Mr. Thompson, Coach (Mr. Williams), Janitor (Mr. Wilson), ComputerTeacher (Mr. Henry), Marcus, Emma, Maya, Thomas, Natasha → School
+- Boss, Michael, Susan → Restaurant
+- Veronica, BarBoss → Bar
+- Strange → Park
+- StrangeBBC → Center
+
+Note: Restaurant Work shifts may advance time +1 to +2 buckets unevenly — confirmed by hour-based `<<AddTime '2'>>` widget visible in ClassroomEvent source. SugarCube tracks `$game.hour` internally; bucket transitions happen at threshold hours.
+
+## Career system (player.jobs[])
+
+| Job | id | Location | Req | Acquire | Income | XP/shift | Time |
+|---|---|---|---|---|---|---|---|
+| Waiter | 1 | Restaurant | Open intro quest | Apply → "Answer right" (Intel) or "Seduce boss" (corr-gated) | $15-30 random | +1 | varies |
+| Secretary | 2 | Office | After graduation | (untested — graduation-locked) | — | — | — |
+| Bartender | 3 | Bar | None observed | Apply at Bar (E only) — single-text | (untested) | — | E? |
+| Stripper | 4 | StripClub | After graduation + fakeID | (untested — graduation-locked) | — | — | E/N? |
+
+Multiple jobs can be active concurrently. Each Restaurant Work randomly produces income via `game.randomMoney`. After hire, venue menu changes from `Eat / Apply` to `Eat / Work / Change Clothes / Quit job`.
+
+## Phone subsystem (player.phone, requires items.phone.purchased=true)
+
+Phone passage opens a fixed UI with `<<button>><<replace #phone-screen>>` macros. Apps are real passages — navigate with `SugarCube.Engine.play(<App>)`:
+
+| App | Passage | Purpose |
+|---|---|---|
+| Messages | `Messages` | Per-NPC threads (empty until quest interactions) |
+| Quests | `Quests` (modal) | Quest journal mirror |
+| Fast Jobs | `FastJobs` | XP-gated sidegig grid (DogWalking/HouseCleaning/BabySitting/ElderlyCare) |
+| Statistics | `Statistics` | Sex/money stats viewer |
+| Bank | `Bank` (or Phone overlay) | Account management mirror |
+| Instafame | `Instafame` | Selfie poster + follower count + DMs (account opt-in needed) |
+| NakedLife | `NakedLife` | 13 exhibitionism challenges, 4 ranks, EXP gating |
+| PornCenter | `PornCenter` | 5 sites with corruption-gain + corruption-required gates (5/5/10/15/20) |
+
+## Income / financial system
+
+| Source | Amount | Frequency | Mechanic |
+|---|---|---|---|
+| Restaurant Waiter | $15-30 | per shift | game.randomMoney |
+| Bartender | TBD | per shift | TBD |
+| Fast Jobs | $45-110 | per gig | XP-gated |
+| Bank interest | 1% | daily | on bank.balance |
+| Laundry | -20% cut | per launder | converts dirtyMoney→money, "magically lower on weekends" |
+| WeeklyAllowance | TBD | day 7 (Sunday?) | from Phase 3 reachable hint |
+
+Money buckets: `player.money` (cash), `player.dirtyMoney` (criminal gains), `player.bank.balance`. Laundry path needed before depositing crime money.
+
+## Drug system
+
+`player.inventory.weed/cocaine/heroin` count items purchased. `player.drugs` tracks: drugAddiction, abstinence (days), duration, drug (current), withdrawn (boolean), onDrugs (boolean), modifiers per stat (energy, arousal, social, intelligence, fitness, beauty, corruptionLevel).
+
+Buy at AbandonedBuilding → BuyDrugs passage. Prices: Weed $18, Cocaine $90, Heroin $170. Use mechanic not yet found (no SmokeWeed/UseDrug passages exist) — likely consumed via inventory UI button or per-passage prompts when conditions match.
+
+## Quest progression matrix (extended)
+
+| Quest | Trigger | Status after S3 | Notes |
+|---|---|---|---|
+| FirstDayOfSchool | Day 1 EM | Completed Day 1 | Auto |
+| INeedMoney | Day 1 EM | Completed Day 1 | Auto on Waiter accept |
+| SchoolTest | Day 1 + School visit | Active | Test only triggers on calendar day; tests counted in `location.school.testsCompleted` (12 needed for graduation) |
+| MathHomework | Day 1 + School visit | Active | Delivered Day 2; deepens via Tutoring corruption route |
+| Promotion | Day 1 + Waiter hire | Active | Work shifts +xp toward rank promotion |
+| Tutoring | Day 1+ if grade<6 | Pending start | StartQuest fires when "Go to teacher desk" clicked from SchoolTest screen |
+| StudyWithMarcus | Day 1+ if grade≥8 | Pending start | StartQuest + UnlockLocation marcusHouse |
+| FakeId (#26) | After Club bouncer rejection | Active | Quest text: "I should go to the club and show it to the bouncer" — Strange offer at AbandonedBuilding |
+
+## Static graph stats
+
+- 358 total passages in the game (per `passage_catalog.json`).
+- ~50 NPCs in `npc.*` tree, each with 5-25 scenes encoded in `npc[K].scenes[id]`.
+- ~13 location-anchored scenes per major location (`location.X.scenes[id]`).
+- Total scene IDs reach 60+ — game has ~200+ unique sex/event scenes encoded as queryable state.
+
+## Notable passages from catalog (untested by Claude this run, named for future sessions)
+
+- **Bus events**: BusRandomEvent (random-3 grope/flash/help-stranger transit events)
+- **Marcus arc**: MarcusBathroom, MarcusBedroom, MarcusParkDate, SecondDate, BathroomSurpriseMarcusBoyfriend, CaughtMasturbatingMarcusBoyfriend (Marcus dating + boyfriend route)
+- **Emma arc**: EmmaInvite, EmmaPlay, EmmaBathroom, EmmaBedroom, EmmaHallway (Emma friend home content)
+- **Pregnancy outcomes**: Birth, Abortion, HospitalBirth, HospitalPregnancyTest, BedroomStudyBrotherGropePregnant, DadShowerSexPregnant, DadWashDishesSexPregnant, JoggingSexPregnant, MarcusBedroomSexPregnant, PlayingGamesSexPregnant, SecretAdmirerPregnant
+- **Crime arc**: HouseRob, HouseRobPrison (failure-route prison sentence)
+- **Gang arc**: Vipers, JoinVipers, JoinVipersEnd, VipersClean
+- **Gangbang scenes**: JamalPoolGangbang, PoliceParkGangbang, RestaurantGangbang, ParkGangbang
+- **Party arc**: ThomasParty, ThomasPartyDance, ThomasPartyDrink, ThomasPartyPongSex, ThomasPartyPool, ThomasPartySpinTheBottle (Friday party with multiple branches), VeronicaCostumeParty
+- **Teacher arc**: TutoringEvent, TeacherTutoring, TeacherSecretFetish, AdditionalLesson
+- **Street events**: DarkAlleyRape1 (gangster random), MovieTheaterGrope1/2, BedroomGrope, BedroomStudyDadGrope, BedroomStudyBrotherGrope
+- **Priest inversion**: PriestVisit, ConfessionSex (corruption-route despite being at Church)
+- **Gallery cheats**: GalleryPatreon, GalleryPatreonCode (Patreon-locked content)
+
+## Save/load update
+
+| Slot | Description | When | State |
+|---|---|---|---|
+| Auto Slot | (auto-save by Phase 0a) | Day 1 EM | Pre-Wardrobe |
+| Manual slot 0 | "TwineExplorer Day1" | Day 1 EM, intel 5, school1 | Pre-job |
+| Manual slot 1 | "TwineExplorer Day2 Tuesday" | Day 2 EM | Day 2 setup |
+| Manual slot 2 | "TwineExplorer Day3 Wed Phone+Bank+FakeID" | Day 3 Wed | Phone/Bank/FakeID acquired, Bartender hired, Bedroom Masturbate scene unlocked |
+
+## Phase 0 + Phase 3 + chrome navigation tricks consolidated
+
+- **Time advance**: Restaurant Work (1-2 buckets/shift, depends on hour), Confess (1 bucket), BedroomSleep at N/LN (advance day, restore energy). NoEnergy (energy=0) auto-routes through forced sleep.
+- **Time NOT advanced**: Bedroom Study, MathClass Study, ParkJog, Movie watch, Wash Dishes, Eat — these only consume energy.
+- **State edits**: `SugarCube.State.variables.player.money = N`, `player.energy = 100`, `items.X.purchased = true`, `player.inventory.X = N`, `clothes.X.purchased = true; clothes.X.isDefault = true; player.clothing = clothes.X`. All require `SugarCube.Engine.show()` to re-render.
+- **Phone navigation**: Skip the Phone modal — go directly via `SugarCube.Engine.play('FastJobs'/'Instafame'/'NakedLife'/'PornCenter'/'Messages')`.
+- **Force passage**: `SugarCube.Engine.play('PassageName')` bypasses gates. Useful for graduation-locked venues.
+- **In-house location grid**: `handleSubLocation('Kitchen')` (or any room key in the family-house cycle) navigates with the location service.
+- **City image grid**: most `<a href="javascript:void(0);">` city tiles lack onclick — fall back to `Engine.play(passageName)`.
+- **Linkreplace cascades** (long scenes): use `[...document.querySelectorAll('.passage a.macro-linkreplace')][0].click()` in a JS loop with `await new Promise(r=>setTimeout(r,300))` to step through.
+- **Save manager**: 4 Load buttons (auto + 3 manuals at xy 951,572 / 951,658 / 951,744 if 3 saves). Use specific xy for the desired slot.

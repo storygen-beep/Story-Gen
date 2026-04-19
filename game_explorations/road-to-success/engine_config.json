@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-04-19T07:28:14.884Z",
+  "captured_at": "2026-04-19T09:35:38.193Z",
   "engine": "sugarcube",
   "version": {
     "name": "SugarCube",
@@ -121,7 +121,7 @@
     "has_deserialize": true,
     "has_slots": true,
     "has_autosave": true,
-    "slot_count": 1,
+    "slot_count": 2,
     "on_save_handlers": 0,
     "on_load_handlers": 0,
     "slots_metadata": [
@@ -133,12 +133,21 @@
         "date": "2026-04-19T07:18:45.879Z",
         "description": null,
         "metadata": null
+      },
+      {
+        "index": 1,
+        "empty": false,
+        "id": "road-to-success-",
+        "title": null,
+        "date": "2026-04-19T07:57:31.026Z",
+        "description": null,
+        "metadata": null
       }
     ],
     "autosave_metadata": {
       "id": "road-to-success-",
       "title": null,
-      "date": "2026-04-19T07:03:52.995Z",
+      "date": "2026-04-19T08:15:49.892Z",
       "description": null
     }
   }

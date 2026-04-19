@@ -1,226 +1,146 @@
 {
   "Menu": {
-    "first_ts": 1776583694923,
-    "visit_count": 9
-  },
-  "Bedroom": {
-    "first_ts": 1776583809921,
-    "visit_count": 11
-  },
-  "DadBedroom": {
-    "first_ts": 1776583930936,
-    "visit_count": 2
-  },
-  "BrotherBedroom": {
-    "first_ts": 1776583943932,
-    "visit_count": 2
-  },
-  "GrandpaBedroom": {
-    "first_ts": 1776583946285,
-    "visit_count": 6
-  },
-  "LivingRoom": {
-    "first_ts": 1776583948501,
-    "visit_count": 2
-  },
-  "Garage": {
-    "first_ts": 1776583950742,
-    "visit_count": 2
-  },
-  "Bathroom": {
-    "first_ts": 1776583952841,
+    "first_ts": 1776591338216,
     "visit_count": 4
   },
-  "BathroomShower": {
-    "first_ts": 1776584028942,
+  "JoinVipers": {
+    "first_ts": 1776591353051,
     "visit_count": 1
   },
-  "ApartmentBathroom": {
-    "first_ts": 1776584045123,
-    "visit_count": 3
+  "Bedroom": {
+    "first_ts": 1776591354737,
+    "visit_count": 9
   },
-  "Kitchen": {
-    "first_ts": 1776584102272,
-    "visit_count": 1
+  "Phone": {
+    "first_ts": 1776591381891,
+    "visit_count": 12
   },
-  "KitchenEat": {
-    "first_ts": 1776584104034,
-    "visit_count": 1
+  "FastJobs": {
+    "first_ts": 1776591532541,
+    "visit_count": 4
   },
-  "ApartmentKitchen": {
-    "first_ts": 1776584120066,
-    "visit_count": 1
-  },
-  "Restaurant": {
-    "first_ts": 1776584121814,
-    "visit_count": 3
-  },
-  "RestaurantInterview": {
-    "first_ts": 1776584124001,
-    "visit_count": 1
-  },
-  "RestaurantInterviewEnd": {
-    "first_ts": 1776584126090,
-    "visit_count": 1
-  },
-  "RestaurantWork": {
-    "first_ts": 1776584151191,
-    "visit_count": 3
-  },
-  "Mall": {
-    "first_ts": 1776584231619,
+  "DogWalking": {
+    "first_ts": 1776591570517,
     "visit_count": 2
   },
-  "ClothingStore": {
-    "first_ts": 1776584240379,
-    "visit_count": 13
-  },
-  "Park": {
-    "first_ts": 1776584523229,
-    "visit_count": 7
-  },
-  "ParkJog": {
-    "first_ts": 1776584569848,
-    "visit_count": 3
-  },
-  "Apartment": {
-    "first_ts": 1776584597022,
-    "visit_count": 3
-  },
-  "ApartmentRent": {
-    "first_ts": 1776584621831,
+  "Instafame": {
+    "first_ts": 1776591584354,
     "visit_count": 2
   },
-  "LightningKidnapping": {
-    "first_ts": 1776584631400,
-    "visit_count": 26
+  "NakedLife": {
+    "first_ts": 1776591586343,
+    "visit_count": 2
+  },
+  "PornCenter": {
+    "first_ts": 1776591588038,
+    "visit_count": 2
+  },
+  "Messages": {
+    "first_ts": 1776591589560,
+    "visit_count": 3
+  },
+  "TechStore": {
+    "first_ts": 1776591631105,
+    "visit_count": 3
+  },
+  "Pharmacy": {
+    "first_ts": 1776591633269,
+    "visit_count": 2
+  },
+  "BeachSwim": {
+    "first_ts": 1776591635340,
+    "visit_count": 2
+  },
+  "BeachSunbathe": {
+    "first_ts": 1776591637115,
+    "visit_count": 2
+  },
+  "BeachExplore": {
+    "first_ts": 1776591638960,
+    "visit_count": 2
+  },
+  "MovieTheater": {
+    "first_ts": 1776591640850,
+    "visit_count": 3
+  },
+  "PoolSwim": {
+    "first_ts": 1776591642822,
+    "visit_count": 4
+  },
+  "DiscountSex": {
+    "first_ts": 1776591659329,
+    "visit_count": 1
+  },
+  "MovieTheaterMovie": {
+    "first_ts": 1776591674287,
+    "visit_count": 5
+  },
+  "BedroomMasturbate": {
+    "first_ts": 1776591751217,
+    "visit_count": 3
+  },
+  "ApartmentBedroom": {
+    "first_ts": 1776591777270,
+    "visit_count": 4
+  },
+  "MathClass": {
+    "first_ts": 1776591821261,
+    "visit_count": 8
+  },
+  "HistoryClass": {
+    "first_ts": 1776591834708,
+    "visit_count": 2
+  },
+  "ComputerClass": {
+    "first_ts": 1776591836435,
+    "visit_count": 2
+  },
+  "SchoolGym": {
+    "first_ts": 1776591838154,
+    "visit_count": 2
+  },
+  "EmptyClass": {
+    "first_ts": 1776591840431,
+    "visit_count": 2
   },
   "NoEnergy": {
-    "first_ts": 1776584939659,
+    "first_ts": 1776591858129,
     "visit_count": 2
   },
   "BedroomSleep": {
-    "first_ts": 1776584957366,
+    "first_ts": 1776591865599,
     "visit_count": 1
   },
-  "School": {
-    "first_ts": 1776585121341,
-    "visit_count": 5
-  },
-  "MathClass": {
-    "first_ts": 1776585147882,
+  "SchoolTest": {
+    "first_ts": 1776591987907,
     "visit_count": 2
   },
-  "MathHomework": {
-    "first_ts": 1776585156655,
-    "visit_count": 2
-  },
-  "BusStop": {
-    "first_ts": 1776585198508,
-    "visit_count": 1
-  },
-  "Elite": {
-    "first_ts": 1776585199798,
-    "visit_count": 2
-  },
-  "Ghetto": {
-    "first_ts": 1776585209743,
-    "visit_count": 2
-  },
-  "Church": {
-    "first_ts": 1776585221530,
-    "visit_count": 2
-  },
-  "DarkAlley": {
-    "first_ts": 1776585223052,
-    "visit_count": 2
-  },
-  "AbandonedBuilding": {
-    "first_ts": 1776585224478,
-    "visit_count": 2
-  },
-  "Laundry": {
-    "first_ts": 1776585226093,
-    "visit_count": 2
-  },
-  "Office": {
-    "first_ts": 1776585240151,
-    "visit_count": 2
-  },
-  "Bank": {
-    "first_ts": 1776585241687,
-    "visit_count": 2
-  },
-  "PoliceStation": {
-    "first_ts": 1776585243129,
-    "visit_count": 2
-  },
-  "Hospital": {
-    "first_ts": 1776585244613,
-    "visit_count": 2
-  },
-  "GasStation": {
-    "first_ts": 1776585245966,
-    "visit_count": 2
-  },
-  "DrivingSchool": {
-    "first_ts": 1776585247292,
-    "visit_count": 2
-  },
-  "MarcusHouse": {
-    "first_ts": 1776585248918,
+  "TutoringEvent": {
+    "first_ts": 1776591999928,
     "visit_count": 2
   },
   "Beach": {
-    "first_ts": 1776585249990,
-    "visit_count": 2
-  },
-  "Pool": {
-    "first_ts": 1776585251540,
-    "visit_count": 2
-  },
-  "Gym": {
-    "first_ts": 1776585253214,
-    "visit_count": 3
-  },
-  "ThomasParty": {
-    "first_ts": 1776585305336,
-    "visit_count": 2
-  },
-  "StripClub": {
-    "first_ts": 1776585306687,
-    "visit_count": 2
-  },
-  "Bar": {
-    "first_ts": 1776585308194,
-    "visit_count": 2
-  },
-  "Casino": {
-    "first_ts": 1776585309800,
-    "visit_count": 2
-  },
-  "PhotoStudio": {
-    "first_ts": 1776585311037,
-    "visit_count": 2
-  },
-  "FilmStudio": {
-    "first_ts": 1776585312199,
-    "visit_count": 2
-  },
-  "JoinVipers": {
-    "first_ts": 1776585313462,
-    "visit_count": 7
-  },
-  "Instafame": {
-    "first_ts": 1776585314971,
-    "visit_count": 2
-  },
-  "ClandestineClinic": {
-    "first_ts": 1776585316468,
+    "first_ts": 1776592034677,
     "visit_count": 2
   },
   "Marina": {
-    "first_ts": 1776585317820,
-    "visit_count": 3
+    "first_ts": 1776592037450,
+    "visit_count": 2
+  },
+  "SchoolGraduation": {
+    "first_ts": 1776592070354,
+    "visit_count": 2
+  },
+  "SchoolFinalExam": {
+    "first_ts": 1776592072480,
+    "visit_count": 2
+  },
+  "Selfie": {
+    "first_ts": 1776592074613,
+    "visit_count": 2
+  },
+  "LaunderMoney": {
+    "first_ts": 1776592076532,
+    "visit_count": 5
   }
 }
