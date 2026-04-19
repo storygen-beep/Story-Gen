@@ -4,9 +4,9 @@
       "object"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "label": "misc",
     "label_confidence": "low",
     "tags": []
@@ -16,11 +16,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 8,
       "max": 8,
@@ -38,11 +38,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -60,11 +60,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -82,11 +82,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0.49,
       "max": 0.49,
@@ -104,11 +104,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -126,9 +126,9 @@
       "object"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "label": "misc",
     "label_confidence": "low",
     "tags": []
@@ -138,9 +138,9 @@
       "object"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "label": "misc",
     "label_confidence": "low",
     "tags": []
@@ -150,11 +150,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -172,9 +172,9 @@
       "object"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "label": "body",
     "label_confidence": "medium",
     "tags": [
@@ -186,11 +186,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -208,11 +208,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -230,11 +230,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -252,11 +252,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -274,11 +274,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -295,12 +295,11 @@
     "types": [
       "string"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 0,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
-      "female",
       "male"
     ],
     "label": "string",
@@ -311,12 +310,11 @@
     "types": [
       "string"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 0,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
-      "she",
       "he"
     ],
     "label": "string",
@@ -327,12 +325,11 @@
     "types": [
       "string"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 0,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
-      "her",
       "him"
     ],
     "label": "string",
@@ -343,12 +340,11 @@
     "types": [
       "string"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 0,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
-      "her",
       "his"
     ],
     "label": "string",
@@ -359,12 +355,11 @@
     "types": [
       "string"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 0,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
-      "herself",
       "himself"
     ],
     "label": "string",
@@ -375,12 +370,11 @@
     "types": [
       "string"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 0,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
-      "her",
       "his"
     ],
     "label": "string",
@@ -391,12 +385,11 @@
     "types": [
       "string"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 0,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
-      "she's",
       "he's"
     ],
     "label": "string",
@@ -407,12 +400,11 @@
     "types": [
       "string"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 0,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
-      "woman",
       "man"
     ],
     "label": "string",
@@ -423,12 +415,11 @@
     "types": [
       "string"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 0,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
-      "girlfriend",
       "boyfriend"
     ],
     "label": "string",
@@ -439,19 +430,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 6,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 7,
-      "min": 0.05,
-      "max": 0.625,
+      "count": 170,
+      "unique_count": 2,
+      "min": 0.1,
+      "max": 0.3,
       "first": 0.3,
       "last": 0.1,
       "is_monotonic_increasing": false,
-      "is_boolean_like": false
+      "is_boolean_like": true
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -462,9 +453,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
       "boyfriend"
     ],
@@ -477,9 +468,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       true
     ],
@@ -495,16 +486,16 @@
       "number"
     ],
     "mutation_count": 10,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 11,
       "min": 0,
-      "max": 95,
+      "max": 111,
       "first": 0,
-      "last": 95,
+      "last": 111,
       "is_monotonic_increasing": true,
       "is_boolean_like": false
     },
@@ -517,9 +508,9 @@
       "object"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "label": "misc",
     "label_confidence": "low",
     "tags": []
@@ -528,12 +519,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -546,9 +538,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -562,19 +554,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 3,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 2,
+      "count": 170,
+      "unique_count": 4,
       "min": 0,
-      "max": 8,
+      "max": 11,
       "first": 0,
-      "last": 8,
+      "last": 11,
       "is_monotonic_increasing": true,
-      "is_boolean_like": true
+      "is_boolean_like": false
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -585,9 +577,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
       "unopened"
     ],
@@ -600,9 +592,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
       "unopened"
     ],
@@ -615,9 +607,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false,
       true
@@ -633,11 +625,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -655,9 +647,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -671,12 +663,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -689,9 +682,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -707,11 +700,11 @@
       "number"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 2,
       "min": 0,
       "max": 1,
@@ -729,9 +722,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -746,9 +739,9 @@
       "string"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
       "none",
       "zackApt"
@@ -762,11 +755,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -783,18 +776,18 @@
     "types": [
       "number"
     ],
-    "mutation_count": 2,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 3,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 3,
-      "min": 30,
+      "count": 170,
+      "unique_count": 4,
+      "min": 20,
       "max": 70,
       "first": 30,
-      "last": 70,
-      "is_monotonic_increasing": true,
+      "last": 20,
+      "is_monotonic_increasing": false,
       "is_boolean_like": false
     },
     "label": "scalar",
@@ -805,19 +798,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 7,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 8,
+      "count": 170,
+      "unique_count": 2,
       "min": 0,
       "max": 100,
       "first": 100,
       "last": 0,
       "is_monotonic_increasing": false,
-      "is_boolean_like": false
+      "is_boolean_like": true
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -827,19 +820,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 9,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 10,
+      "count": 170,
+      "unique_count": 2,
       "min": 0,
       "max": 178,
       "first": 0,
       "last": 178,
       "is_monotonic_increasing": true,
-      "is_boolean_like": false
+      "is_boolean_like": true
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -849,19 +842,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 5,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 5,
+      "count": 170,
+      "unique_count": 2,
       "min": 0,
-      "max": 100,
+      "max": 10,
       "first": 0,
       "last": 10,
-      "is_monotonic_increasing": false,
-      "is_boolean_like": false
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -871,17 +864,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 17,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 5,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 18,
+      "count": 170,
+      "unique_count": 6,
       "min": 0,
-      "max": 15001,
+      "max": 20000,
       "first": 0,
-      "last": 5188,
+      "last": 19653,
       "is_monotonic_increasing": false,
       "is_boolean_like": false
     },
@@ -895,17 +888,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 1,
+      "count": 170,
+      "unique_count": 2,
       "min": 0,
-      "max": 0,
+      "max": 70,
       "first": 0,
-      "last": 0,
+      "last": 70,
       "is_monotonic_increasing": true,
       "is_boolean_like": true
     },
@@ -918,9 +911,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
       "Josephine"
     ],
@@ -933,13 +926,13 @@
       "string"
     ],
     "mutation_count": 3,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
       "No job",
-      "cafe",
-      "alley"
+      "alley",
+      "office"
     ],
     "label": "string",
     "label_confidence": "low",
@@ -950,11 +943,11 @@
       "number"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 2,
       "min": 0,
       "max": 10,
@@ -971,19 +964,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 2,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 2,
-      "min": -175,
+      "count": 170,
+      "unique_count": 3,
+      "min": -200,
       "max": 0,
       "first": 0,
-      "last": -175,
+      "last": -200,
       "is_monotonic_increasing": false,
-      "is_boolean_like": true
+      "is_boolean_like": false
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -993,19 +986,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 2,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 2,
-      "min": -175,
+      "count": 170,
+      "unique_count": 3,
+      "min": -200,
       "max": 0,
       "first": 0,
-      "last": -175,
+      "last": -200,
       "is_monotonic_increasing": false,
-      "is_boolean_like": true
+      "is_boolean_like": false
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -1015,17 +1008,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 31,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 12,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 16,
+      "count": 170,
+      "unique_count": 11,
       "min": 0,
-      "max": 19,
+      "max": 22,
       "first": 0,
-      "last": 1,
+      "last": 2,
       "is_monotonic_increasing": false,
       "is_boolean_like": false
     },
@@ -1037,17 +1030,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 1,
+      "count": 170,
+      "unique_count": 2,
       "min": 0,
-      "max": 0,
+      "max": 1,
       "first": 0,
-      "last": 0,
+      "last": 1,
       "is_monotonic_increasing": true,
       "is_boolean_like": true
     },
@@ -1060,9 +1053,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false,
       true
@@ -1078,9 +1071,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false,
       true
@@ -1096,11 +1089,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1118,11 +1111,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1140,11 +1133,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1162,9 +1155,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -1179,9 +1172,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -1196,9 +1189,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -1213,11 +1206,11 @@
       "number"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 2,
       "min": 0,
       "max": 1,
@@ -1235,11 +1228,11 @@
       "number"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 2,
       "min": 0,
       "max": 1,
@@ -1257,9 +1250,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -1274,9 +1267,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -1291,9 +1284,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -1308,9 +1301,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false,
       true
@@ -1326,9 +1319,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -1342,17 +1335,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 1,
+      "count": 170,
+      "unique_count": 2,
       "min": 0,
-      "max": 0,
+      "max": 1,
       "first": 0,
-      "last": 0,
+      "last": 1,
       "is_monotonic_increasing": true,
       "is_boolean_like": true
     },
@@ -1364,17 +1357,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 1,
+      "count": 170,
+      "unique_count": 2,
       "min": 0,
-      "max": 0,
+      "max": 1,
       "first": 0,
-      "last": 0,
+      "last": 1,
       "is_monotonic_increasing": true,
       "is_boolean_like": true
     },
@@ -1388,17 +1381,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 1,
+      "count": 170,
+      "unique_count": 2,
       "min": 0,
-      "max": 0,
+      "max": 1,
       "first": 0,
-      "last": 0,
+      "last": 1,
       "is_monotonic_increasing": true,
       "is_boolean_like": true
     },
@@ -1411,11 +1404,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1433,11 +1426,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1455,11 +1448,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1477,11 +1470,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1499,11 +1492,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1521,11 +1514,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1543,11 +1536,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1565,11 +1558,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1587,11 +1580,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1609,11 +1602,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1631,11 +1624,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1653,11 +1646,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1675,11 +1668,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1697,11 +1690,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1719,11 +1712,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1741,11 +1734,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1763,9 +1756,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false,
       true
@@ -1781,9 +1774,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
       "6969"
     ],
@@ -1796,11 +1789,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -1818,9 +1811,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false,
       true
@@ -1836,9 +1829,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false,
       true
@@ -1854,9 +1847,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false,
       true
@@ -1872,9 +1865,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -1889,11 +1882,11 @@
       "number"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 2,
       "min": 0,
       "max": 5,
@@ -1911,9 +1904,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -1928,11 +1921,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 1,
       "max": 1,
@@ -1950,11 +1943,11 @@
       "number"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 2,
       "min": 0,
       "max": 6,
@@ -1972,9 +1965,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -1989,9 +1982,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -2006,11 +1999,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 50,
       "max": 50,
@@ -2028,9 +2021,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false,
       true
@@ -2045,12 +2038,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -2062,12 +2056,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -2080,11 +2075,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2102,9 +2097,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -2119,11 +2114,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2140,12 +2135,13 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
-      false
+      false,
+      true
     ],
     "label": "flag",
     "label_confidence": "high",
@@ -2159,11 +2155,11 @@
       "number"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 2,
       "min": 0,
       "max": 1,
@@ -2180,12 +2176,13 @@
     "types": [
       "string"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
-      "single"
+      "single",
+      "Chloe"
     ],
     "label": "string",
     "label_confidence": "low",
@@ -2195,17 +2192,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 1,
+      "count": 170,
+      "unique_count": 2,
       "min": 0,
-      "max": 0,
+      "max": 5,
       "first": 0,
-      "last": 0,
+      "last": 5,
       "is_monotonic_increasing": true,
       "is_boolean_like": true
     },
@@ -2218,11 +2215,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2242,11 +2239,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2266,11 +2263,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2290,11 +2287,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2314,11 +2311,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2337,17 +2334,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 1,
+      "count": 170,
+      "unique_count": 2,
       "min": 0,
-      "max": 0,
+      "max": 1,
       "first": 0,
-      "last": 0,
+      "last": 1,
       "is_monotonic_increasing": true,
       "is_boolean_like": true
     },
@@ -2360,11 +2357,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2383,17 +2380,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 1,
+      "count": 170,
+      "unique_count": 2,
       "min": 0,
-      "max": 0,
+      "max": 1,
       "first": 0,
-      "last": 0,
+      "last": 1,
       "is_monotonic_increasing": true,
       "is_boolean_like": true
     },
@@ -2406,11 +2403,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2428,11 +2425,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2450,11 +2447,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2472,11 +2469,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2494,11 +2491,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2516,11 +2513,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2538,11 +2535,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2560,11 +2557,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2582,9 +2579,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -2598,17 +2595,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 1,
+      "count": 170,
+      "unique_count": 2,
       "min": 0,
-      "max": 0,
+      "max": 1,
       "first": 0,
-      "last": 0,
+      "last": 1,
       "is_monotonic_increasing": true,
       "is_boolean_like": true
     },
@@ -2621,11 +2618,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2643,11 +2640,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2667,11 +2664,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2691,9 +2688,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false,
       true
@@ -2709,9 +2706,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -2726,9 +2723,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -2744,9 +2741,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -2761,19 +2758,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 2,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 2,
+      "count": 170,
+      "unique_count": 3,
       "min": 0,
-      "max": 2,
+      "max": 3,
       "first": 0,
-      "last": 2,
+      "last": 3,
       "is_monotonic_increasing": true,
-      "is_boolean_like": true
+      "is_boolean_like": false
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -2784,9 +2781,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -2801,9 +2798,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false,
       true
@@ -2820,9 +2817,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -2837,9 +2834,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false,
       true
@@ -2855,9 +2852,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false,
       true
@@ -2873,11 +2870,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2895,11 +2892,11 @@
       "number"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 2,
       "min": 0,
       "max": 1,
@@ -2916,19 +2913,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 2,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 3,
+      "count": 170,
+      "unique_count": 2,
       "min": 0,
       "max": 2,
       "first": 0,
       "last": 2,
       "is_monotonic_increasing": true,
-      "is_boolean_like": false
+      "is_boolean_like": true
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -2939,16 +2936,16 @@
       "number"
     ],
     "mutation_count": 2,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 3,
       "min": 0,
-      "max": 2,
+      "max": 3,
       "first": 0,
-      "last": 2,
+      "last": 3,
       "is_monotonic_increasing": true,
       "is_boolean_like": false
     },
@@ -2961,11 +2958,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -2983,11 +2980,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3004,17 +3001,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 1,
+      "count": 170,
+      "unique_count": 2,
       "min": 0,
-      "max": 0,
+      "max": 1,
       "first": 0,
-      "last": 0,
+      "last": 1,
       "is_monotonic_increasing": true,
       "is_boolean_like": true
     },
@@ -3027,11 +3024,11 @@
       "number"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 2,
       "min": 0,
       "max": 1,
@@ -3049,9 +3046,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -3066,9 +3063,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -3084,9 +3081,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
       "count": 3,
       "unique_count": 1,
@@ -3111,11 +3108,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3133,11 +3130,11 @@
       "number"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 2,
       "min": 0,
       "max": 9,
@@ -3155,11 +3152,11 @@
       "number"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 2,
       "min": 0,
       "max": 2,
@@ -3177,11 +3174,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3199,9 +3196,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -3216,11 +3213,11 @@
       "number"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 2,
       "min": 0,
       "max": 17,
@@ -3238,11 +3235,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3260,9 +3257,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -3277,11 +3274,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3298,17 +3295,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 1,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 1,
+      "count": 170,
+      "unique_count": 2,
       "min": 0,
-      "max": 0,
+      "max": 1,
       "first": 0,
-      "last": 0,
+      "last": 1,
       "is_monotonic_increasing": true,
       "is_boolean_like": true
     },
@@ -3321,11 +3318,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3343,11 +3340,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3365,11 +3362,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3387,11 +3384,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3409,11 +3406,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3431,11 +3428,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -3452,19 +3449,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 4,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
-      "unique_count": 2,
+      "count": 170,
+      "unique_count": 5,
       "min": 1,
-      "max": 8,
+      "max": 20,
       "first": 1,
-      "last": 8,
-      "is_monotonic_increasing": true,
-      "is_boolean_like": true
+      "last": 16,
+      "is_monotonic_increasing": false,
+      "is_boolean_like": false
     },
     "label": "time",
     "label_confidence": "high",
@@ -3477,16 +3474,16 @@
       "number"
     ],
     "mutation_count": 14,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 6,
       "min": 1,
       "max": 6,
       "first": 1,
-      "last": 5,
+      "last": 4,
       "is_monotonic_increasing": false,
       "is_boolean_like": false
     },
@@ -3499,9 +3496,9 @@
       "object"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "label": "misc",
     "label_confidence": "low",
     "tags": []
@@ -3511,9 +3508,9 @@
       "object"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "label": "misc",
     "label_confidence": "low",
     "tags": []
@@ -3523,9 +3520,9 @@
       "object"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "label": "misc",
     "label_confidence": "low",
     "tags": []
@@ -3535,9 +3532,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
       ""
     ],
@@ -3551,9 +3548,9 @@
       "string"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
       "Sphynx"
     ],
@@ -3567,9 +3564,9 @@
       "string"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
       "male"
     ],
@@ -3583,9 +3580,9 @@
       "string"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
       "an adventurous"
     ],
@@ -3598,9 +3595,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false,
       true
@@ -3616,11 +3613,11 @@
       "number"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "number_stats": {
-      "count": 158,
+      "count": 170,
       "unique_count": 2,
       "min": 0,
       "max": 5,
@@ -3638,9 +3635,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false,
       true
@@ -3656,9 +3653,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -3673,9 +3670,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -3690,9 +3687,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -3707,9 +3704,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -3724,9 +3721,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false
     ],
@@ -3741,9 +3738,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false,
       true
@@ -3759,9 +3756,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false,
       true
@@ -3777,9 +3774,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false,
       true
@@ -3795,9 +3792,9 @@
       "boolean"
     ],
     "mutation_count": 1,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       false,
       true
@@ -3813,9 +3810,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "bool_values": [
       true
     ],
@@ -3829,31 +3826,31 @@
     "types": [
       "string"
     ],
-    "mutation_count": 86,
-    "first_ts": 1776591281144,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 59,
+    "mutation_count": 112,
+    "first_ts": 1776593148429,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 70,
     "string_samples": [
       "Beginning",
-      "yourRoom",
-      "balcony",
-      "balconyJerk",
-      "yourApartment",
+      "outskirts",
       "Street",
-      "goingDowntown",
-      "Downtown",
-      "Mall",
-      "The Filthy Vibrator",
-      "Electric Giant",
-      "club",
-      "bouncerSed",
-      "bouncerMouth",
-      "alley",
-      "alleyBuy",
-      "alleyJob",
-      "pimp",
-      "pimpMouthInit",
-      "pimpEnd"
+      "busCity",
+      "city",
+      "atmCity",
+      "apartments",
+      "office",
+      "officeInterview",
+      "cityRoads",
+      "gym",
+      "gymCardio",
+      "gymStrength",
+      "gymYoga",
+      "gymRoam",
+      "bodytracker",
+      "Verdantia University",
+      "school",
+      "schoolEnroll",
+      "schoolReception"
     ],
     "label": "string",
     "label_confidence": "low",
@@ -3864,9 +3861,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "Girl"
     ],
@@ -3879,9 +3876,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "chrisvirg"
     ],
@@ -3894,9 +3891,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "he"
     ],
@@ -3909,9 +3906,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "him"
     ],
@@ -3924,9 +3921,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "his"
     ],
@@ -3939,9 +3936,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -3956,9 +3953,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -3973,9 +3970,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       true
     ],
@@ -3990,9 +3987,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       true
     ],
@@ -4007,9 +4004,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -4024,9 +4021,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -4041,9 +4038,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -4058,9 +4055,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       true
     ],
@@ -4075,9 +4072,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -4092,9 +4089,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -4109,9 +4106,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -4126,9 +4123,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -4143,9 +4140,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -4160,9 +4157,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -4177,9 +4174,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -4194,9 +4191,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "Street Parking"
     ],
@@ -4209,11 +4206,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 2,
       "max": 2,
@@ -4231,11 +4228,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -4253,11 +4250,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 5,
       "max": 5,
@@ -4275,9 +4272,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "City Parking"
     ],
@@ -4290,11 +4287,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 3,
       "max": 3,
@@ -4312,11 +4309,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -4334,11 +4331,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 10,
       "max": 10,
@@ -4356,9 +4353,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "Mansion Parking"
     ],
@@ -4371,11 +4368,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 5,
       "max": 5,
@@ -4393,11 +4390,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -4415,11 +4412,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -4437,9 +4434,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "Luxury Parking"
     ],
@@ -4452,11 +4449,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 5,
       "max": 5,
@@ -4474,11 +4471,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -4496,11 +4493,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -4518,9 +4515,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "Honda EV"
     ],
@@ -4533,11 +4530,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 22700,
       "max": 22700,
@@ -4555,9 +4552,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "good"
     ],
@@ -4570,9 +4567,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -4587,9 +4584,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "dealership"
     ],
@@ -4602,9 +4599,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "Toyota Hybrid"
     ],
@@ -4617,11 +4614,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 20500,
       "max": 20500,
@@ -4639,9 +4636,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "good"
     ],
@@ -4654,9 +4651,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -4671,9 +4668,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "dealership"
     ],
@@ -4686,9 +4683,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "Audi"
     ],
@@ -4701,11 +4698,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 31900,
       "max": 31900,
@@ -4723,9 +4720,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "good"
     ],
@@ -4738,9 +4735,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -4755,9 +4752,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "dealership"
     ],
@@ -4770,9 +4767,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "Hyundai"
     ],
@@ -4785,11 +4782,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 22300,
       "max": 22300,
@@ -4807,9 +4804,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "good"
     ],
@@ -4822,9 +4819,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -4839,9 +4836,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "dealership"
     ],
@@ -4854,9 +4851,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "BMW"
     ],
@@ -4869,11 +4866,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 36000,
       "max": 36000,
@@ -4891,9 +4888,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "good"
     ],
@@ -4906,9 +4903,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -4923,9 +4920,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "dealership"
     ],
@@ -4938,9 +4935,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "Lamborghini Urus"
     ],
@@ -4953,11 +4950,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 9999999,
       "max": 9999999,
@@ -4975,9 +4972,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "good"
     ],
@@ -4990,9 +4987,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -5007,9 +5004,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "patron"
     ],
@@ -5021,12 +5018,11 @@
     "types": [
       "boolean"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "mutation_count": 0,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
-      false,
       true
     ],
     "label": "flag",
@@ -5040,9 +5036,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       ""
     ],
@@ -5057,11 +5053,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 5,
       "max": 5,
@@ -5079,9 +5075,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -5096,9 +5092,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -5113,11 +5109,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -5135,11 +5131,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -5157,11 +5153,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -5179,11 +5175,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -5201,11 +5197,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -5223,9 +5219,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -5239,17 +5235,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "mutation_count": 1,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
-      "unique_count": 1,
+      "count": 167,
+      "unique_count": 2,
       "min": 1,
-      "max": 1,
+      "max": 10,
       "first": 1,
-      "last": 1,
+      "last": 10,
       "is_monotonic_increasing": true,
       "is_boolean_like": true
     },
@@ -5262,11 +5258,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -5284,9 +5280,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -5301,11 +5297,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 20,
       "max": 20,
@@ -5323,11 +5319,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 1,
       "max": 1,
@@ -5345,11 +5341,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 3,
       "max": 3,
@@ -5367,9 +5363,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "inhib"
     ],
@@ -5382,11 +5378,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 5,
       "max": 5,
@@ -5406,9 +5402,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       true
     ],
@@ -5423,17 +5419,17 @@
     "types": [
       "number"
     ],
-    "mutation_count": 4,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "mutation_count": 2,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
-      "unique_count": 5,
-      "min": 5,
-      "max": 9,
-      "first": 5,
-      "last": 9,
+      "count": 167,
+      "unique_count": 3,
+      "min": 9,
+      "max": 11,
+      "first": 9,
+      "last": 11,
       "is_monotonic_increasing": true,
       "is_boolean_like": false
     },
@@ -5446,9 +5442,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -5463,9 +5459,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -5480,11 +5476,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 100,
       "max": 100,
@@ -5502,9 +5498,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -5519,11 +5515,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -5541,11 +5537,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -5563,11 +5559,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -5585,11 +5581,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -5607,11 +5603,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591289093,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 58,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 155,
+      "count": 167,
       "unique_count": 1,
       "min": 750,
       "max": 750,
@@ -5629,9 +5625,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591415369,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 55,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       true
     ],
@@ -5646,9 +5642,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591426492,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 55,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       true
     ],
@@ -5663,11 +5659,11 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591487396,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 54,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 122,
+      "count": 167,
       "unique_count": 1,
       "min": 0,
       "max": 0,
@@ -5685,9 +5681,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591487396,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 54,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -5702,9 +5698,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591647871,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 45,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       false
     ],
@@ -5719,9 +5715,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591801810,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 34,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "string_samples": [
       "good"
     ],
@@ -5734,9 +5730,9 @@
       "string"
     ],
     "mutation_count": 0,
-    "first_ts": 1776591839170,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 28,
+    "first_ts": 1776593155646,
+    "last_ts": 1776593969701,
+    "passages_seen_on_count": 55,
     "string_samples": [
       "Laptop"
     ],
@@ -5748,19 +5744,19 @@
     "types": [
       "number"
     ],
-    "mutation_count": 0,
-    "first_ts": 1776591910057,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 22,
+    "mutation_count": 3,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 39,
-      "unique_count": 1,
+      "count": 167,
+      "unique_count": 4,
       "min": 0,
-      "max": 0,
+      "max": 4,
       "first": 0,
-      "last": 0,
+      "last": 4,
       "is_monotonic_increasing": true,
-      "is_boolean_like": true
+      "is_boolean_like": false
     },
     "label": "scalar",
     "label_confidence": "low",
@@ -5771,9 +5767,9 @@
       "boolean"
     ],
     "mutation_count": 0,
-    "first_ts": 1776592052182,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 9,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "bool_values": [
       true
     ],
@@ -5787,16 +5783,16 @@
     "types": [
       "number"
     ],
-    "mutation_count": 1,
-    "first_ts": 1776592080559,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 5,
+    "mutation_count": 0,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 10,
-      "unique_count": 2,
-      "min": 1,
+      "count": 167,
+      "unique_count": 1,
+      "min": 2,
       "max": 2,
-      "first": 1,
+      "first": 2,
       "last": 2,
       "is_monotonic_increasing": true,
       "is_boolean_like": true
@@ -5810,16 +5806,3817 @@
       "number"
     ],
     "mutation_count": 0,
-    "first_ts": 1776592118065,
-    "last_ts": 1776592131948,
-    "passages_seen_on_count": 2,
+    "first_ts": 1776593155646,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
     "number_stats": {
-      "count": 3,
+      "count": 167,
       "unique_count": 1,
       "min": 0,
       "max": 0,
       "first": 0,
       "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "balance": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 2,
+    "first_ts": 1776593178091,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
+    "number_stats": {
+      "count": 165,
+      "unique_count": 3,
+      "min": 9500,
+      "max": 10000,
+      "first": 10000,
+      "last": 9571,
+      "is_monotonic_increasing": false,
+      "is_boolean_like": false
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "atm": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593178091,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 69,
+    "bool_values": [
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "debt": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593186488,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 68,
+    "number_stats": {
+      "count": 163,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "blackmailed": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593186488,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 68,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "yBusEvents": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593186488,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 68,
+    "number_stats": {
+      "count": 163,
+      "unique_count": 1,
+      "min": 1,
+      "max": 1,
+      "first": 1,
+      "last": 1,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "titsSeen": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593186488,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 68,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "cockSeen": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593186488,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 68,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "youngManSeen": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593186488,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 68,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "busFinger": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593186488,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 68,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "busFuck": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593186488,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 68,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "busStop": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593186488,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 68,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "interestRate": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593202116,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 67,
+    "number_stats": {
+      "count": 161,
+      "unique_count": 1,
+      "min": 0.75,
+      "max": 0.75,
+      "first": 0.75,
+      "last": 0.75,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "cashapp": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593202116,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 67,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "amount": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593202116,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 67,
+    "string_samples": [
+      ""
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "amountW": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593202116,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 67,
+    "string_samples": [
+      ""
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "gymClothes": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593326296,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 63,
+    "bool_values": [
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "bikeDet": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593333900,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 63,
+    "number_stats": {
+      "count": 141,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "weightDet": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593343188,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 62,
+    "number_stats": {
+      "count": 139,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "body",
+    "label_confidence": "medium",
+    "tags": [
+      "body"
+    ]
+  },
+  "yogaDet": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593357922,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 61,
+    "number_stats": {
+      "count": 135,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolEnroll": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776593416867,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 55,
+    "number_stats": {
+      "count": 122,
+      "unique_count": 2,
+      "min": 0,
+      "max": 1,
+      "first": 0,
+      "last": 1,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "richStudent": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593416867,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 55,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "student": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "bool_values": [
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "schoolEat": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "classes.anatomy": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "classes.art": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 2,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "classes.biology": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 2,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "classes.computer": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "classes.english": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "classes.mathematics": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "classes.pe": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "classes.physics": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "classes.science": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "classes.sexed": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "classes.recess": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 6,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "classes.auditorium": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 3,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "classSkill.anatomy": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "classSkill.art": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "classSkill.biology": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "classSkill.computer": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "classSkill.english": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "classSkill.mathematics": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "classSkill.pe": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "classSkill.physics": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "classSkill.science": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "classSkill.sexed": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "classSkill.auditorium": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "homework.anatomy": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "none"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "homework.art": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "none"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "homework.biology": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "none"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "homework.computer": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "none"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "homework.english": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "none"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "homework.mathematics": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "none"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "homework.physics": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "none"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "homework.science": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "none"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "homework.sexed": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "none"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "gradesAnatomy": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "gradesArt": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "gradesBiology": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "gradesComputer": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "gradesEnglish": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "gradesMath": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "gradesPE": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "gradesPhysics": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "gradesScience": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "gradesSexed": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "gradesAuditorium": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "dormMateMet": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "dormMate.home": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 11,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "bool_values": [
+      true,
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "dormMate.canteen": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 6,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "dormMate.yard": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 7,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "dormMate.gender": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "girl"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "dormMate.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "Sophia"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "dormMate.rp": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 2,
+      "min": 0,
+      "max": 2,
+      "first": 0,
+      "last": 2,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "attendance": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 2,
+      "min": 0,
+      "max": 2,
+      "first": 0,
+      "last": 2,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "assignments": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "popularity": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "studentDays": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 2,
+      "min": 0,
+      "max": 1,
+      "first": 0,
+      "last": 1,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "bookChosen": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      ""
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "intelligence": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "player_stat",
+    "label_confidence": "high",
+    "tags": [
+      "player_stat"
+    ]
+  },
+  "ownClique": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      ""
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "ownCliqueDesc": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      ""
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "clique": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      ""
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.overachievers.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "The Overachievers"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.overachievers.desc": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "Always striving for perfection, this group dominates honor roll, student council, and every academic competition."
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.overachievers.rp": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.creatives.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "The Creatives"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.creatives.desc": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "A mix of artists, musicians, and writers who express themselves through every medium possible, from sketchbooks to theat"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.creatives.rp": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.athletes.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "The Athletes"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.athletes.desc": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "From varsity stars to gym rats, this clique lives for competition, teamwork, and the next big game."
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.athletes.rp": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.gamers.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "The Gamers & Tech Wizards"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.gamers.desc": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "Obsessed with video games, coding, and the latest tech trends, they can be found debating over frame rates or hacking th"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.gamers.rp": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.rebels.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "The Rebels"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.rebels.desc": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "The rule-breakers and trendsetters who thrive on being different. They challenge authority, question the status quo, and"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.rebels.rp": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.socials.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "The Social Butterflies"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.socials.desc": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "They know everyone and are always at the center of the latest gossip, party planning, and social media trends."
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.socials.rp": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.chill.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "The Chill Outsiders"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.chill.desc": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "A laid-back group that doesn't fit into any one category. They do their own thing, whether it's skateboarding, watching "
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.chill.rp": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.own.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      ""
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.own.desc": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      ""
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolCliques.own.rp": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "anatomyHWGrade": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "anatomyHWFGrade": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      ""
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "artHWGrade": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "artHWFGrade": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      ""
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "biologyHWGrade": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "biologyHWFGrade": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      ""
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "computerHWGrade": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "computerHWFGrade": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      ""
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "englishHWGrade": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "englishHWFGrade": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      ""
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mathHWGrade": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mathHWFGrade": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      ""
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "peHWGrade": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "peHWFGrade": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      ""
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "physicsHWGrade": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "physicsHWFGrade": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      ""
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "scienceHWGrade": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "scienceHWFGrade": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      ""
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "sexedHWGrade": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "sexedHWFGrade": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      ""
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "auditoriumHWGrade": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "auditoriumHWFGrade": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      ""
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "peChall.longjump.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "Longjump"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "peChall.longjump.skill": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "player_stat",
+    "label_confidence": "high",
+    "tags": [
+      "player_stat"
+    ]
+  },
+  "peChall.longjump.win": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "peChall.longjump.lose": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "peChall.track.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "Track Running"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "peChall.track.skill": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "player_stat",
+    "label_confidence": "high",
+    "tags": [
+      "player_stat"
+    ]
+  },
+  "peChall.track.win": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "peChall.track.lose": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "peChall.hedge.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "Hedge Jump"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "peChall.hedge.skill": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "player_stat",
+    "label_confidence": "high",
+    "tags": [
+      "player_stat"
+    ]
+  },
+  "peChall.hedge.win": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "peChall.hedge.lose": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "peChall.wrestling.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "Wrestling"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "peChall.wrestling.skill": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "player_stat",
+    "label_confidence": "high",
+    "tags": [
+      "player_stat"
+    ]
+  },
+  "peChall.wrestling.win": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "peChall.wrestling.lose": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "peChall.fencing.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "string_samples": [
+      "Fencing"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "peChall.fencing.skill": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "player_stat",
+    "label_confidence": "high",
+    "tags": [
+      "player_stat"
+    ]
+  },
+  "peChall.fencing.win": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "peChall.fencing.lose": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolBathroom": {
+    "types": [
+      "object",
+      "number"
+    ],
+    "mutation_count": 85,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 110,
+      "unique_count": 85,
+      "min": -75,
+      "max": 9,
+      "first": 9,
+      "last": -75,
+      "is_monotonic_increasing": false,
+      "is_boolean_like": false
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mira": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mia": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "tia": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "danny": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "spock": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "gainer": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "wilson": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "granger": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593423600,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "number_stats": {
+      "count": 121,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "studentCard": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593434300,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "bool_values": [
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "studentgradebook": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593434300,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 54,
+    "bool_values": [
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "studentID": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593480588,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 53,
+    "bool_values": [
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "schoolPre": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593480588,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 53,
+    "number_stats": {
+      "count": 114,
+      "unique_count": 1,
+      "min": 14,
+      "max": 14,
+      "first": 14,
+      "last": 14,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "anatomyStudy": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593480588,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 53,
+    "number_stats": {
+      "count": 114,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "artStudy": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593480588,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 53,
+    "number_stats": {
+      "count": 114,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "schoolEvents.pros.active": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593480588,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 53,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "hospitalDonate": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593547765,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 47,
+    "number_stats": {
+      "count": 103,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "therapist": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776593547765,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 47,
+    "number_stats": {
+      "count": 103,
+      "unique_count": 2,
+      "min": 0,
+      "max": 5,
+      "first": 0,
+      "last": 5,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "tickets": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 3,
+    "first_ts": 1776593569273,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 45,
+    "number_stats": {
+      "count": 98,
+      "unique_count": 4,
+      "min": 0,
+      "max": 10,
+      "first": 0,
+      "last": 8,
+      "is_monotonic_increasing": false,
+      "is_boolean_like": false
+    },
+    "label": "item",
+    "label_confidence": "medium",
+    "tags": [
+      "item"
+    ]
+  },
+  "destination": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 2,
+    "first_ts": 1776593590725,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 44,
+    "string_samples": [
+      "silvergate",
+      "city",
+      "huevas"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "courtBurn": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 2,
+    "first_ts": 1776593622140,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 44,
+    "number_stats": {
+      "count": 89,
+      "unique_count": 3,
+      "min": 8,
+      "max": 999,
+      "first": 999,
+      "last": 8,
+      "is_monotonic_increasing": false,
+      "is_boolean_like": false
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "passMain": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593622140,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 44,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "pass1": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593622140,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 44,
+    "string_samples": [
+      "broken"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "pass2": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593622140,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 44,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "hackedPass": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593622140,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 44,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "betterID": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593622140,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 44,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "clues": {
+    "types": [
+      "object"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593622140,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 44,
+    "label": "misc",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "valuables.sil.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593628385,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 44,
+    "string_samples": [
+      "silverware"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "valuables.sil.price": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593628385,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 44,
+    "number_stats": {
+      "count": 88,
+      "unique_count": 1,
+      "min": 20,
+      "max": 20,
+      "first": 20,
+      "last": 20,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "valuables.sil.amount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593628385,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 44,
+    "number_stats": {
+      "count": 88,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "valuables.pot.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593628385,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 44,
+    "string_samples": [
+      "pots and pans"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "valuables.pot.price": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593628385,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 44,
+    "number_stats": {
+      "count": 88,
+      "unique_count": 1,
+      "min": 10,
+      "max": 10,
+      "first": 10,
+      "last": 10,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "valuables.pot.amount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593628385,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 44,
+    "number_stats": {
+      "count": 88,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "valuables.jel.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593628385,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 44,
+    "string_samples": [
+      "jewlery"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "valuables.jel.price": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593628385,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 44,
+    "number_stats": {
+      "count": 88,
+      "unique_count": 1,
+      "min": 60,
+      "max": 60,
+      "first": 60,
+      "last": 60,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "valuables.jel.amount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593628385,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 44,
+    "number_stats": {
+      "count": 88,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "valuables.ele.name": {
+    "types": [
+      "string"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593628385,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 44,
+    "string_samples": [
+      "electronics"
+    ],
+    "label": "string",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "valuables.ele.price": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593628385,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 44,
+    "number_stats": {
+      "count": 88,
+      "unique_count": 1,
+      "min": 30,
+      "max": 30,
+      "first": 30,
+      "last": 30,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "valuables.ele.amount": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593628385,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 44,
+    "number_stats": {
+      "count": 88,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "expsubdrive": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593628385,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 44,
+    "number_stats": {
+      "count": 88,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "quickshop": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593670605,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 42,
+    "bool_values": [
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "farmInvest": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776593777394,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 28,
+    "number_stats": {
+      "count": 60,
+      "unique_count": 2,
+      "min": 0,
+      "max": 500,
+      "first": 0,
+      "last": 500,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "roomKey": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776593874171,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 22,
+    "bool_values": [
+      false,
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "schoolEvents.addict.active": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593977867,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 15,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "sBP": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776593977867,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 15,
+    "number_stats": {
+      "count": 31,
+      "unique_count": 2,
+      "min": 0,
+      "max": 1,
+      "first": 0,
+      "last": 1,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "inv": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593977867,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 15,
+    "number_stats": {
+      "count": 31,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "plan": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593977867,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 15,
+    "number_stats": {
+      "count": 31,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "prepDays": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593977867,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 15,
+    "number_stats": {
+      "count": 31,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "anatomyTime": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593977867,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 15,
+    "number_stats": {
+      "count": 31,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "artTime": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593977867,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 15,
+    "number_stats": {
+      "count": 31,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "backupBalance": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593977867,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 15,
+    "number_stats": {
+      "count": 31,
+      "unique_count": 1,
+      "min": 9500,
+      "max": 9500,
+      "first": 9500,
+      "last": 9500,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "mingle": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776593977867,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 15,
+    "number_stats": {
+      "count": 31,
+      "unique_count": 1,
+      "min": 0,
+      "max": 0,
+      "first": 0,
+      "last": 0,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "brothel": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776594010933,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 11,
+    "bool_values": [
+      true
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "dadChock": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776594029452,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 9,
+    "number_stats": {
+      "count": 24,
+      "unique_count": 1,
+      "min": 1,
+      "max": 1,
+      "first": 1,
+      "last": 1,
+      "is_monotonic_increasing": true,
+      "is_boolean_like": true
+    },
+    "label": "scalar",
+    "label_confidence": "low",
+    "tags": []
+  },
+  "dadApology": {
+    "types": [
+      "boolean"
+    ],
+    "mutation_count": 0,
+    "first_ts": 1776594029452,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 9,
+    "bool_values": [
+      false
+    ],
+    "label": "flag",
+    "label_confidence": "high",
+    "tags": [
+      "flag"
+    ]
+  },
+  "brothelRep": {
+    "types": [
+      "number"
+    ],
+    "mutation_count": 1,
+    "first_ts": 1776594037286,
+    "last_ts": 1776594162343,
+    "passages_seen_on_count": 8,
+    "number_stats": {
+      "count": 22,
+      "unique_count": 2,
+      "min": 0,
+      "max": 5,
+      "first": 0,
+      "last": 5,
       "is_monotonic_increasing": true,
       "is_boolean_like": true
     },

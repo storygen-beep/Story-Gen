@@ -3,7 +3,7 @@
 > Design patterns detected. Framed for "what could this game teach mine?"
 
 ### Money / economic system
-**Present.** Money-like variable(s) detected. Income events: 5. Expense events: 12.
+**Present.** Money-like variable(s) detected. Income events: 2. Expense events: 3.
 
 ### Time / calendar system
 **Present.** 1 time-like variable(s). Choices may be day-anchored.
@@ -18,7 +18,7 @@ _Not detected._
 _Not detected._
 
 ### Body / appearance transformation
-**Present.** 4 body-like variable(s). Transitions: 0.
+**Present.** 5 body-like variable(s). Transitions: 0.
 
 ### Multi-NPC parallel threads
 **Present.** 6 NPCs detected with dedicated stat vars.
@@ -27,20 +27,20 @@ _Not detected._
 _Not detected._
 
 ## Scenes catalogued
-- Distinct passage names visited: 59 (the "Unique states seen" count in report.md includes variable-permutations of the same passage).
+- Distinct passage names visited: 70 (the "Unique states seen" count in report.md includes variable-permutations of the same passage).
 - Most-visited passages:
-  - `Downtown` × 9
-  - `balconyJerk` × 8
-  - `The Filthy Vibrator` × 8
-  - `Electric Giant` × 8
-  - `alley` × 8
-  - `waxLegs` × 7
-  - `outskirts` × 7
-  - `Street` × 6
-  - `Uptown` × 6
-  - `yourRoom` × 5
-  - `Park` × 5
-  - `trueMansion` × 5
-  - `massageParlor` × 4
-  - `contacts` × 4
-  - `Beginning` × 3
+  - `school` × 10
+  - `city` × 9
+  - `gym` × 9
+  - `office` × 8
+  - `trainCabin` × 6
+  - `caineOutside` × 6
+  - `outskirts` × 5
+  - `trainstation` × 5
+  - `silvergateUnderground` × 5
+  - `losHuevas` × 5
+  - `silvergate` × 4
+  - `trueMansion` × 4
+  - `morris` × 4
+  - `brothel` × 4
+  - `Park` × 4

@@ -7,9 +7,9 @@
           "object"
         ],
         "mutation_count": 0,
-        "first_ts": 1776591281144,
-        "last_ts": 1776592131948,
-        "passages_seen_on_count": 59
+        "first_ts": 1776593148429,
+        "last_ts": 1776594162343,
+        "passages_seen_on_count": 70
       }
     },
     {
@@ -19,11 +19,11 @@
           "number"
         ],
         "mutation_count": 0,
-        "first_ts": 1776591281144,
-        "last_ts": 1776592131948,
-        "passages_seen_on_count": 59,
+        "first_ts": 1776593148429,
+        "last_ts": 1776594162343,
+        "passages_seen_on_count": 70,
         "number_stats": {
-          "count": 158,
+          "count": 170,
           "unique_count": 1,
           "min": 0,
           "max": 0,
@@ -41,11 +41,11 @@
           "number"
         ],
         "mutation_count": 0,
-        "first_ts": 1776591281144,
-        "last_ts": 1776592131948,
-        "passages_seen_on_count": 59,
+        "first_ts": 1776593148429,
+        "last_ts": 1776594162343,
+        "passages_seen_on_count": 70,
         "number_stats": {
-          "count": 158,
+          "count": 170,
           "unique_count": 1,
           "min": 0,
           "max": 0,
@@ -63,16 +63,38 @@
           "number"
         ],
         "mutation_count": 0,
-        "first_ts": 1776591289093,
-        "last_ts": 1776592131948,
-        "passages_seen_on_count": 58,
+        "first_ts": 1776593155646,
+        "last_ts": 1776594162343,
+        "passages_seen_on_count": 69,
         "number_stats": {
-          "count": 155,
+          "count": 167,
           "unique_count": 1,
           "min": 5,
           "max": 5,
           "first": 5,
           "last": 5,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "weightDet",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1776593343188,
+        "last_ts": 1776594162343,
+        "passages_seen_on_count": 62,
+        "number_stats": {
+          "count": 139,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
           "is_monotonic_increasing": true,
           "is_boolean_like": true
         }

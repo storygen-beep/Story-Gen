@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-04-19T09:34:41.132Z",
+  "captured_at": "2026-04-19T10:05:48.421Z",
   "engine": "sugarcube",
   "version": {
     "name": "SugarCube",
@@ -104,7 +104,7 @@
     "has_deserialize": true,
     "has_slots": true,
     "has_autosave": true,
-    "slot_count": 1,
+    "slot_count": 2,
     "on_save_handlers": 0,
     "on_load_handlers": 0,
     "slots_metadata": [
@@ -116,12 +116,21 @@
         "date": "2026-04-19T07:32:02.621Z",
         "description": null,
         "metadata": null
+      },
+      {
+        "index": 1,
+        "empty": false,
+        "id": "new-life-project-public",
+        "title": null,
+        "date": "2026-04-19T09:48:46.807Z",
+        "description": null,
+        "metadata": null
       }
     ],
     "autosave_metadata": {
       "id": "new-life-project-public",
       "title": null,
-      "date": "2026-04-19T08:16:25.671Z",
+      "date": "2026-04-19T09:48:46.170Z",
       "description": null
     }
   }

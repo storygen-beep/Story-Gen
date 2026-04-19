@@ -1,4 +1,28 @@
 {
   "note": "Labeled at report time from the raw variable profile. See variable_profile.json for raw evidence.",
-  "items": []
+  "items": [
+    {
+      "name": "tickets",
+      "item_name": "tickets",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 3,
+        "first_ts": 1776593569273,
+        "last_ts": 1776594162343,
+        "passages_seen_on_count": 45,
+        "number_stats": {
+          "count": 98,
+          "unique_count": 4,
+          "min": 0,
+          "max": 10,
+          "first": 0,
+          "last": 8,
+          "is_monotonic_increasing": false,
+          "is_boolean_like": false
+        }
+      }
+    }
+  ]
 }

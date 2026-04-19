@@ -409,3 +409,203 @@ After `cafePromo=1` (trigger: "Complain about customer harassment" option at Caf
 - **Investing / banking** — `atm=true` triggers Interest widget + 5 stock portfolios (SPX/NVDA/DJI/TSLA/AAPL/DMI)
 - **Clue quest** — Constantin kidnapping arc, cult confrontation, "prepare" linear event
 - **Lake / cult / cottage** — `$lake` / `$cult` / `$cottage` — exact unlock conditions TBD
+- [2026-04-19T10:22:42.568Z] Session 4 complete: mapped city (ATM/office/university/school/gym/hospital/suburbs/trainstation), Silvergate (court/restaurant/hotel/abyss with Lana/Pete/techie/expsub NPCs), Los Huevas (Golden Lion Casino/Le Rouge Hotel/LHPD/Rooftop Honey Farms donation/realtor), Morris-Constantin quest linear arc through safehouse + war room (Study blueprints / Take inventory / Tactical research), brothel, Chloe apt, Dad apt (dadRape trauma event), Caine cabin with Roscoe pet + locked mysterious door. Slot 2 saved.
+
+---
+
+# Session 4 (late-game world map via eval-expanded state)
+
+## City (`city` — reached via `busCity` from Street, gated `$day≥14`)
+
+Main city square with fast-travel spokes:
+- **ATM** (atmCity): "GIB ME ASS" Goliath Island Bank. Deposit/withdraw £100/£200/£500/£1000 presets or custom input. Balance var = `$balance`. Enables "Pay with card when out of cash" (auto-debit from balance when money is 0).
+- **Office building** (office): corrupt-neutral white-collar job. Free interview at "24th floor" (stairs climb lore). Pay = £50 flat/shift. Sets `job="office"`, `officeTier=1`. `officeCount` tracks shifts.
+- **Upscale apartments** (apartments): Jacob the Porter gatekeeps. Cheapest luxury apt = **£50,000**.
+- **Go to the mansion** (trueMansion): free-travel back to mansion if `$mansion=true`.
+- **Venture down the main roads** (cityRoads): sub-street with Gym + Verdantia University.
+- **Explore the suburbs** (citySub): leads to **Hospital** (hospital): Therapy £95 (-trauma, Tim the therapist), "Donate £10,000 towards fertility research" counter.
+- **Trainstation** (trainstation): ticket booth £29 single / £250 bulk-10. Routes to Silvergate + Los Huevas.
+- **Catch a bus back** — free ticket home.
+
+## Silvergate (train from city, high-end district)
+
+Sub-locations:
+- **Court house** (courtHouse): flavor/empty. "There is nothing to see here."
+- **Vel Aurea Restaurant** (silvergateRestaurant): Bartholomew demands credentials, turns you away. "Credentials" gate is unexplored — likely mansion-association or specific item.
+- **Hotel Celestine** (silvergateHotel): Marcella receptionist. Elevators access-card-gated.
+- **Abyss passage** (silvergatePassage → silvergateUnderground): underground junction with 4 NPCs + store:
+  - **Lana** (techie): Fired civil engineer/tech-grid architect. Offers tech help.
+  - **Pete** (junkshop): Buys valuables for cash. Currently nothing to sell.
+  - **Expsub guide** (expsubInit): Stands at subway tunnel entrance, warns "tunnels lead nowhere" (Subdrive Tunnel — failed project, replaced by FCN).
+  - **Stranger trash-picker** (strangerUnderground): untouched.
+- **Formery Current Network** (EarlyAccess): Gated — "You lack a proper access card" when trying to call Pod.
+
+## Los Huevas (train from city, casino town)
+
+Sub-locations:
+- **Golden Lion Casino** (theLion):
+  - **Lion Cage** (chipCage): £-to-chips exchange with text-input boxes.
+  - **Play Blackjack** (untouched — `deck`/`chips`/`bet`/`luckyCasino` vars confirm full game)
+  - **Play Roulette** (untouched)
+- **Le Rouge Hótel** (rougeHotel): £2500/night sets `roomKey=true`, enters `hotelRoom` with Watch TV / Shower / Bathroom / Sleep.
+- **Los Huevas Police Department** (lhpd): "Nothing to file." Likely opens after crimes/kidnapQuest events.
+- **Rooftop Farming / Honey Farms** (roofFarm → donateFarm): custom-input donation (text box), sets `farmInvest += N`, costs `$balance`. Grants farm produce weekly per Sleep widget. Also "Descend to the farmers market" — currently broken/no-op, returns to losHuevas.
+- **Contact realtor** — alt travel back to outskirts realtor.
+
+## Gym (cityRoads → Gym, requires `gymClothes=true` bought £99 from Clothing Store)
+
+- **Cardio** (gymCardio): +1 cardio, +1 period
+- **Strength** (gymStrength): +1 strength, +1 period
+- **Yoga** (gymYoga): +1 yoga, +1 period
+- **Bodytracker** (bodytracker): stat readout
+- **Roam around** (gymRoam): random NPCs. "Flash someone" corrupt-gated self-loop.
+- **Change and leave**
+Gym is period-gated; closes at period 6 (like mall/bar/beauty).
+
+## School / Verdantia University (cityRoads → Verdantia University, passage: school)
+
+- **schoolDean**: Dean Mr. Wilson. Teacher path mutually exclusive with student.
+- **schoolCounselor → schoolEnroll**: free tuition first 2 times, £150k after. Sets `schoolEnroll +=1`.
+- **schoolReception**: get Student ID + Gradebook.
+- **schoolDorms** (scienceHall variant, gated by studentID + enrollment): hub with:
+  - **Listen in** (schoolDormPROSEventListen): prostitution-ring-side-quest hook (schoolEvents.pros).
+  - **Your dorm room** (schoolDormRoom): full home-away-from-home with Sophia (girl) OR Michael (guy) dorm mate. `dormMate.rp` affinity counter, `dormMate.home` presence flag, `dormMate.gender` variants. Full masturbate widget (`dormJerk` 20 arousal req), laptop (`dormLaptop`), shower (`dormBathroom`), mirror, poster credits, pet display. Can set `home="dorm"`.
+  - **Co-ed bathroom** (coedBath).
+  - **Dorm library** (dormLibrary).
+  - **Friday dorm party** (dormParty): weekly party event.
+- **dormMateMeet**: Sophia intro scene — freckled, red hair. +2 dormMate.rp.
+- **Classes:** `classes.biology`, `classes.art`, `classes.recess`, `classes.anatomy` (Enroll in Anatomy) — daily schedule system tied to `studentClasses` dialog.
+- **Bathrooms:** girls + boys bathroom (boysBathroom has gloryhole content at `corrupt≥180 && inhib≤40 && arousal≥45`).
+
+## Morris-Constantin quest (full linear arc, gated by `constantinCorrupt && questDays≥7`)
+
+1. **morrisTalk=true**: Morris starts offering quest.
+2. **clue=0 → 1:** "Go check on Constantin" → cottage (ransacked) → note "Actions do not come without consequences."
+3. **clue=1 → 2:** Report to Morris → "go to the library's archive section" hint.
+4. **clue=2 → 3:** Find archive clues externally (unmapped specifics).
+5. **clue=3:** Report to Morris → "cult sacrifice!" → "Go prepare" LINEAR EVENT.
+6. **prepare → safehouse:** James + Johnson cloaked men. Hub with Your room / James' / Johnson's / Bathroom / **War room**.
+7. **prepRoom / War room:** 3 progressive tasks:
+   - **Study blueprints** (studyBP): +1 times studied per session
+   - **Take inventory** (untouched)
+   - **Tactical research** (untouched)
+   Mission outcome gated by each stat reaching N.
+
+## Brothel (gated by `$brothel=true`)
+
+Reception desk offers:
+- **Ask for services** → Male gigolo / Female prostitute → room with Oral/Vaginal/Anal picks.
+- **Ask for gloryhole** (untouched — likely corrupt-gated cheap suck service).
+- **Ask for job:** "They don't trust you enough." Probably unlocks after N visits or specific stat.
+
+## Outskirts apartments
+
+- **Dad's apt (dadApt):** Gated `$textDad=true`. Reunion scene → "talk to him" → `talkDad` → **dadRape** trauma event (++ trauma, `$dadRape=true`, `dadChock` counter begins post-scene ticking).
+- **Chloe's apt (chloeApt):** Gated `dating="Chloe" && datingCount≥3`. Living room with Couch / Bathroom / Bedroom / Stare out window / Chat with Chloe.
+
+## Caine's cabin (caineCabin, via Park night if `caineCoffee≥1`)
+
+- Living room hub: Relax / Bathroom / Bedroom / **Mysterious door** (locked — key unknown).
+- **Outside** (caineOutside): period-gated activities — Nap / Pet Roscoe (+1 roscoe, +1 caine) / Hang out with Caine / Tan (needs sunscreen from Quick-E Mart).
+- **Roscoe** is Caine's dog, pettable +relationship.
+
+## UAZ / farming system (fully mapped via Sleep widget + Honey Farms)
+
+- Sleep widget calls `<<farmDonate>>` — each farm investment pays weekly dividends in groceries.
+- **Variables:** `firstPlanter`/`secondPlanter`/`thirdPlanter` (plot slots 1-3). `growthLevel1/2/3` + `growthRate1/2/3` track per-plot crops. `waterSeed1/2/3` toggles watering.
+- Honey Farms (Los Huevas) = the donation destination. `farmInvest` tracks total.
+
+## Economy summary (extended)
+
+| Service | Cost | Reward |
+|---|---|---|
+| Office shift | — | £50 flat |
+| Cafe Clear Tables | — | £30 + £19 tips |
+| Cafe Do Dishes (promo) | — | £30 + £25 tips |
+| Alley pimp client | 2 periods | £350 |
+| Therapy | £95 | -trauma |
+| Massage parlor | (unchecked) | -trauma |
+| Therapy research donation | £10,000 | ??? |
+| Farm donation | custom £ | weekly groceries dividend |
+| Hotel Celestine elevator | access card | unknown |
+| Le Rouge Hotel room | £2500/night | roomKey, Sleep, shower |
+| Luxury apt (city) | £50,000 | ??? |
+| Los Huevas apt (outskirts realtor) | £15,000 | alt home |
+| Train ticket | £29 single, £250 for 10 | travel Silvergate/Los Huevas |
+| Bus (Street→City) | £2 cash OR card | — |
+| Brothel service | (unchecked) | scene |
+| Student enrollment | free (2x), £150k after | schoolEnroll++ |
+
+## Stat threshold summary (extended)
+
+| Gate | Condition | Unlocks |
+|---|---|---|
+| Bus unlock | `day≥14 OR visited(firstTrauma)≥1` | City access |
+| Outskirts | `textDad OR pet.isFound` | Dad apt, realtor, soup kitchen |
+| Office job | `period 1-5 && job="No job"` | officeInterview |
+| Gym entry | `gymClothes=true` | cardio/strength/yoga |
+| Brothel gate | `$brothel=true` (unknown trigger) | services/gloryhole/jobs |
+| Morris quest start | `constantinCorrupt && questDays≥7 && morrisTalk` | cottage → safehouse arc |
+| Caine cabin | `caineCoffee≥1 && period=6` (via Park night) | Caine/Roscoe scenes |
+| School dorm | `studentID + schoolEnroll≥1` | dormMateMeet, classes |
+| Bathroom gloryhole | `corrupt≥180, inhib≤40, arousal≥45` | gloryhole scene |
+| Brother peek bathroom | `corrupt≥60, inhib≤70` | noahPeek |
+| Kitchen flaunt ass | `corrupt≥80, inhib≤70` | cookZackSex |
+| Noah incest dinner | `corrupt≥100` | dinnerEvent |
+| Morris fuck | `corrupt≥100` | morrisFuck |
+| Cinema suck | `corrupt≥250, inhib<30` | cinemaSuck |
+
+## NPCs catalogued this session
+
+| NPC | Location | Var | Notes |
+|---|---|---|---|
+| Jacob the Porter | Upscale apartments | n/a | £50k gatekeeper |
+| Joey | Office interview | n/a | £50/shift job offer |
+| Tim the therapist | Hospital | n/a | £95/session -trauma |
+| Janine the Receptionist | Hospital | n/a | counter + research fund |
+| Jeremy the Gym Staff | Gym | n/a | gate on gymClothes |
+| Dean Mr. Wilson | School | n/a | teacher gate |
+| Counsellor | School | n/a | enrollment free×2 |
+| Sophia | Dorm | `dormMate` object | female dorm mate path, `rp` 0-100 |
+| Michael | Dorm | `dormMate` object | male dorm mate path |
+| Bartholomew | Silvergate Restaurant | n/a | credentials gate |
+| Marcella | Hotel Celestine | n/a | elevator access card gate |
+| Lana | Silvergate Abyss | n/a | tech help NPC, ex-engineer |
+| Pete | Silvergate Abyss Junkshop | n/a | sell valuables for £ |
+| Expsub guide | Silvergate Abyss | n/a | Subdrive Tunnel lore |
+| Strange trash man | Silvergate Abyss | n/a | `strangerUnderground` — unmapped |
+| Ticketmaster | Trainstation | n/a | £29/£250 tickets |
+| Maria (Receptionist) | Le Rouge Hotel | n/a | £2500 room |
+| LHPD Receptionist | Los Huevas Police | n/a | crime filing |
+| James + Johnson | Safehouse | cloaked men | Constantin rescue ops |
+| Harvey | Outskirts Realtor | n/a | £15k Los Huevas apt |
+| Mira | Realtor reception | n/a | |
+| Martin the Vet | Animal Shelter | n/a | pet supplies |
+| Caine | Caine's cabin | `caine` | park-night NPC |
+| Roscoe | Caine's garden | `roscoe` | petable dog |
+| Dad | Outskirts dadApt | `dad`/`dadLove` | dadRape trauma trigger |
+| Tim (therapist) | Hospital | n/a | |
+
+## In-game saves
+
+- **Slot 0:** Day 8 morning, legit playthrough (£108, job=cafe)
+- **Slot 1:** Day 8, eval-boosted (corrupt=150, money=£15k, all items)
+- **Slot 2:** Day ~15, late-game (mansion+caine+morris quests, school enrolled, slot for late-content exploration)
+
+## Backlog for future sessions
+
+- **Train to Los Huevas:** casino blackjack + roulette full mapping (deck/chips/bet system), ATM interactions in Los Huevas
+- **Formery Current Network access card:** quest to find/earn it
+- **Hotel Celestine elevator access card:** ditto
+- **Silvergate restaurant credentials:** likely mansion-association or specific item
+- **Safehouse war room completion:** Study/Inventory/Tactical grind → sacrifice rescue mission → outcome variants
+- **Cult sacrifice rescue mission:** the actual Constantin freeing event — highly branched by war-room prep
+- **Mysterious locked door** in Caine's cabin — unknown key
+- **Dad apt non-rape path:** lower-corrupt / higher-affection route
+- **Brothel job unlock:** visit count / corrupt threshold TBD
+- **Junkshop valuables trade:** Pete's economy
+- **Lana tech help:** what does she unlock?
+- **Investment tickers** (SPX/NVDA/DJI/TSLA/AAPL/DMI): daily price movements via Sleep widget — mapping trading mechanics
+- **Plato / Tyson / brodyMeet / tysonMeet:** street random encounters
+- **questLetter1/2** trigger conditions
+- **Student class schedules:** Anatomy / Art / Biology / Recess daily cycle
