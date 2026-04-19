@@ -1,6 +1,6 @@
 # road-to-success — Coverage
 
-- Unique states visited: 214
+- Unique states visited: 281
 - Queued for future sessions: 0
 - Deepest unexplored branch: depth 0
 

@@ -12,11 +12,11 @@
             "number"
           ],
           "mutation_count": 0,
-          "first_ts": 1776591338216,
-          "last_ts": 1776592298368,
-          "passages_seen_on_count": 36,
+          "first_ts": 1776593182730,
+          "last_ts": 1776593789699,
+          "passages_seen_on_count": 54,
           "number_stats": {
-            "count": 110,
+            "count": 137,
             "unique_count": 1,
             "min": 10,
             "max": 10,
@@ -41,19 +41,19 @@
           "types": [
             "number"
           ],
-          "mutation_count": 0,
-          "first_ts": 1776591338216,
-          "last_ts": 1776592298368,
-          "passages_seen_on_count": 36,
+          "mutation_count": 3,
+          "first_ts": 1776593182730,
+          "last_ts": 1776593789699,
+          "passages_seen_on_count": 54,
           "number_stats": {
-            "count": 110,
-            "unique_count": 1,
+            "count": 137,
+            "unique_count": 4,
             "min": 0,
-            "max": 0,
+            "max": 35,
             "first": 0,
-            "last": 0,
+            "last": 35,
             "is_monotonic_increasing": true,
-            "is_boolean_like": true
+            "is_boolean_like": false
           }
         }
       }

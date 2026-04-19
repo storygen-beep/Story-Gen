@@ -479,3 +479,168 @@ Buy at AbandonedBuilding → BuyDrugs passage. Prices: Weed $18, Cocaine $90, He
 - **City image grid**: most `<a href="javascript:void(0);">` city tiles lack onclick — fall back to `Engine.play(passageName)`.
 - **Linkreplace cascades** (long scenes): use `[...document.querySelectorAll('.passage a.macro-linkreplace')][0].click()` in a JS loop with `await new Promise(r=>setTimeout(r,300))` to step through.
 - **Save manager**: 4 Load buttons (auto + 3 manuals at xy 951,572 / 951,658 / 951,744 if 3 saves). Use specific xy for the desired slot.
+- [2026-04-19T10:07:15.606Z] === SESSION 4 START === Resumed slot 2 (Day 3 Wed M, energy 100, $1980 cash, Phone+FakeID owned, corruption.points 2, Waiter xp1). Goal: arc-deep-dive (Marcus/Emma/Thomas/Vipers/Crime/Pregnancy) + find endings + drug use mechanism.
+- [2026-04-19T10:15:28.993Z] === SESSION 4 FINDINGS ===
+- [2026-04-19T10:15:29.080Z] 27-QUEST MASTER LIST (player.questList[0..26]):
+#0 Instafame (Game key): Buy phone + create Instafame account
+#1 Pornstar (Jim): Accept Jim's proposal (Film Studio career)
+#2 BecomeAModel (Richard): Accept Richard's proposal (Photo Studio career)
+#3 SecretAdmirer (Edward): Accept Edward's proposal (Instafame DM-driven hotel room scenes)
+#4 WhoIsTheFather (Game): Collect sperm samples from the possible fathers (pregnancy paternity puzzle)
+#5 FirstDayOfSchool: auto-complete Day 1
+#6 SchoolTest: Take on Monday
+#7 MathHomework: Do + hand to teacher
+#8 Tutoring (MathTeacher): Have private lessons with the math teacher
+#9 Cheerleader (Coach): Practice a lot until coach notices
+#10 Afterclass (Janitor): Go to classroom after class in evening
+#11 StudyWithMarcus (Marcus): Go to Marcus's house and study
+#12 LibraryExhibitionism (Natasha): Talk to Natasha in library
+#13 PublicExhibitionism (Natasha): Continue Natasha exhibitionism arc
+#14 TeacherSecretFetish (ComputerTeacher): Buy+wear school outfit with corr 30+ then study in Computer Class + accept teacher help
+#15 ThomasParty (Thomas): Ask Thomas about the party (he's in School hallway)
+#16 INeedMoney (Restaurant): auto-complete Day 1 on Waiter hire
+#17 Promotion (Restaurant): Work hard to promote (xp ladder)
+#18 PackageDelivering (DrugDealer): Deliver package to Church (drug-dealing questline)
+#19 PoolParty (Jamal): Sunday pool party invitation
+#20 YachtTour (Matthew): Saturday EM beach — yacht tour
+#21 CostumeParty (Veronica): Phone message costume party
+#22 SecondDate (Edward): Instafame DM follow-up
+#23 Threesome (Edward): Instafame DM follow-up
+#24 SecondPhotoShoot (Richard): Instafame DM follow-up
+#25 MarcusDate (Marcus): Phone message from Marcus
+#26 FakeId (Strange): Meet alley guy at AbandonedBuilding for ID
+- [2026-04-19T10:16:15.886Z] DRUG SYSTEM MECHANICS CONFIRMED — <<UseDrugs>> widget renders in every bathroom (house, apartment, school male/female, club). Only shows drugs player has in inventory. Usage via Bathroom passage click 'Use Weed/Cocaine/Heroin'. Consumes 1 from inventory + sets duration=2+N hours + drugs.drug=name + drugs.onDrugs=true. Effects applied immediately via drugs.modifiers (which offset all player stats while onDrugs=true).
+- [2026-04-19T10:16:15.969Z] DRUG STAT PROFILES (modifiers object):
+WEED ($18): energy -5, arousal +5, social +3, intelligence -2, fitness 0, beauty 0, corruption 0. Addiction +5 per use.
+COCAINE ($90): energy +10, arousal -5, social +5, intelligence +5, fitness 0, beauty -2, corruption +1. Addiction +10 per use.
+HEROIN ($170): energy -10, arousal +8, social 0, intelligence -5, fitness -5, beauty -3, corruption +2. Addiction +20 per use.
+Role-design: Cocaine is the 'pro-stat' drug for work/study sessions; Weed is social chill; Heroin is max-arousal but wrecks everything + rapid addiction. Withdrawal mechanic: drugs.abstinence/withdrawn/duration track active effect vs clean time.
+- [2026-04-19T10:16:16.049Z] GRADUATION UNLOCKS (location.school.graduated=true via passing SchoolGraduation canGraduate check): Office (Mr. Davis interview), DrivingSchool (0/5 lessons + $200 exam), Casino (Roulette 35:1 green / 1:1 red/black + Slots with 9-symbol payouts), StripClub (but still needs more — 'I don't feel comfortable', likely exhibitionism/corruption threshold). Graduation warning: 'After graduation, you will no longer be able to access the school' — one-way door, LOSS of school-anchored scenes. 2 graduation types: Standard (grade>=6) or FinalExam (grade<6 — failure route).
+- [2026-04-19T10:16:16.129Z] OFFICE SECRETARY FLOW: gated by graduation. OfficeInterview with Mr. Davis has single-path 'Yes, I am' → 'Deliver your curriculum' → REJECTED with 'your curriculum doesn't meet our requirements' if intelligence/social below threshold. Corruption route probably opens via corruption-based option later. Secretary job pre-populated in player.jobs[1] (Secretary, Office, id=2) — active flag flipped when hired.
+- [2026-04-19T10:16:16.207Z] CONTENT ARCS TOURED — MARCUS: MarcusHallway (Marcus's bedroom + Sam's bedroom + Bathroom + City), MarcusParkDate (ice cream stroll), MarcusBedroom (Talk + Study), MarcusBathroom (peek door cracked open corruption scene), BathroomSurprise (peek while Marcus showers), CaughtMasturbatingMarcusBoyfriend (overhear Sam). EMMA: EmmaInvite (afterschool evening invite), EmmaPlay (video games together), EmmaHallway (Emma bedroom + Bathroom + City), EmmaBedroom/Bathroom stubs. THOMAS PARTY: invite (ask him in school hallway) → ThomasParty hub (Drink/Energy/Dance/2nd Floor/Pool/Home) → sub-scenes SpinTheBottle (dimly-lit bottle game strip), PongSex (strange guy room ride), Pool (guy yells 'go topless jump in pool'). VIPERS: Vipers → JoinVipers → JoinVipersEnd ('You're wearin' the colors now'), VipersClean (bucket+mop, earn $65 + respect), DarkAlleyRape1 (Gangster encounter). CRIME: HouseRob (needs LN, Mamba handler) → success or HouseRobPrison (Captain Carter searches you in cell). PREGNANCY: HospitalPregnancyTest ($30), PregnancyTest (home, from pharmacy $12), Birth (A SHARP PAIN RIPS THROUGH YOUR STOMACH event), HospitalBirth (delivery room), Abortion ($500).
+- [2026-04-19T10:16:16.291Z] BATHROOM PASSAGE rich auto-events from source: isPlayerAtHouse + previous==Hallway + Dad in Bathroom + random(1,4)==1 → DadShowerSexPregnant/DadShowerSex/DadPeepSex (cascade by executedToday). Similar Grandpa branch. Pregnancy stage triggers: BathroomLactation (while pregnant), BathroomMorningSickness (early), BathroomBellyAwareness (showing). Contraceptive pill: 3-day cooldown, cannot take while pregnant. Pregnancy test: pee on stick → Check result.
+- [2026-04-19T10:16:16.375Z] CASINO POST-GRAD: Roulette UI (Money + bet amount input + RED/BLACK 1:1 or GREEN 35:1 roulette), Slots UI (3 reels + payout table: 💎💎💎=100x, 💰=50x, 🔔=25x, ⭐=20x, 🍒/🍋/🍊/🍇/🍓/🍎=10x, Any Pair=2x). Gambling fuels statistics.moneyEarnedCasino/moneyLostCasino counters. DRIVING SCHOOL POST-GRAD: $100/lesson × 5 + $200 practical exam = $700 total to get license. Driving license presumably unlocks car/mobility option.
+
+# Session 4 — content arcs, drug mechanics, graduation unlocks, quest master list
+
+## 27-quest master list (player.questList, full catalog)
+
+Starting + pre-populated quests (most `active:false, completed:false` until triggered):
+
+| # | Key | Name | Description | Trigger |
+|---|---|---|---|---|
+| 0 | Game | Instafame | Buy a phone and create an Instafame account | Buy Phone |
+| 1 | Jim | Pornstar | Accept Jim's proposal | Film Studio encounter |
+| 2 | Richard | BecomeAModel | Accept Richard's proposal | Photo Studio encounter |
+| 3 | Edward | SecretAdmirer | Accept Edward's proposal | Instafame DM |
+| 4 | Game | WhoIsTheFather | Collect sperm samples from the possible fathers | Pregnancy confirmation — paternity puzzle |
+| 5 | School | FirstDayOfSchool | Today is my first day at school | Auto Day 1 |
+| 6 | School | SchoolTest | Take the school test on Monday | First School visit |
+| 7 | MathTeacher | MathHomework | Do math homework and hand in tomorrow | First School visit |
+| 8 | MathTeacher | Tutoring | Have private lessons with the math teacher | SchoolTest grade < 6 |
+| 9 | Coach | Cheerleader | Practice until coach notices me | PE class fitness progress |
+| 10 | Janitor | Afterclass | Go to classroom after class in evening | Post-Tutoring |
+| 11 | Marcus | StudyWithMarcus | Go to Marcus's house and study | SchoolTest grade ≥ 8 |
+| 12 | Natasha | LibraryExhibitionism | Go to library and talk to Natasha | corruption+exhibitionism |
+| 13 | Natasha | PublicExhibitionism | Continue Natasha arc | After LibraryExhibitionism |
+| 14 | ComputerTeacher | TeacherSecretFetish | Buy + wear school outfit (30+ corruption) + study in Computer Class | school outfit |
+| 15 | Thomas | ThomasParty | Ask Thomas about the party (saw him in hallway) | School Socialize dice=2 |
+| 16 | Restaurant | INeedMoney | Get a job at restaurant | Day 1 auto |
+| 17 | Restaurant | Promotion | Work hard to get promoted | Waiter hire |
+| 18 | DrugDealer | PackageDelivering | Deliver package to Church | Drug dealer hand-off |
+| 19 | Jamal | PoolParty | Sunday pool party invitation | Club meet Jamal |
+| 20 | Matthew | YachtTour | Saturday EM beach — yacht tour | StripClub Mr. Matthew |
+| 21 | Veronica | CostumeParty | Costume party phone message | Bar meet Veronica |
+| 22 | Edward | SecondDate | Instafame DM follow-up | After SecretAdmirer |
+| 23 | Edward | Threesome | Instafame DM follow-up | After SecondDate |
+| 24 | Richard | SecondPhotoShoot | Instafame DM follow-up | After BecomeAModel |
+| 25 | Marcus | MarcusDate | Phone message from Marcus | After StudyWithMarcus |
+| 26 | Strange | FakeId | Get fake ID at AbandonedBuilding | Night Club reject |
+
+## Drug stat profiles (definitive — player.drugs.modifiers when onDrugs=true)
+
+| Drug | Price | energy | arousal | social | intel | fitness | beauty | corruption | addiction |
+|---|---|---|---|---|---|---|---|---|---|
+| Weed | $18 | -5 | +5 | +3 | -2 | 0 | 0 | 0 | +5 |
+| Cocaine | $90 | +10 | -5 | +5 | +5 | 0 | -2 | +1 | +10 |
+| Heroin | $170 | -10 | +8 | 0 | -5 | -5 | -3 | +2 | +20 |
+
+Duration: 2+N hours active. Addiction accumulates cross-drug. `drugs.withdrawn` + `drugs.abstinence` days track clean state. Used via `<<UseDrugs>>` widget in any bathroom (house, apartment, school, club).
+
+## Graduation (major mid-game milestone)
+
+`location.school.graduated = true` via `SchoolGraduation` after `canGraduate` check (12 tests completed, average ≥ 6.0 = Standard; OR FinalExam pass at average < 6.0 = failure-route alternate graduation).
+
+**Unlocks after graduation:**
+
+| Venue | Pre-grad | Post-grad |
+|---|---|---|
+| Office | "Should graduate from school first" | OfficeInterview → Secretary job |
+| DrivingSchool | Same gate | 0/5 lessons @ $100 + $200 exam → License |
+| Casino | "Wouldn't let me in even with fake ID" | Roulette + Slots |
+| StripClub | Same | Partial — still "I don't feel comfortable" (corruption/exhibitionism threshold) |
+
+**WARNING: Graduation is ONE-WAY.** School closes forever — all school-anchored scenes become unreachable (ClassroomFlash, BathroomStudentSex, BathroomFlash, MathHomework scene, TeacherTutoring, TeacherSecretFetish, LibraryExhibitionism, PublicExhibitionism, Cheerleader, Afterclass, ClassLactation, LibraryTransSex — 12 scenes sealed off).
+
+## Auto-event matrix (from source reads)
+
+**Bathroom (house):**
+- `isPlayerAtHouse() + previous=="Hallway" + Dad in Bathroom + random(1,4)==1` → DadShowerSexPregnant (if pregnant) / DadShowerSex / DadPeepSex (cascade by executedToday)
+- Same for Grandpa → GrandpaShowerSex
+- Pregnancy stage: BathroomLactation / BathroomMorningSickness (early) / BathroomBellyAwareness (showing)
+
+**BathroomShower:**
+- `isPlayerAtHouse + previous != BathroomFlashScene + random(1,2)==1 + Dad.arousal>0 + Dad.corruption>0 + IsNpcAtHome("Dad")` → BathroomFlashScene
+
+**KitchenEat:**
+- `random(1,3)==1 + Dad.arousal>0 + IsNpcAtHome("Dad")` → EatSex
+
+**ClassroomEvent Study (dice 1-3):**
+- dice=2 + isBoyfriend("Marcus") + MarcusClassSex.executedToday==false → TeaseBoyfriend
+- isPregnant + changeMediaPregnant() + dice=1 → ClassLactation
+- isPregnant + hasVisibleBelly() + dice=3 → ClassPregnancyReaction
+- previous=="ComputerClass" + dice=1 → ComputerClassEvent
+
+**ClassroomEvent Socialize (dice 1-3):**
+- dice=1 → FlashEventClassroom
+- dice=2 + isQuestAvailable("ThomasParty") → ThomasPartyDialog
+- dice=3 + isQuestCompleted("PublicExhibitionism") → EscapeClassNatasha
+
+**SchoolMaleBathroom:**
+- dice=1 + previous!="BathroomStudentSex" → MarcusBathroomEncounter
+
+**BusRandomEvent (transit):**
+- dice=1: grope (hands on ass progression)
+- dice=2: flash (needs `getExb() >= 10`)
+- dice=3: masturbating man (needs `getCorruptionLevel() >= 3` to "Help him")
+
+## Arc content structure
+
+**MARCUS arc** (13 passages): School classmate → Park date → boyfriend route → MarcusHallway (Marcus/Sam/Bath/City), MarcusBedroom (Talk/Study), MarcusBathroom (peek), SecondDate, CaughtMasturbatingMarcusBoyfriend, BathroomSurpriseMarcusBoyfriend.
+
+**EMMA arc** (5 passages): Invite → EmmaPlay (video games) → EmmaHallway/Bedroom/Bathroom (friend house content).
+
+**THOMAS party arc** (7 passages): Socialize in class dice=2 → Invite → Party hub → 5 sub-passages (Drink, Dance, Pool-topless, 2nd Floor, Bottle Spin + Beer Pong sex).
+
+**VIPERS gang** (4 passages + side gigs): Vipers → JoinVipers → JoinVipersEnd + VipersClean (bucket+mop, $65 + respect), SellDrugs side gig. Gang stats: player.gang.respect + title (Recruit → ???) + daysToWork.
+
+**CRIME path**: HouseRob (Mamba partner, LN gated) → success OR HouseRobPrison (Captain William Carter cell search) — failure-route prison arc.
+
+**PREGNANCY pipeline** (16 passages): PregnancyTest (home peeing stick) / HospitalPregnancyTest ($30) → discovered → stage progression (early/showing/late) → Birth (pain event) → HospitalBirth (delivery) OR Abortion ($500). Active pregnancy swaps media/scenes (suffix `Pregnant` on many scenes: DadShowerSexPregnant, DadWashDishesSexPregnant, BrotherBedroomPregnantSex1, MarcusBedroomSexPregnant, JoggingSexPregnant, PlayingGamesSexPregnant, BedroomStudyBrotherGropePregnant, SecretAdmirerPregnant). WhoIsTheFather quest (#4) gates paternity guessing via sperm collection.
+
+## Casino + DrivingSchool gameplay (post-grad)
+
+**Casino Roulette**: Money + bet input + color pick — GREEN 35:1, RED/BLACK 1:1. Single-number and split bets not observed but likely present in full UI.
+
+**Casino Slots**: 3 reels, bet + SPIN. Payout table: `💎💎💎=100x | 💰💰💰=50x | 🔔🔔🔔=25x | ⭐⭐⭐=20x | 🍒🍒🍒/🍋/🍊/🍇/🍓/🍎=10x | Any Pair=2x`.
+
+**DrivingSchool**: $100 × 5 lessons + $200 practical exam = $700 total. Lessons counter `location.drivingSchool.lessonsCompleted` (0/5). License unlocks mobility option (car from garage? ride requests?).
+
+## Saves on disk
+
+| Slot | Description | Day/Time | Progress |
+|---|---|---|---|
+| 0 | TwineExplorer Day1 | Day 1 EM | Intel 5, school1 |
+| 1 | TwineExplorer Day2 Tuesday | Day 2 EM | +Waiter |
+| 2 | TwineExplorer Day3 Wed Phone+Bank+FakeID | Day 3 M | +Bartender+Bank+FakeID+Phone |
+| 3 | TwineExplorer Day3 Graduated | Day 3 | +Graduated (forced), Office/Casino/Driving unlocked |
