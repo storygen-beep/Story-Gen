@@ -173,3 +173,174 @@
 ## Endings
 
 None reached. This is a long-form sandbox; not a branching VN with discrete endings. Skip `mark-ending`.
+- [2026-04-19T07:31:02.508Z] === SESSION 2 START === Resumed from slot-0 save. Game version v0.24. Save Manager UI: 8 manual slots + Auto Saves panel + Continue Latest Save shortcut. Save loaded preserves intel/clothing/quest progress but NOT player.jobs[].active state — interview likely re-runs after load (engine rule? or save was pre-interview).
+- [2026-04-19T07:36:48.499Z] TIME ADVANCEMENT MECHANIC: Restaurant 'Work' button advances $game.time bucket by ONE step (EM→M observed). Income ranges via game.randomMoney (got $19 on shift 1). +1 jobs.0.xp. -10 energy. NPC schedule SHIFTS at bucket transitions:
+- [2026-04-19T07:36:48.590Z] NPC SCHEDULES — EM (Early Morning): Dad=Kitchen, Brother=Bathroom, Grandpa=Bedroom (family home, AM routine). M (Morning): Dad=Work, Brother=School, Grandpa=Living Room (Dad/Brother at jobs/school, Grandpa retired at home). Static-location NPCs: MathTeacher/Coach (School), Boss/Michael/Susan (Restaurant), Veronica/BarBoss (Bar always - even when bar is closed-time-gated for player), Strange (Park always).
+- [2026-04-19T07:36:48.681Z] CRITICAL DESIGN INSIGHT — Per-NPC scene grids in npc[K].scenes encode the entire game's content design as queryable state. Each scene has: requirements (NPC arousal/corruption/relation), requirementsMC (player corruption/exhibitionism), title, %chance, guide (textual instruction), unlocked/executedToday flags, gallery flag, and act-tag flags (inside/blowjob/vaginal/anal/threesome/gangbang). Brother has 18 scenes (id 13-24, 58-60), Dad has 12 (id 1-12). Total 30+ scenes per family member. The 'guide' field IS the in-game walkthrough. Scenes auto-fire on chance% when in correct location/condition.
+- [2026-04-19T07:41:43.584Z] Mall layout: Clothing Store, Tech Store, Pharmacy, Flash. Clothing Store category tabs (Casual/School/Fitness/Swim/Costume) — Uniform/Underwear are not buyable. Catalog from inspection: Casual1 $100 (no corr), Casual2 $200 (5+ corr), Casual3 $300 (15+ corr), Casual4 $400 (30+ corr), Photoshoot Dress $300 (30+ corr), Cute $200 (15+ corr). Buy buttons (.store-buy-btn) use widget-delegated handler that doesn't fire from CDP click() or HTMLElement.click() — likely needs synthetic MouseEvent or SugarCube event delegation. Workaround: use cheats or directly toggle clothes.X.purchased via state edit.
+- [2026-04-19T07:41:43.670Z] Items shop catalog (items.* var): Laptop $800 / Phone $400 / Webcam $200 (electronics — gate Laptop and Masturbate scenes), Gym memberships 1d $40, 7d $120, 30d $250, lifetime $1100, Pregnancy Test $12 / Contraceptive Pill $8 (health — pregnancy management), Weed $18 / Cocaine $90 / Heroin $170 (drugs — addiction system), Fake ID $150 (object — likely gate to Bar/Club/StripClub for underage player).
+- [2026-04-19T07:41:43.760Z] Property: only 1 in v.properties — apartment (rent $300/7days, landlord=Mr. Henderson, hallway=ApartmentHallway, has lateFee/accumulatedDebt/skippedRentCount mechanics). Currently 'available'. Player residence ladder: house (default) → apartment (rented) → ?
+- [2026-04-19T07:50:07.512Z] DAY CYCLE MECHANIC: Sleep (BedroomSleep) advances days 1→2, day name Monday→Tuesday, time EM, energy 0→100 (full restore). Forced sleep happens at energy=0 via NoEnergy passage ('You feel very tired and go straight home'). Kidnap event awarded +1 corruption.points. Day 2 finds Promotion quest still active (carried from Day 1).
+- [2026-04-19T07:50:07.599Z] RANDOM EVENT ENCOUNTERED: LightningKidnapping. Triggered by walking from Apartment back to Residential? Need to verify trigger location. Long linkreplace cascade (10+ steps) = single passage with progressive reveals. Player ends naked, energy crashes to 0, +1 corruption.points. After 'Run away' link, routes to NoEnergy → Sleep → Wake up Day+1. Acts as a designed setback event for low-corruption players in dangerous areas.
+- [2026-04-19T07:56:53.347Z] EXTENDED CITY MAP — Elite District: only Casino (E-gated, also fakeID-gated 'I don't think they would let me in'). Ghetto: Church (Pray/Confessional — corruption purge?), DarkAlley (Gangster/DrugDealer NPCs), AbandonedBuilding (Buy Stuff — drug dealer), Laundry (Launder Money — converts player.dirtyMoney to clean money), StripClub (E-gated + fakeID), BusStop.
+- [2026-04-19T07:56:53.459Z] City venue results — Office: gated by graduation. DrivingSchool: gated by graduation. Bank: 'Open Bank Account'. PoliceStation: 'report crimes'. Hospital: Pregnancy Test + Gynecologist. GasStation: Car Wash (NakedLife challenge stage). Beach: Swim/Sunbathe/Explore/Marina/JetSki/ChangeClothes — full beach activity hub. Marina: Beach return. Pool: Swim/ChangeClothes. Gym: 4 membership prices visible ($40/$120/$250/$1100).
+- [2026-04-19T07:56:53.590Z] Late-game venues confirmed exist: ThomasParty (Drink/Energy Drink/Dance/2nd Floor/Pool — drunk progression), Bar (Drink/Socialize/Apply to work — Bartender path), PhotoStudio + FilmStudio (career stubs), Vipers (gang induction starting with Krait, leads to JoinVipers passage), Instafame (selfie poster app: normal/lewd/naked + follower count), ClandestineClinic (Artificial Insemination — pregnancy via AI even with bio toggle off?). MarcusHouse passage doesn't exist by that name.
+- [2026-04-19T07:56:53.719Z] School runs a real curriculum: 5 classes scheduled by time bucket (Math=EM, History=M, Computer=M, PE=A, Empty=E), grading system (grade, lastInt, testsCompleted, totalGradePoints, averageGrade, testsHistory[]), graduation track (graduated, finalExamAvailable/Attempted/Passed/Attempts), daysToNextTest counter (=6 → test on Sunday Day 7 from Day 1). 13 location-anchored scenes per the school object: ClassroomFlash, BathroomStudentSex, BathroomFlash, MathHomework, TeacherTutoring (guide: 'Fail school test (score < 6)'), Cheerleader (guide: 'Get enough fitness in PE class'), Afterclass (Janitor), LibraryExhibitionism, PublicExhibitionism, TeacherSecretFetish (guide: 'Spy on teacher's laptop in Computer Class'), ClassLactation (pregnancy), LibraryTransSex.
+- [2026-04-19T07:56:53.820Z] Math homework delivery flow: Bedroom 'Do homework' (Day 2 only available after MathHomework quest active) → location.school.homework=true → MathClass 'Deliver homework' → MathHomework passage (Mr. Thompson scene, you got every question wrong setup for tutoring corruption route). Quest stays active — needs corruption progression to complete the teacher route.
+- [2026-04-19T07:57:18.273Z] PHONE SYSTEM (player.phone) — only usable after buying Phone item ($400, items.phone.purchased=false in fresh game). Apps: 💬Messages (per-NPC threads with selfie sending + quest-aware behavior), 📜Quests, 💼Fast Jobs (DogWalking $45/A petCare, HouseCleaning $75/M cleaning +5xp, BabySitting $110/A +10xp, ElderlyCare $110/M +10xp), 📊Statistics, 🏦Bank, ⏻Turn off. Plus 3 standalone apps: Instafame (social: account/name/followers/likes/dm/posted, takes normal/lewd/naked selfies), NakedLife (13 exhibitionism challenges across 4 ranks: Newbie/Exhibitionist/Shameless/Legend), PornCenter (5 sites: ZVideos/PornVub/Blackez/FamilyLove/F0rc3dWorld with corruption gain 5-20). All map to relatedScene names.
+- [2026-04-19T07:57:18.385Z] DEEP STATS — player.statistics: tracks vaginal/anal/threesomes/blowjobs/gangbangs/creampies/abortions/miscarriages/pregnancies/masturbations/moneyEarnedCasino/moneyLostCasino. player.gang: respect/title/daysToWork (rank progression: Recruit→...). player.bank: open + balance. player.baby: array (multiple births possible). player.drugs: drugAddiction/abstinence/duration/drug/withdrawn/onDrugs + per-stat modifiers. player.relationship: loyalty + intimacy (likely tracks per-NPC). player.dirtyMoney: tracked separately from money — Laundry passage exists to convert via 'Launder Money' action.
+
+# Session 2 — extended exploration
+
+## Time mechanics (confirmed)
+
+| Action | Time effect | Energy | Notes |
+|---|---|---|---|
+| Bedroom Study | Same bucket | -10 | +1 intelligence |
+| MathClass Study | Same bucket | -10 | +1 intelligence; can trigger ClassroomEvent |
+| ParkJog | Same bucket | 0 (when high) | +1 fitness; no time cost |
+| Restaurant Work | **+1 bucket** | -10 | $19 (random via game.randomMoney) + 1 jobs.0.xp |
+| BedroomSleep (gated time≥N) | **+1 day, time→EM** | →100 (full) | Triggers schedule shifts; advances quest counters |
+| NoEnergy auto-route | **forces sleep** | →100 next day | Triggered when energy reaches 0 |
+| Bedroom 'Do homework' | Same bucket | 0 | location.school.homework: false→true |
+
+`$game.time` enum order (advancing): EM → M → A → E → N → LN → EM (next day).
+
+## NPC schedule grid (partial — observed at EM and M)
+
+| NPC | EM | M | A (proj.) | E (proj.) | N (proj.) |
+|---|---|---|---|---|---|
+| Alfred (Dad) | Kitchen | Work | Work? | Home? | Bedroom |
+| Robert (Brother) | Bathroom | School | School/PE | Home? | BrotherBedroom |
+| William (Grandpa) | Bedroom | Living Room | Living Room? | Living Room? | Bedroom |
+| Mr. Thompson | School | School | School | — | — |
+| Mr. Williams (Coach) | School | School | School | — | — |
+| Boss / Michael / Susan | Restaurant | Restaurant | Restaurant | Restaurant | — |
+| Veronica / BarBoss | Bar | Bar | Bar | Bar (open) | Bar |
+| Strange | Park | Park | Park | Park | Park (kidnap risk) |
+
+## Per-NPC scene grid pattern
+
+Every interactable NPC has `npc[K].scenes[<sceneId>]` with this schema:
+
+```
+{
+  id: number,                         // unique scene id across game
+  requirements: {
+    arousal: ""|"🔥"|"🔥🔥"|"🔥🔥🔥",  // NPC arousal tier required
+    corruption: number,               // NPC corruption required
+    relation: number                  // NPC relation required
+  },
+  requirementsMC: {                   // PLAYER stats required
+    corruption: number,
+    exhibitionism: number
+  },
+  title: "string with $npc.X.relationship interpolation",
+  chance: number,                     // % roll when conditions met
+  guide: "human-readable instruction — IS the walkthrough",
+  unlocked: boolean,
+  executedToday: boolean,
+  gallery: boolean,                   // counts toward Gallery
+  inside, blowjob, vaginal, anal, threesome, gangbang: boolean  // act tags
+}
+```
+
+Counts: Brother has 18 scenes (id 13-24, 58-60), Dad has 12 (id 1-12). Many scene IDs reach 60+, so total scene count likely 100+ across all NPCs.
+
+## Location data + scene catalog (from `location.school.scenes` etc.)
+
+Locations also carry their own scene grid (independent of NPC-anchored scenes). School has 13 location-scenes:
+- ClassroomFlash (player corr 15 / exhi 10) — "Go to the classroom and socialize"
+- BathroomStudentSex (corr 30) — "Flash the student in the male bathroom"
+- BathroomFlash (corr 15 / exhi 10) — "Flash the student in the male bathroom"
+- MathHomework (corr 30) — "Deliver homework to teacher in classroom"
+- TeacherTutoring (corr 30) — "Fail school test (score < 6)"
+- Cheerleader (corr 30) — "Get enough fitness in PE class"
+- Afterclass (corr 0) — "Finish tutoring quest; study in classroom after class"
+- LibraryExhibitionism (corr 15 / exhi 10) — "Go to the library and talk with Natasha"
+- PublicExhibitionism (corr 30 / exhi 20) — "Talk with Natasha in the library after 'Library Exhibitionism'"
+- TeacherSecretFetish (corr 30) — "Spy on the teacher's laptop in Computer Class"
+- ClassLactation (pregnant only) — "Study at classroom while being pregnant"
+- LibraryTransSex (corr 30) — "Go to the library and study"
+
+School also tracks: 5 timed classes (Math=EM, History=M, Computer=M, PE=A, Empty=E), grading + tests + graduation.
+
+## Confirmed venue map (city / side districts)
+
+Updated locations table:
+
+| Location | Passage | Access | Notes |
+|---|---|---|---|
+| Restaurant | `Restaurant` | City Center | Eat / Apply (1st time) → Work / Change Clothes / Quit (after hire) |
+| Mall | `Mall` | City Center | Clothing Store / Tech Store / Pharmacy / Flash |
+| ClothingStore | `ClothingStore` | Mall | 5 categories, double-gated price + corruption |
+| Office | `Office` | City Center | "Should graduate from school first" (graduation gate) |
+| Bank | `Bank` | City Center | Open Bank Account |
+| PoliceStation | `PoliceStation` | City Center | Report crimes (event hook) |
+| Hospital | `Hospital` | City Center | Pregnancy Test / Gynecologist |
+| GasStation | `GasStation` | City Center | Car Wash (NakedLife challenge stage) |
+| DrivingSchool | `DrivingSchool` | City Center | Graduation gate |
+| Beach | `Beach` | (not in CityCenter map; via passage?) | Swim/Sunbathe/Explore/Marina/JetSki/Change |
+| Marina | `Marina` | Beach | Yacht hub stub |
+| Pool | `Pool` (PublicPool) | City Center | Swim/Change |
+| Gym | `Gym` | City Center | 4 membership prices ($40/$120/$250/$1100) |
+| Bar | `Bar` | City Center (E-gated) | Drink/Socialize/Apply (Bartender career) |
+| NightClub | `NightClub` | City Center (N-gated) | (likely fakeID-gated too) |
+| MovieTheater | (M-gated) | City Center | (untested) |
+| Casino | `Casino` | Elite (E-gated) | Rejected even with fake ID — stat-gated? |
+| Church | `Church` | Ghetto | Pray + Confessional |
+| DarkAlley | `DarkAlley` | Ghetto | Gangster + DrugDealer NPCs |
+| AbandonedBuilding | `AbandonedBuilding` | Ghetto | Buy Stuff (drug dealer) |
+| Laundry | `Laundry` | Ghetto | Launder Money (player.dirtyMoney → money) |
+| StripClub | `StripClub` | Ghetto (E-gated) | Rejected even with fake ID |
+| ApartmentRent | `ApartmentRent` | (Residential→Apartment tile) | Mr. Henderson lease $300/week, 4-room flat |
+| ApartmentHallway | `ApartmentHallway` | After lease | Apartment hub |
+| ApartmentBedroom | `ApartmentBedroom` | After lease | Player bedroom in flat |
+| ApartmentBathroom | `ApartmentBathroom` | After lease | Apartment bathroom |
+| ApartmentKitchen | `ApartmentKitchen` | After lease | (already saw routing here) |
+| ThomasParty | `ThomasParty` | Friday quest event | Drink/Energy Drink/Dance/2nd Floor/Pool |
+| Vipers | `Vipers` → `JoinVipers` | Gang induction | Krait NPC scene |
+| PhotoStudio | `PhotoStudio` | (unknown access) | Career stub |
+| FilmStudio | `FilmStudio` | (unknown access) | Career stub |
+| Instafame | `Instafame` | Phone app | Selfie post / followers |
+| ClandestineClinic | `ClandestineClinic` | (Ghetto?) | Artificial Insemination |
+
+## Random street events
+
+- **LightningKidnapping** — triggers when walking; Thief NPC. Long linkreplace cascade (10+ steps in one passage). Outcomes: forced rape scene, +1 corruption, energy → 0, auto-routes through NoEnergy → Sleep → next day. Gated by player.exhibitionism = 0 (i.e. low-corruption players are vulnerable).
+- **XCamBlackmail** — gated by xcam account + `($game.time == "LN" || == "N")` — at-night event when previous passage was Residential.
+- **GarageDrunk** — `$game.time == "LN" && getDrunkness() >= 3 && (previous() == "ThomasParty" || == "Residential")`.
+
+## Saves on disk
+
+| Slot | Description | When | State |
+|---|---|---|---|
+| Auto Slot Turn 6 | (auto-save by Phase 0a) | Day 1 EM, fresh post-intro | Pre-Wardrobe |
+| Manual slot 0 | "TwineExplorer Day1" | Day 1 EM, intel 5, school1 equipped, energy 40 | Post first studies, pre-job |
+| Manual slot 1 | "TwineExplorer Day2 Tuesday" | Day 2 EM, intel 5, fitness 1, energy 100, money 69, Waiter active, Math homework delivered, +1 corruption from kidnap | Mid-Day-2 |
+
+## Quest progression matrix
+
+| Quest | Day unlocked | Status after S2 | Notes |
+|---|---|---|---|
+| FirstDayOfSchool | Day 1 EM | Completed Day 1 | Auto-completes on first School visit |
+| INeedMoney | Day 1 EM | Completed Day 1 | Auto-completes on accepting Waiter offer |
+| SchoolTest | Day 1 (post School visit) | Active | Completes by passing test on next test day (daysToNextTest=6 → Sunday Day 7) |
+| MathHomework | Day 1 (post School visit) | Active | Delivered homework → teacher event sets up tutoring scene; possibly only completes via TeacherTutoring corruption route |
+| Promotion | Day 1 (post Waiter hire) | Active | Work shifts gain xp toward promotion (rank 1 → ?) |
+
+## Save/load quirks observed
+
+- SugarCube `Save.slots.save(slot, desc)` works programmatically. The save preserves `npc.X.scenes` state (executedToday flags reset on Sleep), location states, `questList[]`, `player.*` stats. The "TwineExplorer Day1" save oddly DID NOT preserve the Waiter job acquisition — `player.jobs[0].active` reverted to `false` on restore. Possible explanation: the save was actually written at the moment before the interview (the SugarCube internal autosave may have intercepted it), or `player.jobs` is rehydrated from a fresh template on load.
+- Loading from Save Manager modal: 4 "Load" buttons (auto / manual cards). Use coordinate (951, 572) for the second-row right manual save.
+- Loading from "Continue Latest Save" green button does not navigate (silent fail) — use the explicit Load button on the slot row.
+
+## Engine helpers worth remembering
+
+- `SugarCube.Engine.play('PassageName')` — bypasses gate-check and forces navigation. Useful when image-grid tiles lack onclick (Center map for Restaurant/etc).
+- `SugarCube.Story.lookup('name', 'XYZ')` — find passage source.
+- `SugarCube.Macro.get('XYZ')` — find macro/widget.
+- `SugarCube.Save.slots.save(slot, desc)` / `.delete(slot)` / `.get(slot)` — direct save API.
+- `SugarCube.State.variables.X = val; SugarCube.Engine.show()` — mutate + re-render.
+- handleSubLocation('Key') — in-house + sub-location navigation (calls `SugarCube.Engine.play` internally; PostDisplay errors are non-fatal).
+- Sometimes a `<<button>>`-rendered macro UI doesn't fire on synthetic `.click()` (e.g. ClothingStore Buy buttons). Workaround: directly mutate `clothes.X.purchased = true; player.money -= price` via state edit when buying matters less than progress.

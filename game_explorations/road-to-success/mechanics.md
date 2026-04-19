@@ -3,7 +3,7 @@
 > Design patterns detected. Framed for "what could this game teach mine?"
 
 ### Money / economic system
-**Present.** Money-like variable(s) detected. Income events: 0. Expense events: 0.
+**Present.** Money-like variable(s) detected. Income events: 1. Expense events: 0.
 
 ### Time / calendar system
 **Present.** 9 time-like variable(s). Choices may be day-anchored.
@@ -18,7 +18,7 @@ _Not detected._
 _Not detected._
 
 ### Body / appearance transformation
-**Present.** 6 body-like variable(s). Transitions: 0.
+**Present.** 7 body-like variable(s). Transitions: 0.
 
 ### Multi-NPC parallel threads
 **Present.** 2 NPCs detected with dedicated stat vars.
@@ -27,20 +27,20 @@ _Not detected._
 _Not detected._
 
 ## Scenes catalogued
-- Distinct passage names visited: 20 (the "Unique states seen" count in report.md includes variable-permutations of the same passage).
+- Distinct passage names visited: 56 (the "Unique states seen" count in report.md includes variable-permutations of the same passage).
 - Most-visited passages:
-  - `Bedroom` × 17
-  - `Residential` × 12
-  - `Wardrobe` × 9
-  - `BedroomStudy` × 8
-  - `Center` × 5
-  - `ApartmentBedroom` × 4
-  - `School` × 3
-  - `RestaurantInterview` × 3
-  - `Hallway` × 2
-  - `BusStop` × 2
-  - `Kitchen` × 2
-  - `WashDishes` × 2
-  - `ApartmentKitchen` × 2
-  - `Menu` × 1
-  - `MathClass` × 1
+  - `LightningKidnapping` × 26
+  - `ClothingStore` × 13
+  - `Bedroom` × 11
+  - `Menu` × 9
+  - `Park` × 7
+  - `JoinVipers` × 7
+  - `GrandpaBedroom` × 6
+  - `School` × 5
+  - `Bathroom` × 4
+  - `ApartmentBathroom` × 3
+  - `Restaurant` × 3
+  - `RestaurantWork` × 3
+  - `ParkJog` × 3
+  - `Apartment` × 3
+  - `Gym` × 3

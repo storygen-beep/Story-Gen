@@ -12,11 +12,11 @@
             "number"
           ],
           "mutation_count": 0,
-          "first_ts": 1776582230330,
-          "last_ts": 1776583131067,
-          "passages_seen_on_count": 20,
+          "first_ts": 1776583694923,
+          "last_ts": 1776585456323,
+          "passages_seen_on_count": 56,
           "number_stats": {
-            "count": 78,
+            "count": 181,
             "unique_count": 1,
             "min": 10,
             "max": 10,
@@ -42,11 +42,11 @@
             "number"
           ],
           "mutation_count": 0,
-          "first_ts": 1776582230330,
-          "last_ts": 1776583131067,
-          "passages_seen_on_count": 20,
+          "first_ts": 1776583694923,
+          "last_ts": 1776585456323,
+          "passages_seen_on_count": 56,
           "number_stats": {
-            "count": 78,
+            "count": 181,
             "unique_count": 1,
             "min": 0,
             "max": 0,
