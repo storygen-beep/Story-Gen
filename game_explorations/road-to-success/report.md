@@ -1,15 +1,15 @@
 # road-to-success — Exploration Report
 
-Generated: 2026-04-19T10:44:13.636Z
+Generated: 2026-04-19T11:10:48.361Z
 Source URL: https://mopoga.com/road-to-success
 
 ## Session Summary
 
-- Sessions run: 6
-- Total wall-clock: 89m 8s
-- Total clicks: 106
-- Total choices explored: 106
-- Unique states seen: 373
+- Sessions run: 7
+- Total wall-clock: 110m 52s
+- Total clicks: 150
+- Total choices explored: 150
+- Unique states seen: 452
 - Unexplored frontier (queued for next session): 0
 - Endings reached: 0 (use `live.js mark-ending <passage>` to record a terminal passage)
 
@@ -22,13 +22,13 @@ Detected engine: **sugarcube**
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
-| `player.energy` | number | 100..100 | 0 | high |
-| `player.money` | number | 50..5019 | 3 | high |
-| `player.intelligence` | number | 0..21 | 2 | high |
-| `player.fitness` | number | 0..10 | 1 | high |
-| `player.beauty` | number | 0..0 | 0 | high |
-| `player.clothing.beauty` | number | 0..0 | 0 | high |
-| `player.clothing.corruption` | number | 0..0 | 0 | high |
+| `player.energy` | number | 10..100 | 8 | high |
+| `player.money` | number | 50..1522 | 9 | high |
+| `player.intelligence` | number | 0..25 | 2 | high |
+| `player.fitness` | number | 0..9 | 5 | high |
+| `player.beauty` | number | 0..5 | 1 | high |
+| `player.clothing.beauty` | number | 0..5 | 3 | high |
+| `player.clothing.corruption` | number | 0..30 | 1 | high |
 | `player.lastClothing.beauty` | number | 0..0 | 0 | high |
 | `player.lastClothing.corruption` | number | 0..0 | 0 | high |
 | `player.scenes.XCam.requirementsMC.corruption` | number | 45..45 | 0 | high |
@@ -42,10 +42,10 @@ Detected engine: **sugarcube**
 | `player.scenes.HouseCleaning2.requirementsMC.corruption` | number | 30..30 | 0 | high |
 | `player.scenes.xCamPizzaDelivery.requirementsMC.corruption` | number | 45..45 | 0 | high |
 | `player.scenes.SchoolBathroomMasturbate.requirementsMC.corruption` | number | 0..0 | 0 | high |
-| `player.drugs.modifiers.energy` | number | -10..0 | 1 | high |
-| `player.drugs.modifiers.intelligence` | number | -5..0 | 1 | high |
-| `player.drugs.modifiers.fitness` | number | -5..0 | 1 | high |
-| `player.drugs.modifiers.beauty` | number | -3..0 | 1 | high |
+| `player.drugs.modifiers.energy` | number | -10..0 | 2 | high |
+| `player.drugs.modifiers.intelligence` | number | -5..0 | 2 | high |
+| `player.drugs.modifiers.fitness` | number | -5..0 | 2 | high |
+| `player.drugs.modifiers.beauty` | number | -3..0 | 2 | high |
 | `npc.Dad.corruption` | number | 0..0 | 0 | high |
 | `npc.Brother.corruption` | number | 0..0 | 0 | high |
 | `npc.Grandpa.corruption` | number | 0..0 | 0 | high |
@@ -89,8 +89,8 @@ Detected engine: **sugarcube**
 |---|---|---|---|---|
 | `%%cycles.time` | object | — | 0 | high |
 | `%%cycles.day` | object | — | 0 | high |
-| `game.time` | string | `EM`, `M` | 1 | high |
-| `game.day` | string | `Monday`, `Wednesday` | 1 | high |
+| `game.time` | string | `EM`, `M`, `A` | 9 | high |
+| `game.day` | string | `Monday`, `Wednesday`, `Thursday` | 2 | high |
 | `location.school.MathClass.time` | string | `EM` | 0 | high |
 | `location.school.HistoryClass.time` | string | `M` | 0 | high |
 | `location.school.ComputerClass.time` | string | `M` | 0 | high |
@@ -193,13 +193,13 @@ Detected engine: **sugarcube**
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
-| `game.days` | number | 1..3 | 1 | low |
-| `game.dice` | number | 0..1 | 1 | low |
-| `game.randomMoney` | number | 0..19 | 1 | low |
+| `game.days` | number | 1..4 | 2 | low |
+| `game.dice` | number | 0..2 | 5 | low |
+| `game.randomMoney` | number | 0..23 | 5 | low |
 | `game.maxEnergy` | number | 100..100 | 0 | low |
-| `game.questStartCounter` | number | 0..7 | 2 | low |
+| `game.questStartCounter` | number | 0..6 | 1 | low |
 | `game.preferences.autoSaveSlot` | number | 0..0 | 0 | low |
-| `game.random` | number | 2..30 | 50 | low |
+| `game.random` | number | 1..30 | 67 | low |
 | `items.laptop.price` | number | 800..800 | 0 | low |
 | `items.phone.price` | number | 400..400 | 0 | low |
 | `items.webcam.price` | number | 200..200 | 0 | low |
@@ -215,7 +215,7 @@ Detected engine: **sugarcube**
 | `items.fakeID.price` | number | 150..150 | 0 | low |
 | `properties.apartment.price` | number | 300..300 | 0 | low |
 | `properties.apartment.rentCycleDays` | number | 7..7 | 0 | low |
-| `properties.apartment.daysUntilRent` | number | 7..7 | 0 | low |
+| `properties.apartment.daysUntilRent` | number | 6..7 | 1 | low |
 | `properties.apartment.accumulatedDebt` | number | 0..0 | 0 | low |
 | `properties.apartment.skippedRentCount` | number | 0..0 | 0 | low |
 | `location.center.scenes.StreetChallenge1.id` | number | 60..60 | 0 | low |
@@ -235,18 +235,18 @@ Detected engine: **sugarcube**
 | `location.school.daysToNextTest` | number | 0..7 | 1 | low |
 | … | … | … | … | and 544 more |
 
-### string (991)
+### string (998)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
 | `dev.ptPw` | string | `d9f9133fb120cd609687` | 0 | low |
 | `dev.gPW` | string | `eb31c3dfedd8947dfc4a` | 0 | low |
 | `dev.galleryCode` | string | `` | 0 | low |
-| `game.randomMedia` | string | ``, `drink2.webp`, `flash8.webp` | 4 | low |
-| `game.timeIcon` | string | `🌤️`, `☀️` | 1 | low |
-| `game.weather` | string | `clear`, `rain` | 1 | low |
-| `game.weatherIcon` | string | `☀️`, `🌧️` | 1 | low |
-| `game.lastPassage` | string | ``, `ConfessionSex`, `HospitalBirth` | 49 | low |
+| `game.randomMedia` | string | ``, `drink2.webp`, `working2.webp` | 15 | low |
+| `game.timeIcon` | string | `🌤️`, `☀️`, `⛅` | 9 | low |
+| `game.weather` | string | `clear`, `rain`, `cloudy` | 2 | low |
+| `game.weatherIcon` | string | `☀️`, `🌧️`, `☁️` | 2 | low |
+| `game.lastPassage` | string | ``, `ConfessionSex`, `HospitalBirth` | 54 | low |
 | `game.saveVersion` | string | `0.24` | 0 | low |
 | `game.version` | string | `0.24` | 0 | low |
 | `game.activeWardrobeTab` | string | `Casual`, `school` | 1 | low |
@@ -279,7 +279,7 @@ Detected engine: **sugarcube**
 | `items.thirtyDayGym.name` | string | `thirtyDayGym` | 0 | low |
 | `items.thirtyDayGym.title` | string | `30 Days Membership` | 0 | low |
 | `items.thirtyDayGym.image` | string | `30daybanner.webp` | 0 | low |
-| … | … | … | … | and 951 more |
+| … | … | … | … | and 958 more |
 
 ### misc (34)
 
@@ -342,13 +342,13 @@ Detected engine: **sugarcube**
 
 | type | count |
 |---|---|
-| branch | 3 |
+| branch | 41 |
 
 ## Economy
 
 - Price-labeled choices observed: 0
-- Money income events: 3
-- Money expense events: 0
+- Money income events: 5
+- Money expense events: 3
 
 ## Variable prefix clusters
 
@@ -385,20 +385,21 @@ Variables sharing a leading token — candidate entity groups (verify manually).
 | 4 | 2026-04-19T10:06:22.727Z | 10m 7s | 12 | 12 | 67 | no |
 | 5 | 2026-04-19T10:20:53.668Z | 11m 45s | 13 | 13 | 38 | no |
 | 6 | 2026-04-19T10:37:42.108Z | 6m 31s | 3 | 3 | 54 | no |
+| 7 | 2026-04-19T10:49:03.947Z | 21m 44s | 44 | 44 | 79 | no |
 
 ## Graph coverage (observed vs. static)
 
 - Static-graph edges (every navigation parsed from passage source): **496**
-- Observed edges during play: **102** unique `(from, clicked_text, to)` tuples.
-- Static edges covered by at least one observation: **30** (a single observation covers every static edge with the same `(from, to)` pair — gated branches collapse to one observable move).
-- Observed-only edges (no matching static edge, typically self-loop `<<link>>` wrappers that `<<replace>>` in-place): **78**.
-- Coverage: **6.05%** of the static graph explored.
-- Synthetic edges (Claude's out-of-band `eval`/`keys`/`restore`/`pop`): 264
+- Observed edges during play: **130** unique `(from, clicked_text, to)` tuples.
+- Static edges covered by at least one observation: **43** (a single observation covers every static edge with the same `(from, to)` pair — gated branches collapse to one observable move).
+- Observed-only edges (no matching static edge, typically self-loop `<<link>>` wrappers that `<<replace>>` in-place): **95**.
+- Coverage: **8.67%** of the static graph explored.
+- Synthetic edges (Claude's out-of-band `eval`/`keys`/`restore`/`pop`): 292
 
 ### Playable-content partition
 - Passages defined in source: **358** (0 tagged `wip`, 1 empty-body placeholder).
 - Implied playable (non-WIP, non-empty): **357**.
-- Distinct passages visited at least once: **50** — playable-passage coverage: **14.0%**.
+- Distinct passages visited at least once: **35** — playable-passage coverage: **9.8%**.
 
 ### Static edge kinds
 | kind | count |

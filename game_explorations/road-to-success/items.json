@@ -9,9 +9,9 @@
           "boolean"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "bool_values": [
           false
         ]
@@ -25,11 +25,11 @@
           "number"
         ],
         "mutation_count": 1,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "number_stats": {
-          "count": 105,
+          "count": 174,
           "unique_count": 2,
           "min": 0,
           "max": 4,
@@ -48,9 +48,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Dad"
         ]
@@ -64,9 +64,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Brother"
         ]
@@ -80,9 +80,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Grandpa"
         ]
@@ -96,9 +96,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Marcus"
         ]
@@ -112,9 +112,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Sam"
         ]
@@ -128,9 +128,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Oliver"
         ]
@@ -144,9 +144,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Janitor"
         ]
@@ -160,9 +160,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "MathTeacher"
         ]
@@ -176,9 +176,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Coach"
         ]
@@ -192,9 +192,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Natasha"
         ]
@@ -208,9 +208,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Emma"
         ]
@@ -224,9 +224,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "ComputerTeacher"
         ]
@@ -240,9 +240,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Thomas"
         ]
@@ -256,9 +256,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Strange"
         ]
@@ -272,9 +272,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "StrangeBBC"
         ]
@@ -288,9 +288,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Maya"
         ]
@@ -304,9 +304,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Jim"
         ]
@@ -320,9 +320,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Richard"
         ]
@@ -336,9 +336,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Boss"
         ]
@@ -352,9 +352,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Michael"
         ]
@@ -368,9 +368,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Susan"
         ]
@@ -384,9 +384,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "OfficeBoss"
         ]
@@ -400,9 +400,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Jamal"
         ]
@@ -416,9 +416,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "ClubBouncer"
         ]
@@ -432,9 +432,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Veronica"
         ]
@@ -448,9 +448,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "PersonalTrainer"
         ]
@@ -464,9 +464,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Priest"
         ]
@@ -480,9 +480,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Gangster"
         ]
@@ -496,9 +496,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "DrugDealer"
         ]
@@ -512,9 +512,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "KingCobra"
         ]
@@ -528,9 +528,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Mamba"
         ]
@@ -544,9 +544,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Krait"
         ]
@@ -560,9 +560,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "StripClubManager"
         ]
@@ -576,9 +576,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Stripper"
         ]
@@ -592,9 +592,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Bartender"
         ]
@@ -608,9 +608,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Matthew"
         ]
@@ -624,9 +624,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "PoliceMan"
         ]
@@ -640,9 +640,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "PoliceWoman"
         ]
@@ -656,9 +656,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Doctor"
         ]
@@ -672,9 +672,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Nurse"
         ]
@@ -688,9 +688,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Homeless"
         ]
@@ -704,9 +704,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Edward"
         ]
@@ -720,9 +720,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "TowTruckDriver"
         ]
@@ -736,9 +736,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "DeliveryGuy"
         ]
@@ -752,9 +752,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "YachtCaptain"
         ]
@@ -768,9 +768,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Thief"
         ]
@@ -784,9 +784,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "JetSkiInstructor"
         ]
@@ -800,9 +800,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Josh"
         ]
@@ -816,9 +816,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "ClandestineDoctor"
         ]
@@ -832,9 +832,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "BarBoss"
         ]
@@ -848,9 +848,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "DrivingSchoolInstructor"
         ]
@@ -864,9 +864,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "DrivingExaminer"
         ]
@@ -880,9 +880,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "string_samples": [
           "Landlord"
         ]

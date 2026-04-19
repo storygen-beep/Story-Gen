@@ -1,202 +1,142 @@
 {
   "Menu": {
-    "first_ts": 1776595062113,
+    "first_ts": 1776595743951,
     "visit_count": 3
   },
   "HospitalBirth": {
-    "first_ts": 1776595076692,
+    "first_ts": 1776595754620,
     "visit_count": 1
+  },
+  "Bedroom": {
+    "first_ts": 1776595755837,
+    "visit_count": 2
+  },
+  "Hallway": {
+    "first_ts": 1776595772232,
+    "visit_count": 6
   },
   "ApartmentBedroom": {
-    "first_ts": 1776595079047,
-    "visit_count": 3
+    "first_ts": 1776595849157,
+    "visit_count": 6
   },
-  "Library": {
-    "first_ts": 1776595106035,
-    "visit_count": 5
+  "ApartmentHallway": {
+    "first_ts": 1776595855858,
+    "visit_count": 4
   },
-  "LibraryNatasha": {
-    "first_ts": 1776595139498,
+  "ApartmentHall": {
+    "first_ts": 1776595862785,
+    "visit_count": 4
+  },
+  "Residential": {
+    "first_ts": 1776595901212,
+    "visit_count": 8
+  },
+  "BusStop": {
+    "first_ts": 1776595909904,
     "visit_count": 2
   },
-  "NatashaLibrary": {
-    "first_ts": 1776595141067,
-    "visit_count": 2
-  },
-  "TalkWithNatasha": {
-    "first_ts": 1776595142639,
-    "visit_count": 2
-  },
-  "NatashaTalk": {
-    "first_ts": 1776595144065,
-    "visit_count": 2
-  },
-  "LibraryExhibitionism": {
-    "first_ts": 1776595145694,
-    "visit_count": 2
-  },
-  "PublicExhibitionism": {
-    "first_ts": 1776595147846,
-    "visit_count": 2
-  },
-  "NatashaPublicExhibitionism": {
-    "first_ts": 1776595149705,
-    "visit_count": 2
-  },
-  "TeacherTutoring": {
-    "first_ts": 1776595171004,
-    "visit_count": 2
-  },
-  "ComputerAfterClass": {
-    "first_ts": 1776595173139,
-    "visit_count": 2
-  },
-  "TutoringEvent": {
-    "first_ts": 1776595174847,
-    "visit_count": 2
-  },
-  "Afterclass": {
-    "first_ts": 1776595177128,
-    "visit_count": 2
-  },
-  "Cheerleader": {
-    "first_ts": 1776595193737,
-    "visit_count": 2
-  },
-  "DrivingSchoolExamSex": {
-    "first_ts": 1776595195577,
-    "visit_count": 2
-  },
-  "MallFlash": {
-    "first_ts": 1776595197556,
-    "visit_count": 2
-  },
-  "GymFlash": {
-    "first_ts": 1776595199685,
-    "visit_count": 2
-  },
-  "MallCaughtFlashing": {
-    "first_ts": 1776595201580,
-    "visit_count": 2
-  },
-  "BathroomFlashScene": {
-    "first_ts": 1776595203608,
-    "visit_count": 3
+  "Center": {
+    "first_ts": 1776595911756,
+    "visit_count": 21
   },
   "Restaurant": {
-    "first_ts": 1776595231502,
-    "visit_count": 1
+    "first_ts": 1776595943406,
+    "visit_count": 6
   },
   "RestaurantWork": {
-    "first_ts": 1776595233021,
+    "first_ts": 1776595966665,
+    "visit_count": 11
+  },
+  "ApartmentSleep": {
+    "first_ts": 1776596097701,
+    "visit_count": 1
+  },
+  "ApartmentBathroom": {
+    "first_ts": 1776596135671,
+    "visit_count": 3
+  },
+  "BathroomCheckBelly": {
+    "first_ts": 1776596144499,
+    "visit_count": 1
+  },
+  "Bathroom": {
+    "first_ts": 1776596153149,
+    "visit_count": 1
+  },
+  "BathroomShower": {
+    "first_ts": 1776596154417,
+    "visit_count": 2
+  },
+  "BathroomShowerMasturbate": {
+    "first_ts": 1776596168775,
+    "visit_count": 4
+  },
+  "LightningKidnapping": {
+    "first_ts": 1776596236677,
     "visit_count": 3
   },
   "RestaurantPromotionScene": {
-    "first_ts": 1776595247607,
-    "visit_count": 2
-  },
-  "XCamBlackmail": {
-    "first_ts": 1776595269874,
-    "visit_count": 2
-  },
-  "GarageDrunk": {
-    "first_ts": 1776595271567,
-    "visit_count": 2
-  },
-  "SellDrugs": {
-    "first_ts": 1776595273270,
-    "visit_count": 2
-  },
-  "PackageDelivering": {
-    "first_ts": 1776595275094,
-    "visit_count": 2
-  },
-  "PackageDeliver": {
-    "first_ts": 1776595302334,
-    "visit_count": 2
-  },
-  "PizzaDelivery": {
-    "first_ts": 1776595304370,
-    "visit_count": 2
-  },
-  "BeachStrangeSex1": {
-    "first_ts": 1776595307097,
-    "visit_count": 2
-  },
-  "ComputerClassEvent": {
-    "first_ts": 1776595309008,
-    "visit_count": 2
-  },
-  "DNATest": {
-    "first_ts": 1776595327460,
-    "visit_count": 2
-  },
-  "KidnapAtPark": {
-    "first_ts": 1776595328896,
-    "visit_count": 2
-  },
-  "OldManBarSex": {
-    "first_ts": 1776595348945,
-    "visit_count": 2
-  },
-  "YachtCaptainSex": {
-    "first_ts": 1776595350612,
-    "visit_count": 2
-  },
-  "JamalBilliardsSex": {
-    "first_ts": 1776595352054,
-    "visit_count": 2
-  },
-  "TyreFixSex": {
-    "first_ts": 1776595353553,
-    "visit_count": 2
-  },
-  "RestaurantSpecialVisitSex": {
-    "first_ts": 1776595354717,
-    "visit_count": 2
+    "first_ts": 1776596283527,
+    "visit_count": 4
   },
   "RestaurantVIPScene": {
-    "first_ts": 1776595356488,
+    "first_ts": 1776596330016,
+    "visit_count": 7
+  },
+  "Roulette": {
+    "first_ts": 1776596401100,
+    "visit_count": 3
+  },
+  "NakedLife": {
+    "first_ts": 1776596431822,
+    "visit_count": 4
+  },
+  "Park": {
+    "first_ts": 1776596461129,
+    "visit_count": 6
+  },
+  "ParkJog": {
+    "first_ts": 1776596482374,
+    "visit_count": 8
+  },
+  "PoliceParkGangbang": {
+    "first_ts": 1776596554779,
+    "visit_count": 1
+  },
+  "Library": {
+    "first_ts": 1776596556064,
+    "visit_count": 14
+  },
+  "LibraryExhibitionism": {
+    "first_ts": 1776596632467,
+    "visit_count": 7
+  },
+  "DrivingSchool": {
+    "first_ts": 1776596725598,
     "visit_count": 2
   },
-  "LibraryTransSex": {
-    "first_ts": 1776595358217,
+  "PracticalLesson": {
+    "first_ts": 1776596740007,
+    "visit_count": 7
+  },
+  "MarcusHallway": {
+    "first_ts": 1776596878033,
+    "visit_count": 6
+  },
+  "MarcusBedroom": {
+    "first_ts": 1776596919620,
+    "visit_count": 5
+  },
+  "StudyWithMarcus": {
+    "first_ts": 1776596927063,
+    "visit_count": 6
+  },
+  "Mall": {
+    "first_ts": 1776596995414,
     "visit_count": 2
   },
-  "BabySitting": {
-    "first_ts": 1776595368462,
-    "visit_count": 2
-  },
-  "ElderlyCare": {
-    "first_ts": 1776595369872,
-    "visit_count": 2
-  },
-  "HouseCleaning1": {
-    "first_ts": 1776595371086,
-    "visit_count": 2
-  },
-  "HouseCleaning2": {
-    "first_ts": 1776595372490,
-    "visit_count": 2
-  },
-  "PrenatalCare": {
-    "first_ts": 1776595380474,
-    "visit_count": 2
-  },
-  "PrenatalCareBigBelly": {
-    "first_ts": 1776595381938,
-    "visit_count": 2
-  },
-  "VipersClean": {
-    "first_ts": 1776595383483,
-    "visit_count": 2
-  },
-  "GrandpaBedroomSex": {
-    "first_ts": 1776595384907,
-    "visit_count": 2
-  },
-  "GrandpaShowerSex": {
-    "first_ts": 1776595386464,
-    "visit_count": 2
+  "MallFlash": {
+    "first_ts": 1776597004815,
+    "visit_count": 3
   }
 }

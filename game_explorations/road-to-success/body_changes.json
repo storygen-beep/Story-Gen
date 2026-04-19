@@ -7,11 +7,11 @@
           "number"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "number_stats": {
-          "count": 105,
+          "count": 174,
           "unique_count": 1,
           "min": 21,
           "max": 21,
@@ -29,11 +29,11 @@
           "number"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "number_stats": {
-          "count": 105,
+          "count": 174,
           "unique_count": 1,
           "min": 33,
           "max": 33,
@@ -51,11 +51,11 @@
           "number"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "number_stats": {
-          "count": 105,
+          "count": 174,
           "unique_count": 1,
           "min": 0,
           "max": 0,
@@ -73,11 +73,11 @@
           "number"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "number_stats": {
-          "count": 105,
+          "count": 174,
           "unique_count": 1,
           "min": 0,
           "max": 0,
@@ -95,11 +95,11 @@
           "number"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "number_stats": {
-          "count": 105,
+          "count": 174,
           "unique_count": 1,
           "min": 0,
           "max": 0,
@@ -117,11 +117,11 @@
           "number"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595062113,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 50,
+        "first_ts": 1776595743951,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 35,
         "number_stats": {
-          "count": 105,
+          "count": 174,
           "unique_count": 1,
           "min": 0,
           "max": 0,
@@ -139,9 +139,9 @@
           "string"
         ],
         "mutation_count": 0,
-        "first_ts": 1776595076692,
-        "last_ts": 1776595387049,
-        "passages_seen_on_count": 49,
+        "first_ts": 1776595754620,
+        "last_ts": 1776597047877,
+        "passages_seen_on_count": 34,
         "string_samples": [
           "casual"
         ]
