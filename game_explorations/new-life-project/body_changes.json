@@ -1,0 +1,83 @@
+{
+  "variables": [
+    {
+      "name": "discard",
+      "profile": {
+        "types": [
+          "object"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1776582986686,
+        "last_ts": 1776583927722,
+        "passages_seen_on_count": 49
+      }
+    },
+    {
+      "name": "makeupDone",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1776582986686,
+        "last_ts": 1776583927722,
+        "passages_seen_on_count": 49,
+        "number_stats": {
+          "count": 206,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "hairDone",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1776582986686,
+        "last_ts": 1776583927722,
+        "passages_seen_on_count": 49,
+        "number_stats": {
+          "count": 206,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "makeupAmount",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1776583426399,
+        "last_ts": 1776583927722,
+        "passages_seen_on_count": 31,
+        "number_stats": {
+          "count": 132,
+          "unique_count": 1,
+          "min": 5,
+          "max": 5,
+          "first": 5,
+          "last": 5,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    }
+  ],
+  "transitions": []
+}

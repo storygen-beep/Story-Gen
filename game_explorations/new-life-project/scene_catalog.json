@@ -1,0 +1,198 @@
+{
+  "Beginning": {
+    "first_ts": 1776582986686,
+    "visit_count": 4
+  },
+  "Street": {
+    "first_ts": 1776583002954,
+    "visit_count": 34
+  },
+  "Cafe": {
+    "first_ts": 1776583037087,
+    "visit_count": 8
+  },
+  "cafeJob": {
+    "first_ts": 1776583046251,
+    "visit_count": 1
+  },
+  "easterCafe": {
+    "first_ts": 1776583056526,
+    "visit_count": 1
+  },
+  "cafeWorkImproved": {
+    "first_ts": 1776583058133,
+    "visit_count": 4
+  },
+  "cafeDefault": {
+    "first_ts": 1776583074469,
+    "visit_count": 25
+  },
+  "tableClear": {
+    "first_ts": 1776583081935,
+    "visit_count": 17
+  },
+  "alley": {
+    "first_ts": 1776583141061,
+    "visit_count": 2
+  },
+  "alleyBuy": {
+    "first_ts": 1776583141929,
+    "visit_count": 1
+  },
+  "yourApartment": {
+    "first_ts": 1776583187611,
+    "visit_count": 11
+  },
+  "yourRoom": {
+    "first_ts": 1776583188381,
+    "visit_count": 25
+  },
+  "mirror": {
+    "first_ts": 1776583196818,
+    "visit_count": 1
+  },
+  "balcony": {
+    "first_ts": 1776583204995,
+    "visit_count": 1
+  },
+  "credits": {
+    "first_ts": 1776583212541,
+    "visit_count": 1
+  },
+  "sleep": {
+    "first_ts": 1776583227648,
+    "visit_count": 6
+  },
+  "goingDowntown": {
+    "first_ts": 1776583255800,
+    "visit_count": 2
+  },
+  "Downtown": {
+    "first_ts": 1776583256551,
+    "visit_count": 8
+  },
+  "Library": {
+    "first_ts": 1776583265737,
+    "visit_count": 4
+  },
+  "easterLibrary": {
+    "first_ts": 1776583275811,
+    "visit_count": 1
+  },
+  "bookCorrupt": {
+    "first_ts": 1776583277351,
+    "visit_count": 1
+  },
+  "exploreLib": {
+    "first_ts": 1776583285021,
+    "visit_count": 1
+  },
+  "Cinema": {
+    "first_ts": 1776583298603,
+    "visit_count": 3
+  },
+  "easterCinema": {
+    "first_ts": 1776583306646,
+    "visit_count": 1
+  },
+  "movieSceneA": {
+    "first_ts": 1776583317254,
+    "visit_count": 1
+  },
+  "club": {
+    "first_ts": 1776583355976,
+    "visit_count": 1
+  },
+  "easterDowntown": {
+    "first_ts": 1776583364883,
+    "visit_count": 1
+  },
+  "Mall": {
+    "first_ts": 1776583402839,
+    "visit_count": 4
+  },
+  "Quick-E Mart": {
+    "first_ts": 1776583410097,
+    "visit_count": 3
+  },
+  "clothingStore": {
+    "first_ts": 1776583449189,
+    "visit_count": 1
+  },
+  "Electric Giant": {
+    "first_ts": 1776583463242,
+    "visit_count": 1
+  },
+  "Park": {
+    "first_ts": 1776583475490,
+    "visit_count": 5
+  },
+  "parkRun": {
+    "first_ts": 1776583484912,
+    "visit_count": 1
+  },
+  "parkRestroom": {
+    "first_ts": 1776583492833,
+    "visit_count": 2
+  },
+  "parkWalk": {
+    "first_ts": 1776583511721,
+    "visit_count": 1
+  },
+  "parkRest": {
+    "first_ts": 1776583519021,
+    "visit_count": 1
+  },
+  "goingUptown": {
+    "first_ts": 1776583551033,
+    "visit_count": 1
+  },
+  "Uptown": {
+    "first_ts": 1776583551781,
+    "visit_count": 6
+  },
+  "Bar": {
+    "first_ts": 1776583560493,
+    "visit_count": 3
+  },
+  "Socialize": {
+    "first_ts": 1776583567588,
+    "visit_count": 2
+  },
+  "Get a drink": {
+    "first_ts": 1776583587060,
+    "visit_count": 1
+  },
+  "beauty": {
+    "first_ts": 1776583595841,
+    "visit_count": 1
+  },
+  "massageParlor": {
+    "first_ts": 1776583603807,
+    "visit_count": 1
+  },
+  "dealership": {
+    "first_ts": 1776583611234,
+    "visit_count": 1
+  },
+  "easterUptown": {
+    "first_ts": 1776583622191,
+    "visit_count": 1
+  },
+  "coffee": {
+    "first_ts": 1776583634795,
+    "visit_count": 1
+  },
+  "lilyCafe": {
+    "first_ts": 1776583649479,
+    "visit_count": 1
+  },
+  "payRent": {
+    "first_ts": 1776583899569,
+    "visit_count": 1
+  },
+  "pay": {
+    "first_ts": 1776583906382,
+    "visit_count": 1
+  }
+}
