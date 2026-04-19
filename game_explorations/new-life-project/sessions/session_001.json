@@ -1,0 +1,25 @@
+{
+  "session_id": 1,
+  "start_ts": "2026-04-19T07:02:14.826Z",
+  "start_epoch_ms": 1776582134826,
+  "end_ts": "2026-04-19T07:15:05.826Z",
+  "duration_s": 771,
+  "clicks": 53,
+  "choices_explored": 53,
+  "arrow_advances": 0,
+  "unique_states_seen": 52,
+  "new_unique_states": 52,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "Cafe (introCafe): meet Lily (waiter, skimpy uniform). Need to ask Rob about job - 'come back later'. exLoc.cafe=true unlocks. Period advances +1 per visit.",
+    "Player name = Josephine (default). Loser flag set. £0 money. Single. No job at start. Stats: Allure 30, Inhibition 125, Purity 25, Trauma 0, Arousal 0, corrupt -25.",
+    "Time/period system: each click typically advances period+1. Sleep adds full cycle (~7 periods). Day starts Monday Day 1 Early morning. exLoc.* variables track discovered locations.",
+    "Hub passage exploreIntro: rotating choices based on time/state. Day-time = explore (cafe/downtown/uptown/scenery). Night-time = 'Search for a place to sleep'.",
+    "Outskirts gives free 'old phone' item (oldphone=true). exploreOutskirts.",
+    "Sleeping in alley (sleepAlleyIntro) = forced rape event. -15 allure, +3 corruption. Variable: alley=true. Dark content present.",
+    "Apartment hub yourApartment: Join Zack/Your room/Shower/Kitchen/Go outside. Shower → showernude (+15 allure if undressed). Items: makeup gates additional shower content. arousal threshold gates masturbation."
+  ]
+}

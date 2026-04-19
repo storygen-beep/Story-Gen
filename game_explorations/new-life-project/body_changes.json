@@ -1,0 +1,105 @@
+{
+  "variables": [
+    {
+      "name": "discard",
+      "profile": {
+        "types": [
+          "object"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1776595046612,
+        "last_ts": 1776595921611,
+        "passages_seen_on_count": 47
+      }
+    },
+    {
+      "name": "makeupDone",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1776595046612,
+        "last_ts": 1776595921611,
+        "passages_seen_on_count": 47,
+        "number_stats": {
+          "count": 125,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "hairDone",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1776595046612,
+        "last_ts": 1776595921611,
+        "passages_seen_on_count": 47,
+        "number_stats": {
+          "count": 125,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "makeupAmount",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1776595057196,
+        "last_ts": 1776595921611,
+        "passages_seen_on_count": 46,
+        "number_stats": {
+          "count": 122,
+          "unique_count": 1,
+          "min": 5,
+          "max": 5,
+          "first": 5,
+          "last": 5,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "weightDet",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1776595057196,
+        "last_ts": 1776595921611,
+        "passages_seen_on_count": 46,
+        "number_stats": {
+          "count": 122,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    }
+  ],
+  "transitions": []
+}

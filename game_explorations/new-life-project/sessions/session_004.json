@@ -1,0 +1,19 @@
+{
+  "session_id": 4,
+  "start_ts": "2026-04-19T10:05:48.428Z",
+  "start_epoch_ms": 1776593148428,
+  "end_ts": "2026-04-19T10:30:11.629Z",
+  "duration_s": 1463,
+  "clicks": 107,
+  "choices_explored": 107,
+  "arrow_advances": 0,
+  "unique_states_seen": 588,
+  "new_unique_states": 126,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "Session 4 complete: mapped city (ATM/office/university/school/gym/hospital/suburbs/trainstation), Silvergate (court/restaurant/hotel/abyss with Lana/Pete/techie/expsub NPCs), Los Huevas (Golden Lion Casino/Le Rouge Hotel/LHPD/Rooftop Honey Farms donation/realtor), Morris-Constantin quest linear arc through safehouse + war room (Study blueprints / Take inventory / Tactical research), brothel, Chloe apt, Dad apt (dadRape trauma event), Caine cabin with Roscoe pet + locked mysterious door. Slot 2 saved."
+  ]
+}

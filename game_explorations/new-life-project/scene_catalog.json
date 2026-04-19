@@ -1,0 +1,190 @@
+{
+  "Beginning": {
+    "first_ts": 1776595046612,
+    "visit_count": 3
+  },
+  "caineOutside": {
+    "first_ts": 1776595057196,
+    "visit_count": 2
+  },
+  "chipCage": {
+    "first_ts": 1776595067738,
+    "visit_count": 8
+  },
+  "blackjackGame": {
+    "first_ts": 1776595121408,
+    "visit_count": 2
+  },
+  "blackjack": {
+    "first_ts": 1776595141444,
+    "visit_count": 2
+  },
+  "Bet": {
+    "first_ts": 1776595166265,
+    "visit_count": 2
+  },
+  "Deal": {
+    "first_ts": 1776595181471,
+    "visit_count": 2
+  },
+  "roulette": {
+    "first_ts": 1776595211550,
+    "visit_count": 3
+  },
+  "rouletteBet": {
+    "first_ts": 1776595226573,
+    "visit_count": 1
+  },
+  "rouletteRun": {
+    "first_ts": 1776595234459,
+    "visit_count": 3
+  },
+  "theLion": {
+    "first_ts": 1776595281823,
+    "visit_count": 1
+  },
+  "atmCity": {
+    "first_ts": 1776595282572,
+    "visit_count": 2
+  },
+  "constOffice": {
+    "first_ts": 1776595351643,
+    "visit_count": 2
+  },
+  "constTalk": {
+    "first_ts": 1776595360644,
+    "visit_count": 1
+  },
+  "church": {
+    "first_ts": 1776595368136,
+    "visit_count": 7
+  },
+  "churchTour": {
+    "first_ts": 1776595382965,
+    "visit_count": 1
+  },
+  "Uptown": {
+    "first_ts": 1776595390347,
+    "visit_count": 2
+  },
+  "churchNuns": {
+    "first_ts": 1776595404774,
+    "visit_count": 1
+  },
+  "churchInspect": {
+    "first_ts": 1776595413757,
+    "visit_count": 1
+  },
+  "churchAltar": {
+    "first_ts": 1776595435468,
+    "visit_count": 1
+  },
+  "churchWallsInit": {
+    "first_ts": 1776595454277,
+    "visit_count": 4
+  },
+  "concubineCells": {
+    "first_ts": 1776595463469,
+    "visit_count": 1
+  },
+  "pastorWall": {
+    "first_ts": 1776595474562,
+    "visit_count": 1
+  },
+  "MoN Outside": {
+    "first_ts": 1776595485220,
+    "visit_count": 10
+  },
+  "MoN Explore": {
+    "first_ts": 1776595493733,
+    "visit_count": 6
+  },
+  "monconstruct": {
+    "first_ts": 1776595512936,
+    "visit_count": 2
+  },
+  "monconstructfurther": {
+    "first_ts": 1776595520516,
+    "visit_count": 1
+  },
+  "monconstructtent": {
+    "first_ts": 1776595527543,
+    "visit_count": 2
+  },
+  "MoN Pod": {
+    "first_ts": 1776595547810,
+    "visit_count": 2
+  },
+  "WIP Current Trap1": {
+    "first_ts": 1776595555290,
+    "visit_count": 10
+  },
+  "infiniteHotel": {
+    "first_ts": 1776595627517,
+    "visit_count": 2
+  },
+  "hotelPen": {
+    "first_ts": 1776595641100,
+    "visit_count": 2
+  },
+  "silvergateHotel": {
+    "first_ts": 1776595651641,
+    "visit_count": 1
+  },
+  "tradeClues": {
+    "first_ts": 1776595652316,
+    "visit_count": 2
+  },
+  "constDesk": {
+    "first_ts": 1776595660989,
+    "visit_count": 2
+  },
+  "courtClues": {
+    "first_ts": 1776595675157,
+    "visit_count": 3
+  },
+  "silvergate": {
+    "first_ts": 1776595692700,
+    "visit_count": 1
+  },
+  "brodyMeet": {
+    "first_ts": 1776595693521,
+    "visit_count": 2
+  },
+  "facility": {
+    "first_ts": 1776595721706,
+    "visit_count": 3
+  },
+  "leftCor": {
+    "first_ts": 1776595729684,
+    "visit_count": 1
+  },
+  "rightCor": {
+    "first_ts": 1776595738038,
+    "visit_count": 1
+  },
+  "questLetter1": {
+    "first_ts": 1776595746818,
+    "visit_count": 2
+  },
+  "abandonedTracks": {
+    "first_ts": 1776595759922,
+    "visit_count": 5
+  },
+  "safehouse": {
+    "first_ts": 1776595793935,
+    "visit_count": 3
+  },
+  "safeResc": {
+    "first_ts": 1776595815527,
+    "visit_count": 2
+  },
+  "Phone": {
+    "first_ts": 1776595831549,
+    "visit_count": 2
+  },
+  "GMA": {
+    "first_ts": 1776595839256,
+    "visit_count": 5
+  }
+}
