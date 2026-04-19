@@ -1,15 +1,15 @@
 # road-to-success — Exploration Report
 
-Generated: 2026-04-19T10:32:38.749Z
+Generated: 2026-04-19T10:44:13.636Z
 Source URL: https://mopoga.com/road-to-success
 
 ## Session Summary
 
-- Sessions run: 5
-- Total wall-clock: 82m 37s
-- Total clicks: 103
-- Total choices explored: 103
-- Unique states seen: 319
+- Sessions run: 6
+- Total wall-clock: 89m 8s
+- Total clicks: 106
+- Total choices explored: 106
+- Unique states seen: 373
 - Unexplored frontier (queued for next session): 0
 - Endings reached: 0 (use `live.js mark-ending <passage>` to record a terminal passage)
 
@@ -22,10 +22,10 @@ Detected engine: **sugarcube**
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
-| `player.energy` | number | 90..100 | 2 | high |
-| `player.money` | number | 50..2045 | 2 | high |
-| `player.intelligence` | number | 0..20 | 1 | high |
-| `player.fitness` | number | 0..0 | 0 | high |
+| `player.energy` | number | 100..100 | 0 | high |
+| `player.money` | number | 50..5019 | 3 | high |
+| `player.intelligence` | number | 0..21 | 2 | high |
+| `player.fitness` | number | 0..10 | 1 | high |
 | `player.beauty` | number | 0..0 | 0 | high |
 | `player.clothing.beauty` | number | 0..0 | 0 | high |
 | `player.clothing.corruption` | number | 0..0 | 0 | high |
@@ -197,9 +197,9 @@ Detected engine: **sugarcube**
 | `game.dice` | number | 0..1 | 1 | low |
 | `game.randomMoney` | number | 0..19 | 1 | low |
 | `game.maxEnergy` | number | 100..100 | 0 | low |
-| `game.questStartCounter` | number | 0..6 | 1 | low |
+| `game.questStartCounter` | number | 0..7 | 2 | low |
 | `game.preferences.autoSaveSlot` | number | 0..0 | 0 | low |
-| `game.random` | number | 2..29 | 31 | low |
+| `game.random` | number | 2..30 | 50 | low |
 | `items.laptop.price` | number | 800..800 | 0 | low |
 | `items.phone.price` | number | 400..400 | 0 | low |
 | `items.webcam.price` | number | 200..200 | 0 | low |
@@ -242,11 +242,11 @@ Detected engine: **sugarcube**
 | `dev.ptPw` | string | `d9f9133fb120cd609687` | 0 | low |
 | `dev.gPW` | string | `eb31c3dfedd8947dfc4a` | 0 | low |
 | `dev.galleryCode` | string | `` | 0 | low |
-| `game.randomMedia` | string | ``, `drink2.webp` | 1 | low |
+| `game.randomMedia` | string | ``, `drink2.webp`, `flash8.webp` | 4 | low |
 | `game.timeIcon` | string | `🌤️`, `☀️` | 1 | low |
 | `game.weather` | string | `clear`, `rain` | 1 | low |
 | `game.weatherIcon` | string | `☀️`, `🌧️` | 1 | low |
-| `game.lastPassage` | string | ``, `Menu`, `Stats` | 25 | low |
+| `game.lastPassage` | string | ``, `ConfessionSex`, `HospitalBirth` | 49 | low |
 | `game.saveVersion` | string | `0.24` | 0 | low |
 | `game.version` | string | `0.24` | 0 | low |
 | `game.activeWardrobeTab` | string | `Casual`, `school` | 1 | low |
@@ -342,13 +342,13 @@ Detected engine: **sugarcube**
 
 | type | count |
 |---|---|
-| branch | 12 |
+| branch | 3 |
 
 ## Economy
 
 - Price-labeled choices observed: 0
-- Money income events: 1
-- Money expense events: 1
+- Money income events: 3
+- Money expense events: 0
 
 ## Variable prefix clusters
 
@@ -384,20 +384,21 @@ Variables sharing a leading token — candidate entity groups (verify manually).
 | 3 | 2026-04-19T09:35:38.205Z | 16m 1s | 13 | 13 | 51 | no |
 | 4 | 2026-04-19T10:06:22.727Z | 10m 7s | 12 | 12 | 67 | no |
 | 5 | 2026-04-19T10:20:53.668Z | 11m 45s | 13 | 13 | 38 | no |
+| 6 | 2026-04-19T10:37:42.108Z | 6m 31s | 3 | 3 | 54 | no |
 
 ## Graph coverage (observed vs. static)
 
 - Static-graph edges (every navigation parsed from passage source): **496**
-- Observed edges during play: **100** unique `(from, clicked_text, to)` tuples.
-- Static edges covered by at least one observation: **29** (a single observation covers every static edge with the same `(from, to)` pair — gated branches collapse to one observable move).
-- Observed-only edges (no matching static edge, typically self-loop `<<link>>` wrappers that `<<replace>>` in-place): **77**.
-- Coverage: **5.85%** of the static graph explored.
-- Synthetic edges (Claude's out-of-band `eval`/`keys`/`restore`/`pop`): 214
+- Observed edges during play: **102** unique `(from, clicked_text, to)` tuples.
+- Static edges covered by at least one observation: **30** (a single observation covers every static edge with the same `(from, to)` pair — gated branches collapse to one observable move).
+- Observed-only edges (no matching static edge, typically self-loop `<<link>>` wrappers that `<<replace>>` in-place): **78**.
+- Coverage: **6.05%** of the static graph explored.
+- Synthetic edges (Claude's out-of-band `eval`/`keys`/`restore`/`pop`): 264
 
 ### Playable-content partition
 - Passages defined in source: **358** (0 tagged `wip`, 1 empty-body placeholder).
 - Implied playable (non-WIP, non-empty): **357**.
-- Distinct passages visited at least once: **27** — playable-passage coverage: **7.6%**.
+- Distinct passages visited at least once: **50** — playable-passage coverage: **14.0%**.
 
 ### Static edge kinds
 | kind | count |

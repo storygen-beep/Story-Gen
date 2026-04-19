@@ -769,3 +769,97 @@ Pathfinder handles simple `$var == value` and `$var eq value` but can't evaluate
 | 2 | TwineExplorer Day3 Wed Phone+Bank+FakeID | Day 3 M | +Bartender+Bank+FakeID+Phone |
 | 3 | TwineExplorer Day3 Graduated | Day 3 | +Graduated (forced) |
 | 4 | TwineExplorer Day3 Graduated+Secretary+Baby+Apt | Day 3 | +Secretary hired + Apartment rented + Baby girl delivered + Instafame account |
+- [2026-04-19T10:44:06.175Z] === SESSION 6 FINDINGS ===
+- [2026-04-19T10:44:06.258Z] JOB PROMOTION MECHANIC confirmed: Work shift while jobs[N].xp >= threshold triggers special event. For Waiter: xp >=100 → 'You hear your boss calling you from his office' → click 'Go to his office' → RestaurantPromotionScene: promotion to 'VIP waitress' with sexy uniform (wear the uniform linkreplace). Rank 1 → 2 with new uniform requirement + bigger salary + tips. Implies Waiter career ladder: rank 1 (regular) → rank 2 (VIP waitress sexy uniform) → maybe rank 3+ (more).  RestaurantVIPScene: 'VIP SECTION, your new place of work, look around' with 'several erotic scenes'. RestaurantSpecialVisitSex: VIP visitor service event. OldManBarSex: late-night Bar work scene (martini + elderly man customer, alt Bartender shift content).
+- [2026-04-19T10:44:06.342Z] NO DISCRETE ENDINGS. Only 2 passages with 'End' suffix: JoinVipersEnd (gang induction completion text 'You're wearin' the colors now' — gameplay continues), RestaurantInterviewEnd (you got the job — gameplay continues). No Credits/GameOver/Finale passages. Graduation (SchoolGraduation) is the only one-way-door event but player continues after. This is a pure sandbox/progression game. The 'ending' is when the player decides they've done enough; SchoolFinalExam failure-route is a soft alt-ending (failure-type graduation with bad average). mark-ending not needed.
+- [2026-04-19T10:44:06.430Z] XCAM/LATE-NIGHT content: XCamBlackmail passage ('A GUY APPEARS IN FRONT OF YOUR HOUSE' — stalker fan approaches from XCam streams). Requires player.xcam.account=true + player.xcam.exp>=5 + (time==N or LN) + previous()==Residential + random(1,5)==1. Confirms: XCam is a streaming career (webcam required $200), creates stalker blackmail risk. GarageDrunk: 'lost your keys, everyone asleep, wait for someone' passage — triggers LN + drunk>=3 after ThomasParty/Residential. DRUG DEALING: SellDrugs (Vipers-branded: 'Selling drugs for the Vipers. You have to be careful, the police are always watching'). PackageDeliver: church delivery scene ('Strange Guy nervously pacing near a stained-glass window'). Drug dealing is tied to Vipers gang rank progression.
+- [2026-04-19T10:44:06.515Z] WALKTHROUGH-VIA-SOURCE: grepping passage_catalog.json by name pattern reveals game content structure. Totals: 358 passages, ~40 sex/scene-suffixed, ~30 NPC-specific scene variants, 12+ pregnancy-variant scenes, 5 class passages, 7 Thomas Party sub-passages, 13 Marcus arc, 5 Emma arc, 4 Vipers arc. Trans content: 2 passages (LibraryTransSex + LibraryTransSexKissChoice). DNATest: $70 hospital test (paternity puzzle part). KidnapAtPark: separate kidnap variant beyond LightningKidnapping.
+- [2026-04-19T10:44:06.600Z] FAST JOB SCENE PASSAGES all exist — DogWalking (Rex dog walking), BabySitting (client leaves, little one in care), HouseCleaning1 (client's messy house, start cleaning) vs HouseCleaning2 (client present 'Come on in'), ElderlyCare (knock → Someone answers). PrenatalCare + PrenatalCareBigBelly: Dr. Johnson pregnancy check-ups, stage-specific. VipersClean daily-limited ('There's nothing to clean right now. You should come tomorrow'). Grandpa arc scenes: GrandpaBedroomSex + GrandpaShowerSex + GrandpaKitchenSex + GrandpaExerciseSex (4 scene slots — matches Dad arc breadth).
+
+# Session 6 — promotion mechanics, random events, content catalog exhaustion
+
+## Job promotion mechanic (confirmed)
+
+Each job has an xp threshold that triggers a promotion event on the next `Work` shift:
+
+- **Waiter**: xp ≥ 100 → boss calls → `RestaurantPromotionScene` ("You will be promoted!") → rank 1 → 2 **VIP Waitress** with sexy-maid uniform + bigger salary + more generous tips.
+- **Post-promotion**: `RestaurantVIPScene` becomes available ("Welcome to the VIP section, here will be your new place of work. You see several erotic scenes in the VIP section. Look"). `RestaurantSpecialVisitSex` = VIP visitor event.
+- **Bartender**: `OldManBarSex` = alternate shift content (late-night bar, elderly martini customer) — confirms bartender progresses into special events at higher ranks.
+- Other jobs (Secretary / Stripper) likely have similar xp-gated promotion scenes.
+
+## Late-night / random event triggers (Phase 3 confirmed)
+
+| Event | Passage | Triggers | Gate |
+|---|---|---|---|
+| LightningKidnapping | Kidnapping by Thief | `previous == Apartment`? | low exhibitionism, at night in residential? |
+| KidnapAtPark | Wake up passage | Park at LN? | (untested) |
+| XCamBlackmail | XCamBlackmail | `xcam.account + xcam.exp≥5 + (time=="N" \|\| "LN") + previous=="Residential" + random(1,5)==1` | XCam account |
+| GarageDrunk | GarageDrunk | `time=="LN" + drunkness>=3 + random(1,2)==1 + (previous=="ThomasParty" \|\| "Residential")` | Drunk after party |
+| BathroomFlashScene | Bathroom shower surprise | `previous!="BathroomFlashScene" + random(1,2)==1 + Dad.arousal>0 + Dad.corruption>0 + IsNpcAtHome("Dad")` | Dad at home, corrupted |
+| DadShowerSex / DadPeepSex / DadShowerSexPregnant | Bathroom auto-event | `previous=="Hallway" + Dad in Bathroom + random(1,4)==1 + cascade by executedToday` | Dad in bathroom |
+| GrandpaShowerSex | Bathroom auto-event | similar, Grandpa in Bathroom | Grandpa in bathroom |
+| BathroomLactation / MorningSickness / BellyAwareness | Bathroom auto-event | isPregnant + stage | Pregnancy state |
+| EatSex | Kitchen auto-event | `random(1,3)==1 + Dad.arousal>0 + IsNpcAtHome("Dad")` | Dad in kitchen, aroused |
+
+## Drug dealing arc
+
+| Passage | Role |
+|---|---|
+| BuyDrugs | Drug dealer at AbandonedBuilding — buy Weed/Cocaine/Heroin/FakeID |
+| SellDrugs | Sell drugs for Vipers (daily limit: "should wait a few days") |
+| PackageDeliver | Deliver to church ("Strange Guy nervously pacing near stained-glass window") |
+| PackageDelivering (quest #18) | Quest wrapper for the delivery run |
+
+Gang ladder via `player.gang`: respect / title ("Recruit" → ???) / daysToWork cooldown. VipersClean daily chore earns $65+respect.
+
+## Trans content
+
+Only 2 passages (enabled via Preferences.transContent):
+- `LibraryTransSex` — Library scene with trans student
+- `LibraryTransSexKissChoice` — branching kiss prompt
+
+Small content category — the game's main corruption content is cishet-coded; trans is opt-in via Preferences toggle.
+
+## Full content catalog (358 passages — categorical tally)
+
+Based on name-pattern grep of `passage_catalog.json`:
+
+| Category | Count | Notes |
+|---|---|---|
+| `*Sex/Scene/Gangbang*` | ~40 | NPC-specific scenes + act-tagged variants |
+| `*Pregnant*` | ~12 | pregnancy state variants of base scenes |
+| `*Marcus*` | 13 | dating/boyfriend arc + Sam parallel |
+| `*Emma*` | 5 | friend house arc |
+| `*ThomasParty*` | 7 | party event + 5 sub-locations |
+| `*Viper*` | 4 | gang ladder |
+| `*Flash/Grope/Peep*` | ~15 | exhibitionism + surprise scenes |
+| `*Teacher/Tutor/Class*` | 6 | Mr. Thompson + Mr. Henry corruption routes |
+| `*Interview*` | 6 | career hire scenes |
+| Classes | 5 | Math/History/Computer/PE/Empty scheduled by time |
+
+## Endings — doctrinal finding
+
+**No discrete endings in Road to Success.** Searched `"name":` patterns for `End|Ending|Credits|GameOver|Complete|Finish|Finale` — only 2 hits, both non-terminal:
+
+- `JoinVipersEnd` — gang induction completion ("You're wearin' the colors now") — gameplay continues
+- `RestaurantInterviewEnd` — job hire completion ("You got the job!") — gameplay continues
+
+Game is pure sandbox with:
+- Graduation (one-way, closes school)
+- Failure-route (SchoolFinalExam failure = "failure graduation" — bad average)
+- Career rank progression (Waiter → VIP Waitress → …)
+- Gang rank progression (Recruit → …)
+- Pregnancy + baby count + adoption
+- Property ladder (house → apartment → owned properties)
+
+Per skill doctrine: **do NOT call `mark-ending` on this game.** `session.completed` stays false correctly.
+
+## Saves on disk (final)
+
+| Slot | Description | Progress |
+|---|---|---|
+| 0 | TwineExplorer Day1 | Pre-job |
+| 1 | TwineExplorer Day2 Tuesday | +Waiter |
+| 2 | TwineExplorer Day3 Wed Phone+Bank+FakeID | +Bartender+Bank+FakeID+Phone |
+| 3 | TwineExplorer Day3 Graduated | +Graduated |
+| 4 | TwineExplorer Day3 Graduated+Secretary+Baby+Apt | +Secretary+Apartment+Baby girl+Instafame |

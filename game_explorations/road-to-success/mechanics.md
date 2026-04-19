@@ -3,7 +3,7 @@
 > Design patterns detected. Framed for "what could this game teach mine?"
 
 ### Money / economic system
-**Present.** Money-like variable(s) detected. Income events: 1. Expense events: 1.
+**Present.** Money-like variable(s) detected. Income events: 3. Expense events: 0.
 
 ### Time / calendar system
 **Present.** 9 time-like variable(s). Choices may be day-anchored.
@@ -27,20 +27,20 @@ _Not detected._
 _Not detected._
 
 ## Scenes catalogued
-- Distinct passage names visited: 27 (the "Unique states seen" count in report.md includes variable-permutations of the same passage).
+- Distinct passage names visited: 50 (the "Unique states seen" count in report.md includes variable-permutations of the same passage).
 - Most-visited passages:
-  - `Roulette` × 12
-  - `Bedroom` × 9
-  - `HospitalBirth` × 7
-  - `Menu` × 6
-  - `OfficeInterview` × 6
-  - `StripClub` × 6
-  - `Office` × 5
-  - `ApartmentHall` × 3
-  - `ConfessionSex` × 3
-  - `Instafame` × 3
-  - `NakedLife` × 3
-  - `StripClubInterview` × 2
-  - `StripClubInterviewStage` × 2
-  - `RestaurantInterviewSex` × 2
-  - `PhotoStudio` × 2
+  - `Library` × 5
+  - `Menu` × 3
+  - `ApartmentBedroom` × 3
+  - `BathroomFlashScene` × 3
+  - `RestaurantWork` × 3
+  - `LibraryNatasha` × 2
+  - `NatashaLibrary` × 2
+  - `TalkWithNatasha` × 2
+  - `NatashaTalk` × 2
+  - `LibraryExhibitionism` × 2
+  - `PublicExhibitionism` × 2
+  - `NatashaPublicExhibitionism` × 2
+  - `TeacherTutoring` × 2
+  - `ComputerAfterClass` × 2
+  - `TutoringEvent` × 2
