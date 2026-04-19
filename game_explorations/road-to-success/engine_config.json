@@ -1,0 +1,181 @@
+{
+  "captured_at": "2026-04-19T10:49:03.939Z",
+  "engine": "sugarcube",
+  "version": {
+    "name": "SugarCube",
+    "major": 2,
+    "minor": 37,
+    "patch": 3,
+    "prerelease": null,
+    "build": 10338,
+    "short": "SugarCube (v2.37.3)",
+    "toString": "2.37.3+10338"
+  },
+  "config": {
+    "addVisitedLinkClass": false,
+    "cleanupWikifierOutput": false,
+    "debug": false,
+    "enableOptionalDebugging": false,
+    "loadDelay": 0,
+    "audio": {
+      "pauseOnFadeToZero": true,
+      "preloadMetadata": true
+    },
+    "history": {
+      "controls": true,
+      "maxStates": 40
+    },
+    "macros": {
+      "maxLoopIterations": 1000,
+      "typeSkipKey": " ",
+      "typeVisitedPassages": true,
+      "ifAssignmentError": "<deprecated>"
+    },
+    "navigation": {},
+    "passages": {
+      "displayTitles": false,
+      "nobr": true,
+      "start": "Menu",
+      "descriptions": "<deprecated>"
+    },
+    "saves": {
+      "id": "road-to-success-",
+      "maxAutoSaves": 1,
+      "maxSlotSaves": 8,
+      "autosave": "<deprecated>",
+      "onLoad": "<deprecated>",
+      "onSave": "<deprecated>",
+      "slots": "<deprecated>",
+      "tryDiskOnMobile": true
+    },
+    "ui": {
+      "stowBarInitially": 800,
+      "updateStoryElements": true
+    }
+  },
+  "state": {
+    "turn": null,
+    "turns": 1,
+    "length": 1,
+    "bottom_title": "Menu",
+    "active_title": "Menu",
+    "temporary_keys": [
+      "sidebarQuest",
+      "grouped",
+      "totalItems",
+      "uniqueItems",
+      "entry",
+      "id",
+      "quantity",
+      "item",
+      "categoryCount",
+      "sortedNpcs",
+      "relationCount",
+      "unreadPhoneThreads",
+      "level",
+      "title",
+      "exb",
+      "beauty",
+      "playerLocation"
+    ],
+    "prng_present": true,
+    "prng_state": null,
+    "history_length": 1,
+    "history_first_entry_shape": {
+      "keys": [
+        "title",
+        "variables"
+      ],
+      "title": "Menu"
+    },
+    "history_last_entry_shape": {
+      "keys": [
+        "title",
+        "variables"
+      ],
+      "title": "Menu"
+    },
+    "has_marshalForSave": true,
+    "has_unmarshalForSave": true
+  },
+  "story": {
+    "name": "Road to Success 🌴",
+    "ifid": "4DA890B8-3D8A-444F-9523-F88C7356E582",
+    "format": "SugarCube",
+    "format_version": "2.37.3",
+    "creator": "Tweego",
+    "creator_version": "2.1.1+81d1d71",
+    "startnode": "317",
+    "options": null,
+    "tags": null,
+    "zoom": "1",
+    "engine_title": "Road to Success 🌴",
+    "engine_name": "Road to Success 🌴",
+    "engine_dom_id": "road-to-success-"
+  },
+  "settings": {
+    "volume": 50
+  },
+  "save_caps": {
+    "has_serialize": true,
+    "has_deserialize": true,
+    "has_slots": true,
+    "has_autosave": true,
+    "slot_count": 5,
+    "on_save_handlers": 0,
+    "on_load_handlers": 0,
+    "slots_metadata": [
+      {
+        "index": 0,
+        "empty": false,
+        "id": "road-to-success-",
+        "title": null,
+        "date": "2026-04-19T07:18:45.879Z",
+        "description": null,
+        "metadata": null
+      },
+      {
+        "index": 1,
+        "empty": false,
+        "id": "road-to-success-",
+        "title": null,
+        "date": "2026-04-19T07:57:31.026Z",
+        "description": null,
+        "metadata": null
+      },
+      {
+        "index": 2,
+        "empty": false,
+        "id": "road-to-success-",
+        "title": null,
+        "date": "2026-04-19T09:51:33.064Z",
+        "description": null,
+        "metadata": null
+      },
+      {
+        "index": 3,
+        "empty": false,
+        "id": "road-to-success-",
+        "title": null,
+        "date": "2026-04-19T10:16:24.535Z",
+        "description": null,
+        "metadata": null
+      },
+      {
+        "index": 4,
+        "empty": false,
+        "id": "road-to-success-",
+        "title": null,
+        "date": "2026-04-19T10:32:32.941Z",
+        "description": null,
+        "metadata": null
+      }
+    ],
+    "autosave_metadata": {
+      "id": "road-to-success-",
+      "title": null,
+      "date": "2026-04-19T10:43:06.130Z",
+      "description": null
+    }
+  }
+}
