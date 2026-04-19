@@ -1,12 +1,97 @@
 {
-  "generated_at": "2026-04-18T09:36:11.758Z",
-  "total_observed_edges": 22,
-  "total_synthetic_edges": 127,
-  "total_play_log_entries": 367,
-  "total_timeline_entries": 178,
+  "generated_at": "2026-04-19T06:26:37.208Z",
+  "total_observed_edges": 33,
+  "total_synthetic_edges": 152,
+  "total_play_log_entries": 598,
+  "total_timeline_entries": 280,
   "initial_passage": "Disclaimer",
   "orphan_clicks": [],
   "observed_edges": [
+    {
+      "from": "Casino Slots",
+      "clicked_text": null,
+      "to": "Casino Slots",
+      "observation_count": 7,
+      "classifications": {
+        "branch": 6,
+        "observe": 1
+      },
+      "first_observed_ts": 1776537140452,
+      "last_observed_ts": 1776537188522,
+      "same_state_hits": 7,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "slot_bet": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            10
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Disclaimer",
+      "clicked_text": "Ok.",
+      "to": "StartPage",
+      "observation_count": 4,
+      "classifications": {
+        "branch": 4
+      },
+      "first_observed_ts": 1776499721889,
+      "last_observed_ts": 1776535900618,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "city_name": {
+          "count": 4,
+          "changes_count": 4,
+          "kinds": {
+            "changed": 4
+          },
+          "before_values": [
+            "Default Name",
+            "Default Name",
+            "Default Name",
+            "Default Name"
+          ],
+          "after_values": [
+            "Ambush Alley",
+            "Kickback Keys",
+            "Skullduggery Springs",
+            "Rogueport"
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 4,
+          "changes_count": 4,
+          "kinds": {
+            "changed": 4
+          },
+          "before_values": [
+            "Disclaimer",
+            "Disclaimer",
+            "Disclaimer",
+            "Disclaimer"
+          ],
+          "after_values": [
+            "StartPage",
+            "StartPage",
+            "StartPage",
+            "StartPage"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
     {
       "from": "CharGen2",
       "clicked_text": null,
@@ -243,47 +328,229 @@
       }
     },
     {
-      "from": "Disclaimer",
-      "clicked_text": "Ok.",
-      "to": "StartPage",
+      "from": "Motor Vehicle Theft",
+      "clicked_text": null,
+      "to": "Motor Vehicle Theft",
+      "observation_count": 3,
+      "classifications": {
+        "branch": 3
+      },
+      "first_observed_ts": 1776536303271,
+      "last_observed_ts": 1776536339003,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "right_solution_vehicle": {
+          "count": 3,
+          "changes_count": 3,
+          "kinds": {
+            "changed": 3
+          },
+          "before_values": [
+            0,
+            1,
+            2
+          ],
+          "after_values": [
+            1,
+            2,
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 3,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "timer_seconds": {
+          "count": 3,
+          "changes_count": 3,
+          "kinds": {
+            "changed": 3
+          },
+          "before_values": [
+            90,
+            69,
+            53
+          ],
+          "after_values": [
+            77,
+            53,
+            43
+          ],
+          "numeric_stats": {
+            "sample_count": 3,
+            "min_delta": -16,
+            "max_delta": -10,
+            "mean_delta": -13,
+            "always_same_delta": false
+          }
+        },
+        "car_theft_problem": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "You can't find an ignition cabel"
+          ],
+          "after_values": [
+            "Radio turns on"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Mafia Headquarters",
+      "clicked_text": null,
+      "to": "Mafia Headquarters",
+      "observation_count": 3,
+      "classifications": {
+        "branch": 3
+      },
+      "first_observed_ts": 1776536405112,
+      "last_observed_ts": 1776536455387,
+      "same_state_hits": 2,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "met_mechanic": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "Outskirts",
+      "clicked_text": null,
+      "to": "Outskirts",
       "observation_count": 2,
       "classifications": {
         "branch": 2
       },
-      "first_observed_ts": 1776499721889,
-      "last_observed_ts": 1776504126640,
+      "first_observed_ts": 1776535012463,
+      "last_observed_ts": 1776536482954,
+      "same_state_hits": 2,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "Car Chase",
+      "clicked_text": null,
+      "to": "Car Chase",
+      "observation_count": 2,
+      "classifications": {
+        "branch": 2
+      },
+      "first_observed_ts": 1776536528996,
+      "last_observed_ts": 1776536540087,
       "same_state_hits": 0,
-      "is_self_loop": false,
+      "is_self_loop": true,
       "effect_aggregate": {
-        "city_name": {
+        "chase_timer": {
           "count": 2,
           "changes_count": 2,
           "kinds": {
             "changed": 2
           },
           "before_values": [
-            "Default Name",
-            "Default Name"
+            37.0800000000004,
+            18.4000000000008
           ],
           "after_values": [
-            "Ambush Alley",
-            "Kickback Keys"
+            18.4000000000008,
+            7.400000000001023
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": -18.679999999999602,
+            "max_delta": -10.99999999999978,
+            "mean_delta": -14.84,
+            "always_same_delta": false
+          }
+        },
+        "chase_success": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            18,
+            17
+          ],
+          "after_values": [
+            17,
+            16
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": -1,
+            "max_delta": -1,
+            "mean_delta": -1,
+            "always_same_delta": true
+          }
+        },
+        "chase_problem": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            "A flash mob is dancing in the street, but there's the way up ahead!",
+            "There's an unobstructed route visible up ahead!"
+          ],
+          "after_values": [
+            "There's an unobstructed route visible up ahead!",
+            "The road ahead is filled with debris!"
           ],
           "numeric_stats": null
         },
-        "return": {
-          "count": 2,
-          "changes_count": 2,
+        "chase_right_dir.0": {
+          "count": 1,
+          "changes_count": 1,
           "kinds": {
-            "changed": 2
+            "changed": 1
           },
           "before_values": [
-            "Disclaimer",
-            "Disclaimer"
+            "direct"
           ],
           "after_values": [
-            "StartPage",
-            "StartPage"
+            "right"
+          ],
+          "numeric_stats": null
+        },
+        "chase_right_dir.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "left"
           ],
           "numeric_stats": null
         }
@@ -2029,6 +2296,752 @@
           "numeric_stats": null
         }
       }
+    },
+    {
+      "from": "Outskirts",
+      "clicked_text": null,
+      "to": "Motor Vehicle Theft",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776536174425,
+      "last_observed_ts": 1776536174425,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "gameDate.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "2025-01-01T22:00:00.000Z"
+          ],
+          "after_values": [
+            "2025-01-01T23:00:00.000Z"
+          ],
+          "numeric_stats": null
+        },
+        "stam": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            12
+          ],
+          "after_values": [
+            11
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -1,
+            "max_delta": -1,
+            "mean_delta": -1,
+            "always_same_delta": true
+          }
+        },
+        "heat": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            6
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 6,
+            "max_delta": 6,
+            "mean_delta": 6,
+            "always_same_delta": true
+          }
+        },
+        "bikers_heat": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            7
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 7,
+            "max_delta": 7,
+            "mean_delta": 7,
+            "always_same_delta": true
+          }
+        },
+        "stat_heat": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            6
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 6,
+            "max_delta": 6,
+            "mean_delta": 6,
+            "always_same_delta": true
+          }
+        },
+        "car_theft_problem": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "Radio turns on"
+          ],
+          "numeric_stats": null
+        },
+        "target_car": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "Van Car"
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Outskirts"
+          ],
+          "after_values": [
+            "Motor Vehicle Theft"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Motor Vehicle Theft Success",
+      "clicked_text": "Sell it to mafia for dirty cash",
+      "to": "Mafia Headquarters",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776536375715,
+      "last_observed_ts": 1776536375715,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "gameDate.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "2025-01-01T23:00:00.000Z"
+          ],
+          "after_values": [
+            "2025-01-02T00:00:00.000Z"
+          ],
+          "numeric_stats": null
+        },
+        "dirty_money": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            50000
+          ],
+          "after_values": [
+            null
+          ],
+          "numeric_stats": null
+        },
+        "exp_percentage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            14
+          ],
+          "after_values": [
+            42
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 28,
+            "max_delta": 28,
+            "mean_delta": 28,
+            "always_same_delta": true
+          }
+        },
+        "reputation": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            15000
+          ],
+          "after_values": [
+            15041
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 41,
+            "max_delta": 41,
+            "mean_delta": 41,
+            "always_same_delta": true
+          }
+        },
+        "car_thief_trait_progress": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            7
+          ],
+          "after_values": [
+            21
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 14,
+            "max_delta": 14,
+            "mean_delta": 14,
+            "always_same_delta": true
+          }
+        },
+        "right_solution_vehicle": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            0
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -3,
+            "max_delta": -3,
+            "mean_delta": -3,
+            "always_same_delta": true
+          }
+        },
+        "car_theft_problem": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Car alarm turns on"
+          ],
+          "after_values": [
+            ""
+          ],
+          "numeric_stats": null
+        },
+        "timer_seconds": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            42
+          ],
+          "after_values": [
+            90
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 48,
+            "max_delta": 48,
+            "mean_delta": 48,
+            "always_same_delta": true
+          }
+        },
+        "target_car": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Sedan"
+          ],
+          "after_values": [
+            ""
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Motor Vehicle Theft Success"
+          ],
+          "after_values": [
+            "Mafia Headquarters"
+          ],
+          "numeric_stats": null
+        },
+        "notify_array.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "You've improved your car thievery skills! 42%/100% for a new trait."
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Outskirts",
+      "clicked_text": null,
+      "to": "Car Chase",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776536493656,
+      "last_observed_ts": 1776536493656,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "gameDate.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "2025-01-01T22:00:00.000Z"
+          ],
+          "after_values": [
+            "2025-01-02T00:00:00.000Z"
+          ],
+          "numeric_stats": null
+        },
+        "arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "heat": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            6
+          ],
+          "after_values": [
+            11
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 5,
+            "max_delta": 5,
+            "mean_delta": 5,
+            "always_same_delta": true
+          }
+        },
+        "bikers_heat": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            7
+          ],
+          "after_values": [
+            13
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 6,
+            "max_delta": 6,
+            "mean_delta": 6,
+            "always_same_delta": true
+          }
+        },
+        "money": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            50000
+          ],
+          "after_values": [
+            49000
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -1000,
+            "max_delta": -1000,
+            "mean_delta": -1000,
+            "always_same_delta": true
+          }
+        },
+        "race_active": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            true
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "stat_money_used": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1000
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1000,
+            "max_delta": 1000,
+            "mean_delta": 1000,
+            "always_same_delta": true
+          }
+        },
+        "stat_heat": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            6
+          ],
+          "after_values": [
+            11
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 5,
+            "max_delta": 5,
+            "mean_delta": 5,
+            "always_same_delta": true
+          }
+        },
+        "chase_timer": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            55.800000000000004
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 55.800000000000004,
+            "max_delta": 55.800000000000004,
+            "mean_delta": 55.8,
+            "always_same_delta": true
+          }
+        },
+        "chase_success": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            18
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 18,
+            "max_delta": 18,
+            "mean_delta": 18,
+            "always_same_delta": true
+          }
+        },
+        "chase_hp": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            10
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 10,
+            "max_delta": 10,
+            "mean_delta": 10,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Outskirts"
+          ],
+          "after_values": [
+            "Car Chase"
+          ],
+          "numeric_stats": null
+        },
+        "chase_right_dir.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "direct"
+          ],
+          "numeric_stats": null
+        },
+        "chase_problem": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "A flash mob is dancing in the street, but there's the way up ahead!"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Car Chase",
+      "clicked_text": null,
+      "to": "Car Chase Lose",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776536557486,
+      "last_observed_ts": 1776536557486,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "exp_percentage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            42
+          ],
+          "after_values": [
+            18
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -24,
+            "max_delta": -24,
+            "mean_delta": -24,
+            "always_same_delta": true
+          }
+        },
+        "racer_trait_progress": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            18
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 18,
+            "max_delta": 18,
+            "mean_delta": 18,
+            "always_same_delta": true
+          }
+        },
+        "chase_timer": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            7.400000000001023
+          ],
+          "after_values": [
+            -0.039999999998983383
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -7.440000000000006,
+            "max_delta": -7.440000000000006,
+            "mean_delta": -7.44,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Car Chase"
+          ],
+          "after_values": [
+            "Car Chase Lose"
+          ],
+          "numeric_stats": null
+        },
+        "notify_array.2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "You could learn a thing or two about riding on such speed. Well... 18%/100% for a new trait."
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "HeistMenu",
+      "clicked_text": "Heisting",
+      "to": "HeistMenu",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776579572680,
+      "last_observed_ts": 1776579572680,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
+    },
+    {
+      "from": "HeistMenu",
+      "clicked_text": null,
+      "to": "HeistMenu",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1776579584846,
+      "last_observed_ts": 1776579584846,
+      "same_state_hits": 1,
+      "is_self_loop": true,
+      "effect_aggregate": {}
     }
   ],
   "synthetic_edges": [
@@ -7537,13 +8550,2159 @@
           "numeric_stats": null
         }
       }
+    },
+    {
+      "cmd": "eval",
+      "from": "StartPage",
+      "to": "StartPage",
+      "observation_count": 7,
+      "first_observed_ts": 1776534308714,
+      "last_observed_ts": 1776534395060,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "StartPage",
+      "to": "QuickStart Menu",
+      "observation_count": 2,
+      "first_observed_ts": 1776534434864,
+      "last_observed_ts": 1776535902169,
+      "effect_aggregate": {
+        "adolesence": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            "",
+            ""
+          ],
+          "after_values": [
+            "Bully",
+            "Bully"
+          ],
+          "numeric_stats": null
+        },
+        "first_crime": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            "",
+            ""
+          ],
+          "after_values": [
+            "Robbery",
+            "Robbery"
+          ],
+          "numeric_stats": null
+        },
+        "last_crime": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            "",
+            ""
+          ],
+          "after_values": [
+            "Burglary",
+            "Burglary"
+          ],
+          "numeric_stats": null
+        },
+        "band_name": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            "Band",
+            "Band"
+          ],
+          "after_values": [
+            "Dawg",
+            "Gang band"
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            "StartPage",
+            "StartPage"
+          ],
+          "after_values": [
+            "QuickStart Menu",
+            "QuickStart Menu"
+          ],
+          "numeric_stats": null
+        },
+        "pc_haircolor": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "added": 2
+          },
+          "before_values": [
+            null,
+            null
+          ],
+          "after_values": [
+            "brunette",
+            "brunette"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "QuickStart Menu",
+      "to": "Home",
+      "observation_count": 2,
+      "first_observed_ts": 1776534503089,
+      "last_observed_ts": 1776535917158,
+      "effect_aggregate": {
+        "cun_base": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            3,
+            3
+          ],
+          "after_values": [
+            6,
+            10
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": 3,
+            "max_delta": 7,
+            "mean_delta": 5,
+            "always_same_delta": false
+          }
+        },
+        "combat_base": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            3,
+            3
+          ],
+          "after_values": [
+            7,
+            10
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": 4,
+            "max_delta": 7,
+            "mean_delta": 5.5,
+            "always_same_delta": false
+          }
+        },
+        "first_crime": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            "Robbery",
+            "Robbery"
+          ],
+          "after_values": [
+            "Theft",
+            "Theft"
+          ],
+          "numeric_stats": null
+        },
+        "money": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            0,
+            0
+          ],
+          "after_values": [
+            10000,
+            500000
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": 10000,
+            "max_delta": 500000,
+            "mean_delta": 255000,
+            "always_same_delta": false
+          }
+        },
+        "reputation": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            0,
+            0
+          ],
+          "after_values": [
+            5000,
+            15000
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": 5000,
+            "max_delta": 15000,
+            "mean_delta": 10000,
+            "always_same_delta": false
+          }
+        },
+        "gangs_base": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            false,
+            false
+          ],
+          "after_values": [
+            true,
+            true
+          ],
+          "numeric_stats": null
+        },
+        "gangs_met": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            0,
+            0
+          ],
+          "after_values": [
+            1,
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "mafia_base": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            false,
+            false
+          ],
+          "after_values": [
+            true,
+            true
+          ],
+          "numeric_stats": null
+        },
+        "mafia_met": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            0,
+            0
+          ],
+          "after_values": [
+            1,
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "cartel_base": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            false,
+            false
+          ],
+          "after_values": [
+            true,
+            true
+          ],
+          "numeric_stats": null
+        },
+        "cartel_met": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            0,
+            0
+          ],
+          "after_values": [
+            3,
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": 3,
+            "max_delta": 3,
+            "mean_delta": 3,
+            "always_same_delta": true
+          }
+        },
+        "bikers_met": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            0,
+            0
+          ],
+          "after_values": [
+            1,
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "car_1": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            false,
+            false
+          ],
+          "after_values": [
+            true,
+            true
+          ],
+          "numeric_stats": null
+        },
+        "car": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            0,
+            0
+          ],
+          "after_values": [
+            1,
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "home_type": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            0,
+            0
+          ],
+          "after_values": [
+            2,
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "p_warehouse": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            0,
+            0
+          ],
+          "after_values": [
+            2,
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "p_warehouse_size": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            0,
+            0
+          ],
+          "after_values": [
+            5,
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": 5,
+            "max_delta": 5,
+            "mean_delta": 5,
+            "always_same_delta": true
+          }
+        },
+        "warehouse_rent": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            0,
+            0
+          ],
+          "after_values": [
+            30,
+            30
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": 30,
+            "max_delta": 30,
+            "mean_delta": 30,
+            "always_same_delta": true
+          }
+        },
+        "p_boss": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            false,
+            false
+          ],
+          "after_values": [
+            true,
+            true
+          ],
+          "numeric_stats": null
+        },
+        "original_band_name": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            "Band",
+            "Band"
+          ],
+          "after_values": [
+            "The Syndicate",
+            "The Syndicate"
+          ],
+          "numeric_stats": null
+        },
+        "game_state": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            0,
+            0
+          ],
+          "after_values": [
+            1,
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        },
+        "outskirts_roadblock": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            true,
+            true
+          ],
+          "after_values": [
+            false,
+            false
+          ],
+          "numeric_stats": null
+        },
+        "news_setup": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            false,
+            false
+          ],
+          "after_values": [
+            true,
+            true
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            "QuickStart Menu",
+            "QuickStart Menu"
+          ],
+          "after_values": [
+            "Home",
+            "Home"
+          ],
+          "numeric_stats": null
+        },
+        "todayNews": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "added": 2
+          },
+          "before_values": [
+            null,
+            null
+          ],
+          "after_values": [
+            {
+              "text": "Reports of an impromptu street race on outskirts. Police issue warnings.",
+              "tags": [
+                "fluff"
+              ]
+            },
+            {
+              "text": "GhostBit retreats as volumes dry up across exchanges.",
+              "tags": [
+                "crypto_gbt_down"
+              ]
+            }
+          ],
+          "numeric_stats": null
+        },
+        "callText": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "added": 2
+          },
+          "before_values": [
+            null,
+            null
+          ],
+          "after_values": [
+            "Reports of an impromptu street race on outskirts. Police issue warnings.",
+            "GhostBit retreats as volumes dry up across exchanges."
+          ],
+          "numeric_stats": null
+        },
+        "callTarget": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "added": 2
+          },
+          "before_values": [
+            null,
+            null
+          ],
+          "after_values": [
+            null,
+            null
+          ],
+          "numeric_stats": null
+        },
+        "charm_base": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            10
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 7,
+            "max_delta": 7,
+            "mean_delta": 7,
+            "always_same_delta": true
+          }
+        },
+        "base_energy": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            6
+          ],
+          "after_values": [
+            12
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 6,
+            "max_delta": 6,
+            "mean_delta": 6,
+            "always_same_delta": true
+          }
+        },
+        "stam": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            6
+          ],
+          "after_values": [
+            12
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 6,
+            "max_delta": 6,
+            "mean_delta": 6,
+            "always_same_delta": true
+          }
+        },
+        "p_hp_max": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            30
+          ],
+          "after_values": [
+            60
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 30,
+            "max_delta": 30,
+            "mean_delta": 30,
+            "always_same_delta": true
+          }
+        },
+        "p_hp": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            30
+          ],
+          "after_values": [
+            60
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 30,
+            "max_delta": 30,
+            "mean_delta": 30,
+            "always_same_delta": true
+          }
+        },
+        "dirty_money": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            50000
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 50000,
+            "max_delta": 50000,
+            "mean_delta": 50000,
+            "always_same_delta": true
+          }
+        },
+        "band_name": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Gang band"
+          ],
+          "after_values": [
+            "The Syndicate"
+          ],
+          "numeric_stats": null
+        },
+        "crypto_gbt": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1648
+          ],
+          "after_values": [
+            989
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -659,
+            "max_delta": -659,
+            "mean_delta": -659,
+            "always_same_delta": true
+          }
+        },
+        "crypto_gbt_history.2": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1600
+          ],
+          "after_values": [
+            1648
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 48,
+            "max_delta": 48,
+            "mean_delta": 48,
+            "always_same_delta": true
+          }
+        },
+        "crypto_gbt_history.3": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1600
+          ],
+          "after_values": [
+            1165
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -435,
+            "max_delta": -435,
+            "mean_delta": -435,
+            "always_same_delta": true
+          }
+        },
+        "crypto_gbt_history.4": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1648
+          ],
+          "after_values": [
+            989
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -659,
+            "max_delta": -659,
+            "mean_delta": -659,
+            "always_same_delta": true
+          }
+        },
+        "pc_haircolor": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "brunette"
+          ],
+          "after_values": [
+            "redhead"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Home",
+      "to": "Outskirts",
+      "observation_count": 1,
+      "first_observed_ts": 1776534514976,
+      "last_observed_ts": 1776534514976,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Home"
+          ],
+          "after_values": [
+            "Outskirts"
+          ],
+          "numeric_stats": null
+        },
+        "outskirts_amount": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": null
+        },
+        "outskirts_price": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            387
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Outskirts",
+      "to": "Motor Vehicle Theft",
+      "observation_count": 1,
+      "first_observed_ts": 1776534556857,
+      "last_observed_ts": 1776534556857,
+      "effect_aggregate": {
+        "car_theft_problem": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "Car alarm turns on"
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Outskirts"
+          ],
+          "after_values": [
+            "Motor Vehicle Theft"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Motor Vehicle Theft",
+      "to": "Car Chase Lose",
+      "observation_count": 1,
+      "first_observed_ts": 1776534568193,
+      "last_observed_ts": 1776534568193,
+      "effect_aggregate": {
+        "exp_percentage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            56
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 56,
+            "max_delta": 56,
+            "mean_delta": 56,
+            "always_same_delta": true
+          }
+        },
+        "reputation": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            5000
+          ],
+          "after_values": [
+            5184
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 184,
+            "max_delta": 184,
+            "mean_delta": 184,
+            "always_same_delta": true
+          }
+        },
+        "racer_trait_progress": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            56
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 56,
+            "max_delta": 56,
+            "mean_delta": 56,
+            "always_same_delta": true
+          }
+        },
+        "race_cd": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 3,
+            "max_delta": 3,
+            "mean_delta": 3,
+            "always_same_delta": true
+          }
+        },
+        "timer_seconds": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            40
+          ],
+          "after_values": [
+            29
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -11,
+            "max_delta": -11,
+            "mean_delta": -11,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Motor Vehicle Theft"
+          ],
+          "after_values": [
+            "Car Chase Lose"
+          ],
+          "numeric_stats": null
+        },
+        "notify_array.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "You felt this thing called a freedom. On the road, of course. 31%/100% for a new trait."
+          ],
+          "numeric_stats": null
+        },
+        "notify_array.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "You could learn a thing or two about riding on such speed. Well... 56%/100% for a new trait."
+          ],
+          "numeric_stats": null
+        },
+        "chase_right_dir.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "direct"
+          ],
+          "numeric_stats": null
+        },
+        "chase_right_dir.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "right"
+          ],
+          "numeric_stats": null
+        },
+        "chase_problem": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "There’s an unexpected curve to the left coming up!"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Car Chase Lose",
+      "to": "Harbor-Dark Alleys",
+      "observation_count": 1,
+      "first_observed_ts": 1776534643434,
+      "last_observed_ts": 1776534643434,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Car Chase Lose"
+          ],
+          "after_values": [
+            "Harbor-Dark Alleys"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Harbor-Dark Alleys",
+      "to": "Dark Alleys",
+      "observation_count": 1,
+      "first_observed_ts": 1776534654684,
+      "last_observed_ts": 1776534654684,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Harbor-Dark Alleys"
+          ],
+          "after_values": [
+            "Dark Alleys"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Dark Alleys",
+      "to": "Whiteboard",
+      "observation_count": 1,
+      "first_observed_ts": 1776534759044,
+      "last_observed_ts": 1776534759044,
+      "effect_aggregate": {
+        "boss_rep_lose": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            15
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 15,
+            "max_delta": 15,
+            "mean_delta": 15,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Dark Alleys"
+          ],
+          "after_values": [
+            "Whiteboard"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Whiteboard",
+      "to": "Outskirts",
+      "observation_count": 1,
+      "first_observed_ts": 1776534987509,
+      "last_observed_ts": 1776534987509,
+      "effect_aggregate": {
+        "gameDate.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "2010-06-01T08:00:00.000Z"
+          ],
+          "after_values": [
+            "2025-01-01T22:00:00.000Z"
+          ],
+          "numeric_stats": null
+        },
+        "race_cd": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            0
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -3,
+            "max_delta": -3,
+            "mean_delta": -3,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Whiteboard"
+          ],
+          "after_values": [
+            "Outskirts"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Home",
+      "to": "HeistMenu",
+      "observation_count": 1,
+      "first_observed_ts": 1776535949939,
+      "last_observed_ts": 1776535949939,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Home"
+          ],
+          "after_values": [
+            "HeistMenu"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "HeistMenu",
+      "to": "Outskirts",
+      "observation_count": 1,
+      "first_observed_ts": 1776536111870,
+      "last_observed_ts": 1776536111870,
+      "effect_aggregate": {
+        "gameDate.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "2010-06-01T08:00:00.000Z"
+          ],
+          "after_values": [
+            "2025-01-01T22:00:00.000Z"
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "HeistMenu"
+          ],
+          "after_values": [
+            "Outskirts"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Outskirts",
+      "to": "Outskirts",
+      "observation_count": 6,
+      "first_observed_ts": 1776536127487,
+      "last_observed_ts": 1776536786773,
+      "effect_aggregate": {
+        "p_inv.1.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "new setup.Inventory({}, [])"
+          ],
+          "after_values": [
+            "new setup.Inventory({\"Car Opening Tools\":1,\"Lockpick\":10,\"Safe-cracking kit\":1}, [])"
+          ],
+          "numeric_stats": null
+        },
+        "p_range.1.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "new setup.Inventory({}, [])"
+          ],
+          "after_values": [
+            "new setup.Inventory({\"Block 19\":3}, [])"
+          ],
+          "numeric_stats": null
+        },
+        "p_craft.1.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "new setup.Inventory({}, [])"
+          ],
+          "after_values": [
+            "new setup.Inventory({\"Agricultural Products\":10,\"Chems A\":5,\"Chems B\":5,\"Gun Parts\":10}, [])"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Motor Vehicle Theft",
+      "to": "Motor Vehicle Theft",
+      "observation_count": 2,
+      "first_observed_ts": 1776536199064,
+      "last_observed_ts": 1776536212940,
+      "effect_aggregate": {
+        "timer_seconds": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            25,
+            11
+          ],
+          "after_values": [
+            11,
+            0
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": -14,
+            "max_delta": -11,
+            "mean_delta": -12.5,
+            "always_same_delta": false
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Motor Vehicle Theft",
+      "to": "Motor Vehicle Caught",
+      "observation_count": 1,
+      "first_observed_ts": 1776536243463,
+      "last_observed_ts": 1776536243463,
+      "effect_aggregate": {
+        "exp_percentage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            14
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 14,
+            "max_delta": 14,
+            "mean_delta": 14,
+            "always_same_delta": true
+          }
+        },
+        "car_thief_trait_progress": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            7
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 7,
+            "max_delta": 7,
+            "mean_delta": 7,
+            "always_same_delta": true
+          }
+        },
+        "stat_car_thievery": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "starting_timer_vehicle": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            40
+          ],
+          "after_values": [
+            90
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 50,
+            "max_delta": 50,
+            "mean_delta": 50,
+            "always_same_delta": true
+          }
+        },
+        "car_theft_problem": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Radio turns on"
+          ],
+          "after_values": [
+            ""
+          ],
+          "numeric_stats": null
+        },
+        "timer_seconds": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            90
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 90,
+            "max_delta": 90,
+            "mean_delta": 90,
+            "always_same_delta": true
+          }
+        },
+        "target_car": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Van Car"
+          ],
+          "after_values": [
+            ""
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Motor Vehicle Theft"
+          ],
+          "after_values": [
+            "Motor Vehicle Caught"
+          ],
+          "numeric_stats": null
+        },
+        "notify_array.0": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "You've improved your car thievery skills despite this failure. 14%/100% for a new trait."
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Motor Vehicle Caught",
+      "to": "Motor Vehicle Theft",
+      "observation_count": 1,
+      "first_observed_ts": 1776536290238,
+      "last_observed_ts": 1776536290238,
+      "effect_aggregate": {
+        "car_theft_problem": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "Radio turns on"
+          ],
+          "numeric_stats": null
+        },
+        "target_car": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "Sedan"
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Motor Vehicle Caught"
+          ],
+          "after_values": [
+            "Motor Vehicle Theft"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Mafia Headquarters",
+      "to": "Outskirts",
+      "observation_count": 1,
+      "first_observed_ts": 1776536476672,
+      "last_observed_ts": 1776536476672,
+      "effect_aggregate": {
+        "gameDate.1": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "2025-01-02T00:00:00.000Z"
+          ],
+          "after_values": [
+            "2025-01-01T22:00:00.000Z"
+          ],
+          "numeric_stats": null
+        },
+        "money": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            500000
+          ],
+          "after_values": [
+            50000
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -450000,
+            "max_delta": -450000,
+            "mean_delta": -450000,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Mafia Headquarters"
+          ],
+          "after_values": [
+            "Outskirts"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Car Chase Lose",
+      "to": "Outskirts",
+      "observation_count": 1,
+      "first_observed_ts": 1776536583726,
+      "last_observed_ts": 1776536583726,
+      "effect_aggregate": {
+        "cun_base": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            10
+          ],
+          "after_values": [
+            12
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "cun": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            3
+          ],
+          "after_values": [
+            12
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 9,
+            "max_delta": 9,
+            "mean_delta": 9,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Car Chase Lose"
+          ],
+          "after_values": [
+            "Outskirts"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Outskirts",
+      "to": "Mall Clothing",
+      "observation_count": 1,
+      "first_observed_ts": 1776536799932,
+      "last_observed_ts": 1776536799932,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Outskirts"
+          ],
+          "after_values": [
+            "Mall Clothing"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Mall Clothing",
+      "to": "Mall Clothing",
+      "observation_count": 14,
+      "first_observed_ts": 1776536800599,
+      "last_observed_ts": 1776537096311,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Outskirts"
+          ],
+          "after_values": [
+            "Mall Clothing"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Mall Clothing",
+      "to": "Casino Slots",
+      "observation_count": 1,
+      "first_observed_ts": 1776537126931,
+      "last_observed_ts": 1776537126931,
+      "effect_aggregate": {
+        "crowns": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1000
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1000,
+            "max_delta": 1000,
+            "mean_delta": 1000,
+            "always_same_delta": true
+          }
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Mall Clothing"
+          ],
+          "after_values": [
+            "Casino Slots"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Casino Slots",
+      "to": "Casino Slots",
+      "observation_count": 4,
+      "first_observed_ts": 1776537154178,
+      "last_observed_ts": 1776537447324,
+      "effect_aggregate": {
+        "slot_bet": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            10
+          ],
+          "numeric_stats": null
+        },
+        "crowns": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            1000
+          ],
+          "after_values": [
+            1090
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 90,
+            "max_delta": 90,
+            "mean_delta": 90,
+            "always_same_delta": true
+          }
+        },
+        "slot_spins": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            12
+          ],
+          "numeric_stats": null
+        },
+        "slot_reels": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            [
+              {
+                "icon": "img/UI/icons/sabo_active.png",
+                "multiplier": 10,
+                "weight": 24
+              },
+              {
+                "icon": "img/UI/icons/sabo_active.png",
+                "multiplier": 10,
+                "weight": 24
+              },
+              {
+                "icon": "img/UI/icons/sabo_active.png",
+                "multiplier": 10,
+                "weight": 24
+              }
+            ]
+          ],
+          "numeric_stats": null
+        },
+        "slot_win": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            100
+          ],
+          "numeric_stats": null
+        },
+        "slot_reels_html": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "<div style=\"display:flex; justify-content:center; gap:10px;\"><div class=\"slot-reel\"><img src=\"img/UI/icons/sabo_active.png\" class=\"slot-icon\"></div><div class=\"slot-reel\"><img src=\"img/UI/icons/sabo_active.png\" class=\"slot-icon\"></div><div class=\"slot-reel\"><img src=\"img/UI/icons/sabo_active.png\" class=\"slot-icon\"></div></div>"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "Disclaimer",
+      "to": "Disclaimer",
+      "observation_count": 1,
+      "first_observed_ts": 1776579276803,
+      "last_observed_ts": 1776579276803,
+      "effect_aggregate": {}
+    },
+    {
+      "cmd": "eval",
+      "from": "Disclaimer",
+      "to": "HeistMenu",
+      "observation_count": 1,
+      "first_observed_ts": 1776579566790,
+      "last_observed_ts": 1776579566790,
+      "effect_aggregate": {
+        "money": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            500000
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 500000,
+            "max_delta": 500000,
+            "mean_delta": 500000,
+            "always_same_delta": true
+          }
+        },
+        "reputation": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            25000
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 25000,
+            "max_delta": 25000,
+            "mean_delta": 25000,
+            "always_same_delta": true
+          }
+        },
+        "p_boss": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            false
+          ],
+          "after_values": [
+            true
+          ],
+          "numeric_stats": null
+        },
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Disclaimer"
+          ],
+          "after_values": [
+            "HeistMenu"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "HeistMenu",
+      "to": "Basement",
+      "observation_count": 1,
+      "first_observed_ts": 1776579951666,
+      "last_observed_ts": 1776579951666,
+      "effect_aggregate": {
+        "return": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "HeistMenu"
+          ],
+          "after_values": [
+            "Basement"
+          ],
+          "numeric_stats": null
+        },
+        "callText": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            "No calls today."
+          ],
+          "numeric_stats": null
+        },
+        "callTarget": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "added": 1
+          },
+          "before_values": [
+            null
+          ],
+          "after_values": [
+            null
+          ],
+          "numeric_stats": null
+        }
+      }
     }
   ],
   "coverage": {
     "static_edges_total": 2120,
-    "observed_static_edges": 39,
-    "unobserved_static_edges": 2081,
-    "coverage_ratio": 0.0184,
-    "observed_only_edges": 5
+    "observed_static_edges": 49,
+    "unobserved_static_edges": 2071,
+    "coverage_ratio": 0.0231,
+    "observed_only_edges": 10
   }
 }
