@@ -3,7 +3,7 @@
 > Design patterns detected. Framed for "what could this game teach mine?"
 
 ### Money / economic system
-**Present.** Money-like variable(s) detected. Income events: 2. Expense events: 3.
+**Present.** Money-like variable(s) detected. Income events: 0. Expense events: 0.
 
 ### Time / calendar system
 **Present.** 1 time-like variable(s). Choices may be day-anchored.
@@ -21,26 +21,26 @@ _Not detected._
 **Present.** 5 body-like variable(s). Transitions: 0.
 
 ### Multi-NPC parallel threads
-**Present.** 6 NPCs detected with dedicated stat vars.
+**Present.** 7 NPCs detected with dedicated stat vars.
 
 ### Location trilemmas / day-end navigation
 _Not detected._
 
 ## Scenes catalogued
-- Distinct passage names visited: 70 (the "Unique states seen" count in report.md includes variable-permutations of the same passage).
+- Distinct passage names visited: 47 (the "Unique states seen" count in report.md includes variable-permutations of the same passage).
 - Most-visited passages:
-  - `school` × 10
-  - `city` × 9
-  - `gym` × 9
-  - `office` × 8
-  - `trainCabin` × 6
-  - `caineOutside` × 6
-  - `outskirts` × 5
-  - `trainstation` × 5
-  - `silvergateUnderground` × 5
-  - `losHuevas` × 5
-  - `silvergate` × 4
-  - `trueMansion` × 4
-  - `morris` × 4
-  - `brothel` × 4
-  - `Park` × 4
+  - `MoN Outside` × 10
+  - `WIP Current Trap1` × 10
+  - `chipCage` × 8
+  - `church` × 7
+  - `MoN Explore` × 6
+  - `abandonedTracks` × 5
+  - `GMA` × 5
+  - `churchWallsInit` × 4
+  - `Beginning` × 3
+  - `roulette` × 3
+  - `rouletteRun` × 3
+  - `courtClues` × 3
+  - `facility` × 3
+  - `safehouse` × 3
+  - `caineOutside` × 2

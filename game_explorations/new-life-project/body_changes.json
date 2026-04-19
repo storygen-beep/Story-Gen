@@ -7,9 +7,9 @@
           "object"
         ],
         "mutation_count": 0,
-        "first_ts": 1776593148429,
-        "last_ts": 1776594162343,
-        "passages_seen_on_count": 70
+        "first_ts": 1776595046612,
+        "last_ts": 1776595921611,
+        "passages_seen_on_count": 47
       }
     },
     {
@@ -19,11 +19,11 @@
           "number"
         ],
         "mutation_count": 0,
-        "first_ts": 1776593148429,
-        "last_ts": 1776594162343,
-        "passages_seen_on_count": 70,
+        "first_ts": 1776595046612,
+        "last_ts": 1776595921611,
+        "passages_seen_on_count": 47,
         "number_stats": {
-          "count": 170,
+          "count": 125,
           "unique_count": 1,
           "min": 0,
           "max": 0,
@@ -41,11 +41,11 @@
           "number"
         ],
         "mutation_count": 0,
-        "first_ts": 1776593148429,
-        "last_ts": 1776594162343,
-        "passages_seen_on_count": 70,
+        "first_ts": 1776595046612,
+        "last_ts": 1776595921611,
+        "passages_seen_on_count": 47,
         "number_stats": {
-          "count": 170,
+          "count": 125,
           "unique_count": 1,
           "min": 0,
           "max": 0,
@@ -63,11 +63,11 @@
           "number"
         ],
         "mutation_count": 0,
-        "first_ts": 1776593155646,
-        "last_ts": 1776594162343,
-        "passages_seen_on_count": 69,
+        "first_ts": 1776595057196,
+        "last_ts": 1776595921611,
+        "passages_seen_on_count": 46,
         "number_stats": {
-          "count": 167,
+          "count": 122,
           "unique_count": 1,
           "min": 5,
           "max": 5,
@@ -85,11 +85,11 @@
           "number"
         ],
         "mutation_count": 0,
-        "first_ts": 1776593343188,
-        "last_ts": 1776594162343,
-        "passages_seen_on_count": 62,
+        "first_ts": 1776595057196,
+        "last_ts": 1776595921611,
+        "passages_seen_on_count": 46,
         "number_stats": {
-          "count": 139,
+          "count": 122,
           "unique_count": 1,
           "min": 0,
           "max": 0,

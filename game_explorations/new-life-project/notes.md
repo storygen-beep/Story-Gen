@@ -609,3 +609,215 @@ Reception desk offers:
 - **Plato / Tyson / brodyMeet / tysonMeet:** street random encounters
 - **questLetter1/2** trigger conditions
 - **Student class schedules:** Anatomy / Art / Biology / Recess daily cycle
+- [2026-04-19T10:52:01.849Z] Session 5 complete: Blackjack+roulette verified, stock investment widget (SPX/NVDA/DJI/TSLA/AAPL/DMI via Phone→GMA Banking), Morris-Constantin full rescue arc via safeResc, Brody junction letter event, courtClues pen, Church hidden tunnels + concubine cells + pastorWall spy rooms, MoN construction access pass (pass2) + Current Network Pod trap, constOffice (Constantin+Tyson office), tradeClues online, facility infiltration with archive password corridor puzzle, fertility research arc at hospital (partRes insemination), casinoMasterKey stealth office heist with deskKey. Slot 3 saved.
+
+---
+
+# Session 5 (meta-systems + kidnap quest + investigation layer)
+
+## Casino (verified mechanics via live play)
+
+**Blackjack** (`blackjack` → `Bet` → `Deal`):
+- Deck sizes: 6, 7, or 8 decks. `deckCount=8` default. 52 * deckCount = 416 cards in shoe.
+- Bet amount via text-input; deducts from `chips`. House adds to `pot`.
+- Standard rules: Hit (new card) / Stand.
+- Dealer busts at 23 in our test — win = 2× bet; +10000 chips, pot resets.
+- Persistent vars: `luckyCasino` (0.49 → 0.5 per win), `casinoSus` (+0.1 per win — casino suspicion counter), `winAmount`/`totalWinAmount`, `pMiss` (player miss?), `dCheat` (dealer cheat flag).
+- Chips ↔ Money via `chipCage` with two textboxes (buy / cash out).
+
+**Roulette** (`roulette`):
+- Bet amount textbox → `rouletteBet` → Red / Black binary choice.
+- `rouletteRun` rolls 0-36 after ~3s pause.
+- 0 = green (loses on both colors). Red/Black 1:1 payout.
+- Cash out at end ("Stop testing your luck").
+
+## Investment / stock trading (`Phone` → `GMA Banking` → `Invest`)
+
+**Six tickers** — each with open/close-position textboxes:
+- **SPX** (S&P 500) `$spx`
+- **NVDA** (NVIDIA) `$nvda`
+- **DJI** (Dow Jones) `$dji`
+- **TSLA** (Tesla) `$tsla`
+- **AAPL** (Apple) `$aapl`
+- **DMI** (DimirSoft — fictional) `$dmi`
+
+Daily price fluctuation via `Sleep` widget calls (`investSPX`/`investNVDA`/`investDJI`/`investTSLA`/`investAAPL`/`investDMI`) — each ticker drifts independently per sleep. `fixInvest` re-balances on screen re-entry. "Close all open positions" one-click liquidate.
+
+## Hidden investigation / kidnap questline
+
+**CLUE TRAIL** (per `NOTES ON CLUES` passage):
+1. **Clue 1:** Pen with "M" engraving — `courtClues` (charred court house after arson).
+2. **Clue 2:** Blackened handprint on Hotel Celestine elevators — Silvergate.
+3. **Clue 3:** Handprint in soot — court house revisit.
+4. **Clue 4:** Speak to Hotel Celestine receptionist Marcella (`hotelPen`) — reveals pen belongs to **Montgomery**.
+5. **Clue 5 + 6:** Online trading via `constDesk` computer → `tradeClues` (needs internet fixed by **Tyson** via `tysonComputerfix`).
+
+**Constantin's office** (`constOffice`, post-rescue hub):
+- View traffic cameras (surveillance)
+- Talk to Tyson (`tysonTalk`) — sex gate `corrupt≥200` → `tysonFun`
+- Talk to Constantin (`constTalk`) — sex gate `corrupt≥200` → `constFun` (-100 arousal, set $vagCount, $creamCount)
+- Ask Tyson fix (after `tradeClues` attempt)
+- Go to your computer (`constDesk`)
+
+**Morris rescue mission** (`safeResc` — linear payoff):
+- After war-room grind (study/inventory/tactical), mission fires
+- Constantin rescued, James+Johnson safe
+- "You stunned two of their men, and stole their gear and clothes"
+- Safehouse War Room → Constantin's room (healing)
+
+**Church investigation** (`church` → `churchTour` → `churchWallsInit` hidden tunnels):
+- Pastor John (suspicious, smooth manipulator)
+- Take tour → find altar parchment at night: "The guardian's gaze aligns with the altar's truth"
+- Hidden-walls access reveals: plate "W. G. Harding" (architect name)
+- Two spy rooms: `concubineCells` (nuns having sex — not celibate!), `pastorWall` (spy on Pastor John's room)
+
+**Brody abandoned junction** (`abandonedTracks`, via `questLetter1` after `questDays≥6 && clue≥4`):
+- Anonymous letter → meet Brody at railroad
+- Brody reveals Constantin worked for The Facility (former best researcher/field agent)
+- Branch: "Go to Constantin and tell him" (open path) / "Investigate Constantin on your own" (sneaky path, locks some reactions) — **"This will define your game in the future"**
+- Sneaky branch → check old computer in the mansion
+
+**Facility infiltration** (`facility`, `facilityEnter`):
+- Left corridor: locked dead-end + sweet chemical smell
+- Right corridor: keypad (ARCHIVE PASSWORD — letters mapped to 3x3 numpad)
+- Control room: "too busy to enter unnoticed"
+- Archives contain Constantin's name on files (`constFacility`)
+
+**Casino master heist** (`casinoMasterKey`):
+- Stealth into casino manager's office
+- Search desk (needs `deskKey` from shelves), shelves (finds key), trashcan (nothing useful)
+- Documents reveal shell companies "The Tiger LLC" and "The Bobcat Ltd" — casino money laundering
+- Choice: take picture OR steal physical docs (`$casinoDoc="picture" / "stolen"`)
+- Hand to Brody (`brodyMeetPhoneCall`) → +£1500, unlocks brothel quest + church access (`$church=true`)
+
+**Middle of Nowhere** (`MoN Outside`, desert town):
+- Access via walking through Silvergate subway tunnel (one-way sleep passage back)
+- Buildings: `monsmall` (decrepit, running water?), `monconstruct` (construction yard w/ pass2 access card steal), `guard` (fenced building, avoid)
+- `MoN Pod` (Current Network pod, needs `pass2=true` access pass)
+- Pod malfunction event (`WIP Current Trap1`) — wrong weight distribution reroutes to **Security Facility** kidnap
+- Escape: random choice cycle, kick control panel 3× via random switch
+- Bike rental (`MoNBike`)
+- Van/gas station RPG (`monGasStation` → `monGasStationApproach` → van driver seduction chain: `monGasStationSeduceT1` → `SeduceT2` → LEWD/LIFTSHIRT/LIFTSKIRT branches with bald Bruce Willis-looking driver, "I've seen better" snark)
+
+## Fertility research hospital arc (`fertRes`, via Hospital donation ≥£10k)
+
+- Donate £10k repeatedly → unlocks **St. [Name] Fertility Research Center**
+- `fertDonate` counter; `fertLogs` shows 10 random rotating fertility case studies (AMH, PCOS, IVF, sperm banking, etc.)
+- `docSpeak` — random 5-case chat with hospital doctors
+- `partRes` (fertDonate ≥ £50k) — PC "partakes in research": gang bang insemination scene by doctors. +arousal 40, cum leaks out. Pregnancy mechanic hook.
+
+## Plato quest (`platoFollow` forest directional puzzle)
+
+- `[[North|platoDir][$direction to "north"]]` etc. — 4 cardinal directions
+- Plato's scribbles are hard to read. Looking for a "meadow" rendezvous point
+- Likely dead-reckoning puzzle with correct direction per day
+
+## Phone full feature set (post-phone purchase)
+
+- **GMA Banking** → Invest (6 tickers) + account balance check
+- **Open contacts** → NPCs available at current period (Lily early, more as relationships deepen)
+- **Waste time looking at memes** — period-burner
+- **Call a cab** (night-only) — trainstation/cabin travel
+- **Put phone away** → back to previous passage
+
+## Kidnap quest var schema (from `Beginning` init)
+
+- `kidnapQuest` (start: false) — master flag for Constantin arc
+- `facilityQuest` (start: false) — master flag for facility infiltration
+- `questDays` (start: 0) — ticks +1 per sleep once kidnapQuest is active
+- `questLetter1`/`questLetter2` (start: "unopened") — mail-delivery trigger chain
+- `questmap` (start: []) — array of active quests (brothel, church, etc.)
+- `clue` (0-4+) — progressive clue milestone counter
+- `courtBurn` — court house arson event flag (9-day cooldown decrement in Sleep widget)
+- `courtConst` — tell Constantin about court trial
+- `johnCaught` — after John (pastor) is exposed
+- `doubleQuest` — parallel questline flag
+- `dadChock` — shock counter after dadRape event
+
+## School class schedule (`studentClasses` dialog)
+
+From `schoolDormRoom`: `<<run Dialog.setup('Classes', 'class'); Dialog.wiki('<<include "studentClasses">>').open()>>`
+
+Class flags in `$classes` object:
+- `classes.biology`
+- `classes.art` (set true via therapy eval accidentally!)
+- `classes.anatomy` (Enroll in Anatomy class — `anatomyStudy`/`anatomyTime`)
+- `classes.recess`
+- Schedule per weekday; students shuffle between classes
+
+## Widget-set variable API (exhaustive list)
+
+| Widget | Effect | Clamp |
+|---|---|---|
+| `setMoney` | `$money += args[0]` | 0..2147483647 |
+| `setBalance` | `$balance += args[0]` | 0..2147483647 |
+| `setArousal` | `$arousal += args[0]` + arousalVibe | 0..100 |
+| `setAllure` | `$allure += args[0]` | 0..200 |
+| `setIntoxic` | `$intoxic += args[0]` | 0..100 |
+| `setCorruption` | `$corrupt += args[0]` | **-100..300** |
+| `setInhib` | `$inhib += args[0]` | **0..150** |
+| `setTrauma` | `$trauma += args[0]` | 0..100 |
+| `brother`/`dad`/`zack`/`lily`/`chloe`/`caine`/`roscoe`/`tommy` | NPC relation +=args[0] | 0..100 |
+| `chloeLove`/`lilyLove`/`broLove`/`dadLove`/`zackLove`/`caineLove`/`tommyLove` | NPC love +=args[0] | 0..100 |
+| `waitLily`/`waitZack`/`waitDad`/`waitNoah`/`waitCaine`/`waitTommy` | Cooldown counters | 0..100 |
+| `masturbate AROUSAL HIGHCORRUPT MIDCORRUPT LOWCORRUPT LOCATION` | Tiered mast link | — |
+
+## Sleep widget — complete state mutation (every sleep)
+
+Confirmed operations per sleep cycle:
+- `$day += 1`, `$period = 1`, `$countperiods += 6`
+- `$rent += 1`, `$kitchenClean -= 25`, `$zackClean -= 25`
+- `$allure -= 15` (if allure ≥ 15)
+- `$showerTime += 1` (needs shower)
+- `$mugged += 1` (caps 5 — mugging event trigger)
+- `$coffeeDrunk = false` (reset)
+- `$mansionCook = 0`, `$mansionFresh = false`, `$luxFresh = false`
+- `$news = 0`, `$newspaper = false`, `$emailAmount = random(1,10)` (emails generated)
+- `$nudeAmount = 50` (cam mechanic reset)
+- `$moodreset` (full mood object wipe)
+- `$questDays += 1` (if ≥ 1), `$questLetter1/2` checked + delivered
+- **Corruption auto-gain:** if `corrupt<5`, +1; if `corrupt<0`, +2 (bootstraps you out of prude tier)
+- `Math.clamp()` re-applies to ensure stats in valid ranges
+- Beauty decay: legs/pussy/makeup/hair check timers (prickly → -allure 5-10)
+- `Save.autosave.save("You sleep soundly.")` — engine auto-save slot
+- Farm dividends: `$donateTierHoney` 2 → +5 groceries; tier 3 → +10 groceries (every 7 days)
+- Investment ticker drift (in6 `invest*` widgets)
+- NPC date cooldown (`datingWidgetSleep`)
+- Pet care: `$litterTime += 1` (if ≥ 7, `$catNeglect += 1`, if > 3 neglect → `pet.isFound=false` = cat runs away)
+
+## Upbringing ($upbring)
+
+Default: `"chrisvirg"` (set via Sleep). Other values seen in src:
+- `"brat"` (affects school prostitution ring dialog)
+- `"attwhore"` (attention whore, affects cinema suck scene)
+
+Character-creation branch likely picks this early. Affects dialog in school prostitution chain, cinema suck scene, NPC reactions.
+
+## Slot 3 save state
+
+- **Slot 0:** Day 8 legit, £108, cafe job
+- **Slot 1:** Day 8 boosted, corrupt=150, full gear
+- **Slot 2:** Day 16 late-game, Morris quest started, mansion+school+caine unlocked
+- **Slot 3:** Day 16+ after safeResc completion, constOffice opens, questDays=10, full clue trail, stock portfolio accessible
+
+## Backlog remaining
+
+- **Blackjack advanced plays:** Double/Split/Insurance not verified (only Hit/Stand tested)
+- **Roulette:** Only red/black tested — numbers/corners/splits untested
+- **Stock market 30-day simulation:** price curves per ticker
+- **Plato forest puzzle solution:** correct direction per scenario
+- **Facility archive password:** the 3x3 keypad letter mapping
+- **Guard building (MoN):** what they protect
+- **Bike MoN rental:** where it goes
+- **Van driver full seduction:** Bruce Willis bald guy arc
+- **Brothel job unlock:** visit count threshold
+- **School dorm party Friday:** event specifics
+- **Gloryhole (boys bathroom):** corrupt ≥ 180 gate content
+- **Cinema suck** (`cinemaSuck`): corrupt ≥ 250 + inhib < 30
+- **Sophia/Michael dorm mate late relationship:** rp ≥ 60 sleeps-next-to trigger
+- **Anatomy class** (`schoolAnatomy`): school subject grind
+- **Morris fuck** (`morrisFuck`): corrupt ≥ 100 mansion end-scene
+- **Infinite Hotel** mentioned in Sleep widget (`$infiniteHotel`) but passage not found — likely not yet implemented
+- **Taulion FAQ Easter eggs:** "I'm trapped with Tim!" hint suggests Tim (therapist) captivity mini-arc
+- **investConst variable:** suggests another Constantin-financed investment branch
+- **Upbringing arc:** $upbring affects content — map all variant dialog

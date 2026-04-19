@@ -1,15 +1,15 @@
 # new-life-project — Exploration Report
 
-Generated: 2026-04-19T10:30:11.726Z
+Generated: 2026-04-19T10:52:02.109Z
 Source URL: https://mopoga.com/new-life-project
 
 ## Session Summary
 
-- Sessions run: 4
-- Total wall-clock: 78m 14s
-- Total clicks: 427
-- Total choices explored: 427
-- Unique states seen: 588
+- Sessions run: 5
+- Total wall-clock: 92m 49s
+- Total clicks: 481
+- Total choices explored: 481
+- Unique states seen: 665
 - Unexplored frontier (queued for next session): 0
 - Endings reached: 0 (use `live.js mark-ending <passage>` to record a terminal passage)
 
@@ -22,7 +22,7 @@ Detected engine: **sugarcube**
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
-| `money` | number | 0..20000 | 5 | high |
+| `money` | number | 0..50000 | 2 | high |
 | `strength` | number | 0..1 | 1 | high |
 | `intelligence` | number | 0..0 | 0 | high |
 | `peChall.longjump.skill` | number | 0..0 | 0 | high |
@@ -31,7 +31,7 @@ Detected engine: **sugarcube**
 | `peChall.wrestling.skill` | number | 0..0 | 0 | high |
 | `peChall.fencing.skill` | number | 0..0 | 0 | high |
 
-### npc_stat (6)
+### npc_stat (7)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
@@ -41,6 +41,7 @@ Detected engine: **sugarcube**
 | `dadLove` | number | 0..0 | 0 | high |
 | `zackLove` | number | 0..0 | 0 | high |
 | `caineLove` | number | 0..0 | 0 | high |
+| `nunTrust` | number | 0..1 | 1 | high |
 
 ### body (5)
 
@@ -56,15 +57,18 @@ Detected engine: **sugarcube**
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
-| `day` | number | 1..20 | 4 | high |
+| `day` | number | 1..16 | 1 | high |
 
-### item (1)
+### item (4)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
-| `tickets` | number | 0..10 | 3 | medium |
+| `tickets` | number | 8..8 | 0 | medium |
+| `mon.monsmall.hasVisited` | boolean | false | 0 | high |
+| `mon.monconstruct.hasVisited` | boolean | false, true | 1 | high |
+| `mon.guard.hasVisited` | boolean | false, true | 1 | high |
 
-### flag (136)
+### flag (142)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
@@ -108,38 +112,38 @@ Detected engine: **sugarcube**
 | `dildo` | boolean | false, true | 1 | medium |
 | `tail` | boolean | false | 0 | high |
 | `buttplug` | boolean | false, true | 1 | high |
-| … | … | … | … | and 96 more |
+| … | … | … | … | and 102 more |
 
-### scalar (223)
+### scalar (237)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
 | `deckCount` | number | 8..8 | 0 | low |
-| `chips` | number | 0..0 | 0 | low |
-| `bet` | number | 0..0 | 0 | low |
-| `luckyCasino` | number | 0.49..0.49 | 0 | low |
-| `casinoSus` | number | 0..0 | 0 | low |
-| `pot` | number | 0..0 | 0 | low |
-| `winAmount` | number | 0..0 | 0 | low |
-| `totalWinAmount` | number | 0..0 | 0 | low |
-| `totalBetAmount` | number | 0..0 | 0 | low |
-| `pMiss` | number | 0..0 | 0 | low |
-| `dCheat` | number | 0..0 | 0 | low |
+| `chips` | number | 0..15000 | 4 | low |
+| `bet` | number | 0..5000 | 1 | low |
+| `luckyCasino` | number | 0.49..0.5 | 1 | low |
+| `casinoSus` | number | 0..0.09999999999999999 | 1 | low |
+| `pot` | number | 0..10000 | 2 | low |
+| `winAmount` | number | 0..1 | 1 | low |
+| `totalWinAmount` | number | 0..10000 | 1 | low |
+| `totalBetAmount` | number | 0..5000 | 1 | low |
+| `pMiss` | number | 0..0.6993637127741004 | 1 | low |
+| `dCheat` | number | 0..0.20487501727876123 | 1 | low |
 | `vibeLevel` | number | 0.1..0.3 | 1 | low |
-| `countperiods` | number | 0..111 | 10 | low |
+| `countperiods` | number | 0..113 | 3 | low |
 | `questDays` | number | 0..11 | 3 | low |
 | `mansionCook` | number | 0..0 | 0 | low |
 | `cellarClean` | number | 0..1 | 1 | low |
 | `intoxic` | number | 0..0 | 0 | low |
-| `allure` | number | 20..70 | 3 | low |
+| `allure` | number | 20..30 | 1 | low |
 | `inhib` | number | 0..100 | 1 | low |
 | `corrupt` | number | 0..178 | 1 | low |
 | `arousal` | number | 0..10 | 1 | low |
 | `trauma` | number | 0..70 | 1 | low |
 | `groceries` | number | 0..10 | 1 | low |
-| `kitchenClean` | number | -200..0 | 2 | low |
-| `zackClean` | number | -200..0 | 2 | low |
-| `rngesus` | number | 0..22 | 12 | low |
+| `kitchenClean` | number | -200..0 | 1 | low |
+| `zackClean` | number | -200..0 | 1 | low |
+| `rngesus` | number | 0..12 | 3 | low |
 | `rent` | number | 0..1 | 1 | low |
 | `bum` | number | 0..0 | 0 | low |
 | `PIProg` | number | 0..0 | 0 | low |
@@ -154,34 +158,34 @@ Detected engine: **sugarcube**
 | `mood.Submissive` | number | 0..0 | 0 | low |
 | `mood.Sensual` | number | 0..0 | 0 | low |
 | `mood.Romantic` | number | 0..0 | 0 | low |
-| … | … | … | … | and 183 more |
+| … | … | … | … | and 197 more |
 
-### string (107)
+### string (113)
 
 | name | type | range / samples | mutations | confidence |
 |---|---|---|---|---|
-| `charPron.gender` | string | `male` | 0 | low |
-| `charPron.subject` | string | `he` | 0 | low |
-| `charPron.object` | string | `him` | 0 | low |
-| `charPron.possessive` | string | `his` | 0 | low |
-| `charPron.reflexive` | string | `himself` | 0 | low |
-| `charPron.determiner` | string | `his` | 0 | low |
-| `charPron.contraction` | string | `he's` | 0 | low |
-| `charPron.noun` | string | `man` | 0 | low |
-| `charPron.partner` | string | `boyfriend` | 0 | low |
+| `charPron.gender` | string | `non-binary`, `male` | 1 | low |
+| `charPron.subject` | string | `they`, `he` | 1 | low |
+| `charPron.object` | string | `them`, `him` | 1 | low |
+| `charPron.possessive` | string | `their`, `his` | 1 | low |
+| `charPron.reflexive` | string | `themself`, `himself` | 1 | low |
+| `charPron.determiner` | string | `their`, `his` | 1 | low |
+| `charPron.contraction` | string | `they're`, `he's` | 1 | low |
+| `charPron.noun` | string | `person`, `man` | 1 | low |
+| `charPron.partner` | string | `enbyfriend`, `boyfriend` | 1 | low |
 | `partner` | string | `boyfriend` | 0 | low |
-| `questLetter1` | string | `unopened` | 0 | low |
+| `questLetter1` | string | `unopened`, `delivered` | 1 | low |
 | `questLetter2` | string | `unopened` | 0 | low |
 | `home` | string | `none`, `zackApt` | 1 | low |
 | `name` | string | `Josephine` | 0 | low |
-| `job` | string | `No job`, `alley`, `office` | 3 | low |
+| `job` | string | `No job`, `office` | 1 | low |
 | `oldphonePIN` | string | `6969` | 0 | low |
 | `dating` | string | `single`, `Chloe` | 1 | low |
 | `pet.name` | string | `` | 0 | low |
 | `pet.race` | object,string | `Sphynx` | 1 | low |
 | `pet.gender` | object,string | `male` | 1 | low |
 | `pet.attribute` | object,string | `an adventurous` | 1 | low |
-| `return` | string | `Beginning`, `outskirts`, `Street` | 112 | low |
+| `return` | string | `Beginning`, `caineOutside`, `chipCage` | 64 | low |
 | `gender` | string | `Girl` | 0 | low |
 | `upbring` | string | `chrisvirg` | 0 | low |
 | `partnerPro1` | string | `he` | 0 | low |
@@ -200,7 +204,7 @@ Detected engine: **sugarcube**
 | `car.audi.name` | string | `Audi` | 0 | low |
 | `car.audi.condition` | string | `good` | 0 | low |
 | `car.audi.location` | string | `dealership` | 0 | low |
-| … | … | … | … | and 67 more |
+| … | … | … | … | and 73 more |
 
 ### misc (19)
 
@@ -236,6 +240,7 @@ Detected engine: **sugarcube**
 | dad | love | 1 |
 | zack | love | 1 |
 | caine | love | 1 |
+| nun | trust | 1 |
 
 ## Body / appearance traits
 
@@ -250,19 +255,19 @@ Detected engine: **sugarcube**
 
 | type | count |
 |---|---|
-| branch | 104 |
+| branch | 54 |
 
 ## Economy
 
 - Price-labeled choices observed: 0
-- Money income events: 2
-- Money expense events: 3
+- Money income events: 0
+- Money expense events: 0
 
 ## Variable prefix clusters
 
 Variables sharing a leading token — candidate entity groups (verify manually).
 
-- **name** (30): `name`, `pet.name`, `garage.street.name`, `garage.city.name`, `garage.mansion.name`, `garage.luxapt.name`, …
+- **name** (33): `name`, `pet.name`, `garage.street.name`, `garage.city.name`, `garage.mansion.name`, `garage.luxapt.name`, …
 - **price** (14): `garage.street.price`, `garage.city.price`, `garage.mansion.price`, `garage.luxapt.price`, `car.honda.price`, `car.toyota.price`, …
 - **rp** (9): `dormMate.rp`, `schoolCliques.overachievers.rp`, `schoolCliques.creatives.rp`, `schoolCliques.athletes.rp`, `schoolCliques.gamers.rp`, `schoolCliques.rebels.rp`, …
 - **desc** (8): `schoolCliques.overachievers.desc`, `schoolCliques.creatives.desc`, `schoolCliques.athletes.desc`, `schoolCliques.gamers.desc`, `schoolCliques.rebels.desc`, `schoolCliques.socials.desc`, …
@@ -291,20 +296,21 @@ Variables sharing a leading token — candidate entity groups (verify manually).
 | 2 | 2026-04-19T07:16:26.685Z | 17m 26s | 167 | 167 | 162 | no |
 | 3 | 2026-04-19T09:34:41.143Z | 23m 34s | 100 | 100 | 110 | no |
 | 4 | 2026-04-19T10:05:48.428Z | 24m 23s | 107 | 107 | 126 | no |
+| 5 | 2026-04-19T10:37:26.611Z | 14m 35s | 54 | 54 | 77 | no |
 
 ## Graph coverage (observed vs. static)
 
 - Static-graph edges (every navigation parsed from passage source): **3586**
-- Observed edges during play: **309** unique `(from, clicked_text, to)` tuples.
-- Static edges covered by at least one observation: **327** (a single observation covers every static edge with the same `(from, to)` pair — gated branches collapse to one observable move).
-- Observed-only edges (no matching static edge, typically self-loop `<<link>>` wrappers that `<<replace>>` in-place): **36**.
-- Coverage: **9.12%** of the static graph explored.
-- Synthetic edges (Claude's out-of-band `eval`/`keys`/`restore`/`pop`): 44
+- Observed edges during play: **351** unique `(from, clicked_text, to)` tuples.
+- Static edges covered by at least one observation: **371** (a single observation covers every static edge with the same `(from, to)` pair — gated branches collapse to one observable move).
+- Observed-only edges (no matching static edge, typically self-loop `<<link>>` wrappers that `<<replace>>` in-place): **43**.
+- Coverage: **10.35%** of the static graph explored.
+- Synthetic edges (Claude's out-of-band `eval`/`keys`/`restore`/`pop`): 74
 
 ### Playable-content partition
 - Passages defined in source: **1636** (0 tagged `wip`, 9 empty-body placeholder).
 - Implied playable (non-WIP, non-empty): **1627**.
-- Distinct passages visited at least once: **70** — playable-passage coverage: **4.3%**.
+- Distinct passages visited at least once: **47** — playable-passage coverage: **2.9%**.
 
 ### Static edge kinds
 | kind | count |
