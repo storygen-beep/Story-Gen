@@ -26,6 +26,46 @@
 # - All Jack's World reference patterns
 
 ===============================================================================
+                         REFERENCE DOCUMENTS
+===============================================================================
+
+These files in prompts/ are the canonical design references. Consult them
+during authoring. Do not duplicate or re-derive their content here — cite
+them by rule/pattern number.
+
+┌────────────────────────────────┬────────────────────────────────────────────┐
+│ File                           │ What it covers                             │
+├────────────────────────────────┼────────────────────────────────────────────┤
+│ prompts/game_design_rules.md   │ 17 rules enforced on EVERY game build      │
+│                                │ (tiered activities, story-vs-activity      │
+│                                │ separation, flag gating, energy costs,     │
+│                                │ rejection, trait decay, block pools)       │
+│ prompts/game_design_patterns.md│ Optional pattern catalog A-O               │
+│                                │ (multi-route arcs, economic pressure,      │
+│                                │ clothing tiers, parallel arcs, hints,      │
+│                                │ rivals, minigames)                         │
+│ prompts/game_feel_analysis.md  │ Self-critique of VN-feel symptoms and      │
+│                                │ the mechanisms that fix them               │
+│ prompts/media_writing_guide.md │ NPC voice evolution, prose guidance,       │
+│                                │ sensory-density requirements               │
+│ prompts/game_example.toml      │ Reference TOML showing current schema      │
+└────────────────────────────────┴────────────────────────────────────────────┘
+
+WHEN TO CONSULT:
+- Authoring tiered choices              → game_design_rules.md Rule 1
+- Separating story events vs activities → game_design_rules.md Rule 2, 7
+- Writing gate conditions               → game_design_rules.md Rules 3-4
+- Adding hints                          → game_design_patterns.md Pattern H
+- Multi-route NPC arcs                  → game_design_patterns.md Pattern A
+- Clothing tier progression             → game_design_patterns.md Pattern L
+- Economic pressure design              → game_design_patterns.md Pattern C
+- Prose feels flat / NPCs voiceless     → game_feel_analysis.md + media_writing_guide.md
+
+PHASE 2B (SYSTEMS BUDGET, see below) is the architectural phase that allocates
+these rules and patterns as concrete quotas BEFORE content writing begins.
+Every downstream phase (3-6) consumes Phase 2B's output.
+
+===============================================================================
                          SESSION MANAGEMENT
 ===============================================================================
 
@@ -125,6 +165,9 @@ BOOK PHASE FILES:
 │ 0     │ 0_video_integrations.md    │ Video library analysis (optional, skippable)│
 │ 1     │ 1_foundation.md            │ Game identity, driver, premise, tone, scope │
 │ 2     │ 2_characters_and_stats.md  │ Player, NPC, stat economy, gate flags       │
+│ 2B    │ 2b_systems_budget.md       │ Whiteboard, archetypes, 3-stage NPC quest  │
+│       │                            │ arcs, income channels, hint menu, gate      │
+│       │                            │ justifications, Phase 2 unlock content      │
 │ 3     │ 3_world_design.md          │ Locations, time, economics, NPC schedules   │
 │ 4     │ 4_story_events.md          │ One-time events, flag chains, gate moments  │
 │ 5     │ 5_activities.md            │ NPC activities, utility canvases, media      │
@@ -2251,6 +2294,668 @@ List ALL flags the game will use:
 - Utility flags (chores_explained, job_started, rent_last_paid, etc.)
 - Content flags (peek_unlocked, etc.)
 
+NOTE: Phase 2B (Systems Budget) will reorganize these flags into Whiteboard
+goals, NPC quest arc reward flags, and narrative gate flags.
+Phase 2 produces the flat inventory; Phase 2B structures it into systems.
+
+---
+
+===============================================================================
+                         PHASE 2B: SYSTEMS BUDGET
+===============================================================================
+
+INPUT: Phase 1 (Foundation) + Phase 2 (Characters & Stats)
+OUTPUT FILE: [game_name]/book_phases/2b_systems_budget.md
+
+## WHY THIS PHASE EXISTS
+
+Our output has been flat. Scenes are well-written but the game around them
+feels like a visual novel, not a game. The root cause (documented in
+`prompts/game_feel_analysis.md`) is that we write content before deciding
+what mechanical systems it serves.
+
+Proven adult IF games succeed by designing the mechanical skeleton first,
+then populating content to serve it:
+
+- **Shady Deals** opens with a Whiteboard: 7 concrete goals on a wall in the
+  player's home. Completing all 7 unlocks "Create Your Gang" — a whole
+  Phase 2 content tier (Junkyard workshop, heist menu, semi-legal businesses).
+- **Zara's School Life** gives every NPC a 3-stage quest chain with a
+  dynamic "Next Quests Hints" menu. Players always know what to aim for.
+- **New Life Project** builds economic pressure (£400/week rent vs £39/shift
+  jobs) that forces characters into gated routes.
+
+Phase 2B is the phase that FORCES this design discipline. The LLM (you)
+allocates mechanical systems with **required counts**, BEFORE Phase 3 writes
+locations, Phase 4 writes events, Phase 5 writes activities, or Phase 6
+structures the arc.
+
+## ARCHITECTURAL ROLE
+
+Phase 2B is consumed by every downstream phase:
+
+- Phase 3 reads the Income Channels list and In-Fiction Gate Justifications
+- Phase 4 maps every story event to a Whiteboard goal OR NPC quest arc stage
+- Phase 5 implements Income Channels as activity canvases per the spec
+- Phase 6 serializes Long-Term Status Climbs as story_arc.emotion_mappings
+  (with trait_owner = "player") and uses the Phase 2 Content Inventory
+  to author canvases/locations gated on { type = "whiteboard_complete" }
+
+If Phase 2B is under-specified, the entire downstream pipeline drifts back
+toward VN-shaped output.
+
+## REQUIRED OUTPUTS
+
+Each numbered section below becomes an H2 section in `2b_systems_budget.md`.
+Sections 1-8 serialize to TOML in Phase 0. Sections 9-12 stay book-only
+until engine support lands (they document design for future Phase B work).
+
+---
+
+### Section 1: WHITEBOARD (7-12 Concrete Completion Goals)
+
+The Whiteboard is an in-fiction visible document — a literal wall, notepad,
+phone app, or journal the player reads in-game on day 1. It lists what
+"mid-game complete" looks like.
+
+Completing ALL goals unlocks Phase 2 Content Tier (see Section 8).
+
+For each goal, provide:
+```
+### Goal [N]: [Title]
+- **id**: `wb_goal_<snake_case>`
+- **narrative_description**: 1-2 sentences of how it appears in-fiction
+- **completion_condition**: computable in terms of flags/traits/relationships
+  - Example: `flag:jake_quest_3_done` OR `trait:town_reputation >= 40`
+- **visible_in_game**: true (default) | false (hidden until discovered)
+- **contributing_systems**: which NPCs/income channels/locations advance this
+```
+
+QUOTAS:
+- Minimum 7 goals, maximum 12
+- At least 1 goal per ROMANCE NPC (arc completion)
+- At least 1 economic goal (money threshold, ownership, income channel mastery)
+- At least 1 status goal (long-term stat threshold)
+- At least 1 social/town goal (reputation, rival-defeated, network)
+- At most 2 "collection" goals (discover N things, meet N faction types)
+
+ANTI-PATTERNS:
+- ❌ Vague goals ("become confident") — must be computable
+- ❌ Goals only unlocked by story events the player can't trigger
+- ❌ Collection goals that require grinding 100+ of something
+- ❌ More than 12 goals (cognitive overload — pick the top 7-12)
+
+REFERENCE (Shady Deals Whiteboard, verbatim from game):
+1. Save >$10,000
+2. Own a warehouse (Harbor district)
+3. Own a house (via PC browse)
+4. Meet all 4 factions (Mafia/Cartel/Gangs/Bikers)
+5. Reach "Big Shot" reputation
+6. Acquire 3x Block 19 handguns (from bikers)
+7. Gang strength >300 via recruiting thug/thief NPCs
+
+---
+
+### Section 2: NPC ARCHETYPE ROSTER
+
+Every NPC from Phase 2 gets tagged with exactly ONE archetype from this
+vocabulary. Archetype declares the NPC's **mechanical role** — distinct
+from their driver (psychological flavor).
+
+ARCHETYPE VOCABULARY:
+
+| Archetype    | Role                                    | Quest arcs? | Can corrupt? |
+|--------------|-----------------------------------------|-------------|--------------|
+| ROMANCE      | Primary emotional/sexual pursuit         | 3 stages    | Yes          |
+| RIVAL        | Zero-sum competitor, antagonist          | 3 stages    | No (opposes) |
+| MENTOR       | Life advice, wisdom, quest-giver         | 3 stages    | No           |
+| SAFE_HARBOR  | Paternal/friendly, proves not everyone  | Optional    | No (refuses) |
+|              | is after the player                     |             |              |
+| THREAT       | Risk encounters, failure-state NPC       | 3 stages    | No (danger)  |
+| WILDCARD     | Unpredictable, jealousy/chaos agent      | Optional    | Conditional  |
+| AUTHORITY    | Rules, gates, control (distinct from    | Optional    | Rare         |
+|              | romance; e.g. landlord, boss, cop)      |             |              |
+| CLOCK        | Off-screen timer (parent overseas, etc.) | No          | No           |
+
+REQUIRED QUOTAS (for ongoing-game genre — the target for this pipeline):
+- ROMANCE × 1-4 (the primary routes)
+  - Focused single-route games: 1 ROMANCE is valid (Jack's World reference)
+  - Multi-route games: 2-4 ROMANCE
+- RIVAL × at least 1 (creates antagonism, zero-sum reputation)
+- MENTOR × at least 1 (quest giver, hint source)
+- SAFE_HARBOR × at least 1 (trust without agenda)
+- THREAT × at least 1 (failure-state content — risk encounters)
+- WILDCARD × 0-1 (strongly recommended for multi-route; optional for focused)
+- AUTHORITY × at least 1 (separate from romance — gates content)
+- CLOCK × at least 1 (creates time pressure)
+
+Minimum roster is archetype-quota-driven (typically 7-10 NPCs for focused games,
+10-15 for multi-route open-world). Shady Deals has 10+ faction roles. Zara's
+School Life has 10 NPCs. Under One Roof's 3 NPCs was the anti-pattern that
+produced the VN-feel problem — roster must deliver archetype diversity,
+not just romance choices.
+
+For each NPC, write:
+```
+### [NPC Name] — [ARCHETYPE]
+- **id**: npc_<name>
+- **archetype**: ROMANCE | RIVAL | MENTOR | SAFE_HARBOR | THREAT | WILDCARD | AUTHORITY | CLOCK
+- **justification**: 1-2 sentences on why this archetype fits
+- **primary_function**: what mechanical work they do in the game
+- **does NOT do**: what content categories are OFF-LIMITS for this NPC
+  (e.g., SAFE_HARBOR "never initiates physical contact with player")
+```
+
+ANTI-PATTERNS:
+- ❌ Every NPC is ROMANCE (= VN-shaped output)
+- ❌ Missing RIVAL (no antagonist = no tension)
+- ❌ Missing SAFE_HARBOR (every character having an agenda feels paranoid)
+- ❌ AUTHORITY overlapping with ROMANCE (a boss who's also a lover dilutes both)
+
+---
+
+### Section 3: NPC 3-STAGE QUEST ARCS (authored as story_arc.nodes)
+
+Every NPC with archetype ROMANCE, RIVAL, MENTOR, or THREAT gets a 3-stage
+quest arc. Each stage is a regular story_arc.nodes entry (Phase 6 in the
+Book becomes Phase 4 in the TOML — same data). The existing engine's
+Quest Page + hint sidebar automatically render these — no new fields, no
+new sections.
+
+SAFE_HARBOR, WILDCARD, AUTHORITY, CLOCK NPCs may have optional arcs
+(1-3 stages, fewer is fine).
+
+For each qualifying NPC, write:
+```
+### [NPC Name] Quest Arc
+
+#### Stage 1: [Stage Title]
+- **node_id**: `node_<npc>_q1`
+- **unlock_condition**: what makes this stage available
+  (typically: NPC met, or prior story event fired)
+- **completion_condition**: what player action completes it
+  (typically: specific canvas played, or stat threshold reached)
+- **guide_hint**: 1-sentence actionable hint shown in the Quest Page /
+  hint sidebar while this stage is active.
+  Example: "Hang out at the library with Ben in the afternoon"
+- **linked_flag**: `<npc>_q1_done` (set when stage completes)
+- **linked_canvas**: `canvas_<stage_scene>` (the scene that plays)
+- **requires_nodes**: [] (stage 1 has no prereqs beyond meeting the NPC)
+
+#### Stage 2: [Stage Title]
+- **node_id**: `node_<npc>_q2`
+- **unlock_condition**: requires stage 1 complete PLUS stat/item/time gate
+- **completion_condition**: …
+- **guide_hint**: …
+- **linked_flag**: `<npc>_q2_done`
+- **requires_nodes**: `["node_<npc>_q1"]`
+
+#### Stage 3: [Stage Title]
+- **node_id**: `node_<npc>_q3`
+- **unlock_condition**: requires stage 2 complete PLUS escalated gate
+- **completion_condition**: …
+- **guide_hint**: …
+- **linked_flag**: `<npc>_q3_done`
+- **requires_nodes**: `["node_<npc>_q2"]`
+- **Note**: Stage 3's linked canvas exit_block must also set `<npc>_arc_complete`
+  via flagEffects so Whiteboard goals watching "complete <npc>'s arc" fire.
+```
+
+ARCS MUST ESCALATE: Stage 1 gates are light (meet + talk); Stage 2 requires
+investment (trait threshold OR an item purchase); Stage 3 is the culmination.
+
+**Culmination SHAPE varies by archetype** — it is NOT always a romantic/sexual
+climax. Design arc shape to match the NPC's mechanical role:
+
+- ROMANCE: culmination = intimacy (physical or emotional), relationship defined
+- RIVAL: culmination = decisive zero-sum event (beaten, joined forces, or stalemate)
+- MENTOR: culmination = wisdom transferred, quest-giver role handed off, or
+          their arc's lesson internalized by player
+- THREAT: culmination = threat neutralized (defeated, escaped, bargained with, or
+          transformed into something else). **THREAT arcs are 3 escalating
+          risk encounters, not relationship progression.** Each stage raises
+          stakes; culmination resolves the threat one way or another.
+- SAFE_HARBOR (if arc present): culmination = acceptance/trust proven,
+          often with player reciprocating past kindness
+- AUTHORITY (if arc present): culmination = player earns or subverts their
+          authority (passes their test, or bypasses their gate)
+- WILDCARD (if arc present): culmination = the chaos resolves — either the
+          wildcard integrates or exits the player's life
+
+ANTI-PATTERNS:
+- ❌ 5-7 condition gates on any single stage (target is 2-3 conditions MAX)
+- ❌ Stages with only flag gates (must include some progression metric —
+  trait threshold or item acquired)
+- ❌ Arcs that require impossible-to-discover prereqs
+- ❌ Stage 3 completion condition that the player can accidentally skip
+- ❌ THREAT arc written as romance progression (escalating intimacy instead
+  of escalating danger)
+- ❌ MENTOR arc stage 3 written as sexual gate (wisdom culmination doesn't
+  require physical intimacy)
+
+REFERENCE (ZSL Ben Kingsley arc — ROMANCE archetype):
+- Stage 1: Meet at library after PE → talk about science → sets `ben_intro_done`
+- Stage 2: Reach relationship 2 AND hang out in library → `ben_tutor_start`
+- Stage 3: Bring him the hacked credentials from Sixth → `ben_q3_done`
+
+REFERENCE (hypothetical THREAT arc — predatory manager):
+- Stage 1: First inappropriate comment at work → player must respond
+          (refuse / deflect / agree) → sets `threat_encountered`
+- Stage 2: Cornering incident in back room → player must escape or submit
+          (confidence check OR corruption path) → sets `threat_escalated`
+- Stage 3: Ultimatum or confrontation → player resolves (confront authority,
+          succumb, or blackmail back) → sets `threat_resolved`
+
+---
+
+### Section 4: LONG-TERM STATUS CLIMBS (use existing emotion_mappings)
+
+Status climbs — the visible tier labels players see on long-term stats
+(corruption 20 = "Awakening", 40 = "Curious", etc.) — are expressed using
+the EXISTING `[story_arc.emotion_mappings.<trait>.ranges]` schema with
+`trait_owner = "player"`. No separate TOML section is needed; the existing
+`setup.interpretNpcState` handles rendering.
+
+For each primary player stat you want tiered, plan tier labels + ranges
+here. Phase 4 (Story Arc) will serialize them as emotion_mappings.
+
+Example plan (becomes TOML in Phase 4):
+
+```
+## Player emotion mapping: corruption
+trait_owner = player
+ranges:
+  - min 0, max 19   → "Innocent"   : "Still learning what she wants."
+  - min 20, max 39  → "Awakening"  : "First flirt-tier content unlocks."
+  - min 40, max 59  → "Curious"    : "Kiss tier opens; Kaylee notices."
+  - min 60, max 89  → "Seeking"    : "Touch tier unlocks."
+  - min 90, max 250 → "Transformed": "Everything-tier unlocked."
+
+## Player emotion mapping: town_reputation
+trait_owner = player
+ranges:
+  - 0-9    → "Unknown"    : "Locals haven't heard of you."
+  - 10-24  → "Recognized" : "Sara introduces you to regulars."
+  - 25-39  → "Known"      : "Diner tippers know your name."
+  - 40-59  → "Liked"      : "Henley's gallery invitation opens."
+  - 60+    → "Beloved"    : "You outrank Kaylee."
+```
+
+QUOTAS:
+- 1 mapping per primary player stat
+- 3-5 ranges per mapping (more = clutter; fewer = coarse)
+- Every range covers [min, max] inclusive, no gaps
+
+Notes:
+- Gating content on a specific tier: use a `{ type = "trait", subject =
+  "player", trait_key = "corruption", operator = "gte", value = 40 }`
+  condition directly on the canvas/location trigger. No separate "tier
+  crossed" flag needed.
+- These emotion mappings are for VISIBLE labels. Mechanical gating uses
+  trait conditions directly in triggers.
+
+---
+
+### Section 5: PARALLEL INCOME CHANNELS (≥4)
+
+The player must have ≥4 ways to earn money, each with different skill gates,
+payout ranges, time costs, and narrative tones. Different player profiles
+gravitate toward different channels.
+
+For each channel:
+```
+### Income Channel: [name]
+- **id**: `income_<snake_case>`
+- **location_id**: where it happens
+- **skill_gate**: condition that must be true to access
+  Example: `{ type: "trait", trait_key: "charm", operator: "gte", value: 10 }`
+- **payout_range**: [min, max] per attempt
+- **time_cost_minutes**: how much in-game time it consumes
+- **npc_id** (optional): which NPC runs or gates this channel
+- **narrative_tone**: respectable | grey | corrupt | dangerous
+- **tier_progression**: does this channel have skill-gated tier unlocks?
+  If yes, describe the 2-3 tiers.
+```
+
+QUOTAS:
+- Minimum 4 channels, ideally 5-7
+- Narrative tones MUST span respectable → grey → corrupt (at least one of
+  each)
+- Skill gates must use DIFFERENT traits (not all "charm" or all "corruption")
+- At least 1 channel accessible day 1 (safety net for broke starts)
+
+REFERENCE (Shady Deals, verbatim):
+- Brothel work: CHARM 11 gate, $219-231/customer, 1 hour, corrupt tone
+- Cam stream: stamina-gated, variable donations, 90 min, grey tone
+- Burglary: stealth-gated, loot variable, pushes lockpick cost, dangerous
+- Shipments: capital-gated, huge returns ($3600-$17800), multi-day, corrupt
+- Heists: crew-gated, largest returns, highest heat cost, dangerous
+- 404 Bleach gigs: 3 skill tracks (Combat/Cunning/Charm), daily refresh,
+  reduces heat, grey tone
+- Cleaning at home: no gate, $15-30/session, 1 hour, respectable
+- Diner waitressing: beauty gate, $30-50 + tips, 3 hour, respectable
+
+---
+
+### Section 6: HINT MENU CONTENT (authored inline on each stage node)
+
+The hint menu (ZSL "Next Quests Hints" equivalent, Shady Deals "Red Phone")
+surfaces actionable next steps based on current state. **The existing
+engine already renders this — no separate section needed.** The hint text
+for each stage is the `guide_hint` field on the corresponding story_arc.nodes
+entry (Section 3 above). The engine automatically:
+
+- Picks the current incomplete stage per NPC (via `linked_flag` status)
+- Displays that stage's `guide_hint` in both the Quest Page and the
+  `type = "hint"` sidebar widget
+
+Your job in this section: verify each stage node from Section 3 has
+guide_hint text that is:
+- Actionable (tells the player WHERE/WHEN/WHAT, not "try harder")
+- Specific ("Hang out at the library with Ben in the afternoon", not
+  "Get closer to Ben")
+- Not a spoiler ("Bring charcoal to Jake's studio", not "Sleep with Jake")
+- Not meta ("Visit the diner" — not "The designer recommends visiting the diner")
+
+If a stage has multiple failure modes worth separate hints (e.g., the gate
+fails because of a missing flag OR because of a stat threshold), write the
+PRIMARY hint that addresses the most common blocker first. For nuanced
+alternates, use canvas trigger conditions to split the stage into
+conditional sub-canvases rather than authoring multiple hints.
+
+This section is essentially a HINT AUDIT of Section 3, not a separate data
+block. Include a bullet list per NPC confirming each stage's guide_hint:
+
+```
+## Hint Audit
+- npc_jake:
+  - Q1: "Find Jake sketching at the creek in the afternoon." ✓
+  - Q2: "Buy charcoal at the mall ($15), bring it to Jake's studio." ✓
+  - Q3: "Return to Jake's studio when confidence ≥ 35." ✓
+- npc_ryan:
+  - Q1: …
+```
+
+---
+
+### Section 7: IN-FICTION GATE JUSTIFICATIONS
+
+Every gated location, gated canvas, or gated content tier needs a **diegetic
+reason** — a piece of in-world content that narrates WHY it's locked.
+
+Examples of diegetic gates:
+- A news story on the player's phone: "Road to Outskirts closed due to
+  construction" (Shady Deals — the story is literally the map gate)
+- A rumor from an NPC: "Kaylee told me not to trust new girls at the gym"
+  (gate: gym entry blocked until town_rep ≥ 10)
+- A sign on a door: "Closed for private event" (gate: specific canvas
+  unlocks on specific day)
+- A phone message: "Can't meet until Thursday" (gate: NPC availability
+  shifts)
+
+For each gated element in Phase 1/2 (locations with entry conditions,
+canvases with trigger conditions, Phase 2 content, etc.), provide:
+
+```
+### Gate: [location/canvas id]
+- **gate_condition**: the mechanical condition (flag/trait/time)
+- **justification_type**: news | rumor | sign | phone | event_aftermath
+- **justification_content**: the 1-3 sentence diegetic content
+- **delivery_canvas_id**: which canvas or location shows this content
+  (this becomes a Phase 4 story event or Phase 3 location flavor)
+- **unlock_event**: what in-fiction event removes the gate
+  (e.g., "Construction finishes on day 14" or "Kaylee is defeated")
+```
+
+QUOTAS:
+- EVERY gate in the game has a justification (not just the obvious ones)
+- No silent "this is locked because the stat is low" gates
+
+This converts hidden conditions into visible narrative texture. Players stop
+wondering "why can't I go here?" and start understanding the world.
+
+---
+
+### Section 8: PHASE 2 CONTENT INVENTORY (gate on whiteboard_complete)
+
+What opens when the Whiteboard is complete. This is "the game after the
+game" — prevents the ongoing-game model from feeling finished when the
+Whiteboard completes.
+
+**Mechanical implementation:** Phase-2-tier canvases, locations, and NPCs
+are gated by placing `{ type = "whiteboard_complete" }` directly in their
+trigger conditions. No separate TOML section — the condition is the gate.
+
+Write an INVENTORY (a plain list, not a structured section) that Phase 2/3
+authors will implement:
+
+```
+### Phase 2 Content Inventory
+
+**Unlock trigger**: Existing `whiteboard_complete` condition type on the
+trigger conditions of everything below.
+
+**New locations (added in Phase 3, gated on whiteboard_complete)**:
+- [loc_id]: [description]
+
+**New NPCs (added in Phase 1, with meet-canvas in Phase 2 gated on whiteboard_complete)**:
+- [npc_id]: [archetype] — [role in Phase 2]
+
+**Expanded NPC arcs (stage 4+ nodes gated on whiteboard_complete)**:
+- [npc_id]: new stage 4 — [description]
+
+**New income channels (added in Phase 3, gated on whiteboard_complete)**:
+- [channel_id]: [how it differs from Phase 1 channels]
+
+**New mechanical layer (if applicable)**:
+- e.g., "Create Your Gang" unlocks management UI for recruited NPCs
+- e.g., "Open the Gallery" unlocks art-commission management
+
+**New Whiteboard goals (optional — Phase 2 may have its own Whiteboard)**:
+- [wb2_goal_1]: [...]
+```
+
+This section is a DESIGN SPEC — not a detailed content plan. Downstream
+phases will decide whether to write Phase 2 content immediately or leave
+it as spec for later expansion.
+
+---
+
+### Section 9: PRESSURE MECHANIC DESIGN (DEFERRED — book-only)
+
+DESIGN NOW, SERIALIZE LATER. The engine does not yet render a global
+pressure counter. Document the design so Phase B engine work knows what
+to build.
+
+Specify:
+- **Variable name**: e.g., `heat`, `reputation`, `debt`, `suspicion`
+- **Starting value**:
+- **Increment rules**: what actions raise it (per-action delta)
+- **Decrement rules**: what reduces it (time passage, specific activities,
+  paid services)
+- **Thresholds**:
+  - Low (0-N): baseline, no effect
+  - Mid (N-M): warnings, some content gated
+  - High (M+): major content locked, faction responses
+- **What it blocks**: specific locations/canvases locked above threshold
+- **Per-faction variants** (if applicable): do different factions track
+  their own pressure?
+
+REFERENCE (Shady Deals Heat System):
+- Global `heat` + per-faction `gangs_heat`, `mafia_heat`, `bikers_heat`,
+  `cartel_heat`
+- High heat → blocks faction HQ re-entry, blocks lab/warehouse access
+- Reduce via: 404 Bleach cleaning service, bikers noise distraction ($8k),
+  or police walkie-talkie
+
+---
+
+### Section 10: SAFETY NET (DEFERRED — book-only)
+
+DESIGN NOW, SERIALIZE LATER. Mechanism that prevents broke-state soft-lock.
+
+Specify:
+- **Trigger**: e.g., "player money < $0 at day end"
+- **Action**: e.g., "auto-grant $1000 loan + set `has_bank_debt` flag"
+- **Repayment**: e.g., "5% deducted from every paycheck until debt = 0"
+- **Opt-in alternatives**: e.g., "NPC-offered loan with relationship cost"
+- **Narrative flavor**: how the loan appears in-fiction (bank visit, Frank
+  offers, Mafia shark approach with higher interest, etc.)
+
+REFERENCE (Shady Deals):
+- Daily upkeep (food + tax = $10/day) deducted automatically
+- If broke, auto-loans $1000 with bank; debt decrements 5%/paycheck
+- Optional: Mafia shark offers larger loans at worse terms (narrative fork)
+
+---
+
+### Section 11: MINIGAME SPECS (DEFERRED — book-only, at least 1)
+
+DESIGN NOW, SERIALIZE LATER. At least one minigame tied to a specific
+activity, giving the player mechanical friction beyond click-to-choose.
+
+Specify:
+```
+### Minigame: [name]
+- **id**: `mg_<snake_case>`
+- **type**: push-your-luck | timing | matching | rhythm
+- **tied_to_activity**: which canvas/income channel uses it
+- **mechanic**: step-by-step description
+- **outcome_table**: what each outcome yields
+  - Best case: stat gains, money, flag
+  - Mid case: partial reward
+  - Worst case: stat loss, flag, cooldown
+- **skip_condition**: after N successes, allow auto-resolve with worst outcome
+```
+
+REFERENCE (Shady Deals Burglary — push-your-luck):
+- Click containers one by one (racks/cupboards/buffet/closet/drawers)
+- Each click: junk OR valuable item
+- Valuables may trigger "made some noise" — noise accumulates
+- At noise threshold: "Someone is coming, run!" — choices collapse to only
+  "Run away"
+- Player tension: push for one more item vs bail with current loot
+- Consumes 1 lockpick per attempt
+
+---
+
+### Section 12: PROCGEN NPC POOL (DEFERRED — book-only, if applicable)
+
+DESIGN NOW, SERIALIZE LATER. If the game has a bar/diner/park/any
+meet-strangers location, design the pool that generates fresh NPCs on
+every visit.
+
+Specify:
+- **Pool id**: `pool_<location>`
+- **Source location**: where the pool triggers
+- **Name templates**: first name list, last name list (regional/genre-fit)
+- **Role list**: Farmer, Tourist, Student, Construction Worker, etc.
+- **Wealth tiers**: Low-End, Mid-Range, High-End (affects tips/payouts)
+- **Hidden stat reveal gate**: condition that unlocks "Observant" view
+  (seeing hidden NPC stats)
+- **Interaction types**: add to contacts | socialize | hire | recruit |
+  sell drugs to | proposition
+
+REFERENCE (Shady Deals bar socialize):
+- Bar NPC card: Name+Role+Wealth+icon-class (thug_icon, thief_icon, etc.)
+- Example generated: "Vaughn Manning, Farmer, Low-End"
+- Hidden stats (abilities + engagement) revealed only with Observant trait
+- Progression: each contact added ticks `observer_trait_progress` +7
+
+---
+
+## VALIDATION CHECKLIST (self-check before closing Phase 2B)
+
+Before writing "Phase 2B complete," verify ALL items:
+
+### Whiteboard Quality
+□ 7-12 goals (count them)
+□ Every goal has a computable completion_condition
+□ At least 1 goal per ROMANCE NPC
+□ At least 1 economic, 1 status, 1 social goal
+□ No goal requires the player to "win" a bounded deadline
+
+### Archetype Roster
+□ Every Phase 2 NPC has exactly one archetype tag
+□ Archetype quotas met: ≥1 ROMANCE, ≥1 RIVAL, ≥1 MENTOR, ≥1 SAFE_HARBOR,
+  ≥1 THREAT, ≥1 AUTHORITY, ≥1 CLOCK (total ≥ 7 distinct archetype slots)
+□ Roster size matches game scope: 7-10 NPCs for focused games,
+  10-15 for multi-route open-world
+□ Multi-route games (architecture = "multi-NPC parallel arcs") have ≥2 ROMANCE
+□ No overlapping archetypes (e.g., AUTHORITY + ROMANCE same NPC)
+
+### NPC Quest Arcs
+□ Every ROMANCE/RIVAL/MENTOR/THREAT NPC has 3 stages
+□ Each stage has node_id, unlock_condition, completion_condition, linked_flag,
+  linked_canvas, guide_hint, requires_nodes chain pointing to prior stage
+□ Stage 3's linked canvas sets `<npc>_arc_complete` flag via exit_block.flagEffects
+□ No stage has > 3 conditions in unlock_condition (Whiteboard simplification rule)
+□ Stage 2 requires Stage 1's reward flag; Stage 3 requires Stage 2's
+
+### Long-Term Status Climbs (expressed via [story_arc.emotion_mappings])
+□ Every primary player stat has tier labels planned (becomes
+  [story_arc.emotion_mappings.<trait>.ranges] with trait_owner="player" in Phase 4)
+□ Each mapping has 3-5 ranges covering [min, max] inclusive, no gaps
+□ Each range has a narrative label AND description
+
+### Income Channels
+□ Minimum 4 channels
+□ Skill gates use DIFFERENT traits across channels
+□ Narrative tones span respectable → grey → corrupt
+□ At least 1 channel available day 1 (no prereqs)
+
+### Hint Menu
+□ Every NPC × every quest stage has at least 1 primary hint
+□ Hints are actionable (tell player WHERE/WHEN/WHAT)
+□ Hints do not spoil story content
+
+### In-Fiction Gate Justifications
+□ Every gated location in Phase 1 has a diegetic justification
+□ Every gated canvas (with trigger conditions) has a diegetic source
+□ Each justification has a delivery_canvas_id pointing to Phase 4 content
+
+### Phase 2 Content Inventory
+□ Phase 2 tier is defined (not empty)
+□ Includes at least one of: new locations, new NPCs, expanded arcs, new income, new mechanical layer
+□ Each item will carry { type = "whiteboard_complete" } in its trigger conditions
+  when authored in Phase 2/3 (no separate [[phase_2_unlock]] TOML section)
+
+### Deferred Sections (9-12)
+□ Pressure mechanic designed (variable, thresholds, blocks, decrement rules)
+□ Safety net designed (trigger, action, repayment)
+□ At least 1 minigame spec (type, mechanic, outcomes, skip condition)
+□ Procgen NPC pool designed IF game has meet-strangers location
+
+### Integration Check
+□ Every flag in Phase 2's flag inventory is either:
+  - A Whiteboard goal completion flag, OR
+  - An NPC quest arc reward flag (set by a stage's linked canvas), OR
+  - A narrative gate flag, OR
+  - Explicitly marked as "utility only" (job_started, rent_last_paid, etc.)
+□ No orphan flags (set but never read, or read but never set)
+□ Long-term status climbs use emotion_mappings ranges (no separate flags needed
+  for tier transitions — canvases check trait thresholds directly)
+
+---
+
+## WHEN PHASE 2B IS DONE
+
+Write to session_state.yaml:
+```yaml
+current_phase: "2B"
+status: "completed"
+systems_budget:
+  whiteboard_goal_count: N
+  npc_count: N
+  archetypes_used: [list]
+  quest_arcs_defined: N
+  income_channels: N
+  gate_justifications: N
+  deferred_items: [pressure, safety_net, minigames, procgen_pools]
+```
+
+Then stop and wait for "proceed" before Phase 3.
+
 ---
 
 ===============================================================================
@@ -2258,6 +2963,25 @@ List ALL flags the game will use:
 ===============================================================================
 
 Define the physical space, time system, and economic model.
+
+## SYSTEMS-BUDGET INTAKE (read before designing)
+
+Phase 3 consumes Phase 2B outputs:
+- **Income Channels** (Section 5): each channel needs a location and (often)
+  an NPC. Phase 3 locations must accommodate every channel in the budget.
+- **In-Fiction Gate Justifications** (Section 7): gated locations need a
+  diegetic justification source. Phase 3 location descriptions should
+  include the world-building hooks that Phase 4 will later exploit
+  (a bulletin board, a sign, a radio, a newspaper rack) for delivering
+  gate justifications.
+- **Archetype Roster** (Section 2): each archetype implies location needs.
+  RIVAL needs a shared location (zero-sum competition venue). MENTOR needs
+  a meeting place. THREAT typically has a "dangerous" location they inhabit.
+
+Verify at end of Phase 3:
+- Every Income Channel has a matching location
+- Every gated location has a content hook for its justification
+- At least one location suits each archetype's interaction pattern
 
 ## Section 1: Location Hierarchy
 
@@ -2329,6 +3053,24 @@ This determines which activities can fire when.
 ===============================================================================
 
 Design all one-time narrative events that drive the story forward.
+
+## SYSTEMS-BUDGET INTAKE (read before designing)
+
+Every story event in Phase 4 MUST map to at least one of:
+- **A Whiteboard goal** (Phase 2B Section 1) — event advances or completes the goal
+- **An NPC quest arc stage** (Phase 2B Section 3) — event IS a quest stage or sets its reward flag
+- **A gate justification** (Phase 2B Section 7) — event is the diegetic source for a locked gate
+- **A tier transition in an emotion_mapping** (Phase 2B Section 4) — event fires when player crosses a trait tier (e.g., corruption 40 → "Curious"); gate with a `trait >= N` condition directly
+- **A Phase 2 content reveal** (Phase 2B Section 8) — event occurs in content gated on `whiteboard_complete`
+
+If a proposed story event doesn't map to any of the above, it probably
+shouldn't exist. Every event should carry structural weight, not just
+scene color.
+
+When writing each event, annotate:
+```
+**Systems-Budget role**: [whiteboard_goal_<id> | <npc>_q<N> | gate_<id> | threshold_<stat>_<value> | phase_2_unlock]
+```
 
 ## DRAMATIC STRUCTURE REQUIREMENTS
 
@@ -2713,6 +3455,26 @@ Corruption 200: bar + harlan + public     ✓ (3 arcs)
 
 Design all repeatable canvases — NPC activities, utility canvases, and solo activities.
 
+## SYSTEMS-BUDGET INTAKE (read before designing)
+
+Phase 5 is where Parallel Income Channels (Phase 2B Section 5) become
+actual activity canvases. Every income channel in the budget MUST have a
+corresponding activity canvas in Phase 5:
+- Channel skill_gate → canvas trigger.conditions
+- Channel payout_range → choice effects (money trait changes)
+- Channel time_cost_minutes → choice time_progression_minutes
+- Channel narrative_tone → canvas block content voice
+
+If Phase 2B lists 6 income channels and Phase 5 only delivers 4, the
+systems budget is broken. Pause and either expand Phase 5 or revise
+Phase 2B.
+
+Additionally, for each activity:
+- If the activity relates to an NPC quest arc stage, annotate with the
+  stage ID so the hint menu can reference it.
+- If the activity implements a minigame spec from Phase 2B Section 11,
+  mark with `minigame_id` for future engine wiring (book-only for now).
+
 ## EMOTIONAL STATE IN ACTIVITY SCENES
 
 Activity base scenes are where the player FEELS the NPC's emotional state
@@ -2859,6 +3621,34 @@ List any if designed, or note "None for this game."
 ===============================================================================
 
 Define the narrative journal system that tracks the player's emotional journey.
+
+## SYSTEMS-BUDGET INTAKE (read before designing)
+
+Phase 6 expresses the Whiteboard and Phase 2 content tier as narrative
+arc structure:
+
+- **Whiteboard goals** (Phase 2B Section 1) become arc milestones. Each
+  goal's completion is a journal entry. The cluster of all goals completing
+  is the mid-game climax.
+- **Phase 2 Content Inventory** (Phase 2B Section 8) becomes the post-
+  Whiteboard tier of the arc — a new chapter whose canvases/locations
+  all carry `{ type = "whiteboard_complete" }` in their trigger conditions.
+  This is "the game after the game" — replace the bounded-game ending with
+  an ongoing second chapter.
+- **NPC quest arcs** (Phase 2B Section 3) become per-NPC journal threads
+  expressed as story_arc.nodes with npc + linked_flag + guide_hint +
+  requires_nodes. Each arc's 3 stages are 3 journal entries.
+- **Long-term status climbs** (Phase 2B Section 4) ARE the emotion_mappings
+  directly — serialize them as [story_arc.emotion_mappings.<trait>.ranges]
+  with trait_owner = "player". Each range is a visible tier label (e.g.,
+  corruption 40-59 = "Curious" with distinct internal-voice flavor).
+- **Hint menu content** (Phase 2B Section 6) is authored INLINE on each
+  quest-arc stage node as `guide_hint`. The existing setup.getSidebarHint
+  and Quest Page render them — no separate section needed.
+
+The arc is NOT a bounded narrative that ends. For ongoing games, the arc
+is a structured journal that keeps growing — Whiteboard completion is a
+milestone, not a finale.
 
 ## Section 0: Dramatic Spine Summary
 
