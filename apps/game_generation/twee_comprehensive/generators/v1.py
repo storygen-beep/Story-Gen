@@ -482,6 +482,7 @@ class TweeComprehensiveGeneratorV1:
         player_portrait = ""
         player_traits = {}
         player_flag_keys: list[str] = []
+        player_trait_decay: dict[str, float] = {}
         try:
             pc = getattr(self.project, 'player_character', None)
             if pc is not None:
@@ -491,8 +492,17 @@ class TweeComprehensiveGeneratorV1:
                 player_portrait = pc_metadata.get("portrait", "")
                 player_traits = pc.core_traits or {}
                 player_flag_keys = list(getattr(pc, 'flag_keys', []) or [])
+                # Per-day decay for player traits (hygiene, etc.)
+                _td_raw = pc_metadata.get("trait_decay") or {}
+                if isinstance(_td_raw, dict):
+                    for k, v in _td_raw.items():
+                        try:
+                            player_trait_decay[str(k)] = float(v)
+                        except (ValueError, TypeError):
+                            pass
         except (AttributeError, TypeError) as e:
             logger.warning("Error loading player character data: %s", e)
+        self.player_trait_decay_config = player_trait_decay
 
         # Store player portrait and description as instance variables
         self.player_portrait = player_portrait
@@ -520,6 +530,7 @@ class TweeComprehensiveGeneratorV1:
 
         npc_map = {}
         npc_slug_map = {}  # Maps NPC slug to UUID for condition resolution
+        hidden_npcs_map = {}  # Maps NPC UUID -> True for NPCs flagged hidden_from_ui
         try:
             from apps.npcs.models import NPC
 
@@ -558,10 +569,15 @@ class TweeComprehensiveGeneratorV1:
                     short_name = slug.replace("npc_", "", 1) if slug.startswith("npc_") else slug
                     if short_name and short_name != slug:
                         npc_slug_map[short_name] = npc_uuid
+                # Track NPCs hidden from Guide Page, Stats Page, and sidebar NPC-traits widget.
+                # The NPC still exists in $npcs at runtime so narrative UUID lookups keep working.
+                if getattr(n, "hidden_from_ui", False):
+                    hidden_npcs_map[npc_uuid] = True
         except (AttributeError, TypeError) as e:
             logger.warning("Error loading NPC map: %s", e)
             npc_map = {}
             npc_slug_map = {}
+            hidden_npcs_map = {}
 
         # Store as instance variables for use in _convert_blocks_to_game_html
         self.npc_map = npc_map
@@ -610,6 +626,7 @@ class TweeComprehensiveGeneratorV1:
         npc_map_json = json.dumps(npc_map_for_json)
         self.npc_trait_decay_config = npc_trait_decay_config
         npc_slug_map_json = json.dumps(npc_slug_map)
+        hidden_npcs_json = json.dumps(hidden_npcs_map)
 
         # Build customizable NPCs list and redirect start_target if needed
         customizable_npcs = [
@@ -672,11 +689,21 @@ class TweeComprehensiveGeneratorV1:
         self.rent_grace_periods = rent_settings.get("grace_periods", 1)
         self.rent_start_after_flag = rent_settings.get("start_after_flag", "")
         self.rent_text = rent_settings.get("text", {})
+        self.rent_eviction_mode = rent_settings.get("eviction_mode", "game_end")
+        self.rent_eviction_flag = rent_settings.get("eviction_flag", "rent_evicted")
 
         # Passes (recurring time-limited purchases)
         self.passes = (self.project.metadata or {}).get("passes", [])
         # Items (consumable inventory)
         self.items = (self.project.metadata or {}).get("items", [])
+        # Day-rollover hook ([engine.daily_tick]) — fires inside advanceDay().
+        # Always present as a dict with a flagEffects list (possibly empty)
+        # so the generated JS loop has a stable target.
+        _daily_tick_meta = (self.project.metadata or {}).get("daily_tick") or {}
+        self.daily_tick = {"flagEffects": _daily_tick_meta.get("flagEffects", []) or []}
+        # E4: Stage helpers ([[engine.stage_helpers]]) — named composite gates.
+        # Loaded as a list; runtime builds an O(1) name → helper lookup map.
+        self.stage_helpers = (self.project.metadata or {}).get("stage_helpers", []) or []
 
         # Theme (visual customization)
         raw_theme = (self.project.metadata or {}).get("theme", {})
@@ -1401,13 +1428,14 @@ setup.sendPhoneReply = function(convId, choiceIndex, roundNum) {{
                 var feffs = choice.flagEffects || [];
                 for (var f = 0; f < feffs.length; f++) {{
                     var fe = feffs[f];
-                    var fTarget = fe.targetType || "player";
-                    if (fTarget === "player") {{
-                        sv.player.flags[fe.flag] = true;
-                    }} else if (fTarget === "npc" && fe.npcId) {{
-                        var nUuid = setup.resolveNpcId(fe.npcId);
-                        if (sv.npcs[nUuid]) sv.npcs[nUuid].flags[fe.flag] = true;
-                    }}
+                    // Delegate to setup.applyAndNotifyFlag so op = set | unset | toggle
+                    // is honored uniformly with passage-flow flag emission.
+                    setup.applyAndNotifyFlag(
+                        fe.targetType || "player",
+                        fe.npcId || null,
+                        fe.flag,
+                        fe.op || "set"
+                    );
                 }}
                 setup.showEffectNotification();
             }}
@@ -1970,6 +1998,7 @@ Config.history.maxStates = 20;
 // Static lookup data — stored on setup (not State.variables) to avoid deep-clone on every passage transition
 setup.help_data = {help_data_json};
 setup.npc_slug_map = {npc_slug_map_json};
+setup.hiddenNpcs = {hidden_npcs_json};
 setup.locations = {locations_map_json};
 setup.story_arc = {story_arc_json};
 setup.clothing_enabled = {"true" if self.clothing_enabled else "false"};
@@ -1983,6 +2012,8 @@ setup.rent_enabled = {"true" if self.rent_enabled else "false"};
 {f'setup.rent_due_day = "{self.rent_due_day}";' if self.rent_enabled else ''}
 {f'setup.rent_start_after_flag = "{self.rent_start_after_flag}";' if self.rent_enabled else ''}
 {f'setup.rent_text = {json.dumps(self.rent_text)};' if self.rent_enabled else ''}
+{f'setup.rent_eviction_mode = "{self.rent_eviction_mode}";' if self.rent_enabled else ''}
+{f'setup.rent_eviction_flag = "{self.rent_eviction_flag}";' if self.rent_enabled else ''}
 setup.sidebar_items = {sidebar_items_json};
 setup.passes = {json.dumps(self.passes)};
 setup.passes_map = {{}};
@@ -1995,6 +2026,13 @@ for (var _ii = 0; _ii < setup.items.length; _ii++) {{
     setup.items_map[setup.items[_ii].id] = setup.items[_ii];
 }}
 setup.npc_trait_decay = {json.dumps(self.npc_trait_decay_config)};
+setup.player_trait_decay = {json.dumps(self.player_trait_decay_config)};
+setup.daily_tick = {json.dumps(self.daily_tick)};
+setup.stage_helpers = {json.dumps(self.stage_helpers)};
+setup.stage_helpers_map = {{}};
+for (var _shi = 0; _shi < setup.stage_helpers.length; _shi++) {{
+    setup.stage_helpers_map[setup.stage_helpers[_shi].name] = setup.stage_helpers[_shi];
+}}
 setup.phone_enabled = {"true" if self.phone_enabled else "false"};
 setup.phone_data = {phone_data_json};
 
@@ -2656,6 +2694,25 @@ setup.triggerConditionsSatisfied = function(conditions) {{
                 var count = setup.getItemCount(itemId);
                 satisfied = compare(itemOp, count, itemVal);
                 results.push(satisfied);
+                continue;
+            }}
+
+            // E4: stage — reference a named composite gate by name.
+            // Helpers reference primitive types only (validated at template
+            // import time), so this single-level recurse is cycle-free.
+            if (type === 'stage') {{
+                var helperName = String(it.helper || '');
+                var stageOp = String(it.operator || 'is_true');
+                var helper = (setup.stage_helpers_map || {{}})[helperName];
+                if (!helper || !helper.conditions) {{
+                    if (window.console && setup.dev_mode) {{
+                        console.warn('Stage helper not found: ' + helperName);
+                    }}
+                    results.push(false);
+                    continue;
+                }}
+                var inner = setup.triggerConditionsSatisfied(helper.conditions);
+                results.push(stageOp === 'is_false' ? !inner : inner);
                 continue;
             }}
 
@@ -3663,6 +3720,36 @@ window.advanceDay = function() {{
             }}
         }}
     }}
+    // Player trait decay: applied every in-game day, no skip logic (player always "participates")
+    if (setup.player_trait_decay && Object.keys(setup.player_trait_decay).length > 0) {{
+        var _pt = State.variables.player && State.variables.player.core_traits;
+        if (_pt) {{
+            for (var _ptKey in setup.player_trait_decay) {{
+                var _ptDecay = setup.player_trait_decay[_ptKey];
+                if (typeof _pt[_ptKey] === 'number' && _ptDecay > 0) {{
+                    _pt[_ptKey] = Math.max(0, _pt[_ptKey] - _ptDecay);
+                }}
+            }}
+        }}
+    }}
+    // [engine.daily_tick] hook — silently apply configured flag effects
+    // (no notification queueing; daily clears are bookkeeping, not events).
+    if (setup.daily_tick && setup.daily_tick.flagEffects && setup.daily_tick.flagEffects.length > 0) {{
+        var dtEffs = setup.daily_tick.flagEffects;
+        for (var dti = 0; dti < dtEffs.length; dti++) {{
+            var dtFe = dtEffs[dti];
+            try {{
+                window.applyFlagEffect(
+                    dtFe.targetType || 'player',
+                    dtFe.npcId || null,
+                    dtFe.flag,
+                    dtFe.op || 'set'
+                );
+            }} catch (e) {{
+                // ignore — keep day-rollover resilient
+            }}
+        }}
+    }}
     // Reset daily NPC interaction tracking
     State.variables.npc_interacted_today = {{}};
 }};
@@ -3820,10 +3907,15 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
 }};
 
 // ===== Flag Helpers =====
-window.applyFlagEffect = function(targetType, npcId, flag) {{
+// op: "set" (default) | "unset" | "toggle"
+//   - set:    flag = true,  flags_meta updated
+//   - unset:  flag = false, flags_meta untouched (preserves last set_day for re-arming)
+//   - toggle: flag = !flag, flags_meta updated only when new value is true
+window.applyFlagEffect = function(targetType, npcId, flag, op) {{
   try {{
     var sv = State.variables;
     if (!sv) return;
+    op = op || 'set';
 
     // Resolve NPC slug to UUID
     if (targetType === 'npc' && npcId) {{
@@ -3831,29 +3923,43 @@ window.applyFlagEffect = function(targetType, npcId, flag) {{
     }}
 
     var key = String(flag);
-    // Get current day for tracking when flag was set
     var currentDay = (sv.game_state && sv.game_state.time_state) ? sv.game_state.time_state.day : 1;
 
+    var flagsObj = null;
+    var metaObj = null;
     if (targetType === 'player') {{
-      // Store in $flags (sv.flags) to match triggerConditionsSatisfied checks
       sv.flags = sv.flags || {{}};
-      sv.flags[key] = true;
-      // Track when flag was set for days_since_flag conditions
       sv.flags_meta = sv.flags_meta || {{}};
-      sv.flags_meta[key] = {{ set_day: currentDay }};
-      return;
-    }}
-    if (targetType === 'npc') {{
+      flagsObj = sv.flags;
+      metaObj = sv.flags_meta;
+    }} else if (targetType === 'npc') {{
       sv.npcs = sv.npcs || {{}};
       var npc = sv.npcs[String(npcId)];
       if (!npc) return;
       npc.flags = npc.flags || {{}};
-      npc.flags[key] = true;
-      // Track when flag was set for days_since_flag conditions
       npc.flags_meta = npc.flags_meta || {{}};
-      npc.flags_meta[key] = {{ set_day: currentDay }};
+      flagsObj = npc.flags;
+      metaObj = npc.flags_meta;
+    }} else {{
       return;
     }}
+
+    if (op === 'unset') {{
+      flagsObj[key] = false;
+      // Do NOT clear flags_meta — set_day stays for days_since_flag math.
+      return;
+    }}
+    if (op === 'toggle') {{
+      var newVal = !flagsObj[key];
+      flagsObj[key] = newVal;
+      if (newVal === true) {{
+        metaObj[key] = {{ set_day: currentDay }};
+      }}
+      return;
+    }}
+    // Default: 'set' (and any unrecognized op falls through to set for safety).
+    flagsObj[key] = true;
+    metaObj[key] = {{ set_day: currentDay }};
   }} catch (e) {{
     // ignore
   }}
@@ -3902,13 +4008,15 @@ setup.applyAndNotifyTrait = function(targetType, npcId, trait, op, val, clampFla
   }}
 }};
 
-// Apply flag and queue notification
-setup.applyAndNotifyFlag = function(targetType, npcId, flag) {{
+// Apply flag and queue notification.
+// op: "set" (default) | "unset" | "toggle" — passed through to applyFlagEffect.
+setup.applyAndNotifyFlag = function(targetType, npcId, flag, op) {{
+  op = op || 'set';
   // Resolve NPC slug to UUID
   if (targetType === 'npc' && npcId) {{
     npcId = setup.resolveNpcId(npcId);
   }}
-  applyFlagEffect(targetType, npcId, flag);
+  applyFlagEffect(targetType, npcId, flag, op);
   var npcName = '';
   if (targetType === 'npc' && npcId) {{
     var npc = State.variables.npcs ? State.variables.npcs[String(npcId)] : null;
@@ -3917,7 +4025,8 @@ setup.applyAndNotifyFlag = function(targetType, npcId, flag) {{
   setup.pendingEffects.push({{
     type: 'flag',
     name: npcName,
-    flag: flag
+    flag: flag,
+    op: op
   }});
 }};
 
@@ -6208,8 +6317,9 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
             else:
                 # Regular location: Normal passage generation
                 entry_conditions = (location.properties or {}).get('entry_conditions') if hasattr(location, 'properties') else None
-                if self.clothing_enabled and entry_conditions and isinstance(entry_conditions, dict) and entry_conditions.get('items'):
+                if entry_conditions and isinstance(entry_conditions, dict) and entry_conditions.get('items'):
                     entry_cond_json = json.dumps(entry_conditions)
+                    blocked_message = (location.properties or {}).get('blocked_message', '')
                     # Find parent location for "go back" link
                     parent_name = None
                     if hasattr(location, 'entry_from') and location.entry_from:
@@ -6245,12 +6355,19 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     navigation_options = self._generate_hierarchical_navigation(location)
                     content += navigation_options
                     go_back_target = f"Location_{parent_name}" if parent_name else "Start"
+                    if blocked_message:
+                        resolved_blocked = self._resolve_at_references(blocked_message)
+                        blocked_html = f'<p class="entry-blocked-narrative">{resolved_blocked}</p>'
+                    else:
+                        blocked_html = (
+                            '<p class="entry-blocked">You can\'t go here right now.</p>\n'
+                            f'<p class="entry-requirements"><<print setup.formatCanvasConditions({entry_cond_json})>></p>'
+                        )
                     content += f"""</div>
 <</if>>\
 <<else>>
 <h2>{location.name}</h2>
-<p class="entry-blocked">You can't go here right now.</p>
-<p class="entry-requirements"><<print setup.formatCanvasConditions({entry_cond_json})>></p>
+{blocked_html}
 [[Go back->{go_back_target}]]
 <</if>>
 
@@ -6283,11 +6400,11 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 <div class="location-navigation">
 """
 
-                # Generate hierarchical navigation using entry/exit connections
-                navigation_options = self._generate_hierarchical_navigation(location)
-                content += navigation_options
+                    # Generate hierarchical navigation using entry/exit connections
+                    navigation_options = self._generate_hierarchical_navigation(location)
+                    content += navigation_options
 
-                content += """</div>
+                    content += """</div>
 <</if>>
 
 """
@@ -7086,6 +7203,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 
         # Load NPCs for name lookup - index by TOML slug AND name-based slug
         npc_lookup = {}
+        hidden_npc_ids: set = set()
         try:
             for npc in NPC.objects.filter(project=self.project, deleted_at__isnull=True):
                 npc_info = {"id": str(npc.id), "name": npc.name}
@@ -7096,6 +7214,8 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                 toml_slug = (npc.ai_behavior_config or {}).get("slug")
                 if toml_slug:
                     npc_lookup[toml_slug] = npc_info
+                if getattr(npc, "hidden_from_ui", False):
+                    hidden_npc_ids.add(str(npc.id))
         except (AttributeError, TypeError) as e:
             logger.warning("Error building NPC lookup for help system: %s", e)
 
@@ -7233,12 +7353,15 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
             if npc_slug:
                 npc_info = npc_lookup.get(npc_slug, {"id": npc_slug, "name": npc_slug.title()})
                 npc_id = npc_info["id"]
-                if npc_id not in help_data["npcs"]:
-                    help_data["npcs"][npc_id] = {
-                        "name": npc_info["name"],
-                        "activities": []
-                    }
-                help_data["npcs"][npc_id]["activities"].append(activity)
+                if npc_id in hidden_npc_ids:
+                    pass  # hidden NPCs omitted from Guide Page
+                else:
+                    if npc_id not in help_data["npcs"]:
+                        help_data["npcs"][npc_id] = {
+                            "name": npc_info["name"],
+                            "activities": []
+                        }
+                    help_data["npcs"][npc_id]["activities"].append(activity)
             else:
                 # Solo/player node — no NPC association
                 help_data["player"]["activities"].append(activity)
@@ -7332,12 +7455,15 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     npc_info = npc_lookup.get(npc_id, {"id": npc_id, "name": npc_id.replace("npc_", "").replace("_", " ").title()})
                     resolved_npc_id = npc_info["id"]  # Use database UUID as key, not TOML slug
 
-                    if resolved_npc_id not in help_data["npcs"]:
-                        help_data["npcs"][resolved_npc_id] = {
-                            "name": npc_info["name"],
-                            "activities": []
-                        }
-                    help_data["npcs"][resolved_npc_id]["activities"].append(activity)
+                    if resolved_npc_id in hidden_npc_ids:
+                        pass  # hidden NPCs omitted from Guide Page
+                    else:
+                        if resolved_npc_id not in help_data["npcs"]:
+                            help_data["npcs"][resolved_npc_id] = {
+                                "name": npc_info["name"],
+                                "activities": []
+                            }
+                        help_data["npcs"][resolved_npc_id]["activities"].append(activity)
                 else:
                     # Solo/player activity — no NPC association
                     help_data["player"]["activities"].append(activity)
@@ -7477,22 +7603,29 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
             return None
 
         def format_time(time_obj):
-            """Convert time object to '8 AM' format."""
+            """Convert time object to '8:30 AM' format; omit minutes when zero."""
             try:
                 # Handle both time objects and string formats
                 if hasattr(time_obj, 'hour'):
                     hour = time_obj.hour
+                    minute = time_obj.minute
                 else:
-                    hour = int(str(time_obj).split(':')[0])
+                    parts = str(time_obj).split(':')
+                    hour = int(parts[0])
+                    minute = int(parts[1]) if len(parts) > 1 else 0
 
                 if hour == 0:
-                    return "12 AM"
+                    display_hour, ampm = 12, "AM"
                 elif hour < 12:
-                    return f"{hour} AM"
+                    display_hour, ampm = hour, "AM"
                 elif hour == 12:
-                    return "12 PM"
+                    display_hour, ampm = 12, "PM"
                 else:
-                    return f"{hour - 12} PM"
+                    display_hour, ampm = hour - 12, "PM"
+
+                if minute == 0:
+                    return f"{display_hour} {ampm}"
+                return f"{display_hour}:{minute:02d} {ampm}"
             except (ValueError, IndexError, AttributeError) as e:
                 logger.debug("Time format parse error for '%s': %s", time_obj, e)
                 return str(time_obj)
@@ -8402,6 +8535,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         modifier_effects_list = choice_tuple[11] if len(choice_tuple) > 11 else []
                         pass_effects_list = choice_tuple[12] if len(choice_tuple) > 12 else []
                         item_effects_list = choice_tuple[13] if len(choice_tuple) > 13 else []
+                        text_variants_list = choice_tuple[14] if len(choice_tuple) > 14 else []
 
                         # ── Loop: get role for this choice ──
                         choice_role = loop_choice_roles.get(choice_idx, {})
@@ -8439,14 +8573,31 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         # <<print>> macros don't work inside <<link "...">> quoted strings,
                         # so we use backtick expression syntax for dynamic text:
                         #   <<link `"Chat with " + $npcs["uuid"].name` "Target">>
-                        resolved_expr, is_dynamic = self._resolve_at_references_expr(choice_text)
-                        if is_dynamic:
-                            # Backtick expression — no bracket escaping needed (it's JS)
-                            passage_body += f'<<link `{resolved_expr}` "{target_passage}">>'
+                        if text_variants_list:
+                            # E6: Pre-resolve label via SugarCube <<set _cv>> chain.
+                            # Variant texts are static strings; @npc references inside
+                            # variants are NOT supported in v1 (the base text path also
+                            # gets a static treatment when variants are present — keeps
+                            # the variable-label form simple).
+                            escaped_base = choice_text.replace('"', '\\"').replace('[', '&#91;').replace(']', '&#93;')
+                            passage_body += f'<<set _cv to "{escaped_base}">>\n'
+                            for vi, variant in enumerate(text_variants_list):
+                                v_text = (variant.get('text') or '')
+                                v_text_esc = v_text.replace('"', '\\"').replace('[', '&#91;').replace(']', '&#93;')
+                                v_conds = json.dumps(variant.get('conditions') or {})
+                                keyword = '<<if' if vi == 0 else '<<elseif'
+                                passage_body += f'{keyword} setup.triggerConditionsSatisfied({v_conds})>><<set _cv to "{v_text_esc}">>\n'
+                            passage_body += '<</if>>\n'
+                            passage_body += f'<<link _cv "{target_passage}">>'
                         else:
-                            # Static text — escape as before
-                            escaped_choice_text = choice_text.replace('"', '\\"').replace('[', '&#91;').replace(']', '&#93;')
-                            passage_body += f'<<link "{escaped_choice_text}" "{target_passage}">>'
+                            resolved_expr, is_dynamic = self._resolve_at_references_expr(choice_text)
+                            if is_dynamic:
+                                # Backtick expression — no bracket escaping needed (it's JS)
+                                passage_body += f'<<link `{resolved_expr}` "{target_passage}">>'
+                            else:
+                                # Static text — escape as before
+                                escaped_choice_text = choice_text.replace('"', '\\"').replace('[', '&#91;').replace(']', '&#93;')
+                                passage_body += f'<<link "{escaped_choice_text}" "{target_passage}">>'
                         # Clear pending effects at start
                         has_effects = (trait_effects and isinstance(trait_effects, list)) or (flag_effects and isinstance(flag_effects, list)) or (self.clothing_enabled and wardrobe_effects and isinstance(wardrobe_effects, list))
                         if has_effects:
@@ -8480,16 +8631,17 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                                     raise ValueError(
                                         f"Invalid trait effect structure in choice '{choice_text}': {e}"
                                     ) from e
-                        # Emit flag effects next (set true)
+                        # Emit flag effects next (op = set | unset | toggle, defaults to set)
                         if flag_effects and isinstance(flag_effects, list):
                             for fe in flag_effects:
                                 try:
                                     ftype = fe.get('targetType', 'player')
                                     fnpc = fe.get('npcId')
                                     flag = str(fe.get('flag', ''))
+                                    fop = str(fe.get('op', 'set') or 'set')
                                     flag_js = flag.replace('"', '\\"')
                                     npc_js = f'"{fnpc}"' if fnpc else 'null'
-                                    passage_body += f"<<script>>setup.applyAndNotifyFlag(\"{ftype}\", {npc_js}, \"{flag_js}\");<</script>>"
+                                    passage_body += f"<<script>>setup.applyAndNotifyFlag(\"{ftype}\", {npc_js}, \"{flag_js}\", \"{fop}\");<</script>>"
                                 except (KeyError, TypeError, ValueError) as e:
                                     logger.error(
                                         "Invalid flag effect in choice '%s': %s. Effect data: %s",
@@ -8646,8 +8798,9 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                                     ftype = fe.get('targetType', 'player')
                                     fnpc = fe.get('npcId')
                                     flag_val = str(fe.get('flag', ''))
+                                    fop = str(fe.get('op', 'set') or 'set')
                                     npc_js = f'"{fnpc}"' if fnpc else 'null'
-                                    passage_body += f'<<script>>setup.applyAndNotifyFlag("{ftype}", {npc_js}, "{flag_val}");<</script>>'
+                                    passage_body += f'<<script>>setup.applyAndNotifyFlag("{ftype}", {npc_js}, "{flag_val}", "{fop}");<</script>>'
                             if self.clothing_enabled and lb_wardrobe_effects and isinstance(lb_wardrobe_effects, list):
                                 for we in lb_wardrobe_effects:
                                     w_action = we.get('action', 'add')
@@ -8862,6 +9015,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         if not rejection_passage:
                             logger.warning(f"Choice in node {node.id} references unknown rejection_node {rejection_node_id}")
 
+                    text_variants = choice.get('text_variants', []) or []
                     processed_choices.append((
                         target_passage, choice_text, time_minutes, effects, flag_effects,
                         conditions_obj, wardrobe_effects,
@@ -8869,6 +9023,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         modifier_effects,
                         pass_effects,
                         item_effects,
+                        text_variants,
                     ))
 
                 return processed_choices
@@ -8992,13 +9147,14 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                 target_type = fe.get('targetType', 'player')
                 npc_id = fe.get('npcId')
                 flag = fe.get('flag', '')
+                fop = str(fe.get('op', 'set') or 'set')
 
                 if not flag:
                     continue
 
                 npc_js = f'"{npc_id}"' if npc_id else 'null'
                 flag_js = flag.replace('"', '\\"')
-                code_parts.append(f'setup.applyAndNotifyFlag("{target_type}", {npc_js}, "{flag_js}");')
+                code_parts.append(f'setup.applyAndNotifyFlag("{target_type}", {npc_js}, "{flag_js}", "{fop}");')
 
             if code_parts:
                 return "<<script>>" + "".join(code_parts) + "<</script>>"
@@ -9904,6 +10060,7 @@ $(document).on(':passagestart', function(ev) {
 <div id="npc-traits-widget" class="traits-display">
   <div class="traits-header">NPC Traits</div>
   <<for _npcId, _npc range $npcs>>
+    <<if (setup.hiddenNpcs && setup.hiddenNpcs[_npcId])>><<continue>><</if>>
     <<if _npc.core_traits && Object.keys(_npc.core_traits).length > 0>>
       <div class="npc-trait-section">
         <div class="npc-trait-name"><<print _npc.name>></div>
@@ -10016,6 +10173,7 @@ $(document).on(':passagestart', function(ev) {
 <!-- NPC Stats -->
 <<if Object.keys($npcs).length > 0>>
   <<for _npcId, _npc range $npcs>>
+    <<if (setup.hiddenNpcs && setup.hiddenNpcs[_npcId])>><<continue>><</if>>
     <div class="stats-card stats-card-with-portrait">
       <div class="stats-portrait">
         <<if _npc.portrait>>
@@ -10080,6 +10238,7 @@ $(document).on(':passagestart', function(ev) {
 <!-- NPC Stats -->
 <<if Object.keys($npcs).length > 0>>
   <<for _npcId, _npc range $npcs>>
+    <<if (setup.hiddenNpcs && setup.hiddenNpcs[_npcId])>><<continue>><</if>>
     <div class="stats-card stats-card-with-portrait">
       <div class="stats-portrait">
         <<if _npc.portrait>>
@@ -10267,19 +10426,38 @@ if (clothingMsg) {
   <<set _returnTo to (State.variables.last_game_passage || "Navigation")>>
   <<link "Continue your day" _returnTo>><</link>>
 <<else>>
-  <p><<print _rt.eviction_scene || _collectorName + " doesn't wait for excuses this time.">></p>
+  <<if setup.rent_eviction_mode is "flag_set">>
+    <<set $player.flags[setup.rent_eviction_flag] to true>>
+    <<set $game_state.rent_state.warnings to 0>>
+    <<set $game_state.rent_state.is_due to false>>
 
-  <div class="dialog-block dialog-npc">
-    <div class="dialog-content">
-      <strong><<print _collectorName>>:</strong> <<print _rt.eviction_response || "Locks are getting changed today. Pack your things.">>
+    <p><<print _rt.eviction_scene_soft || _rt.eviction_scene || _collectorName + " stops waiting for the money. Something shifts in the way " + _collectorName + " looks at you now.">></p>
+
+    <div class="dialog-block dialog-npc">
+      <div class="dialog-content">
+        <strong><<print _collectorName>>:</strong> <<print _rt.eviction_response_soft || _rt.eviction_response || "We'll be having a different conversation from here on out.">>
+      </div>
     </div>
-  </div>
 
-  <p><<print _rt.eviction_closing || "No negotiation. No extension. You had your chance.">></p>
+    <p><<print _rt.eviction_closing_soft || _rt.eviction_closing || "You're still here. But the terms have changed.">></p>
 
-  <p class="game-over-text">GAME OVER</p>
+    <<set _returnTo to (State.variables.last_game_passage || "Navigation")>>
+    <<link "Continue" _returnTo>><</link>>
+  <<else>>
+    <p><<print _rt.eviction_scene || _collectorName + " doesn't wait for excuses this time.">></p>
 
-  <<link "Start Over">><<run Engine.restart()>><</link>>
+    <div class="dialog-block dialog-npc">
+      <div class="dialog-content">
+        <strong><<print _collectorName>>:</strong> <<print _rt.eviction_response || "Locks are getting changed today. Pack your things.">>
+      </div>
+    </div>
+
+    <p><<print _rt.eviction_closing || "No negotiation. No extension. You had your chance.">></p>
+
+    <p class="game-over-text">GAME OVER</p>
+
+    <<link "Start Over">><<run Engine.restart()>><</link>>
+  <</if>>
 <</if>>
 <</nobr>>"""
 
@@ -10332,6 +10510,9 @@ if (clothingMsg) {
 <div id="sidebar-items-widget">
 <<for _si to 0; _si lt setup.sidebar_items.length; _si++>>
   <<set _item to setup.sidebar_items[_si]>>
+  <<if _item.show_when and not setup.triggerConditionsSatisfied(_item.show_when)>>
+    <<continue>>
+  <</if>>
   <<if _item.type is "countdown">>
     <<set _daysLeft to _item.total_days - $game_state.time_state.day + 1>>
     <div class="sidebar-item countdown-item" id="sidebar-countdown-<<print _si>>">
@@ -10388,6 +10569,41 @@ if (clothingMsg) {
         <</if>>
       <</for>>
     </div>
+  <<elseif _item.type is "trait_words">>
+    <<set _twOwner to _item.trait_owner || "player">>
+    <<set _twKey to _item.trait>>
+    <<if _twOwner is "npc">>
+      <<set _twNpcId to _item.npc_id>>
+      <<set _twNpcObj to (setup.npc_slug_map && setup.npc_slug_map[_twNpcId]) ? State.variables.npcs[setup.npc_slug_map[_twNpcId]] : (State.variables.npcs ? State.variables.npcs[_twNpcId] : null)>>
+      <<set _twVal to (_twNpcObj && _twNpcObj.core_traits) ? (_twNpcObj.core_traits[_twKey] || 0) : 0>>
+    <<else>>
+      <<set _twVal to ($player && $player.core_traits) ? ($player.core_traits[_twKey] || 0) : 0>>
+    <</if>>
+    <<set _twMatched to "">>
+    <<set _twFound to false>>
+    <<if _item.bands>>
+      <<for _bi to 0; _bi lt _item.bands.length; _bi++>>
+        <<if not _twFound>>
+          <<set _twBand to _item.bands[_bi]>>
+          <<if _twBand.flag>>
+            <<if $flags and $flags[_twBand.flag] is true>>
+              <<set _twMatched to _twBand.text>>
+              <<set _twFound to true>>
+            <</if>>
+          <<elseif _twBand.min isnot undefined and _twBand.max isnot undefined>>
+            <<if _twVal gte _twBand.min and _twVal lte _twBand.max>>
+              <<set _twMatched to _twBand.text>>
+              <<set _twFound to true>>
+            <</if>>
+          <</if>>
+        <</if>>
+      <</for>>
+    <</if>>
+    <<if _twMatched isnot "">>
+      <div class="sidebar-item trait-words-item" id="sidebar-trait-words-<<print _si>>">
+        <<print _twMatched>>
+      </div>
+    <</if>>
   <</if>>
 <</for>>
 </div>
@@ -10430,7 +10646,25 @@ if (clothingMsg) {
 
 """
 
-        return info_nav_script + dev_script_passage + time_widgets_start + dev_indicator + review_button + time_display_widget + sidebar_items_widget + phone_widget + active_modifiers_widget + player_traits_widget + npc_traits_widget + """
+        # E7: counter increment / decrement widgets — thin wrappers over
+        # setup.applyAndNotifyTrait. Always emitted; no dev-mode gate.
+        # Usage: <<inc trait_name>> or <<inc trait_name 3>> (and <<dec ...>>).
+        counter_widgets = """
+<<widget "inc">>
+<<set _incTrait to $args[0]>>
+<<set _incBy to ($args[1] != null) ? Number($args[1]) : 1>>
+<<script>>setup.applyAndNotifyTrait("player", null, _incTrait, "add", _incBy, false, null);<</script>>
+<</widget>>
+
+<<widget "dec">>
+<<set _decTrait to $args[0]>>
+<<set _decBy to ($args[1] != null) ? Number($args[1]) : 1>>
+<<script>>setup.applyAndNotifyTrait("player", null, _decTrait, "add", -_decBy, false, null);<</script>>
+<</widget>>
+
+"""
+
+        return info_nav_script + dev_script_passage + time_widgets_start + dev_indicator + review_button + time_display_widget + sidebar_items_widget + phone_widget + active_modifiers_widget + counter_widgets + player_traits_widget + npc_traits_widget + """
 
 <<widget "playerFlags">>
 <div id="flags-widget" class="traits-display">
@@ -11916,6 +12150,13 @@ if (clothingMsg) {
     font-size: 0.9em;
 }
 
+.entry-blocked-narrative {
+    font-style: italic;
+    color: var(--theme-text-muted);
+    line-height: 1.6;
+    margin: 12px 0;
+}
+
 #wardrobe-btn-widget button {
     background: var(--theme-surface);
     border: 1px solid var(--theme-border);
@@ -12199,12 +12440,8 @@ if (clothingMsg) {
         🔒 <<print setup.formatCanvasConditions(_next.canvasConditions)>>
       </div>
     <<elseif _next.flagConditionsNotMet>>
-      <div class="quest-available">
-        <<if _next.activity && _next.activity.guide_hint>>
-          → <<print _next.activity.guide_hint>>
-        <<else>>
-          → <<print setup.formatFlagHint(_next.flagHint, _helpData.player.name)>>
-        <</if>>
+      <div class="quest-conditions">
+        🔒 <<print setup.formatFlagHint(_next.flagHint, _helpData.player.name)>>
       </div>
     <<elseif _next.daysConditionsNotMet>>
       <div class="quest-waiting">
@@ -12243,12 +12480,8 @@ if (clothingMsg) {
           🔒 <<print setup.formatCanvasConditions(_next.canvasConditions)>>
         </div>
       <<elseif _next.flagConditionsNotMet>>
-        <div class="quest-available">
-          <<if _next.activity && _next.activity.guide_hint>>
-            → <<print _next.activity.guide_hint>>
-          <<else>>
-            → <<print setup.formatFlagHint(_next.flagHint, _npcData.name)>>
-          <</if>>
+        <div class="quest-conditions">
+          🔒 <<print setup.formatFlagHint(_next.flagHint, _npcData.name)>>
         </div>
       <<elseif _next.daysConditionsNotMet>>
         <div class="quest-waiting">

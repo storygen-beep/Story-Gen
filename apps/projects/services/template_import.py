@@ -8,6 +8,7 @@ No twee generation or canvases. Creates a brand-new Project and related rows.
 from __future__ import annotations
 
 import json
+import logging
 from dataclasses import dataclass, field
 import uuid
 from typing import Any, Dict, List, Optional, Set, Tuple
@@ -31,6 +32,8 @@ from apps.stories.services.block_conversion import BlockConversionService
 
 
 User = get_user_model()
+
+logger = logging.getLogger(__name__)
 
 
 # -------- Data Shapes (World & Player/NPC) --------
@@ -80,6 +83,7 @@ class TemplatePlayer:
     flag_keys: List[str] = field(default_factory=list)
     customizable: bool = False
     customization_fields: List[TemplatePlayerCustomizationField] = field(default_factory=list)
+    trait_decay: Dict[str, float] = field(default_factory=dict)
 
 
 @dataclass
@@ -110,6 +114,10 @@ class TemplateNPC:
     # Trait decay: {trait_name: decay_per_day}. Traits decay by this amount each day
     # the player doesn't interact with this NPC. Keys must exist in core_traits.
     trait_decay: Dict[str, float] = field(default_factory=dict)
+    # UI visibility: when True, the NPC is omitted from the Guide Page, Stats Page,
+    # and sidebar NPC-traits widget. Runtime $npcs dict still contains the NPC so
+    # prologue/narrative dialog speaker lookups by UUID keep working.
+    hidden_from_ui: bool = False
 
 
 @dataclass
@@ -125,6 +133,7 @@ class TemplateLocation:
     default_entry: str = ""
     navigation_order: List[str] = field(default_factory=list)
     entry_conditions: Dict[str, Any] = field(default_factory=dict)
+    blocked_message: str = ""
     clothing_rules: List[Dict[str, Any]] = field(default_factory=list)
 
 
@@ -260,6 +269,8 @@ class GameTemplate:
     rent_grace_periods: int = 1
     rent_start_after_flag: str = ""
     rent_text: Dict[str, str] = field(default_factory=dict)
+    rent_eviction_mode: str = "game_end"  # "game_end" (legacy) | "flag_set" (fail-forward)
+    rent_eviction_flag: str = "rent_evicted"
     # Sidebar items (custom display elements)
     sidebar_items: List[Dict[str, Any]] = field(default_factory=list)
     # Phone system
@@ -271,6 +282,35 @@ class GameTemplate:
     items: List[TemplateItem] = field(default_factory=list)
     # Visual theme
     theme: Optional[TemplateTheme] = None
+    # Day-rollover hook — fires inside window.advanceDay() once per day flip.
+    # Authored under [engine.daily_tick] in TOML. Used for daily-cooldown flag clears.
+    daily_tick: Optional["TemplateDailyTick"] = None
+    # E4: named composite gates. Authored under [[engine.stage_helpers]] in TOML.
+    # A condition with `type = "stage"` references one of these by name.
+    stage_helpers: List["TemplateStageHelper"] = field(default_factory=list)
+
+
+@dataclass
+class TemplateDailyTick:
+    """Effects that fire once per in-game day at advanceDay() rollover.
+
+    Today only flagEffects are supported. The hook calls window.applyFlagEffect
+    directly (no notification queueing) so daily clears are silent.
+    """
+    flagEffects: List[TemplateFlagEffect] = field(default_factory=list)
+
+
+@dataclass
+class TemplateStageHelper:
+    """Named composite gate. Recipe of conditions referenced by name.
+
+    Helpers reference primitive condition types only — recursion (helper
+    references helper) is rejected at validate() time. Single-level lookup
+    in runtime keeps cycle risk zero.
+    """
+    name: str
+    description: str = ""
+    conditions: Dict[str, Any] = field(default_factory=dict)
 
 
 # -------- Story Data Shapes (v0.2) --------
@@ -316,6 +356,7 @@ class TemplateFlagEffect:
     targetType: str = "player"  # 'player'|'npc'
     npcId: Optional[str] = None
     flag: str = ""
+    op: str = "set"  # 'set'|'unset'|'toggle' — runtime defaults to set when unrecognized
 
 
 @dataclass
@@ -387,6 +428,9 @@ class TemplateChoice:
     pass_effects: List[Dict[str, str]] = field(default_factory=list)
     # Inventory system: add/remove consumable items
     item_effects: List[Dict[str, Any]] = field(default_factory=list)
+    # E6: per-choice text variants — first match wins, falls back to `text`.
+    # Each variant: {"text": str, "conditions": {version, items}}.
+    text_variants: List[Dict[str, Any]] = field(default_factory=list)
 
 
 @dataclass
@@ -654,6 +698,18 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
             sets_portrait=bool(f.get("sets_portrait", False)),
         ))
 
+    # Parse player trait_decay: {trait_name: decay_per_day}
+    player_trait_decay_raw = pl.get("trait_decay") or {}
+    player_trait_decay: Dict[str, float] = {}
+    if isinstance(player_trait_decay_raw, dict):
+        for k, v in player_trait_decay_raw.items():
+            try:
+                player_trait_decay[str(k)] = float(v)
+            except (ValueError, TypeError):
+                raise TypeError(
+                    f"player.trait_decay['{k}'] must be a number, got {type(v).__name__}"
+                )
+
     player = TemplatePlayer(
         id=_require_str(pl, "id", "player"),
         name=_require_str(pl, "name", "Player"),
@@ -663,6 +719,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         flag_keys=_require_list(pl, "flag_keys"),
         customizable=bool(pl.get("customizable", False)),
         customization_fields=player_customization_fields,
+        trait_decay=player_trait_decay,
     )
 
     npcs_raw = data.get("npcs", []) or []
@@ -713,6 +770,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 relationship=_require_str(n, "relationship", "") or None,
                 relationship_options=_require_list(n, "relationship_options"),
                 trait_decay=trait_decay,
+                hidden_from_ui=bool(n.get("hidden_from_ui", False)),
             )
         )
 
@@ -734,6 +792,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 default_entry=_require_str(l, "default_entry", ""),
                 navigation_order=[str(x) for x in _require_list(l, "navigation_order")],
                 entry_conditions=_require_dict(l, "entry_conditions"),
+                blocked_message=_require_str(l, "blocked_message", ""),
                 clothing_rules=l.get("clothing_rules", []) or [],
             )
         )
@@ -830,6 +889,30 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                                 targetType=str(e.get("targetType", "player")),
                                 npcId=_require_str(e, "npcId", "") or None,
                                 flag=_require_str(e, "flag", ""),
+                                op=_require_str(e, "op", "set") or "set",
+                            )
+                        )
+                    # E7: `inc` shorthand — expands into add-op TemplateChoiceEffect rows.
+                    # Accepts either ["counter_name"] (step=1) or [{counter, by}] forms.
+                    for inc_item in ch.get("inc") or []:
+                        if isinstance(inc_item, str):
+                            counter, by = inc_item, 1
+                        elif isinstance(inc_item, dict):
+                            counter = _require_str(inc_item, "counter", "")
+                            try:
+                                by = int(inc_item.get("by", 1))
+                            except (TypeError, ValueError):
+                                by = 1
+                        else:
+                            continue
+                        if not counter:
+                            continue
+                        effs.append(
+                            TemplateChoiceEffect(
+                                targetType="player",
+                                trait=counter,
+                                op="add",
+                                value=by,
                             )
                         )
                     wardrobe_effs = [
@@ -893,6 +976,17 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                                 "quantity": int(ie.get("quantity", 1)),
                             })
 
+                    # E6: parse text_variants — list of {text, conditions} dicts.
+                    text_variants_parsed: List[Dict[str, Any]] = []
+                    for v_raw in ch.get("text_variants") or []:
+                        if not isinstance(v_raw, dict):
+                            continue
+                        text_variants_parsed.append(
+                            {
+                                "text": _require_str(v_raw, "text", ""),
+                                "conditions": _require_dict(v_raw, "conditions"),
+                            }
+                        )
                     choices.append(
                         TemplateChoice(
                             text=_require_str(ch, "text", "Continue"),
@@ -917,6 +1011,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                             modifier_effects=mod_effs,
                             pass_effects=pass_effs,
                             item_effects=item_effs,
+                            text_variants=text_variants_parsed,
                         )
                     )
                 # Validate exit_block type
@@ -1211,6 +1306,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     rent_grace_periods = _require_int(rent_raw, "grace_periods", 1)
     rent_start_after_flag = _require_str(rent_raw, "start_after_flag", "")
     rent_text = rent_raw.get("text", {}) or {}
+    rent_eviction_mode = _require_str(rent_raw, "eviction_mode", "game_end")
+    rent_eviction_flag = _require_str(rent_raw, "eviction_flag", "rent_evicted")
 
     # ── Phone system ──
     phone_raw = data.get("phone")
@@ -1317,6 +1414,38 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 daily_topics=phone_daily_topics,
             )
 
+    # ── Day-rollover hook ── [engine.daily_tick]
+    daily_tick_obj: Optional[TemplateDailyTick] = None
+    # ── Stage helpers ── [[engine.stage_helpers]]
+    stage_helpers: List[TemplateStageHelper] = []
+    engine_raw = data.get("engine")
+    if isinstance(engine_raw, dict):
+        dt_raw = engine_raw.get("daily_tick")
+        if isinstance(dt_raw, dict):
+            dt_flag_effs: List[TemplateFlagEffect] = []
+            for fe in dt_raw.get("flagEffects") or []:
+                if not isinstance(fe, dict):
+                    continue
+                dt_flag_effs.append(
+                    TemplateFlagEffect(
+                        targetType=str(fe.get("targetType", "player")),
+                        npcId=_require_str(fe, "npcId", "") or None,
+                        flag=_require_str(fe, "flag", ""),
+                        op=_require_str(fe, "op", "set") or "set",
+                    )
+                )
+            daily_tick_obj = TemplateDailyTick(flagEffects=dt_flag_effs)
+        for sh_raw in engine_raw.get("stage_helpers") or []:
+            if not isinstance(sh_raw, dict):
+                continue
+            stage_helpers.append(
+                TemplateStageHelper(
+                    name=_require_str(sh_raw, "name", ""),
+                    description=_require_str(sh_raw, "description", ""),
+                    conditions=_require_dict(sh_raw, "conditions"),
+                )
+            )
+
     return GameTemplate(
         schema_version=schema_version,
         project=project,
@@ -1339,12 +1468,16 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         rent_grace_periods=rent_grace_periods,
         rent_start_after_flag=rent_start_after_flag,
         rent_text=rent_text,
+        rent_eviction_mode=rent_eviction_mode,
+        rent_eviction_flag=rent_eviction_flag,
         sidebar_items=sidebar_items,
         phone_enabled=phone_enabled,
         phone=phone_obj,
         passes=passes,
         items=items,
         theme=theme_obj,
+        daily_tick=daily_tick_obj,
+        stage_helpers=stage_helpers,
     )
 
 
@@ -1540,6 +1673,78 @@ def validate(template: GameTemplate) -> List[str]:
                         f"npcs[{i}] '{n.id}' trait_decay['{trait_name}'] must be >= 0, "
                         f"got {decay_val}"
                     )
+
+    # Player trait_decay validation
+    if template.player.trait_decay:
+        for trait_name, decay_val in template.player.trait_decay.items():
+            if trait_name not in (template.player.core_traits or {}):
+                errors.append(
+                    f"player.trait_decay key '{trait_name}' not found in core_traits"
+                )
+            if decay_val < 0:
+                errors.append(
+                    f"player.trait_decay['{trait_name}'] must be >= 0, got {decay_val}"
+                )
+
+    # Sidebar items validation (per-type; only trait_words is typed-validated today)
+    _npc_ids_for_sidebar = {n.id for n in template.npcs}
+    _player_trait_keys = set((template.player.core_traits or {}).keys())
+    for i, item in enumerate(template.sidebar_items or []):
+        if not isinstance(item, dict):
+            errors.append(f"sidebar_items[{i}] must be a table/dict")
+            continue
+        itype = item.get("type")
+        if itype == "trait_words":
+            ctx = f"sidebar_items[{i}] (trait_words)"
+            trait = item.get("trait")
+            owner = item.get("trait_owner", "player")
+            bands = item.get("bands")
+            if not isinstance(trait, str) or not trait:
+                errors.append(f"{ctx}: 'trait' is required (string)")
+            if owner not in ("player", "npc"):
+                errors.append(f"{ctx}: 'trait_owner' must be 'player' or 'npc', got '{owner}'")
+            if owner == "npc":
+                npc_id = item.get("npc_id")
+                if not npc_id:
+                    errors.append(f"{ctx}: 'npc_id' is required when trait_owner='npc'")
+                elif npc_id not in _npc_ids_for_sidebar:
+                    errors.append(f"{ctx}: npc_id '{npc_id}' not found in NPC definitions")
+            elif owner == "player" and isinstance(trait, str) and trait and trait not in _player_trait_keys:
+                # Warn-style error: surface as soft issue but still an error so authors see it
+                errors.append(
+                    f"{ctx}: trait '{trait}' not found in player.core_traits (widget will render empty)"
+                )
+            if not isinstance(bands, list) or not bands:
+                errors.append(f"{ctx}: 'bands' must be a non-empty list")
+            else:
+                for bi, band in enumerate(bands):
+                    bctx = f"{ctx} bands[{bi}]"
+                    if not isinstance(band, dict):
+                        errors.append(f"{bctx}: must be a table/dict")
+                        continue
+                    if "text" not in band:
+                        errors.append(f"{bctx}: missing 'text'")
+                    # A band matches either by flag (flag-driven, for narrative
+                    # milestones) or by min/max (trait-value range). Require one
+                    # of the two modes but not both.
+                    has_flag = "flag" in band
+                    has_range = ("min" in band) or ("max" in band)
+                    if has_flag and has_range:
+                        errors.append(f"{bctx}: cannot combine 'flag' with 'min'/'max' in the same band")
+                    elif not has_flag and not has_range:
+                        errors.append(f"{bctx}: must provide either 'flag' or both 'min' and 'max'")
+                    elif has_range:
+                        if "min" not in band:
+                            errors.append(f"{bctx}: missing 'min'")
+                        if "max" not in band:
+                            errors.append(f"{bctx}: missing 'max'")
+                        bmin, bmax = band.get("min"), band.get("max")
+                        if isinstance(bmin, (int, float)) and isinstance(bmax, (int, float)) and bmin > bmax:
+                            errors.append(f"{bctx}: min ({bmin}) must be <= max ({bmax})")
+                    elif has_flag and not isinstance(band.get("flag"), str):
+                        errors.append(f"{bctx}: 'flag' must be a string")
+                    if "text" in band and not isinstance(band["text"], str):
+                        errors.append(f"{bctx}: 'text' must be a string")
 
     # locations
     loc_ids = [l.id for l in template.locations]
@@ -2182,6 +2387,41 @@ def validate(template: GameTemplate) -> List[str]:
                 )
         if template.rent_grace_periods < 0:
             errors.append("rent grace_periods must be >= 0")
+        if template.rent_eviction_mode not in ("game_end", "flag_set"):
+            errors.append(
+                f"rent eviction_mode must be 'game_end' or 'flag_set', "
+                f"got '{template.rent_eviction_mode}'"
+            )
+        if template.rent_eviction_mode == "flag_set":
+            if not _is_valid_slug(template.rent_eviction_flag):
+                errors.append(
+                    f"rent eviction_flag must be lowercase snake_case, "
+                    f"got '{template.rent_eviction_flag}'"
+                )
+
+    # ===== E4: Stage helpers validation =====
+    if template.stage_helpers:
+        seen_helper_names: Set[str] = set()
+        for hi, sh in enumerate(template.stage_helpers):
+            ctx = f"engine.stage_helpers[{hi}]"
+            if not sh.name:
+                errors.append(f"{ctx}.name is required")
+                continue
+            if sh.name in seen_helper_names:
+                errors.append(
+                    f"engine.stage_helpers: duplicate name '{sh.name}'"
+                )
+            seen_helper_names.add(sh.name)
+            # Helpers may reference primitive condition types only — `type=stage`
+            # nesting is rejected to keep runtime evaluation cycle-free.
+            for item in sh.conditions.get("items", []) or []:
+                if isinstance(item, dict) and item.get("type") == "stage":
+                    errors.append(
+                        f"{ctx} ('{sh.name}'): helpers must reference "
+                        f"primitive condition types only — nested 'type=stage' "
+                        f"items are not allowed in v1"
+                    )
+                    break
 
     return errors
 
@@ -2267,6 +2507,29 @@ def create_project_from_template(
             {"id": it.id, "name": it.name, "icon": it.icon, "max_stack": it.max_stack}
             for it in template.items
         ]
+    # Store daily-tick hook if defined ([engine.daily_tick])
+    if template.daily_tick is not None:
+        project.metadata["daily_tick"] = {
+            "flagEffects": [
+                {
+                    "targetType": fe.targetType,
+                    "npcId": fe.npcId,
+                    "flag": fe.flag,
+                    "op": fe.op,
+                }
+                for fe in template.daily_tick.flagEffects
+            ]
+        }
+    # Store stage helpers if defined ([[engine.stage_helpers]]) — E4
+    if template.stage_helpers:
+        project.metadata["stage_helpers"] = [
+            {
+                "name": sh.name,
+                "description": sh.description,
+                "conditions": sh.conditions,
+            }
+            for sh in template.stage_helpers
+        ]
     # Store theme if defined
     if template.theme:
         t = template.theme
@@ -2299,6 +2562,8 @@ def create_project_from_template(
             "grace_periods": template.rent_grace_periods,
             "start_after_flag": template.rent_start_after_flag,
             "text": template.rent_text,
+            "eviction_mode": template.rent_eviction_mode,
+            "eviction_flag": template.rent_eviction_flag,
         }
     # Store story_arc if defined (for narrative journal and help page)
     if template.story_arc:
@@ -2481,18 +2746,28 @@ def create_project_from_template(
     project.save()
 
     # Player
+    # Auto-register rent eviction flag when fail-forward mode is active,
+    # so conditions can gate on $player.flags[<eviction_flag>] at runtime.
+    _player_flag_keys = list(template.player.flag_keys or [])
+    if template.rent_enabled and template.rent_eviction_mode == "flag_set":
+        if template.rent_eviction_flag and template.rent_eviction_flag not in _player_flag_keys:
+            _player_flag_keys.append(template.rent_eviction_flag)
+
     player = Character(
         project=project,
         name=template.player.name or "Player",
         description=template.player.description or "",
         core_traits=template.player.core_traits or {},
-        flag_keys=template.player.flag_keys or [],
+        flag_keys=_player_flag_keys,
     )
     player.character_metadata = player.character_metadata or {}
     player.character_metadata["slug"] = template.player.id
     # Store portrait path in JSON (not portrait_url URLField) for generator resolution
     if template.player.portrait:
         player.character_metadata["portrait"] = template.player.portrait
+    # Store player trait_decay (per-day decay amounts)
+    if template.player.trait_decay:
+        player.character_metadata["trait_decay"] = template.player.trait_decay
     # Store player customization fields
     if template.player.customizable:
         player.character_metadata["customizable"] = True
@@ -2522,6 +2797,7 @@ def create_project_from_template(
             description=n.description or "",
             core_traits=n.core_traits or {},
             flag_keys=n.flag_keys or [],
+            hidden_from_ui=bool(n.hidden_from_ui),
         )
         npc.ai_behavior_config = npc.ai_behavior_config or {}
         npc.ai_behavior_config["slug"] = n.id
@@ -2569,6 +2845,8 @@ def create_project_from_template(
             loc.properties["image_search_queries"] = l.image_search_queries
         if l.entry_conditions:
             loc.properties["entry_conditions"] = l.entry_conditions
+        if l.blocked_message:
+            loc.properties["blocked_message"] = l.blocked_message
         if l.clothing_rules:
             loc.properties["clothing_rules"] = l.clothing_rules
         loc.save()
@@ -2969,6 +3247,7 @@ def create_project_from_template(
                                     "targetType": e.targetType,
                                     "npcId": e.npcId,
                                     "flag": e.flag,
+                                    "op": e.op,
                                 }
                                 for e in ch.flagEffects
                             ]
@@ -2976,6 +3255,8 @@ def create_project_from_template(
                             ch_d["wardrobeEffects"] = ch.wardrobeEffects
                         if ch.conditions:
                             ch_d["conditions"] = ch.conditions
+                        if ch.text_variants:
+                            ch_d["text_variants"] = ch.text_variants
 
                         # Rejection system fields
                         if ch.show_when_locked:
@@ -3127,6 +3408,7 @@ def _serialize_exit_block(eb: "TemplateExitBlock") -> Dict[str, Any]:
                                 "targetType": e.targetType,
                                 "npcId": e.npcId,
                                 "flag": e.flag,
+                                "op": e.op,
                             }
                             for e in ch.flagEffects
                         ]
@@ -3136,6 +3418,7 @@ def _serialize_exit_block(eb: "TemplateExitBlock") -> Dict[str, Any]:
                 ),
                 **({"wardrobeEffects": ch.wardrobeEffects} if ch.wardrobeEffects else {}),
                 **({"conditions": ch.conditions} if ch.conditions else {}),
+                **({"text_variants": ch.text_variants} if ch.text_variants else {}),
                 **({"show_when_locked": True} if ch.show_when_locked else {}),
                 **({"locked_text": ch.locked_text} if ch.locked_text else {}),
                 **({"rejection_node": ch.rejection_node} if ch.rejection_node else {}),

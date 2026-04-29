@@ -15556,4 +15556,99 @@ This creates a progression loop:
 
 ---
 
+## 12. Engine additions — 2026-04-22 (Long Summer PRD)
+
+Four additive features shipped alongside The Long Summer redesign. All are backward-compatible — games that don't use them render identically to before.
+
+### 12.1 `trait_words` sidebar type
+
+Band-descriptive sidebar text that updates as a trait value crosses configured bands. Surfaces the "words not numbers" rule — author-driven prose instead of a numeric bar.
+
+```toml
+[[sidebar_items]]
+type = "trait_words"
+trait_owner = "player"          # "player" or "npc"
+trait = "awareness"
+# npc_id = "npc_frank"          # required when trait_owner = "npc"
+
+[[sidebar_items.bands]]
+min = 0
+max = 9
+text = "You keep your eyes down."
+
+[[sidebar_items.bands]]
+min = 10
+max = 24
+text = "Sometimes you notice someone looking."
+
+[[sidebar_items.bands]]
+min = 25
+max = 49
+text = "You catch men watching you more often now."
+
+[[sidebar_items.bands]]
+min = 50
+max = 100
+text = "You know who's watching. You know why."
+```
+
+First matching band wins. Trait value outside all bands renders nothing (silent empty). Bands that overlap are tolerated but not recommended — author responsibility.
+
+### 12.2 Generic `entry_conditions` on locations
+
+Location `entry_conditions` now applies regardless of whether clothing is enabled. Previously the block was silently skipped when `[settings.clothing].enabled = false`. Use for phase gating (Prologue-only vs Phase-1-only locations), key/flag-gated secret rooms, or any v1.0 condition on location access.
+
+```toml
+[[locations]]
+id = "loc_phase1_shop"
+name = "Shop (Phase 1)"
+
+[locations.entry_conditions]
+items = [
+  { type = "flag", id = "phase_0_complete", value = true },
+]
+```
+
+When conditions fail, the location passage renders "You can't go here right now." plus `setup.formatCanvasConditions()` output and a back-link.
+
+### 12.3 Player `trait_decay`
+
+Per-day decay on player traits. Symmetric with the existing NPC `trait_decay`. Applied at end-of-in-game-day inside `window.advanceDay()`; values clamp to 0 (no negatives).
+
+```toml
+[player]
+id = "player"
+name = "Maya"
+core_traits = { energy = 100, hygiene = 100, awareness = 0 }
+
+[player.trait_decay]
+hygiene = 3           # loses 3 hygiene per in-game day
+# 'energy' is per-activity cost via canvas.costs, not a decay candidate
+```
+
+Use for slow drift on player stats (hygiene, mood, heat/suspicion) that should erode without per-canvas boilerplate. Does not stack with explicit effects — explicit effects still apply independently.
+
+### 12.4 Rent `eviction_mode` (fail-forward)
+
+The rent system gains a two-value `eviction_mode`:
+
+- `"game_end"` (default) — preserves existing behavior; grace exhaustion ends the game.
+- `"flag_set"` — sets a configurable flag on grace exhaustion and continues the game. The flag is auto-registered in `player.flag_keys`, so `conditions.items = [{ type = "flag", id = "rent_evicted" }]` just works on the next canvas.
+
+```toml
+[settings.rent]
+enabled = true
+amount = 150
+due_day = "Monday"
+collector_npc = "npc_frank"
+grace_periods = 2
+eviction_mode = "flag_set"
+eviction_flag = "rent_evicted"      # optional; defaults to "rent_evicted"
+```
+
+When the flag fires, grace counter resets to 0 so the rent cycle continues. Authors gate the darker narrative branch on `$player.flags.rent_evicted` (or whatever `eviction_flag` was configured). Optional soft-eviction text keys in `[settings.rent.text]`:
+- `eviction_scene_soft`, `eviction_response_soft`, `eviction_closing_soft` (fall back to the hard-eviction keys, then to the defaults, if unset).
+
+---
+
 *End of Comprehensive System Reference*

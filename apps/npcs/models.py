@@ -92,6 +92,16 @@ class NPC(models.Model):
         help_text="Categories for organization",
     )
 
+    # UI visibility — true = omit from Guide Page, Stats Page, and sidebar NPC-traits widget.
+    # Runtime $npcs dict still contains the NPC so narrative/prologue UUID lookups keep working.
+    hidden_from_ui = models.BooleanField(
+        default=False,
+        help_text=(
+            "Hide this NPC from Guide Page, Stats Page, and sidebar NPC-traits widget. "
+            "Runtime $npcs dict still contains the NPC so prologue/narrative UUID lookups keep working."
+        ),
+    )
+
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

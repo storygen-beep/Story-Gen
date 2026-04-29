@@ -1,0 +1,363 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+#  ENGINE PRD DEMO — "The Long Summer (minimal)"
+#  Date: 2026-04-22
+#  Purpose: Didactic test fixture exercising the four Engine-PRD additions.
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+#  This TOML is not a real playable game — it is a reference specimen. Every
+#  section below includes the engine-mental-model commentary that maps TOML
+#  shape → generated Twee → runtime SugarCube state. Read it top-to-bottom to
+#  get a tour of how the game-generation pipeline thinks.
+#
+#  ───────────────────── The pipeline (three stages) ─────────────────────
+#
+#    Stage 1  TOML (this file)
+#              │
+#              ▼
+#    Stage 2  apps/projects/services/template_import.py
+#              ├── tomli.loads(...)   → Python dict
+#              ├── normalize(data)    → GameTemplate (dataclass tree)
+#              ├── validate(template) → list of human-readable error strings
+#              └── create_project_from_template(template, user)
+#                     → rows in Project / Character / NPC / Location /
+#                       StoryCanvas / StoryNode / Trigger tables
+#              │
+#              ▼
+#    Stage 3  apps/game_generation/twee_comprehensive/generators/v1.py
+#              ├── reads DB rows + project.metadata
+#              ├── emits one giant Twee string (widgets + passages + JSON)
+#              └── Tweego compiles Twee → playable HTML5 (SugarCube story format)
+#
+#  ──────────────── The four 2026-04-22 PRD features exercised ────────────────
+#
+#    F1  trait_words sidebar type .............. see [[sidebar_items]] below
+#    F2  entry_conditions without clothing ..... see loc_prologue_cafe
+#    F3  player-level trait_decay .............. see [player.trait_decay]
+#    F4  rent eviction_mode = "flag_set" ....... see [settings.rent]
+#
+# ═══════════════════════════════════════════════════════════════════════════════
+
+schema_version    = "0.2"
+starting_canvas   = "scene_wake_up"
+# starting_canvas must match the id of exactly one [[canvases]] entry that has
+# NO [canvases.trigger] section. That's how the generator recognizes the entry
+# passage — it's the canvas the engine auto-fires on Start without conditions.
+
+# ──────────────────────────────────────────────────────────────────────────────
+#  [project] — required. Identifies the game and seeds URL slugs / dist folder.
+# ──────────────────────────────────────────────────────────────────────────────
+# The `id` is the canonical slug. The Django Project row's slug is set from it.
+# The generator uses this slug for the dist/ folder name and internal passage
+# namespacing.
+
+[project]
+id          = "engine_prd_demo"
+title       = "Engine PRD Demo"
+description = """
+A minimal test fixture that exercises the four 2026-04-22 engine additions:
+player trait_decay, trait_words sidebar, location entry_conditions without
+clothing, and fail-forward rent. Not intended as a game people play — as the
+thing engineers point at when they want to confirm the pipeline is green.
+"""
+
+# ──────────────────────────────────────────────────────────────────────────────
+#  [time] — optional. Drives $game_state.time_state (day / week / hour).
+# ──────────────────────────────────────────────────────────────────────────────
+# starting_day + starting_hour seed the in-game clock. starting_week seeds the
+# week counter (used by rent, passes, schedules). advanceDay() in the generated
+# game rolls these forward and fires the daily decay loops — NPC trait_decay
+# AND (new in this PRD) player trait_decay.
+
+[time]
+enabled        = true
+starting_hour  = 7
+starting_day   = "Monday"
+starting_week  = 1
+
+# ──────────────────────────────────────────────────────────────────────────────
+#  [player] — the protagonist's shape. Lands in the Character model.
+# ──────────────────────────────────────────────────────────────────────────────
+# core_traits becomes $player.core_traits in SugarCube. Keys you declare here
+# are the only trait keys that sidebar_items (trait_bar, trait_words) and
+# effects (op = "add" / "set" / etc.) can target — validate() rejects unknown
+# keys to avoid silent no-ops.
+#
+# flag_keys are the boolean flags the game is allowed to set/check. The
+# generator initializes them all to `false` in $player.flags at Start.
+
+[player]
+id          = "player"
+name        = "Maya"
+description = "A 19-year-old home for the summer. Minimum-viable protagonist for engine testing."
+portrait    = ""
+core_traits = { energy = 100, hygiene = 100, awareness = 0, money = 40 }
+flag_keys   = [
+  "summer_started",       # set by scene_wake_up
+  "day_unlocked",
+  # "rent_evicted" is NOT listed here on purpose — the eviction mode below
+  # auto-registers it (see F4 notes). Authors never hand-declare the flag.
+]
+
+# ─── F3: player.trait_decay ───────────────────────────────────────────────────
+# Runtime flow:
+#   1. template_import.py parses [player.trait_decay] into
+#      template.player.trait_decay (Dict[str, float]).
+#   2. validate() enforces: every key must exist in core_traits (above) and
+#      every value must be >= 0.
+#   3. create_project_from_template() stores the dict on
+#      player.character_metadata["trait_decay"].
+#   4. v1.py generator reads it at construct time and emits
+#      `setup.player_trait_decay = {"hygiene": 3, ...};` near Start.
+#   5. Inside `window.advanceDay()` — which fires on every end-of-day
+#      rollover driven by `advanceTime()` — the generator emits a loop that
+#      decrements each configured trait by its value, clamped to 0.
+#
+# Difference from NPC decay: NPC decay is skipped on days where the player
+# interacted with that NPC (reflects "you kept them warm"). Player decay has
+# no such skip — the player is always "in the scene", so decay always fires.
+
+[player.trait_decay]
+hygiene = 3     # Maya loses 3 hygiene points per in-game day.
+# Note: do NOT decay `energy` here — energy is per-activity cost via canvas
+# `costs`, with a full reset at sleep. Mixing the two systems on one trait is
+# double-counting.
+
+# ──────────────────────────────────────────────────────────────────────────────
+#  [[npcs]] — cast. Each becomes an NPC row.
+# ──────────────────────────────────────────────────────────────────────────────
+# NPC `id` is the slug other sections (rent.collector_npc, trait_words.npc_id,
+# trigger.npc) reference. The Django UUID is assigned at creation time; the
+# generator builds `setup.npc_slug_map` at runtime to resolve slug → UUID.
+
+[[npcs]]
+id          = "npc_frank"
+name        = "Frank"
+description = "Landlord. Fifties. Watches too long."
+portrait    = ""
+core_traits = { trust = 20, arousal = 0 }
+flag_keys   = []
+
+# NPC-side trait_decay (pre-existing, not part of this PRD — shown for contrast
+# with the player version above). Frank's trust decays by 1 per day the player
+# doesn't interact with him, capturing drift-apart behavior.
+[npcs.trait_decay]
+trust = 1
+
+# ──────────────────────────────────────────────────────────────────────────────
+#  [[locations]] — the world graph.
+# ──────────────────────────────────────────────────────────────────────────────
+# Each location becomes a `Location_<slug>` passage in the generated Twee.
+# `entry_from` sets the location's parent for back-navigation. If the passage
+# has no explicit navigation children, the generator uses entry_from to build
+# the back-link.
+#
+# entry_conditions gates the passage with a `<<if setup.triggerConditionsSatisfied(...)>>`
+# check — the player can open the location in nav menus, but the passage body
+# is replaced with "You can't go here right now" + a formatted requirement
+# string when conditions fail. Before the 2026-04-22 PRD, this whole branch
+# was silently skipped when [settings.clothing].enabled was false (F2 bug).
+
+# ─── Central hub (always accessible) ─────────────────────────────────────────
+[[locations]]
+id                   = "loc_home"
+name                 = "Home"
+description          = "A small apartment over a corner store. Yours, for as long as you can pay."
+image                = ""
+image_search_queries = []
+navigation_order     = ["loc_town_square", "loc_prologue_cafe"]
+
+# ─── Phase 1 location (unlocked by a flag) ────────────────────────────────────
+# No entry_conditions — freely navigable from loc_home.
+[[locations]]
+id          = "loc_town_square"
+name        = "Town Square"
+description = "The dusty heart of town. A fountain that hasn't run in years."
+image       = ""
+entry_from  = "loc_home"
+
+# ─── F2: entry_conditions without clothing ───────────────────────────────────
+# This location is Prologue-only — accessible only before `summer_started` is
+# set. Because this fixture does NOT enable clothing (see [settings.clothing]
+# omitted entirely), the pre-PRD engine silently ignored this gate — the
+# location was always accessible. Post-PRD, the v1.0 conditions block applies
+# regardless of clothing settings.
+#
+# conditions.items is the v1.0 condition format. `type = "flag"` + `value = false`
+# means "this flag must NOT be set." Add more items to AND them together. For
+# OR-style gating, use multiple canvases or flag_effects on choices.
+[[locations]]
+id          = "loc_prologue_cafe"
+name        = "Prologue Café"
+description = "A café that belongs to a life you've already left."
+image       = ""
+entry_from  = "loc_home"
+[locations.entry_conditions]
+items = [
+  { type = "flag", id = "summer_started", value = false },
+]
+
+# ──────────────────────────────────────────────────────────────────────────────
+#  [[sidebar_items]] — the right-rail widgets.
+# ──────────────────────────────────────────────────────────────────────────────
+# Each item is a tagged union. Five pre-existing types are supported —
+# countdown, hint, trait_bar, passes, inventory. This PRD adds a sixth:
+# trait_words. The sidebarItems widget in v1.py:10337+ is a big if/elseif
+# ladder over `_item.type`.
+#
+# Ordering in this array is the top-to-bottom render order in the sidebar.
+
+# ─── Pre-existing type: trait_bar (numeric meter) ─────────────────────────────
+[[sidebar_items]]
+type  = "trait_bar"
+trait = "hygiene"
+label = "Hygiene"
+max   = 100
+
+# ─── F1: trait_words — band-descriptive text ─────────────────────────────────
+# Runtime flow:
+#   1. On every sidebar refresh, the widget reads $player.core_traits[trait]
+#      (or $npcs[uuid].core_traits[trait] when trait_owner = "npc").
+#   2. It walks the bands array in declaration order and renders the text of
+#      the FIRST band whose [min, max] contains the current value.
+#   3. If no band matches, the widget renders nothing (silent empty).
+#
+# Design intent ("words not numbers"): surface qualitative prose that shifts
+# as stats cross thresholds, instead of numeric meters. Prefer this over
+# trait_bar for stats that are atmospheric rather than operational.
+#
+# Bands should be non-overlapping and ordered — validate() warns on overlap
+# but does not error (authors may want overlap in rare cases).
+[[sidebar_items]]
+type         = "trait_words"
+trait_owner  = "player"            # or "npc" — requires npc_id then
+trait        = "awareness"
+[[sidebar_items.bands]]
+min  = 0
+max  = 9
+text = "You keep your eyes down."
+[[sidebar_items.bands]]
+min  = 10
+max  = 24
+text = "Sometimes you notice someone looking."
+[[sidebar_items.bands]]
+min  = 25
+max  = 49
+text = "You catch men watching you more often now."
+[[sidebar_items.bands]]
+min  = 50
+max  = 100
+text = "You know who's watching. You know why."
+
+# ─── F1 (second demo): trait_words with an NPC owner ─────────────────────────
+# Same widget, reading from an NPC's core_traits instead of the player's.
+# `npc_id` must match an [[npcs]].id above.
+[[sidebar_items]]
+type         = "trait_words"
+trait_owner  = "npc"
+npc_id       = "npc_frank"
+trait        = "trust"
+[[sidebar_items.bands]]
+min  = 0
+max  = 29
+text = "Frank barely looks at you."
+[[sidebar_items.bands]]
+min  = 30
+max  = 100
+text = "Frank nods when you walk in. Doesn't look up."
+
+# ──────────────────────────────────────────────────────────────────────────────
+#  [settings] — engine subsystems. Each subkey gates a generator module.
+# ──────────────────────────────────────────────────────────────────────────────
+# [settings.clothing] is intentionally OMITTED from this fixture. This exercises
+# F2: with clothing disabled, the entry_conditions on loc_prologue_cafe should
+# STILL be enforced at runtime. Pre-PRD, it was silently skipped.
+
+# ─── F4: rent fail-forward ────────────────────────────────────────────────────
+# Pre-PRD: missing rent past `grace_periods` weeks hard-ended the game via
+# Engine.restart() in the RentDay_Short passage. That's a narrative dead-end.
+#
+# Post-PRD: `eviction_mode = "flag_set"` instead sets a boolean flag and
+# continues the game. The flag is registered into player.flag_keys
+# automatically during template_import — authors don't (and shouldn't) hand-
+# declare it, because a typo would silently un-gate the flag-dependent
+# canvases.
+#
+# Generator runtime:
+#   setup.rent_eviction_mode = "flag_set";
+#   setup.rent_eviction_flag = "rent_evicted";
+#
+# And inside the RentDay_Short passage:
+#   <<if setup.rent_eviction_mode is "flag_set">>
+#     <<set $player.flags[setup.rent_eviction_flag] to true>>
+#     <<set $game_state.rent_state.warnings to 0>>
+#     <<set $game_state.rent_state.is_due to false>>
+#     <p>...soft eviction text...</p>
+#     <<link "Continue" _returnTo>><</link>>
+#   <<else>>
+#     ...GAME OVER + Engine.restart()...
+#   <</if>>
+#
+# After the flag fires, `grace_periods` counter resets to 0 and the normal
+# rent cycle resumes — so the darker second act is a re-entrant state, not a
+# terminal one. The flag is permanent; downstream canvases gate on it.
+
+[settings.rent]
+enabled           = true
+amount            = 150
+due_day           = "Monday"
+collector_npc     = "npc_frank"
+grace_periods     = 2
+eviction_mode     = "flag_set"
+eviction_flag     = "rent_evicted"
+
+# Text customization. The rent system falls back to defaults when a key is
+# absent. The _soft variants are consulted first when eviction_mode = "flag_set";
+# if absent, the hard-eviction keys are used; if those are also absent, the
+# generator's hard-coded defaults fire.
+[settings.rent.text]
+warning_scene        = "You're short. Frank's face doesn't change."
+warning_response     = "Monday. Don't make me ask twice."
+warning_closing      = "One more week."
+eviction_scene_soft  = "Frank stops waiting for the money. Something shifts in how he looks at you."
+eviction_response_soft = "We'll be having a different kind of conversation from here on."
+eviction_closing_soft  = "You're still here. But the terms have changed."
+
+# ──────────────────────────────────────────────────────────────────────────────
+#  [[canvases]] — story events + the starting passage.
+# ──────────────────────────────────────────────────────────────────────────────
+# A canvas is a self-contained narrative unit. Its nodes form an internal
+# graph (choices link node → node); its exit_block hands control back to the
+# world (a location, the navigation screen, another canvas).
+#
+# No [canvases.trigger] section ⇒ starting canvas (referenced by
+# `starting_canvas` at the top of the file). All other canvases need a
+# trigger specifying when they fire (location, time window, required flags,
+# etc.). We only define the starting canvas here — the PRD features land at
+# the engine layer, not in canvas authoring.
+
+[[canvases]]
+id          = "scene_wake_up"
+name        = "Engine PRD Demo"
+description = "Minimum-viable starting canvas for the engine-PRD fixture."
+
+# Node 1: introduction + the flag-set that unlocks post-prologue access.
+[[canvases.nodes]]
+id     = "intro"
+name   = "Wake Up"
+blocks = [
+  { type = "heading",   content = "Engine PRD Demo" },
+  { type = "paragraph", content = "You wake up. Summer has started." },
+  { type = "paragraph", content = "(This fixture exists to exercise the 2026-04-22 engine additions. It is not a game you play.)" },
+]
+
+# exit_block = "location" hands control to a Location_ passage and optionally
+# applies flag and stat effects on the transition. flagEffects set flags that
+# downstream canvases/conditions can read.
+exit_block = { type = "location", text = "Start your summer", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0, flagEffects = [
+  { targetType = "player", flag = "summer_started" },
+] } }
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#  End of fixture. Integration test at apps/projects/tests.py::
+#  EnginePRDIntegrationTests verifies the generator emits the expected strings.
+# ═══════════════════════════════════════════════════════════════════════════════
