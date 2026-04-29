@@ -1296,3 +1296,129 @@ class StageHelpersIntegrationTests(TestCase):
         # Verify the trigger condition got serialized into the runtime
         # (the JSON shape includes the helper reference verbatim).
         self.assertIn('"helper": "frank_stage_2"', twee)
+
+
+# -- arc_stages: per-NPC stage display registry (E9/E10/E11 foundation) ------
+
+
+_FRANK_ARC_STAGES = ["Suspicious", "Warm", "Restrict", "Tease", "Cracked"]
+
+
+def _toml_with_arc_stages(arc_stages=None, player_trait_decay=None):
+    """Minimal TOML where the single NPC may declare arc_stages."""
+    d = _base_toml()
+    if arc_stages is not None:
+        d["npcs"][0]["arc_stages"] = arc_stages
+    if player_trait_decay is not None:
+        d["player"]["trait_decay"] = player_trait_decay
+    return d
+
+
+class ArcStagesSchemaTests(SimpleTestCase):
+    def test_absent_arc_stages_is_empty_list(self):
+        template = normalize(_toml_with_arc_stages(arc_stages=None))
+        self.assertEqual(template.npcs[0].arc_stages, [])
+        # Empty list also validates clean — treated as no stage chain.
+        self.assertEqual(validate(template), [])
+
+    def test_explicit_empty_list_validates_clean(self):
+        template = normalize(_toml_with_arc_stages(arc_stages=[]))
+        self.assertEqual(template.npcs[0].arc_stages, [])
+        self.assertEqual(validate(template), [])
+
+    def test_full_chain_parses_in_order(self):
+        template = normalize(_toml_with_arc_stages(arc_stages=_FRANK_ARC_STAGES))
+        self.assertEqual(template.npcs[0].arc_stages, _FRANK_ARC_STAGES)
+        self.assertEqual(validate(template), [])
+
+    def test_non_list_raises_type_error(self):
+        with self.assertRaises(TypeError) as ctx:
+            normalize(_toml_with_arc_stages(arc_stages="Suspicious"))
+        self.assertIn("arc_stages must be a list", str(ctx.exception))
+
+    def test_non_string_element_raises_type_error(self):
+        with self.assertRaises(TypeError) as ctx:
+            normalize(_toml_with_arc_stages(arc_stages=["Suspicious", 2, "Warm"]))
+        self.assertIn("arc_stages[1]", str(ctx.exception))
+        self.assertIn("must be a string", str(ctx.exception))
+
+    def test_player_trait_decay_collision_fails_validation(self):
+        # An NPC with arc_stages cannot have its <slug>_stage trait listed in
+        # player.trait_decay — decay bypasses applyAndNotifyTrait, which is
+        # where E9 hooks the advancement log. The validator catches it.
+        d = _toml_with_arc_stages(
+            arc_stages=_FRANK_ARC_STAGES,
+            player_trait_decay={"npc_frank_stage": 0.5},
+        )
+        # The collision trait must exist in core_traits so trait_decay
+        # validation reaches the arc_stages check (otherwise the missing-trait
+        # error fires first).
+        d["player"]["core_traits"]["npc_frank_stage"] = 0
+        template = normalize(d)
+        errors = validate(template)
+        self.assertTrue(
+            any(
+                "npc_frank" in e
+                and "arc_stages" in e
+                and "trait_decay" in e
+                and "npc_frank_stage" in e
+                for e in errors
+            ),
+            f"Expected collision error, got: {errors}",
+        )
+
+
+class ArcStagesIntegrationTests(TestCase):
+    """Full pipeline: TOML → DB → generator → Twee. Verifies that the
+    slug-keyed registry lands in the runtime as setup.npc_arc_stages."""
+
+    @classmethod
+    def setUpTestData(cls):
+        User = get_user_model()
+        cls.user = User.objects.create_user(
+            email="arc-stages-test@example.com", password="testpass123"
+        )
+        with open(FIXTURE_PATH, "rb") as f:
+            cls.toml_data = tomli.load(f)
+
+    def _build(self, mutator=None):
+        toml_data = copy.deepcopy(self.toml_data)
+        if mutator is not None:
+            mutator(toml_data)
+        template = normalize(toml_data)
+        errors = validate(template)
+        self.assertEqual(errors, [], f"Should validate clean: {errors}")
+        result = create_project_from_template(template, str(self.user.id))
+        project = Project.objects.get(id=result["project_id"])
+        from apps.game_generation.twee_comprehensive.generators.v1 import (
+            TweeComprehensiveGeneratorV1,
+        )
+        twee = TweeComprehensiveGeneratorV1().generate(project)
+        return project, twee
+
+    def test_no_arc_stages_emits_empty_registry(self):
+        # Fixture has no arc_stages on any NPC by default.
+        _, twee = self._build()
+        self.assertIn("setup.npc_arc_stages = ", twee)
+        # Empty object emitted when no NPC declares stages.
+        self.assertIn("setup.npc_arc_stages = {};", twee)
+
+    def test_frank_arc_stages_emitted_in_registry(self):
+        def mutate(d):
+            for n in d.get("npcs", []):
+                if n.get("id") == "npc_frank":
+                    n["arc_stages"] = _FRANK_ARC_STAGES
+                    break
+
+        _, twee = self._build(mutator=mutate)
+        # Slug-keyed entry must appear with all five labels in order.
+        self.assertIn("setup.npc_arc_stages = ", twee)
+        self.assertIn('"npc_frank"', twee)
+        for label in _FRANK_ARC_STAGES:
+            self.assertIn(f'"{label}"', twee)
+        # Spot-check that the registry contains the slug pointing at the chain.
+        # Pattern: "npc_frank": ["Suspicious", "Warm", ...]
+        self.assertRegex(
+            twee,
+            r'"npc_frank"\s*:\s*\[\s*"Suspicious"\s*,\s*"Warm"\s*,\s*"Restrict"',
+        )

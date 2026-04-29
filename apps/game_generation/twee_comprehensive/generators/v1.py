@@ -531,6 +531,10 @@ class TweeComprehensiveGeneratorV1:
         npc_map = {}
         npc_slug_map = {}  # Maps NPC slug to UUID for condition resolution
         hidden_npcs_map = {}  # Maps NPC UUID -> True for NPCs flagged hidden_from_ui
+        # E9/E10/E11: slug → [stage display names]. Foundation registry. Empty
+        # for NPCs without arc_stages — runtime checks length to know whether
+        # to engage stage-related code paths.
+        npc_arc_stages_map = {}
         try:
             from apps.npcs.models import NPC
 
@@ -573,15 +577,25 @@ class TweeComprehensiveGeneratorV1:
                 # The NPC still exists in $npcs at runtime so narrative UUID lookups keep working.
                 if getattr(n, "hidden_from_ui", False):
                     hidden_npcs_map[npc_uuid] = True
+                # E9/E10/E11: per-NPC arc_stages registry, slug-keyed.
+                # Trait name is derived as `<slug>_stage` everywhere — never stored.
+                arc_stages_for_npc = ai_config.get("arc_stages") or []
+                if arc_stages_for_npc and slug:
+                    npc_arc_stages_map[slug] = list(arc_stages_for_npc)
         except (AttributeError, TypeError) as e:
             logger.warning("Error loading NPC map: %s", e)
             npc_map = {}
             npc_slug_map = {}
             hidden_npcs_map = {}
+            npc_arc_stages_map = {}
 
         # Store as instance variables for use in _convert_blocks_to_game_html
         self.npc_map = npc_map
         self.npc_slug_map = npc_slug_map
+        # E9/E10/E11 foundation: slug-keyed arc_stages registry. Empty when
+        # no NPC has stage chains — runtime checks Object.keys(...).length > 0
+        # before engaging stalled-detection / stage-gate / stage_label paths.
+        self.npc_arc_stages_map = npc_arc_stages_map
 
         # Build locations map for schedule display (location slug → name)
         # NPC schedules reference locations by TOML slug stored in properties["slug"]
@@ -2033,6 +2047,10 @@ setup.stage_helpers_map = {{}};
 for (var _shi = 0; _shi < setup.stage_helpers.length; _shi++) {{
     setup.stage_helpers_map[setup.stage_helpers[_shi].name] = setup.stage_helpers[_shi];
 }}
+// E9/E10/E11 foundation: per-NPC stage display names, slug-keyed.
+// Empty object = no NPC has a stage chain (existing TOMLs unaffected).
+// Trait name convention: <slug>_stage in $player.core_traits (integer 0..N).
+setup.npc_arc_stages = {json.dumps(self.npc_arc_stages_map)};
 setup.phone_enabled = {"true" if self.phone_enabled else "false"};
 setup.phone_data = {phone_data_json};
 

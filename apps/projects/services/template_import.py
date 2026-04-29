@@ -118,6 +118,13 @@ class TemplateNPC:
     # and sidebar NPC-traits widget. Runtime $npcs dict still contains the NPC so
     # prologue/narrative dialog speaker lookups by UUID keep working.
     hidden_from_ui: bool = False
+    # E9/E10/E11: ordered stage display names. Length implies max stage value
+    # (len-1). Empty = NPC has no stage chain. The corresponding integer stage
+    # value lives in $player.core_traits[<slug>_stage]. Used by:
+    #   - E9 stalled-detection registry (NPC with arc_stages → tracked for stalls)
+    #   - E10 hint stage_gate validation (stage_npc must reference one of these)
+    #   - E11 stage_label sidebar widget (renders arc_stages[current_stage])
+    arc_stages: List[str] = field(default_factory=list)
 
 
 @dataclass
@@ -757,6 +764,22 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                         f"npcs[{ni}].trait_decay['{k}'] must be a number, got {type(v).__name__}"
                     )
 
+        # Parse arc_stages: ordered list of stage display names.
+        # Empty/missing = NPC has no stage chain (default; existing TOMLs unaffected).
+        arc_stages_raw = n.get("arc_stages") or []
+        if not isinstance(arc_stages_raw, list):
+            raise TypeError(
+                f"npcs[{ni}].arc_stages must be a list, got {type(arc_stages_raw).__name__}"
+            )
+        arc_stages: List[str] = []
+        for si, stage in enumerate(arc_stages_raw):
+            if not isinstance(stage, str):
+                raise TypeError(
+                    f"npcs[{ni}].arc_stages[{si}] must be a string, "
+                    f"got {type(stage).__name__}: {stage!r}"
+                )
+            arc_stages.append(stage)
+
         npcs.append(
             TemplateNPC(
                 id=_require_str(n, "id"),
@@ -771,6 +794,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 relationship_options=_require_list(n, "relationship_options"),
                 trait_decay=trait_decay,
                 hidden_from_ui=bool(n.get("hidden_from_ui", False)),
+                arc_stages=arc_stages,
             )
         )
 
@@ -1685,6 +1709,31 @@ def validate(template: GameTemplate) -> List[str]:
                 errors.append(
                     f"player.trait_decay['{trait_name}'] must be >= 0, got {decay_val}"
                 )
+
+    # ===== arc_stages validation =====
+    # Foundation for E9 (stalled detection), E10 (stage_gate), E11 (stage_label).
+    # Stage trait lives in $player.core_traits[<slug>_stage] as an integer.
+    # If that trait appears in player.trait_decay, decay would silently move
+    # the value downward without going through applyAndNotifyTrait — which is
+    # where E9 hooks the advancement log. So we reject the combination.
+    for i, n in enumerate(template.npcs):
+        if not n.arc_stages:
+            continue
+        # Element typing already enforced in normalize() but double-check len.
+        if len(n.arc_stages) < 1:
+            errors.append(
+                f"npcs[{i}] '{n.id}' arc_stages must have at least one stage name "
+                f"(or omit the field entirely)"
+            )
+        # Reject the trait-decay collision that would break E9.
+        stage_trait = f"{n.id}_stage"
+        if template.player.trait_decay and stage_trait in template.player.trait_decay:
+            errors.append(
+                f"npcs[{i}] '{n.id}' declares arc_stages but player.trait_decay "
+                f"includes '{stage_trait}' — stage traits must not decay (decay "
+                f"bypasses applyAndNotifyTrait, which would silently break "
+                f"stage-advancement detection)"
+            )
 
     # Sidebar items validation (per-type; only trait_words is typed-validated today)
     _npc_ids_for_sidebar = {n.id for n in template.npcs}
@@ -2825,6 +2874,9 @@ def create_project_from_template(
             npc.ai_behavior_config["relationship_options"] = n.relationship_options
         if n.trait_decay:
             npc.ai_behavior_config["trait_decay"] = n.trait_decay
+        # E9/E10/E11: per-NPC arc_stages list (display names per stage value).
+        if n.arc_stages:
+            npc.ai_behavior_config["arc_stages"] = n.arc_stages
         npc.save()
         npc_ids.append(str(npc.id))
 
