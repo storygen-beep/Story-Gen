@@ -4472,8 +4472,72 @@ setup.generateNarrativeHint = function() {{
 
 // ============== QUEST PAGE HELPER FUNCTIONS ==============
 
+// E10: Resolve UUID → slug. Inverse of setup.npc_slug_map (slug → UUID).
+// Used by getNextActivity to translate the npcId arg into the slug needed
+// for the stage-hint lookup. Returns null when no match (e.g. the player
+// pseudo-id or stale UUIDs).
+setup.npcSlugForId = function(npcId) {{
+    if (!npcId) return null;
+    var slugMap = setup.npc_slug_map || {{}};
+    var key = String(npcId);
+    for (var s in slugMap) {{
+        if (slugMap[s] === key) return s;
+    }}
+    // Allow the input itself to be a slug (e.g. when callers already pass a
+    // slug). Treat as slug if it appears as a key in the registry.
+    if (setup.npc_arc_stages && setup.npc_arc_stages[key]) return key;
+    return null;
+}};
+
+// E10: Stage-gated hint consumer. Walks arc.hints.templates, evaluates each
+// template's normalized condition_items via setup.checkSingleCondition (the
+// same evaluator used by canvas trigger conditions). Returns the FIRST
+// template whose npc_id matches AND all condition_items pass.
+//
+// Templates without npc_id are skipped — those are global and outside the
+// per-NPC routing. condition_items being empty means "always fires" for
+// the matched NPC, useful for default fallback per-NPC content.
+setup.getStageHintForNPC = function(npcSlug) {{
+    if (!npcSlug) return null;
+    var arc = setup.story_arc || {{}};
+    var hints = (arc.guidance || arc.hints || {{}});
+    var templates = hints.templates || [];
+    for (var ti = 0; ti < templates.length; ti++) {{
+        var tpl = templates[ti];
+        if (!tpl || !tpl.npc_id || tpl.npc_id !== npcSlug) continue;
+        var items = tpl.condition_items || [];
+        var allMet = true;
+        for (var ci = 0; ci < items.length; ci++) {{
+            if (!setup.checkSingleCondition(items[ci])) {{
+                allMet = false;
+                break;
+            }}
+        }}
+        if (allMet && tpl.text) {{
+            return {{ text: tpl.text, npc_id: npcSlug }};
+        }}
+    }}
+    return null;
+}};
+
 // Get the next activity for an NPC or player (first incomplete in node order)
 setup.getNextActivity = function(npcId) {{
+    // E10: stage-gated hint takes priority over the canvas-graph walk.
+    // For NPC sources only — the player pseudo-id has no stage chain.
+    if (npcId && npcId !== "_player_") {{
+        var slug = setup.npcSlugForId(npcId);
+        if (slug) {{
+            var stageHint = setup.getStageHintForNPC(slug);
+            if (stageHint) {{
+                return {{
+                    isStageHint: true,
+                    stageHint: stageHint,
+                    conditionsNotMet: false
+                }};
+            }}
+        }}
+    }}
+
     var helpData = setup.help_data || {{}};
     var npcData;
     if (npcId === "_player_") {{
@@ -5077,6 +5141,10 @@ setup.getSidebarHint = function() {{
         var next = setup.getNextActivity(sources[i].id);
         if (next === null) continue;
 
+        // E10: stage-gated hints win priority — checked first.
+        if (next.isStageHint && next.stageHint && next.stageHint.text) {{
+            return next.stageHint.text;
+        }}
         if (next.isStartingCanvas) return "Start the game";
         if (next.flagConditionsNotMet) return setup.formatFlagHint(next.flagHint, sources[i].name);
         if (next.traitConditionsNotMet) return setup.formatCanvasConditions(next.canvasConditions);
@@ -12531,6 +12599,10 @@ if (clothingMsg) {
     <<set _next = setup.getNextActivity("_player_")>>
     <<if _next === null>>
       <div class="quest-complete">✓ All activities completed!</div>
+    <<elseif _next.isStageHint>>
+      <div class="quest-available stage-hint">
+        → <<print _next.stageHint.text>>
+      </div>
     <<elseif _next.isStartingCanvas>>
       <div class="quest-available">→ Start the game</div>
     <<elseif _next.isPhoneActivity>>
@@ -12571,6 +12643,10 @@ if (clothingMsg) {
       <<set _next = setup.getNextActivity(_npcId)>>
       <<if _next === null>>
         <div class="quest-complete">✓ All activities completed!</div>
+      <<elseif _next.isStageHint>>
+        <div class="quest-available stage-hint">
+          → <<print _next.stageHint.text>>
+        </div>
       <<elseif _next.isStartingCanvas>>
         <div class="quest-available">→ Start the game</div>
       <<elseif _next.isPhoneActivity>>

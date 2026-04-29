@@ -1675,3 +1675,237 @@ class StageStallIntegrationTests(TestCase):
         # filters them out via npc.hidden_from_ui.
         _, twee = self._build()
         self.assertIn("npc.hidden_from_ui", twee)
+
+
+# -- E10: stage-gated hint pool + template consumer --------------------------
+
+
+def _toml_with_hint_template(template_dict, arc_stages=None):
+    """Build TOML with a single hint template + Frank arc_stages by default."""
+    d = _base_toml()
+    d["npcs"][0]["arc_stages"] = (
+        _FRANK_ARC_STAGES if arc_stages is None else arc_stages
+    )
+    d["story_arc"] = {
+        "version": "1.0",
+        "hints": {
+            "stuck_threshold_minutes": 30,
+            "hint_style": "observation",
+            "templates": [template_dict],
+        },
+    }
+    return d
+
+
+class StageGatedHintSchemaTests(SimpleTestCase):
+    def test_full_stage_gate_triple_validates(self):
+        tpl = {
+            "text": "Frank's started warming up.",
+            "condition": {
+                "stage_npc": "npc_frank",
+                "stage_op": "eq",
+                "stage_value": 1,
+            },
+        }
+        template = normalize(_toml_with_hint_template(tpl))
+        errors = validate(template)
+        self.assertEqual(errors, [], f"Should validate clean: {errors}")
+        # npc_id defaults to stage_npc when not explicitly set on the template.
+        self.assertEqual(template.story_arc.hints.templates[0].npc_id, "npc_frank")
+
+    def test_partial_triple_fails_validation(self):
+        # stage_npc + stage_op without stage_value
+        tpl = {
+            "text": "Hint.",
+            "condition": {"stage_npc": "npc_frank", "stage_op": "gte"},
+        }
+        template = normalize(_toml_with_hint_template(tpl))
+        errors = validate(template)
+        self.assertTrue(
+            any("must all be set together" in e for e in errors), errors
+        )
+
+    def test_invalid_stage_op_fails(self):
+        tpl = {
+            "text": "Hint.",
+            "condition": {
+                "stage_npc": "npc_frank",
+                "stage_op": "BETWEEN",
+                "stage_value": 1,
+            },
+        }
+        template = normalize(_toml_with_hint_template(tpl))
+        errors = validate(template)
+        self.assertTrue(
+            any("stage_op must be one of" in e for e in errors), errors
+        )
+
+    def test_unknown_stage_npc_fails(self):
+        tpl = {
+            "text": "Hint.",
+            "condition": {
+                "stage_npc": "npc_ghost",
+                "stage_op": "eq",
+                "stage_value": 0,
+            },
+        }
+        template = normalize(_toml_with_hint_template(tpl))
+        errors = validate(template)
+        self.assertTrue(
+            any("npc_ghost" in e and "not found" in e for e in errors), errors
+        )
+
+    def test_stage_npc_without_arc_stages_fails(self):
+        tpl = {
+            "text": "Hint.",
+            "condition": {
+                "stage_npc": "npc_frank",
+                "stage_op": "eq",
+                "stage_value": 0,
+            },
+        }
+        # NPC exists but has no arc_stages.
+        template = normalize(_toml_with_hint_template(tpl, arc_stages=[]))
+        errors = validate(template)
+        self.assertTrue(
+            any("npc_frank" in e and "without arc_stages" in e for e in errors),
+            errors,
+        )
+
+    def test_stage_value_out_of_range_fails(self):
+        tpl = {
+            "text": "Hint.",
+            "condition": {
+                "stage_npc": "npc_frank",
+                "stage_op": "eq",
+                "stage_value": 99,
+            },
+        }
+        template = normalize(_toml_with_hint_template(tpl))
+        errors = validate(template)
+        self.assertTrue(
+            any("out of range" in e and "0..4" in e for e in errors), errors
+        )
+
+    def test_explicit_npc_id_overrides_default(self):
+        tpl = {
+            "text": "Hint.",
+            "npc_id": "npc_frank",
+            "condition": {"missing_flag": "frank_caught"},
+        }
+        template = normalize(_toml_with_hint_template(tpl))
+        errors = validate(template)
+        self.assertEqual(errors, [], f"Should validate clean: {errors}")
+        self.assertEqual(template.story_arc.hints.templates[0].npc_id, "npc_frank")
+
+    def test_unknown_npc_id_routing_fails(self):
+        tpl = {
+            "text": "Hint.",
+            "npc_id": "npc_ghost",
+            "condition": {"missing_flag": "x_flag"},
+        }
+        template = normalize(_toml_with_hint_template(tpl))
+        errors = validate(template)
+        self.assertTrue(
+            any("npc_id" in e and "npc_ghost" in e for e in errors), errors
+        )
+
+
+class StageGatedHintIntegrationTests(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        User = get_user_model()
+        cls.user = User.objects.create_user(
+            email="stage-gated-hint-test@example.com", password="testpass123"
+        )
+        with open(FIXTURE_PATH, "rb") as f:
+            cls.toml_data = tomli.load(f)
+
+    def _build(self, mutator=None):
+        toml_data = copy.deepcopy(self.toml_data)
+        if mutator is not None:
+            mutator(toml_data)
+        template = normalize(toml_data)
+        errors = validate(template)
+        self.assertEqual(errors, [], f"Should validate clean: {errors}")
+        result = create_project_from_template(template, str(self.user.id))
+        project = Project.objects.get(id=result["project_id"])
+        from apps.game_generation.twee_comprehensive.generators.v1 import (
+            TweeComprehensiveGeneratorV1,
+        )
+        twee = TweeComprehensiveGeneratorV1().generate(project)
+        return project, twee
+
+    def _add_frank_stage_chain_and_hint(self, d, hint_text="Stage 1 hint."):
+        for n in d.get("npcs", []):
+            if n.get("id") == "npc_frank":
+                n["arc_stages"] = _FRANK_ARC_STAGES
+                break
+        d.setdefault("story_arc", {}).setdefault("hints", {})
+        d["story_arc"]["hints"].setdefault("templates", []).append({
+            "text": hint_text,
+            "condition": {
+                "stage_npc": "npc_frank",
+                "stage_op": "eq",
+                "stage_value": 1,
+            },
+        })
+
+    def test_runtime_helpers_emitted(self):
+        # Both consumer functions and the slug-resolver must be present
+        # in the runtime, regardless of whether a hint template is configured.
+        _, twee = self._build()
+        self.assertIn("setup.getStageHintForNPC = function", twee)
+        self.assertIn("setup.npcSlugForId = function", twee)
+
+    def test_get_next_activity_short_circuits_on_stage_hint(self):
+        # The early-return block at the top of getNextActivity uses isStageHint.
+        _, twee = self._build()
+        self.assertIn("setup.getStageHintForNPC(slug)", twee)
+        self.assertIn("isStageHint: true", twee)
+
+    def test_quests_page_has_stage_hint_branch_in_both_sections(self):
+        _, twee = self._build()
+        # Two render branches — one in the player section, one in the NPC loop.
+        # The branch text contains _next.isStageHint and the stageHint.text print.
+        self.assertEqual(twee.count("<<elseif _next.isStageHint>>"), 2)
+        self.assertIn("_next.stageHint.text", twee)
+
+    def test_sidebar_hint_extracts_stage_hint_first(self):
+        _, twee = self._build()
+        # The new branch lives at the top of the per-source loop.
+        self.assertIn("next.isStageHint && next.stageHint && next.stageHint.text", twee)
+
+    def test_template_normalized_to_condition_items(self):
+        # When a stage-gate triple is authored, condition_items must contain
+        # a regular trait condition on <slug>_stage that checkSingleCondition
+        # can evaluate without a new branch.
+        def mutate(d):
+            self._add_frank_stage_chain_and_hint(d, "Numbers warmth, Stage 1.")
+
+        _, twee = self._build(mutator=mutate)
+        # The normalized condition_items list must show in the runtime JSON.
+        self.assertIn('"trait_key": "npc_frank_stage"', twee)
+        self.assertIn('"operator": "eq"', twee)
+        self.assertIn('"value": 1', twee)
+        self.assertIn('"npc_id": "npc_frank"', twee)
+        self.assertIn("Numbers warmth, Stage 1.", twee)
+
+    def test_missing_flag_normalizes_to_is_false_condition(self):
+        # A missing_flag condition becomes a flag/is_false predicate so the
+        # existing checkSingleCondition handles it.
+        def mutate(d):
+            for n in d.get("npcs", []):
+                if n.get("id") == "npc_frank":
+                    n["arc_stages"] = _FRANK_ARC_STAGES
+                    break
+            d.setdefault("story_arc", {}).setdefault("hints", {})
+            d["story_arc"]["hints"].setdefault("templates", []).append({
+                "text": "He hasn't caught you yet.",
+                "npc_id": "npc_frank",
+                "condition": {"missing_flag": "frank_caught"},
+            })
+
+        _, twee = self._build(mutator=mutate)
+        self.assertIn('"flag_key": "frank_caught"', twee)
+        self.assertIn('"operator": "is_false"', twee)

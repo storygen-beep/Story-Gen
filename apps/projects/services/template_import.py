@@ -552,6 +552,14 @@ class TemplateHintCondition:
     missing_flag: Optional[str] = None
     missing_trait: Optional[str] = None
     gap_gte: Optional[int] = None
+    # E10: stage gate. All three required together; tri-required validation
+    # in validate(). The triple is normalized at create_project_from_template
+    # time into a regular trait condition on $player.core_traits[<slug>_stage]
+    # so the runtime evaluator (setup.checkSingleCondition) handles it
+    # without a new branch.
+    stage_npc: Optional[str] = None         # NPC slug; must reference an NPC with arc_stages
+    stage_op: Optional[str] = None          # 'eq' | 'gte' | 'lte'
+    stage_value: Optional[int] = None       # 0..len(arc_stages)-1
 
 
 @dataclass
@@ -560,6 +568,10 @@ class TemplateHintTemplate:
 
     condition: Optional[TemplateHintCondition] = None
     text: str = ""
+    # E10: routing field — which NPC's section this hint belongs to in the
+    # Quests page. When stage_npc is set on the condition, npc_id defaults
+    # to it; otherwise authors set npc_id explicitly to scope the hint.
+    npc_id: Optional[str] = None
 
 
 @dataclass
@@ -1199,17 +1211,40 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     cond_raw = ht.get("condition")
                     cond_obj = None
                     if isinstance(cond_raw, dict):
+                        # Stage-gate fields. None when missing — validate() catches
+                        # partial triples (one or two of three set).
+                        sg_npc = _require_str(cond_raw, "stage_npc", "") or None
+                        sg_op = _require_str(cond_raw, "stage_op", "") or None
+                        sg_val_raw = cond_raw.get("stage_value")
+                        sg_val: Optional[int] = None
+                        if sg_val_raw is not None:
+                            try:
+                                sg_val = int(sg_val_raw)
+                            except (ValueError, TypeError):
+                                raise TypeError(
+                                    f"hint condition stage_value must be int, "
+                                    f"got {type(sg_val_raw).__name__}: {sg_val_raw!r}"
+                                )
                         cond_obj = TemplateHintCondition(
                             missing_flag=_require_str(cond_raw, "missing_flag", "")
                             or None,
                             missing_trait=_require_str(cond_raw, "missing_trait", "")
                             or None,
                             gap_gte=_require_int(cond_raw, "gap_gte", 0) or None,
+                            stage_npc=sg_npc,
+                            stage_op=sg_op,
+                            stage_value=sg_val,
                         )
+                    # Routing: explicit npc_id, or fall back to the stage_npc
+                    # from the condition (the common case).
+                    tpl_npc = _require_str(ht, "npc_id", "") or None
+                    if not tpl_npc and cond_obj and cond_obj.stage_npc:
+                        tpl_npc = cond_obj.stage_npc
                     hint_templates.append(
                         TemplateHintTemplate(
                             condition=cond_obj,
                             text=_require_str(ht, "text", ""),
+                            npc_id=tpl_npc,
                         )
                     )
             hints_obj = TemplateStoryHints(
@@ -2503,6 +2538,68 @@ def validate(template: GameTemplate) -> List[str]:
                     )
                     break
 
+    # ===== E10: stage_gate validation on hint conditions =====
+    # Tri-required: stage_npc, stage_op, stage_value all set together.
+    # stage_npc must reference an NPC with arc_stages declared.
+    # 0 ≤ stage_value < len(arc_stages).
+    if template.story_arc and template.story_arc.hints:
+        npc_arc_lookup = {n.id: n.arc_stages for n in template.npcs if n.arc_stages}
+        all_npc_ids = {n.id for n in template.npcs}
+        valid_stage_ops = {"eq", "gte", "lte"}
+        for ti, t in enumerate(template.story_arc.hints.templates):
+            ctx = f"story_arc.hints.templates[{ti}]"
+            cond = t.condition
+            if cond is None:
+                # No condition is fine — the hint always applies (if anything ever
+                # consumes ungated hints in this layer).
+                if t.npc_id and t.npc_id not in all_npc_ids:
+                    errors.append(
+                        f"{ctx}.npc_id '{t.npc_id}' not found in NPC definitions"
+                    )
+                continue
+            sg_set = sum(
+                1
+                for v in (cond.stage_npc, cond.stage_op, cond.stage_value)
+                if v is not None
+            )
+            if 0 < sg_set < 3:
+                errors.append(
+                    f"{ctx}.condition: stage_npc, stage_op, and stage_value "
+                    f"must all be set together (got {sg_set} of 3)"
+                )
+            elif sg_set == 3:
+                if cond.stage_op not in valid_stage_ops:
+                    errors.append(
+                        f"{ctx}.condition.stage_op must be one of "
+                        f"{sorted(valid_stage_ops)}, got '{cond.stage_op}'"
+                    )
+                if cond.stage_npc not in npc_arc_lookup:
+                    if cond.stage_npc in all_npc_ids:
+                        errors.append(
+                            f"{ctx}.condition.stage_npc '{cond.stage_npc}' "
+                            f"references an NPC without arc_stages — declare "
+                            f"arc_stages on the NPC before gating hints on it"
+                        )
+                    else:
+                        errors.append(
+                            f"{ctx}.condition.stage_npc '{cond.stage_npc}' "
+                            f"not found in NPC definitions"
+                        )
+                else:
+                    arc_len = len(npc_arc_lookup[cond.stage_npc])
+                    sv = cond.stage_value
+                    if sv < 0 or sv >= arc_len:
+                        errors.append(
+                            f"{ctx}.condition.stage_value {sv} out of range "
+                            f"for NPC '{cond.stage_npc}' arc_stages "
+                            f"(must be 0..{arc_len - 1})"
+                        )
+            # Validate routing field if explicitly set.
+            if t.npc_id and t.npc_id not in all_npc_ids:
+                errors.append(
+                    f"{ctx}.npc_id '{t.npc_id}' not found in NPC definitions"
+                )
+
     return errors
 
 
@@ -2514,6 +2611,65 @@ def _ensure_user(owner_id: str) -> User:
         return User.objects.get(id=owner_id)
     except Exception:
         raise ValueError(f"owner id not found: {owner_id}")
+
+
+def _serialize_hint_template(t: TemplateHintTemplate) -> Dict[str, Any]:
+    """Emit a hint template into the runtime JSON shape.
+
+    Three pieces:
+      - condition: legacy shape (missing_flag/missing_trait/gap_gte) preserved
+        for back-compat; runtime today doesn't read it but tests may, and
+        future-us shouldn't have to dig through old TOMLs to reconstruct
+        author intent.
+      - npc_id: routing field — which NPC's section the hint belongs to in
+        the Quests page.
+      - condition_items: NORMALIZED predicate list evaluated by
+        setup.checkSingleCondition (v1.py:4636) at runtime. Each item shape
+        matches the existing condition-item DSL (type/subject/operator/...).
+        Empty list = always fires.
+    """
+    cond = t.condition
+    legacy = None
+    items: List[Dict[str, Any]] = []
+    npc_id = t.npc_id  # may be None for global hints
+    if cond is not None:
+        legacy = {
+            "missing_flag": cond.missing_flag,
+            "missing_trait": cond.missing_trait,
+            "gap_gte": cond.gap_gte,
+            "stage_npc": cond.stage_npc,
+            "stage_op": cond.stage_op,
+            "stage_value": cond.stage_value,
+        }
+        # Stage-gate triple → trait condition on $player.core_traits[<slug>_stage].
+        # Validator guarantees the triple is whole when any of three is set.
+        if cond.stage_npc and cond.stage_op and cond.stage_value is not None:
+            items.append({
+                "type": "trait",
+                "subject": "player",
+                "trait_key": f"{cond.stage_npc}_stage",
+                "operator": cond.stage_op,
+                "value": cond.stage_value,
+            })
+        # missing_flag → flag is_false (the hint applies WHILE the flag isn't set).
+        if cond.missing_flag:
+            items.append({
+                "type": "flag",
+                "subject": "player",
+                "flag_key": cond.missing_flag,
+                "operator": "is_false",
+            })
+        # missing_trait + gap_gte are PRD 03 legacy semantics with no
+        # author-spec'd subject. Surfaced in the legacy shape for back-compat
+        # but not normalized into condition_items (would need disambiguation
+        # work in a follow-up). Authors targeting E10 use stage_gate or
+        # missing_flag for predicate logic.
+    return {
+        "condition": legacy,
+        "npc_id": npc_id,
+        "condition_items": items,
+        "text": t.text,
+    }
 
 
 @transaction.atomic
@@ -2728,28 +2884,7 @@ def create_project_from_template(
                         else ""
                     ),
                     "templates": [
-                        {
-                            "condition": (
-                                {
-                                    "missing_flag": (
-                                        t.condition.missing_flag
-                                        if t.condition
-                                        else None
-                                    ),
-                                    "missing_trait": (
-                                        t.condition.missing_trait
-                                        if t.condition
-                                        else None
-                                    ),
-                                    "gap_gte": (
-                                        t.condition.gap_gte if t.condition else None
-                                    ),
-                                }
-                                if t.condition
-                                else None
-                            ),
-                            "text": t.text,
-                        }
+                        _serialize_hint_template(t)
                         for t in (
                             template.story_arc.hints.templates
                             if template.story_arc.hints
