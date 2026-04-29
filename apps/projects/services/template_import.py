@@ -569,6 +569,14 @@ class TemplateStoryHints:
     stuck_threshold_minutes: int = 30
     hint_style: str = "observation"  # observation|suggestion|memory
     templates: List[TemplateHintTemplate] = field(default_factory=list)
+    # E9 — stage-stall detection threshold + custom hint message.
+    # When no NPC with arc_stages has had its <slug>_stage trait advance
+    # in this many in-game days, the engine flags position.stage_progression_stalled
+    # and surfaces the stall hint via generateNarrativeHint.
+    stuck_threshold_days: int = 7
+    # Author-customized stall hint text. Empty string falls back to the
+    # generic "Days are slipping past. Something needs to shift." default.
+    stage_stall_message: str = ""
 
 
 @dataclass
@@ -1210,6 +1218,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 ),
                 hint_style=_require_str(hints_raw, "hint_style", "observation"),
                 templates=hint_templates,
+                stuck_threshold_days=_require_int(hints_raw, "stuck_threshold_days", 7),
+                stage_stall_message=_require_str(hints_raw, "stage_stall_message", ""),
             )
 
         story_arc_obj = TemplateStoryArc(
@@ -2706,6 +2716,16 @@ def create_project_from_template(
                         template.story_arc.hints.hint_style
                         if template.story_arc.hints
                         else "observation"
+                    ),
+                    "stuck_threshold_days": (
+                        template.story_arc.hints.stuck_threshold_days
+                        if template.story_arc.hints
+                        else 7
+                    ),
+                    "stage_stall_message": (
+                        template.story_arc.hints.stage_stall_message
+                        if template.story_arc.hints
+                        else ""
                     ),
                     "templates": [
                         {

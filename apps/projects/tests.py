@@ -1545,3 +1545,133 @@ class StageLabelSidebarIntegrationTests(TestCase):
         # require a regenerate.
         _, twee = self._build()
         self.assertIn('_item.type is "stage_label"', twee)
+
+
+# -- E9: stage-flag stalled-progress detection -------------------------------
+
+
+def _toml_with_story_arc_hints(hints_overrides=None, arc_stages=None):
+    """Minimal TOML with [story_arc] + [story_arc.hints]. Frank gets
+    arc_stages by default so the stalled-detection paths engage."""
+    d = _base_toml()
+    d["npcs"][0]["arc_stages"] = (
+        _FRANK_ARC_STAGES if arc_stages is None else arc_stages
+    )
+    base_hints = {
+        "stuck_threshold_minutes": 30,
+        "hint_style": "observation",
+        "templates": [],
+    }
+    if hints_overrides:
+        base_hints.update(hints_overrides)
+    d["story_arc"] = {"version": "1.0", "hints": base_hints}
+    return d
+
+
+class StageStallSchemaTests(SimpleTestCase):
+    def test_defaults_when_fields_omitted(self):
+        template = normalize(_toml_with_story_arc_hints())
+        self.assertIsNotNone(template.story_arc)
+        self.assertIsNotNone(template.story_arc.hints)
+        self.assertEqual(template.story_arc.hints.stuck_threshold_days, 7)
+        self.assertEqual(template.story_arc.hints.stage_stall_message, "")
+
+    def test_custom_threshold_and_message_parse(self):
+        template = normalize(_toml_with_story_arc_hints(hints_overrides={
+            "stuck_threshold_days": 14,
+            "stage_stall_message": "Maya feels herself standing still.",
+        }))
+        self.assertEqual(template.story_arc.hints.stuck_threshold_days, 14)
+        self.assertEqual(
+            template.story_arc.hints.stage_stall_message,
+            "Maya feels herself standing still.",
+        )
+
+    def test_legacy_minutes_still_supported_alongside_days(self):
+        # stuck_threshold_minutes is unrelated to E9 but lives on the same
+        # dataclass — confirm the existing field doesn't regress.
+        template = normalize(_toml_with_story_arc_hints(hints_overrides={
+            "stuck_threshold_minutes": 60,
+            "stuck_threshold_days": 5,
+        }))
+        self.assertEqual(template.story_arc.hints.stuck_threshold_minutes, 60)
+        self.assertEqual(template.story_arc.hints.stuck_threshold_days, 5)
+
+
+class StageStallIntegrationTests(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        User = get_user_model()
+        cls.user = User.objects.create_user(
+            email="stage-stall-test@example.com", password="testpass123"
+        )
+        with open(FIXTURE_PATH, "rb") as f:
+            cls.toml_data = tomli.load(f)
+
+    def _build(self, mutator=None):
+        toml_data = copy.deepcopy(self.toml_data)
+        if mutator is not None:
+            mutator(toml_data)
+        template = normalize(toml_data)
+        errors = validate(template)
+        self.assertEqual(errors, [], f"Should validate clean: {errors}")
+        result = create_project_from_template(template, str(self.user.id))
+        project = Project.objects.get(id=result["project_id"])
+        from apps.game_generation.twee_comprehensive.generators.v1 import (
+            TweeComprehensiveGeneratorV1,
+        )
+        twee = TweeComprehensiveGeneratorV1().generate(project)
+        return project, twee
+
+    def test_stage_advancement_log_initialized_in_game_state(self):
+        _, twee = self._build()
+        # The init lives in $game_state setup at the Start passage.
+        self.assertIn('"stage_advancement_log": {}', twee)
+
+    def test_advancement_log_hook_in_apply_and_notify_trait(self):
+        # The regex + registry check sits inside applyAndNotifyTrait.
+        _, twee = self._build()
+        self.assertRegex(twee, r"/\^\(\[a-z_\]\+\)_stage\$/\.exec\(trait\)")
+        # Hook is gated on positive delta + registry membership.
+        self.assertIn("delta > 0 && setup.npc_arc_stages", twee)
+        self.assertIn("stage_advancement_log[stageMatch[1]]", twee)
+
+    def test_stage_progression_stalled_block_emitted(self):
+        _, twee = self._build()
+        # detectStoryPosition adds the stalled flag and the OR-with-not-complete
+        # guard. Both must be visible in the emitted runtime.
+        self.assertIn("result.stage_progression_stalled", twee)
+        self.assertRegex(twee, r"completed_nodes\.length\s*<\s*totalNodes\s*\|\|\s*totalNodes\s*===\s*0")
+
+    def test_stage_stall_hint_branch_in_generate_narrative_hint(self):
+        _, twee = self._build()
+        # The new top branch in generateNarrativeHint sets hint_type "stage_stall"
+        # and reads custom message with generic fallback.
+        self.assertIn('"stage_stall"', twee)
+        self.assertIn("Days are slipping past", twee)
+        # Custom message comes from arc.hints.stage_stall_message.
+        self.assertIn("hints.stage_stall_message", twee)
+
+    def test_custom_stall_message_reaches_runtime(self):
+        # Author-provided stage_stall_message round-trips into setup.story_arc.hints.
+        def mutate(d):
+            for n in d.get("npcs", []):
+                if n.get("id") == "npc_frank":
+                    n["arc_stages"] = _FRANK_ARC_STAGES
+                    break
+            d.setdefault("story_arc", {}).setdefault("hints", {})
+            d["story_arc"]["hints"]["stage_stall_message"] = (
+                "Maya feels the days slip past her."
+            )
+            d["story_arc"]["hints"]["stuck_threshold_days"] = 5
+
+        _, twee = self._build(mutator=mutate)
+        self.assertIn("Maya feels the days slip past her.", twee)
+        # Threshold must round-trip — default is 7, custom is 5.
+        self.assertIn('"stuck_threshold_days": 5', twee)
+
+    def test_hidden_npcs_excluded_from_stall_check(self):
+        # Hidden NPCs shouldn't contribute to stall detection — the runtime
+        # filters them out via npc.hidden_from_ui.
+        _, twee = self._build()
+        self.assertIn("npc.hidden_from_ui", twee)

@@ -4010,6 +4010,19 @@ setup.applyAndNotifyTrait = function(targetType, npcId, trait, op, val, clampFla
   applyTraitEffect(targetType, npcId, trait, op, val, clampFlag, cap);
   var newVal = setup.getTraitValue(targetType, npcId, trait);
   var delta = newVal - oldVal;
+  // E9: log stage advancement when a player <slug>_stage trait moves upward.
+  // Keyed by NPC slug (matches setup.npc_arc_stages registry). Records the
+  // current in-game day. Only positive deltas count — a `set` op that
+  // decreases the value isn't an advancement.
+  if (targetType === 'player' && delta > 0 && setup.npc_arc_stages) {{
+    var stageMatch = /^([a-z_]+)_stage$/.exec(trait);
+    if (stageMatch && setup.npc_arc_stages[stageMatch[1]]) {{
+      var sv = State.variables;
+      sv.game_state.stage_advancement_log = sv.game_state.stage_advancement_log || {{}};
+      var currentDay = (sv.game_state.time_state && sv.game_state.time_state.day) || 1;
+      sv.game_state.stage_advancement_log[stageMatch[1]] = currentDay;
+    }}
+  }}
   if (delta !== 0) {{
     var npcName = '';
     if (targetType === 'npc' && npcId) {{
@@ -4252,6 +4265,39 @@ setup.detectStoryPosition = function() {{
     // Check if stuck (no available nodes and not all completed)
     result.is_stuck = result.available_nodes.length === 0 && result.completed_nodes.length < totalNodes;
 
+    // E9: stage-stall augmentation. ORs a per-NPC stage-flag stall signal
+    // into is_stuck so generateNarrativeHint fires for players who are
+    // visiting hubs/activities normally but failing to advance any NPC's
+    // stage chain. Preserves the not-complete clause from the original
+    // is_stuck calc — fully completed games never emit stalled hints.
+    result.stage_progression_stalled = false;
+    if (setup.npc_arc_stages && Object.keys(setup.npc_arc_stages).length > 0) {{
+        var stallHints = (arc.guidance || arc.hints || {{}});
+        var threshold = stallHints.stuck_threshold_days || 7;
+        var sv = State.variables;
+        sv.game_state.stage_advancement_log = sv.game_state.stage_advancement_log || {{}};
+        var currentDay = (sv.game_state.time_state && sv.game_state.time_state.day) || 1;
+        var log = sv.game_state.stage_advancement_log;
+        var slugMap = setup.npc_slug_map || {{}};
+        var stalled = true;
+        for (var slug in setup.npc_arc_stages) {{
+            // Skip hidden NPCs — their advancement isn't visible to the
+            // player, so a hidden NPC stalling shouldn't fire stall hints.
+            var uuid = slugMap[slug];
+            var npc = uuid && sv.npcs ? sv.npcs[uuid] : null;
+            if (npc && npc.hidden_from_ui) continue;
+            var lastAdvance = log[slug] || 0;
+            if (currentDay - lastAdvance < threshold) {{ stalled = false; break; }}
+        }}
+        result.stage_progression_stalled = stalled;
+        // OR with existing canvas-stall, but keep the not-complete guard.
+        // Empty-arc edge case: totalNodes === 0 means there's no story-arc graph
+        // (test fixtures, prologue-only games) — treat any stall as honest.
+        if (stalled && (result.completed_nodes.length < totalNodes || totalNodes === 0)) {{
+            result.is_stuck = true;
+        }}
+    }}
+
     return result;
 }};
 
@@ -4368,6 +4414,18 @@ setup.generateNarrativeHint = function() {{
         hint_type: "none",
         text: ""
     }};
+
+    // E9: stage stall is a top-priority signal. Fires even when the player
+    // still has available canvases — the player is mid-graph but no NPC's
+    // stage chain is moving, which the doctrine treats as stalled.
+    if (position.stage_progression_stalled) {{
+        result.hint_type = "stage_stall";
+        var customMsg = hints.stage_stall_message;
+        result.text = (customMsg && String(customMsg).trim())
+            ? customMsg
+            : "Days are slipping past. Something needs to shift.";
+        return result;
+    }}
 
     // Only show hints when stuck or making slow progress
     if (!position.is_stuck && position.available_nodes.length > 0) {{
@@ -5304,6 +5362,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
     "visited_choices": {{}},
     "active_modifiers": {{}},
     "random_cooldowns": {{}},
+    "stage_advancement_log": {{}},
     "time_state": {{
         "current_hour": {time_settings['starting_hour']},
         "current_minute": 0,
