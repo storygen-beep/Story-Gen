@@ -1794,6 +1794,27 @@ def validate(template: GameTemplate) -> List[str]:
                         errors.append(f"{bctx}: 'flag' must be a string")
                     if "text" in band and not isinstance(band["text"], str):
                         errors.append(f"{bctx}: 'text' must be a string")
+        elif itype == "stage_label":
+            # E11: render "<NPC name>: <stage label>" from the NPC's arc_stages
+            # array indexed by $player.core_traits[<slug>_stage]. Distinct from
+            # trait_words because the label source is the per-NPC stage chain,
+            # not a trait-value band — overloading trait_words would force the
+            # bands validator into special-case branches.
+            ctx = f"sidebar_items[{i}] (stage_label)"
+            sl_npc_id = item.get("npc_id")
+            if not sl_npc_id:
+                errors.append(f"{ctx}: 'npc_id' is required")
+            elif sl_npc_id not in _npc_ids_for_sidebar:
+                errors.append(f"{ctx}: npc_id '{sl_npc_id}' not found in NPC definitions")
+            else:
+                sl_npc = next((n for n in template.npcs if n.id == sl_npc_id), None)
+                if sl_npc is None or not sl_npc.arc_stages:
+                    errors.append(
+                        f"{ctx}: NPC '{sl_npc_id}' has no arc_stages defined "
+                        f"(declare arc_stages on the NPC before using stage_label)"
+                    )
+            if "prefix" in item and not isinstance(item.get("prefix"), str):
+                errors.append(f"{ctx}: 'prefix' must be a string when set")
 
     # locations
     loc_ids = [l.id for l in template.locations]

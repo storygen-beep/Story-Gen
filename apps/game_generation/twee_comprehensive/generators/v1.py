@@ -10622,6 +10622,31 @@ if (clothingMsg) {
         <<print _twMatched>>
       </div>
     <</if>>
+  <<elseif _item.type is "stage_label">>
+    /* E11: render "<prefix>: <stage label>" sourced from arc_stages.
+       Stage value lives in $player.core_traits[<slug>_stage] (integer).
+       Out-of-range value → highest-defined label. Undefined trait → just
+       the prefix with no colon. Empty arc_stages → renders nothing. */
+    <<set _slNpcId to _item.npc_id>>
+    <<set _slStages to (setup.npc_arc_stages && setup.npc_arc_stages[_slNpcId]) ? setup.npc_arc_stages[_slNpcId] : []>>
+    <<set _slRawStage to ($player && $player.core_traits) ? $player.core_traits[_slNpcId + "_stage"] : undefined>>
+    <<set _slPrefix to _item.prefix>>
+    <<if not _slPrefix>>
+      <<set _slUuid to (setup.npc_slug_map && setup.npc_slug_map[_slNpcId]) ? setup.npc_slug_map[_slNpcId] : _slNpcId>>
+      <<set _slNpcObj to State.variables.npcs ? State.variables.npcs[_slUuid] : null>>
+      <<set _slPrefix to _slNpcObj ? (_slNpcObj.name || _slNpcId) : _slNpcId>>
+    <</if>>
+    <<if _slStages.length gt 0 and _slRawStage isnot undefined>>
+      <<set _slIdx to Math.max(0, Math.min(Number(_slRawStage), _slStages.length - 1))>>
+      <<set _slLabel to _slStages[_slIdx]>>
+      <div class="sidebar-item stage-label-item" id="sidebar-stage-label-<<print _si>>">
+        <<print _slPrefix>>: <<print _slLabel>>
+      </div>
+    <<elseif _slPrefix>>
+      <div class="sidebar-item stage-label-item" id="sidebar-stage-label-<<print _si>>">
+        <<print _slPrefix>>
+      </div>
+    <</if>>
   <</if>>
 <</for>>
 </div>

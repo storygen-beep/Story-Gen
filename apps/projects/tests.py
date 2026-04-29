@@ -1422,3 +1422,126 @@ class ArcStagesIntegrationTests(TestCase):
             twee,
             r'"npc_frank"\s*:\s*\[\s*"Suspicious"\s*,\s*"Warm"\s*,\s*"Restrict"',
         )
+
+
+# -- E11: stage_label sidebar item -------------------------------------------
+
+
+def _toml_with_stage_label(item, arc_stages=None):
+    """Minimal TOML with one sidebar_items entry; Frank gets arc_stages
+    unless explicitly set to empty."""
+    d = _base_toml()
+    d["npcs"][0]["arc_stages"] = (
+        _FRANK_ARC_STAGES if arc_stages is None else arc_stages
+    )
+    d["sidebar_items"] = [item]
+    return d
+
+
+class StageLabelSidebarSchemaTests(SimpleTestCase):
+    def test_minimal_valid_stage_label(self):
+        item = {"type": "stage_label", "npc_id": "npc_frank"}
+        template = normalize(_toml_with_stage_label(item))
+        self.assertEqual(validate(template), [])
+
+    def test_stage_label_with_prefix(self):
+        item = {"type": "stage_label", "npc_id": "npc_frank", "prefix": "Stepdad"}
+        template = normalize(_toml_with_stage_label(item))
+        self.assertEqual(validate(template), [])
+
+    def test_missing_npc_id_fails(self):
+        item = {"type": "stage_label"}
+        template = normalize(_toml_with_stage_label(item))
+        errors = validate(template)
+        self.assertTrue(
+            any("stage_label" in e and "npc_id" in e and "required" in e for e in errors),
+            errors,
+        )
+
+    def test_unknown_npc_id_fails(self):
+        item = {"type": "stage_label", "npc_id": "npc_ghost"}
+        template = normalize(_toml_with_stage_label(item))
+        errors = validate(template)
+        self.assertTrue(
+            any(
+                "stage_label" in e and "npc_ghost" in e and "not found" in e
+                for e in errors
+            ),
+            errors,
+        )
+
+    def test_npc_without_arc_stages_fails(self):
+        item = {"type": "stage_label", "npc_id": "npc_frank"}
+        # Force arc_stages empty — npc_frank has no stage chain.
+        template = normalize(_toml_with_stage_label(item, arc_stages=[]))
+        errors = validate(template)
+        self.assertTrue(
+            any(
+                "stage_label" in e and "arc_stages" in e and "npc_frank" in e
+                for e in errors
+            ),
+            errors,
+        )
+
+    def test_non_string_prefix_fails(self):
+        item = {"type": "stage_label", "npc_id": "npc_frank", "prefix": 7}
+        template = normalize(_toml_with_stage_label(item))
+        errors = validate(template)
+        self.assertTrue(
+            any("stage_label" in e and "prefix" in e and "string" in e for e in errors),
+            errors,
+        )
+
+
+class StageLabelSidebarIntegrationTests(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        User = get_user_model()
+        cls.user = User.objects.create_user(
+            email="stage-label-test@example.com", password="testpass123"
+        )
+        with open(FIXTURE_PATH, "rb") as f:
+            cls.toml_data = tomli.load(f)
+
+    def _build(self, mutator=None):
+        toml_data = copy.deepcopy(self.toml_data)
+        if mutator is not None:
+            mutator(toml_data)
+        template = normalize(toml_data)
+        errors = validate(template)
+        self.assertEqual(errors, [], f"Should validate clean: {errors}")
+        result = create_project_from_template(template, str(self.user.id))
+        project = Project.objects.get(id=result["project_id"])
+        from apps.game_generation.twee_comprehensive.generators.v1 import (
+            TweeComprehensiveGeneratorV1,
+        )
+        twee = TweeComprehensiveGeneratorV1().generate(project)
+        return project, twee
+
+    def test_stage_label_branch_emitted_when_configured(self):
+        def mutate(d):
+            for n in d.get("npcs", []):
+                if n.get("id") == "npc_frank":
+                    n["arc_stages"] = _FRANK_ARC_STAGES
+                    break
+            d.setdefault("sidebar_items", []).append({
+                "type": "stage_label",
+                "npc_id": "npc_frank",
+                "prefix": "Frank",
+            })
+
+        _, twee = self._build(mutator=mutate)
+        # Render block must be present in the sidebar widget.
+        self.assertIn('_item.type is "stage_label"', twee)
+        # Trait name derivation visible in the emitted Twee.
+        self.assertIn('_slNpcId + "_stage"', twee)
+        # Out-of-range clamp uses Math.min against arc_stages.length - 1.
+        self.assertRegex(twee, r"Math\.min\(Number\(_slRawStage\),\s*_slStages\.length\s*-\s*1\)")
+
+    def test_stage_label_render_block_present_even_without_item(self):
+        # The widget's elseif branch is part of the static widget definition,
+        # so it ships even when no stage_label item is configured. This keeps
+        # authoring forward-compatible: adding a stage_label later doesn't
+        # require a regenerate.
+        _, twee = self._build()
+        self.assertIn('_item.type is "stage_label"', twee)
