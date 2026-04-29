@@ -1,0 +1,280 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+#  ENGINE PRD PHASE 2 DEMO — "The Long Summer (Phase 2 minimal)"
+#  Date: 2026-04-29
+#  Purpose: Didactic test fixture exercising E9, E10, E11 from
+#           28th_april_TLS_Phase2_Redesign/08_Engine_PRD_Phase2_Additions.md
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+#  Companion to engine_prd_2026_04_22.toml (the F1–F4 fixture). This one
+#  layers the Phase 2 hint-subsystem additions on top of the same minimal
+#  shape — a player, one NPC (Frank) with an arc_stages chain, a kitchen
+#  hub, and a couple of scenes that move frank_stage so the hint pool can
+#  rotate.
+#
+#  ───────────────────────── The three PRD additions ─────────────────────────
+#
+#    E9  stage-flag stalled-progress detection
+#        → stuck_threshold_days + stage_stall_message in [story_arc.hints]
+#        → triggered when no NPC's <slug>_stage trait advances for N days
+#        → fires position.stage_progression_stalled, OR'd into is_stuck
+#
+#    E10 stage-gated hint pool + per-NPC template consumer
+#        → stage_npc/stage_op/stage_value triple on hint condition
+#        → npc_id routing on the template (defaults to stage_npc)
+#        → setup.getStageHintForNPC + setup.npcSlugForId at runtime
+#        → wired into getNextActivity, QuestsPage, getSidebarHint
+#
+#    E11 stage_label sidebar item type
+#        → reads $player.core_traits[<slug>_stage] → arc_stages[stage] label
+#        → renders "<NPC name>: <stage label>" in the sidebar
+#        → out-of-range clamps to highest label; undefined → just NPC name
+#
+#  ─────────────────────── Foundation: arc_stages on NPC ─────────────────────
+#
+#  All three items consume [[npcs]].arc_stages — the per-NPC ordered list
+#  of stage display names. Length implies max stage value (len-1). Empty =
+#  no stage chain. The integer stage value lives in the player's core_traits
+#  under <slug>_stage (NOT in $player.flags — the engine's flag system is
+#  boolean-only; stages are integers).
+#
+# ═══════════════════════════════════════════════════════════════════════════════
+
+schema_version    = "0.2"
+starting_canvas   = "scene_wake_up"
+
+[project]
+id          = "engine_prd_phase2_demo"
+title       = "Engine PRD Phase 2 Demo"
+description = """
+Minimal Phase 2 fixture exercising E9 (stage-stall detection), E10 (stage-gated
+hint pool), and E11 (stage_label sidebar). One NPC (Frank) with a five-stage
+arc. Two test buttons advance the stage flag so the hint rotation is visible
+in the Quests page and sidebar.
+"""
+
+[time]
+enabled        = true
+starting_hour  = 7
+starting_day   = "Monday"
+starting_week  = 1
+
+# ──────────────────────────────────────────────────────────────────────────────
+#  [player] — note npc_frank_stage in core_traits.
+# ──────────────────────────────────────────────────────────────────────────────
+# The stage trait MUST exist in core_traits — applyAndNotifyTrait writes
+# integer values there, and validate() rejects effects targeting unknown
+# trait keys. Default starting value is 0 (stage 0 = "Suspicious").
+#
+# DO NOT add npc_frank_stage to player.trait_decay — validate() rejects
+# that combination because decay bypasses applyAndNotifyTrait, which is
+# where E9 hooks the advancement log. Stage values must move only via
+# explicit choice effects.
+
+[player]
+id          = "player"
+name        = "Maya"
+description = "Phase 2 protagonist. Same minimum-viable shape as the F1–F4 fixture."
+core_traits = { energy = 100, hygiene = 100, awareness = 0, money = 40, npc_frank_stage = 0 }
+flag_keys   = ["summer_started"]
+
+[player.trait_decay]
+hygiene = 3   # OK to decay non-stage traits.
+
+# ──────────────────────────────────────────────────────────────────────────────
+#  [[npcs]] — Frank, with the five-stage arc.
+# ──────────────────────────────────────────────────────────────────────────────
+# arc_stages drives all three Phase 2 features:
+#   - E9: registers Frank as a stage-chain NPC for stalled-detection.
+#   - E10: stage_gate validation refuses unknown stage_npc references and
+#          stage_value out of [0, len(arc_stages)-1].
+#   - E11: stage_label sidebar reads arc_stages[npc_frank_stage] to render
+#          the current stage's display name.
+
+[[npcs]]
+id          = "npc_frank"
+name        = "Frank"
+description = "Landlord. Fifties. Watches too long."
+core_traits = { trust = 20, arousal = 0 }
+flag_keys   = []
+arc_stages  = ["Suspicious", "Warm", "Restrict", "Tease", "Cracked"]
+
+[npcs.trait_decay]
+trust = 1   # NPC trait_decay is fine — stage_trait lives on PLAYER, not NPC.
+
+# ──────────────────────────────────────────────────────────────────────────────
+#  [[locations]] — minimum: home + kitchen.
+# ──────────────────────────────────────────────────────────────────────────────
+
+[[locations]]
+id                   = "loc_home"
+name                 = "Home"
+description          = "A small apartment over a corner store."
+navigation_order     = ["loc_kitchen"]
+
+[[locations]]
+id          = "loc_kitchen"
+name        = "Kitchen"
+description = "Frank's kitchen. The morning paper, the coffee pot, the radio low."
+entry_from  = "loc_home"
+
+# ──────────────────────────────────────────────────────────────────────────────
+#  [[sidebar_items]] — E11 stage_label.
+# ──────────────────────────────────────────────────────────────────────────────
+# The widget reads $player.core_traits.npc_frank_stage at every refresh,
+# indexes into setup.npc_arc_stages.npc_frank, and renders "Frank: <label>".
+# If npc_frank_stage is undefined the widget falls back to just "Frank".
+# If the value is out of range (e.g. dev-mode set to 99) it clamps to the
+# highest label ("Cracked").
+#
+# 'prefix' is optional — defaults to the NPC name. Override when the
+# narrative wants a different surface label (e.g. "Stepdad" instead of
+# the literal NPC name).
+
+[[sidebar_items]]
+type    = "stage_label"
+npc_id  = "npc_frank"
+prefix  = "Frank"
+
+# ──────────────────────────────────────────────────────────────────────────────
+#  [story_arc] — E9 stuck_threshold_days + stage_stall_message,
+#                E10 stage-gated hint templates.
+# ──────────────────────────────────────────────────────────────────────────────
+# Three hint templates, one per stage gate. Each fires when the player's
+# npc_frank_stage trait equals the stage_value. The Quests page and the
+# sidebar hint inherit the rotation automatically — getNextActivity checks
+# stage hints first, before walking the canvas activity graph.
+#
+# stage_stall_message is the custom message shown when the player has been
+# stalled for stuck_threshold_days in-game days without any stage advancing.
+# Without a custom message, the engine falls back to a generic line.
+
+[story_arc]
+version = "1.0"
+
+[story_arc.hints]
+stuck_threshold_days = 7
+stage_stall_message  = """
+Days are slipping past. Maya feels herself standing still — maybe it's time
+to find a new way to get through to Frank.
+"""
+
+[[story_arc.hints.templates]]
+text = "Try talking to Frank in the kitchen mornings — he warms up slow."
+condition = { stage_npc = "npc_frank", stage_op = "eq", stage_value = 0 }
+
+[[story_arc.hints.templates]]
+text = "Frank's started warming up. Ask if he could use a hand with bookkeeping."
+condition = { stage_npc = "npc_frank", stage_op = "eq", stage_value = 1 }
+
+[[story_arc.hints.templates]]
+text = "Things have shifted. The chores are the new way in."
+condition = { stage_npc = "npc_frank", stage_op = "eq", stage_value = 2 }
+
+# ──────────────────────────────────────────────────────────────────────────────
+#  [[canvases]] — starting + two stage-advance buttons for play-testing.
+# ──────────────────────────────────────────────────────────────────────────────
+# The two advance canvases let a tester walk Frank from Stage 0 → 1 → 2
+# without authoring full cascade content. They use op="set" to write the
+# integer stage value directly, which fires the E9 advancement-log hook
+# (applyAndNotifyTrait detects positive delta on a registered <slug>_stage
+# trait and stamps the current day).
+
+[[canvases]]
+id          = "scene_wake_up"
+name        = "Phase 2 Demo"
+description = "Starting canvas — kicks the game into the kitchen hub."
+
+[[canvases.nodes]]
+id     = "intro"
+name   = "Wake Up"
+blocks = [
+  { type = "heading",   content = "Phase 2 Demo" },
+  { type = "paragraph", content = "You wake up. Summer's started." },
+  { type = "paragraph", content = "(This fixture exercises E9 stage-stall, E10 stage-gated hints, and E11 stage_label sidebar. Visit the kitchen to use the dev buttons.)" },
+]
+exit_block = { type = "location", text = "Down to the kitchen", config = { destinationType = "specific", locationId = "loc_kitchen", time_progression_minutes = 0, flagEffects = [
+  { targetType = "player", flag = "summer_started" },
+] } }
+
+[[canvases]]
+id          = "scene_advance_frank_to_1"
+name        = "Dev: Advance Frank to Stage 1"
+description = "Test button — sets npc_frank_stage = 1. Sidebar should show 'Frank: Warm'."
+
+[canvases.trigger]
+location      = "loc_kitchen"
+is_active     = true
+is_repeatable = true
+[canvases.trigger.conditions]
+version = "1.0"
+items   = [
+  { type = "trait", subject = "player", trait_key = "npc_frank_stage", operator = "eq", value = 0 },
+]
+
+[[canvases.nodes]]
+id     = "advance"
+name   = "Bump Stage"
+blocks = [
+  { type = "paragraph", content = "Frank looks up from the paper. Something settles." },
+]
+[canvases.nodes.exit_block]
+type   = "location"
+text   = "Continue"
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_kitchen"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "npc_frank_stage", op = "set", value = 1 },
+]
+
+[[canvases]]
+id          = "scene_advance_frank_to_2"
+name        = "Dev: Advance Frank to Stage 2"
+description = "Test button — sets npc_frank_stage = 2. Sidebar should show 'Frank: Restrict'."
+
+[canvases.trigger]
+location      = "loc_kitchen"
+is_active     = true
+is_repeatable = true
+[canvases.trigger.conditions]
+version = "1.0"
+items   = [
+  { type = "trait", subject = "player", trait_key = "npc_frank_stage", operator = "eq", value = 1 },
+]
+
+[[canvases.nodes]]
+id     = "advance"
+name   = "Bump Stage"
+blocks = [
+  { type = "paragraph", content = "Frank's voice changes. The line moved." },
+]
+[canvases.nodes.exit_block]
+type   = "location"
+text   = "Continue"
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_kitchen"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "npc_frank_stage", op = "set", value = 2 },
+]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#  End of fixture. The Phase2IntegrationSmokeTest in apps/projects/tests.py
+#  builds this end-to-end and asserts every Phase 2 feature lands in the twee.
+#
+#  Manual play-test checklist:
+#    1. Build via: python manage.py package_from_toml --file
+#       apps/game_generation/games_toml_files/engine_prd_phase2_2026_04_29.toml
+#       --owner-id <uuid> --output /tmp/phase2_demo
+#    2. Open output index.html in a browser.
+#    3. Sidebar at start: "Frank: Suspicious" (E11 stage 0).
+#    4. Visit kitchen, click "Bump Stage" → sidebar: "Frank: Warm".
+#    5. Hint rotates from Stage-0 hint to Stage-1 hint in QuestsPage (E10).
+#    6. Click "Bump Stage" again → "Frank: Restrict", Stage-2 hint visible.
+#    7. Force frank_stage = 99 in dev console → still shows "Frank: Cracked"
+#       (E11 highest-defined fallback).
+#    8. Don't advance for 7 in-game days (use dev day-jump if available)
+#       → E9 stage_stall_message fires in StoryJournal/sidebar.
+# ═══════════════════════════════════════════════════════════════════════════════

@@ -1909,3 +1909,70 @@ class StageGatedHintIntegrationTests(TestCase):
         _, twee = self._build(mutator=mutate)
         self.assertIn('"flag_key": "frank_caught"', twee)
         self.assertIn('"operator": "is_false"', twee)
+
+
+# -- E9+E10+E11 fixture-driven smoke test ------------------------------------
+
+
+PHASE2_FIXTURE_PATH = (
+    Path(__file__).resolve().parent.parent
+    / "game_generation"
+    / "games_toml_files"
+    / "engine_prd_phase2_2026_04_29.toml"
+)
+
+
+class Phase2IntegrationSmokeTest(TestCase):
+    """End-to-end check on the Phase 2 didactic fixture. If this breaks, the
+    fixture and the engine code drifted apart — fix one or the other."""
+
+    @classmethod
+    def setUpTestData(cls):
+        User = get_user_model()
+        cls.user = User.objects.create_user(
+            email="phase2-smoke-test@example.com", password="testpass123"
+        )
+
+    def test_phase2_fixture_builds_clean_with_all_three_features(self):
+        with open(PHASE2_FIXTURE_PATH, "rb") as f:
+            toml_data = tomli.load(f)
+        template = normalize(toml_data)
+        errors = validate(template)
+        self.assertEqual(errors, [], f"Phase 2 fixture should validate clean: {errors}")
+        result = create_project_from_template(template, str(self.user.id))
+        project = Project.objects.get(id=result["project_id"])
+        from apps.game_generation.twee_comprehensive.generators.v1 import (
+            TweeComprehensiveGeneratorV1,
+        )
+        twee = TweeComprehensiveGeneratorV1().generate(project)
+
+        # Foundation: arc_stages registry shipped with all five labels.
+        self.assertIn('"npc_frank"', twee)
+        for label in ["Suspicious", "Warm", "Restrict", "Tease", "Cracked"]:
+            self.assertIn(f'"{label}"', twee)
+
+        # E11: stage_label sidebar branch present.
+        self.assertIn('_item.type is "stage_label"', twee)
+
+        # E9: advancement-log hook + custom stall message + threshold round-trip.
+        self.assertIn("stage_advancement_log", twee)
+        self.assertIn("Days are slipping past. Maya feels herself", twee)
+        self.assertIn('"stuck_threshold_days": 7', twee)
+
+        # E10: template consumer + per-stage normalized condition_items.
+        self.assertIn("setup.getStageHintForNPC", twee)
+        # The three template texts must each appear in the runtime — that's
+        # the most distinctive signal. (Counting trait_key occurrences is
+        # noisy because canvas trigger conditions also reference the stage
+        # trait; we don't depend on that count here.)
+        self.assertIn("Try talking to Frank in the kitchen", twee)
+        self.assertIn("Frank's started warming up", twee)
+        self.assertIn("Things have shifted. The chores are the new way", twee)
+        self.assertIn('"npc_id": "npc_frank"', twee)
+        # The normalized trait condition lands at minimum 3× — once per
+        # hint template. (Canvas triggers add more; we just want the
+        # template-emission path to be present.)
+        self.assertGreaterEqual(twee.count('"trait_key": "npc_frank_stage"'), 3)
+
+        # QuestsPage render branches for stage hints (player + NPC sections).
+        self.assertEqual(twee.count("<<elseif _next.isStageHint>>"), 2)
