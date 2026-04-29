@@ -1,9 +1,11 @@
 # 08 — Engine PRD: Phase 2 Doctrine Additions
 
-> **Created 2026-04-29.**
+> **Created 2026-04-29. Implemented 2026-04-30.**
 > Sibling addendum to `03_Engine_Changes_PRD.md`. Does not supersede it.
 > Scope: the engine work the Phase 2 doctrine (`01_Repeatable_First_Doctrine.md`) demands beyond what 03 already covers.
 > Three items: E9, E10, E11. Phase-2-doctrine items only — nice-to-haves and deferrals are explicitly listed in §9.
+>
+> **Status: all three items shipped.** §11 documents what was actually built, the deviations from the original spec text, and the commit list. The §1 prescriptive text is preserved as the historical contract — read §11 for current implementation truth.
 
 ---
 
@@ -259,11 +261,15 @@ Runtime (v1.py sidebar render block):
 
 | ID | Item | Priority | Risk | Effort | Status |
 |---|---|---|---|---|---|
-| E9 | Stage-flag stalled-progress detection | P1 | Medium — interacts with existing `is_stuck` flow; mitigation is OR logic, not replacement | ~80–120 lines, 4–6h | 🟦 specified |
-| E10 | Stage-gated hint pool + per-NPC stage routing | P1 | Medium — schema + validator + runtime selector. Backwards-compatible | ~100–150 lines, 6–8h | 🟦 specified |
-| E11 | NPC stage display in sidebar | P2 | Low — cosmetic + small validator extension | ~40–60 lines, 2–3h | 🟦 specified |
+| E9 | Stage-flag stalled-progress detection | P1 | Medium — interacts with existing `is_stuck` flow; mitigation is OR logic, not replacement | ~80–120 lines spec, ~210 lines actual | ✅ shipped 2026-04-30 (commit `520815b`) |
+| E10 | Stage-gated hint pool + per-NPC stage routing | P1 | Medium — schema + validator + runtime selector. Backwards-compatible | ~100–150 lines spec, ~470 lines actual (template consumer was missing) | ✅ shipped 2026-04-30 (commit `efbca85`) |
+| E11 | NPC stage display in sidebar | P2 | Low — cosmetic + small validator extension | ~40–60 lines spec, ~170 lines actual | ✅ shipped 2026-04-30 (commit `6bd7d63`) |
+| — | `[[npcs]].arc_stages` schema (foundation for E9/E10/E11) | — | Low — additive, default empty | ~200 lines | ✅ shipped 2026-04-30 (commit `906869b`) — undeferred from §5 |
+| — | Phase 2 didactic fixture + smoke test | — | — | ~350 lines | ✅ shipped 2026-04-30 (commit `da918c1`) |
 
-**Total effort estimate: ~12–17 hours of engineering work.** Three small, independent items shippable in any order.
+**Total effort estimate (original): ~12–17 hours.** Actual: ~14h, near the upper end. The major deltas: E10's template consumer was missing entirely (PRD glossed over this), and the foundation `arc_stages` schema was undeferred from §5 to ground the registry on schema rather than on a regex fallback.
+
+See **§11 As built** for implementation notes, deviations from spec, and commit/code-location pointers.
 
 ---
 
@@ -345,15 +351,19 @@ The "Phase 2 doctrine items only" scope decision excludes the following, with ra
 
 ## §7 Status (per-item ledger)
 
-**As of 2026-04-29:**
+**As of 2026-04-30 (updated from 2026-04-29 specified-but-not-started state):**
 
-| Item | Status | Owner | Target |
+| Item | Status | Commit | Notes |
 |---|---|---|---|
-| E9 | 🟦 Specified, not started | TBD | Phase 2 vertical-slice prerequisite |
-| E10 | 🟦 Specified, not started | TBD | Phase 2 vertical-slice prerequisite |
-| E11 | 🟦 Specified, not started | TBD | Phase 2 polish (post-vertical-slice acceptable) |
+| Foundation: `[[npcs]].arc_stages` | ✅ Shipped 2026-04-30 | `906869b` | Undeferred from §5 to give E9/E10/E11 a registry-based foundation instead of regex fallback |
+| E9 | ✅ Shipped 2026-04-30 | `520815b` | Hook lives in `applyAndNotifyTrait`, not `applyFlagEffect` (PRD wrong — stage values are integer player traits) |
+| E10 | ✅ Shipped 2026-04-30 | `efbca85` | Template consumer built (was dead schema at runtime); reuses `setup.checkSingleCondition` |
+| E11 | ✅ Shipped 2026-04-30 | `6bd7d63` | Shipped as new `stage_label` type (NOT extending `trait_words` per PRD's open-question recommendation — see §11.5) |
+| Fixture + smoke test | ✅ Shipped 2026-04-30 | `da918c1` | `engine_prd_phase2_2026_04_29.toml` exercises all three |
 
-E9 and E10 should land before the vertical slice is authored, because the slice's stage-chain content can't be playtested without stage-aware hints. E11 can ship later — the slice plays correctly without it; players just don't see the named stage in the sidebar until E11 is in.
+**Test coverage delta:** 71 → 111 tests (40 new tests across 7 new test classes). Full suite green.
+
+**Vertical-slice readiness:** E9 + E10 + E11 are end-to-end ready for doctrine-driven Phase 2 content authoring. Manual play-test verification (PRD §4 acceptance criteria that depend on browser interaction) is NOT covered by pytest — see §11.6.
 
 ---
 
@@ -374,7 +384,7 @@ E9 and E10 should land before the vertical slice is authored, because the slice'
 - 🟦 Specified, not started — this PRD
 - ⏸ Deferred — rationale included in §5
 
-E9, E10, E11 all sit at 🟦 as of 2026-04-29.
+**Updated 2026-04-30:** E9, E10, E11 all moved 🟦 → ✅. See §7 ledger and §11 implementation notes.
 
 ---
 
@@ -386,3 +396,229 @@ It is not the implementation. (The work is specified; engineering execution is a
 It is not the journal display spec. (That's `07_Journal_Display_Spec.md`, deferred.)
 
 It is the engine work the Phase 2 doctrine demands beyond what was already shipped in 03. Three items, ~12–17 engineering hours, no new primitives, no breaking changes. When E9, E10, E11 land, the engine is end-to-end ready for the doctrine-driven Phase 2 rewrite.
+
+---
+
+## §11 As built — implementation notes (2026-04-30)
+
+This section documents what was actually shipped, the deviations from the original §1 prescriptive text, and where to find the code. The §1 text is preserved as the historical contract — read this section for current truth.
+
+### §11.1 Commit list
+
+Six commits on `main` (oldest → newest):
+
+| Commit | Subject |
+|---|---|
+| `5bb3470` | Engine PRD 03 (E1–E8) + Long Summer features (F1–F4) + tests — prerequisite baseline |
+| `906869b` | `arc_stages` schema: per-NPC stage display registry (E9/E10/E11 foundation) |
+| `6bd7d63` | E11: `stage_label` sidebar item — render "<NPC>: <stage>" from `arc_stages` |
+| `520815b` | E9: stage-flag stalled-progress detection |
+| `efbca85` | E10: stage-gated hints + per-NPC template consumer |
+| `da918c1` | Phase 2 didactic fixture + smoke test (E9/E10/E11 end-to-end) |
+
+The 2026-04-29 working tree carried ~2000 lines of uncommitted E1–E8 + F1–F4 implementation that needed committing as a prerequisite — `5bb3470`. Without that baseline, E9–E11 patches would have mixed into the same diff and lost bisectability.
+
+### §11.2 Foundation: `[[npcs]].arc_stages` schema
+
+The PRD §5 explicitly deferred the `[[npcs]].arc_stages` schema, recommending a runtime regex fallback (`^[a-z_]+_stage$` + integer-value check). During planning we undeferred it because:
+
+- The regex fallback would catch any flag named `*_stage` (e.g. `life_stage`, `pregnancy_stage`) and pollute stalled-detection.
+- A single explicit registry serves all three items: E9 (stalled-detection scope), E10 (hint stage_gate validation), E11 (sidebar display labels).
+- The schema cost is small — one new field on `TemplateNPC`, one validator, one registry emission.
+
+**Schema** (`apps/projects/services/template_import.py`):
+```python
+@dataclass
+class TemplateNPC:
+    # ...
+    arc_stages: List[str] = field(default_factory=list)
+```
+
+**TOML authoring:**
+```toml
+[[npcs]]
+id = "npc_frank"
+arc_stages = ["Suspicious", "Warm", "Restrict", "Tease", "Cracked"]
+```
+
+**Validation:**
+- All entries strings; non-list raises `TypeError`.
+- Length ≥ 1 if present (empty = no stage chain).
+- **`<slug>_stage` MUST NOT appear in `player.trait_decay`** when arc_stages is declared. Decay bypasses `applyAndNotifyTrait`, which is where E9 hooks the advancement log — this collision would silently break stalled-detection.
+
+**Runtime emission** at `v1.py:2031` area (alongside `setup.stage_helpers`):
+```javascript
+setup.npc_arc_stages = {"npc_frank": ["Suspicious", "Warm", "Restrict", "Tease", "Cracked"], ...};
+```
+
+Slug-keyed. Trait name is derived as `slug + "_stage"` everywhere — never stored.
+
+**Help-data hook**: not needed — the runtime registry is read via `setup.npc_arc_stages` directly, not via `_helpData.npcs[uuid]`.
+
+### §11.3 E9 — Stage-flag stalled-progress detection (commit `520815b`)
+
+**Schema additions** to `TemplateStoryHints`:
+- `stuck_threshold_days: int = 7` — N-day window for stalled detection.
+- `stage_stall_message: str = ""` — author-customized stall hint text. Empty falls back to the generic line.
+
+The PRD's open-question §1 left `stage_stall_message` as a future enhancement; we shipped it because a bare `is_stuck` augmentation would emit the generic "explore more" hint without per-game color, and the cost was ~30 minutes.
+
+**Critical PRD correction:** PRD's proposed code shows the advancement-log hook inside `applyFlagEffect` (the boolean flag handler). That's wrong — stage values are integer player traits, not booleans. The engine's flag system is boolean-only. Stage values move via `setup.applyAndNotifyTrait("player", null, "<slug>_stage", "set", N)`.
+
+**Hook location:** `v1.py:applyAndNotifyTrait` (around line 4015 post-edit). The function already exposes `oldVal`, `newVal`, `delta` in scope. The hook is one if-block that fires when:
+- `targetType === 'player'` AND
+- `delta > 0` (positive advancement only — `set` writes that decrease don't count) AND
+- `trait` matches `^([a-z_]+)_stage$` AND
+- the captured slug is in `setup.npc_arc_stages`
+
+On match, stamps `$game_state.stage_advancement_log[slug] = current_day`.
+
+**`$game_state` init** at `v1.py:5288` — `"stage_advancement_log": {}` added alongside `random_cooldowns`. Lazy-init defensive (`sv.game_state.stage_advancement_log = sv.game_state.stage_advancement_log || {}`) at every read site — handles in-flight saves.
+
+**Stall computation** in `detectStoryPosition` after the existing `is_stuck` calc (`v1.py:4266` area). The block:
+- Skips entirely when `setup.npc_arc_stages` is empty (existing TOMLs without stage chains see identical behavior).
+- Iterates the registry; if any non-hidden NPC has advanced within the threshold, `stalled = false`.
+- ORs into `is_stuck` while preserving the not-complete clause from the original calc. Edge case: `totalNodes === 0` (test fixtures, prologue-only games) treats any stall as honest.
+
+**Hidden NPCs** (`hidden_from_ui = true`) are excluded from stall computation — their advancement isn't visible to the player anyway.
+
+**Hint emission** in `generateNarrativeHint`. New top branch (above the existing `incompleteGroup` check) fires `hint_type = "stage_stall"` with the custom message or generic fallback. The existing gate at `v1.py:4419` was extended so stage-stall fires hints even when the player still has available canvases.
+
+**Tests:** 3 schema + 6 integration. See `StageStallSchemaTests` and `StageStallIntegrationTests` in `apps/projects/tests.py`.
+
+### §11.4 E10 — Stage-gated hint pool + template consumer (commit `efbca85`)
+
+**Schema additions** to `TemplateHintCondition` (flat fields per PRD recommendation, not nested `stage_gate` sub-object):
+- `stage_npc: Optional[str] = None`
+- `stage_op: Optional[str] = None` — `eq` | `gte` | `lte`
+- `stage_value: Optional[int] = None`
+
+Plus on `TemplateHintTemplate`:
+- `npc_id: Optional[str] = None` — routing field. Defaults to `stage_npc` from the condition when not explicitly set.
+
+**Validation** (in `validate()`):
+- Tri-required: all three of `stage_npc`/`stage_op`/`stage_value` must be set together (partial triple → error).
+- `stage_op` ∈ `{eq, gte, lte}`.
+- `stage_npc` must reference an NPC that has `arc_stages` declared (catches the typo case + the no-stage-chain case with distinct error messages).
+- `0 ≤ stage_value < len(arc_stages)`.
+- `npc_id` (when set explicitly) must exist in the roster.
+
+**Critical scope expansion not in original PRD:** `TemplateHintTemplate` was **dead schema at runtime** — parsed and JSON-emitted but never iterated by the runtime JS. The PRD's `~6–8h` estimate assumed a consumer existed. We had to build it. Final effort: ~8h, near the upper end of the original window after picking up the `setup.checkSingleCondition` reuse below.
+
+**Normalization at template_import time** — new helper `_serialize_hint_template(t)` in `template_import.py`. Converts the new and legacy condition fields into a normalized `condition_items` list reusable by `setup.checkSingleCondition` (the existing condition evaluator at `v1.py:4636`):
+- Stage-gate triple → `{type: "trait", subject: "player", trait_key: "<slug>_stage", operator: <op>, value: <int>}`
+- `missing_flag` → `{type: "flag", subject: "player", flag_key: "<flag>", operator: "is_false"}`
+- `missing_trait` and `gap_gte` preserved in the legacy `condition` shape but NOT normalized — these are PRD 03 legacy with no author-spec'd subject; disambiguating them is follow-up work. Authors targeting E10 use stage_gate or `missing_flag` for predicate logic.
+
+**Reuse decision (key efficiency win):** the original PRD spec proposed a new `stageGateMatches` helper. Plan agent recommended reusing the existing `setup.checkSingleCondition` instead, by normalizing at template_import time. This drops the runtime JS changes from "new evaluator + dispatcher" to "iterate templates + call existing evaluator." Cleanest reuse path in the codebase.
+
+**Runtime — two new functions** in `v1.py`:
+- `setup.npcSlugForId(npcId)` — UUID → slug inverse of `npc_slug_map`. Returns null for the player pseudo-id and stale UUIDs.
+- `setup.getStageHintForNPC(npcSlug)` — walks `arc.hints.templates`, picks the first template whose `npc_id` matches AND whose `condition_items` all pass `setup.checkSingleCondition`. Returns `{text, npc_id}` or null.
+
+**Wired into:**
+- `getNextActivity(npcId)` — early-return at the top with `{isStageHint: true, stageHint: {...}}` shape. Stage hints win priority over the canvas-graph walk (per doctrine — flag movement IS the story).
+- `getSidebarHint()` — extracts `stageHint.text` first.
+- `QuestsPage` — new `<<elseif _next.isStageHint>>` render branch in BOTH the player section and the NPC loop. Two render branches total — verified by test count assertion.
+
+**Routing ergonomics:** when authors set `stage_npc` on the condition but omit `npc_id` on the template, `npc_id` defaults to `stage_npc`. Eliminates the common-case duplication.
+
+**Tests:** 8 schema + 6 integration. See `StageGatedHintSchemaTests` and `StageGatedHintIntegrationTests`.
+
+### §11.5 E11 — `stage_label` sidebar item (commit `6bd7d63`)
+
+**Deviation from PRD letter:** PRD §1 E11 recommended extending `trait_words` with `source = "stage"`. We shipped a NEW sidebar item type `stage_label` instead.
+
+Rationale: the `trait_words` validator already requires non-empty `bands` with min/max OR flag-driven matching. Special-casing it for `source = "stage"` would proliferate validator branches. Distinct authoring vocabulary keeps both surfaces simple. (Plan agent recommendation, user-approved.)
+
+**Schema** validator extension in `template_import.py:1697` area, sibling `elif itype == "stage_label":` branch:
+- Required: `npc_id` (slug, must reference an NPC with `arc_stages` declared)
+- Optional: `prefix` (string; defaults to NPC name at render time)
+
+**Runtime** at `v1.py:10625` area. New `<<elseif _item.type is "stage_label">>` branch in the sidebarItems widget:
+- Reads `$player.core_traits[<slug>_stage]` as the integer stage value.
+- Looks up the label via `setup.npc_arc_stages[slug][stage]`.
+- Out-of-range clamp: `Math.max(0, Math.min(value, stages.length - 1))` → highest defined label.
+- Undefined trait → just the prefix with no colon (no broken markup).
+- Empty `arc_stages` AND no prefix → renders nothing.
+
+**TOML authoring:**
+```toml
+[[sidebar_items]]
+type    = "stage_label"
+npc_id  = "npc_frank"
+prefix  = "Frank"        # optional; defaults to NPC name
+```
+
+**Tests:** 6 schema + 2 integration. See `StageLabelSidebarSchemaTests` and `StageLabelSidebarIntegrationTests`.
+
+### §11.6 What's NOT verified — manual play-test required
+
+The pytest suite (111 tests, all green) verifies the **code is emitted correctly** — it greps the generated twee for the right substrings, JSON shapes, render branches, etc. It does NOT execute the JavaScript at runtime. Several PRD §4 acceptance criteria depend on browser interaction:
+
+- **E9 #6**: "frank_stage = 0, day 8, no stage advance since day 0 → stalled hint fires. Day 4 → no stalled hint." — Behavioral runtime check.
+- **E10 #2/#3/#5**: "When frank_stage advances to N, Stage-N hint takes over and Stage-(N-1) hint stops." — Runtime rotation behavior.
+- **E11 #2/#3/#4/#5/#6**: Sidebar rendering, layout regression, dev-console fallback. — All visual.
+
+**Manual test fixture** at `apps/game_generation/games_toml_files/engine_prd_phase2_2026_04_29.toml`. Two dev buttons advance Frank stages 0→1→2 to drive the rotation. Bottom-of-file checklist matches PRD §4.
+
+**Build command:**
+```
+python manage.py package_from_toml \
+  --file apps/game_generation/games_toml_files/engine_prd_phase2_2026_04_29.toml \
+  --owner-id <uuid> --output /tmp/phase2_demo
+```
+
+Open the resulting `index.html` in a browser. Sidebar should show "Frank: Suspicious" at start; clicking the kitchen dev button should flip it to "Frank: Warm" and rotate the QuestsPage hint from Stage-0 to Stage-1.
+
+### §11.7 Resolved open questions
+
+The PRD §1 listed three open questions; here's how they resolved.
+
+| PRD open question | Resolution |
+|---|---|
+| E9: regex fallback vs explicit registry for `<npc>_stage` flags? | Built explicit `[[npcs]].arc_stages` schema (foundation, §11.2). Regex approach abandoned. |
+| E10: flat `stage_npc/stage_op/stage_value` vs nested `stage_gate = {...}` sub-object? | Flat fields, per PRD recommendation. Matches existing `missing_*`/`gap_*` flat-field convention. |
+| E11: extend `trait_words` with `source = "stage"` vs new `stage_display` type? | Shipped as new `stage_label` type — opposite of PRD recommendation. Rationale in §11.5. |
+
+### §11.8 Test coverage delta
+
+Before E9/E10/E11: 71 tests. After: 111 tests (+40 across 7 new test classes):
+
+| Test class | Schema | Integration |
+|---|---|---|
+| `ArcStagesSchemaTests` / `ArcStagesIntegrationTests` | 6 | 2 |
+| `StageLabelSidebarSchemaTests` / `StageLabelSidebarIntegrationTests` | 6 | 2 |
+| `StageStallSchemaTests` / `StageStallIntegrationTests` | 3 | 6 |
+| `StageGatedHintSchemaTests` / `StageGatedHintIntegrationTests` | 8 | 6 |
+| `Phase2IntegrationSmokeTest` | — | 1 |
+
+Run via:
+```
+source venv/bin/activate && DJANGO_SETTINGS_MODULE=config.settings.testing \
+  python -m pytest apps/projects/tests.py --override-ini="testpaths=apps/projects"
+```
+
+### §11.9 Where the code lives
+
+For future readers tracing E9/E10/E11 behavior:
+
+| Surface | File:area |
+|---|---|
+| Schema dataclasses | `apps/projects/services/template_import.py` — `TemplateNPC.arc_stages`, `TemplateHintCondition.stage_npc/stage_op/stage_value`, `TemplateHintTemplate.npc_id`, `TemplateStoryHints.stuck_threshold_days/stage_stall_message` |
+| Validation | `apps/projects/services/template_import.py:validate()` — arc_stages block (~1718), `stage_label` sidebar block (~1797), E10 stage_gate block (after E4 stage_helpers validation) |
+| Normalization | `apps/projects/services/template_import.py:_serialize_hint_template()` — converts stage_gate triple into reusable trait condition |
+| Runtime registry emission | `apps/game_generation/twee_comprehensive/generators/v1.py:2035` area — `setup.npc_arc_stages = {...}` |
+| E9 advancement-log hook | `v1.py:applyAndNotifyTrait` (post-edit ~line 4015) |
+| E9 stall computation | `v1.py:detectStoryPosition` (after the existing is_stuck calc) |
+| E9 stall hint emission | `v1.py:generateNarrativeHint` — top branch fires before fallthroughs |
+| E10 template consumer | `v1.py:setup.getStageHintForNPC` + `setup.npcSlugForId` (above `getNextActivity`) |
+| E10 routing into `getNextActivity` | Top of `getNextActivity(npcId)` — early-return with isStageHint shape |
+| E10 QuestsPage render | `v1.py:QuestsPage` — `<<elseif _next.isStageHint>>` in player section + NPC loop |
+| E10 sidebar wiring | `v1.py:getSidebarHint` — extracts stageHint.text first |
+| E11 sidebar render | `v1.py` sidebarItems widget — `<<elseif _item.type is "stage_label">>` branch |
+| `$game_state` init for E9 | `v1.py:5288` area — `"stage_advancement_log": {}` |
+| Test fixture | `apps/game_generation/games_toml_files/engine_prd_phase2_2026_04_29.toml` |
+| Tests | `apps/projects/tests.py` (post-baseline) — see §11.8 |
+
+Line numbers drift with edits; use `grep` against the function/identifier name, not the literal line cite.
