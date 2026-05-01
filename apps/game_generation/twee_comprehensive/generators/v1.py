@@ -9,7 +9,7 @@ import json
 import html
 import logging
 import re
-from typing import Any, Optional
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 from pathlib import Path
 
@@ -718,13 +718,38 @@ class TweeComprehensiveGeneratorV1:
         # E4: Stage helpers ([[engine.stage_helpers]]) — named composite gates.
         # Loaded as a list; runtime builds an O(1) name → helper lookup map.
         self.stage_helpers = (self.project.metadata or {}).get("stage_helpers", []) or []
+        # Pattern 2 (2026-05-01): label registries for setup.computeHintGoal.
+        # Maps internal trait/flag names → player-facing labels.
+        self.trait_labels = (self.project.metadata or {}).get("trait_labels", {}) or {}
+        self.flag_labels = (self.project.metadata or {}).get("flag_labels", {}) or {}
+        # Pattern 2: stage_setter_canvases — runtime index mapping
+        # (npc_slug, stage_value) → canvas_id for branch-inside-shell transitions
+        # (where the helper isn't the source of truth — the canvas's exit_block
+        # writes the stage flag directly). Built by scanning canvases' choice
+        # effects and exit_block.config.effects for `<npc>_stage = N` setters.
+        self.stage_setter_canvases = self._build_stage_setter_canvases_index()
+        # Pattern 3 (2026-05-01): activity_gates_index — map canvas → helpers it
+        # gates (for "→ gates Frank Stage 1" annotations on activity rows).
+        self.activity_gates_index = self._build_activity_to_gates_index()
 
         # Theme (visual customization)
         raw_theme = (self.project.metadata or {}).get("theme", {})
         self.theme = self._resolve_theme(raw_theme)
 
         # Sidebar items (custom display elements configurable via TOML)
-        self.sidebar_items = (self.project.metadata or {}).get("sidebar_items", [])
+        self.sidebar_items = list(
+            (self.project.metadata or {}).get("sidebar_items", []) or []
+        )
+        # E18 — auto-emit trait_bar sidebar items for counter traits referenced
+        # by stage helpers. Closes the "I can't see my counter" UX gap (hints
+        # like "×3 sessions" assume the player can track count). Skips if the
+        # author already authored a sidebar item for the same trait_key.
+        self._auto_emit_counter_sidebar_items()
+        # E20 — auto-emit trait_decay_warning sidebar items for decaying traits
+        # near the next stage gate. Renders an amber banner when a snapshot-vs-
+        # current comparison shows decrease today. Snapshot lives in
+        # State.variables.last_day_snapshot, populated in advanceDay().
+        self._auto_emit_decay_warning_sidebar_items()
         sidebar_items_json = json.dumps(self.sidebar_items)
 
         # Phone system data
@@ -2047,6 +2072,13 @@ setup.stage_helpers_map = {{}};
 for (var _shi = 0; _shi < setup.stage_helpers.length; _shi++) {{
     setup.stage_helpers_map[setup.stage_helpers[_shi].name] = setup.stage_helpers[_shi];
 }}
+// Pattern 2 (2026-05-01): label registries + stage-setter index for the
+// auto-rendered 🎯 goal block (setup.computeHintGoal).
+setup.trait_labels = {json.dumps(self.trait_labels)};
+setup.flag_labels = {json.dumps(self.flag_labels)};
+setup.stage_setter_canvases = {json.dumps(self.stage_setter_canvases)};
+// Pattern 3 (2026-05-01): activity-list gates index for QuestsPage activity rows.
+setup.activity_gates_index = {json.dumps(self.activity_gates_index)};
 // E9/E10/E11 foundation: per-NPC stage display names, slug-keyed.
 // Empty object = no NPC has a stage chain (existing TOMLs unaffected).
 // Trait name convention: <slug>_stage in $player.core_traits (integer 0..N).
@@ -2191,7 +2223,17 @@ setup._getNpcUuidToSlug = function() {{
     var slugMap = setup.npc_slug_map || {{}};
     var map = {{}};
     for (var slug in slugMap) {{
-        map[String(slugMap[slug])] = slug;
+        var uuid = String(slugMap[slug]);
+        // Prefer the canonical long-form `npc_<x>` slug over the short alias.
+        // npc_slug_map intentionally has both `npc_frank` and `frank` mapping
+        // to the same UUID (the short form supports `@frank.name` references
+        // in narrative text per v1.py:572-575). For UUID->slug lookups we want
+        // the long form because that's what canvas trigger metadata stores in
+        // `c.npcId`. Without this guard, JS object iteration order causes the
+        // short alias to overwrite the long form, breaking
+        // getNpcScheduleFromCanvases' string-equality filter.
+        if (map[uuid] && /^npc_/.test(map[uuid])) continue;
+        map[uuid] = slug;
     }}
     setup._npcUuidToSlugCache = map;
     return map;
@@ -3508,13 +3550,25 @@ setup.renderSoloActivities = function(locationId) {{
 
         var soloActivities = [];
         var soloBlocked = [];
+        var soloCooldownBlocked = [];  // E21: opt-in cooldown-visible entries
         for (var i = 0; i < canvasList.length; i++) {{
             var c = canvasList[i];
             if (!c.isRepeatable) continue;
             if ((c.triggerMode || "manual") === "random") continue;
             if (c.npcId) continue;  // Has NPC = shown as portrait, not here
-            if (!setup.isCanvasValid(c)) continue;
-            if (!setup.canTriggerActivity(c.name || c.id, c.maxPerDay)) continue;
+            if (!setup.isCanvasValid(c)) {{
+                // E21 — if author opted in, surface as a grayed cooldown entry
+                if (c.showWhenBlocked) {{
+                    soloCooldownBlocked.push(c);
+                }}
+                continue;
+            }}
+            if (!setup.canTriggerActivity(c.name || c.id, c.maxPerDay)) {{
+                if (c.showWhenBlocked) {{
+                    soloCooldownBlocked.push(c);
+                }}
+                continue;
+            }}
             if (c.costs && c.costs.length > 0 && !setup.checkCostsAffordable(c.costs)) {{
                 soloBlocked.push(c);
             }} else {{
@@ -3522,7 +3576,7 @@ setup.renderSoloActivities = function(locationId) {{
             }}
         }}
 
-        if (soloActivities.length === 0 && soloBlocked.length === 0) return '';
+        if (soloActivities.length === 0 && soloBlocked.length === 0 && soloCooldownBlocked.length === 0) return '';
 
         var html = '<div class="location-solo-activities">';
         // Affordable activities
@@ -3550,6 +3604,15 @@ setup.renderSoloActivities = function(locationId) {{
                 costTag = ' <span class="solo-cost-tag">(' + ct.value + ' ' + ctDisplay + ')</span>';
             }}
             html += '<a class="link-internal solo-activity-btn solo-activity-blocked" data-passage="' + bPassageName + '">' + bDisplayName + costTag + '</a><br>';
+        }}
+        // E21 — Cooldown-blocked activities (author opt-in via show_when_blocked).
+        // Render as non-clickable dimmed text with cooldown message.
+        for (var cd = 0; cd < soloCooldownBlocked.length; cd++) {{
+            var cdItem = soloCooldownBlocked[cd];
+            var cdDisplayName = cdItem.displayName || cdItem.name || 'Activity';
+            var cdMessage = cdItem.cooldownMessage || 'Available again later';
+            html += '<span class="solo-activity-cooldown">' + cdDisplayName +
+                    ' — <em>' + cdMessage + '</em></span><br>';
         }}
         html += '</div>';
 
@@ -3721,6 +3784,40 @@ window.advanceDay = function() {{
             }}
         }}
     }}
+
+    // E20 — snapshot decaying traits BEFORE decay applies. The render-time
+    // decay-warning widget compares snapshot vs current to detect "this
+    // trait dropped today" so it can show an amber banner.
+    (function _snapshotDecayingTraits() {{
+        if (!State.variables.last_day_snapshot) {{
+            State.variables.last_day_snapshot = {{}};
+        }}
+        var snap = State.variables.last_day_snapshot;
+        // Player traits
+        if (setup.player_trait_decay) {{
+            var pt = State.variables.player && State.variables.player.core_traits;
+            if (pt) {{
+                for (var ptKey in setup.player_trait_decay) {{
+                    if (typeof pt[ptKey] === "number") {{
+                        snap["player::" + ptKey] = pt[ptKey];
+                    }}
+                }}
+            }}
+        }}
+        // NPC traits
+        if (setup.npc_trait_decay) {{
+            for (var npcUuid in setup.npc_trait_decay) {{
+                var npc = State.variables.npcs && State.variables.npcs[npcUuid];
+                if (!npc || !npc.core_traits) continue;
+                var dc = setup.npc_trait_decay[npcUuid];
+                for (var traitName in dc) {{
+                    if (typeof npc.core_traits[traitName] === "number") {{
+                        snap["npc:" + npcUuid + ":" + traitName] = npc.core_traits[traitName];
+                    }}
+                }}
+            }}
+        }}
+    }})();
 
     // Trait decay: reduce NPC traits if player didn't interact today
     if (setup.npc_trait_decay && Object.keys(setup.npc_trait_decay).length > 0) {{
@@ -4499,6 +4596,14 @@ setup.npcSlugForId = function(npcId) {{
 // the matched NPC, useful for default fallback per-NPC content.
 setup.getStageHintForNPC = function(npcSlug) {{
     if (!npcSlug) return null;
+    // E17 — cleared-but-not-triggered detection. If the next stage's helper
+    // has cleared but the stage trait hasn't advanced yet (player needs to
+    // visit the transition canvas's location to fire it), synthesize a
+    // "ready" hint pointing at that location instead of the stale Stage-N
+    // baseline. Falls through to the regular template walk if no match.
+    var readyHint = setup._getReadyHintForNPC(npcSlug);
+    if (readyHint) return readyHint;
+
     var arc = setup.story_arc || {{}};
     var hints = (arc.guidance || arc.hints || {{}});
     var templates = hints.templates || [];
@@ -4514,10 +4619,713 @@ setup.getStageHintForNPC = function(npcSlug) {{
             }}
         }}
         if (allMet && tpl.text) {{
-            return {{ text: tpl.text, npc_id: npcSlug }};
+            // Pattern 2: pass through condition + tip + auto_goal so the
+            // renderer can compute the structured 🎯 goal block.
+            return {{
+                text: tpl.text,
+                npc_id: npcSlug,
+                condition: tpl.condition || null,
+                tip: tpl.tip || null,
+                auto_goal: (tpl.auto_goal !== false)
+            }};
         }}
     }}
     return null;
+}};
+
+// E20 — Decay warnings. For each threshold entry (auto-emitted from
+// stage helpers, see _auto_emit_decay_warning_sidebar_items in v1.py),
+// check if the trait value DROPPED since yesterday's snapshot AND is
+// within 2.0 of the next gate. Returns warning text objects for sidebar
+// rendering as amber banners.
+setup.getDecayWarnings = function(thresholds) {{
+    var snap = State.variables.last_day_snapshot || {{}};
+    var warnings = [];
+    if (!thresholds) return warnings;
+    for (var synthKey in thresholds) {{
+        var entries = thresholds[synthKey];
+        if (!Array.isArray(entries) || entries.length === 0) continue;
+        // Take the first entry to learn subject/key — they all share these.
+        var first = entries[0];
+        var subj = first.subject;
+        var traitKey = first.trait_key;
+        var npcId = first.npc_id || "";
+        // Resolve current trait value
+        var currentVal = null;
+        var snapKey = "";
+        var entityLabel = "";
+        if (subj === "player") {{
+            var pt = State.variables.player && State.variables.player.core_traits;
+            if (!pt || typeof pt[traitKey] !== "number") continue;
+            currentVal = pt[traitKey];
+            snapKey = "player::" + traitKey;
+            entityLabel = "Your";
+        }} else if (subj === "npc") {{
+            // npcId in helper is a slug — resolve to UUID
+            var resolvedUuid = (setup.npc_slug_map || {{}})[npcId] || npcId;
+            var npc = State.variables.npcs && State.variables.npcs[resolvedUuid];
+            if (!npc || !npc.core_traits || typeof npc.core_traits[traitKey] !== "number") continue;
+            currentVal = npc.core_traits[traitKey];
+            snapKey = "npc:" + resolvedUuid + ":" + traitKey;
+            // Look up NPC display name
+            entityLabel = (npc.name || npcId);
+        }} else {{
+            continue;
+        }}
+        // Need a snapshot AND current must be < snapshot (decreased today)
+        if (!(snapKey in snap)) continue;
+        var snapVal = snap[snapKey];
+        if (currentVal >= snapVal) continue;  // Did not decrease
+        // Find next gate above current (lowest threshold > currentVal)
+        var nextGate = null;
+        for (var ei = 0; ei < entries.length; ei++) {{
+            var v = entries[ei].value;
+            if (v > currentVal && (nextGate === null || v < nextGate)) {{
+                nextGate = v;
+            }}
+        }}
+        if (nextGate === null) continue;  // Already past all gates
+        // Only warn if within 2.0 of the next gate
+        if (nextGate - currentVal > 2.0) continue;
+        // Build human-readable warning
+        var dropAmount = (snapVal - currentVal).toFixed(1);
+        warnings.push({{
+            text: entityLabel + " " + traitKey + " dropping (" + currentVal.toFixed(1) +
+                  " today, was " + snapVal.toFixed(1) + " yesterday). " +
+                  "Next gate at " + nextGate + " — interact today or lose more."
+        }});
+    }}
+    return warnings;
+}};
+
+// E15 — Global hint walker. Returns ALL templates with no npc_id whose
+// condition_items pass. Used by QuestsPage to render a "Story Goals"
+// section above per-NPC sections (rent, hygiene, energy, etc.).
+setup.getGlobalHints = function() {{
+    var arc = setup.story_arc || {{}};
+    var hints = (arc.guidance || arc.hints || {{}});
+    var templates = hints.templates || [];
+    var matches = [];
+    for (var ti = 0; ti < templates.length; ti++) {{
+        var tpl = templates[ti];
+        if (!tpl || tpl.npc_id) continue;  // global = no npc_id
+        var items = tpl.condition_items || [];
+        var allMet = true;
+        for (var ci = 0; ci < items.length; ci++) {{
+            if (!setup.checkSingleCondition(items[ci])) {{
+                allMet = false;
+                break;
+            }}
+        }}
+        if (allMet && tpl.text) {{
+            matches.push({{
+                text: tpl.text,
+                npc_id: null,
+                condition: tpl.condition || null,
+                tip: tpl.tip || null,
+                auto_goal: (tpl.auto_goal !== false)
+            }});
+        }}
+    }}
+    return matches;
+}};
+
+// E17 — Synthesize a "ready" hint when the NPC's next-stage helper has
+// cleared but the stage trait hasn't advanced yet. Returns null when no
+// such state, or no helper exists for the next stage.
+setup._getReadyHintForNPC = function(npcSlug) {{
+    if (!npcSlug) return null;
+    // Current stage trait lives at $player.core_traits[<slug>_stage]
+    var pl = State.variables.player;
+    var traits = (pl && pl.core_traits) || {{}};
+    var stageKey = npcSlug + "_stage";
+    var curStage = traits[stageKey];
+    if (typeof curStage !== "number") return null;
+    // Helper convention: "<bare>_stage_<N+1>" where bare = npcSlug w/o "npc_" prefix.
+    var bareSlug = npcSlug.replace(/^npc_/, "");
+    var helperName = bareSlug + "_stage_" + (curStage + 1);
+    var helper = (setup.stage_helpers_map || {{}})[helperName];
+    if (!helper || !helper.conditions) return null;
+    // Evaluate the helper's conditions against current state.
+    var cleared = false;
+    try {{
+        cleared = setup.triggerConditionsSatisfied(helper.conditions);
+    }} catch (e) {{
+        return null;
+    }}
+    if (!cleared) return null;
+    // Helper cleared. Find the transition canvas's location.
+    var locName = setup._findHelperTransitionLocation(helperName);
+    if (!locName) return null;
+    return {{
+        text: "All gates cleared. — 🎯 Visit " + locName + " to seal the moment.",
+        npc_id: npcSlug,
+        isReadyHint: true,
+        // Pattern 2: synthesized hint — no condition / tip; widget renders
+        // legacy " — 🎯 " split path because there's no helper context.
+        auto_goal: false
+    }};
+}};
+
+// =====================================================================
+// Pattern 2 (2026-05-01) — auto-render the structured 🎯 goal block
+// =====================================================================
+// Author writes only narrative text + optional `tip`. Engine pulls helper
+// conditions (or canvas trigger conditions for branch-inside-shell), maps
+// trait/flag keys to player-facing labels, evaluates each gate against
+// current state, and renders bulleted progress (✓ / ◯ + current/target).
+
+// Format a single trait value (handles ints and floats cleanly).
+setup._fmtTraitValue = function(v) {{
+    if (typeof v !== "number") return String(v);
+    if (Math.abs(v - Math.round(v)) < 0.05) return String(Math.round(v));
+    return v.toFixed(1);
+}};
+
+// Pretty-print a comparison operator for player-facing display.
+setup._fmtOp = function(op) {{
+    var map = {{ "gte": "≥", "gt": ">", "lte": "≤", "lt": "<", "eq": "=" }};
+    return map[op] || op;
+}};
+
+// Get current value for a trait condition_item. Returns number or null.
+setup._currentTraitValue = function(item) {{
+    if (!item || item.type !== "trait") return null;
+    if (item.subject === "player") {{
+        var pt = State.variables.player && State.variables.player.core_traits;
+        return (pt && typeof pt[item.trait_key] === "number") ? pt[item.trait_key] : 0;
+    }}
+    if (item.subject === "npc") {{
+        var slug = item.npc_id;
+        var uuid = (setup.npc_slug_map || {{}})[slug] || slug;
+        var npc = State.variables.npcs && State.variables.npcs[uuid];
+        return (npc && npc.core_traits && typeof npc.core_traits[item.trait_key] === "number")
+            ? npc.core_traits[item.trait_key] : 0;
+    }}
+    return null;
+}};
+
+// Resolve a player-facing label for a trait condition_item.
+// For NPC subjects, prepends NPC display name (e.g., "Frank trust").
+setup._labelForTrait = function(item) {{
+    var key = item.trait_key;
+    var labelData = (setup.trait_labels || {{}})[key];
+    var labelText = labelData ? labelData.label : key;
+    if (item.subject === "npc" && item.npc_id) {{
+        var slug = item.npc_id;
+        var uuid = (setup.npc_slug_map || {{}})[slug] || slug;
+        var npc = State.variables.npcs && State.variables.npcs[uuid];
+        var npcName = (npc && npc.name) || slug.replace("npc_", "");
+        // Capitalize first letter of NPC name if needed
+        npcName = npcName.charAt(0).toUpperCase() + npcName.slice(1);
+        return npcName + " " + labelText;
+    }}
+    return labelText;
+}};
+
+// Resolve a player-facing label for a flag condition_item.
+setup._labelForFlag = function(item) {{
+    var key = item.flag_key;
+    var labelData = (setup.flag_labels || {{}})[key];
+    return labelData ? labelData.label : key;
+}};
+
+// Render a single AND-gate condition_item as an HTML <li>.
+setup._renderGoalGate = function(item) {{
+    if (!item || typeof item !== "object") return "";
+    var met = false;
+    try {{ met = setup.checkSingleCondition(item); }} catch (e) {{ met = false; }}
+    var marker = met ? '<span class="stage-hint-met">✓</span>'
+                     : '<span class="stage-hint-unmet">◯</span>';
+    if (item.type === "trait") {{
+        var label = setup._labelForTrait(item);
+        var current = setup._currentTraitValue(item);
+        var target = item.value;
+        var op = setup._fmtOp(item.operator);
+        var progress = "";
+        if (typeof current === "number" && typeof target === "number") {{
+            progress = '<span class="stage-hint-progress">'
+                + setup._fmtTraitValue(current) + " / " + setup._fmtTraitValue(target)
+                + "</span>";
+        }}
+        var className = met ? "stage-hint-met-row" : "stage-hint-unmet-row";
+        return '<li class="' + className + '">' + marker + " " + label
+            + " " + op + " " + setup._fmtTraitValue(target) + " " + progress + "</li>";
+    }}
+    if (item.type === "flag") {{
+        var flagLabel = setup._labelForFlag(item);
+        var className2 = met ? "stage-hint-met-row" : "stage-hint-unmet-row";
+        return '<li class="' + className2 + '">' + marker + " " + flagLabel + "</li>";
+    }}
+    // stage / pass / item / other types: render minimally
+    return '<li>' + marker + " " + (item.helper || item.flag_key || item.trait_key || "(condition)") + "</li>";
+}};
+
+// Render an OR-path branch — used when helper conditions.logic === "OR".
+setup._renderGoalPath = function(item, idx) {{
+    var labels = ["Path A", "Path B", "Path C", "Path D"];
+    var pathLabel = labels[idx] || ("Path " + (idx + 1));
+    var inner = setup._renderGoalGate(item);
+    return '<div class="stage-hint-path"><strong>' + pathLabel + ':</strong> '
+        + '<ul>' + inner + '</ul></div>';
+}};
+
+// Find the canvas whose trigger conditions describe this stage transition
+// (used for branch-inside-shell — Frank 1→2). Returns {{conditions, canvas}}
+// or null.
+setup._findStageSetterCanvas = function(npcSlug, stageValue) {{
+    var index = (setup.stage_setter_canvases || {{}})[npcSlug] || {{}};
+    var cvId = index[stageValue];
+    if (!cvId) return null;
+    var helpData = setup.help_data || {{}};
+    var locationCanvases = helpData.locationCanvases || {{}};
+    for (var locUuid in locationCanvases) {{
+        var canvasList = locationCanvases[locUuid];
+        for (var i = 0; i < canvasList.length; i++) {{
+            var c = canvasList[i];
+            if (c && c.id === cvId) {{
+                return {{ canvas: c, locUuid: locUuid }};
+            }}
+        }}
+    }}
+    return null;
+}};
+
+// Format a canvas trigger schedule into a player-facing string like
+// "weekday evenings (19:00–21:30)". Returns "" if no schedule.
+setup._formatCanvasSchedule = function(canvas) {{
+    if (!canvas || !canvas.schedule) return "";
+    var sched = canvas.schedule;
+    if (!Array.isArray(sched) || sched.length === 0) return "";
+    var s = sched[0];  // take the first window for display
+    var weekdayLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    var days = (s.weekdays || []).map(function(d) {{ return weekdayLabels[d] || ""; }}).filter(Boolean);
+    var dayStr = "";
+    if (days.length === 7) dayStr = "every day";
+    else if (days.length === 5 && days.indexOf("Sat") === -1 && days.indexOf("Sun") === -1) dayStr = "weekdays";
+    else if (days.length === 2 && days.indexOf("Sat") !== -1 && days.indexOf("Sun") !== -1) dayStr = "weekends";
+    else dayStr = days.join("/");
+    var timeStr = (s.start_time && s.end_time) ? (s.start_time + "–" + s.end_time) : "";
+    if (dayStr && timeStr) return dayStr + " (" + timeStr + ")";
+    return dayStr || timeStr;
+}};
+
+// Get a location display name from a locUuid (via setup.help_data + setup.locations).
+setup._locNameFromUuid = function(locUuid) {{
+    var locUuidToSlug = setup._getLocUuidToSlug();
+    var slug = locUuidToSlug[locUuid];
+    var locs = setup.locations || {{}};
+    var locData = locs[slug];
+    return (locData && locData.name) || slug || null;
+}};
+
+// Main entry — returns HTML for the structured 🎯 goal block, or "" if
+// the hint doesn't qualify for auto-render (no stage condition, opt-out,
+// or no helper / canvas-setter found).
+setup.computeHintGoal = function(hintObj) {{
+    if (!hintObj || typeof hintObj !== "object") return "";
+    if (hintObj.auto_goal === false) return "";
+    var cond = hintObj.condition || {{}};
+    if (!cond.stage_npc || cond.stage_value == null) return "";
+
+    var npcSlug = cond.stage_npc;
+    var nextStage = cond.stage_value + 1;
+
+    // Try helper first
+    var bareSlug = npcSlug.replace(/^npc_/, "");
+    var helperName = bareSlug + "_stage_" + nextStage;
+    var helper = (setup.stage_helpers_map || {{}})[helperName];
+
+    var conditions = null;
+    var sourceLogic = "AND";
+    var locName = null;
+    var schedStr = "";
+
+    if (helper && helper.conditions && Array.isArray(helper.conditions.items)) {{
+        conditions = helper.conditions.items;
+        sourceLogic = (helper.conditions.logic || "AND").toUpperCase();
+        // Helpers don't carry location/schedule directly — resolve via the
+        // transition canvas that watches this helper.
+        locName = setup._findHelperTransitionLocation(helperName);
+    }} else {{
+        // Fallback: branch-inside-shell — find the canvas that sets this stage
+        var found = setup._findStageSetterCanvas(npcSlug, nextStage);
+        if (!found) return "";
+        var canvas = found.canvas;
+        if (!canvas || !canvas.conditions || !Array.isArray(canvas.conditions.items)) return "";
+        conditions = canvas.conditions.items;
+        sourceLogic = (canvas.conditions.logic || "AND").toUpperCase();
+        locName = setup._locNameFromUuid(found.locUuid);
+        schedStr = setup._formatCanvasSchedule(canvas);
+    }}
+
+    if (!conditions || conditions.length === 0) return "";
+
+    var html = '<div class="stage-hint-goal">';
+    html += '<div class="stage-hint-goal-header"><span class="stage-hint-target">🎯</span> '
+         + (sourceLogic === "OR" ? "Two paths to advance:" : "To advance:") + '</div>';
+
+    if (sourceLogic === "OR") {{
+        for (var i = 0; i < conditions.length; i++) {{
+            html += setup._renderGoalPath(conditions[i], i);
+        }}
+    }} else {{
+        html += '<ul>';
+        for (var j = 0; j < conditions.length; j++) {{
+            html += setup._renderGoalGate(conditions[j]);
+        }}
+        html += '</ul>';
+    }}
+
+    if (locName || schedStr) {{
+        html += '<div class="stage-hint-where">📍 '
+             + (locName || "")
+             + (locName && schedStr ? " · " : "")
+             + (schedStr || "")
+             + '</div>';
+    }}
+
+    html += '</div>';
+    return html;
+}};
+
+// E17 helper — walk locationCanvases to find the canvas that uses the
+// given stage helper as a trigger condition (operator is_true). Returns
+// the canvas's location display name (from setup.locations[slug].name).
+setup._findHelperTransitionLocation = function(helperName) {{
+    var helpData = setup.help_data || {{}};
+    var locationCanvases = helpData.locationCanvases || {{}};
+    var locUuidToSlug = setup._getLocUuidToSlug();
+    var locs = setup.locations || {{}};
+    for (var locUuid in locationCanvases) {{
+        var canvasList = locationCanvases[locUuid];
+        for (var i = 0; i < canvasList.length; i++) {{
+            var c = canvasList[i];
+            var conds = (c.conditions && c.conditions.items) || [];
+            for (var ci = 0; ci < conds.length; ci++) {{
+                var it = conds[ci];
+                if (it && it.type === "stage" && it.helper === helperName && it.operator === "is_true") {{
+                    var locSlug = locUuidToSlug[locUuid];
+                    var locData = locs[locSlug];
+                    return (locData && locData.name) || locSlug || null;
+                }}
+            }}
+        }}
+    }}
+    return null;
+}};
+
+// =====================================================================
+// Pattern 3 (2026-05-01) — activity-list panel
+// =====================================================================
+// Below each Quests-page card, render a computed list of all unlocked
+// canvases tagged to that NPC. Each row: name + when (weekdays + time band)
+// + where (location) + effects + what stage(s) it gates.
+
+// Format a single weekday-set as a compact string ("weekdays" / "Mon/Wed/Fri" / etc.)
+setup._fmtWeekdays = function(weekdays) {{
+    var labels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    var days = (weekdays || []).map(function(d) {{ return labels[d] || ""; }}).filter(Boolean);
+    if (days.length === 0) return "";
+    if (days.length === 7) return "every day";
+    if (days.length === 5 && days.indexOf("Sat") === -1 && days.indexOf("Sun") === -1) return "Mon–Fri";
+    if (days.length === 6 && days.indexOf("Sun") === -1) return "Mon–Sat";
+    if (days.length === 2 && days.indexOf("Sat") !== -1 && days.indexOf("Sun") !== -1) return "weekends";
+    return days.join("/");
+}};
+
+// Return all schedule windows for a canvas as [{{weekdays, time, isNow}}, ...].
+// Extends Pattern 2's _formatCanvasSchedule which only returned the first window.
+setup._formatActivitySchedules = function(canvas) {{
+    var windows = [];
+    if (!canvas) return windows;
+    var sched = canvas.scheduleParams || canvas.schedule;
+    if (!Array.isArray(sched) || sched.length === 0) return windows;
+    var nowDay = null, nowMin = null;
+    try {{
+        var ts = (State.variables.game_state && State.variables.game_state.time_state) || {{}};
+        var dayName = ts.current_day;
+        var dayMap = {{ "Monday": 0, "Tuesday": 1, "Wednesday": 2, "Thursday": 3,
+                        "Friday": 4, "Saturday": 5, "Sunday": 6 }};
+        nowDay = dayMap.hasOwnProperty(dayName) ? dayMap[dayName] : null;
+        nowMin = (ts.current_hour || 0) * 60 + (ts.current_minute || 0);
+    }} catch (e) {{
+        nowDay = null;
+        nowMin = null;
+    }}
+    for (var i = 0; i < sched.length; i++) {{
+        var s = sched[i];
+        if (!s) continue;
+        var startTime = s.start_time || s.startTime || "";
+        var endTime = s.end_time || s.endTime || "";
+        var weekdays = s.weekdays || [];
+        var weekdayStr = setup._fmtWeekdays(weekdays);
+        var timeStr = (startTime && endTime) ? (startTime + "–" + endTime) : "";
+        // Compute whether the player is currently in this window
+        var isNow = false;
+        if (nowDay !== null && weekdays.indexOf(nowDay) !== -1 && startTime && endTime) {{
+            var sh = parseInt(startTime.split(":")[0], 10) || 0;
+            var sm = parseInt(startTime.split(":")[1], 10) || 0;
+            var eh = parseInt(endTime.split(":")[0], 10) || 0;
+            var em = parseInt(endTime.split(":")[1], 10) || 0;
+            var startMin = sh * 60 + sm;
+            var endMin = eh * 60 + em;
+            if (nowMin >= startMin && nowMin <= endMin) {{
+                isNow = true;
+            }}
+        }}
+        windows.push({{ weekdays: weekdayStr, time: timeStr, isNow: isNow }});
+    }}
+    return windows;
+}};
+
+// Format a single effect (trait or flag) into a readable token.
+// effect shape from canvas exit_block: {{trait, op, value, npcId, targetType}}
+// or {{flag, op, targetType}} for flagEffects. Uses label registries from
+// Pattern 2 + NPC display name prefixes for NPC-subject traits.
+setup._formatActivityEffect = function(effect) {{
+    if (!effect || typeof effect !== "object") return "";
+    // Flag effect
+    if (effect.flag) {{
+        var flagLabelData = (setup.flag_labels || {{}})[effect.flag];
+        var flagLabel = flagLabelData ? flagLabelData.label : effect.flag;
+        var flagOp = effect.op || "set";
+        if (flagOp === "set") return "✓ " + flagLabel;
+        if (flagOp === "unset") return "✗ " + flagLabel;
+        return flagLabel;
+    }}
+    // Trait effect
+    var traitKey = effect.trait;
+    if (!traitKey) return "";
+    var labelData = (setup.trait_labels || {{}})[traitKey];
+    var label = labelData ? labelData.label : traitKey;
+    // NPC-subject — prepend NPC display name
+    if (effect.targetType === "npc" && effect.npcId) {{
+        var npcSlug = effect.npcId;
+        var npcUuid = (setup.npc_slug_map || {{}})[npcSlug] || npcSlug;
+        var npc = State.variables.npcs && State.variables.npcs[npcUuid];
+        var npcName = (npc && npc.name) || npcSlug.replace("npc_", "");
+        npcName = npcName.charAt(0).toUpperCase() + npcName.slice(1);
+        label = npcName + " " + label;
+    }}
+    var op = effect.op || "add";
+    var val = effect.value;
+    if (op === "add" && typeof val === "number") {{
+        var sign = val >= 0 ? "+" : "";
+        // Money gets $ prefix
+        if (traitKey === "money") {{
+            return sign + "$" + Math.abs(val) * (val >= 0 ? 1 : -1);
+        }}
+        return sign + val + " " + label;
+    }}
+    if (op === "set" && typeof val !== "undefined") {{
+        return label + " = " + val;
+    }}
+    return label;
+}};
+
+// Format the gates an activity contributes to as readable strings.
+// Returns array like ["Frank Stage 1", "Frank Stage 3"].
+setup._formatActivityGates = function(canvasId) {{
+    var index = setup.activity_gates_index || {{}};
+    var gates = index[canvasId];
+    if (!Array.isArray(gates) || gates.length === 0) return [];
+    var result = [];
+    for (var i = 0; i < gates.length; i++) {{
+        var g = gates[i];
+        var npcSlug = g.npc_slug;
+        var npcUuid = (setup.npc_slug_map || {{}})[npcSlug] || npcSlug;
+        var npc = State.variables.npcs && State.variables.npcs[npcUuid];
+        var npcName = (npc && npc.name) || npcSlug.replace("npc_", "");
+        npcName = npcName.charAt(0).toUpperCase() + npcName.slice(1);
+        result.push(npcName + " Stage " + g.stage_value);
+    }}
+    return result;
+}};
+
+// Test whether a one-shot canvas has been completed.
+// Used to filter completed one-shots out of the activity list.
+setup._activityIsDone = function(activity) {{
+    if (!activity) return false;
+    // Linked flag (set when one-shot completes)
+    var lf = activity.linked_flag;
+    if (lf && State.variables.flags && State.variables.flags[lf] === true) {{
+        return true;
+    }}
+    // visited_nodes tracking — "<canvas_slug>.<node_id>" or any node in canvas
+    var slug = activity.canvas_slug;
+    var visitedNodes = (State.variables.game_state && State.variables.game_state.visited_nodes) || [];
+    if (slug && visitedNodes.length > 0) {{
+        var targetNode = activity.linked_canvas_node;
+        if (targetNode) {{
+            if (visitedNodes.indexOf(slug + "." + targetNode) !== -1) return true;
+        }} else {{
+            // Any node in canvas counts as completed (for one-shots)
+            for (var i = 0; i < visitedNodes.length; i++) {{
+                if (visitedNodes[i].indexOf(slug + ".") === 0) return true;
+            }}
+        }}
+    }}
+    return false;
+}};
+
+// Look up a canvas in setup.help_data.locationCanvases by canvas id.
+// Returns the canvas object (with scheduleParams, conditions, etc.) or null.
+setup._findCanvasInLocations = function(canvasId) {{
+    if (!canvasId) return null;
+    var helpData = setup.help_data || {{}};
+    var locationCanvases = helpData.locationCanvases || {{}};
+    for (var locUuid in locationCanvases) {{
+        var list = locationCanvases[locUuid];
+        for (var i = 0; i < list.length; i++) {{
+            if (list[i] && list[i].id === canvasId) {{
+                return list[i];
+            }}
+        }}
+    }}
+    return null;
+}};
+
+// Main entry. Returns array of activity-row objects ready for rendering.
+// sourceType: "npc" | "player"
+// sourceId:   for "npc" → npc uuid (key into help_data.npcs)
+//             for "player" → "_player_" (irrelevant; uses help_data.player)
+setup.computeActivityList = function(sourceType, sourceId) {{
+    var helpData = setup.help_data || {{}};
+    var rawActivities = [];
+
+    if (sourceType === "npc") {{
+        var npcEntry = (helpData.npcs || {{}})[sourceId];
+        rawActivities = (npcEntry && npcEntry.activities) || [];
+    }} else if (sourceType === "player") {{
+        rawActivities = (helpData.player && helpData.player.activities) || [];
+    }} else {{
+        return [];
+    }}
+
+    var rows = [];
+    for (var ai = 0; ai < rawActivities.length; ai++) {{
+        var act = rawActivities[ai];
+        if (!act || !act.canvas_id) continue;
+        // Skip done one-shots
+        if (setup._activityIsDone(act)) continue;
+        // Look up the canvas in locationCanvases for structured data
+        var canvasMeta = act._canvasObj || setup._findCanvasInLocations(act.canvas_id);
+        // Filter: if conditions are set and not satisfied, hide
+        if (canvasMeta && canvasMeta.conditions) {{
+            var ok = true;
+            try {{ ok = setup.triggerConditionsSatisfied(canvasMeta.conditions); }}
+            catch (e) {{ ok = true; }}
+            if (!ok) continue;
+        }}
+        // Schedules — extended multi-window format
+        var schedules = canvasMeta ? setup._formatActivitySchedules(canvasMeta) : [];
+        // Effects — pull from the activity's pre-extracted trait_effects.
+        var effectStrings = [];
+        var traitFx = act.trait_effects || [];
+        for (var ei = 0; ei < traitFx.length; ei++) {{
+            var s = setup._formatActivityEffect(traitFx[ei]);
+            if (s) effectStrings.push(s);
+        }}
+        // Gates
+        var gates = setup._formatActivityGates(act.canvas_id);
+        // Location: prefer activity.location (string from help_data), else
+        // resolve via locationCanvases reverse lookup
+        var locName = act.location || null;
+        if (!locName && canvasMeta) {{
+            // walk locationCanvases to find locUuid that contains this canvas
+            var locationCanvases = (helpData.locationCanvases || {{}});
+            for (var locUuid in locationCanvases) {{
+                var list = locationCanvases[locUuid];
+                var found = false;
+                for (var li = 0; li < list.length; li++) {{
+                    if (list[li] && list[li].id === act.canvas_id) {{ found = true; break; }}
+                }}
+                if (found) {{
+                    locName = setup._locNameFromUuid(locUuid);
+                    break;
+                }}
+            }}
+        }}
+        // "isNow" — true if any of the schedule windows is currently active
+        var isNow = false;
+        for (var si = 0; si < schedules.length; si++) {{
+            if (schedules[si].isNow) {{ isNow = true; break; }}
+        }}
+        rows.push({{
+            id: act.canvas_id,
+            name: act.name || (canvasMeta && canvasMeta.name) || "(unnamed)",
+            location: locName || "",
+            schedules: schedules,
+            effects: effectStrings,
+            gates: gates,
+            isNow: isNow,
+        }});
+    }}
+    return rows;
+}};
+
+// Render an activity list to HTML. headerLabel may be null (no header).
+setup._renderActivityList = function(activities, headerLabel, suppressGates) {{
+    /* suppressGates (Fix C 2026-05-01): when true, skip the "→ gates X" line.
+       Used by Story Goals — the gates annotation belongs in per-NPC sections,
+       not under a rent/hygiene/energy goal where it reads as noise. */
+    if (!activities || activities.length === 0) return "";
+    var html = '<div class="activity-list">';
+    var hasHeader = !!headerLabel;
+    if (hasHeader) {{
+        // Collapsed by default — clicking the summary expands the list.
+        // Native <details> persists state per render, no JS state needed.
+        html += '<details class="activity-list-details">';
+        html += '<summary class="activity-list-header">Things to do with '
+             + headerLabel + '</summary>';
+    }}
+    html += '<ul>';
+    for (var i = 0; i < activities.length; i++) {{
+        var a = activities[i];
+        var rowClass = "activity-row" + (a.isNow ? " activity-row-now" : "");
+        html += '<li class="' + rowClass + '">';
+        html += '<div class="activity-name">';
+        html += (a.isNow ? '<span class="activity-now-badge">NOW</span> ' : '');
+        html += a.name + '</div>';
+        // Where + when on one line
+        var meta = [];
+        if (a.location) meta.push('<span class="activity-where">' + a.location + '</span>');
+        if (a.schedules && a.schedules.length > 0) {{
+            var schedParts = [];
+            for (var si = 0; si < a.schedules.length; si++) {{
+                var w = a.schedules[si];
+                var combined = "";
+                if (w.weekdays && w.time) combined = w.weekdays + " " + w.time;
+                else combined = w.weekdays || w.time || "";
+                if (combined) schedParts.push(combined);
+            }}
+            if (schedParts.length > 0) {{
+                meta.push('<span class="activity-when">' + schedParts.join(" · ") + '</span>');
+            }}
+        }}
+        if (meta.length > 0) {{
+            html += '<div class="activity-meta">' + meta.join(' · ') + '</div>';
+        }}
+        // Effects + gates
+        var lower = [];
+        if (a.effects && a.effects.length > 0) {{
+            lower.push('<span class="activity-effects">' + a.effects.join(", ") + '</span>');
+        }}
+        if (!suppressGates && a.gates && a.gates.length > 0) {{
+            lower.push('<span class="activity-gates">→ gates ' + a.gates.join(", ") + '</span>');
+        }}
+        if (lower.length > 0) {{
+            html += '<div class="activity-detail">' + lower.join(' · ') + '</div>';
+        }}
+        html += '</li>';
+    }}
+    html += '</ul>';
+    if (hasHeader) {{
+        html += '</details>';
+    }}
+    html += '</div>';
+    return html;
 }};
 
 // Get the next activity for an NPC or player (first incomplete in node order)
@@ -5503,6 +6311,303 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         g = min(255, int(g + (255 - g) * amount))
         b = min(255, int(b + (255 - b) * amount))
         return f"#{r:02x}{g:02x}{b:02x}"
+
+    def _auto_emit_counter_sidebar_items(self) -> None:
+        """E18 — auto-emit trait_bar sidebar items for counter traits used in
+        stage helpers. Skips traits the author already authored a sidebar item
+        for. Picks the LOWEST helper threshold per counter (the most-immediate
+        gate the player is racing toward)."""
+        # Map counter trait_key → (min_threshold, label_hint)
+        counters: dict[str, int] = {}
+        for helper in (self.stage_helpers or []):
+            conds = (helper.get("conditions") or {}).get("items") or []
+            for it in conds:
+                if not isinstance(it, dict):
+                    continue
+                if it.get("type") != "trait":
+                    continue
+                if it.get("subject") != "player":
+                    continue
+                key = it.get("trait_key", "")
+                if not (key.endswith("_count") or key.endswith("_done")):
+                    continue
+                op = it.get("operator", "")
+                val = it.get("value")
+                if op != "gte" or not isinstance(val, (int, float)):
+                    continue
+                cur_min = counters.get(key)
+                if cur_min is None or val < cur_min:
+                    counters[key] = int(val)
+        if not counters:
+            return
+        # Skip counters the author already added a sidebar item for.
+        existing_traits = {
+            si.get("trait") for si in self.sidebar_items
+            if isinstance(si, dict) and si.get("type") == "trait_bar"
+        }
+        for trait_key, max_val in sorted(counters.items()):
+            if trait_key in existing_traits:
+                continue
+            # Build a human-readable label: frank_bookkeeping_count → "Frank bookkeeping"
+            base = trait_key.replace("_count", "").replace("_done", "")
+            label = base.replace("_", " ").strip().capitalize()
+            self.sidebar_items.append({
+                "type": "trait_bar",
+                "trait": trait_key,
+                "label": label,
+                "max": max_val,
+                # Hide once the gate is cleared (counter exceeds max).
+                "show_when": {
+                    "version": "1.0",
+                    "logic": "AND",
+                    "items": [
+                        {
+                            "type": "trait",
+                            "subject": "player",
+                            "trait_key": trait_key,
+                            "operator": "lt",
+                            "value": max_val,
+                        }
+                    ],
+                },
+                "_auto_emitted": True,
+            })
+
+    def _auto_emit_decay_warning_sidebar_items(self) -> None:
+        """E20 — auto-emit a single trait_decay_warning sidebar item if any
+        decaying traits exist. Render-time logic compares snapshots vs current
+        and shows an amber banner when a tracked trait dropped today AND is
+        within 2.0 of the next stage gate. Snapshot is populated in advanceDay.
+        """
+        # Only emit if at least one trait has decay configured. Use the already-
+        # loaded class fields (populated earlier in _load_project_data).
+        any_decay = bool(getattr(self, "player_trait_decay_config", None)) or bool(
+            getattr(self, "npc_trait_decay_config", None)
+        )
+        if not any_decay:
+            return
+        # Skip if author already added one.
+        for si in self.sidebar_items:
+            if isinstance(si, dict) and si.get("type") == "trait_decay_warning":
+                return
+        # Build a map of trait_key → list of helper thresholds, used at render
+        # time to find "next gate above current value" for warning trigger.
+        trait_thresholds: dict[str, list[dict[str, Any]]] = {}
+        for helper in (self.stage_helpers or []):
+            conds = (helper.get("conditions") or {}).get("items") or []
+            for it in conds:
+                if not isinstance(it, dict):
+                    continue
+                if it.get("type") != "trait":
+                    continue
+                op = it.get("operator", "")
+                val = it.get("value")
+                if op not in ("gte", "gt") or not isinstance(val, (int, float)):
+                    continue
+                # Build a synthetic key: subject:[npc_id:]trait_key
+                subj = it.get("subject", "")
+                key = it.get("trait_key", "")
+                npc_id = it.get("npc_id", "")
+                synth = f"{subj}:{npc_id}:{key}" if subj == "npc" else f"player::{key}"
+                trait_thresholds.setdefault(synth, []).append({
+                    "value": int(val),
+                    "subject": subj,
+                    "npc_id": npc_id,
+                    "trait_key": key,
+                })
+        self.sidebar_items.append({
+            "type": "trait_decay_warning",
+            "thresholds": trait_thresholds,
+            "_auto_emitted": True,
+        })
+
+    def _build_stage_setter_canvases_index(self) -> dict:
+        """Pattern 2: scan canvases for branch-inside-shell stage setters.
+
+        Returns: {npc_slug: {stage_value: canvas_slug_or_id}}.
+
+        Walks every story canvas's nodes' exit_block; checks both choice-level
+        effects and config-level effects (raw dicts for location-type
+        exit_blocks). Records canvases whose effects set `<npc>_stage = N`
+        (op="set", numeric value). The canvas identifier stored is the slug
+        used in `setup.canvases_by_id` (via passage_name_map) when available,
+        else the canvas UUID.
+
+        Used by setup.computeHintGoal as a fallback when no helper exists
+        for the next-stage transition (Frank 1→2 sets npc_frank_stage = 2
+        inside scene_living_room_evening choices).
+        """
+        index: Dict[str, Dict[int, str]] = {}
+        # Only consider NPCs with arc_stages — they are the only ones whose
+        # `<slug>_stage` trait is meaningful.
+        all_npc_slugs = set(self.npc_arc_stages_map.keys()) if getattr(
+            self, "npc_arc_stages_map", None
+        ) else set()
+        if not all_npc_slugs:
+            return index
+        for canvas in (self.story_canvases or []):
+            cv_id = str(getattr(canvas, "id", "") or "")
+            try:
+                cv_nodes = list(canvas.nodes.all())
+            except Exception:
+                cv_nodes = []
+            for node in cv_nodes:
+                eb = getattr(node, "exit_block", {}) or {}
+                if not isinstance(eb, dict):
+                    continue
+                effect_dicts: List[Dict[str, Any]] = []
+                cfg = eb.get("config") or {}
+                if isinstance(cfg, dict):
+                    for e in (cfg.get("effects") or []):
+                        if isinstance(e, dict):
+                            effect_dicts.append(e)
+                for choice in (eb.get("choices") or []):
+                    if not isinstance(choice, dict):
+                        continue
+                    for e in (choice.get("effects") or []):
+                        if isinstance(e, dict):
+                            effect_dicts.append(e)
+                for e in effect_dicts:
+                    if e.get("op") != "set":
+                        continue
+                    trait_key = e.get("trait", "")
+                    val = e.get("value")
+                    if not isinstance(trait_key, str) or not trait_key.endswith("_stage"):
+                        continue
+                    if not isinstance(val, (int, float)):
+                        continue
+                    npc_slug = trait_key[: -len("_stage")]
+                    if npc_slug not in all_npc_slugs:
+                        continue
+                    index.setdefault(npc_slug, {})[int(val)] = cv_id
+        return index
+
+    def _build_activity_to_gates_index(self) -> dict:
+        """Pattern 3 (2026-05-01): map canvas → list of helpers it gates.
+
+        Returns: {canvas_id: [{helper_name, npc_slug, stage_value}, ...]}.
+
+        For each canvas, walk every effect (choice.effects + config.effects).
+        For each effect that modifies a trait or flag, scan all helpers — if
+        any helper's conditions.items references that trait/flag, this canvas
+        contributes to that helper. Helper name follows the convention
+        `<bare>_stage_<N>`; we parse npc_slug + stage_value from it. Helpers
+        not matching the convention are skipped.
+
+        Used by setup.computeActivityList to render "→ gates Frank Stage 1"
+        annotations on each activity row.
+        """
+        import re
+        index: Dict[str, List[Dict[str, Any]]] = {}
+        helpers = self.stage_helpers or []
+        if not helpers:
+            return index
+
+        # Build reverse lookup keyed by (subject, npc_id, trait_key) for traits
+        # and flag_key for flags. Subject + npc_id matters: a canvas that adds
+        # +1 to FRANK's trust does NOT gate ryan_stage_1 (which needs RYAN trust),
+        # even though both helpers reference trait_key="trust".
+        trait_to_helpers: Dict[Tuple[str, str, str], List[Dict[str, Any]]] = {}
+        flag_to_helpers: Dict[str, List[Dict[str, Any]]] = {}
+        helper_name_re = re.compile(r"^(?P<slug>[a-z][\w]*)_stage_(?P<n>\d+)$")
+        for helper in helpers:
+            name = helper.get("name", "")
+            m = helper_name_re.match(name)
+            if not m:
+                continue
+            bare_slug = m.group("slug")
+            stage_value = int(m.group("n"))
+            npc_slug = "npc_" + bare_slug
+            helper_summary = {
+                "helper_name": name,
+                "npc_slug": npc_slug,
+                "stage_value": stage_value,
+            }
+            cond = helper.get("conditions") or {}
+            items = cond.get("items") or []
+            for it in items:
+                if not isinstance(it, dict):
+                    continue
+                if it.get("type") == "trait":
+                    tkey = it.get("trait_key")
+                    subj = it.get("subject", "player")
+                    item_npc_id = it.get("npc_id", "") if subj == "npc" else ""
+                    if tkey:
+                        key = (subj, item_npc_id, tkey)
+                        trait_to_helpers.setdefault(key, []).append(helper_summary)
+                elif it.get("type") == "flag":
+                    fkey = it.get("flag_key")
+                    if fkey:
+                        flag_to_helpers.setdefault(fkey, []).append(helper_summary)
+
+        if not trait_to_helpers and not flag_to_helpers:
+            return index
+
+        # Walk canvases; collect effects; match against the reverse lookups.
+        for canvas in (self.story_canvases or []):
+            cv_id = str(getattr(canvas, "id", "") or "")
+            try:
+                cv_nodes = list(canvas.nodes.all())
+            except Exception:
+                cv_nodes = []
+            seen_helpers_for_canvas: Set[str] = set()
+            for node in cv_nodes:
+                eb = getattr(node, "exit_block", {}) or {}
+                if not isinstance(eb, dict):
+                    continue
+                effect_dicts: List[Dict[str, Any]] = []
+                cfg = eb.get("config") or {}
+                if isinstance(cfg, dict):
+                    for e in (cfg.get("effects") or []):
+                        if isinstance(e, dict):
+                            effect_dicts.append(e)
+                    for fe in (cfg.get("flagEffects") or []):
+                        if isinstance(fe, dict):
+                            effect_dicts.append({"_is_flag": True, **fe})
+                for choice in (eb.get("choices") or []):
+                    if not isinstance(choice, dict):
+                        continue
+                    for e in (choice.get("effects") or []):
+                        if isinstance(e, dict):
+                            effect_dicts.append(e)
+                    for fe in (choice.get("flagEffects") or []):
+                        if isinstance(fe, dict):
+                            effect_dicts.append({"_is_flag": True, **fe})
+                for e in effect_dicts:
+                    if e.get("_is_flag") or "flag" in e:
+                        # flagEffect — match against flag helpers (only count `set`)
+                        if e.get("op", "set") != "set":
+                            continue
+                        fkey = e.get("flag")
+                        if fkey and fkey in flag_to_helpers:
+                            for h in flag_to_helpers[fkey]:
+                                if h["helper_name"] not in seen_helpers_for_canvas:
+                                    index.setdefault(cv_id, []).append(h)
+                                    seen_helpers_for_canvas.add(h["helper_name"])
+                    else:
+                        # Trait effect — only count positive `add` (a canvas that
+                        # SUBTRACTS trust doesn't help advance the gate). Match
+                        # on (subject, npc_id, trait_key) tuple so Frank-trust
+                        # effects don't cross-pollute Ryan-trust helpers.
+                        tkey = e.get("trait")
+                        op = e.get("op", "add")
+                        val = e.get("value")
+                        if not tkey or op != "add":
+                            continue
+                        if not isinstance(val, (int, float)) or val <= 0:
+                            continue
+                        target = e.get("targetType", "player")
+                        if target == "npc":
+                            eff_npc = e.get("npcId", "")
+                            key = ("npc", eff_npc, tkey)
+                        else:
+                            key = ("player", "", tkey)
+                        if key in trait_to_helpers:
+                            for h in trait_to_helpers[key]:
+                                if h["helper_name"] not in seen_helpers_for_canvas:
+                                    index.setdefault(cv_id, []).append(h)
+                                    seen_helpers_for_canvas.add(h["helper_name"])
+        return index
 
     def _resolve_theme(self, raw: dict) -> dict:
         """Resolve theme config into a complete set of CSS token values.
@@ -7686,6 +8791,14 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                 if trigger and hasattr(trigger, 'metadata') and trigger.metadata:
                     costs = trigger.metadata.get("costs", []) or []
 
+                # E21 — opt-in cooldown visibility: when canvas filtered by
+                # unmet conditions, render a grayed entry with a message.
+                show_when_blocked = False
+                cooldown_message = None
+                if trigger and hasattr(trigger, 'metadata') and trigger.metadata:
+                    show_when_blocked = bool(trigger.metadata.get("show_when_blocked", False))
+                    cooldown_message = trigger.metadata.get("cooldown_message") or None
+
                 location_canvas_list.append({
                     "id": str(canvas.id),
                     "name": canvas.name,  # For grouping tiers by activity name
@@ -7701,6 +8814,8 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     "triggerMode": trigger_mode,  # "manual" or "random"
                     "chance": trigger_chance,  # Probability for random mode (0.0–1.0)
                     "costs": costs,  # Resource costs [{trait, value}] — checked/deducted on canvas entry
+                    "showWhenBlocked": show_when_blocked,  # E21
+                    "cooldownMessage": cooldown_message,    # E21
                 })
 
                 # Add to canvas-to-activity mapping for shared daily limits
@@ -10618,6 +11733,57 @@ if (clothingMsg) {
 <<print _displayHour + ":" + _minuteStr + " " + _ampm>>
 <</widget>>
 
+<!-- E16: Stage hint visual split. Slice authors write hints as
+     "<flavor> — 🎯 <goal>" and this widget renders them as two stacked blocks
+     (italic flavor on top, highlighted goal below). Falls back to single-line
+     render when the separator is absent — backwards-compat with games that
+     don't follow the convention. -->
+<<widget "renderStageHint">>
+/* Pattern 2 (2026-05-01): accepts either a string (legacy callers) OR a
+   hint object {text, condition, tip, auto_goal, ...}. When passed an object
+   with auto_goal=true and a stage condition, the engine computes the
+   structured 🎯 goal block (bullets + live progress + 📍 location). When
+   passed a string OR a no-auto-goal object, falls back to splitting on
+   " — 🎯 " (legacy behavior) so existing games keep working unchanged. */
+<<set _hintArg to $args[0]>>
+<<set _hintObj to (typeof _hintArg === "object" && _hintArg !== null) ? _hintArg : null>>
+<<set _hintText to _hintObj ? (_hintObj.text || "") : (_hintArg || "")>>
+<<set _computedGoalHtml to _hintObj ? setup.computeHintGoal(_hintObj) : "">>
+<<set _separator to " — 🎯 ">>
+<<set _splitIdx to _hintText.indexOf(_separator)>>
+<<if _computedGoalHtml>>
+  /* New path: structured auto-render. If text contains " — 🎯 ", strip the
+     manual goal portion (auto-render replaces it). */
+  <<if _splitIdx gt -1>>
+    <<set _flavor to _hintText.substring(0, _splitIdx)>>
+  <<else>>
+    <<set _flavor to _hintText>>
+  <</if>>
+  <div class="stage-hint-card">
+    <div class="stage-hint-flavor"><<print _flavor>></div>
+    <<print _computedGoalHtml>>
+    <<if _hintObj && _hintObj.tip>>
+      <div class="stage-hint-tip">💡 <<print _hintObj.tip>></div>
+    <</if>>
+  </div>
+<<elseif _splitIdx gt -1>>
+  /* Legacy path: split on " — 🎯 " */
+  <<set _flavor to _hintText.substring(0, _splitIdx)>>
+  <<set _goal to _hintText.substring(_splitIdx + _separator.length)>>
+  <div class="stage-hint-card">
+    <div class="stage-hint-flavor"><<print _flavor>></div>
+    <div class="stage-hint-goal"><span class="stage-hint-target">🎯</span> <<print _goal>></div>
+    <<if _hintObj && _hintObj.tip>>
+      <div class="stage-hint-tip">💡 <<print _hintObj.tip>></div>
+    <</if>>
+  </div>
+<<else>>
+  <div class="quest-available stage-hint">
+    → <<print _hintText>>
+  </div>
+<</if>>
+<</widget>>
+
 """
 
         # Dev mode: show day count in time display
@@ -10690,6 +11856,16 @@ if (clothingMsg) {
         <div class="trait-bar-fill" style="width: <<print _traitPct>>%"></div>
       </div>
     </div>
+  <<elseif _item.type is "trait_decay_warning">>
+    <!-- E20: render an amber warning when a decaying trait dropped today AND
+         is within 2.0 of its next stage gate. setup.getDecayWarnings() walks
+         the configured thresholds and compares last_day_snapshot vs current. -->
+    <<set _decayWarnings to setup.getDecayWarnings(_item.thresholds || {})>>
+    <<for _dw range _decayWarnings>>
+      <div class="sidebar-item trait-decay-warning-item">
+        ⚠ <<print _dw.text>>
+      </div>
+    <</for>>
   <<elseif _item.type is "passes">>
     <div class="sidebar-item passes-item" id="sidebar-passes-<<print _si>>">
       <<for _pi to 0; _pi lt setup.passes.length; _pi++>>
@@ -11332,6 +12508,196 @@ if (clothingMsg) {
     background: rgba(40, 167, 69, 0.1);
     border-radius: 6px;
     border-left: 4px solid var(--theme-success);
+}
+
+/* E16: Stage hint two-part card. Flavor on top, goal block below. */
+.stage-hint-card {
+    padding: 12px 14px;
+    background: rgba(40, 167, 69, 0.08);
+    border-radius: 6px;
+    border-left: 4px solid var(--theme-success);
+    margin: 8px 0;
+}
+.stage-hint-flavor {
+    font-style: italic;
+    opacity: 0.75;
+    margin-bottom: 10px;
+    font-size: 0.95em;
+}
+.stage-hint-goal {
+    color: var(--theme-success);
+    font-weight: 500;
+    line-height: 1.5;
+}
+.stage-hint-target {
+    font-size: 1.2em;
+    margin-right: 4px;
+}
+
+/* Pattern 2 (2026-05-01) — auto-rendered structured goal block */
+.stage-hint-goal-header {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--theme-success);
+}
+.stage-hint-goal ul {
+    list-style: none;
+    padding-left: 8px;
+    margin: 4px 0;
+}
+.stage-hint-goal li {
+    padding: 3px 0;
+    font-family: var(--theme-font-mono, 'Courier New', monospace);
+    font-size: 0.92em;
+    line-height: 1.4;
+}
+.stage-hint-met {
+    color: var(--theme-success);
+    font-weight: 600;
+    display: inline-block;
+    width: 1.2em;
+}
+.stage-hint-unmet {
+    color: var(--theme-text-muted);
+    display: inline-block;
+    width: 1.2em;
+}
+.stage-hint-met-row {
+    color: var(--theme-success);
+    opacity: 0.9;
+}
+.stage-hint-unmet-row {
+    color: var(--theme-text);
+    opacity: 0.85;
+}
+.stage-hint-progress {
+    color: var(--theme-text-muted);
+    margin-left: 6px;
+    font-size: 0.88em;
+}
+.stage-hint-where {
+    margin-top: 8px;
+    font-size: 0.9em;
+    opacity: 0.85;
+    color: var(--theme-text);
+    font-style: normal;
+}
+.stage-hint-tip {
+    margin-top: 10px;
+    padding: 6px 10px;
+    background: rgba(255, 193, 7, 0.08);
+    border-left: 3px solid var(--theme-warning, #ffc107);
+    border-radius: 3px;
+    font-size: 0.9em;
+    line-height: 1.45;
+    opacity: 0.92;
+}
+.stage-hint-path {
+    margin-top: 6px;
+    padding: 6px 8px;
+    border-left: 2px solid var(--theme-accent, #4ecdc4);
+    background: rgba(78, 205, 196, 0.05);
+}
+.stage-hint-path strong {
+    color: var(--theme-accent, #4ecdc4);
+    font-size: 0.92em;
+}
+
+/* Pattern 3 (2026-05-01) — activity-list panel under each Quest section */
+.activity-list {
+    margin-top: 12px;
+    padding: 8px 12px 4px;
+    background: rgba(0, 0, 0, 0.025);
+    border-radius: 6px;
+}
+.activity-list-header {
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 0.95em;
+    color: var(--theme-text);
+    opacity: 0.85;
+}
+/* Collapsed-by-default activity list. <details> starts closed; clicking the
+   <summary> expands. Native ::-webkit-details-marker hidden; we render our
+   own ▸/▾ via ::before so it stays consistent across browsers. */
+.activity-list-details > summary {
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    margin-bottom: 0;
+}
+.activity-list-details[open] > summary {
+    margin-bottom: 6px;
+}
+.activity-list-details > summary::-webkit-details-marker {
+    display: none;
+}
+.activity-list-details > summary::before {
+    content: '▸ ';
+    display: inline-block;
+    width: 1em;
+    transition: transform 0.1s ease;
+}
+.activity-list-details[open] > summary::before {
+    content: '▾ ';
+}
+.activity-list ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+.activity-row {
+    padding: 8px 10px;
+    margin: 4px 0;
+    border-left: 3px solid var(--theme-border, rgba(0,0,0,0.15));
+    background: var(--theme-surface, rgba(255,255,255,0.4));
+    border-radius: 4px;
+}
+.activity-row-now {
+    border-left-color: var(--theme-success);
+    background: rgba(40, 167, 69, 0.06);
+}
+.activity-name {
+    font-weight: 600;
+    font-size: 0.95em;
+    color: var(--theme-text);
+}
+.activity-now-badge {
+    display: inline-block;
+    background: var(--theme-success);
+    color: #fff;
+    font-size: 0.7em;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-right: 6px;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+}
+.activity-meta {
+    font-size: 0.85em;
+    color: var(--theme-text-muted);
+    margin-top: 2px;
+}
+.activity-where {
+    font-weight: 500;
+}
+.activity-when {
+    font-family: var(--theme-font-mono, 'Courier New', monospace);
+}
+.activity-detail {
+    margin-top: 4px;
+    font-size: 0.86em;
+    line-height: 1.4;
+}
+.activity-effects {
+    color: var(--theme-text);
+    opacity: 0.85;
+}
+.activity-gates {
+    color: var(--theme-accent, #4ecdc4);
+    font-weight: 500;
+    margin-left: 4px;
 }
 
 .quest-locked {
@@ -11994,6 +13360,20 @@ if (clothingMsg) {
     font-size: 0.75em;
     color: var(--theme-danger);
 }
+/* E21 — author-opt-in cooldown entry. Non-clickable dimmed text. */
+.solo-activity-cooldown {
+    display: inline-block;
+    padding: 4px 8px;
+    margin-bottom: 2px;
+    color: var(--theme-border);
+    font-style: normal;
+    font-size: 0.9em;
+    opacity: 0.65;
+}
+.solo-activity-cooldown em {
+    font-size: 0.85em;
+    opacity: 0.85;
+}
 
 /* Cost-blocked passage message */
 .cost-blocked-message {
@@ -12004,6 +13384,18 @@ if (clothingMsg) {
 }
 .cost-blocked-message p {
     margin-bottom: 1rem;
+}
+
+/* ===== E20: Sidebar decay warning ===== */
+.trait-decay-warning-item {
+    margin-top: 0.5rem;
+    padding: 6px 10px;
+    background: rgba(255, 193, 7, 0.18);
+    border-left: 3px solid var(--theme-warning);
+    border-radius: 4px;
+    color: var(--theme-warning-text);
+    font-size: 0.78rem;
+    line-height: 1.35;
 }
 
 /* ===== Sidebar trait bar ===== */
@@ -12593,94 +13985,58 @@ if (clothingMsg) {
 <<set _helpData = setup.help_data || {}>>
 <<set _hasPlayer = _helpData.player && _helpData.player.activities && _helpData.player.activities.some(function(a) { return a.node_id; })>>
 <<set _hasNpcs = _helpData.npcs && Object.keys(_helpData.npcs).length > 0>>
+
+/* Pattern 3 (2026-05-01) — QuestsPage rewrite. getNextActivity removed in
+   favor of (a) stage-hint card via setup.getStageHintForNPC + (b) computed
+   activity list via setup.computeActivityList. The stage hint shows WHERE
+   the player is headed; the activity list shows WHAT TO DO right now. */
+
+<!-- Story Goals — global hints render as narrative + tip cards only.
+     Activity lists were dropped 2026-05-01 after usability review (see
+     §2.11 in 12_Engine_PRD_09_Hint_System_Completeness.md). -->
+<<set _globals = setup.getGlobalHints()>>
+<<if _globals.length > 0>>
+  <div class="npc-section">
+    <h3 class="npc-name">Story Goals</h3>
+    <<for _g range _globals>>
+      <<renderStageHint _g>>
+    <</for>>
+  </div>
+<</if>>
+
+<!-- Player section — solo activities (shower, sleep, nap, etc.) -->
 <<if _hasPlayer>>
   <div class="npc-section">
     <h3 class="npc-name"><<print _helpData.player.name>></h3>
-    <<set _next = setup.getNextActivity("_player_")>>
-    <<if _next === null>>
-      <div class="quest-complete">✓ All activities completed!</div>
-    <<elseif _next.isStageHint>>
-      <div class="quest-available stage-hint">
-        → <<print _next.stageHint.text>>
-      </div>
-    <<elseif _next.isStartingCanvas>>
-      <div class="quest-available">→ Start the game</div>
-    <<elseif _next.isPhoneActivity>>
-      <div class="quest-available">
-        → 📱 Message <<print _next.activity.name || "someone">>
-      </div>
-    <<elseif _next.traitConditionsNotMet>>
-      <div class="quest-conditions">
-        🔒 <<print setup.formatCanvasConditions(_next.canvasConditions)>>
-      </div>
-    <<elseif _next.flagConditionsNotMet>>
-      <div class="quest-conditions">
-        🔒 <<print setup.formatFlagHint(_next.flagHint, _helpData.player.name)>>
-      </div>
-    <<elseif _next.daysConditionsNotMet>>
-      <div class="quest-waiting">
-        ⏳ <<if _next.daysRemaining === 1>>Come back tomorrow<<else>>Wait <<print _next.daysRemaining>> more days<</if>>
-      </div>
-    <<elseif _next.conditionsNotMet>>
-      <div class="quest-conditions">
-        🔒 <<print setup.formatCanvasConditions(_next.canvasConditions)>>
-      </div>
-    <<elseif _next.isLocked>>
-      <div class="quest-locked">
-        🔒 <<print setup.formatTraitRequirements(_next.missingTraits)>>
-      </div>
+    <<set _pActs = setup.computeActivityList("player", "_player_")>>
+    <<if _pActs.length > 0>>
+      <<print setup._renderActivityList(_pActs, _helpData.player.name)>>
     <<else>>
-      <div class="quest-available">
-        → <<print setup.formatActivityHint(_next.activity)>>
-      </div>
+      <div class="quest-complete">No activities available.</div>
     <</if>>
   </div>
 <</if>>
+
+<!-- Per-NPC sections — stage hint card (Pattern 2) + activity list (Pattern 3) -->
 <<if _hasNpcs>>
   <<for _npcId, _npcData range _helpData.npcs>>
     <div class="npc-section">
       <h3 class="npc-name"><<print ($npcs[_npcId] && $npcs[_npcId].name) || _npcData.name>></h3>
-      <<set _next = setup.getNextActivity(_npcId)>>
-      <<if _next === null>>
-        <div class="quest-complete">✓ All activities completed!</div>
-      <<elseif _next.isStageHint>>
-        <div class="quest-available stage-hint">
-          → <<print _next.stageHint.text>>
-        </div>
-      <<elseif _next.isStartingCanvas>>
-        <div class="quest-available">→ Start the game</div>
-      <<elseif _next.isPhoneActivity>>
-        <div class="quest-available">
-          → 📱 Message <<print _next.activity.name || "someone">>
-        </div>
-      <<elseif _next.traitConditionsNotMet>>
-        <div class="quest-conditions">
-          🔒 <<print setup.formatCanvasConditions(_next.canvasConditions)>>
-        </div>
-      <<elseif _next.flagConditionsNotMet>>
-        <div class="quest-conditions">
-          🔒 <<print setup.formatFlagHint(_next.flagHint, _npcData.name)>>
-        </div>
-      <<elseif _next.daysConditionsNotMet>>
-        <div class="quest-waiting">
-          ⏳ <<if _next.daysRemaining === 1>>Come back tomorrow<<else>>Wait <<print _next.daysRemaining>> more days<</if>>
-        </div>
-      <<elseif _next.conditionsNotMet>>
-        <div class="quest-conditions">
-          🔒 <<print setup.formatCanvasConditions(_next.canvasConditions)>>
-        </div>
-      <<elseif _next.isLocked>>
-        <div class="quest-locked">
-          🔒 <<print setup.formatTraitRequirements(_next.missingTraits)>>
-        </div>
-      <<else>>
-        <div class="quest-available">
-          → <<print setup.formatActivityHint(_next.activity)>>
-        </div>
+      <<set _slug = setup.npcSlugForId(_npcId)>>
+      <<if _slug>>
+        <<set _hint = setup.getStageHintForNPC(_slug)>>
+        <<if _hint>>
+          <<renderStageHint _hint>>
+        <</if>>
+      <</if>>
+      <<set _acts = setup.computeActivityList("npc", _npcId)>>
+      <<if _acts.length > 0>>
+        <<print setup._renderActivityList(_acts, _npcData.name)>>
       <</if>>
     </div>
   <</for>>
 <</if>>
+
 <<if !_hasPlayer && !_hasNpcs>>
   <div class="no-quests">No activities available.</div>
 <</if>>

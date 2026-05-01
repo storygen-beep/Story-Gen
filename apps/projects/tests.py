@@ -1314,6 +1314,180 @@ def _toml_with_arc_stages(arc_stages=None, player_trait_decay=None):
     return d
 
 
+# -- Pattern 2 (2026-05-01): label registries + tip + auto_goal -------------
+
+
+def _toml_with_labels(trait_labels=None, flag_labels=None):
+    """Minimal TOML with optional [[traits.labels]] / [[flags.labels]] blocks."""
+    d = _base_toml()
+    if trait_labels is not None:
+        d["traits"] = {"labels": trait_labels}
+    if flag_labels is not None:
+        d["flags"] = {"labels": flag_labels}
+    return d
+
+
+class Pattern2LabelRegistryTests(SimpleTestCase):
+    def test_absent_label_registries_are_empty_lists(self):
+        template = normalize(_toml_with_labels())
+        self.assertEqual(template.trait_labels, [])
+        self.assertEqual(template.flag_labels, [])
+
+    def test_trait_label_parses_with_all_fields(self):
+        template = normalize(
+            _toml_with_labels(
+                trait_labels=[
+                    {"key": "frank_bookkeeping_count", "label": "Bookkeeping",
+                     "verb": "do", "unit": "session"}
+                ]
+            )
+        )
+        self.assertEqual(len(template.trait_labels), 1)
+        tl = template.trait_labels[0]
+        self.assertEqual(tl.key, "frank_bookkeeping_count")
+        self.assertEqual(tl.label, "Bookkeeping")
+        self.assertEqual(tl.verb, "do")
+        self.assertEqual(tl.unit, "session")
+
+    def test_flag_label_parses(self):
+        template = normalize(
+            _toml_with_labels(
+                flag_labels=[{"key": "group_settled_in", "label": "Settled in"}]
+            )
+        )
+        self.assertEqual(len(template.flag_labels), 1)
+        self.assertEqual(template.flag_labels[0].key, "group_settled_in")
+        self.assertEqual(template.flag_labels[0].label, "Settled in")
+
+    def test_duplicate_trait_label_keys_fail_validation(self):
+        template = normalize(
+            _toml_with_labels(
+                trait_labels=[
+                    {"key": "trust", "label": "Trust"},
+                    {"key": "trust", "label": "Different"},
+                ]
+            )
+        )
+        errors = validate(template)
+        self.assertTrue(
+            any("traits.labels" in e and "duplicate" in e.lower() for e in errors),
+            errors,
+        )
+
+    def test_missing_label_field_fails_validation(self):
+        template = normalize(
+            _toml_with_labels(trait_labels=[{"key": "trust", "label": ""}])
+        )
+        errors = validate(template)
+        self.assertTrue(
+            any("traits.labels" in e and "label" in e for e in errors), errors
+        )
+
+    def test_serializer_emits_tip_and_auto_goal(self):
+        from apps.projects.services.template_import import _serialize_hint_template, TemplateHintTemplate, TemplateHintCondition
+        t = TemplateHintTemplate(
+            text="He's looser at the table now.",
+            tip="Each Bookkeeping pays $8.",
+            auto_goal=True,
+            npc_id="npc_frank",
+            condition=TemplateHintCondition(
+                stage_npc="npc_frank", stage_op="eq", stage_value=0
+            ),
+        )
+        out = _serialize_hint_template(t)
+        self.assertEqual(out["tip"], "Each Bookkeeping pays $8.")
+        self.assertTrue(out["auto_goal"])
+        self.assertEqual(out["text"], "He's looser at the table now.")
+
+    def test_auto_goal_defaults_true_when_omitted_in_toml(self):
+        d = _base_toml()
+        d["story_arc"] = {
+            "version": "1.0",
+            "hints": {
+                "stuck_threshold_minutes": 30,
+                "templates": [
+                    {"text": "test", "npc_id": "npc_frank"}
+                ],
+            },
+        }
+        template = normalize(d)
+        self.assertTrue(template.story_arc.hints.templates[0].auto_goal)
+
+
+class Pattern2RuntimeMetadataTests(TestCase):
+    """Test that label registries flow through create_project_from_template."""
+
+    def test_label_registries_persist_to_project_metadata(self):
+        from apps.projects.services.template_import import create_project_from_template
+        from apps.authentication.models import User
+        from apps.projects.models import Project
+
+        d = _toml_with_labels(
+            trait_labels=[
+                {"key": "frank_bookkeeping_count", "label": "Bookkeeping", "verb": "do"}
+            ],
+            flag_labels=[{"key": "group_settled_in", "label": "Settled in"}],
+        )
+        template = normalize(d)
+        owner = User.objects.create_user(
+            username="p2_runtime", email="p2r@test", password="x"
+        )
+        result = create_project_from_template(template, owner_id=str(owner.id))
+        proj = Project.objects.get(id=result["project_id"])
+        self.assertEqual(
+            proj.metadata["trait_labels"]["frank_bookkeeping_count"]["verb"], "do"
+        )
+
+
+# -- Pattern 3 (2026-05-01): activity-list panel ---------------------------
+
+
+class Pattern3ActivityListTests(TestCase):
+    """Pattern 3 — verify Python index builders + runtime data shipping."""
+
+    @classmethod
+    def setUpTestData(cls):
+        User = get_user_model()
+        cls.user = User.objects.create_user(
+            email="pattern3-test@example.com", password="testpass123"
+        )
+        with open(FIXTURE_PATH, "rb") as f:
+            cls.toml_data = tomli.load(f)
+
+    def _build(self):
+        toml_data = copy.deepcopy(self.toml_data)
+        template = normalize(toml_data)
+        errors = validate(template)
+        self.assertEqual(errors, [], f"Should validate clean: {errors}")
+        result = create_project_from_template(template, str(self.user.id))
+        project = Project.objects.get(id=result["project_id"])
+        from apps.game_generation.twee_comprehensive.generators.v1 import (
+            TweeComprehensiveGeneratorV1,
+        )
+        twee = TweeComprehensiveGeneratorV1().generate(project)
+        return twee
+
+    def test_activity_gates_index_shipped_to_runtime(self):
+        twee = self._build()
+        self.assertIn("setup.activity_gates_index = ", twee)
+
+    def test_render_activity_list_function_shipped(self):
+        twee = self._build()
+        self.assertIn("setup.computeActivityList = function", twee)
+        self.assertIn("setup._renderActivityList = function", twee)
+        self.assertIn("setup._formatActivityEffect = function", twee)
+        self.assertIn("setup._formatActivityGates = function", twee)
+        self.assertIn("setup._formatActivitySchedules = function", twee)
+
+    def test_quests_page_uses_compute_activity_list(self):
+        twee = self._build()
+        self.assertIn('setup.computeActivityList("npc", _npcId)', twee)
+        self.assertIn('setup.computeActivityList("player", "_player_")', twee)
+        # Story Goals no longer ship an activity list (dropped 2026-05-01);
+        # global hints render as narrative + tip cards only.
+        self.assertNotIn('setup.computeActivityList("goal"', twee)
+
+
 class ArcStagesSchemaTests(SimpleTestCase):
     def test_absent_arc_stages_is_empty_list(self):
         template = normalize(_toml_with_arc_stages(arc_stages=None))
@@ -1864,12 +2038,18 @@ class StageGatedHintIntegrationTests(TestCase):
         self.assertIn("setup.getStageHintForNPC(slug)", twee)
         self.assertIn("isStageHint: true", twee)
 
-    def test_quests_page_has_stage_hint_branch_in_both_sections(self):
+    def test_quests_page_renders_stage_hint_directly(self):
         _, twee = self._build()
-        # Two render branches — one in the player section, one in the NPC loop.
-        # The branch text contains _next.isStageHint and the stageHint.text print.
-        self.assertEqual(twee.count("<<elseif _next.isStageHint>>"), 2)
-        self.assertIn("_next.stageHint.text", twee)
+        # Pattern 3 (2026-05-01): QuestsPage no longer routes through
+        # getNextActivity for stage hints. It calls setup.getStageHintForNPC
+        # directly per NPC, then renders the hint card + activity list. The
+        # widget still receives the full hint object so the auto-rendered 🎯
+        # goal block (Pattern 2) keeps working.
+        self.assertIn("setup.getStageHintForNPC(_slug)", twee)
+        self.assertIn("<<renderStageHint _hint>>", twee)
+        # Activity list rendering (Pattern 3) replaces the ✓-completed branches.
+        self.assertIn("setup.computeActivityList(\"npc\", _npcId)", twee)
+        self.assertIn("setup._renderActivityList", twee)
 
     def test_sidebar_hint_extracts_stage_hint_first(self):
         _, twee = self._build()
@@ -1974,5 +2154,9 @@ class Phase2IntegrationSmokeTest(TestCase):
         # template-emission path to be present.)
         self.assertGreaterEqual(twee.count('"trait_key": "npc_frank_stage"'), 3)
 
-        # QuestsPage render branches for stage hints (player + NPC sections).
-        self.assertEqual(twee.count("<<elseif _next.isStageHint>>"), 2)
+        # Pattern 3 (2026-05-01): QuestsPage routes stage hints directly via
+        # setup.getStageHintForNPC (not through getNextActivity). The earlier
+        # `<<elseif _next.isStageHint>>` branches were removed when activity
+        # lists replaced the per-source single-next-activity rendering.
+        self.assertIn("setup.getStageHintForNPC(_slug)", twee)
+        self.assertIn("<<renderStageHint _hint>>", twee)

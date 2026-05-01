@@ -392,10 +392,10 @@ The "Phase 2 doctrine items only" scope decision excludes the following, with ra
 
 It is not a redesign spec. (Those are 01, 02, 04, plus deferred 05/06/07.)
 It is not a rewrite of 03. (E1–E8 stay valid; this doc adds E9–E11.)
-It is not the implementation. (The work is specified; engineering execution is a separate task.)
+It was not the implementation when authored on 2026-04-29. §11 documents what shipped on 2026-04-30.
 It is not the journal display spec. (That's `07_Journal_Display_Spec.md`, deferred.)
 
-It is the engine work the Phase 2 doctrine demands beyond what was already shipped in 03. Three items, ~12–17 engineering hours, no new primitives, no breaking changes. When E9, E10, E11 land, the engine is end-to-end ready for the doctrine-driven Phase 2 rewrite.
+It is the engine work the Phase 2 doctrine demands beyond what was already shipped in 03. Three items, ~12–17 engineering hours, no new primitives, no breaking changes. When E9, E10, E11 landed on 2026-04-30 (see §11), the engine became end-to-end ready for the doctrine-driven Phase 2 rewrite.
 
 ---
 

@@ -295,6 +295,32 @@ class GameTemplate:
     # E4: named composite gates. Authored under [[engine.stage_helpers]] in TOML.
     # A condition with `type = "stage"` references one of these by name.
     stage_helpers: List["TemplateStageHelper"] = field(default_factory=list)
+    # Pattern 2 (2026-05-01): label registries — map internal trait/flag names
+    # to player-facing labels used by setup.computeHintGoal when auto-rendering
+    # the 🎯 goal block. Authored under [[traits.labels]] / [[flags.labels]].
+    trait_labels: List["TemplateTraitLabel"] = field(default_factory=list)
+    flag_labels: List["TemplateFlagLabel"] = field(default_factory=list)
+
+
+@dataclass
+class TemplateTraitLabel:
+    """Player-facing label for a trait key (Pattern 2).
+
+    Used by setup.computeHintGoal to render gates as
+    '◯ <Label> <op> <value> (<currentValue>)' instead of the raw trait_key.
+    For NPC-subject traits, the renderer prepends the NPC name.
+    """
+    key: str
+    label: str
+    verb: str = "reach"   # framing word: "reach trust ≥ 15" / "do Bookkeeping ×3"
+    unit: str = ""        # optional unit noun for counter pluralization
+
+
+@dataclass
+class TemplateFlagLabel:
+    """Player-facing label for a flag key (Pattern 2)."""
+    key: str
+    label: str
 
 
 @dataclass
@@ -343,6 +369,11 @@ class TemplateTrigger:
     trigger_mode: str = "manual"  # "manual" (clickable link) or "random" (auto-fires with probability)
     chance: Optional[float] = None  # Probability 0.0–1.0 for random trigger mode
     costs: List[Dict[str, Any]] = field(default_factory=list)  # [{trait: str, value: int}] — resource costs deducted on canvas entry
+    # E21 — opt-in: when this canvas is filtered out by an unmet condition
+    # (e.g., daily-cooldown flag), render a grayed-out entry on QuestsPage
+    # explaining when it will be available again. Default off (silent filter).
+    show_when_blocked: bool = False
+    cooldown_message: Optional[str] = None  # custom text; falls back to a generic message
 
 
 @dataclass
@@ -560,6 +591,16 @@ class TemplateHintCondition:
     stage_npc: Optional[str] = None         # NPC slug; must reference an NPC with arc_stages
     stage_op: Optional[str] = None          # 'eq' | 'gte' | 'lte'
     stage_value: Optional[int] = None       # 0..len(arc_stages)-1
+    # E14 — list of additional trait/flag predicates AND-combined with stage gate.
+    # Each item is a normalized condition_item dict matching the engine's
+    # checkSingleCondition shape (type/subject/operator/...). Lets authors
+    # express "stage 0 AND trust >= 10 AND group_settled_in is_false" precisely.
+    trait_checks: List[Dict[str, Any]] = field(default_factory=list)
+    # E22 — cross-NPC stage prerequisite. Format: "npc_<slug> <op> <int>"
+    # e.g., "npc_frank >= 2". Parsed at serialization into a trait condition_item
+    # on $player.core_traits[<slug>_stage]. Lets a hint document why an arc is
+    # locked behind another NPC's progress.
+    prerequisite_npc_stage: Optional[str] = None
 
 
 @dataclass
@@ -572,6 +613,14 @@ class TemplateHintTemplate:
     # Quests page. When stage_npc is set on the condition, npc_id defaults
     # to it; otherwise authors set npc_id explicitly to scope the hint.
     npc_id: Optional[str] = None
+    # Pattern 2 (2026-05-01): optional player-facing tip rendered as 💡 line
+    # below the auto-rendered goal block. Used for strategic advice that
+    # doesn't fit structured gate data ("Trust decays 1.0/day if ignored").
+    tip: Optional[str] = None
+    # Pattern 2: when true (default), engine auto-renders the 🎯 goal block
+    # from the helper conditions or canvas trigger conditions. When false,
+    # engine treats `text` as fully authored (legacy behavior).
+    auto_goal: bool = True
 
 
 @dataclass
@@ -896,6 +945,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                         for ci in (trig_def.get("costs") or [])
                         if isinstance(ci, dict) and "trait" in ci and "value" in ci
                     ],
+                    show_when_blocked=bool(trig_def.get("show_when_blocked", False)),
+                    cooldown_message=_require_str(trig_def, "cooldown_message", "") or None,
                 )
 
             # Nodes
@@ -1225,6 +1276,17 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                                     f"hint condition stage_value must be int, "
                                     f"got {type(sg_val_raw).__name__}: {sg_val_raw!r}"
                                 )
+                        # E14: parse trait_checks list (optional). Each entry must be
+                        # a dict matching engine's condition_item shape; we don't
+                        # re-validate here (validator runs separately).
+                        trait_checks_raw = cond_raw.get("trait_checks") or []
+                        trait_checks_list: List[Dict[str, Any]] = []
+                        if isinstance(trait_checks_raw, list):
+                            for tc in trait_checks_raw:
+                                if isinstance(tc, dict):
+                                    trait_checks_list.append(dict(tc))
+                        # E22: parse prerequisite_npc_stage string (optional).
+                        prereq_raw = _require_str(cond_raw, "prerequisite_npc_stage", "") or None
                         cond_obj = TemplateHintCondition(
                             missing_flag=_require_str(cond_raw, "missing_flag", "")
                             or None,
@@ -1234,17 +1296,26 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                             stage_npc=sg_npc,
                             stage_op=sg_op,
                             stage_value=sg_val,
+                            trait_checks=trait_checks_list,
+                            prerequisite_npc_stage=prereq_raw,
                         )
                     # Routing: explicit npc_id, or fall back to the stage_npc
                     # from the condition (the common case).
                     tpl_npc = _require_str(ht, "npc_id", "") or None
                     if not tpl_npc and cond_obj and cond_obj.stage_npc:
                         tpl_npc = cond_obj.stage_npc
+                    # Pattern 2: tip + auto_goal (both optional; auto_goal defaults true)
+                    tpl_tip = _require_str(ht, "tip", "") or None
+                    tpl_auto_goal = ht.get("auto_goal", True)
+                    if not isinstance(tpl_auto_goal, bool):
+                        tpl_auto_goal = True
                     hint_templates.append(
                         TemplateHintTemplate(
                             condition=cond_obj,
                             text=_require_str(ht, "text", ""),
                             npc_id=tpl_npc,
+                            tip=tpl_tip,
+                            auto_goal=tpl_auto_goal,
                         )
                     )
             hints_obj = TemplateStoryHints(
@@ -1515,6 +1586,35 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 )
             )
 
+    # Pattern 2: label registries — top-level [[traits.labels]] / [[flags.labels]]
+    trait_labels: List[TemplateTraitLabel] = []
+    traits_raw = data.get("traits")
+    if isinstance(traits_raw, dict):
+        for tl_raw in traits_raw.get("labels") or []:
+            if not isinstance(tl_raw, dict):
+                continue
+            trait_labels.append(
+                TemplateTraitLabel(
+                    key=_require_str(tl_raw, "key", ""),
+                    label=_require_str(tl_raw, "label", ""),
+                    verb=_require_str(tl_raw, "verb", "reach") or "reach",
+                    unit=_require_str(tl_raw, "unit", ""),
+                )
+            )
+
+    flag_labels: List[TemplateFlagLabel] = []
+    flags_raw = data.get("flags")
+    if isinstance(flags_raw, dict):
+        for fl_raw in flags_raw.get("labels") or []:
+            if not isinstance(fl_raw, dict):
+                continue
+            flag_labels.append(
+                TemplateFlagLabel(
+                    key=_require_str(fl_raw, "key", ""),
+                    label=_require_str(fl_raw, "label", ""),
+                )
+            )
+
     return GameTemplate(
         schema_version=schema_version,
         project=project,
@@ -1547,6 +1647,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         theme=theme_obj,
         daily_tick=daily_tick_obj,
         stage_helpers=stage_helpers,
+        trait_labels=trait_labels,
+        flag_labels=flag_labels,
     )
 
 
@@ -2600,7 +2702,543 @@ def validate(template: GameTemplate) -> List[str]:
                     f"{ctx}.npc_id '{t.npc_id}' not found in NPC definitions"
                 )
 
+            # E14 — validate trait_checks shape (each item must have
+            # subject + (trait_key XOR flag_key) + operator).
+            for tci, tc in enumerate(cond.trait_checks or []):
+                tc_ctx = f"{ctx}.condition.trait_checks[{tci}]"
+                if not isinstance(tc, dict):
+                    errors.append(f"{tc_ctx}: must be a dict, got {type(tc).__name__}")
+                    continue
+                tc_type = tc.get("type")
+                if tc_type not in ("trait", "flag"):
+                    errors.append(
+                        f"{tc_ctx}.type must be 'trait' or 'flag', got '{tc_type}'"
+                    )
+                tc_subject = tc.get("subject")
+                if tc_subject not in ("player", "npc"):
+                    errors.append(
+                        f"{tc_ctx}.subject must be 'player' or 'npc', got '{tc_subject}'"
+                    )
+                tc_op = tc.get("operator")
+                valid_ops = {"eq", "gte", "lte", "gt", "lt", "is_true", "is_false"}
+                if tc_op not in valid_ops:
+                    errors.append(
+                        f"{tc_ctx}.operator must be one of {sorted(valid_ops)}, "
+                        f"got '{tc_op}'"
+                    )
+                # Cross-field: trait → trait_key required + value; flag → flag_key required.
+                if tc_type == "trait":
+                    if not tc.get("trait_key"):
+                        errors.append(f"{tc_ctx}: type=trait requires trait_key")
+                    if "value" not in tc:
+                        errors.append(f"{tc_ctx}: type=trait requires value")
+                if tc_type == "flag":
+                    if not tc.get("flag_key"):
+                        errors.append(f"{tc_ctx}: type=flag requires flag_key")
+                # NPC subject must reference real NPC.
+                if tc_subject == "npc":
+                    tc_npc = tc.get("npc_id")
+                    if not tc_npc:
+                        errors.append(f"{tc_ctx}: subject=npc requires npc_id")
+                    elif tc_npc not in all_npc_ids:
+                        errors.append(
+                            f"{tc_ctx}.npc_id '{tc_npc}' not found in NPC definitions"
+                        )
+
+            # E22 — validate prerequisite_npc_stage syntax + NPC reference.
+            if cond.prerequisite_npc_stage:
+                parsed = _parse_prerequisite_npc_stage(cond.prerequisite_npc_stage)
+                if parsed is None:
+                    errors.append(
+                        f"{ctx}.condition.prerequisite_npc_stage "
+                        f"'{cond.prerequisite_npc_stage}' must match format "
+                        f"'npc_<slug> <op> <int>' (e.g., 'npc_frank >= 2')"
+                    )
+                else:
+                    pre_npc, _, pre_val = parsed
+                    if pre_npc not in all_npc_ids:
+                        errors.append(
+                            f"{ctx}.condition.prerequisite_npc_stage references "
+                            f"unknown NPC '{pre_npc}'"
+                        )
+                    elif pre_npc not in npc_arc_lookup:
+                        errors.append(
+                            f"{ctx}.condition.prerequisite_npc_stage references "
+                            f"NPC '{pre_npc}' without arc_stages — declare "
+                            f"arc_stages on the NPC first"
+                        )
+                    else:
+                        arc_len = len(npc_arc_lookup[pre_npc])
+                        if pre_val < 0 or pre_val >= arc_len:
+                            errors.append(
+                                f"{ctx}.condition.prerequisite_npc_stage value "
+                                f"{pre_val} out of range for NPC '{pre_npc}' "
+                                f"arc_stages (0..{arc_len - 1})"
+                            )
+
+    # Pattern 2 — Validate label registries (FAIL on duplicate keys; warn
+    # via linter if a helper-referenced trait/flag has no label entry).
+    seen_trait_label_keys: Set[str] = set()
+    for tl in (template.trait_labels or []):
+        if not tl.key:
+            errors.append("traits.labels entry missing required `key` field")
+            continue
+        if not tl.label:
+            errors.append(f"traits.labels[{tl.key}] missing required `label` field")
+        if tl.key in seen_trait_label_keys:
+            errors.append(f"traits.labels duplicate key '{tl.key}'")
+        seen_trait_label_keys.add(tl.key)
+
+    seen_flag_label_keys: Set[str] = set()
+    for fl in (template.flag_labels or []):
+        if not fl.key:
+            errors.append("flags.labels entry missing required `key` field")
+            continue
+        if not fl.label:
+            errors.append(f"flags.labels[{fl.key}] missing required `label` field")
+        if fl.key in seen_flag_label_keys:
+            errors.append(f"flags.labels duplicate key '{fl.key}'")
+        seen_flag_label_keys.add(fl.key)
+
+    # E23 — Hint linter (warn-only). Cross-checks hint text against the
+    # numeric thresholds, time bands, and gate counts in the matching stage
+    # helpers and canvas triggers. Catches the recurring authoring drift
+    # documented in 11_Hint_Authoring_Guide.md before publish.
+    _lint_hint_templates(template)
+
     return errors
+
+
+def _lint_hint_templates(template: "GameTemplate") -> None:
+    """Warn-only linter for [[story_arc.hints.templates]] entries.
+
+    Detects the recurring authoring pitfalls (hallucinated thresholds, time
+    band drift, internal name leaks, ✓-as-bullet, etc.) by parsing each
+    hint's `text` and cross-checking against the matching stage helper /
+    canvas trigger. Emits Python warnings (caught by package_from_toml and
+    surfaced as ⚠️ lines in the build output) — does not block the build.
+    """
+    import re
+    import warnings as _warnings
+
+    if not template.story_arc or not template.story_arc.hints:
+        return
+    templates = template.story_arc.hints.templates
+    if not templates:
+        return
+
+    # Build lookups once.
+    helpers_by_name: Dict[str, Any] = {
+        h.name: h for h in (template.stage_helpers or [])
+    }
+    location_names: Set[str] = {loc.name for loc in template.locations}
+    npc_arc_lookup: Dict[str, List[str]] = {
+        n.id: n.arc_stages for n in template.npcs if n.arc_stages
+    }
+    # Pattern 2 (2026-05-01) — label registries for "unlabeled trait/flag" rule
+    trait_label_keys: Set[str] = {tl.key for tl in (template.trait_labels or [])}
+    flag_label_keys: Set[str] = {fl.key for fl in (template.flag_labels or [])}
+    # Collect all schedule blocks per NPC for time-band checks.
+    npc_schedules: Dict[str, List[Tuple[str, str, str]]] = {}  # npc_id -> [(start, end, canvas_id)]
+    for cv in template.canvases:
+        if not cv.trigger:
+            continue
+        cv_npc = cv.trigger.npc
+        if not cv_npc:
+            continue
+        for s in (cv.trigger.schedules or []):
+            if s.start_time and s.end_time:
+                npc_schedules.setdefault(cv_npc, []).append((s.start_time, s.end_time, cv.id))
+
+    # Detection rules.
+    THRESHOLD_RE = re.compile(
+        r"\b(trust|corruption|beauty|arousal|fitness|love|energy|hygiene|calculation|money)\s*[≥>=]+\s*(\d+)",
+        re.IGNORECASE,
+    )
+    COUNTER_RE = re.compile(
+        r"(?:×|x)(\d+)\s*(?:sessions|times|visits|helps)|(\d+)\+\s*times",
+        re.IGNORECASE,
+    )
+    TIME_BAND_RE = re.compile(r"(\d{2}:\d{2})\s*[–\-]\s*(\d{2}:\d{2})")
+    LOCATION_PAREN_RE = re.compile(r"\(([A-Z][\w\s']+?),\s*\d{2}:\d{2}")
+    INTERNAL_NAME_RE = re.compile(r"\b\w+_(count|done|today|open|noticed|revealed|caught|cracked)\b")
+    CHECKMARK_AS_BULLET_RE = re.compile(r"\w+\s+✓(?!\s*\(already)")
+
+    INTERNAL_NAME_WHITELIST = {
+        # NPC-facing flag names players might see referenced in safe contexts;
+        # extend as needed.
+    }
+
+    # --- Linter v2 (2026-05-01) — 5 additional rules ---
+    TIER_ABBREV_RE = re.compile(r"\bT(\d)\b")
+    MONEY_AMOUNT_RE = re.compile(r"\$(\d+)")
+    STAGE_ARROW_RE = re.compile(r"Stage\s*\d+\s*[→\-]\s*\d+", re.IGNORECASE)
+    ADVANCES_STAGE_RE = re.compile(r"\badvances\s+Stage\s+\d+", re.IGNORECASE)
+    THE_X_FLAG_RE = re.compile(r"\bthe\s+[\w\-]+\s+flag\b", re.IGNORECASE)
+
+    FOURTH_WALL_KEYWORDS = (
+        "NOT REACHABLE",
+        "dev shortcut",
+        "dev mode",
+        "🔧",
+        "slice testing",
+        "for slice",
+        "in slice",
+        "out of scope",
+        "TODO",
+        "FIXME",
+    )
+    AUTHOR_SCENE_TAG_PHRASES = (
+        "the catch fires",
+        "the catch happens",
+        "the reveal",
+        "first-glance moment",
+        "doorway confrontation",
+    )
+    MONEY_DEBIT_CONTEXT = ("due", "rent", "pay", "owe", "cost", "miss")
+
+    # Build set of known money payouts across all canvases (for rule 2).
+    # Effects can live in two places depending on exit_block.type:
+    #   - type="choices": each TemplateChoice.choices[].effects (typed objects)
+    #   - type="location": exit_block.config["effects"] (raw dicts from TOML)
+    known_money_payouts: Set[int] = set()
+    for cv in template.canvases:
+        for node in (cv.nodes or []):
+            eb = node.exit_block
+            if not eb:
+                continue
+            # Typed effects on choices
+            for choice in (eb.choices or []):
+                for e in (choice.effects or []):
+                    if (
+                        getattr(e, "trait", None) == "money"
+                        and getattr(e, "op", None) == "add"
+                        and isinstance(getattr(e, "value", None), (int, float))
+                        and e.value > 0
+                    ):
+                        known_money_payouts.add(int(e.value))
+            # Raw effects in config dict (location-type exit_blocks)
+            cfg = eb.config or {}
+            for e in (cfg.get("effects") or []):
+                if not isinstance(e, dict):
+                    continue
+                if (
+                    e.get("trait") == "money"
+                    and e.get("op") == "add"
+                    and isinstance(e.get("value"), (int, float))
+                    and e["value"] > 0
+                ):
+                    known_money_payouts.add(int(e["value"]))
+
+    def _emit(template_index: int, severity: str, msg: str) -> None:
+        # All linter findings are warn-only — these are heuristic checks
+        # (helper might not capture branch-inside-shell transitions, OR-logic
+        # alternate paths, etc.). Severity label kept for triage.
+        ctx = f"story_arc.hints.templates[{template_index}]"
+        full_msg = f"HINT LINTER {severity} {ctx}: {msg}"
+        _warnings.warn(full_msg, UserWarning, stacklevel=4)
+
+    for ti, t in enumerate(templates):
+        text = t.text or ""
+        tip = (getattr(t, "tip", None) or "")
+        cond = t.condition
+
+        # --- Rule: missing npc_id and no stage_npc → silently dropped ---
+        if not t.npc_id and not (cond and cond.stage_npc):
+            _emit(
+                ti,
+                "WARN",
+                f"hint has no npc_id and no stage_npc — engine "
+                f"setup.getStageHintForNPC skips global templates today (E15 ETA). "
+                f"Either add npc_id or wait for E15.",
+            )
+
+        # --- Pattern 2 Rule: auto_goal=true + manual " — 🎯 " in text ---
+        # Engine renders the goal block automatically; the author's manual goal
+        # line will be stripped from display. Warn so the author either removes
+        # the manual goal OR sets `auto_goal = false` to opt out.
+        if (
+            getattr(t, "auto_goal", True)
+            and cond and cond.stage_npc and cond.stage_value is not None
+            and " — 🎯 " in text
+        ):
+            _emit(
+                ti,
+                "WARN",
+                "hint has `auto_goal = true` (default) AND a manual ' — 🎯 ' "
+                "goal line in text. Engine will auto-render from the helper "
+                "and strip the manual portion. Either remove the ' — 🎯 ...' "
+                "tail from text, or set `auto_goal = false` to opt out.",
+            )
+
+        # --- Rule: ✓ used as bullet character ---
+        if CHECKMARK_AS_BULLET_RE.search(text):
+            _emit(
+                ti,
+                "WARN",
+                "uses ✓ as a list bullet — players read ✓ as 'completed'. "
+                "Replace with • for bullets.",
+            )
+
+        # --- Rule: internal name leak ---
+        for m in INTERNAL_NAME_RE.finditer(text):
+            name = m.group(0)
+            if name in INTERNAL_NAME_WHITELIST:
+                continue
+            _emit(
+                ti,
+                "WARN",
+                f"hint text contains internal variable name '{name}' — "
+                f"translate to plain English (e.g., '5+ times' instead of "
+                f"'<counter_name> ≥ 5').",
+            )
+
+        # --- Rule: location paren references unknown location ---
+        for m in LOCATION_PAREN_RE.finditer(text):
+            loc = m.group(1).strip()
+            if loc not in location_names:
+                # Allow common short forms not in [[locations]] (Home, etc.)
+                # but still warn if it's likely a typo.
+                _emit(
+                    ti,
+                    "WARN",
+                    f"hint mentions location '{loc}' which doesn't match any "
+                    f"[[locations]].name in the game. Check for typo.",
+                )
+
+        # === Linter v2 (2026-05-01) — 5 additional rules ===
+
+        # --- Rule v2.1: tier abbreviation (T0/T1/T2) leak ---
+        for m in TIER_ABBREV_RE.finditer(text):
+            _emit(
+                ti,
+                "WARN",
+                f"hint contains tier abbreviation '{m.group(0)}' — players don't "
+                f"know what 'T0/T1/T2' means. Use a player-facing label "
+                f"(e.g., 'basic shift', 'busy shift') or rename the canvas itself.",
+            )
+
+        # --- Rule v2.2: dollar amount doesn't match any scene payout ---
+        for m in MONEY_AMOUNT_RE.finditer(text):
+            amount = int(m.group(1))
+            if amount <= 0 or amount in known_money_payouts:
+                continue
+            # False-positive filter: if the surrounding ±30 chars look like a
+            # debit (rent due, pay, owe, cost, miss), skip — we only check payouts.
+            ctx_start = max(0, m.start() - 30)
+            ctx_end = min(len(text), m.end() + 30)
+            ctx = text[ctx_start:ctx_end].lower()
+            if any(w in ctx for w in MONEY_DEBIT_CONTEXT):
+                continue
+            payouts_str = ", ".join(f"${v}" for v in sorted(known_money_payouts)) or "(none found)"
+            _emit(
+                ti,
+                "WARN",
+                f"hint mentions '${amount}' as a payout/earning but no canvas has "
+                f"'money += {amount}' in any exit_block effect. Known payouts: "
+                f"{payouts_str}. Update hint to match actual scene payouts.",
+            )
+
+        # --- Rule v2.3: fourth-wall / dev memo leak ---
+        text_lower = text.lower()
+        for kw in FOURTH_WALL_KEYWORDS:
+            if kw.lower() in text_lower:
+                _emit(
+                    ti,
+                    "WARN",
+                    f"hint contains author/dev memo '{kw}' — the player will see this. "
+                    f"Either gate the hint with `dev_only = true`, or rewrite as "
+                    f"in-fiction text (e.g., 'this story continues in a later chapter').",
+                )
+                break  # one warning per template — don't flood
+
+        # --- Rule v2.4: engine-jargon stage-arrow framing ---
+        for m in STAGE_ARROW_RE.finditer(text):
+            _emit(
+                ti,
+                "WARN",
+                f"hint uses engine-jargon stage notation '{m.group(0)}' — players "
+                f"see stage labels in the sidebar but not the arrow framing. "
+                f"Rephrase as 'Next stage needs:' or 'To advance:'.",
+            )
+        for m in ADVANCES_STAGE_RE.finditer(text):
+            _emit(
+                ti,
+                "WARN",
+                f"hint says '{m.group(0)}' — 'Stage' as an engine concept leaks. "
+                f"Rephrase ('moves things forward', 'unlocks the next chapter', etc.).",
+            )
+
+        # --- Rule v2.5: author-side phrasing ---
+        # 5a — "the X flag" engine-word leak
+        for m in THE_X_FLAG_RE.finditer(text):
+            _emit(
+                ti,
+                "WARN",
+                f"hint says '{m.group(0)}' — 'flag' is an engine word. Players "
+                f"don't know what flags are. Describe the player-facing condition "
+                f"instead (e.g., 'until Ryan invites you as a partner').",
+            )
+        # 5b — known author scene tag phrases
+        for phrase in AUTHOR_SCENE_TAG_PHRASES:
+            if phrase.lower() in text_lower:
+                _emit(
+                    ti,
+                    "WARN",
+                    f"hint mentions author-side scene tag '{phrase}' — players "
+                    f"don't know which scene this refers to. Describe what the "
+                    f"player will SEE happen instead.",
+                )
+
+        # === End linter v2 ===
+
+        # --- Rules requiring stage_gate context (need to know which helper) ---
+        if not (cond and cond.stage_npc and cond.stage_value is not None):
+            continue
+        npc_slug = cond.stage_npc
+        cur_stage = cond.stage_value
+        next_stage = cur_stage + 1
+        # Look up the helper that gates the NEXT stage advancement.
+        helper_name = f"{npc_slug.replace('npc_', '')}_stage_{next_stage}"
+        helper = helpers_by_name.get(helper_name)
+        if not helper:
+            continue  # No helper for this transition — terminal stage or non-helper-driven
+
+        # Extract numeric thresholds from helper conditions.
+        helper_items = (helper.conditions or {}).get("items", []) if isinstance(helper.conditions, dict) else []
+        # Build map: trait_key -> threshold
+        helper_thresholds: Dict[str, int] = {}
+        helper_counters: Dict[str, int] = {}
+        for item in helper_items:
+            if not isinstance(item, dict):
+                continue
+            if item.get("type") != "trait":
+                continue
+            trait_key = item.get("trait_key", "")
+            value = item.get("value")
+            op = item.get("operator", "")
+            if not isinstance(value, (int, float)) or op not in ("gte", "gt", "eq"):
+                continue
+            if trait_key.endswith("_count") or trait_key.endswith("_done"):
+                helper_counters[trait_key] = int(value)
+            else:
+                helper_thresholds[trait_key] = int(value)
+
+        # --- Rule: numeric threshold drift (trust ≥ N etc.) ---
+        for m in THRESHOLD_RE.finditer(text):
+            stat_name = m.group(1).lower()
+            hint_val = int(m.group(2))
+            actual = helper_thresholds.get(stat_name)
+            if actual is not None and actual != hint_val:
+                _emit(
+                    ti,
+                    "FAIL",
+                    f"hint says '{stat_name} ≥ {hint_val}' but helper "
+                    f"'{helper_name}' requires '{stat_name} >= {actual}'. "
+                    f"Update hint to match helper (canvas/helper is source of truth).",
+                )
+
+        # --- Rule: counter drift (×N sessions / N+ times) ---
+        for m in COUNTER_RE.finditer(text):
+            hint_val = int(m.group(1) or m.group(2))
+            # Match any counter — heuristic: if the helper has exactly one counter,
+            # compare. If multiple, can't disambiguate from text alone.
+            if len(helper_counters) == 1:
+                only_counter = list(helper_counters.values())[0]
+                if only_counter != hint_val:
+                    counter_name = list(helper_counters.keys())[0]
+                    _emit(
+                        ti,
+                        "FAIL",
+                        f"hint says '×{hint_val}' but helper '{helper_name}' "
+                        f"requires '{counter_name} >= {only_counter}'. "
+                        f"Update hint to match.",
+                    )
+
+        # --- Rule: time band drift ---
+        for m in TIME_BAND_RE.finditer(text):
+            hint_start = m.group(1)
+            hint_end = m.group(2)
+            schedules = npc_schedules.get(npc_slug, [])
+            if not schedules:
+                continue
+            # Check if the hint's band matches ANY of the NPC's canvas schedules.
+            matched = any(
+                s_start == hint_start and s_end == hint_end
+                for s_start, s_end, _ in schedules
+            )
+            if not matched:
+                actual_bands = ", ".join(f"{s}–{e} ({c})" for s, e, c in schedules)
+                _emit(
+                    ti,
+                    "FAIL",
+                    f"hint mentions time band '{hint_start}–{hint_end}' but "
+                    f"NPC '{npc_slug}' has no canvas with that exact schedule. "
+                    f"Actual schedules: {actual_bands}",
+                )
+
+        # --- Rule: helper has N AND-gates, hint mentions <N ---
+        gate_count_in_helper = len([i for i in helper_items if isinstance(i, dict)])
+        # Heuristic: count "BOTH"/"ALL of"/"need:" mentions, fall back to "•" or "+" markers.
+        has_both = bool(re.search(r"\bBOTH\b|\bALL of\b|\bneed:\b", text, re.IGNORECASE))
+        bullet_count = text.count("•")
+        plus_separator_count = text.count(" + ")
+        if (
+            gate_count_in_helper >= 2
+            and not has_both
+            and bullet_count < 2
+            and plus_separator_count < 1
+        ):
+            _emit(
+                ti,
+                "WARN",
+                f"helper '{helper_name}' has {gate_count_in_helper} AND-gates "
+                f"but hint text doesn't appear to enumerate them "
+                f"(no 'BOTH'/'ALL of'/'•'/' + ' markers). You may be omitting "
+                f"a gate the player needs to know about.",
+            )
+
+    # === Pattern 2 (2026-05-01) — registry coverage scan ===
+    # Walk every helper's conditions; warn for trait_keys / flag_keys that are
+    # referenced in a gate but have no corresponding [[traits.labels]] /
+    # [[flags.labels]] entry. The auto-renderer (setup.computeHintGoal) will
+    # fall back to printing the raw key — functional but ugly. Cosmetic warn.
+    if template.trait_labels or template.flag_labels:
+        # Only run the coverage scan when the author has started using labels;
+        # legacy games with no label registry shouldn't get spammed.
+        helper_unlabeled_traits: Set[str] = set()
+        helper_unlabeled_flags: Set[str] = set()
+        for helper in (template.stage_helpers or []):
+            cond_dict = helper.conditions if isinstance(helper.conditions, dict) else {}
+            for it in (cond_dict.get("items") or []):
+                if not isinstance(it, dict):
+                    continue
+                if it.get("type") == "trait":
+                    tkey = it.get("trait_key")
+                    if tkey and tkey not in trait_label_keys:
+                        helper_unlabeled_traits.add(tkey)
+                elif it.get("type") == "flag":
+                    fkey = it.get("flag_key")
+                    if fkey and fkey not in flag_label_keys:
+                        helper_unlabeled_flags.add(fkey)
+        for tkey in sorted(helper_unlabeled_traits):
+            _warnings.warn(
+                f"HINT LINTER WARN traits.labels: helper-referenced trait "
+                f"'{tkey}' has no [[traits.labels]] entry. Auto-rendered goal "
+                f"bullets will show the raw key. Add a `key = \"{tkey}\"` entry "
+                f"with a player-facing `label`.",
+                UserWarning,
+                stacklevel=4,
+            )
+        for fkey in sorted(helper_unlabeled_flags):
+            _warnings.warn(
+                f"HINT LINTER WARN flags.labels: helper-referenced flag "
+                f"'{fkey}' has no [[flags.labels]] entry. Auto-rendered goal "
+                f"bullets will show the raw flag name. Add a `key = \"{fkey}\"` "
+                f"entry with a player-facing `label`.",
+                UserWarning,
+                stacklevel=4,
+            )
 
 
 # -------- Creation --------
@@ -2611,6 +3249,28 @@ def _ensure_user(owner_id: str) -> User:
         return User.objects.get(id=owner_id)
     except Exception:
         raise ValueError(f"owner id not found: {owner_id}")
+
+
+def _parse_prerequisite_npc_stage(spec: str) -> Optional[Tuple[str, str, int]]:
+    """Parse "npc_<slug> <op> <int>" into (npc_slug, op, value).
+
+    Returns None if the string doesn't parse — validator should have caught
+    this earlier; serializer is defensive.
+    """
+    import re
+    m = re.match(
+        r"^\s*(\w+)\s*(>=|<=|>|<|==|=)\s*(\d+)\s*$", spec
+    )
+    if not m:
+        return None
+    npc_slug = m.group(1)
+    op_raw = m.group(2)
+    value = int(m.group(3))
+    op_map = {">=": "gte", "<=": "lte", ">": "gt", "<": "lt", "==": "eq", "=": "eq"}
+    op = op_map.get(op_raw)
+    if op is None:
+        return None
+    return npc_slug, op, value
 
 
 def _serialize_hint_template(t: TemplateHintTemplate) -> Dict[str, Any]:
@@ -2640,6 +3300,8 @@ def _serialize_hint_template(t: TemplateHintTemplate) -> Dict[str, Any]:
             "stage_npc": cond.stage_npc,
             "stage_op": cond.stage_op,
             "stage_value": cond.stage_value,
+            "trait_checks": cond.trait_checks,
+            "prerequisite_npc_stage": cond.prerequisite_npc_stage,
         }
         # Stage-gate triple → trait condition on $player.core_traits[<slug>_stage].
         # Validator guarantees the triple is whole when any of three is set.
@@ -2659,6 +3321,24 @@ def _serialize_hint_template(t: TemplateHintTemplate) -> Dict[str, Any]:
                 "flag_key": cond.missing_flag,
                 "operator": "is_false",
             })
+        # E14 — append each trait_checks item verbatim as a condition_item.
+        # Validator already verified shape (subject, trait_key/flag_key, operator).
+        for tc in (cond.trait_checks or []):
+            items.append(dict(tc))
+        # E22 — parse "npc_<slug> <op> <int>" into a trait condition_item on
+        # $player.core_traits[<slug>_stage]. Validator confirmed the syntax
+        # and that the referenced NPC exists.
+        if cond.prerequisite_npc_stage:
+            parsed = _parse_prerequisite_npc_stage(cond.prerequisite_npc_stage)
+            if parsed is not None:
+                npc_slug, op, value = parsed
+                items.append({
+                    "type": "trait",
+                    "subject": "player",
+                    "trait_key": f"{npc_slug}_stage",
+                    "operator": op,
+                    "value": value,
+                })
         # missing_trait + gap_gte are PRD 03 legacy semantics with no
         # author-spec'd subject. Surfaced in the legacy shape for back-compat
         # but not normalized into condition_items (would need disambiguation
@@ -2669,6 +3349,11 @@ def _serialize_hint_template(t: TemplateHintTemplate) -> Dict[str, Any]:
         "npc_id": npc_id,
         "condition_items": items,
         "text": t.text,
+        # Pattern 2 (2026-05-01): tip + auto_goal flow through to runtime.
+        # Renderer (setup.computeHintGoal) reads condition.stage_npc/stage_value
+        # from `condition` to look up the helper; renders 🎯 block + 💡 tip line.
+        "tip": t.tip,
+        "auto_goal": t.auto_goal,
     }
 
 
@@ -2766,6 +3451,19 @@ def create_project_from_template(
             }
             for sh in template.stage_helpers
         ]
+    # Pattern 2: store label registries on project metadata.
+    # Engine reads them at runtime via setup.trait_labels / setup.flag_labels
+    # for the goal-block renderer (setup.computeHintGoal).
+    if template.trait_labels:
+        project.metadata["trait_labels"] = {
+            tl.key: {"label": tl.label, "verb": tl.verb, "unit": tl.unit}
+            for tl in template.trait_labels
+        }
+    if template.flag_labels:
+        project.metadata["flag_labels"] = {
+            fl.key: {"label": fl.label}
+            for fl in template.flag_labels
+        }
     # Store theme if defined
     if template.theme:
         t = template.theme
@@ -3180,6 +3878,9 @@ def create_project_from_template(
                             "trigger_mode": c.trigger.trigger_mode if c.trigger.trigger_mode != "manual" else None,
                             "chance": c.trigger.chance,
                             "costs": c.trigger.costs if c.trigger.costs else None,
+                            # E21 — opt-in cooldown visibility
+                            "show_when_blocked": c.trigger.show_when_blocked or None,
+                            "cooldown_message": c.trigger.cooldown_message,
                         }.items() if v is not None
                     },
                 )

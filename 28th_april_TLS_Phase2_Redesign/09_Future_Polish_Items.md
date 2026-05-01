@@ -41,29 +41,7 @@ When a stage flag flips (e.g., `frank_stage` 1 → 2), fire a small sidebar toas
 
 ### `[[npcs.arc_stages]]` as a first-class TOML schema
 
-Today stage chains are a convention — the author defines `frank_stage` as a flag, references it in helpers, and the validator has no idea what stages are *supposed* to exist. Promoting stages to a structured block:
-
-```toml
-[[npcs]]
-id = "frank"
-# ...
-[[npcs.arc_stages]]
-id = 0
-name = "Suspicious landlord"
-advance_when = "frank_stage_1()"     # references engine.stage_helpers
-journal_entry = "He's wary. I don't blame him."
-
-[[npcs.arc_stages]]
-id = 1
-name = "Grudging warmth"
-# ...
-```
-
-…lets the validator catch typos, the UI auto-display named stages, and the journal/hints enumerate stages without parsing flag names.
-
-**Why beneficial.** Catches an entire class of authoring bugs at validation time instead of at playtest. "Did I write `frank_stage_two` or `frank_stage_2`?" gets answered by `package_from_toml --dry-run`, not by spending a session debugging why the cascade isn't branching.
-
-**Cost estimate.** Medium. Schema definition + validator work in `template_import.py`, plus minor render-side updates wherever stage flags are read today. Backwards-compatible with the convention if both forms parse.
+✅ **Shipped 2026-04-30** in commit `906869b`. Un-deferred during Phase 2 implementation planning to give E9/E10/E11 a registry-based foundation rather than a regex fallback over `^[a-z_]+_stage$`. Shipped form is simpler than the version originally proposed in this doc: `arc_stages = ["Suspicious", "Warm", ...]` — just the label array. Advancement logic stays in `[[engine.stage_helpers]]` and effects, not in the schema. See `08_Engine_PRD_Phase2_Additions.md` §11.2 for the as-built spec.
 
 ### StagesPage in dev mode
 
@@ -83,6 +61,14 @@ Frank — Stage 2 (Restrict)
 **Why beneficial.** When playtesting reveals "Frank's stuck at Stage 1," you see *why* in one place. Saves hours of debugging per playtest session — and Phase 2's vertical slice will need many playtest sessions.
 
 **Cost estimate.** Low–medium. New passage rendered in dev mode only; reads from existing helper definitions and stage flags.
+
+### Hint system completeness (PRD 09)
+
+✅ **Shipped 2026-05-01** as PRD 09 batch (E14, E15, E16, E17, E18, E20, E21, E22, E23). Closes the recurring authoring drift pitfalls captured in `11_Hint_Authoring_Guide.md` and the Ryan-class stuck-state bug surfaced during the Long Summer Test Slice playtest.
+
+8 engine extensions covering: precise multi-gate transitionals (E14), cross-NPC prerequisites (E22), global hint rendering (E15), cleared-but-not-triggered detection (E17), counter sidebar bars (E18), decay warnings (E20), cooldown opt-in (E21), build-time hint linter (E23). E16 (visual split for hint text) shipped slightly earlier in the same arc.
+
+See `12_Engine_PRD_09_Hint_System_Completeness.md` for the as-built record (per-feature implementation notes, slice usage audit, known limitations).
 
 ---
 
@@ -157,13 +143,12 @@ If polish items get scheduled, this is the rough sequence:
 | Order | Item | Why first |
 |---|---|---|
 | 1 | StagesPage in dev mode | Pays back during every playtest session of the rewrite |
-| 2 | `[[npcs.arc_stages]]` first-class schema | Catches authoring bugs across all five NPCs being written |
-| 3 | Live NPC location sidebar (E3 revisit) | Player-facing, biggest single UX upgrade |
-| 4 | Phase 1 migration helper script | Pays back during the rewrite — useful before Phase B starts |
-| 5 | Toast on stage transitions | Player-facing, low effort, signals matter |
-| 6 | Confabulation registry | Process discipline; ongoing |
+| 2 | Live NPC location sidebar (E3 revisit) | Player-facing, biggest single UX upgrade |
+| 3 | Phase 1 migration helper script | Pays back during the rewrite — useful before Phase B starts |
+| 4 | Toast on stage transitions | Player-facing, low effort, signals matter |
+| 5 | Confabulation registry | Process discipline; ongoing |
 
-Items 1, 2, and 4 are roughly engineering / authoring tooling. Items 3 and 5 are player UX. Item 6 is a discipline that pays back over the full rewrite.
+Items 1 and 3 are roughly engineering / authoring tooling. Items 2 and 4 are player UX. Item 5 is a discipline that pays back over the full rewrite.
 
 None of this is on the critical path. All of it is real value.
 
@@ -174,8 +159,10 @@ None of this is on the critical path. All of it is real value.
 - **`08_Engine_PRD_Phase2_Additions.md` §5** — explicitly excluded items (some of which appear here as "future polish," some as "deliberately skipped").
 - **`03_Engine_Changes_PRD.md` §E3** — the live NPC location sidebar item, deferred there, tentatively revived here as polish.
 - **`00_TLS_Phase2_Diagnosis_and_Direction.md` Part 4** — confabulation diagnosis that motivates the registry.
-- **`02_NPC_Stage_Chains.md`** — stage chain artifact that `[[npcs.arc_stages]]` schema would formalize.
+- **`02_NPC_Stage_Chains.md`** — stage chain artifact now formalized in the shipped `[[npcs]].arc_stages` schema (see `08_Engine_PRD_Phase2_Additions.md` §11.2).
 - **`archive_02_TLS_Rewrite_Spec_2026-04-29.md` §9** — migration plan for existing canvases (recommends parallel rebuild); the migration helper script supports that approach.
+- **`11_Hint_Authoring_Guide.md`** — author-facing convention guide; updated 2026-05-01 to reflect the engine support shipped in PRD 09.
+- **`12_Engine_PRD_09_Hint_System_Completeness.md`** — as-built record of the PRD 09 batch (E14–E23) referenced in §2 above.
 
 ---
 
