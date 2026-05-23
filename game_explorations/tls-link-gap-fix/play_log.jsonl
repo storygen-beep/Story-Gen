@@ -1,0 +1,21 @@
+{"ts":"2026-05-09T20:11:27.835Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"Start","state_hash":"26fa4530d4dc652f"}
+{"ts":"2026-05-09T20:11:33.096Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"Start","state_hash":"26fa4530d4dc652f"}
+{"ts":"2026-05-09T20:11:37.165Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"Start","state_hash":"26fa4530d4dc652f"}
+{"ts":"2026-05-09T20:11:41.313Z","session_id":1,"cmd":"dom","args":{"filter":"Start\\|Begin\\|Play\\|Continue"},"ok":true}
+{"ts":"2026-05-09T20:11:44.579Z","session_id":1,"cmd":"dom","args":{},"ok":true}
+{"ts":"2026-05-09T20:11:48.693Z","session_id":1,"cmd":"dom","args":{},"ok":true}
+{"ts":"2026-05-09T20:11:52.367Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"Start","state_hash":"26fa4530d4dc652f"}
+{"ts":"2026-05-09T20:11:57.295Z","session_id":1,"cmd":"click","args":{"positional":["I am 18 or older"]},"ok":false,"passage":"Start","state_hash":"26fa4530d4dc652f","state_changed":false,"error":"locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('I am 18 or older', { exact: true }).first()\u001b[22m\n"}
+{"ts":"2026-05-09T20:12:08.346Z","session_id":1,"cmd":"click","args":{"positional":["Enter Game"]},"ok":false,"passage":"Start","state_hash":"26fa4530d4dc652f","state_changed":false,"error":"locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Enter Game', { exact: true }).first()\u001b[22m\n"}
+{"ts":"2026-05-09T20:12:19.101Z","session_id":1,"cmd":"dom","args":{},"ok":true}
+{"ts":"2026-05-09T20:12:23.484Z","session_id":1,"cmd":"click","args":{"xy":"745,473"},"ok":true,"passage":"StartingCanvas_event_test_slice_intro_Node_1","state_hash":"4d1501a50807c013","method":"xy(745,473)","state_changed":true}
+{"ts":"2026-05-09T20:12:30.723Z","session_id":1,"cmd":"click","args":{"positional":["Sit up"]},"ok":false,"passage":"StartingCanvas_event_test_slice_intro_Node_1","state_hash":"4d1501a50807c013","state_changed":false,"error":"locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Sit up', { exact: true }).first()\u001b[22m\n"}
+{"ts":"2026-05-09T20:12:42.453Z","session_id":1,"cmd":"dom","args":{},"ok":true}
+{"ts":"2026-05-09T20:12:48.622Z","session_id":1,"cmd":"click","args":{"xy":"428,498"},"ok":true,"passage":"Canvas_event_partner_invitation_Node_1","state_hash":"c5c5a783feaae63a","method":"xy(428,498)","state_changed":true}
+{"ts":"2026-05-09T20:12:58.111Z","session_id":1,"cmd":"click","args":{"positional":["🔧 Apply"]},"ok":true,"passage":"Location_Maya's_Bedroom","state_hash":"f33cfbb5072af69c","clicked_text":"🔧 Apply","method":"visible-has-text","state_changed":true}
+{"ts":"2026-05-09T20:13:02.249Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"Location_Maya's_Bedroom","state_hash":"f33cfbb5072af69c"}
+{"ts":"2026-05-09T20:13:24.977Z","session_id":1,"cmd":"click","args":{"positional":["Sketch"]},"ok":true,"passage":"Canvas_activity_sketch_Node_1","state_hash":"35efbe1ab0f79891","clicked_text":"Sketch","method":"visible-has-text","state_changed":true}
+{"ts":"2026-05-09T20:13:30.118Z","session_id":1,"cmd":"click","args":{"positional":["Close the book"]},"ok":false,"passage":"Canvas_activity_sketch_Node_1","state_hash":"35efbe1ab0f79891","state_changed":false,"error":"locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Close the book', { exact: true }).first()\u001b[22m\n"}
+{"ts":"2026-05-09T20:13:40.496Z","session_id":1,"cmd":"dom","args":{},"ok":true}
+{"ts":"2026-05-09T20:13:44.268Z","session_id":1,"cmd":"click","args":{"xy":"428,498"},"ok":true,"passage":"Location_Maya's_Bedroom","state_hash":"12c9d58447b60fcc","method":"xy(428,498)","state_changed":true}
+{"ts":"2026-05-09T20:14:10.311Z","session_id":1,"cmd":"stop","args":{},"ok":true}

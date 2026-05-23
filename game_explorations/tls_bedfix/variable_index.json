@@ -1,0 +1,5739 @@
+{
+  "generated_at": "2026-05-17T15:09:30.347Z",
+  "indexing_coverage": "partial",
+  "total_variables": 53,
+  "skipped_script_blocks": 974,
+  "skipped_widget_passages": 1,
+  "skipped_passages": 1,
+  "parse_errors": 14,
+  "complex_setter_count": 14,
+  "variables": {
+    "$player": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "{\n    \"name\": \"Maya\",\n    \"portrait\": \"maya.jpg\",\n    \"current_location\": \"\",\n    \"core_traits\": {\"energy\": 0, \"hygiene\": 0, \"fitness\": 0, \"beauty\": 0, \"corruption\": 0, \"calculation\": 0, \"money\": 0, \"rep_church\": 0, \"rep_road\": 0, \"rep_college\": 0, \"npc_ryan_stage\": 0, \"npc_jake_stage\": 0, \"ryan_help_count\": 0, \"jake_peek_count\": 0, \"lean_by_desk_count\": 0, \"sex_stage\": 0, \"sex_finisher_type\": 0, \"sex_reactions\": 0, \"anal_active\": 0, \"sex_entry_origin\": 0}\n}",
+          "passage": "Start",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".core_traits.money",
+          "op": "-=",
+          "value_expr": "_rent",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"fd9505a0-1503-4197-93db-25ca382e3546\"",
+          "passage": "Location_Front_Porch",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"fde505ef-7bfc-4d14-b881-206ad76f140b\"",
+          "passage": "Location_Home",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"7994b8b3-c6f7-4dcd-a8d3-d5040f1bd641\"",
+          "passage": "Location_Kitchen",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"d7c81f1c-538e-4d39-8397-b4540c4a3f06\"",
+          "passage": "Location_Living_Room",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"624fca47-bb3c-439a-8fe3-e5cdbc150e14\"",
+          "passage": "Location_Back_Porch",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"09dc9777-05c1-4239-8b00-648e73ef64c7\"",
+          "passage": "Location_Back_Yard",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"15f8bca7-37ef-4397-9b26-aa6729530b34\"",
+          "passage": "Location_Maya's_Bedroom",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"de476b2c-e053-465a-9d41-05e54acc88cc\"",
+          "passage": "Location_Bathroom",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"02a75149-8afe-4a04-a497-af374e41bbc1\"",
+          "passage": "Location_Jake's_Room",
+          "gate": [
+            {
+              "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_tease_open\", \"operator\": \"is_true\"}]})",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"eb994eed-af2f-4fde-a1ac-91b6ead7493f\"",
+          "passage": "Location_Frank's_Bedroom",
+          "gate": [
+            {
+              "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_caught\", \"operator\": \"is_true\"}]})",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"d70ccdb8-06f6-4a70-a3c2-dcc4db502b59\"",
+          "passage": "Location_Diana's_Room",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"85cd4c59-89ba-40b0-800e-57d5a438abea\"",
+          "passage": "Location_Main_Street_Sidewalk",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"7fab18af-c2f1-47e4-b8cb-7f8d4daff0e4\"",
+          "passage": "Location_Diner_—_Front_Floor",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"3d306c2d-c493-483e-828e-8d40356cf29c\"",
+          "passage": "Location_Church_Front",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": {
+        "name": "Maya",
+        "portrait": "maya.jpg",
+        "current_location": "",
+        "core_traits": {
+          "energy": 0,
+          "hygiene": 0,
+          "fitness": 0,
+          "beauty": 0,
+          "corruption": 0,
+          "calculation": 0,
+          "money": 0,
+          "rep_church": 0,
+          "rep_road": 0,
+          "rep_college": 0,
+          "npc_ryan_stage": 0,
+          "npc_jake_stage": 0,
+          "ryan_help_count": 0,
+          "jake_peek_count": 0,
+          "lean_by_desk_count": 0,
+          "sex_stage": 0,
+          "sex_finisher_type": 0,
+          "sex_reactions": 0,
+          "anal_active": 0,
+          "sex_entry_origin": 0
+        }
+      }
+    },
+    "$npcs": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "{\"293a1736-e6f5-4e3a-9aeb-6bb97310f4c0\": {\"name\": \"Frank\", \"portrait\": \"frank.jpg\", \"core_traits\": {\"love\": 0, \"trust\": 0, \"corruption\": 0, \"arousal\": 0}, \"flags\": {}, \"schedule\": [], \"relationship\": \"\"}, \"de2dd6fd-5bec-491d-8a40-c83a81e2050a\": {\"name\": \"Ryan\", \"portrait\": \"ryan.jpg\", \"core_traits\": {\"love\": 0, \"trust\": 0, \"corruption\": 0, \"arousal\": 0}, \"flags\": {}, \"schedule\": [], \"relationship\": \"\"}, \"e6bc57b3-b1ec-4c07-8659-f70d6ca656f5\": {\"name\": \"Jake\", \"portrait\": \"jake.jpg\", \"core_traits\": {\"love\": 0, \"trust\": 0, \"corruption\": 0, \"arousal\": 0}, \"flags\": {}, \"schedule\": [], \"relationship\": \"\"}, \"2f55650d-0584-4eb9-b8be-07adc3f99fc7\": {\"name\": \"Diana\", \"portrait\": \"diana.jpg\", \"core_traits\": {\"awareness\": 0, \"trust\": 0}, \"flags\": {}, \"schedule\": [], \"relationship\": \"\"}, \"9066a4e5-d0f6-4e1a-96d0-4c34a3fddc36\": {\"name\": \"Marge\", \"portrait\": \"marge.jpg\", \"core_traits\": {\"trust\": 0}, \"flags\": {}, \"schedule\": [], \"relationship\": \"\"}, \"8de5fe75-5569-4661-b51c-24f0d4e66d5c\": {\"name\": \"Cookie\", \"portrait\": \"cookie.jpg\", \"core_traits\": {\"trust\": 0}, \"flags\": {}, \"schedule\": [], \"relationship\": \"\"}}",
+          "passage": "Start",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": {
+        "293a1736-e6f5-4e3a-9aeb-6bb97310f4c0": {
+          "name": "Frank",
+          "portrait": "frank.jpg",
+          "core_traits": {
+            "love": 0,
+            "trust": 0,
+            "corruption": 0,
+            "arousal": 0
+          },
+          "flags": {},
+          "schedule": [],
+          "relationship": ""
+        },
+        "de2dd6fd-5bec-491d-8a40-c83a81e2050a": {
+          "name": "Ryan",
+          "portrait": "ryan.jpg",
+          "core_traits": {
+            "love": 0,
+            "trust": 0,
+            "corruption": 0,
+            "arousal": 0
+          },
+          "flags": {},
+          "schedule": [],
+          "relationship": ""
+        },
+        "e6bc57b3-b1ec-4c07-8659-f70d6ca656f5": {
+          "name": "Jake",
+          "portrait": "jake.jpg",
+          "core_traits": {
+            "love": 0,
+            "trust": 0,
+            "corruption": 0,
+            "arousal": 0
+          },
+          "flags": {},
+          "schedule": [],
+          "relationship": ""
+        },
+        "2f55650d-0584-4eb9-b8be-07adc3f99fc7": {
+          "name": "Diana",
+          "portrait": "diana.jpg",
+          "core_traits": {
+            "awareness": 0,
+            "trust": 0
+          },
+          "flags": {},
+          "schedule": [],
+          "relationship": ""
+        },
+        "9066a4e5-d0f6-4e1a-96d0-4c34a3fddc36": {
+          "name": "Marge",
+          "portrait": "marge.jpg",
+          "core_traits": {
+            "trust": 0
+          },
+          "flags": {},
+          "schedule": [],
+          "relationship": ""
+        },
+        "8de5fe75-5569-4661-b51c-24f0d4e66d5c": {
+          "name": "Cookie",
+          "portrait": "cookie.jpg",
+          "core_traits": {
+            "trust": 0
+          },
+          "flags": {},
+          "schedule": [],
+          "relationship": ""
+        }
+      }
+    },
+    "$npc_interacted_today": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "{}",
+          "passage": "Start",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": {}
+    },
+    "$flags": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "{\"prologue_at_bed\": false, \"prologue_saw_them\": false, \"prologue_crossed_line\": false, \"prologue_complete\": false, \"arrived_at_franks\": false, \"first_morning_kitchen_done\": false, \"slice_started\": false, \"hired_at_diner\": false, \"first_t0_shift_done\": false, \"group_settled_in\": false, \"first_sunday_passed\": false, \"first_rent_paid\": false, \"attended_church_this_week\": false, \"anon_dm_seen\": false, \"ryan_first_date_done\": false, \"jake_caught_drawing_done\": false, \"frank_caught\": false, \"frank_restrict_declared\": false, \"frank_cracked\": false, \"frank_keep_route_romantic\": false, \"frank_keep_route_arrangement\": false, \"frank_keep_route_rupture\": false, \"frank_keep_route_power_inverted\": false, \"frank_office_first_sex_done\": false, \"frank_invited_to_bedroom\": false, \"frank_bedroom_first_done\": false, \"frank_sleepover_done\": false, \"diana_confronted\": false, \"frank_branch_kicked_out\": false, \"frank_branch_brought_in\": false, \"ryan_help_tier_open\": false, \"ryan_partner_open\": false, \"ryan_big_deal_closed\": false, \"ryan_beach_proposal\": false, \"ryan_keep_route_yes_engaged\": false, \"ryan_keep_route_not_yet\": false, \"ryan_keep_route_no_withdrawn\": false, \"jake_first_glance_noticed\": false, \"jake_peek_draw_revealed\": false, \"jake_tease_open\": false, \"jake_caught\": false, \"jake_hand\": false, \"jake_keep_route_owned\": false, \"jake_keep_route_lovers\": false, \"jake_keep_route_withdrawn\": false, \"jake_keep_route_she_uses_him\": false, \"talked_to_ryan_today\": false, \"talked_to_jake_today\": false, \"talked_to_diana_morning\": false, \"talked_to_diana_evening\": false, \"talked_to_marge_today\": false, \"talked_to_cookie_today\": false, \"helped_diana_today\": false, \"walked_past_jakes_today\": false, \"watched_ryan_today\": false, \"frank_late_night_used\": false, \"rent_evicted\": false, \"dev_mode_enabled\": false, \"frank_diana_call_intercept_used\": false, \"frank_late_drink_used\": false, \"phase_2_bar_unlocked\": false, \"phase_2_fair_week_active\": false, \"phase_2_football_season_started\": false, \"phase_2_church_interior_unlocked\": false, \"college_paid_admission\": false, \"game_started\": true, \"debug_mode\": true}",
+          "passage": "Start",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": {
+        "prologue_at_bed": false,
+        "prologue_saw_them": false,
+        "prologue_crossed_line": false,
+        "prologue_complete": false,
+        "arrived_at_franks": false,
+        "first_morning_kitchen_done": false,
+        "slice_started": false,
+        "hired_at_diner": false,
+        "first_t0_shift_done": false,
+        "group_settled_in": false,
+        "first_sunday_passed": false,
+        "first_rent_paid": false,
+        "attended_church_this_week": false,
+        "anon_dm_seen": false,
+        "ryan_first_date_done": false,
+        "jake_caught_drawing_done": false,
+        "frank_caught": false,
+        "frank_restrict_declared": false,
+        "frank_cracked": false,
+        "frank_keep_route_romantic": false,
+        "frank_keep_route_arrangement": false,
+        "frank_keep_route_rupture": false,
+        "frank_keep_route_power_inverted": false,
+        "frank_office_first_sex_done": false,
+        "frank_invited_to_bedroom": false,
+        "frank_bedroom_first_done": false,
+        "frank_sleepover_done": false,
+        "diana_confronted": false,
+        "frank_branch_kicked_out": false,
+        "frank_branch_brought_in": false,
+        "ryan_help_tier_open": false,
+        "ryan_partner_open": false,
+        "ryan_big_deal_closed": false,
+        "ryan_beach_proposal": false,
+        "ryan_keep_route_yes_engaged": false,
+        "ryan_keep_route_not_yet": false,
+        "ryan_keep_route_no_withdrawn": false,
+        "jake_first_glance_noticed": false,
+        "jake_peek_draw_revealed": false,
+        "jake_tease_open": false,
+        "jake_caught": false,
+        "jake_hand": false,
+        "jake_keep_route_owned": false,
+        "jake_keep_route_lovers": false,
+        "jake_keep_route_withdrawn": false,
+        "jake_keep_route_she_uses_him": false,
+        "talked_to_ryan_today": false,
+        "talked_to_jake_today": false,
+        "talked_to_diana_morning": false,
+        "talked_to_diana_evening": false,
+        "talked_to_marge_today": false,
+        "talked_to_cookie_today": false,
+        "helped_diana_today": false,
+        "walked_past_jakes_today": false,
+        "watched_ryan_today": false,
+        "frank_late_night_used": false,
+        "rent_evicted": false,
+        "dev_mode_enabled": false,
+        "frank_diana_call_intercept_used": false,
+        "frank_late_drink_used": false,
+        "phase_2_bar_unlocked": false,
+        "phase_2_fair_week_active": false,
+        "phase_2_football_season_started": false,
+        "phase_2_church_interior_unlocked": false,
+        "college_paid_admission": false,
+        "game_started": true,
+        "debug_mode": true
+      }
+    },
+    "$flags_meta": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "{}",
+          "passage": "Start",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": {}
+    },
+    "$game_state": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "{\n    \"current_canvas\": \"\",\n    \"visited_locations\": [],\n    \"visited_nodes\": [],\n    \"trigger_history\": {},\n    \"activity_trigger_history\": {},\n    \"visited_choices\": {},\n    \"active_modifiers\": {},\n    \"random_cooldowns\": {},\n    \"stage_advancement_log\": {},\n    \"time_state\": {\n        \"current_hour\": 6,\n        \"current_minute\": 0,\n        \"current_day\": \"Monday\",\n        \"current_week\": 1,\n        \"day\": 1\n    },\n    \"rent_state\": {\n        \"last_paid_week\": 1,\n        \"warnings\": 0,\n        \"is_due\": false\n    }\n}",
+          "passage": "Start",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.last_paid_week",
+          "op": "to",
+          "value_expr": "$game_state.time_state.current_week",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.is_due",
+          "op": "to",
+          "value_expr": "false",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.warnings",
+          "op": "to",
+          "value_expr": "0",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.warnings",
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "$game_state.rent_state.warnings lt setup.rent_grace_periods",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.is_due",
+          "op": "to",
+          "value_expr": "false",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "$game_state.rent_state.warnings lt setup.rent_grace_periods",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.warnings",
+          "op": "to",
+          "value_expr": "0",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "!($game_state.rent_state.warnings lt setup.rent_grace_periods)",
+              "branch": "else"
+            },
+            {
+              "condition": "setup.rent_eviction_mode is \"flag_set\"",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.is_due",
+          "op": "to",
+          "value_expr": "false",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "!($game_state.rent_state.warnings lt setup.rent_grace_periods)",
+              "branch": "else"
+            },
+            {
+              "condition": "setup.rent_eviction_mode is \"flag_set\"",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"c2ecc7cf-867c-40d2-b6d6-63a978ea3e66\"",
+          "passage": "StartingCanvas_event_test_slice_intro_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"15bf309c-5a3d-43aa-b571-f9282234e977\"",
+          "passage": "StartingCanvas_event_test_slice_intro_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"44ccd08b-7739-4a68-b476-9a86a2288b57\"",
+          "passage": "Canvas_activity_masturbate_at_shower_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"db94fa20-2064-4e8a-ab14-1422e2bf28c4\"",
+          "passage": "Canvas_activity_masturbate_at_shower_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"316e5a75-3421-4e0f-918d-b111fe40f06b\"",
+          "passage": "Canvas_event_partner_invitation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"820223c1-f681-4b96-ab99-b90502874655\"",
+          "passage": "Canvas_event_partner_invitation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"fbdb5c11-536c-4626-b9d4-f91d3b6fba1f\"",
+          "passage": "Canvas_dev_advance_jake_to_4_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"218c2333-6746-461f-87a4-a1739fd5ee78\"",
+          "passage": "Canvas_dev_advance_jake_to_4_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"346a5b4c-611b-4fef-a717-2282bb63649c\"",
+          "passage": "Canvas_dev_advance_jake_to_3_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e7ac3655-4d54-427e-a503-449ec9bb0c41\"",
+          "passage": "Canvas_dev_advance_jake_to_3_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"84561a17-1929-4805-b087-0492615cab46\"",
+          "passage": "Canvas_dev_advance_ryan_to_3_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e6424943-71fd-4280-839a-8bc40f678d14\"",
+          "passage": "Canvas_dev_advance_ryan_to_3_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"0553794d-33ec-4537-a01b-a1af6424ba89\"",
+          "passage": "Canvas_dev_advance_ryan_to_2_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"99d6fe56-30e8-4827-bd4f-bb0cb0de1b56\"",
+          "passage": "Canvas_dev_advance_ryan_to_2_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"61d494e0-49a4-495d-8a5d-395283219642\"",
+          "passage": "Canvas_dev_open_frank_bedroom_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5166281d-5d00-4a41-b333-f42e1effc63d\"",
+          "passage": "Canvas_dev_open_frank_bedroom_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"eb9008ae-9e21-40ba-b995-dfd10b58709b\"",
+          "passage": "Canvas_dev_zero_trust_frank_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"172bd913-0217-463d-92b7-7b4a5067fb07\"",
+          "passage": "Canvas_dev_zero_trust_frank_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"735df625-be24-4475-bbfd-4ec7e560ccbb\"",
+          "passage": "Canvas_dev_advance_frank_to_4_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"f2903589-dd5c-4f68-aa1e-6ba8fe9a58b0\"",
+          "passage": "Canvas_dev_advance_frank_to_4_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"90564234-4d15-4b6b-8a81-b0831d02df1b\"",
+          "passage": "Canvas_dev_force_catch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"0db8a23d-9b9b-42f7-b4e7-496eeffeaf61\"",
+          "passage": "Canvas_dev_force_catch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"a876c240-fa1e-4d18-b452-0d1fca460fe0\"",
+          "passage": "Canvas_scene_cookie_diner_evening_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"68b87519-7b01-4b2b-9004-da2219e2b455\"",
+          "passage": "Canvas_scene_cookie_diner_evening_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"a876c240-fa1e-4d18-b452-0d1fca460fe0\"",
+          "passage": "Canvas_scene_cookie_diner_evening_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"fb2d2279-87e1-4fd8-96fe-2422ab3f2668\"",
+          "passage": "Canvas_scene_cookie_diner_evening_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"34cd550d-9dc6-4f23-9ba4-f345599c142c\"",
+          "passage": "Canvas_scene_diner_t1_shift_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"1550db54-38fe-4591-93e2-8a80a324a2d6\"",
+          "passage": "Canvas_scene_diner_t1_shift_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"e08fb7e6-33cd-485e-a7cc-5d8de7c70607\"",
+          "passage": "Canvas_scene_diner_t0_shift_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"606c511b-b5ed-4097-bb3a-beb691cfadd1\"",
+          "passage": "Canvas_scene_diner_t0_shift_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"e160c076-22ed-4cf3-bb3c-f840fbbe7461\"",
+          "passage": "Canvas_scene_frank_walks_in_shower_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"caf524d2-ff62-4523-8f8f-5b456d62f401\"",
+          "passage": "Canvas_scene_frank_walks_in_shower_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"e160c076-22ed-4cf3-bb3c-f840fbbe7461\"",
+          "passage": "Canvas_scene_frank_walks_in_shower_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a095e7f5-47b2-485c-849a-16f4be2f8eda\"",
+          "passage": "Canvas_scene_frank_walks_in_shower_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"e160c076-22ed-4cf3-bb3c-f840fbbe7461\"",
+          "passage": "Canvas_scene_frank_walks_in_shower_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"dd01d5cf-8e2c-4efe-b4f4-1debd9caa169\"",
+          "passage": "Canvas_scene_frank_walks_in_shower_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"f2078ac7-926d-4d90-8653-05fe2fb0e348\"",
+          "passage": "Canvas_scene_frank_at_open_bathroom_door_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"699c40f2-8e2d-480f-ac70-926ad72f552c\"",
+          "passage": "Canvas_scene_frank_at_open_bathroom_door_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cee9ae4a-893c-4754-8c73-f4a2b10ea4b1\"",
+          "passage": "Canvas_scene_frank_at_kitchen_sink_behind_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"200316c2-8875-4342-9a9f-30abc26b0e17\"",
+          "passage": "Canvas_scene_frank_at_kitchen_sink_behind_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cee9ae4a-893c-4754-8c73-f4a2b10ea4b1\"",
+          "passage": "Canvas_scene_frank_at_kitchen_sink_behind_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ec8ea097-cb61-4769-93e8-a693b93a83f1\"",
+          "passage": "Canvas_scene_frank_at_kitchen_sink_behind_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cee9ae4a-893c-4754-8c73-f4a2b10ea4b1\"",
+          "passage": "Canvas_scene_frank_at_kitchen_sink_behind_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6a4a2688-2b4e-4391-b9ee-0b955e5695d1\"",
+          "passage": "Canvas_scene_frank_at_kitchen_sink_behind_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"e655e923-e318-4d29-af09-4ca151b206d2\"",
+          "passage": "Canvas_scene_frank_joins_couch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"96721db7-474a-4101-9d2a-9eb8f75985fd\"",
+          "passage": "Canvas_scene_frank_joins_couch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"02b1071a-25ba-40aa-9499-547add70c23d\"",
+          "passage": "Canvas_scene_frank_joins_porch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e1d81fc8-7323-4f09-9794-eb135f64ee9c\"",
+          "passage": "Canvas_scene_frank_joins_porch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"1ca90c7c-9457-47e3-9d98-89413ce758db\"",
+          "passage": "Canvas_scene_frank_arrives_during_coffee_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"89aaee07-09e9-4a74-b92b-2f606a101779\"",
+          "passage": "Canvas_scene_frank_arrives_during_coffee_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"8227f54c-3495-4deb-91b4-d6b60dc4528c\"",
+          "passage": "Canvas_scene_frank_passes_kitchen_door_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"0a1da345-a9ed-4887-82f9-1f83cdd75f9c\"",
+          "passage": "Canvas_scene_frank_passes_kitchen_door_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"1bc41439-7f2d-406e-9593-7e5d06eddd28\"",
+          "passage": "Canvas_activity_brush_teeth_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"24d11f07-9ba5-4c6d-b443-21989c4ac391\"",
+          "passage": "Canvas_activity_brush_teeth_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ebe81d28-5eaf-41d0-8593-41d4a0402de3\"",
+          "passage": "Canvas_activity_wash_dishes_solo_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"f9f601c1-aa7f-45e4-85c5-10b520e589ea\"",
+          "passage": "Canvas_activity_wash_dishes_solo_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ed1c6246-57ad-4466-8320-c35e086380b7\"",
+          "passage": "Canvas_activity_read_on_couch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"c689e04f-f239-40da-b5d6-f5631dc2bb6e\"",
+          "passage": "Canvas_activity_read_on_couch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e48fb00-8609-48c8-9f00-3211dcfc50ab\"",
+          "passage": "Canvas_activity_sit_on_porch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d708fae2-f2ea-42e2-a10d-3e8dd31a1b74\"",
+          "passage": "Canvas_activity_sit_on_porch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"8ef34f6e-9cee-470b-b8c7-06e864f621b1\"",
+          "passage": "Canvas_activity_make_coffee_solo_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"377a6ded-e6da-4189-acb0-5d377c081a8c\"",
+          "passage": "Canvas_activity_make_coffee_solo_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"8a8871c7-5cec-4324-87a6-9f08c0c829e0\"",
+          "passage": "Canvas_activity_make_tea_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"030f7b42-562f-4195-82bc-03ee2d2bc402\"",
+          "passage": "Canvas_activity_make_tea_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"eba3261c-4b4c-4737-a606-ea67e3fad162\"",
+          "passage": "Canvas_scene_diana_bedroom_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4b18f49b-2b6c-4234-ae25-b7fc9762e566\"",
+          "passage": "Canvas_scene_diana_bedroom_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"eba3261c-4b4c-4737-a606-ea67e3fad162\"",
+          "passage": "Canvas_scene_diana_bedroom_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"fdd7feba-3a35-4920-8e0b-adb429f5fa12\"",
+          "passage": "Canvas_scene_diana_bedroom_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cfa69800-bd50-4b91-8e7a-90d113f08e9e\"",
+          "passage": "Canvas_scene_marge_diner_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"91465fc3-db74-4154-9904-2908fa5dfe3a\"",
+          "passage": "Canvas_scene_marge_diner_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cfa69800-bd50-4b91-8e7a-90d113f08e9e\"",
+          "passage": "Canvas_scene_marge_diner_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"418cbfba-6d0b-45d7-befd-3751577c837d\"",
+          "passage": "Canvas_scene_marge_diner_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cfa69800-bd50-4b91-8e7a-90d113f08e9e\"",
+          "passage": "Canvas_scene_marge_diner_hub_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"91872405-cf5c-4640-9513-6226d35eb7a7\"",
+          "passage": "Canvas_scene_marge_diner_hub_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"aa0e314d-3818-40ca-8e77-a3c0943ddad7\"",
+          "passage": "Canvas_scene_jake_caught_drawing_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"74d6a2a9-04c1-46fb-8114-5bdd9729ec7f\"",
+          "passage": "Canvas_scene_jake_caught_drawing_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"65ecf2e6-a818-47d5-a501-e181091b4dda\"",
+          "passage": "Canvas_scene_ryan_first_date_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"04756993-254f-4cf6-a853-1aeeca7a6139\"",
+          "passage": "Canvas_scene_ryan_first_date_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5d972d1f-1d27-4668-a25d-7f75c4e778cd\"",
+          "passage": "Canvas_scene_anon_dm_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"3ef97597-3d1a-480a-aa07-1d8e8b71a1ba\"",
+          "passage": "Canvas_scene_anon_dm_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"03462e4b-3fb7-4c3a-a8f2-a0c3afd71705\"",
+          "passage": "Canvas_scene_diana_confrontation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"7d59a231-610e-46aa-bd59-0a7a58859abf\"",
+          "passage": "Canvas_scene_diana_confrontation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"03462e4b-3fb7-4c3a-a8f2-a0c3afd71705\"",
+          "passage": "Canvas_scene_diana_confrontation_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4a32806b-459d-40c5-a413-0c22735c7d88\"",
+          "passage": "Canvas_scene_diana_confrontation_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"03462e4b-3fb7-4c3a-a8f2-a0c3afd71705\"",
+          "passage": "Canvas_scene_diana_confrontation_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"c9683a33-9f01-4b06-ad13-46663e685917\"",
+          "passage": "Canvas_scene_diana_confrontation_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"94a22204-e847-4d88-9bdc-ed2a818dcd3b\"",
+          "passage": "Canvas_scene_frank_sleepover_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"15d82fa4-207f-42e9-80c4-69ae16825d4d\"",
+          "passage": "Canvas_scene_frank_sleepover_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"64e4d561-0c17-4a6b-b0f2-0ed5be230b66\"",
+          "passage": "Canvas_scene_frank_declaration_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"28ca3e29-808d-4c64-aa62-4d8dce94496b\"",
+          "passage": "Canvas_scene_frank_declaration_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"64e4d561-0c17-4a6b-b0f2-0ed5be230b66\"",
+          "passage": "Canvas_scene_frank_declaration_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"8be37b55-023f-458e-882a-4a0c40d27959\"",
+          "passage": "Canvas_scene_frank_declaration_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"64e4d561-0c17-4a6b-b0f2-0ed5be230b66\"",
+          "passage": "Canvas_scene_frank_declaration_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5f3ed979-742b-44b4-b439-a7329ed5683c\"",
+          "passage": "Canvas_scene_frank_declaration_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"bcf40d7e-4ae9-44d3-ab9e-4ab3bc0d6c99\"",
+          "passage": "Canvas_ambient_yard_frank_toolshed_pull_in_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d4712f12-a04d-48cc-8e01-df8b55fb48f9\"",
+          "passage": "Canvas_ambient_yard_frank_toolshed_pull_in_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"3132bbae-7222-49e0-973e-19ae827c0f81\"",
+          "passage": "Canvas_ambient_yard_frank_shirtless_fence_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"f5d971ff-4ded-4c08-8365-bfcdb926b34d\"",
+          "passage": "Canvas_ambient_yard_frank_shirtless_fence_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cf504f26-b2e5-44ba-a5ed-db355ce2be0f\"",
+          "passage": "Canvas_ambient_livingroom_frank_couch_stroking_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"110d0f43-2ee5-4c6a-8a59-761c6ef96b4f\"",
+          "passage": "Canvas_ambient_livingroom_frank_couch_stroking_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"c2738b8e-160a-4c2d-8a79-8d19b827ec64\"",
+          "passage": "Canvas_ambient_kitchen_frank_coffee_grope_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e0113591-2bd3-412b-8ca8-9ecf30c6c76c\"",
+          "passage": "Canvas_ambient_kitchen_frank_coffee_grope_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ee3cc524-d35c-409a-8ed5-f3e3269e41be\"",
+          "passage": "Canvas_ambient_kitchen_frank_counter_brush_past_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6a203068-dd33-4920-b3bc-c98c3249bbb0\"",
+          "passage": "Canvas_ambient_kitchen_frank_counter_brush_past_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5ab7f13c-a86d-4a98-b887-13bc0b38f650\"",
+          "passage": "Canvas_ambient_yard_frank_wash_off_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6087cf8b-dc97-4279-8108-71658b39321b\"",
+          "passage": "Canvas_ambient_yard_frank_wash_off_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"05fe7858-7553-4787-9641-c48fa32d514f\"",
+          "passage": "Canvas_frank_yard_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4bd2800d-829d-4ad3-a378-f0d457d9f4b4\"",
+          "passage": "Canvas_frank_yard_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"05fe7858-7553-4787-9641-c48fa32d514f\"",
+          "passage": "Canvas_frank_yard_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"7459152d-80ff-4e0d-a87d-66bdea429b46\"",
+          "passage": "Canvas_frank_yard_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5834fa6a-58db-4073-9aac-6bab6b06104e\"",
+          "passage": "Canvas_flash_yard_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e85b85c2-532e-403e-adff-9a0e5cb82302\"",
+          "passage": "Canvas_flash_yard_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"495883c4-18ed-4309-9d2e-2d9c5eb2c6f9\"",
+          "passage": "Canvas_tease_yard_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"772e4e21-89ae-4544-a9f7-496fafaf888e\"",
+          "passage": "Canvas_tease_yard_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"2afcbd3b-5c73-4612-b8e4-b09ae356211e\"",
+          "passage": "Canvas_frank_living_room_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ac6782f8-8e68-4daa-9492-60b7e25d537d\"",
+          "passage": "Canvas_frank_living_room_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"2afcbd3b-5c73-4612-b8e4-b09ae356211e\"",
+          "passage": "Canvas_frank_living_room_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5e6c660c-edb5-432a-856d-f3f5a9f50f98\"",
+          "passage": "Canvas_frank_living_room_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"68ac5321-0266-4445-9e51-24d986488941\"",
+          "passage": "Canvas_scene_livingroom_catch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"b2d98806-97d1-4875-87f8-0c8f17360460\"",
+          "passage": "Canvas_scene_livingroom_catch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"c99d1ffd-575f-4cfa-826e-99f8120c5fae\"",
+          "passage": "Canvas_flash_livingroom_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"97c0f9ba-042a-4059-b94d-6aa4efd8d2ef\"",
+          "passage": "Canvas_flash_livingroom_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d1a8c2a6-7cfd-46ad-b54a-4aaf7d4fbf0d\"",
+          "passage": "Canvas_tease_livingroom_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"34834751-8507-4cdf-b225-f19b0f96bd25\"",
+          "passage": "Canvas_tease_livingroom_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"2eab2563-945f-4f8b-ab65-4568145e2131\"",
+          "passage": "Canvas_ambient_kitchen_frank_late_night_raid_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"cdc7b749-6f33-4e71-8829-dd7771a35bca\"",
+          "passage": "Canvas_ambient_kitchen_frank_late_night_raid_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ccace9cb-1889-4199-bf09-8e5fbb53ff3f\"",
+          "passage": "Canvas_ambient_kitchen_frank_dinprep_grope_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ed236b4c-6718-4013-a0fb-dbf4f930bb6c\"",
+          "passage": "Canvas_ambient_kitchen_frank_dinprep_grope_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cfb0e620-d4be-4ce3-8301-598d8451cff1\"",
+          "passage": "Canvas_frank_kitchen_dinner_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"51367840-fa55-4ddb-aab7-076445d4f929\"",
+          "passage": "Canvas_frank_kitchen_dinner_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cfb0e620-d4be-4ce3-8301-598d8451cff1\"",
+          "passage": "Canvas_frank_kitchen_dinner_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"87e57a7e-be14-4996-a7f6-ce4d81bb23a6\"",
+          "passage": "Canvas_frank_kitchen_dinner_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d06330b9-5af0-4e14-9773-b6a927ef22cd\"",
+          "passage": "Canvas_frank_kitchen_morning_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"78b05c13-8340-4024-ae13-68633a6123fc\"",
+          "passage": "Canvas_frank_kitchen_morning_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d06330b9-5af0-4e14-9773-b6a927ef22cd\"",
+          "passage": "Canvas_frank_kitchen_morning_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"c37a58d5-9459-4075-9597-7ef44744416c\"",
+          "passage": "Canvas_frank_kitchen_morning_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"658c2137-70b9-44de-90e9-c84fd8bab7e3\"",
+          "passage": "Canvas_flash_kitchen_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"f7d6cc8a-ed6d-47ad-9728-5af956268d45\"",
+          "passage": "Canvas_flash_kitchen_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6d9e0ef0-8a27-469d-8438-c867e40663b1\"",
+          "passage": "Canvas_tease_kitchen_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"38dc45f2-832a-4e07-a706-fd887c2e4b40\"",
+          "passage": "Canvas_tease_kitchen_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"799872c5-67ae-4f23-ad72-4abff4730d1d\"",
+          "passage": "Canvas_tease_bedroom_hand_near_his_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5d197f1e-a2f4-4153-afca-02c641550ff1\"",
+          "passage": "Canvas_tease_bedroom_hand_near_his_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"3b16a1c9-1042-459e-91d3-6d5d0bbc238f\"",
+          "passage": "Canvas_tease_bedroom_robe_flash_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d44b9ca8-73ee-420d-91f1-b0c07af8dda6\"",
+          "passage": "Canvas_tease_bedroom_robe_flash_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"df4e6bb8-cb62-429b-8d3a-3b87374f40e2\"",
+          "passage": "Canvas_tease_hallway_robe_linger_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a0d978e9-d73d-4417-a583-1db2c14435e7\"",
+          "passage": "Canvas_tease_hallway_robe_linger_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"60e82740-5b45-4246-8ca7-290e6e387aff\"",
+          "passage": "Canvas_loop_franks_bedroom_finisher_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"3a3907be-ab9d-42b1-9fee-02770dd6a972\"",
+          "passage": "Canvas_loop_franks_bedroom_finisher_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a983f356-c8a3-45b7-92b6-0c25c4629ddc\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"51b57897-fa59-4cc7-bbee-fe01c2bde714\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a94f103e-4659-4ff5-8f01-9d30d1cd4357\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_4",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"3b3c1f59-00d2-48af-9503-aa9653ff14d1\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_4",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_5",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5d081048-cded-412b-b345-a44d5828be49\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_5",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_6",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e43bfd59-518b-4324-90c0-ccf6900253fb\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_6",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_7",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e68a79ac-82dd-4dbf-aae9-6005b0d12d06\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_7",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_8",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5f00caec-f376-43b7-b95f-2b7fcc6948cb\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_8",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_9",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"f2ade3b2-1be1-4cbe-a2d6-2d2b8651c201\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_9",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_10",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4c9821a7-7913-4bb6-a0f4-9ef717828850\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_10",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_11",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d30d118d-1677-46fa-b5ca-23e1bfbeb43e\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_11",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_12",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"035e81ec-42de-479c-a657-aa65b69af3eb\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_12",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_13",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"31d3daa1-3096-4288-bd5d-2d1686a500a1\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_13",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_14",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"99acb376-0c4b-40a9-a7c2-ca063809faa0\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_14",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_15",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ca346fc4-9efa-462d-8587-c62642ba4d70\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_15",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_16",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"b4311e7d-0ef9-4f6b-a138-90d1abb8eb67\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_16",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_17",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6cd85da9-d44c-46e0-acde-7c3d449306e8\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_17",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_18",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d5d13e43-b6d2-487c-bdb3-3b8c45a94489\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_18",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_19",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4a2b4c2e-621c-4f7f-8d3c-24b9d455f965\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_19",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_20",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"cc0ebcb3-9880-4d5b-99de-ad1298325046\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_20",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_21",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"01a22f16-a448-44e0-bcb3-c6f2ee9c532a\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_21",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"a8ab21e1-727c-4b09-a4b3-ff1d5759df37\"",
+          "passage": "Canvas_scene_franks_bedroom_setter_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e2419780-960f-46cd-930b-2a70cacf08eb\"",
+          "passage": "Canvas_scene_franks_bedroom_setter_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"0fdb8fbd-0133-4061-b317-87c7d461bdae\"",
+          "passage": "Canvas_scene_franks_bedroom_evening_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"29ce3cc5-e568-4874-854f-fd29b497ff1f\"",
+          "passage": "Canvas_scene_franks_bedroom_evening_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"0fdb8fbd-0133-4061-b317-87c7d461bdae\"",
+          "passage": "Canvas_scene_franks_bedroom_evening_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"147ba30c-bcb9-4f16-855b-3049dc787cff\"",
+          "passage": "Canvas_scene_franks_bedroom_evening_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"0fdb8fbd-0133-4061-b317-87c7d461bdae\"",
+          "passage": "Canvas_scene_franks_bedroom_evening_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"16095a03-4145-4eb9-8b7f-e646105ba927\"",
+          "passage": "Canvas_scene_franks_bedroom_evening_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"c35eec64-5090-4db7-a50c-fc5c7a61b7da\"",
+          "passage": "Canvas_scene_yard_with_ryan_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"16d3c868-ab1e-482d-8ca4-167f6f352653\"",
+          "passage": "Canvas_scene_yard_with_ryan_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"2d7ef46a-d1ab-4302-8273-d9267ac8f29a\"",
+          "passage": "Canvas_scene_kitchen_diana_evening_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"fc2b0cfc-5e2f-494a-a433-9a165c4f18da\"",
+          "passage": "Canvas_scene_kitchen_diana_evening_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"9e6072c3-86ca-41a2-adf1-7bab3814a662\"",
+          "passage": "Canvas_scene_kitchen_diana_morning_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"8042c9e7-f5d2-4355-8cd3-9115bc057c71\"",
+          "passage": "Canvas_scene_kitchen_diana_morning_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"4e56fd04-817f-4b8f-a5bb-d04c755a64b8\"",
+          "passage": "Canvas_transition_group_settled_in_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6c0100f1-ff16-4677-beef-f6787dc9df12\"",
+          "passage": "Canvas_transition_group_settled_in_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"2ce69a00-bd11-49b1-8def-497856a804ee\"",
+          "passage": "Canvas_transition_jake_to_1_via_glance_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"fe43a833-3748-4ad3-9893-6bff1743f9ec\"",
+          "passage": "Canvas_transition_jake_to_1_via_glance_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"328bde09-c3c7-4267-a88b-93233a3e41a0\"",
+          "passage": "Canvas_transition_jake_to_1_via_beauty_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"8d54cafa-59ee-420c-8766-d4be0cd29977\"",
+          "passage": "Canvas_transition_jake_to_1_via_beauty_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ece75578-6947-4acc-bb16-56b18b25c17e\"",
+          "passage": "Canvas_transition_ryan_to_1_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ffc4feb7-e881-4396-b3f7-cd2fb494bb33\"",
+          "passage": "Canvas_transition_ryan_to_1_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"fc1c305b-2c57-4905-8e5d-80d67b67e530\"",
+          "passage": "Canvas_activity_walk_property_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"577452ef-98c7-4eb2-9792-9ce06befe29f\"",
+          "passage": "Canvas_activity_walk_property_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"906a9520-2963-4013-9611-9f36f2bbf654\"",
+          "passage": "Canvas_activity_walk_to_town_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d4c053d5-4fec-45c4-81c7-9cfb25c1858f\"",
+          "passage": "Canvas_activity_walk_to_town_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"fefffb88-43bd-45d0-b288-9f6214ad9041\"",
+          "passage": "Canvas_activity_walk_past_jakes_door_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"3a67d7ef-2b6f-493a-a190-83a68b12888d\"",
+          "passage": "Canvas_activity_walk_past_jakes_door_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5833c864-2ce2-43af-89da-e34cf5641873\"",
+          "passage": "Canvas_activity_help_ryan_in_yard_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"cdf1b081-3e48-4184-a2c7-b199235158e9\"",
+          "passage": "Canvas_activity_help_ryan_in_yard_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"3dff5735-7242-449b-9b41-72bc6a6af7a5\"",
+          "passage": "Canvas_activity_help_diana_kitchen_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d279fb81-61df-461f-a995-014d4bbb6da5\"",
+          "passage": "Canvas_activity_help_diana_kitchen_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"f2416a3f-695a-4057-8db2-2fb0fb4d6043\"",
+          "passage": "Canvas_activity_eat_from_fridge_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"18b3013c-edab-47b5-8179-4774e6c8bd8a\"",
+          "passage": "Canvas_activity_eat_from_fridge_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cc3cd1a6-1831-469a-8057-a781abebb18e\"",
+          "passage": "Canvas_activity_sketch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"62832d1f-9545-49e8-b026-13670ab270b9\"",
+          "passage": "Canvas_activity_sketch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d8f1e7d8-538e-4566-b341-1a9cbb09012e\"",
+          "passage": "Canvas_activity_shower_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"57002673-d723-478a-95e2-c24401beec5b\"",
+          "passage": "Canvas_activity_shower_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"f6c33d30-c283-40b1-9558-c7225b121060\"",
+          "passage": "Canvas_activity_sleep_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d901ba7e-5862-4367-850a-baa21eb9088e\"",
+          "passage": "Canvas_activity_sleep_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"28e875e5-7ae9-4dfb-aea5-716d40043f4d\"",
+          "passage": "Canvas_canvas_first_sunday_morning_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"8c947c02-7956-4282-a413-d118c968fa39\"",
+          "passage": "Canvas_canvas_first_sunday_morning_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5e920d9d-2919-448f-9928-5af5adff5158\"",
+          "passage": "Canvas_canvas_marge_interview_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d7d7288b-1804-4af3-894d-40d94fbc12d8\"",
+          "passage": "Canvas_canvas_marge_interview_Node_1",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": {
+        "current_canvas": "",
+        "visited_locations": [],
+        "visited_nodes": [],
+        "trigger_history": {},
+        "activity_trigger_history": {},
+        "visited_choices": {},
+        "active_modifiers": {},
+        "random_cooldowns": {},
+        "stage_advancement_log": {},
+        "time_state": {
+          "current_hour": 6,
+          "current_minute": 0,
+          "current_day": "Monday",
+          "current_week": 1,
+          "day": 1
+        },
+        "rent_state": {
+          "last_paid_week": 1,
+          "warnings": 0,
+          "is_due": false
+        }
+      }
+    },
+    "_helpData": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.help_data || {}",
+          "passage": "QuestsPage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_hasNpcs": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "_helpData.npcs && Object.keys(_helpData.npcs).length > 0",
+          "passage": "QuestsPage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_globals": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getGlobalHints()",
+          "passage": "QuestsPage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_slug": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.npcSlugForId(_npcId)",
+          "passage": "QuestsPage",
+          "gate": [
+            {
+              "condition": "_hasNpcs",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_hint": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "_slug ? setup.getStageHintForNPC(_slug) : null",
+          "passage": "QuestsPage",
+          "gate": [
+            {
+              "condition": "_hasNpcs",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.generateNarrativeHint()",
+          "passage": "StoryJournal",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_tp": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.tips_page || {}",
+          "passage": "TipsPage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_position": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.detectStoryPosition()",
+          "passage": "StoryJournal",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_incompleteGroups": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "_position.active_groups.filter(function(g) { return !g.isComplete && g.completed > 0; })",
+          "passage": "StoryJournal",
+          "gate": [
+            {
+              "condition": "_position.active_groups.length > 0",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_state": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.interpretNpcState(_npcId)",
+          "passage": "StoryJournal",
+          "gate": [
+            {
+              "condition": "Object.keys($npcs).length > 0",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_money": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "$player.core_traits.money || 0",
+          "passage": "RentDay",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_rent": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.rent_amount",
+          "passage": "RentDay",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_rt": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.rent_text || {}",
+          "passage": "RentDay",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.rent_text || {}",
+          "passage": "RentDay_Paid",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.rent_text || {}",
+          "passage": "RentDay_Short",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_collectorName": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "\"the landlord\"",
+          "passage": "RentDay",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_npcData.name",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            },
+            {
+              "condition": "_npcData && _npcData.name",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "\"the landlord\"",
+          "passage": "RentDay_Paid",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_npcData.name",
+          "passage": "RentDay_Paid",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            },
+            {
+              "condition": "_npcData && _npcData.name",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "\"the landlord\"",
+          "passage": "RentDay_Short",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_npcData.name",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            },
+            {
+              "condition": "_npcData && _npcData.name",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_npcPortrait": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "\"\"",
+          "passage": "RentDay",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_npcData.portrait || \"\"",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            },
+            {
+              "condition": "_npcData && _npcData.name",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_npcId": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.npc_slug_map[setup.rent_collector_npc]",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.npc_slug_map[setup.rent_collector_npc]",
+          "passage": "RentDay_Paid",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.npc_slug_map[setup.rent_collector_npc]",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_npcInfo.id",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_npcData": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "$npcs[_npcId]",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "$npcs[_npcId]",
+          "passage": "RentDay_Paid",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "$npcs[_npcId]",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_payText": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "\"Pay $\" + _rent + \" rent\"",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$player.core_traits.money": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": ".core_traits.money",
+          "op": "-=",
+          "value_expr": "_rent",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$game_state.rent_state.last_paid_week": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.last_paid_week",
+          "op": "to",
+          "value_expr": "$game_state.time_state.current_week",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$game_state.rent_state.is_due": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.is_due",
+          "op": "to",
+          "value_expr": "false",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.is_due",
+          "op": "to",
+          "value_expr": "false",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "$game_state.rent_state.warnings lt setup.rent_grace_periods",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.is_due",
+          "op": "to",
+          "value_expr": "false",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "!($game_state.rent_state.warnings lt setup.rent_grace_periods)",
+              "branch": "else"
+            },
+            {
+              "condition": "setup.rent_eviction_mode is \"flag_set\"",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$game_state.rent_state.warnings": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.warnings",
+          "op": "to",
+          "value_expr": "0",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.warnings",
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "$game_state.rent_state.warnings lt setup.rent_grace_periods",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.warnings",
+          "op": "to",
+          "value_expr": "0",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "!($game_state.rent_state.warnings lt setup.rent_grace_periods)",
+              "branch": "else"
+            },
+            {
+              "condition": "setup.rent_eviction_mode is \"flag_set\"",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_cantPayText": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "(_rt.cant_pay || \"Tell them you can't pay\")",
+          "passage": "RentDay",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_returnTo": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "(State.variables.last_game_passage || \"Navigation\")",
+          "passage": "RentDay_Paid",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "(State.variables.last_game_passage || \"Navigation\")",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "$game_state.rent_state.warnings lt setup.rent_grace_periods",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "(State.variables.last_game_passage || \"Navigation\")",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "!($game_state.rent_state.warnings lt setup.rent_grace_periods)",
+              "branch": "else"
+            },
+            {
+              "condition": "setup.rent_eviction_mode is \"flag_set\"",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_currentDay": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "$game_state.time_state.current_day",
+          "passage": "SchedulePage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_todayIndex": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "[\"Monday\", \"Tuesday\", \"Wednesday\", \"Thursday\", \"Friday\", \"Saturday\", \"Sunday\"].indexOf(_currentDay)",
+          "passage": "SchedulePage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_npcsWithSchedules": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.getNpcsWithSchedules()",
+          "passage": "SchedulePage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_npcName": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_npcInfo.name",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_currentLoc": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.getNpcLocation(_npcId)",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_allSchedules": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.getNpcAllSchedulesSorted(_npcId)",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_locName": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "(setup.locations[_currentLoc.location] && setup.locations[_currentLoc.location].name) || _currentLoc.location",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            },
+            {
+              "condition": "_currentLoc",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_isCurrent": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.isCurrentTimeSlot(_sch.start_time, _sch.end_time) && setup._weekdayMatches(_sch.weekdays, _todayIndex)",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            },
+            {
+              "condition": "!(_allSchedules.length === 0)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_rowClass": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_isCurrent ? \"current-slot\" : \"\"",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            },
+            {
+              "condition": "!(_allSchedules.length === 0)",
+              "branch": "else"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_act.isCurrent ? \"current-slot\" : \"\"",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "_soloActivities.length > 0",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_schLocName": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "(setup.locations[_sch.location] && setup.locations[_sch.location].name) || _sch.location",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            },
+            {
+              "condition": "!(_allSchedules.length === 0)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_soloActivities": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.getSoloActivitiesAllSchedules()",
+          "passage": "SchedulePage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_gkeys": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "Object.keys($flags).sort()",
+          "passage": "FlagsPage",
+          "gate": [
+            {
+              "condition": "$flags && Object.keys($flags).length > 0",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_gk": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_gkeys[_i]",
+          "passage": "FlagsPage",
+          "gate": [
+            {
+              "condition": "$flags && Object.keys($flags).length > 0",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$game_state.current_canvas": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"c2ecc7cf-867c-40d2-b6d6-63a978ea3e66\"",
+          "passage": "StartingCanvas_event_test_slice_intro_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"44ccd08b-7739-4a68-b476-9a86a2288b57\"",
+          "passage": "Canvas_activity_masturbate_at_shower_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"316e5a75-3421-4e0f-918d-b111fe40f06b\"",
+          "passage": "Canvas_event_partner_invitation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"fbdb5c11-536c-4626-b9d4-f91d3b6fba1f\"",
+          "passage": "Canvas_dev_advance_jake_to_4_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"346a5b4c-611b-4fef-a717-2282bb63649c\"",
+          "passage": "Canvas_dev_advance_jake_to_3_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"84561a17-1929-4805-b087-0492615cab46\"",
+          "passage": "Canvas_dev_advance_ryan_to_3_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"0553794d-33ec-4537-a01b-a1af6424ba89\"",
+          "passage": "Canvas_dev_advance_ryan_to_2_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"61d494e0-49a4-495d-8a5d-395283219642\"",
+          "passage": "Canvas_dev_open_frank_bedroom_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"eb9008ae-9e21-40ba-b995-dfd10b58709b\"",
+          "passage": "Canvas_dev_zero_trust_frank_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"735df625-be24-4475-bbfd-4ec7e560ccbb\"",
+          "passage": "Canvas_dev_advance_frank_to_4_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"90564234-4d15-4b6b-8a81-b0831d02df1b\"",
+          "passage": "Canvas_dev_force_catch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"a876c240-fa1e-4d18-b452-0d1fca460fe0\"",
+          "passage": "Canvas_scene_cookie_diner_evening_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"a876c240-fa1e-4d18-b452-0d1fca460fe0\"",
+          "passage": "Canvas_scene_cookie_diner_evening_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"34cd550d-9dc6-4f23-9ba4-f345599c142c\"",
+          "passage": "Canvas_scene_diner_t1_shift_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"e08fb7e6-33cd-485e-a7cc-5d8de7c70607\"",
+          "passage": "Canvas_scene_diner_t0_shift_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"e160c076-22ed-4cf3-bb3c-f840fbbe7461\"",
+          "passage": "Canvas_scene_frank_walks_in_shower_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"e160c076-22ed-4cf3-bb3c-f840fbbe7461\"",
+          "passage": "Canvas_scene_frank_walks_in_shower_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"e160c076-22ed-4cf3-bb3c-f840fbbe7461\"",
+          "passage": "Canvas_scene_frank_walks_in_shower_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"f2078ac7-926d-4d90-8653-05fe2fb0e348\"",
+          "passage": "Canvas_scene_frank_at_open_bathroom_door_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cee9ae4a-893c-4754-8c73-f4a2b10ea4b1\"",
+          "passage": "Canvas_scene_frank_at_kitchen_sink_behind_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cee9ae4a-893c-4754-8c73-f4a2b10ea4b1\"",
+          "passage": "Canvas_scene_frank_at_kitchen_sink_behind_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cee9ae4a-893c-4754-8c73-f4a2b10ea4b1\"",
+          "passage": "Canvas_scene_frank_at_kitchen_sink_behind_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"e655e923-e318-4d29-af09-4ca151b206d2\"",
+          "passage": "Canvas_scene_frank_joins_couch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"02b1071a-25ba-40aa-9499-547add70c23d\"",
+          "passage": "Canvas_scene_frank_joins_porch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"1ca90c7c-9457-47e3-9d98-89413ce758db\"",
+          "passage": "Canvas_scene_frank_arrives_during_coffee_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"8227f54c-3495-4deb-91b4-d6b60dc4528c\"",
+          "passage": "Canvas_scene_frank_passes_kitchen_door_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"1bc41439-7f2d-406e-9593-7e5d06eddd28\"",
+          "passage": "Canvas_activity_brush_teeth_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ebe81d28-5eaf-41d0-8593-41d4a0402de3\"",
+          "passage": "Canvas_activity_wash_dishes_solo_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ed1c6246-57ad-4466-8320-c35e086380b7\"",
+          "passage": "Canvas_activity_read_on_couch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e48fb00-8609-48c8-9f00-3211dcfc50ab\"",
+          "passage": "Canvas_activity_sit_on_porch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"8ef34f6e-9cee-470b-b8c7-06e864f621b1\"",
+          "passage": "Canvas_activity_make_coffee_solo_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"8a8871c7-5cec-4324-87a6-9f08c0c829e0\"",
+          "passage": "Canvas_activity_make_tea_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"eba3261c-4b4c-4737-a606-ea67e3fad162\"",
+          "passage": "Canvas_scene_diana_bedroom_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"eba3261c-4b4c-4737-a606-ea67e3fad162\"",
+          "passage": "Canvas_scene_diana_bedroom_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cfa69800-bd50-4b91-8e7a-90d113f08e9e\"",
+          "passage": "Canvas_scene_marge_diner_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cfa69800-bd50-4b91-8e7a-90d113f08e9e\"",
+          "passage": "Canvas_scene_marge_diner_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cfa69800-bd50-4b91-8e7a-90d113f08e9e\"",
+          "passage": "Canvas_scene_marge_diner_hub_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"aa0e314d-3818-40ca-8e77-a3c0943ddad7\"",
+          "passage": "Canvas_scene_jake_caught_drawing_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"65ecf2e6-a818-47d5-a501-e181091b4dda\"",
+          "passage": "Canvas_scene_ryan_first_date_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5d972d1f-1d27-4668-a25d-7f75c4e778cd\"",
+          "passage": "Canvas_scene_anon_dm_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"03462e4b-3fb7-4c3a-a8f2-a0c3afd71705\"",
+          "passage": "Canvas_scene_diana_confrontation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"03462e4b-3fb7-4c3a-a8f2-a0c3afd71705\"",
+          "passage": "Canvas_scene_diana_confrontation_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"03462e4b-3fb7-4c3a-a8f2-a0c3afd71705\"",
+          "passage": "Canvas_scene_diana_confrontation_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"94a22204-e847-4d88-9bdc-ed2a818dcd3b\"",
+          "passage": "Canvas_scene_frank_sleepover_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"64e4d561-0c17-4a6b-b0f2-0ed5be230b66\"",
+          "passage": "Canvas_scene_frank_declaration_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"64e4d561-0c17-4a6b-b0f2-0ed5be230b66\"",
+          "passage": "Canvas_scene_frank_declaration_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"64e4d561-0c17-4a6b-b0f2-0ed5be230b66\"",
+          "passage": "Canvas_scene_frank_declaration_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"bcf40d7e-4ae9-44d3-ab9e-4ab3bc0d6c99\"",
+          "passage": "Canvas_ambient_yard_frank_toolshed_pull_in_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"3132bbae-7222-49e0-973e-19ae827c0f81\"",
+          "passage": "Canvas_ambient_yard_frank_shirtless_fence_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cf504f26-b2e5-44ba-a5ed-db355ce2be0f\"",
+          "passage": "Canvas_ambient_livingroom_frank_couch_stroking_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"c2738b8e-160a-4c2d-8a79-8d19b827ec64\"",
+          "passage": "Canvas_ambient_kitchen_frank_coffee_grope_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ee3cc524-d35c-409a-8ed5-f3e3269e41be\"",
+          "passage": "Canvas_ambient_kitchen_frank_counter_brush_past_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5ab7f13c-a86d-4a98-b887-13bc0b38f650\"",
+          "passage": "Canvas_ambient_yard_frank_wash_off_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"05fe7858-7553-4787-9641-c48fa32d514f\"",
+          "passage": "Canvas_frank_yard_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"05fe7858-7553-4787-9641-c48fa32d514f\"",
+          "passage": "Canvas_frank_yard_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5834fa6a-58db-4073-9aac-6bab6b06104e\"",
+          "passage": "Canvas_flash_yard_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"495883c4-18ed-4309-9d2e-2d9c5eb2c6f9\"",
+          "passage": "Canvas_tease_yard_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"2afcbd3b-5c73-4612-b8e4-b09ae356211e\"",
+          "passage": "Canvas_frank_living_room_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"2afcbd3b-5c73-4612-b8e4-b09ae356211e\"",
+          "passage": "Canvas_frank_living_room_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"68ac5321-0266-4445-9e51-24d986488941\"",
+          "passage": "Canvas_scene_livingroom_catch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"c99d1ffd-575f-4cfa-826e-99f8120c5fae\"",
+          "passage": "Canvas_flash_livingroom_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d1a8c2a6-7cfd-46ad-b54a-4aaf7d4fbf0d\"",
+          "passage": "Canvas_tease_livingroom_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"2eab2563-945f-4f8b-ab65-4568145e2131\"",
+          "passage": "Canvas_ambient_kitchen_frank_late_night_raid_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ccace9cb-1889-4199-bf09-8e5fbb53ff3f\"",
+          "passage": "Canvas_ambient_kitchen_frank_dinprep_grope_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cfb0e620-d4be-4ce3-8301-598d8451cff1\"",
+          "passage": "Canvas_frank_kitchen_dinner_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cfb0e620-d4be-4ce3-8301-598d8451cff1\"",
+          "passage": "Canvas_frank_kitchen_dinner_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d06330b9-5af0-4e14-9773-b6a927ef22cd\"",
+          "passage": "Canvas_frank_kitchen_morning_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d06330b9-5af0-4e14-9773-b6a927ef22cd\"",
+          "passage": "Canvas_frank_kitchen_morning_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"658c2137-70b9-44de-90e9-c84fd8bab7e3\"",
+          "passage": "Canvas_flash_kitchen_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6d9e0ef0-8a27-469d-8438-c867e40663b1\"",
+          "passage": "Canvas_tease_kitchen_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"799872c5-67ae-4f23-ad72-4abff4730d1d\"",
+          "passage": "Canvas_tease_bedroom_hand_near_his_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"3b16a1c9-1042-459e-91d3-6d5d0bbc238f\"",
+          "passage": "Canvas_tease_bedroom_robe_flash_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"df4e6bb8-cb62-429b-8d3a-3b87374f40e2\"",
+          "passage": "Canvas_tease_hallway_robe_linger_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"60e82740-5b45-4246-8ca7-290e6e387aff\"",
+          "passage": "Canvas_loop_franks_bedroom_finisher_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_4",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_5",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_6",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_7",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_8",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_9",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_10",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_11",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_12",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_13",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_14",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_15",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_16",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_17",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_18",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_19",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_20",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6e17f984-632c-4ce1-9ad1-73ff7bf9a023\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_21",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"a8ab21e1-727c-4b09-a4b3-ff1d5759df37\"",
+          "passage": "Canvas_scene_franks_bedroom_setter_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"0fdb8fbd-0133-4061-b317-87c7d461bdae\"",
+          "passage": "Canvas_scene_franks_bedroom_evening_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"0fdb8fbd-0133-4061-b317-87c7d461bdae\"",
+          "passage": "Canvas_scene_franks_bedroom_evening_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"0fdb8fbd-0133-4061-b317-87c7d461bdae\"",
+          "passage": "Canvas_scene_franks_bedroom_evening_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"c35eec64-5090-4db7-a50c-fc5c7a61b7da\"",
+          "passage": "Canvas_scene_yard_with_ryan_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"2d7ef46a-d1ab-4302-8273-d9267ac8f29a\"",
+          "passage": "Canvas_scene_kitchen_diana_evening_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"9e6072c3-86ca-41a2-adf1-7bab3814a662\"",
+          "passage": "Canvas_scene_kitchen_diana_morning_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"4e56fd04-817f-4b8f-a5bb-d04c755a64b8\"",
+          "passage": "Canvas_transition_group_settled_in_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"2ce69a00-bd11-49b1-8def-497856a804ee\"",
+          "passage": "Canvas_transition_jake_to_1_via_glance_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"328bde09-c3c7-4267-a88b-93233a3e41a0\"",
+          "passage": "Canvas_transition_jake_to_1_via_beauty_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ece75578-6947-4acc-bb16-56b18b25c17e\"",
+          "passage": "Canvas_transition_ryan_to_1_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"fc1c305b-2c57-4905-8e5d-80d67b67e530\"",
+          "passage": "Canvas_activity_walk_property_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"906a9520-2963-4013-9611-9f36f2bbf654\"",
+          "passage": "Canvas_activity_walk_to_town_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"fefffb88-43bd-45d0-b288-9f6214ad9041\"",
+          "passage": "Canvas_activity_walk_past_jakes_door_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5833c864-2ce2-43af-89da-e34cf5641873\"",
+          "passage": "Canvas_activity_help_ryan_in_yard_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"3dff5735-7242-449b-9b41-72bc6a6af7a5\"",
+          "passage": "Canvas_activity_help_diana_kitchen_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"f2416a3f-695a-4057-8db2-2fb0fb4d6043\"",
+          "passage": "Canvas_activity_eat_from_fridge_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cc3cd1a6-1831-469a-8057-a781abebb18e\"",
+          "passage": "Canvas_activity_sketch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d8f1e7d8-538e-4566-b341-1a9cbb09012e\"",
+          "passage": "Canvas_activity_shower_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"f6c33d30-c283-40b1-9558-c7225b121060\"",
+          "passage": "Canvas_activity_sleep_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"28e875e5-7ae9-4dfb-aea5-716d40043f4d\"",
+          "passage": "Canvas_canvas_first_sunday_morning_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5e920d9d-2919-448f-9928-5af5adff5158\"",
+          "passage": "Canvas_canvas_marge_interview_Node_1",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$game_state.current_node": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"15bf309c-5a3d-43aa-b571-f9282234e977\"",
+          "passage": "StartingCanvas_event_test_slice_intro_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"db94fa20-2064-4e8a-ab14-1422e2bf28c4\"",
+          "passage": "Canvas_activity_masturbate_at_shower_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"820223c1-f681-4b96-ab99-b90502874655\"",
+          "passage": "Canvas_event_partner_invitation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"218c2333-6746-461f-87a4-a1739fd5ee78\"",
+          "passage": "Canvas_dev_advance_jake_to_4_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e7ac3655-4d54-427e-a503-449ec9bb0c41\"",
+          "passage": "Canvas_dev_advance_jake_to_3_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e6424943-71fd-4280-839a-8bc40f678d14\"",
+          "passage": "Canvas_dev_advance_ryan_to_3_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"99d6fe56-30e8-4827-bd4f-bb0cb0de1b56\"",
+          "passage": "Canvas_dev_advance_ryan_to_2_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5166281d-5d00-4a41-b333-f42e1effc63d\"",
+          "passage": "Canvas_dev_open_frank_bedroom_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"172bd913-0217-463d-92b7-7b4a5067fb07\"",
+          "passage": "Canvas_dev_zero_trust_frank_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"f2903589-dd5c-4f68-aa1e-6ba8fe9a58b0\"",
+          "passage": "Canvas_dev_advance_frank_to_4_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"0db8a23d-9b9b-42f7-b4e7-496eeffeaf61\"",
+          "passage": "Canvas_dev_force_catch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"68b87519-7b01-4b2b-9004-da2219e2b455\"",
+          "passage": "Canvas_scene_cookie_diner_evening_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"fb2d2279-87e1-4fd8-96fe-2422ab3f2668\"",
+          "passage": "Canvas_scene_cookie_diner_evening_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"1550db54-38fe-4591-93e2-8a80a324a2d6\"",
+          "passage": "Canvas_scene_diner_t1_shift_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"606c511b-b5ed-4097-bb3a-beb691cfadd1\"",
+          "passage": "Canvas_scene_diner_t0_shift_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"caf524d2-ff62-4523-8f8f-5b456d62f401\"",
+          "passage": "Canvas_scene_frank_walks_in_shower_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a095e7f5-47b2-485c-849a-16f4be2f8eda\"",
+          "passage": "Canvas_scene_frank_walks_in_shower_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"dd01d5cf-8e2c-4efe-b4f4-1debd9caa169\"",
+          "passage": "Canvas_scene_frank_walks_in_shower_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"699c40f2-8e2d-480f-ac70-926ad72f552c\"",
+          "passage": "Canvas_scene_frank_at_open_bathroom_door_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"200316c2-8875-4342-9a9f-30abc26b0e17\"",
+          "passage": "Canvas_scene_frank_at_kitchen_sink_behind_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ec8ea097-cb61-4769-93e8-a693b93a83f1\"",
+          "passage": "Canvas_scene_frank_at_kitchen_sink_behind_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6a4a2688-2b4e-4391-b9ee-0b955e5695d1\"",
+          "passage": "Canvas_scene_frank_at_kitchen_sink_behind_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"96721db7-474a-4101-9d2a-9eb8f75985fd\"",
+          "passage": "Canvas_scene_frank_joins_couch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e1d81fc8-7323-4f09-9794-eb135f64ee9c\"",
+          "passage": "Canvas_scene_frank_joins_porch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"89aaee07-09e9-4a74-b92b-2f606a101779\"",
+          "passage": "Canvas_scene_frank_arrives_during_coffee_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"0a1da345-a9ed-4887-82f9-1f83cdd75f9c\"",
+          "passage": "Canvas_scene_frank_passes_kitchen_door_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"24d11f07-9ba5-4c6d-b443-21989c4ac391\"",
+          "passage": "Canvas_activity_brush_teeth_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"f9f601c1-aa7f-45e4-85c5-10b520e589ea\"",
+          "passage": "Canvas_activity_wash_dishes_solo_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"c689e04f-f239-40da-b5d6-f5631dc2bb6e\"",
+          "passage": "Canvas_activity_read_on_couch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d708fae2-f2ea-42e2-a10d-3e8dd31a1b74\"",
+          "passage": "Canvas_activity_sit_on_porch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"377a6ded-e6da-4189-acb0-5d377c081a8c\"",
+          "passage": "Canvas_activity_make_coffee_solo_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"030f7b42-562f-4195-82bc-03ee2d2bc402\"",
+          "passage": "Canvas_activity_make_tea_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4b18f49b-2b6c-4234-ae25-b7fc9762e566\"",
+          "passage": "Canvas_scene_diana_bedroom_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"fdd7feba-3a35-4920-8e0b-adb429f5fa12\"",
+          "passage": "Canvas_scene_diana_bedroom_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"91465fc3-db74-4154-9904-2908fa5dfe3a\"",
+          "passage": "Canvas_scene_marge_diner_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"418cbfba-6d0b-45d7-befd-3751577c837d\"",
+          "passage": "Canvas_scene_marge_diner_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"91872405-cf5c-4640-9513-6226d35eb7a7\"",
+          "passage": "Canvas_scene_marge_diner_hub_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"74d6a2a9-04c1-46fb-8114-5bdd9729ec7f\"",
+          "passage": "Canvas_scene_jake_caught_drawing_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"04756993-254f-4cf6-a853-1aeeca7a6139\"",
+          "passage": "Canvas_scene_ryan_first_date_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"3ef97597-3d1a-480a-aa07-1d8e8b71a1ba\"",
+          "passage": "Canvas_scene_anon_dm_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"7d59a231-610e-46aa-bd59-0a7a58859abf\"",
+          "passage": "Canvas_scene_diana_confrontation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4a32806b-459d-40c5-a413-0c22735c7d88\"",
+          "passage": "Canvas_scene_diana_confrontation_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"c9683a33-9f01-4b06-ad13-46663e685917\"",
+          "passage": "Canvas_scene_diana_confrontation_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"15d82fa4-207f-42e9-80c4-69ae16825d4d\"",
+          "passage": "Canvas_scene_frank_sleepover_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"28ca3e29-808d-4c64-aa62-4d8dce94496b\"",
+          "passage": "Canvas_scene_frank_declaration_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"8be37b55-023f-458e-882a-4a0c40d27959\"",
+          "passage": "Canvas_scene_frank_declaration_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5f3ed979-742b-44b4-b439-a7329ed5683c\"",
+          "passage": "Canvas_scene_frank_declaration_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d4712f12-a04d-48cc-8e01-df8b55fb48f9\"",
+          "passage": "Canvas_ambient_yard_frank_toolshed_pull_in_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"f5d971ff-4ded-4c08-8365-bfcdb926b34d\"",
+          "passage": "Canvas_ambient_yard_frank_shirtless_fence_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"110d0f43-2ee5-4c6a-8a59-761c6ef96b4f\"",
+          "passage": "Canvas_ambient_livingroom_frank_couch_stroking_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e0113591-2bd3-412b-8ca8-9ecf30c6c76c\"",
+          "passage": "Canvas_ambient_kitchen_frank_coffee_grope_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6a203068-dd33-4920-b3bc-c98c3249bbb0\"",
+          "passage": "Canvas_ambient_kitchen_frank_counter_brush_past_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6087cf8b-dc97-4279-8108-71658b39321b\"",
+          "passage": "Canvas_ambient_yard_frank_wash_off_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4bd2800d-829d-4ad3-a378-f0d457d9f4b4\"",
+          "passage": "Canvas_frank_yard_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"7459152d-80ff-4e0d-a87d-66bdea429b46\"",
+          "passage": "Canvas_frank_yard_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e85b85c2-532e-403e-adff-9a0e5cb82302\"",
+          "passage": "Canvas_flash_yard_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"772e4e21-89ae-4544-a9f7-496fafaf888e\"",
+          "passage": "Canvas_tease_yard_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ac6782f8-8e68-4daa-9492-60b7e25d537d\"",
+          "passage": "Canvas_frank_living_room_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5e6c660c-edb5-432a-856d-f3f5a9f50f98\"",
+          "passage": "Canvas_frank_living_room_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"b2d98806-97d1-4875-87f8-0c8f17360460\"",
+          "passage": "Canvas_scene_livingroom_catch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"97c0f9ba-042a-4059-b94d-6aa4efd8d2ef\"",
+          "passage": "Canvas_flash_livingroom_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"34834751-8507-4cdf-b225-f19b0f96bd25\"",
+          "passage": "Canvas_tease_livingroom_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"cdc7b749-6f33-4e71-8829-dd7771a35bca\"",
+          "passage": "Canvas_ambient_kitchen_frank_late_night_raid_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ed236b4c-6718-4013-a0fb-dbf4f930bb6c\"",
+          "passage": "Canvas_ambient_kitchen_frank_dinprep_grope_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"51367840-fa55-4ddb-aab7-076445d4f929\"",
+          "passage": "Canvas_frank_kitchen_dinner_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"87e57a7e-be14-4996-a7f6-ce4d81bb23a6\"",
+          "passage": "Canvas_frank_kitchen_dinner_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"78b05c13-8340-4024-ae13-68633a6123fc\"",
+          "passage": "Canvas_frank_kitchen_morning_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"c37a58d5-9459-4075-9597-7ef44744416c\"",
+          "passage": "Canvas_frank_kitchen_morning_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"f7d6cc8a-ed6d-47ad-9728-5af956268d45\"",
+          "passage": "Canvas_flash_kitchen_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"38dc45f2-832a-4e07-a706-fd887c2e4b40\"",
+          "passage": "Canvas_tease_kitchen_general_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5d197f1e-a2f4-4153-afca-02c641550ff1\"",
+          "passage": "Canvas_tease_bedroom_hand_near_his_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d44b9ca8-73ee-420d-91f1-b0c07af8dda6\"",
+          "passage": "Canvas_tease_bedroom_robe_flash_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a0d978e9-d73d-4417-a583-1db2c14435e7\"",
+          "passage": "Canvas_tease_hallway_robe_linger_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"3a3907be-ab9d-42b1-9fee-02770dd6a972\"",
+          "passage": "Canvas_loop_franks_bedroom_finisher_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a983f356-c8a3-45b7-92b6-0c25c4629ddc\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"51b57897-fa59-4cc7-bbee-fe01c2bde714\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a94f103e-4659-4ff5-8f01-9d30d1cd4357\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"3b3c1f59-00d2-48af-9503-aa9653ff14d1\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_4",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5d081048-cded-412b-b345-a44d5828be49\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_5",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e43bfd59-518b-4324-90c0-ccf6900253fb\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_6",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e68a79ac-82dd-4dbf-aae9-6005b0d12d06\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_7",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5f00caec-f376-43b7-b95f-2b7fcc6948cb\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_8",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"f2ade3b2-1be1-4cbe-a2d6-2d2b8651c201\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_9",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4c9821a7-7913-4bb6-a0f4-9ef717828850\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_10",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d30d118d-1677-46fa-b5ca-23e1bfbeb43e\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_11",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"035e81ec-42de-479c-a657-aa65b69af3eb\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_12",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"31d3daa1-3096-4288-bd5d-2d1686a500a1\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_13",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"99acb376-0c4b-40a9-a7c2-ca063809faa0\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_14",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ca346fc4-9efa-462d-8587-c62642ba4d70\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_15",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"b4311e7d-0ef9-4f6b-a138-90d1abb8eb67\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_16",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6cd85da9-d44c-46e0-acde-7c3d449306e8\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_17",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d5d13e43-b6d2-487c-bdb3-3b8c45a94489\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_18",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4a2b4c2e-621c-4f7f-8d3c-24b9d455f965\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_19",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"cc0ebcb3-9880-4d5b-99de-ad1298325046\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_20",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"01a22f16-a448-44e0-bcb3-c6f2ee9c532a\"",
+          "passage": "Canvas_loop_franks_bedroom_sex_Node_21",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e2419780-960f-46cd-930b-2a70cacf08eb\"",
+          "passage": "Canvas_scene_franks_bedroom_setter_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"29ce3cc5-e568-4874-854f-fd29b497ff1f\"",
+          "passage": "Canvas_scene_franks_bedroom_evening_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"147ba30c-bcb9-4f16-855b-3049dc787cff\"",
+          "passage": "Canvas_scene_franks_bedroom_evening_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"16095a03-4145-4eb9-8b7f-e646105ba927\"",
+          "passage": "Canvas_scene_franks_bedroom_evening_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"16d3c868-ab1e-482d-8ca4-167f6f352653\"",
+          "passage": "Canvas_scene_yard_with_ryan_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"fc2b0cfc-5e2f-494a-a433-9a165c4f18da\"",
+          "passage": "Canvas_scene_kitchen_diana_evening_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"8042c9e7-f5d2-4355-8cd3-9115bc057c71\"",
+          "passage": "Canvas_scene_kitchen_diana_morning_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6c0100f1-ff16-4677-beef-f6787dc9df12\"",
+          "passage": "Canvas_transition_group_settled_in_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"fe43a833-3748-4ad3-9893-6bff1743f9ec\"",
+          "passage": "Canvas_transition_jake_to_1_via_glance_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"8d54cafa-59ee-420c-8766-d4be0cd29977\"",
+          "passage": "Canvas_transition_jake_to_1_via_beauty_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ffc4feb7-e881-4396-b3f7-cd2fb494bb33\"",
+          "passage": "Canvas_transition_ryan_to_1_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"577452ef-98c7-4eb2-9792-9ce06befe29f\"",
+          "passage": "Canvas_activity_walk_property_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d4c053d5-4fec-45c4-81c7-9cfb25c1858f\"",
+          "passage": "Canvas_activity_walk_to_town_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"3a67d7ef-2b6f-493a-a190-83a68b12888d\"",
+          "passage": "Canvas_activity_walk_past_jakes_door_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"cdf1b081-3e48-4184-a2c7-b199235158e9\"",
+          "passage": "Canvas_activity_help_ryan_in_yard_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d279fb81-61df-461f-a995-014d4bbb6da5\"",
+          "passage": "Canvas_activity_help_diana_kitchen_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"18b3013c-edab-47b5-8179-4774e6c8bd8a\"",
+          "passage": "Canvas_activity_eat_from_fridge_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"62832d1f-9545-49e8-b026-13670ab270b9\"",
+          "passage": "Canvas_activity_sketch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"57002673-d723-478a-95e2-c24401beec5b\"",
+          "passage": "Canvas_activity_shower_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d901ba7e-5862-4367-850a-baa21eb9088e\"",
+          "passage": "Canvas_activity_sleep_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"8c947c02-7956-4282-a413-d118c968fa39\"",
+          "passage": "Canvas_canvas_first_sunday_morning_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d7d7288b-1804-4af3-894d-40d94fbc12d8\"",
+          "passage": "Canvas_canvas_marge_interview_Node_1",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$player.current_location": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"fd9505a0-1503-4197-93db-25ca382e3546\"",
+          "passage": "Location_Front_Porch",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"fde505ef-7bfc-4d14-b881-206ad76f140b\"",
+          "passage": "Location_Home",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"7994b8b3-c6f7-4dcd-a8d3-d5040f1bd641\"",
+          "passage": "Location_Kitchen",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"d7c81f1c-538e-4d39-8397-b4540c4a3f06\"",
+          "passage": "Location_Living_Room",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"624fca47-bb3c-439a-8fe3-e5cdbc150e14\"",
+          "passage": "Location_Back_Porch",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"09dc9777-05c1-4239-8b00-648e73ef64c7\"",
+          "passage": "Location_Back_Yard",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"15f8bca7-37ef-4397-9b26-aa6729530b34\"",
+          "passage": "Location_Maya's_Bedroom",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"de476b2c-e053-465a-9d41-05e54acc88cc\"",
+          "passage": "Location_Bathroom",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"02a75149-8afe-4a04-a497-af374e41bbc1\"",
+          "passage": "Location_Jake's_Room",
+          "gate": [
+            {
+              "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_tease_open\", \"operator\": \"is_true\"}]})",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"eb994eed-af2f-4fde-a1ac-91b6ead7493f\"",
+          "passage": "Location_Frank's_Bedroom",
+          "gate": [
+            {
+              "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_caught\", \"operator\": \"is_true\"}]})",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"d70ccdb8-06f6-4a70-a3c2-dcc4db502b59\"",
+          "passage": "Location_Diana's_Room",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"85cd4c59-89ba-40b0-800e-57d5a438abea\"",
+          "passage": "Location_Main_Street_Sidewalk",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"7fab18af-c2f1-47e4-b8cb-7f8d4daff0e4\"",
+          "passage": "Location_Diner_—_Front_Floor",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"3d306c2d-c493-483e-828e-8d40356cf29c\"",
+          "passage": "Location_Church_Front",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_autoFire": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"fd9505a0-1503-4197-93db-25ca382e3546\")",
+          "passage": "Location_Front_Porch",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"fde505ef-7bfc-4d14-b881-206ad76f140b\")",
+          "passage": "Location_Home",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"7994b8b3-c6f7-4dcd-a8d3-d5040f1bd641\")",
+          "passage": "Location_Kitchen",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"d7c81f1c-538e-4d39-8397-b4540c4a3f06\")",
+          "passage": "Location_Living_Room",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"624fca47-bb3c-439a-8fe3-e5cdbc150e14\")",
+          "passage": "Location_Back_Porch",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"09dc9777-05c1-4239-8b00-648e73ef64c7\")",
+          "passage": "Location_Back_Yard",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"15f8bca7-37ef-4397-9b26-aa6729530b34\")",
+          "passage": "Location_Maya's_Bedroom",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"de476b2c-e053-465a-9d41-05e54acc88cc\")",
+          "passage": "Location_Bathroom",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"02a75149-8afe-4a04-a497-af374e41bbc1\")",
+          "passage": "Location_Jake's_Room",
+          "gate": [
+            {
+              "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_tease_open\", \"operator\": \"is_true\"}]})",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"eb994eed-af2f-4fde-a1ac-91b6ead7493f\")",
+          "passage": "Location_Frank's_Bedroom",
+          "gate": [
+            {
+              "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_caught\", \"operator\": \"is_true\"}]})",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"d70ccdb8-06f6-4a70-a3c2-dcc4db502b59\")",
+          "passage": "Location_Diana's_Room",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"85cd4c59-89ba-40b0-800e-57d5a438abea\")",
+          "passage": "Location_Main_Street_Sidewalk",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"7fab18af-c2f1-47e4-b8cb-7f8d4daff0e4\")",
+          "passage": "Location_Diner_—_Front_Floor",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"3d306c2d-c493-483e-828e-8d40356cf29c\")",
+          "passage": "Location_Church_Front",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_sub_target": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.checkAndSubstituteCanvas(\"44ccd08b-7739-4a68-b476-9a86a2288b57\")",
+          "passage": "Canvas_activity_masturbate_at_shower_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.checkAndSubstituteCanvas(\"1bc41439-7f2d-406e-9593-7e5d06eddd28\")",
+          "passage": "Canvas_activity_brush_teeth_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.checkAndSubstituteCanvas(\"ebe81d28-5eaf-41d0-8593-41d4a0402de3\")",
+          "passage": "Canvas_activity_wash_dishes_solo_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.checkAndSubstituteCanvas(\"ed1c6246-57ad-4466-8320-c35e086380b7\")",
+          "passage": "Canvas_activity_read_on_couch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.checkAndSubstituteCanvas(\"6e48fb00-8609-48c8-9f00-3211dcfc50ab\")",
+          "passage": "Canvas_activity_sit_on_porch_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.checkAndSubstituteCanvas(\"8ef34f6e-9cee-470b-b8c7-06e864f621b1\")",
+          "passage": "Canvas_activity_make_coffee_solo_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.checkAndSubstituteCanvas(\"8a8871c7-5cec-4324-87a6-9f08c0c829e0\")",
+          "passage": "Canvas_activity_make_tea_Node_1",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_diagChoices": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "window._engineNoExitsDiag_activity_walk_past_jakes_door",
+          "passage": "Canvas_activity_walk_past_jakes_door_Node_1",
+          "gate": [
+            {
+              "condition": "not (setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"eq\", \"value\": 0}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_first_glance_noticed\", \"operator\": \"is_false\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"beauty\", \"operator\": \"gte\", \"value\": 40}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"OR\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"gte\", \"value\": 1}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_first_glance_noticed\", \"operator\": \"is_true\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"beauty\", \"operator\": \"lt\", \"value\": 40}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"gte\", \"value\": 1}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"eq\", \"value\": 1}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_peek_draw_revealed\", \"operator\": \"is_false\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"jake_peek_count\", \"operator\": \"gte\", \"value\": 3}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 30}]}))",
+              "branch": "if"
+            },
+            {
+              "condition": "$flags.debug_mode",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_ch": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_diagChoices[_i]",
+          "passage": "Canvas_activity_walk_past_jakes_door_Node_1",
+          "gate": [
+            {
+              "condition": "not (setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"eq\", \"value\": 0}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_first_glance_noticed\", \"operator\": \"is_false\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"beauty\", \"operator\": \"gte\", \"value\": 40}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"OR\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"gte\", \"value\": 1}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_first_glance_noticed\", \"operator\": \"is_true\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"beauty\", \"operator\": \"lt\", \"value\": 40}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"gte\", \"value\": 1}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"eq\", \"value\": 1}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_peek_draw_revealed\", \"operator\": \"is_false\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"jake_peek_count\", \"operator\": \"gte\", \"value\": 3}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 30}]}))",
+              "branch": "if"
+            },
+            {
+              "condition": "$flags.debug_mode",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_it": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_ch.conditions.items[_j]",
+          "passage": "Canvas_activity_walk_past_jakes_door_Node_1",
+          "gate": [
+            {
+              "condition": "not (setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"eq\", \"value\": 0}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_first_glance_noticed\", \"operator\": \"is_false\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"beauty\", \"operator\": \"gte\", \"value\": 40}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"OR\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"gte\", \"value\": 1}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_first_glance_noticed\", \"operator\": \"is_true\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"beauty\", \"operator\": \"lt\", \"value\": 40}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"gte\", \"value\": 1}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"eq\", \"value\": 1}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_peek_draw_revealed\", \"operator\": \"is_false\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"jake_peek_count\", \"operator\": \"gte\", \"value\": 3}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 30}]}))",
+              "branch": "if"
+            },
+            {
+              "condition": "$flags.debug_mode",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_single": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "{version: \"1.0\", logic: \"AND\", items: [_it]}",
+          "passage": "Canvas_activity_walk_past_jakes_door_Node_1",
+          "gate": [
+            {
+              "condition": "not (setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"eq\", \"value\": 0}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_first_glance_noticed\", \"operator\": \"is_false\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"beauty\", \"operator\": \"gte\", \"value\": 40}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"OR\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"gte\", \"value\": 1}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_first_glance_noticed\", \"operator\": \"is_true\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"beauty\", \"operator\": \"lt\", \"value\": 40}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"gte\", \"value\": 1}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"eq\", \"value\": 1}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_peek_draw_revealed\", \"operator\": \"is_false\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"jake_peek_count\", \"operator\": \"gte\", \"value\": 3}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 30}]}))",
+              "branch": "if"
+            },
+            {
+              "condition": "$flags.debug_mode",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_ok": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.triggerConditionsSatisfied(_single)",
+          "passage": "Canvas_activity_walk_past_jakes_door_Node_1",
+          "gate": [
+            {
+              "condition": "not (setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"eq\", \"value\": 0}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_first_glance_noticed\", \"operator\": \"is_false\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"beauty\", \"operator\": \"gte\", \"value\": 40}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"OR\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"gte\", \"value\": 1}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_first_glance_noticed\", \"operator\": \"is_true\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"beauty\", \"operator\": \"lt\", \"value\": 40}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"gte\", \"value\": 1}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"eq\", \"value\": 1}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_peek_draw_revealed\", \"operator\": \"is_false\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"jake_peek_count\", \"operator\": \"gte\", \"value\": 3}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 30}]}))",
+              "branch": "if"
+            },
+            {
+              "condition": "$flags.debug_mode",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$last_game_passage": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": "Start"
+    }
+  },
+  "complex_setters": [
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"fd9505a0-1503-4197-93db-25ca382e3546\")",
+      "passage": "Location_Front_Porch",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"fd9505a0-1503-4197-93db-25ca382e3546\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"fde505ef-7bfc-4d14-b881-206ad76f140b\")",
+      "passage": "Location_Home",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"fde505ef-7bfc-4d14-b881-206ad76f140b\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"7994b8b3-c6f7-4dcd-a8d3-d5040f1bd641\")",
+      "passage": "Location_Kitchen",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"7994b8b3-c6f7-4dcd-a8d3-d5040f1bd641\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"d7c81f1c-538e-4d39-8397-b4540c4a3f06\")",
+      "passage": "Location_Living_Room",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"d7c81f1c-538e-4d39-8397-b4540c4a3f06\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"624fca47-bb3c-439a-8fe3-e5cdbc150e14\")",
+      "passage": "Location_Back_Porch",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"624fca47-bb3c-439a-8fe3-e5cdbc150e14\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"09dc9777-05c1-4239-8b00-648e73ef64c7\")",
+      "passage": "Location_Back_Yard",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"09dc9777-05c1-4239-8b00-648e73ef64c7\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"15f8bca7-37ef-4397-9b26-aa6729530b34\")",
+      "passage": "Location_Maya's_Bedroom",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"15f8bca7-37ef-4397-9b26-aa6729530b34\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"de476b2c-e053-465a-9d41-05e54acc88cc\")",
+      "passage": "Location_Bathroom",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"de476b2c-e053-465a-9d41-05e54acc88cc\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"02a75149-8afe-4a04-a497-af374e41bbc1\")",
+      "passage": "Location_Jake's_Room",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_tease_open\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "not $game_state.visited_locations.includes(\"02a75149-8afe-4a04-a497-af374e41bbc1\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"eb994eed-af2f-4fde-a1ac-91b6ead7493f\")",
+      "passage": "Location_Frank's_Bedroom",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_caught\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "not $game_state.visited_locations.includes(\"eb994eed-af2f-4fde-a1ac-91b6ead7493f\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"d70ccdb8-06f6-4a70-a3c2-dcc4db502b59\")",
+      "passage": "Location_Diana's_Room",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"d70ccdb8-06f6-4a70-a3c2-dcc4db502b59\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"85cd4c59-89ba-40b0-800e-57d5a438abea\")",
+      "passage": "Location_Main_Street_Sidewalk",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"85cd4c59-89ba-40b0-800e-57d5a438abea\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"7fab18af-c2f1-47e4-b8cb-7f8d4daff0e4\")",
+      "passage": "Location_Diner_—_Front_Floor",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"7fab18af-c2f1-47e4-b8cb-7f8d4daff0e4\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"3d306c2d-c493-483e-828e-8d40356cf29c\")",
+      "passage": "Location_Church_Front",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"3d306c2d-c493-483e-828e-8d40356cf29c\")",
+          "branch": "if"
+        }
+      ]
+    }
+  ]
+}

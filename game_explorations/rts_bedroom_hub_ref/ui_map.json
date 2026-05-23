@@ -1,0 +1,4709 @@
+{
+  "slug": "rts_bedroom_hub_ref",
+  "url": "https://mopoga.com/road-to-success",
+  "generated_at": "2026-05-14T03:41:20.281Z",
+  "engine": "sugarcube",
+  "pregame_auto_advance": {
+    "trail": [
+      {
+        "step": 0,
+        "passage": "Menu",
+        "action": "clicked_forward",
+        "text": "Play ▶️",
+        "tier": 1
+      },
+      {
+        "step": 1,
+        "passage": "WarningGame",
+        "action": "clicked_forward",
+        "text": "I understand",
+        "tier": 2
+      },
+      {
+        "step": 2,
+        "passage": "Preferences",
+        "action": "clicked_forward",
+        "text": "🎮 Continue",
+        "tier": 4
+      },
+      {
+        "step": 3,
+        "passage": "GameMechanics",
+        "action": "clicked_forward",
+        "text": "📚 History",
+        "tier": 5
+      },
+      {
+        "step": 4,
+        "passage": "History",
+        "action": "clicked_forward",
+        "text": "🚀 Start Your Journey",
+        "tier": 1
+      },
+      {
+        "step": 5,
+        "passage": "Bedroom",
+        "action": "terminated",
+        "reason": "no_forward_pattern_match"
+      }
+    ],
+    "terminated_at": {
+      "step": 5,
+      "passage": "Bedroom",
+      "action": "terminated",
+      "reason": "no_forward_pattern_match"
+    }
+  },
+  "regions_catalog": [
+    {
+      "pos_class": "left",
+      "id": "ui-bar",
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 316,
+        "h": 900
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [
+        {
+          "text": "👗         Your Outfit",
+          "tag": "div",
+          "cls": "caption-card-header"
+        },
+        {
+          "text": "Your Outfit",
+          "tag": "span",
+          "cls": "caption-card-title"
+        },
+        {
+          "text": "🫦             Corruption",
+          "tag": "div",
+          "cls": "caption-card-header"
+        },
+        {
+          "text": "Corruption",
+          "tag": "span",
+          "cls": "caption-card-title"
+        },
+        {
+          "text": "⚡             Energy & Arousal",
+          "tag": "div",
+          "cls": "caption-card-header"
+        },
+        {
+          "text": "Energy & Arousal",
+          "tag": "span",
+          "cls": "caption-card-title"
+        },
+        {
+          "text": "💵             Money",
+          "tag": "div",
+          "cls": "caption-card-header"
+        },
+        {
+          "text": "Money",
+          "tag": "span",
+          "cls": "caption-card-title"
+        },
+        {
+          "text": "📊             Stats",
+          "tag": "div",
+          "cls": "caption-card-header"
+        },
+        {
+          "text": "Stats",
+          "tag": "span",
+          "cls": "caption-card-title"
+        },
+        {
+          "text": "🔗         Support & Community",
+          "tag": "div",
+          "cls": "caption-card-header"
+        },
+        {
+          "text": "Support & Community",
+          "tag": "span",
+          "cls": "caption-card-title"
+        }
+      ],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 280,
+            "y": 4,
+            "w": 35,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": 4,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 168,
+            "y": 4,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--patreon link-external",
+          "text": "             Patreon",
+          "title": "",
+          "href": "https://www.patreon.com/astk1",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1020,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--subscribestar link-exte",
+          "text": "             SubscribeStar",
+          "title": "",
+          "href": "https://subscribestar.adult/astk",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1065,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--discord link-external",
+          "text": "             Discord",
+          "title": "",
+          "href": "https://discord.gg/cb4YRG8gwm",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1111,
+            "w": 232,
+            "h": 40
+          }
+        }
+      ],
+      "passive_text_samples": [
+        "Road to Success 🌴",
+        "👗",
+        "Your Outfit",
+        "🫦",
+        "Corruption",
+        "Pure 😇",
+        "📈 Points",
+        "Energy & Arousal",
+        "🔋 100%",
+        "Energy",
+        "❄️ Calm",
+        "Arousal",
+        "💵",
+        "Money",
+        "💵 Cash",
+        "50",
+        "📊",
+        "Stats",
+        "👙 Exhibitionism",
+        "🧠 Intelligence"
+      ]
+    },
+    {
+      "pos_class": "right",
+      "id": "right-ui-bar",
+      "bbox": {
+        "x": 1103,
+        "y": 0,
+        "w": 337,
+        "h": 920
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [
+        {
+          "text": "🕐         Time",
+          "tag": "div",
+          "cls": "sidebar-card-header"
+        },
+        {
+          "text": "Time",
+          "tag": "span",
+          "cls": "sidebar-card-title"
+        },
+        {
+          "text": "🎯             Quest",
+          "tag": "div",
+          "cls": "sidebar-card-header"
+        },
+        {
+          "text": "Quest",
+          "tag": "span",
+          "cls": "sidebar-card-title"
+        },
+        {
+          "text": "First Day Of School",
+          "tag": "div",
+          "cls": "sidebar-quest-title-row"
+        },
+        {
+          "text": "🏠             House",
+          "tag": "div",
+          "cls": "sidebar-card-header"
+        },
+        {
+          "text": "House",
+          "tag": "span",
+          "cls": "sidebar-card-title"
+        },
+        {
+          "text": "⚡         Shortcuts",
+          "tag": "div",
+          "cls": "sidebar-card-header"
+        },
+        {
+          "text": "Shortcuts",
+          "tag": "span",
+          "cls": "sidebar-card-title"
+        },
+        {
+          "text": "🎒 \t\t\t\t\tInventory \t\t\t\t \t\t\t\t0 total \t\t\t \t\t\t \t\t\t\tDis",
+          "tag": "div",
+          "cls": "inventory-header"
+        },
+        {
+          "text": "🎒 \t\t\t\t\tInventory \t\t\t\t \t\t\t\t0 total",
+          "tag": "div",
+          "cls": "inventory-title-row"
+        },
+        {
+          "text": "🎒 \t\t\t\t\tInventory",
+          "tag": "div",
+          "cls": "inventory-title-wrap"
+        },
+        {
+          "text": "🎒",
+          "tag": "span",
+          "cls": "inventory-title-icon"
+        },
+        {
+          "text": "Inventory",
+          "tag": "h2",
+          "cls": ""
+        },
+        {
+          "text": "Distinct items: 0 \t\t\t\tCategories: 0",
+          "tag": "div",
+          "cls": "inventory-subtitle"
+        },
+        {
+          "text": "Your inventory is empty",
+          "tag": "h3",
+          "cls": ""
+        },
+        {
+          "text": "🫂                     Relations                  ",
+          "tag": "div",
+          "cls": "relations-header"
+        },
+        {
+          "text": "🫂                     Relations",
+          "tag": "div",
+          "cls": "relations-title-wrap"
+        },
+        {
+          "text": "🫂",
+          "tag": "span",
+          "cls": "relations-title-icon"
+        },
+        {
+          "text": "Relations",
+          "tag": "h2",
+          "cls": ""
+        },
+        {
+          "text": "Tracked NPCs: 0                 Ordered by highest",
+          "tag": "div",
+          "cls": "relations-subtitle"
+        },
+        {
+          "text": "📋                        Quest Journal           ",
+          "tag": "div",
+          "cls": "quest-header"
+        },
+        {
+          "text": "Quest Journal",
+          "tag": "h1",
+          "cls": "quest-title"
+        },
+        {
+          "text": "Track active objectives and completed milestones.",
+          "tag": "div",
+          "cls": "quest-subtitle"
+        },
+        {
+          "text": "Current Objectives",
+          "tag": "div",
+          "cls": "section-header"
+        },
+        {
+          "text": "🎓 First Day Of School\n                        🆕",
+          "tag": "div",
+          "cls": "quest-card-header"
+        },
+        {
+          "text": "🎓 First Day Of School",
+          "tag": "h3",
+          "cls": "quest-title-text"
+        },
+        {
+          "text": "📋 I Need Money\n                        🆕",
+          "tag": "div",
+          "cls": "quest-card-header"
+        },
+        {
+          "text": "📋 I Need Money",
+          "tag": "h3",
+          "cls": "quest-title-text"
+        },
+        {
+          "text": "Achievements",
+          "tag": "div",
+          "cls": "section-header"
+        },
+        {
+          "text": "Monday                          06:00",
+          "tag": "div",
+          "cls": "phone-header"
+        },
+        {
+          "text": "⚙️         Options",
+          "tag": "div",
+          "cls": "sidebar-card-header"
+        },
+        {
+          "text": "Options",
+          "tag": "span",
+          "cls": "sidebar-card-title"
+        },
+        {
+          "text": "💬         Support",
+          "tag": "div",
+          "cls": "sidebar-card-header"
+        },
+        {
+          "text": "Support",
+          "tag": "span",
+          "cls": "sidebar-card-title"
+        },
+        {
+          "text": "🔊         BGM Volume",
+          "tag": "div",
+          "cls": "sidebar-card-header"
+        },
+        {
+          "text": "BGM Volume",
+          "tag": "span",
+          "cls": "sidebar-card-title"
+        }
+      ],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "button",
+          "id": "right-ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the Right UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1105,
+            "y": 4,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🏫 Go to School",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 801,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🎒 Inventory",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 857,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🫂 Relations",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 913,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📜 Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 969,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📕 Walkthrough",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1025,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "💾 Save Game",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1147,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🔄 Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1203,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "👾 Cheats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1259,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🖼️ Gallery",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1315,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "⚙️ Preferences",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1371,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🪲 Report a bug",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1494,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "💡 Feedback",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1550,
+            "w": 250,
+            "h": 50
+          }
+        }
+      ],
+      "passive_text_samples": [
+        "🕐",
+        "Time",
+        "🌤️",
+        "Early Morning",
+        "🗓️",
+        "Monday",
+        "☀️",
+        "Clear",
+        "🎯",
+        "Quest",
+        "First Day Of School",
+        "It's my first day at school. I'm so nervous",
+        "🏠",
+        "House",
+        "🧓🏻",
+        "Stepfather",
+        "🔥 Arousal",
+        "❄️",
+        "🫦 Corruption",
+        "📍 Location"
+      ]
+    },
+    {
+      "pos_class": "sampled",
+      "id": "ui-bar-history",
+      "bbox": {
+        "x": 0,
+        "y": 4,
+        "w": 315,
+        "h": 36
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": 4,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 168,
+            "y": 4,
+            "w": 36,
+            "h": 36
+          }
+        }
+      ],
+      "passive_text_samples": []
+    },
+    {
+      "pos_class": "sampled",
+      "id": "ui-bar-body",
+      "bbox": {
+        "x": 0,
+        "y": 45,
+        "w": 315,
+        "h": 855
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [
+        {
+          "text": "👗         Your Outfit",
+          "tag": "div",
+          "cls": "caption-card-header"
+        },
+        {
+          "text": "Your Outfit",
+          "tag": "span",
+          "cls": "caption-card-title"
+        },
+        {
+          "text": "🫦             Corruption",
+          "tag": "div",
+          "cls": "caption-card-header"
+        },
+        {
+          "text": "Corruption",
+          "tag": "span",
+          "cls": "caption-card-title"
+        },
+        {
+          "text": "⚡             Energy & Arousal",
+          "tag": "div",
+          "cls": "caption-card-header"
+        },
+        {
+          "text": "Energy & Arousal",
+          "tag": "span",
+          "cls": "caption-card-title"
+        },
+        {
+          "text": "💵             Money",
+          "tag": "div",
+          "cls": "caption-card-header"
+        },
+        {
+          "text": "Money",
+          "tag": "span",
+          "cls": "caption-card-title"
+        },
+        {
+          "text": "📊             Stats",
+          "tag": "div",
+          "cls": "caption-card-header"
+        },
+        {
+          "text": "Stats",
+          "tag": "span",
+          "cls": "caption-card-title"
+        },
+        {
+          "text": "🔗         Support & Community",
+          "tag": "div",
+          "cls": "caption-card-header"
+        },
+        {
+          "text": "Support & Community",
+          "tag": "span",
+          "cls": "caption-card-title"
+        }
+      ],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--patreon link-external",
+          "text": "             Patreon",
+          "title": "",
+          "href": "https://www.patreon.com/astk1",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1020,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--subscribestar link-exte",
+          "text": "             SubscribeStar",
+          "title": "",
+          "href": "https://subscribestar.adult/astk",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1065,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--discord link-external",
+          "text": "             Discord",
+          "title": "",
+          "href": "https://discord.gg/cb4YRG8gwm",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1111,
+            "w": 232,
+            "h": 40
+          }
+        }
+      ],
+      "passive_text_samples": [
+        "Road to Success 🌴",
+        "👗",
+        "Your Outfit",
+        "🫦",
+        "Corruption",
+        "Pure 😇",
+        "📈 Points",
+        "Energy & Arousal",
+        "🔋 100%",
+        "Energy",
+        "❄️ Calm",
+        "Arousal",
+        "💵",
+        "Money",
+        "💵 Cash",
+        "50",
+        "📊",
+        "Stats",
+        "👙 Exhibitionism",
+        "🧠 Intelligence"
+      ]
+    }
+  ],
+  "chrome_probes": [
+    {
+      "label": "             Patreon",
+      "bbox": {
+        "x": 43,
+        "y": 1020,
+        "w": 232,
+        "h": 40
+      },
+      "region_id": "ui-bar",
+      "skipped_reason": "external"
+    },
+    {
+      "label": "             SubscribeStar",
+      "bbox": {
+        "x": 43,
+        "y": 1065,
+        "w": 232,
+        "h": 40
+      },
+      "region_id": "ui-bar",
+      "skipped_reason": "external"
+    },
+    {
+      "label": "             Discord",
+      "bbox": {
+        "x": 43,
+        "y": 1111,
+        "w": 232,
+        "h": 40
+      },
+      "region_id": "ui-bar",
+      "skipped_reason": "external"
+    },
+    {
+      "label": "🏫 Go to School",
+      "bbox": {
+        "x": 1149,
+        "y": 801,
+        "w": 250,
+        "h": 50
+      },
+      "region_id": "right-ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/rts_bedroom_hub_ref/ui_probes/_Go_to_School.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 753,
+      "panel_text": "You need to wear school clothes to go there!",
+      "dialog_text": null,
+      "post_click_text": "New quest available: I Need Money\nNew quest available: First Day Of School\nYou need to wear school clothes to go there!\n👗\nYour Outfit\n\n\n🫦\nCorruption\nPure 😇\n📈 Points\n0\n⚡\nEnergy & Arousal\n🔋 100%\nEnergy\n❄️ Calm\nArousal\n💵\nMoney\n💵 Cash\n50 $\n📊\nStats\n👙 Exhibitionism\n0\n🧠 Intelligence\n0\n👥 Social\n0\n💪 Fitness\n0\n✨ Beauty\n0\n\n\n🔗\nSupport & Community\n\nPatreon\n\nSubscribeStar\n\nDiscord\nv0.25\n🕐\nTime\n🌤️\nEarly Morning\n🗓️\nMonday\n☀️\nClear\n\n\n🎯\nQuest\nFirst Day Of School\nIt's my first day at school. I'm so nervous\n\n\n🏠\nHouse\n🧓🏻 Stepfather\n🔥 Arousal\n❄️\n🫦 Corruption\n0\n📍 Location\nKitchen\n🧑🏻 Stepbrother\n🔥 Arousal\n❄️\n🫦 Corruption\n0\n📍 Location\nBathroom\n👴🏻 Stepgrandfather\n🔥 Arousal\n❄️\n🫦 Corruption\n🤪\n📍 Location\nBedroom\n\n\n⚡\nShortcuts\n🏫 Go to School\n🎒 Inventory\n🫂 Relations\n📜 Quests\n📕 Walkthrough\n\n\n⚙️\nOptions\n💾 Save Game\n🔄 Restart\n👾 Cheats\n🖼️ Gallery\n⚙️ Preferences\n\n\n💬\nSupport\n🪲 Report a bug\n💡 Feedback\n\n\n🔊\nBGM Volume\n\n\n\nYOUR BEDROOM\nStudy 📖\n❌ Too early to sleep ❌\nNap 💤\nWardrobe 👚\nImport Old Save 💾\nHallway 🚪",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 280,
+            "y": 4,
+            "w": 35,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": 4,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 168,
+            "y": 4,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--patreon link-external",
+          "text": "             Patreon",
+          "title": "",
+          "href": "https://www.patreon.com/astk1",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1020,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--subscribestar link-external",
+          "text": "             SubscribeStar",
+          "title": "",
+          "href": "https://subscribestar.adult/astk",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1065,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--discord link-external",
+          "text": "             Discord",
+          "title": "",
+          "href": "https://discord.gg/cb4YRG8gwm",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1111,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "button",
+          "id": "right-ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the Right UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1105,
+            "y": 4,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🏫 Go to School",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 801,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🎒 Inventory",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 857,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🫂 Relations",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 913,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📜 Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 969,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📕 Walkthrough",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1025,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "💾 Save Game",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1147,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🔄 Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1203,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "👾 Cheats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1259,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🖼️ Gallery",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1315,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "⚙️ Preferences",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1371,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🪲 Report a bug",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1494,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "💡 Feedback",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1550,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Study 📖",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 397,
+            "y": 417,
+            "w": 299,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "❌ Too early to sleep ❌",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 744,
+            "y": 417,
+            "w": 299,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Nap 💤",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 397,
+            "y": 497,
+            "w": 299,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Wardrobe 👚",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 744,
+            "y": 497,
+            "w": 299,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Import Old Save 💾",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 397,
+            "y": 577,
+            "w": 299,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Hallway 🚪",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 397,
+            "y": 657,
+            "w": 646,
+            "h": 50
+          }
+        }
+      ]
+    },
+    {
+      "label": "🎒 Inventory",
+      "bbox": {
+        "x": 1149,
+        "y": 857,
+        "w": 250,
+        "h": 50
+      },
+      "region_id": "right-ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/rts_bedroom_hub_ref/ui_probes/_Inventory.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 3542,
+      "panel_text": "🎒\nInventory\n0 total\nDistinct items: 0\nCategories: 0\n📦\nYour inventory is empty\nBuy items to see them here.\nTotal quantity: 0\nClose",
+      "dialog_text": null,
+      "post_click_text": "New quest available: I Need Money\nNew quest available: First Day Of School\nYou need to wear school clothes to go there!\n👗\nYour Outfit\n\n\n🫦\nCorruption\nPure 😇\n📈 Points\n0\n⚡\nEnergy & Arousal\n🔋 100%\nEnergy\n❄️ Calm\nArousal\n💵\nMoney\n💵 Cash\n50 $\n📊\nStats\n👙 Exhibitionism\n0\n🧠 Intelligence\n0\n👥 Social\n0\n💪 Fitness\n0\n✨ Beauty\n0\n\n\n🔗\nSupport & Community\n\nPatreon\n\nSubscribeStar\n\nDiscord\nv0.25\n🕐\nTime\n🌤️\nEarly Morning\n🗓️\nError: <<showcycle>>: Cannot find a cycle named \"day\".\n☀️\nClear\n\n\n🎯\nQuest\nFirst Day Of School\nIt's my first day at school. I'm so nervous\n\n\n🏠\nHouse\n🧓🏻 Stepfather\n🔥 Arousal\n❄️\n🫦 Corruption\n0\n📍 Location\nKitchen\n🧑🏻 Stepbrother\n🔥 Arousal\n❄️\n🫦 Corruption\n0\n📍 Location\nBathroom\n👴🏻 Stepgrandfather\n🔥 Arousal\n❄️\n🫦 Corruption\n🤪\n📍 Location\nBedroom\n\n\n⚡\nShortcuts\n🏫 Go to School\n🎒 Inventory\n🫂 Relations\n📜 Quests\n📕 Walkthrough\n🎒\nInventory\n0 total\nDistinct items: 0\nCategories: 0\n📦\nYour inventory is empty\n\nBuy items to see them here.\n\nTotal quantity: 0\nClose\n\n\n⚙️\nOptions\n💾 Save Game\n🔄 Restart\n👾 Cheats\n🖼️ Gallery\n⚙️ Preferences\n\n\n💬\nSupport\n🪲 Report a bug\n💡 Feedback\n\n\n🔊\nBGM Volume\n\n\n\nYOUR BEDROOM\nStudy 📖\n❌ Too early to sleep ❌\nNap 💤\nWardrobe 👚\nImport Old Save 💾\nHallway 🚪",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 280,
+            "y": 4,
+            "w": 35,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": 4,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 168,
+            "y": 4,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--patreon link-external",
+          "text": "             Patreon",
+          "title": "",
+          "href": "https://www.patreon.com/astk1",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1020,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--subscribestar link-external",
+          "text": "             SubscribeStar",
+          "title": "",
+          "href": "https://subscribestar.adult/astk",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1065,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--discord link-external",
+          "text": "             Discord",
+          "title": "",
+          "href": "https://discord.gg/cb4YRG8gwm",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1111,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "button",
+          "id": "right-ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the Right UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1105,
+            "y": -546,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "error-toggle",
+          "text": "",
+          "title": "Toggle the error view",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1203,
+            "y": -440,
+            "w": 30,
+            "h": 18
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🏫 Go to School",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 379,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🎒 Inventory",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 435,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🫂 Relations",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 491,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📜 Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 547,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📕 Walkthrough",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 603,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Close",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 835,
+            "y": 591,
+            "w": 220,
+            "h": 40
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "💾 Save Game",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 725,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🔄 Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 781,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "👾 Cheats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 837,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🖼️ Gallery",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 893,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "⚙️ Preferences",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 949,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🪲 Report a bug",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1072,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "💡 Feedback",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1128,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Study 📖",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 397,
+            "y": 411,
+            "w": 299,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "❌ Too early to sleep ❌",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 744,
+            "y": 411,
+            "w": 299,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Nap 💤",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 397,
+            "y": 491,
+            "w": 299,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Wardrobe 👚",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 744,
+            "y": 491,
+            "w": 299,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Import Old Save 💾",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 397,
+            "y": 571,
+            "w": 299,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Hallway 🚪",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 397,
+            "y": 651,
+            "w": 646,
+            "h": 50
+          }
+        }
+      ]
+    },
+    {
+      "label": "🫂 Relations",
+      "bbox": {
+        "x": 1149,
+        "y": 913,
+        "w": 250,
+        "h": 50
+      },
+      "region_id": "right-ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/rts_bedroom_hub_ref/ui_probes/_Relations.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 1289,
+      "panel_text": "🫂\nRelations\n0 active\nTracked NPCs: 0\nOrdered by highest relation\nYou have no relations yet.\nClose",
+      "dialog_text": null,
+      "post_click_text": "New quest available: I Need Money\nNew quest available: First Day Of School\nYou need to wear school clothes to go there!\n👗\nYour Outfit\n\n\n🫦\nCorruption\nPure 😇\n📈 Points\n0\n⚡\nEnergy & Arousal\n🔋 100%\nEnergy\n❄️ Calm\nArousal\n💵\nMoney\n💵 Cash\n50 $\n📊\nStats\n👙 Exhibitionism\n0\n🧠 Intelligence\n0\n👥 Social\n0\n💪 Fitness\n0\n✨ Beauty\n0\n\n\n🔗\nSupport & Community\n\nPatreon\n\nSubscribeStar\n\nDiscord\nv0.25\n🕐\nTime\n🌤️\nEarly Morning\n🗓️\nError: <<showcycle>>: Cannot find a cycle named \"day\".\n☀️\nClear\n\n\n🎯\nQuest\nFirst Day Of School\nIt's my first day at school. I'm so nervous\n\n\n🏠\nHouse\n🧓🏻 Stepfather\n🔥 Arousal\n❄️\n🫦 Corruption\n0\n📍 Location\nKitchen\n🧑🏻 Stepbrother\n🔥 Arousal\n❄️\n🫦 Corruption\n0\n📍 Location\nBathroom\n👴🏻 Stepgrandfather\n🔥 Arousal\n❄️\n🫦 Corruption\n🤪\n📍 Location\nBedroom\n\n\n⚡\nShortcuts\n🏫 Go to School\n🎒 Inventory\n🫂 Relations\n📜 Quests\n📕 Walkthrough\n🫂\nRelations\n0 active\nTracked NPCs: 0\nOrdered by highest relation\nYou have no relations yet.\nClose\n\n\n⚙️\nOptions\n💾 Save Game\n🔄 Restart\n👾 Cheats\n🖼️ Gallery\n⚙️ Preferences\n\n\n💬\nSupport\n🪲 Report a bug\n💡 Feedback\n\n\n🔊\nBGM Volume\n\n\n\nYOUR BEDROOM\nStudy 📖\n❌ Too early to sleep ❌\nNap 💤\nWardrobe 👚\nImport Old Save 💾\nHallway 🚪",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 280,
+            "y": 4,
+            "w": 35,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": 4,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 168,
+            "y": 4,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--patreon link-external",
+          "text": "             Patreon",
+          "title": "",
+          "href": "https://www.patreon.com/astk1",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1020,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--subscribestar link-external",
+          "text": "             SubscribeStar",
+          "title": "",
+          "href": "https://subscribestar.adult/astk",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1065,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--discord link-external",
+          "text": "             Discord",
+          "title": "",
+          "href": "https://discord.gg/cb4YRG8gwm",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1111,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "button",
+          "id": "right-ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the Right UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1105,
+            "y": -546,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "error-toggle",
+          "text": "",
+          "title": "Toggle the error view",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1203,
+            "y": -440,
+            "w": 30,
+            "h": 18
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🏫 Go to School",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 379,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🎒 Inventory",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 435,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🫂 Relations",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 491,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📜 Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 547,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📕 Walkthrough",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 603,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Close",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 835,
+            "y": 551,
+            "w": 220,
+            "h": 40
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "💾 Save Game",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 725,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🔄 Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 781,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "👾 Cheats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 837,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🖼️ Gallery",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 893,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "⚙️ Preferences",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 949,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🪲 Report a bug",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1072,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "💡 Feedback",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1128,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Study 📖",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 397,
+            "y": 411,
+            "w": 299,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "❌ Too early to sleep ❌",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 744,
+            "y": 411,
+            "w": 299,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Nap 💤",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 397,
+            "y": 491,
+            "w": 299,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Wardrobe 👚",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 744,
+            "y": 491,
+            "w": 299,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Import Old Save 💾",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 397,
+            "y": 571,
+            "w": 299,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Hallway 🚪",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 397,
+            "y": 651,
+            "w": 646,
+            "h": 50
+          }
+        }
+      ]
+    },
+    {
+      "label": "📜 Quests",
+      "bbox": {
+        "x": 1149,
+        "y": 969,
+        "w": 250,
+        "h": 50
+      },
+      "region_id": "right-ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/rts_bedroom_hub_ref/ui_probes/_Quests.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 875,
+      "panel_text": "📋\nQuest Journal\nTrack active objectives and completed milestones.\n2\nACTIVE\nCOMPLETED\n🎯 Active Quests\n✅ Completed\nCurrent Objectives\nPin an active quest to keep it visible in the right sidebar.\n🎓 First Day Of School\n🆕\n📍 Pin to Sidebar\n📋 I Need Money\n🆕\nI should get a job, maybe at the restaurant?\n📍 Pin to Sidebar\nClose Journal",
+      "dialog_text": null,
+      "post_click_text": "You need to wear school clothes to go there!\n👗\nYour Outfit\n\n\n🫦\nCorruption\nPure 😇\n📈 Points\n0\n⚡\nEnergy & Arousal\n🔋 100%\nEnergy\n❄️ Calm\nArousal\n💵\nMoney\n💵 Cash\n50 $\n📊\nStats\n👙 Exhibitionism\n0\n🧠 Intelligence\n0\n👥 Social\n0\n💪 Fitness\n0\n✨ Beauty\n0\n\n\n🔗\nSupport & Community\n\nPatreon\n\nSubscribeStar\n\nDiscord\nv0.25\n🕐\nTime\n🌤️\nEarly Morning\n🗓️\nError: <<showcycle>>: Cannot find a cycle named \"day\".\n☀️\nClear\n\n\n🎯\nQuest\nFirst Day Of School\nIt's my first day at school. I'm so nervous\n\n\n🏠\nHouse\n🧓🏻 Stepfather\n🔥 Arousal\n❄️\n🫦 Corruption\n0\n📍 Location\nKitchen\n🧑🏻 Stepbrother\n🔥 Arousal\n❄️\n🫦 Corruption\n0\n📍 Location\nBathroom\n👴🏻 Stepgrandfather\n🔥 Arousal\n❄️\n🫦 Corruption\n🤪\n📍 Location\nBedroom\n\n\n⚡\nShortcuts\n🏫 Go to School\n🎒 Inventory\n🫂 Relations\n📜 Quests\n📕 Walkthrough\n📋\nQuest Journal\nTrack active objectives and completed milestones.\n2\nACTIVE\n0\nCOMPLETED\n🎯 Active Quests\n✅ Completed\nCurrent Objectives\nPin an active quest to keep it visible in the right sidebar.\n🎓 First Day Of School\n🆕\n\nIt's my first day at school. I'm so nervous\n\n📍 Pin to Sidebar\n📋 I Need Money\n🆕\n\nI should get a job, maybe at the restaurant?\n\n📍 Pin to Sidebar\nClose Journal\n\n\n⚙️\nOptions\n💾 Save Game\n🔄 Restart\n👾 Cheats\n🖼️ Gallery\n⚙️ Preferences\n\n\n💬\nSupport\n🪲 Report a bug\n💡 Feedback\n\n\n🔊\nBGM Volume\n\n\n\nYOUR BEDROOM\nStudy 📖\n❌ Too early to sleep ❌\nNap 💤\nWardrobe 👚\nImport Old Save 💾\nHallway 🚪",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 280,
+            "y": 4,
+            "w": 35,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": 4,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 168,
+            "y": 4,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--patreon link-external",
+          "text": "             Patreon",
+          "title": "",
+          "href": "https://www.patreon.com/astk1",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1020,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--subscribestar link-external",
+          "text": "             SubscribeStar",
+          "title": "",
+          "href": "https://subscribestar.adult/astk",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1065,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--discord link-external",
+          "text": "             Discord",
+          "title": "",
+          "href": "https://discord.gg/cb4YRG8gwm",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1111,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "button",
+          "id": "right-ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the Right UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1105,
+            "y": -546,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "error-toggle",
+          "text": "",
+          "title": "Toggle the error view",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1203,
+            "y": -440,
+            "w": 30,
+            "h": 18
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🏫 Go to School",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 379,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🎒 Inventory",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 435,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🫂 Relations",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 491,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📜 Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 547,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📕 Walkthrough",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 603,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "tab-button active",
+          "text": "🎯 Active Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 364,
+            "y": 199,
+            "w": 358,
+            "h": 57
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "tab-button",
+          "text": "✅ Completed",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 722,
+            "y": 199,
+            "w": 358,
+            "h": 57
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "quest-pin-button ",
+          "text": "📍 Pin to Sidebar",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 795,
+            "y": 467,
+            "w": 141,
+            "h": 33
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "quest-pin-button ",
+          "text": "📍 Pin to Sidebar",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 795,
+            "y": 636,
+            "w": 141,
+            "h": 33
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "close-button",
+          "text": "Close Journal",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 861,
+            "y": 736,
+            "w": 196,
+            "h": 40
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "💾 Save Game",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 725,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🔄 Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 781,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "👾 Cheats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 837,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🖼️ Gallery",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 893,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "⚙️ Preferences",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 949,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🪲 Report a bug",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1072,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "💡 Feedback",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1128,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Study 📖",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 397,
+            "y": 411,
+            "w": 299,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "❌ Too early to sleep ❌",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 744,
+            "y": 411,
+            "w": 299,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Nap 💤",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 397,
+            "y": 491,
+            "w": 299,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Wardrobe 👚",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 744,
+            "y": 491,
+            "w": 299,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Import Old Save 💾",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 397,
+            "y": 571,
+            "w": 299,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Hallway 🚪",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 397,
+            "y": 651,
+            "w": 646,
+            "h": 50
+          }
+        }
+      ]
+    },
+    {
+      "label": "📕 Walkthrough",
+      "bbox": {
+        "x": 1149,
+        "y": 1025,
+        "w": 250,
+        "h": 50
+      },
+      "region_id": "right-ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/rts_bedroom_hub_ref/ui_probes/_Walkthrough.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 3786,
+      "panel_text": "WALKTHROUGH\nRETURN ↩️\nHow to gain corruption and exhibitionism\nAt the start of the game, you gain 1 arousal each day, or after being groped in your bedroom. You can choose to masturbate to increase your corruption.\nOnce you reach 5 corruption points, you unlock the option to flash your Stepbrother through his bedroom, gaining 1 exhibitionism point.\nSome events have requirements, such as a minimum corruption level, exhibitionism level, or relationship level with an NPC. You can also trigger events by visiting certain locations.\nNPC SCENES\nMC\nStepfather\n12\nStepbrother\n15\nStepgrandfather\n6\nMarcus\n5\nSam\n2\nEmma\n1\nJamal\n3\nVeronica\n3\nPriest\n2\nGangster\n1\nMr. Matthew\n1\nEdward\n4\nTow Truck Driver\n1\nYacht Captain\n1\nThief\n2\nJosh\n1\nLandlord\n1\nLOCATION SCENES\nCity Center\n1\n1\nBus\n3\nPhoto Studio\n2\nSchool\n12\nPark\n9\nGym\n3\nMall\n3\nNight Club\n2\nBeach\n7\nBar\n4\nPublic Pool\n2\nOffice\n2\nDriving School\n1\nThomas's House\n2\nStrip Club\n3\nClandestine Clinic\n2\nRestaurant\n5\nPolice Station\n1\nHospital\n2\nAbandoned Building\n1\nGas Station\n1\nMovie Theater\n2\nRETURN ↩️",
+      "dialog_text": null,
+      "post_click_text": "👗\nYour Outfit\n\n\n🫦\nCorruption\nPure 😇\n📈 Points\n0\n⚡\nEnergy & Arousal\n🔋 100%\nEnergy\n❄️ Calm\nArousal\n💵\nMoney\n💵 Cash\n50 $\n📊\nStats\n👙 Exhibitionism\n0\n🧠 Intelligence\n0\n👥 Social\n0\n💪 Fitness\n0\n✨ Beauty\n0\n\n\n🔗\nSupport & Community\n\nPatreon\n\nSubscribeStar\n\nDiscord\nv0.25\n🕐\nTime\n🌤️\nEarly Morning\n🗓️\nError: <<showcycle>>: Cannot find a cycle named \"day\".\n☀️\nClear\n\n\n🎯\nQuest\nFirst Day Of School\nIt's my first day at school. I'm so nervous\n\n\n🏠\nHouse\n🧓🏻 Stepfather\n🔥 Arousal\n❄️\n🫦 Corruption\n0\n📍 Location\nKitchen\n🧑🏻 Stepbrother\n🔥 Arousal\n❄️\n🫦 Corruption\n0\n📍 Location\nBathroom\n👴🏻 Stepgrandfather\n🔥 Arousal\n❄️\n🫦 Corruption\n🤪\n📍 Location\nBedroom\n\n\n⚡\nShortcuts\n🏫 Go to School\n🎒 Inventory\n🫂 Relations\n📜 Quests\n📕 Walkthrough\n\n\n⚙️\nOptions\n💾 Save Game\n🔄 Restart\n👾 Cheats\n🖼️ Gallery\n⚙️ Preferences\n\n\n💬\nSupport\n🪲 Report a bug\n💡 Feedback\n\n\n🔊\nBGM Volume\n\n\n\nWALKTHROUGH\nRETURN ↩️\nHow to gain corruption and exhibitionism\n\nAt the start of the game, you gain 1 arousal each day, or after being groped in your bedroom. You can choose to masturbate to increase your corruption.\n\nOnce you reach 5 corruption points, you unlock the option to flash your Stepbrother through his bedroom, gaining 1 exhibitionism point.\n\nSome events have requirements, such as a minimum corruption level, exhibitionism level, or relationship level with an NPC. You can also trigger events by visiting certain locations.\n\nNPC SCENES\nMC\nStepfather\n12\nStepbrother\n15\nStepgrandfather\n6\nMarcus\n5\nSam\n2\nEmma\n1\nJamal\n3\nVeronica\n3\nPriest\n2\nGangster\n1\nMr. Matthew\n1\nEdward\n4\nTow Truck Driver\n1\nYacht Captain\n1\nThief\n2\nJosh\n1\nLandlord\n1\nLOCATION SCENES\nCity Center\n1\nHouse\n1\nBus\n3\nPhoto Studio\n2\nSchool\n12\nPark\n9\nGym\n3\nMall\n3\nNight Club\n2\nBeach\n7\nBar\n4\nPublic Pool\n2\nOffice\n2\nDriving School\n1\nThomas's House\n2\nStrip Club\n3\nClandestine Clinic\n2\nRestaurant\n5\nPolice Station\n1\nHospital\n2\nAbandoned Building\n1\nGas Station\n1\nMovie Theater\n2\nRETURN ↩️",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 280,
+            "y": 4,
+            "w": 35,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": 4,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 168,
+            "y": 4,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--patreon link-external",
+          "text": "             Patreon",
+          "title": "",
+          "href": "https://www.patreon.com/astk1",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1020,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--subscribestar link-external",
+          "text": "             SubscribeStar",
+          "title": "",
+          "href": "https://subscribestar.adult/astk",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1065,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--discord link-external",
+          "text": "             Discord",
+          "title": "",
+          "href": "https://discord.gg/cb4YRG8gwm",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1111,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "button",
+          "id": "right-ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the Right UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1105,
+            "y": -546,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "error-toggle",
+          "text": "",
+          "title": "Toggle the error view",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1203,
+            "y": -440,
+            "w": 30,
+            "h": 18
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🏫 Go to School",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 379,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🎒 Inventory",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 435,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🫂 Relations",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 491,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📜 Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 547,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📕 Walkthrough",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 603,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "💾 Save Game",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 725,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🔄 Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 781,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "👾 Cheats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 837,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🖼️ Gallery",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 893,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "⚙️ Preferences",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 949,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🪲 Report a bug",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1072,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "💡 Feedback",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1128,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Return ↩️",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 881,
+            "y": 124,
+            "w": 140,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "MC",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 436,
+            "y": 755,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Stepfather12",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 739,
+            "y": 755,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Stepbrother15",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 436,
+            "y": 868,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Stepgrandfather6",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 739,
+            "y": 868,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Marcus5",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 436,
+            "y": 981,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Sam2",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 739,
+            "y": 981,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Emma1",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 436,
+            "y": 1094,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Jamal3",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 739,
+            "y": 1094,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Veronica3",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 436,
+            "y": 1207,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Priest2",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 739,
+            "y": 1207,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Gangster1",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 436,
+            "y": 1320,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Mr. Matthew1",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 739,
+            "y": 1320,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Edward4",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 436,
+            "y": 1433,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Tow Truck Driver1",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 739,
+            "y": 1433,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Yacht Captain1",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 436,
+            "y": 1546,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Thief2",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 739,
+            "y": 1546,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Josh1",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 436,
+            "y": 1659,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Landlord1",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 739,
+            "y": 1659,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "City Center1",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 436,
+            "y": 1930,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "House1",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 739,
+            "y": 1930,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Bus3",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 436,
+            "y": 2043,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Photo Studio2",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 739,
+            "y": 2043,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "School12",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 436,
+            "y": 2156,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Park9",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 739,
+            "y": 2156,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Gym3",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 436,
+            "y": 2269,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Mall3",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 739,
+            "y": 2269,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Night Club2",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 436,
+            "y": 2382,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Beach7",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 739,
+            "y": 2382,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Bar4",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 436,
+            "y": 2495,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Public Pool 2",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 739,
+            "y": 2495,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Office2",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 436,
+            "y": 2608,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Driving School1",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 739,
+            "y": 2608,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Thomas's House2",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 436,
+            "y": 2721,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Strip Club3",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 739,
+            "y": 2721,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Clandestine Clinic2",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 436,
+            "y": 2834,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Restaurant5",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 739,
+            "y": 2834,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Police Station1",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 436,
+            "y": 2947,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Hospital2",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 739,
+            "y": 2947,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Abandoned Building1",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 436,
+            "y": 3060,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Gas Station1",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 739,
+            "y": 3060,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Movie Theater2",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 436,
+            "y": 3173,
+            "w": 265,
+            "h": 80
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Return ↩️",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 592,
+            "y": 3739,
+            "w": 256,
+            "h": 50
+          }
+        }
+      ]
+    },
+    {
+      "label": "💾 Save Game",
+      "bbox": {
+        "x": 1149,
+        "y": 1147,
+        "w": 250,
+        "h": 50
+      },
+      "region_id": "right-ui-bar",
+      "skipped_reason": "save_mutation"
+    },
+    {
+      "label": "🔄 Restart",
+      "bbox": {
+        "x": 1149,
+        "y": 1203,
+        "w": 250,
+        "h": 50
+      },
+      "region_id": "right-ui-bar",
+      "skipped_reason": "destructive"
+    },
+    {
+      "label": "👾 Cheats",
+      "bbox": {
+        "x": 1149,
+        "y": 1259,
+        "w": 250,
+        "h": 50
+      },
+      "region_id": "right-ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/rts_bedroom_hub_ref/ui_probes/_Cheats.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 3651,
+      "panel_text": "CHEATS\n❗Cheats are only for Patreons❗\nBecome a Patreon\nReturn ↩️",
+      "dialog_text": null,
+      "post_click_text": "👗\nYour Outfit\n\n\n🫦\nCorruption\nPure 😇\n📈 Points\n0\n⚡\nEnergy & Arousal\n🔋 100%\nEnergy\n❄️ Calm\nArousal\n💵\nMoney\n💵 Cash\n50 $\n📊\nStats\n👙 Exhibitionism\n0\n🧠 Intelligence\n0\n👥 Social\n0\n💪 Fitness\n0\n✨ Beauty\n0\n\n\n🔗\nSupport & Community\n\nPatreon\n\nSubscribeStar\n\nDiscord\nv0.25\n🕐\nTime\n🌤️\nEarly Morning\n🗓️\nError: <<showcycle>>: Cannot find a cycle named \"day\".\n☀️\nClear\n\n\n🎯\nQuest\nFirst Day Of School\nIt's my first day at school. I'm so nervous\n\n\n🏠\nHouse\n🧓🏻 Stepfather\n🔥 Arousal\n❄️\n🫦 Corruption\n0\n📍 Location\nKitchen\n🧑🏻 Stepbrother\n🔥 Arousal\n❄️\n🫦 Corruption\n0\n📍 Location\nBathroom\n👴🏻 Stepgrandfather\n🔥 Arousal\n❄️\n🫦 Corruption\n🤪\n📍 Location\nBedroom\n\n\n⚡\nShortcuts\n🏫 Go to School\n🎒 Inventory\n🫂 Relations\n📜 Quests\n📕 Walkthrough\n\n\n⚙️\nOptions\n💾 Save Game\n🔄 Restart\n👾 Cheats\n🖼️ Gallery\n⚙️ Preferences\n\n\n💬\nSupport\n🪲 Report a bug\n💡 Feedback\n\n\n🔊\nBGM Volume\n\n\n\nCHEATS\n❗Cheats are only for Patreons❗\nBecome a Patreon\nReturn ↩️",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 280,
+            "y": 4,
+            "w": 35,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": 4,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 168,
+            "y": 4,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--patreon link-external",
+          "text": "             Patreon",
+          "title": "",
+          "href": "https://www.patreon.com/astk1",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1020,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--subscribestar link-external",
+          "text": "             SubscribeStar",
+          "title": "",
+          "href": "https://subscribestar.adult/astk",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1065,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--discord link-external",
+          "text": "             Discord",
+          "title": "",
+          "href": "https://discord.gg/cb4YRG8gwm",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1111,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "button",
+          "id": "right-ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the Right UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1105,
+            "y": -546,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "error-toggle",
+          "text": "",
+          "title": "Toggle the error view",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1203,
+            "y": -440,
+            "w": 30,
+            "h": 18
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🏫 Go to School",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 379,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🎒 Inventory",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 435,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🫂 Relations",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 491,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📜 Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 547,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📕 Walkthrough",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 603,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "💾 Save Game",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 725,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🔄 Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 781,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "👾 Cheats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 837,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🖼️ Gallery",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 893,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "⚙️ Preferences",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 949,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🪲 Report a bug",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1072,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "💡 Feedback",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1128,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Become a Patreon",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 397,
+            "y": 246,
+            "w": 646,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Return ↩️",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 397,
+            "y": 311,
+            "w": 646,
+            "h": 50
+          }
+        }
+      ]
+    },
+    {
+      "label": "🖼️ Gallery",
+      "bbox": {
+        "x": 1149,
+        "y": 1315,
+        "w": 250,
+        "h": 50
+      },
+      "region_id": "right-ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/rts_bedroom_hub_ref/ui_probes/_Gallery.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 3688,
+      "panel_text": "❗Gallery is only for Patreons❗\nBecome a Patreon\nReturn ↩️",
+      "dialog_text": null,
+      "post_click_text": "👗\nYour Outfit\n\n\n🫦\nCorruption\nPure 😇\n📈 Points\n0\n⚡\nEnergy & Arousal\n🔋 100%\nEnergy\n❄️ Calm\nArousal\n💵\nMoney\n💵 Cash\n50 $\n📊\nStats\n👙 Exhibitionism\n0\n🧠 Intelligence\n0\n👥 Social\n0\n💪 Fitness\n0\n✨ Beauty\n0\n\n\n🔗\nSupport & Community\n\nPatreon\n\nSubscribeStar\n\nDiscord\nv0.25\n🕐\nTime\n🌤️\nEarly Morning\n🗓️\nError: <<showcycle>>: Cannot find a cycle named \"day\".\n☀️\nClear\n\n\n🎯\nQuest\nFirst Day Of School\nIt's my first day at school. I'm so nervous\n\n\n🏠\nHouse\n🧓🏻 Stepfather\n🔥 Arousal\n❄️\n🫦 Corruption\n0\n📍 Location\nKitchen\n🧑🏻 Stepbrother\n🔥 Arousal\n❄️\n🫦 Corruption\n0\n📍 Location\nBathroom\n👴🏻 Stepgrandfather\n🔥 Arousal\n❄️\n🫦 Corruption\n🤪\n📍 Location\nBedroom\n\n\n⚡\nShortcuts\n🏫 Go to School\n🎒 Inventory\n🫂 Relations\n📜 Quests\n📕 Walkthrough\n\n\n⚙️\nOptions\n💾 Save Game\n🔄 Restart\n👾 Cheats\n🖼️ Gallery\n⚙️ Preferences\n\n\n💬\nSupport\n🪲 Report a bug\n💡 Feedback\n\n\n🔊\nBGM Volume\n\n\n\n❗Gallery is only for Patreons❗\nBecome a Patreon\nReturn ↩️",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 280,
+            "y": 4,
+            "w": 35,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": 4,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 168,
+            "y": 4,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--patreon link-external",
+          "text": "             Patreon",
+          "title": "",
+          "href": "https://www.patreon.com/astk1",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1020,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--subscribestar link-external",
+          "text": "             SubscribeStar",
+          "title": "",
+          "href": "https://subscribestar.adult/astk",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1065,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "caption-link caption-link--discord link-external",
+          "text": "             Discord",
+          "title": "",
+          "href": "https://discord.gg/cb4YRG8gwm",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 43,
+            "y": 1111,
+            "w": 232,
+            "h": 40
+          }
+        },
+        {
+          "tag": "button",
+          "id": "right-ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the Right UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1105,
+            "y": -569,
+            "w": 36,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "error-toggle",
+          "text": "",
+          "title": "Toggle the error view",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1203,
+            "y": -463,
+            "w": 30,
+            "h": 18
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🏫 Go to School",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 355,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🎒 Inventory",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 411,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🫂 Relations",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 467,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📜 Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 523,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📕 Walkthrough",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 579,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "💾 Save Game",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 702,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🔄 Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 758,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "👾 Cheats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 814,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🖼️ Gallery",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 870,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "⚙️ Preferences",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 926,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "🪲 Report a bug",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1048,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "💡 Feedback",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 1149,
+            "y": 1104,
+            "w": 250,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Become a Patreon",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 584,
+            "y": 157,
+            "w": 272,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Return ↩️",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 584,
+            "y": 222,
+            "w": 272,
+            "h": 50
+          }
+        }
+      ]
+    },
+    {
+      "label": "⚙️ Preferences",
+      "bbox": {
+        "x": 1149,
+        "y": 1371,
+        "w": 250,
+        "h": 50
+      },
+      "region_id": "right-ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/rts_bedroom_hub_ref/ui_probes/_Preferences.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 3560,
+      "panel_text": "Game Preferences\nReturn ↩️\nCustomize your gaming experience\nGeneral Settings\n👕\nAuto Clothes Change\nAutomatically change clothes when entering places with specific requirements\n🎬\nVideo Autoplay\nAutomatically play videos during gameplay\n🔇\nMute Videos\nPlay videos without sound\n🔁\nLoop Videos\nAutomatically loop videos when they finish playing\n💾\nAuto-Save\nAutomatically save the game when you sleep\n🗂️\nAuto-Save Slot\nChoose which save slot to use for automatic saves\n1\n2\n3\n4\n5\n6\n7\n🎭\nContent Options\n🏳️‍⚧️\nTrans Content\nEnable scenes with trans characters (shemales, femboys, sissies, etc.)\n👭\nLesbian Content\nEnable scenes with the player having sex with other women\n🤱\nPregnancy Options\n🤱\nEnable Pregnancy\nAllow pregnancy mechanics (you can still avoid it by using contraceptives)\n⏰\nPregnancy Duration\nDuration in days (minimum 7)\n🎲\nPregnancy Chance\nChance percentage (0 to 100)\n👤\nCharacter Customization\n👤\nYour Name\n👨‍👩‍👧‍👦\nHousehold Relationships\nCustomize your relationships with household members\nStepfather\nWhat's my name ?\nHis name:\nHe is your:\nYou are his:\nStepbrother\nWhat's my name ?\nHis name:\nHe is your:\nYou are his:\nStepgrandfather\nWhat's my name ?\nHis name:\nHe is your:\nYou are his:\nReturn ↩️",
+      "dialog_text": null,
+      "post_click_text": "Game Preferences\nReturn ↩️\n\nCustomize your gaming experience\n\n⚙️\nGeneral Settings\n👕\nAuto Clothes Change\n\nAutomatically change clothes when entering places with specific requirements\n\n🎬\nVideo Autoplay\n\nAutomatically play videos during gameplay\n\n🔇\nMute Videos\n\nPlay videos without sound\n\n🔁\nLoop Videos\n\nAutomatically loop videos when they finish playing\n\n💾\nAuto-Save\n\nAutomatically save the game when you sleep\n\n🗂️\nAuto-Save Slot\n\nChoose which save slot to use for automatic saves\n\n0\n1\n2\n3\n4\n5\n6\n7\n🎭\nContent Options\n🏳️‍⚧️\nTrans Content\n\nEnable scenes with trans characters (shemales, femboys, sissies, etc.)\n\n👭\nLesbian Content\n\nEnable scenes with the player having sex with other women\n\n🤱\nPregnancy Options\n🤱\nEnable Pregnancy\n\nAllow pregnancy mechanics (you can still avoid it by using contraceptives)\n\n⏰\nPregnancy Duration\n\nDuration in days (minimum 7)\n\n🎲\nPregnancy Chance\n\nChance percentage (0 to 100)\n\n👤\nCharacter Customization\n👤\nYour Name\n👨‍👩‍👧‍👦\nHousehold Relationships\n\nCustomize your relationships with household members\n\nStepfather\nWhat's my name ?\nHis name:\nHe is your:\nYou are his:\nStepbrother\nWhat's my name ?\nHis name:\nHe is your:\nYou are his:\nStepgrandfather\nWhat's my name ?\nHis name:\nHe is your:\nYou are his:\nReturn ↩️",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Return ↩️",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 888,
+            "y": 138,
+            "w": 140,
+            "h": 50
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Return ↩️",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 592,
+            "y": 5106,
+            "w": 256,
+            "h": 50
+          }
+        }
+      ]
+    },
+    {
+      "label": "🪲 Report a bug",
+      "bbox": {
+        "x": 1149,
+        "y": 1494,
+        "w": 250,
+        "h": 50
+      },
+      "region_id": "right-ui-bar",
+      "skipped_reason": "external"
+    },
+    {
+      "label": "💡 Feedback",
+      "bbox": {
+        "x": 1149,
+        "y": 1550,
+        "w": 250,
+        "h": 50
+      },
+      "region_id": "right-ui-bar",
+      "skipped_reason": "external"
+    }
+  ],
+  "regions": [
+    {
+      "pos_class": "floating",
+      "tag": "div",
+      "id": "",
+      "cls": "flash-container top-left-flash-layout",
+      "position_style": "fixed",
+      "z_index": "1000",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 350,
+        "y": 75,
+        "w": 360,
+        "h": 171
+      },
+      "text_sample": "New quest available: I Need MoneyNew quest available: First Day Of School"
+    },
+    {
+      "pos_class": "left",
+      "tag": "div",
+      "id": "ui-bar",
+      "cls": "",
+      "position_style": "fixed",
+      "z_index": "50",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 316,
+        "h": 900
+      },
+      "text_sample": "Road to Success 🌴              👗         Your Outfit                          "
+    },
+    {
+      "pos_class": "right",
+      "tag": "div",
+      "id": "right-ui-bar",
+      "cls": "",
+      "position_style": "fixed",
+      "z_index": "50",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 1103,
+        "y": 0,
+        "w": 337,
+        "h": 920
+      },
+      "text_sample": "🕐         Time                                                 🌤️             "
+    },
+    {
+      "pos_class": "sampled",
+      "tag": "div",
+      "id": "ui-bar-history",
+      "cls": "",
+      "position_style": "static",
+      "z_index": "auto",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 0,
+        "y": 4,
+        "w": 315,
+        "h": 36
+      },
+      "text_sample": "",
+      "from_sampling": true
+    },
+    {
+      "pos_class": "sampled",
+      "tag": "div",
+      "id": "ui-bar-body",
+      "cls": "",
+      "position_style": "static",
+      "z_index": "auto",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 0,
+        "y": 45,
+        "w": 315,
+        "h": 855
+      },
+      "text_sample": "",
+      "from_sampling": true
+    }
+  ],
+  "main_content": null,
+  "chrome_probes_count": 8,
+  "ui_frame_hash": "8a8452ddd10f95dd"
+}

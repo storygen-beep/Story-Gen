@@ -1,0 +1,19 @@
+{
+  "session_id": 1,
+  "start_ts": "2026-05-21T15:47:57.487Z",
+  "start_epoch_ms": 1779378477487,
+  "end_ts": "2026-05-21T15:48:51.480Z",
+  "duration_s": 54,
+  "clicks": 0,
+  "choices_explored": 0,
+  "arrow_advances": 0,
+  "unique_states_seen": 3,
+  "new_unique_states": 3,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "DOC 41 Tier 1 GATE VERIFY (browser, local build) — Gate A (sex-loop entry) false@Maya arousal0 / true@1; Gate B (Frank ambient) false@Frank arousal0 / true@1. Teases ungated (seeders) → no soft-lock. Build clean (37 baseline warnings, no new). Gate C correctly NOT applied to pose menu (climax already gated by loop_npc_pleasure)."
+  ]
+}

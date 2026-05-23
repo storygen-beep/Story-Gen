@@ -1,0 +1,19 @@
+{
+  "session_id": 1,
+  "start_ts": "2026-05-14T09:25:38.132Z",
+  "start_epoch_ms": 1778750738132,
+  "end_ts": "2026-05-14T09:38:47.411Z",
+  "duration_s": 789,
+  "clicks": 15,
+  "choices_explored": 15,
+  "arrow_advances": 0,
+  "unique_states_seen": 17,
+  "new_unique_states": 17,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "VERIFICATION SUMMARY (2026-05-14): Lane 1 hubs + Lane 2 ambients correctly registered + dual-choice routing works. Lane 3 substitutions STRUCTURALLY BROKEN — 7 new sub canvases (scene_frank_*) lack a 'location' field in [canvases.trigger], so they're excluded from setup.help_data.locationCanvases → not in _canvasByIdMap → getCanvasById returns null → checkAndSubstituteCanvas always misses. KEPT working tease canvases (e.g. tease_kitchen_brush_past) have BOTH location AND substitution_only=true. Fix: add 'location = \"loc_X\"' (and likely requires_npc/priority) to each of the 7 sub canvas trigger blocks."
+  ]
+}

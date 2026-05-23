@@ -1,0 +1,3262 @@
+{
+  "generated_at": "2026-05-14T06:17:47.071Z",
+  "variables": {
+    "last_game_passage": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 5,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        "Start",
+        "StartingCanvas_event_test_slice_intro_Node_1",
+        "Canvas_event_partner_invitation_Node_1",
+        "Location_Maya's_Bedroom",
+        "Location_Home",
+        "Canvas_ambient_kitchen_frank_morning_chat_Node_1"
+      ]
+    },
+    "player.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        "Maya"
+      ]
+    },
+    "player.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        "maya.jpg"
+      ]
+    },
+    "player.current_location": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 3,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        "",
+        "ee2dedd9-31b7-4618-9df2-3355fedade5c",
+        "46b2fd9f-b81d-4394-aa70-0ebccbc5e4ed",
+        "0ae53ec6-0d35-4296-8597-008515fd7f92"
+      ]
+    },
+    "player.core_traits.energy": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 2,
+        "min": -2,
+        "max": 0,
+        "first": 0,
+        "last": -2,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.hygiene": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.fitness": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.beauty": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.corruption": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 2,
+        "min": 0,
+        "max": 40,
+        "first": 0,
+        "last": 40,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.calculation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.money": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.rep_church": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.rep_road": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.rep_college": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.npc_ryan_stage": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.npc_jake_stage": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.ryan_help_count": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.jake_peek_count": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.lean_by_desk_count": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.sex_stage": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.sex_finisher_type": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.sex_reactions": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.anal_active": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.c66d9130-1a64-4288-ba28-a642e324bf57.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        "Frank"
+      ]
+    },
+    "npcs.c66d9130-1a64-4288-ba28-a642e324bf57.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        "frank.jpg"
+      ]
+    },
+    "npcs.c66d9130-1a64-4288-ba28-a642e324bf57.core_traits.love": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.c66d9130-1a64-4288-ba28-a642e324bf57.core_traits.trust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 2,
+        "min": 0,
+        "max": 1,
+        "first": 0,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.c66d9130-1a64-4288-ba28-a642e324bf57.core_traits.corruption": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.c66d9130-1a64-4288-ba28-a642e324bf57.core_traits.arousal": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.c66d9130-1a64-4288-ba28-a642e324bf57.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6
+    },
+    "npcs.c66d9130-1a64-4288-ba28-a642e324bf57.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        ""
+      ]
+    },
+    "npcs.2262dbec-e01e-42a9-8ba1-860085f5372f.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        "Ryan"
+      ]
+    },
+    "npcs.2262dbec-e01e-42a9-8ba1-860085f5372f.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        "ryan.jpg"
+      ]
+    },
+    "npcs.2262dbec-e01e-42a9-8ba1-860085f5372f.core_traits.love": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.2262dbec-e01e-42a9-8ba1-860085f5372f.core_traits.trust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.2262dbec-e01e-42a9-8ba1-860085f5372f.core_traits.corruption": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.2262dbec-e01e-42a9-8ba1-860085f5372f.core_traits.arousal": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.2262dbec-e01e-42a9-8ba1-860085f5372f.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6
+    },
+    "npcs.2262dbec-e01e-42a9-8ba1-860085f5372f.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        ""
+      ]
+    },
+    "npcs.4d62dc0b-921a-4139-b5a0-5971a8e65483.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        "Jake"
+      ]
+    },
+    "npcs.4d62dc0b-921a-4139-b5a0-5971a8e65483.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        "jake.jpg"
+      ]
+    },
+    "npcs.4d62dc0b-921a-4139-b5a0-5971a8e65483.core_traits.love": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.4d62dc0b-921a-4139-b5a0-5971a8e65483.core_traits.trust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.4d62dc0b-921a-4139-b5a0-5971a8e65483.core_traits.corruption": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.4d62dc0b-921a-4139-b5a0-5971a8e65483.core_traits.arousal": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.4d62dc0b-921a-4139-b5a0-5971a8e65483.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6
+    },
+    "npcs.4d62dc0b-921a-4139-b5a0-5971a8e65483.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        ""
+      ]
+    },
+    "npcs.a1bc1516-d2b6-44bf-8ee9-24c6282c1e27.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        "Diana"
+      ]
+    },
+    "npcs.a1bc1516-d2b6-44bf-8ee9-24c6282c1e27.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        "diana.jpg"
+      ]
+    },
+    "npcs.a1bc1516-d2b6-44bf-8ee9-24c6282c1e27.core_traits.awareness": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.a1bc1516-d2b6-44bf-8ee9-24c6282c1e27.core_traits.trust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.a1bc1516-d2b6-44bf-8ee9-24c6282c1e27.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6
+    },
+    "npcs.a1bc1516-d2b6-44bf-8ee9-24c6282c1e27.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        ""
+      ]
+    },
+    "npcs.35c55422-534f-4eaa-804d-10272bf91309.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        "Marge"
+      ]
+    },
+    "npcs.35c55422-534f-4eaa-804d-10272bf91309.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        "marge.jpg"
+      ]
+    },
+    "npcs.35c55422-534f-4eaa-804d-10272bf91309.core_traits.trust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.35c55422-534f-4eaa-804d-10272bf91309.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6
+    },
+    "npcs.35c55422-534f-4eaa-804d-10272bf91309.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        ""
+      ]
+    },
+    "npcs.56467194-1c7f-4dec-a2b1-853b0eefc969.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        "Cookie"
+      ]
+    },
+    "npcs.56467194-1c7f-4dec-a2b1-853b0eefc969.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        "cookie.jpg"
+      ]
+    },
+    "npcs.56467194-1c7f-4dec-a2b1-853b0eefc969.core_traits.trust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.56467194-1c7f-4dec-a2b1-853b0eefc969.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6
+    },
+    "npcs.56467194-1c7f-4dec-a2b1-853b0eefc969.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        ""
+      ]
+    },
+    "flags.prologue_at_bed": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "flags.prologue_saw_them": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "flags.prologue_crossed_line": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "flags.prologue_complete": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "flags.arrived_at_franks": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "flags.first_morning_kitchen_done": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "flags.slice_started": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "flags.hired_at_diner": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.first_t0_shift_done": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.group_settled_in": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.first_sunday_passed": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.first_rent_paid": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.attended_church_this_week": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.frank_caught": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.frank_restrict_declared": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.frank_cracked": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.frank_keep_route_romantic": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.frank_keep_route_arrangement": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.frank_keep_route_rupture": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.frank_keep_route_power_inverted": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.frank_office_first_sex_done": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.frank_invited_to_bedroom": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.frank_bedroom_first_done": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.ryan_help_tier_open": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.ryan_partner_open": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "flags.ryan_big_deal_closed": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.ryan_beach_proposal": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.ryan_keep_route_yes_engaged": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.ryan_keep_route_not_yet": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.ryan_keep_route_no_withdrawn": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.jake_first_glance_noticed": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.jake_peek_draw_revealed": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.jake_tease_open": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.jake_caught": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.jake_hand": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.jake_keep_route_owned": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.jake_keep_route_lovers": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.jake_keep_route_withdrawn": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.jake_keep_route_she_uses_him": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.talked_to_ryan_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.talked_to_jake_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.talked_to_diana_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.talked_to_marge_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.talked_to_cookie_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.helped_diana_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.walked_past_jakes_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.watched_ryan_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.frank_late_night_used": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.rent_evicted": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.dev_mode_enabled": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "flags.frank_diana_call_intercept_used": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.frank_late_drink_used": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.phase_2_bar_unlocked": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.phase_2_fair_week_active": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.phase_2_football_season_started": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.phase_2_church_interior_unlocked": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.college_paid_admission": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.game_started": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        true
+      ]
+    },
+    "flags.debug_mode": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        true
+      ]
+    },
+    "game_state.current_canvas": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 3,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        "",
+        "0d0fe461-0570-47b0-b8f2-ce7b59f01f46",
+        "5394b380-c7c7-473f-9ec5-c4e5aa1a2a4f",
+        "54336cf8-788f-42cf-95e9-040dac68726d"
+      ]
+    },
+    "game_state.visited_locations": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6
+    },
+    "game_state.visited_nodes": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6
+    },
+    "game_state.time_state.current_hour": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 2,
+        "min": 6,
+        "max": 7,
+        "first": 6,
+        "last": 7,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.time_state.current_minute": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 3,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 3,
+        "min": 0,
+        "max": 30,
+        "first": 0,
+        "last": 15,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": false
+      }
+    },
+    "game_state.time_state.current_day": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        "Monday",
+        "Wednesday"
+      ]
+    },
+    "game_state.time_state.current_week": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.time_state.day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 2,
+        "min": 1,
+        "max": 3,
+        "first": 1,
+        "last": 3,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.rent_state.last_paid_week": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.rent_state.warnings": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 24,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.rent_state.is_due": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739346008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "bool_values": [
+        false
+      ]
+    },
+    "last_day_snapshot.player::hygiene": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739358216,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 23,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "last_day_snapshot.npc:c66d9130-1a64-4288-ba28-a642e324bf57:love": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739358216,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 23,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "last_day_snapshot.npc:c66d9130-1a64-4288-ba28-a642e324bf57:trust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739358216,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 23,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "last_day_snapshot.npc:c66d9130-1a64-4288-ba28-a642e324bf57:arousal": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739358216,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 23,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "last_day_snapshot.npc:2262dbec-e01e-42a9-8ba1-860085f5372f:love": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739358216,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 23,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "last_day_snapshot.npc:2262dbec-e01e-42a9-8ba1-860085f5372f:trust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739358216,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 23,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "last_day_snapshot.npc:2262dbec-e01e-42a9-8ba1-860085f5372f:arousal": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739358216,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 23,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "last_day_snapshot.npc:4d62dc0b-921a-4139-b5a0-5971a8e65483:love": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739358216,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 23,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "last_day_snapshot.npc:4d62dc0b-921a-4139-b5a0-5971a8e65483:trust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739358216,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 23,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "last_day_snapshot.npc:4d62dc0b-921a-4139-b5a0-5971a8e65483:arousal": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739358216,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 6,
+      "number_stats": {
+        "count": 23,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "flags_meta.prologue_at_bed.set_day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739358811,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 5,
+      "number_stats": {
+        "count": 21,
+        "unique_count": 1,
+        "min": 3,
+        "max": 3,
+        "first": 3,
+        "last": 3,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "flags_meta.prologue_saw_them.set_day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739358811,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 5,
+      "number_stats": {
+        "count": 21,
+        "unique_count": 1,
+        "min": 3,
+        "max": 3,
+        "first": 3,
+        "last": 3,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "flags_meta.prologue_crossed_line.set_day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739358811,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 5,
+      "number_stats": {
+        "count": 21,
+        "unique_count": 1,
+        "min": 3,
+        "max": 3,
+        "first": 3,
+        "last": 3,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "flags_meta.prologue_complete.set_day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739358811,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 5,
+      "number_stats": {
+        "count": 21,
+        "unique_count": 1,
+        "min": 3,
+        "max": 3,
+        "first": 3,
+        "last": 3,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "flags_meta.arrived_at_franks.set_day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739358811,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 5,
+      "number_stats": {
+        "count": 21,
+        "unique_count": 1,
+        "min": 3,
+        "max": 3,
+        "first": 3,
+        "last": 3,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "flags_meta.first_morning_kitchen_done.set_day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739358811,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 5,
+      "number_stats": {
+        "count": 21,
+        "unique_count": 1,
+        "min": 3,
+        "max": 3,
+        "first": 3,
+        "last": 3,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "flags_meta.slice_started.set_day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739358811,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 5,
+      "number_stats": {
+        "count": 21,
+        "unique_count": 1,
+        "min": 3,
+        "max": 3,
+        "first": 3,
+        "last": 3,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "flags_meta.dev_mode_enabled.set_day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739358811,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 5,
+      "number_stats": {
+        "count": 21,
+        "unique_count": 1,
+        "min": 3,
+        "max": 3,
+        "first": 3,
+        "last": 3,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.trigger_history.0d0fe461-0570-47b0-b8f2-ce7b59f01f46.total": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739358811,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 5,
+      "number_stats": {
+        "count": 21,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.trigger_history.0d0fe461-0570-47b0-b8f2-ce7b59f01f46.dayKey": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739358811,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 5,
+      "string_samples": [
+        "1:Wednesday"
+      ]
+    },
+    "game_state.trigger_history.0d0fe461-0570-47b0-b8f2-ce7b59f01f46.dayCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739358811,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 5,
+      "number_stats": {
+        "count": 21,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.current_node": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 2,
+      "first_ts": 1778739358811,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 5,
+      "string_samples": [
+        "af70707a-f5be-4e05-a1c9-0a0675907a48",
+        "1f2a53f3-6739-4269-87bc-6b392dad2508",
+        "3b6230e4-7a53-43c5-aab3-d8dcb8f67c5f"
+      ]
+    },
+    "flags_meta.ryan_partner_open.set_day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739359203,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 4,
+      "number_stats": {
+        "count": 20,
+        "unique_count": 1,
+        "min": 3,
+        "max": 3,
+        "first": 3,
+        "last": 3,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.trigger_history.5394b380-c7c7-473f-9ec5-c4e5aa1a2a4f.total": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739359203,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 4,
+      "number_stats": {
+        "count": 20,
+        "unique_count": 1,
+        "min": 2,
+        "max": 2,
+        "first": 2,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.trigger_history.5394b380-c7c7-473f-9ec5-c4e5aa1a2a4f.dayKey": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739359203,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 4,
+      "string_samples": [
+        "1:Wednesday"
+      ]
+    },
+    "game_state.trigger_history.5394b380-c7c7-473f-9ec5-c4e5aa1a2a4f.dayCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739359203,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 4,
+      "number_stats": {
+        "count": 20,
+        "unique_count": 1,
+        "min": 2,
+        "max": 2,
+        "first": 2,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.activity_trigger_history.🔧 Dev: Partner invitation.dayKey": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739359203,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 4,
+      "string_samples": [
+        "1:Wednesday"
+      ]
+    },
+    "game_state.activity_trigger_history.🔧 Dev: Partner invitation.dayCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739359203,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 4,
+      "number_stats": {
+        "count": 20,
+        "unique_count": 1,
+        "min": 2,
+        "max": 2,
+        "first": 2,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.trigger_history.54336cf8-788f-42cf-95e9-040dac68726d.total": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739371008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 15,
+        "unique_count": 1,
+        "min": 2,
+        "max": 2,
+        "first": 2,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.trigger_history.54336cf8-788f-42cf-95e9-040dac68726d.dayKey": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739371008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 1,
+      "string_samples": [
+        "1:Wednesday"
+      ]
+    },
+    "game_state.trigger_history.54336cf8-788f-42cf-95e9-040dac68726d.dayCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739371008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 15,
+        "unique_count": 1,
+        "min": 2,
+        "max": 2,
+        "first": 2,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.activity_trigger_history.Kitchen — morning chat with Frank.dayKey": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739371008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 1,
+      "string_samples": [
+        "1:Wednesday"
+      ]
+    },
+    "game_state.activity_trigger_history.Kitchen — morning chat with Frank.dayCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739371008,
+      "last_ts": 1778739441701,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 15,
+        "unique_count": 1,
+        "min": 2,
+        "max": 2,
+        "first": 2,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.random_cooldowns.0ae53ec6-0d35-4296-8597-008515fd7f92": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778739371008,
+      "last_ts": 1778739371008,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 1,
+        "unique_count": 1,
+        "min": 3,
+        "max": 3,
+        "first": 3,
+        "last": 3,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    }
+  },
+  "prefix_clusters": {
+    "last": [
+      "last_game_passage",
+      "game_state.rent_state.last_paid_week"
+    ],
+    "name": [
+      "player.name",
+      "npcs.c66d9130-1a64-4288-ba28-a642e324bf57.name",
+      "npcs.2262dbec-e01e-42a9-8ba1-860085f5372f.name",
+      "npcs.4d62dc0b-921a-4139-b5a0-5971a8e65483.name",
+      "npcs.a1bc1516-d2b6-44bf-8ee9-24c6282c1e27.name",
+      "npcs.35c55422-534f-4eaa-804d-10272bf91309.name",
+      "npcs.56467194-1c7f-4dec-a2b1-853b0eefc969.name"
+    ],
+    "portrait": [
+      "player.portrait",
+      "npcs.c66d9130-1a64-4288-ba28-a642e324bf57.portrait",
+      "npcs.2262dbec-e01e-42a9-8ba1-860085f5372f.portrait",
+      "npcs.4d62dc0b-921a-4139-b5a0-5971a8e65483.portrait",
+      "npcs.a1bc1516-d2b6-44bf-8ee9-24c6282c1e27.portrait",
+      "npcs.35c55422-534f-4eaa-804d-10272bf91309.portrait",
+      "npcs.56467194-1c7f-4dec-a2b1-853b0eefc969.portrait"
+    ],
+    "current": [
+      "player.current_location",
+      "game_state.current_canvas",
+      "game_state.time_state.current_hour",
+      "game_state.time_state.current_minute",
+      "game_state.time_state.current_day",
+      "game_state.time_state.current_week",
+      "game_state.current_node"
+    ],
+    "corruption": [
+      "player.core_traits.corruption",
+      "npcs.c66d9130-1a64-4288-ba28-a642e324bf57.core_traits.corruption",
+      "npcs.2262dbec-e01e-42a9-8ba1-860085f5372f.core_traits.corruption",
+      "npcs.4d62dc0b-921a-4139-b5a0-5971a8e65483.core_traits.corruption"
+    ],
+    "rep": [
+      "player.core_traits.rep_church",
+      "player.core_traits.rep_road",
+      "player.core_traits.rep_college"
+    ],
+    "npc": [
+      "player.core_traits.npc_ryan_stage",
+      "player.core_traits.npc_jake_stage",
+      "last_day_snapshot.npc:c66d9130-1a64-4288-ba28-a642e324bf57:love",
+      "last_day_snapshot.npc:c66d9130-1a64-4288-ba28-a642e324bf57:trust",
+      "last_day_snapshot.npc:c66d9130-1a64-4288-ba28-a642e324bf57:arousal",
+      "last_day_snapshot.npc:2262dbec-e01e-42a9-8ba1-860085f5372f:love",
+      "last_day_snapshot.npc:2262dbec-e01e-42a9-8ba1-860085f5372f:trust",
+      "last_day_snapshot.npc:2262dbec-e01e-42a9-8ba1-860085f5372f:arousal",
+      "last_day_snapshot.npc:4d62dc0b-921a-4139-b5a0-5971a8e65483:love",
+      "last_day_snapshot.npc:4d62dc0b-921a-4139-b5a0-5971a8e65483:trust",
+      "last_day_snapshot.npc:4d62dc0b-921a-4139-b5a0-5971a8e65483:arousal"
+    ],
+    "ryan": [
+      "player.core_traits.ryan_help_count",
+      "flags.ryan_help_tier_open",
+      "flags.ryan_partner_open",
+      "flags.ryan_big_deal_closed",
+      "flags.ryan_beach_proposal",
+      "flags.ryan_keep_route_yes_engaged",
+      "flags.ryan_keep_route_not_yet",
+      "flags.ryan_keep_route_no_withdrawn"
+    ],
+    "jake": [
+      "player.core_traits.jake_peek_count",
+      "flags.jake_first_glance_noticed",
+      "flags.jake_peek_draw_revealed",
+      "flags.jake_tease_open",
+      "flags.jake_caught",
+      "flags.jake_hand",
+      "flags.jake_keep_route_owned",
+      "flags.jake_keep_route_lovers",
+      "flags.jake_keep_route_withdrawn",
+      "flags.jake_keep_route_she_uses_him"
+    ],
+    "sex": [
+      "player.core_traits.sex_stage",
+      "player.core_traits.sex_finisher_type",
+      "player.core_traits.sex_reactions"
+    ],
+    "love": [
+      "npcs.c66d9130-1a64-4288-ba28-a642e324bf57.core_traits.love",
+      "npcs.2262dbec-e01e-42a9-8ba1-860085f5372f.core_traits.love",
+      "npcs.4d62dc0b-921a-4139-b5a0-5971a8e65483.core_traits.love"
+    ],
+    "trust": [
+      "npcs.c66d9130-1a64-4288-ba28-a642e324bf57.core_traits.trust",
+      "npcs.2262dbec-e01e-42a9-8ba1-860085f5372f.core_traits.trust",
+      "npcs.4d62dc0b-921a-4139-b5a0-5971a8e65483.core_traits.trust",
+      "npcs.a1bc1516-d2b6-44bf-8ee9-24c6282c1e27.core_traits.trust",
+      "npcs.35c55422-534f-4eaa-804d-10272bf91309.core_traits.trust",
+      "npcs.56467194-1c7f-4dec-a2b1-853b0eefc969.core_traits.trust"
+    ],
+    "arousal": [
+      "npcs.c66d9130-1a64-4288-ba28-a642e324bf57.core_traits.arousal",
+      "npcs.2262dbec-e01e-42a9-8ba1-860085f5372f.core_traits.arousal",
+      "npcs.4d62dc0b-921a-4139-b5a0-5971a8e65483.core_traits.arousal"
+    ],
+    "schedule": [
+      "npcs.c66d9130-1a64-4288-ba28-a642e324bf57.schedule",
+      "npcs.2262dbec-e01e-42a9-8ba1-860085f5372f.schedule",
+      "npcs.4d62dc0b-921a-4139-b5a0-5971a8e65483.schedule",
+      "npcs.a1bc1516-d2b6-44bf-8ee9-24c6282c1e27.schedule",
+      "npcs.35c55422-534f-4eaa-804d-10272bf91309.schedule",
+      "npcs.56467194-1c7f-4dec-a2b1-853b0eefc969.schedule"
+    ],
+    "relationship": [
+      "npcs.c66d9130-1a64-4288-ba28-a642e324bf57.relationship",
+      "npcs.2262dbec-e01e-42a9-8ba1-860085f5372f.relationship",
+      "npcs.4d62dc0b-921a-4139-b5a0-5971a8e65483.relationship",
+      "npcs.a1bc1516-d2b6-44bf-8ee9-24c6282c1e27.relationship",
+      "npcs.35c55422-534f-4eaa-804d-10272bf91309.relationship",
+      "npcs.56467194-1c7f-4dec-a2b1-853b0eefc969.relationship"
+    ],
+    "prologue": [
+      "flags.prologue_at_bed",
+      "flags.prologue_saw_them",
+      "flags.prologue_crossed_line",
+      "flags.prologue_complete"
+    ],
+    "first": [
+      "flags.first_morning_kitchen_done",
+      "flags.first_t0_shift_done",
+      "flags.first_sunday_passed",
+      "flags.first_rent_paid"
+    ],
+    "frank": [
+      "flags.frank_caught",
+      "flags.frank_restrict_declared",
+      "flags.frank_cracked",
+      "flags.frank_keep_route_romantic",
+      "flags.frank_keep_route_arrangement",
+      "flags.frank_keep_route_rupture",
+      "flags.frank_keep_route_power_inverted",
+      "flags.frank_office_first_sex_done",
+      "flags.frank_invited_to_bedroom",
+      "flags.frank_bedroom_first_done",
+      "flags.frank_late_night_used",
+      "flags.frank_diana_call_intercept_used",
+      "flags.frank_late_drink_used"
+    ],
+    "talked": [
+      "flags.talked_to_ryan_today",
+      "flags.talked_to_jake_today",
+      "flags.talked_to_diana_today",
+      "flags.talked_to_marge_today",
+      "flags.talked_to_cookie_today"
+    ],
+    "phase": [
+      "flags.phase_2_bar_unlocked",
+      "flags.phase_2_fair_week_active",
+      "flags.phase_2_football_season_started",
+      "flags.phase_2_church_interior_unlocked"
+    ],
+    "visited": [
+      "game_state.visited_locations",
+      "game_state.visited_nodes"
+    ],
+    "set": [
+      "flags_meta.prologue_at_bed.set_day",
+      "flags_meta.prologue_saw_them.set_day",
+      "flags_meta.prologue_crossed_line.set_day",
+      "flags_meta.prologue_complete.set_day",
+      "flags_meta.arrived_at_franks.set_day",
+      "flags_meta.first_morning_kitchen_done.set_day",
+      "flags_meta.slice_started.set_day",
+      "flags_meta.dev_mode_enabled.set_day",
+      "flags_meta.ryan_partner_open.set_day"
+    ],
+    "total": [
+      "game_state.trigger_history.0d0fe461-0570-47b0-b8f2-ce7b59f01f46.total",
+      "game_state.trigger_history.5394b380-c7c7-473f-9ec5-c4e5aa1a2a4f.total",
+      "game_state.trigger_history.54336cf8-788f-42cf-95e9-040dac68726d.total"
+    ],
+    "daykey": [
+      "game_state.trigger_history.0d0fe461-0570-47b0-b8f2-ce7b59f01f46.dayKey",
+      "game_state.trigger_history.5394b380-c7c7-473f-9ec5-c4e5aa1a2a4f.dayKey",
+      "game_state.activity_trigger_history.🔧 Dev: Partner invitation.dayKey",
+      "game_state.trigger_history.54336cf8-788f-42cf-95e9-040dac68726d.dayKey",
+      "game_state.activity_trigger_history.Kitchen — morning chat with Frank.dayKey"
+    ],
+    "daycount": [
+      "game_state.trigger_history.0d0fe461-0570-47b0-b8f2-ce7b59f01f46.dayCount",
+      "game_state.trigger_history.5394b380-c7c7-473f-9ec5-c4e5aa1a2a4f.dayCount",
+      "game_state.activity_trigger_history.🔧 Dev: Partner invitation.dayCount",
+      "game_state.trigger_history.54336cf8-788f-42cf-95e9-040dac68726d.dayCount",
+      "game_state.activity_trigger_history.Kitchen — morning chat with Frank.dayCount"
+    ]
+  },
+  "co_change": {
+    "game_state.current_canvas||last_game_passage": 3,
+    "game_state.time_state.current_minute||last_game_passage": 2,
+    "game_state.current_canvas||game_state.time_state.current_minute": 2,
+    "last_game_passage||player.current_location": 3,
+    "game_state.current_node||last_game_passage": 2,
+    "game_state.current_canvas||player.current_location": 2,
+    "game_state.current_node||player.current_location": 2,
+    "game_state.current_canvas||game_state.current_node": 2
+  },
+  "passages": {
+    "Start": {
+      "first_ts": 1778739346008,
+      "visit_count": 3
+    },
+    "StartingCanvas_event_test_slice_intro_Node_1": {
+      "first_ts": 1778739358811,
+      "visit_count": 1
+    },
+    "Canvas_event_partner_invitation_Node_1": {
+      "first_ts": 1778739359203,
+      "visit_count": 1
+    },
+    "Location_Maya's_Bedroom": {
+      "first_ts": 1778739359610,
+      "visit_count": 2
+    },
+    "Location_Home": {
+      "first_ts": 1778739365266,
+      "visit_count": 2
+    },
+    "Canvas_ambient_kitchen_frank_morning_chat_Node_1": {
+      "first_ts": 1778739371008,
+      "visit_count": 15
+    }
+  },
+  "choices": {
+    "total": 3,
+    "by_classification": {
+      "branch": 3
+    },
+    "price_observations": [],
+    "recent": [
+      {
+        "ts": 1778739358862,
+        "passage": "Start",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "📋 Review Canvases",
+          "⚠️ Missing Media",
+          ">",
+          ">>",
+          ">>>>>",
+          "+1hr",
+          "Next Day",
+          "📋 Quests",
+          "💡 Tips",
+          "📊 Stats",
+          "📅 Schedules",
+          "🚩 Flags",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "Support Us",
+          "Saves",
+          "Restart",
+          "Support us on Patreon",
+          "✓ I am 18 or older - Enter Game",
+          "✗ I am NOT 18 or older",
+          "Support us on Patreon"
+        ],
+        "picked": "✓ I am 18 or older - Enter Game",
+        "prices": null,
+        "at_state_hash": "cbae1468d309d5de"
+      },
+      {
+        "ts": 1778739359257,
+        "passage": "StartingCanvas_event_test_slice_intro_Node_1",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "📋 Review Canvases",
+          "⚠️ Missing Media",
+          ">",
+          ">>",
+          ">>>>>",
+          "+1hr",
+          "Next Day",
+          "📋 Quests",
+          "💡 Tips",
+          "📊 Stats",
+          "📅 Schedules",
+          "🚩 Flags",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "Support Us",
+          "Saves",
+          "Restart",
+          "Sit up."
+        ],
+        "picked": "Sit up.",
+        "prices": null,
+        "at_state_hash": "214c7de148020dfd"
+      },
+      {
+        "ts": 1778739359661,
+        "passage": "Canvas_event_partner_invitation_Node_1",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "📋 Review Canvases",
+          "⚠️ Missing Media",
+          ">",
+          ">>",
+          ">>>>>",
+          "+1hr",
+          "Next Day",
+          "📋 Quests",
+          "💡 Tips",
+          "📊 Stats",
+          "📅 Schedules",
+          "🚩 Flags",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "Support Us",
+          "Saves",
+          "Restart",
+          "🔧 Apply"
+        ],
+        "picked": "🔧 Apply",
+        "prices": null,
+        "at_state_hash": "3e16407119985b06"
+      }
+    ]
+  },
+  "mutations": [
+    {
+      "ts": 1778739358811,
+      "passage": "StartingCanvas_event_test_slice_intro_Node_1",
+      "state_hash": "214c7de148020dfd",
+      "var": "last_game_passage",
+      "before": "Start",
+      "after": "StartingCanvas_event_test_slice_intro_Node_1"
+    },
+    {
+      "ts": 1778739358811,
+      "passage": "StartingCanvas_event_test_slice_intro_Node_1",
+      "state_hash": "214c7de148020dfd",
+      "var": "flags.prologue_at_bed",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1778739358811,
+      "passage": "StartingCanvas_event_test_slice_intro_Node_1",
+      "state_hash": "214c7de148020dfd",
+      "var": "flags.prologue_saw_them",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1778739358811,
+      "passage": "StartingCanvas_event_test_slice_intro_Node_1",
+      "state_hash": "214c7de148020dfd",
+      "var": "flags.prologue_crossed_line",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1778739358811,
+      "passage": "StartingCanvas_event_test_slice_intro_Node_1",
+      "state_hash": "214c7de148020dfd",
+      "var": "flags.prologue_complete",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1778739358811,
+      "passage": "StartingCanvas_event_test_slice_intro_Node_1",
+      "state_hash": "214c7de148020dfd",
+      "var": "flags.arrived_at_franks",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1778739358811,
+      "passage": "StartingCanvas_event_test_slice_intro_Node_1",
+      "state_hash": "214c7de148020dfd",
+      "var": "flags.first_morning_kitchen_done",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1778739358811,
+      "passage": "StartingCanvas_event_test_slice_intro_Node_1",
+      "state_hash": "214c7de148020dfd",
+      "var": "flags.slice_started",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1778739358811,
+      "passage": "StartingCanvas_event_test_slice_intro_Node_1",
+      "state_hash": "214c7de148020dfd",
+      "var": "flags.dev_mode_enabled",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1778739358811,
+      "passage": "StartingCanvas_event_test_slice_intro_Node_1",
+      "state_hash": "214c7de148020dfd",
+      "var": "game_state.current_canvas",
+      "before": "",
+      "after": "0d0fe461-0570-47b0-b8f2-ce7b59f01f46"
+    },
+    {
+      "ts": 1778739358811,
+      "passage": "StartingCanvas_event_test_slice_intro_Node_1",
+      "state_hash": "214c7de148020dfd",
+      "var": "game_state.time_state.current_minute",
+      "before": 0,
+      "after": 30
+    },
+    {
+      "ts": 1778739359203,
+      "passage": "Canvas_event_partner_invitation_Node_1",
+      "state_hash": "3e16407119985b06",
+      "var": "last_game_passage",
+      "before": "StartingCanvas_event_test_slice_intro_Node_1",
+      "after": "Canvas_event_partner_invitation_Node_1"
+    },
+    {
+      "ts": 1778739359203,
+      "passage": "Canvas_event_partner_invitation_Node_1",
+      "state_hash": "3e16407119985b06",
+      "var": "player.current_location",
+      "before": "",
+      "after": "ee2dedd9-31b7-4618-9df2-3355fedade5c"
+    },
+    {
+      "ts": 1778739359203,
+      "passage": "Canvas_event_partner_invitation_Node_1",
+      "state_hash": "3e16407119985b06",
+      "var": "flags.ryan_partner_open",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1778739359203,
+      "passage": "Canvas_event_partner_invitation_Node_1",
+      "state_hash": "3e16407119985b06",
+      "var": "game_state.current_canvas",
+      "before": "0d0fe461-0570-47b0-b8f2-ce7b59f01f46",
+      "after": "5394b380-c7c7-473f-9ec5-c4e5aa1a2a4f"
+    },
+    {
+      "ts": 1778739359203,
+      "passage": "Canvas_event_partner_invitation_Node_1",
+      "state_hash": "3e16407119985b06",
+      "var": "game_state.current_node",
+      "before": "af70707a-f5be-4e05-a1c9-0a0675907a48",
+      "after": "1f2a53f3-6739-4269-87bc-6b392dad2508"
+    },
+    {
+      "ts": 1778739359610,
+      "passage": "Location_Maya's_Bedroom",
+      "state_hash": "accf2d9d4dbee7c5",
+      "var": "last_game_passage",
+      "before": "Canvas_event_partner_invitation_Node_1",
+      "after": "Location_Maya's_Bedroom"
+    },
+    {
+      "ts": 1778739364822,
+      "passage": "Location_Maya's_Bedroom",
+      "state_hash": "856ebcc8e160c15e",
+      "var": "player.core_traits.corruption",
+      "before": 0,
+      "after": 40
+    },
+    {
+      "ts": 1778739364822,
+      "passage": "Location_Maya's_Bedroom",
+      "state_hash": "856ebcc8e160c15e",
+      "var": "game_state.time_state.current_hour",
+      "before": 6,
+      "after": 7
+    },
+    {
+      "ts": 1778739364822,
+      "passage": "Location_Maya's_Bedroom",
+      "state_hash": "856ebcc8e160c15e",
+      "var": "game_state.time_state.current_minute",
+      "before": 30,
+      "after": 0
+    },
+    {
+      "ts": 1778739365266,
+      "passage": "Location_Home",
+      "state_hash": "436ec538c66302c0",
+      "var": "last_game_passage",
+      "before": "Location_Maya's_Bedroom",
+      "after": "Location_Home"
+    },
+    {
+      "ts": 1778739365266,
+      "passage": "Location_Home",
+      "state_hash": "436ec538c66302c0",
+      "var": "player.current_location",
+      "before": "ee2dedd9-31b7-4618-9df2-3355fedade5c",
+      "after": "46b2fd9f-b81d-4394-aa70-0ebccbc5e4ed"
+    },
+    {
+      "ts": 1778739371008,
+      "passage": "Canvas_ambient_kitchen_frank_morning_chat_Node_1",
+      "state_hash": "045a1355defbb87c",
+      "var": "last_game_passage",
+      "before": "Location_Home",
+      "after": "Canvas_ambient_kitchen_frank_morning_chat_Node_1"
+    },
+    {
+      "ts": 1778739371008,
+      "passage": "Canvas_ambient_kitchen_frank_morning_chat_Node_1",
+      "state_hash": "045a1355defbb87c",
+      "var": "player.current_location",
+      "before": "46b2fd9f-b81d-4394-aa70-0ebccbc5e4ed",
+      "after": "0ae53ec6-0d35-4296-8597-008515fd7f92"
+    },
+    {
+      "ts": 1778739371008,
+      "passage": "Canvas_ambient_kitchen_frank_morning_chat_Node_1",
+      "state_hash": "045a1355defbb87c",
+      "var": "player.core_traits.energy",
+      "before": 0,
+      "after": -2
+    },
+    {
+      "ts": 1778739371008,
+      "passage": "Canvas_ambient_kitchen_frank_morning_chat_Node_1",
+      "state_hash": "045a1355defbb87c",
+      "var": "npcs.c66d9130-1a64-4288-ba28-a642e324bf57.core_traits.trust",
+      "before": 0,
+      "after": 1
+    },
+    {
+      "ts": 1778739371008,
+      "passage": "Canvas_ambient_kitchen_frank_morning_chat_Node_1",
+      "state_hash": "045a1355defbb87c",
+      "var": "game_state.current_canvas",
+      "before": "5394b380-c7c7-473f-9ec5-c4e5aa1a2a4f",
+      "after": "54336cf8-788f-42cf-95e9-040dac68726d"
+    },
+    {
+      "ts": 1778739371008,
+      "passage": "Canvas_ambient_kitchen_frank_morning_chat_Node_1",
+      "state_hash": "045a1355defbb87c",
+      "var": "game_state.time_state.current_minute",
+      "before": 0,
+      "after": 15
+    },
+    {
+      "ts": 1778739371008,
+      "passage": "Canvas_ambient_kitchen_frank_morning_chat_Node_1",
+      "state_hash": "045a1355defbb87c",
+      "var": "game_state.current_node",
+      "before": "1f2a53f3-6739-4269-87bc-6b392dad2508",
+      "after": "3b6230e4-7a53-43c5-aab3-d8dcb8f67c5f"
+    }
+  ]
+}

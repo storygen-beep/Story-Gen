@@ -4,6 +4,7 @@ Tests for Game Generation System.
 Comprehensive tests for the modular game generation architecture.
 """
 
+import unittest
 from unittest.mock import Mock, patch
 
 from django.contrib.auth import get_user_model
@@ -306,3 +307,349 @@ class SystemIsolationTestCase(TestCase):
 
         self.assertNotEqual(nav_caps["features"], comp_caps["features"])
         self.assertNotEqual(nav_caps["description"], comp_caps["description"])
+
+
+class V2ForkTests(TestCase):
+    """Tests guarding the v1 → v2 fork (2026-05-14).
+
+    v2 was created as a wholesale copy of v1, with v2 becoming the default.
+    v1 is frozen as a safe-mode rollback. These tests prove:
+      1. v2 is importable + has the same public interface.
+      2. v1 and v2 produce byte-identical output at fork time (the freeze
+         guarantee — when v2 deliberately diverges, this test gets scoped or
+         replaced with version-specific equivalence tests).
+    """
+
+    def test_v2_class_importable_with_same_interface(self):
+        from apps.game_generation.twee_comprehensive.generators import v2 as comp_v2
+        from apps.game_generation.twee_comprehensive.generators import v1 as comp_v1
+
+        self.assertTrue(hasattr(comp_v2, "TweeComprehensiveGeneratorV2"))
+        self.assertTrue(hasattr(comp_v1, "TweeComprehensiveGeneratorV1"))
+
+        # Same public method signature — both expose generate(project, options).
+        v1_gen = comp_v1.TweeComprehensiveGeneratorV1
+        v2_gen = comp_v2.TweeComprehensiveGeneratorV2
+        self.assertTrue(callable(getattr(v1_gen, "generate", None)))
+        self.assertTrue(callable(getattr(v2_gen, "generate", None)))
+
+    def test_services_default_is_v2(self):
+        """Default version should be v2 (set during fork on 2026-05-14)."""
+        import inspect
+
+        service = TweeComprehensiveService()
+        sig = inspect.signature(service.generate)
+        self.assertEqual(sig.parameters["version"].default, "v2")
+
+        caps = service.get_capabilities()
+        self.assertIn("v2", caps["versions"])
+        self.assertEqual(caps["current_version"], "v2")
+
+    @unittest.skip(
+        "v2 deliberately diverges from v1 starting 2026-05-14 (Phase A: NPC "
+        "schedule primitive + requires_npc + getNpcLocation rewrite + "
+        "renderNpcPortraits gating). The byte-equality guarantee no longer "
+        "holds. See memory v2_engine_fork.md + the Phase A plan. Replace with "
+        "version-specific equivalence tests as v2 evolves."
+    )
+    def test_v1_v2_byte_equality_at_fork(self):
+        """v1 and v2 must produce byte-identical output until v2 diverges.
+
+        Uses the same fixture pattern as apps/projects/tests.py — load the
+        engine PRD fixture TOML, build a Project, run both generators, diff.
+        """
+        import copy
+        from pathlib import Path
+
+        import tomli
+
+        from apps.projects.services.template_import import (
+            normalize,
+            validate,
+            create_project_from_template,
+        )
+        from apps.game_generation.twee_comprehensive.generators.v1 import (
+            TweeComprehensiveGeneratorV1,
+        )
+        from apps.game_generation.twee_comprehensive.generators.v2 import (
+            TweeComprehensiveGeneratorV2,
+        )
+
+        fixture_path = (
+            Path(__file__).resolve().parent
+            / "games_toml_files"
+            / "engine_prd_2026_04_22.toml"
+        )
+        with open(fixture_path, "rb") as f:
+            toml_data = tomli.load(f)
+
+        user = User.objects.create_user(
+            email="v2-fork-byte-equality@example.com", password="testpass123"
+        )
+        template = normalize(copy.deepcopy(toml_data))
+        errors = validate(template)
+        self.assertEqual(errors, [], f"Fixture should validate clean: {errors}")
+        result = create_project_from_template(template, str(user.id))
+        project = Project.objects.get(id=result["project_id"])
+
+        v1_twee = TweeComprehensiveGeneratorV1().generate(project)
+        v2_twee = TweeComprehensiveGeneratorV2().generate(project)
+
+        self.assertEqual(
+            v1_twee,
+            v2_twee,
+            "v1 and v2 must produce byte-identical output at fork. "
+            "If this fails, either v2 has drifted (likely the cause if you "
+            "haven't intentionally diverged it yet) or the fork-copy was "
+            "incomplete. Scope this test once v2 deliberately diverges.",
+        )
+
+
+class PhaseANpcScheduleTests(TestCase):
+    """Phase A (2026-05-14) — NPC schedule primitive + requires_npc gate.
+
+    Verifies the engine extension that lifts NPC location into a first-class
+    declaration consumed by Lane 2/3 random encounters and substitutions.
+    """
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = User.objects.create_user(
+            email="phase-a-npc-schedule@example.com", password="testpass123"
+        )
+
+    def _build_minimal_template(self, *, with_schedule=True, requires_npc=None,
+                                 trigger_npc=None):
+        """Synthesize a minimal valid template dict for normalize/validate.
+
+        Returns the parsed/normalized template ready for create_project_from_template.
+        """
+        loc_id = "loc_kitchen"
+        npc_id = "npc_test"
+        canvas_id = "canvas_test_random"
+        template_dict = {
+            "schema_version": "1.0",
+            "project": {
+                "id": "phase_a_test",
+                "title": "Phase A Schedule Fixture",
+                "description": "Minimal fixture for testing NPC schedule primitive.",
+                "starting_canvas": canvas_id,
+            },
+            "time": {"enabled": True, "starting_hour": 8, "starting_day": "Monday"},
+            "locations": [
+                {"id": loc_id, "name": "Kitchen", "description": "Test kitchen"},
+            ],
+            "npcs": [
+                {
+                    "id": npc_id,
+                    "name": "Test NPC",
+                    "description": "Fixture NPC",
+                    "core_traits": {},
+                    "flag_keys": [],
+                },
+            ],
+            "canvases": [
+                {
+                    "id": canvas_id,
+                    "name": "Test Random Canvas",
+                    "type": "scene",
+                    "trigger": {
+                        "location": loc_id,
+                        "is_active": True,
+                        "is_repeatable": True,
+                        "trigger_mode": "random",
+                        "chance": 0.5,
+                    },
+                    "nodes": [
+                        {
+                            "id": "n1",
+                            "name": "Test Node 1",
+                            "blocks": [
+                                {"type": "paragraph", "props": {},
+                                 "content": [{"type": "text", "text": "test"}]}
+                            ],
+                        }
+                    ],
+                },
+            ],
+        }
+        if with_schedule:
+            template_dict["npcs"][0]["schedules"] = [
+                {
+                    "location": loc_id,
+                    "weekdays": [0, 1, 2, 3, 4],
+                    "start_time": "06:00",
+                    "end_time": "10:00",
+                    "activity": "morning coffee",
+                },
+            ]
+        if requires_npc is not None:
+            template_dict["canvases"][0]["trigger"]["requires_npc"] = requires_npc
+        if trigger_npc is not None:
+            template_dict["canvases"][0]["trigger"]["npc"] = trigger_npc
+        return template_dict
+
+    def _build_and_generate(self, raw):
+        """Helper: normalize+validate+create+generate. Returns (project, twee)."""
+        import copy
+        from apps.projects.services.template_import import (
+            normalize, validate, create_project_from_template,
+        )
+        from apps.game_generation.twee_comprehensive.generators.v2 import (
+            TweeComprehensiveGeneratorV2,
+        )
+        template = normalize(copy.deepcopy(raw))
+        errors = validate(template)
+        self.assertEqual(errors, [], f"Fixture should validate clean: {errors}")
+        result = create_project_from_template(template, str(self.user.id))
+        project = Project.objects.get(id=result["project_id"])
+        twee = TweeComprehensiveGeneratorV2().generate(project)
+        return project, twee
+
+    @staticmethod
+    def _extract_setup_assignment(twee, varname):
+        """Pull the JSON value from a `setup.<varname> = {...};` line in the Twee."""
+        import json
+        import re
+        # Find the assignment, then balanced-brace scan for the JSON object.
+        m = re.search(r'setup\.' + re.escape(varname) + r'\s*=\s*', twee)
+        if not m:
+            return None
+        start = m.end()
+        if start >= len(twee) or twee[start] != '{':
+            return None
+        depth = 0
+        for i in range(start, len(twee)):
+            ch = twee[i]
+            if ch == '{':
+                depth += 1
+            elif ch == '}':
+                depth -= 1
+                if depth == 0:
+                    return json.loads(twee[start:i + 1])
+        return None
+
+    def test_npc_schedule_emitted_into_setup_blob(self):
+        """When TOML declares [[npcs.schedules]], setup.npcSchedules contains
+        a structured entry keyed by NPC slug. Strengthened post-bugfix to
+        parse the actual JSON instead of relying on substring presence."""
+        raw = self._build_minimal_template(with_schedule=True)
+        _, twee = self._build_and_generate(raw)
+
+        npc_schedules = self._extract_setup_assignment(twee, "npcSchedules")
+        self.assertIsNotNone(npc_schedules,
+                             "setup.npcSchedules assignment must be parseable JSON")
+        self.assertIn("npc_test", npc_schedules,
+                      "Schedule blob must be keyed by NPC slug")
+        entries = npc_schedules["npc_test"]
+        self.assertEqual(len(entries), 1, "One declared schedule entry expected")
+        entry = entries[0]
+        self.assertEqual(entry["start_time"], "06:00")
+        self.assertEqual(entry["end_time"], "10:00")
+        self.assertEqual(entry["weekdays"], [0, 1, 2, 3, 4])
+        self.assertEqual(entry["activity"], "morning coffee")
+
+    def test_schedule_location_emitted_as_uuid_not_slug(self):
+        """Phase A bugfix (2026-05-14 PM) regression test.
+
+        The schedule entry's `location` field must be a UUID matching
+        setup.locations[slug].id — runtime gates compare with raw `===`
+        against UUIDs ($player.current_location, locationCanvases keys).
+        Pre-bugfix this field was the literal slug 'loc_kitchen', which
+        never matched any runtime UUID, silently breaking all three Phase A
+        gates (Lane 2 random, Lane 3 substitution, NPC portrait filter).
+        """
+        import uuid as uuid_mod
+        raw = self._build_minimal_template(with_schedule=True)
+        _, twee = self._build_and_generate(raw)
+
+        npc_schedules = self._extract_setup_assignment(twee, "npcSchedules")
+        locations = self._extract_setup_assignment(twee, "locations")
+        self.assertIsNotNone(npc_schedules)
+        self.assertIsNotNone(locations)
+        self.assertIn("loc_kitchen", locations,
+                      "setup.locations must contain the declared location slug")
+        expected_uuid = locations["loc_kitchen"]["id"]
+
+        entry = npc_schedules["npc_test"][0]
+        self.assertEqual(
+            entry["location"], expected_uuid,
+            f"Schedule entry location must be the runtime UUID "
+            f"({expected_uuid}), not a slug. Got: {entry['location']!r}. "
+            f"This is the bug that broke all Phase A runtime gates."
+        )
+        # Sanity: the field must look like a UUID, not a slug.
+        try:
+            uuid_mod.UUID(entry["location"])
+        except (ValueError, TypeError):
+            self.fail(
+                f"Schedule entry.location {entry['location']!r} is not a valid "
+                f"UUID — runtime `===` comparisons against $player.current_location "
+                f"will never match."
+            )
+        # Debug field carrying original slug must also be present.
+        self.assertEqual(
+            entry.get("location_slug"), "loc_kitchen",
+            "location_slug debug field must carry the original TOML slug "
+            "so a developer inspecting setup.npcSchedules in DevTools can "
+            "trace back to the source location declaration."
+        )
+
+    def test_requires_npc_validator_rejects_unknown_npc(self):
+        """trigger.requires_npc pointing at a non-existent NPC must error out."""
+        import copy
+        from apps.projects.services.template_import import normalize, validate
+
+        raw = self._build_minimal_template(requires_npc="ghost_npc")
+        template = normalize(copy.deepcopy(raw))
+        errors = validate(template)
+
+        matching = [e for e in errors if "requires_npc" in e and "ghost_npc" in e]
+        self.assertTrue(
+            matching,
+            f"Expected validate() to reject unknown requires_npc 'ghost_npc'. "
+            f"Got errors: {errors}"
+        )
+
+    def test_trigger_npc_validator_rejects_unknown_npc_gap_fix(self):
+        """Gap-fix: trigger.npc pointing at a non-existent NPC must now error.
+
+        Previously trigger.npc was read by 3 downstream validators but never
+        cross-referenced. Phase A closes that gap.
+        """
+        import copy
+        from apps.projects.services.template_import import normalize, validate
+
+        raw = self._build_minimal_template(trigger_npc="ghost_npc")
+        template = normalize(copy.deepcopy(raw))
+        errors = validate(template)
+
+        matching = [e for e in errors if "trigger.npc" in e and "ghost_npc" in e]
+        self.assertTrue(
+            matching,
+            f"Expected validate() to reject unknown trigger.npc 'ghost_npc'. "
+            f"Got errors: {errors}"
+        )
+
+    def test_npc_schedule_no_longer_emits_deprecation_warning(self):
+        """Declaring [[npcs.schedules]] used to emit DeprecationWarning. Phase A undoes that."""
+        import copy
+        import warnings
+        from apps.projects.services.template_import import normalize, validate
+
+        raw = self._build_minimal_template(with_schedule=True)
+        template = normalize(copy.deepcopy(raw))
+
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
+            errors = validate(template)
+            dep_warnings = [warning for warning in w
+                           if issubclass(warning.category, DeprecationWarning)
+                           and "npcs.schedules" in str(warning.message)]
+
+        self.assertEqual(errors, [], f"Fixture should validate clean: {errors}")
+        self.assertEqual(
+            dep_warnings, [],
+            f"DeprecationWarning for [[npcs.schedules]] should be gone. "
+            f"Got: {[str(w.message) for w in dep_warnings]}"
+        )

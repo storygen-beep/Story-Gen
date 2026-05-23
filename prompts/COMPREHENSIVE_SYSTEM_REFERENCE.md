@@ -1285,6 +1285,146 @@ The engine enforces body coverage by default:
 If a clothing item has `conditions = {corruption = 85}` in TOML, the shop
 UI tier label must show "Bold (Corruption 85+)". Mismatch = confusing UX.
 
+### Garment stats: `beauty` and `corruption` (optional, default 0)
+Each `[[clothing]]` item may declare two numeric stats:
+
+| Field | Type | Default | Meaning |
+|-------|------|---------|---------|
+| `beauty` | int | 0 | How attractive the garment is. |
+| `corruption` | int | 0 | How revealing/lewd the garment is. |
+
+```toml
+[[clothing]]
+id = "sundress_short"
+name = "Short Sundress"
+slot = "dress"
+price = 40
+beauty = 3
+corruption = 12
+```
+
+**The worn outfit exposes a MAX aggregate, not a sum.** `worn_beauty` /
+`worn_corruption` (see CONDITIONS SCHEMA) read the **highest** single equipped
+garment's value — one daring piece drives content; layering does not inflate
+the number.
+
+**DOCTRINE — worn corruption is a SEPARATE axis.** Garment `corruption` ROUTES
+content (which scenes/choices unlock); it NEVER mutates the player's global
+`corruption` core_trait. The global meter stays the progression spine (it gates
+shop tiers and story milestones). If you want sustained revealing wear to nudge
+the global meter, do it deliberately via a `[engine.daily_tick]` rule — it is
+never an automatic side effect of equipping.
+
+**`[engine.daily_tick]` schema (day-rollover hook, fires once per `advanceDay()`):**
+- `flagEffects` — array of `{ targetType, npcId?, flag, op }`. Silent flag
+  clears/sets (the canonical use: clearing `*_today` cooldown flags).
+- `traitEffects` (doc 40) — array of `{ targetType, npcId?, trait, op, value,
+  clamp?, cap? }`. Applies a trait delta each day via `applyAndNotifyTrait`, so
+  `clamp`/`cap` behave exactly like choice/canvas effects. This is how a stat
+  ACCUMULATES over time without per-canvas wiring — the RTS-style arousal
+  "daily auto-rise" (`player arousal +1 cap 10`, `npc arousal +1 cap 3`). A trait
+  left out of every `trait_decay` config and given a daily `traitEffects` bump
+  is a pure no-decay, always-climbing meter. Back-compat: omit `traitEffects`
+  and the day-rollover is unchanged.
+- `conditions` (doc 45 G6) — OPTIONAL on any flag- or trait-effect entry. A
+  standard `{ version, logic, items }` condition block. When present, that
+  effect applies on day rollover ONLY if the conditions are satisfied (e.g.
+  `player arousal +1` gated on `corruption gte 20`). Omit ⇒ unconditional
+  (today's behavior).
+
+### Phone System
+
+A diegetic smartphone opened from a sidebar button (a modal overlay; not a
+passage). Apps render conditionally, so the launcher grows with progress.
+Enable with a top-level `[phone]` table: `enabled = true` + `[[phone.apps]]`
+(each `{ id, type, label, icon? }`; `type` ∈ `chat`, `social_feed`, `dating`
+— `gallery`/`custom` are placeholders).
+
+- **`[[phone.conversations]]`** — scripted, condition-triggered threads.
+  `{ id, app, npc, trigger, notify? }` + ordered `[[…blocks]]`. A block is
+  `type = "message"` (`sender = "npc"|"player"`, `content`) or
+  `type = "reply"` (`round` + `choices`, each choice `{ text, effects[],
+  flagEffects[] }` — same primitives as canvas choices). Branch with
+  `after_round` / `after_choice`. `notify` (doc 45 G1) = toast text shown when
+  the thread is first delivered (empty ⇒ "📱 New message").
+- **`[[phone.daily_topics]]`** — repeatable chat. `{ id, npc, player_message,
+  npc_response, effects[], conditions }`. Default cadence is 1 chat per NPC per
+  day. Doc 45 G3 photo-action extensions (all optional): `image` (renders a
+  sent-photo bubble), `corruption_min` (locks with 🔒 + note below the
+  threshold), `cooldown = "per_topic"` (gives the topic its OWN once-per-day
+  cap so several photo actions can each fire daily; default keeps the legacy
+  per-NPC cap).
+- **`[[phone.posts]]`** — read-only social feed. `{ id, app, npc?|poster_name,
+  image, caption, likes, trigger, notify? }`. `notify` (G1) ⇒ delivery toast
+  (default "📱 New post").
+- **`[[phone.profiles]]`** — dating swipe. `{ id, app, npc, photos, bio, age,
+  interests, trigger, match_condition }`. Like → if `match_condition` holds, a
+  match.
+
+Delivery: triggers are evaluated every passage render; a newly-satisfied
+conversation/post bumps the unread badge and (G1) fires a toast.
+
+- **`social_feed` posting** (doc 45 G2) — give a `social_feed` app a
+  `post_actions` list, each `{ label, corruption_min?, followers_min,
+  followers_max, daily_cap?(=1), counter_trait(="followers") }`. Renders post
+  buttons gated by corruption (🔒 below `corruption_min`) + a per-action daily
+  cap; posting adds `random(min,max)` to the `counter_trait`. Author the
+  `followers` trait as a normal `core_trait`; **milestone DMs are free** — a
+  conversation `trigger` on `{type:"trait", trait_key:"followers", operator:"gte", value:N}`.
+- **`quests` app** (doc 45 G4) — an app of `type="quests"` renders the journal.
+
+### Quests (doc 45 G4)
+
+Story objectives with ordered steps. Define `[[quests]]`:
+`{ id, name, steps:[<journal text per step>], repeatable?(=false) }`. State lives
+in `$game_state.quests[id] = {active, progress, completed}`.
+
+Mutate via **`questEffects` on any choice** (canvas or chat reply):
+`[{ quest, op:"start"|"update"|"cancel"|"complete", step? }]` (`update` sets the
+step, or +1 if omitted). Gate content with the **`quest` condition**:
+`{ type="quest", quest_id, operator="active"|"completed"|"step_gte", value? }`.
+
+### Scheduled / delayed events (doc 45 G5)
+
+Fire something N days later via **`scheduleEffects` on any choice**:
+`[{ delayDays, action:"set_flag"|"start_quest"|"trigger_conversation", flag?/quest?/conversation? }]`.
+The queue (`$game_state.scheduled`) is decremented on each day rollover; at 0 the
+action fires once (`set_flag` sets the flag; `start_quest` starts it;
+`trigger_conversation` sets a `scheduled_<id>` flag a conversation can trigger on).
+
+### Corruption tiers (doc 45 G7)
+
+A discrete corruption LEVEL (0–4) derived from raw `corruption` points via
+thresholds (default `[0,5,15,30,45]`; override with `[engine].corruption_tiers`).
+Gate on it: `{ type="corruption_level", operator="gte"|"lt"|"eq", value }`
+(e.g. `corruption_level gte 3` ⇔ points ≥ 30).
+
+### More phone apps (doc 45 Tier 3)
+
+- **`gallery`** — `[[phone.gallery_items]]` `{ id, image, caption?, trigger?, link? }`.
+  Shows trigger-satisfied images; `link` makes a cell clickable → `Engine.play(link)`.
+- **`custom`** — an app with a `passage` field renders that authored passage
+  *inside* the phone frame (for bespoke mini-apps / webcam screens).
+- **`quests`** — the quest journal (doc 45 G4).
+- **In-world purchase** — `[phone].purchase_flag = "<flag>"` hides the sidebar
+  phone button until that player flag is set (acquire the phone in-world; pair
+  with a normal `flagEffects`/cost on a "buy" choice).
+- **`fast_jobs`** — top-level `[[fast_jobs]]` `{ id, name, income, xp_req?,
+  cooldown_days?, time_period?, money_trait?(="money") }` + a `fast_jobs` app.
+  "Work" pays `income`, +1 fast-jobs XP, sets the cooldown (decremented daily);
+  XP gates higher jobs.
+- **`bank`** — `[bank]` `{ enabled, interest_rate(=0.01), money_trait(="money") }`
+  + a `bank` app. Deposit/withdraw between cash and balance; balance accrues
+  daily interest on the day tick.
+
+### Recipe — RTS PornCenter & xCam (doc 45 G10)
+
+No dedicated engine: build them from the primitives above.
+- **PornCenter** = a `gallery` app whose items are `corruption_level`-gated
+  (genre tiers) with a `link` to a content passage.
+- **xCam** = a `custom` app whose `passage` is an authored webcam scene, with the
+  whole phone gated by `purchase_flag` (e.g. a `webcam` flag) + a corruption gate.
+
 ### Recurring Passes
 
 Time-limited purchases that gate activities. Defined in `[[passes]]`:
@@ -4244,7 +4384,10 @@ This prompt translates Game Design Books into structured TOML files. It defines 
 #   items = [
 #     { type = "flag", ... },
 #     { type = "trait", ... },
-#     { type = "days_since_flag", ... }
+#     { type = "days_since_flag", ... },
+#     { type = "clothing_slot", ... }, { type = "clothing_item", ... },
+#     { type = "worn_beauty", ... },  { type = "worn_corruption", ... },
+#     { type = "pass", ... }, { type = "item", ... }, { type = "stage", ... }
 #   ]
 # }
 #
@@ -4274,6 +4417,20 @@ This prompt translates Game Design Books into structured TOML files. It defines 
 #   flag_key  — the flag whose set-date is compared
 #   operator  — "gte", "gt", "lte", "lt", "eq"
 #   value     — number of in-game days
+#
+# TYPE: "worn_corruption" / "worn_beauty"  (requires clothing system enabled)
+# { type = "worn_corruption", operator = "gte", value = 30 }
+#   operator  — "eq", "ne", "gt", "gte", "lt", "lte"
+#   value     — numeric threshold
+#   Reads the MAX corruption/beauty across the currently-equipped outfit (one
+#   daring garment drives it; layering does not sum). ROUTES content only —
+#   does NOT touch the global player.corruption trait. When clothing is
+#   disabled the condition is always false. NOTE: worn_* are valid in v1.0
+#   `conditions` blocks (canvas triggers, choices, location clothing_rules),
+#   NOT in hint-template `trait_checks` (which allow only trait/flag).
+#
+# OTHER LIVE TYPES (see the relevant system sections): "clothing_slot",
+# "clothing_item", "pass", "item", "stage".
 #
 # NOTE ON FIELD NAMING: Inside conditions, NPC references use npc_id
 # (snake_case). Inside effects, they use npcId (camelCase). This is
@@ -4427,7 +4584,10 @@ This prompt translates Game Design Books into structured TOML files. It defines 
 #   VARIANT CHAIN RULES:
 #   - Consecutive groups = variant chain (<<if>>..<<elseif>>..<<else>>)
 #   - Non-group blocks between groups break the chain
-#   - Groups cannot be nested (no group inside a group)
+#   - Groups CAN be nested (group inside a group) — a stage gate wrapping
+#     flag-gated sub-branch groups renders as a nested variant chain.
+#     Bounded by the normalizer's max_depth (4). (block_pool still cannot
+#     directly nest a block_pool.)
 #   - Conditions use the same format as choice conditions (version 1.0)
 #   - Use for: base node variations based on relationship state or past choices
 #
@@ -4562,7 +4722,9 @@ This prompt translates Game Design Books into structured TOML files. It defines 
 #   INVALID: "canvas", "scene"
 #
 # conditions.items[].type:
-#   ONLY "flag", "trait", "days_since_flag"
+#   "flag", "trait", "days_since_flag", "clothing_slot", "clothing_item",
+#   "worn_beauty", "worn_corruption", "pass", "item", "stage"
+#   (worn_* and clothing_* require the clothing system enabled)
 #
 # flag operator:
 #   "is_true", "is_false", "exists"

@@ -7,6 +7,16 @@
 
 ---
 
+## Update 2026-05-03 — Stages are now the *capstone* layer
+
+Per `15_Sandbox_Pivot_Direction.md` (sandbox pivot direction) and `16_Frank_Scene_Library_Design.md` (Phase 1 Frank pilot), the stage chain is now the **capstone layer** of an NPC's content — the big scripted moments (e.g., the catch, the cracked summons). The **daily texture layer** lives alongside the stages: random ambient encounters, time-gated check-ins, player-initiated relationship-builders, crisis priority hint variants.
+
+Both layers coexist. This doc still authoritatively defines the capstone layer (helpers, transitions, stage-flag schema). For the daily texture layer, read the per-NPC scene library design doc (doc 16 for Frank; doc 17+ for other NPCs as they are built).
+
+If you're authoring a *capstone* moment (stage transition, big scripted beat) → use this doc. If you're authoring an *ambient* scene that fires alongside the stages → use the per-NPC scene library doc. Both can refer to the same NPC stage flags; capstones write them, ambient scenes read them.
+
+---
+
 ## The stage-chain contract
 
 A **stage** is a named position in an NPC's arc. Stages are flags. Every scene the player can enter with that NPC reads the stage flag and picks a branch from the cascade. Stage advancement is the act of flipping the flag — usually from inside a scene, sometimes from a state-pump button, occasionally from a true one-shot canvas.
@@ -46,13 +56,16 @@ Five stages collapsed from the eight stages in `archive_02_TLS_Rewrite_Spec_2026
 
 ### Stage table
 
+> **⚠️ STAGE 4 ROW SUPERSEDED 2026-05-04 by `19_Frank_Stage_3_Plus_Design.md` §4 / §5.**
+> The Stage 4 design below (4 keep-routes — `romantic`, `arrangement`, `rupture`, `power_inverted` — with per-route bedroom branches and Keep-route flag schema) is **dropped**. Doc 19 replaces it with: a single Stage 3→4 capstone (bedroom invitation, branch-inside-shell at `scene_office_after_crack`), one new T3 anchor canvas (`scene_franks_bedroom_evening`), and a register cascade across existing kitchen / living room / back porch surfaces. **One transition, one outcome.** No keep-route flags, no per-route bedroom canvases. Rationale: Phase 2 single-digit one-shot doctrine (doc 01) + sandbox-emergent-not-pre-authored doctrine (doc 15). Stages 0-3 in this table remain canonical baseline. **Frank Stage 4 implementation is shipped in `7_final_game.toml` as of 2026-05-04.**
+
 | Stage | Name | Gate (current state) | Advancing trigger → next | Content unlocked at this stage |
 |---|---|---|---|---|
 | **0** | Suspicious landlord | `frank_stage == 0` (default at arrival) | `frank.trust >= 20` AND `frank.bookkeeping_count >= 3` → `frank_stage = 1` | hub_franks_office: "Talk", "Help with bookkeeping". Kitchen scene fires terse Stage-0 branch. |
 | **1** | Grudging warmth | `frank_stage == 1` | `frank_caught` flag set (from one-time branch in `hub_living_room` evening) → `frank_stage = 2` | hub_back_porch E-band: "Sit with Frank on the porch". Kitchen scene fires Stage-1 branch (he asks if she's any good with numbers). Office scene fires Stage-1 branch (working warmth). |
 | **2** | Restrict | `frank_stage == 2` AND `frank_restrict_declared` | `frank.tease_count >= N` AND `corruption >= 50` AND `frank.arousal >= 30` → `frank_stage = 3` | hub_kitchen + hub_living_room: chore buttons (porch sweep, kitchen cleanup, yard clean, office filing). Kitchen + office scenes fire post-catch register. New scene `scene_franks_office_supervised` available. |
 | **3** | Tease under compliance | `frank_stage_3()` (helper: `corruption >= 50` AND `frank_restrict_declared` AND `frank.arousal >= 30`) | `frank_cracked` flag set (from one-time branch inside `scene_franks_office_supervised` after enough tease firings) → `frank_stage = 4` | hub_franks_office: "Linger by the desk" appears. Tease cascade in office scene unlocks. Crack-adjacent register in kitchen scene. |
-| **4** | Cracked / Keep route | `frank_stage == 4` AND one of `frank_keep_route in {romantic, arrangement, rupture, power_inverted}` | Terminal — arc closes. (Summer end is the next external event.) | hub_franks_bedroom unlocks. Office bookkeeping button replaced by Keep-route options. Per-route scene branches in bedroom + office. |
+| **4** ⚠️ SUPERSEDED | ~~Cracked / Keep route~~ | ~~`frank_stage == 4` AND one of `frank_keep_route in {romantic, arrangement, rupture, power_inverted}`~~ → see doc 19 §4-§5 for canonical design | ~~Terminal — arc closes.~~ See doc 19. | ~~hub_franks_bedroom unlocks. Office bookkeeping button replaced by Keep-route options. Per-route scene branches in bedroom + office.~~ See doc 19 §5 for canonical Stage 4 surface roster (`scene_franks_bedroom_evening` T3 anchor + Stage 4 register cascade across existing surfaces; no per-route branches). |
 
 ### What this looks like to the player
 
@@ -64,7 +77,7 @@ Same hubs every day. Same scene canvases every visit. The arc moves because:
 
 3. **Stage 2 → 3.** The player accumulates tease counter via the supervised office scene. At `corruption >= 50` AND `frank.arousal >= 30` AND `frank.tease_count >= N`, the helper `frank_stage_3()` clears. New button at the office: "Linger by the desk." The office scene's Stage-3 branch carries tease content from now on.
 
-4. **Stage 3 → 4.** Tease scene fires enough times under compliance; the one-time `frank_cracked` branch fires inside the scene's deepest tier. Stage flips to 4. The Crack is a branch, not a separate canvas. Bedroom hub unlocks. Office button set transforms.
+4. **Stage 3 → 4.** ⚠️ **PARTIALLY SUPERSEDED 2026-05-04 by `19_Frank_Stage_3_Plus_Design.md` §4.** The shipped design instead routes Stage 3→4 through a **bedroom invitation capstone** (branch-inside-shell at `scene_office_after_crack`, gated `frank_office_visits ≥ 3 + Frank.corruption ≥ 25`). Both choice exits write `npc_frank_stage = 4 + frank_invited_to_bedroom`. Bedroom (`loc_franks_bedroom`) unlocks ✅ — that part of the original spec stands. The "Crack" itself is the Stage 2→3 transition (now `scene_office_crack`, see doc 18 §5), not Stage 3→4. ~~Tease scene fires enough times under compliance; the one-time `frank_cracked` branch fires inside the scene's deepest tier. Stage flips to 4. The Crack is a branch, not a separate canvas. Bedroom hub unlocks. Office button set transforms.~~
 
 **Five stages × ~3 scene surfaces (kitchen, office, living room/back porch) = ~15 effective scene textures from ~3 repeatable canvases plus the hub branches.** That's the leverage Phase 2 is designed for.
 
@@ -77,8 +90,8 @@ Per the doctrine: "stage advancement is the act of flipping the flag — usually
 | 0 → 1 | Computed: `frank_stage_1()` helper evaluates on canvas entry. Implemented per master spec §2.6 note (a) — derived flag computed and stored. | Helper-driven |
 | 1 → 2 | One-time branch inside `hub_living_room` evening. Sets `frank_caught` and (after player choice) `frank_restrict_declared`. The `frank_stage = 2` value is the helper-derived consequence. | Branch inside repeatable shell |
 | 2 → 3 | Computed: `frank_stage_3()` helper evaluates after counter + threshold conditions clear. | Helper-driven |
-| 3 → 4 | One-time branch inside `scene_franks_office_supervised` deepest cascade tier. Sets `frank_cracked`. | Branch inside repeatable shell |
-| 4 → terminal | Player choice inside the Crack branch sets the keep-route flag. Arc closes at summer-end (external). | Branch + external timer |
+| 3 → 4 ⚠️ SUPERSEDED | ~~One-time branch inside `scene_franks_office_supervised` deepest cascade tier. Sets `frank_cracked`.~~ Per doc 19 §4: branch-inside-shell at `scene_office_after_crack` (NOT `scene_franks_office_supervised`); writes `frank_invited_to_bedroom + npc_frank_stage = 4` directly. The `frank_cracked` flag belongs to Stage 2→3, not Stage 3→4. | Branch inside repeatable shell |
+| 4 → terminal ⚠️ SUPERSEDED | ~~Player choice inside the Crack branch sets the keep-route flag.~~ Per doc 19: no keep-route flag, no internal terminal mechanism. Stage 4 is stable until summer-end (external global event). | External timer only |
 
 **No transition uses a separate non-repeatable "story arc" canvas.** Every flag flip happens either as a derived consequence of state movement or as a one-time guard inside a repeatable shell. This is the doctrine in action.
 
@@ -92,7 +105,7 @@ For each Frank stage, the canvases the cascade lives in:
 | 1 | Stage-1 branch (numbers warmth) | Stage-1 branch (working warmth) | Catch one-time branch (gated `frank_caught == false`) | "Sit with Frank" button + Stage-1 chat | locked |
 | 2 | Stage-2 branch (supervised tone) | Stage-2 branch (paper-filing, supervised) | catch already fired; new register | Stage-2 chat | locked |
 | 3 | Stage-3 branch (Crack-adjacent register) | Stage-3 tease cascade (Linger by desk button) | Stage-3 register | Stage-3 chat | locked |
-| 4 | Stage-4 register per keep-route | Per-keep-route branches | Stage-4 register | Stage-4 chat | unlocked; per-keep-route scenes |
+| 4 ⚠️ SUPERSEDED | ~~Stage-4 register per keep-route~~ → single Stage 4 register (no routes); see `scene_kitchen_with_frank_morning` line ~2470 + `scene_kitchen_with_frank_dinprep` Stage 4 group | ~~Per-keep-route branches~~ → office daytime stays bookkeeping; office evening retired (gates `npc_frank_stage = 3` only) | Stage-4 register (T2 vignette in `scene_living_room_frank_radio`) | Stage-4 register (T2 vignette in `scene_porch_frank_evening_smoke`) | unlocked: ~~per-keep-route scenes~~ → single anchor canvas `scene_franks_bedroom_evening` (T3, weekday E 21:00-23:00, daily cooldown). Per doc 19 §5. |
 
 This is the input that `04_Scene_Cascade_Pattern.md` consumes. The Stage-X branch column for "Kitchen scene" is exactly what gets implemented as the kitchen scene's internal cascade in that doc.
 

@@ -1,0 +1,20 @@
+{
+  "session_id": 1,
+  "start_ts": "2026-05-21T11:48:50.254Z",
+  "start_epoch_ms": 1779364130254,
+  "end_ts": "2026-05-21T11:55:47.520Z",
+  "duration_s": 417,
+  "clicks": 1,
+  "choices_explored": 1,
+  "arrow_advances": 0,
+  "unique_states_seen": 6,
+  "new_unique_states": 6,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "AROUSAL DEEP (source+runtime). PLAYER arousal=$player.arousal int 0-maxArousal(=10), flat scalar. addArousal()=+1 cap10 +notif. getArousal()=gallery?10:arousal. Display bands (ceil(a/10*4)): 0Calm 1-2Warm 3-5Aroused 6-7Hot 8-10Burning; bar width a*10%, class hi>70(a8+)/med>40(a5-7)/lo. SOURCES: <<AddArousal>> 38 sites/28 passages (school afterclass/cheer/tutoring, flash/exhib, NPC tease+peep, jobs, bus); drugs (Heroin +8); SLEEP newDay->resetPlayerStats does +1 if<10 (wake hornier). SINKS: only ResetArousal=0 and FinishSex climax=0. NO time decay anywhere (0 decreaseArousal in code; Nap kept arousal=4 live). galleryMode freezes all.",
+    "AROUSAL gates: dominant gate is getArousal()>0 / arousal>0 (binary 'turned on?' switch) — ~24 refs nearly all >0. Masturbate blocked at 0 ('not aroused enough'): arousal is SPEND-fuel seeded by ambient events, not self-bootstrapped. Player arousal MAGNITUDE barely gated (level bands are flavor). NPC arousal is the real stage gate: $npc.X.arousal int 0-3 (increaseArousal(npc,3)), +1/call, shown 🔥/🔥🔥/🔥🔥🔥. StageOne/Two/Three(npc)=corr>=5/10/15 AND arousal>=1/2/3. updateFamilyArousal() = re-render Dad/Brother/Grandpa labels ONLY (NOT player->npc propagation - corrects old note). Two axes: player arousal=fuel switch for self-acts; npc arousal=per-NPC 0-3 ladder for that NPC's sex stages. FinishSex zeroes both."
+  ]
+}

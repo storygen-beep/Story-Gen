@@ -1,0 +1,23 @@
+{
+  "session_id": 2,
+  "start_ts": "2026-05-07T06:49:37.202Z",
+  "start_epoch_ms": 1778136577202,
+  "end_ts": "2026-05-07T07:14:22.170Z",
+  "duration_s": 1485,
+  "clicks": 47,
+  "choices_explored": 47,
+  "arrow_advances": 0,
+  "unique_states_seen": 87,
+  "new_unique_states": 52,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "ROUND 2 — PLAYER-LED scenes walked end-to-end. Two natural-action scenes confirm the player IS the aggressor: (1) BrotherBedroomSex1 [13 beats] entered via 'Have sex with him 🔥' menu button; opens with bookshelf chitchat as foreplay → Victoria's interior monologue '💭 I need to find a way to make him focus on me' marks the agency moment → 'Do you want to see something more interesting?' is the player's escalation prompt → kiss/strip/BJ/cunnilingus/standing/cowgirl/reverse/doggy/side/mouth-cum. (2) BrotherShowerSex [9 beats] entered by player masturbating in shower → brother walks in caught → player commands 'Get your clothes off and get in here' → BJ/cunnilingus/standing/cowgirl/reverse/mouth-cum.",
+    "ROUND 2 — player as aggressor pattern. Across both scenes Victoria's dialogue is consistently more vulgar than the NPC's. Sample player commands: 'Get that cock out', 'Suck my pussy', 'Shut up and eat me out', 'Fuck me harder Stepbrother', 'Cum for me Stepbrother', 'Cum in my mouth'. NPC responses are softer and reactive: 'What are you doing?', 'Okay...', 'Fuck... you're good at that', 'You're such a little slut'. The escalation arc per scene = polite NPC → confused NPC → submitting NPC → praising NPC ('that was amazing'). Player's voice never softens — it gets cruder beat-by-beat.",
+    "ROUND 2 — FAKEOUT opener for player-initiated sex. BrotherBedroomSex1 'Have sex with him 🔥' button does NOT open with sex. It opens with Victoria asking 'Wow, you have so many books. Have you read all of them?' — innocuous bedroom small talk for 2 beats while Brother gives a science lecture. Victoria's interior thought 'I need to find a way to make him focus on me' is the player's permission slip to escalate. The escalation click ('Do you want to see something more interesting?') is player-driven — Brother never makes the first move. This is opposite to Peep/voyeur scenes which OPEN with action.",
+    "ROUND 2 — gate bail behavior observed live. Walked into Bathroom at Night → DadShowerSex random event fired (Dad in shower) → player chose 'Go in 👀' → masturbated → 'Open the shower door' → Dad: 'Get out of here, I'm busy' → scene cuts to bathroom exit. Bail because Dad's NPC corruption was 0 (only Brother had been boosted). Confirms each scene gates on the SPECIFIC NPC's corruption + relation, not just player corruption. Player corruption gets you the OPENING but NPC corruption is required for climax.",
+    "ROUND 2 — gate-blocked Masturbate button in shower. Clicking 'Masturbate ❤️‍🔥' inside BathroomShower with player.arousal == 0 → Notification 'You are not aroused enough to masturbate'. The shower-masturbate path requires arousal > 0 as input fuel. So masturbation is NOT how arousal gets bootstrapped — random ambient events (Dad walking in, peep events, bus grope, etc.) seed arousal, then player spends it on bigger scenes. Closes the loop on the arousal economy."
+  ]
+}

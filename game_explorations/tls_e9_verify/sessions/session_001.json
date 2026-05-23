@@ -1,0 +1,19 @@
+{
+  "session_id": 1,
+  "start_ts": "2026-05-16T12:16:34.602Z",
+  "start_epoch_ms": 1778933794602,
+  "end_ts": "2026-05-16T12:26:14.454Z",
+  "duration_s": 580,
+  "clicks": 0,
+  "choices_explored": 0,
+  "arrow_advances": 0,
+  "unique_states_seen": 27,
+  "new_unique_states": 27,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "E9 critical-path verify GREEN: 5 capstones render; Declaration accept→frank_cracked=true (dev-only-gap closed at runtime); tier T0/T2 divergence live on scene_frank_passes_kitchen_door; QuestsPage 3 Story Goals; Diana both branches render; 5 E8 NPC canvases reachable; 0 cardinal violations across 23 redesigned canvases."
+  ]
+}

@@ -1,0 +1,3884 @@
+{
+  "generated_at": "2026-05-11T08:35:13.393Z",
+  "total_passages": 165,
+  "skipped_passages": 0,
+  "parse_errors": 0,
+  "total_edges": 290,
+  "edges_by_kind": {
+    "wiki": 70,
+    "button": 128,
+    "link": 90,
+    "goto": 2
+  },
+  "edges": [
+    {
+      "from": "Start",
+      "to": "StartingCanvas_event_test_slice_intro_Node_1",
+      "display": "✓ I am 18 or older - Enter Game",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 5273
+    },
+    {
+      "from": "Start",
+      "to": "AgeBlocked",
+      "display": "✗ I am NOT 18 or older",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 5355
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "CanvasReviewList",
+      "display": "📋 Review Canvases",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 3624
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "QuestsPage",
+      "display": "📋 Quests",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"QuestsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 15383
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "MissingMediaPage",
+      "display": "⚠️ Missing Media",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "$flags.debug_mode",
+          "branch": "if"
+        },
+        {
+          "condition": "passage() isnot \"MissingMediaPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 15633
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "QuestsPage",
+      "display": "📋 Quests",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"QuestsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 15887
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "TipsPage",
+      "display": "💡 Tips",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.tips_page && setup.tips_page.content",
+          "branch": "if"
+        },
+        {
+          "condition": "passage() isnot \"TipsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 16195
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "StatsPage",
+      "display": "📊 Stats",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"StatsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 16373
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "SchedulePage",
+      "display": "📅 Schedules",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "_npcsWithSchedules.length > 0 || _soloActivities.length > 0",
+          "branch": "if"
+        },
+        {
+          "condition": "passage() isnot \"SchedulePage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 16742
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "FlagsPage",
+      "display": "🚩 Flags",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"FlagsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 17419
+    },
+    {
+      "from": "StoryJournal",
+      "to": "Navigation",
+      "display": "Return to your story",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3322
+    },
+    {
+      "from": "RentDay",
+      "to": "RentDay_Paid",
+      "display": null,
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "_money gte _rent",
+          "branch": "if"
+        }
+      ],
+      "index": 1395
+    },
+    {
+      "from": "RentDay",
+      "to": "RentDay_Short",
+      "display": null,
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1541
+    },
+    {
+      "from": "StartingCanvas_event_test_slice_intro_Node_1",
+      "to": "Location_Maya's_Bedroom",
+      "display": "Sit up.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1415
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Frank's_Property",
+      "display": "Frank's Property",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 88
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Main_Street",
+      "display": "Main Street",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 144
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Front_Porch",
+      "display": "Front Porch",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 190
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Home",
+      "display": "Home",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 236
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Kitchen",
+      "display": "Kitchen",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 268
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Living_Room",
+      "display": "Living Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 306
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Frank's_Office",
+      "display": "Frank's Office",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 352
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Back_Porch",
+      "display": "Back Porch",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 404
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Back_Yard",
+      "display": "Back Yard",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 448
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Maya's_Bedroom",
+      "display": "Maya's Bedroom",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 490
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Jake's_Room",
+      "display": "Jake's Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 542
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Frank's_Bedroom",
+      "display": "Frank's Bedroom",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 588
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Main_Street_Sidewalk",
+      "display": "Main Street Sidewalk",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 642
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Diner_—_Front_Floor",
+      "display": "Diner — Front Floor",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 706
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Church_Front",
+      "display": "Church Front",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 768
+    },
+    {
+      "from": "Location_Frank's_Property",
+      "to": "Location_Front_Porch",
+      "display": null,
+      "setter": null,
+      "kind": "goto",
+      "gate": [],
+      "index": 53
+    },
+    {
+      "from": "Location_Main_Street",
+      "to": "Location_Main_Street_Sidewalk",
+      "display": null,
+      "setter": null,
+      "kind": "goto",
+      "gate": [],
+      "index": 53
+    },
+    {
+      "from": "Location_Home",
+      "to": "Location_Front_Porch",
+      "display": "Leave Home",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 11565
+    },
+    {
+      "from": "Location_Kitchen",
+      "to": "Location_Home",
+      "display": "Leave Kitchen",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 930
+    },
+    {
+      "from": "Location_Living_Room",
+      "to": "Location_Home",
+      "display": "Leave Living Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 900
+    },
+    {
+      "from": "Location_Frank's_Office",
+      "to": "Location_Home",
+      "display": "Leave Frank's Office",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 848
+    },
+    {
+      "from": "Location_Back_Porch",
+      "to": "Location_Home",
+      "display": "Leave Back Porch",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 2374
+    },
+    {
+      "from": "Location_Back_Yard",
+      "to": "Location_Back_Porch",
+      "display": "Leave Back Yard",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 840
+    },
+    {
+      "from": "Location_Maya's_Bedroom",
+      "to": "Location_Home",
+      "display": "Leave Maya's Bedroom",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 884
+    },
+    {
+      "from": "Location_Jake's_Room",
+      "to": "Location_Home",
+      "display": "Leave Jake's Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_tease_open\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 1032
+    },
+    {
+      "from": "Location_Jake's_Room",
+      "to": "Location_Home",
+      "display": "Go back",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_tease_open\", \"operator\": \"is_true\"}]}))",
+          "branch": "else"
+        }
+      ],
+      "index": 1399
+    },
+    {
+      "from": "Location_Frank's_Bedroom",
+      "to": "Location_Home",
+      "display": "Leave Frank's Bedroom",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_invited_to_bedroom\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 1125
+    },
+    {
+      "from": "Location_Frank's_Bedroom",
+      "to": "Location_Home",
+      "display": "Go back",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_invited_to_bedroom\", \"operator\": \"is_true\"}]}))",
+          "branch": "else"
+        }
+      ],
+      "index": 1355
+    },
+    {
+      "from": "Location_Diner_—_Front_Floor",
+      "to": "Location_Main_Street_Sidewalk",
+      "display": "Leave Diner — Front Floor",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 767
+    },
+    {
+      "from": "Location_Church_Front",
+      "to": "Location_Main_Street_Sidewalk",
+      "display": "Leave Church Front",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 896
+    },
+    {
+      "from": "Canvas_scene_yard_frank_late_afternoon_Node_1",
+      "to": "Location_Back_Yard",
+      "display": "Head back inside.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 6985
+    },
+    {
+      "from": "Canvas_scene_back_porch_frank_weekend_morning_Node_1",
+      "to": "Location_Back_Porch",
+      "display": "Head back inside.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 6710
+    },
+    {
+      "from": "Canvas_scene_living_room_frank_dusk_Node_1",
+      "to": "Location_Living_Room",
+      "display": "Continue reading.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 5775
+    },
+    {
+      "from": "Canvas_scene_hallway_frank_morning_pass_Node_1",
+      "to": "Location_Home",
+      "display": "Continue.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 7010
+    },
+    {
+      "from": "Canvas_scene_hallway_frank_late_drink_Node_1",
+      "to": "Location_Home",
+      "display": "Go to your room.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1975
+    },
+    {
+      "from": "Canvas_scene_office_frank_diana_call_intercept_Node_1",
+      "to": "Location_Frank's_Office",
+      "display": "Pull the door closed.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3666
+    },
+    {
+      "from": "Canvas_scene_kitchen_frank_afternoon_alone_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Hear the truck. Get up.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2611
+    },
+    {
+      "from": "Canvas_scene_living_room_frank_evening_paper_Node_1",
+      "to": "Location_Living_Room",
+      "display": "Get up.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 4596
+    },
+    {
+      "from": "Canvas_scene_yard_frank_mending_fence_Node_1",
+      "to": "Location_Back_Yard",
+      "display": "Head back inside.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 4347
+    },
+    {
+      "from": "Canvas_scene_kitchen_late_night_raid_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Stay a while longer.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 9878
+    },
+    {
+      "from": "Canvas_scene_kitchen_late_night_raid_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Go back to bed.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 10373
+    },
+    {
+      "from": "Canvas_activity_help_with_chores_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Hang the rag back up.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1802
+    },
+    {
+      "from": "Canvas_scene_porch_frank_evening_smoke_Node_1",
+      "to": "Location_Back_Porch",
+      "display": "Stay a minute.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 7940
+    },
+    {
+      "from": "Canvas_scene_porch_frank_evening_smoke_Node_1",
+      "to": "Location_Back_Porch",
+      "display": "Sit on the railing where he can see your legs.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_restrict_declared\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 8632
+    },
+    {
+      "from": "Canvas_scene_living_room_frank_radio_Node_1",
+      "to": "Location_Living_Room",
+      "display": "Sit and listen.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 7027
+    },
+    {
+      "from": "Canvas_scene_living_room_frank_radio_Node_1",
+      "to": "Location_Living_Room",
+      "display": "Sit on the rug at his feet.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_restrict_declared\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 7721
+    },
+    {
+      "from": "Canvas_scene_kitchen_frank_coffee_alone_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Finish your coffee.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 7061
+    },
+    {
+      "from": "Canvas_activity_talk_to_frank_Node_1",
+      "to": "Navigation",
+      "display": "Excuse yourself.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 12982
+    },
+    {
+      "from": "Canvas_scene_hallway_franks_door_evening_Node_1",
+      "to": "Location_Home",
+      "display": "Continue.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1111
+    },
+    {
+      "from": "Canvas_scene_hallway_frank_pass_Node_1",
+      "to": "Location_Home",
+      "display": "Continue.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 4689
+    },
+    {
+      "from": "Canvas_scene_hallway_frank_pass_Node_1",
+      "to": "Location_Home",
+      "display": "Linger in the doorway in just your robe.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_restrict_declared\", \"operator\": \"is_true\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 35}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 5367
+    },
+    {
+      "from": "Canvas_event_partner_invitation_Node_1",
+      "to": "Location_Maya's_Bedroom",
+      "display": "🔧 Apply",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 735
+    },
+    {
+      "from": "Canvas_dev_advance_jake_to_4_Node_1",
+      "to": "Location_Maya's_Bedroom",
+      "display": "🔧 Apply",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 882
+    },
+    {
+      "from": "Canvas_dev_advance_jake_to_3_Node_1",
+      "to": "Location_Maya's_Bedroom",
+      "display": "🔧 Apply",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1284
+    },
+    {
+      "from": "Canvas_dev_advance_ryan_to_3_Node_1",
+      "to": "Location_Maya's_Bedroom",
+      "display": "🔧 Apply",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1065
+    },
+    {
+      "from": "Canvas_dev_advance_ryan_to_2_Node_1",
+      "to": "Location_Maya's_Bedroom",
+      "display": "🔧 Apply",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1222
+    },
+    {
+      "from": "Canvas_dev_zero_trust_frank_Node_1",
+      "to": "Location_Maya's_Bedroom",
+      "display": "🔧 Apply",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 778
+    },
+    {
+      "from": "Canvas_dev_force_catch_Node_1",
+      "to": "Location_Maya's_Bedroom",
+      "display": "🔧 Apply",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1014
+    },
+    {
+      "from": "Canvas_dev_advance_frank_to_4_Node_1",
+      "to": "Location_Maya's_Bedroom",
+      "display": "🔧 Apply",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1269
+    },
+    {
+      "from": "Canvas_dev_advance_frank_to_3_Node_1",
+      "to": "Location_Maya's_Bedroom",
+      "display": "🔧 Apply",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1461
+    },
+    {
+      "from": "Canvas_scene_cookie_diner_evening_Node_1",
+      "to": "Location_Diner_—_Front_Floor",
+      "display": "Bullshit a minute with her.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1478
+    },
+    {
+      "from": "Canvas_scene_cookie_diner_evening_Node_1",
+      "to": "Location_Diner_—_Front_Floor",
+      "display": "Just check in. Out the door.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1993
+    },
+    {
+      "from": "Canvas_scene_diner_t1_shift_Node_1",
+      "to": "Location_Main_Street_Sidewalk",
+      "display": "Take the wages and the tips.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1232
+    },
+    {
+      "from": "Canvas_scene_diner_t0_shift_Node_1",
+      "to": "Location_Main_Street_Sidewalk",
+      "display": "Take the shift wages and go.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1111
+    },
+    {
+      "from": "Canvas_scene_living_room_evening_Node_1",
+      "to": "Location_Living_Room",
+      "display": "Stay where you are.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3396
+    },
+    {
+      "from": "Canvas_scene_living_room_evening_Node_1",
+      "to": "Location_Living_Room",
+      "display": "Stand up. Go to your room.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 4084
+    },
+    {
+      "from": "Canvas_scene_franks_office_setter_Node_1",
+      "to": "Canvas_activity_bookkeeping_with_frank_Node_1",
+      "display": "Help with bookkeeping 💼",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_offered_bookkeeping\", \"operator\": \"is_true\"}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_caught\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1682
+    },
+    {
+      "from": "Canvas_scene_franks_office_setter_Node_1",
+      "to": "Canvas_scene_franks_office_supervised_Node_1",
+      "display": "Help with bookkeeping 💼",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_offered_bookkeeping\", \"operator\": \"is_true\"}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_caught\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2307
+    },
+    {
+      "from": "Canvas_scene_franks_office_setter_Node_1",
+      "to": "Canvas_activity_talk_to_frank_Node_1",
+      "display": "Talk 💬",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2544
+    },
+    {
+      "from": "Canvas_scene_franks_office_setter_Node_1",
+      "to": "Location_Frank's_Office",
+      "display": "Lean over the desk to read the receipts.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 5}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2943
+    },
+    {
+      "from": "Canvas_scene_franks_office_setter_Node_1",
+      "to": "Location_Frank's_Office",
+      "display": "Stretch when you stand up.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 5}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 3977
+    },
+    {
+      "from": "Canvas_scene_franks_office_setter_Node_1",
+      "to": "Location_Frank's_Office",
+      "display": "Sit on the edge of the desk a moment.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 5}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 5100
+    },
+    {
+      "from": "Canvas_scene_franks_office_setter_Node_1",
+      "to": "Canvas_scene_office_after_crack_Node_1",
+      "display": "Bend over the page ❤️‍🔥",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_cracked\", \"operator\": \"is_true\"}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_restrict_declared\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 6225
+    },
+    {
+      "from": "Canvas_scene_franks_office_setter_Node_1",
+      "to": "Location_Home",
+      "display": "Take the receipts and go 🚪",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 6796
+    },
+    {
+      "from": "Canvas_loop_franks_bedroom_finisher_Node_1",
+      "to": "Location_Frank's_Bedroom",
+      "display": "Stay through. Sleep here.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1481
+    },
+    {
+      "from": "Canvas_loop_franks_bedroom_finisher_Node_1",
+      "to": "Location_Maya's_Bedroom",
+      "display": "Back to my room before Diana wakes.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2410
+    },
+    {
+      "from": "Canvas_loop_franks_bedroom_sex_Node_1",
+      "to": "Canvas_loop_franks_bedroom_sex_Node_2",
+      "display": "Make out 💋",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"loop_npc_pleasure\", \"operator\": \"lt\", \"value\": 50}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1029
+    },
+    {
+      "from": "Canvas_loop_franks_bedroom_sex_Node_1",
+      "to": "Canvas_loop_franks_bedroom_sex_Node_3",
+      "display": "Tease him ❤️‍🔥",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"loop_npc_pleasure\", \"operator\": \"lt\", \"value\": 50}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1929
+    },
+    {
+      "from": "Canvas_loop_franks_bedroom_sex_Node_1",
+      "to": "Canvas_loop_franks_bedroom_sex_Node_4",
+      "display": "Service him 🍆",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"loop_npc_pleasure\", \"operator\": \"lt\", \"value\": 50}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2833
+    },
+    {
+      "from": "Canvas_loop_franks_bedroom_sex_Node_1",
+      "to": "Canvas_loop_franks_bedroom_finisher_Node_1",
+      "display": "Make him cum 💦",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"loop_npc_pleasure\", \"operator\": \"gte\", \"value\": 35}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 3737
+    },
+    {
+      "from": "Canvas_loop_franks_bedroom_sex_Node_1",
+      "to": "Location_Frank's_Bedroom",
+      "display": "Stop 🚪",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 4283
+    },
+    {
+      "from": "Canvas_loop_franks_bedroom_sex_Node_2",
+      "to": "Canvas_loop_franks_bedroom_sex_Node_1",
+      "display": "Continue",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1215
+    },
+    {
+      "from": "Canvas_loop_franks_bedroom_sex_Node_3",
+      "to": "Canvas_loop_franks_bedroom_sex_Node_1",
+      "display": "Continue",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 702
+    },
+    {
+      "from": "Canvas_loop_franks_bedroom_sex_Node_4",
+      "to": "Canvas_loop_franks_bedroom_sex_Node_1",
+      "display": "Continue",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2675
+    },
+    {
+      "from": "Canvas_scene_franks_bedroom_setter_Node_1",
+      "to": "Location_Home",
+      "display": "Talk 💬",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1386
+    },
+    {
+      "from": "Canvas_scene_franks_bedroom_setter_Node_1",
+      "to": "Canvas_loop_franks_bedroom_sex_Node_1",
+      "display": "Get into bed 🛏️",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1769
+    },
+    {
+      "from": "Canvas_scene_franks_bedroom_setter_Node_1",
+      "to": "Canvas_loop_franks_bedroom_sex_Node_1",
+      "display": "Undress for him ❤️‍🔥",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 30}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2499
+    },
+    {
+      "from": "Canvas_scene_franks_bedroom_setter_Node_1",
+      "to": "Canvas_loop_franks_bedroom_sex_Node_1",
+      "display": "Sit on the edge of his bed and wait.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 50}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 3774
+    },
+    {
+      "from": "Canvas_scene_franks_bedroom_setter_Node_1",
+      "to": "Canvas_loop_franks_bedroom_sex_Node_1",
+      "display": "Open your robe slowly.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 70}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 5006
+    },
+    {
+      "from": "Canvas_scene_franks_bedroom_setter_Node_1",
+      "to": "Location_Home",
+      "display": "Goodnight 🚪",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 6002
+    },
+    {
+      "from": "Canvas_scene_franks_bedroom_evening_Node_1",
+      "to": "Canvas_scene_franks_bedroom_evening_Node_2",
+      "display": "Cross to him.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3130
+    },
+    {
+      "from": "Canvas_scene_franks_bedroom_evening_Node_1",
+      "to": "Canvas_scene_franks_bedroom_evening_Node_3",
+      "display": "Hesitate. Step back.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3450
+    },
+    {
+      "from": "Canvas_scene_franks_bedroom_evening_Node_2",
+      "to": "Location_Frank's_Bedroom",
+      "display": "Stay through. Sleep here.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3449
+    },
+    {
+      "from": "Canvas_scene_franks_bedroom_evening_Node_2",
+      "to": "Location_Frank's_Bedroom",
+      "display": "Back to my room before Diana wakes.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 4376
+    },
+    {
+      "from": "Canvas_scene_franks_bedroom_evening_Node_3",
+      "to": "Location_Frank's_Bedroom",
+      "display": "Walk back to your room.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2053
+    },
+    {
+      "from": "Canvas_scene_frank_bedroom_invitation_Node_1",
+      "to": "Location_Home",
+      "display": "Yes.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2548
+    },
+    {
+      "from": "Canvas_scene_frank_bedroom_invitation_Node_1",
+      "to": "Location_Home",
+      "display": "What about Diana.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3237
+    },
+    {
+      "from": "Canvas_scene_office_after_crack_Node_1",
+      "to": "Canvas_scene_office_after_crack_Node_2",
+      "display": "Let him push the skirt up.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 6103
+    },
+    {
+      "from": "Canvas_scene_office_after_crack_Node_1",
+      "to": "Canvas_scene_office_after_crack_Node_3",
+      "display": "Step back. Pick up the receipts.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 6231
+    },
+    {
+      "from": "Canvas_scene_office_after_crack_Node_2",
+      "to": "Canvas_scene_franks_office_setter_Node_1",
+      "display": "Take the receipts. Don't say anything.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3281
+    },
+    {
+      "from": "Canvas_scene_office_after_crack_Node_2",
+      "to": "Canvas_scene_franks_office_setter_Node_1",
+      "display": "Sit on the desk a moment. Don't leave yet.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 4132
+    },
+    {
+      "from": "Canvas_scene_office_after_crack_Node_3",
+      "to": "Navigation",
+      "display": "Leave the receipts. Walk out.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1933
+    },
+    {
+      "from": "Canvas_scene_office_crack_Node_1",
+      "to": "Location_Frank's_Office",
+      "display": "Get up. Close the door.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 4041
+    },
+    {
+      "from": "Canvas_scene_office_crack_Node_1",
+      "to": "Location_Frank's_Office",
+      "display": "Don't move. Make him say it twice.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 4747
+    },
+    {
+      "from": "Canvas_scene_office_supervision_intro_Node_1",
+      "to": "Location_Frank's_Office",
+      "display": "Hand the stack back when you're done.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2849
+    },
+    {
+      "from": "Canvas_scene_franks_office_supervised_Node_1",
+      "to": "Canvas_scene_franks_office_setter_Node_1",
+      "display": "Run the deductibles.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3207
+    },
+    {
+      "from": "Canvas_scene_franks_office_supervised_Node_1",
+      "to": "Canvas_scene_franks_office_setter_Node_1",
+      "display": "Lean against the desk a moment longer.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_restrict_declared\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 4023
+    },
+    {
+      "from": "Canvas_scene_yard_with_ryan_Node_1",
+      "to": "Location_Back_Yard",
+      "display": "Bring him a water.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3541
+    },
+    {
+      "from": "Canvas_scene_yard_with_ryan_Node_1",
+      "to": "Location_Back_Yard",
+      "display": "Watch him work a minute.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 4125
+    },
+    {
+      "from": "Canvas_scene_kitchen_with_diana_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Sit with her a minute.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3366
+    },
+    {
+      "from": "Canvas_scene_kitchen_with_diana_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Coffee and out.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3967
+    },
+    {
+      "from": "Canvas_scene_kitchen_with_frank_dinprep_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Help with dinner prep.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 6464
+    },
+    {
+      "from": "Canvas_scene_kitchen_with_frank_dinprep_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Reach for a plate above his head.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_restrict_declared\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 7357
+    },
+    {
+      "from": "Canvas_scene_frank_offer_bookkeeping_Node_1",
+      "to": "Location_Kitchen",
+      "display": "\\\"Yeah. I can help.\\\"",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2927
+    },
+    {
+      "from": "Canvas_scene_frank_offer_bookkeeping_Node_1",
+      "to": "Location_Kitchen",
+      "display": "\\\"I'm not really…\\\"",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3426
+    },
+    {
+      "from": "Canvas_scene_kitchen_with_frank_morning_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Take the broom from the back door.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_caught\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_restrict_declared\", \"operator\": \"is_true\"}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_offered_chores\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2485
+    },
+    {
+      "from": "Canvas_scene_kitchen_with_frank_morning_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Brush past him at the coffee maker.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_caught\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_restrict_declared\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 3391
+    },
+    {
+      "from": "Canvas_scene_kitchen_with_frank_morning_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Take the broom from the back door.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_offered_bookkeeping\", \"operator\": \"is_true\"}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_caught\", \"operator\": \"is_false\"}]})",
+          "branch": "elseif"
+        },
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_restrict_declared\", \"operator\": \"is_true\"}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_offered_chores\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 7153
+    },
+    {
+      "from": "Canvas_scene_kitchen_with_frank_morning_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Brush past him at the coffee maker.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_offered_bookkeeping\", \"operator\": \"is_true\"}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_caught\", \"operator\": \"is_false\"}]})",
+          "branch": "elseif"
+        },
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_restrict_declared\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 8059
+    },
+    {
+      "from": "Canvas_scene_kitchen_with_frank_morning_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Take the broom from the back door.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_restrict_declared\", \"operator\": \"is_true\"}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_cracked\", \"operator\": \"is_false\"}]})",
+          "branch": "elseif"
+        },
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_restrict_declared\", \"operator\": \"is_true\"}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_offered_chores\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 11270
+    },
+    {
+      "from": "Canvas_scene_kitchen_with_frank_morning_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Brush past him at the coffee maker.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_restrict_declared\", \"operator\": \"is_true\"}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_cracked\", \"operator\": \"is_false\"}]})",
+          "branch": "elseif"
+        },
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_restrict_declared\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 12176
+    },
+    {
+      "from": "Canvas_scene_kitchen_with_frank_morning_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Take the broom from the back door.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_cracked\", \"operator\": \"is_true\"}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_invited_to_bedroom\", \"operator\": \"is_false\"}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_office_first_sex_done\", \"operator\": \"is_false\"}]})",
+          "branch": "elseif"
+        },
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_restrict_declared\", \"operator\": \"is_true\"}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_offered_chores\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 16176
+    },
+    {
+      "from": "Canvas_scene_kitchen_with_frank_morning_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Brush past him at the coffee maker.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_cracked\", \"operator\": \"is_true\"}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_invited_to_bedroom\", \"operator\": \"is_false\"}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_office_first_sex_done\", \"operator\": \"is_false\"}]})",
+          "branch": "elseif"
+        },
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_restrict_declared\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 17082
+    },
+    {
+      "from": "Canvas_scene_kitchen_with_frank_morning_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Take the broom from the back door.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_cracked\", \"operator\": \"is_true\"}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_invited_to_bedroom\", \"operator\": \"is_false\"}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_office_first_sex_done\", \"operator\": \"is_true\"}]})",
+          "branch": "elseif"
+        },
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_restrict_declared\", \"operator\": \"is_true\"}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_offered_chores\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 20428
+    },
+    {
+      "from": "Canvas_scene_kitchen_with_frank_morning_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Brush past him at the coffee maker.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_cracked\", \"operator\": \"is_true\"}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_invited_to_bedroom\", \"operator\": \"is_false\"}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_office_first_sex_done\", \"operator\": \"is_true\"}]})",
+          "branch": "elseif"
+        },
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_restrict_declared\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 21334
+    },
+    {
+      "from": "Canvas_scene_kitchen_with_frank_morning_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Take the broom from the back door.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_invited_to_bedroom\", \"operator\": \"is_true\"}]})",
+          "branch": "elseif"
+        },
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_restrict_declared\", \"operator\": \"is_true\"}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_offered_chores\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 25754
+    },
+    {
+      "from": "Canvas_scene_kitchen_with_frank_morning_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Brush past him at the coffee maker.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_invited_to_bedroom\", \"operator\": \"is_true\"}]})",
+          "branch": "elseif"
+        },
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"frank_restrict_declared\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 26660
+    },
+    {
+      "from": "Canvas_transition_group_settled_in_Node_1",
+      "to": "Location_Home",
+      "display": "Continue.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 922
+    },
+    {
+      "from": "Canvas_transition_jake_to_1_via_glance_Node_1",
+      "to": "Location_Home",
+      "display": "Pass.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1058
+    },
+    {
+      "from": "Canvas_transition_jake_to_1_via_beauty_Node_1",
+      "to": "Location_Home",
+      "display": "Pass.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1058
+    },
+    {
+      "from": "Canvas_transition_ryan_to_1_Node_1",
+      "to": "Location_Back_Yard",
+      "display": "Stay.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1553
+    },
+    {
+      "from": "Canvas_activity_walk_property_Node_1",
+      "to": "Location_Home",
+      "display": "Up the driveway.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1112
+    },
+    {
+      "from": "Canvas_activity_walk_to_town_Node_1",
+      "to": "Location_Main_Street_Sidewalk",
+      "display": "Arrive at Main Street.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1083
+    },
+    {
+      "from": "Canvas_activity_morning_chore_Node_1",
+      "to": "Location_Back_Porch",
+      "display": "Take the five.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1471
+    },
+    {
+      "from": "Canvas_activity_walk_past_jakes_door_Node_1",
+      "to": "Location_Home",
+      "display": "Pass.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"eq\", \"value\": 0}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_first_glance_noticed\", \"operator\": \"is_false\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"beauty\", \"operator\": \"gte\", \"value\": 40}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2686
+    },
+    {
+      "from": "Canvas_activity_walk_past_jakes_door_Node_1",
+      "to": "Location_Home",
+      "display": "Keep walking.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"OR\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"gte\", \"value\": 1}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_first_glance_noticed\", \"operator\": \"is_true\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"beauty\", \"operator\": \"lt\", \"value\": 40}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 3957
+    },
+    {
+      "from": "Canvas_activity_walk_past_jakes_door_Node_1",
+      "to": "Location_Home",
+      "display": "Pause. Look longer.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"gte\", \"value\": 1}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 4942
+    },
+    {
+      "from": "Canvas_activity_walk_past_jakes_door_Node_1",
+      "to": "Location_Home",
+      "display": "Don't say anything. Walk on.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"eq\", \"value\": 1}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_peek_draw_revealed\", \"operator\": \"is_false\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"jake_peek_count\", \"operator\": \"gte\", \"value\": 3}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 30}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 6440
+    },
+    {
+      "from": "Canvas_activity_walk_past_jakes_door_Node_1",
+      "to": "Location_Home",
+      "display": "Continue",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "not (setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"eq\", \"value\": 0}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_first_glance_noticed\", \"operator\": \"is_false\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"beauty\", \"operator\": \"gte\", \"value\": 40}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"OR\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"gte\", \"value\": 1}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_first_glance_noticed\", \"operator\": \"is_true\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"beauty\", \"operator\": \"lt\", \"value\": 40}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"gte\", \"value\": 1}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"npc_jake_stage\", \"operator\": \"eq\", \"value\": 1}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"jake_peek_draw_revealed\", \"operator\": \"is_false\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"jake_peek_count\", \"operator\": \"gte\", \"value\": 3}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 30}]}))",
+          "branch": "if"
+        }
+      ],
+      "index": 12048
+    },
+    {
+      "from": "Canvas_activity_help_ryan_in_yard_Node_1",
+      "to": "Location_Back_Yard",
+      "display": "Hand the board off.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1517
+    },
+    {
+      "from": "Canvas_activity_bookkeeping_with_frank_Node_1",
+      "to": "Navigation",
+      "display": "Hand the stack back.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1246
+    },
+    {
+      "from": "Canvas_activity_help_diana_kitchen_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Plate up.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1371
+    },
+    {
+      "from": "Canvas_activity_eat_from_fridge_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Done.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1037
+    },
+    {
+      "from": "Canvas_activity_sketch_Node_1",
+      "to": "Location_Maya's_Bedroom",
+      "display": "Close the book.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1113
+    },
+    {
+      "from": "Canvas_activity_shower_Node_1",
+      "to": "Location_Maya's_Bedroom",
+      "display": "Towel off.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1109
+    },
+    {
+      "from": "Canvas_activity_sleep_Node_1",
+      "to": "Location_Maya's_Bedroom",
+      "display": "Lights off.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 946
+    },
+    {
+      "from": "Canvas_canvas_first_sunday_morning_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Pay the sixty. Walk to the service with Diana.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1699
+    },
+    {
+      "from": "Canvas_canvas_first_sunday_morning_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Pay the sixty. Stay home with the sketchbook.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2806
+    },
+    {
+      "from": "Canvas_canvas_marge_interview_Node_1",
+      "to": "Location_Diner_—_Front_Floor",
+      "display": "Take the apron.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2294
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_back_porch_frank_weekend_morning",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 373
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_bookkeeping_with_frank",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 728
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_cookie_diner_evening",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1067
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_event_test_slice_intro",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1391
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_kitchen_with_diana",
+      "display": "T5",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1716
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_morning_chore",
+      "display": "T5",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2046
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_eat_from_fridge",
+      "display": "T2",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2375
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_first_sunday_morning",
+      "display": "T10",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2725
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_kitchen_with_frank_dinprep",
+      "display": "T6",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 3078
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_kitchen_with_frank_morning",
+      "display": "T6",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 3430
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_frank_offer_bookkeeping",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 3778
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_office_crack",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 4117
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_franks_bedroom_setter",
+      "display": "T10",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 4458
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_loop_franks_bedroom_finisher",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 4801
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_franks_bedroom_evening",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 5150
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_loop_franks_bedroom_sex",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 5491
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_office_frank_diana_call_intercept",
+      "display": "T14",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 5853
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_frank_bedroom_invitation",
+      "display": "T13",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 6224
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_franks_office_setter",
+      "display": "T11",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 6575
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_franks_office_supervised",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 6922
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_office_after_crack",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 7276
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_office_supervision_intro",
+      "display": "T12",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 7620
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_hallway_frank_pass",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 7961
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_hallway_frank_morning_pass",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 8312
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_hallway_frank_late_drink",
+      "display": "T6",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 8670
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_hallway_franks_door_evening",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 9027
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_help_diana_kitchen",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 9373
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_help_ryan_in_yard",
+      "display": "T5",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 9713
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_help_with_chores",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 10044
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_transition_jake_to_1_via_beauty",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 10392
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_transition_jake_to_1_via_glance",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 10746
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_kitchen_frank_afternoon_alone",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 11112
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_kitchen_frank_coffee_alone",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 11472
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_kitchen_late_night_raid",
+      "display": "T5",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 11826
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_living_room_frank_dusk",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 12183
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_living_room_frank_radio",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 12540
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_living_room_frank_evening_paper",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 12904
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_living_room_evening",
+      "display": "T8",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 13251
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_marge_interview",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 13579
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_porch_frank_evening_smoke",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 13923
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_diner_t1_shift",
+      "display": "T7",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 14257
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_transition_ryan_to_1",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 14571
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_yard_with_ryan",
+      "display": "T6",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 14886
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_transition_group_settled_in",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 15207
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_shower",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 15519
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_sketch",
+      "display": "T2",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 15819
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_sleep",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 16117
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_diner_t0_shift",
+      "display": "T6",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 16432
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_talk_to_frank",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 16751
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_walk_property",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 17084
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_walk_past_jakes_door",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 17420
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_walk_to_town",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 17746
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_yard_frank_late_afternoon",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 18098
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_yard_frank_mending_fence",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 18450
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_dev_advance_frank_to_3",
+      "display": "T1",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 18798
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_dev_advance_frank_to_4",
+      "display": "T1",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 19138
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_dev_advance_jake_to_3",
+      "display": "T1",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 19476
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_dev_advance_jake_to_4",
+      "display": "T1",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 19813
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_dev_advance_ryan_to_2",
+      "display": "T1",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 20150
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_dev_advance_ryan_to_3",
+      "display": "T1",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 20487
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_dev_force_catch",
+      "display": "T1",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 20816
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_event_partner_invitation",
+      "display": "T1",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 21145
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_dev_zero_trust_frank",
+      "display": "T1",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 21477
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "Navigation",
+      "display": "Back to Game",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 21617
+    },
+    {
+      "from": "CanvasReview_event_test_slice_intro",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 648
+    },
+    {
+      "from": "CanvasReview_scene_yard_frank_late_afternoon",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1066
+    },
+    {
+      "from": "CanvasReview_scene_back_porch_frank_weekend_morning",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1089
+    },
+    {
+      "from": "CanvasReview_scene_living_room_frank_dusk",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1073
+    },
+    {
+      "from": "CanvasReview_scene_hallway_frank_morning_pass",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1049
+    },
+    {
+      "from": "CanvasReview_scene_hallway_frank_late_drink",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1519
+    },
+    {
+      "from": "CanvasReview_scene_office_frank_diana_call_intercept",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1959
+    },
+    {
+      "from": "CanvasReview_scene_kitchen_frank_afternoon_alone",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 841
+    },
+    {
+      "from": "CanvasReview_scene_living_room_frank_evening_paper",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 934
+    },
+    {
+      "from": "CanvasReview_scene_yard_frank_mending_fence",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 926
+    },
+    {
+      "from": "CanvasReview_scene_kitchen_late_night_raid",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 963
+    },
+    {
+      "from": "CanvasReview_activity_help_with_chores",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1173
+    },
+    {
+      "from": "CanvasReview_scene_porch_frank_evening_smoke",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1126
+    },
+    {
+      "from": "CanvasReview_scene_living_room_frank_radio",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1123
+    },
+    {
+      "from": "CanvasReview_scene_kitchen_frank_coffee_alone",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 954
+    },
+    {
+      "from": "CanvasReview_activity_talk_to_frank",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 888
+    },
+    {
+      "from": "CanvasReview_scene_hallway_franks_door_evening",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1055
+    },
+    {
+      "from": "CanvasReview_scene_hallway_frank_pass",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 983
+    },
+    {
+      "from": "CanvasReview_event_partner_invitation",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 489
+    },
+    {
+      "from": "CanvasReview_dev_advance_jake_to_4",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 484
+    },
+    {
+      "from": "CanvasReview_dev_advance_jake_to_3",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 505
+    },
+    {
+      "from": "CanvasReview_dev_advance_ryan_to_3",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 495
+    },
+    {
+      "from": "CanvasReview_dev_advance_ryan_to_2",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 497
+    },
+    {
+      "from": "CanvasReview_dev_zero_trust_frank",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 468
+    },
+    {
+      "from": "CanvasReview_dev_force_catch",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 479
+    },
+    {
+      "from": "CanvasReview_dev_advance_frank_to_4",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 507
+    },
+    {
+      "from": "CanvasReview_dev_advance_frank_to_3",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 530
+    },
+    {
+      "from": "CanvasReview_scene_cookie_diner_evening",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1457
+    },
+    {
+      "from": "CanvasReview_scene_diner_t1_shift",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1545
+    },
+    {
+      "from": "CanvasReview_scene_diner_t0_shift",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1399
+    },
+    {
+      "from": "CanvasReview_scene_living_room_evening",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 881
+    },
+    {
+      "from": "CanvasReview_scene_franks_office_setter",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1367
+    },
+    {
+      "from": "CanvasReview_loop_franks_bedroom_finisher",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1026
+    },
+    {
+      "from": "CanvasReview_loop_franks_bedroom_sex",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1768
+    },
+    {
+      "from": "CanvasReview_scene_franks_bedroom_setter",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1350
+    },
+    {
+      "from": "CanvasReview_scene_franks_bedroom_evening",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 3756
+    },
+    {
+      "from": "CanvasReview_scene_frank_bedroom_invitation",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1955
+    },
+    {
+      "from": "CanvasReview_scene_office_after_crack",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 3887
+    },
+    {
+      "from": "CanvasReview_scene_office_crack",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 943
+    },
+    {
+      "from": "CanvasReview_scene_office_supervision_intro",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2110
+    },
+    {
+      "from": "CanvasReview_scene_franks_office_supervised",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 971
+    },
+    {
+      "from": "CanvasReview_scene_yard_with_ryan",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 991
+    },
+    {
+      "from": "CanvasReview_scene_kitchen_with_diana",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 926
+    },
+    {
+      "from": "CanvasReview_scene_kitchen_with_frank_dinprep",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1137
+    },
+    {
+      "from": "CanvasReview_scene_frank_offer_bookkeeping",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2265
+    },
+    {
+      "from": "CanvasReview_scene_kitchen_with_frank_morning",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1166
+    },
+    {
+      "from": "CanvasReview_transition_group_settled_in",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 635
+    },
+    {
+      "from": "CanvasReview_transition_jake_to_1_via_glance",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 700
+    },
+    {
+      "from": "CanvasReview_transition_jake_to_1_via_beauty",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 700
+    },
+    {
+      "from": "CanvasReview_transition_ryan_to_1",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 770
+    },
+    {
+      "from": "CanvasReview_activity_walk_property",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 919
+    },
+    {
+      "from": "CanvasReview_activity_walk_to_town",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 899
+    },
+    {
+      "from": "CanvasReview_activity_morning_chore",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1029
+    },
+    {
+      "from": "CanvasReview_activity_walk_past_jakes_door",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1056
+    },
+    {
+      "from": "CanvasReview_activity_help_ryan_in_yard",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1030
+    },
+    {
+      "from": "CanvasReview_activity_bookkeeping_with_frank",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1093
+    },
+    {
+      "from": "CanvasReview_activity_help_diana_kitchen",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1076
+    },
+    {
+      "from": "CanvasReview_activity_eat_from_fridge",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 949
+    },
+    {
+      "from": "CanvasReview_activity_sketch",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 999
+    },
+    {
+      "from": "CanvasReview_activity_shower",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 980
+    },
+    {
+      "from": "CanvasReview_activity_sleep",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1096
+    },
+    {
+      "from": "CanvasReview_canvas_first_sunday_morning",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1630
+    },
+    {
+      "from": "CanvasReview_canvas_marge_interview",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1819
+    }
+  ],
+  "unresolved_targets": [],
+  "dead_end_passages": [
+    "Story",
+    "AgeBlocked",
+    "StoryCaption",
+    "QuestsPage",
+    "TipsPage",
+    "StatsPage",
+    "RentDay_Paid",
+    "RentDay_Short",
+    "SchedulePage",
+    "FlagsPage",
+    "Location_Front_Porch",
+    "Location_Main_Street_Sidewalk",
+    "MissingMediaPage"
+  ],
+  "untargeted_passages": [
+    "Story",
+    "Start",
+    "TimeWidgets",
+    "StoryCaption",
+    "StoryJournal",
+    "RentDay",
+    "Canvas_scene_yard_frank_late_afternoon_Node_1",
+    "Canvas_scene_back_porch_frank_weekend_morning_Node_1",
+    "Canvas_scene_living_room_frank_dusk_Node_1",
+    "Canvas_scene_hallway_frank_morning_pass_Node_1",
+    "Canvas_scene_hallway_frank_late_drink_Node_1",
+    "Canvas_scene_office_frank_diana_call_intercept_Node_1",
+    "Canvas_scene_kitchen_frank_afternoon_alone_Node_1",
+    "Canvas_scene_living_room_frank_evening_paper_Node_1",
+    "Canvas_scene_yard_frank_mending_fence_Node_1",
+    "Canvas_scene_kitchen_late_night_raid_Node_1",
+    "Canvas_activity_help_with_chores_Node_1",
+    "Canvas_scene_porch_frank_evening_smoke_Node_1",
+    "Canvas_scene_living_room_frank_radio_Node_1",
+    "Canvas_scene_kitchen_frank_coffee_alone_Node_1",
+    "Canvas_scene_hallway_franks_door_evening_Node_1",
+    "Canvas_scene_hallway_frank_pass_Node_1",
+    "Canvas_event_partner_invitation_Node_1",
+    "Canvas_dev_advance_jake_to_4_Node_1",
+    "Canvas_dev_advance_jake_to_3_Node_1",
+    "Canvas_dev_advance_ryan_to_3_Node_1",
+    "Canvas_dev_advance_ryan_to_2_Node_1",
+    "Canvas_dev_zero_trust_frank_Node_1",
+    "Canvas_dev_force_catch_Node_1",
+    "Canvas_dev_advance_frank_to_4_Node_1",
+    "Canvas_dev_advance_frank_to_3_Node_1",
+    "Canvas_scene_cookie_diner_evening_Node_1",
+    "Canvas_scene_diner_t1_shift_Node_1",
+    "Canvas_scene_diner_t0_shift_Node_1",
+    "Canvas_scene_living_room_evening_Node_1",
+    "Canvas_scene_franks_bedroom_setter_Node_1",
+    "Canvas_scene_franks_bedroom_evening_Node_1",
+    "Canvas_scene_frank_bedroom_invitation_Node_1",
+    "Canvas_scene_office_crack_Node_1",
+    "Canvas_scene_office_supervision_intro_Node_1",
+    "Canvas_scene_yard_with_ryan_Node_1",
+    "Canvas_scene_kitchen_with_diana_Node_1",
+    "Canvas_scene_kitchen_with_frank_dinprep_Node_1",
+    "Canvas_scene_frank_offer_bookkeeping_Node_1",
+    "Canvas_scene_kitchen_with_frank_morning_Node_1",
+    "Canvas_transition_group_settled_in_Node_1",
+    "Canvas_transition_jake_to_1_via_glance_Node_1",
+    "Canvas_transition_jake_to_1_via_beauty_Node_1",
+    "Canvas_transition_ryan_to_1_Node_1",
+    "Canvas_activity_walk_property_Node_1",
+    "Canvas_activity_walk_to_town_Node_1",
+    "Canvas_activity_morning_chore_Node_1",
+    "Canvas_activity_walk_past_jakes_door_Node_1",
+    "Canvas_activity_help_ryan_in_yard_Node_1",
+    "Canvas_activity_help_diana_kitchen_Node_1",
+    "Canvas_activity_eat_from_fridge_Node_1",
+    "Canvas_activity_sketch_Node_1",
+    "Canvas_activity_shower_Node_1",
+    "Canvas_activity_sleep_Node_1",
+    "Canvas_canvas_first_sunday_morning_Node_1",
+    "Canvas_canvas_marge_interview_Node_1"
+  ],
+  "per_passage_stats": {
+    "Story": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": [
+        "meta"
+      ]
+    },
+    "Start": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "AgeBlocked": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "TimeWidgets": {
+      "edge_count": 8,
+      "unresolved": 0,
+      "tags": [
+        "widget",
+        "nobr"
+      ]
+    },
+    "StoryCaption": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "QuestsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "TipsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "StoryJournal": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "StatsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "RentDay": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "RentDay_Paid": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "RentDay_Short": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "SchedulePage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "FlagsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "StartingCanvas_event_test_slice_intro_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Navigation": {
+      "edge_count": 15,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Location_Frank's_Property": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Location_Main_Street": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Location_Front_Porch": {
+      "edge_count": 0,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Home": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Kitchen": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Living_Room": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Frank's_Office": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Back_Porch": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Back_Yard": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Maya's_Bedroom": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Jake's_Room": {
+      "edge_count": 2,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Frank's_Bedroom": {
+      "edge_count": 2,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Main_Street_Sidewalk": {
+      "edge_count": 0,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Diner_—_Front_Floor": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Church_Front": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Canvas_scene_yard_frank_late_afternoon_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_back_porch_frank_weekend_morning_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_living_room_frank_dusk_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_hallway_frank_morning_pass_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_hallway_frank_late_drink_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_office_frank_diana_call_intercept_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_kitchen_frank_afternoon_alone_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_living_room_frank_evening_paper_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_yard_frank_mending_fence_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_kitchen_late_night_raid_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_help_with_chores_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_porch_frank_evening_smoke_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_living_room_frank_radio_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_kitchen_frank_coffee_alone_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_talk_to_frank_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_hallway_franks_door_evening_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_hallway_frank_pass_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_event_partner_invitation_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_dev_advance_jake_to_4_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_dev_advance_jake_to_3_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_dev_advance_ryan_to_3_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_dev_advance_ryan_to_2_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_dev_zero_trust_frank_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_dev_force_catch_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_dev_advance_frank_to_4_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_dev_advance_frank_to_3_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_cookie_diner_evening_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_diner_t1_shift_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_diner_t0_shift_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_living_room_evening_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_franks_office_setter_Node_1": {
+      "edge_count": 8,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_loop_franks_bedroom_finisher_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_loop_franks_bedroom_sex_Node_1": {
+      "edge_count": 5,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_loop_franks_bedroom_sex_Node_2": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_loop_franks_bedroom_sex_Node_3": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_loop_franks_bedroom_sex_Node_4": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_franks_bedroom_setter_Node_1": {
+      "edge_count": 6,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_franks_bedroom_evening_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_franks_bedroom_evening_Node_2": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_franks_bedroom_evening_Node_3": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_frank_bedroom_invitation_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_office_after_crack_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_office_after_crack_Node_2": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_office_after_crack_Node_3": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_office_crack_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_office_supervision_intro_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_franks_office_supervised_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_yard_with_ryan_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_kitchen_with_diana_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_kitchen_with_frank_dinprep_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_frank_offer_bookkeeping_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_kitchen_with_frank_morning_Node_1": {
+      "edge_count": 12,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_transition_group_settled_in_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_transition_jake_to_1_via_glance_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_transition_jake_to_1_via_beauty_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_transition_ryan_to_1_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_walk_property_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_walk_to_town_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_morning_chore_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_walk_past_jakes_door_Node_1": {
+      "edge_count": 5,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_help_ryan_in_yard_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_bookkeeping_with_frank_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_help_diana_kitchen_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_eat_from_fridge_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_sketch_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_shower_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_sleep_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_first_sunday_morning_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_marge_interview_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "MissingMediaPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReviewList": {
+      "edge_count": 64,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_event_test_slice_intro": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_yard_frank_late_afternoon": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_back_porch_frank_weekend_morning": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_living_room_frank_dusk": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_hallway_frank_morning_pass": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_hallway_frank_late_drink": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_office_frank_diana_call_intercept": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_kitchen_frank_afternoon_alone": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_living_room_frank_evening_paper": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_yard_frank_mending_fence": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_kitchen_late_night_raid": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_help_with_chores": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_porch_frank_evening_smoke": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_living_room_frank_radio": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_kitchen_frank_coffee_alone": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_talk_to_frank": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_hallway_franks_door_evening": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_hallway_frank_pass": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_event_partner_invitation": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_dev_advance_jake_to_4": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_dev_advance_jake_to_3": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_dev_advance_ryan_to_3": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_dev_advance_ryan_to_2": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_dev_zero_trust_frank": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_dev_force_catch": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_dev_advance_frank_to_4": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_dev_advance_frank_to_3": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_cookie_diner_evening": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_diner_t1_shift": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_diner_t0_shift": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_living_room_evening": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_franks_office_setter": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_loop_franks_bedroom_finisher": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_loop_franks_bedroom_sex": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_franks_bedroom_setter": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_franks_bedroom_evening": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_frank_bedroom_invitation": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_office_after_crack": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_office_crack": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_office_supervision_intro": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_franks_office_supervised": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_yard_with_ryan": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_kitchen_with_diana": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_kitchen_with_frank_dinprep": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_frank_offer_bookkeeping": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_kitchen_with_frank_morning": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_transition_group_settled_in": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_transition_jake_to_1_via_glance": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_transition_jake_to_1_via_beauty": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_transition_ryan_to_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_walk_property": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_walk_to_town": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_morning_chore": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_walk_past_jakes_door": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_help_ryan_in_yard": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_bookkeeping_with_frank": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_help_diana_kitchen": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_eat_from_fridge": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_sketch": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_shower": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_sleep": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_first_sunday_morning": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_marge_interview": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    }
+  }
+}

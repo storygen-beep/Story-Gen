@@ -50,7 +50,7 @@ class GameService:
         self,
         project: Project,
         system_type: str,
-        version: str = "v1",
+        version: str = "v2",
         options: Optional[dict] = None,
     ) -> str:
         """
@@ -353,7 +353,7 @@ class GameService:
         project: Project,
         system_type: str,
         output_dir: str,
-        version: str = "v1",
+        version: str = "v2",
         options: Optional[dict] = None,
         force_copy: bool = False,
         verify_checksums: bool = False,

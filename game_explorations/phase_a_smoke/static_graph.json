@@ -1,0 +1,403 @@
+{
+  "generated_at": "2026-05-13T20:06:41.656Z",
+  "total_passages": 21,
+  "skipped_passages": 0,
+  "parse_errors": 0,
+  "total_edges": 22,
+  "edges_by_kind": {
+    "wiki": 9,
+    "button": 6,
+    "link": 7
+  },
+  "edges": [
+    {
+      "from": "Start",
+      "to": "StartingCanvas_canvas_smoke_intro_Node_1",
+      "display": "✓ I am 18 or older - Enter Game",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1616
+    },
+    {
+      "from": "Start",
+      "to": "AgeBlocked",
+      "display": "✗ I am NOT 18 or older",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1694
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "CanvasReviewList",
+      "display": "📋 Review Canvases",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 3624
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "QuestsPage",
+      "display": "📋 Quests",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"QuestsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 15383
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "MissingMediaPage",
+      "display": "⚠️ Missing Media",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "$flags.debug_mode",
+          "branch": "if"
+        },
+        {
+          "condition": "passage() isnot \"MissingMediaPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 15633
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "QuestsPage",
+      "display": "📋 Quests",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"QuestsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 15887
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "TipsPage",
+      "display": "💡 Tips",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.tips_page && setup.tips_page.content",
+          "branch": "if"
+        },
+        {
+          "condition": "passage() isnot \"TipsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 16195
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "StatsPage",
+      "display": "📊 Stats",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"StatsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 16373
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "SchedulePage",
+      "display": "📅 Schedules",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "_npcsWithSchedules.length > 0 || _soloActivities.length > 0",
+          "branch": "if"
+        },
+        {
+          "condition": "passage() isnot \"SchedulePage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 16742
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "FlagsPage",
+      "display": "🚩 Flags",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"FlagsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 17419
+    },
+    {
+      "from": "StoryJournal",
+      "to": "Navigation",
+      "display": "Return to your story",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3322
+    },
+    {
+      "from": "StartingCanvas_canvas_smoke_intro_Node_1",
+      "to": "Location_Entry",
+      "display": "Continue",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 727
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Entry",
+      "display": "Entry",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 88
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Kitchen",
+      "display": "Kitchen",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 122
+    },
+    {
+      "from": "Location_Entry",
+      "to": "Location_Kitchen",
+      "display": "Kitchen",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 693
+    },
+    {
+      "from": "Location_Kitchen",
+      "to": "Location_Entry",
+      "display": "Entry",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 732
+    },
+    {
+      "from": "Canvas_canvas_smoke_random_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Continue",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 699
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_smoke_intro",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 343
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_smoke_random",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 659
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "Navigation",
+      "display": "Back to Game",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 798
+    },
+    {
+      "from": "CanvasReview_canvas_smoke_intro",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 601
+    },
+    {
+      "from": "CanvasReview_canvas_smoke_random",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 567
+    }
+  ],
+  "unresolved_targets": [],
+  "dead_end_passages": [
+    "Story",
+    "AgeBlocked",
+    "StoryCaption",
+    "QuestsPage",
+    "TipsPage",
+    "StatsPage",
+    "SchedulePage",
+    "FlagsPage",
+    "_BrokenExitFallback",
+    "MissingMediaPage"
+  ],
+  "untargeted_passages": [
+    "Story",
+    "Start",
+    "TimeWidgets",
+    "StoryCaption",
+    "StoryJournal",
+    "_BrokenExitFallback",
+    "Canvas_canvas_smoke_random_Node_1"
+  ],
+  "per_passage_stats": {
+    "Story": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": [
+        "meta"
+      ]
+    },
+    "Start": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "AgeBlocked": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "TimeWidgets": {
+      "edge_count": 8,
+      "unresolved": 0,
+      "tags": [
+        "widget",
+        "nobr"
+      ]
+    },
+    "StoryCaption": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "QuestsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "TipsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "StoryJournal": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "StatsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "SchedulePage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "FlagsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "StartingCanvas_canvas_smoke_intro_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Navigation": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "_BrokenExitFallback": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Location_Entry": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Kitchen": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Canvas_canvas_smoke_random_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "MissingMediaPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReviewList": {
+      "edge_count": 3,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_smoke_intro": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_smoke_random": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    }
+  }
+}

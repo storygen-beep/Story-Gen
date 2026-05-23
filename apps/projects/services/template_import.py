@@ -44,6 +44,10 @@ class TemplateProject:
     slug: str
     title: str
     description: str = ""
+    # PRD 48 — Quests Engine V2 opt-in flag. "v1" (default) → existing
+    # [[story_arc.hints.templates]] engine. "v2" → new [[quests.cards]]
+    # engine. Per-game opt-in; other games stay on v1 untouched.
+    quests_engine: str = "v1"
 
 
 @dataclass
@@ -158,6 +162,9 @@ class TemplateClothingItem:
     initial: bool = False  # If true, player starts with this item
     conditions: Dict[str, Any] = field(default_factory=dict)  # v1.0 conditions for wearing
     price: int = 0  # Price in dollars, 0 for initial/free items
+    beauty: int = 0  # Appearance contribution of this garment (worn_beauty reads MAX)
+    corruption: int = 0  # How revealing/lewd; worn_corruption reads MAX. Routes
+    # content only — never mutates the global player.corruption core_trait.
 
 
 @dataclass
@@ -169,15 +176,18 @@ class TemplateClothingRequirements:
 
 # -------- Phone System Data Shapes --------
 
-VALID_PHONE_APP_TYPES = {"chat", "social_feed", "gallery", "dating", "custom"}
+VALID_PHONE_APP_TYPES = {"chat", "social_feed", "gallery", "dating", "custom", "quests", "fast_jobs", "bank"}
 
 
 @dataclass
 class TemplatePhoneApp:
     id: str
-    type: str  # "chat", "social_feed", "gallery", "custom"
+    type: str  # "chat", "social_feed", "gallery", "custom", "quests"
     label: str = ""
     icon: str = ""  # Relative to video_folder, optional
+    # doc 45 G2 — social_feed posting actions (selfie/lewd/nude analog).
+    # Each: {label, corruption_min?, followers_min, followers_max, daily_cap?, counter_trait}
+    post_actions: List[Dict[str, Any]] = field(default_factory=list)
 
 
 @dataclass
@@ -200,6 +210,9 @@ class TemplatePhoneConversation:
     npc: str  # NPC slug (e.g., "npc_alex")
     trigger: Dict[str, Any] = field(default_factory=dict)  # conditions dict
     blocks: List[TemplatePhoneConversationBlock] = field(default_factory=list)
+    # doc 45 G1 — optional toast text shown when this conversation is delivered
+    # (its trigger first satisfied). Empty ⇒ default "📱 New message".
+    notify: str = ""
 
 
 @dataclass
@@ -213,6 +226,9 @@ class TemplatePhonePost:
     likes: int = 0
     trigger: Dict[str, Any] = field(default_factory=dict)
     search_queries: List[str] = field(default_factory=list)
+    # doc 45 G1 — optional toast text shown when this post is delivered.
+    # Empty ⇒ default "📱 New post".
+    notify: str = ""
 
 
 @dataclass
@@ -237,6 +253,24 @@ class TemplatePhoneDailyTopic:
     npc_response: str = ""
     effects: List[Dict[str, Any]] = field(default_factory=list)
     conditions: Dict[str, Any] = field(default_factory=dict)
+    # doc 45 G3 — photo quick-action extensions (all optional).
+    # image: a media path rendered as a sent-photo bubble.
+    # corruption_min: lock the action until player corruption ≥ this (🔒 + note).
+    # cooldown: "per_topic" ⇒ this topic has its OWN once-per-day cap (RTS photo
+    #   actions); default ("") keeps the legacy per-NPC 1/day cap.
+    image: str = ""
+    corruption_min: Optional[int] = None
+    cooldown: str = ""
+
+
+@dataclass
+class TemplatePhoneGalleryItem:
+    """doc 45 G8 — a gallery image, optionally trigger-gated + clickable (link)."""
+    id: str
+    image: str = ""
+    caption: str = ""
+    trigger: Dict[str, Any] = field(default_factory=dict)
+    link: str = ""  # optional passage to open on click (PornCenter "watch")
 
 
 @dataclass
@@ -247,6 +281,10 @@ class TemplatePhone:
     posts: List[TemplatePhonePost] = field(default_factory=list)
     profiles: List[TemplatePhoneProfile] = field(default_factory=list)
     daily_topics: List[TemplatePhoneDailyTopic] = field(default_factory=list)
+    gallery_items: List[TemplatePhoneGalleryItem] = field(default_factory=list)
+    # doc 45 G11 — when set, the sidebar phone button shows only once this
+    # player flag is true (the phone is "acquired" in-world). "" = always shown.
+    purchase_flag: str = ""
 
 
 @dataclass
@@ -285,6 +323,16 @@ class GameTemplate:
     phone: Optional[TemplatePhone] = None
     # Recurring passes (gym, bus, etc.)
     passes: List[TemplatePass] = field(default_factory=list)
+    # doc 45 G4 — quests (story objectives with steps + journal)
+    quests: List["TemplateQuest"] = field(default_factory=list)
+    # PRD 48 — Quests Engine V2 cards. Populated only when project.quests_engine
+    # == "v2". Empty list for V1 games (which keep using story_arc.hints.templates).
+    quests_cards: List["QuestsCard"] = field(default_factory=list)
+    # doc 45 G7 — optional corruption tier thresholds (default [0,5,15,30,45])
+    corruption_tiers: Optional[List[int]] = None
+    # doc 45 G9 — economy: fast jobs + bank
+    fast_jobs: List["TemplateFastJob"] = field(default_factory=list)
+    bank: Optional["TemplateBank"] = None
     # Consumable items (groceries, art supplies, etc.)
     items: List[TemplateItem] = field(default_factory=list)
     # Visual theme
@@ -300,6 +348,10 @@ class GameTemplate:
     # the 🎯 goal block. Authored under [[traits.labels]] / [[flags.labels]].
     trait_labels: List["TemplateTraitLabel"] = field(default_factory=list)
     flag_labels: List["TemplateFlagLabel"] = field(default_factory=list)
+    # Tips page — game-level mechanics surface (decay rates, time costs, what
+    # affects diner tips, etc.). Authored under [ui.tips_page] in TOML. None
+    # = page + sidebar button not emitted; runtime-conditional.
+    tips_page: Optional["TemplateTipsPage"] = None
 
 
 @dataclass
@@ -324,13 +376,28 @@ class TemplateFlagLabel:
 
 
 @dataclass
+class TemplateTipsPage:
+    """Content for the standalone :: TipsPage passage. Universal game mechanics
+    that would otherwise be repeated as per-template tips on every quest card
+    live here instead. Engine prints `content` verbatim into the passage —
+    author writes raw HTML so formatting is predictable without a markdown pass.
+    """
+    title: str = "Tips"
+    content: str = ""
+
+
+@dataclass
 class TemplateDailyTick:
     """Effects that fire once per in-game day at advanceDay() rollover.
 
-    Today only flagEffects are supported. The hook calls window.applyFlagEffect
-    directly (no notification queueing) so daily clears are silent.
+    `flagEffects` clear/set daily-cooldown flags (silent, via applyFlagEffect).
+    `traitEffects` (doc 40) apply trait deltas each day via applyAndNotifyTrait —
+    this is the RTS arousal "daily auto-rise": e.g. player arousal +1 (cap 10),
+    NPC arousal +1 (cap 3). Each entry reuses the choice-effect shape
+    (targetType/npcId/trait/op/value/clamp/cap).
     """
     flagEffects: List[TemplateFlagEffect] = field(default_factory=list)
+    traitEffects: List[TemplateChoiceEffect] = field(default_factory=list)
 
 
 @dataclass
@@ -340,10 +407,17 @@ class TemplateStageHelper:
     Helpers reference primitive condition types only — recursion (helper
     references helper) is rejected at validate() time. Single-level lookup
     in runtime keeps cycle risk zero.
+
+    `dev_only` (Pattern 2 v2.2, 2026-05-04): silences the flag-setter-
+    coverage validator warning. Set to True when a helper intentionally
+    references a flag that has no canonical canvas setter — i.e., the
+    next stage is reachable only via dev shortcuts in the current scope.
+    See template_import.py validate() block for the check.
     """
     name: str
     description: str = ""
     conditions: Dict[str, Any] = field(default_factory=dict)
+    dev_only: bool = False
 
 
 # -------- Story Data Shapes (v0.2) --------
@@ -374,6 +448,33 @@ class TemplateTrigger:
     # explaining when it will be available again. Default off (silent filter).
     show_when_blocked: bool = False
     cooldown_message: Optional[str] = None  # custom text; falls back to a generic message
+    # Lane 2 anti-toggle cooldown (L2-2 doctrine fix, 2026-05-12).
+    # When non-empty, this canvas only fires if the player entered the current
+    # location from one of these locations. Empty list = fire on any entry.
+    # Build resolves slugs → runtime passage names at help_data emission.
+    # NAMING: chose `entry_only_from` to avoid collision with Location.entry_from
+    # (the location-hierarchy parent field used by back-navigation).
+    entry_only_from: List[str] = field(default_factory=list)
+    # Lane 3 dispatcher substitution rules (PRD 25 §4.1).
+    # Each rule shape:
+    #   { "target_canvas_id": str, "chance": float, "conditions": Optional[Dict] }
+    # Author writes target_canvas_id as a slug (matches canvas.id in TOML);
+    # the generator resolves slug→UUID at engine emission time.
+    # When non-empty, the canvas's body is preceded by a substitution check —
+    # if any rule matches (target valid + conditions pass + dice hit), the
+    # target canvas plays in place of the parent.
+    substitutions: List[Dict[str, Any]] = field(default_factory=list)
+    # When True, this canvas is excluded from renderNpcPortraits +
+    # renderSoloActivities + selectAutoFireCanvasForLocation (PRD 25 §5.5).
+    # Reachable ONLY as the target of another canvas's substitution rule.
+    substitution_only: bool = False
+    # Lane 2/3 NPC-presence gate (Phase A, 2026-05-14). When set, the engine
+    # ANDs this with all existing gates: the canvas only fires if the named
+    # NPC is currently co-located with the player per their declared
+    # [[npcs.schedules]]. Lets authors drop per-canvas location+time gates in
+    # favor of consulting the NPC's single source of truth. Back-compat:
+    # canvases that still carry `trigger.schedules` keep working (AND-gate).
+    requires_npc: Optional[str] = None
 
 
 @dataclass
@@ -387,6 +488,11 @@ class TemplateChoiceEffect:
     cap: Optional[Any] = None
     # Optional flag field - allows flag effects mixed into effects array
     flag: Optional[str] = None
+    # Optional condition gate (doc 45 G6). When set on a [engine.daily_tick]
+    # effect, the effect applies on day rollover ONLY if these conditions are
+    # satisfied. Standard {version, logic, items} block. None ⇒ unconditional
+    # (today's behavior).
+    conditions: Optional[Dict[str, Any]] = None
 
 
 @dataclass
@@ -395,6 +501,8 @@ class TemplateFlagEffect:
     npcId: Optional[str] = None
     flag: str = ""
     op: str = "set"  # 'set'|'unset'|'toggle' — runtime defaults to set when unrecognized
+    # Optional condition gate (doc 45 G6) — see TemplateChoiceEffect.conditions.
+    conditions: Optional[Dict[str, Any]] = None
 
 
 @dataclass
@@ -403,6 +511,37 @@ class TemplateModifierEffect:
     name: str = ""  # display name (e.g., "Tipsy")
     duration_hours: int = 1  # how long it lasts in game hours
     trait_offsets: Dict[str, float] = field(default_factory=dict)  # {trait: offset} for condition checks
+
+
+@dataclass
+class TemplateQuest:
+    """doc 45 G4 — a quest with ordered steps. Each `steps[i]` is the journal
+    text for step i. Driven by `questEffects` on choices (start/update/cancel/
+    complete) and read by the `quest` condition type + the Quests phone app."""
+    id: str = ""
+    name: str = ""
+    steps: List[str] = field(default_factory=list)
+    repeatable: bool = False
+
+
+@dataclass
+class TemplateFastJob:
+    """doc 45 G9 — a repeatable money job. Worked from the Fast Jobs phone app."""
+    id: str = ""
+    name: str = ""
+    income: int = 0
+    xp_req: int = 0          # fast-jobs XP needed to unlock
+    cooldown_days: int = 0   # days locked after working it
+    time_period: str = ""    # optional game.time gate (e.g. "M","A")
+    money_trait: str = "money"
+
+
+@dataclass
+class TemplateBank:
+    """doc 45 G9 — savings account: deposit/withdraw + daily interest."""
+    enabled: bool = False
+    interest_rate: float = 0.01
+    money_trait: str = "money"
 
 
 @dataclass
@@ -458,6 +597,12 @@ class TemplateChoice:
     # Rejection system: controls what happens when conditions are NOT met
     show_when_locked: bool = False  # If True, show choice greyed out when conditions fail
     locked_text: str = ""  # Tooltip/reason text shown when locked (e.g., "She's not ready")
+    # S4 (2026-05-06) — RTS-style threshold notification on locked-choice click.
+    # When set + show_when_locked=True (Mode A — greyed-out, no rejection node),
+    # clicking the locked choice fires a warning toast publishing the threshold
+    # in-character. e.g., "I'd need to know him better — at least 15 trust."
+    # Mirrors RTS <<NotifyCorruption N>> pattern (doc 13 §7.4 + doc 22 §11).
+    locked_text_threshold: str = ""
     rejection_node: Optional[str] = None  # Node to redirect to on rejection (clickable even locked)
     rejection_effects: List[TemplateChoiceEffect] = field(default_factory=list)  # Effects on rejection
     # Temporary modifier system: apply short-lived trait offsets to condition checks
@@ -466,6 +611,10 @@ class TemplateChoice:
     pass_effects: List[Dict[str, str]] = field(default_factory=list)
     # Inventory system: add/remove consumable items
     item_effects: List[Dict[str, Any]] = field(default_factory=list)
+    # doc 45 G4: quest mutations — [{quest, op:start|update|cancel|complete, step?}]
+    quest_effects: List[Dict[str, Any]] = field(default_factory=list)
+    # doc 45 G5: scheduled (delayed) events — [{delayDays, action, flag?/quest?/conversation?}]
+    schedule_effects: List[Dict[str, Any]] = field(default_factory=list)
     # E6: per-choice text variants — first match wins, falls back to `text`.
     # Each variant: {"text": str, "conditions": {version, items}}.
     text_variants: List[Dict[str, Any]] = field(default_factory=list)
@@ -613,6 +762,10 @@ class TemplateHintTemplate:
     # Quests page. When stage_npc is set on the condition, npc_id defaults
     # to it; otherwise authors set npc_id explicitly to scope the hint.
     npc_id: Optional[str] = None
+    # Picker priority — higher wins. Default 0. Use to flag crisis / pressure
+    # variants that should override an ambient line of equal specificity.
+    # See picker rule in v1.py:setup.getStageHintForNPC.
+    priority: int = 0
     # Pattern 2 (2026-05-01): optional player-facing tip rendered as 💡 line
     # below the auto-rendered goal block. Used for strategic advice that
     # doesn't fit structured gate data ("Trust decays 1.0/day if ignored").
@@ -621,6 +774,160 @@ class TemplateHintTemplate:
     # from the helper conditions or canvas trigger conditions. When false,
     # engine treats `text` as fully authored (legacy behavior).
     auto_goal: bool = True
+    # E17 (2026-05-06) — author-supplied override for the ready-frame text
+    # (the line shown when the next-stage helper has cleared but the stage
+    # trait hasn't advanced yet). Replaces the engine default
+    # ("All gates cleared. Visit X to seal the moment.") with in-character
+    # prose. Empty string = use engine default. Per-NPC-per-stage author
+    # control over the player-facing "ready" surface.
+    ready_text: str = ""
+    # 2026-05-09 — terminal-stage badge. When true, the engine renders a
+    # "✓ Arc complete" frame in the goal block instead of trying to surface
+    # a non-existent next-stage helper. Author opt-in: set true on the hint
+    # template for the highest defined stage of an NPC's slice. Bypasses
+    # auto_goal=false suppression so closure displays even on terminal
+    # stages whose author left auto_goal=false.
+    arc_complete: bool = False
+    # 2026-05-10 — terminal-stage flag-based closure target. When set,
+    # computeHintGoal looks up the named flag's setter canvas via
+    # _findFlagSetterCanvas and renders a Ready frame (📍 + 🕒) so the
+    # player knows where/when to consummate the arc. Once the flag flips
+    # true, engine renders the ✓ Arc complete badge instead. Mutex with
+    # arc_complete=true (which renders the badge unconditionally). Author
+    # pattern: pair arc_closure_flag (pre) + arc_complete=true (post)
+    # templates gated by trait_checks on the same flag (is_false / is_true).
+    arc_closure_flag: str = ""
+
+
+# ─── PRD 48: Quests Engine V2 ───────────────────────────────────────────────
+# New schema replacing [[story_arc.hints.templates]]. Authors write one card
+# per state-window per arc; the picker swaps cards as state crosses. Each
+# card carries everything the renderer needs — no helper indirection, no
+# transition canvases, no label registry. See docs 47 + 48.
+
+
+@dataclass
+class QuestsCondition:
+    """A single condition item used in QuestsCard.when (routing) and
+    QuestsCard.goals (progress bullets). Flat shape — flag XOR trait, not
+    both. `label` only required on goals items targeting traits/counters
+    (it's what renders next to each ◯ bullet)."""
+
+    # Flag gate: set `flag` + `op` ("is_true" | "is_false"). `label` optional.
+    flag: Optional[str] = None
+    # Trait / counter gate: set `trait`, `subject` ("player" | "npc"), `op`
+    # ("gte" | "lte" | "gt" | "lt" | "eq"), `value`, and `label`.
+    # When subject == "npc", `npc_id` is required.
+    trait: Optional[str] = None
+    subject: Optional[str] = None
+    npc_id: Optional[str] = None
+    op: str = ""
+    value: Optional[float] = None
+    label: Optional[str] = None
+
+
+@dataclass
+class QuestsCard:
+    """A single Quests page card.
+
+    Routes to a section by presence/absence of `npc_id`:
+      - npc_id set → renders in that NPC's section (one card per NPC per render)
+      - npc_id absent → renders in the top "Story Goals" section (multiple cards)
+
+    The engine picks the winning card per scope by walking `when` against
+    current state, sorting matches by (priority desc, when.length desc,
+    file-order asc). Story Goals additionally group by optional `group` key.
+    """
+
+    text: str = ""
+    ready_text: Optional[str] = None
+    tip: Optional[str] = None
+    npc_id: Optional[str] = None
+    priority: int = 0
+    # Story Goal only — cards sharing a group value collapse to one (highest
+    # priority match wins). Lets authors write crisis variants of the same
+    # goal. Ignored on NPC cards (validator warns).
+    group: Optional[str] = None
+    # Routing — ALL items must evaluate true for this card to win the picker.
+    when: List[QuestsCondition] = field(default_factory=list)
+    # The 🎯 To advance bullets. Each item renders as ◯ <label> — X / Y.
+    # When goals is empty, the card has no climbing phase (goalState.allMet
+    # is vacuously true).
+    goals: List[QuestsCondition] = field(default_factory=list)
+    # When all goals met AND ready_canvas is set, the renderer emits a
+    # 🔓 Ready frame with 📍 + 🕒 pulled from the named canvas's metadata
+    # (location + first schedule entry). Optional — pure-mechanic cards
+    # leave this unset.
+    ready_canvas: Optional[str] = None
+    # Terminal — when true AND when matches, renderer emits ✓ Arc complete
+    # regardless of goals/ready_canvas. Author opt-in for the final card in
+    # an arc.
+    terminal: bool = False
+
+
+def _parse_quests_condition(d: Dict[str, Any]) -> QuestsCondition:
+    """Parse a single condition item from a card's `when` or `goals` list."""
+    flag = d.get("flag")
+    trait = d.get("trait")
+    # Coerce stray empty strings to None so the validator sees a clean shape.
+    if not flag:
+        flag = None
+    if not trait:
+        trait = None
+    subject = d.get("subject") or None
+    npc_id = d.get("npc_id") or None
+    op = str(d.get("op", "") or "")
+    raw_value = d.get("value")
+    value: Optional[float] = None
+    if raw_value is not None:
+        try:
+            value = float(raw_value)
+        except (TypeError, ValueError):
+            # Validator will catch this with a clear error.
+            value = None
+    label = d.get("label") or None
+    return QuestsCondition(
+        flag=flag,
+        trait=trait,
+        subject=subject,
+        npc_id=npc_id,
+        op=op,
+        value=value,
+        label=label,
+    )
+
+
+def _parse_quests_card(d: Dict[str, Any]) -> QuestsCard:
+    """Parse one [[quest_cards]] entry into a QuestsCard."""
+    when_items = [
+        _parse_quests_condition(item)
+        for item in (d.get("when") or [])
+        if isinstance(item, dict)
+    ]
+    goals_items = [
+        _parse_quests_condition(item)
+        for item in (d.get("goals") or [])
+        if isinstance(item, dict)
+    ]
+    priority_raw = d.get("priority", 0)
+    try:
+        priority = int(priority_raw) if priority_raw is not None else 0
+    except (TypeError, ValueError):
+        priority = 0
+    terminal_raw = d.get("terminal", False)
+    terminal = bool(terminal_raw) if isinstance(terminal_raw, bool) else False
+    return QuestsCard(
+        text=_require_str(d, "text", ""),
+        ready_text=_require_str(d, "ready_text", "") or None,
+        tip=_require_str(d, "tip", "") or None,
+        npc_id=_require_str(d, "npc_id", "") or None,
+        priority=priority,
+        group=_require_str(d, "group", "") or None,
+        when=when_items,
+        goals=goals_items,
+        ready_canvas=_require_str(d, "ready_canvas", "") or None,
+        terminal=terminal,
+    )
 
 
 @dataclass
@@ -731,6 +1038,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         slug=_require_str(p, "id"),
         title=_require_str(p, "title"),
         description=_require_str(p, "description"),
+        quests_engine=_require_str(p, "quests_engine", "v1"),
     )
 
     # Optional: [time] section (has sensible defaults)
@@ -947,6 +1255,33 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     ],
                     show_when_blocked=bool(trig_def.get("show_when_blocked", False)),
                     cooldown_message=_require_str(trig_def, "cooldown_message", "") or None,
+                    # L2-2 — Lane 2 anti-toggle cooldown. Author writes location slugs;
+                    # validator cross-refs to existing locations. Build resolves to
+                    # runtime passage names at help_data emission (v1.py).
+                    entry_only_from=[
+                        str(loc).strip()
+                        for loc in (trig_def.get("entry_only_from") or [])
+                        if isinstance(loc, str) and loc.strip()
+                    ],
+                    # PRD 25 — Lane 3 dispatcher substitution rules. Each rule:
+                    #   { "target_canvas_id": str (slug), "chance": float, "conditions": Optional[Dict] }
+                    # Validation (cross-canvas reference + chance bounds + conflict warnings)
+                    # happens later in validate(). Slug→UUID resolution happens at
+                    # engine emission time (v1.py).
+                    substitutions=[
+                        {
+                            "target_canvas_id": str(sub.get("target_canvas_id", "")),
+                            "chance": float(sub.get("chance", 0)),
+                            "conditions": sub.get("conditions") or None,
+                        }
+                        for sub in (trig_def.get("substitutions") or [])
+                        if isinstance(sub, dict) and sub.get("target_canvas_id")
+                    ],
+                    substitution_only=bool(trig_def.get("substitution_only", False)),
+                    # Phase A — Lane 2/3 NPC presence gate. AND-gates with all
+                    # other trigger conditions; engine resolves NPC location
+                    # against [[npcs.schedules]] at fire-time.
+                    requires_npc=(_require_str(trig_def, "requires_npc", "") or None),
                 )
 
             # Nodes
@@ -1071,6 +1406,27 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                                 "quantity": int(ie.get("quantity", 1)),
                             })
 
+                    # doc 45 G4: parse questEffects (quest mutations)
+                    quest_effs: List[Dict[str, Any]] = []
+                    for qe in ch.get("questEffects") or []:
+                        if isinstance(qe, dict) and qe.get("quest"):
+                            entry = {"quest": str(qe["quest"]),
+                                     "op": str(qe.get("op", "start"))}
+                            if qe.get("step") is not None:
+                                entry["step"] = int(qe["step"])
+                            quest_effs.append(entry)
+
+                    # doc 45 G5: parse scheduleEffects (delayed events)
+                    schedule_effs: List[Dict[str, Any]] = []
+                    for se in ch.get("scheduleEffects") or []:
+                        if isinstance(se, dict) and se.get("action"):
+                            entry = {"delayDays": int(se.get("delayDays", 1)),
+                                     "action": str(se["action"])}
+                            for k in ("flag", "quest", "conversation", "step"):
+                                if se.get(k) is not None:
+                                    entry[k] = se[k]
+                            schedule_effs.append(entry)
+
                     # E6: parse text_variants — list of {text, conditions} dicts.
                     text_variants_parsed: List[Dict[str, Any]] = []
                     for v_raw in ch.get("text_variants") or []:
@@ -1101,11 +1457,14 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                             conditions=_require_dict(ch, "conditions"),
                             show_when_locked=bool(ch.get("show_when_locked", False)),
                             locked_text=_require_str(ch, "locked_text", ""),
+                            locked_text_threshold=_require_str(ch, "locked_text_threshold", ""),
                             rejection_node=_require_str(ch, "rejection_node", "") or None,
                             rejection_effects=rej_effs,
                             modifier_effects=mod_effs,
                             pass_effects=pass_effs,
                             item_effects=item_effs,
+                            quest_effects=quest_effs,
+                            schedule_effects=schedule_effs,
                             text_variants=text_variants_parsed,
                         )
                     )
@@ -1304,18 +1663,40 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     tpl_npc = _require_str(ht, "npc_id", "") or None
                     if not tpl_npc and cond_obj and cond_obj.stage_npc:
                         tpl_npc = cond_obj.stage_npc
+                    # Optional priority (picker tiebreaker; default 0).
+                    tpl_priority_raw = ht.get("priority", 0)
+                    try:
+                        tpl_priority = int(tpl_priority_raw) if tpl_priority_raw is not None else 0
+                    except (TypeError, ValueError):
+                        tpl_priority = 0
+                    if tpl_priority < 0:
+                        tpl_priority = 0
                     # Pattern 2: tip + auto_goal (both optional; auto_goal defaults true)
                     tpl_tip = _require_str(ht, "tip", "") or None
                     tpl_auto_goal = ht.get("auto_goal", True)
                     if not isinstance(tpl_auto_goal, bool):
                         tpl_auto_goal = True
+                    # E17 (2026-05-06): per-hint ready-frame text override.
+                    tpl_ready_text = _require_str(ht, "ready_text", "")
+                    # 2026-05-09: terminal-stage badge opt-in.
+                    tpl_arc_complete = ht.get("arc_complete", False)
+                    if not isinstance(tpl_arc_complete, bool):
+                        tpl_arc_complete = False
+                    # 2026-05-10: flag-based arc closure target.
+                    tpl_arc_closure_flag = ht.get("arc_closure_flag", "") or ""
+                    if not isinstance(tpl_arc_closure_flag, str):
+                        tpl_arc_closure_flag = ""
                     hint_templates.append(
                         TemplateHintTemplate(
                             condition=cond_obj,
                             text=_require_str(ht, "text", ""),
                             npc_id=tpl_npc,
+                            priority=tpl_priority,
                             tip=tpl_tip,
                             auto_goal=tpl_auto_goal,
+                            ready_text=tpl_ready_text,
+                            arc_complete=tpl_arc_complete,
+                            arc_closure_flag=tpl_arc_closure_flag,
                         )
                     )
             hints_obj = TemplateStoryHints(
@@ -1356,6 +1737,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     initial=_require_bool(c_raw, "initial", False),
                     conditions=_require_dict(c_raw, "conditions"),
                     price=int(c_raw.get("price", 0)),
+                    beauty=_require_int(c_raw, "beauty", 0),
+                    corruption=_require_int(c_raw, "corruption", 0),
                 )
             )
 
@@ -1393,6 +1776,61 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 duration_days=_require_int(p, "duration_days", 30),
                 icon=_require_str(p, "icon", ""),
             )
+        )
+
+    # ── Quests (doc 45 G4) ──
+    quests_raw = data.get("quests", []) or []
+    quests: List[TemplateQuest] = []
+    for qi, q in enumerate(quests_raw):
+        if not isinstance(q, dict):
+            continue
+        quests.append(
+            TemplateQuest(
+                id=_require_str(q, "id"),
+                name=_require_str(q, "name", ""),
+                steps=[str(s) for s in (q.get("steps") or [])],
+                repeatable=bool(q.get("repeatable", False)),
+            )
+        )
+
+    # ── PRD 48: Quests Engine V2 cards ──
+    # Top-level key is `quest_cards` (flat, not nested under `quests`) to
+    # avoid future namespace collision with doc 45 G4's `[[quests]]` table
+    # array. Only populated when project.quests_engine == "v2"; v1 games
+    # ignore this block entirely.
+    quests_cards_parsed: List[QuestsCard] = []
+    if project.quests_engine == "v2":
+        for qc_raw in (data.get("quest_cards", []) or []):
+            if not isinstance(qc_raw, dict):
+                continue
+            quests_cards_parsed.append(_parse_quests_card(qc_raw))
+
+    # ── Fast jobs (doc 45 G9) ──
+    fast_jobs_raw = data.get("fast_jobs", []) or []
+    fast_jobs: List[TemplateFastJob] = []
+    for fj in fast_jobs_raw:
+        if not isinstance(fj, dict):
+            continue
+        fast_jobs.append(
+            TemplateFastJob(
+                id=_require_str(fj, "id"),
+                name=_require_str(fj, "name", ""),
+                income=_require_int(fj, "income", 0),
+                xp_req=_require_int(fj, "xp_req", 0),
+                cooldown_days=_require_int(fj, "cooldown_days", 0),
+                time_period=_require_str(fj, "time_period", ""),
+                money_trait=_require_str(fj, "money_trait", "money") or "money",
+            )
+        )
+
+    # ── Bank (doc 45 G9) ──
+    bank_obj: Optional[TemplateBank] = None
+    bank_raw = data.get("bank")
+    if isinstance(bank_raw, dict) and _require_bool(bank_raw, "enabled", True):
+        bank_obj = TemplateBank(
+            enabled=True,
+            interest_rate=float(bank_raw.get("interest_rate", 0.01) or 0.01),
+            money_trait=_require_str(bank_raw, "money_trait", "money") or "money",
         )
 
     # ── Items (consumable inventory) ──
@@ -1465,6 +1903,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     type=_require_str(a_raw, "type", "chat"),
                     label=_require_str(a_raw, "label", ""),
                     icon=_require_str(a_raw, "icon", ""),
+                    post_actions=list(a_raw.get("post_actions") or []),
                 ))
 
             phone_conversations: List[TemplatePhoneConversation] = []
@@ -1495,6 +1934,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     npc=_require_str(c_raw, "npc", ""),
                     trigger=trigger_cond,
                     blocks=conv_blocks,
+                    notify=_require_str(c_raw, "notify", ""),
                 ))
 
             # Parse posts (social feed)
@@ -1512,6 +1952,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     likes=_require_int(p_raw, "likes", 0),
                     trigger=p_raw.get("trigger", {}) or {},
                     search_queries=[str(q) for q in _require_list(p_raw, "search_queries")],
+                    notify=_require_str(p_raw, "notify", ""),
                 ))
 
             # Parse profiles (dating app)
@@ -1536,6 +1977,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
             for dti, dt_raw in enumerate(phone_raw.get("daily_topics") or []):
                 if not isinstance(dt_raw, dict):
                     continue
+                _dt_corr_min = dt_raw.get("corruption_min")
                 phone_daily_topics.append(TemplatePhoneDailyTopic(
                     id=_require_str(dt_raw, "id"),
                     npc=_require_str(dt_raw, "npc", ""),
@@ -1543,6 +1985,21 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     npc_response=_require_str(dt_raw, "npc_response", ""),
                     effects=dt_raw.get("effects", []) or [],
                     conditions=dt_raw.get("conditions", {}) or {},
+                    image=_require_str(dt_raw, "image", ""),
+                    corruption_min=int(_dt_corr_min) if _dt_corr_min is not None else None,
+                    cooldown=_require_str(dt_raw, "cooldown", ""),
+                ))
+
+            phone_gallery_items: List[TemplatePhoneGalleryItem] = []
+            for gi, g_raw in enumerate(phone_raw.get("gallery_items") or []):
+                if not isinstance(g_raw, dict):
+                    continue
+                phone_gallery_items.append(TemplatePhoneGalleryItem(
+                    id=_require_str(g_raw, "id"),
+                    image=_require_str(g_raw, "image", ""),
+                    caption=_require_str(g_raw, "caption", ""),
+                    trigger=g_raw.get("trigger", {}) or {},
+                    link=_require_str(g_raw, "link", ""),
                 ))
 
             phone_obj = TemplatePhone(
@@ -1552,14 +2009,20 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 posts=phone_posts,
                 profiles=phone_profiles,
                 daily_topics=phone_daily_topics,
+                gallery_items=phone_gallery_items,
+                purchase_flag=_require_str(phone_raw, "purchase_flag", ""),
             )
 
     # ── Day-rollover hook ── [engine.daily_tick]
     daily_tick_obj: Optional[TemplateDailyTick] = None
     # ── Stage helpers ── [[engine.stage_helpers]]
     stage_helpers: List[TemplateStageHelper] = []
+    corruption_tiers_obj: Optional[List[int]] = None
     engine_raw = data.get("engine")
     if isinstance(engine_raw, dict):
+        _ct_raw = engine_raw.get("corruption_tiers")
+        if isinstance(_ct_raw, list) and _ct_raw:
+            corruption_tiers_obj = [int(x) for x in _ct_raw]
         dt_raw = engine_raw.get("daily_tick")
         if isinstance(dt_raw, dict):
             dt_flag_effs: List[TemplateFlagEffect] = []
@@ -1572,9 +2035,28 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                         npcId=_require_str(fe, "npcId", "") or None,
                         flag=_require_str(fe, "flag", ""),
                         op=_require_str(fe, "op", "set") or "set",
+                        conditions=fe.get("conditions") or None,
                     )
                 )
-            daily_tick_obj = TemplateDailyTick(flagEffects=dt_flag_effs)
+            dt_trait_effs: List[TemplateChoiceEffect] = []
+            for te in dt_raw.get("traitEffects") or []:
+                if not isinstance(te, dict):
+                    continue
+                dt_trait_effs.append(
+                    TemplateChoiceEffect(
+                        targetType=str(te.get("targetType", "player")),
+                        npcId=_require_str(te, "npcId", "") or None,
+                        trait=_require_str(te, "trait", ""),
+                        op=_require_str(te, "op", "add") or "add",
+                        value=te.get("value", 0),
+                        clamp=te.get("clamp", None),
+                        cap=te.get("cap", None),
+                        conditions=te.get("conditions") or None,
+                    )
+                )
+            daily_tick_obj = TemplateDailyTick(
+                flagEffects=dt_flag_effs, traitEffects=dt_trait_effs
+            )
         for sh_raw in engine_raw.get("stage_helpers") or []:
             if not isinstance(sh_raw, dict):
                 continue
@@ -1583,8 +2065,22 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     name=_require_str(sh_raw, "name", ""),
                     description=_require_str(sh_raw, "description", ""),
                     conditions=_require_dict(sh_raw, "conditions"),
+                    dev_only=bool(sh_raw.get("dev_only", False)),
                 )
             )
+
+    # Tips page (game-level mechanics surface). Authored under [ui.tips_page].
+    tips_page_obj: Optional[TemplateTipsPage] = None
+    ui_raw = data.get("ui")
+    if isinstance(ui_raw, dict):
+        tp_raw = ui_raw.get("tips_page")
+        if isinstance(tp_raw, dict):
+            tp_content = _require_str(tp_raw, "content", "")
+            if tp_content:
+                tips_page_obj = TemplateTipsPage(
+                    title=_require_str(tp_raw, "title", "Tips") or "Tips",
+                    content=tp_content,
+                )
 
     # Pattern 2: label registries — top-level [[traits.labels]] / [[flags.labels]]
     trait_labels: List[TemplateTraitLabel] = []
@@ -1643,12 +2139,18 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         phone_enabled=phone_enabled,
         phone=phone_obj,
         passes=passes,
+        quests=quests,
+        quests_cards=quests_cards_parsed,
         items=items,
         theme=theme_obj,
         daily_tick=daily_tick_obj,
         stage_helpers=stage_helpers,
+        corruption_tiers=corruption_tiers_obj,
+        fast_jobs=fast_jobs,
+        bank=bank_obj,
         trait_labels=trait_labels,
         flag_labels=flag_labels,
+        tips_page=tips_page_obj,
     )
 
 
@@ -1799,18 +2301,11 @@ def validate(template: GameTemplate) -> List[str]:
         if n.id in seen_npc_ids:
             errors.append(f"duplicate npc id: {n.id}")
         seen_npc_ids.add(n.id)
-        # NPC schedules are deprecated — NPC presence is derived from canvas triggers at runtime.
-        # We still parse them for backward compatibility but warn about their presence.
-        # (Validation of schedule fields kept for backward compat, but soft-deprecated)
-        if n.schedules:
-            import warnings
-            warnings.warn(
-                f"npcs[{i}] '{n.id}' has [[npcs.schedules]] defined. "
-                f"NPC schedules are deprecated — NPC presence is derived from canvas triggers at runtime. "
-                f"Consider removing [[npcs.schedules]] sections.",
-                DeprecationWarning,
-                stacklevel=2,
-            )
+        # NPC schedules un-deprecated 2026-05-14 — now the canonical source
+        # of truth for engine.getNpcLocation(). When declared, the engine
+        # consults [[npcs.schedules]] FIRST and falls back to canvas-derived
+        # presence only for NPCs without explicit schedules. See memory
+        # `v2_engine_fork.md` + the Phase A plan for context.
         for si, sch in enumerate(n.schedules):
             # Validate weekdays (0-6)
             for w in sch.weekdays:
@@ -2185,6 +2680,33 @@ def validate(template: GameTemplate) -> List[str]:
 
     loc_index = {l.id: l for l in template.locations}
 
+    # Node universe for resolving choice/exit_block node references.
+    # nodeIds in the TOML come in two forms:
+    #   - Bare:      "result_makeout"                          → resolves within the containing canvas
+    #   - Qualified: "loop_franks_bedroom_sex.result_makeout"  → resolves globally
+    # Build both lookup structures once, then use them in the per-node validator below.
+    nodes_by_canvas: Dict[str, Set[str]] = {
+        c.id: {n.id for n in c.nodes}
+        for c in getattr(template, "canvases", [])
+    }
+    all_qualified_nodes: Set[str] = {
+        f"{c.id}.{n.id}"
+        for c in getattr(template, "canvases", [])
+        for n in c.nodes
+    }
+
+    def _node_ref_resolves(ref: str, containing_canvas: str) -> bool:
+        """A nodeId is either bare (same-canvas) or qualified (canvas.node)."""
+        if not ref:
+            return False
+        if "." in ref:
+            return ref in all_qualified_nodes
+        return ref in nodes_by_canvas.get(containing_canvas, set())
+
+    # Build NPC id set once for trigger.npc + trigger.requires_npc validators.
+    # (npc_id_set built earlier at line ~2198 is scoped inside phone validation.)
+    canvas_npc_ids = {n.id for n in template.npcs}
+
     for ci, c in enumerate(getattr(template, "canvases", [])):
         if not _is_valid_slug(c.id):
             errors.append(f"canvases[{ci}].id must be lowercase snake_case")
@@ -2196,6 +2718,46 @@ def validate(template: GameTemplate) -> List[str]:
             # Location is optional for story canvases (they fire on day/flag conditions)
             if c.trigger.location and c.trigger.location not in loc_index:
                 errors.append(f"canvases[{ci}].trigger.location not found in locations")
+
+            # Phase A — Lane 2/3 NPC presence gate validation.
+            if c.trigger.requires_npc and c.trigger.requires_npc not in canvas_npc_ids:
+                errors.append(
+                    f"canvases[{ci}].trigger.requires_npc "
+                    f"'{c.trigger.requires_npc}' not found in npcs"
+                )
+            elif c.trigger.requires_npc and c.trigger.requires_npc in canvas_npc_ids:
+                # Phase A author trap (2026-05-14 PM): if requires_npc is set
+                # but the NPC has no declared [[npcs.schedules]], runtime
+                # presence falls back to canvas-derived inference — which can
+                # include the very canvas that requires the NPC. Almost always
+                # an authoring oversight. Warn, don't block.
+                _trap_npc = next(
+                    (n for n in template.npcs if n.id == c.trigger.requires_npc),
+                    None,
+                )
+                if _trap_npc is not None and not _trap_npc.schedules:
+                    import warnings as _w
+                    _w.warn(
+                        f"canvases[{ci}] '{c.id}' has requires_npc = "
+                        f"'{c.trigger.requires_npc}' but that NPC has no "
+                        f"declared [[npcs.schedules]]. Runtime presence will "
+                        f"fall back to canvas-derived inference, which can "
+                        f"include this very canvas in the inference set — "
+                        f"usually not what you want. Add a [[npcs.schedules]] "
+                        f"entry for '{c.trigger.requires_npc}'.",
+                        UserWarning,
+                        stacklevel=2,
+                    )
+
+            # Gap-fix (2026-05-14) — trigger.npc was previously read by 3
+            # downstream validators (substitution_only conflict + repeatable
+            # uniqueness checks) but never cross-referenced against the npcs
+            # list. Now it is.
+            if c.trigger.npc and c.trigger.npc not in canvas_npc_ids:
+                errors.append(
+                    f"canvases[{ci}].trigger.npc "
+                    f"'{c.trigger.npc}' not found in npcs"
+                )
             for si, s in enumerate(c.trigger.schedules):
                 for w in s.weekdays:
                     if not isinstance(w, int) or w < 0 or w > 6:
@@ -2212,6 +2774,74 @@ def validate(template: GameTemplate) -> List[str]:
                     errors.append(
                         f"canvases[{ci}].trigger.schedules[{si}].end_time must be HH:MM or omitted"
                     )
+
+            # L2-2 — Lane 2 anti-toggle cooldown: validate entry_only_from
+            # location slugs exist + warn if used on non-random canvas.
+            for ei, loc_id in enumerate(c.trigger.entry_only_from or []):
+                if loc_id not in loc_index:
+                    errors.append(
+                        f"canvases[{ci}].trigger.entry_only_from[{ei}] '{loc_id}' "
+                        f"does not match any location in this project"
+                    )
+            if (c.trigger.entry_only_from or []) and c.trigger.trigger_mode != "random":
+                import warnings as _w
+                _w.warn(
+                    f"canvases[{ci}] '{c.id}' has entry_only_from set but trigger_mode "
+                    f"is '{c.trigger.trigger_mode}'. The anti-toggle filter only applies "
+                    f"to random-mode encounters (checkRandomEncounters). The field will "
+                    f"be ignored on manual-mode canvases.",
+                    UserWarning,
+                    stacklevel=2,
+                )
+
+            # PRD 25 — Lane 3 substitution rule validation
+            for ri, rule in enumerate(c.trigger.substitutions or []):
+                ctx = f"canvases[{ci}].trigger.substitutions[{ri}]"
+                target_id = rule.get("target_canvas_id")
+                if not target_id:
+                    errors.append(f"{ctx}.target_canvas_id is required")
+                elif target_id not in canvas_ids:
+                    errors.append(
+                        f"{ctx}.target_canvas_id '{target_id}' does not match any canvas in this project"
+                    )
+                chance_val = rule.get("chance")
+                if chance_val is None:
+                    errors.append(f"{ctx}.chance is required")
+                elif not isinstance(chance_val, (int, float)) or chance_val < 0.0 or chance_val > 1.0:
+                    errors.append(f"{ctx}.chance must be a float in [0.0, 1.0], got {chance_val!r}")
+
+            # PRD 25 §4.3 #3 — substitution_only + npcId conflict warning
+            if c.trigger.substitution_only and c.trigger.npc:
+                import warnings as _w
+                _w.warn(
+                    f"canvases[{ci}] '{c.id}' has substitution_only = true AND npc set "
+                    f"('{c.trigger.npc}'). The canvas will be excluded from NPC portrait + "
+                    f"solo activity selectors but the npc reference may indicate authoring intent "
+                    f"to also surface as a portrait. Verify intentional.",
+                    UserWarning,
+                    stacklevel=2,
+                )
+
+            # PRD 25 §4.3 #4 — substitutions + trigger.chance both set warning
+            if (c.trigger.substitutions or []) and c.trigger.chance is not None:
+                import warnings as _w
+                _w.warn(
+                    f"canvases[{ci}] '{c.id}' has both substitutions (Lane 3 dispatcher) AND "
+                    f"trigger.chance set (Lane 2 random encounter). The canvas would behave as both "
+                    f"a substitution dispatcher AND a random-fire encounter. Likely an authoring mistake.",
+                    UserWarning,
+                    stacklevel=2,
+                )
+
+        # Layer 3 — silent-Navigation gate.
+        # Mirrors v1.py:10240 _get_return_location() — if a canvas has no
+        # resolving trigger.location, the engine's return_target falls back to
+        # the literal "Navigation" passage. Any trigger-type exit (explicit OR
+        # default-omitted) on such a canvas silently lands the player on the
+        # global location list. Hard-fail with an explicit suggested fix.
+        return_will_resolve = bool(
+            c.trigger and c.trigger.location and c.trigger.location in loc_index
+        )
 
         # Node IDs unique per canvas
         seen_node_ids: Set[str] = set()
@@ -2238,11 +2868,37 @@ def validate(template: GameTemplate) -> List[str]:
                     errors.append(
                         f"canvases[{ci}].nodes[{ni}].exit_block.config.destinationType must be 'trigger', 'specific', or 'node'"
                     )
+                # Layer 3 — silent-Navigation gate (single-link form).
+                if dest == "trigger" and not return_will_resolve:
+                    eb_text = (eb.text or "").strip() or "<no text>"
+                    errors.append(
+                        f"canvases[{ci}].nodes[{ni}].exit_block ('{c.id}.{n.id}') uses "
+                        f"destinationType='trigger' but canvas has no resolving "
+                        f"trigger.location — runtime return_target would silently "
+                        f"land on the Navigation page. Exit text: {eb_text!r}. "
+                        f"Fix: change destinationType to 'specific' and set "
+                        f"locationId to the location the player came from."
+                    )
                 if dest == "specific":
                     loc_slug = eb.config.get("locationId")
                     if not loc_slug or loc_slug not in loc_index:
                         errors.append(
                             f"canvases[{ci}].nodes[{ni}].exit_block.config.locationId not found in locations"
+                        )
+                if dest == "node":
+                    # exit_block single-link form: destinationId must resolve.
+                    # Silent fallback to trigger location is gone — broken refs hard-fail here.
+                    dest_node_ref = eb.config.get("destinationId")
+                    if not dest_node_ref:
+                        errors.append(
+                            f"canvases[{ci}].nodes[{ni}].exit_block.config.destinationId "
+                            f"required for destinationType 'node'"
+                        )
+                    elif not _node_ref_resolves(dest_node_ref, c.id):
+                        errors.append(
+                            f"canvases[{ci}].nodes[{ni}].exit_block.config.destinationId "
+                            f"'{dest_node_ref}' does not resolve to any node "
+                            f"(bare = same-canvas '{c.id}', qualified = '<canvas>.<node>')"
                         )
             else:
                 for chi, ch in enumerate(eb.choices):
@@ -2250,15 +2906,38 @@ def validate(template: GameTemplate) -> List[str]:
                         errors.append(
                             f"canvases[{ci}].nodes[{ni}].choices[{chi}].targetType invalid"
                         )
+                    # Layer 3 — silent-Navigation gate (choices form).
+                    # Mirrors v1.py:10942 default (`choice.get('targetType', 'trigger')`):
+                    # omitted targetType behaves as 'trigger' at runtime.
+                    effective_tt = ch.targetType or "trigger"
+                    if effective_tt == "trigger" and not return_will_resolve:
+                        ch_text = (ch.text or "").strip() or "<no text>"
+                        errors.append(
+                            f"canvases[{ci}].nodes[{ni}].choices[{chi}] ('{c.id}.{n.id}') "
+                            f"uses targetType='trigger' but canvas has no resolving "
+                            f"trigger.location — runtime return_target would silently "
+                            f"land on the Navigation page. Choice text: {ch_text!r}. "
+                            f"Fix: change targetType to 'location' and add a locationId "
+                            f"for the location the player came from."
+                        )
                     if ch.targetType == "location":
                         if not ch.locationId or ch.locationId not in loc_index:
                             errors.append(
                                 f"canvases[{ci}].nodes[{ni}].choices[{chi}].locationId not found"
                             )
-                    if ch.targetType == "node" and not ch.nodeId:
-                        errors.append(
-                            f"canvases[{ci}].nodes[{ni}].choices[{chi}].nodeId required for targetType 'node'"
-                        )
+                    if ch.targetType == "node":
+                        if not ch.nodeId:
+                            errors.append(
+                                f"canvases[{ci}].nodes[{ni}].choices[{chi}].nodeId required for targetType 'node'"
+                            )
+                        elif not _node_ref_resolves(ch.nodeId, c.id):
+                            # Silent fallback to Navigation is gone — broken refs hard-fail.
+                            errors.append(
+                                f"canvases[{ci}].nodes[{ni}].choices[{chi}].nodeId "
+                                f"'{ch.nodeId}' does not resolve to any node "
+                                f"(bare = same-canvas '{c.id}', qualified = '<canvas>.<node>'); "
+                                f"choice text: {ch.text!r}"
+                            )
                     # Rejection node validation
                     if ch.rejection_node:
                         if ch.rejection_node not in seen_node_ids:
@@ -2316,6 +2995,10 @@ def validate(template: GameTemplate) -> List[str]:
         if c.trigger and c.trigger.is_repeatable
         and (c.trigger.trigger_mode or "manual") != "random"
         and c.trigger.npc  # Only NPC activities — solo activities are exempt
+        and not c.trigger.substitution_only  # PRD 25 — substitution_only canvases
+        # are excluded from NPC portrait + solo activity selectors at runtime,
+        # so they cannot compete for the location's portrait slot. Skip them
+        # in the overlap check to avoid spurious warnings.
     ]
 
     def _schedules_overlap(
@@ -2639,6 +3322,72 @@ def validate(template: GameTemplate) -> List[str]:
                         f"items are not allowed in v1"
                     )
                     break
+            # Restrict OR-logic in stage helpers (2026-05-03).
+            # OR-helpers produce the awkward "Two paths to advance: Path A /
+            # Path B" rendering in the Pattern 2 goal block on the Quests
+            # page. RTS-aligned pattern is to express multi-path goals as
+            # separate transition canvases, each with its own AND-logic gate.
+            sh_logic = (sh.conditions.get("logic") or "AND").upper()
+            if sh_logic == "OR":
+                errors.append(
+                    f"{ctx} ('{sh.name}'): OR-logic is not allowed in "
+                    f"stage_helpers. Refactor as separate transition canvases "
+                    f"— one per path — each with inline AND-logic trigger "
+                    f"conditions. See jake_stage_1 refactor (2026-05-03) as "
+                    f"the canonical example."
+                )
+
+        # Pattern 2 v2.2 (2026-05-04) — flag-setter coverage check.
+        # For each is_true flag gate in any non-dev_only helper, verify some
+        # non-dev canvas sets the flag. Otherwise the stage is unreachable in
+        # normal play (either authoring bug or unfinished out-of-slice content).
+        # Validator emits warnings, not errors — preserves the _lint pattern
+        # and doesn't block content-in-progress builds.
+        if template.canvases:
+            import warnings as _w
+
+            # Build flag → setter coverage set, excluding dev shortcuts.
+            # Dev shortcuts have a trigger condition `dev_mode_enabled is_true`.
+            nondev_set_flags: Set[str] = set()
+            for cv in template.canvases:
+                is_dev = False
+                if cv.trigger and isinstance(cv.trigger.conditions, dict):
+                    for it in (cv.trigger.conditions.get("items") or []):
+                        if (
+                            isinstance(it, dict)
+                            and it.get("flag_key") == "dev_mode_enabled"
+                            and it.get("operator") == "is_true"
+                        ):
+                            is_dev = True
+                            break
+                if is_dev:
+                    continue
+                nondev_set_flags |= _extract_flags_set_by_canvas(cv)
+
+            for sh in template.stage_helpers:
+                if sh.dev_only:
+                    continue
+                items = sh.conditions.get("items") or []
+                for item in items:
+                    if not isinstance(item, dict):
+                        continue
+                    if item.get("type") != "flag" or item.get("operator") != "is_true":
+                        continue
+                    flag_key = item.get("flag_key", "")
+                    if not flag_key or flag_key in nondev_set_flags:
+                        continue
+                    _w.warn(
+                        f"HINT LINTER WARN engine.stage_helpers "
+                        f"('{sh.name}'): flag '{flag_key}' is required for "
+                        f"stage advancement but no non-dev canvas sets it. "
+                        f"Players cannot advance through this stage in normal "
+                        f"play. Either author the missing setter scene OR "
+                        f"mark the helper as `dev_only = true` to silence "
+                        f"this warning (acknowledges the stage is dev-shortcut-"
+                        f"only in current scope).",
+                        UserWarning,
+                        stacklevel=2,
+                    )
 
     # ===== E10: stage_gate validation on hint conditions =====
     # Tri-required: stage_npc, stage_op, stage_value all set together.
@@ -2745,6 +3494,18 @@ def validate(template: GameTemplate) -> List[str]:
                             f"{tc_ctx}.npc_id '{tc_npc}' not found in NPC definitions"
                         )
 
+            # 2026-05-10 — arc_complete (boolean badge) and arc_closure_flag
+            # (flag-resolved Ready / Complete frame) are mutually exclusive.
+            # Author pattern: split into two trait-check-mutex templates instead.
+            if t.arc_complete and t.arc_closure_flag:
+                errors.append(
+                    f"{ctx}: cannot set both `arc_complete = true` and "
+                    f"`arc_closure_flag = '{t.arc_closure_flag}'`. They are "
+                    f"mutually exclusive — use arc_closure_flag on the "
+                    f"pre-completion template + arc_complete on the "
+                    f"post-completion template, gated by trait_checks."
+                )
+
             # E22 — validate prerequisite_npc_stage syntax + NPC reference.
             if cond.prerequisite_npc_stage:
                 parsed = _parse_prerequisite_npc_stage(cond.prerequisite_npc_stage)
@@ -2806,7 +3567,136 @@ def validate(template: GameTemplate) -> List[str]:
     # documented in 11_Hint_Authoring_Guide.md before publish.
     _lint_hint_templates(template)
 
+    # PRD 48 — Quests Engine V2 schema validation. Only runs for v2 games;
+    # v1 games keep using _lint_hint_templates above for their old-shape
+    # templates. Validates `quest_cards` entries against canvas + NPC refs.
+    if template.project.quests_engine == "v2":
+        _validate_quests_cards(
+            template.quests_cards,
+            template.canvases,
+            {n.id for n in template.npcs},
+            errors,
+        )
+
     return errors
+
+
+def _validate_quests_cards(
+    cards: List[QuestsCard],
+    canvases: List["TemplateCanvas"],
+    npc_ids: Set[str],
+    errors: List[str],
+) -> None:
+    """PRD 48 — Validate [[quest_cards]] entries for the V2 engine.
+
+    Mutates `errors` in place. Catches structural issues that would silently
+    produce broken cards at runtime (bad slug references, missing labels on
+    trait bullets, malformed condition items). Warning-tier issues
+    (terminal + ready_canvas both set, group on NPC card) emit Python
+    warnings.
+
+    Hard errors (raise):
+      - text empty
+      - when empty
+      - goals item targeting trait/counter without `label`
+      - ready_canvas references unknown canvas slug
+      - npc_id references unknown NPC slug
+      - condition item uses old V1 fields (`type`, `flag_key`, `trait_key`,
+        `operator`) — explicit reject to catch migration mistakes
+      - priority not an integer
+      - condition item has neither `flag` nor `trait` set
+      - condition item has both `flag` and `trait` set
+    """
+    canvas_slugs = {c.id for c in canvases}
+
+    def _is_condition_well_formed(
+        item: QuestsCondition, ctx: str, *, require_label: bool
+    ) -> None:
+        # Detect old-schema field leakage via the raw __dict__ (since we
+        # parsed permissively, stray fields are dropped silently — catch at
+        # validate time by looking for both flag and trait being None).
+        has_flag = item.flag is not None
+        has_trait = item.trait is not None
+        if not has_flag and not has_trait:
+            errors.append(
+                f"{ctx}: condition item must set either `flag` or `trait`"
+            )
+            return
+        if has_flag and has_trait:
+            errors.append(
+                f"{ctx}: condition item must set ONLY ONE of `flag` or "
+                f"`trait`, not both"
+            )
+            return
+        if has_flag:
+            if item.op not in ("is_true", "is_false"):
+                errors.append(
+                    f"{ctx}: flag condition op must be is_true/is_false, "
+                    f"got {item.op!r}"
+                )
+        else:  # trait/counter
+            if item.subject not in ("player", "npc"):
+                errors.append(
+                    f"{ctx}: trait condition subject must be 'player' or "
+                    f"'npc', got {item.subject!r}"
+                )
+            if item.subject == "npc" and not item.npc_id:
+                errors.append(
+                    f"{ctx}: trait condition subject='npc' requires npc_id"
+                )
+            if item.op not in ("gte", "lte", "gt", "lt", "eq"):
+                errors.append(
+                    f"{ctx}: trait condition op must be gte/lte/gt/lt/eq, "
+                    f"got {item.op!r}"
+                )
+            if item.value is None:
+                errors.append(f"{ctx}: trait condition requires numeric value")
+            if require_label and not item.label:
+                errors.append(
+                    f"{ctx}: trait/counter goal item must have a `label` "
+                    f"(it renders next to the ◯ bullet)"
+                )
+            if item.subject == "npc" and item.npc_id and item.npc_id not in npc_ids:
+                errors.append(
+                    f"{ctx}: condition npc_id '{item.npc_id}' not found in "
+                    f"[[npcs]]"
+                )
+
+    import warnings as _w
+
+    for idx, card in enumerate(cards):
+        ctx = f"quest_cards[{idx}]"
+        if not card.text:
+            errors.append(f"{ctx}: text is required (non-empty)")
+        if not card.when:
+            errors.append(
+                f"{ctx}: when is required (at least one routing condition). "
+                f"Every card must scope itself to a state-window."
+            )
+        for wi, item in enumerate(card.when):
+            _is_condition_well_formed(item, f"{ctx}.when[{wi}]", require_label=False)
+        for gi, item in enumerate(card.goals):
+            _is_condition_well_formed(item, f"{ctx}.goals[{gi}]", require_label=True)
+        if card.ready_canvas and card.ready_canvas not in canvas_slugs:
+            errors.append(
+                f"{ctx}: ready_canvas '{card.ready_canvas}' not found in "
+                f"any [[canvases]] block"
+            )
+        if card.npc_id and card.npc_id not in npc_ids:
+            errors.append(
+                f"{ctx}: npc_id '{card.npc_id}' not found in [[npcs]]"
+            )
+        if card.terminal and card.ready_canvas:
+            _w.warn(
+                f"{ctx}: terminal=true overrides ready_canvas — both are set; "
+                f"the ✓ Arc complete frame will render, ready_canvas will be "
+                f"ignored. Drop one to silence."
+            )
+        if card.group and card.npc_id:
+            _w.warn(
+                f"{ctx}: `group` is Story Goal only (cards without npc_id). "
+                f"Setting group on an NPC card has no effect."
+            )
 
 
 def _lint_hint_templates(template: "GameTemplate") -> None:
@@ -2940,7 +3830,6 @@ def _lint_hint_templates(template: "GameTemplate") -> None:
 
     for ti, t in enumerate(templates):
         text = t.text or ""
-        tip = (getattr(t, "tip", None) or "")
         cond = t.condition
 
         # --- Rule: missing npc_id and no stage_npc → silently dropped ---
@@ -3198,6 +4087,44 @@ def _lint_hint_templates(template: "GameTemplate") -> None:
                 f"a gate the player needs to know about.",
             )
 
+    # === Picker tie-warning rule ===
+    # When two per-NPC templates would compete on equal footing — same
+    # npc_id + same stage_value + same priority + same condition_items.length
+    # — the picker falls back to file order, which is exactly the silent
+    # contract the priority/specificity rule is meant to kill. Warn so the
+    # author either bumps a priority or adds a distinguishing condition.
+    seen_signatures: Dict[Tuple[Optional[str], Optional[int], int, int], int] = {}
+    for ti, t in enumerate(templates):
+        cond = t.condition
+        if not (cond and cond.stage_npc and cond.stage_value is not None):
+            continue
+        npc = t.npc_id or cond.stage_npc
+        priority = getattr(t, "priority", 0) or 0
+        # Approximate condition_items length — the real serializer count.
+        # Mirrors the items the picker will see at runtime.
+        items_count = 0
+        if cond.stage_npc and cond.stage_op and cond.stage_value is not None:
+            items_count += 1
+        if cond.missing_flag:
+            items_count += 1
+        items_count += len(cond.trait_checks or [])
+        if cond.prerequisite_npc_stage:
+            items_count += 1
+        sig = (npc, cond.stage_value, priority, items_count)
+        if sig in seen_signatures:
+            other_ti = seen_signatures[sig]
+            _emit(
+                ti,
+                "WARN",
+                f"undecidable picker tie with templates[{other_ti}]: same "
+                f"npc_id='{npc}', stage_value={cond.stage_value}, priority={priority}, "
+                f"and {items_count} condition_items. File order would silently "
+                f"win — bump `priority` on the variant that should fire first "
+                f"or add a distinguishing condition.",
+            )
+        else:
+            seen_signatures[sig] = ti
+
     # === Pattern 2 (2026-05-01) — registry coverage scan ===
     # Walk every helper's conditions; warn for trait_keys / flag_keys that are
     # referenced in a gate but have no corresponding [[traits.labels]] /
@@ -3271,6 +4198,64 @@ def _parse_prerequisite_npc_stage(spec: str) -> Optional[Tuple[str, str, int]]:
     if op is None:
         return None
     return npc_slug, op, value
+
+
+def _serialize_quests_condition(c: QuestsCondition) -> Dict[str, Any]:
+    """Emit a condition item into the runtime JSON shape. Only the fields
+    actually set survive — null/empty fields are omitted to keep the
+    runtime JSON small and unambiguous about which shape (flag vs trait)
+    each item is."""
+    out: Dict[str, Any] = {}
+    if c.flag is not None:
+        out["flag"] = c.flag
+    if c.trait is not None:
+        out["trait"] = c.trait
+    if c.subject is not None:
+        out["subject"] = c.subject
+    if c.npc_id is not None:
+        out["npc_id"] = c.npc_id
+    if c.op:
+        out["op"] = c.op
+    if c.value is not None:
+        # Emit ints as ints (not 25.0) so the runtime label reads "X / 25"
+        # not "X / 25.0".
+        if float(c.value).is_integer():
+            out["value"] = int(c.value)
+        else:
+            out["value"] = c.value
+    if c.label is not None:
+        out["label"] = c.label
+    return out
+
+
+def _serialize_quests_card(card: QuestsCard) -> Dict[str, Any]:
+    """PRD 48 — Emit a QuestsCard into the runtime JSON shape consumed by
+    setup.quests_cards at the SugarCube runtime. Field names match the V2
+    runtime functions in v2.py.
+
+    Optional fields (ready_text, tip, npc_id, group, ready_canvas) are
+    omitted when null so the runtime can do `if (card.field)` cleanly.
+    """
+    out: Dict[str, Any] = {
+        "text": card.text,
+        "priority": card.priority,
+        "when": [_serialize_quests_condition(c) for c in card.when],
+    }
+    if card.ready_text:
+        out["ready_text"] = card.ready_text
+    if card.tip:
+        out["tip"] = card.tip
+    if card.npc_id:
+        out["npc_id"] = card.npc_id
+    if card.group:
+        out["group"] = card.group
+    if card.goals:
+        out["goals"] = [_serialize_quests_condition(c) for c in card.goals]
+    if card.ready_canvas:
+        out["ready_canvas"] = card.ready_canvas
+    if card.terminal:
+        out["terminal"] = True
+    return out
 
 
 def _serialize_hint_template(t: TemplateHintTemplate) -> Dict[str, Any]:
@@ -3349,12 +4334,170 @@ def _serialize_hint_template(t: TemplateHintTemplate) -> Dict[str, Any]:
         "npc_id": npc_id,
         "condition_items": items,
         "text": t.text,
+        # Priority is the picker's primary sort key (higher wins). Default 0.
+        "priority": t.priority,
         # Pattern 2 (2026-05-01): tip + auto_goal flow through to runtime.
         # Renderer (setup.computeHintGoal) reads condition.stage_npc/stage_value
         # from `condition` to look up the helper; renders 🎯 block + 💡 tip line.
         "tip": t.tip,
         "auto_goal": t.auto_goal,
+        # E17 (2026-05-06): ready-frame author override. Read by
+        # setup._getReadyHintForNPC at runtime when synthesizing the "all
+        # gates cleared" hint. Empty string → engine default.
+        "ready_text": t.ready_text,
+        # 2026-05-09: terminal-stage badge. Read by setup.computeHintGoal —
+        # when true, emits "✓ Arc complete" frame regardless of auto_goal.
+        "arc_complete": t.arc_complete,
+        # 2026-05-10: flag-based arc closure target. Read by
+        # setup.computeHintGoal — when set, looks up the named flag's setter
+        # canvas and renders Ready (📍+🕒) or ✓ Complete frame based on the
+        # flag's live value. Mutex with arc_complete (validated upstream).
+        "arc_closure_flag": t.arc_closure_flag,
     }
+
+
+def _normalize_block_list(
+    raw_blocks: Any,
+    max_depth: int = 4,
+    _depth: int = 0,
+) -> List[Dict[str, Any]]:
+    """Recursively normalize a list of TOML block dicts to the canonical safe shape.
+
+    Each block becomes ``{id, type, props, content, children}``. Container types
+    (``group``, ``block_pool``) get their inner ``blocks`` recursively
+    normalized. Reads ``conditions`` and ``blocks`` from top-level OR ``props``
+    (the 2026-05-03 bug-fix pattern: TOML may legitimately use either form).
+    Caps recursion at ``max_depth`` (default 4) to prevent pathological nesting;
+    the historical hand-unrolled implementation supported at most depth 3
+    (group inside pool inside group), so 4 is a defensive ceiling.
+
+    Container nesting: ``group`` MAY be nested directly inside ``group`` —
+    a stage gate wrapping flag-gated sub-branches is a legitimate, common
+    shape, and the Twee renderer (``_render_group_chain`` →
+    ``_convert_blocks_to_game_html``) already recurses it into a nested
+    ``<<if>>/<<elseif>>`` variant chain. The old "no group-in-group"
+    same-type-skip rule silently emptied such groups (children dropped →
+    "No content"); it is removed (2026-05-17). ``block_pool`` still cannot
+    nest a ``block_pool`` directly inside itself (random-pick-of-a-random-
+    pick is ambiguous; left restricted intentionally). All nesting — same
+    or mixed type — is bounded by ``max_depth``.
+
+    Returns: list of normalized block dicts, ready for ``StoryNode.node_data``.
+
+    The ``cascade`` block type (S7) is also handled here as a container —
+    each beat's ``blocks`` is recursively normalized via this same helper.
+    Beat-level fields (``advance_text``, ``conditions``, ``effects``,
+    ``flagEffects``, ``show_when_locked``, ``locked_text``) are passed through
+    after type-checking.
+    """
+    if _depth >= max_depth:
+        logger.warning(
+            "Block nesting depth %d exceeded; flattening deeper blocks", max_depth
+        )
+        return []
+    if not isinstance(raw_blocks, list):
+        return []
+
+    safe: List[Dict[str, Any]] = []
+    for b in raw_blocks:
+        if not isinstance(b, dict):
+            continue
+        b_type = str(b.get("type", "")).strip()
+        if not b_type:
+            continue
+        props = b.get("props") or {}
+        if not isinstance(props, dict):
+            props = {}
+
+        # Default heading.level so frontend schema accepts level-less headings.
+        if b_type == "heading" and not props.get("level"):
+            props["level"] = 1
+
+        # Convert top-level clip_id → clipId for frontend's camelCase expectation.
+        if b_type == "clip":
+            clip_id = b.get("clip_id")
+            if clip_id and isinstance(clip_id, str):
+                props["clipId"] = str(clip_id).strip()
+
+        # Container blocks — read .conditions/.blocks from top-level OR props
+        # (the 2026-05-03 4-place bug-fix pattern), recursively normalize children.
+        if b_type == "group":
+            cond = b.get("conditions") or props.get("conditions")
+            if cond and isinstance(cond, dict):
+                props["conditions"] = cond
+            inner_raw = b.get("blocks") or props.get("blocks") or []
+            inner_safe = _normalize_block_list(
+                inner_raw, max_depth=max_depth, _depth=_depth + 1
+            )
+            # Nested groups are PRESERVED (2026-05-17). A stage group wrapping
+            # flag-gated sub-branch groups is a legitimate shape; the renderer
+            # recurses it into a nested <<if>>/<<elseif>> chain. The recursion
+            # above already normalized them + the max_depth cap bounds depth,
+            # so no same-type-skip filter here. (block_pool keeps its filter.)
+            props["blocks"] = inner_safe
+        elif b_type == "block_pool":
+            inner_raw = b.get("blocks") or props.get("blocks") or []
+            inner_safe = _normalize_block_list(
+                inner_raw, max_depth=max_depth, _depth=_depth + 1
+            )
+            # Preserve original same-type-skip rule: drop any nested pools.
+            inner_safe = [ib for ib in inner_safe if ib.get("type") != "block_pool"]
+            # Original behavior: warn if pool has mixed child types.
+            child_types = {ib.get("type") for ib in inner_safe}
+            if len(child_types) > 1:
+                logger.warning(
+                    "block_pool has mixed types %s — all items should be same type",
+                    child_types,
+                )
+            props["blocks"] = inner_safe
+        elif b_type == "cascade":
+            # S7 — multi-beat linkreplace cascade. Reads `id` + `beats` from
+            # top-level OR `props` (same bug-fix-pattern as group/pool).
+            cascade_id = b.get("id") or props.get("id") or str(uuid.uuid4())
+            props["id"] = str(cascade_id)
+            raw_beats = b.get("beats") or props.get("beats") or []
+            if not isinstance(raw_beats, list):
+                raw_beats = []
+            safe_beats: List[Dict[str, Any]] = []
+            for beat in raw_beats:
+                if not isinstance(beat, dict):
+                    continue
+                beat_blocks_raw = beat.get("blocks") or []
+                # Recursively normalize the beat's child blocks. A beat's
+                # blocks can themselves contain groups, pools, thought
+                # bubbles, or even nested cascades — depth cap protects.
+                beat_blocks_safe = _normalize_block_list(
+                    beat_blocks_raw, max_depth=max_depth, _depth=_depth + 1
+                )
+                beat_conditions = beat.get("conditions")
+                if beat_conditions is not None and not isinstance(beat_conditions, dict):
+                    beat_conditions = None
+                safe_beats.append({
+                    "advance_text": str(beat.get("advance_text", "")),
+                    "conditions": beat_conditions,
+                    "effects": beat.get("effects") if isinstance(beat.get("effects"), list) else [],
+                    "flagEffects": beat.get("flagEffects") if isinstance(beat.get("flagEffects"), list) else [],
+                    "show_when_locked": bool(beat.get("show_when_locked", False)),
+                    "locked_text": str(beat.get("locked_text", "")),
+                    # S4 (2026-05-06) — threshold-publisher message for the
+                    # locked sibling. When set + show_when_locked = True,
+                    # clicking the locked label fires a warning toast with
+                    # this in-character message. Mirrors the choice-path S4.
+                    "locked_text_threshold": str(beat.get("locked_text_threshold", "")),
+                    "blocks": beat_blocks_safe,
+                })
+            props["beats"] = safe_beats
+
+        safe.append(
+            {
+                "id": str(b.get("id") or uuid.uuid4()),
+                "type": b_type,
+                "props": props,
+                "content": str(b.get("content", "")),
+                "children": [],
+            }
+        )
+    return safe
 
 
 @transaction.atomic
@@ -3380,6 +4523,15 @@ def create_project_from_template(
         "schema_version": template.schema_version,
         "slug": template.project.slug,
     }
+    # PRD 48 — surface the Quests engine version onto project metadata so the
+    # generator can dispatch (V1 default vs V2 opt-in) at emission time.
+    project.metadata["quests_engine"] = template.project.quests_engine
+    # PRD 48 — serialize V2 cards onto project.metadata. Empty list for v1
+    # games (their hints stay in project.metadata["story_arc"]["hints"]).
+    if template.project.quests_engine == "v2":
+        project.metadata["quests_cards"] = [
+            _serialize_quests_card(c) for c in template.quests_cards
+        ]
     # Store clothing settings if enabled
     if template.clothing_enabled:
         clothing_meta = {
@@ -3395,6 +4547,8 @@ def create_project_from_template(
                     "initial": ci.initial,
                     "conditions": ci.conditions,
                     "price": ci.price,
+                    "beauty": ci.beauty,
+                    "corruption": ci.corruption,
                 }
                 for ci in template.clothing_items
             ],
@@ -3422,6 +4576,34 @@ def create_project_from_template(
             }
             for p in template.passes
         ]
+    # Store corruption tiers if overridden (doc 45 G7)
+    if template.corruption_tiers:
+        project.metadata["corruption_tiers"] = template.corruption_tiers
+    # Store fast jobs + bank (doc 45 G9)
+    if template.fast_jobs:
+        project.metadata["fast_jobs"] = [
+            {"id": j.id, "name": j.name, "income": j.income, "xp_req": j.xp_req,
+             "cooldown_days": j.cooldown_days, "time_period": j.time_period,
+             "money_trait": j.money_trait}
+            for j in template.fast_jobs
+        ]
+    if template.bank is not None:
+        project.metadata["bank"] = {
+            "enabled": template.bank.enabled,
+            "interest_rate": template.bank.interest_rate,
+            "money_trait": template.bank.money_trait,
+        }
+    # Store quests if defined (doc 45 G4)
+    if template.quests:
+        project.metadata["quests"] = [
+            {
+                "id": q.id,
+                "name": q.name,
+                "steps": q.steps,
+                "repeatable": q.repeatable,
+            }
+            for q in template.quests
+        ]
     # Store items if defined
     if template.items:
         project.metadata["items"] = [
@@ -3437,9 +4619,23 @@ def create_project_from_template(
                     "npcId": fe.npcId,
                     "flag": fe.flag,
                     "op": fe.op,
+                    "conditions": fe.conditions,
                 }
                 for fe in template.daily_tick.flagEffects
-            ]
+            ],
+            "traitEffects": [
+                {
+                    "targetType": te.targetType,
+                    "npcId": te.npcId,
+                    "trait": te.trait,
+                    "op": te.op,
+                    "value": te.value,
+                    "clamp": te.clamp,
+                    "cap": te.cap,
+                    "conditions": te.conditions,
+                }
+                for te in template.daily_tick.traitEffects
+            ],
         }
     # Store stage helpers if defined ([[engine.stage_helpers]]) — E4
     if template.stage_helpers:
@@ -3463,6 +4659,12 @@ def create_project_from_template(
         project.metadata["flag_labels"] = {
             fl.key: {"label": fl.label}
             for fl in template.flag_labels
+        }
+    # Tips page (game-level mechanics surface).
+    if template.tips_page:
+        project.metadata["tips_page"] = {
+            "title": template.tips_page.title,
+            "content": template.tips_page.content,
         }
     # Store theme if defined
     if template.theme:
@@ -3599,8 +4801,10 @@ def create_project_from_template(
         phone = template.phone
         project.metadata["phone_settings"] = {
             "enabled": True,
+            "purchase_flag": phone.purchase_flag,
             "apps": [
-                {"id": a.id, "type": a.type, "label": a.label, "icon": a.icon}
+                {"id": a.id, "type": a.type, "label": a.label, "icon": a.icon,
+                 **({"post_actions": a.post_actions} if a.post_actions else {})}
                 for a in phone.apps
             ],
             "conversations": [
@@ -3609,6 +4813,7 @@ def create_project_from_template(
                     "app": c.app,
                     "npc": c.npc,
                     "trigger": c.trigger,
+                    "notify": c.notify,
                     "blocks": [
                         {
                             "type": b.type,
@@ -3636,6 +4841,7 @@ def create_project_from_template(
                     "likes": p.likes,
                     "trigger": p.trigger,
                     "search_queries": p.search_queries,
+                    "notify": p.notify,
                 }
                 for p in phone.posts
             ],
@@ -3662,8 +4868,16 @@ def create_project_from_template(
                     "npc_response": dt.npc_response,
                     "effects": dt.effects,
                     "conditions": dt.conditions,
+                    "image": dt.image,
+                    "corruption_min": dt.corruption_min,
+                    "cooldown": dt.cooldown,
                 }
                 for dt in phone.daily_topics
+            ],
+            "gallery_items": [
+                {"id": g.id, "image": g.image, "caption": g.caption,
+                 "trigger": g.trigger, "link": g.link}
+                for g in phone.gallery_items
             ],
         }
     project.save()
@@ -3881,6 +5095,15 @@ def create_project_from_template(
                             # E21 — opt-in cooldown visibility
                             "show_when_blocked": c.trigger.show_when_blocked or None,
                             "cooldown_message": c.trigger.cooldown_message,
+                            # PRD 25 — Lane 3 dispatcher substitution
+                            "substitutions": c.trigger.substitutions if c.trigger.substitutions else None,
+                            "substitution_only": c.trigger.substitution_only if c.trigger.substitution_only else None,
+                            # L2-2 — Lane 2 anti-toggle cooldown (location slugs)
+                            "entry_only_from": c.trigger.entry_only_from if c.trigger.entry_only_from else None,
+                            # Phase A (2026-05-14) — Lane 2/3 NPC presence gate.
+                            # Engine reads requiresNpc from canvas metadata at
+                            # runtime and AND-gates with all other conditions.
+                            "requires_npc": c.trigger.requires_npc or None,
                         }.items() if v is not None
                     },
                 )
@@ -3898,201 +5121,12 @@ def create_project_from_template(
         for c in template.canvases:
             sc = canvas_slug_map[c.id]
             for n in c.nodes:
-                # Normalize TOML blocks: add id, ensure props/children shapes,
-                # and default heading level so frontend schemas accept them.
-                safe_blocks: list[dict[str, Any]] = []
-                for b in n.blocks or []:
-                    if not isinstance(b, dict):
-                        continue
-                    b_type = str(b.get("type", "")).strip()
-                    if not b_type:
-                        continue
-                    props = b.get("props") or {}
-                    if not isinstance(props, dict):
-                        props = {}
-                    # Default heading.level
-                    if b_type == "heading":
-                        if not props.get("level"):
-                            props["level"] = 1
-
-                    # Handle clip blocks - convert clip_id to clipId
-                    if b_type == "clip":
-                        clip_id = b.get("clip_id")  # Top-level clip_id from TOML
-                        if clip_id and isinstance(clip_id, str):
-                            props["clipId"] = str(clip_id).strip()
-
-                    # Handle block_pool - random content variant selection
-                    if b_type == "block_pool":
-                        pool_blocks_raw = b.get("blocks", [])
-                        if not isinstance(pool_blocks_raw, list):
-                            pool_blocks_raw = []
-
-                        pool_child_types: set = set()
-                        pool_safe_blocks: list[dict[str, Any]] = []
-                        for pb in pool_blocks_raw:
-                            if not isinstance(pb, dict):
-                                continue
-                            pb_type = str(pb.get("type", "")).strip()
-                            if not pb_type or pb_type == "block_pool":
-                                continue  # Skip empty types and nested pools
-                            pool_child_types.add(pb_type)
-                            pb_props = pb.get("props") or {}
-                            if not isinstance(pb_props, dict):
-                                pb_props = {}
-                            if pb_type == "heading" and not pb_props.get("level"):
-                                pb_props["level"] = 1
-                            if pb_type == "clip":
-                                pb_clip_id = pb.get("clip_id")
-                                if pb_clip_id and isinstance(pb_clip_id, str):
-                                    pb_props["clipId"] = str(pb_clip_id).strip()
-                            # Handle group children inside pool
-                            if pb_type == "group":
-                                g_cond = pb.get("conditions")
-                                if g_cond and isinstance(g_cond, dict):
-                                    pb_props["conditions"] = g_cond
-                                inner_raw = pb.get("blocks", [])
-                                inner_safe: list[dict[str, Any]] = []
-                                for ib in (inner_raw if isinstance(inner_raw, list) else []):
-                                    if not isinstance(ib, dict):
-                                        continue
-                                    ib_type = str(ib.get("type", "")).strip()
-                                    if not ib_type or ib_type == "group":
-                                        continue
-                                    ib_props = ib.get("props") or {}
-                                    if not isinstance(ib_props, dict):
-                                        ib_props = {}
-                                    if ib_type == "heading" and not ib_props.get("level"):
-                                        ib_props["level"] = 1
-                                    inner_safe.append({
-                                        "id": str(ib.get("id") or uuid.uuid4()),
-                                        "type": ib_type, "props": ib_props,
-                                        "content": str(ib.get("content", "")),
-                                        "children": [],
-                                    })
-                                pb_props["blocks"] = inner_safe
-
-                            pool_safe_blocks.append({
-                                "id": str(pb.get("id") or uuid.uuid4()),
-                                "type": pb_type, "props": pb_props,
-                                "content": str(pb.get("content", "")),
-                                "children": [],
-                            })
-
-                        if len(pool_child_types) > 1:
-                            logger.warning(
-                                "block_pool has mixed types %s — all items should be same type",
-                                pool_child_types,
-                            )
-
-                        props["blocks"] = pool_safe_blocks
-                        safe_blocks.append({
-                            "id": str(b.get("id") or uuid.uuid4()),
-                            "type": "block_pool", "props": props,
-                            "content": "", "children": [],
-                        })
-                        continue
-
-                    # Handle group blocks - conditional content variants
-                    if b_type == "group":
-                        group_conditions = b.get("conditions")
-                        if group_conditions and isinstance(group_conditions, dict):
-                            props["conditions"] = group_conditions
-
-                        child_blocks_raw = b.get("blocks", [])
-                        if not isinstance(child_blocks_raw, list):
-                            child_blocks_raw = []
-
-                        child_safe_blocks: list[dict[str, Any]] = []
-                        for cb in child_blocks_raw:
-                            if not isinstance(cb, dict):
-                                continue
-                            cb_type = str(cb.get("type", "")).strip()
-                            if not cb_type or cb_type == "group":
-                                continue  # Skip empty types and nested groups
-                            cb_props = cb.get("props") or {}
-                            if not isinstance(cb_props, dict):
-                                cb_props = {}
-                            if cb_type == "heading" and not cb_props.get("level"):
-                                cb_props["level"] = 1
-                            if cb_type == "clip":
-                                cb_clip_id = cb.get("clip_id")
-                                if cb_clip_id and isinstance(cb_clip_id, str):
-                                    cb_props["clipId"] = str(cb_clip_id).strip()
-                            # Handle block_pool children inside group
-                            if cb_type == "block_pool":
-                                bp_raw = cb.get("blocks", [])
-                                bp_safe: list[dict[str, Any]] = []
-                                for bp_item in (bp_raw if isinstance(bp_raw, list) else []):
-                                    if not isinstance(bp_item, dict):
-                                        continue
-                                    bp_t = str(bp_item.get("type", "")).strip()
-                                    if not bp_t or bp_t == "block_pool":
-                                        continue
-                                    bp_p = bp_item.get("props") or {}
-                                    if not isinstance(bp_p, dict):
-                                        bp_p = {}
-                                    if bp_t == "heading" and not bp_p.get("level"):
-                                        bp_p["level"] = 1
-                                    # Handle group items inside pool inside group
-                                    if bp_t == "group":
-                                        g_cond = bp_item.get("conditions")
-                                        if g_cond and isinstance(g_cond, dict):
-                                            bp_p["conditions"] = g_cond
-                                        g_inner_raw = bp_item.get("blocks", [])
-                                        g_inner_safe: list[dict[str, Any]] = []
-                                        for gi in (g_inner_raw if isinstance(g_inner_raw, list) else []):
-                                            if not isinstance(gi, dict):
-                                                continue
-                                            gi_t = str(gi.get("type", "")).strip()
-                                            if not gi_t or gi_t in ("group", "block_pool"):
-                                                continue
-                                            gi_p = gi.get("props") or {}
-                                            if not isinstance(gi_p, dict):
-                                                gi_p = {}
-                                            if gi_t == "heading" and not gi_p.get("level"):
-                                                gi_p["level"] = 1
-                                            g_inner_safe.append({
-                                                "id": str(gi.get("id") or uuid.uuid4()),
-                                                "type": gi_t, "props": gi_p,
-                                                "content": str(gi.get("content", "")),
-                                                "children": [],
-                                            })
-                                        bp_p["blocks"] = g_inner_safe
-                                    bp_safe.append({
-                                        "id": str(bp_item.get("id") or uuid.uuid4()),
-                                        "type": bp_t, "props": bp_p,
-                                        "content": str(bp_item.get("content", "")),
-                                        "children": [],
-                                    })
-                                cb_props["blocks"] = bp_safe
-                            child_safe_blocks.append({
-                                "id": str(cb.get("id") or uuid.uuid4()),
-                                "type": cb_type,
-                                "props": cb_props,
-                                "content": str(cb.get("content", "")),
-                                "children": [],
-                            })
-
-                        props["blocks"] = child_safe_blocks
-                        safe_blocks.append({
-                            "id": str(b.get("id") or uuid.uuid4()),
-                            "type": "group",
-                            "props": props,
-                            "content": "",
-                            "children": [],
-                        })
-                        continue
-
-                    # Ensure base shape
-                    safe_blocks.append(
-                        {
-                            "id": str(b.get("id") or uuid.uuid4()),
-                            "type": b_type,
-                            "props": props,
-                            "content": str(b.get("content", "")),
-                            "children": [],
-                        }
-                    )
+                # Normalize TOML blocks via the shared recursive helper
+                # (consolidated 2026-05-06 — replaced ~200 lines of triplicated
+                # hand-unrolled normalization with `_normalize_block_list`,
+                # which preserves the 2026-05-03 4-place-bug-fix pattern at
+                # every nesting level).
+                safe_blocks = _normalize_block_list(n.blocks or [])
 
                 node_data_dict = {
                     "blocks": safe_blocks,
@@ -4192,6 +5226,8 @@ def create_project_from_template(
                             ch_d["show_when_locked"] = True
                         if ch.locked_text:
                             ch_d["locked_text"] = ch.locked_text
+                        if ch.locked_text_threshold:
+                            ch_d["locked_text_threshold"] = ch.locked_text_threshold
                         if ch.rejection_node:
                             # Resolve rejection_node slug → UUID (same as nodeId)
                             rej_key = (
@@ -4229,6 +5265,10 @@ def create_project_from_template(
                             ch_d["pass_effects"] = ch.pass_effects
                         if ch.item_effects:
                             ch_d["item_effects"] = ch.item_effects
+                        if ch.quest_effects:
+                            ch_d["questEffects"] = ch.quest_effects
+                        if ch.schedule_effects:
+                            ch_d["scheduleEffects"] = ch.schedule_effects
 
                         if ch.targetType == "location" and ch.locationId:
                             loc_obj = slug_map.get(ch.locationId)
@@ -4350,6 +5390,7 @@ def _serialize_exit_block(eb: "TemplateExitBlock") -> Dict[str, Any]:
                 **({"text_variants": ch.text_variants} if ch.text_variants else {}),
                 **({"show_when_locked": True} if ch.show_when_locked else {}),
                 **({"locked_text": ch.locked_text} if ch.locked_text else {}),
+                **({"locked_text_threshold": ch.locked_text_threshold} if ch.locked_text_threshold else {}),
                 **({"rejection_node": ch.rejection_node} if ch.rejection_node else {}),
                 **(
                     {
@@ -4386,6 +5427,8 @@ def _serialize_exit_block(eb: "TemplateExitBlock") -> Dict[str, Any]:
                 ),
                 **({"pass_effects": ch.pass_effects} if ch.pass_effects else {}),
                 **({"item_effects": ch.item_effects} if ch.item_effects else {}),
+                **({"questEffects": ch.quest_effects} if ch.quest_effects else {}),
+                **({"scheduleEffects": ch.schedule_effects} if ch.schedule_effects else {}),
             }
             for ch in eb.choices
         ]

@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-04-28T21:20:17.485Z",
+  "generated_at": "2026-05-21T16:56:58.172Z",
   "indexing_coverage": "partial",
-  "total_variables": 132,
+  "total_variables": 131,
   "skipped_script_blocks": 22,
   "skipped_widget_passages": 13,
   "skipped_passages": 13,
@@ -984,7 +984,7 @@
           "kind": "passage_body",
           "path": ".dice",
           "op": "to",
-          "value_expr": "random(1,5)",
+          "value_expr": "random(1,6)",
           "passage": "BedroomStudy",
           "gate": []
         },
@@ -2541,7 +2541,7 @@
           "kind": "passage_body",
           "path": ".dice",
           "op": "to",
-          "value_expr": "random(1,5)",
+          "value_expr": "random(1,6)",
           "passage": "BedroomStudy",
           "gate": []
         }
@@ -2771,100 +2771,6 @@
             {
               "condition": "!($location.school.graduated)",
               "branch": "else"
-            }
-          ]
-        }
-      ],
-      "unsetters": []
-    },
-    "_message": {
-      "setters": [
-        {
-          "kind": "passage_body",
-          "path": null,
-          "op": "to",
-          "value_expr": "\"You don't have enough money! You need $\" + _stats.lessonPrice",
-          "passage": "DrivingSchool",
-          "gate": [
-            {
-              "condition": "isPlayerGraduated()",
-              "branch": "if"
-            },
-            {
-              "condition": "!_stats.licenseObtained",
-              "branch": "if"
-            },
-            {
-              "condition": "!($player.money >= _stats.lessonPrice)",
-              "branch": "else"
-            }
-          ]
-        },
-        {
-          "kind": "passage_body",
-          "path": null,
-          "op": "to",
-          "value_expr": "\"You don't have enough money! You need $\" + _stats.examPrice",
-          "passage": "DrivingSchool",
-          "gate": [
-            {
-              "condition": "isPlayerGraduated()",
-              "branch": "if"
-            },
-            {
-              "condition": "!_stats.licenseObtained",
-              "branch": "if"
-            },
-            {
-              "condition": "_stats.canTakeExam",
-              "branch": "if"
-            },
-            {
-              "condition": "!($player.money >= _stats.examPrice)",
-              "branch": "else"
-            }
-          ]
-        },
-        {
-          "kind": "passage_body",
-          "path": null,
-          "op": "to",
-          "value_expr": "\"You already had your prenatal care, you need to wait \" + $location.hospital.prenatal + \" days.\"",
-          "passage": "Hospital",
-          "gate": [
-            {
-              "condition": "$player.pregnancy.discovered",
-              "branch": "if"
-            },
-            {
-              "condition": "!($location.hospital.prenatal == 0)",
-              "branch": "else"
-            }
-          ]
-        },
-        {
-          "kind": "passage_body",
-          "path": null,
-          "op": "to",
-          "value_expr": "\"You already had your gynecological exam, you need to wait \" + $location.hospital.gynecologist + \" days.\"",
-          "passage": "Hospital",
-          "gate": [
-            {
-              "condition": "!($location.hospital.gynecologist == 0)",
-              "branch": "else"
-            }
-          ]
-        },
-        {
-          "kind": "passage_body",
-          "path": null,
-          "op": "to",
-          "value_expr": "\"Photo posted! You gained \" + $game.random + \" followers!\"",
-          "passage": "Selfie",
-          "gate": [
-            {
-              "condition": "$player.phone.instafame.posted == false",
-              "branch": "if"
             }
           ]
         }
@@ -3117,7 +3023,7 @@
               "branch": "else"
             },
             {
-              "condition": "$location.school.homework == false && $game.days > 1",
+              "condition": "$location.school.homework == false && getQuestProgress(\"MathHomework\") > 0",
               "branch": "if"
             }
           ]
@@ -5167,6 +5073,24 @@
           "gate": [
             {
               "condition": "!(galleryMode())",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_babyIsMale": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "(random(1, 2) == 1)",
+          "passage": "HospitalBirth",
+          "gate": [
+            {
+              "condition": "!(random(1,3) == 1)",
               "branch": "else"
             }
           ]
@@ -7889,24 +7813,6 @@
       ],
       "unsetters": []
     },
-    "_warningMsg": {
-      "setters": [
-        {
-          "kind": "passage_body",
-          "path": null,
-          "op": "=",
-          "value_expr": "_canRent && _canRent.message ? _canRent.message : \"Unable to check property availability.\"",
-          "passage": "ApartmentRent",
-          "gate": [
-            {
-              "condition": "!(_canRent && _canRent.success)",
-              "branch": "else"
-            }
-          ]
-        }
-      ],
-      "unsetters": []
-    },
     "$player.pregnancy.pillDays": {
       "setters": [
         {
@@ -8201,24 +8107,6 @@
             },
             {
               "condition": "_hasLateFee",
-              "branch": "if"
-            }
-          ]
-        }
-      ],
-      "unsetters": []
-    },
-    "_successMsg": {
-      "setters": [
-        {
-          "kind": "passage_body",
-          "path": null,
-          "op": "=",
-          "value_expr": "_landlordName + \" thanks you and leaves with a smile.\"",
-          "passage": "ApartmentRentCollection",
-          "gate": [
-            {
-              "condition": "ApartmentService.canAffordRent()",
               "branch": "if"
             }
           ]
@@ -8665,7 +8553,7 @@
               "branch": "else"
             },
             {
-              "condition": "$location.school.homework == false && $game.days > 1",
+              "condition": "$location.school.homework == false && getQuestProgress(\"MathHomework\") > 0",
               "branch": "if"
             }
           ]
@@ -8679,7 +8567,7 @@
           "kind": "passage_body",
           "path": null,
           "op": "to",
-          "value_expr": "\"I need to steal my \" + $npc.Dad.relationship + \"'s car so I can go to the party. I think the key is at his bedroom.\"",
+          "value_expr": "\"I need to steal my \" + $npc.Dad.relationship + \"'s car so I can go to the party. I think the key is in his bedroom\"",
           "passage": "ThomasPartyInvite",
           "gate": [
             {
@@ -12517,6 +12405,24 @@
           "path": ".phone.instafame.followers",
           "op": "+=",
           "value_expr": "$game.random",
+          "passage": "Selfie",
+          "gate": [
+            {
+              "condition": "$player.phone.instafame.posted == false",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_message": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "\"Photo posted! You gained \" + $game.random + \" followers!\"",
           "passage": "Selfie",
           "gate": [
             {

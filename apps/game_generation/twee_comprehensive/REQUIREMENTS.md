@@ -1,5 +1,11 @@
 # Comprehensive Game Generation Requirements
 
+> **🧊 v1 frozen 2026-05-14 — v2 is now the default generator.**
+>
+> The generator was forked from `generators/v1.py` to `generators/v2.py` on 2026-05-14 as a wholesale copy. All new engine work (NPC location schedules, `requires_npc` presence-detection on Lane 2/3 triggers, single-canvas hubs with conditional button injection per RTS doctrine) lands in v2. v1 exists only as a safe-mode rollback path during the v2 transition — invoke with `--gen-version v1` on `package_from_toml` / `package_game`. Once v2 is stable for ≥2 weeks, v1 (and its dormant `*_backup.py` siblings) will be deleted.
+>
+> The byte-equality regression test `apps/game_generation/tests.py::TestV1V2ByteEquality` proves v1 and v2 produce identical output at fork time; it will be scoped (or replaced with version-specific equivalence tests) when v2 deliberately diverges.
+
 ## Overview
 This document defines the requirements and expectations for the comprehensive game generation system. This serves as our reference for what we're building and helps identify unnecessary complexity to remove.
 

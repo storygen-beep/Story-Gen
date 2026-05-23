@@ -1,0 +1,315 @@
+{
+  "captured_at": "2026-05-21T22:54:35.431Z",
+  "ts": 1779404075431,
+  "engine": "sugarcube",
+  "engine_version": [
+    "(revive:eval)",
+    "(function(){var e=this.prerelease?\"-\"+this.prerelease:\"\";return this.title+\" (v\"+this.major+\".\"+this.minor+\".\"+this.patch+e+\")\"})"
+  ],
+  "passage": "Start",
+  "variables": {
+    "last_game_passage": "Start",
+    "player": {
+      "name": "Lily",
+      "portrait": "lily.jpg",
+      "current_location": "",
+      "core_traits": {
+        "corruption": 0,
+        "confidence": 0,
+        "money": 400,
+        "energy": 100,
+        "fitness": 0,
+        "beauty": 0,
+        "intelligence": 0
+      },
+      "wardrobe": {
+        "hoodie": {
+          "id": "hoodie",
+          "name": "Hoodie",
+          "slot": "top",
+          "image": ""
+        },
+        "plain_tshirt_1": {
+          "id": "plain_tshirt_1",
+          "name": "Plain T-Shirt (Gray)",
+          "slot": "top",
+          "image": ""
+        },
+        "plain_tshirt_2": {
+          "id": "plain_tshirt_2",
+          "name": "Plain T-Shirt (White)",
+          "slot": "top",
+          "image": ""
+        },
+        "tank_top_basic": {
+          "id": "tank_top_basic",
+          "name": "Tank Top",
+          "slot": "top",
+          "image": ""
+        },
+        "jeans": {
+          "id": "jeans",
+          "name": "Jeans",
+          "slot": "bottom",
+          "image": ""
+        },
+        "old_shorts": {
+          "id": "old_shorts",
+          "name": "Old Shorts",
+          "slot": "bottom",
+          "image": ""
+        },
+        "sweatpants": {
+          "id": "sweatpants",
+          "name": "Sweatpants",
+          "slot": "bottom",
+          "image": ""
+        },
+        "sneakers": {
+          "id": "sneakers",
+          "name": "Sneakers",
+          "slot": "shoes",
+          "image": ""
+        },
+        "flip_flops": {
+          "id": "flip_flops",
+          "name": "Flip Flops",
+          "slot": "shoes",
+          "image": ""
+        },
+        "basic_bra": {
+          "id": "basic_bra",
+          "name": "Basic Bra",
+          "slot": "bra",
+          "image": ""
+        },
+        "sports_bra": {
+          "id": "sports_bra",
+          "name": "Sports Bra",
+          "slot": "bra",
+          "image": ""
+        },
+        "cotton_panties": {
+          "id": "cotton_panties",
+          "name": "Cotton Panties",
+          "slot": "underwear",
+          "image": ""
+        },
+        "sundress_old": {
+          "id": "sundress_old",
+          "name": "Sundress (the nice one)",
+          "slot": "dress",
+          "image": ""
+        }
+      },
+      "equipped": {
+        "bra": "sports_bra",
+        "underwear": "cotton_panties",
+        "top": "tank_top_basic",
+        "bottom": "sweatpants",
+        "dress": "sundress_old",
+        "legwear": null,
+        "shoes": "flip_flops"
+      }
+    },
+    "npcs": {
+      "8394b992-985a-4f00-a7fa-a8b222af06b4": {
+        "name": "Frank",
+        "portrait": "frank.jpg",
+        "core_traits": {
+          "love": 0,
+          "trust": 5,
+          "corruption": 0
+        },
+        "flags": {},
+        "schedule": [],
+        "relationship": "step-dad"
+      },
+      "d1d8af87-94c5-4eb6-b790-b1d3b1248758": {
+        "name": "Ryan",
+        "portrait": "ryan.jpg",
+        "core_traits": {
+          "love": 0,
+          "trust": 0,
+          "corruption": 10
+        },
+        "flags": {},
+        "schedule": [],
+        "relationship": "step-brother"
+      },
+      "fc0ca971-7a23-4d9e-88dd-cb9fe3e0c13a": {
+        "name": "Jake",
+        "portrait": "jake.jpg",
+        "core_traits": {
+          "love": 0,
+          "trust": 0,
+          "corruption": 0
+        },
+        "flags": {},
+        "schedule": [],
+        "relationship": "step-brother"
+      },
+      "4180a299-1d67-4678-a8ff-ac4d75c1ff23": {
+        "name": "Diana",
+        "portrait": "",
+        "core_traits": {},
+        "flags": {},
+        "schedule": [],
+        "relationship": ""
+      }
+    },
+    "npc_interacted_today": {},
+    "flags": {
+      "game_started": true,
+      "unpacked": false,
+      "jake_friendly_start": false,
+      "jake_boundaries_set": false,
+      "jake_has_photo_1": false,
+      "jake_has_photo_2": false,
+      "jake_has_towel_photo": false,
+      "jake_has_underwear_photo": false,
+      "jake_has_nude": false,
+      "jake_encouraged": false,
+      "jake_called_out": false,
+      "jake_mutual_confession": false,
+      "jake_phone_invited": false,
+      "jake_in_person_invite": false,
+      "jake_door_open": false,
+      "mom_checked_in": false,
+      "mom_guilt": false,
+      "mom_warned": false,
+      "ryan_gym_accepted": false,
+      "ryan_photo_exchanged": false,
+      "ryan_flirty_text": false,
+      "ryan_asked_to_leave": false,
+      "ryan_leaving_together": false,
+      "frank_generous_lily": false,
+      "frank_coffee_offer": false,
+      "exposure_unlock": false,
+      "flirt_unlock": false,
+      "tease_unlock": false,
+      "kiss_unlock": false,
+      "handjob_unlock": false,
+      "blowjob_unlock": false,
+      "sex_unlock": false,
+      "jake_awareness": false,
+      "jake_flirt": false,
+      "jake_tease": false,
+      "jake_kiss": false,
+      "ryan_awareness": false,
+      "ryan_flirt": false,
+      "ryan_tease": false,
+      "ryan_kiss": false,
+      "ryan_handjob": false,
+      "frank_awareness": false,
+      "frank_flirt": false,
+      "frank_tease": false,
+      "frank_kiss": false,
+      "first_morning": false,
+      "bus_problem_discovered": false,
+      "mom_called": false,
+      "money_crisis_realized": false,
+      "first_week_complete": false,
+      "chores_started": false,
+      "drawing_started": false,
+      "truck_incident_complete": false,
+      "bookkeeping_started": false,
+      "first_swim": false,
+      "saw_jakes_art": false,
+      "frank_kitchen_moment": false,
+      "frank_repair_complete": false,
+      "jake_repair_complete": false,
+      "financial_crisis": false,
+      "brothers_discover": false,
+      "frank_offer": false,
+      "crisis_resolved": false,
+      "mom_returning": false,
+      "endgame_active": false,
+      "frank_crisis": false,
+      "frank_wine_night": false,
+      "ryan_resisted": false,
+      "ryan_allowed": false,
+      "chose_tender_jake": false,
+      "chose_possessive_jake": false,
+      "jake_sketches_discovered": false,
+      "chose_confront_frank": false,
+      "frank_secret_complete": false,
+      "ryan_detour": false,
+      "ryan_phone_heard": false,
+      "ryan_secret_discovered": false,
+      "ryan_leaving_confirmed": false,
+      "ryan_ultimatum_complete": false,
+      "ryan_leaving": false,
+      "ryan_stayed": false,
+      "ryan_caught_her": false,
+      "mom_suspicious": false,
+      "drawing_1_complete": false,
+      "drawing_2_complete": false,
+      "drawing_3_complete": false,
+      "drawing_4_complete": false,
+      "drawing_5_complete": false,
+      "jake_pencil_dropped": false,
+      "power_outage": false,
+      "town_access": false,
+      "has_art_supplies": false,
+      "debug_mode": false
+    },
+    "flags_meta": {},
+    "game_state": {
+      "current_canvas": "",
+      "visited_locations": [],
+      "visited_nodes": [],
+      "trigger_history": {},
+      "activity_trigger_history": {},
+      "visited_choices": {},
+      "active_modifiers": {},
+      "random_cooldowns": {},
+      "stage_advancement_log": {},
+      "quests": {},
+      "scheduled": [],
+      "fast_jobs": {
+        "xp": 0,
+        "cooldowns": {}
+      },
+      "bank": {
+        "balance": 0
+      },
+      "time_state": {
+        "current_hour": 17,
+        "current_minute": 0,
+        "current_day": "Saturday",
+        "current_week": 1,
+        "day": 1
+      },
+      "rent_state": {
+        "last_paid_week": 1,
+        "warnings": 0,
+        "is_due": false
+      },
+      "passes": {},
+      "inventory": {},
+      "phone": {
+        "triggered_conversations": {},
+        "read_conversations": {},
+        "replies": {},
+        "triggered_posts": {},
+        "viewed_feed": false,
+        "triggered_profiles": {},
+        "liked_profiles": {},
+        "passed_profiles": {},
+        "matches": {}
+      }
+    }
+  },
+  "save_caps": {
+    "stateMarshal": true,
+    "engineShow": true,
+    "serialize": true,
+    "slots": true,
+    "saveNamespace": "SugarCube.Save"
+  },
+  "state_hash": "2b207ffccc57de81",
+  "body_text": "Under One Roof\n\nLily Chen, a 19-year-old art student, is stranded by circumstance at her new step-father's isolated rural property with his two adult sons. Her dorm flooded. Mom is overseas. She has $400 and nowhere else to go. Three men, thin walls, one shared bathroom, and an economic math that forces escalation. The house is the arena. Pride is the engine. Proximity does the rest.\n\nWe're a small indie studio crafting intimate, story-driven experiences. Every game is made with care, and your support helps us keep creating. If you enjoy our work, consider supporting us!\n\n👉 Support us on Patreon\n\n⚠️ This game contains adult content intended for players 18 years of age or older.\n\n✓ I am 18 or older - Enter Game\n✗ I am NOT 18 or older\n\nDeveloped by NutGames\n\n👉 Support us on Patreon",
+  "body_html": "<div class=\"game-intro\"> <h1>Under One Roof</h1> <p class=\"game-description\">Lily Chen, a 19-year-old art student, is stranded by circumstance at her new step-father's isolated rural property with his two adult sons. Her dorm flooded. Mom is overseas. She has $400 and nowhere else to go. Three men, thin walls, one shared bathroom, and an economic math that forces escalation. The house is the arena. Pride is the engine. Proximity does the rest. </p> <div class=\"developer-intro\"> <p class=\"developer-about\">We're a small indie studio crafting intimate, story-driven experiences. Every game is made with care, and your support helps us keep creating. If you enjoy our work, consider supporting us!</p> <p class=\"support-link\">👉 <a href=\"https://www.patreon.com/cw/nutgames844\" target=\"_blank\" rel=\"noopener\" class=\"link-external\" tabindex=\"-2\" aria-hidden=\"true\">Support us on Patreon</a></p> </div> <div class=\"age-gate\"> <p class=\"age-warning\">⚠️ This game contains adult content intended for players 18 years of age or older.</p> <div class=\"age-buttons\"> <a data-passage=\"CustomizeCharacters\" class=\"link-internal\" tabindex=\"-2\" aria-hidden=\"true\">✓ I am 18 or older - Enter Game</a> <a data-passage=\"AgeBlocked\" class=\"link-internal\" tabindex=\"-2\" aria-hidden=\"true\">✗ I am NOT 18 or older</a> </div> </div> <div class=\"developer-footer\"> <p class=\"developer-credit\">Developed by <strong>NutGames</strong></p> <p class=\"support-link\">👉 <a href=\"https://www.patreon.com/cw/nutgames844\" target=\"_blank\" rel=\"noopener\" class=\"link-external\" tabindex=\"-2\" aria-hidden=\"true\">Support us on Patreon</a></p> </div> </div>",
+  "modal_text": "Are you sure that you want to restart? Unsaved progress will be lost.\n\nOKCancel"
+}

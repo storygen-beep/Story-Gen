@@ -1,0 +1,21 @@
+{
+  "session_id": 2,
+  "start_ts": "2026-05-03T20:20:47.342Z",
+  "start_epoch_ms": 1777839647342,
+  "end_ts": "2026-05-03T22:13:55.251Z",
+  "duration_s": 6788,
+  "clicks": 49,
+  "choices_explored": 49,
+  "arrow_advances": 0,
+  "unique_states_seen": 84,
+  "new_unique_states": 51,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "DISCOVERY OBSERVATION #7 (REVISION) — RTS DOES use scripted intro vignettes for first NPC encounter. Game changelog v0.25 line: 'Meeting Natasha for the first time in the school library is now a short intro scene before regular chats unlock.' This refines my earlier 'no scripted intro' claim — the FIRST encounter with a named NPC gets a scripted intro scene, after which they drop into the normal scene-table flow. Pattern: intro vignette → normal recurring activity. Updates Q1 answer.",
+    "DISCOVERY OBSERVATION #8 — DISABLED→ENABLED IS SILENT. ❌ Too early to sleep ❌ button became Sleep 💤 silently after time hit Night. No notification, no animation, just label change. Player notices on next sidebar/button-list scan. Same pattern as new-button-appears: world updates, no interruption.",
+    "DEEP PROGRESSION FINDINGS (Day 2, played to PeepBrotherSex completion):\n\nOBSERVATION #9 — STATUS COLUMN = COMPLETION TRACKER (NOT ACCESSIBILITY GATE).\nWalkthrough STATUS flipped from 🔒 Locked to ✅ Unlocked only after the player completed PeepBrotherSex through to its climax (final 'Cum!' choice). Backed by per-scene state: 'npc.Brother.scenes.PeepBrotherSex.unlocked: false → true' written at the climax. So the walkthrough is a SCENE CHECKLIST / GALLERY — REQUIREMENTS columns + GUIDE prose tell HOW to satisfy each scene; STATUS shows WHICH you've COMPLETED. This is much closer to an achievement-tracker design than a real-time-gate display.\n\nOBSERVATION #10 — FALL-THROUGH SCENES vs CANONICAL.\nEarlier I clicked 'Sleep with him 💤' at MC corruption 30 + Brother arousal 🔥🔥🔥 + Brother corruption 0 (one walkthrough requirement NOT met). Got a soft cuddle vignette then 'Go to your bedroom and sleep' — that was a FALL-THROUGH alt scene, not the canonical 'Sleep with Stepbrother'. STATUS stayed 🔒. PeepBrotherSex with all reqs met fired its full drip → STATUS ✅. Walkthrough requirements are SOFT for ATTEMPTS but HARD for COMPLETION-CREDIT.\n\nOBSERVATION #11 — IN-CONTEXT BUTTON INJECTION (Q1 RESOLVED).\nVisiting BrotherBedroom at MC corruption 31 + Brother arousal 🔥🔥 + Brother corruption 15 + relation 10 + evening = FOUR new buttons appeared in the room: Talk / Tease / Flash / Have sex. Same passage as Day 1 (which showed only 'is not in his bedroom' + Hallway). No notification, no toast, no quest update — buttons just showed up. Player walks in with the right state and the room is denser. THIS is RTS's primary 'new activity appears' pattern: location passages render their button set conditionally on (MC stats, NPC stats, time, day, relation) and the differential is the discovery moment. Walking into a familiar room and noticing 3 new buttons IS the unlock notification.\n\nOBSERVATION #12 — RANDOM ENCOUNTER ENTRY GATING.\nPeepBrotherSex fired on room entry as a 25%-chance random encounter (per walkthrough table). Did NOT appear as a button in the prior turn — it INTERCEPTED the room visit and replaced the normal room render with its own scene. So 'random encounter' fires are PASSAGE OVERRIDES at navigation time, not a button-list addition. Player attempts to enter a room → dice roll → either normal room OR an encounter scene takes over.\n\nOBSERVATION #13 — LINKREPLACE-DRIP CONFIRMED.\nPeepBrotherSex used 4-step linkreplace: Peep → adds paragraph + new choice 'Stroke your pussy' → adds paragraph + 'Masturbate' → adds paragraph + 'Cum!' → final paragraph + Hallway exit. Same passage throughout. Player perceives a sustained scene with multiple beats; engine sees one passage with progressive content reveal. Climax choice writes the unlocked flag + corruption +1 + arousal -1.\n\nOBSERVATION #14 — SCHEDULED FUTURE OPENINGS WITH COUNTDOWN PHRASING.\nSleeping a night flipped many location.X.open false→true AND others changed location.X.opensAt from 'Tomorrow (Afternoon)' → 'Afternoon'. RTS shows scheduled openings with day-relative countdown phrasing in the variable model — possibly surfaced somewhere in UI."
+  ]
+}

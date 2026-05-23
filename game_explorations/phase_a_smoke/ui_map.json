@@ -1,0 +1,3850 @@
+{
+  "slug": "phase_a_smoke",
+  "url": "file:///private/tmp/phase_a_smoke_build/index.html",
+  "generated_at": "2026-05-13T20:06:41.669Z",
+  "engine": "sugarcube",
+  "pregame_auto_advance": {
+    "trail": [
+      {
+        "step": 0,
+        "passage": "Start",
+        "action": "clicked_forward",
+        "text": "Next Day",
+        "tier": 4
+      },
+      {
+        "step": 1,
+        "passage": "Start",
+        "action": "clicked_forward",
+        "text": "Next Day",
+        "tier": 4
+      },
+      {
+        "step": 1,
+        "passage": "Start",
+        "action": "terminated",
+        "reason": "same_passage_same_button_consecutive"
+      }
+    ],
+    "terminated_at": {
+      "step": 1,
+      "passage": "Start",
+      "action": "terminated",
+      "reason": "same_passage_same_button_consecutive"
+    }
+  },
+  "regions_catalog": [
+    {
+      "pos_class": "left",
+      "id": "ui-bar",
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 281,
+        "h": 900
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [
+        {
+          "text": "Phase A Smoke Test",
+          "tag": "h1",
+          "cls": ""
+        },
+        {
+          "text": "Your Traits",
+          "tag": "div",
+          "cls": "traits-header"
+        },
+        {
+          "text": "NPC Traits",
+          "tag": "div",
+          "cls": "traits-header"
+        }
+      ],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 93,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 152,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📋 Review Canvases",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 58,
+            "y": -45,
+            "w": 163,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "⚠️ Missing Media",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 79,
+            "y": 25,
+            "w": 123,
+            "h": 19
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">",
+          "title": "Advance 10 minutes",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 69,
+            "y": 108,
+            "w": 21,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>",
+          "title": "Advance 1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": 108,
+            "w": 28,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>>>>",
+          "title": "Advance 1 day",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 161,
+            "y": 108,
+            "w": 50,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "+1hr",
+          "title": "Dev: +1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 73,
+            "y": 139,
+            "w": 43,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "Next Day",
+          "title": "Dev: Next day 7AM",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 136,
+            "y": 139,
+            "w": 72,
+            "h": 22
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📋 Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 102,
+            "y": 261,
+            "w": 76,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📊 Stats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 110,
+            "y": 355,
+            "w": 60,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "🚩 Flags",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 109,
+            "y": 449,
+            "w": 62,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "patreon-link",
+          "text": "Support Us",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 78,
+            "y": 712,
+            "w": 124,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 830,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 865,
+            "w": 230,
+            "h": 34
+          }
+        }
+      ],
+      "passive_text_samples": [
+        "Phase A Smoke Test",
+        "[DEV MODE]",
+        "8:00 AM",
+        "Monday",
+        "Day",
+        "Your Traits",
+        "No traits",
+        "Use +/- to adjust for testing.",
+        "NPC Traits",
+        "#time-widget {\n    background: var(--theme-surface);\n    bor"
+      ]
+    },
+    {
+      "pos_class": "sampled",
+      "id": "ui-bar-history",
+      "bbox": {
+        "x": 0,
+        "y": 3,
+        "w": 280,
+        "h": 32
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 93,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 152,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        }
+      ],
+      "passive_text_samples": []
+    },
+    {
+      "pos_class": "sampled",
+      "id": "ui-bar-body",
+      "bbox": {
+        "x": 0,
+        "y": 40,
+        "w": 280,
+        "h": 860
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [
+        {
+          "text": "Phase A Smoke Test",
+          "tag": "h1",
+          "cls": ""
+        },
+        {
+          "text": "Your Traits",
+          "tag": "div",
+          "cls": "traits-header"
+        },
+        {
+          "text": "NPC Traits",
+          "tag": "div",
+          "cls": "traits-header"
+        }
+      ],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📋 Review Canvases",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 58,
+            "y": -45,
+            "w": 163,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "⚠️ Missing Media",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 79,
+            "y": 25,
+            "w": 123,
+            "h": 19
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">",
+          "title": "Advance 10 minutes",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 69,
+            "y": 108,
+            "w": 21,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>",
+          "title": "Advance 1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": 108,
+            "w": 28,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>>>>",
+          "title": "Advance 1 day",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 161,
+            "y": 108,
+            "w": 50,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "+1hr",
+          "title": "Dev: +1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 73,
+            "y": 139,
+            "w": 43,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "Next Day",
+          "title": "Dev: Next day 7AM",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 136,
+            "y": 139,
+            "w": 72,
+            "h": 22
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📋 Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 102,
+            "y": 261,
+            "w": 76,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📊 Stats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 110,
+            "y": 355,
+            "w": 60,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "🚩 Flags",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 109,
+            "y": 449,
+            "w": 62,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "patreon-link",
+          "text": "Support Us",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 78,
+            "y": 712,
+            "w": 124,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 830,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 865,
+            "w": 230,
+            "h": 34
+          }
+        }
+      ],
+      "passive_text_samples": [
+        "Phase A Smoke Test",
+        "[DEV MODE]",
+        "8:00 AM",
+        "Monday",
+        "Day",
+        "Your Traits",
+        "No traits",
+        "Use +/- to adjust for testing.",
+        "NPC Traits",
+        "#time-widget {\n    background: var(--theme-surface);\n    bor"
+      ]
+    }
+  ],
+  "chrome_probes": [
+    {
+      "label": "📋 Review Canvases",
+      "bbox": {
+        "x": 58,
+        "y": -45,
+        "w": 163,
+        "h": 36
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/phase_a_smoke/ui_probes/_Review_Canvases.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 3529,
+      "panel_text": "6:00 AM | Wednesday | Day 3\nCanvas Review\nActivities\nSmoke Intro\n·\nT0\nSmokey Greeting\n·\nT0\nBack to Game",
+      "dialog_text": null,
+      "post_click_text": "\nPhase A Smoke Test\n\n[DEV MODE]\n\n\n📋 Review Canvases\n\n\n⚠️ Missing Media\n\n\n6:00 AM | Wednesday | Day 3\n> | >> | >>>>>\n+1hr | Next Day\n\n\n\n\n📋 Quests\n\n\n\n📊 Stats\n\n\n\n🚩 Flags\n\n\nYour Traits\nNo traits\nUse +/- to adjust for testing.\n\n\nNPC Traits\n\n\nSupport Us\n\n\n\nSAVES\nRESTART\n\n\nCanvas Review\n\n\n\nActivities\n\n\n\n\nSmoke Intro\n\n\n\n\n\n\n·\n\n\nT0\n\n\n\n\n\n\n\n\n\n\nSmokey Greeting\n\n\n\n\n\n\n·\n\n\nT0\n\n\n\n\n\n\n\n\n\n\nBack to Game\n\n\n",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 93,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 152,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📋 Review Canvases",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 58,
+            "y": 208,
+            "w": 163,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "⚠️ Missing Media",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 79,
+            "y": 278,
+            "w": 123,
+            "h": 19
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">",
+          "title": "Advance 10 minutes",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 69,
+            "y": 378,
+            "w": 21,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>",
+          "title": "Advance 1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": 378,
+            "w": 28,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>>>>",
+          "title": "Advance 1 day",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 161,
+            "y": 378,
+            "w": 50,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "+1hr",
+          "title": "Dev: +1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 73,
+            "y": 409,
+            "w": 43,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "Next Day",
+          "title": "Dev: Next day 7AM",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 136,
+            "y": 409,
+            "w": 72,
+            "h": 22
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📋 Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 102,
+            "y": 531,
+            "w": 76,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📊 Stats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 110,
+            "y": 625,
+            "w": 60,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "🚩 Flags",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 109,
+            "y": 719,
+            "w": 62,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "patreon-link",
+          "text": "Support Us",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 78,
+            "y": 982,
+            "w": 124,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1100,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1135,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "T0",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 496,
+            "y": 444,
+            "w": 41,
+            "h": 29
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "T0",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 496,
+            "y": 661,
+            "w": 41,
+            "h": 29
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Back to Game",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 460,
+            "y": 871,
+            "w": 143,
+            "h": 41
+          }
+        }
+      ]
+    },
+    {
+      "label": "⚠️ Missing Media",
+      "bbox": {
+        "x": 79,
+        "y": 25,
+        "w": 123,
+        "h": 19
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/phase_a_smoke/ui_probes/_Missing_Media.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 3366,
+      "panel_text": "Missing Media Files\nNo missing media files found.\n← Back",
+      "dialog_text": null,
+      "post_click_text": "\nPhase A Smoke Test\n\n[DEV MODE]\n\n\n📋 Review Canvases\n\n\n⚠️ Missing Media\n\n\n8:00 AM | Monday | Day 1\n> | >> | >>>>>\n+1hr | Next Day\n\n\n\n\n📋 Quests\n\n\n\n📊 Stats\n\n\n\n🚩 Flags\n\n\nYour Traits\nNo traits\nUse +/- to adjust for testing.\n\n\nNPC Traits\n\n\nSupport Us\n\n\n\nSAVES\nRESTART\nMissing Media Files\n\n\n\nNo missing media files found.\n\n\n\n← Back",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 93,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 152,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📋 Review Canvases",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 58,
+            "y": 208,
+            "w": 163,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">",
+          "title": "Advance 10 minutes",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 69,
+            "y": 362,
+            "w": 21,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>",
+          "title": "Advance 1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": 362,
+            "w": 28,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>>>>",
+          "title": "Advance 1 day",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 161,
+            "y": 362,
+            "w": 50,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "+1hr",
+          "title": "Dev: +1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 73,
+            "y": 392,
+            "w": 43,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "Next Day",
+          "title": "Dev: Next day 7AM",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 136,
+            "y": 392,
+            "w": 72,
+            "h": 22
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📋 Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 102,
+            "y": 515,
+            "w": 76,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📊 Stats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 110,
+            "y": 608,
+            "w": 60,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "🚩 Flags",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 109,
+            "y": 702,
+            "w": 62,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "patreon-link",
+          "text": "Support Us",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 78,
+            "y": 965,
+            "w": 124,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1084,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1119,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "← Back",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 428,
+            "y": 286,
+            "w": 56,
+            "h": 19
+          }
+        }
+      ]
+    },
+    {
+      "label": ">",
+      "bbox": {
+        "x": 69,
+        "y": 108,
+        "w": 21,
+        "h": 22
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/phase_a_smoke/ui_probes/_.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 7322,
+      "panel_text": "8:10 AM | Monday | Day 1",
+      "dialog_text": null,
+      "post_click_text": "\nPhase A Smoke Test\n\n[DEV MODE]\n\n\n📋 Review Canvases\n\n\n⚠️ Missing Media\n\n\n8:10 AM | Monday | Day 1\n> | >> | >>>>>\n+1hr | Next Day\n\n\n\n\n📋 Quests\n\n\n\n📊 Stats\n\n\n\n🚩 Flags\n\n\nYour Traits\nNo traits\nUse +/- to adjust for testing.\n\n\nNPC Traits\n\n\nSupport Us\n\n\n\nSAVES\nRESTART\nPhase A Smoke Test\n\nMinimal fixture — one NPC scheduled in kitchen 06:00–10:00; one Lane 2 random canvas with requires_npc fires only when NPC is present.\n\nWe're a small indie studio crafting intimate, story-driven experiences. Every game is made with care, and your support helps us keep creating. If you enjoy our work, consider supporting us!\n\n👉 Support us on Patreon\n\n⚠️ This game contains adult content intended for players 18 years of age or older.\n\n✓ I am 18 or older - Enter Game\n✗ I am NOT 18 or older\n\nDeveloped by NutGames\n\n👉 Support us on Patreon",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 93,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 152,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📋 Review Canvases",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 58,
+            "y": 208,
+            "w": 163,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "⚠️ Missing Media",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 79,
+            "y": 278,
+            "w": 123,
+            "h": 19
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">",
+          "title": "Advance 10 minutes",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 69,
+            "y": 362,
+            "w": 21,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>",
+          "title": "Advance 1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": 362,
+            "w": 28,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>>>>",
+          "title": "Advance 1 day",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 161,
+            "y": 362,
+            "w": 50,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "+1hr",
+          "title": "Dev: +1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 73,
+            "y": 392,
+            "w": 43,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "Next Day",
+          "title": "Dev: Next day 7AM",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 136,
+            "y": 392,
+            "w": 72,
+            "h": 22
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📋 Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 102,
+            "y": 515,
+            "w": 76,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📊 Stats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 110,
+            "y": 608,
+            "w": 60,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "🚩 Flags",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 109,
+            "y": 702,
+            "w": 62,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "patreon-link",
+          "text": "Support Us",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 78,
+            "y": 965,
+            "w": 124,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1084,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1119,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "Support us on Patreon",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 448,
+            "y": 293,
+            "w": 180,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "✓ I am 18 or older - Enter Game",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 745,
+            "y": 417,
+            "w": 229,
+            "h": 28
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "✗ I am NOT 18 or older",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 778,
+            "y": 455,
+            "w": 164,
+            "h": 28
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "Support us on Patreon",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 783,
+            "y": 613,
+            "w": 173,
+            "h": 17
+          }
+        }
+      ]
+    },
+    {
+      "label": ">>",
+      "bbox": {
+        "x": 111,
+        "y": 108,
+        "w": 28,
+        "h": 22
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/phase_a_smoke/ui_probes/_.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 7309,
+      "panel_text": "9:00 AM | Monday | Day 1",
+      "dialog_text": null,
+      "post_click_text": "\nPhase A Smoke Test\n\n[DEV MODE]\n\n\n📋 Review Canvases\n\n\n⚠️ Missing Media\n\n\n9:00 AM | Monday | Day 1\n> | >> | >>>>>\n+1hr | Next Day\n\n\n\n\n📋 Quests\n\n\n\n📊 Stats\n\n\n\n🚩 Flags\n\n\nYour Traits\nNo traits\nUse +/- to adjust for testing.\n\n\nNPC Traits\n\n\nSupport Us\n\n\n\nSAVES\nRESTART\nPhase A Smoke Test\n\nMinimal fixture — one NPC scheduled in kitchen 06:00–10:00; one Lane 2 random canvas with requires_npc fires only when NPC is present.\n\nWe're a small indie studio crafting intimate, story-driven experiences. Every game is made with care, and your support helps us keep creating. If you enjoy our work, consider supporting us!\n\n👉 Support us on Patreon\n\n⚠️ This game contains adult content intended for players 18 years of age or older.\n\n✓ I am 18 or older - Enter Game\n✗ I am NOT 18 or older\n\nDeveloped by NutGames\n\n👉 Support us on Patreon",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 93,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 152,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📋 Review Canvases",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 58,
+            "y": 208,
+            "w": 163,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "⚠️ Missing Media",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 79,
+            "y": 278,
+            "w": 123,
+            "h": 19
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">",
+          "title": "Advance 10 minutes",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 69,
+            "y": 362,
+            "w": 21,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>",
+          "title": "Advance 1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": 362,
+            "w": 28,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>>>>",
+          "title": "Advance 1 day",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 161,
+            "y": 362,
+            "w": 50,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "+1hr",
+          "title": "Dev: +1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 73,
+            "y": 392,
+            "w": 43,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "Next Day",
+          "title": "Dev: Next day 7AM",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 136,
+            "y": 392,
+            "w": 72,
+            "h": 22
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📋 Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 102,
+            "y": 515,
+            "w": 76,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📊 Stats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 110,
+            "y": 608,
+            "w": 60,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "🚩 Flags",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 109,
+            "y": 702,
+            "w": 62,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "patreon-link",
+          "text": "Support Us",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 78,
+            "y": 965,
+            "w": 124,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1084,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1119,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "Support us on Patreon",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 448,
+            "y": 293,
+            "w": 180,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "✓ I am 18 or older - Enter Game",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 745,
+            "y": 417,
+            "w": 229,
+            "h": 28
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "✗ I am NOT 18 or older",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 778,
+            "y": 455,
+            "w": 164,
+            "h": 28
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "Support us on Patreon",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 783,
+            "y": 613,
+            "w": 173,
+            "h": 17
+          }
+        }
+      ]
+    },
+    {
+      "label": ">>>>>",
+      "bbox": {
+        "x": 161,
+        "y": 108,
+        "w": 50,
+        "h": 22
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/phase_a_smoke/ui_probes/_.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 7342,
+      "panel_text": "8:00 AM | Tuesday | Day 2",
+      "dialog_text": null,
+      "post_click_text": "\nPhase A Smoke Test\n\n[DEV MODE]\n\n\n📋 Review Canvases\n\n\n⚠️ Missing Media\n\n\n8:00 AM | Tuesday | Day 2\n> | >> | >>>>>\n+1hr | Next Day\n\n\n\n\n📋 Quests\n\n\n\n📊 Stats\n\n\n\n🚩 Flags\n\n\nYour Traits\nNo traits\nUse +/- to adjust for testing.\n\n\nNPC Traits\n\n\nSupport Us\n\n\n\nSAVES\nRESTART\nPhase A Smoke Test\n\nMinimal fixture — one NPC scheduled in kitchen 06:00–10:00; one Lane 2 random canvas with requires_npc fires only when NPC is present.\n\nWe're a small indie studio crafting intimate, story-driven experiences. Every game is made with care, and your support helps us keep creating. If you enjoy our work, consider supporting us!\n\n👉 Support us on Patreon\n\n⚠️ This game contains adult content intended for players 18 years of age or older.\n\n✓ I am 18 or older - Enter Game\n✗ I am NOT 18 or older\n\nDeveloped by NutGames\n\n👉 Support us on Patreon",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 93,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 152,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📋 Review Canvases",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 58,
+            "y": 208,
+            "w": 163,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "⚠️ Missing Media",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 79,
+            "y": 278,
+            "w": 123,
+            "h": 19
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">",
+          "title": "Advance 10 minutes",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 69,
+            "y": 362,
+            "w": 21,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>",
+          "title": "Advance 1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": 362,
+            "w": 28,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>>>>",
+          "title": "Advance 1 day",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 161,
+            "y": 362,
+            "w": 50,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "+1hr",
+          "title": "Dev: +1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 73,
+            "y": 392,
+            "w": 43,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "Next Day",
+          "title": "Dev: Next day 7AM",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 136,
+            "y": 392,
+            "w": 72,
+            "h": 22
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📋 Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 102,
+            "y": 515,
+            "w": 76,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📊 Stats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 110,
+            "y": 608,
+            "w": 60,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "🚩 Flags",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 109,
+            "y": 702,
+            "w": 62,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "patreon-link",
+          "text": "Support Us",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 78,
+            "y": 965,
+            "w": 124,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1084,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1119,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "Support us on Patreon",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 448,
+            "y": 293,
+            "w": 180,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "✓ I am 18 or older - Enter Game",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 745,
+            "y": 417,
+            "w": 229,
+            "h": 28
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "✗ I am NOT 18 or older",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 778,
+            "y": 455,
+            "w": 164,
+            "h": 28
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "Support us on Patreon",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 783,
+            "y": 613,
+            "w": 173,
+            "h": 17
+          }
+        }
+      ]
+    },
+    {
+      "label": "+1hr",
+      "bbox": {
+        "x": 73,
+        "y": 139,
+        "w": 43,
+        "h": 22
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/phase_a_smoke/ui_probes/_1hr.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 7343,
+      "panel_text": "9:00 AM | Monday | Day 1",
+      "dialog_text": null,
+      "post_click_text": "\nPhase A Smoke Test\n\n[DEV MODE]\n\n\n📋 Review Canvases\n\n\n⚠️ Missing Media\n\n\n9:00 AM | Monday | Day 1\n> | >> | >>>>>\n+1hr | Next Day\n\n\n\n\n📋 Quests\n\n\n\n📊 Stats\n\n\n\n🚩 Flags\n\n\nYour Traits\nNo traits\nUse +/- to adjust for testing.\n\n\nNPC Traits\n\n\nSupport Us\n\n\n\nSAVES\nRESTART\nPhase A Smoke Test\n\nMinimal fixture — one NPC scheduled in kitchen 06:00–10:00; one Lane 2 random canvas with requires_npc fires only when NPC is present.\n\nWe're a small indie studio crafting intimate, story-driven experiences. Every game is made with care, and your support helps us keep creating. If you enjoy our work, consider supporting us!\n\n👉 Support us on Patreon\n\n⚠️ This game contains adult content intended for players 18 years of age or older.\n\n✓ I am 18 or older - Enter Game\n✗ I am NOT 18 or older\n\nDeveloped by NutGames\n\n👉 Support us on Patreon",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 93,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 152,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📋 Review Canvases",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 58,
+            "y": 208,
+            "w": 163,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "⚠️ Missing Media",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 79,
+            "y": 278,
+            "w": 123,
+            "h": 19
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">",
+          "title": "Advance 10 minutes",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 69,
+            "y": 362,
+            "w": 21,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>",
+          "title": "Advance 1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": 362,
+            "w": 28,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>>>>",
+          "title": "Advance 1 day",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 161,
+            "y": 362,
+            "w": 50,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "+1hr",
+          "title": "Dev: +1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 73,
+            "y": 392,
+            "w": 43,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "Next Day",
+          "title": "Dev: Next day 7AM",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 136,
+            "y": 392,
+            "w": 72,
+            "h": 22
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📋 Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 102,
+            "y": 515,
+            "w": 76,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📊 Stats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 110,
+            "y": 608,
+            "w": 60,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "🚩 Flags",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 109,
+            "y": 702,
+            "w": 62,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "patreon-link",
+          "text": "Support Us",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 78,
+            "y": 965,
+            "w": 124,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1084,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1119,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "Support us on Patreon",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 448,
+            "y": 293,
+            "w": 180,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "✓ I am 18 or older - Enter Game",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 745,
+            "y": 417,
+            "w": 229,
+            "h": 28
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "✗ I am NOT 18 or older",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 778,
+            "y": 455,
+            "w": 164,
+            "h": 28
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "Support us on Patreon",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 783,
+            "y": 613,
+            "w": 173,
+            "h": 17
+          }
+        }
+      ]
+    },
+    {
+      "label": "Next Day",
+      "bbox": {
+        "x": 136,
+        "y": 139,
+        "w": 72,
+        "h": 22
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/phase_a_smoke/ui_probes/Next_Day.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 7320,
+      "panel_text": null,
+      "dialog_text": null,
+      "post_click_text": "\nPhase A Smoke Test\n\n[DEV MODE]\n\n\n📋 Review Canvases\n\n\n⚠️ Missing Media\n\n\n8:00 AM | Monday | Day 1\n> | >> | >>>>>\n+1hr | Next Day\n\n\n\n\n📋 Quests\n\n\n\n📊 Stats\n\n\n\n🚩 Flags\n\n\nYour Traits\nNo traits\nUse +/- to adjust for testing.\n\n\nNPC Traits\n\n\nSupport Us\n\n\n\nSAVES\nRESTART\nPhase A Smoke Test\n\nMinimal fixture — one NPC scheduled in kitchen 06:00–10:00; one Lane 2 random canvas with requires_npc fires only when NPC is present.\n\nWe're a small indie studio crafting intimate, story-driven experiences. Every game is made with care, and your support helps us keep creating. If you enjoy our work, consider supporting us!\n\n👉 Support us on Patreon\n\n⚠️ This game contains adult content intended for players 18 years of age or older.\n\n✓ I am 18 or older - Enter Game\n✗ I am NOT 18 or older\n\nDeveloped by NutGames\n\n👉 Support us on Patreon",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 93,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 152,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📋 Review Canvases",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 58,
+            "y": 208,
+            "w": 163,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "⚠️ Missing Media",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 79,
+            "y": 278,
+            "w": 123,
+            "h": 19
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">",
+          "title": "Advance 10 minutes",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 69,
+            "y": 362,
+            "w": 21,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>",
+          "title": "Advance 1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": 362,
+            "w": 28,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>>>>",
+          "title": "Advance 1 day",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 161,
+            "y": 362,
+            "w": 50,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "+1hr",
+          "title": "Dev: +1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 73,
+            "y": 392,
+            "w": 43,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "Next Day",
+          "title": "Dev: Next day 7AM",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 136,
+            "y": 392,
+            "w": 72,
+            "h": 22
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📋 Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 102,
+            "y": 515,
+            "w": 76,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📊 Stats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 110,
+            "y": 608,
+            "w": 60,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "🚩 Flags",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 109,
+            "y": 702,
+            "w": 62,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "patreon-link",
+          "text": "Support Us",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 78,
+            "y": 965,
+            "w": 124,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1084,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1119,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "Support us on Patreon",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 448,
+            "y": 293,
+            "w": 180,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "✓ I am 18 or older - Enter Game",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 745,
+            "y": 417,
+            "w": 229,
+            "h": 28
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal",
+          "text": "✗ I am NOT 18 or older",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 778,
+            "y": 455,
+            "w": 164,
+            "h": 28
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-external",
+          "text": "Support us on Patreon",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 783,
+            "y": 613,
+            "w": 173,
+            "h": 17
+          }
+        }
+      ]
+    },
+    {
+      "label": "📋 Quests",
+      "bbox": {
+        "x": 102,
+        "y": 261,
+        "w": 76,
+        "h": 18
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/phase_a_smoke/ui_probes/_Quests.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 3389,
+      "panel_text": "What's Next\nNo active quests.\n← Back",
+      "dialog_text": null,
+      "post_click_text": "\nPhase A Smoke Test\n\n[DEV MODE]\n\n\n📋 Review Canvases\n\n\n⚠️ Missing Media\n\n\n8:00 AM | Monday | Day 1\n> | >> | >>>>>\n+1hr | Next Day\n\n\n\n\n📋 Quests\n\n\n\n📊 Stats\n\n\n\n🚩 Flags\n\n\nYour Traits\nNo traits\nUse +/- to adjust for testing.\n\n\nNPC Traits\n\n\nSupport Us\n\n\n\nSAVES\nRESTART\nWhat's Next\nNo active quests.\n\n← Back",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 93,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 152,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📋 Review Canvases",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 58,
+            "y": 208,
+            "w": 163,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "⚠️ Missing Media",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 79,
+            "y": 278,
+            "w": 123,
+            "h": 19
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">",
+          "title": "Advance 10 minutes",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 69,
+            "y": 362,
+            "w": 21,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>",
+          "title": "Advance 1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": 362,
+            "w": 28,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>>>>",
+          "title": "Advance 1 day",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 161,
+            "y": 362,
+            "w": 50,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "+1hr",
+          "title": "Dev: +1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 73,
+            "y": 392,
+            "w": 43,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "Next Day",
+          "title": "Dev: Next day 7AM",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 136,
+            "y": 392,
+            "w": 72,
+            "h": 22
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📊 Stats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 110,
+            "y": 608,
+            "w": 60,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "🚩 Flags",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 109,
+            "y": 702,
+            "w": 62,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "patreon-link",
+          "text": "Support Us",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 78,
+            "y": 965,
+            "w": 124,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1084,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1119,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "← Back",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 428,
+            "y": 222,
+            "w": 56,
+            "h": 19
+          }
+        }
+      ]
+    },
+    {
+      "label": "📊 Stats",
+      "bbox": {
+        "x": 110,
+        "y": 355,
+        "w": 60,
+        "h": 19
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/phase_a_smoke/ui_probes/_Stats.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 3381,
+      "panel_text": "All Stats\nYou (Player)\nSmokey\n← Back",
+      "dialog_text": null,
+      "post_click_text": "\nPhase A Smoke Test\n\n[DEV MODE]\n\n\n📋 Review Canvases\n\n\n⚠️ Missing Media\n\n\n8:00 AM | Monday | Day 1\n> | >> | >>>>>\n+1hr | Next Day\n\n\n\n\n📋 Quests\n\n\n\n📊 Stats\n\n\n\n🚩 Flags\n\n\nYour Traits\nNo traits\nUse +/- to adjust for testing.\n\n\nNPC Traits\n\n\nSupport Us\n\n\n\nSAVES\nRESTART\nAll Stats\nYou (Player)\nNo traits\nSmokey\nNo traits\n\n← Back",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 93,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 152,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📋 Review Canvases",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 58,
+            "y": 208,
+            "w": 163,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "⚠️ Missing Media",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 79,
+            "y": 278,
+            "w": 123,
+            "h": 19
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">",
+          "title": "Advance 10 minutes",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 69,
+            "y": 362,
+            "w": 21,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>",
+          "title": "Advance 1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": 362,
+            "w": 28,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>>>>",
+          "title": "Advance 1 day",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 161,
+            "y": 362,
+            "w": 50,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "+1hr",
+          "title": "Dev: +1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 73,
+            "y": 392,
+            "w": 43,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "Next Day",
+          "title": "Dev: Next day 7AM",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 136,
+            "y": 392,
+            "w": 72,
+            "h": 22
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📋 Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 102,
+            "y": 515,
+            "w": 76,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "🚩 Flags",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 109,
+            "y": 702,
+            "w": 62,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "patreon-link",
+          "text": "Support Us",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 78,
+            "y": 965,
+            "w": 124,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1084,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1119,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "← Back",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 428,
+            "y": 446,
+            "w": 56,
+            "h": 19
+          }
+        }
+      ]
+    },
+    {
+      "label": "🚩 Flags",
+      "bbox": {
+        "x": 109,
+        "y": 449,
+        "w": 62,
+        "h": 19
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/phase_a_smoke/ui_probes/_Flags.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 3383,
+      "panel_text": "🚩 Game Flags\nStory Flags\ndebug_mode\n✔\ngame_started\n✔\n← Back",
+      "dialog_text": null,
+      "post_click_text": "\nPhase A Smoke Test\n\n[DEV MODE]\n\n\n📋 Review Canvases\n\n\n⚠️ Missing Media\n\n\n8:00 AM | Monday | Day 1\n> | >> | >>>>>\n+1hr | Next Day\n\n\n\n\n📋 Quests\n\n\n\n📊 Stats\n\n\n\n🚩 Flags\n\n\nYour Traits\nNo traits\nUse +/- to adjust for testing.\n\n\nNPC Traits\n\n\nSupport Us\n\n\n\nSAVES\nRESTART\n🚩 Game Flags\nStory Flags\ndebug_mode\n✔\ngame_started\n✔\n← Back\n\n",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 93,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 152,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "📋 Review Canvases",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 58,
+            "y": 208,
+            "w": 163,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "⚠️ Missing Media",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 79,
+            "y": 278,
+            "w": 123,
+            "h": 19
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">",
+          "title": "Advance 10 minutes",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 69,
+            "y": 362,
+            "w": 21,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>",
+          "title": "Advance 1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": 362,
+            "w": 28,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>>>>",
+          "title": "Advance 1 day",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 161,
+            "y": 362,
+            "w": 50,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "+1hr",
+          "title": "Dev: +1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 73,
+            "y": 392,
+            "w": 43,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn dev-btn",
+          "text": "Next Day",
+          "title": "Dev: Next day 7AM",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 136,
+            "y": 392,
+            "w": 72,
+            "h": 22
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📋 Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 102,
+            "y": 515,
+            "w": 76,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📊 Stats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 110,
+            "y": 608,
+            "w": 60,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "patreon-link",
+          "text": "Support Us",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 78,
+            "y": 965,
+            "w": 124,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1084,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 1119,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "← Back",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 428,
+            "y": 328,
+            "w": 56,
+            "h": 19
+          }
+        }
+      ]
+    },
+    {
+      "label": "Support Us",
+      "bbox": {
+        "x": 78,
+        "y": 712,
+        "w": 124,
+        "h": 38
+      },
+      "region_id": "ui-bar",
+      "skipped_reason": "external"
+    },
+    {
+      "label": "Saves",
+      "bbox": {
+        "x": 25,
+        "y": 830,
+        "w": 230,
+        "h": 34
+      },
+      "region_id": "ui-bar",
+      "skipped_reason": "save_mutation"
+    },
+    {
+      "label": "Restart",
+      "bbox": {
+        "x": 25,
+        "y": 865,
+        "w": 230,
+        "h": 34
+      },
+      "region_id": "ui-bar",
+      "skipped_reason": "destructive"
+    }
+  ],
+  "regions": [
+    {
+      "pos_class": "left",
+      "tag": "div",
+      "id": "ui-bar",
+      "cls": "",
+      "position_style": "fixed",
+      "z_index": "50",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 281,
+        "h": 900
+      },
+      "text_sample": "Phase A Smoke Test [DEV MODE]     📋 Review Canvases       ⚠️ Missing Media   "
+    },
+    {
+      "pos_class": "sampled",
+      "tag": "div",
+      "id": "ui-bar-history",
+      "cls": "",
+      "position_style": "static",
+      "z_index": "auto",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 0,
+        "y": 3,
+        "w": 280,
+        "h": 32
+      },
+      "text_sample": "",
+      "from_sampling": true
+    },
+    {
+      "pos_class": "sampled",
+      "tag": "div",
+      "id": "ui-bar-body",
+      "cls": "",
+      "position_style": "static",
+      "z_index": "auto",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 0,
+        "y": 40,
+        "w": 280,
+        "h": 860
+      },
+      "text_sample": "",
+      "from_sampling": true
+    }
+  ],
+  "main_content": null,
+  "chrome_probes_count": 10,
+  "ui_frame_hash": "5f9159b5de25df2e"
+}

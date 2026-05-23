@@ -36,8 +36,8 @@ class Command(BaseCommand):
         parser.add_argument(
             "--gen-version",
             type=str,
-            default="v1",
-            help="Generator version (default: v1)",
+            default="v2",
+            help="Generator version (default: v2). Pass v1 for frozen safe-mode rollback.",
         )
         parser.add_argument(
             "--force-copy",

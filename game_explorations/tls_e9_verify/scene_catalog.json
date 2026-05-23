@@ -1,0 +1,70 @@
+{
+  "Start": {
+    "first_ts": 1778933794602,
+    "visit_count": 12
+  },
+  "StartingCanvas_event_test_slice_intro_Node_1": {
+    "first_ts": 1778934095617,
+    "visit_count": 2
+  },
+  "Canvas_scene_livingroom_catch_Node_1": {
+    "first_ts": 1778934136889,
+    "visit_count": 1
+  },
+  "Canvas_scene_frank_declaration_Node_1": {
+    "first_ts": 1778934137279,
+    "visit_count": 8
+  },
+  "Canvas_scene_franks_bedroom_evening_Node_1": {
+    "first_ts": 1778934137667,
+    "visit_count": 1
+  },
+  "Canvas_scene_frank_sleepover_Node_1": {
+    "first_ts": 1778934138078,
+    "visit_count": 1
+  },
+  "Canvas_scene_diana_confrontation_Node_1": {
+    "first_ts": 1778934138456,
+    "visit_count": 1
+  },
+  "Canvas_scene_frank_declaration_Node_2": {
+    "first_ts": 1778934274764,
+    "visit_count": 2
+  },
+  "Canvas_scene_frank_passes_kitchen_door_Node_1": {
+    "first_ts": 1778934301205,
+    "visit_count": 4
+  },
+  "QuestsPage": {
+    "first_ts": 1778934302010,
+    "visit_count": 1
+  },
+  "Canvas_scene_diana_confrontation_Node_2": {
+    "first_ts": 1778934302438,
+    "visit_count": 1
+  },
+  "Canvas_scene_diana_confrontation_Node_3": {
+    "first_ts": 1778934302838,
+    "visit_count": 1
+  },
+  "Canvas_scene_anon_dm_Node_1": {
+    "first_ts": 1778934303243,
+    "visit_count": 2
+  },
+  "Canvas_scene_ryan_first_date_Node_1": {
+    "first_ts": 1778934303637,
+    "visit_count": 2
+  },
+  "Canvas_scene_jake_caught_drawing_Node_1": {
+    "first_ts": 1778934304038,
+    "visit_count": 2
+  },
+  "Canvas_scene_marge_diner_hub_Node_1": {
+    "first_ts": 1778934304421,
+    "visit_count": 2
+  },
+  "Canvas_scene_diana_bedroom_hub_Node_1": {
+    "first_ts": 1778934304806,
+    "visit_count": 2
+  }
+}

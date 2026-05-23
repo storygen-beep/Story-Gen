@@ -10,23 +10,19 @@
 
 ## Mental model: what a good hint does
 
-A hint should answer the player's question *"What do I do right now to advance this thread?"* in **one screen-glance**. It is not the journal. It is not the prose voice. It is a small block of:
+A Quests card has exactly **one piece**: the first-person Maya narrative line (`text` field) — what Maya is thinking about this thread right now. That's the entire card.
 
-1. **Where** to go (location name as it appears in-game)
-2. **When** the action is available (time band, day filter)
-3. **What** to do (verb + object)
-4. **Numeric thresholds** that gate the next stage (with the comparison operator, not the variable name)
-5. **Cost / cooldown** if non-obvious (e.g., trust decay)
+No structured goal block. No activity list. No location/schedule/threshold UI. No 💡 tip. State changes are conveyed by **swapping which template fires**, not by adding rows to the card. If state matters, you write a variant template gated on that state; the picker swaps the line at runtime.
 
-Optional flavor sentence (one short Maya-voice line) goes BEFORE the action block. Convention is to use ` — 🎯 ` as separator. Engine renders the two halves visually distinctly via the `<<renderStageHint>>` widget (E16).
+Game-level mechanics (decay rates, what affects diner tips, etc.) live on a separate `:: TipsPage` authored under `[ui.tips_page]` — see "Game-level mechanics: the Tips page" below.
+
+This is the post-2026-05-01 model. Earlier iterations shipped Pattern 2 (auto-rendered 🎯 goal block), Pattern 3 (per-NPC activity list), and a per-template `tip` field; all three were removed in favor of narrative variants + a single Tips page. See doc 12 §2.10 / §2.11 / §2.13 for the rollback rationale.
 
 ---
 
-## Narrative voice rules (post-Pattern 2/3)
+## Narrative voice rules
 
-> **Heads-up:** the "Mental model" section above describes the *pre-Pattern-2/3* shape of a hint, where the `text` field had to carry where/when/what/thresholds itself. After Pattern 2 (auto-rendered 🎯 goal block from helper conditions) and Pattern 3 (auto-rendered activity list from canvas data), the `text` field carries **only the narrative voice** — the engine handles the mechanics. These five rules cover how to write that narrative line going forward. The full "Mental model" section gets a comprehensive rewrite later; for `text` field authoring, treat this section as the source of truth.
-
-The auto-rendered blocks already tell the player *where to go, when, what to do, and how close they are*. The narrative line's only job is to make the journal entry feel like Maya's own thought — so a player can scan the page and immediately feel which thread each section is about. Inspired by Road to Success's quest-journal style: terse, first-person, mood + intent, no mechanics.
+The narrative line's only job is to make the journal entry feel like Maya's own thought — so a player can scan the page and immediately feel which thread each section is about. Inspired by Road to Success's quest-journal style: terse, first-person, mood + intent, no mechanics.
 
 ### Rule 1 — First-person, present-tense
 
@@ -63,21 +59,59 @@ The narrative line should tell the player what the section is *about* even befor
 - ✅ "Frank wants help with the books. I could use the money." (clear without mechanics — a player skimming knows: there's bookkeeping work, money's involved)
 - ❌ "He looked up from the table." (ambiguous — who? what about? mechanics required to interpret)
 
-### Why this works now (Pattern 2 + 3 context)
+---
 
-The card layout as of 2026-05-01 has four pieces:
+## Template ordering & narrative variants
 
-1. **Italic narrative** — the `text` field, governed by these rules
-2. **🎯 Goal block** — auto-rendered from helper conditions (Pattern 2, doc 12 §2.10)
-3. **💡 Tip** — the `tip` field, optional flavor / strategy advice
-4. **▸ Activity list** — auto-rendered from canvas data (Pattern 3, doc 12 §2.11)
+The picker resolves competing templates with this rule (per NPC, per global goal):
 
-Pieces 2 and 4 carry every number, schedule, location, and effect. The narrative's only job is mood + voice + intent. That's why these rules forbid mechanics in `text`: they'd be duplicated below, and the duplicate is the one that drifts.
+```
+sort by (priority desc, condition_items.length desc, file-order asc)
+```
 
-For **global hints** (rent / hygiene / energy — no `stage_npc` condition), Pattern 2 doesn't auto-render a goal block. Drop the manual ` — 🎯 ...` portion entirely and write only the journal thought; the activity list (Pattern 3) carries the actionable info.
+So a more-specific or higher-priority variant **automatically wins** — file order only matters as a final tiebreaker between truly identical candidates (and the linter warns if it has to). This means you can write multiple narrative variants for the same NPC stage, each gated on different state, and let the picker swap which one fires.
 
-- ✅ `text = "Rent's due Sunday morning. If I don't have it, I'm out on the street."` — narrative urgency only; the diner shift activity row below shows the player how to earn it
-- ❌ `text = "Rent's Sunday. — 🎯 $60 due Sunday morning in the Kitchen. Earn it at the Diner shift (Mon–Sat 17:00–22:00). Miss it → eviction."` — every number is drift-prone
+### Specificity is the default tiebreaker
+
+Most cases don't need a `priority` field. Just write the more-specific variant — the picker counts normalized `condition_items` and the longer list wins.
+
+```toml
+# Baseline — fires when nothing else applies. 1 condition_item (stage gate).
+[[story_arc.hints.templates]]
+text      = "Frank wants help with the books. I could use the money."
+npc_id    = "npc_frank"
+condition = { stage_npc = "npc_frank", stage_op = "eq", stage_value = 0 }
+
+# Crisis variant — fires while rent is unpaid. 2 condition_items
+# (stage gate + missing_flag) — wins by specificity, no priority needed.
+[[story_arc.hints.templates]]
+text      = "Frank's offering bookkeeping work — cash in hand. Rent's hanging over me. I can't afford to skip a session."
+npc_id    = "npc_frank"
+condition = { stage_npc = "npc_frank", stage_op = "eq", stage_value = 0, missing_flag = "first_rent_paid" }
+```
+
+Once `first_rent_paid` flips, the crisis variant stops matching, the baseline takes over, and the narrative softens automatically.
+
+### Use `priority = N` for crisis overrides
+
+Reserve explicit priority for **crisis or pressure variants that should override an ambient line of equal specificity**. Default 0; higher wins. Most templates leave it unset.
+
+A common case: the same number of condition_items but different urgency. The slice's Frank Stage 0 rent-pressure variant uses `priority = 10` belt-and-suspenders alongside the missing_flag specificity bump — both signals point the same direction, and the explicit priority makes intent obvious to a future reader of the TOML.
+
+### Anti-patterns
+
+- **Don't tag `priority` on every template.** Adds visual noise and makes it harder to scan for the variants that actually override.
+- **Don't reorder the file expecting behavior to change.** File order is the *last* tiebreaker; if you find yourself moving lines around to fix picker behavior, you need a priority bump or a distinguishing condition instead.
+- **Don't ship two templates with identical `npc_id + stage_value + priority + condition_items.length`.** The linter warns about this — bump one's priority or add a condition to differentiate.
+
+### Cross-NPC pressure (Diana arc territory)
+
+When a future arc gates on another NPC's stage (e.g., Diana opens up only after Frank Stage 2), don't add a structured "Progress with Frank" row — write a narrative variant whose `condition.prerequisite_npc_stage = "npc_frank >= 2"` carries the cue:
+
+- Pre-Frank-Stage-2: *"Diana keeps her distance. Maybe she's waiting to see if Frank trusts me first."*
+- Post-Frank-Stage-2: *"Diana wants to talk about something private."*
+
+The picker swaps the line; the player reads it as Maya noticing the shift.
 
 ### Authoring checklist (for narrative line specifically)
 
@@ -88,9 +122,46 @@ Before saving a `text` field, scan it once:
 - [ ] Zero numbers, zero time bands, zero `≥` / `<` / `+`?
 - [ ] Zero internal trait/flag names (`group_settled_in`, `frank_bookkeeping_count`, etc.)?
 - [ ] Reads as a journal thought a player would believe Maya wrote in her diary?
-- [ ] Standalone meaningful — gives a sense of what's at stake even without reading the block below?
+- [ ] Standalone meaningful — tells the player what the thread is about?
 
-If any answer is no, rewrite. If you need to mention a number/schedule, the right place is the helper definition or canvas trigger — the engine will render it.
+If any answer is no, rewrite. If you need to mention a number/schedule, the right place is the helper definition or canvas trigger — or, if it's universal game info, the Tips page.
+
+---
+
+## Game-level mechanics: the Tips page
+
+Anything that's a **rule about how the game works** ("Trust decays 1.0/day if you ignore an NPC", "Hygiene below 40 docks your diner tips", "Sleep restores energy fully but Nap costs hygiene") is **universal mechanics**, not quest-specific advice. Putting it on individual hint templates means:
+
+- Authors paste the same line onto every relevant card (drift risk).
+- Players read it once and tune it out by Day 2.
+- Updating a rate means a search-and-replace across templates.
+
+These belong on the **Tips page** — a separate `:: TipsPage` passage authored under `[ui.tips_page]` in the project metadata TOML, surfaced via a "💡 Tips" sidebar button. Authored once, accessible whenever the player wants it, off the Quests journal entirely. The slice's Tips page in `1_metadata_and_locations.toml` is the worked example — sections for Time / Trust / Hygiene / Energy / Money / Corruption + Beauty / Reading the Quests page.
+
+Schema:
+
+```toml
+[ui.tips_page]
+title = "Tips"
+content = """
+<h3>Trust</h3>
+<p>NPC trust climbs when you spend time on their stuff and decays roughly <strong>1.0/day</strong> when you ignore them.</p>
+
+<h3>Hygiene</h3>
+<p>Drops with sweat. Below 40, the diner manager docks your tips.</p>
+
+...
+"""
+```
+
+Author writes raw HTML (engine prints `content` verbatim — no markdown engine). When the block is absent, the sidebar button + page are not emitted (graceful no-op for games without a Tips page).
+
+**Quest-specific advice that isn't a universal rule** ("Frank's office tease count comes from supervised office scenes — push corruption first") has two homes today:
+
+1. **Folded into the narrative variant** — write a Frank Stage 2 variant whose narrative implies the path: *"Frank's lessons run past their hour. He's making excuses to keep me there. I should let him."*
+2. **Accept the player discovers it through play.** TLS-style sandboxes generally trust the player to experiment; not every gate needs a hint.
+
+If neither feels right, the quest needs a redesign — the player is being asked to guess something genuinely arbitrary.
 
 ### Reference example pairs (from the slice)
 

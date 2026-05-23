@@ -1,0 +1,766 @@
+{
+  "generated_at": "2026-05-13T20:11:10.010Z",
+  "variables": {
+    "last_game_passage": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 6,
+      "first_ts": 1778702801668,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 5,
+      "string_samples": [
+        "Start",
+        "StartingCanvas_canvas_smoke_intro_Node_1",
+        "Location_Entry",
+        "Canvas_canvas_smoke_random_Node_1",
+        "Location_Kitchen"
+      ]
+    },
+    "player.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778702801668,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 5,
+      "string_samples": [
+        "Player"
+      ]
+    },
+    "player.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778702801668,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 5,
+      "string_samples": [
+        ""
+      ]
+    },
+    "player.current_location": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 4,
+      "first_ts": 1778702801668,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 5,
+      "string_samples": [
+        "",
+        "1bc4bb7d-a468-4608-b21d-7776ffbc229e",
+        "d55397d2-ede4-402d-97ed-8c61917e7fd3"
+      ]
+    },
+    "npcs.2d137c85-ff89-44db-88a1-144e71fe96b6.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778702801668,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 5,
+      "string_samples": [
+        "Smokey"
+      ]
+    },
+    "npcs.2d137c85-ff89-44db-88a1-144e71fe96b6.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778702801668,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 5,
+      "string_samples": [
+        ""
+      ]
+    },
+    "npcs.2d137c85-ff89-44db-88a1-144e71fe96b6.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778702801668,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 5
+    },
+    "npcs.2d137c85-ff89-44db-88a1-144e71fe96b6.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778702801668,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 5,
+      "string_samples": [
+        ""
+      ]
+    },
+    "flags.game_started": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778702801668,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 5,
+      "bool_values": [
+        true
+      ]
+    },
+    "flags.debug_mode": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778702801668,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 5,
+      "bool_values": [
+        true
+      ]
+    },
+    "game_state.current_canvas": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 2,
+      "first_ts": 1778702801668,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 5,
+      "string_samples": [
+        "",
+        "adbf2282-87b3-4807-8dec-a5edc2da1911",
+        "666f4032-b1c0-4c27-aa09-2bd05a4165bc"
+      ]
+    },
+    "game_state.visited_locations": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778702801668,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 5
+    },
+    "game_state.visited_nodes": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778702801668,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 5
+    },
+    "game_state.time_state.current_hour": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1778702801668,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 5,
+      "number_stats": {
+        "count": 14,
+        "unique_count": 2,
+        "min": 8,
+        "max": 11,
+        "first": 8,
+        "last": 11,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.time_state.current_minute": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 3,
+      "first_ts": 1778702801668,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 5,
+      "number_stats": {
+        "count": 14,
+        "unique_count": 3,
+        "min": 0,
+        "max": 6,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": false
+      }
+    },
+    "game_state.time_state.current_day": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778702801668,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 5,
+      "string_samples": [
+        "Monday"
+      ]
+    },
+    "game_state.time_state.current_week": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778702801668,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 5,
+      "number_stats": {
+        "count": 14,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.time_state.day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778702801668,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 5,
+      "number_stats": {
+        "count": 14,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.trigger_history.adbf2282-87b3-4807-8dec-a5edc2da1911.total": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778702928248,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 4,
+      "number_stats": {
+        "count": 9,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.trigger_history.adbf2282-87b3-4807-8dec-a5edc2da1911.dayKey": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778702928248,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 4,
+      "string_samples": [
+        "1:Monday"
+      ]
+    },
+    "game_state.trigger_history.adbf2282-87b3-4807-8dec-a5edc2da1911.dayCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778702928248,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 4,
+      "number_stats": {
+        "count": 9,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.current_node": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1778702928248,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 4,
+      "string_samples": [
+        "f02f5c22-c31f-4df0-8913-d736761c7b91",
+        "4bb28aa7-3270-4af1-be09-9e6681285556"
+      ]
+    },
+    "game_state.trigger_history.666f4032-b1c0-4c27-aa09-2bd05a4165bc.total": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778702979473,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 3,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 2,
+        "max": 2,
+        "first": 2,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.trigger_history.666f4032-b1c0-4c27-aa09-2bd05a4165bc.dayKey": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778702979473,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 3,
+      "string_samples": [
+        "1:Monday"
+      ]
+    },
+    "game_state.trigger_history.666f4032-b1c0-4c27-aa09-2bd05a4165bc.dayCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778702979473,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 3,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 2,
+        "max": 2,
+        "first": 2,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.activity_trigger_history.Smokey Greeting.dayKey": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778702979473,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 3,
+      "string_samples": [
+        "1:Monday"
+      ]
+    },
+    "game_state.activity_trigger_history.Smokey Greeting.dayCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1778702979473,
+      "last_ts": 1778703053357,
+      "passages_seen_on_count": 3,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 2,
+        "max": 2,
+        "first": 2,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.random_cooldowns.d55397d2-ede4-402d-97ed-8c61917e7fd3": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1778702979473,
+      "last_ts": 1778702999887,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 2,
+        "unique_count": 2,
+        "min": 2,
+        "max": 3,
+        "first": 3,
+        "last": 2,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": true
+      }
+    }
+  },
+  "prefix_clusters": {
+    "name": [
+      "player.name",
+      "npcs.2d137c85-ff89-44db-88a1-144e71fe96b6.name"
+    ],
+    "portrait": [
+      "player.portrait",
+      "npcs.2d137c85-ff89-44db-88a1-144e71fe96b6.portrait"
+    ],
+    "current": [
+      "player.current_location",
+      "game_state.current_canvas",
+      "game_state.time_state.current_hour",
+      "game_state.time_state.current_minute",
+      "game_state.time_state.current_day",
+      "game_state.time_state.current_week",
+      "game_state.current_node"
+    ],
+    "visited": [
+      "game_state.visited_locations",
+      "game_state.visited_nodes"
+    ],
+    "total": [
+      "game_state.trigger_history.adbf2282-87b3-4807-8dec-a5edc2da1911.total",
+      "game_state.trigger_history.666f4032-b1c0-4c27-aa09-2bd05a4165bc.total"
+    ],
+    "daykey": [
+      "game_state.trigger_history.adbf2282-87b3-4807-8dec-a5edc2da1911.dayKey",
+      "game_state.trigger_history.666f4032-b1c0-4c27-aa09-2bd05a4165bc.dayKey",
+      "game_state.activity_trigger_history.Smokey Greeting.dayKey"
+    ],
+    "daycount": [
+      "game_state.trigger_history.adbf2282-87b3-4807-8dec-a5edc2da1911.dayCount",
+      "game_state.trigger_history.666f4032-b1c0-4c27-aa09-2bd05a4165bc.dayCount",
+      "game_state.activity_trigger_history.Smokey Greeting.dayCount"
+    ]
+  },
+  "co_change": {
+    "game_state.current_canvas||last_game_passage": 2,
+    "game_state.time_state.current_minute||last_game_passage": 2,
+    "game_state.current_canvas||game_state.time_state.current_minute": 2,
+    "last_game_passage||player.current_location": 4
+  },
+  "passages": {
+    "Start": {
+      "first_ts": 1778702801668,
+      "visit_count": 5
+    },
+    "StartingCanvas_canvas_smoke_intro_Node_1": {
+      "first_ts": 1778702928248,
+      "visit_count": 1
+    },
+    "Location_Entry": {
+      "first_ts": 1778702941335,
+      "visit_count": 3
+    },
+    "Canvas_canvas_smoke_random_Node_1": {
+      "first_ts": 1778702979473,
+      "visit_count": 1
+    },
+    "Location_Kitchen": {
+      "first_ts": 1778702999887,
+      "visit_count": 4
+    }
+  },
+  "choices": {
+    "total": 5,
+    "by_classification": {
+      "branch": 5
+    },
+    "price_observations": [],
+    "recent": [
+      {
+        "ts": 1778702941383,
+        "passage": "StartingCanvas_canvas_smoke_intro_Node_1",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "📋 Review Canvases",
+          "⚠️ Missing Media",
+          ">",
+          ">>",
+          ">>>>>",
+          "+1hr",
+          "Next Day",
+          "📋 Quests",
+          "📊 Stats",
+          "🚩 Flags",
+          "Support Us",
+          "Saves",
+          "Restart",
+          "Continue"
+        ],
+        "picked": "Continue",
+        "prices": null,
+        "at_state_hash": "d70a33917bbe5222"
+      },
+      {
+        "ts": 1778702979531,
+        "passage": "Location_Entry",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "📋 Review Canvases",
+          "⚠️ Missing Media",
+          ">",
+          ">>",
+          ">>>>>",
+          "+1hr",
+          "Next Day",
+          "📋 Quests",
+          "📊 Stats",
+          "🚩 Flags",
+          "Support Us",
+          "Saves",
+          "Restart",
+          "Kitchen"
+        ],
+        "picked": "Kitchen",
+        "prices": null,
+        "at_state_hash": "80840d705e37c111"
+      },
+      {
+        "ts": 1778702999941,
+        "passage": "Canvas_canvas_smoke_random_Node_1",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "📋 Review Canvases",
+          "⚠️ Missing Media",
+          ">",
+          ">>",
+          ">>>>>",
+          "+1hr",
+          "Next Day",
+          "📋 Quests",
+          "📊 Stats",
+          "🚩 Flags",
+          "Support Us",
+          "Saves",
+          "Restart",
+          "Continue"
+        ],
+        "picked": "Continue",
+        "prices": null,
+        "at_state_hash": "864617d995129f9e"
+      },
+      {
+        "ts": 1778703053050,
+        "passage": "Location_Kitchen",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "📋 Review Canvases",
+          "⚠️ Missing Media",
+          ">",
+          ">>",
+          ">>>>>",
+          "+1hr",
+          "Next Day",
+          "📋 Quests",
+          "📊 Stats",
+          "🚩 Flags",
+          "Support Us",
+          "Saves",
+          "Restart",
+          "Entry"
+        ],
+        "picked": "Entry",
+        "prices": null,
+        "at_state_hash": "d4f1b21479b24dd5"
+      },
+      {
+        "ts": 1778703053357,
+        "passage": "Location_Entry",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "📋 Review Canvases",
+          "⚠️ Missing Media",
+          ">",
+          ">>",
+          ">>>>>",
+          "+1hr",
+          "Next Day",
+          "📋 Quests",
+          "📊 Stats",
+          "🚩 Flags",
+          "Support Us",
+          "Saves",
+          "Restart",
+          "Kitchen"
+        ],
+        "picked": "Kitchen",
+        "prices": null,
+        "at_state_hash": "5441e30da12badc0"
+      }
+    ]
+  },
+  "mutations": [
+    {
+      "ts": 1778702928248,
+      "passage": "StartingCanvas_canvas_smoke_intro_Node_1",
+      "state_hash": "d70a33917bbe5222",
+      "var": "last_game_passage",
+      "before": "Start",
+      "after": "StartingCanvas_canvas_smoke_intro_Node_1"
+    },
+    {
+      "ts": 1778702928248,
+      "passage": "StartingCanvas_canvas_smoke_intro_Node_1",
+      "state_hash": "d70a33917bbe5222",
+      "var": "game_state.current_canvas",
+      "before": "",
+      "after": "adbf2282-87b3-4807-8dec-a5edc2da1911"
+    },
+    {
+      "ts": 1778702928248,
+      "passage": "StartingCanvas_canvas_smoke_intro_Node_1",
+      "state_hash": "d70a33917bbe5222",
+      "var": "game_state.time_state.current_minute",
+      "before": 0,
+      "after": 3
+    },
+    {
+      "ts": 1778702941335,
+      "passage": "Location_Entry",
+      "state_hash": "80840d705e37c111",
+      "var": "last_game_passage",
+      "before": "StartingCanvas_canvas_smoke_intro_Node_1",
+      "after": "Location_Entry"
+    },
+    {
+      "ts": 1778702941335,
+      "passage": "Location_Entry",
+      "state_hash": "80840d705e37c111",
+      "var": "player.current_location",
+      "before": "",
+      "after": "1bc4bb7d-a468-4608-b21d-7776ffbc229e"
+    },
+    {
+      "ts": 1778702979473,
+      "passage": "Canvas_canvas_smoke_random_Node_1",
+      "state_hash": "864617d995129f9e",
+      "var": "last_game_passage",
+      "before": "Location_Entry",
+      "after": "Canvas_canvas_smoke_random_Node_1"
+    },
+    {
+      "ts": 1778702979473,
+      "passage": "Canvas_canvas_smoke_random_Node_1",
+      "state_hash": "864617d995129f9e",
+      "var": "player.current_location",
+      "before": "1bc4bb7d-a468-4608-b21d-7776ffbc229e",
+      "after": "d55397d2-ede4-402d-97ed-8c61917e7fd3"
+    },
+    {
+      "ts": 1778702979473,
+      "passage": "Canvas_canvas_smoke_random_Node_1",
+      "state_hash": "864617d995129f9e",
+      "var": "game_state.current_canvas",
+      "before": "adbf2282-87b3-4807-8dec-a5edc2da1911",
+      "after": "666f4032-b1c0-4c27-aa09-2bd05a4165bc"
+    },
+    {
+      "ts": 1778702979473,
+      "passage": "Canvas_canvas_smoke_random_Node_1",
+      "state_hash": "864617d995129f9e",
+      "var": "game_state.time_state.current_minute",
+      "before": 3,
+      "after": 6
+    },
+    {
+      "ts": 1778702979473,
+      "passage": "Canvas_canvas_smoke_random_Node_1",
+      "state_hash": "864617d995129f9e",
+      "var": "game_state.current_node",
+      "before": "f02f5c22-c31f-4df0-8913-d736761c7b91",
+      "after": "4bb28aa7-3270-4af1-be09-9e6681285556"
+    },
+    {
+      "ts": 1778702999887,
+      "passage": "Location_Kitchen",
+      "state_hash": "a0d5085ba24fb28d",
+      "var": "last_game_passage",
+      "before": "Canvas_canvas_smoke_random_Node_1",
+      "after": "Location_Kitchen"
+    },
+    {
+      "ts": 1778702999887,
+      "passage": "Location_Kitchen",
+      "state_hash": "a0d5085ba24fb28d",
+      "var": "game_state.random_cooldowns.d55397d2-ede4-402d-97ed-8c61917e7fd3",
+      "before": 3,
+      "after": 2
+    },
+    {
+      "ts": 1778703023481,
+      "passage": "Location_Kitchen",
+      "state_hash": "d4f1b21479b24dd5",
+      "var": "game_state.time_state.current_hour",
+      "before": 8,
+      "after": 11
+    },
+    {
+      "ts": 1778703023481,
+      "passage": "Location_Kitchen",
+      "state_hash": "d4f1b21479b24dd5",
+      "var": "game_state.time_state.current_minute",
+      "before": 6,
+      "after": 0
+    },
+    {
+      "ts": 1778703052984,
+      "passage": "Location_Entry",
+      "state_hash": "5441e30da12badc0",
+      "var": "last_game_passage",
+      "before": "Location_Kitchen",
+      "after": "Location_Entry"
+    },
+    {
+      "ts": 1778703052984,
+      "passage": "Location_Entry",
+      "state_hash": "5441e30da12badc0",
+      "var": "player.current_location",
+      "before": "d55397d2-ede4-402d-97ed-8c61917e7fd3",
+      "after": "1bc4bb7d-a468-4608-b21d-7776ffbc229e"
+    },
+    {
+      "ts": 1778703053357,
+      "passage": "Location_Kitchen",
+      "state_hash": "d4f1b21479b24dd5",
+      "var": "last_game_passage",
+      "before": "Location_Entry",
+      "after": "Location_Kitchen"
+    },
+    {
+      "ts": 1778703053357,
+      "passage": "Location_Kitchen",
+      "state_hash": "d4f1b21479b24dd5",
+      "var": "player.current_location",
+      "before": "1bc4bb7d-a468-4608-b21d-7776ffbc229e",
+      "after": "d55397d2-ede4-402d-97ed-8c61917e7fd3"
+    }
+  ]
+}

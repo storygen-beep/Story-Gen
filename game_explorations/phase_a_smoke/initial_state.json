@@ -1,0 +1,64 @@
+{
+  "captured_at": "2026-05-13T20:06:41.633Z",
+  "ts": 1778702801633,
+  "engine": "sugarcube",
+  "engine_version": [
+    "(revive:eval)",
+    "(function(){var e=this.prerelease?\"-\"+this.prerelease:\"\";return this.title+\" (v\"+this.major+\".\"+this.minor+\".\"+this.patch+e+\")\"})"
+  ],
+  "passage": "Start",
+  "variables": {
+    "last_game_passage": "Start",
+    "player": {
+      "name": "Player",
+      "portrait": "",
+      "current_location": "",
+      "core_traits": {}
+    },
+    "npcs": {
+      "2d137c85-ff89-44db-88a1-144e71fe96b6": {
+        "name": "Smokey",
+        "portrait": "",
+        "core_traits": {},
+        "flags": {},
+        "schedule": [],
+        "relationship": ""
+      }
+    },
+    "npc_interacted_today": {},
+    "flags": {
+      "game_started": true,
+      "debug_mode": true
+    },
+    "flags_meta": {},
+    "game_state": {
+      "current_canvas": "",
+      "visited_locations": [],
+      "visited_nodes": [],
+      "trigger_history": {},
+      "activity_trigger_history": {},
+      "visited_choices": {},
+      "active_modifiers": {},
+      "random_cooldowns": {},
+      "stage_advancement_log": {},
+      "time_state": {
+        "current_hour": 8,
+        "current_minute": 0,
+        "current_day": "Monday",
+        "current_week": 1,
+        "day": 1
+      }
+    }
+  },
+  "save_caps": {
+    "stateMarshal": true,
+    "engineShow": true,
+    "serialize": true,
+    "slots": true,
+    "saveNamespace": "SugarCube.Save"
+  },
+  "state_hash": "77c80acb226ca81c",
+  "body_text": "Phase A Smoke Test\n\nMinimal fixture — one NPC scheduled in kitchen 06:00–10:00; one Lane 2 random canvas with requires_npc fires only when NPC is present.\n\nWe're a small indie studio crafting intimate, story-driven experiences. Every game is made with care, and your support helps us keep creating. If you enjoy our work, consider supporting us!\n\n👉 Support us on Patreon\n\n⚠️ This game contains adult content intended for players 18 years of age or older.\n\n✓ I am 18 or older - Enter Game\n✗ I am NOT 18 or older\n\nDeveloped by NutGames\n\n👉 Support us on Patreon",
+  "body_html": "<div class=\"game-intro\"> <h1>Phase A Smoke Test</h1> <p class=\"game-description\">Minimal fixture — one NPC scheduled in kitchen 06:00–10:00; one Lane 2 random canvas with requires_npc fires only when NPC is present.</p> <div class=\"developer-intro\"> <p class=\"developer-about\">We're a small indie studio crafting intimate, story-driven experiences. Every game is made with care, and your support helps us keep creating. If you enjoy our work, consider supporting us!</p> <p class=\"support-link\">👉 <a href=\"https://www.patreon.com/cw/nutgames844\" target=\"_blank\" rel=\"noopener\" class=\"link-external\" tabindex=\"-2\" aria-hidden=\"true\">Support us on Patreon</a></p> </div> <div class=\"age-gate\"> <p class=\"age-warning\">⚠️ This game contains adult content intended for players 18 years of age or older.</p> <div class=\"age-buttons\"> <a data-passage=\"StartingCanvas_canvas_smoke_intro_Node_1\" class=\"link-internal\" tabindex=\"-2\" aria-hidden=\"true\">✓ I am 18 or older - Enter Game</a> <a data-passage=\"AgeBlocked\" class=\"link-internal\" tabindex=\"-2\" aria-hidden=\"true\">✗ I am NOT 18 or older</a> </div> </div> <div class=\"developer-footer\"> <p class=\"developer-credit\">Developed by <strong>NutGames</strong></p> <p class=\"support-link\">👉 <a href=\"https://www.patreon.com/cw/nutgames844\" target=\"_blank\" rel=\"noopener\" class=\"link-external\" tabindex=\"-2\" aria-hidden=\"true\">Support us on Patreon</a></p> </div> </div>",
+  "modal_text": "Are you sure that you want to restart? Unsaved progress will be lost.\n\nOKCancel"
+}

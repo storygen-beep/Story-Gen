@@ -10,6 +10,7 @@ from typing import Any, Optional
 from apps.projects.models import Project
 
 from .generators.v1 import TweeComprehensiveGeneratorV1
+from .generators.v2 import TweeComprehensiveGeneratorV2
 
 
 class TweeComprehensiveService:
@@ -20,7 +21,7 @@ class TweeComprehensiveService:
     """
 
     def generate(
-        self, project: Project, version: str = "v1", options: Optional[dict] = None
+        self, project: Project, version: str = "v2", options: Optional[dict] = None
     ) -> str:
         """
         Generate comprehensive game using the specified version.
@@ -37,7 +38,10 @@ class TweeComprehensiveService:
             ValueError: If version not found or generation fails
         """
         # Select generator based on version
-        if version == "v1":
+        if version == "v2":
+            generator = TweeComprehensiveGeneratorV2()
+        elif version == "v1":
+            # v1 frozen 2026-05-14 — safe-mode rollback path only.
             generator = TweeComprehensiveGeneratorV1()
         else:
             raise ValueError(
@@ -110,8 +114,8 @@ class TweeComprehensiveService:
             "system_type": "twee_comprehensive",
             "name": "Twee Comprehensive Game Generator",
             "description": "Generates canvas-based interactive experiences with simple navigation",
-            "versions": ["v1"],
-            "current_version": "v1",
+            "versions": ["v1", "v2"],
+            "current_version": "v2",
             "output_format": "twee",
             "features": [
                 "Starting canvas display",

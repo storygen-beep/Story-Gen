@@ -64,8 +64,8 @@ class Command(BaseCommand):
         parser.add_argument(
             "--gen-version",
             type=str,
-            default="v1",
-            help="Generator version (default: v1)",
+            default="v2",
+            help="Generator version (default: v2). Pass v1 for frozen safe-mode rollback.",
         )
         parser.add_argument(
             "--force-copy",
@@ -329,13 +329,25 @@ class Command(BaseCommand):
             self.stdout.write("   ⏭ Skipped (not twee_comprehensive)")
             return
 
-        # Import and instantiate generator
-        from apps.game_generation.twee_comprehensive.generators.v1 import (
-            TweeComprehensiveGeneratorV1,
-        )
+        # Import and instantiate generator (version-aware dispatch).
+        # v2 is the default; v1 is frozen 2026-05-14 and exists only as
+        # a safe-mode rollback path during the v2 transition.
         from apps.world.models import Location
 
-        generator = TweeComprehensiveGeneratorV1()
+        if version == "v2":
+            from apps.game_generation.twee_comprehensive.generators.v2 import (
+                TweeComprehensiveGeneratorV2,
+            )
+            generator = TweeComprehensiveGeneratorV2()
+        elif version == "v1":
+            from apps.game_generation.twee_comprehensive.generators.v1 import (
+                TweeComprehensiveGeneratorV1,
+            )
+            generator = TweeComprehensiveGeneratorV1()
+        else:
+            raise CommandError(
+                f"Unknown gen-version {version!r}. Supported: v1, v2."
+            )
         generator.project = project
         generator.locations = list(Location.objects.filter(project=project))
         errors = generator.validate_flag_chains()

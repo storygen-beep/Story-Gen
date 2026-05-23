@@ -1,0 +1,19 @@
+{
+  "session_id": 1,
+  "start_ts": "2026-05-08T13:43:45.034Z",
+  "start_epoch_ms": 1778247825034,
+  "end_ts": "2026-05-08T13:49:35.277Z",
+  "duration_s": 350,
+  "clicks": 19,
+  "choices_explored": 19,
+  "arrow_advances": 0,
+  "unique_states_seen": 24,
+  "new_unique_states": 24,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "VERTICAL SLICE V3 LIVE-PLAY 2026-05-08 — multi-node loop hub rewrite VERIFIED. Made out → DIRECTLY landed on Canvas_loop_franks_bedroom_sex_Node_2 (result_makeout) with prose visible immediately. NO Frank-portrait re-click needed. '...' button → directly back to Node_1 (base) hub. Same for Tease (Node_3) + Service (Node_4). All routing intra-canvas via targetType=node + author-id nodeId resolution. Click 'Make him cum.' at npc_pleasure 41 → DIRECTLY landed on finisher canvas via cross-canvas node routing (loop_franks_bedroom_finisher.base). Type C 'Stay through' fired all closure effects (love+1, trust+1, corruption+2, energy-8, Frank.arousal clamped at 0, Diana.awareness+1, talked_today set, ready_for_climax cleared, time +90min). UX matches Shady Deals' Hub ↔ Loop alternation pattern. The 2-click-per-action problem from v2 is FIXED."
+  ]
+}

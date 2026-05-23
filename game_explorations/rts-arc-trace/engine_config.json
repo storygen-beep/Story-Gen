@@ -1,0 +1,133 @@
+{
+  "captured_at": "2026-05-21T05:55:56.671Z",
+  "engine": "sugarcube",
+  "version": {
+    "name": "SugarCube",
+    "major": 2,
+    "minor": 37,
+    "patch": 3,
+    "prerelease": null,
+    "build": 10338,
+    "short": "SugarCube (v2.37.3)",
+    "toString": "2.37.3+10338"
+  },
+  "config": {
+    "addVisitedLinkClass": false,
+    "cleanupWikifierOutput": false,
+    "debug": false,
+    "enableOptionalDebugging": false,
+    "loadDelay": 0,
+    "audio": {
+      "pauseOnFadeToZero": true,
+      "preloadMetadata": true
+    },
+    "history": {
+      "controls": true,
+      "maxStates": 40
+    },
+    "macros": {
+      "maxLoopIterations": 1000,
+      "typeSkipKey": " ",
+      "typeVisitedPassages": true,
+      "ifAssignmentError": "<deprecated>"
+    },
+    "navigation": {},
+    "passages": {
+      "displayTitles": false,
+      "nobr": true,
+      "start": "Menu",
+      "descriptions": "<deprecated>"
+    },
+    "saves": {
+      "id": "road-to-success-",
+      "maxAutoSaves": 1,
+      "maxSlotSaves": 8,
+      "autosave": "<deprecated>",
+      "onLoad": "<deprecated>",
+      "onSave": "<deprecated>",
+      "slots": "<deprecated>",
+      "tryDiskOnMobile": true
+    },
+    "ui": {
+      "stowBarInitially": 800,
+      "updateStoryElements": true
+    }
+  },
+  "state": {
+    "turn": null,
+    "turns": 1,
+    "length": 1,
+    "bottom_title": "Menu",
+    "active_title": "Menu",
+    "temporary_keys": [
+      "sidebarQuest",
+      "grouped",
+      "totalItems",
+      "uniqueItems",
+      "entry",
+      "id",
+      "quantity",
+      "item",
+      "categoryCount",
+      "sortedNpcs",
+      "relationCount",
+      "unreadPhoneThreads",
+      "exb",
+      "beauty",
+      "playerLocation"
+    ],
+    "prng_present": true,
+    "prng_state": null,
+    "history_length": 1,
+    "history_first_entry_shape": {
+      "keys": [
+        "title",
+        "variables"
+      ],
+      "title": "Menu"
+    },
+    "history_last_entry_shape": {
+      "keys": [
+        "title",
+        "variables"
+      ],
+      "title": "Menu"
+    },
+    "has_marshalForSave": true,
+    "has_unmarshalForSave": true
+  },
+  "story": {
+    "name": "Road to Success 🌴",
+    "ifid": "4DA890B8-3D8A-444F-9523-F88C7356E582",
+    "format": "SugarCube",
+    "format_version": "2.37.3",
+    "creator": "Tweego",
+    "creator_version": "2.1.1+81d1d71",
+    "startnode": "320",
+    "options": null,
+    "tags": null,
+    "zoom": "1",
+    "engine_title": "Road to Success 🌴",
+    "engine_name": "Road to Success 🌴",
+    "engine_dom_id": "road-to-success-"
+  },
+  "settings": {
+    "volume": 50
+  },
+  "save_caps": {
+    "has_serialize": true,
+    "has_deserialize": true,
+    "has_slots": true,
+    "has_autosave": true,
+    "slot_count": 0,
+    "on_save_handlers": 0,
+    "on_load_handlers": 0,
+    "slots_metadata": [],
+    "autosave_metadata": {
+      "id": "road-to-success-",
+      "title": null,
+      "date": "2026-05-11T16:41:42.281Z",
+      "description": null
+    }
+  }
+}

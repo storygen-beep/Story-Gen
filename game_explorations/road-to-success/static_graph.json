@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-04-28T21:20:17.455Z",
-  "total_passages": 358,
+  "generated_at": "2026-05-21T16:56:58.156Z",
+  "total_passages": 361,
   "skipped_passages": 0,
   "parse_errors": 0,
-  "total_edges": 496,
+  "total_edges": 502,
   "edges_by_kind": {
-    "button": 375,
-    "goto": 76,
-    "include": 45
+    "button": 376,
+    "goto": 79,
+    "include": 47
   },
   "edges": [
     {
@@ -546,7 +546,7 @@
           "branch": "if"
         }
       ],
-      "index": 1458
+      "index": 1416
     },
     {
       "from": "DrivingSchool",
@@ -564,7 +564,7 @@
           "branch": "else"
         }
       ],
-      "index": 1944
+      "index": 1856
     },
     {
       "from": "DrivingSchoolExamSex",
@@ -759,7 +759,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 351
+      "index": 334
     },
     {
       "from": "Abortion",
@@ -863,7 +863,7 @@
           "branch": "if"
         }
       ],
-      "index": 1037
+      "index": 994
     },
     {
       "from": "Hospital",
@@ -877,7 +877,7 @@
           "branch": "if"
         }
       ],
-      "index": 1109
+      "index": 1066
     },
     {
       "from": "Hospital",
@@ -891,7 +891,7 @@
           "branch": "if"
         }
       ],
-      "index": 1238
+      "index": 1195
     },
     {
       "from": "HospitalBirth",
@@ -919,7 +919,7 @@
           "branch": "else"
         }
       ],
-      "index": 2389
+      "index": 2862
     },
     {
       "from": "HospitalPregnancyTest",
@@ -928,7 +928,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 1406
+      "index": 1427
     },
     {
       "from": "PrenatalCare",
@@ -1012,7 +1012,7 @@
           "branch": "if"
         }
       ],
-      "index": 5303
+      "index": 5343
     },
     {
       "from": "MallCaughtFlashing",
@@ -1026,7 +1026,7 @@
           "branch": "if"
         }
       ],
-      "index": 7266
+      "index": 7298
     },
     {
       "from": "MallFlash",
@@ -1131,7 +1131,7 @@
           "branch": "else"
         }
       ],
-      "index": 8331
+      "index": 8466
     },
     {
       "from": "TechStore",
@@ -1459,7 +1459,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 431
+      "index": 618
     },
     {
       "from": "JamalHallway",
@@ -1468,7 +1468,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 486
+      "index": 673
     },
     {
       "from": "JamalHallway",
@@ -1477,7 +1477,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 542
+      "index": 729
     },
     {
       "from": "JamalHallway",
@@ -1486,7 +1486,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 590
+      "index": 777
     },
     {
       "from": "JamalPool",
@@ -1569,7 +1569,7 @@
     {
       "from": "ThomasParty",
       "to": "ThomasParty2Floor",
-      "display": "2nd Floor",
+      "display": "2nd Floor 🏠",
       "setter": null,
       "kind": "button",
       "gate": [],
@@ -1582,7 +1582,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 800
+      "index": 803
     },
     {
       "from": "ThomasParty",
@@ -1596,7 +1596,7 @@
           "branch": "if"
         }
       ],
-      "index": 955
+      "index": 958
     },
     {
       "from": "ThomasParty",
@@ -1610,12 +1610,12 @@
           "branch": "else"
         }
       ],
-      "index": 1012
+      "index": 1015
     },
     {
       "from": "ThomasParty2Floor",
       "to": "ThomasPartySpinTheBottle",
-      "display": "Play",
+      "display": "Play 🎲",
       "setter": null,
       "kind": "button",
       "gate": [
@@ -1633,11 +1633,11 @@
     {
       "from": "ThomasParty2Floor",
       "to": "ThomasParty",
-      "display": "1nd Floor",
+      "display": "1nd Floor 🏠",
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 1043
+      "index": 1049
     },
     {
       "from": "ThomasPartyDance",
@@ -1804,11 +1804,15 @@
           "branch": "if"
         },
         {
-          "condition": "getQuestProgress(\"CostumeParty\") == 2 && $player.clothing.type == \"costume\" && $game.day == \"Saturday\"",
+          "condition": "getQuestProgress(\"CostumeParty\") == 2 && $game.day == \"Saturday\"",
+          "branch": "if"
+        },
+        {
+          "condition": "$player.clothing.type == \"costume\"",
           "branch": "if"
         }
       ],
-      "index": 418
+      "index": 434
     },
     {
       "from": "VeronicaHallway",
@@ -1817,7 +1821,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 502
+      "index": 624
     },
     {
       "from": "VeronicaHallway",
@@ -1826,7 +1830,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 560
+      "index": 682
     },
     {
       "from": "VeronicaHallway",
@@ -1835,7 +1839,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 619
+      "index": 741
     },
     {
       "from": "VeronicaMeet",
@@ -1950,7 +1954,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 1189
+      "index": 1179
     },
     {
       "from": "Pray",
@@ -2137,7 +2141,7 @@
           "branch": "else"
         }
       ],
-      "index": 2306
+      "index": 2295
     },
     {
       "from": "StripClubInterview",
@@ -2151,7 +2155,7 @@
           "branch": "else"
         }
       ],
-      "index": 2944
+      "index": 2933
     },
     {
       "from": "StripClubInterviewStage",
@@ -2351,7 +2355,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 944
+      "index": 1219
     },
     {
       "from": "Vipers",
@@ -2360,7 +2364,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 683
+      "index": 739
     },
     {
       "from": "Vipers",
@@ -2374,7 +2378,49 @@
           "branch": "if"
         }
       ],
-      "index": 781
+      "index": 837
+    },
+    {
+      "from": "Vipers",
+      "to": "TalkBoss",
+      "display": null,
+      "setter": null,
+      "kind": "goto",
+      "gate": [
+        {
+          "condition": "$player.gang.respect >= 10 && $player.gang.title == \"Recruit\"",
+          "branch": "elseif"
+        }
+      ],
+      "index": 936
+    },
+    {
+      "from": "Vipers",
+      "to": "TalkBoss",
+      "display": null,
+      "setter": null,
+      "kind": "goto",
+      "gate": [
+        {
+          "condition": "$player.gang.respect >= 20 && $player.gang.title == \"Dealer\"",
+          "branch": "elseif"
+        }
+      ],
+      "index": 1032
+    },
+    {
+      "from": "Vipers",
+      "to": "TalkBoss",
+      "display": null,
+      "setter": null,
+      "kind": "goto",
+      "gate": [
+        {
+          "condition": "$player.gang.respect >= 30 && $player.gang.title == \"House Burglar\"",
+          "branch": "elseif"
+        }
+      ],
+      "index": 1135
     },
     {
       "from": "VipersClean",
@@ -2383,7 +2429,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 568
+      "index": 573
     },
     {
       "from": "ApartmentBathroom",
@@ -2692,7 +2738,7 @@
           "branch": "if"
         }
       ],
-      "index": 2924
+      "index": 2889
     },
     {
       "from": "EmmaHallway",
@@ -2729,11 +2775,11 @@
       "kind": "goto",
       "gate": [
         {
-          "condition": "random(1,2) == 1 && previous() == \"Residential\" && !isSceneExecutedToday($npc.Emma.scenes.SexPlaying)",
+          "condition": "(random(1,2) == 1 || isNpcSceneUnlocked(\"Emma\", \"SexPlaying\")) && previous() == \"Residential\" && !isSceneExecutedToday($npc.Emma.scenes.SexPlaying)",
           "branch": "if"
         }
       ],
-      "index": 449
+      "index": 495
     },
     {
       "from": "SexPlaying",
@@ -2881,7 +2927,7 @@
           "branch": "if"
         }
       ],
-      "index": 842
+      "index": 922
     },
     {
       "from": "ParkJog",
@@ -3132,7 +3178,7 @@
           "branch": "else"
         }
       ],
-      "index": 6000
+      "index": 6017
     },
     {
       "from": "Restaurant",
@@ -3474,7 +3520,7 @@
           "branch": "else"
         }
       ],
-      "index": 2715
+      "index": 2752
     },
     {
       "from": "SchoolGraduation",
@@ -3488,7 +3534,7 @@
           "branch": "else"
         }
       ],
-      "index": 2798
+      "index": 2835
     },
     {
       "from": "SchoolTest",
@@ -3575,7 +3621,7 @@
           "branch": "if"
         }
       ],
-      "index": 1052
+      "index": 1019
     },
     {
       "from": "MarcusBathroomEncounter",
@@ -3593,7 +3639,7 @@
           "branch": "if"
         }
       ],
-      "index": 1253
+      "index": 1220
     },
     {
       "from": "MarcusBathroomEncounter",
@@ -3607,7 +3653,7 @@
           "branch": "else"
         }
       ],
-      "index": 1556
+      "index": 1523
     },
     {
       "from": "MarcusBathroomEncounter",
@@ -3616,7 +3662,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 1657
+      "index": 1624
     },
     {
       "from": "SchoolBathroomCabin",
@@ -3742,6 +3788,20 @@
       "index": 690
     },
     {
+      "from": "ComputerAfterClass",
+      "to": "TeacherSecretFetish",
+      "display": "Seduce the teacher",
+      "setter": null,
+      "kind": "button",
+      "gate": [
+        {
+          "condition": "isLocationSceneUnlocked(\"school\", \"TeacherSecretFetish\")",
+          "branch": "if"
+        }
+      ],
+      "index": 518
+    },
+    {
       "from": "ComputerClass",
       "to": "MeetEmma",
       "display": "Approach her",
@@ -3860,6 +3920,34 @@
       "index": 585
     },
     {
+      "from": "TeacherSecretFetish",
+      "to": "TeacherSecretFetishCore",
+      "display": null,
+      "setter": null,
+      "kind": "include",
+      "gate": [
+        {
+          "condition": "isLocationSceneUnlocked(\"school\", \"TeacherSecretFetish\")",
+          "branch": "if"
+        }
+      ],
+      "index": 752
+    },
+    {
+      "from": "TeacherSecretFetish",
+      "to": "TeacherSecretFetishCore",
+      "display": null,
+      "setter": null,
+      "kind": "include",
+      "gate": [
+        {
+          "condition": "!(isLocationSceneUnlocked(\"school\", \"TeacherSecretFetish\"))",
+          "branch": "else"
+        }
+      ],
+      "index": 3506
+    },
+    {
       "from": "EmptyClass",
       "to": "Afterclass",
       "display": "Study 📖",
@@ -3944,7 +4032,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 1409
+      "index": 1408
     },
     {
       "from": "Library",
@@ -3998,6 +4086,24 @@
     },
     {
       "from": "Library",
+      "to": "LibraryMeetNatasha",
+      "display": "Say hello 📚",
+      "setter": null,
+      "kind": "button",
+      "gate": [
+        {
+          "condition": "!(_publicQuestProgress == 1 && !_publicQuestCompleted)",
+          "branch": "else"
+        },
+        {
+          "condition": "$npc.Natasha.relation == 0",
+          "branch": "if"
+        }
+      ],
+      "index": 1890
+    },
+    {
+      "from": "Library",
       "to": "LibraryExhibitionism",
       "display": "Library Exhibitionism 👀",
       "setter": null,
@@ -4012,7 +4118,7 @@
           "branch": "if"
         }
       ],
-      "index": 2079
+      "index": 2416
     },
     {
       "from": "Library",
@@ -4030,7 +4136,7 @@
           "branch": "if"
         }
       ],
-      "index": 2204
+      "index": 2541
     },
     {
       "from": "Library",
@@ -4039,7 +4145,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 2403
+      "index": 2740
     },
     {
       "from": "LibraryExhibitionism",
@@ -4071,11 +4177,11 @@
           "branch": "if"
         },
         {
-          "condition": "$game.dice == 1 && !isQuestActive(\"LibraryExhibitionism\")",
+          "condition": "$game.dice == 1 && !isQuestActive(\"LibraryExhibitionism\") && getRelation(\"Natasha\") >= 5",
           "branch": "if"
         }
       ],
-      "index": 252
+      "index": 283
     },
     {
       "from": "LibraryStudy",
@@ -4093,7 +4199,7 @@
           "branch": "elseif"
         }
       ],
-      "index": 340
+      "index": 371
     },
     {
       "from": "LibraryTransSex",
@@ -4167,7 +4273,7 @@
           "branch": "else"
         }
       ],
-      "index": 2059
+      "index": 2084
     },
     {
       "from": "PublicExhibitionism",
@@ -4195,7 +4301,7 @@
           "branch": "else"
         }
       ],
-      "index": 5036
+      "index": 5046
     },
     {
       "from": "GymClass",
@@ -4204,7 +4310,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 1035
+      "index": 1214
     },
     {
       "from": "SchoolGym",
@@ -4332,7 +4438,7 @@
     {
       "from": "Garage",
       "to": "TyreFixSex",
-      "display": "Go to the party",
+      "display": "Go to the party 🎉",
       "setter": null,
       "kind": "button",
       "gate": [
@@ -4345,11 +4451,11 @@
           "branch": "if"
         },
         {
-          "condition": "!(random(1,2) == 1)",
-          "branch": "else"
+          "condition": "random(1,2) == 1 || !isNpcSceneUnlocked(\"TowTruckDriver\", \"TyreFixSex\")",
+          "branch": "if"
         }
       ],
-      "index": 395
+      "index": 386
     },
     {
       "from": "Garage",
@@ -4358,7 +4464,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 602
+      "index": 629
     },
     {
       "from": "GarageDrunk",
@@ -4372,7 +4478,7 @@
           "branch": "else"
         }
       ],
-      "index": 4988
+      "index": 5294
     },
     {
       "from": "Hallway",
@@ -4574,11 +4680,11 @@
           "branch": "if"
         },
         {
-          "condition": "isPregnant() && changeMediaPregnant() && random(1, 3) == 1",
+          "condition": "isPregnant() && changeMediaPregnant() && random(1, 3) == 1 && previous() != \"BathroomLactation\"",
           "branch": "if"
         }
       ],
-      "index": 2723
+      "index": 2760
     },
     {
       "from": "Bathroom",
@@ -4592,11 +4698,11 @@
           "branch": "if"
         },
         {
-          "condition": "isPregnant() && getPregnancyStage() == \"early\" && random(1, 3) == 1",
+          "condition": "($game.time == \"EM\" || $game.time == \"M\") && isPregnant() && getPregnancyStage() == \"early\" && random(1, 3) == 1 && previous() != \"BathroomMorningSickness\"",
           "branch": "elseif"
         }
       ],
-      "index": 2843
+      "index": 2968
     },
     {
       "from": "Bathroom",
@@ -4610,11 +4716,11 @@
           "branch": "if"
         },
         {
-          "condition": "isPregnant() && getPregnancyStage() == \"showing\" && random(1, 3) == 1",
+          "condition": "isPregnant() && getPregnancyStage() == \"showing\" && random(1, 3) == 1 && previous() != \"BathroomBellyAwareness\"",
           "branch": "elseif"
         }
       ],
-      "index": 2971
+      "index": 3138
     },
     {
       "from": "BathroomCheckBelly",
@@ -4631,27 +4737,8 @@
       "display": "Go to shower 🚿",
       "setter": null,
       "kind": "button",
-      "gate": [
-        {
-          "condition": "getCorruptionLevel() >= 2",
-          "branch": "if"
-        }
-      ],
-      "index": 918
-    },
-    {
-      "from": "BathroomFlashScene",
-      "to": "BathroomShower",
-      "display": "Go to shower 🚿",
-      "setter": null,
-      "kind": "button",
-      "gate": [
-        {
-          "condition": "!(getCorruptionLevel() >= 2)",
-          "branch": "else"
-        }
-      ],
-      "index": 1317
+      "gate": [],
+      "index": 1242
     },
     {
       "from": "BathroomMirror",
@@ -4748,7 +4835,7 @@
           "branch": "else"
         }
       ],
-      "index": 4406
+      "index": 4399
     },
     {
       "from": "DadShowerSexPregnant",
@@ -4762,11 +4849,11 @@
           "branch": "else"
         }
       ],
-      "index": 3607
+      "index": 3671
     },
     {
       "from": "GrandpaShowerSex",
-      "to": "GrandpaBedroom",
+      "to": "Bathroom",
       "display": "Return 🚪",
       "setter": null,
       "kind": "button",
@@ -4804,7 +4891,7 @@
           "branch": "if"
         }
       ],
-      "index": 820
+      "index": 842
     },
     {
       "from": "Bedroom",
@@ -4818,7 +4905,7 @@
           "branch": "if"
         }
       ],
-      "index": 1035
+      "index": 1057
     },
     {
       "from": "Bedroom",
@@ -4827,7 +4914,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 1312
+      "index": 1334
     },
     {
       "from": "Bedroom",
@@ -4841,7 +4928,7 @@
           "branch": "if"
         }
       ],
-      "index": 1477
+      "index": 1499
     },
     {
       "from": "Bedroom",
@@ -4850,7 +4937,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 1576
+      "index": 1598
     },
     {
       "from": "Bedroom",
@@ -4868,7 +4955,7 @@
           "branch": "if"
         }
       ],
-      "index": 1724
+      "index": 1746
     },
     {
       "from": "Bedroom",
@@ -4882,7 +4969,7 @@
           "branch": "else"
         }
       ],
-      "index": 2417
+      "index": 2439
     },
     {
       "from": "Bedroom",
@@ -4896,7 +4983,7 @@
           "branch": "if"
         }
       ],
-      "index": 2541
+      "index": 2563
     },
     {
       "from": "Bedroom",
@@ -4918,7 +5005,7 @@
           "branch": "if"
         }
       ],
-      "index": 2752
+      "index": 2774
     },
     {
       "from": "Bedroom",
@@ -4940,7 +5027,7 @@
           "branch": "if"
         }
       ],
-      "index": 2954
+      "index": 2976
     },
     {
       "from": "BedroomGrope",
@@ -4950,11 +5037,11 @@
       "kind": "goto",
       "gate": [
         {
-          "condition": "!($game.dice === 2 && $npc.Brother.arousal > 0)",
+          "condition": "!($game.dice === 2 && $npc.Brother.arousal > 0 && IsNpcAtHome(\"Brother\"))",
           "branch": "else"
         }
       ],
-      "index": 1038
+      "index": 1099
     },
     {
       "from": "BedroomGrope",
@@ -4963,7 +5050,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 1079
+      "index": 1140
     },
     {
       "from": "BedroomSleep",
@@ -5235,7 +5322,7 @@
           "branch": "if"
         }
       ],
-      "index": 2295
+      "index": 2294
     },
     {
       "from": "BrotherBedroom",
@@ -5261,7 +5348,7 @@
           "branch": "elseif"
         }
       ],
-      "index": 2450
+      "index": 2449
     },
     {
       "from": "BrotherBedroom",
@@ -5270,7 +5357,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 2602
+      "index": 2601
     },
     {
       "from": "BrotherBedroomFlash",
@@ -5340,7 +5427,7 @@
           "branch": "if"
         }
       ],
-      "index": 6929
+      "index": 6928
     },
     {
       "from": "SellingMyStepsister",
@@ -5349,7 +5436,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 7533
+      "index": 7532
     },
     {
       "from": "SleepingBrother",
@@ -5416,7 +5503,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 1675
+      "index": 1674
     },
     {
       "from": "DadPeepSexBedroom",
@@ -5456,7 +5543,7 @@
           "branch": "else"
         }
       ],
-      "index": 712
+      "index": 730
     },
     {
       "from": "GrandpaBedroom",
@@ -5465,7 +5552,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 1007
+      "index": 1025
     },
     {
       "from": "Kitchen",
@@ -5952,7 +6039,7 @@
       "setter": null,
       "kind": "button",
       "gate": [],
-      "index": 1663
+      "index": 1732
     },
     {
       "from": "PassageDone",
@@ -6884,7 +6971,7 @@
     {
       "from": "NoEnergy",
       "to": "ApartmentSleep",
-      "display": "Go to your house",
+      "display": "Go to sleep",
       "setter": null,
       "kind": "button",
       "gate": [
@@ -6893,12 +6980,12 @@
           "branch": "if"
         }
       ],
-      "index": 202
+      "index": 234
     },
     {
       "from": "NoEnergy",
       "to": "BedroomSleep",
-      "display": "Go to your house",
+      "display": "Go to sleep",
       "setter": null,
       "kind": "button",
       "gate": [
@@ -6907,7 +6994,7 @@
           "branch": "else"
         }
       ],
-      "index": 257
+      "index": 327
     },
     {
       "from": "XCamBlackmail",
@@ -6978,14 +7065,15 @@
     "ParkChallenge",
     "ParkGangbang",
     "ParkLateNight",
+    "ParkRest",
     "Residential",
     "Cafeteria",
     "Afterclass",
-    "ComputerAfterClass",
     "EmmaPlay",
-    "TeacherSecretFetish",
+    "TeacherSecretFetishCore",
     "MarcusClassSex",
     "MathHomework",
+    "LibraryMeetNatasha",
     "LibraryTransSexKissChoice",
     "BathroomBellyAwareness",
     "BathroomLactation",
@@ -7104,7 +7192,6 @@
     "StripClubWork",
     "HouseRob",
     "SellDrugs",
-    "TalkBoss",
     "VipersClean",
     "ApartmentRent",
     "ApartmentBathroom",
@@ -7115,6 +7202,7 @@
     "ParkChallenge",
     "ParkJog",
     "ParkLateNightJog",
+    "ParkRest",
     "RestaurantInterview",
     "RestaurantWork",
     "SchoolTest",
@@ -7128,6 +7216,7 @@
     "SchoolGym",
     "TeacherTutoring",
     "Garage",
+    "GrandpaBedroom",
     "Kitchen",
     "LivingRoom",
     "WidgetMedia",
@@ -8181,7 +8270,7 @@
       ]
     },
     "Vipers": {
-      "edge_count": 2,
+      "edge_count": 5,
       "unresolved": 0,
       "tags": [
         "vipers-background"
@@ -8383,6 +8472,13 @@
         "parklatenight-background"
       ]
     },
+    "ParkRest": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": [
+        "park-background"
+      ]
+    },
     "PoliceParkGangbang": {
       "edge_count": 1,
       "unresolved": 0,
@@ -8579,7 +8675,7 @@
       ]
     },
     "ComputerAfterClass": {
-      "edge_count": 0,
+      "edge_count": 1,
       "unresolved": 0,
       "tags": [
         "classroom-background",
@@ -8625,12 +8721,17 @@
       ]
     },
     "TeacherSecretFetish": {
-      "edge_count": 0,
+      "edge_count": 2,
       "unresolved": 0,
       "tags": [
         "classroom-background",
         "shower"
       ]
+    },
+    "TeacherSecretFetishCore": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
     },
     "EmptyClass": {
       "edge_count": 2,
@@ -8677,7 +8778,7 @@
       ]
     },
     "Library": {
-      "edge_count": 6,
+      "edge_count": 7,
       "unresolved": 0,
       "tags": [
         "school-background",
@@ -8686,6 +8787,14 @@
     },
     "LibraryExhibitionism": {
       "edge_count": 1,
+      "unresolved": 0,
+      "tags": [
+        "school-background",
+        ".menu"
+      ]
+    },
+    "LibraryMeetNatasha": {
+      "edge_count": 0,
       "unresolved": 0,
       "tags": [
         "school-background",
@@ -8811,7 +8920,7 @@
       ]
     },
     "BathroomFlashScene": {
-      "edge_count": 2,
+      "edge_count": 1,
       "unresolved": 0,
       "tags": [
         "bathroom-background"
