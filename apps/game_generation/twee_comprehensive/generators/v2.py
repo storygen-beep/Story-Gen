@@ -183,7 +183,74 @@ class TweeComprehensiveGeneratorV2:
         if self.phone_enabled:
             twee_sections.append(self._generate_phone_css())
 
-        return "\n\n".join(twee_sections)
+        output = "\n\n".join(twee_sections)
+
+        # PRD 48 — strip the sidebar hint mechanism from V2 game output.
+        # V1 games keep all functions intact (they're still used by the V1
+        # sidebar `hint`-type item). V2 doesn't surface a sidebar hint, so
+        # the underlying JS functions are dead code — purge them.
+        output = self._strip_sidebar_mechanism_if_v2(output)
+
+        return output
+
+    def _strip_sidebar_mechanism_if_v2(self, output: str) -> str:
+        """PRD 48 — Remove sidebar hint JS functions and widget branch
+        from V2 game output. No-op for V1 games.
+
+        Targets (per audit):
+          - 8 `setup.<name> = function ...` definitions used only by the
+            sidebar hint walker (getSidebarHint, getNextActivity, +6 helpers)
+          - 1 `<<elseif _item.type is "hint">>` branch in the sidebarItems
+            widget that calls `setup.getSidebarHint()`
+
+        NOT touched (shared with other systems):
+          - `setup.formatCanvasConditions` — used by the location-blocking
+            UI ("Required: trust ≥ 10" message). The sidebar caller goes
+            away naturally when `getSidebarHint` is stripped.
+          - `setup.checkSingleCondition`, `setup.triggerConditionsSatisfied`,
+            `setup.npcSlugForId`, `setup.getStageHintForNPC`,
+            `setup._formatCanvasSchedule`, `setup._locNameFromUuid`,
+            `setup.getDecayWarnings`, `setup.getGlobalHints` — all
+            shared utilities used by Quests engine, decay warnings, E10/E11,
+            etc. Keep intact.
+        """
+        if (self.project.metadata or {}).get("quests_engine") != "v2":
+            return output
+
+        import re as _re
+
+        # Each sidebar-only function. Pattern matches from the declaration
+        # to the terminating `};\n` at column 0 (i.e. the function-level
+        # close, not any nested object/closure close). The functions are
+        # well-bounded at the top level — inner blocks close with `}` not
+        # `};\n` so this is unambiguous.
+        sidebar_fns = (
+            "getSidebarHint",
+            "getNextActivity",
+            "formatFlagHint",
+            "formatActivityHint",
+            "getBestFlagHint",
+            "resolveUnlockChain",
+            "checkTraitRequirement",
+            "calculateDaysRemaining",
+        )
+        for fn in sidebar_fns:
+            pattern = (
+                r"setup\." + _re.escape(fn) + r" = function[\s\S]*?\n\};\s*\n"
+            )
+            output = _re.sub(pattern, "", output)
+
+        # Widget branch: from `  <<elseif _item.type is "hint">>` (2-space
+        # indent inside `<<widget "sidebarItems">>`) up to (but not
+        # including) the next sibling `<<elseif`. Other branches stay.
+        widget_branch_pattern = (
+            r'  <<elseif _item\.type is "hint">>\n'
+            r'[\s\S]*?'
+            r'(?=  <<elseif )'
+        )
+        output = _re.sub(widget_branch_pattern, "", output)
+
+        return output
 
     def get_used_assets(self) -> dict:
         """
@@ -13381,8 +13448,11 @@ setup.evaluateGoals = function(card) {
 };
 
 // ── Canvas lookup by slug ────────────────────────────────────────────
-// Extracted from V1's _findFlagSetterCanvas. Used by renderQuestsGoalBlock
-// to surface ready_canvas's location + schedule on the 🔓 Ready frame.
+// Used by renderQuestsGoalBlock to surface ready_canvas's location + schedule
+// on the 🔓 Ready frame. The TOML-level slug (e.g. "scene_livingroom_catch")
+// is encoded into the canvas's `passageName` as `Canvas_<slug>_Node_1`. Canvas
+// objects themselves carry UUIDs as `id`. We extract the slug from passageName
+// to match against the author-facing ready_canvas field.
 setup.lookupCanvasBySlug = function(slug) {
     if (!slug) return null;
     var helpData = setup.help_data || {};
@@ -13391,7 +13461,16 @@ setup.lookupCanvasBySlug = function(slug) {
         var list = locCanvases[locUuid];
         for (var i = 0; i < list.length; i++) {
             var c = list[i];
-            if (c && c.id === slug) {
+            if (!c) continue;
+            // Primary match: parse slug from passageName ("Canvas_<slug>_Node_<n>").
+            if (c.passageName) {
+                var canvasSlug = c.passageName.replace(/^Canvas_/, "").replace(/_Node_\d+$/, "");
+                if (canvasSlug === slug) {
+                    return { canvas: c, locUuid: locUuid };
+                }
+            }
+            // Fallback: direct id match (covers any future canvas indexing by slug).
+            if (c.id === slug) {
                 return { canvas: c, locUuid: locUuid };
             }
         }
@@ -15855,7 +15934,7 @@ if (clothingMsg) {
 }
 .trait-bar-label {
     font-size: 0.75rem;
-    color: var(--theme-border);
+    color: #fff;
     margin-bottom: 3px;
 }
 .trait-bar-bg {

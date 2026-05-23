@@ -5837,3 +5837,119 @@ class QuestsV2EmissionTests(SimpleTestCase):
         self.assertIn("Arc complete", block)
         self.assertIn("Ready", block)
         self.assertIn("To advance:", block)
+
+
+class QuestsV2SidebarStripTests(SimpleTestCase):
+    """PRD 48 Commit 8 — verify the V2 generator strips the sidebar hint
+    JS functions and widget branch from the output, while keeping the
+    same functions intact for V1 games."""
+
+    SIDEBAR_FNS = (
+        "getSidebarHint",
+        "getNextActivity",
+        "formatFlagHint",
+        "formatActivityHint",
+        "getBestFlagHint",
+        "resolveUnlockChain",
+        "checkTraitRequirement",
+        "calculateDaysRemaining",
+    )
+
+    def _strip_with_metadata(self, sample_output: str, metadata: dict) -> str:
+        """Helper — instantiate the V2 generator with mock metadata and
+        run the strip method against a sample output string."""
+        from unittest.mock import MagicMock
+        from apps.game_generation.twee_comprehensive.generators.v2 import (
+            TweeComprehensiveGeneratorV2,
+        )
+        gen = TweeComprehensiveGeneratorV2()
+        gen.project = MagicMock()
+        gen.project.metadata = metadata
+        return gen._strip_sidebar_mechanism_if_v2(sample_output)
+
+    def _sample_output(self) -> str:
+        # Minimal fixture covering every target the strip should remove,
+        # plus shared utilities that must stay.
+        return (
+            "setup.getSidebarHint = function() {\n"
+            "    var x = 1;\n"
+            "    return x;\n"
+            "};\n"
+            "setup.getNextActivity = function(npcId) {\n"
+            "    return null;\n"
+            "};\n"
+            "setup.formatFlagHint = function(h, n) {\n"
+            "    return '';\n"
+            "};\n"
+            "setup.formatActivityHint = function(a) {\n"
+            "    return '';\n"
+            "};\n"
+            "setup.getBestFlagHint = function(unmet) {\n"
+            "    return null;\n"
+            "};\n"
+            "setup.resolveUnlockChain = function(k, m, v, d) {\n"
+            "    return null;\n"
+            "};\n"
+            "setup.checkTraitRequirement = function(r) {\n"
+            "    return true;\n"
+            "};\n"
+            "setup.calculateDaysRemaining = function(c) {\n"
+            "    return 0;\n"
+            "};\n"
+            "setup.formatCanvasConditions = function(c) {\n"
+            "    return 'Required: x';\n"
+            "};\n"
+            "setup.checkSingleCondition = function(c) { return true; };\n"
+            '  <<elseif _item.type is "hint">>\n'
+            "    <<set _hintText to setup.getSidebarHint()>>\n"
+            "    <<if _hintText>>\n"
+            '      <div>...</div>\n'
+            "    <</if>>\n"
+            '  <<elseif _item.type is "trait_bar">>\n'
+            "    <<set _next to 1>>\n"
+        )
+
+    def test_v1_metadata_keeps_everything(self):
+        # No quests_engine flag → treated as V1 → no strip.
+        output = self._strip_with_metadata(self._sample_output(), {})
+        for fn in self.SIDEBAR_FNS:
+            self.assertIn(
+                f"setup.{fn} = function", output,
+                f"V1 emission must keep {fn}",
+            )
+        self.assertIn('_item.type is "hint"', output)
+        self.assertIn("setup.formatCanvasConditions", output)
+        self.assertIn("setup.checkSingleCondition", output)
+
+    def test_v2_metadata_strips_sidebar_fns(self):
+        output = self._strip_with_metadata(
+            self._sample_output(), {"quests_engine": "v2"},
+        )
+        for fn in self.SIDEBAR_FNS:
+            self.assertNotIn(
+                f"setup.{fn} = function", output,
+                f"V2 emission must strip {fn}",
+            )
+
+    def test_v2_metadata_strips_hint_widget_branch(self):
+        output = self._strip_with_metadata(
+            self._sample_output(), {"quests_engine": "v2"},
+        )
+        self.assertNotIn('_item.type is "hint"', output)
+        # Adjacent trait_bar branch must remain.
+        self.assertIn('_item.type is "trait_bar"', output)
+
+    def test_v2_metadata_keeps_format_canvas_conditions(self):
+        # formatCanvasConditions is shared with location-blocking UI;
+        # must NOT be stripped even under V2.
+        output = self._strip_with_metadata(
+            self._sample_output(), {"quests_engine": "v2"},
+        )
+        self.assertIn("setup.formatCanvasConditions = function", output)
+
+    def test_v2_metadata_keeps_shared_utilities(self):
+        # Shared utilities used by Quests engine + other systems must stay.
+        output = self._strip_with_metadata(
+            self._sample_output(), {"quests_engine": "v2"},
+        )
+        self.assertIn("setup.checkSingleCondition", output)

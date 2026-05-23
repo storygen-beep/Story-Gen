@@ -15262,7 +15262,7 @@ if (clothingMsg) {
 }
 .trait-bar-label {
     font-size: 0.75rem;
-    color: var(--theme-border);
+    color: #fff;
     margin-bottom: 3px;
 }
 .trait-bar-bg {

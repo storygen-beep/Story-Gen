@@ -1,0 +1,19 @@
+{
+  "session_id": 1,
+  "start_ts": "2026-05-23T11:44:39.488Z",
+  "start_epoch_ms": 1779536679488,
+  "end_ts": "2026-05-23T11:54:22.209Z",
+  "duration_s": 583,
+  "clicks": 8,
+  "choices_explored": 8,
+  "arrow_advances": 0,
+  "unique_states_seen": 7,
+  "new_unique_states": 7,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "PRD 48 V2 engine end-to-end verified: F1 (pre-catch climbing) → F2 (post-catch) → F3 (post-first-night) → F4 (terminal) all swap correctly. lookupCanvasBySlug bug fixed (now parses slug from passageName)."
+  ]
+}
