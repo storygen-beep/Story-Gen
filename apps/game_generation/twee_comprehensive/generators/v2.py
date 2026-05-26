@@ -3919,36 +3919,18 @@ setup.selectSoloActivityCanvasesForLocation = function(locationId) {{
     return picks;
 }};
 
-// Truth-matched NEW badge — fires iff at least one of the three real entry
-// paths into the location will deliver isCanvasNew content. Replaces the
-// pre-2026-05-07 logic (selectCanvasByPriority + any-unvisited) which
-// diverged from what the location page actually routes to and could
-// promise content the player can't reach from the location screen at the
-// current state. See the user-confusion repro of 2026-05-07: badge fired
-// at Frank's office at 14:00 because activity_talk_to_frank was unvisited
-// (no schedule), but clicking Frank delivered the generic talk dialog,
-// not the dramatic story scene the badge implied.
+// Capstone-only NEW badge (2026-05-25 doctrine tightening) — fires iff a
+// non-repeatable auto-fire canvas is queued for this location's entry.
+// selectAutoFireCanvasForLocation already filters !isRepeatable, non-random
+// trigger, non-substitution, valid schedule+conditions. Per-portrait and
+// per-solo NEW indicators (always repeatable click targets) were removed in
+// the same pass — repeatable surfaces no longer carry NEW signals anywhere.
 setup.locationHasNewCanvases = function(locationId) {{
     try {{
-        // Path 1 — auto-fire on entry
         var autoFire = setup.selectAutoFireCanvasForLocation(locationId);
-        if (autoFire && setup.isCanvasNew(autoFire.id)) return true;
-
-        // Path 2 — NPC portrait click
-        var npcPicks = setup.selectNpcPortraitCanvasesForLocation(locationId);
-        for (var slug in npcPicks) {{
-            if (setup.isCanvasNew(npcPicks[slug].id)) return true;
-        }}
-
-        // Path 3 — solo activity click
-        var soloPicks = setup.selectSoloActivityCanvasesForLocation(locationId);
-        for (var i = 0; i < soloPicks.length; i++) {{
-            if (setup.isCanvasNew(soloPicks[i].id)) return true;
-        }}
-
-        return false;
+        return !!(autoFire && setup.isCanvasNew(autoFire.id));
     }} catch (e) {{
-        return false; // Fail closed - don't show indicator if error
+        return false; // Fail closed
     }}
 }};
 
@@ -3969,41 +3951,6 @@ setup.markChoiceVisited = function(choiceKey) {{
         vc[String(choiceKey)] = true;
     }} catch (e) {{
         // ignore
-    }}
-}};
-
-// Check if a canvas has any unlocked + unvisited conditional choices
-setup.canvasHasNewUnlockedChoices = function(canvasId) {{
-    try {{
-        var cc = (setup.help_data || {{}}).canvasConditionalChoices || {{}};
-        var choices = cc[String(canvasId)];
-        if (!choices || choices.length === 0) return false;
-        for (var i = 0; i < choices.length; i++) {{
-            if (setup.triggerConditionsSatisfied(choices[i].conditions)
-                && !setup.isChoiceVisited(choices[i].key)) {{
-                return true;
-            }}
-        }}
-        return false;
-    }} catch (e) {{
-        return false;
-    }}
-}};
-
-// Check if a location has any canvases with newly unlocked choices
-setup.locationHasNewUnlockedChoices = function(locationId) {{
-    try {{
-        var lc = (setup.help_data || {{}}).locationCanvases || {{}};
-        var canvasList = lc[String(locationId)] || [];
-        var selected = setup.selectCanvasByPriority(canvasList);
-        for (var i = 0; i < selected.length; i++) {{
-            if (setup.canvasHasNewUnlockedChoices(selected[i].id)) {{
-                return true;
-            }}
-        }}
-        return false;
-    }} catch (e) {{
-        return false;
     }}
 }};
 
@@ -4117,43 +4064,36 @@ setup.getCostBlockedMessage = function(costs) {{
     return lines.join('. ');
 }};
 
-// Get NPCs that have available canvases at a location
-// Returns array of {{id, name, portrait}} for NPCs with valid activities
-// Uses selectCanvasByPriority to respect activity-level daily limits
+// Get NPCs whose declared [[npcs.schedules]] places them at this location right
+// now AND who have a reachable affordable+valid canvas here. Schedule-only —
+// no canvas-derived fallback (2026-05-25 doctrine tightening).
+//
+// Intake from selectNpcPortraitCanvasesForLocation (the renderer's pure pick
+// helper) so the badge inherits the same substitutionOnly / cost / daily-cap
+// filters renderNpcPortraits applies. NPCs without declared schedules are
+// suppressed entirely — they need a [[npcs.schedules]] block to surface
+// portraits on nav cards. Matches the fail-closed schedule filter in
+// renderNpcPortraits so the nav card and the location-screen portrait grid
+// promise identical content.
 setup.getNpcsWithCanvasesAtLocation = function(locationId) {{
     var result = [];
     try {{
-        var sv = State.variables;
-        var helpData = setup.help_data || {{}};
-        var locationCanvases = helpData.locationCanvases || {{}};
-        var canvasList = locationCanvases[String(locationId)] || [];
-        var npcs = sv.npcs || {{}};
+        var picks = setup.selectNpcPortraitCanvasesForLocation(locationId);
+        var npcs = (State.variables || {{}}).npcs || {{}};
+        var slugMap = setup.npc_slug_map || {{}};
+        var schedules = setup.npcSchedules || {{}};
+        var seen = {{}};
 
-        // Use selectCanvasByPriority to get ACTUALLY available canvases
-        // This respects activity-level daily limits (all tiers share same limit)
-        var availableCanvases = setup.selectCanvasByPriority(canvasList);
-
-        // selectCanvasByPriority groups by activity `name`, so two canvases at the
-        // same location for the same NPC with DIFFERENT names both come back. Sort
-        // by priority desc so the per-NPC dedup below picks the higher-priority
-        // surface — matches the routing renderNpcPortraits will resolve.
-        availableCanvases.sort(function(a, b) {{ return (b.priority || 0) - (a.priority || 0); }});
-
-        var addedNpcs = {{}};
-
-        for (var i = 0; i < availableCanvases.length; i++) {{
-            var c = availableCanvases[i];
-            if (!c.npcId) continue;
-            if (addedNpcs[c.npcId]) continue;
-
-            // Resolve NPC slug to UUID
-            var npcUuid = setup.npc_slug_map ? setup.npc_slug_map[c.npcId] : null;
-            if (!npcUuid) continue;
-
-            var npc = npcs[npcUuid];
+        for (var slug in picks) {{
+            if (seen[slug]) continue;
+            // Schedule-only gate — no canvas-derived fallback.
+            if (!schedules[slug]) continue;
+            var here = setup.getNpcLocation(slug);
+            if (!here || here.location !== locationId) continue;
+            var npcUuid = slugMap[slug];
+            var npc = npcUuid ? npcs[npcUuid] : null;
             if (!npc) continue;
-
-            addedNpcs[c.npcId] = true;
+            seen[slug] = true;
             result.push({{
                 id: npcUuid,
                 name: npc.name,
@@ -4356,20 +4296,20 @@ setup.renderNpcPortraits = function(locationId) {{
             Object.keys(npcBlocked).filter(function(s) {{ return !npcActivities[s]; }})
         );
 
-        // Phase A (2026-05-14) — schedule-presence pre-filter. For each NPC
-        // candidate, ask setup.getNpcLocation(slug). If the NPC has a declared
-        // schedule that places them somewhere other than the current location,
-        // suppress the portrait. NPCs without declared schedules fall through
-        // unchanged (the canvas-derived fallback in getNpcLocation returns the
-        // active canvas's location, which matches by construction).
+        // Schedule-only presence gate (2026-05-25 doctrine tightening) —
+        // NPC must have declared [[npcs.schedules]] AND getNpcLocation must
+        // place them at this location right now. NPCs without declared
+        // schedules are suppressed (no canvas-derived fallback). Fail-closed
+        // so the location-screen portrait grid matches what the nav-card
+        // badge (getNpcsWithCanvasesAtLocation) promises.
         allSlugs = allSlugs.filter(function(slug) {{
             try {{
                 var npcSched = (setup.npcSchedules || {{}})[slug];
-                if (!npcSched || npcSched.length === 0) return true;  // no declared schedule = unchanged
+                if (!npcSched || npcSched.length === 0) return false;
                 var npcLoc = setup.getNpcLocation(slug);
                 return npcLoc && npcLoc.location === locationId;
             }} catch (errFilter) {{
-                return true;  // fail-open
+                return false;
             }}
         }});
 
@@ -4387,16 +4327,12 @@ setup.renderNpcPortraits = function(locationId) {{
             var passageName = activity.passageName || '';
             if (!passageName) continue;
 
-            // Check for NEW or unlocked indicators (only for affordable)
-            var indicatorClass = '';
-            if (!isBlocked) {{
-                var isNew = setup.isCanvasNew(activity.id);
-                var hasUnlocked = !isNew && setup.canvasHasNewUnlockedChoices(activity.id);
-                indicatorClass = isNew ? ' npc-portrait-new' : (hasUnlocked ? ' npc-portrait-unlocked' : '');
-            }}
+            // Per-portrait NEW/unlocked indicators removed 2026-05-25 —
+            // NPC activities are always repeatable; capstone-only NEW lives
+            // on the nav card; 🔓 unlocked-choices indicator removed entirely.
             var blockedClass = isBlocked ? ' npc-portrait-blocked' : '';
 
-            html += '<div class="npc-portrait-card' + indicatorClass + blockedClass + '">';
+            html += '<div class="npc-portrait-card' + blockedClass + '">';
             // Link always points to the real canvas passage — cost gate in passage handles blocking
             html += '<a class="npc-portrait-link link-internal" data-passage="' + passageName + '">';
 
@@ -4420,10 +4356,6 @@ setup.renderNpcPortraits = function(locationId) {{
                 html += '<span class="npc-badge npc-cost-badge">' + activity.costs[0].value + ' ' + costTraitDisplay + '</span>';
             }}
 
-            if (!isBlocked) {{
-                if (isNew) html += '<span class="npc-badge npc-badge-new">NEW</span>';
-                if (hasUnlocked) html += '<span class="npc-badge npc-badge-unlocked">!</span>';
-            }}
             html += '</a>';
             html += '</div>';
         }}
@@ -4485,9 +4417,8 @@ setup.renderSoloActivities = function(locationId) {{
             var passageName = solo.passageName || '';
             if (!passageName) continue;
 
-            var isNew = setup.isCanvasNew(solo.id);
-            var cls = 'link-internal solo-activity-btn' + (isNew ? ' solo-activity-new' : '');
-            html += '<a class="' + cls + '" data-passage="' + passageName + '">' + displayName + '</a><br>';
+            // Per-solo NEW indicator removed 2026-05-25 (capstone-only NEW doctrine).
+            html += '<a class="link-internal solo-activity-btn" data-passage="' + passageName + '">' + displayName + '</a><br>';
         }}
         // Cost-blocked activities (dimmed with cost tag)
         for (var sb = 0; sb < soloBlocked.length; sb++) {{
@@ -4662,7 +4593,13 @@ setup.checkRandomEncounters = function(locationId) {{
 // PRD spec ("if (...) return") fails at runtime. The <<set>>+<<goto>> pattern
 // works around this and is the canonical SugarCube way to do conditional nav.
 //
-// Doctrine: doc 24 §7 + PRD 25 §3. First-match policy. Fail-open on errors.
+// Doctrine: doc 24 §7 + PRD 25 §3 (Pattern A — independent rolls, first-match).
+// Doc 69 Item 1 (2026-05-27) — Pattern B `exclusive_group` extension:
+// rules sharing an exclusive_group string share ONE dice roll (mutual
+// exclusion via cumulative bucket partition); failed-condition in a claimed
+// slot falls to solo (does NOT promote to next rule in the group). Groups
+// process FIRST per LO Q2 decision; if no group fires, fall through to
+// Pattern A independent rules. Fail-open on errors.
 setup.checkAndSubstituteCanvas = function(parentCanvasId) {{
     try {{
         var subs = (setup.canvasSubstitutions || {{}})[parentCanvasId] || [];
@@ -4670,19 +4607,70 @@ setup.checkAndSubstituteCanvas = function(parentCanvasId) {{
         // Resolve current location once; needed for the NPC presence gate.
         var sv = State.variables || {{}};
         var currentLocation = (sv.player && sv.player.current_location) || null;
-        for (var i = 0; i < subs.length; i++) {{
-            var s = subs[i];
+
+        // Helper: validate target + conditions + requiresNpc gate for a rule.
+        // Returns the resolved target (truthy) or null.
+        var _tryRule = function(s) {{
             var target = setup.getCanvasById(s.target_canvas_id);
-            if (!target) continue;
-            if (!setup.isCanvasValid(target)) continue;
-            if (s.conditions && !setup.triggerConditionsSatisfied(s.conditions)) continue;
-            // Phase A (2026-05-14) — NPC presence gate on substitution target.
-            // If the target carries requiresNpc, the named NPC must be at the
-            // player's current location per setup.getNpcLocation().
+            if (!target) return null;
+            if (!setup.isCanvasValid(target)) return null;
+            if (s.conditions && !setup.triggerConditionsSatisfied(s.conditions)) return null;
             if (target.requiresNpc) {{
                 var subNpcLoc = setup.getNpcLocation(target.requiresNpc);
-                if (!subNpcLoc || subNpcLoc.location !== currentLocation) continue;
+                if (!subNpcLoc || subNpcLoc.location !== currentLocation) return null;
             }}
+            return target;
+        }};
+
+        // ── Doc 69 Item 1 — partition substitution rules by exclusive_group.
+        var groups = {{}};            // group_name → [rule, rule, ...] in declaration order
+        var groupOrder = [];          // first-seen order of group names (for deterministic iteration)
+        var independentRules = [];    // rules without exclusive_group
+        for (var pi = 0; pi < subs.length; pi++) {{
+            var pr = subs[pi];
+            if (pr && pr.exclusive_group) {{
+                var gn = String(pr.exclusive_group);
+                if (!groups[gn]) {{
+                    groups[gn] = [];
+                    groupOrder.push(gn);
+                }}
+                groups[gn].push(pr);
+            }} else {{
+                independentRules.push(pr);
+            }}
+        }}
+
+        // ── Pattern B groups first: single dice per group; cumulative buckets.
+        // If dice falls in a slot but the rule's target/conditions/requiresNpc
+        // fail, FALL THROUGH TO SOLO (return null) — do not promote next rule.
+        // This is the load-bearing Pattern B semantic per Doc 69 §3.4.
+        for (var gi = 0; gi < groupOrder.length; gi++) {{
+            var groupName = groupOrder[gi];
+            var groupRules = groups[groupName];
+            var groupDice = Math.random();
+            var cumulativeChance = 0;
+            for (var gri = 0; gri < groupRules.length; gri++) {{
+                var gs = groupRules[gri];
+                cumulativeChance += (gs.chance || 0);
+                if (groupDice < cumulativeChance) {{
+                    // Dice claimed this slot. Validate target+conditions.
+                    var groupTarget = _tryRule(gs);
+                    if (groupTarget) {{
+                        setup.markCanvasTriggered(groupTarget.id);
+                        return groupTarget.passageName;
+                    }}
+                    // Claimed slot failed conditions → fall to solo, not next rule.
+                    return null;
+                }}
+            }}
+            // Dice fell outside all buckets in this group → continue to next group.
+        }}
+
+        // ── Pattern A independent rules: each rule rolls own dice; first match wins.
+        for (var i = 0; i < independentRules.length; i++) {{
+            var s = independentRules[i];
+            var target = _tryRule(s);
+            if (!target) continue;
             if (Math.random() < (s.chance || 0)) {{
                 setup.markCanvasTriggered(target.id);
                 return target.passageName;
@@ -9699,6 +9687,11 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     "target_canvas_id": target_uuid,
                     "chance": float(r.get("chance", 0)),
                     "conditions": r.get("conditions") or None,
+                    # Doc 69 Item 1 — Pattern B exclusive_group passthrough.
+                    # When non-None, rules sharing the same group name share one
+                    # dice roll at runtime (mutual exclusion). Absent / None
+                    # means Pattern A independent rolls.
+                    "exclusive_group": r.get("exclusive_group") or None,
                 })
             if resolved:
                 canvas_subs_map[parent_uuid] = resolved
@@ -11087,6 +11080,11 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
             # the rest of the parent's body — exactly the no-flicker behavior
             # PRD 25 §3 specifies.
             substitution_check = ""
+            # Doc 69 Item 2 — pre-substitution effects: emit BEFORE the
+            # substitution check so they execute unconditionally. If a
+            # substitution rule fires via <<goto>>, these effects have already
+            # run — the activity "counts" even when interrupted. See Doc 69 §4.
+            pre_substitution_macros = ""
             if i == 0 and hasattr(canvas, 'trigger') and canvas.trigger:
                 if hasattr(canvas.trigger, 'metadata') and canvas.trigger.metadata:
                     if canvas.trigger.metadata.get("substitutions"):
@@ -11094,6 +11092,32 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                             f"<<set _sub_target = setup.checkAndSubstituteCanvas(\"{canvas.id}\")>>"
                             f"<<if _sub_target>><<goto _sub_target>><</if>>\n"
                         )
+                    pre_effects = canvas.trigger.metadata.get("pre_substitution_effects") or []
+                    if pre_effects:
+                        macro_lines = []
+                        for _pe in pre_effects:
+                            if not isinstance(_pe, dict):
+                                continue
+                            _pe_tt = str(_pe.get("targetType", "player"))
+                            _pe_npc = _pe.get("npcId")
+                            _pe_npc_js = f'"{_pe_npc}"' if _pe_npc else "null"
+                            _pe_trait = str(_pe.get("trait", ""))
+                            _pe_op = str(_pe.get("op", "add"))
+                            _pe_val_js = self._resolve_effect_value(_pe.get("value", 0))
+                            _pe_clamp = "true" if _pe.get("clamp") else "false"
+                            _pe_cap = _pe.get("cap")
+                            _pe_cap_js = (
+                                json.dumps(_pe_cap)
+                                if _pe_cap is not None else "null"
+                            )
+                            macro_lines.append(
+                                f'<<script>>setup.applyAndNotifyTrait('
+                                f'"{_pe_tt}", {_pe_npc_js}, "{_pe_trait}", '
+                                f'"{_pe_op}", {_pe_val_js}, {_pe_clamp}, '
+                                f'{_pe_cap_js});<</script>>'
+                            )
+                        if macro_lines:
+                            pre_substitution_macros = "\n".join(macro_lines) + "\n"
 
             # Track node visit in visited_nodes for story arc completion
             node_slug = ""
@@ -11112,7 +11136,8 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 
             passage_header = (
                 f":: {node_passage_name}\n"
-                f"{substitution_check}"  # PRD 25 — fires before any other passage logic
+                f"{pre_substitution_macros}"  # Doc 69 Item 2 — unconditional effects, BEFORE substitution check
+                f"{substitution_check}"  # PRD 25 — fires before body / exit_block; Doc 69 Item 2 moves pre-sub effects earlier still
                 f"{dev_canvas_info}"
                 f"{node_content}\n\n"
                 f"<<set $game_state.current_canvas = \"{canvas.id}\">>\n"
@@ -14389,17 +14414,80 @@ if (clothingMsg) {
       </div>
     <</if>>
   <<elseif _item.type is "trait_bar">>
-    <<set _traitKey to _item.trait>>
-    <<set _traitVal to ($player && $player.core_traits) ? ($player.core_traits[_traitKey] || 0) : 0>>
+    <<set _tbOwner to _item.trait_owner || "player">>
+    <<set _tbKey to _item.trait>>
+    <<if _tbOwner is "npc">>
+      <<set _tbNpcId to _item.npc_id>>
+      <<set _tbNpcObj to (setup.npc_slug_map && setup.npc_slug_map[_tbNpcId]) ? State.variables.npcs[setup.npc_slug_map[_tbNpcId]] : (State.variables.npcs ? State.variables.npcs[_tbNpcId] : null)>>
+      <<set _traitVal to (_tbNpcObj && _tbNpcObj.core_traits) ? (_tbNpcObj.core_traits[_tbKey] || 0) : 0>>
+    <<else>>
+      <<set _traitVal to ($player && $player.core_traits) ? ($player.core_traits[_tbKey] || 0) : 0>>
+    <</if>>
     <<set _traitMax to _item.max || 100>>
-    <<set _traitLabel to _item.label || _traitKey>>
+    <<set _traitLabel to _item.label || _tbKey>>
     <<set _traitPct to Math.max(0, Math.min(100, (_traitVal / _traitMax) * 100))>>
+    <<set _tbTier to "">>
+    <<if _item.color_tiers>>
+      <<for _ti to 0; _ti lt _item.color_tiers.length; _ti++>>
+        <<if _tbTier is "" and _traitPct lte (_item.color_tiers[_ti].up_to)>>
+          <<set _tbTier to _item.color_tiers[_ti].class>>
+        <</if>>
+      <</for>>
+    <</if>>
+    <<set _tbBandText to "">>
+    <<set _tbBandIcon to "">>
+    <<if _item.bands>>
+      <<for _bi to 0; _bi lt _item.bands.length; _bi++>>
+        <<set _bb to _item.bands[_bi]>>
+        <<if _tbBandText is "" and _bb.min isnot undefined and _bb.max isnot undefined and _traitVal gte _bb.min and _traitVal lte _bb.max>>
+          <<set _tbBandText to _bb.text>>
+          <<set _tbBandIcon to _bb.icon || "">>
+        <</if>>
+      <</for>>
+    <</if>>
     <div class="sidebar-item trait-bar-item" id="sidebar-trait-bar-<<print _si>>">
-      <div class="trait-bar-label"><<print _traitLabel>>: <<print Math.floor(_traitVal)>> / <<print _traitMax>></div>
+      <div class="trait-bar-label">
+        <<if _item.hide_value is true>>
+          <<print _traitLabel>>
+        <<else>>
+          <<print _traitLabel>>: <<print Math.floor(_traitVal)>> / <<print _traitMax>>
+        <</if>>
+      </div>
       <div class="trait-bar-bg">
-        <div class="trait-bar-fill" style="width: <<print _traitPct>>%"></div>
+        <div class="trait-bar-fill <<print _tbTier>>" style="width: <<print _traitPct>>%"></div>
+        <<if _tbBandText isnot "">>
+          <span class="trait-bar-band-text"><<print (_tbBandIcon ? _tbBandIcon + " " : "") + _tbBandText>></span>
+        <</if>>
       </div>
     </div>
+  <<elseif _item.type is "trait_status_text">>
+    <<set _tsOwner to _item.trait_owner || "player">>
+    <<set _tsKey to _item.trait>>
+    <<if _tsOwner is "npc">>
+      <<set _tsNpcId to _item.npc_id>>
+      <<set _tsNpcObj to (setup.npc_slug_map && setup.npc_slug_map[_tsNpcId]) ? State.variables.npcs[setup.npc_slug_map[_tsNpcId]] : (State.variables.npcs ? State.variables.npcs[_tsNpcId] : null)>>
+      <<set _tsVal to (_tsNpcObj && _tsNpcObj.core_traits) ? (_tsNpcObj.core_traits[_tsKey] || 0) : 0>>
+    <<else>>
+      <<set _tsVal to ($player && $player.core_traits) ? ($player.core_traits[_tsKey] || 0) : 0>>
+    <</if>>
+    <<set _tsText to "">>
+    <<set _tsIcon to "">>
+    <<if _item.bands>>
+      <<for _bi to 0; _bi lt _item.bands.length; _bi++>>
+        <<set _bb to _item.bands[_bi]>>
+        <<set _bMin to (_bb.min isnot undefined) ? _bb.min : -1e9>>
+        <<set _bMax to (_bb.max isnot undefined) ? _bb.max : 1e9>>
+        <<if _tsText is "" and _tsVal gte _bMin and _tsVal lte _bMax>>
+          <<set _tsText to _bb.text>>
+          <<set _tsIcon to _bb.icon || "">>
+        <</if>>
+      <</for>>
+    <</if>>
+    <<if _tsText isnot "">>
+      <div class="sidebar-item trait-status-text-item">
+        <<print (_tsIcon ? _tsIcon + " " : "") + _tsText>>
+      </div>
+    <</if>>
   <<elseif _item.type is "trait_decay_warning">>
     <!-- E20: render an amber warning when a decaying trait dropped today AND
          is within 2.0 of its next stage gate. setup.getDecayWarnings() walks
@@ -15567,17 +15655,6 @@ if (clothingMsg) {
     font-size: 1.1em;
 }
 
-/* Navigation Unlocked Choice Indicators */
-.nav-unlocked {
-    color: var(--theme-warning);
-    font-weight: bold;
-    font-size: 1.0em;
-}
-.nav-unlocked-badge {
-    font-size: 0.65em;
-    padding: 2px 5px;
-}
-
 /* Navigation NPC Portrait Indicator */
 .nav-npc-portrait {
     width: 24px;
@@ -15788,17 +15865,8 @@ if (clothingMsg) {
     line-height: 1.2;
 }
 
-/* NEW / unlocked indicators on portraits */
-.npc-portrait-new .npc-portrait-img,
-.npc-portrait-new .npc-portrait-placeholder {
-    border-color: var(--theme-warning);
-}
-
-.npc-portrait-unlocked .npc-portrait-img,
-.npc-portrait-unlocked .npc-portrait-placeholder {
-    border-color: var(--theme-success);
-}
-
+/* .npc-badge kept as base class for .npc-cost-badge (cost-blocked portraits).
+   NEW/unlocked portrait border + badge classes removed 2026-05-25. */
 .npc-badge {
     position: absolute;
     top: -4px;
@@ -15808,16 +15876,6 @@ if (clothingMsg) {
     padding: 2px 5px;
     border-radius: 8px;
     text-transform: uppercase;
-}
-
-.npc-badge-new {
-    background: var(--theme-warning);
-    color: #000;
-}
-
-.npc-badge-unlocked {
-    background: var(--theme-success);
-    color: #fff;
 }
 
 /* Solo activity buttons (activities with no NPC) */
@@ -15842,10 +15900,6 @@ if (clothingMsg) {
 .solo-activity-btn:hover {
     background: var(--theme-surface-alt);
     color: var(--theme-text-strong) !important;
-}
-
-.solo-activity-new {
-    border-left: 3px solid var(--theme-warning);
 }
 
 /* ===== Cost-blocked states ===== */
@@ -15928,6 +15982,18 @@ if (clothingMsg) {
     line-height: 1.35;
 }
 
+/* ===== Sidebar trait_status_text (body-state needs) ===== */
+.trait-status-text-item {
+    margin-top: 0.5rem;
+    padding: 6px 10px;
+    background: rgba(99, 179, 237, 0.14);
+    border-left: 3px solid rgba(99, 179, 237, 0.75);
+    border-radius: 4px;
+    color: var(--theme-text);
+    font-size: 0.78rem;
+    line-height: 1.35;
+}
+
 /* ===== Sidebar trait bar ===== */
 .trait-bar-item {
     margin-top: 0.5rem;
@@ -15942,12 +16008,49 @@ if (clothingMsg) {
     background: #1a1a2a;
     border-radius: 4px;
     overflow: hidden;
+    position: relative;
 }
 .trait-bar-fill {
     height: 100%;
     background: linear-gradient(90deg, var(--theme-warning), var(--theme-success));
     border-radius: 4px;
     transition: width 0.3s ease;
+}
+/* Banded mode: when a trait_bar's band-text overlay is rendered, the bg grows
+   to fit the overlay text. Height = font-size 0.75rem (~12px) + ~8px vertical
+   breathing room each side so the band text doesn't kiss the top/bottom
+   borders. Gated via :has() so non-banded bars stay at the 8px default. */
+.trait-bar-bg:has(.trait-bar-band-text) {
+    height: 28px;
+    border-radius: 6px;
+}
+.trait-bar-band-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+    pointer-events: none;
+    z-index: 2;
+    white-space: nowrap;
+}
+/* Built-in color tier gradients — RTS-matched. Authors can override by shipping
+   their own .trait-bar-fill.<class> rules for arbitrary class names. */
+.trait-bar-fill.low {
+    background: linear-gradient(90deg, #2196f3, #1976d2);
+    box-shadow: 0 0 6px rgba(33, 150, 243, 0.3);
+}
+.trait-bar-fill.medium {
+    background: linear-gradient(90deg, #ff9800, #ff5722);
+    box-shadow: 0 0 6px rgba(255, 152, 0, 0.3);
+}
+.trait-bar-fill.high {
+    background: linear-gradient(90deg, #ff6b6b, #ff1744);
+    box-shadow: 0 0 6px rgba(255, 107, 107, 0.3);
 }
 
 /* Dev Mode Controls */
@@ -17258,7 +17361,6 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
                     # Indicators container (NPC portraits + new canvas badge)
                     navigation_html += f'<div class="location-card-indicators">'
                     navigation_html += f'<<if setup.locationHasNewCanvases("{dest_id}")>><span class="nav-new-badge">NEW</span><</if>>'
-                    navigation_html += f'<<if setup.locationHasNewUnlockedChoices("{dest_id}")>><span class="nav-unlocked-badge">\U0001f513</span><</if>>'
                     navigation_html += f'<<for _npc range setup.getNpcsWithCanvasesAtLocation("{dest_id}")>><<if _npc.portrait>><img @src="\'{video_path}/\' + _npc.portrait" class="nav-npc-badge" @alt="_npc.name"><</if>><</for>>'
                     navigation_html += f'</div>'
                     navigation_html += f'</div>'
@@ -17270,7 +17372,7 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
                 navigation_html += "    <strong>Available destinations:</strong><br>\n"
                 for dest in ordered_destinations:
                     dest_name = dest.name.replace(' ', '_')
-                    navigation_html += f"""    [[{dest.name}->Location_{dest_name}]]<<if setup.locationHasNewCanvases("{dest.id}")>> <span class="nav-new">!</span><</if>><<if setup.locationHasNewUnlockedChoices("{dest.id}")>> <span class="nav-unlocked">\U0001f513</span><</if>><<for _npc range setup.getNpcsWithCanvasesAtLocation("{dest.id}")>><<if _npc.portrait>> <img @src="'{video_path}/' + _npc.portrait" class="nav-npc-portrait" @alt="_npc.name"><</if>><</for>><br>\n"""
+                    navigation_html += f"""    [[{dest.name}->Location_{dest_name}]]<<if setup.locationHasNewCanvases("{dest.id}")>> <span class="nav-new">!</span><</if>><<for _npc range setup.getNpcsWithCanvasesAtLocation("{dest.id}")>><<if _npc.portrait>> <img @src="'{video_path}/' + _npc.portrait" class="nav-npc-portrait" @alt="_npc.name"><</if>><</for>><br>\n"""
 
         # EXIT LINKS (always text-only, below the grid)
         exit_links = []
@@ -17343,7 +17445,6 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
                         navigation_html += f'<span class="location-card-name">{safe_name}</span>'
                         navigation_html += f'<div class="location-card-indicators">'
                         navigation_html += f'<<if setup.locationHasNewCanvases("{loc_id}")>><span class="nav-new-badge">NEW</span><</if>>'
-                        navigation_html += f'<<if setup.locationHasNewUnlockedChoices("{loc_id}")>><span class="nav-unlocked-badge">\U0001f513</span><</if>>'
                         navigation_html += f'<<for _npc range setup.getNpcsWithCanvasesAtLocation("{loc_id}")>><<if _npc.portrait>><img @src="\'{video_path}/\' + _npc.portrait" class="nav-npc-badge" @alt="_npc.name"><</if>><</for>>'
                         navigation_html += f'</div>'
                         navigation_html += f'</div>'
@@ -17354,7 +17455,7 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
                     navigation_html += "    <p><strong>All locations:</strong></p>\n"
                     for other_loc in other_locations:
                         other_name = other_loc.name.replace(' ', '_')
-                        navigation_html += f"""    [[{other_loc.name}->Location_{other_name}]]<<if setup.locationHasNewCanvases("{other_loc.id}")>> <span class="nav-new">!</span><</if>><<if setup.locationHasNewUnlockedChoices("{other_loc.id}")>> <span class="nav-unlocked">\U0001f513</span><</if>><<for _npc range setup.getNpcsWithCanvasesAtLocation("{other_loc.id}")>><<if _npc.portrait>> <img @src="'{video_path}/' + _npc.portrait" class="nav-npc-portrait" @alt="_npc.name"><</if>><</for>><br>\n"""
+                        navigation_html += f"""    [[{other_loc.name}->Location_{other_name}]]<<if setup.locationHasNewCanvases("{other_loc.id}")>> <span class="nav-new">!</span><</if>><<for _npc range setup.getNpcsWithCanvasesAtLocation("{other_loc.id}")>><<if _npc.portrait>> <img @src="'{video_path}/' + _npc.portrait" class="nav-npc-portrait" @alt="_npc.name"><</if>><</for>><br>\n"""
 
         return navigation_html
 

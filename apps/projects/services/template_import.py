@@ -352,6 +352,11 @@ class GameTemplate:
     # affects diner tips, etc.). Authored under [ui.tips_page] in TOML. None
     # = page + sidebar button not emitted; runtime-conditional.
     tips_page: Optional["TemplateTipsPage"] = None
+    # Doc 69 Item 3 — parse-time errors collected during normalize() for the
+    # field-name mismatch validator. validate() prepends these to its own
+    # error list. Populated only by normalize(); never mutated downstream.
+    # Empty list = no parse-time errors detected.
+    _parse_errors: List[str] = field(default_factory=list)
 
 
 @dataclass
@@ -475,6 +480,14 @@ class TemplateTrigger:
     # favor of consulting the NPC's single source of truth. Back-compat:
     # canvases that still carry `trigger.schedules` keep working (AND-gate).
     requires_npc: Optional[str] = None
+    # Doc 69 Item 2 (2026-05-27) — Pattern C `pre_substitution_effects`.
+    # Effects that run UNCONDITIONALLY at canvas entry, BEFORE the Lane 3
+    # substitution check. If a substitution rule preempts via <<goto>>, these
+    # effects have already executed — the activity "counts" even when an NPC
+    # walks in. Each entry uses the same shape as a regular trait effect
+    # (targetType / npcId / trait / op / value / clamp / cap). Empty list =
+    # current behavior unchanged (Pattern A semantics). See Doc 69 §4 + §5.2.
+    pre_substitution_effects: List[Dict[str, Any]] = field(default_factory=list)
 
 
 @dataclass
@@ -1025,7 +1038,364 @@ def _validate_weekdays(weekdays_raw: List[Any], context: str) -> List[int]:
     return weekdays
 
 
+# Doc 69 Item 3 — Field-name mismatch validators.
+# Effect schema (TemplateChoiceEffect/TemplateFlagEffect) uses field names:
+#   targetType / npcId / trait / flag / op
+# Predicate schema (triggerConditionsSatisfied items) uses field names:
+#   subject / npc_id / trait_key / flag_key / operator + type
+# Mixing them causes silent no-op at runtime (e.g., `_require_str(e, "trait", "")`
+# returns empty string when the dict only has `trait_key`). Doc 68 §7.6 is the
+# doctrine reference card; these validators convert it to build-time enforcement.
+
+# Predicate-context field names that MUST NOT appear in effect blocks.
+# Maps wrong-field → (correct-field, source-context-name).
+_EFFECT_FORBIDDEN_FIELDS: Dict[str, str] = {
+    "subject": "targetType",
+    "trait_key": "trait",
+    "flag_key": "flag",
+    "npc_id": "npcId",
+    "operator": "op",
+}
+
+# Effect-context field names that MUST NOT appear in predicate items.
+# Maps wrong-field → (correct-field, source-context-name).
+_PREDICATE_FORBIDDEN_FIELDS: Dict[str, str] = {
+    "targetType": "subject",
+    "npcId": "npc_id",
+}
+
+
+def _validate_effect_field_names(raw_eff: Dict[str, Any], ctx: str) -> List[str]:
+    """Validate that an effect dict does NOT use predicate-context field names.
+
+    Returns a list of error messages (empty if clean). Doc 68 §7.6 + Doc 69 §5.3.
+    Callers should append the returned errors to their accumulating errors list.
+    """
+    if not isinstance(raw_eff, dict):
+        return []
+    errors: List[str] = []
+    for wrong_field, right_field in _EFFECT_FORBIDDEN_FIELDS.items():
+        if wrong_field in raw_eff:
+            val = raw_eff[wrong_field]
+            errors.append(
+                f"{ctx}: field `{wrong_field}` is not allowed in an effect block "
+                f"(use `{right_field}` instead — predicate-syntax field mixed into "
+                f"effect context). See Doc 68 §7.6 field-name reference card. "
+                f"Field appeared with value: {val!r}."
+            )
+    return errors
+
+
+def _validate_predicate_field_names(raw_item: Dict[str, Any], ctx: str) -> List[str]:
+    """Validate that a predicate item dict does NOT use effect-context field names.
+
+    Returns a list of error messages (empty if clean). Doc 68 §7.6 + Doc 69 §5.3.
+    Conditionally bans `trait` (when type=trait), `flag` (when type=flag), and
+    `op` (always — predicate uses `operator`).
+    """
+    if not isinstance(raw_item, dict):
+        return []
+    errors: List[str] = []
+    # Unconditional bans (these effect-only fields are never valid in predicates).
+    for wrong_field, right_field in _PREDICATE_FORBIDDEN_FIELDS.items():
+        if wrong_field in raw_item:
+            val = raw_item[wrong_field]
+            errors.append(
+                f"{ctx}: field `{wrong_field}` is not allowed in a predicate item "
+                f"(use `{right_field}` instead — effect-syntax field mixed into "
+                f"condition context). See Doc 68 §7.6 field-name reference card. "
+                f"Field appeared with value: {val!r}."
+            )
+    # Conditional bans based on predicate `type`.
+    item_type = raw_item.get("type")
+    if item_type == "trait" and "trait" in raw_item:
+        errors.append(
+            f"{ctx}: field `trait` is not allowed in a predicate item with "
+            f"`type = 'trait'` (use `trait_key` instead). See Doc 68 §7.6. "
+            f"Field appeared with value: {raw_item['trait']!r}."
+        )
+    if item_type == "flag" and "flag" in raw_item:
+        errors.append(
+            f"{ctx}: field `flag` is not allowed in a predicate item with "
+            f"`type = 'flag'` (use `flag_key` instead). See Doc 68 §7.6. "
+            f"Field appeared with value: {raw_item['flag']!r}."
+        )
+    if "op" in raw_item:
+        errors.append(
+            f"{ctx}: field `op` is not allowed in a predicate item "
+            f"(use `operator` instead — `op` is the effect-context name). "
+            f"See Doc 68 §7.6. Field appeared with value: {raw_item['op']!r}."
+        )
+    return errors
+
+
+def _validate_predicate_items_block(
+    cond_block: Any, ctx: str
+) -> List[str]:
+    """Walk a `{version, logic, items: [...]}` condition block and validate
+    field names of each item. No-op for empty/missing blocks.
+
+    Used by validate() at each place predicates are stored (canvas trigger
+    conditions, choice conditions, exit_block conditions, daily_tick effect
+    conditions, etc.). Returns flat list of error messages.
+    """
+    if not isinstance(cond_block, dict):
+        return []
+    items = cond_block.get("items")
+    if not isinstance(items, list):
+        return []
+    errors: List[str] = []
+    for ii, item in enumerate(items):
+        errors.extend(_validate_predicate_field_names(item, f"{ctx}.items[{ii}]"))
+    return errors
+
+
+# Doc 69 Item 4 — Undeclared trait validator.
+# Each player + NPC trait referenced in any effect or condition MUST be
+# pre-declared in the corresponding `core_traits` block. Engine reads
+# undefined → silent runtime misbehavior (per v2.py:3370, v2.py:5065).
+# Doc 68 §2.5 is the doctrine reference; this validator enforces it at build
+# time.
+#
+# Stage trait special case (Doc 69 §6.3 #4 + Doc 68 §9):
+#   Stage is stored on the player namespace as `<slug>_stage` (e.g.,
+#   `frank_stage`). The matching NPC must have `arc_stages` declared.
+#   - declared in [player.core_traits] + NPC has arc_stages → OK
+#   - matches stage pattern + NPC has arc_stages but NOT declared → ERROR
+#   - declared in [player.core_traits] but NPC has no arc_stages → WARN
+#   - matches stage pattern + no matching NPC → treated as ordinary
+#     player trait (must be declared in [player.core_traits])
+
+import re as _re_for_stage_pattern
+_STAGE_TRAIT_PATTERN = _re_for_stage_pattern.compile(r"^([a-z0-9_]+)_stage$")
+
+
+def _build_trait_registries(
+    player_core_traits: Optional[Dict[str, Any]],
+    npcs_list: Optional[List["TemplateNPC"]],
+) -> Dict[str, Any]:
+    """Build lookup tables of declared traits.
+
+    Returns a dict with:
+      - 'player': set of declared player trait keys
+      - 'npc_by_slug': dict mapping NPC slug → set of declared NPC trait keys
+      - 'npc_arc_stages': dict mapping NPC slug → list of arc_stage names
+        (empty list if NPC has no arc_stages declared, missing key if no
+        such NPC exists)
+
+    Accepts player core_traits dict + npcs list rather than a full
+    GameTemplate so it can be called both inside normalize() (before the
+    template is constructed) and inside validate() (with a parsed template).
+    """
+    player_keys = set((player_core_traits or {}).keys())
+    npc_by_slug: Dict[str, Set[str]] = {}
+    npc_arc_stages: Dict[str, List[str]] = {}
+    for n in npcs_list or []:
+        npc_by_slug[n.id] = set((n.core_traits or {}).keys())
+        npc_arc_stages[n.id] = list(n.arc_stages or [])
+    return {
+        "player": player_keys,
+        "npc_by_slug": npc_by_slug,
+        "npc_arc_stages": npc_arc_stages,
+    }
+
+
+def _classify_stage_trait(
+    trait_name: str, registries: Dict[str, Any]
+) -> Optional[str]:
+    """Classify a trait name against the stage-pattern. Returns:
+      - 'stage_with_arc' — trait matches `<slug>_stage` AND the slug
+        corresponds to an existing NPC with non-empty arc_stages
+      - 'stage_without_arc' — matches pattern, NPC exists but arc_stages empty
+      - 'stage_unknown_npc' — matches pattern but no such NPC slug
+      - None — does not match stage pattern at all
+    """
+    m = _STAGE_TRAIT_PATTERN.match(trait_name)
+    if not m:
+        return None
+    slug = m.group(1)
+    arc_stages_by_npc = registries.get("npc_arc_stages") or {}
+    if slug not in arc_stages_by_npc:
+        return "stage_unknown_npc"
+    if arc_stages_by_npc[slug]:
+        return "stage_with_arc"
+    return "stage_without_arc"
+
+
+def _validate_trait_declaration_in_effect(
+    raw_eff: Dict[str, Any],
+    registries: Dict[str, Any],
+    ctx: str,
+) -> Tuple[List[str], List[str]]:
+    """Validate that an effect's `trait` field references a declared trait.
+
+    Returns (errors, warnings). Doc 69 §6.3.
+    """
+    if not isinstance(raw_eff, dict):
+        return [], []
+    errors: List[str] = []
+    warnings_out: List[str] = []
+    # Only validate trait effects — flag effects use a separate field-name path.
+    trait_name = raw_eff.get("trait")
+    if not trait_name or not isinstance(trait_name, str):
+        return [], []
+    target = str(raw_eff.get("targetType", "player"))
+    if target == "player":
+        player_keys = registries.get("player") or set()
+        if trait_name in player_keys:
+            # Declared. If it looks like a stage trait, check that the
+            # corresponding NPC has arc_stages declared (WARN otherwise).
+            stage_kind = _classify_stage_trait(trait_name, registries)
+            if stage_kind == "stage_without_arc":
+                warnings_out.append(
+                    f"{ctx}: trait `{trait_name}` matches stage pattern `<slug>_stage` "
+                    f"and IS declared in [player.core_traits], but the corresponding "
+                    f"NPC has an empty `arc_stages` list. Stage trait exists with no arc "
+                    f"to advance through — likely an authoring oversight. See Doc 68 §9.0."
+                )
+            return errors, warnings_out
+        # Not declared. If it looks like a stage trait + the NPC exists,
+        # emit a stage-pattern hint; otherwise standard undeclared error.
+        stage_kind = _classify_stage_trait(trait_name, registries)
+        if stage_kind == "stage_with_arc":
+            slug = _STAGE_TRAIT_PATTERN.match(trait_name).group(1)
+            errors.append(
+                f"{ctx}: effect references stage trait `{trait_name}` "
+                f"(matches `<slug>_stage` pattern + NPC '{slug}' has arc_stages "
+                f"declared), but `{trait_name}` is NOT declared in "
+                f"[player.core_traits]. Declare it with initial value 0. "
+                f"See Doc 68 §2.5 + §9.0."
+            )
+        elif stage_kind == "stage_unknown_npc":
+            errors.append(
+                f"{ctx}: effect references undeclared player trait `{trait_name}` "
+                f"(name matches `<slug>_stage` pattern but no NPC has slug matching "
+                f"its prefix). Declare it in [player.core_traits] block with an "
+                f"initial value. See Doc 68 §2.5."
+            )
+        else:
+            errors.append(
+                f"{ctx}: effect references undeclared player trait `{trait_name}`. "
+                f"Declare it in [player.core_traits] block with an initial value "
+                f"before use. See Doc 68 §2.5."
+            )
+    elif target == "npc":
+        npc_id = raw_eff.get("npcId")
+        if not npc_id or not isinstance(npc_id, str):
+            # Field-name validator (Phase 1) catches missing npcId for NPC
+            # effects via a different path; skip silently here to avoid
+            # double-reporting.
+            return errors, warnings_out
+        npc_by_slug = registries.get("npc_by_slug") or {}
+        if npc_id not in npc_by_slug:
+            # Unknown NPC — existing semantic validator catches this; skip.
+            return errors, warnings_out
+        if trait_name not in npc_by_slug[npc_id]:
+            errors.append(
+                f"{ctx}: effect references undeclared NPC trait `{trait_name}` "
+                f"for NPC '{npc_id}'. Declare it in the NPC's `core_traits` "
+                f"block. See Doc 68 §2.5."
+            )
+    return errors, warnings_out
+
+
+def _validate_trait_declaration_in_predicate(
+    raw_item: Dict[str, Any],
+    registries: Dict[str, Any],
+    ctx: str,
+) -> Tuple[List[str], List[str]]:
+    """Validate that a predicate item's `trait_key` references a declared trait.
+
+    Returns (errors, warnings). Doc 69 §6.3.
+    Only fires for `type = "trait"` items; flag/modifier/etc skipped.
+    """
+    if not isinstance(raw_item, dict):
+        return [], []
+    if raw_item.get("type") != "trait":
+        return [], []
+    trait_name = raw_item.get("trait_key")
+    if not trait_name or not isinstance(trait_name, str):
+        return [], []
+    errors: List[str] = []
+    warnings_out: List[str] = []
+    subject = raw_item.get("subject")
+    if subject == "player":
+        player_keys = registries.get("player") or set()
+        if trait_name in player_keys:
+            stage_kind = _classify_stage_trait(trait_name, registries)
+            if stage_kind == "stage_without_arc":
+                warnings_out.append(
+                    f"{ctx}: trait_key `{trait_name}` matches stage pattern + IS "
+                    f"declared in [player.core_traits], but the corresponding NPC "
+                    f"has an empty `arc_stages` list. See Doc 68 §9.0."
+                )
+            return errors, warnings_out
+        stage_kind = _classify_stage_trait(trait_name, registries)
+        if stage_kind == "stage_with_arc":
+            slug = _STAGE_TRAIT_PATTERN.match(trait_name).group(1)
+            errors.append(
+                f"{ctx}: predicate references stage trait `{trait_name}` "
+                f"(matches `<slug>_stage` pattern + NPC '{slug}' has arc_stages "
+                f"declared), but `{trait_name}` is NOT declared in "
+                f"[player.core_traits]. Declare it with initial value 0. "
+                f"See Doc 68 §2.5 + §9.0."
+            )
+        elif stage_kind == "stage_unknown_npc":
+            errors.append(
+                f"{ctx}: predicate references undeclared player trait `{trait_name}` "
+                f"(name matches `<slug>_stage` pattern but no NPC has slug matching "
+                f"its prefix). Declare it in [player.core_traits]. See Doc 68 §2.5."
+            )
+        else:
+            errors.append(
+                f"{ctx}: predicate references undeclared player trait `{trait_name}`. "
+                f"Declare it in [player.core_traits] block. See Doc 68 §2.5."
+            )
+    elif subject == "npc":
+        npc_id = raw_item.get("npc_id")
+        if not npc_id or not isinstance(npc_id, str):
+            return errors, warnings_out
+        npc_by_slug = registries.get("npc_by_slug") or {}
+        if npc_id not in npc_by_slug:
+            return errors, warnings_out
+        if trait_name not in npc_by_slug[npc_id]:
+            errors.append(
+                f"{ctx}: predicate references undeclared NPC trait `{trait_name}` "
+                f"for NPC '{npc_id}'. Declare it in the NPC's `core_traits` block. "
+                f"See Doc 68 §2.5."
+            )
+    return errors, warnings_out
+
+
+def _validate_trait_declaration_items_block(
+    cond_block: Any, registries: Dict[str, Any], ctx: str
+) -> Tuple[List[str], List[str]]:
+    """Walk a `{version, logic, items: [...]}` condition block + validate
+    each item's trait_key against the registries. Returns (errors, warnings).
+    """
+    if not isinstance(cond_block, dict):
+        return [], []
+    items = cond_block.get("items")
+    if not isinstance(items, list):
+        return [], []
+    errors: List[str] = []
+    warnings_out: List[str] = []
+    for ii, item in enumerate(items):
+        item_errs, item_warns = _validate_trait_declaration_in_predicate(
+            item, registries, f"{ctx}.items[{ii}]"
+        )
+        errors.extend(item_errs)
+        warnings_out.extend(item_warns)
+    return errors, warnings_out
+
+
 def normalize(data: Dict[str, Any]) -> GameTemplate:
+    # Doc 69 Item 3 — parse-time accumulator for field-name mismatch errors.
+    # Populated at each effect parse site; consumed by validate() (which
+    # prepends these to its own errors list). Local-scope to this normalize()
+    # invocation; assigned to template._parse_errors before return.
+    _parse_errors: List[str] = []
+
     schema_version = _require_str(data, "schema_version", "0.1")
 
     # Required: [project] section
@@ -1175,6 +1545,13 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
             )
         )
 
+    # Doc 69 Item 4 — build trait registries from the just-parsed player + NPCs.
+    # Used by the trait-declaration validators at each effect parse site below
+    # and again in validate() for predicate-context checks. Built once here so
+    # the per-effect cost is just a dict lookup.
+    _trait_registries = _build_trait_registries(player.core_traits, npcs)
+    _parse_warnings: List[str] = []  # collected via warnings.warn() at function end
+
     locs_raw = data.get("locations", []) or []
     locations = []
     for l in locs_raw:
@@ -1273,6 +1650,18 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                             "target_canvas_id": str(sub.get("target_canvas_id", "")),
                             "chance": float(sub.get("chance", 0)),
                             "conditions": sub.get("conditions") or None,
+                            # Doc 69 Item 1 — Pattern B `exclusive_group` for
+                            # single-dice-partition substitution. Rules in the
+                            # same group share one dice roll; mutual exclusion
+                            # guaranteed; failed-condition in claimed slot falls
+                            # to solo (NOT next rule in group). Absent / None /
+                            # empty string → Pattern A independent rolls.
+                            "exclusive_group": (
+                                str(sub["exclusive_group"]).strip()
+                                if isinstance(sub.get("exclusive_group"), str)
+                                and sub["exclusive_group"].strip()
+                                else None
+                            ),
                         }
                         for sub in (trig_def.get("substitutions") or [])
                         if isinstance(sub, dict) and sub.get("target_canvas_id")
@@ -1282,22 +1671,62 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     # other trigger conditions; engine resolves NPC location
                     # against [[npcs.schedules]] at fire-time.
                     requires_npc=(_require_str(trig_def, "requires_npc", "") or None),
+                    # Doc 69 Item 2 — pre-substitution effects passthrough.
+                    # Validated below (field-name + trait-declaration) inline so
+                    # errors surface with helpful canvas-level context.
+                    pre_substitution_effects=[
+                        dict(eff)
+                        for eff in (trig_def.get("pre_substitution_effects") or [])
+                        if isinstance(eff, dict)
+                    ],
                 )
+                # Doc 69 Item 2 — validate pre_substitution_effects field names
+                # + trait declarations (reuses Phase 1 + Phase 2 validators).
+                _pse_canvas_id = str(c.get("id") or "<unknown>")
+                for _psei, _pse in enumerate(trig_def.get("pre_substitution_effects") or []):
+                    if not isinstance(_pse, dict):
+                        continue
+                    _pse_ctx = (
+                        f"canvases['{_pse_canvas_id}'].trigger"
+                        f".pre_substitution_effects[{_psei}]"
+                    )
+                    _parse_errors.extend(_validate_effect_field_names(_pse, _pse_ctx))
+                    _td_errs, _td_warns = _validate_trait_declaration_in_effect(
+                        _pse, _trait_registries, _pse_ctx
+                    )
+                    _parse_errors.extend(_td_errs)
+                    _parse_warnings.extend(_td_warns)
 
             # Nodes
             nodes: List[TemplateNode] = []
-            for n in c.get("nodes") or []:
+            # Doc 69 Item 3 — context prefix for any field-name validation errors
+            # raised during this canvas's effect parsing.
+            _canvas_id_for_ctx = str(c.get("id") or c.get("slug") or "<unknown>")
+            for ni, n in enumerate(c.get("nodes") or []):
                 if not isinstance(n, dict):
                     continue
+                _node_id_for_ctx = str(n.get("id") or n.get("slug") or f"node[{ni}]")
                 eb_raw = n.get("exit_block", {}) or {}
                 choices: List[TemplateChoice] = []
-                for ch in eb_raw.get("choices") or []:
+                for chi, ch in enumerate(eb_raw.get("choices") or []):
                     if not isinstance(ch, dict):
                         continue
                     effs = []
-                    for e in ch.get("effects") or []:
+                    for ei, e in enumerate(ch.get("effects") or []):
                         if not isinstance(e, dict):
                             continue
+                        _eff_ctx = (
+                            f"canvases['{_canvas_id_for_ctx}'].nodes['{_node_id_for_ctx}']"
+                            f".exit_block.choices[{chi}].effects[{ei}]"
+                        )
+                        # Doc 69 Item 3 — field-name mismatch check.
+                        _parse_errors.extend(_validate_effect_field_names(e, _eff_ctx))
+                        # Doc 69 Item 4 — undeclared trait check.
+                        _td_errs, _td_warns = _validate_trait_declaration_in_effect(
+                            e, _trait_registries, _eff_ctx
+                        )
+                        _parse_errors.extend(_td_errs)
+                        _parse_warnings.extend(_td_warns)
                         effs.append(
                             TemplateChoiceEffect(
                                 targetType=str(e.get("targetType", "player")),
@@ -1311,9 +1740,15 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                             )
                         )
                     flag_effs = []
-                    for e in ch.get("flagEffects") or []:
+                    for fei, e in enumerate(ch.get("flagEffects") or []):
                         if not isinstance(e, dict):
                             continue
+                        # Doc 69 Item 3 — field-name mismatch check (flag-effect context).
+                        _parse_errors.extend(_validate_effect_field_names(
+                            e,
+                            f"canvases['{_canvas_id_for_ctx}'].nodes['{_node_id_for_ctx}']"
+                            f".exit_block.choices[{chi}].flagEffects[{fei}]"
+                        ))
                         flag_effs.append(
                             TemplateFlagEffect(
                                 targetType=str(e.get("targetType", "player")),
@@ -1351,9 +1786,21 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     ]
                     # Parse rejection_effects (same structure as regular effects)
                     rej_effs = []
-                    for e in ch.get("rejection_effects") or []:
+                    for rei, e in enumerate(ch.get("rejection_effects") or []):
                         if not isinstance(e, dict):
                             continue
+                        _rej_ctx = (
+                            f"canvases['{_canvas_id_for_ctx}'].nodes['{_node_id_for_ctx}']"
+                            f".exit_block.choices[{chi}].rejection_effects[{rei}]"
+                        )
+                        # Doc 69 Item 3 — field-name mismatch check.
+                        _parse_errors.extend(_validate_effect_field_names(e, _rej_ctx))
+                        # Doc 69 Item 4 — undeclared trait check.
+                        _td_errs, _td_warns = _validate_trait_declaration_in_effect(
+                            e, _trait_registries, _rej_ctx
+                        )
+                        _parse_errors.extend(_td_errs)
+                        _parse_warnings.extend(_td_warns)
                         rej_effs.append(
                             TemplateChoiceEffect(
                                 targetType=str(e.get("targetType", "player")),
@@ -2026,9 +2473,14 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         dt_raw = engine_raw.get("daily_tick")
         if isinstance(dt_raw, dict):
             dt_flag_effs: List[TemplateFlagEffect] = []
-            for fe in dt_raw.get("flagEffects") or []:
+            for dt_fei, fe in enumerate(dt_raw.get("flagEffects") or []):
                 if not isinstance(fe, dict):
                     continue
+                # Doc 69 Item 3 — field-name mismatch check (daily_tick flagEffect context).
+                _parse_errors.extend(_validate_effect_field_names(
+                    fe,
+                    f"engine.daily_tick.flagEffects[{dt_fei}]"
+                ))
                 dt_flag_effs.append(
                     TemplateFlagEffect(
                         targetType=str(fe.get("targetType", "player")),
@@ -2039,9 +2491,18 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     )
                 )
             dt_trait_effs: List[TemplateChoiceEffect] = []
-            for te in dt_raw.get("traitEffects") or []:
+            for dt_tei, te in enumerate(dt_raw.get("traitEffects") or []):
                 if not isinstance(te, dict):
                     continue
+                _dtte_ctx = f"engine.daily_tick.traitEffects[{dt_tei}]"
+                # Doc 69 Item 3 — field-name mismatch check.
+                _parse_errors.extend(_validate_effect_field_names(te, _dtte_ctx))
+                # Doc 69 Item 4 — undeclared trait check.
+                _td_errs, _td_warns = _validate_trait_declaration_in_effect(
+                    te, _trait_registries, _dtte_ctx
+                )
+                _parse_errors.extend(_td_errs)
+                _parse_warnings.extend(_td_warns)
                 dt_trait_effs.append(
                     TemplateChoiceEffect(
                         targetType=str(te.get("targetType", "player")),
@@ -2111,6 +2572,13 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 )
             )
 
+    # Doc 69 Item 4 — emit any trait-declaration warnings collected at parse
+    # time. Warnings (not errors) for stage-trait-without-arc_stages edge case.
+    if _parse_warnings:
+        import warnings as _w
+        for _warn_msg in _parse_warnings:
+            _w.warn(_warn_msg, UserWarning, stacklevel=2)
+
     return GameTemplate(
         schema_version=schema_version,
         project=project,
@@ -2151,6 +2619,9 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         trait_labels=trait_labels,
         flag_labels=flag_labels,
         tips_page=tips_page_obj,
+        # Doc 69 Item 3 — parse-time field-name mismatch errors collected
+        # by the effect-context validators at the 5 effect parse sites.
+        _parse_errors=_parse_errors,
     )
 
 
@@ -2233,6 +2704,115 @@ def _extract_flags_set_by_canvas(canvas: TemplateCanvas) -> Set[str]:
 
 def validate(template: GameTemplate) -> List[str]:
     errors: List[str] = []
+
+    # Doc 69 Item 3 — prepend parse-time field-name mismatch errors collected
+    # during normalize() at the 5 effect parse sites. These are surfaced first
+    # so authors fix syntax problems before semantic validation runs.
+    if getattr(template, "_parse_errors", None):
+        errors.extend(template._parse_errors)
+
+    # Doc 69 Item 3 — predicate-context field-name validation. Walks every
+    # `conditions = {version, logic, items}` block stored on parsed dataclasses
+    # (canvas triggers, choices, effect conditions, etc.) and checks each item
+    # for forbidden effect-context field names (`targetType` / `npcId` / `op`
+    # in predicate context; also `trait`/`flag` when type=trait/flag).
+    #
+    # Doc 69 Item 4 — undeclared trait check on each predicate item. Built
+    # alongside the field-name walk for efficiency. Both validators share the
+    # same condition-block traversal.
+    _trait_registries_for_validate = _build_trait_registries(
+        template.player.core_traits if template.player else {},
+        template.npcs,
+    )
+    _validate_warnings: List[str] = []
+
+    def _check_cond_block(cond_block: Any, ctx: str) -> None:
+        """Closure helper — apply both validators to one conditions block."""
+        # Field-name validation (Item 3)
+        errors.extend(_validate_predicate_items_block(cond_block, ctx))
+        # Trait-declaration validation (Item 4)
+        td_errs, td_warns = _validate_trait_declaration_items_block(
+            cond_block, _trait_registries_for_validate, ctx
+        )
+        errors.extend(td_errs)
+        _validate_warnings.extend(td_warns)
+
+    for ci, canvas in enumerate(template.canvases or []):
+        canvas_ctx_id = canvas.id or f"<canvas[{ci}]>"
+        # Canvas trigger conditions
+        if canvas.trigger and isinstance(canvas.trigger.conditions, dict):
+            _check_cond_block(
+                canvas.trigger.conditions,
+                f"canvases['{canvas_ctx_id}'].trigger.conditions"
+            )
+        # Per-substitution-rule conditions
+        if canvas.trigger and canvas.trigger.substitutions:
+            for si, sub_rule in enumerate(canvas.trigger.substitutions):
+                if isinstance(sub_rule, dict) and isinstance(sub_rule.get("conditions"), dict):
+                    _check_cond_block(
+                        sub_rule["conditions"],
+                        f"canvases['{canvas_ctx_id}'].trigger.substitutions[{si}].conditions"
+                    )
+        # Per-node choice + effect + flag-effect + rejection-effect conditions
+        for ni, node in enumerate(canvas.nodes or []):
+            node_ctx_id = node.id or f"node[{ni}]"
+            eb = getattr(node, "exit_block", None)
+            if eb is None:
+                continue
+            for chi, choice in enumerate(eb.choices or []):
+                choice_ctx = (
+                    f"canvases['{canvas_ctx_id}'].nodes['{node_ctx_id}']"
+                    f".exit_block.choices[{chi}]"
+                )
+                if isinstance(choice.conditions, dict):
+                    _check_cond_block(choice.conditions, f"{choice_ctx}.conditions")
+                # Per-effect conditions (Doc 45 G6 — optional condition gate on effects).
+                for ei, eff in enumerate(choice.effects or []):
+                    if isinstance(eff.conditions, dict):
+                        _check_cond_block(
+                            eff.conditions, f"{choice_ctx}.effects[{ei}].conditions"
+                        )
+                for fei, feff in enumerate(choice.flagEffects or []):
+                    if isinstance(feff.conditions, dict):
+                        _check_cond_block(
+                            feff.conditions, f"{choice_ctx}.flagEffects[{fei}].conditions"
+                        )
+                for rei, reff in enumerate(choice.rejection_effects or []):
+                    if isinstance(reff.conditions, dict):
+                        _check_cond_block(
+                            reff.conditions, f"{choice_ctx}.rejection_effects[{rei}].conditions"
+                        )
+                # Per-text-variant conditions (E6).
+                for tvi, tv in enumerate(choice.text_variants or []):
+                    if isinstance(tv, dict) and isinstance(tv.get("conditions"), dict):
+                        _check_cond_block(
+                            tv["conditions"], f"{choice_ctx}.text_variants[{tvi}].conditions"
+                        )
+    # Daily-tick effect conditions (Doc 45 G6).
+    if template.daily_tick:
+        for fei, fe in enumerate(template.daily_tick.flagEffects or []):
+            if isinstance(fe.conditions, dict):
+                _check_cond_block(
+                    fe.conditions, f"engine.daily_tick.flagEffects[{fei}].conditions"
+                )
+        for tei, te in enumerate(template.daily_tick.traitEffects or []):
+            if isinstance(te.conditions, dict):
+                _check_cond_block(
+                    te.conditions, f"engine.daily_tick.traitEffects[{tei}].conditions"
+                )
+    # Quest card `when` conditions (PRD 48).
+    for qi, card in enumerate(template.quests_cards or []):
+        card_ctx_id = getattr(card, "id", None) or f"quests_cards[{qi}]"
+        when_block = getattr(card, "when", None)
+        if isinstance(when_block, dict):
+            _check_cond_block(when_block, f"quests_cards['{card_ctx_id}'].when")
+
+    # Doc 69 Item 4 — emit any trait-declaration warnings collected during the
+    # validate() walk (e.g., stage-trait-without-arc_stages edge cases).
+    if _validate_warnings:
+        import warnings as _w
+        for _warn_msg in _validate_warnings:
+            _w.warn(_warn_msg, UserWarning, stacklevel=2)
 
     # project
     if not template.project.title:
@@ -2436,6 +3016,155 @@ def validate(template: GameTemplate) -> List[str]:
                         errors.append(f"{bctx}: 'flag' must be a string")
                     if "text" in band and not isinstance(band["text"], str):
                         errors.append(f"{bctx}: 'text' must be a string")
+        elif itype == "trait_bar":
+            # Generic colored-bar-with-bands primitive. trait + max produce a
+            # plain bar (today's behavior); optional bands add a per-range icon
+            # + text overlay; optional color_tiers add a percentage-keyed CSS
+            # class on the fill so authors can paint blue → orange → red tiers
+            # without writing per-game CSS. hide_value suppresses the
+            # "Label: N / max" line for games using bands as the read-out.
+            ctx = f"sidebar_items[{i}] (trait_bar)"
+            trait = item.get("trait")
+            owner = item.get("trait_owner", "player")
+            if not isinstance(trait, str) or not trait:
+                errors.append(f"{ctx}: 'trait' is required (string)")
+            if owner not in ("player", "npc"):
+                errors.append(f"{ctx}: 'trait_owner' must be 'player' or 'npc', got '{owner}'")
+            if owner == "npc":
+                npc_id = item.get("npc_id")
+                if not npc_id:
+                    errors.append(f"{ctx}: 'npc_id' is required when trait_owner='npc'")
+                elif npc_id not in _npc_ids_for_sidebar:
+                    errors.append(f"{ctx}: npc_id '{npc_id}' not found in NPC definitions")
+            elif owner == "player" and isinstance(trait, str) and trait and trait not in _player_trait_keys:
+                errors.append(
+                    f"{ctx}: trait '{trait}' not found in player.core_traits (widget will render empty)"
+                )
+            if "max" in item:
+                max_val = item["max"]
+                if not isinstance(max_val, (int, float)) or isinstance(max_val, bool) or max_val <= 0:
+                    errors.append(f"{ctx}: 'max' must be a positive number")
+            if "bands" in item:
+                bands = item["bands"]
+                if not isinstance(bands, list) or not bands:
+                    errors.append(f"{ctx}: 'bands' must be a non-empty list when provided")
+                else:
+                    for bi, band in enumerate(bands):
+                        bctx = f"{ctx} bands[{bi}]"
+                        if not isinstance(band, dict):
+                            errors.append(f"{bctx}: must be a table/dict")
+                            continue
+                        if "text" not in band:
+                            errors.append(f"{bctx}: missing 'text'")
+                        elif not isinstance(band["text"], str):
+                            errors.append(f"{bctx}: 'text' must be a string")
+                        # Bars are value-driven; flag-mode bands belong on
+                        # trait_words, not on a numeric meter overlay.
+                        if "flag" in band:
+                            errors.append(
+                                f"{bctx}: 'flag' is not supported on trait_bar bands "
+                                f"(use 'min' and 'max' — flag-mode is trait_words-only)"
+                            )
+                        if "min" not in band or "max" not in band:
+                            errors.append(f"{bctx}: requires both 'min' and 'max'")
+                        else:
+                            bmin, bmax = band["min"], band["max"]
+                            if isinstance(bmin, (int, float)) and isinstance(bmax, (int, float)) and bmin > bmax:
+                                errors.append(f"{bctx}: min ({bmin}) must be <= max ({bmax})")
+                        if "icon" in band and not isinstance(band["icon"], str):
+                            errors.append(f"{bctx}: 'icon' must be a string when set")
+            if "color_tiers" in item:
+                tiers = item["color_tiers"]
+                if not isinstance(tiers, list) or not tiers:
+                    errors.append(f"{ctx}: 'color_tiers' must be a non-empty list when provided")
+                else:
+                    prev_up_to = -1.0
+                    for ti, tier in enumerate(tiers):
+                        tctx = f"{ctx} color_tiers[{ti}]"
+                        if not isinstance(tier, dict):
+                            errors.append(f"{tctx}: must be a table/dict")
+                            continue
+                        up_to = tier.get("up_to")
+                        cls = tier.get("class")
+                        if (
+                            not isinstance(up_to, (int, float))
+                            or isinstance(up_to, bool)
+                            or up_to < 0
+                            or up_to > 100
+                        ):
+                            errors.append(f"{tctx}: 'up_to' must be a number between 0 and 100")
+                        elif up_to <= prev_up_to:
+                            errors.append(
+                                f"{tctx}: 'up_to' ({up_to}) must be strictly greater than the previous "
+                                f"tier's up_to ({prev_up_to}); color_tiers must be sorted ascending"
+                            )
+                        else:
+                            prev_up_to = float(up_to)
+                        if not isinstance(cls, str) or not cls:
+                            errors.append(f"{tctx}: 'class' is required (non-empty string)")
+            if "hide_value" in item and not isinstance(item["hide_value"], bool):
+                errors.append(f"{ctx}: 'hide_value' must be a boolean")
+        elif itype == "trait_status_text":
+            # Passive body-state surface — renders the first matching band's
+            # text when the trait falls within range, renders nothing when no
+            # band matches. Sibling of trait_decay_warning (which is event-
+            # based) but authored, threshold-driven, continuous. Use for
+            # hygiene/energy/hunger-style needs that recover on action.
+            ctx = f"sidebar_items[{i}] (trait_status_text)"
+            trait = item.get("trait")
+            owner = item.get("trait_owner", "player")
+            bands = item.get("bands")
+            if not isinstance(trait, str) or not trait:
+                errors.append(f"{ctx}: 'trait' is required (string)")
+            if owner not in ("player", "npc"):
+                errors.append(f"{ctx}: 'trait_owner' must be 'player' or 'npc', got '{owner}'")
+            if owner == "npc":
+                npc_id = item.get("npc_id")
+                if not npc_id:
+                    errors.append(f"{ctx}: 'npc_id' is required when trait_owner='npc'")
+                elif npc_id not in _npc_ids_for_sidebar:
+                    errors.append(f"{ctx}: npc_id '{npc_id}' not found in NPC definitions")
+            elif owner == "player" and isinstance(trait, str) and trait and trait not in _player_trait_keys:
+                errors.append(
+                    f"{ctx}: trait '{trait}' not found in player.core_traits (widget will render empty)"
+                )
+            if not isinstance(bands, list) or not bands:
+                errors.append(f"{ctx}: 'bands' must be a non-empty list")
+            else:
+                for bi, band in enumerate(bands):
+                    bctx = f"{ctx} bands[{bi}]"
+                    if not isinstance(band, dict):
+                        errors.append(f"{bctx}: must be a table/dict")
+                        continue
+                    has_min = "min" in band
+                    has_max = "max" in band
+                    if not has_min and not has_max:
+                        errors.append(
+                            f"{bctx}: must provide at least one of 'min' or 'max' "
+                            f"(a band with neither bound would always match)"
+                        )
+                    if has_min:
+                        bmin = band.get("min")
+                        if not isinstance(bmin, (int, float)) or isinstance(bmin, bool):
+                            errors.append(f"{bctx}: 'min' must be a number when set")
+                    if has_max:
+                        bmax = band.get("max")
+                        if not isinstance(bmax, (int, float)) or isinstance(bmax, bool):
+                            errors.append(f"{bctx}: 'max' must be a number when set")
+                    if has_min and has_max:
+                        bmin, bmax = band.get("min"), band.get("max")
+                        if (
+                            isinstance(bmin, (int, float))
+                            and isinstance(bmax, (int, float))
+                            and bmin > bmax
+                        ):
+                            errors.append(f"{bctx}: min ({bmin}) must be <= max ({bmax})")
+                    if "text" not in band:
+                        errors.append(f"{bctx}: missing 'text'")
+                    elif not isinstance(band["text"], str) or not band["text"]:
+                        errors.append(f"{bctx}: 'text' must be a non-empty string")
+                    if "icon" in band and not isinstance(band["icon"], str):
+                        errors.append(f"{bctx}: 'icon' must be a string when set")
         elif itype == "stage_label":
             # E11: render "<NPC name>: <stage label>" from the NPC's arc_stages
             # array indexed by $player.core_traits[<slug>_stage]. Distinct from
@@ -2810,6 +3539,83 @@ def validate(template: GameTemplate) -> List[str]:
                 elif not isinstance(chance_val, (int, float)) or chance_val < 0.0 or chance_val > 1.0:
                     errors.append(f"{ctx}.chance must be a float in [0.0, 1.0], got {chance_val!r}")
 
+            # Doc 69 Item 1 — Pattern B exclusive_group cross-rule validation.
+            # Walk substitution rules grouped by exclusive_group name.
+            # Checks: chance sum per group, duplicate target across groups +
+            # group/independent boundary, single-rule group.
+            _sub_groups: Dict[str, List[Tuple[int, Dict[str, Any]]]] = {}
+            _sub_independents: List[Tuple[int, Dict[str, Any]]] = []
+            _sub_target_to_group: Dict[str, Optional[str]] = {}
+            for ri, rule in enumerate(c.trigger.substitutions or []):
+                if not isinstance(rule, dict):
+                    continue
+                group = rule.get("exclusive_group")
+                target_id = rule.get("target_canvas_id")
+                if isinstance(group, str) and group.strip():
+                    group = group.strip()
+                    _sub_groups.setdefault(group, []).append((ri, rule))
+                    if target_id:
+                        if target_id in _sub_target_to_group:
+                            prev = _sub_target_to_group[target_id]
+                            if prev != group:
+                                errors.append(
+                                    f"canvases[{ci}].trigger.substitutions: target_canvas_id "
+                                    f"'{target_id}' appears in exclusive_group '{group}' AND "
+                                    f"{'exclusive_group ' + repr(prev) if prev else 'independent rules'}. "
+                                    f"Each target can be claimed by at most one group/independent. "
+                                    f"See Doc 69 §3.6."
+                                )
+                        else:
+                            _sub_target_to_group[target_id] = group
+                else:
+                    _sub_independents.append((ri, rule))
+                    if target_id:
+                        if target_id in _sub_target_to_group:
+                            prev = _sub_target_to_group[target_id]
+                            if prev is not None:
+                                errors.append(
+                                    f"canvases[{ci}].trigger.substitutions: target_canvas_id "
+                                    f"'{target_id}' appears as an independent rule AND in "
+                                    f"exclusive_group '{prev}'. Each target can be claimed by at "
+                                    f"most one group/independent. See Doc 69 §3.6."
+                                )
+                        else:
+                            _sub_target_to_group[target_id] = None
+            # Per-group chance-sum + single-rule checks.
+            import warnings as _w_subgroup
+            for group_name, group_rules in _sub_groups.items():
+                # Single-rule group → WARN (no behavioral difference from
+                # independent; signals likely authoring oversight).
+                if len(group_rules) == 1:
+                    _w_subgroup.warn(
+                        f"canvases[{ci}] '{c.id}' exclusive_group '{group_name}' has only one "
+                        f"substitution rule. Behavior is identical to an independent rule — "
+                        f"drop the `exclusive_group` field unless you plan to add more rules. "
+                        f"See Doc 69 §3.6.",
+                        UserWarning,
+                        stacklevel=2,
+                    )
+                # Chance-sum check (Doc 69 §3.6).
+                chance_sum = 0.0
+                for _ri, gr in group_rules:
+                    cv = gr.get("chance")
+                    if isinstance(cv, (int, float)):
+                        chance_sum += float(cv)
+                if chance_sum > 1.5:
+                    errors.append(
+                        f"canvases[{ci}] '{c.id}' exclusive_group '{group_name}' chance sum is "
+                        f"{chance_sum:.3f} (> 1.5). Buckets beyond 1.0 can never fire; this is a "
+                        f"major authoring confusion. See Doc 69 §3.6."
+                    )
+                elif chance_sum > 1.0:
+                    _w_subgroup.warn(
+                        f"canvases[{ci}] '{c.id}' exclusive_group '{group_name}' chance sum is "
+                        f"{chance_sum:.3f} (> 1.0). Buckets beyond 1.0 can never fire — the rules "
+                        f"after that point are dead code. See Doc 69 §3.6.",
+                        UserWarning,
+                        stacklevel=2,
+                    )
+
             # PRD 25 §4.3 #3 — substitution_only + npcId conflict warning
             if c.trigger.substitution_only and c.trigger.npc:
                 import warnings as _w
@@ -2818,6 +3624,21 @@ def validate(template: GameTemplate) -> List[str]:
                     f"('{c.trigger.npc}'). The canvas will be excluded from NPC portrait + "
                     f"solo activity selectors but the npc reference may indicate authoring intent "
                     f"to also surface as a portrait. Verify intentional.",
+                    UserWarning,
+                    stacklevel=2,
+                )
+
+            # Doc 69 Item 2 §4.6 — pre_substitution_effects without substitutions
+            # warning. If author sets pre-sub effects but no substitution rules,
+            # the effects fire on every canvas entry — same as body effects.
+            # Likely an authoring mistake (intended substitution_only canvas?).
+            if (c.trigger.pre_substitution_effects or []) and not (c.trigger.substitutions or []):
+                import warnings as _w
+                _w.warn(
+                    f"canvases[{ci}] '{c.id}' has pre_substitution_effects but no "
+                    f"substitutions. The effects will fire on every canvas entry, "
+                    f"identical to body-level effects. Consider moving them to the "
+                    f"canvas's body or exit_block effects. See Doc 69 §4.6.",
                     UserWarning,
                     stacklevel=2,
                 )
@@ -5104,6 +5925,15 @@ def create_project_from_template(
                             # Engine reads requiresNpc from canvas metadata at
                             # runtime and AND-gates with all other conditions.
                             "requires_npc": c.trigger.requires_npc or None,
+                            # Doc 69 Item 2 — Pattern C pre-substitution effects.
+                            # Engine reads from canvas metadata + emits
+                            # <<script>>setup.applyAndNotifyTrait(...)<</script>>
+                            # macros BEFORE the substitution check so effects
+                            # fire unconditionally even when a substitution preempts.
+                            "pre_substitution_effects": (
+                                c.trigger.pre_substitution_effects
+                                if c.trigger.pre_substitution_effects else None
+                            ),
                         }.items() if v is not None
                     },
                 )

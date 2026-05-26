@@ -90,7 +90,7 @@ id          = "player"
 name        = "Maya"
 description = "A 19-year-old home for the summer. Minimum-viable protagonist for engine testing."
 portrait    = ""
-core_traits = { energy = 100, hygiene = 100, awareness = 0, money = 40 }
+core_traits = { energy = 100, hygiene = 100, awareness = 0, money = 40, arousal = 0, corruption = 0 }
 flag_keys   = [
   "summer_started",       # set by scene_wake_up
   "day_unlocked",

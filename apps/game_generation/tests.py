@@ -653,3 +653,1173 @@ class PhaseANpcScheduleTests(TestCase):
             f"DeprecationWarning for [[npcs.schedules]] should be gone. "
             f"Got: {[str(w.message) for w in dep_warnings]}"
         )
+
+
+class Doc69FieldNameValidatorTests(TestCase):
+    """Doc 69 Item 3 — Field-name mismatch validator.
+
+    The TLS engine uses different field names for effects vs predicates:
+      - Effect schema: `targetType` / `npcId` / `trait` / `flag` / `op`
+      - Predicate schema: `subject` / `npc_id` / `trait_key` / `flag_key` / `operator`
+
+    Mixing them causes silent no-op at runtime. These tests verify the
+    validator catches mismatches at build time with helpful error messages
+    citing Doc 68 §7.6.
+    """
+
+    def _build_minimal_template(self):
+        """Minimal valid template — same shape as PhaseANpcScheduleTests fixture.
+
+        Caller mutates the returned dict to inject effect/predicate field-name
+        mismatches at the desired location.
+        """
+        return {
+            "schema_version": "1.0",
+            "project": {
+                "id": "doc69_test",
+                "title": "Doc 69 Field-Name Validator Fixture",
+                "description": "Minimal fixture for field-name mismatch testing.",
+                "starting_canvas": "canvas_test",
+            },
+            "time": {"enabled": True, "starting_hour": 8, "starting_day": "Monday"},
+            "player": {
+                "id": "player",
+                "name": "Test Player",
+                "core_traits": {"corruption": 0, "arousal": 0},
+                "flag_keys": ["test_flag"],
+            },
+            "locations": [
+                {"id": "loc_kitchen", "name": "Kitchen", "description": "Test"},
+            ],
+            "npcs": [
+                {
+                    "id": "npc_test",
+                    "name": "Test NPC",
+                    "description": "Fixture NPC",
+                    "core_traits": {"relation": 0},
+                    "flag_keys": [],
+                },
+            ],
+            "canvases": [
+                {
+                    "id": "canvas_test",
+                    "name": "Test Canvas",
+                    "type": "scene",
+                    "trigger": {
+                        "location": "loc_kitchen",
+                        "is_active": True,
+                        "is_repeatable": True,
+                        "trigger_mode": "manual",
+                    },
+                    "nodes": [
+                        {
+                            "id": "n1",
+                            "name": "Test Node",
+                            "blocks": [{"type": "paragraph", "props": {},
+                                        "content": [{"type": "text", "text": "test"}]}],
+                            "exit_block": {
+                                "type": "choices",
+                                "choices": [
+                                    {
+                                        "text": "Continue",
+                                        "targetType": "trigger",
+                                        "effects": [],
+                                    },
+                                ],
+                            },
+                        },
+                    ],
+                },
+            ],
+        }
+
+    def _validate_template(self, raw):
+        """Helper: normalize + validate, return error list."""
+        import copy
+        from apps.projects.services.template_import import normalize, validate
+        template = normalize(copy.deepcopy(raw))
+        return validate(template), template
+
+    # ─── Effect-context mismatches (5 tests) ────────────────────────────────
+
+    def test_effect_with_subject_field_errors(self):
+        """Effect dict using predicate's `subject` field → ERROR."""
+        raw = self._build_minimal_template()
+        raw["canvases"][0]["nodes"][0]["exit_block"]["choices"][0]["effects"].append({
+            "subject": "player",  # WRONG — predicate field in effect context
+            "trait": "corruption",
+            "op": "add",
+            "value": 1,
+        })
+        errors, _ = self._validate_template(raw)
+        matching = [e for e in errors if "`subject`" in e and "Doc 68" in e]
+        self.assertTrue(matching,
+                        f"Expected error for `subject` in effect context. Got: {errors}")
+
+    def test_effect_with_trait_key_field_errors(self):
+        """Effect dict using predicate's `trait_key` field → ERROR."""
+        raw = self._build_minimal_template()
+        raw["canvases"][0]["nodes"][0]["exit_block"]["choices"][0]["effects"].append({
+            "targetType": "player",
+            "trait_key": "corruption",  # WRONG — should be `trait`
+            "op": "add",
+            "value": 1,
+        })
+        errors, _ = self._validate_template(raw)
+        matching = [e for e in errors if "`trait_key`" in e and "Doc 68" in e]
+        self.assertTrue(matching,
+                        f"Expected error for `trait_key` in effect context. Got: {errors}")
+
+    def test_effect_with_npc_id_field_errors(self):
+        """Effect dict using predicate's `npc_id` field → ERROR."""
+        raw = self._build_minimal_template()
+        raw["canvases"][0]["nodes"][0]["exit_block"]["choices"][0]["effects"].append({
+            "targetType": "npc",
+            "npc_id": "npc_test",  # WRONG — should be `npcId`
+            "trait": "relation",
+            "op": "add",
+            "value": 1,
+        })
+        errors, _ = self._validate_template(raw)
+        matching = [e for e in errors if "`npc_id`" in e and "Doc 68" in e]
+        self.assertTrue(matching,
+                        f"Expected error for `npc_id` in effect context. Got: {errors}")
+
+    def test_effect_with_operator_field_errors(self):
+        """Effect dict using predicate's `operator` field → ERROR."""
+        raw = self._build_minimal_template()
+        raw["canvases"][0]["nodes"][0]["exit_block"]["choices"][0]["effects"].append({
+            "targetType": "player",
+            "trait": "corruption",
+            "operator": "add",  # WRONG — should be `op`
+            "value": 1,
+        })
+        errors, _ = self._validate_template(raw)
+        matching = [e for e in errors if "`operator`" in e and "Doc 68" in e]
+        self.assertTrue(matching,
+                        f"Expected error for `operator` in effect context. Got: {errors}")
+
+    def test_effect_with_flag_key_field_errors(self):
+        """Flag-effect dict using predicate's `flag_key` field → ERROR."""
+        raw = self._build_minimal_template()
+        raw["canvases"][0]["nodes"][0]["exit_block"]["choices"][0]["flagEffects"] = [{
+            "targetType": "player",
+            "flag_key": "test_flag",  # WRONG — should be `flag`
+            "op": "set",
+        }]
+        errors, _ = self._validate_template(raw)
+        matching = [e for e in errors if "`flag_key`" in e and "Doc 68" in e]
+        self.assertTrue(matching,
+                        f"Expected error for `flag_key` in flag-effect context. Got: {errors}")
+
+    # ─── Predicate-context mismatches (5 tests) ─────────────────────────────
+
+    def test_predicate_with_targetType_field_errors(self):
+        """Predicate item using effect's `targetType` field → ERROR."""
+        raw = self._build_minimal_template()
+        raw["canvases"][0]["trigger"]["conditions"] = {
+            "version": "1.0",
+            "items": [
+                {
+                    "type": "trait",
+                    "targetType": "player",  # WRONG — should be `subject`
+                    "trait_key": "corruption",
+                    "operator": "gte",
+                    "value": 15,
+                },
+            ],
+        }
+        errors, _ = self._validate_template(raw)
+        matching = [e for e in errors if "`targetType`" in e and "Doc 68" in e]
+        self.assertTrue(matching,
+                        f"Expected error for `targetType` in predicate context. Got: {errors}")
+
+    def test_predicate_with_trait_field_errors(self):
+        """Predicate item with type=trait using effect's `trait` field → ERROR."""
+        raw = self._build_minimal_template()
+        raw["canvases"][0]["trigger"]["conditions"] = {
+            "version": "1.0",
+            "items": [
+                {
+                    "type": "trait",
+                    "subject": "player",
+                    "trait": "corruption",  # WRONG — should be `trait_key`
+                    "operator": "gte",
+                    "value": 15,
+                },
+            ],
+        }
+        errors, _ = self._validate_template(raw)
+        matching = [e for e in errors if "`trait`" in e and "type = 'trait'" in e and "Doc 68" in e]
+        self.assertTrue(matching,
+                        f"Expected error for `trait` in trait-predicate. Got: {errors}")
+
+    def test_predicate_with_flag_field_errors(self):
+        """Predicate item with type=flag using effect's `flag` field → ERROR."""
+        raw = self._build_minimal_template()
+        raw["canvases"][0]["trigger"]["conditions"] = {
+            "version": "1.0",
+            "items": [
+                {
+                    "type": "flag",
+                    "subject": "player",
+                    "flag": "test_flag",  # WRONG — should be `flag_key`
+                    "operator": "is_true",
+                },
+            ],
+        }
+        errors, _ = self._validate_template(raw)
+        matching = [e for e in errors if "`flag`" in e and "type = 'flag'" in e and "Doc 68" in e]
+        self.assertTrue(matching,
+                        f"Expected error for `flag` in flag-predicate. Got: {errors}")
+
+    def test_predicate_with_op_field_errors(self):
+        """Predicate item using effect's `op` field → ERROR."""
+        raw = self._build_minimal_template()
+        raw["canvases"][0]["trigger"]["conditions"] = {
+            "version": "1.0",
+            "items": [
+                {
+                    "type": "trait",
+                    "subject": "player",
+                    "trait_key": "corruption",
+                    "op": "gte",  # WRONG — should be `operator`
+                    "value": 15,
+                },
+            ],
+        }
+        errors, _ = self._validate_template(raw)
+        matching = [e for e in errors if "`op`" in e and "Doc 68" in e and "operator" in e]
+        self.assertTrue(matching,
+                        f"Expected error for `op` in predicate context. Got: {errors}")
+
+    def test_predicate_with_npcId_field_errors(self):
+        """Predicate item using effect's `npcId` field → ERROR."""
+        raw = self._build_minimal_template()
+        raw["canvases"][0]["trigger"]["conditions"] = {
+            "version": "1.0",
+            "items": [
+                {
+                    "type": "trait",
+                    "subject": "npc",
+                    "npcId": "npc_test",  # WRONG — should be `npc_id`
+                    "trait_key": "relation",
+                    "operator": "gte",
+                    "value": 5,
+                },
+            ],
+        }
+        errors, _ = self._validate_template(raw)
+        matching = [e for e in errors if "`npcId`" in e and "Doc 68" in e]
+        self.assertTrue(matching,
+                        f"Expected error for `npcId` in predicate context. Got: {errors}")
+
+    # ─── Backward-compat / no-false-positives (2 tests) ─────────────────────
+
+    def test_correct_effect_passes(self):
+        """Effect using all correct field names → no errors."""
+        raw = self._build_minimal_template()
+        raw["canvases"][0]["nodes"][0]["exit_block"]["choices"][0]["effects"].append({
+            "targetType": "player",
+            "trait": "corruption",
+            "op": "add",
+            "value": 1,
+        })
+        errors, _ = self._validate_template(raw)
+        fn_errs = [e for e in errors if "Doc 68" in e]
+        self.assertEqual(fn_errs, [],
+                         f"Correct effect should not raise field-name errors. Got: {fn_errs}")
+
+    def test_correct_predicate_passes(self):
+        """Predicate using all correct field names → no errors."""
+        raw = self._build_minimal_template()
+        raw["canvases"][0]["trigger"]["conditions"] = {
+            "version": "1.0",
+            "items": [
+                {
+                    "type": "trait",
+                    "subject": "player",
+                    "trait_key": "corruption",
+                    "operator": "gte",
+                    "value": 15,
+                },
+                {
+                    "type": "flag",
+                    "subject": "player",
+                    "flag_key": "test_flag",
+                    "operator": "is_true",
+                },
+                {
+                    "type": "trait",
+                    "subject": "npc",
+                    "npc_id": "npc_test",
+                    "trait_key": "relation",
+                    "operator": "gte",
+                    "value": 5,
+                },
+            ],
+        }
+        errors, _ = self._validate_template(raw)
+        fn_errs = [e for e in errors if "Doc 68" in e]
+        self.assertEqual(fn_errs, [],
+                         f"Correct predicates should not raise field-name errors. Got: {fn_errs}")
+
+    def test_tls_slice_builds_clean(self):
+        """Integration: live TLS slice TOML should not trigger any field-name errors.
+
+        Per Doc 68 audit (2026-05-26), live TLS uses correct field names everywhere.
+        This is the regression guard — if a future TLS edit introduces a mismatch,
+        the validator catches it.
+        """
+        import os
+        from apps.projects.services.template_import import normalize, validate, parse_toml
+
+        toml_path = (
+            "games/the_long_summer_test/toml_phases/7_final_game.toml"
+        )
+        if not os.path.exists(toml_path):
+            self.skipTest(f"TLS slice not available at {toml_path}")
+
+        data = parse_toml(toml_path)
+        template = normalize(data)
+        errors = validate(template)
+        fn_errs = [e for e in errors if "Doc 68" in e or "predicate-syntax" in e
+                                       or "effect-syntax" in e]
+        self.assertEqual(
+            fn_errs, [],
+            f"TLS slice should pass field-name validation. "
+            f"Found {len(fn_errs)} field-name errors:\n" +
+            "\n".join(f"  - {e}" for e in fn_errs[:5])
+        )
+
+
+class Doc69TraitDeclarationValidatorTests(TestCase):
+    """Doc 69 Item 4 — Undeclared trait validator.
+
+    Every player + NPC trait referenced in effects or conditions MUST be
+    pre-declared in `[player.core_traits]` or per-NPC `core_traits`. Engine
+    reads undefined → silent runtime misbehavior. Validator converts the
+    Doc 68 §2.5 doctrine to build-time enforcement.
+
+    Stage trait pattern (`<slug>_stage`): tracked specially per Doc 68 §9 +
+    Doc 69 §6.3 #4 — declared on player namespace; matching NPC must have
+    `arc_stages`; ERROR if not declared, WARN if declared but no arc.
+    """
+
+    def _build_minimal_template(self, *, extra_player_traits=None,
+                                 npc_arc_stages=None, npc_traits=None):
+        """Minimal valid template — same shape as Phase 1 tests, with
+        configurable player core_traits, NPC core_traits, and arc_stages.
+        """
+        player_core = {"corruption": 0, "arousal": 0}
+        if extra_player_traits:
+            player_core.update(extra_player_traits)
+        npc_core = {"relation": 0}
+        if npc_traits:
+            npc_core.update(npc_traits)
+        npc_block = {
+            "id": "npc_test",
+            "name": "Test NPC",
+            "description": "Fixture NPC",
+            "core_traits": npc_core,
+            "flag_keys": [],
+        }
+        if npc_arc_stages is not None:
+            npc_block["arc_stages"] = list(npc_arc_stages)
+        return {
+            "schema_version": "1.0",
+            "project": {
+                "id": "doc69_item4_test",
+                "title": "Doc 69 Item 4 Fixture",
+                "description": "Trait-declaration validator fixture.",
+                "starting_canvas": "canvas_test",
+            },
+            "time": {"enabled": True, "starting_hour": 8, "starting_day": "Monday"},
+            "player": {
+                "id": "player",
+                "name": "Test Player",
+                "core_traits": player_core,
+                "flag_keys": [],
+            },
+            "locations": [
+                {"id": "loc_kitchen", "name": "Kitchen", "description": "Test"},
+            ],
+            "npcs": [npc_block],
+            "canvases": [
+                {
+                    "id": "canvas_test",
+                    "name": "Test Canvas",
+                    "type": "scene",
+                    "trigger": {
+                        "location": "loc_kitchen",
+                        "is_active": True,
+                        "is_repeatable": True,
+                        "trigger_mode": "manual",
+                    },
+                    "nodes": [
+                        {
+                            "id": "n1",
+                            "name": "Test Node",
+                            "blocks": [{"type": "paragraph", "props": {},
+                                        "content": [{"type": "text", "text": "test"}]}],
+                            "exit_block": {
+                                "type": "choices",
+                                "choices": [
+                                    {
+                                        "text": "Continue",
+                                        "targetType": "trigger",
+                                        "effects": [],
+                                    },
+                                ],
+                            },
+                        },
+                    ],
+                },
+            ],
+        }
+
+    def _validate_template(self, raw):
+        import copy, warnings
+        from apps.projects.services.template_import import normalize, validate
+        with warnings.catch_warnings(record=True) as ws:
+            warnings.simplefilter("always")
+            template = normalize(copy.deepcopy(raw))
+            errors = validate(template)
+        return errors, [str(w.message) for w in ws], template
+
+    # ─── Player trait declaration (effects + conditions) ────────────────────
+
+    def test_effect_undeclared_player_trait_errors(self):
+        """Effect targeting a player trait not in [player.core_traits] → ERROR."""
+        raw = self._build_minimal_template()
+        raw["canvases"][0]["nodes"][0]["exit_block"]["choices"][0]["effects"].append({
+            "targetType": "player",
+            "trait": "nonexistent_trait",
+            "op": "add",
+            "value": 1,
+        })
+        errors, _, _ = self._validate_template(raw)
+        matching = [e for e in errors
+                    if "nonexistent_trait" in e and "Doc 68 §2.5" in e]
+        self.assertTrue(matching,
+                        f"Expected error for undeclared player trait. Got: {errors}")
+
+    def test_effect_declared_player_trait_passes(self):
+        """Effect on a declared player trait → no trait-declaration errors."""
+        raw = self._build_minimal_template()
+        raw["canvases"][0]["nodes"][0]["exit_block"]["choices"][0]["effects"].append({
+            "targetType": "player",
+            "trait": "corruption",  # declared in fixture
+            "op": "add",
+            "value": 1,
+        })
+        errors, _, _ = self._validate_template(raw)
+        td_errs = [e for e in errors if "Doc 68 §2.5" in e]
+        self.assertEqual(td_errs, [],
+                         f"Declared player trait should pass. Got: {td_errs}")
+
+    def test_condition_undeclared_player_trait_errors(self):
+        """Predicate item with trait_key not in player.core_traits → ERROR."""
+        raw = self._build_minimal_template()
+        raw["canvases"][0]["trigger"]["conditions"] = {
+            "version": "1.0",
+            "items": [
+                {
+                    "type": "trait",
+                    "subject": "player",
+                    "trait_key": "ghost_trait",
+                    "operator": "gte",
+                    "value": 1,
+                },
+            ],
+        }
+        errors, _, _ = self._validate_template(raw)
+        matching = [e for e in errors
+                    if "ghost_trait" in e and "Doc 68 §2.5" in e]
+        self.assertTrue(matching,
+                        f"Expected error for undeclared player trait in predicate. "
+                        f"Got: {errors}")
+
+    def test_condition_declared_player_trait_passes(self):
+        """Predicate on declared player trait → no trait-declaration errors."""
+        raw = self._build_minimal_template()
+        raw["canvases"][0]["trigger"]["conditions"] = {
+            "version": "1.0",
+            "items": [
+                {
+                    "type": "trait",
+                    "subject": "player",
+                    "trait_key": "corruption",
+                    "operator": "gte",
+                    "value": 15,
+                },
+            ],
+        }
+        errors, _, _ = self._validate_template(raw)
+        td_errs = [e for e in errors if "Doc 68 §2.5" in e]
+        self.assertEqual(td_errs, [],
+                         f"Declared player trait in predicate should pass. Got: {td_errs}")
+
+    # ─── NPC trait declaration ──────────────────────────────────────────────
+
+    def test_effect_declared_npc_trait_passes(self):
+        """Effect on declared NPC trait → no trait-declaration errors."""
+        raw = self._build_minimal_template()
+        raw["canvases"][0]["nodes"][0]["exit_block"]["choices"][0]["effects"].append({
+            "targetType": "npc",
+            "npcId": "npc_test",
+            "trait": "relation",  # declared in NPC core_traits
+            "op": "add",
+            "value": 1,
+        })
+        errors, _, _ = self._validate_template(raw)
+        td_errs = [e for e in errors if "Doc 68 §2.5" in e]
+        self.assertEqual(td_errs, [],
+                         f"Declared NPC trait should pass. Got: {td_errs}")
+
+    def test_effect_undeclared_npc_trait_errors(self):
+        """Effect on NPC trait not in NPC's core_traits → ERROR."""
+        raw = self._build_minimal_template()
+        raw["canvases"][0]["nodes"][0]["exit_block"]["choices"][0]["effects"].append({
+            "targetType": "npc",
+            "npcId": "npc_test",
+            "trait": "ghost_npc_trait",
+            "op": "add",
+            "value": 1,
+        })
+        errors, _, _ = self._validate_template(raw)
+        matching = [e for e in errors
+                    if "ghost_npc_trait" in e and "npc_test" in e
+                    and "Doc 68 §2.5" in e]
+        self.assertTrue(matching,
+                        f"Expected error for undeclared NPC trait. Got: {errors}")
+
+    # ─── Stage trait special-case ────────────────────────────────────────────
+
+    def test_stage_trait_declared_with_arc_stages_passes(self):
+        """Stage trait declared in player + NPC has arc_stages → passes."""
+        raw = self._build_minimal_template(
+            extra_player_traits={"npc_test_stage": 0},
+            npc_arc_stages=["Stage 0", "Stage 1", "Stage 2"],
+        )
+        # Use it in an effect
+        raw["canvases"][0]["nodes"][0]["exit_block"]["choices"][0]["effects"].append({
+            "targetType": "player",
+            "trait": "npc_test_stage",
+            "op": "set",
+            "value": 1,
+        })
+        errors, warns, _ = self._validate_template(raw)
+        td_errs = [e for e in errors if "Doc 68 §2.5" in e]
+        self.assertEqual(td_errs, [],
+                         f"Stage trait with declared+arc_stages should pass. Got: {td_errs}")
+        # Should also have NO arc-stages warning
+        td_warns = [w for w in warns if "Doc 68 §9.0" in w]
+        self.assertEqual(td_warns, [],
+                         f"No stage-pattern warning expected. Got: {td_warns}")
+
+    def test_stage_trait_not_declared_but_npc_has_arc_errors(self):
+        """Stage trait pattern matches NPC with arc_stages, but trait NOT
+        declared in [player.core_traits] → ERROR with stage-pattern hint."""
+        raw = self._build_minimal_template(
+            extra_player_traits=None,  # don't add npc_test_stage to player
+            npc_arc_stages=["Stage 0", "Stage 1"],
+        )
+        raw["canvases"][0]["nodes"][0]["exit_block"]["choices"][0]["effects"].append({
+            "targetType": "player",
+            "trait": "npc_test_stage",  # matches stage pattern; NPC has arc
+            "op": "set",
+            "value": 1,
+        })
+        errors, _, _ = self._validate_template(raw)
+        matching = [e for e in errors
+                    if "npc_test_stage" in e and "stage" in e.lower()
+                    and "Doc 68" in e]
+        self.assertTrue(matching,
+                        f"Expected stage-pattern ERROR for undeclared stage trait. "
+                        f"Got: {errors}")
+
+    def test_stage_trait_declared_but_no_arc_stages_warns(self):
+        """Stage trait declared in player, but NPC has empty arc_stages → WARN."""
+        raw = self._build_minimal_template(
+            extra_player_traits={"npc_test_stage": 0},
+            npc_arc_stages=[],  # empty
+        )
+        raw["canvases"][0]["nodes"][0]["exit_block"]["choices"][0]["effects"].append({
+            "targetType": "player",
+            "trait": "npc_test_stage",
+            "op": "set",
+            "value": 1,
+        })
+        errors, warns, _ = self._validate_template(raw)
+        # Should NOT error (trait IS declared)
+        td_errs = [e for e in errors if "Doc 68 §2.5" in e and "npc_test_stage" in e]
+        self.assertEqual(td_errs, [],
+                         f"Declared stage trait should not error. Got: {td_errs}")
+        # SHOULD warn about empty arc_stages
+        td_warns = [w for w in warns
+                    if "npc_test_stage" in w and "Doc 68 §9.0" in w]
+        self.assertTrue(td_warns,
+                        f"Expected WARN for stage trait with empty arc_stages. "
+                        f"Got warnings: {warns}")
+
+    def test_tls_slice_traits_all_declared(self):
+        """Integration: TLS slice should pass trait-declaration validation
+        (after the 2026-05-27 loop_*_pleasure declaration fix)."""
+        import os
+        from apps.projects.services.template_import import normalize, validate, parse_toml
+
+        toml_path = "games/the_long_summer_test/toml_phases/7_final_game.toml"
+        if not os.path.exists(toml_path):
+            self.skipTest(f"TLS slice not available at {toml_path}")
+
+        data = parse_toml(toml_path)
+        template = normalize(data)
+        errors = validate(template)
+        td_errs = [e for e in errors if "Doc 68 §2.5" in e or "undeclared" in e]
+        self.assertEqual(
+            td_errs, [],
+            f"TLS slice should have all traits declared. Found {len(td_errs)} errors:\n"
+            + "\n".join(f"  - {e[:200]}" for e in td_errs[:5])
+        )
+
+
+class Doc69PatternBExclusiveGroupTests(TestCase):
+    """Doc 69 Item 1 — Pattern B `exclusive_group` substitution extension.
+
+    Substitution rules sharing an `exclusive_group` string share ONE dice roll
+    at runtime (mutual exclusion via cumulative bucket partition). Failed-
+    condition in claimed slot falls to solo, NOT next rule in group. Groups
+    process FIRST per LO Q2 decision; then Pattern A independent rules.
+    """
+
+    def _build_minimal_template_with_sub(self, substitutions=None):
+        """Minimal template with two canvases: parent + substitution target.
+        Caller passes a list of substitution rule dicts.
+        """
+        return {
+            "schema_version": "1.0",
+            "project": {
+                "id": "doc69_item1_test",
+                "title": "Doc 69 Item 1 Pattern B Fixture",
+                "description": "exclusive_group substitution extension test.",
+                "starting_canvas": "canvas_parent",
+            },
+            "time": {"enabled": True, "starting_hour": 8, "starting_day": "Monday"},
+            "player": {
+                "id": "player",
+                "name": "Player",
+                "core_traits": {"corruption": 0},
+                "flag_keys": [],
+            },
+            "locations": [
+                {"id": "loc_kitchen", "name": "Kitchen", "description": "Test"},
+            ],
+            "npcs": [],
+            "canvases": [
+                {
+                    "id": "canvas_parent",
+                    "name": "Parent",
+                    "type": "scene",
+                    "trigger": {
+                        "location": "loc_kitchen",
+                        "is_active": True,
+                        "is_repeatable": True,
+                        "trigger_mode": "manual",
+                        "substitutions": substitutions or [],
+                    },
+                    "nodes": [{"id": "n1", "name": "n1", "blocks": [{"type": "paragraph",
+                                "props": {}, "content": [{"type": "text", "text": "."}]}]}],
+                },
+                {
+                    "id": "canvas_target_a",
+                    "name": "Target A",
+                    "type": "scene",
+                    "trigger": {"location": "loc_kitchen", "trigger_mode": "manual",
+                                 "is_repeatable": True, "substitution_only": True},
+                    "nodes": [{"id": "n1", "name": "n1", "blocks": [{"type": "paragraph",
+                                "props": {}, "content": [{"type": "text", "text": "A"}]}]}],
+                },
+                {
+                    "id": "canvas_target_b",
+                    "name": "Target B",
+                    "type": "scene",
+                    "trigger": {"location": "loc_kitchen", "trigger_mode": "manual",
+                                 "is_repeatable": True, "substitution_only": True},
+                    "nodes": [{"id": "n1", "name": "n1", "blocks": [{"type": "paragraph",
+                                "props": {}, "content": [{"type": "text", "text": "B"}]}]}],
+                },
+                {
+                    "id": "canvas_target_c",
+                    "name": "Target C",
+                    "type": "scene",
+                    "trigger": {"location": "loc_kitchen", "trigger_mode": "manual",
+                                 "is_repeatable": True, "substitution_only": True},
+                    "nodes": [{"id": "n1", "name": "n1", "blocks": [{"type": "paragraph",
+                                "props": {}, "content": [{"type": "text", "text": "C"}]}]}],
+                },
+            ],
+        }
+
+    def _normalize_and_validate(self, raw):
+        import copy, warnings
+        from apps.projects.services.template_import import normalize, validate
+        with warnings.catch_warnings(record=True) as ws:
+            warnings.simplefilter("always")
+            template = normalize(copy.deepcopy(raw))
+            errors = validate(template)
+        return template, errors, [str(w.message) for w in ws]
+
+    # ─── Schema round-trip ──────────────────────────────────────────────────
+
+    def test_exclusive_group_field_round_trips(self):
+        """exclusive_group field survives normalize() into template.canvases."""
+        raw = self._build_minimal_template_with_sub([
+            {"target_canvas_id": "canvas_target_a", "chance": 0.17,
+             "exclusive_group": "test_group"},
+            {"target_canvas_id": "canvas_target_b", "chance": 0.17,
+             "exclusive_group": "test_group"},
+        ])
+        template, errors, _ = self._normalize_and_validate(raw)
+        parent = next(c for c in template.canvases if c.id == "canvas_parent")
+        self.assertEqual(len(parent.trigger.substitutions), 2)
+        self.assertEqual(parent.trigger.substitutions[0]["exclusive_group"], "test_group")
+        self.assertEqual(parent.trigger.substitutions[1]["exclusive_group"], "test_group")
+
+    def test_exclusive_group_absent_means_pattern_a(self):
+        """Substitution without exclusive_group → field stored as None (Pattern A)."""
+        raw = self._build_minimal_template_with_sub([
+            {"target_canvas_id": "canvas_target_a", "chance": 0.33},
+        ])
+        template, errors, _ = self._normalize_and_validate(raw)
+        parent = next(c for c in template.canvases if c.id == "canvas_parent")
+        self.assertIsNone(parent.trigger.substitutions[0]["exclusive_group"])
+
+    # ─── Validator: chance-sum bounds ───────────────────────────────────────
+
+    def test_chance_sum_over_1_0_warns(self):
+        """Chance values in same exclusive_group summing > 1.0 → WARN."""
+        raw = self._build_minimal_template_with_sub([
+            {"target_canvas_id": "canvas_target_a", "chance": 0.5,
+             "exclusive_group": "g1"},
+            {"target_canvas_id": "canvas_target_b", "chance": 0.7,
+             "exclusive_group": "g1"},  # sum = 1.2
+        ])
+        _, errors, warns = self._normalize_and_validate(raw)
+        # Should NOT error (sum <= 1.5)
+        chance_errs = [e for e in errors if "g1" in e and "chance sum" in e]
+        self.assertEqual(chance_errs, [],
+                         f"Sum 1.2 should warn, not error. Got errors: {chance_errs}")
+        # Should warn
+        chance_warns = [w for w in warns
+                        if "g1" in w and "chance sum" in w and "Doc 69 §3.6" in w]
+        self.assertTrue(chance_warns,
+                        f"Expected WARN for chance sum > 1.0. Got warnings: {warns}")
+
+    def test_chance_sum_over_1_5_errors(self):
+        """Chance values in same exclusive_group summing > 1.5 → ERROR."""
+        raw = self._build_minimal_template_with_sub([
+            {"target_canvas_id": "canvas_target_a", "chance": 0.9,
+             "exclusive_group": "g_too_big"},
+            {"target_canvas_id": "canvas_target_b", "chance": 0.9,
+             "exclusive_group": "g_too_big"},  # sum = 1.8
+        ])
+        _, errors, _ = self._normalize_and_validate(raw)
+        matching = [e for e in errors
+                    if "g_too_big" in e and "chance sum" in e and "Doc 69" in e]
+        self.assertTrue(matching,
+                        f"Expected ERROR for chance sum > 1.5. Got errors: {errors}")
+
+    # ─── Validator: target ownership ────────────────────────────────────────
+
+    def test_duplicate_target_across_groups_errors(self):
+        """Same target_canvas_id in two different groups → ERROR."""
+        raw = self._build_minimal_template_with_sub([
+            {"target_canvas_id": "canvas_target_a", "chance": 0.5,
+             "exclusive_group": "group1"},
+            {"target_canvas_id": "canvas_target_a", "chance": 0.5,
+             "exclusive_group": "group2"},
+        ])
+        _, errors, _ = self._normalize_and_validate(raw)
+        matching = [e for e in errors
+                    if "canvas_target_a" in e and "group1" in e and "group2" in e]
+        self.assertTrue(matching,
+                        f"Expected ERROR for duplicate target across groups. Got: {errors}")
+
+    def test_target_in_group_and_independent_errors(self):
+        """Same target in a group AND as independent rule → ERROR."""
+        raw = self._build_minimal_template_with_sub([
+            {"target_canvas_id": "canvas_target_a", "chance": 0.5,
+             "exclusive_group": "g1"},
+            {"target_canvas_id": "canvas_target_a", "chance": 0.3},  # no group
+        ])
+        _, errors, _ = self._normalize_and_validate(raw)
+        matching = [e for e in errors
+                    if "canvas_target_a" in e and "independent" in e and "g1" in e]
+        self.assertTrue(matching,
+                        f"Expected ERROR for target in group+independent. Got: {errors}")
+
+    # ─── Validator: single-rule group ───────────────────────────────────────
+
+    def test_single_rule_group_warns(self):
+        """exclusive_group with only one rule → WARN (no behavioral difference)."""
+        raw = self._build_minimal_template_with_sub([
+            {"target_canvas_id": "canvas_target_a", "chance": 0.5,
+             "exclusive_group": "solo_group"},
+        ])
+        _, _, warns = self._normalize_and_validate(raw)
+        matching = [w for w in warns
+                    if "solo_group" in w and "only one" in w and "Doc 69" in w]
+        self.assertTrue(matching,
+                        f"Expected WARN for single-rule group. Got warnings: {warns}")
+
+    # ─── Engine emission ────────────────────────────────────────────────────
+
+    def test_exclusive_group_in_emitted_substitutions_json(self):
+        """Engine emits exclusive_group in the canvasSubstitutions JSON map."""
+        import copy
+        from apps.projects.services.template_import import normalize
+        from apps.projects.services.template_import import (
+            create_project_from_template,
+        )
+        from apps.game_generation.twee_comprehensive.generators.v2 import (
+            TweeComprehensiveGeneratorV2,
+        )
+        from django.contrib.auth import get_user_model
+        User = get_user_model()
+        user = User.objects.create_user(
+            email="doc69-item1-emit@example.com", password="testpass123"
+        )
+        raw = self._build_minimal_template_with_sub([
+            {"target_canvas_id": "canvas_target_a", "chance": 0.17,
+             "exclusive_group": "kitchen_walk_in"},
+            {"target_canvas_id": "canvas_target_b", "chance": 0.17,
+             "exclusive_group": "kitchen_walk_in"},
+        ])
+        template = normalize(copy.deepcopy(raw))
+        result = create_project_from_template(template, str(user.id))
+        from apps.projects.models import Project
+        project = Project.objects.get(id=result["project_id"])
+        twee = TweeComprehensiveGeneratorV2().generate(project)
+        # The emitted JSON map should contain "exclusive_group" field.
+        self.assertIn('"exclusive_group": "kitchen_walk_in"', twee,
+                      "exclusive_group should appear in emitted canvasSubstitutions JSON")
+
+    # ─── Backward compat ────────────────────────────────────────────────────
+
+    def test_pattern_a_substitution_still_works(self):
+        """Substitution without exclusive_group (existing Pattern A) → validates clean."""
+        raw = self._build_minimal_template_with_sub([
+            {"target_canvas_id": "canvas_target_a", "chance": 0.33},
+            {"target_canvas_id": "canvas_target_b", "chance": 0.33},
+        ])
+        _, errors, warns = self._normalize_and_validate(raw)
+        phase3_issues = [e for e in errors if "Doc 69" in e] + \
+                        [w for w in warns if "Doc 69" in w]
+        self.assertEqual(phase3_issues, [],
+                         f"Pattern A (no exclusive_group) should validate clean. "
+                         f"Got: {phase3_issues}")
+
+    def test_tls_slice_no_exclusive_group_drift(self):
+        """TLS slice has no exclusive_group anywhere → builds clean with no
+        new Phase 3 errors/warnings. Backward-compat regression guard."""
+        import os, warnings
+        from apps.projects.services.template_import import normalize, validate, parse_toml
+        toml_path = "games/the_long_summer_test/toml_phases/7_final_game.toml"
+        if not os.path.exists(toml_path):
+            self.skipTest(f"TLS slice not available")
+        data = parse_toml(toml_path)
+        with warnings.catch_warnings(record=True) as ws:
+            warnings.simplefilter("always")
+            template = normalize(data)
+            errors = validate(template)
+        phase3_errs = [e for e in errors if "Doc 69 §3" in e]
+        phase3_warns = [str(w.message) for w in ws if "Doc 69 §3" in str(w.message)]
+        self.assertEqual(phase3_errs, [],
+                         f"TLS slice should have no Phase 3 errors. Got: {phase3_errs}")
+        self.assertEqual(phase3_warns, [],
+                         f"TLS slice should have no Phase 3 warnings. Got: {phase3_warns}")
+
+
+class Doc69PatternCPreSubstitutionEffectsTests(TestCase):
+    """Doc 69 Item 2 — Pattern C `pre_substitution_effects` canvas trigger
+    extension. Effects in this list fire UNCONDITIONALLY at canvas entry,
+    BEFORE the Lane 3 substitution check. If a substitution rule preempts
+    via <<goto>>, these effects have already executed — the activity
+    "counts" even when an NPC walks in (RTS Exercise pattern).
+    """
+
+    def _build_minimal_template_with_pse(
+        self, pre_substitution_effects=None, substitutions=None,
+    ):
+        """Minimal template; caller passes pre_substitution_effects + optional
+        substitutions on the parent canvas."""
+        trigger = {
+            "location": "loc_kitchen",
+            "is_active": True,
+            "is_repeatable": True,
+            "trigger_mode": "manual",
+        }
+        if pre_substitution_effects:
+            trigger["pre_substitution_effects"] = pre_substitution_effects
+        if substitutions:
+            trigger["substitutions"] = substitutions
+        return {
+            "schema_version": "1.0",
+            "project": {
+                "id": "doc69_item2_test",
+                "title": "Doc 69 Item 2 Pattern C Fixture",
+                "description": "pre_substitution_effects test.",
+                "starting_canvas": "canvas_parent",
+            },
+            "time": {"enabled": True, "starting_hour": 8, "starting_day": "Monday"},
+            "player": {
+                "id": "player",
+                "name": "Player",
+                "core_traits": {"fitness": 0, "energy": 100, "corruption": 0},
+                "flag_keys": [],
+            },
+            "locations": [
+                {"id": "loc_kitchen", "name": "Kitchen", "description": "Test"},
+            ],
+            "npcs": [],
+            "canvases": [
+                {
+                    "id": "canvas_parent",
+                    "name": "Parent",
+                    "type": "scene",
+                    "trigger": trigger,
+                    "nodes": [{"id": "n1", "name": "n1",
+                                "blocks": [{"type": "paragraph", "props": {},
+                                            "content": [{"type": "text", "text": "."}]}]}],
+                },
+                {
+                    "id": "canvas_target",
+                    "name": "Target",
+                    "type": "scene",
+                    "trigger": {"location": "loc_kitchen", "trigger_mode": "manual",
+                                 "is_repeatable": True, "substitution_only": True},
+                    "nodes": [{"id": "n1", "name": "n1",
+                                "blocks": [{"type": "paragraph", "props": {},
+                                            "content": [{"type": "text", "text": "T"}]}]}],
+                },
+            ],
+        }
+
+    def _normalize_and_validate(self, raw):
+        import copy, warnings
+        from apps.projects.services.template_import import normalize, validate
+        with warnings.catch_warnings(record=True) as ws:
+            warnings.simplefilter("always")
+            template = normalize(copy.deepcopy(raw))
+            errors = validate(template)
+        return template, errors, [str(w.message) for w in ws]
+
+    # ─── Schema round-trip ──────────────────────────────────────────────────
+
+    def test_pre_substitution_effects_round_trip(self):
+        """pre_substitution_effects survives normalize() into TemplateTrigger."""
+        raw = self._build_minimal_template_with_pse(
+            pre_substitution_effects=[
+                {"targetType": "player", "trait": "fitness", "op": "add",
+                 "value": 1, "cap": 100},
+            ],
+            substitutions=[
+                {"target_canvas_id": "canvas_target", "chance": 0.5},
+            ],
+        )
+        template, errors, _ = self._normalize_and_validate(raw)
+        parent = next(c for c in template.canvases if c.id == "canvas_parent")
+        self.assertEqual(len(parent.trigger.pre_substitution_effects), 1)
+        self.assertEqual(parent.trigger.pre_substitution_effects[0]["trait"], "fitness")
+        self.assertEqual(parent.trigger.pre_substitution_effects[0]["op"], "add")
+        self.assertEqual(parent.trigger.pre_substitution_effects[0]["cap"], 100)
+
+    def test_empty_pre_substitution_effects_backward_compat(self):
+        """Canvas without pre_substitution_effects → defaults to empty list."""
+        raw = self._build_minimal_template_with_pse(
+            substitutions=[{"target_canvas_id": "canvas_target", "chance": 0.5}],
+        )
+        template, errors, _ = self._normalize_and_validate(raw)
+        parent = next(c for c in template.canvases if c.id == "canvas_parent")
+        self.assertEqual(parent.trigger.pre_substitution_effects, [])
+
+    # ─── Emitter ordering (the load-bearing test) ───────────────────────────
+
+    def test_emission_pre_substitution_before_substitution_check(self):
+        """The emitted passage MUST have pre-substitution macros BEFORE the
+        substitution_check <<set>>+<<goto>>. This is the load-bearing test
+        per Doc 69 §4.4 — if the order is wrong, Pattern C semantics break."""
+        import copy
+        from apps.projects.services.template_import import (
+            normalize, create_project_from_template,
+        )
+        from apps.game_generation.twee_comprehensive.generators.v2 import (
+            TweeComprehensiveGeneratorV2,
+        )
+        from django.contrib.auth import get_user_model
+        User = get_user_model()
+        user = User.objects.create_user(
+            email="doc69-item2-order@example.com", password="testpass123"
+        )
+        raw = self._build_minimal_template_with_pse(
+            pre_substitution_effects=[
+                {"targetType": "player", "trait": "fitness", "op": "add", "value": 1},
+            ],
+            substitutions=[
+                {"target_canvas_id": "canvas_target", "chance": 0.5},
+            ],
+        )
+        template = normalize(copy.deepcopy(raw))
+        result = create_project_from_template(template, str(user.id))
+        from apps.projects.models import Project
+        project = Project.objects.get(id=result["project_id"])
+        twee = TweeComprehensiveGeneratorV2().generate(project)
+        # Find the parent canvas's passage in the emitted Twee
+        # — it should have applyAndNotifyTrait BEFORE checkAndSubstituteCanvas.
+        # Locate the chunk between `:: ` (passage header) and the next blank line.
+        lines = twee.split("\n")
+        in_target = False
+        pse_idx = None
+        sub_check_idx = None
+        for i, line in enumerate(lines):
+            if line.startswith(":: ") and "canvas_parent" in line:
+                in_target = True
+                continue
+            if in_target and line.startswith(":: "):
+                break
+            if in_target and "applyAndNotifyTrait" in line and pse_idx is None:
+                pse_idx = i
+            if in_target and "checkAndSubstituteCanvas" in line and sub_check_idx is None:
+                sub_check_idx = i
+        self.assertIsNotNone(pse_idx,
+            f"Expected applyAndNotifyTrait macro in canvas_parent passage. Twee[:1500]:\n{twee[:1500]}")
+        self.assertIsNotNone(sub_check_idx,
+            "Expected checkAndSubstituteCanvas call in canvas_parent passage")
+        self.assertLess(pse_idx, sub_check_idx,
+            f"Pre-substitution macro (line {pse_idx}) must appear BEFORE "
+            f"substitution check (line {sub_check_idx}) — Doc 69 §4.4 ordering.")
+
+    def test_emission_no_pre_substitution_when_field_empty(self):
+        """No pre-substitution effects → no applyAndNotifyTrait macros emitted
+        in the canvas's passage header. Backward compat regression guard."""
+        import copy
+        from apps.projects.services.template_import import (
+            normalize, create_project_from_template,
+        )
+        from apps.game_generation.twee_comprehensive.generators.v2 import (
+            TweeComprehensiveGeneratorV2,
+        )
+        from django.contrib.auth import get_user_model
+        User = get_user_model()
+        user = User.objects.create_user(
+            email="doc69-item2-empty@example.com", password="testpass123"
+        )
+        # Canvas with substitutions but NO pre_substitution_effects
+        raw = self._build_minimal_template_with_pse(
+            substitutions=[
+                {"target_canvas_id": "canvas_target", "chance": 0.5},
+            ],
+        )
+        template = normalize(copy.deepcopy(raw))
+        result = create_project_from_template(template, str(user.id))
+        from apps.projects.models import Project
+        project = Project.objects.get(id=result["project_id"])
+        twee = TweeComprehensiveGeneratorV2().generate(project)
+        # The canvas_parent passage should NOT have a pre-substitution
+        # applyAndNotifyTrait before its substitution_check.
+        lines = twee.split("\n")
+        in_target = False
+        sub_check_idx = None
+        for i, line in enumerate(lines):
+            if line.startswith(":: ") and "canvas_parent" in line:
+                in_target = True
+                start_idx = i
+                continue
+            if in_target and line.startswith(":: "):
+                break
+            if in_target and "checkAndSubstituteCanvas" in line:
+                sub_check_idx = i
+                break
+        self.assertIsNotNone(sub_check_idx)
+        # Between passage header and substitution_check, there should be no
+        # applyAndNotifyTrait (those would be pre-substitution effects).
+        between = "\n".join(lines[start_idx:sub_check_idx])
+        self.assertNotIn("applyAndNotifyTrait", between,
+            f"Empty pre_substitution_effects should emit no macros before "
+            f"substitution check. Got between passage header and sub check:\n{between}")
+
+    # ─── Validator ──────────────────────────────────────────────────────────
+
+    def test_pre_substitution_effects_without_substitutions_warns(self):
+        """pre_substitution_effects set without any substitution rules → WARN."""
+        raw = self._build_minimal_template_with_pse(
+            pre_substitution_effects=[
+                {"targetType": "player", "trait": "fitness", "op": "add", "value": 1},
+            ],
+            # No substitutions!
+        )
+        _, errors, warns = self._normalize_and_validate(raw)
+        matching = [w for w in warns
+                    if "pre_substitution_effects" in w and "no substitutions" in w
+                    and "Doc 69" in w]
+        self.assertTrue(matching,
+                        f"Expected WARN for pre-sub effects without substitutions. "
+                        f"Got warnings: {warns}")
+
+    # ─── Validator integration: field-name + trait-declaration ──────────────
+
+    def test_pre_sub_with_wrong_field_name_errors(self):
+        """pre_substitution_effects entry using predicate-syntax field name
+        → ERROR (Phase 1 + Phase 2 validators apply here too)."""
+        raw = self._build_minimal_template_with_pse(
+            pre_substitution_effects=[
+                {"subject": "player",  # WRONG — predicate field in effect
+                 "trait": "fitness", "op": "add", "value": 1},
+            ],
+            substitutions=[{"target_canvas_id": "canvas_target", "chance": 0.5}],
+        )
+        _, errors, _ = self._normalize_and_validate(raw)
+        matching = [e for e in errors
+                    if "pre_substitution_effects" in e and "subject" in e
+                    and "Doc 68" in e]
+        self.assertTrue(matching,
+                        f"Expected field-name ERROR on pre-sub effect. Got: {errors}")
+
+    def test_pre_sub_with_undeclared_trait_errors(self):
+        """pre_substitution_effects entry on undeclared player trait → ERROR
+        (Phase 2 trait-declaration validator applies here too)."""
+        raw = self._build_minimal_template_with_pse(
+            pre_substitution_effects=[
+                {"targetType": "player", "trait": "nonexistent_trait",
+                 "op": "add", "value": 1},
+            ],
+            substitutions=[{"target_canvas_id": "canvas_target", "chance": 0.5}],
+        )
+        _, errors, _ = self._normalize_and_validate(raw)
+        matching = [e for e in errors
+                    if "pre_substitution_effects" in e and "nonexistent_trait" in e
+                    and "Doc 68 §2.5" in e]
+        self.assertTrue(matching,
+                        f"Expected trait-declaration ERROR on pre-sub effect. Got: {errors}")
+
+    # ─── TLS regression ─────────────────────────────────────────────────────
+
+    def test_tls_slice_no_pattern_c_drift(self):
+        """TLS slice has no pre_substitution_effects anywhere → builds clean."""
+        import os, warnings
+        from apps.projects.services.template_import import normalize, validate, parse_toml
+        toml_path = "games/the_long_summer_test/toml_phases/7_final_game.toml"
+        if not os.path.exists(toml_path):
+            self.skipTest(f"TLS slice not available")
+        data = parse_toml(toml_path)
+        with warnings.catch_warnings(record=True) as ws:
+            warnings.simplefilter("always")
+            template = normalize(data)
+            errors = validate(template)
+        phase4_errs = [e for e in errors if "Doc 69 §4" in e]
+        phase4_warns = [str(w.message) for w in ws if "Doc 69 §4" in str(w.message)]
+        self.assertEqual(phase4_errs, [],
+                         f"TLS slice should have no Phase 4 errors. Got: {phase4_errs}")
+        self.assertEqual(phase4_warns, [],
+                         f"TLS slice should have no Phase 4 warnings. Got: {phase4_warns}")
