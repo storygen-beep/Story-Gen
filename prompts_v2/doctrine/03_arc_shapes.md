@@ -97,7 +97,7 @@ Stage NEVER surfaces (Doc 68 §9).
 
 ### §3.5 — Voice register
 
-- Lane 1/2/3: RTS-flat default. ~30-word caption density. Direct/crude diction per per-arc vocab ceiling (`doctrine/08_kink_vocab_ceilings.md` *Batch 2+ — pending*).
+- Lane 1/2/3: RTS-flat default. ~30-word caption density. Direct/crude diction per per-arc vocab ceiling (`doctrine/08_kink_vocab_ceilings.md`).
 - Lane 4 capstones: Tier-3 earned. Interior monologue + layered sensory detail + character-distinguishing diction.
 
 ### §3.6 — Doc 31 design brief (Frank) — gold standard
@@ -372,8 +372,8 @@ A brief commits to peer/dating shape (Lane 3 = 0) but authoring produces 4 Lane 
 - `doctrine/01_rts_principles.md` — P4 (mix arc shapes); P9 (per-arc vocab ceiling)
 - `doctrine/02_three_lanes_plus_capstone.md` — lane mechanism distribution sits inside
 - `doctrine/04_authoring_rules.md` — R3 (per-arc-shape Lane 3 budget); R7 (design brief precedes authoring); F1–F5 (capstone Pattern F)
-- `doctrine/06_design_brief_template.md` *(Batch 2+ — pending)* — R7 brief structure
-- `doctrine/08_kink_vocab_ceilings.md` *(Batch 2+ — pending)* — per-arc vocab ceiling table
+- `doctrine/06_design_brief_template.md` — R7 brief structure
+- `doctrine/08_kink_vocab_ceilings.md` — per-arc vocab ceiling table
 - `doctrine/09_trait_catalog.md` §8 — sidebar visibility per arc shape
 
 ### Source briefs

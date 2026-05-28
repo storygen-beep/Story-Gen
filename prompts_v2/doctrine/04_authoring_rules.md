@@ -162,7 +162,7 @@ guide = "Shower in the bathroom in the morning while Frank is home"
 - The brief lives in `28th_april_TLS_Phase2_Redesign/` as a numbered doc.
 - An authoring pass that violates the brief's budget or ceiling is drift; the brief is the canonical reference.
 
-**Brief template:** see `doctrine/06_design_brief_template.md` *(Batch 2+ — pending; for now use Doc 31 Frank brief + Doc 53 Marge brief in `28th_april_TLS_Phase2_Redesign/` as templates)*.
+**Brief template:** see `doctrine/06_design_brief_template.md`.
 
 ---
 
@@ -582,9 +582,9 @@ For each anti-pattern, the rule it violates.
 - `doctrine/01_rts_principles.md` — the principle each rule operationalizes
 - `doctrine/02_three_lanes_plus_capstone.md` — the mechanism each rule sits inside
 - `doctrine/03_arc_shapes.md` — the per-arc-shape distribution that D56-R3 + R7 reference
-- `doctrine/05_rts_flat_prose.md` *(Batch 2+ — pending)* — voice register that capstone Tier-3 + Lane 1/2/3 RTS-flat enforces
-- `doctrine/06_design_brief_template.md` *(Batch 2+ — pending)* — R7 brief structure
-- `doctrine/07_anti_patterns.md` *(Batch 2+ — pending)* — extended anti-pattern catalog (Doc 54's 27 failure modes)
+- `doctrine/05_rts_flat_prose.md` — voice register that capstone Tier-3 + Lane 1/2/3 RTS-flat enforces
+- `doctrine/06_design_brief_template.md` — R7 brief structure
+- `doctrine/07_anti_patterns.md` — extended anti-pattern catalog (Doc 54's 27 failure modes)
 
 ### Validator hooks
 

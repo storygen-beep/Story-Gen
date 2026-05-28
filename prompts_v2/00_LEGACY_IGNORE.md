@@ -22,12 +22,12 @@ If a downstream file in `prompts_v2/` cites a legacy term, the citation is the b
 
 | Concern | Legacy location | Replaced by |
 |---|---|---|
-| Game-book authoring prompt | `prompts/game_book_prompt_v6.txt` (frozen 2026-04-19) | `prompts_v2/stages/01_game_book_prompt.md` *(Batch 2+ — pending)* |
-| TOML authoring prompt | `prompts/toml_generation_prompt_v4.txt` (frozen 2026-04-19) | `prompts_v2/stages/02_toml_generation_prompt.md` *(Batch 2+ — pending)* |
-| Doctrine spec | `prompts/game_design_rules.md` + `game_design_patterns.md` + `game_design_motivations.md` + `game_design_observations.md` | `prompts_v2/doctrine/01–09` (Batch 1 ships 01 / 02 / 03 / 04 / 09; 05 / 06 / 07 / 08 in Batch 2+) |
-| Engine schema reference | `prompts/COMPREHENSIVE_SYSTEM_REFERENCE.md` (embeds v3, no Docs 24–65) | `prompts_v2/schema/01–02` + regenerated `prompts_v2/COMPREHENSIVE_SYSTEM_REFERENCE.md` *(regen Batch 2+)* |
-| Reference-game extraction | Jack's World + New In Town walkthroughs implicit in v6 | `prompts_v2/reference/01–04` (RTS only) *(Batch 2+ — pending)* |
-| Media / image / listing prompts | `prompts/image_finder_prompt.md` + `prompts/game_listing_prompt.md` | `prompts_v2/stages/03–04` (ported) *(Batch 2+ — pending)* |
+| Game-book authoring prompt | `prompts/game_book_prompt_v6.txt` (frozen 2026-04-19) | `prompts_v2/stages/01_game_book_prompt.md` *(Batch 3+ — pending)* |
+| TOML authoring prompt | `prompts/toml_generation_prompt_v4.txt` (frozen 2026-04-19) | `prompts_v2/stages/02_toml_generation_prompt.md` *(Batch 3+ — pending)* |
+| Doctrine spec | `prompts/game_design_rules.md` + `game_design_patterns.md` + `game_design_motivations.md` + `game_design_observations.md` | `prompts_v2/doctrine/01–09` (complete: 01 / 02 / 03 / 04 / 05 / 06 / 07 / 08 / 09) |
+| Engine schema reference | `prompts/COMPREHENSIVE_SYSTEM_REFERENCE.md` (embeds v3, no Docs 24–65) | `prompts_v2/schema/01–03` + regenerated `prompts_v2/COMPREHENSIVE_SYSTEM_REFERENCE.md` *(regen Batch 3+)* |
+| Reference-game extraction | Jack's World + New In Town walkthroughs implicit in v6 | `prompts_v2/reference/01–04` (RTS only) |
+| Media / image / listing prompts | `prompts/image_finder_prompt.md` + `prompts/game_listing_prompt.md` | `prompts_v2/stages/03–04` (ported) *(Batch 3+ — pending)* |
 
 The legacy `prompts/` folder stays in place as historical record (LO decision §6.7 — no migration, no archival move). It is not consulted, not cited, not "carried over."
 
@@ -127,7 +127,7 @@ The corpus has answers for:
 - "How does this NPC become available in the player's day?" → schedule + `requires_npc` + getNpcLocation (Doc 24 §6 + Doc 67 §3; `schema/01_engine_capabilities.md`)
 - "How does this scripted scene get reached?" → capstone trigger fingerprint + quest card pointer (Doc 57 R1–R5 + Doc 50 R1–R6; `doctrine/04_authoring_rules.md`)
 - "What does the player see in the HUD?" → sidebar items + body-state vs progression-state doctrine (Doc 49 + Doc 68 §8; `schema/01_engine_capabilities.md` + `doctrine/09_trait_catalog.md`)
-- "How explicit is this NPC allowed to get?" → per-arc vocabulary ceiling (Doc 30 §7.5; `doctrine/08_kink_vocab_ceilings.md` *Batch 2+ — pending*)
+- "How explicit is this NPC allowed to get?" → per-arc vocabulary ceiling (Doc 30 §7.5; `doctrine/08_kink_vocab_ceilings.md`)
 - "What stats does the game use?" → Tier 1 (corruption / arousal / energy / hygiene / money + per-NPC arousal / corruption / relation / stage) + Tier 2 (fitness / beauty / exhibitionism / intelligence) (Doc 68; `doctrine/09_trait_catalog.md`)
 
 If none of the above answers apply, the question may be outside the RTS-shape sandbox scope. Surface it to LO rather than reaching for a legacy pattern.

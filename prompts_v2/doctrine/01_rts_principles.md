@@ -18,7 +18,7 @@ Each click should be light in prose because the HUD does the heavy lifting. The 
 
 **Authoring implication:** the Lane 1/2/3 prose target is the RTS-flat 30-word caption density (Doc 30 §7.1). The HUD is what makes 30-word scenes survive — without continuous sidebar feedback, the player has nothing to plan against. Image-first composition + sparse stage directions + dialogue doing the character work. Density goes into Lane 4 capstones, not into the daily texture.
 
-**Cross-reference:** `doctrine/05_rts_flat_prose.md` *(Batch 2+ — pending)* (the 8 rules); `schema/01_engine_capabilities.md` §8 (sidebar item types). For now: the 8 prose rules are in `28th_april_TLS_Phase2_Redesign/30_TLS_Test_Redesign_PRD.md` §7.1.
+**Cross-reference:** `doctrine/05_rts_flat_prose.md` (the 8 rules); `schema/01_engine_capabilities.md` §8 (sidebar item types).
 
 ---
 
@@ -114,7 +114,7 @@ Click a gated button → you see "30+ Corruption Needed." No stat drain. No "NPC
 
 Anti-pattern: a Lane 1 menu item that decrements `relation` on locked-click. That penalizes exploration. RTS doesn't do this anywhere. Don't ship it.
 
-**Cross-reference:** `schema/01_engine_capabilities.md` §10.4 (notifications + soft-fail); `doctrine/07_anti_patterns.md` *(Batch 2+ — pending; for now see `doctrine/04_authoring_rules.md` §7)*.
+**Cross-reference:** `schema/01_engine_capabilities.md` §10.4 (notifications + soft-fail); `doctrine/07_anti_patterns.md`.
 
 ---
 
@@ -132,7 +132,7 @@ The big beats — first night, pregnancy reveal, declaration — get HAND-writte
 
 The voice contract is "specificity, not literary density." Lane 2/3 prose can be specific ("the runner Diana picked out") without being literary (no interior monologue, no extended metaphor). Tier-3 is reserved for canvases the player will see once.
 
-**Cross-reference:** `doctrine/05_rts_flat_prose.md` *(Batch 2+ — pending; for now see `28th_april_TLS_Phase2_Redesign/30_TLS_Test_Redesign_PRD.md` §7.1)*; `doctrine/02_three_lanes_plus_capstone.md` §4 (Lane 4 voice register).
+**Cross-reference:** `doctrine/05_rts_flat_prose.md`; `doctrine/02_three_lanes_plus_capstone.md` §4 (Lane 4 voice register).
 
 ---
 
@@ -152,7 +152,7 @@ Each NPC's content declares its kink ceiling upfront. Frank goes full explicit. 
 
 Per-arc ceiling = per-arc TONE. Forcing one register flat across the cast produces sameness; the cast functions because the registers contrast.
 
-**Cross-reference:** `doctrine/08_kink_vocab_ceilings.md` *(Batch 2+ — pending; for now see `28th_april_TLS_Phase2_Redesign/30_TLS_Test_Redesign_PRD.md` §7.5)*.
+**Cross-reference:** `doctrine/08_kink_vocab_ceilings.md`.
 
 ---
 

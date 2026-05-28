@@ -837,7 +837,7 @@ Then it appears in the NPC portrait hub at the location, the player can click it
 - `doctrine/01_rts_principles.md` — P1–P10, especially P3 (one scene multiple lengths), P5 (lanes = fictional intent), P8 (author no-return; mechanize texture)
 - `doctrine/03_arc_shapes.md` — per-arc canvas distribution that drives lane budget
 - `doctrine/04_authoring_rules.md` — R1–R7 from Doc 56 + R1–R5 from Doc 57 + Doc 67 R1–R7
-- `doctrine/05_rts_flat_prose.md` *(Batch 2+ — pending)* — voice register (RTS-flat default; Tier-3 capstones)
+- `doctrine/05_rts_flat_prose.md` — voice register (RTS-flat default; Tier-3 capstones)
 - `doctrine/09_trait_catalog.md` — trait vocabulary used in lane gating
 
 ### Schema files
