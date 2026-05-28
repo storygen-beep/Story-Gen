@@ -504,7 +504,7 @@ Run before any commit that includes new canvas / capstone / quest card / Lane 3 
 - [ ] **D67-R2** — Stat cost placement decided (`exit_block.effects` vs `pre_substitution_effects`)
 - [ ] **D67-R3** — Menu-level gates on location button; dispatcher trusts the menu
 - [ ] **D67-R4** — Multi-NPC competition defaults to Pattern A; rule order = narrative priority
-- [ ] **D67-R5** — Pattern B only if mutually-exclusive variants; engine-extension status known
+- [ ] **D67-R5** — Pattern B only if mutually-exclusive variants; emit `exclusive_group` on each rule (Doc 69 Item 1, 2026-05-27)
 - [ ] **D67-R6** — `requires_npc` predicate matches walk-in direction (loose for Lane 3; strict for Lane 2)
 - [ ] **D67-R7** — Substitution target has `max_triggers_per_day = 1` + `substitution_only = true`
 - [ ] **D56-R3** — Substitution count respects per-arc-shape Lane 3 budget (family 4–7, slow-burn 1–3, peer 0, service 0, antagonist 0 own)

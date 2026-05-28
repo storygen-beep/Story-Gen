@@ -429,13 +429,12 @@ If browser MCP is disconnected, ask the user to connect it explicitly. **Do NOT 
 - **Solo activity body inline in the location hub** — conflates menu + dispatcher. Makes substitution authoring impossible. Caught by D67-R1.
 - **Time-of-day gate on the dispatcher** — button still renders, click routes to dispatcher, dispatcher bails. Wasted click. Caught by D67-R3.
 - **Multi-NPC substitution rules with no clear priority order** — sequential first-match means first rule has structural advantage. Caught by D67-R4 + brief.
-- **Pattern B authored as multiple Pattern A rules with chance values summing to < 1** — not mutual-exclusion-correct. Cumulative chance ≈ 1 − ∏(1 − cᵢ), not Σcᵢ. Caught by D67-R5.
-- **Stat cost in wrong placement** — if Exercise costs Energy only in the ELSE branch, the workout doesn't "count" when Grandpa walks in. Caught by D67-R2.
+- **Failing to emit `exclusive_group` when intent is mutex Pattern B** — true mutex variants (e.g., Brother grope vs Brother help-study at the same study desk attempt) authored as 2–3 independent Pattern A rules produces ~42% any-fire instead of true 50% (cumulative chance = 1 − ∏(1 − cᵢ), not Σcᵢ), AND fall-through promotes to the next rule instead of falling to solo. Engine support shipped Doc 69 Item 1 (2026-05-27, `v2.py:4671-4713`); emit `exclusive_group = "<name>"` on each rule. **No build error fires for the divergence.** Caught by D67-R5.
+- **Failing to emit `pre_substitution_effects` when activity has unconditional outcome** — e.g., Exercise grants `+fitness` regardless of NPC interrupt. Placing the effect only on the solo `exit_block` means the workout doesn't "count" when Grandpa walks in; duplicating the effect across every substitute canvas is the pre-2026-05-27 workaround. Since Doc 69 Item 2 shipped (`v2.py:11151`), declare the effect on the parent trigger's `pre_substitution_effects` and it runs before substitution `<<goto>>`. Caught by D67-R2.
 - **`GetNpcLocation == "Kitchen"` on a Lane 3 walk-in dispatcher** — too strict; NPC has to already be in the kitchen. Caught by D67-R6.
 - **No `max_triggers_per_day` on substitution target** — same scene firing 5 times in one day breaks the "once per day" cadence. Caught by D67-R7.
 - **Substitution target not marked `substitution_only`** — appears in the NPC portrait hub at the location; player can click it directly. Defeats the "you were doing X and he happened" fictional intent.
 - **Solo activity authoring without checking the per-arc-shape Lane 3 budget** — authoring 7 Frank substitutions when slice scope is 3 is drift. Caught by Doc 56 R3.
-- **Authoring against Pattern B or Pattern C assuming engine support** — current engine natively supports Pattern A only. Writing substitution rules expecting Pattern B's shared-dice partition or Pattern C's unconditional-effects-before-interrupt will silently produce wrong behavior. **No build error fires for either case.**
 
 ### §8.5 — From `00_LEGACY_IGNORE.md`
 
