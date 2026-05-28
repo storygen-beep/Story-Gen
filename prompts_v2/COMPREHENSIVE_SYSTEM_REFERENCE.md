@@ -602,7 +602,7 @@ Dataclass: `TemplateDailyTick` at `template_import.py:404`. Each `traitEffects` 
 
 ### §6.7 — Stage advancement (special-case)
 
-`applyAndNotifyTrait` at `v2.py:5077–5087` matches the trait name against `/^([a-z_]+)_stage$/` and, when `targetType === 'player'` + delta > 0:
+`applyAndNotifyTrait` at `v2.py:5183–5189` matches the trait name against `/^([a-z_]+)_stage$/` and, when `targetType === 'player'` + delta > 0:
 - Updates `setup.npc_arc_stages[slug]` registry.
 - Writes `game_state.stage_advancement_log[slug] = currentDay`.
 
@@ -687,7 +687,7 @@ Wired at `_validate_quests_cards` in `template_import.py:4469`. Validates Doc 50
 | `"trait_words"` | Banded prose label (Pure/Lewd/Slutty/Whore for corruption). 4 named bands. Raw number hidden. | `template_import.py:3032`+ |
 | `"trait_bar"` | Numeric bar with optional band-text overlay + color tiers. NPC-owner mode supported (`trait_owner = "npc"` + `npc_id`). | `template_import.py:3083`+ |
 | `"trait_status_text"` | Banded body-state text (Filthy/Dirty/Fresh/Clean for hygiene). Renders nothing when no band matches. | `template_import.py:3171`+ |
-| `"trait_decay_warning"` | Amber warning when a decaying trait dropped today AND is within range of a band gate. Sibling of `trait_status_text`. | `v1.py:7347` (renderer) |
+| `"trait_decay_warning"` | Amber warning when a decaying trait dropped today AND is within range of a band gate. Sibling of `trait_status_text`. | `v1.py:5620` (`getDecayWarnings` helper) + `v1.py:13850` (SugarCube template) |
 | (more: passes, inventory, etc.) | — | see `schema/02_toml_schema.md` |
 
 **Visibility doctrine** (Doc 68 §8): stage NEVER surfaces to any sidebar item. Antagonist awareness NEVER surfaces. See `doctrine/09_trait_catalog.md` §8.
@@ -799,7 +799,7 @@ arc_stages = [
 ]
 ```
 
-These are display strings only. The CURRENT stage integer lives at `player.core_traits.frank_stage`. Engine recognizes the `<slug>_stage` trait name pattern at `v2.py:5077–5087`.
+These are display strings only. The CURRENT stage integer lives at `player.core_traits.frank_stage`. Engine recognizes the `<slug>_stage` trait name pattern at `v2.py:5183–5189`.
 
 ---
 
@@ -7796,7 +7796,7 @@ intelligence = 0
 **Decay:** None (stages don't regress)
 **Sidebar render:** ❌ **HIDDEN** — never rendered to any sidebar item, never displayed in any player-facing UI surface.
 
-> **⚠️ STORAGE DOCTRINE:** Stage is stored as a **PLAYER trait keyed by NPC slug**, NOT as a trait on the NPC object. Trait name pattern: `<npc_slug>_stage` (e.g., `frank_stage`, `ryan_stage`, `jake_stage`) at `player.core_traits.<slug>_stage`. Engine special-cases this at `v2.py:5077-5087` (`applyAndNotifyTrait` recognizes the regex `/^([a-z_]+)_stage$/` and updates `setup.npc_arc_stages` registry on upward delta). The NPC's `arc_stages = [...]` declaration on `[[npcs]]` is just the LIST of stage NAMES (display strings); the CURRENT stage value lives on player.
+> **⚠️ STORAGE DOCTRINE:** Stage is stored as a **PLAYER trait keyed by NPC slug**, NOT as a trait on the NPC object. Trait name pattern: `<npc_slug>_stage` (e.g., `frank_stage`, `ryan_stage`, `jake_stage`) at `player.core_traits.<slug>_stage`. Engine special-cases this at `v2.py:5183-5189` (`applyAndNotifyTrait` recognizes the regex `/^([a-z_]+)_stage$/` and updates `setup.npc_arc_stages` registry on upward delta). The NPC's `arc_stages = [...]` declaration on `[[npcs]]` is just the LIST of stage NAMES (display strings); the CURRENT stage value lives on player.
 
 > **⚠️ PLAYER-FACING DOCTRINE:** Per LO Q1 — *"Stage shouldn't be a player-facing thing."* See §9 for the full stage-handling doctrine including how the player feels progression without seeing a stage number.
 
@@ -8259,7 +8259,7 @@ Per LO Q1 — *"Stage shouldn't be a player-facing thing."* Stage is the canonic
 
 Stage is stored as a **player-namespace trait keyed by NPC slug**: `player.core_traits.<slug>_stage`. The NPC's `arc_stages = [...]` declaration on `[[npcs]]` is just the LIST of stage NAMES (display strings used by the optional `stage_label` sidebar item — which doctrine FORBIDS using for player-facing rendering); the CURRENT stage integer lives on the player object.
 
-Engine recognition: `applyAndNotifyTrait` at `v2.py:5077-5087` matches the trait name against `/^([a-z_]+)_stage$/` and, when `targetType === 'player'` + delta > 0, updates `setup.npc_arc_stages` registry + writes `game_state.stage_advancement_log[slug] = currentDay`.
+Engine recognition: `applyAndNotifyTrait` at `v2.py:5183-5189` matches the trait name against `/^([a-z_]+)_stage$/` and, when `targetType === 'player'` + delta > 0, updates `setup.npc_arc_stages` registry + writes `game_state.stage_advancement_log[slug] = currentDay`.
 
 **Mutation syntax (advance Frank to stage 2):**
 
@@ -8406,7 +8406,7 @@ The player understands the arc moved without needing a stat number. RTS calls th
 
 - `applyAndNotifyTrait` (`v2.py:5174`) — core trait mutation
 - `triggerConditionsSatisfied` (`v2.py:3275`) — predicate evaluation
-- Stage advancement detection (`v2.py:5077-5087`) — `<slug>_stage` regex recognition
+- Stage advancement detection (`v2.py:5183-5189`) — `<slug>_stage` regex recognition
 - `_player_trait_keys` validator (`template_import.py:2382-2547`) — hard-rejects undeclared traits in sidebar items
 
 ---
