@@ -22,12 +22,12 @@ If a downstream file in `prompts_v2/` cites a legacy term, the citation is the b
 
 | Concern | Legacy location | Replaced by |
 |---|---|---|
-| Game-book authoring prompt | `prompts/game_book_prompt_v6.txt` (frozen 2026-04-19) | `prompts_v2/stages/01_game_book_prompt.md` *(Batch 3+ — pending)* |
-| TOML authoring prompt | `prompts/toml_generation_prompt_v4.txt` (frozen 2026-04-19) | `prompts_v2/stages/02_toml_generation_prompt.md` *(Batch 3+ — pending)* |
+| Game-book authoring prompt | `prompts/game_book_prompt_v6.txt` (frozen 2026-04-19) | `prompts_v2/stages/01_game_book_prompt.md` |
+| TOML authoring prompt | `prompts/toml_generation_prompt_v4.txt` (frozen 2026-04-19) | `prompts_v2/stages/02_toml_generation_prompt.md` |
 | Doctrine spec | `prompts/game_design_rules.md` + `game_design_patterns.md` + `game_design_motivations.md` + `game_design_observations.md` | `prompts_v2/doctrine/01–09` (complete: 01 / 02 / 03 / 04 / 05 / 06 / 07 / 08 / 09) |
-| Engine schema reference | `prompts/COMPREHENSIVE_SYSTEM_REFERENCE.md` (embeds v3, no Docs 24–65) | `prompts_v2/schema/01–03` + regenerated `prompts_v2/COMPREHENSIVE_SYSTEM_REFERENCE.md` *(regen Batch 3+)* |
+| Engine schema reference | `prompts/COMPREHENSIVE_SYSTEM_REFERENCE.md` (embeds v3, no Docs 24–65) | `prompts_v2/schema/01–03` + regenerated `prompts_v2/COMPREHENSIVE_SYSTEM_REFERENCE.md` |
 | Reference-game extraction | Jack's World + New In Town walkthroughs implicit in v6 | `prompts_v2/reference/01–04` (RTS only) |
-| Media / image / listing prompts | `prompts/image_finder_prompt.md` + `prompts/game_listing_prompt.md` | `prompts_v2/stages/03–04` (ported) *(Batch 3+ — pending)* |
+| Media / image / listing prompts | `prompts/image_finder_prompt.md` + `prompts/game_listing_prompt.md` | `prompts_v2/stages/03–04` (ported) |
 
 The legacy `prompts/` folder stays in place as historical record (LO decision §6.7 — no migration, no archival move). It is not consulted, not cited, not "carried over."
 
