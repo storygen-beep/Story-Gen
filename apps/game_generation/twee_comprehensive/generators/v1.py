@@ -1103,6 +1103,31 @@ setup.getWornStatMax = function(field) {
 setup.getWornBeauty = function() { return setup.getWornStatMax('beauty'); };
 setup.getWornCorruption = function() { return setup.getWornStatMax('corruption'); };
 
+// Doc 72 / Doc 71 R2 — Outfit-category aggregator. Returns array of unique
+// non-empty `type` strings across all currently-equipped items. Used by the
+// `worn_type` predicate. Returns array (not Set) for SugarCube serialization
+// compatibility — callers use indexOf to test membership.
+setup.getWornTypes = function() {
+    if (!setup.clothing_enabled) return [];
+    var sv = State.variables;
+    var eq = (sv.player && sv.player.equipped) || {};
+    var cdata = setup.clothing_data || [];
+    var types = [];
+    for (var slot in eq) {
+        if (!eq.hasOwnProperty(slot)) continue;
+        var id = eq[slot];
+        if (!id) continue;
+        for (var i = 0; i < cdata.length; i++) {
+            if (cdata[i].id === id) {
+                var t = cdata[i].type || '';
+                if (t && types.indexOf(t) === -1) types.push(t);
+                break;
+            }
+        }
+    }
+    return types;
+};
+
 setup.isSlotDisabled = function(slotName) {
     var sv = State.variables;
     if (!sv.player || !sv.player.equipped) return false;
@@ -3311,6 +3336,27 @@ setup.triggerConditionsSatisfied = function(conditions) {{
                     ? setup.getWornBeauty()
                     : setup.getWornCorruption();
                 satisfied = compare(wornOp, wornCur, wornVal);
+                results.push(satisfied);
+                continue;
+            }}
+
+            // Doc 72 — worn_type: outfit-category gate. `eq` returns true when
+            // any equipped item declares the matching type; `neq` is the
+            // inverse. Empty value never matches (defensive). Doc 71 R2.
+            if (type === 'worn_type') {{
+                if (!setup.clothing_enabled) {{ results.push(false); continue; }}
+                var wtOp = it.operator || 'eq';
+                var wtVal = it.value || '';
+                var wornT = setup.getWornTypes();
+                if (!wtVal) {{
+                    satisfied = false;
+                }} else if (wtOp === 'eq') {{
+                    satisfied = wornT.indexOf(wtVal) !== -1;
+                }} else if (wtOp === 'neq') {{
+                    satisfied = wornT.indexOf(wtVal) === -1;
+                }} else {{
+                    satisfied = false;
+                }}
                 results.push(satisfied);
                 continue;
             }}
@@ -6858,6 +6904,16 @@ setup.formatCanvasConditions = function(conditions) {{
             var wbOp = item.operator || "gte";
             var wbSym = wbOp === "gt" ? ">" : wbOp === "lte" ? "≤" : wbOp === "lt" ? "<" : wbOp === "eq" ? "=" : "≥";
             parts.push("Appearance " + wbSym + " " + (item.value || 0));
+        }}
+        else if (item.type === "worn_type") {{
+            // Doc 72 / Doc 71 R2 — outfit-category gate
+            var wtOpFmt = item.operator || "eq";
+            var wtValFmt = item.value || "?";
+            if (wtOpFmt === "neq") {{
+                parts.push("Not wearing " + wtValFmt);
+            }} else {{
+                parts.push("Wearing " + wtValFmt);
+            }}
         }}
         else if (item.type === "pass") {{
             var pConf = setup.passes_map[item.pass_id || ''];
@@ -13717,17 +13773,80 @@ if (clothingMsg) {
       </div>
     <</if>>
   <<elseif _item.type is "trait_bar">>
-    <<set _traitKey to _item.trait>>
-    <<set _traitVal to ($player && $player.core_traits) ? ($player.core_traits[_traitKey] || 0) : 0>>
+    <<set _tbOwner to _item.trait_owner || "player">>
+    <<set _tbKey to _item.trait>>
+    <<if _tbOwner is "npc">>
+      <<set _tbNpcId to _item.npc_id>>
+      <<set _tbNpcObj to (setup.npc_slug_map && setup.npc_slug_map[_tbNpcId]) ? State.variables.npcs[setup.npc_slug_map[_tbNpcId]] : (State.variables.npcs ? State.variables.npcs[_tbNpcId] : null)>>
+      <<set _traitVal to (_tbNpcObj && _tbNpcObj.core_traits) ? (_tbNpcObj.core_traits[_tbKey] || 0) : 0>>
+    <<else>>
+      <<set _traitVal to ($player && $player.core_traits) ? ($player.core_traits[_tbKey] || 0) : 0>>
+    <</if>>
     <<set _traitMax to _item.max || 100>>
-    <<set _traitLabel to _item.label || _traitKey>>
+    <<set _traitLabel to _item.label || _tbKey>>
     <<set _traitPct to Math.max(0, Math.min(100, (_traitVal / _traitMax) * 100))>>
+    <<set _tbTier to "">>
+    <<if _item.color_tiers>>
+      <<for _ti to 0; _ti lt _item.color_tiers.length; _ti++>>
+        <<if _tbTier is "" and _traitPct lte (_item.color_tiers[_ti].up_to)>>
+          <<set _tbTier to _item.color_tiers[_ti].class>>
+        <</if>>
+      <</for>>
+    <</if>>
+    <<set _tbBandText to "">>
+    <<set _tbBandIcon to "">>
+    <<if _item.bands>>
+      <<for _bi to 0; _bi lt _item.bands.length; _bi++>>
+        <<set _bb to _item.bands[_bi]>>
+        <<if _tbBandText is "" and _bb.min isnot undefined and _bb.max isnot undefined and _traitVal gte _bb.min and _traitVal lte _bb.max>>
+          <<set _tbBandText to _bb.text>>
+          <<set _tbBandIcon to _bb.icon || "">>
+        <</if>>
+      <</for>>
+    <</if>>
     <div class="sidebar-item trait-bar-item" id="sidebar-trait-bar-<<print _si>>">
-      <div class="trait-bar-label"><<print _traitLabel>>: <<print Math.floor(_traitVal)>> / <<print _traitMax>></div>
+      <div class="trait-bar-label">
+        <<if _item.hide_value is true>>
+          <<print _traitLabel>>
+        <<else>>
+          <<print _traitLabel>>: <<print Math.floor(_traitVal)>> / <<print _traitMax>>
+        <</if>>
+      </div>
       <div class="trait-bar-bg">
-        <div class="trait-bar-fill" style="width: <<print _traitPct>>%"></div>
+        <div class="trait-bar-fill <<print _tbTier>>" style="width: <<print _traitPct>>%"></div>
+        <<if _tbBandText isnot "">>
+          <span class="trait-bar-band-text"><<print (_tbBandIcon ? _tbBandIcon + " " : "") + _tbBandText>></span>
+        <</if>>
       </div>
     </div>
+  <<elseif _item.type is "trait_status_text">>
+    <<set _tsOwner to _item.trait_owner || "player">>
+    <<set _tsKey to _item.trait>>
+    <<if _tsOwner is "npc">>
+      <<set _tsNpcId to _item.npc_id>>
+      <<set _tsNpcObj to (setup.npc_slug_map && setup.npc_slug_map[_tsNpcId]) ? State.variables.npcs[setup.npc_slug_map[_tsNpcId]] : (State.variables.npcs ? State.variables.npcs[_tsNpcId] : null)>>
+      <<set _tsVal to (_tsNpcObj && _tsNpcObj.core_traits) ? (_tsNpcObj.core_traits[_tsKey] || 0) : 0>>
+    <<else>>
+      <<set _tsVal to ($player && $player.core_traits) ? ($player.core_traits[_tsKey] || 0) : 0>>
+    <</if>>
+    <<set _tsText to "">>
+    <<set _tsIcon to "">>
+    <<if _item.bands>>
+      <<for _bi to 0; _bi lt _item.bands.length; _bi++>>
+        <<set _bb to _item.bands[_bi]>>
+        <<set _bMin to (_bb.min isnot undefined) ? _bb.min : -1e9>>
+        <<set _bMax to (_bb.max isnot undefined) ? _bb.max : 1e9>>
+        <<if _tsText is "" and _tsVal gte _bMin and _tsVal lte _bMax>>
+          <<set _tsText to _bb.text>>
+          <<set _tsIcon to _bb.icon || "">>
+        <</if>>
+      <</for>>
+    <</if>>
+    <<if _tsText isnot "">>
+      <div class="sidebar-item trait-status-text-item">
+        <<print (_tsIcon ? _tsIcon + " " : "") + _tsText>>
+      </div>
+    <</if>>
   <<elseif _item.type is "trait_decay_warning">>
     <!-- E20: render an amber warning when a decaying trait dropped today AND
          is within 2.0 of its next stage gate. setup.getDecayWarnings() walks
@@ -15256,6 +15375,18 @@ if (clothingMsg) {
     line-height: 1.35;
 }
 
+/* ===== Sidebar trait_status_text (body-state needs) ===== */
+.trait-status-text-item {
+    margin-top: 0.5rem;
+    padding: 6px 10px;
+    background: rgba(99, 179, 237, 0.14);
+    border-left: 3px solid rgba(99, 179, 237, 0.75);
+    border-radius: 4px;
+    color: var(--theme-text);
+    font-size: 0.78rem;
+    line-height: 1.35;
+}
+
 /* ===== Sidebar trait bar ===== */
 .trait-bar-item {
     margin-top: 0.5rem;
@@ -15270,12 +15401,49 @@ if (clothingMsg) {
     background: #1a1a2a;
     border-radius: 4px;
     overflow: hidden;
+    position: relative;
 }
 .trait-bar-fill {
     height: 100%;
     background: linear-gradient(90deg, var(--theme-warning), var(--theme-success));
     border-radius: 4px;
     transition: width 0.3s ease;
+}
+/* Banded mode: when a trait_bar's band-text overlay is rendered, the bg grows
+   to fit the overlay text. Height = font-size 0.75rem (~12px) + ~8px vertical
+   breathing room each side so the band text doesn't kiss the top/bottom
+   borders. Gated via :has() so non-banded bars stay at the 8px default. */
+.trait-bar-bg:has(.trait-bar-band-text) {
+    height: 28px;
+    border-radius: 6px;
+}
+.trait-bar-band-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+    pointer-events: none;
+    z-index: 2;
+    white-space: nowrap;
+}
+/* Built-in color tier gradients — RTS-matched. Authors can override by shipping
+   their own .trait-bar-fill.<class> rules for arbitrary class names. */
+.trait-bar-fill.low {
+    background: linear-gradient(90deg, #2196f3, #1976d2);
+    box-shadow: 0 0 6px rgba(33, 150, 243, 0.3);
+}
+.trait-bar-fill.medium {
+    background: linear-gradient(90deg, #ff9800, #ff5722);
+    box-shadow: 0 0 6px rgba(255, 152, 0, 0.3);
+}
+.trait-bar-fill.high {
+    background: linear-gradient(90deg, #ff6b6b, #ff1744);
+    box-shadow: 0 0 6px rgba(255, 107, 107, 0.3);
 }
 
 /* Dev Mode Controls */

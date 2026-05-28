@@ -152,6 +152,13 @@ class TemplateLocation:
 
 VALID_CLOTHING_SLOTS = {"bra", "underwear", "top", "bottom", "dress", "legwear", "shoes"}
 
+# Soft-guidance type catalog for the `type` field on clothing items (Doc 72 / Doc 71 R2).
+# Authors can use any string — this is the typo-catch reference set, not a closed allowlist.
+# The `worn_type` predicate matches against whatever string the item declares.
+RECOMMENDED_CLOTHING_TYPES = {
+    "casual", "swim", "costume", "schoolwear", "fitness", "uniform", "sleepwear",
+}
+
 
 @dataclass
 class TemplateClothingItem:
@@ -165,6 +172,8 @@ class TemplateClothingItem:
     beauty: int = 0  # Appearance contribution of this garment (worn_beauty reads MAX)
     corruption: int = 0  # How revealing/lewd; worn_corruption reads MAX. Routes
     # content only — never mutates the global player.corruption core_trait.
+    type: str = ""  # Optional category tag ("swim", "costume", etc.); read by `worn_type`
+    # predicate. Doc 72 / Doc 71 R2. Empty string = untyped; worn_type matches return false.
 
 
 @dataclass
@@ -1148,6 +1157,46 @@ def _validate_predicate_items_block(
     for ii, item in enumerate(items):
         errors.extend(_validate_predicate_field_names(item, f"{ctx}.items[{ii}]"))
     return errors
+
+
+# Doc 72 — `worn_type` predicate validator. Soft typo-catch: if a condition
+# references `worn_type == "X"` but no clothing item declares `type = "X"`,
+# emit a WARN naming the bad value. Plus an info note if `X` is outside the
+# RECOMMENDED_CLOTHING_TYPES set (uncommon type — confirm intentional). Never
+# errors — build proceeds.
+
+def _validate_worn_type_items_block(
+    cond_block: Any, ctx: str, known_types: set, recommended_types: set
+) -> List[str]:
+    """Walk a `{version, logic, items: [...]}` condition block and validate
+    `worn_type` predicate values against the catalog's declared `type` set.
+    Returns flat list of warning messages."""
+    if not isinstance(cond_block, dict):
+        return []
+    items = cond_block.get("items")
+    if not isinstance(items, list):
+        return []
+    warnings: List[str] = []
+    for ii, item in enumerate(items):
+        if not isinstance(item, dict):
+            continue
+        if item.get("type") != "worn_type":
+            continue
+        value = item.get("value", "")
+        if not isinstance(value, str) or not value:
+            continue
+        item_ctx = f"{ctx}.items[{ii}]"
+        if value not in known_types:
+            warnings.append(
+                f"WARN: {item_ctx} worn_type references '{value}' but no clothing "
+                f"item declares type='{value}'. Possible typo. (Doc 72)"
+            )
+        elif value not in recommended_types:
+            warnings.append(
+                f"INFO: {item_ctx} worn_type uses uncommon type '{value}' — "
+                f"confirm intentional. Recommended: {sorted(recommended_types)}. (Doc 72)"
+            )
+    return warnings
 
 
 # Doc 69 Item 4 — Undeclared trait validator.
@@ -2186,6 +2235,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     price=int(c_raw.get("price", 0)),
                     beauty=_require_int(c_raw, "beauty", 0),
                     corruption=_require_int(c_raw, "corruption", 0),
+                    type=_require_str(c_raw, "type", ""),
                 )
             )
 
@@ -2724,6 +2774,11 @@ def validate(template: GameTemplate) -> List[str]:
         template.player.core_traits if template.player else {},
         template.npcs,
     )
+    # Doc 72 — collect known clothing types from the catalog so the worn_type
+    # walker can typo-catch references to types no item declares.
+    _known_clothing_types = {
+        ci.type for ci in (template.clothing_items or []) if ci.type
+    }
     _validate_warnings: List[str] = []
 
     def _check_cond_block(cond_block: Any, ctx: str) -> None:
@@ -2736,6 +2791,10 @@ def validate(template: GameTemplate) -> List[str]:
         )
         errors.extend(td_errs)
         _validate_warnings.extend(td_warns)
+        # Doc 72 — worn_type typo-catch (warnings only, never blocks build)
+        _validate_warnings.extend(_validate_worn_type_items_block(
+            cond_block, ctx, _known_clothing_types, RECOMMENDED_CLOTHING_TYPES,
+        ))
 
     for ci, canvas in enumerate(template.canvases or []):
         canvas_ctx_id = canvas.id or f"<canvas[{ci}]>"
@@ -2809,10 +2868,15 @@ def validate(template: GameTemplate) -> List[str]:
 
     # Doc 69 Item 4 — emit any trait-declaration warnings collected during the
     # validate() walk (e.g., stage-trait-without-arc_stages edge cases).
+    # Doc 72 — also catches worn_type typo / uncommon-type INFO notes.
+    # Warnings are emitted via the warnings module (legacy) AND attached to the
+    # template (for test introspection).
     if _validate_warnings:
         import warnings as _w
         for _warn_msg in _validate_warnings:
             _w.warn(_warn_msg, UserWarning, stacklevel=2)
+    # Always attach (empty list if no warnings) so tests can introspect cleanly.
+    template._validate_warnings = _validate_warnings
 
     # project
     if not template.project.title:
@@ -5370,6 +5434,7 @@ def create_project_from_template(
                     "price": ci.price,
                     "beauty": ci.beauty,
                     "corruption": ci.corruption,
+                    "type": ci.type,  # Doc 72 — outfit-category tag for worn_type predicate
                 }
                 for ci in template.clothing_items
             ],

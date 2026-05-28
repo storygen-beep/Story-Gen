@@ -191,6 +191,372 @@ class TraitWordsSidebarTests(SimpleTestCase):
         self.assertEqual(errors, [], errors)
 
 
+# -- Generic colored-bar-with-bands primitive (trait_bar bands + color_tiers) --
+
+
+class TraitBarSidebarTests(SimpleTestCase):
+    """Validation for the generic trait_bar primitive — optional bands +
+    color_tiers + hide_value on top of today's plain bar."""
+
+    def _with_sidebar(self, item):
+        d = _base_toml()
+        d["sidebar_items"] = [item]
+        return d
+
+    def _minimal(self, **overrides):
+        item = {"type": "trait_bar", "trait": "hygiene", "label": "Hygiene", "max": 100}
+        item.update(overrides)
+        return item
+
+    # -- baseline (today's behavior, unchanged) ---------------------------
+
+    def test_minimal_trait_only_passes(self):
+        template = normalize(self._with_sidebar(self._minimal()))
+        errors = validate(template)
+        self.assertEqual(errors, [], f"Plain trait_bar should validate cleanly: {errors}")
+
+    def test_missing_trait_fails(self):
+        item = {"type": "trait_bar", "label": "Hygiene", "max": 100}
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("'trait' is required" in e for e in errors), errors)
+
+    def test_player_owner_unknown_trait_fails(self):
+        item = self._minimal(trait="magnetism")
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(
+            any("'magnetism' not found in player.core_traits" in e for e in errors), errors
+        )
+
+    # -- trait_owner = "npc" ---------------------------------------------
+
+    def test_npc_owner_missing_npc_id_fails(self):
+        item = self._minimal(trait_owner="npc", trait="trust")
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("'npc_id' is required" in e for e in errors), errors)
+
+    def test_npc_owner_unknown_npc_id_fails(self):
+        item = self._minimal(trait_owner="npc", npc_id="npc_ghost", trait="trust")
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("'npc_ghost' not found" in e for e in errors), errors)
+
+    def test_npc_owner_valid(self):
+        item = self._minimal(trait_owner="npc", npc_id="npc_frank", trait="trust")
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertEqual(errors, [], errors)
+
+    # -- max field --------------------------------------------------------
+
+    def test_max_zero_fails(self):
+        item = self._minimal(max=0)
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("'max' must be a positive number" in e for e in errors), errors)
+
+    def test_max_negative_fails(self):
+        item = self._minimal(max=-5)
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("'max' must be a positive number" in e for e in errors), errors)
+
+    def test_max_string_fails(self):
+        item = self._minimal(max="ten")
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("'max' must be a positive number" in e for e in errors), errors)
+
+    # -- bands ------------------------------------------------------------
+
+    def test_bands_valid(self):
+        item = self._minimal(
+            bands=[
+                {"min": 0, "max": 0, "icon": "❄️", "text": "Calm"},
+                {"min": 1, "max": 50, "icon": "🔥", "text": "Warm"},
+                {"min": 51, "max": 100, "icon": "🔥", "text": "Hot"},
+            ]
+        )
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertEqual(errors, [], errors)
+
+    def test_bands_empty_list_fails(self):
+        item = self._minimal(bands=[])
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("'bands' must be a non-empty list" in e for e in errors), errors)
+
+    def test_band_missing_min_fails(self):
+        item = self._minimal(bands=[{"max": 10, "text": "x"}])
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("requires both 'min' and 'max'" in e for e in errors), errors)
+
+    def test_band_missing_max_fails(self):
+        item = self._minimal(bands=[{"min": 0, "text": "x"}])
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("requires both 'min' and 'max'" in e for e in errors), errors)
+
+    def test_band_flag_mode_rejected(self):
+        item = self._minimal(bands=[{"flag": "frank_caught", "text": "x"}])
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(
+            any("'flag' is not supported on trait_bar bands" in e for e in errors), errors
+        )
+
+    def test_band_min_greater_than_max_fails(self):
+        item = self._minimal(bands=[{"min": 50, "max": 10, "text": "x"}])
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("min (50)" in e and "max (10)" in e for e in errors), errors)
+
+    def test_band_missing_text_fails(self):
+        item = self._minimal(bands=[{"min": 0, "max": 10}])
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("missing 'text'" in e for e in errors), errors)
+
+    def test_band_icon_non_string_fails(self):
+        item = self._minimal(bands=[{"min": 0, "max": 10, "text": "x", "icon": 42}])
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("'icon' must be a string" in e for e in errors), errors)
+
+    # -- color_tiers ------------------------------------------------------
+
+    def test_color_tiers_valid(self):
+        item = self._minimal(
+            color_tiers=[
+                {"up_to": 40, "class": "low"},
+                {"up_to": 70, "class": "medium"},
+                {"up_to": 100, "class": "high"},
+            ]
+        )
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertEqual(errors, [], errors)
+
+    def test_color_tiers_empty_list_fails(self):
+        item = self._minimal(color_tiers=[])
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(
+            any("'color_tiers' must be a non-empty list" in e for e in errors), errors
+        )
+
+    def test_color_tier_up_to_out_of_range_fails(self):
+        item = self._minimal(color_tiers=[{"up_to": 150, "class": "high"}])
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(
+            any("'up_to' must be a number between 0 and 100" in e for e in errors), errors
+        )
+
+    def test_color_tiers_unsorted_fails(self):
+        item = self._minimal(
+            color_tiers=[
+                {"up_to": 70, "class": "medium"},
+                {"up_to": 40, "class": "low"},
+            ]
+        )
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(
+            any("must be sorted ascending" in e for e in errors), errors
+        )
+
+    def test_color_tier_missing_class_fails(self):
+        item = self._minimal(color_tiers=[{"up_to": 50}])
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("'class' is required" in e for e in errors), errors)
+
+    def test_color_tier_class_empty_string_fails(self):
+        item = self._minimal(color_tiers=[{"up_to": 50, "class": ""}])
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("'class' is required" in e for e in errors), errors)
+
+    # -- hide_value --------------------------------------------------------
+
+    def test_hide_value_true_valid(self):
+        item = self._minimal(
+            bands=[{"min": 0, "max": 100, "text": "x"}], hide_value=True
+        )
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertEqual(errors, [], errors)
+
+    def test_hide_value_non_bool_fails(self):
+        item = self._minimal(hide_value="yes")
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("'hide_value' must be a boolean" in e for e in errors), errors)
+
+
+# -- trait_status_text sidebar primitive ------------------------------------
+
+
+class TraitStatusTextSidebarTests(SimpleTestCase):
+    """Validation for the passive body-state sidebar primitive — banded text
+    driven by a stat threshold. Sibling of trait_decay_warning (event-based,
+    auto-emitted) but authored, threshold-driven, continuous."""
+
+    def _with_sidebar(self, item):
+        d = _base_toml()
+        d["sidebar_items"] = [item]
+        return d
+
+    def _minimal(self, **overrides):
+        item = {
+            "type": "trait_status_text",
+            "trait": "hygiene",
+            "bands": [{"max": 30, "text": "Ugh, I really need a shower."}],
+        }
+        item.update(overrides)
+        return item
+
+    # -- baseline ---------------------------------------------------------
+
+    def test_minimal_valid(self):
+        template = normalize(self._with_sidebar(self._minimal()))
+        errors = validate(template)
+        self.assertEqual(errors, [], errors)
+
+    def test_missing_trait_fails(self):
+        item = self._minimal()
+        del item["trait"]
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("'trait' is required" in e for e in errors), errors)
+
+    def test_player_owner_unknown_trait_fails(self):
+        item = self._minimal(trait="magnetism")
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(
+            any("'magnetism' not found in player.core_traits" in e for e in errors), errors
+        )
+
+    # -- trait_owner = "npc" ---------------------------------------------
+
+    def test_npc_owner_missing_npc_id_fails(self):
+        item = self._minimal(trait_owner="npc", trait="trust")
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("'npc_id' is required" in e for e in errors), errors)
+
+    def test_npc_owner_unknown_npc_id_fails(self):
+        item = self._minimal(trait_owner="npc", npc_id="npc_ghost", trait="trust")
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("'npc_ghost' not found" in e for e in errors), errors)
+
+    def test_npc_owner_valid(self):
+        item = self._minimal(trait_owner="npc", npc_id="npc_frank", trait="trust")
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertEqual(errors, [], errors)
+
+    def test_invalid_trait_owner_fails(self):
+        item = self._minimal(trait_owner="world")
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(
+            any("must be 'player' or 'npc'" in e for e in errors), errors
+        )
+
+    # -- bands ------------------------------------------------------------
+
+    def test_bands_missing_fails(self):
+        item = {"type": "trait_status_text", "trait": "hygiene"}
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("'bands' must be a non-empty list" in e for e in errors), errors)
+
+    def test_bands_empty_list_fails(self):
+        item = self._minimal(bands=[])
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("'bands' must be a non-empty list" in e for e in errors), errors)
+
+    def test_band_with_only_max_valid(self):
+        # "Below 30" style — the most common authoring pattern. min is optional.
+        item = self._minimal(bands=[{"max": 30, "text": "low"}])
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertEqual(errors, [], errors)
+
+    def test_band_with_only_min_valid(self):
+        # "Above 70" style — also valid.
+        item = self._minimal(bands=[{"min": 70, "text": "high"}])
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertEqual(errors, [], errors)
+
+    def test_band_with_neither_bound_fails(self):
+        # A band with neither min nor max would always match — meaningless.
+        item = self._minimal(bands=[{"text": "always"}])
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(
+            any("must provide at least one of 'min' or 'max'" in e for e in errors), errors
+        )
+
+    def test_band_min_greater_than_max_fails(self):
+        item = self._minimal(bands=[{"min": 50, "max": 10, "text": "x"}])
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("min (50)" in e and "max (10)" in e for e in errors), errors)
+
+    def test_band_missing_text_fails(self):
+        item = self._minimal(bands=[{"max": 30}])
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("missing 'text'" in e for e in errors), errors)
+
+    def test_band_empty_text_fails(self):
+        item = self._minimal(bands=[{"max": 30, "text": ""}])
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("'text' must be a non-empty string" in e for e in errors), errors)
+
+    def test_band_min_non_number_fails(self):
+        item = self._minimal(bands=[{"min": "low", "text": "x"}])
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("'min' must be a number" in e for e in errors), errors)
+
+    def test_band_max_non_number_fails(self):
+        item = self._minimal(bands=[{"max": "high", "text": "x"}])
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("'max' must be a number" in e for e in errors), errors)
+
+    def test_band_icon_non_string_fails(self):
+        item = self._minimal(bands=[{"max": 30, "text": "x", "icon": 42}])
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertTrue(any("'icon' must be a string" in e for e in errors), errors)
+
+    def test_multi_band_escalation_valid(self):
+        # Typical TLS shape: severe first (lower max), softer after.
+        item = self._minimal(
+            bands=[
+                {"max": 30, "icon": "💧", "text": "Ugh, I really need a shower."},
+                {"max": 60, "icon": "💧", "text": "I'm starting to feel grimy."},
+            ]
+        )
+        template = normalize(self._with_sidebar(item))
+        errors = validate(template)
+        self.assertEqual(errors, [], errors)
+
+
 # -- F3: player.trait_decay --------------------------------------------------
 
 
@@ -5087,6 +5453,198 @@ class WornClothingStatsTests(TestCase):
         self.assertIn('"corruption": 30', twee)
 
 
+class Doc72ClothingTypeTests(TestCase):
+    """Doc 72: `type` field on clothing items + `worn_type` v1.0-condition
+    predicate. Outfit-category gate (Doc 71 R2) — `worn_type == 'swim'` fires
+    when any equipped item declares type='swim'. Static-emission tests against
+    the generated Twee + project metadata.
+    """
+
+    @classmethod
+    def setUpTestData(cls):
+        User = get_user_model()
+        cls.user = User.objects.create_user(
+            email="doc72-clothing-type-test@example.com", password="testpass123"
+        )
+        with open(FIXTURE_PATH, "rb") as f:
+            cls.toml_data = tomli.load(f)
+
+    def _generate(self, toml_dict):
+        template = normalize(copy.deepcopy(toml_dict))
+        errors = validate(template)
+        self.assertEqual(errors, [], f"Template should validate clean: {errors}")
+        result = create_project_from_template(template, str(self.user.id))
+        project = Project.objects.get(id=result["project_id"])
+        from apps.game_generation.twee_comprehensive.generators.v1 import (
+            TweeComprehensiveGeneratorV1,
+        )
+        twee = TweeComprehensiveGeneratorV1().generate(project)
+        return project, twee
+
+    def _clothing_typed_toml(self):
+        """Three items: one swim-typed, one casual-typed, one untyped."""
+        data = copy.deepcopy(self.toml_data)
+        data.setdefault("settings", {})["clothing_enabled"] = True
+        data["clothing"] = [
+            {
+                "id": "bikini_top",
+                "name": "Bikini Top",
+                "slot": "top",
+                "initial": True,
+                "type": "swim",
+                "beauty": 4,
+                "corruption": 30,
+            },
+            {
+                "id": "casual_top",
+                "name": "Casual Top",
+                "slot": "top",
+                "type": "casual",
+                "beauty": 2,
+            },
+            {
+                "id": "untyped_bottom",
+                "name": "Untyped Bottom",
+                "slot": "bottom",
+                "initial": True,
+            },
+        ]
+        return data
+
+    # --- schema round-trip --------------------------------------------------
+
+    def test_type_field_round_trips_through_template(self):
+        data = self._clothing_typed_toml()
+        template = normalize(copy.deepcopy(data))
+        by_id = {ci.id: ci for ci in template.clothing_items}
+        self.assertEqual(by_id["bikini_top"].type, "swim")
+        self.assertEqual(by_id["casual_top"].type, "casual")
+        # Omitted defaults to empty string.
+        self.assertEqual(by_id["untyped_bottom"].type, "")
+
+    def test_type_field_carries_into_project_metadata(self):
+        project, _ = self._generate(self._clothing_typed_toml())
+        items = project.metadata["clothing_settings"]["items"]
+        by_id = {it["id"]: it for it in items}
+        self.assertEqual(by_id["bikini_top"]["type"], "swim")
+        self.assertEqual(by_id["casual_top"]["type"], "casual")
+        self.assertEqual(by_id["untyped_bottom"]["type"], "")
+
+    def test_backcompat_no_type_field(self):
+        """Clothing TOMLs without any `type` declarations still parse cleanly."""
+        data = copy.deepcopy(self.toml_data)
+        data.setdefault("settings", {})["clothing_enabled"] = True
+        data["clothing"] = [
+            {"id": "plain_top", "name": "Plain", "slot": "top", "initial": True},
+        ]
+        template = normalize(copy.deepcopy(data))
+        self.assertEqual(template.clothing_items[0].type, "")
+        errors = validate(template)
+        self.assertEqual(errors, [])
+
+    # --- aggregate emission -------------------------------------------------
+
+    def test_getWornTypes_emitted_when_clothing_enabled(self):
+        _, twee = self._generate(self._clothing_typed_toml())
+        self.assertIn("setup.getWornTypes = function", twee)
+
+    def test_getWornTypes_absent_when_clothing_disabled(self):
+        _, twee = self._generate(self.toml_data)
+        self.assertNotIn("setup.getWornTypes = function", twee)
+
+    # --- dispatch + formatter (always-emitted) ------------------------------
+
+    def test_worn_type_dispatch_branch_always_emitted(self):
+        # The dispatch branch lives inside the always-emitted condition
+        # evaluator. Guards on !clothing_enabled at runtime.
+        _, twee = self._generate(self.toml_data)
+        self.assertIn("type === 'worn_type'", twee)
+
+    def test_worn_type_formatter_branch_always_emitted(self):
+        _, twee = self._generate(self.toml_data)
+        self.assertIn('item.type === "worn_type"', twee)
+        self.assertIn('Wearing " + wtValFmt', twee)
+        self.assertIn('Not wearing " + wtValFmt', twee)
+
+    def test_clothing_data_carries_type_into_setup(self):
+        _, twee = self._generate(self._clothing_typed_toml())
+        self.assertIn('"type": "swim"', twee)
+        self.assertIn('"type": "casual"', twee)
+        self.assertIn('"type": ""', twee)  # untyped item
+
+    # --- worn_type validator (typo-catch) -----------------------------------
+
+    def _toml_with_worn_type_condition(self, value):
+        """A canvas with a worn_type condition referencing `value`."""
+        data = self._clothing_typed_toml()
+        data["canvases"] = [{
+            "id": "swim_unlock",
+            "name": "Swim unlock",
+            "description": "Fires when wearing swim",
+            "trigger": {
+                "location": "loc_test",
+                "conditions": {
+                    "version": "1.0",
+                    "items": [
+                        {"type": "worn_type", "operator": "eq", "value": value}
+                    ],
+                },
+            },
+            "nodes": [{"id": "base", "name": "Base", "blocks": []}],
+        }]
+        data["locations"] = [{"id": "loc_test", "name": "Test", "description": "x"}]
+        return data
+
+    def test_worn_type_validator_recognizes_known_type(self):
+        """worn_type referencing a known type emits no typo WARN."""
+        data = self._toml_with_worn_type_condition("swim")
+        template = normalize(copy.deepcopy(data))
+        validate(template)
+        warns = getattr(template, "_validate_warnings", []) or []
+        typo_warns = [w for w in warns if "Possible typo" in w]
+        self.assertEqual(typo_warns, [], f"Unexpected typo warning: {warns}")
+
+    def test_worn_type_validator_warns_on_unknown_value(self):
+        """worn_type referencing a value no item declares emits a typo WARN."""
+        data = self._toml_with_worn_type_condition("schoolweear")  # typo
+        template = normalize(copy.deepcopy(data))
+        validate(template)
+        warns = getattr(template, "_validate_warnings", []) or []
+        typo_warns = [w for w in warns if "Possible typo" in w and "schoolweear" in w]
+        self.assertEqual(len(typo_warns), 1,
+                         f"Expected 1 typo WARN for 'schoolweear', got {warns}")
+
+    def test_worn_type_validator_info_on_uncommon_known_type(self):
+        """worn_type referencing a known type that's outside RECOMMENDED set
+        emits an INFO note (uncommon type)."""
+        data = self._clothing_typed_toml()
+        # Add an item with an uncommon (but valid) type
+        data["clothing"].append({
+            "id": "exotic_top", "name": "Exotic Top", "slot": "top",
+            "type": "ceremonial",  # not in RECOMMENDED_CLOTHING_TYPES
+        })
+        data["canvases"] = [{
+            "id": "exotic_unlock",
+            "name": "x",
+            "description": "x",
+            "trigger": {
+                "location": "loc_test",
+                "conditions": {
+                    "version": "1.0",
+                    "items": [{"type": "worn_type", "operator": "eq", "value": "ceremonial"}],
+                },
+            },
+            "nodes": [{"id": "base", "name": "Base", "blocks": []}],
+        }]
+        data["locations"] = [{"id": "loc_test", "name": "Test", "description": "x"}]
+        template = normalize(copy.deepcopy(data))
+        validate(template)
+        warns = getattr(template, "_validate_warnings", []) or []
+        info_notes = [w for w in warns if "uncommon type 'ceremonial'" in w]
+        self.assertEqual(len(info_notes), 1,
+                         f"Expected uncommon-type INFO note, got {warns}")
+
+
 class DailyTickTraitEffectsTests(TestCase):
     """Doc 40: [engine.daily_tick].traitEffects apply trait deltas once per
     in-game day (the RTS arousal daily auto-rise). Static-emission tests; the
@@ -5953,3 +6511,170 @@ class QuestsV2SidebarStripTests(SimpleTestCase):
             self._sample_output(), {"quests_engine": "v2"},
         )
         self.assertIn("setup.checkSingleCondition", output)
+
+
+class TraitBarRenderTemplateTests(SimpleTestCase):
+    """Verify the generalized trait_bar SugarCube render branch in both
+    generators. We grep the generator source for the new template strings
+    rather than running a full build — the render branch is static text
+    that doesn't depend on game config, and full builds are slow."""
+
+    def _read(self, path: str) -> str:
+        from pathlib import Path
+        return Path(path).read_text()
+
+    def _v1_source(self) -> str:
+        return self._read(
+            "apps/game_generation/twee_comprehensive/generators/v1.py"
+        )
+
+    def _v2_source(self) -> str:
+        return self._read(
+            "apps/game_generation/twee_comprehensive/generators/v2.py"
+        )
+
+    # -- new template shape present in BOTH generators (identical branches) --
+
+    def test_npc_owner_branch_emitted_in_v1(self):
+        src = self._v1_source()
+        self.assertIn('<<set _tbOwner to _item.trait_owner || "player">>', src)
+        self.assertIn("<<if _tbOwner is \"npc\">>", src)
+        self.assertIn("setup.npc_slug_map", src)  # NPC slug→UUID lookup
+
+    def test_npc_owner_branch_emitted_in_v2(self):
+        src = self._v2_source()
+        self.assertIn('<<set _tbOwner to _item.trait_owner || "player">>', src)
+        self.assertIn("<<if _tbOwner is \"npc\">>", src)
+
+    def test_color_tier_loop_emitted(self):
+        for src in (self._v1_source(), self._v2_source()):
+            self.assertIn("<<if _item.color_tiers>>", src)
+            self.assertIn("_item.color_tiers[_ti].up_to", src)
+            self.assertIn("_item.color_tiers[_ti].class", src)
+
+    def test_band_loop_emitted(self):
+        for src in (self._v1_source(), self._v2_source()):
+            self.assertIn("<<if _item.bands>>", src)
+            # value-driven first-match band selection
+            self.assertIn("_bb.min isnot undefined", src)
+            self.assertIn("_traitVal gte _bb.min and _traitVal lte _bb.max", src)
+            self.assertIn("_bb.icon", src)
+
+    def test_hide_value_renders_title_only_when_true(self):
+        # The label div is ALWAYS emitted (so the bar carries a title);
+        # hide_value=true switches the inner content from "Label: N / max"
+        # to just the trait label, giving a clean title above the bar.
+        for src in (self._v1_source(), self._v2_source()):
+            self.assertIn('<div class="trait-bar-label">', src)
+            self.assertIn("<<if _item.hide_value is true>>", src)
+            # The else branch carries today's Label: N / max shape.
+            self.assertIn(": <<print Math.floor(_traitVal)>> / <<print _traitMax>>", src)
+
+    def test_wrapper_class_has_no_attribute_conditional(self):
+        # Regression guard: SugarCube wikifier does not process <<if>> macros
+        # embedded inside HTML attribute strings, so the conditional class
+        # never actually got added. Replaced with a CSS :has() selector on
+        # .trait-bar-bg. The wrapper now carries a constant class only.
+        for src in (self._v1_source(), self._v2_source()):
+            self.assertNotIn("trait-bar-banded", src.split("/* Built-in color tier")[0])
+            self.assertIn('class="sidebar-item trait-bar-item"', src)
+
+    def test_band_text_overlay_emitted(self):
+        for src in (self._v1_source(), self._v2_source()):
+            self.assertIn('<span class="trait-bar-band-text">', src)
+
+    def test_fill_carries_tier_class(self):
+        for src in (self._v1_source(), self._v2_source()):
+            self.assertIn('<div class="trait-bar-fill <<print _tbTier>>"', src)
+
+    # -- CSS additions present ----------------------------------------------
+
+    def test_css_banded_height_override_present(self):
+        # Height override fires via :has() — matches whenever a band-text
+        # overlay span was rendered, no wrapper class required.
+        for src in (self._v1_source(), self._v2_source()):
+            self.assertIn(".trait-bar-bg:has(.trait-bar-band-text)", src)
+
+    def test_css_band_text_overlay_present(self):
+        for src in (self._v1_source(), self._v2_source()):
+            self.assertIn(".trait-bar-band-text", src)
+
+    def test_css_builtin_color_tiers_present(self):
+        for src in (self._v1_source(), self._v2_source()):
+            self.assertIn(".trait-bar-fill.low", src)
+            self.assertIn(".trait-bar-fill.medium", src)
+            self.assertIn(".trait-bar-fill.high", src)
+
+    def test_css_trait_bar_bg_is_position_relative(self):
+        # Required so the absolute-positioned band-text overlay layers above the fill.
+        for src in (self._v1_source(), self._v2_source()):
+            import re
+            bg_block = re.search(r"\.trait-bar-bg\s*\{[^}]*\}", src)
+            self.assertIsNotNone(bg_block)
+            self.assertIn("position: relative", bg_block.group(0))
+
+
+class TraitStatusTextRenderTemplateTests(SimpleTestCase):
+    """Verify the trait_status_text SugarCube render branch in both
+    generators. Same source-grep approach as TraitBarRenderTemplateTests —
+    the render branch is static template text."""
+
+    def _read(self, path: str) -> str:
+        from pathlib import Path
+        return Path(path).read_text()
+
+    def _v1_source(self) -> str:
+        return self._read("apps/game_generation/twee_comprehensive/generators/v1.py")
+
+    def _v2_source(self) -> str:
+        return self._read("apps/game_generation/twee_comprehensive/generators/v2.py")
+
+    def test_branch_present_in_both_generators(self):
+        for src in (self._v1_source(), self._v2_source()):
+            self.assertIn('<<elseif _item.type is "trait_status_text">>', src)
+
+    def test_owner_resolution_pattern_emitted(self):
+        for src in (self._v1_source(), self._v2_source()):
+            self.assertIn('<<set _tsOwner to _item.trait_owner || "player">>', src)
+            self.assertIn("<<if _tsOwner is \"npc\">>", src)
+            self.assertIn("setup.npc_slug_map", src)
+
+    def test_player_trait_lookup_emitted(self):
+        for src in (self._v1_source(), self._v2_source()):
+            self.assertIn(
+                "<<set _tsVal to ($player && $player.core_traits) ? "
+                "($player.core_traits[_tsKey] || 0) : 0>>",
+                src,
+            )
+
+    def test_bands_loop_emitted(self):
+        for src in (self._v1_source(), self._v2_source()):
+            self.assertIn("<<if _item.bands>>", src)
+            self.assertIn("<<for _bi to 0; _bi lt _item.bands.length; _bi++>>", src)
+            self.assertIn("_tsVal gte _bMin and _tsVal lte _bMax", src)
+
+    def test_sentinel_defaults_for_optional_bounds(self):
+        # Missing min defaults to a very-low sentinel; missing max to very-high.
+        # Lets authors write "below N" (max only) or "above N" (min only).
+        for src in (self._v1_source(), self._v2_source()):
+            self.assertIn("(_bb.min isnot undefined) ? _bb.min : -1e9", src)
+            self.assertIn("(_bb.max isnot undefined) ? _bb.max : 1e9", src)
+
+    def test_conditional_wrapper_only_when_band_matches(self):
+        # The whole point: when no band matches, render nothing — keeps the
+        # sidebar silent when stats are healthy.
+        for src in (self._v1_source(), self._v2_source()):
+            self.assertIn("<<if _tsText isnot \"\">>", src)
+            self.assertIn('<div class="sidebar-item trait-status-text-item">', src)
+
+    def test_icon_prefix_emitted(self):
+        for src in (self._v1_source(), self._v2_source()):
+            self.assertIn(
+                '<<print (_tsIcon ? _tsIcon + " " : "") + _tsText>>', src
+            )
+
+    def test_css_class_present(self):
+        for src in (self._v1_source(), self._v2_source()):
+            self.assertIn(".trait-status-text-item", src)
+            # Distinct visual from .trait-decay-warning-item — cool blue tint.
+            self.assertIn("rgba(99, 179, 237", src)

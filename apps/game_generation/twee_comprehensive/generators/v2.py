@@ -1236,6 +1236,31 @@ setup.getWornStatMax = function(field) {
 setup.getWornBeauty = function() { return setup.getWornStatMax('beauty'); };
 setup.getWornCorruption = function() { return setup.getWornStatMax('corruption'); };
 
+// Doc 72 / Doc 71 R2 — Outfit-category aggregator. Returns array of unique
+// non-empty `type` strings across all currently-equipped items. Used by the
+// `worn_type` predicate. Returns array (not Set) for SugarCube serialization
+// compatibility — callers use indexOf to test membership.
+setup.getWornTypes = function() {
+    if (!setup.clothing_enabled) return [];
+    var sv = State.variables;
+    var eq = (sv.player && sv.player.equipped) || {};
+    var cdata = setup.clothing_data || [];
+    var types = [];
+    for (var slot in eq) {
+        if (!eq.hasOwnProperty(slot)) continue;
+        var id = eq[slot];
+        if (!id) continue;
+        for (var i = 0; i < cdata.length; i++) {
+            if (cdata[i].id === id) {
+                var t = cdata[i].type || '';
+                if (t && types.indexOf(t) === -1) types.push(t);
+                break;
+            }
+        }
+    }
+    return types;
+};
+
 setup.isSlotDisabled = function(slotName) {
     var sv = State.variables;
     if (!sv.player || !sv.player.equipped) return false;
@@ -3476,6 +3501,27 @@ setup.triggerConditionsSatisfied = function(conditions) {{
                     ? setup.getWornBeauty()
                     : setup.getWornCorruption();
                 satisfied = compare(wornOp, wornCur, wornVal);
+                results.push(satisfied);
+                continue;
+            }}
+
+            // Doc 72 — worn_type: outfit-category gate. `eq` returns true when
+            // any equipped item declares the matching type; `neq` is the
+            // inverse. Empty value never matches (defensive). Doc 71 R2.
+            if (type === 'worn_type') {{
+                if (!setup.clothing_enabled) {{ results.push(false); continue; }}
+                var wtOp = it.operator || 'eq';
+                var wtVal = it.value || '';
+                var wornT = setup.getWornTypes();
+                if (!wtVal) {{
+                    satisfied = false;
+                }} else if (wtOp === 'eq') {{
+                    satisfied = wornT.indexOf(wtVal) !== -1;
+                }} else if (wtOp === 'neq') {{
+                    satisfied = wornT.indexOf(wtVal) === -1;
+                }} else {{
+                    satisfied = false;
+                }}
                 results.push(satisfied);
                 continue;
             }}
@@ -7073,6 +7119,16 @@ setup.formatCanvasConditions = function(conditions) {{
             var wbOp = item.operator || "gte";
             var wbSym = wbOp === "gt" ? ">" : wbOp === "lte" ? "≤" : wbOp === "lt" ? "<" : wbOp === "eq" ? "=" : "≥";
             parts.push("Appearance " + wbSym + " " + (item.value || 0));
+        }}
+        else if (item.type === "worn_type") {{
+            // Doc 72 / Doc 71 R2 — outfit-category gate
+            var wtOpFmt = item.operator || "eq";
+            var wtValFmt = item.value || "?";
+            if (wtOpFmt === "neq") {{
+                parts.push("Not wearing " + wtValFmt);
+            }} else {{
+                parts.push("Wearing " + wtValFmt);
+            }}
         }}
         else if (item.type === "pass") {{
             var pConf = setup.passes_map[item.pass_id || ''];
