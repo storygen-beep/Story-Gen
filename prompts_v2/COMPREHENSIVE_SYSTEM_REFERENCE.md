@@ -400,25 +400,63 @@ Order of evaluation per substitution rule:
 5. Roll `Math.random() < chance`.
 6. First match returns; `Engine.play(target.passageName)` preempts the parent passage body.
 
-**Sequential first-match (Pattern A per Doc 67 §4.1).** Each rule has its own independent dice roll. Rule order = priority order. Pattern B (single dice partition) + Pattern C (post-activity events) are NOT YET supported (Doc 67 §5.1 + §5.2 — future engine extensions).
+**Two evaluation modes (Doc 69 Item 1 shipped 2026-05-27):**
 
-### §4.3 — `pre_substitution_effects` (Pattern C support — partial, Doc 69 Item 2)
+1. **Pattern B groups first.** Rules sharing an `exclusive_group` string share ONE dice roll, partitioned into cumulative buckets by `chance`. If the dice lands in a bucket whose target/conditions/`requires_npc` fail, the engine **falls through to solo** — it does NOT promote the next rule in the group. This is the true Pattern B semantic (Doc 67 §4.2). Multiple groups process in declaration order, each with its own dice.
+
+2. **Pattern A independent rules next.** Rules WITHOUT an `exclusive_group` field roll their own dice (first-match wins). Pattern A per Doc 67 §4.1. Mixed A+B in the same dispatcher is supported — groups always evaluate before independents.
+
+Rule order within a group = priority order (cumulative bucket order). Rule order across groups = first-seen order in the TOML.
+
+Pattern C (unconditional pre-substitution effects) is shipped separately via `pre_substitution_effects` — see §4.3.
+
+### §4.3 — `pre_substitution_effects` (Pattern C — shipped Doc 69 Item 2)
 
 Effects that run unconditionally on canvas entry, BEFORE the substitution check. If a substitution preempts via `<<goto>>`, these effects have already executed. RTS Pattern C analog (Exercise's `<<AddFit>>` runs before NPC interrupt).
+
+Each entry is the same shape as `TemplateChoiceEffect` (see `schema/02_toml_schema.md` §16): `{ targetType, npcId?, trait, op, value, clamp?, cap? }` — no `type` field.
 
 ```toml
 [canvases.trigger]
 # ... existing fields ...
 
 [[canvases.trigger.pre_substitution_effects]]
-type = "trait"
 targetType = "player"
-trait = "fitness"
-op = "add"
-value = 1
+trait      = "fitness"
+op         = "add"
+value      = 1
 ```
 
-Schema: `template_import.py:496–502` (`pre_substitution_effects` field on `TemplateTrigger`).
+Engine: `v2.py:11151` reads `canvas.trigger.metadata.pre_substitution_effects` and emits `<<script>>setup.applyAndNotifyTrait(...)<</script>>` macros at the top of the passage body, before the substitution `<<goto>>`. Schema: `TemplateTrigger.pre_substitution_effects` field on the trigger dataclass.
+
+### §4.4 — `exclusive_group` (Pattern B partition — shipped Doc 69 Item 1)
+
+Per-substitution-rule field that marks the rule as part of a Pattern B exclusive group.
+
+```toml
+[canvases.trigger]
+location = "loc_bedroom"
+# ... existing trigger fields ...
+
+# Pattern B — Brother sub-variants at the study desk; one fires per attempt or fall to solo
+[[canvases.trigger.substitutions]]
+target_canvas_id = "scene_brother_grope_at_desk"
+chance           = 0.1667                          # 1/6
+exclusive_group  = "study_desk_brother"
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_brother", trait_key = "corruption", operator = "gte", value = 5 },
+] }
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "scene_brother_help_study"
+chance           = 0.1667                          # 1/6 — combined group bucket = 0.33
+exclusive_group  = "study_desk_brother"
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_brother", trait_key = "love", operator = "gte", value = 3 },
+] }
+```
+
+Engine: `v2.py:4671-4713` partitions `subs` by `exclusive_group` string, rolls one dice per group, walks cumulative buckets. Buckets that fail target/conditions/`requires_npc` fall through to solo (the parent canvas's body runs). Rules without `exclusive_group` go through the Pattern A independent-rules pipeline after all groups process.
 
 ---
 
@@ -1282,12 +1320,13 @@ Each entry is a free-form dict (not a dataclass — schema lives in `setup.check
 | Field | Type | Notes |
 |---|---|---|
 | `target_canvas_id` | str | Slug of the substitution target canvas (resolves to UUID at build) |
-| `chance` | float | 0.0–1.0 fire probability |
+| `chance` | float | 0.0–1.0 fire probability. For Pattern B groups: cumulative bucket size within the group. |
 | `conditions` | Optional[dict] | Extra `{version, items}` block (ANDs with target canvas's own gates) |
+| `exclusive_group` | Optional[str] | Pattern B mutex group name (Doc 69 Item 1, 2026-05-27). Rules sharing this string share ONE dice; cumulative `chance` buckets; failed-condition in claimed slot falls to solo. Engine: `v2.py:4671-4713`. |
 
 ### §6.4 — `[[canvases.trigger.pre_substitution_effects]]` (Doc 69 Item 2)
 
-Effects that run before the substitution check. Same shape as `TemplateChoiceEffect` (see §16).
+Effects that run before the substitution check. Same shape as `TemplateChoiceEffect` (see §16): `{ targetType, npcId?, trait, op, value, clamp?, cap? }` — note no `type` field. Engine: `v2.py:11151`.
 
 ### §6.5 — Trigger examples per lane
 
@@ -4017,11 +4056,22 @@ conditions = { items = [
 
 **Use when:** NPC scene variants are inherently mutually exclusive by design (often same NPC with sub-variants — Brother grope vs Brother help study at the study desk; one fires).
 
-**TLS engine support: ❌ NOT YET SUPPORTED.** `setup.checkAndSubstituteCanvas` evaluates each rule's dice independently. Authoring approximation (N rules with chance summing < 1) **diverges from true Pattern B** in two ways:
-1. Cumulative probability: true B = Σcᵢ; approximation = 1 − ∏(1 − cᵢ). For 3 NPCs at "1/6 each," true B = 50%; approximation ≈ 42%.
-2. Failed-condition fall-through: true B falls to solo; engine `continue`s to next rule.
+**TLS engine support: ✅ Native via `exclusive_group`** (Doc 69 Item 1 shipped 2026-05-27). Substitution rules sharing the same `exclusive_group = "<name>"` string share ONE dice roll partitioned into cumulative `chance` buckets. Failed target/conditions in a claimed slot fall to solo (does NOT promote next rule in the group) — the load-bearing Pattern B semantic. Multiple groups process in declaration order; rules without `exclusive_group` evaluate after via Pattern A first-match. Engine: `v2.py:4671-4713`.
 
-**No build error fires for the divergence.** Use Pattern A and document the approximation. Future `exclusive_group` field (Doc 67 §5.1) will support Pattern B natively; defer until LO scopes the engine work.
+```toml
+# Brother sub-variants at study desk — exactly one fires or fall to solo
+[[canvases.trigger.substitutions]]
+target_canvas_id = "scene_brother_grope_at_desk"
+chance           = 0.1667                          # 1/6
+exclusive_group  = "study_desk_brother"
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "scene_brother_help_study"
+chance           = 0.1667                          # 1/6 — group cumulative = 0.33
+exclusive_group  = "study_desk_brother"
+```
+
+**Do NOT approximate Pattern B via Pattern A.** The approximation that was correct before 2026-05-27 (N rules with chance summing < 1) diverges in two ways: cumulative probability = 1 − ∏(1 − cᵢ) ≈ 42% vs true 50%, and failed-condition fall-through promotes to next rule instead of falling to solo. The engine extension is now shipped — emit Pattern B directly.
 
 #### §4.6.3 — Pattern C: post-activity event check (`Exercise` / `PlayingVideogame` canonical)
 
@@ -4048,15 +4098,32 @@ conditions = { items = [
 
 Pattern C also uses `GetNpcLocation == "Loc"` (strict location check), NOT `IsNpcAtHome` (loose). The NPC must be co-located, not just home, because by the time the event check fires, Maya is at the location actively doing the thing.
 
-**TLS engine support: ⚠️ PARTIAL via `pre_substitution_effects`** (Doc 69 Item 2, 2026-05-27). Effects run BEFORE the substitution check, so they execute even when `<<goto _sub_target>>` preempts. Workaround for slice phase (until full Pattern C ships): duplicate the unconditional effect on every substitution target's effect list. Mechanically equivalent — author duplication is the cost.
+**TLS engine support: ✅ Native via `pre_substitution_effects`** (Doc 69 Item 2 shipped 2026-05-27). Effects declared on the parent canvas's trigger run BEFORE the substitution check, so they execute on both the solo path AND the substituted-NPC-walk-in path. No effect duplication on substitute canvases is needed. Engine: `v2.py:11151` reads `trigger.metadata.pre_substitution_effects` and emits `<<script>>setup.applyAndNotifyTrait(...)<</script>>` macros before the substitution `<<goto>>`.
+
+```toml
+[canvases.trigger]
+location = "loc_bedroom"
+# ... other trigger fields ...
+
+# Pattern C — solo Exercise grants +fitness regardless of who walks in
+[[canvases.trigger.pre_substitution_effects]]
+targetType = "player"
+trait      = "fitness"
+op         = "add"
+value      = 1
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "scene_grandpa_walks_in_on_exercise"
+chance           = 0.20
+```
 
 ### §4.7 — Selection rule (the doctrine call)
 
 | Authoring intent | Pattern |
 |---|---|
-| "Multiple independent NPCs could walk in on this chore; priority by arc focus" | **A** (default) |
-| "Several mutually exclusive variants — one fires per attempt" (often same NPC with sub-variants) | **B** (engine extension required) |
-| "Activity has unconditional stat outcome that counts even when interrupted" | **C** (use `pre_substitution_effects`) |
+| "Multiple independent NPCs could walk in on this chore; priority by arc focus" | **A** (default — no `exclusive_group` on rules) |
+| "Several mutually exclusive variants — one fires per attempt" (often same NPC with sub-variants) | **B** (shared `exclusive_group` on rules) |
+| "Activity has unconditional stat outcome that counts even when interrupted" | **C** (use `pre_substitution_effects` on parent trigger) |
 
 **For slice authoring: default to Pattern A.** Patterns B and C are tools for specific intents that arise in particular activities.
 
@@ -4429,7 +4496,7 @@ Each arc shape has its own canvas distribution per `doctrine/03_arc_shapes.md`. 
 
 ### §8.6 — Pattern B authored as multiple Pattern A rules with chance < 1
 
-This is the approximation noted in §4.6.2. It's not mutual-exclusion-correct. Acceptable in slice phase if Pattern B is rare; document the approximation. The engine extension (`exclusive_group`) is `doctrine/04_authoring_rules.md` §future-engine for when load-bearing.
+Wrong since Doc 69 Item 1 shipped (2026-05-27). The `exclusive_group` field on each substitution rule gives mutex-correct dice partition + fall-to-solo on failed conditions natively. Emit Pattern B directly per §4.6.2 — do NOT approximate via summed Pattern A chances.
 
 ### §8.7 — Stat cost in wrong placement (Pattern A vs C)
 
@@ -4456,8 +4523,8 @@ Then it appears in the NPC portrait hub at the location, the player can click it
 | **Lane 1** — Hub button | ✅ Native via NPC portraits + `exit_block.choices` + per-choice conditions |
 | **Lane 2** — Location-entry random | ✅ Native via `trigger_mode = "random"` + `chance` |
 | **Lane 3** — Pattern A dispatcher | ✅ Native via `substitutions` + `substitution_only` (`v2.py:4649`) |
-| **Lane 3** — Pattern B dispatcher | ❌ Not yet — use Pattern A approximation; defer until LO scopes `exclusive_group` engine work |
-| **Lane 3** — Pattern C dispatcher | ⚠️ Partial via `pre_substitution_effects` (Doc 69 Item 2) |
+| **Lane 3** — Pattern B dispatcher | ✅ Native via `exclusive_group` per rule (`v2.py:4671-4713`, Doc 69 Item 1 shipped 2026-05-27) |
+| **Lane 3** — Pattern C dispatcher | ✅ Native via `pre_substitution_effects` on parent trigger (`v2.py:11151`, Doc 69 Item 2 shipped 2026-05-27) |
 | **Lane 4** — Capstone auto-fire | ✅ Native via `selectAutoFireCanvasForLocation` + priority ≥ 9 + flag-gate |
 | **`IsNpcAtHome` (loose)** | ✅ via `requires_npc` + NPC schedule at meta-location |
 | **`GetNpcLocation == X` (strict)** | ✅ Native |
@@ -5353,11 +5420,26 @@ The player loses the structural read.
 
 Don't use Pattern B for "any NPC could walk in" — that's Pattern A.
 
-**Why:** Pattern B requires either engine-level partition support (Doc 67 §5.1 extension) or approximation via summed chance values. Both have costs. Pattern A is the cheap default.
+**Why:** Pattern B reserves a single dice partition for mutex variants. Failed-condition in a claimed slot falls to solo, not to next rule — matching the load-bearing RTS semantic (Doc 67 §4.2).
 
-**Engine status (2026-05-26):** Pattern B is **NOT YET ENGINE-SUPPORTED.** The current engine evaluates each substitution rule's dice independently. If Pattern B intent arises during authoring, EITHER defer the authoring until `exclusive_group` extension ships, OR accept Pattern A approximation knowing the math + fall-through divergence documented in `doctrine/02_three_lanes_plus_capstone.md` §4.6.2.
+**Engine status (2026-05-27, Doc 69 Item 1 shipped):** Pattern B is engine-supported via the `exclusive_group` field on each substitution rule. Rules sharing the same `exclusive_group` string share ONE dice roll, partitioned into cumulative `chance` buckets. Engine: `v2.py:4671-4713`. Mixed Pattern A + Pattern B in the same dispatcher is supported — groups always evaluate before independent rules.
 
-**Don't write Pattern B authoring as if it works natively** — the silent divergence will produce wrong probabilities + wrong fall-through behavior, neither of which surface as build errors.
+**Emission template** (see `doctrine/02_three_lanes_plus_capstone.md` §4.6.2 for canonical example):
+
+```toml
+[[canvases.trigger.substitutions]]
+target_canvas_id = "scene_brother_grope_at_desk"
+chance           = 0.1667
+exclusive_group  = "study_desk_brother"
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "scene_brother_help_study"
+chance           = 0.1667
+exclusive_group  = "study_desk_brother"
+# Cumulative bucket = 0.33; remaining 0.67 = solo
+```
+
+**Don't approximate Pattern B via Pattern A** (multiple rules with `chance` summing < 1). The pre-2026-05-27 approximation is now wrong on two counts — cumulative probability diverges (1 − ∏(1 − cᵢ) ≈ 42% vs true 50% for 3×1/6) and failed-condition fall-through promotes to next rule instead of solo. Emit `exclusive_group` directly.
 
 ### §5.6 — D67-R6: `IsNpcAtHome` for Lane 3 walk-ins; `GetNpcLocation == "Loc"` for Lane 2 entry-encounters
 
@@ -5510,7 +5592,7 @@ For each anti-pattern, the rule it violates.
 ### Engine status (rules with pending engine work)
 
 - **D56-R5** `guide` field — doctrine-locked; schema field pending Doc 62 PRD
-- **D67-R5** Pattern B `exclusive_group` — doctrine-deferred per Doc 56 §9 (build engine when load-bearing)
+- **D67-R5** Pattern B `exclusive_group` — ✅ shipped Doc 69 Item 1 (2026-05-27)
 - **D67-R2** Pattern C `pre_substitution_effects` — ✅ shipped Doc 69 Item 2 (2026-05-27)
 
 ---
@@ -11708,24 +11790,49 @@ effects = [
 ]
 ```
 
-### §5.4a — Multi-NPC dispatcher engine-support warning (Patterns A / B / C)
+### §5.4a — Multi-NPC dispatcher patterns (A / B / C — all engine-supported as of Doc 69, 2026-05-27)
 
-**Read this before authoring any multi-NPC Lane 3 dispatcher.** The 3 multi-NPC dispatcher patterns (Doc 67 §4) are NOT all supported equally by the engine. Mirror of `doctrine/02_three_lanes_plus_capstone.md` §9 (canonical source — re-read if this section drifts):
+**Read this before authoring any multi-NPC Lane 3 dispatcher.** Three patterns from Doc 67 §4. All three ship natively in the engine; pick by authoring intent, not by engine limitation. Mirror of `doctrine/02_three_lanes_plus_capstone.md` §9 (canonical source — re-read if this section drifts):
 
 | Pattern | Engine support | Emit how |
 |---|---|---|
-| **A — sequential first-match** (RTS `WashDishes` shape) | ✅ Native | Multiple `[[canvases.trigger.substitutions]]` blocks in narrative-priority order, each with own `chance` + `conditions`. First passing roll wins; rest skipped this attempt. Template = §5.4 above. |
-| **B — single dice partition** (RTS `BedroomStudy` shape — exactly one of N variants fires per attempt, else solo) | ❌ Not yet supported | DO NOT emit 3 Pattern A rules with summed `chance` values as a substitute — math + fall-through both diverge (see warning below). Either (a) defer until LO scopes the `exclusive_group` engine extension, or (b) emit Pattern A approximation **with an inline comment flagging the divergence so reviewers can catch it.** |
-| **C — post-activity event check** (RTS `Exercise` shape — solo activity always grants effect; substitute layers an NPC walk-in on top) | ⚠️ Partial | Emit Pattern A substitution + use `pre_substitution_effects` on the activity's trigger (Doc 69 Item 2) to run the unconditional effect BEFORE the substitution roll. Solo and walk-in paths both receive the effect. |
+| **A — sequential first-match** (RTS `WashDishes` shape) | ✅ Native | Multiple `[[canvases.trigger.substitutions]]` blocks in narrative-priority order, each with own `chance` + `conditions`. Each rule rolls its own dice; first match wins. Template = §5.4 above. |
+| **B — single dice partition** (RTS `BedroomStudy` shape — exactly one of N variants fires per attempt, else solo) | ✅ Native via `exclusive_group` (`v2.py:4671-4713`, Doc 69 Item 1) | Multiple substitution rules sharing the same `exclusive_group = "<name>"` string. Engine partitions ONE dice roll into cumulative `chance` buckets. Failed target/conditions in a claimed slot falls to solo — does NOT promote next rule. Template below. |
+| **C — post-activity event check** (RTS `Exercise` shape — solo activity always grants effect; substitute layers an NPC walk-in on top) | ✅ Native via `pre_substitution_effects` on parent trigger (`v2.py:11151`, Doc 69 Item 2) | Effects on parent trigger run BEFORE the substitution check, so both solo and substituted paths receive them. Substitute canvases do NOT re-emit the effect. Template below. |
 
-#### Pattern B — why approximation diverges (cite this in the comment if you must approximate)
+#### Pattern B — `exclusive_group` TOML template
 
-For 3 NPCs at `chance = 1/6` each (true Pattern B → 50% something fires, 50% solo):
+Brother sub-variants at the study desk: grope vs help-study, exactly one fires per attempt or fall to solo.
 
-- **True Pattern B math:** `P(any fires) = Σ cᵢ = 1/6 + 1/6 + 1/6 = 0.50`. Mutex on the variants: exactly one fires or none. Fall-through goes to **solo** automatically.
-- **Pattern A approximation math:** `P(any fires) = 1 − ∏(1 − cᵢ) = 1 − (5/6)³ ≈ 0.421` (≈42%, not 50%). Fall-through behavior also differs: if NPC #1's `conditions` block fails (not just its dice roll), Pattern A continues evaluating NPC #2, NPC #3 — the engine treats each rule independently. True Pattern B would not.
+```toml
+[canvases.trigger]
+location      = "loc_bedroom"
+is_repeatable = true
+priority      = 3
+is_active     = true
 
-**Build error fires? No.** A wrong-shape multi-NPC dispatcher produces silently wrong probabilities + silently wrong fall-through. Catch it in design review by checking against `doctrine/04_authoring_rules.md` §5.5 (D67-R5: Pattern B only when scenes are inherently mutually exclusive).
+[[canvases.trigger.substitutions]]
+target_canvas_id = "scene_brother_grope_at_desk"
+chance           = 0.1667                          # 1/6
+exclusive_group  = "study_desk_brother"
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_brother", trait_key = "corruption", operator = "gte", value = 5 },
+] }
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "scene_brother_help_study"
+chance           = 0.1667                          # 1/6 — group cumulative bucket = 0.33
+exclusive_group  = "study_desk_brother"
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_brother", trait_key = "love", operator = "gte", value = 3 },
+] }
+```
+
+**Probability math:** With both rules at `chance = 0.1667`, group cumulative bucket = 0.33; remaining 0.67 of the dice space falls to solo. Failed-condition in a claimed slot also falls to solo (does NOT promote next rule).
+
+**Mixed Pattern A + Pattern B in the same dispatcher is supported.** Rules WITH `exclusive_group` process first (one dice per group); rules WITHOUT `exclusive_group` process after via Pattern A first-match.
+
+**Do not approximate Pattern B via summed Pattern A chances** — the engine extension is shipped; emit `exclusive_group` directly. The pre-2026-05-27 approximation diverges on both probability (1 − ∏(1 − cᵢ) ≈ 42% vs true 50% for 3×1/6) and fall-through (Pattern A promotes to next rule on failed conditions; Pattern B falls to solo).
 
 #### Pattern C — `pre_substitution_effects` TOML template
 
@@ -11744,8 +11851,8 @@ priority      = 3
 is_active     = true
 
 # Pattern C — effects run BEFORE the substitution roll, on both solo and substituted paths (Doc 69 Item 2)
+# Shape = TemplateChoiceEffect (schema/02 §16): { targetType, npcId?, trait, op, value, clamp?, cap? } — no `type` field
 [[canvases.trigger.pre_substitution_effects]]
-type       = "trait"
 targetType = "player"
 trait      = "fitness"
 op         = "add"
@@ -11763,13 +11870,13 @@ The substitute canvas (`scene_frank_walks_in_exercise`) does NOT need to re-emit
 
 #### Selection rule (mirror of doctrine/02 §4.7)
 
-If the design book calls for a multi-NPC walk-in beat at a Maya-solo activity, classify it against this decision tree BEFORE picking an emission template:
+If the design book calls for a multi-NPC walk-in beat at a Maya-solo activity, classify it against this decision tree:
 
-1. **Are the variants mutually exclusive in fiction?** (Cannot all three NPCs walk in at the same study desk on the same attempt.) → Pattern B intent.
-2. **Does the solo activity have its own outcome that should fire regardless of who walks in?** (Exercise = +fitness whether you finished alone or got interrupted.) → Pattern C intent.
-3. **Otherwise** — independent walk-in chances per NPC, narrative-priority ordered. → Pattern A intent.
+1. **Are the variants mutually exclusive in fiction?** (Cannot have two of the variants fire simultaneously — e.g., Brother grope vs Brother help-study at the same study desk attempt.) → **Pattern B**, emit `exclusive_group`.
+2. **Does the solo activity have its own outcome that should fire regardless of who walks in?** (Exercise = +fitness whether you finished alone or got interrupted.) → **Pattern C**, emit `pre_substitution_effects` on the parent trigger.
+3. **Otherwise** — independent walk-in chances per NPC, narrative-priority ordered. → **Pattern A** (default), no `exclusive_group`, no `pre_substitution_effects`.
 
-Pattern B and Pattern C intents both demand engine support beyond pure Pattern A. Don't silently downgrade.
+Pattern B + Pattern C can combine on the same dispatcher when both intents apply.
 
 ### §5.5 — Lane 3 substitution target (substitution_only)
 
@@ -13714,7 +13821,6 @@ Pregnant, Vanilla Sex, Hardcore, Oral Sex, Blowjobs, Time-Based Games, Sex Stori
 ---
 
 **End of file.** Run on a completed game's TOML to produce a publish-ready listing.
-
 
 ═══════════════════════════════════════════════════════════════════════════════
 

@@ -376,12 +376,13 @@ Each entry is a free-form dict (not a dataclass — schema lives in `setup.check
 | Field | Type | Notes |
 |---|---|---|
 | `target_canvas_id` | str | Slug of the substitution target canvas (resolves to UUID at build) |
-| `chance` | float | 0.0–1.0 fire probability |
+| `chance` | float | 0.0–1.0 fire probability. For Pattern B groups: cumulative bucket size within the group. |
 | `conditions` | Optional[dict] | Extra `{version, items}` block (ANDs with target canvas's own gates) |
+| `exclusive_group` | Optional[str] | Pattern B mutex group name (Doc 69 Item 1, 2026-05-27). Rules sharing this string share ONE dice; cumulative `chance` buckets; failed-condition in claimed slot falls to solo. Engine: `v2.py:4671-4713`. |
 
 ### §6.4 — `[[canvases.trigger.pre_substitution_effects]]` (Doc 69 Item 2)
 
-Effects that run before the substitution check. Same shape as `TemplateChoiceEffect` (see §16).
+Effects that run before the substitution check. Same shape as `TemplateChoiceEffect` (see §16): `{ targetType, npcId?, trait, op, value, clamp?, cap? }` — note no `type` field. Engine: `v2.py:11151`.
 
 ### §6.5 — Trigger examples per lane
 

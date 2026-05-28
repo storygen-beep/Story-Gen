@@ -208,25 +208,63 @@ Order of evaluation per substitution rule:
 5. Roll `Math.random() < chance`.
 6. First match returns; `Engine.play(target.passageName)` preempts the parent passage body.
 
-**Sequential first-match (Pattern A per Doc 67 §4.1).** Each rule has its own independent dice roll. Rule order = priority order. Pattern B (single dice partition) + Pattern C (post-activity events) are NOT YET supported (Doc 67 §5.1 + §5.2 — future engine extensions).
+**Two evaluation modes (Doc 69 Item 1 shipped 2026-05-27):**
 
-### §4.3 — `pre_substitution_effects` (Pattern C support — partial, Doc 69 Item 2)
+1. **Pattern B groups first.** Rules sharing an `exclusive_group` string share ONE dice roll, partitioned into cumulative buckets by `chance`. If the dice lands in a bucket whose target/conditions/`requires_npc` fail, the engine **falls through to solo** — it does NOT promote the next rule in the group. This is the true Pattern B semantic (Doc 67 §4.2). Multiple groups process in declaration order, each with its own dice.
+
+2. **Pattern A independent rules next.** Rules WITHOUT an `exclusive_group` field roll their own dice (first-match wins). Pattern A per Doc 67 §4.1. Mixed A+B in the same dispatcher is supported — groups always evaluate before independents.
+
+Rule order within a group = priority order (cumulative bucket order). Rule order across groups = first-seen order in the TOML.
+
+Pattern C (unconditional pre-substitution effects) is shipped separately via `pre_substitution_effects` — see §4.3.
+
+### §4.3 — `pre_substitution_effects` (Pattern C — shipped Doc 69 Item 2)
 
 Effects that run unconditionally on canvas entry, BEFORE the substitution check. If a substitution preempts via `<<goto>>`, these effects have already executed. RTS Pattern C analog (Exercise's `<<AddFit>>` runs before NPC interrupt).
+
+Each entry is the same shape as `TemplateChoiceEffect` (see `schema/02_toml_schema.md` §16): `{ targetType, npcId?, trait, op, value, clamp?, cap? }` — no `type` field.
 
 ```toml
 [canvases.trigger]
 # ... existing fields ...
 
 [[canvases.trigger.pre_substitution_effects]]
-type = "trait"
 targetType = "player"
-trait = "fitness"
-op = "add"
-value = 1
+trait      = "fitness"
+op         = "add"
+value      = 1
 ```
 
-Schema: `template_import.py:496–502` (`pre_substitution_effects` field on `TemplateTrigger`).
+Engine: `v2.py:11151` reads `canvas.trigger.metadata.pre_substitution_effects` and emits `<<script>>setup.applyAndNotifyTrait(...)<</script>>` macros at the top of the passage body, before the substitution `<<goto>>`. Schema: `TemplateTrigger.pre_substitution_effects` field on the trigger dataclass.
+
+### §4.4 — `exclusive_group` (Pattern B partition — shipped Doc 69 Item 1)
+
+Per-substitution-rule field that marks the rule as part of a Pattern B exclusive group.
+
+```toml
+[canvases.trigger]
+location = "loc_bedroom"
+# ... existing trigger fields ...
+
+# Pattern B — Brother sub-variants at the study desk; one fires per attempt or fall to solo
+[[canvases.trigger.substitutions]]
+target_canvas_id = "scene_brother_grope_at_desk"
+chance           = 0.1667                          # 1/6
+exclusive_group  = "study_desk_brother"
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_brother", trait_key = "corruption", operator = "gte", value = 5 },
+] }
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "scene_brother_help_study"
+chance           = 0.1667                          # 1/6 — combined group bucket = 0.33
+exclusive_group  = "study_desk_brother"
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_brother", trait_key = "love", operator = "gte", value = 3 },
+] }
+```
+
+Engine: `v2.py:4671-4713` partitions `subs` by `exclusive_group` string, rolls one dice per group, walks cumulative buckets. Buckets that fail target/conditions/`requires_npc` fall through to solo (the parent canvas's body runs). Rules without `exclusive_group` go through the Pattern A independent-rules pipeline after all groups process.
 
 ---
 

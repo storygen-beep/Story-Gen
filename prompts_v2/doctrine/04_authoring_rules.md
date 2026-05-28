@@ -439,11 +439,26 @@ The player loses the structural read.
 
 Don't use Pattern B for "any NPC could walk in" — that's Pattern A.
 
-**Why:** Pattern B requires either engine-level partition support (Doc 67 §5.1 extension) or approximation via summed chance values. Both have costs. Pattern A is the cheap default.
+**Why:** Pattern B reserves a single dice partition for mutex variants. Failed-condition in a claimed slot falls to solo, not to next rule — matching the load-bearing RTS semantic (Doc 67 §4.2).
 
-**Engine status (2026-05-26):** Pattern B is **NOT YET ENGINE-SUPPORTED.** The current engine evaluates each substitution rule's dice independently. If Pattern B intent arises during authoring, EITHER defer the authoring until `exclusive_group` extension ships, OR accept Pattern A approximation knowing the math + fall-through divergence documented in `doctrine/02_three_lanes_plus_capstone.md` §4.6.2.
+**Engine status (2026-05-27, Doc 69 Item 1 shipped):** Pattern B is engine-supported via the `exclusive_group` field on each substitution rule. Rules sharing the same `exclusive_group` string share ONE dice roll, partitioned into cumulative `chance` buckets. Engine: `v2.py:4671-4713`. Mixed Pattern A + Pattern B in the same dispatcher is supported — groups always evaluate before independent rules.
 
-**Don't write Pattern B authoring as if it works natively** — the silent divergence will produce wrong probabilities + wrong fall-through behavior, neither of which surface as build errors.
+**Emission template** (see `doctrine/02_three_lanes_plus_capstone.md` §4.6.2 for canonical example):
+
+```toml
+[[canvases.trigger.substitutions]]
+target_canvas_id = "scene_brother_grope_at_desk"
+chance           = 0.1667
+exclusive_group  = "study_desk_brother"
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "scene_brother_help_study"
+chance           = 0.1667
+exclusive_group  = "study_desk_brother"
+# Cumulative bucket = 0.33; remaining 0.67 = solo
+```
+
+**Don't approximate Pattern B via Pattern A** (multiple rules with `chance` summing < 1). The pre-2026-05-27 approximation is now wrong on two counts — cumulative probability diverges (1 − ∏(1 − cᵢ) ≈ 42% vs true 50% for 3×1/6) and failed-condition fall-through promotes to next rule instead of solo. Emit `exclusive_group` directly.
 
 ### §5.6 — D67-R6: `IsNpcAtHome` for Lane 3 walk-ins; `GetNpcLocation == "Loc"` for Lane 2 entry-encounters
 
@@ -596,7 +611,7 @@ For each anti-pattern, the rule it violates.
 ### Engine status (rules with pending engine work)
 
 - **D56-R5** `guide` field — doctrine-locked; schema field pending Doc 62 PRD
-- **D67-R5** Pattern B `exclusive_group` — doctrine-deferred per Doc 56 §9 (build engine when load-bearing)
+- **D67-R5** Pattern B `exclusive_group` — ✅ shipped Doc 69 Item 1 (2026-05-27)
 - **D67-R2** Pattern C `pre_substitution_effects` — ✅ shipped Doc 69 Item 2 (2026-05-27)
 
 ---
