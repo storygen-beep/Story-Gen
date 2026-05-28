@@ -839,6 +839,69 @@ effects = [
 ]
 ```
 
+### §5.4a — Multi-NPC dispatcher engine-support warning (Patterns A / B / C)
+
+**Read this before authoring any multi-NPC Lane 3 dispatcher.** The 3 multi-NPC dispatcher patterns (Doc 67 §4) are NOT all supported equally by the engine. Mirror of `doctrine/02_three_lanes_plus_capstone.md` §9 (canonical source — re-read if this section drifts):
+
+| Pattern | Engine support | Emit how |
+|---|---|---|
+| **A — sequential first-match** (RTS `WashDishes` shape) | ✅ Native | Multiple `[[canvases.trigger.substitutions]]` blocks in narrative-priority order, each with own `chance` + `conditions`. First passing roll wins; rest skipped this attempt. Template = §5.4 above. |
+| **B — single dice partition** (RTS `BedroomStudy` shape — exactly one of N variants fires per attempt, else solo) | ❌ Not yet supported | DO NOT emit 3 Pattern A rules with summed `chance` values as a substitute — math + fall-through both diverge (see warning below). Either (a) defer until LO scopes the `exclusive_group` engine extension, or (b) emit Pattern A approximation **with an inline comment flagging the divergence so reviewers can catch it.** |
+| **C — post-activity event check** (RTS `Exercise` shape — solo activity always grants effect; substitute layers an NPC walk-in on top) | ⚠️ Partial | Emit Pattern A substitution + use `pre_substitution_effects` on the activity's trigger (Doc 69 Item 2) to run the unconditional effect BEFORE the substitution roll. Solo and walk-in paths both receive the effect. |
+
+#### Pattern B — why approximation diverges (cite this in the comment if you must approximate)
+
+For 3 NPCs at `chance = 1/6` each (true Pattern B → 50% something fires, 50% solo):
+
+- **True Pattern B math:** `P(any fires) = Σ cᵢ = 1/6 + 1/6 + 1/6 = 0.50`. Mutex on the variants: exactly one fires or none. Fall-through goes to **solo** automatically.
+- **Pattern A approximation math:** `P(any fires) = 1 − ∏(1 − cᵢ) = 1 − (5/6)³ ≈ 0.421` (≈42%, not 50%). Fall-through behavior also differs: if NPC #1's `conditions` block fails (not just its dice roll), Pattern A continues evaluating NPC #2, NPC #3 — the engine treats each rule independently. True Pattern B would not.
+
+**Build error fires? No.** A wrong-shape multi-NPC dispatcher produces silently wrong probabilities + silently wrong fall-through. Catch it in design review by checking against `doctrine/04_authoring_rules.md` §5.5 (D67-R5: Pattern B only when scenes are inherently mutually exclusive).
+
+#### Pattern C — `pre_substitution_effects` TOML template
+
+For solo activities with unconditional outcomes (Exercise grants `+fitness` regardless of who walks in):
+
+```toml
+[[canvases]]
+id          = "activity_exercise"
+name        = "Exercise"
+description = "Maya-solo dispatcher. Bedroom. Solo grants +fitness; NPC walk-ins layer on top (Pattern C)."
+
+[canvases.trigger]
+location      = "loc_bedroom"
+is_repeatable = true
+priority      = 3
+is_active     = true
+
+# Pattern C — effects run BEFORE the substitution roll, on both solo and substituted paths (Doc 69 Item 2)
+[[canvases.trigger.pre_substitution_effects]]
+type       = "trait"
+targetType = "player"
+trait      = "fitness"
+op         = "add"
+value      = 1
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "scene_frank_walks_in_exercise"
+chance           = 0.20
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 10 },
+] }
+```
+
+The substitute canvas (`scene_frank_walks_in_exercise`) does NOT need to re-emit the `+fitness` effect — it already ran on the parent trigger before substitution resolved.
+
+#### Selection rule (mirror of doctrine/02 §4.7)
+
+If the design book calls for a multi-NPC walk-in beat at a Maya-solo activity, classify it against this decision tree BEFORE picking an emission template:
+
+1. **Are the variants mutually exclusive in fiction?** (Cannot all three NPCs walk in at the same study desk on the same attempt.) → Pattern B intent.
+2. **Does the solo activity have its own outcome that should fire regardless of who walks in?** (Exercise = +fitness whether you finished alone or got interrupted.) → Pattern C intent.
+3. **Otherwise** — independent walk-in chances per NPC, narrative-priority ordered. → Pattern A intent.
+
+Pattern B and Pattern C intents both demand engine support beyond pure Pattern A. Don't silently downgrade.
+
 ### §5.5 — Lane 3 substitution target (substitution_only)
 
 ```toml
