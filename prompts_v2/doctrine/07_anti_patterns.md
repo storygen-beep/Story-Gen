@@ -19,6 +19,8 @@ This file is reference. Pull from it when:
 
 The 27 Doc 54 failure modes are organized by category. Each cost a measurable amount of session time when it first surfaced — recovering one of them costs the same time again. Pre-emption is the cheapest version.
 
+**Scope-mode applicability:** anti-patterns in §2–§7 default to **any-scope** (they apply at both `scope_mode: slice` and `scope_mode: full_game`). Slice-specific failure modes are explicitly tagged `(slice-only)`. Full-game-specific failure modes live in §8.6 (added when full-game scope shipped as first-class, 2026-05-29).
+
 ---
 
 ## §2 — Process failures (6 entries — Doc 54 §2)
@@ -153,7 +155,7 @@ If a craft instinct conflicts with project memory/doctrine, project wins every t
 
 **Prevention rule:** Cookie texture in slice = Cookie present visually during the diner shift work canvases (per `scene_diner_t0_shift` co-presence). NOT Cookie as a menu item in Marge's hub. When Cookie gets her own arc design (separate future brief), she gets her own hub. **Don't blur authoring boundaries between NPCs even when the design doc pairs them.**
 
-### §3.6 — Slice scope vs full-arc trajectory oscillation
+### §3.6 — Slice scope vs full-arc trajectory oscillation (slice-only)
 
 **What happened:** through the session, kept switching between *"slice scope minimal design"* (which suggested very few cards/items) and *"full-arc trajectory hints"* (which suggested locked-visible Phase 3+ rungs). Took 3+ iterations of Doc 53 to land on the correct synthesis: *"slice ships minimal canvases + locked-visible Phase 3+ rungs pointing at stubs."*
 
@@ -443,6 +445,17 @@ If browser MCP is disconnected, ask the user to connect it explicitly. **Do NOT 
 - **Reaching for whiteboard-goals / narrative-gates / income-channels** — these are scheduling-system abstractions invented to model game pacing before the 3-lane doctrine existed. Use per-arc-shape canvas distribution + capstone trigger fingerprint + money trait.
 - **Selectable game shapes (Single-NPC Romance vs Multi-NPC Parallel Arcs)** — LO locked this at the Doc 66 pivot. Every game is RTS-shape.
 - **CLAUDE.md ENI persona** — wrong register for canvas authoring. Use RTS-flat default (Doc 30 §7.1) + Tier-3 earned at Lane 4 (Doc 57 §6).
+
+### §8.6 — Full-game scope anti-patterns (full_game-only)
+
+Added 2026-05-29 when `scope_mode: full_game` shipped as first-class default. These failure modes are unique to authoring complete games — they don't surface at slice scope because slice authoring's smaller surface dodges them.
+
+- **Authoring full-game without resolving Doc 65 Phase 2+ decisions upfront** — pregnancy / scandal / gallery / tracker each have engine entry points + design ripple. Choosing them mid-authoring forces rework; choosing them at Stage 1 §0 Q&A keeps the brief coherent. Caught by Stage 1 §0 interactive Q&A flow.
+- **Register hold drifting RTS-flat → Tier-3 over 30+ canvases** — at full-game scope an arc can run 25–35 canvases (family/ambient). Holding RTS-flat across that surface is harder than across a 6-canvas slice. Ambient cascades drift "literary" without the author noticing. Caught by per-canvas voice check (Doc 30 §7.1 — only Lane 4 capstones earn Tier-3).
+- **Capstone chain incoherence at full scale** — Type C chains (Frank's 5-capstone chain) stay coherent at slice (1–2 chain steps shipped) but lose throughline when stretched to 5 steps. Each step should advance the through-narrative; mid-chain steps that "feel like more capstones" but don't tighten the chain = drift. Caught by Doc 57 chain-coherence audit.
+- **Per-arc vocab ceiling drift at high tiers** — Tier 4–5 content (daddy/incest callouts/breeding talk) authored without Doc 30 §7.5 ceiling discipline. Slice authoring rarely hits Tier 4–5 (capped at Stage 2 typically); full-game blows through Tier 4 routinely. Caught by `doctrine/08_kink_vocab_ceilings.md` §2 table per-NPC + per-tier.
+- **Pre-unlocking the L1 ladder at full_game** — assuming "everything ships → no locked-visible rungs needed." Wrong: locked-visible is a UI/pacing device that applies at any scope (per `doctrine/03_arc_shapes.md` §10.2). RTS Brother's hub at full game still shows locked rungs from day 1; rungs unlock as corruption/love climb. Stripping locked-visible because "the content exists" loses the progression affordance. Caught by RTS Brother evidence + Doc 54 §3.6 lesson.
+- **Phase 2+ inclusions emitted as TOML without design book §1 ratification** — Stage 2 sees TOML with pregnancy variants / scandal flags / gallery items / tracker primitives, but Stage 1 design book §1 never declared the corresponding `Phase 2+ inclusions:` rows. Means Stage 1 Q&A flow was skipped or Stage 2 invented inclusions. Caught by Stage 2 §0 cross-reference check against design book §1.
 
 ---
 

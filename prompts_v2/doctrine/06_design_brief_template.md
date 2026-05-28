@@ -48,6 +48,14 @@ Every R7 brief has these 10 sections. Order matters — §1 (end-state fantasy) 
 
 ## §3 — Section-by-section template
 
+**Scope mode header (added 2026-05-29):** every R7 brief now opens with a scope-mode declaration before §1:
+
+```markdown
+**Scope mode:** <full_game | slice>
+```
+
+Sections below adapt to the declared scope mode where called out. At `scope_mode: full_game` (default), §1 end-state describes the COMPLETE arc; §3 vocab ceiling rows include Phase 2+ tier content when LO opts in via Stage 1 §0 Q&A; §7 becomes a completeness check against `doctrine/03_arc_shapes.md` §2 per-shape budget. At `scope_mode: slice`, §1 describes slice end-state + Phase 2+ projection; §3 blank rows = slice deferrals; §7 lists canvases missing vs slice target.
+
 ### §3.1 — Section 1: End-state fantasy (one paragraph)
 
 ```markdown

@@ -8,6 +8,17 @@ Cross-reference: `doctrine/02_three_lanes_plus_capstone.md` for the lane mechani
 
 ---
 
+**Scope-mode note (read before §2 budget tables):**
+
+The per-arc-shape canvas budgets in §2 are **FULL-ARC targets** — they describe the complete shipped game across all phases, not a slice. Authoring at:
+
+- **`scope_mode: full_game`** (default) — author up to the full budget per shape. All Stage 0→4 content. Full capstone chains.
+- **`scope_mode: slice`** — author a subset (typically 30–50% of budget) + locked-visible rungs telegraphing the deferred remainder.
+
+RTS is the existence proof — Brother (family/ambient) shipped at 15–16 distinct canvases (cluster-merged from a larger surface), landing inside the 25–35 full-arc budget. See `reference/02_rts_scene_catalog.md` for the per-NPC count evidence. The budget table is not aspirational; it's RTS-validated.
+
+---
+
 ## §1 — The five arc shapes
 
 Every NPC in an RTS-shape sandbox runs ONE of these five rhythms. The shape is declared in the R7 design brief BEFORE any canvas is authored (Doc 54 §2.3 + Doc 56 R7).
@@ -321,7 +332,9 @@ The R7 brief (Doc 56 R7 + `doctrine/04_authoring_rules.md`) commits to specific 
 
 ---
 
-## §10 — Adapting to slice scope vs full-arc
+## §10 — Adapting to scope mode (slice vs full_game)
+
+### §10.1 — At `scope_mode: slice`
 
 **Slice scope ≠ full arc.** A slice ships the minimal viable canvases that telegraph the arc shape; the full arc is the eventual delivery. The locked-visible escalation ladder bridges the two — locked rungs visible from day 1 promise the arc's future without requiring future content to ship.
 
@@ -334,6 +347,22 @@ The R7 brief (Doc 56 R7 + `doctrine/04_authoring_rules.md`) commits to specific 
 | Capstones | Capstones up to slice scope's end-state | (next-chain capstones author when triggered) |
 
 Phase 2+ content is NOT shipped in slice — but the slice's locked-visible rungs telegraph it (Doc 54 §3.6). The doctrine bridges slice + full arc via the locked-visible pattern, not via "ship Phase 2+ stubs."
+
+### §10.2 — At `scope_mode: full_game`
+
+All budgeted canvases are authored. Stage 0→4 ships in full; capstone chains run end-to-end; per-shape Lane 3 budgets fill to their upper bound where the arc demands it.
+
+**Locked-visible escalation ladder still applies** — it's a UI/pacing device, not slice-specific. Even at full scope, the L1 hub menu shows future-tier rungs from day 1 with threshold text; rungs unlock as stat/stage gates pass. RTS Brother's hub shows ALL rungs from day 1 (Talk + Tease at Stage 0, Sex/Sleep visible-locked at higher corruption); rungs unlock organically. The difference vs slice is content existence behind each rung, not the UI shape.
+
+| Full-game element | What ships | UI/pacing affordance |
+|---|---|---|
+| L1 hub menu | Full ladder authored | Locked-visible rungs still gate by stat/stage from day 1 |
+| L2 ambients | All Stage 0→4 ambients per shape budget | Per-stage filtering via canvas conditions |
+| L3 substitutions | Per-shape full budget (family 4–7, slow-burn 1–3, peer 0, service 0, antagonist 0 own) | Per-stage gating per substitution rule |
+| Capstones | Full chains per Doc 57 (Type A/B/C) | Chain steps gate by predecessor flags |
+| Phase 2+ inclusions | Pregnancy / scandal / gallery / tracker per LO decisions surfaced at Stage 1 §0 Q&A | Per Doc 65 — engine entry points + ripple |
+
+**Anti-pattern:** pre-unlocking the entire L1 ladder at full_game because "everything ships." Locked-visible exists at any scope to telegraph progression — don't strip it. See `doctrine/07_anti_patterns.md` §8.X (full-game scope anti-patterns).
 
 ---
 

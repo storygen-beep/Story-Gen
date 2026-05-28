@@ -33,6 +33,51 @@ These constrain everything in the corpus:
 
 ---
 
+## Scope modes (added 2026-05-29)
+
+The pipeline supports two scope modes:
+
+- **`scope_mode: full_game`** (DEFAULT) — produces a complete game. Per-arc-shape FULL canvas budgets per `doctrine/03_arc_shapes.md` §2 (family/ambient 25–35, slow-burn 10–15, peer/dating 8–12, service 6–10, antagonist 6–10). Full Stage 0→4 trajectories per NPC. Full capstone chains per Doc 57. Phase 2+ Strategic Scope decisions (pregnancy / scandal / gallery / tracker per Doc 65) surface as interactive Q&A at Stage 1 §0.
+- **`scope_mode: slice`** — produces a shippable validating chunk. ~10–14 day playable window. 1 NPC at full depth (gold standard) + 4–5 NPCs at minimum-contract depth. Locked-visible escalation rungs telegraph deferred arcs. All four Phase 2+ decisions default to "defer." Used for doctrine validation, dev cycles, incremental expansion (the TLS test slice was authored in this mode).
+
+Concept input declares scope mode explicitly. If omitted, default to `full_game`. Slice authoring is preserved as opt-in for incremental work; the locked-visible escalation ladder applies at BOTH scopes as a UI/pacing device (see `doctrine/03_arc_shapes.md` §10).
+
+### Invocation example (full_game mode)
+
+```
+[Attach: prompts_v2/COMPREHENSIVE_SYSTEM_REFERENCE.md]
+
+Execute Stage 1 per `stages/01_game_book_prompt.md`.
+
+## Concept
+scope_mode: full_game
+Title: <working title>
+Setting: <one-paragraph setup>
+Cast: <NPCs + arc shape hints; let doctrine pick if unsure>
+Constraints: <kink ceilings, time model overrides, etc.>
+Phase 2+ decisions: <leave blank to trigger Stage 1 §0 Q&A; or specify
+  pregnancy/scandal/gallery/tracker = include|defer per Doc 65>
+
+## Output
+Single Markdown game-book per `stages/01_game_book_prompt.md` deliverable spec.
+```
+
+### Invocation example (slice mode, opt-in)
+
+```
+[Same attachment]
+
+Execute Stage 1 per `stages/01_game_book_prompt.md`.
+
+## Concept
+scope_mode: slice
+Title: <working title>
+... (rest as above)
+Slice scope: <N>-day window; 1 NPC at full depth + 4-5 NPCs at minimum-contract
+```
+
+---
+
 ## Folder structure (21 files)
 
 ```

@@ -4584,6 +4584,17 @@ Cross-reference: `doctrine/02_three_lanes_plus_capstone.md` for the lane mechani
 
 ---
 
+**Scope-mode note (read before §2 budget tables):**
+
+The per-arc-shape canvas budgets in §2 are **FULL-ARC targets** — they describe the complete shipped game across all phases, not a slice. Authoring at:
+
+- **`scope_mode: full_game`** (default) — author up to the full budget per shape. All Stage 0→4 content. Full capstone chains.
+- **`scope_mode: slice`** — author a subset (typically 30–50% of budget) + locked-visible rungs telegraphing the deferred remainder.
+
+RTS is the existence proof — Brother (family/ambient) shipped at 15–16 distinct canvases (cluster-merged from a larger surface), landing inside the 25–35 full-arc budget. See `reference/02_rts_scene_catalog.md` for the per-NPC count evidence. The budget table is not aspirational; it's RTS-validated.
+
+---
+
 ## §1 — The five arc shapes
 
 Every NPC in an RTS-shape sandbox runs ONE of these five rhythms. The shape is declared in the R7 design brief BEFORE any canvas is authored (Doc 54 §2.3 + Doc 56 R7).
@@ -4897,7 +4908,9 @@ The R7 brief (Doc 56 R7 + `doctrine/04_authoring_rules.md`) commits to specific 
 
 ---
 
-## §10 — Adapting to slice scope vs full-arc
+## §10 — Adapting to scope mode (slice vs full_game)
+
+### §10.1 — At `scope_mode: slice`
 
 **Slice scope ≠ full arc.** A slice ships the minimal viable canvases that telegraph the arc shape; the full arc is the eventual delivery. The locked-visible escalation ladder bridges the two — locked rungs visible from day 1 promise the arc's future without requiring future content to ship.
 
@@ -4910,6 +4923,22 @@ The R7 brief (Doc 56 R7 + `doctrine/04_authoring_rules.md`) commits to specific 
 | Capstones | Capstones up to slice scope's end-state | (next-chain capstones author when triggered) |
 
 Phase 2+ content is NOT shipped in slice — but the slice's locked-visible rungs telegraph it (Doc 54 §3.6). The doctrine bridges slice + full arc via the locked-visible pattern, not via "ship Phase 2+ stubs."
+
+### §10.2 — At `scope_mode: full_game`
+
+All budgeted canvases are authored. Stage 0→4 ships in full; capstone chains run end-to-end; per-shape Lane 3 budgets fill to their upper bound where the arc demands it.
+
+**Locked-visible escalation ladder still applies** — it's a UI/pacing device, not slice-specific. Even at full scope, the L1 hub menu shows future-tier rungs from day 1 with threshold text; rungs unlock as stat/stage gates pass. RTS Brother's hub shows ALL rungs from day 1 (Talk + Tease at Stage 0, Sex/Sleep visible-locked at higher corruption); rungs unlock organically. The difference vs slice is content existence behind each rung, not the UI shape.
+
+| Full-game element | What ships | UI/pacing affordance |
+|---|---|---|
+| L1 hub menu | Full ladder authored | Locked-visible rungs still gate by stat/stage from day 1 |
+| L2 ambients | All Stage 0→4 ambients per shape budget | Per-stage filtering via canvas conditions |
+| L3 substitutions | Per-shape full budget (family 4–7, slow-burn 1–3, peer 0, service 0, antagonist 0 own) | Per-stage gating per substitution rule |
+| Capstones | Full chains per Doc 57 (Type A/B/C) | Chain steps gate by predecessor flags |
+| Phase 2+ inclusions | Pregnancy / scandal / gallery / tracker per LO decisions surfaced at Stage 1 §0 Q&A | Per Doc 65 — engine entry points + ripple |
+
+**Anti-pattern:** pre-unlocking the entire L1 ladder at full_game because "everything ships." Locked-visible exists at any scope to telegraph progression — don't strip it. See `doctrine/07_anti_patterns.md` §8.X (full-game scope anti-patterns).
 
 ---
 
@@ -6113,6 +6142,14 @@ Every R7 brief has these 10 sections. Order matters — §1 (end-state fantasy) 
 
 ## §3 — Section-by-section template
 
+**Scope mode header (added 2026-05-29):** every R7 brief now opens with a scope-mode declaration before §1:
+
+```markdown
+**Scope mode:** <full_game | slice>
+```
+
+Sections below adapt to the declared scope mode where called out. At `scope_mode: full_game` (default), §1 end-state describes the COMPLETE arc; §3 vocab ceiling rows include Phase 2+ tier content when LO opts in via Stage 1 §0 Q&A; §7 becomes a completeness check against `doctrine/03_arc_shapes.md` §2 per-shape budget. At `scope_mode: slice`, §1 describes slice end-state + Phase 2+ projection; §3 blank rows = slice deferrals; §7 lists canvases missing vs slice target.
+
 ### §3.1 — Section 1: End-state fantasy (one paragraph)
 
 ```markdown
@@ -6617,6 +6654,8 @@ This file is reference. Pull from it when:
 
 The 27 Doc 54 failure modes are organized by category. Each cost a measurable amount of session time when it first surfaced — recovering one of them costs the same time again. Pre-emption is the cheapest version.
 
+**Scope-mode applicability:** anti-patterns in §2–§7 default to **any-scope** (they apply at both `scope_mode: slice` and `scope_mode: full_game`). Slice-specific failure modes are explicitly tagged `(slice-only)`. Full-game-specific failure modes live in §8.6 (added when full-game scope shipped as first-class, 2026-05-29).
+
 ---
 
 ## §2 — Process failures (6 entries — Doc 54 §2)
@@ -6751,7 +6790,7 @@ If a craft instinct conflicts with project memory/doctrine, project wins every t
 
 **Prevention rule:** Cookie texture in slice = Cookie present visually during the diner shift work canvases (per `scene_diner_t0_shift` co-presence). NOT Cookie as a menu item in Marge's hub. When Cookie gets her own arc design (separate future brief), she gets her own hub. **Don't blur authoring boundaries between NPCs even when the design doc pairs them.**
 
-### §3.6 — Slice scope vs full-arc trajectory oscillation
+### §3.6 — Slice scope vs full-arc trajectory oscillation (slice-only)
 
 **What happened:** through the session, kept switching between *"slice scope minimal design"* (which suggested very few cards/items) and *"full-arc trajectory hints"* (which suggested locked-visible Phase 3+ rungs). Took 3+ iterations of Doc 53 to land on the correct synthesis: *"slice ships minimal canvases + locked-visible Phase 3+ rungs pointing at stubs."*
 
@@ -7042,6 +7081,17 @@ If browser MCP is disconnected, ask the user to connect it explicitly. **Do NOT 
 - **Selectable game shapes (Single-NPC Romance vs Multi-NPC Parallel Arcs)** — LO locked this at the Doc 66 pivot. Every game is RTS-shape.
 - **CLAUDE.md ENI persona** — wrong register for canvas authoring. Use RTS-flat default (Doc 30 §7.1) + Tier-3 earned at Lane 4 (Doc 57 §6).
 
+### §8.6 — Full-game scope anti-patterns (full_game-only)
+
+Added 2026-05-29 when `scope_mode: full_game` shipped as first-class default. These failure modes are unique to authoring complete games — they don't surface at slice scope because slice authoring's smaller surface dodges them.
+
+- **Authoring full-game without resolving Doc 65 Phase 2+ decisions upfront** — pregnancy / scandal / gallery / tracker each have engine entry points + design ripple. Choosing them mid-authoring forces rework; choosing them at Stage 1 §0 Q&A keeps the brief coherent. Caught by Stage 1 §0 interactive Q&A flow.
+- **Register hold drifting RTS-flat → Tier-3 over 30+ canvases** — at full-game scope an arc can run 25–35 canvases (family/ambient). Holding RTS-flat across that surface is harder than across a 6-canvas slice. Ambient cascades drift "literary" without the author noticing. Caught by per-canvas voice check (Doc 30 §7.1 — only Lane 4 capstones earn Tier-3).
+- **Capstone chain incoherence at full scale** — Type C chains (Frank's 5-capstone chain) stay coherent at slice (1–2 chain steps shipped) but lose throughline when stretched to 5 steps. Each step should advance the through-narrative; mid-chain steps that "feel like more capstones" but don't tighten the chain = drift. Caught by Doc 57 chain-coherence audit.
+- **Per-arc vocab ceiling drift at high tiers** — Tier 4–5 content (daddy/incest callouts/breeding talk) authored without Doc 30 §7.5 ceiling discipline. Slice authoring rarely hits Tier 4–5 (capped at Stage 2 typically); full-game blows through Tier 4 routinely. Caught by `doctrine/08_kink_vocab_ceilings.md` §2 table per-NPC + per-tier.
+- **Pre-unlocking the L1 ladder at full_game** — assuming "everything ships → no locked-visible rungs needed." Wrong: locked-visible is a UI/pacing device that applies at any scope (per `doctrine/03_arc_shapes.md` §10.2). RTS Brother's hub at full game still shows locked rungs from day 1; rungs unlock as corruption/love climb. Stripping locked-visible because "the content exists" loses the progression affordance. Caught by RTS Brother evidence + Doc 54 §3.6 lesson.
+- **Phase 2+ inclusions emitted as TOML without design book §1 ratification** — Stage 2 sees TOML with pregnancy variants / scandal flags / gallery items / tracker primitives, but Stage 1 design book §1 never declared the corresponding `Phase 2+ inclusions:` rows. Means Stage 1 Q&A flow was skipped or Stage 2 invented inclusions. Caught by Stage 2 §0 cross-reference check against design book §1.
+
 ---
 
 ## §9 — Master pre-ship checklist (Doc 54 Appendix A adapted)
@@ -7258,7 +7308,7 @@ The escalation isn't tier-linear (Tier 0 = 0% / Tier 5 = 100%). It's tier-gated 
 
 **Marge / Cookie — lesbian initiation = TBD (Phase 3+, deferred).** This row is blank in the §2 table.
 
-Where the ceiling is left blank, the area is OUT OF SCOPE for the slice (no scenes touching that kink). When Phase 3+ scopes the area, LO fills the row; only then can authoring proceed.
+Where the ceiling is left blank, the area is OUT OF SCOPE for the declared `scope_mode` (no scenes touching that kink). At `scope_mode: slice`, blank rows are slice-scope deferrals — typical Phase 2+/3+ kink areas (lesbian initiation, breeding talk, etc.) get filled when a later authoring pass expands scope. At `scope_mode: full_game`, blank rows mean LO opted the kink out of the entire game — fill the row before authoring or stub the canvas with `(out-of-scope per LO)` reasoning.
 
 **Rule:** if a proposed scene touches a kink area whose ceiling row is blank, the scene doesn't ship until LO fills the ceiling. Don't author against an undeclared ceiling — that's how Phase C6 morning-chat drift happens.
 
@@ -10033,6 +10083,50 @@ Why this switch is load-bearing: the Marge session (Doc 54) cost ~8 hours to a s
 
 ---
 
+## §0.5 — Scope mode declaration (read before authoring)
+
+This prompt supports two scope modes:
+
+- **`scope_mode: full_game`** (DEFAULT) — author the COMPLETE game. Per-arc-shape FULL canvas budgets per `doctrine/03_arc_shapes.md` §2 (family/ambient 25–35, slow-burn 10–15, peer/dating 8–12, service 6–10, antagonist 6–10). Full Stage 0→4 trajectories per NPC. Full capstone chains per Doc 57. Phase 2+ Strategic Scope decisions (Doc 65) surface as interactive Q&A — see §0.5.2 below.
+- **`scope_mode: slice`** — author a shippable validating chunk. ~10–14 day playable window. 1 NPC at full depth (gold standard) + 4–5 NPCs at minimum-contract depth. Locked-visible escalation rungs telegraph deferred arcs. Phase 2+ deferrals listed explicitly (no Q&A — all four default to defer).
+
+### §0.5.1 — Read scope_mode from concept input
+
+LO's concept input should declare `scope_mode: <full_game | slice>` near the top. If the declaration is present, proceed to §0.5.2 (full_game) or skip directly to §1 (slice). If the declaration is ABSENT, default to `scope_mode: full_game` and proceed to §0.5.2.
+
+### §0.5.2 — Interactive Phase 2+ Q&A flow (full_game mode only)
+
+Before authoring §1 of the design book, you must resolve the four Doc 65 Phase 2+ Strategic Scope decisions. Scan LO's concept input — if any of the four is explicitly declared (`pregnancy = include`, `scandal = defer`, etc.), record the call and skip that question. For each UNRESOLVED decision, ask LO ONE question at a time. Wait for the answer. THEN ask the next. Do NOT batch the four questions into one message.
+
+The four decisions in order:
+
+1. **Pregnancy** — include in this game OR defer to a future amendment?
+2. **Scandal arc** — include OR defer?
+3. **Gallery system** — include if 9+ once-only capstones planned (Doc 65 trigger)?
+4. **Tracker / progress system** — include with Doc 62 `guide` backfill?
+
+Question template (one at a time):
+
+> **Phase 2+ decision needed: [Pregnancy/Scandal/Gallery/Tracker]**
+>
+> **Context:** [One-paragraph summary from Doc 65 — engine entry points + ripple + design implications. E.g., for pregnancy: "Affects every sex scene's bareback framing, requires pregnancy stat + variant prose for retrofit-affected scenes, gates Tier 5+ breeding talk per doctrine/08."]
+>
+> **Doctrine recommendation:** [include OR defer + 1-sentence reasoning per Doc 65 per-decision row]
+>
+> **Your call?**
+
+After LO answers each, record the call. After all four are resolved (or skipped because the concept declared them), proceed to §1. Do NOT begin authoring §1 of the design book before all four decisions are resolved.
+
+If LO declares `scope_mode: slice`, SKIP §0.5.2 entirely. Slice authoring defers all four to Phase 2+ by default; no Q&A needed.
+
+### §0.5.3 — Non-Doc-65 clarifying questions (alongside or instead of §0.5.2)
+
+If the concept is missing critical NON-Doc-65 information (cast count, kink ceilings, time model, economic engine specifics), ALSO ask 1–3 clarifying questions before authoring. Do NOT invent answers — that's the Marge §2.3 question-avoidance failure mode (Doc 54).
+
+Order: at `scope_mode: full_game`, ask Phase 2+ Q&A first (§0.5.2), then non-Doc-65 clarifying questions. At `scope_mode: slice`, ask only the non-Doc-65 clarifying questions.
+
+---
+
 ## §1 — The job
 
 You are authoring a **design book** for an RTS-shape sandbox game.
@@ -10042,7 +10136,9 @@ You are authoring a **design book** for an RTS-shape sandbox game.
 LO's concept input is a free-text pitch. Typical shape (you'll see variants):
 
 ```
-"Game: <title>. Setting: <where + when>. Player character: <name + brief>.
+"scope_mode: <full_game | slice>  # If omitted, default to full_game.
+
+Game: <title>. Setting: <where + when>. Player character: <name + brief>.
 
 NPCs (4-6):
 - <Name 1>: <role + relationship to player + 1-line fantasy hook>
@@ -10050,6 +10146,15 @@ NPCs (4-6):
 - ...
 
 Themes: <kink areas the game should explore at full intensity>
+
+# At scope_mode: full_game — Phase 2+ inclusions (optional; if omitted, ask via §0.5.2 Q&A):
+Phase 2+ inclusions:
+  pregnancy: <include | defer>
+  scandal: <include | defer>
+  gallery: <include | defer>
+  tracker: <include | defer>
+
+# At scope_mode: slice — Phase 2+ deferrals (all four default to defer):
 Slice scope: <what ships in the first slice — typically 1 fully-authored NPC + skeletal others>
 Phase 2+ scope: <what's deferred — typically pregnancy / scandal / etc.>
 "
@@ -10061,22 +10166,31 @@ LO may also include: time period (modern / period piece), economic engine (rent 
 
 A design book in structured markdown. Each NPC gets its own R7 brief (per `doctrine/06_design_brief_template.md`). The world setup + locations + economic engine + cross-arc table live in shared sections.
 
-Concretely, your output is:
+Concretely, your output is (scope-conditional — branch sections based on declared `scope_mode`):
 
 ```markdown
 # <Game Title> — Design Book
+
+**Scope mode:** <full_game | slice>
 
 ## §1 World Setup
 - Premise (1-2 paragraphs)
 - Player character (Maya — adapt name if LO specified)
 - Economic engine (rent / income source / etc.)
-- Slice scope (Phase 1) vs Phase 2+ deferrals
+- [At full_game]   Phase 2+ inclusions (pregnancy / scandal / gallery / tracker — Yes/No per decision, resolved at §0.5.2 Q&A)
+- [At slice]       Slice scope (Phase 1) vs Phase 2+ deferrals
 - Time model (24h vs 6-band)
 
 ## §2 NPC Roster (4-6 NPCs)
+[At full_game]
+| NPC | Arc shape | Full-arc depth | Vocab ceiling |
+|---|---|---|---|
+| ... | ... | (canvas count matching per-shape full budget per doctrine/03 §2) | ... |
+
+[At slice]
 | NPC | Arc shape | Slice depth | Vocab ceiling |
 |---|---|---|---|
-| ... | ... | ... | ... |
+| ... | ... | (Fully authored / Skeletal / Sketch / etc.) | ... |
 
 ## §3 Locations
 - Home hub + sub-locations
@@ -10087,13 +10201,23 @@ Concretely, your output is:
 - For each NPC, full 10-section R7 brief per doctrine/06
 
 ## §5 Cross-arc World State
-- Shared flags + scandal/awareness systems (per slice scope)
-- Phase 2+ retrofit-compatibility notes (e.g., bareback framing — Doc 30 §7.3.1)
+- [At full_game] Shared flags + scandal/awareness systems per Phase 2+ inclusions (only emit scandal/awareness traits if scandal = include)
+- [At slice] Shared flags + scandal/awareness systems (per slice scope)
+- Phase 2+ retrofit-compatibility notes (bareback framing — Doc 30 §7.3.1 — applies when bareback default is active per stages/02 §0.5)
 
 ## §6 Capstone Chain Map
-- Per-NPC chain in order
+- Per-NPC chain in order (full chain at full_game; slice-scope subset at slice)
 - Cross-NPC bridge scenes (if any)
 
+[At full_game]
+## §7 Full-Game Build Plan
+- Day 1 bootstrap (per RTS reference/01 §4)
+- Per-NPC stage transition milestones (Stage 0→1, 1→2, etc. — when does the player typically hit each?)
+- Capstone chain milestones (when does the first capstone fire? when does the chain complete?)
+- Phase 2+ system enable points (e.g., pregnancy mechanic activates at Frank Stage 3)
+- Endgame state (what does "completed game" look like? per Doc 65 endgame doctrine)
+
+[At slice]
 ## §7 Slice Build Plan
 - Day-by-day flow for the slice
 - Day 1 bootstrap (per RTS reference/01 §4)
@@ -10112,13 +10236,15 @@ The design book MUST:
 - Author one full R7 brief per NPC per `doctrine/06_design_brief_template.md` §2 (10 sections each)
 - Declare per-arc vocab ceilings per `doctrine/08_kink_vocab_ceilings.md` §2
 - Plan capstone chains per `doctrine/02_three_lanes_plus_capstone.md` §5 + `doctrine/03_arc_shapes.md` §3.5 budgets
-- Commit to slice scope vs full-arc trajectory explicitly (locked-visible rungs bridge — Doc 54 §3.6)
+- Declare scope mode in the file header (`**Scope mode:** <full_game | slice>`) and stay consistent with it throughout (no mixing slice locked-visible deferrals with full_game authored rungs without explicit justification — `doctrine/07_anti_patterns.md` §3.6)
+- At `scope_mode: full_game`: ratify all four Doc 65 Phase 2+ decisions in §1 before authoring §2+
+- At `scope_mode: slice`: commit to slice scope vs full-arc trajectory explicitly (locked-visible rungs bridge — Doc 54 §3.6)
 
 The design book MUST NOT:
 
 - Restate doctrine from the prompts_v2 reference corpus (cite, don't restate)
 - Include scene-body prose (this is Stage 2's job; Stage 1 is shape spec)
-- Author against undefined kink ceilings (blank rows in §8 vocab table = out-of-scope for slice)
+- Author against undefined kink ceilings (blank rows in §8 vocab table = out-of-scope for declared `scope_mode`)
 - Pad empty cells in the per-arc-shape distribution table (per `doctrine/03_arc_shapes.md` §9 — empty cells are honest)
 - Reach for legacy patterns (see `00_LEGACY_IGNORE.md` for full list)
 
@@ -10166,14 +10292,19 @@ These describe the canonical reference game (Road to Success). Cite them when ma
 
 Read LO's pitch carefully. Pay attention to:
 
+- **Scope mode** — `scope_mode: full_game` (default) or `scope_mode: slice`. Detect this FIRST; it changes how Steps 2–8 proceed (full-arc depth vs slice depth per NPC; Phase 2+ Q&A vs deferrals; §7 build plan shape).
+- **Phase 2+ inclusions** — at `scope_mode: full_game`, check whether the concept declares any of pregnancy / scandal / gallery / tracker. Unresolved ones drive the §0.5.2 interactive Q&A.
 - **Setting / period** — modern small town vs. period piece changes vocab + economic engine + location set
 - **Named NPCs** — does LO give 4 or 6? Are there NPC-name suggestions, or just role suggestions?
 - **Themes / kink areas** — these map to `doctrine/08_kink_vocab_ceilings.md` rows. Mark which rows are in-scope.
-- **Slice vs full-arc scope** — explicit deferral statements (e.g., "Phase 2+ pregnancy retrofit")
 - **Player character** — name, age, background, agency
 - **Specific references** — "in the style of RTS Brother arc" / "like Doc 31 Frank" = treat as binding constraint
 
-If the concept is missing critical information (e.g., no slice scope declared, or no kink ceilings named), ask LO 1-3 clarifying questions BEFORE authoring. Do NOT invent answers to unspecified scope decisions — that's the Marge §2.3 question-avoidance failure mode (Doc 54).
+**Pre-authoring Q&A — order matters:**
+1. At `scope_mode: full_game` — run §0.5.2 Phase 2+ Q&A first (one question at a time, wait for answer between each)
+2. Either mode — if critical NON-Doc-65 info is missing (cast count, kink ceilings, time model), ask 1–3 clarifying questions BEFORE authoring
+
+Do NOT invent answers to unspecified scope decisions — that's the Marge §2.3 question-avoidance failure mode (Doc 54). Do NOT batch multiple Phase 2+ questions into one message — the doctrine requires one-at-a-time.
 
 ### Step 2 — Pick the cast (4–6 NPCs)
 
@@ -10185,7 +10316,10 @@ The cast composition gates everything downstream. Per Doc 56 P4 — mix arc shap
 2. For each named NPC, propose an arc shape from `doctrine/03_arc_shapes.md` §1 (family/ambient, slow-burn family, peer/dating, service, antagonist/witness)
 3. **Mix the shapes deliberately.** A good cast has 3+ distinct shapes (typically 1 family/ambient + 1 slow-burn family + 1 peer/dating + 1 service + 1 antagonist + optional 6th).
 4. If LO's pitch leans heavily toward one shape (e.g., 4 family/ambient NPCs), surface this to LO as a flag: "this cast will read all-grindy because all 4 NPCs use the same mechanical rhythm — recommend swapping 1 to peer/dating + 1 to antagonist." Don't author into the imbalance.
-5. Lock the cast in §2 of the design book.
+5. **Assign depth per NPC per declared scope_mode:**
+   - At `scope_mode: full_game`: each NPC ships at its per-arc-shape FULL budget (family/ambient 25–35, slow-burn 10–15, peer/dating 8–12, service 6–10, antagonist 6–10 own + cross-arc appearances). NO "minimum-contract depth" tier — every NPC ships their complete arc.
+   - At `scope_mode: slice`: 1 NPC at full depth (gold standard, ~28 canvases if family/ambient) + 4–5 NPCs at minimum-contract depth (~6 canvases each, locked-visible rungs telegraph the rest).
+6. Lock the cast in §2 of the design book.
 
 **Decision rule per NPC (per `doctrine/03_arc_shapes.md` §8):**
 
@@ -10204,8 +10338,8 @@ If no shape fits, surface to LO. Don't invent a 6th shape — the corpus doesn't
 - **Premise.** Why is the player here? What's the inciting situation? Concrete + specific. ~2 paragraphs.
 - **Player character.** Name (default "Maya" — adapt if LO specified), age (typically 20-23), background (one sentence), agency frame (what can the player choose?).
 - **Economic engine.** Per Doc 30 §4.1 — RTS pattern is rent + first-week deadline. Specifics: rent amount + due day + grace periods. Starting money + first income source.
-- **Slice scope (Phase 1).** What ships in the first 10-14 day slice? Typically: 1 NPC at full depth (gold standard) + 4-5 NPCs at minimum-contract depth + 1 cross-arc capstone.
-- **Phase 2+ deferrals.** Pregnancy / scandal / gallery / etc. per `doctrine/09_trait_catalog.md` §6.1.
+- **At `scope_mode: full_game` — Phase 2+ inclusions.** Per the §0.5.2 Q&A resolutions, declare each of pregnancy / scandal / gallery / tracker as `include` or `defer`. Include = ships in this game with full engine support; defer = locked-visible scaffolding only OR completely absent per LO's call.
+- **At `scope_mode: slice` — Slice scope (Phase 1) + Phase 2+ deferrals.** What ships in the first 10-14 day slice? Typically: 1 NPC at full depth (gold standard) + 4-5 NPCs at minimum-contract depth + 1 cross-arc capstone. All four Doc 65 decisions default to defer per `doctrine/09_trait_catalog.md` §6.1.
 - **Time model.** 24h clock vs. 6-band model (EM/M/A/E/N/LN). Pick one. Per Doc 30 §4.3 — TLS slice uses 24h; future games can pick 6-band.
 
 ### Step 4 — Draft locations + schedules
@@ -10243,7 +10377,7 @@ For each in-scope NPC, draft their full week schedule (weekdays + weekend varian
 - **Family/ambient (Frank-shape):** full 6-tier ladder + all 4 location hubs + Lane 2 ambients per location + Lane 3 substitutions on chore activities + 5 capstone chain
 - **Slow-burn family (Jake-shape):** 2-5 stage milestones + dual-path Stage 0→1 via beauty/glance + 1-3 Lane 3 walk-ins keyed to revelation beats + 3-5 capstones
 - **Peer/dating (Ryan-shape):** Stage 0-4 relation-driven + 0 Lane 3 + Lane 1 visits at workplace + 3-4 dating-chain capstones
-- **Service (Marge-shape):** 1 unlocked tier + locked-visible Phase 3+ rungs + empty Lane 2/3 in slice + 1-2 capstones (hire + mid-arc escalation if vocab allows)
+- **Service (Marge-shape):** 1 unlocked tier + locked-visible Phase 3+ rungs + empty Lane 2/3 by shape doctrine (any scope) + 1-3 capstones (hire + mid-arc escalation if vocab allows; cap depends on scope_mode + Phase 2+ inclusions)
 - **Antagonist/witness (Diana-shape):** silent awareness accumulator 0-100 + bands (cold/suspicious/knowing/shut-out) + 0 own Lane 3 (appears as interruptor in others') + 1-2 confrontation capstones (Type B Pattern F branches)
 - **Phase 3+ scope-out (Cookie-shape):** formal scope-out doc per `28th_april_TLS_Phase2_Redesign/61_Cookie_Phase3_Scope_Out.md` template — NO full brief
 
@@ -10279,18 +10413,21 @@ For each NPC + each in-scope kink area, declare the ceiling at full intensity (T
 
 Per LO 2026-05-16 pattern (`doctrine/08_kink_vocab_ceilings.md` §3): default to maximum-explicit unless LO explicitly says otherwise. Anything softer is the wrong default given the pattern.
 
-**Blank rows = out-of-scope.** If LO's concept doesn't surface a kink area, the ceiling is blank and the slice doesn't author that content.
+**Blank rows = out-of-scope** for the declared `scope_mode`. At slice, blank rows are typical Phase 2+ deferrals. At full_game, blank rows mean LO opted the kink out of the entire game (see `doctrine/08_kink_vocab_ceilings.md` §4.4).
 
 ### Step 8 — Emit the design book
 
 Compile §1–§7 into the structured markdown output per §1.2 above. The file should be:
 
-- **3,000–6,000 words** total (longer for 6-NPC casts with all family/ambient)
-- **Per-NPC brief:** 250–350 lines tabular each
-- **Cross-arc + capstone chain map:** ~50 lines per NPC's chain
-- **Slice build plan:** ~30 lines (day-by-day flow)
+- **At `scope_mode: slice` — 3,000–6,000 words** total (longer for 6-NPC casts with all family/ambient)
+- **At `scope_mode: full_game` — 8,000–15,000+ words** total (per-NPC briefs run longer at full-arc depth; capstone chain map grows; §7 Full-Game Build Plan adds stage-transition milestones + Phase 2+ enable points)
+- **Per-NPC brief:** 250–350 lines tabular at slice; 400–600 lines at full_game (depth column drives ladder/pretext/lane sections to scale)
+- **Cross-arc + capstone chain map:** ~50 lines per NPC's chain at slice; ~80–120 lines at full_game (full chain instead of slice-end subset)
+- **Build plan:** ~30 lines (day-by-day) at slice; ~60–80 lines at full_game (day-by-day for opening 14 days + stage-transition milestone schedule + Phase 2+ enable points)
 
-Deliver the design book in one response. Don't truncate. If you run long, surface scope concerns BEFORE delivery, not by truncation.
+**Delivery:**
+- At `scope_mode: slice`: deliver the design book in one response. Don't truncate. If you run long, surface scope concerns BEFORE delivery, not by truncation.
+- At `scope_mode: full_game`: full-game game-books run long and may hit max output tokens. If you approach the limit, stop at a CLEAN section boundary (end of §N) and emit a single line: `**[Resume from §N+1 in next message]**`. Then stop. Do NOT truncate mid-section. Do NOT include partial briefs.
 
 ---
 
@@ -10298,16 +10435,29 @@ Deliver the design book in one response. Don't truncate. If you run long, surfac
 
 The design book is structured markdown with specific section requirements.
 
+**Scope-mode note for the §5.x worked examples below:** the worked examples (§5.1 file header onward, including the §5.7 cross-arc section and §5.8 build plan) are written in **`scope_mode: slice`** convention — they show the TLS Frank slice authored at slice depth, with locked-visible rungs for Phase 2+ deferrals. This was the corpus's original authoring mode (pre-2026-05-29) and is preserved as the slice-mode exemplar.
+
+**At `scope_mode: full_game`** (the new default), adapt each §5.x example as follows:
+- §5.1 file header: replace `**Slice scope:** <N>-day slice` with `**Phase 2+ inclusions:** pregnancy=..., scandal=..., ...` per the §0.5.2 Q&A resolutions
+- §5.2 World setup: emit `### Phase 2+ inclusions` block (per §1.2 template) instead of `### Slice scope (Phase 1)` + `### Phase 2+ deferrals`
+- §5.3 NPC roster: column header = `Full-arc depth`; canvas counts match per-shape full budgets (family/ambient 25–35, etc.)
+- §5.7 Cross-arc: emit full-game scandal/awareness systems if scandal=include; cross-NPC bridges run the full chain instead of "None in slice"
+- §5.8 Build plan: title = `## §7 Full-Game Build Plan`; covers day 1 bootstrap + stage-transition milestones + capstone chain milestones + Phase 2+ enable points + endgame state (per §1.2 full_game template)
+
+The lane mechanism (§5.5 per-NPC R7 brief sections), capstone chain shape (§5.6), and per-NPC voice spec all work identically at both scopes — the change is content volume, not shape.
+
 ### §5.1 — File header
 
 ```markdown
 # <Game Title> — Design Book
 
+**Scope mode:** <full_game | slice>
 **Author:** ENI (Stage 1 authoring)
 **Authority:** Designed per `prompts_v2/` doctrine (Doc 66 corpus, complete).
 **Status:** Stage 1 output — consumed by `stages/02_toml_generation_prompt.md` for TOML emission.
 **Cast:** <N> NPCs, mix of <shape list>
-**Slice scope:** <N>-day slice; Phase 2+ deferrals: <list>
+[At full_game] **Phase 2+ inclusions:** pregnancy=<inc/def>, scandal=<inc/def>, gallery=<inc/def>, tracker=<inc/def>
+[At slice]     **Slice scope:** <N>-day slice; Phase 2+ deferrals: <list>
 ```
 
 ### §5.2 — §1 World setup section
@@ -10332,6 +10482,8 @@ The design book is structured markdown with specific section requirements.
 - **Starting money:** $<amount>
 - **First income source:** <NPC arc that pays — typically the service NPC>
 
+[At `scope_mode: slice` — emit both Slice scope + Phase 2+ deferrals blocks below:]
+
 ### Slice scope (Phase 1)
 
 - **Duration:** <N>-day slice (typically 10-14 days)
@@ -10343,12 +10495,25 @@ The design book is structured markdown with specific section requirements.
 
 <list per Doc 65 + doctrine/09 §6.1 off-limits — pregnancy / scandal / gallery / cross-arc tracker>
 
+[At `scope_mode: full_game` — replace both blocks above with Phase 2+ inclusions, resolved at §0.5.2 Q&A:]
+
+### Phase 2+ inclusions (resolved at §0.5.2 Q&A)
+
+| Decision | Call | Engine entry point / scope impact |
+|---|---|---|
+| Pregnancy | <include / defer> | <e.g., "include — gates Tier 5 breeding talk at Frank Stage 4+; pregnancy stat + variant scenes ship"> |
+| Scandal arc | <include / defer> | <e.g., "include — awareness 0–100 accumulator + 4 confrontation branches Type B Pattern F"> |
+| Gallery system | <include / defer> | <e.g., "include — 9+ once-only capstones authored; gallery item ships with thumbnail + replay"> |
+| Tracker / progress | <include / defer> | <e.g., "defer — Doc 62 `guide` PRD held"> |
+
 ### Time model
 
 <24h clock OR 6-band model EM/M/A/E/N/LN; rationale>
 ```
 
 ### §5.3 — §2 NPC roster section
+
+[At `scope_mode: slice` — column header = "Slice depth":]
 
 ```markdown
 ## §2 NPC Roster (<N> NPCs)
@@ -10364,6 +10529,23 @@ The design book is structured markdown with specific section requirements.
 **Shape mix:** family/ambient + slow-burn family + peer/dating + service + antagonist (5 shapes covered). Per P4 — mixed tempos.
 
 **Total estimated canvas count:** ~50-65 (Frank dominant at ~28; others 6-10 each).
+```
+
+[At `scope_mode: full_game` — column header = "Full-arc depth"; canvas counts match per-shape full budgets per `doctrine/03_arc_shapes.md` §2:]
+
+```markdown
+## §2 NPC Roster (<N> NPCs)
+
+| NPC | Arc shape | Full-arc depth | Fantasy (1 line) | Vocab ceiling |
+|---|---|---|---|---|
+| Frank | Family/ambient | 25-35 canvases (Lane 1 hubs ×4 + Lane 2 ambients 11 + Lane 3 substitutions 4-7 + 3-6 capstones) | Paternal seduction → secret-then-open second wife → breeding endgame | FULL DADDY + FULL BREEDING (Tier 5) |
+| Cole | Peer/dating | 8-12 canvases (Lane 1 workplace hub ×2 + Lane 2 ambients 2 + Lane 3 = 0 + 3-4 dating capstones) | First-boyfriend wholesome dating → partner commit | FULL Stage 3+ if escalation arc |
+| Hank | Family/ambient | 25-35 canvases | Diner owner paternal-coded second-father | FULL DADDY |
+| Rosa | Service | 6-10 canvases (Lane 1 workplace ×1-2 + Lane 2 = 0 + Lane 3 = 0 + 1-3 capstones) | Workplace mentor / corrupt-the-mentor reversal | per LO |
+
+**Shape mix:** <list> (<N> shapes covered). Per P4 — mixed tempos.
+
+**Total estimated canvas count:** <sum across NPCs> (matching per-shape sums + Phase 2+ inclusions per §1).
 ```
 
 ### §5.4 — §3 Locations section
@@ -10974,6 +11156,23 @@ CLAUDE.md is ignored for this task — `00_LEGACY_IGNORE.md` §3.6 + Doc 30 §3 
 
 ---
 
+## §0.5 — Scope mode (read scope from design book §1)
+
+Stage 2 inherits scope mode from the design book's §1 `**Scope mode:** <full_game | slice>` declaration. The mode affects TOML volume + Phase 2+ inclusions + bareback default.
+
+| `scope_mode` | TOML volume target | Pregnancy retrofit | Scandal arc | Gallery system | Tracker |
+|---|---|---|---|---|---|
+| `full_game` (default) | 200–400KB typical (full per-shape budgets per `doctrine/03_arc_shapes.md` §2) | Per design book §1 `Phase 2+ inclusions: pregnancy = include/defer` | Per design book §1 inclusion | Per design book §1 (ships if 9+ once-only capstones) | Per design book §1 (ships with Doc 62 `guide` backfill) |
+| `slice` | 50–100KB typical (subset of per-shape budget; locked-visible rungs for deferrals) | Bareback throughout (Phase 2+ deferred by default) | Locked-visible only (Phase 2+ deferred) | Deferred | Deferred |
+
+**Cross-reference check:** if the TOML you're emitting includes pregnancy variants / scandal flags / gallery items / tracker primitives, verify the design book §1 explicitly opts each one in. Stage 1's §0 interactive Q&A is where these are ratified; Stage 2 emitting Phase 2+ inclusions without §1 ratification = `doctrine/07_anti_patterns.md` §8.6 last bullet.
+
+**Bareback default applies when:** `scope_mode: slice` OR `scope_mode: full_game` with `Phase 2+ inclusions: pregnancy = defer`. Contraception language is BANNED in sex scenes in both cases (Doc 30 §7.3.1 — blocks Phase 2+ pregnancy retrofit). Only `scope_mode: full_game` with `pregnancy = include` allows contraception language in pre-pregnancy phase scenes + pregnancy variants in retrofit-affected scenes.
+
+If the design book §1 is missing the `Scope mode:` declaration entirely, treat as legacy slice authoring (pre-2026-05-29 corpus convention) and emit with `slice` defaults — bareback throughout, minimal volume, Phase 2+ deferred.
+
+---
+
 ## §1 — The job
 
 You emit **TOML** for an RTS-shape sandbox game.
@@ -10982,13 +11181,13 @@ You emit **TOML** for an RTS-shape sandbox game.
 
 A design book (markdown) from Stage 1. The design book has:
 
-- §1 World Setup (premise + player + economic engine + slice scope + time model)
-- §2 NPC Roster (4-6 NPCs with arc shapes + slice depth + vocab ceilings)
+- §1 World Setup (premise + player + economic engine + scope mode declaration + Phase 2+ inclusions [full_game] or slice scope [slice] + time model)
+- §2 NPC Roster (4-6 NPCs with arc shapes + per-NPC depth column [Full-arc depth at full_game / Slice depth at slice] + vocab ceilings)
 - §3 Locations (home + town + per-NPC schedules)
 - §4 Per-NPC R7 Briefs (10-section briefs per NPC)
-- §5 Cross-arc World State (shared flags + pregnancy retrofit notes)
+- §5 Cross-arc World State (shared flags + pregnancy retrofit notes if pregnancy = include)
 - §6 Capstone Chain Map (per-NPC chains + cross-NPC bridges)
-- §7 Slice Build Plan (day-by-day flow)
+- §7 Build Plan (Full-Game Build Plan at full_game / Slice Build Plan at slice — day-by-day flow)
 
 You read this design book + emit a TOML file that captures every canvas + NPC + location + quest card + sidebar item + capstone the brief specifies. Plus the scene-body prose, which the brief is silent on (Stage 1 is shape spec; Stage 2 authors prose per `doctrine/05_rts_flat_prose.md`).
 
@@ -11071,7 +11270,7 @@ id = "..."
 ...
 ```
 
-Every section in the design book maps to a TOML section. Sections in the TOML schema that the design book is silent on (e.g., `[[items]]`, `[[passes]]`) should be populated as needed for the game's mechanics — typically minimal at slice scope.
+Every section in the design book maps to a TOML section. Sections in the TOML schema that the design book is silent on (e.g., `[[items]]`, `[[passes]]`) should be populated as needed for the game's mechanics — minimal at `scope_mode: slice`, fuller at `scope_mode: full_game` if the game's mechanics demand (e.g., gallery system enabled per §0.5 = `[[items]]` populated with gallery entries).
 
 ### §1.3 — Output contract
 
@@ -11088,7 +11287,7 @@ The TOML MUST:
 The TOML MUST NOT:
 
 - Reach for legacy patterns (Pattern A–J as repeatable-content macros, etc.)
-- Include contraception language in slice sex scenes (per Doc 30 §7.3.1 bareback throughout)
+- Include contraception language in sex scenes when bareback default applies — `scope_mode: slice` OR `scope_mode: full_game` with `Phase 2+ inclusions: pregnancy = defer` (per Doc 30 §7.3.1; see §0.5 above)
 - Surface stage trait in any sidebar item (per `doctrine/09_trait_catalog.md` §9 internal-only)
 - Surface antagonist awareness in any sidebar item (per Doc 30 §6 + `doctrine/09_trait_catalog.md` §8)
 - Use `op = "sub"` for decay (engine has only `add` + `set`; use `op = "add"` + negative `value`)
@@ -11363,7 +11562,7 @@ bands = [
 
 ### Step 8 — Emit `[[clothing]]` + `[[passes]]` + `[[items]]` (if applicable)
 
-Per design book §1 enable flags. Minimal at slice scope.
+Per design book §1 enable flags. Minimal at `scope_mode: slice`. At `scope_mode: full_game`, enable any Phase 2+ system the design book §1 opted in (pregnancy mechanics, scandal awareness, gallery system, tracker primitive).
 
 ```toml
 [[clothing]]
@@ -12790,11 +12989,15 @@ Per D67-R7. Without `substitution_only`, the target appears as a clickable surfa
 
 Grep `[[sidebar_items]]` for any item with `trait = "<slug>_stage"` or `trait = "awareness"` (on antagonist NPC). Both are violations.
 
-### §10.11 — Contraception language in slice sex scenes (Doc 30 §7.3.1)
+### §10.11 — Contraception language when bareback default applies (Doc 30 §7.3.1)
+
+**Applies when:** `scope_mode: slice` OR `scope_mode: full_game` with `Phase 2+ inclusions: pregnancy = defer`.
 
 Grep all scene-body prose for: `condom`, `pull out`, `birth control`, `pill`, `careful`, `pregnant` (in pre-Phase-2 contexts).
 
-All slice Frank (or family/ambient) sex scenes ship BAREBACK with no contraception language. Phase 2+ pregnancy retrofit will add parallel pregnant variants; contraception language BLOCKS retrofit.
+All family/ambient sex scenes ship BAREBACK with no contraception language. Phase 2+ pregnancy retrofit (whether shipped in this game or deferred) will add parallel pregnant variants; contraception language BLOCKS retrofit.
+
+**Exception — when this rule INVERTS:** at `scope_mode: full_game` with `Phase 2+ inclusions: pregnancy = include`, contraception language is ALLOWED in pre-pregnancy phase scenes (gates the pregnancy mechanic — without "careful" framing the pregnancy beat lands without setup). Pregnancy-variant scenes ship bareback with breeding talk per `doctrine/08_kink_vocab_ceilings.md` Tier 5+. In this mode, contraception language in post-pregnancy scenes still BANNED (breaks immersion).
 
 ### §10.12 — Legacy vocabulary
 
@@ -12843,7 +13046,7 @@ Run this BEFORE delivering the TOML.
 ### Voice + content
 - [ ] All Lane 1/2/3 prose is RTS-flat (≤30-word caption density; no atmospheric sensory detail; one beat = one click)
 - [ ] All Lane 4 capstone prose earns Tier-3 register (per `doctrine/05_rts_flat_prose.md` §3 — specific, layered, character-distinguishing)
-- [ ] No contraception language in slice sex scenes (Doc 30 §7.3.1)
+- [ ] Contraception language compliance per §10.11 (BANNED when bareback default applies; ALLOWED in pre-pregnancy scenes when `scope_mode: full_game` + `pregnancy = include`; Doc 30 §7.3.1)
 - [ ] No legacy vocabulary (Pattern A–J as macros, 7-driver archetypes, whiteboard goals, etc.)
 - [ ] Per-NPC vocab ceilings honored (daddy at Frank Tier 4+ when in scope, incest callouts at Jake Tier 3+, etc.)
 
@@ -12907,11 +13110,15 @@ The target canvas relies on the parent activity's substitution rule conditions f
 
 Without it: the substitution rule may fire even when the NPC isn't co-located (e.g., NPC is at school per schedule but substitution evaluates only chance + extra conditions). Result: NPC "appears" in scenes when the world model says they're elsewhere.
 
-### §12.8 — Pregnancy language in slice (Doc 30 §7.3.1)
+### §12.8 — Pregnancy language when bareback default applies (Doc 30 §7.3.1)
 
-You author a Frank sex scene with the line "He pulls out at the last second." Phase 2+ pregnancy retrofit will need pregnant variants of this scene; the "pulls out" language BLOCKS retrofit (pregnant variant should show him cumming inside).
+**Applies when:** `scope_mode: slice` OR `scope_mode: full_game` with `Phase 2+ inclusions: pregnancy = defer`.
 
-**Right:** ALL slice Frank sex scenes ship BAREBACK with cum-inside framing (no breeding talk in Phase 1; full breeding talk Phase 2+ when pregnancy ships).
+You author a Frank sex scene with the line "He pulls out at the last second." Phase 2+ pregnancy retrofit (whether shipped in this game or deferred) will need pregnant variants of this scene; the "pulls out" language BLOCKS retrofit (pregnant variant should show him cumming inside).
+
+**Right:** family/ambient sex scenes ship BAREBACK with cum-inside framing (no breeding talk pre-Phase-2; full breeding talk Phase 2+ when pregnancy ships per §0.5 inclusions).
+
+**Exception — when this rule INVERTS:** at `scope_mode: full_game` with `pregnancy = include`, pre-pregnancy scenes ship WITH contraception cues + careful framing (gates the upcoming pregnancy beat); post-pregnancy scenes ship BAREBACK with breeding talk per `doctrine/08_kink_vocab_ceilings.md` Tier 5+. The retrofit-block rule still applies to pre-pregnancy scenes: their language must support the pregnant variant retrofit when the pregnancy beat fires.
 
 ### §12.9 — Hub menu over-weighting (Doc 54 §3.1)
 

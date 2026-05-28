@@ -24,6 +24,23 @@ CLAUDE.md is ignored for this task — `00_LEGACY_IGNORE.md` §3.6 + Doc 30 §3 
 
 ---
 
+## §0.5 — Scope mode (read scope from design book §1)
+
+Stage 2 inherits scope mode from the design book's §1 `**Scope mode:** <full_game | slice>` declaration. The mode affects TOML volume + Phase 2+ inclusions + bareback default.
+
+| `scope_mode` | TOML volume target | Pregnancy retrofit | Scandal arc | Gallery system | Tracker |
+|---|---|---|---|---|---|
+| `full_game` (default) | 200–400KB typical (full per-shape budgets per `doctrine/03_arc_shapes.md` §2) | Per design book §1 `Phase 2+ inclusions: pregnancy = include/defer` | Per design book §1 inclusion | Per design book §1 (ships if 9+ once-only capstones) | Per design book §1 (ships with Doc 62 `guide` backfill) |
+| `slice` | 50–100KB typical (subset of per-shape budget; locked-visible rungs for deferrals) | Bareback throughout (Phase 2+ deferred by default) | Locked-visible only (Phase 2+ deferred) | Deferred | Deferred |
+
+**Cross-reference check:** if the TOML you're emitting includes pregnancy variants / scandal flags / gallery items / tracker primitives, verify the design book §1 explicitly opts each one in. Stage 1's §0 interactive Q&A is where these are ratified; Stage 2 emitting Phase 2+ inclusions without §1 ratification = `doctrine/07_anti_patterns.md` §8.6 last bullet.
+
+**Bareback default applies when:** `scope_mode: slice` OR `scope_mode: full_game` with `Phase 2+ inclusions: pregnancy = defer`. Contraception language is BANNED in sex scenes in both cases (Doc 30 §7.3.1 — blocks Phase 2+ pregnancy retrofit). Only `scope_mode: full_game` with `pregnancy = include` allows contraception language in pre-pregnancy phase scenes + pregnancy variants in retrofit-affected scenes.
+
+If the design book §1 is missing the `Scope mode:` declaration entirely, treat as legacy slice authoring (pre-2026-05-29 corpus convention) and emit with `slice` defaults — bareback throughout, minimal volume, Phase 2+ deferred.
+
+---
+
 ## §1 — The job
 
 You emit **TOML** for an RTS-shape sandbox game.
@@ -32,13 +49,13 @@ You emit **TOML** for an RTS-shape sandbox game.
 
 A design book (markdown) from Stage 1. The design book has:
 
-- §1 World Setup (premise + player + economic engine + slice scope + time model)
-- §2 NPC Roster (4-6 NPCs with arc shapes + slice depth + vocab ceilings)
+- §1 World Setup (premise + player + economic engine + scope mode declaration + Phase 2+ inclusions [full_game] or slice scope [slice] + time model)
+- §2 NPC Roster (4-6 NPCs with arc shapes + per-NPC depth column [Full-arc depth at full_game / Slice depth at slice] + vocab ceilings)
 - §3 Locations (home + town + per-NPC schedules)
 - §4 Per-NPC R7 Briefs (10-section briefs per NPC)
-- §5 Cross-arc World State (shared flags + pregnancy retrofit notes)
+- §5 Cross-arc World State (shared flags + pregnancy retrofit notes if pregnancy = include)
 - §6 Capstone Chain Map (per-NPC chains + cross-NPC bridges)
-- §7 Slice Build Plan (day-by-day flow)
+- §7 Build Plan (Full-Game Build Plan at full_game / Slice Build Plan at slice — day-by-day flow)
 
 You read this design book + emit a TOML file that captures every canvas + NPC + location + quest card + sidebar item + capstone the brief specifies. Plus the scene-body prose, which the brief is silent on (Stage 1 is shape spec; Stage 2 authors prose per `doctrine/05_rts_flat_prose.md`).
 
@@ -121,7 +138,7 @@ id = "..."
 ...
 ```
 
-Every section in the design book maps to a TOML section. Sections in the TOML schema that the design book is silent on (e.g., `[[items]]`, `[[passes]]`) should be populated as needed for the game's mechanics — typically minimal at slice scope.
+Every section in the design book maps to a TOML section. Sections in the TOML schema that the design book is silent on (e.g., `[[items]]`, `[[passes]]`) should be populated as needed for the game's mechanics — minimal at `scope_mode: slice`, fuller at `scope_mode: full_game` if the game's mechanics demand (e.g., gallery system enabled per §0.5 = `[[items]]` populated with gallery entries).
 
 ### §1.3 — Output contract
 
@@ -138,7 +155,7 @@ The TOML MUST:
 The TOML MUST NOT:
 
 - Reach for legacy patterns (Pattern A–J as repeatable-content macros, etc.)
-- Include contraception language in slice sex scenes (per Doc 30 §7.3.1 bareback throughout)
+- Include contraception language in sex scenes when bareback default applies — `scope_mode: slice` OR `scope_mode: full_game` with `Phase 2+ inclusions: pregnancy = defer` (per Doc 30 §7.3.1; see §0.5 above)
 - Surface stage trait in any sidebar item (per `doctrine/09_trait_catalog.md` §9 internal-only)
 - Surface antagonist awareness in any sidebar item (per Doc 30 §6 + `doctrine/09_trait_catalog.md` §8)
 - Use `op = "sub"` for decay (engine has only `add` + `set`; use `op = "add"` + negative `value`)
@@ -413,7 +430,7 @@ bands = [
 
 ### Step 8 — Emit `[[clothing]]` + `[[passes]]` + `[[items]]` (if applicable)
 
-Per design book §1 enable flags. Minimal at slice scope.
+Per design book §1 enable flags. Minimal at `scope_mode: slice`. At `scope_mode: full_game`, enable any Phase 2+ system the design book §1 opted in (pregnancy mechanics, scandal awareness, gallery system, tracker primitive).
 
 ```toml
 [[clothing]]
@@ -1840,11 +1857,15 @@ Per D67-R7. Without `substitution_only`, the target appears as a clickable surfa
 
 Grep `[[sidebar_items]]` for any item with `trait = "<slug>_stage"` or `trait = "awareness"` (on antagonist NPC). Both are violations.
 
-### §10.11 — Contraception language in slice sex scenes (Doc 30 §7.3.1)
+### §10.11 — Contraception language when bareback default applies (Doc 30 §7.3.1)
+
+**Applies when:** `scope_mode: slice` OR `scope_mode: full_game` with `Phase 2+ inclusions: pregnancy = defer`.
 
 Grep all scene-body prose for: `condom`, `pull out`, `birth control`, `pill`, `careful`, `pregnant` (in pre-Phase-2 contexts).
 
-All slice Frank (or family/ambient) sex scenes ship BAREBACK with no contraception language. Phase 2+ pregnancy retrofit will add parallel pregnant variants; contraception language BLOCKS retrofit.
+All family/ambient sex scenes ship BAREBACK with no contraception language. Phase 2+ pregnancy retrofit (whether shipped in this game or deferred) will add parallel pregnant variants; contraception language BLOCKS retrofit.
+
+**Exception — when this rule INVERTS:** at `scope_mode: full_game` with `Phase 2+ inclusions: pregnancy = include`, contraception language is ALLOWED in pre-pregnancy phase scenes (gates the pregnancy mechanic — without "careful" framing the pregnancy beat lands without setup). Pregnancy-variant scenes ship bareback with breeding talk per `doctrine/08_kink_vocab_ceilings.md` Tier 5+. In this mode, contraception language in post-pregnancy scenes still BANNED (breaks immersion).
 
 ### §10.12 — Legacy vocabulary
 
@@ -1893,7 +1914,7 @@ Run this BEFORE delivering the TOML.
 ### Voice + content
 - [ ] All Lane 1/2/3 prose is RTS-flat (≤30-word caption density; no atmospheric sensory detail; one beat = one click)
 - [ ] All Lane 4 capstone prose earns Tier-3 register (per `doctrine/05_rts_flat_prose.md` §3 — specific, layered, character-distinguishing)
-- [ ] No contraception language in slice sex scenes (Doc 30 §7.3.1)
+- [ ] Contraception language compliance per §10.11 (BANNED when bareback default applies; ALLOWED in pre-pregnancy scenes when `scope_mode: full_game` + `pregnancy = include`; Doc 30 §7.3.1)
 - [ ] No legacy vocabulary (Pattern A–J as macros, 7-driver archetypes, whiteboard goals, etc.)
 - [ ] Per-NPC vocab ceilings honored (daddy at Frank Tier 4+ when in scope, incest callouts at Jake Tier 3+, etc.)
 
@@ -1957,11 +1978,15 @@ The target canvas relies on the parent activity's substitution rule conditions f
 
 Without it: the substitution rule may fire even when the NPC isn't co-located (e.g., NPC is at school per schedule but substitution evaluates only chance + extra conditions). Result: NPC "appears" in scenes when the world model says they're elsewhere.
 
-### §12.8 — Pregnancy language in slice (Doc 30 §7.3.1)
+### §12.8 — Pregnancy language when bareback default applies (Doc 30 §7.3.1)
 
-You author a Frank sex scene with the line "He pulls out at the last second." Phase 2+ pregnancy retrofit will need pregnant variants of this scene; the "pulls out" language BLOCKS retrofit (pregnant variant should show him cumming inside).
+**Applies when:** `scope_mode: slice` OR `scope_mode: full_game` with `Phase 2+ inclusions: pregnancy = defer`.
 
-**Right:** ALL slice Frank sex scenes ship BAREBACK with cum-inside framing (no breeding talk in Phase 1; full breeding talk Phase 2+ when pregnancy ships).
+You author a Frank sex scene with the line "He pulls out at the last second." Phase 2+ pregnancy retrofit (whether shipped in this game or deferred) will need pregnant variants of this scene; the "pulls out" language BLOCKS retrofit (pregnant variant should show him cumming inside).
+
+**Right:** family/ambient sex scenes ship BAREBACK with cum-inside framing (no breeding talk pre-Phase-2; full breeding talk Phase 2+ when pregnancy ships per §0.5 inclusions).
+
+**Exception — when this rule INVERTS:** at `scope_mode: full_game` with `pregnancy = include`, pre-pregnancy scenes ship WITH contraception cues + careful framing (gates the upcoming pregnancy beat); post-pregnancy scenes ship BAREBACK with breeding talk per `doctrine/08_kink_vocab_ceilings.md` Tier 5+. The retrofit-block rule still applies to pre-pregnancy scenes: their language must support the pregnant variant retrofit when the pregnancy beat fires.
 
 ### §12.9 — Hub menu over-weighting (Doc 54 §3.1)
 

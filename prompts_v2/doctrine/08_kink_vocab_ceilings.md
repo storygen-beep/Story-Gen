@@ -127,7 +127,7 @@ The escalation isn't tier-linear (Tier 0 = 0% / Tier 5 = 100%). It's tier-gated 
 
 **Marge / Cookie — lesbian initiation = TBD (Phase 3+, deferred).** This row is blank in the §2 table.
 
-Where the ceiling is left blank, the area is OUT OF SCOPE for the slice (no scenes touching that kink). When Phase 3+ scopes the area, LO fills the row; only then can authoring proceed.
+Where the ceiling is left blank, the area is OUT OF SCOPE for the declared `scope_mode` (no scenes touching that kink). At `scope_mode: slice`, blank rows are slice-scope deferrals — typical Phase 2+/3+ kink areas (lesbian initiation, breeding talk, etc.) get filled when a later authoring pass expands scope. At `scope_mode: full_game`, blank rows mean LO opted the kink out of the entire game — fill the row before authoring or stub the canvas with `(out-of-scope per LO)` reasoning.
 
 **Rule:** if a proposed scene touches a kink area whose ceiling row is blank, the scene doesn't ship until LO fills the ceiling. Don't author against an undeclared ceiling — that's how Phase C6 morning-chat drift happens.
 
