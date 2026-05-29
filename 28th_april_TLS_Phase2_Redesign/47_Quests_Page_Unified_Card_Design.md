@@ -244,44 +244,40 @@ The picker-swap doctrine (engine comment v2.py:6231, doc 35 RTS state-variant) i
 
 ## §7 Walked example — Frank's full arc
 
-The matrix mapped onto Frank's actual progression, from Day 1 to arc terminal. Every line of `text` below is illustrative — not final authored copy — but conforms to the voice doctrine (no location names, no time windows, no numbers in the prose).
+The matrix mapped onto Frank's actual progression, from Day 1 to arc terminal. Every line of `text` below is illustrative — final authored copy lives in `7_final_game.toml` F1–F6 — but conforms to the voice doctrine (no location names, no time windows, no numbers in the prose).
+
+> **Scene order is driven by canvas gate values.** Catch and First-night both gate at corr ≥ 25, but the Catch must fire first (Catch's `frank_caught is_false` gate prevents First-night until catch sets the flag). Declaration gates at corr ≥ 35, Sleepover at corr ≥ 50, Diana confrontation at `npc_diana.awareness ≥ 8` + post-first-night. The walked order below reflects that gate truth — earlier drafts of this doc had Declaration before First-night, which contradicted the actual canvases.
 
 | State | Situation # | text | tip | Goal block |
 |---|---|---|---|---|
 | Day 1, corr 0, no flags | 1 (climbing toward Catch) | *"I'm new under this roof. Frank watches me and pretends he isn't."* | *"He's around the house all day. I notice that."* | 🎯 To advance: ◯ Maya's corruption — 0 / 25 |
 | corr 18, no flags | 1 (same template, picker re-pick) | *"I keep finding reasons to be in the same room as him."* | (same or omitted) | 🎯 To advance: ◯ Maya's corruption — 18 / 25 |
 | corr 25, frank_caught false | 2 (Catch ready) | `ready_text:` *"Something's about to give."* | (omit or quiet) | 🔓 Ready + 📍 Living room + 🕒 Mon–Fri 20:00–22:30 |
-| corr 28, frank_caught true, frank_cracked false | 1 (climbing toward Declaration) | *"He sees me now. He's looking for it."* | *"Everything feels louder."* | 🎯 To advance: ◯ Maya's corruption — 28 / 35 |
-| corr 35, frank_caught true, frank_cracked false | 2 (Declaration ready) | `ready_text:` *"He can't keep pretending. Neither can I."* | — | 🔓 Ready + 📍 Hallway + 🕒 weekday evening |
-| corr 38, frank_cracked true, frank_first_night_done false | 1 (climbing toward First-night by player-initiated; existing template at TOML:2604) | *"Upstairs now. The office stays for the books."* | *"Diana down the hall. Quiet."* | 🔓 Ready + 📍 Frank's bedroom + 🕒 Mon–Fri 21:00–23:00 *(this is already authored)* |
-| First-night played, corr 42, frank_first_night_done true, frank_sleepover_done false | 1 (climbing toward Sleep-over) | *"He moved the line. The bedroom is the venue now."* — currently terminal in slice; new "climbing toward Sleep-over" template needed | *"I want to stay through morning."* | 🎯 To advance: ◯ Maya's corruption — 42 / 50 |
-| corr 50, frank_first_night_done true, frank_sleepover_done false | 2 (Sleep-over ready) | `ready_text:` *"Tonight I don't leave."* | — | 🔓 Ready + 📍 Frank's bedroom + 🕒 night |
-| Sleep-over played, diana_awareness < 8 | 1 (climbing toward Diana confrontation, ambient) | *"This is mine now. She doesn't see it yet."* | *"It builds."* | 🎯 To advance: ◯ Diana awareness — <current> / 8 |
-| diana_awareness = 8, all post-first-night | 2 (Diana confrontation ready, auto-fire) | `ready_text:` *"She's going to ask."* | — | 🔓 Ready (auto-fire — no location/time bullet needed; will fire on next encounter) |
-| Diana confrontation played, branch_outcome set | 3 (arc terminal) | *"It's done either way."* | — | ✓ Arc complete |
+| corr 25+, frank_caught true, frank_bedroom_first_done false | 2 (First-night ready — corr already at 25 from catch threshold) | *"Upstairs now. The office stays for the books."* + `ready_text:` *"He'll be in his bedroom tonight."* | *"Diana down the hall. Quiet."* | 🔓 Ready + 📍 Frank's bedroom + 🕒 Mon–Fri 21:00–23:00 |
+| frank_bedroom_first_done true, frank_cracked false, corr 28 | 1 (climbing toward Declaration) | *"He took me upstairs. He hasn't said the word yet."* | *"Diana's asleep by then. The hallway is dark."* | 🎯 To advance: ◯ Maya's corruption — 28 / 35 |
+| corr 35, frank_cracked false | 2 (Declaration ready) | `ready_text:` *"He's going to break tonight."* | — | 🔓 Ready + 📍 Hallway + 🕒 weekday evening |
+| frank_cracked true, frank_sleepover_done false, corr 42 | 1 (climbing toward Sleepover) | *"He moved the line. The bedroom is the venue now."* | *"Diana down the hall. Quiet."* | 🎯 To advance: ◯ Maya's corruption — 42 / 50 |
+| corr 50, frank_sleepover_done false | 2 (Sleepover ready) | `ready_text:` *"Tonight I don't leave."* | — | 🔓 Ready + 📍 Frank's bedroom + 🕒 Mon–Fri 21:00–23:00 |
+| frank_sleepover_done true, diana_confronted false, npc_diana.awareness < 8 | 1 (climbing toward Diana confrontation) | *"The house feels smaller now. She's home all the time and she's watching."* | *"She doesn't say anything. She doesn't have to."* | 🎯 To advance: ◯ Diana noticing — <current> / 8 |
+| npc_diana.awareness ≥ 8, diana_confronted false | 2 (Diana confrontation ready, auto-fire) | `ready_text:` *"She's going to ask."* | — | 🔓 Ready (auto-fire — surfaces 📍 from canvas; no time bullet, fires on next eligible encounter) |
+| diana_confronted true | 3 (arc terminal) | *"It's done either way."* | — | ✓ Arc complete |
 
-The pattern: **one template per state-window**, with `condition.trait_checks` routing each template to the right window via flag/trait gates. Picker swaps automatically between them as state changes.
+The pattern: **one template per state-window**, with `when` flag/trait gates routing each template to the right window. Picker swaps automatically between them as state changes.
 
-### What's already authored
+### Authoring status (as of 2026-05-24)
 
-States 6 + 7 above use the **existing** Stage 4 templates at `7_final_game.toml:2604-2632`. The pre-catch and post-Diana states would be new authoring work, plus the in-between corr 28–35 climbing card.
+All eleven state-windows above are now authored as six cards (F1–F6) at `7_final_game.toml:2439–2535`:
 
-### What's missing for the slice
+| Card | Covers | Notes |
+|---|---|---|
+| F1 | Pre-catch climbing + Catch ready | One template, `ready_text` swap at corr ≥ 25 |
+| F2 | First-night ready | No climb (corr ≥ 25 already met from catch threshold); pure flag-gated `ready_canvas` pointer |
+| F3 | Post-first-night / pre-declaration | Has `goals` bullet for corr 25 → 35 climb |
+| F4 | Post-declaration / pre-sleepover | Has `goals` bullet for corr 35 → 50 climb |
+| F5 | Post-sleepover / pre-Diana | Has `goals` bullet for `npc_diana.awareness` 0 → 8 climb |
+| F6 | Terminal | Branch-agnostic prose (works for both kicked-out and brought-in forks) |
 
-Counting the new templates needed for full Frank coverage with the unified pattern:
-
-1. Pre-catch climbing (corr 0 → 25, `frank_caught is_false`)
-2. Catch ready (`frank_caught is_false` + corr ≥ 25) — could be a separate template *or* the same as #1 using `ready_text` swap
-3. Post-catch / pre-Declaration climbing (corr 25 → 35, frank_caught true, frank_cracked false)
-4. Declaration ready
-5. Post-Declaration / pre-First-night (already done by existing Stage 4 pre-consummation template using `arc_closure_flag = frank_bedroom_first_done`)
-6. Post-First-night / pre-Sleep-over (NEW; current template ends arc here with `arc_complete = true`)
-7. Sleep-over ready
-8. Post-Sleep-over / pre-Diana (NEW)
-9. Diana ready (NEW)
-10. Terminal (currently exists as post-bedroom; would need re-targeting to post-Diana for slice closure)
-
-That's **6–8 new templates** depending on consolidation. Lighter than it sounds — each is ~10 lines of TOML.
+Earlier drafts of this doc listed 6–8 "missing" templates and described F4 as terminal at `frank_cracked`. That gap closed 2026-05-24 alongside the F3 goals-bullet fix.
 
 ---
 

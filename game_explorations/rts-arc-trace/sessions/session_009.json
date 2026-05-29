@@ -1,0 +1,17 @@
+{
+  "session_id": 9,
+  "start_ts": "2026-05-24T16:32:11.017Z",
+  "start_epoch_ms": 1779640331017,
+  "end_ts": "2026-05-24T16:40:36.585Z",
+  "duration_s": 506,
+  "clicks": 8,
+  "choices_explored": 8,
+  "arrow_advances": 0,
+  "unique_states_seen": 278,
+  "new_unique_states": 10,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": []
+}

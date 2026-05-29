@@ -76,7 +76,7 @@ Each `[[phone.conversations]]` = a thread that **appears when its trigger flag i
 
 Notes:
 - New flags introduced by the design (all author-side, no engine change): `frank_terms_accepted`, plus reuse of existing keep-route seed flags where they already exist.
-- The two Frank "keep-route" threads (romantic/arrangement) reuse the slice's existing `frank_keep_route_*` seed flags rather than inventing new endings.
+- ~~The two Frank "keep-route" threads (romantic/arrangement) reuse the slice's existing `frank_keep_route_*` seed flags rather than inventing new endings.~~ **CORRECTED 2026-05-27 (Doc 70 §4.3 / §6.1.1):** the `frank_keep_route_*` declarations were RETIRED by Doc 19 ("No `frank_keep_route_*` flags") and flagged for removal by Doc 20. Doc 46 mistook the orphaned declarations for live infrastructure. The `flagEffects` lines + the 4 declarations were removed from `7_final_game.toml` on 2026-05-27. Frank chat reply trait deltas are preserved; the Frank "keep-route" routing surface is closed at slice scale. Ryan `keep_route_*` flags remain in place (Cˢ Seed per Doc 58).
 - `anon_*` is the only non-NPC thread; it is the seeded `anon_dm_seen` cam hook made systemic. It is **corruption-gated, not flag-chain-gated**, so it surfaces exactly when Maya is corrupt enough — pure RTS secret-admirer pattern.
 
 ## 6. Daily small-talk (`[[phone.daily_topics]]`)
