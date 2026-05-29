@@ -39,6 +39,15 @@ Stage 2 inherits scope mode from the design book's §1 `**Scope mode:** <full_ga
 
 If the design book §1 is missing the `Scope mode:` declaration entirely, treat as legacy slice authoring (pre-2026-05-29 corpus convention) and emit with `slice` defaults — bareback throughout, minimal volume, Phase 2+ deferred.
 
+### §0.5.1 — Output mode (single vs phased)
+
+Stage 2 supports two output modes:
+
+- **At `scope_mode: slice`** → emit a single TOML (~50–100KB) in one response. Convention name: `7_final_game.toml`. Save to `games/<game_slug>/toml_phases/7_final_game.toml`. Single-mode is the legacy emission (pre-2026-05-29 corpus convention) and stays the slice default.
+- **At `scope_mode: full_game`** → emit **phased TOML** across 7 sub-files matching TLS's convention. Each phase is a separate response. After all 7 phases shipped, run `scripts/merge_toml_phases.py games/<game_slug>` to assemble `7_final_game.toml`. Phased emission solves three full-game ergonomics problems: token budgets per LLM response, review-by-concern, diff-friendliness.
+
+Phased emission spec lives in §12.5 below — read it before emitting at full_game scope.
+
 ---
 
 ## §1 — The job
@@ -1999,6 +2008,83 @@ You ship a hub with 10 menu items. Per D56-R1 + Doc 54 §3.1, hubs cap at ~5 unl
 Per `doctrine/03_arc_shapes.md` §6 — service NPCs have empty Lane 2 + Lane 3 in slice. If you've authored 6 Lane 2 ambients for Marge, those surfaces shouldn't exist.
 
 **Fix:** delete them. Empty cells are honest.
+
+---
+
+## §12.5 — Phased emission spec (full_game mode)
+
+At `scope_mode: full_game`, Stage 2 emits 7 phase files sequentially — one per response. Each response = one phase file. After phase 6 ships, LO runs the assembly script to produce `7_final_game.toml`. This section is the per-phase content contract.
+
+### §12.5.1 — Phase content boundaries
+
+| Phase | File | Content | Approx size at full_game |
+|---|---|---|---|
+| 0 | `0_systems_spec.toml` | `[project]` + `[engine.*]` (decay tick, daily tick, time model) + `[[sidebar_items]]` + `[[sidebar_bars]]` + `[[sidebar_groups]]` + any top-level `[settings]` | ~10–30KB |
+| 1 | `1_metadata_and_locations.toml` | `[player]` (with `core_traits`) + `[[locations]]` (all locations + entry conditions + meta-locations) + `[[npcs]]` (ALL declarations including `[[npcs.schedules]]` + `[[npcs.core_traits]]` per NPC — these MUST live in this file because TOML scoping requires nested tables under their parent) | ~30–100KB |
+| 2 | `2_one_shots.toml` | Intro / onboarding `[[canvases]]` — Day 1 bootstrap canvases, intro one-shots (priority ≥10, `is_repeatable = false`, fire-once flag-gated) | ~10–30KB |
+| 3 | `3_activities.toml` | Maya-solo dispatcher `[[canvases]]` — activities at locations (make_tea, read_couch, exercise, etc.) WITH their Lane 3 `[[canvases.trigger.substitutions]]` rules + Pattern C `pre_substitution_effects` if applicable | ~30–60KB |
+| 4 | `4_story_arc.toml` | Capstone `[[canvases]]` (Type A/B/C per Doc 57) + stage transition canvases + capstone chain wiring (flag setters + chain-step canvases) + cross-NPC bridge capstones | ~30–80KB |
+| 5 | `5_scenes.toml` | Lane 1 hub `[[canvases]]` (NPC portrait hubs + location work surfaces) + Lane 2 ambient cascades + Lane 3 substitution target `[[canvases]]` (the `substitution_only = true` surfaces) + per-NPC voice-flavored scene canvases | ~80–200KB |
+| 6 | `6_dev_shortcuts.toml` | Dev `[[canvases]]` — force-advance shortcuts (stage 0→4 jumpers), debug snapshot canvases, capstone-fire shortcuts. Gated by `[[settings]] dev_mode_enabled = true`. Strip before player ship. | ~5–20KB |
+
+**Why NPCs must live in phase 1** (not phase 5 with scenes): `[[npcs.schedules]]` and `[[npcs.core_traits]]` are nested under each `[[npcs]]` block. TOML scoping means the nested tables must appear in the same file as their parent. Splitting npcs across phases would break parsing.
+
+**Why phases 2–6 can scatter** (all `[[canvases]]` top-level arrays): the schema defines `[[canvases]]` as a flat array-of-tables. Concatenating two files each containing `[[canvases]]` blocks produces a valid combined `[[canvases]]` array. Per-canvas nested tables (`[canvases.trigger]`, `[[canvases.trigger.substitutions]]`, `[[canvases.nodes]]`) all stay inside their parent canvas's file.
+
+### §12.5.2 — Emission protocol (one phase per response)
+
+After reading the design book + completing the §0.5 + §0.5.1 setup, emit phases in order:
+
+**First response (phase 0):**
+
+```
+# Phase 0/7 — 0_systems_spec.toml
+# Save this file as: games/<game_slug>/toml_phases/0_systems_spec.toml
+
+<TOML body for phase 0>
+
+# End of phase 0. Reply "next" to receive phase 1.
+```
+
+**Each subsequent response** follows the same pattern with the phase number incremented. After phase 6, emit a final assembly instruction:
+
+```
+# Phase 6/7 — 6_dev_shortcuts.toml
+# Save this file as: games/<game_slug>/toml_phases/6_dev_shortcuts.toml
+
+<TOML body for phase 6>
+
+# End of phase 6 (final phase).
+#
+# To assemble the buildable TOML, run:
+#
+#     python scripts/merge_toml_phases.py games/<game_slug> --validate
+#
+# This produces games/<game_slug>/toml_phases/7_final_game.toml, then validate
+# parses cleanly via tomllib. Build with:
+#
+#     python manage.py package_from_toml \
+#         --file games/<game_slug>/toml_phases/7_final_game.toml \
+#         --owner-id <uuid> \
+#         --output games/<game_slug>/output \
+#         --dev
+```
+
+**Do NOT batch multiple phases into one response.** Each phase = one response, separated by LO's "next" (or equivalent confirmation). This keeps each response within token budgets + lets LO catch problems per-phase + matches the §0.5.1 promise of phased output.
+
+**If LO asks for revisions to a previously-shipped phase**, re-emit just that phase with the corrections. The assembly script picks up whatever's in each phase file at merge time.
+
+### §12.5.3 — Cross-phase references (canvas slugs)
+
+Canvases in phases 2–6 may reference NPCs (by slug, e.g., `npc_frank`), locations (by slug, e.g., `loc_kitchen`), and other canvases (by slug in flags / substitution targets). Slugs are resolved to UUIDs at build time by `package_from_toml`. Cross-phase slug references work because the build sees the merged file.
+
+When emitting phases 2–6, treat NPC + location slugs as fixed at phase 1's declarations. Don't introduce a new NPC slug in phase 5 that wasn't declared in phase 1 — the build will fail on the unresolved reference.
+
+### §12.5.4 — Slice scope retains single-TOML emission
+
+At `scope_mode: slice`, Stage 2 stays single-TOML (one response, save as `7_final_game.toml` directly, no merge step needed). Phased emission at slice is unnecessary overhead — 50–100KB fits one response cleanly and slice already conventions toward minimal-volume authoring.
+
+If LO explicitly requests phased emission at slice (for review-by-concern), use the same §12.5.1 phase boundaries — slice-scope phases will just be smaller (~5–15KB each).
 
 ---
 

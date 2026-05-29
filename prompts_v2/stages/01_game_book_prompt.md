@@ -60,6 +60,12 @@ After LO answers each, record the call. After all four are resolved (or skipped 
 
 If LO declares `scope_mode: slice`, SKIP §0.5.2 entirely. Slice authoring defers all four to Phase 2+ by default; no Q&A needed.
 
+### §0.5.2a — Downstream emission at full_game (FYI for design book §1 header)
+
+At `scope_mode: full_game`, Stage 2 emits **phased TOML** (7 phase files across 7 responses) per `stages/02_toml_generation_prompt.md` §12.5. LO assembles via `scripts/merge_toml_phases.py games/<game_slug>` after all phases ship. This affects nothing in Stage 1's output — the design book is still a single markdown file — but the design book §1 should name the intended `game_slug` (lowercase, underscores) so the folder convention is locked: `games/<game_slug>/` with `concept.md` (Stage 1 output) + `toml_phases/0_*.toml ... 7_final_game.toml` (Stage 2 phased output + merged).
+
+At `scope_mode: slice`, Stage 2 emits single TOML (one response) — no phased breakdown, no merge step.
+
 ### §0.5.3 — Non-Doc-65 clarifying questions (alongside or instead of §0.5.2)
 
 If the concept is missing critical NON-Doc-65 information (cast count, kink ceilings, time model, economic engine specifics), ALSO ask 1–3 clarifying questions before authoring. Do NOT invent answers — that's the Marge §2.3 question-avoidance failure mode (Doc 54).

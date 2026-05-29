@@ -162,8 +162,9 @@ LO concept input
        │
        ▼
 ┌──────────────────────────────────────┐
-│  Stage 2: stages/02_toml_generation  │   →   TOML file (validates against schema)
-└──────────────────────────────────────┘
+│  Stage 2: stages/02_toml_generation  │   →   slice    → 7_final_game.toml (1 response)
+│                                      │       full_game → phases 0-6 (7 responses)
+└──────────────────────────────────────┘                  + merge via scripts/merge_toml_phases.py
        │
        ├──────────────────────────────────┐
        ▼                                  ▼
@@ -173,9 +174,9 @@ LO concept input
 └─────────────────────────┘  └────────────────────────┘
        │
        ▼
-   build:    python manage.py package_from_toml --file <toml> --owner-id <uuid> --output <dir>
-   compile:  python tools/build.py compile
-   play:     open <output>/index.html
+   merge:    python scripts/merge_toml_phases.py games/<game_slug> --validate    (full_game only)
+   build:    python manage.py package_from_toml --file games/<game_slug>/toml_phases/7_final_game.toml --owner-id <uuid> --output games/<game_slug>/output --dev
+   play:     open games/<game_slug>/output/index.html
 ```
 
 ### Stage invocation
@@ -187,14 +188,41 @@ For each stage, the LLM is given:
 
 For Stage 1: cite `doctrine/01–09` + `reference/01–04`. For Stage 2: cite `schema/01–03` + `doctrine/02, 04, 05, 07, 09`. Stages 3 + 4 are mostly self-contained.
 
-### Validation
+### Game folder convention
 
-After Stage 2 produces TOML:
+Each generated game lives at `games/<game_slug>/`:
+
+```
+games/<game_slug>/
+├── concept.md                       # Stage 1 output (markdown design book)
+├── toml_phases/
+│   ├── 0_systems_spec.toml          # ┐
+│   ├── 1_metadata_and_locations.toml│ │
+│   ├── 2_one_shots.toml             │ ├─ Stage 2 phased output at full_game
+│   ├── 3_activities.toml            │ │  (one phase per LLM response)
+│   ├── 4_story_arc.toml             │ │
+│   ├── 5_scenes.toml                │ │
+│   ├── 6_dev_shortcuts.toml         │ ┘
+│   └── 7_final_game.toml            # merged from 0-6 via scripts/merge_toml_phases.py
+├── output/                          # build output (Twine HTML)
+└── videos/                          # optional media assets per stages/03
+```
+
+At `scope_mode: slice`, Stage 2 emits one TOML directly to `7_final_game.toml` (no phased breakdown, no merge step). At `scope_mode: full_game`, Stage 2 emits phases 0–6 (one per response) and you run the merge script. See `stages/02_toml_generation_prompt.md` §12.5 for the per-phase content contract.
+
+### Validation + build
+
+After Stage 2 produces TOML (and at full_game, after the merge):
 
 ```bash
 cd <story_gen_django>
+
+# At full_game only — merge phases 0-6 into 7_final_game.toml
+python scripts/merge_toml_phases.py games/<game_slug> --validate
+
+# Build (both scope modes)
 python manage.py package_from_toml \
-  --file games/<game_slug>/toml_phases/<N>_final_game.toml \
+  --file games/<game_slug>/toml_phases/7_final_game.toml \
   --owner-id <uuid> \
   --output games/<game_slug>/output \
   --dev
