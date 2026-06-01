@@ -159,6 +159,8 @@ Under R1 this collapses to one paragraph:
 
 The progression-aware behavior lives in the menu rungs (Tease/Flash/Suck/Have-sex with their own `show_when_locked` + `conditions`). The opening doesn't need to repeat the progression in prose.
 
+*Sibling rule — Doc 72:* R1 governs that the opening prose doesn't *vary* by progression; Doc 72 R1 governs that the opening must *exist at all* — a present NPC is always acknowledged by base content, and choices layer on by in-world logic (one rule about constancy, one about the floor).
+
 ### R2 — Every T0/T1 ending lands on an in-fiction interruption
 
 For canvases using `[group]` blocks to tier-route content (Lane 2 ambients, Lane 3 substitution targets, Lane 1 internally-tiered targets like teases), the lower-tier endings MUST hint that more would have happened. The interruption can be:

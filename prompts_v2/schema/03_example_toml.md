@@ -939,7 +939,7 @@ goals = [
 - **D50-R3 (terminal placement)**: F6 is the LAST card. No card requires a flag set after `diana_confronted`.
 - **D50-R4 (chain continuity)**: F1's `ready_canvas` sets `frank_caught` → F2 requires `frank_caught is_true`. F2's `ready_canvas` sets `frank_bedroom_first_done` → F3 requires it. And so on.
 - **D50-R5 (mechanic-tier comment)**: M2 has the `# unlocks:` comment naming the greeting tier flip.
-- **D50-R6 (label voice)**: all `goals.label` entries are in Maya-voice ("Maya's corruption", "Diana noticing", "Marge trust").
+- **D50-R6 (REVERSED 2026-05-30 — LO pref)**: `goals.label` now NAMES THE TRAIT — "Corruption", "<NPC> Relation" — matching the sidebar, NOT Maya-voice euphemisms. The example labels below ("Maya's corruption", "Diana noticing", "Marge trust") predate the reversal; new games use trait-name labels. See `doctrine/04` §2.6.
 
 ### Anti-patterns avoided
 
@@ -1028,7 +1028,347 @@ bands = [
 
 ---
 
-## §12 — Cross-references
+## §12 — Clothing system (Late Shifts — RTS-faithful)
+
+**Demonstrates:** the `[settings]` enable table (correct scoping), a tiered `[[clothing]]` catalog, the conditional coverage `clothing_rules`, a PUBLIC `worn_corruption` event (WEAN), and an exhibitionism flash ACT (+exb). The RTS-faithful model from `doctrine/11_clothing_design.md`.
+
+**Source:** `games/late_shifts/toml_phases/` — `0_systems_spec.toml` (`[settings]`), `1_metadata_and_locations.toml` (`[[clothing]]` + `clothing_rules`), `5_scenes.toml` (`rts_public_clothing_*`), verified 2026-06-01.
+
+```toml
+# ── Enable the system: [settings] TABLE, not bare keys (the scoping trap) ──
+# Read by the importer from data["settings"] (template_import.py:2224). Authored
+# bare (e.g. right after [time]) → scopes under [time] → silently DISABLED.
+[settings]
+clothing_enabled  = true
+wardrobe_location = "loc_mayas_room"
+shop_location     = "loc_thrift_store"
+
+[settings.clothing_requirements]
+body_coverage   = true
+always_required = []
+```
+
+```toml
+# ── Catalog (excerpt across tiers). Top-level [[clothing]] array. ──
+# Starting outfit: initial=true, free, full slot coverage (never naked/blocked).
+[[clothing]]
+id = "faded_tee"
+name = "Faded T-Shirt"
+slot = "top"
+image = "clothing/faded_tee.jpg"
+initial = true
+beauty = 1
+corruption = 0
+
+# Going-out tier: UNGATED, worn_corruption 15-20 — makes public worn_corruption
+# events reachable EARLY (before grinding global corruption). The load-bearing tier.
+[[clothing]]
+id = "going_out_top"
+name = "Going-Out Top"
+slot = "top"
+image = "clothing/going_out_top.jpg"
+price = 20
+beauty = 4
+corruption = 18
+
+# Revealing tier: buy-gated on GLOBAL corruption (item conditions), worn_corr 25-35.
+[[clothing]]
+id = "crop_top"
+name = "Crop Top"
+slot = "top"
+image = "clothing/crop_top.jpg"
+price = 16
+beauty = 4
+corruption = 25
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 } ] }
+```
+
+```toml
+# ── Coverage gate: conditional on global corruption (RTS Bedroom parallel) ──
+# On loc_main_street. Below corruption 50 she must cover up; at 50+ the rule's
+# condition fails, no rule matches, she leaves underdressed. slots_required MUST be
+# non-empty (validator rejects []); express the ceiling via `conditions`, not [].
+clothing_rules = [
+  { slots_required = ["top", "bottom"], message = "She can't head out half-dressed — better go back and put something on.", conditions = { version = "1.0", items = [
+      { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 50 },
+    ] } },
+]
+```
+
+```toml
+# ── PUBLIC worn_corruption event (WEAN — prose only, 0 global corruption) ──
+# Two-tier (RTS ParkJog): >=15 glances/bigger tips, >=30 overt. On the diner FLOOR
+# (customers), NOT on an NPC arc canvas. Gate on worn_corruption, not the NPC.
+[[canvases]]
+id          = "rts_public_clothing_diner_customers"
+name        = "Mel's — the floor notices"
+[canvases.trigger]
+location             = "loc_diner_front"
+is_repeatable        = true
+priority             = 5
+is_active            = true
+trigger_mode         = "random"
+chance               = 0.35
+max_triggers_per_day = 1
+conditions = { version = "1.0", items = [
+  { type = "worn_corruption", operator = "gte", value = 15 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "22:00"
+end_time   = "01:30"
+[[canvases.nodes]]
+id   = "base"
+name = "The floor notices"
+blocks = [
+  { type = "paragraph", content = "The regular at Table 6 looks up a beat longer than the coffee warrants." },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "worn_corruption", operator = "gte", value = 30 },
+    ] }, blocks = [
+    { type = "paragraph", content = "The trucker doesn't pretend to look anywhere else. He tucks a folded twenty under the saucer." },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Keep working."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_diner_front"
+time_progression_minutes = 10
+```
+
+```toml
+# ── Exhibitionism flash ACT: the ONE place clothing content mutates a stat (+exb) ──
+# Requires a revealing outfit to appear (worn_corruption>=25); the flash CHOICE
+# grants +10 exhibitionism (RTS AddExb). Decline = free exit. Public surface.
+[[canvases]]
+id          = "rts_public_clothing_flash_park"
+name        = "Town Park — give them something to see"
+[canvases.trigger]
+location             = "loc_town_park"
+is_repeatable        = true
+priority             = 6
+is_active            = true
+trigger_mode         = "random"
+chance               = 0.25
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "worn_corruption", operator = "gte", value = 25 },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 },
+] }
+# … base node …
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Let him look."
+targetType = "node"
+nodeId = "rts_public_clothing_flash_park.node_flash"
+effects = [
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 10, cap = 100 },
+]
+[[canvases.nodes.exit_block.choices]]
+text = "Not here."
+targetType = "location"
+locationId = "loc_town_park"
+```
+
+### Key features
+
+- **`[settings]` table** turns the system on — never bare keys (the silent-disable trap, `doctrine/11` §8).
+- **Tiered catalog**: free full-coverage starting outfit / ungated going-out (worn_corruption 15-20) / revealing buy-gated on global corruption. The going-out tier makes public events reachable early.
+- **Conditional coverage** `clothing_rules`: cover-up required only below corruption 50; non-empty `slots_required`.
+- **`worn_corruption` on PUBLIC surfaces only** (diner floor with customers), two-tier, WEAN (no global-corruption effect).
+- **Exhibitionism** = a stored player trait raised ONLY by a flash ACT choice; wearing alone never raises it.
+
+### Anti-patterns avoided
+
+- **NPC arc gated on the outfit** — clothing here gates customers/strangers, never Hank/Ben/Cole. NPC arcs stay on corruption + arousal + relationship (`doctrine/11` §2; backwards on-ramp `doctrine/02` §8.12).
+- **`worn_corruption` granting global corruption** — every worn beat is WEAN; only the flash ACT mutates a stat (exhibitionism).
+- **Empty `slots_required` fallback** — the coverage ceiling is expressed with `conditions`, not a `slots_required = []` rule (validator-rejected).
+
+---
+
+## §13 — Rent system (Late Shifts — the economic spine)
+
+**Demonstrates:** the `[settings.rent]` enable table (correct scoping), the `[settings.rent.text]`
+sub-table with the REAL key names, `start_after_flag` (arm-after onboarding), a `collector_npc`, and
+`eviction_mode = "flag_set"` (fail-forward). The design model is `doctrine/12_rent_economy_design.md`.
+
+**Source:** `games/late_shifts/toml_phases/0_systems_spec.toml` (`[settings.rent]`) +
+`1_metadata_and_locations.toml` (the `npc_vince` collector), verified 2026-06-01.
+
+```toml
+[settings.rent]
+enabled          = true
+amount           = 125
+due_day          = "Friday"           # engine arms the due trigger on Friday (one/week)
+collector_npc    = "npc_vince"        # name + portrait shown on RentDay; must exist in [[npcs]]
+grace_periods    = 1                  # one short week is survivable; the next triggers eviction
+start_after_flag = "hired_at_diner"   # rent stays dormant until Maya has the job — rent-free onboarding
+eviction_mode    = "flag_set"         # fail-forward: sets rent_evicted, play continues (vs "game_end")
+eviction_flag    = "rent_evicted"
+
+# RentDay prose, the collector's voice. A SUB-table (NOT a multi-line inline table —
+# those break tomllib). Excerpt — the full key set is in schema/02 §14.3.
+[settings.rent.text]
+title                  = "Friday Morning"
+greeting               = "Rent. Hundred and twenty-five. You've got it, or you've got a reason — and I've heard every reason this building's got."
+paid_response          = "There. Wasn't so hard. Same Friday next week."
+warning_response       = "One week. I'm not a bank and I'm not your friend. Friday."
+eviction_response_soft = "Money's one way to keep a roof over your head. There's others. We'll talk about what works for me."
+```
+
+### The hybrid first-period pattern (TLS)
+
+The engine handles *recurring* rent, but the *first* rent beat is often best hand-authored. TLS arms the
+engine with `start_after_flag = "first_sunday_passed"` and sets that flag from a one-shot capstone
+(`canvas_first_sunday_morning`) that delivers the first Sunday narratively. Result: the first rent is a
+scripted story moment; every week after is the engine backstop. Use this when the first payment carries
+plot weight; skip it (arm on a plain income flag, as Late Shifts does with `hired_at_diner`) when it
+doesn't.
+
+### Key features
+
+- **`[settings.rent]` table** turns rent on — never bare `rent_enabled` keys (the silent-disable trap,
+  `doctrine/12` §7 / `schema/02` §1.3).
+- **`start_after_flag`** keeps onboarding rent-free — rent arms only once the player can earn.
+- **`eviction_mode = "flag_set"`** is fail-forward: missing rent past grace sets `rent_evicted` and the
+  game continues (the `_soft` text variants carry the consequence) rather than GAME OVER.
+- **Real `[settings.rent.text]` keys** — `title` / `greeting` / `paid_response` / `warning_response` /
+  `eviction_response_soft` etc. (NOT the fictional `{paid, late, evicted}` the old corpus listed).
+
+### Anti-patterns avoided
+
+- **`due_day` ignored** — the engine now fires on the configured weekday; the value is meaningful, not
+  decorative. Frame the prose around that day.
+- **Rent armed during onboarding** — `start_after_flag` defers the first due date until there's income;
+  without it, rent would hit before the player can pay (`doctrine/12` §3).
+- **Rent priced above reach** — `amount` is tuned to the wage (125 vs +45/shift, grace 1 as backstop) so
+  the first post-arm due date is clearable (`doctrine/12` §5).
+
+---
+
+## §14 — Phone / apps system (Late Shifts — chat-centric, TLS-faithful)
+
+**Demonstrates:** the top-level `[phone]` table (correct scoping — NOT `[settings]`, NOT a bare
+`phone_enabled` key), `purchase_flag` gating, a `chat` app, a branching multi-round conversation
+(`after_round` + `after_choice`), a `days_since_flag` trigger (time-relative without a day-of-week
+condition), daily small-talk, and a corruption-gated photo quick-action. The design model is
+`doctrine/13_phone_design.md`.
+
+**Source:** `games/late_shifts/toml_phases/8_phone.toml`, verified 2026-06-02. The purchase-gate flag
+`phone_active` is set at the diner hire (`2_one_shots.toml`, take-the-apron exit) alongside
+`hired_at_diner` — Maya's cut-off phone reconnects once she has income.
+
+```toml
+# Top-level table. enabled defaults true when [phone] is present. purchase_flag
+# hides the sidebar 📱 button until flags[phone_active] is set (the acquisition beat).
+[phone]
+enabled       = true
+purchase_flag = "phone_active"
+
+[[phone.apps]]
+id    = "messages"
+type  = "chat"
+label = "Messages"
+
+# A branching thread: triggers on a REAL arc flag, two reply choices, an NPC
+# follow-up gated on which choice was picked (after_round + after_choice).
+[[phone.conversations]]
+id     = "hank_kitchen"
+app    = "messages"
+npc    = "npc_hank"
+notify = "Hank texted you."
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "hank_first_contact", operator = "is_true" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Kitchen's quiet after two. Door doesn't lock from the inside. In case you forget."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "I won't forget.",       effects = [{ targetType = "npc", npcId = "npc_hank", trait = "relation", op = "add", value = 2 }] },
+  { text = "Is that an invitation?", effects = [{ targetType = "npc", npcId = "npc_hank", trait = "arousal", op = "add", value = 1 }, { targetType = "player", trait = "corruption", op = "add", value = 1 }] },
+]
+
+# Rent tie-in: phone triggers CAN'T read day-of-week (no `day`/`time` type), so a
+# Friday reminder uses days_since_flag — fires ~4 days after hire (near rent week).
+[[phone.conversations]]
+id     = "vince_due_soon"
+app    = "messages"
+npc    = "npc_vince"
+notify = "Vince texted you."
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "days_since_flag", subject = "player", flag_key = "hired_at_diner", operator = "gte", value = 4 },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Friday's close. You know the number. I don't like knocking twice."
+
+# Daily small-talk: 1/NPC/day (no `cooldown` field = legacy per-NPC cap), arc-gated.
+[[phone.daily_topics]]
+id             = "hank_smalltalk"
+npc            = "npc_hank"
+player_message = "still there?"
+npc_response   = "Always am."
+effects        = [{ targetType = "npc", npcId = "npc_hank", trait = "relation", op = "add", value = 1 }]
+conditions     = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "hank_opened_up", operator = "is_true" }] }
+
+# Photo quick-action: cooldown="per_topic" (own 1/day cap), corruption_min tier.
+[[phone.daily_topics]]
+id             = "hank_photo_lewd"
+npc            = "npc_hank"
+player_message = "[Send a lewd photo]"
+npc_response   = "Office. After two. Don't be late."
+cooldown       = "per_topic"
+corruption_min = 45
+effects        = [
+  { targetType = "player", trait = "arousal", op = "add", value = 1 },
+  { targetType = "player", trait = "corruption", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_hank", trait = "arousal", op = "add", value = 1 },
+]
+conditions     = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "hank_first_contact", operator = "is_true" }] }
+```
+
+The acquisition beat — the only `phone_active` setter, on the hire exit choice:
+
+```toml
+flagEffects = [
+  { targetType = "player", flag = "hired_at_diner", op = "set" },
+  { targetType = "player", flag = "phone_active",   op = "set" },   # unlocks the phone button
+]
+```
+
+### Key features
+
+- **Top-level `[phone]` table** turns the phone on — never `[settings]`, never a bare `phone_enabled`
+  key (`schema/02` §13 / §1.3, `doctrine/13` §8).
+- **`purchase_flag`** gates the sidebar button — phone stays hidden until the acquisition beat sets the
+  flag (RTS-faithful earned-device pacing). Every such flag needs exactly one setter.
+- **Threads trigger on REAL arc flags** — `hank_first_contact`, etc., verified present in the game, so
+  threads actually dispatch (the dead-flag trap, `doctrine/13` §3).
+- **`days_since_flag`** delivers time-relative content without a day-of-week condition (phone triggers
+  don't support `day`/`time`; `doctrine/13` §4 + `schema/02` §13.3).
+- **`cooldown = "per_topic"` + `corruption_min`** make photo quick-actions self-throttling, tiered
+  (selfie → lewd 45 → nude 85), and gated to NPCs that carry the right traits.
+
+### Anti-patterns avoided
+
+- **Bare `phone_enabled`** — dead config the importer never reads; the §1.3 silent trap.
+- **Day-of-week triggers** — unsupported by the phone evaluator; `days_since_flag` used instead.
+- **Threads on non-existent flags** — every trigger flag is a verified setter in the LS arc.
+- **Effects on traits an NPC lacks** — Cole (relation only) gets relation effects; Hank/Ben (arousal)
+  get arousal effects — never a phantom trait.
+
+---
+
+## §15 — Cross-references
 
 ### Sibling schema files
 
@@ -1044,10 +1384,14 @@ bands = [
 - `doctrine/06_design_brief_template.md` — R7 brief Doc 31 (Frank) + Doc 53 (Marge) are the gold-standard briefs these canvases were authored from
 - `doctrine/07_anti_patterns.md` — Doc 54 27 failure modes (Marge case study)
 - `doctrine/08_kink_vocab_ceilings.md` — Frank daddy register / Marge service register / Diana cuckold framing
+- `doctrine/11_clothing_design.md` — the clothing design model (§12 example above is its worked reference)
+- `doctrine/12_rent_economy_design.md` — the rent/economy design model (§13 example above is its worked reference)
+- `doctrine/13_phone_design.md` — the phone/apps design model (§14 example above is its worked reference)
 
 ### Source TOML
 
-- `games/the_long_summer_test/toml_phases/7_final_game.toml` — 536KB shipped TLS slice. All excerpts above are verbatim from this file.
+- `games/the_long_summer_test/toml_phases/7_final_game.toml` — 536KB shipped TLS slice. Most excerpts above are verbatim from this file.
+- `games/late_shifts/toml_phases/` — the §12 clothing excerpts (`[settings]`, `[[clothing]]`, `rts_public_clothing_*`), the §13 rent excerpt (`[settings.rent]`, `npc_vince`), and the §14 phone excerpts (`[phone]`, `8_phone.toml`) are verbatim from the Late Shifts phase files.
 
 ### Source briefs
 

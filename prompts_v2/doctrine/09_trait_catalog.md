@@ -476,6 +476,14 @@ intelligence = 0
 
 **What it tracks:** Discrete arc-progression milestone for one NPC's arc. Stored as an integer on the player namespace; used by authors + LLM for content gating; never surfaced to player. Player feels stage progression through what the world DOES (new menu items, NPC behavior shifts, location access opens), NOT through a stage number.
 
+> **🔒 ENGINE-ENFORCED HIDE (2026-05-30):** "Never surfaced" is now mechanically enforced, not just a `sidebar_items` convention. The generator's `playerTraits` sidebar widget + Stats page dump EVERY `core_traits` key, so a `<slug>_stage` (and any other internal trait — `pregnancy`, antagonist `awareness`) WILL leak into both dumps unless suppressed. Add a `[[traits.labels]]` entry with `hidden = true` for each internal trait:
+> ```toml
+> [[traits.labels]]
+> key = "frank_stage"
+> hidden = true   # hide-only entry; `label` may be omitted
+> ```
+> The engine emits these as `setup.hiddenTraits` and skips them via `<<continue>>` in every trait-dump loop, in BOTH dev and non-dev builds. **Limitation:** keyed by trait NAME only (not namespaced) — a hidden key hides for the player AND any NPC carrying a core_trait of that name (e.g. an antagonist's `awareness`, which is exactly the intent). See `schema/02` `[[traits.labels]]` and the `stages/02` §11 checklist item.
+
 **When to use it:**
 - Lane 1 hub canvas selection (multiple canvases per location; engine picks by stage via `selectAutoFireCanvasForLocation`)
 - Lane 2/3 substitution conditions ("if Frank stage ≥ 2 → kitchen substitutions eligible")
@@ -742,6 +750,8 @@ player.babies[]                   (array of completed pregnancy records)
 **Why off-limits:** Pregnancy is a complex engine feature requiring father-attribution, parallel scene variants, scandal interaction, birth events. None of this is in the v2 engine yet. Authoring against `pregnancy.isPregnant` without the engine produces broken references.
 
 **Trigger to unlock authoring:** LO calls "ship pregnancy" per Doc 65. Until then, all sex scenes ship bareback (per Doc 30 §7.3.1) with no pregnancy language — future pregnancy retrofit will be additive, not breaking.
+
+**When a Phase-2+ trait IS included, you MUST author its SETTER — the build won't catch a dormant trait.** The flag-chain validator checks FLAGS, not TRAITS: an included trait that's declared but never `set` by any canvas passes the build and ships INERT (its dependent content never fires). When `pregnancy = include`, author a canvas that sets `player.pregnancy` (e.g. a hidden onset event keyed off an `had_unprotected_sex` flag from the first-full-sex capstones) AND the pregnant-variant surfaces for it to gate (each father-NPC needs an ongoing sex hub — `doctrine/10` §6). Late Shifts shipped pregnancy "included" but with no setter → all breeding content was dead until a setter was retro-wired. (Engine-side catch proposed: `PREVENTION_LINTER_SPEC.md` L6.)
 
 #### `scandal_level` / `reputation` (Doc 65 E10c)
 

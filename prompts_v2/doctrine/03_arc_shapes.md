@@ -168,6 +168,8 @@ Separate household. Scheduled interactions. Relation-driven. Quest-chain progres
 
 **Lane 3 budget = 0.** Peer doesn't interrupt private chores. The arc lives in Lane 1 visits + Lane 2 workplace ambient + capstone dates.
 
+**Ongoing Stage-4 hub (required — Late Shifts B6).** A peer/dating arc needs a REPEATABLE Lane-1 hub at the partner's location for the post-consummation (Stage 4) state — not just a one-shot first-night capstone. Without it, the arc has no surface after consummation: nothing to revisit, and Phase-2+ content (e.g. pregnant variants) has nowhere to attach. Pattern: the partner's home is access-gated on the relationship flag (e.g. `cole_date_done`); the ongoing hub gates on the consummation flag (e.g. `cole_first_night_done`) at a priority BELOW the first-night capstone (so the capstone fires first, then the hub takes over). The hub's NPC must be schedule-present at that location, or the portrait won't render (`doctrine/10` §5.2). Late Shifts shipped Cole with only the first-night capstone — the missing ongoing hub surfaced only when authoring pregnant variants.
+
 ### §5.2 — Canvas distribution (Ryan slice — Doc 58 brief)
 
 | Lane | Tier | Canvas count | Examples |

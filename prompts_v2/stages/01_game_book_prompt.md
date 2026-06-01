@@ -58,6 +58,13 @@ Question template (one at a time):
 
 After LO answers each, record the call. After all four are resolved (or skipped because the concept declared them), proceed to §1. Do NOT begin authoring §1 of the design book before all four decisions are resolved.
 
+**When an inclusion is `include`, the design book must name HOW it's mechanized — not just that it's on.** An "included" system that's never wired ships dormant (the build validator won't catch it). For each `include`, the brief must specify:
+- **Pregnancy:** the setter trigger (e.g. an `had_unprotected_sex` flag from first-full-sex capstones → a hidden onset canvas that sets `player.pregnancy`) AND which NPCs get pregnant-variant content. Every NPC that can father needs an ongoing sex surface for the variants to attach to (see the peer/dating ongoing-hub note below).
+- **Scandal:** the awareness accumulator owner (an antagonist/witness NPC), its writers (which beats raise awareness), and the confrontation capstone's threshold + location (a shared/public space the player crosses — `doctrine/10` §5).
+- **Gallery / Tracker:** confirm the trigger condition is actually met (e.g. 9+ once-only capstones for gallery) and name the per-canvas field (`guide` for tracker).
+
+(Late Shifts shipped pregnancy "included" but with no setter → all breeding content was dead until a setter was retro-wired.)
+
 If LO declares `scope_mode: slice`, SKIP §0.5.2 entirely. Slice authoring defers all four to Phase 2+ by default; no Q&A needed.
 
 ### §0.5.2a — Downstream emission at full_game (FYI for design book §1 header)
@@ -213,6 +220,7 @@ This prompt assumes you have read these files in the prompts_v2 corpus:
 | `doctrine/07_anti_patterns.md` | 27 failure modes + cross-doc anti-pattern catalog |
 | `doctrine/08_kink_vocab_ceilings.md` | Per-arc vocabulary ceilings + 2026-05-16 LO default-explicit pattern |
 | `doctrine/09_trait_catalog.md` | Tier 1 + Tier 2 traits + stage internal-only doctrine + Phase 2+ off-limits list |
+| `doctrine/10_location_design.md` | Location layering (private/shared/town) + reachability triad + per-arc location footprint — READ before drafting §3 locations |
 
 If you haven't read these, stop and read them before authoring. Citation without comprehension produces drift.
 
@@ -285,20 +293,23 @@ If no shape fits, surface to LO. Don't invent a 6th shape — the corpus doesn't
 - **Premise.** Why is the player here? What's the inciting situation? Concrete + specific. ~2 paragraphs.
 - **Player character.** Name (default "Maya" — adapt if LO specified), age (typically 20-23), background (one sentence), agency frame (what can the player choose?).
 - **Economic engine.** Per Doc 30 §4.1 — RTS pattern is rent + first-week deadline. Specifics: rent amount + due day + grace periods. Starting money + first income source.
+- **Digital surface (phone) — `doctrine/13_phone_design.md`.** Decide if the game has off-location life worth a phone (NPC texts, a follower/job economy, a private escalation channel). If yes: which app types (most arc games are chat-centric — one `chat` app), the acquisition beat (what sets `purchase_flag`, e.g. reconnecting a cut-off phone at first income), and which NPC arcs get threads. Threads ride arc flags authored in §2; the phone carries arcs, it isn't one. Skip entirely for a single-location game with no off-screen life.
 - **At `scope_mode: full_game` — Phase 2+ inclusions.** Per the §0.5.2 Q&A resolutions, declare each of pregnancy / scandal / gallery / tracker as `include` or `defer`. Include = ships in this game with full engine support; defer = locked-visible scaffolding only OR completely absent per LO's call.
 - **At `scope_mode: slice` — Slice scope (Phase 1) + Phase 2+ deferrals.** What ships in the first 10-14 day slice? Typically: 1 NPC at full depth (gold standard) + 4-5 NPCs at minimum-contract depth + 1 cross-arc capstone. All four Doc 65 decisions default to defer per `doctrine/09_trait_catalog.md` §6.1.
 - **Time model.** 24h clock vs. 6-band model (EM/M/A/E/N/LN). Pick one. Per Doc 30 §4.3 — TLS slice uses 24h; future games can pick 6-band.
 
 ### Step 4 — Draft locations + schedules
 
-§3 of the design book. Cover:
+§3 of the design book. **Read `doctrine/10_location_design.md` first — it's the keystone for this step.** Cover:
 
-- **Home hub** + sub-locations (Hallway → Maya's room / NPC rooms / Kitchen / Living Room / Bathroom / Yard / etc.)
-- **Town hub** + sub-locations (Main Street → Diner / Shop / Gym / Library / etc.)
-- **Outside locations** (Lake / Woods / etc. — Phase 2+ typically)
+- **Home, layered (`doctrine/10` §4).** A private dwelling, the shared building it sits in, and the outside are SEPARATE locations: rooms → private-unit hub → shared-building corridor → exterior root → (walk) → town. Do NOT collapse "the apartment" and "the building corridor" into one hub (the street would open into a bedroom; a neighbor would spawn beside the beds).
+- **Town hub** + sub-locations (Main Street → Diner / Shop / Gym / Library / etc.). Home-exterior root + town root are two top-level locations bridged by walk-activity canvases, not by a direct `entry_from` link.
+- **Outside locations** (Lake / Woods / etc. — Phase 2+ typically).
+- **NPC placement by arc shape (`doctrine/10` §6):** household NPCs inside the private unit; neighbors/witnesses in shared/public space (never the private unit); service at the workplace; peer/dating gets an ongoing Stage-4 hub at the partner's location (not a first-night capstone only).
 - **Per-NPC location schedules.** Per `schema/01_engine_capabilities.md` §5.1 — non-overlapping time windows per NPC.
+- **Reachability triad (`doctrine/10` §5) — apply per NPC beat.** For every place an NPC scene happens, confirm NPC-schedule ∩ scene-window ∩ where-the-player-actually-is-and-awake is non-empty. Anchor each NPC's beats where the player *crosses them in the daily loop* (mind sleep/work windows + cross-midnight). The build will NOT catch a dead-on-arrival scene — lock placement here.
 
-For each in-scope NPC, draft their full week schedule (weekdays + weekend variant if needed). Use Doc 31 Frank's schedule as the gold standard (7 entries covering 24h non-overlapping).
+For each in-scope NPC, draft their full week schedule (weekdays + weekend variant if needed). Use Doc 31 Frank's schedule as the gold standard (7 entries covering 24h non-overlapping); `doctrine/10` for the full layering + reachability doctrine.
 
 ### Step 5 — Author per-NPC R7 brief
 
@@ -945,6 +956,13 @@ Run this checklist before delivering the design book:
 - [ ] §5 Cross-arc state + pregnancy retrofit notes
 - [ ] §6 Capstone chain map for each NPC + cross-NPC bridges
 - [ ] §7 Slice build plan (day-by-day)
+
+### Locations + reachability (`doctrine/10`)
+- [ ] Geography layered: private dwelling ≠ shared building ≠ town (no collapsed hub); home-exterior + town are two roots bridged by walk activities
+- [ ] Household NPCs inside the private unit; neighbors/witnesses in shared/public space (never the private unit)
+- [ ] Every NPC beat passes the reachability triad: NPC-schedule ∩ scene-window ∩ player-present-and-awake is non-empty (cross-midnight aware) — anchored where the player crosses the NPC
+- [ ] Each peer/dating NPC has an ongoing Stage-4 hub at their location, not a first-night capstone only
+- [ ] Each `include`d Phase-2+ system names its mechanism (pregnancy setter / scandal accumulator+confrontation / gallery trigger / tracker field) — §0.5.2
 
 ### Doctrine fidelity
 - [ ] Every arc shape pulled from `doctrine/03_arc_shapes.md` §1 (5 shapes)

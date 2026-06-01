@@ -101,7 +101,11 @@ prompts_v2/
 │   ├── 06_design_brief_template.md      # R7 brief template + Frank/Marge gold standards
 │   ├── 07_anti_patterns.md              # Doc 54's 27 failure modes + cross-doc catalog
 │   ├── 08_kink_vocab_ceilings.md        # Doc 30 §7.5 verbatim + default-explicit pattern
-│   └── 09_trait_catalog.md              # Tier 1 + Tier 2 traits + stage internal-only doctrine
+│   ├── 09_trait_catalog.md              # Tier 1 + Tier 2 traits + stage internal-only doctrine
+│   ├── 10_location_design.md            # location layering + reachability triad (silent-runtime bug prevention)
+│   ├── 11_clothing_design.md            # clothing → public content + beauty/exhibitionism axes (NPC arcs never read the outfit)
+│   ├── 12_rent_economy_design.md        # rent = the money drive: arm-after, eviction-mode choice, budget math, scoping trap
+│   └── 13_phone_design.md               # phone = the digital surface: chat threads on real flags, photo-action tiers, purchase gate, no day/time triggers
 │
 ├── reference/                           # RTS extraction (replaces Jack's World docs)
 │   ├── 01_rts_overview.md               # Game shape + bootstrap + writing tiers

@@ -49,6 +49,12 @@ PHASE_FILES = [
     "4_story_arc.toml",
     "5_scenes.toml",
     "6_dev_shortcuts.toml",
+    # 8_phone.toml is an OPTIONAL content phase, merged LAST (after dev shortcuts)
+    # so the top-level [phone] table + its arrays-of-tables sit at the very end of
+    # the merged file — no [[canvases]] array reopens after it. Numbered 8 (not 7)
+    # because 7_final_game.toml is the OUTPUT name. Missing file is tolerated
+    # (the merge() loop skips absent phases), so games without a phone are fine.
+    "8_phone.toml",
 ]
 OUTPUT_FILENAME = "7_final_game.toml"
 

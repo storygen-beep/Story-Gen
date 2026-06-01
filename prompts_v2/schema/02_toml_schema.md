@@ -23,9 +23,9 @@
 | §9 | `[[sidebar_items]]` per-type tables |
 | §10 | `[engine.daily_tick]` |
 | §11 | `[[engine.stage_helpers]]` |
-| §12 | `[[clothing]]` + `[clothing_requirements]` |
+| §12 | `[[clothing]]` + `[settings.clothing_requirements]` + per-location `clothing_rules` |
 | §13 | `[phone]` + sub-apps |
-| §14 | Rent system fields (`rent_enabled` etc. — top-level GameTemplate fields) |
+| §14 | Rent system — `[settings.rent]` (economic spine; engine RentDay flow) |
 | §15 | Secondary sections (passes / items / fast_jobs / banks / themes / labels / tips_page) |
 | §16 | Effect + predicate field reference (cross-ref to schema/01 §6) |
 | §17 | Round-trip minimal-example for a complete RTS-shape sandbox |
@@ -71,37 +71,68 @@ starting_day = "Monday"
 starting_week = 1
 ```
 
-### §1.3 — Top-level `GameTemplate` flags (rent + clothing + phone enable-switches)
+### §1.3 — `[settings]` — enable-switches (clothing / rent / phone)
 
-The top-level `GameTemplate` dataclass (`template_import.py:300`) carries several enable-flags + their config. These are NOT inside any section header — they're written directly under `[project]` or top-of-file:
+The clothing, rent, and phone systems are turned on by keys the importer reads out of a **real
+`[settings]` TOML table** — `settings_raw = data.get("settings", {})` (`template_import.py:2224`).
+**These keys are NOT bare top-level keys.** Authoring them bare (e.g. directly after `[time]`) scopes
+them under whatever table precedes them, `data["settings"]` comes back empty, and the system reads as
+*disabled with no error* — a silent failure (this is exactly what shipped a dead clothing system once;
+see `doctrine/11_clothing_design.md` §8). The working gold-standard `the_long_summer_test` puts them in
+`[settings]` (`1_metadata_and_locations.toml:616`).
+
+**Clothing** (`[settings]` keys, read at `template_import.py:2225-2227`):
 
 | Field | Type | Default | Notes |
 |---|---|---|---|
-| `clothing_enabled` | bool | `false` | Activates `[[clothing]]` + wardrobe/shop |
-| `wardrobe_location` | str | — | Location slug for wardrobe |
-| `shop_location` | str | — | Location slug for clothing shop |
-| `phone_enabled` | bool | `false` | Activates `[phone]` |
-| `rent_enabled` | bool | `false` | Activates rent system — see §14 |
-| `rent_amount` | int | `0` | Rent due per period |
-| `rent_due_day` | str | `"Monday"` | Weekly rent collection day |
-| `rent_collector_npc` | Optional[str] | — | NPC slug who collects |
-| `rent_grace_periods` | int | `1` | Periods skipped before eviction |
-| `rent_start_after_flag` | str | `""` | Flag that activates rent |
-| `rent_eviction_mode` | str | `"game_end"` | `"game_end"` (legacy) or `"flag_set"` (fail-forward) |
-| `rent_eviction_flag` | str | `"rent_evicted"` | Flag set on eviction (`flag_set` mode) |
-| `corruption_tiers` | List[int] | `[0,5,15,30,45]` | Per-band corruption thresholds |
+| `clothing_enabled` | bool | `false` | Activates `[[clothing]]` + wardrobe/shop pages. See §12. |
+| `wardrobe_location` | str | — | Location slug where the wardrobe page is injected |
+| `shop_location` | str | — | Location slug where the clothing shop page is injected |
 
 ```toml
-clothing_enabled = true
+[settings]
+clothing_enabled  = true
 wardrobe_location = "loc_mayas_room"
-shop_location = "loc_thrift_store"
-
-phone_enabled = true
-
-rent_enabled = true
-rent_amount = 400
-rent_due_day = "Sunday"
+shop_location     = "loc_thrift_store"
 ```
+
+`[settings.clothing_requirements]` (coverage gate) is covered in §12.2; per-location `clothing_rules` in
+§12.3.
+
+**Rent** lives in `[settings.rent]` (read at `template_import.py:2382` — the keys are `enabled` /
+`amount` / `due_day` / …, NOT `rent_enabled` / `rent_amount`). See §14 for the full field table and
+`doctrine/12_rent_economy_design.md` for the design model.
+
+```toml
+[settings.rent]
+enabled       = true
+amount        = 125
+due_day       = "Friday"          # engine fires the due trigger on this weekday
+collector_npc = "npc_vince"       # NPC slug; must exist in [[npcs]]
+eviction_mode = "flag_set"        # or "game_end"
+```
+
+**Phone** lives in a top-level `[phone]` table (`data["phone"]`, key `enabled`, read at
+`template_import.py:2394`). See §13. NOT under `[settings]` (that is clothing) and NOT a bare
+`phone_enabled` key. All three enable-switches now read from their own table — none are bare keys under
+`[time]`:
+
+```toml
+[settings]          # clothing
+clothing_enabled = true
+[settings.rent]     # rent
+enabled = true
+[phone]             # phone (top-level, NOT under [settings])
+enabled = true
+```
+
+> ✅ **Resolved 2026-06-02 (was a known-issue):** older revisions of §13 showed `phone_enabled` as a
+> *bare top-level key*. That was wrong the same way the bare clothing/rent keys were. Phone is read from a
+> `[phone]` table. With this fixed, **no bare-key enable-switch docs remain** (clothing, rent, and phone
+> all scope correctly).
+
+`corruption_tiers` (`List[int]`, default `[0,5,15,30,45]`, per-band corruption thresholds) is a
+top-level `GameTemplate` field — see §2 (player/customization) where corruption banding is documented.
 
 ---
 
@@ -278,14 +309,16 @@ Dataclass: `TemplateLocation` at `template_import.py:135`.
 | `description` | str | `""` | Free text |
 | `image` | str | `""` | Image path |
 | `image_search_queries` | List[str] | `[]` | For Missing Media page |
-| `is_container` | bool | `false` | True for hub locations (Hallway, Main Street) |
-| `parent` | str | `""` | Parent location slug |
-| `entry_from` | str | `""` | Parent for back-navigation |
-| `default_entry` | str | `""` | Default child location to render |
-| `navigation_order` | List[str] | `[]` | Ordered child slugs for layout |
+| `is_container` | bool | `false` | Pure-nav wrapper — SWALLOWS attached canvases (see below). Do NOT attach canvases to one. |
+| `parent` | str | `""` | Structural nesting only (canvas inheritance) — NOT navigation. May differ from `entry_from`. |
+| `entry_from` | str | `""` | Navigation parent. "Leave X" links to `X.entry_from`. A top-level root has none (bridge via walk activity). |
+| `default_entry` | str | `""` | (containers only) child to auto-redirect into |
+| `navigation_order` | List[str] | `[]` | Ordered child slugs. Each listed slug MUST have `entry_from` = this location, or the build rejects it ("not a destination"). |
 | `entry_conditions` | dict | `{}` | `{version, items}` predicate block; deny entry when fails |
 | `blocked_message` | str | `""` | Shown when `entry_conditions` fail |
 | `clothing_rules` | List[dict] | `[]` | Per-location clothing gates |
+
+**`is_container` SWALLOWS canvases.** A container passage renders ONLY the child menu (`v2.py:8800`) — it never calls getStoryCanvasRedirect/renderNpcPortraits/renderSoloActivities, so any canvas whose `trigger.location` is a container is silently DEAD. NEVER attach canvases to a container. Use a NON-container standing hub (carries `navigation_order` AND hosts canvases), or a wrapper + `default_entry` → a standing arrival child that holds the content. Full layering + reachability doctrine: `doctrine/10_location_design.md`.
 
 ```toml
 [[locations]]
@@ -801,6 +834,8 @@ Amber warning when a decaying trait dropped today AND is within range of a band 
 
 **Visibility doctrine (Doc 68 §8):** stage NEVER surfaces to any sidebar item. Antagonist awareness NEVER surfaces. Body-state (energy + hygiene) MUST surface. See `doctrine/09_trait_catalog.md` §8 for per-arc-shape defaults.
 
+**No per-NPC sidebar item via `trait_bar` / `trait_words`.** Although these accept a `trait_owner`/`npc_id`, the engine resolves the `trait` against `player.core_traits` — so `type="trait_bar" npc_id="npc_x" trait="relation"` HARD-FAILS at build ("trait 'relation' not found in player.core_traits") or silently renders the PLAYER's stat. NPC progression (arousal / relation / stage) surfaces on the **Quests page** (V2 cards), NOT the sidebar. The only per-NPC sidebar item is the Doc-64 `npc_location` type, which is PENDING — do not emit it yet. (Late Shifts build failed on four npc-scoped `trait_bar`s.)
+
 ---
 
 ## §10 — `[engine.daily_tick]`
@@ -855,9 +890,24 @@ conditions = { items = [
 
 ---
 
-## §12 — `[[clothing]]` + `[clothing_requirements]`
+## §12 — `[[clothing]]` + `[settings.clothing_requirements]` + per-location `clothing_rules`
 
 Dataclass: `TemplateClothingItem` at `template_import.py:164`.
+
+**Enabling the system (do this first).** The clothing system is OFF unless `[settings]` turns it on
+(§1.3). The three switches live in the `[settings]` table — NOT as bare keys — and the items live in a
+top-level `[[clothing]]` array:
+
+```toml
+[settings]
+clothing_enabled  = true
+wardrobe_location = "loc_mayas_room"     # wardrobe page injected at this location
+shop_location     = "loc_thrift_store"   # shop page injected at this location
+```
+
+`clothing_enabled = true` with zero `[[clothing]]` items is a silent no-op (empty wardrobe/shop pages,
+all `worn_*` predicates read 0) — the importer does NOT warn. Always author a full starting outfit. For
+the *design* of the catalog + what `worn_*` should gate, see `doctrine/11_clothing_design.md`.
 
 ### §12.1 — `[[clothing]]`
 
@@ -896,9 +946,10 @@ corruption = 15
 type = "swim"
 ```
 
-### §12.2 — `[clothing_requirements]`
+### §12.2 — `[settings.clothing_requirements]`
 
-Dataclass: `TemplateClothingRequirements` at `template_import.py:180`.
+Dataclass: `TemplateClothingRequirements` at `template_import.py:180`. Lives under `[settings]` (read at
+`template_import.py:2250`), like the enable switches.
 
 | Field | Type | Default | Notes |
 |---|---|---|---|
@@ -906,11 +957,55 @@ Dataclass: `TemplateClothingRequirements` at `template_import.py:180`.
 | `always_required` | List[str] | `[]` | Slots that can never be removed |
 | `conditional` | Dict[str, Dict[str, str]] | `{}` | `{slot: {until_flag, message}}` — slot required until flag set |
 
+```toml
+[settings.clothing_requirements]
+body_coverage   = true
+always_required = []
+```
+
+### §12.3 — per-location `clothing_rules` (the coverage gate)
+
+A `[[locations]]` block may carry `clothing_rules` (§4) — a list of gates that block *entering* that
+location while underdressed. Runtime: `checkLocationClothing` (`v2.py:1407`) walks the list and enforces
+the **first rule whose `conditions` are satisfied**; a rule with no `conditions` always applies. A
+`dress` satisfies both `top` and `bottom`.
+
+| Rule field | Type | Notes |
+|---|---|---|
+| `slots_required` | List[str] | Slots that must be filled to pass. **Must be non-empty** — the validator rejects `[]` (`template_import.py:3460`). |
+| `conditions` | dict | Optional v1.0 conditions; the rule only applies when they hold. Omit = always applies. |
+| `message` | str | Shown when the player is blocked. |
+
+**Conditional coverage (RTS "go out underdressed once corrupt enough" pattern).** Gate the cover-up rule
+on a corruption ceiling: below the threshold she must cover up; at/above it the rule's condition fails,
+no rule matches, and `checkLocationClothing` returns null (she leaves freely). Do this with a **single
+rule carrying a `conditions` block** — do NOT try an empty-`slots_required` fallback rule (the validator
+rejects empty slots):
+
+```toml
+[[locations]]
+id = "loc_main_street"
+# … entry_from, navigation_order …
+clothing_rules = [
+  { slots_required = ["top", "bottom"], message = "She can't head out half-dressed.", conditions = { version = "1.0", items = [
+      { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 50 },
+    ] } },
+]
+```
+
+See `doctrine/11_clothing_design.md` §6 for the design rationale (coverage gates on global corruption
+LEVEL, not pure slots).
+
 ---
 
 ## §13 — `[phone]`
 
-`phone_enabled = true` at top level activates the phone. Dataclass tree: `TemplatePhone` at `template_import.py:286` (with sub-apps in §13.2+).
+A **top-level `[phone]` table with `enabled = true`** activates the phone (read at
+`template_import.py:2394` — `phone_raw = data.get("phone")`; `enabled` defaults **`true`** when the table
+is present). There is **NO bare `phone_enabled` key** — that form is dead config the importer never reads
+(the §1.3 scoping trap). Dataclass tree: `TemplatePhone` at `template_import.py:286` (sub-apps in §13.2+).
+The *design* model — app-type choice, thread/photo-action patterns, the purchase-gate beat — is in
+`doctrine/13_phone_design.md`; this section is the schema. Gold-standard worked example: schema/03 §14.
 
 ### §13.1 — `[phone]` top-level
 
@@ -943,6 +1038,15 @@ Dataclass: `TemplatePhoneConversation` at `template_import.py:216`.
 | `trigger` | dict | conditions block — when does this conversation become available |
 | `blocks` | List[`TemplatePhoneConversationBlock`] | Thread structure |
 | `notify` | str | Toast text on delivery (default `"📱 New message"`) |
+
+**Trigger condition vocabulary (source-verified vs `triggerConditionsSatisfied`, v2.py:3308 — the
+evaluator the phone, posts, profiles, and daily_topics all use).** Supported `items[].type`:
+`flag` · `trait` · `days_since_flag` · `pass` · `item` · `stage` · `quest` · `corruption_level` ·
+`modifier` · `clothing_slot` · `clothing_item` · `worn_beauty` · `worn_corruption` · `worn_type`.
+**NOT supported: `day`, `time`, `weekday`, `location`, `random`** (those exist only in the *canvas*
+trigger path, not here). So a phone thread cannot fire on day-of-week; use `flag` or `days_since_flag`
+(fires N days after a flag's `set_day`) for time-relative delivery. Shape:
+`conditions = { version = "1.0", logic = "AND"|"OR", items = [ {type="flag", subject="player", flag_key, operator="is_true"|"is_false"}, {type="trait", subject="player"|"npc", trait_key, operator="gte"|..., value, npc_id?}, {type="days_since_flag", subject="player", flag_key, operator="gte", value} ] }`.
 
 ### §13.4 — `[[phone.conversations.blocks]]`
 
@@ -1014,15 +1118,61 @@ Dataclass: `TemplatePhoneGalleryItem` at `template_import.py:276`.
 
 ---
 
-## §14 — Rent system (top-level GameTemplate fields)
+## §14 — Rent system — `[settings.rent]`
 
-See §1.3 for the toggle/config fields. The rent engine fires on `rent_due_day` weekly. If `player.money < rent_amount`:
-- `rent_eviction_mode = "game_end"` — game over.
-- `rent_eviction_mode = "flag_set"` — sets `rent_eviction_flag` (e.g., `"rent_evicted"`); fail-forward (author handles downstream).
+Rent is the recurring economic-pressure system: it intercepts the player on its due day, demands payment,
+and on repeated failure either ends the game or sets a flag. It lives in a **`[settings.rent]` table**
+(read at `template_import.py:2382` — `rent_raw = settings_raw.get("rent", {})`). The keys are `enabled` /
+`amount` / etc. — **NOT** `rent_enabled` / `rent_amount`. Authoring them bare scopes them under the wrong
+table, `data["settings"]["rent"]` comes back empty, and rent reads as disabled with no error (the §1.3
+silent-failure trap — this is exactly what shipped a dead rent system in Late Shifts). The *design* model
+— when to use rent, the eviction-mode choice, the arm-after pattern, budget math — is in
+`doctrine/12_rent_economy_design.md`; this section is the schema.
 
-`rent_text` is a dict of override strings: `{paid, late, evicted, due_warning, ...}`.
+### §14.1 — Fields (`[settings.rent]`)
 
-`rent_grace_periods = N` allows N skipped periods before eviction fires.
+| Field | Type | Default | Notes |
+|---|---|---|---|
+| `enabled` | bool | `false` | Master switch. |
+| `amount` | int | `0` | Rent per period. Validator: must be > 0 when enabled. |
+| `due_day` | str | `"Monday"` | Weekday rent comes due (full name `"Monday"`…`"Sunday"`). The engine arms the due trigger when the in-game day rolls over TO this weekday — once per week. (Pre-2026-06-01 the engine ignored `due_day` and always fired Monday; it now respects it.) |
+| `collector_npc` | str | `""` | NPC slug who collects (name + portrait shown on RentDay). Validator: must exist in `[[npcs]]`. Empty → generic "the landlord". |
+| `grace_periods` | int | `1` | How many times the player may come up short before eviction fires. Each short period consumes one and clears that period's due flag. Validator: >= 0. |
+| `start_after_flag` | str | `""` | Rent stays dormant until this flag is set — use it to keep onboarding rent-free (arm rent only once the player has income). Empty → rent arms from the first due day. |
+| `eviction_mode` | str | `"game_end"` | `"game_end"` → GAME OVER + restart. `"flag_set"` → fail-forward (sets `eviction_flag`, play continues). Validator: one of these two. |
+| `eviction_flag` | str | `"rent_evicted"` | Flag set when `eviction_mode = "flag_set"` and grace is exhausted. Validator: lowercase snake_case; auto-registered on the player. |
+| `text` | table | `{}` | Override strings for the RentDay passages (§14.3). Author as a **`[settings.rent.text]` sub-table**, NOT a multi-line inline table (those break `tomllib`). |
+
+### §14.2 — Runtime flow (what the engine generates)
+
+State: `$game_state.rent_state = { last_paid_week, warnings, is_due }`. On each day rollover, if the new
+weekday == `due_day` and `start_after_flag` (if set) is satisfied, `is_due` is set. While `is_due`, a
+render intercept redirects the player to the `RentDay` passage:
+
+- **Can pay** (`money >= amount`) → debit, clear `is_due`, reset warnings → `RentDay_Paid`.
+- **Can't pay** → `RentDay_Short`: if `warnings < grace_periods`, a warning fires, `warnings += 1`,
+  `is_due` clears (the period is survived). Once grace is exhausted, eviction fires per `eviction_mode`.
+
+The engine does **not** set a "first rent paid" flag. If downstream content needs one, set it from a
+hand-authored first-rent capstone (the hybrid pattern — `doctrine/12`).
+
+### §14.3 — `[settings.rent.text]` keys (the REAL set)
+
+All optional; each has an engine default. The RentDay title renders as `<title> — Rent Day`.
+
+| Key | Passage | Used when |
+|---|---|---|
+| `title`, `scene`, `greeting` | RentDay | the knock + the demand |
+| `cant_pay` | RentDay | the "I'm short" choice label |
+| `paid_scene`, `paid_response`, `paid_closing` | RentDay_Paid | after paying |
+| `warning_scene`, `warning_response`, `warning_closing` | RentDay_Short | short, still within grace |
+| `eviction_scene`, `eviction_response`, `eviction_closing` | RentDay_Short | grace exhausted, `game_end` |
+| `eviction_scene_soft`, `eviction_response_soft`, `eviction_closing_soft` | RentDay_Short | grace exhausted, `flag_set` (falls back to the non-`_soft` keys if unset) |
+
+> The old corpus listed `rent_text` keys as `{paid, late, evicted, due_warning}` — **none of those exist**.
+> Use the keys above (verified against `v2.py:14242–14379`).
+
+See `schema/03_example_toml.md` §13 for a verbatim worked `[settings.rent]` + `[settings.rent.text]` block.
 
 ---
 
@@ -1124,6 +1274,8 @@ Dataclass: `TemplateTipsPage` at `template_import.py:393`. Standalone game-mecha
 ---
 
 ## §16 — Effect + predicate field reference (the field-name minefield)
+
+**Inline-table formatting (tomllib 1.0 hard rule):** an inline table `{ … }` must NOT wrap across lines — keys stay on the opening line and a closing `] }` stays on ONE line. `{ advance_text = "…", blocks = [ … ] },` is valid; splitting `advance_text` onto its own line, or putting `]` and `}` on separate lines, raises "Unclosed inline table" and the build fails. Only `[table]` / `[[array.of.tables]]` headers may span lines, never inline `{ }`. (Cost a repair pass in Late Shifts.)
 
 See `schema/01_engine_capabilities.md` §6 for full behavior. This is the reference card.
 
@@ -1256,11 +1408,12 @@ starting_hour = 8
 starting_day = "Monday"
 starting_week = 1
 
+# Clothing switches live in the [settings] TABLE (read from data["settings"]),
+# NOT as bare keys — see §1.3. (rent → [settings.rent], phone → [phone].)
+[settings]
 clothing_enabled = true
-phone_enabled = false
-rent_enabled = true
-rent_amount = 400
-rent_due_day = "Sunday"
+wardrobe_location = "loc_mayas_room"
+shop_location = "loc_thrift_store"
 
 # ---- Player ----
 [player]
@@ -1410,3 +1563,43 @@ goals = [
 ---
 
 **End of file.** For doctrine (when to use which primitive), read `prompts_v2/doctrine/`. For runtime behavior, read `prompts_v2/schema/01_engine_capabilities.md`.
+
+
+## Label registries — `[[traits.labels]]` / `[[flags.labels]]` (Pattern 2)
+
+Top-level arrays of tables that map an internal trait/flag key to a player-facing
+label (used by `setup.computeHintGoal` when auto-rendering the 🎯 goal block).
+
+```toml
+[[traits.labels]]
+key   = "trust"          # the core_trait key
+label = "Trust"          # player-facing label
+verb  = "reach"          # framing word: "reach Trust >= 15" (default "reach")
+unit  = "session"        # optional unit noun for counter-style goals (e.g. "do Yard help x3")
+
+[[flags.labels]]
+key   = "frank_caught"
+label = "Frank caught me"
+```
+
+### `hidden` (trait labels only) — hide an internal trait from ALL player-facing dumps
+
+The generator's `playerTraits` sidebar widget and the Stats page dump **every**
+`core_traits` key. Internal traits (`<slug>_stage`, `pregnancy`, antagonist
+`awareness`) MUST live in `core_traits` (the engine reads/writes them there) but
+must never be shown. Add a hide-only `[[traits.labels]]` entry:
+
+```toml
+[[traits.labels]]
+key    = "frank_stage"
+hidden = true            # label may be omitted on a hide-only entry
+```
+
+- Emitted as `setup.hiddenTraits`; skipped via `<<continue>>` in every trait-dump
+  loop, in **both dev and non-dev** builds. Display-only — never alters state.
+- **Limitation:** keyed by trait NAME only (not namespaced). A hidden key hides for
+  the player AND any NPC carrying a core_trait of that name (e.g. an antagonist's
+  `awareness` — usually the intent). Revisit only if you need the same trait name
+  visible on one character but hidden on another.
+
+See `doctrine/09_trait_catalog.md` §4.4 and the `stages/02` §11 checklist.

@@ -380,6 +380,12 @@ class TemplateTraitLabel:
     label: str
     verb: str = "reach"   # framing word: "reach trust ≥ 15" / "do Bookkeeping ×3"
     unit: str = ""        # optional unit noun for counter pluralization
+    hidden: bool = False  # when True, hide this trait from ALL player-facing trait dumps
+                          # (playerTraits widget + Stats page, dev AND non-dev). For
+                          # internal traits — <slug>_stage, pregnancy, antagonist awareness.
+                          # A label entry may exist SOLELY to hide (label may be empty).
+                          # NOTE: name-keyed, not namespaced — hides for player + any NPC
+                          # that has a core_trait of this name.
 
 
 @dataclass
@@ -2606,6 +2612,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     label=_require_str(tl_raw, "label", ""),
                     verb=_require_str(tl_raw, "verb", "reach") or "reach",
                     unit=_require_str(tl_raw, "unit", ""),
+                    hidden=bool(tl_raw.get("hidden", False)),
                 )
             )
 
@@ -4425,12 +4432,24 @@ def validate(template: GameTemplate) -> List[str]:
     # Pattern 2 — Validate label registries (FAIL on duplicate keys; warn
     # via linter if a helper-referenced trait/flag has no label entry).
     seen_trait_label_keys: Set[str] = set()
+    # Build the union of declared core_trait keys (player + every NPC) once, for the
+    # hide-only typo warning below.
+    _all_core_trait_keys: Set[str] = set((template.player.core_traits or {}).keys())
+    for _n in (template.npcs or []):
+        _all_core_trait_keys |= set((_n.core_traits or {}).keys())
     for tl in (template.trait_labels or []):
         if not tl.key:
             errors.append("traits.labels entry missing required `key` field")
             continue
-        if not tl.label:
+        # A hide-only entry (hidden=true) may omit `label` — its sole purpose is to
+        # suppress the trait from player-facing dumps, not to render a goal label.
+        if not tl.label and not tl.hidden:
             errors.append(f"traits.labels[{tl.key}] missing required `label` field")
+        if tl.hidden and tl.key not in _all_core_trait_keys and warnings is not None:
+            warnings.append(
+                f"traits.labels[{tl.key}] hidden=true but '{tl.key}' is not a declared "
+                f"core_trait on the player or any NPC — typo? (the hide will no-op)"
+            )
         if tl.key in seen_trait_label_keys:
             errors.append(f"traits.labels duplicate key '{tl.key}'")
         seen_trait_label_keys.add(tl.key)
@@ -5538,7 +5557,7 @@ def create_project_from_template(
     # for the goal-block renderer (setup.computeHintGoal).
     if template.trait_labels:
         project.metadata["trait_labels"] = {
-            tl.key: {"label": tl.label, "verb": tl.verb, "unit": tl.unit}
+            tl.key: {"label": tl.label, "verb": tl.verb, "unit": tl.unit, "hidden": tl.hidden}
             for tl in template.trait_labels
         }
     if template.flag_labels:

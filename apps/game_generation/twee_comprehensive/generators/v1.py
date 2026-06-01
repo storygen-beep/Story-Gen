@@ -4576,8 +4576,11 @@ window.advanceDay = function() {{
         State.variables.game_state.time_state.current_week += 1;
     }}
 {"" if not self.rent_enabled else '''
-    // Rent due on new week (only after start_after_flag is met, if configured)
-    if (nextIndex === 0 && setup.rent_enabled) {{
+    // Rent comes due on its configured weekday (default Monday), once per week,
+    // only after start_after_flag is met (if configured). advanceDay() runs one
+    // day per call, so this matches every occurrence of due_day as days pass.
+    var dueDay = setup.rent_due_day || "Monday";
+    if (days[nextIndex] === dueDay && setup.rent_enabled) {{
         var rs = State.variables.game_state.rent_state;
         var flagOk = !setup.rent_start_after_flag || (State.variables.flags && State.variables.flags[setup.rent_start_after_flag]);
         if (rs && flagOk) {{

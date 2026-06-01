@@ -820,6 +820,30 @@ class EnginePRDIntegrationTests(TestCase):
         # The author-declared flag must still be present.
         self.assertIn("summer_started", player.flag_keys)
 
+    def test_f4_rent_due_respects_due_day(self):
+        _, twee = self._build()
+        # Engine fix: the rent-due trigger must fire on the configured due_day,
+        # not the hardcoded week-rollover. The old form silently ignored due_day
+        # and always fired on Monday — that exact condition must be gone.
+        self.assertIn("days[nextIndex] === dueDay", twee)
+        self.assertNotIn("nextIndex === 0 && setup.rent_enabled", twee)
+        # Fixture sets due_day = Monday, mirrored into setup for the JS match.
+        self.assertIn('setup.rent_due_day = "Monday";', twee)
+
+    def test_f4_rent_due_respects_due_day_v2(self):
+        # V2 is the default generator — verify the same fix landed there too.
+        from apps.game_generation.twee_comprehensive.generators.v2 import (
+            TweeComprehensiveGeneratorV2,
+        )
+
+        template = normalize(copy.deepcopy(self.toml_data))
+        self.assertEqual(validate(template), [])
+        result = create_project_from_template(template, str(self.user.id))
+        project = Project.objects.get(id=result["project_id"])
+        twee = TweeComprehensiveGeneratorV2().generate(project)
+        self.assertIn("days[nextIndex] === dueDay", twee)
+        self.assertNotIn("nextIndex === 0 && setup.rent_enabled", twee)
+
     # --- Sanity: baseline shape of generated game ------------------------
 
     def test_baseline_generator_emits_start_passage(self):

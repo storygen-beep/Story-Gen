@@ -935,6 +935,17 @@ class TweeComprehensiveGeneratorV2:
         # Maps internal trait/flag names → player-facing labels.
         self.trait_labels = (self.project.metadata or {}).get("trait_labels", {}) or {}
         self.flag_labels = (self.project.metadata or {}).get("flag_labels", {}) or {}
+        # Hidden-trait registry (2026-05-30): any [[traits.labels]] entry with
+        # hidden=true names a core_trait that must NEVER render in a player-facing
+        # trait dump (playerTraits/npcTraits widgets + Stats page), in dev AND
+        # non-dev builds. Internal stage/pregnancy/awareness traits live in
+        # core_traits (the engine reads them there) but leak through the
+        # Object.keys() dump loops; this set drives a <<continue>> skip in each.
+        # Name-keyed (not namespaced) — a hidden key is hidden for player + any NPC.
+        self.hidden_trait_keys = [
+            k for k, v in self.trait_labels.items()
+            if isinstance(v, dict) and v.get("hidden")
+        ]
         # Pattern 2: stage_setter_canvases — runtime index mapping
         # (npc_slug, stage_value) → canvas_id for branch-inside-shell transitions
         # (where the helper isn't the source of truth — the canvas's exit_block
@@ -2646,6 +2657,10 @@ for (var _shi = 0; _shi < setup.stage_helpers.length; _shi++) {{
 // auto-rendered 🎯 goal block (setup.computeHintGoal).
 setup.trait_labels = {json.dumps(self.trait_labels)};
 setup.flag_labels = {json.dumps(self.flag_labels)};
+// Hidden traits (2026-05-30) — flat list of core_trait keys flagged hidden=true
+// in [[traits.labels]]. Every player/NPC trait-dump loop skips these via
+// <<continue>>, so internal stage/pregnancy/awareness traits never surface.
+setup.hiddenTraits = {json.dumps(self.hidden_trait_keys)};
 setup.stage_setter_canvases = {json.dumps(self.stage_setter_canvases)};
 setup.flag_setter_canvases = {json.dumps(self.flag_setter_canvases)};
 // Sub-menu parent index (2026-05-09) — child_canvas_id → parent_menu_canvas_id
@@ -2979,14 +2994,19 @@ setup.getNpcDaySchedule = function(npcId, dayIndex) {{
         var npcSlug = uuidToSlug[resolvedId];
         if (!npcSlug) return [];
 
-        var entries = setup.getNpcScheduleFromCanvases(npcSlug);
+        // Prefer the declared [[npcs.schedules]] registry (authoritative weekly
+        // timetable); fall back to canvas-derived entries for un-migrated games.
+        // Declared entries carry location_slug; setup.locations is slug-keyed, so
+        // always surface the slug for the display name lookup.
+        var declared = (setup.npcSchedules || {{}})[npcSlug];
+        var entries = (declared && declared.length > 0) ? declared : setup.getNpcScheduleFromCanvases(npcSlug);
         var result = [];
         for (var i = 0; i < entries.length; i++) {{
             var sch = entries[i];
             // Empty weekdays = all days
             if (!sch.weekdays || sch.weekdays.length === 0 || sch.weekdays.includes(dayIndex)) {{
                 result.push({{
-                    location: sch.location,
+                    location: sch.location_slug || sch.location,
                     start_time: sch.start_time || "00:00",
                     end_time: sch.end_time || null,
                     activity: sch.activity || ""
@@ -3021,6 +3041,15 @@ setup.getNpcsWithSchedules = function() {{
                 if (!setup._isCanvasAvailable(c)) continue;
                 found[c.npcId] = true;
             }}
+        }}
+
+        // Declared [[npcs.schedules]] registry is the authoritative source —
+        // surface every NPC that has a declared schedule, regardless of whether
+        // any of its canvases are unlocked yet. (Canvas scan above stays as a
+        // back-compat fallback for games that declare no [[npcs.schedules]].)
+        var declaredSched = setup.npcSchedules || {{}};
+        for (var dSlug in declaredSched) {{
+            if (declaredSched[dSlug] && declaredSched[dSlug].length > 0) found[dSlug] = true;
         }}
 
         // Resolve slugs to UUIDs and build result
@@ -3126,12 +3155,16 @@ setup.getNpcAllSchedulesSorted = function(npcId) {{
         var npcSlug = uuidToSlug[resolvedId];
         if (!npcSlug) return [];
 
-        var entries = setup.getNpcScheduleFromCanvases(npcSlug);
+        // Prefer the declared [[npcs.schedules]] registry (authoritative weekly
+        // timetable); fall back to canvas-derived entries for un-migrated games.
+        // Declared entries carry location_slug; setup.locations is slug-keyed.
+        var declared = (setup.npcSchedules || {{}})[npcSlug];
+        var entries = (declared && declared.length > 0) ? declared : setup.getNpcScheduleFromCanvases(npcSlug);
         var result = [];
         for (var i = 0; i < entries.length; i++) {{
             var sch = entries[i];
             result.push({{
-                location: sch.location,
+                location: sch.location_slug || sch.location,
                 start_time: sch.start_time || "00:00",
                 end_time: sch.end_time || null,
                 weekdays: sch.weekdays || [],
@@ -4776,8 +4809,11 @@ window.advanceDay = function() {{
         State.variables.game_state.time_state.current_week += 1;
     }}
 {"" if not self.rent_enabled else '''
-    // Rent due on new week (only after start_after_flag is met, if configured)
-    if (nextIndex === 0 && setup.rent_enabled) {{
+    // Rent comes due on its configured weekday (default Monday), once per week,
+    // only after start_after_flag is met (if configured). advanceDay() runs one
+    // day per call, so this matches every occurrence of due_day as days pass.
+    var dueDay = setup.rent_due_day || "Monday";
+    if (days[nextIndex] === dueDay && setup.rent_enabled) {{
         var rs = State.variables.game_state.rent_state;
         var flagOk = !setup.rent_start_after_flag || (State.variables.flags && State.variables.flags[setup.rent_start_after_flag]);
         if (rs && flagOk) {{
@@ -7859,7 +7895,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         Fills in derived values from mode, user overrides take precedence.
         Returns a dict ready for CSS variable generation.
         """
-        mode = raw.get("mode", "light")
+        mode = raw.get("mode", "dark")
 
         # Mode-derived base colors
         if mode == "dark":
@@ -13918,6 +13954,7 @@ $(document).on(':passagestart', function(ev) {
     <ul class="traits-list">
       <<for _i to 0; _i lt _keys.length; _i++>>
         <<set _k to _keys[_i]>>
+        <<if setup.hiddenTraits && setup.hiddenTraits.includes(_k)>><<continue>><</if>>
         <li class="trait-item">
           <span class="trait-name"><<print _k>></span>
           <span class="trait-controls"><button class="dev-adj-btn dev-player-trait-btn" @data-trait="_k" data-delta="-1">-</button> <span @id="'sidebar-player-trait-' + _k" class="trait-value"><<print $player.core_traits[_k]>></span> <button class="dev-adj-btn dev-player-trait-btn" @data-trait="_k" data-delta="1">+</button></span>
@@ -13943,6 +13980,7 @@ $(document).on(':passagestart', function(ev) {
           <<set _npcKeys to Object.keys(_npc.core_traits).sort()>>
           <<for _j to 0; _j lt _npcKeys.length; _j++>>
             <<set _nk to _npcKeys[_j]>>
+            <<if setup.hiddenTraits && setup.hiddenTraits.includes(_nk)>><<continue>><</if>>
             <li class="trait-item">
               <span class="trait-name"><<print _nk>></span>
               <span class="trait-controls"><button class="dev-adj-btn dev-npc-trait-btn" @data-npc="_npcId" @data-trait="_nk" data-delta="-1">-</button> <span @id="'sidebar-npc-trait-' + _npcId + '-' + _nk" class="trait-value"><<print _npc.core_traits[_nk]>></span> <button class="dev-adj-btn dev-npc-trait-btn" @data-npc="_npcId" @data-trait="_nk" data-delta="1">+</button></span>
@@ -13963,6 +14001,7 @@ $(document).on(':passagestart', function(ev) {
     <ul class="traits-list">
       <<for _i to 0; _i lt _keys.length; _i++>>
         <<set _k to _keys[_i]>>
+        <<if setup.hiddenTraits && setup.hiddenTraits.includes(_k)>><<continue>><</if>>
         <li class="trait-item">
           <span class="trait-name"><<print _k>></span>
           <span class="trait-value"><<print $player.core_traits[_k]>></span>
@@ -14035,6 +14074,7 @@ $(document).on(':passagestart', function(ev) {
     <div class="stats-traits">
       <<if $player && $player.core_traits && Object.keys($player.core_traits).length > 0>>
         <<for _tk, _tv range $player.core_traits>>
+          <<if setup.hiddenTraits && setup.hiddenTraits.includes(_tk)>><<continue>><</if>>
           <div class="stats-trait-item">
             <span><<print _tk>></span>
             <span class="trait-controls"><button class="dev-adj-btn dev-player-trait-btn" @data-trait="_tk" data-delta="-1">-</button> <span @id="'stats-player-trait-' + _tk" class="stats-trait-value"><<print _tv>></span> <button class="dev-adj-btn dev-player-trait-btn" @data-trait="_tk" data-delta="1">+</button></span>
@@ -14064,6 +14104,7 @@ $(document).on(':passagestart', function(ev) {
         <div class="stats-traits">
           <<if _npc.core_traits && Object.keys(_npc.core_traits).length > 0>>
             <<for _tk, _tv range _npc.core_traits>>
+              <<if setup.hiddenTraits && setup.hiddenTraits.includes(_tk)>><<continue>><</if>>
               <div class="stats-trait-item">
                 <span><<print _tk>></span>
                 <span class="trait-controls"><button class="dev-adj-btn dev-npc-trait-btn" @data-npc="_npcId" @data-trait="_tk" data-delta="-1">-</button> <span @id="'npc-trait-' + _npcId + '-' + _tk" class="stats-trait-value"><<print _tv>></span> <button class="dev-adj-btn dev-npc-trait-btn" @data-npc="_npcId" @data-trait="_tk" data-delta="1">+</button></span>
@@ -14100,6 +14141,7 @@ $(document).on(':passagestart', function(ev) {
     <div class="stats-traits">
       <<if $player && $player.core_traits && Object.keys($player.core_traits).length > 0>>
         <<for _tk, _tv range $player.core_traits>>
+          <<if setup.hiddenTraits && setup.hiddenTraits.includes(_tk)>><<continue>><</if>>
           <div class="stats-trait-item">
             <span><<print _tk>></span>
             <span class="stats-trait-value"><<print _tv>></span>
@@ -14129,6 +14171,7 @@ $(document).on(':passagestart', function(ev) {
         <div class="stats-traits">
           <<if _npc.core_traits && Object.keys(_npc.core_traits).length > 0>>
             <<for _tk, _tv range _npc.core_traits>>
+              <<if setup.hiddenTraits && setup.hiddenTraits.includes(_tk)>><<continue>><</if>>
               <div class="stats-trait-item">
                 <span><<print _tk>></span>
                 <span class="stats-trait-value"><<print _tv>></span>
@@ -17044,7 +17087,7 @@ if (clothingMsg) {
 <h3 class="npc-name">
 <<print _npcName>>
 <<if _currentLoc>>
-<<set _locName to (setup.locations[_currentLoc.location] && setup.locations[_currentLoc.location].name) || _currentLoc.location>>
+<<set _locName to (setup.locations[_currentLoc.location] && setup.locations[_currentLoc.location].name) || setup._locNameFromUuid(_currentLoc.location) || _currentLoc.location>>
 <span class="now-badge">NOW: <<print _locName>></span>
 <</if>>
 </h3>

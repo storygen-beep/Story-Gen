@@ -457,6 +457,12 @@ Added 2026-05-29 when `scope_mode: full_game` shipped as first-class default. Th
 - **Pre-unlocking the L1 ladder at full_game** — assuming "everything ships → no locked-visible rungs needed." Wrong: locked-visible is a UI/pacing device that applies at any scope (per `doctrine/03_arc_shapes.md` §10.2). RTS Brother's hub at full game still shows locked rungs from day 1; rungs unlock as corruption/love climb. Stripping locked-visible because "the content exists" loses the progression affordance. Caught by RTS Brother evidence + Doc 54 §3.6 lesson.
 - **Phase 2+ inclusions emitted as TOML without design book §1 ratification** — Stage 2 sees TOML with pregnancy variants / scandal flags / gallery items / tracker primitives, but Stage 1 design book §1 never declared the corresponding `Phase 2+ inclusions:` rows. Means Stage 1 Q&A flow was skipped or Stage 2 invented inclusions. Caught by Stage 2 §0 cross-reference check against design book §1.
 
+### §8.7 — From Doc 72 (presence acknowledged; interaction logic-driven)
+
+- **Dead presence** — an NPC is scheduled at a reachable location (and shows on the schedule page), but visiting renders nothing: no base moment, no acknowledgement. The player acts on the schedule and gets an empty room; the world reads as locked doors. Usually escalation-only authoring (only stage-1+ beats written, no base node that renders regardless of stats). Fix: the hub/ambient base node always renders the moment; gate escalation *choices*, never the act of seeing the NPC. **NOT a quota** — "sometimes none" is a valid choice list; what's banned is the absent base. Caught by `doctrine/02` §2.8 + §8.11.
+- **Backwards on-ramp** — an arc's entry condition is a stat/flag only raisable by content downstream of that same arc (a circular gate). The cold-start player can never begin it. Distinct from §8.4 (lane forced on wrong register): here the arc legitimately exists, but its front door is locked with a key that's inside the room. Anti-example: a housemate arc gated on `worn_corruption ≥ 15` — the player must buy + wear provocative clothing before her own housemate registers her. Fix: the arc's first beat needs only co-presence; escalation layers after. Caught by `doctrine/02` §6 (cold-start on-ramp) + §8.12. (Doc 72 R4.)
+- **Quota / format enforcement (the inverse error)** — bolting a hollow ungated action onto every NPC to satisfy a checklist. Doc 72 explicitly rejects "every NPC must have ≥1 ungated interaction." Acknowledgement (the base renders) is required; an *action* is not. Gate or omit by in-world logic, not by count.
+
 ---
 
 ## §9 — Master pre-ship checklist (Doc 54 Appendix A adapted)
@@ -478,6 +484,7 @@ Run BEFORE authoring any new NPC content. Paste into PR description, work throug
 - [ ] Lane 2/3 scope: if no escalation register in slice, both are EMPTY in slice (§3.4)
 - [ ] Other-NPC content stays in their own future surfaces, not blended into this NPC's lanes (§3.5)
 - [ ] Pre-existing canon violations within touched surfaces declared (rewrite-now / schedule / accept-split per §3.7)
+- [ ] Every present NPC's base node renders regardless of stats (no dead presence); every arc is enterable from a cold start — no backwards on-ramp (per §8.7 / Doc 72)
 
 ### Doctrine
 - [ ] Every quest card mode declared (capstone / mechanic / hybrid-tier per Doc 50 §2)
@@ -523,6 +530,7 @@ Run BEFORE authoring any new NPC content. Paste into PR description, work throug
 - `28th_april_TLS_Phase2_Redesign/50_Quest_Card_Shape_Doctrine.md` §8 — quest-card anti-patterns
 - `28th_april_TLS_Phase2_Redesign/57_Capstone_Doctrine.md` §9 — capstone anti-patterns
 - `28th_april_TLS_Phase2_Redesign/67_Solo_Activity_Design_and_Multi_NPC_Dispatcher_Doctrine.md` §9 — solo-activity anti-patterns
+- `28th_april_TLS_Phase2_Redesign/72_Presence_and_Logic_Driven_Interaction_Doctrine.md` §9 — dead-presence + backwards-on-ramp (§8.7)
 
 ### Memory entries
 

@@ -246,11 +246,13 @@ Or for substitution-rule unlocks:
 
 **Why this rule exists:** validators can't see "what's behind the threshold." A mechanic card without this comment can ship pointing at vapor — the threshold crosses and nothing actually changes for the player. The comment makes the unlock greppable and reviewable.
 
-### §2.6 — D50-R6: Goals labels in voice
+### §2.6 — D50-R6: Goals labels NAME THE TRAIT (REVERSED 2026-05-30 — LO preference)
 
-**Rule:** `goals[i].label` MUST be in Maya-voice or in-character framing — *"Maya's corruption,"* *"Diana noticing,"* *"Yard help,"* *"Ryan trust."* Never raw trait keys like `npc_diana.awareness` or `core_traits.corruption`.
+**Rule (current, LO preference 2026-05-30):** `goals[i].label` names the underlying TRAIT plainly so the player can map a quest goal to a visible stat — `"Corruption"` for the corruption trait, `"<NPC> Relation"` (e.g. `"Cole Relation"`, `"Rosa Relation"`) for a per-NPC relation goal. Use the SAME word on the sidebar (the corruption `trait_words` item labeled `"Corruption"`, not `"Status"`). Never raw key paths like `npc_diana.awareness` or `core_traits.corruption`.
 
-**Why this rule exists:** the label renders directly under the 🎯 frame in the player UI. It's a narrative surface, not a debug surface.
+**This REVERSES the original D50-R6** (Maya-voice euphemisms — *"Maya's loosening," "Cole's attention," "Rosa trust"*). LO found the euphemisms confusing: a player can't connect "Maya's loosening" to any stat they see. Trait-name labels are the default for this lineage; use a Maya-voice label only if LO asks for it on a specific game. (Reversal applies ONLY to `goals[i].label` — the `tip`/`text`/`ready_text` card fields stay Maya-voice interior register per §4 of `doctrine/05`.)
+
+**Why labels matter at all:** the label renders directly under the 🎯 frame in the player UI. It's a player-facing surface, not a debug surface — so it must read as the stat the player is tracking.
 
 ### §2.7 — Pure-mechanic chain bounded `when` ranges (Doc 54 §4.3 extension)
 
@@ -533,7 +535,7 @@ Run before any commit that includes new canvas / capstone / quest card / Lane 3 
 - [ ] **D50-R3** — Terminal placement: any `terminal = true` is the LAST card in the NPC chain
 - [ ] **D50-R4** — Chain continuity: every "post-X" card has a sibling "pre-X" card pointing at X's setter
 - [ ] **D50-R5** — Pure-mechanic cards carry `# unlocks:` comment
-- [ ] **D50-R6** — `goals[i].label` in Maya-voice; no raw trait keys
+- [ ] **D50-R6 (REVERSED)** — `goals[i].label` names the trait ("Corruption" / "<NPC> Relation"), matches sidebar; no raw key paths. (LO pref; see §2.6)
 - [ ] **§2.7** — Pure-mechanic chains: each `when` has bounded threshold range; transitions are atomic
 
 ### §6.6 — Per-slice / per-arc checks (D56-R3, R4, R7)

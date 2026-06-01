@@ -76,20 +76,23 @@ A single TOML file matching `schema/02_toml_schema.md` §17 (the minimal RTS-sha
 schema_version = "1.0"
 
 [project]
-slug = "..."
+id = "..."              # REQUIRED, lowercase_snake_case. The TOML field is `id`, NOT `slug`
+                        # (importer reads p["id"], template_import.py:1457; `slug` is rejected →
+                        # build fails "project.id must be lowercase snake_case").
 title = "..."
 description = "..."
 quests_engine = "v2"
+starting_canvas = "..."  # canvas id that auto-plays on new game (e.g. the Day-1 intro one-shot)
 
 [time]
 ...
 
-# Top-level enable flags
+# Enable-switches → [settings] TABLE (read from data["settings"]), NOT bare keys.
+# (rent → [settings.rent] keys enabled/amount; phone → [phone] key enabled.)
+[settings]
 clothing_enabled = true
-phone_enabled = true
-rent_enabled = true
-rent_amount = ...
-rent_due_day = "..."
+wardrobe_location = "loc_mayas_room"
+shop_location = "loc_thrift_store"
 
 [player]
 ...
@@ -160,10 +163,17 @@ The TOML MUST:
 - Author scene-body prose per `doctrine/05_rts_flat_prose.md` (RTS-flat default + Tier-3 capstone earned)
 - Ship every Lane 4 capstone with the D57-R1 trigger fingerprint (`is_repeatable = false` or self-gate + `priority ≥ 9` + flag-setter on exit)
 - Reference every capstone from a quest card per D50-R1 / D57-R3 (or `# off-panel:` comment)
+- Use `id = "..."` (NOT `slug`) in `[project]`, plus `starting_canvas` (see §1.2)
+- Give every `is_true` flag condition a reachable setter canvas — a canvas that sets the flag AND can actually fire (location/schedule). The flag-chain validator checks a setter *exists*; it does NOT check the setter is *reachable*. (Late Shifts: a dev-only flag setter + an `is_true` requirer passed validation but was dead in play.)
+- Pass the reachability triad for every NPC ambient/capstone + portrait hub (`doctrine/10` §5): NPC-schedule ∩ canvas-window ∩ player-presence non-empty; `requires_npc` location ∈ that NPC's schedule; portrait-hub NPC schedule-present at the hub location
+- If `Phase 2+ inclusions: pregnancy = include`, author at least one canvas that SETS `player.pregnancy` (the validator does NOT check traits — an "included" trait with no setter is dormant, `doctrine/09`)
 
 The TOML MUST NOT:
 
 - Reach for legacy patterns (Pattern A–J as repeatable-content macros, etc.)
+- Attach ANY canvas (`trigger.location`) to an `is_container = true` location — containers are pure-nav and silently SWALLOW attached canvases (`doctrine/10` §3). Attach to a NON-container standing hub.
+- Wrap inline tables across lines. Inline-table KEYS stay on the table's opening line and the closing `] }` stays on ONE line — `tomllib` 1.0 rejects multi-line inline tables ("Unclosed inline table"). Correct: `{ advance_text = "…", blocks = [ … ] },` with `] },` on a single line. Wrong: `advance_text` on its own line, or `]` and `}` split across two lines. (Cost a repair pass in Late Shifts.)
+- Use a per-NPC sidebar `trait_bar` / `trait_words` (e.g. `npc_id=… trait="relation"`). The engine resolves `trait` against `player.core_traits` only → it hard-fails or mis-renders the player's stat. NPC progression surfaces on the Quests page; per-NPC sidebar is the Doc-64 `npc_location` type (PENDING). See §8.3/§8.4.
 - Include contraception language in sex scenes when bareback default applies — `scope_mode: slice` OR `scope_mode: full_game` with `Phase 2+ inclusions: pregnancy = defer` (per Doc 30 §7.3.1; see §0.5 above)
 - Surface stage trait in any sidebar item (per `doctrine/09_trait_catalog.md` §9 internal-only)
 - Surface antagonist awareness in any sidebar item (per Doc 30 §6 + `doctrine/09_trait_catalog.md` §8)
@@ -196,6 +206,7 @@ If you haven't read these, stop and read them. The schema docs are ground-truth 
 | `doctrine/07_anti_patterns.md` | Per-canvas + per-capstone + per-quest-card anti-pattern catalog |
 | `doctrine/08_kink_vocab_ceilings.md` | Per-NPC vocab register — daddy / incest / cuckold / breeding / etc. |
 | `doctrine/09_trait_catalog.md` | Trait initialization requirement (§2.5) + Phase 2+ off-limits list + effect/predicate field-name reference card |
+| `doctrine/10_location_design.md` | Location layering + `is_container` swallow rule + the reachability triad (requires_npc/portrait-hub/timing) + per-arc location footprint — the silent-runtime bugs the validator can't catch |
 
 ---
 
@@ -209,27 +220,56 @@ If you haven't read these, stop and read them. The schema docs are ground-truth 
 schema_version = "1.0"
 
 [project]
-slug = "..."
+id = "..."             # TOML field is `id`, NOT `slug` (validator rejects slug — template_import.py:1457)
 title = "..."
 description = "..."
 quests_engine = "v2"   # ALWAYS v2 for RTS-shape sandboxes
+starting_canvas = "..." # canvas id that auto-plays on new game
 
 [time]
 starting_hour = 8
 starting_day = "Monday"
 starting_week = 1
 
-# Top-level enable flags (per design book §1 World Setup)
-clothing_enabled = <bool>
-wardrobe_location = "loc_mayas_room"
-shop_location = "loc_thrift_store"
+# Enable-switches live in the [settings] table — the importer reads them from
+# data["settings"] (template_import.py:2224). Do NOT author them as bare keys: a
+# bare `clothing_enabled` scopes under [time], data["settings"] is empty, and the
+# system reads as DISABLED with no error (silent failure — see doctrine/11 §8).
+[settings]
+clothing_enabled  = <bool>
+wardrobe_location = "loc_mayas_room"     # only when clothing_enabled
+shop_location     = "loc_thrift_store"   # only when clothing_enabled
 
-phone_enabled = <bool>
+# Rent (when the game has economic pressure) → [settings.rent]. Keys are
+# enabled/amount/due_day/etc., NOT rent_enabled/rent_amount. The economic spine —
+# read doctrine/12_rent_economy_design.md. Author RentDay prose as a
+# [settings.rent.text] SUB-table (NOT a multi-line inline table — breaks tomllib).
+[settings.rent]                          # only when the game has rent pressure
+enabled          = true
+amount           = 125
+due_day          = "Friday"              # engine arms the due trigger on this weekday
+collector_npc    = "npc_vince"           # NPC slug; "" = generic "the landlord"
+grace_periods    = 1
+start_after_flag = "hired_at_diner"      # arm rent only after the player has income
+eviction_mode    = "flag_set"            # fail-forward; or "game_end" for a hard stop
+eviction_flag    = "rent_evicted"
 
-rent_enabled = <bool>
-rent_amount = <int>
-rent_due_day = "<weekday>"
-rent_grace_periods = <int>
+# Phone (when the game has off-location life) → TOP-LEVEL [phone] table (NOT
+# [settings], NOT a bare phone_enabled key). The digital surface — read
+# doctrine/13_phone_design.md. Most arc games are chat-centric (one chat app).
+# Threads trigger on REAL arc flags; phone triggers do NOT support day/time —
+# use days_since_flag for time-relative delivery (doctrine/13 §4). Full worked
+# block: schema/03 §14.
+[phone]                                   # only when the game has a phone surface
+enabled       = true
+purchase_flag = "phone_active"            # sidebar button hidden until this flag is set ("" = always on)
+
+[[phone.apps]]
+id    = "messages"
+type  = "chat"                            # chat | social_feed | dating | gallery | custom | quests | fast_jobs | bank
+label = "Messages"
+# … [[phone.conversations]] (arc-flag-triggered threads) + [[phone.daily_topics]]
+# (small-talk + corruption-gated photo actions) — see schema/03 §14 + doctrine/13.
 ```
 
 ### Step 2 — Emit `[player]` + `[player.core_traits]`
@@ -440,6 +480,17 @@ bands = [
 ### Step 8 — Emit `[[clothing]]` + `[[passes]]` + `[[items]]` (if applicable)
 
 Per design book §1 enable flags. Minimal at `scope_mode: slice`. At `scope_mode: full_game`, enable any Phase 2+ system the design book §1 opted in (pregnancy mechanics, scandal awareness, gallery system, tracker primitive).
+
+**Clothing system — read `doctrine/11_clothing_design.md` before authoring.** Requires `[settings]` from
+Step 1 (`clothing_enabled` + wardrobe/shop locations) plus the items below. The RTS-faithful usage model:
+clothing routes **PUBLIC / world content** (via `worn_corruption` / `worn_beauty` predicates, read live,
+WEAN — they never mutate global corruption) and a **social** beauty gate; it does **NOT** gate NPC arcs
+(those stay corruption + arousal + relationship — gating an NPC on the worn outfit is the backwards-on-ramp
+anti-pattern, `doctrine/02` §8.12). If the game uses a persistent **exhibitionism** meter (raised by
+public flash acts), declare it as a player trait in **Step 2** (`[player.core_traits]`) — `worn_*`
+predicates need no declaration, but a stored `exhibitionism` trait does. Author a full starting outfit
+(every slot, `initial = true`) so the player is never naked/blocked; put every `worn_*` consumer on a
+**public** surface (street / park / shop / workplace floor).
 
 ```toml
 [[clothing]]
@@ -1435,6 +1486,7 @@ stats = []
 - **No `<slug>_stage` sidebar items** for ANY NPC (per `doctrine/09_trait_catalog.md` §9)
 - **No `awareness` sidebar item** for antagonist NPCs (per Doc 30 §6 + `doctrine/09_trait_catalog.md` §8)
 - **No money sidebar item with banded poverty/wealth** unless game design specifically calls for banded display
+- **No per-NPC `trait_bar` / `trait_words`** (e.g. `[[sidebar_items]] type="trait_bar" npc_id="npc_x" trait="relation"`). UNSUPPORTED: the engine resolves `trait` against `player.core_traits` regardless of `npc_id`, so it HARD-FAILS ("trait 'relation' not found in player.core_traits") or silently shows the PLAYER's stat. NPC progression (arousal/relation/stage) belongs on the **Quests page** (V2 cards). The only per-NPC sidebar item is the Doc-64 `npc_location` type above — and it is PENDING, so do not emit it yet. (Late Shifts build failed on four npc-scoped `trait_bar`s.)
 
 ---
 
@@ -1446,21 +1498,22 @@ Below is a complete TOML emission for a minimal 3-NPC 1-location slice — enoug
 schema_version = "1.0"
 
 [project]
-slug = "minimal_slice"
+id = "minimal_slice"          # TOML field is `id` (NOT `slug`) — see §1.2
 title = "Minimal Slice"
 description = "Demonstration TOML — 3-NPC RTS-shape sandbox skeleton."
 quests_engine = "v2"
+starting_canvas = "canvas_first_morning"   # auto-plays on new game
 
 [time]
 starting_hour = 8
 starting_day = "Monday"
 starting_week = 1
 
+# Enable-switches → [settings] TABLE, not bare keys (§1.3 scoping trap).
+[settings]
 clothing_enabled = true
-phone_enabled = false
-rent_enabled = true
-rent_amount = 60
-rent_due_day = "Sunday"
+wardrobe_location = "loc_mayas_room"
+shop_location = "loc_thrift_store"
 
 # ───── Player ─────
 [player]
@@ -1854,9 +1907,11 @@ For every quest card with `goals` but no `ready_canvas`: is there a `# unlocks: 
 
 If not, the card may point at vapor — threshold crosses, nothing changes.
 
-### §10.8 — Goal labels in Maya-voice (D50-R6)
+### §10.8 — Goal labels name the trait (LO preference, 2026-05-30 — supersedes D50-R6 for this lineage)
 
-Every `goals[i].label` is in Maya-voice ("Maya's corruption", "Frank trust", "Diana noticing"). NOT raw trait keys ("corruption", "npc_diana.awareness").
+Every `goals[i].label` names the underlying TRAIT plainly so the player can connect a quest goal to the stat they see elsewhere: `"Corruption"` for the corruption trait; `"<NPC> Relation"` (e.g. `"Cole Relation"`) for a per-NPC relation goal. Keep the same word on the sidebar (e.g. the corruption `trait_words` item labeled `"Corruption"`, not `"Status"`).
+
+This REVERSES the original Doc 50 R6 "Maya-voice label" rule ("Maya's loosening" / "Cole's attention" / "Rosa trust"). LO found the euphemisms confusing — players couldn't map them to any visible stat. Use trait-name labels by default; only use a Maya-voice label if LO asks for it on a specific game. (`doctrine/05` annotates R6 as LO-overridable.)
 
 ### §10.9 — Lane 3 substitution target has `substitution_only = true` + `max_triggers_per_day = 1`
 
@@ -1882,16 +1937,37 @@ Grep for `Jack's World`, `New In Town`, `Two Weeks`, `Pattern A` / `B` / ... / `
 
 Zero hits expected outside of `00_LEGACY_IGNORE.md` (which the TOML doesn't include anyway).
 
+### §10.13 — Canvas attached to an `is_container` location (silent death — `doctrine/10` §3)
+
+For every canvas, check its `trigger.location` is NOT an `is_container = true` location. Container passages emit ONLY child-nav (`v2.py:8800`); attached activities/ambients/capstones/portrait-hubs never fire. Late Shifts symptom: town-trap soft-lock + dead Pam arc, all GREEN. Fix: attach to a NON-container standing hub.
+
+### §10.14 — `requires_npc` location not in that NPC's schedule (silent death — `doctrine/10` §5.1)
+
+For every canvas with `requires_npc = npc_X`: confirm its `trigger.location` is one of `npc_X`'s `[[npcs.schedules]]` entries. Presence is schedule-only + fail-closed (`getNpcLocation`); if X is never scheduled there, the canvas NEVER fires. Late Shifts: Hank's first-contact + 3 kitchen subs at `loc_diner_back` where Hank was never scheduled → entire Stage 2→5 chain dead. Fix: schedule the NPC into the location, OR (for walk-ins) drop `requires_npc` and time-gate the sub's own schedule.
+
+### §10.15 — Portrait hub NPC not schedule-present (silent death — `doctrine/10` §5.2)
+
+For every Lane-1 portrait hub (`npc =` set): confirm that NPC is schedule-present at the hub's location. `renderNpcPortraits` (`v2.py:4295`) has its OWN presence gate independent of `requires_npc` — no portrait renders if the NPC isn't scheduled there, so the hub is unreachable. Late Shifts: Cole's apartment hub was blank until Cole got a `loc_cole_apartment` schedule window.
+
+### §10.16 — Dev-only flag required by a shipping canvas (`doctrine/10` + §12)
+
+A flag set ONLY by a dev canvas must NOT be required (`is_true`) by any shipping (non-dev) canvas. When dev canvases are stripped, the requirer becomes unsatisfiable. Late Shifts: `phase_3_unlocked` (only set by `dev_unlock_phase3`) gated Rosa's locked rungs; removing dev re-broke the flag-chain. Audit dev-flag isolation before stripping phase 6.
+
 ---
 
 ## §11 — Quality gate (self-audit checklist)
 
 Run this BEFORE delivering the TOML.
 
+### TOML structure
+- [ ] `[project]` uses `id = "..."` (NOT `slug`) + has `starting_canvas` (§1.2)
+- [ ] No multi-line inline tables — every `{ … }` keeps its keys on the opening line and its closing `] }` on one line (tomllib 1.0; §1.3). Run `python -c "import tomllib; tomllib.load(open('<merged>.toml','rb'))"` to confirm a clean parse.
+
 ### Trait + flag declarations
 - [ ] Every player trait used in any effect/condition/sidebar is declared in `[player.core_traits]`
 - [ ] Every NPC trait used is declared in that NPC's `core_traits` block
 - [ ] Every `<slug>_stage` trait declared in `[player.core_traits]` (one per arc-having NPC)
+- [ ] Every internal trait — every `<slug>_stage`, plus any included Phase-2+ trait (`pregnancy`, antagonist `awareness`) — has a `[[traits.labels]]` entry with `hidden = true`. This is the ENGINE-enforced hide (suppresses the trait from the playerTraits sidebar widget + Stats page in dev AND non-dev). Without it the raw trait name + value leak into both dumps. `[[traits.labels]]` hide entries are keyed by trait NAME only (not namespaced) — a hidden key hides for the player and any NPC carrying a core_trait of that name.
 - [ ] Stage advancement effects use `targetType = "player"` + `trait = "<slug>_stage"` (NOT `targetType = "npc"`)
 
 ### Field names
@@ -1912,12 +1988,21 @@ Run this BEFORE delivering the TOML.
 - [ ] Every climbing capstone card has `goals` block when `ready_canvas` has trait gates above `when` (D50-R2)
 - [ ] Every pure-mechanic card has `# unlocks:` comment naming what crosses (D50-R5)
 - [ ] Terminal card is the LAST in NPC chain (D50-R3)
-- [ ] Every `goals[i].label` is in Maya-voice (D50-R6)
+- [ ] Every `goals[i].label` names the trait — "Corruption" / "<NPC> Relation" (LO pref, §10.8; supersedes D50-R6)
+- [ ] Every `is_true` flag/quest gate has a REACHABLE setter (setter exists AND can fire); no dev-only flag required by a shipping canvas (§10.16)
+
+### Reachability (`doctrine/10` — the validator does NOT catch these)
+- [ ] No canvas's `trigger.location` is an `is_container = true` location (§10.13)
+- [ ] Every `requires_npc` canvas: its location ∈ that NPC's `[[npcs.schedules]]` (§10.14)
+- [ ] Every portrait hub (`npc =` set): the NPC is schedule-present at the hub location (§10.15)
+- [ ] Every NPC ambient/capstone passes the triad (NPC-schedule ∩ window ∩ player-present-and-awake, cross-midnight aware)
+- [ ] If `pregnancy = include`: at least one canvas sets `player.pregnancy`; peer/dating NPCs have an ongoing Stage-4 hub (not capstone-only)
 
 ### Sidebar
 - [ ] Maya state: corruption (banded) + arousal (bar) + energy (status text) + hygiene (status text) all present
 - [ ] No `<slug>_stage` sidebar items for ANY NPC
 - [ ] No `awareness` sidebar item for antagonist NPCs
+- [ ] No per-NPC `trait_bar`/`trait_words` (UNSUPPORTED — §8.4)
 - [ ] Body-state surfaces (energy + hygiene visible)
 
 ### Voice + content
@@ -2008,6 +2093,14 @@ You ship a hub with 10 menu items. Per D56-R1 + Doc 54 §3.1, hubs cap at ~5 unl
 Per `doctrine/03_arc_shapes.md` §6 — service NPCs have empty Lane 2 + Lane 3 in slice. If you've authored 6 Lane 2 ambients for Marge, those surfaces shouldn't exist.
 
 **Fix:** delete them. Empty cells are honest.
+
+### §12.11 — Removing dev canvases re-breaks the flag-chain (Late Shifts 2026-05-29)
+
+Stripping phase 6 (`6_dev_shortcuts.toml`) is NOT just deleting canvases. Dev shortcuts often (a) set `dev_mode_enabled` in the intro one-shot, and (b) are the SOLE setter of flags that shipping canvases require. Before removing them: audit for any `is_true` flag whose only setter is a dev canvas, and clean up its non-dev requirers, or the flag-chain validator fails. Late Shifts: `dev_mode_enabled` setter was orphaned; `phase_3_unlocked` (only set by `dev_unlock_phase3`) gated Rosa's locked rungs → those rungs had to be removed. **Rule: a dev-only flag must never be required by a shipping canvas (§10.16).** Empty phase 6 to a header-only stub — the merge tolerates a canvas-less phase.
+
+### §12.12 — Included Phase-2+ trait with no setter stays dormant
+
+If the design book opts a Phase-2+ trait IN (e.g. `pregnancy = include`), you MUST author a canvas that sets it (e.g. a hidden `event_pregnancy_onset` that sets `player.pregnancy = 1` after an `had_unprotected_sex` flag). The flag-chain validator checks FLAGS, not TRAITS — an included trait with no setter passes the build but the dependent content (revelation scenes, breeding-talk variants) never fires. Late Shifts shipped pregnancy "included" but inert until a setter was wired. (`doctrine/09` + `doctrine/10` §6.)
 
 ---
 

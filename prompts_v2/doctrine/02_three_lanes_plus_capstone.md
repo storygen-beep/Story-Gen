@@ -150,6 +150,17 @@ Anti-pattern: hub with only currently-unlocked items. Player sees "Talk" + "Leav
 
 Anti-pattern: 10-item hub (Marge Pass 1 — Doc 54 §3.1). Over-weighting Lane 1 produces the "menu game" feel that Doc 24 §10.3 warns against ("All Lane 1 → fully transactional experience, low surprise"). If more rungs are needed, they should be locked-visible stages, not parallel work-tasks.
 
+### §2.8 — Presence is acknowledged; interaction is logic-driven (Doc 72)
+
+If an NPC is present where the player can reach them (per their schedule), visiting that place always *shows* the base moment — the hub's base node renders what the NPC is doing in the space, **even when zero choices are available**. Base node + exit, with no menu items unlocked, is a complete and valid canvas. Presence is acknowledged; the player never walks into a dead, empty room when the schedule says the NPC is there.
+
+The *choices* on top of the base then follow in-world logic, not a quota:
+- Some are open from the start (helping a housemate fold laundry, greeting someone you live with — needs no permission).
+- Some are gated until earned (the escalation ladder — locked-visible per §2.6).
+- Sometimes none apply, and base + exit is the whole canvas. That is correct, not a gap.
+
+**This is judgment, NOT a checkbox.** There is no rule that every NPC must offer an ungated action. What's required is *acknowledgement* (the base renders); an *action* is not. Gate a choice for an in-world reason (he wouldn't proposition his housemate on day one), never by reflex — and never gate the act of *seeing* the NPC behind escalation stats. The two failures this bans are **dead presence** (§8.11) and the **backwards on-ramp** (§8.12).
+
 ---
 
 ## §3 — Lane 2: location-entry random (ambient coexistence)
@@ -739,6 +750,8 @@ This produces the "world fills out around me as I escalate" feeling. The player 
 
 The inverse design — "Lane 2/3 lead, Lane 1 follows" — produces a passive game where things keep happening to Maya regardless of her choices. RTS deliberately doesn't do this.
 
+**Cold-start on-ramp (Doc 72 R4).** Because Lane 1 leads, every arc must be *enterable* from a cold start — corruption 0, no flags set — through ordinary presence. The first beat of an arc needs only co-presence (Maya in the room with the NPC, who is there per schedule); escalation conditions layer on *after* that first beat. Never gate an arc's entry on a stat that can only be raised by content downstream of that same arc — that circular gate (the **backwards on-ramp**, §8.12) leaves the cold-start player unable to begin. Location-entry gating is still fine where *entering is itself the first contact* (the diner behind "get hired" — walking in to ask for the job is the first interaction); the on-ramp rule targets people already in the player's everyday space (housemates, neighbours, coworkers-on-shift).
+
 ### §6.1 — Per-NPC progression: shared stat thresholds across lanes
 
 When one threshold crosses, MULTIPLE gates clear simultaneously:
@@ -839,6 +852,14 @@ Same scene firing 5 times in one day breaks the "once per day" cadence RTS uses.
 
 Then it appears in the NPC portrait hub at the location, the player can click it directly — defeating the "you were doing X and he happened" fictional intent. Pre-ship check: every Lane 3 substitution target has `substitution_only = true`.
 
+### §8.11 — Dead presence (NPC present, visiting yields nothing)
+
+An NPC is scheduled at a reachable location (and shows on the schedule page), but visiting renders nothing — no base moment, no acknowledgement. The player acts on the schedule, walks to where the NPC is, and gets an empty room; the world reads as a set of locked doors. Cause is usually escalation-only authoring: only stage-1+ beats written for the NPC, no base node that renders regardless of stats. Fix: the hub/ambient base node always renders the moment (§2.8); gate escalation *choices*, never the act of seeing the NPC. (This is NOT a quota for ungated actions — "sometimes none" is valid; what's banned is the absent base.)
+
+### §8.12 — Backwards on-ramp (arc entry gated on downstream stat)
+
+An arc's entry condition is a stat or flag that can only be raised by content downstream of that same arc — a circular gate. The cold-start player can never begin it; they stall staring at locked affordances. Distinct from §8.4 (lane forced on wrong register): here the arc legitimately exists, but its front door is locked with a key that's inside the room. Worked anti-example: a housemate arc that only opens at `worn_corruption ≥ 15`, i.e. the player must buy and wear provocative clothing before her own housemate will register her. Fix: the arc's first beat needs only co-presence; escalation layers after (§6 cold-start on-ramp, Doc 72 R4).
+
 ---
 
 ## §9 — Engine support summary
@@ -878,6 +899,7 @@ Then it appears in the NPC portrait hub at the location, the player can click it
 - `28th_april_TLS_Phase2_Redesign/24_RTS_Three_Lanes_Repeatable_Activities.md` — Lane mechanism source
 - `28th_april_TLS_Phase2_Redesign/57_Capstone_Doctrine.md` — Lane 4 source
 - `28th_april_TLS_Phase2_Redesign/67_Solo_Activity_Design_and_Multi_NPC_Dispatcher_Doctrine.md` — solo activity + dispatcher patterns source
+- `28th_april_TLS_Phase2_Redesign/72_Presence_and_Logic_Driven_Interaction_Doctrine.md` — presence acknowledged + logic-driven interaction (base floor; dead-presence / backwards-on-ramp bans) — see §2.8 + §6 + §8.11–§8.12
 
 ### Engine primitives
 
