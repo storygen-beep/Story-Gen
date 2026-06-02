@@ -41,4 +41,5 @@ not managed by any code module. Follow the invariants below when editing it.
 `structure_registry`, and adding one is an explicit, logged amendment (register it here in the
 same turn you author it). **Drift** = any `validated`/`authored` beat whose `produced_canvas_ids`
 are missing from the merged TOML; the skill spot-checks this on resume — the real per-beat safety
-net is the `merge_toml_phases` + `package_from_toml` build, which fails loudly on broken references.
+net is `package_from_toml` (schema + flag-chain + broken-reference validation; `merge_toml_phases
+--validate` only syntax-parses the merged file).

@@ -4,6 +4,19 @@ The unit of work is **the next beat in the living plan**. A beat is any story de
 `npc_intro` · `location_reveal` · `arc_escalation` · `cross_npc` · `economic` · `story_turn` ·
 `capstone`. Author exactly one per turn, validate it, then stop.
 
+**Which phase file a beat's content goes in** (set the beat's `target_phase` accordingly; when
+unsure, check where `games/late_shifts/toml_phases/` put the analogous content):
+
+| Beat type | Canvases → phase file | Also touches |
+|---|---|---|
+| `npc_intro` | `5_scenes.toml` (meet + Lane-1 hub) | `1_metadata_and_locations.toml` (npc + schedule) |
+| `location_reveal` | `5_scenes.toml` (its hubs) | `1_metadata_and_locations.toml` (location def + lock) |
+| `arc_escalation` | `5_scenes.toml` | — |
+| `cross_npc` | `5_scenes.toml` | — |
+| `economic` | `5_scenes.toml` (beat canvases) | `0_systems_spec.toml` (rent/phone `[settings]`), `8_phone.toml` |
+| `story_turn` | `2_one_shots.toml` (one-shot event) or `5_scenes.toml` | — |
+| `capstone` | `4_story_arc.toml` or `5_scenes.toml` | — |
+
 ## Resume & reconcile (every continue turn, do this first)
 1. Read `games/<slug>/authoring_state.json`.
 2. `python scripts/merge_toml_phases.py games/<slug> --validate` — assembles `7_final_game.toml`.
@@ -37,10 +50,14 @@ The unit of work is **the next beat in the living plan**. A beat is any story de
    (not every beat).
 
 ## Validation (per beat — the safety net)
-Run in order; emit a PASS/FAIL line for each:
-1. `python scripts/merge_toml_phases.py games/<slug> --validate`
-2. `python manage.py package_from_toml --file games/<slug>/toml_phases/7_final_game.toml --owner-id 15b35759-e67f-4bab-be10-5a27dd7ddc7a --output games/<slug>/output --dev`
-   (validate-only at beat granularity is fine; this same command produces the milestone build when run in full.)
+Run with the repo venv active (`source venv/bin/activate`), in order; emit a PASS/FAIL line for each:
+1. `python scripts/merge_toml_phases.py games/<slug> --validate` — **syntax only**: assembles
+   `7_final_game.toml` and `tomllib`-parses it (catches malformed TOML, e.g. multi-line inline
+   tables). It does NOT check flags or references.
+2. `python manage.py package_from_toml --file games/<slug>/toml_phases/7_final_game.toml --owner-id 15b35759-e67f-4bab-be10-5a27dd7ddc7a --output games/<slug>/output --dev` — **the real validation**:
+   schema, broken references, and flag chains, plus it builds `index.html`. This is the step that
+   actually catches dangling structure, so never skip it. (`--owner-id` must be an existing user;
+   on `Owner with ID ... not found`, see `setup-interview.md` Step 6.)
 3. **Doctrine self-audit** — check each against what THIS beat authored (cite the doctrine in
    `COMPREHENSIVE_SYSTEM_REFERENCE.md`):
    - **reachability triad** — the canvas fires only where NPC-schedule ∩ canvas-window ∩

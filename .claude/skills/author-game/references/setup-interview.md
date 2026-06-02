@@ -27,18 +27,25 @@ the concept input or with a safe doctrine default — state the default, don't a
 
 ## Step 3 — Write `design_book.md`
 To `games/<slug>/design_book.md`: premise, player, economic engine, time model, cast + arc
-shapes, location graph, and the locked-in loose roadmap. This is the intent record.
+shapes, location graph, and the locked-in loose roadmap. This is the intent record. (It is a NEW
+artifact this skill introduces — LS's nearest equivalent is its `concept.md`; mirror the section
+list above, not LS's file layout.)
 
-## Step 4 — Write the scaffold TOML (no canvases)
+## Step 4 — Write the scaffold TOML (skeleton + the opening canvas only)
 - `games/<slug>/toml_phases/0_systems_spec.toml` — `[settings]` (correct clothing/rent/phone
   scoping if used) + engine config.
 - `games/<slug>/toml_phases/1_metadata_and_locations.toml` — metadata, locations (with
   `entry_conditions` + `blocked_message` for locks), npcs, `[[npcs.schedules]]`.
-- No `[[canvases]]` yet. Mirror the table shapes in `games/late_shifts/toml_phases/`.
+- The **minimal intro / Start canvas** the engine needs to open the game (Day-1 bootstrap that
+  drops the player into the starting location). This is structural bootstrap, NOT story content —
+  do not author any NPC arcs, hubs, ambients, or capstones in setup. Mirror the opening canvas in
+  `games/late_shifts/toml_phases/` for the exact table shape.
+- Mirror all table shapes from `games/late_shifts/toml_phases/`.
 
 ## Step 5 — Seed the ledger (`authoring_state.json`, written directly)
-Create `games/<slug>/authoring_state.json` per `references/ledger-schema.md`:
-- start from the v1 shape (`init`-equivalent), `game_slug` = `<slug>`, `book_revision` = 1.
+Hand-construct `games/<slug>/authoring_state.json` by copying the v1 JSONC block in
+`references/ledger-schema.md` and filling it in (there is no `init` tool — you write the file):
+- `game_slug` = `<slug>`, `book_revision` = 1.
 - `structure_registry`: list every location / npc / flag the scaffold declares.
 - `plan`: one beat per roadmap item, `id` = `beat_0001`, `beat_0002`, … (zero-padded, monotonic),
   `status` = `planned`, `target_phase` set to where its canvases will go (e.g. `5_scenes.toml`),
@@ -46,13 +53,20 @@ Create `games/<slug>/authoring_state.json` per `references/ledger-schema.md`:
 - `next_up`: the beat ids in intended authoring order.
 - `decisions_log`: one entry noting setup completion.
 
-## Step 6 — Prove green (the empty scaffold must build)
+## Step 6 — Prove green (the scaffold must build)
+Run with the repo venv active (`source venv/bin/activate`):
 ```bash
-python scripts/merge_toml_phases.py games/<slug> --validate
+python scripts/merge_toml_phases.py games/<slug> --validate   # syntax-parses the merged TOML only
 python manage.py package_from_toml --file games/<slug>/toml_phases/7_final_game.toml \
   --owner-id 15b35759-e67f-4bab-be10-5a27dd7ddc7a --output games/<slug>/output --dev
 ```
-Both must pass (validation + flag chains; `index.html` produced) before setup is "done".
+The second command does the REAL validation (schema + flag chains) and produces `index.html`;
+both must pass before setup is "done".
+
+**Owner-id note:** `--owner-id` must be an existing user in this DB. The UUID above is this
+repo's known owner. If you hit `Owner with ID ... not found`, the DB isn't seeded with it — find
+a real one (`python manage.py shell -c "from apps.authentication.models import User; print(User.objects.first().id)"`)
+or create one (`createsuperuser`), and use that id.
 
 ## Step 7 — Report
 Show the roadmap back and tell the user: **"Setup complete — say *continue* to author the first beat."**
