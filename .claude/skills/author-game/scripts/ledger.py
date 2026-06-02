@@ -30,3 +30,13 @@ def load_ledger(game_dir) -> dict:
 
 def save_ledger(game_dir, led: dict) -> None:
     ledger_path(game_dir).write_text(json.dumps(led, indent=2) + "\n")
+
+
+def add_structure(led: dict, kind: str, name: str) -> dict:
+    reg = led["structure_registry"]
+    if kind not in reg:
+        raise KeyError(f"unknown structure kind: {kind!r}")
+    if name in reg[kind]:
+        raise ValueError(f"{kind} {name!r} already registered")
+    reg[kind].append(name)
+    return led
