@@ -18,6 +18,24 @@ source venv/bin/activate   # Python 3.12.11
 
 ---
 
+## REVISION 2026-06-03 (patterns-only) — read before Phase 1
+
+After starting Phase 1 we cut the code. The authoring system is **patterns + a JSON data file**,
+not a software module. `ledger.py` (init/load/save/add_structure/add_beat/mark_beat/reconcile)
+was just wrappers over JSON edits the skill does natively, and the real per-beat safety net is
+the existing `merge_toml_phases` + `package_from_toml` build — not a second validator.
+
+**Effect on this plan:**
+- **Phase 1 Tasks 2–5 are DROPPED.** No `ledger.py`, no `test_ledger.py`. Only **Task 1**
+  (the schema doc) survives — it documents the data-file shape the skill reads/writes directly.
+- **Phase 3** references describe how the skill manages `authoring_state.json` directly with
+  Read/Write per the schema doc + the anti-drift invariant as *instructions*. Ignore any
+  `scripts/ledger.py` function calls in Tasks 11/12 below — replace with native JSON edits.
+- **Phase 4** drift-check (Task 14): if ever wanted, run a short inline `python` snippet that
+  parses the merged TOML and diffs canvas ids — nothing committed.
+
+The sections below are kept as originally written for reference; the bullets above override them.
+
 ## File Structure
 
 **New — the skill:**

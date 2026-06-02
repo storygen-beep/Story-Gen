@@ -1,8 +1,8 @@
 # authoring_state.json — ledger schema (v1)
 
 The ledger is the living source of truth for the **plan** and for **what structure exists**.
-It is rewritten every authoring turn by `scripts/ledger.py`. Never hand-edit it during a run;
-use the helper so reconcile/anti-drift stays correct.
+The skill reads and rewrites it directly each authoring turn (Read/Write) — it is a data file,
+not managed by any code module. Follow the invariants below when editing it.
 
 ```jsonc
 {
@@ -38,5 +38,7 @@ use the helper so reconcile/anti-drift stays correct.
 → `validated` (passed merge + schema/flag-chain + doctrine self-audit).
 
 **Anti-drift invariant:** nothing in the TOML may reference a location/NPC/flag absent from
-`structure_registry`, and adding one is an explicit `add_structure` call (logged). `reconcile`
-flags any `validated`/`authored` beat whose `produced_canvas_ids` are missing from the merged TOML.
+`structure_registry`, and adding one is an explicit, logged amendment (register it here in the
+same turn you author it). **Drift** = any `validated`/`authored` beat whose `produced_canvas_ids`
+are missing from the merged TOML; the skill spot-checks this on resume — the real per-beat safety
+net is the `merge_toml_phases` + `package_from_toml` build, which fails loudly on broken references.
