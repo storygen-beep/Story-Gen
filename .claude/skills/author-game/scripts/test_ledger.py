@@ -57,3 +57,50 @@ def test_add_structure_rejects_unknown_kind():
     led = ledger.init_ledger("demo")
     with pytest.raises(KeyError, match="unknown structure kind"):
         ledger.add_structure(led, "widgets", "x")
+
+
+def test_add_beat_assigns_padded_id_and_queues():
+    led = ledger.init_ledger("demo")
+    b = ledger.add_beat(led, type="npc_intro", title="Meet Hank",
+                        desc="d", target_phase="5_scenes.toml")
+    assert b["id"] == "beat_0001"
+    assert b["status"] == "planned"
+    assert led["plan"][0]["id"] == "beat_0001"
+    assert led["next_up"] == ["beat_0001"]
+    b2 = ledger.add_beat(led, type="economic", title="Buy home",
+                         desc="d", target_phase="0_systems_spec.toml")
+    assert b2["id"] == "beat_0002"
+
+
+def test_add_beat_rejects_bad_type():
+    led = ledger.init_ledger("demo")
+    with pytest.raises(ValueError, match="invalid beat type"):
+        ledger.add_beat(led, type="nonsense", title="t", desc="d",
+                        target_phase="5_scenes.toml")
+
+
+def test_get_beat_returns_same_object():
+    led = ledger.init_ledger("demo")
+    ledger.add_beat(led, type="npc_intro", title="t", desc="d",
+                    target_phase="5_scenes.toml")
+    got = ledger.get_beat(led, "beat_0001")
+    assert got["title"] == "t"
+
+
+def test_mark_beat_updates_status_and_dequeues_when_validated():
+    led = ledger.init_ledger("demo")
+    ledger.add_beat(led, type="npc_intro", title="t", desc="d",
+                    target_phase="5_scenes.toml")
+    ledger.mark_beat(led, "beat_0001", "active")
+    assert ledger.get_beat(led, "beat_0001")["status"] == "active"
+    ledger.mark_beat(led, "beat_0001", "validated")
+    assert ledger.get_beat(led, "beat_0001")["status"] == "validated"
+    assert "beat_0001" not in led["next_up"]
+
+
+def test_mark_beat_rejects_bad_status():
+    led = ledger.init_ledger("demo")
+    ledger.add_beat(led, type="npc_intro", title="t", desc="d",
+                    target_phase="5_scenes.toml")
+    with pytest.raises(ValueError, match="invalid status"):
+        ledger.mark_beat(led, "beat_0001", "done")
