@@ -62,6 +62,8 @@ The reference table for what each shape's canvas distribution should LOOK like. 
 
 **Empty cells are honest.** If the shape has 0 in a cell, the brief commits to 0. Filling empty cells with relational/atmospheric texture is the Doc 54 Marge failure mode — soft drift toward "fill the world" that violates the shape.
 
+**The L1 cells above count *escalation* rungs, not hubs.** The number of Lane 1 **hubs** is set separately by presence: one hub per distinct `[[npcs.schedules]]` row (location × window) — D72-R6, `doctrine/04` §6.1. An NPC scheduled across 5 windows has 5 hubs even if the escalation budget is small; the extra hubs are *light* (base + talk + leave, exposure-tier-capped per D72-R7), not extra escalation. "Empty cells are honest" governs L2/L3 *escalation* surfaces — it does NOT excuse a missing presence hub: even service/antagonist NPCs get a light hub at each scheduled location. Presence floor (a hub) and escalation register (the rungs on it) are independent axes.
+
 ---
 
 ## §3 — Family/ambient (Frank — the dense reference)
@@ -349,6 +351,8 @@ The R7 brief (Doc 56 R7 + `doctrine/04_authoring_rules.md`) commits to specific 
 | Capstones | Capstones up to slice scope's end-state | (next-chain capstones author when triggered) |
 
 Phase 2+ content is NOT shipped in slice — but the slice's locked-visible rungs telegraph it (Doc 54 §3.6). The doctrine bridges slice + full arc via the locked-visible pattern, not via "ship Phase 2+ stubs."
+
+**Locked-visible across locations (optional, D72-R8).** The locked-visible pattern can also bridge *exposure* tiers, not just stages: an arc NPC's public/semi-private hubs may show the higher (private-only) rungs greyed, so the ladder reads consistently at every hub, unlocking only where exposure allows (`doctrine/04` §6.2–§6.3). This is taste, not a requirement — the default is to simply omit out-of-tier rungs (context-scaled ladder).
 
 ### §10.2 — At `scope_mode: full_game`
 

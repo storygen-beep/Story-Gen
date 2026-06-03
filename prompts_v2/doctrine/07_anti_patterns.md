@@ -459,9 +459,14 @@ Added 2026-05-29 when `scope_mode: full_game` shipped as first-class default. Th
 
 ### §8.7 — From Doc 72 (presence acknowledged; interaction logic-driven)
 
-- **Dead presence** — an NPC is scheduled at a reachable location (and shows on the schedule page), but visiting renders nothing: no base moment, no acknowledgement. The player acts on the schedule and gets an empty room; the world reads as locked doors. Usually escalation-only authoring (only stage-1+ beats written, no base node that renders regardless of stats). Fix: the hub/ambient base node always renders the moment; gate escalation *choices*, never the act of seeing the NPC. **NOT a quota** — "sometimes none" is a valid choice list; what's banned is the absent base. Caught by `doctrine/02` §2.8 + §8.11.
+- **Dead presence** — an NPC is scheduled at a reachable location (and shows on the schedule page), but visiting renders nothing: no base moment, no acknowledgement. The player acts on the schedule and gets an empty room; the world reads as locked doors. Two causes: escalation-only authoring (only stage-1+ beats written, no unconditional base), OR relying on a probabilistic **Lane 2 ambient** to acknowledge presence (a `chance` dice roll is not a floor). Fix: a **Lane 1 hub** whose base renders unconditionally, **per schedule row**; gate escalation *choices*, never the act of seeing the NPC. Caught by `doctrine/02` §2.8 + §8.11; rule = D72-R6 (`doctrine/04` §6.1).
+- **Hub window narrower than the schedule** — a hub exists at the location but its own `trigger.schedules` covers only a slice of the NPC's scheduled presence, so the rest of the rows are dead (Hank: hub open 22:00–01:30, scheduled 06:00–22:00). "A hub at the location" ≠ coverage; the hub must be open during the window. Fix: period-split into per-window hubs. Silent runtime gap — the build won't catch it. Caught by `doctrine/02` §8.13; rule = D72-R6.
+- **Lane 2 used as the presence floor** — relying on a `trigger_mode = "random"` ambient to do the acknowledging. ~3 of 4 visits still render nothing. Lane 2/3 are texture *on top of* the hub, never the floor. Rule = D72-R6.
+- **Physical schedule on a hub-less system NPC** — a rent/phone-only NPC (landlord) carrying a `[[npcs.schedules]]` row, so the schedule page advertises a body the world can't deliver. Fix: drop the schedule, or give them a hub. D72-R6 corollary.
+- **Cloned full ladder / public-space escalation** — the same full escalation ladder offered at every hub regardless of context (e.g. "Have sex" at a public diner counter). Fix: scale each hub's rung set to the location's **exposure tier** (public = talk/look only; semi-private = tease/grope; private = full ladder). Relationship state is global, so consistency holds without cloning. Caught by `doctrine/02` §2.9 + §8.14; rules = D72-R7 + D72-R8 (`doctrine/04` §6.2–§6.3).
 - **Backwards on-ramp** — an arc's entry condition is a stat/flag only raisable by content downstream of that same arc (a circular gate). The cold-start player can never begin it. Distinct from §8.4 (lane forced on wrong register): here the arc legitimately exists, but its front door is locked with a key that's inside the room. Anti-example: a housemate arc gated on `worn_corruption ≥ 15` — the player must buy + wear provocative clothing before her own housemate registers her. Fix: the arc's first beat needs only co-presence; escalation layers after. Caught by `doctrine/02` §6 (cold-start on-ramp) + §8.12. (Doc 72 R4.)
-- **Quota / format enforcement (the inverse error)** — bolting a hollow ungated action onto every NPC to satisfy a checklist. Doc 72 explicitly rejects "every NPC must have ≥1 ungated interaction." Acknowledgement (the base renders) is required; an *action* is not. Gate or omit by in-world logic, not by count.
+- **NPC vanishes into a locked room** — an NPC scheduled into a **locked** location (`entry_conditions`) during a window the player routinely shares, with no open fallback and/or an illegible gate → "where did they go?" Distinct from dead presence (that's an NPC at a *reachable* location); here the location itself is unreachable. The hard bug is an NPC reachable *only* via a locked location (chicken-and-egg gates included). Fix: the **unlock contract** — meet the NPC at an OPEN on-ramp that sets the unlock flag; keep locked windows legible + off-hours/co-gated + with open fallback. The acceptable form (a boss doing books in a locked office at 3am, on the open floor otherwise) is a *bounded, legible* window. Caught by `doctrine/02` §8.15 + `doctrine/10` §5.4; D72-R6 Corollary 2 (`doctrine/04` §6.1).
+- **Choice-quota / format enforcement (the inverse error — still rejected)** — bolting a hollow ungated *action* onto every NPC to satisfy a checklist. Note the two distinct axes: the **hub-per-row** floor (D72-R6) is a hard requirement; the **choices on top** are logic-driven (Doc 72 R2/R3) — "base + talk + leave" is a valid canvas and there is no rule that every NPC must offer an ungated action. Hardening the floor does NOT reintroduce a choice-quota. Gate or omit choices by in-world logic, not by count.
 
 ---
 
@@ -484,7 +489,9 @@ Run BEFORE authoring any new NPC content. Paste into PR description, work throug
 - [ ] Lane 2/3 scope: if no escalation register in slice, both are EMPTY in slice (§3.4)
 - [ ] Other-NPC content stays in their own future surfaces, not blended into this NPC's lanes (§3.5)
 - [ ] Pre-existing canon violations within touched surfaces declared (rewrite-now / schedule / accept-split per §3.7)
-- [ ] Every present NPC's base node renders regardless of stats (no dead presence); every arc is enterable from a cold start — no backwards on-ramp (per §8.7 / Doc 72)
+- [ ] Every `[[npcs.schedules]]` row has a live **Lane 1 hub** whose own `trigger.schedules` covers that window (per-row coverage; Lane 2 ambients don't count); hub-less system NPCs carry no schedule row (D72-R6)
+- [ ] Every hub `base` renders unconditionally (no escalation-flag gate on the base); every arc is enterable from a cold start — no backwards on-ramp (§8.7 / D72-R6 / Doc 72 R4)
+- [ ] Each hub's rung set respects the location **exposure tier** (public/semi-private/private); same-NPC hubs share rung names + gate thresholds + voice, ladder context-scaled not cloned (D72-R7 / D72-R8)
 
 ### Doctrine
 - [ ] Every quest card mode declared (capstone / mechanic / hybrid-tier per Doc 50 §2)
@@ -519,7 +526,7 @@ Run BEFORE authoring any new NPC content. Paste into PR description, work throug
 - `doctrine/01_rts_principles.md` — P1–P10 (anti-patterns operationalize violations of these)
 - `doctrine/02_three_lanes_plus_capstone.md` §8 — lane-mechanism anti-patterns
 - `doctrine/03_arc_shapes.md` §11 — arc-shape anti-patterns
-- `doctrine/04_authoring_rules.md` §7 — rule-violation anti-patterns
+- `doctrine/04_authoring_rules.md` §8 — rule-violation anti-patterns (§6 = Doc 72 R6–R8: per-row hubs + exposure tier)
 - `doctrine/05_rts_flat_prose.md` §4 — voice register anti-patterns
 - `doctrine/06_design_brief_template.md` §8 — brief-authoring anti-patterns
 

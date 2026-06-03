@@ -97,6 +97,22 @@ Even when NPC + location agree, the player must be there *and awake*. Late Shift
 
 **Authoring rule for every NPC ambient/capstone:** anchor it where the player *actually crosses the NPC during the daily loop* — not where the fiction first imagines them. Then sanity-check the triad by hand.
 
+### §5.4 — Locked location ∩ NPC schedule: the unlock contract
+
+A fourth reachability failure the triad doesn't cover: the NPC and the time-window agree, but **the location itself is locked** — so the player can't be present at all. A locked location is a `[[locations]]` with `entry_conditions` (a flag predicate) + `blocked_message`. Our engine's lock is **visible-but-blocked**: the room shows on the nav and, on a failed entry, prints its `blocked_message` ("He hasn't invited me back there yet"). (Contrast RTS, which has two axes — a *discovery* lock that renders the venue **absent** from the map and a recurring *time* lock with a "CLOSED / Opens at X" badge; `reference/01` §6.5. We have only the flag lock; there is **no native time-of-day location lock** — the time/exposure axis lives on the hub via `trigger.schedules` + D72-R7, never on the door. Don't invent a location field the engine lacks.)
+
+**The contract.** A schedule row at a locked location is a **deferred** hub promise (D72-R6 corollary, `doctrine/04` §6.1). It is legitimate *only* when the lock reads as **"haven't met / been invited yet"** and **the unlock is a beat the player can reach at an OPEN location.** The lock represents the social fact; the meeting is the key.
+
+| Case | Shape | Verdict |
+|---|---|---|
+| **A — private place, meeting unlocks it** | The locked location *is* the NPC's private space; the player meets them at an **open** on-ramp, and that beat sets the unlock flag. *LS Cole:* `loc_cole_apartment` gated on `cole_date_done`; Cole met at the open diner/park; the date sets the flag. | **Correct.** The locked row is a deferred promise — legitimate per the R5 access-gate carve-out (`doctrine/05`/Doc 55): pre-onboarding the player can't be there *and* has no reason to be. Keep it; don't separately flag-gate the hub (the door already gates it). |
+| **B — deeper room of an already-reachable NPC** | A secondary room the NPC routes into; the NPC is reachable elsewhere meanwhile. | **Acceptable only if all three hold:** (i) **legible** lock (visible-but-blocked, so the NPC stepping in reads as "gone somewhere I can't follow yet," not "vanished"); (ii) **co-gated *or* off-hours+fallback** — *best:* the door flag is the same flag that gates the player's access to that window, so there is **zero** dead window (*LS Hank back room* ← `hired_at_diner`: can't work the close unless hired, and being hired opens the back); *acceptable:* a **later** flag, but the window sits in hours the player doesn't routinely share **and** the NPC has open-location presence bracketing it (*LS Hank office* ← `hank_first_contact`, 01:30–06:00 graveyard, Hank on the floor up to 01:30 and again from 06:00 — a **bounded legible** dead window, tolerable); (iii) the locked row is **not** the NPC's only/primary presence. |
+| **C — reachable only via a locked location** | The NPC is *only ever* scheduled at locked location(s), **or** the unlock flag has no reachable setter (incl. chicken-and-egg: the door is gated on a flag only settable behind the door). | **The bug — unreachable NPC.** Fix: give an open on-ramp with a reachable setter, or start the location unlocked and gate the *canvas/choices* instead of the door. |
+
+**Legible-lock principle.** Because a locked window means the NPC is *present-but-unreachable* for that slice, the lock must read as a closed door, not a disappearance. The failure to avoid is an NPC shunted into a locked room during a window the player **routinely shares**, with no open fallback and/or an illegible gate → "where did they go?" (`doctrine/02` §8.15). This is distinct from **dead presence** (`doctrine/02` §8.11), which is an NPC at a *reachable* location rendering nothing.
+
+**Schedule-page leak.** The Schedule page renders declared `[[npcs.schedules]]` rows regardless of the location lock, so it will list the NPC at a locked location. With our visible-but-blocked model that's tolerable, even flavorful ("the boss does the books in the office overnight"). If a game ever adopts RTS-style *discovery* hiding, the schedule page must also suppress rows at not-yet-unlocked locations — or it leaks the hidden place.
+
 ---
 
 ## §6 — Per-arc-shape location footprint (Late Shifts bug B6)
@@ -118,6 +134,8 @@ Cross-ref `doctrine/03_arc_shapes.md` §5 for the peer/dating distribution (now 
 - [ ] Every `requires_npc` canvas: its location ∈ that NPC's `[[npcs.schedules]]` (§5.1).
 - [ ] Every portrait hub (`npc =` set): that NPC is schedule-present at the hub's location (§5.2).
 - [ ] Every NPC ambient/capstone passes the triad: NPC-schedule ∩ canvas-window ∩ player-likely-present-and-awake is non-empty, accounting for sleep/work/cross-midnight (§5.3).
+- [ ] Every NPC scheduled at a locked (`entry_conditions`) location obeys the unlock contract (§5.4): the lock reads as "not met/invited," the NPC is meetable at an OPEN on-ramp, and the unlock flag has a reachable setter (that on-ramp beat). No NPC is reachable *only* via a locked location.
+- [ ] Any locked secondary room an NPC routes into is legible + co-gated-or-off-hours + has open fallback presence — never a silent vanish during a window the player routinely shares (§5.4 Case B).
 - [ ] Every peer/dating NPC has an ongoing Stage-4 hub, not just a first-night capstone (§6).
 - [ ] Household NPCs are inside the private unit; neighbors/witnesses are in shared/public space, never the private unit (§4).
 
@@ -129,6 +147,8 @@ If any fail: fix BEFORE delivery. None of these are caught by the build validato
 
 - `schema/02_toml_schema.md` §4 — `[[locations]]` field reference (`entry_from`, `parent`, `default_entry`, `is_container`, `navigation_order`).
 - `schema/01_engine_capabilities.md` §5 — `getNpcLocation`, schedule presence (schedule-only, fail-closed).
+- `reference/01_rts_overview.md` §6.5 — the live-verified RTS city-map location-lock model (discovery vs time axis) that §5.4 adapts.
+- `doctrine/02_three_lanes_plus_capstone.md` §8.11 (dead presence — reachable) vs §8.15 (vanish into a locked room — unreachable).
 - `doctrine/02_three_lanes_plus_capstone.md` — lane mechanisms (what attaches where).
 - `doctrine/03_arc_shapes.md` §5 — peer/dating ongoing-hub footprint.
 - `stages/01_game_book_prompt.md` §4 Step 3/4 — locations + schedules authoring.

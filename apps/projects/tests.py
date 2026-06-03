@@ -5904,6 +5904,14 @@ class PhoneParityIntegrationTests(TestCase):
         self.assertIn("topic_days", twee)
         self.assertIn("phone-daily-locked", twee)
         self.assertIn("corruption_min", twee)
+        # Customization composition — every authored phone string is run through
+        # setup.resolveAtRefs at render so a customizable NPC's chosen name/relationship
+        # (@npc / @npc.rel) and @player tokens resolve in chat threads instead of
+        # leaking literally. resolveAtRefs is a no-op on token-free text. (v1 + v2.)
+        self.assertIn("setup.resolveAtRefs(block.content)", twee)
+        self.assertIn("setup.resolveAtRefs(conv.notify)", twee)
+        self.assertIn("setup.resolveAtRefs(dmsg.npc_response)", twee)
+        self.assertIn("setup.resolveAtRefs(dmsg.player_message)", twee)
 
     def test_v2_runtime(self):
         from apps.game_generation.twee_comprehensive.generators.v2 import (

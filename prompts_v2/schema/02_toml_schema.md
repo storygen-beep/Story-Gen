@@ -183,18 +183,27 @@ intelligence = 0
 
 ### §2.3 — `[[player.customization_fields]]`
 
-For `customizable = true`. Each field renders at game start; the player's choice writes into `$player.<id>`.
+For `customizable = true`. The engine auto-builds a `CustomizeCharacters` screen at game
+start and redirects `Start` to it (no author wiring). Each field renders there; the player's
+choice writes into `$player.<id>`. **Array-of-tables — place these AFTER every `[player.*]`
+subtable (e.g. `[player.core_traits]`), or TOML scopes them wrong.**
 
 Dataclass: `TemplatePlayerCustomizationField` at `template_import.py:70`.
 
 | Field | Type | Notes |
 |---|---|---|
-| `id` | str | Lowercase snake_case |
+| `id` | str | Lowercase snake_case. **`id = "name"` is special → writes `$player.name`.** Other ids write `$player.<id>`. Reserved (rejected): `portrait`, `current_location`, `core_traits`, `flags`, `wardrobe`, `equipped` |
 | `type` | str | `"text"`, `"select"`, or `"image_select"` |
 | `label` | str | Display label |
-| `default` | str | Initial value |
+| `default` | str | Initial value (for `select`/`image_select` must be a valid option/option-id) |
 | `options` | List | For `select`: string list. For `image_select`: TemplatePlayerCustomizationOption list (`{id, image, label}`) |
 | `sets_portrait` | bool | `image_select` only — selected image becomes `$player.portrait` |
+
+**Output — the `@`-token (load-bearing):** a chosen value only *appears* in the story if you
+write the prose with the substitution token. `@player` → the chosen name; `@player.<field>`
+→ any field (e.g. `@player.build`). Tokens resolve in canvas prose, dialog body, choice text,
+and location descriptions — **not** in structural labels (location names, sidebar/quest
+labels). Full contract + the un-tokenizable-surface trap: **doctrine/14**.
 
 ```toml
 [[player.customization_fields]]
@@ -202,6 +211,13 @@ id = "name"
 type = "text"
 label = "Your name"
 default = "Maya"
+
+[[player.customization_fields]]
+id = "build"
+type = "select"
+label = "Build"
+default = "average"
+options = ["petite", "average", "curvy", "athletic", "thick"]
 
 [[player.customization_fields]]
 id = "look"
@@ -212,6 +228,7 @@ options = [
   { id = "blonde", image = "maya_blonde.jpg", label = "Blonde" },
   { id = "brunette", image = "maya_brunette.jpg", label = "Brunette" },
 ]
+# Then in prose: "@player tugs at her shirt, aware of her @player.build frame."
 ```
 
 ---
@@ -238,6 +255,15 @@ Dataclass: `TemplateNPC` at `template_import.py:107`.
 | `hidden_from_ui` | bool | `false` | Omit from Guide / Stats / sidebar widget |
 | `arc_stages` | List[str] | `[]` | Display strings for stage names. Length implies max stage value (len−1). |
 
+**Customizable NPCs:** `customizable = true` lets the player rename the NPC and pick a
+relationship label at game start. It **requires both** `relationship` (the default) **and**
+`relationship_options` (the picker list), and the default must be in the options — the
+importer hard-fails otherwise (`template_import.py:3289`). There is no rename-only mode.
+Reference the customized values in prose with `@<npc_short>` (the slug minus `npc_`, e.g.
+`@frank`) and `@<npc_short>.rel`. **Never bake a customizable NPC's name into a location
+name, sidebar label, or quest title** — those print raw and won't honor the rename
+(genericize them). See **doctrine/14**.
+
 ### §3.2 — `[[npcs.schedules]]` fields
 
 Dataclass: `TemplateNPCSchedule` at `template_import.py:94`.
@@ -251,6 +277,10 @@ Dataclass: `TemplateNPCSchedule` at `template_import.py:94`.
 | `activity` | str | `""` | Author-side description |
 
 Schedule entries should be NON-OVERLAPPING per NPC. Engine resolves NPC location via `getNpcLocation` (`v2.py:2923`) by scanning entries.
+
+**Every schedule row needs a matching Lane 1 hub (D72-R6).** For each row, author a hub canvas for that NPC at that location whose `trigger.schedules` covers the row's window (period-split per window — separate hub per window, §6.2). The hub's rung ceiling follows the location's exposure tier (public/semi-private/private). A row with no live hub is dead presence; a hub-less system NPC (rent/phone-only) carries no schedule row. See `doctrine/04` §6.
+
+**A row at a *locked* location (`entry_conditions`, §4) is a *deferred* hub promise** — the hub is dormant until the lock opens. Valid only under the unlock contract: the NPC is met at an OPEN on-ramp whose beat sets the unlock flag, and no NPC is reachable only via a locked location. Full Case A/B/C treatment in `doctrine/10` §5.4.
 
 ### §3.3 — Round-trip example
 
@@ -341,6 +371,8 @@ entry_conditions = { version = "1.0", items = [
 blocked_message = "Not yet. He hasn't invited me."
 ```
 
+**Locking a location that hosts an NPC schedule — the unlock contract.** `entry_conditions` + `blocked_message` is a *visible-but-blocked* lock: the room shows on the nav and prints `blocked_message` on a failed entry (we have no native time-of-day location lock — the time/exposure axis lives on the hub via `trigger.schedules` + D72-R7). When a locked location also carries an NPC `[[npcs.schedules]]` row, coordinate them: write `blocked_message` to read as "haven't met / been invited" (not a mechanical "locked"), meet that NPC at an OPEN on-ramp location, and have that on-ramp beat set the unlock flag (so the flag has a reachable setter). Never make an NPC reachable *only* via a locked location, and never gate a door on a flag that's only settable behind that door. Full Case A/B/C treatment in `doctrine/10` §5.4; the RTS model this adapts is `reference/01` §6.5.
+
 ---
 
 ## §5 — `[[canvases]]`
@@ -401,6 +433,8 @@ Dataclass: `TemplateTriggerSchedule` at `template_import.py:441`.
 | `weekdays` | List[int] | 0 = Monday … 6 = Sunday |
 | `start_time` | str | `HH:MM` |
 | `end_time` | Optional[str] | `HH:MM` |
+
+**A Lane 1 hub renders only inside its OWN `schedules` window** (`isCanvasValid`, `v2.py:4356`) — not whenever the NPC happens to be present. So for presence coverage (D72-R6) the hub's `schedules` must span the matching `[[npcs.schedules]]` row. Where the NPC's presence at a location spans several windows, author one hub per window (period-split, D56-R1), each with its own `trigger.schedules`.
 
 ### §6.3 — `[[canvases.trigger.substitutions]]` (Lane 3)
 

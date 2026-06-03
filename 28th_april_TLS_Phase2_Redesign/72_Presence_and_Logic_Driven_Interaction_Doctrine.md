@@ -33,6 +33,8 @@ If an NPC is present somewhere the player can already reach, visiting that place
 
 This is the real **floor**. The floor is *acknowledgement*, not a forced action. It is the thing that makes the world feel alive between escalation beats. Whether there is anything to *do* on top of it is a separate, logic-driven question (§4).
 
+> **Evolution (2026-06-02).** This doc originally let either a hub *or* a Lane 2 ambient base carry the floor, by judgment. That is now hardened: the floor must be a **Lane 1 hub, per schedule row** — a Lane 2 ambient is a dice roll (`chance` ⇒ nothing on most visits) and cannot be a floor. The *choices* on a hub remain logic-driven (R2/R3 unchanged — no choice-quota); only the *floor mechanism* became a hard, checkable requirement. Three new rules formalize it: **R6** (per-row Lane 1 hub coverage), **R7** (a hub's escalation ceiling = location exposure, not time), **R8** (same-NPC hub consistency). The corpus home for R6–R8 is `prompts_v2/doctrine/04` §6 + `doctrine/02` §2.8–§2.9. The "no engine linter" stance in §10 is relaxed for the floor: per-row hub coverage is exactly the kind of check that *should* be mechanized; the choice-quota stays rejected.
+
 ## §4 — Rules
 
 ### R1 — Presence is always acknowledged
@@ -85,6 +87,22 @@ Gating an entire location behind a flag is fine when *walking into that place* i
 
 *Worked example:* Housemate in the shared kitchen → daily space → must be acknowledged from day one. Diner floor before being hired → entering is first contact → the hire scene is the on-ramp; locking the rest until `hired_at_diner` is correct.
 
+### R6 — Every schedule row has a live Lane 1 hub (2026-06-02)
+
+For every `[[npcs.schedules]]` row an NPC has — each (location × time-window × weekdays) — there is a Lane 1 hub whose own `trigger.schedules` covers that window. The hub's `base` renders unconditionally (the floor). A Lane 2 ambient does **not** satisfy it (dice roll). Multiple windows at one location = separate hub canvases (period-split, Doc 56 R1).
+
+*Why:* the engine renders a hub portrait only when the hub's own `schedules` is live AND the NPC is present (`isCanvasValid` `v2.py:4356` + presence gate `v2.py:4384`). Late Shifts authored hubs for narrow arc windows while scheduling the NPC present far wider; a per-row audit found 13 of 22 rows dead — the schedule page promised a body the room didn't deliver.
+
+*How to apply:* list the rows; confirm a hub whose window covers each. "A hub at the location" is not enough — it must be open at that time. *Corollary:* a schedule row is a promise of a hub — a pure rent/phone "system" NPC (landlord) carries no schedule row.
+
+### R7 — A hub's escalation ceiling = location exposure, not time
+
+Which rungs a hub may offer is set by the **exposure** (privacy) of the location at that window — who can see, what's at risk — not by time. Public → talk/look only; semi-private → tease/grope (sex gated or interrupted); private → full ladder (private can be several locations). Relationship state (corruption/relation/stage, global) unlocks within that ceiling. Time and co-present NPCs are *inputs to exposure* (an after-close diner is private), not the gate.
+
+### R8 — An NPC's hubs are mutually consistent
+
+Relationship state is global (no per-location re-grind); voice + rung names + gate thresholds stay consistent wherever a rung appears; the full ladder appears wherever it's private; the ladder is context-scaled, **not cloned** into rooms whose exposure can't support it. Optional: locked-visible higher rungs at public hubs for telegraphing, unlockable only where private.
+
 ## §5 — Decision test (T1–T3)
 
 Run per NPC, per location, when authoring:
@@ -108,21 +126,25 @@ The point is the *layering*, never a count. The base acknowledges presence; "Hel
 
 This doctrine sits underneath the Lane model (Doc 24), it does not replace it:
 
-- **Lane 1 (hub):** the base node is the hub opening. R1 here = "the opening exists and acknowledges presence"; Doc 56 R1 = "the opening prose doesn't vary by progression." Two sibling rules — one about the floor, one about constancy.
-- **Lane 2 (ambient):** ambients are the texture layer that makes presence felt between escalation beats. An ambient that renders only when escalation conditions are met is dead presence by another name.
+- **Lane 1 (hub):** the base node is the hub opening, and it **is the floor** (R1 + R6 — the opening exists, acknowledges presence, and is present for every schedule row). Doc 56 R1 = "the opening prose doesn't vary by progression." Sibling rules — floor, coverage, constancy.
+- **Lane 2 (ambient):** ambients are **texture layered on top of the hub**, not the floor (post-2026-06-02, R6). They make presence feel *alive* between escalation beats, but because they are dice rolls they cannot *acknowledge* presence on their own — that is the hub's job. An ambient that renders only when escalation conditions are met is dead presence by another name; an ambient relied on *as* the floor is dead presence ~3 of 4 visits.
 - **Lane 3 (substitution) / Lane 4 (capstone):** unaffected — these are by definition earned, gated content. The floor is about the base layer beneath them.
 
 ## §9 — Anti-patterns
 
-- **Dead presence.** NPC is scheduled at a reachable location (and now shows on the schedule page), but visiting yields nothing — no base moment, no acknowledgement. The world reads as a set of locked doors. (Violates R1.)
+- **Dead presence.** NPC is scheduled at a reachable location (and now shows on the schedule page), but visiting yields nothing — no base moment, no acknowledgement. The world reads as a set of locked doors. (Violates R1 / R6.)
+- **Hub window narrower than the schedule.** A hub exists at the location but its own `trigger.schedules` covers only part of the NPC's scheduled presence there; the rest of the rows are dead (Hank: hub open 22:00–01:30, scheduled 06:00–22:00). Period-split into per-window hubs. (Violates R6.)
+- **Lane 2 used as the floor.** Relying on a `chance` ambient to acknowledge a scheduled NPC — dead presence on most visits. Author the hub. (Violates R6.)
+- **Physical schedule on a hub-less system NPC.** A rent/phone-only NPC carrying a schedule row advertises a body the world can't deliver. Drop the schedule or give them a hub. (Violates R6 corollary.)
+- **Cloned full ladder / public-space escalation.** The same full ladder offered at every hub regardless of context ("Have sex" at a public counter). Scale the rung set to the location exposure tier. (Violates R7 / R8.)
 - **Backwards on-ramp.** An arc's entry condition is a stat/flag that can only be raised by content downstream of that same arc. The cold-start player can never begin it. (Violates R4.) *Example:* housemate arc gated on `worn_corruption ≥ 15`.
 - **Escalation-only authoring.** Writing only stage-1+ beats for an NPC and never the stage-0 base moment — so the NPC simply doesn't exist to a new player. (Violates R1 + R4.)
 - **Quota / format enforcement.** The opposite error: bolting a hollow ungated action onto every NPC to satisfy a checklist. This doc explicitly rejects "every NPC must have ≥1 ungated interaction." Acknowledgement is required; an *action* is not. (Violates R2.)
 
 ## §10 — Scope & non-goals
 
-- **Not a quota.** There is no minimum interaction count. The only hard requirement is acknowledgement of presence (R1); actions are by judgment (R2).
-- **No engine linter.** A validator rule ("scheduled NPC with no ungated canvas → warn") was considered and **deliberately dropped** — it would re-encode the quota thinking this doc rejects. Enforcement is editorial/authorial, via §5's decision test, not mechanical.
+- **No *choice* quota.** There is no minimum interaction-count on a hub's menu; actions are by judgment (R2). What is hard is *floor coverage*: a Lane 1 hub per schedule row (R6). The two are different axes — "every row needs a hub" is not "every hub needs an ungated action."
+- **Engine linter (revised 2026-06-02).** The originally-dropped validator targeted a *choice*-quota ("scheduled NPC with no ungated canvas → warn") — that stays dropped, it re-encodes quota thinking. But **per-row hub coverage (R6) is a legitimate, checkable rule** a future validator *should* enforce ("schedule row with no hub whose `schedules` covers it → warn"). The floor is mechanical; the choices stay editorial via §5's decision test.
 - **Applies to** schedule-present NPCs in spaces the player shares as daily life (home, building, workplace-on-shift).
 - **Out of scope:** locations where entering is itself the first contact (jobs not yet held, places not yet visited) — see R5.
 

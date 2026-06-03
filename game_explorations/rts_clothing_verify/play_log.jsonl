@@ -1,0 +1,12 @@
+{"ts":"2026-05-31T11:57:43.255Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"Bedroom","state_hash":"bf2f06f8d05db7c3"}
+{"ts":"2026-05-31T12:00:49.030Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"Bedroom","state_hash":"bf2f06f8d05db7c3"}
+{"ts":"2026-05-31T12:00:53.629Z","session_id":1,"cmd":"eval","args":{},"ok":false,"error":"eval requires a JS expression or statement body"}
+{"ts":"2026-05-31T12:00:56.044Z","session_id":1,"cmd":"eval","args":{},"ok":false,"error":"eval requires a JS expression or statement body"}
+{"ts":"2026-05-31T12:00:58.388Z","session_id":1,"cmd":"eval","args":{},"ok":false,"error":"eval requires a JS expression or statement body"}
+{"ts":"2026-05-31T12:01:01.477Z","session_id":1,"cmd":"eval","args":{},"ok":false,"error":"eval requires a JS expression or statement body"}
+{"ts":"2026-05-31T12:01:04.514Z","session_id":1,"cmd":"eval","args":{},"ok":false,"error":"eval requires a JS expression or statement body"}
+{"ts":"2026-05-31T12:01:12.505Z","session_id":1,"cmd":"eval","args":{},"ok":false,"error":"eval requires a JS expression or statement body"}
+{"ts":"2026-05-31T12:01:22.044Z","session_id":1,"cmd":"eval","args":{},"ok":false,"error":"eval requires a JS expression or statement body"}
+{"ts":"2026-05-31T12:01:25.419Z","session_id":1,"cmd":"eval","args":{},"ok":false,"error":"eval requires a JS expression or statement body"}
+{"ts":"2026-05-31T12:01:31.879Z","session_id":1,"cmd":"eval","args":{},"ok":false,"error":"eval requires a JS expression or statement body"}
+{"ts":"2026-05-31T12:01:39.466Z","session_id":1,"cmd":"eval","args":{},"ok":false,"error":"eval requires a JS expression or statement body"}

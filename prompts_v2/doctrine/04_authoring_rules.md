@@ -10,6 +10,7 @@
 - **D57-R1 … D57-R5** = Doc 57 (capstone fingerprint + budgets)
 - **F1 … F5** = Doc 57 Pattern F sub-rules (Type B capstones)
 - **D67-R1 … D67-R7** = Doc 67 (solo activity + multi-NPC dispatcher)
+- **D72-R6 … D72-R8** = Doc 72 (presence floor: per-schedule-row hubs + exposure-tier ladder ceiling)
 
 ---
 
@@ -486,11 +487,62 @@ Optionally, the parent activity's `[[canvases.trigger]]` has its own `max_trigge
 
 ---
 
-## §6 — Pre-ship checklist (Appendix-style)
+## §6 — Doc 72 R6–R8 (presence floor: per-schedule-row hubs + exposure-tier ceiling)
+
+These three rules harden Doc 72's presence floor. Doc 72's R1–R5 (in the source doc) still hold; R2/R3 are unchanged — choices on a hub are logic-driven, "base + talk + leave" is a complete canvas, and there is **no choice-quota**. What R6–R8 change is the *floor mechanism*: the thing that acknowledges a scheduled NPC must be a **Lane 1 hub, per schedule row** — not a probabilistic Lane 2 ambient, and not a matter of judgment. The floor is now checkable; the choices on top are still judgment.
+
+### §6.1 — D72-R6: Every schedule row has a live Lane 1 hub
+
+**Rule:** For every `[[npcs.schedules]]` row an NPC has — each (location × time-window × weekdays) — there is a Lane 1 hub canvas for that NPC whose own `trigger.schedules` covers that window. The hub's `base` node renders **unconditionally** (image + a line of what the NPC is doing + optionally one line of dialogue); it is never gated behind escalation flags. A Lane 2 ambient does **not** satisfy the floor — it is a dice roll (`chance 0.25` ⇒ nothing on ~3 of 4 visits), so most visits would still be a dead room.
+
+**Corollary — a schedule entry is a promise of a hub.** If an NPC has no physical hub anywhere (a pure rent/phone "system" NPC such as a landlord), they must carry **no** `[[npcs.schedules]]` row — otherwise the schedule page advertises a body the world can't deliver. Either give them a hub or drop the schedule.
+
+**Corollary 2 — a schedule row at a *locked* location is a *deferred* promise.** If the row's location has `entry_conditions`, the player can't be present until the lock opens, so the hub is dormant until then. This is legitimate only under the **unlock contract**: the lock must read as "haven't met / been invited yet," the NPC must be meetable at an OPEN on-ramp location, and the beat at that on-ramp must set the unlock flag (which therefore needs a reachable setter). The bug to avoid is an NPC reachable *only* via a locked location, or a door gated on a flag only settable behind it. Full Case A/B/C treatment (private place / deeper room / unreachable-NPC) in `doctrine/10` §5.4.
+
+**Multiple windows at one location = separate hub canvases** (this is **D56-R1**: period-split, "don't fold them"). A breakfast hub and an after-close hub at the same diner are two canvases with their own `schedules`.
+
+**Why this rule exists:** the engine renders a hub portrait only when the hub's *own* `schedules` window is live AND the NPC is present (`isCanvasValid`, `v2.py:4356`, + the presence gate at `v2.py:4384`). Late Shifts authored hubs for narrow arc-moment windows (Hank's diner hub opened 22:00–01:30) while scheduling the NPC present far wider (Hank at the diner ~06:00–22:00). A per-row audit found 13 of 22 rows dead — the schedule page promised a body, the room delivered nothing. Lane 2 ambients existed but, being dice rolls, are not a floor.
+
+**How to apply:** list the NPC's schedule rows. For each, confirm a Lane 1 hub at that location whose `trigger.schedules` *covers that exact window+weekdays*. "A hub exists at the location" is not enough — it must be open at that time. Where the NPC's presence spans several distinct windows at one place, author one hub per window (period-split). Never flag-gate the base node.
+
+**Worked example (anti):** Hank is scheduled at the diner front 06:00–09:00, 09:00–17:00, 17:00–22:00, and 22:00–01:30; only `hank_diner_front_hub` (22:00–01:30) exists. Result: 06:00–22:00 every day shows Hank on the schedule page but renders no hub — dead. Fix: author `hank_diner_front_morning` / `_day` / `_evening` hubs, each with `trigger.schedules` matching its row.
+
+### §6.2 — D72-R7: A hub's escalation ceiling is set by location exposure, not by time
+
+**Rule:** Which escalation rungs a hub may offer is decided by the **exposure** (privacy) of that location at that window — *who could see this and what's at risk* — not by the time of day directly. Relationship state (corruption / relation / stage, global to the NPC) then unlocks within that ceiling. Two orthogonal filters: exposure sets the ceiling per hub; relationship state unlocks rungs inside it.
+
+| Exposure tier | Locations | Rung ceiling |
+|---|---|---|
+| **Public** (high exposure) | diner floor with customers, street, park midday, mall | Deniable acts only — talk, banter, a charged look, a brush-past. No flashing, no sex. |
+| **Semi-private** (low exposure) | back kitchen, office with a door, storeroom, building hallway | Tease / grope / quick contact; full sex gated higher or **interrupted** by the setting (the D56-R2 in-fiction-interruption pattern). |
+| **Private** (no exposure) | bedroom, apartment, the diner after close when they're alone | Full ladder, up to sex / sleepover. Private can be **more than one** location. |
+
+**Why this rule exists:** the same act reads differently by place (the verb-overlay anti-pattern, `doctrine/02` §8.1). "Have sex with Hank" at the public breakfast counter is the game pretending the room isn't there — and it's the NPC's risk too (he won't lose his job over the counter). RTS concentrates escalation in private space for exactly this reason: the charge of the private act is that it's private.
+
+**Time and co-present NPCs are *inputs to exposure*, not the gate.** A public location becomes private when it empties: the diner front at 2am, lights off, just the two of them, carries a higher ceiling than the same front at the breakfast rush — not because "it's night," but because the room is empty now. Likewise *who else is scheduled there* (alone vs. with a coworker vs. with an antagonist down the hall) changes exposure. This is why a late-night hub legitimately differs from a morning hub at the same location while the rule stays "exposure," not "time."
+
+**How to apply:** tag each hub with an exposure tier (public / semi-private / private) and offer only rungs at or below that ceiling. The relationship gates (corruption/stage) sit *inside* the permitted rungs as usual.
+
+### §6.3 — D72-R8: An NPC's hubs are mutually consistent
+
+**Rule:** Across all of one NPC's hubs:
+- **Relationship state is global** — corruption / relation / stage are per-NPC, not per-location, so progress carries everywhere automatically. The player never re-grinds a relationship per room.
+- **Voice + rung identity stay consistent** — the NPC sounds the same everywhere; a given rung keeps the same name and the same gate threshold wherever it appears (no "tease unlocks at corr 5 here but corr 15 there").
+- **The full ladder appears wherever it's private** — which can be several locations (D72-R7). It is **context-scaled, not cloned**: a public hub carries only its tier-permitted rungs, not the whole ladder forced into a room that can't support it.
+
+**Optional — locked-visible everywhere.** If you want the ladder telegraphed at every hub for readability, show the higher rungs *locked-visible* (greyed, per §2.6 / D56-R1's sibling) even at public hubs, unlockable only where exposure allows. This gives the "same ladder everywhere" look without making public sex possible. Use it or not by taste; it is not required.
+
+**Why this rule exists:** the worry that drove this — "you can have sex with him at his primary spot but only tease him elsewhere" — is not actually an inconsistency. The relationship is one shared value; only *act availability* varies, and varying it by privacy is realism (flirt in public, fuck in private — exactly how RTS works). The inconsistency to avoid is the mechanical kind: a rung gated differently in two hubs, or the NPC's voice drifting between rooms.
+
+**How to apply:** when authoring an NPC's second/third hub, copy the rung names + gate thresholds + voice from the first; drop the rungs the new location's exposure tier forbids; keep the base + talk + leave. Don't invent a different ladder per room.
+
+---
+
+## §7 — Pre-ship checklist (Appendix-style)
 
 Run before any commit that includes new canvas / capstone / quest card / Lane 3 substitution.
 
-### §6.1 — Per-canvas checks
+### §7.1 — Per-canvas checks
 
 - [ ] **D56-R1** — Hub canvas has ONE opener paragraph, not tiered (unless legitimate world-state framing)
 - [ ] **D56-R2** — If `[group]`-tier-routed, T0/T1 endings land on in-fiction interruption
@@ -500,7 +552,7 @@ Run before any commit that includes new canvas / capstone / quest card / Lane 3 
 - [ ] Locked-click failures pure information (no stat drain) (P7)
 - [ ] No legacy vocabulary (Pattern A–J; ENI-persona references; whiteboard goals; etc.) — see `00_LEGACY_IGNORE.md` §4
 
-### §6.2 — Per-Lane-3 substitution checks (D67-R1–R7)
+### §7.2 — Per-Lane-3 substitution checks (D67-R1–R7)
 
 - [ ] **D67-R1** — Parent activity is a separate `[[canvases]]` entry (not a sub-block of the location hub)
 - [ ] **D67-R2** — Stat cost placement decided (`exit_block.effects` vs `pre_substitution_effects`)
@@ -511,7 +563,7 @@ Run before any commit that includes new canvas / capstone / quest card / Lane 3 
 - [ ] **D67-R7** — Substitution target has `max_triggers_per_day = 1` + `substitution_only = true`
 - [ ] **D56-R3** — Substitution count respects per-arc-shape Lane 3 budget (family 4–7, slow-burn 1–3, peer 0, service 0, antagonist 0 own)
 
-### §6.3 — Per-capstone checks (D57-R1–R5)
+### §7.3 — Per-capstone checks (D57-R1–R5)
 
 - [ ] **D57-R1** — Trigger fingerprint: `is_repeatable = false` (or `true` + self-gate); `priority ≥ 9`; `conditions` include flag-is_false gate; setter-flag effect on exit choice
 - [ ] **D57-R2** — Default to Type A; Type B only if branches diverge downstream
@@ -520,7 +572,7 @@ Run before any commit that includes new canvas / capstone / quest card / Lane 3 
 - [ ] **D57-R5** — Schedule + location match the fiction
 - [ ] **§3.8 voice** — Cascade prose is Tier-3 (specific, layered, character-distinguishing). No Tier-3 spillage in related Lane 2/3 canvases.
 
-### §6.4 — Per-Type-B capstone checks (F1–F5)
+### §7.4 — Per-Type-B capstone checks (F1–F5)
 
 - [ ] **F1** — Both branches playable in good faith (Refuse isn't a punishment-button)
 - [ ] **F2** — Real divergence in flag-effect, NPC arc, or downstream content
@@ -528,7 +580,7 @@ Run before any commit that includes new canvas / capstone / quest card / Lane 3 
 - [ ] **F4** — Refuse-path flag policy matches fiction (retry-allowed vs irreversible)
 - [ ] **F5** — Not compounded with tier-routing AND multi-step downstream — only one structural device beyond the fork
 
-### §6.5 — Per-quest-card checks (D50-R1–R6)
+### §7.5 — Per-quest-card checks (D50-R1–R6)
 
 - [ ] **D50-R1** — Mode declared (capstone / mechanic / hybrid). No `txt_only`.
 - [ ] **D50-R2** — Climbing-bullet present when `ready_canvas` has trait gates strictly above card's `when`
@@ -538,17 +590,21 @@ Run before any commit that includes new canvas / capstone / quest card / Lane 3 
 - [ ] **D50-R6 (REVERSED)** — `goals[i].label` names the trait ("Corruption" / "<NPC> Relation"), matches sidebar; no raw key paths. (LO pref; see §2.6)
 - [ ] **§2.7** — Pure-mechanic chains: each `when` has bounded threshold range; transitions are atomic
 
-### §6.6 — Per-slice / per-arc checks (D56-R3, R4, R7)
+### §7.6 — Per-slice / per-arc checks (D56-R3, R4, R7; D72-R6, R7, R8)
 
 - [ ] **D56-R3** — Per-arc-shape Lane 3 budget matches table (family 4–7, slow-burn 1–3, peer 0, service 0, antagonist 0)
 - [ ] **D56-R4** — Sidebar surfaces in-scope NPC locations + key stats per the arc's register
 - [ ] **D56-R6** — No `txt_only` quest cards in shipped TOML
 - [ ] **D56-R7** — Design brief written + canvas distribution matches the brief's declared budget
 - [ ] **§3 per-arc distribution** — Canvas count per arc within range (family/ambient 25–35; slow-burn 10–15; peer/dating 8–12; service 6–10; antagonist 6–10)
+- [ ] **D72-R6** — Every `[[npcs.schedules]]` row has a Lane 1 hub whose own `trigger.schedules` covers that window (per-row coverage; "a hub at the location" is not enough — it must be open at that time). NPCs with no physical hub carry no schedule row.
+- [ ] **D72-R6** — Every hub `base` node renders unconditionally (no escalation-flag gate on the base; gates live on the choices)
+- [ ] **D72-R7** — Each hub's rung set respects its location exposure tier (public = talk/look only; semi-private = tease/grope; private = full ladder)
+- [ ] **D72-R8** — Same-NPC hubs consistent: shared rung names + gate thresholds + voice; ladder context-scaled, not cloned into public rooms
 
 ---
 
-## §7 — Anti-patterns (consolidated, per-rule cross-reference)
+## §8 — Anti-patterns (consolidated, per-rule cross-reference)
 
 For each anti-pattern, the rule it violates.
 
@@ -581,11 +637,18 @@ For each anti-pattern, the rule it violates.
 - **Pattern B authored as Pattern A approximation without flagging** — violates D67-R5.
 - **`GetNpcLocation == "Kitchen"` on a Lane 3 walk-in dispatcher** — violates D67-R6.
 - **No `max_triggers_per_day` on substitution target** — violates D67-R7.
-- **Substitution target without `substitution_only = true`** — violates D67-R7 + pre-ship check §6.2.
+- **Substitution target without `substitution_only = true`** — violates D67-R7 + pre-ship check §7.2.
+- **Schedule row with no live Lane 1 hub** (NPC scheduled at a place/time, but no hub whose own `trigger.schedules` covers it) — violates D72-R6. The schedule page advertises a body the room doesn't deliver.
+- **Hub window narrower than the schedule** (one hub open 22:00–01:30 while the NPC is scheduled 06:00–22:00) — violates D72-R6. The daytime rows are dead; period-split into per-window hubs.
+- **Lane 2 ambient used as the presence floor** (relying on a `chance` random to acknowledge a scheduled NPC) — violates D72-R6. Dice rolls aren't a floor; author the hub.
+- **Flag-gated hub base node** (the base render itself locked behind an escalation flag) — violates D72-R6. Gate the choices, never the act of seeing the NPC.
+- **Physical schedule on a hub-less system NPC** (a rent/phone-only landlord carrying a `[[npcs.schedules]]` row) — violates D72-R6 corollary. Drop the schedule or give them a hub.
+- **Cloned full ladder across locations / public-space escalation** (the same sex rung offered at a public diner counter) — violates D72-R7 + the verb-overlay anti-pattern in `doctrine/02` §8.1. Scale the ladder to the location's exposure tier.
+- **Same NPC, divergent rung gates between hubs** (tease unlocks at corr 5 in one hub, corr 15 in another; voice drifts room to room) — violates D72-R8.
 
 ---
 
-## §8 — Cross-references
+## §9 — Cross-references
 
 ### Source docs
 
@@ -593,6 +656,7 @@ For each anti-pattern, the rule it violates.
 - `28th_april_TLS_Phase2_Redesign/50_Quest_Card_Shape_Doctrine.md` §4 — R1–R6
 - `28th_april_TLS_Phase2_Redesign/57_Capstone_Doctrine.md` §4 + §7 — R1–R5 + F1–F5
 - `28th_april_TLS_Phase2_Redesign/67_Solo_Activity_Design_and_Multi_NPC_Dispatcher_Doctrine.md` §6 — R1–R7
+- `28th_april_TLS_Phase2_Redesign/72_Presence_and_Logic_Driven_Interaction_Doctrine.md` — presence floor; R6–R8 (per-row hub coverage + exposure-tier ceiling) extend it (see §6)
 
 ### Sibling doctrine files
 

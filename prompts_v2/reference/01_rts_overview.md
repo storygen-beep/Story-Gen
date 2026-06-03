@@ -211,6 +211,29 @@ Phone is a purchased item ($400 + first NPC's allowance unlocks it). Once acquir
 
 Phone is async-mediated content (Edward DM arrives after follower threshold + wait). Phone is NOT load-bearing for family/ambient arcs — those run via location passages + walkthrough.
 
+### §6.5 — City map + location locking (live-verified 2026-06-03)
+
+Live-play of `road_to_success` (introspected the `CityMap` macro handler + `$location` state; notes in `game_explorations/road_to_success/notes.md`). RTS locks **venues** (never districts — center/residential/elite/ghetto are always reachable via the Bus Stop) on **two orthogonal axes**:
+
+| Axis | Field | Player experience |
+|---|---|---|
+| **Discovery** | `unlocked` (bool) | `CityMap` renders **nothing** when `unlocked === false` → the venue is **absent** from the map. The player can't see a place they haven't discovered. Verified: at game start the Residential map omits Marcus's/Emma's houses; the Elite map shows only Casino + Bus Stop (all three mansions hidden). |
+| **Time** | `open` (bool, derived from `openPeriods` vs `$game.time`) + `opensAt` label | When `unlocked` but `open === false`, the tile **is** shown — darkened with a 🔒 + a "CLOSED / Opens at \<opensAt\>" badge; clicking it is a **no-op** (you stay on the map). Verified at early-morning Center: Night Club "Opens at Night," Bar "Opens at Evening," Movie Theater "Opens at Morning." |
+
+**Discovery unlock = meeting the person tied to the place.** `<<UnlockLocation X>>` (→ `LocationService.unlockLocation`) fires at the in-fiction *meet / invite / "address sent"* beat — the lock literally means "you don't know them / where they live yet":
+
+| Unlock | Trigger beat | Story |
+|---|---|---|
+| jamalHouse | `JamalMeet` | meet Jamal at the Club; "I'll see you again, right?" |
+| veronicaHouse | `VeronicaMeet` | a sexual encounter with Veronica |
+| marcusHouse | `SchoolTest` | the school test starts the "Study with Marcus" quest |
+| emmaHouse | `EmmaInvite` | Emma: "I'll wait for you at my house in evening" |
+| clandestineClinic | `HospitalBirth` | the doctor refers you to a friend's artificial-womb clinic |
+| vipers (gang HQ) | `DrugDealer` | the drug-dealer questline opens the hideout |
+| photoStudio / filmStudio / hotel | phone DMs (`InstafameMessages`) | Richard/Jim/Edward each "send you the address" + a `NotifyPhone "X is now unlocked on the city map"` signal |
+
+**How our engine adapts it.** We have only a flag lock: `[[locations]]` `entry_conditions` + `blocked_message` — **visible-but-blocked** (the door shows and tells you why), not RTS-style hide; and **no native time-of-day location lock** (time/exposure lives on the hub, D72-R7). The coordination rule (a locked location that hosts an NPC schedule — Cases A/B/C, the unlock contract, the schedule-page leak if we ever adopt discovery-hiding) is `doctrine/10` §5.4.
+
 ---
 
 ## §7 — Three writing tiers (Doc 13 §9)

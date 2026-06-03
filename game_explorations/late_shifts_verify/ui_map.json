@@ -1,0 +1,565 @@
+{
+  "slug": "late_shifts_verify",
+  "url": "file:///Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/games/late_shifts/output/index.html",
+  "generated_at": "2026-05-30T15:50:11.763Z",
+  "engine": "sugarcube",
+  "pregame_auto_advance": {
+    "trail": [
+      {
+        "step": 0,
+        "passage": "Start",
+        "action": "terminated",
+        "reason": "no_forward_pattern_match"
+      }
+    ],
+    "terminated_at": {
+      "step": 0,
+      "passage": "Start",
+      "action": "terminated",
+      "reason": "no_forward_pattern_match"
+    }
+  },
+  "regions_catalog": [
+    {
+      "pos_class": "left",
+      "id": "ui-bar",
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 281,
+        "h": 900
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [
+        {
+          "text": "Late Shifts",
+          "tag": "h1",
+          "cls": ""
+        },
+        {
+          "text": "Traits",
+          "tag": "div",
+          "cls": "traits-header"
+        }
+      ],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 93,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 152,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">",
+          "title": "Advance 10 minutes",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 69,
+            "y": -150,
+            "w": 21,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>",
+          "title": "Advance 1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": -150,
+            "w": 28,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>>>>",
+          "title": "Advance 1 day",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 161,
+            "y": -150,
+            "w": 50,
+            "h": 22
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📋 Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 102,
+            "y": 187,
+            "w": 76,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📊 Stats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 110,
+            "y": 280,
+            "w": 60,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📅 Schedules",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 90,
+            "y": 350,
+            "w": 100,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "patreon-link",
+          "text": "Support Us",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 78,
+            "y": 711,
+            "w": 124,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 830,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 865,
+            "w": 230,
+            "h": 34
+          }
+        }
+      ],
+      "passive_text_samples": [
+        "Late Shifts",
+        "8:00 AM",
+        "Monday",
+        "Pure",
+        "Arousal",
+        "10",
+        "Cold",
+        "🔋 Rested",
+        "🧼 Clean",
+        "😬 Tight",
+        "Traits",
+        "arousal",
+        "beauty",
+        "corruption",
+        "energy",
+        "100",
+        "fitness",
+        "hygiene",
+        "100",
+        "money"
+      ]
+    },
+    {
+      "pos_class": "sampled",
+      "id": "ui-bar-history",
+      "bbox": {
+        "x": 0,
+        "y": 3,
+        "w": 280,
+        "h": 32
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "button",
+          "id": "history-backward",
+          "cls": "",
+          "text": "",
+          "title": "Go backward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 93,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        },
+        {
+          "tag": "button",
+          "id": "history-forward",
+          "cls": "",
+          "text": "",
+          "title": "Go forward within the game history",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 152,
+            "y": 3,
+            "w": 36,
+            "h": 32
+          }
+        }
+      ],
+      "passive_text_samples": []
+    },
+    {
+      "pos_class": "sampled",
+      "id": "ui-bar-body",
+      "bbox": {
+        "x": 0,
+        "y": 40,
+        "w": 280,
+        "h": 860
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [
+        {
+          "text": "Late Shifts",
+          "tag": "h1",
+          "cls": ""
+        },
+        {
+          "text": "Traits",
+          "tag": "div",
+          "cls": "traits-header"
+        }
+      ],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">",
+          "title": "Advance 10 minutes",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 69,
+            "y": -150,
+            "w": 21,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>",
+          "title": "Advance 1 hour",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 111,
+            "y": -150,
+            "w": 28,
+            "h": 22
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "time-btn",
+          "text": ">>>>>",
+          "title": "Advance 1 day",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 161,
+            "y": -150,
+            "w": 50,
+            "h": 22
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📋 Quests",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 102,
+            "y": 187,
+            "w": 76,
+            "h": 18
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📊 Stats",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 110,
+            "y": 280,
+            "w": 60,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "📅 Schedules",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 90,
+            "y": 350,
+            "w": 100,
+            "h": 19
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "patreon-link",
+          "text": "Support Us",
+          "title": "",
+          "href": "https://www.patreon.com/cw/nutgames844",
+          "target": "_blank",
+          "external": true,
+          "bbox": {
+            "x": 78,
+            "y": 711,
+            "w": 124,
+            "h": 38
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Saves",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 830,
+            "w": 230,
+            "h": 34
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "",
+          "text": "Restart",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 25,
+            "y": 865,
+            "w": 230,
+            "h": 34
+          }
+        }
+      ],
+      "passive_text_samples": [
+        "Late Shifts",
+        "8:00 AM",
+        "Monday",
+        "Pure",
+        "Arousal",
+        "10",
+        "Cold",
+        "🔋 Rested",
+        "🧼 Clean",
+        "😬 Tight",
+        "Traits",
+        "arousal",
+        "beauty",
+        "corruption",
+        "energy",
+        "100",
+        "fitness",
+        "hygiene",
+        "100",
+        "money"
+      ]
+    }
+  ],
+  "chrome_probes": [],
+  "regions": [
+    {
+      "pos_class": "left",
+      "tag": "div",
+      "id": "ui-bar",
+      "cls": "",
+      "position_style": "fixed",
+      "z_index": "50",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 281,
+        "h": 900
+      },
+      "text_sample": "Late Shifts                       8:00 AM  | Monday                   > | >> |"
+    },
+    {
+      "pos_class": "sampled",
+      "tag": "div",
+      "id": "ui-bar-history",
+      "cls": "",
+      "position_style": "static",
+      "z_index": "auto",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 0,
+        "y": 3,
+        "w": 280,
+        "h": 32
+      },
+      "text_sample": "",
+      "from_sampling": true
+    },
+    {
+      "pos_class": "sampled",
+      "tag": "div",
+      "id": "ui-bar-body",
+      "cls": "",
+      "position_style": "static",
+      "z_index": "auto",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 0,
+        "y": 40,
+        "w": 280,
+        "h": 860
+      },
+      "text_sample": "",
+      "from_sampling": true
+    }
+  ],
+  "main_content": null,
+  "ui_frame_hash": "5f9159b5de25df2e"
+}

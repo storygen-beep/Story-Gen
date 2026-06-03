@@ -30,6 +30,7 @@ SOURCES = [
     ("11_clothing_design", "doctrine/11_clothing_design.md"),
     ("12_rent_economy_design", "doctrine/12_rent_economy_design.md"),
     ("13_phone_design", "doctrine/13_phone_design.md"),
+    ("14_customization_design", "doctrine/14_customization_design.md"),
     ("01_rts_overview", "reference/01_rts_overview.md"),
     ("02_rts_scene_catalog", "reference/02_rts_scene_catalog.md"),
     ("03_rts_walkthrough_panel", "reference/03_rts_walkthrough_panel.md"),

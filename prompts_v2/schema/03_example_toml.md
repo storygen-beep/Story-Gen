@@ -1368,7 +1368,94 @@ flagEffects = [
 
 ---
 
-## §15 — Cross-references
+## §15 — Player & NPC customization (Late Shifts — the personalization screen)
+
+Opt-in start-of-game personalization. The engine auto-builds the `CustomizeCharacters`
+screen and redirects `Start` to it — **no passage wiring.** You declare the fields and write
+the prose with `@`-tokens. (Design model: **doctrine/14**.)
+
+```toml
+# ── Player: all three field types ───────────────────────────────────
+[player]
+id = "player"
+name = "Maya"
+customizable = true
+# ... [player.core_traits] etc. ...
+
+# Array-of-tables — MUST come after every [player.*] subtable (TOML scoping).
+[[player.customization_fields]]
+id = "name"            # special: writes $player.name (the @player token)
+type = "text"
+label = "Your name"
+default = "Maya"
+
+[[player.customization_fields]]
+id = "body_type"       # writes $player.body_type → read with @player.body_type
+type = "select"
+label = "Build"
+default = "average"
+options = ["petite", "average", "curvy", "athletic", "thick"]
+
+[[player.customization_fields]]
+id = "look"
+type = "image_select"
+label = "Look"
+default = "tired"
+sets_portrait = true   # chosen image becomes $player.portrait
+options = [
+  { id = "tired",   image = "players/maya_tired.jpg",   label = "Worn out" },
+  { id = "guarded", image = "players/maya_guarded.jpg", label = "Guarded" },
+]
+
+# ── A customizable NPC (rename + relationship picker) ───────────────
+[[npcs]]
+id = "npc_cole"
+name = "Cole"
+customizable = true                  # REQUIRES the next two lines (importer hard-fails otherwise)
+relationship = "coworker"            # default — must be in relationship_options
+relationship_options = ["coworker", "neighbor", "old flame"]
+# ... core_traits, arc_stages, schedules ...
+
+# ── Prose uses @-tokens (resolve at generation; honor the rename) ───
+# In a canvas node body:
+#   { type = "paragraph", content = "His eyes go over her @player.body_type frame once." }
+#   { type = "dialog", props = { speaker = "npc", npcId = "npc_cole" }, content = "@player. Didn't think you'd come by." }
+# @cole / @cole.rel elsewhere render Cole's chosen name / relationship label.
+
+# ── Genericize the surfaces the @-token CAN'T reach (doctrine/14 §4) ─
+[[locations]]
+id = "loc_cole_apartment"
+name = "The Apartment Across Town"   # NOT "Cole's Apartment" — location names print raw
+# sidebar trait-bar label → "Closeness" (not "Cole Relation"); locked tooltip → "Once he's noticed you"
+```
+
+### Key features
+
+- **Auto-screen, zero wiring** — any customizable player field or NPC inserts
+  `CustomizeCharacters` and redirects `Start`.
+- **All three player field types** — text (name), select (build), image_select (look,
+  `sets_portrait`).
+- **NPC rename + relationship toggle** — the genre's step-relative axis, here on the dating
+  arc (cheapest, non-destructive candidate).
+- **`@`-tokens in prose** — `@player`, `@player.body_type`, `@cole`, `@cole.rel`; dialog
+  speaker labels are already dynamic via `npcId`.
+- **Live-verified** — renaming player→*Nadia*/build→*curvy* and Cole→*Jamie* renders
+  *"her curvy frame … Jamie: Nadia. Didn't think you'd come by."*
+
+### Anti-patterns avoided
+
+- **Declared fields, no token** — the silent half-use: a customizable name that never
+  appears because the prose hardcodes "Maya". Every visible mention is `@player` / `@cole`.
+- **Name baked into a structural label** — `"Cole's Apartment"`, `"Cole Relation"` would
+  leak the old name after a rename. Genericized.
+- **Customizable NPC without `relationship_options`** — a build-time hard-fail; both are
+  required.
+- **Renaming a premise-critical NPC** — the brother whose siblinghood *is* the story is the
+  wrong candidate; the dating love-interest is the right one.
+
+---
+
+## §16 — Cross-references
 
 ### Sibling schema files
 
@@ -1387,11 +1474,13 @@ flagEffects = [
 - `doctrine/11_clothing_design.md` — the clothing design model (§12 example above is its worked reference)
 - `doctrine/12_rent_economy_design.md` — the rent/economy design model (§13 example above is its worked reference)
 - `doctrine/13_phone_design.md` — the phone/apps design model (§14 example above is its worked reference)
+- `doctrine/14_customization_design.md` — the player/NPC customization model (§15 example above is its worked reference)
 
 ### Source TOML
 
 - `games/the_long_summer_test/toml_phases/7_final_game.toml` — 536KB shipped TLS slice. Most excerpts above are verbatim from this file.
-- `games/late_shifts/toml_phases/` — the §12 clothing excerpts (`[settings]`, `[[clothing]]`, `rts_public_clothing_*`), the §13 rent excerpt (`[settings.rent]`, `npc_vince`), and the §14 phone excerpts (`[phone]`, `8_phone.toml`) are verbatim from the Late Shifts phase files.
+- `games/late_shifts/toml_phases/` — the §12 clothing excerpts (`[settings]`, `[[clothing]]`, `rts_public_clothing_*`), the §13 rent excerpt (`[settings.rent]`, `npc_vince`), the §14 phone excerpts (`[phone]`, `8_phone.toml`), and the §15 customization excerpts (`customizable`, `[[player.customization_fields]]`, `npc_cole` rename) are verbatim from the Late Shifts phase files.
+- `games/under_one_roof/toml_phases/` — the largest customization consumer (3 customizable NPCs, 400+ `@`-tokens); the production reference behind doctrine/14.
 
 ### Source briefs
 

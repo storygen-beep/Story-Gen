@@ -139,7 +139,7 @@ Dataclass: `template_import.py:448–502`.
 
 | Lane | Diagnostic fields |
 |---|---|
-| **Lane 1 — Hub button** | `trigger_mode = "manual"` + `is_repeatable = true` + `npc` set + `location` matches NPC's schedule. Rendered by `renderNpcPortraits` (`v2.py:4295`) at NPC's location. |
+| **Lane 1 — Hub button** | `trigger_mode = "manual"` + `is_repeatable = true` + `npc` set + `location` matches NPC's schedule. Rendered by `renderNpcPortraits` (`v2.py:4295`) at NPC's location. **The hub's portrait renders only when the hub's OWN `schedules` window is live (`isCanvasValid`, `v2.py:4356`) AND the NPC is present (presence gate, `v2.py:4384`).** So presence coverage is per schedule row: a hub at the location with a narrower `schedules` than the NPC's presence leaves the uncovered windows dead. Author one hub per scheduled window (D72-R6, `doctrine/04` §6.1). |
 | **Lane 2 — Location-entry random** | `trigger_mode = "random"` + `chance` set + `is_repeatable = true`. Dispatched by `checkRandomEncounters` (`v2.py:4520`) on location entry. |
 | **Lane 3 — Dispatcher substitution** (parent activity) | `trigger_mode = "manual"` + `is_repeatable = true` + `substitutions = [...]`. Player-clickable solo activity. |
 | **Lane 3 — Substitution target** | `substitution_only = true` + `requires_npc` set + `is_repeatable = true` + `max_triggers_per_day = 1`. Not in any portrait/activity grid. |
@@ -283,6 +283,8 @@ Engine: `v2.py:4671-4713` partitions `subs` by `exclusive_group` string, rolls o
 Dataclass: `template_import.py:94`. Parsing: `normalize()` resolves slug→UUID; build fails on invalid location slug (Phase A bugfix shipped 2026-05-14).
 
 **Schedule entries should be non-overlapping for a single NPC.** Where in-fiction the NPC's activity differs by time band (kitchen morning vs kitchen evening), use separate entries.
+
+**Each schedule row is a promise of a Lane 1 hub (D72-R6).** Because the schedule page advertises where every NPC is per room per window, every row must have a Lane 1 hub whose own `trigger.schedules` covers that window (per-window = separate hub canvas; §3.3). A row with no live hub is dead presence. An NPC with no physical hub anywhere (a rent/phone-only "system" NPC) must carry NO schedule row. See `doctrine/04` §6.
 
 ### §5.2 — `getNpcLocation` runtime (`v2.py:2923`)
 

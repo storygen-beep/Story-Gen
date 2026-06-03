@@ -211,4 +211,38 @@ Five fairly independent pieces; rough dependency order:
 - **Loop rhythm.** The whole idea rests on the continuation loop *feeling* smooth. We are de-risking it in the shakedown (§11.5) rather than a separate prototype — if the rhythm is awkward, expect to revise the skill before declaring done.
 - **Self-audit reliability.** Until linters exist, structural correctness depends on the skill faithfully running the checklists. Mitigate by making the checklist a literal step the skill must emit results for, per beat.
 - **Corpus anchor breakage.** §8's external references must be preserved or updated in lockstep; verify with a grep sweep post-edit.
+
+## 13. Shakedown findings (2026-06-03)
+
+First real run, on the game **Last Call** (inherited dive bar + loan-shark weekly payment; female
+owner; 5 NPCs; 9 locations). Scope run: setup → 2 continue beats (`npc_intro`, `location_reveal`).
+
+**What worked (the design is validated):**
+- **Setup mode** produced `design_book.md` + a seeded `authoring_state.json` + a scaffold
+  (`0`/`1`/`2` phases) that built green first try — `✓ validation`, `✓ all flag chains valid`,
+  `index.html`. The minimal boot canvas (gap-test fix C) was necessary and sufficient.
+- **Continue loop rhythm is smooth** — propose-with-options (AskUserQuestion) → author → validate →
+  ledger update → reconcile, twice, each ending green with `drift: []`. This retires the §12 "loop
+  rhythm" risk.
+- **The whole-amendment anti-drift discipline holds.** beat_0009 added `loc_shark` + its lock +
+  unlock flag + a reachable setter + content, all in one move, and the locked-location flag chain
+  validated. Deferring `loc_shark` out of the scaffold (introduced at its reveal beat) kept setup green.
+- **Patterns-only ledger works** — the JSON is hand-edited each turn; reconcile is a ~12-line inline
+  snippet. No helper module missed.
+
+**The one real gotcha (now hardened in the skill):**
+- **Don't gate a canvas trigger on an engine-set flag.** beat_0009 first gated the summons canvas on
+  `bar_seized` (the rent `eviction_flag`). `package_from_toml` failed: `✗ bar_seized NEVER SET`. The
+  flag-chain validator (`v2.py:_build_flag_unlock_map` / `validate_flag_chains`) only adds
+  *canvas-set* (and phone-reply) flags to the unlock map; engine-set flags (rent `eviction_flag`,
+  `[engine.daily_tick]` flags) are invisible to it. LS sidesteps this by gating its `rent_evicted`
+  content in a **phone thread** (delivery conditions aren't flag-chain-validated), not a canvas
+  trigger. Fix applied: gate on a canvas-set flag (`debt_explained`) + the Collector's presence.
+  Added as a 6th `beat-authoring.md` self-audit check. **Possible future engine improvement:** the
+  validator could allowlist the configured `rent_eviction_flag` (it's a known engine-provided flag).
+
+**Outcome:** the system works end-to-end. Last Call is a real game kept on disk (`games/last_call/`,
+gitignored like all games); 11 beats remain `planned` in its ledger for future continue sessions.
+The deferred Phase-2 corpus restructure (stages/01+02 setup/per-beat split) is still pending LO's
+in-flight `prompts_v2` WIP settling.
 ```

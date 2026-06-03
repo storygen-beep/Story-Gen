@@ -1,0 +1,19 @@
+{
+  "session_id": 1,
+  "start_ts": "2026-06-02T18:27:30.362Z",
+  "start_epoch_ms": 1780424850363,
+  "end_ts": "2026-06-02T18:35:26.160Z",
+  "duration_s": 476,
+  "clicks": 0,
+  "choices_explored": 0,
+  "arrow_advances": 0,
+  "unique_states_seen": 6,
+  "new_unique_states": 6,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "LOCATION LOCKING (live-verified 2026-06-03): TWO orthogonal axes. (1) DISCOVERY lock = $location.X.unlocked bool. CityMap macro renders NOTHING when unlocked===false -> locked venue is ABSENT from the map (not greyed). Live: Residential start shows House/School/Park/Apartment/BusStop only (marcusHouse+emmaHouse absent); Elite start shows only Casino[CLOSED]+BusStop (jamal/veronica/thomas mansions absent). Unlock via <<UnlockLocation X>> -> LocationService.unlockLocation, fired from the in-fiction meet/invite/address-sent moment: JamalMeet->jamalHouse, VeronicaMeet->veronicaHouse, SchoolTest->marcusHouse, EmmaInvite->emmaHouse, HospitalBirth->clandestineClinic, DrugDealer->vipers, InstafameMessages(phone DMs)->photoStudio/filmStudio/hotel (with NotifyPhone 'X is now unlocked on the city map'). (2) TIME lock = open bool derived from openPeriods (EM/M/A/E/N/LN) vs $game.time, recomputed per tick. unlocked venue with open===false renders WITH a darkened tile + 🔒 + 'CLOSED / Opens at <opensAt>' badge; clicking it is a NO-OP (stays on map). Live Center @EM: NightClub[Opens at Night], Bar[Opens at Evening], MovieTheater[Opens at Morning] closed; rest open. Zones (center/residential/elite/ghetto) all unlocked from start; only venues lock. House interior nav uses createSubLocationButton (no lock)."
+  ]
+}

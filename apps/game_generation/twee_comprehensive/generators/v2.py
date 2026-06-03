@@ -1678,7 +1678,7 @@ setup.checkPhoneConversations = function() {{
             triggered_hour: ts.current_hour || 0,
             conv_index: i
         }};
-        if (!_firstScan) _phoneToasts.push(conv.notify || "📱 New message");
+        if (!_firstScan) _phoneToasts.push(setup.resolveAtRefs(conv.notify) || "📱 New message");
     }}
     // Check posts
     var posts = setup.phone_data.posts || [];
@@ -1689,7 +1689,7 @@ setup.checkPhoneConversations = function() {{
         if (trigCond && !setup.triggerConditionsSatisfied(trigCond)) continue;
         var ts = sv.game_state.time_state || {{}};
         ps.triggered_posts[post.id] = {{ triggered_day: ts.day || 1, triggered_hour: ts.current_hour || 0 }};
-        if (!_firstScan) _phoneToasts.push(post.notify || "📱 New post");
+        if (!_firstScan) _phoneToasts.push(setup.resolveAtRefs(post.notify) || "📱 New post");
     }}
     // Check profiles
     var profiles = setup.phone_data.profiles || [];
@@ -1954,7 +1954,7 @@ setup._renderThreadList = function(appId, appLabel) {{
             var lastConv = th.conversations[th.conversations.length - 1];
             var blocks = lastConv.blocks || [];
             for (var b = blocks.length - 1; b >= 0; b--) {{
-                if (blocks[b].type === "message" && !blocks[b].after_reply) {{ preview = blocks[b].content; break; }}
+                if (blocks[b].type === "message" && !blocks[b].after_reply) {{ preview = setup.resolveAtRefs(blocks[b].content); break; }}
             }}
             if (preview.length > 40) preview = preview.substring(0, 40) + "...";
         }}
@@ -2018,7 +2018,7 @@ setup.openChatThread = function(appId, npcSlug) {{
                 if (block.sender === "npc" && setup._chatAnimConv === conv.id && blockAfterRound != null && blockAfterRound === setup._chatAnimRound) {{
                     pending = ' phone-bubble-pending';
                 }}
-                html += '<div class="phone-bubble ' + cls + pending + '">' + block.content + '</div>';
+                html += '<div class="phone-bubble ' + cls + pending + '">' + setup.resolveAtRefs(block.content) + '</div>';
             }} else if (block.type === "reply") {{
                 var blockRound = block.round || 1;
                 var thisRoundReply = _getRoundReply(convReplies, blockRound);
@@ -2026,7 +2026,7 @@ setup.openChatThread = function(appId, npcSlug) {{
                     // Already replied — show locked-in choice
                     var choices = block.choices || [];
                     if (thisRoundReply.choice >= 0 && thisRoundReply.choice < choices.length) {{
-                        html += '<div class="phone-bubble phone-bubble-player">' + choices[thisRoundReply.choice].text + '</div>';
+                        html += '<div class="phone-bubble phone-bubble-player">' + setup.resolveAtRefs(choices[thisRoundReply.choice].text) + '</div>';
                     }}
                 }} else {{
                     // Check if this reply block's round dependency is met
@@ -2043,7 +2043,7 @@ setup.openChatThread = function(appId, npcSlug) {{
                     html += '<div class="phone-reply-options' + replyPending + '">';
                     var choices = block.choices || [];
                     for (var ri = 0; ri < choices.length; ri++) {{
-                        html += '<button class="phone-reply-btn" data-conv-id="' + conv.id + '" data-choice="' + ri + '" data-round="' + blockRound + '">' + choices[ri].text + '</button>';
+                        html += '<button class="phone-reply-btn" data-conv-id="' + conv.id + '" data-choice="' + ri + '" data-round="' + blockRound + '">' + setup.resolveAtRefs(choices[ri].text) + '</button>';
                     }}
                     html += '</div>';
                 }}
@@ -2054,9 +2054,9 @@ setup.openChatThread = function(appId, npcSlug) {{
     var chatHistory = ((ps.daily_chat_history || {{}})[npcSlug]) || [];
     for (var dh = 0; dh < chatHistory.length; dh++) {{
         var dmsg = chatHistory[dh];
-        html += '<div class="phone-bubble phone-bubble-player">' + dmsg.player_message + '</div>';
+        html += '<div class="phone-bubble phone-bubble-player">' + setup.resolveAtRefs(dmsg.player_message) + '</div>';
         if (dmsg.image) html += '<img src="{video_path_js}/' + dmsg.image + '" class="phone-chat-image" onerror="this.remove()">';
-        html += '<div class="phone-bubble phone-bubble-npc">' + dmsg.npc_response + '</div>';
+        html += '<div class="phone-bubble phone-bubble-npc">' + setup.resolveAtRefs(dmsg.npc_response) + '</div>';
     }}
     // Daily chat: show "Say something..." area if daily limit not reached
     var dailyTopics = (setup.phone_data || {{}}).daily_topics || [];
@@ -2086,9 +2086,9 @@ setup.openChatThread = function(appId, npcSlug) {{
         for (var phi = 0; phi < photoTopics.length; phi++) {{
             var ph = photoTopics[phi];
             if (ph.corruption_min != null && _corr < ph.corruption_min) {{
-                photoHtml += '<div class="phone-daily-locked">🔒 ' + ph.player_message + '</div>';
+                photoHtml += '<div class="phone-daily-locked">🔒 ' + setup.resolveAtRefs(ph.player_message) + '</div>';
             }} else if (npcDc.topic_days[ph.id] !== currentDayKey) {{
-                photoHtml += '<button class="phone-daily-btn" data-npc="' + npcSlug + '" data-topic-id="' + ph.id + '">' + ph.player_message + '</button>';
+                photoHtml += '<button class="phone-daily-btn" data-npc="' + npcSlug + '" data-topic-id="' + ph.id + '">' + setup.resolveAtRefs(ph.player_message) + '</button>';
             }}
         }}
         // Legacy "Say something" — per-NPC 1/day over non-photo topics.
@@ -2108,7 +2108,7 @@ setup.openChatThread = function(appId, npcSlug) {{
             }}
             var shown = available.slice(0, 3);
             for (var sti = 0; sti < shown.length; sti++) {{
-                sayHtml += '<button class="phone-daily-btn" data-npc="' + npcSlug + '" data-topic-id="' + shown[sti].id + '">' + shown[sti].player_message + '</button>';
+                sayHtml += '<button class="phone-daily-btn" data-npc="' + npcSlug + '" data-topic-id="' + shown[sti].id + '">' + setup.resolveAtRefs(shown[sti].player_message) + '</button>';
             }}
         }}
         if (photoHtml || sayHtml) {{
