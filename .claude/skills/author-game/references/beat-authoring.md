@@ -68,5 +68,12 @@ Run with the repo venv active (`source venv/bin/activate`), in order; emit a PAS
    - **`[settings]` scoping** — clothing / rent / phone keys live under `[settings]`, never bare.
    - **`is_container` swallow** — no activity / ambient / capstone attached to a container
      location (containers are pure-nav and swallow attached canvases).
+   - **engine-set flag gating** — do NOT gate a canvas *trigger* on a flag the engine sets
+     rather than a canvas: the rent `eviction_flag` (e.g. `bar_seized`/`rent_evicted`) and the
+     `[engine.daily_tick]` flags. The flag-chain validator only recognizes *canvas-set* flags as
+     gate-satisfiable, so `package_from_toml` fails with `✗ <flag>  NEVER SET`. Instead gate on a
+     canvas-set flag (+ `requires_npc`/schedule for timing), or — if you truly need to react to an
+     engine flag — deliver that content via a phone-thread condition (phone delivery conditions are
+     not flag-chain-validated). Only `is_true` gates are checked; `is_false` guards are exempt.
 
 Any FAIL → fix, re-run, then mark validated.
