@@ -1,0 +1,3698 @@
+{
+  "generated_at": "2026-06-01T17:30:28.019Z",
+  "variables": {
+    "last_game_passage": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 8,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "Start",
+        "StartingCanvas_canvas_first_morning_Node_1",
+        "Location_Main_Street",
+        "Canvas_canvas_hank_hire_Node_1",
+        "Location_Mel's_—_Dining_Floor",
+        "Canvas_activity_walk_home_Node_1",
+        "Location_Building_Front",
+        "Location_Building_Hallway"
+      ]
+    },
+    "player.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "Maya"
+      ]
+    },
+    "player.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "maya.jpg"
+      ]
+    },
+    "player.current_location": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 5,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "",
+        "163b69cb-f1c7-4824-9a94-5a8439fec41f",
+        "6f0b88a9-10e5-4481-9585-88855f38c53c",
+        "e4603450-b32b-41ec-adb7-11c93b757c18",
+        "544a15ff-6d7d-4899-b024-87b8e8c57c6b"
+      ]
+    },
+    "player.core_traits.corruption": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.arousal": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 10,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 11,
+        "min": 0,
+        "max": 10,
+        "first": 0,
+        "last": 10,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": false
+      }
+    },
+    "player.core_traits.energy": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 20,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 21,
+        "min": 2,
+        "max": 100,
+        "first": 100,
+        "last": 2,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": false
+      }
+    },
+    "player.core_traits.hygiene": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 18,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 19,
+        "min": -80,
+        "max": 100,
+        "first": 100,
+        "last": -80,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": false
+      }
+    },
+    "player.core_traits.money": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 3,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 4,
+        "min": 50,
+        "max": 200,
+        "first": 60,
+        "last": 50,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": false
+      }
+    },
+    "player.core_traits.hank_stage": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.ben_stage": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.cole_stage": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.rosa_stage": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.fitness": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.beauty": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.exhibitionism": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.pregnancy": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.wardrobe.plain_bra.id": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "plain_bra"
+      ]
+    },
+    "player.wardrobe.plain_bra.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "Plain Bra"
+      ]
+    },
+    "player.wardrobe.plain_bra.slot": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "bra"
+      ]
+    },
+    "player.wardrobe.plain_bra.image": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "./videos/clothing/plain_bra.jpg"
+      ]
+    },
+    "player.wardrobe.cotton_briefs.id": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "cotton_briefs"
+      ]
+    },
+    "player.wardrobe.cotton_briefs.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "Cotton Briefs"
+      ]
+    },
+    "player.wardrobe.cotton_briefs.slot": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "underwear"
+      ]
+    },
+    "player.wardrobe.cotton_briefs.image": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "./videos/clothing/cotton_briefs.jpg"
+      ]
+    },
+    "player.wardrobe.faded_tee.id": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "faded_tee"
+      ]
+    },
+    "player.wardrobe.faded_tee.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "Faded T-Shirt"
+      ]
+    },
+    "player.wardrobe.faded_tee.slot": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "top"
+      ]
+    },
+    "player.wardrobe.faded_tee.image": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "./videos/clothing/faded_tee.jpg"
+      ]
+    },
+    "player.wardrobe.old_jeans.id": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "old_jeans"
+      ]
+    },
+    "player.wardrobe.old_jeans.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "Old Jeans"
+      ]
+    },
+    "player.wardrobe.old_jeans.slot": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "bottom"
+      ]
+    },
+    "player.wardrobe.old_jeans.image": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "./videos/clothing/old_jeans.jpg"
+      ]
+    },
+    "player.wardrobe.scuffed_sneakers.id": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "scuffed_sneakers"
+      ]
+    },
+    "player.wardrobe.scuffed_sneakers.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "Scuffed Sneakers"
+      ]
+    },
+    "player.wardrobe.scuffed_sneakers.slot": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "shoes"
+      ]
+    },
+    "player.wardrobe.scuffed_sneakers.image": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "./videos/clothing/scuffed_sneakers.jpg"
+      ]
+    },
+    "player.wardrobe.thrift_sundress.id": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "thrift_sundress"
+      ]
+    },
+    "player.wardrobe.thrift_sundress.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "Thrift Sundress"
+      ]
+    },
+    "player.wardrobe.thrift_sundress.slot": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "dress"
+      ]
+    },
+    "player.wardrobe.thrift_sundress.image": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "./videos/clothing/thrift_sundress.jpg"
+      ]
+    },
+    "player.equipped.bra": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "plain_bra"
+      ]
+    },
+    "player.equipped.underwear": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "cotton_briefs"
+      ]
+    },
+    "player.equipped.top": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "faded_tee"
+      ]
+    },
+    "player.equipped.bottom": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "old_jeans"
+      ]
+    },
+    "player.equipped.dress": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "thrift_sundress"
+      ]
+    },
+    "player.equipped.legwear": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10
+    },
+    "player.equipped.shoes": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "scuffed_sneakers"
+      ]
+    },
+    "npcs.bab7762f-85da-4913-9e90-62953c931450.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "Hank"
+      ]
+    },
+    "npcs.bab7762f-85da-4913-9e90-62953c931450.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "hank.jpg"
+      ]
+    },
+    "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.arousal": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 3,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 4,
+        "min": 0,
+        "max": 3,
+        "first": 0,
+        "last": 3,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": false
+      }
+    },
+    "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.corruption": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 7,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 7,
+        "min": 0,
+        "max": 3,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": false
+      }
+    },
+    "npcs.bab7762f-85da-4913-9e90-62953c931450.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10
+    },
+    "npcs.bab7762f-85da-4913-9e90-62953c931450.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        ""
+      ]
+    },
+    "npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "Ben"
+      ]
+    },
+    "npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "ben.jpg"
+      ]
+    },
+    "npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.core_traits.arousal": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 3,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 4,
+        "min": 0,
+        "max": 3,
+        "first": 0,
+        "last": 3,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": false
+      }
+    },
+    "npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.core_traits.relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10
+    },
+    "npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        ""
+      ]
+    },
+    "npcs.be1e5482-e1cd-4be0-95f8-313d0c2d0585.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "Cole"
+      ]
+    },
+    "npcs.be1e5482-e1cd-4be0-95f8-313d0c2d0585.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "cole.jpg"
+      ]
+    },
+    "npcs.be1e5482-e1cd-4be0-95f8-313d0c2d0585.core_traits.relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.be1e5482-e1cd-4be0-95f8-313d0c2d0585.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10
+    },
+    "npcs.be1e5482-e1cd-4be0-95f8-313d0c2d0585.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        ""
+      ]
+    },
+    "npcs.21afa275-ca8b-479b-9ff9-26bb68161b72.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "Rosa"
+      ]
+    },
+    "npcs.21afa275-ca8b-479b-9ff9-26bb68161b72.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "rosa.jpg"
+      ]
+    },
+    "npcs.21afa275-ca8b-479b-9ff9-26bb68161b72.core_traits.relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.21afa275-ca8b-479b-9ff9-26bb68161b72.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10
+    },
+    "npcs.21afa275-ca8b-479b-9ff9-26bb68161b72.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        ""
+      ]
+    },
+    "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "Pam"
+      ]
+    },
+    "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "pam.jpg"
+      ]
+    },
+    "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 18,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 19,
+        "min": 1.3999999999999977,
+        "max": 5,
+        "first": 5,
+        "last": 1.3999999999999977,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": false
+      }
+    },
+    "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.awareness": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10
+    },
+    "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        ""
+      ]
+    },
+    "npcs.b248371e-a0e6-44b2-852c-1fda2a285ad7.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "Vince"
+      ]
+    },
+    "npcs.b248371e-a0e6-44b2-852c-1fda2a285ad7.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "vince.jpg"
+      ]
+    },
+    "npcs.b248371e-a0e6-44b2-852c-1fda2a285ad7.core_traits.relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.b248371e-a0e6-44b2-852c-1fda2a285ad7.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10
+    },
+    "npcs.b248371e-a0e6-44b2-852c-1fda2a285ad7.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        ""
+      ]
+    },
+    "flags.rent_evicted": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "flags.game_started": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "bool_values": [
+        true
+      ]
+    },
+    "flags.debug_mode": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "bool_values": [
+        false
+      ]
+    },
+    "game_state.current_canvas": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 3,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "",
+        "55aa4e53-4fb4-49c7-bbb7-a3c294e6a863",
+        "9e5fc796-1dc9-4ded-8d86-18b86baffece",
+        "0dfcc336-47ab-4738-8c48-68ea0d24b372"
+      ]
+    },
+    "game_state.visited_locations": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10
+    },
+    "game_state.visited_nodes": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10
+    },
+    "game_state.scheduled": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10
+    },
+    "game_state.fast_jobs.xp": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.bank.balance": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.time_state.current_hour": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 2,
+        "min": 6,
+        "max": 8,
+        "first": 8,
+        "last": 6,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.time_state.current_minute": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 5,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 4,
+        "min": 0,
+        "max": 40,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": false
+      }
+    },
+    "game_state.time_state.current_day": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 18,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "string_samples": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ]
+    },
+    "game_state.time_state.current_week": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 2,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 3,
+        "min": 1,
+        "max": 3,
+        "first": 1,
+        "last": 3,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": false
+      }
+    },
+    "game_state.time_state.day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 18,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 19,
+        "min": 1,
+        "max": 19,
+        "first": 1,
+        "last": 19,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": false
+      }
+    },
+    "game_state.rent_state.last_paid_week": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.rent_state.warnings": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 2,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "number_stats": {
+        "count": 102,
+        "unique_count": 2,
+        "min": 0,
+        "max": 1,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.rent_state.is_due": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 6,
+      "first_ts": 1780333459000,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 10,
+      "bool_values": [
+        false,
+        true
+      ]
+    },
+    "game_state.trigger_history.55aa4e53-4fb4-49c7-bbb7-a3c294e6a863.total": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333861323,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 95,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.trigger_history.55aa4e53-4fb4-49c7-bbb7-a3c294e6a863.dayKey": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333861323,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "1:Monday"
+      ]
+    },
+    "game_state.trigger_history.55aa4e53-4fb4-49c7-bbb7-a3c294e6a863.dayCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333861323,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 9,
+      "number_stats": {
+        "count": 95,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.current_node": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 2,
+      "first_ts": 1780333861323,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 9,
+      "string_samples": [
+        "49c64744-cdce-46e6-b6d6-1178cf7942cd",
+        "6e027fd6-6f72-487e-bfcb-10eaecbdffe5",
+        "f8e62a57-c8fa-420a-883c-3fc6c4406795"
+      ]
+    },
+    "flags.first_morning_done": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333992897,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 8,
+      "bool_values": [
+        true
+      ]
+    },
+    "flags_meta.first_morning_done.set_day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780333992897,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 8,
+      "number_stats": {
+        "count": 89,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.trigger_history.9e5fc796-1dc9-4ded-8d86-18b86baffece.total": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334008825,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 8,
+      "number_stats": {
+        "count": 87,
+        "unique_count": 1,
+        "min": 2,
+        "max": 2,
+        "first": 2,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.trigger_history.9e5fc796-1dc9-4ded-8d86-18b86baffece.dayKey": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334008825,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 8,
+      "string_samples": [
+        "1:Monday"
+      ]
+    },
+    "game_state.trigger_history.9e5fc796-1dc9-4ded-8d86-18b86baffece.dayCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334008825,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 8,
+      "number_stats": {
+        "count": 87,
+        "unique_count": 1,
+        "min": 2,
+        "max": 2,
+        "first": 2,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.activity_trigger_history.Mel's — first visit.dayKey": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334008825,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 8,
+      "string_samples": [
+        "1:Monday"
+      ]
+    },
+    "game_state.activity_trigger_history.Mel's — first visit.dayCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334008825,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 8,
+      "number_stats": {
+        "count": 87,
+        "unique_count": 1,
+        "min": 2,
+        "max": 2,
+        "first": 2,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "flags.hired_at_diner": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334056373,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 7,
+      "bool_values": [
+        true
+      ]
+    },
+    "flags_meta.hired_at_diner.set_day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334056373,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 78,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "flags.talked_to_hank_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334130108,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 7,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.talked_to_ben_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334130108,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 7,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.talked_to_cole_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334130108,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 7,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.talked_to_rosa_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334130108,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 7,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.shift_worked_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334130108,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 7,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.did_laundry_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334130108,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 7,
+      "bool_values": [
+        false
+      ]
+    },
+    "last_day_snapshot.npc:bab7762f-85da-4913-9e90-62953c931450:relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 6,
+      "first_ts": 1780334130108,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 73,
+        "unique_count": 7,
+        "min": 0,
+        "max": 3,
+        "first": 3,
+        "last": 0,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": false
+      }
+    },
+    "last_day_snapshot.npc:42820a95-8df4-4b45-9a36-0533d05f7bd0:relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334130108,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 73,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "last_day_snapshot.npc:be1e5482-e1cd-4be0-95f8-313d0c2d0585:relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334130108,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 73,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "last_day_snapshot.npc:21afa275-ca8b-479b-9ff9-26bb68161b72:relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334130108,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 73,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 17,
+      "first_ts": 1780334130108,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 73,
+        "unique_count": 18,
+        "min": 1.5999999999999976,
+        "max": 5,
+        "first": 5,
+        "last": 1.5999999999999976,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": false
+      }
+    },
+    "last_day_snapshot.npc:b248371e-a0e6-44b2-852c-1fda2a285ad7:relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334130108,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 73,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.trigger_history.0dfcc336-47ab-4738-8c48-68ea0d24b372.total": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334368647,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 4,
+      "number_stats": {
+        "count": 40,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.trigger_history.0dfcc336-47ab-4738-8c48-68ea0d24b372.dayKey": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334368647,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 4,
+      "string_samples": [
+        "2:Friday"
+      ]
+    },
+    "game_state.trigger_history.0dfcc336-47ab-4738-8c48-68ea0d24b372.dayCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334368647,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 4,
+      "number_stats": {
+        "count": 40,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.activity_trigger_history.Walk back to the building.dayKey": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334368647,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 4,
+      "string_samples": [
+        "2:Friday"
+      ]
+    },
+    "game_state.activity_trigger_history.Walk back to the building.dayCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780334368647,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 4,
+      "number_stats": {
+        "count": 40,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "flags_meta.rent_evicted.set_day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780335010074,
+      "last_ts": 1780335015328,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 2,
+        "unique_count": 1,
+        "min": 19,
+        "max": 19,
+        "first": 19,
+        "last": 19,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    }
+  },
+  "prefix_clusters": {
+    "last": [
+      "last_game_passage",
+      "game_state.rent_state.last_paid_week"
+    ],
+    "name": [
+      "player.name",
+      "player.wardrobe.plain_bra.name",
+      "player.wardrobe.cotton_briefs.name",
+      "player.wardrobe.faded_tee.name",
+      "player.wardrobe.old_jeans.name",
+      "player.wardrobe.scuffed_sneakers.name",
+      "player.wardrobe.thrift_sundress.name",
+      "npcs.bab7762f-85da-4913-9e90-62953c931450.name",
+      "npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.name",
+      "npcs.be1e5482-e1cd-4be0-95f8-313d0c2d0585.name",
+      "npcs.21afa275-ca8b-479b-9ff9-26bb68161b72.name",
+      "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.name",
+      "npcs.b248371e-a0e6-44b2-852c-1fda2a285ad7.name"
+    ],
+    "portrait": [
+      "player.portrait",
+      "npcs.bab7762f-85da-4913-9e90-62953c931450.portrait",
+      "npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.portrait",
+      "npcs.be1e5482-e1cd-4be0-95f8-313d0c2d0585.portrait",
+      "npcs.21afa275-ca8b-479b-9ff9-26bb68161b72.portrait",
+      "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.portrait",
+      "npcs.b248371e-a0e6-44b2-852c-1fda2a285ad7.portrait"
+    ],
+    "current": [
+      "player.current_location",
+      "game_state.current_canvas",
+      "game_state.time_state.current_hour",
+      "game_state.time_state.current_minute",
+      "game_state.time_state.current_day",
+      "game_state.time_state.current_week",
+      "game_state.current_node"
+    ],
+    "corruption": [
+      "player.core_traits.corruption",
+      "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.corruption"
+    ],
+    "arousal": [
+      "player.core_traits.arousal",
+      "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.arousal",
+      "npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.core_traits.arousal"
+    ],
+    "id": [
+      "player.wardrobe.plain_bra.id",
+      "player.wardrobe.cotton_briefs.id",
+      "player.wardrobe.faded_tee.id",
+      "player.wardrobe.old_jeans.id",
+      "player.wardrobe.scuffed_sneakers.id",
+      "player.wardrobe.thrift_sundress.id"
+    ],
+    "slot": [
+      "player.wardrobe.plain_bra.slot",
+      "player.wardrobe.cotton_briefs.slot",
+      "player.wardrobe.faded_tee.slot",
+      "player.wardrobe.old_jeans.slot",
+      "player.wardrobe.scuffed_sneakers.slot",
+      "player.wardrobe.thrift_sundress.slot"
+    ],
+    "image": [
+      "player.wardrobe.plain_bra.image",
+      "player.wardrobe.cotton_briefs.image",
+      "player.wardrobe.faded_tee.image",
+      "player.wardrobe.old_jeans.image",
+      "player.wardrobe.scuffed_sneakers.image",
+      "player.wardrobe.thrift_sundress.image"
+    ],
+    "relation": [
+      "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.relation",
+      "npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.core_traits.relation",
+      "npcs.be1e5482-e1cd-4be0-95f8-313d0c2d0585.core_traits.relation",
+      "npcs.21afa275-ca8b-479b-9ff9-26bb68161b72.core_traits.relation",
+      "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation",
+      "npcs.b248371e-a0e6-44b2-852c-1fda2a285ad7.core_traits.relation"
+    ],
+    "schedule": [
+      "npcs.bab7762f-85da-4913-9e90-62953c931450.schedule",
+      "npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.schedule",
+      "npcs.be1e5482-e1cd-4be0-95f8-313d0c2d0585.schedule",
+      "npcs.21afa275-ca8b-479b-9ff9-26bb68161b72.schedule",
+      "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.schedule",
+      "npcs.b248371e-a0e6-44b2-852c-1fda2a285ad7.schedule"
+    ],
+    "relationship": [
+      "npcs.bab7762f-85da-4913-9e90-62953c931450.relationship",
+      "npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.relationship",
+      "npcs.be1e5482-e1cd-4be0-95f8-313d0c2d0585.relationship",
+      "npcs.21afa275-ca8b-479b-9ff9-26bb68161b72.relationship",
+      "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.relationship",
+      "npcs.b248371e-a0e6-44b2-852c-1fda2a285ad7.relationship"
+    ],
+    "visited": [
+      "game_state.visited_locations",
+      "game_state.visited_nodes"
+    ],
+    "total": [
+      "game_state.trigger_history.55aa4e53-4fb4-49c7-bbb7-a3c294e6a863.total",
+      "game_state.trigger_history.9e5fc796-1dc9-4ded-8d86-18b86baffece.total",
+      "game_state.trigger_history.0dfcc336-47ab-4738-8c48-68ea0d24b372.total"
+    ],
+    "daykey": [
+      "game_state.trigger_history.55aa4e53-4fb4-49c7-bbb7-a3c294e6a863.dayKey",
+      "game_state.trigger_history.9e5fc796-1dc9-4ded-8d86-18b86baffece.dayKey",
+      "game_state.activity_trigger_history.Mel's — first visit.dayKey",
+      "game_state.trigger_history.0dfcc336-47ab-4738-8c48-68ea0d24b372.dayKey",
+      "game_state.activity_trigger_history.Walk back to the building.dayKey"
+    ],
+    "daycount": [
+      "game_state.trigger_history.55aa4e53-4fb4-49c7-bbb7-a3c294e6a863.dayCount",
+      "game_state.trigger_history.9e5fc796-1dc9-4ded-8d86-18b86baffece.dayCount",
+      "game_state.activity_trigger_history.Mel's — first visit.dayCount",
+      "game_state.trigger_history.0dfcc336-47ab-4738-8c48-68ea0d24b372.dayCount",
+      "game_state.activity_trigger_history.Walk back to the building.dayCount"
+    ],
+    "set": [
+      "flags_meta.first_morning_done.set_day",
+      "flags_meta.hired_at_diner.set_day",
+      "flags_meta.rent_evicted.set_day"
+    ],
+    "talked": [
+      "flags.talked_to_hank_today",
+      "flags.talked_to_ben_today",
+      "flags.talked_to_cole_today",
+      "flags.talked_to_rosa_today"
+    ],
+    "npc": [
+      "last_day_snapshot.npc:bab7762f-85da-4913-9e90-62953c931450:relation",
+      "last_day_snapshot.npc:42820a95-8df4-4b45-9a36-0533d05f7bd0:relation",
+      "last_day_snapshot.npc:be1e5482-e1cd-4be0-95f8-313d0c2d0585:relation",
+      "last_day_snapshot.npc:21afa275-ca8b-479b-9ff9-26bb68161b72:relation",
+      "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation",
+      "last_day_snapshot.npc:b248371e-a0e6-44b2-852c-1fda2a285ad7:relation"
+    ]
+  },
+  "co_change": {
+    "game_state.current_canvas||last_game_passage": 3,
+    "last_game_passage||player.current_location": 5,
+    "game_state.time_state.current_minute||last_game_passage": 3,
+    "game_state.current_node||last_game_passage": 2,
+    "game_state.current_canvas||game_state.current_node": 2,
+    "last_game_passage||player.core_traits.energy": 2,
+    "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.relation||player.core_traits.energy": 7,
+    "game_state.time_state.current_minute||player.core_traits.energy": 4,
+    "game_state.time_state.current_minute||npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.relation": 2,
+    "player.core_traits.arousal||player.core_traits.energy": 10,
+    "player.core_traits.arousal||player.core_traits.hygiene": 10,
+    "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.arousal||player.core_traits.arousal": 3,
+    "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.relation||player.core_traits.arousal": 6,
+    "npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.core_traits.arousal||player.core_traits.arousal": 3,
+    "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation||player.core_traits.arousal": 10,
+    "game_state.time_state.current_day||player.core_traits.arousal": 10,
+    "game_state.time_state.day||player.core_traits.arousal": 10,
+    "player.core_traits.energy||player.core_traits.hygiene": 18,
+    "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.arousal||player.core_traits.energy": 3,
+    "npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.core_traits.arousal||player.core_traits.energy": 3,
+    "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation||player.core_traits.energy": 18,
+    "game_state.time_state.current_day||player.core_traits.energy": 18,
+    "game_state.time_state.day||player.core_traits.energy": 18,
+    "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.arousal||player.core_traits.hygiene": 3,
+    "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.relation||player.core_traits.hygiene": 6,
+    "npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.core_traits.arousal||player.core_traits.hygiene": 3,
+    "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation||player.core_traits.hygiene": 18,
+    "game_state.time_state.current_minute||player.core_traits.hygiene": 2,
+    "game_state.time_state.current_day||player.core_traits.hygiene": 18,
+    "game_state.time_state.day||player.core_traits.hygiene": 18,
+    "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.arousal||npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.relation": 3,
+    "npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.core_traits.arousal||npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.arousal": 3,
+    "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation||npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.arousal": 3,
+    "game_state.time_state.current_day||npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.arousal": 3,
+    "game_state.time_state.day||npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.arousal": 3,
+    "npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.core_traits.arousal||npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.relation": 3,
+    "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation||npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.relation": 6,
+    "game_state.time_state.current_day||npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.relation": 6,
+    "game_state.time_state.day||npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.relation": 6,
+    "npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.core_traits.arousal||npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation": 3,
+    "game_state.time_state.current_day||npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.core_traits.arousal": 3,
+    "game_state.time_state.day||npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.core_traits.arousal": 3,
+    "game_state.time_state.current_minute||npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation": 2,
+    "game_state.time_state.current_day||npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation": 18,
+    "game_state.time_state.day||npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation": 18,
+    "game_state.time_state.current_day||game_state.time_state.current_minute": 2,
+    "game_state.time_state.current_minute||game_state.time_state.day": 2,
+    "game_state.time_state.current_day||game_state.time_state.day": 18,
+    "last_day_snapshot.npc:bab7762f-85da-4913-9e90-62953c931450:relation||player.core_traits.arousal": 6,
+    "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation||player.core_traits.arousal": 9,
+    "last_day_snapshot.npc:bab7762f-85da-4913-9e90-62953c931450:relation||player.core_traits.energy": 6,
+    "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation||player.core_traits.energy": 17,
+    "last_day_snapshot.npc:bab7762f-85da-4913-9e90-62953c931450:relation||player.core_traits.hygiene": 6,
+    "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation||player.core_traits.hygiene": 17,
+    "last_day_snapshot.npc:bab7762f-85da-4913-9e90-62953c931450:relation||npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.arousal": 2,
+    "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation||npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.arousal": 2,
+    "last_day_snapshot.npc:bab7762f-85da-4913-9e90-62953c931450:relation||npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.relation": 5,
+    "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation||npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.relation": 5,
+    "last_day_snapshot.npc:bab7762f-85da-4913-9e90-62953c931450:relation||npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.core_traits.arousal": 2,
+    "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation||npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.core_traits.arousal": 2,
+    "last_day_snapshot.npc:bab7762f-85da-4913-9e90-62953c931450:relation||npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation": 6,
+    "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation||npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation": 17,
+    "game_state.time_state.current_day||last_day_snapshot.npc:bab7762f-85da-4913-9e90-62953c931450:relation": 6,
+    "game_state.time_state.current_day||last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation": 17,
+    "game_state.time_state.day||last_day_snapshot.npc:bab7762f-85da-4913-9e90-62953c931450:relation": 6,
+    "game_state.time_state.day||last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation": 17,
+    "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation||last_day_snapshot.npc:bab7762f-85da-4913-9e90-62953c931450:relation": 6,
+    "game_state.rent_state.is_due||player.core_traits.energy": 3,
+    "game_state.rent_state.is_due||player.core_traits.hygiene": 3,
+    "game_state.rent_state.is_due||npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation": 3,
+    "game_state.rent_state.is_due||game_state.time_state.current_day": 3,
+    "game_state.rent_state.is_due||game_state.time_state.day": 3,
+    "game_state.rent_state.is_due||last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation": 3,
+    "game_state.time_state.current_week||player.core_traits.energy": 2,
+    "game_state.time_state.current_week||player.core_traits.hygiene": 2,
+    "game_state.time_state.current_week||npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation": 2,
+    "game_state.time_state.current_day||game_state.time_state.current_week": 2,
+    "game_state.time_state.current_week||game_state.time_state.day": 2,
+    "game_state.time_state.current_week||last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation": 2,
+    "game_state.rent_state.is_due||game_state.rent_state.warnings": 2
+  },
+  "passages": {
+    "Start": {
+      "first_ts": 1780333459000,
+      "visit_count": 7
+    },
+    "StartingCanvas_canvas_first_morning_Node_1": {
+      "first_ts": 1780333861323,
+      "visit_count": 6
+    },
+    "Location_Main_Street": {
+      "first_ts": 1780333992897,
+      "visit_count": 18
+    },
+    "Canvas_canvas_hank_hire_Node_1": {
+      "first_ts": 1780334008825,
+      "visit_count": 9
+    },
+    "Location_Mel's_—_Dining_Floor": {
+      "first_ts": 1780334056373,
+      "visit_count": 16
+    },
+    "RentDay": {
+      "first_ts": 1780334213016,
+      "visit_count": 9
+    },
+    "RentDay_Paid": {
+      "first_ts": 1780334239162,
+      "visit_count": 3
+    },
+    "Canvas_activity_walk_home_Node_1": {
+      "first_ts": 1780334368647,
+      "visit_count": 5
+    },
+    "RentDay_Short": {
+      "first_ts": 1780334793138,
+      "visit_count": 5
+    },
+    "Location_Building_Front": {
+      "first_ts": 1780334822740,
+      "visit_count": 24
+    }
+  },
+  "choices": {
+    "total": 2,
+    "by_classification": {
+      "branch": 2
+    },
+    "price_observations": [],
+    "recent": [
+      {
+        "ts": 1780333965749,
+        "passage": "StartingCanvas_canvas_first_morning_Node_1",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "📋 Review Canvases",
+          ">",
+          ">>",
+          ">>>>>",
+          "+1hr",
+          "Next Day",
+          "📋 Quests",
+          "📊 Stats",
+          "📅 Schedules",
+          "🚩 Flags",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "Support Us",
+          "Saves",
+          "Restart",
+          "Look at the sign."
+        ],
+        "picked": "Look at the sign.",
+        "prices": null,
+        "at_state_hash": "86863af8919e7439"
+      },
+      {
+        "ts": 1780334034915,
+        "passage": "Canvas_canvas_hank_hire_Node_1",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "📋 Review Canvases",
+          ">",
+          ">>",
+          ">>>>>",
+          "+1hr",
+          "Next Day",
+          "📋 Quests",
+          "📊 Stats",
+          "📅 Schedules",
+          "🚩 Flags",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "-",
+          "+",
+          "Support Us",
+          "Saves",
+          "Restart",
+          "Look up."
+        ],
+        "picked": "Look up.",
+        "prices": null,
+        "at_state_hash": "bc27b48c4e84dc8d"
+      }
+    ]
+  },
+  "mutations": [
+    {
+      "ts": 1780333861323,
+      "passage": "StartingCanvas_canvas_first_morning_Node_1",
+      "state_hash": "86863af8919e7439",
+      "var": "last_game_passage",
+      "before": "Start",
+      "after": "StartingCanvas_canvas_first_morning_Node_1"
+    },
+    {
+      "ts": 1780333861323,
+      "passage": "StartingCanvas_canvas_first_morning_Node_1",
+      "state_hash": "86863af8919e7439",
+      "var": "game_state.current_canvas",
+      "before": "",
+      "after": "55aa4e53-4fb4-49c7-bbb7-a3c294e6a863"
+    },
+    {
+      "ts": 1780333992897,
+      "passage": "Location_Main_Street",
+      "state_hash": "491995bdd4a4a5b0",
+      "var": "last_game_passage",
+      "before": "StartingCanvas_canvas_first_morning_Node_1",
+      "after": "Location_Main_Street"
+    },
+    {
+      "ts": 1780333992897,
+      "passage": "Location_Main_Street",
+      "state_hash": "491995bdd4a4a5b0",
+      "var": "player.current_location",
+      "before": "",
+      "after": "163b69cb-f1c7-4824-9a94-5a8439fec41f"
+    },
+    {
+      "ts": 1780333992897,
+      "passage": "Location_Main_Street",
+      "state_hash": "491995bdd4a4a5b0",
+      "var": "game_state.time_state.current_minute",
+      "before": 0,
+      "after": 20
+    },
+    {
+      "ts": 1780334008825,
+      "passage": "Canvas_canvas_hank_hire_Node_1",
+      "state_hash": "bc27b48c4e84dc8d",
+      "var": "last_game_passage",
+      "before": "Location_Main_Street",
+      "after": "Canvas_canvas_hank_hire_Node_1"
+    },
+    {
+      "ts": 1780334008825,
+      "passage": "Canvas_canvas_hank_hire_Node_1",
+      "state_hash": "bc27b48c4e84dc8d",
+      "var": "player.current_location",
+      "before": "163b69cb-f1c7-4824-9a94-5a8439fec41f",
+      "after": "6f0b88a9-10e5-4481-9585-88855f38c53c"
+    },
+    {
+      "ts": 1780334008825,
+      "passage": "Canvas_canvas_hank_hire_Node_1",
+      "state_hash": "bc27b48c4e84dc8d",
+      "var": "game_state.current_canvas",
+      "before": "55aa4e53-4fb4-49c7-bbb7-a3c294e6a863",
+      "after": "9e5fc796-1dc9-4ded-8d86-18b86baffece"
+    },
+    {
+      "ts": 1780334008825,
+      "passage": "Canvas_canvas_hank_hire_Node_1",
+      "state_hash": "bc27b48c4e84dc8d",
+      "var": "game_state.current_node",
+      "before": "49c64744-cdce-46e6-b6d6-1178cf7942cd",
+      "after": "6e027fd6-6f72-487e-bfcb-10eaecbdffe5"
+    },
+    {
+      "ts": 1780334056373,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "87d40b22da57c7e0",
+      "var": "last_game_passage",
+      "before": "Canvas_canvas_hank_hire_Node_1",
+      "after": "Location_Mel's_—_Dining_Floor"
+    },
+    {
+      "ts": 1780334056373,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "87d40b22da57c7e0",
+      "var": "player.core_traits.energy",
+      "before": 100,
+      "after": 95
+    },
+    {
+      "ts": 1780334056373,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "87d40b22da57c7e0",
+      "var": "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.relation",
+      "before": 0,
+      "after": 3
+    },
+    {
+      "ts": 1780334056373,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "87d40b22da57c7e0",
+      "var": "game_state.time_state.current_minute",
+      "before": 20,
+      "after": 40
+    },
+    {
+      "ts": 1780334104495,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "767ed0153ac6e7ee",
+      "var": "player.core_traits.money",
+      "before": 60,
+      "after": 200
+    },
+    {
+      "ts": 1780334130108,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "b5402ef4e24b3446",
+      "var": "player.core_traits.arousal",
+      "before": 0,
+      "after": 1
+    },
+    {
+      "ts": 1780334130108,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "b5402ef4e24b3446",
+      "var": "player.core_traits.energy",
+      "before": 95,
+      "after": 90
+    },
+    {
+      "ts": 1780334130108,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "b5402ef4e24b3446",
+      "var": "player.core_traits.hygiene",
+      "before": 100,
+      "after": 90
+    },
+    {
+      "ts": 1780334130108,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "b5402ef4e24b3446",
+      "var": "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.arousal",
+      "before": 0,
+      "after": 1
+    },
+    {
+      "ts": 1780334130108,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "b5402ef4e24b3446",
+      "var": "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.relation",
+      "before": 3,
+      "after": 2.5
+    },
+    {
+      "ts": 1780334130108,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "b5402ef4e24b3446",
+      "var": "npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.core_traits.arousal",
+      "before": 0,
+      "after": 1
+    },
+    {
+      "ts": 1780334130108,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "b5402ef4e24b3446",
+      "var": "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation",
+      "before": 5,
+      "after": 4.8
+    },
+    {
+      "ts": 1780334130108,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "b5402ef4e24b3446",
+      "var": "game_state.time_state.current_hour",
+      "before": 8,
+      "after": 6
+    },
+    {
+      "ts": 1780334130108,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "b5402ef4e24b3446",
+      "var": "game_state.time_state.current_minute",
+      "before": 40,
+      "after": 0
+    },
+    {
+      "ts": 1780334130108,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "b5402ef4e24b3446",
+      "var": "game_state.time_state.current_day",
+      "before": "Monday",
+      "after": "Tuesday"
+    },
+    {
+      "ts": 1780334130108,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "b5402ef4e24b3446",
+      "var": "game_state.time_state.day",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "ts": 1780334141535,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "279b3013153151ae",
+      "var": "player.core_traits.arousal",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "ts": 1780334141535,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "279b3013153151ae",
+      "var": "player.core_traits.energy",
+      "before": 90,
+      "after": 85
+    },
+    {
+      "ts": 1780334141535,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "279b3013153151ae",
+      "var": "player.core_traits.hygiene",
+      "before": 90,
+      "after": 80
+    },
+    {
+      "ts": 1780334141535,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "279b3013153151ae",
+      "var": "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.arousal",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "ts": 1780334141535,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "279b3013153151ae",
+      "var": "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.relation",
+      "before": 2.5,
+      "after": 2
+    },
+    {
+      "ts": 1780334141535,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "279b3013153151ae",
+      "var": "npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.core_traits.arousal",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "ts": 1780334141535,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "279b3013153151ae",
+      "var": "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation",
+      "before": 4.8,
+      "after": 4.6
+    },
+    {
+      "ts": 1780334141535,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "279b3013153151ae",
+      "var": "game_state.time_state.current_day",
+      "before": "Tuesday",
+      "after": "Wednesday"
+    },
+    {
+      "ts": 1780334141535,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "279b3013153151ae",
+      "var": "game_state.time_state.day",
+      "before": 2,
+      "after": 3
+    },
+    {
+      "ts": 1780334141535,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "279b3013153151ae",
+      "var": "last_day_snapshot.npc:bab7762f-85da-4913-9e90-62953c931450:relation",
+      "before": 3,
+      "after": 2.5
+    },
+    {
+      "ts": 1780334141535,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "279b3013153151ae",
+      "var": "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation",
+      "before": 5,
+      "after": 4.8
+    },
+    {
+      "ts": 1780334152981,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "102dcd726a7321a0",
+      "var": "player.core_traits.arousal",
+      "before": 2,
+      "after": 3
+    },
+    {
+      "ts": 1780334152981,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "102dcd726a7321a0",
+      "var": "player.core_traits.energy",
+      "before": 85,
+      "after": 80
+    },
+    {
+      "ts": 1780334152981,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "102dcd726a7321a0",
+      "var": "player.core_traits.hygiene",
+      "before": 80,
+      "after": 70
+    },
+    {
+      "ts": 1780334152981,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "102dcd726a7321a0",
+      "var": "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.arousal",
+      "before": 2,
+      "after": 3
+    },
+    {
+      "ts": 1780334152981,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "102dcd726a7321a0",
+      "var": "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.relation",
+      "before": 2,
+      "after": 1.5
+    },
+    {
+      "ts": 1780334152981,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "102dcd726a7321a0",
+      "var": "npcs.42820a95-8df4-4b45-9a36-0533d05f7bd0.core_traits.arousal",
+      "before": 2,
+      "after": 3
+    },
+    {
+      "ts": 1780334152981,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "102dcd726a7321a0",
+      "var": "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation",
+      "before": 4.6,
+      "after": 4.3999999999999995
+    },
+    {
+      "ts": 1780334152981,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "102dcd726a7321a0",
+      "var": "game_state.time_state.current_day",
+      "before": "Wednesday",
+      "after": "Thursday"
+    },
+    {
+      "ts": 1780334152981,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "102dcd726a7321a0",
+      "var": "game_state.time_state.day",
+      "before": 3,
+      "after": 4
+    },
+    {
+      "ts": 1780334152981,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "102dcd726a7321a0",
+      "var": "last_day_snapshot.npc:bab7762f-85da-4913-9e90-62953c931450:relation",
+      "before": 2.5,
+      "after": 2
+    },
+    {
+      "ts": 1780334152981,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "102dcd726a7321a0",
+      "var": "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation",
+      "before": 4.8,
+      "after": 4.6
+    },
+    {
+      "ts": 1780334164346,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "d81a1928d3b3b14d",
+      "var": "player.core_traits.arousal",
+      "before": 3,
+      "after": 4
+    },
+    {
+      "ts": 1780334164346,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "d81a1928d3b3b14d",
+      "var": "player.core_traits.energy",
+      "before": 80,
+      "after": 75
+    },
+    {
+      "ts": 1780334164346,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "d81a1928d3b3b14d",
+      "var": "player.core_traits.hygiene",
+      "before": 70,
+      "after": 60
+    },
+    {
+      "ts": 1780334164346,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "d81a1928d3b3b14d",
+      "var": "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.relation",
+      "before": 1.5,
+      "after": 1
+    },
+    {
+      "ts": 1780334164346,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "d81a1928d3b3b14d",
+      "var": "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation",
+      "before": 4.3999999999999995,
+      "after": 4.199999999999999
+    },
+    {
+      "ts": 1780334164346,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "d81a1928d3b3b14d",
+      "var": "game_state.time_state.current_day",
+      "before": "Thursday",
+      "after": "Friday"
+    },
+    {
+      "ts": 1780334164346,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "d81a1928d3b3b14d",
+      "var": "game_state.time_state.day",
+      "before": 4,
+      "after": 5
+    },
+    {
+      "ts": 1780334164346,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "d81a1928d3b3b14d",
+      "var": "game_state.rent_state.is_due",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1780334164346,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "d81a1928d3b3b14d",
+      "var": "last_day_snapshot.npc:bab7762f-85da-4913-9e90-62953c931450:relation",
+      "before": 2,
+      "after": 1.5
+    },
+    {
+      "ts": 1780334164346,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "d81a1928d3b3b14d",
+      "var": "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation",
+      "before": 4.6,
+      "after": 4.3999999999999995
+    },
+    {
+      "ts": 1780334175755,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "7074e2b73a840b7b",
+      "var": "player.core_traits.arousal",
+      "before": 4,
+      "after": 5
+    },
+    {
+      "ts": 1780334175755,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "7074e2b73a840b7b",
+      "var": "player.core_traits.energy",
+      "before": 75,
+      "after": 70
+    },
+    {
+      "ts": 1780334175755,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "7074e2b73a840b7b",
+      "var": "player.core_traits.hygiene",
+      "before": 60,
+      "after": 50
+    },
+    {
+      "ts": 1780334175755,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "7074e2b73a840b7b",
+      "var": "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.relation",
+      "before": 1,
+      "after": 0.5
+    },
+    {
+      "ts": 1780334175755,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "7074e2b73a840b7b",
+      "var": "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation",
+      "before": 4.199999999999999,
+      "after": 3.999999999999999
+    },
+    {
+      "ts": 1780334175755,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "7074e2b73a840b7b",
+      "var": "game_state.time_state.current_day",
+      "before": "Friday",
+      "after": "Saturday"
+    },
+    {
+      "ts": 1780334175755,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "7074e2b73a840b7b",
+      "var": "game_state.time_state.day",
+      "before": 5,
+      "after": 6
+    },
+    {
+      "ts": 1780334175755,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "7074e2b73a840b7b",
+      "var": "last_day_snapshot.npc:bab7762f-85da-4913-9e90-62953c931450:relation",
+      "before": 1.5,
+      "after": 1
+    },
+    {
+      "ts": 1780334175755,
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "state_hash": "7074e2b73a840b7b",
+      "var": "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation",
+      "before": 4.3999999999999995,
+      "after": 4.199999999999999
+    },
+    {
+      "ts": 1780334213016,
+      "passage": "RentDay",
+      "state_hash": "a0e151727c9f94f7",
+      "var": "last_game_passage",
+      "before": "Location_Mel's_—_Dining_Floor",
+      "after": "Location_Main_Street"
+    },
+    {
+      "ts": 1780334213016,
+      "passage": "RentDay",
+      "state_hash": "a0e151727c9f94f7",
+      "var": "player.current_location",
+      "before": "6f0b88a9-10e5-4481-9585-88855f38c53c",
+      "after": "163b69cb-f1c7-4824-9a94-5a8439fec41f"
+    },
+    {
+      "ts": 1780334239162,
+      "passage": "RentDay_Paid",
+      "state_hash": "04ca161a694453db",
+      "var": "player.core_traits.money",
+      "before": 200,
+      "after": 75
+    },
+    {
+      "ts": 1780334239162,
+      "passage": "RentDay_Paid",
+      "state_hash": "04ca161a694453db",
+      "var": "game_state.rent_state.is_due",
+      "before": true,
+      "after": false
+    },
+    {
+      "ts": 1780334275155,
+      "passage": "Location_Main_Street",
+      "state_hash": "081a26b219c932bb",
+      "var": "player.core_traits.money",
+      "before": 75,
+      "after": 50
+    },
+    {
+      "ts": 1780334280388,
+      "passage": "Location_Main_Street",
+      "state_hash": "f1ef22431b9e63b9",
+      "var": "player.core_traits.arousal",
+      "before": 5,
+      "after": 6
+    },
+    {
+      "ts": 1780334280388,
+      "passage": "Location_Main_Street",
+      "state_hash": "f1ef22431b9e63b9",
+      "var": "player.core_traits.energy",
+      "before": 70,
+      "after": 65
+    },
+    {
+      "ts": 1780334280388,
+      "passage": "Location_Main_Street",
+      "state_hash": "f1ef22431b9e63b9",
+      "var": "player.core_traits.hygiene",
+      "before": 50,
+      "after": 40
+    },
+    {
+      "ts": 1780334280388,
+      "passage": "Location_Main_Street",
+      "state_hash": "f1ef22431b9e63b9",
+      "var": "npcs.bab7762f-85da-4913-9e90-62953c931450.core_traits.relation",
+      "before": 0.5,
+      "after": 0
+    },
+    {
+      "ts": 1780334280388,
+      "passage": "Location_Main_Street",
+      "state_hash": "f1ef22431b9e63b9",
+      "var": "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation",
+      "before": 3.999999999999999,
+      "after": 3.799999999999999
+    },
+    {
+      "ts": 1780334280388,
+      "passage": "Location_Main_Street",
+      "state_hash": "f1ef22431b9e63b9",
+      "var": "game_state.time_state.current_day",
+      "before": "Saturday",
+      "after": "Sunday"
+    },
+    {
+      "ts": 1780334280388,
+      "passage": "Location_Main_Street",
+      "state_hash": "f1ef22431b9e63b9",
+      "var": "game_state.time_state.day",
+      "before": 6,
+      "after": 7
+    },
+    {
+      "ts": 1780334280388,
+      "passage": "Location_Main_Street",
+      "state_hash": "f1ef22431b9e63b9",
+      "var": "last_day_snapshot.npc:bab7762f-85da-4913-9e90-62953c931450:relation",
+      "before": 1,
+      "after": 0.5
+    },
+    {
+      "ts": 1780334280388,
+      "passage": "Location_Main_Street",
+      "state_hash": "f1ef22431b9e63b9",
+      "var": "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation",
+      "before": 4.199999999999999,
+      "after": 3.999999999999999
+    },
+    {
+      "ts": 1780334291833,
+      "passage": "Location_Main_Street",
+      "state_hash": "8065428fc0710eaf",
+      "var": "player.core_traits.arousal",
+      "before": 6,
+      "after": 7
+    },
+    {
+      "ts": 1780334291833,
+      "passage": "Location_Main_Street",
+      "state_hash": "8065428fc0710eaf",
+      "var": "player.core_traits.energy",
+      "before": 65,
+      "after": 60
+    },
+    {
+      "ts": 1780334291833,
+      "passage": "Location_Main_Street",
+      "state_hash": "8065428fc0710eaf",
+      "var": "player.core_traits.hygiene",
+      "before": 40,
+      "after": 30
+    },
+    {
+      "ts": 1780334291833,
+      "passage": "Location_Main_Street",
+      "state_hash": "8065428fc0710eaf",
+      "var": "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation",
+      "before": 3.799999999999999,
+      "after": 3.5999999999999988
+    },
+    {
+      "ts": 1780334291833,
+      "passage": "Location_Main_Street",
+      "state_hash": "8065428fc0710eaf",
+      "var": "game_state.time_state.current_day",
+      "before": "Sunday",
+      "after": "Monday"
+    },
+    {
+      "ts": 1780334291833,
+      "passage": "Location_Main_Street",
+      "state_hash": "8065428fc0710eaf",
+      "var": "game_state.time_state.current_week",
+      "before": 1,
+      "after": 2
+    },
+    {
+      "ts": 1780334291833,
+      "passage": "Location_Main_Street",
+      "state_hash": "8065428fc0710eaf",
+      "var": "game_state.time_state.day",
+      "before": 7,
+      "after": 8
+    },
+    {
+      "ts": 1780334291833,
+      "passage": "Location_Main_Street",
+      "state_hash": "8065428fc0710eaf",
+      "var": "last_day_snapshot.npc:bab7762f-85da-4913-9e90-62953c931450:relation",
+      "before": 0.5,
+      "after": 0
+    },
+    {
+      "ts": 1780334291833,
+      "passage": "Location_Main_Street",
+      "state_hash": "8065428fc0710eaf",
+      "var": "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation",
+      "before": 3.999999999999999,
+      "after": 3.799999999999999
+    },
+    {
+      "ts": 1780334303333,
+      "passage": "Location_Main_Street",
+      "state_hash": "dd37dda36f20f4b1",
+      "var": "player.core_traits.arousal",
+      "before": 7,
+      "after": 8
+    },
+    {
+      "ts": 1780334303333,
+      "passage": "Location_Main_Street",
+      "state_hash": "dd37dda36f20f4b1",
+      "var": "player.core_traits.energy",
+      "before": 60,
+      "after": 55
+    },
+    {
+      "ts": 1780334303333,
+      "passage": "Location_Main_Street",
+      "state_hash": "dd37dda36f20f4b1",
+      "var": "player.core_traits.hygiene",
+      "before": 30,
+      "after": 20
+    },
+    {
+      "ts": 1780334303333,
+      "passage": "Location_Main_Street",
+      "state_hash": "dd37dda36f20f4b1",
+      "var": "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation",
+      "before": 3.5999999999999988,
+      "after": 3.3999999999999986
+    },
+    {
+      "ts": 1780334303333,
+      "passage": "Location_Main_Street",
+      "state_hash": "dd37dda36f20f4b1",
+      "var": "game_state.time_state.current_day",
+      "before": "Monday",
+      "after": "Tuesday"
+    },
+    {
+      "ts": 1780334303333,
+      "passage": "Location_Main_Street",
+      "state_hash": "dd37dda36f20f4b1",
+      "var": "game_state.time_state.day",
+      "before": 8,
+      "after": 9
+    },
+    {
+      "ts": 1780334303333,
+      "passage": "Location_Main_Street",
+      "state_hash": "dd37dda36f20f4b1",
+      "var": "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation",
+      "before": 3.799999999999999,
+      "after": 3.5999999999999988
+    },
+    {
+      "ts": 1780334314803,
+      "passage": "Location_Main_Street",
+      "state_hash": "61176bfc76c4896c",
+      "var": "player.core_traits.arousal",
+      "before": 8,
+      "after": 9
+    },
+    {
+      "ts": 1780334314803,
+      "passage": "Location_Main_Street",
+      "state_hash": "61176bfc76c4896c",
+      "var": "player.core_traits.energy",
+      "before": 55,
+      "after": 50
+    },
+    {
+      "ts": 1780334314803,
+      "passage": "Location_Main_Street",
+      "state_hash": "61176bfc76c4896c",
+      "var": "player.core_traits.hygiene",
+      "before": 20,
+      "after": 10
+    },
+    {
+      "ts": 1780334314803,
+      "passage": "Location_Main_Street",
+      "state_hash": "61176bfc76c4896c",
+      "var": "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation",
+      "before": 3.3999999999999986,
+      "after": 3.1999999999999984
+    },
+    {
+      "ts": 1780334314803,
+      "passage": "Location_Main_Street",
+      "state_hash": "61176bfc76c4896c",
+      "var": "game_state.time_state.current_day",
+      "before": "Tuesday",
+      "after": "Wednesday"
+    },
+    {
+      "ts": 1780334314803,
+      "passage": "Location_Main_Street",
+      "state_hash": "61176bfc76c4896c",
+      "var": "game_state.time_state.day",
+      "before": 9,
+      "after": 10
+    },
+    {
+      "ts": 1780334314803,
+      "passage": "Location_Main_Street",
+      "state_hash": "61176bfc76c4896c",
+      "var": "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation",
+      "before": 3.5999999999999988,
+      "after": 3.3999999999999986
+    },
+    {
+      "ts": 1780334326269,
+      "passage": "Location_Main_Street",
+      "state_hash": "16a2c46b0447b2ca",
+      "var": "player.core_traits.arousal",
+      "before": 9,
+      "after": 10
+    },
+    {
+      "ts": 1780334326269,
+      "passage": "Location_Main_Street",
+      "state_hash": "16a2c46b0447b2ca",
+      "var": "player.core_traits.energy",
+      "before": 50,
+      "after": 45
+    },
+    {
+      "ts": 1780334326269,
+      "passage": "Location_Main_Street",
+      "state_hash": "16a2c46b0447b2ca",
+      "var": "player.core_traits.hygiene",
+      "before": 10,
+      "after": 0
+    },
+    {
+      "ts": 1780334326269,
+      "passage": "Location_Main_Street",
+      "state_hash": "16a2c46b0447b2ca",
+      "var": "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation",
+      "before": 3.1999999999999984,
+      "after": 2.9999999999999982
+    },
+    {
+      "ts": 1780334326269,
+      "passage": "Location_Main_Street",
+      "state_hash": "16a2c46b0447b2ca",
+      "var": "game_state.time_state.current_day",
+      "before": "Wednesday",
+      "after": "Thursday"
+    },
+    {
+      "ts": 1780334326269,
+      "passage": "Location_Main_Street",
+      "state_hash": "16a2c46b0447b2ca",
+      "var": "game_state.time_state.day",
+      "before": 10,
+      "after": 11
+    },
+    {
+      "ts": 1780334326269,
+      "passage": "Location_Main_Street",
+      "state_hash": "16a2c46b0447b2ca",
+      "var": "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation",
+      "before": 3.3999999999999986,
+      "after": 3.1999999999999984
+    },
+    {
+      "ts": 1780334337717,
+      "passage": "Location_Main_Street",
+      "state_hash": "cdf68ac96ffb5aca",
+      "var": "player.core_traits.energy",
+      "before": 45,
+      "after": 40
+    },
+    {
+      "ts": 1780334337717,
+      "passage": "Location_Main_Street",
+      "state_hash": "cdf68ac96ffb5aca",
+      "var": "player.core_traits.hygiene",
+      "before": 0,
+      "after": -10
+    },
+    {
+      "ts": 1780334337717,
+      "passage": "Location_Main_Street",
+      "state_hash": "cdf68ac96ffb5aca",
+      "var": "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation",
+      "before": 2.9999999999999982,
+      "after": 2.799999999999998
+    },
+    {
+      "ts": 1780334337717,
+      "passage": "Location_Main_Street",
+      "state_hash": "cdf68ac96ffb5aca",
+      "var": "game_state.time_state.current_day",
+      "before": "Thursday",
+      "after": "Friday"
+    },
+    {
+      "ts": 1780334337717,
+      "passage": "Location_Main_Street",
+      "state_hash": "cdf68ac96ffb5aca",
+      "var": "game_state.time_state.day",
+      "before": 11,
+      "after": 12
+    },
+    {
+      "ts": 1780334337717,
+      "passage": "Location_Main_Street",
+      "state_hash": "cdf68ac96ffb5aca",
+      "var": "game_state.rent_state.is_due",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1780334337717,
+      "passage": "Location_Main_Street",
+      "state_hash": "cdf68ac96ffb5aca",
+      "var": "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation",
+      "before": 3.1999999999999984,
+      "after": 2.9999999999999982
+    },
+    {
+      "ts": 1780334368647,
+      "passage": "Canvas_activity_walk_home_Node_1",
+      "state_hash": "bb7c2ca580b7011f",
+      "var": "last_game_passage",
+      "before": "Location_Main_Street",
+      "after": "Canvas_activity_walk_home_Node_1"
+    },
+    {
+      "ts": 1780334368647,
+      "passage": "Canvas_activity_walk_home_Node_1",
+      "state_hash": "bb7c2ca580b7011f",
+      "var": "player.core_traits.energy",
+      "before": 40,
+      "after": 37
+    },
+    {
+      "ts": 1780334368647,
+      "passage": "Canvas_activity_walk_home_Node_1",
+      "state_hash": "bb7c2ca580b7011f",
+      "var": "game_state.current_canvas",
+      "before": "9e5fc796-1dc9-4ded-8d86-18b86baffece",
+      "after": "0dfcc336-47ab-4738-8c48-68ea0d24b372"
+    },
+    {
+      "ts": 1780334368647,
+      "passage": "Canvas_activity_walk_home_Node_1",
+      "state_hash": "bb7c2ca580b7011f",
+      "var": "game_state.time_state.current_minute",
+      "before": 0,
+      "after": 10
+    },
+    {
+      "ts": 1780334368647,
+      "passage": "Canvas_activity_walk_home_Node_1",
+      "state_hash": "bb7c2ca580b7011f",
+      "var": "game_state.current_node",
+      "before": "6e027fd6-6f72-487e-bfcb-10eaecbdffe5",
+      "after": "f8e62a57-c8fa-420a-883c-3fc6c4406795"
+    },
+    {
+      "ts": 1780334410006,
+      "passage": "RentDay",
+      "state_hash": "7e7d3cfb8b929f57",
+      "var": "last_game_passage",
+      "before": "Canvas_activity_walk_home_Node_1",
+      "after": "Location_Building_Front"
+    },
+    {
+      "ts": 1780334410006,
+      "passage": "RentDay",
+      "state_hash": "7e7d3cfb8b929f57",
+      "var": "player.current_location",
+      "before": "163b69cb-f1c7-4824-9a94-5a8439fec41f",
+      "after": "e4603450-b32b-41ec-adb7-11c93b757c18"
+    },
+    {
+      "ts": 1780334793138,
+      "passage": "RentDay_Short",
+      "state_hash": "ef7e592b2ef39bec",
+      "var": "game_state.rent_state.warnings",
+      "before": 0,
+      "after": 1
+    },
+    {
+      "ts": 1780334793138,
+      "passage": "RentDay_Short",
+      "state_hash": "ef7e592b2ef39bec",
+      "var": "game_state.rent_state.is_due",
+      "before": true,
+      "after": false
+    },
+    {
+      "ts": 1780334827968,
+      "passage": "Location_Building_Front",
+      "state_hash": "7e5ec9d292eb5b02",
+      "var": "player.core_traits.energy",
+      "before": 37,
+      "after": 32
+    },
+    {
+      "ts": 1780334827968,
+      "passage": "Location_Building_Front",
+      "state_hash": "7e5ec9d292eb5b02",
+      "var": "player.core_traits.hygiene",
+      "before": -10,
+      "after": -20
+    },
+    {
+      "ts": 1780334827968,
+      "passage": "Location_Building_Front",
+      "state_hash": "7e5ec9d292eb5b02",
+      "var": "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation",
+      "before": 2.799999999999998,
+      "after": 2.599999999999998
+    },
+    {
+      "ts": 1780334827968,
+      "passage": "Location_Building_Front",
+      "state_hash": "7e5ec9d292eb5b02",
+      "var": "game_state.time_state.current_minute",
+      "before": 10,
+      "after": 0
+    },
+    {
+      "ts": 1780334827968,
+      "passage": "Location_Building_Front",
+      "state_hash": "7e5ec9d292eb5b02",
+      "var": "game_state.time_state.current_day",
+      "before": "Friday",
+      "after": "Saturday"
+    },
+    {
+      "ts": 1780334827968,
+      "passage": "Location_Building_Front",
+      "state_hash": "7e5ec9d292eb5b02",
+      "var": "game_state.time_state.day",
+      "before": 12,
+      "after": 13
+    },
+    {
+      "ts": 1780334827968,
+      "passage": "Location_Building_Front",
+      "state_hash": "7e5ec9d292eb5b02",
+      "var": "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation",
+      "before": 2.9999999999999982,
+      "after": 2.799999999999998
+    },
+    {
+      "ts": 1780334839447,
+      "passage": "Location_Building_Front",
+      "state_hash": "eb9500816f583a78",
+      "var": "player.core_traits.energy",
+      "before": 32,
+      "after": 27
+    },
+    {
+      "ts": 1780334839447,
+      "passage": "Location_Building_Front",
+      "state_hash": "eb9500816f583a78",
+      "var": "player.core_traits.hygiene",
+      "before": -20,
+      "after": -30
+    },
+    {
+      "ts": 1780334839447,
+      "passage": "Location_Building_Front",
+      "state_hash": "eb9500816f583a78",
+      "var": "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation",
+      "before": 2.599999999999998,
+      "after": 2.3999999999999977
+    },
+    {
+      "ts": 1780334839447,
+      "passage": "Location_Building_Front",
+      "state_hash": "eb9500816f583a78",
+      "var": "game_state.time_state.current_day",
+      "before": "Saturday",
+      "after": "Sunday"
+    },
+    {
+      "ts": 1780334839447,
+      "passage": "Location_Building_Front",
+      "state_hash": "eb9500816f583a78",
+      "var": "game_state.time_state.day",
+      "before": 13,
+      "after": 14
+    },
+    {
+      "ts": 1780334839447,
+      "passage": "Location_Building_Front",
+      "state_hash": "eb9500816f583a78",
+      "var": "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation",
+      "before": 2.799999999999998,
+      "after": 2.599999999999998
+    },
+    {
+      "ts": 1780334850879,
+      "passage": "Location_Building_Front",
+      "state_hash": "4fe1c286e77d7c00",
+      "var": "player.core_traits.energy",
+      "before": 27,
+      "after": 22
+    },
+    {
+      "ts": 1780334850879,
+      "passage": "Location_Building_Front",
+      "state_hash": "4fe1c286e77d7c00",
+      "var": "player.core_traits.hygiene",
+      "before": -30,
+      "after": -40
+    },
+    {
+      "ts": 1780334850879,
+      "passage": "Location_Building_Front",
+      "state_hash": "4fe1c286e77d7c00",
+      "var": "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation",
+      "before": 2.3999999999999977,
+      "after": 2.1999999999999975
+    },
+    {
+      "ts": 1780334850879,
+      "passage": "Location_Building_Front",
+      "state_hash": "4fe1c286e77d7c00",
+      "var": "game_state.time_state.current_day",
+      "before": "Sunday",
+      "after": "Monday"
+    },
+    {
+      "ts": 1780334850879,
+      "passage": "Location_Building_Front",
+      "state_hash": "4fe1c286e77d7c00",
+      "var": "game_state.time_state.current_week",
+      "before": 2,
+      "after": 3
+    },
+    {
+      "ts": 1780334850879,
+      "passage": "Location_Building_Front",
+      "state_hash": "4fe1c286e77d7c00",
+      "var": "game_state.time_state.day",
+      "before": 14,
+      "after": 15
+    },
+    {
+      "ts": 1780334850879,
+      "passage": "Location_Building_Front",
+      "state_hash": "4fe1c286e77d7c00",
+      "var": "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation",
+      "before": 2.599999999999998,
+      "after": 2.3999999999999977
+    },
+    {
+      "ts": 1780334862425,
+      "passage": "Location_Building_Front",
+      "state_hash": "88f69d26103c5779",
+      "var": "player.core_traits.energy",
+      "before": 22,
+      "after": 17
+    },
+    {
+      "ts": 1780334862425,
+      "passage": "Location_Building_Front",
+      "state_hash": "88f69d26103c5779",
+      "var": "player.core_traits.hygiene",
+      "before": -40,
+      "after": -50
+    },
+    {
+      "ts": 1780334862425,
+      "passage": "Location_Building_Front",
+      "state_hash": "88f69d26103c5779",
+      "var": "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation",
+      "before": 2.1999999999999975,
+      "after": 1.9999999999999976
+    },
+    {
+      "ts": 1780334862425,
+      "passage": "Location_Building_Front",
+      "state_hash": "88f69d26103c5779",
+      "var": "game_state.time_state.current_day",
+      "before": "Monday",
+      "after": "Tuesday"
+    },
+    {
+      "ts": 1780334862425,
+      "passage": "Location_Building_Front",
+      "state_hash": "88f69d26103c5779",
+      "var": "game_state.time_state.day",
+      "before": 15,
+      "after": 16
+    },
+    {
+      "ts": 1780334862425,
+      "passage": "Location_Building_Front",
+      "state_hash": "88f69d26103c5779",
+      "var": "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation",
+      "before": 2.3999999999999977,
+      "after": 2.1999999999999975
+    },
+    {
+      "ts": 1780334873911,
+      "passage": "Location_Building_Front",
+      "state_hash": "9a1257329349687c",
+      "var": "player.core_traits.energy",
+      "before": 17,
+      "after": 12
+    },
+    {
+      "ts": 1780334873911,
+      "passage": "Location_Building_Front",
+      "state_hash": "9a1257329349687c",
+      "var": "player.core_traits.hygiene",
+      "before": -50,
+      "after": -60
+    },
+    {
+      "ts": 1780334873911,
+      "passage": "Location_Building_Front",
+      "state_hash": "9a1257329349687c",
+      "var": "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation",
+      "before": 1.9999999999999976,
+      "after": 1.7999999999999976
+    },
+    {
+      "ts": 1780334873911,
+      "passage": "Location_Building_Front",
+      "state_hash": "9a1257329349687c",
+      "var": "game_state.time_state.current_day",
+      "before": "Tuesday",
+      "after": "Wednesday"
+    },
+    {
+      "ts": 1780334873911,
+      "passage": "Location_Building_Front",
+      "state_hash": "9a1257329349687c",
+      "var": "game_state.time_state.day",
+      "before": 16,
+      "after": 17
+    },
+    {
+      "ts": 1780334873911,
+      "passage": "Location_Building_Front",
+      "state_hash": "9a1257329349687c",
+      "var": "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation",
+      "before": 2.1999999999999975,
+      "after": 1.9999999999999976
+    },
+    {
+      "ts": 1780334885369,
+      "passage": "Location_Building_Front",
+      "state_hash": "1dae4bc677e6ffeb",
+      "var": "player.core_traits.energy",
+      "before": 12,
+      "after": 7
+    },
+    {
+      "ts": 1780334885369,
+      "passage": "Location_Building_Front",
+      "state_hash": "1dae4bc677e6ffeb",
+      "var": "player.core_traits.hygiene",
+      "before": -60,
+      "after": -70
+    },
+    {
+      "ts": 1780334885369,
+      "passage": "Location_Building_Front",
+      "state_hash": "1dae4bc677e6ffeb",
+      "var": "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation",
+      "before": 1.7999999999999976,
+      "after": 1.5999999999999976
+    },
+    {
+      "ts": 1780334885369,
+      "passage": "Location_Building_Front",
+      "state_hash": "1dae4bc677e6ffeb",
+      "var": "game_state.time_state.current_day",
+      "before": "Wednesday",
+      "after": "Thursday"
+    },
+    {
+      "ts": 1780334885369,
+      "passage": "Location_Building_Front",
+      "state_hash": "1dae4bc677e6ffeb",
+      "var": "game_state.time_state.day",
+      "before": 17,
+      "after": 18
+    },
+    {
+      "ts": 1780334885369,
+      "passage": "Location_Building_Front",
+      "state_hash": "1dae4bc677e6ffeb",
+      "var": "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation",
+      "before": 1.9999999999999976,
+      "after": 1.7999999999999976
+    },
+    {
+      "ts": 1780334896867,
+      "passage": "Location_Building_Front",
+      "state_hash": "ea72b6a1e347bf93",
+      "var": "player.core_traits.energy",
+      "before": 7,
+      "after": 2
+    },
+    {
+      "ts": 1780334896867,
+      "passage": "Location_Building_Front",
+      "state_hash": "ea72b6a1e347bf93",
+      "var": "player.core_traits.hygiene",
+      "before": -70,
+      "after": -80
+    },
+    {
+      "ts": 1780334896867,
+      "passage": "Location_Building_Front",
+      "state_hash": "ea72b6a1e347bf93",
+      "var": "npcs.9aecc74f-e587-456e-bbce-9243c306ebd7.core_traits.relation",
+      "before": 1.5999999999999976,
+      "after": 1.3999999999999977
+    },
+    {
+      "ts": 1780334896867,
+      "passage": "Location_Building_Front",
+      "state_hash": "ea72b6a1e347bf93",
+      "var": "game_state.time_state.current_day",
+      "before": "Thursday",
+      "after": "Friday"
+    },
+    {
+      "ts": 1780334896867,
+      "passage": "Location_Building_Front",
+      "state_hash": "ea72b6a1e347bf93",
+      "var": "game_state.time_state.day",
+      "before": 18,
+      "after": 19
+    },
+    {
+      "ts": 1780334896867,
+      "passage": "Location_Building_Front",
+      "state_hash": "ea72b6a1e347bf93",
+      "var": "game_state.rent_state.is_due",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1780334896867,
+      "passage": "Location_Building_Front",
+      "state_hash": "ea72b6a1e347bf93",
+      "var": "last_day_snapshot.npc:9aecc74f-e587-456e-bbce-9243c306ebd7:relation",
+      "before": 1.7999999999999976,
+      "after": 1.5999999999999976
+    },
+    {
+      "ts": 1780334985567,
+      "passage": "RentDay",
+      "state_hash": "8e7b3de41e960659",
+      "var": "last_game_passage",
+      "before": "Location_Building_Front",
+      "after": "Location_Building_Hallway"
+    },
+    {
+      "ts": 1780334985567,
+      "passage": "RentDay",
+      "state_hash": "8e7b3de41e960659",
+      "var": "player.current_location",
+      "before": "e4603450-b32b-41ec-adb7-11c93b757c18",
+      "after": "544a15ff-6d7d-4899-b024-87b8e8c57c6b"
+    },
+    {
+      "ts": 1780335010074,
+      "passage": "RentDay_Short",
+      "state_hash": "0db01227dbafbf5b",
+      "var": "flags.rent_evicted",
+      "before": false,
+      "after": true
+    },
+    {
+      "ts": 1780335010074,
+      "passage": "RentDay_Short",
+      "state_hash": "0db01227dbafbf5b",
+      "var": "game_state.rent_state.warnings",
+      "before": 1,
+      "after": 0
+    },
+    {
+      "ts": 1780335010074,
+      "passage": "RentDay_Short",
+      "state_hash": "0db01227dbafbf5b",
+      "var": "game_state.rent_state.is_due",
+      "before": true,
+      "after": false
+    }
+  ]
+}

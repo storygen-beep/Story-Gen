@@ -1,0 +1,1036 @@
+{
+  "generated_at": "2026-06-03T10:19:15.734Z",
+  "total_passages": 49,
+  "skipped_passages": 0,
+  "parse_errors": 0,
+  "total_edges": 67,
+  "edges_by_kind": {
+    "wiki": 26,
+    "button": 18,
+    "link": 23
+  },
+  "edges": [
+    {
+      "from": "Start",
+      "to": "CustomizeCharacters",
+      "display": "✓ I am 18 or older - Enter Game",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3364
+    },
+    {
+      "from": "Start",
+      "to": "AgeBlocked",
+      "display": "✗ I am NOT 18 or older",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3421
+    },
+    {
+      "from": "CustomizeCharacters",
+      "to": "StartingCanvas_canvas_first_night_Node_1",
+      "display": "Continue to Game",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1715
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "CanvasReviewList",
+      "display": "📋 Review Canvases",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 3624
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "QuestsPage",
+      "display": "📋 Quests",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"QuestsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 18135
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "MissingMediaPage",
+      "display": "⚠️ Missing Media",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "$flags.debug_mode",
+          "branch": "if"
+        },
+        {
+          "condition": "passage() isnot \"MissingMediaPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 18385
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "QuestsPage",
+      "display": "📋 Quests",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"QuestsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 18639
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "TipsPage",
+      "display": "💡 Tips",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.tips_page && setup.tips_page.content",
+          "branch": "if"
+        },
+        {
+          "condition": "passage() isnot \"TipsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 18947
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "StatsPage",
+      "display": "📊 Stats",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"StatsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 19125
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "SchedulePage",
+      "display": "📅 Schedules",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "_npcsWithSchedules.length > 0 || _soloActivities.length > 0",
+          "branch": "if"
+        },
+        {
+          "condition": "passage() isnot \"SchedulePage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 19494
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "FlagsPage",
+      "display": "🚩 Flags",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"FlagsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 20171
+    },
+    {
+      "from": "StoryJournal",
+      "to": "Navigation",
+      "display": "Return to your story",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3322
+    },
+    {
+      "from": "RentDay",
+      "to": "RentDay_Paid",
+      "display": null,
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "_money gte _rent",
+          "branch": "if"
+        }
+      ],
+      "index": 1395
+    },
+    {
+      "from": "RentDay",
+      "to": "RentDay_Short",
+      "display": null,
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1541
+    },
+    {
+      "from": "StartingCanvas_canvas_first_night_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Pour yourself one and take stock.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2318
+    },
+    {
+      "from": "StartingCanvas_canvas_first_night_Node_1",
+      "to": "Location_The_Apartment",
+      "display": "Lock up and go up to bed.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2713
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Last_Call",
+      "display": "The Last Call",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 88
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Kitchen",
+      "display": "The Kitchen",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 138
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Back_Office",
+      "display": "The Back Office",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 184
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Cellar",
+      "display": "The Cellar",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 238
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Apartment",
+      "display": "The Apartment",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 282
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Main_Street",
+      "display": "Main Street",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 332
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Bank",
+      "display": "The Bank",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 378
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Reece's",
+      "display": "Reece's",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 418
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Depot",
+      "display": "The Depot",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 456
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Boyd's_Place",
+      "display": "Boyd's Place",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 498
+    },
+    {
+      "from": "Location_The_Kitchen",
+      "to": "Location_The_Last_Call",
+      "display": "Leave The Kitchen",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 864
+    },
+    {
+      "from": "Location_The_Back_Office",
+      "to": "Location_The_Last_Call",
+      "display": "Leave The Back Office",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 864
+    },
+    {
+      "from": "Location_The_Cellar",
+      "to": "Location_The_Last_Call",
+      "display": "Leave The Cellar",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 822
+    },
+    {
+      "from": "Location_The_Apartment",
+      "to": "WardrobePage",
+      "display": "Change Clothes",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 619
+    },
+    {
+      "from": "Location_The_Apartment",
+      "to": "Location_The_Last_Call",
+      "display": "Leave The Apartment",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 875
+    },
+    {
+      "from": "Location_Main_Street",
+      "to": "Location_The_Last_Call",
+      "display": "Leave Main Street",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 6350
+    },
+    {
+      "from": "Location_The_Bank",
+      "to": "Location_Main_Street",
+      "display": "Leave The Bank",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 857
+    },
+    {
+      "from": "Location_Reece's",
+      "to": "ShopPage",
+      "display": "Browse Clothes",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 642
+    },
+    {
+      "from": "Location_Reece's",
+      "to": "Location_Main_Street",
+      "display": "Leave Reece's",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 894
+    },
+    {
+      "from": "Location_The_Depot",
+      "to": "Location_Main_Street",
+      "display": "Leave The Depot",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 833
+    },
+    {
+      "from": "Location_Boyd's_Place",
+      "to": "Location_Main_Street",
+      "display": "Leave Boyd's Place",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"summoned_by_shark\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 1068
+    },
+    {
+      "from": "Location_Boyd's_Place",
+      "to": "Location_Main_Street",
+      "display": "Go back",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"summoned_by_shark\", \"operator\": \"is_true\"}]}))",
+          "branch": "else"
+        }
+      ],
+      "index": 1297
+    },
+    {
+      "from": "Canvas_canvas_shark_place_Node_1",
+      "to": "Location_Main_Street",
+      "display": "Tell him he'll get his money.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1727
+    },
+    {
+      "from": "Canvas_canvas_shark_place_Node_1",
+      "to": "Location_Main_Street",
+      "display": "Ask what the other ways are.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2022
+    },
+    {
+      "from": "Canvas_canvas_shark_summons_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Take the card.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1656
+    },
+    {
+      "from": "Canvas_canvas_bar_ambient_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Get to it.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 829
+    },
+    {
+      "from": "Canvas_canvas_work_walkin_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Pour it, take the tip, brush him off.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 773
+    },
+    {
+      "from": "Canvas_canvas_work_walkin_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Lean in and work the tip for what it's worth.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1094
+    },
+    {
+      "from": "Canvas_canvas_work_shift_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Work a normal shift.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 936
+    },
+    {
+      "from": "Canvas_canvas_work_shift_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Push through a long one.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1341
+    },
+    {
+      "from": "Canvas_canvas_sal_hub_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Talk to Sal.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"talked_to_sal_today\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1035
+    },
+    {
+      "from": "Canvas_canvas_sal_hub_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Flirt with him.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 25}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1791
+    },
+    {
+      "from": "Canvas_canvas_sal_hub_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Head back to the floor.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2677
+    },
+    {
+      "from": "Canvas_canvas_sal_ropes_first_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Let him show you how Sully ran the place.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1844
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_work_walkin",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 338
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_shark_place",
+      "display": "T8",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 650
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_first_night",
+      "display": "T12",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 962
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_sal_hub",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1278
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_sal_ropes_first",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1597
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_shark_summons",
+      "display": "T10",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1939
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_bar_ambient",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2259
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_work_shift",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2570
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "Navigation",
+      "display": "Back to Game",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2707
+    },
+    {
+      "from": "CanvasReview_canvas_first_night",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1363
+    },
+    {
+      "from": "CanvasReview_canvas_shark_place",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1412
+    },
+    {
+      "from": "CanvasReview_canvas_shark_summons",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1269
+    },
+    {
+      "from": "CanvasReview_canvas_bar_ambient",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 893
+    },
+    {
+      "from": "CanvasReview_canvas_work_walkin",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 913
+    },
+    {
+      "from": "CanvasReview_canvas_work_shift",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 905
+    },
+    {
+      "from": "CanvasReview_canvas_sal_hub",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 903
+    },
+    {
+      "from": "CanvasReview_canvas_sal_ropes_first",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1536
+    }
+  ],
+  "unresolved_targets": [],
+  "dead_end_passages": [
+    "Story",
+    "AgeBlocked",
+    "StoryCaption",
+    "QuestsV2Widgets",
+    "QuestsPage",
+    "TipsPage",
+    "StatsPage",
+    "WardrobePage",
+    "ClothingBlock",
+    "ShopPage",
+    "RentDay_Paid",
+    "RentDay_Short",
+    "SchedulePage",
+    "FlagsPage",
+    "_BrokenExitFallback",
+    "Location_The_Last_Call",
+    "MissingMediaPage"
+  ],
+  "untargeted_passages": [
+    "Story",
+    "Start",
+    "TimeWidgets",
+    "StoryCaption",
+    "QuestsV2Widgets",
+    "StoryJournal",
+    "ClothingBlock",
+    "RentDay",
+    "_BrokenExitFallback",
+    "Canvas_canvas_shark_place_Node_1",
+    "Canvas_canvas_shark_summons_Node_1",
+    "Canvas_canvas_bar_ambient_Node_1",
+    "Canvas_canvas_work_walkin_Node_1",
+    "Canvas_canvas_work_shift_Node_1",
+    "Canvas_canvas_sal_hub_Node_1",
+    "Canvas_canvas_sal_ropes_first_Node_1"
+  ],
+  "per_passage_stats": {
+    "Story": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": [
+        "meta"
+      ]
+    },
+    "Start": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CustomizeCharacters": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "AgeBlocked": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "TimeWidgets": {
+      "edge_count": 8,
+      "unresolved": 0,
+      "tags": [
+        "widget",
+        "nobr"
+      ]
+    },
+    "StoryCaption": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "QuestsV2Widgets": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": [
+        "widget",
+        "nobr"
+      ]
+    },
+    "QuestsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "TipsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "StoryJournal": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "StatsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "WardrobePage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "ClothingBlock": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "ShopPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "RentDay": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "RentDay_Paid": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "RentDay_Short": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "SchedulePage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "FlagsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "StartingCanvas_canvas_first_night_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Navigation": {
+      "edge_count": 10,
+      "unresolved": 0,
+      "tags": []
+    },
+    "_BrokenExitFallback": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Location_The_Last_Call": {
+      "edge_count": 0,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Kitchen": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Back_Office": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Cellar": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Apartment": {
+      "edge_count": 2,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Main_Street": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Bank": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Reece's": {
+      "edge_count": 2,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Depot": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Boyd's_Place": {
+      "edge_count": 2,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Canvas_canvas_shark_place_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_shark_summons_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_bar_ambient_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_work_walkin_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_work_shift_Node_1": {
+      "edge_count": 2,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Canvas_canvas_sal_hub_Node_1": {
+      "edge_count": 3,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_sal_ropes_first_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "MissingMediaPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReviewList": {
+      "edge_count": 9,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_first_night": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_shark_place": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_shark_summons": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_bar_ambient": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_work_walkin": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_work_shift": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_sal_hub": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_sal_ropes_first": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    }
+  }
+}

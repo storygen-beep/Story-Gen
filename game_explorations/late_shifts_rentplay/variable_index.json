@@ -1,0 +1,4874 @@
+{
+  "generated_at": "2026-06-01T17:04:18.992Z",
+  "indexing_coverage": "partial",
+  "total_variables": 54,
+  "skipped_script_blocks": 531,
+  "skipped_widget_passages": 2,
+  "skipped_passages": 2,
+  "parse_errors": 17,
+  "complex_setter_count": 17,
+  "variables": {
+    "$player": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "{\n    \"name\": \"Maya\",\n    \"portrait\": \"maya.jpg\",\n    \"current_location\": \"\",\n    \"core_traits\": {\"corruption\": 0, \"arousal\": 0, \"energy\": 100, \"hygiene\": 100, \"money\": 60, \"hank_stage\": 0, \"ben_stage\": 0, \"cole_stage\": 0, \"rosa_stage\": 0, \"fitness\": 0, \"beauty\": 0, \"exhibitionism\": 0, \"pregnancy\": 0},\n    \"wardrobe\": {\"plain_bra\": {\"id\": \"plain_bra\", \"name\": \"Plain Bra\", \"slot\": \"bra\", \"image\": \"./videos/clothing/plain_bra.jpg\"}, \"cotton_briefs\": {\"id\": \"cotton_briefs\", \"name\": \"Cotton Briefs\", \"slot\": \"underwear\", \"image\": \"./videos/clothing/cotton_briefs.jpg\"}, \"faded_tee\": {\"id\": \"faded_tee\", \"name\": \"Faded T-Shirt\", \"slot\": \"top\", \"image\": \"./videos/clothing/faded_tee.jpg\"}, \"old_jeans\": {\"id\": \"old_jeans\", \"name\": \"Old Jeans\", \"slot\": \"bottom\", \"image\": \"./videos/clothing/old_jeans.jpg\"}, \"scuffed_sneakers\": {\"id\": \"scuffed_sneakers\", \"name\": \"Scuffed Sneakers\", \"slot\": \"shoes\", \"image\": \"./videos/clothing/scuffed_sneakers.jpg\"}, \"thrift_sundress\": {\"id\": \"thrift_sundress\", \"name\": \"Thrift Sundress\", \"slot\": \"dress\", \"image\": \"./videos/clothing/thrift_sundress.jpg\"}},\n    \"equipped\": {\"bra\": \"plain_bra\", \"underwear\": \"cotton_briefs\", \"top\": \"faded_tee\", \"bottom\": \"old_jeans\", \"dress\": \"thrift_sundress\", \"legwear\": null, \"shoes\": \"scuffed_sneakers\"}\n}",
+          "passage": "Start",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".core_traits.money",
+          "op": "-=",
+          "value_expr": "_rent",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"3e253ffb-3a0c-4af9-bbfd-478ab46a324c\"",
+          "passage": "Location_Maya's_Apartment",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"6dfb4cc6-eb2b-44ac-9fe0-f91a63c9fbfb\"",
+          "passage": "Location_Maya's_Room",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"e8beca0f-3ec1-4c71-9fdf-1016faea5dbe\"",
+          "passage": "Location_Ben's_Room",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"15cf8d3c-5fbd-4d0f-9d99-e1e88f3bd5c5\"",
+          "passage": "Location_Kitchen",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"350a510d-8ae0-4cda-8c47-4dcae0312c6f\"",
+          "passage": "Location_Living_Room",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"1149da3d-e914-4586-94af-b906d8be9e28\"",
+          "passage": "Location_Bathroom",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"a1613fc2-bc00-4269-b085-23a4c61a9e32\"",
+          "passage": "Location_Laundry_Nook",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"e4603450-b32b-41ec-adb7-11c93b757c18\"",
+          "passage": "Location_Building_Front",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"544a15ff-6d7d-4899-b024-87b8e8c57c6b\"",
+          "passage": "Location_Building_Hallway",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"163b69cb-f1c7-4824-9a94-5a8439fec41f\"",
+          "passage": "Location_Main_Street",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"6f0b88a9-10e5-4481-9585-88855f38c53c\"",
+          "passage": "Location_Mel's_—_Dining_Floor",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"1625426c-dee2-4d7c-9559-ed712ed11561\"",
+          "passage": "Location_Mel's_—_Kitchen",
+          "gate": [
+            {
+              "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"hired_at_diner\", \"operator\": \"is_true\"}]})",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"8aeb5b2b-fda5-458d-8d6a-51f56ca2e1a3\"",
+          "passage": "Location_Mel's_—_Back_Office",
+          "gate": [
+            {
+              "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"hank_first_contact\", \"operator\": \"is_true\"}]})",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"9e05710e-59ab-40b4-83f4-4dcfd58cc6dd\"",
+          "passage": "Location_Town_Park",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"954ea3ff-8a2d-440f-97ba-b0c5add4a96c\"",
+          "passage": "Location_Cole's_Apartment",
+          "gate": [
+            {
+              "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"cole_date_done\", \"operator\": \"is_true\"}]})",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"3687f7bd-d997-4477-b7ef-3858daadb3b6\"",
+          "passage": "Location_Convenience_Store",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"a76d080e-1b7e-4df6-891e-c043b619f2cd\"",
+          "passage": "Location_Second-Hand_Threads",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": {
+        "name": "Maya",
+        "portrait": "maya.jpg",
+        "current_location": "",
+        "core_traits": {
+          "corruption": 0,
+          "arousal": 0,
+          "energy": 100,
+          "hygiene": 100,
+          "money": 60,
+          "hank_stage": 0,
+          "ben_stage": 0,
+          "cole_stage": 0,
+          "rosa_stage": 0,
+          "fitness": 0,
+          "beauty": 0,
+          "exhibitionism": 0,
+          "pregnancy": 0
+        },
+        "wardrobe": {
+          "plain_bra": {
+            "id": "plain_bra",
+            "name": "Plain Bra",
+            "slot": "bra",
+            "image": "./videos/clothing/plain_bra.jpg"
+          },
+          "cotton_briefs": {
+            "id": "cotton_briefs",
+            "name": "Cotton Briefs",
+            "slot": "underwear",
+            "image": "./videos/clothing/cotton_briefs.jpg"
+          },
+          "faded_tee": {
+            "id": "faded_tee",
+            "name": "Faded T-Shirt",
+            "slot": "top",
+            "image": "./videos/clothing/faded_tee.jpg"
+          },
+          "old_jeans": {
+            "id": "old_jeans",
+            "name": "Old Jeans",
+            "slot": "bottom",
+            "image": "./videos/clothing/old_jeans.jpg"
+          },
+          "scuffed_sneakers": {
+            "id": "scuffed_sneakers",
+            "name": "Scuffed Sneakers",
+            "slot": "shoes",
+            "image": "./videos/clothing/scuffed_sneakers.jpg"
+          },
+          "thrift_sundress": {
+            "id": "thrift_sundress",
+            "name": "Thrift Sundress",
+            "slot": "dress",
+            "image": "./videos/clothing/thrift_sundress.jpg"
+          }
+        },
+        "equipped": {
+          "bra": "plain_bra",
+          "underwear": "cotton_briefs",
+          "top": "faded_tee",
+          "bottom": "old_jeans",
+          "dress": "thrift_sundress",
+          "legwear": null,
+          "shoes": "scuffed_sneakers"
+        }
+      }
+    },
+    "$npcs": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "{\"bab7762f-85da-4913-9e90-62953c931450\": {\"name\": \"Hank\", \"portrait\": \"hank.jpg\", \"core_traits\": {\"arousal\": 0, \"corruption\": 0, \"relation\": 0}, \"flags\": {}, \"schedule\": [], \"relationship\": \"\"}, \"42820a95-8df4-4b45-9a36-0533d05f7bd0\": {\"name\": \"Ben\", \"portrait\": \"ben.jpg\", \"core_traits\": {\"arousal\": 0, \"relation\": 0}, \"flags\": {}, \"schedule\": [], \"relationship\": \"\"}, \"be1e5482-e1cd-4be0-95f8-313d0c2d0585\": {\"name\": \"Cole\", \"portrait\": \"cole.jpg\", \"core_traits\": {\"relation\": 0}, \"flags\": {}, \"schedule\": [], \"relationship\": \"\"}, \"21afa275-ca8b-479b-9ff9-26bb68161b72\": {\"name\": \"Rosa\", \"portrait\": \"rosa.jpg\", \"core_traits\": {\"relation\": 0}, \"flags\": {}, \"schedule\": [], \"relationship\": \"\"}, \"9aecc74f-e587-456e-bbce-9243c306ebd7\": {\"name\": \"Pam\", \"portrait\": \"pam.jpg\", \"core_traits\": {\"relation\": 5, \"awareness\": 0}, \"flags\": {}, \"schedule\": [], \"relationship\": \"\"}, \"b248371e-a0e6-44b2-852c-1fda2a285ad7\": {\"name\": \"Vince\", \"portrait\": \"vince.jpg\", \"core_traits\": {\"relation\": 0}, \"flags\": {}, \"schedule\": [], \"relationship\": \"\"}}",
+          "passage": "Start",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": {
+        "bab7762f-85da-4913-9e90-62953c931450": {
+          "name": "Hank",
+          "portrait": "hank.jpg",
+          "core_traits": {
+            "arousal": 0,
+            "corruption": 0,
+            "relation": 0
+          },
+          "flags": {},
+          "schedule": [],
+          "relationship": ""
+        },
+        "42820a95-8df4-4b45-9a36-0533d05f7bd0": {
+          "name": "Ben",
+          "portrait": "ben.jpg",
+          "core_traits": {
+            "arousal": 0,
+            "relation": 0
+          },
+          "flags": {},
+          "schedule": [],
+          "relationship": ""
+        },
+        "be1e5482-e1cd-4be0-95f8-313d0c2d0585": {
+          "name": "Cole",
+          "portrait": "cole.jpg",
+          "core_traits": {
+            "relation": 0
+          },
+          "flags": {},
+          "schedule": [],
+          "relationship": ""
+        },
+        "21afa275-ca8b-479b-9ff9-26bb68161b72": {
+          "name": "Rosa",
+          "portrait": "rosa.jpg",
+          "core_traits": {
+            "relation": 0
+          },
+          "flags": {},
+          "schedule": [],
+          "relationship": ""
+        },
+        "9aecc74f-e587-456e-bbce-9243c306ebd7": {
+          "name": "Pam",
+          "portrait": "pam.jpg",
+          "core_traits": {
+            "relation": 5,
+            "awareness": 0
+          },
+          "flags": {},
+          "schedule": [],
+          "relationship": ""
+        },
+        "b248371e-a0e6-44b2-852c-1fda2a285ad7": {
+          "name": "Vince",
+          "portrait": "vince.jpg",
+          "core_traits": {
+            "relation": 0
+          },
+          "flags": {},
+          "schedule": [],
+          "relationship": ""
+        }
+      }
+    },
+    "$npc_interacted_today": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "{}",
+          "passage": "Start",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": {}
+    },
+    "$flags": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "{\"rent_evicted\": false, \"game_started\": true, \"debug_mode\": false}",
+          "passage": "Start",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": {
+        "rent_evicted": false,
+        "game_started": true,
+        "debug_mode": false
+      }
+    },
+    "$flags_meta": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "{}",
+          "passage": "Start",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": {}
+    },
+    "$game_state": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "{\n    \"current_canvas\": \"\",\n    \"visited_locations\": [],\n    \"visited_nodes\": [],\n    \"trigger_history\": {},\n    \"activity_trigger_history\": {},\n    \"visited_choices\": {},\n    \"active_modifiers\": {},\n    \"random_cooldowns\": {},\n    \"stage_advancement_log\": {},\n    \"quests\": {},\n    \"scheduled\": [],\n    \"fast_jobs\": { \"xp\": 0, \"cooldowns\": {} },\n    \"bank\": { \"balance\": 0 },\n    \"time_state\": {\n        \"current_hour\": 8,\n        \"current_minute\": 0,\n        \"current_day\": \"Monday\",\n        \"current_week\": 1,\n        \"day\": 1\n    },\n    \"rent_state\": {\n        \"last_paid_week\": 1,\n        \"warnings\": 0,\n        \"is_due\": false\n    }\n}",
+          "passage": "Start",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.last_paid_week",
+          "op": "to",
+          "value_expr": "$game_state.time_state.current_week",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.is_due",
+          "op": "to",
+          "value_expr": "false",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.warnings",
+          "op": "to",
+          "value_expr": "0",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.warnings",
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "$game_state.rent_state.warnings lt setup.rent_grace_periods",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.is_due",
+          "op": "to",
+          "value_expr": "false",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "$game_state.rent_state.warnings lt setup.rent_grace_periods",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.warnings",
+          "op": "to",
+          "value_expr": "0",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "!($game_state.rent_state.warnings lt setup.rent_grace_periods)",
+              "branch": "else"
+            },
+            {
+              "condition": "setup.rent_eviction_mode is \"flag_set\"",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.is_due",
+          "op": "to",
+          "value_expr": "false",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "!($game_state.rent_state.warnings lt setup.rent_grace_periods)",
+              "branch": "else"
+            },
+            {
+              "condition": "setup.rent_eviction_mode is \"flag_set\"",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"55aa4e53-4fb4-49c7-bbb7-a3c294e6a863\"",
+          "passage": "StartingCanvas_canvas_first_morning_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"49c64744-cdce-46e6-b6d6-1178cf7942cd\"",
+          "passage": "StartingCanvas_canvas_first_morning_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"df077256-377e-4326-bfc3-2f7f9a5b05b1\"",
+          "passage": "Canvas_rts_public_clothing_payoff_bold_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"b086c68d-b770-406f-b721-7673ba5db42b\"",
+          "passage": "Canvas_rts_public_clothing_payoff_bold_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"df077256-377e-4326-bfc3-2f7f9a5b05b1\"",
+          "passage": "Canvas_rts_public_clothing_payoff_bold_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5c1f98c0-7af2-405c-acad-c839f1073ce7\"",
+          "passage": "Canvas_rts_public_clothing_payoff_bold_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"191eade9-d1c1-4cf3-bdb3-892a55b78ecf\"",
+          "passage": "Canvas_rts_public_clothing_payoff_street_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ed976809-cb8d-42ba-97e8-6ae7bf18dac9\"",
+          "passage": "Canvas_rts_public_clothing_payoff_street_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5a3d1e64-a2fc-4b1e-996d-1b7b12a16891\"",
+          "passage": "Canvas_rts_public_clothing_flash_diner_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"b9b85701-966e-428e-b4e4-137925f32565\"",
+          "passage": "Canvas_rts_public_clothing_flash_diner_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5a3d1e64-a2fc-4b1e-996d-1b7b12a16891\"",
+          "passage": "Canvas_rts_public_clothing_flash_diner_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"121dcc14-69f3-4825-96aa-7d70375e51d9\"",
+          "passage": "Canvas_rts_public_clothing_flash_diner_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5116bfb6-8ff0-47cb-8a82-fb1aa67d4656\"",
+          "passage": "Canvas_rts_public_clothing_flash_park_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4830ebf9-8427-41f1-a05d-9f612ff2d62c\"",
+          "passage": "Canvas_rts_public_clothing_flash_park_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5116bfb6-8ff0-47cb-8a82-fb1aa67d4656\"",
+          "passage": "Canvas_rts_public_clothing_flash_park_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"dd063602-c806-42f6-ac9d-a160182ff20e\"",
+          "passage": "Canvas_rts_public_clothing_flash_park_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ac87852b-e1c6-446a-9e5a-cf4aebf2bf03\"",
+          "passage": "Canvas_rts_public_clothing_store_clerk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"2d7130ab-70da-4908-a962-a43daed96d8d\"",
+          "passage": "Canvas_rts_public_clothing_store_clerk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"f8bf05bf-9913-422c-a729-68650922404e\"",
+          "passage": "Canvas_rts_public_clothing_park_jogger_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"972534cc-4075-4d6a-aaed-ae02161114d7\"",
+          "passage": "Canvas_rts_public_clothing_park_jogger_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"dfcafbd6-68b3-4111-ba3c-20a23e2eb0d3\"",
+          "passage": "Canvas_rts_public_clothing_street_stares_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ce96d6cd-5b18-4356-94a0-5b69392b67d0\"",
+          "passage": "Canvas_rts_public_clothing_street_stares_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"2f6938ae-b544-4c4b-9715-71c6f3e4b913\"",
+          "passage": "Canvas_rts_public_clothing_diner_beauty_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"60cd3114-024c-4050-be5c-d6ef9aafc222\"",
+          "passage": "Canvas_rts_public_clothing_diner_beauty_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d11dbdff-bb31-4173-a899-5f2e90aa2d2e\"",
+          "passage": "Canvas_rts_public_clothing_diner_customers_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4bc2be22-54d6-4d09-a6c7-0d87d963e63b\"",
+          "passage": "Canvas_rts_public_clothing_diner_customers_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"602994b4-8a5b-40cd-a130-ec173b2f6ac4\"",
+          "passage": "Canvas_cole_park_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"9f960ddc-6a5e-46a0-8618-7b985008bad8\"",
+          "passage": "Canvas_cole_park_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"7c2a21ee-2bf9-4915-b058-54c738cd8053\"",
+          "passage": "Canvas_ambient_cole_park_sketching_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d3a21acf-515a-4500-bee3-d3a3d4132165\"",
+          "passage": "Canvas_ambient_cole_park_sketching_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"a044c633-7bb5-4ece-9bea-332f990e4829\"",
+          "passage": "Canvas_ambient_pam_hallway_neutral_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"02d84af9-f906-4f84-a656-2df850605c35\"",
+          "passage": "Canvas_ambient_pam_hallway_neutral_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"97c0ac81-7226-4d2e-bebc-dbac91ec98e5\"",
+          "passage": "Canvas_scene_ben_walks_in_change_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"1c7a48b8-aeb5-4a1f-91d9-09676f6ff53c\"",
+          "passage": "Canvas_scene_ben_walks_in_change_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"265709d7-f7f7-4ba7-abb5-90613144bd82\"",
+          "passage": "Canvas_scene_ben_couch_reveal_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ec61ce36-8f46-4cf1-bb2f-fddf1dad4d78\"",
+          "passage": "Canvas_scene_ben_couch_reveal_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"94cbd715-0b1e-4824-8150-e67104dbbaeb\"",
+          "passage": "Canvas_scene_ben_walks_in_kitchen_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6985c28f-4229-4ded-9251-0799aac6dbee\"",
+          "passage": "Canvas_scene_ben_walks_in_kitchen_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"4ad610fe-f29c-4521-b55c-df0fb48b5fec\"",
+          "passage": "Canvas_scene_hank_storage_room_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6e9a250a-9619-458d-b6ad-387e4b6620bb\"",
+          "passage": "Canvas_scene_hank_storage_room_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"c48cf3e9-6717-4cc7-93a1-4c49b7c2f5c1\"",
+          "passage": "Canvas_scene_hank_walkin_encounter_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"b5602b3e-8317-439f-9734-b0ba4bec9569\"",
+          "passage": "Canvas_scene_hank_walkin_encounter_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"81d799f9-01b5-4347-b73a-8cfc155941a1\"",
+          "passage": "Canvas_scene_hank_kitchen_doorway_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"fd8a0f16-b19f-4417-a387-ced57af406ee\"",
+          "passage": "Canvas_scene_hank_kitchen_doorway_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"53ec5900-d5a9-4b1b-a028-8e8b8a1a7b9a\"",
+          "passage": "Canvas_scene_hank_passes_during_restock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6006c339-cdfb-4bd4-8c63-89fd99dfa909\"",
+          "passage": "Canvas_scene_hank_passes_during_restock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"3822b3fb-62e8-4143-848e-0e2c1d45b933\"",
+          "passage": "Canvas_ambient_pam_building_loaded_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ff000487-3427-4013-ae05-f03c10de7249\"",
+          "passage": "Canvas_ambient_pam_building_loaded_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"0056166a-c1c0-46b3-b2ad-5439c208a4c0\"",
+          "passage": "Canvas_ambient_pam_building_neutral_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4828874d-ee81-49a9-b8a3-12c267f8b1a8\"",
+          "passage": "Canvas_ambient_pam_building_neutral_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"7da5e3d2-b092-4dd9-8e29-be7d684575b4\"",
+          "passage": "Canvas_ambient_ben_couch_reading_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6d6fdaf1-1e76-4cd0-9af7-1855de07466a\"",
+          "passage": "Canvas_ambient_ben_couch_reading_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"087755b8-7189-4332-b9c2-ef1cf882bd5d\"",
+          "passage": "Canvas_ambient_ben_morning_crossover_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"c8fb9576-7a35-4cc1-a9c1-1b27af37341a\"",
+          "passage": "Canvas_ambient_ben_morning_crossover_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"96947e2e-d621-4c20-835b-7430d2a6c6e7\"",
+          "passage": "Canvas_ambient_hank_mel_reference_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"2fbbcb50-3ee9-4fd0-a59a-a5227d4d0459\"",
+          "passage": "Canvas_ambient_hank_mel_reference_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"2987fbe3-a1b7-415b-8c4d-4aa34073b36e\"",
+          "passage": "Canvas_ambient_hank_diner_observation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4dca1ce2-f94c-4142-8994-1b5a1628ee63\"",
+          "passage": "Canvas_ambient_hank_diner_observation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"34c27235-b02e-4527-8e3c-5977e7671c63\"",
+          "passage": "Canvas_ambient_hank_counter_alone_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e414895d-5722-4aa3-921a-c9e74f6fe771\"",
+          "passage": "Canvas_ambient_hank_counter_alone_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"c94b8f8f-6deb-4b43-9482-b881ae7299cf\"",
+          "passage": "Canvas_rosa_diner_front_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"9ee27818-51e6-4b36-bd94-cb8b461a2254\"",
+          "passage": "Canvas_rosa_diner_front_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d6b661a5-355a-481c-a8a3-47354b8c7ccd\"",
+          "passage": "Canvas_cole_apartment_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a88c4c94-8630-42f0-82ff-414276e4c470\"",
+          "passage": "Canvas_cole_apartment_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d6b661a5-355a-481c-a8a3-47354b8c7ccd\"",
+          "passage": "Canvas_cole_apartment_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4cc4b14f-4b16-472e-9031-476dbc916d1d\"",
+          "passage": "Canvas_cole_apartment_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"363a2b6f-1634-4e75-8fa2-3630b2403f36\"",
+          "passage": "Canvas_cole_diner_back_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"9153337e-f6c1-4b76-a840-233d773764af\"",
+          "passage": "Canvas_cole_diner_back_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"b03b4f1b-88ad-4abc-ab1d-1ab456fb1531\"",
+          "passage": "Canvas_ben_room_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"917e0d48-90bf-4e85-be08-752062527b3d\"",
+          "passage": "Canvas_ben_room_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"b03b4f1b-88ad-4abc-ab1d-1ab456fb1531\"",
+          "passage": "Canvas_ben_room_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"bab95188-5fee-4585-a502-0da59a847fd6\"",
+          "passage": "Canvas_ben_room_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"b03b4f1b-88ad-4abc-ab1d-1ab456fb1531\"",
+          "passage": "Canvas_ben_room_hub_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5b658210-19e4-4c8d-852e-54f646cc49cc\"",
+          "passage": "Canvas_ben_room_hub_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"7d90c225-0968-445b-b700-cb5705892ab3\"",
+          "passage": "Canvas_ben_living_room_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a82e2aab-8159-4edd-9c17-8ec4f58a8706\"",
+          "passage": "Canvas_ben_living_room_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"51324d33-0228-4076-bbc7-e118687184ef\"",
+          "passage": "Canvas_ben_kitchen_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"b6cb03de-274c-4509-91a6-9fd74df82418\"",
+          "passage": "Canvas_ben_kitchen_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cd166f5b-eadd-4054-92d1-1cc6c7f3d712\"",
+          "passage": "Canvas_hank_office_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d6669b4e-8dba-4c10-95d5-a4341802a96e\"",
+          "passage": "Canvas_hank_office_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cd166f5b-eadd-4054-92d1-1cc6c7f3d712\"",
+          "passage": "Canvas_hank_office_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"082fd76d-73cd-4d39-bf25-fcb4016e7ee1\"",
+          "passage": "Canvas_hank_office_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cd166f5b-eadd-4054-92d1-1cc6c7f3d712\"",
+          "passage": "Canvas_hank_office_hub_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e34c7f73-dda1-4bfe-9067-0805b5d369a6\"",
+          "passage": "Canvas_hank_office_hub_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"12e81d85-7512-4f48-a783-fde9a4fc3d4d\"",
+          "passage": "Canvas_hank_flash_diner_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"f5bbc485-5361-4dd8-a1a6-02e73df5eec3\"",
+          "passage": "Canvas_hank_flash_diner_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"7cee466a-c7d8-45ab-9dc8-b63c76099571\"",
+          "passage": "Canvas_hank_tease_diner_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d6a63668-b577-4d20-88d0-02cdfa613cbb\"",
+          "passage": "Canvas_hank_tease_diner_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cd6c3902-bcdb-4c67-8f49-39993d68ef2b\"",
+          "passage": "Canvas_hank_diner_front_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"599da9be-ff02-4b2d-93f9-ad1d8f7680f7\"",
+          "passage": "Canvas_hank_diner_front_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cd6c3902-bcdb-4c67-8f49-39993d68ef2b\"",
+          "passage": "Canvas_hank_diner_front_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"b2bed941-aa2a-4958-a3dc-c1ce68bad256\"",
+          "passage": "Canvas_hank_diner_front_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cd6c3902-bcdb-4c67-8f49-39993d68ef2b\"",
+          "passage": "Canvas_hank_diner_front_hub_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"0a999c97-3af7-4611-a14c-fbf7232c218d\"",
+          "passage": "Canvas_hank_diner_front_hub_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d71fa004-dbfa-4977-8dac-7c5fdabb2438\"",
+          "passage": "Canvas_scene_pam_confrontation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"9b02fc9e-a2ea-4bfd-8ffd-c3f9a798d7b0\"",
+          "passage": "Canvas_scene_pam_confrontation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d71fa004-dbfa-4977-8dac-7c5fdabb2438\"",
+          "passage": "Canvas_scene_pam_confrontation_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"dd187d50-1bc3-4e4d-94b9-5a53d3b1c35a\"",
+          "passage": "Canvas_scene_pam_confrontation_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d71fa004-dbfa-4977-8dac-7c5fdabb2438\"",
+          "passage": "Canvas_scene_pam_confrontation_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"cdc08471-8a0e-4db4-8e79-394d7b0ca9fc\"",
+          "passage": "Canvas_scene_pam_confrontation_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"33048ed6-6601-4082-8ce5-e9a5e864c5ce\"",
+          "passage": "Canvas_scene_cole_first_night_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"bb4c81df-0a7b-446e-a54d-ca7d40b2b2b3\"",
+          "passage": "Canvas_scene_cole_first_night_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"33048ed6-6601-4082-8ce5-e9a5e864c5ce\"",
+          "passage": "Canvas_scene_cole_first_night_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"302b06f7-a618-49da-bf29-ca1330ffdbc7\"",
+          "passage": "Canvas_scene_cole_first_night_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"33048ed6-6601-4082-8ce5-e9a5e864c5ce\"",
+          "passage": "Canvas_scene_cole_first_night_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"df52a6f4-c088-486c-84c5-251d8a808921\"",
+          "passage": "Canvas_scene_cole_first_night_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"4c6fcc90-665f-49a1-a6c8-633526c1baf3\"",
+          "passage": "Canvas_scene_cole_first_date_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"144b1cd0-c9b4-462f-8187-2f8572417775\"",
+          "passage": "Canvas_scene_cole_first_date_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"0b3b0e31-cd7f-47cc-8bf8-252f274f04b3\"",
+          "passage": "Canvas_scene_cole_post_shift_walk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"1cbd5448-1ae2-44a9-a218-288c0f2c8034\"",
+          "passage": "Canvas_scene_cole_post_shift_walk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"479b3ad3-f5b4-4135-9094-8d1df0f8c064\"",
+          "passage": "Canvas_scene_cole_first_break_talk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"3a16167a-c68c-4129-9355-5b8f58b82f82\"",
+          "passage": "Canvas_scene_cole_first_break_talk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"1528bdcd-3e71-4a27-8de4-388156f5052b\"",
+          "passage": "Canvas_scene_ben_pregnancy_revelation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a7461590-bab9-4edd-9da9-211bbaec094a\"",
+          "passage": "Canvas_scene_ben_pregnancy_revelation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"81a9e16e-6575-48b7-9c26-12b64885bcd5\"",
+          "passage": "Canvas_event_pregnancy_onset_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e2c17d79-9479-4733-b76a-112d05b5f357\"",
+          "passage": "Canvas_event_pregnancy_onset_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5827be66-6ffb-400c-ae73-1355db667b88\"",
+          "passage": "Canvas_scene_ben_consummation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"21c798a4-9aea-42be-a096-e961ca9ede9a\"",
+          "passage": "Canvas_scene_ben_consummation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"17743093-654c-465b-a775-34f5ab8362de\"",
+          "passage": "Canvas_scene_ben_stage2_charged_moment_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"88f8cef3-3851-4a28-8c15-bd6f76a95e24\"",
+          "passage": "Canvas_scene_ben_stage2_charged_moment_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"17743093-654c-465b-a775-34f5ab8362de\"",
+          "passage": "Canvas_scene_ben_stage2_charged_moment_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"8e2ea1d1-bb7e-4070-a17e-0588adeac5bd\"",
+          "passage": "Canvas_scene_ben_stage2_charged_moment_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"17743093-654c-465b-a775-34f5ab8362de\"",
+          "passage": "Canvas_scene_ben_stage2_charged_moment_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4ebcd93c-2c00-4e92-8d31-7d5454fba7db\"",
+          "passage": "Canvas_scene_ben_stage2_charged_moment_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"660d8fc7-d8f4-44b3-80ff-42a82bd906e3\"",
+          "passage": "Canvas_scene_ben_stage1_via_glance_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"c4622896-2bb7-45de-9f30-1efcc133e32b\"",
+          "passage": "Canvas_scene_ben_stage1_via_glance_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"8b02ba84-15e0-4b99-83ad-bbc04e96ffd6\"",
+          "passage": "Canvas_scene_ben_stage1_via_beauty_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"f3063348-65e0-44e7-a644-66ce0be3f641\"",
+          "passage": "Canvas_scene_ben_stage1_via_beauty_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"539180a3-daff-4bd6-a917-6925a389a27f\"",
+          "passage": "Canvas_scene_hank_declaration_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"878b22a7-18c2-441a-961e-b8164cbce730\"",
+          "passage": "Canvas_scene_hank_declaration_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"4b4d90f8-10ec-4682-8b2a-a870d5d722bb\"",
+          "passage": "Canvas_scene_hank_office_first_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"0e16d063-972a-4799-94e3-b04b4bc5635e\"",
+          "passage": "Canvas_scene_hank_office_first_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cdce81c6-ecdd-453c-9cbf-91d80f31c74a\"",
+          "passage": "Canvas_scene_hank_after_close_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"74429b3d-fd29-439c-8c1e-18b8b43c2740\"",
+          "passage": "Canvas_scene_hank_after_close_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cdce81c6-ecdd-453c-9cbf-91d80f31c74a\"",
+          "passage": "Canvas_scene_hank_after_close_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d2c0a376-6f11-41b4-9338-a74ea4ce9ed7\"",
+          "passage": "Canvas_scene_hank_after_close_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cdce81c6-ecdd-453c-9cbf-91d80f31c74a\"",
+          "passage": "Canvas_scene_hank_after_close_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"9e5cb1fe-e230-48bb-9341-77eb70005267\"",
+          "passage": "Canvas_scene_hank_after_close_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"7b74ebbe-c593-40d1-b3cb-4b1fa92b795a\"",
+          "passage": "Canvas_scene_hank_first_contact_kitchen_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5fd05197-6b25-40df-a950-ebcbab28bcc0\"",
+          "passage": "Canvas_scene_hank_first_contact_kitchen_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5d507053-ce06-415f-a20d-6817111d619b\"",
+          "passage": "Canvas_scene_hank_slow_night_talk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"351cd304-b91a-49f5-82f9-906334aadb36\"",
+          "passage": "Canvas_scene_hank_slow_night_talk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"0dfcc336-47ab-4738-8c48-68ea0d24b372\"",
+          "passage": "Canvas_activity_walk_home_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"f8e62a57-c8fa-420a-883c-3fc6c4406795\"",
+          "passage": "Canvas_activity_walk_home_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cb8987ea-0af0-4598-a03d-2f49f0e08ef7\"",
+          "passage": "Canvas_activity_walk_to_town_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a597c119-4de5-4e59-8359-d739f944cac1\"",
+          "passage": "Canvas_activity_walk_to_town_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"9472b87b-cb3d-46f2-a3ac-49c31fbd1a56\"",
+          "passage": "Canvas_activity_work_shift_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5049aa47-8183-4ba4-a6ee-e61ea50f3720\"",
+          "passage": "Canvas_activity_work_shift_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6f0c6485-5919-4443-bf44-09dd1aaa0571\"",
+          "passage": "Canvas_activity_diner_storage_stock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5715f88c-3a3b-4955-be9e-bc44399e9e12\"",
+          "passage": "Canvas_activity_diner_storage_stock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"978b9115-f8ac-4d26-9447-e060bb71d0b9\"",
+          "passage": "Canvas_activity_diner_walkin_stock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"93224470-9261-40a4-b6e2-f00193cbf49b\"",
+          "passage": "Canvas_activity_diner_walkin_stock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"4bbd5442-68d7-466d-b41c-009f2eb6f8d7\"",
+          "passage": "Canvas_activity_diner_kitchen_prep_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a69327d2-ba5a-4b5d-812d-0471e4351d99\"",
+          "passage": "Canvas_activity_diner_kitchen_prep_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"16a1c373-7836-4e9a-a0f4-8c27d456fb97\"",
+          "passage": "Canvas_activity_diner_restock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"cf8a6041-6efd-4e33-817c-dc5337959503\"",
+          "passage": "Canvas_activity_diner_restock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"717dbe38-a0dc-4d98-898d-02c762cc2ec3\"",
+          "passage": "Canvas_activity_sleep_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e9449799-be2b-4aef-ae2f-2ca5a4e3066b\"",
+          "passage": "Canvas_activity_sleep_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"9e447400-68ae-4f8e-bc56-1893d84b0a45\"",
+          "passage": "Canvas_activity_shower_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5f41277d-bdb7-48fa-b8c2-4fee74494aaa\"",
+          "passage": "Canvas_activity_shower_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"13044e42-b120-4c5b-8cc5-a849fecc9f75\"",
+          "passage": "Canvas_activity_change_clothes_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"1aa01001-3911-44c0-846e-99632b947299\"",
+          "passage": "Canvas_activity_change_clothes_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce122a51-3154-4d83-96ee-b9dccf848920\"",
+          "passage": "Canvas_activity_watch_tv_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"0cbb8f06-e2ef-41a0-aadf-5012f20aea41\"",
+          "passage": "Canvas_activity_watch_tv_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"536d52c1-2f3f-4280-a48a-f4b4efefaf83\"",
+          "passage": "Canvas_activity_make_coffee_solo_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d099a0ab-7556-4fb0-992a-6141ade148ac\"",
+          "passage": "Canvas_activity_make_coffee_solo_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"2e3f1477-5478-4d51-ad14-b038d584676c\"",
+          "passage": "Canvas_activity_make_tea_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"0d1ad0ae-b9ab-49be-8a12-827f66bfaa07\"",
+          "passage": "Canvas_activity_make_tea_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"091b7c2a-ca87-4960-9ee1-17a3cf326754\"",
+          "passage": "Canvas_canvas_rosa_onboarding_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"f0971473-12e1-483a-81a0-1d45a7ed6b39\"",
+          "passage": "Canvas_canvas_rosa_onboarding_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"9e5fc796-1dc9-4ded-8d86-18b86baffece\"",
+          "passage": "Canvas_canvas_hank_hire_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6e027fd6-6f72-487e-bfcb-10eaecbdffe5\"",
+          "passage": "Canvas_canvas_hank_hire_Node_1",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": {
+        "current_canvas": "",
+        "visited_locations": [],
+        "visited_nodes": [],
+        "trigger_history": {},
+        "activity_trigger_history": {},
+        "visited_choices": {},
+        "active_modifiers": {},
+        "random_cooldowns": {},
+        "stage_advancement_log": {},
+        "quests": {},
+        "scheduled": [],
+        "fast_jobs": {
+          "xp": 0,
+          "cooldowns": {}
+        },
+        "bank": {
+          "balance": 0
+        },
+        "time_state": {
+          "current_hour": 8,
+          "current_minute": 0,
+          "current_day": "Monday",
+          "current_week": 1,
+          "day": 1
+        },
+        "rent_state": {
+          "last_paid_week": 1,
+          "warnings": 0,
+          "is_due": false
+        }
+      }
+    },
+    "_goals": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.pickQuestsCards(\"story_goals\")",
+          "passage": "QuestsPage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_helpData": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.help_data || {}",
+          "passage": "QuestsPage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_hasNpcs": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "_helpData.npcs && Object.keys(_helpData.npcs).length > 0",
+          "passage": "QuestsPage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_slug": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.npcSlugForId(_npcId)",
+          "passage": "QuestsPage",
+          "gate": [
+            {
+              "condition": "_hasNpcs",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_card": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "_slug ? setup.pickQuestsCard(_slug) : null",
+          "passage": "QuestsPage",
+          "gate": [
+            {
+              "condition": "_hasNpcs",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_tp": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.tips_page || {}",
+          "passage": "TipsPage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_position": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.detectStoryPosition()",
+          "passage": "StoryJournal",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_hint": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.generateNarrativeHint()",
+          "passage": "StoryJournal",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_incompleteGroups": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "_position.active_groups.filter(function(g) { return !g.isComplete && g.completed > 0; })",
+          "passage": "StoryJournal",
+          "gate": [
+            {
+              "condition": "_position.active_groups.length > 0",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_state": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.interpretNpcState(_npcId)",
+          "passage": "StoryJournal",
+          "gate": [
+            {
+              "condition": "Object.keys($npcs).length > 0",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_money": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "$player.core_traits.money || 0",
+          "passage": "RentDay",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_rent": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.rent_amount",
+          "passage": "RentDay",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_rt": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.rent_text || {}",
+          "passage": "RentDay",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.rent_text || {}",
+          "passage": "RentDay_Paid",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.rent_text || {}",
+          "passage": "RentDay_Short",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_collectorName": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "\"the landlord\"",
+          "passage": "RentDay",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_npcData.name",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            },
+            {
+              "condition": "_npcData && _npcData.name",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "\"the landlord\"",
+          "passage": "RentDay_Paid",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_npcData.name",
+          "passage": "RentDay_Paid",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            },
+            {
+              "condition": "_npcData && _npcData.name",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "\"the landlord\"",
+          "passage": "RentDay_Short",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_npcData.name",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            },
+            {
+              "condition": "_npcData && _npcData.name",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_npcPortrait": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "\"\"",
+          "passage": "RentDay",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_npcData.portrait || \"\"",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            },
+            {
+              "condition": "_npcData && _npcData.name",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_npcId": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.npc_slug_map[setup.rent_collector_npc]",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.npc_slug_map[setup.rent_collector_npc]",
+          "passage": "RentDay_Paid",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.npc_slug_map[setup.rent_collector_npc]",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_npcInfo.id",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_npcData": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "$npcs[_npcId]",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "$npcs[_npcId]",
+          "passage": "RentDay_Paid",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "$npcs[_npcId]",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_payText": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "\"Pay $\" + _rent + \" rent\"",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$player.core_traits.money": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": ".core_traits.money",
+          "op": "-=",
+          "value_expr": "_rent",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$game_state.rent_state.last_paid_week": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.last_paid_week",
+          "op": "to",
+          "value_expr": "$game_state.time_state.current_week",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$game_state.rent_state.is_due": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.is_due",
+          "op": "to",
+          "value_expr": "false",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.is_due",
+          "op": "to",
+          "value_expr": "false",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "$game_state.rent_state.warnings lt setup.rent_grace_periods",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.is_due",
+          "op": "to",
+          "value_expr": "false",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "!($game_state.rent_state.warnings lt setup.rent_grace_periods)",
+              "branch": "else"
+            },
+            {
+              "condition": "setup.rent_eviction_mode is \"flag_set\"",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$game_state.rent_state.warnings": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.warnings",
+          "op": "to",
+          "value_expr": "0",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.warnings",
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "$game_state.rent_state.warnings lt setup.rent_grace_periods",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.warnings",
+          "op": "to",
+          "value_expr": "0",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "!($game_state.rent_state.warnings lt setup.rent_grace_periods)",
+              "branch": "else"
+            },
+            {
+              "condition": "setup.rent_eviction_mode is \"flag_set\"",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_cantPayText": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "(_rt.cant_pay || \"Tell them you can't pay\")",
+          "passage": "RentDay",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_returnTo": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "(State.variables.last_game_passage || \"Navigation\")",
+          "passage": "RentDay_Paid",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "(State.variables.last_game_passage || \"Navigation\")",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "$game_state.rent_state.warnings lt setup.rent_grace_periods",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "(State.variables.last_game_passage || \"Navigation\")",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "!($game_state.rent_state.warnings lt setup.rent_grace_periods)",
+              "branch": "else"
+            },
+            {
+              "condition": "setup.rent_eviction_mode is \"flag_set\"",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_currentDay": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "$game_state.time_state.current_day",
+          "passage": "SchedulePage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_todayIndex": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "[\"Monday\", \"Tuesday\", \"Wednesday\", \"Thursday\", \"Friday\", \"Saturday\", \"Sunday\"].indexOf(_currentDay)",
+          "passage": "SchedulePage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_npcsWithSchedules": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.getNpcsWithSchedules()",
+          "passage": "SchedulePage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_npcName": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_npcInfo.name",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_currentLoc": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.getNpcLocation(_npcId)",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_allSchedules": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.getNpcAllSchedulesSorted(_npcId)",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_locName": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "(setup.locations[_currentLoc.location] && setup.locations[_currentLoc.location].name) || setup._locNameFromUuid(_currentLoc.location) || _currentLoc.location",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            },
+            {
+              "condition": "_currentLoc",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_isCurrent": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.isCurrentTimeSlot(_sch.start_time, _sch.end_time) && setup._weekdayMatches(_sch.weekdays, _todayIndex)",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            },
+            {
+              "condition": "!(_allSchedules.length === 0)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_rowClass": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_isCurrent ? \"current-slot\" : \"\"",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            },
+            {
+              "condition": "!(_allSchedules.length === 0)",
+              "branch": "else"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_act.isCurrent ? \"current-slot\" : \"\"",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "_soloActivities.length > 0",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_schLocName": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "(setup.locations[_sch.location] && setup.locations[_sch.location].name) || _sch.location",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            },
+            {
+              "condition": "!(_allSchedules.length === 0)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_soloActivities": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.getSoloActivitiesAllSchedules()",
+          "passage": "SchedulePage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_gkeys": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "Object.keys($flags).sort()",
+          "passage": "FlagsPage",
+          "gate": [
+            {
+              "condition": "$flags && Object.keys($flags).length > 0",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_gk": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_gkeys[_i]",
+          "passage": "FlagsPage",
+          "gate": [
+            {
+              "condition": "$flags && Object.keys($flags).length > 0",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$game_state.current_canvas": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"55aa4e53-4fb4-49c7-bbb7-a3c294e6a863\"",
+          "passage": "StartingCanvas_canvas_first_morning_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"df077256-377e-4326-bfc3-2f7f9a5b05b1\"",
+          "passage": "Canvas_rts_public_clothing_payoff_bold_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"df077256-377e-4326-bfc3-2f7f9a5b05b1\"",
+          "passage": "Canvas_rts_public_clothing_payoff_bold_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"191eade9-d1c1-4cf3-bdb3-892a55b78ecf\"",
+          "passage": "Canvas_rts_public_clothing_payoff_street_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5a3d1e64-a2fc-4b1e-996d-1b7b12a16891\"",
+          "passage": "Canvas_rts_public_clothing_flash_diner_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5a3d1e64-a2fc-4b1e-996d-1b7b12a16891\"",
+          "passage": "Canvas_rts_public_clothing_flash_diner_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5116bfb6-8ff0-47cb-8a82-fb1aa67d4656\"",
+          "passage": "Canvas_rts_public_clothing_flash_park_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5116bfb6-8ff0-47cb-8a82-fb1aa67d4656\"",
+          "passage": "Canvas_rts_public_clothing_flash_park_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ac87852b-e1c6-446a-9e5a-cf4aebf2bf03\"",
+          "passage": "Canvas_rts_public_clothing_store_clerk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"f8bf05bf-9913-422c-a729-68650922404e\"",
+          "passage": "Canvas_rts_public_clothing_park_jogger_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"dfcafbd6-68b3-4111-ba3c-20a23e2eb0d3\"",
+          "passage": "Canvas_rts_public_clothing_street_stares_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"2f6938ae-b544-4c4b-9715-71c6f3e4b913\"",
+          "passage": "Canvas_rts_public_clothing_diner_beauty_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d11dbdff-bb31-4173-a899-5f2e90aa2d2e\"",
+          "passage": "Canvas_rts_public_clothing_diner_customers_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"602994b4-8a5b-40cd-a130-ec173b2f6ac4\"",
+          "passage": "Canvas_cole_park_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"7c2a21ee-2bf9-4915-b058-54c738cd8053\"",
+          "passage": "Canvas_ambient_cole_park_sketching_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"a044c633-7bb5-4ece-9bea-332f990e4829\"",
+          "passage": "Canvas_ambient_pam_hallway_neutral_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"97c0ac81-7226-4d2e-bebc-dbac91ec98e5\"",
+          "passage": "Canvas_scene_ben_walks_in_change_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"265709d7-f7f7-4ba7-abb5-90613144bd82\"",
+          "passage": "Canvas_scene_ben_couch_reveal_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"94cbd715-0b1e-4824-8150-e67104dbbaeb\"",
+          "passage": "Canvas_scene_ben_walks_in_kitchen_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"4ad610fe-f29c-4521-b55c-df0fb48b5fec\"",
+          "passage": "Canvas_scene_hank_storage_room_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"c48cf3e9-6717-4cc7-93a1-4c49b7c2f5c1\"",
+          "passage": "Canvas_scene_hank_walkin_encounter_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"81d799f9-01b5-4347-b73a-8cfc155941a1\"",
+          "passage": "Canvas_scene_hank_kitchen_doorway_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"53ec5900-d5a9-4b1b-a028-8e8b8a1a7b9a\"",
+          "passage": "Canvas_scene_hank_passes_during_restock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"3822b3fb-62e8-4143-848e-0e2c1d45b933\"",
+          "passage": "Canvas_ambient_pam_building_loaded_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"0056166a-c1c0-46b3-b2ad-5439c208a4c0\"",
+          "passage": "Canvas_ambient_pam_building_neutral_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"7da5e3d2-b092-4dd9-8e29-be7d684575b4\"",
+          "passage": "Canvas_ambient_ben_couch_reading_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"087755b8-7189-4332-b9c2-ef1cf882bd5d\"",
+          "passage": "Canvas_ambient_ben_morning_crossover_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"96947e2e-d621-4c20-835b-7430d2a6c6e7\"",
+          "passage": "Canvas_ambient_hank_mel_reference_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"2987fbe3-a1b7-415b-8c4d-4aa34073b36e\"",
+          "passage": "Canvas_ambient_hank_diner_observation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"34c27235-b02e-4527-8e3c-5977e7671c63\"",
+          "passage": "Canvas_ambient_hank_counter_alone_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"c94b8f8f-6deb-4b43-9482-b881ae7299cf\"",
+          "passage": "Canvas_rosa_diner_front_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d6b661a5-355a-481c-a8a3-47354b8c7ccd\"",
+          "passage": "Canvas_cole_apartment_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d6b661a5-355a-481c-a8a3-47354b8c7ccd\"",
+          "passage": "Canvas_cole_apartment_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"363a2b6f-1634-4e75-8fa2-3630b2403f36\"",
+          "passage": "Canvas_cole_diner_back_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"b03b4f1b-88ad-4abc-ab1d-1ab456fb1531\"",
+          "passage": "Canvas_ben_room_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"b03b4f1b-88ad-4abc-ab1d-1ab456fb1531\"",
+          "passage": "Canvas_ben_room_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"b03b4f1b-88ad-4abc-ab1d-1ab456fb1531\"",
+          "passage": "Canvas_ben_room_hub_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"7d90c225-0968-445b-b700-cb5705892ab3\"",
+          "passage": "Canvas_ben_living_room_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"51324d33-0228-4076-bbc7-e118687184ef\"",
+          "passage": "Canvas_ben_kitchen_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cd166f5b-eadd-4054-92d1-1cc6c7f3d712\"",
+          "passage": "Canvas_hank_office_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cd166f5b-eadd-4054-92d1-1cc6c7f3d712\"",
+          "passage": "Canvas_hank_office_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cd166f5b-eadd-4054-92d1-1cc6c7f3d712\"",
+          "passage": "Canvas_hank_office_hub_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"12e81d85-7512-4f48-a783-fde9a4fc3d4d\"",
+          "passage": "Canvas_hank_flash_diner_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"7cee466a-c7d8-45ab-9dc8-b63c76099571\"",
+          "passage": "Canvas_hank_tease_diner_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cd6c3902-bcdb-4c67-8f49-39993d68ef2b\"",
+          "passage": "Canvas_hank_diner_front_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cd6c3902-bcdb-4c67-8f49-39993d68ef2b\"",
+          "passage": "Canvas_hank_diner_front_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cd6c3902-bcdb-4c67-8f49-39993d68ef2b\"",
+          "passage": "Canvas_hank_diner_front_hub_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d71fa004-dbfa-4977-8dac-7c5fdabb2438\"",
+          "passage": "Canvas_scene_pam_confrontation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d71fa004-dbfa-4977-8dac-7c5fdabb2438\"",
+          "passage": "Canvas_scene_pam_confrontation_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d71fa004-dbfa-4977-8dac-7c5fdabb2438\"",
+          "passage": "Canvas_scene_pam_confrontation_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"33048ed6-6601-4082-8ce5-e9a5e864c5ce\"",
+          "passage": "Canvas_scene_cole_first_night_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"33048ed6-6601-4082-8ce5-e9a5e864c5ce\"",
+          "passage": "Canvas_scene_cole_first_night_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"33048ed6-6601-4082-8ce5-e9a5e864c5ce\"",
+          "passage": "Canvas_scene_cole_first_night_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"4c6fcc90-665f-49a1-a6c8-633526c1baf3\"",
+          "passage": "Canvas_scene_cole_first_date_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"0b3b0e31-cd7f-47cc-8bf8-252f274f04b3\"",
+          "passage": "Canvas_scene_cole_post_shift_walk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"479b3ad3-f5b4-4135-9094-8d1df0f8c064\"",
+          "passage": "Canvas_scene_cole_first_break_talk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"1528bdcd-3e71-4a27-8de4-388156f5052b\"",
+          "passage": "Canvas_scene_ben_pregnancy_revelation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"81a9e16e-6575-48b7-9c26-12b64885bcd5\"",
+          "passage": "Canvas_event_pregnancy_onset_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5827be66-6ffb-400c-ae73-1355db667b88\"",
+          "passage": "Canvas_scene_ben_consummation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"17743093-654c-465b-a775-34f5ab8362de\"",
+          "passage": "Canvas_scene_ben_stage2_charged_moment_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"17743093-654c-465b-a775-34f5ab8362de\"",
+          "passage": "Canvas_scene_ben_stage2_charged_moment_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"17743093-654c-465b-a775-34f5ab8362de\"",
+          "passage": "Canvas_scene_ben_stage2_charged_moment_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"660d8fc7-d8f4-44b3-80ff-42a82bd906e3\"",
+          "passage": "Canvas_scene_ben_stage1_via_glance_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"8b02ba84-15e0-4b99-83ad-bbc04e96ffd6\"",
+          "passage": "Canvas_scene_ben_stage1_via_beauty_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"539180a3-daff-4bd6-a917-6925a389a27f\"",
+          "passage": "Canvas_scene_hank_declaration_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"4b4d90f8-10ec-4682-8b2a-a870d5d722bb\"",
+          "passage": "Canvas_scene_hank_office_first_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cdce81c6-ecdd-453c-9cbf-91d80f31c74a\"",
+          "passage": "Canvas_scene_hank_after_close_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cdce81c6-ecdd-453c-9cbf-91d80f31c74a\"",
+          "passage": "Canvas_scene_hank_after_close_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cdce81c6-ecdd-453c-9cbf-91d80f31c74a\"",
+          "passage": "Canvas_scene_hank_after_close_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"7b74ebbe-c593-40d1-b3cb-4b1fa92b795a\"",
+          "passage": "Canvas_scene_hank_first_contact_kitchen_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5d507053-ce06-415f-a20d-6817111d619b\"",
+          "passage": "Canvas_scene_hank_slow_night_talk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"0dfcc336-47ab-4738-8c48-68ea0d24b372\"",
+          "passage": "Canvas_activity_walk_home_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"cb8987ea-0af0-4598-a03d-2f49f0e08ef7\"",
+          "passage": "Canvas_activity_walk_to_town_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"9472b87b-cb3d-46f2-a3ac-49c31fbd1a56\"",
+          "passage": "Canvas_activity_work_shift_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6f0c6485-5919-4443-bf44-09dd1aaa0571\"",
+          "passage": "Canvas_activity_diner_storage_stock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"978b9115-f8ac-4d26-9447-e060bb71d0b9\"",
+          "passage": "Canvas_activity_diner_walkin_stock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"4bbd5442-68d7-466d-b41c-009f2eb6f8d7\"",
+          "passage": "Canvas_activity_diner_kitchen_prep_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"16a1c373-7836-4e9a-a0f4-8c27d456fb97\"",
+          "passage": "Canvas_activity_diner_restock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"717dbe38-a0dc-4d98-898d-02c762cc2ec3\"",
+          "passage": "Canvas_activity_sleep_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"9e447400-68ae-4f8e-bc56-1893d84b0a45\"",
+          "passage": "Canvas_activity_shower_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"13044e42-b120-4c5b-8cc5-a849fecc9f75\"",
+          "passage": "Canvas_activity_change_clothes_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce122a51-3154-4d83-96ee-b9dccf848920\"",
+          "passage": "Canvas_activity_watch_tv_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"536d52c1-2f3f-4280-a48a-f4b4efefaf83\"",
+          "passage": "Canvas_activity_make_coffee_solo_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"2e3f1477-5478-4d51-ad14-b038d584676c\"",
+          "passage": "Canvas_activity_make_tea_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"091b7c2a-ca87-4960-9ee1-17a3cf326754\"",
+          "passage": "Canvas_canvas_rosa_onboarding_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"9e5fc796-1dc9-4ded-8d86-18b86baffece\"",
+          "passage": "Canvas_canvas_hank_hire_Node_1",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$game_state.current_node": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"49c64744-cdce-46e6-b6d6-1178cf7942cd\"",
+          "passage": "StartingCanvas_canvas_first_morning_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"b086c68d-b770-406f-b721-7673ba5db42b\"",
+          "passage": "Canvas_rts_public_clothing_payoff_bold_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5c1f98c0-7af2-405c-acad-c839f1073ce7\"",
+          "passage": "Canvas_rts_public_clothing_payoff_bold_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ed976809-cb8d-42ba-97e8-6ae7bf18dac9\"",
+          "passage": "Canvas_rts_public_clothing_payoff_street_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"b9b85701-966e-428e-b4e4-137925f32565\"",
+          "passage": "Canvas_rts_public_clothing_flash_diner_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"121dcc14-69f3-4825-96aa-7d70375e51d9\"",
+          "passage": "Canvas_rts_public_clothing_flash_diner_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4830ebf9-8427-41f1-a05d-9f612ff2d62c\"",
+          "passage": "Canvas_rts_public_clothing_flash_park_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"dd063602-c806-42f6-ac9d-a160182ff20e\"",
+          "passage": "Canvas_rts_public_clothing_flash_park_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"2d7130ab-70da-4908-a962-a43daed96d8d\"",
+          "passage": "Canvas_rts_public_clothing_store_clerk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"972534cc-4075-4d6a-aaed-ae02161114d7\"",
+          "passage": "Canvas_rts_public_clothing_park_jogger_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ce96d6cd-5b18-4356-94a0-5b69392b67d0\"",
+          "passage": "Canvas_rts_public_clothing_street_stares_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"60cd3114-024c-4050-be5c-d6ef9aafc222\"",
+          "passage": "Canvas_rts_public_clothing_diner_beauty_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4bc2be22-54d6-4d09-a6c7-0d87d963e63b\"",
+          "passage": "Canvas_rts_public_clothing_diner_customers_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"9f960ddc-6a5e-46a0-8618-7b985008bad8\"",
+          "passage": "Canvas_cole_park_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d3a21acf-515a-4500-bee3-d3a3d4132165\"",
+          "passage": "Canvas_ambient_cole_park_sketching_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"02d84af9-f906-4f84-a656-2df850605c35\"",
+          "passage": "Canvas_ambient_pam_hallway_neutral_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"1c7a48b8-aeb5-4a1f-91d9-09676f6ff53c\"",
+          "passage": "Canvas_scene_ben_walks_in_change_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ec61ce36-8f46-4cf1-bb2f-fddf1dad4d78\"",
+          "passage": "Canvas_scene_ben_couch_reveal_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6985c28f-4229-4ded-9251-0799aac6dbee\"",
+          "passage": "Canvas_scene_ben_walks_in_kitchen_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6e9a250a-9619-458d-b6ad-387e4b6620bb\"",
+          "passage": "Canvas_scene_hank_storage_room_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"b5602b3e-8317-439f-9734-b0ba4bec9569\"",
+          "passage": "Canvas_scene_hank_walkin_encounter_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"fd8a0f16-b19f-4417-a387-ced57af406ee\"",
+          "passage": "Canvas_scene_hank_kitchen_doorway_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6006c339-cdfb-4bd4-8c63-89fd99dfa909\"",
+          "passage": "Canvas_scene_hank_passes_during_restock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ff000487-3427-4013-ae05-f03c10de7249\"",
+          "passage": "Canvas_ambient_pam_building_loaded_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4828874d-ee81-49a9-b8a3-12c267f8b1a8\"",
+          "passage": "Canvas_ambient_pam_building_neutral_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6d6fdaf1-1e76-4cd0-9af7-1855de07466a\"",
+          "passage": "Canvas_ambient_ben_couch_reading_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"c8fb9576-7a35-4cc1-a9c1-1b27af37341a\"",
+          "passage": "Canvas_ambient_ben_morning_crossover_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"2fbbcb50-3ee9-4fd0-a59a-a5227d4d0459\"",
+          "passage": "Canvas_ambient_hank_mel_reference_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4dca1ce2-f94c-4142-8994-1b5a1628ee63\"",
+          "passage": "Canvas_ambient_hank_diner_observation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e414895d-5722-4aa3-921a-c9e74f6fe771\"",
+          "passage": "Canvas_ambient_hank_counter_alone_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"9ee27818-51e6-4b36-bd94-cb8b461a2254\"",
+          "passage": "Canvas_rosa_diner_front_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a88c4c94-8630-42f0-82ff-414276e4c470\"",
+          "passage": "Canvas_cole_apartment_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4cc4b14f-4b16-472e-9031-476dbc916d1d\"",
+          "passage": "Canvas_cole_apartment_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"9153337e-f6c1-4b76-a840-233d773764af\"",
+          "passage": "Canvas_cole_diner_back_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"917e0d48-90bf-4e85-be08-752062527b3d\"",
+          "passage": "Canvas_ben_room_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"bab95188-5fee-4585-a502-0da59a847fd6\"",
+          "passage": "Canvas_ben_room_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5b658210-19e4-4c8d-852e-54f646cc49cc\"",
+          "passage": "Canvas_ben_room_hub_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a82e2aab-8159-4edd-9c17-8ec4f58a8706\"",
+          "passage": "Canvas_ben_living_room_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"b6cb03de-274c-4509-91a6-9fd74df82418\"",
+          "passage": "Canvas_ben_kitchen_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d6669b4e-8dba-4c10-95d5-a4341802a96e\"",
+          "passage": "Canvas_hank_office_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"082fd76d-73cd-4d39-bf25-fcb4016e7ee1\"",
+          "passage": "Canvas_hank_office_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e34c7f73-dda1-4bfe-9067-0805b5d369a6\"",
+          "passage": "Canvas_hank_office_hub_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"f5bbc485-5361-4dd8-a1a6-02e73df5eec3\"",
+          "passage": "Canvas_hank_flash_diner_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d6a63668-b577-4d20-88d0-02cdfa613cbb\"",
+          "passage": "Canvas_hank_tease_diner_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"599da9be-ff02-4b2d-93f9-ad1d8f7680f7\"",
+          "passage": "Canvas_hank_diner_front_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"b2bed941-aa2a-4958-a3dc-c1ce68bad256\"",
+          "passage": "Canvas_hank_diner_front_hub_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"0a999c97-3af7-4611-a14c-fbf7232c218d\"",
+          "passage": "Canvas_hank_diner_front_hub_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"9b02fc9e-a2ea-4bfd-8ffd-c3f9a798d7b0\"",
+          "passage": "Canvas_scene_pam_confrontation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"dd187d50-1bc3-4e4d-94b9-5a53d3b1c35a\"",
+          "passage": "Canvas_scene_pam_confrontation_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"cdc08471-8a0e-4db4-8e79-394d7b0ca9fc\"",
+          "passage": "Canvas_scene_pam_confrontation_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"bb4c81df-0a7b-446e-a54d-ca7d40b2b2b3\"",
+          "passage": "Canvas_scene_cole_first_night_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"302b06f7-a618-49da-bf29-ca1330ffdbc7\"",
+          "passage": "Canvas_scene_cole_first_night_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"df52a6f4-c088-486c-84c5-251d8a808921\"",
+          "passage": "Canvas_scene_cole_first_night_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"144b1cd0-c9b4-462f-8187-2f8572417775\"",
+          "passage": "Canvas_scene_cole_first_date_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"1cbd5448-1ae2-44a9-a218-288c0f2c8034\"",
+          "passage": "Canvas_scene_cole_post_shift_walk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"3a16167a-c68c-4129-9355-5b8f58b82f82\"",
+          "passage": "Canvas_scene_cole_first_break_talk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a7461590-bab9-4edd-9da9-211bbaec094a\"",
+          "passage": "Canvas_scene_ben_pregnancy_revelation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e2c17d79-9479-4733-b76a-112d05b5f357\"",
+          "passage": "Canvas_event_pregnancy_onset_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"21c798a4-9aea-42be-a096-e961ca9ede9a\"",
+          "passage": "Canvas_scene_ben_consummation_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"88f8cef3-3851-4a28-8c15-bd6f76a95e24\"",
+          "passage": "Canvas_scene_ben_stage2_charged_moment_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"8e2ea1d1-bb7e-4070-a17e-0588adeac5bd\"",
+          "passage": "Canvas_scene_ben_stage2_charged_moment_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4ebcd93c-2c00-4e92-8d31-7d5454fba7db\"",
+          "passage": "Canvas_scene_ben_stage2_charged_moment_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"c4622896-2bb7-45de-9f30-1efcc133e32b\"",
+          "passage": "Canvas_scene_ben_stage1_via_glance_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"f3063348-65e0-44e7-a644-66ce0be3f641\"",
+          "passage": "Canvas_scene_ben_stage1_via_beauty_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"878b22a7-18c2-441a-961e-b8164cbce730\"",
+          "passage": "Canvas_scene_hank_declaration_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"0e16d063-972a-4799-94e3-b04b4bc5635e\"",
+          "passage": "Canvas_scene_hank_office_first_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"74429b3d-fd29-439c-8c1e-18b8b43c2740\"",
+          "passage": "Canvas_scene_hank_after_close_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d2c0a376-6f11-41b4-9338-a74ea4ce9ed7\"",
+          "passage": "Canvas_scene_hank_after_close_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"9e5cb1fe-e230-48bb-9341-77eb70005267\"",
+          "passage": "Canvas_scene_hank_after_close_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5fd05197-6b25-40df-a950-ebcbab28bcc0\"",
+          "passage": "Canvas_scene_hank_first_contact_kitchen_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"351cd304-b91a-49f5-82f9-906334aadb36\"",
+          "passage": "Canvas_scene_hank_slow_night_talk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"f8e62a57-c8fa-420a-883c-3fc6c4406795\"",
+          "passage": "Canvas_activity_walk_home_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a597c119-4de5-4e59-8359-d739f944cac1\"",
+          "passage": "Canvas_activity_walk_to_town_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5049aa47-8183-4ba4-a6ee-e61ea50f3720\"",
+          "passage": "Canvas_activity_work_shift_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5715f88c-3a3b-4955-be9e-bc44399e9e12\"",
+          "passage": "Canvas_activity_diner_storage_stock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"93224470-9261-40a4-b6e2-f00193cbf49b\"",
+          "passage": "Canvas_activity_diner_walkin_stock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a69327d2-ba5a-4b5d-812d-0471e4351d99\"",
+          "passage": "Canvas_activity_diner_kitchen_prep_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"cf8a6041-6efd-4e33-817c-dc5337959503\"",
+          "passage": "Canvas_activity_diner_restock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e9449799-be2b-4aef-ae2f-2ca5a4e3066b\"",
+          "passage": "Canvas_activity_sleep_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5f41277d-bdb7-48fa-b8c2-4fee74494aaa\"",
+          "passage": "Canvas_activity_shower_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"1aa01001-3911-44c0-846e-99632b947299\"",
+          "passage": "Canvas_activity_change_clothes_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"0cbb8f06-e2ef-41a0-aadf-5012f20aea41\"",
+          "passage": "Canvas_activity_watch_tv_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d099a0ab-7556-4fb0-992a-6141ade148ac\"",
+          "passage": "Canvas_activity_make_coffee_solo_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"0d1ad0ae-b9ab-49be-8a12-827f66bfaa07\"",
+          "passage": "Canvas_activity_make_tea_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"f0971473-12e1-483a-81a0-1d45a7ed6b39\"",
+          "passage": "Canvas_canvas_rosa_onboarding_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6e027fd6-6f72-487e-bfcb-10eaecbdffe5\"",
+          "passage": "Canvas_canvas_hank_hire_Node_1",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$player.current_location": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"3e253ffb-3a0c-4af9-bbfd-478ab46a324c\"",
+          "passage": "Location_Maya's_Apartment",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"6dfb4cc6-eb2b-44ac-9fe0-f91a63c9fbfb\"",
+          "passage": "Location_Maya's_Room",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"e8beca0f-3ec1-4c71-9fdf-1016faea5dbe\"",
+          "passage": "Location_Ben's_Room",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"15cf8d3c-5fbd-4d0f-9d99-e1e88f3bd5c5\"",
+          "passage": "Location_Kitchen",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"350a510d-8ae0-4cda-8c47-4dcae0312c6f\"",
+          "passage": "Location_Living_Room",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"1149da3d-e914-4586-94af-b906d8be9e28\"",
+          "passage": "Location_Bathroom",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"a1613fc2-bc00-4269-b085-23a4c61a9e32\"",
+          "passage": "Location_Laundry_Nook",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"e4603450-b32b-41ec-adb7-11c93b757c18\"",
+          "passage": "Location_Building_Front",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"544a15ff-6d7d-4899-b024-87b8e8c57c6b\"",
+          "passage": "Location_Building_Hallway",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"163b69cb-f1c7-4824-9a94-5a8439fec41f\"",
+          "passage": "Location_Main_Street",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"6f0b88a9-10e5-4481-9585-88855f38c53c\"",
+          "passage": "Location_Mel's_—_Dining_Floor",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"1625426c-dee2-4d7c-9559-ed712ed11561\"",
+          "passage": "Location_Mel's_—_Kitchen",
+          "gate": [
+            {
+              "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"hired_at_diner\", \"operator\": \"is_true\"}]})",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"8aeb5b2b-fda5-458d-8d6a-51f56ca2e1a3\"",
+          "passage": "Location_Mel's_—_Back_Office",
+          "gate": [
+            {
+              "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"hank_first_contact\", \"operator\": \"is_true\"}]})",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"9e05710e-59ab-40b4-83f4-4dcfd58cc6dd\"",
+          "passage": "Location_Town_Park",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"954ea3ff-8a2d-440f-97ba-b0c5add4a96c\"",
+          "passage": "Location_Cole's_Apartment",
+          "gate": [
+            {
+              "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"cole_date_done\", \"operator\": \"is_true\"}]})",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"3687f7bd-d997-4477-b7ef-3858daadb3b6\"",
+          "passage": "Location_Convenience_Store",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"a76d080e-1b7e-4df6-891e-c043b619f2cd\"",
+          "passage": "Location_Second-Hand_Threads",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_autoFire": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"3e253ffb-3a0c-4af9-bbfd-478ab46a324c\")",
+          "passage": "Location_Maya's_Apartment",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"6dfb4cc6-eb2b-44ac-9fe0-f91a63c9fbfb\")",
+          "passage": "Location_Maya's_Room",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"e8beca0f-3ec1-4c71-9fdf-1016faea5dbe\")",
+          "passage": "Location_Ben's_Room",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"15cf8d3c-5fbd-4d0f-9d99-e1e88f3bd5c5\")",
+          "passage": "Location_Kitchen",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"350a510d-8ae0-4cda-8c47-4dcae0312c6f\")",
+          "passage": "Location_Living_Room",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"1149da3d-e914-4586-94af-b906d8be9e28\")",
+          "passage": "Location_Bathroom",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"a1613fc2-bc00-4269-b085-23a4c61a9e32\")",
+          "passage": "Location_Laundry_Nook",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"e4603450-b32b-41ec-adb7-11c93b757c18\")",
+          "passage": "Location_Building_Front",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"544a15ff-6d7d-4899-b024-87b8e8c57c6b\")",
+          "passage": "Location_Building_Hallway",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"163b69cb-f1c7-4824-9a94-5a8439fec41f\")",
+          "passage": "Location_Main_Street",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"6f0b88a9-10e5-4481-9585-88855f38c53c\")",
+          "passage": "Location_Mel's_—_Dining_Floor",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"1625426c-dee2-4d7c-9559-ed712ed11561\")",
+          "passage": "Location_Mel's_—_Kitchen",
+          "gate": [
+            {
+              "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"hired_at_diner\", \"operator\": \"is_true\"}]})",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"8aeb5b2b-fda5-458d-8d6a-51f56ca2e1a3\")",
+          "passage": "Location_Mel's_—_Back_Office",
+          "gate": [
+            {
+              "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"hank_first_contact\", \"operator\": \"is_true\"}]})",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"9e05710e-59ab-40b4-83f4-4dcfd58cc6dd\")",
+          "passage": "Location_Town_Park",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"954ea3ff-8a2d-440f-97ba-b0c5add4a96c\")",
+          "passage": "Location_Cole's_Apartment",
+          "gate": [
+            {
+              "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"cole_date_done\", \"operator\": \"is_true\"}]})",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"3687f7bd-d997-4477-b7ef-3858daadb3b6\")",
+          "passage": "Location_Convenience_Store",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"a76d080e-1b7e-4df6-891e-c043b619f2cd\")",
+          "passage": "Location_Second-Hand_Threads",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_diagChoices": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "window._engineNoExitsDiag_hank_tease_diner",
+          "passage": "Canvas_hank_tease_diner_Node_1",
+          "gate": [
+            {
+              "condition": "not (setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"lt\", \"value\": 15}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 15}]}))",
+              "branch": "if"
+            },
+            {
+              "condition": "$flags.debug_mode",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_ch": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_diagChoices[_i]",
+          "passage": "Canvas_hank_tease_diner_Node_1",
+          "gate": [
+            {
+              "condition": "not (setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"lt\", \"value\": 15}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 15}]}))",
+              "branch": "if"
+            },
+            {
+              "condition": "$flags.debug_mode",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_it": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_ch.conditions.items[_j]",
+          "passage": "Canvas_hank_tease_diner_Node_1",
+          "gate": [
+            {
+              "condition": "not (setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"lt\", \"value\": 15}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 15}]}))",
+              "branch": "if"
+            },
+            {
+              "condition": "$flags.debug_mode",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_single": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "{version: \"1.0\", logic: \"AND\", items: [_it]}",
+          "passage": "Canvas_hank_tease_diner_Node_1",
+          "gate": [
+            {
+              "condition": "not (setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"lt\", \"value\": 15}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 15}]}))",
+              "branch": "if"
+            },
+            {
+              "condition": "$flags.debug_mode",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_ok": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.triggerConditionsSatisfied(_single)",
+          "passage": "Canvas_hank_tease_diner_Node_1",
+          "gate": [
+            {
+              "condition": "not (setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"lt\", \"value\": 15}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 15}]}))",
+              "branch": "if"
+            },
+            {
+              "condition": "$flags.debug_mode",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_sub_target": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.checkAndSubstituteCanvas(\"9472b87b-cb3d-46f2-a3ac-49c31fbd1a56\")",
+          "passage": "Canvas_activity_work_shift_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.checkAndSubstituteCanvas(\"6f0c6485-5919-4443-bf44-09dd1aaa0571\")",
+          "passage": "Canvas_activity_diner_storage_stock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.checkAndSubstituteCanvas(\"978b9115-f8ac-4d26-9447-e060bb71d0b9\")",
+          "passage": "Canvas_activity_diner_walkin_stock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.checkAndSubstituteCanvas(\"4bbd5442-68d7-466d-b41c-009f2eb6f8d7\")",
+          "passage": "Canvas_activity_diner_kitchen_prep_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.checkAndSubstituteCanvas(\"16a1c373-7836-4e9a-a0f4-8c27d456fb97\")",
+          "passage": "Canvas_activity_diner_restock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.checkAndSubstituteCanvas(\"13044e42-b120-4c5b-8cc5-a849fecc9f75\")",
+          "passage": "Canvas_activity_change_clothes_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.checkAndSubstituteCanvas(\"ce122a51-3154-4d83-96ee-b9dccf848920\")",
+          "passage": "Canvas_activity_watch_tv_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.checkAndSubstituteCanvas(\"536d52c1-2f3f-4280-a48a-f4b4efefaf83\")",
+          "passage": "Canvas_activity_make_coffee_solo_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.checkAndSubstituteCanvas(\"2e3f1477-5478-4d51-ad14-b038d584676c\")",
+          "passage": "Canvas_activity_make_tea_Node_1",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$last_game_passage": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": "Start"
+    }
+  },
+  "complex_setters": [
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"3e253ffb-3a0c-4af9-bbfd-478ab46a324c\")",
+      "passage": "Location_Maya's_Apartment",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"3e253ffb-3a0c-4af9-bbfd-478ab46a324c\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"6dfb4cc6-eb2b-44ac-9fe0-f91a63c9fbfb\")",
+      "passage": "Location_Maya's_Room",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"6dfb4cc6-eb2b-44ac-9fe0-f91a63c9fbfb\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"e8beca0f-3ec1-4c71-9fdf-1016faea5dbe\")",
+      "passage": "Location_Ben's_Room",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"e8beca0f-3ec1-4c71-9fdf-1016faea5dbe\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"15cf8d3c-5fbd-4d0f-9d99-e1e88f3bd5c5\")",
+      "passage": "Location_Kitchen",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"15cf8d3c-5fbd-4d0f-9d99-e1e88f3bd5c5\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"350a510d-8ae0-4cda-8c47-4dcae0312c6f\")",
+      "passage": "Location_Living_Room",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"350a510d-8ae0-4cda-8c47-4dcae0312c6f\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"1149da3d-e914-4586-94af-b906d8be9e28\")",
+      "passage": "Location_Bathroom",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"1149da3d-e914-4586-94af-b906d8be9e28\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"a1613fc2-bc00-4269-b085-23a4c61a9e32\")",
+      "passage": "Location_Laundry_Nook",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"a1613fc2-bc00-4269-b085-23a4c61a9e32\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"e4603450-b32b-41ec-adb7-11c93b757c18\")",
+      "passage": "Location_Building_Front",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"e4603450-b32b-41ec-adb7-11c93b757c18\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"544a15ff-6d7d-4899-b024-87b8e8c57c6b\")",
+      "passage": "Location_Building_Hallway",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"544a15ff-6d7d-4899-b024-87b8e8c57c6b\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"163b69cb-f1c7-4824-9a94-5a8439fec41f\")",
+      "passage": "Location_Main_Street",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"163b69cb-f1c7-4824-9a94-5a8439fec41f\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"6f0b88a9-10e5-4481-9585-88855f38c53c\")",
+      "passage": "Location_Mel's_—_Dining_Floor",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"6f0b88a9-10e5-4481-9585-88855f38c53c\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"1625426c-dee2-4d7c-9559-ed712ed11561\")",
+      "passage": "Location_Mel's_—_Kitchen",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"hired_at_diner\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "not $game_state.visited_locations.includes(\"1625426c-dee2-4d7c-9559-ed712ed11561\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"8aeb5b2b-fda5-458d-8d6a-51f56ca2e1a3\")",
+      "passage": "Location_Mel's_—_Back_Office",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"hank_first_contact\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "not $game_state.visited_locations.includes(\"8aeb5b2b-fda5-458d-8d6a-51f56ca2e1a3\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"9e05710e-59ab-40b4-83f4-4dcfd58cc6dd\")",
+      "passage": "Location_Town_Park",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"9e05710e-59ab-40b4-83f4-4dcfd58cc6dd\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"954ea3ff-8a2d-440f-97ba-b0c5add4a96c\")",
+      "passage": "Location_Cole's_Apartment",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"cole_date_done\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "not $game_state.visited_locations.includes(\"954ea3ff-8a2d-440f-97ba-b0c5add4a96c\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"3687f7bd-d997-4477-b7ef-3858daadb3b6\")",
+      "passage": "Location_Convenience_Store",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"3687f7bd-d997-4477-b7ef-3858daadb3b6\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"a76d080e-1b7e-4df6-891e-c043b619f2cd\")",
+      "passage": "Location_Second-Hand_Threads",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"a76d080e-1b7e-4df6-891e-c043b619f2cd\")",
+          "branch": "if"
+        }
+      ]
+    }
+  ]
+}

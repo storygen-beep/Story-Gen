@@ -1,0 +1,7 @@
+{"ts":"2026-05-30T15:50:13.526Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"Start","state_hash":"0fd633fe4c9e68ba"}
+{"ts":"2026-05-30T15:50:35.503Z","session_id":1,"cmd":"click","args":{"positional":["✓ I am 18 or older - Enter Game"]},"ok":true,"passage":"StartingCanvas_canvas_first_morning_Node_1","state_hash":"4062f1d50e2aa5d5","clicked_text":"✓ I am 18 or older - Enter Game","method":"visible-has-text","state_changed":true}
+{"ts":"2026-05-30T15:50:58.408Z","session_id":1,"cmd":"eval","args":{"positional":["try{SugarCube.Engine.play('SchedulePage');}catch(e){}"]},"ok":true,"passage":"SchedulePage","state_hash":"c5f876083a23d9ac"}
+{"ts":"2026-05-30T15:51:00.001Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"SchedulePage","state_hash":"c5f876083a23d9ac"}
+{"ts":"2026-05-30T15:51:23.564Z","session_id":1,"cmd":"eval","args":{"positional":["try{SugarCube.Engine.play('SchedulePage');}catch(e){}"]},"ok":true,"passage":"SchedulePage","state_hash":"c5f876083a23d9ac"}
+{"ts":"2026-05-30T15:51:24.986Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"SchedulePage","state_hash":"c5f876083a23d9ac"}
+{"ts":"2026-05-30T15:52:07.329Z","session_id":1,"cmd":"stop","args":{},"ok":true}

@@ -1,0 +1,3481 @@
+{
+  "generated_at": "2026-05-30T04:24:28.169Z",
+  "total_passages": 158,
+  "skipped_passages": 0,
+  "parse_errors": 0,
+  "total_edges": 260,
+  "edges_by_kind": {
+    "wiki": 77,
+    "button": 114,
+    "link": 69
+  },
+  "edges": [
+    {
+      "from": "Start",
+      "to": "StartingCanvas_canvas_first_morning_Node_1",
+      "display": "✓ I am 18 or older - Enter Game",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2903
+    },
+    {
+      "from": "Start",
+      "to": "AgeBlocked",
+      "display": "✗ I am NOT 18 or older",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2983
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "CanvasReviewList",
+      "display": "📋 Review Canvases",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 3624
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "QuestsPage",
+      "display": "📋 Quests",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"QuestsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 17954
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "MissingMediaPage",
+      "display": "⚠️ Missing Media",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "$flags.debug_mode",
+          "branch": "if"
+        },
+        {
+          "condition": "passage() isnot \"MissingMediaPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 18204
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "QuestsPage",
+      "display": "📋 Quests",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"QuestsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 18458
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "TipsPage",
+      "display": "💡 Tips",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.tips_page && setup.tips_page.content",
+          "branch": "if"
+        },
+        {
+          "condition": "passage() isnot \"TipsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 18766
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "StatsPage",
+      "display": "📊 Stats",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"StatsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 18944
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "SchedulePage",
+      "display": "📅 Schedules",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "_npcsWithSchedules.length > 0 || _soloActivities.length > 0",
+          "branch": "if"
+        },
+        {
+          "condition": "passage() isnot \"SchedulePage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 19313
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "FlagsPage",
+      "display": "🚩 Flags",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"FlagsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 19990
+    },
+    {
+      "from": "StoryJournal",
+      "to": "Navigation",
+      "display": "Return to your story",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3322
+    },
+    {
+      "from": "StartingCanvas_canvas_first_morning_Node_1",
+      "to": "Location_Main_Street",
+      "display": "Walk to the diner.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1922
+    },
+    {
+      "from": "StartingCanvas_canvas_first_morning_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Drink the coffee first.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2215
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Apartment_Hallway",
+      "display": "Apartment Hallway",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 88
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Maya's_Room",
+      "display": "Maya's Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 146
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Ben's_Room",
+      "display": "Ben's Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 192
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Kitchen",
+      "display": "Kitchen",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 236
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Living_Room",
+      "display": "Living Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 274
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Bathroom",
+      "display": "Bathroom",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 320
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Laundry_Room",
+      "display": "Laundry Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 360
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Building_Front",
+      "display": "Building Front",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 408
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Main_Street",
+      "display": "Main Street",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 460
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Mel's — Dining Floor",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 506
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Mel's_—_Kitchen",
+      "display": "Mel's — Kitchen",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 570
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Mel's_—_Back_Office",
+      "display": "Mel's — Back Office",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 624
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Town_Park",
+      "display": "Town Park",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 686
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Cole's_Apartment",
+      "display": "Cole's Apartment",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 728
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Convenience_Store",
+      "display": "Convenience Store",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 784
+    },
+    {
+      "from": "Location_Maya's_Room",
+      "to": "Location_Apartment_Hallway",
+      "display": "Leave Maya's Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 762
+    },
+    {
+      "from": "Location_Ben's_Room",
+      "to": "Location_Apartment_Hallway",
+      "display": "Leave Ben's Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 766
+    },
+    {
+      "from": "Location_Kitchen",
+      "to": "Location_Apartment_Hallway",
+      "display": "Leave Kitchen",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 773
+    },
+    {
+      "from": "Location_Living_Room",
+      "to": "Location_Apartment_Hallway",
+      "display": "Leave Living Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 772
+    },
+    {
+      "from": "Location_Bathroom",
+      "to": "Location_Apartment_Hallway",
+      "display": "Leave Bathroom",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 727
+    },
+    {
+      "from": "Location_Laundry_Room",
+      "to": "Location_Apartment_Hallway",
+      "display": "Leave Laundry Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 763
+    },
+    {
+      "from": "Location_Building_Front",
+      "to": "Location_Apartment_Hallway",
+      "display": "Leave Building Front",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 794
+    },
+    {
+      "from": "Location_Mel's_—_Dining_Floor",
+      "to": "Location_Main_Street",
+      "display": "Leave Mel's — Dining Floor",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 3697
+    },
+    {
+      "from": "Location_Mel's_—_Kitchen",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Leave Mel's — Kitchen",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"hired_at_diner\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 1002
+    },
+    {
+      "from": "Location_Mel's_—_Kitchen",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Go back",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"hired_at_diner\", \"operator\": \"is_true\"}]}))",
+          "branch": "else"
+        }
+      ],
+      "index": 1211
+    },
+    {
+      "from": "Location_Mel's_—_Back_Office",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Leave Mel's — Back Office",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"hank_first_contact\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 1011
+    },
+    {
+      "from": "Location_Mel's_—_Back_Office",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Go back",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"hank_first_contact\", \"operator\": \"is_true\"}]}))",
+          "branch": "else"
+        }
+      ],
+      "index": 1215
+    },
+    {
+      "from": "Location_Town_Park",
+      "to": "Location_Main_Street",
+      "display": "Leave Town Park",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 812
+    },
+    {
+      "from": "Location_Cole's_Apartment",
+      "to": "Location_Main_Street",
+      "display": "Leave Cole's Apartment",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"cole_date_done\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 1038
+    },
+    {
+      "from": "Location_Cole's_Apartment",
+      "to": "Location_Main_Street",
+      "display": "Go back",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"cole_date_done\", \"operator\": \"is_true\"}]}))",
+          "branch": "else"
+        }
+      ],
+      "index": 1223
+    },
+    {
+      "from": "Location_Convenience_Store",
+      "to": "Location_Main_Street",
+      "display": "Leave Convenience Store",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 792
+    },
+    {
+      "from": "Canvas_scene_ben_walks_in_change_Node_1",
+      "to": "Location_Maya's_Room",
+      "display": "Finish getting dressed.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2236
+    },
+    {
+      "from": "Canvas_scene_ben_couch_reveal_Node_1",
+      "to": "Location_Living_Room",
+      "display": "Stay.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3101
+    },
+    {
+      "from": "Canvas_scene_ben_walks_in_kitchen_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Pour the tea.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3171
+    },
+    {
+      "from": "Canvas_scene_hank_storage_room_Node_1",
+      "to": "Location_Mel's_—_Kitchen",
+      "display": "Tell him.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1677
+    },
+    {
+      "from": "Canvas_scene_hank_storage_room_Node_1",
+      "to": "Location_Mel's_—_Kitchen",
+      "display": "Name the inventory item. Go back to the kitchen.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2172
+    },
+    {
+      "from": "Canvas_scene_hank_walkin_encounter_Node_1",
+      "to": "Location_Mel's_—_Kitchen",
+      "display": "Come out.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2499
+    },
+    {
+      "from": "Canvas_scene_hank_kitchen_doorway_Node_1",
+      "to": "Location_Mel's_—_Kitchen",
+      "display": "Keep prepping.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2490
+    },
+    {
+      "from": "Canvas_scene_hank_passes_during_restock_Node_1",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Keep working.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3052
+    },
+    {
+      "from": "Canvas_ambient_pam_building_loaded_Node_1",
+      "to": "Location_Building_Front",
+      "display": "Head to town.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1686
+    },
+    {
+      "from": "Canvas_ambient_pam_building_neutral_Node_1",
+      "to": "Location_Building_Front",
+      "display": "Head to town.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2177
+    },
+    {
+      "from": "Canvas_ambient_ben_couch_reading_Node_1",
+      "to": "Location_Living_Room",
+      "display": "Stay a while.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2279
+    },
+    {
+      "from": "Canvas_ambient_ben_morning_crossover_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Go to bed.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3396
+    },
+    {
+      "from": "Canvas_ambient_hank_mel_reference_Node_1",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Keep working.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1794
+    },
+    {
+      "from": "Canvas_ambient_hank_diner_observation_Node_1",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Keep moving.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1781
+    },
+    {
+      "from": "Canvas_ambient_hank_counter_alone_Node_1",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Keep working.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1315
+    },
+    {
+      "from": "Canvas_rosa_diner_front_hub_Node_1",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Talk.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"talked_to_rosa_today\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1133
+    },
+    {
+      "from": "Canvas_rosa_diner_front_hub_Node_1",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Ask about a regular.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1631
+    },
+    {
+      "from": "Canvas_rosa_diner_front_hub_Node_1",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Watch her work.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1946
+    },
+    {
+      "from": "Canvas_rosa_diner_front_hub_Node_1",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Leave.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2257
+    },
+    {
+      "from": "Canvas_cole_apartment_hub_Node_1",
+      "to": "Location_Cole's_Apartment",
+      "display": "Talk.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"talked_to_cole_today\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1227
+    },
+    {
+      "from": "Canvas_cole_apartment_hub_Node_1",
+      "to": "Canvas_cole_apartment_hub_Node_2",
+      "display": "Stay the night.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1722
+    },
+    {
+      "from": "Canvas_cole_apartment_hub_Node_1",
+      "to": "Location_Main_Street",
+      "display": "Head home.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1833
+    },
+    {
+      "from": "Canvas_cole_apartment_hub_Node_2",
+      "to": "Location_Cole's_Apartment",
+      "display": "Lie there.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2439
+    },
+    {
+      "from": "Canvas_cole_diner_back_hub_Node_1",
+      "to": "Location_Mel's_—_Kitchen",
+      "display": "Talk.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"talked_to_cole_today\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1107
+    },
+    {
+      "from": "Canvas_cole_diner_back_hub_Node_1",
+      "to": "Location_Mel's_—_Kitchen",
+      "display": "Ask him to walk after shift.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"cole_noticed\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1868
+    },
+    {
+      "from": "Canvas_cole_diner_back_hub_Node_1",
+      "to": "Location_Mel's_—_Kitchen",
+      "display": "Ask him out.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"cole_walk_done\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2789
+    },
+    {
+      "from": "Canvas_cole_diner_back_hub_Node_1",
+      "to": "Location_Cole's_Apartment",
+      "display": "Come to his place.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"cole_date_done\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 3670
+    },
+    {
+      "from": "Canvas_cole_diner_back_hub_Node_1",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Back to the floor.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 4093
+    },
+    {
+      "from": "Canvas_ben_room_hub_Node_1",
+      "to": "Location_Ben's_Room",
+      "display": "Sit with him.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 867
+    },
+    {
+      "from": "Canvas_ben_room_hub_Node_1",
+      "to": "Canvas_ben_room_hub_Node_2",
+      "display": "Touch him.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 25}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1442
+    },
+    {
+      "from": "Canvas_ben_room_hub_Node_1",
+      "to": "Canvas_ben_room_hub_Node_3",
+      "display": "Have sex with him.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"ben_consummation_done\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2126
+    },
+    {
+      "from": "Canvas_ben_room_hub_Node_1",
+      "to": "Location_Apartment_Hallway",
+      "display": "Go to bed.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2552
+    },
+    {
+      "from": "Canvas_ben_room_hub_Node_2",
+      "to": "Location_Ben's_Room",
+      "display": "Stay.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1535
+    },
+    {
+      "from": "Canvas_ben_room_hub_Node_3",
+      "to": "Location_Ben's_Room",
+      "display": "Stay in his bed.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1144
+    },
+    {
+      "from": "Canvas_ben_living_room_hub_Node_1",
+      "to": "Location_Living_Room",
+      "display": "Sit with him.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 847
+    },
+    {
+      "from": "Canvas_ben_living_room_hub_Node_1",
+      "to": "Location_Living_Room",
+      "display": "Touch his hand.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 15}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1423
+    },
+    {
+      "from": "Canvas_ben_living_room_hub_Node_1",
+      "to": "Location_Ben's_Room",
+      "display": "Come to his room.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"ben_first_move_done\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2614
+    },
+    {
+      "from": "Canvas_ben_living_room_hub_Node_1",
+      "to": "Location_Apartment_Hallway",
+      "display": "Go to your room.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3028
+    },
+    {
+      "from": "Canvas_ben_kitchen_hub_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Talk.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 841
+    },
+    {
+      "from": "Canvas_ben_kitchen_hub_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Stay up with him.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 15}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1497
+    },
+    {
+      "from": "Canvas_ben_kitchen_hub_Node_1",
+      "to": "Location_Ben's_Room",
+      "display": "Come to his room.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"ben_first_move_done\", \"operator\": \"is_true\"}, {\"type\": \"trait\", \"subject\": \"npc\", \"npc_id\": \"npc_ben\", \"trait_key\": \"relation\", \"operator\": \"gte\", \"value\": 15}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2620
+    },
+    {
+      "from": "Canvas_ben_kitchen_hub_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Go to bed.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3055
+    },
+    {
+      "from": "Canvas_hank_office_hub_Node_1",
+      "to": "Location_Mel's_—_Back_Office",
+      "display": "Talk.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 817
+    },
+    {
+      "from": "Canvas_hank_office_hub_Node_1",
+      "to": "Canvas_hank_office_hub_Node_2",
+      "display": "Get on your knees.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"hank_after_close_done\", \"operator\": \"is_true\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 25}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1509
+    },
+    {
+      "from": "Canvas_hank_office_hub_Node_1",
+      "to": "Canvas_hank_office_hub_Node_3",
+      "display": "Bend over the desk.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"hank_office_first_done\", \"operator\": \"is_true\"}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 35}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2352
+    },
+    {
+      "from": "Canvas_hank_office_hub_Node_1",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Leave.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2810
+    },
+    {
+      "from": "Canvas_hank_office_hub_Node_2",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Go home.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1705
+    },
+    {
+      "from": "Canvas_hank_office_hub_Node_3",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Go home.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2443
+    },
+    {
+      "from": "Canvas_hank_flash_diner_Node_1",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Back to the floor.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2756
+    },
+    {
+      "from": "Canvas_hank_tease_diner_Node_1",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Back to the floor.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"lt\", \"value\": 15}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 3586
+    },
+    {
+      "from": "Canvas_hank_tease_diner_Node_1",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Back to the floor.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 15}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 4476
+    },
+    {
+      "from": "Canvas_hank_tease_diner_Node_1",
+      "to": "Navigation",
+      "display": "Continue",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "not (setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"lt\", \"value\": 15}]}) or setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 15}]}))",
+          "branch": "if"
+        }
+      ],
+      "index": 7302
+    },
+    {
+      "from": "Canvas_hank_diner_front_hub_Node_1",
+      "to": "Canvas_hank_diner_front_hub_Node_2",
+      "display": "Talk.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"talked_to_hank_today\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1168
+    },
+    {
+      "from": "Canvas_hank_diner_front_hub_Node_1",
+      "to": "Canvas_hank_tease_diner_Node_1",
+      "display": "Tease him.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 5}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1947
+    },
+    {
+      "from": "Canvas_hank_diner_front_hub_Node_1",
+      "to": "Canvas_hank_flash_diner_Node_1",
+      "display": "Flash him.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 15}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2630
+    },
+    {
+      "from": "Canvas_hank_diner_front_hub_Node_1",
+      "to": "Location_Mel's_—_Back_Office",
+      "display": "Come to the office.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 25}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"hank_first_contact\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 3430
+    },
+    {
+      "from": "Canvas_hank_diner_front_hub_Node_1",
+      "to": "Canvas_hank_diner_front_hub_Node_3",
+      "display": "Come in through the back.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 50}, {\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"hank_cracked\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 4272
+    },
+    {
+      "from": "Canvas_hank_diner_front_hub_Node_1",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Leave.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 4743
+    },
+    {
+      "from": "Canvas_hank_diner_front_hub_Node_2",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Back to the floor.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 635
+    },
+    {
+      "from": "Canvas_hank_diner_front_hub_Node_3",
+      "to": "Location_Mel's_—_Back_Office",
+      "display": "Go in.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 875
+    },
+    {
+      "from": "Canvas_scene_pam_confrontation_Node_1",
+      "to": "Canvas_scene_pam_confrontation_Node_2",
+      "display": "\\\"What do you want?\\\"",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3191
+    },
+    {
+      "from": "Canvas_scene_pam_confrontation_Node_1",
+      "to": "Canvas_scene_pam_confrontation_Node_3",
+      "display": "Say nothing. Go to your door.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3313
+    },
+    {
+      "from": "Canvas_scene_pam_confrontation_Node_2",
+      "to": "Location_Building_Front",
+      "display": "Head to town.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2091
+    },
+    {
+      "from": "Canvas_scene_pam_confrontation_Node_3",
+      "to": "Location_Building_Front",
+      "display": "Keep walking.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1441
+    },
+    {
+      "from": "Canvas_scene_cole_first_night_Node_1",
+      "to": "Canvas_scene_cole_first_night_Node_2",
+      "display": "Stay.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1217
+    },
+    {
+      "from": "Canvas_scene_cole_first_night_Node_1",
+      "to": "Canvas_scene_cole_first_night_Node_3",
+      "display": "\\\"I should go.\\\"",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1322
+    },
+    {
+      "from": "Canvas_scene_cole_first_night_Node_2",
+      "to": "Location_Cole's_Apartment",
+      "display": "Lie there.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3645
+    },
+    {
+      "from": "Canvas_scene_cole_first_night_Node_3",
+      "to": "Location_Cole's_Apartment",
+      "display": "Go home.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1179
+    },
+    {
+      "from": "Canvas_scene_cole_first_date_Node_1",
+      "to": "Location_Town_Park",
+      "display": "\\\"Yeah.\\\"",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2891
+    },
+    {
+      "from": "Canvas_scene_cole_post_shift_walk_Node_1",
+      "to": "Location_Main_Street",
+      "display": "Go home.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2867
+    },
+    {
+      "from": "Canvas_scene_cole_first_break_talk_Node_1",
+      "to": "Location_Mel's_—_Kitchen",
+      "display": "Go back in.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3304
+    },
+    {
+      "from": "Canvas_scene_ben_pregnancy_revelation_Node_1",
+      "to": "Location_Kitchen",
+      "display": "\\\"Okay.\\\"",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3827
+    },
+    {
+      "from": "Canvas_event_pregnancy_onset_Node_1",
+      "to": "Location_Maya's_Room",
+      "display": "Put it in the drawer. Lie down.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2132
+    },
+    {
+      "from": "Canvas_scene_ben_consummation_Node_1",
+      "to": "Location_Ben's_Room",
+      "display": "Stay.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 4374
+    },
+    {
+      "from": "Canvas_scene_ben_stage2_charged_moment_Node_1",
+      "to": "Canvas_scene_ben_stage2_charged_moment_Node_2",
+      "display": "Turn your hand over.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1725
+    },
+    {
+      "from": "Canvas_scene_ben_stage2_charged_moment_Node_1",
+      "to": "Canvas_scene_ben_stage2_charged_moment_Node_3",
+      "display": "Pull back. Go to bed.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1854
+    },
+    {
+      "from": "Canvas_scene_ben_stage2_charged_moment_Node_2",
+      "to": "Location_Living_Room",
+      "display": "Go to bed.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1940
+    },
+    {
+      "from": "Canvas_scene_ben_stage2_charged_moment_Node_3",
+      "to": "Location_Living_Room",
+      "display": "Go to bed.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1249
+    },
+    {
+      "from": "Canvas_scene_ben_stage1_via_glance_Node_1",
+      "to": "Location_Living_Room",
+      "display": "Go back to your page.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1860
+    },
+    {
+      "from": "Canvas_scene_ben_stage1_via_beauty_Node_1",
+      "to": "Location_Living_Room",
+      "display": "Go to your room.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1777
+    },
+    {
+      "from": "Canvas_scene_hank_declaration_Node_1",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Go to the floor.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3205
+    },
+    {
+      "from": "Canvas_scene_hank_office_first_Node_1",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Go home.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3796
+    },
+    {
+      "from": "Canvas_scene_hank_after_close_Node_1",
+      "to": "Canvas_scene_hank_after_close_Node_2",
+      "display": "Stay.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1816
+    },
+    {
+      "from": "Canvas_scene_hank_after_close_Node_1",
+      "to": "Canvas_scene_hank_after_close_Node_3",
+      "display": "Leave.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2219
+    },
+    {
+      "from": "Canvas_scene_hank_after_close_Node_2",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Go home.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3589
+    },
+    {
+      "from": "Canvas_scene_hank_after_close_Node_3",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Walk home.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 668
+    },
+    {
+      "from": "Canvas_scene_hank_first_contact_kitchen_Node_1",
+      "to": "Location_Mel's_—_Kitchen",
+      "display": "Go back to the floor.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2237
+    },
+    {
+      "from": "Canvas_scene_hank_slow_night_talk_Node_1",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Go home.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3129
+    },
+    {
+      "from": "Canvas_activity_walk_home_Node_1",
+      "to": "Location_Building_Front",
+      "display": "Arrive at the building.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1151
+    },
+    {
+      "from": "Canvas_activity_walk_to_town_Node_1",
+      "to": "Location_Main_Street",
+      "display": "Arrive at Main Street.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1136
+    },
+    {
+      "from": "Canvas_activity_work_shift_Node_1",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Shift's done. Go home.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1622
+    },
+    {
+      "from": "Canvas_activity_diner_storage_stock_Node_1",
+      "to": "Location_Mel's_—_Kitchen",
+      "display": "Back to the kitchen.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1337
+    },
+    {
+      "from": "Canvas_activity_diner_walkin_stock_Node_1",
+      "to": "Location_Mel's_—_Kitchen",
+      "display": "Come back out.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1382
+    },
+    {
+      "from": "Canvas_activity_diner_kitchen_prep_Node_1",
+      "to": "Location_Mel's_—_Kitchen",
+      "display": "Finish up.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1370
+    },
+    {
+      "from": "Canvas_activity_diner_restock_Node_1",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Done with the floor.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1296
+    },
+    {
+      "from": "Canvas_activity_sleep_Node_1",
+      "to": "Location_Maya's_Room",
+      "display": "Wake up.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1186
+    },
+    {
+      "from": "Canvas_activity_shower_Node_1",
+      "to": "Location_Bathroom",
+      "display": "Get out.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1178
+    },
+    {
+      "from": "Canvas_activity_change_clothes_Node_1",
+      "to": "Location_Maya's_Room",
+      "display": "Done.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1080
+    },
+    {
+      "from": "Canvas_activity_watch_tv_Node_1",
+      "to": "Location_Living_Room",
+      "display": "Turn it off.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1235
+    },
+    {
+      "from": "Canvas_activity_make_coffee_solo_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Take the coffee.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1293
+    },
+    {
+      "from": "Canvas_activity_make_tea_Node_1",
+      "to": "Location_Kitchen",
+      "display": "Take the mug.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1294
+    },
+    {
+      "from": "Canvas_canvas_rosa_onboarding_Node_1",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Take the first table.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 4387
+    },
+    {
+      "from": "Canvas_canvas_hank_hire_Node_1",
+      "to": "Location_Mel's_—_Dining_Floor",
+      "display": "Take the apron.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3091
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_ben_room_hub",
+      "display": "T8",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 323
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_ben_consummation",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 644
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_ben_pregnancy_revelation",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 986
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_change_clothes",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1317
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_cole_apartment_hub",
+      "display": "T8",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1638
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_cole_first_night",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1971
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_cole_first_break_talk",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2303
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_hank_passes_during_restock",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2653
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_first_morning",
+      "display": "T12",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2983
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_hank_flash_diner",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 3292
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_pam_confrontation",
+      "display": "T10",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 3613
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_ambient_pam_building_neutral",
+      "display": "T5",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 3952
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_ambient_pam_building_loaded",
+      "display": "T6",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 4301
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_diner_kitchen_prep",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 4631
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_ambient_ben_morning_crossover",
+      "display": "T6",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 4977
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_ben_kitchen_hub",
+      "display": "T8",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 5298
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_ben_walks_in_kitchen",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 5624
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_cole_diner_back_hub",
+      "display": "T8",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 5947
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_hank_kitchen_doorway",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 6285
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_hank_first_contact_kitchen",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 6632
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_ben_living_room_hub",
+      "display": "T8",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 6964
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_ambient_ben_couch_reading",
+      "display": "T5",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 7297
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_ben_couch_reveal",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 7630
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_ben_stage1_via_beauty",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 7965
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_ben_stage2_charged_moment",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 8305
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_ben_stage1_via_glance",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 8656
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_cole_post_shift_walk",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 8998
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_make_tea",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 9322
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_make_coffee_solo",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 9639
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_ben_walks_in_change",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 9985
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_event_pregnancy_onset",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 10313
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_hank_office_hub",
+      "display": "T8",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 10632
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_hank_diner_front_hub",
+      "display": "T8",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 10943
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_ambient_hank_counter_alone",
+      "display": "T6",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 11286
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_ambient_hank_diner_observation",
+      "display": "T5",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 11626
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_rosa_diner_front_hub",
+      "display": "T7",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 11952
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_hank_after_close",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 12277
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_hank_hire",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 12598
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_hank_slow_night_talk",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 12936
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_ambient_hank_mel_reference",
+      "display": "T5",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 13279
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_diner_restock",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 13608
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_rosa_onboarding",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 13934
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_shower",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 14241
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_sleep",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 14539
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_diner_walkin_stock",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 14861
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_diner_storage_stock",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 15192
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_hank_storage_room",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 15529
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_hank_tease_diner",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 15856
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_hank_office_first",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 16182
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_hank_declaration",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 16516
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_cole_first_date",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 16844
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_walk_home",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 17172
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_walk_to_town",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 17494
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_hank_walkin_encounter",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 17828
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_watch_tv",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 18144
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_work_shift",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 18458
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "Navigation",
+      "display": "Back to Game",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 18597
+    },
+    {
+      "from": "CanvasReview_canvas_first_morning",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 965
+    },
+    {
+      "from": "CanvasReview_scene_ben_walks_in_change",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 921
+    },
+    {
+      "from": "CanvasReview_scene_ben_couch_reveal",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1267
+    },
+    {
+      "from": "CanvasReview_scene_ben_walks_in_kitchen",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 942
+    },
+    {
+      "from": "CanvasReview_scene_hank_storage_room",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1285
+    },
+    {
+      "from": "CanvasReview_scene_hank_walkin_encounter",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 875
+    },
+    {
+      "from": "CanvasReview_scene_hank_kitchen_doorway",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 927
+    },
+    {
+      "from": "CanvasReview_scene_hank_passes_during_restock",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 901
+    },
+    {
+      "from": "CanvasReview_ambient_pam_building_loaded",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1119
+    },
+    {
+      "from": "CanvasReview_ambient_pam_building_neutral",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1165
+    },
+    {
+      "from": "CanvasReview_ambient_ben_couch_reading",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 832
+    },
+    {
+      "from": "CanvasReview_ambient_ben_morning_crossover",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 926
+    },
+    {
+      "from": "CanvasReview_ambient_hank_mel_reference",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 979
+    },
+    {
+      "from": "CanvasReview_ambient_hank_diner_observation",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1053
+    },
+    {
+      "from": "CanvasReview_ambient_hank_counter_alone",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 888
+    },
+    {
+      "from": "CanvasReview_rosa_diner_front_hub",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 778
+    },
+    {
+      "from": "CanvasReview_cole_apartment_hub",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1073
+    },
+    {
+      "from": "CanvasReview_cole_diner_back_hub",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 792
+    },
+    {
+      "from": "CanvasReview_ben_room_hub",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1574
+    },
+    {
+      "from": "CanvasReview_ben_living_room_hub",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 780
+    },
+    {
+      "from": "CanvasReview_ben_kitchen_hub",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 766
+    },
+    {
+      "from": "CanvasReview_hank_office_hub",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1150
+    },
+    {
+      "from": "CanvasReview_hank_flash_diner",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 629
+    },
+    {
+      "from": "CanvasReview_hank_tease_diner",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 751
+    },
+    {
+      "from": "CanvasReview_hank_diner_front_hub",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1417
+    },
+    {
+      "from": "CanvasReview_scene_pam_confrontation",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2272
+    },
+    {
+      "from": "CanvasReview_scene_cole_first_night",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1633
+    },
+    {
+      "from": "CanvasReview_scene_cole_first_date",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 906
+    },
+    {
+      "from": "CanvasReview_scene_cole_post_shift_walk",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 942
+    },
+    {
+      "from": "CanvasReview_scene_cole_first_break_talk",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 869
+    },
+    {
+      "from": "CanvasReview_scene_ben_pregnancy_revelation",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 940
+    },
+    {
+      "from": "CanvasReview_event_pregnancy_onset",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 910
+    },
+    {
+      "from": "CanvasReview_scene_ben_consummation",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 897
+    },
+    {
+      "from": "CanvasReview_scene_ben_stage2_charged_moment",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2081
+    },
+    {
+      "from": "CanvasReview_scene_ben_stage1_via_glance",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 989
+    },
+    {
+      "from": "CanvasReview_scene_ben_stage1_via_beauty",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 992
+    },
+    {
+      "from": "CanvasReview_scene_hank_declaration",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 910
+    },
+    {
+      "from": "CanvasReview_scene_hank_office_first",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 871
+    },
+    {
+      "from": "CanvasReview_scene_hank_after_close",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1618
+    },
+    {
+      "from": "CanvasReview_scene_hank_first_contact_kitchen",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 987
+    },
+    {
+      "from": "CanvasReview_scene_hank_slow_night_talk",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 881
+    },
+    {
+      "from": "CanvasReview_activity_walk_home",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 793
+    },
+    {
+      "from": "CanvasReview_activity_walk_to_town",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 775
+    },
+    {
+      "from": "CanvasReview_activity_work_shift",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 831
+    },
+    {
+      "from": "CanvasReview_activity_diner_storage_stock",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 831
+    },
+    {
+      "from": "CanvasReview_activity_diner_walkin_stock",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 877
+    },
+    {
+      "from": "CanvasReview_activity_diner_kitchen_prep",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 865
+    },
+    {
+      "from": "CanvasReview_activity_diner_restock",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 796
+    },
+    {
+      "from": "CanvasReview_activity_sleep",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 751
+    },
+    {
+      "from": "CanvasReview_activity_shower",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 744
+    },
+    {
+      "from": "CanvasReview_activity_change_clothes",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 735
+    },
+    {
+      "from": "CanvasReview_activity_watch_tv",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 746
+    },
+    {
+      "from": "CanvasReview_activity_make_coffee_solo",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 796
+    },
+    {
+      "from": "CanvasReview_activity_make_tea",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 805
+    },
+    {
+      "from": "CanvasReview_canvas_rosa_onboarding",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 820
+    },
+    {
+      "from": "CanvasReview_canvas_hank_hire",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 779
+    }
+  ],
+  "unresolved_targets": [],
+  "dead_end_passages": [
+    "Story",
+    "AgeBlocked",
+    "StoryCaption",
+    "QuestsV2Widgets",
+    "QuestsPage",
+    "TipsPage",
+    "StatsPage",
+    "SchedulePage",
+    "FlagsPage",
+    "_BrokenExitFallback",
+    "Location_Apartment_Hallway",
+    "Location_Main_Street",
+    "MissingMediaPage"
+  ],
+  "untargeted_passages": [
+    "Story",
+    "Start",
+    "TimeWidgets",
+    "StoryCaption",
+    "QuestsV2Widgets",
+    "StoryJournal",
+    "_BrokenExitFallback",
+    "Canvas_scene_ben_walks_in_change_Node_1",
+    "Canvas_scene_ben_couch_reveal_Node_1",
+    "Canvas_scene_ben_walks_in_kitchen_Node_1",
+    "Canvas_scene_hank_storage_room_Node_1",
+    "Canvas_scene_hank_walkin_encounter_Node_1",
+    "Canvas_scene_hank_kitchen_doorway_Node_1",
+    "Canvas_scene_hank_passes_during_restock_Node_1",
+    "Canvas_ambient_pam_building_loaded_Node_1",
+    "Canvas_ambient_pam_building_neutral_Node_1",
+    "Canvas_ambient_ben_couch_reading_Node_1",
+    "Canvas_ambient_ben_morning_crossover_Node_1",
+    "Canvas_ambient_hank_mel_reference_Node_1",
+    "Canvas_ambient_hank_diner_observation_Node_1",
+    "Canvas_ambient_hank_counter_alone_Node_1",
+    "Canvas_rosa_diner_front_hub_Node_1",
+    "Canvas_cole_apartment_hub_Node_1",
+    "Canvas_cole_diner_back_hub_Node_1",
+    "Canvas_ben_room_hub_Node_1",
+    "Canvas_ben_living_room_hub_Node_1",
+    "Canvas_ben_kitchen_hub_Node_1",
+    "Canvas_hank_office_hub_Node_1",
+    "Canvas_hank_diner_front_hub_Node_1",
+    "Canvas_scene_pam_confrontation_Node_1",
+    "Canvas_scene_cole_first_night_Node_1",
+    "Canvas_scene_cole_first_date_Node_1",
+    "Canvas_scene_cole_post_shift_walk_Node_1",
+    "Canvas_scene_cole_first_break_talk_Node_1",
+    "Canvas_scene_ben_pregnancy_revelation_Node_1",
+    "Canvas_event_pregnancy_onset_Node_1",
+    "Canvas_scene_ben_consummation_Node_1",
+    "Canvas_scene_ben_stage2_charged_moment_Node_1",
+    "Canvas_scene_ben_stage1_via_glance_Node_1",
+    "Canvas_scene_ben_stage1_via_beauty_Node_1",
+    "Canvas_scene_hank_declaration_Node_1",
+    "Canvas_scene_hank_office_first_Node_1",
+    "Canvas_scene_hank_after_close_Node_1",
+    "Canvas_scene_hank_first_contact_kitchen_Node_1",
+    "Canvas_scene_hank_slow_night_talk_Node_1",
+    "Canvas_activity_walk_home_Node_1",
+    "Canvas_activity_walk_to_town_Node_1",
+    "Canvas_activity_work_shift_Node_1",
+    "Canvas_activity_diner_storage_stock_Node_1",
+    "Canvas_activity_diner_walkin_stock_Node_1",
+    "Canvas_activity_diner_kitchen_prep_Node_1",
+    "Canvas_activity_diner_restock_Node_1",
+    "Canvas_activity_sleep_Node_1",
+    "Canvas_activity_shower_Node_1",
+    "Canvas_activity_change_clothes_Node_1",
+    "Canvas_activity_watch_tv_Node_1",
+    "Canvas_activity_make_coffee_solo_Node_1",
+    "Canvas_activity_make_tea_Node_1",
+    "Canvas_canvas_rosa_onboarding_Node_1",
+    "Canvas_canvas_hank_hire_Node_1"
+  ],
+  "per_passage_stats": {
+    "Story": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": [
+        "meta"
+      ]
+    },
+    "Start": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "AgeBlocked": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "TimeWidgets": {
+      "edge_count": 8,
+      "unresolved": 0,
+      "tags": [
+        "widget",
+        "nobr"
+      ]
+    },
+    "StoryCaption": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "QuestsV2Widgets": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": [
+        "widget",
+        "nobr"
+      ]
+    },
+    "QuestsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "TipsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "StoryJournal": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "StatsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "SchedulePage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "FlagsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "StartingCanvas_canvas_first_morning_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Navigation": {
+      "edge_count": 15,
+      "unresolved": 0,
+      "tags": []
+    },
+    "_BrokenExitFallback": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Location_Apartment_Hallway": {
+      "edge_count": 0,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Maya's_Room": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Ben's_Room": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Kitchen": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Living_Room": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Bathroom": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Laundry_Room": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Building_Front": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Main_Street": {
+      "edge_count": 0,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Mel's_—_Dining_Floor": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Mel's_—_Kitchen": {
+      "edge_count": 2,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Mel's_—_Back_Office": {
+      "edge_count": 2,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Town_Park": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Cole's_Apartment": {
+      "edge_count": 2,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Convenience_Store": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Canvas_scene_ben_walks_in_change_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_ben_couch_reveal_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_ben_walks_in_kitchen_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_hank_storage_room_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_hank_walkin_encounter_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_hank_kitchen_doorway_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_hank_passes_during_restock_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_ambient_pam_building_loaded_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_ambient_pam_building_neutral_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_ambient_ben_couch_reading_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_ambient_ben_morning_crossover_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_ambient_hank_mel_reference_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_ambient_hank_diner_observation_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_ambient_hank_counter_alone_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_rosa_diner_front_hub_Node_1": {
+      "edge_count": 4,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_cole_apartment_hub_Node_1": {
+      "edge_count": 3,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_cole_apartment_hub_Node_2": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_cole_diner_back_hub_Node_1": {
+      "edge_count": 5,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_ben_room_hub_Node_1": {
+      "edge_count": 4,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_ben_room_hub_Node_2": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_ben_room_hub_Node_3": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_ben_living_room_hub_Node_1": {
+      "edge_count": 4,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_ben_kitchen_hub_Node_1": {
+      "edge_count": 4,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_hank_office_hub_Node_1": {
+      "edge_count": 4,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_hank_office_hub_Node_2": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_hank_office_hub_Node_3": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_hank_flash_diner_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_hank_tease_diner_Node_1": {
+      "edge_count": 3,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_hank_diner_front_hub_Node_1": {
+      "edge_count": 6,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_hank_diner_front_hub_Node_2": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_hank_diner_front_hub_Node_3": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_pam_confrontation_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_pam_confrontation_Node_2": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_pam_confrontation_Node_3": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_cole_first_night_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_cole_first_night_Node_2": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_cole_first_night_Node_3": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_cole_first_date_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_cole_post_shift_walk_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_cole_first_break_talk_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_ben_pregnancy_revelation_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_event_pregnancy_onset_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_ben_consummation_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_ben_stage2_charged_moment_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_ben_stage2_charged_moment_Node_2": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_ben_stage2_charged_moment_Node_3": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_ben_stage1_via_glance_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_ben_stage1_via_beauty_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_hank_declaration_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_hank_office_first_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_hank_after_close_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_hank_after_close_Node_2": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_hank_after_close_Node_3": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_hank_first_contact_kitchen_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_hank_slow_night_talk_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_walk_home_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_walk_to_town_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_work_shift_Node_1": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Canvas_activity_diner_storage_stock_Node_1": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Canvas_activity_diner_walkin_stock_Node_1": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Canvas_activity_diner_kitchen_prep_Node_1": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Canvas_activity_diner_restock_Node_1": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Canvas_activity_sleep_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_shower_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_change_clothes_Node_1": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Canvas_activity_watch_tv_Node_1": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Canvas_activity_make_coffee_solo_Node_1": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Canvas_activity_make_tea_Node_1": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Canvas_canvas_rosa_onboarding_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_hank_hire_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "MissingMediaPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReviewList": {
+      "edge_count": 57,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_first_morning": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_ben_walks_in_change": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_ben_couch_reveal": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_ben_walks_in_kitchen": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_hank_storage_room": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_hank_walkin_encounter": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_hank_kitchen_doorway": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_hank_passes_during_restock": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_ambient_pam_building_loaded": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_ambient_pam_building_neutral": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_ambient_ben_couch_reading": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_ambient_ben_morning_crossover": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_ambient_hank_mel_reference": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_ambient_hank_diner_observation": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_ambient_hank_counter_alone": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_rosa_diner_front_hub": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_cole_apartment_hub": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_cole_diner_back_hub": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_ben_room_hub": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_ben_living_room_hub": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_ben_kitchen_hub": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_hank_office_hub": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_hank_flash_diner": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_hank_tease_diner": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_hank_diner_front_hub": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_pam_confrontation": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_cole_first_night": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_cole_first_date": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_cole_post_shift_walk": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_cole_first_break_talk": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_ben_pregnancy_revelation": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_event_pregnancy_onset": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_ben_consummation": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_ben_stage2_charged_moment": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_ben_stage1_via_glance": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_ben_stage1_via_beauty": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_hank_declaration": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_hank_office_first": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_hank_after_close": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_hank_first_contact_kitchen": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_hank_slow_night_talk": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_walk_home": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_walk_to_town": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_work_shift": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_diner_storage_stock": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_diner_walkin_stock": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_diner_kitchen_prep": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_diner_restock": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_sleep": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_shower": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_change_clothes": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_watch_tv": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_make_coffee_solo": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_make_tea": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_rosa_onboarding": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_hank_hire": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    }
+  }
+}

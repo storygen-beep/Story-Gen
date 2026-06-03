@@ -1,0 +1,1769 @@
+{
+  "generated_at": "2026-06-03T06:40:14.395Z",
+  "variables": {
+    "last_game_passage": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "Start",
+        "CustomizeCharacters"
+      ]
+    },
+    "player.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "Maya"
+      ]
+    },
+    "player.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "maya.jpg"
+      ]
+    },
+    "player.current_location": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        ""
+      ]
+    },
+    "player.core_traits.corruption": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.arousal": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 2,
+        "min": 0,
+        "max": 2,
+        "first": 0,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.energy": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 2,
+        "min": 90,
+        "max": 100,
+        "first": 100,
+        "last": 90,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.hygiene": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 2,
+        "min": 80,
+        "max": 100,
+        "first": 100,
+        "last": 80,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.money": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 60,
+        "max": 60,
+        "first": 60,
+        "last": 60,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.hank_stage": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.ben_stage": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.cole_stage": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.rosa_stage": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.fitness": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.beauty": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.exhibitionism": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.pregnancy": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.wardrobe.plain_bra.id": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "plain_bra"
+      ]
+    },
+    "player.wardrobe.plain_bra.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "Plain Bra"
+      ]
+    },
+    "player.wardrobe.plain_bra.slot": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "bra"
+      ]
+    },
+    "player.wardrobe.plain_bra.image": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "./videos/clothing/plain_bra.jpg"
+      ]
+    },
+    "player.wardrobe.cotton_briefs.id": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "cotton_briefs"
+      ]
+    },
+    "player.wardrobe.cotton_briefs.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "Cotton Briefs"
+      ]
+    },
+    "player.wardrobe.cotton_briefs.slot": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "underwear"
+      ]
+    },
+    "player.wardrobe.cotton_briefs.image": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "./videos/clothing/cotton_briefs.jpg"
+      ]
+    },
+    "player.wardrobe.faded_tee.id": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "faded_tee"
+      ]
+    },
+    "player.wardrobe.faded_tee.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "Faded T-Shirt"
+      ]
+    },
+    "player.wardrobe.faded_tee.slot": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "top"
+      ]
+    },
+    "player.wardrobe.faded_tee.image": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "./videos/clothing/faded_tee.jpg"
+      ]
+    },
+    "player.wardrobe.old_jeans.id": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "old_jeans"
+      ]
+    },
+    "player.wardrobe.old_jeans.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "Old Jeans"
+      ]
+    },
+    "player.wardrobe.old_jeans.slot": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "bottom"
+      ]
+    },
+    "player.wardrobe.old_jeans.image": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "./videos/clothing/old_jeans.jpg"
+      ]
+    },
+    "player.wardrobe.scuffed_sneakers.id": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "scuffed_sneakers"
+      ]
+    },
+    "player.wardrobe.scuffed_sneakers.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "Scuffed Sneakers"
+      ]
+    },
+    "player.wardrobe.scuffed_sneakers.slot": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "shoes"
+      ]
+    },
+    "player.wardrobe.scuffed_sneakers.image": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "./videos/clothing/scuffed_sneakers.jpg"
+      ]
+    },
+    "player.wardrobe.thrift_sundress.id": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "thrift_sundress"
+      ]
+    },
+    "player.wardrobe.thrift_sundress.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "Thrift Sundress"
+      ]
+    },
+    "player.wardrobe.thrift_sundress.slot": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "dress"
+      ]
+    },
+    "player.wardrobe.thrift_sundress.image": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "./videos/clothing/thrift_sundress.jpg"
+      ]
+    },
+    "player.equipped.bra": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "plain_bra"
+      ]
+    },
+    "player.equipped.underwear": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "cotton_briefs"
+      ]
+    },
+    "player.equipped.top": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "faded_tee"
+      ]
+    },
+    "player.equipped.bottom": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "old_jeans"
+      ]
+    },
+    "player.equipped.dress": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "thrift_sundress"
+      ]
+    },
+    "player.equipped.legwear": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2
+    },
+    "player.equipped.shoes": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "scuffed_sneakers"
+      ]
+    },
+    "player.body_type": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "average"
+      ]
+    },
+    "player.look": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "tired"
+      ]
+    },
+    "npcs.1534a2b9-5251-4317-ada4-1ef60bf0e4be.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "Hank"
+      ]
+    },
+    "npcs.1534a2b9-5251-4317-ada4-1ef60bf0e4be.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "hank.jpg"
+      ]
+    },
+    "npcs.1534a2b9-5251-4317-ada4-1ef60bf0e4be.core_traits.arousal": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 2,
+        "min": 0,
+        "max": 2,
+        "first": 0,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.1534a2b9-5251-4317-ada4-1ef60bf0e4be.core_traits.corruption": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.1534a2b9-5251-4317-ada4-1ef60bf0e4be.core_traits.relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.1534a2b9-5251-4317-ada4-1ef60bf0e4be.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2
+    },
+    "npcs.1534a2b9-5251-4317-ada4-1ef60bf0e4be.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        ""
+      ]
+    },
+    "npcs.473ef11b-1552-430a-ba1e-d08c0602e5e6.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "Ben"
+      ]
+    },
+    "npcs.473ef11b-1552-430a-ba1e-d08c0602e5e6.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "ben.jpg"
+      ]
+    },
+    "npcs.473ef11b-1552-430a-ba1e-d08c0602e5e6.core_traits.arousal": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 2,
+        "min": 0,
+        "max": 2,
+        "first": 0,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.473ef11b-1552-430a-ba1e-d08c0602e5e6.core_traits.relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.473ef11b-1552-430a-ba1e-d08c0602e5e6.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2
+    },
+    "npcs.473ef11b-1552-430a-ba1e-d08c0602e5e6.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        ""
+      ]
+    },
+    "npcs.9fabdf57-2c98-4ea4-80d8-ebc485d563ad.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "Cole"
+      ]
+    },
+    "npcs.9fabdf57-2c98-4ea4-80d8-ebc485d563ad.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "cole.jpg"
+      ]
+    },
+    "npcs.9fabdf57-2c98-4ea4-80d8-ebc485d563ad.core_traits.relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.9fabdf57-2c98-4ea4-80d8-ebc485d563ad.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2
+    },
+    "npcs.9fabdf57-2c98-4ea4-80d8-ebc485d563ad.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "coworker"
+      ]
+    },
+    "npcs.83fe0a16-9c7c-43bd-9c6c-f5c059480529.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "Rosa"
+      ]
+    },
+    "npcs.83fe0a16-9c7c-43bd-9c6c-f5c059480529.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "rosa.jpg"
+      ]
+    },
+    "npcs.83fe0a16-9c7c-43bd-9c6c-f5c059480529.core_traits.relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.83fe0a16-9c7c-43bd-9c6c-f5c059480529.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2
+    },
+    "npcs.83fe0a16-9c7c-43bd-9c6c-f5c059480529.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        ""
+      ]
+    },
+    "npcs.a2fb7af9-3584-4fb4-af81-c3886d2054a1.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "Pam"
+      ]
+    },
+    "npcs.a2fb7af9-3584-4fb4-af81-c3886d2054a1.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "pam.jpg"
+      ]
+    },
+    "npcs.a2fb7af9-3584-4fb4-af81-c3886d2054a1.core_traits.relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 2,
+        "min": 4.6,
+        "max": 5,
+        "first": 5,
+        "last": 4.6,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.a2fb7af9-3584-4fb4-af81-c3886d2054a1.core_traits.awareness": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.a2fb7af9-3584-4fb4-af81-c3886d2054a1.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2
+    },
+    "npcs.a2fb7af9-3584-4fb4-af81-c3886d2054a1.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        ""
+      ]
+    },
+    "npcs.51fac171-6bbd-4d8c-83a2-ef1b99212b2a.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "Vince"
+      ]
+    },
+    "npcs.51fac171-6bbd-4d8c-83a2-ef1b99212b2a.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "vince.jpg"
+      ]
+    },
+    "npcs.51fac171-6bbd-4d8c-83a2-ef1b99212b2a.core_traits.relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.51fac171-6bbd-4d8c-83a2-ef1b99212b2a.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2
+    },
+    "npcs.51fac171-6bbd-4d8c-83a2-ef1b99212b2a.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        ""
+      ]
+    },
+    "flags.rent_evicted": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.game_started": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "bool_values": [
+        true
+      ]
+    },
+    "flags.debug_mode": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "bool_values": [
+        false
+      ]
+    },
+    "game_state.current_canvas": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        ""
+      ]
+    },
+    "game_state.visited_locations": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2
+    },
+    "game_state.visited_nodes": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2
+    },
+    "game_state.scheduled": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2
+    },
+    "game_state.fast_jobs.xp": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.bank.balance": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.time_state.current_hour": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 2,
+        "min": 6,
+        "max": 8,
+        "first": 8,
+        "last": 6,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.time_state.current_minute": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.time_state.current_day": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "Monday",
+        "Wednesday"
+      ]
+    },
+    "game_state.time_state.current_week": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.time_state.day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 2,
+        "min": 1,
+        "max": 3,
+        "first": 1,
+        "last": 3,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.rent_state.last_paid_week": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.rent_state.warnings": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 5,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.rent_state.is_due": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "bool_values": [
+        false
+      ]
+    },
+    "game_state.phone.viewed_feed": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466981351,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.talked_to_hank_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466993594,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.talked_to_ben_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466993594,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.talked_to_cole_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466993594,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.talked_to_rosa_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466993594,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.talked_to_pam_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466993594,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.shift_worked_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466993594,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.did_laundry_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466993594,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "bool_values": [
+        false
+      ]
+    },
+    "last_day_snapshot.npc:1534a2b9-5251-4317-ada4-1ef60bf0e4be:relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466993594,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 4,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "last_day_snapshot.npc:473ef11b-1552-430a-ba1e-d08c0602e5e6:relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466993594,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 4,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "last_day_snapshot.npc:9fabdf57-2c98-4ea4-80d8-ebc485d563ad:relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466993594,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 4,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "last_day_snapshot.npc:83fe0a16-9c7c-43bd-9c6c-f5c059480529:relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466993594,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 4,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "last_day_snapshot.npc:a2fb7af9-3584-4fb4-af81-c3886d2054a1:relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466993594,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 4,
+        "unique_count": 1,
+        "min": 4.8,
+        "max": 4.8,
+        "first": 4.8,
+        "last": 4.8,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "last_day_snapshot.npc:51fac171-6bbd-4d8c-83a2-ef1b99212b2a:relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780466993594,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 2,
+      "number_stats": {
+        "count": 4,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.phone._phone_scanned": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780467012245,
+      "last_ts": 1780467019544,
+      "passages_seen_on_count": 1,
+      "bool_values": [
+        true
+      ]
+    }
+  },
+  "prefix_clusters": {
+    "last": [
+      "last_game_passage",
+      "game_state.rent_state.last_paid_week"
+    ],
+    "name": [
+      "player.name",
+      "player.wardrobe.plain_bra.name",
+      "player.wardrobe.cotton_briefs.name",
+      "player.wardrobe.faded_tee.name",
+      "player.wardrobe.old_jeans.name",
+      "player.wardrobe.scuffed_sneakers.name",
+      "player.wardrobe.thrift_sundress.name",
+      "npcs.1534a2b9-5251-4317-ada4-1ef60bf0e4be.name",
+      "npcs.473ef11b-1552-430a-ba1e-d08c0602e5e6.name",
+      "npcs.9fabdf57-2c98-4ea4-80d8-ebc485d563ad.name",
+      "npcs.83fe0a16-9c7c-43bd-9c6c-f5c059480529.name",
+      "npcs.a2fb7af9-3584-4fb4-af81-c3886d2054a1.name",
+      "npcs.51fac171-6bbd-4d8c-83a2-ef1b99212b2a.name"
+    ],
+    "portrait": [
+      "player.portrait",
+      "npcs.1534a2b9-5251-4317-ada4-1ef60bf0e4be.portrait",
+      "npcs.473ef11b-1552-430a-ba1e-d08c0602e5e6.portrait",
+      "npcs.9fabdf57-2c98-4ea4-80d8-ebc485d563ad.portrait",
+      "npcs.83fe0a16-9c7c-43bd-9c6c-f5c059480529.portrait",
+      "npcs.a2fb7af9-3584-4fb4-af81-c3886d2054a1.portrait",
+      "npcs.51fac171-6bbd-4d8c-83a2-ef1b99212b2a.portrait"
+    ],
+    "current": [
+      "player.current_location",
+      "game_state.current_canvas",
+      "game_state.time_state.current_hour",
+      "game_state.time_state.current_minute",
+      "game_state.time_state.current_day",
+      "game_state.time_state.current_week"
+    ],
+    "corruption": [
+      "player.core_traits.corruption",
+      "npcs.1534a2b9-5251-4317-ada4-1ef60bf0e4be.core_traits.corruption"
+    ],
+    "arousal": [
+      "player.core_traits.arousal",
+      "npcs.1534a2b9-5251-4317-ada4-1ef60bf0e4be.core_traits.arousal",
+      "npcs.473ef11b-1552-430a-ba1e-d08c0602e5e6.core_traits.arousal"
+    ],
+    "id": [
+      "player.wardrobe.plain_bra.id",
+      "player.wardrobe.cotton_briefs.id",
+      "player.wardrobe.faded_tee.id",
+      "player.wardrobe.old_jeans.id",
+      "player.wardrobe.scuffed_sneakers.id",
+      "player.wardrobe.thrift_sundress.id"
+    ],
+    "slot": [
+      "player.wardrobe.plain_bra.slot",
+      "player.wardrobe.cotton_briefs.slot",
+      "player.wardrobe.faded_tee.slot",
+      "player.wardrobe.old_jeans.slot",
+      "player.wardrobe.scuffed_sneakers.slot",
+      "player.wardrobe.thrift_sundress.slot"
+    ],
+    "image": [
+      "player.wardrobe.plain_bra.image",
+      "player.wardrobe.cotton_briefs.image",
+      "player.wardrobe.faded_tee.image",
+      "player.wardrobe.old_jeans.image",
+      "player.wardrobe.scuffed_sneakers.image",
+      "player.wardrobe.thrift_sundress.image"
+    ],
+    "relation": [
+      "npcs.1534a2b9-5251-4317-ada4-1ef60bf0e4be.core_traits.relation",
+      "npcs.473ef11b-1552-430a-ba1e-d08c0602e5e6.core_traits.relation",
+      "npcs.9fabdf57-2c98-4ea4-80d8-ebc485d563ad.core_traits.relation",
+      "npcs.83fe0a16-9c7c-43bd-9c6c-f5c059480529.core_traits.relation",
+      "npcs.a2fb7af9-3584-4fb4-af81-c3886d2054a1.core_traits.relation",
+      "npcs.51fac171-6bbd-4d8c-83a2-ef1b99212b2a.core_traits.relation"
+    ],
+    "schedule": [
+      "npcs.1534a2b9-5251-4317-ada4-1ef60bf0e4be.schedule",
+      "npcs.473ef11b-1552-430a-ba1e-d08c0602e5e6.schedule",
+      "npcs.9fabdf57-2c98-4ea4-80d8-ebc485d563ad.schedule",
+      "npcs.83fe0a16-9c7c-43bd-9c6c-f5c059480529.schedule",
+      "npcs.a2fb7af9-3584-4fb4-af81-c3886d2054a1.schedule",
+      "npcs.51fac171-6bbd-4d8c-83a2-ef1b99212b2a.schedule"
+    ],
+    "relationship": [
+      "npcs.1534a2b9-5251-4317-ada4-1ef60bf0e4be.relationship",
+      "npcs.473ef11b-1552-430a-ba1e-d08c0602e5e6.relationship",
+      "npcs.9fabdf57-2c98-4ea4-80d8-ebc485d563ad.relationship",
+      "npcs.83fe0a16-9c7c-43bd-9c6c-f5c059480529.relationship",
+      "npcs.a2fb7af9-3584-4fb4-af81-c3886d2054a1.relationship",
+      "npcs.51fac171-6bbd-4d8c-83a2-ef1b99212b2a.relationship"
+    ],
+    "visited": [
+      "game_state.visited_locations",
+      "game_state.visited_nodes"
+    ],
+    "talked": [
+      "flags.talked_to_hank_today",
+      "flags.talked_to_ben_today",
+      "flags.talked_to_cole_today",
+      "flags.talked_to_rosa_today",
+      "flags.talked_to_pam_today"
+    ],
+    "npc": [
+      "last_day_snapshot.npc:1534a2b9-5251-4317-ada4-1ef60bf0e4be:relation",
+      "last_day_snapshot.npc:473ef11b-1552-430a-ba1e-d08c0602e5e6:relation",
+      "last_day_snapshot.npc:9fabdf57-2c98-4ea4-80d8-ebc485d563ad:relation",
+      "last_day_snapshot.npc:83fe0a16-9c7c-43bd-9c6c-f5c059480529:relation",
+      "last_day_snapshot.npc:a2fb7af9-3584-4fb4-af81-c3886d2054a1:relation",
+      "last_day_snapshot.npc:51fac171-6bbd-4d8c-83a2-ef1b99212b2a:relation"
+    ]
+  },
+  "co_change": {},
+  "passages": {
+    "Start": {
+      "first_ts": 1780466981351,
+      "visit_count": 3
+    },
+    "CustomizeCharacters": {
+      "first_ts": 1780467012245,
+      "visit_count": 2
+    }
+  },
+  "choices": {
+    "total": 0,
+    "by_classification": {},
+    "price_observations": [],
+    "recent": []
+  },
+  "mutations": [
+    {
+      "ts": 1780467012245,
+      "passage": "CustomizeCharacters",
+      "state_hash": "38ef845685061314",
+      "var": "last_game_passage",
+      "before": "Start",
+      "after": "CustomizeCharacters"
+    }
+  ]
+}
