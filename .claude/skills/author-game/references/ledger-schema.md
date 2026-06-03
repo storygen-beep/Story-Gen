@@ -1,4 +1,4 @@
-# authoring_state.json — ledger schema (v1)
+# authoring_state.json — ledger schema (v2)
 
 The ledger is the living source of truth for the **plan** and for **what structure exists**.
 The skill reads and rewrites it directly each authoring turn (Read/Write) — it is a data file,
@@ -7,8 +7,16 @@ not managed by any code module. Follow the invariants below when editing it.
 ```jsonc
 {
   "game_slug": "late_shifts",       // matches games/<slug>/
-  "schema_version": 1,
+  "schema_version": 2,
   "book_revision": 1,               // bumped when design_book.md is amended
+  "scope_mode": "full_game",        // "full_game" | "slice" — set at setup; drives budgets + Phase 2+ flow
+  "npcs": {                         // per-NPC intent from the R7 brief; sizes the continue loop
+    "npc_sal": {
+      "arc_shape": "slow-burn family",   // family/ambient|slow-burn family|peer/dating|service|antagonist
+      "lane_budget": { "L1": 2, "L2": 1, "L3": 0, "capstones": 3 },  // target counts from the brief
+      "vocab_ceiling": "explicit"        // this NPC's full-intensity ceiling (R7 brief; default max-explicit)
+    }
+  },
   "plan": [                         // the living roadmap; ordered, reorderable
     {
       "id": "beat_0001",            // stable, zero-padded, monotonic
@@ -33,6 +41,11 @@ not managed by any code module. Follow the invariants below when editing it.
   ]
 }
 ```
+
+**`scope_mode` + `npcs`** (v2): `scope_mode` (`full_game` | `slice`) is set at setup and read before
+sizing any arc. `npcs.<id>` carries each NPC's R7-brief intent — `arc_shape`, `lane_budget` (target
+counts the continue loop authors *toward*, decremented as beats land), and `vocab_ceiling`. (v1
+ledgers without these fields are fine — treat missing `scope_mode` as `full_game`.)
 
 **Statuses:** `planned` → `active` (being authored this turn) → `authored` (canvases written)
 → `validated` (passed merge + schema/flag-chain + doctrine self-audit).

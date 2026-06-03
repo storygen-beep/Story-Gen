@@ -28,6 +28,8 @@ your normal tools (Read / Write / Edit / Bash). There is no helper module to cal
 - `references/lanes.md` — **the four lanes**: when to use each, how to write each (verbs, narrative,
   fingerprints), the hub-vs-work separation, and per-arc-shape budgets. READ before authoring any
   NPC-arc beat.
+- `references/toml-gotchas.md` — emission build-breakers (single-line inline tables, declare-traits-
+  before-use, choice/stage shapes, no npc sidebar bars). CHECK before emitting TOML.
 - `prompts_v2/COMPREHENSIVE_SYSTEM_REFERENCE.md` — ALL engine/schema/doctrine. The single
   source of truth for how to author canvases, lanes, hubs, schedules, locks, settings. Cite it.
 - `games/late_shifts/toml_phases/` — a real, shipped game; the structural reference for TOML
@@ -52,4 +54,12 @@ On invocation, resolve the game slug from the request, then:
 - **Build NPC arcs across the four lanes** (`references/lanes.md`), sized by arc shape — never
   Lane-1-only. Keep the NPC hub (Lane 1) separate from Maya-solo work activities (Lane 3 hosts):
   if a menu choice's verb has no NPC object, it's solo work, not a hub item (§8.2 / §8.3).
+- **`scope_mode` (full_game | slice) governs scale.** Set it at setup (default full_game), store it
+  in the ledger, and size every arc to it + the per-NPC budget. Slice = 1 gold NPC + minimum-contract
+  rest + locked-visible rungs; full_game = full budgets + the Phase 2+ Q&A.
+- **Honor the per-NPC R7 brief** (voice spec + vocab ceiling + stat ladder, in `design_book.md`) when
+  authoring — don't re-derive or drift it. Explicit content defaults to the **most explicit** reading
+  at the NPC's declared ceiling (`doctrine/08`), never softer.
+- **A Phase 2+ `include` must be mechanized** (setter/owner/threshold named) or it ships dormant —
+  the validator won't catch it.
 - **Validate every beat, build at milestones** (see `references/beat-authoring.md`).
