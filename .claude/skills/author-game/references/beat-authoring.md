@@ -43,10 +43,16 @@ unsure, check where `games/late_shifts/toml_phases/` put the analogous content):
 4. **Author the canvases** per the doctrine in `prompts_v2/COMPREHENSIVE_SYSTEM_REFERENCE.md` for
    the beat `type` (lanes, hubs, schedules, locks, settings, capstone shape). Append ONLY to the
    beat's `target_phase` file. Record the new canvas ids in the beat's `produced_canvas_ids`.
-5. **Validate** (below). Fix red BEFORE marking done.
-6. **Mark validated + persist** — set `status` to `validated`, append a `decisions_log` entry,
+5. **Author/update the quest card** — if the beat introduces or advances a *player-facing goal*
+   (an NPC arc milestone, an economic milestone, a capstone). Add/replace the `[[quest_cards]]`
+   that points the player at this step, with `when` flag-gates tracking arc state so the right
+   card shows now and retires when the next stage opens (the milestone-chain pattern). NOT every
+   beat gets a card — repeatable ambients / flavor hubs get none (Doc 49: quests are arcs, not
+   activities). See "Quest cards" below for the shape.
+6. **Validate** (below). Fix red BEFORE marking done.
+7. **Mark validated + persist** — set `status` to `validated`, append a `decisions_log` entry,
    write `authoring_state.json` back.
-7. **Build at milestones** — run the full HTML build at end of an arc / session / on demand
+8. **Build at milestones** — run the full HTML build at end of an arc / session / on demand
    (not every beat).
 
 ## Validation (per beat — the safety net)
@@ -75,5 +81,26 @@ Run with the repo venv active (`source venv/bin/activate`), in order; emit a PAS
      canvas-set flag (+ `requires_npc`/schedule for timing), or — if you truly need to react to an
      engine flag — deliver that content via a phone-thread condition (phone delivery conditions are
      not flag-chain-validated). Only `is_true` gates are checked; `is_false` guards are exempt.
+   - **Quests page reflects current goals** — if this beat is a trackable goal, a `[[quest_cards]]`
+     now shows it at the right time (and the prior milestone's card retires via its `when` gate).
+     The Quests page is never empty and never stale (Doc 49). Repeatable ambients/flavor: no card.
 
 Any FAIL → fix, re-run, then mark validated.
+
+## Quest cards (`[[quest_cards]]` — the Quests page)
+Active only when `[project].quests_engine = "v2"`. Authoritative schema: `prompts_v2` `schema/02`
+§8; condition shape: §16.5; doctrine: `doctrine/04` (Doc 49 goals-vs-sidebar, Doc 50 R1–R6 card shape).
+
+- **Where they render:** no `npc_id` → top **"Story Goals"** (the spine / main objective);
+  `npc_id` set → that NPC's section.
+- **Fields:** `text` (climbing copy) · `ready_text` (when goals met) · `tip` (interior line) ·
+  `npc_id` · `priority` · `when` (routing — ALL must be true to show this card) · `goals`
+  (🎯 to-advance bullets) · `ready_canvas` (set → 🔓 Ready frame) · `terminal = true` (✓ arc complete).
+- **Condition shape is FLAT** (different from trigger conditions — no `type` discriminator):
+  flag gate `{ flag = "x", op = "is_true" }`; trait gate
+  `{ trait = "relation", subject = "npc", npc_id = "npc_x", op = "gte", value = 10, label = "X trust" }`.
+- **Three modes:** *mechanic* (no `ready_canvas` — crossing a `goals` threshold IS the unlock);
+  *capstone* (`ready_canvas` → Ready frame launches the one-shot); *terminal* (`terminal = true`).
+- **Milestone chain:** one card per arc stage, each gated `when` the prior stage's flag is set and
+  this stage's completion flag is not — so exactly one card shows per NPC at a time.
+- Author quest cards into the beat's `target_phase` (or `5_scenes.toml`), alongside its canvases.

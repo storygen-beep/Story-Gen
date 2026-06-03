@@ -40,6 +40,13 @@ list above, not LS's file layout.)
   drops the player into the starting location). This is structural bootstrap, NOT story content —
   do not author any NPC arcs, hubs, ambients, or capstones in setup. Mirror the opening canvas in
   `games/late_shifts/toml_phases/` for the exact table shape.
+- The **spine quest card** (one `[[quest_cards]]`, no `npc_id` → renders in the top "Story Goals"
+  section). If you set `quests_engine = "v2"` you MUST populate the Quests page, or it renders empty
+  and reads as broken. The spine = the game's central pressure from the economic engine / premise
+  (e.g. "Pay Boyd $200 every Monday or lose the bar"). Use a mechanic-mode card (a `goals` trait
+  gate like `money >= <amount>`, no `ready_canvas`) gated `when` the debt is active. Fields +
+  shape: see `beat-authoring.md` "Quest cards" + `prompts_v2` `schema/02` §8. This is the ONLY
+  story-bearing content setup authors — everything else is beats.
 - Mirror all table shapes from `games/late_shifts/toml_phases/`.
 
 ## Step 5 — Seed the ledger (`authoring_state.json`, written directly)
@@ -72,7 +79,10 @@ or create one (`createsuperuser`), and use that id.
 Show the roadmap back and tell the user: **"Setup complete — say *continue* to author the first beat."**
 
 ## Anti-patterns
-- Do NOT author canvases in setup.
+- Do NOT author STORY canvases (NPC arcs / hubs / ambients / capstones) in setup — only the
+  minimal boot canvas + the spine quest card. Everything else is beats.
+- Do NOT enable `quests_engine = "v2"` without authoring the spine quest card — an empty Quests
+  page reads as broken.
 - Do NOT ask questions with safe doctrine defaults — default and say so.
 - Do NOT invent engine knobs; every option offered must be real (cite the doctrine/schema).
 - Do NOT leave a locked location reachable only via itself, or a flag with no reachable setter.
