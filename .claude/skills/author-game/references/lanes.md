@@ -35,7 +35,11 @@ all Lane 1 = transactional "menu game"; all Lane 2 = inert/passive; all Lane 3 =
 | L2 ambients | 4–7 | 0–2 | 1 (low) | 1 | 2–5 |
 | L3 walk-ins | 4–7 | 1–3 (ARE the milestones) | **0** | **0** | **0 own** (interruptor in others') |
 | Capstones | 4–6 | 3–5 | 3–4 | 1–2 | 1–2 |
-| **Total** | **25–35** | **10–15** | **8–12** | **6–10** | **6–10** |
+| **Total** | **25–35** | **10–15** | **8–12** | **6–10** | **6–10** ¹ |
+
+¹ Antagonist total = **standalone + cross-appearances in others' arcs**. The *standalone* count is
+low (the antagonist mostly appears as an interruptor in other NPCs' Lane 3 endings); don't pad
+standalone canvases to hit 6–10 — that's the "fill-the-world" drift the doctrine bans.
 
 - **Empty cells are honest** (§8.4). Peer/dating → no Lane 3. Service → no Lane 2 or 3. Filling an
   empty cell with texture is the failure, not the omission.
@@ -43,6 +47,10 @@ all Lane 1 = transactional "menu game"; all Lane 2 = inert/passive; all Lane 3 =
   `[[npcs.schedules]]` row** (D72-R6). An NPC at 5 windows has 5 hubs even with a tiny rung budget —
   the extra hubs are *light* (base + talk + leave), exposure-capped.
 - Author against the **shape**, never by cloning the gold-standard NPC (§8.5).
+- **These are `full_game` targets.** At `scope_mode = slice` (see `setup-interview.md`), author
+  ~30–50% of each budget for ONE gold-standard NPC + minimum-contract depth for the rest, with
+  locked-visible rungs telegraphing the deferred remainder (`doctrine/03` §1). Read the game's
+  `scope_mode` from the ledger before sizing an arc.
 
 ---
 
@@ -74,6 +82,10 @@ IS the menu.
   rungs *within* that ceiling. Same-NPC hubs stay consistent (shared rung names/thresholds/voice).
 - **Base + exit with zero unlocked choices is a complete, valid hub** (the presence floor). Never
   flag-gate the base node — gate the choices.
+- **The hub opener is ONE constant paragraph (D56-R1, `doctrine/04` §1.1).** Do NOT tier the base
+  node into T0/T1/T2 `[group]` blocks — the opening stays the same as the arc escalates; *only the
+  choices* change. Tiering the opener is the Marge-Pass-1 failure. (Period-split hubs are different:
+  a *separate* hub per schedule window is fine; tiering one hub's opener by stat is not.)
 
 ## Lane 2 — location-entry random ambient (how to write)
 **Fingerprint:** `trigger_mode = "random"`, `chance = 0.2–0.3`, `is_repeatable = true`,
@@ -93,18 +105,34 @@ The hardest lane; RTS's biggest. Two canvases per activity:
    study) MUST be **authentically not-about-the-NPC** — that's what makes the walk-in land. Menu
    gating (time/energy/money) lives on the location button; stat cost in `exit_block.effects`.
 2. **Dispatcher:** rolls dice + checks NPC conditions → HIT routes to the NPC scene, MISS plays solo
-   content. **Substitution canvases MUST declare a `location`** or they never enter the registry and
-   the dispatcher silently misses (the C7b bug). Per-day cooldowns + per-arc Lane 3 budget apply.
+   content. **Each substitution target canvas ships ALL of:** `substitution_only = true` (keeps it
+   out of the Lane 1/2 selectors) **+** `max_triggers_per_day = 1` (once-per-day is the felt cadence,
+   D67-R7) **+** `is_repeatable = true` **+** a `location` (else it never enters the registry and the
+   dispatcher silently misses — the C7b bug). All four are required; missing any is a known
+   anti-pattern (`doctrine/02` §8.9/§8.10).
+   - **Multiple mutually-exclusive variants at one activity (Pattern B):** give each rule the same
+     `exclusive_group = "<name>"` string → ONE partitioned dice roll, fall-to-solo on a failed slot.
+     Do NOT approximate with summed Pattern A `chance` values (wrong since Doc 69; `doctrine/02` §4.6.2).
+   - **Walk-in direction:** Lane 3 walk-ins use a *loose* presence check (NPC is around — `IsNpcAtHome`
+     style); a *strict* exact-location match is Lane 2 / Pattern C, not a walk-in (`doctrine/02` §4.8).
 - **Vocabulary:** he walks in (mid-activity), he arrives while she's vulnerable, innocent setup →
   charged shift. The setup is genuinely a chore; the seduction happens *to* her.
 - **A solo activity is also the game's earning/utility loop** — "work a shift" earns money and is the
   natural Lane 3 host. Splitting work (host) from the NPC hub (Lane 1) is the §8.2 rule in action.
 
 ## Lane 4 — capstone (how to write)
-**Fingerprint:** `is_repeatable = false`, `priority ≥ 9`, auto-fire on location entry when
-conditions match, flag-gated + flag-setting. Three types (§5.2): **A** linear deterministic,
-**B** branching choice (Pattern F — both branches playable, diverge in downstream effect),
-**C** quest-chain step. Per-NPC capstone budget per shape (table above).
+**Fingerprint:** `priority ≥ 9` (typically 9–12), `trigger_mode = "manual"`, auto-fire on location
+entry when conditions match, flag-gated + sets a one-shot flag on completion. **Repeat field is one of
+two forms** (`doctrine/02` §5.1):
+- `is_repeatable = false` — once it fires, done; OR
+- `is_repeatable = true` **+ a `flag_is_false` self-gate on its own setter flag** — the "retry"
+  variant. The canvas re-fires next eligible time *until* its flag is set, so a **Refuse branch that
+  doesn't set the flag keeps it alive** (Pattern F / F4). Canonical: `scene_franks_bedroom_evening`.
+  Use this whenever a branching capstone has a decline path.
+
+Three types (§5.2): **A** linear deterministic, **B** branching choice (Pattern F — both branches
+playable, diverge in downstream effect), **C** quest-chain step. Per-NPC capstone budget per shape
+(table above). Voice: Tier-3 earned (once-only, so the prose can spend).
 
 ## Voice register (`doctrine/03` §3.5)
 - **Lane 1 / 2 / 3:** RTS-flat default — ~30-word caption density, direct/crude diction per the
