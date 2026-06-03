@@ -150,16 +150,32 @@ Anti-pattern: hub with only currently-unlocked items. Player sees "Talk" + "Leav
 
 Anti-pattern: 10-item hub (Marge Pass 1 — Doc 54 §3.1). Over-weighting Lane 1 produces the "menu game" feel that Doc 24 §10.3 warns against ("All Lane 1 → fully transactional experience, low surprise"). If more rungs are needed, they should be locked-visible stages, not parallel work-tasks.
 
-### §2.8 — Presence is acknowledged; interaction is logic-driven (Doc 72)
+### §2.8 — Presence is acknowledged by a Lane 1 hub, per schedule row (Doc 72 R6)
 
-If an NPC is present where the player can reach them (per their schedule), visiting that place always *shows* the base moment — the hub's base node renders what the NPC is doing in the space, **even when zero choices are available**. Base node + exit, with no menu items unlocked, is a complete and valid canvas. Presence is acknowledged; the player never walks into a dead, empty room when the schedule says the NPC is there.
+If an NPC is present where the player can reach them (per `[[npcs.schedules]]`), visiting that place always *shows* the base moment. The mechanism for that floor is a **Lane 1 hub**: a canvas whose `base` node renders what the NPC is doing in the space, **even when zero choices are available**. Base node + exit, with no menu items unlocked, is a complete and valid canvas. Presence is acknowledged; the player never walks into a dead, empty room when the schedule says the NPC is there.
+
+**The floor is per schedule row, and it must be a Lane 1 hub — not a Lane 2 ambient.** For every (location × time-window × weekdays) the NPC is scheduled, there is a hub whose own `trigger.schedules` covers that window (period-split per window — D56-R1, `doctrine/04` §1.1). A Lane 2 ambient cannot be the floor: it is a dice roll (`chance 0.25` ⇒ nothing on ~3 of 4 visits), so most visits would still be dead. Lane 2/3 are texture layered *on top of* the hub, never the acknowledgement itself. The engine enforces the window: a hub's portrait renders only when its own `schedules` is live and the NPC is present (`renderNpcPortraits` → `isCanvasValid`). The full rule, its corollary (a schedule entry is a promise of a hub), and the worked Hank example are in `doctrine/04` §6 (D72-R6).
 
 The *choices* on top of the base then follow in-world logic, not a quota:
 - Some are open from the start (helping a housemate fold laundry, greeting someone you live with — needs no permission).
-- Some are gated until earned (the escalation ladder — locked-visible per §2.6).
+- Some are gated until earned (the escalation ladder — locked-visible per §2.6, capped by location exposure per §2.9).
 - Sometimes none apply, and base + exit is the whole canvas. That is correct, not a gap.
 
-**This is judgment, NOT a checkbox.** There is no rule that every NPC must offer an ungated action. What's required is *acknowledgement* (the base renders); an *action* is not. Gate a choice for an in-world reason (he wouldn't proposition his housemate on day one), never by reflex — and never gate the act of *seeing* the NPC behind escalation stats. The two failures this bans are **dead presence** (§8.11) and the **backwards on-ramp** (§8.12).
+**The floor is hard; the choices are judgment.** The *hub-per-row* requirement is a checkable rule (D72-R6). The *choices on top* are still logic-driven (Doc 72 R2/R3): there is no rule that every NPC must offer an ungated action, and "base + exit" is a valid canvas. Two distinct axes — never conflate "the hub must exist" (hard) with "every hub must offer an action" (rejected quota). Never flag-gate the base node itself; gate the choices, never the act of *seeing* the NPC. The failures this bans are **dead presence** (§8.11), the **backwards on-ramp** (§8.12), and a **hub window narrower than the schedule** (§8.13).
+
+### §2.9 — Exposure-tier rung ceiling (Doc 72 R7)
+
+Which escalation rungs a hub may offer is decided by the **exposure** (privacy) of that location at that window — *who could see this, and what's at risk* — **not** by the time of day. Two orthogonal filters: **exposure sets the ceiling per hub; relationship state (corruption / relation / stage, global to the NPC) unlocks rungs within it.**
+
+| Exposure tier | Locations (examples) | Rung ceiling |
+|---|---|---|
+| **Public** (high exposure) | diner floor with customers, street, park midday, mall | Deniable acts only — talk, banter, a charged look, a brush-past. No flashing, no sex. |
+| **Semi-private** (low exposure) | back kitchen, office with a door, storeroom, building hallway | Tease / grope / quick contact; full sex gated higher or *interrupted* by the setting (the in-fiction interruption, §3.6). |
+| **Private** (no exposure) | bedroom, apartment, the diner after close when alone | Full ladder, up to sex / sleepover. Private can be **more than one** location. |
+
+**Time and co-present NPCs are inputs to exposure, not the gate.** A public location becomes private when it empties — the diner front at 2am, lights off, just the two of them, carries a higher ceiling than the same front at the breakfast rush. Not because "it's night," but because the room is empty now. Who else is scheduled there (alone vs. a coworker vs. an antagonist down the hall) changes exposure too. This is why a late-night hub legitimately differs from a morning hub at the same location while the rule stays *exposure*, not *time*.
+
+This is the positive form of the verb-overlay anti-pattern (§8.1): the same act reads differently by place, so don't clone the full ladder into every room. **Same-NPC hubs stay consistent** (shared rung names + gate thresholds + voice; ladder context-scaled, not cloned) — D72-R8, `doctrine/04` §6.3. An optional *locked-visible-everywhere* variant (greyed higher rungs shown at public hubs, unlockable only where private) is allowed for telegraphing.
 
 ---
 
@@ -750,7 +766,7 @@ This produces the "world fills out around me as I escalate" feeling. The player 
 
 The inverse design — "Lane 2/3 lead, Lane 1 follows" — produces a passive game where things keep happening to Maya regardless of her choices. RTS deliberately doesn't do this.
 
-**Cold-start on-ramp (Doc 72 R4).** Because Lane 1 leads, every arc must be *enterable* from a cold start — corruption 0, no flags set — through ordinary presence. The first beat of an arc needs only co-presence (Maya in the room with the NPC, who is there per schedule); escalation conditions layer on *after* that first beat. Never gate an arc's entry on a stat that can only be raised by content downstream of that same arc — that circular gate (the **backwards on-ramp**, §8.12) leaves the cold-start player unable to begin. Location-entry gating is still fine where *entering is itself the first contact* (the diner behind "get hired" — walking in to ask for the job is the first interaction); the on-ramp rule targets people already in the player's everyday space (housemates, neighbours, coworkers-on-shift).
+**Cold-start on-ramp (Doc 72 R4).** Because Lane 1 leads, every arc must be *enterable* from a cold start — corruption 0, no flags set — through ordinary presence. The first beat of an arc needs only co-presence (Maya in the room with the NPC, who is there per schedule), and that co-presence is delivered by the NPC's Lane 1 hub at that location, which renders its base unconditionally (the presence floor, §2.8 / D72-R6); escalation conditions layer on *after* that first beat. Never gate an arc's entry on a stat that can only be raised by content downstream of that same arc — that circular gate (the **backwards on-ramp**, §8.12) leaves the cold-start player unable to begin. Location-entry gating is still fine where *entering is itself the first contact* (the diner behind "get hired" — walking in to ask for the job is the first interaction); the on-ramp rule targets people already in the player's everyday space (housemates, neighbours, coworkers-on-shift).
 
 ### §6.1 — Per-NPC progression: shared stat thresholds across lanes
 
@@ -854,11 +870,23 @@ Then it appears in the NPC portrait hub at the location, the player can click it
 
 ### §8.11 — Dead presence (NPC present, visiting yields nothing)
 
-An NPC is scheduled at a reachable location (and shows on the schedule page), but visiting renders nothing — no base moment, no acknowledgement. The player acts on the schedule, walks to where the NPC is, and gets an empty room; the world reads as a set of locked doors. Cause is usually escalation-only authoring: only stage-1+ beats written for the NPC, no base node that renders regardless of stats. Fix: the hub/ambient base node always renders the moment (§2.8); gate escalation *choices*, never the act of seeing the NPC. (This is NOT a quota for ungated actions — "sometimes none" is valid; what's banned is the absent base.)
+An NPC is scheduled at a reachable location (and shows on the schedule page), but visiting renders nothing — no base moment, no acknowledgement. The player acts on the schedule, walks to where the NPC is, and gets an empty room; the world reads as a set of locked doors. Two causes: escalation-only authoring (only stage-1+ beats written, no unconditional base node), OR relying on a probabilistic Lane 2 ambient to do the acknowledging (a `chance` dice roll is not a floor — most visits still render nothing). Fix: a **Lane 1 hub** whose `base` node renders unconditionally, per schedule row (§2.8 / D72-R6); gate escalation *choices*, never the act of seeing the NPC. (The hub-per-row requirement is hard; the *choices* on it are still logic-driven — "sometimes none" is a valid choice list. What's banned is the absent or probabilistic base, not a thin menu.) This is the *reachable*-location case; an NPC scheduled at an *unreachable* / locked location is a different failure — §8.15 + `doctrine/10` §5.4.
 
 ### §8.12 — Backwards on-ramp (arc entry gated on downstream stat)
 
 An arc's entry condition is a stat or flag that can only be raised by content downstream of that same arc — a circular gate. The cold-start player can never begin it; they stall staring at locked affordances. Distinct from §8.4 (lane forced on wrong register): here the arc legitimately exists, but its front door is locked with a key that's inside the room. Worked anti-example: a housemate arc that only opens at `worn_corruption ≥ 15`, i.e. the player must buy and wear provocative clothing before her own housemate will register her. Fix: the arc's first beat needs only co-presence; escalation layers after (§6 cold-start on-ramp, Doc 72 R4).
+
+### §8.13 — Hub window narrower than the schedule (D72-R6)
+
+A Lane 1 hub exists at the location, but its own `trigger.schedules` covers only a slice of the NPC's scheduled presence there — so the rest of the rows are dead. Worked anti-example: Hank is scheduled at the diner front 06:00–22:00 (plus late night), but `hank_diner_front_hub` opens only 22:00–01:30; from 06:00–22:00 every day the schedule page shows him there and the room renders no hub. "A hub at the location" is not coverage — the hub must be *open during that window*. Fix: period-split into per-window hubs, each with `trigger.schedules` matching its row (§2.8, D72-R6). The build does NOT catch this — it's a silent runtime gap.
+
+### §8.14 — Cloned full ladder across locations / public-space escalation (D72-R7)
+
+The same full escalation ladder is offered at every one of an NPC's hubs regardless of context — e.g. "Have sex with him" clickable at the public diner counter mid-rush. This is the verb-overlay anti-pattern (§8.1) in hub form: it ignores that the act can't happen there (and that the NPC won't risk it). Fix: scale each hub's rung set to the location's exposure tier (§2.9) — public = talk/look only, semi-private = tease/grope, private = full ladder. The relationship state stays global, so consistency is preserved without cloning the ladder into rooms that can't support it (D72-R8).
+
+### §8.15 — NPC vanishes into a locked room (present-but-unreachable)
+
+An NPC's `[[npcs.schedules]]` sends them into a **locked** location (a `[[locations]]` with `entry_conditions`) during a window the player routinely shares — so they leave the reachable floor for a room the player can't enter, with no open-location fallback and/or an illegible gate. The player watches them step away and gets "where did they go?" Distinct from §8.11: that is an NPC at a *reachable* location rendering nothing; this is an NPC at an *unreachable* location. Fix: the **unlock contract** (`doctrine/10` §5.4) — make the lock legible (visible-but-blocked, so it reads as a closed door), keep the locked window in off-hours the player doesn't share *or* co-gate the door with the same flag that gates the player's access, and ensure open-location fallback presence; or open the door and gate the canvas/choices instead. The *acceptable* form (e.g. a boss who does paperwork in a locked office 01:30–06:00, on the open floor up to 01:30 and from 06:00) is a **bounded, legible** window — not this anti-pattern. The hard bug is an NPC reachable *only* via a locked location (`doctrine/10` §5.4 Case C).
 
 ---
 
@@ -899,7 +927,7 @@ An arc's entry condition is a stat or flag that can only be raised by content do
 - `28th_april_TLS_Phase2_Redesign/24_RTS_Three_Lanes_Repeatable_Activities.md` — Lane mechanism source
 - `28th_april_TLS_Phase2_Redesign/57_Capstone_Doctrine.md` — Lane 4 source
 - `28th_april_TLS_Phase2_Redesign/67_Solo_Activity_Design_and_Multi_NPC_Dispatcher_Doctrine.md` — solo activity + dispatcher patterns source
-- `28th_april_TLS_Phase2_Redesign/72_Presence_and_Logic_Driven_Interaction_Doctrine.md` — presence acknowledged + logic-driven interaction (base floor; dead-presence / backwards-on-ramp bans) — see §2.8 + §6 + §8.11–§8.12
+- `28th_april_TLS_Phase2_Redesign/72_Presence_and_Logic_Driven_Interaction_Doctrine.md` — presence floor + logic-driven interaction. R6–R8 (per-schedule-row Lane 1 hubs + exposure-tier ladder ceiling + same-NPC hub consistency) live in `doctrine/04` §6 — see §2.8 + §2.9 + §6 + §8.11–§8.14
 
 ### Engine primitives
 

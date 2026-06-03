@@ -183,23 +183,25 @@ work ships, e.g., breeding-talk dialogue retrofitted into Tier 5 shapes once pre
 ```markdown
 ## §5 Lane-by-lane content map
 
-Per location, what fills the lane slots. Cross-references doc 30 §8.1 triage table.
+One block PER SCHEDULE WINDOW (not just per location) — every `[[npcs.schedules]]` row gets a
+Lane 1 hub (D72-R6). Tag each with its exposure tier; the tier caps the hub's rung ceiling (D72-R7).
+Cross-references doc 30 §8.1 triage table.
 
-### <Location 1> (<NPC schedule window>)
+### <Location 1> — <schedule window> — exposure: <public | semi-private | private>
 
 | Slot | Canvas | Tier-content |
 |---|---|---|
-| Lane 1 hub | <canvas_slug> | Tier 0-5 menu items per §3 ladder; <vocab register> from Tier <N>+ |
-| Lane 2 ambient | <canvas_slug> | Tier <N>+ dice <N>%; <ambient description> |
+| Lane 1 hub | <canvas_slug> | Rungs ≤ exposure ceiling: public = talk/look; semi-private = tease/grope; private = full ladder (Tier 0-5 per §3). <vocab register> from Tier <N>+ |
+| Lane 2 ambient | <canvas_slug> | Tier <N>+ dice <N>%; <ambient description> (texture ON TOP — never the presence floor) |
 | Lane 3 sub | <canvas_slug> | Tier <N>+ dice <N>%; <walk-in description> |
 | Capstones | <capstone-1>, <capstone-2> | Per §6 |
 
-### <Location 2> (<NPC schedule window>)
+### <Location 2> — <schedule window> — exposure: <tier>
 
-(repeats per location)
+(repeats per schedule window — every row covered by a hub)
 ```
 
-**Match the §5 table to the per-arc-shape distribution (`doctrine/03_arc_shapes.md` §2).** Family/ambient gets 4–7 Lane 3 cells. Peer/dating gets 0. Empty cells are honest.
+**Match the §5 table to the per-arc-shape distribution (`doctrine/03_arc_shapes.md` §2).** Family/ambient gets 4–7 Lane 3 cells. Peer/dating gets 0. Empty cells are honest for L2/L3 escalation — but every schedule window still gets a Lane 1 hub (the presence floor is independent of the escalation budget; `doctrine/03` §2 note). Same NPC's hubs share rung names + gate thresholds + voice (D72-R8).
 
 ### §3.6 — Section 6: Capstones
 

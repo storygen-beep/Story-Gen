@@ -25,14 +25,15 @@
 15. [11_clothing_design](#15-11-clothing-design) — `prompts_v2/doctrine/11_clothing_design.md`
 16. [12_rent_economy_design](#16-12-rent-economy-design) — `prompts_v2/doctrine/12_rent_economy_design.md`
 17. [13_phone_design](#17-13-phone-design) — `prompts_v2/doctrine/13_phone_design.md`
-18. [01_rts_overview](#18-01-rts-overview) — `prompts_v2/reference/01_rts_overview.md`
-19. [02_rts_scene_catalog](#19-02-rts-scene-catalog) — `prompts_v2/reference/02_rts_scene_catalog.md`
-20. [03_rts_walkthrough_panel](#20-03-rts-walkthrough-panel) — `prompts_v2/reference/03_rts_walkthrough_panel.md`
-21. [04_rts_hud_world_model](#21-04-rts-hud-world-model) — `prompts_v2/reference/04_rts_hud_world_model.md`
-22. [01_game_book_prompt](#22-01-game-book-prompt) — `prompts_v2/stages/01_game_book_prompt.md`
-23. [02_toml_generation_prompt](#23-02-toml-generation-prompt) — `prompts_v2/stages/02_toml_generation_prompt.md`
-24. [03_image_finder_prompt](#24-03-image-finder-prompt) — `prompts_v2/stages/03_image_finder_prompt.md`
-25. [04_game_listing_prompt](#25-04-game-listing-prompt) — `prompts_v2/stages/04_game_listing_prompt.md`
+18. [14_customization_design](#18-14-customization-design) — `prompts_v2/doctrine/14_customization_design.md`
+19. [01_rts_overview](#19-01-rts-overview) — `prompts_v2/reference/01_rts_overview.md`
+20. [02_rts_scene_catalog](#20-02-rts-scene-catalog) — `prompts_v2/reference/02_rts_scene_catalog.md`
+21. [03_rts_walkthrough_panel](#21-03-rts-walkthrough-panel) — `prompts_v2/reference/03_rts_walkthrough_panel.md`
+22. [04_rts_hud_world_model](#22-04-rts-hud-world-model) — `prompts_v2/reference/04_rts_hud_world_model.md`
+23. [01_game_book_prompt](#23-01-game-book-prompt) — `prompts_v2/stages/01_game_book_prompt.md`
+24. [02_toml_generation_prompt](#24-02-toml-generation-prompt) — `prompts_v2/stages/02_toml_generation_prompt.md`
+25. [03_image_finder_prompt](#25-03-image-finder-prompt) — `prompts_v2/stages/03_image_finder_prompt.md`
+26. [04_game_listing_prompt](#26-04-game-listing-prompt) — `prompts_v2/stages/04_game_listing_prompt.md`
 
 ---
 
@@ -332,7 +333,7 @@ Dataclass: `template_import.py:448–502`.
 
 | Lane | Diagnostic fields |
 |---|---|
-| **Lane 1 — Hub button** | `trigger_mode = "manual"` + `is_repeatable = true` + `npc` set + `location` matches NPC's schedule. Rendered by `renderNpcPortraits` (`v2.py:4295`) at NPC's location. |
+| **Lane 1 — Hub button** | `trigger_mode = "manual"` + `is_repeatable = true` + `npc` set + `location` matches NPC's schedule. Rendered by `renderNpcPortraits` (`v2.py:4295`) at NPC's location. **The hub's portrait renders only when the hub's OWN `schedules` window is live (`isCanvasValid`, `v2.py:4356`) AND the NPC is present (presence gate, `v2.py:4384`).** So presence coverage is per schedule row: a hub at the location with a narrower `schedules` than the NPC's presence leaves the uncovered windows dead. Author one hub per scheduled window (D72-R6, `doctrine/04` §6.1). |
 | **Lane 2 — Location-entry random** | `trigger_mode = "random"` + `chance` set + `is_repeatable = true`. Dispatched by `checkRandomEncounters` (`v2.py:4520`) on location entry. |
 | **Lane 3 — Dispatcher substitution** (parent activity) | `trigger_mode = "manual"` + `is_repeatable = true` + `substitutions = [...]`. Player-clickable solo activity. |
 | **Lane 3 — Substitution target** | `substitution_only = true` + `requires_npc` set + `is_repeatable = true` + `max_triggers_per_day = 1`. Not in any portrait/activity grid. |
@@ -476,6 +477,8 @@ Engine: `v2.py:4671-4713` partitions `subs` by `exclusive_group` string, rolls o
 Dataclass: `template_import.py:94`. Parsing: `normalize()` resolves slug→UUID; build fails on invalid location slug (Phase A bugfix shipped 2026-05-14).
 
 **Schedule entries should be non-overlapping for a single NPC.** Where in-fiction the NPC's activity differs by time band (kitchen morning vs kitchen evening), use separate entries.
+
+**Each schedule row is a promise of a Lane 1 hub (D72-R6).** Because the schedule page advertises where every NPC is per room per window, every row must have a Lane 1 hub whose own `trigger.schedules` covers that window (per-window = separate hub canvas; §3.3). A row with no live hub is dead presence. An NPC with no physical hub anywhere (a rent/phone-only "system" NPC) must carry NO schedule row. See `doctrine/04` §6.
 
 ### §5.2 — `getNpcLocation` runtime (`v2.py:2923`)
 
@@ -1127,18 +1130,27 @@ intelligence = 0
 
 ### §2.3 — `[[player.customization_fields]]`
 
-For `customizable = true`. Each field renders at game start; the player's choice writes into `$player.<id>`.
+For `customizable = true`. The engine auto-builds a `CustomizeCharacters` screen at game
+start and redirects `Start` to it (no author wiring). Each field renders there; the player's
+choice writes into `$player.<id>`. **Array-of-tables — place these AFTER every `[player.*]`
+subtable (e.g. `[player.core_traits]`), or TOML scopes them wrong.**
 
 Dataclass: `TemplatePlayerCustomizationField` at `template_import.py:70`.
 
 | Field | Type | Notes |
 |---|---|---|
-| `id` | str | Lowercase snake_case |
+| `id` | str | Lowercase snake_case. **`id = "name"` is special → writes `$player.name`.** Other ids write `$player.<id>`. Reserved (rejected): `portrait`, `current_location`, `core_traits`, `flags`, `wardrobe`, `equipped` |
 | `type` | str | `"text"`, `"select"`, or `"image_select"` |
 | `label` | str | Display label |
-| `default` | str | Initial value |
+| `default` | str | Initial value (for `select`/`image_select` must be a valid option/option-id) |
 | `options` | List | For `select`: string list. For `image_select`: TemplatePlayerCustomizationOption list (`{id, image, label}`) |
 | `sets_portrait` | bool | `image_select` only — selected image becomes `$player.portrait` |
+
+**Output — the `@`-token (load-bearing):** a chosen value only *appears* in the story if you
+write the prose with the substitution token. `@player` → the chosen name; `@player.<field>`
+→ any field (e.g. `@player.build`). Tokens resolve in canvas prose, dialog body, choice text,
+and location descriptions — **not** in structural labels (location names, sidebar/quest
+labels). Full contract + the un-tokenizable-surface trap: **doctrine/14**.
 
 ```toml
 [[player.customization_fields]]
@@ -1146,6 +1158,13 @@ id = "name"
 type = "text"
 label = "Your name"
 default = "Maya"
+
+[[player.customization_fields]]
+id = "build"
+type = "select"
+label = "Build"
+default = "average"
+options = ["petite", "average", "curvy", "athletic", "thick"]
 
 [[player.customization_fields]]
 id = "look"
@@ -1156,6 +1175,7 @@ options = [
   { id = "blonde", image = "maya_blonde.jpg", label = "Blonde" },
   { id = "brunette", image = "maya_brunette.jpg", label = "Brunette" },
 ]
+# Then in prose: "@player tugs at her shirt, aware of her @player.build frame."
 ```
 
 ---
@@ -1182,6 +1202,15 @@ Dataclass: `TemplateNPC` at `template_import.py:107`.
 | `hidden_from_ui` | bool | `false` | Omit from Guide / Stats / sidebar widget |
 | `arc_stages` | List[str] | `[]` | Display strings for stage names. Length implies max stage value (len−1). |
 
+**Customizable NPCs:** `customizable = true` lets the player rename the NPC and pick a
+relationship label at game start. It **requires both** `relationship` (the default) **and**
+`relationship_options` (the picker list), and the default must be in the options — the
+importer hard-fails otherwise (`template_import.py:3289`). There is no rename-only mode.
+Reference the customized values in prose with `@<npc_short>` (the slug minus `npc_`, e.g.
+`@frank`) and `@<npc_short>.rel`. **Never bake a customizable NPC's name into a location
+name, sidebar label, or quest title** — those print raw and won't honor the rename
+(genericize them). See **doctrine/14**.
+
 ### §3.2 — `[[npcs.schedules]]` fields
 
 Dataclass: `TemplateNPCSchedule` at `template_import.py:94`.
@@ -1195,6 +1224,10 @@ Dataclass: `TemplateNPCSchedule` at `template_import.py:94`.
 | `activity` | str | `""` | Author-side description |
 
 Schedule entries should be NON-OVERLAPPING per NPC. Engine resolves NPC location via `getNpcLocation` (`v2.py:2923`) by scanning entries.
+
+**Every schedule row needs a matching Lane 1 hub (D72-R6).** For each row, author a hub canvas for that NPC at that location whose `trigger.schedules` covers the row's window (period-split per window — separate hub per window, §6.2). The hub's rung ceiling follows the location's exposure tier (public/semi-private/private). A row with no live hub is dead presence; a hub-less system NPC (rent/phone-only) carries no schedule row. See `doctrine/04` §6.
+
+**A row at a *locked* location (`entry_conditions`, §4) is a *deferred* hub promise** — the hub is dormant until the lock opens. Valid only under the unlock contract: the NPC is met at an OPEN on-ramp whose beat sets the unlock flag, and no NPC is reachable only via a locked location. Full Case A/B/C treatment in `doctrine/10` §5.4.
 
 ### §3.3 — Round-trip example
 
@@ -1285,6 +1318,8 @@ entry_conditions = { version = "1.0", items = [
 blocked_message = "Not yet. He hasn't invited me."
 ```
 
+**Locking a location that hosts an NPC schedule — the unlock contract.** `entry_conditions` + `blocked_message` is a *visible-but-blocked* lock: the room shows on the nav and prints `blocked_message` on a failed entry (we have no native time-of-day location lock — the time/exposure axis lives on the hub via `trigger.schedules` + D72-R7). When a locked location also carries an NPC `[[npcs.schedules]]` row, coordinate them: write `blocked_message` to read as "haven't met / been invited" (not a mechanical "locked"), meet that NPC at an OPEN on-ramp location, and have that on-ramp beat set the unlock flag (so the flag has a reachable setter). Never make an NPC reachable *only* via a locked location, and never gate a door on a flag that's only settable behind that door. Full Case A/B/C treatment in `doctrine/10` §5.4; the RTS model this adapts is `reference/01` §6.5.
+
 ---
 
 ## §5 — `[[canvases]]`
@@ -1345,6 +1380,8 @@ Dataclass: `TemplateTriggerSchedule` at `template_import.py:441`.
 | `weekdays` | List[int] | 0 = Monday … 6 = Sunday |
 | `start_time` | str | `HH:MM` |
 | `end_time` | Optional[str] | `HH:MM` |
+
+**A Lane 1 hub renders only inside its OWN `schedules` window** (`isCanvasValid`, `v2.py:4356`) — not whenever the NPC happens to be present. So for presence coverage (D72-R6) the hub's `schedules` must span the matching `[[npcs.schedules]]` row. Where the NPC's presence at a location spans several windows, author one hub per window (period-split, D56-R1), each with its own `trigger.schedules`.
 
 ### §6.3 — `[[canvases.trigger.substitutions]]` (Lane 3)
 
@@ -3926,7 +3963,94 @@ flagEffects = [
 
 ---
 
-## §15 — Cross-references
+## §15 — Player & NPC customization (Late Shifts — the personalization screen)
+
+Opt-in start-of-game personalization. The engine auto-builds the `CustomizeCharacters`
+screen and redirects `Start` to it — **no passage wiring.** You declare the fields and write
+the prose with `@`-tokens. (Design model: **doctrine/14**.)
+
+```toml
+# ── Player: all three field types ───────────────────────────────────
+[player]
+id = "player"
+name = "Maya"
+customizable = true
+# ... [player.core_traits] etc. ...
+
+# Array-of-tables — MUST come after every [player.*] subtable (TOML scoping).
+[[player.customization_fields]]
+id = "name"            # special: writes $player.name (the @player token)
+type = "text"
+label = "Your name"
+default = "Maya"
+
+[[player.customization_fields]]
+id = "body_type"       # writes $player.body_type → read with @player.body_type
+type = "select"
+label = "Build"
+default = "average"
+options = ["petite", "average", "curvy", "athletic", "thick"]
+
+[[player.customization_fields]]
+id = "look"
+type = "image_select"
+label = "Look"
+default = "tired"
+sets_portrait = true   # chosen image becomes $player.portrait
+options = [
+  { id = "tired",   image = "players/maya_tired.jpg",   label = "Worn out" },
+  { id = "guarded", image = "players/maya_guarded.jpg", label = "Guarded" },
+]
+
+# ── A customizable NPC (rename + relationship picker) ───────────────
+[[npcs]]
+id = "npc_cole"
+name = "Cole"
+customizable = true                  # REQUIRES the next two lines (importer hard-fails otherwise)
+relationship = "coworker"            # default — must be in relationship_options
+relationship_options = ["coworker", "neighbor", "old flame"]
+# ... core_traits, arc_stages, schedules ...
+
+# ── Prose uses @-tokens (resolve at generation; honor the rename) ───
+# In a canvas node body:
+#   { type = "paragraph", content = "His eyes go over her @player.body_type frame once." }
+#   { type = "dialog", props = { speaker = "npc", npcId = "npc_cole" }, content = "@player. Didn't think you'd come by." }
+# @cole / @cole.rel elsewhere render Cole's chosen name / relationship label.
+
+# ── Genericize the surfaces the @-token CAN'T reach (doctrine/14 §4) ─
+[[locations]]
+id = "loc_cole_apartment"
+name = "The Apartment Across Town"   # NOT "Cole's Apartment" — location names print raw
+# sidebar trait-bar label → "Closeness" (not "Cole Relation"); locked tooltip → "Once he's noticed you"
+```
+
+### Key features
+
+- **Auto-screen, zero wiring** — any customizable player field or NPC inserts
+  `CustomizeCharacters` and redirects `Start`.
+- **All three player field types** — text (name), select (build), image_select (look,
+  `sets_portrait`).
+- **NPC rename + relationship toggle** — the genre's step-relative axis, here on the dating
+  arc (cheapest, non-destructive candidate).
+- **`@`-tokens in prose** — `@player`, `@player.body_type`, `@cole`, `@cole.rel`; dialog
+  speaker labels are already dynamic via `npcId`.
+- **Live-verified** — renaming player→*Nadia*/build→*curvy* and Cole→*Jamie* renders
+  *"her curvy frame … Jamie: Nadia. Didn't think you'd come by."*
+
+### Anti-patterns avoided
+
+- **Declared fields, no token** — the silent half-use: a customizable name that never
+  appears because the prose hardcodes "Maya". Every visible mention is `@player` / `@cole`.
+- **Name baked into a structural label** — `"Cole's Apartment"`, `"Cole Relation"` would
+  leak the old name after a rename. Genericized.
+- **Customizable NPC without `relationship_options`** — a build-time hard-fail; both are
+  required.
+- **Renaming a premise-critical NPC** — the brother whose siblinghood *is* the story is the
+  wrong candidate; the dating love-interest is the right one.
+
+---
+
+## §16 — Cross-references
 
 ### Sibling schema files
 
@@ -3945,11 +4069,13 @@ flagEffects = [
 - `doctrine/11_clothing_design.md` — the clothing design model (§12 example above is its worked reference)
 - `doctrine/12_rent_economy_design.md` — the rent/economy design model (§13 example above is its worked reference)
 - `doctrine/13_phone_design.md` — the phone/apps design model (§14 example above is its worked reference)
+- `doctrine/14_customization_design.md` — the player/NPC customization model (§15 example above is its worked reference)
 
 ### Source TOML
 
 - `games/the_long_summer_test/toml_phases/7_final_game.toml` — 536KB shipped TLS slice. Most excerpts above are verbatim from this file.
-- `games/late_shifts/toml_phases/` — the §12 clothing excerpts (`[settings]`, `[[clothing]]`, `rts_public_clothing_*`), the §13 rent excerpt (`[settings.rent]`, `npc_vince`), and the §14 phone excerpts (`[phone]`, `8_phone.toml`) are verbatim from the Late Shifts phase files.
+- `games/late_shifts/toml_phases/` — the §12 clothing excerpts (`[settings]`, `[[clothing]]`, `rts_public_clothing_*`), the §13 rent excerpt (`[settings.rent]`, `npc_vince`), the §14 phone excerpts (`[phone]`, `8_phone.toml`), and the §15 customization excerpts (`customizable`, `[[player.customization_fields]]`, `npc_cole` rename) are verbatim from the Late Shifts phase files.
+- `games/under_one_roof/toml_phases/` — the largest customization consumer (3 customizable NPCs, 400+ `@`-tokens); the production reference behind doctrine/14.
 
 ### Source briefs
 
@@ -4359,16 +4485,32 @@ Anti-pattern: hub with only currently-unlocked items. Player sees "Talk" + "Leav
 
 Anti-pattern: 10-item hub (Marge Pass 1 — Doc 54 §3.1). Over-weighting Lane 1 produces the "menu game" feel that Doc 24 §10.3 warns against ("All Lane 1 → fully transactional experience, low surprise"). If more rungs are needed, they should be locked-visible stages, not parallel work-tasks.
 
-### §2.8 — Presence is acknowledged; interaction is logic-driven (Doc 72)
+### §2.8 — Presence is acknowledged by a Lane 1 hub, per schedule row (Doc 72 R6)
 
-If an NPC is present where the player can reach them (per their schedule), visiting that place always *shows* the base moment — the hub's base node renders what the NPC is doing in the space, **even when zero choices are available**. Base node + exit, with no menu items unlocked, is a complete and valid canvas. Presence is acknowledged; the player never walks into a dead, empty room when the schedule says the NPC is there.
+If an NPC is present where the player can reach them (per `[[npcs.schedules]]`), visiting that place always *shows* the base moment. The mechanism for that floor is a **Lane 1 hub**: a canvas whose `base` node renders what the NPC is doing in the space, **even when zero choices are available**. Base node + exit, with no menu items unlocked, is a complete and valid canvas. Presence is acknowledged; the player never walks into a dead, empty room when the schedule says the NPC is there.
+
+**The floor is per schedule row, and it must be a Lane 1 hub — not a Lane 2 ambient.** For every (location × time-window × weekdays) the NPC is scheduled, there is a hub whose own `trigger.schedules` covers that window (period-split per window — D56-R1, `doctrine/04` §1.1). A Lane 2 ambient cannot be the floor: it is a dice roll (`chance 0.25` ⇒ nothing on ~3 of 4 visits), so most visits would still be dead. Lane 2/3 are texture layered *on top of* the hub, never the acknowledgement itself. The engine enforces the window: a hub's portrait renders only when its own `schedules` is live and the NPC is present (`renderNpcPortraits` → `isCanvasValid`). The full rule, its corollary (a schedule entry is a promise of a hub), and the worked Hank example are in `doctrine/04` §6 (D72-R6).
 
 The *choices* on top of the base then follow in-world logic, not a quota:
 - Some are open from the start (helping a housemate fold laundry, greeting someone you live with — needs no permission).
-- Some are gated until earned (the escalation ladder — locked-visible per §2.6).
+- Some are gated until earned (the escalation ladder — locked-visible per §2.6, capped by location exposure per §2.9).
 - Sometimes none apply, and base + exit is the whole canvas. That is correct, not a gap.
 
-**This is judgment, NOT a checkbox.** There is no rule that every NPC must offer an ungated action. What's required is *acknowledgement* (the base renders); an *action* is not. Gate a choice for an in-world reason (he wouldn't proposition his housemate on day one), never by reflex — and never gate the act of *seeing* the NPC behind escalation stats. The two failures this bans are **dead presence** (§8.11) and the **backwards on-ramp** (§8.12).
+**The floor is hard; the choices are judgment.** The *hub-per-row* requirement is a checkable rule (D72-R6). The *choices on top* are still logic-driven (Doc 72 R2/R3): there is no rule that every NPC must offer an ungated action, and "base + exit" is a valid canvas. Two distinct axes — never conflate "the hub must exist" (hard) with "every hub must offer an action" (rejected quota). Never flag-gate the base node itself; gate the choices, never the act of *seeing* the NPC. The failures this bans are **dead presence** (§8.11), the **backwards on-ramp** (§8.12), and a **hub window narrower than the schedule** (§8.13).
+
+### §2.9 — Exposure-tier rung ceiling (Doc 72 R7)
+
+Which escalation rungs a hub may offer is decided by the **exposure** (privacy) of that location at that window — *who could see this, and what's at risk* — **not** by the time of day. Two orthogonal filters: **exposure sets the ceiling per hub; relationship state (corruption / relation / stage, global to the NPC) unlocks rungs within it.**
+
+| Exposure tier | Locations (examples) | Rung ceiling |
+|---|---|---|
+| **Public** (high exposure) | diner floor with customers, street, park midday, mall | Deniable acts only — talk, banter, a charged look, a brush-past. No flashing, no sex. |
+| **Semi-private** (low exposure) | back kitchen, office with a door, storeroom, building hallway | Tease / grope / quick contact; full sex gated higher or *interrupted* by the setting (the in-fiction interruption, §3.6). |
+| **Private** (no exposure) | bedroom, apartment, the diner after close when alone | Full ladder, up to sex / sleepover. Private can be **more than one** location. |
+
+**Time and co-present NPCs are inputs to exposure, not the gate.** A public location becomes private when it empties — the diner front at 2am, lights off, just the two of them, carries a higher ceiling than the same front at the breakfast rush. Not because "it's night," but because the room is empty now. Who else is scheduled there (alone vs. a coworker vs. an antagonist down the hall) changes exposure too. This is why a late-night hub legitimately differs from a morning hub at the same location while the rule stays *exposure*, not *time*.
+
+This is the positive form of the verb-overlay anti-pattern (§8.1): the same act reads differently by place, so don't clone the full ladder into every room. **Same-NPC hubs stay consistent** (shared rung names + gate thresholds + voice; ladder context-scaled, not cloned) — D72-R8, `doctrine/04` §6.3. An optional *locked-visible-everywhere* variant (greyed higher rungs shown at public hubs, unlockable only where private) is allowed for telegraphing.
 
 ---
 
@@ -4959,7 +5101,7 @@ This produces the "world fills out around me as I escalate" feeling. The player 
 
 The inverse design — "Lane 2/3 lead, Lane 1 follows" — produces a passive game where things keep happening to Maya regardless of her choices. RTS deliberately doesn't do this.
 
-**Cold-start on-ramp (Doc 72 R4).** Because Lane 1 leads, every arc must be *enterable* from a cold start — corruption 0, no flags set — through ordinary presence. The first beat of an arc needs only co-presence (Maya in the room with the NPC, who is there per schedule); escalation conditions layer on *after* that first beat. Never gate an arc's entry on a stat that can only be raised by content downstream of that same arc — that circular gate (the **backwards on-ramp**, §8.12) leaves the cold-start player unable to begin. Location-entry gating is still fine where *entering is itself the first contact* (the diner behind "get hired" — walking in to ask for the job is the first interaction); the on-ramp rule targets people already in the player's everyday space (housemates, neighbours, coworkers-on-shift).
+**Cold-start on-ramp (Doc 72 R4).** Because Lane 1 leads, every arc must be *enterable* from a cold start — corruption 0, no flags set — through ordinary presence. The first beat of an arc needs only co-presence (Maya in the room with the NPC, who is there per schedule), and that co-presence is delivered by the NPC's Lane 1 hub at that location, which renders its base unconditionally (the presence floor, §2.8 / D72-R6); escalation conditions layer on *after* that first beat. Never gate an arc's entry on a stat that can only be raised by content downstream of that same arc — that circular gate (the **backwards on-ramp**, §8.12) leaves the cold-start player unable to begin. Location-entry gating is still fine where *entering is itself the first contact* (the diner behind "get hired" — walking in to ask for the job is the first interaction); the on-ramp rule targets people already in the player's everyday space (housemates, neighbours, coworkers-on-shift).
 
 ### §6.1 — Per-NPC progression: shared stat thresholds across lanes
 
@@ -5063,11 +5205,23 @@ Then it appears in the NPC portrait hub at the location, the player can click it
 
 ### §8.11 — Dead presence (NPC present, visiting yields nothing)
 
-An NPC is scheduled at a reachable location (and shows on the schedule page), but visiting renders nothing — no base moment, no acknowledgement. The player acts on the schedule, walks to where the NPC is, and gets an empty room; the world reads as a set of locked doors. Cause is usually escalation-only authoring: only stage-1+ beats written for the NPC, no base node that renders regardless of stats. Fix: the hub/ambient base node always renders the moment (§2.8); gate escalation *choices*, never the act of seeing the NPC. (This is NOT a quota for ungated actions — "sometimes none" is valid; what's banned is the absent base.)
+An NPC is scheduled at a reachable location (and shows on the schedule page), but visiting renders nothing — no base moment, no acknowledgement. The player acts on the schedule, walks to where the NPC is, and gets an empty room; the world reads as a set of locked doors. Two causes: escalation-only authoring (only stage-1+ beats written, no unconditional base node), OR relying on a probabilistic Lane 2 ambient to do the acknowledging (a `chance` dice roll is not a floor — most visits still render nothing). Fix: a **Lane 1 hub** whose `base` node renders unconditionally, per schedule row (§2.8 / D72-R6); gate escalation *choices*, never the act of seeing the NPC. (The hub-per-row requirement is hard; the *choices* on it are still logic-driven — "sometimes none" is a valid choice list. What's banned is the absent or probabilistic base, not a thin menu.) This is the *reachable*-location case; an NPC scheduled at an *unreachable* / locked location is a different failure — §8.15 + `doctrine/10` §5.4.
 
 ### §8.12 — Backwards on-ramp (arc entry gated on downstream stat)
 
 An arc's entry condition is a stat or flag that can only be raised by content downstream of that same arc — a circular gate. The cold-start player can never begin it; they stall staring at locked affordances. Distinct from §8.4 (lane forced on wrong register): here the arc legitimately exists, but its front door is locked with a key that's inside the room. Worked anti-example: a housemate arc that only opens at `worn_corruption ≥ 15`, i.e. the player must buy and wear provocative clothing before her own housemate will register her. Fix: the arc's first beat needs only co-presence; escalation layers after (§6 cold-start on-ramp, Doc 72 R4).
+
+### §8.13 — Hub window narrower than the schedule (D72-R6)
+
+A Lane 1 hub exists at the location, but its own `trigger.schedules` covers only a slice of the NPC's scheduled presence there — so the rest of the rows are dead. Worked anti-example: Hank is scheduled at the diner front 06:00–22:00 (plus late night), but `hank_diner_front_hub` opens only 22:00–01:30; from 06:00–22:00 every day the schedule page shows him there and the room renders no hub. "A hub at the location" is not coverage — the hub must be *open during that window*. Fix: period-split into per-window hubs, each with `trigger.schedules` matching its row (§2.8, D72-R6). The build does NOT catch this — it's a silent runtime gap.
+
+### §8.14 — Cloned full ladder across locations / public-space escalation (D72-R7)
+
+The same full escalation ladder is offered at every one of an NPC's hubs regardless of context — e.g. "Have sex with him" clickable at the public diner counter mid-rush. This is the verb-overlay anti-pattern (§8.1) in hub form: it ignores that the act can't happen there (and that the NPC won't risk it). Fix: scale each hub's rung set to the location's exposure tier (§2.9) — public = talk/look only, semi-private = tease/grope, private = full ladder. The relationship state stays global, so consistency is preserved without cloning the ladder into rooms that can't support it (D72-R8).
+
+### §8.15 — NPC vanishes into a locked room (present-but-unreachable)
+
+An NPC's `[[npcs.schedules]]` sends them into a **locked** location (a `[[locations]]` with `entry_conditions`) during a window the player routinely shares — so they leave the reachable floor for a room the player can't enter, with no open-location fallback and/or an illegible gate. The player watches them step away and gets "where did they go?" Distinct from §8.11: that is an NPC at a *reachable* location rendering nothing; this is an NPC at an *unreachable* location. Fix: the **unlock contract** (`doctrine/10` §5.4) — make the lock legible (visible-but-blocked, so it reads as a closed door), keep the locked window in off-hours the player doesn't share *or* co-gate the door with the same flag that gates the player's access, and ensure open-location fallback presence; or open the door and gate the canvas/choices instead. The *acceptable* form (e.g. a boss who does paperwork in a locked office 01:30–06:00, on the open floor up to 01:30 and from 06:00) is a **bounded, legible** window — not this anti-pattern. The hard bug is an NPC reachable *only* via a locked location (`doctrine/10` §5.4 Case C).
 
 ---
 
@@ -5108,7 +5262,7 @@ An arc's entry condition is a stat or flag that can only be raised by content do
 - `28th_april_TLS_Phase2_Redesign/24_RTS_Three_Lanes_Repeatable_Activities.md` — Lane mechanism source
 - `28th_april_TLS_Phase2_Redesign/57_Capstone_Doctrine.md` — Lane 4 source
 - `28th_april_TLS_Phase2_Redesign/67_Solo_Activity_Design_and_Multi_NPC_Dispatcher_Doctrine.md` — solo activity + dispatcher patterns source
-- `28th_april_TLS_Phase2_Redesign/72_Presence_and_Logic_Driven_Interaction_Doctrine.md` — presence acknowledged + logic-driven interaction (base floor; dead-presence / backwards-on-ramp bans) — see §2.8 + §6 + §8.11–§8.12
+- `28th_april_TLS_Phase2_Redesign/72_Presence_and_Logic_Driven_Interaction_Doctrine.md` — presence floor + logic-driven interaction. R6–R8 (per-schedule-row Lane 1 hubs + exposure-tier ladder ceiling + same-NPC hub consistency) live in `doctrine/04` §6 — see §2.8 + §2.9 + §6 + §8.11–§8.14
 
 ### Engine primitives
 
@@ -5192,6 +5346,8 @@ The reference table for what each shape's canvas distribution should LOOK like. 
 | Antagonist/witness | **6–10 standalone** + cross-appearances in others' arcs | Diana standalone count is low; her presence saturates Frank's lanes |
 
 **Empty cells are honest.** If the shape has 0 in a cell, the brief commits to 0. Filling empty cells with relational/atmospheric texture is the Doc 54 Marge failure mode — soft drift toward "fill the world" that violates the shape.
+
+**The L1 cells above count *escalation* rungs, not hubs.** The number of Lane 1 **hubs** is set separately by presence: one hub per distinct `[[npcs.schedules]]` row (location × window) — D72-R6, `doctrine/04` §6.1. An NPC scheduled across 5 windows has 5 hubs even if the escalation budget is small; the extra hubs are *light* (base + talk + leave, exposure-tier-capped per D72-R7), not extra escalation. "Empty cells are honest" governs L2/L3 *escalation* surfaces — it does NOT excuse a missing presence hub: even service/antagonist NPCs get a light hub at each scheduled location. Presence floor (a hub) and escalation register (the rungs on it) are independent axes.
 
 ---
 
@@ -5481,6 +5637,8 @@ The R7 brief (Doc 56 R7 + `doctrine/04_authoring_rules.md`) commits to specific 
 
 Phase 2+ content is NOT shipped in slice — but the slice's locked-visible rungs telegraph it (Doc 54 §3.6). The doctrine bridges slice + full arc via the locked-visible pattern, not via "ship Phase 2+ stubs."
 
+**Locked-visible across locations (optional, D72-R8).** The locked-visible pattern can also bridge *exposure* tiers, not just stages: an arc NPC's public/semi-private hubs may show the higher (private-only) rungs greyed, so the ladder reads consistently at every hub, unlocking only where exposure allows (`doctrine/04` §6.2–§6.3). This is taste, not a requirement — the default is to simply omit out-of-tier rungs (context-scaled ladder).
+
 ### §10.2 — At `scope_mode: full_game`
 
 All budgeted canvases are authored. Stage 0→4 ships in full; capstone chains run end-to-end; per-shape Lane 3 budgets fill to their upper bound where the arc demands it.
@@ -5576,6 +5734,7 @@ A brief commits to peer/dating shape (Lane 3 = 0) but authoring produces 4 Lane 
 - **D57-R1 … D57-R5** = Doc 57 (capstone fingerprint + budgets)
 - **F1 … F5** = Doc 57 Pattern F sub-rules (Type B capstones)
 - **D67-R1 … D67-R7** = Doc 67 (solo activity + multi-NPC dispatcher)
+- **D72-R6 … D72-R8** = Doc 72 (presence floor: per-schedule-row hubs + exposure-tier ladder ceiling)
 
 ---
 
@@ -6052,11 +6211,62 @@ Optionally, the parent activity's `[[canvases.trigger]]` has its own `max_trigge
 
 ---
 
-## §6 — Pre-ship checklist (Appendix-style)
+## §6 — Doc 72 R6–R8 (presence floor: per-schedule-row hubs + exposure-tier ceiling)
+
+These three rules harden Doc 72's presence floor. Doc 72's R1–R5 (in the source doc) still hold; R2/R3 are unchanged — choices on a hub are logic-driven, "base + talk + leave" is a complete canvas, and there is **no choice-quota**. What R6–R8 change is the *floor mechanism*: the thing that acknowledges a scheduled NPC must be a **Lane 1 hub, per schedule row** — not a probabilistic Lane 2 ambient, and not a matter of judgment. The floor is now checkable; the choices on top are still judgment.
+
+### §6.1 — D72-R6: Every schedule row has a live Lane 1 hub
+
+**Rule:** For every `[[npcs.schedules]]` row an NPC has — each (location × time-window × weekdays) — there is a Lane 1 hub canvas for that NPC whose own `trigger.schedules` covers that window. The hub's `base` node renders **unconditionally** (image + a line of what the NPC is doing + optionally one line of dialogue); it is never gated behind escalation flags. A Lane 2 ambient does **not** satisfy the floor — it is a dice roll (`chance 0.25` ⇒ nothing on ~3 of 4 visits), so most visits would still be a dead room.
+
+**Corollary — a schedule entry is a promise of a hub.** If an NPC has no physical hub anywhere (a pure rent/phone "system" NPC such as a landlord), they must carry **no** `[[npcs.schedules]]` row — otherwise the schedule page advertises a body the world can't deliver. Either give them a hub or drop the schedule.
+
+**Corollary 2 — a schedule row at a *locked* location is a *deferred* promise.** If the row's location has `entry_conditions`, the player can't be present until the lock opens, so the hub is dormant until then. This is legitimate only under the **unlock contract**: the lock must read as "haven't met / been invited yet," the NPC must be meetable at an OPEN on-ramp location, and the beat at that on-ramp must set the unlock flag (which therefore needs a reachable setter). The bug to avoid is an NPC reachable *only* via a locked location, or a door gated on a flag only settable behind it. Full Case A/B/C treatment (private place / deeper room / unreachable-NPC) in `doctrine/10` §5.4.
+
+**Multiple windows at one location = separate hub canvases** (this is **D56-R1**: period-split, "don't fold them"). A breakfast hub and an after-close hub at the same diner are two canvases with their own `schedules`.
+
+**Why this rule exists:** the engine renders a hub portrait only when the hub's *own* `schedules` window is live AND the NPC is present (`isCanvasValid`, `v2.py:4356`, + the presence gate at `v2.py:4384`). Late Shifts authored hubs for narrow arc-moment windows (Hank's diner hub opened 22:00–01:30) while scheduling the NPC present far wider (Hank at the diner ~06:00–22:00). A per-row audit found 13 of 22 rows dead — the schedule page promised a body, the room delivered nothing. Lane 2 ambients existed but, being dice rolls, are not a floor.
+
+**How to apply:** list the NPC's schedule rows. For each, confirm a Lane 1 hub at that location whose `trigger.schedules` *covers that exact window+weekdays*. "A hub exists at the location" is not enough — it must be open at that time. Where the NPC's presence spans several distinct windows at one place, author one hub per window (period-split). Never flag-gate the base node.
+
+**Worked example (anti):** Hank is scheduled at the diner front 06:00–09:00, 09:00–17:00, 17:00–22:00, and 22:00–01:30; only `hank_diner_front_hub` (22:00–01:30) exists. Result: 06:00–22:00 every day shows Hank on the schedule page but renders no hub — dead. Fix: author `hank_diner_front_morning` / `_day` / `_evening` hubs, each with `trigger.schedules` matching its row.
+
+### §6.2 — D72-R7: A hub's escalation ceiling is set by location exposure, not by time
+
+**Rule:** Which escalation rungs a hub may offer is decided by the **exposure** (privacy) of that location at that window — *who could see this and what's at risk* — not by the time of day directly. Relationship state (corruption / relation / stage, global to the NPC) then unlocks within that ceiling. Two orthogonal filters: exposure sets the ceiling per hub; relationship state unlocks rungs inside it.
+
+| Exposure tier | Locations | Rung ceiling |
+|---|---|---|
+| **Public** (high exposure) | diner floor with customers, street, park midday, mall | Deniable acts only — talk, banter, a charged look, a brush-past. No flashing, no sex. |
+| **Semi-private** (low exposure) | back kitchen, office with a door, storeroom, building hallway | Tease / grope / quick contact; full sex gated higher or **interrupted** by the setting (the D56-R2 in-fiction-interruption pattern). |
+| **Private** (no exposure) | bedroom, apartment, the diner after close when they're alone | Full ladder, up to sex / sleepover. Private can be **more than one** location. |
+
+**Why this rule exists:** the same act reads differently by place (the verb-overlay anti-pattern, `doctrine/02` §8.1). "Have sex with Hank" at the public breakfast counter is the game pretending the room isn't there — and it's the NPC's risk too (he won't lose his job over the counter). RTS concentrates escalation in private space for exactly this reason: the charge of the private act is that it's private.
+
+**Time and co-present NPCs are *inputs to exposure*, not the gate.** A public location becomes private when it empties: the diner front at 2am, lights off, just the two of them, carries a higher ceiling than the same front at the breakfast rush — not because "it's night," but because the room is empty now. Likewise *who else is scheduled there* (alone vs. with a coworker vs. with an antagonist down the hall) changes exposure. This is why a late-night hub legitimately differs from a morning hub at the same location while the rule stays "exposure," not "time."
+
+**How to apply:** tag each hub with an exposure tier (public / semi-private / private) and offer only rungs at or below that ceiling. The relationship gates (corruption/stage) sit *inside* the permitted rungs as usual.
+
+### §6.3 — D72-R8: An NPC's hubs are mutually consistent
+
+**Rule:** Across all of one NPC's hubs:
+- **Relationship state is global** — corruption / relation / stage are per-NPC, not per-location, so progress carries everywhere automatically. The player never re-grinds a relationship per room.
+- **Voice + rung identity stay consistent** — the NPC sounds the same everywhere; a given rung keeps the same name and the same gate threshold wherever it appears (no "tease unlocks at corr 5 here but corr 15 there").
+- **The full ladder appears wherever it's private** — which can be several locations (D72-R7). It is **context-scaled, not cloned**: a public hub carries only its tier-permitted rungs, not the whole ladder forced into a room that can't support it.
+
+**Optional — locked-visible everywhere.** If you want the ladder telegraphed at every hub for readability, show the higher rungs *locked-visible* (greyed, per §2.6 / D56-R1's sibling) even at public hubs, unlockable only where exposure allows. This gives the "same ladder everywhere" look without making public sex possible. Use it or not by taste; it is not required.
+
+**Why this rule exists:** the worry that drove this — "you can have sex with him at his primary spot but only tease him elsewhere" — is not actually an inconsistency. The relationship is one shared value; only *act availability* varies, and varying it by privacy is realism (flirt in public, fuck in private — exactly how RTS works). The inconsistency to avoid is the mechanical kind: a rung gated differently in two hubs, or the NPC's voice drifting between rooms.
+
+**How to apply:** when authoring an NPC's second/third hub, copy the rung names + gate thresholds + voice from the first; drop the rungs the new location's exposure tier forbids; keep the base + talk + leave. Don't invent a different ladder per room.
+
+---
+
+## §7 — Pre-ship checklist (Appendix-style)
 
 Run before any commit that includes new canvas / capstone / quest card / Lane 3 substitution.
 
-### §6.1 — Per-canvas checks
+### §7.1 — Per-canvas checks
 
 - [ ] **D56-R1** — Hub canvas has ONE opener paragraph, not tiered (unless legitimate world-state framing)
 - [ ] **D56-R2** — If `[group]`-tier-routed, T0/T1 endings land on in-fiction interruption
@@ -6066,7 +6276,7 @@ Run before any commit that includes new canvas / capstone / quest card / Lane 3 
 - [ ] Locked-click failures pure information (no stat drain) (P7)
 - [ ] No legacy vocabulary (Pattern A–J; ENI-persona references; whiteboard goals; etc.) — see `00_LEGACY_IGNORE.md` §4
 
-### §6.2 — Per-Lane-3 substitution checks (D67-R1–R7)
+### §7.2 — Per-Lane-3 substitution checks (D67-R1–R7)
 
 - [ ] **D67-R1** — Parent activity is a separate `[[canvases]]` entry (not a sub-block of the location hub)
 - [ ] **D67-R2** — Stat cost placement decided (`exit_block.effects` vs `pre_substitution_effects`)
@@ -6077,7 +6287,7 @@ Run before any commit that includes new canvas / capstone / quest card / Lane 3 
 - [ ] **D67-R7** — Substitution target has `max_triggers_per_day = 1` + `substitution_only = true`
 - [ ] **D56-R3** — Substitution count respects per-arc-shape Lane 3 budget (family 4–7, slow-burn 1–3, peer 0, service 0, antagonist 0 own)
 
-### §6.3 — Per-capstone checks (D57-R1–R5)
+### §7.3 — Per-capstone checks (D57-R1–R5)
 
 - [ ] **D57-R1** — Trigger fingerprint: `is_repeatable = false` (or `true` + self-gate); `priority ≥ 9`; `conditions` include flag-is_false gate; setter-flag effect on exit choice
 - [ ] **D57-R2** — Default to Type A; Type B only if branches diverge downstream
@@ -6086,7 +6296,7 @@ Run before any commit that includes new canvas / capstone / quest card / Lane 3 
 - [ ] **D57-R5** — Schedule + location match the fiction
 - [ ] **§3.8 voice** — Cascade prose is Tier-3 (specific, layered, character-distinguishing). No Tier-3 spillage in related Lane 2/3 canvases.
 
-### §6.4 — Per-Type-B capstone checks (F1–F5)
+### §7.4 — Per-Type-B capstone checks (F1–F5)
 
 - [ ] **F1** — Both branches playable in good faith (Refuse isn't a punishment-button)
 - [ ] **F2** — Real divergence in flag-effect, NPC arc, or downstream content
@@ -6094,7 +6304,7 @@ Run before any commit that includes new canvas / capstone / quest card / Lane 3 
 - [ ] **F4** — Refuse-path flag policy matches fiction (retry-allowed vs irreversible)
 - [ ] **F5** — Not compounded with tier-routing AND multi-step downstream — only one structural device beyond the fork
 
-### §6.5 — Per-quest-card checks (D50-R1–R6)
+### §7.5 — Per-quest-card checks (D50-R1–R6)
 
 - [ ] **D50-R1** — Mode declared (capstone / mechanic / hybrid). No `txt_only`.
 - [ ] **D50-R2** — Climbing-bullet present when `ready_canvas` has trait gates strictly above card's `when`
@@ -6104,17 +6314,21 @@ Run before any commit that includes new canvas / capstone / quest card / Lane 3 
 - [ ] **D50-R6 (REVERSED)** — `goals[i].label` names the trait ("Corruption" / "<NPC> Relation"), matches sidebar; no raw key paths. (LO pref; see §2.6)
 - [ ] **§2.7** — Pure-mechanic chains: each `when` has bounded threshold range; transitions are atomic
 
-### §6.6 — Per-slice / per-arc checks (D56-R3, R4, R7)
+### §7.6 — Per-slice / per-arc checks (D56-R3, R4, R7; D72-R6, R7, R8)
 
 - [ ] **D56-R3** — Per-arc-shape Lane 3 budget matches table (family 4–7, slow-burn 1–3, peer 0, service 0, antagonist 0)
 - [ ] **D56-R4** — Sidebar surfaces in-scope NPC locations + key stats per the arc's register
 - [ ] **D56-R6** — No `txt_only` quest cards in shipped TOML
 - [ ] **D56-R7** — Design brief written + canvas distribution matches the brief's declared budget
 - [ ] **§3 per-arc distribution** — Canvas count per arc within range (family/ambient 25–35; slow-burn 10–15; peer/dating 8–12; service 6–10; antagonist 6–10)
+- [ ] **D72-R6** — Every `[[npcs.schedules]]` row has a Lane 1 hub whose own `trigger.schedules` covers that window (per-row coverage; "a hub at the location" is not enough — it must be open at that time). NPCs with no physical hub carry no schedule row.
+- [ ] **D72-R6** — Every hub `base` node renders unconditionally (no escalation-flag gate on the base; gates live on the choices)
+- [ ] **D72-R7** — Each hub's rung set respects its location exposure tier (public = talk/look only; semi-private = tease/grope; private = full ladder)
+- [ ] **D72-R8** — Same-NPC hubs consistent: shared rung names + gate thresholds + voice; ladder context-scaled, not cloned into public rooms
 
 ---
 
-## §7 — Anti-patterns (consolidated, per-rule cross-reference)
+## §8 — Anti-patterns (consolidated, per-rule cross-reference)
 
 For each anti-pattern, the rule it violates.
 
@@ -6147,11 +6361,18 @@ For each anti-pattern, the rule it violates.
 - **Pattern B authored as Pattern A approximation without flagging** — violates D67-R5.
 - **`GetNpcLocation == "Kitchen"` on a Lane 3 walk-in dispatcher** — violates D67-R6.
 - **No `max_triggers_per_day` on substitution target** — violates D67-R7.
-- **Substitution target without `substitution_only = true`** — violates D67-R7 + pre-ship check §6.2.
+- **Substitution target without `substitution_only = true`** — violates D67-R7 + pre-ship check §7.2.
+- **Schedule row with no live Lane 1 hub** (NPC scheduled at a place/time, but no hub whose own `trigger.schedules` covers it) — violates D72-R6. The schedule page advertises a body the room doesn't deliver.
+- **Hub window narrower than the schedule** (one hub open 22:00–01:30 while the NPC is scheduled 06:00–22:00) — violates D72-R6. The daytime rows are dead; period-split into per-window hubs.
+- **Lane 2 ambient used as the presence floor** (relying on a `chance` random to acknowledge a scheduled NPC) — violates D72-R6. Dice rolls aren't a floor; author the hub.
+- **Flag-gated hub base node** (the base render itself locked behind an escalation flag) — violates D72-R6. Gate the choices, never the act of seeing the NPC.
+- **Physical schedule on a hub-less system NPC** (a rent/phone-only landlord carrying a `[[npcs.schedules]]` row) — violates D72-R6 corollary. Drop the schedule or give them a hub.
+- **Cloned full ladder across locations / public-space escalation** (the same sex rung offered at a public diner counter) — violates D72-R7 + the verb-overlay anti-pattern in `doctrine/02` §8.1. Scale the ladder to the location's exposure tier.
+- **Same NPC, divergent rung gates between hubs** (tease unlocks at corr 5 in one hub, corr 15 in another; voice drifts room to room) — violates D72-R8.
 
 ---
 
-## §8 — Cross-references
+## §9 — Cross-references
 
 ### Source docs
 
@@ -6159,6 +6380,7 @@ For each anti-pattern, the rule it violates.
 - `28th_april_TLS_Phase2_Redesign/50_Quest_Card_Shape_Doctrine.md` §4 — R1–R6
 - `28th_april_TLS_Phase2_Redesign/57_Capstone_Doctrine.md` §4 + §7 — R1–R5 + F1–F5
 - `28th_april_TLS_Phase2_Redesign/67_Solo_Activity_Design_and_Multi_NPC_Dispatcher_Doctrine.md` §6 — R1–R7
+- `28th_april_TLS_Phase2_Redesign/72_Presence_and_Logic_Driven_Interaction_Doctrine.md` — presence floor; R6–R8 (per-row hub coverage + exposure-tier ceiling) extend it (see §6)
 
 ### Sibling doctrine files
 
@@ -6833,23 +7055,25 @@ work ships, e.g., breeding-talk dialogue retrofitted into Tier 5 shapes once pre
 ```markdown
 ## §5 Lane-by-lane content map
 
-Per location, what fills the lane slots. Cross-references doc 30 §8.1 triage table.
+One block PER SCHEDULE WINDOW (not just per location) — every `[[npcs.schedules]]` row gets a
+Lane 1 hub (D72-R6). Tag each with its exposure tier; the tier caps the hub's rung ceiling (D72-R7).
+Cross-references doc 30 §8.1 triage table.
 
-### <Location 1> (<NPC schedule window>)
+### <Location 1> — <schedule window> — exposure: <public | semi-private | private>
 
 | Slot | Canvas | Tier-content |
 |---|---|---|
-| Lane 1 hub | <canvas_slug> | Tier 0-5 menu items per §3 ladder; <vocab register> from Tier <N>+ |
-| Lane 2 ambient | <canvas_slug> | Tier <N>+ dice <N>%; <ambient description> |
+| Lane 1 hub | <canvas_slug> | Rungs ≤ exposure ceiling: public = talk/look; semi-private = tease/grope; private = full ladder (Tier 0-5 per §3). <vocab register> from Tier <N>+ |
+| Lane 2 ambient | <canvas_slug> | Tier <N>+ dice <N>%; <ambient description> (texture ON TOP — never the presence floor) |
 | Lane 3 sub | <canvas_slug> | Tier <N>+ dice <N>%; <walk-in description> |
 | Capstones | <capstone-1>, <capstone-2> | Per §6 |
 
-### <Location 2> (<NPC schedule window>)
+### <Location 2> — <schedule window> — exposure: <tier>
 
-(repeats per location)
+(repeats per schedule window — every row covered by a hub)
 ```
 
-**Match the §5 table to the per-arc-shape distribution (`doctrine/03_arc_shapes.md` §2).** Family/ambient gets 4–7 Lane 3 cells. Peer/dating gets 0. Empty cells are honest.
+**Match the §5 table to the per-arc-shape distribution (`doctrine/03_arc_shapes.md` §2).** Family/ambient gets 4–7 Lane 3 cells. Peer/dating gets 0. Empty cells are honest for L2/L3 escalation — but every schedule window still gets a Lane 1 hub (the presence floor is independent of the escalation budget; `doctrine/03` §2 note). Same NPC's hubs share rung names + gate thresholds + voice (D72-R8).
 
 ### §3.6 — Section 6: Capstones
 
@@ -7649,9 +7873,14 @@ Added 2026-05-29 when `scope_mode: full_game` shipped as first-class default. Th
 
 ### §8.7 — From Doc 72 (presence acknowledged; interaction logic-driven)
 
-- **Dead presence** — an NPC is scheduled at a reachable location (and shows on the schedule page), but visiting renders nothing: no base moment, no acknowledgement. The player acts on the schedule and gets an empty room; the world reads as locked doors. Usually escalation-only authoring (only stage-1+ beats written, no base node that renders regardless of stats). Fix: the hub/ambient base node always renders the moment; gate escalation *choices*, never the act of seeing the NPC. **NOT a quota** — "sometimes none" is a valid choice list; what's banned is the absent base. Caught by `doctrine/02` §2.8 + §8.11.
+- **Dead presence** — an NPC is scheduled at a reachable location (and shows on the schedule page), but visiting renders nothing: no base moment, no acknowledgement. The player acts on the schedule and gets an empty room; the world reads as locked doors. Two causes: escalation-only authoring (only stage-1+ beats written, no unconditional base), OR relying on a probabilistic **Lane 2 ambient** to acknowledge presence (a `chance` dice roll is not a floor). Fix: a **Lane 1 hub** whose base renders unconditionally, **per schedule row**; gate escalation *choices*, never the act of seeing the NPC. Caught by `doctrine/02` §2.8 + §8.11; rule = D72-R6 (`doctrine/04` §6.1).
+- **Hub window narrower than the schedule** — a hub exists at the location but its own `trigger.schedules` covers only a slice of the NPC's scheduled presence, so the rest of the rows are dead (Hank: hub open 22:00–01:30, scheduled 06:00–22:00). "A hub at the location" ≠ coverage; the hub must be open during the window. Fix: period-split into per-window hubs. Silent runtime gap — the build won't catch it. Caught by `doctrine/02` §8.13; rule = D72-R6.
+- **Lane 2 used as the presence floor** — relying on a `trigger_mode = "random"` ambient to do the acknowledging. ~3 of 4 visits still render nothing. Lane 2/3 are texture *on top of* the hub, never the floor. Rule = D72-R6.
+- **Physical schedule on a hub-less system NPC** — a rent/phone-only NPC (landlord) carrying a `[[npcs.schedules]]` row, so the schedule page advertises a body the world can't deliver. Fix: drop the schedule, or give them a hub. D72-R6 corollary.
+- **Cloned full ladder / public-space escalation** — the same full escalation ladder offered at every hub regardless of context (e.g. "Have sex" at a public diner counter). Fix: scale each hub's rung set to the location's **exposure tier** (public = talk/look only; semi-private = tease/grope; private = full ladder). Relationship state is global, so consistency holds without cloning. Caught by `doctrine/02` §2.9 + §8.14; rules = D72-R7 + D72-R8 (`doctrine/04` §6.2–§6.3).
 - **Backwards on-ramp** — an arc's entry condition is a stat/flag only raisable by content downstream of that same arc (a circular gate). The cold-start player can never begin it. Distinct from §8.4 (lane forced on wrong register): here the arc legitimately exists, but its front door is locked with a key that's inside the room. Anti-example: a housemate arc gated on `worn_corruption ≥ 15` — the player must buy + wear provocative clothing before her own housemate registers her. Fix: the arc's first beat needs only co-presence; escalation layers after. Caught by `doctrine/02` §6 (cold-start on-ramp) + §8.12. (Doc 72 R4.)
-- **Quota / format enforcement (the inverse error)** — bolting a hollow ungated action onto every NPC to satisfy a checklist. Doc 72 explicitly rejects "every NPC must have ≥1 ungated interaction." Acknowledgement (the base renders) is required; an *action* is not. Gate or omit by in-world logic, not by count.
+- **NPC vanishes into a locked room** — an NPC scheduled into a **locked** location (`entry_conditions`) during a window the player routinely shares, with no open fallback and/or an illegible gate → "where did they go?" Distinct from dead presence (that's an NPC at a *reachable* location); here the location itself is unreachable. The hard bug is an NPC reachable *only* via a locked location (chicken-and-egg gates included). Fix: the **unlock contract** — meet the NPC at an OPEN on-ramp that sets the unlock flag; keep locked windows legible + off-hours/co-gated + with open fallback. The acceptable form (a boss doing books in a locked office at 3am, on the open floor otherwise) is a *bounded, legible* window. Caught by `doctrine/02` §8.15 + `doctrine/10` §5.4; D72-R6 Corollary 2 (`doctrine/04` §6.1).
+- **Choice-quota / format enforcement (the inverse error — still rejected)** — bolting a hollow ungated *action* onto every NPC to satisfy a checklist. Note the two distinct axes: the **hub-per-row** floor (D72-R6) is a hard requirement; the **choices on top** are logic-driven (Doc 72 R2/R3) — "base + talk + leave" is a valid canvas and there is no rule that every NPC must offer an ungated action. Hardening the floor does NOT reintroduce a choice-quota. Gate or omit choices by in-world logic, not by count.
 
 ---
 
@@ -7674,7 +7903,9 @@ Run BEFORE authoring any new NPC content. Paste into PR description, work throug
 - [ ] Lane 2/3 scope: if no escalation register in slice, both are EMPTY in slice (§3.4)
 - [ ] Other-NPC content stays in their own future surfaces, not blended into this NPC's lanes (§3.5)
 - [ ] Pre-existing canon violations within touched surfaces declared (rewrite-now / schedule / accept-split per §3.7)
-- [ ] Every present NPC's base node renders regardless of stats (no dead presence); every arc is enterable from a cold start — no backwards on-ramp (per §8.7 / Doc 72)
+- [ ] Every `[[npcs.schedules]]` row has a live **Lane 1 hub** whose own `trigger.schedules` covers that window (per-row coverage; Lane 2 ambients don't count); hub-less system NPCs carry no schedule row (D72-R6)
+- [ ] Every hub `base` renders unconditionally (no escalation-flag gate on the base); every arc is enterable from a cold start — no backwards on-ramp (§8.7 / D72-R6 / Doc 72 R4)
+- [ ] Each hub's rung set respects the location **exposure tier** (public/semi-private/private); same-NPC hubs share rung names + gate thresholds + voice, ladder context-scaled not cloned (D72-R7 / D72-R8)
 
 ### Doctrine
 - [ ] Every quest card mode declared (capstone / mechanic / hybrid-tier per Doc 50 §2)
@@ -7709,7 +7940,7 @@ Run BEFORE authoring any new NPC content. Paste into PR description, work throug
 - `doctrine/01_rts_principles.md` — P1–P10 (anti-patterns operationalize violations of these)
 - `doctrine/02_three_lanes_plus_capstone.md` §8 — lane-mechanism anti-patterns
 - `doctrine/03_arc_shapes.md` §11 — arc-shape anti-patterns
-- `doctrine/04_authoring_rules.md` §7 — rule-violation anti-patterns
+- `doctrine/04_authoring_rules.md` §8 — rule-violation anti-patterns (§6 = Doc 72 R6–R8: per-row hubs + exposure tier)
 - `doctrine/05_rts_flat_prose.md` §4 — voice register anti-patterns
 - `doctrine/06_design_brief_template.md` §8 — brief-authoring anti-patterns
 
@@ -9222,6 +9453,22 @@ Even when NPC + location agree, the player must be there *and awake*. Late Shift
 
 **Authoring rule for every NPC ambient/capstone:** anchor it where the player *actually crosses the NPC during the daily loop* — not where the fiction first imagines them. Then sanity-check the triad by hand.
 
+### §5.4 — Locked location ∩ NPC schedule: the unlock contract
+
+A fourth reachability failure the triad doesn't cover: the NPC and the time-window agree, but **the location itself is locked** — so the player can't be present at all. A locked location is a `[[locations]]` with `entry_conditions` (a flag predicate) + `blocked_message`. Our engine's lock is **visible-but-blocked**: the room shows on the nav and, on a failed entry, prints its `blocked_message` ("He hasn't invited me back there yet"). (Contrast RTS, which has two axes — a *discovery* lock that renders the venue **absent** from the map and a recurring *time* lock with a "CLOSED / Opens at X" badge; `reference/01` §6.5. We have only the flag lock; there is **no native time-of-day location lock** — the time/exposure axis lives on the hub via `trigger.schedules` + D72-R7, never on the door. Don't invent a location field the engine lacks.)
+
+**The contract.** A schedule row at a locked location is a **deferred** hub promise (D72-R6 corollary, `doctrine/04` §6.1). It is legitimate *only* when the lock reads as **"haven't met / been invited yet"** and **the unlock is a beat the player can reach at an OPEN location.** The lock represents the social fact; the meeting is the key.
+
+| Case | Shape | Verdict |
+|---|---|---|
+| **A — private place, meeting unlocks it** | The locked location *is* the NPC's private space; the player meets them at an **open** on-ramp, and that beat sets the unlock flag. *LS Cole:* `loc_cole_apartment` gated on `cole_date_done`; Cole met at the open diner/park; the date sets the flag. | **Correct.** The locked row is a deferred promise — legitimate per the R5 access-gate carve-out (`doctrine/05`/Doc 55): pre-onboarding the player can't be there *and* has no reason to be. Keep it; don't separately flag-gate the hub (the door already gates it). |
+| **B — deeper room of an already-reachable NPC** | A secondary room the NPC routes into; the NPC is reachable elsewhere meanwhile. | **Acceptable only if all three hold:** (i) **legible** lock (visible-but-blocked, so the NPC stepping in reads as "gone somewhere I can't follow yet," not "vanished"); (ii) **co-gated *or* off-hours+fallback** — *best:* the door flag is the same flag that gates the player's access to that window, so there is **zero** dead window (*LS Hank back room* ← `hired_at_diner`: can't work the close unless hired, and being hired opens the back); *acceptable:* a **later** flag, but the window sits in hours the player doesn't routinely share **and** the NPC has open-location presence bracketing it (*LS Hank office* ← `hank_first_contact`, 01:30–06:00 graveyard, Hank on the floor up to 01:30 and again from 06:00 — a **bounded legible** dead window, tolerable); (iii) the locked row is **not** the NPC's only/primary presence. |
+| **C — reachable only via a locked location** | The NPC is *only ever* scheduled at locked location(s), **or** the unlock flag has no reachable setter (incl. chicken-and-egg: the door is gated on a flag only settable behind the door). | **The bug — unreachable NPC.** Fix: give an open on-ramp with a reachable setter, or start the location unlocked and gate the *canvas/choices* instead of the door. |
+
+**Legible-lock principle.** Because a locked window means the NPC is *present-but-unreachable* for that slice, the lock must read as a closed door, not a disappearance. The failure to avoid is an NPC shunted into a locked room during a window the player **routinely shares**, with no open fallback and/or an illegible gate → "where did they go?" (`doctrine/02` §8.15). This is distinct from **dead presence** (`doctrine/02` §8.11), which is an NPC at a *reachable* location rendering nothing.
+
+**Schedule-page leak.** The Schedule page renders declared `[[npcs.schedules]]` rows regardless of the location lock, so it will list the NPC at a locked location. With our visible-but-blocked model that's tolerable, even flavorful ("the boss does the books in the office overnight"). If a game ever adopts RTS-style *discovery* hiding, the schedule page must also suppress rows at not-yet-unlocked locations — or it leaks the hidden place.
+
 ---
 
 ## §6 — Per-arc-shape location footprint (Late Shifts bug B6)
@@ -9243,6 +9490,8 @@ Cross-ref `doctrine/03_arc_shapes.md` §5 for the peer/dating distribution (now 
 - [ ] Every `requires_npc` canvas: its location ∈ that NPC's `[[npcs.schedules]]` (§5.1).
 - [ ] Every portrait hub (`npc =` set): that NPC is schedule-present at the hub's location (§5.2).
 - [ ] Every NPC ambient/capstone passes the triad: NPC-schedule ∩ canvas-window ∩ player-likely-present-and-awake is non-empty, accounting for sleep/work/cross-midnight (§5.3).
+- [ ] Every NPC scheduled at a locked (`entry_conditions`) location obeys the unlock contract (§5.4): the lock reads as "not met/invited," the NPC is meetable at an OPEN on-ramp, and the unlock flag has a reachable setter (that on-ramp beat). No NPC is reachable *only* via a locked location.
+- [ ] Any locked secondary room an NPC routes into is legible + co-gated-or-off-hours + has open fallback presence — never a silent vanish during a window the player routinely shares (§5.4 Case B).
 - [ ] Every peer/dating NPC has an ongoing Stage-4 hub, not just a first-night capstone (§6).
 - [ ] Household NPCs are inside the private unit; neighbors/witnesses are in shared/public space, never the private unit (§4).
 
@@ -9254,6 +9503,8 @@ If any fail: fix BEFORE delivery. None of these are caught by the build validato
 
 - `schema/02_toml_schema.md` §4 — `[[locations]]` field reference (`entry_from`, `parent`, `default_entry`, `is_container`, `navigation_order`).
 - `schema/01_engine_capabilities.md` §5 — `getNpcLocation`, schedule presence (schedule-only, fail-closed).
+- `reference/01_rts_overview.md` §6.5 — the live-verified RTS city-map location-lock model (discovery vs time axis) that §5.4 adapts.
+- `doctrine/02_three_lanes_plus_capstone.md` §8.11 (dead presence — reachable) vs §8.15 (vanish into a locked room — unreachable).
 - `doctrine/02_three_lanes_plus_capstone.md` — lane mechanisms (what attaches where).
 - `doctrine/03_arc_shapes.md` §5 — peer/dating ongoing-hub footprint.
 - `stages/01_game_book_prompt.md` §4 Step 3/4 — locations + schedules authoring.
@@ -9708,7 +9959,206 @@ The phone is OFF until a `[phone]` table turns it on, and the switch is a **sile
 
 ═══════════════════════════════════════════════════════════════════════════════
 
-## 18. 01_rts_overview
+## 18. 14_customization_design
+
+**Source:** `prompts_v2/doctrine/14_customization_design.md`
+
+---
+
+# Doctrine 14 — Player & NPC Customization Design
+
+How to let the player personalize themselves and the cast at game start — name, build,
+look, NPC names, NPC relationship labels — and, critically, how to make those choices
+actually **show up** in the writing. Sibling of [doctrine/11 clothing], [doctrine/12 rent],
+[doctrine/13 phone]: another free engine surface that ships fully built but is easy to
+half-use (declare the inputs, forget the output token).
+
+The engine is fully shipped — importer `template_import.py:62–89` (player) / `:107–117`
+(NPC), validator `:2906–2943` / `:3289–3304`, runtime `v2.py:8376` (the auto-built
+`CustomizeCharacters` passage) + `v2.py:12658` (the `@`-token processor). **No engine
+change is needed to use it.**
+
+---
+
+## §1 — What it is (and the RTS parallel)
+
+Two independent surfaces, both opt-in:
+
+- **Player customization** — a start-of-game screen where the player sets fields you
+  declare (`name`, `build`, a portrait `look`, anything). RTS-of-this-genre games open on
+  exactly this: name yourself, pick a body type, choose a starting look.
+- **NPC customization** — per-NPC, the player can **rename** the character and pick a
+  **relationship label** from a list you supply (e.g. `step-dad` / `mom's boyfriend` /
+  `landlord`). This is the genre's relationship-toggle: the same arc, reframed as a
+  step-brother *or* a roommate, by the player's choice.
+
+The screen is **auto-generated and auto-wired**. If any `[player].customizable = true`
+field or any `customizable` NPC exists, the engine inserts a `CustomizeCharacters` passage
+and redirects `Start` to it (`v2.py:830–837`). You author **zero** passage plumbing — you
+declare the fields and write the prose with tokens.
+
+---
+
+## §2 — The free engine features
+
+| Feature | Declared in | Renders as |
+|---|---|---|
+| Player text field (name, etc.) | `[[player.customization_fields]]` `type="text"` | a textbox |
+| Player choice field (build, etc.) | `type="select"` + `options` | a dropdown |
+| Player portrait picker | `type="image_select"` + `options` + `sets_portrait` | an image grid; the pick can become `$player.portrait` |
+| NPC rename | NPC `customizable = true` | a textbox seeded with the default name |
+| NPC relationship label | NPC `relationship` + `relationship_options` | a dropdown |
+
+A `text`/`select` value lands in `$player.<field_id>`. `id = "name"` is special — it writes
+`$player.name` (the canonical name the whole engine reads). An NPC's chosen name lands in
+`$npcs[uuid].name`, the relationship in `$npcs[uuid].relationship`.
+
+---
+
+## §3 — The `@`-token contract (the part everyone forgets)
+
+Declaring the fields is half the job. A customized value only *appears* in the story if you
+write the prose with the substitution token. **There is exactly one token syntax**, processed
+at generation time (`_resolve_at_references`, `v2.py:12658`):
+
+| Token in your prose | Becomes | Reads |
+|---|---|---|
+| `@player` | `<<print $player.name>>` | the player's chosen name |
+| `@player.<field>` | `<<print $player.<field> \|\| "">>` | any player field (e.g. `@player.build`) |
+| `@<npc_short>` | `<<print $npcs["uuid"].name>>` | that NPC's chosen name |
+| `@<npc_short>.rel` | `<<print $npcs["uuid"].relationship \|\| "">>` | that NPC's relationship label |
+
+`<npc_short>` is the NPC slug **without** the `npc_` prefix — `@cole` for `npc_cole`,
+`@frank` for `npc_frank`. An unrecognized `@word` is left untouched (so it's safe to write
+literal `@`s — but see §6 on the handle collision).
+
+**Possessives and punctuation just work:** `@cole's place` → `<<print …name>>'s place`
+→ "Jamie's place". Dialog speaker labels are already dynamic (they render from `npcId`), so
+you only tokenize the *body* text, never the speaker tag.
+
+**Rule R1 — if an NPC is `customizable`, every player-visible mention of their name in
+prose MUST be `@<npc>` (and every relationship mention `@<npc>.rel`).** A single hardcoded
+"Cole" left in a renamed-Cole game is a visible bug. Same for `@player` once the player can
+rename themselves.
+
+**Worked proof (Late Shifts, live-verified):** with the player renamed *Nadia* / build
+*curvy* and Cole renamed *Jamie* / relationship *old flame*, the apartment scene renders
+*"His eyes go over her **curvy** frame … **Jamie**: **Nadia**. Didn't think you'd come by."*
+All four token forms resolving at once.
+
+---
+
+## §4 — The un-tokenizable-surface trap (R2)
+
+The `@`-token only fires where the engine runs `_resolve_at_references`: **canvas prose,
+dialog body, choice text, and location descriptions.** It does **NOT** reach structural
+labels that the engine prints raw:
+
+- **Location names** (`<h2>{location.name}>` — the navigation title)
+- **Sidebar trait-bar `label`s** (e.g. a `"Cole Relation"` bar)
+- **Locked-link tooltip text** (`locked_text_threshold`)
+- **Quest/stage display strings** and **arc_stages** names
+- The NPC's customize-screen `description` intro (printed raw, html-escaped)
+
+**Rule R2 — never bake a customizable NPC's name into a structural label.** A location
+called `"Cole's Apartment"` stays "Cole's Apartment" after the player renames Cole → the
+leak the whole feature was supposed to avoid. **Genericize these instead:** the location
+becomes `"The Apartment Across Town"`, the sidebar bar label becomes `"Closeness"`, the
+locked tooltip becomes `"Once he's noticed you"`. Carry the specificity in the *prose*
+(which tokenizes), keep the *labels* neutral.
+
+(Canvas/node `name` fields are dev-only — they appear on the Canvas-Review page and the
+dev-mode banner, never in a production player build — so those may keep the literal name.)
+
+---
+
+## §5 — Customizable-NPC required fields (R3)
+
+A `customizable` NPC **must** declare both `relationship` (the default) and
+`relationship_options` (the picker list), and the default must be a member of the options.
+The importer **hard-fails** otherwise (`template_import.py:3289–3304`). There is no
+rename-only mode — renaming and relationship-picking ship together.
+
+Player `customization_fields` have their own guards (`:2906–2943`): field `id`s must be
+lowercase snake_case, unique, and **not** one of the reserved `$player` properties
+(`portrait`, `current_location`, `core_traits`, `flags`, `wardrobe`, `equipped`).
+`select` needs `options` (and any `default` must be in them); `image_select` needs `options`
+with `id` + `image` on each; `sets_portrait` is `image_select`-only.
+
+---
+
+## §6 — `image_select`, portraits, and the `@handle` collision
+
+- **`image_select`** renders a clickable image grid; each option is `{ id, image, label }`.
+  With `sets_portrait = true` the chosen image becomes `$player.portrait` (used everywhere
+  the engine shows the player's face). Missing art degrades gracefully — the `<img>` hides
+  on error and the label still shows — so it's safe to ship the field before the art lands
+  (same missing-media convention as locations).
+- **The `@handle` collision (R4):** the token regex matches any `@word`. Social-feed
+  handles in phone content — `@samantha_x`, `@lexiluv_` — that don't resolve to a known NPC
+  slug are left as literal text (fine), **but** a handle that happens to collide with an NPC
+  short-name *will* be substituted. Keep social handles distinct from NPC slugs, or accept
+  the rewrite.
+
+---
+
+## §7 — Composition with the phone (and other JS-rendered surfaces)
+
+The phone renders authored text as **JavaScript data**, not passage bodies — so the
+generation-time `@`-token processor never touches it. The runtime twin `setup.resolveAtRefs`
+(same `@player`/`@npc` resolution, in JS) is now applied at every phone render point
+(notify toasts, message bubbles, reply buttons, daily-chat history, daily-topic buttons —
+`v2.py` + `v1.py`), so **you can use `@<npc>` / `@player` tokens in phone `notify`, message
+`content`, and `daily_topics` text and they resolve to the customized name.** The thread
+title, avatar, and preview already read the live `$npcs[uuid].name`, so they honor a rename
+even without a token.
+
+Doctrine still applies: keep names *out* of any future raw-printed surface, and prefer the
+auto-dynamic thread name over hardcoding.
+
+---
+
+## §8 — When to make it customizable (and when not)
+
+- **Make the player customizable** when the protagonist is a blank-ish self-insert (the
+  RTS default): name + build + look is the standard opener. **Don't** when the protagonist
+  is a written, named character central to the premise and the prose leans on third-person
+  narration by name — retrofitting `@player` across hundreds of "she did X" lines fights the
+  grain and buys little. (Late Shifts demonstrates the field types in one arc rather than
+  sweeping the whole third-person script — a deliberate, scoped choice.)
+- **Make an NPC customizable** when the relationship framing is a genuine player fantasy
+  axis (the step-relative toggle) **and** the cost is bounded — i.e. the name isn't baked
+  into many structural labels (§4) and isn't load-bearing for the premise. A dating
+  love-interest is the cheapest, most natural candidate; a sibling whose siblinghood *is*
+  the story is the most expensive and most destructive.
+
+**Enabling checklist:**
+1. `[player].customizable = true` + at least one `[[player.customization_fields]]` (array-of-
+   tables placed **after** every `[player.*]` subtable — TOML scoping).
+2. For each customizable NPC: `customizable = true` + `relationship` + `relationship_options`.
+3. Every player-visible name mention → `@player` / `@<npc>`; every relationship → `@<npc>.rel` (R1).
+4. Every structural label that named the NPC → genericized (R2).
+5. No engine wiring — the `CustomizeCharacters` screen and the `Start` redirect are automatic.
+
+---
+
+## §9 — Cross-references
+
+- **Schema:** [schema/02 §2.3] (player fields) + [schema/02 §3.1] (NPC customization fields);
+  [schema/03 §15] (full worked example, all three field types + NPC rename + tokens).
+- **Sibling doctrine:** [doctrine/11 clothing], [doctrine/12 rent], [doctrine/13 phone] —
+  the other opt-in engine surfaces with the same "declare-the-input, write-the-output" shape.
+- **Production reference:** `games/under_one_roof` — three customizable NPCs (Frank / Jake /
+  Ryan), 400+ `@`-tokens; the largest real consumer. `games/test_customize` — the minimal
+  purpose-built example. `games/late_shifts` — the scoped demonstrator (player name/build/look
+  + Cole rename, this session).
+- **Engine entry points:** importer `template_import.py:62`, validator `:2906`/`:3289`,
+  runtime screen `v2.py:8376`, token processor `v2.py:12658`, JS twin `setup.resolveAtRefs`
+  `v2.py:2722`.
+
+═══════════════════════════════════════════════════════════════════════════════
+
+## 19. 01_rts_overview
 
 **Source:** `prompts_v2/reference/01_rts_overview.md`
 
@@ -9927,6 +10377,29 @@ Phone is a purchased item ($400 + first NPC's allowance unlocks it). Once acquir
 
 Phone is async-mediated content (Edward DM arrives after follower threshold + wait). Phone is NOT load-bearing for family/ambient arcs — those run via location passages + walkthrough.
 
+### §6.5 — City map + location locking (live-verified 2026-06-03)
+
+Live-play of `road_to_success` (introspected the `CityMap` macro handler + `$location` state; notes in `game_explorations/road_to_success/notes.md`). RTS locks **venues** (never districts — center/residential/elite/ghetto are always reachable via the Bus Stop) on **two orthogonal axes**:
+
+| Axis | Field | Player experience |
+|---|---|---|
+| **Discovery** | `unlocked` (bool) | `CityMap` renders **nothing** when `unlocked === false` → the venue is **absent** from the map. The player can't see a place they haven't discovered. Verified: at game start the Residential map omits Marcus's/Emma's houses; the Elite map shows only Casino + Bus Stop (all three mansions hidden). |
+| **Time** | `open` (bool, derived from `openPeriods` vs `$game.time`) + `opensAt` label | When `unlocked` but `open === false`, the tile **is** shown — darkened with a 🔒 + a "CLOSED / Opens at \<opensAt\>" badge; clicking it is a **no-op** (you stay on the map). Verified at early-morning Center: Night Club "Opens at Night," Bar "Opens at Evening," Movie Theater "Opens at Morning." |
+
+**Discovery unlock = meeting the person tied to the place.** `<<UnlockLocation X>>` (→ `LocationService.unlockLocation`) fires at the in-fiction *meet / invite / "address sent"* beat — the lock literally means "you don't know them / where they live yet":
+
+| Unlock | Trigger beat | Story |
+|---|---|---|
+| jamalHouse | `JamalMeet` | meet Jamal at the Club; "I'll see you again, right?" |
+| veronicaHouse | `VeronicaMeet` | a sexual encounter with Veronica |
+| marcusHouse | `SchoolTest` | the school test starts the "Study with Marcus" quest |
+| emmaHouse | `EmmaInvite` | Emma: "I'll wait for you at my house in evening" |
+| clandestineClinic | `HospitalBirth` | the doctor refers you to a friend's artificial-womb clinic |
+| vipers (gang HQ) | `DrugDealer` | the drug-dealer questline opens the hideout |
+| photoStudio / filmStudio / hotel | phone DMs (`InstafameMessages`) | Richard/Jim/Edward each "send you the address" + a `NotifyPhone "X is now unlocked on the city map"` signal |
+
+**How our engine adapts it.** We have only a flag lock: `[[locations]]` `entry_conditions` + `blocked_message` — **visible-but-blocked** (the door shows and tells you why), not RTS-style hide; and **no native time-of-day location lock** (time/exposure lives on the hub, D72-R7). The coordination rule (a locked location that hosts an NPC schedule — Cases A/B/C, the unlock contract, the schedule-page leak if we ever adopt discovery-hiding) is `doctrine/10` §5.4.
+
 ---
 
 ## §7 — Three writing tiers (Doc 13 §9)
@@ -10098,7 +10571,7 @@ Tutorial says "1 arousal per day OR after being groped." Live observed: BedroomG
 
 ═══════════════════════════════════════════════════════════════════════════════
 
-## 19. 02_rts_scene_catalog
+## 20. 02_rts_scene_catalog
 
 **Source:** `prompts_v2/reference/02_rts_scene_catalog.md`
 
@@ -10542,7 +11015,7 @@ Per methodology rule (use both source extraction AND live play, never one alone)
 
 ═══════════════════════════════════════════════════════════════════════════════
 
-## 20. 03_rts_walkthrough_panel
+## 21. 03_rts_walkthrough_panel
 
 **Source:** `prompts_v2/reference/03_rts_walkthrough_panel.md`
 
@@ -10862,7 +11335,7 @@ RTS Walkthrough has ~130 scenes total. Single-page rendering may not scale beyon
 
 ═══════════════════════════════════════════════════════════════════════════════
 
-## 21. 04_rts_hud_world_model
+## 22. 04_rts_hud_world_model
 
 **Source:** `prompts_v2/reference/04_rts_hud_world_model.md`
 
@@ -11208,7 +11681,7 @@ Authoring discipline: when adding a new sidebar item, ask:
 
 ═══════════════════════════════════════════════════════════════════════════════
 
-## 22. 01_game_book_prompt
+## 23. 01_game_book_prompt
 
 **Source:** `prompts_v2/stages/01_game_book_prompt.md`
 
@@ -11510,6 +11983,7 @@ If no shape fits, surface to LO. Don't invent a 6th shape — the corpus doesn't
 - **Player character.** Name (default "Maya" — adapt if LO specified), age (typically 20-23), background (one sentence), agency frame (what can the player choose?).
 - **Economic engine.** Per Doc 30 §4.1 — RTS pattern is rent + first-week deadline. Specifics: rent amount + due day + grace periods. Starting money + first income source.
 - **Digital surface (phone) — `doctrine/13_phone_design.md`.** Decide if the game has off-location life worth a phone (NPC texts, a follower/job economy, a private escalation channel). If yes: which app types (most arc games are chat-centric — one `chat` app), the acquisition beat (what sets `purchase_flag`, e.g. reconnecting a cut-off phone at first income), and which NPC arcs get threads. Threads ride arc flags authored in §2; the phone carries arcs, it isn't one. Skip entirely for a single-location game with no off-screen life.
+- **Customization (player/NPC personalization) — `doctrine/14_customization_design.md`.** Decide if the player personalizes at game start. **Player:** name + build + a portrait look is the RTS-default opener — include it when the protagonist is a blank-ish self-insert; SKIP it when the protagonist is a written, premise-central named character (retrofitting `@player` across third-person narration fights the grain). **NPCs:** mark an NPC `customizable` (rename + relationship-label picker — the step-relative toggle) only when the relationship framing is a real fantasy axis AND the cost is bounded (the name isn't load-bearing for the premise or baked into structural labels). A dating love-interest is the cheapest candidate; a sibling whose siblinghood *is* the story is the wrong one. If included: every name mention in prose becomes `@player`/`@<npc>` and structural labels get genericized (doctrine/14 §3–§4).
 - **At `scope_mode: full_game` — Phase 2+ inclusions.** Per the §0.5.2 Q&A resolutions, declare each of pregnancy / scandal / gallery / tracker as `include` or `defer`. Include = ships in this game with full engine support; defer = locked-visible scaffolding only OR completely absent per LO's call.
 - **At `scope_mode: slice` — Slice scope (Phase 1) + Phase 2+ deferrals.** What ships in the first 10-14 day slice? Typically: 1 NPC at full depth (gold standard) + 4-5 NPCs at minimum-contract depth + 1 cross-arc capstone. All four Doc 65 decisions default to defer per `doctrine/09_trait_catalog.md` §6.1.
 - **Time model.** 24h clock vs. 6-band model (EM/M/A/E/N/LN). Pick one. Per Doc 30 §4.3 — TLS slice uses 24h; future games can pick 6-band.
@@ -11522,8 +11996,9 @@ If no shape fits, surface to LO. Don't invent a 6th shape — the corpus doesn't
 - **Town hub** + sub-locations (Main Street → Diner / Shop / Gym / Library / etc.). Home-exterior root + town root are two top-level locations bridged by walk-activity canvases, not by a direct `entry_from` link.
 - **Outside locations** (Lake / Woods / etc. — Phase 2+ typically).
 - **NPC placement by arc shape (`doctrine/10` §6):** household NPCs inside the private unit; neighbors/witnesses in shared/public space (never the private unit); service at the workplace; peer/dating gets an ongoing Stage-4 hub at the partner's location (not a first-night capstone only).
-- **Per-NPC location schedules.** Per `schema/01_engine_capabilities.md` §5.1 — non-overlapping time windows per NPC.
+- **Per-NPC location schedules.** Per `schema/01_engine_capabilities.md` §5.1 — non-overlapping time windows per NPC. **Every schedule window is a promise of a Lane 1 hub (D72-R6):** plan one hub per (location × window), with its rung ceiling set by the location's exposure tier — public = talk/look, semi-private = tease/grope, private = full ladder (D72-R7, `doctrine/04` §6). An NPC with no physical hub (rent/phone-only) carries no schedule.
 - **Reachability triad (`doctrine/10` §5) — apply per NPC beat.** For every place an NPC scene happens, confirm NPC-schedule ∩ scene-window ∩ where-the-player-actually-is-and-awake is non-empty. Anchor each NPC's beats where the player *crosses them in the daily loop* (mind sleep/work windows + cross-midnight). The build will NOT catch a dead-on-arrival scene — lock placement here.
+- **Locked location ∩ NPC schedule — the unlock contract (`doctrine/10` §5.4).** If an NPC is scheduled at a locked location (`entry_conditions`), the player must first meet them at an OPEN on-ramp whose beat sets the unlock flag — the lock reads as "haven't met / been invited yet." Never make an NPC reachable *only* via a locked location, and never gate a door on a flag only settable behind it. A locked room an already-met NPC routes into (e.g. a back office) is fine only if the lock is legible and falls in off-hours with open-location fallback presence.
 
 For each in-scope NPC, draft their full week schedule (weekdays + weekend variant if needed). Use Doc 31 Frank's schedule as the gold standard (7 entries covering 24h non-overlapping); `doctrine/10` for the full layering + reachability doctrine.
 
@@ -11716,6 +12191,8 @@ The lane mechanism (§5.5 per-NPC R7 brief sections), capstone chain shape (§5.
 | Cole | Peer/dating | 8-12 canvases (Lane 1 workplace hub ×2 + Lane 2 ambients 2 + Lane 3 = 0 + 3-4 dating capstones) | First-boyfriend wholesome dating → partner commit | FULL Stage 3+ if escalation arc |
 | Hank | Family/ambient | 25-35 canvases | Diner owner paternal-coded second-father | FULL DADDY |
 | Rosa | Service | 6-10 canvases (Lane 1 workplace ×1-2 + Lane 2 = 0 + Lane 3 = 0 + 1-3 capstones) | Workplace mentor / corrupt-the-mentor reversal | per LO |
+
+**Hub count = scheduled-window count (D72-R6).** The "Lane 1 hubs ×N" above is driven by the NPC's schedule, not the escalation budget: one hub per (location × window). An NPC present at the diner across morning/day/evening/late windows needs a hub for each — the daytime ones are *light* (base + talk + leave, exposure-capped), the private/late one carries the full ladder. Don't under-count hubs to fit the escalation budget.
 
 **Shape mix:** <list> (<N> shapes covered). Per P4 — mixed tempos.
 
@@ -12304,7 +12781,7 @@ If LO surfaces a critique during authoring, BEFORE responding with a fix, ask: "
 
 ═══════════════════════════════════════════════════════════════════════════════
 
-## 23. 02_toml_generation_prompt
+## 24. 02_toml_generation_prompt
 
 **Source:** `prompts_v2/stages/02_toml_generation_prompt.md`
 
@@ -12478,6 +12955,8 @@ The TOML MUST:
 - Use `id = "..."` (NOT `slug`) in `[project]`, plus `starting_canvas` (see §1.2)
 - Give every `is_true` flag condition a reachable setter canvas — a canvas that sets the flag AND can actually fire (location/schedule). The flag-chain validator checks a setter *exists*; it does NOT check the setter is *reachable*. (Late Shifts: a dev-only flag setter + an `is_true` requirer passed validation but was dead in play.)
 - Pass the reachability triad for every NPC ambient/capstone + portrait hub (`doctrine/10` §5): NPC-schedule ∩ canvas-window ∩ player-presence non-empty; `requires_npc` location ∈ that NPC's schedule; portrait-hub NPC schedule-present at the hub location
+- Cover every `[[npcs.schedules]]` row with a Lane 1 hub whose own `trigger.schedules` spans that window (D72-R6 / `doctrine/04` §6). A hub at the location with a narrower window than the NPC's presence leaves the rest dead — period-split into per-window hubs. Lane 2 ambients do NOT count as the floor. Each hub's rung ceiling = the location exposure tier (D72-R7)
+- Honor the unlock contract for any NPC scheduled at a locked (`entry_conditions`) location (`doctrine/10` §5.4): the NPC is met at an OPEN on-ramp whose beat sets the unlock flag; no NPC is reachable only via a locked location; no door gated on a flag only settable behind it
 - If `Phase 2+ inclusions: pregnancy = include`, author at least one canvas that SETS `player.pregnancy` (the validator does NOT check traits — an "included" trait with no setter is dormant, `doctrine/09`)
 
 The TOML MUST NOT:
@@ -12623,6 +13102,27 @@ notoriety = 0
 
 **Rule:** if you write `{ targetType = "player", trait = "calculation", op = "add", value = 1 }` anywhere in the file, `calculation` MUST appear in `[player.core_traits]`. Same for sidebar items.
 
+```toml
+# Player customization (only when the design book opted in — doctrine/14). Set
+# customizable = true on [player], then emit the fields as array-of-tables AFTER
+# every [player.*] subtable (TOML scoping — placing them before [player.core_traits]
+# captures the traits into the wrong table). The engine auto-builds the screen +
+# redirects Start; no passage wiring. Then write prose with @player / @player.<field>.
+[[player.customization_fields]]
+id = "name"                               # special: writes $player.name
+type = "text"
+label = "Your name"
+default = "Maya"
+
+[[player.customization_fields]]
+id = "body_type"                          # writes $player.body_type → @player.body_type
+type = "select"
+label = "Build"
+default = "average"
+options = ["petite", "average", "curvy", "athletic", "thick"]
+# image_select (sets_portrait) also available — see schema/03 §15.
+```
+
 ### Step 3 — Emit `[[npcs]]` blocks
 
 For each NPC in design book §2 roster:
@@ -12640,6 +13140,19 @@ arc_stages = ["<stage 1 name>", "<stage 2 name>", ...]   # display strings; curr
 [npcs.trait_decay]
 # Per-NPC daily decay (typically only relation has trickle decay; arousal + corruption DON'T decay)
 relation = 0.5
+```
+
+**Customizable NPC (only when opted in — doctrine/14):** add `customizable = true` plus
+BOTH `relationship` (default) and `relationship_options` (the importer hard-fails without
+both, and the default must be in the list). Then write every player-visible name mention as
+`@<npc_short>` (slug minus `npc_`) and relationships as `@<npc_short>.rel`. **Genericize any
+location name / sidebar label / quest title that named the NPC** — those print raw and won't
+honor a rename (doctrine/14 §4).
+
+```toml
+customizable          = true
+relationship          = "coworker"
+relationship_options  = ["coworker", "neighbor", "old flame"]
 ```
 
 **Per-arc-shape arousal range** (per `doctrine/09_trait_catalog.md` §4.1):
@@ -12836,7 +13349,7 @@ For each NPC in design book §2 roster, emit canvases per the design book §4 br
 **Order per NPC:**
 
 1. **Lane 4 capstones first** — these are referenced by Lane 1 hub buttons + quest cards. Author them first so other canvases can reference them by ID.
-2. **Lane 1 hub canvases** — per scheduled location for the NPC
+2. **Lane 1 hub canvases** — **one per scheduled WINDOW** for the NPC (per-row coverage, D72-R6), each with `trigger.schedules` matching its `[[npcs.schedules]]` row; base renders unconditionally; rung set capped by the location exposure tier (public/semi-private/private, D72-R7). Period-split windows at the same location into separate hubs (D56-R1)
 3. **Lane 1 route-target stubs** — tease / flash / explicit content reached via hub menu (NO `[canvases.trigger]` block)
 4. **Lane 2 ambient canvases** — random encounters at NPC's locations
 5. **Lane 3 parent activities** — Maya-solo dispatchers (if any per arc shape)
@@ -12907,11 +13420,13 @@ Mirror the canonical examples in `schema/03_example_toml.md`.
 
 ### §5.1 — Lane 1 hub canvas (Frank kitchen morning gold standard)
 
+This hub's `trigger.schedules` (05:30–09:00) matches Frank's kitchen schedule **row** — one hub per window (D72-R6). The kitchen at breakfast is a **private** household space, so the full ladder is fair here; a *public* hub (a diner floor with customers) would cap at talk/look only (D72-R7). The `base` node renders unconditionally — escalation lives on the menu rungs, never on the base.
+
 ```toml
 [[canvases]]
 id          = "frank_kitchen_morning_hub"
 name        = "Kitchen — Frank, morning"
-description = "Always-show RTS ladder hub for Frank in kitchen, morning slot. Locked-visible escalation rungs visible from day 1."
+description = "Always-show RTS ladder hub for Frank in kitchen, morning slot. Locked-visible escalation rungs visible from day 1. Exposure: private (household) → full ladder."
 
 [canvases.trigger]
 location      = "loc_kitchen"
@@ -14265,6 +14780,10 @@ For every Lane-1 portrait hub (`npc =` set): confirm that NPC is schedule-presen
 
 A flag set ONLY by a dev canvas must NOT be required (`is_true`) by any shipping (non-dev) canvas. When dev canvases are stripped, the requirer becomes unsatisfiable. Late Shifts: `phase_3_unlocked` (only set by `dev_unlock_phase3`) gated Rosa's locked rungs; removing dev re-broke the flag-chain. Audit dev-flag isolation before stripping phase 6.
 
+### §10.17 — NPC reachable only via a locked location / vanishes into a locked room (silent — `doctrine/10` §5.4)
+
+A locked location (`entry_conditions`) is a *visible-but-blocked* door, but the build won't tell you it makes an NPC unreachable. For every NPC scheduled at a locked location, honor the **unlock contract**: the NPC is met at an OPEN on-ramp whose beat sets the unlock flag (reachable setter), and the NPC has other open presence — never *only* the locked location, and never a door gated on a flag only settable behind it (chicken-and-egg). A locked secondary room an already-met NPC routes into is fine only if it's legible + off-hours/co-gated + has open fallback presence; otherwise the NPC "vanishes" mid-window (`doctrine/02` §8.15). Case A/B/C in `doctrine/10` §5.4.
+
 ---
 
 ## §11 — Quality gate (self-audit checklist)
@@ -14526,7 +15045,7 @@ If LO explicitly requests phased emission at slice (for review-by-concern), use 
 
 ═══════════════════════════════════════════════════════════════════════════════
 
-## 24. 03_image_finder_prompt
+## 25. 03_image_finder_prompt
 
 **Source:** `prompts_v2/stages/03_image_finder_prompt.md`
 
@@ -15147,7 +15666,7 @@ Failed items:
 
 ═══════════════════════════════════════════════════════════════════════════════
 
-## 25. 04_game_listing_prompt
+## 26. 04_game_listing_prompt
 
 **Source:** `prompts_v2/stages/04_game_listing_prompt.md`
 

@@ -166,6 +166,8 @@ The TOML MUST:
 - Use `id = "..."` (NOT `slug`) in `[project]`, plus `starting_canvas` (see §1.2)
 - Give every `is_true` flag condition a reachable setter canvas — a canvas that sets the flag AND can actually fire (location/schedule). The flag-chain validator checks a setter *exists*; it does NOT check the setter is *reachable*. (Late Shifts: a dev-only flag setter + an `is_true` requirer passed validation but was dead in play.)
 - Pass the reachability triad for every NPC ambient/capstone + portrait hub (`doctrine/10` §5): NPC-schedule ∩ canvas-window ∩ player-presence non-empty; `requires_npc` location ∈ that NPC's schedule; portrait-hub NPC schedule-present at the hub location
+- Cover every `[[npcs.schedules]]` row with a Lane 1 hub whose own `trigger.schedules` spans that window (D72-R6 / `doctrine/04` §6). A hub at the location with a narrower window than the NPC's presence leaves the rest dead — period-split into per-window hubs. Lane 2 ambients do NOT count as the floor. Each hub's rung ceiling = the location exposure tier (D72-R7)
+- Honor the unlock contract for any NPC scheduled at a locked (`entry_conditions`) location (`doctrine/10` §5.4): the NPC is met at an OPEN on-ramp whose beat sets the unlock flag; no NPC is reachable only via a locked location; no door gated on a flag only settable behind it
 - If `Phase 2+ inclusions: pregnancy = include`, author at least one canvas that SETS `player.pregnancy` (the validator does NOT check traits — an "included" trait with no setter is dormant, `doctrine/09`)
 
 The TOML MUST NOT:
@@ -311,6 +313,27 @@ notoriety = 0
 
 **Rule:** if you write `{ targetType = "player", trait = "calculation", op = "add", value = 1 }` anywhere in the file, `calculation` MUST appear in `[player.core_traits]`. Same for sidebar items.
 
+```toml
+# Player customization (only when the design book opted in — doctrine/14). Set
+# customizable = true on [player], then emit the fields as array-of-tables AFTER
+# every [player.*] subtable (TOML scoping — placing them before [player.core_traits]
+# captures the traits into the wrong table). The engine auto-builds the screen +
+# redirects Start; no passage wiring. Then write prose with @player / @player.<field>.
+[[player.customization_fields]]
+id = "name"                               # special: writes $player.name
+type = "text"
+label = "Your name"
+default = "Maya"
+
+[[player.customization_fields]]
+id = "body_type"                          # writes $player.body_type → @player.body_type
+type = "select"
+label = "Build"
+default = "average"
+options = ["petite", "average", "curvy", "athletic", "thick"]
+# image_select (sets_portrait) also available — see schema/03 §15.
+```
+
 ### Step 3 — Emit `[[npcs]]` blocks
 
 For each NPC in design book §2 roster:
@@ -328,6 +351,19 @@ arc_stages = ["<stage 1 name>", "<stage 2 name>", ...]   # display strings; curr
 [npcs.trait_decay]
 # Per-NPC daily decay (typically only relation has trickle decay; arousal + corruption DON'T decay)
 relation = 0.5
+```
+
+**Customizable NPC (only when opted in — doctrine/14):** add `customizable = true` plus
+BOTH `relationship` (default) and `relationship_options` (the importer hard-fails without
+both, and the default must be in the list). Then write every player-visible name mention as
+`@<npc_short>` (slug minus `npc_`) and relationships as `@<npc_short>.rel`. **Genericize any
+location name / sidebar label / quest title that named the NPC** — those print raw and won't
+honor a rename (doctrine/14 §4).
+
+```toml
+customizable          = true
+relationship          = "coworker"
+relationship_options  = ["coworker", "neighbor", "old flame"]
 ```
 
 **Per-arc-shape arousal range** (per `doctrine/09_trait_catalog.md` §4.1):
@@ -524,7 +560,7 @@ For each NPC in design book §2 roster, emit canvases per the design book §4 br
 **Order per NPC:**
 
 1. **Lane 4 capstones first** — these are referenced by Lane 1 hub buttons + quest cards. Author them first so other canvases can reference them by ID.
-2. **Lane 1 hub canvases** — per scheduled location for the NPC
+2. **Lane 1 hub canvases** — **one per scheduled WINDOW** for the NPC (per-row coverage, D72-R6), each with `trigger.schedules` matching its `[[npcs.schedules]]` row; base renders unconditionally; rung set capped by the location exposure tier (public/semi-private/private, D72-R7). Period-split windows at the same location into separate hubs (D56-R1)
 3. **Lane 1 route-target stubs** — tease / flash / explicit content reached via hub menu (NO `[canvases.trigger]` block)
 4. **Lane 2 ambient canvases** — random encounters at NPC's locations
 5. **Lane 3 parent activities** — Maya-solo dispatchers (if any per arc shape)
@@ -595,11 +631,13 @@ Mirror the canonical examples in `schema/03_example_toml.md`.
 
 ### §5.1 — Lane 1 hub canvas (Frank kitchen morning gold standard)
 
+This hub's `trigger.schedules` (05:30–09:00) matches Frank's kitchen schedule **row** — one hub per window (D72-R6). The kitchen at breakfast is a **private** household space, so the full ladder is fair here; a *public* hub (a diner floor with customers) would cap at talk/look only (D72-R7). The `base` node renders unconditionally — escalation lives on the menu rungs, never on the base.
+
 ```toml
 [[canvases]]
 id          = "frank_kitchen_morning_hub"
 name        = "Kitchen — Frank, morning"
-description = "Always-show RTS ladder hub for Frank in kitchen, morning slot. Locked-visible escalation rungs visible from day 1."
+description = "Always-show RTS ladder hub for Frank in kitchen, morning slot. Locked-visible escalation rungs visible from day 1. Exposure: private (household) → full ladder."
 
 [canvases.trigger]
 location      = "loc_kitchen"
@@ -1952,6 +1990,10 @@ For every Lane-1 portrait hub (`npc =` set): confirm that NPC is schedule-presen
 ### §10.16 — Dev-only flag required by a shipping canvas (`doctrine/10` + §12)
 
 A flag set ONLY by a dev canvas must NOT be required (`is_true`) by any shipping (non-dev) canvas. When dev canvases are stripped, the requirer becomes unsatisfiable. Late Shifts: `phase_3_unlocked` (only set by `dev_unlock_phase3`) gated Rosa's locked rungs; removing dev re-broke the flag-chain. Audit dev-flag isolation before stripping phase 6.
+
+### §10.17 — NPC reachable only via a locked location / vanishes into a locked room (silent — `doctrine/10` §5.4)
+
+A locked location (`entry_conditions`) is a *visible-but-blocked* door, but the build won't tell you it makes an NPC unreachable. For every NPC scheduled at a locked location, honor the **unlock contract**: the NPC is met at an OPEN on-ramp whose beat sets the unlock flag (reachable setter), and the NPC has other open presence — never *only* the locked location, and never a door gated on a flag only settable behind it (chicken-and-egg). A locked secondary room an already-met NPC routes into is fine only if it's legible + off-hours/co-gated + has open fallback presence; otherwise the NPC "vanishes" mid-window (`doctrine/02` §8.15). Case A/B/C in `doctrine/10` §5.4.
 
 ---
 

@@ -105,7 +105,8 @@ prompts_v2/
 │   ├── 10_location_design.md            # location layering + reachability triad (silent-runtime bug prevention)
 │   ├── 11_clothing_design.md            # clothing → public content + beauty/exhibitionism axes (NPC arcs never read the outfit)
 │   ├── 12_rent_economy_design.md        # rent = the money drive: arm-after, eviction-mode choice, budget math, scoping trap
-│   └── 13_phone_design.md               # phone = the digital surface: chat threads on real flags, photo-action tiers, purchase gate, no day/time triggers
+│   ├── 13_phone_design.md               # phone = the digital surface: chat threads on real flags, photo-action tiers, purchase gate, no day/time triggers
+│   └── 14_customization_design.md       # player/NPC personalization: the @player/@npc token contract + the un-tokenizable-surface trap (location/sidebar labels)
 │
 ├── reference/                           # RTS extraction (replaces Jack's World docs)
 │   ├── 01_rts_overview.md               # Game shape + bootstrap + writing tiers
