@@ -26,11 +26,18 @@ Each question: 2–4 concrete options + a recommendation. **Skip any question al
 the concept input or with a safe doctrine default — state the default, don't ask.**
 
 1. **Premise / setting / player character** — who the player is, where, the hook.
-2. **Economic engine + time model** — money pressure + day/period structure (offer the doctrine
-   default time model; only ask if the concept overrides it).
+2. **Economic engine + time model + day-cycle** — money pressure + the **day-cycle** (`doctrine/04`
+   §10). Define the day's **phases** (e.g. Morning/Afternoon/Evening/Night/Asleep — a label convention
+   over the continuous clock) and **where the player's orbit sits** (night-centric vs day-centric).
+   A time-gated game MUST have a **day-advance activity** (sleep/rest) so the clock is traversable —
+   it's the router between the day-half (errands/town) and the player's main hub; without it, daytime
+   windows are unreachable (the Dee-bug). The scaffold authors this sleep activity (Step 4).
 3. **Cast** — propose 4–6 NPCs with arc shapes (from the arc-shapes doctrine); LO reshapes.
 4. **Location graph** — propose hubs / containers / locks from cast + premise; LO reshapes. Apply
-   the unlock contract to any locked location that will host an NPC schedule.
+   the unlock contract to any locked location that will host an NPC schedule. Each schedule row is one
+   of three categories (`doctrine/10` §5.5): reachable (gets a hub) / locked (unlock contract) /
+   **offscreen** (`offscreen = true` — a non-navigable "away" label for home/sleep/work blocks).
+   Add offscreen locations for NPCs' away blocks so days are complete without dead presence.
 5. **Phase 2+ decisions (full_game only — slice defers all four, no Q&A).** Ask ONE at a time, in
    order: **pregnancy → scandal → gallery → tracker** (`stages/01` §0.5.2). Skip any the concept
    already declared. **An `include` is not a toggle — the design book MUST name HOW it's mechanized,
@@ -77,6 +84,13 @@ To `games/<slug>/design_book.md` — the intent record (a NEW artifact; LS's nea
   drops the player into the starting location). This is structural bootstrap, NOT story content —
   do not author any NPC arcs, hubs, ambients, or capstones in setup. Mirror the opening canvas in
   `games/late_shifts/toml_phases/` for the exact table shape.
+- The **day-advance (sleep/rest) activity** — IF the game is time-gated (any NPC schedule has
+  windows the player must be present for). A solo canvas at the player's home/hub with a fixed
+  forward `time_progression_minutes` (e.g. 420 = ~7h to morning) + an energy restore, schedule-gated
+  to the sleep window. This is the **router** that carries the player across the clock so daytime
+  (or off-hours) windows are reachable — without it, non-starting-phase content is dead (the Dee-bug,
+  `doctrine/04` §10.1). Structural infrastructure like the boot canvas, NOT story content. Mirror
+  `games/late_shifts/` `activity_sleep` for the exact shape (`references/toml-gotchas.md`).
 - The **spine quest card** (one `[[quest_cards]]`, no `npc_id` → renders in the top "Story Goals"
   section). If you set `quests_engine = "v2"` you MUST populate the Quests page, or it renders empty
   and reads as broken. The spine = the game's central pressure from the economic engine / premise
@@ -92,7 +106,9 @@ Hand-construct `games/<slug>/authoring_state.json` by copying the v2 JSONC block
 - `game_slug` = `<slug>`, `book_revision` = 1, `scope_mode` = `full_game` | `slice`.
 - `npcs`: one entry per NPC with `{ arc_shape, lane_budget, vocab_ceiling }` from its R7 brief, so
   the continue loop knows each NPC's shape, how much is left to author, and its ceiling.
-- `structure_registry`: list every location / npc / flag the scaffold declares.
+- `structure_registry`: list every location / npc / flag the scaffold declares. Tag each location's
+  category (reachable / locked / **offscreen**) so the continue loop knows which schedule rows need a
+  hub (D72-R6) vs which are away-labels exempt from the presence floor (`doctrine/10` §5.5).
 - `plan`: one beat per roadmap item, `id` = `beat_0001`, `beat_0002`, … (zero-padded, monotonic),
   `status` = `planned`, `target_phase` set to where its canvases will go (e.g. `5_scenes.toml`),
   `introduces` filled if the beat will add new structure.
@@ -119,7 +135,8 @@ Show the roadmap back and tell the user: **"Setup complete — say *continue* to
 
 ## Anti-patterns
 - Do NOT author STORY canvases (NPC arcs / hubs / ambients / capstones) in setup — only the
-  minimal boot canvas + the spine quest card. Everything else is beats.
+  minimal boot canvas, the day-advance sleep activity (if time-gated), and the spine quest card.
+  Everything else is beats.
 - Do NOT enable `quests_engine = "v2"` without authoring the spine quest card — an empty Quests
   page reads as broken.
 - Do NOT ask questions with safe doctrine defaults — default and say so.

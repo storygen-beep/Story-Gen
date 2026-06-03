@@ -33,7 +33,11 @@ not managed by any code module. Follow the invariants below when editing it.
     }
   ],
   "structure_registry": {           // what EXISTS; every amendment is checked against this
-    "locations": [], "npcs": [], "flags": [], "schedules": []
+    // locations: tag each with its category — "reachable" (needs a hub per D72-R6),
+    // "locked" (unlock contract, doctrine/10 §5.4), or "offscreen" (away-label,
+    // offscreen=true, exempt from the presence floor, doctrine/10 §5.5)
+    "locations": [],                // e.g. [{ "id": "loc_sal_place", "category": "offscreen" }]
+    "npcs": [], "flags": [], "schedules": []
   },
   "next_up": [],                    // ordered beat ids proposed next
   "decisions_log": [                // human-readable trail

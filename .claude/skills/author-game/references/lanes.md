@@ -46,6 +46,11 @@ standalone canvases to hit 6–10 — that's the "fill-the-world" drift the doct
 - **L1 cells count escalation *rungs*, not hubs.** Hubs are set by presence: **one Lane 1 hub per
   `[[npcs.schedules]]` row** (D72-R6). An NPC at 5 windows has 5 hubs even with a tiny rung budget —
   the extra hubs are *light* (base + talk + leave), exposure-capped.
+- **Offscreen schedule rows are exempt from the hub rule.** A row at an `offscreen = true` location
+  (the NPC's home/sleep/away block) is a non-navigable label — the player can't go there, so it gets
+  NO hub and is exempt from the presence floor (`doctrine/10` §5.5, the Day System). Use offscreen
+  rows to complete an NPC's day without manufacturing dead presence. Only **reachable** rows earn a
+  hub; **locked** rows follow the unlock contract (§5.4).
 - Author against the **shape**, never by cloning the gold-standard NPC (§8.5).
 - **These are `full_game` targets.** At `scope_mode = slice` (see `setup-interview.md`), author
   ~30–50% of each budget for ONE gold-standard NPC + minimum-contract depth for the rest, with
