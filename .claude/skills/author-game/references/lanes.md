@@ -144,6 +144,23 @@ playable, diverge in downstream effect), **C** quest-chain step. Per-NPC capston
 - **Lane 4 capstones:** Tier-3 EARNED — interior monologue + layered sensory detail +
   character-distinguishing diction. Once-only, so the prose can spend.
 
+## Runtime rendering rules (live-verified — these bite even when the build is green)
+The location screen renders four separate paths; a canvas only appears if it matches the right one:
+- **NPC first-contact one-shot → make it AUTO-FIRE**, NOT an NPC-portrait canvas. `renderNpcPortraits`
+  skips non-repeatable canvases, so a one-shot *with* `npc`/`requires_npc` set renders NOWHERE (it's
+  neither a repeatable portrait nor an auto-fire). Author it like the boot canvas: `is_repeatable=false`,
+  `priority≥9`, **no `npc`/`requires_npc`**, gated on flags; it auto-fires on entry and sets the
+  `<npc>_opened_up` flag. The ongoing **hub** (repeatable, `npc` set) renders the portrait from then on.
+- **Solo activity → no per-canvas `schedule`** if it should be available whenever the location is
+  reachable. A `schedule` block on a solo activity suppressed its button (match the proven
+  `activity_make_tea` shape: location + `is_repeatable` + `priority` + optional `conditions`/`substitutions`,
+  no `schedule`). Gate availability via `conditions` and location reachability instead.
+- **Distinct `name` per canvas.** A non-repeatable first-contact and its repeatable hub sharing a
+  `name` collide in the name-group selector — give them different `name`s.
+- **A hub portrait renders only while the NPC is present** (`getNpcLocation(slug).location == here`).
+  If a hub won't show, verify the NPC's `[[npcs.schedules]]` actually places them at that location at
+  the current time (and that schedule slugs resolved). Presence is the gate, not just `is_active`.
+
 ## Beat type → lanes (what a beat authors)
 - `npc_intro` → establish the NPC's **Lane 1 hub(s)** (one per schedule row) + optionally the first **Lane 2** ambient. Cold-start enterable.
 - `arc_escalation` → add **Lane 1 rungs** (locked-visible) AND the **Lane 2/3** content that lights up at those thresholds — per the shape's budget, respecting empty cells.

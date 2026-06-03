@@ -32,6 +32,13 @@ against the shipped `games/late_shifts/toml_phases/`.
   operator, value}`); quest-card `when`/`goals` are FLAT (`{flag, op}` / `{trait, subject, npc_id,
   op, value, label}`). `schema/02` §16.5.
 
+## Trigger-field placement (silent if wrong)
+- **`substitution_only`, `max_triggers_per_day`, `requires_npc`, `npc`, `chance`, `trigger_mode`,
+  `schedules`, `substitutions` all live UNDER `[canvases.trigger]`** — NOT at the `[[canvases]]`
+  top level. The importer reads them from the trigger; placed at canvas level they're silently
+  ignored (e.g. a misplaced `substitution_only` → the canvas wrongly shows as a normal activity
+  button). Live-verified 2026-06-03.
+
 ## Minor / FYI
 - **`[project]` key is `id`** (the shipped LS form: `id = "late_shifts"`), not `slug`.
 - **Quest cards** support a `group` key (Story-Goals crisis-variant collapse) — available if needed.
