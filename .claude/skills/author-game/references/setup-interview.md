@@ -87,7 +87,7 @@ To `games/<slug>/design_book.md` — the intent record (a NEW artifact; LS's nea
 - Mirror all table shapes from `games/late_shifts/toml_phases/`.
 
 ## Step 5 — Seed the ledger (`authoring_state.json`, written directly)
-Hand-construct `games/<slug>/authoring_state.json` by copying the v1 JSONC block in
+Hand-construct `games/<slug>/authoring_state.json` by copying the v2 JSONC block in
 `references/ledger-schema.md` and filling it in (there is no `init` tool — you write the file):
 - `game_slug` = `<slug>`, `book_revision` = 1, `scope_mode` = `full_game` | `slice`.
 - `npcs`: one entry per NPC with `{ arc_shape, lane_budget, vocab_ceiling }` from its R7 brief, so

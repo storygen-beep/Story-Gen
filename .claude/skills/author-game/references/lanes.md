@@ -125,10 +125,14 @@ The hardest lane; RTS's biggest. Two canvases per activity:
 entry when conditions match, flag-gated + sets a one-shot flag on completion. **Repeat field is one of
 two forms** (`doctrine/02` §5.1):
 - `is_repeatable = false` — once it fires, done; OR
-- `is_repeatable = true` **+ a `flag_is_false` self-gate on its own setter flag** — the "retry"
-  variant. The canvas re-fires next eligible time *until* its flag is set, so a **Refuse branch that
-  doesn't set the flag keeps it alive** (Pattern F / F4). Canonical: `scene_franks_bedroom_evening`.
-  Use this whenever a branching capstone has a decline path.
+- `is_repeatable = true` **+ a self-gate on its own setter flag** — the "retry" variant. The
+  self-gate is a normal typed trigger condition on its OWN completion flag, e.g.
+  `{ type = "flag", subject = "player", flag_key = "<its_setter_flag>", operator = "is_false" }`
+  ("flag_is_false" is doctrine shorthand — emit the typed condition, NOT a literal `flag_is_false`
+  key, which the engine ignores). The canvas re-fires next eligible time *until* its flag is set, so
+  a **Refuse branch that doesn't set the flag keeps it alive** (Pattern F / F4). Canonical:
+  `scene_franks_bedroom_evening` (in the `the_long_summer_test` game, not Late Shifts). Use this
+  whenever a branching capstone has a decline path.
 
 Three types (§5.2): **A** linear deterministic, **B** branching choice (Pattern F — both branches
 playable, diverge in downstream effect), **C** quest-chain step. Per-NPC capstone budget per shape
