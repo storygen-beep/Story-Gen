@@ -110,6 +110,15 @@ Run with the repo venv active (`source venv/bin/activate`), in order; emit a PAS
 
 Any FAIL → fix, re-run, then mark validated.
 
+## Live-testing note (twine-game-explorer + `--dev` builds)
+When live-playing a `--dev` build to verify rendering, the explorer's Phase 0 auto-advance clicks
+buttons matching "Next" — and the dev **"Next Day"** button matches, so Phase 0 can advance days and
+reset the clock to morning (6 AM). That puts the game OUTSIDE evening schedules, so schedule/presence-
+gated content (NPC hubs, scheduled canvases, Lane 2 ambients) correctly won't render — looking like a
+bug that isn't one. Before concluding a hub/canvas is broken, **verify the NPC is present at the
+current game time** (check the clock + the NPC's `[[npcs.schedules]]` window). To avoid the artifact,
+live-test with `--skip-phase0` (drive pre-game manually) or a non-`--dev` build.
+
 ## Quest cards (`[[quest_cards]]` — the Quests page)
 Active only when `[project].quests_engine = "v2"`. Authoritative schema: `prompts_v2` `schema/02`
 §8; condition shape: §16.5; doctrine: `doctrine/04` (Doc 49 goals-vs-sidebar, Doc 50 R1–R6 card shape).
