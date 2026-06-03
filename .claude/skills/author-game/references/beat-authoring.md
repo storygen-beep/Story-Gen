@@ -40,8 +40,12 @@ unsure, check where `games/late_shifts/toml_phases/` put the analogous content):
    - flag → ensure a reachable setter exists before anything gates on it.
    Add each new location/npc/flag to `structure_registry`. If it's already there, that's a
    conflict — do not silently re-add.
-4. **Author the canvases** per the doctrine in `prompts_v2/COMPREHENSIVE_SYSTEM_REFERENCE.md` for
-   the beat `type` (lanes, hubs, schedules, locks, settings, capstone shape). Append ONLY to the
+4. **Author the canvases across the right lanes.** Read `references/lanes.md` first — it gives the
+   four lanes (when + how to write each, with verbs/narrative/fingerprints), the beat-type→lane
+   mapping, the per-arc-shape budget, and the hub-vs-solo-work separation. An NPC arc is built
+   *across* lanes per its shape (never Lane-1-only); keep the NPC hub (Lane 1) separate from any
+   Maya-solo work activity (Lane 3 host) — pronoun test: a menu verb with no NPC object is solo
+   work, not a hub item. Voice: Lane 1/2/3 RTS-flat (~30 words), Lane 4 Tier-3. Append ONLY to the
    beat's `target_phase` file. Record the new canvas ids in the beat's `produced_canvas_ids`.
 5. **Author/update the quest card** — if the beat introduces or advances a *player-facing goal*
    (an NPC arc milestone, an economic milestone, a capstone). Add/replace the `[[quest_cards]]`
@@ -84,6 +88,10 @@ Run with the repo venv active (`source venv/bin/activate`), in order; emit a PAS
    - **Quests page reflects current goals** — if this beat is a trackable goal, a `[[quest_cards]]`
      now shows it at the right time (and the prior milestone's card retires via its `when` gate).
      The Quests page is never empty and never stale (Doc 49). Repeatable ambients/flavor: no card.
+   - **lane coverage vs arc shape** — the NPC's content spans the lanes its shape calls for (not
+     Lane-1-only), within budget, and EMPTY cells stay empty (peer/dating: no Lane 3; service: no
+     Lane 2/3). The NPC hub holds only NPC-object verbs; solo work/chores are their own canvases
+     (§8.2/§8.3). Substitution (Lane 3) canvases each declare a `location` (else they never fire).
 
 Any FAIL → fix, re-run, then mark validated.
 

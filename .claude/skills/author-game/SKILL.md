@@ -25,6 +25,9 @@ your normal tools (Read / Write / Edit / Bash). There is no helper module to cal
 - `references/ledger-schema.md` — the ledger shape + the anti-drift invariant.
 - `references/setup-interview.md` — **setup mode**: the one-time interview + scaffold output.
 - `references/beat-authoring.md` — **continue mode**: the per-beat loop + the doctrine self-audit.
+- `references/lanes.md` — **the four lanes**: when to use each, how to write each (verbs, narrative,
+  fingerprints), the hub-vs-work separation, and per-arc-shape budgets. READ before authoring any
+  NPC-arc beat.
 - `prompts_v2/COMPREHENSIVE_SYSTEM_REFERENCE.md` — ALL engine/schema/doctrine. The single
   source of truth for how to author canvases, lanes, hubs, schedules, locks, settings. Cite it.
 - `games/late_shifts/toml_phases/` — a real, shipped game; the structural reference for TOML
@@ -46,4 +49,7 @@ On invocation, resolve the game slug from the request, then:
   explicit amendment done WHOLE (location → def + lock + schedule + unlock beat; NPC → schedule
   + open on-ramp; flag → reachable setter) and registered in `structure_registry`. Never a bare
   dangling reference. This single discipline prevents the recurring bug catalog.
+- **Build NPC arcs across the four lanes** (`references/lanes.md`), sized by arc shape — never
+  Lane-1-only. Keep the NPC hub (Lane 1) separate from Maya-solo work activities (Lane 3 hosts):
+  if a menu choice's verb has no NPC object, it's solo work, not a hub item (§8.2 / §8.3).
 - **Validate every beat, build at milestones** (see `references/beat-authoring.md`).
