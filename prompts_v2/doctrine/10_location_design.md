@@ -115,6 +115,31 @@ A fourth reachability failure the triad doesn't cover: the NPC and the time-wind
 
 ---
 
+### §5.5 — Offscreen locations + the three location categories
+
+A schedule row can point at a location the player is *never meant to reach* — the NPC's home, where
+they sleep, an offscreen job. RTS does this with `Work` (a location key with no passage: "your dad is
+at work"). Our engine supports it explicitly: **`[[locations]]` with `offscreen = true`** (`schema/02`
+§4) — a non-navigable "away" label, excluded from all nav (no card), with no `entry_from` and in no
+`navigation_order`. `getNpcLocation` still returns it and the **Schedule page shows "NPC — <name>"**,
+but it renders no portrait and needs **no hub**.
+
+This gives **three location categories** for an NPC schedule row — pick the right one:
+
+| Category | Player can go there? | Needs a hub? | Use for |
+|---|---|---|---|
+| **Reachable** | Yes | **Yes** — presence floor, D72-R6 | windows where the player meets/interacts with the NPC |
+| **Locked** (`entry_conditions`) | Not yet (visible-but-blocked) | Deferred — unlock contract §5.4 | a private/deeper place earned via a beat |
+| **Offscreen** (`offscreen = true`) | **No** (non-navigable label) | **No** — exempt from the presence floor | away/home/sleep/work blocks the player can't follow |
+
+**Rule.** Every schedule row resolves to exactly one category. An *away* block → **offscreen** (the
+NPC is accounted-for + the Schedule page reads "at home", and you've kept a complete day) **or** simply
+*drop the row* if you don't even want the label. **Never** leave an away block pointing at a *reachable*
+location with no hub — that's dead presence (`doctrine/02` §8.11). Offscreen is the partner of the day
+cycle (`doctrine/04` §10): the NPC is "away" during the very phases the player is elsewhere.
+
+---
+
 ## §6 — Per-arc-shape location footprint (Late Shifts bug B6)
 
 - **Family/ambient + slow-burn family:** live-in; canvases attach to shared-household standing locations the player already frequents.
@@ -136,6 +161,8 @@ Cross-ref `doctrine/03_arc_shapes.md` §5 for the peer/dating distribution (now 
 - [ ] Every NPC ambient/capstone passes the triad: NPC-schedule ∩ canvas-window ∩ player-likely-present-and-awake is non-empty, accounting for sleep/work/cross-midnight (§5.3).
 - [ ] Every NPC scheduled at a locked (`entry_conditions`) location obeys the unlock contract (§5.4): the lock reads as "not met/invited," the NPC is meetable at an OPEN on-ramp, and the unlock flag has a reachable setter (that on-ramp beat). No NPC is reachable *only* via a locked location.
 - [ ] Any locked secondary room an NPC routes into is legible + co-gated-or-off-hours + has open fallback presence — never a silent vanish during a window the player routinely shares (§5.4 Case B).
+- [ ] Every schedule row resolves to exactly one category — reachable (has a hub) / locked (unlock contract) / **offscreen** (`offscreen = true`, no hub) — and no away block points at a reachable location without a hub (§5.5).
+- [ ] Every content window is **navigable**: the day-cycle (a sleep/rest day-advance activity) delivers the player to that phase + place; no window is unreachable scarcity (`doctrine/04` §10.1/§10.3).
 - [ ] Every peer/dating NPC has an ongoing Stage-4 hub, not just a first-night capstone (§6).
 - [ ] Household NPCs are inside the private unit; neighbors/witnesses are in shared/public space, never the private unit (§4).
 

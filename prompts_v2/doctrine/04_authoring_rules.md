@@ -678,6 +678,48 @@ For each anti-pattern, the rule it violates.
 
 - **D56-R5** `guide` field — doctrine-locked; schema field pending Doc 62 PRD
 - **D67-R5** Pattern B `exclusive_group` — ✅ shipped Doc 69 Item 1 (2026-05-27)
+
+---
+
+## §10 — The Day System (day-cycle + offscreen presence)
+
+Schedules only matter if the player can *traverse the day* to reach the windows. RTS's schedule is a
+**content-gate + player-router + fantasy-framer**, not world-sim (researched 2026-06-03): every
+(location × time) slot is a window the player plans around; "offscreen" is deliberate exclusion;
+scarcity is always **navigable** ("be there at the right time"), never impossible. Three rules.
+
+### §10.1 — Day-advance precondition (a sleep/rest activity is mandatory for time-gated games)
+The engine clock is continuous (`advanceTime` rolls minutes→hours→days; midnight auto-advances the
+day via `advanceDay`). There is **no built-in "sleep to morning"** — so a time-gated game MUST author
+a **day-advance activity** (sleep/rest), or the clock isn't traversable and any content outside the
+starting phase is **dead**. Pattern (LS `activity_sleep`): a solo canvas at the home/bed location, no
+NPC, `time_progression_minutes` = a fixed forward jump into the next phase (e.g. 420), `energy +N`,
+schedule-gated to the rest window. The sleep activity is the **router** that moves the player between
+the day-half (town/errands) and the night-half (the player's main hub). Without it, scarce daytime
+windows aren't scarce — they're unreachable (the Dee-bug class).
+
+### §10.2 — Phase convention (named blocks over the continuous clock)
+Layer named **phases** on the clock for legibility (e.g. *Morning / Afternoon / Evening / Night /
+Asleep*). Phases are an **authoring + display convention** — schedules still use `start_time`/`end_time`
++ `weekdays`; the engine stays continuous (more flexible than RTS's fixed 6 blocks). Follow RTS:
+**weekday/weekend variation only** where it changes what's reachable; do **not** author per-day
+(Mon≠Tue) routines — that's noise.
+
+### §10.3 — Scarcity must be navigable (the Dee-bug law)
+Every content window must sit in a phase the player can **reach via the day-cycle**. RTS scarcity =
+"be there at the right time" (a window you *can* hit with planning). A window the player can **never**
+reach (an NPC scheduled only in hours the player can't get to) is a **broken lock, not scarcity** —
+the failure that made LS-Dee's daytime depot dead. Self-audit: for each scheduled window, confirm the
+day-cycle delivers the player to that phase + place.
+
+### §10.4 — Complete-day schedules + offscreen (every block earns its place)
+RTS gives the **co-present (core) NPCs** a complete day (wake→bathe→work→home→sleep, every block
+filled) and leaves peripheral NPCs static — density follows the player's orbit. Mirror it: schedule
+the NPCs the player shares space with across their phases, but **every block must earn its place** —
+it is *either* a reachable window (gets a light hub, D72-R6), *or* an **offscreen** "away" block
+(`offscreen = true`, `doctrine/10` §5.5 — no hub, Schedule page shows "at home"), *or* simply
+unscheduled. **Filler blocks are the Marge anti-pattern** — don't pad a calendar for "realism."
+Offscreen is the partner of §10.1: the NPC is "away" during the very phases the player is elsewhere.
 - **D67-R2** Pattern C `pre_substitution_effects` — ✅ shipped Doc 69 Item 2 (2026-05-27)
 
 ---

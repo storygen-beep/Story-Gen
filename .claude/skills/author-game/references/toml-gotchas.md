@@ -45,5 +45,39 @@ against the shipped `games/late_shifts/toml_phases/`.
 - **`guide` field** (per-canvas progression hint) is a pending schema field; set it on capstones if
   a tracker system is `include`d (see setup Phase 2+ mechanization).
 
+## Day System shapes (day-cycle + offscreen)
+- **Offscreen location** (`schema/02` §4, `doctrine/10` §5.5) — an NPC "away" label the player can't
+  visit. Set `offscreen = true`, give NO `entry_from`, and put it in NO `navigation_order`. It emits
+  no nav card and no portrait/hub, is exempt from the presence floor + reachability, but still
+  resolves its name on the Schedule page (`getNpcLocation`):
+  ```toml
+  [[locations]]
+  id        = "loc_sal_place"
+  name      = "Sal's place"
+  description = "Sal's apartment across town. You've never been."
+  offscreen = true
+  ```
+  Schedule an NPC's home/sleep/work block here to complete their 24h day without dead presence:
+  ```toml
+  [[npcs.schedules]]
+  location = "loc_sal_place"
+  weekdays = [0,1,2,3,4,5,6]
+  start_time = "02:00"
+  end_time = "17:00"
+  activity = "home, off the clock"
+  ```
+- **Day-advance (sleep) activity** (`doctrine/04` §10.1) — the shipped shape is LS `activity_sleep`
+  (`games/late_shifts/toml_phases/3_activities.toml`): a SOLO canvas (no `npc`, no `requires_npc`) at
+  the player's home, `is_repeatable = true`, with a `[[canvases.trigger.schedules]]` block gating the
+  sleep window (LS: 07:00–14:00, the night-shift wake cycle), and the forward jump on the EXIT block —
+  `exit_block.config.time_progression_minutes = 420` (≈7h to wake) + `effects` (energy +80, hygiene
+  −10). It's the router that carries the player across the clock so daytime / off-hours windows are
+  reachable; without it, non-starting-phase content is dead. The clock auto-rolls the day at midnight
+  (`advanceTime` → `advanceDay`) — sleep just jumps the hours within the cycle.
+  - **`schedule` IS correct here** because you WANT the button only in the sleep window. The
+    `lanes.md` "solo activity → no `schedule`" gotcha is the opposite case: an activity that should be
+    available *whenever* its location is reachable (there a `schedule` wrongly suppresses the button).
+    Sleep is window-gated by design, so it carries the schedule block.
+
 When in doubt about a shape, read the authoritative table in `prompts_v2/schema/02_toml_schema.md`
 and copy the analogous block from `games/late_shifts/toml_phases/`.

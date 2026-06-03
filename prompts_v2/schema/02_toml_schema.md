@@ -340,6 +340,7 @@ Dataclass: `TemplateLocation` at `template_import.py:135`.
 | `image` | str | `""` | Image path |
 | `image_search_queries` | List[str] | `[]` | For Missing Media page |
 | `is_container` | bool | `false` | Pure-nav wrapper — SWALLOWS attached canvases (see below). Do NOT attach canvases to one. |
+| `offscreen` | bool | `false` | **Non-navigable "away" label.** Player can NOT go here (excluded from all nav; no nav card); set no `entry_from` and list it in no `navigation_order`. NPCs schedule here for away/home/sleep/work blocks — `getNpcLocation` returns it + the Schedule page shows "NPC — <name>", but it renders no portrait/hub. The **third location category** beside reachable (needs a hub, D72-R6) and locked (unlock contract §5.4); **exempt from presence floor + reachability**. For complete-day schedules — see `doctrine/10` Day System. |
 | `parent` | str | `""` | Structural nesting only (canvas inheritance) — NOT navigation. May differ from `entry_from`. |
 | `entry_from` | str | `""` | Navigation parent. "Leave X" links to `X.entry_from`. A top-level root has none (bridge via walk activity). |
 | `default_entry` | str | `""` | (containers only) child to auto-redirect into |

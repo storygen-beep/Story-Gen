@@ -78,7 +78,13 @@ Run with the repo venv active (`source venv/bin/activate`), in order; emit a PAS
    `COMPREHENSIVE_SYSTEM_REFERENCE.md`):
    - **reachability triad** — the canvas fires only where NPC-schedule ∩ canvas-window ∩
      player-present-and-awake overlap.
-   - **dead-presence / presence floor** — every scheduled NPC has a reachable hub; no dead presence.
+   - **dead-presence / presence floor** — every scheduled NPC has a reachable hub at each
+     **reachable** schedule row; no dead presence. **Offscreen** rows (`offscreen = true` away/home/
+     sleep blocks) are exempt — no hub, no floor (`doctrine/10` §5.5).
+   - **navigable scarcity (the Dee-bug law)** — every scheduled window the player must reach sits in
+     a day-phase the day-cycle can deliver them to. A daytime depot window is dead if nothing carries
+     the player from the night hub to daytime; the day-advance sleep activity is that router
+     (`doctrine/04` §10). If this beat schedules content in a new phase, confirm the cycle reaches it.
    - **locked-location unlock contract** — any NPC at a locked location is meetable at an open
      on-ramp and the unlock flag has a reachable setter (Cases A/B/C).
    - **`[settings]` scoping** — clothing / rent / phone keys live under `[settings]`, never bare.

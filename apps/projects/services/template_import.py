@@ -139,6 +139,7 @@ class TemplateLocation:
     image: str = ""  # Relative to video_folder, e.g., "locations/kitchen.jpg"
     image_search_queries: List[str] = field(default_factory=list)  # For Missing Media page
     is_container: bool = False
+    offscreen: bool = False  # Non-navigable "away" location (NPC schedule label; no nav card, no hub, exempt from presence floor + reachability)
     parent: str = ""
     entry_from: str = ""
     default_entry: str = ""
@@ -1620,6 +1621,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 image=_require_str(l, "image", ""),
                 image_search_queries=[str(q) for q in _require_list(l, "image_search_queries")],
                 is_container=bool(l.get("is_container", False)),
+                offscreen=bool(l.get("offscreen", False)),
                 parent=_require_str(l, "parent", ""),
                 entry_from=_require_str(l, "entry_from", ""),
                 default_entry=_require_str(l, "default_entry", ""),
@@ -5884,6 +5886,8 @@ def create_project_from_template(
         )
         loc.properties = loc.properties or {}
         loc.properties["slug"] = l.id
+        if l.offscreen:
+            loc.properties["offscreen"] = True
         if l.image:
             loc.properties["image"] = l.image
         if l.image_search_queries:
