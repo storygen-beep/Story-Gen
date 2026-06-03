@@ -1287,6 +1287,7 @@ Dataclass: `TemplateLocation` at `template_import.py:135`.
 | `image` | str | `""` | Image path |
 | `image_search_queries` | List[str] | `[]` | For Missing Media page |
 | `is_container` | bool | `false` | Pure-nav wrapper — SWALLOWS attached canvases (see below). Do NOT attach canvases to one. |
+| `offscreen` | bool | `false` | **Non-navigable "away" label.** Player can NOT go here (excluded from all nav; no nav card); set no `entry_from` and list it in no `navigation_order`. NPCs schedule here for away/home/sleep/work blocks — `getNpcLocation` returns it + the Schedule page shows "NPC — <name>", but it renders no portrait/hub. The **third location category** beside reachable (needs a hub, D72-R6) and locked (unlock contract §5.4); **exempt from presence floor + reachability**. For complete-day schedules — see `doctrine/10` Day System. |
 | `parent` | str | `""` | Structural nesting only (canvas inheritance) — NOT navigation. May differ from `entry_from`. |
 | `entry_from` | str | `""` | Navigation parent. "Leave X" links to `X.entry_from`. A top-level root has none (bridge via walk activity). |
 | `default_entry` | str | `""` | (containers only) child to auto-redirect into |
@@ -6402,6 +6403,48 @@ For each anti-pattern, the rule it violates.
 
 - **D56-R5** `guide` field — doctrine-locked; schema field pending Doc 62 PRD
 - **D67-R5** Pattern B `exclusive_group` — ✅ shipped Doc 69 Item 1 (2026-05-27)
+
+---
+
+## §10 — The Day System (day-cycle + offscreen presence)
+
+Schedules only matter if the player can *traverse the day* to reach the windows. RTS's schedule is a
+**content-gate + player-router + fantasy-framer**, not world-sim (researched 2026-06-03): every
+(location × time) slot is a window the player plans around; "offscreen" is deliberate exclusion;
+scarcity is always **navigable** ("be there at the right time"), never impossible. Three rules.
+
+### §10.1 — Day-advance precondition (a sleep/rest activity is mandatory for time-gated games)
+The engine clock is continuous (`advanceTime` rolls minutes→hours→days; midnight auto-advances the
+day via `advanceDay`). There is **no built-in "sleep to morning"** — so a time-gated game MUST author
+a **day-advance activity** (sleep/rest), or the clock isn't traversable and any content outside the
+starting phase is **dead**. Pattern (LS `activity_sleep`): a solo canvas at the home/bed location, no
+NPC, `time_progression_minutes` = a fixed forward jump into the next phase (e.g. 420), `energy +N`,
+schedule-gated to the rest window. The sleep activity is the **router** that moves the player between
+the day-half (town/errands) and the night-half (the player's main hub). Without it, scarce daytime
+windows aren't scarce — they're unreachable (the Dee-bug class).
+
+### §10.2 — Phase convention (named blocks over the continuous clock)
+Layer named **phases** on the clock for legibility (e.g. *Morning / Afternoon / Evening / Night /
+Asleep*). Phases are an **authoring + display convention** — schedules still use `start_time`/`end_time`
++ `weekdays`; the engine stays continuous (more flexible than RTS's fixed 6 blocks). Follow RTS:
+**weekday/weekend variation only** where it changes what's reachable; do **not** author per-day
+(Mon≠Tue) routines — that's noise.
+
+### §10.3 — Scarcity must be navigable (the Dee-bug law)
+Every content window must sit in a phase the player can **reach via the day-cycle**. RTS scarcity =
+"be there at the right time" (a window you *can* hit with planning). A window the player can **never**
+reach (an NPC scheduled only in hours the player can't get to) is a **broken lock, not scarcity** —
+the failure that made LS-Dee's daytime depot dead. Self-audit: for each scheduled window, confirm the
+day-cycle delivers the player to that phase + place.
+
+### §10.4 — Complete-day schedules + offscreen (every block earns its place)
+RTS gives the **co-present (core) NPCs** a complete day (wake→bathe→work→home→sleep, every block
+filled) and leaves peripheral NPCs static — density follows the player's orbit. Mirror it: schedule
+the NPCs the player shares space with across their phases, but **every block must earn its place** —
+it is *either* a reachable window (gets a light hub, D72-R6), *or* an **offscreen** "away" block
+(`offscreen = true`, `doctrine/10` §5.5 — no hub, Schedule page shows "at home"), *or* simply
+unscheduled. **Filler blocks are the Marge anti-pattern** — don't pad a calendar for "realism."
+Offscreen is the partner of §10.1: the NPC is "away" during the very phases the player is elsewhere.
 - **D67-R2** Pattern C `pre_substitution_effects` — ✅ shipped Doc 69 Item 2 (2026-05-27)
 
 ---
@@ -9471,6 +9514,31 @@ A fourth reachability failure the triad doesn't cover: the NPC and the time-wind
 
 ---
 
+### §5.5 — Offscreen locations + the three location categories
+
+A schedule row can point at a location the player is *never meant to reach* — the NPC's home, where
+they sleep, an offscreen job. RTS does this with `Work` (a location key with no passage: "your dad is
+at work"). Our engine supports it explicitly: **`[[locations]]` with `offscreen = true`** (`schema/02`
+§4) — a non-navigable "away" label, excluded from all nav (no card), with no `entry_from` and in no
+`navigation_order`. `getNpcLocation` still returns it and the **Schedule page shows "NPC — <name>"**,
+but it renders no portrait and needs **no hub**.
+
+This gives **three location categories** for an NPC schedule row — pick the right one:
+
+| Category | Player can go there? | Needs a hub? | Use for |
+|---|---|---|---|
+| **Reachable** | Yes | **Yes** — presence floor, D72-R6 | windows where the player meets/interacts with the NPC |
+| **Locked** (`entry_conditions`) | Not yet (visible-but-blocked) | Deferred — unlock contract §5.4 | a private/deeper place earned via a beat |
+| **Offscreen** (`offscreen = true`) | **No** (non-navigable label) | **No** — exempt from the presence floor | away/home/sleep/work blocks the player can't follow |
+
+**Rule.** Every schedule row resolves to exactly one category. An *away* block → **offscreen** (the
+NPC is accounted-for + the Schedule page reads "at home", and you've kept a complete day) **or** simply
+*drop the row* if you don't even want the label. **Never** leave an away block pointing at a *reachable*
+location with no hub — that's dead presence (`doctrine/02` §8.11). Offscreen is the partner of the day
+cycle (`doctrine/04` §10): the NPC is "away" during the very phases the player is elsewhere.
+
+---
+
 ## §6 — Per-arc-shape location footprint (Late Shifts bug B6)
 
 - **Family/ambient + slow-burn family:** live-in; canvases attach to shared-household standing locations the player already frequents.
@@ -9492,6 +9560,8 @@ Cross-ref `doctrine/03_arc_shapes.md` §5 for the peer/dating distribution (now 
 - [ ] Every NPC ambient/capstone passes the triad: NPC-schedule ∩ canvas-window ∩ player-likely-present-and-awake is non-empty, accounting for sleep/work/cross-midnight (§5.3).
 - [ ] Every NPC scheduled at a locked (`entry_conditions`) location obeys the unlock contract (§5.4): the lock reads as "not met/invited," the NPC is meetable at an OPEN on-ramp, and the unlock flag has a reachable setter (that on-ramp beat). No NPC is reachable *only* via a locked location.
 - [ ] Any locked secondary room an NPC routes into is legible + co-gated-or-off-hours + has open fallback presence — never a silent vanish during a window the player routinely shares (§5.4 Case B).
+- [ ] Every schedule row resolves to exactly one category — reachable (has a hub) / locked (unlock contract) / **offscreen** (`offscreen = true`, no hub) — and no away block points at a reachable location without a hub (§5.5).
+- [ ] Every content window is **navigable**: the day-cycle (a sleep/rest day-advance activity) delivers the player to that phase + place; no window is unreachable scarcity (`doctrine/04` §10.1/§10.3).
 - [ ] Every peer/dating NPC has an ongoing Stage-4 hub, not just a first-night capstone (§6).
 - [ ] Household NPCs are inside the private unit; neighbors/witnesses are in shared/public space, never the private unit (§4).
 
