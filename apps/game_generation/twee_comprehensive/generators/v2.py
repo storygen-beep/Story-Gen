@@ -17422,8 +17422,11 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
         # Get placeholder SVG for locations without images
         placeholder_svg = html.escape(self._get_location_placeholder_svg())
 
-        # Get ordered navigation destinations using the navigation ordering system
-        ordered_destinations = location.get_ordered_navigation()
+        # Get ordered navigation destinations using the navigation ordering system.
+        # Offscreen locations are never navigable destinations (NPC "away" labels).
+        def _loc_offscreen(_l):
+            return bool((getattr(_l, 'properties', None) or {}).get('offscreen'))
+        ordered_destinations = [d for d in location.get_ordered_navigation() if not _loc_offscreen(d)]
 
         if ordered_destinations:
             # Check if ANY destination has an image path defined (enables visual mode)
@@ -17512,8 +17515,9 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
             navigation_html += '    </div>\n'
 
         # Fallback: if no hierarchical connections, list all other locations
+        # (excluding offscreen "away" labels — they're never navigable).
         if not navigation_html:
-            other_locations = [loc for loc in self.locations if loc.id != location.id]
+            other_locations = [loc for loc in self.locations if loc.id != location.id and not _loc_offscreen(loc)]
             if other_locations:
                 # Check if any has image path defined for fallback visual mode
                 has_any_images = any(
