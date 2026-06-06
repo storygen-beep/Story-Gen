@@ -1823,3 +1823,423 @@ class Doc69PatternCPreSubstitutionEffectsTests(TestCase):
                          f"TLS slice should have no Phase 4 errors. Got: {phase4_errs}")
         self.assertEqual(phase4_warns, [],
                          f"TLS slice should have no Phase 4 warnings. Got: {phase4_warns}")
+
+
+class NpcPanelSidebarTests(TestCase):
+    """`npc_panel` sidebar item (RTS House-card): per-NPC arousal band / corruption /
+    location-from-schedule (2026-06-06). Location reuses setup.getNpcLocation — the same
+    schedule source the Schedule page uses."""
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = User.objects.create_user(
+            email="npc-panel-sidebar@example.com", password="testpass123"
+        )
+
+    def _template(self, *, rows=None, with_schedule=True, with_traits=True, item_override=None):
+        loc_id = "loc_kitchen"
+        npc_id = "npc_test"
+        canvas_id = "canvas_test"
+        npc = {
+            "id": npc_id,
+            "name": "Test NPC",
+            "description": "Fixture NPC",
+            "core_traits": {"arousal": 0, "corruption": 0} if with_traits else {},
+            "flag_keys": [],
+        }
+        if with_schedule:
+            npc["schedules"] = [
+                {"location": loc_id, "weekdays": [0, 1, 2, 3, 4, 5, 6],
+                 "start_time": "06:00", "end_time": "23:00", "activity": "around"},
+            ]
+        item = item_override if item_override is not None else {
+            "type": "npc_panel",
+            "npc_id": npc_id,
+            "label": "Test NPC",
+            "rows": rows if rows is not None else ["arousal", "corruption", "location"],
+        }
+        return {
+            "schema_version": "1.0",
+            "project": {
+                "id": "npc_panel_test",
+                "title": "NPC Panel Fixture",
+                "description": "Minimal fixture for the npc_panel sidebar item.",
+                "starting_canvas": canvas_id,
+            },
+            "time": {"enabled": True, "starting_hour": 8, "starting_day": "Monday"},
+            "locations": [{"id": loc_id, "name": "Kitchen", "description": "Test kitchen"}],
+            "npcs": [npc],
+            "sidebar_items": [item],
+            "canvases": [
+                {
+                    "id": canvas_id,
+                    "name": "Test Canvas",
+                    "type": "scene",
+                    "trigger": {"location": loc_id, "is_active": True, "is_repeatable": True,
+                                "trigger_mode": "random", "chance": 0.5},
+                    "nodes": [
+                        {"id": "n1", "name": "N1",
+                         "blocks": [{"type": "paragraph", "props": {},
+                                     "content": [{"type": "text", "text": "test"}]}]}
+                    ],
+                },
+            ],
+        }
+
+    def _validate(self, raw):
+        import copy
+        from apps.projects.services.template_import import normalize, validate
+        return validate(normalize(copy.deepcopy(raw)))
+
+    def _gen(self, raw, version="v2"):
+        import copy
+        from apps.projects.services.template_import import (
+            normalize, validate, create_project_from_template,
+        )
+        template = normalize(copy.deepcopy(raw))
+        errors = validate(template)
+        self.assertEqual(errors, [], f"Fixture should validate clean: {errors}")
+        result = create_project_from_template(template, str(self.user.id))
+        project = Project.objects.get(id=result["project_id"])
+        if version == "v2":
+            from apps.game_generation.twee_comprehensive.generators.v2 import (
+                TweeComprehensiveGeneratorV2 as Gen,
+            )
+        else:
+            from apps.game_generation.twee_comprehensive.generators.v1 import (
+                TweeComprehensiveGeneratorV1 as Gen,
+            )
+        return Gen().generate(project)
+
+    def test_npc_panel_render_branch_and_item_emitted_v2_and_v1(self):
+        for version in ("v2", "v1"):
+            twee = self._gen(self._template(), version=version)
+            self.assertIn('_item.type is "npc_panel"', twee,
+                          f"{version}: npc_panel render branch must be emitted")
+            self.assertIn("npc-panel-item", twee, f"{version}: card markup must be present")
+            self.assertIn("setup.getNpcLocation", twee,
+                          f"{version}: location row must use getNpcLocation (Schedule-page source)")
+            # the configured item rides into the sidebar_items blob
+            self.assertIn('"npc_panel"', twee, f"{version}: npc_panel item must be serialized")
+            self.assertIn("npc_test", twee, f"{version}: the configured npc_id must be present")
+
+    def test_npc_panel_schedule_emitted_for_location_row(self):
+        twee = self._gen(self._template(rows=["location"]))
+        self.assertIn("npcSchedules", twee)
+        self.assertIn("loc_kitchen", twee)
+
+    def test_validation_rejects_unknown_npc_id(self):
+        errors = self._validate(self._template(
+            item_override={"type": "npc_panel", "npc_id": "npc_ghost", "rows": ["arousal"]}))
+        self.assertTrue(any("npc_ghost" in e and "npc_panel" in e for e in errors),
+                        f"Expected unknown-npc error, got: {errors}")
+
+    def test_validation_rejects_bad_row(self):
+        errors = self._validate(self._template(rows=["arousal", "bogus"]))
+        self.assertTrue(any("bogus" in e and "npc_panel" in e for e in errors),
+                        f"Expected bad-row error, got: {errors}")
+
+    def test_validation_rejects_missing_rows(self):
+        errors = self._validate(self._template(
+            item_override={"type": "npc_panel", "npc_id": "npc_test"}))
+        self.assertTrue(any("rows" in e and "npc_panel" in e for e in errors),
+                        f"Expected missing-rows error, got: {errors}")
+
+    def test_validation_rejects_row_trait_not_declared(self):
+        errors = self._validate(self._template(rows=["arousal"], with_traits=False))
+        self.assertTrue(any("arousal" in e and "npc_panel" in e for e in errors),
+                        f"Expected undeclared-trait error, got: {errors}")
+
+    def test_next_row_valid_and_branch_emitted(self):
+        # "next" is an allowed row (no trait declaration needed — it reads the quest system).
+        self.assertEqual(self._validate(self._template(rows=["next"])), [])
+        twee = self._gen(self._template(rows=["arousal", "location", "next"]))
+        self.assertIn('_npRow is "next"', twee, "next render branch must be emitted")
+        self.assertIn("npc-panel-next", twee, "next card markup must be present")
+        self.assertIn("setup.pickQuestsCard", twee, "next must reuse the quest picker")
+        self.assertIn("setup.renderQuestsGoalBlock", twee, "next must reuse the Quests goal-block renderer (full parity)")
+
+
+class ClothingBuyGateTests(TestCase):
+    """Clothing shop buy-gate feedback (2026-06-06).
+
+    A clothing item can carry its own `conditions` block (e.g. corruption >= 25).
+    `buyItem` enforces it, but the shop's tier display rounds the threshold down
+    into the Basic tier, so the item shows a live Buy button. Before this fix the
+    failed click silently no-op'd. Now buyItem publishes a gated-action toast
+    (bottom-overlay `notify-warning`) naming the unmet requirement, flushed by the
+    shop handler's `showEffectNotification()`. Verified across v1 + v2 parity.
+    """
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = User.objects.create_user(
+            email="clothing-buy-gate@example.com", password="testpass123"
+        )
+
+    def _template(self):
+        loc_id = "loc_shop"
+        canvas_id = "canvas_start"
+        return {
+            "schema_version": "1.0",
+            "project": {
+                "id": "clothing_gate_test",
+                "title": "Clothing Buy Gate Fixture",
+                "description": "Minimal clothing-enabled fixture with a gated item.",
+                "starting_canvas": canvas_id,
+            },
+            "time": {"enabled": True, "starting_hour": 8, "starting_day": "Monday"},
+            "settings": {
+                "clothing_enabled": True,
+                "shop_location": loc_id,
+                "wardrobe_location": loc_id,
+            },
+            "clothing": [
+                {
+                    "id": "outfit_gated",
+                    "name": "Barely-there mini",
+                    "slot": "bottom",
+                    "price": 55,
+                    "beauty": 12,
+                    "corruption": 30,
+                    "type": "casual",
+                    "conditions": {
+                        "version": "1.0",
+                        "items": [
+                            {"type": "trait", "subject": "player",
+                             "trait_key": "corruption", "operator": "gte", "value": 25},
+                        ],
+                    },
+                },
+            ],
+            "locations": [
+                {"id": loc_id, "name": "Reece's", "description": "The clothing shop."},
+            ],
+            "npcs": [],
+            "canvases": [
+                {
+                    "id": canvas_id,
+                    "name": "Start",
+                    "type": "scene",
+                    "trigger": {"location": loc_id, "is_active": True,
+                                "is_repeatable": True},
+                    "nodes": [
+                        {
+                            "id": "n1",
+                            "name": "Start Node",
+                            "blocks": [
+                                {"type": "paragraph", "props": {},
+                                 "content": [{"type": "text", "text": "test"}]}
+                            ],
+                        }
+                    ],
+                },
+            ],
+        }
+
+    def _build(self, generator_cls):
+        import copy
+        from apps.projects.services.template_import import (
+            normalize, validate, create_project_from_template,
+        )
+        template = normalize(copy.deepcopy(self._template()))
+        errors = validate(template)
+        self.assertEqual(errors, [], f"Fixture should validate clean: {errors}")
+        result = create_project_from_template(template, str(self.user.id))
+        project = Project.objects.get(id=result["project_id"])
+        return generator_cls().generate(project)
+
+    def _assert_gate_wired(self, twee):
+        # The describe helper is emitted (generic threshold formatter).
+        self.assertIn("setup.describeUnmetConditions = function", twee,
+                      "describeUnmetConditions helper must be emitted")
+        # buyItem resolves the reason then publishes the gated toast on failure.
+        self.assertIn(
+            "var why = setup.describeUnmetConditions(item.conditions);", twee,
+            "buyItem must resolve the unmet-condition reason before notifying",
+        )
+        self.assertIn(
+            'setup.queueGatedNotification(why ? ("Not yet — needs " + why)',
+            twee,
+            "buyItem must queue a gated notification describing the unmet condition",
+        )
+        # The shop handler flushes the toast after the buy attempt.
+        self.assertIn(
+            "setup.buyItem(String(itemId));\n        setup.showEffectNotification();",
+            twee,
+            "shop buy handler must flush the gated toast via showEffectNotification",
+        )
+
+    def test_v2_gate_feedback_wired(self):
+        from apps.game_generation.twee_comprehensive.generators.v2 import (
+            TweeComprehensiveGeneratorV2,
+        )
+        self._assert_gate_wired(self._build(TweeComprehensiveGeneratorV2))
+
+    def test_v1_gate_feedback_wired(self):
+        from apps.game_generation.twee_comprehensive.generators.v1 import (
+            TweeComprehensiveGeneratorV1,
+        )
+        self._assert_gate_wired(self._build(TweeComprehensiveGeneratorV1))
+
+
+class ChoiceCostsTests(TestCase):
+    """Per-choice `costs` — tiered "main lock, then energy cost" gating (2026-06-06).
+
+    An exit choice can carry `costs = [{trait, value}]` — the resource tier UNDER its
+    `conditions` (main lock). Render is nested: main-lock `conditions` (outer) →
+    affordability (inner). A cost-blocked rung shows as a plain greyed `locked-choice`
+    span with `getCostBlockedMessage` (NOT a clickable button), the cost deducts on
+    click, and a choice WITHOUT costs is unchanged. Mirrors canvas-level `costs`.
+    Verified across v1 + v2 parity.
+    """
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = User.objects.create_user(
+            email="choice-costs@example.com", password="testpass123"
+        )
+
+    def _template(self, *, with_costs):
+        canvas_id = "canvas_start"
+        loc_id = "loc_bar"
+        # Cost-only choice (no main lock) + tiered choice (main lock + cost) when
+        # with_costs; otherwise two plain choices (backward-compat baseline).
+        if with_costs:
+            choices = [
+                {
+                    "text": "Work a shift",
+                    "targetType": "trigger",
+                    "effects": [
+                        {"targetType": "player", "trait": "money", "op": "add", "value": 50},
+                    ],
+                    "costs": [{"trait": "energy", "value": 15}],
+                },
+                {
+                    "text": "Work the floor in less",
+                    "targetType": "trigger",
+                    "show_when_locked": True,
+                    "locked_text": "In less (needs corruption)",
+                    "conditions": {
+                        "version": "1.0",
+                        "items": [
+                            {"type": "trait", "subject": "player",
+                             "trait_key": "corruption", "operator": "gte", "value": 10},
+                        ],
+                    },
+                    "effects": [
+                        {"targetType": "player", "trait": "money", "op": "add", "value": 90},
+                    ],
+                    "costs": [{"trait": "energy", "value": 15}],
+                },
+            ]
+        else:
+            choices = [
+                {"text": "Leave", "targetType": "trigger", "effects": []},
+            ]
+        return {
+            "schema_version": "1.0",
+            "project": {
+                "id": "choice_costs_test",
+                "title": "Choice Costs Fixture",
+                "description": "Minimal fixture for per-choice costs.",
+                "starting_canvas": canvas_id,
+            },
+            "time": {"enabled": True, "starting_hour": 8, "starting_day": "Monday"},
+            "player": {
+                "id": "player",
+                "name": "Test Player",
+                "core_traits": {"corruption": 0, "energy": 100, "money": 0},
+                "flag_keys": [],
+            },
+            "locations": [
+                {"id": loc_id, "name": "The Bar", "description": "Test bar."},
+            ],
+            "npcs": [],
+            "canvases": [
+                {
+                    "id": canvas_id,
+                    "name": "Start",
+                    "type": "scene",
+                    "trigger": {"location": loc_id, "is_active": True,
+                                "is_repeatable": True, "trigger_mode": "manual"},
+                    "nodes": [
+                        {
+                            "id": "n1",
+                            "name": "Start Node",
+                            "blocks": [{"type": "paragraph", "props": {},
+                                        "content": [{"type": "text", "text": "test"}]}],
+                            "exit_block": {"type": "choices", "choices": choices},
+                        }
+                    ],
+                },
+            ],
+        }
+
+    def _build(self, generator_cls, *, with_costs):
+        import copy
+        from apps.projects.services.template_import import (
+            normalize, validate, create_project_from_template,
+        )
+        template = normalize(copy.deepcopy(self._template(with_costs=with_costs)))
+        errors = validate(template)
+        self.assertEqual(errors, [], f"Fixture should validate clean: {errors}")
+        result = create_project_from_template(template, str(self.user.id))
+        project = Project.objects.get(id=result["project_id"])
+        return generator_cls().generate(project)
+
+    def _assert_costs_wired(self, twee):
+        # The inner cost-affordability gate is emitted as a passage <<if>>.
+        self.assertIn("<<if setup.checkCostsAffordable(", twee,
+                      "per-choice cost gate must emit a checkCostsAffordable <<if>>")
+        # Cost-blocked rung = greyed span with the dynamic resource message.
+        self.assertIn("<<= setup.getCostBlockedMessage(", twee,
+                      "cost-blocked rung must render getCostBlockedMessage")
+        self.assertIn('<span class="locked-choice"', twee,
+                      "cost-blocked rung must be a greyed locked-choice span")
+        # The rung KEEPS the action label and appends the requirement beside it
+        # (doesn't replace the choice text with the bare message).
+        self.assertIn("Work a shift (<<= setup.getCostBlockedMessage(", twee,
+                      "cost-blocked rung must keep the choice text before the requirement")
+        # The cost deducts on click (energy -15), NOT via effects.
+        self.assertIn('"energy", "add", -15', twee,
+                      "per-choice cost must deduct energy on click")
+        # The tiered choice's main-lock label still appears (outer conditions tier).
+        self.assertIn("In less (needs corruption)", twee,
+                      "main-lock locked_text must still render for the outer tier")
+        # When all rungs are cost/condition-locked, the player gets a clean Continue
+        # escape — NOT the contradictory "No available choices" line (the rungs are
+        # still shown greyed with their own reason).
+        self.assertIn("[[Continue->", twee,
+                      "all-locked canvas must still offer a Continue escape")
+        self.assertNotIn("No available choices", twee,
+                         "the redundant 'No available choices' line must be gone")
+
+    def test_v2_choice_costs_wired(self):
+        from apps.game_generation.twee_comprehensive.generators.v2 import (
+            TweeComprehensiveGeneratorV2,
+        )
+        self._assert_costs_wired(self._build(TweeComprehensiveGeneratorV2, with_costs=True))
+
+    def test_v1_choice_costs_wired(self):
+        from apps.game_generation.twee_comprehensive.generators.v1 import (
+            TweeComprehensiveGeneratorV1,
+        )
+        self._assert_costs_wired(self._build(TweeComprehensiveGeneratorV1, with_costs=True))
+
+    def test_v2_no_costs_no_guard(self):
+        """Backward-compat: a choice without costs emits no cost guard."""
+        from apps.game_generation.twee_comprehensive.generators.v2 import (
+            TweeComprehensiveGeneratorV2,
+        )
+        twee = self._build(TweeComprehensiveGeneratorV2, with_costs=False)
+        self.assertNotIn("<<if setup.checkCostsAffordable(", twee,
+                         "no costs anywhere → no per-choice cost guard call site")
+
+    def test_v1_no_costs_no_guard(self):
+        from apps.game_generation.twee_comprehensive.generators.v1 import (
+            TweeComprehensiveGeneratorV1,
+        )
+        twee = self._build(TweeComprehensiveGeneratorV1, with_costs=False)
+        self.assertNotIn("<<if setup.checkCostsAffordable(", twee,
+                         "no costs anywhere → no per-choice cost guard call site")

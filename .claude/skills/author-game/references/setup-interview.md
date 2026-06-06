@@ -6,9 +6,11 @@ buildable scaffold (skeleton + the minimal boot canvas + the spine quest card) +
 
 ## Step 1 — Load the doctrine you need
 Read the relevant parts of `prompts_v2/COMPREHENSIVE_SYSTEM_REFERENCE.md`: arc shapes, the time
-model, location design (containers / hubs / locks + the unlock contract), `[settings]` scoping
-(clothing / rent / phone), and the Phase 2+ decisions (pregnancy / scandal / gallery / tracker).
-Use `games/late_shifts/toml_phases/` as the structural reference for TOML table shapes.
+model, location design (containers / hubs / locks + the unlock contract), system scoping (three
+homes — clothing → `[settings]`, rent → `[settings.rent]`, phone → top-level `[phone]`; `schema/02`
+§1.3), and the Phase 2+ decisions (pregnancy / scandal / gallery / tracker).
+For TOML table shapes, the corpus's canonical worked example is `schema/03` (verbatim from the TLS
+Frank slice); `games/late_shifts/toml_phases/` is a complete shipped game to copy concrete blocks from.
 
 ## Step 1.5 — Determine scope mode (do this BEFORE the interview)
 Read `scope_mode` from the concept input; if absent, **default to `full_game`** (`stages/01` §0.5).
@@ -25,13 +27,21 @@ It drives budgets, the Phase 2+ flow, and depth — record it in the ledger (`sc
 Each question: 2–4 concrete options + a recommendation. **Skip any question already answered by
 the concept input or with a safe doctrine default — state the default, don't ask.**
 
-1. **Premise / setting / player character** — who the player is, where, the hook.
+1. **Premise / setting / player character** — who the player is, where, the hook. **Ask whether the
+   player is named/customizable and whether any NPC is** (`[[player.customization_fields]]`,
+   `doctrine/14` via `references/systems.md`) — the easiest system to forget, and it changes how prose
+   is authored (every customizable name must be emitted as an `@`-token, never hardcoded).
 2. **Economic engine + time model + day-cycle** — money pressure + the **day-cycle** (`doctrine/04`
    §10). Define the day's **phases** (e.g. Morning/Afternoon/Evening/Night/Asleep — a label convention
    over the continuous clock) and **where the player's orbit sits** (night-centric vs day-centric).
    A time-gated game MUST have a **day-advance activity** (sleep/rest) so the clock is traversable —
    it's the router between the day-half (errands/town) and the player's main hub; without it, daytime
    windows are unreachable (the Dee-bug). The scaffold authors this sleep activity (Step 4).
+   If the economy uses a **spent resource** (energy/stamina) to pace actions, that spend gates via the
+   **`costs`** field (NOT `effects`, which decrements without gating → a cosmetic meter) — pair it with
+   a restore (sleep/shower); see `toml-gotchas.md` "Resource gating" + the beat self-audit.
+   **Also decide which optional systems the game uses** — clothing / rent / phone — each lives at its
+   own TOML home with a signature trap; read `references/systems.md` before wiring any of them.
 3. **Cast** — propose 4–6 NPCs with arc shapes (from the arc-shapes doctrine); LO reshapes.
 4. **Location graph** — propose hubs / containers / locks from cast + premise; LO reshapes. Apply
    the unlock contract to any locked location that will host an NPC schedule. Each schedule row is one
@@ -65,37 +75,47 @@ To `games/<slug>/design_book.md` — the intent record (a NEW artifact; LS's nea
 - **World setup** — premise, player, economic engine, time model, `scope_mode`, the four Phase 2+
   calls (with the mechanization recorded for any `include`), and the locked-in loose roadmap.
 - **Locations** — the graph (hubs / containers / locks).
-- **Per-NPC R7 brief** (one per NPC — the corpus's core Stage-1 deliverable, `doctrine/06` /
-  `stages/01` Step 5). Each brief commits the intent the continue loop must honor:
-  - **Arc shape + lane budget** (the specific numbers within the shape's range, per `lanes.md`).
-  - **Voice spec** — how this NPC sounds; RTS-flat register for Lane 1/2/3.
-  - **Per-tier vocab ceiling** — what's allowed at full intensity (from interview item 6;
-    default-to-maximum-explicit), tier by tier.
-  - **Stat ladder** — the stage flags + the corruption/relation thresholds each rung gates on.
-  - **Per-NPC anti-patterns** — what NOT to do for this NPC (e.g. empty Lane 3 for peer/dating).
-  This is where voice/ceiling/ladder intent lives; the per-beat loop reads it instead of re-deriving.
+- **Per-NPC R7 brief** (one per NPC — the corpus's core Stage-1 deliverable). Author it against
+  **`doctrine/06` §2's 10-section template** + arc-shape + lane budget (`lanes.md`). A *partial* brief
+  is the failure mode — the continue loop re-derives what's missing and drifts (Marge cost hours to a
+  brief whose §1 just said "deferred"). The sections, load-bearing ones flagged:
+  1. **End-state fantasy** (one paragraph) — the complete arc's destination. **Gates everything
+     downstream; author it FIRST** (without it the locked-visible rungs have nothing to telegraph).
+  2. **Voice spec** — how this NPC sounds; RTS-flat register for Lane 1/2/3.
+  3. **Stat ladder + gating spine** — stage flags + per-rung thresholds, AND the **spine** trait by
+     arc shape (peer → `relation` milestones; family/slow-burn/escalation → player `corruption` × NPC
+     `arousal`; leverage → `money`; service → `relation`; never default to `relation` —
+     `references/trait-design.md`). Per-tier **vocab ceiling** here too (`doctrine/08`,
+     default-to-maximum-explicit).
+  4. **Per-rung pretext shapes** — the in-fiction setup menu for each ladder rung (the content menu).
+  5. **Lane-by-lane map** — the budget compiled into specific canvas slots per location/window.
+  6. **Capstones** — each scripted moment: type A/B/C + trigger + the flag it writes (Pattern F F1–F5
+     for forks, `doctrine/04` §4). **Commit these up front** so capstone beats are authorable later.
+  7. **Per-NPC anti-patterns** — what NOT to do for this NPC (e.g. empty Lane 3 for peer/dating).
+  8. **Cross-arc writes / reads** — flags this NPC's scenes set + flags they read from other arcs.
+  9–10. **Cross-references + acceptance criteria** — the arc's "done" check.
+  The per-beat loop reads this instead of re-deriving voice / ceiling / ladder / capstone intent.
 
 ## Step 4 — Write the scaffold TOML (skeleton + the opening canvas only)
-- `games/<slug>/toml_phases/0_systems_spec.toml` — `[settings]` (correct clothing/rent/phone
-  scoping if used) + engine config.
+- `games/<slug>/toml_phases/0_systems_spec.toml` — system blocks at their correct homes if used
+  (clothing → `[settings]`, rent → `[settings.rent]`, phone → top-level `[phone]`; `schema/02` §1.3)
+  + engine config.
 - `games/<slug>/toml_phases/1_metadata_and_locations.toml` — metadata, locations (with
   `entry_conditions` + `blocked_message` for locks), npcs, `[[npcs.schedules]]`.
 - The **minimal intro / Start canvas** the engine needs to open the game (Day-1 bootstrap that
   drops the player into the starting location). This is structural bootstrap, NOT story content —
   do not author any NPC arcs, hubs, ambients, or capstones in setup. Mirror the opening canvas in
   `games/late_shifts/toml_phases/` for the exact table shape.
-- The **day-advance (sleep/rest) activity** — IF the game is time-gated (any NPC schedule has
-  windows the player must be present for). A solo canvas at the player's home/hub with a fixed
-  forward `time_progression_minutes` (e.g. 420 = ~7h to morning) + an energy restore, schedule-gated
-  to the sleep window. This is the **router** that carries the player across the clock so daytime
-  (or off-hours) windows are reachable — without it, non-starting-phase content is dead (the Dee-bug,
-  `doctrine/04` §10.1). Structural infrastructure like the boot canvas, NOT story content. Mirror
-  `games/late_shifts/` `activity_sleep` for the exact shape (`references/toml-gotchas.md`).
+- The **day-advance (sleep/rest) activity** — IF the game is time-gated (the clock router from
+  interview item 2; `doctrine/04` §10). A solo canvas at the player's home/hub: fixed forward
+  `time_progression_minutes` (e.g. 420 ≈ 7h) + an energy restore, schedule-gated to the sleep window.
+  Structural infrastructure like the boot canvas, NOT story content; mirror `games/late_shifts/`
+  `activity_sleep` for the shape (`references/toml-gotchas.md`).
 - The **spine quest card** (one `[[quest_cards]]`, no `npc_id` → renders in the top "Story Goals"
   section). If you set `quests_engine = "v2"` you MUST populate the Quests page, or it renders empty
   and reads as broken. The spine = the game's central pressure from the economic engine / premise
-  (e.g. "Pay Boyd $200 every Monday or lose the bar"). Use a mechanic-mode card (a `goals` trait
-  gate like `money >= <amount>`, no `ready_canvas`) gated `when` the debt is active. Fields +
+  (e.g. "make the weekly rent or lose your place"). Use a mechanic-mode card (a `goals` trait
+  gate like `money >= <amount>`, no `ready_canvas`) gated `when` the pressure is active. Fields +
   shape: see `beat-authoring.md` "Quest cards" + `prompts_v2` `schema/02` §8. This is the ONLY
   story-bearing content setup authors — everything else is beats.
 - Mirror all table shapes from `games/late_shifts/toml_phases/`.

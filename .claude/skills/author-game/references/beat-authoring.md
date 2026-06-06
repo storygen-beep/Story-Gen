@@ -43,9 +43,12 @@ unsure, check where `games/late_shifts/toml_phases/` put the analogous content):
 4. **Author the canvases across the right lanes.** First read TWO things:
    - the NPC's **R7 brief** in `design_book.md` — its arc shape, lane budget, **voice spec**,
      **per-tier vocab ceiling**, and stat ladder. Honor that intent; don't re-derive or drift it.
-     Size the arc to the brief's budget AND the game's `scope_mode` (from the ledger).
+     Size the arc to the brief's budget AND the game's `scope_mode` (from the ledger). The stat ladder
+     commits the gating **spine** — which trait drives this arc, by shape (`references/trait-design.md`);
+     gate the rungs on that, not on `relation` by default.
    - `references/lanes.md` — the four lanes (when + how to write each, verbs/narrative/fingerprints),
-     beat-type→lane mapping, budgets, and the hub-vs-solo-work separation.
+     beat-type→lane mapping, budgets, and the hub-vs-solo-work separation. For **repeatable explicit**
+     content (after a first-night capstone) the loop menu is its own pattern — `references/sex-loop.md`.
    An NPC arc is built *across* lanes per its shape (never Lane-1-only); keep the NPC hub (Lane 1)
    separate from any Maya-solo work activity (Lane 3 host) — pronoun test: a menu verb with no NPC
    object is solo work, not a hub item. Voice: Lane 1/2/3 RTS-flat (~30 words) at the NPC's ceiling,
@@ -81,25 +84,45 @@ Run with the repo venv active (`source venv/bin/activate`), in order; emit a PAS
    - **dead-presence / presence floor** — every scheduled NPC has a reachable hub at each
      **reachable** schedule row; no dead presence. **Offscreen** rows (`offscreen = true` away/home/
      sleep blocks) are exempt — no hub, no floor (`doctrine/10` §5.5).
+   - **cold-start / no backwards on-ramp** — every arc is enterable at corruption 0 / no flags, through
+     ordinary presence; an arc's entry must NOT gate on a stat/flag only raisable by that arc's own
+     downstream content (a circular gate — e.g. a housemate arc gated on `worn_corruption`). The first
+     beat needs only co-presence; escalation layers after (`doctrine/07` backwards-on-ramp, `doctrine/02`
+     §6/§8.12).
    - **navigable scarcity (the Dee-bug law)** — every scheduled window the player must reach sits in
      a day-phase the day-cycle can deliver them to. A daytime depot window is dead if nothing carries
      the player from the night hub to daytime; the day-advance sleep activity is that router
      (`doctrine/04` §10). If this beat schedules content in a new phase, confirm the cycle reaches it.
+   - **stat-restore infrastructure** — if `[engine.daily_tick]` drains a player stat (hygiene/energy)
+     with no way to recover it, the game spirals to the bottom band. The sleep router already restores
+     energy (`doctrine/04` §10); mirror it for any other drained stat — a restore activity (e.g. a
+     shower for hygiene) authored as a solo canvas (no NPC sub), not optional polish.
    - **locked-location unlock contract** — any NPC at a locked location is meetable at an open
      on-ramp and the unlock flag has a reachable setter (Cases A/B/C).
-   - **`[settings]` scoping** — clothing / rent / phone keys live under `[settings]`, never bare.
+   - **system scoping** — three systems, three different homes (`schema/02` §1.3): clothing →
+     `[settings]`, rent → `[settings.rent]`, phone → **top-level `[phone]`** (NOT under `[settings]`).
+     Never bare keys under `[time]`.
+   - **optional-system doctrine** — if this beat wires clothing / rent / phone / customization, honor
+     its signature trap (`references/systems.md` + the linked doctrine): clothing gates PUBLIC content
+     never an NPC arc; rent arms after an income flag; phone triggers can't use `day`/`time`/`location`/
+     `random`; customizable names must be emitted as `@`-tokens, never hardcoded into labels.
    - **`is_container` swallow** — no activity / ambient / capstone attached to a container
      location (containers are pure-nav and swallow attached canvases).
-   - **engine-set flag gating** — do NOT gate a canvas *trigger* on a flag the engine sets
-     rather than a canvas: the rent `eviction_flag` (e.g. `bar_seized`/`rent_evicted`) and the
-     `[engine.daily_tick]` flags. The flag-chain validator only recognizes *canvas-set* flags as
-     gate-satisfiable, so `package_from_toml` fails with `✗ <flag>  NEVER SET`. Instead gate on a
-     canvas-set flag (+ `requires_npc`/schedule for timing), or — if you truly need to react to an
-     engine flag — deliver that content via a phone-thread condition (phone delivery conditions are
-     not flag-chain-validated). Only `is_true` gates are checked; `is_false` guards are exempt.
+   - **engine-set flag gating** — the flag-chain validator accepts a flag as gate-satisfiable only
+     if *something* sets it — and that includes ENGINE-configured setters: the rent `eviction_flag`
+     **and** `[engine.daily_tick]` `flagEffects` with `op = "set"` are registered in the unlock map, so
+     you MAY gate a trigger `is_true` on them. The rent `eviction_flag` is in fact the CORRECT "fell
+     behind" signal — gate leverage/escalation content on it, not on a day-1 onboarding flag (so a
+     player who always pays never triggers the fell-behind branch). What STILL fails `✗ <flag>  NEVER SET`: a flag
+     NOTHING sets — no canvas `flagEffects`, no phone reply, not an engine setter — or a `daily_tick`
+     flag that's only `unset` (a clear, not a setter; its canvas setter still must exist). For those,
+     gate on a canvas-set flag (+ `requires_npc`/schedule for timing), or deliver via a phone-thread
+     condition (not flag-chain-validated). Only `is_true` gates are checked; `is_false` guards are exempt.
    - **Quests page reflects current goals** — if this beat is a trackable goal, a `[[quest_cards]]`
      now shows it at the right time (and the prior milestone's card retires via its `when` gate).
      The Quests page is never empty and never stale (Doc 49). Repeatable ambients/flavor: no card.
+     Each `goals` label **NAMES THE TRAIT** ("Corruption" / "<NPC> Relation"), matching the sidebar —
+     never a raw key path (D50-R6, reversed; `doctrine/04` §2).
    - **lane coverage vs arc shape** — the NPC's content spans the lanes its shape calls for (not
      Lane-1-only), within the brief's budget + the game's `scope_mode`, and EMPTY cells stay empty
      (peer/dating: no Lane 3; service: no Lane 2/3). The NPC hub holds only NPC-object verbs; solo
@@ -108,11 +131,38 @@ Run with the repo venv active (`source venv/bin/activate`), in order; emit a PAS
      (missing any = silent miss). Hub base opener is one constant paragraph (not tiered, D56-R1).
    - **vocab ceiling honored** — explicit content sits at the NPC's declared per-tier ceiling (R7
      brief); default to the MOST explicit reading, no euphemism drift at high tiers, lower tiers
-     naturally lighter. Sex scenes ship bareback (no contraception language) so a Phase-2+ pregnancy
-     retrofit can attach (`doctrine/08`, `stages/01` §5.6).
+     naturally lighter. **Contraception language is scope-conditional** (`stages/02` §10.11): ship
+     bareback (no contraception language, so a pregnancy retrofit can attach) when `scope_mode: slice`
+     OR `full_game` + `pregnancy = defer`; it INVERTS at `full_game` + `pregnancy = include` —
+     contraception language is then ALLOWED in pre-pregnancy scenes (it sets up the beat), still banned
+     post-pregnancy. Read the game's `scope_mode` + Phase-2+ calls from the ledger / design book.
    - **traits declared before use** — any trait this beat references (effect, condition, sidebar, or
      stage) is already in `[player.core_traits]` / `[npcs.core_traits]`; an undeclared trait is a
      sidebar hard-fail or a silent effect/condition no-op (`toml-gotchas.md`).
+   - **trait spine + no dead meter** — the NPC's rungs/capstones gate on a shape-appropriate spine
+     (`references/trait-design.md`), not `relation` by default; and every trait this beat *raises* is
+     read by some gate. A meter that climbs but gates nothing — worst when it's a visible sidebar bar
+     — is a dead meter: gate it or cut the raise.
+   - **spent resources gate via `costs`** (the converse of the dead-meter rule) — if this beat costs
+     the player a resource (energy/hygiene on an activity, work shift, or chore), the spend goes in
+     **`costs`**: trigger-level for a single-exit activity, or per-choice for a multi-intensity exit
+     (tiered UNDER any `conditions` main-lock, greyed per-tier message). `costs` GATES *and* deducts.
+     NEVER spend a resource via `effects {op=add, value=-N}` (it decrements without gating → cosmetic
+     meter the player burns through to 0), and NEVER gate a resource with `conditions` +
+     `locked_text_threshold` (renders a clickable blue toast-button, not a plain greyed rung). `effects`
+     carries only the *gains* (money/relation) + `time_progression_minutes`; restores (sleep/shower)
+     stay `effects`-positive. (`toml-gotchas.md` "Resource gating"; `schema/02` §6.1 + §7.4.)
+   - **sidebar visibility per arc shape** — a beat that adds an NPC surfaces its traits by shape
+     (family: arousal+corruption+relation; slow-burn: arousal+relation; peer/service: relation;
+     antagonist: location-only); `stage` + antagonist `awareness` NEVER surface. The HUD is the world
+     model — without the NPC-location radar, Lane 3 is unplannable (`doctrine/09` §8, `reference/04`).
+   - **choice labels RTS-flat** — labels are terse action verbs, not literary sentences; no
+     self-justifying subtext; crude-in-label at the NPC's ceiling; emoji on menu/hub buttons, bare on
+     in-loop cascade beats (`lanes.md` choice-vocab).
+   - **locked rungs render as intended** — escalation rungs use `show_when_locked` (greyed-visible).
+     A bare greyed span (the TLS look) needs NO `locked_text_threshold` — that field renders a
+     click-to-toast **button** instead. Non-ladder gated choices (daily caps, intra-loop beats,
+     narrative branches) HIDE — no `show_when_locked` (`lanes.md`).
 
 Any FAIL → fix, re-run, then mark validated.
 
@@ -124,6 +174,14 @@ gated content (NPC hubs, scheduled canvases, Lane 2 ambients) correctly won't re
 bug that isn't one. Before concluding a hub/canvas is broken, **verify the NPC is present at the
 current game time** (check the clock + the NPC's `[[npcs.schedules]]` window). To avoid the artifact,
 live-test with `--skip-phase0` (drive pre-game manually) or a non-`--dev` build.
+
+**Stale-session trap (the bigger one).** SugarCube keeps the in-progress playthrough in
+sessionStorage and restores it on a plain page **reload** — so after you rebuild `index.html`, a
+refresh resumes the OLD session's state on the NEW code, showing inconsistent gates (a flag set under
+old rules + a meter at a now-impossible value). That reads as a bug but isn't. For a TRUE fresh test:
+use the in-game **Restart**, clear the site's local/sessionStorage, or a private window (the
+explorer's `--fresh` does this). After ANY gate/trait change, reset before judging behavior — a
+"restart" that's really an F5 will mislead you.
 
 ## Quest cards (`[[quest_cards]]` — the Quests page)
 Active only when `[project].quests_engine = "v2"`. Authoritative schema: `prompts_v2` `schema/02`

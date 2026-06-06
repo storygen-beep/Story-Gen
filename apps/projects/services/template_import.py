@@ -647,6 +647,11 @@ class TemplateChoice:
     # E6: per-choice text variants — first match wins, falls back to `text`.
     # Each variant: {"text": str, "conditions": {version, items}}.
     text_variants: List[Dict[str, Any]] = field(default_factory=list)
+    # Per-choice resource costs — [{trait: str, value: int}]. The energy/hygiene TIER under
+    # the choice's `conditions` (main lock): checked via checkCostsAffordable, deducted on
+    # click, and shown as a greyed getCostBlockedMessage rung when unaffordable. Mirrors the
+    # canvas-level `costs` semantic (TemplateTrigger.costs) at the choice level.
+    costs: List[Dict[str, Any]] = field(default_factory=list)
 
 
 @dataclass
@@ -1970,6 +1975,11 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                             quest_effects=quest_effs,
                             schedule_effects=schedule_effs,
                             text_variants=text_variants_parsed,
+                            costs=[
+                                {"trait": str(ci["trait"]), "value": int(ci["value"])}
+                                for ci in (ch.get("costs") or [])
+                                if isinstance(ci, dict) and "trait" in ci and "value" in ci
+                            ],
                         )
                     )
                 # Validate exit_block type
@@ -3259,6 +3269,37 @@ def validate(template: GameTemplate) -> List[str]:
                     )
             if "prefix" in item and not isinstance(item.get("prefix"), str):
                 errors.append(f"{ctx}: 'prefix' must be a string when set")
+        elif itype == "npc_panel":
+            # RTS House-card: per-NPC arousal band / corruption / location (from schedule).
+            ctx = f"sidebar_items[{i}] (npc_panel)"
+            np_npc_id = item.get("npc_id")
+            np_npc = None
+            if not np_npc_id:
+                errors.append(f"{ctx}: 'npc_id' is required")
+            elif np_npc_id not in _npc_ids_for_sidebar:
+                errors.append(f"{ctx}: npc_id '{np_npc_id}' not found in NPC definitions")
+            else:
+                np_npc = next((n for n in template.npcs if n.id == np_npc_id), None)
+            np_rows = item.get("rows")
+            if not isinstance(np_rows, list) or not np_rows:
+                errors.append(
+                    f"{ctx}: 'rows' is required (non-empty list from: arousal, corruption, location)"
+                )
+            else:
+                for r in np_rows:
+                    if r not in ("arousal", "corruption", "location", "next"):
+                        errors.append(
+                            f"{ctx}: invalid row '{r}' (allowed: arousal, corruption, location, next)"
+                        )
+                    elif (
+                        np_npc is not None
+                        and r in ("arousal", "corruption")
+                        and r not in (np_npc.core_traits or {})
+                    ):
+                        errors.append(
+                            f"{ctx}: row '{r}' but NPC '{np_npc_id}' has no '{r}' in core_traits "
+                            f"(declare it before use)"
+                        )
 
     # locations
     loc_ids = [l.id for l in template.locations]
@@ -6187,6 +6228,8 @@ def create_project_from_template(
                             ch_d["questEffects"] = ch.quest_effects
                         if ch.schedule_effects:
                             ch_d["scheduleEffects"] = ch.schedule_effects
+                        if ch.costs:
+                            ch_d["costs"] = ch.costs
 
                         if ch.targetType == "location" and ch.locationId:
                             loc_obj = slug_map.get(ch.locationId)
@@ -6347,6 +6390,7 @@ def _serialize_exit_block(eb: "TemplateExitBlock") -> Dict[str, Any]:
                 **({"item_effects": ch.item_effects} if ch.item_effects else {}),
                 **({"questEffects": ch.quest_effects} if ch.quest_effects else {}),
                 **({"scheduleEffects": ch.schedule_effects} if ch.schedule_effects else {}),
+                **({"costs": ch.costs} if ch.costs else {}),
             }
             for ch in eb.choices
         ]

@@ -40,14 +40,14 @@ Dataclass: `TemplateProject` at `template_import.py:43`.
 
 | Field | Type | Default | Notes |
 |---|---|---|---|
-| `slug` | str | required | URL-safe identifier |
+| `id` | str | required | URL-safe identifier. **TOML key is `id`** (`_require_str(p, "id")`); stored internally as the `slug` attribute. |
 | `title` | str | required | Display title |
 | `description` | str | `""` | Free text |
 | `quests_engine` | str | `"v1"` | **Set to `"v2"`** for RTS-shape games (enables `[[quest_cards]]`). PRD 48. |
 
 ```toml
 [project]
-slug = "the_long_summer"
+id = "the_long_summer"
 title = "The Long Summer"
 description = "A 90-day summer with Frank at the lake house."
 quests_engine = "v2"
@@ -416,7 +416,7 @@ Dataclass: `TemplateTrigger` at `template_import.py:448`.
 | `npc` | Optional[str] | — | NPC slug; navigation indicator |
 | `trigger_mode` | str | `"manual"` | `"manual"` (Lane 1/3/4) or `"random"` (Lane 2) |
 | `chance` | Optional[float] | — | 0.0–1.0; Lane 2 only |
-| `costs` | List[dict] | `[]` | Resource costs on entry: `[{trait: str, value: int}]` |
+| `costs` | List[dict] | `[]` | Resource costs on entry: `[{trait: str, value: int}]`. **This is how you GATE on a resource** (energy/hygiene): the engine checks affordability, dims the menu button with a `(N <Trait>)` tag, and on click shows "Requires N <Trait> (you have M)" + Back — *and* deducts on entry. Single value per canvas → use for single-exit activities; for a per-choice differential (e.g. −15 vs −28) put `costs` on each choice instead (§7.4 — same field, choice level, with tiered greyed messaging). **Spending a resource via `effects {op=add, value=-N}` deducts but does NOT gate** (no affordability check, can go negative, blocks nothing — a cosmetic bar). Don't put both `costs` and an effects deduction on the same canvas — double-charge. |
 | `show_when_blocked` | bool | `false` | Render grayed-out entry on QuestsPage when daily-cooldown blocks |
 | `cooldown_message` | Optional[str] | — | Custom blocked text |
 | `entry_only_from` | List[str] | `[]` | Lane 2 anti-toggle cooldown: only fire if previous location matched |
@@ -563,7 +563,7 @@ Each block is `{type = "X", ... type-specific fields}`. Supported types:
 ```toml
 [[canvases.nodes.blocks]]
 type = "group"
-props.conditions = { items = [
+props.conditions = { version = "1.0", items = [
   { type = "flag", subject = "player", flag_key = "frank_caught", operator = "is_false" },
 ] }
 props.blocks = [
@@ -649,6 +649,23 @@ Dataclass: `TemplateChoice` at `template_import.py:609`.
 | `quest_effects` | List[dict] | `[]` | V1 quests — `[{quest, op, step?}]` |
 | `schedule_effects` | List[dict] | `[]` | Delayed events — `[{delayDays, action, flag?/quest?/conversation?}]` |
 | `text_variants` | List[dict] | `[]` | Per-state text — `[{text, conditions}]`; first match wins |
+| `costs` | List[dict] | `[]` | Per-choice resource cost — `[{trait, value}]`. **Tiered gating**: rendered as a tier UNDER `conditions` (the main lock). Affordable → live link; unaffordable → a plain greyed `locked-choice` rung showing "Requires N <Trait> (you have M)" (no button). Deducts on click — so the energy/hygiene spend lives HERE, not in `effects`. Same `costs` semantic as the canvas trigger (§6.1), at the choice level. |
+
+**Tiered gating — main lock (`conditions`) + resource cost (`costs`):**
+
+```toml
+[[canvases.nodes.exit_block.choices]]
+text             = "Work the floor in less 👀"
+show_when_locked = true
+locked_text      = "Work the floor in less 👀 (needs revealing outfit)"   # main-lock reason
+conditions = { version = "1.0", items = [{ type = "worn_corruption", operator = "gte", value = 15 }] }
+costs   = [{ trait = "energy", value = 15 }]   # tier under the lock — greys with the energy message
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 120
+effects = [{ targetType = "player", trait = "money", op = "add", value = 90 }]  # NO energy here (costs deducts it)
+```
+Outfit off → "needs revealing outfit"; outfit on but tired → "Requires 15 Energy (you have N)"; both met → live. For a pure energy gate with no main lock (e.g. a plain work shift), give the choice `costs` and omit `conditions`. Don't gate a resource with `conditions` + `locked_text_threshold` (that renders a clickable blue toast-button, and a flat `conditions` can't show a per-tier reason).
 
 **Locked choice (always-show with threshold publish — RTS pattern):**
 
@@ -658,7 +675,7 @@ text = "Suck him"
 show_when_locked = true
 locked_text = "I need to know him better first"
 locked_text_threshold = "Maya's corruption: 35+"
-conditions = { items = [
+conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 35 },
   { type = "flag", subject = "player", flag_key = "frank_cracked", operator = "is_true" },
 ] }
@@ -869,7 +886,11 @@ Amber warning when a decaying trait dropped today AND is within range of a band 
 
 **Visibility doctrine (Doc 68 §8):** stage NEVER surfaces to any sidebar item. Antagonist awareness NEVER surfaces. Body-state (energy + hygiene) MUST surface. See `doctrine/09_trait_catalog.md` §8 for per-arc-shape defaults.
 
-**No per-NPC sidebar item via `trait_bar` / `trait_words`.** Although these accept a `trait_owner`/`npc_id`, the engine resolves the `trait` against `player.core_traits` — so `type="trait_bar" npc_id="npc_x" trait="relation"` HARD-FAILS at build ("trait 'relation' not found in player.core_traits") or silently renders the PLAYER's stat. NPC progression (arousal / relation / stage) surfaces on the **Quests page** (V2 cards), NOT the sidebar. The only per-NPC sidebar item is the Doc-64 `npc_location` type, which is PENDING — do not emit it yet. (Late Shifts build failed on four npc-scoped `trait_bar`s.)
+**Per-NPC sidebar items ARE supported** (added after the Late Shifts failure that the old note described). Two ways:
+- `trait_bar` / `trait_words` / `trait_status_text` with `trait_owner = "npc"` + `npc_id` — renders that NPC's `core_traits[trait]` (resolved via `setup.npc_slug_map`). Owner defaults to `"player"`; `npc_id` is required when owner is `"npc"`.
+- **`npc_panel`** (the RTS House-card — ships Doc 64): one card per NPC with `rows = ["arousal","corruption","location","next"]` (any ordered subset). The **location** row reads `setup.getNpcLocation` (the SAME schedule source as the Schedule page); **arousal** renders as a band glyph (default ❄️/🔥/🔥🔥/🔥🔥🔥, or author `arousal_bands`); **corruption** as a number (or `corruption_max_label` at/above `corruption_max_value`); **`next`** mirrors the Quests-page goal block (reuses `renderQuestsGoalBlock`): `🎯 To advance` + ◯ live progress while climbing, `🔓 Ready / 📍 <loc> / 🕒 <schedule>` when ready, `✓ Arc complete` when terminal — no flavor/tip text. Respects `hidden=true`; `show_when` supported. Validator: `npc_id` must exist; arousal/corruption rows require the trait declared in the NPC's `core_traits`.
+
+`stage` and antagonist `awareness` still NEVER surface (Doc 68 §8). Relation/corruption milestones can alternatively surface on the **Quests page** (V2 cards) — use whichever fits.
 
 ---
 
@@ -899,6 +920,8 @@ traitEffects = [
 
 **Doctrine constraint (Doc 40 / Doc 68 §3–§4):** body-state (`hygiene`, `energy`) decays daily. Progression traits (`corruption`, `arousal`, `relation`, `stage`) do NOT decay daily. NPC arousal climbs daily (no-decay rule per Doc 40).
 
+**Gating constraint:** body-state only *paces* the game if activities actually GATE on it. Spend energy/hygiene through the **`costs`** field — on the trigger for a single-exit activity (§6.1) or on each choice for a multi-intensity exit (§7.4, tiered under `conditions` with greyed per-tier messaging). Spending via `effects {op=add, value=-N}` alone deducts but never blocks (cosmetic bar), and gating a resource with `conditions`+`locked_text_threshold` renders a clickable blue toast-button instead of a plain greyed rung — use `costs`. Always pair a gate with a restore (a Sleep/Shower canvas) or the player dead-ends.
+
 ---
 
 ## §11 — `[[engine.stage_helpers]]`
@@ -918,7 +941,7 @@ Named composite gates. A `type = "stage"` condition references a helper by name;
 [[engine.stage_helpers]]
 name = "frank_stage_2_plus"
 description = "Frank reached Stage 2 (post-catch)."
-conditions = { items = [
+conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "frank_stage", operator = "gte", value = 2 },
 ] }
 ```
@@ -1357,7 +1380,17 @@ Dataclass: `TemplateFlagEffect` at `template_import.py:521`.
 
 ### §16.3 — Trigger / canvas PREDICATE (condition gate)
 
-The `{version, logic, items: [...]}` block on `[canvases.trigger.conditions]`, `[canvases.exit_block.choices.conditions]`, `[locations.entry_conditions]`, etc.
+The `{version, logic, items: [...]}` block on `[canvases.trigger.conditions]`, `[canvases.exit_block.choices.conditions]`, `[locations.entry_conditions]`, group-block `props.conditions`, substitution-rule `conditions`, stage-helper `conditions`, etc.
+
+> **⚠️ `version = "1.0"` IS MANDATORY — omit it and the gate FAILS OPEN.** The evaluator opens with
+> `if (!conditions.version || conditions.version !== '1.0') return true;` (`triggerConditionsSatisfied`,
+> v2.py:3312). A `conditions` block missing `version = "1.0"` is treated as **satisfied** — the `items`
+> are never checked, the gate always passes. **No build error, no validator catch.** This silently
+> ungates whatever it guards (locked rungs show from the start, daily caps don't cap, capstone-gated
+> choices appear early, ending forks open unearned). It bites **per-choice** conditions most, where
+> `conditions = { items = [...] }` is an easy thing to write. ALWAYS include `version = "1.0"` on EVERY
+> condition block — trigger, choice, group, substitution, entry, stage-helper. Grep guard before build:
+> `grep 'conditions = { items = \['` must return ZERO hits. (Live-caught in Last Call 2026-06-04.)
 
 ```toml
 [canvases.trigger.conditions]
@@ -1433,7 +1466,7 @@ A complete RTS-shape sandbox skeleton — copy-paste starting point. Trim/expand
 schema_version = "1.0"
 
 [project]
-slug = "test_game"
+id = "test_game"
 title = "Test Game"
 description = "Minimal RTS-shape sandbox skeleton."
 quests_engine = "v2"

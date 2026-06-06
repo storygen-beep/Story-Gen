@@ -1483,6 +1483,63 @@ setup.getCorruptionThreshold = function(item) {
     return 0;
 };
 
+// Human-readable summary of the conditions on an item that are NOT currently met.
+// Generic over any trait, using the same operator vocabulary as
+// triggerConditionsSatisfied so the message can never disagree with the gate.
+// Returns "" if nothing fails (or only un-describable items fail).
+setup.describeUnmetConditions = function(conditions) {
+    if (!conditions || !conditions.items) return "";
+    var sv = State.variables || {};
+    var traits = (sv.player && sv.player.core_traits) || {};
+    var flags = sv.flags || {};
+    var parts = [];
+    function cap(s) { s = String(s == null ? "" : s); return s.charAt(0).toUpperCase() + s.slice(1); }
+    function num(v) { var n = Number(v); return isNaN(n) ? null : n; }
+    for (var i = 0; i < conditions.items.length; i++) {
+        var it = conditions.items[i];
+        if (!it || typeof it !== 'object') continue;
+        if (it.type === 'trait') {
+            var key = it.trait_key;
+            var op = it.operator;
+            var want = it.value;
+            var cur = (it.subject === 'npc') ? null : num(traits[key]);
+            if (cur !== null) {
+                var sat = false;
+                if (op === 'gte') sat = cur >= want;
+                else if (op === 'gt') sat = cur > want;
+                else if (op === 'lte') sat = cur <= want;
+                else if (op === 'lt') sat = cur < want;
+                else if (op === 'eq') sat = cur === want;
+                else if (op === 'ne') sat = cur !== want;
+                if (sat) continue;
+            }
+            var label = cap(key);
+            var phrase;
+            if (op === 'gte') phrase = label + ' ' + want + '+';
+            else if (op === 'gt') phrase = label + ' above ' + want;
+            else if (op === 'lte') phrase = label + ' ' + want + ' or lower';
+            else if (op === 'lt') phrase = label + ' under ' + want;
+            else if (op === 'eq') phrase = label + ' exactly ' + want;
+            else if (op === 'ne') phrase = label + ' not ' + want;
+            else phrase = label + ' ' + op + ' ' + want;
+            if (cur !== null) phrase += ' (you have ' + cur + ')';
+            parts.push(phrase);
+        } else if (it.type === 'flag') {
+            var fkey = String(it.flag_key || '');
+            var fop = it.operator;
+            var v = flags[fkey];
+            var fsat = false;
+            if (fop === 'is_true') fsat = (v === true);
+            else if (fop === 'is_false') fsat = (v === false || v === undefined);
+            else if (fop === 'exists') fsat = Object.prototype.hasOwnProperty.call(flags, fkey);
+            if (fsat) continue;
+            var disp = cap(fkey.replace(/_/g, ' '));
+            parts.push(fop === 'is_false' ? ('Requires: not ' + disp) : ('Requires: ' + disp));
+        }
+    }
+    return parts.join(', ');
+};
+
 setup.buyItem = function(itemId) {
     var sv = State.variables;
     if (!sv.player || !sv.player.wardrobe) return false;
@@ -1500,7 +1557,11 @@ setup.buyItem = function(itemId) {
     if (money < price) return false;
 
     if (item.conditions && item.conditions.items && item.conditions.items.length > 0) {
-        if (!setup.triggerConditionsSatisfied(item.conditions)) return false;
+        if (!setup.triggerConditionsSatisfied(item.conditions)) {
+            var why = setup.describeUnmetConditions(item.conditions);
+            setup.queueGatedNotification(why ? ("Not yet — needs " + why) : "Not available yet.");
+            return false;
+        }
     }
 
     sv.player.core_traits.money -= price;
@@ -1637,6 +1698,7 @@ jQuery(document).on('click', '.shop-buy-btn', function(e) {
     var itemId = jQuery(this).data('item-id');
     if (itemId) {
         setup.buyItem(String(itemId));
+        setup.showEffectNotification();
         Engine.play("ShopPage");
     }
 });
@@ -10633,6 +10695,44 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                                     "is_phone": True,
                                 }
 
+        # Also register flags the ENGINE sets (not any canvas): the rent
+        # eviction_flag (set when the weekly payment is missed past grace) and any
+        # [engine.daily_tick] flagEffects with op == "set". These are legitimately
+        # set at runtime but have no canvas setter, so a trigger gated on them is
+        # valid — register them here so the flag-chain validator doesn't raise a
+        # false "NEVER SET". They are engine-global (no location/schedule binding),
+        # so give a human schedule hint to satisfy the missing-hint check.
+        # Read straight from project.metadata: in the validation path the generator
+        # is constructed without a project and `self.project` is assigned afterward,
+        # so the __init__-populated rent/daily_tick attributes are stale defaults.
+        _engine_meta = (getattr(self, "project", None) and self.project.metadata) or {}
+        _rent = _engine_meta.get("rent_settings", {}) or {}
+        if _rent.get("enabled") and _rent.get("eviction_flag"):
+            ef = _rent["eviction_flag"]
+            if ef not in flag_unlock_map:
+                flag_unlock_map[ef] = {
+                    "canvas_name": "the weekly payment (rent system)",
+                    "canvas_id": None,
+                    "location": None,
+                    "schedule": "when the payment is missed past grace",
+                    "canvas_conditions": None,
+                    "npc_name": _rent.get("collector_npc", "") or "player",
+                    "is_engine": True,
+                }
+        for fe in ((_engine_meta.get("daily_tick", {}) or {}).get("flagEffects", []) or []):
+            if fe.get("op") == "set":
+                fk = fe.get("flag")
+                if fk and fk not in flag_unlock_map:
+                    flag_unlock_map[fk] = {
+                        "canvas_name": "the daily cycle (engine.daily_tick)",
+                        "canvas_id": None,
+                        "location": None,
+                        "schedule": "each new day",
+                        "canvas_conditions": None,
+                        "npc_name": "player",
+                        "is_engine": True,
+                    }
+
         return flag_unlock_map
 
     def validate_flag_chains(self) -> list:
@@ -11301,6 +11401,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         locked_text_threshold = choice_tuple[15] if len(choice_tuple) > 15 else ''
                         quest_effects_list = choice_tuple[16] if len(choice_tuple) > 16 else []
                         schedule_effects_list = choice_tuple[17] if len(choice_tuple) > 17 else []
+                        choice_costs_list = choice_tuple[18] if len(choice_tuple) > 18 else []
 
                         # ── Loop: get role for this choice ──
                         choice_role = loop_choice_roles.get(choice_idx, {})
@@ -11311,26 +11412,58 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         if is_loop_base and role == 'non_terminal' and choice_node_slug:
                             passage_body += f'<<if not $game_state.loop_visited.includes("{choice_node_slug}")>>\n'
 
-                        # Open conditional gate if conditions present
+                        # Open gate(s): main-lock `conditions` (OUTER) then per-choice
+                        # `costs` affordability (INNER). The unlocked-choice span lives
+                        # only in the affordable branch so the cost-blocked rung renders
+                        # as a plain greyed span (not inside the highlight wrapper).
                         choice_key = None
+                        cond_expr = None
+                        # Normalize per-choice costs → JSON once (None = no cost gate).
+                        choice_costs_js = None
+                        if choice_costs_list:
+                            try:
+                                _norm_costs = [
+                                    {"trait": str(cc["trait"]), "value": int(cc["value"])}
+                                    for cc in choice_costs_list
+                                    if isinstance(cc, dict) and "trait" in cc and "value" in cc
+                                ]
+                                if _norm_costs:
+                                    choice_costs_js = json.dumps(_norm_costs)
+                            except (KeyError, TypeError, ValueError) as e:
+                                logger.warning("Invalid costs for choice '%s': %s", choice_text, e)
+                                choice_costs_js = None
+                        # Outer: main-lock conditions
                         if choice_conditions:
                             try:
                                 conditions_js = json.dumps(choice_conditions)
                                 passage_body += f"<<if setup.triggerConditionsSatisfied({conditions_js})>>\n"
-                                conditional_expr_parts.append(f"setup.triggerConditionsSatisfied({conditions_js})")
+                                cond_expr = f"setup.triggerConditionsSatisfied({conditions_js})"
                                 # Generate choice key for unlock highlighting
                                 choice_key = f"{canvas.id}:cc{cc_counter}"
                                 cc_counter += 1
-                                # Highlight wrapper for newly unlocked conditional choices
-                                # Uses @class dynamic attribute to avoid SugarCube HTML parsing errors
-                                # (conditional <span> open/close in separate <<if>> blocks causes "cannot find closing tag")
-                                passage_body += f'<span @class="setup.isChoiceVisited(\'{choice_key}\') ? \'\' : \'unlocked-choice\'">\n'
                             except (TypeError, ValueError) as e:
                                 logger.warning(
                                     "Error serializing choice conditions for '%s': %s. Treating as unconditional.",
                                     choice_text, e
                                 )
-                                has_unconditional_choice = True
+                        # Inner: per-choice cost affordability (wraps link + highlight span)
+                        if choice_costs_js:
+                            passage_body += f"<<if setup.checkCostsAffordable({choice_costs_js})>>\n"
+                        # Highlight wrapper for newly unlocked conditional choices.
+                        # Uses @class dynamic attribute to avoid SugarCube HTML parsing
+                        # errors (conditional <span> open/close in separate <<if>> blocks
+                        # causes "cannot find closing tag").
+                        if choice_key:
+                            passage_body += f'<span @class="setup.isChoiceVisited(\'{choice_key}\') ? \'\' : \'unlocked-choice\'">\n'
+                        # No-exits fallback: a choice is "available" only if BOTH its
+                        # main-lock AND its cost are satisfied. Register the combined
+                        # expression; a choice with neither gate is truly unconditional.
+                        _sat_parts = [p for p in (
+                            cond_expr,
+                            (f"setup.checkCostsAffordable({choice_costs_js})" if choice_costs_js else None),
+                        ) if p]
+                        if _sat_parts:
+                            conditional_expr_parts.append("(" + " and ".join(_sat_parts) + ")")
                         else:
                             has_unconditional_choice = True
 
@@ -11364,7 +11497,10 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                                 escaped_choice_text = choice_text.replace('"', '\\"').replace('[', '&#91;').replace(']', '&#93;')
                                 passage_body += f'<<link "{escaped_choice_text}" "{target_passage}">>'
                         # Clear pending effects at start
-                        has_effects = (trait_effects and isinstance(trait_effects, list)) or (flag_effects and isinstance(flag_effects, list)) or (self.clothing_enabled and wardrobe_effects and isinstance(wardrobe_effects, list))
+                        # Per-choice costs deduct here too (the spend), so they count
+                        # toward has_effects (clear+flush pendingEffects) even if the
+                        # choice carries no other effects.
+                        has_effects = (trait_effects and isinstance(trait_effects, list)) or (flag_effects and isinstance(flag_effects, list)) or (self.clothing_enabled and wardrobe_effects and isinstance(wardrobe_effects, list)) or bool(choice_costs_js)
                         if has_effects:
                             passage_body += "<<script>>setup.pendingEffects = [];<</script>>"
                         # Emit trait + flag + wardrobe effects via shared inline helpers
@@ -11373,6 +11509,12 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         passage_body += self._emit_trait_effects_inline(trait_effects, ctx)
                         passage_body += self._emit_flag_effects_inline(flag_effects, ctx)
                         passage_body += self._emit_wardrobe_effects_inline(wardrobe_effects, ctx)
+                        # Deduct per-choice costs (the resource spend) — negative
+                        # applyAndNotifyTrait per cost, mirroring canvas-level deductCosts.
+                        if choice_costs_js:
+                            for _cc in _norm_costs:
+                                _ct = str(_cc["trait"]).replace('"', '\\"')
+                                passage_body += f'<<script>>setup.applyAndNotifyTrait("player", null, "{_ct}", "add", {-int(_cc["value"])}, false, null);<</script>>'
                         # Emit modifier effects (apply temporary modifiers)
                         if modifier_effects_list and isinstance(modifier_effects_list, list):
                             for me in modifier_effects_list:
@@ -11444,12 +11586,22 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         # Then emit time progression and close link
                         passage_body += f"<<script>>advanceTime({int(time_minutes)});<</script>><</link>><br>\n"
 
-                        # Close conditional gate if opened
-                        if choice_conditions:
-                            # Close highlight wrapper (always-present span with dynamic @class)
-                            if choice_key:
-                                passage_body += '</span>\n'
-                            # ── Rejection / locked-visible system ──
+                        # ── Close gate(s): span, then INNER cost rung, then OUTER conditions ──
+                        # Close highlight wrapper (only opened when a real conditions gate exists).
+                        if choice_key:
+                            passage_body += '</span>\n'
+                        # Inner cost-affordability rung — always greyed-visible when unaffordable
+                        # (independent of show_when_locked, which governs the main-lock tier below).
+                        if choice_costs_js:
+                            # Keep the ACTION label and append the requirement in a bracket
+                            # beside it (don't replace the text) — matches the main-lock
+                            # locked_text style, e.g. "Work a shift 🍺 (Requires 15 Energy (you have 6))".
+                            _esc_choice_label = choice_text.replace('"', '\\"').replace('[', '&#91;').replace(']', '&#93;')
+                            passage_body += "<<else>>\n"
+                            passage_body += f'<span class="locked-choice" title="{_esc_choice_label}">{_esc_choice_label} (<<= setup.getCostBlockedMessage({choice_costs_js})>>)</span><br>\n'
+                            passage_body += "<</if>>\n"
+                        # ── Rejection / locked-visible system (main-lock tier) ──
+                        if cond_expr is not None:
                             if show_when_locked:
                                 passage_body += "<<else>>\n"
                                 escaped_locked = (locked_text or choice_text).replace('"', '\\"').replace('[', '&#91;').replace(']', '&#93;')
@@ -11647,8 +11799,11 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         passage_body += "<</for>>\n"
                         passage_body += "</div>\n"
                         passage_body += "<</if>>\n"
-                        # (3) Continue fallback (preserved)
-                        passage_body += "No available choices<br>\n"
+                        # (3) Continue fallback (player-facing escape). No "No available
+                        # choices" line — when rungs are cost/condition-locked they're still
+                        # shown greyed with their own reason ("Requires N Energy …"), so that
+                        # text was redundant and contradictory. The dev banner above (gated on
+                        # $flags.debug_mode) still flags genuine authoring dead-ends.
                         passage_body += "[[Continue->" + return_target + "]]\n"
                         passage_body += "<</if>>\n"
                     passage_body += "<</nobr>>\n"
@@ -11888,6 +12043,8 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     # doc 45 G4/G5 — quest + scheduled effects
                     quest_effects = choice.get('questEffects', []) or []
                     schedule_effects = choice.get('scheduleEffects', []) or []
+                    # Per-choice resource costs (energy/hygiene tier under `conditions`)
+                    choice_costs = choice.get('costs', []) or []
 
                     # Resolve target based on targetType.
                     # Broken refs route to _BrokenExitFallback (loud throw) instead of
@@ -11946,6 +12103,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         locked_text_threshold,  # S4 — position 15
                         quest_effects,           # doc 45 G4 — position 16
                         schedule_effects,        # doc 45 G5 — position 17
+                        choice_costs,            # per-choice costs — position 18
                     ))
 
                 return processed_choices
@@ -14681,6 +14839,61 @@ if (clothingMsg) {
         <<print _slPrefix>>
       </div>
     <</if>>
+  <<elseif _item.type is "npc_panel">>
+    /* RTS-style per-NPC card: name header + rows (arousal band / corruption / location).
+       Location uses setup.getNpcLocation — the SAME schedule source the Schedule page uses. */
+    <<set _npId to _item.npc_id>>
+    <<set _npObj to (setup.npc_slug_map && setup.npc_slug_map[_npId]) ? State.variables.npcs[setup.npc_slug_map[_npId]] : (State.variables.npcs ? State.variables.npcs[_npId] : null)>>
+    <<if _npObj>>
+      <<set _npRows to _item.rows || ["arousal"]>>
+      <<set _npHeader to _item.label || _npObj.name || _npId>>
+      <div class="sidebar-item npc-panel-item" id="sidebar-npc-panel-<<print _si>>">
+        <div class="npc-panel-header"><<print _npHeader>></div>
+        <<for _npri to 0; _npri lt _npRows.length; _npri++>>
+          <<set _npRow to _npRows[_npri]>>
+          <<if _npRow is "arousal">>
+            <<if not (setup.hiddenTraits && setup.hiddenTraits.includes("arousal"))>>
+              <<set _npAr to (_npObj.core_traits) ? (_npObj.core_traits.arousal || 0) : 0>>
+              <<set _npBands to _item.arousal_bands || [{"min":0,"max":0,"text":"❄️"},{"min":1,"max":1,"text":"🔥"},{"min":2,"max":2,"text":"🔥🔥"},{"min":3,"max":3,"text":"🔥🔥🔥"}]>>
+              <<set _npArText to "">>
+              <<for _nbi to 0; _nbi lt _npBands.length; _nbi++>>
+                <<set _nb to _npBands[_nbi]>>
+                <<if _npArText is "" and _nb.min isnot undefined and _nb.max isnot undefined and _npAr gte _nb.min and _npAr lte _nb.max>>
+                  <<set _npArText to _nb.text>>
+                <</if>>
+              <</for>>
+              <div class="sidebar-row"><span class="sidebar-label">🔥 Arousal</span> <span class="sidebar-value"><<print _npArText>></span></div>
+            <</if>>
+          <<elseif _npRow is "corruption">>
+            <<if not (setup.hiddenTraits && setup.hiddenTraits.includes("corruption"))>>
+              <<set _npCorr to (_npObj.core_traits) ? (_npObj.core_traits.corruption || 0) : 0>>
+              <<set _npCorrOut to _npCorr>>
+              <<if _item.corruption_max_value isnot undefined and _npCorr gte _item.corruption_max_value>>
+                <<set _npCorrOut to (_item.corruption_max_label || "MAX")>>
+              <</if>>
+              <div class="sidebar-row"><span class="sidebar-label">🫦 Corruption</span> <span class="sidebar-value"><<print _npCorrOut>></span></div>
+            <</if>>
+          <<elseif _npRow is "location">>
+            <<set _npLoc to setup.getNpcLocation(_npId)>>
+            <<set _npLocName to _npLoc ? (setup._locNameFromUuid(_npLoc.location) || _npLoc.location) : (_item.away_label || "Away")>>
+            <div class="sidebar-row"><span class="sidebar-label">📍 Location</span> <span class="sidebar-value"><<print _npLocName>></span></div>
+          <<elseif _npRow is "next">>
+            /* Next-milestone block — EXACT Quests-page parity: reuses setup.renderQuestsGoalBlock, so
+               the card shows the same goal block as the Quests page — 🎯 To advance + ◯ live progress
+               (climbing) / 🔓 Ready + 📍 + 🕒 (ready) / ✓ Arc complete (terminal). No flavor/tip text. */
+            <<if setup.pickQuestsCard and setup.renderQuestsGoalBlock>>
+              <<set _npCard to setup.pickQuestsCard(_npId)>>
+              <<if _npCard>>
+                <<set _npGoalBlock to setup.renderQuestsGoalBlock(_npCard, setup.evaluateGoals(_npCard))>>
+                <<if _npGoalBlock>>
+                  <div class="npc-panel-next"><<print _npGoalBlock>></div>
+                <</if>>
+              <</if>>
+            <</if>>
+          <</if>>
+        <</for>>
+      </div>
+    <</if>>
   <</if>>
 <</for>>
 </div>
@@ -16151,6 +16364,50 @@ if (clothingMsg) {
     background: linear-gradient(90deg, #ff6b6b, #ff1744);
     box-shadow: 0 0 6px rgba(255, 107, 107, 0.3);
 }
+
+/* NPC panel card (npc_panel sidebar item) — RTS House-card: header strip + label/value rows */
+.npc-panel-item {
+    text-align: left;
+    padding: 0;
+    margin-top: 0.5rem;
+    background: var(--theme-surface);
+    border: 1px solid var(--theme-border);
+    border-radius: 6px;
+    overflow: hidden;
+}
+.npc-panel-header {
+    padding: 5px 8px;
+    background: var(--theme-surface-alt);
+    border-bottom: 1px solid var(--theme-border);
+    color: var(--theme-text-strong);
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+.npc-panel-item .sidebar-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+.npc-panel-item .sidebar-label {
+    color: var(--theme-text-muted);
+    white-space: nowrap;
+}
+.npc-panel-item .sidebar-value {
+    color: var(--theme-text-strong);
+    font-weight: 500;
+    text-align: right;
+}
+.npc-panel-next {
+    margin-top: 4px;
+    padding: 4px 8px 2px;
+    border-top: 1px solid var(--theme-border);
+}
+/* the inner goal block reuses the Quests-page classes (.quests-goal/.quests-ready/.quests-where) */
 
 /* Dev Mode Controls */
 .dev-adj-btn {
