@@ -83,18 +83,36 @@ To `games/<slug>/design_book.md` — the intent record (a NEW artifact; LS's nea
      downstream; author it FIRST** (without it the locked-visible rungs have nothing to telegraph).
   2. **Voice spec** — how this NPC sounds; RTS-flat register for Lane 1/2/3.
   3. **Stat ladder + gating spine** — stage flags + per-rung thresholds, AND the **spine** trait by
-     arc shape (peer → `relation` milestones; family/slow-burn/escalation → player `corruption` × NPC
-     `arousal`; leverage → `money`; service → `relation`; never default to `relation` —
-     `references/trait-design.md`). Per-tier **vocab ceiling** here too (`doctrine/08`,
-     default-to-maximum-explicit).
+     arc shape (peer → `relation`; family/slow-burn/escalation → player `corruption` odometer + NPC
+     `arousal` throttle; leverage → `money`; service → `relation`; never default to `relation`, and
+     never make player `corruption` the universal spine — `references/trait-design.md`). Note the
+     **throttle/odometer split**: the **odometer** (permanent: `corruption`/`relation`) gates rungs AND
+     one-shot capstones; the **throttle** (`arousal`, resets at climax) gates the **repeatable** sex
+     loop, never a capstone. Per-tier **vocab ceiling** here too (`doctrine/08`, default-to-maximum-explicit).
   4. **Per-rung pretext shapes** — the in-fiction setup menu for each ladder rung (the content menu).
   5. **Lane-by-lane map** — the budget compiled into specific canvas slots per location/window.
-  6. **Capstones** — each scripted moment: type A/B/C + trigger + the flag it writes (Pattern F F1–F5
-     for forks, `doctrine/04` §4). **Commit these up front** so capstone beats are authorable later.
+  6. **Capstones** — each scripted moment: type A/B/C + trigger + **the odometer threshold it gates on**
+     (`corruption`/`relation` + flags — NEVER the `arousal` throttle, which is for the repeatable loop)
+     + the flag it writes (Pattern F F1–F5 for forks, `doctrine/04` §4). Committing the gate here (not
+     just the flag) keeps the capstone on the same odometer the hub builds, instead of defaulting to
+     global corruption at
+     continue time. **Commit these up front** so capstone beats are authorable later.
   7. **Per-NPC anti-patterns** — what NOT to do for this NPC (e.g. empty Lane 3 for peer/dating).
   8. **Cross-arc writes / reads** — flags this NPC's scenes set + flags they read from other arcs.
   9–10. **Cross-references + acceptance criteria** — the arc's "done" check.
   The per-beat loop reads this instead of re-deriving voice / ceiling / ladder / capstone intent.
+
+## Step 3.5 — Build the content roster (decide WHAT scenes exist)
+Read `references/content-design.md` and run the content-design pass into a **`## Content roster`**
+section of `design_book.md`. This is the creative-direction step the briefs alone don't cover — the R7
+brief gives each NPC a *budget of slots*; the roster decides *what fills them*, across the WHOLE cast
+and — critically — the **player/world lewd-activity catalog** the lane model omits (solo self-acts,
+location flashing, public dares, job-lewd) that feeds the player's `corruption`/`exhibitionism`
+odometers. Walk every location and every NPC against the archetype catalog; tier each row on the
+player-corruption ladder; **balance the feeder supply against the NPC seduction floors** so the floors
+are reachable through ordinary play (a game with arcs but no feeders starves — the Last Call finding).
+Size to `scope_mode` (slice → a thin but tier-complete feeder spine + the gold NPC's full arc). The
+roster seeds the ledger `plan` rows alongside the roadmap; the continue loop fills a roster row per beat.
 
 ## Step 4 — Write the scaffold TOML (skeleton + the opening canvas only)
 - `games/<slug>/toml_phases/0_systems_spec.toml` — system blocks at their correct homes if used
