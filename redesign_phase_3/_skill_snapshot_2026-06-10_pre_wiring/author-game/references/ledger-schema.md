@@ -9,11 +9,7 @@ not managed by any code module. Follow the invariants below when editing it.
   "game_slug": "late_shifts",       // matches games/<slug>/
   "schema_version": 2,
   "book_revision": 1,               // bumped when design_book.md is amended
-  "pipeline_phase": "authoring",    // which pipeline step we're in — the phase-aware dispatch reads THIS,
-                                    //   not "does the file exist". One of: "setup" | "top_level" |
-                                    //   "casting" | "npc_arcs" | "roster" | "authoring". The ledger is
-                                    //   CREATED at setup carrying this; structure_registry/plan stay
-                                    //   empty until "authoring". (Step 0 = fantasy is pre-ledger.)
+  "scope_mode": "full_game",        // "full_game" | "slice" — set at setup; drives budgets + Phase 2+ flow
   "npcs": {                         // per-NPC intent from the R7 brief; sizes the continue loop
     "npc_sal": {
       "arc_shape": "slow-burn family",   // family/ambient|slow-burn family|peer/dating|service|antagonist
@@ -50,12 +46,10 @@ not managed by any code module. Follow the invariants below when editing it.
 }
 ```
 
-**`pipeline_phase` + `npcs`** (v2): `pipeline_phase` is set when the ledger is created at setup and
-updated as the pipeline advances; the **phase-aware dispatch reads it** to resume at the right step
-(replacing the old "does `authoring_state.json` exist?" binary — slice was removed, so there is no
-`scope_mode`). `npcs.<id>` carries each NPC's R7-brief intent — `arc_shape`, `lane_budget` (target
-counts the continue loop authors *toward*, decremented as beats land), and `vocab_ceiling`. (v1 ledgers
-without these fields are fine — a missing `pipeline_phase` with a populated `plan` means `authoring`.)
+**`scope_mode` + `npcs`** (v2): `scope_mode` (`full_game` | `slice`) is set at setup and read before
+sizing any arc. `npcs.<id>` carries each NPC's R7-brief intent — `arc_shape`, `lane_budget` (target
+counts the continue loop authors *toward*, decremented as beats land), and `vocab_ceiling`. (v1
+ledgers without these fields are fine — treat missing `scope_mode` as `full_game`.)
 
 **Statuses:** `planned` → `active` (being authored this turn) → `authored` (canvases written)
 → `validated` (passed merge + schema/flag-chain + doctrine self-audit).

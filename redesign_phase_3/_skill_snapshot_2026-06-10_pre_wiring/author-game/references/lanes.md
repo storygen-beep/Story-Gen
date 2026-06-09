@@ -49,9 +49,10 @@ stale copy.** How the skill applies that budget:
   rows to complete an NPC's day without manufacturing dead presence. Only **reachable** rows earn a
   hub; **locked** rows follow the unlock contract (§5.4).
 - Author against the **shape**, never by cloning the gold-standard NPC (§8.5).
-- **Budgets are always full-game.** Author each arc to its full per-shape budget (slice scope was
-  removed — every game is the complete game). Locked-visible rungs still telegraph the ladder ahead, but
-  the whole budget is the target, not a fraction of it.
+- **These are `full_game` targets.** At `scope_mode = slice` (see `setup-interview.md`), author
+  ~30–50% of each budget for ONE gold-standard NPC + minimum-contract depth for the rest, with
+  locked-visible rungs telegraphing the deferred remainder (`doctrine/03` §1). Read the game's
+  `scope_mode` from the ledger before sizing an arc.
 
 ---
 
@@ -136,7 +137,7 @@ The hardest lane; RTS's biggest. Two canvases per activity:
   charged shift. The setup is genuinely a chore; the seduction happens *to* her.
 - **A solo activity is also the game's earning/utility loop** — "work a shift" earns money and is the
   natural Lane 3 host. Splitting work (host) from the NPC hub (Lane 1) is the §8.2 rule in action.
-- **A solo host can fire a PLAYER-LEWD event, not only an NPC walk-in** (`references/step-5-roster.md`).
+- **A solo host can fire a PLAYER-LEWD event, not only an NPC walk-in** (`references/content-design.md`).
   The dispatcher above routes an *NPC* into the activity; the same host shape ALSO carries the
   **player/world lewd track** — solo self-acts, location flashing/exhibitionism, public dares, job-lewd
   — the *base activity itself being lewd*, gated on the **player** `corruption`/`exhibitionism` tier and
