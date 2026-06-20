@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-06-06T12:32:38.848Z",
+  "total_observed_edges": 0,
+  "total_synthetic_edges": 1,
+  "total_play_log_entries": 17,
+  "total_timeline_entries": 14,
+  "initial_passage": "Menu",
+  "orphan_clicks": [],
+  "observed_edges": [],
+  "synthetic_edges": [
+    {
+      "cmd": "eval",
+      "from": "Bedroom",
+      "to": "Bedroom",
+      "observation_count": 13,
+      "first_observed_ts": 1780748751427,
+      "last_observed_ts": 1780749100864,
+      "effect_aggregate": {}
+    }
+  ],
+  "coverage": {
+    "static_edges_total": 460,
+    "observed_static_edges": 0,
+    "unobserved_static_edges": 460,
+    "coverage_ratio": 0,
+    "observed_only_edges": 0
+  }
+}

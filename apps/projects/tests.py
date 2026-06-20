@@ -666,6 +666,74 @@ class RentEvictionModeTests(SimpleTestCase):
         self.assertEqual(template.rent_eviction_flag, "forced_deal")
 
 
+class EngineSetFlagUnlockMapTests(SimpleTestCase):
+    """Regression: the flag-chain validator must recognize ENGINE-set flags as
+    legitimate setters — the rent eviction_flag (set on eviction past grace) and
+    [engine.daily_tick] flagEffects with op='set'. Otherwise a canvas trigger
+    gated on them fails the build with a false 'NEVER SET' (the trap that forced
+    Last Call's Boyd summons onto a week-1 debt_explained gate instead of the
+    correct 'fell behind' bar_seized gate).
+
+    Critically, in the validation path the generator is constructed WITHOUT a
+    project and `.project` is assigned afterward, so _build_flag_unlock_map must
+    read project.metadata directly — not the stale __init__-populated rent attrs.
+    """
+
+    def _gen_with_meta(self, metadata, *, v1=False):
+        from types import SimpleNamespace
+
+        if v1:
+            from apps.game_generation.twee_comprehensive.generators.v1 import (
+                TweeComprehensiveGeneratorV1 as Gen,
+            )
+        else:
+            from apps.game_generation.twee_comprehensive.generators.v2 import (
+                TweeComprehensiveGeneratorV2 as Gen,
+            )
+        gen = Gen()
+        # mirror the validation path: project assigned after construction
+        gen.project = SimpleNamespace(metadata=metadata, starting_canvas=None)
+        return gen
+
+    def test_rent_eviction_flag_registered_with_hint(self):
+        gen = self._gen_with_meta({
+            "rent_settings": {
+                "enabled": True,
+                "eviction_flag": "bar_seized",
+                "collector_npc": "npc_collector",
+            },
+        })
+        m = gen._build_flag_unlock_map([], {}, {})
+        self.assertIn("bar_seized", m)
+        # carries a schedule hint so it also clears the missing-hint check
+        self.assertTrue(m["bar_seized"].get("schedule"))
+        self.assertTrue(m["bar_seized"].get("is_engine"))
+
+    def test_disabled_rent_not_registered(self):
+        gen = self._gen_with_meta({
+            "rent_settings": {"enabled": False, "eviction_flag": "bar_seized"},
+        })
+        self.assertNotIn("bar_seized", gen._build_flag_unlock_map([], {}, {}))
+
+    def test_daily_tick_set_flag_registered_but_unset_excluded(self):
+        gen = self._gen_with_meta({
+            "daily_tick": {"flagEffects": [
+                {"flag": "curfew_on", "op": "set"},
+                {"flag": "talked_today", "op": "unset"},
+            ]},
+        })
+        m = gen._build_flag_unlock_map([], {}, {})
+        self.assertIn("curfew_on", m)          # op='set' → a real engine setter
+        self.assertNotIn("talked_today", m)    # op='unset' is a clear, not a setter
+
+    def test_v1_parity_rent_flag_registered(self):
+        gen = self._gen_with_meta(
+            {"rent_settings": {"enabled": True, "eviction_flag": "bar_seized"}},
+            v1=True,
+        )
+        self.assertIn("bar_seized", gen._build_flag_unlock_map([], {}, {}))
+
+
 # -- Integration: fixture TOML → generator → Twee substring assertions -------
 
 

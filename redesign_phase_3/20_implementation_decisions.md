@@ -85,7 +85,23 @@ idea (dropped as over-engineering).
 - When a thread grows up: a friend-who-becomes-playable is a **new NPC** back through casting; a ripple
   is a **`cross_npc` beat** at authoring. No system, no diagram.
 
-**Touch-list:** `06` (add the rough sketch to what casting assigns + the output artifact).
+**REFINED 2026-06-10 (the machine — `22`).** The 2026-06-10 field survey (`21`) reopened this. What
+decision 7 correctly killed was a **bookkeeping diagram with no payoff**. But the survey shows cross-wiring
+is *where the depth lives* (the deepest games are one interconnected machine, not parallel arcs). So the
+"web" **returns reconceived** — not as a per-NPC matrix/checkpoint, but as **the machine: a designed
+top-level layer** (`22`), settled up front in Step 2 beside the cascade/economy/frontier, written as
+plain-language intent in the design book (the same status the cascade already has), realized with ordinary
+engine knobs (player flags + `<npc>_stage` traits + banded choices) and ordinary beat `deps` — **no new
+ledger field, no diagram.** Casting's rough-sketch threads stay the **seed**; they now *plug into* a machine
+designed up front rather than being the whole cross-NPC story. Scope: forms 1 (arc→arc depth gates) + 2
+(arc↔economy circulation); form 3 (finished arc → resource) is **G6, deferred**. This refines — does not
+reverse — decision 7: the light threads remain; the machine gives them a spine to attach to.
+
+**Touch-list:** `06` (add the rough sketch + the NPC's "place in the machine" to what casting assigns +
+the output artifact); **+ the machine layer** — NEW `22`; `13` (form-2a fusion bullet); `07` §8 = the arc's
+wiring contract; `18` self-check = the machine check (DAG + telegraph); skill `step-2-toplevel.md` §7,
+`step-3-casting.md`, `step-4-npc-arcs.md`, `step-5-roster.md`, `beat-authoring.md`, `design_book.md`
+`## The machine` section.
 
 ### 8. Fix the stale step numbering in `01`
 `01`'s "what moved out of setup" table still uses the **old 5-step** scheme (NPC arcs = Step 3, roster =

@@ -1,0 +1,795 @@
+{
+  "generated_at": "2026-06-05T14:00:35.570Z",
+  "total_observed_edges": 8,
+  "total_synthetic_edges": 4,
+  "total_play_log_entries": 73,
+  "total_timeline_entries": 55,
+  "initial_passage": "Menu",
+  "orphan_clicks": [],
+  "observed_edges": [
+    {
+      "from": "Bedroom",
+      "clicked_text": null,
+      "to": "Bedroom",
+      "observation_count": 8,
+      "classifications": {
+        "branch": 3,
+        "observe": 5
+      },
+      "first_observed_ts": 1780667262767,
+      "last_observed_ts": 1780667555805,
+      "same_state_hits": 6,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "game.random": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            5,
+            21
+          ],
+          "after_values": [
+            9,
+            7
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": -14,
+            "max_delta": 4,
+            "mean_delta": -5,
+            "always_same_delta": false
+          }
+        }
+      }
+    },
+    {
+      "from": "Bedroom",
+      "clicked_text": "Nap 💤",
+      "to": "Bedroom",
+      "observation_count": 3,
+      "classifications": {
+        "branch": 3
+      },
+      "first_observed_ts": 1780667363893,
+      "last_observed_ts": 1780667370548,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "game.random": {
+          "count": 3,
+          "changes_count": 3,
+          "kinds": {
+            "changed": 3
+          },
+          "before_values": [
+            9,
+            23,
+            12
+          ],
+          "after_values": [
+            23,
+            12,
+            21
+          ],
+          "numeric_stats": {
+            "sample_count": 3,
+            "min_delta": -11,
+            "max_delta": 14,
+            "mean_delta": 4,
+            "always_same_delta": false
+          }
+        }
+      }
+    },
+    {
+      "from": "Bedroom",
+      "clicked_text": null,
+      "to": "BedroomStudy",
+      "observation_count": 2,
+      "classifications": {
+        "branch": 2
+      },
+      "first_observed_ts": 1780667608622,
+      "last_observed_ts": 1780667884100,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "game.dice": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            0,
+            4
+          ],
+          "after_values": [
+            5,
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": -1,
+            "max_delta": 5,
+            "mean_delta": 2,
+            "always_same_delta": false
+          }
+        },
+        "game.lastPassage": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            "History",
+            "BedroomSleep"
+          ],
+          "after_values": [
+            "Bedroom",
+            "Bedroom"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            7,
+            28
+          ],
+          "after_values": [
+            22,
+            19
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": -9,
+            "max_delta": 15,
+            "mean_delta": 3,
+            "always_same_delta": false
+          }
+        }
+      }
+    },
+    {
+      "from": "Bedroom",
+      "clicked_text": "Dev",
+      "to": "Bedroom",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1780667198965,
+      "last_observed_ts": 1780667198965,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "rightSidebarTab": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "game"
+          ],
+          "after_values": [
+            "dev"
+          ],
+          "numeric_stats": null
+        }
+      }
+    },
+    {
+      "from": "Bedroom",
+      "clicked_text": "Add Day",
+      "to": "Bedroom",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1780667210854,
+      "last_observed_ts": 1780667210854,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            24
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -19,
+            "max_delta": -19,
+            "mean_delta": -19,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "BedroomSleep",
+      "clicked_text": null,
+      "to": "BedroomSleep",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1780667826368,
+      "last_observed_ts": 1780667826368,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "game.randomMedia": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "sleep1.webp"
+          ],
+          "after_values": [
+            "sleep.webp"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            10
+          ],
+          "after_values": [
+            24
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 14,
+            "max_delta": 14,
+            "mean_delta": 14,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "BedroomSleep",
+      "clicked_text": null,
+      "to": "Bedroom",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1780667881675,
+      "last_observed_ts": 1780667881675,
+      "same_state_hits": 0,
+      "is_self_loop": false,
+      "effect_aggregate": {
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "BedroomStudy"
+          ],
+          "after_values": [
+            "BedroomSleep"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            24
+          ],
+          "after_values": [
+            28
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 4,
+            "max_delta": 4,
+            "mean_delta": 4,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "from": "BedroomStudy",
+      "clicked_text": null,
+      "to": "BedroomStudy",
+      "observation_count": 1,
+      "classifications": {
+        "branch": 1
+      },
+      "first_observed_ts": 1780667945679,
+      "last_observed_ts": 1780667945679,
+      "same_state_hits": 0,
+      "is_self_loop": true,
+      "effect_aggregate": {
+        "dev.devMode": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            true
+          ],
+          "after_values": [
+            false
+          ],
+          "numeric_stats": null
+        },
+        "rightSidebarTab": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "dev"
+          ],
+          "after_values": [
+            "game"
+          ],
+          "numeric_stats": null
+        }
+      }
+    }
+  ],
+  "synthetic_edges": [
+    {
+      "cmd": "eval",
+      "from": "Bedroom",
+      "to": "Bedroom",
+      "observation_count": 19,
+      "first_observed_ts": 1780666935643,
+      "last_observed_ts": 1780667587420,
+      "effect_aggregate": {
+        "game.random": {
+          "count": 3,
+          "changes_count": 3,
+          "kinds": {
+            "changed": 3
+          },
+          "before_values": [
+            24,
+            5,
+            21
+          ],
+          "after_values": [
+            5,
+            9,
+            7
+          ],
+          "numeric_stats": {
+            "sample_count": 3,
+            "min_delta": -19,
+            "max_delta": 4,
+            "mean_delta": -9.6667,
+            "always_same_delta": false
+          }
+        },
+        "player.energy": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            100,
+            40
+          ],
+          "after_values": [
+            40,
+            100
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": -60,
+            "max_delta": 60,
+            "mean_delta": 0,
+            "always_same_delta": false
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "BedroomStudy",
+      "to": "BedroomStudy",
+      "observation_count": 9,
+      "first_observed_ts": 1780667610085,
+      "last_observed_ts": 1780667996607,
+      "effect_aggregate": {
+        "game.dice": {
+          "count": 4,
+          "changes_count": 4,
+          "kinds": {
+            "changed": 4
+          },
+          "before_values": [
+            0,
+            5,
+            5,
+            4
+          ],
+          "after_values": [
+            5,
+            4,
+            4,
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 4,
+            "min_delta": -1,
+            "max_delta": 5,
+            "mean_delta": 0.5,
+            "always_same_delta": false
+          }
+        },
+        "game.lastPassage": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            "History",
+            "BedroomSleep"
+          ],
+          "after_values": [
+            "Bedroom",
+            "Bedroom"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 4,
+          "changes_count": 4,
+          "kinds": {
+            "changed": 4
+          },
+          "before_values": [
+            7,
+            22,
+            22,
+            28
+          ],
+          "after_values": [
+            22,
+            27,
+            27,
+            19
+          ],
+          "numeric_stats": {
+            "sample_count": 4,
+            "min_delta": -9,
+            "max_delta": 15,
+            "mean_delta": 4,
+            "always_same_delta": false
+          }
+        },
+        "player.energy": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            100,
+            100
+          ],
+          "after_values": [
+            50,
+            50
+          ],
+          "numeric_stats": {
+            "sample_count": 2,
+            "min_delta": -50,
+            "max_delta": -50,
+            "mean_delta": -50,
+            "always_same_delta": true
+          }
+        },
+        "npc.Brother.arousal": {
+          "count": 3,
+          "changes_count": 3,
+          "kinds": {
+            "changed": 3
+          },
+          "before_values": [
+            0,
+            0,
+            1
+          ],
+          "after_values": [
+            1,
+            1,
+            3
+          ],
+          "numeric_stats": {
+            "sample_count": 3,
+            "min_delta": 1,
+            "max_delta": 2,
+            "mean_delta": 1.3333,
+            "always_same_delta": false
+          }
+        },
+        "npc.Brother.sideBarText": {
+          "count": 2,
+          "changes_count": 2,
+          "kinds": {
+            "changed": 2
+          },
+          "before_values": [
+            "❄️",
+            "❄️"
+          ],
+          "after_values": [
+            "🔥",
+            "🔥"
+          ],
+          "numeric_stats": null
+        },
+        "player.arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            6
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 6,
+            "max_delta": 6,
+            "mean_delta": 6,
+            "always_same_delta": true
+          }
+        },
+        "npc.Dad.corruption": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            10
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 10,
+            "max_delta": 10,
+            "mean_delta": 10,
+            "always_same_delta": true
+          }
+        },
+        "npc.Dad.arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            2
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 2,
+            "max_delta": 2,
+            "mean_delta": 2,
+            "always_same_delta": true
+          }
+        },
+        "npc.Brother.corruption": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            15
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 15,
+            "max_delta": 15,
+            "mean_delta": 15,
+            "always_same_delta": true
+          }
+        },
+        "npc.Grandpa.corruption": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            99
+          ],
+          "after_values": [
+            5
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -94,
+            "max_delta": -94,
+            "mean_delta": -94,
+            "always_same_delta": true
+          }
+        },
+        "npc.Grandpa.arousal": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            0
+          ],
+          "after_values": [
+            1
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 1,
+            "max_delta": 1,
+            "mean_delta": 1,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "BedroomStudy",
+      "to": "BedroomSleep",
+      "observation_count": 1,
+      "first_observed_ts": 1780667736532,
+      "last_observed_ts": 1780667736532,
+      "effect_aggregate": {
+        "game.randomMedia": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            ""
+          ],
+          "after_values": [
+            "sleep1.webp"
+          ],
+          "numeric_stats": null
+        },
+        "game.lastPassage": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "Bedroom"
+          ],
+          "after_values": [
+            "BedroomStudy"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            27
+          ],
+          "after_values": [
+            10
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": -17,
+            "max_delta": -17,
+            "mean_delta": -17,
+            "always_same_delta": true
+          }
+        }
+      }
+    },
+    {
+      "cmd": "eval",
+      "from": "BedroomSleep",
+      "to": "BedroomSleep",
+      "observation_count": 4,
+      "first_observed_ts": 1780667782511,
+      "last_observed_ts": 1780667876194,
+      "effect_aggregate": {
+        "game.randomMedia": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            "sleep1.webp"
+          ],
+          "after_values": [
+            "sleep.webp"
+          ],
+          "numeric_stats": null
+        },
+        "game.random": {
+          "count": 1,
+          "changes_count": 1,
+          "kinds": {
+            "changed": 1
+          },
+          "before_values": [
+            10
+          ],
+          "after_values": [
+            24
+          ],
+          "numeric_stats": {
+            "sample_count": 1,
+            "min_delta": 14,
+            "max_delta": 14,
+            "mean_delta": 14,
+            "always_same_delta": true
+          }
+        }
+      }
+    }
+  ],
+  "coverage": {
+    "static_edges_total": 460,
+    "observed_static_edges": 2,
+    "unobserved_static_edges": 458,
+    "coverage_ratio": 0.0043,
+    "observed_only_edges": 6
+  }
+}

@@ -74,8 +74,8 @@ There is **no scope question** — every game is the full game (slice was remove
 At the end of this conversation, create `games/<slug>/authoring_state.json` from `references/ledger-schema.md`
 with **`pipeline_phase` set** (it advances as the pipeline proceeds). `structure_registry` / `plan` stay
 **empty** — there's no structure yet. The ledger is bookkeeping JSON: it compiles nothing, can't fail a
-build, and lets the skill resume at the right step. (See decision 4 in the redesign — the dispatch reads
-`pipeline_phase`, not "does the file exist.")
+build, and lets the skill resume at the right step. (The dispatch reads `pipeline_phase`, not "does the file
+exist.")
 
 ## Output (only the seed sections of `design_book.md`)
 - **World setup** — the fantasy (POV · the 3-part-bar fantasy line · the desire span), premise, player,
@@ -83,8 +83,8 @@ build, and lets the skill resume at the right step. (See decision 4 in the redes
 - **Cast** — names + roles.
 - **Locations** — the map.
 
-It does **NOT** write: per-NPC briefs (Step 4), the story/economy spine (Step 2), the roster (Step 5), or
-any TOML / ledger structure / green build (Step 6).
+It does **NOT** write: the per-subject story design (Step 4), the blueprint (Step 5), the story/economy spine
+(Step 2), the feedback review (Step 6), or any TOML / ledger structure / green build (Step 7).
 
 ## Why setup is creative-only
 Plumbing decided early goes stale — you don't know which flag/trait a scene needs until you write that
@@ -100,6 +100,5 @@ creative seat; the engine translation happens later, by the agent.
 - Hand off: *"Seed locked — moving to top-level design (the engine + economy + desire ladder)."* → Step 2.
 
 ## Cross-references
-- `redesign_phase_3/05` (the 8 qualities + Step-0 bar) · `redesign_phase_3/01` (the lean seed) ·
-  `references/run-mode.md` (Mode A/B, the interaction discipline) · `references/ledger-schema.md` (the
+- `references/run-mode.md` (Mode A/B, the interaction discipline) · `references/ledger-schema.md` (the
   ledger born here) · Step 2 = `references/step-2-toplevel.md`.

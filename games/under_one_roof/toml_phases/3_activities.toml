@@ -1,0 +1,2300 @@
+# ═══════════════════════════════════════════════════════════════
+# PHASE 3: ACTIVITY CANVASES (Repeatable)
+# ═══════════════════════════════════════════════════════════════
+# Source: GAME_DESIGN.md Section 4 + media_writing_guide.md
+# Game: Under One Roof
+# ═══════════════════════════════════════════════════════════════
+
+# ═══════════════════════════════════════════════════════════════
+# SOLO ACTIVITIES (7) — Player alone, no NPC, stat building
+# ═══════════════════════════════════════════════════════════════
+
+# ─── YOGA ───
+
+[[canvases]]
+id = "solo_yoga"
+name = "Yoga"
+description = "Morning stretch. Beauty maintenance."
+
+[canvases.trigger]
+location = "loc_living_room"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 1
+is_active = true
+costs = [{ trait = "energy", value = 10 }]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "06:00"
+end_time = "08:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Yoga"
+blocks = [
+  { type = "paragraph", content = "She rolls out an imaginary mat on the bedroom floor. Stretches, breathes, tries to quiet her head." },
+  { type = "paragraph", content = "The floor creaks. Through the wall, @jake's pencil stops — then starts again." },
+  { type = "image", props = { file = "activities/solo_yoga.jpg", search_queries = ["woman yoga stretching bedroom morning floor"] } }
+]
+exit_block = { type = "location", text = "Done.", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [ { targetType = "player", trait = "beauty", op = "add", value = 2 }, { targetType = "player", trait = "fitness", op = "add", value = 1 } ] } }
+
+# ─── JOGGING (PROPERTY) ───
+
+[[canvases]]
+id = "solo_jog_property"
+name = "Jogging (Property)"
+description = "Laps around the yard. Basic fitness."
+
+[canvases.trigger]
+location = "loc_yard"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 1
+is_active = true
+costs = [{ trait = "energy", value = 15 }]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "06:00"
+end_time = "08:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Morning Run"
+blocks = [
+  { type = "paragraph", content = "Early morning. The grass is still wet. She runs loops around the property — past the workshop, along the tree line, back to the porch." },
+  { type = "image", props = { file = "activities/solo_jog_property.jpg", search_queries = ["woman jogging rural property morning dew", "woman running yard morning rural field"] } },
+  { type = "paragraph", content = "The air smells like dew and cut wood. From the workshop window, @frank's silhouette. He's already working." }
+]
+exit_block = { type = "location", text = "Done.", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [ { targetType = "player", trait = "fitness", op = "add", value = 1 }, { targetType = "player", trait = "confidence", op = "add", value = 1 } ] } }
+
+# ─── JOGGING (PARK) ───
+
+[[canvases]]
+id = "solo_jog_park"
+name = "Jogging (Park)"
+description = "Park trail. Better fitness gains, requires town access."
+
+[canvases.trigger]
+location = "loc_park"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 1
+is_active = true
+costs = [{ trait = "energy", value = 20 }]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "town_access", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "10:00"
+end_time = "12:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Trail Run"
+blocks = [
+  { type = "paragraph", content = "The park trail loops around the pond. Shade from oaks. Nobody here on weekday mornings — just her and the ducks." },
+  { type = "image", props = { file = "activities/solo_jog_park.jpg", search_queries = ["woman jogging park trail pond shade", "woman running park path trees morning"] } },
+  { type = "paragraph", content = "She runs until her lungs burn. Then walks. Then runs again." }
+]
+exit_block = { type = "location", text = "Done.", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [ { targetType = "player", trait = "fitness", op = "add", value = 2 }, { targetType = "player", trait = "confidence", op = "add", value = 1 } ] } }
+
+# ─── CAMPUS CLASSES ───
+
+[[canvases]]
+id = "solo_campus"
+name = "Campus Classes"
+description = "Art history, composition theory. Best intelligence source."
+
+[canvases.trigger]
+location = "loc_campus"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 1
+is_active = true
+costs = [{ trait = "energy", value = 20 }]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "town_access", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "09:00"
+end_time = "12:00"
+weekdays = [0, 1, 2, 3, 4]
+
+[[canvases.nodes]]
+id = "base"
+name = "Art History"
+blocks = [
+  { type = "paragraph", content = "Brick buildings. North-facing windows. The professor talks about Caravaggio's use of light — chiaroscuro, the dramatic contrast between dark and light." },
+  { type = "paragraph", content = "She takes notes. Thinks about the lamp in @frank's office. The way it casts everything in amber. Chiaroscuro." },
+  { type = "image", props = { file = "activities/solo_campus.jpg", search_queries = ["college art class lecture hall student notes"] } }
+]
+exit_block = { type = "location", text = "Class over.", config = { destinationType = "trigger", time_progression_minutes = 180, effects = [ { targetType = "player", trait = "intelligence", op = "add", value = 3 } ] } }
+
+# ─── SELF-CARE / GROOMING ───
+
+[[canvases]]
+id = "solo_grooming"
+name = "Self-Care"
+description = "Shower, skincare, grooming. Beauty maintenance."
+
+[canvases.trigger]
+location = "loc_bathroom"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 3
+is_active = true
+costs = [{ trait = "energy", value = 10 }]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "06:00"
+end_time = "07:30"
+
+[[canvases.nodes]]
+id = "base"
+name = "Mirror Time"
+blocks = [
+  { type = "paragraph", content = "Shower. Steam fills the bathroom — the lock doesn't catch but she's learned to wedge a towel under the door." },
+  { type = "image", props = { file = "activities/solo_grooming.jpg", search_queries = ["woman bathroom mirror self care grooming", "woman bathroom getting ready mirror"] } },
+  { type = "paragraph", content = "Skincare. The stuff she brought from the dorm. Her face in the mirror looks different than it did eight weeks ago. Sharper. More aware of being looked at." }
+]
+exit_block = { type = "location", text = "Done.", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [ { targetType = "player", trait = "beauty", op = "add", value = 2 } ] } }
+
+# ─── JOURNAL ───
+
+[[canvases]]
+id = "solo_journal"
+name = "Journal"
+description = "Writing before bed. Small intelligence and confidence gain."
+
+[canvases.trigger]
+location = "loc_lily_room"
+is_repeatable = true
+priority = 1
+max_triggers_per_day = 1
+is_active = true
+costs = [{ trait = "energy", value = 5 }]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "22:00"
+end_time = "23:30"
+
+[[canvases.nodes]]
+id = "base"
+name = "Writing"
+blocks = [
+  { type = "paragraph", content = "The notebook Mom gave her before Dubai. She writes. Not about the house — about herself. Who she was. Who she's becoming." },
+  { type = "image", props = { file = "activities/solo_journal.jpg", search_queries = ["woman writing notebook bed lamp night", "woman journal writing bedroom evening"] } },
+  { type = "paragraph", content = "The words come easier now than they did on day one." }
+]
+exit_block = { type = "location", text = "Close the notebook.", config = { destinationType = "trigger", time_progression_minutes = 30, effects = [ { targetType = "player", trait = "intelligence", op = "add", value = 1 }, { targetType = "player", trait = "confidence", op = "add", value = 1 } ] } }
+
+# ─── STARGAZING ───
+
+[[canvases]]
+id = "solo_stargazing"
+name = "Stargazing"
+description = "Quiet night on the porch. Small confidence gain."
+
+[canvases.trigger]
+location = "loc_yard"
+is_repeatable = true
+priority = 1
+max_triggers_per_day = 1
+is_active = true
+costs = [{ trait = "energy", value = 5 }]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "22:00"
+end_time = "00:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Stars"
+blocks = [
+  { type = "paragraph", content = "The porch. No light pollution out here — the sky is absurd. More stars than she's ever seen." },
+  { type = "image", props = { file = "activities/solo_stargazing.jpg", search_queries = ["woman porch night sky stars rural", "woman sitting porch night stars countryside"] } },
+  { type = "paragraph", content = "The house hums behind her. Kitchen light. Someone's still up. She doesn't go inside." }
+]
+exit_block = { type = "location", text = "Go to bed.", config = { destinationType = "trigger", time_progression_minutes = 30, effects = [ { targetType = "player", trait = "confidence", op = "add", value = 1 } ] } }
+
+# ═══════════════════════════════════════════════════════════════
+# SLEEP & REST
+# ═══════════════════════════════════════════════════════════════
+
+# ─── SLEEP (NIGHT) ───
+
+[[canvases]]
+id = "solo_sleep"
+name = "Sleep"
+description = "Full night's rest. Energy restored."
+
+[canvases.trigger]
+location = "loc_lily_room"
+is_repeatable = true
+priority = 1
+max_triggers_per_day = 1
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "21:00"
+end_time = "05:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Lights Out"
+blocks = [
+  { type = "paragraph", content = "She clicks the lamp off. The room goes blue — moonlight through the window, the backyard silver and still." },
+  { type = "image", props = { file = "activities/solo_sleep.jpg", search_queries = ["woman bed moonlight bedroom dark peaceful", "bedroom moonlight window night sleeping"] } },
+  { type = "paragraph", content = "Through the wall, @jake's pencil scratches paper. Down the hall, the TV murmurs — @ryan watching something with the volume low. The floorboards creak once near @frank's office, then nothing." },
+  { type = "paragraph", content = "*The house breathes. She breathes with it.*" }
+]
+exit_block = { type = "location", text = "Sleep.", config = { destinationType = "trigger", time_progression_minutes = 480, effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }] } }
+
+# ─── REST (EVENING) ───
+
+[[canvases]]
+id = "solo_rest"
+name = "Rest"
+description = "Wind down for the evening. Energy restored."
+
+[canvases.trigger]
+location = "loc_lily_room"
+is_repeatable = true
+priority = 1
+max_triggers_per_day = 1
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "19:00"
+end_time = "22:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Winding Down"
+blocks = [
+  { type = "paragraph", content = "She falls back on the bed, phone balanced on her chest. The ceiling fan ticks. Somewhere in the house, dishes clink — someone's cleaning up after dinner." },
+  { type = "image", props = { file = "activities/solo_rest.jpg", search_queries = ["woman lying bed phone evening relaxing", "woman bed phone ceiling fan evening"] } },
+  { type = "paragraph", content = "She scrolls past nothing. Puts the phone down. Picks it up. Puts it down again. The window is open and the evening air smells like cut grass and the creek." },
+  { type = "paragraph", content = "*Two hours of just... existing. No one asking anything. No one watching.*" }
+]
+exit_block = { type = "location", text = "Get up.", config = { destinationType = "trigger", time_progression_minutes = 120, effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }] } }
+
+# ═══════════════════════════════════════════════════════════════
+# CORRUPTION EVENTS — Passive Exposure
+# ═══════════════════════════════════════════════════════════════
+
+# ── TIER 1: Accidental Exposure (no corruption gate) ──
+
+# ─── TV CHANNELS ───
+
+[[canvases]]
+id = "solo_tv_channels"
+name = "Watch TV"
+description = "Five channels. One of them isn't for her."
+
+[canvases.trigger]
+location = "loc_living_room"
+is_repeatable = true
+priority = 1
+max_triggers_per_day = 5
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "19:00"
+end_time = "23:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Channel 1 — News"
+blocks = [
+  { type = "paragraph", content = "She drops onto the couch, grabs the remote. The TV flickers on." },
+  { type = "image", props = { file = "activities/solo_tv_channels.jpg", search_queries = ["woman couch remote TV living room evening", "woman watching TV couch remote night"] } },
+  { type = "paragraph", content = "Weather. Traffic. A segment about property taxes. Her eyes glaze." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Change channel.", targetType = "node", nodeId = "solo_tv_channels.cooking" },
+  { text = "Turn it off.", targetType = "trigger", time_progression_minutes = 10 }
+] }
+
+[[canvases.nodes]]
+id = "cooking"
+name = "Channel 2 — Cooking Show"
+blocks = [
+  { type = "paragraph", content = "A chef is doing something aggressive to a chicken. Studio audience laughs at nothing." },
+  { type = "image", props = { file = "activities/solo_tv_cooking.jpg", search_queries = ["cooking show chef kitchen TV screen", "TV cooking show chef audience studio"] } },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Change channel.", targetType = "node", nodeId = "solo_tv_channels.movie" },
+  { text = "Turn it off.", targetType = "trigger", time_progression_minutes = 10 }
+] }
+
+[[canvases.nodes]]
+id = "movie"
+name = "Channel 3 — Action Movie"
+blocks = [
+  { type = "paragraph", content = "Car chase. Explosion. The lead actor says something that's supposed to be witty. She's seen this one. Twice." },
+  { type = "image", props = { file = "activities/solo_tv_movie.jpg", search_queries = ["action movie TV screen car chase explosion", "TV screen action movie car chase"] } },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Change channel.", targetType = "node", nodeId = "solo_tv_channels.sports" },
+  { text = "Keep watching.", targetType = "trigger", time_progression_minutes = 30 },
+  { text = "Turn it off.", targetType = "trigger", time_progression_minutes = 10 }
+] }
+
+[[canvases.nodes]]
+id = "sports"
+name = "Channel 4 — Sports"
+blocks = [
+  { type = "paragraph", content = "Two teams she doesn't recognize doing something with a ball. The commentator is yelling like someone died. The crowd agrees." },
+  { type = "image", props = { file = "activities/solo_tv_sports.jpg", search_queries = ["sports game TV screen crowd cheering", "TV sports broadcast game crowd"] } },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Change channel.", targetType = "node", nodeId = "solo_tv_channels.adult" },
+  { text = "Turn it off.", targetType = "trigger", time_progression_minutes = 10 }
+] }
+
+[[canvases.nodes]]
+id = "adult"
+name = "Channel 5"
+blocks = [
+  { type = "paragraph", content = "The screen changes. Soft focus. Low music. Two bodies, tangled, moving together. Not acting." },
+  { type = "image", props = { file = "activities/solo_tv_adult.jpg", search_queries = ["couple TV screen soft focus intimate", "TV adult channel couple bedroom soft"] } },
+  { type = "paragraph", content = "She should change it. Her thumb is on the button. She doesn't press it." },
+  { type = "paragraph", content = "The sounds fill the living room. She turns the volume down — not off. Down." },
+  { type = "paragraph", content = "*Anyone could walk in. The hallway is right there.*" }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Change channel.", targetType = "node", nodeId = "solo_tv_channels.base", time_progression_minutes = 30, effects = [{ targetType = "player", trait = "corruption", op = "add", value = 2 }] },
+  { text = "Keep watching.", targetType = "trigger", time_progression_minutes = 30, effects = [{ targetType = "player", trait = "corruption", op = "add", value = 2 }] },
+  { text = "Turn it off.", targetType = "trigger", time_progression_minutes = 10, effects = [{ targetType = "player", trait = "corruption", op = "add", value = 2 }] }
+] }
+
+# ─── YOGA STARE (random auto-fire) ───
+
+[[canvases]]
+id = "event_yoga_stare"
+name = "Eyes On You"
+description = "Someone watches during yoga."
+
+[canvases.trigger]
+location = "loc_living_room"
+is_repeatable = true
+trigger_mode = "random"
+chance = 0.3
+priority = 1
+max_triggers_per_day = 1
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "06:00"
+end_time = "08:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "The Stare"
+blocks = [
+  { type = "paragraph", content = "Halfway through a downward dog, the floorboard behind her creaks." },
+  { type = "image", props = { file = "activities/event_yoga_stare.jpg", search_queries = ["woman yoga downward dog living room morning", "woman stretching yoga floor living room"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "@ryan is in the doorway. Tank top, towel over his shoulder, heading to the shower. His eyes drop to her hips — linger there — and he doesn't look away when she straightens up. He grins. 'Don't stop on my account.' Then he's gone." },
+    { type = "paragraph", content = "@jake freezes in the kitchen doorway. Coffee mug halfway to his mouth. His eyes go wide behind the glasses. He makes a sound — not a word, just air — and retreats so fast he bumps the doorframe. She hears him swearing softly from the kitchen." },
+    { type = "paragraph", content = "@frank pauses at the hallway entrance, coffee in hand. He watches for exactly one breath — long enough that she feels it between her shoulder blades — then keeps walking. Doesn't say a word. Doesn't need to." }
+  ] },
+  { type = "paragraph", content = "*She holds the pose. Doesn't adjust her shorts. Doesn't pull down her top.*" }
+]
+exit_block = { type = "location", text = "Finish the stretch.", config = { destinationType = "trigger", time_progression_minutes = 15, effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1 }] } }
+
+# ── TIER 2: Growing Awareness (corruption ≥ 5) ──
+
+# ─── OVERHEARING JAKE (random auto-fire) ───
+
+[[canvases]]
+id = "event_overhear_jake"
+name = "Through the Wall"
+description = "The wall between their rooms is thin."
+
+[canvases.trigger]
+location = "loc_lily_room"
+is_repeatable = true
+trigger_mode = "random"
+chance = 0.3
+priority = 1
+max_triggers_per_day = 1
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 5 }
+] }
+[[canvases.trigger.schedules]]
+start_time = "23:00"
+end_time = "02:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Through the Wall"
+blocks = [
+  { type = "paragraph", content = "Past midnight. The house is quiet except for the creek outside and the refrigerator hum downstairs." },
+  { type = "image", props = { file = "activities/event_overhear_jake.jpg", search_queries = ["woman bed dark bedroom wall listening night", "woman lying bed dark room night still"] } },
+  { type = "paragraph", content = "Then — through the wall. @jake's bed. A rhythmic creak. Slow at first. His breathing, ragged, muffled like his face is in the pillow." },
+  { type = "paragraph", content = "A groan. Low. Stifled. And then her name. Barely a whisper. But she hears it. She hears it." },
+  { type = "paragraph", content = "*She lies perfectly still. Hand on the sheet. Knuckles white. Heart slamming against her ribs.*" },
+  { type = "paragraph", content = "The creaking stops. A long exhale through the wall. Then silence. She doesn't move for twenty minutes." }
+]
+exit_block = { type = "location", text = "Stare at the ceiling.", config = { destinationType = "trigger", time_progression_minutes = 15, effects = [{ targetType = "player", trait = "corruption", op = "add", value = 2 }, { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 1 }] } }
+
+# ── TIER 3: Deliberate Boundary Testing (corruption ≥ 10–15) ──
+
+# ─── SLEEPING IN LESS ───
+
+[[canvases]]
+id = "solo_sleep_less"
+name = "Less Clothes"
+description = "The thin shirt. No bra. The hallway."
+
+[canvases.trigger]
+location = "loc_lily_room"
+is_repeatable = true
+priority = 1
+max_triggers_per_day = 1
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 10 }
+] }
+[[canvases.trigger.schedules]]
+start_time = "21:00"
+end_time = "05:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "The Thin Shirt"
+blocks = [
+  { type = "paragraph", content = "She opens the drawer. The oversized sleep shirt — the thin one. Cotton so worn it's almost translucent. No bra. She pulls it on. It barely reaches mid-thigh." },
+  { type = "image", props = { file = "activities/solo_sleep_less.jpg", search_queries = ["woman thin shirt hallway dark night bare legs", "woman sleep shirt hallway dark night"] } },
+  { type = "paragraph", content = "The bathroom is down the hall. She opens the door. Bare feet on hardwood. The hallway is dark but the bathroom light is on — someone just left it." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "@ryan comes around the corner. Stops. His eyes travel down and back up in the time it takes her to inhale. Neither of them says good night." },
+    { type = "paragraph", content = "@jake's door opens as she passes. He sees her. She sees him see her. He closes the door so carefully it doesn't make a sound." },
+    { type = "paragraph", content = "@frank is at the end of the hall, heading to his room. He looks. Just once. The kind of look that knows exactly what it's seeing. He keeps walking." }
+  ] },
+  { type = "paragraph", content = "*She could have worn the long pajamas. She chose this.*" }
+]
+exit_block = { type = "location", text = "Back to bed.", config = { destinationType = "trigger", time_progression_minutes = 10, effects = [{ targetType = "player", trait = "corruption", op = "add", value = 2 }] } }
+
+# ─── DOOR CRACKED (random auto-fire) ───
+
+[[canvases]]
+id = "event_door_cracked"
+name = "Not Quite Closed"
+description = "The door. The gap. The shadow."
+
+[canvases.trigger]
+location = "loc_lily_room"
+is_repeatable = true
+trigger_mode = "random"
+chance = 0.4
+priority = 1
+max_triggers_per_day = 1
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 }
+] }
+[[canvases.trigger.schedules]]
+start_time = "07:00"
+end_time = "09:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "The Gap"
+blocks = [
+  { type = "paragraph", content = "Morning. She's changing. The door isn't latched — it drifts open two inches. She notices. Reaches for the handle." },
+  { type = "image", props = { file = "activities/event_door_cracked.jpg", search_queries = ["woman changing bedroom door crack hallway", "bedroom door gap shadow hallway morning"] } },
+  { type = "paragraph", content = "Her hand stops." },
+  { type = "paragraph", content = "A shadow moves in the hallway. Footsteps slow, then stop. Someone is standing just outside the gap." },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The shadow is broad. @ryan. She can hear him breathing. She unhooks her bra with her back to the door. Takes her time pulling the shirt over her head. The shadow doesn't move until she reaches for the handle." },
+    { type = "paragraph", content = "The shadow is thin. @jake. A sharp inhale from the other side. She pulls her top off, standing in just underwear. The pencil he's always carrying hits the floor. By the time she turns around, the hallway is empty." },
+    { type = "paragraph", content = "The shadow is tall. @frank. Complete silence from the other side. She changes slowly. Deliberately. When she opens the door fully, the hallway is empty. But his coffee mug is on the hallway table. Still warm." }
+  ] },
+  { type = "paragraph", content = "*She looks at the door latch. It works fine. Always has.*" }
+]
+exit_block = { type = "location", text = "Close the door.", config = { destinationType = "trigger", time_progression_minutes = 10, effects = [{ targetType = "player", trait = "corruption", op = "add", value = 3 }] } }
+
+# ─── STREET ENCOUNTER (random auto-fire, one-time) ───
+
+[[canvases]]
+id = "event_street_encounter"
+name = "The Alley"
+description = "A shortcut she shouldn't have taken."
+
+[canvases.trigger]
+location = "loc_town"
+trigger_mode = "random"
+chance = 0.3
+priority = 1
+is_active = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "town_access", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 10 }
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "The Shortcut"
+blocks = [
+  { type = "paragraph", content = "The alley between the hardware store and the laundromat. A shortcut. She's used it before." },
+  { type = "image", props = { file = "activities/event_street_encounter.jpg", search_queries = ["alley couple against wall town afternoon", "couple alley brick wall standing"] } },
+  { type = "paragraph", content = "Halfway through — movement. Against the brick wall. Two people. His hand in her hair, her leg hooked around his hip. The sounds are unmistakable." },
+  { type = "paragraph", content = "She should turn around. Walk the long way. Her feet don't move." },
+  { type = "paragraph", content = "She watches. Five seconds. Ten. The woman's head falls back against the brick. The man's hand slides up her thigh." },
+  { type = "paragraph", content = "*Fifteen seconds. She counted again. Just like the phone.*" },
+  { type = "paragraph", content = "She walks back the way she came. Her face is hot. Her hands are shaking. But not from fear." }
+]
+exit_block = { type = "location", text = "Keep walking.", config = { destinationType = "trigger", time_progression_minutes = 5, effects = [{ targetType = "player", trait = "corruption", op = "add", value = 3 }] } }
+
+# ═══════════════════════════════════════════════════════════════
+# NPC DAILY ROUTINE — Ambient Presence
+# ═══════════════════════════════════════════════════════════════
+
+# ── BATHROOM ──
+
+# ─── FRANK SHOWER (06:00-06:30) ───
+
+[[canvases]]
+id = "ambient_frank_shower"
+name = "Occupied"
+description = "Frank showers at 6 AM. The door doesn't lock right."
+
+[canvases.trigger]
+location = "loc_bathroom"
+npc = "npc_frank"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 5
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "06:00"
+end_time = "06:30"
+
+[[canvases.nodes]]
+id = "base"
+name = "Steam"
+blocks = [
+  { type = "paragraph", content = "She pushes the bathroom door. It swings open — the latch catches on nothing. Steam billows out. The shower is running." },
+  { type = "image", props = { file = "activities/ambient_frank_shower.jpg", search_queries = ["bathroom steam shower older man back muscles", "man showering bathroom steam glass door"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "@frank under the water. Broad back, soap running down the ridges of muscle along his spine. He hasn't heard the door over the spray. His head is tilted back, eyes closed. Water streams through the gray at his temples. She sees the scar below his shoulder blade — old, faded, the kind nobody asks about." },
+    { type = "paragraph", content = "@frank braced against the tile wall with one arm. His head is dropped forward, shoulders hunched. His other hand is moving — rhythmic, purposeful. A low groan fills the bathroom, deep in his chest. The sound hits her like a wall. He hasn't heard the door." }
+  ] },
+  { type = "paragraph", content = "*She stands there for three full seconds before her brain reconnects to her legs.*" }
+]
+exit_block = { type = "location", text = "Close the door. Quietly.", config = { destinationType = "trigger", time_progression_minutes = 5, effects = [{ targetType = "player", trait = "corruption", op = "add", value = 3 }] } }
+
+# ─── RYAN SHOWER MORNING (06:30-07:00) ───
+
+[[canvases]]
+id = "ambient_ryan_shower_morning"
+name = "Occupied"
+description = "Ryan's morning shower. He doesn't lock the door either."
+
+[canvases.trigger]
+location = "loc_bathroom"
+npc = "npc_ryan"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 5
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "06:30"
+end_time = "07:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Steam"
+blocks = [
+  { type = "paragraph", content = "The bathroom door is ajar. Steam curling into the hallway. She pushes it open without thinking." },
+  { type = "image", props = { file = "activities/ambient_ryan_shower_morning.jpg", search_queries = ["bathroom shower athletic young man steam", "man shower steam glass door muscles"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "@ryan under the spray, scrubbing his hair with both hands. Arms up, everything on display — the chest, the abs, the V that disappears below his hip bones. Water runs down him like it's showing off. He spots her through the glass and grins. 'Need something?'" },
+    { type = "paragraph", content = "@ryan leaning against the shower wall. One hand braced on the tile, the other working between his legs. His eyes are closed, jaw clenched, hips moving in a slow grind. He hasn't noticed the door. A groan — low, animal — bounces off the tile." }
+  ] },
+  { type = "paragraph", content = "*Her hand is still on the doorknob. She forgot how to let go.*" }
+]
+exit_block = { type = "location", text = "Close the door.", config = { destinationType = "trigger", time_progression_minutes = 5, effects = [{ targetType = "player", trait = "corruption", op = "add", value = 3 }] } }
+
+# ─── JAKE SHOWER (07:00-07:30) ───
+
+[[canvases]]
+id = "ambient_jake_shower"
+name = "Occupied"
+description = "Jake showers last. The quiet one."
+
+[canvases.trigger]
+location = "loc_bathroom"
+npc = "npc_jake"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 5
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "07:00"
+end_time = "07:30"
+
+[[canvases.nodes]]
+id = "base"
+name = "Steam"
+blocks = [
+  { type = "paragraph", content = "She opens the bathroom door. The shower curtain is drawn, water running. @jake's glasses are folded neatly on the sink beside a worn paperback." },
+  { type = "image", props = { file = "activities/ambient_jake_shower.jpg", search_queries = ["bathroom shower curtain silhouette lean young man", "man shower curtain silhouette steam"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "His silhouette through the curtain — lean, shoulder blades sharp like wings. He's humming something off-key. She can see the outline of his hands in his hair, elbows pointed up. Skinnier than she expected. More real." },
+    { type = "paragraph", content = "His breathing through the curtain. Fast. Rhythmic. The curtain shifts with his movement. Then — quiet, barely a whisper — her name. Just once. His hand hits the tile with a soft thud." }
+  ] },
+  { type = "paragraph", content = "*She backs out so carefully the door doesn't make a sound. Her heart does, though.*" }
+]
+exit_block = { type = "location", text = "Close the door.", config = { destinationType = "trigger", time_progression_minutes = 5, effects = [{ targetType = "player", trait = "corruption", op = "add", value = 3 }] } }
+
+# ─── RYAN SHOWER EVENING (18:00-18:30) ───
+
+[[canvases]]
+id = "ambient_ryan_shower_evening"
+name = "Occupied"
+description = "Ryan's post-workout shower. Second time today."
+
+[canvases.trigger]
+location = "loc_bathroom"
+npc = "npc_ryan"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 5
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "18:00"
+end_time = "18:30"
+
+[[canvases.nodes]]
+id = "base"
+name = "Post-Workout"
+blocks = [
+  { type = "paragraph", content = "She needs the bathroom. The door is cracked. @ryan's sweaty gym clothes are on the floor in a heap. Steam everywhere." },
+  { type = "image", props = { file = "activities/ambient_ryan_shower_evening.jpg", search_queries = ["bathroom mirror towel athletic man steam", "man towel bathroom mirror post workout"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "He's singing. Badly. Some country song she doesn't know. She can see his outline through the fogged glass — big, moving under the water like it's a stage. He hits a note that makes her wince and smile at the same time." },
+    { type = "paragraph", content = "He's standing in front of the mirror. Towel around his waist. Looking at himself — no, looking down. His hand goes under the towel. Slow. His reflection watches himself. She watches his reflection." }
+  ] },
+  { type = "paragraph", content = "*She'll use the bathroom later.*" }
+]
+exit_block = { type = "location", text = "Walk away.", config = { destinationType = "trigger", time_progression_minutes = 5, effects = [{ targetType = "player", trait = "corruption", op = "add", value = 3 }] } }
+
+# ── FRANK AMBIENT ──
+
+# ─── FRANK MORNING COFFEE (05:00-07:00) ───
+
+[[canvases]]
+id = "ambient_frank_coffee"
+name = "Morning Coffee"
+description = "Frank and black coffee. Before the world starts."
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_frank"
+is_repeatable = true
+priority = 1
+max_triggers_per_day = 1
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "05:00"
+end_time = "07:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Before Dawn"
+blocks = [
+  { type = "paragraph", content = "Kitchen. The sky outside is still dark. @frank is at the table — newspaper flat, coffee black, reading glasses she's never seen him wear anywhere else. He nods when she walks in. Doesn't talk before his second cup." },
+  { type = "image", props = { file = "activities/ambient_frank_coffee.jpg", search_queries = ["kitchen table coffee newspaper older man dawn", "man coffee kitchen table morning dark outside"] } },
+  { type = "paragraph", content = "The coffee maker is still warm. The only sound is him turning pages." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Pour a cup. Sit with him.", targetType = "trigger", time_progression_minutes = 30, effects = [{ targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 1 }] },
+  { text = "Grab coffee and go.", targetType = "trigger", time_progression_minutes = 10 }
+] }
+
+# ─── FRANK LUNCH (12:00-13:00) ───
+
+[[canvases]]
+id = "ambient_frank_lunch"
+name = "Lunch Break"
+description = "Frank at the counter. He makes two sandwiches."
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_frank"
+is_repeatable = true
+priority = 1
+max_triggers_per_day = 1
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "12:00"
+end_time = "13:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Standing Lunch"
+blocks = [
+  { type = "paragraph", content = "@frank at the counter, sleeves rolled, assembling sandwiches with the same precision he uses on a table saw. He slides one toward her without asking. Turkey. Extra mustard. He remembered." },
+  { type = "image", props = { file = "activities/ambient_frank_lunch.jpg", search_queries = ["kitchen counter sandwich making older man", "man making sandwich kitchen counter sleeves rolled"] } },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Eat together.", targetType = "trigger", time_progression_minutes = 30, effects = [{ targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 1 }] },
+  { text = "Take it to her room.", targetType = "trigger", time_progression_minutes = 10 }
+] }
+
+# ─── FRANK WHISKEY (22:00-23:00) ───
+
+[[canvases]]
+id = "ambient_frank_whiskey"
+name = "Nightcap"
+description = "Frank. Whiskey. The lamp."
+
+[canvases.trigger]
+location = "loc_living_room"
+npc = "npc_frank"
+is_repeatable = true
+priority = 1
+max_triggers_per_day = 1
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "22:00"
+end_time = "23:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "The Lamp"
+blocks = [
+  { type = "paragraph", content = "Living room. One lamp. @frank on the couch, whiskey glass balanced on the armrest, TV on so low it's just moving light. He looks tired in a way that has nothing to do with the day." },
+  { type = "image", props = { file = "activities/ambient_frank_whiskey.jpg", search_queries = ["living room couch whiskey lamp night older man", "man couch whiskey glass dim lamp night"] } },
+  { type = "paragraph", content = "He sees her in the doorway. Doesn't straighten up. Doesn't hide the glass." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Sit down.", targetType = "trigger", time_progression_minutes = 30, effects = [{ targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 1 }, { targetType = "npc", npcId = "npc_frank", trait = "love", op = "add", value = 1 }] },
+  { text = "\"Good night.\"", targetType = "trigger", time_progression_minutes = 5 }
+] }
+
+# ─── FRANK WORKSHOP AFTERNOON (13:00-17:00) ───
+
+[[canvases]]
+id = "ambient_frank_workshop_pm"
+name = "Afternoon Work"
+description = "Frank in the workshop. Sawdust and country radio."
+
+[canvases.trigger]
+location = "loc_workshop"
+npc = "npc_frank"
+is_repeatable = true
+priority = 1
+max_triggers_per_day = 1
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "13:00"
+end_time = "17:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Sawdust"
+blocks = [
+  { type = "paragraph", content = "@frank sanding a cabinet door. Sawdust in the air, catching the light from the high windows. Sleeves rolled past the elbow. Radio playing something old and country. He works like nobody's watching — and he's better at it that way." },
+  { type = "image", props = { file = "activities/ambient_frank_workshop_pm.jpg", search_queries = ["workshop sanding wood sawdust man afternoon", "man workshop woodworking sawdust afternoon light"] } },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Watch him work.", targetType = "trigger", time_progression_minutes = 20, effects = [{ targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 1 }] },
+  { text = "Leave him to it.", targetType = "trigger", time_progression_minutes = 5 }
+] }
+
+# ── RYAN AMBIENT ──
+
+# ─── RYAN MORNING KITCHEN (06:00-06:30) ───
+
+[[canvases]]
+id = "ambient_ryan_morning"
+name = "Protein Shake"
+description = "Ryan before 7 AM. Shirtless. Obviously."
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_ryan"
+is_repeatable = true
+priority = 1
+max_triggers_per_day = 1
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "06:00"
+end_time = "06:30"
+
+[[canvases.nodes]]
+id = "base"
+name = "Before Coffee"
+blocks = [
+  { type = "paragraph", content = "@ryan at the counter. Shirtless — he's always shirtless before 7 AM. Scratching his stomach, scrolling his phone, protein shake blending loud enough to wake the dead." },
+  { type = "image", props = { file = "activities/ambient_ryan_morning.jpg", search_queries = ["kitchen counter shirtless man protein shake morning", "athletic man kitchen morning shirtless phone"] } },
+  { type = "paragraph", content = "He looks up. The grin loads automatically." },
+  { type = "dialog", content = "Don't drink the shake. You'll puke.", props = { speaker = "npc", npcId = "npc_ryan" } }
+]
+exit_block = { type = "choices", choices = [
+  { text = "\"Morning.\"", targetType = "trigger", time_progression_minutes = 15, effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 1 }] },
+  { text = "Grab something and go.", targetType = "trigger", time_progression_minutes = 5 }
+] }
+
+# ─── RYAN LUNCH (12:00-13:00) ───
+
+[[canvases]]
+id = "ambient_ryan_lunch"
+name = "Leftovers"
+description = "Ryan and the open fridge. Decisions."
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_ryan"
+is_repeatable = true
+priority = 1
+max_triggers_per_day = 1
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "12:00"
+end_time = "13:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Fridge Door Open"
+blocks = [
+  { type = "paragraph", content = "@ryan standing with the fridge open, staring into it like it owes him money. He takes up most of the kitchen just by existing. Pulls out three containers, sniffs each one, puts two back." },
+  { type = "image", props = { file = "activities/ambient_ryan_lunch.jpg", search_queries = ["man open fridge kitchen standing", "kitchen fridge open man choosing food"] } },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Eat together.", targetType = "trigger", time_progression_minutes = 20, effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 1 }] },
+  { text = "\"I'll eat later.\"", targetType = "trigger", time_progression_minutes = 5 }
+] }
+
+# ─── RYAN AFTERNOON (13:00-14:00) ───
+
+[[canvases]]
+id = "ambient_ryan_afternoon"
+name = "Couch"
+description = "Ryan. Boots off. Half-napping."
+
+[canvases.trigger]
+location = "loc_living_room"
+npc = "npc_ryan"
+is_repeatable = true
+priority = 1
+max_triggers_per_day = 1
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "13:00"
+end_time = "14:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Dead Weight"
+blocks = [
+  { type = "paragraph", content = "@ryan on the couch, boots off, arm behind his head. Half-watching TV, half-napping. The couch sags under him like it's given up." },
+  { type = "image", props = { file = "activities/ambient_ryan_afternoon.jpg", search_queries = ["man couch napping boots off living room", "athletic man sleeping couch afternoon"] } },
+  { type = "paragraph", content = "He cracks one eye open when she walks in. Doesn't sit up." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Sit down.", targetType = "trigger", time_progression_minutes = 20, effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 1 }] },
+  { text = "Leave him.", targetType = "trigger", time_progression_minutes = 5 }
+] }
+
+# ── JAKE AMBIENT ──
+
+# ─── JAKE BREAKFAST (07:30-09:00) ───
+
+[[canvases]]
+id = "ambient_jake_breakfast"
+name = "Soggy Cereal"
+description = "Jake. Earbuds. A napkin full of drawings."
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_jake"
+is_repeatable = true
+priority = 1
+max_triggers_per_day = 1
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "07:30"
+end_time = "09:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "The Napkin"
+blocks = [
+  { type = "paragraph", content = "@jake at the table. Earbuds in, cereal getting soggy, drawing on a napkin with a stub of pencil. He doesn't look up when she enters." },
+  { type = "image", props = { file = "activities/ambient_jake_breakfast.jpg", search_queries = ["young man kitchen table earbuds drawing cereal", "man drawing napkin kitchen breakfast quiet"] } },
+  { type = "paragraph", content = "Then he does. Quick. Back to the napkin. The pencil moves faster." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Sit across from him.", targetType = "trigger", time_progression_minutes = 20, effects = [{ targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 }] },
+  { text = "Just coffee.", targetType = "trigger", time_progression_minutes = 5 }
+] }
+
+# ─── JAKE LUNCH (12:00-13:00) ───
+
+[[canvases]]
+id = "ambient_jake_lunch"
+name = "Ramen"
+description = "Jake reads the instructions like they're poetry."
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_jake"
+is_repeatable = true
+priority = 1
+max_triggers_per_day = 1
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "12:00"
+end_time = "13:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Boiling Water"
+blocks = [
+  { type = "paragraph", content = "@jake at the stove, reading the back of a ramen packet like it's literature. The water is already boiling over. He hasn't noticed." },
+  { type = "image", props = { file = "activities/ambient_jake_lunch.jpg", search_queries = ["young man stove ramen cooking kitchen", "man cooking ramen kitchen stove reading"] } },
+]
+exit_block = { type = "choices", choices = [
+  { text = "\"Want help?\"", targetType = "trigger", time_progression_minutes = 20, effects = [{ targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 }, { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 1 }] },
+  { text = "Leave him to it.", targetType = "trigger", time_progression_minutes = 5 }
+] }
+
+# ─── JAKE EVENING (20:00-21:00) ───
+
+[[canvases]]
+id = "ambient_jake_evening"
+name = "Sketchbook"
+description = "Jake on the living room floor. Drawing something private."
+
+[canvases.trigger]
+location = "loc_living_room"
+npc = "npc_jake"
+is_repeatable = true
+priority = 1
+max_triggers_per_day = 1
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "20:00"
+end_time = "21:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "The Cover-Up"
+blocks = [
+  { type = "paragraph", content = "@jake on the floor by the couch, sketchbook on his knees, TV casting light he isn't watching. He's drawing something. When she walks in, his hand flips the page." },
+  { type = "image", props = { file = "activities/ambient_jake_evening.jpg", search_queries = ["young man floor sketchbook living room TV", "man drawing sketchbook living room floor night"] } },
+  { type = "paragraph", content = "Too slow. She caught a curve. A shoulder. Not a landscape." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "\"What are you drawing?\"", targetType = "trigger", time_progression_minutes = 15, effects = [{ targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 }] },
+  { text = "Just passing through.", targetType = "trigger", time_progression_minutes = 5 }
+] }
+
+# ═══════════════════════════════════════════════════════════════
+# UTILITY ACTIVITIES — Meals, Work, Sleep, Expenses
+# ═══════════════════════════════════════════════════════════════
+
+# ─── BREAKFAST ───
+
+[[canvases]]
+id = "meal_breakfast"
+name = "Breakfast"
+description = "Morning meal. All NPCs present. Energy restore."
+
+[canvases.trigger]
+location = "loc_kitchen"
+is_repeatable = true
+priority = 3
+max_triggers_per_day = 1
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "07:00"
+end_time = "08:30"
+
+[[canvases.nodes]]
+id = "base"
+name = "Morning Table"
+blocks = [
+  { type = "group", blocks = [
+    { type = "paragraph", content = "@jake doesn't look up. Sketchbook propped against the salt shaker. Pencil moving. Earbuds in. She might as well not be in the room." }
+  ], conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "drawing_started", operator = "is_false" }
+  ] } },
+  { type = "paragraph", content = "Kitchen. Coffee maker still hissing. @frank at the head of the table, paper open. @ryan inhaling eggs." },
+  { type = "image", props = { file = "activities/meal_breakfast.jpg", search_queries = ["family breakfast kitchen table morning coffee"] } }
+]
+exit_block = { type = "choices", choices = [ { text = "Eat quietly.", targetType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "player", trait = "energy", op = "add", value = 15 }] }, { text = "Talk to @jake about his drawing.", targetType = "trigger", time_progression_minutes = 45, effects = [ { targetType = "player", trait = "energy", op = "add", value = 15 }, { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 1 } ], conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "drawing_started", operator = "is_true" } ] } }, { text = "Ask @ryan about his plans today.", targetType = "trigger", time_progression_minutes = 45, effects = [ { targetType = "player", trait = "energy", op = "add", value = 15 }, { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 1 } ] }, { text = "Offer to pour @frank's coffee.", targetType = "trigger", time_progression_minutes = 45, effects = [ { targetType = "player", trait = "energy", op = "add", value = 15 }, { targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 1 } ] } ] }
+
+# ─── LUNCH ───
+
+[[canvases]]
+id = "meal_lunch"
+name = "Lunch"
+description = "Midday. Quick energy restore."
+
+[canvases.trigger]
+location = "loc_kitchen"
+is_repeatable = true
+priority = 1
+max_triggers_per_day = 1
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "12:00"
+end_time = "13:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Midday"
+blocks = [
+  { type = "paragraph", content = "Sandwich. The kitchen is empty — everyone else is working or gone. Quiet. Just the fridge hum." },
+  { type = "image", props = { file = "activities/meal_lunch.jpg", search_queries = ["kitchen sandwich alone quiet fridge", "woman eating kitchen alone afternoon"] } },
+]
+exit_block = { type = "location", text = "Done.", config = { destinationType = "trigger", time_progression_minutes = 30, effects = [{ targetType = "player", trait = "energy", op = "add", value = 20 }] } }
+
+# ─── DINNER ───
+
+[[canvases]]
+id = "meal_dinner"
+name = "Dinner"
+description = "Evening meal. All NPCs present. Largest energy restore. Social dynamics."
+
+[canvases.trigger]
+location = "loc_kitchen"
+is_repeatable = true
+priority = 3
+max_triggers_per_day = 1
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "18:00"
+end_time = "19:30"
+
+[[canvases.nodes]]
+id = "base"
+name = "The Table"
+blocks = [
+  { type = "paragraph", content = "Dinner. Five chairs at the table — @frank at the head, @ryan and @jake on opposite sides, Lily between worlds." },
+  { type = "image", props = { file = "activities/meal_dinner.jpg", search_queries = ["family dinner table kitchen four people evening", "dinner table kitchen multiple people evening"] } },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "@jake eats with earbuds in. His sketchbook is on the table next to his plate. He hasn't said a word to her since she arrived." }
+  ], conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "drawing_started", operator = "is_false" }
+  ] } },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Four chairs. Three people. @ryan's seat faces the window. Nobody moves it." }
+  ], conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "ryan_leaving", operator = "is_true" }
+  ] } },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "The table is tense. @ryan and @jake don't look at each other. @frank eats in silence. The only sound is forks on plates." }
+  ], conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "brothers_discover", operator = "is_true" }
+  ] } },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "@ryan tells a story about the job site. @jake laughs. @frank shakes his head but almost smiles. Normal. The house pretending to be a family." }
+  ], conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "brothers_discover", operator = "is_false" }
+  ] } }
+]
+exit_block = { type = "choices", choices = [ { text = "Eat with everyone.", targetType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "player", trait = "energy", op = "add", value = 25 }] }, { text = "Sit next to @jake.", targetType = "trigger", time_progression_minutes = 60, effects = [ { targetType = "player", trait = "energy", op = "add", value = 25 }, { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 1 } ], conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "drawing_started", operator = "is_true" } ] } }, { text = "Sit across from @ryan.", targetType = "trigger", time_progression_minutes = 60, effects = [ { targetType = "player", trait = "energy", op = "add", value = 25 }, { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 1 } ] }, { text = "Sit across from @ryan. Hold his gaze.", targetType = "trigger", time_progression_minutes = 60, effects = [ { targetType = "player", trait = "energy", op = "add", value = 25 }, { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 2 } ], conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ryan_flirt", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 } ] } } ] }
+
+# ─── HOUSE CLEANING ───
+
+[[canvases]]
+id = "utility_cleaning"
+name = "House Cleaning"
+description = "Mop, scrub, dust. $20. The reliable baseline income."
+
+[canvases.trigger]
+location = "loc_hallway"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 1
+is_active = true
+costs = [{ trait = "energy", value = 20 }]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "chores_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "09:00"
+end_time = "12:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Cleaning"
+blocks = [
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Short shorts. Scrubbing the bottom step on her knees. @frank walks through the hallway. His boots stop. Two seconds. Then they keep going. Faster." },
+  { type = "image", props = { file = "activities/utility_cleaning.jpg", search_queries = ["woman scrubbing floor hallway cleaning knees", "woman cleaning house floor hands knees"] } },
+  ], conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "frank_tease", operator = "is_true" },
+    { type = "flag", subject = "player", flag_key = "frank_wine_night", operator = "is_false" }
+  ] } },
+  { type = "paragraph", content = "Mop. Scrub. Dust. The house is old and it shows — every surface collects something. Wood shavings from the workshop tracked through the hallway. @ryan's boot prints. @jake's eraser shavings." },
+  { type = "paragraph", content = "Three hours. Her back aches. But the $20 is guaranteed and it doesn't require anyone's permission or presence." }
+]
+exit_block = { type = "location", text = "Done. Collect pay.", config = { destinationType = "trigger", time_progression_minutes = 180, effects = [ { targetType = "player", trait = "money", op = "add", value = 20, clamp = false } ] } }
+
+# ─── DINER SHIFT ───
+
+[[canvases]]
+id = "utility_diner"
+name = "Diner Shift"
+description = "$45 + tips. Takes the ENTIRE evening. Misses dinner + all NPCs."
+
+[canvases.trigger]
+location = "loc_diner"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 1
+is_active = true
+costs = [{ trait = "energy", value = 30 }]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "town_access", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "confidence", operator = "gte", value = 30 }
+] }
+[[canvases.trigger.schedules]]
+start_time = "17:00"
+end_time = "22:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "The Shift"
+blocks = [
+  { type = "paragraph", content = "Vinyl booths. Coffee that's been sitting too long. The bell on the door. Five hours on her feet." },
+  { type = "image", props = { file = "activities/utility_diner.jpg", search_queries = ["diner shift waitress vinyl booths coffee", "woman working diner waitress evening"] } },
+  { type = "paragraph", content = "She pours, she carries, she smiles. The tips are better when she smiles. The tips are better since she started caring about how she looks." },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Good tips tonight. She's learned how to carry three plates. The regulars know her name." }
+  ], conditions = { version = "1.0", items = [
+    { type = "trait", subject = "player", trait_key = "beauty", operator = "gte", value = 40 }
+  ] } }
+]
+exit_block = { type = "location", text = "Shift's over.", config = { destinationType = "trigger", time_progression_minutes = 300, effects = [ { targetType = "player", trait = "money", op = "add", value = 45, clamp = false }, { targetType = "player", trait = "confidence", op = "add", value = 1 } ] } }
+
+# ═══════════════════════════════════════════════════════════════
+# JAKE ACTIVITIES (5) — Sketchbook Progress mechanic
+# ═══════════════════════════════════════════════════════════════
+
+# ─── DRAWING SESSION ───
+
+[[canvases]]
+id = "activity_drawing_jake"
+name = "Drawing Session"
+description = "Jake draws Lily. Beauty affects progress. Sketchbook mechanic."
+
+[canvases.trigger]
+location = "loc_jakes_room"
+npc = "npc_jake"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 2
+is_active = true
+costs = [{ trait = "energy", value = 15 }]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "drawing_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "14:00"
+end_time = "17:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "The Room"
+blocks = [
+  { type = "paragraph", content = "Afternoon light through @jake's window. Graphite and clean laundry. He's set up — sketchbook open, pencils arranged by grade." },
+  { type = "image", props = { file = "activities/activity_drawing_jake_base.jpg", search_queries = ["artist bedroom afternoon light sketchbook pencils setup"] } },
+  { type = "paragraph", content = "He looks up. The smile is automatic — his face decided before his brain caught up." },
+  { type = "dialog", content = "I was just— sit anywhere. The light's good today.", props = { speaker = "npc", npcId = "npc_jake" } }
+]
+exit_block = { type = "choices", choices = [ { text = "Sit down. Hold still.", targetType = "node", nodeId = "activity_drawing_jake.session" }, { text = "\"I'll come back later.\"", targetType = "trigger", time_progression_minutes = 15 } ] }
+
+[[canvases.nodes]]
+id = "session"
+name = "Drawing"
+blocks = [
+  { type = "paragraph", content = "The scratch of charcoal on paper. His hand moving with a certainty his voice never has." },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "He's sketching her hands. 'Hold still — the light on your knuckles.'" }
+  ], conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "drawing_1_complete", operator = "is_false" }
+  ] } },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Portrait today. Her face. 'Turn your head slightly. There.'" }
+  ], conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "drawing_1_complete", operator = "is_true" },
+    { type = "flag", subject = "player", flag_key = "drawing_2_complete", operator = "is_false" }
+  ] } },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Full figure. 'Can you stand near the window? The way the light falls on your—' He stops. Starts over. 'Just stand there.'" }
+  ], conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "drawing_2_complete", operator = "is_true" },
+    { type = "flag", subject = "player", flag_key = "drawing_3_complete", operator = "is_false" }
+  ] } },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "The pose is more intimate now. 'The strap is casting a shadow...' His voice is barely above a whisper." }
+  ], conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "drawing_3_complete", operator = "is_true" },
+    { type = "flag", subject = "player", flag_key = "drawing_4_complete", operator = "is_false" }
+  ] } },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "She's not wearing much. He draws without looking away. The pencil doesn't shake anymore." },
+    { type = "dialog", content = "Don't move. This is... you're perfect.", props = { speaker = "npc", npcId = "npc_jake" } }
+  ], conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "drawing_4_complete", operator = "is_true" },
+    { type = "flag", subject = "player", flag_key = "drawing_5_complete", operator = "is_false" }
+  ] } }
+]
+exit_block = { type = "choices", choices = [ { text = "Ask about what he's drawing.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 2 }, { targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 } ] }, { text = "Adjust your pose to help the composition.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 3 }, { targetType = "player", trait = "corruption", op = "add", value = 1 } ], conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "beauty", operator = "gte", value = 30 } ] } }, { text = "\"Can I see?\" Look over his shoulder.", targetType = "node", nodeId = "activity_drawing_jake.looking", conditions = { version = "1.0", items = [ { type = "trait", subject = "npc", npc_id = "npc_jake", trait_key = "love", operator = "gte", value = 8 } ] } }, { text = "Hold still and watch his eyes.", targetType = "node", nodeId = "activity_drawing_jake.flirt", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "jake_flirt", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 } ] } }, { text = "\"Come here.\"", targetType = "node", nodeId = "activity_drawing_jake.kiss", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "jake_pencil_dropped", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "jake_kiss", operator = "is_true" }, { type = "trait", subject = "npc", npc_id = "npc_jake", trait_key = "love", operator = "gte", value = 18 }, { type = "trait", subject = "player", trait_key = "beauty", operator = "gte", value = 35 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 70 } ] } }, { text = "Guide his hand.", targetType = "node", nodeId = "activity_drawing_jake.handjob", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "jake_pencil_dropped", operator = "is_true" }, { type = "trait", subject = "npc", npc_id = "npc_jake", trait_key = "love", operator = "gte", value = 22 }, { type = "trait", subject = "player", trait_key = "beauty", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 85 } ] } }, { text = "Kneel by his chair.", targetType = "node", nodeId = "activity_drawing_jake.oral", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "jake_pencil_dropped", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "blowjob_unlock", operator = "is_true" }, { type = "trait", subject = "npc", npc_id = "npc_jake", trait_key = "love", operator = "gte", value = 28 }, { type = "trait", subject = "player", trait_key = "beauty", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 100 } ] } }, { text = "\"Stay tonight.\"", targetType = "node", nodeId = "activity_drawing_jake.sex", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "jake_pencil_dropped", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "sex_unlock", operator = "is_true" }, { type = "trait", subject = "npc", npc_id = "npc_jake", trait_key = "love", operator = "gte", value = 32 }, { type = "trait", subject = "player", trait_key = "beauty", operator = "gte", value = 45 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 120 } ] } } ] }
+
+[[canvases.nodes]]
+id = "looking"
+name = "What He's Drawing"
+blocks = [
+  { type = "paragraph", content = "She leans over his shoulder. Her hair brushes his neck. He goes very still." },
+  { type = "paragraph", content = "The drawing. Her jawline. Her hands. Details she didn't know he'd noticed — the chip in her thumbnail, the freckle below her ear." },
+  { type = "paragraph", content = "*He sees things nobody else sees. Small things. True things.*" }
+]
+exit_block = { type = "choices", choices = [ { text = "\"It's beautiful, Jake.\" Be specific.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 3 }, { targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 2 } ] }, { text = "\"Sign it. I want to keep this one.\"", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 4 } ] } ] }
+
+[[canvases.nodes]]
+id = "flirt"
+name = "His Eyes"
+blocks = [
+  { type = "paragraph", content = "She watches him watching her. Neither blinks." },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "He blushes. Sets down the pencil. 'You're making it hard to concentrate.'" }
+  ], conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "chose_tender_jake", operator = "is_true" }
+  ] } },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "His eyes narrow. The pencil doesn't stop. 'Don't move.'" }
+  ], conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "chose_possessive_jake", operator = "is_true" }
+  ] } }
+]
+exit_block = { type = "choices", choices = [ { text = "\"Then stop concentrating.\"", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 2 }, { targetType = "npc", npcId = "npc_jake", trait = "corruption", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 2 } ] }, { text = "Look away first. Let him win.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 1 }, { targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 } ] } ] }
+
+[[canvases.nodes]]
+id = "kiss"
+name = "The Pencil Drops"
+blocks = [
+  { type = "paragraph", content = "She says it quietly. Two words. He sets the pencil down like it weighs nothing and everything." },
+  { type = "paragraph", content = "He crosses the room. His glasses bump her forehead — he pulls back, embarrassed — and she closes the gap." },
+  { type = "image", props = { file = "activities/activity_drawing_jake_kiss.jpg", search_queries = ["young couple tender kiss bedroom afternoon gentle"] } },
+  { type = "paragraph", content = "His mouth is soft. He tastes like graphite and coffee he drinks too sweet. His hand finds her jaw, holds it like he's positioning a portrait. The sketchbook slides to the floor. Neither of them picks it up." }
+]
+exit_block = { type = "choices", choices = [ { text = "Pull him closer.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 4 }, { targetType = "npc", npcId = "npc_jake", trait = "corruption", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 2 } ] }, { text = "Pull back. \"We shouldn't.\"", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 2 }, { targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 2 } ] } ] }
+
+[[canvases.nodes]]
+id = "handjob"
+name = "Not the Sketchbook"
+blocks = [
+  { type = "paragraph", content = "His pencil is shaking. Has been for twenty minutes. She knows why." },
+  { type = "paragraph", content = "Her hand finds his. The pencil drops. She guides his hand — not to the sketchbook. He makes a sound. Small. Surprised. His glasses fog." },
+  { type = "image", props = { file = "activities/activity_drawing_jake_handjob.jpg", search_queries = ["young couple intimate bedroom close tender"] } },
+  { type = "paragraph", content = "She wraps her fingers around him. Gentle. He shakes." },
+  { type = "dialog", content = "Is this okay?", props = { speaker = "player" } },
+  { type = "paragraph", content = "He nods. Can't speak. She moves her hand. Slow. His hips lift off the chair without him deciding. The sketchbook slides to the floor." },
+  { type = "paragraph", content = "He comes quietly — a shudder, his forehead against her shoulder. His hand finds her waist and just holds on." },
+  { type = "dialog", content = "I drew you a hundred times. This is better.", props = { speaker = "npc", npcId = "npc_jake" } }
+]
+exit_block = { type = "choices", choices = [ { text = "Hold him.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 5 }, { targetType = "npc", npcId = "npc_jake", trait = "corruption", op = "add", value = 3 }, { targetType = "player", trait = "corruption", op = "add", value = 3 } ] }, { text = "\"Draw me again tomorrow.\"", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 4 }, { targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 2 } ] } ] }
+
+[[canvases.nodes]]
+id = "oral"
+name = "Below the Sketchbook"
+blocks = [
+  { type = "paragraph", content = "She slides off the edge of his bed. Kneels by his chair. His eyes go wide behind the glasses." },
+  { type = "dialog", content = "You don't have to—", props = { speaker = "npc", npcId = "npc_jake" } },
+  { type = "paragraph", content = "She does. His hand finds her hair — not pushing, not guiding. Just resting. Like he needs to hold something or he'll float away." },
+  { type = "image", props = { file = "activities/activity_drawing_jake_oral.jpg", search_queries = ["intimate couple bedroom kneeling tender"] } },
+  { type = "paragraph", content = "His other hand grips the arm of the chair. Knuckles white. His breathing is the only sound in the room besides the clock." },
+  { type = "paragraph", content = "When it's over, he pulls her up. Into the chair with him. It's not built for two but neither of them cares." }
+]
+exit_block = { type = "choices", choices = [ { text = "Stay in the chair with him.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 5 }, { targetType = "npc", npcId = "npc_jake", trait = "corruption", op = "add", value = 4 }, { targetType = "player", trait = "corruption", op = "add", value = 4 } ] } ] }
+
+[[canvases.nodes]]
+id = "sex"
+name = "The Drawing Can Wait"
+blocks = [
+  { type = "paragraph", content = "The sketchbook is on the floor. The pencils are scattered. The afternoon light makes everything gold." },
+  { type = "paragraph", content = "He undresses her slowly. Reverently. Like he's unwrapping something he's been drawing from memory for weeks. His hands shake but they know exactly where to go." },
+  { type = "image", props = { file = "activities/activity_drawing_jake_sex.jpg", search_queries = ["young couple intimate bedroom afternoon undressing tender"] } },
+  { type = "paragraph", content = "She pulls him down to the narrow bed. It creaks — the wall is thin, @ryan's room is next door, and neither of them cares." },
+  { type = "paragraph", content = "He's gentle. Careful. His forehead against hers, glasses abandoned on the desk. Every movement is slow, like he's memorizing it for later." },
+  { type = "paragraph", content = "Afterward, he traces her collarbone with his fingertip. The same line he's drawn a hundred times. But this time, it's real." },
+  { type = "dialog", content = "I love you. I drew you again. I always draw you.", props = { speaker = "npc", npcId = "npc_jake" } }
+]
+exit_block = { type = "choices", choices = [ { text = "\"I know.\"", targetType = "trigger", time_progression_minutes = 180, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 6 }, { targetType = "npc", npcId = "npc_jake", trait = "corruption", op = "add", value = 5 }, { targetType = "player", trait = "corruption", op = "add", value = 5 } ] } ] }
+
+# ─── WALL KNOCKING ───
+
+[[canvases]]
+id = "activity_wall_knocking"
+name = "Wall Knocking"
+description = "Nightly ritual through the shared wall. Silence has consequences."
+
+[canvases.trigger]
+location = "loc_lily_room"
+npc = "npc_jake"
+is_repeatable = true
+priority = 3
+max_triggers_per_day = 1
+is_active = true
+costs = [{ trait = "energy", value = 10 }]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "drawing_started", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "first_morning", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "22:00"
+end_time = "00:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Tap-Tap"
+blocks = [
+  { type = "paragraph", content = "Night. Through the wall: tap-tap. The familiar rhythm. Their ritual." }
+]
+exit_block = { type = "choices", choices = [ { text = "Knock back.", targetType = "node", nodeId = "activity_wall_knocking.talking" }, { text = "Open his door.", targetType = "node", nodeId = "activity_wall_knocking.his_room", conditions = { version = "1.0", items = [ { type = "trait", subject = "npc", npc_id = "npc_jake", trait_key = "love", operator = "gte", value = 12 } ] } }, { text = "Silence.", targetType = "trigger", time_progression_minutes = 30, effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = -1 }] } ] }
+
+[[canvases.nodes]]
+id = "talking"
+name = "Through the Wall"
+blocks = [
+  { type = "paragraph", content = "She knocks back. Tap-tap." },
+  { type = "paragraph", content = "Through the plaster: his voice, muffled. 'You up?'" },
+  { type = "paragraph", content = "They talk. About nothing. About everything. The wall between them makes honesty easier — no eye contact, no body language. Just voices and thin plaster." }
+]
+exit_block = { type = "choices", choices = [ { text = "Tell him about her day.", targetType = "trigger", time_progression_minutes = 60, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 2 } ] }, { text = "Ask what he's drawing.", targetType = "trigger", time_progression_minutes = 60, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 2 } ] }, { text = "\"I wish this wall wasn't here.\"", targetType = "trigger", time_progression_minutes = 60, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 3 }, { targetType = "player", trait = "corruption", op = "add", value = 1 } ], conditions = { version = "1.0", items = [ { type = "trait", subject = "npc", npc_id = "npc_jake", trait_key = "love", operator = "gte", value = 15 } ] } }, { text = "\"Good night, Jake.\"", targetType = "trigger", time_progression_minutes = 30, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 1 } ] } ] }
+
+[[canvases.nodes]]
+id = "his_room"
+name = "His Room"
+blocks = [
+  { type = "paragraph", content = "She opens his door. He looks up from the sketchbook. Not surprised — he was hoping." },
+  { type = "paragraph", content = "The room smells like graphite and clean laundry. Desk lamp on. The walls covered in drawings she's seen a hundred times and one she hasn't." }
+]
+exit_block = { type = "choices", choices = [ { text = "Sit on the floor next to him.", targetType = "trigger", time_progression_minutes = 90, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 3 }, { targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 2 } ] }, { text = "Sit on his bed.", targetType = "trigger", time_progression_minutes = 90, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 3 }, { targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 } ] }, { text = "Kiss him.", targetType = "node", nodeId = "activity_wall_knocking.night_kiss", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "jake_kiss", operator = "is_true" }, { type = "trait", subject = "npc", npc_id = "npc_jake", trait_key = "love", operator = "gte", value = 18 } , { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 70 }] } }, { text = "Pull him to the bed.", targetType = "node", nodeId = "activity_wall_knocking.night_intimate", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "jake_pencil_dropped", operator = "is_true" }, { type = "trait", subject = "npc", npc_id = "npc_jake", trait_key = "love", operator = "gte", value = 22 } , { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 85 }] } } ] }
+
+[[canvases.nodes]]
+id = "night_kiss"
+name = "Through the Dark"
+blocks = [
+  { type = "paragraph", content = "The desk lamp clicks off. The room goes dark except for the moonlight through the curtain." },
+  { type = "paragraph", content = "She finds his face in the dark. His glasses are on the desk. Without them, his eyes are softer. Closer." },
+  { type = "paragraph", content = "The kiss is different at night. Slower. No art between them. No excuse. Just mouths and the sound of breathing through the wall that used to separate them." },
+  { type = "image", props = { file = "activities/activity_wall_knocking_kiss.jpg", search_queries = ["young couple kissing dark bedroom night moonlight tender"] } }
+]
+exit_block = { type = "choices", choices = [ { text = "Stay a little longer.", targetType = "trigger", time_progression_minutes = 60, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 4 }, { targetType = "npc", npcId = "npc_jake", trait = "corruption", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 2 } ] }, { text = "\"Good night, Jake.\" Go back through the wall.", targetType = "trigger", time_progression_minutes = 30, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 3 } ] } ] }
+
+[[canvases.nodes]]
+id = "night_intimate"
+name = "The Narrow Bed"
+blocks = [
+  { type = "paragraph", content = "The bed is too narrow for two people. They make it work." },
+  { type = "paragraph", content = "His hands are uncertain in the dark. She guides them. He makes a sound against her neck — quiet, like he's trying not to let it through the wall." },
+  { type = "image", props = { file = "activities/activity_wall_knocking_intimate.jpg", search_queries = ["young couple intimate narrow bed night dark tender quiet"] } },
+  { type = "paragraph", content = "*The wall is thin. @ryan might hear. @frank might hear. The whole house might hear.*" },
+  { type = "paragraph", content = "*I don't care.*" }
+]
+exit_block = { type = "choices", choices = [ { text = "Stay until his breathing slows.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 5 }, { targetType = "npc", npcId = "npc_jake", trait = "corruption", op = "add", value = 3 }, { targetType = "player", trait = "corruption", op = "add", value = 3 } ] } ] }
+
+# ─── LIBRARY STUDYING ───
+
+[[canvases]]
+id = "activity_library_jake"
+name = "Library Studying"
+description = "Art theory and homework. Jake's trust-building activity."
+
+[canvases.trigger]
+location = "loc_library"
+npc = "npc_jake"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 1
+is_active = true
+costs = [{ trait = "energy", value = 10 }]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "town_access", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "drawing_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "13:00"
+end_time = "16:00"
+weekdays = [0, 1, 2, 3, 4]
+
+[[canvases.nodes]]
+id = "base"
+name = "The Carrel"
+blocks = [
+  { type = "paragraph", content = "Library basement. Low ceilings, fluorescent buzz. @jake at a study carrel, books spread open. He looks up when she sits down next to him." },
+  { type = "image", props = { file = "activities/activity_library_jake.jpg", search_queries = ["library basement studying couple table books", "couple library table books quiet studying"] } },
+  { type = "paragraph", content = "Side by side. Textbooks and sketchbooks. He explains composition theory — the rule of thirds, negative space, why Vermeer's light feels alive." }
+]
+exit_block = { type = "choices", choices = [ { text = "Listen and learn.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 2 }, { targetType = "player", trait = "intelligence", op = "add", value = 2 } ] }, { text = "Help him with his art history essay.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 3 }, { targetType = "player", trait = "intelligence", op = "add", value = 1 } ], conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "intelligence", operator = "gte", value = 25 } ] } }, { text = "Close the textbook. Talk about something real.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 3 }, { targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 2 } ], conditions = { version = "1.0", items = [ { type = "trait", subject = "npc", npc_id = "npc_jake", trait_key = "love", operator = "gte", value = 12 } ] } } ] }
+
+# ─── PARK SKETCHING ───
+
+[[canvases]]
+id = "activity_park_jake"
+name = "Park Sketching"
+description = "Public. Peaceful. No escalation beyond sitting close."
+
+[canvases.trigger]
+location = "loc_park"
+npc = "npc_jake"
+is_repeatable = true
+priority = 2
+costs = [{ trait = "energy", value = 10 }]
+max_triggers_per_day = 1
+is_active = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "town_access", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "drawing_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "10:00"
+end_time = "13:00"
+weekdays = [5, 6]
+
+[[canvases.nodes]]
+id = "base"
+name = "The Bench"
+blocks = [
+  { type = "paragraph", content = "Park bench. @jake's sketching the pond — the way light moves on water. She sits next to him. Close enough to see the page." },
+  { type = "image", props = { file = "activities/activity_park_jake.jpg", search_queries = ["park bench man sketching pond nature", "young man sketching park bench pond trees"] } },
+  { type = "paragraph", content = "Peaceful. Public. Nobody from the house watching." }
+]
+exit_block = { type = "choices", choices = [ { text = "Watch him draw.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 1 }, { targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 2 } ] }, { text = "Bring your own sketchbook.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 2 }, { targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 2 }, { targetType = "player", trait = "beauty", op = "add", value = 1 } ], conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "has_art_supplies", operator = "is_true" } ] } }, { text = "Lean against his shoulder.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 3 }, { targetType = "player", trait = "corruption", op = "add", value = 1 } ], conditions = { version = "1.0", items = [ { type = "trait", subject = "npc", npc_id = "npc_jake", trait_key = "love", operator = "gte", value = 15 } ] } } ] }
+
+# ─── CREEK SWIMMING (CONTEMPLATIVE — JAKE) ───
+
+[[canvases]]
+id = "activity_creek_jake"
+name = "Creek Swimming (Jake)"
+description = "Quiet. Observational. Jake sketches while she swims."
+
+[canvases.trigger]
+location = "loc_creek"
+npc = "npc_jake"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 1
+is_active = true
+costs = [{ trait = "energy", value = 15 }]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "first_swim", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "drawing_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "15:00"
+end_time = "17:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "The Water"
+blocks = [
+  { type = "paragraph", content = "Creek. @jake on the bank with his sketchbook. She wades in. The water is cold — her toes go numb, then her calves adjust." },
+  { type = "paragraph", content = "He draws. She floats. The only sound is water over stones and the scratch of his pencil." },
+  { type = "image", props = { file = "activities/activity_creek_jake.jpg", search_queries = ["woman swimming creek man drawing bank nature peaceful"] } }
+]
+exit_block = { type = "choices", choices = [ { text = "Float on her back. Let him draw.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 2 }, { targetType = "player", trait = "fitness", op = "add", value = 1 } ] }, { text = "Swim to the deeper part.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 2 }, { targetType = "player", trait = "fitness", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 2 } ], conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "fitness", operator = "gte", value = 25 } ] } }, { text = "\"Come in.\"", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 3 }, { targetType = "npc", npcId = "npc_jake", trait = "corruption", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 2 } ], conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "jake_tease", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 55 } ] } } ] }
+
+# ═══════════════════════════════════════════════════════════════
+# RYAN ACTIVITIES (5) — Challenge System mechanic
+# ═══════════════════════════════════════════════════════════════
+
+# ─── TRUCK RIDE ───
+
+[[canvases]]
+id = "activity_truck_ryan"
+name = "Truck Ride"
+description = "Destination matters. Different places unlock different conversations."
+
+[canvases.trigger]
+location = "loc_ryans_truck"
+npc = "npc_ryan"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 1
+costs = [{ trait = "energy", value = 15 }]
+is_active = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "ryan_leaving", operator = "is_false" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "09:00"
+end_time = "11:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "The Truck"
+blocks = [
+  { type = "group", blocks = [
+    { type = "paragraph", content = "He takes the long way without explaining. The detours are getting longer. Neither of them mentions why." }
+  ], conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "ryan_secret_discovered", operator = "is_true" },
+    { type = "flag", subject = "player", flag_key = "ryan_leaving_confirmed", operator = "is_false" }
+  ] } },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Truck. He drives slower today. Like he's memorizing the roads. Every turn, every tree, every mile marker." }
+  ], conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "ryan_leaving_confirmed", operator = "is_true" },
+    { type = "flag", subject = "player", flag_key = "ryan_stayed", operator = "is_false" }
+  ] } },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Truck. He's smiling. Not the grin — the real one underneath. The roads feel different when you're not counting how many you have left." }
+  ], conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "ryan_stayed", operator = "is_true" }
+  ] } },
+  { type = "paragraph", content = "Pine air freshener and whatever @ryan wore to the job site. The bench seat. No center console. The radio plays classic rock too loud." },
+  { type = "image", props = { file = "activities/activity_truck_ryan_base.jpg", search_queries = ["pickup truck interior bench seat rural road morning"] } },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "He turns the music up. Hands on the wheel. Ten and two. But he's looking at her mouth when he talks." }
+  ], conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "ryan_resisted", operator = "is_true" }
+  ] } },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "His hand finds her knee before the driveway ends. Not testing now. Claiming. She doesn't move it." }
+  ], conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "ryan_allowed", operator = "is_true" }
+  ] } },
+]
+exit_block = { type = "choices", choices = [ { text = "\"Just drive. Nowhere in particular.\"", targetType = "node", nodeId = "activity_truck_ryan.ride_nowhere", conditions = { version = "1.0", items = [ { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "trust", operator = "gte", value = 12 } ] } }, { text = "\"Town run. I need supplies.\"", targetType = "trigger", time_progression_minutes = 90, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 1 }, { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 1 } ] }, { text = "\"The creek.\"", targetType = "trigger", time_progression_minutes = 60, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 1 } ], conditions = { version = "1.0", items = [ { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "trust", operator = "gte", value = 8 } ] } }, { text = "Challenge: \"Bet you can't name three songs on this station.\"", targetType = "node", nodeId = "activity_truck_ryan.challenge", conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "confidence", operator = "gte", value = 15 } ] } }, { text = "\"Pull over.\"", targetType = "node", nodeId = "activity_truck_ryan.kiss", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ryan_kiss", operator = "is_true" }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "love", operator = "gte", value = 15 }, { type = "trait", subject = "player", trait_key = "confidence", operator = "gte", value = 25 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 70 } ] } }, { text = "\"Don't tell me to stop.\"", targetType = "node", nodeId = "activity_truck_ryan.handjob", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ryan_handjob", operator = "is_true" }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "love", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "fitness", operator = "gte", value = 35 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 85 } ] } }, ] }
+
+[[canvases.nodes]]
+id = "ride_nowhere"
+name = "Nowhere"
+blocks = [
+  { type = "paragraph", content = "No destination. He drives slow. The road unwinds through fields. Something's on his mind." },
+  { type = "paragraph", content = "The radio is off. Wind through the open windows. She waits." },
+  { type = "group", blocks = [
+    { type = "dialog", content = "I didn't finish community college because I couldn't read fast enough. No joke after. Just the window down and the road.", props = { speaker = "npc", npcId = "npc_ryan" } }
+  ], conditions = { version = "1.0", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "trust", operator = "gte", value = 18 }
+  ] } },
+  { type = "group", blocks = [
+    { type = "dialog", content = "I don't want to go home yet.", props = { speaker = "npc", npcId = "npc_ryan" } },
+    { type = "paragraph", content = "The most vulnerable thing @ryan has ever said." }
+  ], conditions = { version = "1.0", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "trust", operator = "gte", value = 22 }
+  ] } }
+]
+exit_block = { type = "choices", choices = [ { text = "\"You don't have to talk.\"", targetType = "trigger", time_progression_minutes = 90, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 2 }, { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 1 } ] }, { text = "\"Tell me about the scar. The real story.\"", targetType = "trigger", time_progression_minutes = 90, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 3 }, { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 2 } ], conditions = { version = "1.0", items = [ { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "trust", operator = "gte", value = 15 } ] } } ] }
+
+[[canvases.nodes]]
+id = "challenge"
+name = "The Dare"
+blocks = [
+  { type = "paragraph", content = "His grin snaps into place. He LOVES this." },
+  { type = "dialog", content = "You're on. If I win, you owe me a beer.", props = { speaker = "npc", npcId = "npc_ryan" } }
+]
+exit_block = { type = "choices", choices = [ { text = "Name them. (Try to win.)", targetType = "trigger", time_progression_minutes = 60, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 3 }, { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 1 } ] }, { text = "\"Raise: if I win, you tell me about the scar.\"", targetType = "trigger", time_progression_minutes = 60, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 4 }, { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 2 }, { targetType = "player", trait = "confidence", op = "add", value = 2 } ], conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "confidence", operator = "gte", value = 20 } ] } } ] }
+
+[[canvases.nodes]]
+id = "kiss"
+name = "Gravel and Silence"
+blocks = [
+  { type = "paragraph", content = "He pulls over. Gravel under tires. Engine off. The radio dies mid-song." },
+  { type = "dialog", content = "C'mere.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "One word. His hand behind her neck, pulling her across the bench seat. He tastes like mint gum and adrenaline. His stubble scrapes her chin." },
+  { type = "image", props = { file = "activities/activity_truck_ryan_kiss.jpg", search_queries = ["couple kissing pickup truck passionate bench seat"] } },
+  { type = "paragraph", content = "She grabs his collar. The truck lurches — his foot slipped off the brake." },
+  { type = "dialog", content = "Took you long enough.", props = { speaker = "npc", npcId = "npc_ryan" } }
+]
+exit_block = { type = "choices", choices = [ { text = "\"I didn't do anything.\"", targetType = "trigger", time_progression_minutes = 60, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 4 }, { targetType = "npc", npcId = "npc_ryan", trait = "corruption", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 2 } ] }, { text = "Kiss him harder.", targetType = "trigger", time_progression_minutes = 60, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 3 }, { targetType = "npc", npcId = "npc_ryan", trait = "corruption", op = "add", value = 3 }, { targetType = "player", trait = "corruption", op = "add", value = 3 } ] } ] }
+
+[[canvases.nodes]]
+id = "handjob"
+name = "The Gearshift"
+blocks = [
+  { type = "paragraph", content = "Parked by the creek. Engine off. Windows fogged from the inside." },
+  { type = "paragraph", content = "His hand is on the gearshift. Her hand covers his. Moves it. Higher." },
+  { type = "dialog", content = "Fuck.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "One word. All breath. She grips him — firm, fast, no hesitation. His hand slams the truck ceiling." },
+  { type = "image", props = { file = "activities/activity_truck_ryan_handjob.jpg", search_queries = ["couple intimate truck parked foggy windows"] } },
+  { type = "paragraph", content = "He finishes with a groan that fogs the windshield. Chest heaving. Then the grin comes back." },
+  { type = "dialog", content = "Your turn?", props = { speaker = "npc", npcId = "npc_ryan" } }
+]
+exit_block = { type = "choices", choices = [ { text = "\"Maybe next time.\"", targetType = "trigger", time_progression_minutes = 90, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 4 }, { targetType = "npc", npcId = "npc_ryan", trait = "corruption", op = "add", value = 3 }, { targetType = "player", trait = "corruption", op = "add", value = 3 } ] }, { text = "\"Definitely.\"", targetType = "trigger", time_progression_minutes = 90, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 5 }, { targetType = "npc", npcId = "npc_ryan", trait = "corruption", op = "add", value = 4 }, { targetType = "player", trait = "corruption", op = "add", value = 4 } ] } ] }
+
+# ─── GYM WORKOUT ───
+
+[[canvases]]
+id = "activity_gym_ryan"
+name = "Gym Workout"
+description = "Performance-based. Fitness gates exercises. Challenge mechanic."
+
+[canvases.trigger]
+location = "loc_gym"
+npc = "npc_ryan"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 2
+costs = [{ trait = "energy", value = 25 }]
+is_active = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "town_access", operator = "is_true" },
+  { type = "pass", pass_id = "gym_pass", operator = "is_active" },
+  { type = "flag", subject = "player", flag_key = "ryan_leaving", operator = "is_false" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "07:00"
+end_time = "09:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "The Gym"
+blocks = [
+  { type = "group", blocks = [
+    { type = "paragraph", content = "He's lifting heavier than usual. Punishing something. Or saying goodbye to the routine." }
+  ], conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "ryan_leaving_confirmed", operator = "is_true" },
+    { type = "flag", subject = "player", flag_key = "ryan_stayed", operator = "is_false" }
+  ] } },
+  { type = "paragraph", content = "Gym. Free weights. @ryan is already at the bench press — his altar." },
+  { type = "image", props = { file = "activities/activity_gym_ryan.jpg", search_queries = ["gym free weights bench press athletic man workout"] } }
+]
+exit_block = { type = "choices", choices = [ { text = "Treadmill. Solo.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "player", trait = "fitness", op = "add", value = 2 } ] }, { text = "Work out near him.", targetType = "node", nodeId = "activity_gym_ryan.workout" }, { text = "\"Spot me.\"", targetType = "node", nodeId = "activity_gym_ryan.spotting", conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "fitness", operator = "gte", value = 30 } ] } } ] }
+
+[[canvases.nodes]]
+id = "workout"
+name = "Side by Side"
+blocks = [
+  { type = "paragraph", content = "Side by side. He demonstrates form — his hands adjust her stance. Professional. Charged." },
+  { type = "dialog", content = "Match my set. Ten reps.", props = { speaker = "npc", npcId = "npc_ryan" } }
+]
+exit_block = { type = "choices", choices = [ { text = "Match his set.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 3 }, { targetType = "player", trait = "fitness", op = "add", value = 3 } ], conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "fitness", operator = "gte", value = 30 } ] } }, { text = "Try. Fail at eight.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "corruption", op = "add", value = 1 }, { targetType = "player", trait = "fitness", op = "add", value = 2 } ] }, { text = "\"Add five more. If I win, you buy protein shakes.\"", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 4 }, { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 1 }, { targetType = "player", trait = "fitness", op = "add", value = 3 }, { targetType = "player", trait = "confidence", op = "add", value = 2 } ], conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "fitness", operator = "gte", value = 35 }, { type = "trait", subject = "player", trait_key = "confidence", operator = "gte", value = 20 } ] } } ] }
+
+[[canvases.nodes]]
+id = "spotting"
+name = "Hands Close"
+blocks = [
+  { type = "paragraph", content = "She spots him. He spots her. Hands near each other's bodies — functional, necessary. Professional." },
+  { type = "paragraph", content = "His fingers brush her ribcage adjusting her grip. Neither acknowledges it." }
+]
+exit_block = { type = "choices", choices = [ { text = "Focus on form.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 2 }, { targetType = "player", trait = "fitness", op = "add", value = 3 } ] }, { text = "Hold longer than necessary.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 2 }, { targetType = "npc", npcId = "npc_ryan", trait = "corruption", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 2 }, { targetType = "player", trait = "fitness", op = "add", value = 3 } ], conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ryan_flirt", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 } ] } }, { text = "\"Locker hallway. Now.\"", targetType = "node", nodeId = "activity_gym_ryan.hallway_kiss", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ryan_kiss", operator = "is_true" }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "trust", operator = "gte", value = 15 }, { type = "trait", subject = "player", trait_key = "fitness", operator = "gte", value = 30 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 70 } ] } }, { text = "\"The shower.\"", targetType = "node", nodeId = "activity_gym_ryan.shower", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ryan_handjob", operator = "is_true" }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "trust", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "fitness", operator = "gte", value = 35 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 85 } ] } } ] }
+
+[[canvases.nodes]]
+id = "hallway_kiss"
+name = "Between Locker Rooms"
+blocks = [
+  { type = "paragraph", content = "The hallway between locker rooms. Narrow. Fluorescent buzz overhead. Nobody here at this hour." },
+  { type = "paragraph", content = "She grabs his tank top. Pulls. He lets himself be pulled — @ryan, who never lets anyone pull him anywhere." },
+  { type = "image", props = { file = "activities/activity_gym_ryan_kiss.jpg", search_queries = ["couple kissing gym hallway athletic sweaty passionate"] } },
+  { type = "paragraph", content = "He tastes like sweat and protein powder. His hands grip her waist — not gentle, but not rough. Somewhere between workout and worship." }
+]
+exit_block = { type = "choices", choices = [ { text = "\"Anyone could walk in.\"", targetType = "trigger", time_progression_minutes = 30, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 4 }, { targetType = "npc", npcId = "npc_ryan", trait = "corruption", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 2 }, { targetType = "player", trait = "fitness", op = "add", value = 3 } ] } ] }
+
+[[canvases.nodes]]
+id = "shower"
+name = "Hot Water"
+blocks = [
+  { type = "paragraph", content = "The shower stall. Steam. The water is too hot and neither of them adjusts it." },
+  { type = "paragraph", content = "His back against the tile. Her hand finds him through the water. He groans — the sound bounces off every surface in the empty locker room." },
+  { type = "image", props = { file = "activities/activity_gym_ryan_shower.jpg", search_queries = ["couple intimate shower steam athletic"] } },
+  { type = "paragraph", content = "\"If someone comes in—\" She doesn't finish. He doesn't care." }
+]
+exit_block = { type = "choices", choices = [ { text = "Finish what she started.", targetType = "trigger", time_progression_minutes = 60, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 5 }, { targetType = "npc", npcId = "npc_ryan", trait = "corruption", op = "add", value = 3 }, { targetType = "player", trait = "corruption", op = "add", value = 3 }, { targetType = "player", trait = "fitness", op = "add", value = 3 } ] } ] }
+
+# ─── TV COUCH ───
+
+[[canvases]]
+id = "activity_tv_couch"
+name = "TV on the Couch"
+description = "Hangout. Hub menu grows with relationship. Frank may walk through."
+
+[canvases.trigger]
+location = "loc_living_room"
+npc = "npc_ryan"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 2
+costs = [{ trait = "energy", value = 10 }]
+is_active = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "ryan_leaving", operator = "is_false" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "19:00"
+end_time = "22:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "The Couch"
+blocks = [
+  { type = "group", blocks = [
+    { type = "paragraph", content = "He sits closer than he needs to. His arm behind her on the couch. Not performing — memorizing what it feels like to sit next to her." }
+  ], conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "ryan_leaving_confirmed", operator = "is_true" },
+    { type = "flag", subject = "player", flag_key = "ryan_stayed", operator = "is_false" }
+  ] } },
+  { type = "paragraph", content = "Living room. TV on — something @ryan picked. Blue glow. The leather couch fits three if nobody cares about personal space." },
+  { type = "paragraph", content = "The cushion between them is either a buffer or a bridge." },
+  { type = "image", props = { file = "activities/activity_tv_couch.jpg", search_queries = ["couple couch TV evening living room casual domestic"] } }
+]
+exit_block = { type = "choices", choices = [ { text = "Watch the show.", targetType = "trigger", time_progression_minutes = 90, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 1 } ] }, { text = "Comment on the show. Make him laugh.", targetType = "trigger", time_progression_minutes = 90, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 1 }, { targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 1 } ] }, { text = "Remove the cushion between you.", targetType = "node", nodeId = "activity_tv_couch.close", conditions = { version = "1.0", items = [ { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "love", operator = "gte", value = 8 } ] } }, { text = "Lean into him.", targetType = "trigger", time_progression_minutes = 90, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 2 }, { targetType = "npc", npcId = "npc_ryan", trait = "corruption", op = "add", value = 1 }, { targetType = "player", trait = "corruption", op = "add", value = 1 } ], conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ryan_flirt", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 } ] } }, { text = "Kiss him.", targetType = "node", nodeId = "activity_tv_couch.couch_kiss", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ryan_kiss", operator = "is_true" }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "love", operator = "gte", value = 15 }, { type = "trait", subject = "player", trait_key = "confidence", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 70 } ] } }, { text = "Under the blanket.", targetType = "node", nodeId = "activity_tv_couch.blanket", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ryan_handjob", operator = "is_true" }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "love", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "fitness", operator = "gte", value = 30 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 85 } ] } }, ] }
+
+[[canvases.nodes]]
+id = "close"
+name = "No Buffer"
+blocks = [
+  { type = "paragraph", content = "Cushion gone. Their legs almost touching. The TV is background noise." },
+  { type = "paragraph", content = "He doesn't look at her. But his leg shifts. Closes the gap by an inch." }
+]
+exit_block = { type = "choices", choices = [ { text = "Let her knee touch his.", targetType = "trigger", time_progression_minutes = 90, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 1 } ] }, { text = "Just sit close. Comfortable silence.", targetType = "trigger", time_progression_minutes = 90, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 1 }, { targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 1 } ] } ] }
+
+[[canvases.nodes]]
+id = "couch_kiss"
+name = "Blue Light"
+blocks = [
+  { type = "paragraph", content = "The TV casts blue light across his face. She leans across the cushion gap. His eyes widen for half a second — then he meets her halfway." },
+  { type = "image", props = { file = "activities/activity_tv_couch_kiss.jpg", search_queries = ["couple kissing couch TV blue light living room evening"] } },
+  { type = "paragraph", content = "His hand finds the back of her neck. The TV plays to an empty audience." }
+]
+exit_block = { type = "choices", choices = [ { text = "Pull back before someone walks in.", targetType = "trigger", time_progression_minutes = 90, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 3 }, { targetType = "npc", npcId = "npc_ryan", trait = "corruption", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 2 } ] } ] }
+
+[[canvases.nodes]]
+id = "blanket"
+name = "Under Cover"
+blocks = [
+  { type = "paragraph", content = "The throw blanket from the arm of the couch. She drapes it over their laps. His eyebrows go up. Then the grin." },
+  { type = "paragraph", content = "Her hand finds him under the blanket. The TV is loud enough to cover the sound of his breathing. Barely." },
+  { type = "image", props = { file = "activities/activity_tv_couch_blanket.jpg", search_queries = ["couple couch blanket intimate evening living room secret"] } },
+  { type = "paragraph", content = "@frank could walk through at any moment. The danger is the point." }
+]
+exit_block = { type = "choices", choices = [ { text = "Finish before anyone comes.", targetType = "trigger", time_progression_minutes = 90, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 4 }, { targetType = "npc", npcId = "npc_ryan", trait = "corruption", op = "add", value = 3 }, { targetType = "player", trait = "corruption", op = "add", value = 3 } ] } ] }
+
+# ─── JOB SITE ───
+
+[[canvases]]
+id = "activity_job_site"
+name = "Job Site"
+description = "Physical work. Earns $40 + fitness. One challenge moment."
+
+[canvases.trigger]
+location = "loc_workshop"
+npc = "npc_ryan"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 1
+is_active = true
+costs = [{ trait = "energy", value = 15 }]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chores_started", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "ryan_leaving", operator = "is_false" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "09:00"
+end_time = "12:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Work"
+blocks = [
+  { type = "group", blocks = [
+    { type = "paragraph", content = "He works faster. Cleaner. Not for @frank — for himself. Every dollar is one step closer to the truck being packed." }
+  ], conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "ryan_secret_discovered", operator = "is_true" }
+  ] } },
+  { type = "paragraph", content = "Workshop. Sawdust and motor oil. @ryan puts her to work — holding boards, sorting nails, sweeping." },
+  { type = "paragraph", content = "A heavy board needs moving. He could do it alone." },
+  { type = "image", props = { file = "activities/activity_job_site.jpg", search_queries = ["workshop lumber physical work man woman helping construction"] } }
+]
+exit_block = { type = "choices", choices = [ { text = "Help him lift it.", targetType = "trigger", time_progression_minutes = 180, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 2 }, { targetType = "player", trait = "fitness", op = "add", value = 1 }, { targetType = "player", trait = "money", op = "add", value = 40, clamp = false } ], conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "fitness", operator = "gte", value = 20 } ] } }, { text = "Solve the measurement problem instead.", targetType = "trigger", time_progression_minutes = 180, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 1 }, { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 1 }, { targetType = "player", trait = "intelligence", op = "add", value = 1 }, { targetType = "player", trait = "money", op = "add", value = 40, clamp = false } ], conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "intelligence", operator = "gte", value = 20 } ] } }, { text = "Keep sweeping.", targetType = "trigger", time_progression_minutes = 180, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 1 }, { targetType = "player", trait = "money", op = "add", value = 40, clamp = false } ] } ] }
+
+# ─── CREEK SWIMMING (COMPETITIVE — RYAN) ───
+
+[[canvases]]
+id = "activity_creek_ryan"
+name = "Creek Swimming (Ryan)"
+description = "Competitive. Racing, challenges. Different from Jake's contemplative creek."
+
+[canvases.trigger]
+location = "loc_creek"
+npc = "npc_ryan"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 1
+is_active = true
+costs = [{ trait = "energy", value = 15 }]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "first_swim", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "fitness", operator = "gte", value = 25 },
+  { type = "flag", subject = "player", flag_key = "ryan_leaving", operator = "is_false" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "15:00"
+end_time = "17:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "The Race"
+blocks = [
+  { type = "group", blocks = [
+    { type = "paragraph", content = "He doesn't race today. Floats on his back. Looks at the sky. 'I'm gonna miss this creek.'" }
+  ], conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "ryan_leaving_confirmed", operator = "is_true" },
+    { type = "flag", subject = "player", flag_key = "ryan_stayed", operator = "is_false" }
+  ] } },
+  { type = "paragraph", content = "Creek. @ryan strips his shirt. 'Last one in's a coward.'" },
+  { type = "paragraph", content = "He's already running. Splash. Cold water. She can hear his laugh bouncing off the trees." },
+  { type = "image", props = { file = "activities/activity_creek_ryan.jpg", search_queries = ["couple creek swimming competitive splashing nature summer"] } }
+]
+exit_block = { type = "choices", choices = [ { text = "Race him to the rock.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 3 }, { targetType = "player", trait = "fitness", op = "add", value = 2 } ], conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "fitness", operator = "gte", value = 35 } ] } }, { text = "Try to keep up. (She'll lose.)", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "corruption", op = "add", value = 1 }, { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 1 }, { targetType = "player", trait = "fitness", op = "add", value = 2 } ] }, { text = "\"Raise: loser tells a secret.\"", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 4 }, { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 2 }, { targetType = "player", trait = "fitness", op = "add", value = 2 }, { targetType = "player", trait = "confidence", op = "add", value = 2 } ], conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "confidence", operator = "gte", value = 25 } ] } } ] }
+
+# ═══════════════════════════════════════════════════════════════
+# FRANK ACTIVITIES (4) — Trust Ledger mechanic
+# ═══════════════════════════════════════════════════════════════
+
+# ─── BOOKKEEPING ───
+
+[[canvases]]
+id = "activity_bookkeeping_frank"
+name = "Bookkeeping"
+description = "Intelligence-gated. Reliability flags tracked. Door open/closed by trust."
+
+[canvases.trigger]
+location = "loc_franks_office"
+npc = "npc_frank"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 2
+is_active = true
+costs = [{ trait = "energy", value = 15 }]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "bookkeeping_started", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "12:00"
+end_time = "15:00"
+weekdays = [0, 2, 4]
+
+[[canvases.nodes]]
+id = "base"
+name = "The Office"
+blocks = [
+  { type = "group", blocks = [
+    { type = "paragraph", content = "She holds eye contact across the desk a second too long. He looks down first. She doesn't." }
+  ], conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "frank_flirt", operator = "is_true" },
+    { type = "flag", subject = "player", flag_key = "frank_tease", operator = "is_false" }
+  ] } },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Skirt today. She crosses her legs. Uncrosses them. He loses his place in the receivables. Goes back two lines. She doesn't help him find it." }
+  ], conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "frank_tease", operator = "is_true" },
+    { type = "flag", subject = "player", flag_key = "frank_wine_night", operator = "is_false" }
+  ] } },
+  { type = "paragraph", content = "Office. Invoices, receipts, the amber desk lamp. Leather and old paper." },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Door stays open. He checks her work. Two chairs, maximum distance." }
+  ], conditions = { version = "1.0", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "trust", operator = "lte", value = 15 }
+  ] } },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "The door closes. 'We can focus better this way.' The click of the lock. The rest of the house disappears." }
+  ], conditions = { version = "1.0", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "trust", operator = "gte", value = 16 }
+  ] } },
+  { type = "image", props = { file = "activities/activity_bookkeeping.jpg", search_queries = ["home office desk lamp invoices two chairs professional older man"] } }
+]
+exit_block = { type = "choices", choices = [ { text = "Do the books. Efficiently. Correctly.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 2 }, { targetType = "player", trait = "intelligence", op = "add", value = 1 }, { targetType = "player", trait = "money", op = "add", value = 25, clamp = false } ] }, { text = "Ask about the client who's late on payment.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 2 }, { targetType = "npc", npcId = "npc_frank", trait = "love", op = "add", value = 1 }, { targetType = "player", trait = "money", op = "add", value = 25, clamp = false } ] }, { text = "Let the silence stretch. Watch him work.", targetType = "node", nodeId = "activity_bookkeeping_frank.silence", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "love", operator = "gte", value = 12 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 70 } ] } }, { text = "Reach past him for the ledger.", targetType = "node", nodeId = "activity_bookkeeping_frank.office_kiss", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "frank_kiss", operator = "is_true" }, { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "love", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "trust", operator = "gte", value = 20 } , { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 70 }] } }, { text = "Move higher.", targetType = "node", nodeId = "activity_bookkeeping_frank.under_desk", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "frank_wine_night", operator = "is_true" }, { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "love", operator = "gte", value = 25 }, { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "trust", operator = "gte", value = 22 }, { type = "trait", subject = "player", trait_key = "intelligence", operator = "gte", value = 30 } , { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 85 }] } }, ] }
+
+[[canvases.nodes]]
+id = "silence"
+name = "The Charged Silence"
+blocks = [
+  { type = "paragraph", content = "She puts down the pen. Looks at him. Doesn't say anything." },
+  { type = "paragraph", content = "@frank is writing in the ledger. He feels her looking. His pen slows. Stops." },
+  { type = "paragraph", content = "The clock ticks. The ledger page is still open to receivables but nobody is reading numbers anymore." },
+  { type = "paragraph", content = "Coffee. His. Black. Getting cold." }
+]
+exit_block = { type = "choices", choices = [ { text = "\"Say what you mean, Frank.\"", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_frank", trait = "love", op = "add", value = 3 }, { targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 1 }, { targetType = "player", trait = "corruption", op = "add", value = 2 }, { targetType = "player", trait = "money", op = "add", value = 25, clamp = false } ] }, { text = "Pick up the pen. Get back to work.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 2 }, { targetType = "player", trait = "money", op = "add", value = 25, clamp = false } ] } ] }
+
+[[canvases.nodes]]
+id = "office_kiss"
+name = "The Ledger Excuse"
+blocks = [
+  { type = "paragraph", content = "She reaches past him for the ledger. Her arm crosses his chest. Their faces six inches apart." },
+  { type = "paragraph", content = "He doesn't move. His jaw tightens. The pen in his hand hasn't moved in three minutes." },
+  { type = "paragraph", content = "She closes the gap. The kiss is fast — his mouth tastes like black coffee and restraint. His hand grips the edge of the desk. Not her. The desk." },
+  { type = "image", props = { file = "activities/activity_bookkeeping_kiss.jpg", search_queries = ["older man younger woman kiss office desk professional forbidden"] } },
+  { type = "paragraph", content = "He pulls back. Eyes closed for one second. Opens them." },
+  { type = "dialog", content = "Page forty-two.", props = { speaker = "npc", npcId = "npc_frank" } },
+  { type = "paragraph", content = "Like nothing happened. Except his hand is shaking." }
+]
+exit_block = { type = "choices", choices = [ { text = "Go back to the numbers.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_frank", trait = "love", op = "add", value = 4 }, { targetType = "npc", npcId = "npc_frank", trait = "corruption", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 3 }, { targetType = "player", trait = "money", op = "add", value = 25, clamp = false } ] } ] }
+
+[[canvases.nodes]]
+id = "under_desk"
+name = "Below the Ledger"
+blocks = [
+  { type = "paragraph", content = "Under the desk. The ledger is still open. His hand grips the edge of the oak — knuckles white." },
+  { type = "paragraph", content = "She found him. Through the fabric first, then the zipper. He didn't stop her. That's how she knows the dam broke." },
+  { type = "image", props = { file = "activities/activity_bookkeeping_handjob.jpg", search_queries = ["office desk intimate older man younger woman forbidden professional"] } },
+  { type = "paragraph", content = "He's thick. Warm. His jaw clenches — he won't make a sound. Control, even now. She strokes him slowly. His breathing changes — measured, deliberate, like he's counting." },
+  { type = "paragraph", content = "The pen in his other hand hasn't moved in three minutes." },
+  { type = "paragraph", content = "When he finishes, his eyes close. Just for a moment. Then he opens them. Looks at her. Says nothing." },
+  { type = "dialog", content = "Page forty-two.", props = { speaker = "npc", npcId = "npc_frank" } },
+  { type = "paragraph", content = "*She's never felt more powerful in her life.*" }
+]
+exit_block = { type = "choices", choices = [ { text = "Pick up the pen.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_frank", trait = "love", op = "add", value = 5 }, { targetType = "npc", npcId = "npc_frank", trait = "corruption", op = "add", value = 4 }, { targetType = "player", trait = "corruption", op = "add", value = 4 }, { targetType = "player", trait = "money", op = "add", value = 25, clamp = false } ] } ] }
+
+# ─── COOKING DINNER ───
+
+[[canvases]]
+id = "activity_cooking_frank"
+name = "Cooking Dinner"
+description = "Kitchen choreography. Shared domestic work. Other NPCs may appear."
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_frank"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 1
+is_active = true
+costs = [{ trait = "energy", value = 15 }]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "first_week_complete", operator = "is_true" },
+  { type = "item", item_id = "groceries", operator = "gte", value = 3 }
+] }
+[[canvases.trigger.schedules]]
+start_time = "17:00"
+end_time = "19:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "The Kitchen"
+blocks = [
+  { type = "group", blocks = [
+    { type = "paragraph", content = "She reaches past him for the salt shaker. Closer than she needs to be. Her arm brushes his. He goes still. She takes her time pulling back." }
+  ], conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "frank_flirt", operator = "is_true" },
+    { type = "flag", subject = "player", flag_key = "frank_tease", operator = "is_false" }
+  ] } },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "No bra under the tank top. She reaches for the top shelf — the bowl she could reach fine without stretching. Arms up. Fabric pulls tight. She takes her time getting it down." },
+    { type = "paragraph", content = "@frank is at the table. His coffee mug is halfway to his mouth. Frozen." }
+  ], conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "frank_tease", operator = "is_true" },
+    { type = "flag", subject = "player", flag_key = "frank_wine_night", operator = "is_false" }
+  ] } },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "She stands behind him while he stirs. Close. Her chest against his back. 'Needs more salt.' Her voice right at his ear. His stirring hand stops." }
+  ], conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "frank_wine_night", operator = "is_true" }
+  ] } },
+  { type = "paragraph", content = "Kitchen. @frank at the stove. Sleeves rolled. Garlic and something simmering. He nods at the cutting board without looking up." },
+  { type = "image", props = { file = "activities/activity_cooking_frank.jpg", search_queries = ["man cooking kitchen stove woman helping cutting board domestic"] } }
+]
+exit_block = { type = "choices", choices = [ { text = "Pick up the knife.", targetType = "node", nodeId = "activity_cooking_frank.cooking", itemEffects = [{ item_id = "groceries", action = "remove", quantity = 3 }] }, { text = "Set the table instead.", targetType = "trigger", time_progression_minutes = 90, effects = [ { targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 1 } ], itemEffects = [{ item_id = "groceries", action = "remove", quantity = 3 }] } ] }
+
+[[canvases.nodes]]
+id = "cooking"
+name = "Side by Side"
+blocks = [
+  { type = "paragraph", content = "Side by side at the counter. Chopping, stirring, reaching past each other. The kitchen is small — their elbows brush." },
+  { type = "paragraph", content = "He talks about Diana's old recipes. His voice softens when he says her mom's name." },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Footsteps. @ryan walks through. 'Smells good.' He watches them for a beat too long before grabbing a glass of water and leaving." }
+  ], conditions = { version = "1.0", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "trust", operator = "gte", value = 8 }
+  ] } }
+]
+exit_block = { type = "choices", choices = [ { text = "Ask about Diana.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_frank", trait = "love", op = "add", value = 3 } ] }, { text = "Focus on the food. Work in rhythm.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 2 } ] }, { text = "Reach past him for the skillet.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_frank", trait = "love", op = "add", value = 2 }, { targetType = "npc", npcId = "npc_frank", trait = "corruption", op = "add", value = 1 }, { targetType = "player", trait = "corruption", op = "add", value = 2 } ], conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "love", operator = "gte", value = 12 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 } ] } }, { text = "\"Don't move.\"", targetType = "node", nodeId = "activity_cooking_frank.kitchen_kiss", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "frank_kiss", operator = "is_true" }, { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "love", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 70 } ] } }, { text = "The counter.", targetType = "node", nodeId = "activity_cooking_frank.counter", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "frank_wine_night", operator = "is_true" }, { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "love", operator = "gte", value = 25 }, { type = "trait", subject = "player", trait_key = "intelligence", operator = "gte", value = 25 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 85 } ] } } ] }
+
+[[canvases.nodes]]
+id = "kitchen_kiss"
+name = "Garlic and Guilt"
+blocks = [
+  { type = "paragraph", content = "He's stirring. She says it from behind him. Two words. He freezes." },
+  { type = "paragraph", content = "She turns him by the shoulder. The spatula clatters on the counter. His mouth tastes like the sauce he was testing — garlic, wine, something bitter underneath." },
+  { type = "image", props = { file = "activities/activity_cooking_kiss.jpg", search_queries = ["older man younger woman kiss kitchen cooking domestic forbidden"] } },
+  { type = "paragraph", content = "The kiss lasts three seconds. He pulls back. Checks the doorway. Nobody." },
+  { type = "dialog", content = "The sauce is burning.", props = { speaker = "npc", npcId = "npc_frank" } },
+  { type = "paragraph", content = "It's not burning. He just needs something to say that isn't what he's feeling." }
+]
+exit_block = { type = "choices", choices = [ { text = "Save the sauce.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_frank", trait = "love", op = "add", value = 4 }, { targetType = "npc", npcId = "npc_frank", trait = "corruption", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 2 } ] } ] }
+
+[[canvases.nodes]]
+id = "counter"
+name = "The Butcher Block"
+blocks = [
+  { type = "paragraph", content = "The counter. Butcher block. His back against the edge. Her hand finds him through the apron." },
+  { type = "paragraph", content = "His grip tightens on the counter behind him. His breathing stays measured — counted — even as his hips betray him." },
+  { type = "image", props = { file = "activities/activity_cooking_counter.jpg", search_queries = ["couple intimate kitchen counter domestic forbidden passionate"] } },
+  { type = "paragraph", content = "The stove hisses. Something is actually burning now. Neither of them moves to fix it." },
+  { type = "paragraph", content = "When it's over, he straightens his shirt. Turns back to the stove. Fixes the sauce." },
+  { type = "dialog", content = "Dinner in five.", props = { speaker = "npc", npcId = "npc_frank" } }
+]
+exit_block = { type = "choices", choices = [ { text = "Set the table. Act normal.", targetType = "trigger", time_progression_minutes = 120, effects = [ { targetType = "npc", npcId = "npc_frank", trait = "love", op = "add", value = 5 }, { targetType = "npc", npcId = "npc_frank", trait = "corruption", op = "add", value = 3 }, { targetType = "player", trait = "corruption", op = "add", value = 3 } ] } ] }
+
+# ─── LATE-NIGHT KITCHEN ───
+
+[[canvases]]
+id = "activity_late_night_frank"
+name = "Late-Night Kitchen"
+description = "50% chance Frank is here. Whiskey, dim light, the house asleep."
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_frank"
+is_repeatable = true
+priority = 3
+max_triggers_per_day = 1
+trigger_mode = "random"
+chance = 0.5
+is_active = true
+costs = [{ trait = "energy", value = 10 }]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "frank_kitchen_moment", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "23:00"
+end_time = "01:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "2 AM"
+blocks = [
+  { type = "group", blocks = [
+    { type = "paragraph", content = "The short sleep shirt. She heard his floorboard creak — she knows he's down here. She doesn't put on pants. When she pours water, she leans against the counter. The shirt rides up at the back. She doesn't fix it." }
+  ], conditions = { version = "1.0", logic = "AND", items = [
+    { type = "flag", subject = "player", flag_key = "frank_tease", operator = "is_true" },
+    { type = "flag", subject = "player", flag_key = "frank_wine_night", operator = "is_false" }
+  ] } },
+  { type = "paragraph", content = "Kitchen. Past midnight. @frank at the table. Whiskey. Lamp light. The glass across from him is already poured." },
+  { type = "paragraph", content = "*He knew I'd come down.*" },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "He talks about the business. The real numbers. Not the ones in the clean ledger — the ones she found." }
+  ], conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "chose_confront_frank", operator = "is_true" }
+  ] } },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "He talks about the house. Diana. How quiet it gets at 2 AM when you're the only one awake. Except tonight he's not alone." }
+  ], conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "chose_confront_frank", operator = "is_false" }
+  ] } }
+]
+exit_block = { type = "choices", choices = [ { text = "Listen. Let him fill the silence.", targetType = "trigger", time_progression_minutes = 60, effects = [ { targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 2 }, { targetType = "npc", npcId = "npc_frank", trait = "love", op = "add", value = 1 } ] }, { text = "Ask the question he's avoiding.", targetType = "trigger", time_progression_minutes = 60, effects = [ { targetType = "npc", npcId = "npc_frank", trait = "love", op = "add", value = 3 }, { targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 1 } ] }, { text = "Move your chair closer.", targetType = "trigger", time_progression_minutes = 60, effects = [ { targetType = "npc", npcId = "npc_frank", trait = "love", op = "add", value = 3 }, { targetType = "npc", npcId = "npc_frank", trait = "corruption", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 2 } ], conditions = { version = "1.0", items = [ { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "love", operator = "gte", value = 20 } ] } }, { text = "Touch his hand.", targetType = "node", nodeId = "activity_late_night_frank.whiskey_kiss", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "frank_kiss", operator = "is_true" }, { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "love", operator = "gte", value = 20 } , { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 70 }] } }, { text = "Under the table.", targetType = "node", nodeId = "activity_late_night_frank.table", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "frank_wine_night", operator = "is_true" }, { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "love", operator = "gte", value = 25 }, { type = "trait", subject = "player", trait_key = "intelligence", operator = "gte", value = 25 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 85 } ] } }, ] }
+
+[[canvases.nodes]]
+id = "whiskey_kiss"
+name = "Whiskey Mouth"
+blocks = [
+  { type = "paragraph", content = "Her hand covers his on the table. He doesn't pull away. Her pinkie traces his knuckle." },
+  { type = "paragraph", content = "She leans across the table. The whiskey glass tips. Neither catches it." },
+  { type = "image", props = { file = "activities/activity_late_night_kiss.jpg", search_queries = ["older man younger woman kiss kitchen table night whiskey intimate"] } },
+  { type = "paragraph", content = "He tastes like whiskey and something underneath — the taste of a man who's been sitting alone at 2 AM for months. His hand finally moves. Finds her jaw. Holds it like he's been wanting to for weeks." },
+  { type = "paragraph", content = "The kitchen clock ticks. Upstairs, nothing moves. The house sleeps while they don't." }
+]
+exit_block = { type = "choices", choices = [ { text = "\"Good night, Frank.\" Leave him wanting.", targetType = "trigger", time_progression_minutes = 60, effects = [ { targetType = "npc", npcId = "npc_frank", trait = "love", op = "add", value = 4 }, { targetType = "npc", npcId = "npc_frank", trait = "corruption", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 3 } ] } ] }
+
+[[canvases.nodes]]
+id = "table"
+name = "Below the Whiskey"
+blocks = [
+  { type = "paragraph", content = "She slides from her chair. Under the kitchen table. The wood is cold against her knees." },
+  { type = "paragraph", content = "@frank looks down. His face — disbelief, then something darker. His hand finds the edge of the table. Grips." },
+  { type = "image", props = { file = "activities/activity_late_night_handjob.jpg", search_queries = ["intimate kitchen table night older man forbidden"] } },
+  { type = "paragraph", content = "She finds him. Already hard. He won't make a sound — the boys are upstairs. His breathing comes through his nose, measured, controlled. His knuckles on the table are white." },
+  { type = "paragraph", content = "The whiskey glass trembles. His whole body trembles. He finishes without a word. Just his eyes closing." },
+  { type = "paragraph", content = "She climbs back into her chair. Picks up her glass. Drinks like nothing happened." },
+  { type = "dialog", content = "You should go to bed.", props = { speaker = "npc", npcId = "npc_frank" } },
+  { type = "paragraph", content = "He means it this time. He also doesn't. She can still hear both." }
+]
+exit_block = { type = "choices", choices = [ { text = "\"Good night, Frank.\"", targetType = "trigger", time_progression_minutes = 60, effects = [ { targetType = "npc", npcId = "npc_frank", trait = "love", op = "add", value = 5 }, { targetType = "npc", npcId = "npc_frank", trait = "corruption", op = "add", value = 4 }, { targetType = "player", trait = "corruption", op = "add", value = 4 } ] } ] }
+
+# ─── WORKSHOP HELP ───
+
+[[canvases]]
+id = "activity_workshop_frank"
+name = "Workshop Help"
+description = "Physical labor alongside Frank. Trust through competence."
+
+[canvases.trigger]
+location = "loc_workshop"
+npc = "npc_frank"
+is_repeatable = true
+priority = 2
+max_triggers_per_day = 1
+is_active = true
+costs = [{ trait = "energy", value = 20 }]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "trust", operator = "gte", value = 5 }
+] }
+[[canvases.trigger.schedules]]
+start_time = "07:00"
+end_time = "09:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "The Workshop"
+blocks = [
+  { type = "paragraph", content = "Workshop. Sawdust, tool pegboard, the hum of the compressor. @frank is building something. He could use an extra pair of hands." },
+  { type = "image", props = { file = "activities/activity_workshop_frank.jpg", search_queries = ["workshop sawdust tools construction older man working morning"] } }
+]
+exit_block = { type = "choices", choices = [ { text = "Help without being asked.", targetType = "trigger", time_progression_minutes = 150, effects = [ { targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 3 }, { targetType = "player", trait = "intelligence", op = "add", value = 1 } ] }, { text = "\"What do you need?\"", targetType = "trigger", time_progression_minutes = 150, effects = [ { targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 2 }, { targetType = "player", trait = "intelligence", op = "add", value = 1 } ] }, { text = "Work in silence together.", targetType = "trigger", time_progression_minutes = 150, effects = [ { targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 3 } ], conditions = { version = "1.0", items = [ { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "trust", operator = "gte", value = 15 } ] } } ] }
+
+# ═══════════════════════════════════════════════════════════════
+# PURCHASE CANVASES — Set item flags
+# ═══════════════════════════════════════════════════════════════
+
+# ─── BUY ART SUPPLIES ───
+
+[[canvases]]
+id = "utility_buy_art_supplies"
+name = "Art Supplies"
+description = "Buy charcoal, paper, pencils. $60."
+
+[canvases.trigger]
+location = "loc_general_store"
+is_repeatable = false
+priority = 2
+is_active = true
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "town_access", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "has_art_supplies", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 60 } ] }
+
+[[canvases.nodes]]
+id = "base"
+name = "The Back Aisle"
+blocks = [
+  { type = "paragraph", content = "General store. Art supplies in the back — charcoal sticks, heavyweight paper, blending stumps. The good stuff @jake uses." },
+  { type = "image", props = { file = "activities/utility_buy_art_supplies.jpg", search_queries = ["general store art supplies aisle", "store aisle art supplies charcoal pencils"] } },
+  { type = "paragraph", content = "$60. She can feel the number in her stomach. But campus assignments need materials. And @jake's face when she brings her own sketchbook..." }
+]
+exit_block = { type = "choices", choices = [ { text = "Buy them. $60.", targetType = "trigger", time_progression_minutes = 30, effects = [ { targetType = "player", trait = "money", op = "add", value = -60, clamp = false } ], flagEffects = [{ targetType = "player", flag = "has_art_supplies" }] }, { text = "Not today.", targetType = "trigger", time_progression_minutes = 15 } ] }
+
+# ─── BUY GYM PASS ───
+
+[[canvases]]
+id = "utility_buy_gym_pass"
+name = "Gym Pass"
+description = "30-day gym pass. $30. Renew when it expires."
+
+[canvases.trigger]
+location = "loc_gym"
+is_repeatable = true
+priority = 2
+is_active = true
+conditions = { version = "1.0", logic = "OR", items = [ { type = "pass", pass_id = "gym_pass", operator = "is_inactive" } ] }
+
+[[canvases.nodes]]
+id = "base"
+name = "The Front Desk"
+blocks = [
+  { type = "paragraph", content = "Gym front desk. A signup sheet and a bored attendant." },
+  { type = "image", props = { file = "activities/utility_buy_gym_pass.jpg", search_queries = ["gym front desk signup counter", "gym reception desk signup attendant"] } },
+  { type = "paragraph", content = "$30 for a 30-day pass. @ryan is already at the bench press — he raises an eyebrow when he sees her at the counter." }
+]
+exit_block = { type = "choices", choices = [ { text = "Pay $30. Get the pass.", targetType = "trigger", time_progression_minutes = 15, passEffects = [{ pass_id = "gym_pass" }], conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 30 } ] } }, { text = "Not today.", targetType = "trigger", time_progression_minutes = 5 } ] }
+
+# ─── BUY GROCERIES ───
+
+[[canvases]]
+id = "utility_buy_groceries"
+name = "Buy Groceries"
+description = "Stock up at the general store."
+
+[canvases.trigger]
+location = "loc_general_store"
+is_repeatable = true
+priority = 2
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "town_access", operator = "is_true" }
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "The General Store"
+blocks = [
+  { type = "paragraph", content = "General store. Fluorescent lights, linoleum floors. The kind of place that sells everything and specializes in nothing." },
+  { type = "image", props = { file = "activities/utility_buy_groceries.jpg", search_queries = ["general store grocery aisle fluorescent", "small store grocery aisle shopping"] } },
+  { type = "paragraph", content = "She grabs a basket. Eggs, bread, pasta, chicken, vegetables. The basics." }
+]
+exit_block = { type = "choices", choices = [ { text = "Buy groceries ($15)", targetType = "trigger", time_progression_minutes = 30, effects = [ { targetType = "player", trait = "money", op = "add", value = -15, clamp = false } ], itemEffects = [{ item_id = "groceries", action = "add", quantity = 5 }], conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 15 } ] } }, { text = "Just browsing.", targetType = "trigger", time_progression_minutes = 5 } ] }
+
+# ═══════════════════════════════════════════════════════════════
+# END OF PHASE 3: ACTIVITIES
+# ═══════════════════════════════════════════════════════════════

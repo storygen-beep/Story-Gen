@@ -1,0 +1,40 @@
+=== merge_toml_phases --validate ===
+warning: missing phase files: ['4_story_arc.toml', '6_dev_shortcuts.toml', '8_phone.toml']
+merged 5 phase(s) → games/eval_bar_empire_wired/toml_phases/7_final_game.toml
+  size: 24,145 bytes
+  validation: OK (parsed cleanly)
+
+=== package_from_toml --dev ===
+🔧 Dev Mode: ENABLED (stat adjustment controls)
+📦 Loading TOML: games/eval_bar_empire_wired/toml_phases/7_final_game.toml
+   ✓ TOML parsed successfully
+   ✓ Validation passed
+
+📂 Creating project in database...
+   ✓ Project: Bar Empire
+
+🔗 Validating flag chains...
+   ✓ All flag chains valid
+
+🎮 Generating game package...
+   System: twee_comprehensive
+   Version: v2
+   Dev mode: Enabled (+/- stat controls)
+   Game folder (for approvals): output
+
+🧹 Database cleanup:
+   ✓ Project removed from database
+
+📊 Clip Statistics:
+   Total clips: 0
+   Copied: 0
+   Skipped: 0
+   Failed: 0
+   Bytes copied: 0
+   Bytes saved: 0
+
+📄 Package created:
+   HTML: /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/games/eval_bar_empire_wired/output/index.html
+   Media: /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/games/eval_bar_empire_wired/output/media
+
+🎉 Package ready! Open /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/games/eval_bar_empire_wired/output/index.html in a browser.

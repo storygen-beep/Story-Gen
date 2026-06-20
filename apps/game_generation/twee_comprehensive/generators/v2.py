@@ -793,6 +793,11 @@ class TweeComprehensiveGeneratorV2:
                 "name": loc.name,
                 "id": str(loc.id),
                 "clothing_rules": loc_props.get("clothing_rules", []),
+                # Travel-friction (entry cost) + lock-as-prose (visible-but-blocked) data.
+                # Both default empty → free, always-open move (today's behavior).
+                "entry_costs": loc_props.get("entry_costs", {}),
+                "entry_conditions": loc_props.get("entry_conditions", {}),
+                "blocked_message": loc_props.get("blocked_message", ""),
             }
 
         # Build passage name → location slug reverse map (for clothing checks)
@@ -3048,6 +3053,25 @@ setup.getNpcLocation = function(npcId) {{
     }}
 }};
 
+// Get all NPC slugs currently resolved to a location (shared-space occupancy, redesign_phase_3/25).
+// Backs the any-NPC ("room occupied"/"room empty") form of the npc_at_location condition.
+setup.getNpcsAtLocation = function(locId) {{
+    var out = [];
+    try {{
+        var locMap = setup._getLocUuidToSlug() || {{}};
+        var target = (locId && locMap[locId]) ? locMap[locId] : locId;
+        var schedules = setup.npcSchedules || {{}};
+        for (var slug in schedules) {{
+            if (!schedules.hasOwnProperty(slug)) continue;
+            var loc = setup.getNpcLocation(slug);
+            if (!loc || !loc.location) continue;
+            var here = locMap[loc.location] || loc.location;
+            if (here === target) out.push(slug);
+        }}
+    }} catch (e) {{ return out; }}
+    return out;
+}};
+
 // Get schedule entries for a specific NPC on a specific day (dynamic)
 setup.getNpcDaySchedule = function(npcId, dayIndex) {{
     try {{
@@ -3681,6 +3705,27 @@ setup.triggerConditionsSatisfied = function(conditions) {{
                 results.push(clres);
                 continue;
             }}
+            // shared-space occupancy (redesign_phase_3/25) — cross-room presence:
+            // {{type:'npc_at_location', npc_id?, location_id, operator:'is_present'|'is_absent'}}
+            // npc_id given → that NPC present/absent at location_id; npc_id omitted → location occupied/empty.
+            if (type === 'npc_at_location') {{
+                var nalLoc = String(it.location_id || it.location || '');
+                if (!nalLoc) {{ results.push(false); continue; }}
+                var nalOp = String(it.operator || 'is_present');
+                var nalMap = setup._getLocUuidToSlug() || {{}};
+                var nalTarget = nalMap[nalLoc] || nalLoc;
+                var nalNpc = String(it.npc_id || it.character_id || '');
+                var nalPresent;
+                if (nalNpc) {{
+                    var nalWhere = setup.getNpcLocation(nalNpc);
+                    var nalHere = (nalWhere && nalWhere.location) ? (nalMap[nalWhere.location] || nalWhere.location) : null;
+                    nalPresent = (nalHere !== null && nalHere === nalTarget);
+                }} else {{
+                    nalPresent = (setup.getNpcsAtLocation(nalLoc).length > 0);
+                }}
+                results.push(nalOp === 'is_absent' ? !nalPresent : nalPresent);
+                continue;
+            }}
 
             // Unknown type
             results.push(false);
@@ -4177,15 +4222,20 @@ setup.getCanvasCosts = function(canvasId) {{
     return [];
 }};
 
-// Deduct costs for a canvas (called on canvas entry)
-setup.deductCosts = function(canvasId) {{
-    var costs = setup.getCanvasCosts(canvasId);
+// Apply a raw [{{trait, value}}] cost array as deductions. Shared by canvas costs
+// and location entry costs so the two paths can never drift.
+setup.deductCostArray = function(costs) {{
     if (!costs || costs.length === 0) return;
     setup.pendingEffects = [];
     for (var k = 0; k < costs.length; k++) {{
         setup.applyAndNotifyTrait('player', null, costs[k].trait, 'add', -Number(costs[k].value), true, null);
     }}
     setup.showEffectNotification();
+}};
+
+// Deduct costs for a canvas (called on canvas entry)
+setup.deductCosts = function(canvasId) {{
+    setup.deductCostArray(setup.getCanvasCosts(canvasId));
 }};
 
 // Get a human-readable blocked message for unaffordable costs
@@ -4205,36 +4255,113 @@ setup.getCostBlockedMessage = function(costs) {{
     return lines.join('. ');
 }};
 
+// ===== Location entry-cost system (travel friction) =====
+// A location's per-entry cost lives in setup.locations[slug].entry_costs as a dict
+// {{time, energy, ...}}. `time` (minutes) advances the day-cycle clock; every other
+// key is a player-trait deduction. Empty/absent = a free move (today's behavior).
+setup.getLocationEntryCosts = function(slug) {{
+    var loc = (setup.locations || {{}})[String(slug)] || {{}};
+    return loc.entry_costs || {{}};
+}};
+
+// The trait-deduction portion (everything except `time`) as a [{{trait,value}}] array.
+setup.locationCostTraitArray = function(slug) {{
+    var ec = setup.getLocationEntryCosts(slug);
+    var arr = [];
+    Object.keys(ec).forEach(function(k) {{
+        if (k === 'time') return;
+        arr.push({{ trait: k, value: Number(ec[k]) }});
+    }});
+    return arr;
+}};
+
+// Affordability for entering a location. `time` is never a gate (you can always
+// spend time) — only the trait portion is checked, via the shared affordability fn.
+setup.checkLocationCostsAffordable = function(slug) {{
+    return setup.checkCostsAffordable(setup.locationCostTraitArray(slug));
+}};
+
+// Charge a location's entry cost exactly once: advance the clock by `time`, deduct traits.
+setup.deductLocationCosts = function(slug) {{
+    var ec = setup.getLocationEntryCosts(slug);
+    if (!ec || Object.keys(ec).length === 0) return;
+    var mins = Number(ec.time || 0);
+    if (mins > 0 && typeof window.advanceTime === 'function') {{
+        window.advanceTime(mins);
+    }}
+    setup.deductCostArray(setup.locationCostTraitArray(slug));
+}};
+
+// Short nav-card cost tag, e.g. "30m · 10 Energy". Empty when the location is free.
+setup.getLocationCostTag = function(slug) {{
+    var ec = setup.getLocationEntryCosts(slug);
+    var parts = [];
+    if (Number(ec.time || 0) > 0) parts.push(Number(ec.time) + 'm');
+    Object.keys(ec).forEach(function(k) {{
+        if (k === 'time') return;
+        var disp = String(k).charAt(0).toUpperCase() + String(k).slice(1);
+        parts.push(Number(ec[k]) + ' ' + disp);
+    }});
+    return parts.join(' · ');
+}};
+
+// Reason string when a location's entry is unaffordable (trait portion only).
+setup.getLocationCostBlockedMessage = function(slug) {{
+    return setup.getCostBlockedMessage(setup.locationCostTraitArray(slug));
+}};
+
+// ===== Lock-as-prose on the nav surface =====
+// Is this destination's door open right now? Versionless/empty conditions fail OPEN
+// (matches the passage-entry guard + the global condition evaluator), so a location
+// without real entry_conditions always renders a normal, clickable link.
+setup.navDestUnlocked = function(slug) {{
+    var loc = (setup.locations || {{}})[String(slug)] || {{}};
+    var ec = loc.entry_conditions || {{}};
+    if (!ec.items || ec.items.length === 0) return true;
+    return setup.triggerConditionsSatisfied(ec);
+}};
+
+// The in-world reason a locked destination shows in-place: the authored blocked_message,
+// else the formatted conditions, else a quiet default. Same source the passage guard
+// uses, so the nav card and the blocked passage can never disagree.
+setup.navDestBlockedReason = function(slug) {{
+    var loc = (setup.locations || {{}})[String(slug)] || {{}};
+    if (loc.blocked_message) return loc.blocked_message;
+    if (typeof setup.formatCanvasConditions === 'function' && loc.entry_conditions) {{
+        var f = setup.formatCanvasConditions(loc.entry_conditions);
+        if (f) return f;
+    }}
+    return 'Locked for now.';
+}};
+
 // Get NPCs whose declared [[npcs.schedules]] places them at this location right
 // now AND who have a reachable affordable+valid canvas here. Schedule-only —
 // no canvas-derived fallback (2026-05-25 doctrine tightening).
 //
 // Intake from selectNpcPortraitCanvasesForLocation (the renderer's pure pick
 // helper) so the badge inherits the same substitutionOnly / cost / daily-cap
-// filters renderNpcPortraits applies. NPCs without declared schedules are
-// suppressed entirely — they need a [[npcs.schedules]] block to surface
-// portraits on nav cards. Matches the fail-closed schedule filter in
-// renderNpcPortraits so the nav card and the location-screen portrait grid
-// promise identical content.
-setup.getNpcsWithCanvasesAtLocation = function(locationId) {{
+// Nav-card "someone's here" presence badge. SCHEDULE-OCCUPANCY — the SAME logic
+// as the door / occupancy gate (setup.getNpcsAtLocation + the npc_at_location
+// condition). An NPC counts as present at a destination if they are SCHEDULED
+// there now, NOT if they own an interactable canvas there — so the map's
+// presence and the locked-door / occupancy check always agree (a housemate
+// showering shows at the bathroom AND blocks its door). The clickable portrait
+// GRID (renderNpcPortraits) stays canvas-gated — only offer a click where there
+// is an interaction (D72 dead-presence). Returns {{id,name,portrait}}.
+setup.getNpcsPresentAtLocation = function(locationId) {{
     var result = [];
     try {{
-        var picks = setup.selectNpcPortraitCanvasesForLocation(locationId);
         var npcs = (State.variables || {{}}).npcs || {{}};
         var slugMap = setup.npc_slug_map || {{}};
-        var schedules = setup.npcSchedules || {{}};
+        var slugs = setup.getNpcsAtLocation(locationId);
         var seen = {{}};
-
-        for (var slug in picks) {{
+        for (var pi = 0; pi < slugs.length; pi++) {{
+            var slug = slugs[pi];
             if (seen[slug]) continue;
-            // Schedule-only gate — no canvas-derived fallback.
-            if (!schedules[slug]) continue;
-            var here = setup.getNpcLocation(slug);
-            if (!here || here.location !== locationId) continue;
+            seen[slug] = true;
             var npcUuid = slugMap[slug];
             var npc = npcUuid ? npcs[npcUuid] : null;
             if (!npc) continue;
-            seen[slug] = true;
             result.push({{
                 id: npcUuid,
                 name: npc.name,
@@ -4440,9 +4567,13 @@ setup.renderNpcPortraits = function(locationId) {{
         // Schedule-only presence gate (2026-05-25 doctrine tightening) —
         // NPC must have declared [[npcs.schedules]] AND getNpcLocation must
         // place them at this location right now. NPCs without declared
-        // schedules are suppressed (no canvas-derived fallback). Fail-closed
-        // so the location-screen portrait grid matches what the nav-card
-        // badge (getNpcsWithCanvasesAtLocation) promises.
+        // schedules are suppressed (no canvas-derived fallback). This is the
+        // INTERACTION surface (canvas-gated — only show a clickable portrait
+        // where there's something to do). The nav-card presence badge
+        // (getNpcsPresentAtLocation) is schedule-occupancy: the two agree for
+        // normal hubs and intentionally differ only for hub-less occupancy rooms
+        // (a showering housemate shows on the nav + blocks the door, but has no
+        // clickable portrait inside).
         allSlugs = allSlugs.filter(function(slug) {{
             try {{
                 var npcSched = (setup.npcSchedules || {{}})[slug];
@@ -7208,6 +7339,24 @@ setup.formatCanvasConditions = function(conditions) {{
                 parts.push("Must not own: " + itemName);
             }}
         }}
+        else if (item.type === "npc_at_location") {{
+            var nalLocId = item.location_id || item.location || "";
+            var nalLocMap = setup._getLocUuidToSlug() || {{}};
+            var nalLocSlug = nalLocMap[nalLocId] || nalLocId;
+            var nalLocs = setup.locations || {{}};
+            var nalLocName = (nalLocs[nalLocSlug] && nalLocs[nalLocSlug].name) ? nalLocs[nalLocSlug].name : nalLocSlug;
+            var nalAbsent = (item.operator === "is_absent");
+            var nalNpcId = item.npc_id || "";
+            if (nalNpcId) {{
+                var nalSlugMap = setup.npc_slug_map || {{}};
+                var nalNpcsData = State.variables.npcs || {{}};
+                var nalUuid = nalSlugMap[nalNpcId];
+                var nalNpcName = (nalUuid && nalNpcsData[nalUuid]) ? (nalNpcsData[nalUuid].name || nalNpcId) : nalNpcId;
+                parts.push(nalNpcName + (nalAbsent ? " must not be in " : " must be in ") + nalLocName);
+            }} else {{
+                parts.push(nalAbsent ? (nalLocName + " must be empty") : (nalLocName + " must be occupied"));
+            }}
+        }}
         else if (item.type === "worn_corruption") {{
             var wcOp = item.operator || "gte";
             var wcSym = wcOp === "gt" ? ">" : wcOp === "lte" ? "≤" : wcOp === "lt" ? "<" : wcOp === "eq" ? "=" : "≥";
@@ -7967,7 +8116,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                 "surface_alt": "#16213e",
                 "border": "#333333",
                 "text": "#e0e0e0",
-                "text_muted": "#888888",
+                "text_muted": "#9aa0ab",  # ≈4.6:1 on surface — clears WCAG 4.5:1 for the small uppercase labels (was #888888 ≈3.6:1)
             }
         else:
             defaults = {
@@ -8351,13 +8500,19 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
     padding: 40px 20px; font-size: 14px;
 }
 
-/* Sidebar phone button */
-.phone-btn-item { position: relative; padding: 10px 8px; font-size: 16px; }
-.phone-badge {
+/* Sidebar phone button — matches the band-card language (see .trait-*-item / .band-value) */
+/* The phone button is styled by the SAME rules as the action buttons (its id
+   #phone-sidebar-btn is in those selectors above) so it is pixel-identical. Only
+   the unread badge below is phone-specific. */
+.phone-badge {                     /* unread count — notification dot on the top-right corner */
+    position: absolute;
+    top: 2px;
+    right: 5px;
     background: var(--theme-danger); color: #fff;
     font-size: 10px; font-weight: bold;
-    padding: 1px 5px; border-radius: 8px;
-    margin-left: 4px;
+    min-width: 16px; text-align: center; box-sizing: border-box;
+    border: 2px solid var(--theme-surface);   /* surface stroke so the pill floats over the icon */
+    padding: 0 4px; border-radius: 9px;
 }
 
 /* Social Feed */
@@ -13471,7 +13626,18 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                             f'</div></div>'
                         )
                 else:
-                    # Fallback to paragraph for unknown types
+                    # Fallback to paragraph for unknown types. Warn loudly — an
+                    # unrecognized block type means authored content (e.g. a
+                    # mistyped "dialogue"/"speech" dialog block) silently loses its
+                    # speaker/structure here. The importer hard-fails on this, but
+                    # other entry points (e.g. the editor) reach this path too.
+                    logger.warning(
+                        "Unknown block type %r — rendering as plain paragraph; "
+                        "speaker/structure lost. Recognized: heading, paragraph, "
+                        "dialog, thought_bubble, image, video, cascade, group, "
+                        "block_pool, clip.",
+                        block_type,
+                    )
                     html_parts.append(f"<p>{content}</p>")
 
             result = "".join(html_parts)
@@ -14035,9 +14201,43 @@ window.devGoBack = function() {
     }
 """
 
+        # Travel-friction: charge a location's entry cost (time + traits) on a genuine
+        # move. Runs AFTER rent/clothing so a blocked entry never charges (no
+        # double-charge on retry). Only emitted when some location declares costs;
+        # otherwise movement stays free (backward-compatible).
+        has_location_costs = any(
+            (getattr(loc, 'properties', None) or {}).get('entry_costs')
+            for loc in self.locations
+        )
+        travel_cost_block = ""
+        if has_location_costs:
+            travel_cost_block = """
+    // Travel-friction intercept: charge entry cost on a genuine move.
+    if (psg.indexOf("Location_") === 0 && infoPages.indexOf(psg) === -1) {
+        var travelSlug = (setup.passage_to_location || {})[psg];
+        if (travelSlug) {
+            var destLoc = (setup.locations || {})[travelSlug] || {};
+            var curLoc = (sv.player && sv.player.current_location) || "";
+            // Only a real move (entering a DIFFERENT location) is charged — re-entry
+            // and back-from-a-menu are free.
+            if (String(destLoc.id) !== String(curLoc)) {
+                if (!setup.checkLocationCostsAffordable(travelSlug)) {
+                    sv._travel_block_message = setup.getLocationCostBlockedMessage(travelSlug);
+                    sv._travel_block_destination = psg;
+                    setTimeout(function() { Engine.play("TravelBlock"); }, 10);
+                    return;
+                }
+                setup.deductLocationCosts(travelSlug);
+            }
+        }
+    }
+"""
+
         info_pages_list = '["QuestsPage", "TipsPage", "StatsPage", "SchedulePage", "MissingMediaPage", "StoryJournal", "WardrobePage", "ShopPage", "ClothingBlock"'
         if self.rent_enabled:
             info_pages_list += ', "RentDay", "RentDay_Paid", "RentDay_Short"'
+        if has_location_costs:
+            info_pages_list += ', "TravelBlock"'
         info_pages_list += ']'
 
         info_nav_script = """:: InfoPageNav [script]
@@ -14063,7 +14263,7 @@ $(document).on(':passagestart', function(ev) {
     }
     var psg = ev.passage.title;
     var infoPages = """ + info_pages_list + """;
-""" + rent_redirect_block + clothing_redirect_block + """    if (infoPages.indexOf(psg) === -1) {
+""" + rent_redirect_block + clothing_redirect_block + travel_cost_block + """    if (infoPages.indexOf(psg) === -1) {
         State.variables.last_game_passage = psg;
     }
     // Check for newly triggered phone conversations
@@ -14380,6 +14580,20 @@ if (clothingMsg) {
     Engine.play("WardrobePage");
 <</script>><</link>>
 <br>
+<<link "Go back">><<script>>
+    Engine.play(State.variables.last_game_passage || "Navigation");
+<</script>><</link>>
+</div>"""
+
+        # Travel-block page (only when some location has an entry cost) — shown when the
+        # player can't afford the trait cost of a move. Mirrors ClothingBlock.
+        travel_block_page = ""
+        if has_location_costs:
+            travel_block_page = """
+:: TravelBlock
+<h2>Not Right Now</h2>
+<p><<print State.variables._travel_block_message || "You don't have what it takes to get there right now.">></p>
+<div class="clothing-block-choices">
 <<link "Go back">><<script>>
     Engine.play(State.variables.last_game_passage || "Navigation");
 <</script>><</link>>
@@ -14742,7 +14956,8 @@ if (clothingMsg) {
     <</if>>
     <<if _tsText isnot "">>
       <div class="sidebar-item trait-status-text-item">
-        <<print (_tsIcon ? _tsIcon + " " : "") + _tsText>>
+        <<if _item.label>><div class="band-header"><<print _item.label>></div><</if>>
+        <span class="band-value"><<print (_tsIcon ? _tsIcon + " " : "") + _tsText>></span>
       </div>
     <</if>>
   <<elseif _item.type is "trait_decay_warning">>
@@ -14811,7 +15026,8 @@ if (clothingMsg) {
     <</if>>
     <<if _twMatched isnot "">>
       <div class="sidebar-item trait-words-item" id="sidebar-trait-words-<<print _si>>">
-        <<print _twMatched>>
+        <<if _item.label>><div class="band-header"><<print _item.label>></div><</if>>
+        <span class="band-value"><<print _twMatched>></span>
       </div>
     <</if>>
   <<elseif _item.type is "stage_label">>
@@ -14908,10 +15124,10 @@ if (clothingMsg) {
 <<widget "phoneButton">>
 <<if setup.phone_enabled and (setup.phone_purchase_flag === '' or (State.variables.flags and State.variables.flags[setup.phone_purchase_flag]))>>
 <<set _phoneUnread to setup.getPhoneUnreadCount()>>
-<div id="phone-sidebar-btn" class="sidebar-item phone-btn-item">
-  <<link "📱 Phone">><<script>>setup.openPhone();<</script>><</link>>
+<div id="phone-sidebar-btn" class="phone-btn-item">
+  <<link "Phone">><<script>>setup.openPhone();<</script>><</link>><span class="nav-i">📱</span>
   <<if _phoneUnread gt 0>>
-    <span class="phone-badge"><<print _phoneUnread>></span>
+    <span class="phone-badge"><<print (_phoneUnread gt 9 ? "9+" : _phoneUnread)>></span>
   <</if>>
 </div>
 <</if>>
@@ -14980,7 +15196,7 @@ if (clothingMsg) {
 <<widget "questsButton">>
 <!-- Debug/legacy quest view - shows raw mechanics -->
 <div id="quests-btn-widget">
-  <<if passage() isnot "QuestsPage">><<link "📋 Quests" "QuestsPage">><</link>><<else>>📋 Quests<</if>>
+  <<if passage() isnot "QuestsPage">><<link "Quests" "QuestsPage">><</link>><<else>><span class="nav-row">Quests</span><</if>><span class="nav-i">📋</span>
 </div>
 <</widget>>
 
@@ -14995,7 +15211,7 @@ if (clothingMsg) {
 <<widget "journalButton">>
 <!-- Quests - active per-NPC quest cards -->
 <div id="journal-btn-widget">
-  <<if passage() isnot "QuestsPage">><<link "📋 Quests" "QuestsPage">><</link>><<else>>📋 Quests<</if>>
+  <<if passage() isnot "QuestsPage">><<link "Quests" "QuestsPage">><</link>><<else>><span class="nav-row">Quests</span><</if>><span class="nav-i">📋</span>
 </div>
 <</widget>>
 
@@ -15003,14 +15219,14 @@ if (clothingMsg) {
 <!-- Tips - game-level mechanics surface; conditional on [ui.tips_page] authored -->
 <<if setup.tips_page && setup.tips_page.content>>
 <div id="tips-btn-widget">
-  <<if passage() isnot "TipsPage">><<link "💡 Tips" "TipsPage">><</link>><<else>>💡 Tips<</if>>
+  <<if passage() isnot "TipsPage">><<link "Tips" "TipsPage">><</link>><<else>><span class="nav-row">Tips</span><</if>><span class="nav-i">💡</span>
 </div>
 <</if>>
 <</widget>>
 
 <<widget "statsButton">>
 <div id="stats-btn-widget">
-  <<if passage() isnot "StatsPage">><<link "📊 Stats" "StatsPage">><</link>><<else>>📊 Stats<</if>>
+  <<if passage() isnot "StatsPage">><<link "Stats" "StatsPage">><</link>><<else>><span class="nav-row">Stats</span><</if>><span class="nav-i">📊</span>
 </div>
 <</widget>>
 
@@ -15019,7 +15235,7 @@ if (clothingMsg) {
 <<set _soloActivities to setup.getSoloActivitiesForToday()>>
 <<if _npcsWithSchedules.length > 0 || _soloActivities.length > 0>>
 <div id="schedule-btn-widget">
-  <<if passage() isnot "SchedulePage">><<link "📅 Schedules" "SchedulePage">><</link>><<else>>📅 Schedules<</if>>
+  <<if passage() isnot "SchedulePage">><<link "Schedules" "SchedulePage">><</link>><<else>><span class="nav-row">Schedules</span><</if>><span class="nav-i">📅</span>
 </div>
 <</if>>
 <</widget>>
@@ -15037,7 +15253,7 @@ if (clothingMsg) {
 
 <<widget "flagsButton">>
 <div id="flags-btn-widget">
-  <<if passage() isnot "FlagsPage">><<link "🚩 Flags" "FlagsPage">><</link>><<else>>🚩 Flags<</if>>
+  <<if passage() isnot "FlagsPage">><<link "Flags" "FlagsPage">><</link>><<else>><span class="nav-row">Flags</span><</if>><span class="nav-i">🚩</span>
 </div>
 <</widget>>
 
@@ -15090,10 +15306,9 @@ if (clothingMsg) {
     margin-bottom: 8px;
 }
 .sidebar-item {
-    text-align: center;
+    text-align: left;       /* one type system across the rail — left, theme sans (was centered mono) */
     padding: 6px 8px;
     font-size: 13px;
-    font-family: var(--theme-font-mono);
     line-height: 1.3;
 }
 .countdown-item {
@@ -15176,130 +15391,56 @@ if (clothingMsg) {
     color: var(--theme-text-strong);
 }
 
-#quests-btn-widget {
-    background: var(--theme-primary-bg);
-    border: 1px solid var(--theme-primary);
-    border-radius: 4px;
-    padding: 6px 8px;
-    margin-bottom: 8px;
-    text-align: center;
-}
-
-#quests-btn-widget a {
-    color: var(--theme-primary);
-    text-decoration: none;
-    font-weight: bold;
-}
-
-#quests-btn-widget a:hover {
-    color: var(--theme-primary);
-    text-decoration: underline;
-}
-
-#journal-btn-widget {
-    background: linear-gradient(180deg, var(--journal-bg) 0%, var(--journal-bg-end) 100%);
-    border: 1px solid var(--journal-border);
-    border-radius: 4px;
-    padding: 6px 8px;
-    margin-bottom: 8px;
-    text-align: center;
-}
-
-#journal-btn-widget a {
-    color: var(--journal-text-muted);
-    text-decoration: none;
-    font-weight: bold;
-    font-family: var(--theme-font-heading);
-}
-
-#journal-btn-widget a:hover {
-    color: var(--journal-text);
-    text-decoration: underline;
-}
-
-/* Tips button — paired visually with Quests/journal since both surface
-   help/reference content. Same gradient + border tokens. */
-#tips-btn-widget {
-    background: linear-gradient(180deg, var(--journal-bg) 0%, var(--journal-bg-end) 100%);
-    border: 1px solid var(--journal-border);
-    border-radius: 4px;
-    padding: 6px 8px;
-    margin-bottom: 8px;
-    text-align: center;
-}
-
-#tips-btn-widget a {
-    color: var(--journal-text-muted);
-    text-decoration: none;
-    font-weight: bold;
-    font-family: var(--theme-font-heading);
-}
-
-#tips-btn-widget a:hover {
-    color: var(--journal-text);
-    text-decoration: underline;
-}
-
-#stats-btn-widget {
-    background: var(--theme-success-bg);
-    border: 1px solid var(--theme-success);
-    border-radius: 4px;
-    padding: 6px 8px;
-    margin-bottom: 8px;
-    text-align: center;
-}
-
-#stats-btn-widget a {
-    color: var(--theme-success);
-    text-decoration: none;
-    font-weight: bold;
-}
-
-#stats-btn-widget a:hover {
-    color: var(--theme-success);
-    text-decoration: underline;
-}
-
-#schedule-btn-widget {
-    background: var(--theme-primary-bg);
-    border: 1px solid var(--theme-primary);
-    border-radius: 4px;
-    padding: 6px 8px;
-    margin-bottom: 8px;
-    text-align: center;
-}
-
-#schedule-btn-widget a {
-    color: var(--theme-primary);
-    text-decoration: none;
-    font-weight: bold;
-}
-
-#schedule-btn-widget a:hover {
-    color: var(--theme-primary);
-    text-decoration: underline;
-}
-
-/* Flags Button in Sidebar */
+/* ===== Sidebar action buttons — ONE neutral pill family =====
+   Structure is carried by neutral surfaces; the accent is reserved for hover
+   (and .is-active). Replaces the old zoo: 4 tinted pills + 2 parchment-serif
+   journal/tips. All six now share one filled surface pill, left-aligned, muted
+   label, accent on hover, single 6px radius. */
+/* ===== Sidebar action buttons — ONE neutral pill family =====
+   The link (or the current-page .nav-row span) FILLS the whole padded box, so
+   the ENTIRE box is clickable — not just the text. The icon overlays the right
+   edge with pointer-events:none, so clicks there pass through to the link beneath.
+   Structure in neutrals; accent reserved for hover. */
+#phone-sidebar-btn,
+#quests-btn-widget,
+#journal-btn-widget,
+#tips-btn-widget,
+#stats-btn-widget,
+#schedule-btn-widget,
 #flags-btn-widget {
-    background: var(--theme-warning-bg);
-    border: 1px solid var(--theme-warning);
-    border-radius: 4px;
-    padding: 6px 8px;
-    margin-bottom: 8px;
-    text-align: center;
+    position: relative;          /* anchor the icon overlay + unread badge */
+    background: var(--theme-surface);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 6px;
+    margin: 8px 0 0 0;           /* uniform 8px rhythm — same as the cards */
 }
-
-#flags-btn-widget a {
-    color: var(--theme-warning-text);
+/* the clickable fill: <a> in nav state, .nav-row span on the current page */
+#phone-sidebar-btn a,
+#quests-btn-widget a, #journal-btn-widget a, #tips-btn-widget a, #stats-btn-widget a, #schedule-btn-widget a, #flags-btn-widget a,
+#quests-btn-widget .nav-row, #journal-btn-widget .nav-row, #tips-btn-widget .nav-row, #stats-btn-widget .nav-row, #schedule-btn-widget .nav-row, #flags-btn-widget .nav-row {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 30px 8px 10px;  /* padded fill → whole box clickable; right room for the icon */
+    text-align: left;            /* override the #ui-bar default center */
+    color: var(--theme-text-muted);
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
 }
-
-#flags-btn-widget a:hover {
-    color: var(--theme-warning-text);
-    text-decoration: underline;
+#phone-sidebar-btn a:hover,
+#quests-btn-widget a:hover, #journal-btn-widget a:hover, #tips-btn-widget a:hover, #stats-btn-widget a:hover, #schedule-btn-widget a:hover, #flags-btn-widget a:hover {
+    color: var(--theme-accent);
+    text-decoration: none;
 }
+.nav-i {                         /* right-edge icon overlay; clicks pass through to the link */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+/* Sidebar spacing is margin-driven, not <br>-driven (kill stray empty-widget breaks). */
+#story-caption br { display: none; }
 
 /* Patreon Button in Sidebar */
 #patreon-btn-widget {
@@ -16090,6 +16231,40 @@ if (clothingMsg) {
     border: 1px solid var(--theme-text-muted);
 }
 
+/* Locked destination card (lock-as-prose): shown but not clickable, with the reason */
+.location-card-locked {
+    opacity: 0.6;
+    cursor: not-allowed;
+    filter: grayscale(0.4);
+}
+.location-card-locked .location-card-image {
+    filter: grayscale(0.6) brightness(0.85);
+}
+.nav-locked-reason {
+    font-size: 0.7em;
+    line-height: 1.25;
+    color: var(--theme-text-muted);
+    font-style: italic;
+    margin-top: 2px;
+}
+/* Text-mode locked link */
+.nav-link-locked {
+    color: var(--theme-text-muted);
+    font-style: italic;
+}
+/* Travel-cost tag on a nav destination (neutral, informational) */
+.nav-cost-tag {
+    font-size: 0.65em;
+    color: var(--theme-text-muted);
+    background: var(--theme-surface);
+    border: 1px solid var(--theme-border, rgba(255,255,255,0.12));
+    border-radius: 3px;
+    padding: 1px 5px;
+    margin-left: 4px;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
 /* Exit Links Section (text-only, below grid) */
 .location-nav-exits {
     margin-top: 12px;
@@ -16294,46 +16469,81 @@ if (clothingMsg) {
     line-height: 1.35;
 }
 
-/* ===== Sidebar trait_status_text (body-state needs) ===== */
-.trait-status-text-item {
+/* ===== Sidebar band cards (trait_words / trait_status_text / trait_bar) =====
+   ONE card language. Structure is carried by NEUTRAL surfaces + spacing; the
+   accent is RESERVED for signal (hover / .is-active), never the resting stripe.
+   trait_words is the HERO stat (corruption / identity) — raised surface + larger
+   value so it anchors the top of the rail instead of reading as a peer card. */
+.trait-words-item,
+.trait-status-text-item,
+.trait-bar-item {
+    text-align: left;
     margin-top: 0.5rem;
-    padding: 6px 10px;
-    background: rgba(99, 179, 237, 0.14);
-    border-left: 3px solid rgba(99, 179, 237, 0.75);
-    border-radius: 4px;
+    padding: 8px 10px;
+    background: var(--theme-surface);
+    border: 1px solid rgba(255, 255, 255, 0.07);   /* hairline — survives across tiers, clears the eye (the old #333 border was ~1.3:1, invisible) */
+    border-left: 3px solid rgba(255, 255, 255, 0.10);   /* neutral at rest */
+    border-radius: 6px;
     color: var(--theme-text);
     font-size: 0.78rem;
     line-height: 1.35;
 }
-
-/* ===== Sidebar trait bar ===== */
-.trait-bar-item {
-    margin-top: 0.5rem;
+/* HERO: the identity word-state (corruption) reads as the top-of-rail anchor. */
+.trait-words-item {
+    background: var(--theme-surface-hover);   /* +0.08 lighter — the existing 'raised' tier */
 }
+.trait-words-item .band-value {
+    font-size: 1.05rem;
+    line-height: 1.25;
+}
+/* The accent/semantic left-stripe is a SCARCE SIGNAL (active / urgent / locked),
+   not decoration — a row earns it; toggled by emitting the class on that item. */
+.sidebar-item.is-active { border-left-color: var(--theme-accent); }
+.sidebar-item.is-urgent { border-left-color: var(--theme-warning); }
+.sidebar-item.is-locked { border-left-color: var(--theme-danger); }
+/* the label, rendered as a compact card header (matches .npc-panel-header) */
+.band-header {
+    color: var(--theme-text-muted);
+    font-weight: bold;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+/* the value line (word / status text) */
+.band-value {
+    color: var(--theme-text-strong);
+    font-weight: 600;
+    font-size: 0.86rem;
+    font-variant-numeric: tabular-nums lining-nums;   /* columns don't jitter as values change */
+}
+
+/* ===== trait_bar — banded word over a flat fill bar ===== */
 .trait-bar-label {
-    font-size: 0.75rem;
-    color: #fff;
-    margin-bottom: 3px;
+    color: var(--theme-text-muted);
+    font-weight: bold;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
 }
 .trait-bar-bg {
     height: 8px;
-    background: #1a1a2a;
-    border-radius: 4px;
+    background: var(--theme-surface-alt);
+    border-radius: 6px;
     overflow: hidden;
     position: relative;
 }
 .trait-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--theme-warning), var(--theme-success));
-    border-radius: 4px;
+    background: var(--theme-accent);
+    border-radius: 6px;
     transition: width 0.3s ease;
 }
 /* Banded mode: when a trait_bar's band-text overlay is rendered, the bg grows
-   to fit the overlay text. Height = font-size 0.75rem (~12px) + ~8px vertical
-   breathing room each side so the band text doesn't kiss the top/bottom
-   borders. Gated via :has() so non-banded bars stay at the 8px default. */
+   to fit the overlay text. Gated via :has() so non-banded bars stay at 8px. */
 .trait-bar-bg:has(.trait-bar-band-text) {
-    height: 28px;
+    height: 26px;
     border-radius: 6px;
 }
 .trait-bar-band-text {
@@ -16341,28 +16551,27 @@ if (clothingMsg) {
     inset: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: #fff;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+    justify-content: flex-end;
+    padding-right: 9px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--theme-text-strong);
+    font-variant-numeric: tabular-nums lining-nums;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
     pointer-events: none;
     z-index: 2;
     white-space: nowrap;
 }
-/* Built-in color tier gradients — RTS-matched. Authors can override by shipping
-   their own .trait-bar-fill.<class> rules for arbitrary class names. */
+/* Built-in value-tier fills — flat & matte (set a tier class via color_tiers).
+   Authors can override by shipping their own .trait-bar-fill.<class> rules. */
 .trait-bar-fill.low {
-    background: linear-gradient(90deg, #2196f3, #1976d2);
-    box-shadow: 0 0 6px rgba(33, 150, 243, 0.3);
+    background: #3b82c4;
 }
 .trait-bar-fill.medium {
-    background: linear-gradient(90deg, #ff9800, #ff5722);
-    box-shadow: 0 0 6px rgba(255, 152, 0, 0.3);
+    background: #d98a3a;
 }
 .trait-bar-fill.high {
-    background: linear-gradient(90deg, #ff6b6b, #ff1744);
-    box-shadow: 0 0 6px rgba(255, 107, 107, 0.3);
+    background: #d65a5a;
 }
 
 /* NPC panel card (npc_panel sidebar item) — RTS House-card: header strip + label/value rows */
@@ -16371,18 +16580,18 @@ if (clothingMsg) {
     padding: 0;
     margin-top: 0.5rem;
     background: var(--theme-surface);
-    border: 1px solid var(--theme-border);
+    border: 1px solid rgba(255, 255, 255, 0.07);
     border-radius: 6px;
     overflow: hidden;
 }
 .npc-panel-header {
     padding: 5px 8px;
     background: var(--theme-surface-alt);
-    border-bottom: 1px solid var(--theme-border);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     color: var(--theme-text-strong);
     font-weight: bold;
     font-size: 12px;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
 }
 .npc-panel-item .sidebar-row {
@@ -16401,11 +16610,12 @@ if (clothingMsg) {
     color: var(--theme-text-strong);
     font-weight: 500;
     text-align: right;
+    font-variant-numeric: tabular-nums lining-nums;
 }
 .npc-panel-next {
     margin-top: 4px;
     padding: 4px 8px 2px;
-    border-top: 1px solid var(--theme-border);
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 /* the inner goal block reuses the Quests-page classes (.quests-goal/.quests-ready/.quests-where) */
 
@@ -17323,7 +17533,7 @@ if (clothingMsg) {
   </div>
 </div>
 
-""" + stats_page + wardrobe_page + clothing_block_page + shop_page + rent_page + """
+""" + stats_page + wardrobe_page + clothing_block_page + travel_block_page + shop_page + rent_page + """
 
 :: SchedulePage
 <<nobr>>
@@ -17658,6 +17868,57 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
 <</widget>>
 """
 
+    def _location_nav_slug(self, loc):
+        """The runtime slug a location is keyed by in setup.locations (mirror of the
+        locations_map build): properties['slug'] or a loc_<id> fallback."""
+        return (getattr(loc, 'properties', None) or {}).get('slug') or f"loc_{loc.id}"
+
+    def _render_location_nav_card(self, loc, video_path):
+        """A single nav-grid card for a destination, lock-as-prose aware: a normal
+        clickable card when the door is open, else a greyed non-clickable card showing
+        the in-world reason. A travel-cost tag rides along when the location has costs."""
+        loc_id = str(loc.id)
+        slug = self._location_nav_slug(loc)
+        passage_name = f"Location_{loc.name.replace(' ', '_')}"
+        safe_name = html.escape(loc.name)
+        image = self.location_images.get(loc_id, "")
+        if image:
+            img_html = f'<div class="location-card-image" style="background-image: url(\'{video_path}/{image}\')"></div>'
+        else:
+            img_html = f'<div class="location-card-image location-card-placeholder">{self._get_location_placeholder_svg()}</div>'
+        indicators = (
+            f'<div class="location-card-indicators">'
+            f'<<if setup.locationHasNewCanvases("{loc_id}")>><span class="nav-new-badge">NEW</span><</if>>'
+            f'<<for _npc range setup.getNpcsPresentAtLocation("{loc_id}")>><<if _npc.portrait>><img @src="\'{video_path}/\' + _npc.portrait" class="nav-npc-badge" @alt="_npc.name"><</if>><</for>>'
+            f'</div>'
+        )
+        cost_tag = f'<<if setup.getLocationCostTag("{slug}")>><span class="nav-cost-tag"><<= setup.getLocationCostTag("{slug}")>></span><</if>>'
+        open_card = (
+            f'<a class="location-card link-internal" data-passage="{passage_name}">{img_html}'
+            f'<div class="location-card-content"><span class="location-card-name">{safe_name}</span>{cost_tag}{indicators}</div></a>'
+        )
+        locked_card = (
+            f'<div class="location-card location-card-locked">{img_html}'
+            f'<div class="location-card-content"><span class="location-card-name">{safe_name}</span>'
+            f'<span class="nav-locked-reason"><<= setup.navDestBlockedReason("{slug}")>></span></div></div>'
+        )
+        return f'<<if setup.navDestUnlocked("{slug}")>>{open_card}<<else>>{locked_card}<</if>>'
+
+    def _render_location_nav_link(self, loc, video_path):
+        """Text-mode sibling of _render_location_nav_card (lock-as-prose + cost tag)."""
+        loc_id = str(loc.id)
+        slug = self._location_nav_slug(loc)
+        link_name = f"Location_{loc.name.replace(' ', '_')}"
+        cost_tag = f'<<if setup.getLocationCostTag("{slug}")>> <span class="nav-cost-tag"><<= setup.getLocationCostTag("{slug}")>></span><</if>>'
+        open_link = (
+            f'[[{loc.name}->{link_name}]]'
+            f'<<if setup.locationHasNewCanvases("{loc_id}")>> <span class="nav-new">!</span><</if>>'
+            f'<<for _npc range setup.getNpcsPresentAtLocation("{loc_id}")>><<if _npc.portrait>> <img @src="\'{video_path}/\' + _npc.portrait" class="nav-npc-portrait" @alt="_npc.name"><</if>><</for>>'
+            f'{cost_tag}'
+        )
+        locked_link = f'<span class="nav-link-locked">{html.escape(loc.name)} — <<= setup.navDestBlockedReason("{slug}")>></span>'
+        return f'<<if setup.navDestUnlocked("{slug}")>>{open_link}<<else>>{locked_link}<</if>>'
+
     def _generate_hierarchical_navigation(self, location) -> str:
         """Generate hierarchical navigation using simplified entry_from system.
 
@@ -17697,41 +17958,14 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
                 navigation_html += '<<nobr>><div class="location-nav-grid">'
 
                 for dest in ordered_destinations:
-                    dest_id = str(dest.id)
-                    dest_name = dest.name.replace(' ', '_')
-                    dest_image = self.location_images.get(dest_id, "")
-                    passage_name = f"Location_{dest_name}"
-                    safe_name = html.escape(dest.name)
-
-                    # Build card HTML (no newlines to avoid whitespace)
-                    navigation_html += f'<a class="location-card link-internal" data-passage="{passage_name}">'
-
-                    if dest_image:
-                        # Card with image
-                        image_src = f"{video_path}/{dest_image}"
-                        navigation_html += f'<div class="location-card-image" style="background-image: url(\'{image_src}\')"></div>'
-                    else:
-                        # Card with placeholder silhouette
-                        navigation_html += f'<div class="location-card-image location-card-placeholder">{self._get_location_placeholder_svg()}</div>'
-
-                    navigation_html += f'<div class="location-card-content">'
-                    navigation_html += f'<span class="location-card-name">{safe_name}</span>'
-
-                    # Indicators container (NPC portraits + new canvas badge)
-                    navigation_html += f'<div class="location-card-indicators">'
-                    navigation_html += f'<<if setup.locationHasNewCanvases("{dest_id}")>><span class="nav-new-badge">NEW</span><</if>>'
-                    navigation_html += f'<<for _npc range setup.getNpcsWithCanvasesAtLocation("{dest_id}")>><<if _npc.portrait>><img @src="\'{video_path}/\' + _npc.portrait" class="nav-npc-badge" @alt="_npc.name"><</if>><</for>>'
-                    navigation_html += f'</div>'
-                    navigation_html += f'</div>'
-                    navigation_html += f'</a>'
+                    navigation_html += self._render_location_nav_card(dest, video_path)
 
                 navigation_html += '</div><</nobr>>\n'
             else:
                 # TEXT-ONLY MODE (no images)
                 navigation_html += "    <strong>Available destinations:</strong><br>\n"
                 for dest in ordered_destinations:
-                    dest_name = dest.name.replace(' ', '_')
-                    navigation_html += f"""    [[{dest.name}->Location_{dest_name}]]<<if setup.locationHasNewCanvases("{dest.id}")>> <span class="nav-new">!</span><</if>><<for _npc range setup.getNpcsWithCanvasesAtLocation("{dest.id}")>><<if _npc.portrait>> <img @src="'{video_path}/' + _npc.portrait" class="nav-npc-portrait" @alt="_npc.name"><</if>><</for>><br>\n"""
+                    navigation_html += "    " + self._render_location_nav_link(dest, video_path) + "<br>\n"
 
         # EXIT LINKS (always text-only, below the grid)
         exit_links = []
@@ -17787,35 +18021,13 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
                     navigation_html += '<<nobr>><div class="location-nav-grid">'
 
                     for other_loc in other_locations:
-                        loc_id = str(other_loc.id)
-                        other_name = other_loc.name.replace(' ', '_')
-                        loc_image = self.location_images.get(loc_id, "")
-                        passage_name = f"Location_{other_name}"
-                        safe_name = html.escape(other_loc.name)
-
-                        navigation_html += f'<a class="location-card link-internal" data-passage="{passage_name}">'
-
-                        if loc_image:
-                            image_src = f"{video_path}/{loc_image}"
-                            navigation_html += f'<div class="location-card-image" style="background-image: url(\'{image_src}\')"></div>'
-                        else:
-                            navigation_html += f'<div class="location-card-image location-card-placeholder">{self._get_location_placeholder_svg()}</div>'
-
-                        navigation_html += f'<div class="location-card-content">'
-                        navigation_html += f'<span class="location-card-name">{safe_name}</span>'
-                        navigation_html += f'<div class="location-card-indicators">'
-                        navigation_html += f'<<if setup.locationHasNewCanvases("{loc_id}")>><span class="nav-new-badge">NEW</span><</if>>'
-                        navigation_html += f'<<for _npc range setup.getNpcsWithCanvasesAtLocation("{loc_id}")>><<if _npc.portrait>><img @src="\'{video_path}/\' + _npc.portrait" class="nav-npc-badge" @alt="_npc.name"><</if>><</for>>'
-                        navigation_html += f'</div>'
-                        navigation_html += f'</div>'
-                        navigation_html += f'</a>'
+                        navigation_html += self._render_location_nav_card(other_loc, video_path)
 
                     navigation_html += '</div><</nobr>>\n'
                 else:
                     navigation_html += "    <p><strong>All locations:</strong></p>\n"
                     for other_loc in other_locations:
-                        other_name = other_loc.name.replace(' ', '_')
-                        navigation_html += f"""    [[{other_loc.name}->Location_{other_name}]]<<if setup.locationHasNewCanvases("{other_loc.id}")>> <span class="nav-new">!</span><</if>><<for _npc range setup.getNpcsWithCanvasesAtLocation("{other_loc.id}")>><<if _npc.portrait>> <img @src="'{video_path}/' + _npc.portrait" class="nav-npc-portrait" @alt="_npc.name"><</if>><</for>><br>\n"""
+                        navigation_html += "    " + self._render_location_nav_link(other_loc, video_path) + "<br>\n"
 
         return navigation_html
 

@@ -1,0 +1,225 @@
+# ═══════════════════════════════════════════════════════════════
+# PHASE 1: METADATA, PLAYER, NPCS & LOCATIONS
+# ═══════════════════════════════════════════════════════════════
+# Source: Book Phases 1 (Foundation), 2 (Characters & Stats), 3 (World Design)
+# Game: Two Weeks
+# Architecture: Single-NPC Romance (Option A)
+# Drivers: FORBIDDEN (primary) + LOVE (secondary)
+# ═══════════════════════════════════════════════════════════════
+
+schema_version = "0.2"
+starting_canvas = "scene_arrival"
+
+# ═══════════════════════════════════════════════════════════════
+# PROJECT METADATA
+# ═══════════════════════════════════════════════════════════════
+
+[project]
+id = "two_weeks"
+title = "Two Weeks"
+description = """
+You return home after two years for your step-brother Ethan's wedding. \
+The feelings you buried — the ones that made you leave in the first place — \
+never went away. And neither did his. You have exactly 14 days before he \
+says "I do" to someone else. Every moment is a choice between what's right \
+and what you truly want. A single-NPC forbidden romance driven by a ticking \
+clock, dual taboo (step-sibling + engaged), and the question: is love worth \
+the cost of destroying everything else?
+"""
+
+# ═══════════════════════════════════════════════════════════════
+# TIME SYSTEM
+# ═══════════════════════════════════════════════════════════════
+# Game starts Saturday afternoon (Day 1). Player arrives mid-afternoon.
+# 14 days: Saturday (Week 1) through Friday (Week 3).
+# 8 time periods per day: early_morning through night.
+
+[time]
+enabled = true
+starting_hour = 14
+starting_day = "Saturday"
+starting_week = 1
+
+# ═══════════════════════════════════════════════════════════════
+# PLAYER
+# ═══════════════════════════════════════════════════════════════
+# Female, early 20s. Step-sister returning for the wedding.
+# Player-owned stats: boldness (agency axis), energy.
+# NPC stats (affection, guilt) go on the NPC, not here.
+
+[player]
+id = "player"
+name = "Lily"
+description = "A young woman in her early 20s, returning home after two years away. Slim build, expressive eyes. Old enough to know better, young enough to not care. She left to escape feelings she wasn't supposed to have. Now she's back for his wedding."
+portrait = "player.jpg"
+core_traits = { boldness = 0, energy = 100 }
+flag_keys = [
+  # --- Progression flags (set by story canvases, gate the next story canvas) ---
+  "game_started",
+  "arrival_complete",
+  "welcome_dinner_complete",
+  "old_photos_complete",
+  "sleepless_night_complete",
+  "madison_calls_complete",
+  "rainy_day_complete",
+  "the_couch_complete",
+  "confession_complete",
+  "almost_kiss_complete",
+  "real_talk_complete",
+  "first_kiss_done",
+  "what_are_we_doing_done",
+  "going_further_complete",
+  "first_night_complete",
+  "morning_after_complete",
+  "cant_stay_away_complete",
+  "madison_arrived",
+  "stolen_moment_complete",
+  "night_before_complete",
+  "wedding_morning_done",
+  # --- Ending flag (set by any ending, blocks all other endings) ---
+  "ending_seen",
+  # --- Gate flags (set by story canvases, gate activity tiers) ---
+  "lingering_touch_unlock",
+  "flirt_unlock",
+  "kiss_unlock",
+  "intimacy_unlock",
+  # Granular intimacy unlocks (activities T6–T8)
+  "manual_unlock",
+  "oral_unlock",
+  "sex_unlock",
+  # --- NPC state flags (track Ethan's relationship state) ---
+  "ethan_comfortable",
+  "ethan_interested",
+  "ethan_vulnerable",
+  "ethan_intimate"
+]
+
+# ═══════════════════════════════════════════════════════════════
+# NPC: ETHAN (Primary)
+# ═══════════════════════════════════════════════════════════════
+# Step-brother, late 20s, engaged to Madison.
+# Protective older brother energy with suppressed desire.
+# Warm, genuinely kind, conflict-avoidant.
+# NPC-owned stats: love, trust, corruption.
+
+[[npcs]]
+id = "npc_ethan"
+name = "Ethan"
+description = "Your step-brother. Late 20s, tall, athletic build, warm brown eyes. Protective older brother energy with suppressed desire underneath. Engaged to Madison — wedding in 14 days. He remembers everything about you: your favorite meal, how you take your coffee, that summer you got too close. His loyalty is both his most attractive quality and the obstacle."
+portrait = "ethan.jpg"
+core_traits = { love = 0, trust = 0, corruption = 0 }
+flag_keys = []
+# NPC presence is derived from canvas triggers at runtime — no schedules needed.
+
+# ═══════════════════════════════════════════════════════════════
+# NPC: MADISON (Secondary — Days 13-14 only)
+# ═══════════════════════════════════════════════════════════════
+# Ethan's fiancée. Not a villain — she's genuinely nice.
+# Appears Day 13 afternoon. No relationship stats (not interactive).
+# Her function: make the player feel the weight of their choices.
+
+[[npcs]]
+id = "npc_madison"
+name = "Madison"
+description = "Ethan's fiancée. Late 20s, polished, put-together, warm. She greets you with genuine friendliness. She's not a caricature — she's a real person who doesn't deserve what's happening. Her presence transforms what you've done from abstract to devastatingly real."
+portrait = "madison.jpg"
+core_traits = {}
+flag_keys = []
+# NPC presence is derived from canvas triggers at runtime — no schedules needed.
+
+# ═══════════════════════════════════════════════════════════════
+# LOCATIONS
+# ═══════════════════════════════════════════════════════════════
+# 8 locations. Single-floor house + yard.
+# Home = central hub. All rooms accessible directly.
+# No containers needed — flat hierarchy with entry_from connections.
+#
+# Hierarchy:
+#   loc_home (central hub)
+#     ├── loc_player_room
+#     ├── loc_ethan_room
+#     ├── loc_bathroom
+#     ├── loc_living
+#     ├── loc_kitchen
+#     ├── loc_backyard
+#     └── loc_garage
+
+# --- CENTRAL HUB ---
+[[locations]]
+id = "loc_home"
+name = "Home"
+description = "The central hallway of the house. Family photos line the walls — including several of you and Ethan as teenagers, standing too close at someone's birthday party. Doors branch off to every room. Shoes by the front door, keys on the hook, the smell of whatever Ethan last cooked still lingering."
+image = "locations/hallway.jpg"
+image_search_queries = ["house hallway family photos", "home entryway cozy"]
+navigation_order = ["loc_player_room", "loc_ethan_room", "loc_bathroom", "loc_living", "loc_kitchen", "loc_backyard", "loc_garage"]
+
+# --- ROOMS ---
+[[locations]]
+id = "loc_player_room"
+name = "Your Old Room"
+description = "The guest room that was once yours. Some of your old things are still here — posters you left behind, books on the shelf. The bed is smaller than you remembered. Window overlooks the backyard pool."
+image = "locations/player_room.jpg"
+image_search_queries = ["cozy guest bedroom small bed", "childhood bedroom grown up"]
+entry_from = "loc_home"
+
+[[locations]]
+id = "loc_ethan_room"
+name = "Ethan's Bedroom"
+description = "Master bedroom with a king bed. Madison's presence is visible — her things on the dresser, their engagement photo on the nightstand. Entering feels like crossing a line."
+image = "locations/ethan_room.jpg"
+image_search_queries = ["master bedroom engagement photo nightstand", "couple bedroom forbidden"]
+entry_from = "loc_home"
+
+[[locations]]
+id = "loc_bathroom"
+name = "Bathroom"
+description = "Shared bathroom with a large mirror, walk-in shower with glass door. Acoustics carry — you can hear when someone's in here. One bathroom for two people means timing matters."
+image = "locations/bathroom.jpg"
+image_search_queries = ["modern bathroom glass shower", "shared bathroom mirror"]
+entry_from = "loc_home"
+
+[[locations]]
+id = "loc_living"
+name = "Living Room"
+description = "Comfortable space with a large sectional couch, flatscreen TV, and soft lighting. The couch is notably oversized — easy to end up sitting close. Wedding planning materials scattered on the coffee table."
+image = "locations/living_room.jpg"
+image_search_queries = ["living room couch TV cozy evening", "comfortable living room blanket"]
+entry_from = "loc_home"
+
+[[locations]]
+id = "loc_kitchen"
+name = "Kitchen"
+description = "Open-plan modern kitchen with a large island and breakfast bar. Morning light floods through windows. Coffee maker prominently featured. Connected to the living area through an open archway."
+image = "locations/kitchen.jpg"
+image_search_queries = ["modern kitchen island breakfast bar morning", "open kitchen bright"]
+entry_from = "loc_home"
+
+# --- OUTDOOR ---
+[[locations]]
+id = "loc_backyard"
+name = "Backyard & Pool"
+description = "Well-maintained backyard with an in-ground pool, lounge chairs, and a covered patio area. Privacy fence ensures neighbors can't see. The pool has underwater lights for night swimming."
+image = "locations/backyard.jpg"
+image_search_queries = ["backyard pool lounge chairs privacy fence", "pool night lights"]
+entry_from = "loc_home"
+
+[[locations]]
+id = "loc_garage"
+name = "Garage"
+description = "Attached garage used partly for storage. Old boxes contain family memories — photo albums, childhood items, mementos from when you were growing up together. Dusty, dim, private."
+image = "locations/garage.jpg"
+image_search_queries = ["garage storage boxes memories", "dusty garage shelves storage"]
+entry_from = "loc_home"
+
+# ═══════════════════════════════════════════════════════════════
+# SIDEBAR ITEMS
+# ═══════════════════════════════════════════════════════════════
+# Custom sidebar display elements. Rendered below the time widget.
+
+[[sidebar_items]]
+type = "countdown"
+total_days = 14
+label = "days until the wedding"
+
+[[sidebar_items]]
+type = "hint"

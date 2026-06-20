@@ -1,0 +1,43 @@
+# Phase 2/7 — 2_one_shots.toml
+# Bar Empire — one-shots. SCAFFOLD: only the boot canvas (structural bootstrap, not story).
+# NPC arcs/hubs/ambients/capstones are BEATS authored into 5_scenes.toml / 4_story_arc.toml.
+
+# ─── Boot / Start canvas ──────────────────────────────────────────────────────
+# Drops the player onto the bar floor at the start of her shift, Day 1. Structural
+# bootstrap (establishes the situation + sets first_shift_done). NOT an NPC beat.
+
+[[canvases]]
+id          = "canvas_first_shift"
+name        = "First shift"
+description = "Day 1 boot. The Velvet Rail floor, 18:00. Establishes the bar, Sal, and the situation. Sets first_shift_done."
+
+[canvases.trigger]
+location      = "loc_bar_floor"
+is_repeatable = false
+priority      = 12
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "first_shift_done", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "intro"
+name = "First shift"
+blocks = [
+  { type = "image", props = { file = "scenes/canvas_first_shift.jpg" } },
+  { type = "paragraph", content = "The neon over the bar buzzes one letter short — VELVET RAIL, the V flickering like it can't decide. Sal's behind the counter counting the till before the night's even started, sleeves pushed up, a cigarette going in the ashtray he pretends isn't there. He doesn't look up when you come in." },
+  { type = "paragraph", content = "Forty dollars to your name and three weeks behind. The floor's yours tonight. So are the men who'll be sitting at it." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "I need this to pay better than it does. I need a way up." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tie on your apron and work the floor."
+targetType = "location"
+locationId = "loc_bar_floor"
+time_progression_minutes = 5
+flagEffects = [
+  { targetType = "player", flag = "first_shift_done", op = "set" },
+]

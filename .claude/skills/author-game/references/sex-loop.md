@@ -5,7 +5,7 @@ surface or the hub goes hollow once the milestones are spent. The sex-loop is th
 player-driven menu of acts/poses that climbs a pleasure meter to a chosen climax, replayable nightly.
 
 Read this when a beat adds repeatable explicit content to an NPC whose per-tier vocab ceiling allows
-it (the ceiling is declared in the NPC's R7 brief; model in `doctrine/08`) — typically the gold
+it (the ceiling is declared in the NPC's design brief; model in `references/kink-ceilings.md`) — typically the gold
 NPC's full arc, not service/antagonist. Reference implementation: `the_long_summer_test`
 `loop_franks_bedroom_sex` (+ its finisher) — copy its table shapes.
 

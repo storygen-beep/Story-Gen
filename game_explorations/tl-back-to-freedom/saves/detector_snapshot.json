@@ -1,0 +1,1487 @@
+{
+  "generated_at": "2026-06-07T22:12:28.334Z",
+  "variables": {
+    "return": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "string_samples": [
+        "Start"
+      ]
+    },
+    "return2": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "string_samples": [
+        "Start"
+      ]
+    },
+    "avatarmc": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mcrel": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "string_samples": [
+        "stepdad"
+      ]
+    },
+    "ginarel": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "string_samples": [
+        "stepdaughter"
+      ]
+    },
+    "meganrel": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "string_samples": [
+        "stepdaughter"
+      ]
+    },
+    "incest": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "string_samples": [
+        "Off"
+      ]
+    },
+    "music": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "string_samples": [
+        "On"
+      ]
+    },
+    "volume": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "string_samples": [
+        "100%"
+      ]
+    },
+    "gallery": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "string_samples": [
+        "Locked"
+      ]
+    },
+    "gallerymenu": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "bool_values": [
+        true
+      ]
+    },
+    "angelalove": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 10,
+        "max": 10,
+        "first": 10,
+        "last": 10,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "angelalust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 10,
+        "max": 10,
+        "first": 10,
+        "last": 10,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "ginalove": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 10,
+        "max": 10,
+        "first": 10,
+        "last": 10,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "ginalust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "meganlove": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 10,
+        "max": 10,
+        "first": 10,
+        "last": 10,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "meganlust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "adrianalove": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 5,
+        "max": 5,
+        "first": 5,
+        "last": 5,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "adrianalust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 5,
+        "max": 5,
+        "first": 5,
+        "last": 5,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "avalove": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 5,
+        "max": 5,
+        "first": 5,
+        "last": 5,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "avalust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "haleylove": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "haleylust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "abigaillove": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "abigaillust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "blanchelove": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "blanchelust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "amirahlove": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "amirahlust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "jillianlove": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "jillianlust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "lanalove": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "lanalust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "jessalove": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "jessalust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "kelsilove": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "kelsilust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "alexislove": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "alexislust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "brennalove": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "brennalust": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "jasonfriendship": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 5,
+        "max": 5,
+        "first": 5,
+        "last": 5,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "dylanfriendship": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mrreedrespect": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "corruption": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "money": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "flower": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "chocolate": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "teddybear": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "perfume": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "ring1": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "ring2": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "ring3": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "earring1": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "earring2": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "earring3": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "necklace1": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "necklace2": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "necklace3": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "lingerie": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "dildo": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "analplug": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "analgel": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "pinkpill": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "bluepill": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "greenpill": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "weed": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "coke": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "car": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mcjob": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "pleasure1": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "pleasure2": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "climax": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "cum": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "tookbluepill": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "bool_values": [
+        false
+      ]
+    },
+    "mchp": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 100,
+        "max": 100,
+        "first": 100,
+        "last": 100,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "enemyhp": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 100,
+        "max": 100,
+        "first": 100,
+        "last": 100,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mcspecial": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "sbday": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "sbtime": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780870272153,
+      "last_ts": 1780870321088,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 6,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    }
+  },
+  "prefix_clusters": {
+    "return": [
+      "return",
+      "return2"
+    ],
+    "ring": [
+      "ring1",
+      "ring2",
+      "ring3"
+    ],
+    "earring": [
+      "earring1",
+      "earring2",
+      "earring3"
+    ],
+    "necklace": [
+      "necklace1",
+      "necklace2",
+      "necklace3"
+    ],
+    "pleasure": [
+      "pleasure1",
+      "pleasure2"
+    ]
+  },
+  "co_change": {},
+  "passages": {
+    "Start": {
+      "first_ts": 1780870272153,
+      "visit_count": 6
+    }
+  },
+  "choices": {
+    "total": 0,
+    "by_classification": {},
+    "price_observations": [],
+    "recent": []
+  },
+  "mutations": []
+}

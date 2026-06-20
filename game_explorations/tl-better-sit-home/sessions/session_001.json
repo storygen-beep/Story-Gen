@@ -1,0 +1,19 @@
+{
+  "session_id": 1,
+  "start_ts": "2026-06-07T21:30:29.062Z",
+  "start_epoch_ms": 1780867829062,
+  "end_ts": "2026-06-07T21:34:22.486Z",
+  "duration_s": 233,
+  "clicks": 6,
+  "choices_explored": 6,
+  "arrow_advances": 0,
+  "unique_states_seen": 7,
+  "new_unique_states": 7,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "TOP-LEVEL (Better Sit Home, aromabish): LINEAR narrative VN, NOT a sandbox. Drive = survive/escape after witnessing a forest cult murder at a resort → forced TG transformation via pharma (breeding/fertility theme). Structure = day/chapter-labeled but purely linear, advanced by 'Next'/linkreplace; no free-roam, no activities, near-zero agency (single continue link per beat). Sidebar = Fertility Tracker + Money + inventory, but these are THEMATIC display, not a progression economy (fertility tracker empty early; money/inv light). World does NOT open by player state — it's an authored sequence. Story shape = strong linear beginning→turn(witness+transform)→scripted continuation. CONTRAST to RTS: the LINEAR end of the spectrum — story-spine carries everything, no corruption-sandbox loop. Confidence high on structure, low on endings (didn't reach)."
+  ]
+}

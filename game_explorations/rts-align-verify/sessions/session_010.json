@@ -1,0 +1,19 @@
+{
+  "session_id": 10,
+  "start_ts": "2026-06-08T18:31:10.640Z",
+  "start_epoch_ms": 1780943470640,
+  "end_ts": "2026-06-08T18:32:58.493Z",
+  "duration_s": 108,
+  "clicks": 0,
+  "choices_explored": 0,
+  "arrow_advances": 0,
+  "unique_states_seen": 12,
+  "new_unique_states": 1,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "GAP-5 ECONOMY research (RTS source 2026-06-09 + survey): RTS economy is MULTI-PATH + a CORRUPTION LADDER. Two currencies: clean money (legit) + dirtyMoney (lewd income), with a LAUNDERING loop (launder dirty→clean at a cut). Income paths: (1) legit gig jobs escalating DogWalking 45 → HouseCleaning 75 → BabySitting/ElderlyCare 110 (safe, low pay, early); (2) LEWD WORK = the big one: xcam/camgirl (161 refs — a full camgirl system), prostitution/clients (167 'client' refs), stripper (11) — pays dirtyMoney, higher, gated on corruption/exhibitionism, IS the lewd content; (3) scene/event payouts (moneyValue from gigs/scenes e.g. discount sex). Spends: rent/debt, property, clothing, lessons, laundering cut. addMoney(job.income) + addMoney(moneyValue) + dirtyMoney += dirtyMoneyValue. KEY INSIGHT: the economy is ITSELF a corruption ladder — legit-low-pay early → lewd-high-pay as you fall — so MAKING MONEY and CORRUPTING YOURSELF are the same act; the money pressure literally pushes you to the lewd paths because that's where the money is. Inherently anti-grind: multiple paths + the paths ARE content + they escalate. Other games same pattern: Lustbound cash + OnlyFans(ofFollowers) + prostitution(prosRep/clientsServiced) + coffee job; Gakko corporate-career-ladder = income spine; The Company Money/Paycheck + slave economy; Back to Freedom money→gifts→meters; Generic PG legit jobs + interviews + bank. Universal: multi-path income that turns increasingly LEWD as you progress, earning fused with content."
+  ]
+}

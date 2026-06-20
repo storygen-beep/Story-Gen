@@ -1,0 +1,641 @@
+[
+ {
+  "loc": "house",
+  "key": "PizzaDelivery",
+  "title": "Pizza Delivery",
+  "chance": 33,
+  "guide": "Order pizza naked",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "park",
+  "key": "JoggingFlash",
+  "title": "Jogging Flash",
+  "chance": 33,
+  "guide": "Jog at the park",
+  "exb": 15,
+  "corr": 30
+ },
+ {
+  "loc": "park",
+  "key": "KidnapAtPark",
+  "title": "Kidnapped At Park",
+  "chance": 50,
+  "guide": "Jog at the park late at night",
+  "exb": 0,
+  "corr": 0
+ },
+ {
+  "loc": "park",
+  "key": "JoggingSex1",
+  "title": "Jogging Sex I",
+  "chance": 33,
+  "guide": "Jog with +30 corruption outfit and flash tits",
+  "exb": 15,
+  "corr": 45
+ },
+ {
+  "loc": "park",
+  "key": "JoggingSexPregnant",
+  "title": "Jogging Sex Pregnant",
+  "chance": 33,
+  "guide": "Jog with +30 corruption outfit and flash tits while being pregnant",
+  "exb": 15,
+  "corr": 45
+ },
+ {
+  "loc": "park",
+  "key": "JoggingSex2",
+  "title": "Jogging Sex II",
+  "chance": 33,
+  "guide": "Jog with +30 corruption outfit and flash tits",
+  "exb": 15,
+  "corr": 45
+ },
+ {
+  "loc": "beach",
+  "key": "SwimFlash",
+  "title": "Swim Flash",
+  "chance": 50,
+  "guide": "Swim at the beach",
+  "exb": 15,
+  "corr": 30
+ },
+ {
+  "loc": "beach",
+  "key": "BikiniThief",
+  "title": "Bikini Thief",
+  "chance": 50,
+  "guide": "Wear a bikini at the beach",
+  "exb": 0,
+  "corr": 0
+ },
+ {
+  "loc": "beach",
+  "key": "TouristsThreesome",
+  "title": "Tourists Threesome",
+  "chance": 50,
+  "guide": "Wear a bikini at the beach",
+  "exb": 0,
+  "corr": 0
+ },
+ {
+  "loc": "beach",
+  "key": "SunbatheLotion",
+  "title": "Sunbathe Lotion",
+  "chance": 33,
+  "guide": "Wear a 30+ corruption bikini and sunbathe",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "beach",
+  "key": "JetSkiRide",
+  "title": "Jet Ski Ride",
+  "chance": 50,
+  "guide": "Go to the beach and pay for a jet ski ride",
+  "exb": 15,
+  "corr": 30
+ },
+ {
+  "loc": "mall",
+  "key": "MallFlash",
+  "title": "Mall Flash",
+  "chance": 33,
+  "guide": "Visit the mall",
+  "exb": 10,
+  "corr": 15
+ },
+ {
+  "loc": "mall",
+  "key": "DiscountSex",
+  "title": "Discount Sex",
+  "chance": 100,
+  "guide": "Ask for discount at the Tech Store",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "mall",
+  "key": "MallCaughtFlashing",
+  "title": "Caught Flashing",
+  "chance": 33,
+  "guide": "Flash at the mall; get caught by security",
+  "exb": 10,
+  "corr": 15
+ },
+ {
+  "loc": "club",
+  "key": "ClubFlash",
+  "title": "Club Flash",
+  "chance": 50,
+  "guide": "Dance at the club",
+  "exb": 10,
+  "corr": 15
+ },
+ {
+  "loc": "club",
+  "key": "ClubGloryHole",
+  "title": "Club Gloryhole",
+  "chance": 100,
+  "guide": "Go to the club bathroom cabin",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "school",
+  "key": "ClassroomFlash",
+  "title": "Classroom Flash",
+  "chance": 50,
+  "guide": "Go to the classroom and socialize",
+  "exb": 10,
+  "corr": 15
+ },
+ {
+  "loc": "school",
+  "key": "BathroomStudentSex",
+  "title": "Bathroom Student Sex",
+  "chance": 50,
+  "guide": "Flash the student in the male bathroom",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "school",
+  "key": "BathroomFlash",
+  "title": "Bathroom Flash",
+  "chance": 50,
+  "guide": "Flash the student in the male bathroom",
+  "exb": 10,
+  "corr": 15
+ },
+ {
+  "loc": "school",
+  "key": "MathHomework",
+  "title": "Math Homework",
+  "chance": 100,
+  "guide": "Deliver homework to teacher in classroom",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "school",
+  "key": "TeacherTutoring",
+  "title": "Teacher Tutoring",
+  "chance": 100,
+  "guide": "Fail school test (score < 6)",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "school",
+  "key": "Cheerleader",
+  "title": "Join the Cheerleaders",
+  "chance": 100,
+  "guide": "Get enough fitness in PE class",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "school",
+  "key": "Afterclass",
+  "title": "Janitor Event",
+  "chance": 50,
+  "guide": "Finish tutoring quest; study in classroom after class",
+  "exb": 0,
+  "corr": 0
+ },
+ {
+  "loc": "school",
+  "key": "LibraryExhibitionism",
+  "title": "Library Exhibitionism",
+  "chance": 25,
+  "guide": "Go to the library and study, you must have at least 5 relation points with Natasha",
+  "exb": 10,
+  "corr": 15
+ },
+ {
+  "loc": "school",
+  "key": "PublicExhibitionism",
+  "title": "Public Exhibitionism",
+  "chance": 100,
+  "guide": "Talk with Natasha in the library after ",
+  "exb": 20,
+  "corr": 30
+ },
+ {
+  "loc": "school",
+  "key": "TeacherSecretFetish",
+  "title": "Teacher Secret Fetish",
+  "chance": 100,
+  "guide": "Spy on the teacher",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "school",
+  "key": "ClassLactation",
+  "title": "Class Lactation",
+  "chance": 100,
+  "guide": "Study at classroom while being pregnant",
+  "exb": 0,
+  "corr": 0
+ },
+ {
+  "loc": "gym",
+  "key": "GymFlash",
+  "title": "Gym Flash",
+  "chance": 50,
+  "guide": "Visit the gym and workout",
+  "exb": 10,
+  "corr": 15
+ },
+ {
+  "loc": "gym",
+  "key": "GymPersonalSex",
+  "title": "Gym Personal Sex",
+  "chance": 50,
+  "guide": "Visit the gym and workout",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "gym",
+  "key": "GymShowerThreesome",
+  "title": "Gym Shower Threesome",
+  "chance": 33,
+  "guide": "Take a shower at the gym",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "restaurant",
+  "key": "RestaurantInterviewSex",
+  "title": "Interview Scene",
+  "chance": 100,
+  "guide": "Seduce the boss at the restaurant interview",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "restaurant",
+  "key": "RestaurantPromotionScene",
+  "title": "Promotion Scene",
+  "chance": 100,
+  "guide": "Work at restaurant and have at least 10 XP",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "restaurant",
+  "key": "RestaurantFlash",
+  "title": "Work Flash",
+  "chance": 50,
+  "guide": "Work at the restaurant",
+  "exb": 10,
+  "corr": 15
+ },
+ {
+  "loc": "restaurant",
+  "key": "RestaurantSpecialVisitSex",
+  "title": "Special Visit",
+  "chance": 100,
+  "guide": "Work in VIP section at restaurant with 25+ XP",
+  "exb": 0,
+  "corr": 45
+ },
+ {
+  "loc": "restaurant",
+  "key": "RestaurantGangbang",
+  "title": "Restaurant Gangbang",
+  "chance": 25,
+  "guide": "Work in VIP section at restaurant with 30+ XP",
+  "exb": 0,
+  "corr": 45
+ },
+ {
+  "loc": "pool",
+  "key": "PoolFlash",
+  "title": "Pool Flash",
+  "chance": 33,
+  "guide": "Swim at the pool with a 30+ corruption bikini",
+  "exb": 15,
+  "corr": 30
+ },
+ {
+  "loc": "pool",
+  "key": "PoolSwimSex",
+  "title": "Pool Swimming Sex",
+  "chance": 33,
+  "guide": "Swim at the pool with a 30+ corruption bikini and flash",
+  "exb": 15,
+  "corr": 45
+ },
+ {
+  "loc": "photoStudio",
+  "key": "ModelPhotoshoot",
+  "title": "Model Photoshoot",
+  "chance": 100,
+  "guide": "Have 500+ Instafame followers; read your DMs",
+  "exb": 0,
+  "corr": 0
+ },
+ {
+  "loc": "stripclub",
+  "key": "StripClubInterview",
+  "title": "Strip Club Interview",
+  "chance": 100,
+  "guide": "Apply for a job at the strip club",
+  "exb": 0,
+  "corr": 45
+ },
+ {
+  "loc": "stripclub",
+  "key": "StripClubPrivate1",
+  "title": "Private Session I",
+  "chance": 25,
+  "guide": "Work at the strip club; get a client",
+  "exb": 0,
+  "corr": 45
+ },
+ {
+  "loc": "stripclub",
+  "key": "StripClubStage1",
+  "title": "Stage Session I",
+  "chance": 25,
+  "guide": "Work at the strip club; get a client",
+  "exb": 0,
+  "corr": 45
+ },
+ {
+  "loc": "bus",
+  "key": "BusFlash",
+  "title": "Bus Flash",
+  "chance": 50,
+  "guide": "Ride the bus and flash",
+  "exb": 10,
+  "corr": 0
+ },
+ {
+  "loc": "bus",
+  "key": "BusMasturbate",
+  "title": "Bus Masturbate",
+  "chance": 33,
+  "guide": "Ride the bus and masturbate the strange guy",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "bus",
+  "key": "BusGrope",
+  "title": "Bus Grope",
+  "chance": 33,
+  "guide": "Ride the bus",
+  "exb": 0,
+  "corr": 0
+ },
+ {
+  "loc": "policeDep",
+  "key": "HouseRobPrison",
+  "title": "House Robbing",
+  "chance": 100,
+  "guide": "Rob a house with the Vipers",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "thomasHouse",
+  "key": "ThomasPartyPongSex",
+  "title": "Beer Pong Sex",
+  "chance": 33,
+  "guide": "Go to Thomas",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "thomasHouse",
+  "key": "ThomasPartySpinTheBottle",
+  "title": "Spin Bottle Group Sex",
+  "chance": 33,
+  "guide": "Go to Thomas",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "office",
+  "key": "OfficeInterview",
+  "title": "Office Interview",
+  "chance": 100,
+  "guide": "Apply for a job at the office",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "office",
+  "key": "SecretarySex",
+  "title": "Secretary Sex",
+  "chance": 25,
+  "guide": "Work at the office",
+  "exb": 0,
+  "corr": 0
+ },
+ {
+  "loc": "abandonedBuilding",
+  "key": "HomelessThreesome",
+  "title": "Homeless Threesome",
+  "chance": 33,
+  "guide": "Escape from class with Natasha",
+  "exb": 20,
+  "corr": 30
+ },
+ {
+  "loc": "hospital",
+  "key": "PrenatalCareBigBelly",
+  "title": "Prenatal Care Big Belly",
+  "chance": 100,
+  "guide": "Get pregnant and go to the hospital for prenatal care and have 3 relation points with the Doctor",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "hospital",
+  "key": "GynecologicalExam",
+  "title": "Gynecological Exam",
+  "chance": 100,
+  "guide": "Go to the hospital and do the gynecological exam and have 3 relation points with the Doctor",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "clandestineClinic",
+  "key": "ArtificialInsemination",
+  "title": "Artificial Insemination",
+  "chance": 100,
+  "guide": "If you lose your baby during childbirth, your doctor will give you the address of a clinic that can help you with artificial insemination",
+  "exb": 0,
+  "corr": 0
+ },
+ {
+  "loc": "clandestineClinic",
+  "key": "SexualInsemination",
+  "title": "Sexual Insemination",
+  "chance": 100,
+  "guide": "After attempting artificial insemination, return to the clinic to check the result",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "bar",
+  "key": "BarRandomSex1",
+  "title": "Bar Random Sex 1",
+  "chance": 25,
+  "guide": "Go to the bar and drink until you get drunk",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "photoStudio",
+  "key": "SecondPhotoShoot",
+  "title": "Second Photo Shoot",
+  "chance": 100,
+  "guide": "Wait 15 days after the first photoshoot",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "park",
+  "key": "ParkGangbang",
+  "title": "Park Gangbang",
+  "chance": 33,
+  "guide": "Jog at the park late at night",
+  "exb": 0,
+  "corr": 0
+ },
+ {
+  "loc": "gasStation",
+  "key": "CarWashChallenge",
+  "title": "Car Wash Challenge",
+  "chance": 100,
+  "guide": "Get the car wash challenge at Naked Life App",
+  "exb": 20,
+  "corr": 30
+ },
+ {
+  "loc": "park",
+  "key": "ParkChallenge",
+  "title": "Park Challenge",
+  "chance": 100,
+  "guide": "Get the park challenge at Naked Life App",
+  "exb": 20,
+  "corr": 30
+ },
+ {
+  "loc": "center",
+  "key": "StreetChallenge1",
+  "title": "Street Challenge I",
+  "chance": 100,
+  "guide": "Get the Street Challenge I at Naked Life App",
+  "exb": 30,
+  "corr": 45
+ },
+ {
+  "loc": "beach",
+  "key": "BeachChallenge1",
+  "title": "Beach Challenge I",
+  "chance": 100,
+  "guide": "Get the Beach Challenge I at Naked Life App",
+  "exb": 30,
+  "corr": 30
+ },
+ {
+  "loc": "beach",
+  "key": "BeachStrangeSex1",
+  "title": "Beach Strange Sex I",
+  "chance": 33,
+  "guide": "Go to the beach and wear a bikini",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "drivingSchool",
+  "key": "DrivingSchoolExamSex",
+  "title": "Driving School Exam Sex",
+  "chance": 50,
+  "guide": "Take a practical lesson at the driving school",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "movieTheater",
+  "key": "MovieTheaterGrope1",
+  "title": "Movie Theater Grope I",
+  "chance": 25,
+  "guide": "Go to the movie theater and watch a movie",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "movieTheater",
+  "key": "MovieTheaterGrope2",
+  "title": "Movie Theater Grope II",
+  "chance": 25,
+  "guide": "Go to the movie theater and watch a movie",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "bar",
+  "key": "BarThreesome",
+  "title": "Bar Threesome",
+  "chance": 25,
+  "guide": "Go to the bar and work",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "bar",
+  "key": "BarBathroomSex",
+  "title": "Bar Bathroom Sex",
+  "chance": 25,
+  "guide": "Go to the bar and drink until you get drunk",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "school",
+  "key": "LibraryTransSex",
+  "title": "Library Trans Sex",
+  "chance": 25,
+  "guide": "Go to the library and study",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "bar",
+  "key": "OldManBarSex",
+  "title": "Old Man Bar Sex",
+  "chance": 25,
+  "guide": "Go to the bar and work as a bartender at late night",
+  "exb": 0,
+  "corr": 30
+ },
+ {
+  "loc": "park",
+  "key": "PoliceParkGangbang",
+  "title": "Police Park Gangbang",
+  "chance": 25,
+  "guide": "Flash your breasts at park at least one time and go jog",
+  "exb": 0,
+  "corr": 0
+ },
+ {
+  "loc": "park",
+  "key": "ParkRestLiftSkirt",
+  "title": "Park Rest Lift Skirt",
+  "chance": 33,
+  "guide": "Rest at the park and a boy lifts your skirt",
+  "exb": 0,
+  "corr": 0
+ }
+]

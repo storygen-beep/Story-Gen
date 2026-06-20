@@ -1,0 +1,3140 @@
+{
+  "captured_at": "2026-06-07T22:00:53.296Z",
+  "ts": 1780869653296,
+  "engine": "sugarcube",
+  "engine_version": [
+    "(revive:eval)",
+    "(function(){var prerelease=this.prerelease?\"-\".concat(this.prerelease):\"\";return\"\".concat(this.title,\" (v\").concat(this.major,\".\").concat(this.minor,\".\").concat(this.patch).concat(prerelease,\")\")})"
+  ],
+  "passage": "Start",
+  "variables": {
+    "XL": 99,
+    "L": 75,
+    "M": 50,
+    "S": 25,
+    "XS": 1,
+    "HATE": 0,
+    "DISLIKE": 20,
+    "NEUTRAL": 40,
+    "LIKE": 60,
+    "LOVE": 80,
+    "EXPERT": 5,
+    "GREAT": 4,
+    "GOOD": 3,
+    "OKAY": 2,
+    "NEW": 1,
+    "achievement": [
+      [
+        "(revive:eval)",
+        "undefined"
+      ],
+      {
+        "name": "Beginner Chemist",
+        "desc": "Congratulations on your first official serum created for The Company!",
+        "reward": true,
+        "rewardType": "serum",
+        "rewardText": "3x $serum[1].name",
+        "rewardQty": 3,
+        "rewardValue": 1,
+        "earned": false
+      },
+      {
+        "name": "Intermediate Chemist",
+        "desc": "Your serums are getting more complicated, but the payoff is worth the effort!",
+        "reward": true,
+        "rewardType": "serum",
+        "rewardText": "3x $serum[2].name",
+        "rewardQty": 3,
+        "rewardValue": 2,
+        "earned": false
+      },
+      {
+        "name": "Advanced Chemist",
+        "desc": "You've mastered the highest tier of mind control serums. Congratulations!",
+        "reward": true,
+        "rewardType": "serum",
+        "rewardText": "3x $serum[3].name",
+        "rewardQty": 3,
+        "rewardValue": 3,
+        "earned": false
+      },
+      {
+        "name": "Bad Ender",
+        "desc": "It took a lot of time of effort, but you finally finished your first batch of the mysterious MCS-X serum! What ever are you planning on doing with it?",
+        "reward": true,
+        "rewardType": "money",
+        "rewardValue": 50000,
+        "rewardText": "$$50,000",
+        "earned": false
+      },
+      {
+        "name": "Chapter One Completion",
+        "desc": "You completed Chapter 1 of the main story!",
+        "reward": true,
+        "rewardType": "wolf",
+        "rewardValue": 1,
+        "rewardText": "1x Wolf Coin",
+        "earned": false
+      },
+      {
+        "name": "Chapter Two Completion",
+        "desc": "You completed Chapter 2 of the main story!",
+        "reward": true,
+        "rewardType": "wolf",
+        "rewardValue": 1,
+        "rewardText": "1x Wolf Coin",
+        "earned": false
+      },
+      {
+        "name": "Commanding Serum",
+        "desc": "You really came through by crafting that CMD-1 before the deadline! $penny.name doesn't need to worry with a <<guy>> like you around.",
+        "reward": true,
+        "rewardType": "serum",
+        "rewardText": "10x $serum[1].name",
+        "rewardQty": 10,
+        "rewardValue": 1,
+        "earned": false
+      },
+      {
+        "name": "Oedipus Complex",
+        "desc": "Time to start spending some quality time with $mom.name!",
+        "reward": true,
+        "rewardType": "hart",
+        "rewardValue": 1,
+        "rewardText": "1x Hart Coin",
+        "earned": false
+      },
+      {
+        "name": "How Can My Little Sister Be This Cute?",
+        "desc": "Mind controlling your little <<sister>>? What kind of <<brother>> are you, anyway!?",
+        "reward": true,
+        "rewardType": "hart",
+        "rewardValue": 1,
+        "rewardText": "1x Hart Coin",
+        "earned": false
+      },
+      {
+        "name": "Manic Pixie Dream Assistant",
+        "desc": "Your lab assistant? Seems a bit cliche, no?",
+        "reward": true,
+        "rewardType": "wolf",
+        "rewardValue": 1,
+        "rewardText": "1x Wolf Coin",
+        "earned": false
+      },
+      {
+        "name": "Reigning In Tasha",
+        "desc": "Time to get those numbers up!",
+        "reward": true,
+        "rewardType": "wolf",
+        "rewardValue": 1,
+        "rewardText": "1x Wolf Coin",
+        "earned": false
+      },
+      {
+        "name": "A Wonderful Woman",
+        "desc": "Careful you don't get tied up!",
+        "reward": true,
+        "rewardType": "wolf",
+        "rewardValue": 1,
+        "rewardText": "1x Wolf Coin",
+        "earned": false
+      },
+      {
+        "name": "Johnny Be Good",
+        "desc": "He's really not a bad guy if you can look past... everything.",
+        "reward": true,
+        "rewardType": "wolf",
+        "rewardValue": 1,
+        "rewardText": "1x Wolf Coin",
+        "earned": false
+      },
+      {
+        "name": "Johnny Be Bad",
+        "desc": "Uh-oh! How's that beer treating you?",
+        "reward": true,
+        "rewardType": "wolf",
+        "rewardValue": 1,
+        "rewardText": "1x Wolf Coin",
+        "earned": false
+      },
+      {
+        "name": "Chapter Three Completion",
+        "desc": "You completed Chapter 3 of the main story!",
+        "reward": true,
+        "rewardType": "wolf",
+        "rewardValue": 1,
+        "rewardText": "1x Wolf Coin",
+        "earned": false
+      },
+      {
+        "name": "Who Made That Man A Gunner?",
+        "desc": "I knew it! I'm surrounded by Assholes!",
+        "reward": true,
+        "rewardType": "ram",
+        "rewardValue": 1,
+        "rewardText": "1x Ram Coin",
+        "earned": false
+      },
+      {
+        "name": "Cunning Linguist",
+        "desc": "Rug Munching and Cock Gobbling Extraordinaire!",
+        "reward": true,
+        "rewardType": "hart",
+        "rewardValue": 1,
+        "rewardText": "1x Hart Coin",
+        "earned": false
+      },
+      {
+        "name": "Mouth of Myth",
+        "desc": "Your new life goal is to become that girl from Pigeon Blood",
+        "reward": true,
+        "rewardType": "ram",
+        "rewardValue": 1,
+        "rewardText": "1x Ram Coin",
+        "earned": false
+      },
+      {
+        "name": "Committed Airhead",
+        "desc": "Like, fancy a shag? Tee-hee, see? I can speak British!",
+        "reward": true,
+        "rewardType": "ram",
+        "rewardValue": 1,
+        "rewardText": "1x Ram Coin",
+        "earned": false
+      },
+      {
+        "name": "Masculine Mystique",
+        "desc": "You're a sucker for a hard cock and a harder chest!",
+        "reward": true,
+        "rewardType": "hart",
+        "rewardValue": 1,
+        "rewardText": "1x Hart Coin",
+        "earned": false
+      },
+      {
+        "name": "Feminine Wiles",
+        "desc": "Soft skin, soft lips, soft pillowy chest... What could be better?",
+        "reward": true,
+        "rewardType": "wolf",
+        "rewardValue": 1,
+        "rewardText": "1x Wolf Coin",
+        "earned": false
+      },
+      {
+        "name": "Best of Everything",
+        "desc": "The best girls come with a little extra!",
+        "reward": true,
+        "rewardType": "ram",
+        "rewardValue": 1,
+        "rewardText": "1x Ram Coin",
+        "earned": false
+      },
+      {
+        "name": "Johnny Come Early",
+        "desc": "Or, wait, is that how it goes?",
+        "reward": true,
+        "rewardType": "ram",
+        "rewardValue": 1,
+        "rewardText": "1x Ram Coin",
+        "earned": false
+      },
+      {
+        "name": "FICSIT Certified",
+        "desc": "Remember Employee #2085241, efficiency first!",
+        "reward": true,
+        "rewardType": "ram",
+        "rewardValue": 1,
+        "rewardText": "1x Ram Coin",
+        "earned": false
+      },
+      {
+        "name": "400 Babies",
+        "desc": "You've tried strawberry, now try RAWBERRY!",
+        "reward": true,
+        "rewardType": "ram",
+        "rewardValue": 1,
+        "rewardText": "1x Ram Coin",
+        "earned": false
+      },
+      {
+        "name": "Family First",
+        "desc": "Blood is thicker than water, but so is semen, so...",
+        "reward": true,
+        "rewardType": "hart",
+        "rewardValue": 1,
+        "rewardText": "1x Hart Coin",
+        "earned": false
+      },
+      {
+        "name": "Wild Horses",
+        "desc": "Helped Jag skip town",
+        "reward": true,
+        "rewardType": "ram",
+        "rewardValue": 1,
+        "rewardText": "1x Ram Coin",
+        "earned": false
+      },
+      {
+        "name": "Gimme Shelter",
+        "desc": "Helped get Jag's stalkers off his back",
+        "reward": true,
+        "rewardType": "ram",
+        "rewardValue": 1,
+        "rewardText": "1x Ram Coin",
+        "earned": false
+      },
+      {
+        "name": "Paint it Black",
+        "desc": "Turned Jag into a Pit Slave, you monster",
+        "reward": true,
+        "rewardType": "ram",
+        "rewardValue": 1,
+        "rewardText": "1x Ram Coin",
+        "earned": false
+      },
+      {
+        "name": "Sympathy For The Devil",
+        "desc": "Failed to help Jag",
+        "reward": true,
+        "rewardType": "ram",
+        "rewardValue": 1,
+        "rewardText": "1x Ram Coin",
+        "earned": false
+      }
+    ],
+    "HAIRLENGTH": [
+      "Bald",
+      "Very Short",
+      "Short",
+      "Medium-Short",
+      "Medium-Long",
+      "Long",
+      "Very Long"
+    ],
+    "HAIRDESC": [
+      "completely shaved off",
+      "very short and boyish",
+      "short, falling just past your ears",
+      "somewhat short, just reaching your shoulders",
+      "somewhat long, hanging just past your shoulders",
+      "long, reaching your back",
+      "very long, reaching past your back as well as falling over your shoulders. It has also turned unnaturally blonde"
+    ],
+    "BREASTSIZE": [
+      "Flat",
+      "Tiny",
+      "Small",
+      "Medium",
+      "Large",
+      "Massive"
+    ],
+    "PENISSIZE": [
+      "None",
+      "Tiny",
+      "Small",
+      "Medium",
+      "Large",
+      "Massive"
+    ],
+    "PUSSYSIZE": [
+      "Virgin",
+      "Tight",
+      "Average",
+      "Loose",
+      "Stretched",
+      "Gaping"
+    ],
+    "ASSSIZE": [
+      "Virgin",
+      "Tight",
+      "Average",
+      "Loose",
+      "Stretched",
+      "Gaping"
+    ],
+    "Location": "Title Screen",
+    "Chapter": 0,
+    "DaysPlayed": 0,
+    "CH4": {},
+    "Money": 100,
+    "Paycheck": 750,
+    "BirthControl": 0,
+    "getCaught": 0,
+    "getCaughtChance": 34,
+    "StatRate": 0.5,
+    "g": {},
+    "DailyCD": {},
+    "CONVO": [],
+    "CONVOR": 0,
+    "SisterRoom": [
+      1,
+      2
+    ],
+    "MomRoom": [
+      1,
+      2
+    ],
+    "CanTF": true,
+    "ForceTF": true,
+    "PauseTF": false,
+    "TFMode": "classic",
+    "TFMilestone": 5,
+    "PermanentTF": 15,
+    "ShowPlayerPortrait": true,
+    "UseDoseCD": false,
+    "ShowImages": true,
+    "UsePics": false,
+    "ShowWeather": true,
+    "NewNotes": false,
+    "DebugImages": false,
+    "FreePlay": false,
+    "MCSXUnlockDate": 20180201,
+    "pitSlaves": {},
+    "SlavePrice": 35000,
+    "PrefSlaveGender": "female",
+    "EventCD": 0,
+    "EventChance": 65,
+    "HomeEvents": [
+      0,
+      1,
+      3,
+      4,
+      13,
+      16,
+      17,
+      21,
+      22
+    ],
+    "HomeEventsCD": [],
+    "WorkEvents": [
+      0,
+      1,
+      2,
+      15,
+      17,
+      18,
+      19,
+      20
+    ],
+    "WorkEventsCD": [],
+    "DreamEvents": [
+      1
+    ],
+    "DreamEventsCD": [],
+    "NightEvents": [
+      0
+    ],
+    "NightEventsCD": [],
+    "HomeEventsUnlocked": [],
+    "WorkEventsUnlocked": [],
+    "DreamEventsUnlocked": [],
+    "NightEventsUnlocked": [],
+    "time": {
+      "day": "",
+      "time": "",
+      "month": "November",
+      "calendarDay": "",
+      "dayCount": 1,
+      "cTime": 4,
+      "cDay": 4,
+      "cMonth": 11,
+      "cYear": 2017
+    },
+    "story": {
+      "ch1": {},
+      "ch2": {},
+      "ch3": {},
+      "ch4": {},
+      "ch5": {}
+    },
+    "LoveIncreaseRate": 1,
+    "LustIncreaseRate": 1,
+    "MaxDailyLove": 2,
+    "MaxDailyLust": 2,
+    "cheats": {
+      "debug": false,
+      "bimbo": false,
+      "sissy": false,
+      "fastpass": false,
+      "fastlove": false,
+      "fastlust": false,
+      "unlockserums": false,
+      "materials": false,
+      "money": false,
+      "birthcontrol": false,
+      "outfits": false,
+      "chanel": false,
+      "naked": false
+    },
+    "Coinshop": {
+      "wolf": [
+        "penny-fireside"
+      ],
+      "ram": [],
+      "hart": [
+        "dakota-sporty"
+      ]
+    },
+    "mcsxCD": 3,
+    "matYield": 50,
+    "LabLevel": 0,
+    "LabMaxLevel": 10,
+    "LabUpgradeCost": 350,
+    "LabUpgradeCostIncrease": 150,
+    "YieldIncrease": 15,
+    "SerumYieldIncrease": 1,
+    "chem": [
+      {
+        "name": "Sodium Pentothal",
+        "qty": 0,
+        "note": "Opens user to subconscious suggestion"
+      },
+      {
+        "name": "Flunitrazepam",
+        "qty": 0,
+        "note": "Impairs user's short term memory retention"
+      },
+      {
+        "name": "Scopolamine",
+        "qty": 0,
+        "note": "Heavily sedates user"
+      },
+      {
+        "name": "Testosterone",
+        "qty": 0,
+        "note": "Increases male hormone production"
+      },
+      {
+        "name": "Estrogens",
+        "qty": 0,
+        "note": "Increases female hormone production"
+      },
+      {
+        "name": "Diazepam",
+        "qty": 0,
+        "note": "Makes user compliant and easily influenced"
+      },
+      {
+        "name": "Ketamine",
+        "qty": 0,
+        "note": "Inhibits user's cognitive facilities"
+      },
+      {
+        "name": "Bremelanotide",
+        "qty": 0,
+        "note": "Induces increased and permanent arousal in user"
+      },
+      {
+        "name": "Stabilized HGH",
+        "qty": 0,
+        "note": "Increases hormone production and physical aptitude"
+      }
+    ],
+    "serum": [
+      {
+        "name": "MCS-LULZ",
+        "qty": 0,
+        "cost": 999999,
+        "cd": 1,
+        "unlocked": false,
+        "yield": 99,
+        "yieldIncreaseCost": 999999999,
+        "mats": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "matsQty": [
+          999,
+          999,
+          999,
+          999,
+          999,
+          999,
+          999,
+          999
+        ]
+      },
+      {
+        "name": "MCS-1",
+        "qty": 0,
+        "cost": 150,
+        "cd": 2,
+        "unlocked": false,
+        "yield": 1,
+        "yieldIncreaseCost": 5000,
+        "mats": [
+          0,
+          1,
+          2
+        ],
+        "matsQty": [
+          200,
+          100,
+          100
+        ],
+        "unlockLevel": 0,
+        "unlockCost": 0
+      },
+      {
+        "name": "MCS-2",
+        "qty": 0,
+        "cost": 300,
+        "cd": 3,
+        "unlocked": false,
+        "yield": 1,
+        "yieldIncreaseCost": 10000,
+        "mats": [
+          0,
+          1,
+          2
+        ],
+        "matsQty": [
+          300,
+          200,
+          200
+        ],
+        "unlockLevel": 1,
+        "unlockCost": 10000
+      },
+      {
+        "name": "MCS-3",
+        "qty": 0,
+        "cost": 600,
+        "cd": 4,
+        "unlocked": false,
+        "yield": 1,
+        "yieldIncreaseCost": 20000,
+        "mats": [
+          0,
+          1,
+          2
+        ],
+        "matsQty": [
+          500,
+          400,
+          400
+        ],
+        "unlockLevel": 3,
+        "unlockCost": 30000
+      },
+      {
+        "name": "CMD-1",
+        "qty": 0,
+        "cost": 1200,
+        "cd": 1,
+        "unlocked": false,
+        "yield": 1,
+        "yieldIncreaseCost": 40000,
+        "mats": [
+          0,
+          1,
+          2,
+          5,
+          6
+        ],
+        "matsQty": [
+          50,
+          100,
+          50,
+          200,
+          100
+        ],
+        "unlockLevel": 7,
+        "unlockCost": 40000
+      },
+      {
+        "name": "BMB-1",
+        "qty": 0,
+        "cost": 1500,
+        "cd": 1,
+        "unlocked": false,
+        "yield": 1,
+        "yieldIncreaseCost": 35000,
+        "mats": [
+          0,
+          5,
+          6,
+          7
+        ],
+        "matsQty": [
+          100,
+          100,
+          200,
+          250
+        ],
+        "unlockLevel": 5,
+        "unlockCost": 35000
+      },
+      {
+        "name": "TFM-1",
+        "qty": 0,
+        "cost": 1750,
+        "cd": 1,
+        "unlocked": false,
+        "yield": 1,
+        "yieldIncreaseCost": 25000,
+        "mats": [
+          2,
+          3,
+          4,
+          7
+        ],
+        "matsQty": [
+          150,
+          250,
+          250,
+          100
+        ],
+        "unlockLevel": 3,
+        "unlockCost": 40000
+      },
+      {
+        "name": "MCS-X",
+        "qty": 0,
+        "cost": 2500,
+        "cd": 1,
+        "unlocked": false,
+        "yield": 1,
+        "yieldIncreaseCost": 100000,
+        "mats": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "matsQty": [
+          300,
+          300,
+          300,
+          300,
+          300,
+          300,
+          300,
+          300
+        ],
+        "unlockLevel": 9,
+        "unlockCost": 100000
+      },
+      {
+        "name": "Stamina Increase I",
+        "qty": 0,
+        "cost": 2500,
+        "cd": 1,
+        "unlocked": false,
+        "yield": 1,
+        "yieldIncreaseCost": 100000,
+        "mats": [
+          0,
+          3,
+          8
+        ],
+        "matsQty": [
+          100,
+          50,
+          200
+        ]
+      },
+      {
+        "name": "Stamina Increase II",
+        "qty": 0,
+        "cost": 2500,
+        "cd": 1,
+        "unlocked": false,
+        "yield": 1,
+        "yieldIncreaseCost": 100000,
+        "mats": [
+          0,
+          3,
+          8
+        ],
+        "matsQty": [
+          200,
+          250,
+          500
+        ]
+      },
+      {
+        "name": "Genital Enhancement",
+        "qty": 0,
+        "cost": 2500,
+        "cd": 1,
+        "unlocked": false,
+        "yield": 1,
+        "yieldIncreaseCost": 100000,
+        "mats": [
+          0,
+          2,
+          3
+        ],
+        "matsQty": [
+          50,
+          150,
+          250
+        ]
+      },
+      {
+        "name": "Genital Degenerator",
+        "qty": 0,
+        "cost": 2500,
+        "cd": 1,
+        "unlocked": false,
+        "yield": 1,
+        "yieldIncreaseCost": 100000,
+        "mats": [
+          0,
+          2,
+          4
+        ],
+        "matsQty": [
+          50,
+          150,
+          250
+        ]
+      },
+      {
+        "name": "Breast Enhancement",
+        "qty": 0,
+        "cost": 2500,
+        "cd": 1,
+        "unlocked": false,
+        "yield": 1,
+        "yieldIncreaseCost": 100000,
+        "mats": [
+          0,
+          4,
+          7
+        ],
+        "matsQty": [
+          50,
+          200,
+          200
+        ]
+      },
+      {
+        "name": "Breast Degenerator",
+        "qty": 0,
+        "cost": 2500,
+        "cd": 1,
+        "unlocked": false,
+        "yield": 1,
+        "yieldIncreaseCost": 100000,
+        "mats": [
+          0,
+          3,
+          8
+        ],
+        "matsQty": [
+          50,
+          200,
+          200
+        ]
+      },
+      {
+        "name": "Follicle Infuser",
+        "qty": 0,
+        "cost": 2500,
+        "cd": 1,
+        "unlocked": false,
+        "yield": 1,
+        "yieldIncreaseCost": 100000,
+        "mats": [
+          0,
+          4,
+          7
+        ],
+        "matsQty": [
+          75,
+          75,
+          75
+        ]
+      }
+    ],
+    "Tasks": [
+      {
+        "open": false,
+        "complete": false,
+        "name": "Null Task",
+        "desc": "There is no spoon"
+      },
+      {
+        "open": false,
+        "complete": false,
+        "name": "Executive Meeting",
+        "desc": "Create a vial of CMD-1 to show for the executive meeting on September 18th"
+      },
+      {
+        "open": false,
+        "complete": false,
+        "name": "$penny.name's Project",
+        "desc": "Help $penny.name with her side project by crafting 1x CMD-1, 2x BMB-1, and 3x TFM-1 by October 30th"
+      }
+    ],
+    "saya": {
+      "name": "Saya",
+      "id": "saya",
+      "portrait": "Saya",
+      "isSimple": true,
+      "noOutfit": true,
+      "style": "saya",
+      "notes": [],
+      "isFuta": true,
+      "status": "Normal",
+      "relationship": "Spirit Guide",
+      "lust": 0,
+      "love": 0
+    },
+    "chris": {
+      "name": "Chris",
+      "id": "chris",
+      "portrait": "chris-pro",
+      "useNPC": true,
+      "style": "chris",
+      "notes": [],
+      "flags": {
+        "kiss": false
+      },
+      "isMale": true,
+      "hangoutCD": 0,
+      "convoCD": 0,
+      "eventCD": 0,
+      "event": 0,
+      "peCounter": 1,
+      "peDecline": false,
+      "status": "Normal",
+      "relationship": "Friend",
+      "lust": 0,
+      "love": 0
+    },
+    "sean": {
+      "name": "Sean",
+      "id": "sean",
+      "portrait": "sean-pro",
+      "useNPC": true,
+      "style": "tasha",
+      "notes": [],
+      "isTrans": true,
+      "status": "Normal",
+      "relationship": "Lab Rat",
+      "lust": 0,
+      "love": 0
+    },
+    "lexi": {
+      "name": "Lexi",
+      "id": "lexi",
+      "portrait": "lexi-pro",
+      "useNPC": true,
+      "style": "tasha",
+      "notes": [],
+      "isFemale": true,
+      "status": "Normal",
+      "relationship": "Women's Boutique Clerk",
+      "hasShop": true,
+      "lust": 1,
+      "love": 0
+    },
+    "veruca": {
+      "name": "Veruca",
+      "id": "veruca",
+      "portrait": "veruca-pro",
+      "useNPC": true,
+      "style": "john",
+      "notes": [],
+      "isFemale": true,
+      "status": "Normal",
+      "relationship": "Men's Boutique Clerk",
+      "hasShop": true,
+      "lust": 1,
+      "love": 0
+    },
+    "siri": {
+      "name": "Siri",
+      "id": "siri",
+      "portrait": "siri-pro",
+      "useNPC": true,
+      "style": "penny",
+      "notes": [],
+      "isFemale": true,
+      "status": "Normal",
+      "relationship": "Intimate Apparel Clerk",
+      "hasShop": true,
+      "lust": 1,
+      "love": 0
+    },
+    "ash": {
+      "name": "Ash",
+      "id": "ash",
+      "portrait": "ash-pro",
+      "useNPC": true,
+      "style": "sister",
+      "notes": [],
+      "isFemale": true,
+      "status": "Normal",
+      "relationship": "Adult Store Clerk",
+      "hasShop": true,
+      "lust": 1,
+      "love": 0
+    },
+    "elsa": {
+      "name": "Elsa",
+      "id": "elsa",
+      "portrait": "portrait",
+      "noOutfit": true,
+      "style": "penny",
+      "isFemale": true,
+      "status": "Normal",
+      "relationship": "Cousin",
+      "lust": 0,
+      "love": 0
+    },
+    "mick": {
+      "name": "Mick",
+      "id": "mick",
+      "portrait": "mick-pro",
+      "useNPC": true,
+      "style": "men",
+      "notes": [],
+      "isMale": true,
+      "status": "Normal",
+      "relationship": "Company Escort",
+      "lust": 0,
+      "love": 0
+    },
+    "jag": {
+      "name": "Jag",
+      "id": "jag",
+      "portrait": "jag-pro",
+      "useNPC": true,
+      "style": "men",
+      "notes": [],
+      "isMale": true,
+      "status": "Normal",
+      "relationship": "Company Escort",
+      "lust": 0,
+      "love": 0
+    },
+    "craig": {
+      "name": "Craig",
+      "isSimple": true,
+      "portrait": "Unknown",
+      "style": "men",
+      "id": "craig",
+      "convo": [
+        [
+          "(revive:eval)",
+          "undefined"
+        ],
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 1,
+          "title": "Security Detail?"
+        }
+      ]
+    },
+    "slave1": {
+      "name": "Slave Girl",
+      "isSimple": true,
+      "portrait": "Slave Girl",
+      "style": "men"
+    },
+    "tory": {
+      "name": "Ms. L",
+      "id": "tory",
+      "portrait": "tory-pro",
+      "isHidden": true,
+      "useNPC": true,
+      "style": "men"
+    },
+    "katie": {
+      "name": "Katie",
+      "isSimple": true,
+      "portrait": "Katie",
+      "style": "men"
+    },
+    "jessica": {
+      "name": "Jessica",
+      "portrait": "jessica-pro",
+      "useNPC": true,
+      "style": "chris"
+    },
+    "sam": {
+      "name": "Samantha",
+      "portrait": "samantha-pro",
+      "useNPC": true,
+      "style": "tasha"
+    },
+    "ron": {
+      "name": "Ronnie",
+      "isSimple": true,
+      "portrait": "Unknown",
+      "style": "men"
+    },
+    "girl": {
+      "name": "Girl",
+      "isSimple": true,
+      "portrait": "UnknownF",
+      "style": "men"
+    },
+    "man": {
+      "name": "Man",
+      "isSimple": true,
+      "portrait": "Unknown",
+      "style": "men"
+    },
+    "woman": {
+      "name": "Woman",
+      "isSimple": true,
+      "portrait": "UnknownF",
+      "style": "men"
+    },
+    "serverm": {
+      "name": "Server",
+      "isSimple": true,
+      "portrait": "Unknown",
+      "style": "men"
+    },
+    "serverf": {
+      "name": "Server",
+      "isSimple": true,
+      "portrait": "UnknownF",
+      "style": "men"
+    },
+    "westane": {
+      "name": "Westane",
+      "isSimple": true,
+      "portrait": "Westane",
+      "style": "westane"
+    },
+    "sophie": {
+      "name": "Ms. Dee",
+      "id": "sophie",
+      "default": "default",
+      "style": "sophie",
+      "pName": "<<Formal>>",
+      "convo": [
+        [
+          "(revive:eval)",
+          "undefined"
+        ],
+        {
+          "enabled": true,
+          "seen": false,
+          "id": 1,
+          "title": "Talk About New Job"
+        },
+        {
+          "enabled": true,
+          "seen": false,
+          "id": 2,
+          "title": "Talk About Office Environment"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 3,
+          "title": "Thinking of Tory"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 4,
+          "title": "Thinking of Julia"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 5,
+          "title": "Thinking of Chanel"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 6,
+          "title": "Enjoying our Time Together"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 7,
+          "title": "Enjoying Sneaking Around"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 8,
+          "title": "Enjoying your Mouth"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 9,
+          "title": "Help for Kagney"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 10,
+          "title": "Driver's Worried"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 11,
+          "title": "Tasha's Happy"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 12,
+          "title": "What's Going on with Tasha"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 13,
+          "title": "Please Stop"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 14,
+          "title": "Concerning Rumors"
+        }
+      ],
+      "notes": [],
+      "control": {},
+      "isFemale": true,
+      "dose": 0,
+      "doseF": 0,
+      "doseS": 0,
+      "doseD": 0,
+      "femR": 0,
+      "doseCD": 0,
+      "convoCD": 0,
+      "eventCD": 0,
+      "status": "Normal",
+      "relationship": "Direct Report",
+      "hasShop": true,
+      "lust": 0,
+      "love": 1
+    },
+    "penny": {
+      "name": "Penny",
+      "id": "penny",
+      "mcsx": {
+        "cd": 0
+      },
+      "default": "default",
+      "style": "penny",
+      "mood": "nice",
+      "MaxOP": 100,
+      "CurOP": 10,
+      "tfmTimer": -1,
+      "tfmNotes": [],
+      "convo": [
+        [
+          "(revive:eval)",
+          "undefined"
+        ],
+        {
+          "enabled": true,
+          "seen": false,
+          "id": 1,
+          "title": "Working Here Long?"
+        },
+        {
+          "enabled": true,
+          "seen": false,
+          "id": 2,
+          "title": "Chemistry Education"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 3,
+          "title": "Chemistry Education"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 4,
+          "title": "Taste of Lenny"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 5,
+          "title": "Thinking of Tory's Fate"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 6,
+          "title": "Thinking of Tory"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 7,
+          "title": "Thinking of Julia"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 8,
+          "title": "Had a Great Time..."
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 9,
+          "title": "Meeting with John"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 10,
+          "title": "Something on Your Face"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 11,
+          "title": "Thinking of Chanel"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 12,
+          "title": "Long Nights"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 13,
+          "title": "Do I Make You Happy?"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 14,
+          "title": "Selling Serums"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 15,
+          "title": "Testing Serums"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 16,
+          "title": "Serum Side Effects"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 17,
+          "title": "Eating Julia"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 18,
+          "title": "Keep Me Safe?"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 19,
+          "title": "Weird Cravings..."
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 20,
+          "title": "Horny All the Time"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 21,
+          "title": "New Wardrobe?"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 22,
+          "title": "Paid for Fun"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 23,
+          "title": "<<Daddy>>? Sorry. <<Daddy>>?"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 24,
+          "title": "Looking Good"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 25,
+          "title": "New Look"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 26,
+          "title": "Explore Each Other"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 27,
+          "title": "Fun With Diana"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 28,
+          "title": "Be My Pet?"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 29,
+          "title": "New Lesbian"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 30,
+          "title": "What's Up With Tasha?"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 31,
+          "title": "Tasha's so Hawt!"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 32,
+          "title": "Rodent Life"
+        }
+      ],
+      "notes": [],
+      "control": {},
+      "flag": {},
+      "tfmNotesNew": false,
+      "newNotes": false,
+      "isMouse": false,
+      "isWhore": false,
+      "isDom": false,
+      "canRomance": true,
+      "isDating": false,
+      "dose": 0,
+      "doseCD": 0,
+      "dateCD": 0,
+      "dates": 0,
+      "convoCD": 0,
+      "peCounter": 1,
+      "daysWhore": -1,
+      "status": "Normal",
+      "relationship": "Co-worker",
+      "hasShop": true,
+      "matBonus": 20,
+      "lust": 0,
+      "love": 1,
+      "pref": {
+        "kiss": {
+          "give": 60,
+          "get": 60
+        },
+        "analFuck": {
+          "give": 60,
+          "get": 60
+        },
+        "pussyFuck": {
+          "give": 0,
+          "get": 80
+        },
+        "analPlay": {
+          "give": 60,
+          "get": 60
+        },
+        "pussyPlay": {
+          "give": 40,
+          "get": 40
+        },
+        "rimjob": {
+          "give": 40,
+          "get": 40
+        },
+        "eatPussy": {
+          "give": 60,
+          "get": 80
+        },
+        "suckCock": {
+          "give": 60,
+          "get": 40
+        },
+        "gangbang": {
+          "give": 40,
+          "get": 40
+        },
+        "cock": {
+          "have": 40,
+          "want": 40
+        },
+        "pussy": {
+          "have": 40,
+          "want": 40
+        },
+        "breasts": {
+          "have": 40,
+          "want": 40
+        },
+        "bigBreasts": {
+          "have": 40,
+          "want": 40
+        },
+        "smallBreasts": {
+          "have": 40,
+          "want": 40
+        }
+      },
+      "act": [
+        "analFuck.get",
+        "pussyFuck.get",
+        "eatPussy.get",
+        "eatPussy.give",
+        "suckCock.give"
+      ]
+    },
+    "diana": {
+      "name": "Diana",
+      "id": "diana",
+      "default": "default",
+      "style": "diana",
+      "convo": [
+        [
+          "(revive:eval)",
+          "undefined"
+        ],
+        {
+          "enabled": true,
+          "seen": false,
+          "id": 1,
+          "title": "Thoughts on Work"
+        },
+        {
+          "enabled": true,
+          "seen": false,
+          "id": 2,
+          "title": "Spilling the Tea"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 3,
+          "title": "Had a Great Time"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 4,
+          "title": "Thinking of Julia"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 5,
+          "title": "Thinking of John"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 6,
+          "title": "Helping a Friend"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 7,
+          "title": "Off the Books"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 8,
+          "title": "Security Detail Order"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 9,
+          "title": "No Secrets"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 10,
+          "title": "The New Office Bunny"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 11,
+          "title": "Feeling Frisky"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 12,
+          "title": "You Taste Incredible"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 13,
+          "title": "Regarding Sophie"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 14,
+          "title": "Regarding My Coworkers"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 15,
+          "title": "Feeling Sexy"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 16,
+          "title": "Sharing Interests"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 17,
+          "title": "This Has Been Fun"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 18,
+          "title": "Feel Like I Can Open Up"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 19,
+          "title": "Not So Bad Maybe"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 20,
+          "title": "I've Had Other Pets"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 21,
+          "title": "Don't You Just Love Being My Pet?"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 22,
+          "title": "Such a Good Pet"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 23,
+          "title": "I Think I'll Keep You"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 24,
+          "title": "If I Did Take A Master"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 25,
+          "title": "New Arrangement"
+        }
+      ],
+      "notes": [],
+      "control": {},
+      "flag": {},
+      "mcsx": {
+        "cd": 0
+      },
+      "isFemale": true,
+      "dose": 0,
+      "doseCD": 0,
+      "sexCD": 0,
+      "convoCD": 0,
+      "peCounter": 1,
+      "peDecline": false,
+      "status": "Normal",
+      "relationship": "Co-worker",
+      "hasShop": true,
+      "lust": 0,
+      "love": 1,
+      "pref": {
+        "kiss": {
+          "give": 60,
+          "get": 60
+        },
+        "analFuck": {
+          "give": 80,
+          "get": 20
+        },
+        "pussyFuck": {
+          "give": 80,
+          "get": 60
+        },
+        "analPlay": {
+          "give": 80,
+          "get": 60
+        },
+        "pussyPlay": {
+          "give": 80,
+          "get": 60
+        },
+        "rimjob": {
+          "give": 0,
+          "get": 80
+        },
+        "eatPussy": {
+          "give": 60,
+          "get": 80
+        },
+        "suckCock": {
+          "give": 60,
+          "get": 80
+        },
+        "cumEat": {
+          "give": 80,
+          "get": 20
+        },
+        "gangbang": {
+          "give": 40,
+          "get": 40
+        },
+        "cock": {
+          "have": 40,
+          "want": 40
+        },
+        "pussy": {
+          "have": 40,
+          "want": 40
+        },
+        "breasts": {
+          "have": 40,
+          "want": 40
+        },
+        "bigBreasts": {
+          "have": 40,
+          "want": 40
+        },
+        "smallBreasts": {
+          "have": 40,
+          "want": 40
+        }
+      }
+    },
+    "john": {
+      "name": "John",
+      "id": "john",
+      "default": "default",
+      "oldName": "John",
+      "style": "john",
+      "convo": [
+        [
+          "(revive:eval)",
+          "undefined"
+        ],
+        {
+          "enabled": true,
+          "seen": false,
+          "id": 1,
+          "title": "Settling In"
+        },
+        {
+          "enabled": true,
+          "seen": false,
+          "id": 2,
+          "title": "Stressful Workplace"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 3,
+          "title": "Thinking of Tory"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 4,
+          "title": "Thinking of Julia"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 5,
+          "title": "Reflecting on New Self"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 6,
+          "title": "Fun with Penny"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 7,
+          "title": "Fun with You"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 8,
+          "title": "Improving"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 9,
+          "title": "New Numb"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 10,
+          "title": "Playing Nice"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 11,
+          "title": "Being a Friend"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 12,
+          "title": "People Are Nice"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 13,
+          "title": "Drinks Again?"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 14,
+          "title": "What's Up With Tasha?"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 15,
+          "title": "Love the New Tasha!"
+        }
+      ],
+      "notes": [],
+      "flag": {},
+      "isMale": true,
+      "hasPenis": true,
+      "workReaction": false,
+      "dose": 0,
+      "doseCD": 0,
+      "convoCD": 0,
+      "sexCD": 0,
+      "tfCD": 3,
+      "status": "Normal",
+      "relationship": "Co-worker",
+      "hasShop": true,
+      "lust": 0,
+      "love": 1,
+      "cPenny": 0,
+      "cTasha": 0,
+      "cDiana": 0,
+      "cPlayer": 0,
+      "pref": {
+        "kiss": {
+          "give": 20,
+          "get": 20
+        },
+        "analFuck": {
+          "give": 80,
+          "get": 0
+        },
+        "pussyFuck": {
+          "give": 80,
+          "get": 0
+        },
+        "analPlay": {
+          "give": 60,
+          "get": 0
+        },
+        "pussyPlay": {
+          "give": 60,
+          "get": 0
+        },
+        "rimjob": {
+          "give": 0,
+          "get": 40
+        },
+        "eatPussy": {
+          "give": 20,
+          "get": 80
+        },
+        "suckCock": {
+          "give": 0,
+          "get": 80
+        },
+        "gangbang": {
+          "give": 80,
+          "get": 0
+        },
+        "cock": {
+          "have": 80,
+          "want": 80
+        },
+        "pussy": {
+          "have": 0,
+          "want": 0
+        },
+        "breasts": {
+          "have": 0,
+          "want": 0
+        },
+        "bigBreasts": {
+          "have": 0,
+          "want": 0
+        },
+        "smallBreasts": {
+          "have": 0,
+          "want": 0
+        }
+      }
+    },
+    "tasha": {
+      "name": "Tasha",
+      "id": "tasha",
+      "default": "default",
+      "style": "tasha",
+      "convo": [
+        [
+          "(revive:eval)",
+          "undefined"
+        ],
+        {
+          "enabled": true,
+          "seen": false,
+          "id": 1,
+          "title": "Try to Visit"
+        },
+        {
+          "enabled": true,
+          "seen": false,
+          "id": 2,
+          "title": "Working with John"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 3,
+          "title": "Thinking of Tory"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 4,
+          "title": "Acceptance"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 5,
+          "title": "Fun Together"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 6,
+          "title": "Tasha's Secret's Out!"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 7,
+          "title": "Thinking of Julia"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 8,
+          "title": "Thinking of John"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 9,
+          "title": "Domming John"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 10,
+          "title": "Nice John"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 11,
+          "title": "Our Morning Visits"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 12,
+          "title": "Our Time Together"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 13,
+          "title": "Seeing Anyone?"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 14,
+          "title": "Anatomy of a Cock"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 15,
+          "title": "Working Relationship"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 16,
+          "title": "Your Place?"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 17,
+          "title": "Your Family"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 18,
+          "title": "Take Me Away"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 19,
+          "title": "How Exciting!"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 20,
+          "title": "It's Okay if it's You"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 21,
+          "title": "Strange Fantasies"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 22,
+          "title": "So This Place..."
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 23,
+          "title": "So Much Fun!"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 24,
+          "title": "Weird Dreams"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 25,
+          "title": "New Gear"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 26,
+          "title": "Love Being the Office Bunny!"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 27,
+          "title": "Strange Noises"
+        }
+      ],
+      "notes": [],
+      "talk": {},
+      "flag": {},
+      "control": {},
+      "mcsx": {
+        "cd": 0
+      },
+      "isTrans": true,
+      "genderReveal": false,
+      "hasPussy": false,
+      "dose": 0,
+      "doseCD": 0,
+      "convoCD": 0,
+      "sexCD": 0,
+      "status": "Normal",
+      "relationship": "Co-worker",
+      "hasShop": true,
+      "lust": 0,
+      "love": 1
+    },
+    "julia": {
+      "name": "Julia",
+      "id": "julia",
+      "default": "default",
+      "style": "julia",
+      "convo": [
+        [
+          "(revive:eval)",
+          "undefined"
+        ],
+        {
+          "enabled": true,
+          "seen": false,
+          "id": 1,
+          "title": "Staying Busy"
+        },
+        {
+          "enabled": true,
+          "seen": false,
+          "id": 2,
+          "title": "Hard Work"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 3,
+          "title": "Thinking of Tory"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 4,
+          "title": "Thinking of Chanel"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 5,
+          "title": "The New Julia"
+        },
+        {
+          "enabled": true,
+          "seen": false,
+          "id": 6,
+          "title": "Birth Control PSA"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 7,
+          "title": "Nice John"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 8,
+          "title": "I Want to Taste It!"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 9,
+          "title": "Tasha's a Lot..."
+        }
+      ],
+      "notes": [],
+      "flag": {},
+      "talk": {},
+      "isFemale": true,
+      "dose": 0,
+      "doseCD": 0,
+      "convoCD": 0,
+      "status": "Normal",
+      "relationship": "Co-worker",
+      "hasShop": true,
+      "lust": 0,
+      "love": 1
+    },
+    "lisa": {
+      "name": "Ms. Ann",
+      "id": "lisa",
+      "firstName": "Lisa",
+      "default": "default",
+      "style": "lisa",
+      "pName": "<<Formal>>",
+      "convo": [],
+      "notes": [],
+      "isFemale": true,
+      "status": "Normal",
+      "relationship": "Company Executive",
+      "lust": 0,
+      "love": 0
+    },
+    "lauren": {
+      "name": "Lauren",
+      "id": "lauren",
+      "portrait": "portrait",
+      "noOutfit": true,
+      "style": "lauren",
+      "convo": [
+        [
+          "(revive:eval)",
+          "undefined"
+        ],
+        {
+          "enabled": true,
+          "seen": false,
+          "id": 1,
+          "title": "Getting Comfortable?"
+        },
+        {
+          "enabled": true,
+          "seen": false,
+          "id": 2,
+          "title": "About Tory"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 3,
+          "title": "About Julia"
+        }
+      ],
+      "notes": [],
+      "isFemale": true,
+      "status": "Normal",
+      "relationship": "Co-worker",
+      "dose": 0,
+      "doseCD": 0,
+      "convoCD": 0,
+      "lust": 0,
+      "love": 1
+    },
+    "james": {
+      "name": "Dr. K",
+      "id": "james",
+      "portrait": "james-pro",
+      "useNPC": true,
+      "isHidden": true,
+      "style": "men",
+      "convo": [],
+      "notes": [],
+      "isMale": true,
+      "status": "Normal",
+      "relationship": "Head of Company R&D"
+    },
+    "erik": {
+      "name": "Mr. G",
+      "id": "erik",
+      "isSimple": true,
+      "portrait": "Unknown",
+      "style": "men"
+    },
+    "kagney": {
+      "name": "Kagney",
+      "id": "kagney",
+      "portrait": "portrait",
+      "noOutfit": true,
+      "default": "default",
+      "style": "sister",
+      "convo": [
+        [
+          "(revive:eval)",
+          "undefined"
+        ],
+        {
+          "enabled": true,
+          "seen": false,
+          "id": 1,
+          "title": "Keeping Busy"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 2,
+          "title": "Looking Overworked"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 3,
+          "title": "Looking For Help"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 4,
+          "title": "Is It True?"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 5,
+          "title": "OMG Tasha!"
+        }
+      ],
+      "notes": [],
+      "isFemale": true,
+      "dose": 0,
+      "doseCD": 0,
+      "convoCD": 0,
+      "status": "Normal",
+      "relationship": "Receptionist",
+      "lust": 0,
+      "love": 1
+    },
+    "mom": {
+      "name": "Mom",
+      "id": "mom",
+      "realName": "Ava",
+      "default": "default",
+      "style": "mom",
+      "convo": [
+        [
+          "(revive:eval)",
+          "undefined"
+        ],
+        {
+          "enabled": true,
+          "seen": false,
+          "cd": 0,
+          "cdMax": 3,
+          "id": 1,
+          "title": "Talk About Moving In"
+        },
+        {
+          "enabled": true,
+          "seen": false,
+          "cd": 0,
+          "cdMax": 3,
+          "id": 2,
+          "title": "Talk About Life"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "cd": 0,
+          "cdMax": 3,
+          "id": 3,
+          "title": "Thanks For The Coffee"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "cd": 0,
+          "cdMax": 3,
+          "id": 4,
+          "title": "Have You Been Okay?"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "cd": 0,
+          "cdMax": 3,
+          "id": 5,
+          "title": "You've Been Acting Stressed"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "cd": 0,
+          "cdMax": 3,
+          "id": 6,
+          "title": "Talk About Affection"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "cd": 0,
+          "cdMax": 3,
+          "id": 7,
+          "title": "Talk About <<Mom>>'s Penis"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "cd": 0,
+          "cdMax": 3,
+          "id": 8,
+          "title": "Comfortable Clothing"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "cd": 0,
+          "cdMax": 3,
+          "id": 9,
+          "title": "Tight Family"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "cd": 0,
+          "cdMax": 3,
+          "id": 10,
+          "title": "<<Mom>> is Happy"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "cd": 0,
+          "cdMax": 3,
+          "id": 11,
+          "title": "New Dad?"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "cd": 0,
+          "cdMax": 3,
+          "id": 12,
+          "title": "Lots of Fun"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "cd": 0,
+          "cdMax": 3,
+          "id": 13,
+          "title": "<<Mom>> Loves Master"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "cd": 0,
+          "cdMax": 3,
+          "id": 14,
+          "title": "Bridal Plans"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "cd": 0,
+          "cdMax": 3,
+          "id": 15,
+          "title": "<<Mom>> Gets Dark"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "cd": 0,
+          "cdMax": 3,
+          "id": 16,
+          "title": "<<Mom>> Gets Ideas"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "cd": 0,
+          "cdMax": 3,
+          "id": 17,
+          "title": "Married Life"
+        }
+      ],
+      "notes": [],
+      "isFemale": true,
+      "daysCollar": 0,
+      "dose": 0,
+      "nextSerum": 1,
+      "mcsx": {
+        "cd": 0,
+        "slut": 0
+      },
+      "doseCD": 0,
+      "convoCD": 0,
+      "status": "Normal",
+      "relationship": "Mother",
+      "lust": 0,
+      "love": 1,
+      "hasShop": true,
+      "shop": "hart",
+      "morningTask": "oral",
+      "control": {},
+      "flag": {}
+    },
+    "sister": {
+      "name": "Dakota",
+      "id": "sister",
+      "default": "default",
+      "style": "sister",
+      "convo": [
+        [
+          "(revive:eval)",
+          "undefined"
+        ],
+        {
+          "enabled": true,
+          "seen": false,
+          "id": 1,
+          "title": "Talk About School"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 2,
+          "title": "Talk About School"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 3,
+          "title": "Talk About School"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 4,
+          "title": "Talk About School"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 5,
+          "title": "New Guy at School"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 6,
+          "title": "New Guy at School"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 7,
+          "title": "New Guy at School"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 8,
+          "title": "New Girl at School"
+        },
+        {
+          "enabled": true,
+          "seen": false,
+          "id": 9,
+          "title": "Talk About <<Mom>>"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 10,
+          "title": "Talk About <<Mom>>"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 11,
+          "title": "<<Mom>>'s Bringing You COFFEE!?"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 12,
+          "title": "<<Mom>> is Stressed"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 13,
+          "title": "Teasing <<Sister>>"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 14,
+          "title": "Sharing a Kiss with <<Sister>>"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 15,
+          "title": "Frustrated with <<Mom>>'s Masturbating"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 16,
+          "title": "Catch you Watching <<Mom>> in Shower"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 17,
+          "title": "Tease you About <<Mom>> in Shower"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 18,
+          "title": "<<Sister>> Puts on a Show"
+        },
+        {
+          "enabled": true,
+          "seen": false,
+          "id": 19,
+          "title": "Talk About Movies"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 20,
+          "title": "Had Fun at Theater"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 21,
+          "title": "Talk About Porn"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 22,
+          "title": "Watch Porn with <<Sister>>"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 23,
+          "title": "On Having Sex"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 24,
+          "title": "<<Mom>>'s Crazy"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 25,
+          "title": "Thoughts on <<Mom>>"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 26,
+          "title": "Is <<Mom>> Okay?"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 27,
+          "title": "Pimping Out <<Mom>>!?"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 28,
+          "title": "So Tired"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 29,
+          "title": "<<Mom>>'s a Maid"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 30,
+          "title": "It's Cute!"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 31,
+          "title": "You Married $mom.name!?"
+        },
+        {
+          "enabled": false,
+          "seen": false,
+          "id": 32,
+          "title": "Wrong Room"
+        }
+      ],
+      "notes": [],
+      "rape": {},
+      "isFemale": true,
+      "pregnantBy": "",
+      "dose": 0,
+      "nextSerum": 1,
+      "mcsx": {
+        "cd": 0,
+        "pet": 0,
+        "porn": 0
+      },
+      "doseCD": 0,
+      "convoCD": 0,
+      "status": "Normal",
+      "relationship": "Sister",
+      "lust": 0,
+      "love": 1,
+      "camStep": 1,
+      "hasShop": true,
+      "shop": "hart",
+      "control": {},
+      "flag": {},
+      "talk": {}
+    },
+    "player": {
+      "name": "Jesse",
+      "sophieName": "",
+      "surname": "Doe",
+      "s": "SISSY",
+      "b": "BIMBO",
+      "d": "DEFAULT",
+      "wakeup": "room",
+      "MaxOP": 100,
+      "CurOP": 10,
+      "outfit": "casual1",
+      "outfits": [],
+      "hat": "none",
+      "hats": [
+        "none"
+      ],
+      "underwear": "boxers1",
+      "underwears": [
+        "none"
+      ],
+      "bra": "none",
+      "bras": [
+        "none"
+      ],
+      "accf": "none",
+      "accfs": [
+        "none"
+      ],
+      "accb": "none",
+      "accbs": [
+        "none"
+      ],
+      "style": "you",
+      "penisSize": 0,
+      "pussySize": 0,
+      "breastSize": 0,
+      "assSize": 0,
+      "dose": 0,
+      "doseCD": 0,
+      "dayEventCD": 0,
+      "johnEventCD": 0,
+      "hairCD": -1,
+      "horny": 0,
+      "hornyMod": 0,
+      "dom": 50,
+      "genderv": 0,
+      "hLength": "Bald",
+      "hDesc": "completely shaved off",
+      "tfRate": 1,
+      "tfCD": 0,
+      "tfForever": 15,
+      "tfMale": 0,
+      "tfFemale": 0,
+      "tfTrans": 0,
+      "tfBimbo": 0,
+      "tfSissy": 0,
+      "daysMale": 0,
+      "daysFemale": 0,
+      "daysSissy": 0,
+      "daysTrans": 0,
+      "daysBimbo": 0,
+      "makeup": 0,
+      "wearingMakeup": [
+        "no",
+        "@@.tf;light@@",
+        "@@.xxx;heavy@@"
+      ],
+      "makeupLevel": [
+        "None",
+        "Light Makeup",
+        "Slutty Makeup"
+      ],
+      "coinOutfits": [
+        "default"
+      ],
+      "wolf": 0,
+      "ram": 0,
+      "hart": 0,
+      "baseGender": "male",
+      "pref": {
+        "kiss": {
+          "give": 60,
+          "get": 60
+        },
+        "analFuck": {
+          "give": 60,
+          "get": 60
+        },
+        "pussyFuck": {
+          "give": 80,
+          "get": 40
+        },
+        "analPlay": {
+          "give": 60,
+          "get": 60
+        },
+        "pussyPlay": {
+          "give": 40,
+          "get": 40
+        },
+        "rimjob": {
+          "give": 40,
+          "get": 40
+        },
+        "eatPussy": {
+          "give": 60,
+          "get": 80
+        },
+        "suckCock": {
+          "give": 60,
+          "get": 80
+        },
+        "gangbang": {
+          "give": 40,
+          "get": 40
+        },
+        "cock": {
+          "have": 40,
+          "want": 40
+        },
+        "pussy": {
+          "have": 40,
+          "want": 40
+        },
+        "breasts": {
+          "have": 40,
+          "want": 40
+        },
+        "bigBreasts": {
+          "have": 40,
+          "want": 40
+        },
+        "smallBreasts": {
+          "have": 40,
+          "want": 40
+        },
+        "sex": {
+          "men": 40,
+          "women": 40,
+          "trans": 40,
+          "family": 40
+        }
+      },
+      "flag": {},
+      "has": {},
+      "control": {},
+      "met": {},
+      "tracking": {}
+    },
+    "PitSlots": 0,
+    "MaxPitSlots": 3,
+    "MaxSlaveXP": 5,
+    "MaxSlaveLevel": 3,
+    "TrainingPoints": 2,
+    "MaxTrainingPoints": 2,
+    "PitLevel": 1,
+    "PitMaxLevel": 6,
+    "PitXP": 0,
+    "PitXPMod": 0,
+    "PitXPReq": [
+      0,
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100
+    ],
+    "PitSEXMod": 0,
+    "PitWLPMod": 0,
+    "PitLTYMod": 0,
+    "PitValueMod": 100,
+    "WeeklySlavePay": 0,
+    "WeeklySlavePayMod": 0.2,
+    "cubeSlaves": {},
+    "PitSlaveGenders": [
+      "female",
+      "female"
+    ],
+    "PitSlaveCost": 30000,
+    "BoughtSlave": false,
+    "PitDailySlaveGender": "female",
+    "PitDailySlaveName": "Anna",
+    "PitDailySlaveAge": "",
+    "PitDailySlaveHairColor": "",
+    "PitDailySlaveHairLength": 4,
+    "PitDailySlaveBreastSize": 1,
+    "PitDailySlavePenisSize": 1,
+    "PitDailySlaveBallSize": 4,
+    "PitDailySlaveDescriptionMale": "",
+    "PitDailySlaveDescriptionFemale": "",
+    "thepit": {
+      "img": []
+    },
+    "PitUpgrade": [
+      {
+        "name": "Add +2 Trainer Points",
+        "cost": 7500,
+        "locked": true,
+        "type": "tp",
+        "value": 2,
+        "level": 1
+      },
+      {
+        "name": "Add +1 Cell Slot",
+        "cost": 10000,
+        "locked": true,
+        "type": "slot",
+        "value": 1,
+        "level": 1
+      },
+      {
+        "name": "Unlock Training Assistant",
+        "cost": 15000,
+        "locked": true,
+        "type": "flag",
+        "flag": "PitAssistant",
+        "level": 1
+      },
+      {
+        "name": "Add +2 Trainer Point",
+        "cost": 20000,
+        "locked": true,
+        "type": "tp",
+        "value": 2,
+        "level": 2
+      },
+      {
+        "name": "Add +1 Cell Slot",
+        "cost": 20000,
+        "locked": true,
+        "type": "slot",
+        "value": 1,
+        "level": 2
+      },
+      {
+        "name": "Unlock Basic Surgery",
+        "cost": 50000,
+        "locked": true,
+        "type": "flag",
+        "flag": "PitSurgery",
+        "level": 2
+      },
+      {
+        "name": "Slaves gain +1 XP",
+        "cost": 100000,
+        "locked": true,
+        "type": "stat",
+        "stat": "PitXPMod",
+        "value": 1,
+        "level": 3
+      },
+      {
+        "name": "Slaves gain or lose +1 Sexuality when trained",
+        "cost": 200000,
+        "locked": true,
+        "type": "stat",
+        "stat": "PitSEXMod",
+        "value": 1,
+        "level": 3
+      },
+      {
+        "name": "Slaves gain or lose +1 Willpower when trained",
+        "cost": 200000,
+        "locked": true,
+        "type": "stat",
+        "stat": "PitWLPMod",
+        "value": 1,
+        "level": 3
+      },
+      {
+        "name": "Slaves gain or lose +1 Loyalty when trained",
+        "cost": 200000,
+        "locked": true,
+        "type": "stat",
+        "stat": "PitLTYMod",
+        "value": 1,
+        "level": 3
+      },
+      {
+        "name": "Add +3 Trainer Points",
+        "cost": 100000,
+        "locked": true,
+        "type": "tp",
+        "value": 3,
+        "level": 4
+      },
+      {
+        "name": "Add +3 Cell Slot",
+        "cost": 100000,
+        "locked": true,
+        "type": "slot",
+        "value": 3,
+        "level": 4
+      },
+      {
+        "name": "Unlock Advanced Surgery",
+        "cost": 500000,
+        "locked": true,
+        "type": "flag",
+        "flag": "PitSurgery2",
+        "level": 4
+      },
+      {
+        "name": "Slaves gain 50% more Value from training",
+        "cost": 1000000,
+        "locked": true,
+        "type": "stat",
+        "stat": "PitValueMod",
+        "value": 50,
+        "level": 5
+      },
+      {
+        "name": "Slaves gain or lose +2 Sexuality when trained",
+        "cost": 500000,
+        "locked": true,
+        "type": "stat",
+        "stat": "PitSEXMod",
+        "value": 2,
+        "level": 5
+      },
+      {
+        "name": "Slaves gain or lose +2 Willpower when trained",
+        "cost": 500000,
+        "locked": true,
+        "type": "stat",
+        "stat": "PitWLPMod",
+        "value": 2,
+        "level": 5
+      },
+      {
+        "name": "Slaves gain or lose +2 Loyalty when trained",
+        "cost": 500000,
+        "locked": true,
+        "type": "stat",
+        "stat": "PitLTYMod",
+        "value": 2,
+        "level": 5
+      },
+      {
+        "name": "Add +3 Trainer Points",
+        "cost": 750000,
+        "locked": true,
+        "type": "tp",
+        "value": 3,
+        "level": 6
+      },
+      {
+        "name": "Add +3 Cell Slot",
+        "cost": 750000,
+        "locked": true,
+        "type": "slot",
+        "value": 3,
+        "level": 6
+      },
+      {
+        "name": "Unlock feminization surgery",
+        "cost": 400000,
+        "locked": true,
+        "type": "flag",
+        "flag": "PitFemSurgery",
+        "level": 3
+      }
+    ],
+    "game": {
+      "release": "Public Build",
+      "version": 5.1200003,
+      "Version": "5.12"
+    },
+    "DebugMessages": false,
+    "PitTesting": false,
+    "ArtDemo": false,
+    "DevDigest": false,
+    "UseArt": false,
+    "return": "Start"
+  },
+  "save_caps": {
+    "stateMarshal": true,
+    "engineShow": true,
+    "serialize": true,
+    "slots": true,
+    "saveNamespace": "SugarCube.Save"
+  },
+  "state_hash": "d2bb5b2355dbc5a9",
+  "body_text": "\nThe Company - Public Build 5.12\n\n\"The Company\" is a game that takes place in the universe established by Wandrer and his stories on the ASSTR database. \"The Company\" is used with permission from Wandrer, and beyond the existence of The Company as an entity does not further take elements from his works. Special thanks to Wandrer for allowing me to use his creations as the basis for my story.\n\nI'd also like to thank all of my own supporters for helping make this game into what it is today! If you're also interested in contributing, please visit my SubscribeStar for frequent updates and early access to new builds of this game.\n\nThis game contains adult imagery and themes, and should not be played by anyone under the age of 18.\n\nI am 18 or older, start the game\n\n",
+  "body_html": "<span class=\"pic\"><img data-passage=\"banner\" src=\"data:image/jpeg;base64,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AAAAAYACAADAAAGAAabcu54DodxxrpvFptzz9wmp0gQU1NRCREFhzllDDtS4192ZNobmjZRub8255PHCxj0WdnqGs2no+GASAMGmDGAANNAChnl9z3ui8m2NWOfln6cXss9vHq1hna15bDFFXHs81cbmuT6eSgW8iUbc7pqcW40xjtVyalaJ3NbHcZr5leXLYyqdMmWtJqeepBndrXzu7zxWJrVV82pvHcWtflms8McEnhhj1i7BrPVCtyvLss068zr+q5DXC/lr2SMLuxXVdDQ2qrlu118nIY9tr9c6V2puDWxzSuct/WdO1g0/eedTVfLjsOew2Wj67HXd+bdhxfPrsMeLH6PNnHBVVo7DNsbjS462FCdhNNf11wyvDtbNetnUWuW7SacTzcYo6zlMVtXm2KXROeVnFLBmXPe10zaaiW/5drfDKxcFV4+nMFkM9iArSQ4pFeOWvj156V5Gq6XSVdeb3rL496x5/fZAx1AAAABAGIYAAAxMAAQBgAAFanlPQS44/Zw5yejpcdDZ8/cXKUDcmnta5W8UslxWdklrLNgaeKtHPbJBPOySpXEdtr+/9HxQBxAAYDaYwAAQYADsPBvefG9Z5fZ5M66LdV9huY9fkry7KpttFFp6jpk569rews09Pd6eWLns7NNJ4bN9rTYJqsWu6jO9VWh0VzotlWVktZdgX6V+rnew0+758s0s/RWaelsdZZbn0nFS7mpu+clxy2eq1ghtdcLLnzLr4S3KavotNdnTemlsTrrcc814VsW01cWlstFbky7/AIxN9Q33Ky7PLbyS81sNR2Os6fW4esNThzwQu6HoZutXuazWNpveUr+f09Fpaq1jJTuVunPbyovpzq7rR9Lz6afYUrxQjVsazT2OfVpcr7rVS57Vmed6rHXyb57rmem5ua2C3HLS5rm21ZTsUekTVU7RrPfPhpeP3dRS5rBvG80s8vfzOusfTmJBK3izkokVaUUaSFXsYse3KY8ilW0Jqdrho68vtux8K9W4+vfjOXoQwTAAAGCYAAACAwAAAoABgABz/O+hS1jgdzs+Yz32y57ZY9d5SMd4jSgAJsRrKXTy57u123T5161F3gwEGFDHAwABAHQJoPF5ZZ1nn1zmt4j1XJ7ayF7S3p06Pjen1DG/Wv10099zWW5rXqdezp8GnhLHseI2llTCrFzDpOczKs2CRl2+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\"></span>\t<br>\t<u><strong>The Company - Public Build 5.12</strong></u><br><br>\t<strong>\"The Company\" is a game that takes place in the universe established by <a target=\"_blank\" class=\"link-external\" href=\"https://www.hentai-foundry.com/user/wandrer/profile\" tabindex=\"-2\" aria-hidden=\"true\">Wandrer</a> and his stories on the ASSTR database. \"The Company\" is used with permission from Wandrer, and beyond the existence of The Company as an entity does not further take elements from his works. Special thanks to Wandrer for allowing me to use his creations as the basis for my story.</strong><br><br>\t<strong>I'd also like to thank all of my own supporters for helping make this game into what it is today! If you're also interested in contributing, please visit my <a target=\"_blank\" class=\"link-external\" href=\"https://subscribestar.adult/westane\" tabindex=\"-2\" aria-hidden=\"true\">SubscribeStar</a> for frequent updates and early access to new builds of this game.</strong><br><br>\t<strong>This game contains adult imagery and themes, and should not be played by anyone under the age of 18.</strong><br><br>\t\t\t<span class=\"btnUI\"><button data-passage=\"Intro-FirstCheck\" class=\"link-internal macro-button\" type=\"button\" role=\"link\" tabindex=\"-2\" aria-hidden=\"true\">I am 18 or older, start the game</button></span><br>\t\t<br>\t",
+  "modal_text": "Are you sure that you want to restart? Unsaved progress will be lost.\n\nOKCancel"
+}

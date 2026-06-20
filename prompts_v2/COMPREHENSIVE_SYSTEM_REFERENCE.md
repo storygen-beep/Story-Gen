@@ -375,7 +375,7 @@ schedules = [{ weekdays = [0,1,2,3,4,5,6], start_time = "07:00", end_time = "21:
 [[canvases.trigger.substitutions]]
 target_canvas_id = "scene_frank_kitchen_dishes"  # slug (resolves to UUID at build time)
 chance = 0.33
-conditions = { items = [
+conditions = { version = "1.0", items = [
   { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "stage", operator = "gte", value = 2 },
 ] }
 
@@ -730,6 +730,7 @@ Wired at `_validate_quests_cards` in `template_import.py:4469`. Validates Doc 50
 | `"trait_bar"` | Numeric bar with optional band-text overlay + color tiers. NPC-owner mode supported (`trait_owner = "npc"` + `npc_id`). | `template_import.py:3083`+ |
 | `"trait_status_text"` | Banded body-state text (Filthy/Dirty/Fresh/Clean for hygiene). Renders nothing when no band matches. | `template_import.py:3171`+ |
 | `"trait_decay_warning"` | Amber warning when a decaying trait dropped today AND is within range of a band gate. Sibling of `trait_status_text`. | `v1.py:5620` (`getDecayWarnings` helper) + `v1.py:13850` (SugarCube template) |
+| `"npc_panel"` | RTS House-card: one card per NPC with `rows` = ordered subset of `["arousal","corruption","location","next"]`. arousal → band glyph (default 0/1/2/3 → ❄️/🔥/🔥🔥/🔥🔥🔥, or author `arousal_bands`); corruption → number (or `corruption_max_label` at/above `corruption_max_value`); **location → `setup.getNpcLocation` (the SAME schedule source as the Schedule page)**; **`next` → mirrors the Quests-page goal block (reuses `renderQuestsGoalBlock`): `🎯 To advance` + ◯ live progress while climbing, `🔓 Ready / 📍 <loc> / 🕒 <schedule>` when ready, `✓ Arc complete` when terminal — no flavor/tip text**. Respects `hidden=true`. `npc_id` required; `show_when` supported. | `template_import.py` (npc_panel branch) + `v2.py`/`v1.py` `sidebarItems` widget |
 | (more: passes, inventory, etc.) | — | see `schema/02_toml_schema.md` |
 
 **Visibility doctrine** (Doc 68 §8): stage NEVER surfaces to any sidebar item. Antagonist awareness NEVER surfaces. See `doctrine/09_trait_catalog.md` §8.
@@ -987,14 +988,14 @@ Dataclass: `TemplateProject` at `template_import.py:43`.
 
 | Field | Type | Default | Notes |
 |---|---|---|---|
-| `slug` | str | required | URL-safe identifier |
+| `id` | str | required | URL-safe identifier. **TOML key is `id`** (`_require_str(p, "id")`); stored internally as the `slug` attribute. |
 | `title` | str | required | Display title |
 | `description` | str | `""` | Free text |
 | `quests_engine` | str | `"v1"` | **Set to `"v2"`** for RTS-shape games (enables `[[quest_cards]]`). PRD 48. |
 
 ```toml
 [project]
-slug = "the_long_summer"
+id = "the_long_summer"
 title = "The Long Summer"
 description = "A 90-day summer with Frank at the lake house."
 quests_engine = "v2"
@@ -1363,7 +1364,7 @@ Dataclass: `TemplateTrigger` at `template_import.py:448`.
 | `npc` | Optional[str] | — | NPC slug; navigation indicator |
 | `trigger_mode` | str | `"manual"` | `"manual"` (Lane 1/3/4) or `"random"` (Lane 2) |
 | `chance` | Optional[float] | — | 0.0–1.0; Lane 2 only |
-| `costs` | List[dict] | `[]` | Resource costs on entry: `[{trait: str, value: int}]` |
+| `costs` | List[dict] | `[]` | Resource costs on entry: `[{trait: str, value: int}]`. **This is how you GATE on a resource** (energy/hygiene): the engine checks affordability, dims the menu button with a `(N <Trait>)` tag, and on click shows "Requires N <Trait> (you have M)" + Back — *and* deducts on entry. Single value per canvas → use for single-exit activities; for a per-choice differential (e.g. −15 vs −28) put `costs` on each choice instead (§7.4 — same field, choice level, with tiered greyed messaging). **Spending a resource via `effects {op=add, value=-N}` deducts but does NOT gate** (no affordability check, can go negative, blocks nothing — a cosmetic bar). Don't put both `costs` and an effects deduction on the same canvas — double-charge. |
 | `show_when_blocked` | bool | `false` | Render grayed-out entry on QuestsPage when daily-cooldown blocks |
 | `cooldown_message` | Optional[str] | — | Custom blocked text |
 | `entry_only_from` | List[str] | `[]` | Lane 2 anti-toggle cooldown: only fire if previous location matched |
@@ -1510,7 +1511,7 @@ Each block is `{type = "X", ... type-specific fields}`. Supported types:
 ```toml
 [[canvases.nodes.blocks]]
 type = "group"
-props.conditions = { items = [
+props.conditions = { version = "1.0", items = [
   { type = "flag", subject = "player", flag_key = "frank_caught", operator = "is_false" },
 ] }
 props.blocks = [
@@ -1596,6 +1597,23 @@ Dataclass: `TemplateChoice` at `template_import.py:609`.
 | `quest_effects` | List[dict] | `[]` | V1 quests — `[{quest, op, step?}]` |
 | `schedule_effects` | List[dict] | `[]` | Delayed events — `[{delayDays, action, flag?/quest?/conversation?}]` |
 | `text_variants` | List[dict] | `[]` | Per-state text — `[{text, conditions}]`; first match wins |
+| `costs` | List[dict] | `[]` | Per-choice resource cost — `[{trait, value}]`. **Tiered gating**: rendered as a tier UNDER `conditions` (the main lock). Affordable → live link; unaffordable → a plain greyed `locked-choice` rung showing "Requires N <Trait> (you have M)" (no button). Deducts on click — so the energy/hygiene spend lives HERE, not in `effects`. Same `costs` semantic as the canvas trigger (§6.1), at the choice level. |
+
+**Tiered gating — main lock (`conditions`) + resource cost (`costs`):**
+
+```toml
+[[canvases.nodes.exit_block.choices]]
+text             = "Work the floor in less 👀"
+show_when_locked = true
+locked_text      = "Work the floor in less 👀 (needs revealing outfit)"   # main-lock reason
+conditions = { version = "1.0", items = [{ type = "worn_corruption", operator = "gte", value = 15 }] }
+costs   = [{ trait = "energy", value = 15 }]   # tier under the lock — greys with the energy message
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 120
+effects = [{ targetType = "player", trait = "money", op = "add", value = 90 }]  # NO energy here (costs deducts it)
+```
+Outfit off → "needs revealing outfit"; outfit on but tired → "Requires 15 Energy (you have N)"; both met → live. For a pure energy gate with no main lock (e.g. a plain work shift), give the choice `costs` and omit `conditions`. Don't gate a resource with `conditions` + `locked_text_threshold` (that renders a clickable blue toast-button, and a flat `conditions` can't show a per-tier reason).
 
 **Locked choice (always-show with threshold publish — RTS pattern):**
 
@@ -1605,7 +1623,7 @@ text = "Suck him"
 show_when_locked = true
 locked_text = "I need to know him better first"
 locked_text_threshold = "Maya's corruption: 35+"
-conditions = { items = [
+conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 35 },
   { type = "flag", subject = "player", flag_key = "frank_cracked", operator = "is_true" },
 ] }
@@ -1710,6 +1728,39 @@ See `doctrine/04_authoring_rules.md` for Doc 50 R1–R6 + Doc 56 R6.
 
 Validator: `template_import.py:3024`+. Each entry is `{ type = "X", ... type-specific fields }`.
 
+### §9.0 — Choosing the type (and avoiding the doubling)
+
+**The sidebar is NOT the only place stats show.** The engine's auto `<<playerTraits>>` Traits widget
+(+ the Stats page) dumps **every non-hidden `core_trait` as a raw number** by default. So a stat is
+*already visible as a number* without any `[[sidebar_items]]` entry. A band is an **upgrade you add on
+top** — use it only when a qualitative word beats the number, and de-dup so the stat doesn't show twice.
+
+**Encode by the stat's nature:**
+
+| Stat nature | Type | Why |
+|---|---|---|
+| Identity / qualitative state, number meaningless (corruption) | `trait_words` | The word IS the read (Pure→Whore). This is the **hero** stat — the engine renders `trait_words` raised + larger. |
+| Transient mood / bounded magnitude (arousal) | `trait_bar` + `bands` + **`hide_value = true`** | A heat word on a bar (Cold→Burning); the raw 0–10 is noise. |
+| Body-state need, silent when fine (hygiene, energy) | `trait_status_text` | Filthy→Clean; renders nothing when healthy. |
+| Spendable resource you COUNT (money) | **leave as a NUMBER** (no band) | A vibe word ("Broke/Flush") hides the amount the player needs to make decisions. |
+
+**Don't over-band.** Banding every stat makes the rail noisy and redundant (every banded stat is also a
+number in the Traits dump — see below). Band the 1–2 stats whose word genuinely beats the number; number
+the rest. (Reference: RTS bands ~2 of its ~9 stats.)
+
+**Kill the number+word doubling — two kinds:**
+- *Within a `trait_bar`:* `bands` + no `hide_value` renders BOTH `"Arousal: 3 / 10"` AND `"Cold"`. Set
+  **`hide_value = true`** so only the band word shows.
+- *Across surfaces:* a banded stat (`trait_words`/`trait_bar`) STILL appears as a raw number in the auto
+  Traits dump → it shows TWICE. Add **`[[traits.labels]] hidden = true`** for that trait so it shows ONCE
+  (as the band). Safe: the band renderers ignore `hiddenTraits` (`v2.py:14744`/`14853`) — the band
+  survives; only the auto dump + Stats page drop the number. (See `doctrine/09` §4.4.)
+
+**Visual design is engine-handled** — pick the type + bands, never hand-style: the engine renders one
+consistent card language (neutral structure, accent reserved for signal, the word-state hero). Worked
+example: `games/the_inheritance/toml_phases/0_systems_spec.toml` (corruption `trait_words`; arousal
+`trait_bar` + `hide_value=true`; energy/money as numbers; corruption + arousal `hidden=true` to de-dup).
+
 ### §9.1 — `type = "trait_words"`
 
 Banded prose label. Renders a band's text string; raw number hidden. Used for corruption (Pure / Lewd / Slutty / Whore).
@@ -1738,7 +1789,8 @@ bands = [
 
 ### §9.2 — `type = "trait_bar"`
 
-Numeric bar with optional band-text overlay + color tiers.
+Numeric bar with optional band-text overlay + color tiers. **With `bands`, set `hide_value = true`** —
+otherwise the bar shows the raw `X / Y` AND the band word together (the doubling, see §9.0).
 
 | Field | Notes |
 |---|---|
@@ -1758,6 +1810,7 @@ type = "trait_bar"
 trait = "arousal"
 label = "Arousal"
 max = 10
+hide_value = true   # bands carry the read-out (Cold→Burning); don't also print the raw 3 / 10
 color_tiers = [
   { up_to = 30,  class = "low" },
   { up_to = 70,  class = "medium" },
@@ -1816,7 +1869,11 @@ Amber warning when a decaying trait dropped today AND is within range of a band 
 
 **Visibility doctrine (Doc 68 §8):** stage NEVER surfaces to any sidebar item. Antagonist awareness NEVER surfaces. Body-state (energy + hygiene) MUST surface. See `doctrine/09_trait_catalog.md` §8 for per-arc-shape defaults.
 
-**No per-NPC sidebar item via `trait_bar` / `trait_words`.** Although these accept a `trait_owner`/`npc_id`, the engine resolves the `trait` against `player.core_traits` — so `type="trait_bar" npc_id="npc_x" trait="relation"` HARD-FAILS at build ("trait 'relation' not found in player.core_traits") or silently renders the PLAYER's stat. NPC progression (arousal / relation / stage) surfaces on the **Quests page** (V2 cards), NOT the sidebar. The only per-NPC sidebar item is the Doc-64 `npc_location` type, which is PENDING — do not emit it yet. (Late Shifts build failed on four npc-scoped `trait_bar`s.)
+**Per-NPC sidebar items ARE supported** (added after the Late Shifts failure that the old note described). Two ways:
+- `trait_bar` / `trait_words` / `trait_status_text` with `trait_owner = "npc"` + `npc_id` — renders that NPC's `core_traits[trait]` (resolved via `setup.npc_slug_map`). Owner defaults to `"player"`; `npc_id` is required when owner is `"npc"`.
+- **`npc_panel`** (the RTS House-card — ships Doc 64): one card per NPC with `rows = ["arousal","corruption","location","next"]` (any ordered subset). The **location** row reads `setup.getNpcLocation` (the SAME schedule source as the Schedule page); **arousal** renders as a band glyph (default ❄️/🔥/🔥🔥/🔥🔥🔥, or author `arousal_bands`); **corruption** as a number (or `corruption_max_label` at/above `corruption_max_value`); **`next`** mirrors the Quests-page goal block (reuses `renderQuestsGoalBlock`): `🎯 To advance` + ◯ live progress while climbing, `🔓 Ready / 📍 <loc> / 🕒 <schedule>` when ready, `✓ Arc complete` when terminal — no flavor/tip text. Respects `hidden=true`; `show_when` supported. Validator: `npc_id` must exist; arousal/corruption rows require the trait declared in the NPC's `core_traits`.
+
+`stage` and antagonist `awareness` still NEVER surface (Doc 68 §8). Relation/corruption milestones can alternatively surface on the **Quests page** (V2 cards) — use whichever fits.
 
 ---
 
@@ -1846,6 +1903,8 @@ traitEffects = [
 
 **Doctrine constraint (Doc 40 / Doc 68 §3–§4):** body-state (`hygiene`, `energy`) decays daily. Progression traits (`corruption`, `arousal`, `relation`, `stage`) do NOT decay daily. NPC arousal climbs daily (no-decay rule per Doc 40).
 
+**Gating constraint:** body-state only *paces* the game if activities actually GATE on it. Spend energy/hygiene through the **`costs`** field — on the trigger for a single-exit activity (§6.1) or on each choice for a multi-intensity exit (§7.4, tiered under `conditions` with greyed per-tier messaging). Spending via `effects {op=add, value=-N}` alone deducts but never blocks (cosmetic bar), and gating a resource with `conditions`+`locked_text_threshold` renders a clickable blue toast-button instead of a plain greyed rung — use `costs`. Always pair a gate with a restore (a Sleep/Shower canvas) or the player dead-ends.
+
 ---
 
 ## §11 — `[[engine.stage_helpers]]`
@@ -1865,7 +1924,7 @@ Named composite gates. A `type = "stage"` condition references a helper by name;
 [[engine.stage_helpers]]
 name = "frank_stage_2_plus"
 description = "Frank reached Stage 2 (post-catch)."
-conditions = { items = [
+conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "frank_stage", operator = "gte", value = 2 },
 ] }
 ```
@@ -2304,7 +2363,17 @@ Dataclass: `TemplateFlagEffect` at `template_import.py:521`.
 
 ### §16.3 — Trigger / canvas PREDICATE (condition gate)
 
-The `{version, logic, items: [...]}` block on `[canvases.trigger.conditions]`, `[canvases.exit_block.choices.conditions]`, `[locations.entry_conditions]`, etc.
+The `{version, logic, items: [...]}` block on `[canvases.trigger.conditions]`, `[canvases.exit_block.choices.conditions]`, `[locations.entry_conditions]`, group-block `props.conditions`, substitution-rule `conditions`, stage-helper `conditions`, etc.
+
+> **⚠️ `version = "1.0"` IS MANDATORY — omit it and the gate FAILS OPEN.** The evaluator opens with
+> `if (!conditions.version || conditions.version !== '1.0') return true;` (`triggerConditionsSatisfied`,
+> v2.py:3312). A `conditions` block missing `version = "1.0"` is treated as **satisfied** — the `items`
+> are never checked, the gate always passes. **No build error, no validator catch.** This silently
+> ungates whatever it guards (locked rungs show from the start, daily caps don't cap, capstone-gated
+> choices appear early, ending forks open unearned). It bites **per-choice** conditions most, where
+> `conditions = { items = [...] }` is an easy thing to write. ALWAYS include `version = "1.0"` on EVERY
+> condition block — trigger, choice, group, substitution, entry, stage-helper. Grep guard before build:
+> `grep 'conditions = { items = \['` must return ZERO hits. (Live-caught in Last Call 2026-06-04.)
 
 ```toml
 [canvases.trigger.conditions]
@@ -2380,7 +2449,7 @@ A complete RTS-shape sandbox skeleton — copy-paste starting point. Trim/expand
 schema_version = "1.0"
 
 [project]
-slug = "test_game"
+id = "test_game"
 title = "Test Game"
 description = "Minimal RTS-shape sandbox skeleton."
 quests_engine = "v2"
@@ -3569,6 +3638,7 @@ type = "trait_bar"
 trait = "arousal"
 label = "Arousal"
 max = 10
+hide_value = true   # bands carry the read-out — don't also print the raw 3 / 10 (the doubling, schema/02 §9.0)
 color_tiers = [
   { up_to = 30,  class = "low" },
   { up_to = 70,  class = "medium" },
@@ -3601,12 +3671,13 @@ bands = [
   { min = 75,  max = 100, text = "Rested",    icon = "🔋" },
 ]
 
-# When Doc 64 PRD ships, add per-NPC items:
-# [[sidebar_items]]
-# type = "npc_location"
-# npc_id = "npc_frank"
-# label = "Frank"
-# stats = ["arousal", "corruption", "relation"]    # family/ambient default per Doc 68 §8
+# Per-NPC radar — npc_panel (SHIPPED). The location row reads the NPC's [[npcs.schedules]]
+# via getNpcLocation (same source as the Schedule page):
+[[sidebar_items]]
+type   = "npc_panel"
+npc_id = "npc_frank"
+label  = "Frank"
+rows   = ["arousal", "corruption", "location", "next"]    # family/ambient default per Doc 68 §8
 ```
 
 ### Key features
@@ -3614,7 +3685,7 @@ bands = [
 - **`trait_words` for corruption** (banded display, raw number hidden) — Doc 68 Q2 lock
 - **`trait_bar` for arousal** (0–10 with bands) — Doc 40 lock
 - **`trait_status_text` for body-state** (hygiene + energy) — Doc 49
-- **`npc_location` items** (commented out, pending Doc 64 PRD) — when shipped, per-NPC radar with per-arc-shape stat surfacing
+- **`npc_panel` items** (shipped) — per-NPC radar: arousal/corruption/location/next rows; location reads the NPC schedule (Schedule-page source); `next` shows the ready milestone (🔓/📍/🕒) reusing the Quests-page logic
 
 ### Anti-patterns avoided
 
@@ -4219,6 +4290,8 @@ Anti-pattern: a Lane 1 menu item that decrements `relation` on locked-click. Tha
 
 The big beats — first night, pregnancy reveal, declaration — get HAND-written, one of one, deliberate. The daily texture — hallway encounters, random teases, walk-ins — is mechanism. One cascade fires sometimes. Don't waste real prose on what happens 30 times.
 
+**Mechanize the prose, not the priority.** "Texture" here means the *writing* is templated and re-readable (RTS-flat) — it does NOT mean the daily loop is low-value or low-coverage. For a cohabitation game the daily routine is the **primary content channel by volume** (`doctrine/02` §6, §3.1): it is where the corruption the player built gets spent. Mechanize each chore's prose so it survives 30 readings; do not *under-build the routine itself*. A thin daily loop — few solo hosts, no walk-ins, no feeder floor — starves the game no matter how good the capstones are.
+
 **RTS evidence (Doc 35):**
 
 > RTS doesn't mutate canvases for persistent states; it ROUTES to separate variant passages on the state predicate. Pregnancy gives a separate `BrotherBedroomPregnantSex1` passage variant. Pattern F real-choice forks (e.g., `SellingMyStepsister` Accept/Refuse branch) are hand-authored. Linkreplace cascade mechanism for the daily texture. Mechanism for what repeats; authorship for what doesn't.
@@ -4262,7 +4335,7 @@ The player has to be able to SEE the world. Where every NPC is. What time it is.
 > Right sidebar continuously renders Time (Early Morning, Monday, Clear weather), Quest pin, and per-NPC rows (Stepfather: Kitchen / Arousal / Corruption / Stepbrother: Bathroom / Arousal / Corruption / Stepgrandfather: Bedroom / Arousal / Corruption). Updates every tick. No menu click required to check NPC state.
 
 **Authoring implication:** the sidebar must surface, for every in-scope NPC:
-- Current location (via `getNpcLocation` runtime; sidebar item type pending Doc 64 PRD)
+- Current location (via `getNpcLocation`; surfaced by the `npc_panel` `location` row — shipped)
 - Key stats per the register (arousal + corruption + relation for family/ambient; relation only for peer/service; location-only for antagonist)
 
 Without per-NPC location radar, Lane 3 becomes undiscoverable — the player can't plan "if I shower now and Frank is in the kitchen, will he walk in?" The whole "you were doing X and he happened" texture depends on the player having the situational awareness to choose X knowing it might collide with the NPC.
@@ -4443,7 +4516,7 @@ text = "Tease him"
 show_when_locked = true
 locked_text = "Not yet."
 locked_text_threshold = "Maya's corruption: 15+"
-conditions = { items = [
+conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
 ] }
 nodeId = "tease_bedroom_general"
@@ -4459,7 +4532,7 @@ text = "Have sex with him"
 show_when_locked = true
 locked_text = "Not until I'm sure."
 locked_text_threshold = "Maya's corruption: 35+ AND Frank declared"
-conditions = { items = [
+conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 35 },
   { type = "flag", subject = "player", flag_key = "frank_cracked", operator = "is_true" },
 ] }
@@ -4632,7 +4705,7 @@ The crucial structural rule: **the parent activity must be authentically not-abo
 | Stepbrother Washing Dishes Sex | 3 | Go to the kitchen and wash the dishes | 20% |
 | (+ 2 pregnant variants) | 3 | (variant guides) | 20% |
 
-**Lane 3 is 20–33% chance.** Four parent activities (Study, Play Videogame, Shower→Masturbate, Wash Dishes) host the 7 substitution targets.
+**Lane 3 is 20–33% chance per attempt — but that constant is a floor, not the whole curve.** RTS holds each scene's chance fixed and adds NEW scenes as the arc deepens, so the felt *frequency* of being interrupted climbs across the game ("can't get through a chore without him"). On our engine the equivalent is **stacked, corruption-banded rules on the same host** — the hijack rate rises with the odometer Lane 1 drives (§4.11). Four parent activities (Study, Play Videogame, Shower→Masturbate, Wash Dishes) host the 7 substitution targets.
 
 ### §4.4 — The solo-activity host (Doc 67 §3)
 
@@ -4674,6 +4747,8 @@ Pattern A activities default to in-`exit_block` placement (NPC walk-in = chore n
 
 1/3 chance + Brother's stage check + presence check → NPC scene, else solo. ReturnButton outside the if/else; `<<GetDressed>>` runs on click.
 
+**This is the canonical FUSED unit — read it twice.** One canvas does three jobs at once: it is a *self-care chore* (Maya showers), a *player-corruption feeder* (the solo `else` branch — "You masturbate yourself. Corruption increased!" raises her odometer every time), AND a *Lane 3 hijack host* (the `if` branch — Brother walks in). The mundane routine is the carrier; the feeder is the floor that always pays out; the walk-in is the surprise on top. **Self-care chores — shower, bath, sleep, eat — are first-class hosts, not just "Wash Dishes / Study."** A self-care activity authored as a bare restore (no solo-lewd branch, no substitution) at a co-presence location is the dead-bath anti-pattern: it throws away the single highest-volume content surface in the game (§4.12, §6, `doctrine/04` §10).
+
 ### §4.6 — Multi-NPC dispatcher patterns (Doc 67 §4)
 
 When multiple NPCs could walk in on the same chore, three patterns exist. **The selection rule is fictional, not arbitrary.**
@@ -4708,14 +4783,14 @@ When multiple NPCs could walk in on the same chore, three patterns exist. **The 
 [[canvases.trigger.substitutions]]
 target_canvas_id = "scene_frank_kitchen_dishes"
 chance = 0.33
-conditions = { items = [
+conditions = { version = "1.0", items = [
   { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "stage", operator = "gte", value = 2 },
 ] }
 
 [[canvases.trigger.substitutions]]
 target_canvas_id = "scene_jake_kitchen_dishes"
 chance = 0.33
-conditions = { items = [
+conditions = { version = "1.0", items = [
   { type = "trait", subject = "npc", npc_id = "npc_jake", trait_key = "stage", operator = "gte", value = 2 },
 ] }
 ```
@@ -4834,6 +4909,8 @@ This is why same NPC at same location can fire on different lanes — it depends
 - Lane 3 walk-in: NPC's schedule has a meta-location or wide-scope entry resolving to "house"
 - Lane 2 entry-encounter: NPC's schedule has an entry at the exact canvas location during the same time window
 
+**Honest caveat on "loose" presence.** The engine has exactly one presence relation — the NPC is co-located with the player (`requires_npc` → `getNpcLocation(npc).location === player location`, `v2.py:4691`). "Loose `IsNpcAtHome`" is achieved by scheduling the NPC at a single meta-location ("the house") that resolves to where the player stands when the chore runs. That works — but it **conflicts with per-room modelling**: if "Home" is one location you get the cheap walk-in but lose distinct rooms; if you split rooms you can only fire when the NPC is in the player's *exact* room. The schedule's `activity` label (e.g. `"showering"`) is **display-only — no gate reads it** — so you cannot key a collision off it. The cross-room query RTS uses for peeping (`GetNpcLocation("Dad") == "Bathroom"` from the hallway) and "room is occupied" contention now ship via the **`npc_at_location`** condition type (`is_present`/`is_absent`, optional `npc_id`) — see `doctrine/04` §10.5 and the model spec `redesign_phase_3/25`. (The two-NPC co-presence case is still pending.)
+
 ### §4.9 — Per-day cooldowns (Doc 67 §3.6)
 
 Two mechanisms observed in RTS:
@@ -4855,6 +4932,47 @@ Two mechanisms observed in RTS:
 | **Antagonist/witness** | 0 own + appears as INTERRUPTOR in others' L3 endings | Diana doesn't have her own walk-ins; she's the THREAT in others' Lane 3 endings (the "Diana's floorboard" pattern). |
 
 **Overages flag as drift.** If a service NPC is gaining Lane 3 substitutions, either the brief is wrong OR the additions don't belong.
+
+**The budget counts NPC WALK-INS, not the solo activities themselves.** "Solo activities exist" is **universal** — every time-gated game has a daily loop (sleep, eat, bathe, the player's own self-care feeders, the earning chore), regardless of arc shape. What the table above budgets is *how many NPCs walk in on those chores*, which is correctly shape-gated. So **`Lane 3 = 0` for peer/service/antagonist means "this NPC doesn't barge into private chores," NOT "this game has no daily routine."** The solo hosts still exist and still pay out their feeder floor (§4.12); they just don't host *that* NPC's walk-in. This is the line that keeps the Marge anti-pattern intact (`doctrine/03` §2): charged routine, never filler routine.
+
+### §4.11 — Hijack frequency climbs with corruption (the saturation curve)
+
+RTS's felt experience is "early game the shower does nothing; late game I can't get through a chore without him." That is a *frequency* curve, and the doctrine above doesn't yet teach it — every chance shown is a fixed constant. RTS produces the curve by holding each scene's chance fixed and *adding new scenes* as corruption rises. Our engine produces it more directly: **stack several Pattern-A rules on the same host, one per corruption band, with the chance rising per band.** Make the bands disjoint (`gte`/`lt`) so exactly one rule is eligible at any odometer value — then the effective hijack rate is exactly that band's chance, and below the lowest band the chore is never interrupted (early-game peace).
+
+```toml
+# Same walk-in target on one shower host; rate climbs with the NPC's corruption.
+# Bands are disjoint (gte/lt) so exactly one rule is eligible — no compounding.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "scene_frank_shower_walkin"
+chance           = 0.70
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "corruption", operator = "gte", value = 60 },
+] }
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "scene_frank_shower_walkin"
+chance           = 0.40
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "corruption", operator = "gte", value = 35 },
+  { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "corruption", operator = "lt",  value = 60 },
+] }
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "scene_frank_shower_walkin"
+chance           = 0.15
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "corruption", operator = "gte", value = 15 },
+  { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "corruption", operator = "lt",  value = 35 },
+] }
+```
+
+Order the rules high-band first; `version = "1.0"` is mandatory on every condition block (a version-less block fails open — `doctrine/09` §7.5). The same shape works gated on the *player's* `corruption` when the saturation should track the MC's depravity rather than one NPC's arc. Scene *depth* still scales separately inside each target (Pattern D); this axis is only about how OFTEN the hijack lands.
+
+### §4.12 — The solo host's other half: the player-corruption feeder
+
+The same solo activity that hosts an NPC walk-in (the `if` branch) is also the player's own corruption **feeder** (the solo `else` branch). In RTS's shower canvas the miss path is not nothing — it is "You masturbate yourself. Corruption increased!" The chore pays out a small odometer gain *every time*, hit or miss, and that supply is what makes the NPC seduction floors (the `requirementsMC` player-corruption gates) reachable. A game with rich NPC arcs but no feeder floor on its daily loop starves its own player odometer (the Last Call finding).
+
+So the canonical solo host is **one canvas, three jobs**: the chore (restore/earn), the feeder (solo-lewd `else` raising player `corruption`/`exhibitionism`), and the hijack (NPC `if` branch). Author them together, not as separate systems. The player-side design — which feeders exist, what each is worth, the supply-vs-demand check — lives in the skill's player thread (`references/content-framework.md` §2; `references/lanes.md` Lane 3 footnote); this section is the doctrine that the *host* and the *feeder* are the same unit.
 
 ---
 
@@ -5100,6 +5218,8 @@ This produces the "world fills out around me as I escalate" feeling. The player 
 
 **Even though Lane 2/3 outnumber Lane 1 by canvas count (10/15 of Brother's surfaces vs. 5/15), Lane 1 is the causal driver.** Without Lane 1 escalation, most Lane 2/3 content stays dormant.
 
+**"Consequence" does not mean "low-value."** Lane 3 is the causal *downstream* of Lane 1, but it is the **primary content surface by volume** for cohabitation shapes — Brother delivers 47% of his scenes there (§3.1). Lane 1 is the accelerant the player presses; Lane 3 is where that escalation is *spent*, on the daily loop. Read the dependency as sequencing, not priority: build the daily-routine hosts richly (every shared room, the player's own self-care — §4.5, §4.12), then let Lane 1 control how often they ignite (§4.11). Under-building Lane 3 because it "follows" is the most common way a game built on this doctrine ends up feeling dead — the world the player escalated into has nothing in it.
+
 The inverse design — "Lane 2/3 lead, Lane 1 follows" — produces a passive game where things keep happening to Maya regardless of her choices. RTS deliberately doesn't do this.
 
 **Cold-start on-ramp (Doc 72 R4).** Because Lane 1 leads, every arc must be *enterable* from a cold start — corruption 0, no flags set — through ordinary presence. The first beat of an arc needs only co-presence (Maya in the room with the NPC, who is there per schedule), and that co-presence is delivered by the NPC's Lane 1 hub at that location, which renders its base unconditionally (the presence floor, §2.8 / D72-R6); escalation conditions layer on *after* that first beat. Never gate an arc's entry on a stat that can only be raised by content downstream of that same arc — that circular gate (the **backwards on-ramp**, §8.12) leaves the cold-start player unable to begin. Location-entry gating is still fine where *entering is itself the first contact* (the diner behind "get hired" — walking in to ask for the job is the first interaction); the on-ramp rule targets people already in the player's everyday space (housemates, neighbours, coworkers-on-shift).
@@ -5115,6 +5235,8 @@ When one threshold crosses, MULTIPLE gates clear simultaneously:
 | Stage 4 (post-sleepover) | Bedroom hub unlocks | Bedroom door-open ambient | Wash-dishes dispatcher rolls Frank-behind-you at 33% | Diana confrontation capstone unlocks |
 
 **One stat threshold = multiple gates clear = "world feels alive."** Player doesn't think "the kitchen menu changed"; they think "Frank is suddenly everywhere." That perception is the doctrine producing player-felt effects.
+
+**The chances in the table above are starting floors, not constants.** Notice they sit flat (33% / 25% / 33%) — that is the gap to close. A crossing should raise not just *which* walk-ins are eligible but *how often* they fire: the same host carries corruption-banded rules whose rate climbs as the arc deepens (§4.11). "Frank is suddenly everywhere" lands fully only when the shower is interrupted occasionally at stage 2 and most nights at stage 4.
 
 ---
 
@@ -5135,6 +5257,8 @@ Within each lane, scene intensity scales with stat tier (Pattern D mechanism —
 - **Mix across all three lanes, all three tiers → alive**
 
 Lane 4 capstones sit OUTSIDE the grid — they're the once-only milestones that gate the stat tier crossings.
+
+**A fourth axis the grid doesn't show: hijack frequency.** The grid scales scene *depth* (cascade) with tier. It does not show that the *rate* at which Lane 3 walk-ins fire should also climb with the odometer — early arc the shower is almost never interrupted; late arc it's interrupted most visits. Author that with corruption-banded rules on the host (§4.11). Depth and frequency are independent axes: a late-arc walk-in is both deeper AND more frequent.
 
 ---
 
@@ -5350,6 +5474,8 @@ The reference table for what each shape's canvas distribution should LOOK like. 
 
 **The L1 cells above count *escalation* rungs, not hubs.** The number of Lane 1 **hubs** is set separately by presence: one hub per distinct `[[npcs.schedules]]` row (location × window) — D72-R6, `doctrine/04` §6.1. An NPC scheduled across 5 windows has 5 hubs even if the escalation budget is small; the extra hubs are *light* (base + talk + leave, exposure-tier-capped per D72-R7), not extra escalation. "Empty cells are honest" governs L2/L3 *escalation* surfaces — it does NOT excuse a missing presence hub: even service/antagonist NPCs get a light hub at each scheduled location. Presence floor (a hub) and escalation register (the rungs on it) are independent axes.
 
+**A third independent axis: the player's own daily loop.** The `L3` cells count *NPC walk-ins*, which are correctly shape-gated (a peer doesn't barge into private chores). They do NOT count the player's solo daily activities — sleep, eat, bathe, self-care feeders, the earning chore — which exist in **every** game regardless of shape (`doctrine/02` §4.10, §4.12). A shape with `L3 = 0` has no NPC walk-ins; it still has a full daily routine and a feeder floor. Do not read "0 walk-ins" as "no daily loop" — that misread is how games ship dead kitchens and solo-forever baths.
+
 ---
 
 ## §3 — Family/ambient (Frank — the dense reference)
@@ -5483,7 +5609,7 @@ Lane 1/2 RTS-flat; capstones Tier-3 earned. Per-arc vocab ceiling: open question
 
 ### §5.5 — Doc 58 design brief (Ryan)
 
-`28th_april_TLS_Phase2_Redesign/58_Ryan_Design_Brief.md`. Per-lane budget L1 2–3 + L2 1–2 + **L3 = 0** + capstones 3–4. Slice scope = Stage 2 partner. Phase 2+ = Stage 3+ consummation.
+`28th_april_TLS_Phase2_Redesign/58_Ryan_Design_Brief.md`. Per-lane budget L1 1–3 (Doc 58 §3: T1 1 + T2 0–1 + T3 0–1) + L2 1–2 + **L3 = 0** + capstones 3–4. Slice scope = Stage 2 partner. Phase 2+ = Stage 3+ consummation.
 
 ---
 
@@ -5823,7 +5949,7 @@ Diana's footstep stops the cascade — external interruption. T1 of the same can
 **Why this rule exists:** P10 — without per-NPC location radar, Lane 3 becomes undiscoverable. The whole "you're doing X and he happened" texture depends on the player having the situational awareness to choose X knowing it might collide with him. `getNpcLocation` (`v2.py:2923`) primitive already exists; the sidebar authoring just calls it.
 
 **How to apply:**
-- Add per-NPC `sidebar_items` to the slice. Each item calls `getNpcLocation(npcId)` (sidebar primitive type pending Doc 64 PRD).
+- Add per-NPC `sidebar_items` (`npc_panel`) to the slice. The `location` row calls `getNpcLocation(npcId)` — shipped 2026-06-06.
 - Where the arc's register includes NPC stats the player needs to plan against (Frank's arousal, etc.), add per-NPC stat readouts alongside the location.
 - Per-arc-shape defaults are in `doctrine/09_trait_catalog.md` §8:
   - Family/ambient: location + arousal + corruption + relation
@@ -6409,9 +6535,12 @@ For each anti-pattern, the rule it violates.
 ## §10 — The Day System (day-cycle + offscreen presence)
 
 Schedules only matter if the player can *traverse the day* to reach the windows. RTS's schedule is a
-**content-gate + player-router + fantasy-framer**, not world-sim (researched 2026-06-03): every
+**content-gate + player-router + fantasy-framer**, not world-sim *ambience* (researched 2026-06-03): every
 (location × time) slot is a window the player plans around; "offscreen" is deliberate exclusion;
-scarcity is always **navigable** ("be there at the right time"), never impossible. Three rules.
+scarcity is always **navigable** ("be there at the right time"), never impossible. But "not world-sim"
+cuts only against *padding a calendar for realism* — the NPC's **resolved location is first-class state
+the player's routines roll against**. "Is Frank home right now" is the tripwire a shower-host fires on
+(`doctrine/02` §4.5, §4.8); presence is a queryable fact, not décor. Three rules.
 
 ### §10.1 — Day-advance precondition (a sleep/rest activity is mandatory for time-gated games)
 The engine clock is continuous (`advanceTime` rolls minutes→hours→days; midnight auto-advances the
@@ -6446,6 +6575,30 @@ it is *either* a reachable window (gets a light hub, D72-R6), *or* an **offscree
 unscheduled. **Filler blocks are the Marge anti-pattern** — don't pad a calendar for "realism."
 Offscreen is the partner of §10.1: the NPC is "away" during the very phases the player is elsewhere.
 - **D67-R2** Pattern C `pre_substitution_effects` — ✅ shipped Doc 69 Item 2 (2026-05-27)
+
+### §10.5 — The daily loop is a content host, not just a clock (self-care = hijack host)
+The day cycle exists to move the player to content — but the player's OWN repeated activities inside it
+(sleep, shower, bath, eat, the earning chore) are themselves the highest-volume content surface, not
+inert routers. **Default rule: a self-care/chore canvas at a location an NPC shares carries a Lane 3
+dispatcher** (`doctrine/02` §4.4–§4.12) — the chore is the carrier, the solo-lewd `else` is the
+player-corruption feeder, the NPC `if` branch is the walk-in. The bare-restore shape (a sleep/shower
+canvas with no feeder branch and no substitution) is the **explicit exception**, correct only where no
+NPC is scheduled to the player's location during that window (e.g. the player lives alone). Authoring
+the day-advance sleep as a pure router and stopping there is how a game ends up with a lived-in-looking
+house whose rooms are all dead (the dead-bath finding). For cohabitation, the core housemates' **home
+block should be a reachable, room-resolved presence** the routine can collide with — not only an
+offscreen "away" label (§10.4 still holds for peripheral NPCs and genuine away/work blocks; the
+cohabitation exception is `doctrine/10` §5.5).
+
+**Cross-room presence — the occupancy predicate (SHIPPED 2026-06-17).** The walk-in-on-the-player path above
+always worked (co-location `requires_npc`). The *inverse* — the player peeping on an NPC in another room, and
+shared-resource **occupancy** ("the bathroom is busy") — now ships via the **`npc_at_location`** condition
+type (`operator = "is_present" | "is_absent"`, optional `npc_id`; omit `npc_id` to ask room-occupied/empty),
+added to the canonical evaluator `triggerConditionsSatisfied`, so it works in canvas/choice/substitution AND
+`entry_conditions`. Peep, occupied-bathroom, and caught are authorable now — the full model (one combination
+table) is `redesign_phase_3/25`; **visibility (see/peep/hear) is authoring, not engine.** Still pending: the
+**two-NPC co-presence** case (config 2 — render two NPCs in one observed scene), which needs the separate
+multi-NPC rendering work.
 
 ---
 
@@ -7304,7 +7457,7 @@ The brief follows the same 10-section template but with:
 
 - **§3 ladder:** Stage 0 (meet) → Stage 1 (notice) → Stage 2 (partner) → Stage 3+ (consummation, Phase 2+) → Stage 4 (relationship). Peer arcs don't use the universal 6-tier corruption ladder — they use relation-driven stages.
 - **§4 pretexts:** date contexts, shared activities, relation-build moments. Not sexual-tier shapes.
-- **§5 lanes:** L1 2–3 + L2 1–2 + **L3 = 0** + capstones 3–4. Peer doesn't interrupt private chores.
+- **§5 lanes:** L1 1–3 + L2 1–2 + **L3 = 0** + capstones 3–4. Peer doesn't interrupt private chores.
 - **§6 capstones:** Type A first-date + Type A second-date + Type B partner-commit (Phase 2+).
 - **§7 anti-patterns:** "Frank-cloning" (don't apply family/ambient saturation), "Lane 3 substitutions on a peer" (Doc 56 R3 violation).
 
@@ -8435,7 +8588,7 @@ intelligence = 0
 **Default at game start:** 0
 **Decay:** None (per Doc 40 — arousal is always-climbing fuel meter; no daily decay)
 **Sidebar render:** `trait_bar` with optional bands
-**Bands (optional):** Cold (0–2) / Warm (3–5) / Hot (6–8) / Burning (9–10)
+**Bands (optional):** Calm (0) / Warm (1–2) / Aroused (3–5) / Hot (6–7) / Burning (8–10) — RTS-faithful (RTS derives the band as `level = arousal===0 ? 0 : min(ceil(arousal/maxArousal*4), 4)`).
 
 **What it tracks:** Maya's short-term sexual readiness — the per-attempt fuel meter for masturbation + lewd activities. Climbs from beats + days; resets to 0 on climax. Distinct from corruption (long-term progression).
 
@@ -8552,6 +8705,8 @@ intelligence = 0
 - Shower activity is the restore loop
 - Some NPC reactions at Filthy band (e.g., "you smell — go shower")
 
+**What it triggers (the routine, not a gate):** the point of hygiene is the *routine it drives*, not a wall it builds. Low hygiene should *pull* the player to the shower (a Filthy-band nudge or a low-hygiene auto-prompt) — and that shower is a **Lane 3 hijack host** (`doctrine/02` §4.5), so the decay loop is what *delivers the player into* catchable self-care. Likewise a self-care act run at high `arousal`/`corruption` can substitute a player-lewd feeder beat (the shower→masturbate fusion, §4.12). Hygiene earns its keep by being a body-state that *moves the player through the routine the world hijacks* — fully compatible with the soft-modifier rule below: it triggers a routine, it never hard-gates an arc.
+
 **Don't use it for:**
 - Hard-gating ALL NPC interactions (soft modifier; don't block entire arcs on hygiene)
 - Long-term progression (use `corruption`)
@@ -8613,11 +8768,7 @@ intelligence = 0
 ### §4.1 — `arousal` (NPC)
 
 **Tier:** 1 (canonical / required, per-NPC)
-**Range:**
-- **Family/ambient + slow-burn family NPCs:** 0–3 integer (per Doc 40 — RTS-faithful for family register)
-- **Peer/dating + career NPCs:** 0–10 integer (matches player range)
-- **Service NPCs:** 0–3 (workplace register stays bounded)
-- **Antagonist/witness:** N/A (antagonists don't track arousal — use awareness or hidden state instead)
+**Range:** 0–3 integer (per Doc 40 — RTS-faithful). NPC arousal is the willingness axis for **family/ambient, slow-burn, and escalation** arcs ONLY. **Peer/dating, service, and antagonist NPCs do NOT track arousal** — peer/service are relation-spined; antagonists use awareness/hidden state (per `doctrine/03` + the spine table in the skill's `trait-design.md`). RTS itself only tracks arousal on its family NPCs (Dad/Brother/Grandpa, 0–3); the earlier "peer 0–10 / service 0–3" ranges were a corpus over-generalization (an arousal meter on a relation-spined NPC is a dead meter) and are removed.
 
 **Default at game start:** 0
 **Decay:** None (no-decay per Doc 40 — both player + NPC arousal are always-climbing meters)
@@ -8775,6 +8926,16 @@ intelligence = 0
 > hidden = true   # hide-only entry; `label` may be omitted
 > ```
 > The engine emits these as `setup.hiddenTraits` and skips them via `<<continue>>` in every trait-dump loop, in BOTH dev and non-dev builds. **Limitation:** keyed by trait NAME only (not namespaced) — a hidden key hides for the player AND any NPC carrying a core_trait of that name (e.g. an antagonist's `awareness`, which is exactly the intent). See `schema/02` `[[traits.labels]]` and the `stages/02` §11 checklist item.
+
+> **🔁 SAME MECHANISM DE-DUPS A *VISIBLE* BANDED STAT.** `hidden = true` is not only for internal traits.
+> The playerTraits dump shows EVERY non-hidden `core_trait` as a number, so if you also BAND a stat in
+> `[[sidebar_items]]` (`trait_words`/`trait_bar`), that stat renders **twice** — once as the band word,
+> once as a raw number in the dump. Add a `hidden = true` label for the banded trait so it shows **once**
+> (as the band). **Safe:** the band renderers `trait_words` (`v2.py:14853`) and `trait_bar` (`v2.py:14744`)
+> read the trait directly and do NOT consult `hiddenTraits`, so the band survives — only the auto dump +
+> Stats page drop the number. The Inheritance hides `corruption` + `arousal` (both banded) for exactly
+> this. The full encode-by-type + de-dup rule (which stat → which type, and don't over-band) lives in
+> `schema/02 §9.0`.
 
 **When to use it:**
 - Lane 1 hub canvas selection (multiple canvases per location; engine picks by stage via `selectAutoFireCanvasForLocation`)
@@ -9170,6 +9331,13 @@ items = [
 ]
 ```
 
+> **⚠️ `version = "1.0"` is MANDATORY on the conditions block — omit it and the whole gate FAILS OPEN.**
+> `triggerConditionsSatisfied` (`v2.py:3312`) returns `true` immediately for any conditions object whose
+> `version !== '1.0'`, so the `items` are never evaluated and the gate always passes. No build error
+> fires. This applies to every condition block (trigger, per-choice, group `props.conditions`,
+> substitution, `entry_conditions`, stage-helper). The trap is most common on **per-choice** conditions
+> written inline as `conditions = { items = [...] }` — always write `{ version = "1.0", items = [...] }`.
+
 **Predicate field names:**
 - `type` — `"trait"`, `"flag"`, `"modifier"`, `"days_since_flag"`, `"clothing_slot"`, `"clothing_item"`, `"pass"`, `"item"`, `"stage"`, `"quest"`, `"worn_beauty"`, `"worn_corruption"`, `"worn_type"`, `"corruption_level"`
 - `subject` — `"player"` or `"npc"` (predicate uses `subject`; effects use `targetType`)
@@ -9216,6 +9384,12 @@ Per LO Q6: each NPC's design brief (R7 per Doc 56) declares which traits surface
 | **ALL arc shapes** | `stage` NEVER surfaces | Per LO Q1 + §9 — stage is internal-only across all NPCs. |
 
 ### Authoring rule (R7 brief addition)
+
+**Surfacing mechanism (SHIPPED 2026-06-06):** these surface via the **`npc_panel`** sidebar item
+(`rows = ["arousal","corruption","location","next"]`; location from the NPC schedule, same source as the
+Schedule page) plus `trait_owner="npc"` trait items for anything not in those three rows (e.g.
+`relation` via an npc `trait_bar`). This was the old Doc-64 gap — it's now real, so the table above is
+buildable, not aspirational. `stage`/`awareness` still NEVER surface.
 
 When writing an NPC's design brief, declare a "Sidebar surfaces" line:
 
@@ -9536,6 +9710,15 @@ NPC is accounted-for + the Schedule page reads "at home", and you've kept a comp
 *drop the row* if you don't even want the label. **Never** leave an away block pointing at a *reachable*
 location with no hub — that's dead presence (`doctrine/02` §8.11). Offscreen is the partner of the day
 cycle (`doctrine/04` §10): the NPC is "away" during the very phases the player is elsewhere.
+
+**Cohabitation exception — don't offscreen the home you share.** Offscreen is right for an away/work
+block the player genuinely can't follow. It is **wrong** for the home/sleep block of a *core housemate
+in a cohabitation game*, where "is he home now" is the tripwire the player's own routines roll against
+(`doctrine/04` §10.5). For those 1–3 core NPCs, make the home a **reachable, room-resolved** presence (a
+light hub for each shared room they pass through) instead of a single offscreen "away" label — that is
+what lets the shower / kitchen / hallway become walk-in hosts. Peripheral NPCs still go offscreen; this
+exception is scoped to the people the player shares the house with, so it does not reopen the Marge
+padding door.
 
 ---
 
@@ -11279,7 +11462,7 @@ text = "Suck him"
 show_when_locked = true
 locked_text = "I need to know him better first"
 locked_text_threshold = "Maya's corruption: 35+"
-conditions = { items = [
+conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 35 },
 ] }
 nodeId = "loop_franks_bedroom_finisher"
@@ -11551,7 +11734,7 @@ Per Doc 49 + `doctrine/09_trait_catalog.md` §3.3 + §3.4:
 ### §4.2 — Progression-state — banded or hidden
 
 - **`corruption`** — render as `trait_words` (banded: Pure / Lewd / Slutty / Whore). Raw 0-100 number HIDDEN.
-- **`arousal`** — render as `trait_bar` (0-10 visual meter) with optional bands (Cold / Warm / Hot / Burning).
+- **`arousal`** — render as `trait_bar` (0-10 visual meter) with optional bands (Calm / Warm / Aroused / Hot / Burning — RTS-faithful: Calm 0 / Warm 1–2 / Aroused 3–5 / Hot 6–7 / Burning 8–10).
 - **`money`** — render as numeric ("$80") or `trait_words` if banded.
 - **`exhibitionism` / `fitness` / `intelligence` / `beauty`** — Tier 2 traits. Render only when the game's arc/setting uses them. `trait_bar` 0-100 OR hidden.
 
@@ -11596,40 +11779,54 @@ Per `doctrine/01_rts_principles.md` §3 audit, TLS sidebar currently has:
 
 `setup.getNpcLocation(npcId)` at `v2.py:2923` already computes NPC location from the NPC's `[[npcs.schedules]]` block. The engine surface is ready; sidebar authoring just needs to call it.
 
-**The blocker is the sidebar item type:** TLS doesn't yet have a `"npc_location"` sidebar item type. Doc 64 PRD specs this.
+**SHIPPED (2026-06-06):** the `npc_panel` sidebar item type does exactly this — it calls
+`setup.getNpcLocation` for the location row, so the per-NPC radar is now real.
 
 ---
 
-## §6 — Doc 64 PRD (Sidebar NPC Location Radar — held)
+## §6 — `npc_panel` sidebar card (SHIPPED — was Doc 64 PRD)
 
-Doc 64 PRD specs the sidebar item type for per-NPC location radar. Currently held per Doc 66 §10 (the prompts_v2/ rewrite pivot).
+The per-NPC HUD radar shipped as the `npc_panel` sidebar item (renderer in `v2.py`/`v1.py`
+`sidebarItems` widget; validation in `template_import.py`). It replaces the old PRD's proposed
+`npc_location` type — **author `npc_panel`, not `npc_location`**.
 
-### §6.1 — Proposed schema
+### §6.1 — Schema
 
 ```toml
 [[sidebar_items]]
-type = "npc_location"
+type   = "npc_panel"
 npc_id = "npc_frank"
-label = "Frank"
-# Optional secondary stat displays per arc-shape default
-stats = ["arousal", "corruption", "relation"]
+label  = "Frank"                                  # optional → NPC name
+rows   = ["arousal", "corruption", "location", "next"]    # ordered subset
+# optional: arousal_bands, corruption_max_value/_label, away_label, show_when
 ```
 
-The item renders:
+Renders an RTS House-card:
 ```
-Frank — Kitchen
-  Arousal: 🔥🔥  Corruption: 12  Relation: 8
+Frank
+  🔥 Arousal:    🔥🔥
+  🫦 Corruption:  12        (or "MAX" at/above corruption_max_value)
+  📍 Location:    Kitchen   (from setup.getNpcLocation — same source as the Schedule page)
+  ── next (mirrors the Quests goal block) ──
+  🎯 To advance:           (while climbing)
+  ◯ My corruption — 12/20
+  …or when ready…
+  🔓 Ready
+  📍 Kitchen                (the ready_canvas's location)
+  🕒 every day 22:00–02:00  (the ready_canvas's schedule)
 ```
+arousal → band glyph (default 0/1/2/3 → ❄️/🔥/🔥🔥/🔥🔥🔥); location is null-safe (`away_label`,
+default "Away"); respects `hidden=true` traits. The **`next`** row reuses `setup.renderQuestsGoalBlock`,
+so it shows the Quests-page goal block in full — `🎯 To advance` + ◯ live progress while climbing,
+`🔓 Ready / 📍 / 🕒` when ready, `✓ Arc complete` when terminal — **identical to the Quests page**, minus
+the flavor/tip prose.
 
-### §6.2 — When Doc 64 unlocks authoring
+### §6.2 — Authoring discipline
 
-Per Doc 65 §3 row: Doc 64 PRD scoped when:
-- Phase 2 polish prioritized OR
-- Lane 3 discoverability becomes a blocker in playtest
-
-For prompts_v2/ generated games: every game's `[[sidebar_items]]` block should emit `npc_location` items for in-scope NPCs from day 1. When Doc 64 ships, the data is already authored.
-
-**Authoring discipline:** assume Doc 64 ships. Author `npc_location` sidebar items in the brief's lane map. The validator will tolerate the type even before it's parsed.
+Emit `npc_panel` items for the NPCs whose state the player must read to plan (per the arc-shape
+table in §3.3 — family/ambient + slow-burn). Surface only the rows that are live for that NPC
+(e.g. a slow-burn NPC whose corruption stays 0 → `rows = ["arousal","location"]`). `stage` and
+antagonist `awareness` still NEVER surface.
 
 ---
 
@@ -11652,9 +11849,9 @@ For prompts_v2/ generated games: every game's `[[sidebar_items]]` block should e
 - **TLS per-arc-shape stat visibility.** RTS surfaces all stats for all family NPCs flat; TLS differentiates per arc shape per Doc 68 §8.
 - **TLS uses 24-hour clock** in slice. RTS uses 6-band model (EM/M/A/E/N/LN). Doc 30 §4.3 open question: keep 24-hour or migrate to bands.
 
-### §7.3 — What TLS SHOULD borrow when Doc 64 ships
+### §7.3 — Per-NPC radar (SHIPPED via `npc_panel`)
 
-- **Per-NPC location radar** — load-bearing per P10. Without it Lane 3 becomes undiscoverable.
+- **Per-NPC location radar** — load-bearing per P10; now available as the `npc_panel` `location` row.
 - **NPC arousal display per arc-shape default** — family/ambient (Frank) gets arousal surfaced; service (Marge) doesn't.
 - **Tick-frequency updates** — every passage transition, not just hourly.
 
@@ -11679,17 +11876,16 @@ For each new TLS slice / prompts_v2 generated game, the sidebar block should dec
 - [ ] `trait_bar` for intelligence (if school/study mechanic exists)
 - [ ] `trait_bar` for beauty (typically hidden — derived from worn_beauty)
 
-### §8.3 — Per-NPC radar (when Doc 64 ships — author against the future shape)
+### §8.3 — Per-NPC radar — `npc_panel` (SHIPPED)
 
-For each in-scope NPC:
+For each in-scope NPC whose state the player must read to plan:
 
-- [ ] `npc_location` item with `npc_id`
-- [ ] `stats` array per arc-shape default:
-  - Family/ambient: `["arousal", "corruption", "relation"]`
-  - Slow-burn family: `["arousal", "relation"]`
-  - Peer/dating: `["relation"]`
-  - Service: `["relation"]`
-  - Antagonist: `[]` (location only)
+- [ ] `npc_panel` item with `npc_id`
+- [ ] `rows` per arc-shape (subset of arousal/corruption/location/next):
+  - Family/ambient: `["arousal", "corruption", "location", "next"]`
+  - Slow-burn family: `["arousal", "location"]`
+  - Peer/dating + service: `["location"]` (+ relation via a `trait_owner="npc"` trait_bar if wanted)
+  - Antagonist: `["location"]` (awareness NEVER surfaces)
 
 ### §8.4 — DO NOT surface
 
@@ -14337,45 +14533,50 @@ bands = [
 # (if flash/cam arc exists)
 ```
 
-### §8.3 — Per-NPC radar (Doc 64 PRD pending — author against future shape)
+### §8.3 — Per-NPC radar — `npc_panel` (SHIPPED 2026-06-06)
 
-When Doc 64 ships, `npc_location` sidebar item type becomes available:
+Surface NPC state with the `npc_panel` card. `rows` = ordered subset of `["arousal","corruption","location","next"]`;
+the **location** row reads `setup.getNpcLocation` (the NPC's `[[npcs.schedules]]`, same source as the
+Schedule page). The **`next`** row mirrors the Quests-page goal block (reuses `renderQuestsGoalBlock`): `🎯 To advance`
++ live progress while climbing, `🔓 Ready / 📍 / 🕒` when ready, `✓ Arc complete` when terminal — no
+flavor/tip text. There is **no `relation` row** in
+`npc_panel` — for relation-spined arcs surface relation via a `trait_owner="npc"` trait item.
 
 ```toml
-# Family/ambient default
+# Family/ambient — wanting + depravity + where he is + next milestone (when ready)
 [[sidebar_items]]
-type = "npc_location"
+type   = "npc_panel"
 npc_id = "npc_frank"
-label = "Frank"
-stats = ["arousal", "corruption", "relation"]
+label  = "Frank"
+rows   = ["arousal", "corruption", "location", "next"]
 
-# Slow-burn family default
+# Slow-burn family — arousal + location (corruption stays low by design)
 [[sidebar_items]]
-type = "npc_location"
+type   = "npc_panel"
 npc_id = "npc_jake"
-label = "Jake"
-stats = ["arousal", "relation"]
+label  = "Jake"
+rows   = ["arousal", "location"]
 
-# Peer/dating default
+# Peer/dating + service — relation-spined: npc_panel shows location; relation via an npc trait_bar
 [[sidebar_items]]
-type = "npc_location"
+type   = "npc_panel"
 npc_id = "npc_ryan"
-label = "Ryan"
-stats = ["relation"]
-
-# Service default
+label  = "Ryan"
+rows   = ["location"]
 [[sidebar_items]]
-type = "npc_location"
-npc_id = "npc_marge"
-label = "Marge"
-stats = ["relation"]
+type        = "trait_bar"
+trait_owner = "npc"
+npc_id      = "npc_ryan"
+trait       = "relation"
+label       = "Ryan"
+max         = 100
 
-# Antagonist — LOCATION ONLY (no stats)
+# Antagonist — location only (awareness NEVER surfaces)
 [[sidebar_items]]
-type = "npc_location"
+type   = "npc_panel"
 npc_id = "npc_diana"
-label = "Diana"
-stats = []
+label  = "Diana"
+rows   = ["location"]
 ```
 
 ### §8.4 — DO NOT surface
@@ -14383,7 +14584,8 @@ stats = []
 - **No `<slug>_stage` sidebar items** for ANY NPC (per `doctrine/09_trait_catalog.md` §9)
 - **No `awareness` sidebar item** for antagonist NPCs (per Doc 30 §6 + `doctrine/09_trait_catalog.md` §8)
 - **No money sidebar item with banded poverty/wealth** unless game design specifically calls for banded display
-- **No per-NPC `trait_bar` / `trait_words`** (e.g. `[[sidebar_items]] type="trait_bar" npc_id="npc_x" trait="relation"`). UNSUPPORTED: the engine resolves `trait` against `player.core_traits` regardless of `npc_id`, so it HARD-FAILS ("trait 'relation' not found in player.core_traits") or silently shows the PLAYER's stat. NPC progression (arousal/relation/stage) belongs on the **Quests page** (V2 cards). The only per-NPC sidebar item is the Doc-64 `npc_location` type above — and it is PENDING, so do not emit it yet. (Late Shifts build failed on four npc-scoped `trait_bar`s.)
+- *(Per-NPC sidebar items ARE supported now — see §8.3. Use `npc_panel`, or `trait_owner="npc"` trait
+  items for a single NPC trait. `stage`/`awareness` are the only hard "never surface" cases.)*
 
 ---
 
@@ -14903,7 +15105,7 @@ Run this BEFORE delivering the TOML.
 - [ ] Maya state: corruption (banded) + arousal (bar) + energy (status text) + hygiene (status text) all present
 - [ ] No `<slug>_stage` sidebar items for ANY NPC
 - [ ] No `awareness` sidebar item for antagonist NPCs
-- [ ] No per-NPC `trait_bar`/`trait_words` (UNSUPPORTED — §8.4)
+- [ ] NPC state surfaced via `npc_panel` / `trait_owner="npc"` items where useful (§8.3); `stage`/`awareness` never surfaced
 - [ ] Body-state surfaces (energy + hygiene visible)
 
 ### Voice + content

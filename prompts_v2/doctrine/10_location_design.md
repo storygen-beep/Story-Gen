@@ -138,6 +138,15 @@ NPC is accounted-for + the Schedule page reads "at home", and you've kept a comp
 location with no hub — that's dead presence (`doctrine/02` §8.11). Offscreen is the partner of the day
 cycle (`doctrine/04` §10): the NPC is "away" during the very phases the player is elsewhere.
 
+**Cohabitation exception — don't offscreen the home you share.** Offscreen is right for an away/work
+block the player genuinely can't follow. It is **wrong** for the home/sleep block of a *core housemate
+in a cohabitation game*, where "is he home now" is the tripwire the player's own routines roll against
+(`doctrine/04` §10.5). For those 1–3 core NPCs, make the home a **reachable, room-resolved** presence (a
+light hub for each shared room they pass through) instead of a single offscreen "away" label — that is
+what lets the shower / kitchen / hallway become walk-in hosts. Peripheral NPCs still go offscreen; this
+exception is scoped to the people the player shares the house with, so it does not reopen the Marge
+padding door.
+
 ---
 
 ## §6 — Per-arc-shape location footprint (Late Shifts bug B6)

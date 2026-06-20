@@ -1,0 +1,883 @@
+# ═══════════════════════════════════════════════════════════════
+# PHASE 4: STORY ARC — Narrative Journal & Progression System
+# ═══════════════════════════════════════════════════════════════
+# Source: GAME_DESIGN.md Sections 6, 7, 8
+# Game: Under One Roof
+# ═══════════════════════════════════════════════════════════════
+
+[story_arc]
+version = "1.0"
+
+# ═══════════════════════════════════════════════════════════════
+# CHAPTERS (7 chapters matching the 4-act structure)
+# ═══════════════════════════════════════════════════════════════
+
+[[story_arc.chapters]]
+id = "chapter_arrival"
+name = "Arrival"
+mood = "neutral"
+description = "One suitcase, three strangers, fifty-six days."
+order = 1
+
+[[story_arc.chapters]]
+id = "chapter_settling"
+name = "Settling In"
+mood = "hopeful"
+description = "Learning the house, the men, the routines. The math that doesn't work."
+order = 2
+
+[[story_arc.chapters]]
+id = "chapter_awakening"
+name = "Awakening"
+mood = "tense"
+description = "Bodies noticed. Lines tested. Something shifting under the surface."
+order = 3
+
+[[story_arc.chapters]]
+id = "chapter_deepening"
+name = "Deepening"
+mood = "romantic"
+description = "First flirt. First kiss. The point of no return, passed without noticing."
+order = 4
+
+[[story_arc.chapters]]
+id = "chapter_crisis"
+name = "Crisis"
+mood = "tense"
+description = "Drawings discovered. Brothers at war. The house fractures."
+order = 5
+
+[[story_arc.chapters]]
+id = "chapter_convergence"
+name = "Convergence"
+mood = "passionate"
+description = "Mom's coming home. Every moment is a last moment. Choose."
+order = 6
+
+[[story_arc.chapters]]
+id = "chapter_resolution"
+name = "Resolution"
+mood = "peaceful"
+description = "Mom's coming home. The story continues."
+order = 7
+
+# ═══════════════════════════════════════════════════════════════
+# GROUPS (milestone gates — must complete X of Y before proceeding)
+# ═══════════════════════════════════════════════════════════════
+
+[[story_arc.groups]]
+id = "group_settling_in"
+name = "Getting Settled"
+description = "Lily learns the house and its people. Must complete at least 3 settling events."
+required_count = 3
+
+[[story_arc.groups]]
+id = "group_first_connections"
+name = "First Connections"
+description = "Building initial relationships. At least 2 NPC connections made."
+required_count = 2
+
+[[story_arc.groups]]
+id = "group_crisis_events"
+name = "Crisis Points"
+description = "The household fractures. At least 2 crisis events must fire."
+required_count = 2
+
+[[story_arc.groups]]
+id = "group_npc_discoveries"
+name = "NPC Discoveries"
+description = "Learning what each NPC hides. At least 2 discoveries."
+required_count = 2
+
+
+# ═══════════════════════════════════════════════════════════════
+# STORY NODES — Act 1: Settling
+# ═══════════════════════════════════════════════════════════════
+
+[[story_arc.nodes]]
+id = "node_arrival"
+name = "One Suitcase"
+chapter = "chapter_arrival"
+linked_canvas = "opening_arrival"
+linked_flag = "game_started"
+journal_entry = "I arrived at the Harmon property with one suitcase and fifty-six days ahead of me. Frank shook my hand. Ryan grinned like I was a dare. Jake smiled at his shoes."
+is_milestone = true
+
+[[story_arc.nodes]]
+id = "node_unpacking"
+name = "Unpacking"
+chapter = "chapter_arrival"
+linked_canvas = "story_unpacking"
+linked_flag = "unpacked"
+requires_nodes = ["node_arrival"]
+journal_entry = "Small room. Thin walls. Through one wall — Jake's pencil. Through the floor — Frank's dishes. The mattress smells like someone else's laundry detergent. Home for fifty-six days."
+
+[[story_arc.nodes]]
+id = "node_first_morning"
+name = "The Bathroom Door"
+chapter = "chapter_settling"
+linked_canvas = "story_first_morning"
+linked_flag = "first_morning"
+requires_nodes = ["node_unpacking"]
+group = "group_settling_in"
+journal_entry = "The bathroom lock doesn't work. Jake was inside. He didn't stammer or blush. 'Knock.' One word. Like I'm furniture. Like I don't exist."
+npc = "npc_jake"
+
+[[story_arc.nodes]]
+id = "node_bus_problem"
+name = "The Bus or the Truck"
+chapter = "chapter_settling"
+linked_canvas = "story_bus_problem"
+linked_flag = "bus_problem_discovered"
+requires_nodes = ["node_first_morning"]
+group = "group_settling_in"
+journal_entry = "Getting to town: $2 bus ride, forty minutes. Or Ryan's truck, fifteen minutes, free. Nothing is free."
+npc = "npc_ryan"
+
+[[story_arc.nodes]]
+id = "node_moms_call"
+name = "The Transfer's Delayed"
+chapter = "chapter_settling"
+linked_canvas = "story_moms_call"
+linked_flag = "mom_called"
+requires_nodes = ["node_bus_problem"]
+group = "group_settling_in"
+journal_entry = "Mom called. Transfer delayed. She sounded tired. I told her I was fine. I'm not fine."
+
+[[story_arc.nodes]]
+id = "node_the_math"
+name = "Thirteen Dollars"
+chapter = "chapter_settling"
+linked_canvas = "story_the_math"
+linked_flag = "money_crisis_realized"
+requires_nodes = ["node_moms_call"]
+group = "group_settling_in"
+journal_entry = "$400. Monthly expenses: $385. Surplus: $13. For ten weeks. Frank offered cleaning work — $20 per session. It's not enough. But it's something."
+is_milestone = true
+npc = "npc_frank"
+
+[[story_arc.nodes]]
+id = "node_first_week"
+name = "Routines"
+chapter = "chapter_settling"
+linked_canvas = "story_first_week"
+linked_flag = "first_week_complete"
+requires_nodes = ["node_the_math"]
+group = "group_settling_in"
+journal_entry = "One week. I know Frank's coffee schedule, Jake's humming, Ryan's unpredictability. I know which floorboards creak. The house is teaching me its language."
+is_milestone = true
+
+# ═══════════════════════════════════════════════════════════════
+# STORY NODES — Act 2: Awakening & Deepening
+# ═══════════════════════════════════════════════════════════════
+
+[[story_arc.nodes]]
+id = "node_jake_notices"
+name = "The Pencil Stops"
+chapter = "chapter_awakening"
+linked_canvas = "story_jake_notices"
+linked_flag = "drawing_started"
+requires_nodes = ["node_first_week"]
+is_milestone = true
+journal_entry = "Jake looked at me today. Actually looked. His pencil stopped mid-line and he tore the page out. Later, in the hallway: 'I could draw you. This afternoon. If you're not busy.' Three weeks of nothing. Then that."
+npc = "npc_jake"
+
+[[story_arc.nodes]]
+id = "node_jake_awareness"
+name = "Something Shifts"
+chapter = "chapter_awakening"
+linked_canvas = "story_first_awareness_jake"
+linked_flag = "exposure_unlock"
+requires_group = "group_settling_in"
+journal_entry = "Something changed today. The way he looked at me — or the way I noticed him looking. I don't know which is worse. I don't know which I want."
+is_milestone = true
+npc = "npc_jake"
+
+[[story_arc.nodes]]
+id = "node_ryan_awareness"
+name = "The Creek"
+chapter = "chapter_awakening"
+linked_canvas = "story_first_awareness_ryan"
+linked_flag = "ryan_awareness"
+requires_group = "group_settling_in"
+journal_entry = "Ryan at the creek. Shirt off. I couldn't look away. He knew."
+npc = "npc_ryan"
+
+[[story_arc.nodes]]
+id = "node_frank_awareness"
+name = "The Hallway at Midnight"
+chapter = "chapter_awakening"
+linked_canvas = "story_first_awareness_frank"
+linked_flag = "frank_awareness"
+requires_group = "group_settling_in"
+journal_entry = "2 AM. Sleep shirt. He looked at the hem, then my face. Just for a second. I felt it."
+npc = "npc_frank"
+
+[[story_arc.nodes]]
+id = "node_jake_reference_photo"
+name = "The Reference Photo"
+chapter = "chapter_awakening"
+linked_phone = "jake_reference_photo"
+linked_flag = "jake_has_photo_1"
+requires_nodes = ["node_jake_notices"]
+npc = "npc_jake"
+journal_entry = "He asked for a reference photo. For the drawing, he said. I sent it. The light on my collarbone, he said. He noticed the light."
+
+[[story_arc.nodes]]
+id = "node_drawing_sessions"
+name = "Drawing Sessions"
+chapter = "chapter_awakening"
+linked_canvas = "story_drawing_milestone_1"
+linked_flag = "drawing_1_complete"
+requires_nodes = ["node_jake_reference_photo"]
+group = "group_first_connections"
+journal_entry = "Jake drew my hands today. When he showed me, I saw things I didn't know he noticed — the chip in my thumbnail, the freckle below my ear. He sees things nobody else sees."
+npc = "npc_jake"
+
+[[story_arc.nodes]]
+id = "node_ryans_push"
+name = "The Hand on the Knee"
+chapter = "chapter_awakening"
+linked_canvas = "story_ryans_push"
+linked_flag = "truck_incident_complete"
+requires_nodes = ["node_ryan_awareness"]
+journal_entry = "Ryan's hand on my knee in the truck. I had three seconds to decide. Whatever I chose — that's the direction now. No going back."
+is_milestone = true
+npc = "npc_ryan"
+
+# ── Ryan's Departure Arc Nodes ──
+
+[[story_arc.nodes]]
+id = "node_ryan_detour"
+name = "Wrong Turn"
+chapter = "chapter_awakening"
+linked_canvas = "story_ryan_detour"
+linked_flag = "ryan_detour"
+requires_nodes = ["node_ryans_push"]
+journal_entry = "Ryan missed the turn today. Stopped at a site that isn't Frank's. Talked to someone I couldn't see. 'Wrong turn.' It wasn't."
+npc = "npc_ryan"
+
+[[story_arc.nodes]]
+id = "node_ryan_phone"
+name = "Two Weeks"
+chapter = "chapter_deepening"
+linked_canvas = "story_ryan_phone"
+linked_flag = "ryan_phone_heard"
+requires_nodes = ["node_ryan_detour"]
+journal_entry = "Phone call. He pulled over, stepped out. I heard fragments through the truck door. 'Two weeks.' 'Hold the spot.' He didn't explain."
+npc = "npc_ryan"
+
+[[story_arc.nodes]]
+id = "node_ryan_map"
+name = "Under the Seat"
+chapter = "chapter_deepening"
+linked_canvas = "story_ryan_map"
+linked_flag = "ryan_secret_discovered"
+requires_nodes = ["node_ryan_phone"]
+group = "group_npc_discoveries"
+is_milestone = true
+journal_entry = "Map under the truck seat. A city circled in red. A job offer — his own crew, real money. He's leaving. Before Mom comes back."
+npc = "npc_ryan"
+
+[[story_arc.nodes]]
+id = "node_ryan_truth"
+name = "Twenty-Three and Stuck"
+chapter = "chapter_crisis"
+linked_canvas = "story_ryan_truth"
+linked_flag = "ryan_leaving_confirmed"
+requires_nodes = ["node_ryan_map"]
+is_milestone = true
+journal_entry = "He's 23 and stuck. Dad's house, dad's jobs, dad's roads. The scar was the day he knew he'd be doing this forever. The offer is real. He leaves before Mom comes back."
+npc = "npc_ryan"
+
+[[story_arc.nodes]]
+id = "node_power_outage"
+name = "Candlelight"
+chapter = "chapter_crisis"
+linked_canvas = "story_power_outage"
+linked_flag = "power_outage"
+requires_nodes = ["node_ryan_truth"]
+journal_entry = "Storm. Candlelight. Ryan told the real story of his scar — eighteen, scared, thought his arm was broken. Frank drove him to the ER without a word. 'You were fine.' 'I know. That's why you didn't talk.' For one evening, nobody was performing."
+
+[[story_arc.nodes]]
+id = "node_ryan_ultimatum"
+name = "Come With Me"
+chapter = "chapter_convergence"
+linked_canvas = "story_ryan_ultimatum"
+linked_flag = "ryan_ultimatum_complete"
+requires_nodes = ["node_ryan_truth"]
+is_milestone = true
+journal_entry = "'Come with me.' Not blackmail. Not leverage. A man in a truck asking someone to choose him. The only honest question anyone in this house has asked me."
+npc = "npc_ryan"
+
+[[story_arc.nodes]]
+id = "node_ryan_departure"
+name = "Engine Running"
+chapter = "chapter_convergence"
+linked_canvas = "story_ryan_departure"
+linked_flag = "ryan_stayed"
+requires_nodes = ["node_ryan_ultimatum"]
+is_milestone = true
+journal_entry = "Dawn. The truck was packed. The engine was running. What happened next changed everything."
+npc = "npc_ryan"
+
+# ── End Ryan's Departure Arc ──
+
+[[story_arc.nodes]]
+id = "node_bookkeeping"
+name = "The Office Door"
+chapter = "chapter_awakening"
+linked_canvas = "story_bookkeeping_offer"
+linked_flag = "bookkeeping_started"
+requires_nodes = ["node_frank_awareness"]
+group = "group_first_connections"
+journal_entry = "$25 per session. Three times a week. Behind a door that locks. The money changes everything. The door changes something else."
+npc = "npc_frank"
+
+[[story_arc.nodes]]
+id = "node_creek"
+name = "The Swimming Hole"
+chapter = "chapter_awakening"
+linked_canvas = "story_creek_discovery"
+linked_flag = "first_swim"
+requires_nodes = ["node_first_week"]
+group = "group_first_connections"
+journal_entry = "Found the creek. Fifteen minutes through the trees. Cold water, smooth rocks, nobody watching. The one place that's mine."
+
+[[story_arc.nodes]]
+id = "node_jakes_art"
+name = "The Portfolio"
+chapter = "chapter_deepening"
+linked_canvas = "story_jakes_art"
+linked_flag = "saw_jakes_art"
+requires_nodes = ["node_jake_awareness"]
+group = "group_first_connections"
+journal_entry = "Jake showed me his portfolio. Not the ones of me — the real work. The creek, the workshop, Frank's hands on a coffee mug. They're actually good. He looked at me like my opinion was the only one that mattered."
+npc = "npc_jake"
+
+[[story_arc.nodes]]
+id = "node_jake_flirt"
+name = "Crossing the Line"
+chapter = "chapter_deepening"
+linked_canvas = "story_first_flirt_jake"
+linked_flag = "flirt_unlock"
+requires_nodes = ["node_jake_awareness"]
+journal_entry = "I flirted. Deliberately. Not accidental, not a misunderstanding. I chose to cross that line. And I liked what I saw on the other side."
+is_milestone = true
+npc = "npc_jake"
+
+[[story_arc.nodes]]
+id = "node_jake_tease"
+name = "The First Tease"
+chapter = "chapter_deepening"
+linked_canvas = "story_first_tease_jake"
+linked_flag = "tease_unlock"
+requires_nodes = ["node_jake_flirt"]
+is_milestone = true
+journal_entry = "I did it on purpose. Not accidental, not a misunderstanding. I dressed for it. I positioned for it. I watched the reaction. And I liked what I saw."
+npc = "npc_jake"
+
+# ── Per-NPC Flirt/Tease/Kiss Nodes (Ryan + Frank) ──
+
+[[story_arc.nodes]]
+id = "node_ryan_flirt"
+name = "Matching Energy"
+chapter = "chapter_deepening"
+linked_canvas = "story_first_flirt_ryan"
+linked_flag = "ryan_flirt"
+requires_nodes = ["node_ryan_awareness"]
+journal_entry = "I flirted with Ryan. Not his usual dares — I dared back. His grin froze. Then cracked wider."
+npc = "npc_ryan"
+
+[[story_arc.nodes]]
+id = "node_ryan_tease"
+name = "The Spot"
+chapter = "chapter_deepening"
+linked_canvas = "story_first_tease_ryan"
+linked_flag = "ryan_tease"
+requires_nodes = ["node_ryan_flirt"]
+journal_entry = "Gym. Spotting him. I leaned over the bench and let gravity do the work. His rep stuttered. I didn't step back."
+npc = "npc_ryan"
+
+[[story_arc.nodes]]
+id = "node_ryan_kiss"
+name = "Pulled Across"
+chapter = "chapter_deepening"
+linked_canvas = "story_first_kiss_ryan"
+linked_flag = "ryan_kiss"
+requires_nodes = ["node_ryan_tease"]
+journal_entry = "He pulled me across the bench seat. No preamble. No asking. Ryan kisses like he drives — fast, certain, no brakes."
+npc = "npc_ryan"
+
+[[story_arc.nodes]]
+id = "node_frank_flirt"
+name = "The Silence"
+chapter = "chapter_deepening"
+linked_canvas = "story_first_flirt_frank"
+linked_flag = "frank_flirt"
+requires_nodes = ["node_frank_awareness"]
+journal_entry = "I stopped working and just looked at him. He felt it. His pen stopped. Neither of us said anything. We didn't need to."
+npc = "npc_frank"
+
+[[story_arc.nodes]]
+id = "node_frank_tease"
+name = "The Floor"
+chapter = "chapter_deepening"
+linked_canvas = "story_first_tease_frank"
+linked_flag = "frank_tease"
+requires_nodes = ["node_frank_flirt"]
+journal_entry = "Short shorts. On my knees. I heard his boots stop behind me. Three seconds. Then faster. I smiled at the floor."
+npc = "npc_frank"
+
+[[story_arc.nodes]]
+id = "node_frank_kiss"
+name = "Whiskey and This Can't Happen"
+chapter = "chapter_deepening"
+linked_canvas = "story_first_kiss_frank"
+linked_flag = "frank_kiss"
+requires_nodes = ["node_frank_tease"]
+journal_entry = "2 AM. Kitchen. Whiskey. He kissed me like a man drowning. His hand gripped the chair, not me. Because if he held me he wouldn't stop."
+npc = "npc_frank"
+
+# ── End Per-NPC Gate Nodes ──
+
+[[story_arc.nodes]]
+id = "node_ryan_catches"
+name = "You're Never Around"
+chapter = "chapter_deepening"
+linked_canvas = "story_ryan_catches"
+linked_flag = "ryan_caught_her"
+requires_nodes = ["node_ryan_truth"]
+journal_entry = "'You're never around anymore.' He told me he's leaving and I haven't said a word about it since. He's right. I've been pretending it's not happening."
+npc = "npc_ryan"
+
+[[story_arc.nodes]]
+id = "node_jake_kiss"
+name = "The First"
+chapter = "chapter_deepening"
+linked_canvas = "story_first_kiss_jake"
+linked_flag = "kiss_unlock"
+requires_nodes = ["node_jake_flirt"]
+journal_entry = "The first kiss. I'll remember who, where, how it tasted, forever. The point of no return — I passed it and didn't even slow down."
+is_milestone = true
+npc = "npc_jake"
+
+[[story_arc.nodes]]
+id = "node_jake_sketches"
+name = "Under the Mattress"
+chapter = "chapter_deepening"
+linked_canvas = "story_jake_sketches"
+linked_flag = "jake_sketches_discovered"
+requires_nodes = ["node_jake_kiss"]
+group = "group_npc_discoveries"
+journal_entry = "Found Jake's hidden drawings. Me sleeping. Me in a towel. Poses I never held for him. The sweet one has been watching. What I said next changed everything."
+is_milestone = true
+npc = "npc_jake"
+
+[[story_arc.nodes]]
+id = "node_drawing_progress"
+name = "The Poses Deepen"
+chapter = "chapter_deepening"
+linked_canvas = "story_drawing_milestone_3"
+linked_flag = "drawing_3_complete"
+requires_nodes = ["node_drawing_sessions"]
+journal_entry = "The poses have changed. He asks me to adjust — lower the strap, turn toward the light. Each session pulls us deeper. The drawings are becoming something we can't take back."
+npc = "npc_jake"
+
+[[story_arc.nodes]]
+id = "node_jake_angle_photo"
+name = "The Angle Photo"
+chapter = "chapter_deepening"
+linked_phone = "jake_angle_photo"
+linked_flag = "jake_has_photo_2"
+requires_nodes = ["node_drawing_progress"]
+npc = "npc_jake"
+journal_entry = "He needed another reference. My waist, he said. I sent the mirror pic. He looked at it for ten minutes. Then he drew all night."
+
+[[story_arc.nodes]]
+id = "node_drawing_milestone_4"
+name = "The Strap"
+chapter = "chapter_deepening"
+linked_canvas = "story_drawing_milestone_4"
+linked_flag = "drawing_4_complete"
+requires_nodes = ["node_jake_angle_photo"]
+journal_entry = "The strap. He asked about a shadow and I lowered it myself. His pencil slowed. We both pretended it was still about the drawing."
+npc = "npc_jake"
+
+[[story_arc.nodes]]
+id = "node_jake_towel_photo"
+name = "The Towel Photo"
+chapter = "chapter_deepening"
+linked_phone = "jake_towel_accident"
+linked_flag = "jake_has_towel_photo"
+requires_nodes = ["node_drawing_milestone_4"]
+npc = "npc_jake"
+journal_entry = "I sent it by accident. That's what I told him. He didn't delete it. I didn't ask him to. Not really."
+
+[[story_arc.nodes]]
+id = "node_drawing_milestone_5"
+name = "Without Anything"
+chapter = "chapter_deepening"
+linked_canvas = "story_drawing_milestone_5"
+linked_flag = "drawing_5_complete"
+requires_nodes = ["node_jake_towel_photo"]
+journal_entry = "I took off the shirt without being asked. He drew me like I was the most important thing. I was bare and I didn't feel naked. I felt seen."
+npc = "npc_jake"
+
+[[story_arc.nodes]]
+id = "node_jake_deliberate_photo"
+name = "The Underwear Photo"
+chapter = "chapter_crisis"
+linked_phone = "jake_deliberate_photo"
+linked_flag = "jake_has_underwear_photo"
+requires_nodes = ["node_drawing_milestone_5"]
+npc = "npc_jake"
+journal_entry = "No accident this time. No excuse. I chose to send it. He asked me to come to his room. The drawings aren't art anymore."
+
+[[story_arc.nodes]]
+id = "node_jake_pencil_drops"
+name = "The Pencil Drops"
+chapter = "chapter_crisis"
+linked_canvas = "story_jake_pencil_drops"
+linked_flag = "jake_pencil_dropped"
+requires_nodes = ["node_jake_deliberate_photo"]
+is_milestone = true
+journal_entry = "His pencil dropped. He couldn't draw anymore. He was looking at me — not the paper. The artist ran out of art. What was left was just a boy who wanted to touch what he'd been drawing for weeks."
+npc = "npc_jake"
+
+[[story_arc.nodes]]
+id = "node_jake_everything_photo"
+name = "Everything"
+chapter = "chapter_crisis"
+linked_phone = "jake_everything"
+linked_flag = "jake_has_nude"
+requires_nodes = ["node_jake_pencil_drops"]
+npc = "npc_jake"
+journal_entry = "I sent everything. All of me. He's coming to my room. Right now."
+
+[[story_arc.nodes]]
+id = "node_jake_blowjob"
+name = "You Deserve This"
+chapter = "chapter_crisis"
+linked_canvas = "story_jake_blowjob"
+linked_flag = "blowjob_unlock"
+requires_nodes = ["node_jake_escalation", "node_jake_everything_photo"]
+journal_entry = "The art show accepted three pieces. His first exhibition. I knelt by his chair. 'You deserve this.' He said I didn't have to. I know."
+npc = "npc_jake"
+
+[[story_arc.nodes]]
+id = "node_jake_sex"
+name = "The Truth"
+chapter = "chapter_convergence"
+linked_canvas = "story_jake_sex"
+linked_flag = "sex_unlock"
+requires_nodes = ["node_jake_blowjob"]
+is_milestone = true
+journal_entry = "'I want to fuck you.' No art metaphor. No pretense. The sketchbook hit the floor. The bed is narrow. The wall is thin. We didn't care."
+npc = "npc_jake"
+
+# ═══════════════════════════════════════════════════════════════
+# STORY NODES — Act 3: Crisis
+# ═══════════════════════════════════════════════════════════════
+
+[[story_arc.nodes]]
+id = "node_franks_late_night"
+name = "Three Inches"
+chapter = "chapter_crisis"
+linked_canvas = "story_franks_late_night"
+linked_flag = "frank_kitchen_moment"
+requires_nodes = ["node_jake_kiss"]
+journal_entry = "2 AM. Kitchen. Whiskey. His hand on the table, three inches from mine. Neither of us moved closer. Neither of us moved away."
+npc = "npc_frank"
+
+[[story_arc.nodes]]
+id = "node_franks_secret"
+name = "Forty Thousand"
+chapter = "chapter_crisis"
+linked_canvas = "story_franks_secret"
+linked_flag = "frank_secret_complete"
+requires_nodes = ["node_bookkeeping"]
+group = "group_npc_discoveries"
+journal_entry = "Found the real ledger. The business is $40,000 in debt. Frank doesn't know I know. Or does he?"
+is_milestone = true
+npc = "npc_frank"
+
+[[story_arc.nodes]]
+id = "node_jake_escalation"
+name = "Further"
+chapter = "chapter_crisis"
+linked_canvas = "story_escalation_jake"
+linked_flag = "handjob_unlock"
+requires_nodes = ["node_jake_kiss"]
+journal_entry = "We went further. Past kissing, past pretending it's innocent. I knew what I was doing. I wanted to."
+is_milestone = true
+npc = "npc_jake"
+
+[[story_arc.nodes]]
+id = "node_frank_crisis"
+name = "The Call"
+chapter = "chapter_crisis"
+linked_canvas = "story_frank_crisis"
+linked_flag = "frank_crisis"
+requires_nodes = ["node_franks_secret"]
+group = "group_crisis_events"
+journal_entry = "The business is failing. Client cancelled. Bank calling. Frank locked the office. 'Miss Chen.' Three days of cold. The steady man broke."
+is_milestone = true
+npc = "npc_frank"
+
+[[story_arc.nodes]]
+id = "node_frank_repair"
+name = "Come In"
+chapter = "chapter_crisis"
+linked_canvas = "story_frank_repair"
+linked_flag = "frank_repair_complete"
+requires_nodes = ["node_frank_crisis"]
+journal_entry = "Three days of 'Miss Chen.' I knocked. 'Come in.' Two words. I sat beside him for the first time — same side of the desk. He didn't tell me to move."
+npc = "npc_frank"
+
+[[story_arc.nodes]]
+id = "node_frank_wine_night"
+name = "The Wine"
+chapter = "chapter_crisis"
+linked_canvas = "story_frank_wine_night"
+linked_flag = "frank_wine_night"
+requires_nodes = ["node_frank_repair"]
+is_milestone = true
+journal_entry = "Wine. His office floor. He was talking about the mortgage and I looked down and saw what I'd been doing to him for a month. I didn't look away. I didn't want to."
+npc = "npc_frank"
+
+[[story_arc.nodes]]
+id = "node_jake_repair"
+name = "The Coffee Mug Drawing"
+chapter = "chapter_crisis"
+linked_canvas = "story_jake_repair"
+linked_flag = "jake_repair_complete"
+requires_nodes = ["node_frank_crisis"]
+journal_entry = "A drawing slid under my door. Not me — my coffee mug. The chip on the rim, the light on the ceramic. A detail only someone who watches constantly would notice. The drawing was the apology."
+npc = "npc_jake"
+
+[[story_arc.nodes]]
+id = "node_brothers_discover"
+name = "The Hallway"
+chapter = "chapter_crisis"
+linked_canvas = "story_brothers_discover"
+linked_flag = "brothers_discover"
+requires_nodes = ["node_jake_escalation"]
+group = "group_crisis_events"
+journal_entry = "They found out. Both of them. The hallway at night, three feet wide, three people who can't pretend anymore. What I said next — or didn't say — changed everything."
+is_milestone = true
+
+# ═══════════════════════════════════════════════════════════════
+# STORY NODES — Act 4: Convergence & Resolution
+# ═══════════════════════════════════════════════════════════════
+
+[[story_arc.nodes]]
+id = "node_financial_crisis"
+name = "The Bounce"
+chapter = "chapter_convergence"
+linked_canvas = "story_financial_crisis"
+linked_flag = "financial_crisis"
+requires_group = "group_crisis_events"
+journal_entry = "Mom's transfer bounced. $47 in the bank. $185 in bills due. The math I've been outrunning finally caught me."
+
+[[story_arc.nodes]]
+id = "node_franks_arrangement"
+name = "I'll Cover Everything"
+chapter = "chapter_convergence"
+linked_canvas = "story_franks_arrangement"
+linked_flag = "frank_offer"
+requires_nodes = ["node_brothers_discover"]
+journal_entry = "Frank's offer. Cover everything — bus, art supplies, phone, food. In exchange for... late nights. The office. 'Whatever I need help with.' We both know what that means."
+is_milestone = true
+npc = "npc_frank"
+
+[[story_arc.nodes]]
+id = "node_moms_return"
+name = "She's Coming Home"
+chapter = "chapter_convergence"
+linked_canvas = "story_moms_return"
+linked_flag = "mom_returning"
+requires_nodes = ["node_franks_arrangement"]
+journal_entry = "Mom called. Flight booked. One week. Jake's pencil snapped. Ryan looked at the ceiling. Frank set down his fork. Very carefully."
+is_milestone = true
+
+[[story_arc.nodes]]
+id = "node_final_week"
+name = "Seven Days"
+chapter = "chapter_convergence"
+linked_canvas = "story_final_week"
+linked_flag = "endgame_active"
+requires_nodes = ["node_moms_return"]
+journal_entry = "Seven days. Every conversation is a last conversation. Every touch might be the final one. The countdown is real now."
+is_milestone = true
+
+
+# ═══════════════════════════════════════════════════════════════
+# EMOTION MAPPINGS — How relationship stats display in the journal
+# ═══════════════════════════════════════════════════════════════
+
+[story_arc.emotion_mappings.jake_love]
+trait_owner = "npc"
+default_npc = "npc_jake"
+[[story_arc.emotion_mappings.jake_love.ranges]]
+min = 0
+max = 8
+label = "Acquaintance"
+description = "He glances up from his sketchbook when you enter. Small nod. Back to drawing. You're scenery."
+[[story_arc.emotion_mappings.jake_love.ranges]]
+min = 9
+max = 15
+label = "Noticed"
+description = "His pencil moves differently when you're in the room. He shows you his landscapes. Not the portraits. Not yet."
+[[story_arc.emotion_mappings.jake_love.ranges]]
+min = 16
+max = 22
+label = "Drawn To"
+description = "He shows you a drawing and his hand is shaking. Not the drawing — the act of showing. He's never shown anyone."
+[[story_arc.emotion_mappings.jake_love.ranges]]
+min = 23
+max = 30
+label = "Devoted"
+description = "He's drawn your hands from three angles. 'I couldn't get the light right.' The light is perfect. He just wanted to keep drawing."
+[[story_arc.emotion_mappings.jake_love.ranges]]
+min = 31
+max = 40
+label = "In Love"
+description = "He stops drawing when you walk in. Not hiding it. Looking at you is better than any picture he could make."
+
+[story_arc.emotion_mappings.ryan_love]
+trait_owner = "npc"
+default_npc = "npc_ryan"
+[[story_arc.emotion_mappings.ryan_love.ranges]]
+min = 0
+max = 5
+label = "Furniture"
+description = "He looks at you like a new piece of furniture. Interesting. Temporary."
+[[story_arc.emotion_mappings.ryan_love.ranges]]
+min = 6
+max = 12
+label = "Paying Attention"
+description = "He holds the truck door open. Still a test. But he's paying attention now."
+[[story_arc.emotion_mappings.ryan_love.ranges]]
+min = 13
+max = 18
+label = "Cleaned Up"
+description = "The passenger seat is clean. The cans are gone. Pine air freshener. He doesn't mention it."
+[[story_arc.emotion_mappings.ryan_love.ranges]]
+min = 19
+max = 25
+label = "Waiting"
+description = "He waits. Ryan doesn't wait for anyone. But the engine is running ten minutes after she said 'give me five.'"
+[[story_arc.emotion_mappings.ryan_love.ranges]]
+min = 26
+max = 35
+label = "Undone"
+description = "He tucks your hair behind your ear while you're talking. Freezes. His hand hangs there. 'What were you saying?' Quieter than you've ever heard him."
+
+[story_arc.emotion_mappings.frank_love]
+trait_owner = "npc"
+default_npc = "npc_frank"
+[[story_arc.emotion_mappings.frank_love.ranges]]
+min = 0
+max = 5
+label = "Guest"
+description = "He nods when you enter. Pours his own coffee. Reads the paper. You're a guest he's tolerating."
+[[story_arc.emotion_mappings.frank_love.ranges]]
+min = 6
+max = 12
+label = "Noticed"
+description = "He pours your coffee too. Black — he doesn't know how you take it yet. 'Classes going alright?'"
+[[story_arc.emotion_mappings.frank_love.ranges]]
+min = 13
+max = 20
+label = "Remembered"
+description = "He remembered you take cream. It's already in the mug. He watches you sit down, then looks away — slower than before."
+[[story_arc.emotion_mappings.frank_love.ranges]]
+min = 21
+max = 28
+label = "Waiting"
+description = "He's at the table when you arrive. Like he was waiting. The paper is open but he hasn't read it."
+[[story_arc.emotion_mappings.frank_love.ranges]]
+min = 29
+max = 35
+label = "Breaking"
+description = "He pushes the mug toward you. Their fingers almost touch. He doesn't pull back. 'You look...' He stops. Whatever he was going to say stays behind his teeth."
+
+[story_arc.emotion_mappings.frank_trust]
+trait_owner = "npc"
+default_npc = "npc_frank"
+[[story_arc.emotion_mappings.frank_trust.ranges]]
+min = 0
+max = 8
+label = "Supervised"
+description = "Office door stays open. He checks your work. Counts the cash drawer after you leave."
+[[story_arc.emotion_mappings.frank_trust.ranges]]
+min = 9
+max = 15
+label = "Competent"
+description = "He stops checking your work. Leaves receipts for filing. 'You're doing fine.'"
+[[story_arc.emotion_mappings.frank_trust.ranges]]
+min = 16
+max = 22
+label = "Inside"
+description = "Door closes. He tells you about a client who's late. Business talk. You're inside the circle."
+[[story_arc.emotion_mappings.frank_trust.ranges]]
+min = 23
+max = 28
+label = "Trusted"
+description = "Leaves you alone with the books and the checkbook. Tells you about the real numbers. 'Don't tell Diana.'"
+[[story_arc.emotion_mappings.frank_trust.ranges]]
+min = 29
+max = 35
+label = "Vulnerable"
+description = "Asks your opinion on a bid. Listens. Falls asleep in the office chair while you're working — the most vulnerable thing Frank Harmon has ever done."
+
+# ═══════════════════════════════════════════════════════════════
+# HINTS — Help for stuck players
+# ═══════════════════════════════════════════════════════════════
+
+[[story_arc.hints]]
+id = "hint_first_awareness"
+condition_flag = "exposure_unlock"
+condition_met = false
+requires_flag = "first_week_complete"
+text = "Something might shift if you spend more time with one of the NPCs. Try building trust or love through activities."
+
+[[story_arc.hints]]
+id = "hint_bookkeeping"
+condition_flag = "bookkeeping_started"
+condition_met = false
+requires_flag = "chores_started"
+text = "Frank mentioned needing help with the books. Your corruption and intelligence may need to be higher before he asks."
+
+[[story_arc.hints]]
+id = "hint_first_kiss"
+condition_flag = "kiss_unlock"
+condition_met = false
+requires_flag = "flirt_unlock"
+text = "You've been flirting. To go further, build corruption and deepen your relationship with an NPC through their activities."
+
+[[story_arc.hints]]
+id = "hint_franks_secret"
+condition_flag = "frank_secret_complete"
+condition_met = false
+requires_flag = "bookkeeping_started"
+text = "Something's off in the books. Your intelligence needs to be higher to spot it. Try campus classes or studying."
+
+[[story_arc.hints]]
+id = "hint_brothers"
+condition_flag = "brothers_discover"
+condition_met = false
+requires_flag = "handjob_unlock"
+text = "The brothers don't know about each other yet. But they will. Give it time."
+
+[[story_arc.hints]]
+id = "hint_arrangement"
+condition_flag = "frank_offer"
+condition_met = false
+requires_flag = "crisis_resolved"
+text = "Frank has something on his mind. Build your relationship with him. He'll make an offer when the time is right."
+
+# ═══════════════════════════════════════════════════════════════
+# END OF PHASE 4: STORY ARC
+# ═══════════════════════════════════════════════════════════════

@@ -1,0 +1,2028 @@
+{
+  "variables": [
+    {
+      "name": "settings.breastModifier",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "settings.darkSkinChance",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 10,
+          "max": 10,
+          "first": 10,
+          "last": 10,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "settings.bodyWritingLevel",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 3,
+          "max": 3,
+          "first": 3,
+          "last": 3,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "settings.clothingCostModifier",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 1,
+          "max": 1,
+          "first": 1,
+          "last": 1,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "settings.schoolClothingCostModifier",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 1,
+          "max": 1,
+          "first": 1,
+          "last": 1,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "settings.lewdClothingCostModifier",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 1,
+          "max": 1,
+          "first": 1,
+          "last": 1,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "settings.basePlayerPregnancyChance",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 80,
+          "max": 80,
+          "first": 80,
+          "last": 80,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "settings.baseNpcPregnancyChance",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 8,
+          "max": 8,
+          "first": 8,
+          "last": 8,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "settings.humanPregnancyMonths",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 3,
+          "max": 3,
+          "first": 3,
+          "last": 3,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "settings.wolfPregnancyWeeks",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 4,
+          "max": 4,
+          "first": 4,
+          "last": 4,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "settings.pregnancyType",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "realistic"
+        ]
+      }
+    },
+    {
+      "name": "objectVersion.skinColor",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 1,
+          "max": 1,
+          "first": 1,
+          "last": 1,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "objectVersion.npcPregnancyGenderChange",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 1,
+          "max": 1,
+          "first": 1,
+          "last": 1,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "objectVersion.pregnancyAvoidance",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 1,
+          "max": 1,
+          "first": 1,
+          "last": 1,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "clothing_update",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 1,
+          "max": 1,
+          "first": 1,
+          "last": 1,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "player.breastsize",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 1,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 2,
+          "min": 0,
+          "max": 4,
+          "first": 0,
+          "last": 4,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "player.gender_body",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "a"
+        ]
+      }
+    },
+    {
+      "name": "player.bodyTemperature",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 37,
+          "max": 37,
+          "first": 37,
+          "last": 37,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "player.bodyshape",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 1,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "classic",
+          "curvy"
+        ]
+      }
+    },
+    {
+      "name": "carried.over_upper.bustresize",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787049050,
+        "passages_seen_on_count": 1,
+        "number_stats": {
+          "count": 23,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "carried.over_upper.breast_img",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787049050,
+        "passages_seen_on_count": 1,
+        "number_stats": {
+          "count": 23,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "carried.upper.bustresize",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787049050,
+        "passages_seen_on_count": 1,
+        "number_stats": {
+          "count": 23,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "carried.upper.breast_img",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787049050,
+        "passages_seen_on_count": 1,
+        "number_stats": {
+          "count": 23,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "carried.under_upper.bustresize",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787049050,
+        "passages_seen_on_count": 1,
+        "number_stats": {
+          "count": 23,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "carried.under_upper.breast_img",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787049050,
+        "passages_seen_on_count": 1,
+        "number_stats": {
+          "count": 23,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "worn.over_upper.bustresize",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787049050,
+        "passages_seen_on_count": 1,
+        "number_stats": {
+          "count": 23,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "worn.over_upper.breast_img",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787049050,
+        "passages_seen_on_count": 1,
+        "number_stats": {
+          "count": 23,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "worn.upper.bustresize",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787049050,
+        "passages_seen_on_count": 1,
+        "number_stats": {
+          "count": 23,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "worn.upper.breast_img",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787049050,
+        "passages_seen_on_count": 1,
+        "number_stats": {
+          "count": 23,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "worn.under_upper.bustresize",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787049050,
+        "passages_seen_on_count": 1,
+        "number_stats": {
+          "count": 23,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "worn.under_upper.breast_img",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787049050,
+        "passages_seen_on_count": 1,
+        "number_stats": {
+          "count": 23,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "outfit",
+      "profile": {
+        "types": [
+          "object"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5
+      }
+    },
+    {
+      "name": "wear_outfit",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "none"
+        ]
+      }
+    },
+    {
+      "name": "parasite.bodyparts",
+      "profile": {
+        "types": [
+          "object"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5
+      }
+    },
+    {
+      "name": "hairlength",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 200,
+          "max": 200,
+          "first": 200,
+          "last": 200,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "hairtype",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "default"
+        ]
+      }
+    },
+    {
+      "name": "breastsizeold",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "breastsizemax",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 12,
+          "max": 12,
+          "first": 12,
+          "last": 12,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "breastsizemin",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "breastsensitivity",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 1,
+          "max": 1,
+          "first": 1,
+          "last": 1,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "hairejacstat",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "fame.pregnancy",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "insecurity_breasts_small",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "insecurity_breasts_big",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "insecurity_pregnancy",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "acceptance_penis_small",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "acceptance_penis_big",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "acceptance_breasts_small",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "acceptance_breasts_big",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "acceptance_pregnancy",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "bodypart_number",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 12,
+          "max": 12,
+          "first": 12,
+          "last": 12,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "long_hair_meet_day",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 99999,
+          "max": 99999,
+          "first": 99999,
+          "last": 99999,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "museumAntiques.antiques.antiquetrashcup",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "notFound"
+        ]
+      }
+    },
+    {
+      "name": "featsBoosts.upgrades.tattoos",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "featsBoosts.upgrades.randomClothing",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "featsBoosts.upgrades.specialClothing",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "featsBoosts.missing.tattoos",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "Unlock this boost by obtaining the 'Billboard' and 'A Living Canvas' feats"
+        ]
+      }
+    },
+    {
+      "name": "featsBoosts.missing.randomClothing",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          ""
+        ]
+      }
+    },
+    {
+      "name": "featsBoosts.missing.specialClothing",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "Unlock this boost by obtaining a hidden feat (Hint: Half of the rewards for triumph and trouble alike.)"
+        ]
+      }
+    },
+    {
+      "name": "featsBoosts.name.tattoos",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "?????"
+        ]
+      }
+    },
+    {
+      "name": "featsBoosts.name.randomClothing",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "Random Clothing"
+        ]
+      }
+    },
+    {
+      "name": "featsBoosts.name.specialClothing",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "?????"
+        ]
+      }
+    },
+    {
+      "name": "featsBoosts.clothingGender",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "Either"
+        ]
+      }
+    },
+    {
+      "name": "featsBoosts.tattoos.1.bodypart",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "Random"
+        ]
+      }
+    },
+    {
+      "name": "featsBoosts.tattoos.1.tattoo",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "Random"
+        ]
+      }
+    },
+    {
+      "name": "featsBoosts.tattoos.2.bodypart",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "Random"
+        ]
+      }
+    },
+    {
+      "name": "featsBoosts.tattoos.2.tattoo",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "Random"
+        ]
+      }
+    },
+    {
+      "name": "featsBoosts.tattoos.3.bodypart",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "Random"
+        ]
+      }
+    },
+    {
+      "name": "featsBoosts.tattoos.3.tattoo",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "Random"
+        ]
+      }
+    },
+    {
+      "name": "featsBoosts.tattoos.4.bodypart",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "Random"
+        ]
+      }
+    },
+    {
+      "name": "featsBoosts.tattoos.4.tattoo",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "Random"
+        ]
+      }
+    },
+    {
+      "name": "featsBoosts.tattoos.5.bodypart",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "Random"
+        ]
+      }
+    },
+    {
+      "name": "featsBoosts.tattoos.5.tattoo",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "Random"
+        ]
+      }
+    },
+    {
+      "name": "makeup.owned.hairdye",
+      "profile": {
+        "types": [
+          "object"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5
+      }
+    },
+    {
+      "name": "makeup.owned.mascara",
+      "profile": {
+        "types": [
+          "object"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5
+      }
+    },
+    {
+      "name": "makeup.mascara",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "makeup.mascara_running",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "bodysize",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "number_stats": {
+          "count": 35,
+          "unique_count": 1,
+          "min": 2,
+          "max": 2,
+          "first": 2,
+          "last": 2,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "hairselect",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786689145,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "red"
+        ]
+      }
+    },
+    {
+      "name": "naturalhaircolour",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781786806782,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 5,
+        "string_samples": [
+          "red"
+        ]
+      }
+    },
+    {
+      "name": "objectVersion.pregnancyFix",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787067205,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 4,
+        "number_stats": {
+          "count": 12,
+          "unique_count": 1,
+          "min": 1,
+          "max": 1,
+          "first": 1,
+          "last": 1,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "player.perceived_breastsize",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787067205,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 4,
+        "number_stats": {
+          "count": 12,
+          "unique_count": 1,
+          "min": 4,
+          "max": 4,
+          "first": 4,
+          "last": 4,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "worn.lower.outfitSecondary",
+      "profile": {
+        "types": [
+          "object"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787067205,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 4
+      }
+    },
+    {
+      "name": "mannequinBreastsSize",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787067205,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 4,
+        "number_stats": {
+          "count": 12,
+          "unique_count": 1,
+          "min": 3,
+          "max": 3,
+          "first": 3,
+          "last": 3,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "breastgrowthtimer",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787067205,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 4,
+        "number_stats": {
+          "count": 12,
+          "unique_count": 1,
+          "min": 350,
+          "max": 350,
+          "first": 350,
+          "last": 350,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "haircolour",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787067205,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 4,
+        "string_samples": [
+          "red"
+        ]
+      }
+    },
+    {
+      "name": "hairColourStyle",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787067205,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 4,
+        "string_samples": [
+          "simple"
+        ]
+      }
+    },
+    {
+      "name": "hairfringecolour",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787067205,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 4,
+        "string_samples": [
+          "red"
+        ]
+      }
+    },
+    {
+      "name": "hairFringeColourStyle",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787067205,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 4,
+        "string_samples": [
+          "simple"
+        ]
+      }
+    },
+    {
+      "name": "sexStats.pills.lastTaken.breast",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787067205,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 4,
+        "string_samples": [
+          ""
+        ]
+      }
+    },
+    {
+      "name": "sexStats.pills.lastTaken.pregnancy",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787067205,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 4,
+        "string_samples": [
+          ""
+        ]
+      }
+    },
+    {
+      "name": "sexStats.pills.mostTaken.breast",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787067205,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 4,
+        "string_samples": [
+          ""
+        ]
+      }
+    },
+    {
+      "name": "sexStats.pills.mostTaken.pregnancy",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787067205,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 4,
+        "string_samples": [
+          ""
+        ]
+      }
+    },
+    {
+      "name": "hairlengthstage",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787067205,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 4,
+        "string_samples": [
+          "shoulder"
+        ]
+      }
+    },
+    {
+      "name": "robinTattoo",
+      "profile": {
+        "types": [
+          "object"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787067205,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 4
+      }
+    },
+    {
+      "name": "pregnancyStats.pregnancyTestsTaken",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787067205,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 4,
+        "number_stats": {
+          "count": 12,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "pregnancyStats.childBreastfedInteractions",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787067205,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 4,
+        "number_stats": {
+          "count": 12,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "pregnancyStats.totalDaysPregnant",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787067205,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 4,
+        "number_stats": {
+          "count": 12,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "pregnancyStats.totalDaysPregnancyKnown",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787067205,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 4,
+        "number_stats": {
+          "count": 12,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "auriga_scar",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787067205,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 4,
+        "number_stats": {
+          "count": 12,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "nightMonsterNNPCUpdate",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787067205,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 4,
+        "number_stats": {
+          "count": 12,
+          "unique_count": 1,
+          "min": 2,
+          "max": 2,
+          "first": 2,
+          "last": 2,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "breastindicator",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787077520,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 3,
+        "number_stats": {
+          "count": 10,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "clothingselector",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787077520,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 3,
+        "number_stats": {
+          "count": 10,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "settings.tanningDifficulty",
+      "profile": {
+        "types": [
+          "number"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787125452,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 1,
+        "number_stats": {
+          "count": 3,
+          "unique_count": 1,
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0,
+          "is_monotonic_increasing": true,
+          "is_boolean_like": true
+        }
+      }
+    },
+    {
+      "name": "bodywritingSet",
+      "profile": {
+        "types": [
+          "string"
+        ],
+        "mutation_count": 0,
+        "first_ts": 1781787125452,
+        "last_ts": 1781787158257,
+        "passages_seen_on_count": 1,
+        "string_samples": [
+          "General"
+        ]
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "ts": 1781787028144,
+      "passage": "Start",
+      "state_hash": "d2080349b52710e4",
+      "var": "player.breastsize",
+      "before": 0,
+      "after": 4
+    },
+    {
+      "ts": 1781787028144,
+      "passage": "Start",
+      "state_hash": "d2080349b52710e4",
+      "var": "player.bodyshape",
+      "before": "classic",
+      "after": "curvy"
+    }
+  ]
+}

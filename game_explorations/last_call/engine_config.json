@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-06-03T10:19:15.744Z",
+  "captured_at": "2026-06-03T23:06:19.613Z",
   "engine": "sugarcube",
   "version": {
     "name": null,
@@ -117,7 +117,7 @@
   },
   "story": {
     "name": "Last Call",
-    "ifid": "C8F2C958-C6ED-4ECA-875E-6F4B662856FA",
+    "ifid": "C404D178-D8EF-471F-998D-D797553128E8",
     "format": "SugarCube",
     "format_version": "2.30.0",
     "creator": "Tweego",

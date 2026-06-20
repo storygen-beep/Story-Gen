@@ -1,0 +1,27 @@
+{
+  "session_id": 1,
+  "start_ts": "2026-06-05T13:38:51.756Z",
+  "start_epoch_ms": 1780666731756,
+  "end_ts": "2026-06-05T14:00:35.420Z",
+  "duration_s": 1304,
+  "clicks": 18,
+  "choices_explored": 18,
+  "arrow_advances": 0,
+  "unique_states_seen": 18,
+  "new_unique_states": 18,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "AROUSAL — two separate meters. PLAYER: $player.arousal 0..$game.maxArousal (maxArousal=10 confirmed live). NPC: $npc.<Name>.arousal 0..3 (Dad/Brother/Grandpa).",
+    "PLAYER arousal raises: <<AddArousal>> = StatsService.addArousal -> increaseArousal(player,maxArousal): arousal=min(arousal+1,maxArousal). +1 per call, cap 10. Skipped in galleryMode (and getArousal() returns 10 in gallery).",
+    "PLAYER arousal also +1 PER NEW DAY: TimeService.newDay -> resetPlayerStats: energy=maxEnergy (reset full) BUT if(arousal<maxArousal) addArousal() else arousal=10. So sleep RESETS energy but RAISES arousal +1. No reset-to-0 on sleep.",
+    "NPC arousal raises: per-NPC add widgets (e.g. AddBrotherArousal -> increaseArousal(Brother,3)) = +1 cap 3. ALSO +1 PER NEW DAY hardcoded: updateNPCs() does if(Dad/Brother/Grandpa.arousal<3) arousal++.",
+    "RESET to 0: player via <<ResetArousal>> (arousal=0) and inside <<FinishSex>> (StatsService.resetArousal). Family NPC reset to 0 at climax: finishSex sets npc.arousal=0 + NpcService.addCorruption(npc) for Dad/Brother/Grandpa. Also ResetDad/Brother/GrandpaArousal widgets.",
+    "NO TIME DECAY anywhere. Only arousal decrement in entire JS = drug modifier line (player.arousal=Math.max(0,player.arousal+mods.arousal)). Both meters are no-decay climbers, reset only at climax.",
+    "GATES (the two-axis tier system) — family scenes gated corruption x arousal: stage1 corr>=5 && arousal>=1; stage2 corr>=10 && arousal>=2; stage3 corr>=15 && arousal>=3 (galleryMode bypasses). Confirmed in current passage source too: BedroomStudy Dad/Brother grope needs npc.arousal>0 && npc.corruption>0; BedroomSleep Dad scene needs Dad.arousal>0 && Dad.corruption>0.",
+    "UI SURFACING — PLAYER: left bar '⚡ Energy & Arousal' card shows band text via getArousalText(level): 0 Calm,1 Warm,2 Aroused,3 Hot,4 Burning; level=arousal==0?0:min(ceil(arousal/max*4),4). Live: arousal 6/10 -> 'Hot'. NPC: right 'House' sidebar per family member row '🔥 Arousal: <sideBarText>' where sideBarText set by updateArousalText: 0 ❄️,1 🔥,2 🔥🔥,3 🔥🔥🔥. Corruption row shows 'MAX' at >=15 (confirmed live).",
+    "TOOLING LIMIT: mopoga embed has broken time Cycle ('Error: cannot find a cycle named...') -> NewDay/Study/AddTime do NOT commit stat changes to readable state (intelligence/days/energy/arousal frozen across real clicks, dev buttons, Engine.play, Wikifier). Mechanics above are from authoritative game SOURCE (current passage_catalog + JS dump, which agree); live confirmed: var structure, current values, UI surfacing, corruption MAX cap, content-gate conditions."
+  ]
+}

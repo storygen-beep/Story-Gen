@@ -1,0 +1,42 @@
+# Phase 2 — 2_one_shots.toml
+# Bar Empire (baseline) — setup scaffold: the minimal boot canvas ONLY.
+# No NPC arcs / hubs / ambients / capstones here — those are beats.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# canvas_first_morning — Day-1 boot. Drops Dahlia into her room, late afternoon,
+# broke. Auto-fires (priority 12, is_repeatable=false). Sets first_morning_done.
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id          = "canvas_first_morning"
+name        = "Last of the rent money"
+description = "Day 1 boot. Dahlia's room, 4pm. Broke, behind, the Spur sign buzzing two blocks down. Establishes the situation. Sets first_morning_done."
+
+[canvases.trigger]
+location      = "loc_dahlias_room"
+is_repeatable = false
+priority      = 12
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "first_morning_done", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "intro"
+name = "Last of the rent money"
+blocks = [
+  { type = "paragraph", content = "Twenty dollars and a window full of brick. Dahlia counts the bills twice on the mattress like the second count might find more, and it doesn't. Down the block the Velvet Spur's sign buzzes pink through the dusk — she'd waited a table there a month ago, before Marco cut the floor and her with it." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He'll put me back on. He likes having something to hold over a girl." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Head down to the Spur."
+targetType = "location"
+locationId = "loc_city_street"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "first_morning_done", op = "set" },
+]

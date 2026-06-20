@@ -1,0 +1,127 @@
+# Phase 1/7 — 1_metadata_and_locations.toml
+# Bar Empire — player + NPCs (with schedules) + locations
+# IMPORTANT: All [[npcs]] + [[npcs.schedules]] + [[npcs.core_traits]] live in THIS file.
+
+# ─── Player ───────────────────────────────────────────────────────────────────
+
+[player]
+id           = "player"
+name         = "Nina"
+description  = "Mid-twenties, broke, three weeks behind on everything. She took the floor job at the Velvet Rail because it was the only place that didn't ask questions. She's started to notice the way men look at her — and the way that look has a price tag."
+portrait     = "nina.jpg"
+customizable = true
+
+[player.core_traits]
+# ── Always-on (built-in) ──────────────────────────────────────────────────────
+corruption = 0
+arousal    = 0
+energy     = 100
+hygiene    = 100
+money      = 40        # broke start — the pressure that drives the corruption ladder
+
+# ── Built-in optional ─────────────────────────────────────────────────────────
+exhibitionism = 0      # public-floor exposure leg (real content: flashing/revealing shifts)
+
+# ── Tier-3 CUSTOM trait (NOT engine-native; gated with the ordinary `trait` predicate) ──
+# The madam-power leg. Gates Act-2/3 content (the stable, the city tier). Written by the
+# take-the-bar capstone; never decays. Declared here so every gate/effect/sidebar resolves.
+influence = 0
+
+# ── Per-NPC stage trait (player namespace; hidden from sidebar) ───────────────
+sal_stage = 0          # 0–4: noticed → storeroom → backroom → owned
+
+# ─── Player customization fields ──────────────────────────────────────────────
+[[player.customization_fields]]
+id      = "name"
+type    = "text"
+label   = "Your name"
+default = "Nina"
+
+[[player.customization_fields]]
+id      = "body_type"
+type    = "select"
+label   = "Build"
+default = "average"
+options = ["petite", "average", "curvy", "athletic", "thick"]
+
+# ─── NPCs ─────────────────────────────────────────────────────────────────────
+# Sal — CORE, family/slow-burn. Spine = npc_sal.corruption (odometer) + arousal (throttle);
+# player corruption is the secondary floor on explicit beats. arc_stages = the R7 ladder.
+
+[[npcs]]
+id          = "npc_sal"
+name        = "Sal"
+description = "Late forties, soft in the middle, sharp in the eyes. Owns the Velvet Rail and owes more on it than he'll admit. Wears the same three shirts and counts the till twice a night. Used to being the one with the keys."
+portrait    = "sal.jpg"
+core_traits = { arousal = 0, corruption = 0, relation = 0 }
+flag_keys   = []
+arc_stages  = [
+  "Owner",        # Stage 0 — he signs your shifts; baseline
+  "Noticed",      # Stage 1 — sal_noticed; he watches you on the floor
+  "Storeroom",    # Stage 2 — sal_storeroom_done; he takes his cut
+  "Back room",    # Stage 3 — sal_backroom_done; the books are an excuse
+  "Owned",        # Stage 4 — sal_owned; the Rail is yours
+]
+
+[npcs.trait_decay]
+relation = 0.5   # small trickle — rewards continued interaction
+
+# Sal is at the bar floor every night (opportunistic, present from turn 1 — soft gate).
+[[npcs.schedules]]
+location   = "loc_bar_floor"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time   = "02:00"
+activity   = "running the bar"
+
+[[npcs.schedules]]
+location   = "loc_back_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "02:00"
+end_time   = "04:00"
+activity   = "counting the till"
+
+[[npcs.schedules]]
+location   = "loc_apartment"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "04:00"
+end_time   = "18:00"
+activity   = "away (home)"
+# offscreen: Sal is at his own place during the day — away-label, exempt from the
+# presence floor (doctrine/10 §5.5). loc_apartment here doubles as the offscreen
+# "away" tag for the daytime block; he is never actually met in the player's apartment.
+
+# ─── Locations ────────────────────────────────────────────────────────────────
+# Standing hubs (NOT is_container — containers swallow attached canvases).
+
+[[locations]]
+id               = "loc_bar_floor"
+name             = "The Velvet Rail — Floor"
+description      = "Sticky bar, six stools, a row of booths under dead neon. The stage in back hasn't held an act in years. The smell is spilled beer and Sal's cigarettes. This is where the shifts, the patrons, and the money are."
+# Start location (the starting_canvas fires here). NON-container standing hub.
+navigation_order = ["loc_storeroom", "loc_back_room"]
+
+[[locations]]
+id          = "loc_storeroom"
+name        = "The Velvet Rail — Storeroom"
+description = "A narrow room of beer crates and broken stools behind the bar, one bulb on a string. Dark, close, and out of sight of the floor — the first place things happen off-stage."
+entry_from  = "loc_bar_floor"
+
+[[locations]]
+id          = "loc_back_room"
+name        = "The Velvet Rail — Back Room"
+description = "Sal's office behind the bar: a desk buried in receipts, a safe he keeps locked, a couch that's seen things. The door bolts from the inside. This is where the real business — and the real privacy — lives."
+entry_from  = "loc_bar_floor"
+# Locked until Sal invites you back (the back-room capstone sets sal_backroom_done).
+# Visible-but-blocked (doctrine/10 §5.4 Case B — deeper room, off-hours fallback legible).
+entry_conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "sal_backroom_done", operator = "is_true" },
+] }
+blocked_message = "He hasn't waved me back there yet. That door's still his."
+
+[[locations]]
+id          = "loc_apartment"
+name        = "Your Apartment"
+description = "One room, a mattress, a window onto the alley. The rent's late and the fridge hums too loud. It's cramped and it's yours — the door locks. Where you sleep, dress, and plan the climb."
+# Reachable home hub. Also the wardrobe + (stub) shop location until the rack gets its own venue.
+entry_from  = "loc_bar_floor"

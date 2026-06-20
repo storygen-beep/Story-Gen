@@ -1,0 +1,49 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 3 v2 — ACTIVITIES (Repeatable canvases)
+# Game: The Long Summer (rewrite v2)
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Phase A.0 sanity check (2026-04-28). One canvas to validate the activity
+# pattern: block_pool rotating openings + schedule banding + max_triggers_per_day.
+#
+# Voice register per 02_TLS_Rewrite_Spec.md §10:
+#   - Activity canvases: TLS-literary, Failbetter density, 30-100 words per pool entry.
+
+
+# ─── ACTIVITY: activity_sleep — solo daily at loc_mayas_bedroom ───
+
+[[canvases]]
+id = "activity_sleep"
+name = "Sleep"
+description = "Solo daily activity at loc_mayas_bedroom. Schedule N/LN bands. max_triggers_per_day=1. Phase A.0: 4 block_pool entries, no Keep-route variants yet (deferred to Phase D)."
+
+[canvases.trigger]
+location = "loc_mayas_bedroom"
+is_repeatable = true
+priority = 2
+is_active = true
+max_triggers_per_day = 1
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "arrived_at_franks", operator = "is_true" }
+] }
+[[canvases.trigger.schedules]]
+start_time = "22:00"
+end_time = "04:00"
+
+[[canvases.nodes]]
+id = "base"
+name = "Sleep"
+blocks = [
+  { type = "image", props = { file = "activities/sleep.jpg", description = "Maya's bedroom at night. Twin bed under a window, the quilt half-pushed back, an oscillating fan on the dresser, a small reading lamp throwing yellow on a sketchbook closed on the desk. The window cracked two inches at the bottom; cicadas through it. Late summer Southern night.", search_queries = ["young woman's small bedroom at night twin bed quilt fan oscillating sketchbook on desk", "southern farmhouse guest bedroom night window cracked open cicadas summer reading lamp", "rural alabama small bedroom twin bed late night window slightly open warm yellow lamp"] } },
+  { type = "block_pool", blocks = [
+    { type = "paragraph", content = "The fan was on. The fan was always on. Through the wall, the slow tick of Jake's keyboard. The cicadas through the window-crack. The quilt over her at the angle the quilt always landed when she pulled it up tired." },
+    { type = "paragraph", content = "The crickets outside the window and the refrigerator hum from the kitchen and the weight of three hundred and twenty miles she had stopped feeling around midnight. She was asleep before she registered the sheet against her ankle." },
+    { type = "paragraph", content = "The night was the August kind. The fan moved the heat instead of cutting it. Somewhere on Route 9 a truck changed gears. The yellow under the door was the hall nightlight, which was the same yellow it had been the night before." },
+    { type = "paragraph", content = "She turned the lamp off. The room was the dark of a room she had begun to know the dark of. Her hand under the pillow. The oscillating fan finishing its slow turn back to her side of the bed." }
+  ] }
+]
+exit_block = { type = "location", text = "Lights off.", config = { destinationType = "trigger", time_progression_minutes = 480, effects = [
+  { targetType = "player", trait = "energy", op = "set", value = 100 }
+], flagEffects = [
+  { targetType = "player", flag = "talked_to_frank_today", op = "unset" }
+] } }

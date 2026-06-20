@@ -148,8 +148,10 @@ Rides existing mechanisms — don't invent a new canvas type:
 
 ## Method (the pass itself)
 1. **NPC-arc track — per NPC:** walk its arc-shape rungs (R7 §3) × its lane budget → one row per scene, each
-   tagged with the **want** it serves (`09`) and its **double lock** (`07`). Consolidates the whole cast into
-   one table (catches cross-NPC gaps).
+   tagged with the **want** it serves (`09`), its **double lock** (`07`), and — for any cross-wired rung —
+   the **machine wire** it carries (the other arc's flag/stage it reads, from §8; `22`). Consolidates the
+   whole cast into one table — and this is where the **machine is verified** (next), not just where
+   cross-NPC gaps are caught by accident.
 2. **Player track — per LOCATION × archetype:** walk each venue × the catalog (1–10) → "what self-act / flash
    / public / job-lewd / **reactive event** fits *here* at this premise + ceiling?" → a **tiered column per
    venue** (corr 0 → 15 → 30 → 45) + its **reactive ceiling** (`11`). This is the step that never happened.
@@ -167,6 +169,16 @@ Rides existing mechanisms — don't invent a new canvas type:
 - **Every row serves a want** (`09`) — no meter-exercise rows.
 - **Tiers populated** — bootstrap (corr 0) + flash (corr 15) feeders exist, not just corr-30 capstones.
 - **Economy balanced** — every NPC seduction door is reachable through ordinary feeder play.
+- **The machine is verified** (`22` — a REAL check, not "≥1 cross-NPC link exists"):
+  - **Core loop closed** — the conquest → money/access → next-conquest loop the machine designed (`22`) is
+    present in the roster's rows (the income paths that fund reaching the next target are actually there).
+  - **Every core NPC placed** — each core NPC's §8 wires (SETS/READS) appear as roster rows; no core NPC is
+    an island.
+  - **DAG (D2)** — trace the F1 cross-reads: they form a directed-acyclic graph, every arc cold-start-
+    reachable, no two arcs mutually gating each other's depth. A cycle is a deadlock the build won't catch.
+  - **No entry gated (D1)** — every cross-read gates a mid/late rung or capstone, never an arc's on-ramp.
+  - **Every cross-gate telegraphed (D3)** — each cross-wired rung has a locked-visible row/telegraph naming
+    the gating arc's state (`14` L7); no silent cross-lock.
 - **Reactive rows present & ceiling-set** (`11`) — clothing-triggered events per place, with modes + the act-scoped forced rule.
 - **Archetypes fit the premise** — no gym in a bar game; the venues are this game's real locations.
 - **Ceiling honored** — player-track rows touching an NPC sit at that NPC's `doctrine/08` ceiling.
@@ -183,7 +195,8 @@ dumped into code in one pass.
 
 ## Cross-references
 - `06` casting / `07` NPC arcs (inputs) · `09` desire ladder (every row a want) · `11` reactive world
-  (archetype 10) · `13` economy (archetype 4) · `17` frontier (open-topped, deferred = seeds) · `16` run-mode.
+  (archetype 10) · `13` economy (archetype 4) · `17` frontier (open-topped, deferred = seeds) · `16` run-mode ·
+  `22` the machine (the roster self-check verifies it — core loop / every core NPC placed / DAG / telegraphs).
 - Existing skill (reconcile at wiring): `references/content-design.md` (this re-homes it), `lanes.md`,
   `trait-design.md`, `sex-loop.md`, `doctrine/08`, `beat-authoring.md` (reads the roster each turn).
 - Evidence: `game_explorations/rts-align-verify/rts_scene_registry.json`.

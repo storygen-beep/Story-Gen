@@ -61,6 +61,13 @@ Income, pressure, content, and desire become the **same beats**:
 - the **desire ladder** (`09`): she earns *while chasing a want* (rent, the dress, the bar), never to fill a bar;
 - the **reactive world** (`11`): the lewd income paths (work the floor revealing, cam, escort) ARE the
   clothing-triggered content — earning + reactivity + scene are one;
+- the **machine** (`22`, form 2a): money is the **connective tissue BETWEEN arcs** — what you earn from one
+  arc/activity is the *gate* to reach the next person. `13` says "earning = corrupting yourself"; the
+  machine adds "earning = the thing that lets you reach the NEXT target" (work the floor / break the boss →
+  *afford* the dress that turns the owner's head). So the economy isn't a meter beside the arcs; it's the
+  circuit that wires them together. *(Form 2b — a payout **banded** by an NPC's trait, so corrupting him
+  also pays better — is the same fusion at choice level; `22`. The output end — a *finished* arc that
+  **produces** income/capability — is **G6**, deferred; reserve `E10` for it.)*
 - **sinks** point money back at *wanted* purchases (clothing dial, the empire) → pressure via desire.
 
 ---
@@ -96,9 +103,12 @@ She never grinds a shift button; she chooses which hot/story money path to chase
 - **Pressure kept alive by scaling sinks** (rent/debt + clothing + empire + gifts), not a tax — and the sinks are *wanted* (desire, not friction).
 - **Pressure escalates across acts** (E8): survival debt → late empire-threat; the squeeze never fully dies.
 - **Recruits are arcs, not income widgets** (E9): empire money is a byproduct of authored content, never a passive number.
+- **The economy is the machine's connective tissue** (`22` form 2a): earning from one arc/activity gates
+  reaching the next — the income paths wire the arcs together, they don't just sit beside them.
 - Counts/rates **authored per game**, not hardcoded.
 
 ## Cross-references
 - `12_economy_research.md` (evidence) · `08` Gap 5 · `04` cascade (pressure) · `09` desire ladder (earn
-  while chasing wants) · `11` reactive world (lewd income = the content) · `05` quality #3 (no grind).
+  while chasing wants) · `11` reactive world (lewd income = the content) · `05` quality #3 (no grind) ·
+  `22` the machine (the economy as connective tissue between arcs — form 2a/2b; finished-arc-as-income = G6).
 - Engine reuse: existing `money` + rent system + clothing system + `lanes.md` Lane 3 work hosts.

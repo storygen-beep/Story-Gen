@@ -1,0 +1,750 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 2 — STORY CANVASES (Non-repeatable story beats)
+# Game: The Long Summer
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Source: book_phases/4_story_events.md. 48 canvases total:
+#   Prologue (20): P1.1–P1.6, P2.1–P2.5, P3.1–P3.4, P4.1–P4.5
+#   Phase 1 (28): B1–B28 (arrival + 9 Ch1 + 6 Ch2 + 12 Ch3+)
+#
+# All canvases: priority = 10, is_repeatable = false, is_active = true.
+# Every canvas sets at least one completion flag via exit_block.flagEffects.
+# Starting canvas `prologue_morning_with_daniel` fires on game start
+# (starting_canvas = "prologue_morning_with_daniel" is declared in Phase 1).
+#
+# PROLOGUE LOCATIONS (synthetic, sub-game scope — NOT in session_state.yaml
+# Phase 1 coverage.locations). These locations are declared inline in the
+# triggers below; the engine tolerates trigger.location references that don't
+# appear in [[locations]] (confirmed by template_import normalize — locations
+# are validated against Phase 1 at validate time; for the Prologue we use loc_
+# Prologue synthetic IDs that Phase 2 canvases fire against as transient
+# settings, and the Prologue ends with an advance to Phase 1 locations).
+#
+# Prologue synthetic locations used:
+#   loc_prologue_daniels_apartment  — Daniel's place. The single Prologue
+#                                     location. Prologue is now one canvas with
+#                                     nine sequential nodes; locations are not
+#                                     traversed within the Prologue.
+#
+# These are NOT in [[locations]] in Phase 1 — they're Prologue-only. The
+# Prologue ends with the final beat (prologue_diana_call_and_pack) setting
+# accepted_diana_offer and firing the next canvas (arrival_at_franks, which
+# does resolve against Phase 1 locations). Since we cannot add Prologue
+# locations without polluting session_state.yaml coverage, we reuse an
+# existing Phase 1 location (loc_mayas_bedroom) as a generic "Maya-solo
+# indoor" location for all Prologue-synthetic scenes that don't otherwise
+# match a registered location. The prose handles the transition.
+#
+# Common Mistake #10 (dialog blocks use props.speaker/npcId, not npcName) —
+# enforced throughout.
+# Common Mistake #1 (targetType in choices must not be "canvas") — we use
+# "trigger" (returns to location) or "specific" (jumps to a canvas/node).
+# Common Mistake #9 (day-based gates) — no day-of-week gates in canvas
+# conditions; only flag chains + trait thresholds.
+
+
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║ PART A — PROLOGUE (1 canvas, 9 linear nodes)                              ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+#
+# The Prologue is a single canvas with nine sequential nodes, ~8,000 words of
+# linear novel-register prose. See design doc §4 in
+# 19th_april_UOR_Redesign_Session/Game_Redesign.md. Source anchor for the
+# prose: originally drafted in
+# apps/game_generation/games_toml_files/the_long_summer_prologue.toml
+# (standalone fixture), then merged here as the real Prologue.
+#
+# Only two nodes take player input:
+#   prep  — three calc_tier choices (deliberate / moderate / impulsive)
+#   diana — told_sarah yes/no; both branches set all legacy prologue flags
+#           and exit to loc_front_porch (Phase 1 arrival).
+#
+# Legacy flags set on both `diana` exit choices: met_daniel, prologue_cast_met,
+# emma_read, sarah_suspicion_surfaced, saw_emma_text, decided_to_look,
+# sarah_knows_something, confirmed_visual, saw_the_thread, second_flag_landed,
+# kevin_approach_branch, party_scheduled, revenge_committed,
+# prologue_morning_after_done, prologue_emma_done, prologue_daniel_breakup_done,
+# accepted_diana_offer, prologue_complete (+ told_sarah on the 'Call Sarah'
+# branch). The backed_out_of_revenge flag is not set — the single-canvas
+# linear form drops the bail-out branch by design.
+[[canvases]]
+id          = "prologue_morning_with_daniel"
+name        = "The Long Summer — Prologue"
+description = "Prologue. Maya's last Sunday in her old life, and the Wednesday that broke it. Nine sequential nodes, ~8,500 words of linear novel-register prose. Starting canvas; triggers at loc_prologue_daniels_apartment; exits to loc_front_porch. Revised 2026-04-23: Sarah (not Emma) is Daniel's secret partner; discovery is visual in an empty college classroom; added morning sex scene at N2."
+
+[canvases.trigger]
+location = "loc_prologue_daniels_apartment"
+is_repeatable = false
+priority = 10
+is_active = true
+
+# ─── N1 ── wake — Sunday morning, same bed as Daniel ─────────────────────────
+[[canvases.nodes]]
+id     = "wake"
+name   = "Sunday Morning"
+blocks = [
+  { type = "heading",   content = "Prologue" },
+  { type = "paragraph", content = "The apartment smelled like Daniel on Sunday mornings — his shampoo from the shower he'd taken before he came to bed, the specific wool of his weekend sweater on the chair, the ghost of coffee he hadn't made yet because it was still too early. Maya kept her eyes closed and took inventory the way she always did when she woke up somewhere that wasn't hers. Light against the eyelids: soft, morning, the blinds half-closed the way they had been closed last night. A car going past, two stories down. The building's heating clicked and settled. Daniel's breath against the back of her neck, not deep enough to be sleep, not awake yet either." },
+  { type = "paragraph", content = "She had never told him she did this — lay in bed mapping the room before she opened her eyes. It felt like something she shouldn't describe out loud, the way some private rituals felt more hers the less they were said." },
+  { type = "paragraph", content = "When she opened her eyes the ceiling was the same ceiling it had been for two years. A water mark in the shape of a comma by the vent. The paint around the light fixture a slightly different white than the paint on the rest of the ceiling, because the landlord had touched it up once without blending. She had asked Daniel about it during the second month of sleeping over and he had shrugged in the way that meant he had never seen it and did not intend to start. She had drawn the water mark in her sketchbook once — the comma, the faint halo of damp around it — and Daniel had asked her why she'd drawn something ugly. She had said it wasn't ugly. He had said she was weird and kissed her shoulder." },
+  { type = "paragraph", content = "She turned slowly. The sheet slid off her hip. Daniel was on his side, face pressed into the pillow, one arm flung over her stomach like he had been reaching for her in sleep and given up halfway. His mouth was open slightly. His hair did the thing it did in the morning. She had watched him sleep hundreds of times and she had not yet figured out how to draw the particular angle of his jaw when the muscles in it let go." },
+  { type = "paragraph", content = "She put her hand against his hair. The gesture was so familiar she did not register it as a decision." },
+  { type = "paragraph", content = "He made a sound — the not-quite-word he made when he was waking up, which was not a word in any language but which she would have recognized over a phone line in a country she had never been to. He moved his hand where it was on her stomach. He found the hem of her shirt. His thumb went under it." },
+  { type = "paragraph", content = "She watched his face come back to her. She loved this part — the specific minute between sleep and awake when the guard hadn't come up yet, when he was only the weight of himself, and she was the first thing his hand was looking for." },
+  { type = "paragraph", content = "His eyes opened. He saw her. He did the small smile he did when the first thing he saw was her face, which he had done on every Sunday morning she had ever spent in this bed, and which she had never once watched without something quiet happening in her chest." },
+  { type = "dialog", content = "Hey.", props = { speaker = "npc", npcId = "npc_daniel" } },
+  { type = "dialog", content = "Hey.", props = { speaker = "player" } },
+  { type = "paragraph", content = "Nothing was wrong." },
+  { type = "paragraph", content = "The morning was just the morning." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Continue", targetType = "node", nodeId = "prologue_morning_with_daniel.bed", time_progression_minutes = 5, flagEffects = [ { targetType = "player", flag = "prologue_at_bed" } ] },
+  { text = "Skip the prologue. (Go straight to Frank's.)", targetType = "node", nodeId = "prologue_morning_with_daniel.skip_recap", time_progression_minutes = 0 }
+] }
+
+# ─── N2 ── bed — Morning sex before getting out of the bed ───────────────────
+[[canvases.nodes]]
+id     = "bed"
+name   = "The Slow One"
+blocks = [
+  { type = "paragraph", content = "He kissed her. Not fully, not the way he kissed her at night — just a kiss against her mouth that was half a question, and when she answered by not moving away he kissed her again, more of one, the morning taste of him, the faint metal of last night's wine still in the very back of his tongue." },
+  { type = "paragraph", content = "Then he pulled back and looked at her again, because they had been together long enough that he asked her even when he wasn't saying he was asking." },
+  { type = "dialog", content = "Yeah.", props = { speaker = "player" } },
+  { type = "paragraph", content = "His hand was already under her shirt. He pulled the shirt up over her head and threw it in the direction of the chair where it would miss and land on the floor, which was a fact about Daniel and also a fact about their Sunday mornings. She reached for the waist of his boxers. They had done this enough times that neither of them bothered to be clever about it. The clothes came off with the efficiency of people who had stopped performing." },
+  { type = "paragraph", content = "His skin was warm from sleep. That was the thing about morning — he was not yet the person he would be at ten, when the coffee was in him and the edges came back. At eight thirty he was only warmth and the specific smell of the crook of his neck, which she had spent two years learning, which was his shampoo and his sweat and the laundry detergent his mother still bought for him and something underneath that was just Daniel, the thing that was him and no one else." },
+  { type = "paragraph", content = "She pulled him onto her. He made the sound he made. She made the sound she made. The sheet tangled around their legs the way it always did and neither of them stopped to fix it." },
+  { type = "paragraph", content = "He was slow this morning. Some mornings he was fast — woke up wanting and did not negotiate with himself about it — and some mornings he was slow, and this was a slow one. His hand went to her jaw first, his thumb along the edge of it, the way he touched her face only when they were in bed. His mouth at her throat. His other hand finding the shape of her hip under the tangled sheet." },
+  { type = "paragraph", content = "She closed her eyes. She did not close them to be anywhere else. She closed them because she wanted to feel it without watching — the familiar weight of him, the familiar way he knew where to put his hand, the familiar quiet of the morning around them that she had been inside every Sunday for two years and would be inside on this Sunday, and next Sunday, and the Sunday after that." },
+  { type = "paragraph", content = "That was the last thought she had like that." },
+  { type = "paragraph", content = "She did not know yet that it was the last." },
+  { type = "video",     props = { file = "prologue/n2_morning_sex.webm", description = "Morning. Two figures moving together under a tangled sheet. The slow one.", search_queries = ["young couple morning sex in bed tangled sheet soft light", "intimate lovemaking morning bedroom natural light", "boyfriend girlfriend slow tender sex tangled sheet"] } },
+  { type = "paragraph", content = "When he was inside her he said her name. Not moaning it — just saying it, the way he said it when he wanted to know she was there. She said yeah. She said yeah again. Her hand was on the back of his neck and his hand was still on the edge of her jaw and the sheet was a pale rectangle of kicked-aside fabric at the foot of the bed, and the morning light did the thing it did through the half-closed blinds, striping his back in slow parallel lines." },
+  { type = "paragraph", content = "It was not the kind of sex that went anywhere dramatic. It was the sex of people who had learned each other. He came first. He came saying her name again, pressed into her shoulder, and she felt it in her chest as much as her body. He stayed inside her a minute after. He kissed her temple." },
+  { type = "dialog", content = "God, I love you.", props = { speaker = "npc", npcId = "npc_daniel" } },
+  { type = "dialog", content = "I love you.", props = { speaker = "player" } },
+  { type = "paragraph", content = "She meant it. She had meant it that morning and for the whole weekend and for every week of the last two years, and she would go on for the rest of her life not doubting that she had meant it at that moment — and she would go on for the rest of her life knowing that he had, too, even while he was also meaning it, or some version of it, to someone else." },
+  { type = "paragraph", content = "He rolled off her. He pulled the sheet back up over them both. He did the hair-smoothing thing he did to her hair afterward, absent, warm, the gesture of someone who was already falling back into the morning, into coffee, into Sunday." },
+  { type = "dialog", content = "I gotta get up.", props = { speaker = "npc", npcId = "npc_daniel" } },
+  { type = "dialog", content = "In a minute.", props = { speaker = "player" } },
+  { type = "dialog", content = "In a minute.", props = { speaker = "npc", npcId = "npc_daniel" } },
+  { type = "paragraph", content = "They lay there. The heating clicked. A car went past." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Continue", targetType = "node", nodeId = "prologue_morning_with_daniel.classroom", time_progression_minutes = 4320 }
+] }
+
+# ─── N3 ── classroom — Wednesday afternoon, the door she opened ──────────────
+[[canvases.nodes]]
+id     = "classroom"
+name   = "The Third Door"
+blocks = [
+  { type = "paragraph", content = "Wednesday was a Wednesday, and Wednesday was the last day of the semester. That was the thing she would remember afterward, the specific flatness of the day — the morning drawing class that had run five minutes long, the professor who had said *good luck, good summer* and meant it, the coffee she hadn't finished, the hallway echoing in the particular way hallways echoed on the last week when most people had already packed up and gone home. A Wednesday in a life that had been, as of the morning she had spent in Daniel's bed, perfectly shaped." },
+  { type = "paragraph", content = "She had forty minutes before her last final, which was the Art History thing she was going to walk into and sit down and write for two hours and walk out of and not think about again until the grade came through in June. She had wanted to sketch." },
+  { type = "paragraph", content = "The Fine Arts building was where she would normally have gone, but the studios were locked on finals week, and she did not want the whispered study-group sound from the lobbies. She walked across campus to the Humanities building. The third floor had six lecture classrooms, small ones, the kind they used for senior seminars and grad-student discussions, and on the last Wednesday of the semester most of them would be empty — which was, later, the detail she would keep stopping on, because if classes had still been running, none of this would have happened the way it did." },
+  { type = "paragraph", content = "The third floor smelled like the photocopier down the hall that was always warm and the disinfectant they used on the handrails. She tried the first door. Locked. The second door. Locked. The third door opened." },
+  { type = "paragraph", content = "The third door opened and she saw them." },
+  { type = "video",     props = { file = "prologue/n3_classroom.webm", description = "Fluorescent light. An empty classroom. A desk. Two figures she knows.", search_queries = ["couple fucking empty college classroom lecture hall", "cheating couple sex on professor desk fluorescent light", "college hookup empty classroom clothing disarray"] } },
+  { type = "paragraph", content = "She saw them before they saw her. She had that — two seconds of seeing that belonged to her alone, that she would later parse and re-parse and be unable to give up, because the image was specific and complete and she was going to have to carry it: the fluorescent panel above the board flickering at the edge, the rows of empty chairs pushed in at the crooked angles students leave them, Sarah's backpack — the olive-green one Maya had helped her pick out last fall at the thrift on Fifth — slumped against the leg of a student desk, Sarah's sweater crumpled on top of it, Sarah's skirt shoved up around her waist, Sarah on the edge of the professor's desk with her knees apart and her hands braced behind her, Daniel between her knees with his mouth on hers and one hand in her hair in the particular way Maya had felt his hand in her own hair on Sunday morning." },
+  { type = "paragraph", content = "Sarah's mouth was doing the thing Sarah's mouth did, which Maya had seen a hundred times in a hundred non-sexual contexts over three years of friendship — the slight left-sided hitch of her lips, the way she pressed her tongue against her teeth before a laugh — and which was now doing it for Daniel." },
+  { type = "paragraph", content = "Neither of them looked up." },
+  { type = "paragraph", content = "She stood in the doorway for somewhere between two and four seconds. She knew the count because later, in her apartment, she would try to reconstruct exactly how long she had stood there, and she would not be able to decide, and her inability to decide would become one of the things she carried." },
+  { type = "paragraph", content = "Long enough to register that she was not misreading. Long enough to be sure she was not going to look back at this in an hour and wonder if maybe she had seen something else. Long enough that if either of them had glanced at the door, they would have seen her." },
+  { type = "paragraph", content = "Neither of them glanced at the door." },
+  { type = "paragraph", content = "She closed the door." },
+  { type = "paragraph", content = "She closed it quietly. She did not slam it. The part of her that slammed doors had not been in the room with her, apparently, for some time — she had left that part of herself somewhere, maybe on Sunday morning, maybe earlier, and what was in her body in the third-floor hallway was the other part, the part that closed doors quietly, the part that would turn out to be most of her from here on out." },
+  { type = "paragraph", content = "She walked down the hallway. She walked down the stairs. She walked out of the Humanities building and across the quad and past the coffee cart at the edge of the quad, and she sat on a bench outside the library because her legs had decided to sit before she had decided to sit, and she took her sketchbook out of her bag and put it in her lap." },
+  { type = "paragraph", content = "She did not open it." },
+  { type = "paragraph", content = "She sat for fifteen minutes on the bench. A boy she did not know walked past with a dog she did not know. A bell rang somewhere. Her phone buzzed twice in her coat pocket and she did not look at it. The sun moved the specific amount the sun moves in fifteen minutes on a Wednesday in October." },
+  { type = "paragraph", content = "She stood up. She walked back to the parking lot at the edge of campus. She got in her car. She drove home." },
+  { type = "paragraph", content = "In her apartment she locked the door behind her with the specific care of a person handling something breakable. She sat down on her bed with her coat still on." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Continue", targetType = "node", nodeId = "prologue_morning_with_daniel.home", time_progression_minutes = 60, flagEffects = [ { targetType = "player", flag = "prologue_saw_them" } ] }
+] }
+
+# ─── N4 ── home — Maya alone, planning ───────────────────────────────────────
+[[canvases.nodes]]
+id     = "home"
+name   = "Item Four"
+blocks = [
+  { type = "paragraph", content = "The laundromat's dryers vibrated the floor at a frequency she had stopped hearing three weeks into her lease. She could hear it now. It was the sound of the afternoon agreeing with itself that nothing had changed, and the floor continued to hum, and the light came through her curtains the way it had come through last Wednesday's curtains and the Wednesday before that, and she sat on the bed thinking very carefully about how not to cry." },
+  { type = "paragraph", content = "She was not going to cry. That part she had decided on the bench." },
+  { type = "paragraph", content = "What she did not yet know was what the decision was instead." },
+  { type = "paragraph", content = "She made a list, not on paper. On paper would have been an action, and actions meant commitment, and she was not ready to commit. In her head the list had items." },
+  { type = "paragraph", content = "Item one: she could call him. She saw the version of herself that called him — the shape of that sentence, the way her voice would sound through the phone, the things he would say — and discarded it." },
+  { type = "paragraph", content = "Item two: she could confront them. Go back to the classroom, or to Sarah's apartment, or to Daniel's, and perform the shouting version of this, the slap, the thrown glass. The version of herself that did that was a version she could perform, had performed, at fifteen, at sixteen, a girl with a clean wound and a louder voice. The wound was not clean. She was not fifteen." },
+  { type = "paragraph", content = "Item three: she could tell Kevin. Just call him, tell him what she had seen, let him break up with Sarah cleanly. The version of herself that did this was a good person. That self-knowledge was interesting — a good person existed in her, was in fact available on short notice — but she noticed that she did not want to become that person at this particular moment. She put the option down. The good person in her was very quiet." },
+  { type = "paragraph", content = "She sat on the bed." },
+  { type = "paragraph", content = "The sketchbook was on the desk. It had been open since the weekend to a page of Daniel's hands — she had been drawing his hands on Friday evening while he watched a movie, the way she had drawn his hands a dozen times before, because she liked the particular knuckle of his left ring finger and the vein across the back of his hand that showed when he was cold. She looked at the page from where she sat on the bed. She did not get up and close it." },
+  { type = "paragraph", content = "Item four appeared. It appeared whole. It was not a thought she constructed — it was a thought that was already there when she turned her attention to it, the way a word you have been trying to remember for an hour is suddenly the word, and was the word all along." },
+  { type = "paragraph", content = "Item four was: do to her what she had done, and do it with someone she loves, and do it so that she has to learn about it the same way." },
+  { type = "paragraph", content = "She held it in her head and noticed that she was not shocked by it. She noticed that she was doing the thing she had been doing all afternoon — observing herself from a half-step behind. The thought was the kind of thought a person had and then discarded, if the person was the person she had thought she was. She did not discard it. She turned it over. She tested it against the specific edges of what she knew about Sarah and what she knew about the people who were currently in Sarah's orbit." },
+  { type = "paragraph", content = "Kevin was in Sarah's orbit." },
+  { type = "paragraph", content = "Kevin and Sarah had been together for three years, one year longer than Maya and Daniel. Kevin was — and this was the symmetry Maya was turning over on the bed — exactly the right weight. Daniel would feel it because Daniel had never looked at Kevin and thought of him as competition. Sarah would feel it in the specific currency she had picked. What Sarah had done to Maya, Maya could do to Sarah, exactly, and with the same man-around-the-edges friend-group logic that had made Sarah and Daniel possible in the first place." },
+  { type = "paragraph", content = "She stood up. She took off her coat. She laid it on the chair, folded, the way she folded everything." },
+  { type = "paragraph", content = "She got into the shower with the water too hot, because it was too hot that she wanted, and she did not cry there either." },
+  { type = "paragraph", content = "When she came out she sat on the edge of the bed in a towel, and she did not open the sketchbook, and she did not close it, and the evening began." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Continue", targetType = "node", nodeId = "prologue_morning_with_daniel.prep", time_progression_minutes = 180 }
+] }
+
+# ─── N5 ── prep — Player choice sets calculation_tier + calc_tier_* ──────────
+[[canvases.nodes]]
+id     = "prep"
+name   = "Preparation"
+blocks = [
+  { type = "paragraph", content = "There was a party at Adam's on Saturday night. Kevin and Sarah would be there because Adam and Kevin had been friends since seventh grade and Kevin went to every party Adam had ever thrown, even the ones he didn't want to go to. Maya had checked Kevin's Instagram from the couch on Thursday and confirmed. He had posted a thing at lunchtime. He would be there." },
+  { type = "paragraph", content = "She had not seen Kevin in maybe six weeks. She did not dislike him. She had never disliked him. At the July barbecue he had asked her about the mural she'd done on the side of the community center and had listened to her answer in the way some people listen, which is to say completely, without performing interest, without offering his own opinion until she had finished with hers. She had thought at the time that if she had not already been with Daniel she might have noticed him." },
+  { type = "paragraph", content = "She was going to use that." },
+  { type = "paragraph", content = "The dress was on the bed. It was a dress she had bought in February and had not worn because she had bought it for a specific night that had not happened the way she had planned. It was black. It was not cut low. It did not need to be. It was cut the way dresses are cut when the person wearing them knows what a shoulder blade is and does not feel the need to underline it." },
+  { type = "image",     props = { file = "prologue/n5_getting_ready.jpg", description = "Maya in the mirror, half-dressed. The dress on the bed.", search_queries = ["young woman half-dressed mirror bathroom getting ready evening", "woman black dress lipstick preparing for party", "college student mirror reflection putting on dress"] } },
+  { type = "paragraph", content = "She stood in the bathroom in her underwear with a tube of lipstick she had forgotten she owned. The lipstick was the wrong color for her mouth in the afternoon and the right color for her mouth at nine in the evening in someone's kitchen, and she knew this because she had tested it once, eight months ago, and had written it down in the notes app on her phone because she was the kind of person who wrote down what shade of lipstick worked at what time of day under what light." },
+  { type = "paragraph", content = "The mirror showed her what it usually showed her. Her mouth. The angle of her jaw. The short scar under her chin from when she was seven. She looked at herself. The person in the mirror looked back." },
+  { type = "paragraph", content = "She had not asked herself yet what she was willing to do tonight. She had been careful not to ask. The not-asking was the thing she was going to have to stop, in about forty-five minutes, in the backseat of the car she was going to call, because the not-asking was a kind of cowardice that she could not take with her into Adam's house." },
+  { type = "paragraph", content = "She had three ways to go about it." },
+  { type = "paragraph", content = "She could rehearse. She could pick the dress and the lipstick and the line and the first and second sentence she was going to say to Kevin, and the third, and the moment she was going to put her hand on his wrist, and she could be so prepared that when it happened it would feel like the performance it was." },
+  { type = "paragraph", content = "She could take a drink first. Not to lose herself. To blur the specific edges of what she was about to do so that she could do it without watching herself do it." },
+  { type = "paragraph", content = "Or she could not decide. She could put on the dress and go. She could trust that her body knew more than her mind did and let her body tell her, in the room, what the next move was." },
+  { type = "paragraph", content = "She stood in front of the dress." },
+  { type = "paragraph", content = "The bathroom smelled like the shampoo she had used in the too-hot shower — green apple, cheap, her own." },
+  { type = "paragraph", content = "She reached for the dress." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Pick the dress she hasn't worn. Rehearse the line in her head.", targetType = "node", nodeId = "prologue_morning_with_daniel.party", time_progression_minutes = 45, effects = [{ targetType = "player", trait = "calculation", op = "add", value = 5 }], flagEffects = [{ targetType = "player", flag = "calculation_tier" }, { targetType = "player", flag = "calc_tier_deliberate" }, { targetType = "player", flag = "revenge_planned" }] },
+  { text = "A drink first. Then the dress.",                                  targetType = "node", nodeId = "prologue_morning_with_daniel.party", time_progression_minutes = 45, effects = [{ targetType = "player", trait = "calculation", op = "add", value = 3 }], flagEffects = [{ targetType = "player", flag = "calculation_tier" }, { targetType = "player", flag = "calc_tier_moderate" }, { targetType = "player", flag = "drinks_at_party" }, { targetType = "player", flag = "revenge_planned" }] },
+  { text = "Grab something. Don't think. Go.",                                targetType = "node", nodeId = "prologue_morning_with_daniel.party", time_progression_minutes = 30, effects = [{ targetType = "player", trait = "calculation", op = "add", value = 1 }], flagEffects = [{ targetType = "player", flag = "calculation_tier" }, { targetType = "player", flag = "calc_tier_impulsive" }, { targetType = "player", flag = "revenge_planned" }] }
+] }
+
+# ─── N6 ── party — Kevin's humanity beat (Kevin is Sarah's bf) ───────────────
+[[canvases.nodes]]
+id     = "party"
+name   = "The Back Porch"
+blocks = [
+  { type = "paragraph", content = "Adam's house was the kind of house that had been rented by six roommates and was being lived in by twenty-three, and it always smelled like old beer and the very specific stale warmth of too many bodies in rooms built for fewer. Adam threw the same party every May, the end-of-semester thing, the send-off before everyone scattered — home for the summer, internship in another city, a half-empty apartment waiting for a job — and the party was loud because everyone had a reason to want the night to count. Maya got there at nine-twenty. She was alone. She had ordered the car and paid in cash because she had not wanted the timestamp on her card. She noticed, noticing this, that she was already thinking in the language of aftermath." },
+  { type = "paragraph", content = "Adam opened the door with a bottle in his hand and kissed her on the cheek and asked where Daniel was and Maya said *not feeling great, told him I'd come anyway,* and Adam nodded the way boys nodded when girls told them things they had no interest in following up on, and he said *well, good to see you before summer* and waved her in and went back to the kitchen." },
+  { type = "paragraph", content = "The music in the living room was loud enough that she had to move her mouth specifically when she spoke. The couch was full. The coffee table was full. There were people she knew and people she didn't. The people she knew did the wave-thing. She did the wave-thing back. She wound through. She was looking." },
+  { type = "paragraph", content = "Kevin was on the back porch." },
+  { type = "image",     props = { file = "prologue/n6_kevin.jpg", description = "Kevin on the back porch, alone. A specific face, not a template.", search_queries = ["young man alone back porch house party evening beer", "college guy sitting on steps looking at phone night", "quiet man house party back porch t-shirt step"] } },
+  { type = "paragraph", content = "She saw him through the kitchen window before he saw her. He was sitting on the step with a beer balanced on his knee, alone, looking at his phone the way you look at a phone when you are pretending to wait for something so you do not have to talk to the person inside the house who is going to ask you a question you don't want to answer. Sarah was not with him. Sarah was somewhere — the bathroom, the kitchen, not here yet, not here at all — and it did not matter where Sarah was." },
+  { type = "paragraph", content = "Maya went through the kitchen and opened the sliding door and stepped out onto the porch." },
+  { type = "dialog", content = "Hey.", props = { speaker = "player" } },
+  { type = "paragraph", content = "He looked up. He smiled at her without calculation. That was the first thing she had to hold off." },
+  { type = "dialog", content = "Hey, Maya.", props = { speaker = "npc", npcId = "npc_kevin" } },
+  { type = "paragraph", content = "She sat down on the step next to him. Not too close. Close enough that she could feel the warmth of his arm without it touching her. He set the phone face-down on his thigh in a gesture she catalogued." },
+  { type = "dialog", content = "I didn't know you were coming.", props = { speaker = "npc", npcId = "npc_kevin" } },
+  { type = "dialog", content = "I didn't know I was coming either. Just needed the night.", props = { speaker = "player" } },
+  { type = "paragraph", content = "He nodded. The house's porch light was behind them and his face was half in shadow and she could see, for the first time really, the shape of his jaw, the place where the stubble came in unevenly on the left side, a small patch of skin above the cheekbone where it didn't grow. He had an old t-shirt on. The t-shirt had a faded logo for a show she had liked in high school and that she hadn't seen him wearing before." },
+  { type = "dialog", content = "I liked that band.", props = { speaker = "player" } },
+  { type = "dialog", content = "Me too. Long time ago.", props = { speaker = "npc", npcId = "npc_kevin" } },
+  { type = "paragraph", content = "They sat. The beer on his knee was doing the condensation thing. Somewhere inside the house somebody played the song they always played at parties, the one everyone knew but nobody could remember the name of, and a chorus of voices came up, and died down, and came up again." },
+  { type = "dialog", content = "Hey. I saw the thing you did. On the wall, by the community center. With the birds.", props = { speaker = "npc", npcId = "npc_kevin" } },
+  { type = "paragraph", content = "She looked at him." },
+  { type = "dialog", content = "Saw it in July, actually. After you told me about it at Adam's thing. I went over.", props = { speaker = "npc", npcId = "npc_kevin" } },
+  { type = "dialog", content = "You went over.", props = { speaker = "player" } },
+  { type = "dialog", content = "Yeah. I had to drive past that area for — whatever, doesn't matter. I pulled over. I stood there for ten minutes.", props = { speaker = "npc", npcId = "npc_kevin" } },
+  { type = "dialog", content = "Oh.", props = { speaker = "player" } },
+  { type = "dialog", content = "The thing with the — the one bird that's not quite like the others. The one that's looking the wrong way.", props = { speaker = "npc", npcId = "npc_kevin" } },
+  { type = "dialog", content = "Yeah.", props = { speaker = "player" } },
+  { type = "dialog", content = "Why.", props = { speaker = "npc", npcId = "npc_kevin" } },
+  { type = "paragraph", content = "She had known for four months why. It was not a thing she had told Daniel. Daniel had liked the mural, had taken a picture of himself in front of it, had posted it with a caption that said *my girl.* Daniel had not asked." },
+  { type = "dialog", content = "Composition. I liked the break in the pattern.", props = { speaker = "player" } },
+  { type = "paragraph", content = "Kevin nodded." },
+  { type = "paragraph", content = "The truth was that the bird was her. She had painted it looking the wrong way because she had been painting at a time when she had been feeling looked-at in every direction but the one she wanted to be looked in, and the bird was the bird that was not going to be looked at properly because the bird had decided to stop trying. It was the only real thing in the mural. It was the thing she'd been proud of. Kevin had driven over and stood in front of it for ten minutes on a weekday in July and he had asked her the only question anyone had ever asked her about it that mattered." },
+  { type = "paragraph", content = "She said *composition* and she watched his face accept the lie without suspicion, because he was the kind of person who took what you said at the value you said it, and this — this was the thing that she was going to carry for the rest of her life without being able to name, the small courtesy of having been told a lie by the person you admired, without ever knowing it had been a lie." },
+  { type = "paragraph", content = "He drank some of his beer." },
+  { type = "dialog", content = "Can I get you one?", props = { speaker = "npc", npcId = "npc_kevin" } },
+  { type = "dialog", content = "Yeah. Please.", props = { speaker = "player" } },
+  { type = "paragraph", content = "He stood up to go inside and she watched the line of his back as he walked through the kitchen, and she noticed that she had already started — the thing she had come here to do had started forty seconds ago and she had not noticed the exact moment it began. That was the part that scared her. Not the doing of it. The not noticing when it began." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Continue", targetType = "node", nodeId = "prologue_morning_with_daniel.upstairs", time_progression_minutes = 45 }
+] }
+
+# ─── N7 ── upstairs — The act. Reveal names Daniel + Sarah. ──────────────────
+[[canvases.nodes]]
+id     = "upstairs"
+name   = "The Guest Bedroom"
+blocks = [
+  { type = "paragraph", content = "There is a room upstairs in Adam's house that has been a guest bedroom for as long as anyone has been renting the house, a small room with a sloped ceiling that catches the attic heat even in the fall, and which everyone at every party goes up to at some point during the night in pairs or in trios, because the door closes and the lock works and there is a bed and there is a rug and there is one small window that looks out over the neighbor's garage. Maya had been in that room twice before in her life. Once with Sarah, three years ago, who had been crying. Once with Daniel, at a party eleven months ago, which was a thing that she would have to remember later, and was remembering now, as she went up the stairs ahead of Kevin with her hand on the bannister and her left shoe scuffing the second step the way her left shoe always scuffed the second step of old houses." },
+  { type = "paragraph", content = "The second beer was in her hand. She had not drunk much of it. She had not intended to drink much of it. She had intended to be steady." },
+  { type = "paragraph", content = "He followed. He had not asked why. That was the part that was making this easier and harder at the same time — she had not given him a reason because she had not needed to. She had gone back out onto the porch after a period of time that he had chosen to read as ambiguous, and she had said *come upstairs with me for a minute,* and he had said *okay* the way people say *okay* when they are agreeing to something they are going to pretend they didn't agree to. He had left his beer on the porch step." },
+  { type = "paragraph", content = "She opened the door. She closed it behind him. She turned the lock." },
+  { type = "dialog", content = "Maya.", props = { speaker = "npc", npcId = "npc_kevin" } },
+  { type = "dialog", content = "Yeah.", props = { speaker = "player" } },
+  { type = "dialog", content = "I don't — ", props = { speaker = "npc", npcId = "npc_kevin" } },
+  { type = "dialog", content = "I know.", props = { speaker = "player" } },
+  { type = "paragraph", content = "He looked at her. There was a single lamp on the nightstand and the lamp was on, because the last people who had been in the room had left it on, and the light was yellow and unkind and the wallpaper in the room was the wrong color for skin — a pale green with a repeating pattern of something that might have been ferns and might have been something else. The pattern was off by a quarter-inch every third repeat. A misprint. The kind of thing Daniel would not have noticed. The kind of thing she had been noticing her whole life." },
+  { type = "dialog", content = "What do you know.", props = { speaker = "npc", npcId = "npc_kevin" } },
+  { type = "dialog", content = "Daniel is cheating on me.", props = { speaker = "player" } },
+  { type = "paragraph", content = "Nothing moved in his face except his mouth, slightly. He processed. He was about to say something sympathetic — she watched him find the shape of it — and she spoke before he could." },
+  { type = "dialog", content = "With Sarah.", props = { speaker = "player" } },
+  { type = "paragraph", content = "He stopped. She watched him stop." },
+  { type = "paragraph", content = "For a full breath he was not in the room. Then he was back, and something had rearranged in him — not surprise exactly, because some part of him had always half-known something, the way people always half-know, but the specific naming of it. He set his hand on the dresser to steady it, and the muscle in his forearm shifted the way a muscle shifts when it is absorbing a piece of information that is changing the shape of something it had been arranging." },
+  { type = "dialog", content = "How long.", props = { speaker = "npc", npcId = "npc_kevin" } },
+  { type = "dialog", content = "I don't know. Long enough.", props = { speaker = "player" } },
+  { type = "dialog", content = "How did you — ", props = { speaker = "npc", npcId = "npc_kevin" } },
+  { type = "dialog", content = "I saw them.", props = { speaker = "player" } },
+  { type = "paragraph", content = "He did not say anything else for a moment. She watched him arrive at the place she had arrived at on Wednesday afternoon — the place where the facts sat in the center of the room and the old life was on one side of the facts and the new life was on the other and the only way across was through. Kevin was, she understood now, a person who was going to take longer than her to cross. He was going to cross slower. He was also going to cross. She could see the shape of him crossing." },
+  { type = "dialog", content = "Come here.", props = { speaker = "player" } },
+  { type = "paragraph", content = "He came." },
+  { type = "paragraph", content = "She put her hand on his wrist first, which was the gesture she had rehearsed, and she watched herself do it and watched it work. His skin was warmer than she had expected. She had known him for two years and had never touched his wrist." },
+  { type = "paragraph", content = "*Daniel's wrist.* The memory arrived before she could keep it out. The way Daniel's wrist had felt on Sunday morning, the slow one, his hand on her jaw. She closed her eyes for a second and opened them. Kevin was still standing there. Kevin's wrist was under her hand. Kevin, not Daniel. *The classroom.* Sarah's mouth. The olive backpack against the leg of the desk. The fluorescent flicker. She blinked it away. Kevin was still there." },
+  { type = "paragraph", content = "She stood up on her toes. She kissed him." },
+  { type = "paragraph", content = "His mouth was not what Daniel's mouth was. Every mouth in the world was not what Daniel's mouth was, and she realized in that instant that she had been kissing one man for two years and had forgotten that other mouths existed, and Kevin's mouth was a different mouth, softer at the edges, and he kissed her back in a way that was not what she had expected — not hunger, not hesitation, but a kind of careful attentiveness, as if he were trying to read her rather than take something." },
+  { type = "paragraph", content = "That was the first thing that she had not accounted for." },
+  { type = "paragraph", content = "She pulled back. She put her hand on his chest, flat." },
+  { type = "dialog", content = "Are you sure.", props = { speaker = "player" } },
+  { type = "dialog", content = "Are you.", props = { speaker = "npc", npcId = "npc_kevin" } },
+  { type = "dialog", content = "Yes.", props = { speaker = "player" } },
+  { type = "dialog", content = "Then yes.", props = { speaker = "npc", npcId = "npc_kevin" } },
+  { type = "paragraph", content = "She took off his shirt. She did it with the quickness that she had decided on. The t-shirt had been soft from being washed too many times and she felt the softness and she felt the smoke smell in it — not the same smoke that had been on Daniel's clothes that Sunday, a different one, wood, a fire somewhere, a Saturday night that did not belong to her. She folded the shirt. She caught herself folding it and she set it down more quickly than she would have, on the arm of the chair, where it slipped off a moment later and she did not pick it up." },
+  { type = "video",     props = { file = "prologue/n7_reframing.webm", description = "Reframing beat — the moment the scene stops being about survival and becomes about agency.", search_queries = ["woman on top bed lamplight taking charge intimate", "confident female lover leading sex scene yellow lamp", "young woman in control partner underneath bedroom"] } },
+  { type = "paragraph", content = "She kissed him again. This time she did not close her eyes. She watched his face from a distance of two inches. His eyelashes. The small white scar below the eyebrow that she had never looked at this closely. He was not Daniel. She said the sentence in her head the way a person learning a language says a sentence: Kevin, not Daniel. Kevin, not Daniel. The sentence held." },
+  { type = "paragraph", content = "Somewhere under the shock of being looked at by the wrong mouth, Kevin's hands started to move. They were not sure hands. They were careful hands. They were hands that were trying to be kind to a woman he had just learned was being betrayed by his own girlfriend, and he was going to give her whatever she needed and try not to fail the moment, and she saw the whole shape of his kindness and she understood that she was going to use it." },
+  { type = "paragraph", content = "That was when the part of her that had closed the classroom door quietly stood up." },
+  { type = "paragraph", content = "She put her own hand on his belt. She undid it." },
+  { type = "paragraph", content = "Her hands were steady. She noticed her hands being steady. The classroom that afternoon, the bench, the coat she had sat on the bed in without taking off — the steadiness had been there all week, had been waiting for her like a piece of clothing that fit better than she had expected it to fit. She had worn it up the stairs without knowing. She was wearing it now." },
+  { type = "paragraph", content = "She took him to the bed." },
+  { type = "paragraph", content = "She was the one who did it. She was the one who decided when and how and in what order. She had been the one who had locked the door; she was the one who lay down and pulled him down with her; she was the one who reached between them first. Kevin was not in charge. Kevin was in her hands, and his surprise at being in her hands — the small question in his face that kept appearing and being answered — was the thing she had not known she was coming for, the thing she had not admitted she had come for, until she had it." },
+  { type = "paragraph", content = "*Sarah's mouth.* The classroom. The specific hitch on the left side that Maya had always read as tenderness. The fluorescent light flickering above the board. Daniel's hand in Sarah's hair. The image arrived from the afternoon and she let it arrive. She let it arrive the way you let a piece of music come into a room — not fighting, not welcoming, just letting it pass through." },
+  { type = "paragraph", content = "She got underneath him and she moved the way she had learned to move in two years of being moved under, and the difference was she was the one choosing the shape of it, she was the one setting the pace of it, she was the one who said *slower* and *there* and *like that, yes, like that,* and Kevin followed her voice and she felt him follow her voice and she felt it." },
+  { type = "paragraph", content = "It was good. That was the part she had not planned for. That was the part she had assumed she would not have to confront because she had expected the act to be mechanical, to be a thing she executed and got out of. It was not mechanical. Her body was responding. Her body had been, for a year and a half without her admitting it, the kind of body that can respond to something other than Daniel, and a mouth that was not Daniel's mouth and a pair of hands that were not Daniel's hands were telling her body something that her body agreed with, and her body agreed with it loudly, and she let it." },
+  { type = "paragraph", content = "She did not cry. She did not think about Daniel, except in the flicker of the classroom image that kept arriving. She thought about her own hands. She thought about the specific pressure of her own hands on the back of Kevin's neck." },
+  { type = "paragraph", content = "When it ended she let it end. She did not perform anything. She did not thank him. She did not pretend. She let it end the way it ended." },
+  { type = "paragraph", content = "She lay there and she listened to her own breathing come back and she understood, with a clarity that was colder than anything the afternoon had delivered, that she was good at this." },
+  { type = "paragraph", content = "That was the sentence. She would go on for years trying to articulate the sentence that arrived in the yellow light of the bedroom over the neighbor's garage, and the sentence, all along, had been the simplest one. She was good at this. She had been good at this from the first hand on the wrist. The planning had been good. The execution had been good. The read of Kevin's kindness had been good. She had done a hard and cruel and deliberate thing, and she had done it competently, and the competence was the thing she was going to have to carry." },
+  { type = "paragraph", content = "The yellow lamp was still on." },
+  { type = "paragraph", content = "The wallpaper was still misprinted." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Continue", targetType = "node", nodeId = "prologue_morning_with_daniel.after", time_progression_minutes = 60, flagEffects = [ { targetType = "player", flag = "prologue_crossed_line" } ] }
+] }
+
+# ─── N8 ── after — Bathroom, mirror, walk home ───────────────────────────────
+[[canvases.nodes]]
+id     = "after"
+name   = "Cold Feet"
+blocks = [
+  { type = "paragraph", content = "She got up before he did." },
+  { type = "paragraph", content = "She gathered her clothes from the floor where they had ended up and she put them back on in the order she had taken them off, which was not the order Daniel would have put them back on, because Daniel rushed, and she was not rushing. The stockings. The dress. The shoes. She stood in front of the small mirror on the back of the door and she did not look at the woman in the mirror, exactly — she looked at the door itself, at the paint around the hinge where the last occupant had scraped something with the tip of a key, at the long line of chipped wood along the bottom edge, at the way the whole door had been painted over its scrapes so many times that the paint stood up from the wood in a landscape of its own. She looked at the door until she had her breath back." },
+  { type = "paragraph", content = "Kevin was on the bed behind her. She did not turn to look at him. She did not say anything to him. She did not know what she would say if she did. She did not know if she wanted to know." },
+  { type = "paragraph", content = "She opened the door and she walked out." },
+  { type = "paragraph", content = "The hallway was empty. The music from downstairs was still going. The bathroom at the end of the hall had its door open and the light on, and someone — not her, someone earlier — had left a makeup bag on the edge of the sink, pink, with a cartoon strawberry on it, the strawberry's seeds drawn with the particular clumsiness of a designer who had never actually looked at a strawberry, and she stood in the doorway looking at the strawberry for longer than she should have." },
+  { type = "paragraph", content = "She went in. She closed the door. She locked it." },
+  { type = "image",     props = { file = "prologue/n8_mirror.jpg", description = "A bathroom mirror. The edge of a face. A pink makeup bag with a cartoon strawberry.", search_queries = ["party bathroom mirror young woman face edge reflection", "private bathroom sink pink cartoon strawberry makeup bag", "quiet bathroom mirror woman alone after"] } },
+  { type = "paragraph", content = "In the mirror above the sink there was a woman she was not going to look at directly. She washed her hands. The soap in the dispenser was a brand she did not recognize — something floral and too sweet. She used too much of it. She rinsed. She used the towel that was on the rack, which was a towel that had been used by a dozen people already that night, and she did not care." },
+  { type = "paragraph", content = "She sat down on the edge of the bathtub." },
+  { type = "paragraph", content = "Her feet were cold. She did not know where her feet had gotten cold. She looked at the rug on the bathroom floor, which was a rug with a geometric pattern in faded blue and faded red, and she noticed a small stain in one corner, the color of coffee, too small to care about, placed exactly where she was looking." },
+  { type = "paragraph", content = "She was not going to cry here. She was not going to cry at all, she understood now, and the not-crying was going to be a thing she would have to explain to herself later, when she had the energy to pretend to explain things." },
+  { type = "paragraph", content = "The tile in the bathroom was the wrong pattern. The grout had been replaced in some places and not in others. There was a hair on the wall by the shower that belonged to someone she was never going to meet." },
+  { type = "paragraph", content = "She stood up." },
+  { type = "paragraph", content = "She came out of the bathroom and she went down the stairs with the specific dignity of a person who had decided that dignity was a thing she was going to have to perform whether or not she believed in it anymore, and she walked through the living room and she waved once at Adam, who was in the kitchen, who did the wave-thing back without looking up, and she opened the front door and she stepped out onto the street, and the night air hit her, and the night air was colder than she had expected." },
+  { type = "paragraph", content = "She started walking. She did not order a car. She walked because walking was a thing her body could do, and her body could do it, and she wanted the long version of the trip home." },
+  { type = "paragraph", content = "Somewhere a few blocks from Adam's house there was a dog barking behind a fence. The dog was barking at nothing. The barking rose and fell. She kept walking." },
+  { type = "paragraph", content = "The house behind her was a house she was never going to be inside again. She knew this because she decided it as she walked, and because deciding it was the smallest thing she could do." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Continue", targetType = "node", nodeId = "prologue_morning_with_daniel.diana", time_progression_minutes = 20 }
+] }
+
+# ─── N9 ── diana — Collapse, Diana's call, drive, player choice ──────────────
+[[canvases.nodes]]
+id     = "diana"
+name   = "The Driveway"
+blocks = [
+  { type = "paragraph", content = "Monday, Kevin broke up with Sarah." },
+  { type = "paragraph", content = "He did not call Maya. He did not need to. Kevin was, it turned out, the kind of man who cleaned up his own house quietly, and on Monday morning he drove to Sarah's apartment and said the things he needed to say, and then he left, and then on Tuesday Sarah called Maya thirteen times." },
+  { type = "paragraph", content = "Maya did not answer." },
+  { type = "paragraph", content = "By Tuesday evening Daniel had heard. Daniel called her. She let it go to voicemail. The voicemail was ninety seconds long — not the anger she had expected, just a long arc of confused crumpling about what had happened, and then him saying, in the voice he used when he had run out of anger and was about to say the real thing, *did you know about me and Sarah.* She listened to the voicemail once and then she deleted it." },
+  { type = "paragraph", content = "By Wednesday Sarah had stopped calling and started writing. Long paragraphs of text. What Sarah wrote was not what Maya had expected. Sarah did not apologize. Sarah explained — the way Sarah explained things — in careful paragraphs about feelings and about Daniel and about how the three of them had been, in some rare fictional telling, equally complicated. Sarah's version of events placed Sarah in a particular lighting. Maya read the paragraphs once each and did not respond." },
+  { type = "paragraph", content = "By Wednesday evening the group chat had gone quiet." },
+  { type = "paragraph", content = "By Thursday it was everyone. People Maya had known since freshman year did not respond to the regular flow. A post she made on Instagram in the afternoon got six likes — her mother, her aunt, two bots, a girl from her art class who was always three steps behind on social information, and Kevin. Kevin, who had liked it without saying anything. Kevin, who would probably never say anything to her. Kevin, who was, she understood now, the only other person in the world who knew exactly the shape of the thing." },
+  { type = "paragraph", content = "On Thursday Diana called." },
+  { type = "paragraph", content = "Her mother was not a person who called without a reason. Diana called when she had a reason, and Maya recognized the weight of the number on the screen the way you recognize the weight of a letter before you open it. She answered." },
+  { type = "dialog", content = "Hi, mom.", props = { speaker = "player" } },
+  { type = "dialog", content = "Hi, honey.", props = { speaker = "npc", npcId = "npc_diana" } },
+  { type = "paragraph", content = "The silence between them was a specific silence. Diana had a way of making a silence that let the other person walk into it at whatever pace they needed." },
+  { type = "dialog", content = "I heard.", props = { speaker = "npc", npcId = "npc_diana" } },
+  { type = "dialog", content = "Who.", props = { speaker = "player" } },
+  { type = "dialog", content = "Your aunt.", props = { speaker = "npc", npcId = "npc_diana" } },
+  { type = "dialog", content = "Who told her.", props = { speaker = "player" } },
+  { type = "dialog", content = "I didn't ask.", props = { speaker = "npc", npcId = "npc_diana" } },
+  { type = "paragraph", content = "Maya sat on the couch and held the phone and did not say anything." },
+  { type = "dialog", content = "I'm not going to ask you what happened. You don't have to tell me.", props = { speaker = "npc", npcId = "npc_diana" } },
+  { type = "dialog", content = "Okay.", props = { speaker = "player" } },
+  { type = "dialog", content = "I called because I thought you might want somewhere to go.", props = { speaker = "npc", npcId = "npc_diana" } },
+  { type = "paragraph", content = "Diana lived with Frank now. Frank was her second husband, whom Maya had met twice, who had a house on a big piece of land in a state Maya had been to once, for an Easter, when she had been fifteen. The house had a porch. The porch had a swing. The summer would be hot there, her mother had said the last time they had talked, in the tired voice Diana used now instead of the one she had used before Maya's father had died." },
+  { type = "dialog", content = "The house is big. Frank's two boys are home for the summer but there's a room. You can stay as long as you need.", props = { speaker = "npc", npcId = "npc_diana" } },
+  { type = "paragraph", content = "Maya did not say anything. Diana waited a beat. When Maya did not fill the silence, Diana did the thing Diana did when she was about to say the useful part." },
+  { type = "dialog", content = "And there's a community college in Millhaven. Twenty minutes from the house. It's a good one — better than people give it credit for.", props = { speaker = "npc", npcId = "npc_diana" } },
+  { type = "paragraph", content = "Maya closed her eyes." },
+  { type = "dialog", content = "I'm not telling you what to do, honey. I'm telling you the math. If you transferred in the fall you'd be paying a fraction of what you're paying now. And you'd be living here, so no rent. No food. I'd do your laundry if you let me. You'd come out the other end of this without the debt you've been building up, and you'd still have the degree.", props = { speaker = "npc", npcId = "npc_diana" } },
+  { type = "paragraph", content = "Maya opened her eyes. Her mother had been counting. Her mother had been doing the numbers for her, quietly, over months probably, waiting for a moment she could say them without it sounding like she was asking. This was the moment. Her mother was not asking." },
+  { type = "dialog", content = "Mom.", props = { speaker = "player" } },
+  { type = "dialog", content = "It's a place to be, Maya. That's all I'm saying. It's a place to be, and it's a good school, and the summer is long. Think about the school thing when you get here. You don't have to decide on the drive.", props = { speaker = "npc", npcId = "npc_diana" } },
+  { type = "paragraph", content = "Maya did not cry. She had known she was not going to cry when her mother said the thing she had said, because her mother had said it the correct way, which was as a fact rather than as a rescue, and a fact did not require tears. Nothing about Diana's offer was performance. The numbers were real. The room was real. The college was real. The summer was long. The summer could be longer." },
+  { type = "dialog", content = "Okay. Thank you.", props = { speaker = "player" } },
+  { type = "dialog", content = "Drive down when you're ready. Whenever that is.", props = { speaker = "npc", npcId = "npc_diana" } },
+  { type = "dialog", content = "Okay.", props = { speaker = "player" } },
+  { type = "dialog", content = "Honey.", props = { speaker = "npc", npcId = "npc_diana" } },
+  { type = "dialog", content = "Yeah.", props = { speaker = "player" } },
+  { type = "dialog", content = "I love you.", props = { speaker = "npc", npcId = "npc_diana" } },
+  { type = "dialog", content = "I know.", props = { speaker = "player" } },
+  { type = "paragraph", content = "Diana ended the call the way Diana ended calls, which was without saying goodbye, because Diana believed in ending calls the way you end a conversation in person, by simply stopping. The phone went dark in Maya's hand." },
+  { type = "paragraph", content = "She packed that night. She packed the way she did everything. In order. The clothes she wore to work. The clothes she slept in. Her sketchbook, which she wrapped in a t-shirt because the spine had been coming loose. Her paints. The one photograph of her father she carried from place to place. She did not pack the dress from Adam's house. The dress was in a black trash bag already, had been in the trash bag since Sunday afternoon, tied at the top, set by the door to go out with the garbage on Wednesday. Wednesday had come and gone and the bag was still there. She picked it up now and she took it down to the dumpster in the alley, and she dropped it in, and she watched it settle between a cardboard box and a bag of something wet, and she walked back upstairs." },
+  { type = "paragraph", content = "She was in her car by morning." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Drive south.", targetType = "node", nodeId = "prologue_morning_with_daniel.drive", time_progression_minutes = 0 }
+] }
+
+# ─── N10 ── drive — Southbound. Thinking about the house she's arriving at ───
+[[canvases.nodes]]
+id     = "drive"
+name   = "Southbound"
+blocks = [
+  { type = "paragraph", content = "The radio died somewhere outside Memphis. She had not been listening to it anyway; it had been on because her hand had reached for the dial out of habit when she got in the car, and she had not bothered to find a station because she had not wanted to hear anything that was going to make her feel a specific thing. When the radio died she did not turn it back on." },
+  { type = "paragraph", content = "The highway was the highway. Trees, then more trees, then a rest stop with a chain coffee she did not remember buying. Her hands on the wheel were steady in the same way they had been steady on Kevin's belt, which was a correspondence she did not want to notice and noticed anyway." },
+  { type = "paragraph", content = "She thought about the house she was driving to." },
+  { type = "paragraph", content = "She had met Frank twice. The first time was at an Easter when she had been fifteen and Diana had been married to him for maybe four months. Frank had been polite and quiet and had made her plate for her without asking how much she wanted, which had been the exact wrong amount, and he had said grace in a way that was not showy but was not negotiable either. The second time had been at a wedding, not his own, and he had worn a suit that fit and shaken Maya's hand like shaking hands mattered. She remembered the texture of his palm — rough in specific places, like he had done things with his hands for a living. She did not remember him speaking more than six sentences to her total." },
+  { type = "paragraph", content = "Her mother had said the word *strict* about him exactly once, in a phone call, in a voice that was not complaining. *Frank keeps a house,* she had said. *Dinner's at six-thirty. Chores have owners.* That was the phrase that had stayed: *chores have owners.* Maya understood what it meant and had not, until now, thought about what it would mean to be inside it." },
+  { type = "paragraph", content = "There were two sons. She had not met either." },
+  { type = "paragraph", content = "Ryan was the older one. She knew that he worked on something mechanical — an engine shop, a salvage thing, something with a roof and a bay and a cash drawer. Diana had said he was *a good kid* in the voice Diana used about people she liked, which was measured and undramatic and you had to have known Diana a long time to hear the warmth in. The younger one was Jake. Jake went to a community college somewhere. Diana had said less about him, which might have meant nothing and might have meant Jake was hard to describe." },
+  { type = "paragraph", content = "Three men in a house she had never been in. One of them her mother's husband. Two of them her mother's husband's sons." },
+  { type = "paragraph", content = "She tried to picture them at a table." },
+  { type = "paragraph", content = "She could not." },
+  { type = "paragraph", content = "What she could picture, and kept picturing, was the shape of a hallway she had not yet seen. The sound a strange house made at night. The way bathroom doors locked differently depending on whose house you were in. The negotiations of breakfast. Whether Frank's two sons were the kind of men who looked at a woman in her pajamas, and whether they were the kind of men who looked and looked away, and whether they were the kind of men who made it her problem either way." },
+  { type = "paragraph", content = "She thought about the rent. Her mother had said *no rent* in the phone call; Maya had already done the math on that and had decided she would pay Frank something anyway, because her pride would not sit at his dinner table eating food she had not earned. Whatever he asked, she would pay. If he did not ask, she would leave it on the kitchen counter and they would not discuss it. She had been doing the math on that for most of Kentucky." },
+  { type = "paragraph", content = "She thought about the thing nobody in Millhaven knew." },
+  { type = "paragraph", content = "Nobody in that house had any idea what she had done on Saturday night. Nobody there had any way of finding out unless she told them. That was the one mercy in the whole drive, and she was not sure yet whether it was actually a mercy or just a particular kind of pressure she was going to have to carry differently — the pressure of being, for the first time in her life, in a place where she was entirely herself, unwitnessed. Not the girl who wouldn't let her ex see her cry. Not the best friend who had figured out the shape of her own best friend on a desk. Just a nineteen-year-old with a suitcase and a mother who was waiting on a porch." },
+  { type = "paragraph", content = "She did not know yet which would be harder." },
+  { type = "paragraph", content = "By the time she was in Frank's county the light was slanting the way it slanted at the end of summer days in places that smelled like pine and heat and the specific rust of dry red earth. She pulled off the highway. She drove the last six miles on a two-lane road. The driveway was not marked. She almost missed it. She turned in." },
+  { type = "paragraph", content = "The gravel popped under her tires." },
+  { type = "image",     props = { file = "prologue/n9_driveway.jpg", description = "A gravel driveway through pines. The house at the end. The light at the end of a summer day in a place that smells like red earth.", search_queries = ["gravel driveway through pines rural house sunset south", "southern farmhouse end of long gravel drive summer evening", "country home property arrival late afternoon red earth"] } },
+  { type = "paragraph", content = "The house stood at the end of the driveway." },
+  { type = "paragraph", content = "She had one thing to do before she turned the engine off." },
+  { type = "paragraph", content = "Her phone was in the cup holder. Sarah's name was in her contacts, still, which was its own specific kind of fact. She picked up the phone. She held it. She looked at the house through the windshield and she thought about the currency of the friendship she had spent, and about Sarah's careful paragraphs, and about the three words she had been turning over in her head for most of the drive." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Leave Sarah a voicemail. One sentence. \"I saw you.\"", targetType = "location", locationId = "loc_front_porch", time_progression_minutes = 1440, effects = [{ targetType = "player", trait = "energy", op = "set", value = 70 }], flagEffects = [{ targetType = "player", flag = "met_daniel" }, { targetType = "player", flag = "prologue_cast_met" }, { targetType = "player", flag = "saw_daniel_and_sarah" }, { targetType = "player", flag = "kevin_approach_branch" }, { targetType = "player", flag = "party_scheduled" }, { targetType = "player", flag = "revenge_committed" }, { targetType = "player", flag = "prologue_morning_after_done" }, { targetType = "player", flag = "prologue_daniel_breakup_done" }, { targetType = "player", flag = "accepted_diana_offer" }, { targetType = "player", flag = "prologue_complete" }, { targetType = "player", flag = "left_sarah_voicemail" }] },
+  { text = "Don't call. Just drive in.", targetType = "location", locationId = "loc_front_porch", time_progression_minutes = 1440, effects = [{ targetType = "player", trait = "energy", op = "set", value = 70 }], flagEffects = [{ targetType = "player", flag = "met_daniel" }, { targetType = "player", flag = "prologue_cast_met" }, { targetType = "player", flag = "saw_daniel_and_sarah" }, { targetType = "player", flag = "kevin_approach_branch" }, { targetType = "player", flag = "party_scheduled" }, { targetType = "player", flag = "revenge_committed" }, { targetType = "player", flag = "prologue_morning_after_done" }, { targetType = "player", flag = "prologue_daniel_breakup_done" }, { targetType = "player", flag = "accepted_diana_offer" }, { targetType = "player", flag = "prologue_complete" }] }
+] }
+
+# ─── SKIP ── skip_recap — Three-paragraph recap for players who opt out ──────
+# Reached only from N1 (wake) via the "Skip the prologue" choice. Flags mirror
+# the union of all prologue-exit payloads MINUS the branch-specific ones: no
+# calculation_tier/calc_tier_* (no tier chosen), no drinks_at_party, no
+# left_sarah_voicemail. Energy set to 70 and time advanced 6175 min to match
+# the cumulative clock at the end of the full prologue (Thu 09:00 → Mon ~15:55),
+# so Phase 1 is indistinguishable from a full playthrough.
+[[canvases.nodes]]
+id     = "skip_recap"
+name   = "Recap"
+blocks = [
+  { type = "heading",   content = "Recap" },
+  { type = "paragraph", content = "Sunday morning she was nineteen and in love. By Wednesday afternoon she was neither. The third door on the third floor of the Humanities building opened onto Daniel and Sarah, and neither of them looked up, and she closed the door quietly and walked out of the building and sat on a bench outside the library for fifteen minutes without opening her sketchbook. She did not cry. She did not call. She did not confront. She went home and locked the door behind her with the specific care of a person handling something breakable and sat on her bed with her coat still on and made a list in her head, and the fourth item on the list was the one she picked." },
+  { type = "paragraph", content = "On Saturday night she was at a housewarming in a dress she had not worn yet, sitting on the edge of a bed upstairs with Sarah's boyfriend's hand at her waist. She had thought she might not be able to go through with it. It turned out she could. Kevin broke up with Sarah on Monday morning. By Tuesday evening Daniel had called her and she had let it go to voicemail. By Wednesday Sarah had stopped calling and started writing — long careful paragraphs about feelings and about Daniel and about how the three of them had been, in some rare fictional telling, equally complicated. Maya read the paragraphs once each and did not respond. By Thursday the group chat had gone quiet. A post she made on Instagram in the afternoon got six likes — her mother, her aunt, two bots, a girl from her art class who was always three steps behind on social information, and Kevin." },
+  { type = "paragraph", content = "On Thursday Diana called. Her mother was not a person who called without a reason. Diana said the house was big and Frank's two sons were home for the summer but there was a room. Diana said the community college in Millhaven was twenty minutes from the house and better than people gave it credit for. Diana said the summer was long. Diana did the math the way Diana did math — as a fact, not as a rescue — and Maya, who had been raised on the same math, heard it. She packed that night. Sketchbook in a t-shirt. Paints. The one photograph of her father. She did not pack the dress. She drove south through Kentucky and through trees and through the radio dying somewhere outside Memphis. By late afternoon she was on a two-lane road in a county she had been to once, for an Easter, when she was fifteen. The driveway was not marked. She almost missed it. She turned in. The gravel popped under her tires." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Stop the car.", targetType = "location", locationId = "loc_front_porch", time_progression_minutes = 6175, effects = [{ targetType = "player", trait = "energy", op = "set", value = 70 }], flagEffects = [{ targetType = "player", flag = "met_daniel" }, { targetType = "player", flag = "prologue_cast_met" }, { targetType = "player", flag = "saw_daniel_and_sarah" }, { targetType = "player", flag = "kevin_approach_branch" }, { targetType = "player", flag = "party_scheduled" }, { targetType = "player", flag = "revenge_planned" }, { targetType = "player", flag = "revenge_committed" }, { targetType = "player", flag = "prologue_morning_after_done" }, { targetType = "player", flag = "prologue_daniel_breakup_done" }, { targetType = "player", flag = "accepted_diana_offer" }, { targetType = "player", flag = "prologue_complete" }] }
+] }
+
+
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║ PART B — PHASE 1 v2 (REWRITE — hub-event architecture)                    ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+#
+# Phase A.0 sanity check (2026-04-28). Three canvases prove the engine accepts:
+#   - Hub canvas pattern (hub_kitchen): is_repeatable=true, multi-choice exit
+#   - One-shot event pattern (event_arrival_at_franks, event_first_morning_kitchen):
+#     priority=10, flag-gated, single-node, real choice on exit
+#
+# All four pattern verified at hub-and-event live RtS exploration (rts-recon).
+# Voice register per 02_TLS_Rewrite_Spec.md §10:
+#   - Hubs: image + 1 atmospheric line max + button list
+#   - Events: TLS-literary at compressed density, 80-250 words single-node
+
+
+# ─── EVENT: event_arrival_at_franks — replaces B1, fires after Prologue ───
+#
+# Maya gets out of the car. Diana on the porch. Frank in the doorway, takes
+# the suitcase. Ryan voice from the yard. Jake at dinner. To bed.
+# Sets arrived_at_franks + 5 first-meet flags. Exits to loc_mayas_bedroom.
+
+[[canvases]]
+id = "event_arrival_at_franks"
+name = "Arrival"
+description = "B1 v2. One-shot priority event at loc_front_porch. Fires after Prologue's accepted_diana_offer. Single-node ~180 words. Sets arrived_at_franks + met_X_day_1 flags. Routes to bed."
+
+[canvases.trigger]
+location = "loc_front_porch"
+is_repeatable = false
+priority = 10
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "accepted_diana_offer", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "arrived_at_franks", operator = "is_false" }
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Arrival"
+blocks = [
+  { type = "image", props = { file = "events/arrival_at_franks.jpg", description = "Late afternoon at a Southern farmhouse. A young woman just out of a parked sedan on a red-clay driveway, her mother coming down the porch steps to meet her, a stepfather in the doorway behind. Cicadas, screen door, July heat shimmer.", search_queries = ["southern farmhouse arrival driveway young woman mother porch hug late afternoon july", "rural alabama farmhouse red clay drive sedan parked late summer porch screen door", "stepdaughter arrives at family farmhouse mother on porch stepfather in doorway"] } },
+  { type = "paragraph", content = "She parked. The cicadas in the pines were into their five-in-the-afternoon count. The screen door opened before she had turned off the engine." },
+  { type = "dialog", content = "Maya, honey.", props = { speaker = "npc", npcId = "npc_diana" } },
+  { type = "paragraph", content = "Diana on the drive, hugging at the weight of a hug that had been held back an inch for the length of the drive. Frank in the doorway, one hand flat on the jamb." },
+  { type = "dialog", content = "Maya.", props = { speaker = "npc", npcId = "npc_frank" } },
+  { type = "paragraph", content = "He came down the steps and offered his hand for the suitcase. From the yard, through the screen, a voice she would learn was Ryan's." },
+  { type = "dialog", content = "Hey, kid.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "Dinner was at six-thirty. Five plates at a table set for four. Jake across from Ryan, headphones around his neck, looking at his plate before food was on it." },
+  { type = "dialog", content = "Jake.", props = { speaker = "npc", npcId = "npc_diana" } },
+  { type = "paragraph", content = "He nodded. He did not look up. Maya was in bed by eight with her door closed quietly behind her." }
+]
+exit_block = { type = "location", text = "Bed.", config = { destinationType = "specific", locationId = "loc_mayas_bedroom", time_progression_minutes = 295, flagEffects = [
+  { targetType = "player", flag = "arrived_at_franks" },
+  { targetType = "player", flag = "met_diana_day_1" },
+  { targetType = "player", flag = "met_frank_day_1" },
+  { targetType = "player", flag = "met_ryan_day_1" },
+  { targetType = "player", flag = "met_jake_day_1" }
+] } }
+
+
+# ─── HUB: hub_kitchen — Type-A shared room hub at loc_kitchen ───
+#
+# Always available after arrived_at_franks. Renders a button menu. NPC presence
+# (Diana scheduled here EM/M/DINPREP, Frank M/DINPREP) does not surface
+# interaction here — interactions live at NPC personal hubs per RtS pattern.
+# Per §10: image + ONE atmospheric line, no atmospheric paragraph variants.
+
+[[canvases]]
+id = "hub_kitchen"
+name = "Kitchen"
+description = "Hub-A canvas at loc_kitchen. Always-available menu after arrived_at_franks. Phase A.0 sanity-check version: minimal buttons (table-sit state-pump + hallway nav), no NPC-presence variants, no schedule banding yet. Voice register §10: image + one atmospheric line, button list. Lower priority than events so event_first_morning_kitchen pre-empts on first M-band Sunday."
+
+[canvases.trigger]
+location = "loc_kitchen"
+is_repeatable = true
+priority = 1
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "arrived_at_franks", operator = "is_true" }
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Kitchen"
+blocks = [
+  { type = "image", props = { file = "hubs/kitchen.jpg", description = "Southern farmhouse kitchen interior, daytime. Worn oak table with five chairs around a table sized for four. Window over the sink cracked an inch. Basil on the sill. Coffee can on the counter. Flat afternoon light.", search_queries = ["southern farmhouse kitchen daytime worn oak table five chairs basil window over sink", "rural alabama family kitchen oak chairs basil percolator window flat afternoon light", "small town American farmhouse kitchen interior natural daylight window basil sill"] } },
+  { type = "paragraph", content = "Window over the sink cracked an inch. Basil on the sill. The percolator off but warm." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Sit at the table.", targetType = "trigger", time_progression_minutes = 30, effects = [
+    { targetType = "player", trait = "energy", op = "add", value = 5 }
+  ] },
+  { text = "Hallway.", targetType = "location", locationId = "loc_hallway", time_progression_minutes = 1 }
+] }
+
+
+# ─── EVENT: event_first_morning_kitchen — replaces B2 ───
+#
+# Sunday Week 1, 06:30-08:30. Frank states the rent terms, asks the church
+# choice. Maya picks come or stay. Sets first_morning_kitchen_done +
+# rent_terms_set. Pre-empts hub_kitchen via priority 10.
+
+[[canvases]]
+id = "event_first_morning_kitchen"
+name = "First Morning"
+description = "B2 v2. One-shot priority event at loc_kitchen. Fires Sunday Week 1 morning band on first kitchen entry after arrived_at_franks. ~150 words single-node. Two real choices on exit (church or stay). Pre-empts hub_kitchen via priority 10."
+
+[canvases.trigger]
+location = "loc_kitchen"
+is_repeatable = false
+priority = 10
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "arrived_at_franks", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "first_morning_kitchen_done", operator = "is_false" }
+] }
+[[canvases.trigger.schedules]]
+weekdays = [6]
+start_time = "06:30"
+end_time = "08:30"
+
+[[canvases.nodes]]
+id = "base"
+name = "First Morning"
+blocks = [
+  { type = "image", props = { file = "events/first_morning_kitchen.jpg", description = "Sunday morning Southern farmhouse kitchen at seven a.m. Older man at the kitchen table with a folded-open newspaper and a coffee mug, reading glasses on. Older woman at the counter with her back mostly to the table. Third place at the table set with a chipped Hayes Hardware mug. Soft early-morning light through the window over the sink.", search_queries = ["southern sunday morning kitchen seven am father at table newspaper mother at counter coffee", "rural farmhouse kitchen percolator sunday breakfast quiet light through window third place set", "family kitchen sunday morning coffee paper stepfather older woman at counter early summer"] } },
+  { type = "paragraph", content = "She came down the fourteen stairs in yesterday's clothes. The percolator was going. Diana was wiping a spot that did not need wiping." },
+  { type = "dialog", content = "Sit.", props = { speaker = "npc", npcId = "npc_diana" } },
+  { type = "paragraph", content = "Frank was at the table with the paper folded open against the napkin holder. He took a long breath through his nose and looked up." },
+  { type = "dialog", content = "Maya. Rent's sixty a week, due Sundays.", props = { speaker = "npc", npcId = "npc_frank" } },
+  { type = "dialog", content = "You cook. Diana and I buy the groceries. That's the deal if you're staying.", props = { speaker = "npc", npcId = "npc_frank" } },
+  { type = "dialog", content = "Okay.", props = { speaker = "player" } },
+  { type = "paragraph", content = "Frank nodded once and opened the paper again. Diana at the counter did not turn around." },
+  { type = "dialog", content = "Church is at ten. You can come. You can not.", props = { speaker = "npc", npcId = "npc_frank" } }
+]
+exit_block = { type = "choices", choices = [
+  { text = "I'll come.", targetType = "trigger", time_progression_minutes = 30, effects = [
+    { targetType = "player", trait = "energy", op = "add", value = 10 },
+    { targetType = "player", trait = "rep_church", op = "add", value = 2 }
+  ], flagEffects = [
+    { targetType = "player", flag = "first_morning_kitchen_done" },
+    { targetType = "player", flag = "rent_terms_set" },
+    { targetType = "player", flag = "attended_church_week_1" }
+  ] },
+  { text = "I'll stay.", targetType = "trigger", time_progression_minutes = 30, effects = [
+    { targetType = "player", trait = "energy", op = "add", value = 10 }
+  ], flagEffects = [
+    { targetType = "player", flag = "first_morning_kitchen_done" },
+    { targetType = "player", flag = "rent_terms_set" }
+  ] }
+] }
+
+
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║ PHASE A.1 SANITY CHECK CANVASES — added 2026-04-28                        ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+#
+# Tests the harder patterns from 02_TLS_Rewrite_Spec.md:
+#   - Multiple canvases at same location with priority + flag-conditions
+#     (the "stat-gated button" workaround per §4.4)
+#   - State-pump button (re-fire trigger destination + flag set + cooldown)
+#   - Type-B NPC personal hub (menu changes wholesale by NPC presence)
+#   - Multi-node scene canvas with per-act counter via npc trait
+#   - Group variant block inside node body for counter-gated reveal
+
+
+# ─── HUB-B: Frank's office, talkable state ───
+#
+# Priority 3, fires when player has not yet talked to Frank today.
+# Two buttons: Talk (state-pump that re-fires this canvas after setting
+# talked_to_frank_today, which then makes _busy variant fire next), Leave.
+
+[[canvases]]
+id = "hub_franks_office_present"
+name = "Frank's Office"
+description = "Hub-B canvas at loc_franks_office (talkable state). Priority 3. Fires when arrived_at_franks AND talked_to_frank_today=false. Talk button is the state-pump pattern: targetType=trigger re-fires same location, flagEffects set talked_today=true. After the click, _present's condition fails and _busy (priority 2) fires instead, giving the player feedback that Frank's been talked-to-already. Daily-reset of talked_to_frank_today is a separate concern (sleep activity should unset it; engine support for op=unset on flagEffects TBD)."
+
+[canvases.trigger]
+location = "loc_franks_office"
+is_repeatable = true
+priority = 3
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "arrived_at_franks", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "talked_to_frank_today", operator = "is_false" }
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Frank's Office"
+blocks = [
+  { type = "image", props = { file = "hubs/franks_office.jpg", description = "A small home office in a Southern farmhouse: a worn oak desk with a green-shaded banker's lamp, a ledger book open, a coffee mug at the corner, an older man at the desk with reading glasses on. Late afternoon light from a single window. Heavy quiet.", search_queries = ["small home office worn oak desk banker lamp older man reading ledger southern farmhouse afternoon", "rural alabama home office stepfather working at desk green lamp ledger book coffee mug late afternoon", "1950s wood desk banker lamp older man reading glasses ledger book quiet southern home office"] } },
+  { type = "paragraph", content = "Door cracked. Frank at the desk. Lamp on. The ledger open at the page he'd been on this morning." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Talk to Frank.", targetType = "trigger", time_progression_minutes = 20, effects = [
+    { targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 1 }
+  ], flagEffects = [
+    { targetType = "player", flag = "talked_to_frank_today" }
+  ] },
+  { text = "Hallway.", targetType = "location", locationId = "loc_hallway", time_progression_minutes = 1 }
+] }
+
+
+# ─── HUB-B: Frank's office, busy state (post-talk cooldown) ───
+#
+# Priority 2 (lower than _present). Fires after Talk has been clicked today.
+# Body shows that Frank doesn't engage twice in one afternoon. Just a Leave button.
+
+[[canvases]]
+id = "hub_franks_office_busy"
+name = "Frank's Office (busy)"
+description = "Hub-B canvas at loc_franks_office (cooldown state). Priority 2. Fires when talked_to_frank_today=true. Provides player feedback for the cooldown — Frank's been engaged-with already, doesn't engage twice. Single Leave button. The cooldown semantics: this canvas fires today; tomorrow morning the sleep activity should unset talked_to_frank_today, and _present will fire again. Acts as the 'silent no-op' equivalent in RtS — the click is allowed, the state is shown, no progress."
+
+[canvases.trigger]
+location = "loc_franks_office"
+is_repeatable = true
+priority = 2
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "arrived_at_franks", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "talked_to_frank_today", operator = "is_true" }
+] }
+
+[[canvases.nodes]]
+id = "base"
+name = "Frank's Office (busy)"
+blocks = [
+  { type = "image", props = { file = "hubs/franks_office.jpg", description = "Same home office. Frank at the desk. The lamp on, the ledger open. He doesn't look up.", search_queries = ["older man working at home office desk does not look up ledger book green lamp afternoon"] } },
+  { type = "paragraph", content = "Frank at the desk. Lamp on. He didn't look up." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Hallway.", targetType = "location", locationId = "loc_hallway", time_progression_minutes = 1 }
+] }
+
+
+# ─── SCENE: Frank desk-tease (multi-node, counter-gated reveals) ───
+#
+# Priority 7 (above hubs). Fires when corruption-gated AND Frank-arc state
+# clears. Tests:
+#   - Multi-node scene canvas (2 nodes: step1 → step2)
+#   - npc_frank.arousal as the per-act counter (RtS pattern from §2.5b)
+#   - Group variant inside node body for counter-gated reveal
+#     (visit 2+ shows extra prose because frank.arousal accumulated from visit 1)
+#   - Player corruption + frank_restrict_declared flag stack on canvas trigger
+#
+# Uses frank_restrict_declared as a flag that won't be set by any A.0/A.1
+# canvas (set by the Frank-catch event in Phase D). Dry-run validates schema
+# regardless of flag reachability — actual play needs the flag set first.
+
+[[canvases]]
+id = "scene_frank_lean_by_desk"
+name = "Lean by the desk"
+description = "Scene canvas at loc_franks_office. Priority 7 (pre-empts both hub variants). Conditions: corruption ≥ 50 AND frank_restrict_declared=true (set by Frank-catch event in Phase D). Two-node cascade. Each visit walks step1 → step2. npc_frank.arousal accumulates; visit 2's step2 reveals an extra group-variant paragraph because arousal ≥ 10 from earlier visit. Tests the explicit-tier scene pattern from §2.5b without explicit prose at this stage."
+
+[canvases.trigger]
+location = "loc_franks_office"
+is_repeatable = true
+priority = 7
+is_active = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "arrived_at_franks", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "frank_restrict_declared", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 50 }
+] }
+
+[[canvases.nodes]]
+id = "step1"
+name = "Lean by the desk — first beat"
+blocks = [
+  { type = "image", props = { file = "scenes/frank_lean_by_desk_step1.jpg", description = "A young woman leaning her hip against the corner of a desk in a small home office; an older man at the desk holding a pen on a ledger line, eyes on the page. Late afternoon light through a single window.", search_queries = ["young woman leans hip against desk corner stepfather working at desk pen on ledger line"] } },
+  { type = "paragraph", content = "He didn't look up when she came in. He kept looking up the second beat after, when she didn't speak." },
+  { type = "paragraph", content = "She leaned her hip against the desk on his left side, slow enough that he saw her stop." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Wait.", targetType = "node", nodeId = "scene_frank_lean_by_desk.step2", time_progression_minutes = 5 }
+] }
+
+[[canvases.nodes]]
+id = "step2"
+name = "Lean by the desk — second beat"
+blocks = [
+  { type = "paragraph", content = "He didn't move the pen. His thumb went under the cap and pressed it on. He set the pen down at the angle he set pens down when he was done with them." },
+  # Counter-gated reveal — only renders on visit 2+ (frank.arousal accumulated)
+  { type = "group", blocks = [
+    { type = "paragraph", content = "He'd been doing the count of looking up at her since she'd been doing the count of standing here. The line at his mouth was deeper than it had been on the first day she'd done this." }
+  ], conditions = { version = "1.0", items = [
+    { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "arousal", operator = "gte", value = 10 }
+  ] } },
+  { type = "dialog", content = "You're in my way.", props = { speaker = "npc", npcId = "npc_frank" } },
+  { type = "dialog", content = "I know.", props = { speaker = "player" } }
+]
+exit_block = { type = "location", text = "Step back.", config = { destinationType = "trigger", time_progression_minutes = 15, effects = [
+  { targetType = "npc", npcId = "npc_frank", trait = "arousal", op = "add", value = 5 },
+  { targetType = "player", trait = "corruption", op = "add", value = 1 }
+] } }

@@ -1478,45 +1478,50 @@ bands = [
 # (if flash/cam arc exists)
 ```
 
-### §8.3 — Per-NPC radar (Doc 64 PRD pending — author against future shape)
+### §8.3 — Per-NPC radar — `npc_panel` (SHIPPED 2026-06-06)
 
-When Doc 64 ships, `npc_location` sidebar item type becomes available:
+Surface NPC state with the `npc_panel` card. `rows` = ordered subset of `["arousal","corruption","location","next"]`;
+the **location** row reads `setup.getNpcLocation` (the NPC's `[[npcs.schedules]]`, same source as the
+Schedule page). The **`next`** row mirrors the Quests-page goal block (reuses `renderQuestsGoalBlock`): `🎯 To advance`
++ live progress while climbing, `🔓 Ready / 📍 / 🕒` when ready, `✓ Arc complete` when terminal — no
+flavor/tip text. There is **no `relation` row** in
+`npc_panel` — for relation-spined arcs surface relation via a `trait_owner="npc"` trait item.
 
 ```toml
-# Family/ambient default
+# Family/ambient — wanting + depravity + where he is + next milestone (when ready)
 [[sidebar_items]]
-type = "npc_location"
+type   = "npc_panel"
 npc_id = "npc_frank"
-label = "Frank"
-stats = ["arousal", "corruption", "relation"]
+label  = "Frank"
+rows   = ["arousal", "corruption", "location", "next"]
 
-# Slow-burn family default
+# Slow-burn family — arousal + location (corruption stays low by design)
 [[sidebar_items]]
-type = "npc_location"
+type   = "npc_panel"
 npc_id = "npc_jake"
-label = "Jake"
-stats = ["arousal", "relation"]
+label  = "Jake"
+rows   = ["arousal", "location"]
 
-# Peer/dating default
+# Peer/dating + service — relation-spined: npc_panel shows location; relation via an npc trait_bar
 [[sidebar_items]]
-type = "npc_location"
+type   = "npc_panel"
 npc_id = "npc_ryan"
-label = "Ryan"
-stats = ["relation"]
-
-# Service default
+label  = "Ryan"
+rows   = ["location"]
 [[sidebar_items]]
-type = "npc_location"
-npc_id = "npc_marge"
-label = "Marge"
-stats = ["relation"]
+type        = "trait_bar"
+trait_owner = "npc"
+npc_id      = "npc_ryan"
+trait       = "relation"
+label       = "Ryan"
+max         = 100
 
-# Antagonist — LOCATION ONLY (no stats)
+# Antagonist — location only (awareness NEVER surfaces)
 [[sidebar_items]]
-type = "npc_location"
+type   = "npc_panel"
 npc_id = "npc_diana"
-label = "Diana"
-stats = []
+label  = "Diana"
+rows   = ["location"]
 ```
 
 ### §8.4 — DO NOT surface
@@ -1524,7 +1529,8 @@ stats = []
 - **No `<slug>_stage` sidebar items** for ANY NPC (per `doctrine/09_trait_catalog.md` §9)
 - **No `awareness` sidebar item** for antagonist NPCs (per Doc 30 §6 + `doctrine/09_trait_catalog.md` §8)
 - **No money sidebar item with banded poverty/wealth** unless game design specifically calls for banded display
-- **No per-NPC `trait_bar` / `trait_words`** (e.g. `[[sidebar_items]] type="trait_bar" npc_id="npc_x" trait="relation"`). UNSUPPORTED: the engine resolves `trait` against `player.core_traits` regardless of `npc_id`, so it HARD-FAILS ("trait 'relation' not found in player.core_traits") or silently shows the PLAYER's stat. NPC progression (arousal/relation/stage) belongs on the **Quests page** (V2 cards). The only per-NPC sidebar item is the Doc-64 `npc_location` type above — and it is PENDING, so do not emit it yet. (Late Shifts build failed on four npc-scoped `trait_bar`s.)
+- *(Per-NPC sidebar items ARE supported now — see §8.3. Use `npc_panel`, or `trait_owner="npc"` trait
+  items for a single NPC trait. `stage`/`awareness` are the only hard "never surface" cases.)*
 
 ---
 
@@ -2044,7 +2050,7 @@ Run this BEFORE delivering the TOML.
 - [ ] Maya state: corruption (banded) + arousal (bar) + energy (status text) + hygiene (status text) all present
 - [ ] No `<slug>_stage` sidebar items for ANY NPC
 - [ ] No `awareness` sidebar item for antagonist NPCs
-- [ ] No per-NPC `trait_bar`/`trait_words` (UNSUPPORTED — §8.4)
+- [ ] NPC state surfaced via `npc_panel` / `trait_owner="npc"` items where useful (§8.3); `stage`/`awareness` never surfaced
 - [ ] Body-state surfaces (energy + hygiene visible)
 
 ### Voice + content

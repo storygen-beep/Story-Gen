@@ -1,0 +1,11 @@
+{
+  "captured_at": "2026-06-07T22:11:12.138Z",
+  "engine": "sugarcube",
+  "engine_version": [
+    "(revive:eval)",
+    "(function(){var prerelease=this.prerelease?\"-\".concat(this.prerelease):\"\";return\"\".concat(this.title,\" (v\").concat(this.major,\".\").concat(this.minor,\".\").concat(this.patch).concat(prerelease,\")\")})"
+  ],
+  "error": "Story/passages unreachable — no catalog available",
+  "total_passages": 0,
+  "passages": []
+}

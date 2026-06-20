@@ -1,0 +1,4 @@
+{"ts":"2026-06-18T13:19:15.144Z","step":0,"passage":"Start","action":"clicked_forward","text":"Start Game!","tier":1}
+{"ts":"2026-06-18T13:19:15.144Z","step":1,"passage":"Start2","action":"clicked_forward","text":"Next","tier":4}
+{"ts":"2026-06-18T13:19:15.144Z","step":2,"passage":"Orphanage Intro","action":"clicked_forward","text":"Next","tier":4}
+{"ts":"2026-06-18T13:19:15.144Z","step":3,"passage":"Bedroom","action":"terminated","reason":"no_forward_pattern_match"}

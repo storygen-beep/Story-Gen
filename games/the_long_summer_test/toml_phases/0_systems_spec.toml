@@ -1,0 +1,193 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+#                 PHASE 0 — SYSTEMS SERIALIZATION (TEST SLICE)
+#                     Game: The Long Summer — Test Slice
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Source: 28th_april_TLS_Phase2_Redesign/10_Test_Slice_10Day_Plan.md
+# Sister to: games/the_long_summer/toml_phases/0_systems_spec.toml (full game)
+#
+# This file holds engine-level wiring (parsed by template_import.py) plus the
+# design-discipline metadata for the slice (comment-only — same convention as
+# the parent TLS 0_systems_spec, where `[[whiteboard_goals]]`, `[[narrative_gates]]`,
+# `[[income_channels]]`, and `npc.archetype` sections are TOML-parser-tolerated
+# unknown arrays kept for documentation discipline).
+#
+# Engine sections in this file:
+#   [engine.daily_tick]     — E5 hook: clears all `*_today` flags at day rollover
+#   [[engine.stage_helpers]] — E4 named composite gates (7 entries)
+#
+# All other top-level concerns (project, time, player, npcs, locations,
+# sidebar_items, settings) live in `1_metadata_and_locations.toml`.
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DESIGN DISCIPLINE — Slice scope (comment-only; not parsed by the engine)
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Per plan §2 — IN SCOPE for this slice:
+#   - 3 deep NPCs: Frank, Ryan, Jake — natural Stage 0 → 1 → 2
+#   - 2 ambient: Diana (silent diana_awareness accumulator), Marge (employer)
+#   - 1 peer: Cookie (diner texture, no arc)
+#   - 10 in-game days (Mon Day 1 → Wed Day 10, single calendar week + 3)
+#   - One-week rent cycle (Day 7 Sunday — F4 eviction_mode validation)
+#   - Hub-and-event architecture for 10 active locations
+#   - Income channels 1 (T0 base wage) + 2 (T1 tips, unlocks Day 6) + 5 (Ryan
+#     small-ticket Help, unlocks Day 5)
+#   - All shipped engine features: E1, E2, E4, E5, E6, E7, E9, E10, E11
+#
+# Out of scope (deferred / dev-button only):
+#   - Stage 3+ for all three NPCs (dev buttons in 6_dev_shortcuts.toml)
+#   - Diana's arc (silent accumulator only; gates Phase 2+ in real game)
+#   - Marge Thursday key (`first_ambient_tilt`) — week 3 minimum, not reachable
+#   - Sub-rep gating beyond rep_road from diner shifts
+#   - Phase-2-locked locations (truck stop bar, fairground, stadium, church
+#     interior, full college campus)
+#
+# WHITEBOARD GOALS for the slice (comment-only — derived from Book 2B §1):
+#   1. First rent paid — `first_rent_paid` (Day 7 Sunday)
+#   2. One NPC arc to Stage 2 (test of natural progression) — any of
+#      `npc_frank_stage >= 2`, `npc_ryan_stage >= 2`, `npc_jake_stage >= 2`
+#      (Frank reachable via the catch; Ryan only via dev button in 10 days;
+#      Jake reachable via the peek/draw revealed branch)
+#   3. Hire at diner — `hired_at_diner` (Day 1 evening, branch in hub_diner_front)
+#
+# Two of Book 2B's five whiteboard goals (`first_ambient_tilt`, `brothers_discover`)
+# are unreachable in 10 days per book pacing; one (`money >= 1500 + college_brochure_taken`)
+# requires content not in slice scope.
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ENGINE WIRING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ─── E5: Daily tick — clears all `*_today` flags at day rollover ──────────────
+# Per PRD 03 §E5: fires once at every day flip, BEFORE any other day-1 logic.
+# Plan §3 mechanism row 6 + row 13 validation depends on this.
+[engine.daily_tick]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_frank_today",   op = "unset" },
+  { targetType = "player", flag = "talked_to_ryan_today",    op = "unset" },
+  { targetType = "player", flag = "talked_to_jake_today",    op = "unset" },
+  { targetType = "player", flag = "talked_to_diana_today",   op = "unset" },
+  { targetType = "player", flag = "talked_to_marge_today",   op = "unset" },
+  { targetType = "player", flag = "talked_to_cookie_today",  op = "unset" },
+  { targetType = "player", flag = "helped_diana_today",      op = "unset" },
+  { targetType = "player", flag = "did_morning_chore_today", op = "unset" },
+  { targetType = "player", flag = "walked_past_jakes_today", op = "unset" },
+  { targetType = "player", flag = "watched_ryan_today",      op = "unset" },
+]
+# doc 40 — daily arousal auto-rise (RTS: both axes climb +1/day, never decay).
+# Maya +1 (cap 10); Frank +1 (cap 3). Authoritative copy lives in 7_final_game.toml.
+traitEffects = [
+  { targetType = "player", trait = "arousal", op = "add", value = 1, cap = 10 },
+  { targetType = "npc", npcId = "npc_frank", trait = "arousal", op = "add", value = 1, cap = 3 },
+]
+
+
+# ─── E4: Stage helpers — named composite gates ────────────────────────────────
+# Per PRD 03 §E4: helpers reference primitive condition types (trait, flag,
+# days_since_flag, etc.) but NOT other helpers — single-level recursion is
+# cycle-free per validate-time check at template_import.py:2532.
+#
+# IMPORTANT (per plan §12.1) — helpers are gate-check ONLY. They evaluate to a
+# boolean via the `type = "stage"` condition operator (v1.py:2718-2735). They do
+# NOT auto-write the stage trait. Stage advancement happens via:
+#   - "Helper-driven" transitions: a small transition canvas in
+#     `4b_stage_transitions.toml` gated on `helper is_true AND <slug>_stage == old`,
+#     whose exit `effects` writes `<slug>_stage = new`.
+#   - "Branch-inside-shell" transitions: a `group` block inside the host hub/scene,
+#     gated on the catch/glance/crack one-time guard, whose exit writes both the
+#     guard flag and the stage trait directly.
+#
+# The helpers below are referenced by both transition canvases (as triggers) and
+# by hint condition stage_gates (as content selectors). Tuning a helper threshold
+# propagates to every site that references it.
+
+# ── Frank ─────────────────────────────────────────────────────────────────────
+
+# REFACTOR 2026-05-04 (doc 18 §3) — frank_stage_1 helper REWRITTEN.
+# bookkeeping_count counter retired. Gate now: trust >= 10 + frank_offered_bookkeeping is_true.
+# The bookkeeping offer scene (Stage-0→1 branch in scene_kitchen_with_frank_morning,
+# new in doc 18 §3) sets the flag when player accepts. Activity is flag-gated.
+# Authoritative source: games/the_long_summer_test/toml_phases/7_final_game.toml.
+# This phase file uses the pointer-note pattern; not updated for parity.
+
+# REFACTOR 2026-05-04 — frank_stage_2 helper REMOVED.
+# The Stage 1→2 helper checked frank_caught + frank_restrict_declared,
+# both of which are written by the same effects block as npc_frank_stage = 2
+# at scene_living_room_evening (the catch). Post-condition tautology with
+# no gate value. Pattern 2 now uses setup._findStageSetterCanvas to surface
+# the catch scene's actual trigger conditions (corruption ≥ 45, evening band,
+# living room) on the Quests page goal block.
+# Authoritative source: games/the_long_summer_test/toml_phases/7_final_game.toml
+# (search for `scene_living_room_evening`). This phase file is NOT updated
+# to mirror the refactor — pointer-note pattern only.
+
+# REFACTOR 2026-05-04 (doc 18 §5) — frank_stage_3 helper REWRITTEN.
+# tease_count + chore_count counters retired. Gate now: corruption >= 50 + restrict +
+# Frank.arousal >= 30 + Frank.corruption >= 15 (4-AND, all stat-cumulative, all
+# multi-sourced via tease-choice distribution across 6 ambient scenes). Crack moment
+# is a branch-inside-shell at scene_franks_office_supervised. Reachable Day 7-9.
+# Authoritative source: games/the_long_summer_test/toml_phases/7_final_game.toml.
+# This phase file uses the pointer-note pattern; not updated for parity.
+
+# ── Ryan ──────────────────────────────────────────────────────────────────────
+
+[[engine.stage_helpers]]
+name = "ryan_stage_1"
+description = "Ryan Stage 0→1 gate — group-settled-in + trust threshold. Threshold lowered 15→10 (audit §2.2 fix) so transition fires Day 5-6 instead of Day 12+ at natural cadence (Ryan starts trust=5, +1 per yard help, decay 0.8/day if skipped — trust 15 unreachable in 10 days)."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc",    npc_id = "npc_ryan", trait_key = "trust",            operator = "gte", value = 10 },
+  { type = "flag",  subject = "player",                      flag_key  = "group_settled_in", operator = "is_true" },
+] }
+
+[[engine.stage_helpers]]
+name = "ryan_stage_2"
+description = "Ryan Stage 1→2 gate — partner invitation + corruption + 5 helps. NATURALLY UNREACHABLE in 10-day slice; dev-button only."
+dev_only = true  # Pattern 2 v2.2 (2026-05-04): formalizes the prose annotation. Mirror in 7_final_game.toml.
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc",    npc_id = "npc_ryan", trait_key = "trust",             operator = "gte", value = 40 },
+  { type = "trait", subject = "player",                      trait_key = "corruption",        operator = "gte", value = 25 },
+  { type = "trait", subject = "player",                      trait_key = "ryan_help_count",   operator = "gte", value = 5 },
+  { type = "flag",  subject = "player",                      flag_key  = "ryan_partner_open", operator = "is_true" },
+] }
+
+# ── Jake ──────────────────────────────────────────────────────────────────────
+
+# REFACTOR 2026-05-03 — jake_stage_1 helper REMOVED.
+# OR-logic in stage_helpers is now banned (validate() rejects it). The
+# multi-path Stage 0→1 gate is now expressed as two separate transition
+# canvases in 7_final_game.toml (the operational source):
+#   - transition_jake_to_1_via_beauty  (beauty >= 50)
+#   - transition_jake_to_1_via_glance  (jake_first_glance_noticed flag)
+# This phase file does NOT need to mirror them; 7_final_game.toml is the
+# authoritative source per the existing pointer-note pattern.
+
+[[engine.stage_helpers]]
+name = "jake_stage_2"
+description = "Jake Stage 1→2 gate — peek/draw revealed branch fired (set inside scene_jakes_doorway evening Stage-1 group when peek_count >= 3 AND corruption >= 30). Reachable Day 6–7."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "jake_peek_draw_revealed", operator = "is_true" },
+] }
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Notes for execution
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Counter trait names used above are declared in [player.core_traits] in
+# 1_metadata_and_locations.toml:
+#   - frank_bookkeeping_count    (E7 <<inc>> from activity_bookkeeping_with_frank)
+#   - frank_tease_count          (E7 <<inc>> from scene_franks_office_supervised)
+#   - frank_chore_count          (E7 <<inc>> from activity_morning_chore)
+#   - ryan_help_count            (E7 <<inc>> from activity_help_ryan_in_yard)
+#   - jake_peek_count            (E7 <<inc>> from activity_walk_past_jakes_door)
+#   - lean_by_desk_count         (dev-only counter for Stage 3+ verification)
+#
+# Stage trait names (also in [player.core_traits], starting at 0):
+#   - npc_frank_stage   (max value 4 per arc_stages length)
+#   - npc_ryan_stage    (max value 4)
+#   - npc_jake_stage    (max value 4)
+#
+# Per PRD 08 §11.2 — stage traits MUST be in player.core_traits and MUST NOT
+# appear in [player.trait_decay] (validate() rejects that combination because
+# decay bypasses applyAndNotifyTrait, which is where E9 hooks the advancement
+# log at v1.py:4017-4025).

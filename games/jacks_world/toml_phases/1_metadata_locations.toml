@@ -1,0 +1,160 @@
+# ═══════════════════════════════════════════════════════════════
+# PHASE 1: METADATA, PLAYER & LOCATIONS
+# ═══════════════════════════════════════════════════════════════
+# Source: Book Phases 1 (Foundation), 3 (Character Design), 4 (World Design)
+# Game: Jack's World
+# ═══════════════════════════════════════════════════════════════
+
+schema_version = "0.2"
+starting_canvas = "jack_arrives"
+
+# ═══════════════════════════════════════════════════════════════
+# PROJECT METADATA
+# ═══════════════════════════════════════════════════════════════
+
+[project]
+id = "jacks_world"
+title = "Jack's World"
+description = """
+Jack moves into his step-mom Angela's apartment. What starts as a practical \
+living arrangement becomes something neither of them expected. Over 30 days, \
+daily routines — shared breakfasts, evening movies, accidental encounters — \
+build into a genuine connection. Every intimate moment is earned through \
+presence, small kindnesses, and emotional vulnerability. The forbidden element \
+adds tension but doesn't define the relationship. Love is the driver, not lust.
+"""
+
+[time]
+enabled = true
+starting_hour = 8
+starting_day = "Monday"
+starting_week = 1
+
+# ═══════════════════════════════════════════════════════════════
+# PLAYER
+# ═══════════════════════════════════════════════════════════════
+
+[player]
+id = "player"
+name = "Jack"
+description = "Young man, early 20s. Moving into his step-mom's apartment while he gets on his feet. Works shifts at a neighborhood cafe. Practical, uncertain, but open to connection."
+portrait = "player.jpg"
+core_traits = { money = 50 }
+flag_keys = [
+  "game_started",
+  "jack_arrived_complete",
+  "bills_discovered",
+  "job_started",
+  "first_rent_paid",
+  "rent_last_paid",
+  "routine_noticed",
+  "late_night_talk",
+  "massage_offered",
+  "towel_encounter_complete",
+  "bedroom_encounter_complete",
+  "bedroom_moment_complete",
+  "date_night_complete",
+  "kiss_unlocked",
+  "groping_unlocked",
+  "makeout_unlocked",
+  "oral_unlocked",
+  "manual_unlocked",
+  "sex_unlocked"
+]
+
+# ═══════════════════════════════════════════════════════════════
+# LOCATIONS
+# ═══════════════════════════════════════════════════════════════
+
+# --- HUB ---
+[[locations]]
+id = "loc_hallway"
+name = "Hallway"
+description = "The central hallway of Angela's apartment. Doors lead to every room. The smell of her laundry detergent and a candle she left burning."
+is_container = false
+parent = ""
+entry_from = ""
+default_entry = ""
+navigation_order = ["loc_jacks_bedroom", "loc_kitchen", "loc_living_room", "loc_angelas_bedroom", "loc_bathroom", "loc_cafe"]
+
+# --- APARTMENT ROOMS ---
+[[locations]]
+id = "loc_kitchen"
+name = "Kitchen"
+description = "The center of domestic life. Bright, well-lit, modern appliances. Natural light through windows. Counter island in the center. Angela's domain — this is where the day starts."
+is_container = false
+parent = ""
+entry_from = "loc_hallway"
+default_entry = ""
+navigation_order = []
+
+[[locations]]
+id = "loc_living_room"
+name = "Living Room"
+description = "Couch facing a TV. Comfortable, lived-in. Throw pillows, a blanket folded over the arm."
+is_container = false
+parent = ""
+entry_from = "loc_hallway"
+default_entry = ""
+navigation_order = []
+
+[[locations]]
+id = "loc_angelas_bedroom"
+name = "Angela's Bedroom"
+description = "Her private space. Bed with soft pillows, warm lighting. Candles on the nightstand. The room smells like her perfume. Entry feels like crossing a boundary."
+is_container = false
+parent = ""
+entry_from = "loc_hallway"
+default_entry = ""
+navigation_order = ["loc_bedroom_floor"]
+
+[[locations]]
+id = "loc_bathroom"
+name = "Bathroom"
+description = "Bathtub, warm lighting, steam. Tiled floor, a towel rack, bottles of bath oil. The sound of running water carries through the walls."
+is_container = false
+parent = ""
+entry_from = "loc_hallway"
+default_entry = ""
+navigation_order = []
+
+[[locations]]
+id = "loc_jacks_bedroom"
+name = "Jack's Bedroom"
+description = "A small guest room. Single bed, a desk by the window, half-unpacked bag in the corner. Simple but comfortable."
+is_container = false
+parent = ""
+entry_from = "loc_hallway"
+default_entry = ""
+navigation_order = []
+
+[[locations]]
+id = "loc_bedroom_floor"
+name = "Bedroom Floor"
+description = "Rug area near a mirror in Angela's bedroom. A distinct zone — intimate, grounded, with soft carpet underfoot."
+is_container = false
+parent = ""
+entry_from = "loc_angelas_bedroom"
+default_entry = ""
+navigation_order = []
+
+# --- EXTERNAL LOCATIONS ---
+[[locations]]
+id = "loc_cafe"
+name = "Cafe"
+description = "A neighborhood cafe with regulars, worn wooden tables, and the smell of fresh coffee. Warm and familiar."
+is_container = false
+parent = ""
+entry_from = "loc_hallway"
+default_entry = ""
+navigation_order = []
+
+[[locations]]
+id = "loc_hotel"
+name = "Hotel"
+description = "A hotel bedroom. Warm lighting, a king bed, champagne on the nightstand. Romantic and private."
+is_container = false
+parent = ""
+entry_from = "loc_hallway"
+default_entry = ""
+navigation_order = []

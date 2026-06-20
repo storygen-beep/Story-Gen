@@ -1,0 +1,2638 @@
+# ═══════════════════════════════════════════════════════════════
+# PHASE 3: ACTIVITIES (synced from 6_final_game.toml)
+# ═══════════════════════════════════════════════════════════════
+# Game: Two Weeks
+#
+# Format: Base node (group variants) → 3 choices (Emotional/Physical/Neutral)
+#   → Emotional sub-node (group variants) → exit
+#   → Physical sub-node → unlockable tier choices → tier nodes
+#   → Neutral → direct exit
+#
+# Relationship phases for group variants:
+#   Phase 5: madison_arrived (fiancée in the house)
+#   Phase 4: first_night_complete (fully intimate)
+#   Phase 3: first_kiss_done (physical line crossed)
+#   Default: Phase 1-2 (reconnecting)
+# ═══════════════════════════════════════════════════════════════
+
+[[canvases]]
+id = "activity_breakfast_ethan"
+name = "Morning with Ethan"
+description = "Morning light, coffee, and the easy rhythm of routine."
+
+# === BASE NODE (group variants by relationship phase) ===
+[[canvases.nodes]]
+id = "base"
+name = "Morning Kitchen"
+blocks = [
+  # Phase 5: Madison arrived
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "He's on the phone when you walk in. Hangs up fast. 'That was Madison.' One mug on the counter. Yours isn't made." },
+    { type = "image", props = { file = "activities/breakfast_ethan_base.jpg", description = "Morning kitchen, tense atmosphere", search_queries = ["morning kitchen coffee tense", "awkward morning kitchen"] } },
+    { type = "dialog", content = "She's asking about the seating chart.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "You make your own coffee. The silence has a different weight now." }
+  ] },
+  # Phase 4: Post-first night (intimate baseline)
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "He made your favorite. Doesn't say why. Your mug is exactly right — he's memorized it. Sits closer than he used to." },
+    { type = "image", props = { file = "activities/breakfast_ethan_base.jpg", description = "Morning kitchen, warm intimate domestic scene", search_queries = ["morning kitchen coffee two mugs domestic", "cozy breakfast kitchen morning light"] } },
+    { type = "dialog", content = "Couldn't sleep after you left.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "His knee finds yours under the counter. Neither of you pretends it's an accident anymore." }
+  ] },
+  # Phase 3: Post-first kiss
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "He's already looking when you walk in. Looks away too fast. Your mug is ready — made exactly how you like it." },
+    { type = "image", props = { file = "activities/breakfast_ethan_base.jpg", description = "Morning kitchen, coffee for two, warm domestic scene", search_queries = ["morning kitchen coffee two mugs domestic", "cozy breakfast kitchen morning light"] } },
+    { type = "dialog", content = "Hey.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "Just 'hey.' But the way he says it — like the word is carrying everything he can't say out loud." }
+  ] },
+  # Default: Phase 1-2 (reconnecting / pre-physical)
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Morning light through the kitchen window. He's at the counter, coffee already made. Two mugs. He remembered how you take yours." },
+    { type = "image", props = { file = "activities/breakfast_ethan_base.jpg", description = "Morning kitchen, coffee for two, warm domestic scene", search_queries = ["morning kitchen coffee two mugs domestic", "cozy breakfast kitchen morning light"] } },
+    { type = "dialog", content = "Morning. Sleep okay?", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "Cereal, toast, the easy rhythm of two people who know each other's habits." }
+  ] }
+]
+exit_block = { type = "choices", choices = [
+  # EMOTIONAL — always available
+  { text = "Talk with him over coffee", targetType = "node", nodeId = "activity_breakfast_ethan.emotional" },
+  # PHYSICAL — only after first physical unlock
+  { text = "Get closer", targetType = "node", nodeId = "activity_breakfast_ethan.physical", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "lingering_touch_unlock", operator = "is_true" }
+  ] } },
+  # NEUTRAL — always available
+  { text = "Just eat. Easy silence.", targetType = "trigger", time_progression_minutes = 45, effects = [
+    { targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true },
+
+    { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 3, clamp = true },
+
+    { targetType = "player", trait = "energy", op = "add", value = 5, clamp = true },
+
+  ] }
+] }
+
+# === EMOTIONAL SUB-NODE (group variants by phase) ===
+[[canvases.nodes]]
+id = "emotional"
+name = "Morning Conversation"
+blocks = [
+  # Phase 5: Madison arrived
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "You stir your coffee longer than necessary. The question sits between you like a third person at the table." },
+    { type = "dialog", content = "How's the planning going?", props = { speaker = "player" } },
+    { type = "dialog", content = "Fine. It's fine.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "'Fine' is doing a lot of heavy lifting in that sentence. You don't push. The silence says what neither of you will." }
+  ] },
+  # Phase 4: Post-first night
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "The coffee gets cold while you talk. Really talk. About what this is, what it means, whether either of you can stop." },
+    { type = "dialog", content = "I keep thinking about what happens when you leave.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "You don't have an answer. Neither does he. But the honesty feels like its own kind of intimacy." }
+  ] },
+  # Phase 3: Post-first kiss
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "You talk around it for ten minutes before he sets down his mug." },
+    { type = "dialog", content = "Are we going to pretend last night didn't happen?", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "dialog", content = "Do you want to pretend?", props = { speaker = "player" } },
+    { type = "paragraph", content = "He looks at you. Really looks." },
+    { type = "dialog", content = "No.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "The word is quiet but it fills the kitchen." }
+  ] },
+  # Default: Phase 1-2
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Easy conversation about nothing important. Old memories, shared jokes, the kind of talk that flows between people with history." },
+    { type = "dialog", content = "Remember when Mom burned the turkey that one Thanksgiving?", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "You laugh. He laughs. For a moment it's just two people who grew up together, catching up. Almost simple." }
+  ] }
+]
+exit_block = { type = "location", text = "Finish your coffee", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [
+  { targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true },
+
+  { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 2, clamp = true },
+
+  { targetType = "player", trait = "energy", op = "add", value = 5, clamp = true },
+
+] } }
+
+# === PHYSICAL SUB-NODE (unlockable intensity choices) ===
+[[canvases.nodes]]
+id = "physical"
+name = "Getting Closer"
+blocks = [
+  { type = "paragraph", content = "The coffee can wait." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Sit closer than necessary. Let your knee touch his.", targetType = "node", nodeId = "activity_breakfast_ethan.t2" },
+  { text = "\"You always look good in the morning.\" Hold eye contact.", targetType = "node", nodeId = "activity_breakfast_ethan.t3", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "flirt_unlock", operator = "is_true" }
+  ] } },
+  { text = "Come up behind him. Arms around his waist. Kiss his neck.", targetType = "node", nodeId = "activity_breakfast_ethan.t4", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "kiss_unlock", operator = "is_true" }
+  ] } },
+  { text = "His hand under the table. The cereal can wait.", targetType = "node", nodeId = "activity_breakfast_ethan.t6", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "manual_unlock", operator = "is_true" }
+  ] } },
+  { text = "Kneel on cool tile. Morning takes a turn.", targetType = "node", nodeId = "activity_breakfast_ethan.t7", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "oral_unlock", operator = "is_true" }
+  ] } },
+  { text = "Counter. Now.", targetType = "node", nodeId = "activity_breakfast_ethan.t8", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "sex_unlock", operator = "is_true" }
+  ] } }
+] }
+
+# === TIER NODES (existing content preserved) ===
+[[canvases.nodes]]
+id = "t2"
+name = "Closer Than Necessary"
+blocks = [
+  { type = "paragraph", content = "Your knees touch under the breakfast bar. Neither moves away. His hand finds yours reaching for the jam. Fingers brush. Linger." },
+  { type = "video", props = { file = "activities/breakfast_ethan_t2.jpg", description = "Accidental hand touch over breakfast, fingers lingering", search_queries = ["hand touch over breakfast intimate", "fingers brushing lingering domestic"] } },
+  { type = "paragraph", content = "He's not sorry. Neither are you." }
+]
+exit_block = { type = "location", text = "Finish breakfast", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 3, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 2, clamp = true }] } }
+
+
+[[canvases.nodes]]
+id = "t3"
+name = "Morning Compliment"
+blocks = [
+  { type = "paragraph", content = "You catch him watching you stretch. He quickly looks away, ears red. You take your time reaching for things on high shelves. The kitchen feels very small." },
+  { type = "video", props = { file = "activities/breakfast_ethan_flirt.jpg", description = "Standing too close in kitchen, reaching past her", search_queries = ["standing too close kitchen tension sexual", "man behind woman kitchen reaching close bodies"] } },
+  { type = "dialog", content = "Need help with that?", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "He's already behind you." }
+]
+exit_block = { type = "location", text = "Finish breakfast", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 4, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t4"
+name = "Kitchen Embrace"
+blocks = [
+  { type = "paragraph", content = "You wrap your arms around him from behind at the counter. He leans back. Turns around. His hands on your waist. Kisses that taste like coffee." },
+  { type = "video", props = { file = "activities/breakfast_ethan_t4.jpg", description = "Kitchen embrace, kissing, morning light", search_queries = ["couple kissing passionately kitchen morning", "making out kitchen counter embrace"] } },
+  { type = "dialog", content = "We should eat.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "dialog", content = "Later.", props = { speaker = "player" } }
+]
+exit_block = { type = "location", text = "Continue your morning", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 5, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 3, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t6"
+name = "Morning Hand"
+blocks = [
+  { type = "paragraph", content = "Milk sweats on the carton while his hand makes you forget it exists. The kitchen feels indecent in the morning light — in a way you love." },
+  { type = "video", props = { file = "activities/breakfast_ethan_t6.jpg", description = "Morning manual stimulation at counter, playful and quiet", search_queries = ["morning kitchen hand under shirt counter", "manual stimulation kitchen morning light"] } }
+]
+exit_block = { type = "location", text = "Toast pops eventually", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 6, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 4, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t7"
+name = "Kneel"
+blocks = [
+  { type = "paragraph", content = "You sink to your knees on cool tile. He tastes like coffee and him. His fingers curl in your hair as he tries to stay quiet and fails a little." },
+  { type = "video", props = { file = "activities/breakfast_ethan_t7.jpg", description = "Morning oral in kitchen, discreet, coffee nearby", search_queries = ["blowjob kitchen morning coffee", "kneeling oral morning kitchen"] } }
+]
+exit_block = { type = "location", text = "Wipe your mouth, grin", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 7, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 5, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t8"
+name = "Counter Rush"
+blocks = [
+  { type = "paragraph", content = "He lifts you onto the counter again, this time with no hesitation. You meet him eagerly, the kitchen your accomplice." },
+  { type = "video", props = { file = "activities/breakfast_ethan_t8.jpg", description = "Sex on kitchen counter, morning urgency", search_queries = ["sex on kitchen counter morning", "urgent sex counter kitchen daylight"] } },
+  { type = "paragraph", content = "The toast is charcoal by the time you're done. He makes a new batch, grinning." }
+]
+exit_block = { type = "location", text = "Make new toast", loop_terminal = true, config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 2, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 8, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 6, clamp = true }] } }
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1
+[[canvases.trigger.schedules]]
+start_time = "07:00"
+end_time = "09:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "arrival_complete"
+operator = "is_true"
+
+[[canvases]]
+id = "activity_helping_chores"
+name = "Helping with Chores"
+description = "Laundry, dishes, domestic teamwork. Easy conversation."
+
+# === BASE NODE (group variants by relationship phase) ===
+[[canvases.nodes]]
+id = "base"
+name = "Chores Together"
+blocks = [
+  # Phase 5: Madison arrived
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Madison's dry cleaning hangs on the door handle. You fold it without being asked. He watches you fold his fiancée's clothes and something in his face breaks a little." },
+    { type = "image", props = { file = "activities/helping_chores_base.jpg", description = "Domestic chores, tense atmosphere", search_queries = ["couple doing chores together domestic", "folding laundry living room together"] } },
+    { type = "dialog", content = "You don't have to do that.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "But you do it anyway. Because what else can you do." }
+  ] },
+  # Phase 4: Post-first night
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "You're folding his shirts. He comes up behind you and wraps his arms around your waist." },
+    { type = "dialog", content = "You don't have to do this.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "dialog", content = "I want to.", props = { speaker = "player" } },
+    { type = "paragraph", content = "Neither of you means the laundry." },
+    { type = "image", props = { file = "activities/helping_chores_base.jpg", description = "Domestic chores together, intimate", search_queries = ["couple doing chores together domestic", "folding laundry living room together"] } },
+    { type = "paragraph", content = "The house smells like detergent and him. Domestic in a way that aches." }
+  ] },
+  # Phase 3: Post-first kiss
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Laundry, dishes, the domestic dance. His hand brushes yours at the sink more than necessary. The house feels smaller since last night." },
+    { type = "image", props = { file = "activities/helping_chores_base.jpg", description = "Domestic chores together, warm tension", search_queries = ["couple doing chores together domestic", "folding laundry living room together"] } },
+    { type = "dialog", content = "Thanks for helping.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "His eyes say more than thanks. Your hips bump at the sink. Neither apologizes." }
+  ] },
+  # Default: Phase 1-2
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Laundry, dishes, general tidying. Domestic teamwork. You're helping because you're a guest who doesn't want to be useless. He appreciates it." },
+    { type = "image", props = { file = "activities/helping_chores_base.jpg", description = "Domestic chores together, folding laundry, living room", search_queries = ["couple doing chores together domestic", "folding laundry living room together"] } },
+    { type = "paragraph", content = "Easy conversation about old times while folding towels. He washes, you dry. Your hips bump at the sink." }
+  ] }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Talk while you work", targetType = "node", nodeId = "activity_helping_chores.emotional" },
+  { text = "Get closer", targetType = "node", nodeId = "activity_helping_chores.physical", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "lingering_touch_unlock", operator = "is_true" }
+  ] } },
+  { text = "Fold laundry, easy conversation.", targetType = "trigger", time_progression_minutes = 45, effects = [
+    { targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true },
+
+    { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 3, clamp = true },
+
+  ] }
+] }
+
+# === EMOTIONAL SUB-NODE ===
+[[canvases.nodes]]
+id = "emotional"
+name = "Domestic Conversation"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "She left her wedding shoes by the door. You almost tripped on them this morning." },
+    { type = "dialog", content = "I saw.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "He doesn't apologize for them being there. He doesn't move them. The shoes sit between you like everything else unsaid." }
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Folding towels side by side. The routine feels dangerously domestic. Like this could be your life." },
+    { type = "dialog", content = "What would mornings look like if things were different?", props = { speaker = "player" } },
+    { type = "paragraph", content = "He stops folding. Stares at the towel in his hands like it holds the answer. It doesn't. But the question hangs in the warm air between you." }
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "You sort laundry in comfortable silence. His shirt is warm from the dryer." },
+    { type = "dialog", content = "It's nice having help.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "dialog", content = "It's nice being here.", props = { speaker = "player" } },
+    { type = "paragraph", content = "Both of you meaning more than the words carry." }
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Easy banter while you work. He tells you about the neighbor's cat that keeps getting into the yard. You tell him about your apartment's terrible plumbing." },
+    { type = "dialog", content = "Sounds like you need a handyman.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "The offer hangs in the air, half-joke, half-something else." }
+  ] }
+]
+exit_block = { type = "location", text = "Back to folding", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [
+  { targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true },
+
+  { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 2, clamp = true },
+
+] } }
+
+# === PHYSICAL SUB-NODE ===
+[[canvases.nodes]]
+id = "physical"
+name = "Getting Closer"
+blocks = [
+  { type = "paragraph", content = "The chores can wait." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Hold his shirt to your face. Breathe in.", targetType = "node", nodeId = "activity_helping_chores.t2" },
+  { text = "Flick him with the dish towel. Let him chase you.", targetType = "node", nodeId = "activity_helping_chores.t3", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "flirt_unlock", operator = "is_true" }
+  ] } },
+  { text = "Stay at the sink. Let him come up behind you.", targetType = "node", nodeId = "activity_helping_chores.t4", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "kiss_unlock", operator = "is_true" }
+  ] } },
+  { text = "Pull him to the couch. Hide under the laundry.", targetType = "node", nodeId = "activity_helping_chores.t6", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "manual_unlock", operator = "is_true" }
+  ] } },
+  { text = "Kneel on the rug. Kiss lower.", targetType = "node", nodeId = "activity_helping_chores.t7", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "oral_unlock", operator = "is_true" }
+  ] } },
+  { text = "Push him into the cushions.", targetType = "node", nodeId = "activity_helping_chores.t8", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "sex_unlock", operator = "is_true" }
+  ] } }
+] }
+
+# === TIER NODES ===
+[[canvases.nodes]]
+id = "t2"
+name = "His Shirt"
+blocks = [
+  { type = "paragraph", content = "You hold one of his shirts — press it to your nose." },
+    { type = "dialog", content = "Still use the same detergent.", props = { speaker = "player" } },
+    { type = "paragraph", content = "He watches you inhale. Doesn't say anything. Doesn't need to." },
+  { type = "video", props = { file = "activities/helping_chores_t2.jpg", description = "Smelling his shirt, intimate domestic moment", search_queries = ["smelling his shirt intimate domestic", "laundry intimate moment"] } }
+]
+exit_block = { type = "location", text = "Keep folding", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 3, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 2, clamp = true }] } }
+
+
+[[canvases.nodes]]
+id = "t3"
+name = "Towel Fight"
+blocks = [
+  { type = "paragraph", content = "Dish towel flick fight. He chases you around the island. You squeal. He catches you from behind. Both breathing hard. His arms around you. Neither moves." },
+  { type = "video", props = { file = "activities/helping_chores_t3.jpg", description = "Playful chasing, catching from behind, laughing", search_queries = ["playful chasing catching from behind hug", "man catches woman from behind playful domestic"] } },
+  { type = "paragraph", content = "Then you squirm free, laughing." },
+    { type = "dialog", content = "You cheat.", props = { speaker = "player" } }
+]
+exit_block = { type = "location", text = "Back to chores", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 4, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t4"
+name = "At the Sink"
+blocks = [
+  { type = "paragraph", content = "You're at the sink. He comes up behind you, reaching for the faucet. Doesn't step back. His breath on your neck. Hands sliding from the faucet to your waist." },
+  { type = "video", props = { file = "activities/helping_chores_t4.jpg", description = "Behind her at the sink, kissing her neck, intimate", search_queries = ["kissing her neck from behind at sink", "man kissing woman neck kitchen embrace behind"] } },
+  { type = "dialog", content = "You missed a spot.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "His lips find your shoulder. The dishes can wait." }
+]
+exit_block = { type = "location", text = "Finish the dishes", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 5, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 3, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t6"
+name = "Under the Pile"
+blocks = [
+  { type = "paragraph", content = "You tug him to the couch, a shirt draped over your lap like camouflage. His hand disappears under the fabric and you forget what chore you were doing." },
+  { type = "video", props = { file = "activities/helping_chores_t6.jpg", description = "Manual play on couch under laundry pile", search_queries = ["hand under clothes couch laundry", "manual stimulation on couch hidden by laundry"] } }
+]
+exit_block = { type = "location", text = "Half-folded, fully distracted", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 6, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 4, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t7"
+name = "Lower"
+blocks = [
+  { type = "paragraph", content = "You kneel on the rug and kiss lower until talking stops. The TV hums to itself, ignored." },
+  { type = "video", props = { file = "activities/helping_chores_t7.jpg", description = "Oral on living room rug, quiet afternoon", search_queries = ["blowjob living room rug afternoon", "oral on couch area carpet"] } }
+]
+exit_block = { type = "location", text = "Stand, breathless", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 7, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 5, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t8"
+name = "Couch Rush"
+blocks = [
+  { type = "paragraph", content = "He pushes you back into the cushions and the world narrows to you and him. The laundry can absolutely wait." },
+  { type = "video", props = { file = "activities/helping_chores_t8.jpg", description = "Sex on couch in living room, impromptu", search_queries = ["sex on couch living room impromptu", "quick sex couch domestic"] } }
+]
+exit_block = { type = "location", text = "Fold later", loop_terminal = true, config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 2, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 8, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 6, clamp = true }] } }
+
+[canvases.trigger]
+location = "loc_living"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1
+costs = [{ trait = "energy", value = 25 }]
+[[canvases.trigger.schedules]]
+start_time = "09:00"
+end_time = "12:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "arrival_complete"
+operator = "is_true"
+
+[[canvases]]
+id = "activity_lunch_together"
+name = "Lunch Together"
+description = "Making sandwiches, catching up. Easy midday routine."
+
+[[canvases.nodes]]
+id = "base"
+name = "Lunch"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "He made lunch for three. Madison's plate is at the far end. You sit where you always sit — next to him." },
+    { type = "image", props = { file = "activities/lunch_together_base.jpg", description = "Lunch with three plates", search_queries = ["couple lunch kitchen midday", "making lunch together kitchen"] } },
+    { type = "dialog", content = "She likes your grilled cheese recipe.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "You smile. The cheese tastes like chalk in your mouth." },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Lunch for two without being asked. This is routine now. His knee against yours is deliberate." },
+    { type = "image", props = { file = "activities/lunch_together_base.jpg", description = "Lunch together intimate", search_queries = ["couple lunch kitchen midday", "making lunch together kitchen"] } },
+    { type = "dialog", content = "Same as yesterday?", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "He means the sandwich. He also means everything else." },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Grilled cheese, extra sharp. He remembered. His eyes linger on your mouth when you take the first bite." },
+    { type = "image", props = { file = "activities/lunch_together_base.jpg", description = "Lunch together warm tension", search_queries = ["couple lunch kitchen midday", "making lunch together kitchen"] } },
+    { type = "paragraph", content = "The kitchen feels different now. Every shared meal is a small confession." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Making sandwiches together. He remembers your favorite — grilled cheese, extra sharp cheddar." },
+    { type = "image", props = { file = "activities/lunch_together_base.jpg", description = "Making lunch together, midday light", search_queries = ["couple lunch kitchen midday", "making lunch together kitchen"] } },
+    { type = "paragraph", content = "Their knees touch under the breakfast bar. Neither moves away." },
+  ] },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Talk with him", targetType = "node", nodeId = "activity_lunch_together.emotional" },
+  { text = "Get closer", targetType = "node", nodeId = "activity_lunch_together.physical", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "lingering_touch_unlock", operator = "is_true" }
+  ] } },
+  { text = "Casual lunch.", targetType = "trigger", time_progression_minutes = 45, effects = [
+    { targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true },
+
+    { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 3, clamp = true },
+
+    { targetType = "player", trait = "energy", op = "add", value = 5, clamp = true },
+
+  ] }
+] }
+
+[[canvases.nodes]]
+id = "emotional"
+name = "Conversation"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Madison texts him during lunch. He puts the phone face-down." },
+    { type = "dialog", content = "It's nothing.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "Everything is nothing now. You eat in silence." },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "You talk about small things. Every mundane word carries the weight of what you can't say in daylight." },
+    { type = "dialog", content = "This is nice. Just... this.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "He asks how you're sleeping. You both know the answer." },
+    { type = "dialog", content = "Better than I expected.", props = { speaker = "player" } },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Easy lunch conversation. He asks about your friends, your job." },
+    { type = "dialog", content = "You always were a terrible liar.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  ] },
+]
+exit_block = { type = "location", text = "Clear the plates", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 2, clamp = true }, { targetType = "player", trait = "energy", op = "add", value = 5, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "physical"
+name = "Getting Closer"
+blocks = [
+  { type = "paragraph", content = "Words can wait." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Let your knee press against his. Leave it there.", targetType = "node", nodeId = "activity_lunch_together.t2" },
+  { text = "Offer a bite from your fork. Watch his eyes.", targetType = "node", nodeId = "activity_lunch_together.t3", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "flirt_unlock", operator = "is_true" }
+  ] } },
+  { text = "Hop onto the counter. Pull him close.", targetType = "node", nodeId = "activity_lunch_together.t4", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "kiss_unlock", operator = "is_true" }
+  ] } },
+  { text = "Take his hand under the counter edge.", targetType = "node", nodeId = "activity_lunch_together.t6", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "manual_unlock", operator = "is_true" }
+  ] } },
+  { text = "Kneel on the kitchen mat.", targetType = "node", nodeId = "activity_lunch_together.t7", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "oral_unlock", operator = "is_true" }
+  ] } },
+  { text = "Pull him between your knees. Now.", targetType = "node", nodeId = "activity_lunch_together.t8", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "sex_unlock", operator = "is_true" }
+  ] } },
+] }
+
+[[canvases.nodes]]
+id = "t2"
+name = "Knee Touch"
+blocks = [
+  { type = "paragraph", content = "Knees pressed together under the counter. The warmth of his leg against yours. He offers a bite from his plate. You take it." },
+  { type = "video", props = { file = "activities/lunch_together_t2.jpg", description = "Legs touching under counter, sharing food", search_queries = ["legs touching under table sharing food", "intimate lunch counter"] } }
+]
+exit_block = { type = "location", text = "Clear the plates", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 3, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t3"
+name = "Fork Bite"
+blocks = [
+  { type = "paragraph", content = "He offers a bite from his fork. You lean forward, eyes on his. Take it slowly. His eyes drop to your lips. The air between you thickens." },
+  { type = "video", props = { file = "activities/lunch_together_t3.jpg", description = "Feeding from fork, eye contact, intimate", search_queries = ["feeding from fork seductive eye contact", "woman eating from fork seductive eyes"] } }
+]
+exit_block = { type = "location", text = "Clear the plates", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 4, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t4"
+name = "Counter Kiss"
+blocks = [
+  { type = "paragraph", content = "You hop onto the counter. He moves between your legs. Hands on your thighs. The sandwich is irrelevant. His mouth finds yours." },
+  { type = "video", props = { file = "activities/lunch_together_t4.jpg", description = "Kissing on kitchen counter, standing between her legs", search_queries = ["making out kitchen counter between her legs", "passionate kiss counter standing between legs"] } }
+]
+exit_block = { type = "location", text = "Eventually eat", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 5, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 3, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t6"
+name = "Counter Edge"
+blocks = [
+  { type = "paragraph", content = "You perch on the stool and take his hand under the counter edge. No one would know — if anyone were here to see." },
+  { type = "video", props = { file = "activities/lunch_together_t6.jpg", description = "Manual under counter edge at kitchen bar", search_queries = ["manual under counter kitchen bar", "hand job kitchen stool counter edge"] } }
+]
+exit_block = { type = "location", text = "Finish lunch eventually", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 6, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 4, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t7"
+name = "Kitchen Mat"
+blocks = [
+  { type = "paragraph", content = "You kneel on the kitchen mat, bracing one hand on the cabinet door as you make quick work of his resolve." },
+  { type = "video", props = { file = "activities/lunch_together_t7.jpg", description = "Oral in kitchen, kneeling on mat", search_queries = ["blowjob kitchen kneeling mat", "oral kitchen midday quick"] } }
+]
+exit_block = { type = "location", text = "Stand and grin", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 7, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 5, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t8"
+name = "Bar Quickie"
+blocks = [
+  { type = "paragraph", content = "You pull him between your knees and the world tilts. It's fast, hungry, and reckless in the middle of the day." },
+  { type = "video", props = { file = "activities/lunch_together_t8.jpg", description = "Quick sex at kitchen bar, midday", search_queries = ["quick sex kitchen bar midday", "sex on stool kitchen quick"] } }
+]
+exit_block = { type = "location", text = "Wipe the counter", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 2, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 8, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 6, clamp = true }] } }
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1
+[[canvases.trigger.schedules]]
+start_time = "12:00"
+end_time = "14:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "arrival_complete"
+operator = "is_true"
+
+[[canvases]]
+id = "activity_pool_time"
+name = "Pool Time"
+description = "Summer heat. Swimsuits. Privacy fence. No one can see."
+
+[[canvases.nodes]]
+id = "base"
+name = "Pool Day"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Madison sunbathes on the far lounger. He's in the pool. You're in a bikini. The geometry is unbearable." },
+    { type = "image", props = { file = "activities/pool_time_base.jpg", description = "Pool day tense triangle", search_queries = ["pool day summer swimsuit", "backyard pool lounging summer"] } },
+    { type = "paragraph", content = "She adjusts her sunglasses. He treads water. You stand at the edge of everything." },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "He's already in the water when you come out. Watches you walk to the edge." },
+    { type = "image", props = { file = "activities/pool_time_base.jpg", description = "Pool day intimate", search_queries = ["pool day summer swimsuit", "backyard pool lounging summer"] } },
+    { type = "dialog", content = "Took you long enough.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Summer heat. The pool shimmers. You catch him looking at you in your swimsuit. He doesn't pretend he wasn't." },
+    { type = "image", props = { file = "activities/pool_time_base.jpg", description = "Pool day warm tension", search_queries = ["pool day summer swimsuit", "backyard pool lounging summer"] } },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Summer heat. The pool shimmers. You're in a swimsuit, he's in board shorts. The privacy fence means no one can see." },
+    { type = "image", props = { file = "activities/pool_time_base.jpg", description = "Pool day summer", search_queries = ["pool day summer swimsuit", "backyard pool lounging summer"] } },
+    { type = "dialog", content = "The water's perfect.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  ] },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Talk with him", targetType = "node", nodeId = "activity_pool_time.emotional" },
+  { text = "Get closer", targetType = "node", nodeId = "activity_pool_time.physical", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "lingering_touch_unlock", operator = "is_true" }
+  ] } },
+  { text = "Swim laps, lounge on chairs.", targetType = "trigger", time_progression_minutes = 45, effects = [
+    { targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true },
+
+    { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 3, clamp = true },
+
+  ] }
+] }
+
+[[canvases.nodes]]
+id = "emotional"
+name = "Conversation"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Madison waves from her lounger. You wave back. The smile costs everything." },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Floating on your backs, staring at the sky." },
+    { type = "dialog", content = "Do you ever think about what happens after I leave?", props = { speaker = "player" } },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "He tosses you a towel. His hand stays on yours a beat too long." },
+    { type = "dialog", content = "You're getting burned.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "You float. He floats. The water holds you both up. Easy silence." },
+  ] },
+]
+exit_block = { type = "location", text = "Dry off", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "physical"
+name = "Getting Closer"
+blocks = [
+  { type = "paragraph", content = "Words can wait." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Let him put sunscreen on your back.", targetType = "node", nodeId = "activity_pool_time.t2" },
+  { text = "Wrap your legs around him in the water.", targetType = "node", nodeId = "activity_pool_time.t3", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "flirt_unlock", operator = "is_true" }
+  ] } },
+  { text = "Night swimming. Underwater lights.", targetType = "node", nodeId = "activity_pool_time.t4", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "kiss_unlock", operator = "is_true" }
+  ] } },
+  { text = "On the lounger. Under the bikini.", targetType = "node", nodeId = "activity_pool_time.t6", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "manual_unlock", operator = "is_true" }
+  ] } },
+  { text = "Slide down between his legs on the lounger.", targetType = "node", nodeId = "activity_pool_time.t7", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "oral_unlock", operator = "is_true" }
+  ] } },
+  { text = "In the water. Quiet splashes.", targetType = "node", nodeId = "activity_pool_time.t8", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "sex_unlock", operator = "is_true" }
+  ] } },
+] }
+
+[[canvases.nodes]]
+id = "t2"
+name = "Sunscreen"
+blocks = [
+  { type = "paragraph", content = "His hands on your back. Slow — shoulders, spine, the small of your back. Fingertips at the bikini line. You arch into his touch." },
+  { type = "video", props = { file = "activities/pool_time_t2.jpg", description = "Applying sunscreen on back, lingering hands, pool", search_queries = ["sunscreen back lingering hands pool", "applying lotion back intimate"] } }
+]
+exit_block = { type = "location", text = "Go for a swim", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 3, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t3"
+name = "Pool Play"
+blocks = [
+  { type = "paragraph", content = "Splash war escalates. You wrap your legs around him for 'balance.' His hands on your thighs, holding you up. Wet skin on wet skin. Faces inches apart." },
+  { type = "video", props = { file = "activities/pool_time_t3.jpg", description = "Pool play, bodies pressed together, wet, playful", search_queries = ["couple pool play bodies pressed wet bikini", "swimming together bodies close wet flirty"] } },
+  { type = "paragraph", content = "'Balance' is a fiction and you both know it." }
+]
+exit_block = { type = "location", text = "Dry off", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 4, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t4"
+name = "Night Swimming"
+blocks = [
+  { type = "paragraph", content = "Night. Pool lights shimmer blue beneath the surface. He pulls you against him. Water provides cover. Your bikini top loosens. His fingers find skin." },
+  { type = "video", props = { file = "activities/pool_time_t4.jpg", description = "Night pool, underwater touching, intimate, blue lights", search_queries = ["couple night pool touching underwater intimate", "pool night bikini off underwater foreplay"] } },
+  { type = "dialog", content = "Anyone could see us.", props = { speaker = "player" } },
+  { type = "dialog", content = "No they can't.", props = { speaker = "npc", npcId = "npc_ethan" } }
+]
+exit_block = { type = "location", text = "Get out of the pool", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 5, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 3, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t6"
+name = "Under the Bikini"
+blocks = [
+  { type = "paragraph", content = "On the lounger, his hand slips under your bikini bottom. The night air is warm; your skin warmer." },
+  { type = "video", props = { file = "activities/pool_time_t6.jpg", description = "Manual stimulation on pool lounger at night", search_queries = ["manual stimulation pool lounger night", "hand under bikini lounger night"] } }
+]
+exit_block = { type = "location", text = "Adjust your suit", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 6, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 4, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t7"
+name = "Under Stars"
+blocks = [
+  { type = "paragraph", content = "You slide down between his legs on the lounger, the fence hiding you from the world. Stars watch without judging." },
+  { type = "video", props = { file = "activities/pool_time_t7.jpg", description = "Oral on pool lounger at night", search_queries = ["blowjob pool lounger night", "oral outdoors private night"] } }
+]
+exit_block = { type = "location", text = "Catch your breath", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 7, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 5, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t8"
+name = "Night Swim More"
+blocks = [
+  { type = "paragraph", content = "In the water or on the lounger, you take him inside you. Quiet splashes, quiet gasps, a private universe in your backyard." },
+  { type = "video", props = { file = "activities/pool_time_t8.jpg", description = "Sex by the pool at night, private backyard", search_queries = ["sex by pool night private backyard", "night sex outdoors pool area"] } }
+]
+exit_block = { type = "location", text = "Wrap in a towel", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 2, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 8, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 6, clamp = true }] } }
+
+[canvases.trigger]
+location = "loc_backyard"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1
+costs = [{ trait = "energy", value = 30 }]
+[[canvases.trigger.schedules]]
+start_time = "14:00"
+end_time = "17:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "arrival_complete"
+operator = "is_true"
+
+[[canvases]]
+id = "activity_wedding_planning"
+name = "Wedding Planning Help"
+description = "Seating charts and RSVPs. Helping plan his fiancee's wedding."
+
+[[canvases.nodes]]
+id = "base"
+name = "Wedding Planning"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Madison reviews your seating chart suggestions." },
+    { type = "dialog", content = "You're so helpful!", props = { speaker = "npc", npcId = "npc_madison" } },
+    { type = "paragraph", content = "The gratitude is genuine. You want to disappear." },
+    { type = "image", props = { file = "activities/wedding_planning_base.jpg", description = "Wedding planning tension", search_queries = ["wedding planning table documents", "seating chart invitations table"] } },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "The invitation says 'Ethan & Madison' in the font you helped pick. Your handwriting is on the envelopes." },
+    { type = "image", props = { file = "activities/wedding_planning_base.jpg", description = "Wedding planning betrayal", search_queries = ["wedding planning table documents", "seating chart invitations table"] } },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "He passes you invitation samples. Your fingers overlap on the paper. The embossed names are a knife between you." },
+    { type = "image", props = { file = "activities/wedding_planning_base.jpg", description = "Wedding planning tension", search_queries = ["wedding planning table documents", "seating chart invitations table"] } },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Seating charts, RSVPs, invitation samples spread across the patio table. You're being a good sister." },
+    { type = "image", props = { file = "activities/wedding_planning_base.jpg", description = "Wedding planning patio", search_queries = ["wedding planning table documents", "seating chart invitations table"] } },
+    { type = "paragraph", content = "The irony is not lost on either of you." },
+  ] },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Talk with him", targetType = "node", nodeId = "activity_wedding_planning.emotional" },
+  { text = "Get closer", targetType = "node", nodeId = "activity_wedding_planning.physical", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "lingering_touch_unlock", operator = "is_true" }
+  ] } },
+  { text = "Help with RSVPs. Be a good sister.", targetType = "trigger", time_progression_minutes = 45, effects = [
+    { targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true },
+
+    { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 3, clamp = true },
+
+  ] }
+] }
+
+[[canvases.nodes]]
+id = "emotional"
+name = "Conversation"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Madison asks your opinion on vows. He leaves the room. You help her anyway." },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "dialog", content = "Does she make you happy?", props = { speaker = "player" } },
+    { type = "dialog", content = "She makes things... simple.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "You trace 'Ethan & Madison' with your fingertip. He watches your hand. Neither speaks." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "You help sort RSVPs. His hand brushes yours over a stack." },
+    { type = "dialog", content = "Thanks for doing this.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  ] },
+]
+exit_block = { type = "location", text = "Back to the plans", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "physical"
+name = "Getting Closer"
+blocks = [
+  { type = "paragraph", content = "Words can wait." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Let your fingers overlap on the invitation.", targetType = "node", nodeId = "activity_wedding_planning.t2" },
+  { text = "Ask what kind of wedding he really wants.", targetType = "node", nodeId = "activity_wedding_planning.t3", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "flirt_unlock", operator = "is_true" }
+  ] } },
+  { text = "He puts his head in his hands. Take his hand.", targetType = "node", nodeId = "activity_wedding_planning.t4", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "kiss_unlock", operator = "is_true" }
+  ] } },
+  { text = "Under the table, under the RSVPs.", targetType = "node", nodeId = "activity_wedding_planning.t6", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "manual_unlock", operator = "is_true" }
+  ] } },
+  { text = "Kneel between his chair and the table.", targetType = "node", nodeId = "activity_wedding_planning.t7", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "oral_unlock", operator = "is_true" }
+  ] } },
+  { text = "Sweep the invitations aside.", targetType = "node", nodeId = "activity_wedding_planning.t8", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "sex_unlock", operator = "is_true" }
+  ] } },
+] }
+
+[[canvases.nodes]]
+id = "t2"
+name = "Invitation Samples"
+blocks = [
+  { type = "paragraph", content = "Your fingers overlap on a sample. He doesn't pull away. You trace the embossed 'Ethan & Madison' with your fingertip. The name is a knife between you." },
+  { type = "image", props = { file = "activities/wedding_planning_t2.jpg", description = "Hands overlapping on wedding invitation, bittersweet", search_queries = ["hands overlapping invitation bittersweet", "wedding planning hands touching"] } }
+]
+exit_block = { type = "location", text = "Keep planning", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 3, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t3"
+name = "Dangerous Question"
+blocks = [
+  { type = "paragraph", content = "His eyes meet yours. Long pause." },
+    { type = "dialog", content = "Small. Private. Someone who...", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "He doesn't finish. Doesn't need to." },
+  { type = "video", props = { file = "activities/wedding_planning_t3.jpg", description = "Loaded eye contact, unfinished sentence, emotional", search_queries = ["loaded eye contact emotional unfinished", "intense gaze meaningful pause"] } }
+]
+exit_block = { type = "location", text = "Change the subject", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 4, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t4"
+name = "Breaking Down"
+blocks = [
+  { type = "paragraph", content = "He drops his pen. Puts his head in his hands. You take his hand. Both know he's not talking about centerpieces. Forehead to forehead." },
+  { type = "video", props = { file = "activities/wedding_planning_t4.jpg", description = "Comfort, foreheads touching, emotional, wedding plans visible", search_queries = ["foreheads touching emotional comfort kissing", "couple comfort kissing tender emotional"] } }
+]
+exit_block = { type = "location", text = "Give him space", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 5, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 3, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t6"
+name = "Under Papers"
+blocks = [
+  { type = "paragraph", content = "He slides a stack of RSVP cards aside and finds you under the table edge. Your breath hitches; the plans blur." },
+  { type = "video", props = { file = "activities/wedding_planning_t6.jpg", description = "Manual stimulation at table among invitations", search_queries = ["manual stimulation kitchen table invitations", "hand under table wedding planning"] } }
+]
+exit_block = { type = "location", text = "Straighten the stack", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 6, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 4, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t7"
+name = "Between Chair and Table"
+blocks = [
+  { type = "paragraph", content = "You kneel between his knees as he slides back the chair. Paper rustles above; something else happens below." },
+  { type = "video", props = { file = "activities/wedding_planning_t7.jpg", description = "Oral at dining table, papers scattered", search_queries = ["oral under table dining scattered papers", "blowjob at dining table wedding planning"] } }
+]
+exit_block = { type = "location", text = "Push in the chair", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 7, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 5, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t8"
+name = "Table Cleared"
+blocks = [
+  { type = "paragraph", content = "Invitations scatter to the floor as he sweeps the table. You climb up and pull him with you, paper crunching underfoot." },
+  { type = "video", props = { file = "activities/wedding_planning_t8.jpg", description = "Sex on table amid wedding plans", search_queries = ["sex on table invitations on floor", "passionate sex table wedding planning"] } }
+]
+exit_block = { type = "location", text = "Gather the cards later", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 2, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 8, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 6, clamp = true }] } }
+
+[canvases.trigger]
+location = "loc_backyard"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1
+costs = [{ trait = "energy", value = 20 }]
+[[canvases.trigger.schedules]]
+start_time = "10:00"
+end_time = "13:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "arrival_complete"
+operator = "is_true"
+
+[[canvases]]
+id = "activity_cooking_together"
+name = "Cooking Together"
+description = "Making mom's old recipe. Nostalgia and kitchen teamwork."
+
+[[canvases.nodes]]
+id = "base"
+name = "Cooking"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Madison asks to join. He says it's a 'sibling thing.' She smiles and goes to the living room." },
+    { type = "image", props = { file = "activities/cooking_together_base.jpg", description = "Cooking together tension", search_queries = ["couple cooking kitchen together", "cooking together evening kitchen"] } },
+    { type = "paragraph", content = "You can hear her humming from the next room." },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "He chops while you stir. His hip against yours at the counter." },
+    { type = "image", props = { file = "activities/cooking_together_base.jpg", description = "Cooking together intimate", search_queries = ["couple cooking kitchen together", "cooking together evening kitchen"] } },
+    { type = "dialog", content = "You're doing it wrong.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "dialog", content = "Show me then.", props = { speaker = "player" } },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Mom's old recipe. His hands guide yours on the knife. He doesn't need to." },
+    { type = "image", props = { file = "activities/cooking_together_base.jpg", description = "Cooking together warm", search_queries = ["couple cooking kitchen together", "cooking together evening kitchen"] } },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Making mom's old recipe together. Nostalgia, laughter over shared memories." },
+    { type = "image", props = { file = "activities/cooking_together_base.jpg", description = "Cooking together nostalgic", search_queries = ["couple cooking kitchen together", "cooking together evening kitchen"] } },
+    { type = "dialog", content = "You're doing it wrong.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "dialog", content = "Show me then.", props = { speaker = "player" } },
+  ] },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Talk with him", targetType = "node", nodeId = "activity_cooking_together.emotional" },
+  { text = "Get closer", targetType = "node", nodeId = "activity_cooking_together.physical", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "lingering_touch_unlock", operator = "is_true" }
+  ] } },
+  { text = "Cook together, swap stories.", targetType = "trigger", time_progression_minutes = 45, effects = [
+    { targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true },
+
+    { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 3, clamp = true },
+
+  ] }
+] }
+
+[[canvases.nodes]]
+id = "emotional"
+name = "Conversation"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "She's in the next room. You can hear her humming." },
+    { type = "dialog", content = "She likes your cooking.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "dialog", content = "Remember the smoke alarm?", props = { speaker = "player" } },
+    { type = "paragraph", content = "He laughs. You laugh. The kitchen smells like then and now." },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "He tells you about learning this recipe after you left." },
+    { type = "dialog", content = "I wanted to remember.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Easy cooking banter. He burns the garlic. You rescue it. Old rhythm." },
+  ] },
+]
+exit_block = { type = "location", text = "Plate up dinner", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "physical"
+name = "Getting Closer"
+blocks = [
+  { type = "paragraph", content = "Words can wait." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Let him stand behind you at the cutting board.", targetType = "node", nodeId = "activity_cooking_together.t2" },
+  { text = "Taste from the same spoon. Watch his eyes.", targetType = "node", nodeId = "activity_cooking_together.t3", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "flirt_unlock", operator = "is_true" }
+  ] } },
+  { text = "Sauce on your lip. Let him get it.", targetType = "node", nodeId = "activity_cooking_together.t4", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "kiss_unlock", operator = "is_true" }
+  ] } },
+  { text = "His hand follows the trail of your skin.", targetType = "node", nodeId = "activity_cooking_together.t6", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "manual_unlock", operator = "is_true" }
+  ] } },
+  { text = "Slide to your knees on the tile.", targetType = "node", nodeId = "activity_cooking_together.t7", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "oral_unlock", operator = "is_true" }
+  ] } },
+  { text = "He lifts you onto the counter.", targetType = "node", nodeId = "activity_cooking_together.t8", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "sex_unlock", operator = "is_true" }
+  ] } },
+] }
+
+[[canvases.nodes]]
+id = "t2"
+name = "Guided Hands"
+blocks = [
+  { type = "paragraph", content = "He stands behind you at the chopping board. His hands over yours, guiding the knife. His chest warm against your back. You can feel his heartbeat." },
+  { type = "video", props = { file = "activities/cooking_together_t2.jpg", description = "Guiding hands while cooking, standing behind, close", search_queries = ["guiding hands cooking behind close", "cooking together standing behind intimate"] } }
+]
+exit_block = { type = "location", text = "Keep cooking", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 3, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t3"
+name = "Same Spoon"
+blocks = [
+  { type = "paragraph", content = "He holds the spoon up. You lean forward, lips parting. His eyes on your mouth. You taste." },
+    { type = "dialog", content = "Perfect.", props = { speaker = "player" } },
+    { type = "paragraph", content = "The word means more than the food." },
+  { type = "video", props = { file = "activities/cooking_together_t3.jpg", description = "Taste-testing from same spoon, intimate, kitchen", search_queries = ["sharing spoon tasting food seductive kitchen", "feeding from spoon intimate eye contact"] } }
+]
+exit_block = { type = "location", text = "Plate up dinner", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 4, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t4"
+name = "Sauce on Your Lip"
+blocks = [
+  { type = "paragraph", content = "Sauce on your lip. His thumb comes up to wipe it. Lingers. His eyes drop from the sauce to your lips to your eyes. The kitchen goes very quiet." },
+  { type = "video", props = { file = "activities/cooking_together_t4.jpg", description = "Wiping sauce from lip with thumb, lingering, close faces", search_queries = ["wiping lip thumb kissing sensual kitchen", "thumb on lip close faces about to kiss"] } }
+]
+exit_block = { type = "location", text = "Serve dinner", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 5, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 3, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t6"
+name = "Taste Test"
+blocks = [
+  { type = "paragraph", content = "He licks a dot of sauce from your finger, then follows the trail of your skin further. You brace against the counter as your focus shifts off the stove." },
+  { type = "video", props = { file = "activities/cooking_together_t6.jpg", description = "Manual on kitchen counter during cooking", search_queries = ["manual stimulation kitchen counter while cooking", "hand under clothes cooking together"] } }
+]
+exit_block = { type = "location", text = "Turn off a burner", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 6, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 4, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t7"
+name = "Down Low"
+blocks = [
+  { type = "paragraph", content = "You slide to your knees on the tile. He leans back on the counter, eyes closing as your mouth replaces any thought of dinner." },
+  { type = "video", props = { file = "activities/cooking_together_t7.jpg", description = "Oral in kitchen during cooking, playful", search_queries = ["blowjob kitchen cooking playful", "kneeling oral kitchen during cooking"] } }
+]
+exit_block = { type = "location", text = "Stir later", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 7, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 5, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t8"
+name = "Counter Heat"
+blocks = [
+  { type = "paragraph", content = "He lifts you onto the counter and slides into you. The pot sizzles on an empty burner; you both start laughing and turn it off between kisses." },
+  { type = "video", props = { file = "activities/cooking_together_t8.jpg", description = "Sex on counter while cooking, playful chaos", search_queries = ["sex on kitchen counter while cooking", "passionate counter sex stove on"] } }
+]
+exit_block = { type = "location", text = "Order takeout instead", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 2, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 8, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 6, clamp = true }] } }
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1
+costs = [{ trait = "energy", value = 20 }]
+[[canvases.trigger.schedules]]
+start_time = "17:00"
+end_time = "18:30"
+
+[canvases.trigger.conditions]
+version = "1.0"
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "welcome_dinner_complete"
+operator = "is_true"
+[[canvases.trigger.conditions.items]]
+type = "days_since_flag"
+subject = "player"
+flag_key = "welcome_dinner_complete"
+operator = "gte"
+value = 1
+
+[[canvases]]
+id = "activity_dinner_ethan"
+name = "Dinner with Ethan"
+description = "Dinner conversation with undercurrents. Wine optional."
+
+[[canvases.nodes]]
+id = "base"
+name = "Dinner"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Three place settings. Madison talks about the honeymoon. Bali. She's excited. You drink faster." },
+    { type = "image", props = { file = "activities/dinner_ethan_base.jpg", description = "Dinner with three tense", search_queries = ["dinner table wine evening", "couple dinner conversation wine"] } },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Wine with dinner. The conversation dives straight in. His foot finds yours from the first pour." },
+    { type = "image", props = { file = "activities/dinner_ethan_base.jpg", description = "Dinner intimate", search_queries = ["dinner table wine evening", "couple dinner conversation wine"] } },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Second glass. He asks about your life. You ask about the wedding. Both deflecting." },
+    { type = "image", props = { file = "activities/dinner_ethan_base.jpg", description = "Dinner warm tension", search_queries = ["dinner table wine evening", "couple dinner conversation wine"] } },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Dinner conversation. He asks about your dating life, you deflect. Normal family dinner with undercurrents." },
+    { type = "image", props = { file = "activities/dinner_ethan_base.jpg", description = "Dinner conversation wine", search_queries = ["dinner table wine evening", "couple dinner conversation wine"] } },
+    { type = "paragraph", content = "Wine with dinner. Elbows on the table, leaning in." },
+  ] },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Talk with him", targetType = "node", nodeId = "activity_dinner_ethan.emotional" },
+  { text = "Get closer", targetType = "node", nodeId = "activity_dinner_ethan.physical", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "lingering_touch_unlock", operator = "is_true" }
+  ] } },
+  { text = "Pleasant dinner conversation.", targetType = "trigger", time_progression_minutes = 45, effects = [
+    { targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true },
+
+    { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 3, clamp = true },
+
+    { targetType = "player", trait = "energy", op = "add", value = 10, clamp = true },
+
+  ] }
+] }
+
+[[canvases.nodes]]
+id = "emotional"
+name = "Conversation"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Madison clears the plates. He looks at you over her shoulder. You look away first." },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "dialog", content = "Why her?", props = { speaker = "player" } },
+    { type = "dialog", content = "Because she was safe. Because she wasn't you.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "dialog", content = "You know why I left.", props = { speaker = "player" } },
+    { type = "dialog", content = "I know why you left.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "The truth is a third guest at the table." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Wine loosens the conversation. He asks why you stayed away so long. You give the rehearsed answer." },
+  ] },
+]
+exit_block = { type = "location", text = "Clear the table", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 2, clamp = true }, { targetType = "player", trait = "energy", op = "add", value = 10, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "physical"
+name = "Getting Closer"
+blocks = [
+  { type = "paragraph", content = "Words can wait." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Pour a second glass. Lean closer.", targetType = "node", nodeId = "activity_dinner_ethan.t2" },
+  { text = "'You know why.' Let the words hang.", targetType = "node", nodeId = "activity_dinner_ethan.t3", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "flirt_unlock", operator = "is_true" }
+  ] } },
+  { text = "Your bare foot finds his calf. Slides up.", targetType = "node", nodeId = "activity_dinner_ethan.t4", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "kiss_unlock", operator = "is_true" }
+  ] } },
+  { text = "Guide his hand under the tablecloth.", targetType = "node", nodeId = "activity_dinner_ethan.t6", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "manual_unlock", operator = "is_true" }
+  ] } },
+  { text = "Slide under the tablecloth.", targetType = "node", nodeId = "activity_dinner_ethan.t7", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "oral_unlock", operator = "is_true" }
+  ] } },
+  { text = "Sweep the plates aside.", targetType = "node", nodeId = "activity_dinner_ethan.t8", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "sex_unlock", operator = "is_true" }
+  ] } },
+] }
+
+[[canvases.nodes]]
+id = "t2"
+name = "Second Glass"
+blocks = [
+  { type = "paragraph", content = "Second glass loosens things. He asks why you stayed away. The answer is on the tip of your tongue. You hold it back — barely." },
+  { type = "video", props = { file = "activities/dinner_ethan_t2.jpg", description = "Deep dinner conversation, wine, loaded questions", search_queries = ["deep conversation dinner wine loaded", "intimate dinner questioning"] } }
+]
+exit_block = { type = "location", text = "Clear the plates", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 3, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t3"
+name = "You Know Why"
+blocks = [
+  { type = "dialog", content = "You know why.", props = { speaker = "player" } },
+    { type = "paragraph", content = "His fork stops. The air thickens. Two words that change the entire dinner from catch-up to confession." },
+  { type = "video", props = { file = "activities/dinner_ethan_t3.jpg", description = "Fork stopping, intense eye contact across dinner table", search_queries = ["intense eye contact dinner table sexual tension", "couple dinner loaded stare sexual tension"] } }
+]
+exit_block = { type = "location", text = "Finish dinner", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 4, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t4"
+name = "Under the Table"
+blocks = [
+  { type = "paragraph", content = "Your bare foot finds his calf under the table. Slides up. He grips the edge of the table. His eyes widen. Neither of you breaks eye contact." },
+  { type = "video", props = { file = "activities/dinner_ethan_t4.jpg", description = "Footsie under dinner table, tension, gripping table edge", search_queries = ["footsie under table foreplay dinner sexual", "foot rubbing leg under dinner table teasing"] } }
+]
+exit_block = { type = "location", text = "Dessert?", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 5, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 3, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t6"
+name = "Under-Table Hand"
+blocks = [
+  { type = "paragraph", content = "You lace fingers under the tablecloth and then guide him to your thigh. He doesn't look up from his plate; neither do you." },
+  { type = "video", props = { file = "activities/dinner_ethan_t6.jpg", description = "Manual under dining table, evening", search_queries = ["manual under table dining", "hand under skirt dinner table"] } }
+]
+exit_block = { type = "location", text = "Clear plates slowly", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 6, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 4, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t7"
+name = "Under the Table"
+blocks = [
+  { type = "paragraph", content = "You slide under the tablecloth and make dinner irrelevant. The silverware rattles once; you both freeze and then laugh." },
+  { type = "video", props = { file = "activities/dinner_ethan_t7.jpg", description = "Oral under dining table, playful risk", search_queries = ["blowjob under table dining playful", "oral dinner table risk playful"] } }
+]
+exit_block = { type = "location", text = "Set the forks straight", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 7, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 5, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t8"
+name = "Table Again"
+blocks = [
+  { type = "paragraph", content = "You sweep plates aside and pull him over you on the table. It's messy and perfect and neither of you cares." },
+  { type = "video", props = { file = "activities/dinner_ethan_t8.jpg", description = "Sex on dining table, messy and passionate", search_queries = ["sex dining table plates aside", "passionate sex dinner table"] } }
+]
+exit_block = { type = "location", text = "Dishwasher later", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 2, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 8, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 6, clamp = true }] } }
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1
+[[canvases.trigger.schedules]]
+start_time = "19:00"
+end_time = "21:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "welcome_dinner_complete"
+operator = "is_true"
+[[canvases.trigger.conditions.items]]
+type = "days_since_flag"
+subject = "player"
+flag_key = "welcome_dinner_complete"
+operator = "gte"
+value = 1
+
+[[canvases]]
+id = "activity_movie_night"
+name = "Movie Night"
+description = "Big couch, blanket, and a movie neither of you is watching."
+
+[[canvases.nodes]]
+id = "base"
+name = "Movie Night"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Madison sits between you on the couch. His hand finds yours behind her back." },
+    { type = "image", props = { file = "activities/movie_night_base.jpg", description = "Movie night couch tense", search_queries = ["movie night couch blanket popcorn", "couple watching TV couch blanket"] } },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "No popcorn bowl between you. You sit against him from the start. His arm is automatic now." },
+    { type = "image", props = { file = "activities/movie_night_base.jpg", description = "Movie night intimate", search_queries = ["movie night couch blanket popcorn", "couple watching TV couch blanket"] } },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "The popcorn bowl is between you. A buffer. Both pretending you need it." },
+    { type = "image", props = { file = "activities/movie_night_base.jpg", description = "Movie night buffer", search_queries = ["movie night couch blanket popcorn", "couple watching TV couch blanket"] } },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Big couch, blanket draped over the armrest, popcorn between you. Neither of you is really watching." },
+    { type = "image", props = { file = "activities/movie_night_base.jpg", description = "Movie night couch", search_queries = ["movie night couch blanket popcorn", "couple watching TV couch blanket"] } },
+  ] },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Talk with him", targetType = "node", nodeId = "activity_movie_night.emotional" },
+  { text = "Get closer", targetType = "node", nodeId = "activity_movie_night.physical", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "lingering_touch_unlock", operator = "is_true" }
+  ] } },
+  { text = "Watch the movie.", targetType = "trigger", time_progression_minutes = 45, effects = [
+    { targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true },
+
+    { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 3, clamp = true },
+
+  ] }
+] }
+
+[[canvases.nodes]]
+id = "emotional"
+name = "Conversation"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Madison falls asleep on his shoulder. He looks at you over her head. Nobody watches the movie." },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "dialog", content = "We used to watch this exact one. Remember?", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "You remember. You remember everything about that summer." },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "dialog", content = "This is nice.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "dialog", content = "Yeah. It is.", props = { speaker = "player" } },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "The movie fills the silence. You argue about the plot like you used to. His laugh is the same." },
+  ] },
+]
+exit_block = { type = "location", text = "Credits roll", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "physical"
+name = "Getting Closer"
+blocks = [
+  { type = "paragraph", content = "Words can wait." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Scoot past the popcorn bowl. Closer.", targetType = "node", nodeId = "activity_movie_night.t2" },
+  { text = "Head on his shoulder. Let his arm settle.", targetType = "node", nodeId = "activity_movie_night.t3", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "flirt_unlock", operator = "is_true" }
+  ] } },
+  { text = "His hand finds your thigh under the blanket.", targetType = "node", nodeId = "activity_movie_night.t4", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "kiss_unlock", operator = "is_true" }
+  ] } },
+  { text = "The blanket becomes a tent for two.", targetType = "node", nodeId = "activity_movie_night.t6", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "manual_unlock", operator = "is_true" }
+  ] } },
+  { text = "Slide down the couch under the blanket.", targetType = "node", nodeId = "activity_movie_night.t7", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "oral_unlock", operator = "is_true" }
+  ] } },
+  { text = "Climb onto his lap. Blanket falls away.", targetType = "node", nodeId = "activity_movie_night.t8", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "sex_unlock", operator = "is_true" }
+  ] } },
+] }
+
+[[canvases.nodes]]
+id = "t2"
+name = "Closer Under the Blanket"
+blocks = [
+  { type = "paragraph", content = "You shiver — barely convincing — and scoot past the popcorn bowl. Your thigh presses against his. Heat radiates through the blanket. He doesn't move away. The movie continues. Neither of you could name the scene." },
+  { type = "video", props = { file = "activities/movie_night_t2.jpg", description = "Scooting closer on couch under blanket, thighs touching", search_queries = ["couple close couch blanket thighs", "scooting closer couch movie night"] } }
+]
+exit_block = { type = "location", text = "Movie ends", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 3, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t3"
+name = "Head on Shoulder"
+blocks = [
+  { type = "paragraph", content = "Your head drifts to his shoulder. His arm settles around you — natural as breathing. His fingers trace absent patterns on your arm." },
+    { type = "dialog", content = "Just like we used to.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "dialog", content = "It doesn't feel like it used to.", props = { speaker = "player" } },
+    { type = "paragraph", content = "No. It doesn't." },
+  { type = "video", props = { file = "activities/movie_night_cuddle.jpg", description = "Head on shoulder, arm around her, fingers tracing arm", search_queries = ["cuddling couch head on shoulder arm around", "couple cuddling blanket couch intimate"] } }
+]
+exit_block = { type = "location", text = "Credits roll", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 4, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t4"
+name = "Wandering Hands"
+blocks = [
+  { type = "paragraph", content = "Under the blanket, his hand finds your thigh. Innocent at first. Then higher. Your hand finds his. Intertwines. Then moves to his leg. The movie is background noise. Both of your breathing has changed." },
+  { type = "video", props = { file = "activities/movie_night_t4.jpg", description = "Under blanket hands on thigh, tension, heavy breathing", search_queries = ["hand on thigh under blanket couch foreplay", "touching thigh under blanket couch sexual tension"] } }
+]
+exit_block = { type = "location", text = "Pull the blanket tighter", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 5, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 3, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t6"
+name = "Under-Blanket Manual"
+blocks = [
+  { type = "paragraph", content = "The blanket becomes a tent for two. His hand finds a rhythm, and your breath stutters as the movie drones on, forgotten." },
+  { type = "video", props = { file = "activities/movie_night_t6.jpg", description = "Under-blanket handplay on couch, discreet and intimate", search_queries = ["under blanket hand job couch", "discreet couch intimacy blanket"] } }
+]
+exit_block = { type = "location", text = "Let the credits roll", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 6, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 4, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t7"
+name = "Under-Blanket Oral"
+blocks = [
+  { type = "paragraph", content = "You slide down the couch and take him in your mouth. The blanket hides you; his hand curls in your hair, eyes on the ceiling, stunned and grateful." },
+  { type = "video", props = { file = "activities/movie_night_t7.jpg", description = "Oral under blanket on couch, careful and quiet", search_queries = ["blowjob under blanket couch discreet", "quiet oral on couch blanket night"] } }
+]
+exit_block = { type = "location", text = "Straighten the blanket", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 7, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 5, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t8"
+name = "Couch Intimacy"
+blocks = [
+  { type = "paragraph", content = "You climb back onto his lap and guide him inside you. Breathless and close, you try to be quiet and fail, laughing softly against his mouth." },
+  { type = "video", props = { file = "activities/movie_night_t8.jpg", description = "Sex on couch at night, blanket askew", search_queries = ["sex on couch night blanket aside", "riding on couch night intimacy"] } }
+]
+exit_block = { type = "location", text = "Find the remote eventually", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 2, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 8, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 6, clamp = true }] } }
+
+[canvases.trigger]
+location = "loc_living"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1
+costs = [{ trait = "energy", value = 15 }]
+[[canvases.trigger.schedules]]
+start_time = "19:00"
+end_time = "22:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "welcome_dinner_complete"
+operator = "is_true"
+
+[[canvases]]
+id = "activity_wine_talk"
+name = "Wine & Talk"
+description = "Wine, stars, and conversations the daylight won't allow."
+
+[[canvases.nodes]]
+id = "base"
+name = "Wine & Talk"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "He brings the bottle outside after Madison falls asleep. You're already waiting." },
+    { type = "image", props = { file = "activities/wine_talk_base.jpg", description = "Wine on patio desperate", search_queries = ["wine patio night stars two glasses", "couple wine outside evening stars"] } },
+    { type = "paragraph", content = "The patio is your sanctuary now. The stars are the same. Everything else has changed." },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Two glasses. No pretense. The wine is an excuse but not the reason." },
+    { type = "image", props = { file = "activities/wine_talk_base.jpg", description = "Wine patio intimate", search_queries = ["wine patio night stars two glasses", "couple wine outside evening stars"] } },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "A bottle on the patio table. Stars overhead. The wine loosens what the daylight holds tight." },
+    { type = "image", props = { file = "activities/wine_talk_base.jpg", description = "Wine patio confessional", search_queries = ["wine patio night stars two glasses", "couple wine outside evening stars"] } },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "A bottle of wine on the patio table. Two glasses. Stars overhead, privacy fence all around." },
+    { type = "image", props = { file = "activities/wine_talk_base.jpg", description = "Wine on patio starlight", search_queries = ["wine patio night stars two glasses", "couple wine outside evening stars"] } },
+    { type = "paragraph", content = "The wine loosens tongues and the night air makes everything feel confessional." },
+  ] },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Talk with him", targetType = "node", nodeId = "activity_wine_talk.emotional" },
+  { text = "Get closer", targetType = "node", nodeId = "activity_wine_talk.physical", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "lingering_touch_unlock", operator = "is_true" }
+  ] } },
+  { text = "One glass, stargazing.", targetType = "trigger", time_progression_minutes = 45, effects = [
+    { targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true },
+
+    { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 3, clamp = true },
+
+  ] }
+] }
+
+[[canvases.nodes]]
+id = "emotional"
+name = "Conversation"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "dialog", content = "How many more nights do we have?", props = { speaker = "player" } },
+    { type = "paragraph", content = "The wine makes you brave enough to count. The stars don't answer." },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "dialog", content = "That summer — what would have happened if I'd stayed?", props = { speaker = "player" } },
+    { type = "dialog", content = "Everything. Everything would have happened.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "dialog", content = "I need to tell you something.", props = { speaker = "player" } },
+    { type = "paragraph", content = "The wine gives you courage the daylight won't. He sets his glass down." },
+    { type = "dialog", content = "Tell me.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Stars and wine. He asks about your life. You ask about his. The answers get real." },
+  ] },
+]
+exit_block = { type = "location", text = "Cork the bottle", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "physical"
+name = "Getting Closer"
+blocks = [
+  { type = "paragraph", content = "Words can wait." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Second glass. Let the conversation drift.", targetType = "node", nodeId = "activity_wine_talk.t2" },
+  { text = "Liquid courage. Say what you mean.", targetType = "node", nodeId = "activity_wine_talk.t3", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "flirt_unlock", operator = "is_true" }
+  ] } },
+  { text = "Lean across the table. We shouldn't.", targetType = "node", nodeId = "activity_wine_talk.t4", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "kiss_unlock", operator = "is_true" }
+  ] } },
+  { text = "His hand under your dress. The night keeps secrets.", targetType = "node", nodeId = "activity_wine_talk.t6", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "manual_unlock", operator = "is_true" }
+  ] } },
+  { text = "Slide off the lounger.", targetType = "node", nodeId = "activity_wine_talk.t7", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "oral_unlock", operator = "is_true" }
+  ] } },
+  { text = "Pull him down onto the lounger.", targetType = "node", nodeId = "activity_wine_talk.t8", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "sex_unlock", operator = "is_true" }
+  ] } },
+] }
+
+[[canvases.nodes]]
+id = "t2"
+name = "Second Glass"
+blocks = [
+  { type = "paragraph", content = "Second glass. The conversation drifts into dangerous territory." },
+    { type = "dialog", content = "Do you ever think about that summer?", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "He doesn't finish. Doesn't need to. The stars are impossibly bright and the wine is warm in your chest." },
+  { type = "video", props = { file = "activities/wine_talk_t2.jpg", description = "Second glass of wine, deep conversation under stars", search_queries = ["deep conversation wine night outdoor", "couple wine talking stars patio"] } }
+]
+exit_block = { type = "location", text = "Finish the bottle another night", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 3, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t3"
+name = "Liquid Courage"
+blocks = [
+  { type = "dialog", content = "I need to tell you something.", props = { speaker = "player" } },
+    { type = "paragraph", content = "The wine gives you courage the daylight won't. He sets his glass down. Turns to face you." },
+    { type = "dialog", content = "Tell me.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "The night is patient. The words come out messier than planned." },
+  { type = "video", props = { file = "activities/wine_talk_t3.jpg", description = "Confession moment on patio, setting wine glass down, turning to face", search_queries = ["confession wine patio night turning emotional", "couple wine deep talk outdoor night romantic"] } }
+]
+exit_block = { type = "location", text = "Cork the bottle", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 4, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t4"
+name = "Leaning In"
+blocks = [
+  { type = "dialog", content = "We shouldn't.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "dialog", content = "I know.", props = { speaker = "player" } },
+    { type = "paragraph", content = "But you're already leaning across the patio table. His hand catches your chin. Thumb on your lower lip. Stars above. Privacy fence around. Nobody but the night." },
+  { type = "video", props = { file = "activities/wine_talk_t4.jpg", description = "Leaning across table, chin touch, intimate patio moment under stars", search_queries = ["chin touch leaning in kiss patio night", "couple about to kiss outdoor wine romantic"] } }
+]
+exit_block = { type = "location", text = "Head inside", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 5, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 3, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t6"
+name = "Hand Under Dress"
+blocks = [
+  { type = "paragraph", content = "On the lounger, his hand slips under your dress. The night keeps your secret." },
+  { type = "video", props = { file = "activities/wine_talk_t6.jpg", description = "Manual on patio lounger at night", search_queries = ["manual stimulation patio lounger night", "hand under dress outdoors night private"] } }
+]
+exit_block = { type = "location", text = "Top off the wine", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 6, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 4, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t7"
+name = "Stars Above"
+blocks = [
+  { type = "paragraph", content = "You slide off the lounger and take him in your mouth. The fence, the stars, the two of you — everything feels far away." },
+  { type = "video", props = { file = "activities/wine_talk_t7.jpg", description = "Oral outdoors at night on patio", search_queries = ["blowjob patio night private", "oral outdoors patio night"] } }
+]
+exit_block = { type = "location", text = "Sit back up", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 7, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 5, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t8"
+name = "Patio Furniture"
+blocks = [
+  { type = "paragraph", content = "You turn and pull him down with you on the lounger. The cushion creaks; your breath does too." },
+  { type = "video", props = { file = "activities/wine_talk_t8.jpg", description = "Sex on patio furniture at night", search_queries = ["sex on patio lounger night", "outdoor sex private patio night"] } }
+]
+exit_block = { type = "location", text = "Gather the glasses", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 2, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 8, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 6, clamp = true }] } }
+
+[canvases.trigger]
+location = "loc_backyard"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1
+costs = [{ trait = "energy", value = 20 }]
+[[canvases.trigger.schedules]]
+start_time = "19:00"
+end_time = "22:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "welcome_dinner_complete"
+operator = "is_true"
+
+[[canvases]]
+id = "activity_late_night_kitchen"
+name = "Late Night Kitchen"
+description = "Midnight insomnia, whispers, and sleep clothes."
+
+[[canvases.nodes]]
+id = "base"
+name = "Late Night Kitchen"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "He checks the hallway twice before closing the kitchen door. She's asleep upstairs." },
+    { type = "image", props = { file = "activities/cant_sleep.jpg", description = "Late night kitchen hiding", search_queries = ["late night kitchen dark fridge light", "insomnia kitchen midnight"] } },
+    { type = "paragraph", content = "The click of the latch sounds like a confession." },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "He's leaning against the counter, waiting. Boxers and nothing else. Not pretending anymore." },
+    { type = "image", props = { file = "activities/cant_sleep.jpg", description = "Late night kitchen waiting", search_queries = ["late night kitchen dark fridge light", "insomnia kitchen midnight"] } },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Both can't sleep. He's in boxers. You're in a nightgown. Eyes meet over the fridge light." },
+    { type = "image", props = { file = "activities/cant_sleep.jpg", description = "Late night kitchen tension", search_queries = ["late night kitchen dark fridge light", "insomnia kitchen midnight"] } },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Both can't sleep. The kitchen at 1 AM feels different — smaller, more intimate. Eyes meet over the fridge light." },
+    { type = "image", props = { file = "activities/cant_sleep.jpg", description = "Late night kitchen insomnia", search_queries = ["late night kitchen dark fridge light", "insomnia kitchen midnight"] } },
+    { type = "paragraph", content = "Both pretend not to notice. Both notice everything. The fridge hums." },
+  ] },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Talk with him", targetType = "node", nodeId = "activity_late_night_kitchen.emotional" },
+  { text = "Get closer", targetType = "node", nodeId = "activity_late_night_kitchen.physical", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "flirt_unlock", operator = "is_true" }
+  ] } },
+  { text = "Midnight snack. Back to bed.", targetType = "trigger", time_progression_minutes = 45, effects = [
+    { targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true },
+
+    { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 3, clamp = true },
+
+  ] }
+] }
+
+[[canvases.nodes]]
+id = "emotional"
+name = "Conversation"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "dialog", content = "What happens when she finds out?", props = { speaker = "player" } },
+    { type = "paragraph", content = "His hand tightens on his glass." },
+    { type = "dialog", content = "I don't know.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "The honesty is the loudest thing in the room." },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "dialog", content = "I can't stop thinking about you.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "He says it to the countertop. The confession fills the dark." },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "dialog", content = "Can't sleep either?", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "dialog", content = "It's not the coffee.", props = { speaker = "player" } },
+    { type = "dialog", content = "No. It's not.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Midnight snacking in near-darkness. The fridge hum is the loudest thing. Both pretending this is about insomnia." },
+  ] },
+]
+exit_block = { type = "location", text = "Back upstairs", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "physical"
+name = "Getting Closer"
+blocks = [
+  { type = "paragraph", content = "Words can wait." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Cross the three feet between you.", targetType = "node", nodeId = "activity_late_night_kitchen.t3", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "flirt_unlock", operator = "is_true" }
+  ] } },
+  { text = "'I keep thinking about you.' Close the distance.", targetType = "node", nodeId = "activity_late_night_kitchen.t4", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "kiss_unlock", operator = "is_true" }
+  ] } },
+  { text = "Brace on the counter. Let his hand find you.", targetType = "node", nodeId = "activity_late_night_kitchen.t6", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "manual_unlock", operator = "is_true" }
+  ] } },
+  { text = "Sink to your knees on the tile.", targetType = "node", nodeId = "activity_late_night_kitchen.t7", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "oral_unlock", operator = "is_true" }
+  ] } },
+  { text = "He lifts you onto the counter.", targetType = "node", nodeId = "activity_late_night_kitchen.t8", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "sex_unlock", operator = "is_true" }
+  ] } },
+] }
+
+[[canvases.nodes]]
+id = "t3"
+name = "Loaded Question"
+blocks = [
+  { type = "dialog", content = "Can't sleep either?", props = { speaker = "player" } },
+    { type = "paragraph", content = "You both know why neither can sleep. It's not the coffee. He leans against the counter. You lean against the opposite one. Three feet of kitchen floor between you. It might as well be an ocean. Or nothing." },
+  { type = "video", props = { file = "activities/late_night_kitchen_t3.jpg", description = "Leaning on opposite kitchen counters, midnight tension, loaded silence", search_queries = ["sexual tension kitchen midnight two people", "man woman kitchen counter tension night sleepwear"] } }
+]
+exit_block = { type = "location", text = "Warm milk helps", config = { destinationType = "trigger", time_progression_minutes = 30, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 4, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t4"
+name = "Whispered Confession"
+blocks = [
+  { type = "dialog", content = "I keep thinking about you.", props = { speaker = "player" } },
+    { type = "paragraph", content = "Whispered into the dark kitchen. You cross the three feet between you. His back against the counter. Your hands on his chest. Heartbeat under your palms." },
+  { type = "video", props = { file = "activities/late_night_kitchen_t4.jpg", description = "Crossing kitchen to him, hands on chest, whispered confession, dark", search_queries = ["crossing kitchen hands on chest midnight kiss", "couple kissing midnight kitchen hands chest"] } }
+]
+exit_block = { type = "location", text = "Go upstairs", config = { destinationType = "trigger", time_progression_minutes = 30, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 5, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 3, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t6"
+name = "Counter Manual"
+blocks = [
+  { type = "paragraph", content = "You brace on the counter as his hand works you open. The kitchen feels charged at this hour — breath, touch, the hum of the fridge." },
+  { type = "video", props = { file = "activities/late_night_kitchen_t6.jpg", description = "Manual stimulation in kitchen at night against counter", search_queries = ["hand under nightgown kitchen counter night", "manual stimulation kitchen midnight"] } }
+]
+exit_block = { type = "location", text = "Catch your breath", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 6, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 4, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t7"
+name = "Quiet Kneel"
+blocks = [
+  { type = "paragraph", content = "You sink to your knees on the tile. He tastes like salt and sleep. His hand finds your hair; he bites his lip to stay quiet." },
+  { type = "video", props = { file = "activities/late_night_kitchen_t7.jpg", description = "Oral in kitchen at night, discreet and intimate", search_queries = ["blowjob kitchen night discreet", "kneeling oral kitchen counter night"] } }
+]
+exit_block = { type = "location", text = "Stand up slowly", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 7, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 5, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t8"
+name = "Counter Intimacy"
+blocks = [
+  { type = "paragraph", content = "He lifts you onto the counter and slides inside you. You try to be quiet; you fail, breath catching as you cling to his shoulders." },
+  { type = "video", props = { file = "activities/late_night_kitchen_t8.jpg", description = "Sex on kitchen counter at night, urgent and quiet", search_queries = ["sex on kitchen counter night urgent", "quiet sex kitchen counter midnight"] } }
+]
+exit_block = { type = "location", text = "Sneak back upstairs", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 2, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 8, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 6, clamp = true }] } }
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1
+costs = [{ trait = "energy", value = 20 }]
+[[canvases.trigger.schedules]]
+start_time = "22:00"
+end_time = "01:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "sleepless_night_complete"
+operator = "is_true"
+
+[[canvases]]
+id = "activity_goodnight"
+name = "Saying Goodnight"
+description = "Bedroom doors ten feet apart. The goodnight ritual."
+
+[[canvases.nodes]]
+id = "base"
+name = "Saying Goodnight"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Madison's voice from his room: 'Coming to bed?' He looks at you. The hallway feels like a canyon." },
+    { type = "image", props = { file = "activities/hallway_doorway_flirt.jpg", description = "Hallway goodbye tense", search_queries = ["hallway doorway night goodbye", "standing between two doors hallway"] } },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Standing between two doors. His and yours. The goodnight takes longer every night." },
+    { type = "image", props = { file = "activities/hallway_doorway_flirt.jpg", description = "Hallway goodbye intimate", search_queries = ["hallway doorway night goodbye", "standing between two doors hallway"] } },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "The hug lasts too long. He pulls back. Something unfinished in his eyes." },
+    { type = "image", props = { file = "activities/hallway_doorway_flirt.jpg", description = "Hallway goodbye unfinished", search_queries = ["hallway doorway night goodbye", "standing between two doors hallway"] } },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Bedroom doors ten feet apart. The goodnight ritual. Neither wants to be the first through their door." },
+    { type = "image", props = { file = "activities/hallway_doorway_flirt.jpg", description = "Hallway goodnight", search_queries = ["hallway doorway night goodbye", "standing between two doors hallway"] } },
+  ] },
+]
+exit_block = { type = "choices", choices = [
+  { text = "Talk with him", targetType = "node", nodeId = "activity_goodnight.emotional" },
+  { text = "Get closer", targetType = "node", nodeId = "activity_goodnight.physical", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "lingering_touch_unlock", operator = "is_true" }
+  ] } },
+  { text = "Quick goodnight. Separate doors.", targetType = "trigger", time_progression_minutes = 45, effects = [
+    { targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true },
+
+    { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 3, clamp = true },
+
+  ] }
+] }
+
+[[canvases.nodes]]
+id = "emotional"
+name = "Conversation"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "dialog", content = "I should go in. She's waiting.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "He doesn't move. You don't move. The hallway holds its breath." },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "dialog", content = "I don't want tonight to end.", props = { speaker = "player" } },
+    { type = "dialog", content = "Then don't let it.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  ] },
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "dialog", content = "Goodnight.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "He says it but doesn't turn away. Neither do you." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "A brief hug." },
+    { type = "dialog", content = "Sleep well.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "He smells like soap and something warm. You pull back before it gets complicated." },
+  ] },
+]
+exit_block = { type = "location", text = "Your door. Close it.", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "physical"
+name = "Getting Closer"
+blocks = [
+  { type = "paragraph", content = "Words can wait." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Let the hug linger. Press closer.", targetType = "node", nodeId = "activity_goodnight.t2" },
+  { text = "'What if I can't sleep?' Watch his face.", targetType = "node", nodeId = "activity_goodnight.t3", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "flirt_unlock", operator = "is_true" }
+  ] } },
+  { text = "Pin him against his door.", targetType = "node", nodeId = "activity_goodnight.t4", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "kiss_unlock", operator = "is_true" }
+  ] } },
+  { text = "Between his body and the wood. His hand finds you.", targetType = "node", nodeId = "activity_goodnight.t6", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "manual_unlock", operator = "is_true" }
+  ] } },
+  { text = "Just inside the door. Kneel.", targetType = "node", nodeId = "activity_goodnight.t7", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "oral_unlock", operator = "is_true" }
+  ] } },
+  { text = "Whose room? Does it matter?", targetType = "node", nodeId = "activity_goodnight.t8", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "sex_unlock", operator = "is_true" }
+  ] } },
+] }
+
+[[canvases.nodes]]
+id = "t2"
+name = "Lingering Hug"
+blocks = [
+  { type = "paragraph", content = "The hug goes on. His arms tighten. Your face presses into his neck. He smells like soap and something that's just him. He pulls back — looks at you. A beat too long. Releases you like it costs something." },
+  { type = "video", props = { file = "activities/goodnight_t2.jpg", description = "Lingering hug in hallway, reluctant release, intense eye contact", search_queries = ["lingering hug hallway reluctant release", "long hug pulling back eye contact night"] } }
+]
+exit_block = { type = "location", text = "Goodnight", config = { destinationType = "trigger", time_progression_minutes = 15, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 3, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t3"
+name = "Dangerous Invitation"
+blocks = [
+  { type = "dialog", content = "What if I can't sleep?", props = { speaker = "player" } },
+    { type = "dialog", content = "Then come find me.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "His door closes. The invitation hangs in the hallway air. You stand between the two doors. Your room is safety. His room is everything else." },
+  { type = "video", props = { file = "activities/goodnight_t3.jpg", description = "Hallway between two doors, invitation, standing alone deciding", search_queries = ["hallway bedroom doors night invitation suggestive", "standing between bedrooms night sexual tension"] } }
+]
+exit_block = { type = "location", text = "Your door. For now.", config = { destinationType = "trigger", time_progression_minutes = 15, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 4, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 2, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t4"
+name = "Against the Door"
+blocks = [
+  { type = "paragraph", content = "He pins you against your bedroom door." },
+    { type = "dialog", content = "We should stop.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "Your hands pull him closer." },
+    { type = "dialog", content = "We should.", props = { speaker = "player" } },
+    { type = "paragraph", content = "His mouth finds your neck. The door handle digs into your back. Neither of you reaches for it." },
+  { type = "video", props = { file = "activities/goodnight_t4.jpg", description = "Pinned against bedroom door, kissing neck, hallway at night", search_queries = ["pinned against door kissing neck passionate", "making out against bedroom door hallway"] } }
+]
+exit_block = { type = "location", text = "Separate doors. Barely.", config = { destinationType = "trigger", time_progression_minutes = 15, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 5, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 3, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t6"
+name = "Against the Door (Further)"
+blocks = [
+  { type = "paragraph", content = "Pinned between his body and the wood, his hand finds you without asking. You nod anyway." },
+  { type = "video", props = { file = "activities/goodnight_t6.jpg", description = "Manual stimulation against bedroom door at night", search_queries = ["manual stimulation against door hallway night", "hand under skirt against door"] } }
+]
+exit_block = { type = "location", text = "Keys jingle down the hall", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 6, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 4, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t7"
+name = "Just Inside"
+blocks = [
+  { type = "paragraph", content = "Inside the door, you sink to your knees before it clicks shut. He exhales your name like relief." },
+  { type = "video", props = { file = "activities/goodnight_t7.jpg", description = "Oral just inside bedroom door at night", search_queries = ["blowjob inside bedroom door night", "kneeling oral doorway night"] } }
+]
+exit_block = { type = "location", text = "Stand, dizzy", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 7, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 5, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t8"
+name = "Whose Room"
+blocks = [
+  { type = "paragraph", content = "You're not sure whose room it is when you finally break apart. It doesn't matter. The door clicks. The world narrows." },
+  { type = "video", props = { file = "activities/goodnight_t8.jpg", description = "Sex in bedroom doorway/just inside, night", search_queries = ["sex bedroom doorway night", "quick sex just inside bedroom door night"] } }
+]
+exit_block = { type = "location", text = "Lights off", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 2, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 8, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 6, clamp = true }] } }
+
+[canvases.trigger]
+location = "loc_home"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1
+costs = [{ trait = "energy", value = 10 }]
+[[canvases.trigger.schedules]]
+start_time = "22:00"
+end_time = "01:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "welcome_dinner_complete"
+operator = "is_true"
+
+[[canvases]]
+id = "solo_sleep"
+name = "Sleep"
+description = "Rest in your old room."
+
+[[canvases.nodes]]
+id = "base"
+name = "Sleep"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "The sheets smell like you and faintly like him. You press your face into the pillow and breathe." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "You lie down on the bed. The familiar ceiling, the old posters. So much has changed, but this room feels like a time capsule. Your eyes are heavy." }
+  ] }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Take a short nap (1 hour)", targetType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "player", trait = "energy", op = "add", value = 20, clamp = true }] },
+  { text = "Sleep until morning", targetType = "trigger", time_progression_minutes = 480, effects = [{ targetType = "player", trait = "energy", op = "set", value = 100, clamp = true }] },
+] }
+
+[canvases.trigger]
+location = "loc_player_room"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 2
+priority = 1
+
+[[canvases]]
+id = "solo_shower"
+name = "Shower"
+description = "Hot water and a moment to decompress."
+
+[[canvases.nodes]]
+id = "base"
+name = "Shower"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Hot water runs over skin that still remembers his hands. The steam doesn't wash away the feeling. You don't want it to." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Hot water, steam on the mirror. A moment to decompress and process everything that's happening. The shared bathroom means you can hear him in the hallway sometimes." }
+  ] }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Quick rinse", targetType = "trigger", time_progression_minutes = 15, effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, clamp = true }] },
+  { text = "Long shower, let the water run", targetType = "trigger", time_progression_minutes = 30, effects = [{ targetType = "player", trait = "energy", op = "add", value = 10, clamp = true }] },
+] }
+
+[canvases.trigger]
+location = "loc_bathroom"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1
+
+[[canvases]]
+id = "solo_get_ready"
+name = "Get Ready"
+description = "Mirror, makeup, clothes. Knowing who will see."
+[[canvases.nodes]]
+id = "base"
+name = "Get Ready"
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Mirror, makeup, clothes. Choosing what to wear — knowing who will see. You spend more time getting ready than you used to. You tell yourself it's just because you're on vacation."
+
+
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Keep it casual"
+targetType = "trigger"
+time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.choices]]
+text = "Put in effort today"
+targetType = "trigger"
+time_progression_minutes = 30
+[[canvases.nodes.exit_block.choices.effects]]
+targetType = "player"
+trait = "corruption"
+op = "add"
+value = 2
+clamp = true
+
+
+
+[canvases.trigger]
+location = "loc_bathroom"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1
+costs = [{ trait = "energy", value = 10 }]
+
+[[canvases]]
+id = "solo_unpack"
+name = "Unpack"
+description = "Settling back into a space that's yours but isn't anymore."
+[[canvases.nodes]]
+id = "base"
+name = "Unpack"
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Unpacking in your old room. You find things you left behind — an old journal, a photo strip from the mall with Ethan. His arm around you, both of you laughing. You were sixteen. You put it face-down on the nightstand."
+
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Settle in"
+[canvases.nodes.exit_block.config]
+destinationType = "trigger"
+time_progression_minutes = 60
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait = "corruption"
+op = "add"
+value = 2
+clamp = true
+
+
+[canvases.trigger]
+location = "loc_player_room"
+is_active = true
+is_repeatable = false
+max_triggers_per_day = 1
+priority = 1
+
+[[canvases]]
+id = "solo_phone_scroll"
+name = "Phone Scroll"
+description = "Scrolling, texting, avoiding."
+[[canvases.nodes]]
+id = "base"
+name = "Phone Scroll"
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Scrolling social media, texting friends, avoiding what you should be thinking about. Your friend asks how the trip is. 'Fine,' you type. Delete it. 'Complicated.' Delete that too. 'Fine.'"
+
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Put the phone down"
+[canvases.nodes.exit_block.config]
+destinationType = "trigger"
+time_progression_minutes = 30
+
+[canvases.trigger]
+location = "loc_player_room"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 2
+priority = 1
+costs = [{ trait = "energy", value = 15 }]
+
+[[canvases]]
+id = "solo_swim_alone"
+name = "Swim Alone"
+description = "The pool is different when he's not here."
+[[canvases.nodes]]
+id = "base"
+name = "Swim Alone"
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Swimming laps alone. The pool is different when he's not here — peaceful, meditative. The sun on your skin. Floating and thinking. The water holds you up when everything else feels heavy."
+
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Dry off"
+[canvases.nodes.exit_block.config]
+destinationType = "trigger"
+time_progression_minutes = 45
+[[canvases.nodes.exit_block.config.effects]]
+targetType = "player"
+trait = "energy"
+op = "add"
+value = 10
+clamp = true
+
+
+[canvases.trigger]
+location = "loc_backyard"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1
+costs = [{ trait = "energy", value = 5 }]
+[[canvases.trigger.schedules]]
+start_time = "14:00"
+end_time = "17:00"
+
+[[canvases]]
+id = "solo_wander"
+name = "Wander the House"
+description = "The house is a museum of your shared childhood."
+[[canvases.nodes]]
+id = "base"
+name = "Wander"
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Walking through the house. Family photos in the hallway — you and Ethan at someone's birthday, standing too close. Peeking into rooms. The house is a museum of your shared childhood. You pass his door. It's open a crack. You keep walking."
+
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Return to your room"
+[canvases.nodes.exit_block.config]
+destinationType = "trigger"
+time_progression_minutes = 15
+
+[canvases.trigger]
+location = "loc_home"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1
+costs = [{ trait = "energy", value = 5 }]
+
+[[canvases]]
+id = "solo_journal"
+name = "Journal"
+description = "Processing the day on paper."
+
+[[canvases.nodes]]
+id = "base"
+name = "Journal"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "You wrote his name. Crossed it out. Wrote it again. The pen knows what you won't say out loud." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Writing in the journal you found while unpacking. Processing the day. You write about the house, the weather, the food. You don't write about the way his hand felt on your back. But you think about it for the rest of the page." }
+  ] }
+]
+exit_block = { type = "location", text = "Close the journal", config = { destinationType = "trigger", time_progression_minutes = 30, effects = [{ targetType = "player", trait = "boldness", op = "add", value = 3, clamp = true }] } }
+
+[canvases.trigger]
+location = "loc_player_room"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 3
+priority = 1
+costs = [{ trait = "energy", value = 20 }]
+
+[[canvases]]
+id = "solo_lie_down"
+name = "Lie Down"
+description = "Close your eyes for a bit. Not sleeping, just resting."
+
+[[canvases.nodes]]
+id = "base"
+name = "Lie Down"
+blocks = [
+  { type = "paragraph", content = "You lie back on the bed and stare at the ceiling. Not sleeping. Just letting your body be still for a minute. The fan hums. Light moves across the wall. Your thoughts slow down enough to breathe." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Just close your eyes", targetType = "trigger", time_progression_minutes = 15, effects = [{ targetType = "player", trait = "energy", op = "add", value = 10, clamp = true }] },
+  { text = "Drift for a while", targetType = "trigger", time_progression_minutes = 30, effects = [{ targetType = "player", trait = "energy", op = "add", value = 15, clamp = true }] },
+] }
+
+[canvases.trigger]
+location = "loc_player_room"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 3
+priority = 1
+
+[[canvases]]
+id = "solo_snack"
+name = "Grab a Snack"
+description = "Coffee, leftovers, whatever's in the fridge."
+
+[[canvases.nodes]]
+id = "base"
+name = "Snack"
+blocks = [
+  { type = "paragraph", content = "You rummage through the fridge. Leftover pasta, a half-eaten pie, cold coffee you reheat in the microwave. Standing at the counter eating out of the container like a civilized adult." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Quick coffee", targetType = "trigger", time_progression_minutes = 10, effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, clamp = true }] },
+  { text = "Proper snack", targetType = "trigger", time_progression_minutes = 20, effects = [{ targetType = "player", trait = "energy", op = "add", value = 8, clamp = true }] },
+] }
+
+[canvases.trigger]
+location = "loc_kitchen"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 3
+priority = 1
+
+[[canvases]]
+id = "solo_relax"
+name = "Relax on the Couch"
+description = "Sit down, breathe, do nothing for a while."
+
+[[canvases.nodes]]
+id = "base"
+name = "Relax"
+blocks = [
+  { type = "paragraph", content = "You sink into the couch cushions and stare at the ceiling fan making slow circles. No phone, no journal, no thinking about what any of this means. Just sitting. The house creaks. Somewhere a clock ticks. It's enough." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Just a few minutes", targetType = "trigger", time_progression_minutes = 15, effects = [{ targetType = "player", trait = "energy", op = "add", value = 8, clamp = true }] },
+  { text = "Lose track of time", targetType = "trigger", time_progression_minutes = 30, effects = [{ targetType = "player", trait = "energy", op = "add", value = 12, clamp = true }] },
+] }
+
+[canvases.trigger]
+location = "loc_living"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 2
+priority = 1
+
+[[canvases]]
+id = "bonding_moms_recipe"
+name = "Cook Mom's Recipe"
+description = "The old recipe card. Mom's handwriting. Making it together."
+
+[[canvases.nodes]]
+id = "base"
+name = "The Recipe Card"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Madison asks for the recipe card. 'Family tradition!' she says brightly. He hands it to her. You watch your mother's handwriting leave his hands." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "He finds the old recipe card in the drawer. Mom's handwriting, faded but legible. You make it together — measuring flour, arguing about seasoning. The kitchen smells like childhood." },
+    { type = "image", props = { file = "activities/bonding_moms_recipe_base.jpg", description = "Cooking together from old recipe card, flour on counter, nostalgic kitchen scene", search_queries = ["cooking together recipe card nostalgic kitchen", "baking together flour counter warm"] } },
+    { type = "dialog", content = "She always added too much cinnamon. On purpose, I think.", props = { speaker = "npc", npcId = "npc_ethan" } }
+  ] }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Finish cooking. Eat together.", targetType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 5, clamp = true }] },
+  { text = "Ask about the first time she made this.", targetType = "node", nodeId = "bonding_moms_recipe.t2", conditions = { version = "1.0", items = [{ type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 30 }] } },
+  { text = "Stay in this moment a while.", targetType = "node", nodeId = "bonding_moms_recipe.t3", conditions = { version = "1.0", items = [{ type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 55 }] } },
+] }
+
+[[canvases.nodes]]
+id = "t2"
+name = "The Story Behind It"
+blocks = [
+  { type = "paragraph", content = "He tells you about the Thanksgiving she first made this. Before the divorce. Before you were step-siblings. When you were just two kids who liked the same dessert." },
+  { type = "dialog", content = "You stole the last piece. I cried. Mom made another one just for me.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "He laughs. You remember it differently but you let him have his version." }
+]
+exit_block = { type = "location", text = "Save the leftovers", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 5, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t3"
+name = "Belonging"
+blocks = [
+  { type = "paragraph", content = "You're covered in flour and laughing. He wipes your cheek with his thumb and doesn't move his hand." },
+  { type = "paragraph", content = "This isn't desire — it's something older and deeper. The feeling of belonging somewhere. Of being known by someone who remembers the version of you that existed before you learned to hide." },
+  { type = "dialog", content = "We should make this more often.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "He means the recipe. He also means this." }
+]
+exit_block = { type = "location", text = "This is enough", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 6, clamp = true }] } }
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1
+costs = [{ trait = "energy", value = 15 }]
+[[canvases.trigger.schedules]]
+start_time = "09:00"
+end_time = "12:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "arrival_complete"
+operator = "is_true"
+
+[[canvases]]
+id = "bonding_video_games"
+name = "Old Video Games"
+description = "Same controllers. Same cartridge. Fourteen again."
+
+[[canvases.nodes]]
+id = "base"
+name = "Player Two"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "Between rounds, his hand rests on your knee. Player one, player two. The game has changed but neither of you pauses it." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "He digs the old console out of the TV stand. Same controllers, same cartridge. You sit cross-legged on the floor like you're fourteen again, elbowing each other for advantage." },
+    { type = "image", props = { file = "activities/bonding_video_games_base.jpg", description = "Two people playing retro video games on floor, cross-legged, nostalgic", search_queries = ["playing retro video games together floor", "nostalgic gaming console living room"] } },
+    { type = "dialog", content = "I call player one.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "Some arguments never change." }
+  ] }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Play a few rounds. Trash-talk like old times.", targetType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 5, clamp = true }] },
+  { text = "Call him out for letting you win.", targetType = "node", nodeId = "bonding_video_games.t2", conditions = { version = "1.0", items = [{ type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 30 }] } },
+  { text = "Pause the game. Just talk.", targetType = "node", nodeId = "bonding_video_games.t3", conditions = { version = "1.0", items = [{ type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 55 }] } },
+] }
+
+[[canvases.nodes]]
+id = "t2"
+name = "Fair Play"
+blocks = [
+  { type = "paragraph", content = "He lets you win. You call him out. He grins — that same grin from when you were kids." },
+  { type = "dialog", content = "I have no idea what you're talking about. You're just naturally gifted.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "For a moment there's no wedding, no Madison, no complicated feelings. Just two people who grew up together, still keeping score." }
+]
+exit_block = { type = "location", text = "Save the game", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 5, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t3"
+name = "Before Everything Changed"
+blocks = [
+  { type = "paragraph", content = "The game is paused. Controllers on the carpet. He's talking about the summer you both learned to play this — before everything got complicated." },
+  { type = "dialog", content = "I miss when things were simple. When we were just... us.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "His voice is soft. You realize this is the version of him that existed before obligation. Before he learned to want things he wasn't supposed to have." }
+]
+exit_block = { type = "location", text = "Remember this feeling", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 6, clamp = true }] } }
+
+[canvases.trigger]
+location = "loc_living"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1
+costs = [{ trait = "energy", value = 15 }]
+[[canvases.trigger.schedules]]
+start_time = "12:00"
+end_time = "14:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "arrival_complete"
+operator = "is_true"
+
+[[canvases]]
+id = "bonding_garage_memories"
+name = "Garage Memories"
+description = "Boxes of old stuff. A childhood neither of you has touched in years."
+
+[[canvases.nodes]]
+id = "base"
+name = "The Boxes"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "You find a prom photo buried in the boxes. His arm around you, your head on his shoulder." },
+    { type = "dialog", content = "We look happy.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "Present tense." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Boxes of old stuff. School projects, faded ribbons, a science fair trophy with both your names on it. You sit on the concrete floor and sort through a childhood neither of you has touched in years." },
+    { type = "image", props = { file = "activities/bonding_garage_memories_base.jpg", description = "Sitting on garage floor sorting through old boxes, childhood memorabilia", search_queries = ["sorting old boxes garage floor memories", "childhood memorabilia boxes garage nostalgic"] } },
+    { type = "dialog", content = "Oh my god. Your macaroni art phase.", props = { speaker = "npc", npcId = "npc_ethan" } }
+  ] }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Laugh about old school photos. Put the boxes back.", targetType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 5, clamp = true }] },
+  { text = "Look at what he kept.", targetType = "node", nodeId = "bonding_garage_memories.t2", conditions = { version = "1.0", items = [{ type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 30 }] } },
+  { text = "Sit with the memories a while.", targetType = "node", nodeId = "bonding_garage_memories.t3", conditions = { version = "1.0", items = [{ type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 55 }] } },
+] }
+
+[[canvases.nodes]]
+id = "t2"
+name = "The Birthday Card"
+blocks = [
+  { type = "paragraph", content = "He finds the birthday card you made him when you were twelve. Crayon hearts and misspelled words. He reads it out loud and his voice cracks on 'your the best brother ever.'" },
+  { type = "dialog", content = "You spelled 'you're' wrong.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "dialog", content = "I was twelve.", props = { speaker = "player" } },
+  { type = "dialog", content = "Still wrong.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "But he's smiling. And he puts the card back in the box carefully, like it matters." }
+]
+exit_block = { type = "location", text = "Keep looking", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 5, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t3"
+name = "Family First"
+blocks = [
+  { type = "paragraph", content = "Sitting among the boxes, dusty and quiet. The garage smells like old cardboard and motor oil and time." },
+  { type = "dialog", content = "We were a family before we were anything else.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "It's the truest thing either of you has said. Some bonds predate desire. This one does. Whatever happens with the wedding, with Madison, with the future — this is the foundation underneath everything." }
+]
+exit_block = { type = "location", text = "Close the boxes gently", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 6, clamp = true }] } }
+
+[canvases.trigger]
+location = "loc_garage"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1
+costs = [{ trait = "energy", value = 10 }]
+[[canvases.trigger.schedules]]
+start_time = "14:00"
+end_time = "17:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "old_photos_complete"
+operator = "is_true"
+
+[[canvases]]
+id = "bonding_stargazing"
+name = "Stargazing"
+description = "Blanket on the grass. Stars out. The sky is infinite and the moment is small and perfect."
+
+[[canvases.nodes]]
+id = "base"
+name = "The Sky"
+blocks = [
+  { type = "group", conditions = { version = "1.0", items = [
+    { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" }
+  ] }, blocks = [
+    { type = "paragraph", content = "He whispers so Madison won't hear through the bedroom window. The stars feel like witnesses to something they shouldn't see." },
+  ] },
+  { type = "group", blocks = [
+    { type = "paragraph", content = "Blanket on the grass. Stars out. He points at constellations and gets every name wrong. You correct him. He claims he's been saying that the whole time." },
+    { type = "image", props = { file = "activities/bonding_stargazing_base.jpg", description = "Two people lying on blanket stargazing, backyard at night, peaceful", search_queries = ["stargazing blanket backyard night peaceful", "lying on grass looking at stars together"] } },
+    { type = "dialog", content = "That one's definitely Orion.", props = { speaker = "npc", npcId = "npc_ethan" } },
+    { type = "paragraph", content = "It's not. The sky is infinite and the moment is small and perfect." }
+  ] }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Watch the stars in comfortable silence.", targetType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 5, clamp = true }] },
+  { text = "Ask what he wanted to be when he grew up.", targetType = "node", nodeId = "bonding_stargazing.t2", conditions = { version = "1.0", items = [{ type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 30 }] } },
+  { text = "Just lie here. No words needed.", targetType = "node", nodeId = "bonding_stargazing.t3", conditions = { version = "1.0", items = [{ type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 55 }] } },
+] }
+
+[[canvases.nodes]]
+id = "t2"
+name = "Old Dreams"
+blocks = [
+  { type = "paragraph", content = "He asks what you wanted to be when you were a kid. You tell him. He remembers — he always remembers." },
+  { type = "dialog", content = "I wanted to be someone who didn't hurt people.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "The quiet after that sentence goes on forever. A shooting star crosses the sky and neither of you makes a wish." }
+]
+exit_block = { type = "location", text = "Let the silence be", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 5, clamp = true }] } }
+
+[[canvases.nodes]]
+id = "t3"
+name = "Just Presence"
+blocks = [
+  { type = "paragraph", content = "No words left. Just two people lying on the grass, shoulders touching, watching the same sky. His hand finds yours. Not desire. Just presence." },
+  { type = "paragraph", content = "Just: I'm here. You're here. That's enough tonight." },
+  { type = "paragraph", content = "The dew starts to fall. Neither of you moves." }
+]
+exit_block = { type = "location", text = "Stay until the dew falls", config = { destinationType = "trigger", time_progression_minutes = 45, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "trust", op = "add", value = 6, clamp = true }] } }
+
+[canvases.trigger]
+location = "loc_backyard"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = true
+max_triggers_per_day = 1
+priority = 1
+[[canvases.trigger.schedules]]
+start_time = "22:00"
+end_time = "01:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "arrival_complete"
+operator = "is_true"

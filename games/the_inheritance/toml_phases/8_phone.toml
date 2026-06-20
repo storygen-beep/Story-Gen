@@ -1,0 +1,162 @@
+# Phase 8/8 — 8_phone.toml
+# The Inheritance — the phone (deferred at scaffold; the final-polish system, beat_0027).
+# Top-level [phone] table (NOT bare phone_enabled — §1.3 scoping trap). Always available
+# (Catherine has her phone from day 1 — she watches porn on it in beat_0003); no purchase_flag.
+# One chat app + tone-shifted threads from the conquered family, each gated on a milestone flag.
+# Phone trigger evaluator (v2.py:3308) supports flag/trait/days_since_flag/item/etc — NOT
+# day/time/location/random. Threads gate on the arc flags (audrey_devoted / grayson_serves /
+# richard_first_night). Reply choices are flavor-only (no effects) — pure polish.
+# ⚠ GATE NESTING: phone triggers read trigger.CONDITIONS — the gate must nest as
+# trigger = { conditions = { version="1.0", items=[...] } }. Authoring trigger = { version, items }
+# directly (the canvas-trigger shape) leaves conv.trigger.conditions undefined → checkPhoneConversations
+# skips the gate → ALL threads fire at game start (live-caught 2026-06-14). Matches late_shifts 8_phone.toml.
+
+[phone]
+enabled = true
+
+[[phone.apps]]
+id    = "messages"
+type  = "chat"
+label = "Messages"
+icon  = "phone/messages.jpg"
+
+[[phone.apps]]
+id    = "flaunt"
+type  = "social_feed"
+label = "Flaunt"
+icon  = "phone/flaunt.jpg"
+
+# ─── Audrey — devoted, oblivious, all hearts (after the first night) ─────────────
+[[phone.conversations]]
+id      = "thread_audrey"
+app     = "messages"
+npc     = "npc_audrey"
+notify  = "📱 Audrey 🩷"
+trigger = { conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "audrey_devoted", operator = "is_true" } ] } }
+
+[[phone.conversations.blocks]]
+type    = "message"
+sender  = "npc"
+content = "thinking about you all day 🥺 danny says i seem really happy lately and i AM, like SO happy, and it's all bc of you cath ♡♡"
+
+[[phone.conversations.blocks]]
+type    = "message"
+sender  = "npc"
+content = "is it weird that i'd rather practice with you than literally anything else lol. don't answer that. teach me something new tonight??"
+
+[[phone.conversations.blocks]]
+type = "reply"
+choices = [
+  { text = "Good girl. Tonight." },
+  { text = "We'll see if you've earned it." },
+]
+
+[[phone.conversations.blocks]]
+type        = "message"
+sender      = "npc"
+content     = "🥰🥰 i'll be so good. i'll do anything you want. i always will ♡"
+after_reply = true
+
+# ─── Grayson — curt, servile, hating that he's the one texting (after the flip) ──
+[[phone.conversations]]
+id      = "thread_grayson"
+app     = "messages"
+npc     = "npc_grayson"
+notify  = "📱 Grayson"
+trigger = { conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "grayson_serves", operator = "is_true" } ] } }
+
+[[phone.conversations.blocks]]
+type    = "message"
+sender  = "npc"
+content = "what time do you need me tomorrow."
+
+[[phone.conversations.blocks]]
+type    = "message"
+sender  = "npc"
+content = "and don't make me wait around the drawing room all day again. i have. things. i used to have things."
+
+[[phone.conversations.blocks]]
+type = "reply"
+choices = [
+  { text = "You'll wait wherever I tell you to wait." },
+  { text = "You don't have things anymore. You have me." },
+]
+
+[[phone.conversations.blocks]]
+type        = "message"
+sender      = "npc"
+content     = "...fine. i'll be there at nine. (i hate that i already know i'll be early.)"
+after_reply = true
+
+# ─── Richard — warm, devoted, a little ashamed of how much (after the first night) ──
+[[phone.conversations]]
+id      = "thread_richard"
+app     = "messages"
+npc     = "npc_richard"
+notify  = "📱 Richard"
+trigger = { conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "richard_first_night", operator = "is_true" } ] } }
+
+[[phone.conversations.blocks]]
+type    = "message"
+sender  = "npc"
+content = "The October numbers are up eleven percent. I've attached nothing because I know you don't need the spreadsheet — I just wanted an excuse to write to you. — R"
+
+[[phone.conversations.blocks]]
+type    = "message"
+sender  = "npc"
+content = "The study's very quiet when you're not in it. That's all. Forgive an old man. Come up when you can."
+
+[[phone.conversations.blocks]]
+type = "reply"
+choices = [
+  { text = "Keep them good for me. I'll come up tonight." },
+  { text = "You're not old. You're mine. Same thing." },
+]
+
+[[phone.conversations.blocks]]
+type        = "message"
+sender      = "npc"
+content     = "Yours. Yes. I'll have the fire lit. — R"
+after_reply = true
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Flaunt — social feed. The conquered family's public faces, each gated on the SAME
+# arc flag as their chat thread (phone trigger = trigger.CONDITIONS, the nesting trap).
+# Photos are placeholders with search_queries → sourceable + Missing-Media page.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+[[phone.posts]]
+id             = "post_audrey"
+app            = "flaunt"
+npc            = "npc_audrey"
+image          = "phone/post_audrey.jpg"
+caption        = "best big sister in the WHOLE world 🩷 i don't know what i did to deserve her ✨ #blessed #family"
+likes          = 312
+search_queries = ["young woman happy selfie bedroom", "cute girl mirror selfie smiling"]
+notify         = "📱 Audrey posted"
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "audrey_devoted", operator = "is_true" } ] }
+
+[[phone.posts]]
+id             = "post_richard"
+app            = "flaunt"
+npc            = "npc_richard"
+image          = "phone/post_richard.jpg"
+caption        = "The old place is finally turning a corner. Proud of what this family is becoming. — R"
+likes          = 41
+search_queries = ["hotel lobby older man smiling", "distinguished man suit hotel"]
+notify         = "📱 Richard posted"
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "richard_first_night", operator = "is_true" } ] }
+
+[[phone.posts]]
+id             = "post_grayson"
+app            = "flaunt"
+npc            = "npc_grayson"
+image          = "phone/post_grayson.jpg"
+caption        = "Helping out around the estate these days. Keeping busy. It's fine. Everything's fine."
+likes          = 8
+search_queries = ["young man sullen mansion portrait", "man suit unhappy estate"]
+notify         = "📱 Grayson posted"
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "grayson_serves", operator = "is_true" } ] }

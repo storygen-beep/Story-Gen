@@ -1,0 +1,20 @@
+{
+  "session_id": 1,
+  "start_ts": "2026-06-18T13:18:12.558Z",
+  "start_epoch_ms": 1781788692558,
+  "end_ts": "2026-06-18T13:24:39.889Z",
+  "duration_s": 387,
+  "clicks": 5,
+  "choices_explored": 5,
+  "arrow_advances": 0,
+  "unique_states_seen": 5,
+  "new_unique_states": 5,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "BASELINE (Bedroom, dressed): sidebar paperdoll top-left = red-hair figure in white sundress + striped socks over town/sky bg + thermometer overlay. Sidebar text: 'wearing a white sundress and a pair of pale white plain panties'. Avatar visible by default, in-game (not just creator).",
+    "CLOTHING REACTIVITY — LIVE PROVEN (v0.5.10.10, in-game Bedroom→Wardrobe). 3 distinct sidebar paperdoll composites driven ONLY by the wardrobe clothing system: (1) BASELINE white sundress+striped socks [1781788879903]; (2) after 'Strip all' → NUDE bare body, worn.upper/lower flipped exposed, warmth 10→0, 'You are completely naked!' [1781788978220]; (3) after 'Wear random clothes' → BLUE PYJAMAS, worn.upper.name naked→'pyjama shirt', worn.lower.name naked→'pyjama bottoms', warmth 0→15 [1781789020488]. MECHANISM confirmed live via eval: sidebar holds 4 <canvas> els (256x256 mainCanvas = avatar + 'lighting' overlay + base + thermometer), Renderer is object, Renderer.lastModel.name='main', Renderer.composeLayers=function, NO <img> swap (imgdiv:false). = layered HTML5 canvas compositor, recomposited per clothing change. Confirms wf_abc52f68-e6d research."
+  ]
+}

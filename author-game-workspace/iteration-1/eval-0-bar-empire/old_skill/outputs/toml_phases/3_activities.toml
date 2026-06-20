@@ -1,0 +1,47 @@
+# Phase 3 — 3_activities.toml
+# Bar Empire (baseline) — setup scaffold: the day-advance Sleep router ONLY.
+# (The work-shift Lane-3 host + feeder activities are BEATS, not setup.)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# activity_sleep — Dahlia's room solo, the day-cycle router (doctrine/04 §10).
+# Night-centric: she sleeps the day window (08:00–16:00), which carries her across
+# the clock so the daytime errand/thrift window is reachable. Energy +80.
+# No NPC sub. is_repeatable. Schedule-gated to the sleep window (correct here —
+# the button SHOULD only show in the sleep window).
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id          = "activity_sleep"
+name        = "Sleep"
+description = "Dahlia-solo. Her room. Day-cycle router. Energy +80. Time: 420 min (7h). Restores energy earned-back-through for the shift cost gate."
+
+[canvases.trigger]
+location      = "loc_dahlias_room"
+is_repeatable = true
+priority      = 3
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "16:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Sleep"
+blocks = [
+  { type = "paragraph", content = "She pulls the thin curtain against the brick-wall light, sets the alarm for late afternoon, and goes down hard. The bar runs on her clock now — daylight is just the part she sleeps through." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Wake up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_dahlias_room"
+time_progression_minutes = 420
+effects = [
+  { targetType = "player", trait = "energy",  op = "add", value = 80  },
+  { targetType = "player", trait = "hygiene", op = "add", value = -10 },
+]

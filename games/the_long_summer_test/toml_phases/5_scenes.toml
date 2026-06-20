@@ -1,0 +1,1032 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 5 — SCENE CANVASES (TEST SLICE)
+# Game: The Long Summer — Test Slice
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# 8 scene canvases per plan §7.2 (revised: split Frank kitchen into 2 per-band
+# canvases since `type = "schedule"` condition is NOT handled inside group blocks
+# at runtime — only on canvas triggers per v1.py:2126 isScheduleActive). Other
+# scenes are single-band so no split.
+#
+# Each scene = one canvas. Single-node multi-group cascade per Doc 04 §"Cascade
+# skeleton". Stage outermost, no time-band overlay (band is selected by which
+# canvas fires per the multi-schedule trigger). Stage-3+ branches included as
+# small dev fragments so force-advance buttons render correctly.
+#
+# All scenes:
+#   - is_repeatable = true
+#   - priority = 6 (above location ambient; below dev shortcuts at priority 8+)
+#   - chance = 0.30 (kitchen feels like kitchen most days; per Doc 04 §"Probability gating")
+#     except scene_living_room_evening which is deterministic for the catch
+#   - Daily-cooldown via `talked_to_<npc>_today` flag (cleared by [engine.daily_tick])
+#
+# ─── INDEX ─────────────────────────────────────────────────────────────────────
+#   §1 — scene_kitchen_with_frank_morning      (M band 06:30–08:30, weekdays)
+#   §2 — scene_kitchen_with_frank_dinprep      (DINPREP band 17:00–18:30, weekdays)
+#   §3 — scene_kitchen_with_diana              (ambient awareness band variants)
+#   §4 — scene_yard_with_ryan                  (A band 08:00–15:00, weekdays)
+#   §5 — scene_franks_office_supervised        (post-catch Stage 2 chore-supervision)
+#   §6 — scene_living_room_evening             (E/N band, catch one-time guard)
+#   §7 — scene_diner_t0_shift                  (DINPREP+E band 17:00–22:00, Mon–Sat)
+#   §8 — scene_diner_t1_shift                  (T1 unlock — corruption + rep + beauty gate)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §1 — scene_kitchen_with_frank_morning
+# ═══════════════════════════════════════════════════════════════════════════════
+# Frank at the kitchen 06:30–08:30 weekdays. Stage 0/1/2 cascade. Stage 3/4
+# fragments included as dev-fragment branches (one paragraph + dialog each)
+# so force-advance buttons render correctly per plan §7.2 dev fragment column.
+
+[[canvases]]
+id          = "scene_kitchen_with_frank_morning"
+name        = "Frank — kitchen, morning"
+description = "Morning kitchen surface for Frank. Stages 0/1/2 natural; 3/4 dev-fragment. Trigger gates on Frank's M band schedule + daily cooldown."
+
+[canvases.trigger]
+location      = "loc_kitchen"
+is_repeatable = true
+priority      = 6
+is_active     = true
+chance        = 0.30
+npc           = "npc_frank"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_frank_today", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "arrived_at_franks",     operator = "is_true"  },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "06:30"
+end_time   = "08:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Kitchen — Frank, morning"
+blocks = [
+  { type = "image", props = { file = "scenes/kitchen_with_frank_morning.jpg", description = "Frank at the kitchen table with the morning paper, coffee mug at his elbow, summer light through the window over the sink.", search_queries = [
+    "older man at kitchen table morning paper coffee mug rural farmhouse summer light",
+    "fifties man reading newspaper kitchen table butcher block counter",
+    "older man morning coffee paper southern rural kitchen window light",
+    "salt and pepper hair man kitchen breakfast table paper folded",
+    "rural alabama kitchen morning man coffee newspaper",
+  ] } },
+
+  # ─── STAGE 0 — Suspicious landlord ─────────────────────────────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_frank_stage", operator = "eq", value = 0 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Frank had the paper open at the table when she came in. He didn't look up. The kettle was already cool — Diana's pour, an hour ago, before she'd gone out to the garden. Coffee bitter from sitting since five-thirty." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Morning." },
+    { type = "paragraph", content = "He folded the corner of the page when she sat. He went back to the page. The clock above the stove was the loudest thing in the kitchen." },
+  ] } },
+
+  # ─── STAGE 1 — Grudging warmth (numbers ask) ───────────────────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_frank_stage", operator = "eq", value = 1 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Frank had the receipts in two stacks at his elbow. He looked up when she came in — actually looked, not the page-turn glance. The kettle was still warm." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "You any good with numbers?" },
+    { type = "paragraph", content = "She nodded once. He pushed the smaller stack across to her side of the table. The pen Diana kept in the drawer. The sound of his pencil tapping the column total he'd already done in his head twice." },
+  ] } },
+
+  # ─── STAGE 2 — Restrict (post-catch supervised tone) ──────────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_frank_stage", operator = "eq", value = 2 },
+    ] }, blocks = [
+    { type = "paragraph", content = "He didn't look up when she came in. He waited until she had the kettle on. The kitchen smelled like the burnt edge of yesterday's coffee. Diana wasn't down yet." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Porch needs sweeping. Before you sit." },
+    { type = "paragraph", content = "She set the kettle down. Yes, she said with her body, with the way she crossed the kitchen back to the door. He turned the page of the paper. The sound of his cup against the saucer was the sound the kitchen made on Tuesdays now." },
+  ] } },
+
+  # ─── STAGE 3 — Tease under compliance (DEV FRAGMENT) ──────────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_frank_stage", operator = "eq", value = 3 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Frank at the table with his coffee cold beside him. He had been watching the door for some time before she came through it. He didn't look down at the paper anymore." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Took your time." },
+    { type = "paragraph", content = "She crossed to the kettle. He watched her cross to the kettle. The kitchen was the kitchen and was not the kitchen." },
+  ] } },
+
+  # ─── STAGE 4 — Cracked / Keep route (TIER-3 POLISH 2026-05-03) ────────────
+  # Per doc 16 §6. Cracked = pretense dropped. Tier-3 carve-out applies.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_frank_stage", operator = "eq", value = 4 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Frank's already at the table when she comes down. The paper's not open this morning. The mug's there but he's not drinking from it. Just sitting with both hands flat on the wood, looking at the doorway she's about to come through." },
+    { type = "paragraph", content = "He hears her on the stairs. Doesn't turn." },
+    { type = "paragraph", content = "She crosses to the kettle. The kitchen smells like coffee that's been sitting since five. The clock above the stove ticks once, the way it always ticks once before the minute hand jumps." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Maya." },
+    { type = "paragraph", content = "Just her name. The way he says it now is not the way he said it the first time, in the doorway, the night of the catch. Then it had measurement in it. This morning it doesn't measure anything. It just lands." },
+    { type = "paragraph", content = "She turns from the kettle." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Come sit." },
+    { type = "paragraph", content = "Two words. He doesn't add please. He doesn't add the way he used to add a small qualifier, an out, a piece of plausible deniability about whether he was asking or telling. He's not pretending anymore that he doesn't know which one he's doing." },
+    { type = "paragraph", content = "She sits across from him. The mug between his hands has gone cold. He pushes it aside without looking at it." },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Pour your coffee."
+text_variants = [
+  { text = "Pour your coffee. Don't sit yet.", conditions = { version = "1.0", logic = "AND", items = [
+    { type = "trait", subject = "player", trait_key = "npc_frank_stage", operator = "gte", value = 2 },
+  ] } },
+]
+targetType = "trigger"
+time_progression_minutes = 30
+effects = [
+  { targetType = "npc",    npcId = "npc_frank", trait = "trust",   op = "add", value = 1 },
+  { targetType = "player",                       trait = "energy",  op = "add", value = -3 },
+]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_frank_today", op = "set" },
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §2 — scene_kitchen_with_frank_dinprep
+# ═══════════════════════════════════════════════════════════════════════════════
+# DINPREP band 17:00–18:30 weekdays. Same stage cascade pattern, different
+# surfaces (church-bulletin envelope, onions, dish-gesture). Player sees a
+# different paragraph at the same Stage if they visit at this band vs M band
+# — that's the doctrinal claim plan §3 row 3 validates.
+
+[[canvases]]
+id          = "scene_kitchen_with_frank_dinprep"
+name        = "Frank — kitchen, before dinner"
+description = "Pre-dinner kitchen surface for Frank. Stages 0/1/2 natural; 3/4 dev-fragment."
+
+[canvases.trigger]
+location      = "loc_kitchen"
+is_repeatable = true
+priority      = 6
+is_active     = true
+chance        = 0.30
+npc           = "npc_frank"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_frank_today", operator = "is_false" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "17:00"
+end_time   = "18:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Kitchen — Frank, before dinner"
+blocks = [
+  { type = "image", props = { file = "scenes/kitchen_with_frank_dinprep.jpg", description = "Frank at the kitchen counter with the church bulletin envelope, evening light, the smell of onions starting on the stove.", search_queries = [
+    "older man kitchen counter envelope evening rural farmhouse warm light",
+    "fifties man cooking kitchen onions stove southern home dinner prep",
+    "older man kitchen evening checkbook envelope warm interior light",
+    "rural alabama kitchen evening man at counter receipt paperwork",
+    "salt and pepper hair man kitchen dinner preparation southern home",
+  ] } },
+
+  # ─── STAGE 0 — Suspicious landlord ────────────────────────────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_frank_stage", operator = "eq", value = 0 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Frank at the counter with the church-bulletin envelope when she came in. The kitchen smelled like onions. Diana had the pan on. He nodded once at the kettle and went back to the envelope." },
+    { type = "paragraph", content = "She knew not to ask what was in the envelope. She knew not to ask what he was writing on the back of it." },
+  ] } },
+
+  # ─── STAGE 1 — Grudging warmth (kitchen-shared) ───────────────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_frank_stage", operator = "eq", value = 1 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Frank was at the counter peeling potatoes when she came in. Diana at the stove. He looked up." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Diana's setting up. Don't get in her way." },
+    { type = "paragraph", content = "Diana laughed once at the stove without turning around. Frank's mouth almost did the same thing." },
+  ] } },
+
+  # ─── STAGE 2 — Restrict (dish gesture) ────────────────────────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_frank_stage", operator = "eq", value = 2 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Frank at the counter with the carrots. Diana on a phone call in the back hallway. The tap was running on its own from when Diana had walked away from it." },
+    { type = "paragraph", content = "He didn't speak. He gestured at the sink with the tip of the knife, twice. The dishes from breakfast." },
+  ] } },
+
+  # ─── STAGE 3 — Tease under compliance (DEV FRAGMENT) ──────────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_frank_stage", operator = "eq", value = 3 },
+    ] }, blocks = [
+    { type = "paragraph", content = "He was at the counter with both hands flat on it when she came in. He had been waiting for her to come in. Diana wasn't in the room." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Sit down for a minute." },
+  ] } },
+
+  # ─── STAGE 4 — Cracked (DEV FRAGMENT) ─────────────────────────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_frank_stage", operator = "eq", value = 4 },
+    ] }, blocks = [
+    { type = "paragraph", content = "He had the same look he'd had in the morning. He hadn't put it down. The kitchen was a room he was waiting to leave with her." },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Help with dinner prep."
+targetType = "trigger"
+time_progression_minutes = 30
+effects = [
+  { targetType = "npc",    npcId = "npc_frank", trait = "trust",  op = "add", value = 1 },
+  { targetType = "npc",    npcId = "npc_diana", trait = "awareness", op = "add", value = 1 },
+  { targetType = "player",                       trait = "energy", op = "add", value = -5 },
+]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_frank_today", op = "set" },
+  { targetType = "player", flag = "helped_diana_today",    op = "set" },
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §3 — scene_kitchen_with_diana
+# ═══════════════════════════════════════════════════════════════════════════════
+# Ambient Diana scene. No stage gates — Diana doesn't have arc_stages in slice.
+# Awareness band variants instead (per Book 2B §5 — diana_awareness 0-24/25-49/
+# 50-74/75-100 surfaces only through ambient prose, not sidebar). Single time
+# band M (06:00–08:30) since Diana's the kitchen anchor in the morning. Cooldown
+# via `talked_to_diana_today` flag.
+
+[[canvases]]
+id          = "scene_kitchen_with_diana"
+name        = "Diana — kitchen"
+description = "Ambient Diana morning scene. Awareness band variants surface Maya's accumulating distance from her mother."
+
+[canvases.trigger]
+location      = "loc_kitchen"
+is_repeatable = true
+priority      = 5
+is_active     = true
+chance        = 0.40
+npc           = "npc_diana"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_diana_today", operator = "is_false" },
+] }
+# Two schedule blocks — OR-applied at runtime per v1.py:2136 (isScheduleActive).
+# Audit §2.5 fix: previously only morning band; DINPREP added so Diana ambient
+# is present at evening band per plan §8 schedule grid.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "06:00"
+end_time   = "08:30"
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "20:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Kitchen — Diana"
+blocks = [
+  { type = "image", props = { file = "scenes/kitchen_with_diana.jpg", description = "Diana at the kitchen stove or sink, morning light, coffee maker running.", search_queries = [
+    "middle aged woman kitchen morning coffee stove southern rural",
+    "mother in kitchen breakfast preparation morning light farmhouse",
+    "forties woman kitchen sink window morning light coffee",
+    "southern mother kitchen stove pancakes morning light family",
+    "rural alabama farmhouse kitchen mother morning routine",
+  ] } },
+
+  # ─── Awareness band 0–24 — she doesn't look up when Maya comes in late ────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_diana", trait_key = "awareness", operator = "lte", value = 24 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Diana at the stove. She didn't turn around when Maya came in. She lifted her coffee, sipped, set it back at the same angle she'd set it down at." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_diana" }, content = "Eggs in the pan. Help yourself." },
+  ] } },
+
+  # ─── Awareness band 25–49 — she looks up, smiles, doesn't ask ─────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_diana", trait_key = "awareness", operator = "gte", value = 25 },
+      { type = "trait", subject = "npc", npc_id = "npc_diana", trait_key = "awareness", operator = "lte", value = 49 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Diana at the stove. She looked up when Maya came in and smiled the smile that didn't quite reach. She poured the second cup before Maya sat down." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_diana" }, content = "Eggs are fresh. Sleep alright?" },
+  ] } },
+
+  # ─── Awareness band 50–74 — she looks up and doesn't smile ────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_diana", trait_key = "awareness", operator = "gte", value = 50 },
+      { type = "trait", subject = "npc", npc_id = "npc_diana", trait_key = "awareness", operator = "lte", value = 74 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Diana looked up when Maya came in. She didn't smile. She poured the second cup but she didn't slide it across." },
+  ] } },
+
+  # ─── Awareness band 75–100 — she doesn't look up at all ───────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_diana", trait_key = "awareness", operator = "gte", value = 75 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Diana at the stove. She didn't turn. She didn't pour the second cup. The kitchen was quieter by the time Maya was in it." },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sit with her a minute."
+targetType = "trigger"
+time_progression_minutes = 15
+effects = [
+  { targetType = "npc",    npcId = "npc_diana", trait = "awareness", op = "add", value = -1, clamp = true },
+  { targetType = "npc",    npcId = "npc_diana", trait = "trust",     op = "add", value = 1 },
+  { targetType = "player",                       trait = "energy",    op = "add", value = -2 },
+]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_diana_today", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Coffee and out."
+targetType = "trigger"
+time_progression_minutes = 5
+effects = [
+  { targetType = "npc",    npcId = "npc_diana", trait = "awareness", op = "add", value = 1 },
+  { targetType = "player",                       trait = "energy",    op = "add", value = 2 },
+]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_diana_today", op = "set" },
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §4 — scene_yard_with_ryan
+# ═══════════════════════════════════════════════════════════════════════════════
+# Ryan in the yard 08:00–15:00 weekdays. Stage 0/1 natural; 2/3/4 dev fragment.
+# Stage 0 → 1 transition condition (helper ryan_stage_1) is checked by a
+# transition canvas in 4b_stage_transitions.toml; this scene just provides the
+# Stage-0 and Stage-1 surfaces.
+#
+# Stage 0 sets `ryan_help_tier_open` flag on the FIRST exit at Stage 0 (one-time
+# branch inside the scene per Doc 01). The flag also gates Ryan's love-band
+# sidebar reveal.
+
+[[canvases]]
+id          = "scene_yard_with_ryan"
+name        = "Ryan — yard"
+description = "Ryan working in the yard. Stage 0/1 natural; 2/3/4 dev-fragment. First-visit branch sets ryan_help_tier_open."
+
+[canvases.trigger]
+location      = "loc_yard"
+is_repeatable = true
+priority      = 6
+is_active     = true
+chance        = 0.50
+npc           = "npc_ryan"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_ryan_today", operator = "is_false" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "08:00"
+end_time   = "15:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Yard — Ryan"
+blocks = [
+  { type = "image", props = { file = "scenes/yard_with_ryan.jpg", description = "Ryan working with a belt sander or hand tools in the back yard, lean shoulders, faded t-shirt, summer heat.", search_queries = [
+    "lean young man working belt sander backyard tarp summer rural",
+    "twenty something man woodworking yard project summer faded tshirt",
+    "young man yard work tools tarp southern rural alabama summer",
+    "lean shoulders man working with tools outdoor summer heat",
+    "rural backyard workshop young man hand tools lumber",
+  ] } },
+
+  # ─── STAGE 0 — Stranger (first-visit sub-branch + default) ────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_ryan_stage", operator = "eq", value = 0 },
+    ] }, blocks = [
+    # First-time sub-branch — sets ryan_help_tier_open
+    { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+        { type = "flag", subject = "player", flag_key = "ryan_help_tier_open", operator = "is_false" },
+      ] }, blocks = [
+      { type = "paragraph", content = "Ryan with the belt sander on a piece of cedar at the work table. He looked up when her shadow crossed the lumber. He didn't stop. He nodded with his chin." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_ryan" }, content = "Need somethin'?" },
+      { type = "paragraph", content = "He set the sander down without turning it off and turned to face her properly. The sander whined down to nothing on the table." },
+    ] } },
+
+    # Default Stage-0 (after first visit, before stage advance)
+    { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+        { type = "flag", subject = "player", flag_key = "ryan_help_tier_open", operator = "is_true" },
+      ] }, blocks = [
+      { type = "paragraph", content = "Ryan at the work table again. The cedar from yesterday gone, something else under the sander now. He nodded when she came up." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_ryan" }, content = "Hey kid." },
+    ] } },
+  ] } },
+
+  # ─── STAGE 1 — Helper ─────────────────────────────────────────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_ryan_stage", operator = "eq", value = 1 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Ryan looked up before she'd cleared the back porch. He had a customer's truck pulled around — pickup, dented bed, an older man's hat on the dashboard." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_ryan" }, content = "Hey. Get me the smaller adjustable wrench, would ya. The one with the red handle." },
+    { type = "paragraph", content = "She brought the wrench. He took it without looking up from the bed of the truck. The customer at the corner of the shop, watching." },
+  ] } },
+
+  # ─── STAGE 2 — Partner (DEV FRAGMENT) ─────────────────────────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_ryan_stage", operator = "eq", value = 2 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Ryan in the shop, the customer at the counter — middle-aged, pickup hat, wallet already in hand. Ryan caught her eye over the customer's shoulder and tipped his chin half an inch." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_ryan" }, content = "She'll write it up for you." },
+  ] } },
+
+  # ─── STAGE 3 — Closer / Big deal (DEV FRAGMENT) ───────────────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_ryan_stage", operator = "eq", value = 3 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Ryan didn't speak when she came up. He looked at her once — count of two — and went back to the saw. He'd been thinking about something all morning he hadn't said." },
+  ] } },
+
+  # ─── STAGE 4 — After Beach (DEV FRAGMENT) ─────────────────────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_ryan_stage", operator = "eq", value = 4 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Ryan was waiting for her answer the way a man waits when he has already decided how he's going to take it whichever way it lands." },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Bring him a water."
+targetType = "trigger"
+time_progression_minutes = 15
+effects = [
+  { targetType = "npc",    npcId = "npc_ryan", trait = "trust",  op = "add", value = 2 },
+  { targetType = "player",                      trait = "energy", op = "add", value = -3 },
+]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_ryan_today", op = "set" },
+  # Set ryan_help_tier_open on first interaction at Stage 0 — gates the love-band sidebar reveal
+  { targetType = "player", flag = "ryan_help_tier_open",  op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Watch him work a minute."
+targetType = "trigger"
+time_progression_minutes = 30
+effects = [
+  { targetType = "npc",    npcId = "npc_ryan", trait = "trust",   op = "add", value = 1 },
+  { targetType = "npc",    npcId = "npc_ryan", trait = "arousal", op = "add", value = 1 },
+  { targetType = "player",                      trait = "energy",  op = "add", value = -2 },
+]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_ryan_today", op = "set" },
+  { targetType = "player", flag = "watched_ryan_today",   op = "set" },
+  # Set ryan_help_tier_open here too — the first-time sub-branch should retire after
+  # first encounter regardless of choice (audit §2.1 fix). Idempotent on subsequent
+  # visits since `op = set` to a true flag is a no-op.
+  { targetType = "player", flag = "ryan_help_tier_open",  op = "set" },
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §5 — scene_franks_office_supervised
+# ═══════════════════════════════════════════════════════════════════════════════
+# Stage 2+ only. Available after the catch (`frank_restrict_declared`). Frank
+# in the office; Maya doing chore-supervision filing or a small task. This is
+# also the host for the Stage 3 tease cascade with the lean_by_desk_count
+# counter (dev-fragment in the slice; full content deferred).
+
+[[canvases]]
+id          = "scene_franks_office_supervised"
+name        = "Frank's office — supervised"
+description = "Post-catch Stage 2 surface. Stage 3 tease cascade dev-fragment. Schedule-gated to Frank's evening office hours."
+
+[canvases.trigger]
+location      = "loc_franks_office"
+is_repeatable = true
+priority      = 6
+is_active     = true
+npc           = "npc_frank"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "npc_frank_stage",         operator = "gte",      value = 2 },
+  { type = "flag",  subject = "player", flag_key  = "frank_restrict_declared", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "19:00"
+end_time   = "21:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Frank's office — supervised"
+blocks = [
+  { type = "image", props = { file = "scenes/franks_office_supervised.jpg", description = "Frank at the desk in his office, lamp on, paperwork visible, evening light through the window.", search_queries = [
+    "older man at home office desk lamp evening rural farmhouse paperwork",
+    "fifties man office desk paperwork warm lamp light evening",
+    "rural home office filing cabinets desk evening warm lamp",
+    "salt and pepper hair man at desk paperwork evening light",
+    "southern home office wooden desk ledger paperwork evening",
+  ] } },
+
+  # ─── STAGE 2 — Restrict (chore-supervision filing) ────────────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_frank_stage", operator = "eq", value = 2 },
+    ] }, blocks = [
+    { type = "paragraph", content = "He had the receipts in three stacks now, the sorting changed since the catch. He gestured at the chair across the desk without looking up." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Sit. The deductibles." },
+    { type = "paragraph", content = "She sat. The lamp on the desk between them. He passed her the smaller stack across — same way he had at the kitchen table — but the room was different now and they both knew it." },
+  ] } },
+
+  # ─── STAGE 3 — Tease cascade (DEV FRAGMENT) ───────────────────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_frank_stage", operator = "eq", value = 3 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Frank set his pen down when she came in. He didn't pick the receipts back up. The lamp made the room smaller than it was." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Close the door." },
+  ] } },
+
+  # ─── STAGE 4 — Cracked (DEV FRAGMENT) ─────────────────────────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_frank_stage", operator = "eq", value = 4 },
+    ] }, blocks = [
+    { type = "paragraph", content = "He was at the desk but not working. He had been waiting for her to come up." },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Run the deductibles."
+targetType = "trigger"
+time_progression_minutes = 60
+effects = [
+  { targetType = "npc",    npcId = "npc_frank", trait = "trust",  op = "add", value = 1 },
+  { targetType = "player",                       trait = "money",  op = "add", value = 5 },
+  { targetType = "player",                       trait = "energy", op = "add", value = -8 },
+]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_frank_today", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Lean against the desk a moment longer."
+targetType = "trigger"
+time_progression_minutes = 15
+effects = [
+  { targetType = "npc",    npcId = "npc_frank", trait = "arousal",          op = "add", value = 2 },
+  { targetType = "player",                       trait = "lean_by_desk_count", op = "add", value = 1 },
+  { targetType = "player",                       trait = "frank_tease_count",   op = "add", value = 1 },
+  { targetType = "player",                       trait = "corruption",        op = "add", value = 1 },
+  { targetType = "player",                       trait = "energy",            op = "add", value = -3 },
+]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_frank_today", op = "set" },
+]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "npc_frank_stage", operator = "gte", value = 3 },
+] }
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §6 — scene_living_room_evening
+# ═══════════════════════════════════════════════════════════════════════════════
+# The catch. One-time guard branch inside repeatable shell — the doctrinal
+# poster child for branch-driven stage transitions. Doc 02 §7.3 says the catch
+# fires when Maya does corruption-≥45 solo activity in the living room when
+# Frank's home; the branch sets `frank_caught` + `frank_restrict_declared` AND
+# writes `npc_frank_stage = 2` directly (per plan §12.1 — branch-inside-shell
+# transitions write the trait themselves).
+#
+# Trigger: deterministic (no chance). E/N band, weekdays. Gates on Frank Stage 1
+# AND corruption ≥ 45 AND frank_caught == false. The scene IS the catch — fires
+# at most once per playthrough.
+
+[[canvases]]
+id          = "scene_living_room_evening"
+name        = "Living room — evening"
+description = "The catch container. One-time guard branch fires when Maya is in the living room evening at Stage 1 with corruption >= 45 and Frank scheduled home. Sets frank_caught + frank_restrict_declared + advances npc_frank_stage to 2 in same exit."
+
+[canvases.trigger]
+location      = "loc_living_room"
+is_repeatable = false
+priority      = 8
+is_active     = true
+npc           = "npc_frank"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "npc_frank_stage", operator = "eq",       value = 1 },
+  { type = "trait", subject = "player", trait_key = "corruption",      operator = "gte",      value = 45 },
+  { type = "flag",  subject = "player", flag_key  = "frank_caught",    operator = "is_false" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "20:00"
+end_time   = "22:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Living room — Frank walks in"
+blocks = [
+  { type = "image", props = { file = "scenes/living_room_evening_catch.jpg", description = "Living room at night, lamp on, the porch visible through the front window. The doorway from the hall. The angle of being seen.", search_queries = [
+    "rural living room night lamp deep couch porch window doorway",
+    "southern farmhouse living room evening lamp light couch dark hallway",
+    "interior living room night lamp couch front porch window dim",
+    "rural alabama farmhouse interior living room night dim warm",
+    "small farmhouse living room night quiet lamp couch coffee table",
+  ] } },
+
+  # ─── TIER-3 POLISH 2026-05-03 ────────────────────────────────────────────
+  # Per doc 16 §8 + memory entry feedback_tls_scene_body_style.md Tier-3
+  # carve-out (stage-flag capstone). Sensory layered (door sound, lamp, book
+  # sliding, clock). Frank's voice unchanged from spec. Two real choices
+  # below preserved from prior version — only prose is changed. Flag effects
+  # untouched (frank_caught, frank_restrict_declared, npc_frank_stage = 2).
+  # The clock detail (11:47) is deliberate: Frank said "ten." She's nearly
+  # two hours over. Don't lampshade. The "measurement" word is doing work —
+  # don't replace.
+  { type = "paragraph", content = "She's on the couch when she hears the back door open. Not a slam — Frank doesn't slam. The careful weight of the door fitting back into its frame, the soft click of the latch. She knows the sound now. Has heard it every night for three weeks, after he comes in from the porch." },
+  { type = "paragraph", content = "Tonight she didn't expect him this early." },
+  { type = "paragraph", content = "The hallway light catches him before she sees his face. He stops in the doorway. Looks at her. Looks at the lamp on the side table — the one she turned on after sundown, the one he doesn't usually find on. Looks at her again." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Late." },
+  { type = "paragraph", content = "That's all he says. One word. The air in the room changes shape around it." },
+  { type = "paragraph", content = "She sits up. The book she wasn't reading slides off her lap onto the cushion." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Door's supposed to be locked by ten." },
+  { type = "paragraph", content = "She opens her mouth to explain — about the hour, about losing track, about the porch light she meant to turn off and forgot. Her voice catches before any of it gets out." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Don't." },
+  { type = "paragraph", content = "He doesn't move from the doorway. Doesn't sit. Doesn't ask what she was doing. Just stands there in the hallway light with a look she's never seen on him before — not anger, not exactly. Something tighter. Something with measurement in it. Like he's been thinking about this for longer than tonight." },
+  { type = "paragraph", content = "The clock above the kitchen says 11:47." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Stay where you are."
+targetType = "trigger"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player",                       trait = "corruption",     op = "add", value = 3 },
+  { targetType = "npc",    npcId = "npc_frank", trait = "arousal",        op = "add", value = 5 },
+  { targetType = "player",                       trait = "npc_frank_stage", op = "set", value = 2 },
+  { targetType = "player",                       trait = "energy",         op = "add", value = -5 },
+]
+flagEffects = [
+  { targetType = "player", flag = "frank_caught",             op = "set" },
+  { targetType = "player", flag = "frank_restrict_declared",  op = "set" },
+  { targetType = "player", flag = "talked_to_frank_today",    op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Stand up. Go to your room."
+targetType = "trigger"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player",                       trait = "corruption",     op = "add", value = 1 },
+  { targetType = "npc",    npcId = "npc_frank", trait = "arousal",        op = "add", value = 3 },
+  { targetType = "player",                       trait = "npc_frank_stage", op = "set", value = 2 },
+  { targetType = "player",                       trait = "energy",         op = "add", value = -5 },
+]
+flagEffects = [
+  { targetType = "player", flag = "frank_caught",             op = "set" },
+  { targetType = "player", flag = "frank_restrict_declared",  op = "set" },
+  { targetType = "player", flag = "talked_to_frank_today",    op = "set" },
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §7 — scene_diner_t0_shift
+# ═══════════════════════════════════════════════════════════════════════════════
+# Base T0 shift. Available after `hired_at_diner` (set Day 1 evening via the
+# diner-front first-visit branch). 5-hour block, $45 base. Mon–Sat (diner closed
+# Sundays per book §9). One shift per day max.
+#
+# This scene is the "income channel 1" of plan §11. Hub-launchable from
+# loc_diner_front during 17:00–22:00 on workdays.
+
+[[canvases]]
+id          = "scene_diner_t0_shift"
+name        = "Take a shift (T0)"
+description = "Base diner shift. 5h, $45 base. Mon–Sat 17:00–22:00. Cookie present in kitchen the whole shift."
+
+[canvases.trigger]
+location      = "loc_diner_front"
+is_repeatable = true
+priority      = 6
+is_active     = true
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "hired_at_diner", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5]
+start_time = "17:00"
+end_time   = "21:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "T0 shift — distance"
+blocks = [
+  { type = "image", props = { file = "scenes/diner_t0_shift.jpg", description = "Maya behind the diner counter, apron on, coffee pot in hand. Booths visible. Cookie in the pass-through window.", search_queries = [
+    "young waitress behind diner counter coffee pot apron evening",
+    "small town american diner waitress booths counter neon sign",
+    "young woman diner shift apron coffee pot booths evening",
+    "rural alabama diner waitress counter customers booths evening",
+    "twentysomething waitress diner coffee pot uniform booths",
+  ] } },
+
+  { type = "paragraph", content = "Five hours behind the counter. Two coffees-only at the truckers' booth. A family of three for the early dinner — split check, no tip on the kids. Mr. Hollis at his usual stool keeping his hat on. Cookie in the back banging the spatula against the rim of the grill the way she always did when she wasn't going to ask Maya how her day had been." },
+  { type = "paragraph", content = "Marge at the register at the end. Counted out the wages without looking up. Forty-five even. The tips jar was empty because Maya had played it straight tonight." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Take the shift wages and go."
+targetType = "location"
+locationId = "loc_main_street_sidewalk"
+time_progression_minutes = 300
+effects = [
+  { targetType = "player", trait = "money",       op = "add", value = 45 },
+  { targetType = "player", trait = "energy",      op = "add", value = -40 },
+  { targetType = "player", trait = "hygiene",     op = "add", value = -15 },
+  { targetType = "player", trait = "rep_road",    op = "add", value = 2 },
+  { targetType = "npc", npcId = "npc_marge",  trait = "trust",      op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_cookie", trait = "trust",      op = "add", value = 1 },
+]
+flagEffects = [
+  { targetType = "player", flag = "first_t0_shift_done",   op = "set" },
+  { targetType = "player", flag = "talked_to_marge_today", op = "set" },
+  { targetType = "player", flag = "talked_to_cookie_today", op = "set" },
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §8 — scene_diner_t1_shift
+# ═══════════════════════════════════════════════════════════════════════════════
+# T1 unlock — corruption ≥ 25 + rep_road ≥ 15 + beauty ≥ 45. Replaces T0 in the
+# menu when conditions match (higher priority + same location). Doctrine row 18
+# validation: "stat threshold unlocks NEW MENU OPTION, not new prose."
+#
+# Same shift block. Different prose (read the floor; let the looks land). Bigger
+# tips. Same energy/hygiene cost. rep_road accelerates; rep_church takes the hit
+# (Book 2B §4 reputation effect).
+
+[[canvases]]
+id          = "scene_diner_t1_shift"
+name        = "Read the floor (T1)"
+description = "T1 diner shift — flirt, linger, laugh. $45 base + $8–20 tips. Gates: corruption ≥ 25, rep_road ≥ 15, beauty ≥ 45."
+
+[canvases.trigger]
+location      = "loc_diner_front"
+is_repeatable = true
+priority      = 7
+is_active     = true
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "hired_at_diner", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "corruption",     operator = "gte", value = 25 },
+  { type = "trait", subject = "player", trait_key = "rep_road",       operator = "gte", value = 15 },
+  { type = "trait", subject = "player", trait_key = "beauty",         operator = "gte", value = 45 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5]
+start_time = "17:00"
+end_time   = "21:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "T1 shift — read the floor"
+blocks = [
+  { type = "image", props = { file = "scenes/diner_t1_shift.jpg", description = "Maya at the diner with more attention to the customer at the counter — leaning in, the laugh that runs a beat longer than the joke deserved.", search_queries = [
+    "young waitress diner counter laughing customer flirty evening",
+    "twentysomething waitress diner lean against counter customers booths warm light",
+    "young woman diner shift smile flirty customer evening tips",
+    "diner waitress smiling counter customer evening bigger tips",
+    "rural alabama diner young waitress flirty service evening",
+  ] } },
+
+  { type = "paragraph", content = "Five hours behind the counter, but tonight she did it differently. The lean against the counter when Mr. Hollis told the same joke he'd told the last three Fridays. The laugh that ran a beat longer than the joke deserved. The way she let the truckers' booth catch her when she came back from the ice machine, and the smile she gave them about it." },
+  { type = "paragraph", content = "Marge at the register at the end of the shift. Counted out the forty-five wages, then tapped the tips jar. *Sixteen,* she said. *Not bad for a Friday.* She didn't ask anything else. Cookie in the pass-through with a look Maya didn't entirely want to read." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Take the wages and the tips."
+targetType = "location"
+locationId = "loc_main_street_sidewalk"
+time_progression_minutes = 300
+effects = [
+  { targetType = "player", trait = "money",       op = "add", value = 60 },
+  { targetType = "player", trait = "energy",      op = "add", value = -45 },
+  { targetType = "player", trait = "hygiene",     op = "add", value = -18 },
+  { targetType = "player", trait = "rep_road",    op = "add", value = 3 },
+  { targetType = "player", trait = "rep_church",  op = "add", value = -1 },
+  { targetType = "player", trait = "corruption",  op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_marge",  trait = "trust", op = "add", value = 1 },
+]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_marge_today",   op = "set" },
+  { targetType = "player", flag = "talked_to_cookie_today",  op = "set" },
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §9 — scene_cookie_diner_evening (audit §2.6 fix)
+# ═══════════════════════════════════════════════════════════════════════════════
+# Cookie ambient. Plan §2 says "Cookie diner co-worker, evening band only —
+# texture, not arc." Audit §2.6 found Cookie has zero canvases with
+# `npc = "npc_cookie"` trigger, so setup.getNpcLocation("npc_cookie") returns
+# null. This scene fixes that — Cookie surfaces on the engine's NPC location
+# lookup at her schedule.
+#
+# Priority 4 (below scene_diner_t0_shift @ 6 and t1_shift @ 7), so when Maya
+# visits at 17:00–22:00 the shift dominates. After the shift's max_triggers_per_day=1
+# is exhausted, this scene becomes available on subsequent same-day visits to
+# diner_front (rare in normal play). Daily-cooldown via talked_to_cookie_today
+# (already cleared by [engine.daily_tick]).
+
+[[canvases]]
+id          = "scene_cookie_diner_evening"
+name        = "Cookie at the pass"
+description = "Ambient Cookie scene — fires when Maya is at the diner outside her shift. Mostly off-shift visits. Engine-visibility for Cookie's NPC location."
+
+[canvases.trigger]
+location      = "loc_diner_front"
+is_repeatable = true
+priority      = 4
+is_active     = true
+chance        = 0.50
+npc           = "npc_cookie"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "hired_at_diner",         operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "talked_to_cookie_today", operator = "is_false" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5]
+start_time = "17:00"
+end_time   = "22:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Cookie at the pass"
+blocks = [
+  { type = "image", props = { file = "scenes/cookie_diner_evening.jpg", description = "Cookie at the pass-through window between kitchen and floor — twenty-eight, cigarette behind one ear she doesn't smoke at work, spatula in one hand. The grill behind her ticking heat off in the evening light.", search_queries = [
+    "young woman cook diner pass through window spatula evening cigarette behind ear",
+    "twentysomething female cook diner kitchen pass window evening warm light",
+    "diner cook young woman pass through window spatula apron evening",
+    "rural diner cook woman kitchen pass evening light grill",
+    "young woman diner kitchen short order cook pass window southern",
+  ] } },
+  { type = "paragraph", content = "Cookie at the pass with a half-cup of black coffee gone cold beside her. She tipped her chin at Maya without taking the spatula off the grill." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cookie" }, content = "Mr. Hollis told the same joke twice tonight. You picked up on it the second time, didn't you." },
+  { type = "paragraph", content = "Maya nodded. Cookie smiled with one corner of her mouth and turned an egg." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Bullshit a minute with her."
+targetType = "trigger"
+time_progression_minutes = 15
+effects = [
+  { targetType = "npc",    npcId = "npc_cookie", trait = "trust",  op = "add", value = 2 },
+  { targetType = "player",                        trait = "energy", op = "add", value = -2 },
+]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_cookie_today", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Just check in. Out the door."
+targetType = "trigger"
+time_progression_minutes = 5
+effects = [
+  { targetType = "npc",    npcId = "npc_cookie", trait = "trust",  op = "add", value = 1 },
+  { targetType = "player",                        trait = "energy", op = "add", value = -1 },
+]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_cookie_today", op = "set" },
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §10 — scene_hallway_frank_pass (PHASE 1 SANDBOX PILOT — random ambient)
+# ═══════════════════════════════════════════════════════════════════════════════
+# Random ambient encounter on hallway entry, N band 21:30-23:00. Frank passing
+# between rooms before bed. Tier-branched by Frank trust: Tier-1 utility at
+# trust < 5, Tier-2 vignette at trust 5+, slightly extended at trust 15+.
+#
+# Per doc 16_Frank_Scene_Library_Design.md §10. Daily cooldown via new flag
+# frank_hallway_pass_today (does NOT collide with kitchen scenes' cooldown
+# `talked_to_frank_today` — this is ambient, can co-exist with one kitchen
+# scene per day).
+#
+# Sandbox doctrine: ambient scene, NPC presence not strictly required at
+# trigger time (Frank passes through fictionally). Engine triggers on location
+# + time + chance only.
+
+[[canvases]]
+id          = "scene_hallway_frank_pass"
+name        = "Hallway — Frank passing"
+description = "Random ambient: Frank passes through hallway in N band before bed. Tier-branched by frank.trust (Tier-1 short at <5, Tier-2 at 5+, extended at 15+). Daily cooldown via frank_hallway_pass_today."
+
+[canvases.trigger]
+location      = "loc_hallway"
+is_repeatable = true
+priority      = 4
+is_active     = true
+chance        = 0.30
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "frank_hallway_pass_today", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "arrived_at_franks",        operator = "is_true"  },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "21:30"
+end_time   = "23:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Hallway — Frank passing"
+blocks = [
+  { type = "image", props = { file = "scenes/hallway_frank_pass.jpg", description = "Hallway at night, Frank passing through with a coffee mug, the chipped one with a boat painted on it. Soft hallway lamp. Quiet farmhouse interior.", search_queries = [
+    "older man walking hallway night coffee mug rural farmhouse warm light",
+    "fifties man passing through hallway evening coffee mug interior dim",
+    "rural alabama farmhouse hallway night man coffee mug warm lamp",
+    "older man hallway evening coffee mug southern home interior",
+    "salt and pepper hair man hallway night warm interior dim quiet",
+  ] } },
+
+  # ─── Tier 1 — Low trust (< 5). RTS-flat. ──────────────────────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "trust", operator = "lt", value = 5 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Frank passes you in the hallway. Coffee mug in his hand. He nods." },
+  ] } },
+
+  # ─── Tier 2 — Mid trust (5–14). RTS-flat with brief exchange. ─────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "trust", operator = "gte", value = 5 },
+      { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "trust", operator = "lt",  value = 15 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Frank passes you in the hallway. Coffee mug in his hand, the chipped one with the boat on it. He nods." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Lights left on in the living room." },
+    { type = "paragraph", content = "You stand there a second." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "I got it." },
+    { type = "paragraph", content = "He keeps walking. The kitchen door swings shut behind him." },
+  ] } },
+
+  # ─── Tier 2+ — High trust (15+). Slightly extended; not Tier-3 territory. ─
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "trust", operator = "gte", value = 15 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Frank passes you in the hallway. Coffee mug in his hand, the chipped one with the boat on it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Lights on in the living room." },
+    { type = "paragraph", content = "You start to apologize." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Wasn't asking." },
+    { type = "paragraph", content = "He glances at you — quick, unreadable — and keeps walking." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Late tonight. You eat?" },
+    { type = "paragraph", content = "The kitchen door swings shut behind him before you answer." },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Continue."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "trigger"
+locationId               = "loc_hallway"
+time_progression_minutes = 5
+effects = [
+  { targetType = "player", trait = "energy", op = "add", value = -1 },
+]
+flagEffects = [
+  { targetType = "player", flag = "frank_hallway_pass_today", op = "set" },
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §11+ — PHASE 1 SANDBOX PILOT scenes #6/#7/#8/#11 + Stage 4 polish (DOC POINTER)
+# ═══════════════════════════════════════════════════════════════════════════════
+# Per docs 15_Sandbox_Pivot_Direction.md + 16_Frank_Scene_Library_Design.md.
+# The following four new sandbox scenes were authored directly into
+# 7_final_game.toml (the operational source) for pilot speed:
+#
+#   - scene_kitchen_frank_coffee_alone   (random ambient, EM 05:30-06:29)
+#   - scene_living_room_frank_radio      (random ambient, A 14:00-16:00)
+#   - scene_porch_frank_evening_smoke    (random ambient, E 18:30-18:59)
+#   - scene_kitchen_late_night_raid      (Tier-3 time-gated, N 22:00-22:59)
+#
+# Plus Stage 4 cracked-summons polish on scene_kitchen_with_frank_morning
+# (already synced to this file at §1 Stage 4 group block).
+#
+# These scenes are NOT duplicated in this phase file to avoid stale-on-fork
+# risk. 7_final_game.toml is the operational source. If we later add a
+# compose-from-phases tool, sync these scenes back to this file.
+#
+# Specs + sample prose for each: see 16_Frank_Scene_Library_Design.md §11-§16.

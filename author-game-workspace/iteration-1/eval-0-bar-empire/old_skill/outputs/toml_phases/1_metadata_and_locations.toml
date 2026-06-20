@@ -1,0 +1,309 @@
+# Phase 1 — 1_metadata_and_locations.toml
+# Bar Empire (baseline) — player + NPCs (with schedules) + locations + clothing
+# All [[npcs]]/[[npcs.schedules]]/[[npcs.core_traits]] live in this single file.
+
+# ─── Player ───────────────────────────────────────────────────────────────────
+
+[player]
+id          = "player"
+name        = "Dahlia"
+description = "26. Waited tables in four cities and ran out of road in this one. Behind on a debt the bar's owner is happy to keep counting. Sharp enough to see the leash; broke enough to wear it for now."
+portrait    = "dahlia.jpg"
+customizable = true
+
+[player.core_traits]
+corruption    = 0
+arousal       = 0
+energy        = 100
+hygiene       = 100
+money         = 20
+exhibitionism = 0
+# Per-NPC stage trait (player namespace).
+marco_stage   = 0
+
+[[player.customization_fields]]
+id      = "name"
+type    = "text"
+label   = "Your name"
+default = "Dahlia"
+
+[[player.customization_fields]]
+id      = "body_type"
+type    = "select"
+label   = "Build"
+default = "curvy"
+options = ["petite", "average", "curvy", "athletic", "thick"]
+
+# ─── NPCs ─────────────────────────────────────────────────────────────────────
+#   npc_marco  — GOLD slow-burn seduction → leverage (arousal throttle + player corruption spine)
+#   npc_jolene — Service / future stable recruit (relation, light)
+#   npc_reggie — Peer / regular (relation, light)
+
+# ── Marco ──────────────────────────────────────────────────────────────────────
+
+[[npcs]]
+id          = "npc_marco"
+name        = "Marco"
+description = "49. Heavy through the shoulders, gold ring on a thick hand, shirt open one button past respectable. Owns The Velvet Spur and looks at every woman on the floor like he's already counted the till she'll bring in. Smiles with the bottom half of his face only."
+portrait    = "marco.jpg"
+core_traits = { arousal = 0, corruption = 0, relation = 0 }
+flag_keys   = []
+arc_stages  = [
+  "Counting her",     # Stage 0 — owner-baseline; pure appraisal
+  "Noticed",          # Stage 1 — marco_noticed
+  "Contact",          # Stage 2 — marco_contact; the lean across the bar landed
+  "After close",      # Stage 3 — marco_backroom_done; backroom access
+  "The arrangement",  # Stage 4 — marco_arrangement
+  "Leash flipped",    # Stage 5 — marco_signed; the deed changes hands
+]
+
+[npcs.trait_decay]
+relation = 0.5
+
+# Marco schedules — runs the Spur Evening→Night; home (offscreen) days.
+[[npcs.schedules]]
+location   = "loc_spur_floor"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "22:00"
+activity   = "working the floor, watching the till"
+
+[[npcs.schedules]]
+location   = "loc_spur_backroom"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "02:00"
+activity   = "counting the night down in back"
+
+[[npcs.schedules]]
+location   = "loc_marco_home"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "02:00"
+end_time   = "17:00"
+activity   = "across town, off the clock"
+
+# ── Jolene ──────────────────────────────────────────────────────────────────────
+
+[[npcs]]
+id          = "npc_jolene"
+name        = "Jolene"
+description = "31. Eleven years on this floor, knows which regulars tip and which ones just breathe heavy. Apron tied twice around a narrow waist, hair pinned up off her neck by the second hour. Warm to the new girl in a way that costs her nothing and means something."
+portrait    = "jolene.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = [
+  "Coworkers",   # Stage 0 — neutral floor colleague
+  "Trusted",     # Stage 1 — jolene_trusts; conspiratorial
+]
+
+[npcs.trait_decay]
+relation = 0.5
+
+[[npcs.schedules]]
+location   = "loc_spur_floor"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "01:00"
+activity   = "running the till and the regulars"
+
+[[npcs.schedules]]
+location   = "loc_marco_home"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "01:00"
+end_time   = "17:00"
+activity   = "home, off the clock"
+
+# ── Reggie ──────────────────────────────────────────────────────────────────────
+
+[[npcs]]
+id          = "npc_reggie"
+name        = "Reggie"
+description = "54. A regular's regular — same stool, same bottle, since before the current owner. Big-bellied, big-voiced, leaves a real tip when the night goes the way he likes. Knows everyone's business and shares most of it."
+portrait    = "reggie.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = []
+
+[npcs.trait_decay]
+relation = 0.2
+
+[[npcs.schedules]]
+location   = "loc_spur_floor"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time   = "23:00"
+activity   = "on his stool"
+
+[[npcs.schedules]]
+location   = "loc_marco_home"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "23:00"
+end_time   = "18:00"
+activity   = "home"
+
+# ─── Locations ────────────────────────────────────────────────────────────────
+
+# ── Home cluster ────────────────────────────────────────────────────────────────
+
+[[locations]]
+id               = "loc_dahlias_room"
+name             = "Dahlia's Room"
+description      = "A rented room over a shuttered laundromat. A mattress, a hot plate, a window that looks at a brick wall. The closet door doesn't shut all the way. It's hers until the end of the month, which is closer than she'd like."
+entry_from       = "loc_rooming_house_hall"
+
+[[locations]]
+id               = "loc_rooming_house_hall"
+name             = "Rooming-House Hall"
+description      = "A narrow corridor of identical doors, one bulb out, the carpet worn to backing down the middle. The stairs at the end drop you onto the street."
+# Exterior root of the home cluster (NO entry_from — parallel to loc_city_street).
+navigation_order = ["loc_dahlias_room"]
+
+# ── Town hub ────────────────────────────────────────────────────────────────────
+
+[[locations]]
+id               = "loc_city_street"
+name             = "Carver Street"
+description      = "Three blocks of wet asphalt and neon. The Velvet Spur's sign buzzes pink halfway down. A thrift shop, a check-cashing place, a bus stop nobody waits at. The kind of street that's busier at midnight than noon."
+navigation_order = [
+  "loc_spur_floor",
+  "loc_thrift_store",
+]
+# Clothing coverage gate (public street) — conditional below the Crooked band.
+clothing_rules = [
+  { slots_required = ["top", "bottom"], message = "She can't walk Carver Street half-dressed — back upstairs and put something on.", conditions = { version = "1.0", items = [
+      { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 50 },
+    ] } },
+]
+
+[[locations]]
+id          = "loc_spur_floor"
+name        = "The Velvet Spur — Floor"
+description = "Pink light, sticky brass rail, a stage at the back nobody's danced on tonight. Marco runs it from the end of the bar where he can see the door and the till at the same time. The booths are vinyl and patched with tape."
+image       = "locations/spur_floor.jpg"
+entry_from  = "loc_city_street"
+navigation_order = ["loc_spur_backroom", "loc_spur_office"]
+
+[[locations]]
+id          = "loc_spur_backroom"
+name        = "The Velvet Spur — Back Room"
+description = "Past the curtain behind the stage. A couch that's seen things, a small bar, a lock on the inside of the door. Marco does his real counting back here, away from the floor."
+image       = "locations/spur_backroom.jpg"
+entry_from  = "loc_spur_floor"
+entry_conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "marco_backroom_done", operator = "is_true" },
+] }
+blocked_message = "That curtain's his. I'm not invited back there yet."
+
+[[locations]]
+id          = "loc_spur_office"
+name        = "The Velvet Spur — Office"
+description = "A cramped room off the back hall with a safe, a desk, and the framed liquor license. The deed to the building lives in the top drawer. This is where ownership is decided."
+image       = "locations/spur_office.jpg"
+entry_from  = "loc_spur_floor"
+entry_conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "marco_signed", operator = "is_true" },
+] }
+blocked_message = "Nothing in that office is mine yet."
+
+[[locations]]
+id          = "loc_thrift_store"
+name        = "Second-Hand Threads"
+description = "A cramped shop two doors from the Spur, racks packed tight with other people's clothes. A bell on the door, a hand-lettered SALE sign, everything cheap if you don't mind the wear."
+image       = "locations/thrift_store.jpg"
+entry_from  = "loc_city_street"
+
+# ── Offscreen (Marco's away-block; non-navigable; exempt from presence floor) ───
+
+[[locations]]
+id          = "loc_marco_home"
+name        = "Across Town"
+description = "Marco's place, somewhere on the good side of the river. You've never been."
+offscreen   = true
+
+# ═════════════════════════════════════════════════════════════════════════════
+# Clothing catalog — starting (free) + a thrift tier + a revealing tier (corr>=25).
+# Feeds worn_corruption/worn_beauty + the exhibitionism feeder; never an NPC arc.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[clothing]]
+id          = "worn_bra"
+name        = "Worn Bra"
+slot        = "bra"
+image       = "clothing/worn_bra.jpg"
+initial     = true
+beauty      = 0
+corruption  = 0
+
+[[clothing]]
+id          = "cotton_panties"
+name        = "Cotton Panties"
+slot        = "underwear"
+image       = "clothing/cotton_panties.jpg"
+initial     = true
+beauty      = 0
+corruption  = 0
+
+[[clothing]]
+id          = "work_tee"
+name        = "Work T-Shirt"
+slot        = "top"
+image       = "clothing/work_tee.jpg"
+initial     = true
+beauty      = 1
+corruption  = 0
+
+[[clothing]]
+id          = "black_jeans"
+name        = "Black Jeans"
+slot        = "bottom"
+image       = "clothing/black_jeans.jpg"
+initial     = true
+beauty      = 1
+corruption  = 0
+
+[[clothing]]
+id          = "flat_shoes"
+name        = "Flat Shoes"
+slot        = "shoes"
+image       = "clothing/flat_shoes.jpg"
+initial     = true
+beauty      = 0
+corruption  = 0
+
+[[clothing]]
+id          = "tight_top"
+name        = "Tight Top"
+slot        = "top"
+image       = "clothing/tight_top.jpg"
+price       = 14
+beauty      = 3
+corruption  = 10
+
+[[clothing]]
+id          = "short_skirt"
+name        = "Short Skirt"
+slot        = "bottom"
+image       = "clothing/short_skirt.jpg"
+price       = 14
+beauty      = 3
+corruption  = 12
+
+[[clothing]]
+id          = "lace_thong"
+name        = "Lace Thong"
+slot        = "underwear"
+image       = "clothing/lace_thong.jpg"
+price       = 12
+beauty      = 3
+corruption  = 28
+conditions  = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 } ] }
+
+[[clothing]]
+id          = "barely_dress"
+name        = "Barely-There Dress"
+slot        = "dress"
+image       = "clothing/barely_dress.jpg"
+price       = 26
+beauty      = 5
+corruption  = 32
+conditions  = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 } ] }

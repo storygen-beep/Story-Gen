@@ -1,0 +1,345 @@
+# ═══════════════════════════════════════════════════════════════
+# PHASE 5: STORY ARC (Narrative Journal & Guide System)
+# ═══════════════════════════════════════════════════════════════
+# Source: Book Phase 6 (Story Architecture), Phase 7 (Intimacy),
+#         Phase 8 (Choice Architecture)
+# Game: Jack's World
+# ═══════════════════════════════════════════════════════════════
+# Chapters map to Book's 3-Act structure:
+#   Act 1: The New Normal (love 0–20, Days 1–5)
+#   Act 2: Growing Closer (love 21–60, Days 5–18)
+#   Act 3: Deep Connection (love 61–100, Days 18–30)
+# Plus Prologue and Resolution
+# ═══════════════════════════════════════════════════════════════
+
+[story_arc]
+version = "1.0"
+
+# ═══════════════════════════════════════════════════════════════
+# CHAPTERS
+# ═══════════════════════════════════════════════════════════════
+
+[[story_arc.chapters]]
+id = "chapter_prologue"
+name = "A New Arrangement"
+mood = "hopeful"
+description = "Jack arrives at Angela's apartment. They're polite strangers under one roof."
+order = 1
+
+[[story_arc.chapters]]
+id = "chapter_act1"
+name = "The New Normal"
+mood = "hopeful"
+description = "Daily routines establish. Shared breakfasts, accidental glimpses, evening movies. The apartment begins to feel like something more than a temporary arrangement."
+order = 2
+
+[[story_arc.chapters]]
+id = "chapter_act2"
+name = "Growing Closer"
+mood = "romantic"
+description = "The careful distance narrows. Tension builds through daily rituals. She starts to relax around him. He starts to see her as more than his step-mom."
+order = 3
+
+[[story_arc.chapters]]
+id = "chapter_turning"
+name = "The Breaking Point"
+mood = "passionate"
+description = "Weeks of tension finally break. Everything they've been holding back comes to the surface."
+order = 4
+
+[[story_arc.chapters]]
+id = "chapter_act3"
+name = "Deep Connection"
+mood = "passionate"
+description = "All pretense is gone. Every moment together is charged with something real. Special nights, shared mornings, and a love that neither of them expected."
+order = 5
+
+[[story_arc.chapters]]
+id = "chapter_resolution"
+name = "What We Became"
+mood = "peaceful"
+description = "The story concludes. What began as a practical living arrangement became something neither of them could have predicted."
+order = 6
+
+# ═══════════════════════════════════════════════════════════════
+# STORY NODES (Key Moments linked to canvases)
+# ═══════════════════════════════════════════════════════════════
+
+# --- PROLOGUE ---
+
+[[story_arc.nodes]]
+id = "arrival"
+name = "Jack Arrives"
+chapter = "chapter_prologue"
+journal_entry = "I moved into Angela's apartment today. She put fresh sheets on the bed and folded a towel on the pillow. 'Welcome home, Jack.' Home. I'm not sure what that word means yet."
+linked_canvas = "jack_arrives"
+linked_flag = "jack_arrived_complete"
+npc = "npc_angela"
+is_milestone = true
+
+# --- ACT 1: THE NEW NORMAL ---
+
+[[story_arc.nodes]]
+id = "first_breakfast"
+name = "First Breakfast Together"
+chapter = "chapter_act1"
+journal_entry = "She makes coffee every morning. I started showing up. We don't say much, but the silence has gotten comfortable."
+linked_canvas = "activity_breakfast_angela"
+npc = "npc_angela"
+is_milestone = false
+group = "early_bonding"
+
+[[story_arc.nodes]]
+id = "first_peek"
+name = "Accidental Glimpse"
+chapter = "chapter_act1"
+journal_entry = "I saw something I shouldn't have. Through the door, through the steam. I couldn't look away."
+linked_canvas = "activity_bath_peek_angela"
+npc = "npc_angela"
+is_milestone = false
+group = "early_bonding"
+
+[[story_arc.nodes]]
+id = "first_movie"
+name = "Movie Night"
+chapter = "chapter_act1"
+journal_entry = "We watched a movie together. She sat close. Our legs touched. Neither of us moved."
+linked_canvas = "activity_movie_night_angela"
+npc = "npc_angela"
+is_milestone = false
+group = "early_bonding"
+
+# --- EARLY STORY ARCS (Trust Building) ---
+
+[[story_arc.nodes]]
+id = "the_bills"
+name = "The Bills"
+chapter = "chapter_act1"
+journal_entry = "I found her at the counter with a laptop and overdue notices. She closed it fast. 'Just bills.' But I saw enough. She's been covering everything alone."
+linked_canvas = "angelas_struggle"
+linked_flag = "bills_discovered"
+npc = "npc_angela"
+is_milestone = false
+
+[[story_arc.nodes]]
+id = "the_job"
+name = "The Job"
+chapter = "chapter_act1"
+journal_entry = "I got a job at the cafe down the street. When I told her, she paused mid-cooking. 'You didn't have to do that.' 'I wanted to.' She went back to cooking, but she was smiling."
+linked_canvas = "jack_gets_hired"
+linked_flag = "job_started"
+npc = "npc_angela"
+is_milestone = false
+
+[[story_arc.nodes]]
+id = "her_routine"
+name = "Her Routine"
+chapter = "chapter_act1"
+journal_entry = "Came home from a shift. She was on the couch — wine, book, bare feet. She didn't hear me come in. She put a plate in the oven for me. She didn't have to."
+linked_canvas = "angelas_evening"
+linked_flag = "routine_noticed"
+npc = "npc_angela"
+is_milestone = false
+
+[[story_arc.nodes]]
+id = "first_rent"
+name = "First Rent"
+chapter = "chapter_act1"
+journal_entry = "I paid my first rent today. $200. She looked at me differently after. Not like a guest. Like someone who belongs here."
+linked_canvas = "first_rent_day"
+linked_flag = "first_rent_paid"
+npc = "npc_angela"
+is_milestone = false
+
+[[story_arc.nodes]]
+id = "cant_sleep"
+name = "Can't Sleep"
+chapter = "chapter_act1"
+journal_entry = "2 AM. Both of us in the kitchen. She told me about the divorce. 'People leave. That's what I learned.' I didn't have an answer. I just stayed. At the door she said, 'Jack? I'm glad you're here.'"
+linked_canvas = "late_night_kitchen"
+linked_flag = "late_night_talk"
+npc = "npc_angela"
+is_milestone = false
+
+# --- ACT 2: GROWING CLOSER ---
+
+[[story_arc.nodes]]
+id = "towel_moment"
+name = "The Towel Encounter"
+chapter = "chapter_act2"
+journal_entry = "I walked in on her in the bathroom. She wasn't angry. She smiled. 'Knock next time, Jack.' But she didn't look away either."
+linked_canvas = "towel_encounter"
+linked_flag = "towel_encounter_complete"
+npc = "npc_angela"
+is_milestone = true
+requires_nodes = ["arrival"]
+
+[[story_arc.nodes]]
+id = "deep_talk"
+name = "Opening Up"
+chapter = "chapter_act2"
+journal_entry = "We talked. Really talked. About her life alone, about my father, about what happens when two people share a kitchen every morning. She said things I don't think she's told anyone."
+linked_canvas = "activity_deep_conversation_angela"
+npc = "npc_angela"
+is_milestone = false
+group = "mid_bonding"
+
+[[story_arc.nodes]]
+id = "couch_play_first"
+name = "Afternoon on the Couch"
+chapter = "chapter_act2"
+journal_entry = "Something shifted today. On the couch. She was playful in a way that had nothing to do with being maternal."
+linked_canvas = "activity_couch_play_angela"
+npc = "npc_angela"
+is_milestone = false
+group = "mid_bonding"
+
+[[story_arc.nodes]]
+id = "first_massage"
+name = "The Offer"
+chapter = "chapter_act2"
+journal_entry = "She was on the couch, rubbing her neck. I pressed my thumb into the knot and she melted. Two minutes of silence, just her breathing getting slower. Then she looked at me — 'I have massage oils in the bedroom. Maybe we could do this properly sometime?' She said it like it was nothing. It wasn't nothing."
+linked_canvas = "massage_offer"
+linked_flag = "massage_offered"
+npc = "npc_angela"
+is_milestone = false
+group = "mid_bonding"
+requires_nodes = ["towel_moment"]
+
+# --- THE BREAKING POINT ---
+
+[[story_arc.nodes]]
+id = "the_encounter"
+name = "The Bedroom Encounter"
+chapter = "chapter_turning"
+journal_entry = "Her door was open. Candlelight. Lingerie. She said my name like it was the only word she needed. Everything we'd been holding back — it all came out."
+linked_canvas = "bedroom_encounter"
+linked_canvas_node = "oral"
+linked_flag = "bedroom_encounter_complete"
+npc = "npc_angela"
+is_milestone = true
+requires_nodes = ["towel_moment"]
+requires_group = "early_bonding"
+
+[[story_arc.nodes]]
+id = "the_moment"
+name = "Her Bedroom, Her Terms"
+chapter = "chapter_turning"
+journal_entry = "'Stay.' One word. This time she chose it. She wasn't caught off guard — she was inviting me in. Into her bed. Into her life."
+linked_canvas = "bedroom_encounter"
+linked_canvas_node = "sex"
+linked_flag = "bedroom_moment_complete"
+npc = "npc_angela"
+is_milestone = true
+requires_nodes = ["the_encounter"]
+requires_group = "mid_bonding"
+
+# --- ACT 3: DEEP CONNECTION ---
+
+[[story_arc.nodes]]
+id = "morning_together_first"
+name = "Waking Up Together"
+chapter = "chapter_act3"
+journal_entry = "I woke up in her bed. She was already awake, watching me with this look — like she couldn't believe I was real. 'Good morning,' she said. Like it was the most natural thing in the world."
+linked_canvas = "activity_morning_together_angela"
+npc = "npc_angela"
+is_milestone = false
+group = "deep_bonding"
+
+[[story_arc.nodes]]
+id = "spa_night"
+name = "The Massage"
+chapter = "chapter_act2"
+journal_entry = "She kept her promise. Oils, candles, towels laid out on the bed. 'Lie down,' she said — then caught herself. 'I mean, sit. Or lie down. Whatever's comfortable.' Her hands were warm and steady. Neither of us said much. We didn't need to."
+linked_canvas = "activity_spa_massage_angela"
+npc = "npc_angela"
+is_milestone = false
+group = "mid_bonding"
+requires_nodes = ["first_massage"]
+
+[[story_arc.nodes]]
+id = "bath_night"
+name = "Bath Together"
+chapter = "chapter_act3"
+journal_entry = "She invited me into the bath. Where I used to peek, now I belong. The water was warm and so was she."
+linked_canvas = "activity_bath_together_angela"
+npc = "npc_angela"
+is_milestone = false
+group = "deep_bonding"
+
+# --- RESOLUTION ---
+
+[[story_arc.nodes]]
+id = "date_night"
+name = "Somewhere Nobody Knows Us"
+chapter = "chapter_resolution"
+journal_entry = "'Somewhere nobody knows us.' She said it like a confession. The hotel, the champagne, 25 moments that felt like a lifetime. For one night we weren't step-mom and step-son. We were just two people in love."
+linked_canvas = "activity_date_night_hotel_angela"
+linked_flag = "date_night_complete"
+npc = "npc_angela"
+is_milestone = true
+requires_nodes = ["the_moment"]
+requires_group = "deep_bonding"
+
+[[story_arc.nodes]]
+id = "exploring"
+name = "Trust Without Words"
+chapter = "chapter_resolution"
+journal_entry = "She knelt on the floor in pink lingerie with a collar beside her. 'I want to try something. Only if you want to.' The deepest intimacy isn't physical — it's the willingness to be vulnerable."
+linked_canvas = "activity_exploring_kink_angela"
+npc = "npc_angela"
+is_milestone = false
+requires_nodes = ["date_night"]
+
+# ═══════════════════════════════════════════════════════════════
+# ACTIVITY GROUPS (Parallel Options — complete any N of M)
+# ═══════════════════════════════════════════════════════════════
+
+[[story_arc.groups]]
+id = "early_bonding"
+name = "Getting to Know Her"
+description = "Share daily moments with Angela — breakfast, movies, quiet glimpses of her private world."
+required_count = 2
+
+[[story_arc.groups]]
+id = "mid_bonding"
+name = "Growing Connection"
+description = "The distance between you narrows. Conversations deepen. Afternoons change meaning."
+required_count = 1
+
+[[story_arc.groups]]
+id = "deep_bonding"
+name = "Deep Intimacy"
+description = "She opens her private world to you — mornings in her bed, evenings in her bath, trust in its purest form."
+required_count = 1
+
+# ═══════════════════════════════════════════════════════════════
+# EMOTION MAPPINGS (NPC trait visualization for journal)
+# ═══════════════════════════════════════════════════════════════
+
+[story_arc.emotion_mappings.love]
+ranges = [
+  { min = 0, max = 20, label = "strangers", description = "Angela is polite but distant. You're a guest in her home, nothing more." },
+  { min = 21, max = 40, label = "warming", description = "Angela's smiles come easier now. She lingers at breakfast. Something is shifting." },
+  { min = 41, max = 60, label = "attraction", description = "Angela watches you when she thinks you aren't looking. The air between you is charged." },
+  { min = 61, max = 80, label = "intimate", description = "Angela reaches for you. Her touches are deliberate, her eyes full of want. The pretense is gone." },
+  { min = 81, max = 100, label = "in love", description = "Angela loves you. It shows in everything — the way she says your name, the way she holds you, the way she chose this." }
+]
+
+[story_arc.emotion_mappings.trust]
+ranges = [
+  { min = 0, max = 10, label = "guarded", description = "Angela has her walls up. She's watching, measuring. You haven't earned her trust yet." },
+  { min = 11, max = 20, label = "cautious", description = "Angela is opening up, but carefully. She tests the water before she wades in." },
+  { min = 21, max = 30, label = "trusting", description = "Angela confides in you. She lets you see her when she's not performing strength." },
+  { min = 31, max = 40, label = "safe", description = "Angela feels safe with you. She sleeps soundly when you're beside her." },
+  { min = 41, max = 50, label = "complete", description = "Angela trusts you completely. 'I didn't expect this. Any of this.' But she's glad." }
+]
+
+# ═══════════════════════════════════════════════════════════════
+# PLAYER GUIDANCE HINTS
+# ═══════════════════════════════════════════════════════════════
+
+[story_arc.guidance]
+group_incomplete = "There might be more moments to share with Angela..."
+progress_needed = "Spending time together — breakfasts, movies, conversations — might reveal new possibilities."
+story_complete = "Your journey with Angela has reached its beautiful conclusion."

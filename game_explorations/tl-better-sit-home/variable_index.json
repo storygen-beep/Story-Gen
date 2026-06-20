@@ -1,0 +1,2805 @@
+{
+  "generated_at": "2026-06-07T21:30:29.053Z",
+  "indexing_coverage": "partial",
+  "total_variables": 65,
+  "skipped_script_blocks": 0,
+  "skipped_widget_passages": 0,
+  "skipped_passages": 0,
+  "parse_errors": 13,
+  "complex_setter_count": 13,
+  "variables": {
+    "$looks": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "\"cute\"",
+          "passage": "StoryCaption",
+          "gate": [
+            {
+              "condition": "$Appearance lte 3",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "\"sexy\"",
+          "passage": "StoryCaption",
+          "gate": [
+            {
+              "condition": "$Appearance lte 7",
+              "branch": "elseif"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "\"Hot bimbo\"",
+          "passage": "StoryCaption",
+          "gate": [
+            {
+              "condition": "$Appearance gte 8",
+              "branch": "elseif"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$mind": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "\"Shy\"",
+          "passage": "StoryCaption",
+          "gate": [
+            {
+              "condition": "$corruption lte 20",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "\"Slutty\"",
+          "passage": "StoryCaption",
+          "gate": [
+            {
+              "condition": "$corruption lte 40",
+              "branch": "elseif"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "\"Whore\"",
+          "passage": "StoryCaption",
+          "gate": [
+            {
+              "condition": "$corruption gte 41 and $corruption lt 60",
+              "branch": "elseif"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "\"Cock addict\"",
+          "passage": "StoryCaption",
+          "gate": [
+            {
+              "condition": "$corruption gte 60 and $corruption lt 80",
+              "branch": "elseif"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "\"Mindless fuckdoll\"",
+          "passage": "StoryCaption",
+          "gate": [
+            {
+              "condition": "$corruption gte 80",
+              "branch": "elseif"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$Appearance": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$breast+$butt",
+          "passage": "StoryCaption",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": null
+    },
+    "$random": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "random(1,4)",
+          "passage": "Village",
+          "gate": [
+            {
+              "condition": "$looks==\"Hot bimbo\"",
+              "branch": "elseif"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "random(1,4)",
+          "passage": "Upper street",
+          "gate": [
+            {
+              "condition": "$looks==\"Hot bimbo\"",
+              "branch": "elseif"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$lactating": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "DayChanged",
+          "gate": [
+            {
+              "condition": "$PregDays gte 14",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "milking",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$milk": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "woman",
+          "gate": [
+            {
+              "condition": "!($Moahim isnot 1)",
+              "branch": "else"
+            },
+            {
+              "condition": "$milk gte 1",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$milk+1",
+          "passage": "milking",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$lesbian": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "SalonWork",
+          "gate": [
+            {
+              "condition": "$SalonWork gt 5",
+              "branch": "elseif"
+            },
+            {
+              "condition": "$SalonWork == 10",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "MeganHouse",
+          "gate": [
+            {
+              "condition": "!($PregDays lt 14)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$KateBirth": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "DayChanged",
+          "gate": [
+            {
+              "condition": "!($KatePregDays isnot 33)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$KatePreg": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "DayChanged",
+          "gate": [
+            {
+              "condition": "$KatePregDays isnot 33",
+              "branch": "if"
+            },
+            {
+              "condition": "!($KateProst==0)",
+              "branch": "else"
+            },
+            {
+              "condition": "$rnd==1",
+              "branch": "if"
+            },
+            {
+              "condition": "$KatePreg is 0",
+              "branch": "if"
+            },
+            {
+              "condition": "$rnd gte 5",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$KatePregDays": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$KatePregDays+1",
+          "passage": "Home",
+          "gate": [
+            {
+              "condition": "$KatePreg==1 and $DayChanged==1",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$KateProst": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "KateCorruption2",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$intro": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "0",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$PregDays": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$PregDays+1",
+          "passage": "Home",
+          "gate": [
+            {
+              "condition": "$Pregnant==1 and $DayChanged==1",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$Pregnant": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "See what's next",
+          "gate": [
+            {
+              "condition": "!($PregDays gte 14)",
+              "branch": "else"
+            },
+            {
+              "condition": "$Pregnant==0",
+              "branch": "if"
+            },
+            {
+              "condition": "$rndpreg lt $Fert",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "See what's next1",
+          "gate": [
+            {
+              "condition": "$Pregnant==0",
+              "branch": "if"
+            },
+            {
+              "condition": "$rndpreg lt $Fert",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "BrothelSex",
+          "gate": [
+            {
+              "condition": "$Pregnant==0",
+              "branch": "if"
+            },
+            {
+              "condition": "$rndpreg lt $Fert",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "Vip3",
+          "gate": [
+            {
+              "condition": "visited() is 6",
+              "branch": "case"
+            },
+            {
+              "condition": "$Pregnant==0",
+              "branch": "if"
+            },
+            {
+              "condition": "$rndpreg lt $Fert",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "FuckMachine",
+          "gate": [
+            {
+              "condition": "!(visited() is 1 or visited() is 2 or visited() is 3)",
+              "branch": "default"
+            },
+            {
+              "condition": "$Pregnant==0",
+              "branch": "if"
+            },
+            {
+              "condition": "$rndpreg lt $Fert",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$Actions": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "Home",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$WeekDays": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$WeekDays +1",
+          "passage": "DayChanged",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$Fert": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "DayChanged",
+          "gate": [
+            {
+              "condition": "$FertDays is 11",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$Fert+1",
+          "passage": "DayChanged",
+          "gate": [
+            {
+              "condition": "$FertDays lte 10",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$corruption": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$corruption+2",
+          "passage": "SmithOral",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$corruption+8",
+          "passage": "See what's next",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$corruption+8",
+          "passage": "See what's next1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$corruption+5",
+          "passage": "BrothelSexEnd",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$corruption+2",
+          "passage": "Pole",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$corruption+5",
+          "passage": "Vip3",
+          "gate": [
+            {
+              "condition": "visited() is 1",
+              "branch": "case"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$corruption+5",
+          "passage": "Vip3",
+          "gate": [
+            {
+              "condition": "visited() is 2",
+              "branch": "case"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$corruption+5",
+          "passage": "Vip3",
+          "gate": [
+            {
+              "condition": "visited() is 3",
+              "branch": "case"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$corruption+5",
+          "passage": "Vip3",
+          "gate": [
+            {
+              "condition": "visited() is 4",
+              "branch": "case"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$corruption+5",
+          "passage": "Vip3",
+          "gate": [
+            {
+              "condition": "visited() is 5",
+              "branch": "case"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$corruption+5",
+          "passage": "Vip3",
+          "gate": [
+            {
+              "condition": "visited() is 6",
+              "branch": "case"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$corruption+3",
+          "passage": "FuckMachine",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$corruption+3",
+          "passage": "FuckMachineEnd",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$corruption+5",
+          "passage": "MeganSex",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$corruption+3",
+          "passage": "MeganSexEnd",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$inventory": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "[]",
+          "passage": "3",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$money": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "10",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+50",
+          "passage": "DayChanged",
+          "gate": [
+            {
+              "condition": "$KatePregDays isnot 33",
+              "branch": "if"
+            },
+            {
+              "condition": "!($KateProst==0)",
+              "branch": "else"
+            },
+            {
+              "condition": "$rnd==1",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money-5",
+          "passage": "DayChanged",
+          "gate": [
+            {
+              "condition": "$money gte 5",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+20",
+          "passage": "SmithWorkEnd",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+20+$Appearance",
+          "passage": "SmithOralEnd",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+(10*$milk)",
+          "passage": "woman",
+          "gate": [
+            {
+              "condition": "!($Moahim isnot 1)",
+              "branch": "else"
+            },
+            {
+              "condition": "$milk gte 1",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money-$breast*30",
+          "passage": "services",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+25",
+          "passage": "do my work",
+          "gate": [
+            {
+              "condition": "$SalonWork gt 5",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+10",
+          "passage": "do my work",
+          "gate": [
+            {
+              "condition": "!($SalonWork gt 5)",
+              "branch": "else"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money-20",
+          "passage": "Shop",
+          "gate": [
+            {
+              "condition": "$money gte 20",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money-400",
+          "passage": "Shop",
+          "gate": [
+            {
+              "condition": "!($inventory.contains(\"flashlight\"))",
+              "branch": "else"
+            },
+            {
+              "condition": "$money gte 400",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money-200",
+          "passage": "Shop",
+          "gate": [
+            {
+              "condition": "!($inventory.contains(\"master keys\"))",
+              "branch": "else"
+            },
+            {
+              "condition": "$money gte 200",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money-150",
+          "passage": "Shop",
+          "gate": [
+            {
+              "condition": "!($inventory.contains(\"ruby\"))",
+              "branch": "else"
+            },
+            {
+              "condition": "$money gte 150",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+$Appearance*6+$strength*2",
+          "passage": "BrothelSexEnd",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+$strength*4+$Appearance*2",
+          "passage": "PoleEnd",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+5",
+          "passage": "Pole",
+          "gate": [
+            {
+              "condition": "$rnd lte $strength",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+100",
+          "passage": "Elder1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money-25",
+          "passage": "SexShop",
+          "gate": [
+            {
+              "condition": "!($inventory.contains(\"enema\"))",
+              "branch": "else"
+            },
+            {
+              "condition": "$money gte 25",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money-15",
+          "passage": "SexShop",
+          "gate": [
+            {
+              "condition": "!($inventory.contains(\"rope\"))",
+              "branch": "else"
+            },
+            {
+              "condition": "$money gte 15",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money-80",
+          "passage": "SexShop",
+          "gate": [
+            {
+              "condition": "!($inventory.contains(\"pack of toys\"))",
+              "branch": "else"
+            },
+            {
+              "condition": "$money gte 80",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money-30",
+          "passage": "SexShop",
+          "gate": [
+            {
+              "condition": "!($inventory.contains(\"Breast pump\"))",
+              "branch": "else"
+            },
+            {
+              "condition": "$money gte 30",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+100",
+          "passage": "Elder2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+125",
+          "passage": "Elder3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+125",
+          "passage": "Elder4",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+150",
+          "passage": "Elder5",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+150",
+          "passage": "Elder6",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+150",
+          "passage": "ElderSex2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+30",
+          "passage": "FuckMachineEnd",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+40",
+          "passage": "MeganSexEnd",
+          "gate": [
+            {
+              "condition": "visited() is 1",
+              "branch": "case"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+50",
+          "passage": "MeganSexEnd",
+          "gate": [
+            {
+              "condition": "visited() is 2",
+              "branch": "case"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+70",
+          "passage": "MeganSexEnd",
+          "gate": [
+            {
+              "condition": "visited() is 3",
+              "branch": "case"
+            },
+            {
+              "condition": "$grouplesbian==1",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+50",
+          "passage": "MeganSexEnd",
+          "gate": [
+            {
+              "condition": "visited() is 3",
+              "branch": "case"
+            },
+            {
+              "condition": "!($grouplesbian==1)",
+              "branch": "else"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+70",
+          "passage": "MeganSexEnd",
+          "gate": [
+            {
+              "condition": "!(visited() is 1 or visited() is 2 or visited() is 3)",
+              "branch": "default"
+            },
+            {
+              "condition": "$grouplesbian==1",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$money+50",
+          "passage": "MeganSexEnd",
+          "gate": [
+            {
+              "condition": "!(visited() is 1 or visited() is 2 or visited() is 3)",
+              "branch": "default"
+            },
+            {
+              "condition": "!($grouplesbian==1)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$SmithSex": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$SmithSex+1",
+          "passage": "SmithOralEnd",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$SalonWork": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$SalonWork+1",
+          "passage": "do my work",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$PregSick": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$PregSick+1",
+          "passage": "DayChanged",
+          "gate": [
+            {
+              "condition": "$PregDays==4 or $PregDays==8 or $PregDays==14",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$FertDays": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "DayChanged",
+          "gate": [
+            {
+              "condition": "$FertDays is 11",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$FertDays+1",
+          "passage": "DayChanged",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$creampie": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "DayChanged",
+          "gate": [
+            {
+              "condition": "$creampie gt 1",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$creampie+1",
+          "passage": "See what's next",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$creampie+1",
+          "passage": "See what's next1",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$pepper": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$pepper+1",
+          "passage": "Shop",
+          "gate": [
+            {
+              "condition": "$money gte 20",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$pepper-1",
+          "passage": "Use spray to protect yourself",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$pepper-1",
+          "passage": "spray2",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$code": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "random(1000,9999)",
+          "passage": "3",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$inputcode": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$locked": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "CodeFail",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$ElderRoute": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "Elder6",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$body": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "{\n \"butt\" : [\"images/butt0.jpg\", \"images/butt1.jpg\", \"images/butt2.jpg\", \"images/butt3.jpg\", \"images/butt4.jpg\", \"images/butt5.jpg\"],\n \"breast\":[\"images/Bcup.jpg\", \"images/Ccup.jpeg\", \"images/Dcup.jpg\", \"images/Ecup.jpg\", \"images/Fcup.jpg\", \"images/Gcup.jpg\"]\n}",
+          "passage": "3",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$breast": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$breast+1",
+          "passage": "servicesEnd",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$butt": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$butt+1",
+          "passage": "do some exersices",
+          "gate": [
+            {
+              "condition": "$ButtTraining==3 and $butt lt 5",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$recovery": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$recovery+1",
+          "passage": "DayChanged",
+          "gate": [
+            {
+              "condition": "$recovery gte 1",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "DayChanged",
+          "gate": [
+            {
+              "condition": "$recovery gte 1",
+              "branch": "if"
+            },
+            {
+              "condition": "$recovery is 4",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "servicesEnd",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$training": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "DayChanged",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "do some exersices",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "jogging",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$ButtTraining": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$ButtTraining+1",
+          "passage": "do some exersices",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "do some exersices",
+          "gate": [
+            {
+              "condition": "$ButtTraining==3 and $butt lt 5",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$strength": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$strength+1",
+          "passage": "jogging",
+          "gate": [
+            {
+              "condition": "$FitTraining==2",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$BrothelWorked": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$BrothelWorked+1",
+          "passage": "BrothelSexEnd",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$starving": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "DayChanged",
+          "gate": [
+            {
+              "condition": "$money gte 5",
+              "branch": "if"
+            },
+            {
+              "condition": "$PregDays lt 23",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$starving+1",
+          "passage": "DayChanged",
+          "gate": [
+            {
+              "condition": "!($money gte 5)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$FitTraining": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$FitTraining+1",
+          "passage": "jogging",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "jogging",
+          "gate": [
+            {
+              "condition": "$FitTraining==2",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$gif": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "{\n\"eldertext1\": [\"- Now lick it, girl. I need you to rise it up.\",\"Now he fucks me with his disgusting dick!\",\"- Bend over! I want to look at your ass!\",\"He pulled out and turned me so im facing him. - Finish me with your mouth you dirty slut!\"],\n\n\"gifpack1\" : [\"images/1/1.gif\",\"images/1/2.gif\",\"images/1/3.gif\",\"images/1/4.gif\"],\n\n\"eldertext2\": [\"- You know what to do, open your mouth\", \"- Lie on your stomach, i want you from behind. - now he fucks my pussy lying on top of me.\", \"- Lie on your stomach, i want you from behind. - now he fucks me lying on top of me.\", \"We switched position to cowgirl, his dick enter a lot better this way. Oh my god, what i am thinking about!?\",\"- It's time to switch to my favourite one. Spread your legs.\",\"- You are realy tight down here. Ohh-yesss... I can barely resist to not finish inside.\"],\n\n\"gifpack2\" : [\"images/2/1.gif\", \"images/2/2.gif\", \"images/2/3.gif\", \"images/2/4.gif\", \"images/2/5.gif\", \"images/2/6.gif\"],\n\n\"eldertext3\": [\"- You know what to do.- i dropped on my knees to suck his dick\",\"- Let's take off your panties\", \"He starts entering my backdoor. Shit, this is painfull!\", \"This feels kinda strange now. Am i aroused? I didn't notice how i started to rub my pussy\",\"- Ohhh... don't stop!\",\"- Here i come!\"],\n\n\"gifpack3\" : [\"images/3/1.gif\", \"images/3/2.gif\", \"images/3/3.gif\", \"images/3/4.gif\", \"images/3/5.gif\", \"images/3/6.gif\"],\n\n\"eldertext4\": [\"I started with my mouth as always\", \"- Ohh... your dick fits my hole perfectly!\", \"My mind goes crazy when he thrusts so fast\", \"- I just can't get enough of you. I can fuck you for days!\",\"- Eat this! - he pours his tasty semen in my mouth\"],\n\n\"gifpack4\" : [\"images/4/1.gif\",\"images/4/2.gif\",\"images/4/3.gif\",\"images/4/4.gif\", \"images/4/5.gif\"],\n\n\"eldertext5\": [\"We started as usual. What did he mean buy 'rough sex'?\",\"- Yes! Fuck my pussy!\", \"Someone else grabbed me and started to fuck me doggy style!\", \"- Let's finish her!\"],\n\n\"gifpack5\" : [\"images/5/1.gif\",\"images/5/2.gif\",\"images/5/3.gif\",\"images/5/4.gif\"],\n\n\"eldertext6\": [\"I'm realy used to suck his cock\", \"I feel another man started to fuck my pussy - please, harder!\", \"They turned me around to exchange my holes. Uh, this is so good!\", \"- Keep fucking mu dirty pussy!\", \"I feel something strange inside me. I need some more!\", \"- Here it comes! - i felt their dicks became a bit bigger\", \"They pumped my holes with their sperm. So warm, so full...\"],\n\n\"gifpack6\" : [\"images/6/1.gif\", \"images/6/2.gif\", \"images/6/3.gif\", \"images/6/4.gif\", \"images/6/5.gif\", \"images/6/6.gif\", \"images/6/7.gif\"]\n}",
+          "passage": "3",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$item": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "\"Useless phone\"",
+          "passage": "3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "\"enema\"",
+          "passage": "Elder2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "\"rope\"",
+          "passage": "Elder6",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "\"pack of toys\"",
+          "passage": "ElderSex2",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$rnd": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "random(1,4)",
+          "passage": "DayChanged",
+          "gate": [
+            {
+              "condition": "$KatePregDays isnot 33",
+              "branch": "if"
+            },
+            {
+              "condition": "!($KateProst==0)",
+              "branch": "else"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "random(1,10)",
+          "passage": "DayChanged",
+          "gate": [
+            {
+              "condition": "$KatePregDays isnot 33",
+              "branch": "if"
+            },
+            {
+              "condition": "!($KateProst==0)",
+              "branch": "else"
+            },
+            {
+              "condition": "$rnd==1",
+              "branch": "if"
+            },
+            {
+              "condition": "$KatePreg is 0",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "random(1,3)",
+          "passage": "wait for a client",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "random(1,100)",
+          "passage": "TryRun1",
+          "gate": [
+            {
+              "condition": "$starving is 0",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "random(1,100)",
+          "passage": "TryRun2",
+          "gate": [
+            {
+              "condition": "$starving is 0",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "random(1,14)",
+          "passage": "Pole",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "random(1,2)",
+          "passage": "MeganSex",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$sick": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "true",
+          "passage": "DayChanged",
+          "gate": [
+            {
+              "condition": "$PregDays==4 or $PregDays==8 or $PregDays==14",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "false",
+          "passage": "PregSickness",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$DayChanged": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "DayChanged",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "Home",
+          "gate": [
+            {
+              "condition": "$Pregnant==1 and $DayChanged==1",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$SalonDays": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$SalonDays+1",
+          "passage": "DayChanged",
+          "gate": [
+            {
+              "condition": "$final is 1",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "come back to Moahim",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$sewersOpened": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "sewers",
+          "gate": [
+            {
+              "condition": "$inventory.contains(\"crowbar\")",
+              "branch": "if"
+            },
+            {
+              "condition": "$sewersOpened isnot 1",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$BlacksmithMeet": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "Blacksmith",
+          "gate": [
+            {
+              "condition": "$BlacksmithMeet isnot 1",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$SmithOpen": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "Blacksmith",
+          "gate": [
+            {
+              "condition": "$BlacksmithMeet==1 and $Appearance gte 3",
+              "branch": "if"
+            },
+            {
+              "condition": "$SmithOpen isnot 1",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$rnd2": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "random(1,3)",
+          "passage": "SmithOral",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$Salary": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "20+$Appearance",
+          "passage": "SmithOralEnd",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$Moahim": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "woman",
+          "gate": [
+            {
+              "condition": "$Moahim isnot 1",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$DrugLocation": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "notes",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$SalonQuest1": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "SalonEvent1.2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "Morgan",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$rndsex": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "random(1,2)",
+          "passage": "See what's next",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "random(1,2)",
+          "passage": "See what's next1",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$rndpreg": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "random(5,10)",
+          "passage": "See what's next",
+          "gate": [
+            {
+              "condition": "!($PregDays gte 14)",
+              "branch": "else"
+            },
+            {
+              "condition": "$Pregnant==0",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "random(5,10)",
+          "passage": "See what's next1",
+          "gate": [
+            {
+              "condition": "$Pregnant==0",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "random(5,10)",
+          "passage": "BrothelSex",
+          "gate": [
+            {
+              "condition": "$Pregnant==0",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "random(5,10)",
+          "passage": "Vip3",
+          "gate": [
+            {
+              "condition": "visited() is 6",
+              "branch": "case"
+            },
+            {
+              "condition": "$Pregnant==0",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "random(5,10)",
+          "passage": "FuckMachine",
+          "gate": [
+            {
+              "condition": "!(visited() is 1 or visited() is 2 or visited() is 3)",
+              "branch": "default"
+            },
+            {
+              "condition": "$Pregnant==0",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$MorganLetter": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "Morgan",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "Give her a letter",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$event3": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "SalonEvent2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "Salon event 3",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$ElderNight": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "Steal the dagger",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "Salon event 3",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$final": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "come back to Moahim",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$percent": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "0",
+          "passage": "Pole",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "$percent + 1",
+          "passage": "Pole",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$VipBlocked": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "Vip2",
+          "gate": [
+            {
+              "condition": "visited() is 1",
+              "branch": "case"
+            },
+            {
+              "condition": "$Pregnant is 1",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "Vip2",
+          "gate": [
+            {
+              "condition": "!(visited() is 1)",
+              "branch": "default"
+            },
+            {
+              "condition": "$Pregnant is 1",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$i": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "0",
+          "passage": "Vip3",
+          "gate": [
+            {
+              "condition": "visited() is 1",
+              "branch": "case"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$i + 1",
+          "passage": "Vip3",
+          "gate": [
+            {
+              "condition": "visited() is 1",
+              "branch": "case"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "0",
+          "passage": "Vip3",
+          "gate": [
+            {
+              "condition": "visited() is 2",
+              "branch": "case"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$i + 1",
+          "passage": "Vip3",
+          "gate": [
+            {
+              "condition": "visited() is 2",
+              "branch": "case"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "0",
+          "passage": "Vip3",
+          "gate": [
+            {
+              "condition": "visited() is 3",
+              "branch": "case"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$i + 1",
+          "passage": "Vip3",
+          "gate": [
+            {
+              "condition": "visited() is 3",
+              "branch": "case"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "0",
+          "passage": "Vip3",
+          "gate": [
+            {
+              "condition": "visited() is 4",
+              "branch": "case"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$i + 1",
+          "passage": "Vip3",
+          "gate": [
+            {
+              "condition": "visited() is 4",
+              "branch": "case"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "0",
+          "passage": "Vip3",
+          "gate": [
+            {
+              "condition": "visited() is 5",
+              "branch": "case"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$i + 1",
+          "passage": "Vip3",
+          "gate": [
+            {
+              "condition": "visited() is 5",
+              "branch": "case"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "0",
+          "passage": "Vip3",
+          "gate": [
+            {
+              "condition": "visited() is 6",
+              "branch": "case"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$i + 1",
+          "passage": "Vip3",
+          "gate": [
+            {
+              "condition": "visited() is 6",
+              "branch": "case"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$grouplesbian": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "1",
+          "passage": "MeganSexEnd",
+          "gate": [
+            {
+              "condition": "visited() is 2",
+              "branch": "case"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "0",
+          "passage": "MeganSexEnd",
+          "gate": [
+            {
+              "condition": "visited() is 2",
+              "branch": "case"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$index": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "$inventory.indexOf(\"VZ-173\")",
+          "passage": "Pour VZ-173",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    }
+  },
+  "complex_setters": [
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$inventory.push($item)",
+      "passage": "3",
+      "gate": []
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$inventory.push(\"crowbar\")",
+      "passage": "SmithOffice",
+      "gate": [
+        {
+          "condition": "!($inventory.contains(\"crowbar\"))",
+          "branch": "else"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$inventory.push(\"flashlight\")",
+      "passage": "Shop",
+      "gate": [
+        {
+          "condition": "!($inventory.contains(\"flashlight\"))",
+          "branch": "else"
+        },
+        {
+          "condition": "$money gte 400",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$inventory.push(\"master keys\")",
+      "passage": "Shop",
+      "gate": [
+        {
+          "condition": "!($inventory.contains(\"master keys\"))",
+          "branch": "else"
+        },
+        {
+          "condition": "$money gte 200",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$inventory.push(\"ruby\")",
+      "passage": "Shop",
+      "gate": [
+        {
+          "condition": "!($inventory.contains(\"ruby\"))",
+          "branch": "else"
+        },
+        {
+          "condition": "$money gte 150",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$inventory.push(\"Ancient dagger\")",
+      "passage": "Steal the dagger",
+      "gate": []
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$inventory.push(\"enema\")",
+      "passage": "SexShop",
+      "gate": [
+        {
+          "condition": "!($inventory.contains(\"enema\"))",
+          "branch": "else"
+        },
+        {
+          "condition": "$money gte 25",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$inventory.push(\"rope\")",
+      "passage": "SexShop",
+      "gate": [
+        {
+          "condition": "!($inventory.contains(\"rope\"))",
+          "branch": "else"
+        },
+        {
+          "condition": "$money gte 15",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$inventory.push(\"pack of toys\")",
+      "passage": "SexShop",
+      "gate": [
+        {
+          "condition": "!($inventory.contains(\"pack of toys\"))",
+          "branch": "else"
+        },
+        {
+          "condition": "$money gte 80",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$inventory.push(\"Breast pump\")",
+      "passage": "SexShop",
+      "gate": [
+        {
+          "condition": "!($inventory.contains(\"Breast pump\"))",
+          "branch": "else"
+        },
+        {
+          "condition": "$money gte 30",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$inventory.push(\"key\")",
+      "passage": "west",
+      "gate": [
+        {
+          "condition": "!($inventory.contains(\"key\"))",
+          "branch": "else"
+        },
+        {
+          "condition": "$DrugLocation==1",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$inventory.push(\"VZ-173\")",
+      "passage": "Open №2",
+      "gate": [
+        {
+          "condition": "visited() is 1",
+          "branch": "case"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$inventory.pluck($index, $index+1)",
+      "passage": "Pour VZ-173",
+      "gate": [
+        {
+          "condition": "$index gt -1",
+          "branch": "if"
+        }
+      ]
+    }
+  ]
+}

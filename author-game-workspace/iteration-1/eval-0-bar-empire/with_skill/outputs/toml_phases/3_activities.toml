@@ -1,0 +1,43 @@
+# Phase 3/7 — 3_activities.toml
+# Bar Empire — activities. SCAFFOLD: only the sleep activity (the day-cycle router).
+# Solo feeders / work hosts are BEATS authored later per the content roster.
+
+# ─── activity_sleep — the day-advance router (doctrine/04 §10) ────────────────
+# Without it daytime windows are unreachable. Player works nights; she sleeps in the
+# morning after close. +80 energy, advances 420 min (7h). Solo, no NPC sub.
+
+[[canvases]]
+id          = "activity_sleep"
+name        = "Sleep"
+description = "Player-solo. Apartment. Energy +80. Time +420 min (7h). The clock router — advances the day."
+
+[canvases.trigger]
+location      = "loc_apartment"
+is_repeatable = true
+priority      = 3
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "02:00"
+end_time   = "16:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Sleep"
+blocks = [
+  { type = "image", props = { file = "activities/sleep.jpg" } },
+  { type = "paragraph", content = "You pull the blanket over the window's grey light, kick your shoes off under the covers, and let the hum of the fridge carry you under. The Rail can wait until tonight." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Wake up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_apartment"
+time_progression_minutes = 420
+effects = [
+  { targetType = "player", trait = "energy", op = "add", value = 80 },
+]

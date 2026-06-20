@@ -98,7 +98,7 @@ Diana's footstep stops the cascade — external interruption. T1 of the same can
 **Why this rule exists:** P10 — without per-NPC location radar, Lane 3 becomes undiscoverable. The whole "you're doing X and he happened" texture depends on the player having the situational awareness to choose X knowing it might collide with him. `getNpcLocation` (`v2.py:2923`) primitive already exists; the sidebar authoring just calls it.
 
 **How to apply:**
-- Add per-NPC `sidebar_items` to the slice. Each item calls `getNpcLocation(npcId)` (sidebar primitive type pending Doc 64 PRD).
+- Add per-NPC `sidebar_items` (`npc_panel`) to the slice. The `location` row calls `getNpcLocation(npcId)` — shipped 2026-06-06.
 - Where the arc's register includes NPC stats the player needs to plan against (Frank's arousal, etc.), add per-NPC stat readouts alongside the location.
 - Per-arc-shape defaults are in `doctrine/09_trait_catalog.md` §8:
   - Family/ambient: location + arousal + corruption + relation
@@ -684,9 +684,12 @@ For each anti-pattern, the rule it violates.
 ## §10 — The Day System (day-cycle + offscreen presence)
 
 Schedules only matter if the player can *traverse the day* to reach the windows. RTS's schedule is a
-**content-gate + player-router + fantasy-framer**, not world-sim (researched 2026-06-03): every
+**content-gate + player-router + fantasy-framer**, not world-sim *ambience* (researched 2026-06-03): every
 (location × time) slot is a window the player plans around; "offscreen" is deliberate exclusion;
-scarcity is always **navigable** ("be there at the right time"), never impossible. Three rules.
+scarcity is always **navigable** ("be there at the right time"), never impossible. But "not world-sim"
+cuts only against *padding a calendar for realism* — the NPC's **resolved location is first-class state
+the player's routines roll against**. "Is Frank home right now" is the tripwire a shower-host fires on
+(`doctrine/02` §4.5, §4.8); presence is a queryable fact, not décor. Three rules.
 
 ### §10.1 — Day-advance precondition (a sleep/rest activity is mandatory for time-gated games)
 The engine clock is continuous (`advanceTime` rolls minutes→hours→days; midnight auto-advances the
@@ -721,6 +724,30 @@ it is *either* a reachable window (gets a light hub, D72-R6), *or* an **offscree
 unscheduled. **Filler blocks are the Marge anti-pattern** — don't pad a calendar for "realism."
 Offscreen is the partner of §10.1: the NPC is "away" during the very phases the player is elsewhere.
 - **D67-R2** Pattern C `pre_substitution_effects` — ✅ shipped Doc 69 Item 2 (2026-05-27)
+
+### §10.5 — The daily loop is a content host, not just a clock (self-care = hijack host)
+The day cycle exists to move the player to content — but the player's OWN repeated activities inside it
+(sleep, shower, bath, eat, the earning chore) are themselves the highest-volume content surface, not
+inert routers. **Default rule: a self-care/chore canvas at a location an NPC shares carries a Lane 3
+dispatcher** (`doctrine/02` §4.4–§4.12) — the chore is the carrier, the solo-lewd `else` is the
+player-corruption feeder, the NPC `if` branch is the walk-in. The bare-restore shape (a sleep/shower
+canvas with no feeder branch and no substitution) is the **explicit exception**, correct only where no
+NPC is scheduled to the player's location during that window (e.g. the player lives alone). Authoring
+the day-advance sleep as a pure router and stopping there is how a game ends up with a lived-in-looking
+house whose rooms are all dead (the dead-bath finding). For cohabitation, the core housemates' **home
+block should be a reachable, room-resolved presence** the routine can collide with — not only an
+offscreen "away" label (§10.4 still holds for peripheral NPCs and genuine away/work blocks; the
+cohabitation exception is `doctrine/10` §5.5).
+
+**Cross-room presence — the occupancy predicate (SHIPPED 2026-06-17).** The walk-in-on-the-player path above
+always worked (co-location `requires_npc`). The *inverse* — the player peeping on an NPC in another room, and
+shared-resource **occupancy** ("the bathroom is busy") — now ships via the **`npc_at_location`** condition
+type (`operator = "is_present" | "is_absent"`, optional `npc_id`; omit `npc_id` to ask room-occupied/empty),
+added to the canonical evaluator `triggerConditionsSatisfied`, so it works in canvas/choice/substitution AND
+`entry_conditions`. Peep, occupied-bathroom, and caught are authorable now — the full model (one combination
+table) is `redesign_phase_3/25`; **visibility (see/peep/hear) is authoring, not engine.** Still pending: the
+**two-NPC co-presence** case (config 2 — render two NPCs in one observed scene), which needs the separate
+multi-NPC rendering work.
 
 ---
 

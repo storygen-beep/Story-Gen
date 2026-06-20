@@ -1,0 +1,2784 @@
+# Phase 5 — 5_scenes.toml
+# Last Call — NPC arc canvases (authored beat-by-beat by /author-game continue mode).
+#
+# beat_0002 — Sal on-ramp (npc_intro): Lane 1 = first-contact one-shot + repeatable hub
+#   (interactions WITH Sal only). The WORK is a separate solo activity (Lane 3 host) below —
+#   §8.2 hub-vs-solo-work separation. The bar's earning loop lives in canvas_work_shift.
+
+# ── beat_0002 / Sal — first contact (auto-fire one-shot) ──────────────────────
+# Auto-fires on bar entry once first night is done (no `npc`/`requires_npc` — those
+# make it a repeatable PORTRAIT, and renderNpcPortraits skips non-repeatable canvases,
+# so a one-shot first-contact must be an auto-fire like the boot canvas). Sets
+# sal_opened_up → the repeatable Sal hub (portrait) takes over from then on.
+[[canvases]]
+id          = "canvas_sal_ropes_first"
+name        = "The Last Call — Sal"
+description = "beat_0002. First meeting with Sal. Auto-fires on bar entry post-first-night. Sets sal_opened_up + sal_stage=1."
+
+[canvases.trigger]
+location      = "loc_bar"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "first_night_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "sal_opened_up",   operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Working the bar"
+blocks = [
+  { type = "image", props = { file = "scenes/sal_bar_hub.jpg" } },
+  { type = "paragraph", content = "Sal slides down to make room and starts talking — which tap runs foam, which regular runs a tab, where Sully kept the good stuff. You keep up. You've poured in worse rooms than this." },
+  { type = "paragraph", content = "By the second rush he stops narrating and just works beside you." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sal" }, content = "Huh. You've done this. Sully said you tended in the city. I figured he was bragging." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "First thing today that felt like solid ground." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Learn the bar 🍺"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "sal_opened_up",      op = "set" },
+  { targetType = "player", flag = "talked_to_sal_today", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "sal_stage", op = "set", value = 1 },
+]
+
+# ── beat_0002 / Sal — Lane 1 HUB (SERVICE hours, public tier) ─────────────────
+# beat_0010 split (audit F3): this hub now covers ONLY service hours 17:00–22:00
+# (public exposure — talk + flirt). The after-close window 22:00–02:00 (private) is a
+# SEPARATE hub (canvas_sal_afterhours_hub) carrying the private ladder + the kiss capstone.
+[[canvases]]
+id          = "canvas_sal_hub"
+name        = "Sal — behind the bar"
+description = "beat_0002 (split in beat_0010). Lane 1 SERVICE hub, 17:00–22:00, PUBLIC tier: talk + locked-visible flirt rung. NPC-object verbs only; WORK is canvas_work_shift. One constant opener (D56-R1). After-close private content is canvas_sal_afterhours_hub."
+
+[canvases.trigger]
+location      = "loc_bar"
+requires_npc  = "npc_sal"
+npc           = "npc_sal"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "sal_opened_up", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "22:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Sal at the taps"
+blocks = [
+  { type = "image", props = { file = "scenes/sal_bar_hub.jpg" } },
+  { type = "paragraph", content = "Sal's at the taps, towel over his shoulder, half a story going about a customer from 1998. He tips his head at the empty side of the bar." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# Lane 1 — relational (always open once he's warmed up; daily-gated)
+[[canvases.nodes.exit_block.choices]]
+text       = "Talk to Sal 💬"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 15
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_sal_today", operator = "is_false" },
+] }
+flagEffects = [
+  { targetType = "player", flag = "talked_to_sal_today", op = "set" },
+]
+# Sal re-spine: the daily Sal beat raises HIS WANTING (npc_sal.arousal), capped at
+# +1/day by talked_to_sal_today (shared with the after-close stay below). This is the
+# earned slow-burn climb that drives the private ladder. Relation dropped from Sal.
+effects = [
+  { targetType = "npc", npcId = "npc_sal", trait = "arousal", op = "add", value = 1, cap = 3 },
+]
+
+# Lane 1 — the directed lewd beat (daily-capped → HIDES when done/below floor; the "Make a move"
+# rung below carries the locked-visible ladder telegraph). This is Sal's corruption driver.
+[[canvases.nodes.exit_block.choices]]
+text       = "Flirt with him 😏"
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 5 },
+  { type = "flag",  subject = "player", flag_key = "flirted_with_sal_today", operator = "is_false" },
+] }
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 15
+flagEffects = [
+  { targetType = "player", flag = "flirted_with_sal_today", op = "set" },
+]
+# RTS model: the lewd act corrupts HIM. Flirt raises her brazenness (player corruption) AND draws Sal
+# across the line (npc_sal.corruption — his per-NPC ODOMETER, never resets), daily-capped like RTS's
+# once-per-day lewd scenes. His corruption gates the kiss + first night; arousal (throttle) stays on
+# the repeatable sex loop, never the capstones.
+effects = [
+  { targetType = "player", trait = "corruption", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_sal", trait = "corruption", op = "add", value = 1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Back to the floor ↩️"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 5
+
+# ══════════════════════════════════════════════════════════════════════════════
+# beat_0010 — Sal slow-burn deepens (hub split F3 + first-kiss capstone).
+#   The after-close window (22:00–02:00, PRIVATE tier) gets its own hub + the
+#   capstone #2 kiss. canvas_sal_hub above now covers only service hours (17–22).
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ── beat_0010 / Sal — AFTER-CLOSE hub (private tier, 22:00–02:00) ─────────────
+[[canvases]]
+id          = "canvas_sal_afterhours_hub"
+name        = "Sal — after the lock turns"
+description = "beat_0010. Lane 1 hub for the after-close window (22:00–02:00, PRIVATE tier). Counting the till, just the two of them. Talk (daily-gated; builds his arousal — the in-scene throttle on the sex loop, NOT the kiss) + locked-visible telegraph + leave. One constant opener (D56-R1). The kiss capstone (canvas_sal_after_hours) auto-fires once HIS corruption (npc_sal.corruption, built by Flirt) reaches 3."
+
+[canvases.trigger]
+location      = "loc_bar"
+requires_npc  = "npc_sal"
+npc           = "npc_sal"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "sal_opened_up", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "02:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "After close"
+# The opening reflects HIS HEAT TONIGHT (npc_sal.arousal 0-3 = the in-scene throttle), NOT the
+# relationship's progress — arousal resets at climax, so the prose stays transient "how worked up is
+# he tonight" (RTS keys only heat-framed text to arousal; the courtship lives in the flag chain).
+blocks = [
+  { type = "image", props = { file = "scenes/sal_afterhours.jpg" } },
+  { type = "group", props = { conditions = { version = "1.0", items = [ { type = "trait", subject = "npc", npc_id = "npc_sal", trait_key = "arousal", operator = "eq", value = 0 } ] }, blocks = [ { type = "paragraph", content = "Last customer gone, bolt thrown, neon off. Sal counts the till by the register light, slow and heavy, shoulders still wearing the shift. He's wrung out tonight — doesn't tell you to go home, doesn't look up either. The quiet's just quiet, and the cooler hum is the only thing awake." } ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [ { type = "trait", subject = "npc", npc_id = "npc_sal", trait_key = "arousal", operator = "eq", value = 1 } ] }, blocks = [ { type = "paragraph", content = "Bolt thrown, neon off. He counts the till one-handed, and the count keeps losing its place whenever you move behind him. He doesn't tell you to go home. There's something under the quiet tonight that wasn't there an hour ago." } ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [ { type = "trait", subject = "npc", npc_id = "npc_sal", trait_key = "arousal", operator = "eq", value = 2 } ] }, blocks = [ { type = "paragraph", content = "He's half given up on the count. Sleeves shoved past the elbow, bolt thrown, he watches you over the register the way he watched you work the room all night — and tonight he's not bothering to look away." } ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [ { type = "trait", subject = "npc", npc_id = "npc_sal", trait_key = "arousal", operator = "gte", value = 3 } ] }, blocks = [ { type = "paragraph", content = "He's quit counting. The till sits open and forgotten and he just looks at you across the dark bar, both hands flat on the mahogany, like the door's already bolted and the rest of the night is yours to spend however you want it." } ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# Lane 1 — relational (after-close deepening; daily-gated, shares the daily Sal budget)
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay after close 🌙"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 20
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_sal_today", operator = "is_false" },
+] }
+flagEffects = [
+  { targetType = "player", flag = "talked_to_sal_today", op = "set" },
+]
+# The charged after-close beat (daily-capped via talked_to_sal_today, shared with the service-hours
+# Talk rung — one fires/day). It raises BOTH his arousal (throttle, the warmth that night) AND draws
+# him across the line (npc_sal.corruption, his odometer) — the RTS "same charged beat raises throttle
+# + odometer" shape. So the after-close intimacy progresses the kiss too, not just Flirt. (Talk, the
+# neutral chat, stays arousal-only — RTS doesn't corrupt from neutral talk.)
+effects = [
+  { targetType = "npc", npcId = "npc_sal", trait = "arousal", op = "add", value = 1, cap = 3 },
+  { targetType = "npc", npcId = "npc_sal", trait = "corruption", op = "add", value = 1 },
+]
+
+# Lane 1 — locked-visible telegraph of the kiss (the capstone auto-fires at HIS corruption 3)
+[[canvases.nodes.exit_block.choices]]
+text                  = "Make a move 😏"
+show_when_locked      = true
+# Telegraph mirrors the kiss capstone's gate: HIS corruption (the odometer flirting builds), not hers.
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_sal", trait_key = "corruption", operator = "gte", value = 3 },
+] }
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 10
+
+# beat_0022 — repeatable explicit: opens the sex-loop menu once you've spent the
+# first night with him (sal_first_done). Routes (nodeId) into the triggerless loop,
+# resetting all loop state for a fresh run.
+# Sal re-spine / TLS ladder alignment: show_when_locked so the repeatable sex menu is a
+# VISIBLE greyed destination from day 1 (RTS locked-visible ladder, D72-R8), not a rung
+# that appears from nowhere after the first night.
+[[canvases.nodes.exit_block.choices]]
+text                  = "Take him to bed 🔥"
+show_when_locked      = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "sal_first_done", operator = "is_true" },
+] }
+targetType = "node"
+nodeId     = "sal_sex_loop.intro"
+time_progression_minutes = 0
+effects = [
+  { targetType = "player", trait = "sex_stage",            op = "set", value = 0 },
+  { targetType = "player", trait = "loop_npc_pleasure",    op = "set", value = 0 },
+  { targetType = "player", trait = "loop_player_pleasure", op = "set", value = 0 },
+  { targetType = "player", trait = "sex_finisher_type",    op = "set", value = 0 },
+  { targetType = "player", trait = "anal_active",          op = "set", value = 0 },
+  { targetType = "player", trait = "sex_reactions",        op = "set", value = 0 },
+  { targetType = "player", trait = "sex_entry_origin",     op = "set", value = 0 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Call it a night 🛏️"
+targetType = "location"
+locationId = "loc_apartment"
+time_progression_minutes = 5
+
+# ── beat_0010 / Sal — CAPSTONE #2: the after-close kiss (Lane 4, Type A) ───────
+# Auto-fires after close once corruption 20 is earned. Tier-3 EARNED prose
+# (once-only). His move — older, steady, terse-tender (crude only later, Tier 4+).
+# Sets sal_after_hours_done + sal_stage=3 ("After hours"). is_repeatable=false.
+[[canvases]]
+id          = "canvas_sal_after_hours"
+name        = "Sal — the night he stays"
+description = "beat_0010. Lane 4 capstone #2. Fires at loc_bar 22:00–02:00 when npc_sal.corruption>=3 (his odometer, built by Flirt) + Sal present. The first kiss after lockup. Sets sal_after_hours_done + sal_stage=3. Tier-3 voice."
+
+[canvases.trigger]
+location      = "loc_bar"
+requires_npc  = "npc_sal"
+npc           = "npc_sal"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag",  subject = "player", flag_key = "sal_opened_up",       operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "sal_after_hours_done", operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_sal", trait_key = "corruption", operator = "gte", value = 3 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "02:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "After the lock turns"
+blocks = [
+  { type = "image", props = { file = "scenes/sal_kiss.jpg" } },
+  { type = "paragraph", content = "He's wiping down the well when he stops, both hands flat on the bar, and looks at you across it the way he's been not-looking at you for weeks. The register light buzzes. Somewhere a cooler kicks on. He doesn't say the thing — Sal never says the thing — he just comes around to your side of the bar, slow enough that you could step back if you wanted to, and you don't." },
+  { type = "paragraph", content = "His hand finds the side of your jaw, rough from thirty years of work, careful like he's handling something he can't afford to drop. He smells like beer and bar soap and the cold off the cellar stairs. When he kisses you it's nothing like you braced for — not hungry, not taking, just sure, the way he does everything behind this bar he's run longer than you've been alive." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Every man in my life has wanted something from me since I got off that bus. He's the first one who waited until I wanted it too." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sal" }, content = "...Lock's already thrown. Stay a while. I'll kill the lights." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay 🔥"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 45
+flagEffects = [
+  { targetType = "player", flag = "sal_after_hours_done", op = "set" },
+]
+# The kiss is him crossing the line — a charged act, so it deepens his odometer (+1, bridges his-corr
+# 3 → first-night 5). Once-only capstone, so inherently capped.
+effects = [
+  { targetType = "player", trait = "sal_stage", op = "set", value = 3 },
+  { targetType = "npc", npcId = "npc_sal", trait = "corruption", op = "add", value = 1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Kiss him, send him home 💋"
+targetType = "location"
+locationId = "loc_apartment"
+time_progression_minutes = 20
+flagEffects = [
+  { targetType = "player", flag = "sal_after_hours_done", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "sal_stage", op = "set", value = 3 },
+  { targetType = "npc", npcId = "npc_sal", trait = "corruption", op = "add", value = 1 },
+]
+
+# ── beat_0015 / WORK A SHIFT — solo activity (Lane 3 host; the earning loop) ───
+# No npc / no trigger_mode → surfaces as an action button at the bar (Maya-solo).
+# This is the job: it earns money (feeds the $200 debt goal) and costs energy.
+[[canvases]]
+id          = "canvas_work_shift"
+name        = "Work a shift"
+description = "beat_0015. Maya-solo earning loop. Pour, run tabs, fill the till. Earns money, costs energy. Lane 3 host: a regular may walk in (canvas_work_walkin)."
+
+[canvases.trigger]
+location      = "loc_bar"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "first_night_done", operator = "is_true" },
+] }
+
+# Pattern B mutex (Doc 69 §1): all three share exclusive_group "shift_event" → ONE
+# partitioned dice roll, fall-to-solo on a claimed-but-ineligible slot. The two Collector
+# targets are gated by requires_npc (Mon 18:00-20:00 presence) + bar_seized, so they're only
+# eligible on a collection-night shift; otherwise the slot falls to solo and only the regular
+# walk-in can land. (beat_0016 added the two Collector targets.)
+[[canvases.trigger.substitutions]]
+target_canvas_id = "canvas_work_walkin"
+chance           = 0.25
+exclusive_group  = "shift_event"
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "canvas_collector_floorwalk"
+chance           = 0.25
+exclusive_group  = "shift_event"
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "canvas_collector_floorwalk_seized"
+chance           = 0.25
+exclusive_group  = "shift_event"
+
+[[canvases.nodes]]
+id   = "base"
+name = "On the floor"
+blocks = [
+  { type = "image", props = { file = "scenes/work_shift.jpg" } },
+  { type = "paragraph", content = "You work it the way you know how — crack the lines, run the tabs, keep the register honest. The till's heavier by last call. Not enough, with Boyd's Monday coming." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# Energy GATE = per-choice `costs` (the resource tier under each choice). costs checks
+# affordability, deducts on click, and greys the rung with "Requires N Energy (you have M)"
+# when she's too tired — plain locked-choice text, no button. Energy lives ONLY in costs
+# (not effects → no double-charge; not conditions → the cost message stays distinct from
+# any main-lock message). See toml-gotchas.md "Resource gating".
+[[canvases.nodes.exit_block.choices]]
+text       = "Work a shift 🍺"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 120
+costs = [{ trait = "energy", value = 15 }]
+effects = [
+  { targetType = "player", trait = "money", op = "add", value = 50 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Pull a double 💪"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 180
+costs = [{ trait = "energy", value = 28 }]
+effects = [
+  { targetType = "player", trait = "money", op = "add", value = 85 },
+]
+
+# beat_0007 — dress-for-tips: TIERED gate. Main lock = revealing outfit (worn_corruption
+# gte 15, from Reece's) → greys with "needs revealing outfit". Under it, the energy `costs`
+# tier → greys with the energy message once she's dressed but tired. Serve-in-less-for-
+# takings: more money + exhibitionism + corruption. worn_corruption = clothing predicate (MAX of worn).
+[[canvases.nodes.exit_block.choices]]
+text                  = "Work the floor in less 👀"
+show_when_locked      = true
+locked_text           = "Work the floor in less 👀 (needs revealing outfit)"
+conditions = { version = "1.0", items = [{ type = "worn_corruption", operator = "gte", value = 15 }] }
+costs = [{ trait = "energy", value = 15 }]
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 120
+effects = [
+  { targetType = "player", trait = "money",         op = "add", value = 90 },
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 3  },
+  { targetType = "player", trait = "corruption",    op = "add", value = 1  },
+]
+
+# ── beat_0015 / Lane 3 walk-in — substitution target on the work shift ────────
+[[canvases]]
+id                   = "canvas_work_walkin"
+name                 = "A regular gets bold"
+description          = "beat_0015. Lane 3 walk-in: mid-shift a regular makes a pass. Substitution target of canvas_work_shift."
+
+[canvases.trigger]
+location             = "loc_bar"
+is_repeatable        = true
+priority             = 4
+is_active            = true
+substitution_only    = true
+max_triggers_per_day = 1
+
+[[canvases.nodes]]
+id   = "base"
+name = "Last call, one more"
+blocks = [
+  { type = "image", props = { file = "scenes/work_walkin.jpg" } },
+  { type = "paragraph", content = "A regular two stools down has had exactly one too many. He waves you over for a last one and lets his eyes do the asking, a folded bill already on the bar between two fingers." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the tip, brush him off 💵"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 10
+effects = [
+  { targetType = "player", trait = "money", op = "add", value = 10 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Work him for more 😏"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 10
+effects = [
+  { targetType = "player", trait = "money",         op = "add", value = 30 },
+  { targetType = "player", trait = "corruption",    op = "add", value = 2  },
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 2  },
+]
+
+# ── beat_0015 / Lane 2 ambient — bar-entry texture (dice on entry) ────────────
+[[canvases]]
+id          = "canvas_bar_ambient"
+name        = "The floor at night"
+description = "beat_0015 (tiered beat_0021; Sal re-spine). Lane 2 floor ambient, LOW tier (exhibitionism lt 10). Tiered on EXHIBITIONISM — the bar-floor public axis (how bold she works the room), the premise-true Lane 2 driver (RTS gates public/display content on getExb). Mutually exclusive with canvas_bar_ambient_hot."
+
+[canvases.trigger]
+location      = "loc_bar"
+trigger_mode  = "random"
+chance        = 0.25
+is_repeatable = true
+requires_npc  = "npc_sal"
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 10 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "02:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Coming onto the floor"
+blocks = [
+  { type = "image", props = { file = "scenes/bar_ambient.jpg" } },
+  { type = "paragraph", content = "The jukebox is on. Sal's got a regular laughing at the far end. For a second it's just a bar, not a debt." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get to it ↩️"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 2
+
+# ── beat_0021 / Sal — Lane 2 ambient HOT tier (corruption gte 25) ─────────────
+# Replaces canvas_bar_ambient once she's loosened up. Same window/presence; charged
+# but bounded (Lane 2, RTS-flat — not a capstone).
+[[canvases]]
+id          = "canvas_bar_ambient_hot"
+name        = "The floor at night, late"
+description = "beat_0021 (Sal re-spine). Lane 2 floor ambient, HOT tier (exhibitionism gte 10) — she's been working the room bold enough that Sal can't keep his hands to himself in the well. Tiered on EXHIBITIONISM (bar-floor public axis). Mutually exclusive with canvas_bar_ambient."
+
+[canvases.trigger]
+location      = "loc_bar"
+trigger_mode  = "random"
+chance        = 0.25
+is_repeatable = true
+requires_npc  = "npc_sal"
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 10 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "02:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Behind the bar, close"
+blocks = [
+  { type = "image", props = { file = "scenes/bar_ambient_hot.jpg" } },
+  { type = "paragraph", content = "You squeeze past Sal in the well and his hand finds your hip to steady you — leaves it there a beat longer than steadying needs. He doesn't say anything. He doesn't have to anymore." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let it linger 😏"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 2
+
+# ── beat_0009 / location_reveal — the summons (setter for summoned_by_shark) ───
+# FLAG-CHAIN NOTE (UPDATED turn 11): now gated on bar_seized (is_true) — the rent
+# ENGINE's eviction_flag, set when the weekly payment is missed past grace. This is
+# the CORRECT "fell behind" escalation (the Collector brief's pay-clean-vs-leverage
+# branch): a player who always pays the $200 never falls behind, never sets bar_seized,
+# and never gets summoned — Boyd stays at arm's length. Previously this was gated on
+# debt_explained (set night 1) because the flag-chain validator rejected bar_seized as
+# "NEVER SET" (engine-set flags weren't in the unlock map). That validator gap was
+# fixed this session (v1.py/v2.py _build_flag_unlock_map now registers the rent
+# eviction_flag + daily_tick set-flags). Exit sets summoned_by_shark → unlocks loc_shark.
+[[canvases]]
+id          = "canvas_shark_summons"
+name        = "The Last Call — a message from Boyd"
+description = "beat_0009. Fires on a Monday once the bar's been seized (missed payment past grace) and the Collector is present. He delivers Boyd's summons; sets summoned_by_shark, unlocking loc_shark."
+
+[canvases.trigger]
+location      = "loc_bar"
+requires_npc  = "npc_collector"
+npc           = "npc_collector"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "bar_seized",        operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "summoned_by_shark", operator = "is_false" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0]
+start_time = "18:00"
+end_time   = "20:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "He wants to see you"
+blocks = [
+  { type = "image", props = { file = "scenes/shark_summons.jpg" } },
+  { type = "paragraph", content = "You're past the point where two hundred dollars fixes this. The Collector doesn't ask for it tonight — he just sets a card on the bar, an address three blocks off Main, no name, and taps it once with one thick finger." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_collector" }, content = "Money stopped being the conversation when you fell behind. Mr. Boyd wants to put a face to what he's owed — yours. Tomorrow, that address. He doesn't ask twice, and he doesn't ask nice the second time." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Now I know where he lives. I don't think that's good news for me." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the card 📇"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 10
+flagEffects = [
+  { targetType = "player", flag = "summoned_by_shark", op = "set" },
+]
+
+# ── beat_0009 / location_reveal — content at the revealed location (no dead reveal) ─
+[[canvases]]
+id          = "canvas_shark_place"
+name        = "Boyd's Place"
+description = "beat_0009. First arrival at loc_shark. The meeting with Boyd; lays out the real terms. Sets shark_met. Gated on summoned_by_shark (the door's unlock flag) too, so the NEW badge stays suppressed until the room is actually reachable (turn 22 fix)."
+
+[canvases.trigger]
+location      = "loc_shark"
+is_repeatable = false
+priority      = 8
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "summoned_by_shark", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "shark_met",         operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The man who owns the block"
+blocks = [
+  { type = "image", props = { file = "scenes/shark_place.jpg" } },
+  { type = "paragraph", content = "Boyd is smaller than the room he sits in — a neat man behind a big desk, reading glasses pushed up, a cigar he doesn't light. He looks at you the way an accountant looks at a column that won't balance. The man at the door stays at the door." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_boyd" }, content = "Sully was a friend, so I'll be plain. I don't want the bar. A bar's a headache. I want what I'm owed, on time, and I want you to understand that I have ways of being paid that don't involve money. Are we understanding each other?" },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He's not threatening me. That's the part that scares me. He's just telling me the weather." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "He'll get his money 💰"
+targetType = "location"
+locationId = "loc_street"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "shark_met", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask about \"other ways\" 😏"
+targetType = "location"
+locationId = "loc_street"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "shark_met", op = "set" },
+]
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# beat_0005 — Dee on-ramp (npc_intro). Peer/dating leverage (R7 brief).
+#   Dee has TWO reachable schedule rows → TWO Lane 1 hubs (D72-R6): the depot
+#   (Mon–Fri 10:00–17:00, his territory) + a light cellar hub (Tue/Fri 14:00–15:00,
+#   his delivery drop). The offscreen loc_dee_place row is exempt (no hub).
+#   The depot is a TRAVELED-TO scheduled location (not a home base like Sal's bar),
+#   so the first-contact uses the proven canvas_shark_summons shape (requires_npc +
+#   npc + schedule, is_repeatable=false, priority 10) — it fires ONLY when Dee is
+#   actually at the depot (reachability triad), not whenever the player wanders in
+#   off-hours. Reachable ONLY because the Day System sleep router delivers the
+#   player to daytime (the Dee-bug fix, doctrine/04 §10).
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ── beat_0005 / Dee — first contact (auto-fire one-shot, depot, Dee present) ────
+[[canvases]]
+id          = "canvas_dee_ropes_first"
+name        = "The Depot — Dee"
+description = "beat_0005. First meeting with Dee at the depot. Fires only when Dee is present (requires_npc + schedule). Sets dee_opened_up; leaves dee_stage at 0 (he's 'on the books' — the leverage starts at beat_0011)."
+
+[canvases.trigger]
+location      = "loc_wholesaler"
+requires_npc  = "npc_dee"
+npc           = "npc_dee"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "first_night_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "dee_opened_up",    operator = "is_false" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "10:00"
+end_time   = "17:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The new account"
+blocks = [
+  { type = "image", props = { file = "scenes/dee_depot.jpg" } },
+  { type = "paragraph", content = "Dee finds you before you find him — clipboard already out, reading the order Sully never finished paying for. He doesn't shake your hand. He taps the open invoice like it's a person you both know." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_dee" }, content = "New owner! Sully ran a tab — most of my good customers do. You want the same deal he had, you keep the same account current. Simple. For now." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Every bottle in my bar comes through this man. He knows it, and he wants me to know he knows it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Open an account 📋"
+targetType = "location"
+locationId = "loc_wholesaler"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "dee_opened_up",      op = "set" },
+  { targetType = "player", flag = "talked_to_dee_today", op = "set" },
+]
+
+# ── beat_0005 / Dee — Lane 1 HUB at the depot (order/terms + locked rung) ──────
+[[canvases]]
+id          = "canvas_dee_hub"
+name        = "Dee — at the depot"
+description = "beat_0005. Lane 1 hub at loc_wholesaler. Talk/order (relational, daily-gated) + one locked-visible leverage rung telegraphing the credit-for-favors arc (gated corruption 25, the brief's T2). One constant opener (D56-R1). Escalation rungs proper come in beat_0011."
+
+[canvases.trigger]
+location      = "loc_wholesaler"
+requires_npc  = "npc_dee"
+npc           = "npc_dee"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "dee_opened_up", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "10:00"
+end_time   = "17:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Dee with the clipboard"
+blocks = [
+  { type = "image", props = { file = "scenes/dee_depot.jpg" } },
+  { type = "paragraph", content = "Dee's at the loading dock, clipboard against his thigh, that smile already doing arithmetic. He nods you over without looking up from the manifest." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# Lane 1 — relational (build the account; daily-gated)
+[[canvases.nodes.exit_block.choices]]
+text       = "Go over the order 📋"
+targetType = "location"
+locationId = "loc_wholesaler"
+time_progression_minutes = 15
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_dee_today", operator = "is_false" },
+] }
+flagEffects = [
+  { targetType = "player", flag = "talked_to_dee_today", op = "set" },
+]
+
+# Lane 1 — leverage rung (locked-visible ladder; telegraphs the credit-for-favors arc)
+[[canvases.nodes.exit_block.choices]]
+text                  = "Offer flexible terms 😏"
+show_when_locked      = true
+# Telegraph mirrors the terms capstone's leverage gate (money<200 + corruption) so the greyed preview is
+# honest — the float only appears when she's squeezed, not flush.
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "money",      operator = "lt",  value = 200 },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 10 },
+] }
+targetType = "location"
+locationId = "loc_wholesaler"
+time_progression_minutes = 15
+effects = [
+  { targetType = "player", trait = "corruption", op = "add", value = 1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Load up, head back ↩️"
+targetType = "location"
+locationId = "loc_wholesaler"
+time_progression_minutes = 5
+
+# ── beat_0005 / Dee — LIGHT Lane 1 hub at the cellar drop (presence floor) ─────
+# Dee's second reachable schedule row (Tue/Fri 14:00–15:00, dropping a delivery).
+# Light by design (base + talk + leave, D72-R6 "extra hubs are light"). The cellar
+# is semi-private — the higher-exposure delivery escalation attaches HERE in beat_0011.
+[[canvases]]
+id          = "canvas_dee_cellar_hub"
+name        = "Dee — the cellar drop"
+description = "beat_0005. Light Lane 1 hub at loc_cellar for Dee's Tue/Fri delivery window (presence floor, D72-R6). Base + talk + leave only; beat_0011 adds the leverage rung here (semi-private exposure ceiling)."
+
+[canvases.trigger]
+location      = "loc_cellar"
+requires_npc  = "npc_dee"
+npc           = "npc_dee"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "dee_opened_up", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [1, 4]
+start_time = "14:00"
+end_time   = "15:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Delivery in the cellar"
+blocks = [
+  { type = "image", props = { file = "scenes/dee_cellar.jpg" } },
+  { type = "paragraph", content = "Dee's down in the cold with the hatch open, checking cases off as his guy stacks them. Closer quarters than the depot, and he knows it — he always finds a reason to make the drop himself." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sign for it 📋"
+targetType = "location"
+locationId = "loc_cellar"
+time_progression_minutes = 15
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_dee_today", operator = "is_false" },
+] }
+flagEffects = [
+  { targetType = "player", flag = "talked_to_dee_today", op = "set" },
+]
+
+# beat_0011 — locked-visible telegraph of the dock favor (the canvas_dee_dock capstone
+# auto-fires here at corruption 25 + dee_terms). Signals the semi-private escalation lives here.
+[[canvases.nodes.exit_block.choices]]
+text                  = "Work it off down here 😏"
+show_when_locked      = true
+# Telegraph mirrors the dock capstone's leverage gate (money<200 + corruption 25).
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "money",      operator = "lt",  value = 200 },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 },
+] }
+targetType = "location"
+locationId = "loc_cellar"
+time_progression_minutes = 10
+effects = [
+  { targetType = "player", trait = "corruption", op = "add", value = 1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Head upstairs ↩️"
+targetType = "location"
+locationId = "loc_cellar"
+time_progression_minutes = 5
+
+# ── beat_0005 / Dee — Lane 2 ambient at the depot (dice on entry) ──────────────
+[[canvases]]
+id          = "canvas_dee_ambient"
+name        = "The dock at midday"
+description = "beat_0005 (tiered beat_0021). Lane 2 ambient, LOW tier (corruption lt 25). Mutually exclusive with canvas_dee_ambient_hot."
+
+[canvases.trigger]
+location      = "loc_wholesaler"
+trigger_mode  = "random"
+chance        = 0.25
+is_repeatable = true
+requires_npc  = "npc_dee"
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 25 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "10:00"
+end_time   = "17:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Coming up on the depot"
+blocks = [
+  { type = "image", props = { file = "scenes/dee_dock.jpg" } },
+  { type = "paragraph", content = "Dee's leaning on a pallet jack, phone to his ear, laughing at something that isn't funny. He clocks you across the lot and holds up one finger — wait your turn — without breaking the call." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Wait for him ⏳"
+targetType = "location"
+locationId = "loc_wholesaler"
+time_progression_minutes = 2
+
+# ── beat_0021 / Dee — Lane 2 ambient HOT tier (corruption gte 25) ─────────────
+[[canvases]]
+id          = "canvas_dee_ambient_hot"
+name        = "The dock, his terms"
+description = "beat_0021. Lane 2 ambient, HOT tier (corruption gte 25). Mutually exclusive with canvas_dee_ambient."
+
+[canvases.trigger]
+location      = "loc_wholesaler"
+trigger_mode  = "random"
+chance        = 0.25
+is_repeatable = true
+requires_npc  = "npc_dee"
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "10:00"
+end_time   = "17:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "He doesn't hurry"
+blocks = [
+  { type = "image", props = { file = "scenes/dee_dock_hot.jpg" } },
+  { type = "paragraph", content = "Dee sees you coming and stays on the phone on purpose, letting you stand there in the lot a beat too long — then he crooks one finger and tips his head toward the cold dark of the cellar bay, the question already answered. You both know you'll follow." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Follow him to the cellar 😏"
+targetType = "location"
+locationId = "loc_wholesaler"
+time_progression_minutes = 2
+
+# ══════════════════════════════════════════════════════════════════════════════
+# beat_0011 — Dee's terms (leverage escalation). Capstone #1 (flexible terms) +
+#   capstone #2 (the dock favor). Peer/dating leverage; Tier-3 EARNED on both
+#   (once-only). Dee voice: smooth, breezy, the cost arrives late in the sentence;
+#   affable coercion, never crude this early (T1/T2 < T4). Leverage always tied to
+#   the bar's supply line. Capstone #3 (standing terms) → beat_0019.
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ── beat_0011 / Dee — CAPSTONE #1: flexible terms (Lane 4 Type A) ─────────────
+[[canvases]]
+id          = "canvas_dee_terms"
+name        = "Dee — the terms turn"
+description = "beat_0011. Lane 4 capstone #1. Auto-fires at the depot when the bar's short (money<200) + corruption>=10 + Dee present. Leverage spine = money/debt + corruption (NOT relation): the float only lands when she's squeezed and a little loosened; a flush owner bypasses it. He floats the overdue tab and names that terms get 'flexible.' Sets dee_terms + dee_stage=1. Tier-3."
+
+[canvases.trigger]
+location      = "loc_wholesaler"
+requires_npc  = "npc_dee"
+npc           = "npc_dee"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag",  subject = "player", flag_key = "dee_opened_up", operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "dee_terms",     operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "money",      operator = "lt",  value = 200 },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 10  },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "10:00"
+end_time   = "17:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The number on the clipboard"
+blocks = [
+  { type = "image", props = { file = "scenes/dee_terms.jpg" } },
+  { type = "paragraph", content = "Dee's got your running tab on the clipboard and a look like he's already done the math and doesn't love the answer for you. He flips the sheet around so you can see the number, taps it once, and lets the silence sit a beat too long before he smiles it off his face." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_dee" }, content = "Here's the thing, and I say it as a friend. I can keep fronting you the good stuff and let the tab ride — Sully did, for years. But a tab this size, between friends? At some point it stops being about money. Starts being about goodwill. Right kind of customer, my terms get real flexible. You follow me." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "I follow him exactly. The terrible part is the arithmetic — I can't keep the taps on without him, and he clocked the day I walked in that I already knew it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the float 💰"
+targetType = "location"
+locationId = "loc_wholesaler"
+time_progression_minutes = 20
+flagEffects = [
+  { targetType = "player", flag = "dee_terms", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "dee_stage", op = "set", value = 1 },
+]
+
+# ── beat_0011 / Dee — CAPSTONE #2: the dock favor (Lane 4 Type B / Pattern F) ──
+# Retry variant: is_repeatable=true + self-gate dee_deal_done is_false → a refusal
+# keeps it live for the next Tue/Fri delivery. Accept sets the flag and stops it.
+[[canvases]]
+id          = "canvas_dee_dock"
+name        = "Dee — the cellar door, half down"
+description = "beat_0011. Lane 4 capstone #2 (Type B retry). Leverage spine = money/debt + corruption (NOT relation): fires at loc_cellar Tue/Fri 14-15 when dee_terms + money<200 (the well's dry, she can't cover the crate) + corruption>=25 + Dee present, while dee_deal_done is_false. A flush owner bypasses it. The first transactional favor. Accept → dee_deal_done + dee_stage=2; refuse → no flag, re-fires. Tier-3, explicit-not-crude."
+
+[canvases.trigger]
+location      = "loc_cellar"
+requires_npc  = "npc_dee"
+npc           = "npc_dee"
+is_repeatable = true
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag",  subject = "player", flag_key = "dee_terms",     operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "dee_deal_done", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "money",      operator = "lt",  value = 200 },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [1, 4]
+start_time = "14:00"
+end_time   = "15:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "After his guy goes up"
+blocks = [
+  { type = "image", props = { file = "scenes/dee_dock.jpg" } },
+  { type = "paragraph", content = "The delivery's signed, his guy's already gone up the alley with the dolly. Dee doesn't follow him. He pulls the hatch half-down, easy, like it's nothing, and the cold cellar gets smaller around the two of you. He sets the clipboard on a keg and finally says what 'flexible' costs — here, with the door down, where it's just arithmetic and no witnesses." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_dee" }, content = "Relax, I'm not a monster, I'm a businessman. That crate that just came down — the one your well can't open tonight without? Call it square. No charge, no tab. For ten minutes and a little goodwill. Same as we talked about. It's your call. It's always your call." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "It isn't, though. Not really. The well's dry upstairs, Monday's coming, and he picked this exact crate to make the point land soft." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Square the crate 😏"
+targetType = "location"
+locationId = "loc_cellar"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "dee_deal_done", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "dee_stage",  op = "set", value = 2 },
+  { targetType = "player", trait = "corruption", op = "add", value = 3 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Refuse — send it back ❌"
+targetType = "location"
+locationId = "loc_cellar"
+time_progression_minutes = 5
+
+# ══════════════════════════════════════════════════════════════════════════════
+# beat_0006 — Marcus on-ramp (npc_intro). Peer/dating, sugar/leverage (R7 brief).
+#   ONE reachable row (loc_bar 20:00–23:00) → ONE Lane 1 hub (the offscreen
+#   loc_marcus_place row is exempt). The bar is the player's home base, but Marcus
+#   only holds the end of it 20:00–23:00 — a SUBSET of bar hours — so his
+#   first-contact uses the requires_npc + schedule shape (fires only when he's
+#   actually there), not the open bar-entry auto-fire. Voice: smooth, complete
+#   sentences, courtesy with a floor of steel; never crude this early (R7 §2).
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ── beat_0006 / Marcus — first contact (auto-fire, bar, Marcus present 20–23) ───
+[[canvases]]
+id          = "canvas_marcus_ropes_first"
+name        = "The Last Call — Marcus"
+description = "beat_0006. First real exchange with Marcus, the moneyed regular. Fires only when he's at the end of the bar (requires_npc + schedule 20–23). Sets marcus_opened_up; leaves marcus_stage at 0 ('a regular' — he singles HER out at the beat_0008 T1 capstone)."
+
+[canvases.trigger]
+location      = "loc_bar"
+requires_npc  = "npc_marcus"
+npc           = "npc_marcus"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "first_night_done",  operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "marcus_opened_up",  operator = "is_false" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "20:00"
+end_time   = "23:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The man at the end of the bar"
+blocks = [
+  { type = "image", props = { file = "scenes/marcus_bar.jpg" } },
+  { type = "paragraph", content = "He's been at the far end for an hour, top-shelf neat, watching the room the way some men read a paper. When you finally work down to him he's already decided he likes being waited on by you." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_marcus" }, content = "Same as always. And whatever you're having — put it on my tab. A bar this size, the owner should drink with the regulars. I'm Marcus. I'm here most nights." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He tips like the money's nothing. Men who do that always want you to notice the money. I noticed." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Pour him a drink 🥃"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 20
+flagEffects = [
+  { targetType = "player", flag = "marcus_opened_up",     op = "set" },
+  { targetType = "player", flag = "talked_to_marcus_today", op = "set" },
+]
+effects = [
+  { targetType = "npc", npcId = "npc_marcus", trait = "relation", op = "add", value = 10 },
+]
+
+# ── beat_0006 / Marcus — Lane 1 HUB at the bar (serve/talk + locked rung) ──────
+[[canvases]]
+id          = "canvas_marcus_hub"
+name        = "Marcus — end of the bar"
+description = "beat_0006. Lane 1 hub at loc_bar (20–23). Serve/talk (relational, daily-gated) + one locked-visible rung — the back-booth private drink — telegraphing the sugar arc (gated corruption 20, the brief's T2). One constant opener (D56-R1). Escalation + the money-for-Monday offer come in beat_0008."
+
+[canvases.trigger]
+location      = "loc_bar"
+requires_npc  = "npc_marcus"
+npc           = "npc_marcus"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "marcus_opened_up", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "20:00"
+end_time   = "23:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Marcus, top-shelf neat"
+blocks = [
+  { type = "image", props = { file = "scenes/marcus_bar.jpg" } },
+  { type = "paragraph", content = "Marcus is at his end, glass at the same careful angle, watching you work the room. When you come within range he lifts two fingers — not a summons, an invitation. He's never in a hurry." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# Lane 1 — relational (let him talk; daily-gated)
+[[canvases.nodes.exit_block.choices]]
+text       = "Give him a refill 🥃"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 15
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_marcus_today", operator = "is_false" },
+] }
+flagEffects = [
+  { targetType = "player", flag = "talked_to_marcus_today", op = "set" },
+]
+effects = [
+  { targetType = "npc", npcId = "npc_marcus", trait = "relation", op = "add", value = 3 },
+]
+
+# Lane 1 — private-drink rung (locked-visible; the T2/"Drinks after" milestone, marcus_drinks_done).
+# Re-spine: gated on HIS INTEREST (npc_marcus.relation), sequenced after #1 (marcus_noticed) and made
+# one-shot (marcus_drinks_done is_false) so it's a real ladder step, not a corruption-grind rung. The
+# flag it sets is now READ by the arrangement (the chain), so it's no longer a dead-end.
+[[canvases.nodes.exit_block.choices]]
+text                  = "Join him in the back booth 😏"
+show_when_locked      = true
+conditions = { version = "1.0", items = [
+  { type = "flag",  subject = "player", flag_key = "marcus_noticed",      operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "marcus_drinks_done",  operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_marcus", trait_key = "relation", operator = "gte", value = 20 },
+] }
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 20
+flagEffects = [
+  { targetType = "player", flag = "marcus_drinks_done", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "corruption", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_marcus", trait = "relation", op = "add", value = 2 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave him to it ↩️"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 5
+
+# ── beat_0006 / Marcus — Lane 2 ambient (he's watching from his end) ───────────
+[[canvases]]
+id          = "canvas_marcus_ambient"
+name        = "Watched from the end"
+description = "beat_0006 (tiered beat_0021). Lane 2 ambient, LOW tier (corruption lt 20). Mutually exclusive with canvas_marcus_ambient_hot."
+
+[canvases.trigger]
+location      = "loc_bar"
+trigger_mode  = "random"
+chance        = 0.25
+is_repeatable = true
+requires_npc  = "npc_marcus"
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "20:00"
+end_time   = "23:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "His end of the bar"
+blocks = [
+  { type = "image", props = { file = "scenes/marcus_watch.jpg" } },
+  { type = "paragraph", content = "Marcus is in his usual spot, glass untouched, watching you cross the floor like he's pricing the place — or you. When your eyes meet he doesn't look away. He just tips the glass, a quarter-inch. Later." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep moving ↩️"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 2
+
+# ── beat_0021 / Marcus — Lane 2 ambient HOT tier (corruption gte 20) ──────────
+[[canvases]]
+id          = "canvas_marcus_ambient_hot"
+name        = "His end of the bar, later"
+description = "beat_0021. Lane 2 ambient, HOT tier (corruption gte 20). Mutually exclusive with canvas_marcus_ambient."
+
+[canvases.trigger]
+location      = "loc_bar"
+trigger_mode  = "random"
+chance        = 0.25
+is_repeatable = true
+requires_npc  = "npc_marcus"
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "20:00"
+end_time   = "23:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The back booth, open"
+blocks = [
+  { type = "image", props = { file = "scenes/marcus_watch_hot.jpg" } },
+  { type = "paragraph", content = "Marcus catches your eye across the room and tips his head toward the empty back booth — an invitation that isn't really a question anymore. His gaze stays on you the rest of the night, patient and proprietary, marking the time until you come to him." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him watch 👀"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 2
+
+# ══════════════════════════════════════════════════════════════════════════════
+# beat_0008 — Marcus heats up (sugar/dating escalation). Capstone #1 (singled out)
+#   + capstone #2 (the money-for-Monday arrangement). Peer/dating; Tier-3 EARNED on
+#   both. Marcus voice: smooth complete sentences, offers not demands, courtesy with
+#   a floor of steel, NEVER crude this early (T1/T3 < T4), never cartoon-sleaze, and
+#   always a choice she makes. His money is tied to the debt spine. Capstone #3
+#   (kept) → beat_0020.
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ── beat_0008 / Marcus — CAPSTONE #1: singled out (Lane 4 Type A) ─────────────
+[[canvases]]
+id          = "canvas_marcus_singled_out"
+name        = "Marcus — the tip with a string on it"
+description = "beat_0008. Lane 4 capstone #1. Auto-fires at the bar (20-23) when npc_marcus.relation>=15 + Marcus present. The oversized tip with a condition — he makes her his bartender. Sets marcus_noticed + marcus_stage=1. Tier-3."
+
+[canvases.trigger]
+location      = "loc_bar"
+requires_npc  = "npc_marcus"
+npc           = "npc_marcus"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag",  subject = "player", flag_key = "marcus_opened_up", operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "marcus_noticed",   operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_marcus", trait_key = "relation", operator = "gte", value = 15 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "20:00"
+end_time   = "23:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "A folded bill"
+blocks = [
+  { type = "image", props = { file = "scenes/marcus_tip.jpg" } },
+  { type = "paragraph", content = "He settles up the way he always does — except this time the bill he folds under the empty glass is the kind of money that pays a vendor, not a bar tab. He doesn't slide it over right away. He waits until you've clocked the number, until he's sure you've done the arithmetic of what a week of those would mean against Boyd's Monday." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_marcus" }, content = "Consider it a retainer. I drink where I'm taken care of, and I've decided that's here — with you behind the bar, not whoever else Sully used to leave on. Keep my end of the bar mine, @player. We'll both be happier." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "A retainer. Like I'm a thing he's putting on the books. The worst part is doing the math and realizing how much I want him to keep doing it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the retainer 💵"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 15
+flagEffects = [
+  { targetType = "player", flag = "marcus_noticed", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "marcus_stage", op = "set", value = 1 },
+  { targetType = "player", trait = "money",  op = "add", value = 40 },
+  { targetType = "npc", npcId = "npc_marcus", trait = "relation", op = "add", value = 8 },
+]
+
+# ── beat_0008 / Marcus — CAPSTONE #2: the arrangement (Lane 4 Type B / Pattern F) ─
+# Retry variant: is_repeatable=true + self-gate marcus_date_done is_false → a refusal
+# lets him make the offer again (patiently — no penalty). Accept ties his money to the debt.
+[[canvases]]
+id          = "canvas_marcus_arrangement"
+name        = "Marcus — making Monday go away"
+description = "beat_0008. Lane 4 capstone #2 (Type B retry). Fires at the bar (20-23) when marcus_drinks_done + npc_marcus.relation>=25 (his interest) AND player corruption>=25 (her willingness) + Marcus present, while marcus_date_done is_false. The money-for-Monday offer. Accept -> marcus_date_done + money+200 (covers a Monday — debt tie-in); refuse -> no flag, re-offers. Tier-3, not crude."
+
+[canvases.trigger]
+location      = "loc_bar"
+requires_npc  = "npc_marcus"
+npc           = "npc_marcus"
+is_repeatable = true
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag",  subject = "player", flag_key = "marcus_drinks_done", operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "marcus_date_done",   operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_marcus", trait_key = "relation", operator = "gte", value = 25 },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "20:00"
+end_time   = "23:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The back booth, after the rush"
+blocks = [
+  { type = "image", props = { file = "scenes/marcus_arrangement.jpg" } },
+  { type = "paragraph", content = "He waits until the floor thins, then tips his head at the back booth — not a summons, an invitation, the way it's always been with him. When you slide in across from him he sets his phone face-down and looks at you like a man who's already decided and is only being polite about the timing." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_marcus" }, content = "I'll be plain, because you've earned plain. I can make Monday stop being a problem. Not once — standing. Boyd gets paid, the lights stay on, you stop doing that thing where you count the till twice. You know what I'd ask in return. I won't pretend it's nothing. But it's a better deal than the one you've got." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He's not wrong, and that's the whole problem. He's never once been wrong. I could say no. I keep noticing how much I'm not saying it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the deal 💰"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 40
+flagEffects = [
+  { targetType = "player", flag = "marcus_date_done", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "marcus_stage", op = "set", value = 3 },
+  { targetType = "player", trait = "money",      op = "add", value = 200 },
+  { targetType = "player", trait = "corruption", op = "add", value = 3 },
+  { targetType = "npc", npcId = "npc_marcus", trait = "relation", op = "add", value = 6 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Not yet ❌"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 10
+
+# ══════════════════════════════════════════════════════════════════════════════
+# beat_0004 — Rosa on-ramp (npc_intro). Service / non-escalation ally (R7 brief).
+#   ONE reachable row (loc_kitchen 17:00–23:00) → ONE Lane 1 hub. EMPTY L2/L3 is
+#   HONEST (doctrine/03 §8.4) — Rosa is not a seduction; filling her empty cells
+#   with romance/atmosphere is the Marge failure mode (R7 §7). Her whole arc is
+#   tiny (L1:1 + capstone:1), and the plan has no separate Rosa escalation beat,
+#   so the COMPLETE arc lands here: first-contact + hub + the one trust capstone.
+#   NO sexual register, NO locked rungs. Voice: warm-brusque, imperative,
+#   affection disguised as orders (R7 §2). She is the game's conscience/foreshadow.
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ── beat_0004 / Rosa — first contact (auto-fire, kitchen, Rosa present 17–23) ───
+[[canvases]]
+id          = "canvas_rosa_ropes_first"
+name        = "The Kitchen — Rosa"
+description = "beat_0004. First meeting with Rosa in her kitchen. Fires only when she's on (requires_npc + schedule 17–23). Sets rosa_opened_up. Service register — no stat advance beyond relation."
+
+[canvases.trigger]
+location      = "loc_kitchen"
+requires_npc  = "npc_rosa"
+npc           = "npc_rosa"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "first_night_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "rosa_opened_up",   operator = "is_false" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "23:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Her kitchen, her rules"
+blocks = [
+  { type = "image", props = { file = "scenes/rosa_kitchen.jpg" } },
+  { type = "paragraph", content = "Rosa doesn't stop working when you come in — she points you to a stool with the wooden spoon and keeps her eyes on the flat-top. A plate of something appears in front of you before you've said a word." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_rosa" }, content = "You're @player. Sully's girl. Sit. Eat. The kitchen's mine — it was mine when he was alive and it's mine now, and we'll get along fine as long as you remember that. Eat something before you fall over. Then we'll talk." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "First person all day who's handed me something instead of taking. I'm not going to cry over a plate of eggs. I'm not." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Eat 🍽️"
+targetType = "location"
+locationId = "loc_kitchen"
+time_progression_minutes = 20
+flagEffects = [
+  { targetType = "player", flag = "rosa_opened_up",      op = "set" },
+  { targetType = "player", flag = "talked_to_rosa_today", op = "set" },
+]
+effects = [
+  { targetType = "npc", npcId = "npc_rosa", trait = "relation", op = "add", value = 10 },
+]
+
+# ── beat_0004 / Rosa — Lane 1 HUB in the kitchen (talk/advice; no rungs) ───────
+[[canvases]]
+id          = "canvas_rosa_hub"
+name        = "Rosa — in the kitchen"
+description = "beat_0004. Lane 1 hub at loc_kitchen (17–23). Talk/advice only (daily-gated, builds relation toward the rosa_trusts capstone). NO locked sexual rungs — service NPC, empty escalation is honest. One constant opener (D56-R1)."
+
+[canvases.trigger]
+location      = "loc_kitchen"
+requires_npc  = "npc_rosa"
+npc           = "npc_rosa"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "rosa_opened_up", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "23:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Rosa at the flat-top"
+blocks = [
+  { type = "image", props = { file = "scenes/rosa_kitchen.jpg" } },
+  { type = "paragraph", content = "Rosa's wreathed in steam, plating tickets two at a time, the radio on a station that's been off the air for years. She jerks her chin at the stool. There's coffee on it she made before you got there." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# Lane 1 — relational (the only register; daily-gated; builds toward rosa_trusts)
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit and listen 💬"
+targetType = "location"
+locationId = "loc_kitchen"
+time_progression_minutes = 15
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_rosa_today", operator = "is_false" },
+] }
+flagEffects = [
+  { targetType = "player", flag = "talked_to_rosa_today", op = "set" },
+]
+effects = [
+  { targetType = "npc", npcId = "npc_rosa", trait = "relation", op = "add", value = 4 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Back to the floor ↩️"
+targetType = "location"
+locationId = "loc_kitchen"
+time_progression_minutes = 5
+
+# ── beat_0004 / Rosa — CAPSTONE (Lane 4, type A): she picks your side ──────────
+# The one place Rosa's prose spends (Tier-3 earned, Doc 57 / lanes voice register).
+# Auto-fires in the kitchen once trust is earned (relation 25). Sets rosa_trusts.
+# is_repeatable=false → fires once. Her warning names whoever's circling (cross-arc).
+[[canvases]]
+id          = "canvas_rosa_trust_talk"
+name        = "Rosa — the kitchen, after the rush"
+description = "beat_0004. Lane 4 capstone (type A). Fires when relation>=25 + Rosa present. The night she stops being the cook who came with the building and becomes the one person in Nina's corner. Sets rosa_trusts. Tier-3 voice."
+
+[canvases.trigger]
+location      = "loc_kitchen"
+requires_npc  = "npc_rosa"
+npc           = "npc_rosa"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag",  subject = "player", flag_key = "rosa_opened_up", operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "rosa_trusts",    operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_rosa", trait_key = "relation", operator = "gte", value = 25 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "23:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "After the rush"
+blocks = [
+  { type = "image", props = { file = "scenes/rosa_trust.jpg" } },
+  { type = "paragraph", content = "The last ticket's down. Rosa kills the flat-top and the kitchen goes quiet except for the cooler's hum and the muffled jukebox bleeding through the wall. She wipes her hands on the apron, slow, and for once she's looking right at you instead of past you at the work." },
+  { type = "paragraph", content = "She pulls the second stool over with her foot and sits, knees almost touching yours. Up close she smells like garlic and the cheap rosewater she dabs on every morning, and her eyes are doing the thing Sully's used to do — taking a measure, deciding something." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_rosa" }, content = "I watched your uncle let this place eat him alive. Boyd's man on Mondays, that smooth one at the end of the bar, Dee and his 'flexible terms' — I've buried better judgment than yours, and I'm not burying you too. So hear me. Whatever they offer, it costs more than it says on the label. Always." },
+  { type = "paragraph", content = "She reaches over and squeezes your wrist once, hard, the way you'd grip something to keep it from going over the edge — then lets go and stands like none of it happened." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_rosa" }, content = "That's all. You're mine now, same as the kitchen. Eat before you leave. There's a plate warming." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Everyone in this town wants a piece of me or the bar. She's the only one who just wants me to make it out. I won't forget which is which." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell her you hear her 💬"
+targetType = "location"
+locationId = "loc_kitchen"
+time_progression_minutes = 20
+flagEffects = [
+  { targetType = "player", flag = "rosa_trusts", op = "set" },
+]
+effects = [
+  { targetType = "npc", npcId = "npc_rosa", trait = "relation", op = "add", value = 10 },
+]
+
+# ══════════════════════════════════════════════════════════════════════════════
+# beat_0003 — First payment day (economic). The Collector's collection-night PRESENCE.
+#   The TRANSACTION fiction is already live: [settings.rent.text] (0_systems_spec.toml)
+#   scripts the full weekly collection — scene/greeting/paid/warning/eviction-soft —
+#   so the engine narrates the $200 modal every Monday. This beat adds what the bare
+#   modal can't: the Collector as a FELT presence in the room around the transaction
+#   (his brief's Lane 2 budget). Two ambients, both at loc_bar Mon 18:00–20:00
+#   (requires_npc — he is NEVER present off collection-night, R7 §7), random.
+#   COLLISION-SAFE with the once-only canvas_shark_summons (priority 10 auto-fire):
+#   on the first eligible Monday the summons pre-empts a random ambient; once it has
+#   fired (summoned_by_shark set, is_repeatable=false), later Mondays are free for
+#   these. Gated only on debt_explained (canvas-set — NOT bar_seized, the engine-flag
+#   trap). Voice: flat, economical, menace without volume (R7 §2). No quest card
+#   (repeatable ambients carry none — Doc 49; the spine debt card already tracks pay-day).
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ── beat_0003 / Collector — Lane 2: he prices the room ────────────────────────
+[[canvases]]
+id          = "canvas_collector_pressure"
+name        = "Collection night"
+description = "beat_0003. Lane 2 ambient on collection night (Mon 18–20). The Collector in the room beyond the transaction — taking inventory of what he could take instead. Yields to the priority-10 summons on the first Monday; fills later ones."
+
+[canvases.trigger]
+location      = "loc_bar"
+trigger_mode  = "random"
+chance        = 0.3
+is_repeatable = true
+requires_npc  = "npc_collector"
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "debt_explained", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "bar_seized",     operator = "is_false" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0]
+start_time = "18:00"
+end_time   = "20:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "He's in no hurry"
+blocks = [
+  { type = "image", props = { file = "scenes/collector_bar.jpg" } },
+  { type = "paragraph", content = "The Collector's taken a stool he didn't ask permission for, jacket still on, and he's reading the room — the cracked vinyl, the dead storefronts out the window, the till. Pricing it. He hasn't mentioned money yet. He doesn't have to; the air does it for him." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep working ↩️"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 5
+
+# ── beat_0003 / Collector — Lane 2: a quiet word about Mr. Boyd ────────────────
+[[canvases]]
+id          = "canvas_collector_word"
+name        = "A friendly reminder"
+description = "beat_0003. Lane 2 ambient variant on collection night. The Collector leaves a low, deniable word about what patience costs — the threat is in the quiet (R7 §2). Random alternate to canvas_collector_pressure."
+
+[canvases.trigger]
+location      = "loc_bar"
+trigger_mode  = "random"
+chance        = 0.3
+is_repeatable = true
+requires_npc  = "npc_collector"
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "debt_explained", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "bar_seized",     operator = "is_false" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0]
+start_time = "18:00"
+end_time   = "20:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Just so you know"
+blocks = [
+  { type = "image", props = { file = "scenes/collector_bar.jpg" } },
+  { type = "paragraph", content = "On his way past he stops, close enough that you smell the cold off his coat, and says it like he's mentioning the weather — that Sully used to run a week behind sometimes, near the end, and look how that turned out. Then he's at the door, unhurried, leaving the sentence to do its work." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say nothing 🚪"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 5
+
+# ── beat_0021 / Collector — Lane 2 HOT tier (post-seizure coercion, bar_seized) ─
+# Replaces the pre-seizure menace (pressure/word, now gated bar_seized is_false) on
+# collection night once the bar's been seized. Distinct surface from the during-shift
+# floor-walk (beat_0016) — this is the Monday collection register turning coercive.
+[[canvases]]
+id          = "canvas_collector_coerce"
+name        = "Collection night, his terms now"
+description = "beat_0021. Lane 2 ambient, post-seizure tier (bar_seized is_true). The collection-night menace becomes coercive once the bar's his to lean on."
+
+[canvases.trigger]
+location      = "loc_bar"
+trigger_mode  = "random"
+chance        = 0.3
+is_repeatable = true
+requires_npc  = "npc_collector"
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "bar_seized", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0]
+start_time = "18:00"
+end_time   = "20:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "He doesn't ask for money"
+# Collector re-spine: the coercion tiers on PLAYER corruption (how far she's fallen) — a
+# debt-enforcer reads availability, not a dead awareness meter. bar_seized gates his presence;
+# corruption tiers the intensity (lean → explicit).
+blocks = [
+  { type = "image", props = { file = "scenes/collector_bar.jpg" } },
+  { type = "group", props = { conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 25 } ] }, blocks = [ { type = "paragraph", content = "He doesn't open with the number anymore — that stopped being the point the week the bar went to Boyd on paper. He takes the good stool, watches you pour, and lets the silence do the work: he's not collecting tonight, he's checking on something that's already his." } ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 } ] }, blocks = [ { type = "paragraph", content = "He doesn't bother with the number. He's watched you work the floor in less, watched what you'll do for a tab — and he's done pretending the debt gets squared in cash. He takes the good stool, lets his eyes finish the sentence, and waits for you to do the math: there are other ways to pay a man like Boyd, and you've already shown him you'll find them." } ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Don't react 😶"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 5
+
+# ══════════════════════════════════════════════════════════════════════════════
+# beat_0016 — Collector floor-walk (antagonist Lane 3 cross-appearance).
+#   The one NPC-in-activity content (doctrine-sound: antagonist = interruptor in
+#   others' scenes, LS Pam). Substitution targets on canvas_work_shift, both with
+#   the four required fields (substitution_only + max_triggers_per_day=1 +
+#   is_repeatable + location). requires_npc=npc_collector → only eligible on his
+#   Mon 18:00-20:00 window; off-window the slot falls to solo. Two variants split on
+#   bar_seized (valid gate since the turn-11 flag-chain fix). Voice: flat, menace
+#   without volume (Collector R7 §2).
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ── beat_0016 / Collector floor-walk — PRE-seizure (menace) ───────────────────
+[[canvases]]
+id          = "canvas_collector_floorwalk"
+name        = "He works the room"
+description = "beat_0016. Lane 3 sub on canvas_work_shift. Collection-night shift, debt still current (bar_seized is_false): the Collector drifts the floor mid-shift, pricing the place. Menace, no transaction."
+
+[canvases.trigger]
+location             = "loc_bar"
+requires_npc         = "npc_collector"
+substitution_only    = true
+max_triggers_per_day = 1
+is_repeatable        = true
+is_active            = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "bar_seized", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Mid-shift"
+blocks = [
+  { type = "image", props = { file = "scenes/collector_bar.jpg" } },
+  { type = "paragraph", content = "You're three drinks deep into the rush when you feel him. The Collector isn't drinking — he never drinks — he just moves through the room slow, running a finger along a booth back, checking the till's sightline, counting heads. Pricing what he'd get if the place were his. He catches your eye and doesn't nod." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep pouring 🍺"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 10
+
+# ── beat_0016 / Collector floor-walk — POST-seizure (coercion) ────────────────
+[[canvases]]
+id          = "canvas_collector_floorwalk_seized"
+name        = "Like he owns the place"
+description = "beat_0016. Lane 3 sub on canvas_work_shift. Post-seizure (bar_seized is_true): the Collector works the floor like it's already his — the leverage register. Coercion tiers on player corruption (lean → explicit); no money."
+
+[canvases.trigger]
+location             = "loc_bar"
+requires_npc         = "npc_collector"
+substitution_only    = true
+max_triggers_per_day = 1
+is_repeatable        = true
+is_active            = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "bar_seized", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "His floor now"
+# Coercion tiers on player corruption (debt-enforcer reads how far she's fallen); bar_seized
+# gates presence. Low corruption = the lean; high = explicit.
+blocks = [
+  { type = "image", props = { file = "scenes/collector_bar.jpg" } },
+  { type = "group", props = { conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 25 } ] }, blocks = [ { type = "paragraph", content = "He doesn't stand by the door anymore. He takes the good stool, the one with the back, and watches you work his floor — because that's what it is now, on paper, until you settle it. When you pass he says it low, almost kind: there's easier ways to clear what you owe than killing yourself behind a bar." } ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 } ] }, blocks = [ { type = "paragraph", content = "He takes the good stool and watches you work his floor like he's appraising stock he already owns. He's seen how you earn when the tips are good — seen what you'll put on display for them — and when you pass he says it low and unhurried: clearing what you owe Boyd is the same trade you already make every shift, just with him holding the book. You both know exactly what he means." } ] } },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He's not in a hurry anymore. That's the worst part. He's already won the argument; he's just waiting for me to agree." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ignore him 😶"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 10
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CAPSTONE TAILS (beats 0017/0018/0019/0020) — finish Sal, Dee, Marcus.
+#   Tier-3 EARNED, explicit at each NPC's declared ceiling, bareback (Phase-2
+#   pregnancy-retrofit compatible). Each auto-fires on its NPC's window when the
+#   prior arc flag + stat gate are met. Sal upstairs is Type B (retry); the rest
+#   are Type A terminals.
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ── beat_0017 / Sal — CAPSTONE #3: first night upstairs (Type B retry) ────────
+[[canvases]]
+id          = "canvas_sal_upstairs"
+name        = "Sal — up the stairs"
+description = "beat_0017. Sal capstone #3 (Type B retry). After close (22-02) at npc_sal.corruption>=5 (his odometer) AND player corruption>=30 (her depravity for the bareback night) + sal_after_hours_done. First night in the studio over the bar. Accept -> sal_first_done + sal_stage=4; refuse -> re-fires. Tier-3 explicit, terse (Sal's voice). Bareback."
+
+[canvases.trigger]
+location      = "loc_bar"
+requires_npc  = "npc_sal"
+npc           = "npc_sal"
+is_repeatable = true
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag",  subject = "player", flag_key = "sal_after_hours_done", operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "sal_first_done",       operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_sal", trait_key = "corruption", operator = "gte", value = 5  },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 30 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "02:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "After the bolt"
+blocks = [
+  { type = "image", props = { file = "scenes/sal_upstairs.jpg" } },
+  { type = "paragraph", content = "He throws the bolt, kills the neon, and the floor goes dark except for the cooler light. Then his hand finds the small of your back and steers you toward the stairs like he has done it a hundred times in his head. The studio still smells like Sully's pipe tobacco — and now like him, sweat and bar soap and the cold off the cellar." },
+  { type = "paragraph", content = "He is not gentle and he is not rough, just sure — peels you out of your clothes like stock he has been waiting on, backs your @player.body_type frame to the bed, and when he finally pushes into you bare it knocks the breath clean out of you. He works you slow and deep, one forearm braced by your head, thirty years of patience in every stroke, until you are saying things into his shoulder you will be shy about come morning." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sal" }, content = "Knew the first night you'd be trouble, @player. ...Good kind of trouble." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He didn't pull out and I didn't ask him to. That's a tomorrow problem. Tonight I just want him to stay." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Pull him down 🔥"
+targetType = "location"
+locationId = "loc_apartment"
+time_progression_minutes = 60
+# Sal re-spine: first night is the point of no return — it now also sets sal_cracked
+# ("she's with Sal"), re-homed from the deleted backbone capstone so the Clean+Sal
+# ending and the collision Sal-protector branch still fire.
+flagEffects = [
+  { targetType = "player", flag = "sal_first_done", op = "set" },
+  { targetType = "player", flag = "sal_cracked",    op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "sal_stage", op = "set", value = 4 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stop at the stairs ✋"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 10
+
+# ── beat_0018 / Sal — CAPSTONE #4 (the backbone) REMOVED in the Sal re-spine ──
+# The commitment framing was dropped (LO call): a pure-escalation arc has no separate
+# emotional terminal — the arc deepens into routine via the repeatable sex loop. The
+# sal_cracked flag it used to set is now set at the first night (canvas_sal_upstairs),
+# so the Clean+Sal ending and the collision Sal-protector branch keep working.
+
+# ── beat_0019 / Dee — CAPSTONE #3: standing terms (Type A, arc terminal) ──────
+# NOTE: Dee arc_stages defines only 0-2 — do NOT set dee_stage here (set the flag only).
+[[canvases]]
+id          = "canvas_dee_standing"
+name        = "Dee — the leash, comfortable now"
+description = "beat_0019. Dee capstone #3 (Type A, terminal). Leverage spine = money/debt + corruption. Cellar delivery (Tue/Fri 14-15) at money<200 (the bar never gets out from under his supply) + corruption 45 + dee_deal_done. The favor is routine; the taps are his leash. Sets dee_first_done (flag only, no stage advance). Tier-3 explicit, affable-coercive."
+
+[canvases.trigger]
+location      = "loc_cellar"
+requires_npc  = "npc_dee"
+npc           = "npc_dee"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag",  subject = "player", flag_key = "dee_deal_done",  operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "dee_first_done", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "money",      operator = "lt",  value = 200 },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 45 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [1, 4]
+start_time = "14:00"
+end_time   = "15:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Same time next delivery"
+blocks = [
+  { type = "image", props = { file = "scenes/dee_standing.jpg" } },
+  { type = "paragraph", content = "It is a routine now, and so is the rest of it. Dee doesn't bother pulling the hatch down anymore — doesn't have to. He sets the clipboard on a keg, leans back against the cooler, and just nods you over like a man who stopped asking weeks ago." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_dee" }, content = "See, this is what I like about you, @player. No drama, no renegotiating. Order shows up, you take care of me, the taps stay wet. Everybody's happy." },
+  { type = "paragraph", content = "You go to your knees on the cold concrete because that is the deal now, and he threads his fingers into your hair and uses your mouth slow and easy, reading next week's invoice off the clipboard while he does it — like the two things are the same transaction. Because to him they are." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He owns the supply line, which means he owns the bar, which means — say it — he owns this. I stopped pretending the math came out any other way a long time ago." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Square it 😏"
+targetType = "location"
+locationId = "loc_cellar"
+time_progression_minutes = 25
+flagEffects = [
+  { targetType = "player", flag = "dee_first_done", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "corruption", op = "add", value = 2 },
+]
+
+# ── beat_0020 / Marcus — CAPSTONE #3: kept (Type A, arc terminal) ─────────────
+[[canvases]]
+id          = "canvas_marcus_kept"
+name        = "Marcus — kept"
+description = "beat_0020. Marcus capstone #3 (Type A, terminal). Bar (20-23) at npc_marcus.relation>=35 (his interest) AND player corruption>=30 (RTS first-sex floor) + marcus_date_done. The kept arrangement; patience curdles into ownership. Sets marcus_first_done + marcus_stage=4. Tier-3 explicit, smooth/possessive (crude only now). Bareback."
+
+[canvases.trigger]
+location      = "loc_bar"
+requires_npc  = "npc_marcus"
+npc           = "npc_marcus"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag",  subject = "player", flag_key = "marcus_date_done",  operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "marcus_first_done", operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_marcus", trait_key = "relation", operator = "gte", value = 35 },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 30 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "20:00"
+end_time   = "23:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "He sends a car"
+blocks = [
+  { type = "image", props = { file = "scenes/marcus_kept.jpg" } },
+  { type = "paragraph", content = "He doesn't drink at the bar tonight; he sends a car. The back booth became his place uptown, the retainer became an allowance, and the line between his bartender and his kept woman finished blurring somewhere you can no longer point to." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_marcus" }, content = "Monday's handled. It will always be handled, as long as we understand each other. And we do, don't we." },
+  { type = "paragraph", content = "He undresses you the way he appraises everything he already owns — unhurried, proprietary, one hand closing over your throat not to choke but to feel you swallow. He lays your @player.body_type form out on sheets worth more than a week's take and takes you with the same patient certainty he does everything, bare, in no hurry, because he owns the clock too. You finish around him saying his name, and somewhere in the last month you started meaning it." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "I could still walk. I keep telling myself that. I keep not doing it. His money's between me and Boyd, his hand's at my throat, and the worst part is how safe it feels." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay kept 💵"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 60
+flagEffects = [
+  { targetType = "player", flag = "marcus_first_done", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "marcus_stage", op = "set", value = 4 },
+  { targetType = "player", trait = "corruption", op = "add", value = 3 },
+  { targetType = "npc", npcId = "npc_marcus", trait = "relation", op = "add", value = 5 },
+]
+
+# ══════════════════════════════════════════════════════════════════════════════
+# beat_0012 — A collision (cross_npc). The universal climax hinge: the Collector
+#   stops waiting. Reachable on BOTH paths via an OR-gate — leverage (shark_met,
+#   from the bar_seized summons) OR clean (money>=1000, ready to buy out). Branches
+#   by which protector arc is complete. Every branch opens loc_shark (summoned_by_shark)
+#   so the reckoning is reachable for clean players too. is_repeatable=false = fires once.
+# ══════════════════════════════════════════════════════════════════════════════
+[[canvases]]
+id          = "canvas_collision"
+name        = "The Last Call — he's done waiting"
+description = "beat_0012. Cross-NPC climax hinge. Mon 18-20, Collector present. OR-gate: shark_met (leverage) OR money>=1000 (clean). Branches: Sal (sal_cracked) / Marcus (marcus_first_done) / alone (fallback). Sets collision_done + summoned_by_shark. Tier-3."
+
+[canvases.trigger]
+location      = "loc_bar"
+requires_npc  = "npc_collector"
+npc           = "npc_collector"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "OR", items = [
+  { type = "flag",  subject = "player", flag_key = "shark_met", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 1000 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0]
+start_time = "18:00"
+end_time   = "20:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Both hands on the bar"
+blocks = [
+  { type = "image", props = { file = "scenes/collision.jpg" } },
+  { type = "paragraph", content = "He doesn't take the stool tonight. He plants both hands flat on the bar, leans his whole weight into it, and lets the regulars feel the temperature drop until they remember somewhere else to be. When the last of them is gone he says it without raising his voice, which is how you know he means it: Boyd's done extending. Tonight it gets settled, one way or the other." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "This is the moment the whole year's been bending toward. Whatever I've got in my corner — money, a man, or nothing — it's what I'm walking into Boyd's office with." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# Branch — Sal stands up (if his arc is complete)
+[[canvases.nodes.exit_block.choices]]
+text             = "Let Sal handle it 💪"
+show_when_locked = false
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "sal_cracked", operator = "is_true" },
+] }
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 15
+flagEffects = [
+  { targetType = "player", flag = "collision_done",     op = "set" },
+  { targetType = "player", flag = "summoned_by_shark",  op = "set" },
+]
+effects = [
+]
+
+# Branch — Marcus's name ends it (if his arc is complete)
+[[canvases.nodes.exit_block.choices]]
+text             = "Use Marcus's name 💰"
+show_when_locked = false
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "marcus_first_done", operator = "is_true" },
+] }
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 15
+flagEffects = [
+  { targetType = "player", flag = "collision_done",    op = "set" },
+  { targetType = "player", flag = "summoned_by_shark", op = "set" },
+]
+
+# Branch — alone (always available fallback)
+[[canvases.nodes.exit_block.choices]]
+text       = "Face him yourself ✊"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 15
+flagEffects = [
+  { targetType = "player", flag = "collision_done",    op = "set" },
+  { targetType = "player", flag = "summoned_by_shark", op = "set" },
+]
+
+# ══════════════════════════════════════════════════════════════════════════════
+# beat_0022 — Sal sex-loop menu (per-NPC, full 6-pose TLS clone). The REPEATABLE
+#   explicit layer (the once-only canvas_sal_upstairs capstone is the first time).
+#   TRIGGERLESS canvases — reached ONLY via nodeId from canvas_sal_afterhours_hub's
+#   "Take him to bed" item (post sal_first_done). State = numeric traits (reset on
+#   entry by the hub choice). Poses: 0 foreplay·1 blowjob·2 cunnilingus·3 doggy·
+#   4 missionary·5 ontop. Foreplay is the central hub (all pose entries); each pose
+#   loops its act + offers the climax-elect (loop_npc_pleasure gte 50) -> finisher.
+#   Voice: Sal terse/explicit. Bareback.
+# ══════════════════════════════════════════════════════════════════════════════
+[[canvases]]
+id          = "sal_sex_loop"
+name        = "Sal — after close, the two of you"
+description = "beat_0022. TRIGGERLESS sex-loop menu for Sal (reached via nodeId from canvas_sal_afterhours_hub). 6-pose Shady-clone; foreplay = central hub. Climax-elect at loop_npc_pleasure gte 50 -> sal_sex_finisher.climax."
+
+# ── intro ─────────────────────────────────────────────────────────────────────
+[[canvases.nodes]]
+id   = "intro"
+name = "After the bolt"
+blocks = [
+  { type = "image", props = { file = "sex/sal_intro.jpg" } },
+  { type = "paragraph", content = "Lights off, bolt thrown, the studio quiet over the dead bar. He's got that look — the patient one, like he's got all night and intends to use it." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Go to him"
+targetType = "node"
+nodeId = "base_foreplay"
+time_progression_minutes = 0
+
+# ── base_foreplay (sex_stage 0) — CENTRAL HUB: foreplay acts + all pose entries ─
+[[canvases.nodes]]
+id   = "base_foreplay"
+name = "Foreplay"
+blocks = [
+  { type = "image", props = { file = "sex/sal_foreplay.jpg" } },
+  { type = "paragraph", content = "His hands are slow and sure, thirty years of knowing exactly what he's doing. Your call where this goes." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Kiss him"
+targetType = "node"
+nodeId = "result_makeout"
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure",    op = "add", value = { type = "random", min = 2, max = 5 }, clamp = false },
+  { targetType = "npc", npcId = "npc_sal", trait = "arousal", op = "add", value = 1, cap = 3 },
+  { targetType = "player", trait = "loop_player_pleasure", op = "add", value = { type = "random", min = 2, max = 5 }, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text = "Tease him"
+targetType = "node"
+nodeId = "result_tease"
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 } ] }
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure",    op = "add", value = { type = "random", min = 3, max = 6 }, clamp = false },
+  { targetType = "npc", npcId = "npc_sal", trait = "arousal", op = "add", value = 1, cap = 3 },
+  { targetType = "player", trait = "loop_player_pleasure", op = "add", value = { type = "random", min = 2, max = 4 }, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text = "Get his cock out"
+targetType = "node"
+nodeId = "result_grope"
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 } ] }
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure",    op = "add", value = { type = "random", min = 4, max = 7 }, clamp = false },
+  { targetType = "npc", npcId = "npc_sal", trait = "arousal", op = "add", value = 1, cap = 3 },
+  { targetType = "player", trait = "loop_player_pleasure", op = "add", value = { type = "random", min = 1, max = 3 }, clamp = false },
+]
+# Pose entries — DUAL-MUTEX on npc_sal.arousal (his wanting). Each pose has two same-label choices:
+# the arousal-MET variant enters the pose; the arousal-LOW variant routes to not_worked_up (the
+# "not worked up enough" redirect screen). BOTH keep the existing corruption lock, so the pose stays
+# HIDDEN until corruption is met (unchanged), then arousal decides enter-vs-redirect. Foreplay raises
+# his arousal; cum resets it. Ladder: oral >=1 / doggy+missionary >=2 / on-top >=3.
+[[canvases.nodes.exit_block.choices]]
+text = "Blow him"
+targetType = "node"
+nodeId = "base_blowjob"
+conditions = { version = "1.0", items = [ { type = "trait", subject = "npc", npc_id = "npc_sal", trait_key = "arousal", operator = "gte", value = 1 } ] }
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Blow him"
+targetType = "node"
+nodeId = "not_worked_up"
+conditions = { version = "1.0", items = [ { type = "trait", subject = "npc", npc_id = "npc_sal", trait_key = "arousal", operator = "lt", value = 1 } ] }
+[[canvases.nodes.exit_block.choices]]
+text = "Sit on his face"
+targetType = "node"
+nodeId = "base_cunnilingus"
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 }, { type = "trait", subject = "npc", npc_id = "npc_sal", trait_key = "arousal", operator = "gte", value = 1 } ] }
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 2 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Sit on his face"
+targetType = "node"
+nodeId = "not_worked_up"
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 }, { type = "trait", subject = "npc", npc_id = "npc_sal", trait_key = "arousal", operator = "lt", value = 1 } ] }
+[[canvases.nodes.exit_block.choices]]
+text = "Bend over"
+targetType = "node"
+nodeId = "base_doggy"
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 }, { type = "trait", subject = "npc", npc_id = "npc_sal", trait_key = "arousal", operator = "gte", value = 2 } ] }
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 3 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Bend over"
+targetType = "node"
+nodeId = "not_worked_up"
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 }, { type = "trait", subject = "npc", npc_id = "npc_sal", trait_key = "arousal", operator = "lt", value = 2 } ] }
+[[canvases.nodes.exit_block.choices]]
+text = "Pull him on top"
+targetType = "node"
+nodeId = "base_missionary"
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 }, { type = "trait", subject = "npc", npc_id = "npc_sal", trait_key = "arousal", operator = "gte", value = 2 } ] }
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 4 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Pull him on top"
+targetType = "node"
+nodeId = "not_worked_up"
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 }, { type = "trait", subject = "npc", npc_id = "npc_sal", trait_key = "arousal", operator = "lt", value = 2 } ] }
+[[canvases.nodes.exit_block.choices]]
+text = "Climb on top"
+targetType = "node"
+nodeId = "base_ontop"
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 30 }, { type = "trait", subject = "npc", npc_id = "npc_sal", trait_key = "arousal", operator = "gte", value = 3 } ] }
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 5 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Climb on top"
+targetType = "node"
+nodeId = "not_worked_up"
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 30 }, { type = "trait", subject = "npc", npc_id = "npc_sal", trait_key = "arousal", operator = "lt", value = 3 } ] }
+[[canvases.nodes.exit_block.choices]]
+text = "Not tonight"
+targetType = "location"
+locationId = "loc_apartment"
+time_progression_minutes = 20
+effects = [
+  { targetType = "player", trait = "sex_stage", op = "set", value = 0 },
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0 },
+  { targetType = "player", trait = "loop_player_pleasure", op = "set", value = 0 },
+  { targetType = "player", trait = "anal_active", op = "set", value = 0 },
+]
+
+# ── foreplay result nodes (loop back) ─────────────────────────────────────────
+[[canvases.nodes]]
+id = "result_makeout"
+name = "Kissing"
+blocks = [ { type = "image", props = { file = "sex/sal_makeout.jpg" } }, { type = "paragraph", content = "He kisses you back unhurried, one rough hand spread at the small of your back, the other already learning you. He tastes like the last cigarette he swears he's quitting." } ]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "More"
+targetType = "node"
+nodeId = "base_foreplay"
+
+[[canvases.nodes]]
+id = "result_tease"
+name = "Teasing"
+blocks = [ { type = "image", props = { file = "sex/sal_tease.jpg" } }, { type = "paragraph", content = "You take your time, mouth at his jaw, hips just out of reach. He lets you run it, that patience holding — until a low sound in his chest tells you it's costing him." } ]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Keep going"
+targetType = "node"
+nodeId = "base_foreplay"
+
+[[canvases.nodes]]
+id = "result_grope"
+name = "In hand"
+blocks = [ { type = "image", props = { file = "sex/sal_grope.jpg" } }, { type = "paragraph", content = "You get him free and take him in your hand — thick, already hard. He exhales through his nose and says @player once, quiet, like it's the only word he trusts himself with." } ]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "More"
+targetType = "node"
+nodeId = "base_foreplay"
+
+# ── not_worked_up — arousal-gate rejection screen (dual-mutex target) ──────────
+# Reached when a pose's corruption lock is met but npc_sal.arousal is below that act's threshold.
+# Tells the player to work him up (foreplay raises his arousal), then back to the foreplay hub.
+[[canvases.nodes]]
+id   = "not_worked_up"
+name = "Not yet"
+blocks = [
+  { type = "paragraph", content = "Sal catches your wrist, easy, and shakes his head once — not a no, just not yet. He's not worked up enough for that. Get him there first." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Back to him ↩️"
+targetType = "node"
+nodeId = "base_foreplay"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 0 } ]
+
+# ── base_blowjob (sex_stage 1) ────────────────────────────────────────────────
+[[canvases.nodes]]
+id   = "base_blowjob"
+name = "On your knees"
+blocks = [ { type = "image", props = { file = "sex/sal_blowjob.jpg" } }, { type = "paragraph", content = "You go to your knees on the bar mat. He threads a hand into your hair — guiding, not forcing. Sal never forces." } ]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Suck his cock"
+targetType = "node"
+nodeId = "result_suck"
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure",    op = "add", value = { type = "random", min = 7, max = 11 }, clamp = false },
+  { targetType = "player", trait = "loop_player_pleasure", op = "add", value = { type = "random", min = 2, max = 4 }, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text = "Take him deep"
+targetType = "node"
+nodeId = "result_deep"
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 30 } ] }
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure",    op = "add", value = { type = "random", min = 10, max = 15 }, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text = "Let him cum in your mouth"
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 } ] }
+targetType = "node"
+nodeId = "sal_sex_finisher.climax"
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Get up — you want his cock"
+targetType = "node"
+nodeId = "base_foreplay"
+
+[[canvases.nodes]]
+id = "result_suck"
+name = "Mouth on him"
+blocks = [ { type = "image", props = { file = "sex/sal_suck.jpg" } }, { type = "paragraph", content = "You work him slow and deep. His grip tightens in your hair by degrees, the only tell he gives, his breath gone ragged above you." } ]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Keep at it"
+targetType = "node"
+nodeId = "base_blowjob"
+
+[[canvases.nodes]]
+id = "result_deep"
+name = "All the way"
+blocks = [ { type = "image", props = { file = "sex/sal_deep.jpg" } }, { type = "paragraph", content = "You take him all the way down, eyes watering, and hold there until he groans something that isn't quite words. When you come up for air he just looks at you like you've undone something in him." } ]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Again"
+targetType = "node"
+nodeId = "base_blowjob"
+
+# ── base_cunnilingus (sex_stage 2) ────────────────────────────────────────────
+[[canvases.nodes]]
+id   = "base_cunnilingus"
+name = "His mouth on you"
+blocks = [ { type = "image", props = { file = "sex/sal_cunni.jpg" } }, { type = "paragraph", content = "He sits you on the bar top and puts his mouth to work, unhurried and exact, like he's got nowhere to be and nothing he'd rather do." } ]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Ride his mouth"
+targetType = "node"
+nodeId = "result_ridemouth"
+effects = [
+  { targetType = "player", trait = "loop_player_pleasure", op = "add", value = { type = "random", min = 8, max = 13 }, clamp = false },
+  { targetType = "player", trait = "loop_npc_pleasure",    op = "add", value = { type = "random", min = 3, max = 5 }, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text = "Enough — you want his cock"
+targetType = "node"
+nodeId = "base_foreplay"
+
+[[canvases.nodes]]
+id = "result_ridemouth"
+name = "On his mouth"
+blocks = [ { type = "image", props = { file = "sex/sal_ridemouth.jpg" } }, { type = "paragraph", content = "You grip the edge of the bar and grind down against his tongue. He holds your @player.body_type hips steady, takes everything you give him, and hums against you like he could do this all night." } ]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "More"
+targetType = "node"
+nodeId = "base_cunnilingus"
+
+# ── base_doggy (sex_stage 3) — anal toggle + climax-elects ────────────────────
+[[canvases.nodes]]
+id   = "base_doggy"
+name = "Bent over"
+blocks = [ { type = "image", props = { file = "sex/sal_doggy.jpg" } }, { type = "paragraph", content = "You brace over the bar and he lines up behind you, one hand flat between your shoulder blades, the other on your hip. He pushes in slow, all the way, and waits a beat to let you feel the whole of it." } ]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Let him fuck you from behind"
+targetType = "node"
+nodeId = "result_doggy"
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure",    op = "add", value = { type = "random", min = 9, max = 14 }, clamp = false },
+  { targetType = "player", trait = "loop_player_pleasure", op = "add", value = { type = "random", min = 6, max = 10 }, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text = "Tell him to fuck your ass"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 35 }, { type = "trait", subject = "player", trait_key = "anal_active", operator = "eq", value = 0 } ] }
+targetType = "node"
+nodeId = "result_doggy_anal"
+effects = [
+  { targetType = "player", trait = "anal_active", op = "set", value = 1 },
+  { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 12 }, clamp = false },
+  { targetType = "player", trait = "corruption", op = "add", value = 1 },
+]
+[[canvases.nodes.exit_block.choices]]
+text = "Let him cum inside you"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 }, { type = "trait", subject = "player", trait_key = "anal_active", operator = "eq", value = 0 } ] }
+targetType = "node"
+nodeId = "sal_sex_finisher.climax"
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 1 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Let him cum in your ass"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 }, { type = "trait", subject = "player", trait_key = "anal_active", operator = "eq", value = 1 } ] }
+targetType = "node"
+nodeId = "sal_sex_finisher.climax"
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 2 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Make him pull out, cum on you"
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 } ] }
+targetType = "node"
+nodeId = "sal_sex_finisher.climax"
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 3 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Switch it up"
+targetType = "node"
+nodeId = "base_foreplay"
+
+[[canvases.nodes]]
+id = "result_doggy"
+name = "From behind"
+blocks = [ { type = "image", props = { file = "sex/sal_doggy_r.jpg" } }, { type = "paragraph", content = "He sets a deep, even rhythm, the bar creaking under both your weight, his grip bruise-firm on your hips. No hurry, no mercy either — just that steady working drive until your arms shake." } ]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "More"
+targetType = "node"
+nodeId = "base_doggy"
+
+[[canvases.nodes]]
+id = "result_doggy_anal"
+name = "The other way"
+blocks = [ { type = "image", props = { file = "sex/sal_anal.jpg" } }, { type = "paragraph", content = "He works into your ass slow, a thumb rubbing slow circles at the base of your spine until you open for him, then sinks the rest of the way with a low curse he never lets himself say sober." } ]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "More"
+targetType = "node"
+nodeId = "base_doggy"
+
+# ── base_missionary (sex_stage 4) ─────────────────────────────────────────────
+[[canvases.nodes]]
+id   = "base_missionary"
+name = "Under him"
+blocks = [ { type = "image", props = { file = "sex/sal_miss.jpg" } }, { type = "paragraph", content = "He lays you back on the booth bench and settles over you, taking his weight on one forearm. When he pushes in he keeps his eyes on yours the whole time, that steady gaze you can't look away from." } ]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Let him fuck you"
+targetType = "node"
+nodeId = "result_miss"
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure",    op = "add", value = { type = "random", min = 8, max = 13 }, clamp = false },
+  { targetType = "player", trait = "loop_player_pleasure", op = "add", value = { type = "random", min = 7, max = 11 }, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text = "Let him cum inside you"
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 } ] }
+targetType = "node"
+nodeId = "sal_sex_finisher.climax"
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 1 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Make him cum on you"
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 } ] }
+targetType = "node"
+nodeId = "sal_sex_finisher.climax"
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 3 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Switch it up"
+targetType = "node"
+nodeId = "base_foreplay"
+
+[[canvases.nodes]]
+id = "result_miss"
+name = "Face to face"
+blocks = [ { type = "image", props = { file = "sex/sal_miss_r.jpg" } }, { type = "paragraph", content = "He moves in you slow and deep, forehead dropping to yours, breath mixing. It's nothing like you braced for — not taking, just sure, the way he does everything in this bar he's run longer than you've been alive." } ]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "More"
+targetType = "node"
+nodeId = "base_missionary"
+
+# ── base_ontop (sex_stage 5) ──────────────────────────────────────────────────
+[[canvases.nodes]]
+id   = "base_ontop"
+name = "Riding him"
+blocks = [ { type = "image", props = { file = "sex/sal_ontop.jpg" } }, { type = "paragraph", content = "You push him flat and straddle him, sinking down at your own pace while his hands settle on your @player.body_type thighs — letting you run it, the way he let you run everything once he decided you'd earned it." } ]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Ride him"
+targetType = "node"
+nodeId = "result_ontop"
+effects = [
+  { targetType = "player", trait = "loop_player_pleasure", op = "add", value = { type = "random", min = 9, max = 14 }, clamp = false },
+  { targetType = "player", trait = "loop_npc_pleasure",    op = "add", value = { type = "random", min = 7, max = 11 }, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text = "Sink down, let him cum"
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 } ] }
+targetType = "node"
+nodeId = "sal_sex_finisher.climax"
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 1 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Make him cum"
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 } ] }
+targetType = "node"
+nodeId = "sal_sex_finisher.climax"
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 3 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Switch it up"
+targetType = "node"
+nodeId = "base_foreplay"
+
+[[canvases.nodes]]
+id = "result_ontop"
+name = "On top"
+blocks = [ { type = "image", props = { file = "sex/sal_ontop_r.jpg" } }, { type = "paragraph", content = "You set the pace and he lets you have it, watching your @player.body_type frame take what you want with that quiet wonder, hands flexing on your thighs every time you grind down hard." } ]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "More"
+targetType = "node"
+nodeId = "base_ontop"
+
+# ══════════════════════════════════════════════════════════════════════════════
+# beat_0022 — Sal sex-loop FINISHER (triggerless). Climax variant by sex_finisher_type
+#   (0 facial·1 pussy·2 ass·3 body) + a closure menu that RESETS all loop state.
+# ══════════════════════════════════════════════════════════════════════════════
+[[canvases]]
+id          = "sal_sex_finisher"
+name        = "Sal — after"
+description = "beat_0022. TRIGGERLESS climax/closure for sal_sex_loop. 4 finisher variants by sex_finisher_type; closure resets loop traits + exits."
+
+[[canvases.nodes]]
+id   = "climax"
+name = "He finishes"
+blocks = [
+  { type = "image", props = { file = "sex/sal_finish.jpg" } },
+  { type = "group", props = { conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 } ] }, blocks = [
+    { type = "paragraph", content = "He finishes in your mouth with a low, broken sound, hand still gentle in your hair. You swallow and look up, and the way he looks back at you is almost worse than tender." } ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 } ] }, blocks = [
+    { type = "paragraph", content = "He finishes deep inside you, bare, hips pressed flush, and stays there — not pulling out, just holding you against him while his breathing comes back down." } ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 } ] }, blocks = [
+    { type = "paragraph", content = "He finishes buried in your ass, a hand splayed warm at the small of your back, and stays sunk in you a long moment after, swearing soft into your shoulder." } ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 3 } ] }, blocks = [
+    { type = "paragraph", content = "He pulls out at the last second and finishes across your stomach, warm, his forehead dropping to yours while he rides it out." } ] } },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sal" }, content = "...C'mere." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Stay the night 🛏️"
+targetType = "location"
+locationId = "loc_apartment"
+time_progression_minutes = 60
+effects = [
+  { targetType = "player", trait = "sex_stage", op = "set", value = 0 },
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0 },
+  { targetType = "player", trait = "loop_player_pleasure", op = "set", value = 0 },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0 },
+  { targetType = "player", trait = "anal_active", op = "set", value = 0 },
+  { targetType = "player", trait = "sex_reactions", op = "set", value = 0 },
+  { targetType = "npc", npcId = "npc_sal", trait = "arousal", op = "set", value = 0 },
+]
+[[canvases.nodes.exit_block.choices]]
+text = "Clean up, lock up 🔒"
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "sex_stage", op = "set", value = 0 },
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0 },
+  { targetType = "player", trait = "loop_player_pleasure", op = "set", value = 0 },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0 },
+  { targetType = "player", trait = "anal_active", op = "set", value = 0 },
+  { targetType = "player", trait = "sex_reactions", op = "set", value = 0 },
+  { targetType = "npc", npcId = "npc_sal", trait = "arousal", op = "set", value = 0 },
+]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# QUEST CARDS ([[quest_cards]], V2 engine) — backfilled 2026-06-03.
+# Spine = Story Goals (no npc_id). Sal = milestone chain matching beat_0002.
+# Shape: schema/02 §8 (flat conditions per §16.5). Not every beat → a card.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Spine — the debt (Story Goals; mechanic mode) ─────────────────────────────
+[[quest_cards]]
+priority   = 10
+text       = "Uncle Sully left me his bar and his debt. Two hundred to Boyd's man, every Monday. Miss it and I lose the only thing I've got left."
+ready_text = "I've got this week's two hundred. Now I just have to keep finding it."
+tip        = "The till feeds the fund — deposit at the bank, pay when the Collector comes Monday."
+when = [
+  { flag = "debt_explained", op = "is_true"  },
+  { flag = "bar_seized",      op = "is_false" },
+  { flag = "collision_done",  op = "is_false" },
+]
+goals = [
+  { trait = "money", subject = "player", op = "gte", value = 200, label = "This week's payment" },
+]
+
+# ── Spine — the reckoning (Story Goals; capstone mode → canvas_reckoning; beat_0012/0013) ─
+[[quest_cards]]
+priority     = 10
+text         = "Boyd's man is done waiting. It ends at Boyd's place now — I either put the whole debt on his desk or I find out what 'other ways of being paid' means."
+ready_text   = "It's time. Boyd's office, three blocks off Main."
+tip          = "Go to Boyd's Place to settle. Pay in full ($1000), let a patron cover it, or face the terms."
+ready_canvas = "canvas_reckoning"
+when = [
+  { flag = "collision_done", op = "is_true"  },
+  { flag = "reckoning_done", op = "is_false" },
+]
+goals = [
+  { trait = "money", subject = "player", op = "gte", value = 1000, label = "Settle in full" },
+]
+
+# ── Spine — terminal (the story has ended) ────────────────────────────────────
+[[quest_cards]]
+priority = 10
+text     = "However it ended — bought clean, kept, or owned — it ended. The Last Call is still standing. So am I, more or less."
+terminal = true
+when = [
+  { flag = "reckoning_done", op = "is_true" },
+]
+
+# ── Sal M0 — pre-opened-up (capstone mode → canvas_sal_ropes_first) ────────────
+[[quest_cards]]
+npc_id       = "npc_sal"
+priority     = 2
+text         = "Sal poured for my uncle for thirty years and he's still behind the bar. I should find out if he's with me or just waiting to watch me fail."
+ready_text   = "He's working the taps tonight."
+tip          = "Work a shift beside him."
+ready_canvas = "canvas_sal_ropes_first"
+when = [
+  { flag = "sal_opened_up", op = "is_false" },
+]
+
+# ── Sal M1 — after-close milestone (capstone mode → the kiss; beat_0010) ───────
+[[quest_cards]]
+npc_id       = "npc_sal"
+priority     = 2
+text         = "We work the bar like we've done it for years, and lately he doesn't send me up when we close. Something's sitting there in the quiet after the bolt. I could let it."
+ready_text   = "It's after close and he's not telling me to go home."
+tip          = "Stay after close (the bar, late) and keep earning his trust."
+ready_canvas = "canvas_sal_after_hours"
+when = [
+  { flag = "sal_opened_up",       op = "is_true"  },
+  { flag = "sal_after_hours_done", op = "is_false" },
+]
+goals = [
+  { trait = "corruption", subject = "player", op = "gte", value = 20, label = "My corruption" },
+]
+
+# ── Sal M2 — first-night milestone (capstone mode → canvas_sal_upstairs; beat_0017) ─
+[[quest_cards]]
+npc_id       = "npc_sal"
+priority     = 2
+text         = "He kissed me after close and didn't make it weird the next day — just poured two and nodded me to the wrong side of the bar. The stairs to the studio are right there, most nights now."
+ready_text   = "He's killing the lights slow tonight, watching to see if I head for the door or the stairs."
+tip          = "Stay after close and keep earning it."
+ready_canvas = "canvas_sal_upstairs"
+when = [
+  { flag = "sal_after_hours_done", op = "is_true"  },
+  { flag = "sal_first_done",       op = "is_false" },
+]
+goals = [
+  { trait = "corruption", subject = "player", op = "gte", value = 30, label = "My corruption" },
+]
+
+# ── Sal M3 (the-backbone milestone) REMOVED — backbone capstone dropped in the re-spine.
+# The arc terminal is now the first night → repeatable routine; M4 (terminal) fires off
+# sal_cracked, which is set at the first night.
+
+# ── Sal M4 — terminal (arc complete) ──────────────────────────────────────────
+[[quest_cards]]
+npc_id   = "npc_sal"
+priority = 2
+text     = "Most nights end the same way now — bolt thrown, lights off, the stairs to the studio instead of the door. Sal doesn't say what we are and I've stopped needing him to. Whatever happens with Boyd, I'm not facing it alone."
+terminal = true
+when = [
+  { flag = "sal_cracked", op = "is_true" },
+]
+
+# ── Dee M0 — pre-opened-up (capstone mode → canvas_dee_ropes_first) ────────────
+[[quest_cards]]
+npc_id       = "npc_dee"
+priority     = 2
+text         = "Every bottle in the place comes through Dee's depot. Sully ran a tab with him for years. I need to set up my own account before the taps run dry."
+ready_text   = "The depot's open — he's there with the clipboard."
+tip          = "Visit the Depot during the day (10–5, weekdays)."
+ready_canvas = "canvas_dee_ropes_first"
+when = [
+  { flag = "dee_opened_up", op = "is_false" },
+]
+
+# ── Dee M1 — flexible-terms milestone (capstone mode → canvas_dee_terms; beat_0011) ─
+[[quest_cards]]
+npc_id       = "npc_dee"
+priority     = 2
+text         = "The account's current and Dee's friendly — the kind of friendly that's keeping a tally. He keeps hinting the terms could get 'flexible' for the right customer."
+ready_text   = "He's got the tab on the clipboard and that look. He wants to talk terms."
+tip          = "He only floats the tab for a squeezed owner — visit the depot (daytime, weekdays) while the till's short (under $200)."
+ready_canvas = "canvas_dee_terms"
+when = [
+  { flag = "dee_opened_up", op = "is_true"  },
+  { flag = "dee_terms",     op = "is_false" },
+]
+goals = [
+  { trait = "corruption", subject = "player", op = "gte", value = 10, label = "My corruption" },
+]
+
+# ── Dee M2 — the dock favor (capstone mode → canvas_dee_dock; beat_0011) ───────
+[[quest_cards]]
+npc_id       = "npc_dee"
+priority     = 2
+text         = "The tab rides on 'goodwill' now. He's made it clear what that means, and the well runs dry the day I stop agreeing. Sooner or later he'll pick a crate I can't say no to."
+ready_text   = "Delivery day. He's down in the cellar, and his guy just went up the alley."
+tip          = "Be in the cellar on a delivery (Tue/Fri, 2–3pm) while the till's short (under $200) — the favor only lands when you can't cover the crate."
+ready_canvas = "canvas_dee_dock"
+when = [
+  { flag = "dee_terms",     op = "is_true"  },
+  { flag = "dee_deal_done", op = "is_false" },
+]
+goals = [
+  { trait = "corruption", subject = "player", op = "gte", value = 25, label = "My corruption" },
+]
+
+# ── Dee M3 — standing-terms milestone (capstone mode → canvas_dee_standing; beat_0019) ─
+[[quest_cards]]
+npc_id       = "npc_dee"
+priority     = 2
+text         = "I squared a crate his way and he already knew there'd be a next time. The favors are starting to feel less like a deal and more like a standing arrangement I never signed."
+ready_text   = "Delivery day. He doesn't even bother pulling the hatch down anymore."
+tip          = "Be in the cellar on a delivery (Tue/Fri, 2–3pm) while the till's still short — the bar never gets out from under his supply."
+ready_canvas = "canvas_dee_standing"
+when = [
+  { flag = "dee_deal_done",  op = "is_true"  },
+  { flag = "dee_first_done", op = "is_false" },
+]
+goals = [
+  { trait = "corruption", subject = "player", op = "gte", value = 45, label = "My corruption" },
+]
+
+# ── Dee M4 — terminal (arc complete) ──────────────────────────────────────────
+[[quest_cards]]
+npc_id   = "npc_dee"
+priority = 2
+text     = "The terms are standing now. Every bottle in the place comes on Dee's goodwill, and his goodwill has a price I pay on a schedule. He owns the supply line, which means he owns the bar, which means he owns me — and we both stopped pretending otherwise."
+terminal = true
+when = [
+  { flag = "dee_first_done", op = "is_true" },
+]
+
+# ── Marcus M0 — pre-opened-up (capstone mode → canvas_marcus_ropes_first) ──────
+[[quest_cards]]
+npc_id       = "npc_marcus"
+priority     = 2
+text         = "There's a man who drinks top-shelf alone at the end of the bar and tips like it's nothing. Men like that are either trouble or money. Sometimes both. I should find out which."
+ready_text   = "He's at his end of the bar tonight."
+tip          = "Work the floor in the evening (8–11) — he holds down the far end."
+ready_canvas = "canvas_marcus_ropes_first"
+when = [
+  { flag = "marcus_opened_up", op = "is_false" },
+]
+
+# ── Marcus M1 — singled-out milestone (capstone mode → canvas_marcus_singled_out; beat_0008) ─
+[[quest_cards]]
+npc_id       = "npc_marcus"
+priority     = 2
+text         = "Marcus is a fixture now — his tab, his patience, his eyes on me across the room. He's waiting for something, and he can afford to wait."
+ready_text   = "He's folding a bill under his glass and watching to see if I notice the number."
+tip          = "Hold his end of the bar in the evenings — let his interest build."
+ready_canvas = "canvas_marcus_singled_out"
+when = [
+  { flag = "marcus_opened_up", op = "is_true"  },
+  { flag = "marcus_noticed",   op = "is_false" },
+]
+goals = [
+  { trait = "relation", subject = "npc", npc_id = "npc_marcus", op = "gte", value = 15, label = "Marcus's interest" },
+]
+
+# ── Marcus M1.5 — the back booth ("Drinks after"; hub rung → mechanic mode, no ready_canvas) ─
+[[quest_cards]]
+npc_id       = "npc_marcus"
+priority     = 2
+text         = "Now that he's claimed me as his bartender, he's started tipping his head at the back booth after the room thins — an invitation he's too patient to repeat twice."
+ready_text   = "The back booth's open and he's waiting. He's earned a drink on the other side of the bar."
+tip          = "Keep his interest building, then join him in the back booth (evenings)."
+when = [
+  { flag = "marcus_noticed",     op = "is_true"  },
+  { flag = "marcus_drinks_done", op = "is_false" },
+]
+goals = [
+  { trait = "relation", subject = "npc", npc_id = "npc_marcus", op = "gte", value = 20, label = "Marcus's interest" },
+]
+
+# ── Marcus M2 — the arrangement (capstone mode → canvas_marcus_arrangement; beat_0008) ─
+[[quest_cards]]
+npc_id       = "npc_marcus"
+priority     = 2
+text         = "I'm 'his bartender' now, on a retainer I didn't quite agree to. He keeps circling the same offer — that he could make Monday stop being a problem, for a price he hasn't said out loud."
+ready_text   = "He's tipped his head at the back booth. Tonight he's going to say it plainly."
+tip          = "Build it at the bar in the evenings until he makes the offer."
+ready_canvas = "canvas_marcus_arrangement"
+when = [
+  { flag = "marcus_drinks_done", op = "is_true"  },
+  { flag = "marcus_date_done",   op = "is_false" },
+]
+goals = [
+  { trait = "relation", subject = "npc", npc_id = "npc_marcus", op = "gte", value = 25, label = "Marcus's interest" },
+  { trait = "corruption", subject = "player", op = "gte", value = 25, label = "My corruption" },
+]
+
+# ── Marcus M3 — kept milestone (capstone mode → canvas_marcus_kept; beat_0020) ─
+[[quest_cards]]
+npc_id       = "npc_marcus"
+priority     = 2
+text         = "His money stands between me and Boyd now. Monday's his problem, which means I'm his — he just hasn't called it that out loud yet. The math always did favor him."
+ready_text   = "He sent a car instead of coming to the bar. Tonight he stops being subtle about what I am to him."
+tip          = "Let it deepen at the bar in the evenings."
+ready_canvas = "canvas_marcus_kept"
+when = [
+  { flag = "marcus_date_done",  op = "is_true"  },
+  { flag = "marcus_first_done", op = "is_false" },
+]
+goals = [
+  { trait = "relation", subject = "npc", npc_id = "npc_marcus", op = "gte", value = 35, label = "Marcus's interest" },
+  { trait = "corruption", subject = "player", op = "gte", value = 30, label = "My corruption" },
+]
+
+# ── Marcus M4 — terminal (arc complete) ───────────────────────────────────────
+[[quest_cards]]
+npc_id   = "npc_marcus"
+priority = 2
+text     = "I'm kept. His allowance pays Boyd, his car brings me uptown, his hand fits at my throat like it belongs there. I could still walk. I keep not doing it — and the bar keeps its lights on because I don't."
+terminal = true
+when = [
+  { flag = "marcus_first_done", op = "is_true" },
+]
+
+# ── Rosa M0 — pre-opened-up (capstone mode → canvas_rosa_ropes_first) ──────────
+[[quest_cards]]
+npc_id       = "npc_rosa"
+priority     = 1
+text         = "Rosa runs the kitchen like she owns it — which, the way Sully let things slide, she practically does. I should make my peace with the cook before I make an enemy of her."
+ready_text   = "She's at the flat-top — the kitchen's open."
+tip          = "Step into the kitchen in the evening (5–11)."
+ready_canvas = "canvas_rosa_ropes_first"
+when = [
+  { flag = "rosa_opened_up", op = "is_false" },
+]
+
+# ── Rosa M1 — earn her trust (capstone mode → canvas_rosa_trust_talk) ──────────
+[[quest_cards]]
+npc_id       = "npc_rosa"
+priority     = 1
+text         = "Rosa feeds me and watches me and says almost nothing. She's deciding whether I'm worth her trouble. I should keep showing up."
+ready_text   = "She's stopped working long enough to look at me. She wants to say something."
+tip          = "Sit with her in the kitchen — keep building it."
+ready_canvas = "canvas_rosa_trust_talk"
+when = [
+  { flag = "rosa_opened_up", op = "is_true"  },
+  { flag = "rosa_trusts",    op = "is_false" },
+]
+goals = [
+  { trait = "relation", subject = "npc", npc_id = "npc_rosa", op = "gte", value = 25, label = "Rosa's trust" },
+]
+
+# ── Rosa M2 — terminal (arc complete; she's in Nina's corner) ──────────────────
+[[quest_cards]]
+npc_id   = "npc_rosa"
+priority = 1
+text     = "Rosa's in my corner now — the one person in this place who wants nothing from me but to see me make it out. She'll feed me and tell me the truth, and right now that's worth more than money."
+terminal = true
+when = [
+  { flag = "rosa_trusts", op = "is_true" },
+]

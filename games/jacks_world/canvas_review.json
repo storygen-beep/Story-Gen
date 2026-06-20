@@ -1,0 +1,122 @@
+{
+  "jack_arrives": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-02-14T09:05:26.116948+00:00"
+  },
+  "activity_breakfast_angela": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-02-14T14:22:34.661196+00:00"
+  },
+  "activity_morning_peek_angela": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-02-14T15:54:30.143556+00:00"
+  },
+  "activity_cafe_shift_morning": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-02-14T14:26:58.640872+00:00"
+  },
+  "activity_cafe_shift_afternoon": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-02-14T15:00:51.653428+00:00"
+  },
+  "activity_bath_peek_angela": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-02-14T14:28:30.160069+00:00"
+  },
+  "activity_bedroom_play_angela": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-02-14T14:29:34.796075+00:00"
+  },
+  "activity_morning_together_angela": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-02-16T10:36:19.826938+00:00"
+  },
+  "activity_bath_together_angela": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-02-14T14:31:23.139244+00:00"
+  },
+  "towel_encounter": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-02-14T14:32:00.123452+00:00"
+  },
+  "activity_deep_conversation_angela": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-02-14T14:32:18.001350+00:00"
+  },
+  "activity_couch_play_angela": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-02-16T08:38:22.124500+00:00"
+  },
+  "bedroom_encounter": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-02-16T09:15:00.000000+00:00"
+  },
+  "activity_spa_massage_angela": {
+    "status": "approved",
+    "notes": "Restructured: linear → tiered (massage/sensual/sexual/aftercare). Trigger: massage_offered + love >= 50 + trust >= 20. Oral_unlocked gate on sensual, sex_unlocked on sexual+aftercare. Story arc in mid_bonding, requires first_massage.",
+    "updated_at": "2026-02-16T12:00:00.000000+00:00"
+  },
+  "activity_date_night_hotel_angela": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-02-14T14:36:31.390982+00:00"
+  },
+  "activity_exploring_kink_angela": {
+    "status": "review",
+    "notes": "have only two nodes, can be more narrative with linear nodes",
+    "updated_at": "2026-02-14T14:36:58.399838+00:00"
+  },
+  "activity_movie_night_angela": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-02-14T19:46:48.748111+00:00"
+  },
+  "angelas_struggle": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-02-16T10:31:05.835372+00:00"
+  },
+  "jack_gets_hired": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-02-16T10:31:11.256757+00:00"
+  },
+  "angelas_evening": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-02-16T10:31:18.348286+00:00"
+  },
+  "first_rent_day": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-02-16T10:31:21.445806+00:00"
+  },
+  "activity_weekly_rent": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-02-16T10:32:08.964428+00:00"
+  },
+  "late_night_kitchen": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-02-16T10:32:17.392607+00:00"
+  },
+  "massage_offer": {
+    "status": "approved",
+    "notes": "Text-only story canvas. 2 nodes (noticing → the_offer). Sets massage_offered flag to gate spa massage activity.",
+    "updated_at": "2026-02-16T13:00:00.000000+00:00"
+  }
+}

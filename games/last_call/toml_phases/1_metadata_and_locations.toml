@@ -1,0 +1,359 @@
+# Phase 1 — 1_metadata_and_locations.toml
+# Last Call — player + 5 NPCs (with schedules) + locations
+# All [[npcs]] / [[npcs.schedules]] / [[npcs.core_traits]] MUST live in this one file.
+# loc_shark is intentionally NOT here — it is introduced by the beat-9 location_reveal
+# (the lock + its unlock-flag setter are authored together as one whole amendment).
+
+# ─── Player ───────────────────────────────────────────────────────────────────
+[player]
+id          = "player"
+name        = "Nina"
+description  = "Mid-thirties. Came back to town for the funeral and left holding the keys to a bar that loses money and a debt she didn't sign for. Tending bar is the one thing she actually knows how to do."
+portrait    = "nina.jpg"
+customizable = true
+
+[player.core_traits]
+corruption = 0
+energy     = 100
+hygiene    = 100
+money      = 80
+# Per-NPC stage traits (player namespace)
+sal_stage    = 0
+marcus_stage = 0
+dee_stage    = 0
+rosa_stage   = 0
+# Tier 2
+exhibitionism = 0
+# Phase 2+ (declared; mechanics dormant until enabled)
+pregnancy = 0
+# Sex-loop state (beat_0022, TLS Shady-clone). Numeric pseudo-enums (NOT flags — the
+# loop canvases are triggerless; flags would trip the flag-chain validator). Reset to 0
+# on every loop entry (the entering hub choice sets them). Hidden from the sidebar.
+#   sex_stage: 0 foreplay·1 blowjob·2 cunnilingus·3 doggy·4 missionary·5 ontop
+#   sex_finisher_type: 0 facial·1 pussy·2 ass·3 body   anal_active: 0 vaginal·1 anal
+sex_stage           = 0
+loop_npc_pleasure   = 0
+loop_player_pleasure = 0
+sex_finisher_type   = 0
+anal_active         = 0
+sex_reactions       = 0
+sex_entry_origin    = 0
+
+[[player.customization_fields]]
+id      = "name"
+type    = "text"
+label   = "Your name"
+default = "Nina"
+
+[[player.customization_fields]]
+id      = "body_type"
+type    = "select"
+label   = "Build"
+default = "average"
+options = ["petite", "average", "curvy", "athletic", "thick"]
+
+[[player.customization_fields]]
+id           = "look"
+type         = "image_select"
+label        = "Look"
+default      = "tired"
+sets_portrait = true
+options = [
+  { id = "tired",   image = "players/nina_tired.jpg",   label = "Worn out" },
+  { id = "guarded", image = "players/nina_guarded.jpg", label = "Guarded" },
+  { id = "sharp",   image = "players/nina_sharp.jpg",   label = "Sharp" },
+]
+
+# ─── NPCs ─────────────────────────────────────────────────────────────────────
+# Arc shapes: sal=slow-burn · marcus=peer/dating · collector=antagonist, debt-enforcer sub-type
+#             (escalates on player corruption × the bar_seized economic flag — NOT an awareness meter,
+#             which is the witness sub-type / Diana model)
+#             rosa=service/support · dee=service/leverage
+
+# ── Sal — bartender, slow-burn ────────────────────────────────────────────────
+[[npcs]]
+id          = "npc_sal"
+name        = "Sal"
+description = "Late fifties, built like a man who's lifted kegs for thirty years. Grey stubble, forearms like cabling, a bar towel always over one shoulder. He poured for Sully longer than you've been gone and he's still here, which tells you something about loyalty or about having nowhere else to go."
+portrait    = "sal.jpg"
+core_traits = { arousal = 0, corruption = 0 }
+flag_keys   = []
+arc_stages  = [
+  "Sizing you up",   # 0
+  "Warmed up",       # 1 — sal_opened_up
+  "Close quarters",  # 2 — sal_first_contact
+  "After hours",     # 3 — sal_after_hours_done
+  "His",             # 4 — sal_first_done
+]
+
+[[npcs.schedules]]
+location   = "loc_bar"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "22:00"
+activity   = "working the taps"
+
+[[npcs.schedules]]
+location   = "loc_bar"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "02:00"
+activity   = "the late crowd"
+
+# Offscreen "away" block — completes Sal's 24h day. He's home/asleep when the bar's
+# shut; loc_sal_place is offscreen (you can't follow him home). Schedule page shows it.
+[[npcs.schedules]]
+location   = "loc_sal_place"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "02:00"
+end_time   = "17:00"
+activity   = "home, off the clock"
+
+# ── Marcus — moneyed regular, peer/dating ─────────────────────────────────────
+[[npcs]]
+id          = "npc_marcus"
+name        = "Marcus"
+description = "Forties, good coat, the kind of watch you notice. He drinks top-shelf alone at the end of the bar and tips like the difference is nothing to him. Polite, attentive, patient — the patience of a man used to getting what he waits for."
+portrait    = "marcus.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = [
+  "A regular",       # 0
+  "Noticed",         # 1 — marcus_noticed
+  "Drinks after",    # 2 — marcus_drinks_done
+  "First date",      # 3 — marcus_date_done
+  "Together",        # 4 — marcus_first_done
+]
+
+[[npcs.schedules]]
+location   = "loc_bar"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "20:00"
+end_time   = "23:00"
+activity   = "drinking alone at the end of the bar"
+
+# Offscreen "away" block — completes Marcus's day. He's uptown the rest of the time;
+# loc_marcus_place is offscreen (you can't follow him home). Schedule page shows it.
+[[npcs.schedules]]
+location   = "loc_marcus_place"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "23:00"
+end_time   = "20:00"
+activity   = "uptown, wherever men like that go"
+
+# ── The Collector — Mr. Boyd's man, antagonist ────────────────────────────────
+[[npcs]]
+id          = "npc_collector"
+name        = "The Collector"
+description = "Heavyset, unhurried, a jacket that never quite closes over his shoulders. He calls himself Reggie when he's being friendly, which is never twice. He works for Mr. Boyd, who owns the debt, the block, and the patience you're running out of."
+portrait    = "collector.jpg"
+# Antagonist: no own meter — his pressure gates on the debt/eviction flags + player corruption (content
+# tier), correct for an antagonist/leverage NPC (P5/P11). No dead declarations.
+core_traits = {}
+flag_keys   = []
+
+[[npcs.schedules]]
+location   = "loc_bar"
+weekdays   = [0]
+start_time = "18:00"
+end_time   = "20:00"
+activity   = "collection night"
+
+# ── Rosa — cook, service/support ──────────────────────────────────────────────
+[[npcs]]
+id          = "npc_rosa"
+name        = "Rosa"
+description = "Runs the kitchen like it's a country she founded. Fifties, apron strings double-wrapped, a wooden spoon she points with. She fed Sully and she'll feed you, but the kitchen is hers and you'll learn that fast."
+portrait    = "rosa.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = [
+  "The new owner",   # 0
+  "Earned it",       # 1 — rosa_trusts
+]
+
+[[npcs.schedules]]
+location   = "loc_kitchen"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "23:00"
+activity   = "running the kitchen"
+
+# Offscreen "away" block — completes Rosa's day. Home with her family when the
+# kitchen's dark; loc_rosa_place is offscreen. Schedule page shows "Rosa — home".
+[[npcs.schedules]]
+location   = "loc_rosa_place"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "23:00"
+end_time   = "17:00"
+activity   = "home with the grandkids"
+
+# ── Dee — liquor supplier, service/leverage ───────────────────────────────────
+[[npcs]]
+id          = "npc_dee"
+name        = "Dee"
+description = "Distributor. Smooth, mid-forties, clipboard and a smile that's doing math. He sets the credit terms on every bottle that comes through the door, which means he sets how long you stay open."
+portrait    = "dee.jpg"
+# Leverage NPC: gated entirely player-side (money/debt + corruption) + the dee_* flag chain — no own
+# meter (correct for a coercive supplier; the leverage is the spine, not a bond). No dead declarations.
+core_traits = {}
+flag_keys   = []
+arc_stages  = [
+  "On the books",    # 0
+  "Flexible terms",  # 1 — dee_terms
+  "His kind of deal", # 2 — dee_deal_done
+]
+
+[[npcs.schedules]]
+location   = "loc_wholesaler"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "10:00"
+end_time   = "17:00"
+activity   = "at the depot"
+
+[[npcs.schedules]]
+location   = "loc_cellar"
+weekdays   = [1, 4]
+start_time = "14:00"
+end_time   = "15:00"
+activity   = "dropping a delivery"
+
+# Offscreen "away" blocks — complete Dee's whole week so the Schedule page is never
+# blank for him (audit F2). loc_dee_place is offscreen. WEEKDAY nights: depot closes
+# 17:00, he's off the clock until it reopens 10:00. WEEKENDS: depot shut all day, so a
+# full Sat/Sun away row (weekday index 0=Mon → 5=Sat, 6=Sun).
+[[npcs.schedules]]
+location   = "loc_dee_place"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "17:00"
+end_time   = "10:00"
+activity   = "off the clock, across the river"
+
+[[npcs.schedules]]
+location   = "loc_dee_place"
+weekdays   = [5, 6]
+start_time = "00:00"
+end_time   = "23:59"
+activity   = "across the river, depot shut for the weekend"
+
+# ─── Locations ────────────────────────────────────────────────────────────────
+# The building (loc_bar is the root + the player's start) + the town. All open;
+# loc_shark is added later by the beat-9 location_reveal.
+
+[[locations]]
+id               = "loc_bar"
+name             = "The Last Call"
+description      = "The floor. A scarred mahogany bar, a dozen stools, booths with cracked vinyl along the wall, a jukebox that only plays what Sully loaded into it. It smells like spilled beer and pine cleaner losing the fight. It's yours now."
+navigation_order = [
+  "loc_kitchen",
+  "loc_office",
+  "loc_cellar",
+  "loc_apartment",
+  "loc_street",
+]
+
+[[locations]]
+id          = "loc_kitchen"
+name        = "The Kitchen"
+description = "Cramped, stainless, hot. A flat-top, a fryer, a pass-through to the floor. Rosa's domain — her knives, her order, her rules. Smells like onions and old grease in a way that isn't unpleasant once you stop noticing."
+image       = "locations/kitchen.jpg"
+entry_from  = "loc_bar"
+
+[[locations]]
+id          = "loc_office"
+name        = "The Back Office"
+description = "A windowless room behind the bar. A desk buried in Sully's paperwork, a safe you don't have the combination to yet, a calendar still on the wrong month. This is where the numbers live, and the numbers are bad."
+image       = "locations/office.jpg"
+entry_from  = "loc_bar"
+
+[[locations]]
+id          = "loc_cellar"
+name        = "The Cellar"
+description = "Down a half-flight behind the bar. Kegs, cases, a walk-in cooler that hums. The delivery hatch opens to the alley. Cold enough that you can see your breath near the cooler."
+image       = "locations/cellar.jpg"
+entry_from  = "loc_bar"
+
+[[locations]]
+id          = "loc_apartment"
+name        = "The Apartment"
+description = "The studio over the bar, where Sully lived and where you live now. A bed, a hotplate, a closet, a bathroom the size of a phone booth. The floor thrums when the jukebox is on downstairs."
+image       = "locations/apartment.jpg"
+entry_from  = "loc_bar"
+
+[[locations]]
+id               = "loc_street"
+name             = "Main Street"
+description      = "The block out front. Half the storefronts are papered over. The good half — a bank, a wholesaler, a shop — is the half Mr. Boyd hasn't bought yet."
+image            = "locations/street.jpg"
+entry_from       = "loc_bar"
+navigation_order = [
+  "loc_bank",
+  "loc_shop",
+  "loc_wholesaler",
+  "loc_shark",
+]
+
+[[locations]]
+id          = "loc_bank"
+name        = "The Bank"
+description = "A branch that's seen better decades. One teller, a velvet rope nobody needs, a deposit slip you fill out with a pen chained to the counter. Where the night's takings go, and where the payment money comes from."
+image       = "locations/bank.jpg"
+entry_from  = "loc_street"
+
+[[locations]]
+id          = "loc_shop"
+name        = "Reece's"
+description = "A clothing shop that survives on the foot traffic the bank still brings. Racks of everything from work clothes to the kind of thing you'd wear if you wanted a room to look. The owner doesn't judge; she rings it up."
+image       = "locations/shop.jpg"
+entry_from  = "loc_street"
+
+[[locations]]
+id          = "loc_wholesaler"
+name        = "The Depot"
+description = "Dee's territory. A warehouse of pallets and clipboards where the liquor comes from. The loading dock, the little office with the space heater, the smell of cardboard and cold concrete."
+image       = "locations/wholesaler.jpg"
+entry_from  = "loc_street"
+
+# ── Offscreen "away" location (NPC schedule label; non-navigable; no nav card, no hub) ──
+# No entry_from, in no navigation_order → the player can't go here. NPCs schedule here for
+# their home/asleep/away blocks; the Schedule page shows "Sal — home". offscreen=true makes
+# it explicit + future-proof (excluded from nav/reachability/presence-floor).
+[[locations]]
+id          = "loc_sal_place"
+name        = "Sal's place"
+description = "Sal's apartment across town. You've never been."
+offscreen   = true
+
+[[locations]]
+id          = "loc_marcus_place"
+name        = "Uptown"
+description = "Wherever Marcus goes when the bar isn't enough. The part of town the money never left. Not yours."
+offscreen   = true
+
+[[locations]]
+id          = "loc_rosa_place"
+name        = "Rosa's place"
+description = "A house six blocks east, full of grandkids' photos and the smell of something always on the stove. You've never been asked over."
+offscreen   = true
+
+[[locations]]
+id          = "loc_dee_place"
+name        = "Across the river"
+description = "Wherever Dee keeps himself when the depot's locked. The other side of the water, where his books balance out of sight."
+offscreen   = true
+
+# ── beat_0009 (location_reveal) — Mr. Boyd's place ────────────────────────────
+# Locked until the Collector summons her (summoned_by_shark, set by canvas_shark_summons,
+# which fires once the debt goes past grace: bar_seized → summons → unlock). Unlock
+# contract Case A: a private location the player has no reason/way to reach until the
+# meeting that unlocks it. Reachable setter = canvas_shark_summons.
+[[locations]]
+id               = "loc_shark"
+name             = "Boyd's Place"
+description      = "A back office above a check-cashing shop three blocks off Main. Frosted glass, a buzzer, a man at the door who doesn't talk. This is where the debt actually lives — not in your ledger, but in a room that smells like cigars and other people's bad luck."
+image            = "locations/shark.jpg"
+entry_from       = "loc_street"
+entry_conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "summoned_by_shark", operator = "is_true" },
+] }
+blocked_message = "I've got no reason to go knocking on Boyd's door — and every reason not to. Not yet."

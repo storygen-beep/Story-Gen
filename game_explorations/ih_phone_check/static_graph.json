@@ -1,0 +1,4072 @@
+{
+  "generated_at": "2026-06-14T22:47:21.967Z",
+  "total_passages": 182,
+  "skipped_passages": 0,
+  "parse_errors": 0,
+  "total_edges": 294,
+  "edges_by_kind": {
+    "wiki": 127,
+    "button": 124,
+    "link": 43
+  },
+  "edges": [
+    {
+      "from": "Start",
+      "to": "CustomizeCharacters",
+      "display": "✓ I am 18 or older - Enter Game",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 4679
+    },
+    {
+      "from": "Start",
+      "to": "AgeBlocked",
+      "display": "✗ I am NOT 18 or older",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 4736
+    },
+    {
+      "from": "CustomizeCharacters",
+      "to": "StartingCanvas_canvas_arrival_Node_1",
+      "display": "Continue to Game",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1820
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "CanvasReviewList",
+      "display": "📋 Review Canvases",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 3624
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "QuestsPage",
+      "display": "📋 Quests",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"QuestsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 22283
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "MissingMediaPage",
+      "display": "⚠️ Missing Media",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "$flags.debug_mode",
+          "branch": "if"
+        },
+        {
+          "condition": "passage() isnot \"MissingMediaPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 22533
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "QuestsPage",
+      "display": "📋 Quests",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"QuestsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 22787
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "TipsPage",
+      "display": "💡 Tips",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.tips_page && setup.tips_page.content",
+          "branch": "if"
+        },
+        {
+          "condition": "passage() isnot \"TipsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 23095
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "StatsPage",
+      "display": "📊 Stats",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"StatsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 23273
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "SchedulePage",
+      "display": "📅 Schedules",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "_npcsWithSchedules.length > 0 || _soloActivities.length > 0",
+          "branch": "if"
+        },
+        {
+          "condition": "passage() isnot \"SchedulePage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 23642
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "FlagsPage",
+      "display": "🚩 Flags",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"FlagsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 24319
+    },
+    {
+      "from": "StoryJournal",
+      "to": "Navigation",
+      "display": "Return to your story",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3322
+    },
+    {
+      "from": "StartingCanvas_canvas_arrival_Node_1",
+      "to": "Location_The_Hotel_—_Lobby",
+      "display": "Go in.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3161
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Hotel_—_Lobby",
+      "display": "The Hotel — Lobby",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 88
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Hotel_—_Bar",
+      "display": "The Hotel — Bar",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 146
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Hotel_—_Guest_Rooms",
+      "display": "The Hotel — Guest Rooms",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 200
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Hotel_—_Back_Office",
+      "display": "The Hotel — Back Office",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 270
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Hotel_—_Private_Floor",
+      "display": "The Hotel — Private Floor",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 340
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Residence",
+      "display": "The Residence",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 414
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Your_Old_Room",
+      "display": "Your Old Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 464
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Drawing_Room",
+      "display": "The Drawing Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 514
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Study",
+      "display": "The Study",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 570
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Kitchen",
+      "display": "The Kitchen",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 612
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Terrace",
+      "display": "The Terrace",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 658
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Upstairs_Bath",
+      "display": "The Upstairs Bath",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 704
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Audrey's_Room",
+      "display": "Audrey's Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 762
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Grayson's_Room",
+      "display": "Grayson's Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 812
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Richard's_Room",
+      "display": "Richard's Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 864
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Margaret's_Room",
+      "display": "Margaret's Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 916
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Town",
+      "display": "Town",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 970
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Halloway_&_Sons",
+      "display": "Halloway & Sons",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1002
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Boutique",
+      "display": "The Boutique",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1056
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Adult_Shop",
+      "display": "The Adult Shop",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1104
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Town_—_Out_&_About",
+      "display": "Town — Out & About",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1156
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_College",
+      "display": "The College",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1216
+    },
+    {
+      "from": "Location_The_Hotel_—_Bar",
+      "to": "Location_The_Hotel_—_Lobby",
+      "display": "Leave The Hotel — Bar",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 848
+    },
+    {
+      "from": "Location_The_Hotel_—_Guest_Rooms",
+      "to": "Location_The_Hotel_—_Lobby",
+      "display": "Leave The Hotel — Guest Rooms",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 844
+    },
+    {
+      "from": "Location_The_Hotel_—_Back_Office",
+      "to": "Location_The_Hotel_—_Lobby",
+      "display": "Leave The Hotel — Back Office",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"hotel_money_control\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 1061
+    },
+    {
+      "from": "Location_The_Hotel_—_Back_Office",
+      "to": "Location_The_Hotel_—_Lobby",
+      "display": "Go back",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"hotel_money_control\", \"operator\": \"is_true\"}]}))",
+          "branch": "else"
+        }
+      ],
+      "index": 1297
+    },
+    {
+      "from": "Location_The_Hotel_—_Private_Floor",
+      "to": "Location_The_Hotel_—_Lobby",
+      "display": "Leave The Hotel — Private Floor",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"upgrade_private_floor\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 1114
+    },
+    {
+      "from": "Location_The_Hotel_—_Private_Floor",
+      "to": "Location_The_Hotel_—_Lobby",
+      "display": "Go back",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"upgrade_private_floor\", \"operator\": \"is_true\"}]}))",
+          "branch": "else"
+        }
+      ],
+      "index": 1391
+    },
+    {
+      "from": "Location_The_Residence",
+      "to": "Location_The_Hotel_—_Lobby",
+      "display": "Leave The Residence",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 14781
+    },
+    {
+      "from": "Location_Your_Old_Room",
+      "to": "WardrobePage",
+      "display": "Change Clothes",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 619
+    },
+    {
+      "from": "Location_Your_Old_Room",
+      "to": "Location_The_Residence",
+      "display": "Leave Your Old Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 875
+    },
+    {
+      "from": "Location_The_Drawing_Room",
+      "to": "Location_The_Residence",
+      "display": "Leave The Drawing Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 835
+    },
+    {
+      "from": "Location_The_Study",
+      "to": "Location_The_Residence",
+      "display": "Leave The Study",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 828
+    },
+    {
+      "from": "Location_The_Kitchen",
+      "to": "Location_The_Residence",
+      "display": "Leave The Kitchen",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 812
+    },
+    {
+      "from": "Location_The_Terrace",
+      "to": "Location_The_Residence",
+      "display": "Leave The Terrace",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 827
+    },
+    {
+      "from": "Location_The_Upstairs_Bath",
+      "to": "Location_The_Residence",
+      "display": "Leave The Upstairs Bath",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 826
+    },
+    {
+      "from": "Location_Audrey's_Room",
+      "to": "Location_The_Residence",
+      "display": "Leave Audrey's Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 783
+    },
+    {
+      "from": "Location_Grayson's_Room",
+      "to": "Location_The_Residence",
+      "display": "Leave Grayson's Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 785
+    },
+    {
+      "from": "Location_Richard's_Room",
+      "to": "Location_The_Residence",
+      "display": "Leave Richard's Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 771
+    },
+    {
+      "from": "Location_Margaret's_Room",
+      "to": "Location_The_Residence",
+      "display": "Leave Margaret's Room",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 779
+    },
+    {
+      "from": "Location_Town",
+      "to": "Location_The_Hotel_—_Lobby",
+      "display": "Leave Town",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 6427
+    },
+    {
+      "from": "Location_Halloway_&_Sons",
+      "to": "Location_Town",
+      "display": "Leave Halloway & Sons",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 835
+    },
+    {
+      "from": "Location_The_Boutique",
+      "to": "ShopPage",
+      "display": "Browse Clothes",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 542
+    },
+    {
+      "from": "Location_The_Boutique",
+      "to": "Location_Town",
+      "display": "Leave The Boutique",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 794
+    },
+    {
+      "from": "Location_The_Adult_Shop",
+      "to": "Location_Town",
+      "display": "Leave The Adult Shop",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 814
+    },
+    {
+      "from": "Location_Town_—_Out_&_About",
+      "to": "Location_Town",
+      "display": "Leave Town — Out & About",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 793
+    },
+    {
+      "from": "Canvas_lorna_partnership_Node_1",
+      "to": "Location_The_Hotel_—_Bar",
+      "display": "Partners.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 4054
+    },
+    {
+      "from": "Canvas_marg_slave_terminal_Node_1",
+      "to": "Location_Margaret's_Room",
+      "display": "Take your throne.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3998
+    },
+    {
+      "from": "Canvas_marg_breaking_Node_1",
+      "to": "Location_Margaret's_Room",
+      "display": "Leave the men to finish. Decide her place.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 5846
+    },
+    {
+      "from": "Canvas_marg_setup_Node_1",
+      "to": "Location_Margaret's_Room",
+      "display": "Take her up to her room.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3105
+    },
+    {
+      "from": "Canvas_marg_board_turns_Node_1",
+      "to": "Location_The_Drawing_Room",
+      "display": "Let her sit with it.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 4509
+    },
+    {
+      "from": "Canvas_marg_ambient_scheming_Node_1",
+      "to": "Location_The_Drawing_Room",
+      "display": "Note the move. Keep yours hidden.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2339
+    },
+    {
+      "from": "Canvas_marg_ambient_menace_Node_1",
+      "to": "Location_The_Drawing_Room",
+      "display": "Smile back. Give her nothing.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2252
+    },
+    {
+      "from": "Canvas_marg_drawing_room_hub_Node_1",
+      "to": "Location_The_Drawing_Room",
+      "display": "Trade one more blow. Bank it for later.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"margaret_cornered\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 5609
+    },
+    {
+      "from": "Canvas_marg_drawing_room_hub_Node_1",
+      "to": "Location_The_Drawing_Room",
+      "display": "Domestic — run her ragged, in front of whoever's watching.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"margaret_slave\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 6319
+    },
+    {
+      "from": "Canvas_marg_drawing_room_hub_Node_1",
+      "to": "Canvas_marg_drawing_room_hub_Node_2",
+      "display": "Sexual use — point the family at her.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"margaret_slave\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 6842
+    },
+    {
+      "from": "Canvas_marg_drawing_room_hub_Node_1",
+      "to": "Canvas_marg_drawing_room_hub_Node_3",
+      "display": "Put her on the floor — let the vice-house use what's left.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"margaret_slave\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 7353
+    },
+    {
+      "from": "Canvas_marg_drawing_room_hub_Node_1",
+      "to": "Location_The_Drawing_Room",
+      "display": "Just let her wait.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"margaret_slave\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 7885
+    },
+    {
+      "from": "Canvas_marg_drawing_room_hub_Node_1",
+      "to": "Location_The_Drawing_Room",
+      "display": "Continue",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "not ((setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"margaret_cornered\", \"operator\": \"is_false\"}]})) or (setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"margaret_slave\", \"operator\": \"is_true\"}]})) or (setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"margaret_slave\", \"operator\": \"is_true\"}]})) or (setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"margaret_slave\", \"operator\": \"is_true\"}]})) or (setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"margaret_slave\", \"operator\": \"is_true\"}]})))",
+          "branch": "if"
+        }
+      ],
+      "index": 11523
+    },
+    {
+      "from": "Canvas_marg_drawing_room_hub_Node_2",
+      "to": "Location_The_Drawing_Room",
+      "display": "Leave them to it.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1806
+    },
+    {
+      "from": "Canvas_marg_drawing_room_hub_Node_3",
+      "to": "Location_The_Drawing_Room",
+      "display": "Collect the floor's take.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1906
+    },
+    {
+      "from": "Canvas_aud_3some_grayson_Node_1",
+      "to": "Location_Audrey's_Room",
+      "display": "Dismiss them both.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 5651
+    },
+    {
+      "from": "Canvas_aud_3some_richard_Node_1",
+      "to": "Location_Audrey's_Room",
+      "display": "Keep them both.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 5633
+    },
+    {
+      "from": "Canvas_rich_at_your_side_Node_1",
+      "to": "Location_The_Study",
+      "display": "Put him to good use.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3109
+    },
+    {
+      "from": "Canvas_rich_the_keys_Node_1",
+      "to": "Location_The_Study",
+      "display": "Take the keys.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 4709
+    },
+    {
+      "from": "Canvas_rich_first_night_Node_1",
+      "to": "Location_Richard's_Room",
+      "display": "Stay the night.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 5768
+    },
+    {
+      "from": "Canvas_rich_ambient_alive_Node_1",
+      "to": "Location_The_Study",
+      "display": "Let him stand there wanting.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2199
+    },
+    {
+      "from": "Canvas_rich_back_to_life_Node_1",
+      "to": "Location_The_Study",
+      "display": "Tell him it's all right. Leave him wanting.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 5683
+    },
+    {
+      "from": "Canvas_rich_confides_Node_1",
+      "to": "Location_The_Study",
+      "display": "Say goodnight.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 4532
+    },
+    {
+      "from": "Canvas_rich_ambient_grief_Node_1",
+      "to": "Location_The_Study",
+      "display": "Leave him to the window.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2232
+    },
+    {
+      "from": "Canvas_gray_free_Node_1",
+      "to": "Location_The_Drawing_Room",
+      "display": "Keep him.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 5596
+    },
+    {
+      "from": "Canvas_gray_stops_pretending_Node_1",
+      "to": "Location_The_Drawing_Room",
+      "display": "Let him stay — on your terms.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 5562
+    },
+    {
+      "from": "Canvas_gray_on_knees_Node_1",
+      "to": "Location_The_Drawing_Room",
+      "display": "Send him to clean up.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 5614
+    },
+    {
+      "from": "Canvas_gray_the_deal_Node_1",
+      "to": "Location_The_Drawing_Room",
+      "display": "Welcome him to the payroll.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 4812
+    },
+    {
+      "from": "Canvas_gray_cut_allowance_Node_1",
+      "to": "Location_The_Hotel_—_Back_Office",
+      "display": "Close the ledger. Wait.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2984
+    },
+    {
+      "from": "Canvas_gray_debt_tip_Node_1",
+      "to": "Location_The_Hotel_—_Bar",
+      "display": "File it away.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3231
+    },
+    {
+      "from": "Canvas_gray_ambient_contempt_Node_1",
+      "to": "Location_The_Drawing_Room",
+      "display": "Let him think it.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3011
+    },
+    {
+      "from": "Canvas_gray_prey_grope_Node_1",
+      "to": "Location_The_Drawing_Room",
+      "display": "Say nothing. Remember it.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 5352
+    },
+    {
+      "from": "Canvas_aud_lesson_anal_Node_1",
+      "to": "Location_Audrey's_Room",
+      "display": "Lie down with her.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 5771
+    },
+    {
+      "from": "Canvas_aud_3some_danny_Node_1",
+      "to": "Location_Audrey's_Room",
+      "display": "Send the boy home happy.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 5626
+    },
+    {
+      "from": "Canvas_aud_firstnight_Node_1",
+      "to": "Location_Audrey's_Room",
+      "display": "Hold her while she sleeps.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 5932
+    },
+    {
+      "from": "Canvas_aud_danny_study_Node_1",
+      "to": "Location_Audrey's_Room",
+      "display": "Leave them to it — for now.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2435
+    },
+    {
+      "from": "Canvas_aud_danny_bf_Node_1",
+      "to": "Location_Audrey's_Room",
+      "display": "Tell her you're proud of her.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3984
+    },
+    {
+      "from": "Canvas_aud_lesson_blowjob_Node_1",
+      "to": "Location_Audrey's_Room",
+      "display": "Let her finish.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 5554
+    },
+    {
+      "from": "Canvas_aud_lesson_toy_Node_1",
+      "to": "Location_Audrey's_Room",
+      "display": "Tell her to keep it. Practice.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 4774
+    },
+    {
+      "from": "Canvas_aud_lesson_kiss_Node_1",
+      "to": "Location_Audrey's_Room",
+      "display": "Break it off first — make her want more.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 4696
+    },
+    {
+      "from": "Canvas_aud_lesson_masturbate_Node_1",
+      "to": "Location_Audrey's_Room",
+      "display": "Tell her she did well.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 5759
+    },
+    {
+      "from": "Canvas_aud_teachme_Node_1",
+      "to": "Location_Audrey's_Room",
+      "display": "Tell her you'll teach her.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 4495
+    },
+    {
+      "from": "Canvas_aud_tuition_Node_1",
+      "to": "Location_Audrey's_Room",
+      "display": "Tell her it's handled.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 4479
+    },
+    {
+      "from": "Canvas_canvas_take_books_Node_1",
+      "to": "Location_The_Hotel_—_Back_Office",
+      "display": "Sit at the desk.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3519
+    },
+    {
+      "from": "Canvas_scene_lobby_eyes_Node_1",
+      "to": "Location_The_Hotel_—_Lobby",
+      "display": "Let them look.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2294
+    },
+    {
+      "from": "Canvas_canvas_meet_lorna_Node_1",
+      "to": "Location_The_Hotel_—_Bar",
+      "display": "Take the drink.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3673
+    },
+    {
+      "from": "Canvas_activity_private_floor_Node_1",
+      "to": "Canvas_activity_private_floor_Node_2",
+      "display": "Take a private client.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.checkCostsAffordable([{\"trait\": \"energy\", \"value\": 30}])",
+          "branch": "if"
+        }
+      ],
+      "index": 2293
+    },
+    {
+      "from": "Canvas_activity_private_floor_Node_1",
+      "to": "Canvas_activity_private_floor_Node_3",
+      "display": "Entertain a regular — the VIP treatment.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 80}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "setup.checkCostsAffordable([{\"trait\": \"energy\", \"value\": 35}])",
+          "branch": "if"
+        }
+      ],
+      "index": 3141
+    },
+    {
+      "from": "Canvas_activity_private_floor_Node_1",
+      "to": "Canvas_activity_private_floor_Node_4",
+      "display": "Be the headline act 👀",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 90}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "setup.checkCostsAffordable([{\"trait\": \"energy\", \"value\": 40}])",
+          "branch": "if"
+        }
+      ],
+      "index": 4288
+    },
+    {
+      "from": "Canvas_activity_private_floor_Node_1",
+      "to": "Location_The_Hotel_—_Private_Floor",
+      "display": "Just run the book tonight.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 5040
+    },
+    {
+      "from": "Canvas_activity_private_floor_Node_2",
+      "to": "Location_The_Hotel_—_Private_Floor",
+      "display": "Pocket the money.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2114
+    },
+    {
+      "from": "Canvas_activity_private_floor_Node_3",
+      "to": "Location_The_Hotel_—_Private_Floor",
+      "display": "Bill him and move on.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2098
+    },
+    {
+      "from": "Canvas_activity_private_floor_Node_4",
+      "to": "Location_The_Hotel_—_Private_Floor",
+      "display": "Count the night's take.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2144
+    },
+    {
+      "from": "Canvas_rich_bed_Node_1",
+      "to": "Location_Richard's_Room",
+      "display": "Stay a while.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 4155
+    },
+    {
+      "from": "Canvas_rich_study_hub_Node_1",
+      "to": "Location_The_Study",
+      "display": "Stay until he's eaten.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"richard_opened\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 7319
+    },
+    {
+      "from": "Canvas_rich_study_hub_Node_1",
+      "to": "Location_The_Study",
+      "display": "Reward him. Let him want it.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"richard_opened\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 8006
+    },
+    {
+      "from": "Canvas_rich_study_hub_Node_1",
+      "to": "Location_The_Study",
+      "display": "Continue",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "not ((setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"richard_opened\", \"operator\": \"is_false\"}]})) or (setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"richard_opened\", \"operator\": \"is_true\"}]})))",
+          "branch": "if"
+        }
+      ],
+      "index": 10808
+    },
+    {
+      "from": "Canvas_gray_serve_Node_1",
+      "to": "Location_The_Drawing_Room",
+      "display": "Run him ragged — fetch, carry, wait on you.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1976
+    },
+    {
+      "from": "Canvas_gray_serve_Node_1",
+      "to": "Canvas_gray_serve_Node_2",
+      "display": "Make him beg for it on his knees.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"grayson_used\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2584
+    },
+    {
+      "from": "Canvas_gray_serve_Node_1",
+      "to": "Canvas_gray_serve_Node_3",
+      "display": "Use his body — ride him, your way.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"grayson_used\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 3244
+    },
+    {
+      "from": "Canvas_gray_serve_Node_1",
+      "to": "Canvas_gray_serve_Node_4",
+      "display": "Make him watch you take someone else.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"grayson_craves\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 3867
+    },
+    {
+      "from": "Canvas_gray_serve_Node_1",
+      "to": "Canvas_gray_serve_Node_5",
+      "display": "The deep things — peg him, lock him up, leave him aching.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"grayson_craves\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 4505
+    },
+    {
+      "from": "Canvas_gray_serve_Node_1",
+      "to": "Location_The_Drawing_Room",
+      "display": "Dismiss him for now.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 4895
+    },
+    {
+      "from": "Canvas_gray_serve_Node_2",
+      "to": "Location_The_Drawing_Room",
+      "display": "Leave him kneeling.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2044
+    },
+    {
+      "from": "Canvas_gray_serve_Node_3",
+      "to": "Location_The_Drawing_Room",
+      "display": "Send him to clean up.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1987
+    },
+    {
+      "from": "Canvas_gray_serve_Node_4",
+      "to": "Location_The_Drawing_Room",
+      "display": "Let him stew.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1982
+    },
+    {
+      "from": "Canvas_gray_serve_Node_5",
+      "to": "Location_The_Drawing_Room",
+      "display": "Lock him up and go.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1987
+    },
+    {
+      "from": "Canvas_aud_practice_Node_1",
+      "to": "Canvas_aud_practice_Node_2",
+      "display": "Have her show you her homework.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2054
+    },
+    {
+      "from": "Canvas_aud_practice_Node_1",
+      "to": "Canvas_aud_practice_Node_3",
+      "display": "Practice kissing.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"audrey_skill_kiss\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2448
+    },
+    {
+      "from": "Canvas_aud_practice_Node_1",
+      "to": "Canvas_aud_practice_Node_4",
+      "display": "Practice with the toy.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"audrey_skill_toy\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 3076
+    },
+    {
+      "from": "Canvas_aud_practice_Node_1",
+      "to": "Canvas_aud_practice_Node_5",
+      "display": "Practice with her mouth.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"audrey_skill_blowjob\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 3721
+    },
+    {
+      "from": "Canvas_aud_practice_Node_1",
+      "to": "Canvas_aud_practice_Node_6",
+      "display": "Take her to bed.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"audrey_skill_sex\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 4384
+    },
+    {
+      "from": "Canvas_aud_practice_Node_1",
+      "to": "Canvas_aud_practice_Node_7",
+      "display": "Take her the other way.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"audrey_skill_anal\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 5006
+    },
+    {
+      "from": "Canvas_aud_practice_Node_1",
+      "to": "Location_Audrey's_Room",
+      "display": "Not today — let her study.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 5374
+    },
+    {
+      "from": "Canvas_aud_practice_Node_2",
+      "to": "Location_Audrey's_Room",
+      "display": "Tell her she did well.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2074
+    },
+    {
+      "from": "Canvas_aud_practice_Node_3",
+      "to": "Location_Audrey's_Room",
+      "display": "Break it off first.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1995
+    },
+    {
+      "from": "Canvas_aud_practice_Node_4",
+      "to": "Location_Audrey's_Room",
+      "display": "Tell her to keep practicing.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1969
+    },
+    {
+      "from": "Canvas_aud_practice_Node_5",
+      "to": "Location_Audrey's_Room",
+      "display": "Let her finish.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2014
+    },
+    {
+      "from": "Canvas_aud_practice_Node_6",
+      "to": "Location_Audrey's_Room",
+      "display": "Hold her after.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1981
+    },
+    {
+      "from": "Canvas_aud_practice_Node_7",
+      "to": "Location_Audrey's_Room",
+      "display": "Lie down with her.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1987
+    },
+    {
+      "from": "Canvas_canvas_adult_shop_Node_1",
+      "to": "Location_The_Adult_Shop",
+      "display": "Buy the toy — $60",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"item\", \"item_id\": \"dildo\", \"operator\": \"lt\", \"value\": 1}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "setup.checkCostsAffordable([{\"trait\": \"money\", \"value\": 60}])",
+          "branch": "if"
+        }
+      ],
+      "index": 2379
+    },
+    {
+      "from": "Canvas_canvas_adult_shop_Node_1",
+      "to": "Location_The_Adult_Shop",
+      "display": "Buy the strap-on — $90",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"item\", \"item_id\": \"strap_on\", \"operator\": \"lt\", \"value\": 1}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "setup.checkCostsAffordable([{\"trait\": \"money\", \"value\": 90}])",
+          "branch": "if"
+        }
+      ],
+      "index": 3321
+    },
+    {
+      "from": "Canvas_canvas_adult_shop_Node_1",
+      "to": "Location_The_Adult_Shop",
+      "display": "Buy the bottle — $120",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"item\", \"item_id\": \"drug\", \"operator\": \"lt\", \"value\": 1}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "setup.checkCostsAffordable([{\"trait\": \"money\", \"value\": 120}])",
+          "branch": "if"
+        }
+      ],
+      "index": 4278
+    },
+    {
+      "from": "Canvas_canvas_adult_shop_Node_1",
+      "to": "Location_Town",
+      "display": "Leave.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 4915
+    },
+    {
+      "from": "Canvas_activity_escort_Node_1",
+      "to": "Location_The_Hotel_—_Guest_Rooms",
+      "display": "Collect and go back down.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "setup.checkCostsAffordable(_costs)",
+          "branch": "if"
+        }
+      ],
+      "index": 3700
+    },
+    {
+      "from": "Canvas_activity_escort_Node_1",
+      "to": "Location_The_Hotel_—_Guest_Rooms",
+      "display": "Back",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(setup.checkCostsAffordable(_costs))",
+          "branch": "else"
+        }
+      ],
+      "index": 3865
+    },
+    {
+      "from": "Canvas_activity_sell_photos_Node_1",
+      "to": "Canvas_activity_sell_photos_Node_2",
+      "display": "Sell tasteful shots.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.checkCostsAffordable([{\"trait\": \"energy\", \"value\": 5}])",
+          "branch": "if"
+        }
+      ],
+      "index": 2101
+    },
+    {
+      "from": "Canvas_activity_sell_photos_Node_1",
+      "to": "Canvas_activity_sell_photos_Node_3",
+      "display": "Sell something bolder 👀",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 50}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "setup.checkCostsAffordable([{\"trait\": \"energy\", \"value\": 5}])",
+          "branch": "if"
+        }
+      ],
+      "index": 2938
+    },
+    {
+      "from": "Canvas_activity_sell_photos_Node_1",
+      "to": "Location_Your_Old_Room",
+      "display": "Continue",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "not ((setup.checkCostsAffordable([{\"trait\": \"energy\", \"value\": 5}])) or (setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 50}]}) and setup.checkCostsAffordable([{\"trait\": \"energy\", \"value\": 5}])))",
+          "branch": "if"
+        }
+      ],
+      "index": 5817
+    },
+    {
+      "from": "Canvas_activity_sell_photos_Node_2",
+      "to": "Location_Your_Old_Room",
+      "display": "Upload and cash out.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2031
+    },
+    {
+      "from": "Canvas_activity_sell_photos_Node_3",
+      "to": "Location_Your_Old_Room",
+      "display": "Upload the set.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2128
+    },
+    {
+      "from": "Canvas_activity_comped_favor_Node_1",
+      "to": "Location_The_Hotel_—_Guest_Rooms",
+      "display": "Pocket it and go back down.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "setup.checkCostsAffordable(_costs)",
+          "branch": "if"
+        }
+      ],
+      "index": 3695
+    },
+    {
+      "from": "Canvas_activity_comped_favor_Node_1",
+      "to": "Location_The_Hotel_—_Guest_Rooms",
+      "display": "Back",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(setup.checkCostsAffordable(_costs))",
+          "branch": "else"
+        }
+      ],
+      "index": 3862
+    },
+    {
+      "from": "Canvas_activity_hostess_shift_Node_1",
+      "to": "Location_The_Hotel_—_Lobby",
+      "display": "Close out the shift.",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.checkCostsAffordable([{\"trait\": \"energy\", \"value\": 15}])",
+          "branch": "if"
+        }
+      ],
+      "index": 2172
+    },
+    {
+      "from": "Canvas_activity_hostess_shift_Node_1",
+      "to": "Canvas_activity_hostess_shift_Node_2",
+      "display": "Work the floor in less 👀",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"worn_corruption\", \"operator\": \"gte\", \"value\": 15}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "setup.checkCostsAffordable([{\"trait\": \"energy\", \"value\": 15}])",
+          "branch": "if"
+        }
+      ],
+      "index": 3066
+    },
+    {
+      "from": "Canvas_activity_hostess_shift_Node_1",
+      "to": "Location_The_Hotel_—_Lobby",
+      "display": "Continue",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "not ((setup.checkCostsAffordable([{\"trait\": \"energy\", \"value\": 15}])) or (setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"worn_corruption\", \"operator\": \"gte\", \"value\": 15}]}) and setup.checkCostsAffordable([{\"trait\": \"energy\", \"value\": 15}])))",
+          "branch": "if"
+        }
+      ],
+      "index": 5895
+    },
+    {
+      "from": "Canvas_activity_hostess_shift_Node_2",
+      "to": "Location_The_Hotel_—_Lobby",
+      "display": "Cash out the shift.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2135
+    },
+    {
+      "from": "Canvas_activity_masturbate_Node_1",
+      "to": "Location_Your_Old_Room",
+      "display": "Lie back.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3331
+    },
+    {
+      "from": "Canvas_activity_mirror_Node_1",
+      "to": "Location_Your_Old_Room",
+      "display": "Get dressed properly.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3320
+    },
+    {
+      "from": "Canvas_activity_porn_phone_Node_1",
+      "to": "Location_Your_Old_Room",
+      "display": "Put the phone down.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3232
+    },
+    {
+      "from": "Canvas_activity_porn_tv_Node_1",
+      "to": "Location_Your_Old_Room",
+      "display": "Turn it off.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3204
+    },
+    {
+      "from": "Canvas_activity_sleep_Node_1",
+      "to": "Location_Your_Old_Room",
+      "display": "Wake up.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 2132
+    },
+    {
+      "from": "Canvas_canvas_foreclosure_setback_Node_1",
+      "to": "Location_The_Hotel_—_Lobby",
+      "display": "See him out.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3404
+    },
+    {
+      "from": "Canvas_canvas_foreclosure_paid_Node_1",
+      "to": "Location_The_Hotel_—_Lobby",
+      "display": "See him out.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3053
+    },
+    {
+      "from": "Canvas_canvas_upgrade_vice_house_Node_1",
+      "to": "Location_The_Hotel_—_Back_Office",
+      "display": "Open the doors.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "setup.checkCostsAffordable(_costs)",
+          "branch": "if"
+        }
+      ],
+      "index": 3303
+    },
+    {
+      "from": "Canvas_canvas_upgrade_vice_house_Node_1",
+      "to": "Location_The_Hotel_—_Back_Office",
+      "display": "Back",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(setup.checkCostsAffordable(_costs))",
+          "branch": "else"
+        }
+      ],
+      "index": 3458
+    },
+    {
+      "from": "Canvas_canvas_upgrade_private_floor_Node_1",
+      "to": "Location_The_Hotel_—_Back_Office",
+      "display": "Sign off on the build.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "setup.checkCostsAffordable(_costs)",
+          "branch": "if"
+        }
+      ],
+      "index": 3295
+    },
+    {
+      "from": "Canvas_canvas_upgrade_private_floor_Node_1",
+      "to": "Location_The_Hotel_—_Back_Office",
+      "display": "Back",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(setup.checkCostsAffordable(_costs))",
+          "branch": "else"
+        }
+      ],
+      "index": 3457
+    },
+    {
+      "from": "Canvas_canvas_upgrade_back_rooms_Node_1",
+      "to": "Location_The_Hotel_—_Back_Office",
+      "display": "Sign off on the refit.",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "setup.checkCostsAffordable(_costs)",
+          "branch": "if"
+        }
+      ],
+      "index": 3204
+    },
+    {
+      "from": "Canvas_canvas_upgrade_back_rooms_Node_1",
+      "to": "Location_The_Hotel_—_Back_Office",
+      "display": "Back",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(setup.checkCostsAffordable(_costs))",
+          "branch": "else"
+        }
+      ],
+      "index": 3366
+    },
+    {
+      "from": "Canvas_canvas_will_reading_Node_1",
+      "to": "Location_The_Hotel_—_Lobby",
+      "display": "Start where the money is — the hotel.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 6496
+    },
+    {
+      "from": "Canvas_canvas_will_reading_Node_1",
+      "to": "Location_The_Hotel_—_Lobby",
+      "display": "Stay. Learn the room first.",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 6810
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_rich_ambient_grief",
+      "display": "T2",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 343
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_rich_ambient_alive",
+      "display": "T2",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 654
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_masturbate",
+      "display": "T2",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 960
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_marg_ambient_menace",
+      "display": "T2",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1281
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_rich_at_your_side",
+      "display": "T7",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1593
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_rich_back_to_life",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1903
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_gray_prey_grope",
+      "display": "T8",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2213
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_comped_favor",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2524
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_gray_cut_allowance",
+      "display": "T8",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2838
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_scene_lobby_eyes",
+      "display": "T2",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 3153
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_aud_3some_richard",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 3456
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_rich_confides",
+      "display": "T7",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 3764
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_gray_stops_pretending",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 4081
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_rich_bed",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 4381
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_arrival",
+      "display": "T12",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 4672
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_escort",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 4984
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_aud_3some_grayson",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 5304
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_gray_ambient_contempt",
+      "display": "T2",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 5623
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_marg_drawing_room_hub",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 5937
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_gray_on_knees",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 6247
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_aud_practice",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 6556
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_aud_lesson_kiss",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 6866
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_gray_serve",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 7170
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_marg_setup",
+      "display": "T8",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 7471
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_rich_study_hub",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 7766
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_porn_phone",
+      "display": "T2",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 8072
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_sell_photos",
+      "display": "T2",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 8391
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_aud_danny_bf",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 8702
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_sleep",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 8997
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_aud_danny_study",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 9300
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_aud_3some_danny",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 9605
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_aud_teachme",
+      "display": "T8",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 9903
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_upgrade_back_rooms",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 10217
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_meet_lorna",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 10536
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_marg_board_turns",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 10848
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_take_books",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 11154
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_marg_breaking",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 11460
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_gray_the_deal",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 11758
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_marg_slave_terminal",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 12070
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_aud_lesson_masturbate",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 12390
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_rich_first_night",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 12706
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_aud_firstnight",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 12906
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_rich_the_keys",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 13205
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_aud_lesson_anal",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 13512
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_porn_tv",
+      "display": "T2",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 13823
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_mirror",
+      "display": "T2",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 14128
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_aud_lesson_blowjob",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 14441
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_marg_ambient_scheming",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 14760
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_lorna_partnership",
+      "display": "T8",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 15077
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_upgrade_private_floor",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 15403
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_will_reading",
+      "display": "T11",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 15738
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_foreclosure_setback",
+      "display": "T11",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 16061
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_foreclosure_paid",
+      "display": "T11",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 16281
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_adult_shop",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 16594
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_aud_lesson_toy",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 16903
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_upgrade_vice_house",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 17221
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_gray_debt_tip",
+      "display": "T6",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 17539
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_hostess_shift",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 17852
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_private_floor",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 18182
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_aud_tuition",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 18497
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_gray_free",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 18798
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "Navigation",
+      "display": "Back to Game",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 18927
+    },
+    {
+      "from": "CanvasReview_canvas_arrival",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1792
+    },
+    {
+      "from": "CanvasReview_lorna_partnership",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1708
+    },
+    {
+      "from": "CanvasReview_marg_slave_terminal",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1550
+    },
+    {
+      "from": "CanvasReview_marg_breaking",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1357
+    },
+    {
+      "from": "CanvasReview_marg_setup",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1716
+    },
+    {
+      "from": "CanvasReview_marg_board_turns",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1377
+    },
+    {
+      "from": "CanvasReview_marg_ambient_scheming",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1344
+    },
+    {
+      "from": "CanvasReview_marg_ambient_menace",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1274
+    },
+    {
+      "from": "CanvasReview_marg_drawing_room_hub",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2186
+    },
+    {
+      "from": "CanvasReview_aud_3some_grayson",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1281
+    },
+    {
+      "from": "CanvasReview_aud_3some_richard",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1321
+    },
+    {
+      "from": "CanvasReview_rich_at_your_side",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1631
+    },
+    {
+      "from": "CanvasReview_rich_the_keys",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1335
+    },
+    {
+      "from": "CanvasReview_rich_first_night",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1267
+    },
+    {
+      "from": "CanvasReview_rich_ambient_alive",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1243
+    },
+    {
+      "from": "CanvasReview_rich_back_to_life",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1333
+    },
+    {
+      "from": "CanvasReview_rich_confides",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1576
+    },
+    {
+      "from": "CanvasReview_rich_ambient_grief",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1264
+    },
+    {
+      "from": "CanvasReview_gray_free",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1306
+    },
+    {
+      "from": "CanvasReview_gray_stops_pretending",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1289
+    },
+    {
+      "from": "CanvasReview_gray_on_knees",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1280
+    },
+    {
+      "from": "CanvasReview_gray_the_deal",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1479
+    },
+    {
+      "from": "CanvasReview_gray_cut_allowance",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1448
+    },
+    {
+      "from": "CanvasReview_gray_debt_tip",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1547
+    },
+    {
+      "from": "CanvasReview_gray_ambient_contempt",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1530
+    },
+    {
+      "from": "CanvasReview_gray_prey_grope",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2615
+    },
+    {
+      "from": "CanvasReview_aud_lesson_anal",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1354
+    },
+    {
+      "from": "CanvasReview_aud_3some_danny",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1332
+    },
+    {
+      "from": "CanvasReview_aud_firstnight",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1280
+    },
+    {
+      "from": "CanvasReview_aud_danny_study",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1299
+    },
+    {
+      "from": "CanvasReview_aud_danny_bf",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1804
+    },
+    {
+      "from": "CanvasReview_aud_lesson_blowjob",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1285
+    },
+    {
+      "from": "CanvasReview_aud_lesson_toy",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1274
+    },
+    {
+      "from": "CanvasReview_aud_lesson_kiss",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1251
+    },
+    {
+      "from": "CanvasReview_aud_lesson_masturbate",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1276
+    },
+    {
+      "from": "CanvasReview_aud_teachme",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1501
+    },
+    {
+      "from": "CanvasReview_aud_tuition",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1529
+    },
+    {
+      "from": "CanvasReview_canvas_take_books",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1430
+    },
+    {
+      "from": "CanvasReview_scene_lobby_eyes",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1197
+    },
+    {
+      "from": "CanvasReview_canvas_meet_lorna",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1674
+    },
+    {
+      "from": "CanvasReview_activity_private_floor",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 3603
+    },
+    {
+      "from": "CanvasReview_rich_bed",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1821
+    },
+    {
+      "from": "CanvasReview_rich_study_hub",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 516
+    },
+    {
+      "from": "CanvasReview_gray_serve",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 4258
+    },
+    {
+      "from": "CanvasReview_aud_practice",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 5769
+    },
+    {
+      "from": "CanvasReview_canvas_adult_shop",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1253
+    },
+    {
+      "from": "CanvasReview_activity_escort",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1598
+    },
+    {
+      "from": "CanvasReview_activity_sell_photos",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2620
+    },
+    {
+      "from": "CanvasReview_activity_comped_favor",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1606
+    },
+    {
+      "from": "CanvasReview_activity_hostess_shift",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2002
+    },
+    {
+      "from": "CanvasReview_activity_masturbate",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1466
+    },
+    {
+      "from": "CanvasReview_activity_mirror",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1459
+    },
+    {
+      "from": "CanvasReview_activity_porn_phone",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1455
+    },
+    {
+      "from": "CanvasReview_activity_porn_tv",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1448
+    },
+    {
+      "from": "CanvasReview_activity_sleep",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 986
+    },
+    {
+      "from": "CanvasReview_canvas_foreclosure_setback",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1817
+    },
+    {
+      "from": "CanvasReview_canvas_foreclosure_paid",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1497
+    },
+    {
+      "from": "CanvasReview_canvas_upgrade_vice_house",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1555
+    },
+    {
+      "from": "CanvasReview_canvas_upgrade_private_floor",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1520
+    },
+    {
+      "from": "CanvasReview_canvas_upgrade_back_rooms",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1452
+    },
+    {
+      "from": "CanvasReview_canvas_will_reading",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1736
+    }
+  ],
+  "unresolved_targets": [],
+  "dead_end_passages": [
+    "Story",
+    "AgeBlocked",
+    "StoryCaption",
+    "QuestsV2Widgets",
+    "QuestsPage",
+    "TipsPage",
+    "StatsPage",
+    "WardrobePage",
+    "ClothingBlock",
+    "ShopPage",
+    "SchedulePage",
+    "FlagsPage",
+    "_BrokenExitFallback",
+    "Location_The_Hotel_—_Lobby",
+    "Location_The_College",
+    "MissingMediaPage"
+  ],
+  "untargeted_passages": [
+    "Story",
+    "Start",
+    "TimeWidgets",
+    "StoryCaption",
+    "QuestsV2Widgets",
+    "StoryJournal",
+    "ClothingBlock",
+    "_BrokenExitFallback",
+    "Canvas_lorna_partnership_Node_1",
+    "Canvas_marg_slave_terminal_Node_1",
+    "Canvas_marg_breaking_Node_1",
+    "Canvas_marg_setup_Node_1",
+    "Canvas_marg_board_turns_Node_1",
+    "Canvas_marg_ambient_scheming_Node_1",
+    "Canvas_marg_ambient_menace_Node_1",
+    "Canvas_marg_drawing_room_hub_Node_1",
+    "Canvas_aud_3some_grayson_Node_1",
+    "Canvas_aud_3some_richard_Node_1",
+    "Canvas_rich_at_your_side_Node_1",
+    "Canvas_rich_the_keys_Node_1",
+    "Canvas_rich_first_night_Node_1",
+    "Canvas_rich_ambient_alive_Node_1",
+    "Canvas_rich_back_to_life_Node_1",
+    "Canvas_rich_confides_Node_1",
+    "Canvas_rich_ambient_grief_Node_1",
+    "Canvas_gray_free_Node_1",
+    "Canvas_gray_stops_pretending_Node_1",
+    "Canvas_gray_on_knees_Node_1",
+    "Canvas_gray_the_deal_Node_1",
+    "Canvas_gray_cut_allowance_Node_1",
+    "Canvas_gray_debt_tip_Node_1",
+    "Canvas_gray_ambient_contempt_Node_1",
+    "Canvas_gray_prey_grope_Node_1",
+    "Canvas_aud_lesson_anal_Node_1",
+    "Canvas_aud_3some_danny_Node_1",
+    "Canvas_aud_firstnight_Node_1",
+    "Canvas_aud_danny_study_Node_1",
+    "Canvas_aud_danny_bf_Node_1",
+    "Canvas_aud_lesson_blowjob_Node_1",
+    "Canvas_aud_lesson_toy_Node_1",
+    "Canvas_aud_lesson_kiss_Node_1",
+    "Canvas_aud_lesson_masturbate_Node_1",
+    "Canvas_aud_teachme_Node_1",
+    "Canvas_aud_tuition_Node_1",
+    "Canvas_canvas_take_books_Node_1",
+    "Canvas_scene_lobby_eyes_Node_1",
+    "Canvas_canvas_meet_lorna_Node_1",
+    "Canvas_activity_private_floor_Node_1",
+    "Canvas_rich_bed_Node_1",
+    "Canvas_rich_study_hub_Node_1",
+    "Canvas_gray_serve_Node_1",
+    "Canvas_aud_practice_Node_1",
+    "Canvas_canvas_adult_shop_Node_1",
+    "Canvas_activity_escort_Node_1",
+    "Canvas_activity_sell_photos_Node_1",
+    "Canvas_activity_comped_favor_Node_1",
+    "Canvas_activity_hostess_shift_Node_1",
+    "Canvas_activity_masturbate_Node_1",
+    "Canvas_activity_mirror_Node_1",
+    "Canvas_activity_porn_phone_Node_1",
+    "Canvas_activity_porn_tv_Node_1",
+    "Canvas_activity_sleep_Node_1",
+    "Canvas_canvas_foreclosure_setback_Node_1",
+    "Canvas_canvas_foreclosure_paid_Node_1",
+    "Canvas_canvas_upgrade_vice_house_Node_1",
+    "Canvas_canvas_upgrade_private_floor_Node_1",
+    "Canvas_canvas_upgrade_back_rooms_Node_1",
+    "Canvas_canvas_will_reading_Node_1"
+  ],
+  "per_passage_stats": {
+    "Story": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": [
+        "meta"
+      ]
+    },
+    "Start": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CustomizeCharacters": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "AgeBlocked": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "TimeWidgets": {
+      "edge_count": 8,
+      "unresolved": 0,
+      "tags": [
+        "widget",
+        "nobr"
+      ]
+    },
+    "StoryCaption": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "QuestsV2Widgets": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": [
+        "widget",
+        "nobr"
+      ]
+    },
+    "QuestsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "TipsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "StoryJournal": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "StatsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "WardrobePage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "ClothingBlock": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "ShopPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "SchedulePage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "FlagsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "StartingCanvas_canvas_arrival_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Navigation": {
+      "edge_count": 22,
+      "unresolved": 0,
+      "tags": []
+    },
+    "_BrokenExitFallback": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Location_The_Hotel_—_Lobby": {
+      "edge_count": 0,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Hotel_—_Bar": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Hotel_—_Guest_Rooms": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Hotel_—_Back_Office": {
+      "edge_count": 2,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Hotel_—_Private_Floor": {
+      "edge_count": 2,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Residence": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Your_Old_Room": {
+      "edge_count": 2,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Drawing_Room": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Study": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Kitchen": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Terrace": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Upstairs_Bath": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Audrey's_Room": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Grayson's_Room": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Richard's_Room": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Margaret's_Room": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Town": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Halloway_&_Sons": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Boutique": {
+      "edge_count": 2,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Adult_Shop": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Town_—_Out_&_About": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_College": {
+      "edge_count": 0,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Canvas_lorna_partnership_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_marg_slave_terminal_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_marg_breaking_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_marg_setup_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_marg_board_turns_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_marg_ambient_scheming_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_marg_ambient_menace_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_marg_drawing_room_hub_Node_1": {
+      "edge_count": 6,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_marg_drawing_room_hub_Node_2": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_marg_drawing_room_hub_Node_3": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_aud_3some_grayson_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_aud_3some_richard_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_rich_at_your_side_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_rich_the_keys_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_rich_first_night_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_rich_ambient_alive_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_rich_back_to_life_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_rich_confides_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_rich_ambient_grief_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_gray_free_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_gray_stops_pretending_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_gray_on_knees_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_gray_the_deal_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_gray_cut_allowance_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_gray_debt_tip_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_gray_ambient_contempt_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_gray_prey_grope_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_aud_lesson_anal_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_aud_3some_danny_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_aud_firstnight_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_aud_danny_study_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_aud_danny_bf_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_aud_lesson_blowjob_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_aud_lesson_toy_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_aud_lesson_kiss_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_aud_lesson_masturbate_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_aud_teachme_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_aud_tuition_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_take_books_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_scene_lobby_eyes_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_meet_lorna_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_private_floor_Node_1": {
+      "edge_count": 4,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_private_floor_Node_2": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_private_floor_Node_3": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_private_floor_Node_4": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_rich_bed_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_rich_study_hub_Node_1": {
+      "edge_count": 3,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_gray_serve_Node_1": {
+      "edge_count": 6,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_gray_serve_Node_2": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_gray_serve_Node_3": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_gray_serve_Node_4": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_gray_serve_Node_5": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_aud_practice_Node_1": {
+      "edge_count": 7,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_aud_practice_Node_2": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_aud_practice_Node_3": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_aud_practice_Node_4": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_aud_practice_Node_5": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_aud_practice_Node_6": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_aud_practice_Node_7": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_adult_shop_Node_1": {
+      "edge_count": 4,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_escort_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_sell_photos_Node_1": {
+      "edge_count": 3,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_sell_photos_Node_2": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_sell_photos_Node_3": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_comped_favor_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_hostess_shift_Node_1": {
+      "edge_count": 3,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_hostess_shift_Node_2": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_masturbate_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_mirror_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_porn_phone_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_porn_tv_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_sleep_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_foreclosure_setback_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_foreclosure_paid_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_upgrade_vice_house_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_upgrade_private_floor_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_upgrade_back_rooms_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_will_reading_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "MissingMediaPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReviewList": {
+      "edge_count": 62,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_arrival": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_lorna_partnership": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_marg_slave_terminal": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_marg_breaking": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_marg_setup": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_marg_board_turns": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_marg_ambient_scheming": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_marg_ambient_menace": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_marg_drawing_room_hub": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_aud_3some_grayson": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_aud_3some_richard": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_rich_at_your_side": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_rich_the_keys": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_rich_first_night": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_rich_ambient_alive": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_rich_back_to_life": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_rich_confides": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_rich_ambient_grief": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_gray_free": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_gray_stops_pretending": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_gray_on_knees": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_gray_the_deal": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_gray_cut_allowance": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_gray_debt_tip": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_gray_ambient_contempt": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_gray_prey_grope": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_aud_lesson_anal": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_aud_3some_danny": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_aud_firstnight": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_aud_danny_study": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_aud_danny_bf": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_aud_lesson_blowjob": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_aud_lesson_toy": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_aud_lesson_kiss": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_aud_lesson_masturbate": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_aud_teachme": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_aud_tuition": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_take_books": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_scene_lobby_eyes": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_meet_lorna": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_private_floor": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_rich_bed": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_rich_study_hub": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_gray_serve": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_aud_practice": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_adult_shop": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_escort": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_sell_photos": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_comped_favor": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_hostess_shift": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_masturbate": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_mirror": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_porn_phone": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_porn_tv": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_sleep": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_foreclosure_setback": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_foreclosure_paid": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_upgrade_vice_house": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_upgrade_private_floor": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_upgrade_back_rooms": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_will_reading": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    }
+  }
+}

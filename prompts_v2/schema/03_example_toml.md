@@ -973,6 +973,7 @@ type = "trait_bar"
 trait = "arousal"
 label = "Arousal"
 max = 10
+hide_value = true   # bands carry the read-out — don't also print the raw 3 / 10 (the doubling, schema/02 §9.0)
 color_tiers = [
   { up_to = 30,  class = "low" },
   { up_to = 70,  class = "medium" },
@@ -1005,12 +1006,13 @@ bands = [
   { min = 75,  max = 100, text = "Rested",    icon = "🔋" },
 ]
 
-# When Doc 64 PRD ships, add per-NPC items:
-# [[sidebar_items]]
-# type = "npc_location"
-# npc_id = "npc_frank"
-# label = "Frank"
-# stats = ["arousal", "corruption", "relation"]    # family/ambient default per Doc 68 §8
+# Per-NPC radar — npc_panel (SHIPPED). The location row reads the NPC's [[npcs.schedules]]
+# via getNpcLocation (same source as the Schedule page):
+[[sidebar_items]]
+type   = "npc_panel"
+npc_id = "npc_frank"
+label  = "Frank"
+rows   = ["arousal", "corruption", "location", "next"]    # family/ambient default per Doc 68 §8
 ```
 
 ### Key features
@@ -1018,7 +1020,7 @@ bands = [
 - **`trait_words` for corruption** (banded display, raw number hidden) — Doc 68 Q2 lock
 - **`trait_bar` for arousal** (0–10 with bands) — Doc 40 lock
 - **`trait_status_text` for body-state** (hygiene + energy) — Doc 49
-- **`npc_location` items** (commented out, pending Doc 64 PRD) — when shipped, per-NPC radar with per-arc-shape stat surfacing
+- **`npc_panel` items** (shipped) — per-NPC radar: arousal/corruption/location/next rows; location reads the NPC schedule (Schedule-page source); `next` shows the ready milestone (🔓/📍/🕒) reusing the Quests-page logic
 
 ### Anti-patterns avoided
 

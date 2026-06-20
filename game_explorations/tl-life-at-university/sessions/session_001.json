@@ -1,0 +1,20 @@
+{
+  "session_id": 1,
+  "start_ts": "2026-06-09T21:47:37.250Z",
+  "start_epoch_ms": 1781041657250,
+  "end_ts": "2026-06-09T21:53:35.776Z",
+  "duration_s": 359,
+  "clicks": 12,
+  "choices_explored": 12,
+  "arrow_advances": 0,
+  "unique_states_seen": 10,
+  "new_unique_states": 10,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "LaU live obs: fixed 303-day calendar (Day 0 of 303 in sidebar); weekly Mon rent $100; street-grid nav (5 streets, venues per street), taxi $5 fast travel, public toilets, 'hang around 15/30/60/120min' explicit time-burn buttons",
+    "Stats: Energy/Hygiene/Morale/Liberal(=corruption)/Lust/Looks/Tanned/Intellect/Fitness/Weight/Tits/Butt/Reputation + addictions(coke/weed/alc/sex) + intoxication + STDs + pregnancy. 487 vars. Jobs: gas/cafe/hotel/eroshop/model/stripclub/brothel. Ava arc = player corrupts friend into prostitution. Blackmail both directions (Alex blackmails player; player blackmails principal)."
+  ]
+}

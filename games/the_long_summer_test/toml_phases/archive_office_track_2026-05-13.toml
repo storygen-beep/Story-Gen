@@ -1,0 +1,1823 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# ARCHIVE — Frank office track (removed 2026-05-13)
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# This file is NOT loaded by the build (package_from_toml takes a single --file
+# arg pointing at 7_final_game.toml). It exists only as a recoverable record of
+# the entire Frank office track that was dropped on 2026-05-13.
+#
+# WHY REMOVED:
+# Following the chore-drop earlier the same day, the user chose to also remove
+# the office wholesale and treat TLS as a "dev-only sandbox until the post-catch
+# arc gets redesigned end-to-end." Office capstones are gone; bedroom hub
+# remains reachable via dev shortcuts (dev_open_frank_bedroom_hub at line 6636
+# of the post-cut file already bypasses the gate; dev_advance_frank_to_4 sets
+# all flags). The catch event itself survives — scene_living_room_evening (kept,
+# in the living room) is the natural-play setter of frank_caught +
+# frank_restrict_declared. Only frank_cracked + frank_invited_to_bedroom +
+# frank_office_first_sex_done become dev-only.
+#
+# WHAT'S IN HERE:
+# - 10 canvas blocks (verbatim, with preceding section-header comments)
+# - 1 location declaration (loc_franks_office)
+# - 3 flag-label blocks (frank_offered_bookkeeping, frank_supervision_explained,
+#   frank_declined_bookkeeping_today)
+# - 5 hint-template blocks (pre-bookkeeping → pre-bedroom-invitation chain)
+# - 1 in-scene cascade group (Stage 1 register inside scene_kitchen_with_frank_morning)
+#
+# RESURRECTION CHECKLIST (to bring office back, do all of these):
+#   1. Re-paste the 10 canvas blocks below into 7_final_game.toml at their
+#      original section anchors (TOC at top of file shows §-numbering).
+#   2. Re-paste loc_franks_office [[locations]] block.
+#   3. Re-add "loc_franks_office" element to the loc_hallway navigation_order
+#      array (around line 618 in the post-cut file).
+#   4. Re-paste the 3 [[flags.labels]] blocks.
+#   5. Re-add the 3 flag string entries to the player flags-declaration array.
+#   6. Re-add { targetType = "player", flag = "frank_declined_bookkeeping_today",
+#      op = "unset" } back to the daily_tick flagEffects array.
+#   7. Re-paste the 5 hint templates back into the Frank hints section.
+#   8. Re-paste the STAGE 1 cascade group back into scene_kitchen_with_frank_morning's
+#      blocks array, between STAGE 0 and STAGE 2.
+#   9. Re-add { targetType = "player", flag = "frank_offered_bookkeeping",
+#      op = "set" } to flagEffects on:
+#        - dev_advance_frank_to_3
+#        - dev_advance_frank_to_4
+#        - dev_force_catch
+#  10. Re-add { targetType = "player", flag = "frank_supervision_explained",
+#      op = "set" } to flagEffects on the same 3 dev shortcuts.
+#  11. Restore dev shortcut inline comments (the "Stage 3 implies bookkeeping
+#      accepted + chores assigned + office context established" lines + similar).
+#  12. Re-add the §6 TOC line "#   §6 — activity_bookkeeping_with_frank ..."
+#      at the top of 7_final_game.toml around line 1181 in the post-cut file.
+#  13. Re-add the bookkeeping doc-pointer block in 3_activities.toml.
+#  14. Re-add loc_franks_office in 1_metadata_and_locations.toml.
+#
+# Design-doc references (kept as historical record, NOT updated):
+#   28th_april_TLS_Phase2_Redesign/10, 16, 19, 20, 21, 22, 26, 29, 04
+
+
+# ────────────────────────────────────────────────────────────────────────────
+# canvas: scene_office_frank_diana_call_intercept
+# ────────────────────────────────────────────────────────────────────────────
+
+
+
+# ─── §S6e — scene_office_frank_diana_call_intercept (RANDOM OVERRIDE) ────────
+# Maya walks into office expecting setter; instead overhears Frank on phone with
+# Diana about money. ONE-TIME-PER-ARC mutex via frank_diana_call_intercept_used.
+# Priority 14 (above setter 11). Chance 0.25. Stage 2+ + frank_restrict_declared.
+# Adds Diana-presence tension + +1 calculation (Maya catalogs the moment).
+
+[[canvases]]
+id          = "scene_office_frank_diana_call_intercept"
+name        = "Frank's office — Diana on the phone"
+description = "Random override: Maya pushes the office door open and finds Frank on the phone with Diana about money. He waves her off. ONE-TIME-PER-ARC. Priority 14 beats office setter (11) when chance hits."
+
+[canvases.trigger]
+location      = "loc_franks_office"
+is_repeatable = true
+priority      = 14
+is_active     = true
+trigger_mode  = "random"
+chance        = 0.25
+npc           = "npc_frank"
+conditions = { version = "1.0", logic = "AND", items = [
+  # 2026-05-11 RTS-shape conversion: dropped npc_frank_stage gte 2 (deprecated).
+  # frank_restrict_declared carries the post-catch gating.
+  { type = "flag",  subject = "player", flag_key  = "frank_restrict_declared",          operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key  = "frank_diana_call_intercept_used",  operator = "is_false" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "19:00"
+end_time   = "21:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Frank's office — Diana on the phone"
+# 2026-05-12 L2-1 canvas 6/6 (audit doc 26 / remediation doc 27): converted
+# from single-render to single linear cascade per RTS Pattern D doctrine.
+# Prose preserved VERBATIM. NO outer-group wrapper (this canvas has no tier
+# branches — one-time-per-arc mutex via frank_diana_call_intercept_used).
+# P1.6 audit fix (2026-05-12): Frank.love +1 lives on terminal Beat 3 per
+# RTS terminal-only doctrine. Was previously on Beat 1 mid-stream; the
+# "verbal-share doctrine pattern" framing was TLS-original (per doc 28),
+# not RTS-canonical.
+blocks = [
+  { type = "image", props = { file = "scenes/office_frank_phone_evening.jpg", description = "Frank's office evening. Frank at the desk with a corded phone to his ear, the lamp on, his free hand raised toward the door — wait. Receipts in piles around him.", search_queries = [
+    "older man home office desk corded phone evening lamp paper piles raised hand",
+    "fifties man at desk corded phone receipts evening office lamp warm interior",
+    "salt and pepper hair man home office phone call evening lamp paper desk",
+    "rural farmhouse home office man at desk telephone evening lamp paperwork",
+    "older man on phone at desk evening lamp office quiet receipts paper",
+  ] } },
+
+  { type = "cascade", props = { id = "frank_diana_call_intercept", beats = [
+    # Beat 0 — opens. Maya pushes door, Frank at desk on phone, raises hand.
+    { blocks = [
+      { type = "paragraph", content = "You push the door open. Frank's at the desk with the phone to his ear. He raises a hand without looking — wait." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "I told you I don't know yet." },
+    ] },
+    # Beat 1 — Pause. He shifts the phone. "Don't bring her name into it."
+    # (Love +1 tick previously here moved to terminal Beat 3 per P1.6 audit fix.)
+    { advance_text = "Stay in the doorway.", blocks = [
+      { type = "paragraph", content = "Pause. Whoever's on the line says something. He shifts the phone." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Don't bring her name into it." },
+    ] },
+    # Beat 2 — Longer pause. Glances at her, jaw tightens. "Tomorrow."
+    { advance_text = "Wait.", blocks = [
+      { type = "paragraph", content = "Another pause. Longer. He glances at you in the doorway and the line of his jaw tightens." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Tomorrow." },
+    ] },
+    # Beat 3 — terminal. Hangs up. Sets receiver slow. "Come back later."
+    # P1.6 audit fix (2026-05-12): Frank.love +1 lives here per RTS terminal-only
+    # doctrine — fires on cascade-completion click.
+    { effects = [
+      { targetType = "npc", npcId = "npc_frank", trait = "love", op = "add", value = 1 },
+    ], blocks = [
+      { type = "paragraph", content = "He hangs up. Doesn't explain. Sets the receiver down with one finger, slow." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Come back later." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Pull the door closed."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "trigger"
+locationId               = "loc_hallway"
+time_progression_minutes = 5
+effects = [
+  { targetType = "npc",    npcId = "npc_frank", trait = "trust",       op = "add", value = 1 },
+  { targetType = "player",                       trait = "calculation", op = "add", value = 1 },
+]
+flagEffects = [
+  { targetType = "player", flag = "frank_diana_call_intercept_used", op = "set" },
+]
+
+
+# ─── §S6f — scene_hallway_frank_late_drink (RANDOM OVERRIDE) ─────────────────
+# Maya turns the corner toward her room at night; instead Frank in the dark
+# hallway with bourbon. Vulnerable moment. ONE-TIME-PER-ARC mutex via
+# frank_late_drink_used. Priority 6 (above hallway_pass 4). Chance 0.25.
+# Stage 2+ + frank_cracked.
+
+
+# ────────────────────────────────────────────────────────────────────────────
+# canvas: activity_talk_to_frank
+# ────────────────────────────────────────────────────────────────────────────
+
+
+
+# ─── §S2 — activity_talk_to_frank ─────────────────────────────────────────────
+# Per-day relationship-builder. Available wherever Frank is. Single shared daily
+# cooldown via `talked_to_frank_today` flag — mutex with kitchen morning /
+# dinprep / bookkeeping (one Frank-trust source per day, RTS-style discipline).
+# Trust gain +1 per use. Per doc 16 §14. Tier-branched dialogue by
+# (frank.trust × frank_stage). Stage 0/1 covers Pilot scope. Stage 2+ branch
+# included with cooler post-catch tone.
+
+[[canvases]]
+id          = "activity_talk_to_frank"
+name        = "Talk to Frank"
+description = "Per-day relationship-builder. +1 frank.trust on first use per day. Tier-branched dialogue by trust + stage. TRIGGERLESS — reachable only via the office activity menu (scene_franks_office_setter, 'Talk 💬'). Sub-menu canvas. Doctrine: see doc 24 §3."
+
+# NO [canvases.trigger] — sub-menu only. Reachable via cross-canvas nodeId
+# from scene_franks_office_setter's "Talk 💬" choice.
+
+[[canvases.nodes]]
+id   = "base"
+name = "Talk to Frank"
+blocks = [
+  { type = "image", props = { file = "activities/talk_to_frank.jpg", description = "Frank seated at the kitchen or office table, looking up. Soft warm interior light. Quiet farmhouse moment.", search_queries = [
+    "older man kitchen table looking up warm interior light farmhouse",
+    "fifties man home conversation table evening warm rural interior",
+    "salt and pepper hair man at table looking up southern home warm",
+    "rural alabama farmhouse interior man at table evening conversation",
+    "older man at home table warm light quiet conversation moment",
+  ] } },
+
+  # ─── Tier 1 — Low trust (< 5), pre-catch register. RTS-flat, near non-conversation. ─
+  # 2026-05-11 RTS-shape conversion: stage lte 1 → frank_caught is_false (pre-catch).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc",    npc_id = "npc_frank", trait_key = "trust",         operator = "lt",       value = 5 },
+      { type = "flag",  subject = "player",                       flag_key  = "frank_caught", operator = "is_false" },
+    ] }, blocks = [
+    { type = "paragraph", content = "You catch Frank's eye. He doesn't look away, but he doesn't soften either." },
+    { type = "dialog", props = { speaker = "npc",    npcId = "npc_frank" }, content = "Need something?" },
+    { type = "dialog", props = { speaker = "player", npcId = "npc_frank" }, content = "Just saying hi." },
+    { type = "paragraph", content = "He nods. Waits a beat to see if there's more. There isn't." },
+    { type = "dialog", props = { speaker = "npc",    npcId = "npc_frank" }, content = "Alright." },
+    { type = "paragraph", content = "He goes back to whatever he was doing." },
+  ] } },
+
+  # ─── Tier 2 — Mid trust (5–14), pre-catch register. Trying-but-not-quite. ──
+  # 2026-05-11 RTS-shape conversion: stage lte 1 → frank_caught is_false (pre-catch).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc",    npc_id = "npc_frank", trait_key = "trust",         operator = "gte",      value = 5  },
+      { type = "trait", subject = "npc",    npc_id = "npc_frank", trait_key = "trust",         operator = "lt",       value = 15 },
+      { type = "flag",  subject = "player",                       flag_key  = "frank_caught", operator = "is_false" },
+    ] }, blocks = [
+    { type = "paragraph", content = "Frank looks up when you come into his line of sight." },
+    { type = "dialog", props = { speaker = "npc",    npcId = "npc_frank" }, content = "How was your day?" },
+    { type = "dialog", props = { speaker = "player", npcId = "npc_frank" }, content = "Long. School stuff." },
+    { type = "dialog", props = { speaker = "npc",    npcId = "npc_frank" }, content = "Mm." },
+    { type = "paragraph", content = "He thinks a second. Tries again." },
+    { type = "dialog", props = { speaker = "npc",    npcId = "npc_frank" }, content = "Eat something. Bread's still good. Soup in the fridge from Tuesday." },
+    { type = "dialog", props = { speaker = "player", npcId = "npc_frank" }, content = "Thanks." },
+    { type = "dialog", props = { speaker = "npc",    npcId = "npc_frank" }, content = "Mm." },
+    { type = "paragraph", content = "He's not great at this. But he's trying." },
+  ] } },
+
+  # ─── Tier 2+ — High trust (15+), Stage 0/1. Real moment. ──────────────────
+  # CANONICAL: First time Frank reveals his late wife. Wife liked peppermint
+  # tea, brewed nightly after dinner. Smell still in pantry top. Do NOT repeat
+  # this exact memory in other Frank scenes — see doc 16 §14 + §16. Other
+  # wife memories should reveal different things.
+  # 2026-05-11 RTS-shape conversion: stage lte 1 → frank_caught is_false (pre-catch).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc",    npc_id = "npc_frank", trait_key = "trust",         operator = "gte",      value = 15 },
+      { type = "flag",  subject = "player",                       flag_key  = "frank_caught", operator = "is_false" },
+    ] }, blocks = [
+    { type = "paragraph", content = "Frank's at the kitchen table with the books open. Looks up when you sit down across from him." },
+    { type = "dialog", props = { speaker = "npc",    npcId = "npc_frank" }, content = "Tea on the stove. You want some." },
+    { type = "dialog", props = { speaker = "player", npcId = "npc_frank" }, content = "Sure." },
+    { type = "paragraph", content = "You make the tea. Bring two mugs back. Frank pushes the ledger to the side." },
+    { type = "dialog", props = { speaker = "npc",    npcId = "npc_frank" }, content = "My wife used to have peppermint. Hated it myself — tastes like medicine. But she'd brew it every night after dinner." },
+    { type = "paragraph", content = "He pauses." },
+    { type = "dialog", props = { speaker = "npc",    npcId = "npc_frank" }, content = "Place still smells like it sometimes. Top of the kitchen pantry. You ever notice?" },
+    { type = "dialog", props = { speaker = "player", npcId = "npc_frank" }, content = "I noticed." },
+    { type = "dialog", props = { speaker = "npc",    npcId = "npc_frank" }, content = "Yeah." },
+    { type = "paragraph", content = "He drinks his tea. Doesn't continue." },
+  ] } },
+
+  # ─── Tier 2 — Post-catch register. Cooler. ────────────────────────────────
+  # 2026-05-11 RTS-shape conversion: stage gte 2 → frank_caught is_true (post-catch).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "frank_caught", operator = "is_true" },
+    ] }, blocks = [
+    { type = "paragraph", content = "Frank's at the table. He doesn't look up when you sit." },
+    { type = "dialog", props = { speaker = "npc",    npcId = "npc_frank" }, content = "Yeah." },
+    { type = "dialog", props = { speaker = "player", npcId = "npc_frank" }, content = "Just wanted to talk." },
+    { type = "paragraph", content = "He sets the pen down. Looks at you. Looks at the pen." },
+    { type = "dialog", props = { speaker = "npc",    npcId = "npc_frank" }, content = "Talking's fine. Door stays open." },
+    { type = "paragraph", content = "He picks the pen up again. The conversation, whatever it was going to be, is over." },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Excuse yourself."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_franks_office"
+time_progression_minutes = 30
+effects = [
+  { targetType = "npc",    npcId = "npc_frank", trait = "trust",  op = "add", value = 1 },
+  { targetType = "player",                       trait = "energy", op = "add", value = -2 },
+]
+flagEffects = [
+]
+
+
+# ─── §S3 — scene_kitchen_frank_coffee_alone ──────────────────────────────────
+# Random ambient encounter. Kitchen entry EM 05:30–06:29 (the half-hour just
+# before Frank's official kitchen-morning band). Catches him quieter, more
+# vulnerable. Per doc 16 §11. Daily cooldown via frank_coffee_alone_today.
+# Does NOT collide with kitchen morning scene #1 — different time band.
+
+
+# ────────────────────────────────────────────────────────────────────────────
+# canvas: scene_franks_office_setter
+# ────────────────────────────────────────────────────────────────────────────
+
+
+
+# 2026-05-13 — scene_frank_bedroom_sleep_overnight canvas DELETED. Was the L1-3
+# non-sex overnight cascade (4 beats + stay-through-morning / leave-before-dawn
+# fork). Removed when "Sleep with him 💤" menu item dropped from bedroom hub
+# (text was ambiguous with "Have sex with him 🔥" — English colloquial sleep =
+# sex). Canvas was substitution_only, only reachable via the dropped menu item.
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §5c — Frank's office activity menu (parent menu — see doc 24 §3)
+# ═══════════════════════════════════════════════════════════════════════════════
+# Setter canvas at the office. Renders setter prose + activity menu items
+# routing DIRECTLY (cross-canvas nodeId) to the existing triggerless office
+# canvases (bookkeeping / talk / supervised / sex). Player picks instead of
+# the engine auto-routing to one canvas.
+#
+# Sub-menu canvases (now triggerless — this canvas is the sole entry point):
+#   - activity_bookkeeping_with_frank  (Stage 1+, before supervision intro)
+#   - scene_franks_office_supervised   (Stage 2+, after supervision intro)
+#   - activity_talk_to_frank
+#   - scene_office_after_crack         (Stage 3+, post-crack)
+#
+# One-shot transitions stay triggered + auto-fire ABOVE this menu's priority:
+#   - scene_office_supervision_intro  (one-time Stage 2 setup intro)
+#   - scene_office_crack              (one-time Stage 2→3 transition)
+#   - transition_frank_to_1           (one-time Stage 0→1 transition)
+
+[[canvases]]
+id          = "scene_franks_office_setter"
+name        = "Frank's office — activity menu"
+description = "Activity menu canvas for Frank's office at evening. Renders setter prose (Frank at desk, lamp on, receipts in piles) + menu items routing cross-canvas to triggerless sub-menus (Bookkeeping or Supervised work depending on Stage / Talk / Bend over the page if Stage 3+). Player picks the activity. See doc 24 §3 for the full menu / auto-fire / cascade rule applied to Frank."
+
+[canvases.trigger]
+location      = "loc_franks_office"
+is_repeatable = true
+priority      = 11                  # beats normal office canvases (pri 5, 6, 9)
+                                    # NOTE: scene_office_supervision_intro bumped to pri 12
+                                    # so it wins exactly once at Stage 2 entry, then self-gates
+                                    # via frank_supervision_explained.
+is_active     = true
+npc           = "npc_frank"
+conditions = { version = "1.0", logic = "AND", items = [
+  # 2026-05-11 Pass 3: dropped frank_offered_bookkeeping is_true parent gate
+  # so the office is reachable Day 1+ at evening (RTS-pure: locations are just
+  # rooms; access gates by schedule + NPC presence). Bookkeeping menu items
+  # below carry their own frank_offered_bookkeeping is_true gate so they
+  # don't render pre-offer. Pre-offer office visits show: Talk + 3 tease items
+  # (corruption 5+) + Take the receipts.
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "19:00"
+end_time   = "21:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Frank's office — activity menu"
+blocks = [
+  { type = "image", props = { file = "scenes/franks_office_evening.jpg", description = "Frank's office at evening. Desk lamp on, papers in three stacks, Frank in the chair with the pen still in his hand. The door is closed behind her.", search_queries = [
+    "older man home office evening lamp on desk paperwork warm interior",
+    "fifties man at desk evening warm low lamp papers receipts rural farmhouse",
+    "rural alabama home office evening warm lamp older man at desk private",
+  ] } },
+  { type = "paragraph", content = "Frank at the desk. Lamp on. Pen in his hand. Receipts in three stacks under the salt shaker. He glances up." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Sit." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# ─── MENU ITEM 1a: Bookkeeping (pre-catch register, no supervised tone) ───
+# Mutually exclusive with the Supervised work item below via frank_caught flag.
+# 2026-05-11 Pass 3: added frank_offered_bookkeeping is_true gate (parent
+# canvas no longer enforces it — pre-offer this menu item shouldn't render).
+[[canvases.nodes.exit_block.choices]]
+text = "Help with bookkeeping 💼"
+targetType = "node"
+nodeId = "activity_bookkeeping_with_frank.base"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "frank_offered_bookkeeping", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "frank_caught",              operator = "is_false" },
+] }
+
+# ─── MENU ITEM 1b: Supervised work (post-catch, Frank closer + watching) ───
+# 2026-05-11 Pass 3: added frank_offered_bookkeeping is_true gate (defensive —
+# in practice frank_caught implies offer was accepted earlier).
+[[canvases.nodes.exit_block.choices]]
+text = "Help with bookkeeping 💼"
+targetType = "node"
+nodeId = "scene_franks_office_supervised.base"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "frank_offered_bookkeeping", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "frank_caught",              operator = "is_true" },
+] }
+
+# ─── MENU ITEM 2: Talk (always available) ──────────────────────────────────
+[[canvases.nodes.exit_block.choices]]
+text = "Talk 💬"
+targetType = "node"
+nodeId = "activity_talk_to_frank.base"
+time_progression_minutes = 0
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Pass 3 (2026-05-11) — Lane 1 self-display tease items (RTS-pure)
+# ═══════════════════════════════════════════════════════════════════════════════
+# 3 escalating tease menu items, each gated only on Maya.corruption gte 5.
+# Style matches existing 6-row tease distribution (kitchen "Brush past" / dinprep
+# "Reach for plate" / hallway "Linger in robe" / radio "Sit on rug" / porch "Sit
+# on railing" / office supervised "Lean against the desk a moment longer"):
+# click-only with effects + return, no rendered intermediate scene. Returns to
+# trigger evaluation (player either re-enters office setter or lands at bare
+# location). First pre-catch tease content in TLS — RTS Tease/Flash threshold
+# (corruption 5).
+
+# ─── MENU ITEM 2a: Lean over the desk to read the receipts (Tier 1 tease) ──
+# 2026-05-12 L1-1 Pattern A promotion: was click-only (targetType=trigger);
+# now routes to rendered canvas tease_office_desk_lean which holds the prose
+# + cascade + effects. Effects moved to the canvas's exit_block.
+[[canvases.nodes.exit_block.choices]]
+text = "Lean over the desk to read the receipts."
+targetType = "node"
+nodeId = "tease_office_desk_lean.base"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 5 },
+] }
+
+# ─── MENU ITEM 2b: Stretch when you stand up (Tier 1 tease + calculation) ──
+# Brief: arms over head, back arched, held second. Frank looks up once and
+# down. The +1 calculation captures Maya choosing to be seen — calculation
+# not capitulation, matching the catch-scene "Don't speak" doctrine.
+[[canvases.nodes.exit_block.choices]]
+text = "Stretch when you stand up."
+targetType = "trigger"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 5 },
+] }
+effects = [
+  { targetType = "npc",    npcId = "npc_frank", trait = "arousal",     op = "add", value = 1 },
+  { targetType = "npc",    npcId = "npc_frank", trait = "corruption",  op = "add", value = 1 },
+  { targetType = "player",                       trait = "corruption",  op = "add", value = 1 },
+  { targetType = "player",                       trait = "calculation", op = "add", value = 1 },
+  { targetType = "player",                       trait = "energy",      op = "add", value = -2 },
+]
+flagEffects = [
+]
+
+# ─── MENU ITEM 2c: Sit on the edge of the desk (Tier 2 tease, click-only) ──
+# 2026-05-12 P5.2 audit fix: DEMOTED back to click-only (targetType=trigger).
+# Pattern A density was 6 surfaces (3x RTS scarcity baseline); per doc 28
+# 🟡 #4 audit, this surface was redundant with the office desk lean tease (2b
+# above) — same location, same gate, same suggestive register. The Pattern A
+# rendered canvas `tease_office_desk_sit` was deleted; effects restored inline.
+# T2 escalation register is preserved via the higher Frank.arousal +2 (vs
+# desk_lean's +1) on the click.
+[[canvases.nodes.exit_block.choices]]
+text = "Sit on the edge of the desk a moment."
+targetType = "trigger"
+time_progression_minutes = 15
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 5 },
+] }
+effects = [
+  { targetType = "npc",    npcId = "npc_frank", trait = "arousal",    op = "add", value = 2 },
+  { targetType = "npc",    npcId = "npc_frank", trait = "corruption", op = "add", value = 1 },
+  { targetType = "player",                       trait = "corruption", op = "add", value = 1 },
+  { targetType = "player",                       trait = "energy",     op = "add", value = -3 },
+]
+flagEffects = [
+]
+
+# ─── MENU ITEM 3: Bend over the page (Stage 3+ post-crack) ─────────────────
+# Locked sibling pattern when ungated — the in-character threshold message
+# ("things would have to be different") signals to player without breaking
+# Maya's voice.
+[[canvases.nodes.exit_block.choices]]
+text = "Bend over the page ❤️‍🔥"
+targetType = "node"
+nodeId = "scene_office_after_crack.base"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [
+  # 2026-05-11 RTS-shape conversion: dropped npc_frank_stage eq 3 (deprecated).
+  # frank_cracked + frank_restrict_declared flags carry the post-crack register.
+  { type = "flag",  subject = "player", flag_key  = "frank_cracked",           operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key  = "frank_restrict_declared", operator = "is_true"  },
+] }
+show_when_locked       = true
+locked_text            = "Stay on the visitor side of the desk."
+locked_text_threshold  = "I'd need things between us to be different — past the line he hasn't crossed yet — before I could do that."
+
+# ─── MENU ITEM 4: Take the receipts and go (clean exit to hallway) ─────────
+[[canvases.nodes.exit_block.choices]]
+text = "Take the receipts and go 🚪"
+targetType = "location"
+locationId = "loc_hallway"
+time_progression_minutes = 5
+flagEffects = [
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# L1-1 Pattern A renders (2026-05-12) — promoted from click-only tease items
+# ═══════════════════════════════════════════════════════════════════════════════
+# Per audit doc 26 / remediation doc 27 §L1-1: TLS Frank had ZERO rendered
+# Pattern A tease scenes despite 11 click-only tease items distributed across
+# hubs and ambient surfaces. RTS Brother has 2 (Tease + Flash, ~70-90w each
+# with image + stat ticks + return). This section ships the L1-1 promotions
+# — short rendered scenes (substitution_only, reachable only via the menu
+# item that now routes to them via cross-canvas nodeId).
+#
+# Doctrine pattern (matches scene_frank_at_open_bathroom_door from Pass 7):
+#   - substitution_only = true (excluded from selectors)
+#   - cascade body, 2-3 beats, ~75-90 words
+#   - exit_block type = "location" simple return to parent location
+#   - all effects on exit (matches the canonical Pattern A pattern)
+#   - npc field omitted to avoid substitution_only+npc warning
+#
+# Sub-canvases below are reached ONLY via cross-canvas nodeId routing from
+# the office/bedroom/kitchen/hallway setters and ambient menu items.
+
+# ─── L1-1 item 1/5: tease_office_desk_lean ─────────────────────────────────
+# Maya leans across Frank's desk at the receipts. Shirt loose at collar. The
+# lamp catches her shoulders. Frank's pen pauses. She traces the column with
+# one finger, slow. He doesn't move. She straightens; he turns the page.
+# Reached via scene_franks_office_setter "Lean over the desk to read the
+# receipts." menu item (Maya.corruption gte 5 gate).
+
+
+# ────────────────────────────────────────────────────────────────────────────
+# canvas: scene_franks_office_supervised
+# ────────────────────────────────────────────────────────────────────────────
+
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §5 — scene_franks_office_supervised
+# ═══════════════════════════════════════════════════════════════════════════════
+# Stage 2+ only. Available after the catch (`frank_restrict_declared`). Frank
+# in the office; Maya doing chore-supervision filing or a small task. This is
+# also the host for the Stage 3 tease cascade with the lean_by_desk_count
+# counter (dev-fragment in the slice; full content deferred).
+
+[[canvases]]
+id          = "scene_franks_office_supervised"
+name        = "Frank's office — supervised"
+description = "Post-catch Stage 2 surface. Stage 3 tease cascade dev-fragment. TRIGGERLESS — reachable only via the office activity menu (scene_franks_office_setter, Stage 2+ bookkeeping route). Sub-menu canvas. Doctrine: see doc 24 §3."
+
+# NO [canvases.trigger] — sub-menu only. Reachable via cross-canvas nodeId
+# from scene_franks_office_setter's Stage-2+ bookkeeping menu item.
+
+[[canvases.nodes]]
+id   = "base"
+name = "Frank's office — supervised"
+blocks = [
+  { type = "image", props = { file = "scenes/franks_office_supervised.jpg", description = "Frank at the desk in his office, lamp on, paperwork visible, evening light through the window.", search_queries = [
+    "older man at home office desk lamp evening rural farmhouse paperwork",
+    "fifties man office desk paperwork warm lamp light evening",
+    "rural home office filing cabinets desk evening warm lamp",
+    "salt and pepper hair man at desk paperwork evening light",
+    "southern home office wooden desk ledger paperwork evening",
+  ] } },
+
+  # ─── STAGE 2 — Restrict (chore-supervision filing) ────────────────────────
+  # 2026-05-11 RTS-shape conversion: stage gate replaced with
+  # frank_restrict_declared is_true + frank_cracked is_false.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "frank_restrict_declared", operator = "is_true" },
+      { type = "flag", subject = "player", flag_key = "frank_cracked",           operator = "is_false" },
+    ] }, blocks = [
+    { type = "paragraph", content = "He had the receipts in three stacks now, the sorting changed since the catch. He gestured at the chair across the desk without looking up." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Sit. The deductibles." },
+    { type = "paragraph", content = "She sat. The lamp on the desk between them. He passed her the smaller stack across — same way he had at the kitchen table — but the room was different now and they both knew it." },
+  ] } },
+
+  # ─── STAGE 3 — Same-day fallback (post-sex; daily cooldown used) ──────────
+  # Doc 18 §6 redesign 2026-05-04: the canonical Stage-3 office content is
+  # scene_office_after_crack (separate canvas, priority 9, daily cooldown via
+  # talked_to_frank_today). This Stage-3 group block is the SAME-DAY FALLBACK
+  # that renders if the player revisits the office in the same evening after
+  # the priority-9 canvas already fired. Tier-2, brief — it's a "you've already
+  # had your evening with him" register, not new content.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      # 2026-05-11 RTS-shape conversion: stage gate replaced with
+      # frank_cracked is_true + frank_invited_to_bedroom is_false.
+      { type = "flag", subject = "player", flag_key = "frank_cracked",            operator = "is_true"  },
+      { type = "flag", subject = "player", flag_key = "frank_invited_to_bedroom", operator = "is_false" },
+    ] }, blocks = [
+    { type = "paragraph", content = "He's at the desk again. The lamp's at its usual brightness now. The receipts are in the same three stacks she left them in. He doesn't look up when she comes back in." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Tomorrow." },
+    { type = "paragraph", content = "That's all. The bookkeeping pretense survives — both of them — every evening, including this one." },
+  ] } },
+
+  # ─── STAGE 4 — Cracked (DEV FRAGMENT) ─────────────────────────────────────
+  # 2026-05-11 RTS-shape conversion: stage gate replaced with frank_invited_to_bedroom is_true.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "frank_invited_to_bedroom", operator = "is_true" },
+    ] }, blocks = [
+    { type = "paragraph", content = "He was at the desk but not working. He had been waiting for her to come up." },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Run the deductibles."
+targetType = "node"
+nodeId = "scene_franks_office_setter.base"
+time_progression_minutes = 60
+effects = [
+  { targetType = "npc",    npcId = "npc_frank", trait = "trust",  op = "add", value = 1 },
+  { targetType = "player",                       trait = "money",  op = "add", value = 5 },
+  { targetType = "player",                       trait = "energy", op = "add", value = -8 },
+]
+flagEffects = [
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Lean against the desk a moment longer."
+targetType = "node"
+nodeId = "scene_franks_office_setter.base"
+time_progression_minutes = 15
+# Doc 18 §5 redesign 2026-05-04 — gate dropped from Stage 3+ to Stage 2+ (with
+# restrict). This is the OFFICE tease moment in the multi-source distribution
+# (table row #5 — preserved as-is in choice text/prose, retagged effects).
+# Triple effect (player.corruption + Frank.arousal + Frank.corruption) replaces
+# the retired frank_tease_count counter.
+effects = [
+  { targetType = "npc",    npcId = "npc_frank", trait = "arousal",            op = "add", value = 1 },
+  { targetType = "npc",    npcId = "npc_frank", trait = "corruption",         op = "add", value = 1 },
+  { targetType = "player",                       trait = "corruption",         op = "add", value = 1 },
+  { targetType = "player",                       trait = "lean_by_desk_count", op = "add", value = 1 },
+  { targetType = "player",                       trait = "energy",             op = "add", value = -3 },
+]
+flagEffects = [
+]
+# 2026-05-11 RTS-shape conversion: dropped npc_frank_stage gte 2 (deprecated).
+# frank_restrict_declared carries the post-catch gating.
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "frank_restrict_declared", operator = "is_true" },
+] }
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §5.4 — scene_office_supervision_intro  (DOC 18 §4 — supervision intro Tier-3)
+# ═══════════════════════════════════════════════════════════════════════════════
+# First-time post-catch office beat. Tier-3. One-shot guard via
+# frank_supervision_explained flag. Priority 9 wins over scene_franks_office_supervised
+# (priority 6) on the player's first office visit at Stage 2 + restrict. After
+# firing, frank_supervision_explained = true → gate fails → never re-fires.
+# Subsequent Stage-2 office visits land in the regular supervised office Stage-2
+# register (the "He had the receipts in three stacks now..." block).
+#
+# Co-exists with scene_office_crack at the same priority (9) — they have
+# mutually exclusive trigger conditions: this fires Stage 2 + supervision
+# unexplained; crack fires Stage 2 + ALL Stage-3 stat thresholds met +
+# frank_cracked false. The supervision intro fires immediately post-catch,
+# long before tease accumulation hits the crack thresholds.
+#
+# Tier-3 weight per doc 16 §2 voice. Frank's "door open" rule is the
+# capstone — clipped, controlling, no apology. Maya's interiority is
+# minimal at this moment (the rule lands first; she'll process later).
+
+
+# ────────────────────────────────────────────────────────────────────────────
+# canvas: scene_frank_bedroom_invitation
+# ────────────────────────────────────────────────────────────────────────────
+
+
+
+# ─── CAPSTONE EXITS REMOVED 2026-05-09 — extracted to scene_frank_bedroom_invitation ──
+# The "Yes." / "What about Diana." choices live in the new invitation canvas
+# (priority 13) which fires on the NEXT office entry once first sex done +
+# corruption ≥ 25. See §5a-bis below.
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §5a-bis — scene_frank_bedroom_invitation (extracted 2026-05-09)
+# ═══════════════════════════════════════════════════════════════════════════════
+# Bedroom invitation as its own one-shot threshold canvas. Extracted from
+# scene_office_after_crack's nested capstone group (formerly lines 3565-3578
+# + capstone exits 3652-3702). Why separate: the invitation moment deserves
+# its own breathing room, not a stacked beat at the climax of office sex.
+# Player has the office sex scene (after_crack), returns to setter via Fix 3
+# orbit; on NEXT office entry with capstone gates met, this higher-priority
+# canvas (13) wins over setter (11) and renders the invitation as its own
+# scene. Player accepts/qualifies → npc_frank_stage = 4 + frank_invited_to_bedroom
+# set + routes to loc_hallway (Maya leaves to walk to bedroom).
+# Mutex with setter via frank_invited_to_bedroom is_false in conditions:
+# once player accepts, this canvas never fires again, setter resumes winning.
+
+[[canvases]]
+id          = "scene_frank_bedroom_invitation"
+name        = "Frank's office — Upstairs. Same hour."
+description = "Bedroom invitation threshold canvas. Higher priority than office setter (13 vs 11). Fires when frank_office_first_sex_done is_true + frank_invited_to_bedroom is_false + Frank.corruption >= 25. Two choice exits (Yes / What about Diana) both route to hallway, set npc_frank_stage = 4, set frank_invited_to_bedroom. Register-distinguishing secondary stat: 'Yes' = bare acceptance; 'What about Diana' = +1 calculation. Extracted 2026-05-09 from scene_office_after_crack's nested capstone group."
+
+[canvases.trigger]
+location      = "loc_franks_office"
+is_repeatable = true
+priority      = 13
+is_active     = true
+npc           = "npc_frank"
+conditions = { version = "1.0", logic = "AND", items = [
+  # 2026-05-11 RTS-shape conversion: dropped npc_frank_stage gate; lowered
+  # Frank.corruption 25→15. frank_cracked + first_sex_done flags carry the
+  # progression gate (capstone fires after the natural Stage-3-equivalent
+  # office sex chain). frank_restrict_declared still gated since it's a
+  # prereq of frank_cracked (the catch must have happened first).
+  { type = "flag",  subject = "player",                       flag_key  = "frank_office_first_sex_done", operator = "is_true"  },
+  { type = "flag",  subject = "player",                       flag_key  = "frank_invited_to_bedroom",    operator = "is_false" },
+  { type = "flag",  subject = "player",                       flag_key  = "frank_cracked",               operator = "is_true"  },
+  { type = "flag",  subject = "player",                       flag_key  = "frank_restrict_declared",     operator = "is_true"  },
+  { type = "trait", subject = "npc",    npc_id = "npc_frank", trait_key = "corruption",                  operator = "gte",      value = 15 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "19:00"
+end_time   = "21:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Frank's office — the invitation"
+blocks = [
+  { type = "image", props = { file = "scenes/franks_office_evening.jpg" } },
+  { type = "paragraph", content = "He doesn't sit back down. He stands behind the desk for a long second with his hand still on the wood, looking at her like he's deciding something he already decided a week ago." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Not in here next time." },
+  { type = "paragraph", content = "She turns from the desk. The receipts are still in three stacks. The lamp is still on. The door is still closed. Nothing in the room has changed except the way he's looking at her." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Upstairs. Same hour." },
+  { type = "paragraph", content = "Three words. He doesn't add a please. Doesn't add a question. The hallway between his room and Diana's room is the hallway it's always been — the boards she knows the squeak of, the runner Diana picked out three summers ago, the door at the end she's only ever walked past." },
+  { type = "paragraph", content = "He waits for her answer with his weight on one hand on the desk and the lamp light catching the side of his face." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Yes."
+targetType = "location"
+locationId = "loc_hallway"
+time_progression_minutes = 5
+effects = [
+  # 2026-05-11 — npc_frank_stage write removed (per RTS-shape conversion).
+  # frank_invited_to_bedroom flag below carries the post-invitation register.
+  { targetType = "player",                       trait = "corruption",          op = "add", value = 3 },
+  { targetType = "player",                       trait = "energy",              op = "add", value = -10 },
+  { targetType = "npc",    npcId = "npc_frank", trait = "arousal",             op = "add", value = -3 },
+  { targetType = "npc",    npcId = "npc_frank", trait = "corruption",          op = "add", value = 2 },
+]
+flagEffects = [
+  { targetType = "player", flag = "frank_invited_to_bedroom", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "What about Diana."
+targetType = "location"
+locationId = "loc_hallway"
+time_progression_minutes = 5
+# Per doc 19 §4: Diana-mention choice register-distinguishes via +1 calculation.
+# The Frank reply lives in the player's memory of the moment.
+effects = [
+  # 2026-05-11 — npc_frank_stage write removed (per RTS-shape conversion).
+  { targetType = "player",                       trait = "corruption",          op = "add", value = 3 },
+  { targetType = "player",                       trait = "calculation",         op = "add", value = 1 },
+  { targetType = "player",                       trait = "energy",              op = "add", value = -10 },
+  { targetType = "npc",    npcId = "npc_frank", trait = "arousal",             op = "add", value = -3 },
+  { targetType = "npc",    npcId = "npc_frank", trait = "corruption",          op = "add", value = 2 },
+]
+flagEffects = [
+  { targetType = "player", flag = "frank_invited_to_bedroom", op = "set" },
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §5b — scene_franks_bedroom_evening (NEW, doc 19 §5)
+# ═══════════════════════════════════════════════════════════════════════════════
+# Stage 4 anchor canvas. Replaces the office as the evening venue once the
+# bedroom invitation has been accepted. The bookkeeping pretense survives
+# during the day (kitchen morning + evening + office daytime); the bedroom
+# is post-pretense. No money pays here ($0) — the wage flowed during the
+# bookkeeping; this is the dynamic, not the wage.
+#
+# Trigger: loc_franks_bedroom, weekday E band 21:00-23:00, repeatable,
+# priority 9, daily cooldown via talked_to_frank_today.
+# Conditions: npc_frank_stage >= 4 + frank_invited_to_bedroom is_true +
+# talked_to_frank_today is_false.
+#
+# Internal cascade: first night (frank_bedroom_first_done is_false) carries
+# the longer T3 first-time prose; subsequent nights branch shorter, more
+# ritualized. Same pattern as Stage 3 kitchen morning split.
+#
+# Tier-3 register per doc 16 §2 voice rules (preserved). Frank stays terse
+# ("Come here." / "Quiet." / "Stay."). Sensory ground is the bedroom — bed,
+# nightstand lamp, the wall on the right that is Diana's wall, the boards
+# Maya knows the squeak of from the wrong side.
+#
+# Diana awareness: +1 npc_diana.awareness on each exit (silent accumulator
+# per doc 16; gates Diana-arc Phase 2+ content).
+
+
+# ────────────────────────────────────────────────────────────────────────────
+# canvas: scene_office_after_crack
+# ────────────────────────────────────────────────────────────────────────────
+
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §5.6 — scene_office_after_crack  (DOC 18 §6 — Stage 3 explicit office sex)
+# ═══════════════════════════════════════════════════════════════════════════════
+# The post-crack repeating Stage 3 office surface. Replaces the previous
+# scene_franks_office_supervised Stage-3 dev-fragment as the canonical Stage 3
+# office content (per doc 18 §6). Repeatable canvas with daily cooldown via
+# talked_to_frank_today flag; priority 9 wins over scene_franks_office_supervised
+# (priority 6) when its conditions match. After firing once, the cooldown means
+# subsequent same-day office visits fall back to the supervised office's
+# updated Stage-3 register (the brief "Tomorrow." beat).
+#
+# Trigger: Stage 3 + frank_cracked + restrict + same E band + daily cooldown
+# clear. No first-vs-subsequent guard — every Stage 3 evening visit fires the
+# same canonical scene; the frank_office_first_sex_done flag is set as a
+# tracking flag (potential walkthrough/sidebar use) but doesn't gate.
+#
+# Tier-3 explicit register per doc 16 §2 voice rules. Frank stays terse
+# ("Sit." / "Quiet." / "Keep still."), names things instead of feelings,
+# no academic vocabulary, no apologizing. Maya's interiority + sensory
+# experience carries the Tier-3 weight — the desk taking her weight, the
+# page sliding sideways, the lamp not moving, the kitchen clock ticking
+# the way it does at this hour. The bookkeeping pretense survives the
+# act ($8 still pays out, "receipts for tomorrow are in the middle stack")
+# — that's part of the dynamic.
+
+[[canvases]]
+id          = "scene_office_after_crack"
+name        = "Frank's office — the new arrangement"
+description = "Stage 3 post-crack repeating office sex. Tier-3 explicit. TRIGGERLESS — reachable only via the office activity menu (scene_franks_office_setter, 'Bend over the page ❤️‍🔥' — Stage 3 + cracked + restrict-declared gate). 2026-05-09 RTS-alignment: NO daily cooldown — unlimited per-day repeats, paced by stat thresholds. Climax writes player.corruption +2 + Frank.arousal -3 + Frank.corruption +2 + $8 + frank_office_first_sex_done flag."
+
+# NO [canvases.trigger] — sub-menu only. Reachable via cross-canvas nodeId
+# from scene_franks_office_setter's "Bend over the page" choice. Stage/cracked
+# gating lives on the menu choice itself; daily cooldown is enforced by the
+# setter exit setting talked_to_frank_today (the menu trigger requires that
+# flag false, so completing one office visit blocks re-entry until tomorrow).
+
+[[canvases.nodes]]
+id   = "base"
+name = "Frank's office — the new arrangement"
+# 2026-05-06 — body rewritten as S7 cascade per Frank Phase 2 rollout (plan
+# `lets-plan-a-game-wobbly-snail.md`). Pattern E (linear cascade, no in-scene
+# stat gate — the canvas trigger conditions already gate the scene). The
+# capstone group (bedroom invitation, Stage 3→4) is nested INSIDE the cascade's
+# terminal beat — this preserves existing OR-excluded standard exits +
+# AND-gated capstone exits semantics while making the wall of text reveal
+# beat-by-beat instead of dumping at scene entry. All prose preserved verbatim.
+# All choice exits (4 total) and their gates / effects / flagEffects unchanged.
+blocks = [
+  { type = "image", props = { file = "scenes/office_after_crack.jpg", description = "Frank's office at evening with the door closed. Frank at the desk with the receipts open. Lamp on. Maya bent over the desk reading the page he's working on. Quiet, charged.", search_queries = [
+    "older man at home office desk evening warm lamp paperwork young woman bent over desk reading",
+    "fifties man at desk evening dim lamp papers receipts woman leaning over desk",
+    "rural alabama home office desk evening warm lamp older man paperwork private",
+    "salt and pepper hair man home office desk evening woman reading over shoulder dim lamp",
+    "older man home office desk evening warm low lamp papers private interior",
+  ] } },
+
+  { type = "cascade", props = { id = "frank_office_after_crack", beats = [
+    # Beat 0 — opens unconditionally on scene entry. The new arrangement
+    # established + sit command.
+    { blocks = [
+      { type = "paragraph", content = "The door's closed. It stays closed every evening now. Has since the night he closed it himself — the night the lamp was low and he set the pen down and changed his mind. She still doesn't know what changed his mind, only that something did, and the receipts are still on the desk every evening because the bookkeeping is still happening, only it's not really bookkeeping anymore and they both know it." },
+      { type = "paragraph", content = "He's at the desk when she comes in. Page open. Pen in his hand. Lamp on. Same as before, same as always — only the door's closed behind her now." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Sit." },
+      { type = "paragraph", content = "She sits." },
+    ] },
+
+    # Beat 1 — click "Bend over the page." The bend + first contact + the
+    # question that isn't a question + her answer. Per-beat effect (E,
+    # 2026-05-06): Frank.arousal +1 — his desire crossing into the visible/
+    # spoken when he asks the not-a-question and she answers. 2026-05-09
+    # Item 4: middle "first contact" moment is now 2-tier prose (default vs
+    # high — corruption ≥ 35 AND Frank.arousal ≥ 30 = wanting forward).
+    { advance_text = "Bend over the page.", effects = [
+      { targetType = "npc", npcId = "npc_frank", trait = "arousal", op = "add", value = 1 },
+    ], blocks = [
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Read the column." },
+      { type = "paragraph", content = "The page is the deductibles. She bends over the desk to see, her hands on the wood, her hair coming forward. The shirt she chose tonight is the loose one. She knows what he sees from his angle and she takes a second longer than the column needs." },
+
+      # ─── First-contact moment: default (reserved) ──────────────────────
+      { type = "group", props = { conditions = { version = "1.0", logic = "OR", items = [
+          { type = "trait", subject = "player",                       trait_key = "corruption", operator = "lt", value = 35 },
+          { type = "trait", subject = "npc",    npc_id = "npc_frank", trait_key = "arousal",    operator = "lt", value = 30 },
+        ] }, blocks = [
+        { type = "paragraph", content = "His hand finds her hip. He doesn't move it — just sets it there the way he'd set a glass down. Like he's checking it stays." },
+      ] } },
+
+      # ─── First-contact moment: high (wanting forward) ──────────────────
+      { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+          { type = "trait", subject = "player",                       trait_key = "corruption", operator = "gte", value = 35 },
+          { type = "trait", subject = "npc",    npc_id = "npc_frank", trait_key = "arousal",    operator = "gte", value = 30 },
+        ] }, blocks = [
+        { type = "paragraph", content = "His hand finds her hip and she leans into it without thinking — back against his chest, his pen-hand at her ribs. The page she was supposed to be reading slides an inch sideways under her palms." },
+      ] } },
+
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "You wearing anything under that." },
+      { type = "paragraph", content = "It's not a question. She doesn't look up from the page." },
+      { type = "dialog", props = { speaker = "player", npcId = "npc_player" }, content = "No." },
+    ] },
+
+    # Beat 2 — terminal (2026-05-09 Item 3 fork). Click "Don't look up." His hand
+    # slides + skirt up + Keep reading + pen finally goes down. Per-beat effect:
+    # Frank.arousal +1. Cascade ends here; exit_block.choices below render TWO
+    # fork options ("Let him push the skirt up" → climax_node / "Step back" →
+    # refuse_node). Real player agency at peak-stakes moment. RTS Pattern F.
+    { advance_text = "Don't look up.", effects = [
+      { targetType = "npc", npcId = "npc_frank", trait = "arousal", op = "add", value = 1 },
+    ], blocks = [
+      { type = "paragraph", content = "His hand stays where it is for another second. Then it slides up the back of her thigh, slow, finding the hem of her skirt and lifting it. He still doesn't look at her — he's looking at the page she's pretending to read." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Keep reading." },
+      { type = "paragraph", content = "The pen is still in his other hand. He hasn't put it down. The lamp light is steady. Outside the office the house is quiet — Diana asleep, the hallway dark, the kitchen clock ticking the way it does at this hour. Inside the office his hand is on her ass and the skirt is up and she's still bent over the desk and he hasn't said anything else." },
+      { type = "paragraph", content = "She pushes back against his hand. His hand tightens. The pen finally goes down." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# ─── FORK CHOICES (Item 3, 2026-05-09) — Accept / Refuse mid-cascade ─────
+# RTS Pattern F equivalent. Both choices route via intra-canvas nodeId to
+# different nodes within this canvas. Accept → node_climax (sex + climax +
+# standard post-coital exits). Refuse → node_refuse (Frank stops, brief
+# disengagement prose, exits to setter). Refuse does NOT set
+# frank_office_first_sex_done — she didn't do it, the gate stays open for
+# next visit. Accept-path pre-effect (Maya pushing into it): nothing here;
+# the heavy effects fire on the climax_node's standard exits.
+[[canvases.nodes.exit_block.choices]]
+text = "Let him push the skirt up."
+targetType = "node"
+nodeId = "scene_office_after_crack.node_climax"
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Step back. Pick up the receipts."
+targetType = "node"
+nodeId = "scene_office_after_crack.node_refuse"
+time_progression_minutes = 0
+
+
+# ─── node_climax (Item 3, 2026-05-09) — Accept-path continuation ──────────
+# Beat 3 prose (sex + climax + receipts + sits back down). Standard exits
+# (Take the receipts / Sit on desk) at the bottom — same effects as before
+# the fork: player.corruption +2 + money +8 + energy -10 + Frank.arousal -3
+# + Frank.corruption +2 (+ trust +1 on "Sit on desk"). Both routes return
+# to setter per Fix 3 office orbit. Sets frank_office_first_sex_done.
+[[canvases.nodes]]
+id   = "node_climax"
+name = "Frank's office — climax"
+blocks = [
+  { type = "paragraph", content = "She hears the chair scrape — he's standing. Belt. The sound of the buckle. Then his hands are on both her hips and he's behind her and there's a moment where she can feel him just there, just the heat and the weight of him, before he pushes in." },
+  { type = "paragraph", content = "The desk takes her weight. The page she was reading slides sideways. She braces her forearms on the wood and lets her head drop forward and lets him have it the way he wants it — slow at first, then not slow, his hand bracing her hip, his other hand flat against her lower back like he's pressing her down into the desk." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Quiet." },
+  { type = "paragraph", content = "She bites the inside of her cheek. The desk creaks once. The lamp doesn't move. He doesn't speak again until he's close —" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Keep still." },
+  { type = "paragraph", content = "— and then he holds her hip hard, pulls her back into him once, twice, and finishes. He stays like that for a long second after, his hand still flat against her back, his breathing slow." },
+  { type = "paragraph", content = "Then he pulls out. She hears the rustle of him fixing his belt. She doesn't move from the desk." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Wipe yourself off. Receipts for tomorrow are in the middle stack." },
+  { type = "paragraph", content = "He sits back down." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Take the receipts. Don't say anything."
+targetType = "node"
+nodeId = "scene_franks_office_setter.base"
+time_progression_minutes = 60
+effects = [
+  { targetType = "player",                       trait = "corruption",          op = "add", value = 2 },
+  { targetType = "player",                       trait = "money",               op = "add", value = 8 },
+  { targetType = "player",                       trait = "energy",              op = "add", value = -10 },
+  { targetType = "npc",    npcId = "npc_frank", trait = "arousal",             op = "add", value = -3 },
+  { targetType = "npc",    npcId = "npc_frank", trait = "corruption",          op = "add", value = 2 },
+]
+flagEffects = [
+  { targetType = "player", flag = "frank_office_first_sex_done", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sit on the desk a moment. Don't leave yet."
+targetType = "node"
+nodeId = "scene_franks_office_setter.base"
+time_progression_minutes = 60
+effects = [
+  { targetType = "player",                       trait = "corruption",          op = "add", value = 2 },
+  { targetType = "player",                       trait = "money",               op = "add", value = 8 },
+  { targetType = "player",                       trait = "energy",              op = "add", value = -10 },
+  { targetType = "npc",    npcId = "npc_frank", trait = "arousal",             op = "add", value = -3 },
+  { targetType = "npc",    npcId = "npc_frank", trait = "corruption",          op = "add", value = 2 },
+  # Lingering signals continued investment — Frank.trust nudge as a small
+  # secondary effect, distinguishes from the businesslike take-and-leave choice.
+  { targetType = "npc",    npcId = "npc_frank", trait = "trust",               op = "add", value = 1 },
+]
+flagEffects = [
+  { targetType = "player", flag = "frank_office_first_sex_done", op = "set" },
+]
+
+
+# ─── node_refuse (Item 3, 2026-05-09) — Refuse-path continuation ──────────
+# She steps back. Frank stops. Brief disengagement. Routes to setter — no
+# flag set, no money paid (she didn't do the work). Effects: Frank.arousal
+# -3 (frustrated release without release), Frank.trust -2 (she pulled back),
+# Frank.love +1 (he respects the no — costly for him, gentle long-term gain).
+# RTS doctrine: real choice with real cost, not punitive softlock.
+[[canvases.nodes]]
+id   = "node_refuse"
+name = "Frank's office — refuse"
+blocks = [
+  { type = "paragraph", content = "She straightens. Pushes the skirt back down. Steps out from between him and the desk." },
+  { type = "paragraph", content = "Frank doesn't move. His hand stays in the air for a second where her hip just was, then drops. He sets the pen down on the page. Doesn't pick it back up." },
+  { type = "paragraph", content = "She picks up the receipts off the middle stack. Holds them against her chest." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Door's behind you." },
+  { type = "paragraph", content = "He doesn't look at her. She doesn't look at him." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave the receipts. Walk out."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_franks_office"
+time_progression_minutes = 5
+effects = [
+  { targetType = "npc",    npcId = "npc_frank", trait = "arousal", op = "add", value = -3 },
+  { targetType = "npc",    npcId = "npc_frank", trait = "trust",   op = "add", value = -2 },
+  { targetType = "npc",    npcId = "npc_frank", trait = "love",    op = "add", value = 1 },
+  { targetType = "player",                       trait = "energy",  op = "add", value = -3 },
+]
+flagEffects = [
+]
+
+
+# ─── CAPSTONE EXITS REMOVED 2026-05-09 — extracted to scene_frank_bedroom_invitation ──
+# The "Yes." / "What about Diana." choices live in the new invitation canvas
+# (priority 13) which fires on the NEXT office entry once first sex done +
+# corruption ≥ 25. See §5a-bis below.
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §5a-bis — scene_frank_bedroom_invitation (extracted 2026-05-09)
+# ═══════════════════════════════════════════════════════════════════════════════
+# Bedroom invitation as its own one-shot threshold canvas. Extracted from
+# scene_office_after_crack's nested capstone group (formerly lines 3565-3578
+# + capstone exits 3652-3702). Why separate: the invitation moment deserves
+# its own breathing room, not a stacked beat at the climax of office sex.
+# Player has the office sex scene (after_crack), returns to setter via Fix 3
+# orbit; on NEXT office entry with capstone gates met, this higher-priority
+# canvas (13) wins over setter (11) and renders the invitation as its own
+# scene. Player accepts/qualifies → npc_frank_stage = 4 + frank_invited_to_bedroom
+# set + routes to loc_hallway (Maya leaves to walk to bedroom).
+# Mutex with setter via frank_invited_to_bedroom is_false in conditions:
+# once player accepts, this canvas never fires again, setter resumes winning.
+
+
+# ────────────────────────────────────────────────────────────────────────────
+# canvas: scene_office_crack
+# ────────────────────────────────────────────────────────────────────────────
+
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §5.5 — scene_office_crack  (DOC 18 §5 — Stage 2→3 transition Tier-3)
+# ═══════════════════════════════════════════════════════════════════════════════
+# Stage 2→3 crack moment. Branch-inside-shell at loc_franks_office: a separate
+# priority-9 one-time-guard canvas that wins the priority race over the
+# repeatable scene_franks_office_supervised (priority 6) when conditions match.
+# Replaces the regular supervised office render with the crack moment for that
+# one visit. After firing: frank_cracked = true → gate fails → never re-fires.
+#
+# Trigger: Stage 2 + restrict + corruption ≥ 50 + Frank.arousal ≥ 30 +
+# Frank.corruption ≥ 15 + cracked false. All four stat-cumulative gates clear
+# naturally via the multi-source tease distribution (doc 18 §5 table — kitchen
+# morning brush-past, kitchen dinprep reach, hallway robe-linger, living room
+# sit-on-rug, office lean-by-desk, porch railing). Reachable Day 7-9 of slice
+# at consistent tease cadence + the +1/day passive arousal tick.
+#
+# Pattern matches scene_frank_offer_bookkeeping (the Stage 0→1 offer, doc 18 §3)
+# and scene_living_room_evening (the catch — Stage 1→2). All three are one-time
+# guard canvases at the right location/time, gated on the relevant prereqs,
+# with choice exits that write the stage advancement directly.
+#
+# Tier-3 prose per doc 16 §2 voice (Frank: terse, names things, no apologies,
+# no academic vocabulary; Maya's interiority carries the weight). Two choices:
+# obedience ("Get up. Close the door.") and defiance ("Don't move. Make him
+# say it twice."). Both write frank_cracked + npc_frank_stage = 3 + the same
+# stat triple (player.corruption + Frank.arousal + Frank.corruption). Choice
+# flavor lives in the text + Step 5 continuation prose; mechanically equivalent
+# in this slice.
+
+[[canvases]]
+id          = "scene_office_crack"
+name        = "Frank — the office, the door"
+description = "Stage 2→3 crack. Tier-3. Fires once at the supervised office's evening band when corruption ≥ 50 + restrict + Frank.arousal ≥ 30 + Frank.corruption ≥ 15. Both choice exits set frank_cracked + advance npc_frank_stage to 3."
+
+[canvases.trigger]
+location      = "loc_franks_office"
+is_repeatable = false
+priority      = 9
+is_active     = true
+npc           = "npc_frank"
+conditions = { version = "1.0", logic = "AND", items = [
+  # 2026-05-11 RTS-shape conversion: dropped npc_frank_stage gate; replaced
+  # with frank_caught flag (catch must have already fired). Lowered MC
+  # corruption 50→35. Frank trait gates preserved (RTS-pattern stat gating).
+  { type = "flag",  subject = "player",                       flag_key  = "frank_caught",            operator = "is_true"  },
+  { type = "flag",  subject = "player",                       flag_key  = "frank_restrict_declared", operator = "is_true" },
+  { type = "trait", subject = "player",                       trait_key = "corruption",              operator = "gte",      value = 35 },
+  { type = "trait", subject = "npc",    npc_id = "npc_frank", trait_key = "arousal",                 operator = "gte",      value = 30 },
+  { type = "trait", subject = "npc",    npc_id = "npc_frank", trait_key = "corruption",              operator = "gte",      value = 15 },
+  { type = "flag",  subject = "player",                       flag_key  = "frank_cracked",           operator = "is_false" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "19:00"
+end_time   = "21:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Frank's office — the door"
+# 2026-05-06 — body rewritten as S7 cascade per Frank Phase 2 rollout.
+# Pattern E (linear cascade, no in-scene gate — canvas trigger AND-list of
+# 6 conditions already gates the scene). One-shot crack moment paced as 4
+# beats so the standoff lands beat-by-beat. All prose verbatim. Both
+# register-branch exits unchanged.
+blocks = [
+  { type = "image", props = { file = "scenes/office_crack.jpg", description = "Frank's office at evening with the lamp turned low. Frank at the desk, pen in hand but not moving, the receipts open in front of him. The door behind Maya is open. Quiet, dim, charged.", search_queries = [
+    "older man at home office desk evening dim lamp receipts paper quiet rural farmhouse",
+    "fifties man at desk evening warm low lamp light papers door open behind",
+    "rural alabama home office desk evening dim warm lamp older man pen paper",
+    "salt and pepper hair man at office desk evening low light receipts paperwork",
+    "older man home office evening dim warm lamp light papers quiet southern interior",
+  ] } },
+
+  { type = "cascade", props = { id = "frank_office_crack", beats = [
+    # Beat 0 — opens unconditionally. The setup: lower lamp, the unbidden
+    # sitting, the bare foot under the desk. All three signals he's noticed
+    # but hasn't called out.
+    { blocks = [
+      { type = "paragraph", content = "The lamp's lower than usual. She'd noticed it when she came in. He'd dimmed it at some point and not raised it back. The receipts are out but she's not sure he was working — the top page of the middle stack hasn't turned in the time she's been here." },
+      { type = "paragraph", content = "She'd sat. He hadn't said sit. He'd just looked up when she came through the door and looked back down at the page and not said anything, and she'd sat anyway. They were past the part where he tells her where to sit." },
+      { type = "paragraph", content = "Her foot is bare under the desk. She'd toed her shoe off ten minutes ago. She'd pretended it was an accident. The shoe is on its side on the floorboards near the desk leg, and he'd looked at it once and not said anything about that either." },
+    ] },
+
+    # Beat 1 — click "Look up." Frank's first command. The door he himself
+    # named the rule about.
+    { advance_text = "Look up.", blocks = [
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Door." },
+      { type = "paragraph", content = "She looks up." },
+      { type = "paragraph", content = "He's looking at the door. The door behind her. The door that's been propped open every evening since the catch, propped open because he said it — because *door open, always, I don't care who's in the house.*" },
+    ] },
+
+    # Beat 2 — click "Hold his eyes." The standoff. He repeats himself; she
+    # doesn't move. The kitchen clock ticks. Per-beat effect (E, 2026-05-06):
+    # player.corruption +1 — actively choosing not to obey is the moment of
+    # commitment that produces the rule break that follows.
+    { advance_text = "Hold his eyes.", effects = [
+      { targetType = "player", trait = "corruption", op = "add", value = 1 },
+    ], blocks = [
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Close it." },
+      { type = "paragraph", content = "She doesn't move. The lamp light catches her bare foot under the desk. Outside the office the house is quiet — Diana asleep, the hallway dark, the kitchen clock ticking the way it does at this hour." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "I told you. Door open." },
+    ] },
+
+    # Beat 3 terminal (no advance_text, yields to register-branch choice
+    # exits). The rule break. He sets the pen down — first thing all evening
+    # — then says the four words.
+    { blocks = [
+      { type = "paragraph", content = "He sets the pen down. The first thing he's set down all evening." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "I changed my mind." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get up. Close the door."
+targetType = "trigger"
+time_progression_minutes = 20
+effects = [
+  # 2026-05-11 — npc_frank_stage write removed (per RTS-shape conversion).
+  # frank_cracked flag below carries the post-crack register.
+  { targetType = "player",                       trait = "corruption",      op = "add", value = 2 },
+  { targetType = "npc",    npcId = "npc_frank", trait = "arousal",         op = "add", value = 2 },
+  { targetType = "npc",    npcId = "npc_frank", trait = "corruption",      op = "add", value = 1 },
+  { targetType = "player",                       trait = "energy",          op = "add", value = -3 },
+]
+flagEffects = [
+  { targetType = "player", flag = "frank_cracked",            op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Don't move. Make him say it twice."
+targetType = "trigger"
+time_progression_minutes = 20
+effects = [
+  # 2026-05-11 — npc_frank_stage write removed (per RTS-shape conversion).
+  { targetType = "player",                       trait = "corruption",      op = "add", value = 2 },
+  { targetType = "npc",    npcId = "npc_frank", trait = "arousal",         op = "add", value = 2 },
+  { targetType = "npc",    npcId = "npc_frank", trait = "corruption",      op = "add", value = 1 },
+  { targetType = "player",                       trait = "energy",          op = "add", value = -3 },
+]
+flagEffects = [
+  { targetType = "player", flag = "frank_cracked",            op = "set" },
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §5.6 — scene_office_after_crack  (DOC 18 §6 — Stage 3 explicit office sex)
+# ═══════════════════════════════════════════════════════════════════════════════
+# The post-crack repeating Stage 3 office surface. Replaces the previous
+# scene_franks_office_supervised Stage-3 dev-fragment as the canonical Stage 3
+# office content (per doc 18 §6). Repeatable canvas with daily cooldown via
+# talked_to_frank_today flag; priority 9 wins over scene_franks_office_supervised
+# (priority 6) when its conditions match. After firing once, the cooldown means
+# subsequent same-day office visits fall back to the supervised office's
+# updated Stage-3 register (the brief "Tomorrow." beat).
+#
+# Trigger: Stage 3 + frank_cracked + restrict + same E band + daily cooldown
+# clear. No first-vs-subsequent guard — every Stage 3 evening visit fires the
+# same canonical scene; the frank_office_first_sex_done flag is set as a
+# tracking flag (potential walkthrough/sidebar use) but doesn't gate.
+#
+# Tier-3 explicit register per doc 16 §2 voice rules. Frank stays terse
+# ("Sit." / "Quiet." / "Keep still."), names things instead of feelings,
+# no academic vocabulary, no apologizing. Maya's interiority + sensory
+# experience carries the Tier-3 weight — the desk taking her weight, the
+# page sliding sideways, the lamp not moving, the kitchen clock ticking
+# the way it does at this hour. The bookkeeping pretense survives the
+# act ($8 still pays out, "receipts for tomorrow are in the middle stack")
+# — that's part of the dynamic.
+
+
+# ────────────────────────────────────────────────────────────────────────────
+# canvas: scene_office_supervision_intro
+# ────────────────────────────────────────────────────────────────────────────
+
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §5.4 — scene_office_supervision_intro  (DOC 18 §4 — supervision intro Tier-3)
+# ═══════════════════════════════════════════════════════════════════════════════
+# First-time post-catch office beat. Tier-3. One-shot guard via
+# frank_supervision_explained flag. Priority 9 wins over scene_franks_office_supervised
+# (priority 6) on the player's first office visit at Stage 2 + restrict. After
+# firing, frank_supervision_explained = true → gate fails → never re-fires.
+# Subsequent Stage-2 office visits land in the regular supervised office Stage-2
+# register (the "He had the receipts in three stacks now..." block).
+#
+# Co-exists with scene_office_crack at the same priority (9) — they have
+# mutually exclusive trigger conditions: this fires Stage 2 + supervision
+# unexplained; crack fires Stage 2 + ALL Stage-3 stat thresholds met +
+# frank_cracked false. The supervision intro fires immediately post-catch,
+# long before tease accumulation hits the crack thresholds.
+#
+# Tier-3 weight per doc 16 §2 voice. Frank's "door open" rule is the
+# capstone — clipped, controlling, no apology. Maya's interiority is
+# minimal at this moment (the rule lands first; she'll process later).
+
+[[canvases]]
+id          = "scene_office_supervision_intro"
+name        = "Frank's office — the rule"
+description = "First-time post-catch office intro. Tier-3 ~140 words. Fires once at Stage 2 + restrict + frank_supervision_explained is_false. Sets frank_supervision_explained on exit (gate then fails forever). Priority 12 — must beat scene_franks_office_setter (pri 11) so the intro plays once at Stage 2 entry before the activity menu takes over."
+
+[canvases.trigger]
+location      = "loc_franks_office"
+is_repeatable = true
+priority      = 12
+is_active     = true
+npc           = "npc_frank"
+conditions = { version = "1.0", logic = "AND", items = [
+  # 2026-05-11 RTS-shape conversion: dropped npc_frank_stage eq 2 (deprecated).
+  # Replaced with frank_caught is_true + frank_cracked is_false (post-catch,
+  # pre-crack register). frank_supervision_explained is_false is the one-shot guard.
+  { type = "flag",  subject = "player", flag_key  = "frank_caught",              operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key  = "frank_cracked",             operator = "is_false" },
+  { type = "flag",  subject = "player", flag_key  = "frank_restrict_declared",    operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key  = "frank_supervision_explained", operator = "is_false" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "19:00"
+end_time   = "21:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Frank's office — the rule"
+blocks = [
+  { type = "image", props = { file = "scenes/office_supervision_intro.jpg", description = "Frank's office at evening, lamp on, door propped open behind Maya, three stacks of receipts on the desk where there used to be one. Frank at the desk, page open, pen in hand.", search_queries = [
+    "older man at home office desk lamp evening rural farmhouse paperwork door open",
+    "fifties man at office desk evening warm lamp stacks of receipts paperwork",
+    "rural alabama home office desk evening lamp older man paperwork open door",
+    "salt and pepper hair man at desk evening warm lamp receipts paperwork doorway",
+    "older man home office desk evening warm low lamp papers door propped open",
+  ] } },
+  { type = "paragraph", content = "The lamp's on. Door's open — she'd left it open coming in. Frank at the desk, the receipts in three stacks now where there used to be one, sorted in some way she doesn't read yet." },
+  { type = "paragraph", content = "He doesn't look up when she comes in." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Door open." },
+  { type = "paragraph", content = "She'd already left it open. He says it anyway." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Always. I don't care who's in the house." },
+  { type = "paragraph", content = "He passes her the smaller stack across without looking." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Sit. Where I can see you." },
+  { type = "paragraph", content = "The chair he means is the one across from him, lamp between them. She sits. He goes back to the page he was on. They work an hour that way and he doesn't speak again." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Hand the stack back when you're done."
+targetType = "trigger"
+time_progression_minutes = 60
+effects = [
+  { targetType = "npc",    npcId = "npc_frank", trait = "trust",  op = "add", value = 1 },
+  { targetType = "player",                       trait = "money",  op = "add", value = 5 },
+  { targetType = "player",                       trait = "energy", op = "add", value = -8 },
+]
+flagEffects = [
+  { targetType = "player", flag = "frank_supervision_explained", op = "set" },
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §5.5 — scene_office_crack  (DOC 18 §5 — Stage 2→3 transition Tier-3)
+# ═══════════════════════════════════════════════════════════════════════════════
+# Stage 2→3 crack moment. Branch-inside-shell at loc_franks_office: a separate
+# priority-9 one-time-guard canvas that wins the priority race over the
+# repeatable scene_franks_office_supervised (priority 6) when conditions match.
+# Replaces the regular supervised office render with the crack moment for that
+# one visit. After firing: frank_cracked = true → gate fails → never re-fires.
+#
+# Trigger: Stage 2 + restrict + corruption ≥ 50 + Frank.arousal ≥ 30 +
+# Frank.corruption ≥ 15 + cracked false. All four stat-cumulative gates clear
+# naturally via the multi-source tease distribution (doc 18 §5 table — kitchen
+# morning brush-past, kitchen dinprep reach, hallway robe-linger, living room
+# sit-on-rug, office lean-by-desk, porch railing). Reachable Day 7-9 of slice
+# at consistent tease cadence + the +1/day passive arousal tick.
+#
+# Pattern matches scene_frank_offer_bookkeeping (the Stage 0→1 offer, doc 18 §3)
+# and scene_living_room_evening (the catch — Stage 1→2). All three are one-time
+# guard canvases at the right location/time, gated on the relevant prereqs,
+# with choice exits that write the stage advancement directly.
+#
+# Tier-3 prose per doc 16 §2 voice (Frank: terse, names things, no apologies,
+# no academic vocabulary; Maya's interiority carries the weight). Two choices:
+# obedience ("Get up. Close the door.") and defiance ("Don't move. Make him
+# say it twice."). Both write frank_cracked + npc_frank_stage = 3 + the same
+# stat triple (player.corruption + Frank.arousal + Frank.corruption). Choice
+# flavor lives in the text + Step 5 continuation prose; mechanically equivalent
+# in this slice.
+
+
+# ────────────────────────────────────────────────────────────────────────────
+# canvas: scene_frank_offer_bookkeeping
+# ────────────────────────────────────────────────────────────────────────────
+
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §1.5 — scene_frank_offer_bookkeeping  (DOC 18 §3 — bookkeeping intro Tier-3)
+# ═══════════════════════════════════════════════════════════════════════════════
+# Stage 0→1 transition trigger. High-priority (9) one-shot-style canvas at the
+# kitchen during Frank's M band. Wins the priority race over the repeatable
+# scene_kitchen_with_frank_morning (priority 6) when its conditions match —
+# replacing the normal Stage-0 morning render with the offer beat for that
+# visit. After accept: frank_offered_bookkeeping flips → never fires again
+# (gate on flag is_false fails). After decline: frank_declined_bookkeeping_today
+# pulses for the day → daily_tick clears overnight → fires again next morning.
+#
+# This is the RTS-aligned content unlock pattern (doc 18 §3): location-prose
+# offer → choice → flag opens recurring activity. Mirrors RTS Library/Natasha
+# (doc 13 §11 lines 519-522: "kind of weird you never said hi. Could fix that
+# now." → [Say hello] → Tier-3 intro → per-NPC chat unlocks).
+#
+# Tier-3 register per doc 16 §2 voice rules + §4 tier discrimination. Frank
+# stays terse, names things instead of feelings, no apologies, no academic
+# vocabulary. Maya's interiority is light at this stage (Stage 0 — she barely
+# knows him).
+
+[[canvases]]
+id          = "scene_frank_offer_bookkeeping"
+name        = "Frank — the books offer"
+description = "Stage 0→1 bookkeeping introduction. Tier-3. Fires once during Frank's M kitchen band when trust >= 10 + offer flag false + (no decline pulse today). Accept sets frank_offered_bookkeeping (opens activity_bookkeeping_with_frank); decline sets daily decline flag (offer comes back next morning)."
+
+[canvases.trigger]
+location      = "loc_kitchen"
+is_repeatable = true
+priority      = 9
+is_active     = true
+npc           = "npc_frank"
+conditions = { version = "1.0", logic = "AND", items = [
+  # 2026-05-11 RTS-shape conversion: dropped npc_frank_stage eq 0 (deprecated).
+  # frank_offered_bookkeeping is_false is already the one-shot guard.
+  { type = "trait", subject = "npc",    npc_id = "npc_frank", trait_key = "trust",                            operator = "gte",      value = 10 },
+  { type = "flag",  subject = "player",                       flag_key  = "frank_offered_bookkeeping",         operator = "is_false" },
+  { type = "flag",  subject = "player",                       flag_key  = "frank_declined_bookkeeping_today", operator = "is_false" },
+  { type = "flag",  subject = "player",                       flag_key  = "arrived_at_franks",                operator = "is_true"  },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "06:30"
+end_time   = "08:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The books"
+blocks = [
+  { type = "image", props = { file = "scenes/frank_offer_bookkeeping.jpg", description = "Frank at the kitchen table mid-morning, three short stacks of receipts in front of him, coffee cup at his elbow, summer light through the window over the sink. He's looking at the top page of the middle stack without turning it.", search_queries = [
+    "older man at kitchen table receipts paperwork stacks coffee morning rural farmhouse",
+    "fifties man bookkeeping kitchen table sorting papers warm morning light",
+    "older man morning paperwork stacks receipts kitchen southern rural",
+    "salt and pepper hair man at kitchen table papers coffee mug morning",
+    "rural alabama kitchen table receipts paperwork older man morning",
+  ] } },
+  { type = "paragraph", content = "She comes in for coffee. Frank's already at the table. Not eating — he's done eating. Receipts. Three short stacks she hadn't noticed on the prior mornings, set out the way you'd set a hand of cards. He's looking at the top one of the middle stack and not turning it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "You eat?" },
+  { type = "paragraph", content = "She nods." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Sit a minute." },
+  { type = "paragraph", content = "She sits. He doesn't push the receipts toward her, just lets them stay where they are between them. Like they're a thing he hasn't decided about yet either." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "You any good with numbers?" },
+  { type = "paragraph", content = "The way he says it — not a job interview, not a casual question. Like he's already been thinking about it for a few mornings and finally said it out loud." },
+  { type = "paragraph", content = "She looks at the stacks." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Yeah. I can help.\""
+targetType = "trigger"
+time_progression_minutes = 20
+effects = [
+  { targetType = "npc",    npcId = "npc_frank", trait = "trust",  op = "add", value = 2 },
+  { targetType = "player",                       trait = "energy", op = "add", value = -3 },
+]
+flagEffects = [
+  { targetType = "player", flag = "frank_offered_bookkeeping", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"I'm not really…\""
+targetType = "trigger"
+time_progression_minutes = 10
+effects = [
+  { targetType = "player", trait = "energy", op = "add", value = -1 },
+]
+flagEffects = [
+  { targetType = "player", flag = "frank_declined_bookkeeping_today", op = "set" },
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §2 — scene_kitchen_with_frank_dinprep
+# ═══════════════════════════════════════════════════════════════════════════════
+# DINPREP band 17:00–18:30 weekdays. Same stage cascade pattern, different
+# surfaces (church-bulletin envelope, onions, dish-gesture). Player sees a
+# different paragraph at the same Stage if they visit at this band vs M band
+# — that's the doctrinal claim plan §3 row 3 validates.
+
+
+# ────────────────────────────────────────────────────────────────────────────
+# canvas: activity_bookkeeping_with_frank
+# ────────────────────────────────────────────────────────────────────────────
+
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §6 — activity_bookkeeping_with_frank
+# ═══════════════════════════════════════════════════════════════════════════════
+# Doc 18 §3 redesign 2026-05-04: activity is now flag-gated on frank_offered_bookkeeping
+# (set by Stage-0→1 offer scene in scene_kitchen_with_frank_morning). The original
+# every completion. Schedule-gated to Frank's office hours (E band weekdays).
+# Counter feeds frank_stage_1() helper.
+
+[[canvases]]
+id          = "activity_bookkeeping_with_frank"
+name        = "Bookkeeping with Frank"
+description = "+1 frank.trust, +$8. 60 min. TRIGGERLESS — reachable only via the office activity menu (scene_franks_office_setter, Stage 1 routing). Sub-menu canvas. Doctrine: see doc 24 §3."
+
+# NO [canvases.trigger] — sub-menu only. Reachable via cross-canvas nodeId
+# from scene_franks_office_setter's "Help with bookkeeping 💼" choice (Stage 1
+# routing). Closure pass at v1.py:_compute_included_canvases pulls this canvas
+# in via that targetType="node" reference.
+
+[[canvases.nodes]]
+id   = "base"
+name = "Bookkeeping"
+blocks = [
+  { type = "image", props = { file = "activities/bookkeeping_with_frank.jpg", description = "Frank at the desk, Maya across from him, two stacks of receipts between them, the lamp on, warm evening interior.", search_queries = [
+    "older man young woman home office desk receipts paperwork lamp evening",
+    "father stepdaughter office desk paperwork warm lamp light",
+    "small home office two people desk paperwork receipts evening warm",
+    "rural farmhouse office desk paperwork lamp evening two people",
+    "older man teaching young woman bookkeeping desk lamp warm interior",
+  ] } },
+  { type = "paragraph", content = "He had the smaller stack waiting. He didn't explain it again — she'd seen the deductible/wash/wait categories two weeks running now and he assumed she remembered. He was right that she remembered. The pen Diana kept in the kitchen drawer. Forty-five minutes by the clock." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Hand the stack back."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_franks_office"
+time_progression_minutes = 60
+effects = [
+  { targetType = "npc",    npcId = "npc_frank", trait = "trust",  op = "add", value = 1 },
+  { targetType = "player",                       trait = "money",  op = "add", value = 8 },
+  { targetType = "player",                       trait = "energy", op = "add", value = -8 },
+]
+flagEffects = [
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §7 — activity_help_ryan_in_yard
+# ═══════════════════════════════════════════════════════════════════════════════
+# Gates Ryan Stage 0→1 via ryan_help_count counter. A band weekdays. The
+# scene_yard_with_ryan also fires here on chance — both can co-exist (different
+# names = different buttons in the menu).
+
+
+# ────────────────────────────────────────────────────────────────────────────
+# location: loc_franks_office
+# ────────────────────────────────────────────────────────────────────────────
+
+[[locations]]
+id               = "loc_living_room"
+name             = "Living Room"
+description      = "Television against the long wall. Couch deep enough to lie down on. Lamp Diana brought from the old house. Coffee table with coasters nobody uses. The porch visible through the front window. Frank reads here some evenings when the office gets stale."
+image            = "locations/living_room.jpg"
+image_search_queries = ["rural living room deep couch old television lamp porch window southern evening", "small farmhouse living room couch lamp coffee table"]
+parent           = "loc_property"
+entry_from       = "loc_hallway"
+
+
+# ────────────────────────────────────────────────────────────────────────────
+# flag-label: frank_offered_bookkeeping
+# ────────────────────────────────────────────────────────────────────────────
+
+[[flags.labels]]
+key = "frank_offered_bookkeeping"
+label = "Frank offered me bookkeeping"
+
+
+# ────────────────────────────────────────────────────────────────────────────
+# flag-label: frank_supervision_explained
+# ────────────────────────────────────────────────────────────────────────────
+
+[[flags.labels]]
+key = "frank_supervision_explained"
+label = "Frank set the office rules"
+
+
+# ────────────────────────────────────────────────────────────────────────────
+# hint-templates: pre-catch chain (5 templates, lines 1907-1970)
+# ────────────────────────────────────────────────────────────────────────────
+
+# Pre-bookkeeping baseline. Fires before the bookkeeping offer is accepted.
+[[story_arc.hints.templates]]
+text             = "Frank wants help with the books. I could use the money."
+npc_id           = "npc_frank"
+auto_goal        = false
+arc_closure_flag = "frank_offered_bookkeeping"
+condition = { trait_checks = [
+  { type = "flag", subject = "player", flag_key = "frank_offered_bookkeeping", operator = "is_false" },
+] }
+
+# Pre-bookkeeping crisis variant. Fires while rent is unpaid. Picker prefers
+# it over the baseline (priority 10 + 2 condition items vs 1).
+[[story_arc.hints.templates]]
+text             = "Frank's offering bookkeeping work — cash in hand. Rent's hanging over me. I can't afford to skip a session."
+npc_id           = "npc_frank"
+priority         = 10
+auto_goal        = false
+arc_closure_flag = "frank_offered_bookkeeping"
+condition = { missing_flag = "first_rent_paid", trait_checks = [
+  { type = "flag", subject = "player", flag_key = "frank_offered_bookkeeping", operator = "is_false" },
+] }
+
+# Post-offer, pre-catch — branch-inside-shell to scene_living_room_evening.
+# Tip names the where/when sensorily without spoiling the corruption threshold.
+[[story_arc.hints.templates]]
+text             = "Frank's been watching me different lately. Something's about to shift."
+tip              = "Stay up later than I should. Be downstairs when I shouldn't be — the living room, after his bedtime. He'll find me eventually."
+npc_id           = "npc_frank"
+auto_goal        = false
+arc_closure_flag = "frank_caught"
+condition = { trait_checks = [
+  { type = "flag", subject = "player", flag_key = "frank_offered_bookkeeping", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "frank_caught",              operator = "is_false" },
+] }
+
+# Post-catch, pre-crack.
+[[story_arc.hints.templates]]
+text             = "Frank's lessons run past their hour. He's making excuses to keep me there."
+npc_id           = "npc_frank"
+auto_goal        = false
+arc_closure_flag = "frank_cracked"
+condition = { trait_checks = [
+  { type = "flag", subject = "player", flag_key = "frank_caught",  operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "frank_cracked", operator = "is_false" },
+] }
+
+# Post-crack — bedroom invitation pending. Maya's interior voice only — no
+# time / location / schedule / counter references in narrative copy (per
+# `feedback_hint_narrative_no_time_or_location`). 2026-05-11 RTS-shape
+# conversion: stage gate replaced with frank_cracked is_true +
+# frank_invited_to_bedroom is_false. arc_closure_flag points engine at the
+# bedroom-invitation canvas (which sets frank_invited_to_bedroom) so goal
+# block renders 🔓 Ready + 📍 + 🕒 from that canvas's trigger.
+[[story_arc.hints.templates]]
+text             = "He needs me. The bookkeeping is the cover now."
+tip              = "Frank's pulling at her. The more she gives him, the more he wants — and the further the line moves."
+ready_text       = "He'll move the line tonight."
+npc_id           = "npc_frank"
+auto_goal        = false
+arc_closure_flag = "frank_invited_to_bedroom"
+condition = { trait_checks = [
+  { type = "flag", subject = "player", flag_key = "frank_cracked",            operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "frank_invited_to_bedroom", operator = "is_false" },
+] }
+
+
+
+# ────────────────────────────────────────────────────────────────────────────
+# kitchen-cascade-group: STAGE 1 (gates on frank_offered_bookkeeping is_true)
+# ────────────────────────────────────────────────────────────────────────────
+
+  # ─── STAGE 1 — Grudging warmth (post-offer working register) ──────────────
+  # Doc 18 §3 redesign 2026-05-04: the "you any good with numbers?" beat
+  # moved to scene_frank_offer_bookkeeping (the proper Stage-0→1 intro).
+  # Stage 1 morning kitchen now reads as the established working rhythm
+  # — Frank expects her, the books are out, no question needs asking.
+  # 2026-05-11 RTS-shape conversion: stage gate replaced with
+  # frank_offered_bookkeeping is_true + frank_caught is_false (post-offer, pre-catch register).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "frank_offered_bookkeeping", operator = "is_true" },
+      { type = "flag", subject = "player", flag_key = "frank_caught",              operator = "is_false" },
+    ] }, blocks = [
+    { type = "cascade", props = { id = "frank_kitchen_morning_s1", beats = [
+      { blocks = [
+        { type = "paragraph", content = "Frank had the receipts in two stacks at his elbow when she came in. He'd put the smaller one on her side of the table without waiting for her to sit. The kettle was still warm. He didn't look up — but the wait wasn't the same wait as last week." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Coffee's still warm." },
+        # 2026-05-09 Item 5 — Stage 1 warmth line. Frank starting to notice
+        # her as a person, not just a tenant. First-name-skirting concern.
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "You sleep alright in there?" },
+      ] },
+      { advance_text = "Take the cup.", blocks = [
+        { type = "paragraph", content = "She poured a cup and sat. The pen Diana kept in the drawer. The sound of his pencil tapping the column total he'd already done in his head twice." },
+      ] },
+    ] } },
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# ADDENDUM 2026-05-13 — pieces missed in initial archive pass
+# ════════════════════════════════════════════════════════════════════════════
+# Both items below were dropped from the live TOML during a round-2 fix script
+# (after the round-1 script left them in place); the round-2 script handled
+# the live-file deletion but failed to extend the archive. Splicing them in
+# here so the archive is resurrection-complete.
+#
+# Items:
+#   1. tease_office_desk_lean canvas — L1-1 item 1/5 Pattern A render at
+#      loc_franks_office (corruption gte 5 pre-catch tease, substitution_only,
+#      reachable via scene_franks_office_setter "Lean over the desk" menu item).
+#   2. scene_kitchen_with_frank_dinprep STAGE 1 cascade group — the kitchen-
+#      dinprep Stage 1 register that gated on frank_offered_bookkeeping is_true.
+#      Was a 4-line vignette ("Frank at the counter peeling potatoes" + the
+#      "Diana's setting up. Don't get in her way." line + Diana's laugh).
+
+# ────────────────────────────────────────────────────────────────────────────
+# canvas: tease_office_desk_lean (full body — was missing from initial archive)
+# ────────────────────────────────────────────────────────────────────────────
+
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# L1-1 Pattern A renders (2026-05-12) — promoted from click-only tease items
+# ═══════════════════════════════════════════════════════════════════════════════
+# Per audit doc 26 / remediation doc 27 §L1-1: TLS Frank had ZERO rendered
+# Pattern A tease scenes despite 11 click-only tease items distributed across
+# hubs and ambient surfaces. RTS Brother has 2 (Tease + Flash, ~70-90w each
+# with image + stat ticks + return). This section ships the L1-1 promotions
+# — short rendered scenes (substitution_only, reachable only via the menu
+# item that now routes to them via cross-canvas nodeId).
+#
+# Doctrine pattern (matches scene_frank_at_open_bathroom_door from Pass 7):
+#   - substitution_only = true (excluded from selectors)
+#   - cascade body, 2-3 beats, ~75-90 words
+#   - exit_block type = "location" simple return to parent location
+#   - all effects on exit (matches the canonical Pattern A pattern)
+#   - npc field omitted to avoid substitution_only+npc warning
+#
+# Sub-canvases below are reached ONLY via cross-canvas nodeId routing from
+# the office/bedroom/kitchen/hallway setters and ambient menu items.
+
+# ─── L1-1 item 1/5: tease_office_desk_lean ─────────────────────────────────
+# Maya leans across Frank's desk at the receipts. Shirt loose at collar. The
+# lamp catches her shoulders. Frank's pen pauses. She traces the column with
+# one finger, slow. He doesn't move. She straightens; he turns the page.
+# Reached via scene_franks_office_setter "Lean over the desk to read the
+# receipts." menu item (Maya.corruption gte 5 gate).
+
+[[canvases]]
+id          = "tease_office_desk_lean"
+name        = "Office — lean over the desk"
+description = "L1-1 Pattern A render: pre-catch tease at corruption 5+. Maya leans across Frank's desk at the receipts. 3-beat cascade. substitution_only — reachable only via scene_franks_office_setter menu item."
+
+[canvases.trigger]
+location          = "loc_franks_office"
+is_repeatable     = true
+priority          = 4
+is_active         = true
+substitution_only = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 5 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "19:00"
+end_time   = "21:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Office — lean over the desk"
+blocks = [
+  { type = "image", props = { files = ["scenes/tease_office_desk_lean_1.jpg", "scenes/tease_office_desk_lean_2.jpg", "scenes/tease_office_desk_lean_3.jpg", "scenes/tease_office_desk_lean_4.jpg", "scenes/tease_office_desk_lean_5.jpg"], description = "Frank's office at evening, lamp on. Maya leaning across the desk at the receipts, shirt loose at the collar. Frank in the chair with the pen still in his hand, watching.", search_queries = [
+    "young woman leaning over desk receipts older man warm office lamp evening interior",
+    "young woman over desk reading paperwork older man pen warm lamp study quiet",
+    "rural alabama farmhouse office evening young woman desk older man warm lamp pen",
+  ] } },
+  { type = "cascade", props = { id = "tease_office_desk_lean_cascade", beats = [
+    # Beat 0 — opens. Maya crosses to his side, leans across the receipts.
+    { blocks = [
+      { type = "paragraph", content = "She crossed to his side of the desk and leaned across the receipts, hand braced on the wood. Shirt loose at the collar. The good lamp on her shoulders. Frank's pen stopped moving." },
+    ] },
+    # Beat 1 — She traces the bottom column with one finger.
+    { advance_text = "Trace the column.", blocks = [
+      { type = "paragraph", content = "She traced the bottom column with one finger, slow, like she was doing math. He didn't move. The lamp held the page for both of them." },
+    ] },
+    # Beat 2 — terminal. She straightens; he turns the page. Pen resumes.
+    { advance_text = "Straighten.", blocks = [
+      { type = "paragraph", content = "She straightened. He turned the page. Didn't look up. The pen started moving again, the same way it always moved." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sit back down."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "trigger"
+locationId               = "loc_franks_office"
+time_progression_minutes = 10
+effects = [
+  { targetType = "npc",    npcId = "npc_frank", trait = "arousal",    op = "add", value = 1 },
+  { targetType = "npc",    npcId = "npc_frank", trait = "corruption", op = "add", value = 1 },
+  { targetType = "player",                       trait = "corruption", op = "add", value = 1 },
+  { targetType = "player",                       trait = "energy",     op = "add", value = -2 },
+]
+flagEffects = [
+]
+
+
+# ─── L1-1 item 2/5: tease_office_desk_sit — DEMOTED 2026-05-12 (P5.2 audit fix) ──
+# Per doc 28 §LANE 1 🟡 #4 (Pattern A density 6 vs RTS 2 = 3x scarcity drift).
+# This canvas was demoted to close the office-desk redundancy: tease_office_desk_lean
+# (item 1) and tease_office_desk_sit shared location + gate (corr ≥ 5) + register
+# (suggestive proximity). Cutting the sit variant brings Frank Pattern A density
+# from 6 → 5 (still 2.5x RTS but moves toward scarcity).
+# The "Sit on the edge of the desk a moment." menu item in scene_franks_office_setter
+# is reverted to click-only (targetType=trigger) with effects restored inline.
+# Effect deltas preserved exactly: Frank.arousal +2, Frank.corruption +1,
+# Maya.corruption +1, energy -3, time +15min.
+# See `frank_audit_fix_P5_1.md` (audit recommendation) + `frank_audit_fix_P5_2.md`
+# (this demotion's diff) for full rationale.
+
+
+# 2026-05-13 RTS-shape remap: tease_bedroom_sit_wait canvas DELETED. Was the
+# corruption-50 self-display rung (sit on bed + wait → sex loop with arousal +5
+# carryover). Removed when bedroom hub collapsed to RTS 5-item shape — the
+# corr 30/50/70 ladder was TLS-extra vs RTS Brother (Tease + Flash only).
+# See plan + memory entry bedroom_hub_rts_remap_2026-05-13.md.
+
+
+# ─── L1-1 item 4/5: tease_kitchen_brush_past ───────────────────────────────
+# Render-then-return-to-loc variant (like items 1+2). Maya needs the sugar
+# tin from the high shelf above the coffee maker. Frank's at the counter
+# with his mug. She has to lean across him; her hip brushes his arm; she
+# takes longer than the reach should take; he doesn't move out of her way.
+# Reached via scene_kitchen_with_frank_morning "Brush past him at the
+# coffee maker." menu item (frank_restrict_declared post-catch gate).
+
+# ────────────────────────────────────────────────────────────────────────────
+# in-scene cascade: scene_kitchen_with_frank_dinprep STAGE 1 group (kitchen-shared)
+# (was missing from initial archive)
+#
+# Resurrection: paste back into scene_kitchen_with_frank_dinprep's blocks
+# array, between the STAGE 0 group and the STAGE 2 group.
+# ────────────────────────────────────────────────────────────────────────────
+
+  # ─── STAGE 1 — Grudging warmth (kitchen-shared) ───────────────────────────
+  # 2026-05-11 RTS-shape conversion: stage gate replaced with
+  # frank_offered_bookkeeping is_true + frank_caught is_false.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "frank_offered_bookkeeping", operator = "is_true" },
+      { type = "flag", subject = "player", flag_key = "frank_caught",              operator = "is_false" },
+    ] }, blocks = [
+    { type = "paragraph", content = "Frank was at the counter peeling potatoes when she came in. Diana at the stove. He looked up." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_frank" }, content = "Diana's setting up. Don't get in her way." },
+    { type = "paragraph", content = "Diana laughed once at the stove without turning around. Frank's mouth almost did the same thing." },
+  ] } },

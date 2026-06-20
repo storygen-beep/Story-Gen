@@ -1,0 +1,155 @@
+{
+  "captured_at": "2026-06-07T21:50:11.444Z",
+  "engine": "sugarcube",
+  "version": {
+    "name": "SugarCube",
+    "major": 2,
+    "minor": 37,
+    "patch": 3,
+    "prerelease": null,
+    "build": 10338,
+    "short": "SugarCube (v2.37.3)",
+    "toString": "2.37.3+10338"
+  },
+  "config": {
+    "addVisitedLinkClass": false,
+    "cleanupWikifierOutput": false,
+    "debug": false,
+    "enableOptionalDebugging": false,
+    "loadDelay": 0,
+    "audio": {
+      "pauseOnFadeToZero": true,
+      "preloadMetadata": true
+    },
+    "history": {
+      "controls": true,
+      "maxStates": 40
+    },
+    "macros": {
+      "maxLoopIterations": 1000,
+      "typeSkipKey": " ",
+      "typeVisitedPassages": true,
+      "ifAssignmentError": "<deprecated>"
+    },
+    "navigation": {
+      "override": "<function>"
+    },
+    "passages": {
+      "displayTitles": false,
+      "nobr": false,
+      "start": "Intro",
+      "descriptions": "<deprecated>"
+    },
+    "saves": {
+      "id": "become-someone",
+      "maxAutoSaves": 0,
+      "maxSlotSaves": 8,
+      "autosave": "<deprecated>",
+      "onLoad": "<deprecated>",
+      "onSave": "<deprecated>",
+      "slots": "<deprecated>",
+      "tryDiskOnMobile": true
+    },
+    "ui": {
+      "stowBarInitially": 800,
+      "updateStoryElements": true
+    }
+  },
+  "state": {
+    "turn": null,
+    "turns": 1,
+    "length": 1,
+    "bottom_title": "Intro",
+    "active_title": "Intro",
+    "temporary_keys": [
+      "od",
+      "contactStyle",
+      "osrc",
+      "studentTests",
+      "classTests",
+      "i",
+      "noTestsLeft",
+      "emptySeat",
+      "supportKeys",
+      "allSupport",
+      "supI",
+      "currentSupport",
+      "avgSupport",
+      "christmasVer",
+      "halloweenVer",
+      "giftsRepKeys",
+      "invI",
+      "currentGiftRep",
+      "giftsNoRepKeys",
+      "currentGiftNoRep",
+      "giftsXmasKeys",
+      "currentGiftXmas",
+      "giftsXmas2Keys",
+      "currentGiftXmas2",
+      "maddieGalAppSrc",
+      "maxQuest",
+      "locListClass",
+      "locListBtnClass",
+      "allGirlsLocs",
+      "allGirlsLocsKeys",
+      "g",
+      "girl",
+      "locLinkGirls",
+      "locLinkNames",
+      "officeLinkGirls",
+      "llgI",
+      "thisLocGirlName",
+      "thisLocCheck",
+      "thisLocGirl",
+      "thisLocGirlNameLabel",
+      "glc",
+      "girlLinkStyle"
+    ],
+    "prng_present": true,
+    "prng_state": null,
+    "history_length": 1,
+    "history_first_entry_shape": {
+      "keys": [
+        "title",
+        "variables"
+      ],
+      "title": "Intro"
+    },
+    "history_last_entry_shape": {
+      "keys": [
+        "title",
+        "variables"
+      ],
+      "title": "Intro"
+    },
+    "has_marshalForSave": true,
+    "has_unmarshalForSave": true
+  },
+  "story": {
+    "name": "Become someone",
+    "ifid": "CF629C5D-B6F0-494A-9572-0EB51E470102",
+    "format": "SugarCube",
+    "format_version": "2.37.3",
+    "creator": "Twine",
+    "creator_version": "2.11.1",
+    "startnode": "1776",
+    "options": null,
+    "tags": null,
+    "zoom": "0.6",
+    "engine_title": "Become someone",
+    "engine_name": "Become someone",
+    "engine_dom_id": "become-someone"
+  },
+  "settings": {},
+  "save_caps": {
+    "has_serialize": true,
+    "has_deserialize": true,
+    "has_slots": true,
+    "has_autosave": true,
+    "slot_count": 0,
+    "on_save_handlers": 1,
+    "on_load_handlers": 0,
+    "slots_metadata": [],
+    "autosave_metadata": null
+  }
+}

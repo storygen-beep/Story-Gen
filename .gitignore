@@ -66,27 +66,61 @@ test-results/
 test_clips_demo_game.html
 
 # ============================================================
-# Generated games (engine outputs — not source)
+# Games — SOURCE is tracked (toml_phases, books, json, output HTML).
+# Only media is dropped, via the global media block below.
 # ============================================================
-games/
 game_books/
-angela_white/
-angelas_desire/
-before_i_do_game/
-elenas_awakening/
-seven_days_game/
-two_weeks/
 
 # ============================================================
-# Large media / video artifacts
+# Media — ignored everywhere (video / images / audio).
+# Skill-bundled media is re-included via !.claude/skills/** below.
 # ============================================================
 videos/
-output/
-output.mp4
 z_video_capture/
+output.mp4
 the-persistent-husband_720m.mp4
+*.unknown_video
+
+# packaged game bundles (zipped builds full of media — not source)
+*.zip
+
+# author backup snapshots (pre-edit copies — not source)
+*.bak
+*.bak_*
+
+# video
 *.mp4
+*.webm
+*.mov
+*.mkv
+*.m4v
+*.avi
+*.mpg
+*.mpeg
+*.flv
+*.wmv
+
+# images
+*.jpg
+*.jpeg
+*.png
+*.gif
 *.webp
+*.bmp
+*.tif
+*.tiff
+*.svg
+*.ico
+*.avif
+*.heic
+
+# audio
+*.mp3
+*.wav
+*.ogg
+*.m4a
+*.aac
+*.flac
 
 # ============================================================
 # Side experiments / not part of the engine

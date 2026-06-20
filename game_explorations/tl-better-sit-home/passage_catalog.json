@@ -1,0 +1,722 @@
+{
+  "captured_at": "2026-06-07T21:30:29.040Z",
+  "engine": "sugarcube",
+  "engine_version": [
+    "(revive:eval)",
+    "(function(){var e=this.prerelease?\"-\"+this.prerelease:\"\";return this.title+\" (v\"+this.major+\".\"+this.minor+\".\"+this.patch+e+\")\"})"
+  ],
+  "engine_hint": "harlowe-embedded",
+  "total_passages": 142,
+  "passages": [
+    {
+      "name": "StoryCaption",
+      "tags": [],
+      "source_raw": "<<if $intro isnot 1>>\\\n<<if $PregDays lte 2>>\\\n<img src=\"images/body1.jpg\"  height=\"350\">\n<<elseif $PregDays lte 4>> \n<img src=\"images/body2.jpg\"  height=\"350\">\n<<elseif $PregDays lte 6>> \n<img src=\"images/body3.jpg\"  height=\"350\">\n<<elseif $PregDays lte 8>> \n<img src=\"images/body4.jpg\"  height=\"350\">\n<<elseif $PregDays lte 10>> \n<img src=\"images/body5.jpg\"  height=\"350\">\n<<elseif $PregDays lte 12>> \n<img src=\"images/body6.jpg\"  height=\"350\">\n<<elseif $PregDays lte 14>> \n<img src=\"images/body7.jpg\"  height=\"350\">\n<<elseif $PregDays lte 16>> \n<img src=\"images/body8.jpg\"  height=\"350\">\n<<elseif $PregDays lte 18>> \n<img src=\"images/body9.jpg\"  height=\"350\">\n<<elseif $PregDays lte 20>> \n<img src=\"images/body10.jpg\"  height=\"350\">\n<<elseif $PregDays lte 22>> \n<img src=\"images/body11.jpg\"  height=\"350\">\n<<elseif $PregDays lte 24>> \n<img src=\"images/body12.jpg\"  height=\"350\">\n<<elseif $PregDays lte 26>> \n<img src=\"images/body13.jpg\"  height=\"350\">\n<<elseif $PregDays lte 28>> \n<img src=\"images/body14.jpg\"  height=\"350\">\n<<elseif $PregDays lte 30>> \n<img src=\"images/body15.jpg\"  height=\"350\">\n<<elseif $PregDays lte 32>> \n<img src=\"images/body16.jpg\"  height=\"350\">\n<</if>>\\\n<</if>>\\\n<<if $creampie gte 3>><img src=\"images/cumdrip.gif\">\nCum is gushing out of my pussy...<</if>>\\\n<<if $lactating is 1>>\\\n<img src=\"images/lact.gif\" height=\"180\">\nDamn, my boobs started to produce milk\n<</if>>\\\n[[Fertility Tracker]] \nMoney: <<print $money>>\n[[inventory]]\n<<if $Appearance lte 3>> <<set $looks =\"cute\">>\n<<elseif $Appearance lte 7>> <<set $looks =\"sexy\">>\n<<elseif $Appearance gte 8>> <<set $looks =\"Hot bimbo\">>\n<</if>>\n<<if $corruption lte 20>> <<set $mind =\"Shy\">>\n<<elseif $corruption lte 40>> <<set $mind =\"Slutty\">>\n<<elseif $corruption gte 41 and $corruption lt 60>> <<set $mind =\"Whore\">>\n<<elseif $corruption gte 60 and $corruption lt 80>> <<set $mind =\"Cock addict\">>\n<<elseif $corruption gte 80>> <<set $mind =\"Mindless fuckdoll\">>\n<</if>>\n<<set $Appearance=$breast+$butt>>\n\nBy aromabish"
+    },
+    {
+      "name": "Village",
+      "tags": [],
+      "source_raw": "Ways to go:\n[[Upper street]]\n<<if $lesbian==1>>\\\n[[Check|MeganHouse]] Megan's house.\n<</if>>\\\nGo back to [[Hideout|Home]]\nTalk to [[blacksmith|Blacksmith]]\n<<if $training is 0 and $starving is 0 and $strength lte 6 and $PregDays lte 13>>\\\nI can go for a [[jogging]] if i want to train my body\n<<else>>\\\nI can't train more<</if>>\n<<if $SewersLocked is 1>>\\\nI have nothing to do in sewers anymore<<else>>\\\nInspect [[sewers]]<</if>>\n<<if $looks==\"sexy\">>\\\n<img src=\"images/StreetWalking1.gif\" height=\"520\">\nI feel the hungry looks of men. Probably Moahim was right, if I continue to use her services, I may have problems...\n<<elseif $looks==\"Hot bimbo\">>\\\n<img src=\"images/StreetWalking2.gif\" height=\"320\">\nMen begin to follow me. Some whistle when I pass nearby. Especially arrogant even offer sex for money...\n<<set $random=random(1,4)>>\\\n<</if>>\\\n<img src=\"images/Village.jpg\" height=\"620\">\n<<if $random==1>>\n<<goto [[StreetSex1]] >>\n<</if>>"
+    },
+    {
+      "name": "3",
+      "tags": [],
+      "source_raw": "Susie? Not bad at all. But i will not stay in this body for the rest of my life! \nNow i have to find a way out. I must get information from the locals as much as possible and not cause any suspicion, that means i can barely resist their sexual desires...\n[[Village]]\n<<set $lactating=0>>\n<<set $milk=0>>\n<<set $lesbian=0>>\n<<set $KateBirth=0>>\n<<set $KatePreg=0>>\n<<set $KatePregDays=0>>\n<<set $KateProst=0>>\n<<set $intro=0>>\n<<set $PregDays=0>>\n<<set $Pregnant = 0>>\n<<set $Actions =0>>\n<<set $WeekDays = 1>>\n<<set $Fert = 0>>\n<<set $corruption=0>>\n<<set $inventory=[]>>\n<<set $money = 10>>\n<<set $SmithSex=0>>\n<<set $SalonWork=0>>\n<<set $PregSick=0>>\n<<set $FertDays=0>>\n<<set $creampie=1>>\n<<set $pepper = 0>>\n<<set $code=random(1000,9999)>>\n<<set $inputcode=0>>\n<<set $locked=0>>\n<<set $ElderRoute=0>>\n<<set $body = {\n \"butt\" : [\"images/butt0.jpg\", \"images/butt1.jpg\", \"images/butt2.jpg\", \"images/butt3.jpg\", \"images/butt4.jpg\", \"images/butt5.jpg\"],\n \"breast\":[\"images/Bcup.jpg\", \"images/Ccup.jpeg\", \"images/Dcup.jpg\", \"images/Ecup.jpg\", \"images/Fcup.jpg\", \"images/Gcup.jpg\"]\n}>>\n<<set $breast=0>>\n<<set $butt=0>>\n<<set $Appearance=0>>\n<<set $recovery=0>>\n<<set $training=0>>\n<<set $ButtTraining=0>>\n<<set $strength=0>>\n<<set $BrothelWorked=0>>\n<<set $starving=0>>\n<<set $FitTraining=0>>\n<<set $gif = {\n\"eldertext1\": [\"- Now lick it, girl. I need you to rise it up.\",\"Now he fucks me with his disgusting dick!\",\"- Bend over! I want to look at your ass!\",\"He pulled out and turned me so im facing him. - Finish me with your mouth you dirty slut!\"],\n\n\"gifpack1\" : [\"images/1/1.gif\",\"images/1/2.gif\",\"images/1/3.gif\",\"images/1/4.gif\"],\n\n\"eldertext2\": [\"- You know what to do, open your mouth\", \"- Lie on your stomach, i want you from behind. - now he fucks my pussy lying on top of me.\", \"- Lie on your stomach, i want you from behind. - now he fucks me lying on top of me.\", \"We switched position to cowgirl, his dick enter a lot better this way. Oh my god, what i am thinking about!?\",\"- It's time to switch to my favourite one. Spread your legs.\",\"- You are realy tight down here. Ohh-yesss... I can barely resist to not finish inside.\"],\n\n\"gifpack2\" : [\"images/2/1.gif\", \"images/2/2.gif\", \"images/2/3.gif\", \"images/2/4.gif\", \"images/2/5.gif\", \"images/2/6.gif\"],\n\n\"eldertext3\": [\"- You know what to do.- i dropped on my knees to suck his dick\",\"- Let's take off your panties\", \"He starts entering my backdoor. Shit, this is painfull!\", \"This feels kinda strange now. Am i aroused? I didn't notice how i started to rub my pussy\",\"- Ohhh... don't stop!\",\"- Here i come!\"],\n\n\"gifpack3\" : [\"images/3/1.gif\", \"images/3/2.gif\", \"images/3/3.gif\", \"images/3/4.gif\", \"images/3/5.gif\", \"images/3/6.gif\"],\n\n\"eldertext4\": [\"I started with my mouth as always\", \"- Ohh... your dick fits my hole perfectly!\", \"My mind goes crazy when he thrusts so fast\", \"- I just can't get enough of you. I can fuck you for days!\",\"- Eat this! - he pours his tasty semen in my mouth\"],\n\n\"gifpack4\" : [\"images/4/1.gif\",\"images/4/2.gif\",\"images/4/3.gif\",\"images/4/4.gif\", \"images/4/5.gif\"],\n\n\"eldertext5\": [\"We started as usual. What did he mean buy 'rough sex'?\",\"- Yes! Fuck my pussy!\", \"Someone else grabbed me and started to fuck me doggy style!\", \"- Let's finish her!\"],\n\n\"gifpack5\" : [\"images/5/1.gif\",\"images/5/2.gif\",\"images/5/3.gif\",\"images/5/4.gif\"],\n\n\"eldertext6\": [\"I'm realy used to suck his cock\", \"I feel another man started to fuck my pussy - please, harder!\", \"They turned me around to exchange my holes. Uh, this is so good!\", \"- Keep fucking mu dirty pussy!\", \"I feel something strange inside me. I need some more!\", \"- Here it comes! - i felt their dicks became a bit bigger\", \"They pumped my holes with their sperm. So warm, so full...\"],\n\n\"gifpack6\" : [\"images/6/1.gif\", \"images/6/2.gif\", \"images/6/3.gif\", \"images/6/4.gif\", \"images/6/5.gif\", \"images/6/6.gif\", \"images/6/7.gif\"]\n}>>\n<<set $item=\"Useless phone\">>\n<<set $inventory.push($item)>>"
+    },
+    {
+      "name": "DayChanged",
+      "tags": [],
+      "source_raw": "<<if $mind ==\"Shy\">>\\\nTime to sleep. I have to find a way out...\n<<elseif $mind ==\"Slutty\">>\\\nI have erotic dreams, I wonder if all local men have big cocks? Oh my God! What am I just thinking about!\n<<elseif $mind ==\"Whore\">>\\\nGetting paid for sex is a good idea. You get pleasure, and you also get paid for it!\n<<elseif $mind ==\"Cock addict\">>\\\nI need more penises. They all have different shapes, sizes, tastes. I have to try them all! My pussy cries when it's empty!\n<<elseif $mind ==\"Mindless fuckdoll\">>\nWhy should I even run away from this place? I get sex every day, but this is not enough for me. If I leave, I won't be able to fuck every day ... I have to fuck without stopping!<</if>>\n<<if $KatePregDays isnot 33>>\\\n<<if $KateProst==0>>\\\nKate is sleeping as usual.\n<img src=\"images/KateSleep.jpg\" height=\"520\">\n<<else>>\\\n<<set $rnd=random(1,4)>>\\\n<<if $rnd==1>>\\\nLooks like Kate had a good time. I hope she knows what she’s doing. She left 50$ on the table. Wait, what is she doing at work?<<set $money=$money+50>>\n<img src=\"images/KateSleepCP.jpg\" height=\"520\">\n<<if $KatePreg is 0>>\n<<set $rnd=random(1,10)>>\\\n<<if $rnd gte 5>>\\\n<<set $KatePreg=1>>\\\n<</if>>\\<</if>>\n<<else>>\\\nKate is sleeping as usual.\n<img src=\"images/KateSleep.jpg\" height=\"520\">\n<</if>>\\\n<</if>>\\\n<<else>>\\\n<img src=\"images/KateBirth2.jpg\" height=\"520\">\n<<set $KateBirth=1>>\\\nKate gave birth to a boy that night. I helped her, but it seems to me that it's all my fault. There is no turning back for her.\n<</if>>\\\n<<if $creampie gt 1>>\\\nThere is a lot of cum inside me, i need to wash it out.\n<img src=\"images/wash.gif\">\n<<set $creampie=1>><</if>>\n<<if $money gte 5>>\\\n<<set $money=$money-5>>\\\nI used 5 dollars to buy some food.\n<<if $PregDays lt 23>>\\\n<img src=\"images/buyfood.jpg\" height=\"520\">\n<<set $starving=0>>\\\n<<else>>\\\n<img src=\"images/buyfoodP.jpg\" height=\"520\">\n<</if>>\\\n<<else>>\\\nI dont have money to buy food. I need to earn some if i dont want to die.\n<<set $starving=$starving+1>>\\\n<</if>>\n[[Next|Home]]\n<<if $PregDays==4 or $PregDays==8 or $PregDays==14 >>\n<<set $sick to true>>\n<<set $PregSick=$PregSick+1>>\n<</if>>\n<<set $DayChanged=1>>\\\n<<if $FertDays is 11>> <<set $FertDays=0>> <<set $Fert=0>><</if>>\n<<set $FertDays=$FertDays+1>>\n<<if $FertDays lte 10>>\n<<set $Fert=$Fert+1>>\n<</if>>\n<<set $WeekDays = $WeekDays +1>>\\\n<<if $recovery gte 1>>\n<<set $recovery=$recovery+1>>\n<<if $recovery is 4>>\n<<set $recovery=0>><</if>>\n<</if>>\n<<set $training=0>>\n<<if $final is 1>>\n<<set $SalonDays=$SalonDays+1>>\n<</if>>\n<<if $PregDays gte 14>>\n<<set $lactating=1>>\n<</if>>\n"
+    },
+    {
+      "name": "Home",
+      "tags": [],
+      "source_raw": "<<if $KatePreg==1 and $DayChanged==1>>\\\n<<set $KatePregDays=$KatePregDays+1>>\\\n<</if>>\\\n!Day <<print $WeekDays>>\n<<if $lactating is 1 and $inventory.contains(\"Breast pump\")>>\\\nUse breast pump to [[milk|milking]] yourself\n<</if>>\\\n<<if $inventory.contains(\"VZ-173\") and $KateProst==0>>\\\n<<if $corruption gte 20>>\\\n[[Pour VZ-173]] into Kate's glass\n<<else>>\\\nI can't do this to Kate. We need money, but she saved me.<</if>>\n<</if>>\\\nIf i want to [[stay at home|DayChanged]], i can.\nThere is a [[basement]] but there is nothing to do since it is abandoned.\n[[Talk to Kate|KateHome]]\n[[Mirror]]\n<<if $training is 0 and $starving is 0>>\\\nI can [[do some exersices]] to train my butt.\n<<else>>\\\nI can't train more<</if>>\nGo [[out|Village]]\n<<if $SalonDays gte 4>>\\\nThere is a strange [[note|Final blow]] on my bed<</if>>\n<<if $corruption gte 200>>\n<<goto [[PublicEnd]]>>\n<</if>>\\\n<img src=\"images/home.jpg\" height=\"620\">\n<<set $Actions=0>>\n<<if $Pregnant==1 and $DayChanged==1>>\n<<set $PregDays=$PregDays+1>>\n<<set $DayChanged=0>><</if>>\n<<if $PregDays == 33>> <<goto [[Ending 2]]>>\n<</if>>\\\n<<if $sick is true>>\n<<goto [[PregSickness]]>>\n<</if>>\n<<if $starving is 3>>\n<<goto \"DeadEnd\">>\n<</if>>\n"
+    },
+    {
+      "name": "sewers",
+      "tags": [],
+      "source_raw": "<<if $inventory.contains(\"crowbar\")>>\n<<if $sewersOpened isnot 1>>\\\n[[Open sewer with crowbar|SewerEntry]]<<set $sewersOpened=1>> <<else>>\\\n[[Go down|SewerEntry]]<</if>>\n<<else>>I can't open sewers with my hands<</if>>\n[[Back|Village]]\n<img src=\"images/sewer1.jpg\">"
+    },
+    {
+      "name": "SewerEntry",
+      "tags": [],
+      "source_raw": "<<if $inventory.contains(\"flashlight\")>>\\\n<img src=\"images/sewers2.jpg\">\n[[Investigate sewers]]\n<<else>>\\\nI went down to the sewers, however  the sunbeam illuminates only me, but it does not go further. If i want to investiate this way i need some source of light.<</if>>\n[[Get back to village|Village]]\n\n"
+    },
+    {
+      "name": "Blacksmith",
+      "tags": [],
+      "source_raw": "<<if $BlacksmithMeet isnot 1>> \nI come closer to blacksmith.\nHe notices me.\n-What do you want?\n-Hello, I'm Susie. Could you tell me where i can get some money?\nHe looks over my body and says\n<<if $Appearance gte 3>>\\\n-Ohh, you can work here, sweetie, call me Mark. Salary is 20 bucks per shitf. If you will be a good girl i'll pay you even more.\n<<else>>\\\n-Go to our beautician, you need this for sure... i mean you can find work there.<</if>>\n-Okay i guess, thank you.\n<<link \"Next\" \"Blacksmith\">> <<set $BlacksmithMeet = 1>><</link>>\n<</if>>\\\n<<if $BlacksmithMeet==1 and $Appearance gte 3>>\n<<if $SmithOpen isnot 1>>\\\nAs i come in, blacksmith's eyes widens\nHo-ho, look whom we got here! Did you decide to work here, beauty, call me Mark. <<set $SmithOpen=1>>\n<</if>>\\\n[[Work in forge|BlacksmithWork]]\n<</if>>\\\n<<if $BlacksmithMeet==1>>\\\n<<if $Appearance lt 3>>\n-Dont disturb me!<</if>>\n[[Go back|Village]]<</if>>\n<img src=\"images/blacksmith.jpg\">"
+    },
+    {
+      "name": "BlacksmithWork",
+      "tags": [],
+      "source_raw": "<img src=\"images/smithwork.gif\">\nI work in the forge until the evening. It is very hard work, pumpin iron, high degrees. Despite the fact that I only give him the things he asks for, it’s still hard for me to work here. During the rest I constantly catching master's eye on me. After work he tells me to go to his room.\n<<if $Appearance lte 3>>\\\n[[End your work|SmithWorkEnd]]\n<<else>>\\\n[[See what he wants|SmithSex]]\n<</if>>\\"
+    },
+    {
+      "name": "Mirror",
+      "tags": [],
+      "source_raw": "Boobs:\n<<switch $breast>>\\\n<<case 0>>\nB-cup\n<<case 1>>\nC-cup\n<<case 2>>\nD-cup\n<<case 3>>\nE-cup\n<<case 4>> \nF-cup\n<<case 5>>\nG-cup\n<</switch>>\\\n[img[$body.breast[$breast]]]\nButt: \n[img[$body.butt[$butt]]]\nAppearance : $looks\nCorruption : $mind\nFitness : $strength\n[[Back|Home]] "
+    },
+    {
+      "name": "SmithSex",
+      "tags": [],
+      "source_raw": "-Its time for you to put some extra work. For additional pay ofcource.\n<<if $corruption lte 20>>\\\nI can't say him no, since Kait said not to refuse them or it may cause problems.<<elseif $corruption gte 21>>\\\nI undress faster to let him fuck me!<</if>>\n<img src=\"images/smithundress.gif\">\n<<if $SmithSex gte 5 and $PregDays lte 14>>\\\n[[Next|SmithMachine]]\n<<else>>\\\n [[Next|SmithOral]]\n<</if>>"
+    },
+    {
+      "name": "SmithOral",
+      "tags": [],
+      "source_raw": "<<set $rnd2 = random(1,3)>>\\\n<<if $rnd2 == 1>>\\\n<<if $PregDays gte 14>><img src=\"images/SmithOral1p.gif\">      <<else>>\\\n<img src=\"images/SmithOral1.gif\">\n <</if>>\\<</if>>\\\n<<if $rnd2 == 2>>\\\n<<if $PregDays gte 14>><img src=\"images/SmithOral2p.gif\"> \n<<else>>\\\n<img src=\"images/SmithOral2.gif\"> <</if>>\\<</if>>\\\n<<if $rnd2 == 3>>\\\n<<if $PregDays gte 14>><img src=\"images/SmithOral3p.gif\">      <<else>>\\\n<img src=\"images/SmithOral3.gif\"><</if>><</if>>\n[[Next|SmithOralEnd]] \n<<set $corruption=$corruption+2>>"
+    },
+    {
+      "name": "Upper street",
+      "tags": [],
+      "source_raw": "If i want to escape this place i need buy some things in [[Shop]]. Im pretty i'll find there something useful.\nAll girls can work in a [[brothel|Brothel]] . I have never been there as a man, but it seems the time has come to work there as a woman.\nGirls always spend a lot of time in [[beauty salons|BeautySalon]], why? It's time to find out. In the end, I'm now also a girl.\n<<if ($ElderNight==1 and $inventory.contains(\"master keys\")) or $ElderRoute==1 >>\n[[Elder's house]]\n<</if>>\n[[SexShop]] \n[[Lower street|Village]]\n<<if $looks ==\"sexy\">>\\\n<img src=\"images/StreetWalking1.gif\" height=\"520\">\nI feel the hungry looks of men. Probably Moahim was right, if I continue to use her services, I may have problems....\n<<elseif $looks==\"Hot bimbo\">>\\\n<img src=\"images/StreetWalking2.gif\" height=\"320\">\nMen begin to follow me. Some whistle when I pass nearby. Especially arrogant even offer sex for money ...\n<<set $random=random(1,4)>>\\\n<</if>>\n<img src=\"images/Upper.jpg\">\n<<if $random==1>>\n<<goto [[StreetSex2]] >>\n<</if>>"
+    },
+    {
+      "name": "inventory",
+      "tags": [],
+      "source_raw": "I have:\n<<print $inventory>>\nPepper sprays : $pepper\nMilk bottle : $milk"
+    },
+    {
+      "name": "2",
+      "tags": [],
+      "source_raw": "I sigh. That was hard work, but now it is done: setting up a website for a holliday ressort is not really difficult to code -I am a quite able IT student at UCLA Torrent, after all- but the design was trouble. The Kingfishers wanted the lake in the centre of the page (they own the small marina and the boar renting), the Klaffkies wanted the Mountain pass to their hillbilly home (where they hope to open a casino once the state recognises them as aboriginals: fat chance there!), the chamber of commerce wanted the main street with all five shops and the motel owner wanted her legit house posted. She also owns a ...less savoury busines... and asked for a link to the Hunny Hunch, while her goth daughter wants a link to her \"coven\" instead. \n<img src=\"images/programmer.jpg\" height=\"720\" width=\"920\">\nTHis is my first commercial website, so I had real problems to talk them about a reasonable lnking: that Hunny Hunch link would have turned the whole wabsite PG18+! \nBut now, at long last, the site is up, my bill is paid and I even got a bonus!\nThe money eases off my student loan problems, and that lets me sleep MUCH better; but the bonus was a surpris: they are inviting me to the ressort! A whole week, trip paid! \nAfter all the hard studying and that mean bitch of an ex girlfriend who broke up with me and can do very well with some relaxing. Tonight is the big faculty party (the biologists and chemists have sponsoring deals that make for great parties), then I take my car sharing option early in the morning, and tomorrow evening I will be in the mountains in a fabulous ressort with a great lake, pretty woods and much to do, see -and hang up. \n\n[[Party time!|resort]]"
+    },
+    {
+      "name": "1",
+      "tags": [],
+      "source_raw": "I wake up early in the morning, today is the deadline for the project that I was ordered a month ago.\n<img src=\"images/morning.jpg\">\nIt is time to eat my breakfast( if only i had one), and run to market to buy some energetic drinks. Today is gonna be a realy tough day.\n\n!!!Few hours later\nPhew! Who would have thought that there were so many people in the shops on weekdays! Now i have to hurry and [[start|2]] my work!"
+    },
+    {
+      "name": "0",
+      "tags": [],
+      "source_raw": "My name is Sean. I am 22 years old.\nA few years ago, I began to live alone. At first my parents were against it, but I was tired of their control.\n<img src=\"images/leaving.jpg\">\nI can program well, so I have no problems with work. At first, it was hard for me to combine my studies along with work, but over time I got used to it and things began get better.\nI'm taking differents orders for now: sites, small management systems...\nBut today i got realy good one! Client ordered advertising site, but salary is pretty high! If i will do this, i will be able to buy new laptop and maybe some other things!\nTime to [[begin|1]] my work\n<<set $intro=1>>"
+    },
+    {
+      "name": "resort",
+      "tags": [],
+      "source_raw": "Two days later I arrived at the resort. After a long flight I need a good rest. In the gift voucher specified hotel address. I should become used to rest, so im heading to the [[this place|hotel]]!\n"
+    },
+    {
+      "name": "hotel",
+      "tags": [],
+      "source_raw": "I enter the hotel and head to reception.\nAfter a while i can finaly go to my room. Hotel is pretty good looking, despite of old fashion designs. Administrator told me there is no electricity in rooms. This is their style. So, i cannot blame them. Maybe i really should rest from my laptop and other gifts of civilization.\n<img src=\"images/hotel.png\" height=\"520\">\nRoom is western styled. I can say there were a lot of people. \nWallpaper on the walls peeled off in some places, also there is a lot of dust on the cabinet. Not perfect, but still acceptable.\nNow i have to [[sleep|morning]]."
+    },
+    {
+      "name": "morning",
+      "tags": [],
+      "source_raw": "\t\t\t\t//I meet a [[woman|Kate]] in the streets who is moving somewhat awkwardly. When she realizes that I am here her gait changes from clumsy to sexy: as if walking with swinging twins and cheeks was new to her: but she definetly is an adult, both her body and the nervous eyes make that pretty obvious. I nod and wave heartedly: being a stranger maybe it would not be wise to pick up lost strangers and strays. She walks over -like a very self assured women, maybe even a professional woman. She smiles, and the smile almost reaches her eyes: \"Hi there! I haven't ever seen you, and you look somewhat city boy-ish. I guess you are a new arrival, right?\" I nod, somewhat distracted by her deep neckline. But then my manners overcome and I rise my eyes over her mountains to her pretty face: \"Hi. Sorry I am staring, you are a beauty to behold. Are you a local yourself?\" She looks down into her own neckline and grins sheepishly: \"I guess guys stare at certain sights. No harm done -but there is no touching to be done, either. I am understanding, not slutty.\" I nod, earnestly: never disagree with buxom gals that don't scream bloody hell when they catch you staring at their boobs. \nWe do some small talk. I think she wants something from me -nothing that I would LOVE to give her, though- but I have no idea what it is. \n //\nThis resort is pretty good, i want to look all over this place. I have a lot of time, let's do it without rushing.\n[[Next day|Day2]]"
+    },
+    {
+      "name": "Kate",
+      "tags": [],
+      "source_raw": "<img src=\"images/Kate.jpg\" height=\"520\">\n[[Back|morning]] "
+    },
+    {
+      "name": "reserve in the woods",
+      "tags": [],
+      "source_raw": "I wander through the woods: not up the mountains -those are STEEP!!- but some more easily walkable pathes. I think I am getting fitter. When I come to the crossing of two trails I step into the weirdest sight I have ever seen: the elderman is naked, smeared in coloured mud -and cutting the throat of someone! Some guys in hooded robes turn towards me when I stumble back and break a branch with a noise much louder than the gurgling of the dying man. I turn and run before they react. Was that a pentagram on the forrest floor? \nI run like a hare ...well: like an IT hare with short breath but unlimted panic. I run without stopping until I reach the shed of the village snowplow (that is not deligated to horsepower). I break down there and try to both hide and breathe with middling rather than fair results. While I am still way to winded to run any more. Kate the buxom gal hurry-scurries to me and whispes: \"Did you see them doing their thing? I did, too: then I ran as fast as I could. Not fast enough, that is for sure. Not that you can run any faster: and what good would it do, here in the mountains?\" She sighs: \"I got away because they didn't realize I am the witness to their crime. I am disguised so well thanks to the friendly neighbourhood pharma con that no on will ever recognize me. You see: I used to be a guy. Just like you. Then I witnessed something that will get me killed if they ever learn that I know it. So I run, a little faster and further than you. But this is not about bragging: I broke down, winded and unable to run any further, at the backyard of that research compound where no one ever is let in. When I could move again -cramps REALLY hurt, by the way: you will see what I mean quite soon- I was hungry like a wolf. So I checked their garbage: pharma cons throw away food trays that were in the cafe even if they are still unopened: hygene plus. And there were such food trays. A racoon had prepared the way by getting fried on the fence, so I got in without problems, grabbed a chicken breast sandwich and a milkshake and ran again. I ate, and hid here: they keep blankets here for the snowplow crew. Then I slept a couple of days or so, and woke up with no dick but the tits that you stare at all the time. I have been a woman since, and I hate it. But while they do not let go, neither do they kill me: that is a win in my book.\" She pats me on the head: \"So I guess you have the same option that I had: eat some of the good stuff, and get a change over: or get killed for seeing the quaint local customs in action.\" She grimaced: \"Now please excuse me: that changeover is complete, and I am getting my period AGAIN. That shit is really bad for you, man. Be good, I have to run.\" \nShe leaves with great haste, looking a little green around the gill, so to speak.\n[[Next]]"
+    },
+    {
+      "name": "Next",
+      "tags": [],
+      "source_raw": "Now way! I can't believe she was a man before! But do i really have other options? If i will walk just as it is locals will find and kill me. Atleast i can try Kate's advise. I have nothing to lose right now.\n\n!Day 1\nI eat some suspicious food. Fried chicken, a can of baked beans. It's good but nothing more, did she lie? Of course it is impossible!\n[[Next|TS2]] \n"
+    },
+    {
+      "name": "Eat",
+      "tags": [],
+      "source_raw": "Kate brought medium sized mirror today.\n-Hello, i think you are ready, look at yourself.\nI doubt a bit, bit come closer and look.\n<img src=\"images/Blonde.jpg\" height=\"520\"><img src=\"images/blonde2.jpg\" height=\"520\">\n-Is this really me?\n-Yup, your transformation is completed. Your body is fully functional you know... That means you should care about all female problems, even pregnancy!\n- NO WAY! You didn't tell we are going so far!\n- Listen, we don't have options. Now you can walk in village  without getting killed and find a way out! I have a home in village, we can stop there.\n- How did you get it that fast?\n- Erhh... don't ask me. Let's go. We need to talk in safe place.\n[[Next|finalintro]]"
+    },
+    {
+      "name": "finalintro",
+      "tags": [],
+      "source_raw": "We enter Kate's home.\n-So, now we can talk. We have done 1 stage of our plan: your transformation. The second is : we have to search for a ways out. First you need to walk into town and get a job. You will need money to get some items. I tried to buy some, but since i was here for 2 months, no one sold me any stuff. Maybe they knew i was trying to escape. Here you will help us a bit. Talk, search and try to figure out. I don't have any ideas anymore. \nAnd last one thing. Locals are wild. Almost all of them will try to fuck you. Remember that you cannot resist! Or they will probably kill you. Be carefull using you vagina, there is no contraceptive shop, Take this fertility tracker, you will know your dangerous days. That's all. Go now.\nOh by the way, i think your new name is Susie.\n[[Next|3]]\n<img src=\"images/home.jpg\" height=\"620\">"
+    },
+    {
+      "name": "SmithWorkEnd",
+      "tags": [],
+      "source_raw": "-Good work, Susie - he hands me two ten-dollar bills. - You are done today, go gome.\nI thank him and go back.\n[[End day|DayChanged]]\n<<set $money = $money+20>>"
+    },
+    {
+      "name": "KateHome",
+      "tags": [],
+      "source_raw": "<<if $KateBirth is 0>>\\\n<<if $KatePreg is 0>>\\\n<img src=\"images/Kate.jpg\" height=\"520\">\n<<else>>\\\n<<if $KatePregDays gte 1 and $KatePregDays lte 11>>\n<img src=\"images/KateP1.jpg\" height=\"520\">\\\n<<elseif $KatePregDays gte 12 and $KatePregDays lte 22>>\n<img src=\"images/KateP2.jpg\" height=\"520\">\\\n<<elseif $KatePregDays gte 22 and $KatePregDays lte 33>>\n<img src=\"images/KateP3.jpg\" height=\"520\"><</if>>\\\n<</if>>\nSo, what do you want to talk about?\n<<if $KatePregDays gte 12>>\\\nUhm... about [[your belly]]\n<</if>>\\\nAsk about [[ways out]]\nCan you give me those [[notes]] from the basement?\nCan i [[transform back?]]\n<<else>>\\\n<img src=\"images/KateBirth.jpg\" height=\"520\">\nAfter giving birth, Kate is completely lost. \nI can’t help her. Now I have to escape alone. The only good thing is she still earns money... yeah.<</if>>\n[[Dont ask anything|Home]]\n"
+    },
+    {
+      "name": "SmithOralEnd",
+      "tags": [],
+      "source_raw": "<<if $mind ==\"Shy\">>\\\nHe filled my mouth with his disgusting semen. I spit it out.\nHe puts his pants back on and walks over to his desk. A little fiddling, he pulls out a few banknotes.<<elseif $mind ==\"Slutty\">>\\\nIt seems to me that his sperm had a sweet taste. I swallow his seed. Do I start to like it?<<elseif $mind ==\"Whore\" or $mind ==\"Cock addict\" or $mind==\"Mindless fuckdoll\">>\nHis precious seed fills my mouth. I hold it in my mouth for a few seconds to enjoy the taste, and then I swallow with pleasure.<</if>>\n- Here is your salary for work, he he <<set $Salary = 20+$Appearance>>\nI got <<print $Salary>> bucks\n<span class=\"reddish\">Relations with Mark +1.</span>\n\n[[Next|DayChanged]]\n<<set $money = $money+20+$Appearance>>\n<<set $SmithSex=$SmithSex+1>>"
+    },
+    {
+      "name": "SmithOffice",
+      "tags": [],
+      "source_raw": "Mark leaves the office. Maybe i can find something usefull here?\n<<if $inventory.contains(\"crowbar\")>>\\\nI have nothing to do here.\n<<else>><<link \"Search around\" \"Crowbar\">> <<set $inventory.push(\"crowbar\")>><</link>><</if>>\n[[Go back|DayChanged]]"
+    },
+    {
+      "name": "Crowbar",
+      "tags": [],
+      "source_raw": "I found a crowbar. I think i know how to use this...\n[[Back|SmithOffice]] "
+    },
+    {
+      "name": "Day2",
+      "tags": [],
+      "source_raw": "//I meet the strange but buxom girl. Tis time I ask for her name: \"Kate.\" I tell her mine, and do my best friend zoned small talk. Just the sight of her is ...invigorating. And she is nice. //\n[[Next day|Day3]]"
+    },
+    {
+      "name": "Day3",
+      "tags": [],
+      "source_raw": "//I met Kate again, and we chat some more. Her outfit is slowly subverting me. If ONE single buttom pops off, I will raise the mast right here in the middle of the street.//\nThe last place a have to visit is a nature reserve in the woods. I'll head there tomorrow.\n[[Next day|reserve in the woods]]"
+    },
+    {
+      "name": "TS2",
+      "tags": [],
+      "source_raw": "!Day 2\nI feel something strange. My chest feels a bit fuller. I have to eat futher, i think it starts working. Good thing no one can find this shed.\n<img src=\"images/changing.jpg\">\n[[Next|TS3]] "
+    },
+    {
+      "name": "TS3",
+      "tags": [],
+      "source_raw": "!Day 3 \nAll the hair below my head is gone. \nMy whole body became a bit smaller, especially my arms and legs. My penis lost a half of his length and ability to errect. My hair grows to neck length.\nI feel that my hips have expanded a little. Kate brought me some girly clothes, since i can't wear my old.\n<img src=\"images/arm1.jpg\" height=\"420\"><img src=\"images/arm2.jpg\" height=\"420\">\n<img src=\"images/legs.jpg\" height=\"420\">\n[[Next|TS4]] "
+    },
+    {
+      "name": "TS4",
+      "tags": [],
+      "source_raw": "!Day 4\nI cannot remember any woman i was attracted to. I am pretty sure there was al teast one. But i think i dont like them any longer. Kate said that transformation changes brain too because male brain cannot work with female body.I think i became lighter. \nThe belly became tight, and the waist slim. My hair grew to bra line. Butt and breast grows more. I wonder how much they will grow? My penis turned into a small clit.\n<img src=\"images/breast.jpg\" height=\"420\">\n<img src=\"images/butt.jpg\" width=\"640\">\n[[Next|TS5]] "
+    },
+    {
+      "name": "TS5",
+      "tags": [],
+      "source_raw": "!Day 5\nI don't know how my face changed, but it is different for sure. My penis is completely gone his place was taken by a new female vagina. My breast and butt stopped growing, is it over? \n<img src=\"images/trans.jpg\">\n[[Next|Eat]] "
+    },
+    {
+      "name": "BeautySalon",
+      "tags": [],
+      "source_raw": "This is the village spot for women: ladies, wives, daughters. They have a nice if unobtrusively low tech reception, and I may have got a glimpse into the swimming pool area: but if I ever saw all the town's women naked, I would CERTAINLY never tell anyone.\n<<if $Moahim isnot 1>>\\\nThere is an impressive looking [[woman]]\n<<else>>\\\nTalk to [[Moahim|woman]]\n<</if>>\\\n<img src=\"images/BathHouse.jpg\">\n<<if $SalonDays gte 4>>\n<<goto \"Final blow2\">>\n<</if>>"
+    },
+    {
+      "name": "woman",
+      "tags": [],
+      "source_raw": "<img src=\"images/Moahim.jpg\" height=\"520\">\n<<if $Moahim isnot 1>>\\\nWelcome, sister. My name is Moahim, nice to meet you.\n-I see that you are new here. Let me tell you about this place - woman took my hand and forced me to follow her without letting me say a word - \nIn this place we study the beauty of the body. If you need our services, you can always come here. But don't think something dirty. Sexual acts are forbidden here! \n-I just wanted to find a job. And what is happening with this place? I mean with people - i finaly wanaged to say something i wanted.\n- A job? We can use your help here. We need someone to sort things out of stock. We are preparing for something special. I will pay you 10 dollars for 1 day. \nAs for situation... Our elder is heretic. Not so long ago everything was fine, but then something changed. More and more young girls began to become pregnant, and tourists began to disappear. A brothel was opened! We do not have so many visitors, because the girls are now mostly slutty and they are not interested in what we are doing here. \nWe can only enlarge your boobs here, if you want to make your butt bigger you sould do some trainings. Also if you have a milk, i will buy it for 10$ per bottle. Milk is used in our oinments. But be careful with our procedures, if you become too beautiful, you may have problems. First procedure is free.\nThe conversation was intense so i almost forgot to tell her my name.\n<<link \"Got it\" \"woman\">><<set $Moahim=1>><</link>>\\\n<<else>>\\\n<<if $milk gte 1>>\\\n<<link \"Sell my milk\" \"woman\">><<set $money=$money+(10*$milk)>><<set $milk=0>><</link>>\n<</if>>\n-Hi, what are your plans for today?\nI want to [[work|SalonWork]] here\n<<if $recovery==0>>\\\n<<if $breast lt 5>>\\\n<<if $money gte $breast*30>>\\\nI need your [[services]]\n<<else>>\\\nI don't have enough money for treatment(<<print $breast*30>>$ needed)<</if>>\\\n<<else>>\\\nI dont need her services anymore.<</if>>\n<<else>>\\\nI need some time to recover from last session.<</if>>\n[[Go back|Upper street]]\n<</if>>\\\n<<if $MorganLetter==1>>\\\nI have a letter from Morgan. Moahim definitely will want to take a look.\n[[Give her a letter]]\n<</if>>\n\n\n"
+    },
+    {
+      "name": "SalonWork",
+      "tags": [],
+      "source_raw": "<<if $SalonWork lte 5>>\nI am taken deep into the building. It's a bit dark here. Then a wooden door is opened in front of me. This is a warehouse. I am told that my job is to keep this place clean. That will make items easier to give out.\nThe door closes and I am alone with myself. It smells damp. Through the small window the dim rays of the sun make their way directly to the floor. Among ordinary things, I notice strange big fabric bundles. They are quite heavy and something metallic rings inside. This is not my business, so I will not open them.\n<img src=\"images/cleaning.gif\">\n[[I've done my work|do my work]]\n<<elseif $SalonWork gt 5>>\nNow i am allowed to work as masseur. Well, basicaly i have to help girls with their sexual desire so that they can refrain further.\n<<if $SalonWork == 10>>\\\n- Hey, you are pretty good with your hands. Call me Megan. I want you to come to my home for some extra massage. Don't worry, nothing bad but more money.\nShe is a girl. Nothing can happen right? I should chech her proposal.\n<<set $lesbian=1>><</if>>\n<img src=\"images/massage.gif\">\n[[I've done my work|do my work]]\n<</if>>"
+    },
+    {
+      "name": "services",
+      "tags": [],
+      "source_raw": "The girl takes me to the treatment room. She told me to undress completely and lie down on the couch. While I was undressing, the girl lit the candles and began laying out her tools. I noticed some ointment. But most of all I was worried about sickle knives. I lay a few minutes before I felt a strange sweet smell. I stopped worrying and completely relaxed. Then the girl came up to me and began gently stroking my skin on my legs. I raised my head and saw that my legs were covered with a golden ointment. After a while she got to my intimate part. Something strange happened when she rubbed my pussy I did not feel anything. As if it were normal skin like on any other part of the body.\nWhile she reached my chest I fell asleep.\n[[Wake up|servicesEnd]]\n<<set $money = $money-$breast*30>>"
+    },
+    {
+      "name": "do my work",
+      "tags": [],
+      "source_raw": "I finished my work and now i should  go back to Moahim.\n<img src=\"images/Moahim.jpg\" height=\"520\">\n-Good job, Susie. If you will work here enough, i will give you some special options. Rest now - she gave me my payment  and i went out. I need to rest.\n<span class=\"reddish\">Reputation with Moahim+1.</span>\n<<link \"Finish day\" \"DayChanged\">><</link>>\n<<set $SalonWork=$SalonWork+1>>\n<<if $SalonWork==5>>\n<<goto [[SalonEvent1]]>>\n<<elseif $SalonWork gte 10 and $event3 is 1>>\n<<goto [[Salon event 3]]>>\n<</if>>\n<<if $SalonWork gt 5>>\n<<set $money = $money+25>>\n<<else>>\n<<set $money = $money+10>>\n<</if>>"
+    },
+    {
+      "name": "servicesEnd",
+      "tags": [],
+      "source_raw": "When I woke up the girl was no longer in the room.\nThe room had a large mirror and I decided to look into it.\n<img src=\"images/BeautyTreatment.jpg\" height=\"420\">\nI feel how my skin has become more silky and clean, my hips seem to be a bit fuller and my chest has become a little bigger.\nWhile I looked at myself, the girl opened the door and brought my clothes.\nIt's time to dress up and go <<link \"home\" \"DayChanged\">><<set $breast=$breast+1>><</link>>.\n<<set $recovery=1>>"
+    },
+    {
+      "name": "ways out",
+      "tags": [],
+      "source_raw": "Kate tells me the information she know. \n-I believe, the sewers can lead us to freedom, but we can't just open it. We have to find a tool, i think you should search in smith's room. He won't just let you in, first get his trust.\nYou can try and sneak in Elder's house. Maybe there is something useful. If you want to get in there, you have to work in brothel. Usualy he picks up a girl he likes. Be carefull with this option. \nTry to cooperate with Moahim in beauty salon. This is the only safe place in town. I think she can help us.\n[[Back|KateHome]]"
+    },
+    {
+      "name": "transform back?",
+      "tags": [],
+      "source_raw": "-Transforming back? We can't do this now. But once we are free, i believe we will figure this out. Just don't use your new \"equipment\" too much. If you want to get out don't end up pregnant. I read some notes about chemical we ate. It tells that we have unusual body chemistry and our menstrual cycle is irregular. That means we can get pregnant in any time, just like russian roulete. \nOur metabolism is very fast, it means that our wounds heal in a matter of hours, it also means that our body is very changeable. If one of us becomes pregnant, the pregnancy will be 3-4 times faster than normal. Also this physical transformation aflicts our minds. Yeah, we like men.\n[[Back|KateHome]] "
+    },
+    {
+      "name": "Investigate sewers",
+      "tags": [],
+      "source_raw": "I had to walk straight for about 30 minutes to finally reach the door.\nAs i walk futher i see a [[combination lock]] on the door.\n[[Go back|SewerEntry]]\n"
+    },
+    {
+      "name": "SewersExit",
+      "tags": [],
+      "source_raw": "I type a combination that I’ve read before and freeze for a second. \nAlmost immediately above the lock a green light turns on and there is a soft click. The door is opened now!\n[[Go futher|A few moments later]]"
+    },
+    {
+      "name": "A few moments later",
+      "tags": [],
+      "source_raw": "<img src=\"images/SewersExit.jpg\" height=\"520\">\n<<if $KateBirth==0>>\\\nI see the light! This must be a way out. Time to get back to home and take Kate with me!\n[[Escape with Kate|Ending 1]]\n<<else>>\\\nI want to take Kate with me, but she won't go with me. \nI am overcome by the gloomy feeling that I will have to leave my savior here. There is nothing to be done, I have to go further.\n[[Epilogue|SoloEnd]] \n<</if>>\\"
+    },
+    {
+      "name": "notes",
+      "tags": [],
+      "source_raw": "I take strange documents, sit on the chair comfortably and start reading.\n     //\n\t March 8\n\t Today was a rather productive day. We delivered everything we needed          through the sewers. Who would have thought that they would install a          loc in the sewer? It is good that all employees were informed about the code, otherwise some might suspect something.　Atleast Experiments can be started.\n\t March 9\n\t The first experiments were very successful. Our gene changes the structure of dna, it means that we can change a living person as we want. \n\t May 24\n\t We have some problems. After a while, the modified dna begins to mutate. Especially Monoamine oxidase. The test subjects became very aggressive, yesterday one of them broke the head of our collaborator. A high rise in testosterone levels was also noted. Maybe it's time to use VZ-173. I'll hide it in my table №2 in western wing and as always I’ll hide the key on the ceiling lamp cover. \n\t May 26\n\t Several test subjects fled this morning. Also, 3 female employees              disappeared, we suspect that they were abducted by fugitives.\n\t May 29\n\t Damn it, we are engaged in illegal experiments here, I did not subscribe to it! I made some special DNA reformer blends for myself if I will have to change personality.\n\t June 1\n\t Our department head ordered to throw all the materials here and run through the sewers. We are not allowed to leave any evidence, but apparently the situation is very serious. What was the code from that damn  code lock $code?\n\t                                              Mr.Abrams Lee\n\t //\n\t [[Stop reading|KateHome]]\n\t <<set $DrugLocation=1>>"
+    },
+    {
+      "name": "combination lock",
+      "tags": [],
+      "source_raw": "<img src=\"images/Lock.jpg\">\nThere are three little bulbs above the combination lock. They are all off\n<<if $locked==0>>\\\n<<textbox \"$inputcode\" \"Try code\" \"code check\" autofocus>>\nGo back to village and try to [[find a combination|Village]].\n<<else>>\\\nI cant use code lock anymore...\n[[Go back to village|Village]]\n<</if>>\n"
+    },
+    {
+      "name": "Ending 1",
+      "tags": [],
+      "source_raw": "I came back for Kate. She was very surprised that I was still able to find a way to freedom. We went the same way as me. After 30 minutes we got to the field. We walked for about an hour and decided to get some rest.\n<img src=\"images/End1.jpg\" height=\"720\">\n<<if $Pregnant is 1>>\nI do not know what will happen next, but I am sure that together with Kate we will cope with everything!<<else>>\nKate said she will find a way to return our old bodies. I believe her, but first we need to get to our homes.<</if>>\n<<if $Pregnant is 1>>\\\n[[Epilogue|EpiloguePregnant]]\n<<else>>\\\n[[Epilogue|EpilogueNonPreg]] \n<</if>>"
+    },
+    {
+      "name": "Shop",
+      "tags": [],
+      "source_raw": "I went to the store. It's pretty messy here. An old man stands behind the counter. \nAt the very same counter are a few items. It seems that in this settlement people do not use the services of the outside world at all, and therefore the store is on the verge of bankruptcy.\nI see a flashlight and a price tag of $ 400. I wonder why it is so expensive? Also nearby is a set of master keys for $ 200. The third item is a ruby, I don’t know why he sells it, but it costs only $ 150. I see a bunch of pepper sprays 20$ each. I think this will help to keep me safe in some situations.\n\n<<if $money gte 20>> \\\n  <<link \"Buy pepper spray\" \"Shop\">>\\\n  <<set $money = $money-20>> <<set $pepper=$pepper+1>>\n  <</link>>\\\n  <<else>>\\\nI dont have money for pepper spray.<</if>>\n<<if $inventory.contains(\"flashlight\")>>\\\n<<else>>\\\n  <<if $money gte 400>> \\\n  <<link \"Buy flashlight\" \"Shop\">>\\\n  <<set $money = $money-400>> <<set $inventory.push(\"flashlight\")>>\n  <</link>>\\\n  <<else>>\\\nI dont have money for flashlight.<</if>>\\\n<</if>>\n<<if $inventory.contains(\"master keys\")>>\\\n<<else>>\\\n  <<if $money gte 200>> \\\n  <<link \"Buy master keys\" \"Shop\">>\\\n  <<set $money = $money-200>> <<set $inventory.push(\"master keys\")>>\n  <</link>>\\\n  <<else>>\\\nI dont have money for master keys.<</if>>\\\n<</if>>\n<<if $inventory.contains(\"ruby\")>>\\\n<<else>>\\\n  <<if $money gte 150>> \\\n  <<link \"Buy ruby\" \"Shop\">>\\\n  <<set $money = $money-150>> <<set $inventory.push(\"ruby\")>>\n  <</link>>\\\n  <<else>>\\\nI dont have money for ruby.<</if>>\n<</if>>\\\n[[Go back|Upper street]]"
+    },
+    {
+      "name": "Ending 2",
+      "tags": [],
+      "source_raw": "I felt a terrible pain in my belly\nMy waters broke and the contractions began. Kate came running from the next room and brought a basin of water and a towel.\n<img src=\"images/birth.png\">\nI gave birth to a healthy boy.\n<<if $KatePregDays==33>>\\\nKate gave birth in this day too. It was a girl.\n<</if>>\nI am too weak to continue my investigations. I have to become a mother now and earn money...\n!!Half year later\nThe brothel administrator opens the curtain and begins the presentation.\n-Today is a special day. Our guest is a mother of three children! But she is also waiting for the fourth! Our local wealth, the standard of women and the goddess of fertility. Susieeeeee!!!!!\n<img src=\"images/Bred.jpg\">\nA very pregnant woman appeared on the scene. She was dressed, if it can be called clothing. Nipples and genitals were covered. That's all she wore.\nAll the men immediately began to applaud. And the administrator already accepts payment for sex with the goddess of fertility.\nThe first man went up to the stage, and then took off his pants with shorts.\nThe pregnant girl did not say anything, she just immediately fell on all fours and spread her legs a little. It was rumored that she lost her mind from sex and therefore forgot how to speak. When a man started to fuck her, in her eyes was a real pleasure.\n<img src=\"images/BredEnd.gif\">\n\n\n!BAD ENDING. Bred and broken."
+    },
+    {
+      "name": "Brothel",
+      "tags": [],
+      "source_raw": "<img src=\"images/Brothel.jpg\" height=\"520\">\n<<if $BrothelWorked isnot 1>>\nThis is the men's place in town. A classic brothel with a reception to keep upstanding women and children out of the main areas. A girl might need to fetch her father, or a woman her business partner....: I do not think that wives pick up their husbands in a brothel withouth shouting them down. And hunting is a common sport in the mountain woods, even if my fantasies may be a little too \"Old West\". Inside -and I am welcome inside- there are men on bathing gowns, towels or nude, many naked whores and some few women in livres: cleaning women, very obviously not on the menu. The whores are friendly and smile as if they mean it, the cleaners are polite and the men are men in a men's world. \nI have seen places like this in movies, but this is not a hidden den of sin but a public place without any sense of wrongness: everyone hear seems to think that this is how it should be. \nI am welcomed by the matron, a former whore by the looks of her: a friendly, powerful, respected woman - at least here, I haven't met her in the streets- who is polite and very, very knowing about men and manly parts. She tells me about my options -both mine as a man and customer, and the options I would have as a girl lookin for work: \"Because that usually calms visitors. Prostitution is legal here, and the girls are here on their own free will, work safely and -I hope- happily and leave if and when they want to do so.\" \nWell, if that is a lie, it is a very convincing one: she is still a hooker, and I doubt anyone gives her lip. <</if>>\nI want to [[see work places here|BrothelWork]]\n[[Get out|Upper street]]"
+    },
+    {
+      "name": "PregSickness",
+      "tags": [],
+      "source_raw": "<<if $PregSick == 1>>\\\n<img src=\"images/Preg1.jpg\" height=\"520\">\nI wake up and run to the toilet: boy am I sick! And I didn't even eat anything funny lately...\nEeeh! My comfy t-shirt from before that I use as a nighgown needs a wash. I tear it off before my skin gets soaked and drop it in the washing bassin to let the running water to clean the stains some before putting it in the \"urgent washing\" box. Then I rinse my mouth and look at myself: but I was fast enough, I think. While I look at my bare chest in the mirror, my wobblers look -and feel- somewhat strange. Swollen. Both my babes and my pointers are swollen -and I thought my fairy rings were pinker and less ...brown? Weird.<</if>>\n<<if $PregSick == 2>>\\\nI am getting sick again when I wake up. But I know the drill by now and strip my top during the run to the toilet: washing my body is easier than washing stained shirts. I am really, really sick again. Then I wash up. My titties and my nipples are still swollen, and my areolas are darker than they have been before. I think that may mean something, but when we talked about boobs in school, I was too busy starring at the sight and didn't listen. I am even more touchy in the boobs, I think: but not in the good, orgasm by nippletouching way. It sets my on edge.\n<img src=\"images/Preg2.jpg\" height=\"520\">\nI need to see a doctor: some of those weird hers here are causing allergic reactions with my funbags.<</if>>\n<<if $PregSick == 3>>\\\n<img src=\"images/Preg3.jpg\" height=\"520\">\nMy boobs are definetly still swollen, maybe more so than ever. I am not having the cramps, but I am growing a little belly bump. Swollen boobs, no bleeding, growing belly...\n<img src=\"images/Preg4.jpg\" height=\"520\">\nShit. I caught a bullet. \nI am pregnant. \nOh.\n<</if>>\n[[Continue|Home]] \n<<set $sick to false>>"
+    },
+    {
+      "name": "StreetSex1",
+      "tags": [],
+      "source_raw": "While I was walking down the street i felt like someone's hand grabbed my ass.\nHe immediately put his hands in my pants and tried to pull off my bottom.\nHe doesnt even care about other people!\n<<if  $corruption gte 60>>\nI [[don't want|See what's next]] to resist!\n<<else>>\n<<if $pepper gte 1>>\\\n[[Use spray to protect yourself]]\n<<else>>\n[[I don't have anything to protect myself. I'll try to run|TryRun1]]\n<</if>>\n<</if>>\n"
+    },
+    {
+      "name": "SalonEvent1.2",
+      "tags": [],
+      "source_raw": "<img src=\"images/Moahim.jpg\" height=\"520\">\nShe is silent for about 10 seconds, but it seems to me like an eternity.\n-You want to escape from here, right?\n-How did you....- my heart was beating with incredible speed. She knows about my plans, does she really prevent me from doing this?\n-Calm down, Susie. I talked with Kate. We can help you, but first you have to prove that you are useful.\n-What do you need from me? I can do anything! Just help us to escape! - she became a ray of hope for me from now on.\n-We need you to talk to our friend in a brothel, Morgan.\nShe has not been in touch for several months. She works there and monitors the situation. We cannot talk to her, because she cannot leave, but you are new in these places. You can work there and get information from her.\n-Ok, I will do it. But you will definitely help me.- <<if $BrothelWorked==1>>i've already worked in brothel, there is no problem with her request<<else>>I don't know if I want to work in a brothel. That means I have to use my pussy...<</if>>\n[[Finish day|DayChanged]]\n<<set $SalonQuest1=1>>\n"
+    },
+    {
+      "name": "SalonEvent1",
+      "tags": [],
+      "source_raw": "Moahim took my hand and led me to her office. \nShe sat in her chair and asked me to do the same, it seems she wants to talk about something.\n[[Sit|SalonEvent1.2]] "
+    },
+    {
+      "name": "BrothelWork",
+      "tags": [],
+      "source_raw": "<img src=\"images/BrothelDressing.jpg\" height=\"520\">\nI decided to work here to make some money.\n<<if $breast gte 2 and $butt gte 2>>\\\nMatron took me to the staff room. She also said that girls can only use their pussies for work, this is an order from the elder.\nThe room was quite clean, despite the fact that it is a brothel. There are several mirrors, cabinets with fetish clothes. Girls animatedly chatted about something and put makeup on themselves.\nI sit on a chair to apply makeup and brush my hair too.\nNow i sould choose my [[working place|Rooms]].\nI can just [[leave|Upper street]] this place. \n<<if $SalonQuest1==1>>\nI see that the name Morgan is written on one of the chairs. A blonde is sitting on the chair, but I don’t see her face because I’m standing behind her. Perhaps she is Moahim's agent. I need to [[talk to this girl|Morgan]].\n<</if>>\n<<else>>\\\nMatron told me  that I am not suitable for this job. She told me to if i had bigger boobs and ass, she could hire me.\n[[Leave|Upper street]] \n<</if>>\n\n"
+    },
+    {
+      "name": "See what's next",
+      "tags": [],
+      "source_raw": "<<set $rndsex=random(1,2)>>\\\n<<if $PregDays gte 14>>\\\n<img src=\"images/StreetSexP.gif\">\nThe man tried to bend me, but I told him that with my big belly it would be easier if I sat down on top. He quickly lay back on the ground and began to lower me onto his dick. I'm starting to ride it. I feel how his penis with each movement gets to my uterus. I hope the baby will be okay...\n<<else>>\\\n<<if $Pregnant==0>>\\\n<<set $rndpreg=random(5,10)>>\\\n<<if $rndpreg lt $Fert>> <<set $Pregnant=1>><</if>>\\\n<</if>>\\\n<<if $rndsex==1>>\\\n<img src=\"images/StreetSex1.gif\">\\\n<<elseif $rndsex==2>>\n<img src=\"images/StreetSex2.gif\">\n<</if>>\nThe man quickly took off my panties and bent me over. \nHis cock entered me sharply and immediately began to move. With his every move, I feel how he gets to the very depths of my pussy.I feel the veins on his penis swelled, and the penis itself has grown in size. A few more movements, and I feel a hot throbbing inside. Yes, he came inside me...\n<img src=\"images/StreetSexCreampie.gif\">\n<</if>>\n<<set $corruption=$corruption+8>>\\\n[[Finish|Village]] \n<<set $creampie=$creampie+1>>"
+    },
+    {
+      "name": "StreetSex2",
+      "tags": [],
+      "source_raw": "While I was walking down the street i felt like someone's hand grabbed my ass.\nHe immediately put his hands in my pants and tried to pull off my bottom.\nHe doesnt even care about other people!\n<<if  $corruption gte 60>>\nI [[don't want|See what's next1]] to resist!\n<<else>>\n<<if $pepper gte 1>>\\\n[[Use spray to protect yourself|spray2]]\n<<else>>\n[[I don't have anything to protect myself. I'll try to run|TryRun2]]\n<</if>>\n<</if>>"
+    },
+    {
+      "name": "See what's next1",
+      "tags": [],
+      "source_raw": "<<set $rndsex=random(1,2)>>\\\n<<if $PregDays gte 14>>\\\n<img src=\"images/StreetSexP.gif\">\nThe man tried to bend me, but I told him that with my big belly it would be easier if I sat down on top. He quickly lay back on the ground and began to lower me onto his dick. I'm starting to ride it. I feel how his penis with each movement gets to my uterus. I hope the baby will be okay...\n<<else>>\\\n<<if $rndsex==1>>\\\n<img src=\"images/StreetSex1.gif\">\\\n<<elseif $rndsex==2>>\n<img src=\"images/StreetSex2.gif\">\n<</if>>\nThe man quickly took off my panties and bent me over. \nHis cock entered me sharply and immediately began to move. With his every move, I feel how he gets to the very depths of my pussy.I feel the veins on his penis swelled, and the penis itself has grown in size. A few more movements, and I feel a hot throbbing inside. Yes, he came inside me...\n<img src=\"images/StreetSexCreampie.gif\">\n<</if>>\n[[Finish|Upper street]] \n<<set $corruption=$corruption+8>>\n<<if $Pregnant==0>>\\\n<<set $rndpreg=random(5,10)>>\\\n<<if $rndpreg lt $Fert>> <<set $Pregnant=1>><</if>>\\\n<</if>>\\\n<<set $creampie=$creampie+1>>"
+    },
+    {
+      "name": "wait for a client",
+      "tags": [],
+      "source_raw": "<img src=\"images/BrothelWork1.jpg\" height=\"520\">\nI went to my room to wait for the client, I took off my panties beforehand, because in any case they would have to be removed. I stand near bed...\nI hear the [[door opens|BrothelSex]]\n<<set $rnd=random(1,3)>>"
+    },
+    {
+      "name": "BrothelSex",
+      "tags": [],
+      "source_raw": "<<if $rnd == 1>>\\\n<<if $PregDays gte 14>><img src=\"images/BrothelVagp.gif\" height=\"320\">\nA customer comes up behind me and puts his hands on my waist. He presses against me and I smell him. First he strokes my huge belly, and then starts massaging my breasts. I see how milk starts to stand out from it.\nThen with one hand he caresses my wet pussy, and with the other he puts his cock in my pussy from behind.\nHe tilts me and starts moving. Did pregnancy make me so hot? I'm so pleased!\n<<else>>\\\n<img src=\"images/BrothelVag.gif\" height=\"320\">\nThe client comes up to me and immediately touches my ass. Then he smoothly slides his hands over my stomach and rises to my chest. I feel his hard hot dick on my ass. I bent over. His penis pushes my lower lips. He makes a strong move and his dick slides into me at his full length. I screamed a bit, just surprised. He moves in me with average speed. But each time he begins to move faster and faster. I feel an itchy feeling inside, it seems I will cum soon.\n <</if>>\\<</if>>\\\n<<if $rnd == 2>>\\\n<<if $PregDays gte 14>><img src=\"images/BrothelVag2p.gif\" height=\"320\"> \nHe pushed me onto the bed. Having fallen on the bed, I habitually protect my belly. Because of the pregnancy, I constantly touch him. The client lies on top of me. Whether because of hormones, or because of excitement, my pussy is already wet. He enters between my legs without delay and starts moving.\n<<else>>\\\n<img src=\"images/BrothelVag2.gif\" height=\"320\"> \nThe customer pushes me onto the bed. He lies on top of me. He begins to touch my right breast, and eagerly suck the left. I spread my legs and feel his hot big dick entering my pussy. He starts moving inside me, still touching my chest. I feel every vein on his penis and think how deep he can reach. \nThe client starts to move faster, and I feel that I will cum soon.<</if>>\\<</if>>\\\n<<if $rnd == 3>>\\\n<<if $PregDays gte 14>><img src=\"images/BrothelVag3p.gif\" height=\"320\">\\\nThe client lies on the bed and orders me to sit on top of him. Apparently because of my big belly, he decided that the cowgirl position would be more convenient for me. I turn my ass to him. He takes me by the hips and pushes me down on his fat cock. Because of pregnancy, my hormones are unpredictable. That is why I get great pleasure from his big dick. He penetrates deeper and deeper into me. At some point I am even afraid that he will pierce the uterus.<<else>>\\\n<img src=\"images/BrothelVag3.gif\" height=\"320\">\nThe client lies on the bed completely naked. I see his huge cock standing straight. He tells me to sit on top of him. I climb onto the bed, turn around showing him my ass and stand over his cock. I start to sit slowly until his dick starts to enter my pussy. I sit down to all lengths and feel every small detail on his penis. I start moving up and down until I feel a little tired at my legs. All the same, this position is very tiring.<</if>><</if>>\nAfter a few minutes, I feel his dick begin to throb and the hot sperm pours deep inside me.\n<<if $rnd == 1>>\\\n<img src=\"images/BrothelVagCum.gif\" height=\"320\">\n<</if>>\\\n<<if $rnd == 2>>\\\n<img src=\"images/BrothelVagCum2.gif\" height=\"320\"> \n<</if>>\\\n<<if $rnd == 3>>\\\n<img src=\"images/BrothelVagCum3.gif\" height=\"320\"><</if>>\n[[Finish|BrothelSexEnd]] \n\n\n\n\n\n\n\n\n<<if $Pregnant==0>>\\\n<<set $rndpreg=random(5,10)>>\\\n<<if $rndpreg lt $Fert>> <<set $Pregnant=1>><</if>>\\\n<</if>>\\"
+    },
+    {
+      "name": "BrothelSexEnd",
+      "tags": [],
+      "source_raw": "I got <<print $Appearance*6>> bucks for client. Im tired, i need to wash myselft and go home.\n[[Go gome|DayChanged]]\n<<set $money=$money+$Appearance*6+$strength*2>>\n<<set $BrothelWorked=$BrothelWorked+1>>\n<<set $corruption=$corruption+5>>"
+    },
+    {
+      "name": "Morgan",
+      "tags": [],
+      "source_raw": "<img src=\"images/Morgan.jpg\" height=\"520\">\nI come closer to the girl. She got up from the chair and is already standing in front of the mirror. I call her name. She turns around. I see a beautiful blonde. Big breasts, wide hips, and ... big round belly. She is pregnant, without a doubt. Previously, these girls were to my taste, until I became a girl.\n-Morgan? I'm from Moahim, do you know her?\n-So, are you another pawn of Moahim? - she stares at me without any interest.\n-Moahim said that you have not been in touch for several months. You should have given her some information - she obviously does not want to talk to me, so I am immediately to the point.\n-Ahh, so you fulfilled my mission ... I was sent here to spy on my senior six months ago. I got some info about him. All collected information is stored in my letter. Take it and bring it to Moahim. Tell her that I will not return to her, I can not. Look at my belly! I have to earn money to secure the future of my unborn child. Take the letter and get out. Don't talk to me anymore, otherwise I will have problems.\n\nI take her letter and [[leave|BrothelWork]]. Better not talk to her again.\n<<set $SalonQuest1=0>>\n<<set $MorganLetter=1>>"
+    },
+    {
+      "name": "Give her a letter",
+      "tags": [],
+      "source_raw": "I give the letter to Moahim and she tells me to go to her office.\n[[Go to office|SalonEvent2]]\n<<set $MorganLetter=0>>"
+    },
+    {
+      "name": "SalonEvent2",
+      "tags": [],
+      "source_raw": "<img src=\"images/Moahim.jpg\" height=\"520\">\nI wait while she carefully reads the letter. After 5 minutes, she removes it and closes her eyes.\n-Tell me, is everything okay with Morgan? - she started from afar.\n-It seems that she is doing well. She said she would not return here because of her pregnancy. She has other goals now.\n-Okay, i understand. I shouldn't have sent her to a brothel. But now, thanks to her information, we know what to do next - she looked at me.- But not yet, proove that you can be trusted first. Keep working, girl.\nI have to [[go|Upper street]].\n<<set $event3=1>>"
+    },
+    {
+      "name": "PublicEnd",
+      "tags": [],
+      "source_raw": "You feel very intense heat in the lower abdomen. You can’t do anything about it and your thoughts are blurred. It is unbearable and you only think about how to satisfy yourself.\nYou go out and take off all your clothes. All the men around immediately pay attention to you.\n<<if $PregDays gte 14>>\\\n<img src=\"images/PublicNakedP.jpg\">\n<<else>>\\\n<img src=\"images/PublicNaked.gif\">\n<</if>>\nFUUUCK MEEEE! - you cry out to the whole town.\nAfter a few seconds, you see some men walking in your direction. The understanding comes to you that they are going to satisfy you.\nWith finger inside your dripping pussy you lie on the bed.\n[[Wait for the men]]"
+    },
+    {
+      "name": "Wait for the men",
+      "tags": [],
+      "source_raw": "You fuck every day from morning to evening. \nYou eat sperm and your pussy is always full. \nYour name is forgotten, your personality doesn't exist anymore. Every man in the town knows you as a free sperm tank. You are nothing more than a mindless fuck hole anymore.\n<<if $PregDays gte 14>>\\\n<img src=\"images/PublicEndP.gif\">\n<<else>>\\\n<video loop autoplay src=\"images/PublicEndP.webm\"></video>\n<</if>>\n<video loop autoplay src=\"images/CumSlut.webm\"></video>\n!Bad end (try to fuck a bit less)"
+    },
+    {
+      "name": "Elder's house",
+      "tags": [],
+      "source_raw": "The village elder has an office right out of a western: minus the gun cabinet. Maybe it is more like an office from the times of Emily Dickinson that way. There are wooden desk, wooden chairs, wooden cabinets -only the <<if $inventory.contains(\"Ancient dagger\")>>\\black jewelry box <<else>>\\[[black jewelry box]]<</if>> is made from metal. No plastic, no chrome. The  is an antiquity, there is a typwriter instead of a computer, and much of the writing seems to be done by HAND. Well: official documents were quite recently signed by people in office, wern't they? \nI am utterly out of place here, and a swift check proves this to be a dangerouy spot: there is no socket in the whole room. My laptop is lovingly cared for, but even the best battery needs some recharge every so often, and I only brought one spare. Little wonder they needed outside help to set up a website. \n\nI remember what they told me when they hired me: they had problems with power lines go down due to bad weather so often some decades ago that they are trying to be completely self reliant: and in their case that means horses to draw carriages and ploughs, writing on paper instead of typing into computers, even a coach running a route like a slow bus. \nThey told me they are of course using all the comforts of modern technology -but keep the older variants that do not need electricity ready at hand. In some cases they have come to prefer horse power to engines, they told me: riding in the mountinas can get one to places where no road wide enough for a car can get; and the slower pace means that certain people who would need social security elsewhere can still dirve a coach, care for horses and do other things that keep them gainfully employed and a working redundancy system up and running. \nA win-win situation. \n\nOnly the elder is not living like a winner: maybe he got caught up a little too much in the back-to-horsepower movement; I do not think this office is as well kept and repainted as it was.\n<<if $ElderRoute==1>>\\\n<<if $inventory.contains($item)>>\nElder told me to come here. Maybe i should [[wait|ElderSex]] for him?\n<<else>>\\\nI'm sure Elder told me to buy something<</if>>\n<</if>>\n[[leave house|Upper street]]"
+    },
+    {
+      "name": "Fertility Tracker",
+      "tags": [],
+      "source_raw": "<<if $Pregnant==0>>\\\n<<if $Fert lte 5>>Safe day\n<<elseif $Fert lte 7>> Medium fertility\n<<elseif $Fert lte 10>>Dangerous day\n<</if>>\\\n<</if>>\\\n<<if $PregDays is 0>>\\\n<<if $creampie is 1>> <img src=\"images/wombnormal1.png\">\n<<elseif $creampie is 2>> <img src=\"images/wombnormal2.png\">\n<<elseif $creampie is 3>> <img src=\"images/wombnormal3.png\">\n<<elseif $creampie gte 4>> <img src=\"images/wombnormal4.png\">\n<</if>>\\\n<<else>>\\\n<<switch $PregDays>>\\\n<<case 1 2 3 4 5>> \nImpregnated\n<img src=\"images/wombpreg1.png\">\n<<case 6 7 8 9 10>> \nPregnant\n<img src=\"images/wombpreg2.png\">\n<<case 11 12 13 14 15>> \nFirst trimester\n<img src=\"images/wombpreg3.png\">\n<<case 16 17 18 19 20>>\nFirst trimester\n<img src=\"images/wombpreg4.png\">\n<<case 21 22 23 24>>\nSecond trimester\n<img src=\"images/wombpreg5.png\">\n<<case 25 26 27 28>> \nThird trimester\n<img src=\"images/wombpreg6.png\">\n<<case 29 30 31 32>> \nReady to deliver\n<img src=\"images/wombpreg7.png\">\n<</switch>>\\\n<</if>>\\\n<<return>>"
+    },
+    {
+      "name": "Use spray to protect yourself",
+      "tags": [],
+      "source_raw": "<img src=\"images/pepper.jpg\" height=\"420\">\nI sprayed pepper spray on the man's face. He screamed and covered his face with his hands. He shrank back and began to rub his eyes. While he was trying to recover, I was able to [[escape|Village]].\n<<set $pepper=$pepper-1>>"
+    },
+    {
+      "name": "spray2",
+      "tags": [],
+      "source_raw": "<img src=\"images/pepper.jpg\" height=\"420\">\nI sprayed pepper spray on the man's face. He screamed and covered his face with his hands. He shrank back and began to rub his eyes. While he was trying to recover, I was able to [[escape|Upper street]].\n<<set $pepper=$pepper-1>>"
+    },
+    {
+      "name": "code check",
+      "tags": [],
+      "source_raw": "<<if $inputcode==$code>>\\\n<<goto [[SewersExit]]>> \n<<else>>\\\n<<goto [[CodeFail]]>>\n<</if>>"
+    },
+    {
+      "name": "CodeFail",
+      "tags": [],
+      "source_raw": "The combination lock made a loud sound and all the lights turned red. The words \"lock locked\" appeared on the screen. I think I messed it up ...\n<<set $locked=1>>\\\n[[Return|combination lock]] "
+    },
+    {
+      "name": "do some exersices",
+      "tags": [],
+      "source_raw": "<<if $PregDays gte 14>>\\\n<img src=\"images/Psquats.gif\">\n<<else>>\\\n<img src=\"images/squats.gif\"><</if>>\nI do squats for about an hour and feel that training has an effect\n[[End training|TrainingEnd]]\n<<set $ButtTraining=$ButtTraining+1>>\n<<if $ButtTraining==3 and $butt lt 5>>\n<<set $butt=$butt+1>>\n<<set $ButtTraining=0>>\n<</if>>\n<<set $training=1>>\n"
+    },
+    {
+      "name": "TrainingEnd",
+      "tags": [],
+      "source_raw": "I feel that my ass is getting a little thicker, and I am getting a better shape. I have to continue training.\nI use shower after exercises to wash off my sweat.\n<<if $PregDays gte 14>>\\\n<img src=\"images/ShowerP.gif\">\n<<else>>\\\n<img src=\"images/Shower.gif\" height=\"420\">\n<</if>>\n<<if $butt lt 5>>\\\n<span class=\"reddish\">Butt became a bit bigger.</span>\n<<else>>\\\n<span class=\"reddish\">I think my butt got the maximum size.</span><</if>>\n[[Get out and dry yourself|Home]]\n"
+    },
+    {
+      "name": "black jewelry box",
+      "tags": [],
+      "source_raw": "The black box is completely smooth to the touch. I do not see a keyhole in it, but it does not open. On the upper side there is a small cavity. Maybe something needs to be inserted?\n<<if $inventory.contains(\"ruby\")>>\\\nTry to [[put ruby]] in it.<</if>>\n[[put the box on it's place|Elder's house]]"
+    },
+    {
+      "name": "put ruby",
+      "tags": [],
+      "source_raw": "I inserted a ruby into the groove. It was hard to shove it. It seems a bit  bigger than needed, but it still fits the size!\n[[Look in the box]]"
+    },
+    {
+      "name": "Look in the box",
+      "tags": [],
+      "source_raw": "<img src=\"images/dagger.jpg\" height=\"520\">\nAs Moahim said, there is the dagger. He is all rusty. I can not imagine how they can kill someone with this. Nevertheless, i see coagulated drops of blood on it. I think it is time to stop Elder's sacrifices.\n[[Steal the dagger]]"
+    },
+    {
+      "name": "Steal the dagger",
+      "tags": [],
+      "source_raw": "I walk out of this house before I get caught. I have to [[come back to Moahim]].\n<img src=\"images/night.jpg\" height=\"520\">\n<<set $ElderNight=0>>\n<<set $inventory.push(\"Ancient dagger\")>>"
+    },
+    {
+      "name": "Salon event 3",
+      "tags": [],
+      "source_raw": "<img src=\"images/Moahim.jpg\" height=\"520\">\n-Sit down girl, i have a task for you. - she was silent as always for some time, but then she started - You must break into the house of the elder at night. An ancient dagger is kept in his bedroom with which he makes sacrifices. If you steal it, Elder will lose control of his followers and we will be able to overthrow his heresy.\n-But how can i get into his house? - i know this is dangerous, but it sounds like a plan which can help me escape this place.\n-Buy a set of master keys in shop. One of the keys will open elder's house or you can try to find another ways into his house. Now go. We have to prepare for our final blow.\n[[Go back to village|Upper street]]\n<<set $ElderNight=1>>\n<<set $event3=0>>"
+    },
+    {
+      "name": "come back to Moahim",
+      "tags": [],
+      "source_raw": "<img src=\"images/Moahim.jpg\" height=\"520\">\nI came to Moahim at night.\n-What happened, Susie? - she asked me, but then she notices the dagger in my hand.- Oh, you did it. That means we can start our preparings. Keep the dagger, girl. We will become ready in a next few days. Just wait.\n-What will you do? - i wonder, because i feel simething bad is coming.\n-You will see, you won't have to do anything, leave it to us.\n-Okay, i think i'll just chill in my home.\n[[End this crazy day|DayChanged]]\n<<set $SalonDays=0>>\n<<set $final = 1>>"
+    },
+    {
+      "name": "Final blow",
+      "tags": [],
+      "source_raw": "Early in the morning an unfamiliar girl handed me a note.\n //We are ready. Come to beauty salon.\n                                           Moahim\n //\nHuh, so fast. I hope this will end soon and will go back to a normal world.\n<<return>>\n"
+    },
+    {
+      "name": "Final blow2",
+      "tags": [],
+      "source_raw": "<img src=\"images/Moahim.jpg\" height=\"520\">\n-You've come. We were waiting for you. - Moahim was serious this time. Her face was like made of stone. Also i noticed many womans in whhite robes, everyone got short swords in their hands. So that what was in abig fabric bundles!\n-What do you want from me? - i literaly dont want to participate in their action.\n-Don't worry, you will just watch. Besides, i think you can find your items after that.\nMy laptop...It wasn't too expensive, but i worked on it a lot of time and i don't want to lose it.\n-Okay, you got me. What's next?\n-After you stole the dagger, people began to leave the elder. Now he is defenseless. Therefore, we attack him at night. Get some rest. We will wake you up.\n[[Wait until night|Final blow3]]"
+    },
+    {
+      "name": "Final blow3",
+      "tags": [],
+      "source_raw": "We went out from the forest. \n<img src=\"images/cultist.jpg\" height=\"520\">\nWe were many, about 15 or 20 people.\nWe walked through the village calmly. There was almost no one on the streets. And those who noticed us were immediately out of sight. We reached Elder's house. One of the girls came to the door. Even though she was in her robe, I saw that she was taller and more powerful than the rest. With a sudden kick, she easily knocked out the front door. Everyone now walking inside.\n[[Enter|Final Blow4]]"
+    },
+    {
+      "name": "Final Blow4",
+      "tags": [],
+      "source_raw": "We quickly went inside. Everyone silently began to go to the second floor. I walked behind everyone. When I almost reached the second floor  I heard a man scream and then a punch. No more screams.\n<img src=\"images/finalblow.jpg\">\nThe Elder was in bed. A few short swords sticking out of his chest. Every girl came up to him and stuck another sword into him. It's horrible! I somehow hold back the gagging urge. Why did everyone do that? He is already dead!\n-Good job girls! - woman took off her hood. It was Moahim. - Now we can get rid of other heretics and clean this place of debauchery. - As for you, Susie, you can get your things and leave this place. The gate is no longer protected. Remember this time, it's all became possible because of your help. We owe you. - as soon as she said i can go, one of the girl screamed.\nWe turned around and froze in surprise.\n<img src=\"images/zombie.png\" height=\"520\">\nIt was Elder! He was biting girls arm. \nHis face was gray, blood was leaking from his eyes, and he himself was making strange animal sounds. And yeah... swords were still inside him. It's impossible! How could someone survive that? The biggest girl  knocked him down. But he began to bite her left shoulder. Everyone was just standing. So was i. \nSuddenly, I remember that I still have a dagger. I do not know how, but I forced myself to move. I approached them and began to stick a dagger in the elder's chest.\nThe girl tried to hold him as best she could. Blood was flowing from her shoulder, but she did not pay attention to it. \nI stuck a dagger into it many times, but he still does not die. I use my last strength to shout and strike another blow, but to the head. He stopped moving. Is he dead? I hope so.\nMy hands are shaking. What have i done?\n<<if $KateBirth is 0>>\\\n[[Epilogue]]\n<<else>>\\\n[[Epilogue|SoloEnd]]\n<</if>>\\"
+    },
+    {
+      "name": "Epilogue",
+      "tags": [],
+      "source_raw": "Kate and I pack our stuff. We are leaving today. I do not want to remember what happened yesterday, but it will haunt me for a long time.\n<img src=\"images/epilogue.jpg\">\n<<if $Pregnant is 1>>\\\n[[Next|EpiloguePregnant]]\n<<else>>\\\n[[Next|EpilogueNonPreg]]\n<</if>>"
+    },
+    {
+      "name": "EpiloguePregnant",
+      "tags": [],
+      "source_raw": "!!2 years later\nLife has come to normal. Kate and I fled from a terrible place two years ago, but I still have nightmares.\n<<if $KatePreg==0>>\\\nOh yeah, i was pregnant but  Kate decided to use DNA transformer to turn into man and marry me despite the fact that I don't even know who the father of the child is!. Yup, are married now and have a child!\n<<else>>\\\nOh yeah, i was pregnant and Kate was too. We are married and raise our children together!\n<</if>>\\\n<<if $grouplesbian is 1>>\\\nAlso we took Megan with us! She said she always wanted to become an aunt. Now, with her help we are doing pretty well. She founded her own clothing brand, so we don't need money anymore!<</if>>\\\nI didn't hear any news about this goddamn resort. On the news more and more talk about the strange attacks on people. Some kind of a rabies virus or something like that. \nI want to forget about everything. It's time to live a normal life.\n<<if $KatePreg==0>>\\\n<img src=\"images/happy ending2.jpg\">\n<<else>>\\\n<img src=\"images/happy endingC.jpg\" height=\"520\">\n<</if>>\\\n"
+    },
+    {
+      "name": "EpilogueNonPreg",
+      "tags": [],
+      "source_raw": "!!2 years later\nLife has come to normal. Kate and I fled from a terrible place two years ago, but I still have nightmares.\n<<if $KatePreg==0>>\\\nOh yeah, i turned back to man! Unfortunately, Kate had only one DNA transformer. She gave it to me, cuz she decided to stay as girl. But this is not bad! I know, she was a man before but... we are married now and waiting for our first child!\n<<else>>\\\nOh yeah, i turned back to man! Kate had only one DNA transformer. She gave it to me, cuz she was pregnant and decided to stay a girl after giving birth. But this is not bad! I know, she was a man before but... we are married now and waiting for our first child! For me it does not matter whose child it is.\n<</if>>\\\n<<if $grouplesbian is 1>>\\\nWe took Megan with us, cuz she insisted on that. Yup, we still lovers. Now, with her help we are doing pretty well. She founded her own clothing brand, so we don't need money anymore!<</if>>\\\nI didn't hear anything about this goddamn resort like it was never existing. But TV shows more and more news about the strange attacks on people. Some kind of a rabies virus or something like that. \nI want to forget about everything. It's time to live a normal life.\n<img src=\"images/happy ending.jpg\" height=\"520\">\n!HappyEnding"
+    },
+    {
+      "name": "PoleEnd",
+      "tags": [],
+      "source_raw": "I've earned <<print $strength*4+$Appearance*2>>\n<<set $money=$money+$strength*4+$Appearance*2>>\nIt was a hard day. Time to [[rest|DayChanged]]. "
+    },
+    {
+      "name": "Vip",
+      "tags": [],
+      "source_raw": "<<switch visited()>>\\\n<<case 1>>\\\n<img src=\"images/Candy.jpg\" height=\"520\">\nAs i came closer to the \"Vip\" door, the young beautiful woman weant out the door.\n-Oh, hello sweetie. I heard you a newbie. You are not yet ready for this room. There is a special client. He likes certain girls with good shapes.\n//This girl has impressive breast and butt. I think she means i need the same shapes as hers. Maybe i need atleast F-cup size?. Who is this client?//\n[[Go away|Rooms]] from this door.\n<<default>>\\\n<<if $breast lt 4>>\\\nI don't think i match required breast size.\n[[Go back|Rooms]]\n<<else>>\\\n<<if $inventory.contains($item)>>\\\nI think i have required size. Now i can [[come in|Vip2]]\n<<else>>\\\nI think i forgot something...\n[[Go back|Rooms]]<</if>>\n<</if>>\\\n<</switch>>\n"
+    },
+    {
+      "name": "Rooms",
+      "tags": [],
+      "source_raw": "<<if $corruption gte 20>>\\\n[[Bedroom|wait for a client]]\n<<else>>\\\nI cannot bring myself to sell my pussy.<</if>>\n<<if $PregDays gte 14>>\\\nI cannot dance with my bloated belly.<<else>>\n[[Dancing pole|Dressing]]<</if>>\n<<if $VipBlocked isnot 1>>\\\n<<if $ElderRoute==1>>\nHe said i should go to his house from now on.\n<<else>>\n[[Vip room|Vip]]<</if>><</if>>\n[[Go back|BrothelWork]]"
+    },
+    {
+      "name": "jogging",
+      "tags": [],
+      "source_raw": "<img src=\"images/run.gif\">\nI run around the streets for about 30 minutes and then [[return home|RunEnd]]\n\n<<set $training=1>>\n<<set $FitTraining=$FitTraining+1>>\n<<if $FitTraining==2>>\n<<set $strength=$strength+1>>\n<<set $FitTraining=0>>\n<</if>>\n"
+    },
+    {
+      "name": "RunEnd",
+      "tags": [],
+      "source_raw": "I feel that i've burned some fat, and I am getting a better shape. I have to continue training.\nI use shower after exercises to wash off my sweat.\n<<if $PregDays gte 14>>\\\n<img src=\"images/ShowerP.gif\">\n<<else>>\\\n<img src=\"images/Shower.gif\" height=\"420\">\n<</if>>\n<span class=\"reddish\">I feel it takes some effect.</span>\n[[Get out and dry yourself|Home]]"
+    },
+    {
+      "name": "DeadEnd",
+      "tags": [],
+      "source_raw": "You died from starving.\nP.S. Don't starve:)\n!Bad End"
+    },
+    {
+      "name": "TryRun1",
+      "tags": [],
+      "source_raw": "<<if $starving is 0>>\n<<set $rnd=random(1,100)>>\n<<switch $strength>>\n<<case 0>>\n<<if $rnd lte 0>>\n<<goto \"RunEscape\">>\n<<else>>\n<<goto \"See what's next\">>\n<</if>>\n<<case 1>>\n<<if $rnd lte 10>>\n<<goto \"RunEscape\">>\n<<else>>\n<<goto \"See what's next\">>\n<</if>>\n<<case 2>>\n<<if $rnd lte 20>>\n<<goto \"RunEscape\">>\n<<else>>\n<<goto \"See what's next\">>\n<</if>>\n<<case 3>>\n<<if $rnd lte 30>>\n<<goto \"RunEscape\">>\n<<else>>\n<<goto \"See what's next\">>\n<</if>>\n<<case 4>>\n<<if $rnd lte 40>>\n<<goto \"RunEscape\">>\n<<else>>\n<<goto \"See what's next\">>\n<</if>>\n<<case 5>>\n<<if $rnd lte 50>>\n<<goto \"RunEscape\">>\n<<else>>\n<<goto \"See what's next\">>\n<</if>>\n<<case 6>>\n<<if $rnd lte 60>>\n<<goto \"RunEscape\">>\n<<else>>\n<<goto \"See what's next\">>\n<</if>>\n<<case 7>>\n<<if $rnd lte 70>>\n<<goto \"RunEscape\">>\n<<else>>\n<<goto \"See what's next\">>\n<</if>>\n<</switch>>\n<<else>>\n<<goto \"See what's next\">>\n<</if>>"
+    },
+    {
+      "name": "RunEscape",
+      "tags": [],
+      "source_raw": "I managed to run away from rapist!\n[[Next|Village]] "
+    },
+    {
+      "name": "RunEscape2",
+      "tags": [],
+      "source_raw": "I managed to run away from rapist!\n[[Next|Upper street]] "
+    },
+    {
+      "name": "TryRun2",
+      "tags": [],
+      "source_raw": "<<if $starving is 0>>\n<<set $rnd=random(1,100)>>\n<<switch $strength>>\n<<case 0>>\n<<if $rnd lte 0>>\n<<goto \"RunEscape\">>\n<<else>>\n<<goto \"See what's next\">>\n<</if>>\n<<case 1>>\n<<if $rnd lte 10>>\n<<goto \"RunEscape2\">>\n<<else>>\n<<goto \"See what's next1\">>\n<</if>>\n<<case 2>>\n<<if $rnd lte 20>>\n<<goto \"RunEscape2\">>\n<<else>>\n<<goto \"See what's next1\">>\n<</if>>\n<<case 3>>\n<<if $rnd lte 30>>\n<<goto \"RunEscape2\">>\n<<else>>\n<<goto \"See what's next1\">>\n<</if>>\n<<case 4>>\n<<if $rnd lte 40>>\n<<goto \"RunEscape2\">>\n<<else>>\n<<goto \"See what's next1\">>\n<</if>>\n<<case 5>>\n<<if $rnd lte 50>>\n<<goto \"RunEscape2\">>\n<<else>>\n<<goto \"See what's next1\">>\n<</if>>\n<<case 6>>\n<<if $rnd lte 60>>\n<<goto \"RunEscape2\">>\n<<else>>\n<<goto \"See what's next1\">>\n<</if>>\n<<case 7>>\n<<if $rnd lte 70>>\n<<goto \"RunEscape2\">>\n<<else>>\n<<goto \"See what's next1\">>\n<</if>>\n<</switch>>\n<<else>>\n<<goto \"See what's next1\">>\n<</if>>"
+    },
+    {
+      "name": "Pole",
+      "tags": [],
+      "source_raw": "<<switch $strength>>\n<<case 3 4>>\n<img src=\"images/strip1.gif\">\nI don't know how to dance yet, but i think some men are watching me.\n<<case 5 6>>\n<img src=\"images/strip2.gif\">\nI'm gettin used to this. My moves are a lot better now. Men constantly whistle to me.\n<<case 7>>\n<img src=\"images/strip3.gif\">\nAll the men are watching me now. Some even shout something about my ass. \n<</switch>>\n<<set $percent to 0>>\\\nDancing time: <span id=\"countdown\">$percent s</span>\\\n<<silently>>\n\t<<repeat 1s>>\n\t\t<<set $percent to $percent + 1>>\n\t\t<<replace \"#countdown\">>$percent s<</replace>>\n\t\t<<if $percent ==10>>\n\t\t<<goto \"PoleEnd\">>\n\t\t<<stop>>\n\t\t<</if>>\n\t<</repeat>>\n<</silently>>\n<span id=\"money\"></span>\\\n<<silently>>\n\t<<repeat 3s>>\n\t<<set $rnd=random(1,14)>>\n\t<<if $rnd lte $strength>>\n\t\t<<replace \"#money\">>Man holds out his hand with money.<<link \"Take money\">><<set $money=$money+5>><<replace \"#money\">><</replace>><</link>>\n\t\t<<repeat 1s>><<replace \"#money\">><<stop>><</replace>><</repeat>>\n\t\t<</replace>>\n\t\t<</if>>\n\t<</repeat>>\n<</silently>>\n<<set $corruption=$corruption+2>>"
+    },
+    {
+      "name": "Dressing",
+      "tags": [],
+      "source_raw": "<<switch visited()>>\n<<case 1>>\nA strong looking man in jeans and black T-shirt stoped me.\n-What's up girl? Wanna work here?\n-I thought i can make some money here. This is stripper's room, right? - i dont want to sell my pussy, so stripping may be a better way to make money.\n-Ofcource we need good looking girls. If you are fit enough you can work here. You can do some jogging to stay in form. Also patrons will sometime give you extra money. Remember - the better you look the more money you will get.\n<<link \"Next\" \"Dressing\">><</link>>\n<<default>>\n<<if $strength gte 3>>\n<img src=\"images/stripper.jpg\" height=\"520\">\nManager lead me to special room. I wear special clothes for striptease and put on makeup. As I was told, clients may touch me, but nothing terrible threatens me.\n[[Do some pole dancing|Pole]]\n<<else>>\\\n<img src=\"images/manager.jpg\" height=\"520\">\n-Look at yourself girl! You need some trainings for sure. Get out of my sight and dont come here until you get better shape! I don't want to lose clients.\n[[I can't work here|Rooms]]. Maybe i realy should do something about it?\n<</if>>\n<</switch>>\n"
+    },
+    {
+      "name": "Vip2",
+      "tags": [],
+      "source_raw": "<<switch visited()>>\\\n<<case 1>>\\\n<img src=\"images/prost.jpg\" hieght=\"520\">\nI've entered the room. It doesn't look like the special one, but a bunch of girls sitting all around and the mid-aged man sits on the bed. \nIt seems I have already seen him somewhere. For sure! He executed someone in the forest! Since I entered here, it is impossible to show that I recognized him, but Kate said that you could find a way to escape through his house. I have to endure a little. Matron is also here.\n- Girls! Bend over, it's time for a little check. - said matron.\nGirls started to do as she said, so did i. \n- You, get out - i heard.\n- You to.\nWhat is she looking for?\nNow i feel she stands behind me. I felt that something entered my vagina. Something cold. She stretched a bit my hole.\n<<if $Pregnant is 1>>\\\n-Get out now and don't come here ever again - she said.\nI don't know why i don't match, but i cannot do anything with it.\n[[Leave vip room|Rooms]]\n<<set $VipBlocked=1>>\\\n<<else>>\\\nShe ended with me and moved to another girl.\nAfter this Elder whispered something to Matron and she told to other girls to leave.\n- Now undress, girl, and do some work!\n[[Time to see what happens|Vip3]]\n<</if>>\\\n<<default>>\n<img src=\"images/sofa.jpg\" height=\"520\">\nFor this time i am the only one who came here.\nMatron said to bend over again. It is time to check me. This procedure became standart for me.\n<<if $Pregnant is 1>>\\\n-Get out now and don't come here ever again - she said.\nI don't know why i don't match, but i cannot do anything with it.\n<<set $VipBlocked=1>>\\\n[[Leave vip room|Rooms]]\n<<else>>\\\n-It's okay, she fits.\nShe ended with me.\n[[Next|Vip3]]\n<</if>>\\\n<</switch>>"
+    },
+    {
+      "name": "Vip3",
+      "tags": [],
+      "source_raw": "<<switch visited()>>\\\n<<case 1>>\n<<set $i to 0>>\\\n<span id=\"gif\">[img[$gif.gifpack1[0]]]</span>\n<span id=\"text\"><<print $gif.eldertext1[0]>></span>\\\n<<silently>>\n\t<<repeat 3s>>\n\t\t<<set $i=$i + 1>>\n\t\t<<replace \"#gif\">>[img[$gif.gifpack1[$i]]]<</replace>>\n\t\t<<replace \"#text\">><<print $gif.eldertext1[$i]>><</replace>>\n\t\t<<if $i==4>>\n\t\t<<goto \"Elder1\">>\n\t\t<</if>>\n\t<</repeat>>\n\t<<set $corruption=$corruption+5>>\\\n<</silently>>\n<<case 2>>\n<<set $i to 0>>\\\n<span id=\"gif\">[img[$gif.gifpack2[0]]]</span>\n<span id=\"text\"><<print $gif.eldertext2[0]>></span>\\\n<<silently>>\n\t<<repeat 3s>>\n\t\t<<set $i=$i + 1>>\n\t\t<<replace \"#gif\">>[img[$gif.gifpack2[$i]]]<</replace>>\n\t\t<<replace \"#text\">><<print $gif.eldertext2[$i]>><</replace>>\n\t\t<<if $i==6>>\n\t\t<<goto \"Elder2\">>\n\t\t<</if>>\n\t<</repeat>>\n\t<<set $corruption=$corruption+5>>\\\n<</silently>>\n<<case 3>>\n<<set $i to 0>>\\\n<span id=\"gif\">[img[$gif.gifpack3[0]]]</span>\n<span id=\"text\"><<print $gif.eldertext3[0]>></span>\\\n<<silently>>\n\t<<repeat 4s>>\n\t\t<<set $i=$i + 1>>\n\t\t<<replace \"#gif\">>[img[$gif.gifpack3[$i]]]<</replace>>\n\t\t<<replace \"#text\">><<print $gif.eldertext3[$i]>><</replace>>\n\t\t<<if $i==6>>\n\t\t<<goto \"Elder3\">>\n\t\t<</if>>\n\t<</repeat>>\n\t<<set $corruption=$corruption+5>>\\\n<</silently>>\n<<case 4>>\n<<set $i to 0>>\\\n<span id=\"gif\">[img[$gif.gifpack4[0]]]</span>\n<span id=\"text\"><<print $gif.eldertext4[0]>></span>\\\n<<silently>>\n\t<<repeat 4s>>\n\t\t<<set $i=$i + 1>>\n\t\t<<replace \"#gif\">>[img[$gif.gifpack4[$i]]]<</replace>>\n\t\t<<replace \"#text\">><<print $gif.eldertext4[$i]>><</replace>>\n\t\t<<if $i==5>>\n\t\t<<goto \"Elder4\">>\n\t\t<</if>>\n\t<</repeat>>\n\t<<set $corruption=$corruption+5>>\\\n<</silently>>\n<<case 5>>\n<<set $i to 0>>\\\n<span id=\"gif\">[img[$gif.gifpack5[0]]]</span>\n<span id=\"text\"><<print $gif.eldertext5[0]>></span>\\\n<<silently>>\n\t<<repeat 4s>>\n\t\t<<set $i=$i + 1>>\n\t\t<<replace \"#gif\">>[img[$gif.gifpack5[$i]]]<</replace>>\n\t\t<<replace \"#text\">><<print $gif.eldertext5[$i]>><</replace>>\n\t\t<<if $i==4>>\n\t\t<<goto \"Elder5\">>\n\t\t<</if>>\n\t<</repeat>>\n\t<<set $corruption=$corruption+5>>\\\n<</silently>>\n<<case 6>>\n<<set $i to 0>>\\\n<span id=\"gif\">[img[$gif.gifpack6[0]]]</span>\n<span id=\"text\"><<print $gif.eldertext6[0]>></span>\\\n<<silently>>\n\t<<repeat 4s>>\n\t\t<<set $i=$i + 1>>\n\t\t<<replace \"#gif\">>[img[$gif.gifpack6[$i]]]<</replace>>\n\t\t<<replace \"#text\">><<print $gif.eldertext6[$i]>><</replace>>\n\t\t<<if $i==7>>\n\t\t<<goto \"Elder6\">>\n\t\t<</if>>\n\t<</repeat>>\n\t<<set $corruption=$corruption+5>>\\\n<<if $Pregnant==0>>\\\n<<set $rndpreg=random(5,10)>>\\\n<<if $rndpreg lt $Fert>> <<set $Pregnant=1>><</if>>\\<</if>>\n<</silently>>\n<</switch>>\n"
+    },
+    {
+      "name": "Elder1",
+      "tags": [],
+      "source_raw": "- Good job girl. Come here again next time. I'll pay you a lot more than others.\nI got 100 dollars! That a lot! Even he is a killer i may use him to earn money quick.\n[[End day|DayChanged]]\n<<set $money=$money+100>>"
+    },
+    {
+      "name": "SexShop",
+      "tags": [],
+      "source_raw": "<img src=\"images/SexShop.jpg\" height=\"520\">\n\n<<if $inventory.contains(\"enema\")>>\\\n<<else>>\\\n  <<if $money gte 25>> \\\n  <<link \"Buy enema(25$)\" \"SexShop\">>\\\n  <<set $money = $money-25>> <<set $inventory.push(\"enema\")>>\n  <</link>>\\\n  <<else>>\\\nI dont have money for enema(25$).<</if>>\\\n<</if>>\n<<if $inventory.contains(\"rope\")>>\\\n<<else>>\\\n  <<if $money gte 15>> \\\n  <<link \"Buy rope(15$)\" \"SexShop\">>\\\n  <<set $money = $money-15>> <<set $inventory.push(\"rope\")>>\n  <</link>>\\\n  <<else>>\\\nI dont have money for rope(15$).<</if>>\\\n<</if>>\n<<if $inventory.contains(\"pack of toys\")>>\\\n<<else>>\\\n  <<if $money gte 80>> \\\n  <<link \"Buy pack of toys(80$)\" \"SexShop\">>\\\n  <<set $money = $money-80>> <<set $inventory.push(\"pack of toys\")>>\n  <</link>>\\\n  <<else>>\\\nI dont have money for pack of toys(80$).<</if>>\n<</if>>\\\n<<if $inventory.contains(\"Breast pump\")>>\\\n<<else>>\\\n  <<if $money gte 30>> \\\n  <<link \"Buy Breast pump(30$)\" \"SexShop\">>\\\n  <<set $money = $money-30>> <<set $inventory.push(\"Breast pump\")>>\n  <</link>>\\\n  <<else>>\\\nI dont have money for Breast pump(30$).<</if>>\\\n<</if>>\n[[Go back|Upper street]]"
+    },
+    {
+      "name": "Elder2",
+      "tags": [],
+      "source_raw": "- I like your enthusiasm. Keep coming here and you will get a lot of money. Take this. Before coming here next time, go to sex shop and buy enema. I need your backdoor to be clean, he-he.\nIs he going to fuck my ass next time? I need to be prepared for this. \nI got 100 dollars. Good think he doesn't cum inside. Maybe getting money from him isn't that bad.\n[[Go gome|DayChanged]]\n<<set $money=$money+100>>\n<<set $item=\"enema\">>"
+    },
+    {
+      "name": "Elder3",
+      "tags": [],
+      "source_raw": "- You have pretty good holes. You are becoming my favourite girl. Until next then.\nHe gives me 125$ this time. \n[[Go gome|DayChanged]]\n<<set $money=$money+125>>\n"
+    },
+    {
+      "name": "Elder4",
+      "tags": [],
+      "source_raw": "- I've trained your ass. Now it's time for something more. Let's get some rough sex. I'll have a surprise for you.\nI got 125$. Something rough, huh? Until he doesn't cum inside me i think it's ok.\n[[Go gome|DayChanged]]\n<<set $money=$money+125>>\n\n"
+    },
+    {
+      "name": "Elder5",
+      "tags": [],
+      "source_raw": "- Yes, that was good. Isn't it?\nI felt realy good, but i didn't expect threesome... I simply nod.\nI got 150$. Okay, i can deal with this.\n- Almost forgot. Next time make sure you are on safe day. I don't need you to get knocked up. Don't dissapoint me, girl.\nWhat? is he going to fill me next time? I'm not sure i want to come here next time...\n[[Go gome|DayChanged]]\n<<set $money=$money+150>>\n"
+    },
+    {
+      "name": "Elder6",
+      "tags": [],
+      "source_raw": "- That was incredible. Cumings inside feels like extasy. I hope you checked your safe days. By the way, enough coming here. Next time you should come to my house and bring rope.\n\nTheir semen runs down my legs. It's kinda sad that it leaking out...\nI got 150$\n[[Go gome|DayChanged]]\n<<set $item=\"rope\">>\n<<set $money=$money+150>>\n<<set $ElderRoute=1>>"
+    },
+    {
+      "name": "ElderSex",
+      "tags": [],
+      "source_raw": "<<switch visited()>>\n<<case 1>>\nAfter some time the front door opens. This is the Elder. \n- You've come. Good. - he came closer to me and sniffed my hair.\n- You know what to do - bend over.\nI do as he says.\nHe inserted his tool as matron did.\n<<if $Pregnant is 1>>\\\nBefore he pulls out i felt how something hard and metalic wraped aroud my neck.\n- What the...\n- Shut up bitch! I told you not to get knocked up! You've chosen your fate, pig.\n[[Face consequences|ElderBadEnd]]\n<<else>>\n- Good job. Soon you won't have to worry this. Now go to bed and undress.\nWhat did he mean by \"won't have to worry\"? I don't think this is something bad. He pays well and... i must admit im being addicted to sex with him.\n<<if $inventory.contains(\"Ancient dagger\")>>\\\nMaybe i can use dagger to [[kill this monster|ElderKill]]?<</if>>\n[[Prepare|ElderSex1]]\n<</if>>\n<<default>>\n- I hope you got everything i asked for. \nNow let's do examination quickly.\n<<if $Pregnant is 1>>\\\nBefore he pulls out i felt how something hard and metalic wraped aroud my neck.\n- What the...\n- Shut up bitch! I told you not to get knocked up! You've chosen your fate, pig.\n[[Face consequences|ElderBadEnd]]\n<<else>>\\\n- Let's get to action. I want you so bad!\n- Me too, master!\n[[Pleasure|ElderSex1]] your master.\n<</if>>\\\n<</switch>>"
+    },
+    {
+      "name": "ElderBadEnd",
+      "tags": [],
+      "source_raw": "This moron chained me in basement. \n- If you love dicks, so be it. From now on you will be serving them non-stop.\nWhat the hell? I'm not going to stay here forever!\n\nAs soon as he left, I heard the footsteps of several people.\n- Jackpot, guys! Elder said to ravish this slut until she loses her mind.\n\nI can't say anything. I am in shock and can't do anything about it. My arms and legs refuses to move.\nFrom this day i got fucked many times and started my live as a meat toilet for all the men in this village...\n<<if $PregDays gte 16>>\\\n<img src=\"images/ElderEnd1.gif\">\n<<else>>\n<img src=\"images/ElderEnd2.gif\">\n<img src=\"images/ElderEnd3.gif\">\n<</if>>\n\n!!Some time later\n\n- How are you, my little pig?\n- I'm good master, but my pussy feels lonely. Can i have yours?\n- Don't worry, today almost every single men will come to play with you - he came closer and stroked my pregnant belly. \nHooray! My pussy will get enough pleasure today!\n- I'm so happy, master!\n<img src=\"images/ElderEnd.jpg\">\n"
+    },
+    {
+      "name": "ElderSex1",
+      "tags": [],
+      "source_raw": "<<switch visited()>>\\\n<<case 1>>\\\n- Have you brought the rope?\nI simply give it to him. He smiles and then tries to tear the rope. He doesn't manage to do that. \n- It will be enough. It's time to make you who you are.\n What is he doing?. He tying me!\n <img src=\"images/Rope.gif\">\n- Now tell me, bitch. Who am i?\n- You are fucking bastard! Let me out!\n- Wrong answer.\n<img src=\"images/Rope2.gif\">\nHe uses his fingers to play with my pussy. It feels fucking good! But i cant just let him do what he wants!\n- Again. Who am i?\n- Huh... please, stop... ohh... no... please...\n- Who am i?\n<img src=\"images/Rope3.gif\">\n- My... m...ahh.. ter\n- Who? Tell me! Tell me again!\n- My master! Please stop this, make me cum alredy!\n- Yes, and you are my slave now. Ask me properly and i will let you cum.\n- Master, please put you precious dick inside your worthless slave's pussy!\n- Good. Take your reward now.\n<img src=\"images/Rope4.gif\">\n- Now i'll mark your face with my sperm!\n<img src=\"images/Rope5.gif\">\n- Thank you, master...\n- Put the rest of my semen in your mouth!\n- As you wish, my master.\n<img src=\"images/Rope6.gif\">\n[[Next|ElderSex2]]\n<<case 2>>\n- Today you will become a mother! We must prepare your body. Drink this.\nHe gave me a little bottle of pink liquid. It tastes like sugar. I immediately begin to feel how the fluid spreads inside me, and then the heat throughout my body collects in my pussy and stomach.\n- It's time to prepare your womb. This will massage you for 15 minutes.\nNo way! I cannot last that longer! I need some dicks right now!\n<img src=\"images/rope7.gif\">\n\n!!15 minutes later\n- Are you ready?\nI can't say a word. My fast breathing and juicing pussy show that I am ready for anything.\n- He he, it seems you are. Let's bring you to my bed.\n[[Fuck me!|ElderSex3]]\n<</switch>>\\"
+    },
+    {
+      "name": "ElderSex2",
+      "tags": [],
+      "source_raw": "As we cleaned, the Elder gives me money.\n- You don't have to, Master.\n- You are my favourite slave and I plan to make you a carrier of my child. But before this, you must go to sexshop and buy some toys. Next time will be special.\nI got 150 dollars.\n[[End day|DayChanged]]\n<<set $money=$money+150>>\n<<set $item=\"pack of toys\">>"
+    },
+    {
+      "name": "ElderSex3",
+      "tags": [],
+      "source_raw": "<img src=\"images/1.gif\">\n- Ohhh yes! Fuck me, Master!\n<img src=\"images/2.gif\">\n<img src=\"images/3.gif\">\nThis fuck is all i wanted. And now i feel like i need to milk his cock to the last drops inside my womb!\n<img src=\"images/4.gif\">\n- I'll cum soon. Prepare to have my child, slave!\n- Yes, Master! Shoot it all inside me! I want your semen flowing inside my womb! Make me pregnant!\n- Take this!\n<img src=\"images/ElderCreampie.gif\">\nI feel his hot seed flowing in my womb and filling it. I feel satisfaction and soft warmth inside. Looks like my womb just wanted to be filled.\n<img src=\"images/5.gif\">\n- Your pussy is the best. We must make sure you get pregnant that's why from now on you will live with me as my breeder wife. I'll put my babies inside you again and again!\n<img src=\"images/6.gif\">\n- Yes, Master! I want to be your breeder and get your cum inside me every time!\n\n[[Start|elder end]] your breeder's live."
+    },
+    {
+      "name": "elder end",
+      "tags": [],
+      "source_raw": "Since i agreed to become his breeding bitch we fucked everyday from morning till night.\n<img src=\"images/ride.gif\">\nAnd he always finished inside me.\n<img src=\"images/cowcream.gif\">\n[[Next|elder end2]]"
+    },
+    {
+      "name": "elder end2",
+      "tags": [],
+      "source_raw": "- Wake up, Susie. We have a heretic to burn.\n<img src=\"images/sleepcream.jpg\" height=\"520\">\n- Today we will do something important. Meet me in the forest. \nI dont know what he wants, but it doesn't matter. My master wants me to come so i have to!\nGo to [[forest]]"
+    },
+    {
+      "name": "forest",
+      "tags": [],
+      "source_raw": "I went to the forest, where once he made a sacrifice.\n<img src=\"images/nudeforest.jpg\" height=\"620\">\n\nAs soon as I approached that place, I noticed a lot of people standing around.\nIn the center were naked girls. They were held by the hands of several men. The elder was standing next to an old woman who was bound. \nShe is the only one who has clothes and a gag in her mouth. It was Moahim.\n- Shut up, bitch! Today we will get rid of you, and your girls will become good bitches for fun!\nShe cannot say anything, but her wide eyes show how terrified she is.\n- Oh, Susie, finaly you've come. Look at this bitch, who was trying to ruin our plans! - he slaps her face.\n- Boys... Breed this bitches!\nAs soon as he said this, the men became wild and threw the girls to the ground. They began to undress and then rape bound girls.\nI heard a lot of screams.\n<img src=\"images/orgy.gif\" height=\"420\">\n\nThe master put his hands on my hips. \nI know what he wants, so I immediately got into a doggy style position.\n\n<img src=\"images/forestsex.gif\">\n\nHe pounds my pussy, and in the meantime I look into Moahim’s eyes.\n- Look how my Master breeds me! I will give birth to his child!\nMoahim didn't say anything. She can't. But i feel how her anger grews up.\n\nSoon i feel that Master's dick became bigger. He will cum soon!\nAfter a few movements he began to cum deeply into me. I'm pretty sure this time he impregnated me!\n<img src=\"images/forestcream.gif\">\n<img src=\"images/fert.gif\">\n- Now, Susie, kill this bitch! - he gives me his dagger <<if $inventory.contains(\"Ancient dagger\")>>\\  which I once stole from him, but then returned<</if>>.\nI come closer to Moahim. I put my finger in my pussy, and then smear the sperm on her face. Then I quickly cut her throat. She twitches for a few seconds and then falls to the ground.\n[[Epilogue|ElderEnd]]\n"
+    },
+    {
+      "name": "ElderEnd",
+      "tags": [],
+      "source_raw": "Much time has passed since then. The whole village has become subordinate to him. I became the elder's personal concubine. He fucked a lot of other girls, but only I was worthy to carry his child.\n\n!!Elder's concubine end. (not bad, but still...)\n<img src=\"images/amazon.jpg\">"
+    },
+    {
+      "name": "SmithMachine",
+      "tags": [],
+      "source_raw": "<<switch visited()>>\n<<case 1>>\n- Today we will try something new. I was working on special tool and you will test it. Also it will help you to reveal your true nature! Don't worry, i'll pay you much more for this.\n[[Next|FuckMachine]]\n<<default>>\n- Let's go and play more with your favourite toy. I'm pretty sure you like it.\n[[Next|FuckMachine]]\n<</switch>>"
+    },
+    {
+      "name": "FuckMachine",
+      "tags": [],
+      "source_raw": "<<switch visited()>>\n<<case 1>>\n!!A few moments later\n\n<img src=\"images/FuckMachine.gif\">\n- How do you feel, Susie? \n- Aww... shit! can you make it slower?\nI feel it began to move slightly slower. Also i feel i'll cum soon!\n<<case 2>>\n- I increased the power, now you can turn on the increased speed. Wanna try?\n- You are paying me. Turn on.\n<img src=\"images/FuckMachine2.gif\">\n- Holy! Slow down! Slow down! Ah, fuck!\n- Should i turn it off?\n- What? No! Just.... uhhh... let me feel it a bit more...\n<<case 3>>\n- I wasn't able to return the second dildo, but i did something different. I'm sure you will like it. Now test it.\n\n<img src=\"images/FuckMachine3.gif\">\n- This is perfet, Mark! Not that rough and still fast enough.\n- I'll keep this version then. Now take your pleasure time. I have some work to be done.\n<<default>>\\\n- I'll let you play with my machine as usualy. Don't worry, i'm getting my pleasure for sure.\n\n<img src=\"images/FuckMachine3.gif\">\nThis machine is getting me so horny that i cannot think straight.\n\n- Now it's time for my reward!\nHe turns off the machine and takes my ass  pulling me towards himself.\n<img src=\"images/SmithBehind.gif\" height=\"420\">\n\n- Don't stop! - the heat overwhelms me. His dick is all i can think about.\n- Here comes your delivery!\nHe pushes all his lenghth inside me and feel how his dick began pulsate. Warn liquind flows inside my lower belly. I'm cumming from this!\n<img src=\"images/pulse.gif\" height=\"420\">\n<img src=\"images/SmithCP.gif\" height=\"320\">\n<<if $Pregnant==0>>\\\n<<set $rndpreg=random(5,10)>>\\\n<<if $rndpreg lt $Fert>> <<set $Pregnant=1>><</if>>\\\n<</if>>\\\n<</switch>>\n[[Finish|FuckMachineEnd]] \n<<set $corruption=$corruption+3>>\n"
+    },
+    {
+      "name": "FuckMachineEnd",
+      "tags": [],
+      "source_raw": "<<switch visited()>>\\\n<<case 1>>\\\nI cummed several times in a row. What a beast! I might get used to this machine...\n- What do you think about this? - he asked me.\n- I don't know, it needs some upgrades and more testing i think.\n- Ho-ho, got it. I'll make something for next time. Oh, take this. An extra pay for this time.\n[[Rest|DayChanged]] \n<<case 2>>\nI'm all sweaty. I almost fainted from such power.\n- Do you like my improvements? I removed second dildo in order to increase power and penetrating ability.\n- I think it's all okay. But can you return the second one?\n- Ha ha, you are getting addicted aren't you? Okay, i'll do this for my favourite employe.\n[[Rest|DayChanged]] \n<<case 3>>\nI've spent almost 30 mins playing with this new machine. Who could've ever thought that female body can feel such great pleasure? Maybe i'll need something more net time...\n[[Rest|DayChanged]] \n<<default>>\n- Dat was something, Susie! I'm not sure i can live without your pussy now. Here's you payment. Come here next time. And close my office. He gives me a key.\nI stand near him and his semen running down my legs.\n<<if $PregDays lt 14>>\\\nOnce my heat is gone i realise that he cummed inside and horror of possible consequences takes my mind.\n<<else>>\\\nGood think i cannot get anymore pregnant than i already am. Yeah...\n<</if>>\\\n[[Get dressed|SmithOffice]]\n<</switch>>\nI got 30 dollars.\n<<set $money=$money+30>>\\\n<<set $corruption=$corruption+3>>"
+    },
+    {
+      "name": "MeganHouse",
+      "tags": [],
+      "source_raw": "<img src=\"images/Megan.jpg\" height=\"520\">\n<<if $PregDays lt 14>>\\\n<<switch visited()>>\\\n<<case 1>>\\\n- I am glad you've come, Susie. Take a sit. I was surprised by your massage, that's why i offered you some extra work in my house. You know, maybe you can do a bit more with your hands...\nMegan is surprisingly beautiful. Her voice is soft and she makes me relax. Even though I'm a girl now, she attracts me a little.\n[[Accept offer|MeganSex]]\n[[Decline|Village]]\n<<default>>\\\n- Welcome back, Susie. Wanna work? - she smiles.\nMegan is surprisingly beautiful. Her voice is soft and she makes me relax. Even though I'm a girl now, she attracts me a little.\n[[Accept offer|MeganSex]]\n[[Decline|Village]]\n<</switch>>\n<<else>>\\\nMegan says 'hello' to me and then the notices my belly. \n- Oh my god! I thought you are just getting fat!\nShe looks upset. It seem she is not happy about this situation.\n- I can't believe you betrayed my trust... with a man. Don't come here anymore. Leave me. You didn't value my care.\n[[Leave|Village]] \n<<set $lesbian=0>>\n<</if>>\n"
+    },
+    {
+      "name": "MeganSex",
+      "tags": [],
+      "source_raw": "<<set $rnd=random(1,2)>>\\\n<<switch visited()>>\\\n<<case 1>>\\\n<img src=\"images/MeganSex.gif\">\n- Mmmm... i like your hands so much!\nI massage her for about 15 minutes and see how much her pussy gets wet\n- Susie...\n- Huh? What?\n- Can you put you finger inside please?\nThis request surprised me a little. However, she pays me, so why not?\n\n<img src=\"images/MeganSex1.gif\">\n- Uhh... yes, like this!\n- Faster!\nI started to make heavy movements with my finger.\n- I'm cummiiiing!\nHer vaginal muscles squeezed my finger, and then a clear liquid splashed out of her pussy.\n<<case 2>>\n- Today i want to try something new. It isn't fair that i'm the only one who gets pleasured.\nAfter this words she pushed me on the bed and undressed me.\n- Just relax a bit, i know what to do.\nShe began to gently lick my pussy. And then she inserted a finger and started to suck  my clit.\nI didn't know she is so skillfull with her mouth!\n<img src=\"images/MeganSex2.gif\">\nI feel like i'll cum soon. I press her head against my pussy much harder.\n-I'm CUMING!\n<<case 3>>\n<<if $grouplesbian==1>>\\\nWhen I went inside, I saw several girls. They talked to each other. There were even more girls in the hall. Are they all Megan's friends?\n<img src=\"images/girls.jpg\">\nWe sat in the room and drank cocktails. Everyone was pretty nice talking. I relaxed and felt the girl next to me stroking my knee. Megan is already kissing her friend. And the other girls started to touch each other. I couldn't resist my lust and i started to touch her.\nAfter some time the whole situation took an intimate way.\n<img src=\"images/LesbianGroup2.gif\" height=\"520\">\n<img src=\"images/LesbianGroup.gif\" height=\"520\">\nThat was like a dream. I felt like i wasn't in control of my body. That girls was the only thing i wanted right now.\nTheir curvaceous bodies, smooth and soft skin...\n<<else>>\\\n<img src=\"images/MeganSex3.gif\">\n<<if $rnd==1>>\n<img src=\"images/MeganSex4.gif\">\n<<else>>\\\n<img src=\"images/MeganSex5.gif\"><</if>>\n<</if>>\\\n<<default>>\n<<if $grouplesbian==1>>\\\n- Hello Susie, we are glad you've come. Lets start our party - said one girl and took my hand.\n\n<img src=\"images/LesbianGroup2.gif\" height=\"520\">\n\n<img src=\"images/LesbianGroup.gif\" height=\"520\">\n<<else>>\\\n<img src=\"images/MeganSex3.gif\">\n<<if $rnd==1>>\n<img src=\"images/MeganSex4.gif\">\n<<else>>\\\n<img src=\"images/MeganSex5.gif\"><</if>>\n<</if>>\\\n<</switch>>\n[[End session|MeganSexEnd]]\n<<set $corruption=$corruption+5>>"
+    },
+    {
+      "name": "MeganSexEnd",
+      "tags": [],
+      "source_raw": "<<switch visited()>>\\\n<<case 1>>\\\nI left megan in her room for a while.\nMegan, panting, went into the hall. She is already dressed.\n\n-  You did a good job. I have not experienced such an orgasm for a long time. I hope you will come here again. By the way, here is your money.\nI got 40 dollars.\n\nWhile I was counting money, Megan came very close to me.\n<img src=\"images/MeganKiss.gif\">\n\nI did not expect this kiss, so my lips did not move.\n- Good luck, Susie. Waiting for you next time.\n<<set $money=$money+40>>\\\n[[End day|DayChanged]]\n<<case 2>>\\\n- Wow, i didn't know you can do such things, Megan - i am lying on the bed and I can’t get up. My legs are still trembling.\nShe pulled me to her and kissed me without a single word.\n<img src=\"images/MeganKiss2.gif\">\n- You can come here as much as you want, Susie. I don't mind having fun with you - she chuckles. - By the way, i want to invite my friends next time. They are all cute girls. Are you ok with that? - she hands me 50 dollars.\n<<set $money=$money+50>>\\\n<<link \"Ok\" \"DayChanged\">><<set $grouplesbian=1>><</link>>\n<<link \"No, i don't want this\" \"DayChanged\">><<set $grouplesbian=0>><</link>>\n<<case 3>>\n<<if $grouplesbian==1>>\\\n<img src=\"images/LesbianGroup3.jpg\" width=\"520\">\nAs we finished, Megan came closer to me and said \n- It was so fucking good! Did you enjoy?\n- A little bit... It is not comfortable for me yet - i'm not sure this is right. But money is money...\n- Actualy i forgot money in my room. Go there and take them please.\n<<set $money=$money+70>>\\\n[[Go to Megan's room|Megan's room]]\n<<else>>\\\n<img src=\"images/Megan.jpg\" height=\"520\">\n- I'm glad you are coming here. I wish you would meet the other girls...\n- Megan, you know i'm not into girls. You are the only one i trust, so don't push on me please.\n- Sorry, Susie - she hugs me - i won't do anything against your will.\nI got 50 dollars.\n<<set $money=$money+50>>\\\n[[Get some rest|DayChanged]]\n<</if>>\n<<default>>\n<<if $grouplesbian==1>>\\\n<img src=\"images/LesbianGroup3.jpg\" width=\"520\">\nI'm still kissing Megan and i dont want to go home. \n- I knew you like it, Susie! - said Megan pushing me away for a bit.\n- Of course she likes it! Where else will you find such wonderful pussies? - one of the girls laughs.\n- I have to go home, Kate will worry about me - i pick up my clothes.\n- Until next time then!\n- Bye-bye, Susieeee!\nI got 70 dollars.\n<<set $money=$money+70>>\\\n[[Get some rest|DayChanged]]\n<<else>>\\\n<img src=\"images/Megan.jpg\" height=\"520\">\nMegan and I lie on a bed in a hug. This girl is wonderful. I just can't get enough of her.\nBut time is limited, i can't risk coming home at evening so i have to go now. \nI got 50 dollars.\n<<set $money=$money+50>>\\\n[[Get some rest|DayChanged]]\n<</if>>\n<</switch>>\\\n<<set $corruption=$corruption+3>>"
+    },
+    {
+      "name": "ElderKill",
+      "tags": [],
+      "source_raw": "<img src=\"images/elderkill.jpg\">\n- Wait, master. I want to thank you for all you did to me! - i come closer and hug him. He didn't do anything but stood still. Now! This is the moment!\nI stuck a dagger in his back and heard scream. He pushed me off and  fell on his knee. \n- Bitch! What have you done!\nHe tried to remove the dagger, but could not reach it. I lie on the floor and see how his blood flows down making a small bloody lake under his legs. After a few moments he fell down. He did not move. Silence... the air was so tough it could be cutted with knife. My trembling body started to calm down and i tried to  stand up. I stepped over elder's body and ran away through the [[door|KillEnd]].\n"
+    },
+    {
+      "name": "KillEnd",
+      "tags": [],
+      "source_raw": "<<if $KateBirth==0>>\\\nI returned to Kate's house and found her reading a book.\n- Oh my god! What happened to you? - her gaze was full of natural surprise.\n- Kate, i've killed the elder! We have to run now! - my heart beat was crazy, legs shaking and voice incredibly high. \n- What!? - she jumped from her chair. In a moment she took my face with her soft hands and looked in my eyes.  Her skin was soft, like a silk on touch. This feeling threw away my panic and horror and i completely calmed down. \n- Kate, we have to hurry. I think elder's acolytes are busy now and we can escape through the main gate. I'm pretty sure its unprotected now.\nShe didn't say anything. Ofcourse we were both shocked but time is not on our side. \nI helped her to pack up. After this we went to street and moved toward the gate. As soon as we reached the gate i saw a bunch of people near the elder's house. They are acolytes, no doubt. I heard a few screams from his house. Not only one was screaming. It looked like someone was fighting. \nI turned back and walked to the gate. They are opened... Of course they didn't need to put a lock cuz nobody tried to [[escape|EpilogueNonPreg]].\n<<else>>\\\nI returned home covered in blood. I immediately tried to wash the blood in the bathroom, but it did not help. I changed into new clothes and started looking for Kate.\nShe was with another man in her bedroom. I can’t reach her, it’s my fault. Through tears, I packed my things and ran out into the street. I have to run away.\n[[Epilogue|SoloEnd]] \n<</if>>\\"
+    },
+    {
+      "name": "Megan's room",
+      "tags": [],
+      "source_raw": "I took my money. There is a [[red diary]] lying on her bed. Maybe i should take a little peek?\n[[Get some rest|DayChanged]]\n"
+    },
+    {
+      "name": "red diary",
+      "tags": [],
+      "source_raw": "<img src=\"images/Sean.jpg\"> <img src=\"images/Sean2.jpg\">\nName: Sean Steevenson, Age: 22, New name : Lisa\n\n<img src=\"images/Cole.jpg\"> <img src=\"images/Cole2.jpg\">\nName: Cole Hendriks, Age: 28, New name : Coleen\n\n<img src=\"images/John.jpg\"> <img src=\"images/John2.jpg\">\nName: John Doe, Age: 19, New name : Jessy\n\nWait a minute, this girls were mans before?\n<<return>>"
+    },
+    {
+      "name": "basement",
+      "tags": [],
+      "source_raw": "<img src=\"images/lab.jpg\" height=\"520\">\nI went down to the basement. After a long descent down, I went into the lighted area. Everything is made of concrete. \nA narrow bridge leads to the [[west]], north and [[east]]. \nThe north gate is closed. This is indicated by the red inscription \"Quarantine. The gate is closed.\"\n[[Up|Home]] "
+    },
+    {
+      "name": "west",
+      "tags": [],
+      "source_raw": "<img src=\"images/west.jpg\" height=\"520\">\nThere is much less light in this room. It seems that emergency power sources are working in the laboratory. There are a bunch of bottles with incomprehensible contents inside. I see several tables. On each of them is written the number: No. 1, No. 2, No. 3. It seems i need a key to open atleast one of them.\n<<if $inventory.contains(\"key\")>>\\\n[[Open №2]]\n<<else>>\\\n<<if $DrugLocation==1>>\n<<link \"Get the key\" \"west\">><<set $inventory.push(\"key\")>><</link>><</if>>\n<</if>>\\\n[[Go back|basement]]"
+    },
+    {
+      "name": "east",
+      "tags": [],
+      "source_raw": "The east wing turned out to be an ordinary archive. There are a lot of documents and they are all useless to me. \nIt will take years to study them. \nHowever, I see a [[black folder]] under the table. All folders here have a transparent cover and this one is different.\n[[Go back|basement]]"
+    },
+    {
+      "name": "Open №2",
+      "tags": [],
+      "source_raw": "<<switch visited()>>\n<<case 1>>\nI found a small bottle of violet liquid on the table. Next to her lies a bloody sheet of paper.\n<<set $inventory.push(\"VZ-173\")>>\\\n<img src=\"images/note.jpg\">\nSo this drug can make a person more obedient? I could use it for my own purposes. We need money to escape from here. Maybe I can get Kate to work?\n<<default>>\nThere is nothing left.\n<</switch>>\n[[Close|west]]\n"
+    },
+    {
+      "name": "black folder",
+      "tags": [],
+      "source_raw": "//\nJan.14\nWe received an order from the government of the United States of America. They want us to develop a virus that enhances the physical capabilities of soldiers and prevents them from becoming infected with other viruses.\n\nFeb.22\nAfter signing all the contracts for hiring employees, we moved to our testing laboratory. This place was chosen because of its remoteness from the rest of the world. It was a resort, and for us an ideal place to start experiments.\n\nMar.9\nMr. Abrams discovered that the Monoamine oxidase gene works best with our drug. It increases the physical strength of a person, but also aggression. It was decided to create a drug VZ-173 to reduce aggression and control of experimental subjects.\n\nApr.30\nThe results are amazing! We achieved the desired result in just 2 months. But that's not all! We also found that with minor changes, our drug takes on completely different properties. It still increases strength, but does not affect the brain; instead, it transforms body cells at the genetic level! Yesterday, the subject grew by 14 centimeters after taking the drug. For each transformation acts differently. And it seems that it depends on the desire of the test object.\n\nMay.23\nWe started some problems. It seems a traitor among us. Someone sent experiment documents to the US government and they decided to close the project because they did not want to deal with human experiments. What fools they are. Surely they do not understand that we made a real discovery here?\nThey will not get results. I'll do this in my way now...\n//\n[[Stop reading|east]]\n"
+    },
+    {
+      "name": "Pour VZ-173",
+      "tags": [],
+      "source_raw": "<img src=\"images/wine.jpg\" height=\"520\">\nKate, as usual, drank wine in the evenings, so I quietly poured VZ-173 into her glass. She continued to drink her drink and did not notice anything. Hope this works.\nHow long should I [[wait|KateCorruption]] for this to work?\n<<set $index = $inventory.indexOf(\"VZ-173\")>>\\\n<<if $index gt -1>>\\\n <<set $inventory.pluck($index, $index+1)>>\\\n<</if>>\\"
+    },
+    {
+      "name": "KateCorruption",
+      "tags": [],
+      "source_raw": "I waited an hour and a half. Maybe it's time to check if the drug is working?\n- Kate, come here please.\nShe left her glass on the table and came up to me.\n- What did you want?\nI'm nervous. \nSuddenly this is all complete nonsense and the drug does not work?\nI hardly say my words.\n- Show me your tits.\nShe stares at me silently. Heck. Didn't it work?\n<img src=\"images/KateFlash.gif\">\n\nOh my go, it works!\nLet's try something [[more|KateCorruption2]]"
+    },
+    {
+      "name": "KateCorruption2",
+      "tags": [],
+      "source_raw": "- Undress and dance for me, Kate.\nShe immediately took off all her clothes except her panties and began to dance.\n<img src=\"images/KateDance.gif\">\n\nWell, now is the time to think about how to use this situation to our advantage. \nKate obeys me, so I can order her anything?\nI don’t want something bad to happen to her. But in our situation, we must act both if we want to get out of here.\n- Kate, stop dancing and listen to me please. I have something important to say.\nShe stoped to dance. Now she just standing almost fully naked and looking at me.\n- Do you know that we should get out of here as soon as possible?\nShe nods.\n- We need money to buy some things. If I work alone, then we will not get out of here soon. Do you understand?\nShe nods.\n- I want you to start working tomorrow. Try to choose the job that pays the most. But only the one that does not hurt you.\n- Okay, Susie. I will start tomorrow. You can count on me! - she smiles.\n- I am glad that we have solved this problem. It's time to sleep now. Good night.\n- Good night Susie - she just turned around and walked inside her bedroom naked.\nI have a strange feeling that I did something bad.\n[[Sleep|DayChanged]] \n<<set $KateProst=1>>"
+    },
+    {
+      "name": "your belly",
+      "tags": [],
+      "source_raw": "<<switch visited()>>\\\n<<case 1>>\\\n<img src=\"images/KateP2.jpg\" height=\"520\">\n\n- You are pregnant, right?\n- Yes I know.\n- Are you not worried about this?\n- Why should I worry?\n- Kate, if you found a man for yourself, you could have said that before.\n- But I don’t know who the father of the child is.\n- Why dont you know? What happened to you?\nKate said that after my request to find the highest paid job, she went through the whole city. She asked wherever possible and compared salaries. The highest was in the brothel. So she started working there. \nIs it really my fault? What have I done?\n- Kate, you must stop working there!\n- Sorry, Susie, i can't. Matron said not to listen to anyone but her.\nWait, is this working that way? Shit! It seems i cannot do anything about this.\nSorry, Kate...\n<<default>>\\\n<<if $KatePregDays gte 12 and $KatePregDays lte 22>>\\\n<img src=\"images/KateP2.jpg\" height=\"520\">\n- How are you doing, Kate?\n- Thanks, im fine. The child is okay too.\n<<elseif $KatePregDays gte 22 and $KatePregDays lte 33>>\\\n<img src=\"images/KateP3.jpg\" height=\"520\">\n- It seems your due date is soon.\n- Yeah, im pretty nervous about giving birth.\n- Why? You said you are okay with that.\n- I do not worry about birth. I worry about giving birth and having another baby as soon as possible.\n- What?\n- Matron said that clients love pregnant girls. Therefore, she told me to be always pregnant.\nWhat the hell is this? Due to her metabolism, we will have a whole army of children soon!\n<</if>>\\<</switch>>\n[[End conversation|KateHome]]"
+    },
+    {
+      "name": "SoloEnd",
+      "tags": [],
+      "source_raw": "!!2 years later\n  Two years have passed since those terrible events. It seems life has bounced back.I was pregnant and i don't even know who the father of the child is. It doesnt matter, i must live a normal life.\nI remember Kate sometime. I could save us, but I left her.\nI have not heard any news about that village.\n  On television, news of increasing attacks on people is shown. Some kind of rabies virus. I hope this is not related to what I saw ...\n<<if $grouplesbian is 1>>\\\nMegan ran away with me. We remained as lovers. She founded her own clothing brand, so we don't need money anymore! \n<</if>>\\\n!Good ending \"Escaped\"(not without a scrifice)"
+    },
+    {
+      "name": "Start",
+      "tags": [],
+      "source_raw": "Special thanks to:\nBlauz for his enonormous amount of help with writings and inspiration. Without him i would never start creating games.\nTemnoRytsar for his help with pictures. He saved me a lot of time.\nI was creating this game for a long time since i had some problems. I tried to make some new mechanics to make game interesting. This is sandbox-like game. \nIt has different endings. The good endings also has variations. Try to find them all. Good luck.\n[[Start|0]] "
+    },
+    {
+      "name": "milking",
+      "tags": [],
+      "source_raw": "<img src=\"images/milking.jpg\" height=\"520\">\nI use a breast pump to collect some milk.\nMilk bottle +1\n[[End pumping|Home]]\n<<set $milk=$milk+1>>\n<<set $lactating=0>>"
+    }
+  ]
+}

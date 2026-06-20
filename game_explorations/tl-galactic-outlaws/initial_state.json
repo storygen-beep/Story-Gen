@@ -1,0 +1,32 @@
+{
+  "captured_at": "2026-06-07T21:48:27.209Z",
+  "ts": 1780868907209,
+  "engine": "sugarcube",
+  "engine_version": [
+    "(revive:eval)",
+    "(function(){var e=this.prerelease?\"-\"+this.prerelease:\"\";return this.title+\" (v\"+this.major+\".\"+this.minor+\".\"+this.patch+e+\")\"})"
+  ],
+  "passage": "start",
+  "variables": {
+    "inventory": [
+      "(revive:eval)",
+      [
+        "new setup.Inventory([])",
+        null
+      ]
+    ],
+    "timenum": 1,
+    "day": 2
+  },
+  "save_caps": {
+    "stateMarshal": true,
+    "engineShow": true,
+    "serialize": true,
+    "slots": true,
+    "saveNamespace": "SugarCube.Save"
+  },
+  "state_hash": "c10cc83070f0f85f",
+  "body_text": "\n\n\n\nGalactic Outlaws\nAll content takes place between consenting adults of at least 18 years of age. This is a work of fiction, all names, characters, businesses, places, events, locales, and incidents are fictitious.\n\nIf you are over 18 and want to play the game click the \"Start\" button. If not, close this tab.\n\n\nSTART\n\n\nSPECIAL THANKS\n\n",
+  "body_html": "<br><br><br><div class=\"logo\"><b>Ga<span>la</span>c<span>t</span>ic<span> Ou</span>tl<span>a</span>w<span>s</span></b></div><div class=\"narrator\">All content takes place between consenting adults of at least 18 years of age. This is a work of fiction, all names, characters, businesses, places, events, locales, and incidents are fictitious.<br><br>If you are over 18 and want to play the game click the \"Start\" button. If not, close this tab.<br><br><center><button data-passage=\"mc_create1\" class=\"link-internal macro-button\" type=\"button\" tabindex=\"0\">Start</button><br><br><br><button data-passage=\"Special thanks\" class=\"link-internal macro-button\" type=\"button\" tabindex=\"0\">Special thanks</button></center><br></div>",
+  "modal_text": null
+}

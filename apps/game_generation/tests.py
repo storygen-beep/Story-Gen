@@ -655,6 +655,179 @@ class PhaseANpcScheduleTests(TestCase):
         )
 
 
+class NpcAtLocationConditionTests(TestCase):
+    """Shared-space occupancy predicate (redesign_phase_3/25).
+
+    The `npc_at_location` condition type asks cross-room NPC presence — the
+    foundation of peep / occupied-bathroom / caught. It validates permissively
+    (condition types have no allowlist) and emits an evaluator branch in
+    `triggerConditionsSatisfied` plus the `getNpcsAtLocation` helper that backs
+    the any-NPC (room occupied/empty) form.
+
+    NOTE: the evaluator is JS embedded in a string template; the Python suite does
+    NOT execute it. These tests prove *emitted + validates*, not runtime gating —
+    runtime correctness is a live-play check (a peep/occupied canvas in a real game).
+    """
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = User.objects.create_user(
+            email="npc-at-location@example.com", password="testpass123"
+        )
+
+    def _template(self, condition_items, *, entry_conditions=None):
+        loc_id = "loc_bathroom"
+        hall_id = "loc_hallway"
+        npc_id = "npc_frank"
+        canvas_id = "canvas_peep"
+        td = {
+            "schema_version": "1.0",
+            "project": {
+                "id": "occ_test",
+                "title": "Occupancy Fixture",
+                "description": "Minimal fixture for npc_at_location.",
+                "starting_canvas": canvas_id,
+            },
+            "time": {"enabled": True, "starting_hour": 8, "starting_day": "Monday"},
+            "locations": [
+                {"id": hall_id, "name": "Hallway", "description": "The hallway"},
+                {"id": loc_id, "name": "Bathroom", "description": "Shared bath"},
+            ],
+            "npcs": [
+                {
+                    "id": npc_id,
+                    "name": "Frank",
+                    "description": "Fixture NPC",
+                    "core_traits": {},
+                    "flag_keys": [],
+                    "schedules": [
+                        {
+                            "location": loc_id,
+                            "weekdays": [0, 1, 2, 3, 4, 5, 6],
+                            "start_time": "06:00",
+                            "end_time": "10:00",
+                            "activity": "showering",
+                        },
+                    ],
+                },
+            ],
+            "canvases": [
+                {
+                    "id": canvas_id,
+                    "name": "Peep Canvas",
+                    "type": "scene",
+                    "trigger": {
+                        "location": hall_id,
+                        "is_active": True,
+                        "is_repeatable": True,
+                        "trigger_mode": "random",
+                        "chance": 0.5,
+                        "conditions": {"version": "1.0", "items": condition_items},
+                    },
+                    "nodes": [
+                        {
+                            "id": "n1",
+                            "name": "Test Node 1",
+                            "blocks": [
+                                {"type": "paragraph", "props": {},
+                                 "content": [{"type": "text", "text": "test"}]}
+                            ],
+                        }
+                    ],
+                },
+            ],
+        }
+        if entry_conditions is not None:
+            for loc in td["locations"]:
+                if loc["id"] == loc_id:
+                    loc["entry_conditions"] = entry_conditions
+                    loc["blocked_message"] = "The door's shut. Someone's in there."
+        return td
+
+    def _build_and_generate(self, raw):
+        import copy
+        from apps.projects.services.template_import import (
+            normalize, validate, create_project_from_template,
+        )
+        from apps.game_generation.twee_comprehensive.generators.v2 import (
+            TweeComprehensiveGeneratorV2,
+        )
+        template = normalize(copy.deepcopy(raw))
+        errors = validate(template)
+        self.assertEqual(errors, [], f"Fixture should validate clean: {errors}")
+        result = create_project_from_template(template, str(self.user.id))
+        project = Project.objects.get(id=result["project_id"])
+        twee = TweeComprehensiveGeneratorV2().generate(project)
+        return project, twee
+
+    def test_all_forms_validate_clean(self):
+        """present/absent, specific-NPC and any-NPC forms validate with no errors
+        (condition types are permissive — no allowlist registration needed)."""
+        import copy
+        from apps.projects.services.template_import import normalize, validate
+        items = [
+            {"type": "npc_at_location", "npc_id": "npc_frank",
+             "location_id": "loc_bathroom", "operator": "is_present"},
+            {"type": "npc_at_location", "npc_id": "npc_frank",
+             "location_id": "loc_bathroom", "operator": "is_absent"},
+            {"type": "npc_at_location", "location_id": "loc_bathroom",
+             "operator": "is_present"},
+        ]
+        template = normalize(copy.deepcopy(self._template(items)))
+        errors = validate(template)
+        self.assertEqual(errors, [],
+                         f"npc_at_location should validate clean: {errors}")
+
+    def test_evaluator_branch_and_helper_emitted(self):
+        """The generated runtime carries the npc_at_location evaluator branch and
+        the getNpcsAtLocation helper backing the any-NPC occupancy form."""
+        raw = self._template([
+            {"type": "npc_at_location", "npc_id": "npc_frank",
+             "location_id": "loc_bathroom", "operator": "is_present"},
+        ])
+        _, twee = self._build_and_generate(raw)
+        self.assertIn("type === 'npc_at_location'", twee,
+                      "evaluator must dispatch the npc_at_location condition type")
+        self.assertIn("setup.getNpcsAtLocation", twee,
+                      "the any-NPC occupancy helper must be emitted")
+
+    def test_entry_conditions_occupied_block_builds(self):
+        """A location whose entry_conditions use npc_at_location(is_absent) — the
+        'bathroom occupied, can't enter' shape — builds, validates, and generates."""
+        raw = self._template(
+            [{"type": "npc_at_location", "npc_id": "npc_frank",
+              "location_id": "loc_bathroom", "operator": "is_present"}],
+            entry_conditions={"version": "1.0", "items": [
+                {"type": "npc_at_location", "location_id": "loc_bathroom",
+                 "operator": "is_absent"},
+            ]},
+        )
+        _, twee = self._build_and_generate(raw)
+        self.assertIn("type === 'npc_at_location'", twee)
+
+    def test_nav_presence_badge_is_schedule_occupancy(self):
+        """The nav-card "someone's here" badge uses schedule-occupancy
+        (getNpcsPresentAtLocation → getNpcsAtLocation) — the SAME logic as the
+        door — so the map and the occupied-bathroom block always agree. The old
+        canvas-gated feeder is gone; the clickable portrait grid
+        (renderNpcPortraits) stays canvas-gated."""
+        raw = self._template([
+            {"type": "npc_at_location", "npc_id": "npc_frank",
+             "location_id": "loc_bathroom", "operator": "is_present"},
+        ])
+        _, twee = self._build_and_generate(raw)
+        self.assertIn("setup.getNpcsPresentAtLocation", twee,
+                      "nav presence feeder must be the schedule-based one")
+        self.assertNotIn("getNpcsWithCanvasesAtLocation", twee,
+                         "the old canvas-gated nav feeder must be gone")
+        i = twee.find("setup.getNpcsPresentAtLocation = function")
+        body = twee[i:i + 800]
+        self.assertIn("setup.getNpcsAtLocation", body,
+                      "nav presence must seed from schedule-occupancy")
+        self.assertNotIn("selectNpcPortraitCanvasesForLocation", body,
+                         "nav presence must NOT require a canvas")
+
+
 class Doc69FieldNameValidatorTests(TestCase):
     """Doc 69 Item 3 — Field-name mismatch validator.
 
@@ -2243,3 +2416,172 @@ class ChoiceCostsTests(TestCase):
         twee = self._build(TweeComprehensiveGeneratorV1, with_costs=False)
         self.assertNotIn("<<if setup.checkCostsAffordable(", twee,
                          "no costs anywhere → no per-choice cost guard call site")
+
+
+class TravelFrictionAndLockProseTests(TestCase):
+    """Location entry-cost (travel friction) + lock-as-prose on the nav surface
+    (2026-06-18). v2-only — the v1 generator is deprecated.
+
+    Travel friction: a [[locations]] `costs = {time, energy}` is charged on a genuine
+    move (entering a DIFFERENT location), enforced in the :passagestart guard.
+    Lock-as-prose: a destination with entry_conditions renders its blocked_message
+    in-place on the nav (greyed, non-clickable) instead of only on the blocked passage.
+    """
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = User.objects.create_user(
+            email="travel-friction@example.com", password="testpass123"
+        )
+
+    def _build_template(self, *, costs=None, entry_conditions=None, blocked_message=""):
+        """Kitchen (start) → Pantry (a reachable destination that may carry an entry
+        cost and/or a visible-but-blocked lock). One ungated canvas at the kitchen so
+        the build validates."""
+        start = "loc_kitchen"
+        dest = "loc_pantry"
+        canvas_id = "canvas_kitchen_idle"
+        pantry = {"id": dest, "name": "Pantry", "description": "A back pantry.",
+                  "entry_from": start}
+        if costs is not None:
+            pantry["costs"] = costs
+        if entry_conditions is not None:
+            pantry["entry_conditions"] = entry_conditions
+        if blocked_message:
+            pantry["blocked_message"] = blocked_message
+        return {
+            "schema_version": "1.0",
+            "project": {"id": "travel_test", "title": "Travel Fixture",
+                        "description": "Travel-friction + lock-as-prose fixture.",
+                        "starting_canvas": canvas_id},
+            "time": {"enabled": True, "starting_hour": 8, "starting_day": "Monday"},
+            "locations": [
+                {"id": start, "name": "Kitchen", "description": "Test kitchen",
+                 "navigation_order": [dest]},
+                pantry,
+            ],
+            "npcs": [],
+            "canvases": [
+                {"id": canvas_id, "name": "Kitchen Idle", "type": "scene",
+                 "trigger": {"location": start, "is_active": True, "is_repeatable": True},
+                 "nodes": [{"id": "n1", "name": "N1", "blocks": [
+                     {"type": "paragraph", "props": {},
+                      "content": [{"type": "text", "text": "test"}]}]}]},
+            ],
+        }
+
+    def _generate(self, raw):
+        import copy
+        from apps.projects.services.template_import import (
+            normalize, validate, create_project_from_template)
+        from apps.game_generation.twee_comprehensive.generators.v2 import (
+            TweeComprehensiveGeneratorV2)
+        template = normalize(copy.deepcopy(raw))
+        errors = validate(template)
+        self.assertEqual(errors, [], f"Fixture should validate clean: {errors}")
+        result = create_project_from_template(template, str(self.user.id))
+        project = Project.objects.get(id=result["project_id"])
+        return TweeComprehensiveGeneratorV2().generate(project)
+
+    @staticmethod
+    def _extract_setup_assignment(twee, varname):
+        import json
+        import re
+        m = re.search(r'setup\.' + re.escape(varname) + r'\s*=\s*', twee)
+        if not m:
+            return None
+        start = m.end()
+        if start >= len(twee) or twee[start] != '{':
+            return None
+        depth = 0
+        for i in range(start, len(twee)):
+            ch = twee[i]
+            if ch == '{':
+                depth += 1
+            elif ch == '}':
+                depth -= 1
+                if depth == 0:
+                    return json.loads(twee[start:i + 1])
+        return None
+
+    # ----- Travel friction -----
+    def test_entry_costs_round_trip_into_setup_locations(self):
+        """costs in TOML → importer properties['entry_costs'] → setup.locations blob.
+        One assertion exercises the whole parse→properties→emit path."""
+        twee = self._generate(self._build_template(costs={"time": 30, "energy": 10}))
+        locs = self._extract_setup_assignment(twee, "locations")
+        self.assertIsNotNone(locs, "setup.locations should be emitted")
+        self.assertEqual(locs.get("loc_pantry", {}).get("entry_costs"),
+                         {"time": 30, "energy": 10})
+
+    def test_travel_block_passage_emitted_only_with_costs(self):
+        with_costs = self._generate(self._build_template(costs={"energy": 5}))
+        self.assertIn(":: TravelBlock", with_costs)
+        self.assertIn("Travel-friction intercept", with_costs)
+        without = self._generate(self._build_template())
+        self.assertNotIn(":: TravelBlock", without)
+        self.assertNotIn("Travel-friction intercept", without)
+
+    def test_cost_tag_rendered_in_nav(self):
+        twee = self._generate(self._build_template(costs={"time": 30}))
+        self.assertIn('setup.getLocationCostTag("loc_pantry")', twee)
+
+    def test_deduct_location_costs_advances_time(self):
+        twee = self._generate(self._build_template(costs={"time": 30}))
+        self.assertIn("setup.deductLocationCosts = function", twee)
+        self.assertIn("window.advanceTime(mins)", twee)
+
+    def test_validate_rejects_negative_cost(self):
+        import copy
+        from apps.projects.services.template_import import normalize, validate
+        template = normalize(copy.deepcopy(self._build_template(costs={"energy": -5})))
+        errors = validate(template)
+        self.assertTrue(any("costs" in e and "negative" in e for e in errors),
+                        f"expected a negative-cost validation error, got {errors}")
+
+    # ----- Lock-as-prose -----
+    def _flag_conditions(self):
+        return {"version": "1.0", "items": [
+            {"type": "flag", "subject": "player", "flag_key": "pantry_open",
+             "operator": "is_true"}]}
+
+    def test_entry_conditions_round_trip_into_setup_locations(self):
+        ec = self._flag_conditions()
+        twee = self._generate(self._build_template(
+            entry_conditions=ec, blocked_message="It's locked."))
+        locs = self._extract_setup_assignment(twee, "locations")
+        self.assertEqual(locs.get("loc_pantry", {}).get("entry_conditions"), ec)
+        self.assertEqual(locs.get("loc_pantry", {}).get("blocked_message"), "It's locked.")
+
+    def test_nav_wraps_locked_destination(self):
+        twee = self._generate(self._build_template(
+            entry_conditions=self._flag_conditions(), blocked_message="It's locked."))
+        self.assertIn('setup.navDestUnlocked("loc_pantry")', twee)
+        self.assertIn('setup.navDestBlockedReason("loc_pantry")', twee)
+        # The greyed branch renders in whichever nav mode the fixture lands in.
+        self.assertTrue("location-card-locked" in twee or "nav-link-locked" in twee,
+                        "a locked destination should render the greyed lock-as-prose branch")
+
+    def test_unlocked_destination_navigable(self):
+        """No entry_conditions → setup.locations carries an empty dict (fail-open) and
+        the destination is still a real navigable target."""
+        twee = self._generate(self._build_template())
+        locs = self._extract_setup_assignment(twee, "locations")
+        self.assertEqual(locs.get("loc_pantry", {}).get("entry_conditions"), {})
+        self.assertTrue('data-passage="Location_Pantry"' in twee
+                        or "[[Pantry->Location_Pantry]]" in twee,
+                        "an unlocked destination should be a navigable nav target")
+
+    def test_navdest_unlocked_helper_fails_open_on_versionless(self):
+        """Structural guard: the helper short-circuits to open when there are no
+        condition items, so a versionless/empty block renders a normal link (the same
+        fail-open the passage guard + the global evaluator use)."""
+        twee = self._generate(self._build_template(costs={"energy": 1}))
+        self.assertIn("if (!ec.items || ec.items.length === 0) return true;", twee)
+
+    def test_passage_guard_and_nav_share_blocked_reason(self):
+        twee = self._generate(self._build_template(
+            entry_conditions=self._flag_conditions(), blocked_message="It's locked."))
+        # The passage backstop renders the same authored message the nav helper returns.
+        self.assertIn("entry-blocked-narrative", twee)
+        self.assertIn("It's locked.", twee)

@@ -1,0 +1,37 @@
+{"ts":"2026-06-14T14:41:35.852Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"Start","state_hash":"4b9c85afe9c0ce1f"}
+{"ts":"2026-06-14T14:42:05.554Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"Start","state_hash":"4b9c85afe9c0ce1f"}
+{"ts":"2026-06-14T14:42:22.580Z","session_id":1,"cmd":"dom","args":{"filter":"18 or older"},"ok":true}
+{"ts":"2026-06-14T14:42:29.413Z","session_id":1,"cmd":"click","args":{"xy":"859,487"},"ok":true,"passage":"CustomizeCharacters","state_hash":"74f4f5be82c3d466","method":"xy(859,487)","state_changed":true}
+{"ts":"2026-06-14T14:42:29.992Z","session_id":1,"cmd":"dom","args":{"filter":"Continue to Game"},"ok":true}
+{"ts":"2026-06-14T14:42:30.095Z","session_id":1,"cmd":"click","args":{"xy":"860,659"},"ok":true,"passage":"StartingCanvas_canvas_arrival_Node_1","state_hash":"d76dc58ee7edd147","method":"xy(860,659)","state_changed":true}
+{"ts":"2026-06-14T14:43:04.567Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"StartingCanvas_canvas_arrival_Node_1","state_hash":"d76dc58ee7edd147"}
+{"ts":"2026-06-14T14:43:12.720Z","session_id":1,"cmd":"dom","args":{"filter":"Go in"},"ok":true}
+{"ts":"2026-06-14T14:43:16.958Z","session_id":1,"cmd":"click","args":{"xy":"449,543"},"ok":true,"passage":"Canvas_canvas_will_reading_Node_1","state_hash":"6c8f56eaaf32a5c6","method":"xy(449,543)","state_changed":true}
+{"ts":"2026-06-14T14:43:32.229Z","session_id":1,"cmd":"eval","args":{"positional":["\nvar sv=SugarCube.State.variables;\nsv.flags = sv.flags || {};\nsv.flags.first_arrival_done = true;\nsv.flags.will_read_done = true;\nreturn JSON.stringify({first:sv.flags.first_arrival_done, will:sv.flags.will_read_done});\n"]},"ok":true,"passage":"Canvas_canvas_will_reading_Node_1","state_hash":"37e653415d6c7c58"}
+{"ts":"2026-06-14T14:43:56.068Z","session_id":1,"cmd":"eval","args":{"positional":["\ntry { SugarCube.Engine.play('Location_The_Drawing_Room'); return 'played'; }\ncatch(e){ return 'ERR '+e.message; }\n"]},"ok":true,"passage":"Location_The_Drawing_Room","state_hash":"c270205031496325"}
+{"ts":"2026-06-14T14:43:57.614Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"Location_The_Drawing_Room","state_hash":"c270205031496325"}
+{"ts":"2026-06-14T14:44:04.381Z","session_id":1,"cmd":"dom","args":{"filter":"Margaret"},"ok":true}
+{"ts":"2026-06-14T14:44:09.324Z","session_id":1,"cmd":"click","args":{"xy":"860,360"},"ok":true,"passage":"Canvas_marg_drawing_room_hub_Node_1","state_hash":"1d97d86202973025","method":"xy(860,360)","state_changed":true}
+{"ts":"2026-06-14T14:44:19.028Z","session_id":1,"cmd":"eval","args":{"positional":["window.scrollTo(0,document.body.scrollHeight);return 1;"]},"ok":true,"passage":"Canvas_marg_drawing_room_hub_Node_1","state_hash":"1d97d86202973025"}
+{"ts":"2026-06-14T14:44:24.232Z","session_id":1,"cmd":"dom","args":{},"ok":true}
+{"ts":"2026-06-14T14:44:36.757Z","session_id":1,"cmd":"eval","args":{"positional":["\nvar f=SugarCube.State.variables.flags;\nf.margaret_cornered=true; f.margaret_slave=true;\nSugarCube.Engine.play('Location_The_Drawing_Room');\nreturn JSON.stringify({cornered:f.margaret_cornered, slave:f.margaret_slave});\n"]},"ok":true,"passage":"Location_The_Drawing_Room","state_hash":"2cdac6a97350a93d"}
+{"ts":"2026-06-14T14:44:38.235Z","session_id":1,"cmd":"dom","args":{"filter":"Margaret"},"ok":true}
+{"ts":"2026-06-14T14:44:38.326Z","session_id":1,"cmd":"click","args":{"xy":"860,360"},"ok":true,"passage":"Canvas_marg_drawing_room_hub_Node_1","state_hash":"faa221fec408a435","method":"xy(860,360)","state_changed":true}
+{"ts":"2026-06-14T14:44:45.304Z","session_id":1,"cmd":"eval","args":{"positional":["window.scrollTo(0,document.body.scrollHeight);return 1;"]},"ok":true,"passage":"Canvas_marg_drawing_room_hub_Node_1","state_hash":"faa221fec408a435"}
+{"ts":"2026-06-14T14:44:50.531Z","session_id":1,"cmd":"dom","args":{},"ok":true}
+{"ts":"2026-06-14T14:45:01.703Z","session_id":1,"cmd":"eval","args":{"positional":["SugarCube.Engine.play('Location_The_Study'); return SugarCube.State.variables.flags.richard_opened || 'unset';"]},"ok":true,"passage":"Location_The_Study","state_hash":"ede3b595984fdd42"}
+{"ts":"2026-06-14T14:45:03.221Z","session_id":1,"cmd":"dom","args":{"filter":"Richard"},"ok":true}
+{"ts":"2026-06-14T14:45:03.315Z","session_id":1,"cmd":"click","args":{"xy":"860,360"},"ok":true,"passage":"Canvas_rich_study_hub_Node_1","state_hash":"363ad3408111bb94","method":"xy(860,360)","state_changed":true}
+{"ts":"2026-06-14T14:45:10.671Z","session_id":1,"cmd":"eval","args":{"positional":["window.scrollTo(0,document.body.scrollHeight);return 1;"]},"ok":true,"passage":"Canvas_rich_study_hub_Node_1","state_hash":"363ad3408111bb94"}
+{"ts":"2026-06-14T14:45:15.915Z","session_id":1,"cmd":"dom","args":{},"ok":true}
+{"ts":"2026-06-14T14:45:25.675Z","session_id":1,"cmd":"eval","args":{"positional":["\nSugarCube.State.variables.flags.richard_opened=true;\nSugarCube.Engine.play('Location_The_Study');\nreturn SugarCube.State.variables.flags.richard_opened;\n"]},"ok":true,"passage":"Canvas_rich_ambient_alive_Node_1","state_hash":"ca2a6b35d1584718"}
+{"ts":"2026-06-14T14:45:27.217Z","session_id":1,"cmd":"dom","args":{"filter":"Richard"},"ok":true}
+{"ts":"2026-06-14T14:45:27.311Z","session_id":1,"cmd":"click","args":{"xy":"NONE"},"ok":false,"passage":"Canvas_rich_ambient_alive_Node_1","state_hash":"ca2a6b35d1584718","state_changed":false,"error":"--xy needs \"X,Y\" numeric"}
+{"ts":"2026-06-14T14:45:27.473Z","session_id":1,"cmd":"eval","args":{"positional":["window.scrollTo(0,document.body.scrollHeight);return 1;"]},"ok":true,"passage":"Canvas_rich_ambient_alive_Node_1","state_hash":"ca2a6b35d1584718"}
+{"ts":"2026-06-14T14:45:32.690Z","session_id":1,"cmd":"dom","args":{},"ok":true}
+{"ts":"2026-06-14T14:45:48.048Z","session_id":1,"cmd":"eval","args":{"positional":["SugarCube.Engine.play('Canvas_rich_study_hub_Node_1'); return 1;"]},"ok":true,"passage":"Canvas_rich_study_hub_Node_1","state_hash":"8a24bee7b81b9cbc"}
+{"ts":"2026-06-14T14:45:49.509Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"Canvas_rich_study_hub_Node_1","state_hash":"8a24bee7b81b9cbc"}
+{"ts":"2026-06-14T14:45:49.690Z","session_id":1,"cmd":"eval","args":{"positional":["window.scrollTo(0,document.body.scrollHeight);return 1;"]},"ok":true,"passage":"Canvas_rich_study_hub_Node_1","state_hash":"8a24bee7b81b9cbc"}
+{"ts":"2026-06-14T14:45:54.897Z","session_id":1,"cmd":"dom","args":{},"ok":true}
+{"ts":"2026-06-14T14:46:08.815Z","session_id":1,"cmd":"note","args":{"positional":["CANVAS-FOLD live-verify (turn 56). Both overlap warnings cleared; both folded hubs render correctly in BOTH states (verified by eval flag-flip on a fresh game). MARGARET marg_drawing_room_hub @ drawing room: cold-war state (margaret_cornered is_false) → sparring prose + ONLY 'Trade one more blow' choice; flip margaret_slave=true → slave prose + ONLY the 4 slave choices (domestic/sexual-use/put-on-floor/wait), cold-war choice hidden. RICHARD rich_study_hub @ study: pre-open (richard_opened false) → sit-with prose + ONLY 'Stay until he's eaten'; flip richard_opened=true → pursuit prose + ONLY 'Reward him', sit-with choice hidden. group blocks route body, per-choice conditions route exit, mutually-exclusive states never bleed. (Note: a Lane-2 ambient rich_ambient_alive rolls on study entry post-open — separate canvas, expected.) PASS."]},"ok":true}
+{"ts":"2026-06-14T14:46:08.915Z","session_id":1,"cmd":"stop","args":{},"ok":true}

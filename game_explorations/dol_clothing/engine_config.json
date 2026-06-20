@@ -1,0 +1,143 @@
+{
+  "captured_at": "2026-06-18T13:18:12.553Z",
+  "engine": "sugarcube",
+  "version": {
+    "name": null,
+    "major": 2,
+    "minor": 36,
+    "patch": 1,
+    "prerelease": null,
+    "build": 34,
+    "short": "SugarCube (v2.36.1)",
+    "toString": "2.36.1+34"
+  },
+  "config": {
+    "debug": false,
+    "addVisitedLinkClass": false,
+    "cleanupWikifierOutput": false,
+    "loadDelay": 0,
+    "audio": {
+      "pauseOnFadeToZero": true,
+      "preloadMetadata": true
+    },
+    "history": {
+      "controls": false,
+      "maxStates": 5,
+      "maxSessionStates": 40,
+      "maxExpired": 100,
+      "mode": "<error:Error: Config.history.mode has been deprecated and is no longer used by SugarCub>",
+      "tracking": "<error:Error: Config.history.tracking has been deprecated, use Config.history.maxStates>"
+    },
+    "macros": {
+      "ifAssignmentError": true,
+      "maxLoopIterations": 1000,
+      "typeSkipKey": " ",
+      "typeVisitedPassages": true
+    },
+    "navigation": {
+      "override": "<function>"
+    },
+    "passages": {
+      "displayTitles": false,
+      "nobr": false,
+      "onProcess": "<function>",
+      "start": "Start"
+    },
+    "saves": {
+      "autosave": [
+        "autosave"
+      ],
+      "id": "degrees-of-lewdity",
+      "isAllowed": "<function>",
+      "slots": 9,
+      "tryDiskOnMobile": true,
+      "useLZString": -1,
+      "onLoad": "<error:Error: Config.saves.onLoad has been deprecated, use the Save.onLoad API instead>",
+      "onSave": "<error:Error: Config.saves.onSave has been deprecated, use the Save.onSave API instead>"
+    },
+    "ui": {
+      "stowBarInitially": 800,
+      "updateStoryElements": true
+    }
+  },
+  "state": {
+    "turn": null,
+    "turns": 1,
+    "length": 1,
+    "bottom_title": "Start",
+    "active_title": "Start",
+    "temporary_keys": [
+      "globalThemeDefaults",
+      "globalGeneralDefaults",
+      "npc",
+      "tit",
+      "ins",
+      "tpe",
+      "swi",
+      "i",
+      "part",
+      "type",
+      "cr",
+      "temp0",
+      "bodypart",
+      "active_bodypart",
+      "labelM",
+      "valueM",
+      "defaultChimeraConfig",
+      "linksenabled",
+      "verify",
+      "tan",
+      "selectedStart",
+      "featTabName",
+      "buttons",
+      "temperatureRestingPoint"
+    ],
+    "prng_present": true,
+    "prng_state": null,
+    "history_length": 1,
+    "history_first_entry_shape": {
+      "keys": [
+        "title",
+        "variables",
+        "pull"
+      ],
+      "title": "Start"
+    },
+    "history_last_entry_shape": {
+      "keys": [
+        "title",
+        "variables",
+        "pull"
+      ],
+      "title": "Start"
+    },
+    "has_marshalForSave": true,
+    "has_unmarshalForSave": true
+  },
+  "story": {
+    "name": "Degrees of Lewdity",
+    "ifid": "A6AFB52D-38F2-4CB5-86A8-54BF665670D6",
+    "format": "SugarCube",
+    "format_version": "2.36.1",
+    "creator": "Tweego",
+    "creator_version": "2.1.1",
+    "startnode": "3",
+    "options": null,
+    "tags": null,
+    "zoom": "1",
+    "engine_title": "Degrees of Lewdity",
+    "engine_dom_id": "degrees-of-lewdity"
+  },
+  "settings": {},
+  "save_caps": {
+    "has_serialize": true,
+    "has_deserialize": true,
+    "has_slots": true,
+    "has_autosave": true,
+    "slot_count": 0,
+    "on_save_handlers": 1,
+    "on_load_handlers": 1,
+    "slots_metadata": [],
+    "autosave_metadata": null
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "Menu": {
+    "first_ts": 1780666731758,
+    "visit_count": 1
+  },
+  "Bedroom": {
+    "first_ts": 1780666792218,
+    "visit_count": 36
+  },
+  "BedroomStudy": {
+    "first_ts": 1780667609305,
+    "visit_count": 17
+  },
+  "BedroomSleep": {
+    "first_ts": 1780667741659,
+    "visit_count": 6
+  }
+}

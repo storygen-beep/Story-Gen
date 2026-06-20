@@ -1,0 +1,349 @@
+# Phase 2/7 — 2_one_shots.toml
+# The Inheritance — one-shot canvases. Scaffold: the boot/arrival only.
+# The will reading + meeting the family cold + the first want = beat_0002 (authored next).
+
+# ─── BOOT — canvas_arrival (structural drop-in; NOT the will-reading story beat) ──
+# Fires once on game start in the hotel lobby; sets first_arrival_done and drops the player
+# into the building. Priority 12 so nothing rolls before it.
+
+[[canvases]]
+id          = "canvas_arrival"
+name        = "Home"
+description = "Boot. Day 1. Catherine arrives at the hotel for the will reading. Establishes the building (public floor + residence above) + drops her in. Sets first_arrival_done."
+
+[canvases.trigger]
+location      = "loc_hotel"
+is_repeatable = false
+priority      = 12
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "first_arrival_done", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "intro"
+name = "Home"
+blocks = [
+  { type = "image", props = { file = "scenes/canvas_arrival.jpg", description = "A young woman stands with her bags outside a faded boutique hotel at dusk.", search_queries = ["boutique hotel exterior dusk", "young woman suitcase hotel entrance"] } },
+  { type = "paragraph", content = "The cab leaves you at the front of the hotel with your three bags and drives off before you've decided whether to go in. ELEANOR'S, the sign still reads over the doors — your mother's name, the boutique hotel she built and raised you above, one letter dead now at dusk with no one left who cares to fix it. Inside, the lobby is exactly as you left it years ago and nothing like it — smaller, shabbier, the desk unmanned, Eleanor's hand on every surface and Eleanor nowhere in it. Up the stairs behind the desk, the residence where she raised you and then stood by while the new family wrote you out of it. You're the daughter from before — the one she had when it was just the two of you, and the one she chose to lose when it wasn't. You walked out, and she never once said your name to stop you. You came back for the paper. You're staying for the rest." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Now she's dead and can't make it right. So I'll make it mine instead. They wrote me off — that was the first mistake." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go in."
+targetType = "location"
+locationId = "loc_hotel"
+time_progression_minutes = 10
+flagEffects = [
+  { targetType = "player", flag = "first_arrival_done", op = "set" },
+]
+
+# ─── beat_0002 — canvas_will_reading (the opening: meet the family cold + the pressure) ──
+# Fires once in the hotel lobby right after arrival. Tier-3 cold register (once-only opener).
+# Introduces the whole cast in the one room they're all in; lands the foreclosure + the weak
+# claim; sharpens the first want. Sets will_read_done. Per-NPC on-ramps are their own beats.
+
+[[canvases]]
+id          = "canvas_will_reading"
+name        = "The reading of the will"
+description = "beat_0002. Opening capstone. The family assembled; Halloway reads the will; cold read of each (Margaret/Grayson/Richard/Audrey); foreclosure + weak claim land; first want sharpens. Sets will_read_done."
+
+[canvases.trigger]
+location      = "loc_hotel"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "first_arrival_done", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "will_read_done",     operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "reading"
+name = "The reading of the will"
+blocks = [
+  { type = "image", props = { file = "scenes/canvas_will_reading.jpg", description = "A family sits assembled in a dim drawing room while a lawyer reads the will at the cold hearth.", search_queries = ["drawing room family gathered will", "lawyer reading will old man"] } },
+  { type = "paragraph", content = "They've put the reading in the drawing room, under your mother's portrait — the woman who chose this room full of them over you, and died before you could make her answer for it — with the fire let down to ash because no one thought to keep it. Four of them arranged across the good furniture like pieces someone set out and forgot to play. Halloway stands at the cold hearth with a leather folder and the patience of a man billing by the hour. The chair they've left you is the one nearest the door — the one you sit in when no one expects you to stay." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Take the chair.", blocks = [
+        { type = "paragraph", content = "Halloway clears his throat into the quiet and begins to read, and the room arranges itself around the document the way iron filings arrange around a magnet — everyone leaning toward the part that's theirs. You sit very still and watch them do it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_halloway" }, content = "Now that Miss Catherine has joined us, we can begin. I'll keep it brief — there isn't much here that's simple." },
+    ] },
+    { advance_text = "Read the aunt.", blocks = [
+        { type = "paragraph", content = "Your aunt Margaret hasn't moved since you came in. Eleanor's sister, in Eleanor's house, in a chair she's already decided is hers — hands folded, a small patient smile she aims at you like a compliment with a blade in it. She isn't listening to Halloway. She's watching you listen." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_margaret" }, content = "Catherine. We weren't sure you'd come — it has been so long. How good of you to find the time." },
+        { type = "thought_bubble", props = { speaker = "npc_margaret" }, content = "So the prodigal came after all. Good. I do my best work when I can see the board." },
+    ] },
+    { advance_text = "Read the brother.", blocks = [
+        { type = "paragraph", content = "Your half-brother Grayson is slouched into the wingback like the will is a formality keeping him from somewhere better, one ankle over a knee, already spending money the paper hasn't given him yet — Eleanor's son and Richard's, raised to expect all of this. When his eyes find you they do a slow, insolent inventory and don't bother to hide it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_grayson" }, content = "Don't get too comfortable. There's nothing in that folder with your name on it." },
+        { type = "thought_bubble", props = { speaker = "npc_grayson" }, content = "Relax. Whatever she crawled back for, it's mine before she's unpacked." },
+    ] },
+    { advance_text = "Read the stepfather.", blocks = [
+        { type = "paragraph", content = "Your stepfather Richard sits apart, near the window, a glass going warm and untouched in his hand. Eleanor's widower — he married your mother years after you were born, no blood of yours — older than you remembered, hollowed out, looking at the carpet like the answer to something is written in it. He holds the keys to the hotel and the say over the will, and he has the face of a man who has forgotten he's holding anything at all." },
+    ] },
+    { advance_text = "Read the sister.", blocks = [
+        { type = "paragraph", content = "And Audrey — your baby half-sister, perched on the very edge of the settee, too young for this room, watching you instead of the lawyer with something that hasn't curdled into anything yet. Eleanor's youngest, barely grown, she gives you a small frightened smile when she catches you looking — the only honest thing in the room — and you feel the old pull of being the one she still thinks can fix things." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_audrey" }, content = "You came back. I didn't think you would." },
+        { type = "thought_bubble", props = { speaker = "npc_audrey" }, content = "She's back. Maybe it'll be okay now. She always knew what to do." },
+    ] },
+    { advance_text = "Hear the terms.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_halloway" }, content = "The estate is entailed and contested. The hotel is mortgaged to the rafters, and the foreclosure clock is already running." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_halloway" }, content = "Control runs through Mr. Richard's signature and Mr. Grayson's claim. You are named, Miss Catherine — just enough to be a problem, not enough to be an answer." },
+        { type = "paragraph", content = "Margaret's smile deepens by a single degree. She knows exactly how thin your hand is. So do you." },
+    ] },
+  ] } },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Weak claim, failing hotel, a room full of people who already divided me up. Fine. I don't need the paper to win. I need the building, the money, and every one of them — and I'll take them in that order." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Start where the money is — the hotel."
+targetType = "location"
+locationId = "loc_hotel"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "will_read_done", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay. Learn the room first."
+targetType = "location"
+locationId = "loc_hotel"
+time_progression_minutes = 20
+flagEffects = [
+  { targetType = "player", flag = "will_read_done", op = "set" },
+]
+
+# ═════════════════════════════════════════════════════════════════════════════
+# beat_0008 — HOTEL UPGRADE 1: discreet back rooms (the reinvestment sink → escort)
+# ═════════════════════════════════════════════════════════════════════════════
+# The first money-bought hotel upgrade — the spiral that replaced renown. Fires in the
+# back office (only reachable via hotel_money_control). costs = $1500 (trigger-level, single
+# exit): GATES on affordability (won't show until you've saved it) + DEDUCTS on entry — the
+# sink. Sets upgrade_back_rooms, which the escort activity reads. Business gate only
+# (money_control + the cash); reaching Slutty is the personal door, carried by the work itself.
+
+[[canvases]]
+id          = "canvas_upgrade_back_rooms"
+name        = "The back rooms"
+description = "beat_0008. One-shot purchase @ loc_hotel_back_office. Gate hotel_money_control + upgrade_back_rooms is_false; costs $1500 (gates + deducts). Sets upgrade_back_rooms (unlocks activity_escort). The first hotel-upgrade reinvestment sink."
+
+[canvases.trigger]
+location      = "loc_hotel_back_office"
+is_repeatable = false
+priority      = 9
+is_active     = true
+costs = [{ trait = "money", value = 1500 }]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "hotel_money_control", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "upgrade_back_rooms",  operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "buy"
+name = "The back rooms"
+blocks = [
+  { type = "image", props = { file = "scenes/canvas_upgrade_back_rooms.jpg", description = "A woman sits over ledgers and a floor plan in a dim back office, planning a discreet refit.", search_queries = ["back office desk floor plan", "woman desk paperwork dim office"] } },
+  { type = "paragraph", content = "You sit with the ledgers and the floor plan and do the arithmetic that Eleanor never would. A block of rooms on the far side of the service stair — separate entrance, no line of sight from the desk, the kind of quiet you can't buy by accident. Refit them discreet: better locks, a private corridor, nothing in the books that names what they're for. It costs real money, money the hotel can't quite spare, and you spend it anyway, because the rooms that don't go through the books are the only ones that will ever turn a real profit." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Eleanor kept this place respectable right into the ground. I'd rather keep it." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sign off on the refit."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_hotel_back_office"
+time_progression_minutes = 60
+flagEffects = [
+  { targetType = "player", flag = "upgrade_back_rooms", op = "set" },
+]
+
+# ═════════════════════════════════════════════════════════════════════════════
+# beat_0020 — HOTEL UPGRADE 2: the private floor build-out (needs richard_signed)
+# ═════════════════════════════════════════════════════════════════════════════
+# The 2nd upgrade in the chain (replaces renown). Same sink pattern as the back rooms, but
+# gated on richard_signed (you only control the hotel openly once Richard signs it over).
+# costs $3000 (gates+deducts). Sets upgrade_private_floor -> beat_0021 creates loc_hotel_private_floor
+# (entry_conditions read this flag; setter-before-lock, valid). The private floor = the empire's surface.
+
+[[canvases]]
+id          = "canvas_upgrade_private_floor"
+name        = "The private floor"
+description = "beat_0020. One-shot purchase @ loc_hotel_back_office. Gate richard_signed is_true + upgrade_private_floor is_false; costs $3000 (gates+deducts). Sets upgrade_private_floor (unlocks loc_hotel_private_floor, built beat_0021). 2nd hotel-upgrade sink."
+
+[canvases.trigger]
+location      = "loc_hotel_back_office"
+is_repeatable = false
+priority      = 9
+is_active     = true
+costs = [{ trait = "money", value = 3000 }]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "richard_signed",        operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "upgrade_private_floor", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "buy"
+name = "The private floor"
+blocks = [
+  { type = "image", props = { file = "scenes/canvas_upgrade_private_floor.jpg", description = "An empty top-floor suite stands stripped for a private build-out, contractors' plans laid out.", search_queries = ["empty hotel top floor renovation", "luxury suite construction plans table"] } },
+  { type = "paragraph", content = "Richard signed the hotel into your hands, so now you build the thing the back rooms were only rehearsing for. The disused top floor — its own lift, its own discreet entrance, soundproofed and appointed and answerable to no one but you. It costs more than the hotel has made all year, and you spend it without blinking, because a discreet room turns a profit and a private floor builds an empire. The contractors don't ask what it's for. The money makes sure of that." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Eleanor's failing little hotel, reborn as exactly what this family always was under the manners — for sale, by appointment, to whoever can pay. Mother would hate it. That's most of the pleasure." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sign off on the build."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_hotel_back_office"
+time_progression_minutes = 90
+flagEffects = [
+  { targetType = "player", flag = "upgrade_private_floor", op = "set" },
+]
+
+# ═════════════════════════════════════════════════════════════════════════════
+# beat_0026 — HOTEL UPGRADE 3 (final): the full vice-house — the empire (frontier dressing)
+# ═════════════════════════════════════════════════════════════════════════════
+# The 3rd/last upgrade. Late, frontier-only (gate margaret_slave). $5000 sink — the cosmetic/
+# narrative peak (the whole place openly what it became). No new mechanical content; the dressing.
+
+[[canvases]]
+id          = "canvas_upgrade_vice_house"
+name        = "The whole house"
+description = "beat_0026. Final upgrade (one-shot) @ loc_hotel_back_office. Gate margaret_slave is_true + upgrade_vice_house is_false; costs $5000. Sets upgrade_vice_house. The empire fully realized — frontier dressing, no new mechanics."
+
+[canvases.trigger]
+location      = "loc_hotel_back_office"
+is_repeatable = false
+priority      = 9
+is_active     = true
+costs = [{ trait = "money", value = 5000 }]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "margaret_slave",     operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "upgrade_vice_house", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "empire"
+name = "The whole house"
+blocks = [
+  { type = "image", props = { file = "scenes/canvas_upgrade_vice_house.jpg", description = "The whole hotel stands taken over and reappointed, its brass nameplate still over the front desk.", search_queries = ["grand hotel lobby brass nameplate", "opulent hotel interior chandelier"] } },
+  { type = "paragraph", content = "There's nothing left to be discreet about. The family's yours, the will's yours, the town knows better than to ask, so you stop pretending the hotel is a hotel. You take the whole building over — every floor a private floor, the bar a front, the back office the only desk that matters — and you build the thing Eleanor's faded little inn was always destined to become once someone in this family stopped flinching. It costs a fortune. It will earn it back by the season. You sign the last of the money out yourself, and the empire stops being a plan and starts being an address." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Mother's name still in brass over the desk. I think I'll leave it. Let her keep the credit. I've got everything else." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Open the doors."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_hotel_back_office"
+time_progression_minutes = 90
+flagEffects = [
+  { targetType = "player", flag = "upgrade_vice_house", op = "set" },
+]
+
+# ═════════════════════════════════════════════════════════════════════════════
+# beat_0009 — THE FORECLOSURE RECKONING (Act-1 clock; SOFT, no game-over)
+# ═════════════════════════════════════════════════════════════════════════════
+# The will reading (beat_0002) started the clock as narration; this is the deadline with
+# teeth. TWO mutually-exclusive one-shots at the hotel (Halloway comes to the hotel — the
+# player sleeps in the residence here, so the reckoning can't be dodged). Both fire once the deadline arrives
+# (days_since will_read_done >= 4) and branch on the spine card's $500 milestone:
+#   • money >= 500 → bought time (foreclosure_resolved). A viability check, NOT a spend —
+#     savings carry toward the back-rooms upgrade.
+#   • money <  500 → a concession (foreclosure_resolved + foreclosure_setback). Soft: the
+#     game continues; Margaret gains a talking point (read later in her scheming beat).
+# Both set foreclosure_resolved → exactly one fires, the Act-1 clock closes, pressure recedes.
+# Priority 11 (deadline interrupt, pre-empts ambients). No quest card (spine card names $500).
+
+# ── canvas_foreclosure_paid — hit the milestone; the threat eases ────────────────
+[[canvases]]
+id          = "canvas_foreclosure_paid"
+name        = "The reckoning"
+description = "beat_0009. One-shot @ loc_hotel. Gate days_since will_read_done>=4 + foreclosure_resolved is_false + money>=500. Halloway checks the books; the immediate foreclosure is staved off. Sets foreclosure_resolved (NOT a money spend — a viability check)."
+
+[canvases.trigger]
+location      = "loc_hotel"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "days_since_flag", subject = "player", flag_key = "will_read_done",     operator = "gte", value = 4 },
+  { type = "flag",            subject = "player", flag_key = "foreclosure_resolved", operator = "is_false" },
+  { type = "trait",           subject = "player", trait_key = "money",              operator = "gte", value = 500 },
+] }
+
+[[canvases.nodes]]
+id   = "paid"
+name = "The reckoning"
+blocks = [
+  { type = "image", props = { file = "scenes/canvas_foreclosure_paid.jpg", description = "An older lawyer stands at the hotel front desk with a foreclosure notice while a woman faces him.", search_queries = ["hotel front desk lobby reception", "man suit documents desk woman"] } },
+  { type = "paragraph", content = "Halloway comes to the hotel himself, which is how you know the clock has run down. He sets the foreclosure notice on the front desk like a man laying down a card he's sure of, and waits. So you lay down yours — the takings, the turned-around books, the numbers that say the hotel is breathing again on its own. He reads them twice. Nothing in his starched face moves, but he closes the folder instead of opening it, and that's the whole victory." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_halloway" }, content = "The lender will hold, for now. Viability buys patience, Miss @player — it does not buy forgiveness. I'll be back." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Let him come back. By then it won't be his patience I need." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "See him out."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_hotel"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "foreclosure_resolved", op = "set" },
+]
+
+# ── canvas_foreclosure_setback — missed it; a soft concession (game continues) ───
+[[canvases]]
+id          = "canvas_foreclosure_setback"
+name        = "The reckoning"
+description = "beat_0009. One-shot @ loc_hotel. Gate days_since will_read_done>=4 + foreclosure_resolved is_false + money lt 500. Can't cover it; Halloway forces worse terms / a lost wing. SOFT (no game-over). Sets foreclosure_resolved + foreclosure_setback (Margaret reads it later)."
+
+[canvases.trigger]
+location      = "loc_hotel"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "days_since_flag", subject = "player", flag_key = "will_read_done",     operator = "gte", value = 4 },
+  { type = "flag",            subject = "player", flag_key = "foreclosure_resolved", operator = "is_false" },
+  { type = "trait",           subject = "player", trait_key = "money",              operator = "lt",  value = 500 },
+] }
+
+[[canvases.nodes]]
+id   = "setback"
+name = "The reckoning"
+blocks = [
+  { type = "image", props = { file = "scenes/canvas_foreclosure_setback.jpg", description = "An older lawyer signs papers at the hotel front desk while an older woman watches from a doorway.", search_queries = ["hotel reception desk signing papers", "older woman watching doorway hallway"] } },
+  { type = "paragraph", content = "Halloway comes to the hotel himself, which is how you know the clock has run down. He sets the foreclosure notice on the front desk and waits for you to cover it, and you can't — not yet, not nearly. So he does the correct, ruinous thing instead: a deed of variation, a whole floor's revenue signed straight to the lender, terms a degree worse than yesterday's. The hotel doesn't fall. It just bleeds a little more slowly, and from a wound you'll be paying down for a while." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_halloway" }, content = "It buys you time, Miss @player. Time is not the same as ground. Use it better." },
+  { type = "paragraph", content = "From the drawing-room doorway Margaret watches the lawyer pack his folder, and the small patient smile she's been saving comes out at last. She has something to say to people now: that the prodigal came home and signed away a wing inside a week." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Fine. A wing. Cheap, for what I'm going to take back." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "See him out."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_hotel"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "foreclosure_resolved", op = "set" },
+  { targetType = "player", flag = "foreclosure_setback",  op = "set" },
+]

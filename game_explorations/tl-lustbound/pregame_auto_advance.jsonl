@@ -1,0 +1,5 @@
+{"ts":"2026-06-07T21:34:43.166Z","step":0,"passage":"Landing Page","action":"clicked_forward","text":"New Game","tier":1}
+{"ts":"2026-06-07T21:34:43.166Z","step":1,"passage":"starting_game_1","action":"clicked_forward","text":"Play Text Only","tier":1}
+{"ts":"2026-06-07T21:34:43.166Z","step":2,"passage":"start_game_new","action":"clicked_forward","text":"Male","tier":5}
+{"ts":"2026-06-07T21:34:43.166Z","step":3,"passage":"start_game_new","action":"clicked_forward","text":"Male","tier":5}
+{"ts":"2026-06-07T21:34:43.166Z","step":3,"passage":"start_game_new","action":"terminated","reason":"state_unchanged_after_click"}

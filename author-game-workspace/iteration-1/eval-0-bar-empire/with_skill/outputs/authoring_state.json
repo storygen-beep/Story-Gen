@@ -1,0 +1,72 @@
+{
+  "game_slug": "eval_bar_empire_wired",
+  "schema_version": 2,
+  "book_revision": 1,
+  "pipeline_phase": "authoring",
+  "npcs": {
+    "npc_sal": {
+      "arc_shape": "slow-burn family",
+      "lane_budget": { "L1": 2, "L2": 1, "L3": 1, "capstones": 3 },
+      "vocab_ceiling": "explicit"
+    }
+  },
+  "plan": [
+    {
+      "id": "beat_0001",
+      "type": "npc_intro",
+      "title": "Sal's floor hub (Lane 1) + ungated Talk + double-locked escalation ladder",
+      "desc": "Meet/work Sal at the bar floor; non-lewd Talk ungated builds his lock; flirt rung double-locked (corr15 x sal.corr5); storeroom rung greyed-visible seed.",
+      "status": "validated",
+      "deps": [],
+      "target_phase": "5_scenes.toml",
+      "introduces": { "locations": [], "npcs": ["npc_sal"], "flags": ["talked_to_sal_today", "sal_noticed"] },
+      "produced_canvas_ids": ["sal_bar_floor_hub"],
+      "decided_at": 6
+    },
+    {
+      "id": "beat_0002",
+      "type": "capstone",
+      "title": "Sal C1 — the storeroom cut",
+      "desc": "Type-A capstone: corr30 x sal.corr10, writes sal_storeroom_done.",
+      "status": "planned",
+      "deps": ["beat_0001"],
+      "target_phase": "4_story_arc.toml",
+      "introduces": { "locations": [], "npcs": [], "flags": ["sal_storeroom_done"] },
+      "produced_canvas_ids": [],
+      "decided_at": null
+    },
+    {
+      "id": "beat_0003",
+      "type": "story_turn",
+      "title": "Player feeder bootstrap (solo corr-0) + flash (corr15+exb10)",
+      "desc": "Player-track feeders so the double-lock floors are reachable.",
+      "status": "planned",
+      "deps": [],
+      "target_phase": "3_activities.toml",
+      "introduces": { "locations": [], "npcs": [], "flags": [] },
+      "produced_canvas_ids": [],
+      "decided_at": null
+    }
+  ],
+  "structure_registry": {
+    "locations": [
+      { "id": "loc_bar_floor", "category": "reachable" },
+      { "id": "loc_storeroom", "category": "reachable" },
+      { "id": "loc_back_room", "category": "locked" },
+      { "id": "loc_apartment", "category": "reachable" }
+    ],
+    "npcs": ["npc_sal"],
+    "flags": ["first_shift_done", "talked_to_sal_today", "shift_worked_today", "sal_backroom_done", "bar_owned"],
+    "schedules": ["npc_sal@loc_bar_floor:18-02", "npc_sal@loc_back_room:02-04", "npc_sal@loc_apartment:04-18(offscreen-away)"]
+  },
+  "next_up": ["beat_0002", "beat_0003"],
+  "decisions_log": [
+    { "turn": 7, "note": "GREEN BUILD proven. merge_toml_phases --validate = OK (parsed cleanly, 24145 bytes, 5 phases; missing 4/6/8 expected). package_from_toml --dev = TOML parsed + Validation passed + All flag chains valid + index.html (921KB) generated. beat_0001 (Sal hub) validated against merged TOML. Scaffold + first beat done.", "book_revision": 1 },
+    { "turn": 6, "note": "Step 6 ENTRY: scaffold emitted (0_systems_spec clothing+phone+daily_tick+sidebar incl. custom influence leg; 1_metadata player customizable + influence Tier-3 + Sal core family/slow-burn 3 schedules incl. offscreen daytime + 4 locations; boot canvas_first_shift @ loc_bar_floor; activity_sleep day-router @ apartment 02-16/+420/+80e; spine quest card mechanic-mode money>=60 when bar_owned is_false). structure_registry + plan seeded (beat_0001 Sal hub = first authored BEAT, validated; beat_0002 C1 storeroom + beat_0003 feeders planned). Proving green next.", "book_revision": 1 },
+    { "turn": 5, "note": "Step 5 content roster: BOTH tracks on paper. NPC-arc track = Sal hub+rungs+3 capstones + Marcus glimpse. Player/world track = solo bootstrap (corr0) + flash (corr15+exb10) + reactive floor groping (worn_corruption choice) + storeroom forced (act-scoped auto-fire capstone) + revealing work (corr30 economy ladder). Tiers seeded 0/15/30/45; economy supply>=demand for every NPC floor; frontier (Dee recruit/house cut/city-tier) logged as locked-visible seeds. Advancing to authoring.", "book_revision": 1 },
+    { "turn": 4, "note": "Step 4 NPC arcs: Sal (core) authored FULL 10-section R7 brief — family/slow-burn, double lock per rung (player corruption door tiers 15/30/45 x npc_sal.corruption lock 5/10/20/30), npc_sal.corruption odometer + arousal throttle, 3 capstones (storeroom A / backroom A / take-the-Rail B Pattern-F, all odometer-gated not throttle), writes bar_owned+influence read downstream by Dee/Marcus/frontier, reads Vince debt clock + worn_corruption. npcs.npc_sal recorded in ledger (budget L1:2 L2:1 L3:1 cap:3, ceiling explicit). Dee/Marcus/Rosa/Vince briefs abbreviated for the structural eval (each carries same 10 sections at casting depth in later increments). Advancing to roster.", "book_revision": 1 },
+    { "turn": 3, "note": "Casting locked. 5 NPCs, all role+hook+lane+depth+arc-shape+spine. Sal=core/family-slow-burn (corruption odometer + arousal throttle, expensive treatment). Dee=core#2/peer recruit (relation milestones), Act3 influence-gated. Marcus=peripheral/service+reactive-world host (player corruption + worn_corruption). Rosa=service ally (relation trust, local ending, no lewd spine). Vince=antagonist/pressure (silent accumulator, debt deadline). Cross-NPC threads: own-bar opens influence for all; Dee knows Rosa (recruit ripple); Marcus money -> house cut; Vince's boss = frontier threat. Structural coverage + variety + desire span verified.", "book_revision": 1 },
+    { "turn": 2, "note": "Top-level locked. Cascade=3-act self-corruption->take-Sal->build-stable w/ double lock (MC corruption door + per-NPC lock; non-lewd ungated). Stats: corruption/money/energy (built-in always) + exhibitionism (built-in, public-floor exposure) + influence (TIER-3 CUSTOM, madam-power leg gating Act2/3). No fitness/intelligence (dead). beauty NOT a leg (worn_beauty). Desire ladder = 6 named wants (rent->turn Sal's head->back room->take the Rail->recruit Dee->run the house). Reactive world keyed on worn_corruption (Lane2/3 public, place-ceiling in conditions; Marcus predatory; forced=auto-fire capstone, act-scoped). Economy = corruption ladder one wallet (floor->revealing floor->storeroom favors->house cut), pressure via scaling sinks (bar debt->rival madam). Frontier = madam plateau + greyed rival-madam seed, no win-screen.", "book_revision": 1 },
+    { "turn": 1, "note": "Seed locked. POV=female PC; fantasy=broke-waitress->take-the-bar->build-the-empire (3-part bar cleared); desire span Act1 conquest of Sal (M, transactional->conquest) / Act2 the stable (F recruits + F/M house economy). Player named+customizable. Systems: clothing YES, phone YES, rent NO. Cast (names+roles): Sal/Dee/Marcus/Rosa/Vince. Map: Velvet Rail floor, back room, storeroom, apartment, docks. structure_registry/plan empty (no structure yet).", "book_revision": 1 }
+  ]
+}

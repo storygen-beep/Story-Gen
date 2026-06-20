@@ -181,7 +181,7 @@ schedules = [{ weekdays = [0,1,2,3,4,5,6], start_time = "07:00", end_time = "21:
 [[canvases.trigger.substitutions]]
 target_canvas_id = "scene_frank_kitchen_dishes"  # slug (resolves to UUID at build time)
 chance = 0.33
-conditions = { items = [
+conditions = { version = "1.0", items = [
   { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "stage", operator = "gte", value = 2 },
 ] }
 
@@ -536,6 +536,7 @@ Wired at `_validate_quests_cards` in `template_import.py:4469`. Validates Doc 50
 | `"trait_bar"` | Numeric bar with optional band-text overlay + color tiers. NPC-owner mode supported (`trait_owner = "npc"` + `npc_id`). | `template_import.py:3083`+ |
 | `"trait_status_text"` | Banded body-state text (Filthy/Dirty/Fresh/Clean for hygiene). Renders nothing when no band matches. | `template_import.py:3171`+ |
 | `"trait_decay_warning"` | Amber warning when a decaying trait dropped today AND is within range of a band gate. Sibling of `trait_status_text`. | `v1.py:5620` (`getDecayWarnings` helper) + `v1.py:13850` (SugarCube template) |
+| `"npc_panel"` | RTS House-card: one card per NPC with `rows` = ordered subset of `["arousal","corruption","location","next"]`. arousal → band glyph (default 0/1/2/3 → ❄️/🔥/🔥🔥/🔥🔥🔥, or author `arousal_bands`); corruption → number (or `corruption_max_label` at/above `corruption_max_value`); **location → `setup.getNpcLocation` (the SAME schedule source as the Schedule page)**; **`next` → mirrors the Quests-page goal block (reuses `renderQuestsGoalBlock`): `🎯 To advance` + ◯ live progress while climbing, `🔓 Ready / 📍 <loc> / 🕒 <schedule>` when ready, `✓ Arc complete` when terminal — no flavor/tip text**. Respects `hidden=true`. `npc_id` required; `show_when` supported. | `template_import.py` (npc_panel branch) + `v2.py`/`v1.py` `sidebarItems` widget |
 | (more: passes, inventory, etc.) | — | see `schema/02_toml_schema.md` |
 
 **Visibility doctrine** (Doc 68 §8): stage NEVER surfaces to any sidebar item. Antagonist awareness NEVER surfaces. See `doctrine/09_trait_catalog.md` §8.

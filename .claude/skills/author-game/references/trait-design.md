@@ -1,7 +1,7 @@
 # Designing an NPC's trait spine (which trait drives the arc)
 
-Read this when writing an NPC's R7 stat ladder (setup) or gating its rungs/capstones (continue). The
-canonical trait catalog — names, ranges, decay, sidebar — lives in `prompts_v2 doctrine/09`; this file
+Read this when writing an NPC's design-brief stat ladder (setup) or gating its rungs/capstones (continue). The
+canonical trait catalog — names, ranges, decay, sidebar — lives in `references/trait-catalog.md`; this file
 is the one decision that catalog doesn't make for you: **which trait actually drives THIS arc.**
 
 ## The core idea: traits have roles, and the role depends on arc shape
@@ -53,7 +53,7 @@ default for every NPC. **Verified in RTS:** the two-meter model is used by **onl
   game and still reserves the rich model for just 3). Gold-plating every NPC is the failure — it dilutes
   the core and triples the authoring. (`rts-design-philosophy.md` P5.)
 
-Record the chosen spine in the NPC's R7 brief stat ladder so the continue loop gates on it instead of
+Record the chosen spine in the NPC's design brief stat ladder so the continue loop gates on it instead of
 defaulting to `relation`.
 
 ## Throttle vs odometer — the decisive distinction for what gates what
@@ -142,8 +142,10 @@ Distinct from everything above: **player `arousal`** (0–10) is *her own* per-a
 NPC's wanting. Climbs +1 per lewd beat and +1/day (no decay), and **resets to 0 only at climax**
 (author-emitted — there is no engine macro that zeroes it). It gates *her* lewd actions (must be `>0`
 to masturbate; cascade/lewd-menu thresholds), never long-term progression (that's `corruption`). Full
-spec: `prompts_v2 doctrine/09 §3.2`. Don't confuse it with the sex-loop's `loop_player_pleasure`, which
-is per-scene state (see `sex-loop.md`).
+spec: `references/trait-catalog.md` §2. Don't confuse it with the sex-loop's `loop_player_pleasure`, which
+is per-scene state (see `sex-loop.md`). The act it gates — masturbate — is itself a **corruption feeder**
+and the solo branch of a Lane 3 host (`references/lanes.md`): arousal throttles
+*when* she can; the act raises the `corruption` odometer that gates everything downstream.
 
 ## Anti-pattern: the dead meter
 A trait that **climbs but gates nothing** is a bug, not flavor — and it's worse when it's a visible
@@ -151,24 +153,31 @@ sidebar bar, because the player reads progress that isn't real (a common miss: a
 `exhibitionism` meter that ticks up but no gate ever reads it). Rule: **every trait you raise must
 either gate something or be cut.** When you add a `+trait` effect, name what reads it; if nothing does, delete the
 effect or add the gate. (Sidebar bars are the loudest offenders — only surface a trait the player can
-act on.)
+act on.) And when you DO surface one, **encode by type and don't over-band** (`references/trait-catalog.md`
+§5): the auto Traits dump already shows every trait as a number, so a band is an upgrade — `trait_words` for
+an identity state (corruption), `trait_bar`+`hide_value=true` for a mood (arousal), a countable resource
+(money) stays a plain number. `[[traits.labels]] hidden=true` any stat you band so it doesn't print twice
+(band + number).
 
 ## Slow-burn pacing: earn the willingness, don't tick it
-`prompts_v2 doctrine/09` §4.1 sets NPC `arousal` to a passive `+1/day` for in-scope family NPCs
-(source: Doc 40) — that's RTS *ambient-family fastness*, which makes the meter hit cap in a few days
-no matter what the player does. For a **slow
+The catalog's RTS-default for an in-scope family NPC is a passive `+1/day` on `arousal`
+(`references/trait-catalog.md` §3) — *which you author into `[engine.daily_tick].traitEffects`; the engine
+hardcodes no climb.* Left at the default it's RTS *ambient-family fastness*: the meter hits cap in a few
+days no matter what the player does. For a **slow
 burn**, that collapses the arc back to one axis. Instead make the willingness axis **earned** from
 arc beats (a daily-capped raise on the NPC's daily interaction + specific charged moments), with **no
-passive daily climb** for that NPC. That keeps the burn player-driven and paced. Flag it in the brief
-as a deliberate deviation from the `doctrine/09` §4.1 default, and reach the cap only through play. (Daily-cap cheaply via the
+passive daily climb** for that NPC — i.e. simply omit that NPC from the daily tick. That keeps the burn
+player-driven and paced. Flag it in the brief as a deliberate deviation from the family default
+(`references/trait-catalog.md` §3), and reach the cap only through play. (Daily-cap cheaply via the
 NPC's existing once-per-day flag, e.g. `talked_to_<npc>_today`, shared across the raise sources.)
 
 ## Cross-cutting axes (not per-NPC)
 `corruption` (global content tier), `exhibitionism` (public/display — a natural fit for bar/club/
 service premises; gate the public floor on it), and `money` are **player-global**, not owned by one
 NPC. Use them for premise-wide content (the floor, the shop, the debt), and let the per-NPC spine sit
-on top. **Player `corruption` is locked to 0–100, 4 bands (Pure / Lewd / Slutty / Whore)** — author
-thresholds on that scale, NOT the RTS 0–200 scale (`doctrine/09` §3.2). Player corruption is the
+on top. **Player `corruption` runs 0–100** — author thresholds on that scale, NOT the RTS 0–200 scale. A 4-band
+sidebar scheme (e.g. Pure / Lewd / Slutty / Whore) is the *convention*, but those band names and boundaries
+are **author-supplied, not an engine fact** (`references/trait-catalog.md` §1). Player corruption is the
 *global depravity tier*, NOT a per-NPC relationship clock: a specific NPC's milestone gated ONLY on it,
 with that NPC's own built axis ignored, is the corruption-as-universal-spine bug (see "The core idea").
 
@@ -186,5 +195,5 @@ with that NPC's own built axis ignored, is the corruption-as-universal-spine bug
   repeatable loop is correctly used, not dead.
 - Slow-burn willingness is **earned + daily-capped**, not passive.
 - Every spine/loop trait is **declared before use** in `[player.core_traits]` / `[npcs.core_traits]` —
-  an undeclared trait is a silent no-op gate (`doctrine/09` §2, `toml-gotchas.md`).
-- Trait names/ranges/decay match `prompts_v2 doctrine/09` (don't reinvent the catalog).
+  an undeclared trait is a silent no-op gate (`references/trait-catalog.md` §1, `references/toml-gotchas.md`).
+- Trait names/ranges/decay match `references/trait-catalog.md` (don't reinvent the catalog).

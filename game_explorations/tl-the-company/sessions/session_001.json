@@ -1,0 +1,19 @@
+{
+  "session_id": 1,
+  "start_ts": "2026-06-07T22:00:53.706Z",
+  "start_epoch_ms": 1780869653706,
+  "end_ts": "2026-06-07T22:02:05.812Z",
+  "duration_s": 72,
+  "clicks": 0,
+  "choices_explored": 0,
+  "arrow_advances": 0,
+  "unique_states_seen": 1,
+  "new_unique_states": 1,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "TOP-LEVEL (The Company, Public Build 5.12, Westane — based on Wandrer's ASSTR universe). SugarCube. Reached via DIRECT CDN URL (gamcore.ch wrapper hung the explorer; real game = fgn.cdn.serverable.com/common/flashes/nf/the_company/index.html). A CORPORATE-TRANSFORMATION sandbox. DRIVE = you work for 'The Company' (a shadowy corp whose business is transforming/trafficking people); progress your role + transform yourself/others. PROGRESSION SPINE = (1) CHAPTER-gated story (Chapter, CH4, DaysPlayed) — story chapters are the macro spine; (2) BANDED relationships (constants HATE/DISLIKE/NEUTRAL/LIKE/LOVE) + banded skills (EXPERT/GREAT/GOOD/OKAY/NEW); (3) deep TRANSFORMATION system = the signature: CanTF/ForceTF/TFMode/TFMilestone/PermanentTF + player tfMale/tfFemale/tfTrans/tfBimbo/tfSissy + daysMale/daysFemale/... (gender-fluid PC, tracked by days-in-each-state); (4) Money/Paycheck + a SLAVE economy (pitSlaves, SlavePrice). Player = body sizes (penis/pussy/breast/ass), dom, genderv (fluid gender value), horny, dose (drug doses), wardrobe/makeup/hair, factions (wolf/ram/hart). NPCs = family (MomRoom/SisterRoom) + CONVO system + getCaught mechanic. BirthControl/pregnancy gating. DAY LOOP = days + chapters + Location nav; daily cooldowns (DailyCD, doseCD, event CDs). WORLD LOGIC = chapter progress + relationship bands + TF milestones + money gate content. DISTINCTIVE: TRANSFORMATION-as-central-mechanic-and-economy (the corp's business), gender-fluid PC with days-in-state tracking, banded relationship model, chapter-gated story over a sandbox, a management/corporate frame. Confidence high (State.variables)."
+  ]
+}

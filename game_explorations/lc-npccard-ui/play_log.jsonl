@@ -1,0 +1,9 @@
+{"ts":"2026-06-05T20:03:13.890Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"Start","state_hash":"7abe930fbb2fedf1"}
+{"ts":"2026-06-05T20:03:51.679Z","session_id":1,"cmd":"click","args":{"positional":["I am 18 or older - Enter Game"]},"ok":false,"passage":"Start","state_hash":"7abe930fbb2fedf1","state_changed":false,"error":"locator.click: Timeout 2500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('I am 18 or older - Enter Game', { exact: true }).first()\u001b[22m\n"}
+{"ts":"2026-06-05T20:03:57.870Z","session_id":1,"cmd":"eval","args":{"positional":["\n  var c = document.querySelectorAll('.npc-panel-item');\n  return JSON.stringify({cards:c.length, txt: c.length? c[0].textContent.replace(/\\s+/g,' ').trim():'(none)'});\n"]},"ok":true,"passage":"Start","state_hash":"7abe930fbb2fedf1"}
+{"ts":"2026-06-05T20:04:03.100Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"Start","state_hash":"7abe930fbb2fedf1"}
+{"ts":"2026-06-05T20:04:56.562Z","session_id":1,"cmd":"click","args":{"positional":["Cancel"]},"ok":true,"passage":"Start","state_hash":"7abe930fbb2fedf1","clicked_text":"Cancel","method":"visible-has-text","state_changed":false}
+{"ts":"2026-06-05T20:04:57.994Z","session_id":1,"cmd":"eval","args":{"positional":["\n  var g=SugarCube.State.variables;\n  return JSON.stringify({passage: SugarCube.State.passage, cards: document.querySelectorAll('.npc-panel-item').length});\n"]},"ok":true,"passage":"Start","state_hash":"7abe930fbb2fedf1"}
+{"ts":"2026-06-05T20:05:03.195Z","session_id":1,"cmd":"eval","args":{"positional":["SugarCube.Engine.play('Bedroom'); return SugarCube.State.passage;"]},"ok":true,"passage":"Bedroom","state_hash":"36dd5ca1ab7668db"}
+{"ts":"2026-06-05T20:05:04.625Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"Bedroom","state_hash":"36dd5ca1ab7668db"}
+{"ts":"2026-06-05T20:05:58.640Z","session_id":1,"cmd":"stop","args":{},"ok":true}

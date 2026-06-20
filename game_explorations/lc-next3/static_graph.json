@@ -1,0 +1,3431 @@
+{
+  "generated_at": "2026-06-06T06:14:17.444Z",
+  "total_passages": 148,
+  "skipped_passages": 0,
+  "parse_errors": 0,
+  "total_edges": 253,
+  "edges_by_kind": {
+    "wiki": 34,
+    "button": 96,
+    "link": 123
+  },
+  "edges": [
+    {
+      "from": "Start",
+      "to": "CustomizeCharacters",
+      "display": "✓ I am 18 or older - Enter Game",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3645
+    },
+    {
+      "from": "Start",
+      "to": "AgeBlocked",
+      "display": "✗ I am NOT 18 or older",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3702
+    },
+    {
+      "from": "CustomizeCharacters",
+      "to": "StartingCanvas_canvas_first_night_Node_1",
+      "display": "Continue to Game",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1715
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "CanvasReviewList",
+      "display": "📋 Review Canvases",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 3624
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "QuestsPage",
+      "display": "📋 Quests",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"QuestsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 21799
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "MissingMediaPage",
+      "display": "⚠️ Missing Media",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "$flags.debug_mode",
+          "branch": "if"
+        },
+        {
+          "condition": "passage() isnot \"MissingMediaPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 22049
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "QuestsPage",
+      "display": "📋 Quests",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"QuestsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 22303
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "TipsPage",
+      "display": "💡 Tips",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.tips_page && setup.tips_page.content",
+          "branch": "if"
+        },
+        {
+          "condition": "passage() isnot \"TipsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 22611
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "StatsPage",
+      "display": "📊 Stats",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"StatsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 22789
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "SchedulePage",
+      "display": "📅 Schedules",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "_npcsWithSchedules.length > 0 || _soloActivities.length > 0",
+          "branch": "if"
+        },
+        {
+          "condition": "passage() isnot \"SchedulePage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 23158
+    },
+    {
+      "from": "TimeWidgets",
+      "to": "FlagsPage",
+      "display": "🚩 Flags",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "passage() isnot \"FlagsPage\"",
+          "branch": "if"
+        }
+      ],
+      "index": 23835
+    },
+    {
+      "from": "StoryJournal",
+      "to": "Navigation",
+      "display": "Return to your story",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 3322
+    },
+    {
+      "from": "RentDay",
+      "to": "RentDay_Paid",
+      "display": null,
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "_money gte _rent",
+          "branch": "if"
+        }
+      ],
+      "index": 1395
+    },
+    {
+      "from": "RentDay",
+      "to": "RentDay_Short",
+      "display": null,
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1541
+    },
+    {
+      "from": "StartingCanvas_canvas_first_night_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Pour one, take stock 🥃",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2066
+    },
+    {
+      "from": "StartingCanvas_canvas_first_night_Node_1",
+      "to": "Location_The_Apartment",
+      "display": "Lock up, head to bed 🛏️",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2451
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Last_Call",
+      "display": "The Last Call",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 88
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Kitchen",
+      "display": "The Kitchen",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 138
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Back_Office",
+      "display": "The Back Office",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 184
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Cellar",
+      "display": "The Cellar",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 238
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Apartment",
+      "display": "The Apartment",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 282
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Main_Street",
+      "display": "Main Street",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 332
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Bank",
+      "display": "The Bank",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 378
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Reece's",
+      "display": "Reece's",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 418
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_The_Depot",
+      "display": "The Depot",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 456
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Sal's_place",
+      "display": "Sal's place",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 498
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Uptown",
+      "display": "Uptown",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 544
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Rosa's_place",
+      "display": "Rosa's place",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 580
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Across_the_river",
+      "display": "Across the river",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 628
+    },
+    {
+      "from": "Navigation",
+      "to": "Location_Boyd's_Place",
+      "display": "Boyd's Place",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 684
+    },
+    {
+      "from": "Location_The_Kitchen",
+      "to": "Location_The_Last_Call",
+      "display": "Leave The Kitchen",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 864
+    },
+    {
+      "from": "Location_The_Back_Office",
+      "to": "Location_The_Last_Call",
+      "display": "Leave The Back Office",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 864
+    },
+    {
+      "from": "Location_The_Cellar",
+      "to": "Location_The_Last_Call",
+      "display": "Leave The Cellar",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 822
+    },
+    {
+      "from": "Location_The_Apartment",
+      "to": "WardrobePage",
+      "display": "Change Clothes",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 619
+    },
+    {
+      "from": "Location_The_Apartment",
+      "to": "Location_The_Last_Call",
+      "display": "Leave The Apartment",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 875
+    },
+    {
+      "from": "Location_Main_Street",
+      "to": "Location_The_Last_Call",
+      "display": "Leave Main Street",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 6350
+    },
+    {
+      "from": "Location_The_Bank",
+      "to": "Location_Main_Street",
+      "display": "Leave The Bank",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 857
+    },
+    {
+      "from": "Location_Reece's",
+      "to": "ShopPage",
+      "display": "Browse Clothes",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 642
+    },
+    {
+      "from": "Location_Reece's",
+      "to": "Location_Main_Street",
+      "display": "Leave Reece's",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 894
+    },
+    {
+      "from": "Location_The_Depot",
+      "to": "Location_Main_Street",
+      "display": "Leave The Depot",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 833
+    },
+    {
+      "from": "Location_Boyd's_Place",
+      "to": "Location_Main_Street",
+      "display": "Leave Boyd's Place",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"summoned_by_shark\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "!(_autoFire)",
+          "branch": "else"
+        }
+      ],
+      "index": 1068
+    },
+    {
+      "from": "Location_Boyd's_Place",
+      "to": "Location_Main_Street",
+      "display": "Go back",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [
+        {
+          "condition": "!(setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"summoned_by_shark\", \"operator\": \"is_true\"}]}))",
+          "branch": "else"
+        }
+      ],
+      "index": 1297
+    },
+    {
+      "from": "Canvas_sal_sex_finisher_Node_1",
+      "to": "Location_The_Apartment",
+      "display": "Stay the night 🛏️",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1946
+    },
+    {
+      "from": "Canvas_sal_sex_finisher_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Clean up, lock up 🔒",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2890
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_1",
+      "to": "Canvas_sal_sex_loop_Node_2",
+      "display": "Go to him",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 736
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_2",
+      "to": "Canvas_sal_sex_loop_Node_3",
+      "display": "Kiss him",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 617
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_2",
+      "to": "Canvas_sal_sex_loop_Node_4",
+      "display": "Tease him",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 15}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1474
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_2",
+      "to": "Canvas_sal_sex_loop_Node_5",
+      "display": "Get his cock out",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 20}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2437
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_2",
+      "to": "Canvas_sal_sex_loop_Node_7",
+      "display": "Blow him",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"npc\", \"npc_id\": \"npc_sal\", \"trait_key\": \"arousal\", \"operator\": \"gte\", \"value\": 1}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 3421
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_2",
+      "to": "Canvas_sal_sex_loop_Node_6",
+      "display": "Blow him",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"npc\", \"npc_id\": \"npc_sal\", \"trait_key\": \"arousal\", \"operator\": \"lt\", \"value\": 1}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 4114
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_2",
+      "to": "Canvas_sal_sex_loop_Node_10",
+      "display": "Sit on his face",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 15}, {\"type\": \"trait\", \"subject\": \"npc\", \"npc_id\": \"npc_sal\", \"trait_key\": \"arousal\", \"operator\": \"gte\", \"value\": 1}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 4707
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_2",
+      "to": "Canvas_sal_sex_loop_Node_6",
+      "display": "Sit on his face",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 15}, {\"type\": \"trait\", \"subject\": \"npc\", \"npc_id\": \"npc_sal\", \"trait_key\": \"arousal\", \"operator\": \"lt\", \"value\": 1}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 5507
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_2",
+      "to": "Canvas_sal_sex_loop_Node_12",
+      "display": "Bend over",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 25}, {\"type\": \"trait\", \"subject\": \"npc\", \"npc_id\": \"npc_sal\", \"trait_key\": \"arousal\", \"operator\": \"gte\", \"value\": 2}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 6107
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_2",
+      "to": "Canvas_sal_sex_loop_Node_6",
+      "display": "Bend over",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 25}, {\"type\": \"trait\", \"subject\": \"npc\", \"npc_id\": \"npc_sal\", \"trait_key\": \"arousal\", \"operator\": \"lt\", \"value\": 2}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 6901
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_2",
+      "to": "Canvas_sal_sex_loop_Node_15",
+      "display": "Pull him on top",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 25}, {\"type\": \"trait\", \"subject\": \"npc\", \"npc_id\": \"npc_sal\", \"trait_key\": \"arousal\", \"operator\": \"gte\", \"value\": 2}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 7495
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_2",
+      "to": "Canvas_sal_sex_loop_Node_6",
+      "display": "Pull him on top",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 25}, {\"type\": \"trait\", \"subject\": \"npc\", \"npc_id\": \"npc_sal\", \"trait_key\": \"arousal\", \"operator\": \"lt\", \"value\": 2}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 8295
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_2",
+      "to": "Canvas_sal_sex_loop_Node_17",
+      "display": "Climb on top",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 30}, {\"type\": \"trait\", \"subject\": \"npc\", \"npc_id\": \"npc_sal\", \"trait_key\": \"arousal\", \"operator\": \"gte\", \"value\": 3}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 8896
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_2",
+      "to": "Canvas_sal_sex_loop_Node_6",
+      "display": "Climb on top",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 30}, {\"type\": \"trait\", \"subject\": \"npc\", \"npc_id\": \"npc_sal\", \"trait_key\": \"arousal\", \"operator\": \"lt\", \"value\": 3}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 9695
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_2",
+      "to": "Location_The_Apartment",
+      "display": "Not tonight",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 9903
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_3",
+      "to": "Canvas_sal_sex_loop_Node_2",
+      "display": "More",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 683
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_4",
+      "to": "Canvas_sal_sex_loop_Node_2",
+      "display": "Keep going",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 674
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_5",
+      "to": "Canvas_sal_sex_loop_Node_2",
+      "display": "More",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 696
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_6",
+      "to": "Canvas_sal_sex_loop_Node_2",
+      "display": "Back to him ↩️",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 649
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_7",
+      "to": "Canvas_sal_sex_loop_Node_8",
+      "display": "Suck his cock",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 627
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_7",
+      "to": "Canvas_sal_sex_loop_Node_9",
+      "display": "Take him deep",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 30}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1392
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_7",
+      "to": "Canvas_sal_sex_finisher_Node_1",
+      "display": "Let him cum in your mouth",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"loop_npc_pleasure\", \"operator\": \"gte\", \"value\": 50}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2127
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_7",
+      "to": "Canvas_sal_sex_loop_Node_2",
+      "display": "Get up — you want his cock",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2560
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_8",
+      "to": "Canvas_sal_sex_loop_Node_7",
+      "display": "Keep at it",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 641
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_9",
+      "to": "Canvas_sal_sex_loop_Node_7",
+      "display": "Again",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 705
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_10",
+      "to": "Canvas_sal_sex_loop_Node_11",
+      "display": "Ride his mouth",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 658
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_10",
+      "to": "Canvas_sal_sex_loop_Node_2",
+      "display": "Enough — you want his cock",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1147
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_11",
+      "to": "Canvas_sal_sex_loop_Node_10",
+      "display": "More",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 732
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_12",
+      "to": "Canvas_sal_sex_loop_Node_13",
+      "display": "Let him fuck you from behind",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 707
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_12",
+      "to": "Canvas_sal_sex_loop_Node_14",
+      "display": "Tell him to fuck your ass",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 35}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"anal_active\", \"operator\": \"eq\", \"value\": 0}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1602
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_12",
+      "to": "Canvas_sal_sex_finisher_Node_1",
+      "display": "Let him cum inside you",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"loop_npc_pleasure\", \"operator\": \"gte\", \"value\": 50}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"anal_active\", \"operator\": \"eq\", \"value\": 0}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2668
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_12",
+      "to": "Canvas_sal_sex_finisher_Node_1",
+      "display": "Let him cum in your ass",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"logic\": \"AND\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"loop_npc_pleasure\", \"operator\": \"gte\", \"value\": 50}, {\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"anal_active\", \"operator\": \"eq\", \"value\": 1}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 3497
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_12",
+      "to": "Canvas_sal_sex_finisher_Node_1",
+      "display": "Make him pull out, cum on you",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"loop_npc_pleasure\", \"operator\": \"gte\", \"value\": 50}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 4213
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_12",
+      "to": "Canvas_sal_sex_loop_Node_2",
+      "display": "Switch it up",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 4650
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_13",
+      "to": "Canvas_sal_sex_loop_Node_12",
+      "display": "More",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 700
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_14",
+      "to": "Canvas_sal_sex_loop_Node_12",
+      "display": "More",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 714
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_15",
+      "to": "Canvas_sal_sex_loop_Node_16",
+      "display": "Let him fuck you",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 713
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_15",
+      "to": "Canvas_sal_sex_finisher_Node_1",
+      "display": "Let him cum inside you",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"loop_npc_pleasure\", \"operator\": \"gte\", \"value\": 50}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1489
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_15",
+      "to": "Canvas_sal_sex_finisher_Node_1",
+      "display": "Make him cum on you",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"loop_npc_pleasure\", \"operator\": \"gte\", \"value\": 50}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2204
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_15",
+      "to": "Canvas_sal_sex_loop_Node_2",
+      "display": "Switch it up",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2631
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_16",
+      "to": "Canvas_sal_sex_loop_Node_15",
+      "display": "More",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 723
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_17",
+      "to": "Canvas_sal_sex_loop_Node_18",
+      "display": "Ride him",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 735
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_17",
+      "to": "Canvas_sal_sex_finisher_Node_1",
+      "display": "Sink down, let him cum",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"loop_npc_pleasure\", \"operator\": \"gte\", \"value\": 50}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1503
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_17",
+      "to": "Canvas_sal_sex_finisher_Node_1",
+      "display": "Make him cum",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"loop_npc_pleasure\", \"operator\": \"gte\", \"value\": 50}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2218
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_17",
+      "to": "Canvas_sal_sex_loop_Node_2",
+      "display": "Switch it up",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2638
+    },
+    {
+      "from": "Canvas_sal_sex_loop_Node_18",
+      "to": "Canvas_sal_sex_loop_Node_17",
+      "display": "More",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 708
+    },
+    {
+      "from": "Canvas_canvas_collision_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Let Sal handle it 💪",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"sal_cracked\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1968
+    },
+    {
+      "from": "Canvas_canvas_collision_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Use Marcus's name 💰",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"marcus_first_done\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2729
+    },
+    {
+      "from": "Canvas_canvas_collision_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Face him yourself ✊",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3217
+    },
+    {
+      "from": "Canvas_canvas_marcus_kept_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Stay kept 💵",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2138
+    },
+    {
+      "from": "Canvas_canvas_dee_standing_Node_1",
+      "to": "Location_The_Cellar",
+      "display": "Square it 😏",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2043
+    },
+    {
+      "from": "Canvas_canvas_sal_upstairs_Node_1",
+      "to": "Location_The_Apartment",
+      "display": "Pull him down 🔥",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2136
+    },
+    {
+      "from": "Canvas_canvas_sal_upstairs_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Stop at the stairs ✋",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2610
+    },
+    {
+      "from": "Canvas_canvas_collector_floorwalk_seized_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Ignore him 😶",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2361
+    },
+    {
+      "from": "Canvas_canvas_collector_floorwalk_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Keep pouring 🍺",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 919
+    },
+    {
+      "from": "Canvas_canvas_collector_coerce_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Don't react 😶",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1604
+    },
+    {
+      "from": "Canvas_canvas_collector_word_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Say nothing 🚪",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 890
+    },
+    {
+      "from": "Canvas_canvas_collector_pressure_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Keep working ↩️",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 871
+    },
+    {
+      "from": "Canvas_canvas_rosa_trust_talk_Node_1",
+      "to": "Location_The_Kitchen",
+      "display": "Tell her you hear her 💬",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2432
+    },
+    {
+      "from": "Canvas_canvas_rosa_hub_Node_1",
+      "to": "Location_The_Kitchen",
+      "display": "Sit and listen 💬",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"talked_to_rosa_today\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1068
+    },
+    {
+      "from": "Canvas_canvas_rosa_hub_Node_1",
+      "to": "Location_The_Kitchen",
+      "display": "Back to the floor ↩️",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1570
+    },
+    {
+      "from": "Canvas_canvas_rosa_ropes_first_Node_1",
+      "to": "Location_The_Kitchen",
+      "display": "Eat 🍽️",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1734
+    },
+    {
+      "from": "Canvas_canvas_marcus_arrangement_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Take the deal 💰",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1943
+    },
+    {
+      "from": "Canvas_canvas_marcus_arrangement_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Not yet ❌",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2644
+    },
+    {
+      "from": "Canvas_canvas_marcus_singled_out_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Take the retainer 💵",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1900
+    },
+    {
+      "from": "Canvas_canvas_marcus_ambient_hot_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Let him watch 👀",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 875
+    },
+    {
+      "from": "Canvas_canvas_marcus_ambient_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Keep moving ↩️",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 808
+    },
+    {
+      "from": "Canvas_canvas_marcus_hub_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Give him a refill 🥃",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"talked_to_marcus_today\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1066
+    },
+    {
+      "from": "Canvas_canvas_marcus_hub_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Join him in the back booth 😏",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 20}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1854
+    },
+    {
+      "from": "Canvas_canvas_marcus_hub_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Leave him to it ↩️",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2588
+    },
+    {
+      "from": "Canvas_canvas_marcus_ropes_first_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Pour him a drink 🥃",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1644
+    },
+    {
+      "from": "Canvas_canvas_dee_dock_Node_1",
+      "to": "Location_The_Cellar",
+      "display": "Square the crate 😏",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1918
+    },
+    {
+      "from": "Canvas_canvas_dee_dock_Node_1",
+      "to": "Location_The_Cellar",
+      "display": "Refuse — send it back ❌",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2409
+    },
+    {
+      "from": "Canvas_canvas_dee_terms_Node_1",
+      "to": "Location_The_Depot",
+      "display": "Take the float 💰",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1895
+    },
+    {
+      "from": "Canvas_canvas_dee_ambient_hot_Node_1",
+      "to": "Location_The_Depot",
+      "display": "Follow him to the cellar 😏",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 858
+    },
+    {
+      "from": "Canvas_canvas_dee_ambient_Node_1",
+      "to": "Location_The_Depot",
+      "display": "Wait for him ⏳",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 788
+    },
+    {
+      "from": "Canvas_canvas_dee_cellar_hub_Node_1",
+      "to": "Location_The_Cellar",
+      "display": "Sign for it 📋",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"talked_to_dee_today\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1075
+    },
+    {
+      "from": "Canvas_canvas_dee_cellar_hub_Node_1",
+      "to": "Location_The_Cellar",
+      "display": "Work it off down here 😏",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 25}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1746
+    },
+    {
+      "from": "Canvas_canvas_dee_cellar_hub_Node_1",
+      "to": "Location_The_Cellar",
+      "display": "Head upstairs ↩️",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2266
+    },
+    {
+      "from": "Canvas_canvas_dee_hub_Node_1",
+      "to": "Location_The_Depot",
+      "display": "Go over the order 📋",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"talked_to_dee_today\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1011
+    },
+    {
+      "from": "Canvas_canvas_dee_hub_Node_1",
+      "to": "Location_The_Depot",
+      "display": "Offer flexible terms 😏",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 25}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1687
+    },
+    {
+      "from": "Canvas_canvas_dee_hub_Node_1",
+      "to": "Location_The_Depot",
+      "display": "Load up, head back ↩️",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2203
+    },
+    {
+      "from": "Canvas_canvas_dee_ropes_first_Node_1",
+      "to": "Location_The_Depot",
+      "display": "Open an account 📋",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1605
+    },
+    {
+      "from": "Canvas_canvas_shark_place_Node_1",
+      "to": "Location_Main_Street",
+      "display": "He'll get his money 💰",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1727
+    },
+    {
+      "from": "Canvas_canvas_shark_place_Node_1",
+      "to": "Location_Main_Street",
+      "display": "Ask about \\\"other ways\\\" 😏",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2015
+    },
+    {
+      "from": "Canvas_canvas_shark_summons_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Take the card 📇",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1673
+    },
+    {
+      "from": "Canvas_canvas_bar_ambient_hot_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Let it linger 😏",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 798
+    },
+    {
+      "from": "Canvas_canvas_bar_ambient_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Get to it ↩️",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 704
+    },
+    {
+      "from": "Canvas_canvas_work_walkin_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Take the tip, brush him off 💵",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 773
+    },
+    {
+      "from": "Canvas_canvas_work_walkin_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Work him for more 😏",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1087
+    },
+    {
+      "from": "Canvas_canvas_work_shift_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Work a shift 🍺",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 882
+    },
+    {
+      "from": "Canvas_canvas_work_shift_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Pull a double 💪",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1282
+    },
+    {
+      "from": "Canvas_canvas_work_shift_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Work the floor in less 👀",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"worn_corruption\", \"operator\": \"gte\", \"value\": 15}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1922
+    },
+    {
+      "from": "Canvas_canvas_sal_after_hours_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Stay 🔥",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2123
+    },
+    {
+      "from": "Canvas_canvas_sal_after_hours_Node_1",
+      "to": "Location_The_Apartment",
+      "display": "Kiss him, send him home 💋",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2510
+    },
+    {
+      "from": "Canvas_canvas_sal_afterhours_hub_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Stay after close 🌙",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"talked_to_sal_today\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2554
+    },
+    {
+      "from": "Canvas_canvas_sal_afterhours_hub_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Make a move 😏",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 20}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 3331
+    },
+    {
+      "from": "Canvas_canvas_sal_afterhours_hub_Node_1",
+      "to": "Canvas_sal_sex_loop_Node_1",
+      "display": "Take him to bed 🔥",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"sal_first_done\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 3893
+    },
+    {
+      "from": "Canvas_canvas_sal_afterhours_hub_Node_1",
+      "to": "Location_The_Apartment",
+      "display": "Call it a night 🛏️",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 5046
+    },
+    {
+      "from": "Canvas_canvas_sal_hub_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Talk to Sal 💬",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"talked_to_sal_today\", \"operator\": \"is_false\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 996
+    },
+    {
+      "from": "Canvas_canvas_sal_hub_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Flirt with him 😏",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"corruption\", \"operator\": \"gte\", \"value\": 15}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 1768
+    },
+    {
+      "from": "Canvas_canvas_sal_hub_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Back to the floor ↩️",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 2270
+    },
+    {
+      "from": "Canvas_canvas_sal_ropes_first_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Learn the bar 🍺",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1559
+    },
+    {
+      "from": "Canvas_canvas_reckoning_Node_1",
+      "to": "Location_Main_Street",
+      "display": "Pay in full 💰",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"trait\", \"subject\": \"player\", \"trait_key\": \"money\", \"operator\": \"gte\", \"value\": 1000}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 2261
+    },
+    {
+      "from": "Canvas_canvas_reckoning_Node_1",
+      "to": "Location_Main_Street",
+      "display": "Let Marcus cover it 💵",
+      "setter": null,
+      "kind": "link",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"marcus_first_done\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        }
+      ],
+      "index": 3196
+    },
+    {
+      "from": "Canvas_canvas_reckoning_Node_1",
+      "to": "Location_Main_Street",
+      "display": "Pay another way 😏",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 3678
+    },
+    {
+      "from": "Canvas_activity_restock_cellar_Node_1",
+      "to": "Location_The_Cellar",
+      "display": "Head upstairs ↩️",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1011
+    },
+    {
+      "from": "Canvas_activity_clean_up_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Call it ↩️",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 985
+    },
+    {
+      "from": "Canvas_activity_shower_Node_1",
+      "to": "Location_The_Apartment",
+      "display": "Get out, towel off 🚿",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 1051
+    },
+    {
+      "from": "Canvas_canvas_sleep_Node_1",
+      "to": "Location_The_Apartment",
+      "display": "Sleep until morning 😴",
+      "setter": null,
+      "kind": "wiki",
+      "gate": [],
+      "index": 973
+    },
+    {
+      "from": "Canvas_canvas_ending_owned_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Last call 🥃",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1980
+    },
+    {
+      "from": "Canvas_canvas_ending_kept_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Last call 🥃",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1925
+    },
+    {
+      "from": "Canvas_canvas_ending_clean_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Last call 🥃",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1859
+    },
+    {
+      "from": "Canvas_canvas_ending_clean_sal_Node_1",
+      "to": "Location_The_Last_Call",
+      "display": "Last call 🥃",
+      "setter": null,
+      "kind": "link",
+      "gate": [],
+      "index": 1848
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_collector_word",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 341
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_work_walkin",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 663
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_shark_place",
+      "display": "T8",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 975
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_reckoning",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1302
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_clean_up",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1615
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_collector_pressure",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1937
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_collector_coerce",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2280
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_dee_hub",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2599
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_dee_dock",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2924
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_dee_cellar_hub",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 3245
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_dee_standing",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 3581
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_dee_terms",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 3900
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_first_night",
+      "display": "T12",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 4210
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_collector_floorwalk",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 4535
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_marcus_ambient_hot",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 4875
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_ending_owned",
+      "display": "T11",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 5206
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_ending_kept",
+      "display": "T11",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 5524
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_ending_clean",
+      "display": "T11",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 5850
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_ending_clean_sal",
+      "display": "T12",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 6192
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_collector_floorwalk_seized",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 6534
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_marcus_hub",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 6871
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_marcus_kept",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 7183
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_marcus_arrangement",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 7520
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_marcus_singled_out",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 7870
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_restock_cellar",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 8200
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_rosa_hub",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 8523
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_rosa_trust_talk",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 8858
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_sal_sex_finisher",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 9171
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_sal_sex_loop",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 9496
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_sal_afterhours_hub",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 9823
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_sal_hub",
+      "display": "T4",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 10146
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_sal_after_hours",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 10470
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_sal_upstairs",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 10794
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_activity_shower",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 11098
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_sleep",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 11394
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_dee_ropes_first",
+      "display": "T10",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 11708
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_rosa_ropes_first",
+      "display": "T10",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 12036
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_marcus_ropes_first",
+      "display": "T10",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 12371
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_sal_ropes_first",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 12701
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_shark_summons",
+      "display": "T10",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 13043
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_collision",
+      "display": "T9",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 13376
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_dee_ambient",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 13692
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_dee_ambient_hot",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 14015
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_bar_ambient",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 14337
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_bar_ambient_hot",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 14665
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_marcus_ambient",
+      "display": "T0",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 14992
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "CanvasReview_canvas_work_shift",
+      "display": "T3",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 15306
+    },
+    {
+      "from": "CanvasReviewList",
+      "to": "Navigation",
+      "display": "Back to Game",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 15443
+    },
+    {
+      "from": "CanvasReview_canvas_first_night",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1119
+    },
+    {
+      "from": "CanvasReview_sal_sex_finisher",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 842
+    },
+    {
+      "from": "CanvasReview_sal_sex_loop",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 10756
+    },
+    {
+      "from": "CanvasReview_canvas_collision",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1344
+    },
+    {
+      "from": "CanvasReview_canvas_marcus_kept",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1784
+    },
+    {
+      "from": "CanvasReview_canvas_dee_standing",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1680
+    },
+    {
+      "from": "CanvasReview_canvas_sal_upstairs",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1795
+    },
+    {
+      "from": "CanvasReview_canvas_collector_floorwalk_seized",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 893
+    },
+    {
+      "from": "CanvasReview_canvas_collector_floorwalk",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 997
+    },
+    {
+      "from": "CanvasReview_canvas_collector_coerce",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 722
+    },
+    {
+      "from": "CanvasReview_canvas_collector_word",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 957
+    },
+    {
+      "from": "CanvasReview_canvas_collector_pressure",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 955
+    },
+    {
+      "from": "CanvasReview_canvas_rosa_trust_talk",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 2240
+    },
+    {
+      "from": "CanvasReview_canvas_rosa_hub",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 900
+    },
+    {
+      "from": "CanvasReview_canvas_rosa_ropes_first",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1341
+    },
+    {
+      "from": "CanvasReview_canvas_marcus_arrangement",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1606
+    },
+    {
+      "from": "CanvasReview_canvas_marcus_singled_out",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1516
+    },
+    {
+      "from": "CanvasReview_canvas_marcus_ambient_hot",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 938
+    },
+    {
+      "from": "CanvasReview_canvas_marcus_ambient",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 874
+    },
+    {
+      "from": "CanvasReview_canvas_marcus_hub",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 921
+    },
+    {
+      "from": "CanvasReview_canvas_marcus_ropes_first",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1249
+    },
+    {
+      "from": "CanvasReview_canvas_dee_dock",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1608
+    },
+    {
+      "from": "CanvasReview_canvas_dee_terms",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1501
+    },
+    {
+      "from": "CanvasReview_canvas_dee_ambient_hot",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 936
+    },
+    {
+      "from": "CanvasReview_canvas_dee_ambient",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 853
+    },
+    {
+      "from": "CanvasReview_canvas_dee_cellar_hub",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 916
+    },
+    {
+      "from": "CanvasReview_canvas_dee_hub",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 868
+    },
+    {
+      "from": "CanvasReview_canvas_dee_ropes_first",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1191
+    },
+    {
+      "from": "CanvasReview_canvas_shark_place",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1412
+    },
+    {
+      "from": "CanvasReview_canvas_shark_summons",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1288
+    },
+    {
+      "from": "CanvasReview_canvas_bar_ambient_hot",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 868
+    },
+    {
+      "from": "CanvasReview_canvas_bar_ambient",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 770
+    },
+    {
+      "from": "CanvasReview_canvas_work_walkin",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 876
+    },
+    {
+      "from": "CanvasReview_canvas_work_shift",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 872
+    },
+    {
+      "from": "CanvasReview_canvas_sal_after_hours",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1838
+    },
+    {
+      "from": "CanvasReview_canvas_sal_afterhours_hub",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 872
+    },
+    {
+      "from": "CanvasReview_canvas_sal_hub",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 842
+    },
+    {
+      "from": "CanvasReview_canvas_sal_ropes_first",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1201
+    },
+    {
+      "from": "CanvasReview_canvas_reckoning",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1663
+    },
+    {
+      "from": "CanvasReview_activity_restock_cellar",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 863
+    },
+    {
+      "from": "CanvasReview_activity_clean_up",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 827
+    },
+    {
+      "from": "CanvasReview_activity_shower",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 825
+    },
+    {
+      "from": "CanvasReview_canvas_sleep",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 826
+    },
+    {
+      "from": "CanvasReview_canvas_ending_owned",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1594
+    },
+    {
+      "from": "CanvasReview_canvas_ending_kept",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1549
+    },
+    {
+      "from": "CanvasReview_canvas_ending_clean",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1463
+    },
+    {
+      "from": "CanvasReview_canvas_ending_clean_sal",
+      "to": "CanvasReviewList",
+      "display": "← Back to List",
+      "setter": null,
+      "kind": "button",
+      "gate": [],
+      "index": 1482
+    }
+  ],
+  "unresolved_targets": [],
+  "dead_end_passages": [
+    "Story",
+    "AgeBlocked",
+    "StoryCaption",
+    "QuestsV2Widgets",
+    "QuestsPage",
+    "TipsPage",
+    "StatsPage",
+    "WardrobePage",
+    "ClothingBlock",
+    "ShopPage",
+    "RentDay_Paid",
+    "RentDay_Short",
+    "SchedulePage",
+    "FlagsPage",
+    "_BrokenExitFallback",
+    "Location_The_Last_Call",
+    "Location_Sal's_place",
+    "Location_Uptown",
+    "Location_Rosa's_place",
+    "Location_Across_the_river",
+    "MissingMediaPage"
+  ],
+  "untargeted_passages": [
+    "Story",
+    "Start",
+    "TimeWidgets",
+    "StoryCaption",
+    "QuestsV2Widgets",
+    "StoryJournal",
+    "ClothingBlock",
+    "RentDay",
+    "_BrokenExitFallback",
+    "Canvas_canvas_collision_Node_1",
+    "Canvas_canvas_marcus_kept_Node_1",
+    "Canvas_canvas_dee_standing_Node_1",
+    "Canvas_canvas_sal_upstairs_Node_1",
+    "Canvas_canvas_collector_floorwalk_seized_Node_1",
+    "Canvas_canvas_collector_floorwalk_Node_1",
+    "Canvas_canvas_collector_coerce_Node_1",
+    "Canvas_canvas_collector_word_Node_1",
+    "Canvas_canvas_collector_pressure_Node_1",
+    "Canvas_canvas_rosa_trust_talk_Node_1",
+    "Canvas_canvas_rosa_hub_Node_1",
+    "Canvas_canvas_rosa_ropes_first_Node_1",
+    "Canvas_canvas_marcus_arrangement_Node_1",
+    "Canvas_canvas_marcus_singled_out_Node_1",
+    "Canvas_canvas_marcus_ambient_hot_Node_1",
+    "Canvas_canvas_marcus_ambient_Node_1",
+    "Canvas_canvas_marcus_hub_Node_1",
+    "Canvas_canvas_marcus_ropes_first_Node_1",
+    "Canvas_canvas_dee_dock_Node_1",
+    "Canvas_canvas_dee_terms_Node_1",
+    "Canvas_canvas_dee_ambient_hot_Node_1",
+    "Canvas_canvas_dee_ambient_Node_1",
+    "Canvas_canvas_dee_cellar_hub_Node_1",
+    "Canvas_canvas_dee_hub_Node_1",
+    "Canvas_canvas_dee_ropes_first_Node_1",
+    "Canvas_canvas_shark_place_Node_1",
+    "Canvas_canvas_shark_summons_Node_1",
+    "Canvas_canvas_bar_ambient_hot_Node_1",
+    "Canvas_canvas_bar_ambient_Node_1",
+    "Canvas_canvas_work_walkin_Node_1",
+    "Canvas_canvas_work_shift_Node_1",
+    "Canvas_canvas_sal_after_hours_Node_1",
+    "Canvas_canvas_sal_afterhours_hub_Node_1",
+    "Canvas_canvas_sal_hub_Node_1",
+    "Canvas_canvas_sal_ropes_first_Node_1",
+    "Canvas_canvas_reckoning_Node_1",
+    "Canvas_activity_restock_cellar_Node_1",
+    "Canvas_activity_clean_up_Node_1",
+    "Canvas_activity_shower_Node_1",
+    "Canvas_canvas_sleep_Node_1",
+    "Canvas_canvas_ending_owned_Node_1",
+    "Canvas_canvas_ending_kept_Node_1",
+    "Canvas_canvas_ending_clean_Node_1",
+    "Canvas_canvas_ending_clean_sal_Node_1"
+  ],
+  "per_passage_stats": {
+    "Story": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": [
+        "meta"
+      ]
+    },
+    "Start": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CustomizeCharacters": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "AgeBlocked": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "TimeWidgets": {
+      "edge_count": 8,
+      "unresolved": 0,
+      "tags": [
+        "widget",
+        "nobr"
+      ]
+    },
+    "StoryCaption": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "QuestsV2Widgets": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": [
+        "widget",
+        "nobr"
+      ]
+    },
+    "QuestsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "TipsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "StoryJournal": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "StatsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "WardrobePage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "ClothingBlock": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "ShopPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "RentDay": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "RentDay_Paid": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "RentDay_Short": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "SchedulePage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "FlagsPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "StartingCanvas_canvas_first_night_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Navigation": {
+      "edge_count": 14,
+      "unresolved": 0,
+      "tags": []
+    },
+    "_BrokenExitFallback": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Location_The_Last_Call": {
+      "edge_count": 0,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Kitchen": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Back_Office": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Cellar": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Apartment": {
+      "edge_count": 2,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Main_Street": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Bank": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Reece's": {
+      "edge_count": 2,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_The_Depot": {
+      "edge_count": 1,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Sal's_place": {
+      "edge_count": 0,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Uptown": {
+      "edge_count": 0,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Rosa's_place": {
+      "edge_count": 0,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Across_the_river": {
+      "edge_count": 0,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Location_Boyd's_Place": {
+      "edge_count": 2,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Canvas_sal_sex_finisher_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_sal_sex_loop_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_sal_sex_loop_Node_2": {
+      "edge_count": 14,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_sal_sex_loop_Node_3": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_sal_sex_loop_Node_4": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_sal_sex_loop_Node_5": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_sal_sex_loop_Node_6": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_sal_sex_loop_Node_7": {
+      "edge_count": 4,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_sal_sex_loop_Node_8": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_sal_sex_loop_Node_9": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_sal_sex_loop_Node_10": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_sal_sex_loop_Node_11": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_sal_sex_loop_Node_12": {
+      "edge_count": 6,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_sal_sex_loop_Node_13": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_sal_sex_loop_Node_14": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_sal_sex_loop_Node_15": {
+      "edge_count": 4,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_sal_sex_loop_Node_16": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_sal_sex_loop_Node_17": {
+      "edge_count": 4,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_sal_sex_loop_Node_18": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_collision_Node_1": {
+      "edge_count": 3,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_marcus_kept_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_dee_standing_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_sal_upstairs_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_collector_floorwalk_seized_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_collector_floorwalk_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_collector_coerce_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_collector_word_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_collector_pressure_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_rosa_trust_talk_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_rosa_hub_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_rosa_ropes_first_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_marcus_arrangement_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_marcus_singled_out_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_marcus_ambient_hot_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_marcus_ambient_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_marcus_hub_Node_1": {
+      "edge_count": 3,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_marcus_ropes_first_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_dee_dock_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_dee_terms_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_dee_ambient_hot_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_dee_ambient_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_dee_cellar_hub_Node_1": {
+      "edge_count": 3,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_dee_hub_Node_1": {
+      "edge_count": 3,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_dee_ropes_first_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_shark_place_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_shark_summons_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_bar_ambient_hot_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_bar_ambient_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_work_walkin_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_work_shift_Node_1": {
+      "edge_count": 3,
+      "unresolved": 1,
+      "tags": []
+    },
+    "Canvas_canvas_sal_after_hours_Node_1": {
+      "edge_count": 2,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_sal_afterhours_hub_Node_1": {
+      "edge_count": 4,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_sal_hub_Node_1": {
+      "edge_count": 3,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_sal_ropes_first_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_reckoning_Node_1": {
+      "edge_count": 3,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_restock_cellar_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_clean_up_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_activity_shower_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_sleep_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_ending_owned_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_ending_kept_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_ending_clean_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "Canvas_canvas_ending_clean_sal_Node_1": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "MissingMediaPage": {
+      "edge_count": 0,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReviewList": {
+      "edge_count": 48,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_first_night": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_sal_sex_finisher": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_sal_sex_loop": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_collision": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_marcus_kept": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_dee_standing": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_sal_upstairs": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_collector_floorwalk_seized": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_collector_floorwalk": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_collector_coerce": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_collector_word": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_collector_pressure": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_rosa_trust_talk": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_rosa_hub": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_rosa_ropes_first": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_marcus_arrangement": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_marcus_singled_out": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_marcus_ambient_hot": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_marcus_ambient": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_marcus_hub": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_marcus_ropes_first": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_dee_dock": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_dee_terms": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_dee_ambient_hot": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_dee_ambient": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_dee_cellar_hub": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_dee_hub": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_dee_ropes_first": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_shark_place": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_shark_summons": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_bar_ambient_hot": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_bar_ambient": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_work_walkin": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_work_shift": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_sal_after_hours": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_sal_afterhours_hub": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_sal_hub": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_sal_ropes_first": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_reckoning": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_restock_cellar": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_clean_up": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_activity_shower": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_sleep": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_ending_owned": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_ending_kept": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_ending_clean": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    },
+    "CanvasReview_canvas_ending_clean_sal": {
+      "edge_count": 1,
+      "unresolved": 0,
+      "tags": []
+    }
+  }
+}

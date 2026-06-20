@@ -1,0 +1,1777 @@
+{
+  "captured_at": "2026-06-07T21:34:41.261Z",
+  "ts": 1780868081261,
+  "engine": "sugarcube",
+  "passage": "Landing Page",
+  "variables": {
+    "dicksenabled": true,
+    "version": 0.726,
+    "maxperks": 3,
+    "gametype": "Unknown",
+    "lustessence": 0,
+    "multi": 1,
+    "day": 1,
+    "dayspassed": 0,
+    "time": 1,
+    "miagrades": 0,
+    "miaTransformationCount": 0,
+    "miaTransformationPending": false,
+    "miaTransformationThisTime": "",
+    "tonyTransformationCount": 0,
+    "tonyTransformationPending": false,
+    "tonyTransformationThisTime": "",
+    "isaakTransformationCount": 0,
+    "isaakTransformationPending": false,
+    "isaakTransformationThisTime": "",
+    "natashaTransformationCount": 0,
+    "natashaTransformationPending": false,
+    "natashaTransformationThisTime": "",
+    "paulineTransformationCount": 0,
+    "paulineTransformationPending": false,
+    "paulineTransformationThisTime": "",
+    "isaakTransformationBeforeGender": "",
+    "isaakTransformationAfterGender": "",
+    "isaakTransformationBeforeGenitals": "",
+    "isaakTransformationAfterGenitals": "",
+    "isaakTransformationBeforeBreasts": "",
+    "isaakTransformationAfterBreasts": "",
+    "natashaTransformationBeforeGender": "",
+    "natashaTransformationAfterGender": "",
+    "natashaTransformationBeforeGenitals": "",
+    "natashaTransformationAfterGenitals": "",
+    "natashaTransformationBeforeBreasts": "",
+    "natashaTransformationAfterBreasts": "",
+    "paulineTransformationBeforeGender": "",
+    "paulineTransformationAfterGender": "",
+    "paulineTransformationBeforeGenitals": "",
+    "paulineTransformationAfterGenitals": "",
+    "paulineTransformationBeforeBreasts": "",
+    "paulineTransformationAfterBreasts": "",
+    "currentEvent": "",
+    "jailTicker": 0,
+    "wakeywakey": 0,
+    "lustessenceearnedtoday": 0,
+    "cumchance": 10,
+    "tvnumber": 0,
+    "lustChance": 70,
+    "lustEssenceAmount": 1,
+    "collegeIntro": 0,
+    "interactionAmounts": {
+      "kiss": 5,
+      "handjob": 45,
+      "bj": 55,
+      "head": 58,
+      "fuck": 75,
+      "anal": 95
+    },
+    "coffeestats": {
+      "customersserved": 0,
+      "coffeesmilked": 0,
+      "level": 0,
+      "customersfucked": 0
+    },
+    "isaakSissy": 0,
+    "momHouseHeat": 0,
+    "momHouseCaughtCount": 0,
+    "momHouseNudeStrikeCount": 0,
+    "momHouseBanUntilDay": 0,
+    "momHouseBanUntilDaysPassed": 0,
+    "momHouseLastAmbientKey": "",
+    "momHouseLastNudeReactionKey": "",
+    "momHouseLastConfrontDay": 0,
+    "momHouseTrust": {
+      "pauline": 0,
+      "natasha": 0,
+      "isaak": 0
+    },
+    "momHouseJealousy": {
+      "pauline": 0,
+      "natasha": 0,
+      "isaak": 0
+    },
+    "momHouseOpenness": {
+      "pauline": 0,
+      "natasha": 0,
+      "isaak": 0
+    },
+    "ofmessages": [],
+    "ofFollowers": 0,
+    "prosRep": 0,
+    "clientsServiced": 0,
+    "backerImageCharacter": "pauline",
+    "backerImageSlot": "",
+    "backerImagePath": "",
+    "settings": [
+      {
+        "name": "Perk Overlay",
+        "enabled": true,
+        "desc": "This enables or disables perk overlays such as the 'coomer drip' in a character portrait."
+      },
+      {
+        "name": "Male Masturbation Content",
+        "enabled": true,
+        "desc": "This enables or disables the male masturbation content. Turning it off just displays text. Doesn't apply to female characters with dicks."
+      }
+    ],
+    "player": {
+      "money": 0,
+      "inventory": [],
+      "strength": 0,
+      "combatenabled": "true",
+      "health": 110,
+      "maxhealth": 110,
+      "baseMaxhealth": 90,
+      "stamina": 16,
+      "maxstamina": 16,
+      "baseMaxstamina": 16,
+      "damage": 12,
+      "level": 1,
+      "xp": 0,
+      "skill": 0,
+      "moves": [
+        {
+          "name": "Nothing",
+          "staminaCost": 0
+        },
+        {
+          "name": "Punch",
+          "staminaCost": 1
+        },
+        {
+          "name": "Defend",
+          "staminaCost": 2
+        }
+      ]
+    },
+    "movechecks": [
+      {
+        "name": "Nothing",
+        "stamina": 0,
+        "level": 0,
+        "gender": [
+          "Female",
+          "Male"
+        ]
+      },
+      {
+        "name": "Punch",
+        "stamina": 1,
+        "level": 0,
+        "gender": [
+          "Female",
+          "Male"
+        ]
+      },
+      {
+        "name": "Defend",
+        "stamina": 2,
+        "level": 0,
+        "gender": [
+          "Female",
+          "Male"
+        ]
+      },
+      {
+        "name": "Headbutt",
+        "stamina": 3,
+        "level": 5,
+        "gender": [
+          "Female",
+          "Male"
+        ]
+      },
+      {
+        "name": "Low Blow",
+        "stamina": 4,
+        "level": 10,
+        "gender": [
+          "Female",
+          "Male"
+        ]
+      },
+      {
+        "name": "Second Wind",
+        "stamina": 4,
+        "level": 18,
+        "gender": [
+          "Female",
+          "Male"
+        ]
+      },
+      {
+        "name": "Body Slam",
+        "stamina": 6,
+        "level": 28,
+        "gender": [
+          "Female",
+          "Male"
+        ]
+      },
+      {
+        "name": "Guard Break",
+        "stamina": 7,
+        "level": 40,
+        "gender": [
+          "Female",
+          "Male"
+        ]
+      },
+      {
+        "name": "Combo Rush",
+        "stamina": 8,
+        "level": 55,
+        "gender": [
+          "Female",
+          "Male"
+        ]
+      },
+      {
+        "name": "Iron Will",
+        "stamina": 6,
+        "level": 70,
+        "gender": [
+          "Female",
+          "Male"
+        ]
+      },
+      {
+        "name": "Knockout Blow",
+        "stamina": 10,
+        "level": 85,
+        "gender": [
+          "Female",
+          "Male"
+        ]
+      },
+      {
+        "name": "Finisher",
+        "stamina": 12,
+        "level": 99,
+        "gender": [
+          "Female",
+          "Male"
+        ]
+      }
+    ],
+    "combat": {
+      "party": [
+        {
+          "id": "custom_character",
+          "name": "Alex",
+          "gender": "Female",
+          "partypic": "<img src=\"images/ui/locked.webp\" alt=\"\" />",
+          "health": 110,
+          "stamina": 16,
+          "maxhealth": 110,
+          "maxstamina": 16,
+          "baseMaxhealth": 90,
+          "baseMaxstamina": 16,
+          "level": 1,
+          "skill": 0,
+          "defendReduction": 0,
+          "damage": 12,
+          "moves": [
+            {
+              "name": "Nothing",
+              "staminaCost": 0
+            },
+            {
+              "name": "Punch",
+              "staminaCost": 1
+            },
+            {
+              "name": "Defend",
+              "staminaCost": 2
+            }
+          ]
+        }
+      ],
+      "bench": [],
+      "enemies": [
+        {
+          "name": "Female Hobo",
+          "gender": "Female",
+          "pic": "<img src=\"images/fan/characters/hobo/hobo_chat.webp\" alt=\"\" />",
+          "health": 85,
+          "stamina": 10,
+          "maxhealth": 85,
+          "maxstamina": 10,
+          "level": 3,
+          "xp": 0,
+          "moves": [
+            "Nothing",
+            "Punch",
+            "Defend"
+          ],
+          "defeated": 0,
+          "discovered": false,
+          "location": "Revachol Streets"
+        },
+        {
+          "name": "Jason",
+          "gender": "Male",
+          "pic": "<img src=\"images/fan/characters/jason/jasonchat.webp\" alt=\"\" />",
+          "health": 220,
+          "stamina": 28,
+          "maxhealth": 220,
+          "maxstamina": 28,
+          "level": 20,
+          "xp": 0,
+          "moves": [
+            "Block",
+            "Punch",
+            "Headbutt"
+          ],
+          "defeated": 0,
+          "discovered": false,
+          "location": "Park"
+        }
+      ],
+      "enemy": [],
+      "turn": 0,
+      "lastAnimation": null,
+      "totalxp": 0,
+      "totalfights": 0,
+      "totalfightslost": 0,
+      "totalfightswon": 0
+    },
+    "combatongoing": false,
+    "chosen": 0,
+    "enemyChosen": "Female Hobo",
+    "chosenmove": "",
+    "combatActionTab": "fight",
+    "battleLog": [],
+    "leftPic": "",
+    "rightPic": "",
+    "exitLocation": "sleep",
+    "combatMoveAnimations": 0,
+    "sidebarPanelMode": "paperdoll",
+    "npcchosen": 0,
+    "playing": 0,
+    "naked": false,
+    "paperdollEnabled": true,
+    "soloMasturbationScenesEnabled": true,
+    "paperdollWardrobe": {
+      "tshirt": {
+        "name": "T-Shirt",
+        "owned": true,
+        "starter": true
+      },
+      "jeans": {
+        "name": "Jeans",
+        "owned": true,
+        "starter": true
+      },
+      "underwear": {
+        "name": "Underwear",
+        "owned": true,
+        "starter": true
+      },
+      "shoes": {
+        "name": "Shoes",
+        "owned": true,
+        "starter": true
+      }
+    },
+    "paperdollEquip": {
+      "tshirt": true,
+      "jeans": true,
+      "underwear": true,
+      "shoes": true
+    },
+    "littleGameProgress": 0,
+    "littleGameCompleted": false,
+    "littleGameZoeNamed": false,
+    "littleGameTrust": 0,
+    "littleGameHerShame": 100,
+    "littleGameRoom": 0,
+    "littleGameTurn": 0,
+    "littleGameMaxTurns": 0,
+    "littleGamePlayerGauge": 0,
+    "littleGameWomanGauge": 0,
+    "littleGameTargetPlayer": 0,
+    "littleGameTargetWoman": 0,
+    "littleGameRoomType": "",
+    "littleGameLastResult": "",
+    "littleGameLastAction": "",
+    "littleGameLastActor": "",
+    "littleGameLastDelta": 0,
+    "littleGameLog": [],
+    "littleGameActionTab": "player",
+    "littleGameNextArousalMultiplier": 1,
+    "littleGameZoeHelpUsed": false,
+    "littleGameSoftSetup": false,
+    "littleGamePopupVideo": "",
+    "littleGamePopupTitle": "",
+    "littleGameParty": [],
+    "littleGameStoredCombatParty": [],
+    "littleGameStoredCombatBench": [],
+    "characters": [
+      {
+        "id": "custom_character",
+        "name": "Alex",
+        "gender": "Female",
+        "main": {
+          "official": "images/ui/locked.webp",
+          "fan": ""
+        },
+        "chat": {
+          "official": "images/ui/locked.webp",
+          "fan": ""
+        },
+        "perks": [],
+        "outfit": "Regular Outfit",
+        "pregnant": false,
+        "virgin": false,
+        "ftimes": 0,
+        "cash": 35,
+        "breasts": "Regular",
+        "genitals": "Regular Cock",
+        "lust": 0,
+        "relationships": {
+          "daisy": 0,
+          "sydney": 0,
+          "jason": 0,
+          "debra": 0,
+          "fatman": 0,
+          "tony": 0,
+          "bella": 0,
+          "officerballs": 0,
+          "jewelz": 0,
+          "demonica": 0,
+          "fastfood": 0,
+          "bouncer": 0,
+          "groupie": 0,
+          "psychiatrist": 0,
+          "mia": 0,
+          "robert": 0,
+          "pauline": 0,
+          "natasha": 0,
+          "isaak": 0,
+          "little_game_woman": 0
+        },
+        "customImages": {
+          "chat": "",
+          "main": ""
+        }
+      },
+      {
+        "id": "daisy",
+        "name": "Daisy",
+        "gender": "Female",
+        "main": {
+          "official": "images/official/characters/daisy/main.webp",
+          "fan": "images/fan/characters/daisy/main.webp"
+        },
+        "chat": {
+          "official": "images/official/characters/daisy/chat.webp",
+          "fan": "images/fan/characters/daisy/chat.webp"
+        },
+        "perks": [
+          "Gay"
+        ],
+        "outfit": "Regular Outfit",
+        "pregnant": false,
+        "virgin": false,
+        "ftimes": 0,
+        "cash": 35,
+        "breasts": "Regular",
+        "genitals": "Regular Cock",
+        "lust": 0,
+        "relationships": {
+          "custom_character": 0,
+          "sydney": 0,
+          "jason": 0,
+          "debra": 0,
+          "fatman": 0,
+          "tony": 0,
+          "bella": 0,
+          "officerballs": 0,
+          "jewelz": 0,
+          "demonica": 0,
+          "fastfood": 0,
+          "bouncer": 0,
+          "groupie": 0,
+          "psychiatrist": 0,
+          "mia": 0,
+          "robert": 0,
+          "pauline": 0,
+          "natasha": 0,
+          "isaak": 0,
+          "little_game_woman": 0
+        },
+        "homelocation": "hallway_daisy",
+        "customImages": {
+          "chat": "",
+          "main": ""
+        }
+      },
+      {
+        "id": "sydney",
+        "name": "Sydney",
+        "gender": "Male",
+        "main": {
+          "official": "images/official/characters/sydney/sydney.webp",
+          "fan": "images/fan/characters/sydney/sydney.webp"
+        },
+        "chat": {
+          "official": "images/official/characters/sydney/sydneychat.webp",
+          "fan": "images/fan/characters/sydney/sydneychat.webp"
+        },
+        "perks": [],
+        "outfit": "Regular Outfit",
+        "pregnant": false,
+        "virgin": false,
+        "ftimes": 0,
+        "cash": 35,
+        "breasts": "Flat",
+        "genitals": "Big Cock",
+        "lust": 0,
+        "relationships": {
+          "custom_character": 0,
+          "daisy": 0,
+          "jason": 0,
+          "debra": 0,
+          "fatman": 0,
+          "tony": 0,
+          "bella": 0,
+          "officerballs": 0,
+          "jewelz": 0,
+          "demonica": 0,
+          "fastfood": 0,
+          "bouncer": 0,
+          "groupie": 0,
+          "psychiatrist": 0,
+          "mia": 0,
+          "robert": 0,
+          "pauline": 0,
+          "natasha": 0,
+          "isaak": 0,
+          "little_game_woman": 0
+        },
+        "homelocation": "hallway_sydney",
+        "customImages": {
+          "chat": "",
+          "main": ""
+        }
+      },
+      {
+        "id": "jason",
+        "name": "Jason",
+        "gender": "Male",
+        "main": {
+          "official": "images/official/characters/jason/jason.webp",
+          "fan": "images/fan/characters/jason/jason.webp"
+        },
+        "chat": {
+          "official": "images/official/characters/jason/jasonchat.webp",
+          "fan": "images/fan/characters/jason/jasonchat.webp"
+        },
+        "perks": [],
+        "outfit": "Regular Outfit",
+        "pregnant": false,
+        "virgin": false,
+        "ftimes": 0,
+        "cash": 35,
+        "breasts": "Flat",
+        "genitals": "Big Cock",
+        "lust": 0,
+        "relationships": {
+          "custom_character": 0,
+          "daisy": 0,
+          "sydney": 0,
+          "debra": 0,
+          "fatman": 0,
+          "tony": 0,
+          "bella": 0,
+          "officerballs": 0,
+          "jewelz": 0,
+          "demonica": 0,
+          "fastfood": 0,
+          "bouncer": 0,
+          "groupie": 0,
+          "psychiatrist": 0,
+          "mia": 0,
+          "robert": 0,
+          "pauline": 0,
+          "natasha": 0,
+          "isaak": 0,
+          "little_game_woman": 0
+        },
+        "homelocation": "hallway_jason",
+        "dates": false,
+        "customImages": {
+          "chat": "",
+          "main": ""
+        }
+      },
+      {
+        "id": "debra",
+        "name": "Debra",
+        "gender": "Female",
+        "main": {
+          "official": "images/official/characters/debra/main.webp",
+          "fan": "images/fan/characters/debra/main.webp"
+        },
+        "chat": {
+          "official": "images/official/characters/debra/chat.webp",
+          "fan": "images/fan/characters/debra/chat.webp"
+        },
+        "perks": [
+          "Gay"
+        ],
+        "outfit": "Regular Outfit",
+        "pregnant": false,
+        "virgin": false,
+        "ftimes": 0,
+        "cash": 35,
+        "breasts": "Regular",
+        "genitals": "Vagina",
+        "lust": 0,
+        "relationships": {
+          "custom_character": 0,
+          "daisy": 0,
+          "sydney": 0,
+          "jason": 0,
+          "fatman": 0,
+          "tony": 0,
+          "bella": 0,
+          "officerballs": 0,
+          "jewelz": 0,
+          "demonica": 0,
+          "fastfood": 0,
+          "bouncer": 0,
+          "groupie": 0,
+          "psychiatrist": 0,
+          "mia": 0,
+          "robert": 0,
+          "pauline": 0,
+          "natasha": 0,
+          "isaak": 0,
+          "little_game_woman": 0
+        },
+        "homelocation": "hallway_debra",
+        "dates": false,
+        "customImages": {
+          "chat": "",
+          "main": ""
+        }
+      },
+      {
+        "id": "fatman",
+        "name": "Fatman",
+        "gender": "Male",
+        "main": {
+          "official": "images/official/characters/fatman/main.webp",
+          "fan": "images/fan/characters/fatman/main.webp"
+        },
+        "chat": {
+          "official": "images/official/characters/fatman/fatmanchat.webp",
+          "fan": "images/fan/characters/fatman/fatmanchat.webp"
+        },
+        "perks": [
+          "Gay"
+        ],
+        "outfit": "Regular Outfit",
+        "pregnant": false,
+        "virgin": false,
+        "ftimes": 0,
+        "cash": 35,
+        "breasts": "Huge",
+        "genitals": "Tiny Cock",
+        "lust": 0,
+        "relationships": {
+          "custom_character": 0,
+          "daisy": 0,
+          "sydney": 0,
+          "jason": 0,
+          "debra": 0,
+          "tony": 0,
+          "bella": 0,
+          "officerballs": 0,
+          "jewelz": 0,
+          "demonica": 0,
+          "fastfood": 0,
+          "bouncer": 0,
+          "groupie": 0,
+          "psychiatrist": 0,
+          "mia": 0,
+          "robert": 0,
+          "pauline": 0,
+          "natasha": 0,
+          "isaak": 0,
+          "little_game_woman": 0
+        },
+        "homelocation": "hallway_fatman",
+        "dates": false,
+        "customImages": {
+          "chat": "",
+          "main": ""
+        }
+      },
+      {
+        "id": "tony",
+        "name": "Tony",
+        "gender": "Male",
+        "main": {
+          "official": "images/official/characters/tony/main.webp",
+          "fan": "images/fan/characters/tony/main.webp"
+        },
+        "chat": {
+          "official": "images/official/characters/tony/tonychat.webp",
+          "fan": "images/fan/characters/tony/tonychat.webp"
+        },
+        "perks": [
+          "Gay"
+        ],
+        "outfit": "Regular Outfit",
+        "pregnant": false,
+        "virgin": false,
+        "ftimes": 0,
+        "cash": 35,
+        "breasts": "Flat",
+        "genitals": "Tiny Cock",
+        "lust": 0,
+        "relationships": {
+          "custom_character": 0,
+          "daisy": 0,
+          "sydney": 0,
+          "jason": 0,
+          "debra": 0,
+          "fatman": 0,
+          "bella": 0,
+          "officerballs": 0,
+          "jewelz": 0,
+          "demonica": 0,
+          "fastfood": 0,
+          "bouncer": 0,
+          "groupie": 0,
+          "psychiatrist": 0,
+          "mia": 0,
+          "robert": 0,
+          "pauline": 0,
+          "natasha": 0,
+          "isaak": 0,
+          "little_game_woman": 0
+        },
+        "homelocation": "hallway_tony",
+        "dates": false,
+        "customImages": {
+          "chat": "",
+          "main": ""
+        }
+      },
+      {
+        "id": "bella",
+        "name": "Bella",
+        "gender": "Female",
+        "main": {
+          "official": "images/official/characters/bella/main.webp",
+          "fan": "images/fan/characters/bella/main.webp"
+        },
+        "chat": {
+          "official": "images/official/characters/bella/chat.webp",
+          "fan": "images/fan/characters/bella/chat.webp"
+        },
+        "perks": [
+          "Gay"
+        ],
+        "outfit": "Regular Outfit",
+        "pregnant": false,
+        "virgin": false,
+        "ftimes": 0,
+        "cash": 35,
+        "breasts": "Regular",
+        "genitals": "Vagina",
+        "lust": 0,
+        "relationships": {
+          "custom_character": 0,
+          "daisy": 0,
+          "sydney": 0,
+          "jason": 0,
+          "debra": 0,
+          "fatman": 0,
+          "tony": 0,
+          "officerballs": 0,
+          "jewelz": 0,
+          "demonica": 0,
+          "fastfood": 0,
+          "bouncer": 0,
+          "groupie": 0,
+          "psychiatrist": 0,
+          "mia": 0,
+          "robert": 0,
+          "pauline": 0,
+          "natasha": 0,
+          "isaak": 0,
+          "little_game_woman": 0
+        },
+        "homelocation": "hallway_bella",
+        "dates": false,
+        "customImages": {
+          "chat": "",
+          "main": ""
+        }
+      },
+      {
+        "id": "officerballs",
+        "name": "Officer Balls",
+        "gender": "Male",
+        "main": {
+          "official": "images/official/characters/officerballs/main.webp",
+          "fan": "images/fan/characters/officerballs/main.webp"
+        },
+        "chat": {
+          "official": "images/official/characters/officerballs/chat.webp",
+          "fan": "images/fan/characters/officerballs/chat.webp"
+        },
+        "perks": [],
+        "outfit": "Regular Outfit",
+        "pregnant": false,
+        "virgin": false,
+        "ftimes": 0,
+        "cash": 35,
+        "breasts": "Flat",
+        "genitals": "Regular Cock",
+        "lust": 0,
+        "relationships": {
+          "custom_character": 0,
+          "daisy": 0,
+          "sydney": 0,
+          "jason": 0,
+          "debra": 0,
+          "fatman": 0,
+          "tony": 0,
+          "bella": 0,
+          "jewelz": 0,
+          "demonica": 0,
+          "fastfood": 0,
+          "bouncer": 0,
+          "groupie": 0,
+          "psychiatrist": 0,
+          "mia": 0,
+          "robert": 0,
+          "pauline": 0,
+          "natasha": 0,
+          "isaak": 0,
+          "little_game_woman": 0
+        },
+        "homelocation": "hallway_officerballs",
+        "dates": false,
+        "customImages": {
+          "chat": "",
+          "main": ""
+        }
+      },
+      {
+        "id": "jewelz",
+        "name": "Jewelz",
+        "gender": "Female",
+        "main": {
+          "official": "images/official/characters/jewelz/main.webp",
+          "fan": "images/fan/characters/jewelz/main.webp"
+        },
+        "chat": {
+          "official": "images/official/characters/jewelz/chat.webp",
+          "fan": "images/fan/characters/jewelz/chat.webp"
+        },
+        "perks": [],
+        "outfit": "Regular Outfit",
+        "pregnant": false,
+        "virgin": false,
+        "ftimes": 0,
+        "cash": 35,
+        "breasts": "Small",
+        "genitals": "Vagina",
+        "lust": 0,
+        "relationships": {
+          "custom_character": 0,
+          "daisy": 0,
+          "sydney": 0,
+          "jason": 0,
+          "debra": 0,
+          "fatman": 0,
+          "tony": 0,
+          "bella": 0,
+          "officerballs": 0,
+          "demonica": 0,
+          "fastfood": 0,
+          "bouncer": 0,
+          "groupie": 0,
+          "psychiatrist": 0,
+          "mia": 0,
+          "robert": 0,
+          "pauline": 0,
+          "natasha": 0,
+          "isaak": 0,
+          "little_game_woman": 0
+        },
+        "customImages": {
+          "chat": "",
+          "main": ""
+        }
+      },
+      {
+        "id": "demonica",
+        "name": "Demonica",
+        "gender": "Female",
+        "main": {
+          "official": "images/official/characters/demonica/main.webp",
+          "fan": "images/fan/characters/demonica/main.webp"
+        },
+        "chat": {
+          "official": "images/official/characters/demonica/chat.webp",
+          "fan": "images/fan/characters/demonica/chat.webp"
+        },
+        "perks": [],
+        "outfit": "Regular Outfit",
+        "pregnant": false,
+        "virgin": false,
+        "ftimes": 0,
+        "cash": 35,
+        "breasts": "Small",
+        "genitals": "Vagina",
+        "lust": 0,
+        "relationships": {
+          "custom_character": 0,
+          "daisy": 0,
+          "sydney": 0,
+          "jason": 0,
+          "debra": 0,
+          "fatman": 0,
+          "tony": 0,
+          "bella": 0,
+          "officerballs": 0,
+          "jewelz": 0,
+          "fastfood": 0,
+          "bouncer": 0,
+          "groupie": 0,
+          "psychiatrist": 0,
+          "mia": 0,
+          "robert": 0,
+          "pauline": 0,
+          "natasha": 0,
+          "isaak": 0,
+          "little_game_woman": 0
+        },
+        "customImages": {
+          "chat": "",
+          "main": ""
+        }
+      },
+      {
+        "id": "fastfood",
+        "name": "Fast Food Employee",
+        "gender": "Female",
+        "main": {
+          "official": "images/official/characters/burgerwoman/main.webp",
+          "fan": "images/fan/characters/burgerwoman/main.webp"
+        },
+        "chat": {
+          "official": "images/official/characters/burgerwoman/chat.webp",
+          "fan": "images/fan/characters/burgerwoman/chat.webp"
+        },
+        "perks": [
+          "Gay"
+        ],
+        "outfit": "Regular Outfit",
+        "pregnant": false,
+        "virgin": false,
+        "ftimes": 0,
+        "cash": 35,
+        "breasts": "Small",
+        "genitals": "Vagina",
+        "lust": 0,
+        "relationships": {
+          "custom_character": 0,
+          "daisy": 0,
+          "sydney": 0,
+          "jason": 0,
+          "debra": 0,
+          "fatman": 0,
+          "tony": 0,
+          "bella": 0,
+          "officerballs": 0,
+          "jewelz": 0,
+          "demonica": 0,
+          "bouncer": 0,
+          "groupie": 0,
+          "psychiatrist": 0,
+          "mia": 0,
+          "robert": 0,
+          "pauline": 0,
+          "natasha": 0,
+          "isaak": 0,
+          "little_game_woman": 0
+        },
+        "customImages": {
+          "chat": "",
+          "main": ""
+        }
+      },
+      {
+        "id": "bouncer",
+        "name": "Blade The Bouncer",
+        "gender": "Male",
+        "main": {
+          "official": "images/official/characters/blade/main.webp",
+          "fan": "images/fan/characters/blade/main.webp"
+        },
+        "chat": {
+          "official": "images/official/characters/blade/bladechat.webp",
+          "fan": "images/fan/characters/blade/bladechat.webp"
+        },
+        "perks": [],
+        "outfit": "Regular Outfit",
+        "pregnant": false,
+        "virgin": false,
+        "ftimes": 0,
+        "cash": 35,
+        "breasts": "Flat",
+        "genitals": "Regular Cock",
+        "lust": 0,
+        "relationships": {
+          "custom_character": 0,
+          "daisy": 0,
+          "sydney": 0,
+          "jason": 0,
+          "debra": 0,
+          "fatman": 0,
+          "tony": 0,
+          "bella": 0,
+          "officerballs": 0,
+          "jewelz": 0,
+          "demonica": 0,
+          "fastfood": 0,
+          "groupie": 0,
+          "psychiatrist": 0,
+          "mia": 0,
+          "robert": 0,
+          "pauline": 0,
+          "natasha": 0,
+          "isaak": 0,
+          "little_game_woman": 0
+        },
+        "customImages": {
+          "chat": "",
+          "main": ""
+        }
+      },
+      {
+        "id": "groupie",
+        "name": "Nightclub Groupie",
+        "gender": "Female",
+        "main": {
+          "official": "images/official/characters/groupie/main.webp",
+          "fan": "images/fan/characters/groupie/main.webp"
+        },
+        "chat": {
+          "official": "images/official/characters/groupie/groupiechat.webp",
+          "fan": "images/fan/characters/groupie/groupiechat.webp"
+        },
+        "perks": [],
+        "outfit": "Regular Outfit",
+        "pregnant": false,
+        "virgin": false,
+        "ftimes": 0,
+        "cash": 35,
+        "breasts": "Small",
+        "genitals": "Vagina",
+        "lust": 0,
+        "relationships": {
+          "custom_character": 0,
+          "daisy": 0,
+          "sydney": 0,
+          "jason": 0,
+          "debra": 0,
+          "fatman": 0,
+          "tony": 0,
+          "bella": 0,
+          "officerballs": 0,
+          "jewelz": 0,
+          "demonica": 0,
+          "fastfood": 0,
+          "bouncer": 0,
+          "psychiatrist": 0,
+          "mia": 0,
+          "robert": 0,
+          "pauline": 0,
+          "natasha": 0,
+          "isaak": 0,
+          "little_game_woman": 0
+        },
+        "customImages": {
+          "chat": "",
+          "main": ""
+        }
+      },
+      {
+        "id": "psychiatrist",
+        "name": "Psychiatrist",
+        "gender": "Female",
+        "main": {
+          "official": "images/official/characters/psychiatrist/main.webp",
+          "fan": "images/fan/characters/psychiatrist/main.webp"
+        },
+        "chat": {
+          "official": "images/official/characters/psychiatrist/chat.webp",
+          "fan": "images/fan/characters/psychiatrist/chat.webp"
+        },
+        "perks": [],
+        "outfit": "Regular Outfit",
+        "pregnant": false,
+        "virgin": false,
+        "ftimes": 0,
+        "cash": 35,
+        "breasts": "Small",
+        "genitals": "Vagina",
+        "lust": 0,
+        "relationships": {
+          "custom_character": 0,
+          "daisy": 0,
+          "sydney": 0,
+          "jason": 0,
+          "debra": 0,
+          "fatman": 0,
+          "tony": 0,
+          "bella": 0,
+          "officerballs": 0,
+          "jewelz": 0,
+          "demonica": 0,
+          "fastfood": 0,
+          "bouncer": 0,
+          "groupie": 0,
+          "mia": 0,
+          "robert": 0,
+          "pauline": 0,
+          "natasha": 0,
+          "isaak": 0,
+          "little_game_woman": 0
+        },
+        "customImages": {
+          "chat": "",
+          "main": ""
+        }
+      },
+      {
+        "id": "mia",
+        "name": "Mia",
+        "gender": "Female",
+        "main": {
+          "official": "images/official/characters/mia/police_outfit.webp",
+          "fan": "images/fan/characters/mia/police_outfit.webp"
+        },
+        "chat": {
+          "official": "images/official/characters/mia/police_chat.webp",
+          "fan": "images/fan/characters/mia/police_chat.webp"
+        },
+        "perks": [],
+        "outfit": "Regular Outfit",
+        "pregnant": false,
+        "virgin": false,
+        "ftimes": 0,
+        "cash": 35,
+        "breasts": "Small",
+        "genitals": "Vagina",
+        "lust": 0,
+        "relationships": {
+          "custom_character": 0,
+          "daisy": 0,
+          "sydney": 0,
+          "jason": 0,
+          "debra": 0,
+          "fatman": 0,
+          "tony": 0,
+          "bella": 0,
+          "officerballs": 0,
+          "jewelz": 0,
+          "demonica": 0,
+          "fastfood": 0,
+          "bouncer": 0,
+          "groupie": 0,
+          "psychiatrist": 0,
+          "robert": 0,
+          "pauline": 0,
+          "natasha": 0,
+          "isaak": 0,
+          "little_game_woman": 0
+        },
+        "customImages": {
+          "chat": "",
+          "main": ""
+        }
+      },
+      {
+        "id": "robert",
+        "name": "Robert",
+        "gender": "Male",
+        "main": {
+          "official": "images/official/characters/robert/chatoutfit.webp",
+          "fan": "images/fan/characters/robert/chatoutfit.webp"
+        },
+        "chat": {
+          "official": "images/official/characters/robert/chat.webp",
+          "fan": "images/fan/characters/robert/chat.webp"
+        },
+        "perks": [],
+        "outfit": "Regular Outfit",
+        "pregnant": false,
+        "virgin": false,
+        "ftimes": 0,
+        "cash": 35,
+        "breasts": "Small",
+        "genitals": "Regular Cock",
+        "lust": 0,
+        "relationships": {
+          "custom_character": 0,
+          "daisy": 0,
+          "sydney": 0,
+          "jason": 0,
+          "debra": 0,
+          "fatman": 0,
+          "tony": 0,
+          "bella": 0,
+          "officerballs": 0,
+          "jewelz": 0,
+          "demonica": 0,
+          "fastfood": 0,
+          "bouncer": 0,
+          "groupie": 0,
+          "psychiatrist": 0,
+          "mia": 0,
+          "pauline": 0,
+          "natasha": 0,
+          "isaak": 0,
+          "little_game_woman": 0
+        },
+        "customImages": {
+          "chat": "",
+          "main": ""
+        }
+      },
+      {
+        "id": "pauline",
+        "name": "Pauline",
+        "gender": "Female",
+        "main": {
+          "official": "images/official/characters/pauline/chatoutfit.webp",
+          "fan": "images/fan/characters/pauline/chatoutfit.webp"
+        },
+        "chat": {
+          "official": "images/official/characters/pauline/chat.webp",
+          "fan": "images/fan/characters/pauline/chat.webp"
+        },
+        "perks": [],
+        "outfit": "Regular Outfit",
+        "pregnant": false,
+        "virgin": false,
+        "ftimes": 0,
+        "cash": 35,
+        "breasts": "Huge",
+        "genitals": "Vagina",
+        "lust": 0,
+        "relationships": {
+          "custom_character": 0,
+          "daisy": 0,
+          "sydney": 0,
+          "jason": 0,
+          "debra": 0,
+          "fatman": 0,
+          "tony": 0,
+          "bella": 0,
+          "officerballs": 0,
+          "jewelz": 0,
+          "demonica": 0,
+          "fastfood": 0,
+          "bouncer": 0,
+          "groupie": 0,
+          "psychiatrist": 0,
+          "mia": 0,
+          "robert": 0,
+          "natasha": 0,
+          "isaak": 0,
+          "little_game_woman": 0
+        },
+        "customImages": {
+          "chat": "",
+          "main": ""
+        }
+      },
+      {
+        "id": "natasha",
+        "name": "Natasha",
+        "gender": "Female",
+        "main": {
+          "official": "images/official/characters/natasha/chatimage.webp",
+          "fan": "images/fan/characters/natasha/chatimage.webp"
+        },
+        "chat": {
+          "official": "images/official/characters/natasha/chat.webp",
+          "fan": "images/fan/characters/natasha/chat.webp"
+        },
+        "perks": [],
+        "outfit": "Regular Outfit",
+        "pregnant": false,
+        "virgin": false,
+        "ftimes": 0,
+        "cash": 35,
+        "breasts": "Small",
+        "genitals": "Vagina",
+        "lust": 0,
+        "relationships": {
+          "custom_character": 0,
+          "daisy": 0,
+          "sydney": 0,
+          "jason": 0,
+          "debra": 0,
+          "fatman": 0,
+          "tony": 0,
+          "bella": 0,
+          "officerballs": 0,
+          "jewelz": 0,
+          "demonica": 0,
+          "fastfood": 0,
+          "bouncer": 0,
+          "groupie": 0,
+          "psychiatrist": 0,
+          "mia": 0,
+          "robert": 0,
+          "pauline": 0,
+          "isaak": 0,
+          "little_game_woman": 0
+        },
+        "customImages": {
+          "chat": "",
+          "main": ""
+        }
+      },
+      {
+        "id": "isaak",
+        "name": "Isaak",
+        "gender": "Male",
+        "main": {
+          "official": "images/official/characters/isaac/chatimage.webp",
+          "fan": "images/fan/characters/isaac/chatimage.webp"
+        },
+        "chat": {
+          "official": "images/official/characters/isaac/chat.webp",
+          "fan": "images/fan/characters/isaac/chat.webp"
+        },
+        "perks": [],
+        "outfit": "Regular Outfit",
+        "pregnant": false,
+        "virgin": false,
+        "ftimes": 0,
+        "cash": 35,
+        "breasts": "Small",
+        "genitals": "Tiny Cock",
+        "lust": 0,
+        "relationships": {
+          "custom_character": 0,
+          "daisy": 0,
+          "sydney": 0,
+          "jason": 0,
+          "debra": 0,
+          "fatman": 0,
+          "tony": 0,
+          "bella": 0,
+          "officerballs": 0,
+          "jewelz": 0,
+          "demonica": 0,
+          "fastfood": 0,
+          "bouncer": 0,
+          "groupie": 0,
+          "psychiatrist": 0,
+          "mia": 0,
+          "robert": 0,
+          "pauline": 0,
+          "natasha": 0,
+          "little_game_woman": 0
+        },
+        "customImages": {
+          "chat": "",
+          "main": ""
+        }
+      },
+      {
+        "id": "little_game_woman",
+        "name": "Unknown Woman",
+        "gender": "Female",
+        "main": {
+          "official": "images/fan/characters/zoe/image/1.webp",
+          "fan": "images/fan/characters/zoe/image/1.webp"
+        },
+        "chat": {
+          "official": "images/fan/characters/zoe/chat/1.webp",
+          "fan": "images/fan/characters/zoe/chat/1.webp"
+        },
+        "perks": [],
+        "outfit": "None",
+        "pregnant": false,
+        "virgin": false,
+        "ftimes": 0,
+        "cash": 0,
+        "breasts": "Regular",
+        "genitals": "Vagina",
+        "lust": 0,
+        "relationships": {
+          "custom_character": 0,
+          "daisy": 0,
+          "sydney": 0,
+          "jason": 0,
+          "debra": 0,
+          "fatman": 0,
+          "tony": 0,
+          "bella": 0,
+          "officerballs": 0,
+          "jewelz": 0,
+          "demonica": 0,
+          "fastfood": 0,
+          "bouncer": 0,
+          "groupie": 0,
+          "psychiatrist": 0,
+          "mia": 0,
+          "robert": 0,
+          "pauline": 0,
+          "natasha": 0,
+          "isaak": 0
+        },
+        "homelocation": "little_game_room",
+        "customImages": {
+          "chat": "",
+          "main": ""
+        }
+      }
+    ],
+    "allPerks": [
+      "Family Lover",
+      "Gay",
+      "Nymphomaniac",
+      "Foot Fetishist",
+      "Coomer",
+      "Perverted",
+      "Facial'd",
+      "Lactating",
+      "Nudist",
+      "Virgin",
+      "Cuck",
+      "Dominatrix",
+      "Fuck Toy"
+    ],
+    "allBreasts": [
+      "Flat",
+      "Small",
+      "Regular",
+      "Huge"
+    ],
+    "allGenitals": [
+      "Vagina",
+      "Tiny Cock",
+      "Regular Cock",
+      "Big Cock"
+    ],
+    "genders": [
+      "Male",
+      "Female"
+    ],
+    "achievementTypeCovers": {
+      "Home": "<img src='images/fan/achievements/categories/1.webp'>",
+      "Pregnancy": "<img src='images/fan/achievements/categories/2.webp'>",
+      "Family": "<img src='images/fan/achievements/categories/3.webp'>",
+      "Combat": "<img src='images/fan/achievements/categories/4.webp'>",
+      "Zoe": "<img src='images/fan/characters/zoe/image/1.webp'>"
+    },
+    "achievements": {
+      "welcome": {
+        "unlocked": false,
+        "title": "Welcome to Lustbound",
+        "description": "Started the game",
+        "image": "<img src='images/fan/achievements/1/1.webp'>",
+        "type": "Home",
+        "rarity": "common"
+      },
+      "meetmia": {
+        "unlocked": false,
+        "title": "Meet Mia",
+        "description": "You met Mia!",
+        "image": "<img src='images/fan/achievements/1/2.webp'>",
+        "type": "Home",
+        "rarity": "common"
+      },
+      "meettony": {
+        "unlocked": false,
+        "title": "Meet Tony",
+        "description": "You met Tony!",
+        "image": "<img src='images/fan/achievements/1/3.webp'>",
+        "type": "Home",
+        "rarity": "common"
+      },
+      "fucktony": {
+        "unlocked": false,
+        "title": "Fuck Tony",
+        "description": "You FUCKED Tony!",
+        "image": "<img src='images/fan/achievements/1/4.webp'>",
+        "type": "Home",
+        "rarity": "uncommon"
+      },
+      "fuckmia": {
+        "unlocked": false,
+        "title": "Fuck Mia",
+        "description": "You FUCKED Mia!",
+        "image": "<img src='images/fan/achievements/1/5.webp'>",
+        "type": "Home",
+        "rarity": "uncommon"
+      },
+      "pregmia": {
+        "unlocked": false,
+        "title": "Mia Pregnant",
+        "description": "You got Mia pregnant.",
+        "image": "<img src='images/fan/achievements/1/miapreg.webp'>",
+        "type": "Pregnancy",
+        "rarity": "rare"
+      },
+      "pregtony": {
+        "unlocked": false,
+        "title": "Tony Pregnant",
+        "description": "You got Tony pregnant.",
+        "image": "<img src='images/fan/achievements/1/tonypreg.webp'>",
+        "type": "Pregnancy",
+        "rarity": "rare"
+      },
+      "pregdebra": {
+        "unlocked": false,
+        "title": "Debra Pregnant",
+        "description": "You got Debra pregnant.",
+        "image": "<img src='images/fan/achievements/1/debrapreg.webp'>",
+        "type": "Pregnancy",
+        "rarity": "rare"
+      },
+      "pregjewelz": {
+        "unlocked": false,
+        "title": "Jewelz Pregnant",
+        "description": "You got Jewelz pregnant.",
+        "image": "<img src='images/fan/achievements/1/jewelzpreg.webp'>",
+        "type": "Pregnancy",
+        "rarity": "rare"
+      },
+      "pregnatasha": {
+        "unlocked": false,
+        "title": "Natasha Pregnant",
+        "description": "You got Natasha pregnant.",
+        "image": "<img src='images/fan/characters/natasha/cosplayoufit.webp'>",
+        "type": "Pregnancy",
+        "rarity": "rare"
+      },
+      "pregpauline": {
+        "unlocked": false,
+        "title": "Pauline Pregnant",
+        "description": "You got Pauline pregnant.",
+        "image": "<img src='images/fan/characters/pauline/cosplayoufit.webp'>",
+        "type": "Pregnancy",
+        "rarity": "rare"
+      },
+      "pregplayer": {
+        "unlocked": false,
+        "title": "Expecting",
+        "description": "Get pregnant.",
+        "image": "<img src='images/fan/characters/psychiatrist/main.webp'>",
+        "type": "Pregnancy",
+        "rarity": "rare"
+      },
+      "happyending": {
+        "unlocked": false,
+        "title": "Employee of the month",
+        "description": "You gave a customer a happy ending.",
+        "image": "<img src='images/fan/achievements/1/6.webp'>",
+        "type": "Home",
+        "rarity": "common"
+      },
+      "altar": {
+        "unlocked": false,
+        "title": "Altar unlocked",
+        "description": "You unlocked the transformation altar",
+        "image": "<img src='images/fan/achievements/1/7.webp'>",
+        "type": "Home",
+        "rarity": "rare"
+      },
+      "mrmoneybags": {
+        "unlocked": false,
+        "title": "Mr Money Bags",
+        "description": "Have over $1000",
+        "requirement": "Reach $1000 cash on hand.",
+        "progressTarget": 1000,
+        "tracker": "playerCash",
+        "image": "<img src='images/fan/achievements/1/8.webp'>",
+        "type": "Home",
+        "rarity": "rare"
+      },
+      "familyspy": {
+        "unlocked": false,
+        "title": "Family Peeping",
+        "description": "Spy on someone showering at Mom's House.",
+        "image": "<img src='images/fan/achievements/1/showerpeeping.webp'>",
+        "type": "Family",
+        "rarity": "common"
+      },
+      "familykicked": {
+        "unlocked": false,
+        "title": "Family Exile",
+        "description": "Get kicked out of Mom's House for 3 days.",
+        "image": "<img src='images/fan/achievements/1/familyexile.webp'>",
+        "type": "Family",
+        "rarity": "uncommon"
+      },
+      "familyalter": {
+        "unlocked": false,
+        "title": "Family Altered",
+        "description": "Alter a family member using the altar.",
+        "image": "<img src='images/fan/achievements/1/familyaltered.webp'>",
+        "type": "Family",
+        "rarity": "rare"
+      },
+      "fucknatasha": {
+        "unlocked": false,
+        "title": "Fuck Natasha",
+        "description": "Have sex with Natasha.",
+        "image": "<img src='images/fan/characters/natasha/sluttyoutfit.webp'>",
+        "type": "Family",
+        "rarity": "common"
+      },
+      "analnatasha": {
+        "unlocked": false,
+        "title": "Anal Fuck Natasha",
+        "description": "Take Natasha for an anal ride.",
+        "image": "<img src='images/fan/characters/natasha/nightwear.webp'>",
+        "type": "Family",
+        "rarity": "uncommon"
+      },
+      "oralnatasha": {
+        "unlocked": false,
+        "title": "Receive Oral from Natasha",
+        "description": "Get oral from Natasha.",
+        "image": "<img src='images/fan/characters/natasha/natasha_old.webp'>",
+        "type": "Family",
+        "rarity": "common"
+      },
+      "flirtisaak": {
+        "unlocked": false,
+        "title": "Flirt with Isaak",
+        "description": "Flirt with Isaak.",
+        "image": "<img src='images/fan/characters/isaac/shower_help.webp'>",
+        "type": "Family",
+        "rarity": "common"
+      },
+      "fuckpauline": {
+        "unlocked": false,
+        "title": "Fuck Pauline",
+        "description": "Have sex with Pauline.",
+        "image": "<img src='images/fan/characters/pauline/momslut.webp'>",
+        "type": "Family",
+        "rarity": "common"
+      },
+      "analpauline": {
+        "unlocked": false,
+        "title": "Anal Fuck Pauline",
+        "description": "Take Pauline for an anal ride.",
+        "image": "<img src='images/fan/characters/pauline/maidoutfit.webp'>",
+        "type": "Family",
+        "rarity": "uncommon"
+      },
+      "householdhundred": {
+        "unlocked": false,
+        "title": "All In The Family",
+        "description": "Fuck household members 100 times.",
+        "requirement": "Reach 100 household fucks.",
+        "progressTarget": 100,
+        "tracker": "householdFucks",
+        "image": "<img src='images/fan/characters/pauline/nightwear.webp'>",
+        "type": "Family",
+        "rarity": "rare"
+      },
+      "householddate": {
+        "unlocked": false,
+        "title": "A Proper Date",
+        "description": "Go on a date with a household character.",
+        "image": "<img src='images/fan/characters/ashlee/bartender.webp'>",
+        "type": "Family",
+        "rarity": "common"
+      },
+      "hobochamp": {
+        "unlocked": false,
+        "title": "Hobo Champ",
+        "description": "Defeat the hobo in combat.",
+        "image": "<img src='images/fan/characters/hobo/hobo_main.webp'>",
+        "type": "Combat",
+        "rarity": "common"
+      },
+      "miaspar": {
+        "unlocked": false,
+        "title": "Beat The Badge",
+        "description": "Beat Mia in a sparring match.",
+        "image": "<img src='images/fan/characters/mia/chatimage.webp'>",
+        "type": "Combat",
+        "rarity": "uncommon"
+      },
+      "jasonchamp": {
+        "unlocked": false,
+        "title": "Park Thug Takedown",
+        "description": "Defeat Jason in combat.",
+        "image": "<img src='images/fan/characters/jason/jason.webp'>",
+        "type": "Combat",
+        "rarity": "uncommon"
+      },
+      "miarecruit": {
+        "unlocked": false,
+        "title": "Call For Backup",
+        "description": "Recruit Mia to your combat party.",
+        "image": "<img src='images/fan/characters/mia/police_outfit.webp'>",
+        "type": "Combat",
+        "rarity": "common"
+      },
+      "gamemaster": {
+        "unlocked": false,
+        "title": "Game Master",
+        "description": "In 'A little game' complete the first challenge in five turns or less.",
+        "image": "<img src='images/fan/characters/zoe/image/hippy.webp'>",
+        "type": "Zoe",
+        "rarity": "common"
+      },
+      "watchandlearn": {
+        "unlocked": false,
+        "title": "Watch and learn",
+        "description": "In 'A little game' finish challenge 1 without Zoe's help.",
+        "image": "<img src='images/fan/characters/zoe/image/sisterpool.webp'>",
+        "type": "Zoe",
+        "rarity": "common"
+      },
+      "alittlegame": {
+        "unlocked": false,
+        "title": "Game Completed",
+        "description": "Complete 'A little game'",
+        "image": "<img src='images/fan/characters/zoe/image/bunny.webp'>",
+        "type": "Zoe",
+        "rarity": "common"
+      },
+      "ngplus": {
+        "unlocked": false,
+        "title": "NG+",
+        "description": "Start a NG+ game via the altar",
+        "image": "<img src='images/fan/characters/zoe/image/nude.webp'>",
+        "type": "Zoe",
+        "rarity": "rare"
+      }
+    },
+    "lastNonUiPassage": "Landing Page"
+  },
+  "save_caps": {
+    "stateMarshal": true,
+    "engineShow": true,
+    "serialize": true,
+    "slots": true,
+    "saveNamespace": "SugarCube.Save"
+  },
+  "state_hash": "baa6d12a1135a101",
+  "body_text": "New Game\nLoad Game\nChangelog\nv.0.726",
+  "body_html": " <div class=\"backgroundmenu\">     <div class=\"landingpagebox\">         <div class=\"amoretitlesummer\"><img src=\"images/ui/logo.webp\" alt=\"\"></div>         <button data-passage=\"starting_game_1\" class=\"button link-internal\" type=\"button\" tabindex=\"0\" role=\"link\">New Game</button>         <button class=\"link-internal macro-button\" type=\"button\" role=\"button\" tabindex=\"0\">Load Game</button>         <button data-passage=\"changelog_new\" class=\"button link-internal\" type=\"button\" tabindex=\"0\" role=\"link\">Changelog</button>                  v.0.726     </div> </div>",
+  "modal_text": null
+}

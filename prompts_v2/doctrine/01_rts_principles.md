@@ -122,6 +122,8 @@ Anti-pattern: a Lane 1 menu item that decrements `relation` on locked-click. Tha
 
 The big beats — first night, pregnancy reveal, declaration — get HAND-written, one of one, deliberate. The daily texture — hallway encounters, random teases, walk-ins — is mechanism. One cascade fires sometimes. Don't waste real prose on what happens 30 times.
 
+**Mechanize the prose, not the priority.** "Texture" here means the *writing* is templated and re-readable (RTS-flat) — it does NOT mean the daily loop is low-value or low-coverage. For a cohabitation game the daily routine is the **primary content channel by volume** (`doctrine/02` §6, §3.1): it is where the corruption the player built gets spent. Mechanize each chore's prose so it survives 30 readings; do not *under-build the routine itself*. A thin daily loop — few solo hosts, no walk-ins, no feeder floor — starves the game no matter how good the capstones are.
+
 **RTS evidence (Doc 35):**
 
 > RTS doesn't mutate canvases for persistent states; it ROUTES to separate variant passages on the state predicate. Pregnancy gives a separate `BrotherBedroomPregnantSex1` passage variant. Pattern F real-choice forks (e.g., `SellingMyStepsister` Accept/Refuse branch) are hand-authored. Linkreplace cascade mechanism for the daily texture. Mechanism for what repeats; authorship for what doesn't.
@@ -165,7 +167,7 @@ The player has to be able to SEE the world. Where every NPC is. What time it is.
 > Right sidebar continuously renders Time (Early Morning, Monday, Clear weather), Quest pin, and per-NPC rows (Stepfather: Kitchen / Arousal / Corruption / Stepbrother: Bathroom / Arousal / Corruption / Stepgrandfather: Bedroom / Arousal / Corruption). Updates every tick. No menu click required to check NPC state.
 
 **Authoring implication:** the sidebar must surface, for every in-scope NPC:
-- Current location (via `getNpcLocation` runtime; sidebar item type pending Doc 64 PRD)
+- Current location (via `getNpcLocation`; surfaced by the `npc_panel` `location` row — shipped)
 - Key stats per the register (arousal + corruption + relation for family/ambient; relation only for peer/service; location-only for antagonist)
 
 Without per-NPC location radar, Lane 3 becomes undiscoverable — the player can't plan "if I shower now and Frank is in the kitchen, will he walk in?" The whole "you were doing X and he happened" texture depends on the player having the situational awareness to choose X knowing it might collide with the NPC.

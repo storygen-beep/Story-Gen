@@ -146,6 +146,10 @@ class TemplateLocation:
     navigation_order: List[str] = field(default_factory=list)
     entry_conditions: Dict[str, Any] = field(default_factory=dict)
     blocked_message: str = ""
+    # Per-ENTRY travel friction charged when the player moves INTO this location.
+    # `time` (minutes) advances the day-cycle clock; every other key deducts that
+    # player trait (e.g. energy). Empty = a free move (today's behavior).
+    costs: Dict[str, int] = field(default_factory=dict)
     clothing_rules: List[Dict[str, Any]] = field(default_factory=list)
 
 
@@ -1633,6 +1637,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 navigation_order=[str(x) for x in _require_list(l, "navigation_order")],
                 entry_conditions=_require_dict(l, "entry_conditions"),
                 blocked_message=_require_str(l, "blocked_message", ""),
+                costs=_require_dict(l, "costs"),
                 clothing_rules=l.get("clothing_rules", []) or [],
             )
         )
@@ -2771,6 +2776,77 @@ def _extract_flags_set_by_canvas(canvas: TemplateCanvas) -> Set[str]:
     return set_flags
 
 
+# Content block types the comprehensive generator's _convert_blocks_to_game_html
+# (v2.py / v1.py) can actually render. Anything else hits the generator's silent
+# `<p>{content}</p>` fallback, which DISCARDS the speaker/structure — this is the
+# bug that shipped two whole games (the_inheritance authored "dialogue", last_call
+# authored "speech", both rendered as anonymous paragraphs). The build now hard-
+# fails on an unrecognized content block type so the next typo is caught here, not
+# silently in the shipped HTML. Keep in sync with the generator's block dispatch.
+RECOGNIZED_CONTENT_BLOCK_TYPES = frozenset({
+    "heading", "paragraph", "dialog", "thought_bubble",
+    "image", "video", "cascade", "group", "block_pool", "clip",
+})
+
+# Common authoring near-misses → the canonical type, for a "did you mean" hint.
+_CONTENT_BLOCK_TYPE_SUGGESTIONS = {
+    "dialogue": "dialog",
+    "speech": "dialog",
+    "say": "dialog",
+    "thought": "thought_bubble",
+    "thoughtbubble": "thought_bubble",
+    "img": "image",
+    "picture": "image",
+    "text": "paragraph",
+    "p": "paragraph",
+}
+
+
+def _validate_content_block_types(blocks: Any, ctx: str) -> List[str]:
+    """Walk a CONTENT-block list (a canvas node's `blocks`), recursing into the
+    container blocks the renderer descends into (group / block_pool / cascade
+    beats), and flag any block whose `type` the generator can't render.
+
+    Scoped to content blocks only — never touches the `type` fields used by
+    condition items (flag/trait/random/...), exit blocks (location/choices/
+    game_end), or phone apps, so it can't false-fail those.
+    """
+    errs: List[str] = []
+    if not isinstance(blocks, list):
+        return errs
+    for bi, b in enumerate(blocks):
+        if not isinstance(b, dict):
+            continue
+        b_type = str(b.get("type", "")).strip()
+        if not b_type:
+            continue
+        if b_type not in RECOGNIZED_CONTENT_BLOCK_TYPES:
+            hint = _CONTENT_BLOCK_TYPE_SUGGESTIONS.get(b_type.lower())
+            suggestion = f" (did you mean '{hint}'?)" if hint else ""
+            errs.append(
+                f"{ctx}.blocks[{bi}]: unrecognized content block type "
+                f"'{b_type}'{suggestion}. The generator would silently render it "
+                f"as a plain paragraph and discard any speaker. Recognized types: "
+                f"{', '.join(sorted(RECOGNIZED_CONTENT_BLOCK_TYPES))}."
+            )
+            # Unknown container shape is undefined — don't recurse into it.
+            continue
+        props = b.get("props") or {}
+        if not isinstance(props, dict):
+            props = {}
+        # Recurse exactly where the renderer descends into children.
+        if b_type in ("group", "block_pool"):
+            child = b.get("blocks") or props.get("blocks") or []
+            errs.extend(_validate_content_block_types(child, f"{ctx}.blocks[{bi}]"))
+        elif b_type == "cascade":
+            for ti, beat in enumerate(props.get("beats") or []):
+                if isinstance(beat, dict):
+                    errs.extend(_validate_content_block_types(
+                        beat.get("blocks") or [], f"{ctx}.blocks[{bi}].beats[{ti}]"
+                    ))
+    return errs
+
+
 def validate(template: GameTemplate) -> List[str]:
     errors: List[str] = []
 
@@ -2834,6 +2910,13 @@ def validate(template: GameTemplate) -> List[str]:
         # Per-node choice + effect + flag-effect + rejection-effect conditions
         for ni, node in enumerate(canvas.nodes or []):
             node_ctx_id = node.id or f"node[{ni}]"
+            # Content block-type allowlist (build-fatal) — runs for EVERY node,
+            # before the exit_block guard below, so a node that's pure content
+            # still gets checked.
+            errors.extend(_validate_content_block_types(
+                node.blocks,
+                f"canvases['{canvas_ctx_id}'].nodes['{node_ctx_id}']",
+            ))
             eb = getattr(node, "exit_block", None)
             if eb is None:
                 continue
@@ -3513,6 +3596,19 @@ def validate(template: GameTemplate) -> List[str]:
                         errors.append(
                             f"location '{l.id}' clothing_rules[{ri}] invalid slot '{s}', must be one of {sorted(VALID_CLOTHING_SLOTS)}"
                         )
+
+    # ===== Location entry-cost (travel friction) validation =====
+    for l in template.locations:
+        if not l.costs:
+            continue
+        if not isinstance(l.costs, dict):
+            errors.append(f"location '{l.id}' costs must be a dict (e.g. {{ time = 30, energy = 10 }})")
+            continue
+        for k, v in l.costs.items():
+            if not isinstance(v, (int, float)) or isinstance(v, bool):
+                errors.append(f"location '{l.id}' costs['{k}'] must be a number")
+            elif v < 0:
+                errors.append(f"location '{l.id}' costs['{k}'] must not be negative")
 
     # ===== Story validation (optional) =====
     canvas_ids = {c.id for c in getattr(template, "canvases", [])}
@@ -5937,6 +6033,9 @@ def create_project_from_template(
             loc.properties["entry_conditions"] = l.entry_conditions
         if l.blocked_message:
             loc.properties["blocked_message"] = l.blocked_message
+        if l.costs:
+            # int-coerce (TOML may give floats); the generator reads entry_costs.
+            loc.properties["entry_costs"] = {k: int(v) for k, v in l.costs.items()}
         if l.clothing_rules:
             loc.properties["clothing_rules"] = l.clothing_rules
         loc.save()

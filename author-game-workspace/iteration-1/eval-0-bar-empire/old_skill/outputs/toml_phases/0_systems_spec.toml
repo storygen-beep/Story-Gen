@@ -1,0 +1,158 @@
+# Phase 0 — 0_systems_spec.toml
+# Bar Empire (baseline) — project + time + clothing + daily tick + sidebar + stage helpers
+# scope_mode = slice. Setup scaffold only (no story canvases here).
+
+schema_version = "1.0"
+
+[project]
+id              = "eval_bar_empire_baseline"
+title           = "Bar Empire"
+description      = "Dahlia, 26, broke and behind, waits tables at The Velvet Spur — a sleazy dive owned by a man who counts the women on his floor like inventory. Seduce and corrupt him until the bar is yours, then build an empire."
+quests_engine   = "v2"
+starting_canvas = "canvas_first_morning"
+
+[time]
+starting_hour = 16
+starting_day  = "Monday"
+starting_week = 1
+
+# ─── System scoping (each system reads from its OWN table; schema/02 §1.3) ─────
+#   clothing → [settings]   (clothing_enabled / wardrobe_location / shop_location)
+#   rent     → [settings.rent]   — OFF in this slice (debt modeled as money + flags)
+#   phone    → [phone]           — OFF in this slice
+
+[settings]
+clothing_enabled  = true
+wardrobe_location = "loc_dahlias_room"
+shop_location     = "loc_thrift_store"
+
+[settings.clothing_requirements]
+body_coverage   = true
+always_required = []
+
+# ─── Engine daily tick ────────────────────────────────────────────────────────
+# Body-state decay (energy/hygiene). Player arousal +1/day (cap 10, no decay).
+# Marco arousal +1/day (cap 3 — slow-burn throttle). Daily-cap flag unsets.
+[engine.daily_tick]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_marco_today",  op = "unset" },
+  { targetType = "player", flag = "talked_to_jolene_today", op = "unset" },
+  { targetType = "player", flag = "talked_to_reggie_today", op = "unset" },
+  { targetType = "player", flag = "shift_worked_today",     op = "unset" },
+]
+traitEffects = [
+  { targetType = "player", trait = "hygiene", op = "add", value = -10 },
+  { targetType = "player", trait = "energy",  op = "add", value = -5  },
+  { targetType = "player", trait = "arousal", op = "add", value = 1, cap = 10 },
+  { targetType = "npc", npcId = "npc_marco", trait = "arousal", op = "add", value = 1, cap = 3 },
+]
+
+# ─── Stage helpers ────────────────────────────────────────────────────────────
+[[engine.stage_helpers]]
+name        = "marco_stage_1_plus"
+description = "Marco has noticed Dahlia."
+conditions  = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "marco_noticed", operator = "is_true" },
+] }
+
+[[engine.stage_helpers]]
+name        = "marco_stage_2_plus"
+description = "Marco first contact (tease landed)."
+conditions  = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "marco_contact", operator = "is_true" },
+] }
+
+[[engine.stage_helpers]]
+name        = "marco_stage_3_plus"
+description = "After-close done — backroom access."
+conditions  = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "marco_backroom_done", operator = "is_true" },
+] }
+
+[[engine.stage_helpers]]
+name        = "marco_stage_5"
+description = "Marco signed the bar over (leash flipped)."
+conditions  = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "marco_signed", operator = "is_true" },
+] }
+
+[[engine.stage_helpers]]
+name        = "hired_at_spur"
+description = "Dahlia is back on the floor."
+conditions  = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "hired_at_spur", operator = "is_true" },
+] }
+
+# ─── Sidebar items ────────────────────────────────────────────────────────────
+# Stage traits + Marco's throttle never surface. Player corruption + exhibitionism +
+# arousal + body-state + money do.
+
+[[sidebar_items]]
+type  = "trait_words"
+trait = "corruption"
+label = "Corruption"
+bands = [
+  { min = 0,  max = 24,  text = "Straight",  icon = "✨" },
+  { min = 25, max = 49,  text = "Bent",      icon = "💋" },
+  { min = 50, max = 74,  text = "Crooked",   icon = "🔥" },
+  { min = 75, max = 100, text = "The Madam", icon = "💦" },
+]
+
+[[sidebar_items]]
+type  = "trait_bar"
+trait = "exhibitionism"
+label = "Exhibitionism"
+max   = 100
+bands = [
+  { min = 0,  max = 24,  text = "Covered"    },
+  { min = 25, max = 49,  text = "Aware"      },
+  { min = 50, max = 74,  text = "Bold"       },
+  { min = 75, max = 100, text = "Shameless"  },
+]
+
+[[sidebar_items]]
+type  = "trait_bar"
+trait = "arousal"
+label = "Arousal"
+max   = 10
+bands = [
+  { min = 0, max = 2,  text = "Cold"    },
+  { min = 3, max = 5,  text = "Warm"    },
+  { min = 6, max = 8,  text = "Hot"     },
+  { min = 9, max = 10, text = "Burning" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "energy"
+bands = [
+  { min = 0,  max = 24,  text = "Dead on her feet", icon = "🪫" },
+  { min = 25, max = 49,  text = "Dragging",         icon = "💤" },
+  { min = 50, max = 74,  text = "Fine",             icon = "🟢" },
+  { min = 75, max = 100, text = "Sharp",            icon = "🔋" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "hygiene"
+bands = [
+  { min = 0,  max = 24,  text = "Filthy", icon = "🧫" },
+  { min = 25, max = 49,  text = "Dirty",  icon = "🌫️" },
+  { min = 50, max = 74,  text = "Fresh",  icon = "🪞" },
+  { min = 75, max = 100, text = "Clean",  icon = "🧼" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "money"
+bands = [
+  { min = 0,   max = 49,  text = "Broke",        icon = "💸" },
+  { min = 50,  max = 199, text = "Scraping by",  icon = "😬" },
+  { min = 200, max = 499, text = "Ahead",        icon = "💵" },
+  { min = 500, max = 9999, text = "Flush",       icon = "✅" },
+]
+
+# ─── Hidden traits ────────────────────────────────────────────────────────────
+[[traits.labels]]
+key = "marco_stage"
+hidden = true

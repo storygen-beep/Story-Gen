@@ -1,0 +1,764 @@
+# Phase 1/7 — 1_metadata_and_locations.toml
+# The Inheritance — player + all NPCs (with schedules) + the day-one map.
+# Scaffold (Step-7 entry). Locked locations that ship WITH their unlock beat (hotel back office →
+# hotel_money_control; private floor → private_floor_open) are NOT here yet — they arrive whole with
+# their beats. This file is the open, cold-start-reachable map + every NPC declared with a schedule.
+#
+# IMPORTANT: all [[npcs]] + [[npcs.schedules]] + [[npcs.core_traits]] live in THIS single file.
+
+# ─── Player ───────────────────────────────────────────────────────────────────
+
+[player]
+id          = "player"
+name        = "Catherine"
+description = "The estranged eldest daughter, home for the first time in years. Eleanor's child from before Richard — no blood tie to the stepfather, half-sister to the two younger ones. Written off when her mother chose the new family and let them push her out — the first mistake they made."
+portrait    = "catherine.jpg"
+customizable = true
+
+[player.core_traits]
+# Always-on
+corruption = 0
+arousal    = 0
+energy     = 100
+hygiene    = 100
+money      = 50          # broke — home with three bags and a contested will
+
+# The public-display register (clothing-driven; raised by being-seen acts)
+exhibitionism = 0
+
+# Per-NPC stage traits (player namespace — the gateway/apex cross-reads use these; hidden in 0)
+audrey_stage   = 0       # 0 = cold .. up through devoted/gateway (set at her first night)
+grayson_stage  = 0       # 0 = obstacle .. bought_out (set at his surrender)
+richard_stage  = 0       # 0 = grieving .. fully yours (set at his first night)
+margaret_stage = 0       # 0 = at war .. communal slave (the frontier)
+
+# ─── Player customization (auto-rendered before the first canvas; @player tokens) ──
+[[player.customization_fields]]
+id      = "name"
+type    = "text"
+label   = "Your name"
+default = "Catherine"
+
+[[player.customization_fields]]
+id      = "body_type"
+type    = "select"
+label   = "Build"
+default = "average"
+options = ["petite", "average", "curvy", "athletic", "thick"]
+
+[[player.customization_fields]]
+id            = "look"
+type          = "image_select"
+label         = "Look"
+default       = "composed"
+sets_portrait = true
+options = [
+  { id = "composed", image = "players/catherine_composed.jpg", label = "Composed" },
+  { id = "sharp",    image = "players/catherine_sharp.jpg",    label = "Sharp" },
+  { id = "weary",    image = "players/catherine_weary.jpg",    label = "Weary" },
+]
+
+# ─── NPCs ─────────────────────────────────────────────────────────────────────
+# Arc shapes (design book Step 3/4):
+#   npc_audrey   — family/ambient (entry + gateway) → arousal + corruption + relation
+#   npc_grayson  — antagonist→owned (femdom)        → arousal + corruption(submission) + relation
+#   npc_richard  — slow-burn family (warm)          → arousal + corruption(trust) + relation
+#   npc_margaret — antagonist (broken, not seduced) → relation + scheming(hidden); NO arousal/corruption
+#   npc_lorna    — service (LIGHT ally)             → relation only
+#   npc_danny    — prop (Audrey's payoff)           → relation baseline
+#   npc_halloway — structural (the will/foreclosure)→ relation baseline
+
+# ── Audrey ──────────────────────────────────────────────────────────────────
+[[npcs]]
+id          = "npc_audrey"
+name        = "Audrey"
+description = "Your baby half-sister, in college, fees unpaid and terrified of losing her place. Soft, eager, the only one in this house who never stopped looking up to you. She has a boy at school she's hopeless over."
+portrait    = "audrey.jpg"
+core_traits = { arousal = 0, corruption = 0, relation = 0 }
+flag_keys   = []
+arc_stages  = ["Looks up to you", "Asks to be taught", "The lessons", "Yours", "The gateway"]
+
+[npcs.trait_decay]
+relation = 0.5
+
+# Morning shower — FIRST in the list so first-match resolves it inside the overlapping 06:00–08:00 room
+# window. This is the occupancy tripwire: 07:00–07:30 she's in loc_common_bathroom (bath pilot).
+[[npcs.schedules]]
+location   = "loc_common_bathroom"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "07:00"
+end_time   = "07:30"
+activity   = "morning shower"
+
+[[npcs.schedules]]
+location   = "loc_audrey_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "06:00"
+end_time   = "08:00"
+activity   = "getting ready"
+
+[[npcs.schedules]]
+location   = "loc_college"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "08:00"
+end_time   = "17:00"
+activity   = "at college"
+
+[[npcs.schedules]]
+location   = "loc_audrey_room"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "17:00"
+end_time   = "23:59"
+activity   = "home — studying"
+
+[[npcs.schedules]]
+location   = "loc_audrey_room"
+weekdays   = [5, 6]
+start_time = "08:00"
+end_time   = "23:59"
+activity   = "home all day"
+
+# ── Grayson ───────────────────────────────────────────────────────────────────
+[[npcs]]
+id          = "npc_grayson"
+name        = "Grayson"
+description = "Your half-brother — entitled, useless, certain the estate is his and you're beneath him. Certain enough to put his hands on you while you're still nobody. Gambling debts he thinks no one knows about."
+portrait    = "grayson.jpg"
+core_traits = { arousal = 0, corruption = 0, relation = 0 }
+flag_keys   = []
+arc_stages  = ["On top of you", "The deal", "Serving", "Craving", "Yours for nothing"]
+
+[npcs.trait_decay]
+relation = 0.5
+
+# Grayson showers 12:00–12:30 (just after he wakes) — FIRST so first-match beats his overlapping
+# 12:00–17:00 lounging window. Second occupancy occupant for the bathroom pilot.
+[[npcs.schedules]]
+location   = "loc_common_bathroom"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "12:00"
+end_time   = "12:30"
+activity   = "showering"
+
+[[npcs.schedules]]
+location   = "loc_grayson_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "00:00"
+end_time   = "12:00"
+activity   = "sleeping in"
+
+[[npcs.schedules]]
+location   = "loc_drawing_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "12:00"
+end_time   = "17:00"
+activity   = "lounging"
+
+[[npcs.schedules]]
+location   = "loc_hotel_bar"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "23:59"
+activity   = "drinking, causing trouble"
+
+# ── Richard ─────────────────────────────────────────────────────────────────
+[[npcs]]
+id          = "npc_richard"
+name        = "Richard"
+description = "Your stepfather — Eleanor's widower, biological father of the two younger ones, no blood tie to you. Hollowed out by grief, drifting through a hotel he can no longer run, holding the will and the keys and forgetting why."
+portrait    = "richard.jpg"
+core_traits = { arousal = 0, corruption = 0, relation = 0 }
+flag_keys   = []
+arc_stages  = ["Grieving", "Confides", "Wanting", "Pursuing", "Hands you the keys"]
+
+[npcs.trait_decay]
+relation = 0.5
+
+# Richard showers 06:30–07:00 (before the rotation) — FIRST so first-match beats his 06:00–17:00 study window.
+[[npcs.schedules]]
+location   = "loc_common_bathroom"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "06:30"
+end_time   = "07:00"
+activity   = "showering"
+
+[[npcs.schedules]]
+location   = "loc_study"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "06:00"
+end_time   = "17:00"
+activity   = "drifting / the will"
+
+# Richard takes his supper in the kitchen 18:00–19:00 — declared BEFORE the drawing-room evening window
+# so first-match parks him at the table. Wakes the dead kitchen: a nightly shared-meal collision (richard_kitchen).
+[[npcs.schedules]]
+location   = "loc_kitchen"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time   = "19:00"
+activity   = "supper at the kitchen table"
+
+[[npcs.schedules]]
+location   = "loc_drawing_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "22:00"
+activity   = "the evening"
+
+[[npcs.schedules]]
+location   = "loc_richard_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "23:59"
+activity   = "his room"
+
+# ── Margaret ──────────────────────────────────────────────────────────────────
+[[npcs]]
+id          = "npc_margaret"
+name        = "Margaret"
+description = "Your blood aunt — Eleanor's sister, moved in 'to help' and already counting the silver. Sharp, patient, patrician; she reads you as the only real threat and she is almost always a step ahead."
+portrait    = "margaret.jpg"
+core_traits = { relation = 0, scheming = 0 }
+flag_keys   = []
+arc_stages  = ["Cold war", "Cornered", "Broken", "The family slave"]
+
+# Margaret showers 07:30–08:00 (last in the morning rotation) — FIRST in her list for clean first-match.
+[[npcs.schedules]]
+location   = "loc_common_bathroom"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "07:30"
+end_time   = "08:00"
+activity   = "showering"
+
+[[npcs.schedules]]
+location   = "loc_drawing_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "22:00"
+activity   = "watching, scheming"
+
+[[npcs.schedules]]
+location   = "loc_margaret_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "23:59"
+activity   = "her room"
+
+# ── Lorna ─────────────────────────────────────────────────────────────────────
+[[npcs]]
+id          = "npc_lorna"
+name        = "Lorna"
+description = "The hotel's lifer bartender — worldly, unshockable, has seen what this place was and what it could be after dark. The one person on your side by choice. Your mentor in the trade and your eyes and ears."
+portrait    = "lorna.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+
+[npcs.trait_decay]
+relation = 0.5
+
+[[npcs.schedules]]
+location   = "loc_hotel_bar"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "14:00"
+end_time   = "23:59"
+activity   = "tending the bar"
+
+# ── Danny (prop — Audrey's payoff) ─────────────────────────────────────────────
+[[npcs]]
+id          = "npc_danny"
+name        = "Danny"
+description = "The ordinary college boy Audrey is hopeless over — sweet, a little clueless, no idea what he's walked into."
+portrait    = "danny.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+
+[[npcs.schedules]]
+location   = "loc_college"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "08:00"
+end_time   = "17:00"
+activity   = "at college"
+
+[[npcs.schedules]]
+location   = "loc_outings"
+weekdays   = [5, 6]
+start_time = "12:00"
+end_time   = "18:00"
+activity   = "out with Audrey"
+
+# beat_0012 — Danny in Audrey's room weekday evenings (study partner -> boyfriend).
+# Whole-amendment: the study-date + study-group-threesome scenes need him present here
+# (he was scaffold-scheduled only at college/outings — registry intent, now realized).
+# Window 17-22 (Audrey's home 17-23:59), so the LATE slot stays Catherine+Audrey-private.
+[[npcs.schedules]]
+location   = "loc_audrey_room"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "17:00"
+end_time   = "22:00"
+activity   = "studying with Audrey"
+
+# ── Mr. Halloway (structural — the will / foreclosure) ──────────────────────────
+[[npcs]]
+id          = "npc_halloway"
+name        = "Mr. Halloway"
+description = "Eleanor's executor — starched, correct, holding the foreclosure clock and the will's fine print. Indifferent to your charm and immune to it. The deadline with a face."
+portrait    = "halloway.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+
+[[npcs.schedules]]
+location   = "loc_bank"
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "09:00"
+end_time   = "17:00"
+activity   = "at the office"
+
+# ─── Locations (the day-one map — standing hubs are NOT is_container) ───────────
+
+# ═════════════════════════════════════════════════════════════════════════════
+# ONE BUILDING (Model B, turn 56). The "estate" and the "hotel" were two parallel
+# trees; they're now ONE building — a hotel — with the family living on the residence
+# floor above the public floor. Fiction: Eleanor built the boutique hotel and raised
+# the family in the residence above it (so Catherine grew up here — "the room you grew
+# up in" still holds). loc_estate is RETIRED; loc_residence is the family-floor hub.
+# Leaf-room IDs are UNCHANGED, so every beat reference + every NPC schedule still resolves.
+#
+# WORLD ROOT (turn 70). loc_town is now the map root (no entry_from); the hotel BUILDING
+# sits INSIDE the town (loc_hotel.entry_from = loc_town), a peer of the bank/boutique/
+# adult-shop/outings. The one-building fiction is untouched — the family still lives in
+# the residence ABOVE the public hotel floor; we only reframed the world so the building
+# is in the town, not the town hanging off the building (Doctrine 10 §4 geographic layering).
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ── The Hotel (the building — the start/home; sits INSIDE the town; the public floor) ─
+[[locations]]
+id               = "loc_hotel"
+name             = "The Hotel — Lobby"
+description      = "Eleanor's boutique hotel, faded and bleeding money. A handsome lobby that needs the light fixed, a register no one's minding, MEL— no, ELEANOR'S in brass over the desk. The public floor you'll work and remake; the family lives in the residence up the stairs behind the desk."
+image            = "locations/hotel_lobby.jpg"
+image_search_queries = ["grand boutique hotel lobby", "faded old hotel reception desk"]
+entry_from       = "loc_town"
+navigation_order = ["loc_hotel_bar", "loc_hotel_dining", "loc_grand_stair", "loc_hotel_back_office"]
+
+[[locations]]
+id          = "loc_hotel_bar"
+name        = "The Bar"
+description = "A dim, good-bones bar off the lobby. Lorna's domain — she's behind it most hours, pouring for the handful of regulars and watching everything. Where the after-dark version of this place starts."
+image       = "locations/hotel_bar.jpg"
+image_search_queries = ["dim cozy hotel bar interior", "moody vintage cocktail bar"]
+entry_from  = "loc_hotel"
+
+# DEFERRED SHELL (audit f11 follow-up, turn 75). The hotel's dining room — present + LOCKED from
+# game start, gated on `hotel_dining_reopened`, which NOTHING sets yet. This is intentional:
+# LO wants it placed now, opened in a future authoring pass ("for now keep it locked").
+# OFF-PATTERN vs the back office / private floor (which "arrive whole" with their setter, see
+# line 4): it builds green because location entry_conditions flags are NOT setter-checked by the
+# flag-chain validator, but it leaves a dangling read BY DESIGN. ⚠️ THE FUTURE UNLOCK PASS OWNS:
+# a setter beat (reopen / buy back the dining room) AND interior content (activities / an NPC)
+# shipped TOGETHER — or it becomes a dead room (audit f9) the instant the flag flips.
+[[locations]]
+id          = "loc_hotel_dining"
+name        = "The Dining Room"
+description = "The hotel's dining room off the lobby — white cloths gone grey under dust sheets, a long mirror, chairs stacked on the tables. It hasn't served a plate since the staff were let go. One of the rooms that comes back to life when this place does."
+image       = "locations/hotel_dining.jpg"
+image_search_queries = ["faded grand hotel dining room dust sheets", "empty shuttered old restaurant chairs on tables"]
+entry_from  = "loc_hotel"
+entry_conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "hotel_dining_reopened", operator = "is_true" },
+] }
+blocked_message = "Not yet. The dining room's been dark since the staff went — it stays shut until I can afford to light it again."
+
+# ── The Grand Stair (the vertical spine — climbs from the lobby to the upstairs floors) ──
+# Non-container standing hub (renders its own passage). The lobby routes UP through here;
+# guest rooms / residence / private floor hang off it (entry_from=loc_grand_stair). The
+# private floor's "own discreet lift" is carried in this description (no separate hub).
+[[locations]]
+id          = "loc_grand_stair"
+name        = "The Grand Stair"
+description = "The wide staircase that climbs out of the lobby behind the desk — a worn runner, a banister three generations have smoothed, a landing window going gold at dusk. The let rooms branch off one flight up; the residence sits above them; and folded into the corner, the old brass service lift, the only discreet way up to the top floor."
+image       = "locations/grand_stair.jpg"
+image_search_queries = ["grand old hotel staircase wood", "vintage stairwell banister landing window"]
+entry_from  = "loc_hotel"
+navigation_order = ["loc_hotel_guest_rooms", "loc_residence", "loc_hotel_private_floor"]
+
+[[locations]]
+id          = "loc_hotel_guest_rooms"
+name        = "The Guest Rooms"
+description = "The upstairs floor of let rooms — most of them empty these days. Quiet corridors, doors that lock, a housekeeping cart no one pushes. Where a comped 'favor' has somewhere to happen."
+image       = "locations/hotel_guest_rooms.jpg"
+image_search_queries = ["empty hotel corridor doors", "quiet hotel hallway guest rooms"]
+entry_from  = "loc_grand_stair"
+
+# Locked until you take the books in hand (beat_0007 — canvas_take_books sets the flag).
+[[locations]]
+id          = "loc_hotel_back_office"
+name        = "The Back Office"
+description = "The cramped office behind the desk — a safe that doesn't lock right, a filing cabinet of the hotel's whole sorry story, the ledgers Eleanor kept by hand. Whoever sits at this desk decides who in this family gets paid. Now it's you."
+image       = "locations/hotel_back_office.jpg"
+image_search_queries = ["cramped office back room desk", "old filing cabinet safe office"]
+entry_from  = "loc_hotel"
+entry_conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "hotel_money_control", operator = "is_true" },
+] }
+blocked_message = "Not yet. Until I hold the books, the desk isn't mine to sit at."
+
+# beat_0021 — the private floor. WHOLE locked-location amendment (mirrors back office):
+# entry_conditions on upgrade_private_floor (built @ beat_0020) + blocked_message + wired into
+# loc_grand_stair nav above. Setter (canvas_upgrade_private_floor, beat_0020) shipped before this lock.
+[[locations]]
+id          = "loc_hotel_private_floor"
+name        = "The Private Floor"
+description = "The top floor, reborn. Its own lift, its own discreet entrance, soundproofed and appointed like a place that doesn't appear in any brochure. Members and appointments only. This is the surface of what the hotel really is now — and the dirtiest, best money Catherine makes anywhere."
+image       = "locations/hotel_private_floor.jpg"
+image_search_queries = ["luxury private members lounge", "exclusive upscale hotel suite floor"]
+entry_from  = "loc_grand_stair"
+entry_conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "upgrade_private_floor", operator = "is_true" },
+] }
+blocked_message = "Not built yet. The private floor needs the hotel firmly in my hands — and the money to make it real."
+
+# ── The Residence (family floor — above the public hotel, where the family lives) ──
+# Reached up the Grand Stair from the lobby. Holds every family bedroom + the common
+# rooms. The bedroom/common-room IDs are unchanged from the old estate map — only their
+# parent moved (loc_estate → loc_residence), so beats + schedules keep resolving.
+[[locations]]
+id               = "loc_residence"
+name             = "The Residence"
+description      = "The family's floor above the hotel proper — the rooms Eleanor kept while the boutique ran itself downstairs. High ceilings, old money gone a little threadbare. Where you grew up and where they all still sleep. It still smells like Eleanor's house."
+image            = "locations/residence.jpg"
+image_search_queries = ["grand old money family residence", "high ceiling stately living floor"]
+entry_from       = "loc_grand_stair"
+navigation_order = [
+  "loc_player_room",
+  "loc_drawing_room",
+  "loc_study",
+  "loc_kitchen",
+  "loc_common_bathroom",
+  "loc_audrey_room",
+  "loc_grayson_room",
+  "loc_richard_room",
+  "loc_margaret_room",
+]
+
+[[locations]]
+id          = "loc_player_room"
+name        = "Your Old Room"
+description = "The room you grew up in, kept like a museum exhibit nobody visits. Your three bags by the bed. A mirror, a wardrobe of clothes you left behind. The one place in this house that's yours."
+image       = "locations/player_room.jpg"
+image_search_queries = ["childhood bedroom preserved old", "cozy small bedroom wardrobe mirror"]
+entry_from  = "loc_residence"
+
+[[locations]]
+id          = "loc_drawing_room"
+name        = "The Drawing Room"
+description = "Where the family gathers and where Margaret holds court — wing chairs, the good decanter, a fire that's always just been let die down. Every conversation in here is a negotiation."
+image       = "locations/drawing_room.jpg"
+image_search_queries = ["elegant drawing room wing chairs", "old money sitting room fireplace"]
+entry_from  = "loc_residence"
+
+[[locations]]
+id          = "loc_study"
+name        = "The Study"
+description = "Eleanor's study, now Richard's by default — the desk he doesn't work at, the will in a drawer, a glass going warm beside the lamp. He's in here more than anywhere, not doing much."
+image       = "locations/study.jpg"
+image_search_queries = ["old wood home study desk", "vintage study lamp bookshelves"]
+entry_from  = "loc_residence"
+
+[[locations]]
+id          = "loc_kitchen"
+name        = "The Kitchen"
+description = "Big, old, under-used since the staff were let go. The kettle still works. Somewhere to put something warm in your stomach before you go back out to them."
+image       = "locations/kitchen.jpg"
+image_search_queries = ["big old country kitchen", "vintage farmhouse kitchen kettle"]
+entry_from  = "loc_residence"
+
+[[locations]]
+id          = "loc_common_bathroom"
+name        = "The Upstairs Bath"
+description = "The big shared bathroom off the residence hall — clawfoot tub, a lock that doesn't quite catch, steam under the door when someone's in there. Sound and sightlines carry.<<set _occ to setup.getNpcsPresentAtLocation('loc_common_bathroom')>><<if _occ.length>> The water's running right now — <<print _occ[0].name>>'s in the shower, the door cracked an inch.<</if>>"
+image       = "locations/common_bathroom.jpg"
+image_search_queries = ["vintage bathroom clawfoot tub", "old shared bathroom steam"]
+entry_from  = "loc_residence"
+# Bathroom pilot: NOT hard-locked. Occupancy gates what you can DO here — the bath (activity_bath_soak)
+# shows only when EMPTY; the peep (aud/gray_bathroom_peep, located here) shows only while a housemate is in
+# the shower. The dynamic description above names who's in there.
+
+[[locations]]
+id          = "loc_audrey_room"
+name        = "Audrey's Room"
+description = "Soft and cluttered — fairy lights, textbooks, a corkboard of photos. The room of a girl who still thinks the world is mostly kind."
+image       = "locations/audrey_room.jpg"
+image_search_queries = ["college girl bedroom fairy lights", "cluttered teen bedroom corkboard"]
+entry_from  = "loc_residence"
+
+[[locations]]
+id          = "loc_grayson_room"
+name        = "Grayson's Room"
+description = "Expensive things he didn't earn and doesn't take care of. Always a little dark, curtains drawn against a morning he sleeps through."
+image       = "locations/grayson_room.jpg"
+image_search_queries = ["dark messy young man bedroom", "curtained moody bedroom dim"]
+entry_from  = "loc_residence"
+
+[[locations]]
+id          = "loc_richard_room"
+name        = "Richard's Room"
+description = "Still half Eleanor's — her side of the bed untouched, her things where she left them. He sleeps on top of the covers."
+image       = "locations/richard_room.jpg"
+image_search_queries = ["somber master bedroom old", "quiet traditional bedroom muted"]
+entry_from  = "loc_residence"
+
+[[locations]]
+id          = "loc_margaret_room"
+name        = "Margaret's Room"
+description = "Immaculate. Moved-in like she means to stay. Everything in its place and a place she's chosen for everything, including you."
+image       = "locations/margaret_room.jpg"
+image_search_queries = ["immaculate tidy elegant bedroom", "neat refined guest bedroom"]
+entry_from  = "loc_residence"
+
+# ── Town (THE WORLD ROOT — the map the hotel building sits in; no entry_from) ──────
+[[locations]]
+id               = "loc_town"
+name             = "Town"
+description      = "The town beyond the hotel doors — Halloway & Sons, where the executor keeps office hours, a row of shops, the college Audrey rides out to. Where money goes to be spent and the will gets argued over."
+image            = "locations/town.jpg"
+image_search_queries = ["small town main street shops", "quaint town street storefronts"]
+navigation_order = ["loc_hotel", "loc_bank", "loc_clothing_shop", "loc_adult_shop", "loc_outings"]
+
+[[locations]]
+id          = "loc_bank"
+name        = "Halloway & Sons"
+description = "The executor's office — dark wood, the will in a folder, the foreclosure paperwork in another. Halloway sees you by appointment and checks the numbers before he checks his manners."
+image       = "locations/bank.jpg"
+image_search_queries = ["dark wood law office interior", "old executor lawyer office"]
+entry_from  = "loc_town"
+
+[[locations]]
+id          = "loc_clothing_shop"
+name        = "The Boutique"
+description = "A town dress shop with a back rack bolder than the front. Where money becomes the way the world looks at you."
+image       = "locations/clothing_shop.jpg"
+image_search_queries = ["boutique dress shop interior", "women's clothing store racks"]
+entry_from  = "loc_town"
+
+[[locations]]
+id          = "loc_adult_shop"
+name        = "The Adult Shop"
+description = "A discreet shop down a side street — toys, the harder stuff, a clerk who's seen everything and judges none of it. Where money buys the tools, not just the look."
+image       = "locations/adult_shop.jpg"
+image_search_queries = ["discreet shop storefront side street", "small specialty boutique interior"]
+entry_from  = "loc_town"
+
+[[locations]]
+id          = "loc_outings"
+name        = "Out & About"
+description = "The park, the waterfront, the places a college girl takes a boy on a weekend. Public, sunlit, the kind of place an outfit gets noticed."
+image       = "locations/outings.jpg"
+image_search_queries = ["sunny waterfront park promenade", "lakeside park walkway daytime"]
+entry_from  = "loc_town"
+
+# ── Offscreen (NPCs go here where the player can't follow) ──────────────────────
+[[locations]]
+id          = "loc_college"
+name        = "The College"
+description = "Audrey's campus across town — lectures, the boy, a life that runs by day without you in it."
+offscreen   = true
+
+# ═════════════════════════════════════════════════════════════════════════════
+# beat_0005 — Clothing catalog. Top-level [[clothing]] array (importer reads data["clothing"]).
+# Shop UI auto-renders at shop_location (loc_clothing_shop). Tiers (classic/old-money register):
+#   initial (owned, free, corr 0) → going-out (ungated, price, corr 16-20) →
+#   revealing (buy-gate corr>=25, corr 28-38) → club (buy-gate corr>=50, corr 55-70).
+# `corruption` = the worn_corruption source (MAX-aggregate; NEVER mutates global corruption).
+# Clothing gates PUBLIC content only (the two-part rule) — never an NPC arc spine.
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ── Initial (owned, modest — corr 0) ────────────────────────────────────────────
+[[clothing]]
+id = "in_bra"
+name = "Plain Bra"
+slot = "bra"
+image = "clothing/in_bra.jpg"
+initial = true
+beauty = 0
+corruption = 0
+
+[[clothing]]
+id = "in_briefs"
+name = "Plain Briefs"
+slot = "underwear"
+image = "clothing/in_briefs.jpg"
+initial = true
+beauty = 0
+corruption = 0
+
+[[clothing]]
+id = "in_blouse"
+name = "Linen Blouse"
+slot = "top"
+image = "clothing/in_blouse.jpg"
+initial = true
+beauty = 1
+corruption = 0
+
+[[clothing]]
+id = "in_slacks"
+name = "Tailored Slacks"
+slot = "bottom"
+image = "clothing/in_slacks.jpg"
+initial = true
+beauty = 1
+corruption = 0
+
+[[clothing]]
+id = "in_flats"
+name = "Flats"
+slot = "shoes"
+image = "clothing/in_flats.jpg"
+initial = true
+beauty = 0
+corruption = 0
+
+[[clothing]]
+id = "in_day_dress"
+name = "Day Dress"
+slot = "dress"
+image = "clothing/in_day_dress.jpg"
+initial = true
+beauty = 2
+corruption = 5
+
+# ── Going-out (ungated, price, corr 16-20) ──────────────────────────────────────
+[[clothing]]
+id = "silk_blouse"
+name = "Silk Blouse"
+slot = "top"
+image = "clothing/silk_blouse.jpg"
+price = 30
+beauty = 3
+corruption = 16
+
+[[clothing]]
+id = "pencil_skirt"
+name = "Pencil Skirt"
+slot = "bottom"
+image = "clothing/pencil_skirt.jpg"
+price = 30
+beauty = 3
+corruption = 16
+
+[[clothing]]
+id = "cocktail_dress"
+name = "Cocktail Dress"
+slot = "dress"
+image = "clothing/cocktail_dress.jpg"
+price = 50
+beauty = 4
+corruption = 20
+
+[[clothing]]
+id = "heels"
+name = "Heels"
+slot = "shoes"
+image = "clothing/heels.jpg"
+price = 25
+beauty = 3
+corruption = 8
+
+# ── Revealing (buy-gate corruption >= 25) ───────────────────────────────────────
+[[clothing]]
+id = "low_cut_top"
+name = "Low-Cut Top"
+slot = "top"
+image = "clothing/low_cut_top.jpg"
+price = 40
+beauty = 4
+corruption = 28
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 } ] }
+
+[[clothing]]
+id = "short_skirt"
+name = "Short Skirt"
+slot = "bottom"
+image = "clothing/short_skirt.jpg"
+price = 40
+beauty = 4
+corruption = 30
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 } ] }
+
+[[clothing]]
+id = "slip_dress"
+name = "Slip Dress"
+slot = "dress"
+image = "clothing/slip_dress.jpg"
+price = 60
+beauty = 5
+corruption = 36
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 } ] }
+
+[[clothing]]
+id = "lace_set_bra"
+name = "Lace Bra"
+slot = "bra"
+image = "clothing/lace_set_bra.jpg"
+price = 22
+beauty = 4
+corruption = 30
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 } ] }
+
+[[clothing]]
+id = "lace_set_thong"
+name = "Lace Thong"
+slot = "underwear"
+image = "clothing/lace_set_thong.jpg"
+price = 18
+beauty = 4
+corruption = 32
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 } ] }
+
+# ── Club / barely-there (buy-gate corruption >= 50) ─────────────────────────────
+[[clothing]]
+id = "backless_dress"
+name = "Backless Dress"
+slot = "dress"
+image = "clothing/backless_dress.jpg"
+price = 90
+beauty = 5
+corruption = 55
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 50 } ] }
+
+[[clothing]]
+id = "sheer_top"
+name = "Sheer Top"
+slot = "top"
+image = "clothing/sheer_top.jpg"
+price = 70
+beauty = 5
+corruption = 65
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 50 } ] }
+
+# ═════════════════════════════════════════════════════════════════════════════
+# beat_0011 — Key-item economy ([[items]] = consumable/durable inventory).
+# The gap_1 items, finally authored into TOML. Sold at canvas_adult_shop (3_activities),
+# granted via choice item_effects (action="add"), owned-checked via the `item` condition.
+#   • dildo    — gates Audrey's toy rung (aud_lesson_toy + its practice). Durable.
+#   • strap_on — gates Audrey's strap rungs (blowjob / first night / anal). Durable.
+#   • drug     — gates Margaret's breaking (marg_setup, later). Buyable ahead, by design.
+# addItem REQUIRES the item declared here (items_map) or it silently no-ops.
+# ═════════════════════════════════════════════════════════════════════════════
+[[items]]
+id        = "dildo"
+name      = "Toy"
+icon      = "items/dildo.jpg"
+max_stack = 1
+
+[[items]]
+id        = "strap_on"
+name      = "Strap-on"
+icon      = "items/strap_on.jpg"
+max_stack = 1
+
+[[items]]
+id        = "drug"
+name      = "The Bottle"
+icon      = "items/drug.jpg"
+max_stack = 1

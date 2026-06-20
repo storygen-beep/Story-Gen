@@ -1,0 +1,281 @@
+# Phase 0 — 0_systems_spec.toml
+# Last Call — system spec: project + time + settings + rent + daily tick + sidebar
+# Authored by /author-game (setup mode). Skeleton only — no NPC arc content here.
+
+schema_version = "1.0"
+
+[project]
+id              = "last_call"
+title           = "Last Call"
+description      = "Nina inherits The Last Call, her late uncle's failing dive bar — and the debt he owed to the man who really owns the block. The bartender came with the building and knows where every body is buried. A regular with money keeps tipping like he's buying something. The cook runs the kitchen like it's hers. The supplier sets his own terms. And every week, the collector knocks. Keep the lights on, or lose the only thing she's got left."
+quests_engine   = "v2"
+starting_canvas = "canvas_first_night"
+
+[time]
+starting_hour = 18
+starting_day  = "Monday"
+starting_week = 1
+
+# ─── Settings (read by template_import via data["settings"]) ──────────────────
+# System scoping: clothing → [settings]; rent → [settings.rent]. Never bare keys.
+[settings]
+clothing_enabled  = true
+wardrobe_location = "loc_apartment"
+shop_location     = "loc_shop"
+
+[settings.clothing_requirements]
+body_coverage   = true
+always_required = []
+
+# ─── Clothing catalog (beat_0007) ─────────────────────────────────────────────
+# Top-level [[clothing]] array (schema §12.1). Reece's (loc_shop) sells these; the
+# wardrobe (loc_apartment) wears them — both pages engine-injected from this array.
+# `corruption` is the content-router stat only (worn_corruption reads MAX; never
+# touches player.corruption). Revealing items gate WEARING on player corruption (RTS
+# model). Starting outfit (initial=true) satisfies body_coverage (top + bottom).
+[[clothing]]
+id         = "outfit_work_tee"
+name       = "Plain work tee"
+slot       = "top"
+initial    = true
+price      = 0
+beauty     = 3
+corruption = 0
+type       = "casual"
+
+[[clothing]]
+id         = "outfit_work_jeans"
+name       = "Work jeans"
+slot       = "bottom"
+initial    = true
+price      = 0
+beauty     = 3
+corruption = 0
+type       = "casual"
+
+[[clothing]]
+id         = "outfit_blouse"
+name       = "Fitted blouse"
+slot       = "top"
+price      = 40
+beauty     = 10
+corruption = 5
+type       = "casual"
+
+[[clothing]]
+id         = "outfit_skirt"
+name       = "Short black skirt"
+slot       = "bottom"
+price      = 35
+beauty     = 8
+corruption = 10
+type       = "casual"
+
+[[clothing]]
+id         = "outfit_red_dress"
+name       = "Red cocktail dress"
+slot       = "dress"
+price      = 80
+beauty     = 18
+corruption = 20
+type       = "casual"
+
+[[clothing]]
+id         = "outfit_lowcut"
+name       = "Low-cut halter top"
+slot       = "top"
+price      = 60
+beauty     = 14
+corruption = 25
+type       = "casual"
+
+[[clothing]]
+id         = "outfit_mini"
+name       = "Barely-there mini"
+slot       = "bottom"
+price      = 55
+beauty     = 12
+corruption = 30
+type       = "casual"
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 },
+] }
+
+[[clothing]]
+id         = "outfit_barely"
+name       = "The dress that's mostly an idea"
+slot       = "dress"
+price      = 120
+beauty     = 22
+corruption = 40
+type       = "casual"
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 35 },
+] }
+
+# ─── Debt (economic spine) ────────────────────────────────────────────────────
+# The loan-shark's weekly payment, modelled on the rent system. Due Monday.
+# Armed only after the debt is explained on the first night (start_after_flag),
+# so night one is pressure-free onboarding. eviction_mode = flag_set: missing the
+# payment past grace doesn't end the game — it sets bar_seized and opens a leverage path.
+[settings.rent]
+enabled          = true
+amount           = 200
+due_day          = "Monday"
+collector_npc    = "npc_collector"
+grace_periods    = 1
+start_after_flag = "debt_explained"
+eviction_mode    = "flag_set"
+eviction_flag    = "bar_seized"
+
+[settings.rent.text]
+title                  = "Monday Night"
+scene                  = "The bell over the door goes while you're still wiping down the taps. You don't have to look up to know — nobody else pushes the door open that slow, like the hinges work for him too."
+greeting               = "Two hundred. Sully's number, not mine — I just collect it. You got it, or you got a story?"
+cant_pay               = "Tell him the till came up short"
+paid_scene             = "You count it onto the bar top. He doesn't touch it right away — lets it sit there between you, then sweeps it into his jacket in one motion."
+paid_response          = "Good girl. Mr. Boyd likes it when it's easy. Next Monday."
+paid_closing           = "The door swings shut behind him. The taps still need wiping. The week, at least, is yours."
+warning_scene          = "You tell him the till came up short. The collector doesn't argue. He just looks around the room slow, pricing it, the way you'd look at a car you're thinking of taking apart."
+warning_response       = "One week. Mr. Boyd's patient exactly once. After that the patience is mine to hand out, and mine costs more."
+warning_closing        = "He's gone before you can say anything else. Seven days, and a new kind of quiet left in the room."
+eviction_scene_soft    = "The collector stops asking about the money. He leans on the bar like he's off the clock, like the place is already half his, and watches you work."
+eviction_response_soft = "Money's one way to square it with Mr. Boyd. There's others. You and me can work out what counts."
+eviction_closing_soft  = "He doesn't take the keys. That's the part that sits wrong — the terms just moved somewhere you can't see them anymore."
+
+# ─── Engine daily tick ────────────────────────────────────────────────────────
+[engine.daily_tick]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_sal_today",     op = "unset" },
+  { targetType = "player", flag = "flirted_with_sal_today",  op = "unset" },
+  { targetType = "player", flag = "talked_to_marcus_today",  op = "unset" },
+  { targetType = "player", flag = "talked_to_rosa_today",    op = "unset" },
+  { targetType = "player", flag = "talked_to_dee_today",     op = "unset" },
+  { targetType = "player", flag = "bar_open_today",          op = "unset" },
+]
+traitEffects = [
+  { targetType = "player", trait = "hygiene", op = "add", value = -10 },
+  { targetType = "player", trait = "energy",  op = "add", value = -5  },
+  # Player arousal cut (LC arousal pass): it was a dead sidebar bar (climbed +1/day, gated
+  # nothing) — LC has no solo self-content for it to fuel, so the trait is removed entirely.
+  # npc_sal.arousal (his wanting) is the live arousal axis — earned from Sal beats, gates the
+  # sex-loop acts; it never climbed passively here.
+]
+
+# ─── Sidebar items ────────────────────────────────────────────────────────────
+[[sidebar_items]]
+type  = "trait_words"
+trait = "corruption"
+label = "Corruption"
+bands = [
+  { min = 0,  max = 24,  text = "Straight",  icon = "✨" },
+  { min = 25, max = 49,  text = "Loosening", icon = "💋" },
+  { min = 50, max = 74,  text = "Working it", icon = "🔥" },
+  { min = 75, max = 100, text = "Sold",      icon = "💦" },
+]
+
+[[sidebar_items]]
+type  = "trait_bar"
+trait = "exhibitionism"
+label = "Exhibitionism"
+max   = 100
+bands = [
+  { min = 0,  max = 24,  text = "Covered"   },
+  { min = 25, max = 49,  text = "Aware"     },
+  { min = 50, max = 74,  text = "Bold"      },
+  { min = 75, max = 100, text = "Shameless" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "energy"
+bands = [
+  { min = 0,  max = 24,  text = "Dead on her feet", icon = "🪫" },
+  { min = 25, max = 49,  text = "Dragging",          icon = "💤" },
+  { min = 50, max = 74,  text = "Fine",              icon = "🟢" },
+  { min = 75, max = 100, text = "Sharp",             icon = "🔋" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "hygiene"
+bands = [
+  { min = 0,  max = 24,  text = "Reeks of bar", icon = "🧫" },
+  { min = 25, max = 49,  text = "Stale",        icon = "🌫️" },
+  { min = 50, max = 74,  text = "Fresh",        icon = "🪞" },
+  { min = 75, max = 100, text = "Clean",        icon = "🧼" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "money"
+bands = [
+  { min = 0,   max = 49,  text = "Broke",       icon = "💸" },
+  { min = 50,  max = 199, text = "Short",        icon = "😬" },
+  { min = 200, max = 499, text = "Made the nut", icon = "💵" },
+  { min = 500, max = 9999, text = "Ahead",       icon = "✅" },
+]
+
+# ─── NPC panel — Sal (RTS House-card) ─────────────────────────────────────────
+# Shows Sal's wanting (npc_sal.arousal, the live axis that gates the sex-loop acts) + where he is
+# (from his [[npcs.schedules]], same source as the Schedule page). Always visible — Sal is the
+# bartender who comes with the bar (present from night one), so the card is shown from the start
+# like RTS's House panel. Corruption row omitted — Sal doesn't track a corruption axis. Default
+# arousal bands (0 ❄️ / 1 🔥 / 2 🔥🔥 / 3 🔥🔥🔥).
+[[sidebar_items]]
+type      = "npc_panel"
+npc_id    = "npc_sal"
+label     = "Sal"
+rows      = ["arousal", "location", "next"]
+
+# ─── Hidden traits ────────────────────────────────────────────────────────────
+# Internal stage/awareness/pregnancy traits live in core_traits but are suppressed
+# from all player-facing dumps via hidden=true.
+[[traits.labels]]
+key = "sal_stage"
+hidden = true
+
+[[traits.labels]]
+key = "marcus_stage"
+hidden = true
+
+[[traits.labels]]
+key = "dee_stage"
+hidden = true
+
+[[traits.labels]]
+key = "rosa_stage"
+hidden = true
+
+[[traits.labels]]
+key = "pregnancy"
+hidden = true
+
+# Sex-loop state (beat_0022) — internal pseudo-enums, suppressed from the sidebar.
+[[traits.labels]]
+key = "sex_stage"
+hidden = true
+
+[[traits.labels]]
+key = "loop_npc_pleasure"
+hidden = true
+
+[[traits.labels]]
+key = "loop_player_pleasure"
+hidden = true
+
+[[traits.labels]]
+key = "sex_finisher_type"
+hidden = true
+
+[[traits.labels]]
+key = "anal_active"
+hidden = true
+
+[[traits.labels]]
+key = "sex_reactions"
+hidden = true
+
+[[traits.labels]]
+key = "sex_entry_origin"
+hidden = true

@@ -1,0 +1,337 @@
+{
+  "locations/hallway.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T04:37:45.978600+00:00"
+  },
+  "locations/player_room.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T04:37:52.924152+00:00"
+  },
+  "locations/ethan_room.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T04:37:58.476578+00:00"
+  },
+  "locations/bathroom.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T04:38:00.294091+00:00"
+  },
+  "locations/living_room.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T04:38:02.093867+00:00"
+  },
+  "locations/kitchen.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T04:38:03.693771+00:00"
+  },
+  "locations/backyard.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T04:38:06.293954+00:00"
+  },
+  "locations/garage.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T04:38:08.476055+00:00"
+  },
+  "locations/home_exterior.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T04:40:06.318493+00:00"
+  },
+  "story/scene_arrival_ethan.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T04:40:11.556341+00:00"
+  },
+  "story/scene_welcome_dinner_dinner.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T04:40:14.107883+00:00"
+  },
+  "activities/garage_boxes_base.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T04:40:19.575630+00:00"
+  },
+  "activities/cant_sleep.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T04:40:20.487107+00:00"
+  },
+  "story/scene_madison_calls_the_call.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T04:40:23.461228+00:00"
+  },
+  "story/scene_rainy_day_power_out.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T04:40:26.507587+00:00"
+  },
+  "story/scene_the_couch_movie_night.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:18:58.305485+00:00"
+  },
+  "story/scene_confession_under_the_stars.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:19:02.002288+00:00"
+  },
+  "story/scene_almost_kiss_the_moment.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:19:03.939437+00:00"
+  },
+  "story/scene_real_talk_in_the_dark.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:19:11.318501+00:00"
+  },
+  "story/scene_going_further_taste.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:19:56.810320+00:00"
+  },
+  "story/scene_going_further_taste2.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:20:03.055237+00:00"
+  },
+  "story/scene_first_night_stay.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:20:06.938131+00:00"
+  },
+  "story/scene_morning_after_dawn.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:20:11.229167+00:00"
+  },
+  "story/scene_cant_stay_away_hallway.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:20:26.106875+00:00"
+  },
+  "story/scene_madison_arrives_arrival.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:20:28.424951+00:00"
+  },
+  "story/scene_stolen_moment_hidden.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:20:29.451832+00:00"
+  },
+  "story/scene_night_before_wedding_n7_finish.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:20:45.103365+00:00"
+  },
+  "story/scene_night_before_wedding_n6_control.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:20:49.724405+00:00"
+  },
+  "story/scene_night_before_wedding_n5_deeper.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:20:51.360385+00:00"
+  },
+  "story/scene_night_before_wedding_n4_together.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:20:52.451756+00:00"
+  },
+  "story/scene_night_before_wedding_n3_worship.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:20:54.772976+00:00"
+  },
+  "story/scene_night_before_wedding_n2_undressing.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:20:55.689459+00:00"
+  },
+  "story/scene_night_before_wedding_n1_door.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:20:56.668966+00:00"
+  },
+  "story/scene_wedding_morning_the_day.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:20:59.889779+00:00"
+  },
+  "story/ending_he_chooses_you.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:21:05.222047+00:00"
+  },
+  "story/ending_the_arrangement.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:21:11.089588+00:00"
+  },
+  "story/ending_one_last_night.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:21:17.437798+00:00"
+  },
+  "story/ending_what_could_have_been.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:21:20.810111+00:00"
+  },
+  "activities/breakfast_ethan_t4.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:21:30.031080+00:00"
+  },
+  "activities/breakfast_ethan_flirt.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:21:31.958121+00:00"
+  },
+  "activities/breakfast_ethan_t2.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:21:32.968025+00:00"
+  },
+  "activities/breakfast_ethan_t8.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:21:43.404903+00:00"
+  },
+  "activities/breakfast_ethan_t7.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:21:44.734360+00:00"
+  },
+  "activities/breakfast_ethan_t6.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:21:45.817819+00:00"
+  },
+  "activities/helping_chores_t6.jpg": {
+    "status": "disapproved",
+    "notes": "maybe we can find something else as in this video both faces are blured sort of confusing",
+    "updated_at": "2026-03-20T19:25:25.045056+00:00"
+  },
+  "activities/helping_chores_t4.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:25:29.356135+00:00"
+  },
+  "activities/helping_chores_t3.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:25:30.303144+00:00"
+  },
+  "activities/helping_chores_t2.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:25:31.486228+00:00"
+  },
+  "activities/helping_chores_t8.jpg": {
+    "status": "disapproved",
+    "notes": "this is not sex on the couch this, this does not contains penetration, instead it contains guy licking girl ass from behind on couch",
+    "updated_at": "2026-03-20T19:26:23.818040+00:00"
+  },
+  "activities/helping_chores_t7.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:26:29.575653+00:00"
+  },
+  "story/scene_what_are_we_doing_morning.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:28:31.760905+00:00"
+  },
+  "story/scene_what_are_we_doing_escalation.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:28:33.615157+00:00"
+  },
+  "activities/lunch_together_t2.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:28:39.125553+00:00"
+  },
+  "activities/lunch_together_t3.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:28:39.936913+00:00"
+  },
+  "activities/lunch_together_t4.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:28:49.482027+00:00"
+  },
+  "activities/lunch_together_t6.jpg": {
+    "status": "disapproved",
+    "notes": "what does manual means here, does it means sex penetration??",
+    "updated_at": "2026-03-20T19:29:09.912461+00:00"
+  },
+  "activities/lunch_together_t7.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:29:19.511791+00:00"
+  },
+  "activities/lunch_together_t8.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:29:32.054663+00:00"
+  },
+  "activities/pool_time_t2.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:32:04.240562+00:00"
+  },
+  "activities/pool_time_t3.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:32:06.611677+00:00"
+  },
+  "activities/pool_time_t4.jpg": {
+    "status": "disapproved",
+    "notes": "reverify this with the query",
+    "updated_at": "2026-03-20T19:32:37.897672+00:00"
+  },
+  "activities/pool_time_t7.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:32:53.559875+00:00"
+  },
+  "activities/pool_time_t8.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:33:03.093764+00:00"
+  },
+  "activities/pool_time_t6.jpg": {
+    "status": "disapproved",
+    "notes": "what manual means",
+    "updated_at": "2026-03-20T19:33:10.475397+00:00"
+  },
+  "activities/wedding_planning_t2.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:33:13.511099+00:00"
+  },
+  "activities/wedding_planning_t3.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:33:18.189504+00:00"
+  },
+  "activities/cooking_together_t7.jpg": {
+    "status": "approved",
+    "notes": "",
+    "updated_at": "2026-03-20T19:40:17.101763+00:00"
+  }
+}

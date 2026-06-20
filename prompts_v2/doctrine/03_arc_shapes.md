@@ -64,6 +64,8 @@ The reference table for what each shape's canvas distribution should LOOK like. 
 
 **The L1 cells above count *escalation* rungs, not hubs.** The number of Lane 1 **hubs** is set separately by presence: one hub per distinct `[[npcs.schedules]]` row (location × window) — D72-R6, `doctrine/04` §6.1. An NPC scheduled across 5 windows has 5 hubs even if the escalation budget is small; the extra hubs are *light* (base + talk + leave, exposure-tier-capped per D72-R7), not extra escalation. "Empty cells are honest" governs L2/L3 *escalation* surfaces — it does NOT excuse a missing presence hub: even service/antagonist NPCs get a light hub at each scheduled location. Presence floor (a hub) and escalation register (the rungs on it) are independent axes.
 
+**A third independent axis: the player's own daily loop.** The `L3` cells count *NPC walk-ins*, which are correctly shape-gated (a peer doesn't barge into private chores). They do NOT count the player's solo daily activities — sleep, eat, bathe, self-care feeders, the earning chore — which exist in **every** game regardless of shape (`doctrine/02` §4.10, §4.12). A shape with `L3 = 0` has no NPC walk-ins; it still has a full daily routine and a feeder floor. Do not read "0 walk-ins" as "no daily loop" — that misread is how games ship dead kitchens and solo-forever baths.
+
 ---
 
 ## §3 — Family/ambient (Frank — the dense reference)
@@ -197,7 +199,7 @@ Lane 1/2 RTS-flat; capstones Tier-3 earned. Per-arc vocab ceiling: open question
 
 ### §5.5 — Doc 58 design brief (Ryan)
 
-`28th_april_TLS_Phase2_Redesign/58_Ryan_Design_Brief.md`. Per-lane budget L1 2–3 + L2 1–2 + **L3 = 0** + capstones 3–4. Slice scope = Stage 2 partner. Phase 2+ = Stage 3+ consummation.
+`28th_april_TLS_Phase2_Redesign/58_Ryan_Design_Brief.md`. Per-lane budget L1 1–3 (Doc 58 §3: T1 1 + T2 0–1 + T3 0–1) + L2 1–2 + **L3 = 0** + capstones 3–4. Slice scope = Stage 2 partner. Phase 2+ = Stage 3+ consummation.
 
 ---
 

@@ -9,7 +9,7 @@ Everything below answers to the 8 qualities (Step 0) and is grounded in the RTS 
 
 ---
 
-## 1. The cascade (the spine) — `redesign_phase_3/04`
+## 1. The cascade (the spine)
 **One idea: you must corrupt YOURSELF before you can corrupt anyone else.** The player's own corruption is
 the master key; all lewd content with NPCs stays locked until the MC has fallen far enough. This turns an
 open sandbox into a story with a beginning/middle/end *without a linear script.*
@@ -55,7 +55,7 @@ around, just colder/worse"* → **soft gate** (always reachable, low stat degrad
 
 ---
 
-## 2. The desire ladder — `redesign_phase_3/09` (the cascade, *felt* as wants)
+## 2. The desire ladder (the cascade, *felt* as wants)
 Don't model the game as a corruption meter with content bolted at thresholds. Model it as **a chain of
 escalating, named WANTS** — each concrete and *wanted* — where pursuing a want raises the meters that open
 the next want. **The meter is backstage; desire is onstage.**
@@ -75,7 +75,7 @@ rung: a concrete want + what clearing it unlocks (the next want).
 
 ---
 
-## 3. The reactive world — `redesign_phase_3/11` (clothing-driven lewd reactivity)
+## 3. The reactive world (clothing-driven lewd reactivity)
 **The world reacts to what she's WEARING, not to a hidden corruption number.** The outfit has an exposure
 level she controls; the world reads it and takes lewd liberties scaled to it. (Deliberate divergence from
 RTS — outfit-only, for legibility + player control.)
@@ -99,7 +99,7 @@ RTS — outfit-only, for legibility + player control.)
 
 ---
 
-## 4. The economy — `redesign_phase_3/13` (a corruption-ladder, anti-grind)
+## 4. The economy (a corruption-ladder, anti-grind)
 **The economy is itself a CORRUPTION LADDER, not a job list.** Income runs legit-low-pay early →
 lewd-high-pay as she falls, so **making money and corrupting herself are the same act**, and broke-pressure
 *pulls her down the lewd path because that's where the money is.*
@@ -119,11 +119,16 @@ lewd-high-pay as she falls, so **making money and corrupting herself are the sam
 
 ---
 
-## 5. Legibility + pacing — `redesign_phase_3/14`
+## 5. Legibility + pacing
 - **Legibility is a discipline on the quest cards we already have, not a new tracker.** The top "Story
   Goals" card always shows the **current want** (the active desire-ladder rung) AND **the next concrete
-  action** (what · where · when) — RTS's failure was naming the goal, not the step. Telegraph the next rung
+  action, naming the PLACE + TIME-WINDOW + REQUIREMENT verbatim** ("Make rent ($120) — work the floor for
+  tips at the bar, evenings 6 pm–close", not just "make rent") — RTS's failure was naming the goal, not the
+  step; the field's best games (Gakko's walkthrough-as-sidebar) always name where + when. **Mandatory for
+  the active card**, and for each NPC's `next` block (`npc_panel`, `systems.md`). Telegraph the next rung
   (locked-visible). Never stale (one current want shown). Per-NPC wants legible in each NPC's quest section.
+  **A cross-gated rung names the OTHER arc's state** ("Sal won't go further while the bar's in jeopardy" —
+  the machine §7 D3); a silent cross-lock is a soft-lock.
 - **Pacing = tension → release, escalating, then PLATEAU.** Every want ends in a **payoff** (no want without
   one); payoffs escalate up the ladder, then flatten into a **wide livable plateau** at the frontier
   (climb → plateau → climb). Alternate big and small beats; cap the gap between payoffs (always a near
@@ -135,7 +140,7 @@ lewd-high-pay as she falls, so **making money and corrupting herself are the sam
 
 ---
 
-## 6. The frontier — `redesign_phase_3/17` (endless sandbox, not a finish line)
+## 6. The frontier (endless sandbox, not a finish line)
 We build **endless sandboxes** (like RTS), not limited games with a win-screen. Three kinds of "ending":
 - **Local arc endings — KEEP.** A single NPC's terminal capstone ("you fully corrupted Rosa") ends a
   *thread*, not the game.
@@ -150,12 +155,71 @@ We build **endless sandboxes** (like RTS), not limited games with a win-screen. 
 
 ---
 
+## 7. The machine (cross-wiring as the depth spine)
+The game is **one machine**, not parallel arcs that share a wallet: NPC arcs + the economy + the player's
+rise read/write a shared state and feed each other. Designed HERE, up front, so Step-4 arcs are authored as
+components that plug into a machine that already exists on paper (the islands-fail fix). **Design the core
+loop first**, then the wires, then check the disciplines.
+- **The core loop (the spine).** One economic circuit: conquest → money/access → the next conquest
+  (bar game: break the owner → take the bar → bar income funds recruiting girls → their arcs earn → fund
+  the madam). Every core NPC gets a **place** in it (casting, `step-3-casting.md`).
+- **Two forms of wire** (form 3 — a *finished* arc becomes a resource — is **G6, deferred**):
+  - **Form 1 — arc→arc depth gate.** Arc A's *mid/late rung* gated on arc B's *stage*. **Milestone → a
+    shared PLAYER flag** the source arc sets (`{type="flag", subject="player", flag_key="bar_seized"}`);
+    **"how far along" → the `<npc>_stage` PLAYER trait** (`{type="trait", subject="player",
+    trait_key="<otherNpc>_stage", operator="gte"}`). Rule: **milestone → flag; "how far" → stage trait.**
+    NEVER a raw cross-NPC trait read (`subject="npc", npc_id="npc_OTHER"` from a foreign canvas is
+    unverified — mirror to the player namespace at the source arc).
+  - **Form 2 — arc↔economy circulation.** (2a, load-bearing) money earned from arc/activity A is the *gate*
+    to reach B — the economy is the connective tissue between arcs (§4). (2b, flourish) a payout
+    **banded** by an NPC's trait — authored as **band-gated sibling choices** (one choice per band, each
+    with its own `conditions` + literal-int money `effects`; `beat-authoring.md`), banding on the host
+    NPC's trait or a player-mirror.
+- **Three disciplines** (the firewalls): **D1** never gate an arc's ENTRY on another arc — only mid/late
+  rungs (every arc stays cold-start-enterable; breaks cycles by construction). *Introducing a late-act
+  recruit later (her schedule begins in Act 3) is the separate on-ramp-stagger pattern — fine; D1 forbids a
+  `conditions` cross-gate on a **present** arc's on-ramp, not sequencing when an NPC enters.* **D2** no
+  dependency cycles (the F1 wires form a DAG — built at the blueprint, checked at the feedback review, `step-6-feedback.md`); **D3** every
+  cross-gate is a **locked-visible telegraph naming the other arc's state** (§5 — a silent
+  cross-gate is a soft-lock).
+- **No new ledger field** — the machine is designed in the design book's `## The machine` section and
+  enforced by ordinary beat `deps` + the `cross_npc`/`economic` beat types (`ledger-schema.md`). One NPC at
+  a time still holds (Step 4): A reads a flag B will later set; an unset flag = a locked rung = correct.
+
+---
+
+## 8. The opening, the systems, and the fail-state (framework §1 completions)
+Three declarations that finish the game's *shape* (framework §1 — `references/content-framework.md`). Cheap on
+paper; each closes a real blind spot.
+- **The opening / cold start (§1E).** Design the first session as the desire ladder's *first rung*: the first
+  screen (where she stands, what's happening around her), the **2–3 things she can DO immediately** (one
+  nudging her down without grinding), the **first named want**, how the world TEACHES with no tutorial, and the
+  10-minute-taste test — a brand-new player comes away knowing what this game IS (the core charge, not just
+  chores). If anyone (player or NPC) is **customizable**, name where the value appears and confirm the game
+  *speaks it back* (`@player`/`@npc` tokens, never baked into labels — `references/customization.md`).
+- **The systems in play (§1E).** Declare which optional engine systems this game switches **ON** (phone /
+  rent-debt clock / clothing wardrobe / customization) and which it leaves **OFF** — each named in or out, so
+  none is half-wired by accident and none silently forgotten (`references/systems.md`).
+- **The fail-state declaration (§1C).** Declare whether **failure exists at all**: when she refuses a beat,
+  neglects a person for days, lets the deadline lapse, or runs out of money, does anything get **worse**, **close
+  off**, or **push back** — or is forward the only direction? A forward-only ratchet is a legitimate
+  power-fantasy floor, but **declare it on purpose** ("no fail-state by design"), not by default. *(The ripples
+  are named at Step 4 Pass 4 and wired at Step 5 Pass 4 / framework §4F; here just declare whether the negative axis exists — the
+  inheritance's biggest gap was an advertised foreclosure clock that could never actually bite.)*
+
+---
+
 ## Output (written into `design_book.md`)
 A **World setup / engine** section carrying: the cascade + double-lock + the stat set (with each leg's job
 + which are built-in vs Tier-3 custom); the **desire ladder** (the chain of named wants from open to
 frontier); the **reactive-world** model (which places get which ceiling, which NPCs are predatory); the
-**economy** (the income paths + the sinks + the late-act pressure); the **pacing** intent; and the
-**frontier** (the top rung's 3 jobs + the seeded next-hook). Set `pipeline_phase = "casting"` when done.
+**economy** (the income paths + the sinks + the late-act pressure); **the machine** (the core loop + which
+arcs wire to which / to the economy — form 1/2, the disciplines); the **pacing** intent; the
+**frontier** (the top rung's 3 jobs + the seeded next-hook); and the **§8 declarations** (the opening / cold
+start + the systems-in-play + the fail-state). Set `pipeline_phase = "map_design"` when done (Step 2b
+designs the world's spatial graph before casting places characters onto it).
+*(The full `## The machine` block in the design book is finalized at Step 5 (blueprint) — the synthesis of
+every arc's wiring contract — but the core loop + who's a node is fixed here.)*
 
 ## Self-check
 - The cascade + **double lock** are explicit; non-lewd interaction is ungated.
@@ -168,9 +232,15 @@ frontier); the **reactive-world** model (which places get which ceiling, which N
 - One wallet; income is a corruption ladder; earning = content; pressure escalates via scaling sinks.
 - Pacing is climb → plateau → climb; the **endgame escalates in content, not management**.
 - The **frontier** is designed (3 jobs + honest narration); local arc endings kept; no hard game-ending.
+- The **§8 declarations** are explicit: the opening (first-session + first want + speak-back), the systems
+  on/off list, and the fail-state (failure exists *or* "no fail-state by design" — chosen, not defaulted).
+- **The machine** (§7): the core loop is designed; every core NPC has a place; the wires are form 1/2 (form
+  3 = G6, deferred); D1 (no entry gated) · D2 (DAG) · D3 (cross-gates telegraphed) hold. Legibility (§5) is
+  mandatory verbatim (place + time-window) + cross-gates name the other arc.
 
 ## Cross-references
-`redesign_phase_3/{04,09,11,13,14,17}` (full detail) · `references/trait-design.md` (the spine the
-double-lock rides) · `references/lanes.md` (where reactive/economy content is authored) ·
-`references/systems.md` (the clothing two-part rule) · `references/run-mode.md` (ask the crucial forks).
-Next = `references/step-3-casting.md`.
+`references/trait-design.md`
+(the spine the double-lock rides) · `references/lanes.md` (where reactive/economy content is authored) ·
+`references/systems.md` (the clothing two-part rule + the `npc_panel` `next` block legibility) ·
+`references/run-mode.md` (ask the crucial forks). Next = `references/step-2b-map-design.md` (design the
+map), then `references/step-3-casting.md`.

@@ -18,10 +18,14 @@ we have**, so it actually delivers. Two failures to kill:
 - **L1 — The tracker IS the desire ladder, surfaced.** The top "Story Goals" card always shows the
   **current want** (the active rung of the desire ladder `09`) as ONE coherent thread — not scattered
   per-NPC cards with no spine. (Reuse: the no-`npc_id` quest card = the "Story Goals" section.)
-- **L2 — Show the next ACTION, not just the goal.** Each active card shows the want **+ the next concrete
-  step (what · where · when)** — "Make rent ($X) — work the floor for tips, evenings," not just "make
-  rent." This is the exact RTS failure (the guide named the goal, not the step). (Reuse: the card
-  `text`/`tip`/`goals` fields carry the action.)
+- **L2 — Show the next ACTION, named VERBATIM, not just the goal.** Each active card shows the want **+ the
+  next concrete step, naming the PLACE + TIME-WINDOW + REQUIREMENT in words** — "Make rent ($120) — work the
+  floor for tips at the bar, evenings (6 pm–close)," not just "make rent." This is the exact RTS failure (the
+  guide named the goal, not the step) AND the field's strongest single device: the best games (Gakko's
+  walkthrough-as-sidebar — `21` §3E) key a hint to the exact arc step and **always name where + when**
+  ("From 3 to 6 p.m., have dinner with Aunt Ririko in the kitchen"). **This is MANDATORY for the active card,
+  not optional polish** — an active card that names only the abstract goal fails L2. (Reuse: the card
+  `text`/`tip`/`goals` fields carry the action; the `npc_panel` `next` block carries it per-NPC.)
 - **L3 — Telegraph what's coming.** The next want/rung is visible ahead (greyed/locked-visible), so the
   player sees where they're headed. (Reuse: locked-visible rungs `lanes.md` + the quest chain showing the next stage.)
 - **L4 — Never stale.** Exactly one current want shown; it retires and the next appears as wants clear.
@@ -33,15 +37,25 @@ we have**, so it actually delivers. Two failures to kill:
   peak — run your empire, [the steady-state loop]. More to come."* — instead of going empty. The edge of
   authored content is *told to the player*, with the livable steady-state named, so the open sandbox feels
   like arrival, not "I don't know what to do."
+- **L7 — A CROSS-GATE names the other arc's state** (the machine seam — `22` D3). When a rung is locked
+  behind *another arc's* progress (form 1 of the machine — "Sal won't cross that line while the bar's still
+  in jeopardy," gated on `bar_seized`), the lock must be **visible and name what's blocking it** — the other
+  arc + the state needed — not just sit greyed or, worse, silently absent. An invisible cross-gate is a
+  **soft-lock** (the field's worst guidance bug — `21` §3E), and the more arcs the machine wires, the more
+  this bites. So every cross-gated rung is a **locked-visible telegraph naming the gating arc's state**.
+  (Reuse: locked-visible rung `lanes.md` with `locked_text` naming the other arc; this is the legibility
+  half of the machine layer — it's why G5's cross-wires can't ship without G1.)
 
 ## Anti-patterns
-- A card that names only the abstract goal ("seduce Sal") with no action.
+- A card that names only the abstract goal ("seduce Sal") with no action / no place + time-window (L2).
 - Scattered/stale cards with no single "what you're chasing now."
 - The player ever staring at the screen not knowing what to do (the RTS sin).
+- A **silent cross-gate** — a rung locked behind another arc with no visible reason (L7 violated → soft-lock).
 
 ## Check
-At any moment, the tracker names the **current want + the next concrete action**; the next want is
-visible ahead; no stale cards; both the main ladder and each active NPC pursuit are legible.
+At any moment, the tracker names the **current want + the next concrete action (place + time-window +
+requirement, verbatim — L2)**; the next want is visible ahead; no stale cards; both the main ladder and each
+active NPC pursuit are legible; **every cross-gated rung names the arc/state blocking it (L7)**.
 
 ---
 
@@ -118,4 +132,6 @@ the visible next-want (L3) is the always-near next-payoff (P4). Together they ma
 
 ## Cross-references
 - `08` Gaps 3 & 4 · `09` desire ladder (the wants/payoffs these surface & pace) · `13` economy (the rent
-  cadence + tiered pay) · `04` cascade (the spacing) · `05` quality #2 (legible pull), #4 (payoff), #6 (pacing).
+  cadence + tiered pay) · `04` cascade (the spacing) · `05` quality #2 (legible pull), #4 (payoff), #6 (pacing) ·
+  `22` the machine (L7 = its D3 cross-gate-legibility discipline; the cross-wires cannot ship without L7) ·
+  `21` §3E (the field evidence: name place + time-window verbatim — the Gakko walkthrough-as-sidebar device).

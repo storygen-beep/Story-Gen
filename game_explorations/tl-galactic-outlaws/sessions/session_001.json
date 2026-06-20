@@ -1,0 +1,19 @@
+{
+  "session_id": 1,
+  "start_ts": "2026-06-07T21:48:27.359Z",
+  "start_epoch_ms": 1780868907359,
+  "end_ts": "2026-06-07T21:49:50.424Z",
+  "duration_s": 83,
+  "clicks": 2,
+  "choices_explored": 2,
+  "arrow_advances": 0,
+  "unique_states_seen": 4,
+  "new_unique_states": 4,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "TOP-LEVEL (Galactic Outlaws — NOTE: sci-fi title but the actual playable build opens on a mundane FAMILY breakfast w/ mom + step-sister; title/wrapper mismatch with content). This is an RTS-MOLD family-corruption sandbox — strong corroboration of the RTS pattern. DRIVE = corrupt the household (mom, step-sister) along a main quest. PROGRESSION SPINE = per-NPC CORRUPTION + STAGE, exactly RTS's two-axis model: momcorruption/momstage, siscorruption/sisstage; plus player stats charisma/intelligence/strengh/money (secondary) + a 'mainquest' through-line. DAY LOOP = day/time/timenum + location; daily activity flags (exercised, readtoday, workedthisweek) — self-improvement + routine. WORLD LOGIC = per-NPC corruption/stage gates that NPC's escalating content (RTS-faithful); mainquest gates story beats. Character creator up front (appearance + a 'background' origin choice that likely seeds starting stats). STORY = mainquest spine + sandbox days. DISTINCTIVE: confirms the RTS template (per-NPC corruption+stage as the arc spine, player stats secondary, day-cycle, main quest) appears across multiple games — it's a genre-standard, not unique to RTS. Confidence high on model (State.variables), low on endings/quest specifics."
+  ]
+}

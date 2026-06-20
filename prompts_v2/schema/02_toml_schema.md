@@ -780,6 +780,39 @@ See `doctrine/04_authoring_rules.md` for Doc 50 R1–R6 + Doc 56 R6.
 
 Validator: `template_import.py:3024`+. Each entry is `{ type = "X", ... type-specific fields }`.
 
+### §9.0 — Choosing the type (and avoiding the doubling)
+
+**The sidebar is NOT the only place stats show.** The engine's auto `<<playerTraits>>` Traits widget
+(+ the Stats page) dumps **every non-hidden `core_trait` as a raw number** by default. So a stat is
+*already visible as a number* without any `[[sidebar_items]]` entry. A band is an **upgrade you add on
+top** — use it only when a qualitative word beats the number, and de-dup so the stat doesn't show twice.
+
+**Encode by the stat's nature:**
+
+| Stat nature | Type | Why |
+|---|---|---|
+| Identity / qualitative state, number meaningless (corruption) | `trait_words` | The word IS the read (Pure→Whore). This is the **hero** stat — the engine renders `trait_words` raised + larger. |
+| Transient mood / bounded magnitude (arousal) | `trait_bar` + `bands` + **`hide_value = true`** | A heat word on a bar (Cold→Burning); the raw 0–10 is noise. |
+| Body-state need, silent when fine (hygiene, energy) | `trait_status_text` | Filthy→Clean; renders nothing when healthy. |
+| Spendable resource you COUNT (money) | **leave as a NUMBER** (no band) | A vibe word ("Broke/Flush") hides the amount the player needs to make decisions. |
+
+**Don't over-band.** Banding every stat makes the rail noisy and redundant (every banded stat is also a
+number in the Traits dump — see below). Band the 1–2 stats whose word genuinely beats the number; number
+the rest. (Reference: RTS bands ~2 of its ~9 stats.)
+
+**Kill the number+word doubling — two kinds:**
+- *Within a `trait_bar`:* `bands` + no `hide_value` renders BOTH `"Arousal: 3 / 10"` AND `"Cold"`. Set
+  **`hide_value = true`** so only the band word shows.
+- *Across surfaces:* a banded stat (`trait_words`/`trait_bar`) STILL appears as a raw number in the auto
+  Traits dump → it shows TWICE. Add **`[[traits.labels]] hidden = true`** for that trait so it shows ONCE
+  (as the band). Safe: the band renderers ignore `hiddenTraits` (`v2.py:14744`/`14853`) — the band
+  survives; only the auto dump + Stats page drop the number. (See `doctrine/09` §4.4.)
+
+**Visual design is engine-handled** — pick the type + bands, never hand-style: the engine renders one
+consistent card language (neutral structure, accent reserved for signal, the word-state hero). Worked
+example: `games/the_inheritance/toml_phases/0_systems_spec.toml` (corruption `trait_words`; arousal
+`trait_bar` + `hide_value=true`; energy/money as numbers; corruption + arousal `hidden=true` to de-dup).
+
 ### §9.1 — `type = "trait_words"`
 
 Banded prose label. Renders a band's text string; raw number hidden. Used for corruption (Pure / Lewd / Slutty / Whore).
@@ -808,7 +841,8 @@ bands = [
 
 ### §9.2 — `type = "trait_bar"`
 
-Numeric bar with optional band-text overlay + color tiers.
+Numeric bar with optional band-text overlay + color tiers. **With `bands`, set `hide_value = true`** —
+otherwise the bar shows the raw `X / Y` AND the band word together (the doubling, see §9.0).
 
 | Field | Notes |
 |---|---|
@@ -828,6 +862,7 @@ type = "trait_bar"
 trait = "arousal"
 label = "Arousal"
 max = 10
+hide_value = true   # bands carry the read-out (Cold→Burning); don't also print the raw 3 / 10
 color_tiers = [
   { up_to = 30,  class = "low" },
   { up_to = 70,  class = "medium" },

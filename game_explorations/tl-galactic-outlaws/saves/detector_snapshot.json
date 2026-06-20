@@ -1,0 +1,667 @@
+{
+  "generated_at": "2026-06-07T21:49:50.427Z",
+  "variables": {
+    "inventory": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868907359,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 4
+    },
+    "timenum": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868907359,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 4,
+      "number_stats": {
+        "count": 9,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868907359,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 4,
+      "number_stats": {
+        "count": 9,
+        "unique_count": 1,
+        "min": 2,
+        "max": 2,
+        "first": 2,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868912376,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 3,
+      "string_samples": [
+        "Matt"
+      ]
+    },
+    "hair": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868912376,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 3,
+      "string_samples": [
+        "brown"
+      ]
+    },
+    "eyes": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868912376,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 3,
+      "string_samples": [
+        "hazel"
+      ]
+    },
+    "beard": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868912376,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 3,
+      "string_samples": [
+        "no"
+      ]
+    },
+    "glasses": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868912376,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 3,
+      "string_samples": [
+        "no"
+      ]
+    },
+    "imgnum": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868912376,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 3,
+      "number_stats": {
+        "count": 8,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "mom": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868912376,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 3,
+      "string_samples": [
+        "Player"
+      ]
+    },
+    "son": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1780868912376,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 3,
+      "string_samples": [
+        "step-son",
+        "Smith"
+      ]
+    },
+    "name_mom": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868912376,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 3,
+      "string_samples": [
+        "Angela"
+      ]
+    },
+    "sis": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868912376,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 3,
+      "string_samples": [
+        "step-sister"
+      ]
+    },
+    "bro": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868912376,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 3,
+      "string_samples": [
+        "step-brother"
+      ]
+    },
+    "name_sis": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868912376,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 3,
+      "string_samples": [
+        "Riley"
+      ]
+    },
+    "infant": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868938885,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "intelligence"
+      ]
+    },
+    "adolescent": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868938885,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        "intelligence"
+      ]
+    },
+    "cheats": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868938885,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 2,
+      "string_samples": [
+        ""
+      ]
+    },
+    "location": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "string_samples": [
+        "hyperspace"
+      ]
+    },
+    "black_porn": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "bool_values": [
+        false
+      ]
+    },
+    "collar": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 2,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "spices": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 2,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "you": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "string_samples": [
+        "brownhazelnono1"
+      ]
+    },
+    "exercised": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "bool_values": [
+        false
+      ]
+    },
+    "workedthisweek": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "bool_values": [
+        false
+      ]
+    },
+    "movies": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 2,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "readtoday": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "bool_values": [
+        false
+      ]
+    },
+    "c_mom": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "string_samples": [
+        "brownmom"
+      ]
+    },
+    "c_sis": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "string_samples": [
+        "brownsis"
+      ]
+    },
+    "mainquest": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 2,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "momstage": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 2,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "sisstage": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 2,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "siscorruption": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 2,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "momcorruption": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 2,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "money": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 2,
+        "unique_count": 1,
+        "min": 1000,
+        "max": 1000,
+        "first": 1000,
+        "last": 1000,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "charisma": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 2,
+        "unique_count": 1,
+        "min": 5,
+        "max": 5,
+        "first": 5,
+        "last": 5,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "intelligence": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 2,
+        "unique_count": 1,
+        "min": 15,
+        "max": 15,
+        "first": 15,
+        "last": 15,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "strengh": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 2,
+        "unique_count": 1,
+        "min": 5,
+        "max": 5,
+        "first": 5,
+        "last": 5,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "statsinit": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "bool_values": [
+        true
+      ]
+    },
+    "time": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780868957299,
+      "last_ts": 1780868962699,
+      "passages_seen_on_count": 1,
+      "string_samples": [
+        "earlymorning"
+      ]
+    }
+  },
+  "prefix_clusters": {
+    "name": [
+      "name",
+      "name_mom",
+      "name_sis"
+    ]
+  },
+  "co_change": {},
+  "passages": {
+    "start": {
+      "first_ts": 1780868907359,
+      "visit_count": 1
+    },
+    "mc_create2": {
+      "first_ts": 1780868912376,
+      "visit_count": 4
+    },
+    "mc_create3": {
+      "first_ts": 1780868938885,
+      "visit_count": 2
+    },
+    "intro": {
+      "first_ts": 1780868957299,
+      "visit_count": 2
+    }
+  },
+  "choices": {
+    "total": 2,
+    "by_classification": {
+      "branch": 2
+    },
+    "price_observations": [],
+    "recent": [
+      {
+        "ts": 1780868939369,
+        "passage": "mc_create2",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Saves",
+          "Restart",
+          "Click to change  your profile picture",
+          "Last step"
+        ],
+        "picked": "Last step",
+        "prices": null,
+        "at_state_hash": "439993a7ce33efc8"
+      },
+      {
+        "ts": 1780868957413,
+        "passage": "mc_create3",
+        "classification": "branch",
+        "options": [
+          "Toggle the UI bar",
+          "",
+          "",
+          "Saves",
+          "Restart",
+          "Patreons",
+          "Begin story"
+        ],
+        "picked": "Begin story",
+        "prices": null,
+        "at_state_hash": "bb273f71378288a2"
+      }
+    ]
+  },
+  "mutations": [
+    {
+      "ts": 1780868938885,
+      "passage": "mc_create3",
+      "state_hash": "bb273f71378288a2",
+      "var": "son",
+      "before": "step-son",
+      "after": "Smith"
+    }
+  ]
+}

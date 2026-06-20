@@ -1,0 +1,161 @@
+# Phase 3 — 3_activities.toml
+# Last Call — Nina-solo activities (no NPC arcs here; those are beats in 5_scenes).
+#
+# canvas_sleep is the DAY-CYCLE ROUTER (the Day System, doctrine/04 §10). Last Call is
+# night-centric: the bar runs 17:00–02:00 and Nina works it (canvas_work_shift advances
+# the clock 120–180 min a turn). Past midnight the bar's dead and she crashes upstairs;
+# sleep jumps her to mid-morning so the DAYTIME town — and Dee, who only stands the depot
+# 10:00–17:00 — becomes reachable. Without this router daytime presence is dead (the Dee-bug).
+# Shape mirrors games/late_shifts activity_sleep: solo canvas, schedule-gated window,
+# forward jump + energy restore on the EXIT block. No hygiene cost — Last Call has no shower
+# activity yet, and hygiene already drains via the daily tick, so sleeping mustn't double-drain it.
+
+# ── canvas_sleep — Nina-solo, the day-advance router ──────────────────────────
+[[canvases]]
+id          = "canvas_sleep"
+name        = "Sleep"
+description = "Nina-solo. The apartment over the bar. Day-cycle router: jumps from the dead post-close hours to mid-morning so the daytime town/depot is reachable. Energy restore. No NPC sub."
+
+[canvases.trigger]
+location      = "loc_apartment"
+is_repeatable = true
+priority      = 3
+is_active     = true
+
+# Sleep window: after midnight (bar winding down / shut) through early afternoon. Keeps
+# her from sleeping through the evening shift, and caps re-sleeping so daytime gets used.
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "00:00"
+end_time   = "14:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Sleep"
+blocks = [
+  { type = "image", props = { file = "activities/sleep.jpg" } },
+  { type = "paragraph", content = "The floor's finally quiet, the jukebox dead, the taps wiped. You climb the stairs to the studio that was Sully's and is yours now, kick your shoes off at the bed, and let the dark take the rest. Below, the building ticks as it cools." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sleep until morning 😴"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_apartment"
+time_progression_minutes = 540
+effects = [
+  { targetType = "player", trait = "energy", op = "add", value = 75 },
+]
+
+# ══════════════════════════════════════════════════════════════════════════════
+# beat_0016 — daily-life UTILITY activities (P3, "Utility + antagonist" scope).
+#   Nina-solo, no NPC subs (peers are hub+capstone; the one NPC-in-activity piece
+#   is the Collector floor-walk on canvas_work_shift in 5_scenes.toml). NO per-canvas
+#   schedule — these are available whenever their location is reachable (the live-
+#   verified gotcha: a schedule suppresses the solo-activity button; sleep is the
+#   deliberate window-gated exception). Shape mirrors games/late_shifts/3_activities.
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ── activity_shower — hygiene restore (fixes the drain-with-no-restore hole) ───
+# Daily tick drains hygiene -10/day with nothing to recover it; this is the recovery.
+[[canvases]]
+id          = "activity_shower"
+name        = "Shower"
+description = "beat_0016. Nina-solo, loc_apartment. Hygiene +40, energy +5. The hygiene-restore the day-cycle was missing (daily tick drains it with no recovery). No NPC sub."
+
+[canvases.trigger]
+location      = "loc_apartment"
+is_repeatable = true
+priority      = 3
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Shower"
+blocks = [
+  { type = "image", props = { file = "activities/shower.jpg" } },
+  { type = "paragraph", content = "The bathroom's the size of a phone booth and the water takes a full minute to run warm, but it runs. You stand under it until the smell of the bar — smoke, spilled beer, other people's nights — finally lets go of your skin." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get out, towel off 🚿"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_apartment"
+time_progression_minutes = 20
+effects = [
+  { targetType = "player", trait = "hygiene", op = "add", value = 40 },
+  { targetType = "player", trait = "energy",  op = "add", value = 5  },
+]
+
+# ── activity_clean_up — after-close bar chore (texture + time sink) ────────────
+# Sits beside the future beat_0010 Sal after-close hub at the same location.
+[[canvases]]
+id          = "activity_clean_up"
+name        = "Clean up the bar"
+description = "beat_0016. Nina-solo, loc_bar. Wipe down, stack stools, run the glasswasher. Energy -5, ~30 min. No NPC sub (Sal is peer — his content is the hub)."
+
+[canvases.trigger]
+location      = "loc_bar"
+is_repeatable = true
+priority      = 3
+is_active     = true
+# Energy gate: costs (not effects). Checked+deducted on entry — dims the button
+# with a "(5 Energy)" tag and shows "Requires 5 Energy (you have N)" when too tired.
+# See references/toml-gotchas.md "Resource gating — costs, not effects".
+costs = [{ trait = "energy", value = 5 }]
+
+[[canvases.nodes]]
+id   = "base"
+name = "Clean up"
+blocks = [
+  { type = "image", props = { file = "activities/clean_up.jpg" } },
+  { type = "paragraph", content = "You work the rag down the length of the bar, stack the stools, load the last rack into the glasswasher. The neon buzzes in the window. For a few minutes the place is just yours — quiet, wiped down, almost respectable." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Call it ↩️"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_bar"
+time_progression_minutes = 30
+# Energy spend lives on the trigger as costs (gated on entry), not here — keeping a
+# -5 effect too would double-charge.
+
+# ── activity_restock_cellar — daytime cellar chore (gives the cellar a day use) ─
+[[canvases]]
+id          = "activity_restock_cellar"
+name        = "Restock the cellar"
+description = "beat_0016. Nina-solo, loc_cellar. Haul cases up, rotate the kegs, mark what's low. Energy -6, ~20 min. No NPC sub (Dee is peer; his cellar content is the delivery hub)."
+
+[canvases.trigger]
+location      = "loc_cellar"
+is_repeatable = true
+priority      = 3
+is_active     = true
+# Energy gate: costs (not effects) — see activity_clean_up above + toml-gotchas.md.
+costs = [{ trait = "energy", value = 6 }]
+
+[[canvases.nodes]]
+id   = "base"
+name = "Restock"
+blocks = [
+  { type = "image", props = { file = "activities/restock_cellar.jpg" } },
+  { type = "paragraph", content = "Down in the cold you rotate the kegs, break down empty cases, carry the night's order up to the well. Your breath fogs near the cooler. It's the kind of work that empties your head — which, lately, is the only break you get." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Head upstairs ↩️"
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_cellar"
+time_progression_minutes = 20
+# Energy spend lives on the trigger as costs (gated on entry), not here — no double-charge.

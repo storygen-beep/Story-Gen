@@ -1,0 +1,1614 @@
+# ═══════════════════════════════════════════════════════════════
+# PHASE 2: STORY CANVASES
+# ═══════════════════════════════════════════════════════════════
+# Source: Book Phase 4 (Story Events)
+# Game: Two Weeks
+#
+# Contents:
+#   - 1 Starting canvas (scene_arrival — no trigger)
+#   - 19 Story event canvases (is_repeatable = false, priority = 10)
+#   - 1 Forced ending canvas (Day 14+ without story completion)
+#   - 4 Ending canvases (priority-ordered: 10, 8, 6, 1)
+#
+# Flag Chain: Each canvas requires the previous canvas's completion flag.
+# Gate Flags: Set by scene_old_photos (T2), scene_the_couch (T3),
+#             scene_first_kiss (T4), scene_what_are_we_doing (T6),
+#             scene_going_further (T7), scene_first_night (T5),
+#             scene_morning_after (T8).
+# Stats: affection/guilt on npc_ethan, boldness/energy on player.
+# ═══════════════════════════════════════════════════════════════
+
+
+# ═══════════════════════════════════════════════════════════════
+# EVENT #1: ARRIVAL (Starting Canvas — NO trigger section)
+# ═══════════════════════════════════════════════════════════════
+# Sets: game_started, arrival_complete
+# Player Phase: DENIAL → first crack
+
+[[canvases]]
+id = "scene_arrival"
+name = "Two Weeks"
+description = "You return home after two years for your step-brother's wedding."
+
+# NO [canvases.trigger] — this is the starting canvas (Rule 5)
+
+# Node 1: Before You Begin (How to Play)
+[[canvases.nodes]]
+id = "before_you_begin"
+name = "Before You Begin"
+blocks = [
+  { type = "heading", content = "Before You Begin" },
+  { type = "paragraph", content = "Two Weeks is an interactive story about forbidden feelings, impossible choices, and a clock that won't stop ticking. You have fourteen days before Ethan's wedding. What happens in those days is up to you." },
+  { type = "paragraph", content = "Explore the house, spend time with Ethan through daily activities, and make choices that shape your relationship. New story events unlock as your bond deepens. Check the Guide at the top of the screen anytime to see what's available." },
+  { type = "paragraph", content = "Three stats shape your story:" },
+  { type = "paragraph", content = "Affection — how close you and Ethan become. Built through activities and story choices. Guilt — the cost of crossing lines. Deeper intimacy carries weight. Boldness — your willingness to push boundaries and take risks." },
+  { type = "paragraph", content = "This game has multiple endings. For Ethan to choose you over the wedding: Affection 95+, Boldness 70+, and Guilt under 50. High affection alone won't be enough — courage matters, and too much guilt has a cost." },
+  { type = "paragraph", content = "The wedding is in fourteen days. Time advances with every action. If the clock runs out before you've seen the story through, the wedding happens without you getting a say." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Begin", targetType = "node", nodeId = "scene_arrival.the_return" }
+] }
+
+# Node 2: The Return
+[[canvases.nodes]]
+id = "the_return"
+name = "The Return"
+blocks = [
+  { type = "heading", content = "Two Weeks" },
+  { type = "paragraph", content = "The taxi pulls away and you're standing on the sidewalk with your suitcase, staring at a house you haven't seen in two years. Same white shutters. Same oak tree in the front yard, taller now. Same crack in the second porch step that Dad always said he'd fix." },
+  { type = "paragraph", content = "You left for college across the country. Told everyone it was for the program. Told yourself it was for the adventure. The truth was simpler and uglier: you couldn't keep living in a house with him and pretending you didn't feel what you felt." },
+  { type = "paragraph", content = "Running was easier than staying and aching." },
+  { type = "image", props = { file = "locations/home_exterior.jpg", description = "Suburban house exterior, warm afternoon light, suitcase on sidewalk", search_queries = ["family home exterior afternoon light", "suburban house returning home"] } },
+  { type = "paragraph", content = "Two years of careful distance. Two years of short phone calls and shorter visits. And now you're back because your step-brother is getting married in fourteen days and you couldn't think of a good enough excuse not to come." },
+  { type = "paragraph", content = "Your heart is pounding. You tell yourself it's just nerves." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Walk to the door", targetType = "node", nodeId = "scene_arrival.ethan" }
+] }
+
+# Node 3: Ethan
+[[canvases.nodes]]
+id = "ethan"
+name = "Ethan"
+blocks = [
+  { type = "paragraph", content = "The door opens before you reach it. And there he is." },
+  { type = "paragraph", content = "Taller than you remembered. Or maybe you'd been trying to make him smaller in your memory. Warm brown eyes. That easy, lopsided smile that always made you feel like you were the only person in the room. He's broader now — athletic, filled out. Not the lanky stepbrother you left behind." },
+  { type = "dialog", content = "Hey, stranger.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "He pulls you into a hug. His arms tighten a moment too long. You breathe him in without meaning to — cedar and coffee and something that's just him. Two years of careful distance collapse in three seconds." },
+  { type = "image", props = { file = "story/scene_arrival_ethan.jpg", description = "Warm reunion embrace at front door, afternoon light", search_queries = ["reunion hug front door emotional", "embrace coming home"] } },
+  { type = "dialog", content = "God, it's good to see you. I wasn't sure you'd actually come.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "Your heart is racing and you are actively trying to ignore the reason why." }
+]
+exit_block = { type = "choices", choices = [
+  { targetType = "node", text = "I missed you.", nodeId = "scene_arrival.the_situation", effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }] }
+] }
+
+# Node 4: The Situation
+[[canvases.nodes]]
+id = "the_situation"
+name = "The Situation"
+blocks = [
+  { type = "paragraph", content = "He carries your suitcase inside like it weighs nothing. The house smells like fresh coffee and something baking. He's been preparing." },
+  { type = "dialog", content = "Madison's away finishing up some work stuff. Won't be here until right before the wedding. So it's just us for the next couple weeks.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "Just us. The weight of those two words hangs in the air between you." },
+  { type = "paragraph", content = "He shows you to your old room — the guest room that was once yours. Some of your old things are still here. Posters you left behind, books on the shelf. He didn't change it." },
+  { type = "dialog", content = "I kept meaning to turn it into an office but... I don't know. Didn't feel right.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "Fourteen days. Just the two of you. In the house where everything started." }
+]
+exit_block = { type = "location", text = "Settle in", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 60, flagEffects = [
+  { targetType = "player", flag = "game_started" },
+  { targetType = "player", flag = "arrival_complete" }
+] } }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EVENT #2: WELCOME HOME DINNER [BRIDGE]
+# ═══════════════════════════════════════════════════════════════
+# Conditions: arrival_complete
+# Sets: welcome_dinner_complete, ethan_comfortable
+# Location: loc_kitchen, 17:00-19:00
+
+[[canvases]]
+id = "scene_welcome_dinner"
+name = "Welcome Home Dinner"
+description = "He cooked your favorite. He remembered."
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+items = [
+  { type = "flag", subject = "player", flag_key = "arrival_complete", operator = "is_true" }
+]
+[[canvases.trigger.schedules]]
+start_time = "17:00"
+end_time = "19:00"
+
+# Node 1: Dinner Together
+[[canvases.nodes]]
+id = "dinner"
+name = "Dinner Together"
+blocks = [
+  { type = "paragraph", content = "The kitchen smells incredible. He's made your favorite — that pasta recipe your mom used to make before the divorce, the one you mentioned exactly once, years ago." },
+  { type = "paragraph", content = "He remembered." },
+  { type = "dialog", content = "Some things you don't forget.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "He pours you a glass of wine and makes small talk about safe things — the neighborhood, his work, the wedding venue. But you catch him watching you when he thinks you're not looking. His eyes linger a beat too long." },
+  { type = "image", props = { file = "story/scene_welcome_dinner_dinner.jpg", description = "Intimate dinner table for two, warm kitchen lighting, wine glasses", search_queries = ["intimate dinner table two people kitchen", "cozy dinner wine evening"] } }
+]
+exit_block = { type = "choices", choices = [
+  { targetType = "node", text = "Remember when we used to have dinner parties? Just us, pretending to be fancy?", nodeId = "scene_welcome_dinner.after_dinner", effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }] }
+] }
+
+# Node 2: After Dinner
+[[canvases.nodes]]
+id = "after_dinner"
+name = "After Dinner"
+blocks = [
+  { type = "paragraph", content = "He clears the dishes, waving off your offer to help. You watch him move through the kitchen — efficient, comfortable, at home. This is his life now. A life you're not part of." },
+  { type = "dialog", content = "I'm glad you're here. Really.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "The way he says it — you're not sure if he means here for the wedding, or here in this kitchen, or just... here." }
+]
+exit_block = { type = "location", text = "Head upstairs", config = { destinationType = "trigger", time_progression_minutes = 90, flagEffects = [
+  { targetType = "player", flag = "welcome_dinner_complete" },
+  { targetType = "player", flag = "ethan_comfortable" }
+] } }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EVENT #3: FINDING OLD PHOTOS → sets lingering_touch_unlock
+# ═══════════════════════════════════════════════════════════════
+# Conditions: welcome_dinner_complete, affection >= 15
+# Sets: old_photos_complete, lingering_touch_unlock
+# Location: loc_garage, 14:00-17:00
+
+[[canvases]]
+id = "scene_old_photos"
+name = "Finding Old Photos"
+description = "Photo albums in the garage. Heads bent close. Hands touching."
+
+[canvases.trigger]
+location = "loc_garage"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "welcome_dinner_complete", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 15 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "trust", operator = "gte", value = 8 }
+]
+[[canvases.trigger.schedules]]
+start_time = "14:00"
+end_time = "17:00"
+
+# Node 1: The Discovery
+[[canvases.nodes]]
+id = "discovery"
+name = "The Discovery"
+blocks = [
+  { type = "paragraph", content = "You find the boxes while looking for something to do with yourself. Photo albums. High school. Prom. Beach trips. That summer you both try not to think about." },
+  { type = "paragraph", content = "He appears in the garage doorway. Sees what you've found. Doesn't leave." },
+  { type = "paragraph", content = "You look through them together. Heads bent close, shoulders pressed against each other. His finger traces a photo of you in that sundress from the Fourth of July." },
+  { type = "dialog", content = "I remember that night.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "His voice has dropped. Your eyes meet. Something unspoken passes between you — something that's been waiting two years to be acknowledged." },
+  { type = "video", props = { file = "activities/garage_boxes_base.jpg", description = "Two people looking through old photos together, intimate proximity, heads close", search_queries = ["looking through photo album together close", "nostalgic photos intimate moment"] } }
+]
+exit_block = { type = "choices", choices = [
+  { targetType = "node", text = "Why did you keep these?", nodeId = "scene_old_photos.lingering", effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }] }
+] }
+
+# Node 2: Lingering
+[[canvases.nodes]]
+id = "lingering"
+name = "Lingering"
+blocks = [
+  { type = "paragraph", content = "He doesn't answer right away. He looks at the photo, then at you. The silence stretches like taffy." },
+  { type = "dialog", content = "We should probably put these away.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "But neither of you moves. His hand is still touching yours where it rests on the album page. Neither of you pulls away." }
+]
+exit_block = { type = "location", text = "Put the albums back", config = { destinationType = "trigger", time_progression_minutes = 45, flagEffects = [
+  { targetType = "player", flag = "old_photos_complete" },
+  { targetType = "player", flag = "lingering_touch_unlock" }
+] } }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EVENT #4: SLEEPLESS NIGHT
+# ═══════════════════════════════════════════════════════════════
+# Conditions: old_photos_complete, affection >= 25
+# Sets: sleepless_night_complete
+# Location: loc_kitchen, 22:00-01:00
+
+[[canvases]]
+id = "scene_sleepless_night"
+name = "Sleepless Night"
+description = "3 AM. Neither can sleep. The darkness makes it easier to say things."
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "old_photos_complete", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 25 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "trust", operator = "gte", value = 15 }
+]
+[[canvases.trigger.schedules]]
+start_time = "22:00"
+end_time = "01:00"
+
+# Node 1: 3 AM
+[[canvases.nodes]]
+id = "three_am"
+name = "3 AM"
+blocks = [
+  { type = "paragraph", content = "You can't sleep. The house is too quiet and your thoughts are too loud. You go downstairs for water and find him sitting at the kitchen island in the dark." },
+  { type = "paragraph", content = "Both in sleep clothes. Both pretending this is normal. The moonlight through the window paints everything silver." },
+  { type = "image", props = { file = "activities/cant_sleep.jpg", description = "Moonlit kitchen, two people in sleepwear, intimate late-night moment", search_queries = ["moonlit kitchen night intimate", "late night kitchen encounter"] } },
+  { type = "paragraph", content = "He looks at you — your thin nightgown, bare shoulders — and doesn't look away. You feel his gaze like a physical thing." },
+  { type = "dialog", content = "Couldn't sleep either?", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "He reaches out and tucks a strand of hair behind your ear. His fingers brush your neck. He freezes." },
+  { type = "dialog", content = "I should... I should go back to bed.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "His hand trembles slightly. Neither of you moves." }
+]
+exit_block = { type = "choices", choices = [
+  { targetType = "node", text = "Stay. Just for a bit.", nodeId = "scene_sleepless_night.parting", effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 5, clamp = true }] }
+] }
+
+# Node 2: Parting
+[[canvases.nodes]]
+id = "parting"
+name = "Parting"
+blocks = [
+  { type = "paragraph", content = "The moment stretches. Then breaks. You retreat to separate rooms, separate beds, separate lies about why your hearts are racing." },
+  { type = "paragraph", content = "Sleep doesn't come any easier." }
+]
+exit_block = { type = "location", text = "Go back to bed", config = { destinationType = "trigger", time_progression_minutes = 30, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 2, clamp = true }], flagEffects = [
+  { targetType = "player", flag = "sleepless_night_complete" }
+] } }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EVENT #5: MADISON CALLS [REGRESSION #1]
+# ═══════════════════════════════════════════════════════════════
+# Conditions: sleepless_night_complete, affection >= 30
+# Sets: madison_calls_complete
+# Location: loc_living, 12:00-17:00
+
+[[canvases]]
+id = "scene_madison_calls"
+name = "Madison Calls"
+description = "His phone rings. Madison. Reality intrudes."
+
+[canvases.trigger]
+location = "loc_living"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "sleepless_night_complete", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 30 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "trust", operator = "gte", value = 20 }
+]
+[[canvases.trigger.schedules]]
+start_time = "12:00"
+end_time = "17:00"
+
+# Node 1: The Call
+[[canvases.nodes]]
+id = "the_call"
+name = "The Call"
+blocks = [
+  { type = "paragraph", content = "His phone rings. The screen lights up: Madison." },
+  { type = "paragraph", content = "He answers without looking at you. Loving words that sound rehearsed. 'Yes, everything's fine. She just got here. We're just catching up.'" },
+  { type = "paragraph", content = "You watch him perform. The way his voice changes — lighter, easier, the voice of someone who hasn't been awake at 3 AM thinking about his step-sister." },
+  { type = "video", props = { file = "story/scene_madison_calls_the_call.jpg", description = "Overhearing a phone call, conflicted looks exchanged between two people", search_queries = ["overhearing phone call jealousy", "watching someone on phone emotional"] } },
+  { type = "paragraph", content = "He tells Madison he loves her. While looking directly at you. Something dark and wanting flickers across his face like a shadow." },
+  { type = "paragraph", content = "When he hangs up, neither of you speaks. She isn't an abstract concept anymore. She's a real woman with a real voice who calls him 'babe' and talks about flower arrangements." }
+]
+exit_block = { type = "choices", choices = [
+  { targetType = "node", text = "Say nothing. Just look at him.", nodeId = "scene_madison_calls.aftermath", effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }] }
+] }
+
+# Node 2: Aftermath
+[[canvases.nodes]]
+id = "aftermath"
+name = "Aftermath"
+blocks = [
+  { type = "dialog", content = "She's... she's great. Really.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "He sets his phone face-down on the coffee table. He doesn't sound convinced. Neither are you." }
+]
+exit_block = { type = "location", text = "Give him space", config = { destinationType = "trigger", time_progression_minutes = 30, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 3, clamp = true }], flagEffects = [
+  { targetType = "player", flag = "madison_calls_complete" }
+] } }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EVENT #6: RAINY DAY [BRIDGE]
+# ═══════════════════════════════════════════════════════════════
+# Conditions: madison_calls_complete, days_since >= 1
+# Sets: rainy_day_complete
+# Location: loc_living, 19:00-22:00
+
+[[canvases]]
+id = "scene_rainy_day"
+name = "Rainy Day"
+description = "Thunderstorm. Power out. Candles and conversation."
+
+[canvases.trigger]
+location = "loc_living"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "madison_calls_complete", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "madison_calls_complete", operator = "gte", value = 1 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "trust", operator = "gte", value = 25 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 25 }
+]
+[[canvases.trigger.schedules]]
+start_time = "19:00"
+end_time = "22:00"
+
+# Node 1: Power Out
+[[canvases.nodes]]
+id = "power_out"
+name = "Power Out"
+blocks = [
+  { type = "paragraph", content = "Thunder cracks like a gunshot and the lights die. The house goes dark. No TV, no Wi-Fi, phones at single digits." },
+  { type = "paragraph", content = "He digs candles out of the kitchen drawer. You open wine. The living room in candlelight feels like a different world — smaller, warmer, more honest." },
+  { type = "image", props = { file = "story/scene_rainy_day_power_out.jpg", description = "Candlelit living room during thunderstorm, two people on couch, intimate atmosphere", search_queries = ["candlelit living room storm night", "cozy candlelight conversation couch"] } },
+  { type = "paragraph", content = "You sit on the couch — the same couch that will matter later, but tonight it's innocent. Rain hammers the windows. And without screens to hide behind, you just... talk." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Tell him the truth about why you left", targetType = "node", nodeId = "scene_rainy_day.truth" }
+] }
+
+# Node 2: The Truth About Leaving
+[[canvases.nodes]]
+id = "truth"
+name = "The Truth About Leaving"
+blocks = [
+  { type = "paragraph", content = "The candlelight makes it easier to say the thing you've never said out loud." },
+  { type = "dialog", content = "I didn't leave for the program, Ethan. I left because I couldn't keep living in a house with you and pretending I didn't feel what I felt. Running was easier than staying and aching.", props = { speaker = "player" } },
+  { type = "paragraph", content = "He's quiet for a long time. The rain fills the silence." },
+  { type = "dialog", content = "I knew. Part of me always knew. I just... I told myself you were just growing up. Leaving the nest. Normal stuff.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "Neither topic is explicitly romantic. But both reveal vulnerability that daylight would never allow." }
+]
+exit_block = { type = "choices", choices = [
+  { targetType = "node", text = "Do you wish I hadn't come back?", nodeId = "scene_rainy_day.his_answer", effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 5, clamp = true }] }
+] }
+
+# Node 3: His Answer
+[[canvases.nodes]]
+id = "his_answer"
+name = "His Answer"
+blocks = [
+  { type = "paragraph", content = "Whatever he says, it's more honest than anything either of you has managed in two years. The storm rages outside but inside the candlelight makes everything feel suspended — outside of time, outside of consequence." },
+  { type = "dialog", content = "You were always... chaos. The best kind.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "The candles burn low. Neither of you moves to replace them. In the growing dark, his hand finds yours. Just that. Just hands. It's enough." }
+]
+exit_block = { type = "location", text = "Let the night end", config = { destinationType = "trigger", time_progression_minutes = 90, flagEffects = [
+  { targetType = "player", flag = "rainy_day_complete" }
+] } }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EVENT #7: THE COUCH → sets flirt_unlock
+# ═══════════════════════════════════════════════════════════════
+# Conditions: rainy_day_complete, affection >= 40, days_since >= 1
+# Sets: the_couch_complete, flirt_unlock, ethan_interested
+# Location: loc_living, 19:00-22:00
+
+[[canvases]]
+id = "scene_the_couch"
+name = "The Couch"
+description = "Movie night. The couch is big but you've migrated to the middle."
+
+[canvases.trigger]
+location = "loc_living"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "rainy_day_complete", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "rainy_day_complete", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "boldness", operator = "gte", value = 25 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 30 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "trust", operator = "gte", value = 30 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "corruption", operator = "gte", value = 10 }
+]
+[[canvases.trigger.schedules]]
+start_time = "19:00"
+end_time = "22:00"
+
+# Node 1: Movie Night
+[[canvases.nodes]]
+id = "movie_night"
+name = "Movie Night"
+blocks = [
+  { type = "paragraph", content = "Movie night. The couch is big enough for three people but somehow you've both migrated to the middle. A blanket covers both of you." },
+  { type = "paragraph", content = "On screen, a couple is doing what you're both pretending not to think about." },
+  { type = "paragraph", content = "Under the blanket, bodies touching. His arm settles around your shoulders — starts casual, drifts to pulling you closer. His hand on your thigh. Starts innocent. Drifts higher. Neither of you acknowledges it." },
+  { type = "video", props = { file = "story/scene_the_couch_movie_night.jpg", description = "Two people on couch under blanket, movie night, physical tension and proximity", search_queries = ["couple making out under blanket couch", "kissing on couch movie night blanket"] } },
+  { type = "dialog", content = "This is nice. Just... this.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "His thumb traces small circles on your thigh through the blanket. Deliberate. Not accidental." }
+]
+exit_block = { type = "choices", choices = [
+  { targetType = "node", text = "Move closer", nodeId = "scene_the_couch.breaking_apart", effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 5, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 3, clamp = true }] }
+] }
+
+# Node 2: Breaking Apart
+[[canvases.nodes]]
+id = "breaking_apart"
+name = "Breaking Apart"
+blocks = [
+  { type = "paragraph", content = "Something shifts. Or almost shifts. The movie ends. Credits roll. Neither of you has any idea what happened in it." },
+  { type = "dialog", content = "It's late. We should...", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "He doesn't finish the sentence. You both know what's happening. You both know you're not going to stop it." }
+]
+exit_block = { type = "location", text = "Say goodnight", config = { destinationType = "trigger", time_progression_minutes = 60, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 3, clamp = true }], flagEffects = [
+  { targetType = "player", flag = "the_couch_complete" },
+  { targetType = "player", flag = "flirt_unlock" },
+  { targetType = "player", flag = "ethan_interested" }
+] } }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EVENT #8: THE CONFESSION
+# ═══════════════════════════════════════════════════════════════
+# Conditions: the_couch_complete, affection >= 50, boldness >= 35
+# Sets: confession_complete
+# Location: loc_backyard, 22:00-01:00
+
+[[canvases]]
+id = "scene_confession"
+name = "The Confession"
+description = "Under the stars, three glasses in, the unsayable thing gets said."
+
+[canvases.trigger]
+location = "loc_backyard"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "the_couch_complete", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 35 },
+  { type = "trait", subject = "player", trait_key = "boldness", operator = "gte", value = 20 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "trust", operator = "gte", value = 35 }
+]
+[[canvases.trigger.schedules]]
+start_time = "22:00"
+end_time = "01:00"
+
+# Node 1: Under the Stars
+[[canvases.nodes]]
+id = "under_the_stars"
+name = "Under the Stars"
+blocks = [
+  { type = "paragraph", content = "Third glass of wine on the patio. Stars out. Pool lights shimmer turquoise across the water." },
+  { type = "paragraph", content = "The alcohol makes the truth easier. Or maybe it's not the alcohol at all." },
+  { type = "dialog", content = "I used to stay awake at night listening for your footsteps. Hoping you'd knock on my door. Terrified you would.", props = { speaker = "player" } },
+  { type = "paragraph", content = "The silence that follows is the loudest thing you've ever heard." },
+  { type = "dialog", content = "I thought I was the only one.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "dialog", content = "You weren't.", props = { speaker = "player" } },
+  { type = "paragraph", content = "Long pause. The pool filter hums. A lifetime passes." },
+  { type = "dialog", content = "What do we do now?", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "video", props = { file = "story/scene_confession_under_the_stars.jpg", description = "Intense eye contact over wine on a patio at night, stars visible, emotional confession", search_queries = ["patio night wine confession emotional", "intense eye contact evening outdoor"] } }
+]
+exit_block = { type = "choices", choices = [
+  { targetType = "node", text = "We still have time to figure that out.", nodeId = "scene_confession.after", effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 8, clamp = true }] }
+] }
+
+# Node 2: After
+[[canvases.nodes]]
+id = "after"
+name = "After"
+blocks = [
+  { type = "paragraph", content = "The night air feels different now. Charged. Whatever walls were left have started to crumble." },
+  { type = "paragraph", content = "The stars don't care about your problems. The pool lights keep shimmering. The world keeps turning. But something between you has changed permanently." }
+]
+exit_block = { type = "location", text = "Go inside", config = { destinationType = "trigger", time_progression_minutes = 45, flagEffects = [
+  { targetType = "player", flag = "confession_complete" }
+] } }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EVENT #9: ALMOST KISS [BRIDGE]
+# ═══════════════════════════════════════════════════════════════
+# Conditions: confession_complete, affection >= 55
+# Sets: almost_kiss_complete
+# Location: loc_backyard, 19:00-22:00
+
+[[canvases]]
+id = "scene_almost_kiss"
+name = "Almost Kiss"
+description = "Faces inches apart. Then — interruption."
+
+[canvases.trigger]
+location = "loc_backyard"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "confession_complete", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 55 },
+  { type = "trait", subject = "player", trait_key = "boldness", operator = "gte", value = 30 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "trust", operator = "gte", value = 30 }
+]
+[[canvases.trigger.schedules]]
+start_time = "19:00"
+end_time = "22:00"
+
+# Node 1: The Moment
+[[canvases.nodes]]
+id = "the_moment"
+name = "The Moment"
+blocks = [
+  { type = "paragraph", content = "Close. Too close. You can feel the heat radiating off his skin." },
+  { type = "paragraph", content = "His hand comes up to your face. Thumb tracing your cheekbone. His breath mixing with yours. The tilt of heads beginning." },
+  { type = "video", props = { file = "story/scene_almost_kiss_the_moment.jpg", description = "Faces inches apart, almost kissing, intense anticipation then interrupted", search_queries = ["almost kiss lips close anticipation", "couple about to kiss faces inches apart"] } },
+  { type = "paragraph", content = "Then — his phone. Vibrating on the patio table. The spell shatters. You spring apart like guilty teenagers caught by the porch light." },
+  { type = "dialog", content = "I should...", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "dialog", content = "Yeah.", props = { speaker = "player" } },
+  { type = "paragraph", content = "But you both know. There's no going back from what almost just happened." }
+]
+exit_block = { type = "choices", choices = [
+  { targetType = "node", text = "Next time, lock the door.", nodeId = "scene_almost_kiss.parting", effects = [{ targetType = "player", trait = "boldness", op = "add", value = 5, clamp = true }, { targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }] }
+] }
+
+# Node 2: Parting
+[[canvases.nodes]]
+id = "parting"
+name = "Parting"
+blocks = [
+  { type = "paragraph", content = "You go inside separately. Separate doors. Separate showers. The cold water doesn't help." }
+]
+exit_block = { type = "location", text = "Go inside", config = { destinationType = "trigger", time_progression_minutes = 30, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "corruption", op = "add", value = 4, clamp = true }], flagEffects = [
+  { targetType = "player", flag = "almost_kiss_complete" }
+] } }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EVENT #10: THE REAL TALK [MAJOR CRISIS]
+# ═══════════════════════════════════════════════════════════════
+# Conditions: almost_kiss_complete, guilt >= 15
+# Sets: real_talk_complete, ethan_vulnerable
+# Location: loc_player_room, 22:00-01:00
+
+[[canvases]]
+id = "scene_real_talk"
+name = "The Real Talk"
+description = "He's sitting alone in the dark. The contradictions have peaked."
+
+[canvases.trigger]
+location = "loc_player_room"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "almost_kiss_complete", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 45 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "trust", operator = "gte", value = 40 },
+  { type = "trait", subject = "player", trait_key = "boldness", operator = "gte", value = 25 }
+]
+[[canvases.trigger.schedules]]
+start_time = "22:00"
+end_time = "01:00"
+
+# Node 1: In the Dark
+[[canvases.nodes]]
+id = "in_the_dark"
+name = "In the Dark"
+blocks = [
+  { type = "paragraph", content = "You find him sitting on your bed in the dark. He's been waiting. Or maybe he's been trying to leave and couldn't." },
+  { type = "dialog", content = "We need to talk about this.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "The wedding is in a week. Madison. The family. The impossibility of what he's feeling. Everything he's been pushing down comes flooding up at once." },
+  { type = "dialog", content = "I'm supposed to be getting married.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "dialog", content = "I know.", props = { speaker = "player" } },
+  { type = "dialog", content = "I don't know if I can.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "dialog", content = "I know.", props = { speaker = "player" } },
+  { type = "paragraph", content = "His voice breaks." },
+  { type = "dialog", content = "What do you want?", props = { speaker = "player" } },
+  { type = "dialog", content = "I want you. I hate that I want you.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "video", props = { file = "story/scene_real_talk_in_the_dark.jpg", description = "Emotional breakdown, holding someone who is crying, comfort not seduction", search_queries = ["emotional breakdown comfort holding", "vulnerability crying being held"] } },
+  { type = "paragraph", content = "He's not performing anymore. The protective older brother, the dutiful fiance, the man who has it all together — all masks, and they've all fallen off at once." }
+]
+exit_block = { type = "choices", choices = [
+  { targetType = "node", text = "We'll figure it out. Together.", nodeId = "scene_real_talk.aftermath", effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 5, clamp = true }] }
+] }
+
+# Node 2: Aftermath
+[[canvases.nodes]]
+id = "aftermath"
+name = "Aftermath"
+blocks = [
+  { type = "paragraph", content = "Whatever was said, the air feels different. Raw. Like a wound that's been lanced — it hurts more now, but at least it's honest." },
+  { type = "paragraph", content = "He doesn't stay. But when he leaves, he pauses at the door. His hand on the frame. He doesn't look back." },
+  { type = "dialog", content = "I'm sorry. For all of this.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "The door clicks shut. You stare at the ceiling until dawn." }
+]
+exit_block = { type = "location", text = "Try to sleep", config = { destinationType = "trigger", time_progression_minutes = 60, flagEffects = [
+  { targetType = "player", flag = "real_talk_complete" },
+  { targetType = "player", flag = "ethan_vulnerable" }
+] } }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EVENT #11: FIRST KISS → sets kiss_unlock
+# ═══════════════════════════════════════════════════════════════
+# Conditions: real_talk_complete, affection >= 70, days_since >= 1
+# Sets: first_kiss_done, kiss_unlock
+# Location: loc_living, 19:00-22:00
+
+[[canvases]]
+id = "scene_first_kiss"
+name = "First Kiss"
+description = "No more interruptions. No more excuses. It happens like gravity."
+
+[canvases.trigger]
+location = "loc_living"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "real_talk_complete", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "real_talk_complete", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "boldness", operator = "gte", value = 40 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 30 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "trust", operator = "gte", value = 45 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "corruption", operator = "gte", value = 25 }
+]
+[[canvases.trigger.schedules]]
+start_time = "19:00"
+end_time = "22:00"
+
+# Node 1: Inevitable
+[[canvases.nodes]]
+id = "inevitable"
+name = "Inevitable"
+blocks = [
+  { type = "paragraph", content = "No more interruptions. No more excuses. It happens like gravity." },
+  { type = "paragraph", content = "One moment you're talking — something about nothing, filling silence with noise. The next, silence. His eyes on your mouth. Your breath catching." },
+  { type = "paragraph", content = "Then his mouth is on yours." },
+  { type = "paragraph", content = "The kiss starts tentative — a question. Then desperate. Years of suppression breaking like a dam. His hands in your hair, your back against the wall, pulling each other closer and closer and it's still not close enough." },
+  { type = "video", props = { file = "activities/passionate_kiss.gif", description = "Passionate first kiss, tentative then desperate, years of longing released", search_queries = ["passionate first kiss against wall", "intense first kiss couple desperate"] } },
+  { type = "paragraph", content = "Everything you've both been fighting falls away in an instant." }
+]
+exit_block = { type = "choices", choices = [
+  { targetType = "node", text = "Don't stop.", nodeId = "scene_first_kiss.after_the_kiss", effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 5, clamp = true }] }
+] }
+
+# Node 2: After the Kiss
+[[canvases.nodes]]
+id = "after_the_kiss"
+name = "After the Kiss"
+blocks = [
+  { type = "paragraph", content = "When you finally break apart, the world has shifted on its axis. The room is the same. Everything else is different." },
+  { type = "dialog", content = "I've wanted to do that for years.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "His forehead rests against yours. His breath is ragged. Neither of you is pretending anymore." }
+]
+exit_block = { type = "location", text = "Say goodnight", config = { destinationType = "trigger", time_progression_minutes = 30, flagEffects = [
+  { targetType = "player", flag = "first_kiss_done" },
+  { targetType = "player", flag = "kiss_unlock" }
+] } }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EVENT #12: WHAT ARE WE DOING
+# ═══════════════════════════════════════════════════════════════
+# Conditions: first_kiss_done
+# Sets: what_are_we_doing_done, manual_unlock
+# Location: loc_kitchen, 07:00-09:00
+
+[[canvases]]
+id = "scene_what_are_we_doing"
+name = "What Are We Doing"
+description = "The morning after the first kiss. Coffee. Acknowledgement."
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "first_kiss_done", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "boldness", operator = "gte", value = 55 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 45 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "trust", operator = "gte", value = 35 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "corruption", operator = "gte", value = 40 }
+]
+[[canvases.trigger.schedules]]
+start_time = "07:00"
+end_time = "09:00"
+
+# Node 1: Morning After the Kiss
+[[canvases.nodes]]
+id = "morning"
+name = "Morning After the Kiss"
+blocks = [
+  { type = "paragraph", content = "Morning. Coffee. The weight of last night hanging in the air like smoke." },
+  { type = "paragraph", content = "He's already there when you come down. Already poured your coffee. He knows how you take it — black, one sugar. Always has." },
+  { type = "paragraph", content = "He crosses to you. Takes the coffee from your hands. Sets it on the counter." },
+  { type = "paragraph", content = "And kisses you. Soft. Deliberate. Morning breath and all." },
+  { type = "video", props = { file = "story/scene_what_are_we_doing_morning.jpg", description = "Morning kitchen kiss, tender and unhurried, coffee on counter", search_queries = ["couple kissing kitchen morning tender", "morning kiss coffee counter"] } },
+  { type = "dialog", content = "I don't want to pretend that didn't happen.", props = { speaker = "npc", npcId = "npc_ethan" } }
+]
+exit_block = { type = "choices", choices = [
+  { targetType = "node", text = "Neither do I.", nodeId = "scene_what_are_we_doing.escalation", effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 5, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 3, clamp = true }] }
+] }
+
+# Node 2: Escalation
+[[canvases.nodes]]
+id = "escalation"
+name = "More Than a Kiss"
+blocks = [
+  { type = "paragraph", content = "The kiss changes. Deeper. His hands slide from your face to your waist. Yours find the hem of his shirt." },
+  { type = "paragraph", content = "He lifts you onto the counter — the same counter where he makes your coffee every morning. Your legs wrap around him. His mouth moves to your neck." },
+  { type = "paragraph", content = "His hand slides under your shirt, tracing upward. Then downward. Past your waistband. Your breath catches." },
+  { type = "video", props = { file = "story/scene_what_are_we_doing_escalation.jpg", description = "Intimate touching on kitchen counter, hands exploring, morning light", search_queries = ["couple intimate touching kitchen counter morning", "hands under clothes kitchen counter foreplay"] } },
+  { type = "paragraph", content = "You reach for him. Find him hard through his shorts. His forehead drops to your shoulder as your hand wraps around him." },
+  { type = "dialog", content = "God...", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "It's clumsy and perfect. Morning light through the kitchen window. Coffee going cold. His breath ragged against your neck as your hand moves. Years of wanting condensed into this — the first time you touch each other and mean it." }
+]
+exit_block = { type = "choices", choices = [
+  { targetType = "node", text = "Don't stop looking at me.", nodeId = "scene_what_are_we_doing.new_normal", effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 5, clamp = true }] }
+] }
+
+# Node 3: New Normal
+[[canvases.nodes]]
+id = "new_normal"
+name = "New Normal"
+blocks = [
+  { type = "paragraph", content = "You lean against each other, breathing hard. The counter is cold under your thighs. His hand is still on your hip, thumb tracing circles." },
+  { type = "dialog", content = "So that's what we're doing.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "He says it with a half-laugh, half-wonder. Like he can't believe it's real. Neither can you." },
+  { type = "paragraph", content = "The coffee is stone cold. He makes a fresh pot. You sit at the counter and watch him, and everything — every small domestic motion — is charged now. Electric. Inevitable." }
+]
+exit_block = { type = "location", text = "Start the day", config = { destinationType = "trigger", time_progression_minutes = 45, flagEffects = [
+  { targetType = "player", flag = "what_are_we_doing_done" },
+  { targetType = "player", flag = "manual_unlock" }
+] } }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EVENT #12b: GOING FURTHER
+# ═══════════════════════════════════════════════════════════════
+# Conditions: what_are_we_doing_done, affection >= 80, days_since >= 1
+# Sets: going_further_complete, oral_unlock
+# Location: loc_living, 21:00-01:00
+
+[[canvases]]
+id = "scene_going_further"
+name = "Going Further"
+description = "The couch where you held hands. Tonight you go further."
+
+[canvases.trigger]
+location = "loc_living"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "what_are_we_doing_done", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "what_are_we_doing_done", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "boldness", operator = "gte", value = 70 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 60 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "trust", operator = "gte", value = 50 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "corruption", operator = "gte", value = 55 }
+]
+[[canvases.trigger.schedules]]
+start_time = "21:00"
+end_time = "01:00"
+
+# Node 1: The Couch Again
+[[canvases.nodes]]
+id = "the_couch_again"
+name = "The Couch Again"
+blocks = [
+  { type = "paragraph", content = "The same couch. The same blanket. But nothing is the same." },
+  { type = "paragraph", content = "His hand finds yours under the blanket — the way it did weeks ago, when touching fingers felt revolutionary. Now his thumb traces your palm and you both know it isn't going to stop at hands." },
+  { type = "paragraph", content = "The TV is on. Neither of you is watching." },
+  { type = "dialog", content = "Come here.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "You swing your leg over his lap. Face to face. His hands on your hips. The blanket falls to the floor and neither of you reaches for it." }
+]
+exit_block = { type = "choices", choices = [
+  { targetType = "node", text = "Let it happen. See where this goes.", nodeId = "scene_going_further.taste", effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 5, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 3, clamp = true }] }
+] }
+
+# Node 2: Taste
+[[canvases.nodes]]
+id = "taste"
+name = "Taste"
+blocks = [
+  { type = "paragraph", content = "Mouths travel. Past collarbones. Past the edges of fabric. Shirts come off — not thrown, but peeled away, slowly, like unwrapping something precious." },
+  { type = "paragraph", content = "He kisses down your stomach. Your fingers curl in his hair. The world shrinks to the couch, to his mouth, to the sound you make when he reaches his destination." },
+  { type = "video", props = { file = "story/scene_going_further_taste.jpg", description = "Oral on the couch at night, intimate and tender, blanket on floor", search_queries = ["man going down on woman couch night intimate", "cunnilingus couch living room night tender"] } },
+  { type = "paragraph", content = "When he comes back up, you push him onto his back. Fair is fair. His head falls back. His hand finds your hair. The couch creaks. You don't care." },
+  { type = "video", props = { file = "story/scene_going_further_taste2.jpg", description = "Woman giving oral on couch at night, intimate", search_queries = ["blowjob on couch night intimate", "woman going down on man couch night"] } },
+  { type = "paragraph", content = "Not sex. Not yet. But this — mouths and hands and the raw honesty of wanting someone without any barriers left — is its own kind of crossing." }
+]
+exit_block = { type = "choices", choices = [
+  { targetType = "node", text = "Stay here tonight. Just like this.", nodeId = "scene_going_further.after", effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 5, clamp = true }] }
+] }
+
+# Node 3: After
+[[canvases.nodes]]
+id = "after"
+name = "After"
+blocks = [
+  { type = "paragraph", content = "You lie on the couch tangled together, half-dressed, the TV casting blue light over bare skin. His fingers draw patterns on your shoulder." },
+  { type = "dialog", content = "I don't think I can go back to just coffee and conversation.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "You can't either. And the wedding is getting closer." }
+]
+exit_block = { type = "location", text = "Eventually, separate rooms", config = { destinationType = "trigger", time_progression_minutes = 120, flagEffects = [
+  { targetType = "player", flag = "going_further_complete" },
+  { targetType = "player", flag = "oral_unlock" }
+] } }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EVENT #13: FIRST NIGHT TOGETHER [TURNING POINT] → sets intimacy_unlock
+# ═══════════════════════════════════════════════════════════════
+# Conditions: going_further_complete, affection >= 85, days_since >= 1
+# Sets: first_night_complete, intimacy_unlock, ethan_intimate
+# Location: loc_player_room, 22:00-01:00
+
+[[canvases]]
+id = "scene_first_night"
+name = "First Night"
+description = "No more pretending. The door clicks shut. Everything changes."
+
+[canvases.trigger]
+location = "loc_player_room"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "going_further_complete", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "going_further_complete", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "boldness", operator = "gte", value = 85 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 75 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "trust", operator = "gte", value = 60 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "corruption", operator = "gte", value = 70 }
+]
+[[canvases.trigger.schedules]]
+start_time = "22:00"
+end_time = "01:00"
+
+# Node 1: Stay
+[[canvases.nodes]]
+id = "stay"
+name = "Stay"
+blocks = [
+  { type = "paragraph", content = "The goodnight at the door doesn't end with goodnight." },
+  { type = "dialog", content = "Stay.", props = { speaker = "player" } },
+  { type = "paragraph", content = "One word. Everything changes. The door clicks shut." },
+  { type = "paragraph", content = "His hands shake — not from nerves but from how long he's wanted this. You pull him closer. Years of suppression breaking." },
+  { type = "paragraph", content = "Tender and desperate at once. His hands tracing paths he's memorized in his imagination. Your name on his lips like a prayer." },
+  { type = "video", props = { file = "story/scene_first_night_stay.jpg", description = "First time having sex, emotional and passionate, eye contact throughout", search_queries = ["couple first time sex emotional passionate", "lovers first night together naked bed"] } },
+  { type = "dialog", content = "God, you're beautiful.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "This isn't just physical. Eye contact throughout. His name on your lips. Emotional intimacy matching every physical moment." }
+]
+exit_block = { type = "choices", choices = [
+  { targetType = "node", text = "I've wanted this for so long.", nodeId = "scene_first_night.aftermath", effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 5, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 3, clamp = true }] }
+] }
+
+# Node 2: Aftermath
+[[canvases.nodes]]
+id = "aftermath"
+name = "Aftermath"
+blocks = [
+  { type = "paragraph", content = "In the quiet after, everything feels different. Clearer. More complicated. You lie tangled together, his arm around you, his breath slowing against your neck." },
+  { type = "dialog", content = "No regrets?", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "You answer with a kiss. He pulls you closer and you fall asleep like that — intertwined, sharing a pillow, sharing a secret that will reshape both your lives." }
+]
+exit_block = { type = "location", text = "Fall asleep together", config = { destinationType = "trigger", time_progression_minutes = 360, flagEffects = [
+  { targetType = "player", flag = "first_night_complete" },
+  { targetType = "player", flag = "intimacy_unlock" },
+  { targetType = "player", flag = "ethan_intimate" }
+] } }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EVENT #14: MORNING AFTER [REGRESSION #2]
+# ═══════════════════════════════════════════════════════════════
+# Conditions: first_night_complete
+# Sets: morning_after_complete
+# Location: loc_player_room, 07:00-09:00
+
+[[canvases]]
+id = "scene_morning_after"
+name = "Morning After"
+description = "Dawn light. His arm around you. Then reality seeps back."
+
+[canvases.trigger]
+location = "loc_player_room"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "first_night_complete", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "trust", operator = "gte", value = 55 }
+]
+[[canvases.trigger.schedules]]
+start_time = "07:00"
+end_time = "09:00"
+
+# Node 1: Dawn
+[[canvases.nodes]]
+id = "dawn"
+name = "Dawn"
+blocks = [
+  { type = "paragraph", content = "Dawn light through the curtains. His arm around you. For a moment — just this. Just warmth and skin and the slow rhythm of his breathing." },
+  { type = "paragraph", content = "Morning intimacy — lazy, half-asleep, tender. A continuation of the night before. He's gentle, present, lost in you." },
+  { type = "video", props = { file = "story/scene_morning_after_dawn.jpg", description = "Naked spooning morning after sex, gentle and tender, morning light", search_queries = ["couple naked spooning morning after sex", "lovers morning after bed sheets nude"] } },
+  { type = "paragraph", content = "Then it's over and the weight lands. You can see it hit him — his eyes change, the softness replaced by something heavier. He's lying next to his step-sister, in the house where they grew up, four days before his wedding." }
+]
+exit_block = { type = "choices", choices = [
+  { targetType = "node", text = "I don't regret this. Do you?", nodeId = "scene_morning_after.lingering", effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 5, clamp = true }] }
+] }
+
+# Node 2: Lingering
+[[canvases.nodes]]
+id = "lingering"
+name = "Lingering"
+blocks = [
+  { type = "dialog", content = "We should talk. Later. About everything.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "But not now. Now he gets dressed without meeting your eyes. He flinches when his hand brushes yours. The weight of what they've done is a living thing between them." },
+  { type = "paragraph", content = "At the door, he pauses. Doesn't turn around. Then he's gone, and you're alone with the impression of his body on the sheets." }
+]
+exit_block = { type = "location", text = "Get up", config = { destinationType = "trigger", time_progression_minutes = 60, flagEffects = [
+  { targetType = "player", flag = "morning_after_complete" },
+  { targetType = "player", flag = "sex_unlock" }
+] } }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EVENT #15: CAN'T STAY AWAY
+# ═══════════════════════════════════════════════════════════════
+# Conditions: morning_after_complete, affection >= 90
+# Sets: cant_stay_away_complete
+# Location: loc_home, 14:00-17:00
+
+[[canvases]]
+id = "scene_cant_stay_away"
+name = "Can't Stay Away"
+description = "He tried to keep his distance. He failed."
+
+[canvases.trigger]
+location = "loc_home"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "morning_after_complete", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 90 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "trust", operator = "gte", value = 60 },
+  { type = "trait", subject = "player", trait_key = "boldness", operator = "gte", value = 85 }
+]
+[[canvases.trigger.schedules]]
+start_time = "14:00"
+end_time = "17:00"
+
+# Node 1: Hallway
+[[canvases.nodes]]
+id = "hallway"
+name = "Hallway"
+blocks = [
+  { type = "paragraph", content = "You tried to be normal today. Failed. Every look is loaded. Every accidental touch sends electricity through both of you." },
+  { type = "dialog", content = "I can't stop thinking about last night.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "He initiates. That's the difference. He comes to you, not the other way around. His resistance broke on its own — desire stronger than duty." },
+  { type = "paragraph", content = "He glances down the hall — empty — and then his mouth is on yours. You stumble backward. Your back hits the wall. Fast, desperate, addicted." },
+  { type = "video", props = { file = "story/scene_cant_stay_away_hallway.jpg", description = "Sex against the hallway wall, desperate and urgent, passionate", search_queries = ["couple sex against wall hallway desperate", "passionate fuck against wall urgent"] } },
+  { type = "dialog", content = "My room. Ten minutes. I'm not done with you.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "Every creaking board in this house is a risk. Every doorway a potential witness. The danger makes it more intense, not less." }
+]
+exit_block = { type = "location", text = "Follow him", config = { destinationType = "trigger", time_progression_minutes = 90, flagEffects = [
+  { targetType = "player", flag = "cant_stay_away_complete" }
+] } }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EVENT #16: MADISON ARRIVES [ACT 3 CRISIS]
+# ═══════════════════════════════════════════════════════════════
+# Conditions: cant_stay_away_complete, days_since >= 1
+# Sets: madison_arrived
+# Location: loc_home, 14:00-17:00
+
+[[canvases]]
+id = "scene_madison_arrives"
+name = "Madison Arrives"
+description = "A car in the driveway. She's real. She's here. She's nice."
+
+[canvases.trigger]
+location = "loc_home"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "cant_stay_away_complete", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "cant_stay_away_complete", operator = "gte", value = 1 }
+]
+[[canvases.trigger.schedules]]
+start_time = "14:00"
+end_time = "17:00"
+
+# Node 1: Arrival
+[[canvases.nodes]]
+id = "arrival"
+name = "Arrival"
+blocks = [
+  { type = "paragraph", content = "Sound of a car in the driveway. Your heart stops." },
+  { type = "paragraph", content = "Madison." },
+  { type = "paragraph", content = "She's polished, put-together, excited. She practically bounces through the door with a suitcase and a garment bag." },
+  { type = "dialog", content = "Surprise! I finished early!", props = { speaker = "npc", npcId = "npc_madison" } },
+  { type = "paragraph", content = "You watch Ethan perform. The hug. The smile. The 'I'm so glad you're here.' Over Madison's shoulder, his eyes find yours. Apology. Fear. Longing." },
+  { type = "video", props = { file = "story/scene_madison_arrives_arrival.jpg", description = "Fiancee arriving home, couple embrace, third person watching with hidden emotion", search_queries = ["fiancee arriving home hug welcome", "watching couple embrace hidden emotion"] } },
+  { type = "dialog", content = "You must be the step-sister! I've heard so much about you.", props = { speaker = "npc", npcId = "npc_madison" } },
+  { type = "paragraph", content = "She's warm. Genuine. She hugs you like a friend. She smells like expensive perfume and a clear conscience." }
+]
+exit_block = { type = "choices", choices = [
+  { targetType = "node", text = "All good things, I hope.", nodeId = "scene_madison_arrives.new_reality" }
+] }
+
+# Node 2: New Reality
+[[canvases.nodes]]
+id = "new_reality"
+name = "New Reality"
+blocks = [
+  { type = "paragraph", content = "Madison is nice. Genuinely, disarmingly nice. She asks about your life, your work, your flight. She makes you tea without being asked." },
+  { type = "paragraph", content = "That makes it so much worse." },
+  { type = "paragraph", content = "The abstract has become concrete. She's not a name on a phone screen anymore. She's a person. A person who doesn't deserve what you've done." }
+]
+exit_block = { type = "location", text = "Retreat to your room", config = { destinationType = "trigger", time_progression_minutes = 30, flagEffects = [
+  { targetType = "player", flag = "madison_arrived" }
+] } }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EVENT #17: STOLEN MOMENT
+# ═══════════════════════════════════════════════════════════════
+# Conditions: madison_arrived, affection >= 85
+# Sets: stolen_moment_complete
+# Location: loc_garage, 14:00-17:00
+
+[[canvases]]
+id = "scene_stolen_moment"
+name = "Stolen Moment"
+description = "Madison is in the house. The garage is the only safe place."
+
+[canvases.trigger]
+location = "loc_garage"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "madison_arrived", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 85 },
+  { type = "trait", subject = "player", trait_key = "boldness", operator = "gte", value = 90 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "corruption", operator = "gte", value = 75 }
+]
+[[canvases.trigger.schedules]]
+start_time = "14:00"
+end_time = "17:00"
+
+# Node 1: Hidden
+[[canvases.nodes]]
+id = "hidden"
+name = "Hidden"
+blocks = [
+  { type = "paragraph", content = "Madison is on the phone in the kitchen. Or maybe the shower. It doesn't matter where — just that she's not here." },
+  { type = "paragraph", content = "He finds you in the garage. Grabs your hand. Pulls you behind the shelves." },
+  { type = "dialog", content = "I need you. I can't — one more time before —", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "He doesn't finish. He doesn't need to." },
+  { type = "paragraph", content = "Desperate. Guilty. Unable to stop. His hand over your mouth because Madison is somewhere in the house." },
+  { type = "video", props = { file = "story/scene_stolen_moment_hidden.jpg", description = "Quick desperate sex in garage, forbidden, hand covering her mouth", search_queries = ["secret sex garage urgent hand over mouth", "forbidden quickie hidden desperate"] } },
+  { type = "paragraph", content = "Every sound from inside the house is a threat. The thrill of almost getting caught. The terrifying freedom of not caring." }
+]
+exit_block = { type = "choices", choices = [
+  { targetType = "node", text = "We're insane. (But don't stop)", nodeId = "scene_stolen_moment.after", effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 3, clamp = true }, { targetType = "player", trait = "boldness", op = "add", value = 3, clamp = true }] }
+] }
+
+# Node 2: After
+[[canvases.nodes]]
+id = "after"
+name = "After"
+blocks = [
+  { type = "paragraph", content = "Madison's voice calling his name from inside. The spell shatters." },
+  { type = "dialog", content = "Coming!", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "He looks at you one last time before going inside. That look says everything words can't: I'm sorry. I love you. I don't know how to fix this." }
+]
+exit_block = { type = "location", text = "Wait. Then go inside separately.", config = { destinationType = "trigger", time_progression_minutes = 30, flagEffects = [
+  { targetType = "player", flag = "stolen_moment_complete" }
+] } }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EVENT #18: NIGHT BEFORE WEDDING
+# ═══════════════════════════════════════════════════════════════
+# Conditions: stolen_moment_complete
+# Sets: night_before_complete
+# Location: loc_player_room, 22:00-01:00
+# Extended scene — 7 nodes, linear chain
+
+[[canvases]]
+id = "scene_night_before_wedding"
+name = "Night Before Wedding"
+description = "Tomorrow he marries Madison. Tonight the door opens in darkness."
+
+[canvases.trigger]
+location = "loc_player_room"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "stolen_moment_complete", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 80 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "trust", operator = "gte", value = 70 }
+]
+[[canvases.trigger.schedules]]
+start_time = "22:00"
+end_time = "01:00"
+
+# Node 1: The Door Opens
+[[canvases.nodes]]
+id = "n1_door"
+name = "The Door Opens"
+blocks = [
+  { type = "paragraph", content = "Tomorrow he marries Madison." },
+  { type = "paragraph", content = "Tonight the door opens in darkness. You know it's him before he speaks. You've been waiting. You've been hoping. You've been dreading." },
+  { type = "dialog", content = "I had to see you.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "His kiss tastes like tears." },
+  { type = "video", props = { file = "story/scene_night_before_wedding_n1_door.jpg", description = "Desperate embrace in doorway at night, emotional intensity, tears", search_queries = ["desperate kissing doorway night tears emotional", "couple embracing crying doorway"] } }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Pull him inside", targetType = "node", nodeId = "scene_night_before_wedding.n2_undressing" }
+] }
+
+# Node 2: Undressing
+[[canvases.nodes]]
+id = "n2_undressing"
+name = "Undressing"
+blocks = [
+  { type = "paragraph", content = "Slowly. Memorizing. Every button, every inch of skin. Like he's trying to commit you to permanent memory." },
+  { type = "dialog", content = "I want to remember everything.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "video", props = { file = "story/scene_night_before_wedding_n2_undressing.jpg", description = "Slowly undressing each other, savoring every moment, tender and deliberate", search_queries = ["slowly undressing lover savoring body", "couple undressing each other tender bedroom"] } }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Let him lay you down", targetType = "node", nodeId = "scene_night_before_wedding.n3_worship" }
+] }
+
+# Node 3: Worship
+[[canvases.nodes]]
+id = "n3_worship"
+name = "Worship"
+blocks = [
+  { type = "paragraph", content = "He kisses his way down your body. No rush tonight. Slow, devoted, like a prayer." },
+  { type = "dialog", content = "I want to remember every part of you.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "video", props = { file = "story/scene_night_before_wedding_n3_worship.jpg", description = "Man kissing down her body, eating her out, devoted and emotional", search_queries = ["man going down on woman cunnilingus devoted", "eating pussy emotional intimate worship"] } }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Pull him up to you", targetType = "node", nodeId = "scene_night_before_wedding.n4_together" }
+] }
+
+# Node 4: Together
+[[canvases.nodes]]
+id = "n4_together"
+name = "Together"
+blocks = [
+  { type = "paragraph", content = "When he enters you, you're both crying. The weight of everything you can't have. But right now, in this moment, he's yours." },
+  { type = "dialog", content = "I love you. I've always loved you.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "Not in the heat of passion — in the weight of loss. He says it like a fact. Like gravity. Like something that was always true and will always be true regardless of what tomorrow brings." },
+  { type = "video", props = { file = "story/scene_night_before_wedding_n4_together.jpg", description = "Missionary sex, foreheads touching, tears, emotional lovemaking", search_queries = ["missionary sex emotional eye contact tears", "couple making love missionary foreheads touching"] } }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Hold him closer", targetType = "node", nodeId = "scene_night_before_wedding.n5_deeper" }
+] }
+
+# Node 5: Deeper
+[[canvases.nodes]]
+id = "n5_deeper"
+name = "Deeper"
+blocks = [
+  { type = "paragraph", content = "The pace builds. Gentle becomes urgent. Tenderness gives way to need." },
+  { type = "dialog", content = "Don't hold back. Not tonight.", props = { speaker = "player" } },
+  { type = "paragraph", content = "You pull him deeper. Nails down his back. He gasps your name." },
+  { type = "video", props = { file = "story/scene_night_before_wedding_n5_deeper.jpg", description = "Intense deep sex, nails scratching his back, building urgency", search_queries = ["intense sex nails scratching back passionate", "rough passionate sex urgent deep"] } }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Take control", targetType = "node", nodeId = "scene_night_before_wedding.n6_control" }
+] }
+
+# Node 6: Taking Control
+[[canvases.nodes]]
+id = "n6_control"
+name = "Taking Control"
+blocks = [
+  { type = "paragraph", content = "You push him onto his back. You need to feel him, control this, make it yours. His hands grip your hips. His eyes never leave yours." },
+  { type = "video", props = { file = "story/scene_night_before_wedding_n6_control.jpg", description = "Woman on top riding him, intense eye contact, gripping her hips", search_queries = ["woman riding cowgirl sex eye contact", "girl on top riding hips gripped passionate"] } },
+  { type = "paragraph", content = "Everything narrows to this — two bodies, one heartbeat, a love that will outlast whatever happens tomorrow." }
+]
+exit_block = { type = "choices", choices = [
+  { text = "Feel it building", targetType = "node", nodeId = "scene_night_before_wedding.n7_finish" }
+] }
+
+# Node 7: The Finish — final choices determine ending path
+[[canvases.nodes]]
+id = "n7_finish"
+name = "The Finish"
+blocks = [
+  { type = "dialog", content = "I'm yours. Whatever happens tomorrow, I'm yours tonight.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "Climax. The world whites out. When it returns, you're tangled together, breathing hard, holding on." },
+  { type = "paragraph", content = "He cleans you gently, tenderly. Then you lie together in the dark." },
+  { type = "video", props = { file = "story/scene_night_before_wedding_n7_finish.jpg", description = "Post-sex afterglow, naked and tangled together in bed, holding each other", search_queries = ["couple naked afterglow bed tangled together", "post sex cuddling tender bed sheets"] } },
+  { type = "dialog", content = "Don't marry her.", props = { speaker = "player" } },
+  { type = "dialog", content = "Don't ask me that.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "But he's here, isn't he?" },
+  { type = "paragraph", content = "You stay together until the sky lightens. No more words. Just holding on to what little time you have." }
+]
+exit_block = { type = "choices", choices = [
+  { targetType = "trigger", text = "I'll always love you. Whatever you decide.", time_progression_minutes = 300, effects = [{ targetType = "npc", npcId = "npc_ethan", trait = "love", op = "add", value = 5, clamp = true }], flagEffects = [{ targetType = "player", flag = "night_before_complete" }] }
+] }
+
+
+# ═══════════════════════════════════════════════════════════════
+# EVENT #19: WEDDING MORNING
+# ═══════════════════════════════════════════════════════════════
+# Conditions: night_before_complete
+# Sets: wedding_morning_done
+# Location: loc_kitchen, 07:00-09:00
+
+[[canvases]]
+id = "scene_wedding_morning"
+name = "Wedding Morning"
+description = "The day has arrived. Chaos. One stolen moment."
+
+[canvases.trigger]
+location = "loc_kitchen"
+npc = "npc_ethan"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+items = [
+  { type = "days_since_flag", subject = "player", flag_key = "game_started", operator = "gte", value = 13 }
+]
+[[canvases.trigger.schedules]]
+start_time = "07:00"
+end_time = "09:00"
+
+# Node 1: The Day
+[[canvases.nodes]]
+id = "the_day"
+name = "The Day"
+blocks = [
+  { type = "paragraph", content = "The house is chaos. Florists. A caterer. Madison's mother on the phone. Someone asking about centerpieces." },
+  { type = "paragraph", content = "He finds you in the kitchen during a brief gap. Everyone else is upstairs. His hand finds yours under the counter." },
+  { type = "dialog", content = "Whatever happens today... I need you to know... Thank you. For everything.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "video", props = { file = "story/scene_wedding_morning_the_day.jpg", description = "Stolen hand-holding amid wedding chaos, intense brief moment", search_queries = ["stolen moment wedding morning hands touching", "secret touch during wedding preparations"] } },
+  { type = "paragraph", content = "You don't know what that means yet. His eyes are red. He didn't sleep either." },
+  { type = "paragraph", content = "Someone calls his name from upstairs. He squeezes your hand once, hard, then lets go." }
+]
+exit_block = { type = "location", text = "Let him go", config = { destinationType = "trigger", time_progression_minutes = 60, flagEffects = [
+  { targetType = "player", flag = "wedding_morning_done" }
+] } }
+
+
+# ═══════════════════════════════════════════════════════════════
+# ENDING CANVASES
+# ═══════════════════════════════════════════════════════════════
+# All trigger from loc_living, 09:00-12:00, after wedding_morning_done.
+# All share name "The Wedding Day" so engine groups them as one activity.
+# Priority ordering: best ending = LOWEST priority (engine picks lowest valid unvisited).
+# ending_seen flag prevents multiple endings from showing after one is clicked.
+
+
+# ───────────────────────────────────────────────────────────────
+# ENDING A: HE CHOOSES YOU (Priority 1 — best ending, lowest priority = selected first)
+# ───────────────────────────────────────────────────────────────
+# Conditions: affection >= 95, boldness >= 70, guilt < 50
+
+[[canvases]]
+id = "ending_he_chooses_you"
+name = "The Wedding Day"
+description = "The ceremony begins. 'I can't do this.'"
+
+[canvases.trigger]
+location = "loc_living"
+is_active = true
+is_repeatable = false
+priority = 10
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "wedding_morning_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "ending_seen", operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 95 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "trust", operator = "gte", value = 80 },
+  { type = "trait", subject = "player", trait_key = "boldness", operator = "gte", value = 85 }
+]
+[[canvases.trigger.schedules]]
+start_time = "09:00"
+end_time = "12:00"
+
+[[canvases.nodes]]
+id = "ending"
+name = "He Chooses You"
+blocks = [
+  { type = "heading", content = "He Chooses You" },
+  { type = "paragraph", content = "The ceremony begins. Flowers. Music. Madison walks down the aisle in white. Everyone watches. Everyone smiles." },
+  { type = "paragraph", content = "He stands at the altar. The officiant speaks. 'Do you take this woman...'" },
+  { type = "paragraph", content = "And he looks at you. Sitting in the third row. Hands in your lap. Heart in your throat." },
+  { type = "dialog", content = "I can't do this.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "Chaos. Madison's tears. Her mother's scream. His father's face. Whispers turning to shouts. The destruction of a life carefully built." },
+  { type = "video", props = { file = "story/ending_he_chooses_you.jpg", description = "Wedding interrupted, man walking away from altar, aftermath chaos", search_queries = ["wedding interrupted walking away altar", "called off wedding emotional"] } },
+  { type = "paragraph", content = "When the dust settles — hours, days, a lifetime later — he's beside you. Bags packed. Nowhere to go. Scandal at his back and an uncertain future ahead." },
+  { type = "dialog", content = "I choose you. I choose us.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "It won't be easy. His family may never forgive him. Madison certainly won't. The whispers will follow you both for years." },
+  { type = "paragraph", content = "But his hand is in yours. And for the first time in your life, you're not running." },
+  { type = "paragraph", content = "You did it. You were brave enough to let it happen — bold enough to stand in the fire and not look away. He saw that in you. He chose that." },
+  { type = "paragraph", content = "It took everything: the late nights, the stolen moments, the courage to push past every safe boundary. Love ran deep between you, trust anchored what you built, and neither of you flinched when it mattered most." },
+  { type = "paragraph", content = "Not every love story ends like this. Yours did." }
+]
+exit_block = { type = "game_end", text = "The End", config = { flagEffects = [{ targetType = "player", flag = "ending_seen" }] } }
+
+
+# ───────────────────────────────────────────────────────────────
+# ENDING B: THE ARRANGEMENT (Priority 2)
+# ───────────────────────────────────────────────────────────────
+# Conditions: affection >= 85, guilt >= 70, boldness >= 60
+
+[[canvases]]
+id = "ending_the_arrangement"
+name = "The Wedding Day"
+description = "He marries Madison. But the story doesn't end."
+start_node = "the_ceremony"
+
+[canvases.trigger]
+location = "loc_living"
+is_active = true
+is_repeatable = false
+priority = 8
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "wedding_morning_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "ending_seen", operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 85 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "trust", operator = "lt", value = 40 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "corruption", operator = "gte", value = 80 }
+]
+[[canvases.trigger.schedules]]
+start_time = "09:00"
+end_time = "12:00"
+
+[[canvases.nodes]]
+id = "the_ceremony"
+name = "The Ceremony"
+blocks = [
+  { type = "heading", content = "The Wedding" },
+  { type = "paragraph", content = "The ceremony is perfect. Of course it is. Madison walks the aisle in white, radiant, every inch the bride. The flowers, the music, the soft gasps from the crowd — all of it choreographed, all of it beautiful." },
+  { type = "paragraph", content = "He stands at the altar. Composed. Steady. The vows come — 'to have and to hold, in sickness and in health' — and his voice doesn't break." },
+  { type = "paragraph", content = "But you see it. The way his jaw tightens. The way his eyes sweep the crowd once — just once — and find you before snapping back to Madison. The way his hands shake when he slides on the ring." },
+  { type = "paragraph", content = "He says 'I do.' Madison says 'I do.' Everyone cheers. You clap with the rest of them, your smile a perfect mask." },
+  { type = "paragraph", content = "You know something they don't. And that knowledge sits in your chest like a stone." }
+]
+exit_block = { type = "location", text = "Watch the reception begin", config = { destinationType = "node", destinationId = "ending_the_arrangement.ending" } }
+
+[[canvases.nodes]]
+id = "ending"
+name = "The Arrangement"
+blocks = [
+  { type = "heading", content = "The Arrangement" },
+  { type = "paragraph", content = "He marries Madison. Of course he does. The desire was there but something was missing — the trust to believe you could be more than a secret. You watch from the crowd with a smile that could cut glass." },
+  { type = "paragraph", content = "The reception is beautiful. The speeches are warm. Madison glows. He plays the part perfectly." },
+  { type = "paragraph", content = "Three weeks later, your phone buzzes. Unknown number." },
+  { type = "dialog", content = "I can't leave her. But I can't leave you either.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "It's wrong. You both know it's wrong. You've always known." },
+  { type = "video", props = { file = "story/ending_the_arrangement.jpg", description = "Secret message on phone, hidden relationship continuing, bittersweet", search_queries = ["secret text message affair continuing", "hidden relationship phone message"] } },
+  { type = "paragraph", content = "But when has that ever stopped you?" },
+  { type = "paragraph", content = "The arrangement begins. Stolen weekends. Burner phones. A love that lives in the shadows because neither of you is strong enough to let it die — or brave enough to bring it into the light." },
+  { type = "paragraph", content = "The love was real. The connection was deep. But without enough trust to believe in a future together, duty held him in place. You pushed him far — but not quite far enough to pull him free before the ring went on." },
+  { type = "paragraph", content = "Next time: balance everything. Build love through emotional choices, earn trust through bonding, and don't shy away from physical escalation. The best ending needs love, trust, and corruption all running high." }
+]
+exit_block = { type = "game_end", text = "The End", config = { flagEffects = [{ targetType = "player", flag = "ending_seen" }] } }
+
+
+# ───────────────────────────────────────────────────────────────
+# ENDING C: ONE LAST NIGHT (Priority 3)
+# ───────────────────────────────────────────────────────────────
+# Conditions: affection >= 80, guilt >= 60
+
+[[canvases]]
+id = "ending_one_last_night"
+name = "The Wedding Day"
+description = "He goes through with it. They never crossed enough lines."
+start_node = "the_ceremony"
+
+[canvases.trigger]
+location = "loc_living"
+is_active = true
+is_repeatable = false
+priority = 6
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "wedding_morning_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "ending_seen", operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "love", operator = "gte", value = 80 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "trust", operator = "gte", value = 60 },
+  { type = "trait", subject = "npc", npc_id = "npc_ethan", trait_key = "corruption", operator = "lt", value = 40 }
+]
+[[canvases.trigger.schedules]]
+start_time = "09:00"
+end_time = "12:00"
+
+[[canvases.nodes]]
+id = "the_ceremony"
+name = "The Ceremony"
+blocks = [
+  { type = "heading", content = "The Wedding" },
+  { type = "paragraph", content = "You take your seat. Third row, aisle side. Your hands won't stop shaking so you sit on them like a child." },
+  { type = "paragraph", content = "The music starts. Madison walks the aisle in white. She's radiant. She deserves this — all of it. The thought makes your throat close." },
+  { type = "paragraph", content = "He's at the altar. The officiant speaks. And then — just for a second — his eyes find yours." },
+  { type = "paragraph", content = "Everything you built over fourteen days is in that look. Every late-night conversation. Every accidental touch that wasn't accidental. Every time one of you almost said the thing that would have changed everything." },
+  { type = "paragraph", content = "Almost. The cruelest word in any language." },
+  { type = "dialog", content = "I do.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "He doesn't look at you again. Not during the kiss. Not during the applause. Not when they walk back up the aisle together, married, finished." }
+]
+exit_block = { type = "location", text = "Stay for the reception", config = { destinationType = "node", destinationId = "ending_one_last_night.ending" } }
+
+[[canvases.nodes]]
+id = "ending"
+name = "One Last Night"
+blocks = [
+  { type = "heading", content = "One Last Night" },
+  { type = "paragraph", content = "He goes through with it. You never pushed far enough — kept things emotional, kept things safe. But the night before, he came to you one last time." },
+  { type = "dialog", content = "I love you. I'll always love you. But I can't destroy everything.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "paragraph", content = "You watch from the crowd. Their vows. The ring. The kiss. His eyes find yours once — just once — across the room. A lifetime in a glance." },
+  { type = "video", props = { file = "story/ending_one_last_night.jpg", description = "Watching wedding from crowd with hidden tears, eye contact across room", search_queries = ["watching wedding from crowd tears", "eye contact across room wedding"] } },
+  { type = "paragraph", content = "You leave before the reception. You don't say goodbye. The taxi comes and you get in and you don't look back because if you look back you will break apart." },
+  { type = "paragraph", content = "At the airport, your phone buzzes. One message from him: 'I'm sorry. For all of it. Except the parts with you.'" },
+  { type = "paragraph", content = "You board the plane. You fly away. You don't come back." },
+  { type = "paragraph", content = "Some love stories end with sacrifice." },
+  { type = "paragraph", content = "He loved you. That was never the question. But love wasn't enough — not without crossing enough lines together, not without the physical truth of what you were to each other making denial impossible." },
+  { type = "paragraph", content = "Next time: don't hold back physically. Build corruption through daring choices and the journal. The best ending needs love, trust, and corruption all running high — emotional depth alone won't free him." }
+]
+exit_block = { type = "game_end", text = "The End", config = { flagEffects = [{ targetType = "player", flag = "ending_seen" }] } }
+
+
+# ───────────────────────────────────────────────────────────────
+# ENDING D: WHAT COULD HAVE BEEN (Priority 4 — fallback, highest = selected last)
+# ───────────────────────────────────────────────────────────────
+# Conditions: wedding_morning_done only (fallback if no other ending matches)
+
+[[canvases]]
+id = "ending_what_could_have_been"
+name = "The Wedding Day"
+description = "They came close. Neither was brave enough."
+start_node = "the_ceremony"
+
+[canvases.trigger]
+location = "loc_living"
+is_active = true
+is_repeatable = false
+priority = 1
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "wedding_morning_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "ending_seen", operator = "is_false" }
+]
+[[canvases.trigger.schedules]]
+start_time = "09:00"
+end_time = "12:00"
+
+[[canvases.nodes]]
+id = "the_ceremony"
+name = "The Ceremony"
+blocks = [
+  { type = "heading", content = "The Wedding" },
+  { type = "paragraph", content = "The wedding is beautiful. Everyone says so. The flowers, the venue, the weather — all of it perfect." },
+  { type = "paragraph", content = "You sit in the crowd and watch it happen. Madison walks the aisle. He waits at the altar. The officiant speaks. The vows are said." },
+  { type = "paragraph", content = "He doesn't look at you. Not once. Not during the vows. Not during the ring. Not during the kiss." },
+  { type = "paragraph", content = "You're not sure if that makes it easier or harder." },
+  { type = "paragraph", content = "When did it happen — or rather, when didn't it? Two weeks in the same house. Every almost. Every not-quite. The distance never closed and now it never will." },
+  { type = "paragraph", content = "The ceremony ends. Everyone applauds. You clap too, because what else is there to do?" }
+]
+exit_block = { type = "location", text = "Go to the reception", config = { destinationType = "node", destinationId = "ending_what_could_have_been.ending" } }
+
+[[canvases.nodes]]
+id = "ending"
+name = "What Could Have Been"
+blocks = [
+  { type = "heading", content = "What Could Have Been" },
+  { type = "paragraph", content = "They came close. So close. But neither was brave enough to cross the final line." },
+  { type = "paragraph", content = "The wedding happens. It's beautiful. He's distant but committed. She's present but already leaving." },
+  { type = "paragraph", content = "At the reception, you find a quiet corner. He finds you there." },
+  { type = "dialog", content = "Maybe in another life.", props = { speaker = "npc", npcId = "npc_ethan" } },
+  { type = "dialog", content = "Maybe.", props = { speaker = "player" } },
+  { type = "video", props = { file = "story/ending_what_could_have_been.jpg", description = "Airport departure, looking back once, melancholy and regret", search_queries = ["airport departure looking back regret", "leaving looking back once melancholy"] } },
+  { type = "paragraph", content = "You leave the next morning. Early flight. No fanfare. He drives you to the airport. Neither of you speaks." },
+  { type = "paragraph", content = "At the gate, you almost say it. Almost. The words are right there." },
+  { type = "paragraph", content = "But you board the plane. And the words stay unspoken. And the story ends the way most love stories end — not with a bang, but with a what-if that echoes forever." },
+  { type = "paragraph", content = "The distance won. Two weeks in the same house, and neither of you found the courage to close the gap. The moments were there — but you let them pass." },
+  { type = "paragraph", content = "Next time: don't hold back. Spend more time with Ethan — every meal, every evening, every quiet moment. Balance emotional and physical choices. Build trust through bonding activities. The best ending needs deep love, real trust, and enough corruption that going back to normal is impossible." }
+]
+exit_block = { type = "game_end", text = "The End", config = { flagEffects = [{ targetType = "player", flag = "ending_seen" }] } }

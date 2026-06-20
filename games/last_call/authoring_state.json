@@ -1,0 +1,891 @@
+{
+  "game_slug": "last_call",
+  "schema_version": 2,
+  "book_revision": 2,
+  "scope_mode": "full_game",
+  "npcs": {
+    "npc_sal": {
+      "arc_shape": "peer/dating",
+      "lane_budget": {
+        "L1": 3,
+        "L2": 1,
+        "L3": 0,
+        "capstones": 4
+      },
+      "vocab_ceiling": "explicit"
+    },
+    "npc_marcus": {
+      "arc_shape": "peer/dating",
+      "lane_budget": {
+        "L1": 2,
+        "L2": 1,
+        "L3": 0,
+        "capstones": 3
+      },
+      "vocab_ceiling": "explicit"
+    },
+    "npc_collector": {
+      "arc_shape": "antagonist",
+      "lane_budget": {
+        "L1": 1,
+        "L2": 3,
+        "L3": 0,
+        "capstones": 2
+      },
+      "vocab_ceiling": "explicit"
+    },
+    "npc_rosa": {
+      "arc_shape": "service",
+      "lane_budget": {
+        "L1": 1,
+        "L2": 0,
+        "L3": 0,
+        "capstones": 1
+      },
+      "vocab_ceiling": "explicit"
+    },
+    "npc_dee": {
+      "arc_shape": "peer/dating",
+      "lane_budget": {
+        "L1": 2,
+        "L2": 1,
+        "L3": 0,
+        "capstones": 3
+      },
+      "vocab_ceiling": "explicit"
+    }
+  },
+  "plan": [
+    {
+      "id": "beat_0001",
+      "type": "story_turn",
+      "title": "First night",
+      "desc": "Inherit the bar, meet Sal, learn the debt. Boot canvas; arms the economy.",
+      "status": "validated",
+      "deps": [],
+      "target_phase": "2_one_shots.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": [
+          "first_night_done",
+          "debt_explained"
+        ]
+      },
+      "produced_canvas_ids": [
+        "canvas_first_night"
+      ],
+      "decided_at": 1
+    },
+    {
+      "id": "beat_0002",
+      "type": "npc_intro",
+      "title": "Sal shows you the ropes",
+      "desc": "Bartender on-ramp: Lane 1 first-contact one-shot + Lane 1 hub (interactions WITH Sal only; work split out to beat_0015).",
+      "status": "validated",
+      "deps": [
+        "beat_0001"
+      ],
+      "target_phase": "5_scenes.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": [
+          "sal_opened_up"
+        ]
+      },
+      "produced_canvas_ids": [
+        "canvas_sal_ropes_first",
+        "canvas_sal_hub"
+      ],
+      "decided_at": 2
+    },
+    {
+      "id": "beat_0015",
+      "type": "economic",
+      "title": "Work-the-bar earning loop (lane restructure)",
+      "desc": "Split the conflated hub (§8.2): solo work activity (Lane 3 host, earns money — the missing earning loop) + a regular walk-in (Lane 3 substitution) + a bar-entry ambient (Lane 2).",
+      "status": "validated",
+      "deps": [
+        "beat_0002"
+      ],
+      "target_phase": "5_scenes.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": []
+      },
+      "produced_canvas_ids": [
+        "canvas_work_shift",
+        "canvas_work_walkin",
+        "canvas_bar_ambient"
+      ],
+      "decided_at": 5
+    },
+    {
+      "id": "beat_0003",
+      "type": "economic",
+      "title": "First payment day",
+      "desc": "The Collector arrives Monday; the weekly payment mechanic goes live in fiction. (Transaction fiction already delivered by [settings.rent.text] at setup; this beat adds the Collector's Lane 2 collection-night PRESENCE on top.)",
+      "status": "validated",
+      "deps": [
+        "beat_0001"
+      ],
+      "target_phase": "5_scenes.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": []
+      },
+      "produced_canvas_ids": [
+        "canvas_collector_pressure",
+        "canvas_collector_word"
+      ],
+      "decided_at": 10
+    },
+    {
+      "id": "beat_0004",
+      "type": "npc_intro",
+      "title": "Rosa in the kitchen",
+      "desc": "Cook/ally on-ramp: a Lane-1 hub in the kitchen + her single trust capstone (service NPC, full tiny arc in one beat).",
+      "status": "validated",
+      "deps": [
+        "beat_0001"
+      ],
+      "target_phase": "5_scenes.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": [
+          "rosa_opened_up",
+          "rosa_trusts"
+        ]
+      },
+      "produced_canvas_ids": [
+        "canvas_rosa_ropes_first",
+        "canvas_rosa_hub",
+        "canvas_rosa_trust_talk"
+      ],
+      "decided_at": 9
+    },
+    {
+      "id": "beat_0005",
+      "type": "npc_intro",
+      "title": "Restock run — meet Dee",
+      "desc": "Supplier on-ramp at the depot; introduces Dee's leverage.",
+      "status": "validated",
+      "deps": [
+        "beat_0001"
+      ],
+      "target_phase": "5_scenes.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": [
+          "dee_opened_up"
+        ]
+      },
+      "produced_canvas_ids": [
+        "canvas_dee_ropes_first",
+        "canvas_dee_hub",
+        "canvas_dee_cellar_hub",
+        "canvas_dee_ambient"
+      ],
+      "decided_at": 9
+    },
+    {
+      "id": "beat_0006",
+      "type": "npc_intro",
+      "title": "Marcus, the regular",
+      "desc": "Moneyed patron on-ramp at the bar; peer/dating arc begins.",
+      "status": "validated",
+      "deps": [
+        "beat_0001"
+      ],
+      "target_phase": "5_scenes.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": [
+          "marcus_opened_up"
+        ]
+      },
+      "produced_canvas_ids": [
+        "canvas_marcus_ropes_first",
+        "canvas_marcus_hub",
+        "canvas_marcus_ambient"
+      ],
+      "decided_at": 9
+    },
+    {
+      "id": "beat_0007",
+      "type": "economic",
+      "title": "Dress for tips",
+      "desc": "Clothing economy. Authored the [[clothing]] catalog in 0_systems_spec.toml (8 items: 2 initial top+bottom satisfying body_coverage + 6 shop items rising beauty/corruption; outfit_mini/outfit_barely gate WEARING on player corruption 25/35). Engine auto-injects shop (loc_shop) + wardrobe (loc_apartment) pages. Dress-for-tips gate added to canvas_work_shift: a worn_corruption gte 15 choice -> money +90 / exhibitionism +3 / corruption +1 (serve-in-less-for-takings, mirrors LS). worn_corruption is content-router only (never global corruption). No new flags, no new canvas (catalog + a work-shift choice edit).",
+      "status": "validated",
+      "deps": [
+        "beat_0002"
+      ],
+      "target_phase": "0_systems_spec.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": []
+      },
+      "produced_canvas_ids": [],
+      "decided_at": 21
+    },
+    {
+      "id": "beat_0008",
+      "type": "arc_escalation",
+      "title": "Marcus heats up",
+      "desc": "Dating/sugar escalation for Marcus. Scope = capstone #1 (canvas_marcus_singled_out, the retainer tip -> marcus_noticed, relation 15) + capstone #2 (canvas_marcus_arrangement, money-for-Monday Type B accept/refuse retry -> marcus_date_done, corruption 35; accept gives money+200 = the debt tie-in) + back-booth hub rung wired to set marcus_drinks_done (T2) + Marcus quest chain M1/M2/M3. Capstone #3 (kept -> marcus_first_done) deferred to beat_0020.",
+      "status": "validated",
+      "deps": [
+        "beat_0006"
+      ],
+      "target_phase": "5_scenes.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": [
+          "marcus_noticed",
+          "marcus_drinks_done",
+          "marcus_date_done"
+        ]
+      },
+      "produced_canvas_ids": [
+        "canvas_marcus_singled_out",
+        "canvas_marcus_arrangement"
+      ],
+      "decided_at": 17
+    },
+    {
+      "id": "beat_0009",
+      "type": "location_reveal",
+      "title": "Behind on the payment — the shark's place unlocks",
+      "desc": "Fall behind, get summoned; loc_shark added (locked) + unlock flag + reachable setter — whole amendment.",
+      "status": "validated",
+      "deps": [
+        "beat_0003"
+      ],
+      "target_phase": "1_metadata_and_locations.toml",
+      "introduces": {
+        "locations": [
+          "loc_shark"
+        ],
+        "npcs": [],
+        "flags": [
+          "summoned_by_shark",
+          "shark_met"
+        ]
+      },
+      "produced_canvas_ids": [
+        "canvas_shark_summons",
+        "canvas_shark_place"
+      ],
+      "decided_at": 3
+    },
+    {
+      "id": "beat_0010",
+      "type": "arc_escalation",
+      "title": "Sal slow-burn deepens",
+      "desc": "Scope = hub split (F3) + first-kiss capstone. canvas_sal_hub narrowed to service hours (17-22, public); NEW canvas_sal_afterhours_hub (22-02, private, deepening rung + locked telegraph); NEW canvas_sal_after_hours capstone #2 (relation 45 -> first kiss after lockup, Tier-3, sets sal_after_hours_done + sal_stage=3). Sal M1 quest card repurposed to the after-close milestone + M2 added. Capstones #3 (upstairs) / #4 (backbone) deferred to beat_0017/0018.",
+      "status": "validated",
+      "deps": [
+        "beat_0002"
+      ],
+      "target_phase": "5_scenes.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": [
+          "sal_after_hours_done"
+        ]
+      },
+      "produced_canvas_ids": [
+        "canvas_sal_afterhours_hub",
+        "canvas_sal_after_hours"
+      ],
+      "decided_at": 15
+    },
+    {
+      "id": "beat_0011",
+      "type": "arc_escalation",
+      "title": "Dee's terms",
+      "desc": "Credit-for-favors leverage arc for Dee. Scope = capstone #1 (canvas_dee_terms, flexible terms floated -> dee_terms, relation 20, depot) + capstone #2 (canvas_dee_dock, first dock favor, Type B accept/refuse retry -> dee_deal_done, corruption 25 + dee_terms, cellar Tue/Fri) + cellar-hub telegraph rung + Dee quest chain M1/M2/M3. Capstone #3 (standing terms -> dee_first_done) deferred to beat_0019.",
+      "status": "validated",
+      "deps": [
+        "beat_0005"
+      ],
+      "target_phase": "5_scenes.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": [
+          "dee_terms",
+          "dee_deal_done"
+        ]
+      },
+      "produced_canvas_ids": [
+        "canvas_dee_terms",
+        "canvas_dee_dock"
+      ],
+      "decided_at": 16
+    },
+    {
+      "id": "beat_0012",
+      "type": "cross_npc",
+      "title": "A collision",
+      "desc": "The universal climax hinge: the Collector stops waiting. canvas_collision at loc_bar Mon 18-20, OR-gate shark_met (leverage) OR money>=1000 (clean). Branches by protector arc (Sal sal_cracked / Marcus marcus_first_done / alone fallback). Sets collision_done + summoned_by_shark (opens loc_shark for clean players).",
+      "status": "validated",
+      "deps": [
+        "beat_0008",
+        "beat_0010"
+      ],
+      "target_phase": "5_scenes.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": [
+          "collision_done"
+        ]
+      },
+      "produced_canvas_ids": [
+        "canvas_collision"
+      ],
+      "decided_at": 19
+    },
+    {
+      "id": "beat_0013",
+      "type": "capstone",
+      "title": "The reckoning",
+      "desc": "Pattern B debt fork at Boyd's (canvas_reckoning, loc_shark, gate shark_met + collision_done). Three outcomes: pay in full (money>=1000 -> ending_clean, money-1000) / Marcus covers (marcus_first_done -> ending_kept) / nothing left (fallback -> ending_owned). Sets reckoning_done + one ending flag. NEW phase file 4_story_arc.toml.",
+      "status": "validated",
+      "deps": [
+        "beat_0009",
+        "beat_0012"
+      ],
+      "target_phase": "4_story_arc.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": [
+          "reckoning_done",
+          "ending_clean",
+          "ending_kept",
+          "ending_owned"
+        ]
+      },
+      "produced_canvas_ids": [
+        "canvas_reckoning"
+      ],
+      "decided_at": 19
+    },
+    {
+      "id": "beat_0014",
+      "type": "story_turn",
+      "title": "Endgame",
+      "desc": "Three terminal resolutions auto-fire at loc_bar, gated on the ending flag + endgame_seen is_false (one fires). canvas_ending_clean_sal (p12, ending_clean+sal_cracked) / canvas_ending_clean (p11) / canvas_ending_kept / canvas_ending_owned. Tier-3, arc-colored. Sets endgame_seen.",
+      "status": "validated",
+      "deps": [
+        "beat_0013"
+      ],
+      "target_phase": "2_one_shots.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": [
+          "endgame_seen"
+        ]
+      },
+      "produced_canvas_ids": [
+        "canvas_ending_clean_sal",
+        "canvas_ending_clean",
+        "canvas_ending_kept",
+        "canvas_ending_owned"
+      ],
+      "decided_at": 19
+    },
+    {
+      "id": "beat_0016",
+      "type": "economic",
+      "title": "Daily-life activities + Collector floor-walk",
+      "desc": "P3 (Utility+antagonist scope). 3 Nina-solo utility activities (activity_shower = the hygiene-restore fix, activity_clean_up, activity_restock_cellar) + the Collector floor-walk Lane 3 cross-appearance on canvas_work_shift (pre/post-seizure variants, exclusive_group 'shift_event' mutex with canvas_work_walkin). Peers stay hub+capstone (no L3, doctrine). No new structure/flags.",
+      "status": "validated",
+      "deps": [
+        "beat_0015",
+        "beat_0003"
+      ],
+      "target_phase": "3_activities.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": []
+      },
+      "produced_canvas_ids": [
+        "activity_shower",
+        "activity_clean_up",
+        "activity_restock_cellar",
+        "canvas_collector_floorwalk",
+        "canvas_collector_floorwalk_seized"
+      ],
+      "decided_at": 14
+    },
+    {
+      "id": "beat_0017",
+      "type": "capstone",
+      "title": "Sal — the first night upstairs",
+      "desc": "Sal capstone #3 (deferred from beat_0010). After-close, relation 60 + sal_after_hours_done -> first night in the studio over the bar. Sets sal_first_done + sal_stage=4. Type B (retry-on-refuse). Tier-3 explicit, terse. Bareback.",
+      "status": "validated",
+      "deps": [
+        "beat_0010"
+      ],
+      "target_phase": "5_scenes.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": [
+          "sal_first_done"
+        ]
+      },
+      "produced_canvas_ids": [
+        "canvas_sal_upstairs"
+      ],
+      "decided_at": 18
+    },
+    {
+      "id": "beat_0018",
+      "type": "capstone",
+      "title": "Sal — the backbone",
+      "desc": "Sal capstone #4 (deferred from beat_0010). Terminal: he gives up his place, commits to her/the bar. Sets sal_cracked (flag only; stage stays 4). Type A. Terse, not purple. relation 75.",
+      "status": "validated",
+      "deps": [
+        "beat_0017"
+      ],
+      "target_phase": "5_scenes.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": [
+          "sal_cracked"
+        ]
+      },
+      "produced_canvas_ids": [
+        "canvas_sal_backbone"
+      ],
+      "decided_at": 18
+    },
+    {
+      "id": "beat_0019",
+      "type": "capstone",
+      "title": "Dee — standing terms",
+      "desc": "Dee capstone #3 (deferred from beat_0011). Terminal: the favor is routine, the taps are his leash. Sets dee_first_done (flag ONLY — dee_stage NOT advanced past 2, arc_stages defines 0-2). Type A. corruption 45, cellar Tue/Fri. Tier-3 explicit.",
+      "status": "validated",
+      "deps": [
+        "beat_0011"
+      ],
+      "target_phase": "5_scenes.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": [
+          "dee_first_done"
+        ]
+      },
+      "produced_canvas_ids": [
+        "canvas_dee_standing"
+      ],
+      "decided_at": 18
+    },
+    {
+      "id": "beat_0020",
+      "type": "capstone",
+      "title": "Marcus — kept",
+      "desc": "Marcus capstone #3 (deferred from beat_0008). Terminal: T4 (corruption 50) kept arrangement / consummation; patience curdles into ownership. Sets marcus_first_done + marcus_stage=4. Type A. Tier-3 explicit, possessive. Bareback.",
+      "status": "validated",
+      "deps": [
+        "beat_0008"
+      ],
+      "target_phase": "5_scenes.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": [
+          "marcus_first_done"
+        ]
+      },
+      "produced_canvas_ids": [
+        "canvas_marcus_kept"
+      ],
+      "decided_at": 18
+    },
+    {
+      "id": "beat_0021",
+      "type": "arc_escalation",
+      "title": "Lane 2 tiering pass",
+      "desc": "Ported the RTS tier-by-stat technique to LC's flat Lane 2 ambients (lane2_reference.md gap). Mutual-exclusion gates: each peer base ambient now gated corruption lt N + a HOT variant gte N — canvas_bar_ambient_hot (Sal, 25), canvas_marcus_ambient_hot (Marcus, 20), canvas_dee_ambient_hot (Dee, 25). Collector: pressure/word now gated bar_seized is_false + NEW canvas_collector_coerce gated bar_seized is_true (post-seizure coercion). Same window/presence; RTS-flat charged voice, premise-appropriate (no grope/peep). No new flags (gates use corruption trait + existing bar_seized).",
+      "status": "validated",
+      "deps": [
+        "beat_0015",
+        "beat_0005",
+        "beat_0006",
+        "beat_0003"
+      ],
+      "target_phase": "5_scenes.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": []
+      },
+      "produced_canvas_ids": [
+        "canvas_bar_ambient_hot",
+        "canvas_marcus_ambient_hot",
+        "canvas_dee_ambient_hot",
+        "canvas_collector_coerce"
+      ],
+      "decided_at": 20
+    },
+    {
+      "id": "beat_0022",
+      "type": "arc_escalation",
+      "title": "Sal sex-loop menu (TLS clone, template)",
+      "desc": "Per-NPC repeatable sex-loop menu — full 6-pose TLS clone, SAL TEMPLATE. TRIGGERLESS sal_sex_loop (intro + 6 pose menus foreplay/blowjob/cunnilingus/doggy/missionary/ontop + result loop-back nodes + anal toggle + climax-elects at loop_npc_pleasure gte 50) + TRIGGERLESS sal_sex_finisher (4 finisher-type variants facial/pussy/ass/body via group blocks + closure that resets loop state). 7 numeric loop-state traits added to player core_traits (hidden in 0_systems_spec). Wired: canvas_sal_afterhours_hub 'Take him to bed' rung gated sal_first_done -> nodeId sal_sex_loop.intro (resets state). Reached ONLY via nodeId (no trigger). Bareback, incl. anal. The once-only canvas_sal_upstairs capstone stays the first-time scene. BENIGN build warning: _extract_trait_effects_from_canvas can't compare the random-value dict to int -> skips it (same as TLS's 47 random effects; build-time hint helper only, runtime unaffected, loop_npc_pleasure present 25x in HTML).",
+      "status": "validated",
+      "deps": [
+        "beat_0017"
+      ],
+      "target_phase": "5_scenes.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": []
+      },
+      "produced_canvas_ids": [
+        "sal_sex_loop",
+        "sal_sex_finisher"
+      ],
+      "decided_at": 23
+    },
+    {
+      "id": "beat_0023",
+      "type": "arc_escalation",
+      "title": "Marcus sex-loop menu (replicate)",
+      "desc": "Replicate the Sal template per-NPC for Marcus: own marcus_sex_loop + marcus_sex_finisher (his possessive/kept voice, uptown setting), gated marcus_first_done, wired from canvas_marcus_hub. Reuses the shared loop-state traits. PENDING (post Sal review).",
+      "status": "planned",
+      "deps": [
+        "beat_0022",
+        "beat_0020"
+      ],
+      "target_phase": "5_scenes.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": []
+      },
+      "produced_canvas_ids": [],
+      "decided_at": null
+    },
+    {
+      "id": "beat_0024",
+      "type": "arc_escalation",
+      "title": "Dee sex-loop menu (replicate)",
+      "desc": "Replicate the Sal template per-NPC for Dee: own dee_sex_loop + dee_sex_finisher (transactional/coercive voice, cellar setting), gated dee_deal_done, wired from canvas_dee_cellar_hub. PENDING (post Sal review).",
+      "status": "planned",
+      "deps": [
+        "beat_0022",
+        "beat_0011"
+      ],
+      "target_phase": "5_scenes.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": []
+      },
+      "produced_canvas_ids": [],
+      "decided_at": null
+    },
+    {
+      "id": "beat_0025",
+      "type": "arc_respine",
+      "title": "Sal re-spine — pure-escalation two-axis arc",
+      "desc": "Re-spined Sal off the universal npc.relation onto the RTS family/escalation model: two axes only — player.corruption (her depth) x npc_sal.arousal 0-3 (his wanting). relation DROPPED from Sal entirely (gates+awards). His wanting is EARNED, not passive (removed the daily_tick npc_sal arousal climb); climbs +1/day max from the daily Sal beat (Talk service-hours OR Stay after-close, both sharing talked_to_sal_today). Legible via 4 wanting-tier group blocks on the after-close hub base (no per-NPC sidebar bar exists). Ladder: flirt corr25->15; Lane2 ambients re-partitioned corr->EXHIBITIONISM (lt/gte 10, the bar-floor public axis, waking the dead exhibitionism meter); kiss relation45->corr20+wanting2; first-night relation60->corr30+wanting3. Commitment framing DROPPED: canvas_sal_backbone + its M3 quest card deleted; sal_cracked setter re-homed onto the first night (canvas_sal_upstairs) so the Clean+Sal ending + collision Sal-protector branch still fire. Fixes the kiss->sex sprint (two independent climbs, no capstone refund) and wakes both dead meters (npc_sal.arousal + exhibitionism).",
+      "status": "done",
+      "deps": [
+        "beat_0010",
+        "beat_0017",
+        "beat_0018",
+        "beat_0021"
+      ],
+      "target_phase": "5_scenes.toml + 0_systems_spec.toml",
+      "introduces": {
+        "locations": [],
+        "npcs": [],
+        "flags": []
+      }
+    }
+  ],
+  "structure_registry": {
+    "locations": [
+      {
+        "id": "loc_bar",
+        "category": "reachable"
+      },
+      {
+        "id": "loc_kitchen",
+        "category": "reachable"
+      },
+      {
+        "id": "loc_office",
+        "category": "reachable"
+      },
+      {
+        "id": "loc_cellar",
+        "category": "reachable"
+      },
+      {
+        "id": "loc_apartment",
+        "category": "reachable"
+      },
+      {
+        "id": "loc_street",
+        "category": "reachable"
+      },
+      {
+        "id": "loc_bank",
+        "category": "reachable"
+      },
+      {
+        "id": "loc_shop",
+        "category": "reachable"
+      },
+      {
+        "id": "loc_wholesaler",
+        "category": "reachable"
+      },
+      {
+        "id": "loc_shark",
+        "category": "locked"
+      },
+      {
+        "id": "loc_sal_place",
+        "category": "offscreen"
+      },
+      {
+        "id": "loc_marcus_place",
+        "category": "offscreen"
+      },
+      {
+        "id": "loc_rosa_place",
+        "category": "offscreen"
+      },
+      {
+        "id": "loc_dee_place",
+        "category": "offscreen"
+      }
+    ],
+    "npcs": [
+      "npc_sal",
+      "npc_marcus",
+      "npc_collector",
+      "npc_rosa",
+      "npc_dee"
+    ],
+    "flags": [
+      "first_night_done",
+      "debt_explained",
+      "bar_seized",
+      "talked_to_sal_today",
+      "talked_to_marcus_today",
+      "talked_to_rosa_today",
+      "talked_to_dee_today",
+      "bar_open_today",
+      "sal_opened_up",
+      "summoned_by_shark",
+      "shark_met",
+      "dee_opened_up",
+      "marcus_opened_up",
+      "rosa_opened_up",
+      "rosa_trusts",
+      "sal_after_hours_done",
+      "dee_terms",
+      "dee_deal_done",
+      "marcus_noticed",
+      "marcus_drinks_done",
+      "marcus_date_done",
+      "sal_first_done",
+      "sal_cracked",
+      "dee_first_done",
+      "marcus_first_done",
+      "collision_done",
+      "reckoning_done",
+      "ending_clean",
+      "ending_kept",
+      "ending_owned",
+      "endgame_seen"
+    ],
+    "schedules": [
+      {
+        "npc": "npc_sal",
+        "rows": 2
+      },
+      {
+        "npc": "npc_marcus",
+        "rows": 1
+      },
+      {
+        "npc": "npc_collector",
+        "rows": 1
+      },
+      {
+        "npc": "npc_rosa",
+        "rows": 1
+      },
+      {
+        "npc": "npc_dee",
+        "rows": 2
+      }
+    ]
+  },
+  "next_up": [
+    "beat_0023",
+    "beat_0024"
+  ],
+  "decisions_log": [
+    {
+      "turn": 1,
+      "note": "Setup complete. Premise: struggling-bar inheritance + loan-shark weekly payment. Female owner, full explicit RTS. Cast of 5, 9 locations (loc_shark deferred to beat_0009). 14-beat loose roadmap locked. Phase 2+ all deferred. Boot canvas authored (beat_0001 validated).",
+      "book_revision": 1
+    },
+    {
+      "turn": 2,
+      "note": "beat_0002 (Sal on-ramp, npc_intro) authored: 'working the bar together' — first-contact one-shot canvas_sal_ropes_first (sets sal_opened_up + sal_stage=1 + relation) + repeatable daily-gated hub canvas_sal_bar_hub. New flag sal_opened_up registered.",
+      "book_revision": 1
+    },
+    {
+      "turn": 3,
+      "note": "beat_0009 (location_reveal) authored as a WHOLE amendment: added loc_shark (locked on summoned_by_shark, blocked_message, unlock contract Case A) + canvas_shark_summons (reachable setter) + canvas_shark_place (content so the reveal isn't dead, sets shark_met). Registered loc_shark + summoned_by_shark + shark_met. FINDING: first gated the summons on bar_seized (the rent eviction_flag) — flag-chain validator rejected it because engine-set flags aren't in the canvas unlock map; re-gated on debt_explained (canvas-set) + Collector Monday presence. Build green after fix.",
+      "book_revision": 1
+    },
+    {
+      "turn": 4,
+      "note": "Backfilled quest cards (Quests page was empty — quests_engine=v2 with no [[quest_cards]]). Added 3 cards in 5_scenes.toml: spine debt card (Story Goals, money>=200), Sal M0 (capstone → canvas_sal_ropes_first), Sal M1 (mechanic, relation>=20). Skill hardened so future setups/beats author cards automatically. Build green.",
+      "book_revision": 1
+    },
+    {
+      "turn": 5,
+      "note": "Lane restructure (first run of the ALIGNED skill). Fixed §8.2: replaced conflated canvas_sal_bar_hub with canvas_sal_hub (Lane 1, NPC-object verbs + locked-visible flirt rung, one constant opener). Added the missing earning loop: canvas_work_shift (solo Lane 3 host, earns money/-energy) + canvas_work_walkin (Lane 3 substitution_only target, max_triggers_per_day=1) + canvas_bar_ambient (Lane 2 random). Upgraded ledger to v2 (scope_mode=full_game + per-NPC budgets). beat_0015 added.",
+      "book_revision": 2
+    },
+    {
+      "turn": 6,
+      "note": "LIVE-PLAY of the restructure surfaced runtime bugs build-green missed (all fixed except one): (1) substitution_only/max_triggers_per_day were misplaced at canvas top-level → moved under [canvases.trigger]. (2) Sal first-contact (is_repeatable=false + npc) rendered NOWHERE → made it auto-fire (no npc); Sal now meetable (was a LATENT pre-restructure bug). (3) Work-shift solo activity didn't render due to a per-canvas schedule → removed it; PROVEN LIVE: 'Work a shift' earns money 80→130, energy 90→75 (earning loop works). VERIFIED LIVE: §8.2 split (work separate from interaction), earning loop, Sal first-contact auto-fire, substitution_only now excluded. KNOWN-OPEN: canvas_sal_hub portrait still does not render after sal_opened_up — NPC-hub presence-resolution issue (getNpcLocation gate); likely pre-existing (the old conflated hub had the same gate). Needs separate engine-presence debugging. Runtime lessons folded into the skill (lanes.md + toml-gotchas.md).",
+      "book_revision": 2
+    },
+    {
+      "turn": 7,
+      "note": "RESOLVED 'Sal hub portrait doesn't render' via systematic-debugging — NOT a game bug. Root cause: twine-game-explorer Phase 0 auto-advance clicks buttons matching 'Next', and the dev 'Next Day' button matches → advanced days + reset clock to 6 AM (devNextDay, v2.py:13821), putting the game in MORNING, outside Sal's 17:00-22:00 schedule → getNpcLocation(sal)=null → hub correctly suppressed. PROVEN with --skip-phase0 (real 18:00 Mon start): Collector summons auto-fires (Mon 18:00-20:00), Sal first-contact fires, Sal hub portrait renders + opens (Talk to Sal + locked-visible Flirt). Game is CORRECT; morning clock was a test artifact. Testing lesson added to skill.",
+      "book_revision": 2
+    },
+    {
+      "turn": 8,
+      "note": "DAY SYSTEM applied (gap 5 resolved the right way). Added canvas_sleep (3_activities.toml) — the day-cycle ROUTER: solo, loc_apartment, schedule-gated 00:00-14:00, +540min jump to mid-morning + energy +75 (no hygiene cost — no shower activity exists yet). Night-centric loop: work the bar past midnight -> sleep -> wake ~10:00 -> daytime town/depot reachable, so Dee's 10:00-17:00 depot presence is no longer dead (the Dee-bug, doctrine/04 §10). Added 4 offscreen locations (loc_sal/marcus/rosa/dee_place, offscreen=true) + away schedule blocks so each arc NPC's day is complete on the Schedule page (away = honest 'not here', not manufactured presence). The Collector stays event-only (antagonist, no away block). Build GREEN, flag chains valid; offscreen locs resolve names in setup.locations with 0 nav cards (verified in built HTML). Engine offscreen flag + Day System doctrine + skill shipped this session (DS1-DS3).",
+      "book_revision": 2
+    },
+    {
+      "turn": 9,
+      "note": "Breadth-first on-ramp batch (LO: breadth-first, 'all one by one') — closed the dead-presence gap for the 3 mute scheduled NPCs. beat_0005 Dee (npc_intro): first-contact canvas_dee_ropes_first + depot hub canvas_dee_hub (talk + locked-visible leverage rung corr>=25) + LIGHT cellar hub canvas_dee_cellar_hub (2nd reachable row, D72-R6) + L2 canvas_dee_ambient; reachable ONLY via the Day System sleep router (Dee-bug fix proven structurally). beat_0006 Marcus (npc_intro): first-contact + bar hub canvas_marcus_hub (serve/talk + locked-visible private-drink rung corr>=20) + L2 canvas_marcus_ambient. beat_0004 Rosa (npc_intro, FULL tiny arc in one beat — service, no separate escalation beat in plan): first-contact + kitchen hub canvas_rosa_hub (talk-only, EMPTY L2/L3 honest) + Tier-3 trust capstone canvas_rosa_trust_talk (relation>=25 -> rosa_trusts, names the men circling = cross-arc conscience). KEY PATTERN: all three first-contacts use the requires_npc+npc+schedule+is_repeatable=false+priority=10 shape (the PROVEN canvas_shark_summons auto-fire), NOT the open bar-entry auto-fire (canvas_sal_ropes_first), because depot/kitchen/Marcus's-20:00-window are traveled-to / time-sliced presences — the requires_npc gate keeps the meeting honest (no 'NPC slides over' when they're offscreen). 10 canvases + 7 quest cards added to 5_scenes.toml. New flags dee/marcus/rosa_opened_up + rosa_trusts registered. Each beat merge+package GREEN, flag chains valid. Live-play NOT yet run (next session). Remaining planned: 0003 payment day, 0007 dress-for-tips, 0008 Marcus heats up, 0010 Sal deepens, 0011 Dee's terms, 0012 collision, 0013 reckoning, 0014 endgame.",
+      "book_revision": 2
+    },
+    {
+      "turn": 10,
+      "note": "beat_0003 First payment day (economic). FINDING: the weekly-payment-in-fiction headline was already delivered at SETUP via [settings.rent.text] (0_systems_spec.toml) — full scripted collection (scene/greeting/paid_*/warning_*/eviction_soft_*), the engine narrates the $200 modal every Monday. So this beat's real work = the Collector's collection-night PRESENCE the bare modal can't give (his brief L2:3). Authored 2 Lane 2 ambients: canvas_collector_pressure (he prices the room) + canvas_collector_word (a deniable threat re Boyd's patience). Both loc_bar Mon 18-20, requires_npc=npc_collector (NEVER off-night per his anti-patterns), random 0.3, gated debt_explained (canvas-set — NOT bar_seized engine-flag trap). COLLISION-SAFE: priority-10 once-only canvas_shark_summons pre-empts a random ambient on the first eligible Monday; later Mondays free for these. No quest card (repeatable ambients, Doc 49; spine debt card already tracks pay-day). Merge+package GREEN, flag chains valid. OPEN DESIGN FINDING surfaced to LO (not resolved): canvas_shark_summons (beat_0009) fires on the FIRST Monday (gated debt_explained, set night 1) rather than after falling behind — compresses the Boyd escalation. Proper fix needs gating on a 'behind' signal, but bar_seized as an is_true TRIGGER gate fails flag-chain validation (engine-flag trap); options = engine allowlist for rent_eviction_flag, or a phone-thread delivery (LC has no phone), or a redesign. Left beat_0009 untouched (validated) pending LO's call.",
+      "book_revision": 2
+    },
+    {
+      "turn": 11,
+      "note": "ENGINE FIX + beat_0009 re-gate (LO: 'address the Boyd-summons timing'). ROOT CAUSE (systematic-debugging): canvas_shark_summons was gated on debt_explained (set night 1) → Boyd summoned week 1, NOT after falling behind, because gating on bar_seized (the real 'fell behind' signal) failed flag-chain validation with 'bar_seized NEVER SET' — _build_flag_unlock_map (v1.py/v2.py) only registered canvas + phone flags, never ENGINE-set flags. Deeper cause: in the validation path the generator is constructed with no project (TweeComprehensiveGeneratorV2()) and .project is assigned AFTER, so the __init__-populated rent attrs were stale defaults (rent_enabled=False); first fix attempt read self.rent_enabled and silently no-op'd. FIX: _build_flag_unlock_map now reads project.metadata directly and registers (a) rent_settings.eviction_flag when rent enabled + (b) [engine.daily_tick] flagEffects with op=='set', each with an engine schedule-hint so they clear both NEVER-SET and MISSING-HINT checks. Mirrored v2+v1. Reproduced the failure first (re-gated → '✗ bar_seized NEVER SET'), then fixed → GREEN. 4 new regression tests (apps/projects/tests.py::EngineSetFlagUnlockMapTests, incl. v1 parity + daily_tick set-vs-unset) all pass; full suite 439 pass + 5 PRE-EXISTING fails (twee_navigation/BasicTweeGeneratorV1/generate-API — confirmed via git-stash, untouched). beat_0009 re-gated: canvas_shark_summons now bar_seized is_true (+ summoned_by_shark is_false) + prose rewritten for the post-eviction context (no longer 'takes the cash'). DESIGN NOTE: this matches the Collector R7 brief §3 (A2 bar_seized -> A3 summoned) that was ALWAYS written — implementation now matches design; a player who always pays never sets bar_seized, never meets Boyd (the clean-pay branch). Skill beat-authoring.md self-audit 'engine-set flag gating' rule updated (rent eviction_flag + daily_tick set-flags now gate-able). PENDING: fold the same correction into prompts_v2 corpus (schema/02 + COMPREHENSIVE regen) once the corpus WIP settles. Nothing committed (engine changes are committable but LO commits on request; games gitignored).",
+      "book_revision": 2
+    },
+    {
+      "turn": 12,
+      "note": "Lane/schedule coverage AUDIT recorded → games/last_call/lane_schedule_audit.md (grounded in prompts_v2/reference/02_rts_scene_catalog.md, not invented). Per-NPC lane table + 4 schedule findings + the RTS Lane-3 gap. KEY FINDINGS: (F1) Dee cellar days are weekdays=[2,5]=Wed+Sat but design intends Tue/Fri=[1,4] — metadata row AND dee_cellar_hub both [2,5] (agree with each other, disagree with intent); fix both to [1,4]. (F2) Dee offscreen away block is Mon-Fri only → blank weekends on Schedule page; extend loc_dee_place to Sat/Sun. (F3) Sal has 2 reachable bar rows (17-22 service + 22-02 after-close) covered by ONE hub (17-02) — presence OK but the two exposure tiers (public vs private) are conflated; SPLIT into service + after-close hubs in beat_0010 (now annotated). (F4) Collector has no Lane 1 hub — rent modal + 2 ambients stand in (antagonist exception, documented, OK). BIG GAP vs RTS: only 1 solo activity (work_shift) + 1 generic walk-in, vs RTS family NPC at 47% Lane 3 across 4 solo activities; root cause = LC cast is all peer/dating+service+antagonist (the L3=0 shapes), no family/ambient. Even RTS's peer Marcus has activity events (StudyWithMarcus/ClassSex/BathroomEncounter). Lane 2 is FINE (matches per-shape budget, RTS-proportional). PRIORITIZED BACKLOG (audit §4): P1 fix Dee schedule (tiny), P2 beat_0010 Sal split, P3 solo-activities+Lane 3 expansion (large, biggest RTS-texture lever — do before P4 so escalations hook into it), P4 escalations 0008/0011, P5 Collector hub + reckoning. ENI recommends P1 now then P3 before P4. weekday index 0=Monday confirmed (v2.py:2784). Nothing committed; games gitignored.",
+      "book_revision": 2
+    },
+    {
+      "turn": 13,
+      "note": "P1 schedule fixes (audit F1+F2) DONE. F1: Dee cellar drop weekdays [2,5]=Wed+Sat -> [1,4]=Tue/Fri in BOTH 1_metadata cellar row AND canvas_dee_cellar_hub (now consistent + matches design_book intent + depot-open days). F2: added a weekend away row for Dee — loc_dee_place weekdays=[5,6] (Sat/Sun) 00:00-23:59 alongside the existing weekday-overnight [0,1,2,3,4] 17:00-10:00, so the Schedule page is never blank for him. Build GREEN, flag chains valid. Audit F1/F2 marked resolved in games/last_call/lane_schedule_audit.md. P3 (solo activities + Lane 3) scope chosen by LO = 'Utility + antagonist' — plan written to .claude/plans/ (not yet executed).",
+      "book_revision": 2
+    },
+    {
+      "turn": 14,
+      "note": "P3 EXECUTED (LO scope 'Utility + antagonist') → beat_0016 validated. 3_activities.toml: activity_shower (loc_apartment, hygiene +40/energy +5 — FIXES the hygiene-only-drains hole; daily tick was -10/day with no restore), activity_clean_up (loc_bar, energy -5, after-close texture beside the future beat_0010 Sal hub), activity_restock_cellar (loc_cellar, energy -6, daytime cellar use). All Nina-solo, NO per-canvas schedule (always-available; the suppress-button gotcha), no NPC subs. 5_scenes.toml: canvas_collector_floorwalk (pre-seizure menace, bar_seized is_false) + canvas_collector_floorwalk_seized (post-seizure coercion, bar_seized is_true, +5 collector awareness) — antagonist Lane 3 cross-appearance, both substitution_only+max_triggers_per_day=1+is_repeatable+location+requires_npc=npc_collector (only eligible Mon 18-20). Wired onto canvas_work_shift as 2 new substitution rules + exclusive_group='shift_event' on all 3 (incl. existing work_walkin) → Pattern B mutex, chance 0.25 each (sum 0.75). The bar_seized is_true gate is now VALID thanks to the turn-11 flag-chain fix (would've failed NEVER-SET before). Peers (Sal/Marcus/Dee) deliberately get NO Lane 3 (doctrine, confirmed by LS Cole). Build GREEN, flag chains valid, exclusive_group cross-rule validation passed. No quest card (activities/subs, Doc 49). Live-play NOT yet run. Audit §3/§4 updated.",
+      "book_revision": 2
+    },
+    {
+      "turn": 15,
+      "note": "beat_0010 EXECUTED (LO scope: hub split + first kiss). audit F3 RESOLVED. (1) Hub split: canvas_sal_hub narrowed 17:00-02:00 -> 17:00-22:00 (service/public tier); NEW canvas_sal_afterhours_hub (loc_bar 22:00-02:00, private tier) — 'stay while he counts the till' daily-gated relation+3 (shares talked_to_sal_today) + locked-visible kiss telegraph (relation 45) + head-up leave. Both reachable bar windows now have hubs (presence floor intact, exposure tiers separated). (2) NEW canvas_sal_after_hours = capstone #2, auto-fire p9 at loc_bar 22-02 gated sal_opened_up + sal_after_hours_done is_false + npc_sal.relation gte 45; Tier-3 EARNED prose (first kiss after lockup, terse-tender — Sal stays non-crude pre-Tier-4 per brief); 2-choice Type A, both set sal_after_hours_done + sal_stage=3 + relation. sal_stage owned by capstone only (flirt rung doesn't write the stage trait — avoids regression). (3) Quest chain: Sal M1 repurposed mechanic(relation20) -> capstone-mode after-close milestone (ready_canvas=canvas_sal_after_hours, relation 45) + NEW M2 holding card (when sal_after_hours_done). One Sal card at a time. New flag sal_after_hours_done registered (canvas-set). Added beat_0017 (upstairs/sal_first_done) + beat_0018 (backbone/sal_cracked) as planned (deferred capstones #3/#4). Build GREEN, flag chains valid. Live-play not run (relation 45 ~15 in-game days; dev controls can fast-forward).",
+      "book_revision": 2
+    },
+    {
+      "turn": 16,
+      "note": "beat_0011 EXECUTED (Dee's terms; scope = capstones #1+#2, defer #3). canvas_dee_terms (Lane 4 Type A, depot Mon-Fri 10-17, auto-fire p9, gate dee_opened_up + relation 20 + dee_terms is_false; Dee floats the tab, names 'flexible' terms; sets dee_terms + dee_stage=1; Tier-3 affable-coercion). canvas_dee_dock (Lane 4 Type B/Pattern F RETRY, cellar Tue/Fri 14-15, auto-fire p9, is_repeatable=true + self-gate dee_deal_done is_false, full gate dee_terms + corruption 25; the first dock favor; ACCEPT -> dee_deal_done + dee_stage=2 + corruption+3; REFUSE -> no flag, re-fires next delivery; Tier-3 explicit-not-crude per T2<T4). Added locked-visible telegraph rung to canvas_dee_cellar_hub (corruption 25). Quest chain: Dee M1 repurposed mechanic(relation20) -> flexible-terms capstone milestone (ready_canvas=canvas_dee_terms); NEW M2 (dock, ready_canvas=canvas_dee_dock, corruption 25, tip names cellar Tue/Fri) + M3 (post-dock holding). One Dee card at a time. New flags dee_terms + dee_deal_done registered (canvas-set). Added beat_0019 (standing terms -> dee_first_done, capstone #3) planned. Build GREEN, flag chains valid. Self-audit all pass (reachability on Dee's real windows, peer shape no L3, Tier-3 only on capstones, leverage tied to supply line). Live-play not run.",
+      "book_revision": 2
+    },
+    {
+      "turn": 17,
+      "note": "beat_0008 EXECUTED (Marcus heats up; scope = capstones #1+#2, defer #3). Marcus was the last on-ramp-only NPC; now at parity with Sal/Dee. canvas_marcus_singled_out (Lane 4 Type A, bar 20-23, auto-fire p9, gate marcus_opened_up + relation 15 + marcus_noticed is_false; the retainer tip; sets marcus_noticed + marcus_stage=1 + money+40; Tier-3). canvas_marcus_arrangement (Lane 4 Type B/Pattern F RETRY, bar 20-23, is_repeatable=true + self-gate marcus_date_done is_false, full gate marcus_noticed + corruption 35; the money-for-Monday offer; ACCEPT -> marcus_date_done + marcus_stage=3 + money+200 [covers a Monday — the debt tie-in his brief requires] + corruption; REFUSE -> no flag, re-offers patiently no penalty [he stays a choice]; Tier-3 not-crude per T3<T4). Wired existing back-booth hub rung to set marcus_drinks_done (T2 flag; NOT the stage trait — capstones own it). Quest chain: Marcus M1 repurposed mechanic(relation20) -> singled-out capstone milestone; NEW M2 (arrangement, ready_canvas, corruption 35) + M3 (post-arrangement holding). One Marcus card at a time. New flags marcus_noticed + marcus_drinks_done + marcus_date_done registered (canvas-set). Added beat_0020 (Marcus kept -> marcus_first_done, capstone #3) planned. Build GREEN, flag chains valid. Self-audit all pass. Live-play not run. STATUS: 12 validated beats; all 4 arc NPCs now have escalation (Sal/Dee/Marcus capstone tails 0017/0018/0019/0020 remain; Rosa complete).",
+      "book_revision": 2
+    },
+    {
+      "turn": 18,
+      "note": "CAPSTONE TAILS batch EXECUTED (beats 0017/0018/0019/0020) — Sal, Dee, Marcus arcs now COMPLETE (Rosa was already). All Tier-3 explicit, bareback (Phase-2 pregnancy-retrofit compatible), in-voice. canvas_sal_upstairs (Sal #3, Type B retry, loc_bar 22-02, relation 60 + sal_after_hours_done -> sal_first_done + sal_stage=4; explicit-terse). canvas_sal_backbone (Sal #4 terminal, loc_bar 22-02, relation 75 + sal_first_done -> sal_cracked, stage stays 4; he gives up his place). canvas_dee_standing (Dee #3 terminal, loc_cellar Tue/Fri 14-15, corruption 45 + dee_deal_done -> dee_first_done FLAG ONLY [no dee_stage advance — arc_stages 0-2]). canvas_marcus_kept (Marcus #3 terminal, loc_bar 20-23, corruption 50 + marcus_date_done -> marcus_first_done + marcus_stage=4; kept/possessive). Each NPC's quest chain extended to a TERMINAL card (Sal M2->M3->M4, Dee M3->M4, Marcus M3->M4); one card per NPC at a time. 4 new flags registered (all canvas-set). Build GREEN, flag chains valid, self-audit all pass. STATUS: 16 validated beats; ALL arc NPCs complete. Remaining: 0007 dress-for-tips (systems), 0012 collision, 0013 reckoning, 0014 endgame (the climax chain). Live-play not run on this batch.",
+      "book_revision": 2
+    },
+    {
+      "turn": 19,
+      "note": "CLIMAX CHAIN EXECUTED (beats 0012/0013/0014) — the game has an ENDING. LO chose debt-fork+who-she-became endings + Collector-vs-protector collision. beat_0012 canvas_collision (5_scenes, loc_bar Mon 18-20 requires_npc collector, OR-gate logic=OR [shark_met is_true, money gte 1000] + is_repeatable=false; the universal hinge reachable on BOTH paths; branches Sal/Marcus/alone; sets collision_done + summoned_by_shark so loc_shark opens for clean players). beat_0013 canvas_reckoning (NEW phase file 4_story_arc.toml, loc_shark, gate shark_met + collision_done; Pattern B 3 outcomes: pay-in-full money>=1000 -> ending_clean + money-1000 / Marcus covers marcus_first_done -> ending_kept / fallback -> ending_owned; sets reckoning_done + one ending flag). beat_0014 (2_one_shots) 4 terminal endings auto-fire at loc_bar gated on ending flag + endgame_seen is_false (one fires): clean+Sal (p12) / clean-alone (p11) / kept / owned; set endgame_seen. ENTRY-FLOW reconciliation: clean players reach the climax via money>=1000 (collision opens loc_shark); leverage players via bar_seized->summons->shark_met; no double-fire with beat_0009 summons. Story-Goal quest spine: debt card retires at collision_done -> reckoning card (ready_canvas, goal money 1000) -> terminal card. 6 new flags registered (all canvas-set). BUILD FIX: TOML trailing comma in an inline table ({speaker='Boyd',}) failed the merge parse — removed (TOML forbids trailing commas in inline tables; gotcha). merge now 6 phases incl. 4_story_arc.toml; package GREEN, flag chains valid incl. OR-gate. STATUS: 19 validated beats; the game is END-TO-END COMPLETE (intro -> arcs -> debt spine -> 4 endings). Only beat_0007 (dress-for-tips, optional systems) remains planned. Live-play of the climax NOT yet run.",
+      "book_revision": 2
+    },
+    {
+      "turn": 20,
+      "note": "beat_0021 Lane 2 tiering pass EXECUTED — closed the one Lane-2 gap the RTS comparison (lane2_reference.md) surfaced (LC flat vs RTS tiered). Ported RTS 'same doorway deepens with stat' via MUTUAL-EXCLUSION gates (verified lt/lte supported v2.py:3334; cleaner than priority — exactly one ambient eligible per tier). Peers: added corruption lt N to each base + a HOT variant gte N — Sal canvas_bar_ambient_hot (25, brush-past behind the bar), Marcus canvas_marcus_ambient_hot (20, back-booth beckon), Dee canvas_dee_ambient_hot (25, crook-a-finger to the cellar). Thresholds match each NPC's existing escalation gates. Collector: gated pressure+word on bar_seized is_false (pre-seizure menace) + NEW canvas_collector_coerce on bar_seized is_true (post-seizure coercion; distinct surface from the beat_0016 during-shift floor-walk). Voice RTS-flat charged ~30w (NOT Tier-3 — repeatable Lane 2); premise-appropriate (workplace charged contact, no grope/peep — cohabitation-only in RTS). 4 new variant canvases + 5 base-gate edits. No new flags. Build GREEN, flag chains valid. Updated lane2_reference.md §1 (ambients now tiered). STATUS: 20 validated beats; only beat_0007 (dress-for-tips) remains planned.",
+      "book_revision": 2
+    },
+    {
+      "turn": 21,
+      "note": "beat_0007 Dress-for-tips EXECUTED — the LAST planned beat. Last Call is now FULLY AUTHORED (21/21 beats, next_up empty). Clothing was enabled-but-empty (silent no-op); authored 8 [[clothing]] items in 0_systems_spec.toml (2 initial top+bottom for body_coverage + 6 Reece's shop items rising beauty/corruption; outfit_mini corr30/wear-gated player corr 25, outfit_barely corr40/wear-gated 35). Engine auto-injects shop+wardrobe pages from the catalog (no canvas authoring). Dress-for-tips loop: added a worn_corruption gte 15 choice to canvas_work_shift -> money+90/exhibitionism+3/corruption+1 (serve-in-less, mirrors LS tip-jar pattern). Verified clothing round-trips into the built HTML (8 items in shop, worn_corruption gate present). Build GREEN, flag chains valid. No new flags. NEXT: full build done (this package); live-play of the complete game pending in this turn.",
+      "book_revision": 2
+    },
+    {
+      "turn": 22,
+      "note": "FIX (live-play finding): loc_shark (Boyd's Place) showed a NEW badge while still LOCKED — clicking bounced with the blocked_message. ROOT CAUSE (source-confirmed): engine NEW-badge locationHasNewCanvases (v2.py:4007) only checks for a pending non-repeatable auto-fire canvas with satisfied CANVAS conditions; it does NOT check the location's entry_conditions lock. canvas_shark_place was gated only on shark_met is_false (true from game start, no schedule) -> read as 'ready' -> NEW fired on the locked door (premature spoiler + dead click). AUTHORING FIX (no engine change): added summoned_by_shark is_true to canvas_shark_place's trigger conditions so the canvas's readiness matches the door's unlock flag. Before the summons -> conditions unmet -> no NEW; after -> room open AND NEW honest. canvas_reckoning already self-suppressed (needs shark_met). Flag chain still valid (summoned_by_shark set by canvas_shark_summons + canvas_collision). Build GREEN, rebuilt. No new beat/flags. ENGINE-GAP FOLLOW-UP (deferred, not done): locationHasNewCanvases should also return false when a location's entry_conditions are unsatisfied — the general fix for all games + honest-nav doctrine (Doc 55). Candidate for a future engine pass + corpus note.",
+      "book_revision": 2
+    },
+    {
+      "turn": 23,
+      "note": "beat_0022 Sal sex-loop menu BUILT (template for the per-NPC repeatable-explicit layer; LO: per-NPC / full 6-pose TLS clone incl. anal / Sal first / build+validate+pause). Closes the gap that hubs had no repeatable explicit surface (explicit was all once-only capstones). Cloned the_long_summer_test loop_franks_bedroom_sex architecture: 7 numeric loop-state traits (sex_stage/loop_npc_pleasure/loop_player_pleasure/sex_finisher_type/anal_active/sex_reactions/sex_entry_origin) in player core_traits, hidden; TRIGGERLESS sal_sex_loop (intro hub-routes to base_foreplay central hub -> 6 pose menus, each pose = act result loop-back + pose switches + climax-elect gated loop_npc_pleasure gte 50 -> sal_sex_finisher.climax; anal toggle on doggy gated corr 35) + TRIGGERLESS sal_sex_finisher (4 group-block variants by sex_finisher_type + 2 closure exits that reset all loop traits). Wired canvas_sal_afterhours_hub 'Take him to bed' rung gated sal_first_done -> nodeId sal_sex_loop.intro (resets state). Mechanisms used (all TLS-proven): triggerless canvases, targetType=node + cross-canvas nodeId, value={type=random,min,max} effects, group conditional blocks. Build GREEN, flag chains valid (loop uses traits not flags -> nothing for flag-chain to choke on). Benign warning (random-dict in build-time extractor; matches TLS). Structural check: both canvases + all 6 poses + intro + climax present, hub routes in, 8 climax-elects route to finisher. NOT live-played yet (new subsystem — recommend it). PAUSED per LO before replicating to Marcus (beat_0023) + Dee (beat_0024), now planned + in next_up.",
+      "book_revision": 2
+    },
+    {
+      "turn": 24,
+      "note": "beat_0025 Sal re-spine BUILT (LO: pure escalation / drop commitment framing). Two implementation refinements vs the written plan, both preserving its intent: (1) NO new sal_wanting_today flag — used the existing talked_to_sal_today as the daily cap (this engine has no per-effect conditionals, so capping wanting across multiple uncapped vectors would need mutex-choice duplication; tying the single +1/day raise to the already daily-gated Talk/Stay beats is cleaner). (2) Lane 2 ambients re-partitioned on EXHIBITIONISM (lt/gte 10) rather than npc_sal.arousal — the bar-floor public axis is the premise-true Lane 2 driver and gives the dead exhibitionism meter real teeth; his wanting drives the PRIVATE ladder (kiss/first-night) + hub prose instead. No separate canvas_sal_watches_floor needed. Removed passive npc_sal arousal from daily_tick (flagged Doc 40 deviation: RTS family +1/day = ambient fastness, opposite of a slow burn). Backbone capstone + M3 card deleted; sal_cracked re-homed to canvas_sal_upstairs (readers: Clean+Sal ending, collision Sal branch, M4 card — all verified intact). Build GREEN, flag chains valid, TOML parses; static audit clean (zero npc_sal relation refs, zero canvas_sal_backbone refs). Pre-existing unrelated warnings: Dee cellar_hub/dock + Marcus hub/arrangement repeatable-overlap (out of scope), sex-loop random-value dict hint (benign). Marcus/Dee/Rosa re-spines deferred (Marcus->relation-milestones+money, Dee->money/leverage, Rosa fine)."
+    },
+    {
+      "turn": 25,
+      "note": "BUGFIX (LO live-caught on Sal after-close hub): choice-level `conditions` were written as `{ items = [...] }` WITHOUT `version = \"1.0\"`. Engine `triggerConditionsSatisfied` (v2.py:3312) FAILS OPEN — `if (!conditions.version || conditions.version !== '1.0') return true;` — so every such choice gate silently always-passed. Symptom: 'Take him to bed' (gated sal_first_done is_true) showed at game start; also daily caps (talked_to_sal_today), corruption rungs, AND the reckoning ending fork (pay-in-full money>=1000 / Marcus-covers) were all ungated. LO was RIGHT it wasn't a stale save — my earlier stale-save theory was WRONG; this was a real authoring bug. Canvas TRIGGER conditions already had version (so the re-spine CAPSTONE gates worked); only CHOICE conditions lacked it. Fixed all 17 (15 in 5_scenes.toml + 2 in 4_story_arc.toml) via version add. Rebuilt GREEN, flag chains valid. LIVE-VERIFIED via twine-game-explorer (SugarCube.State/setup handles + passage-scoped DOM clicks): clean session (arousal 0, sal_first_done false, 23:00) -> Guarded prose + 'Take him to bed' GONE + 'Stay' correctly hidden (daily cap now enforced) + 'Let it become something' locked; positive case (arousal 2 + corruption 25) -> KISS CAPSTONE fires. Re-spine pacing confirmed working. FOLLOW-UP: this is a generalizable engine-contract trap worth adding to prompts_v2 toml-gotchas + the author-game references (choice/substitution conditions need version='1.0' or they fail-open)."
+    },
+    {
+      "turn": 26,
+      "note": "TLS ladder alignment (LO): converted the two hidden HUB-LEVEL escalation rungs to locked-visible (show_when_locked=true + locked_text + threshold), matching TLS's locked-visible-everywhere style (D72-R8 richer variant): (1) 'Take him to bed' (sal_sex_loop entry, gated sal_first_done) -> greyed 'Not yet — not until he's taken me upstairs the first time'; (2) 'Work the floor in what you bought at Reece's' (worn_corruption gte 15) -> greyed 'Not in this — I'd need something off Reece's rack'. The other 24 hidden choices correctly STAY hidden (daily caps, collision narrative branches, and the 16 intra-sex-loop pose/finisher menus reached after entry — never telegraphed on a hub). Marcus/Dee telegraph rungs were already greyed; their sex loops are deferred. show_when_locked rungs in 5_scenes now 5->7. Build GREEN, flag chains valid; LIVE-VERIFIED the after-close hub renders both rungs greyed with their locked_text on a clean session. Diff vs TLS that remains by design: LC escalation is capstone-driven (auto-fire kiss/first-night) not a full menu Tease/Flash/Suck/Sex ladder, so LC has fewer greyed menu rungs than TLS's 24 — but every hub-level escalation ENTRY is now visible-greyed."
+    },
+    {
+      "turn": 27,
+      "note": "RTS-flat choice-label pass (LO: full crude + RTS emoji). Rewrote ALL 111 choice labels game-wide (5_scenes 97, 2_one_shots 7, 3_activities 4, 4_story_arc 3) from the literary/subtext style to RTS-flat: verb-first, terse, self-justifying subtext stripped ('Tell yourself it's just business' -> 'Square the crate 😏'). Register split matching RTS source: MENU/hub/capstone/activity/exit buttons get terse text + one trailing emoji (💬😏🔥🥃💰↩️🛏️ etc., RTS link/button convention); SEX-LOOP internal cascade beats are BARE + crude (RTS linkreplace convention has no emoji): 'Get him out of his belt'->'Get his cock out', 'Go down on him'->'Blow him', 'Let him finish in your ass'->'Let him cum in your ass' (finish->cum, crude-in-label per Sal full-explicit ceiling); periods dropped on cascade beats (More./Again. -> More/Again). Accept/refuse + branch distinctions preserved (reckoning: 'Pay in full 💰' / 'Let Marcus cover it 💵' / 'Pay another way 😏'; collision: 'Let Sal handle it 💪' / 'Use Marcus's name 💰' / 'Face him yourself ✊'). Applied via verified replace script (0 misses). Build GREEN, flag chains valid. Doctrine note: this is a deliberate move toward doctrine/05 RTS-flat at the CLICK level (label=action, flavor in the result scene) — supersedes the earlier literary-label voice for Last Call."
+    },
+    {
+      "turn": 28,
+      "note": "Block-type bug fix: 20 spoken lines were authored as type=\"speech\" (engine recognizes only \"dialog\"), so they silently rendered as anonymous <p> with the speaker discarded. Renamed all 20 to type=\"dialog\" + props{speaker=\"npc\", npcId=<slug>} across 2_one_shots(2)+4_story_arc(1)+5_scenes(17), mapping display-name->slug (Sal/Marcus/Dee/Rosa/The Collector); Boyd label-only via npc_boyd title-case fallback (no NPC def). Rebuilt — all 20 now render as speaker-labelled dialog blocks. Engine hardened repo-wide (see the_inheritance entry)."
+    }
+  ]
+}

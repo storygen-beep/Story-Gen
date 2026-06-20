@@ -1,0 +1,19 @@
+{
+  "session_id": 1,
+  "start_ts": "2026-06-07T21:34:41.387Z",
+  "start_epoch_ms": 1780868081387,
+  "end_ts": "2026-06-07T21:43:21.458Z",
+  "duration_s": 520,
+  "clicks": 10,
+  "choices_explored": 9,
+  "arrow_advances": 1,
+  "unique_states_seen": 10,
+  "new_unique_states": 10,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "TOP-LEVEL (Lustbound): MAXIMALIST multi-system sandbox + supernatural frame. Intro = heavy char-creator (name/gender/avatar/genitals/breasts presets) then 'awakening' — a female entity binds you to lust. DRIVE = harvest 'lust essence' (magical meta-currency, earned daily) + build a harem + manage mundane life (coffee-shop job, college, mom's house, apartment). PROGRESSION = MULTI-AXIS, not one corruption meter: (1) lustessence (spend on perks/NPC transformations), (2) per-character relationship 0-100 + unlockable PERKS (harem model; 'not all characters accessible yet'), (3) cash (jobs), (4) player+NPC body TRANSFORMATION state (gender/genitals/breasts — signature mechanic: transform people), (5) reputation economies (OnlyFans ofFollowers + prostitution prosRep/clientsServiced). DAY LOOP = day+time slots; nested nav (apartment rooms → citadel street → Park/Beach/Nightclub/Cinema/Coffee Shop/Psychiatrist); solo activities in bedroom (masturbate/sleep/wardrobe/PC); sleep advances day. WORLD LOGIC = relationship tiers + lust power gate access to characters/content. Also has COMBAT (battleLog/moves), a seduction MINIGAME (littleGame gauges), paperdoll clothing, achievements, jail/consequences, momHouse heat-caught-nude tracker. Sandbox-dominant with a story frame. DISTINCTIVE: a magical resource economy (lust essence) powering an NPC-transformation system, wrapped in a kitchen-sink daily-life sim — the MAXIMALIST extreme (opposite of Better Sit Home's linear VN). Confidence high on systems (read State.variables), med on story/endings (didn't reach)."
+  ]
+}

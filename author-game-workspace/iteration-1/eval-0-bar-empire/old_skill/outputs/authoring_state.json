@@ -1,0 +1,121 @@
+{
+  "game_slug": "eval_bar_empire_baseline",
+  "schema_version": 2,
+  "book_revision": 1,
+  "scope_mode": "slice",
+  "npcs": {
+    "npc_marco": {
+      "arc_shape": "slow-burn seduction/leverage",
+      "lane_budget": { "L1": 2, "L2": 1, "L3": 1, "capstones": 2 },
+      "vocab_ceiling": "explicit"
+    },
+    "npc_jolene": {
+      "arc_shape": "service",
+      "lane_budget": { "L1": 1, "L2": 0, "L3": 0, "capstones": 0 },
+      "vocab_ceiling": "explicit"
+    },
+    "npc_reggie": {
+      "arc_shape": "peer",
+      "lane_budget": { "L1": 1, "L2": 0, "L3": 0, "capstones": 0 },
+      "vocab_ceiling": "explicit"
+    }
+  },
+  "plan": [
+    {
+      "id": "beat_0001",
+      "type": "npc_intro",
+      "title": "Marco puts Dahlia back on the floor + Marco Lane-1 hub",
+      "desc": "Hire capstone (Type A) at the Spur floor + the Marco floor hub it opens. Sets hired_at_spur + marco_noticed.",
+      "status": "validated",
+      "deps": [],
+      "target_phase": "5_scenes.toml",
+      "introduces": { "locations": [], "npcs": ["npc_marco"], "flags": ["hired_at_spur", "marco_noticed", "marco_contact"] },
+      "produced_canvas_ids": ["canvas_marco_hire", "canvas_marco_floor_hub"],
+      "decided_at": 2
+    },
+    {
+      "id": "beat_0002",
+      "type": "npc_intro",
+      "title": "Meet Jolene — floor hub",
+      "desc": "Jolene service on-ramp at the Spur floor; teaches the till. Locked-visible 'bring her in' rung telegraphs the Act-3 stable.",
+      "status": "planned",
+      "deps": ["beat_0001"],
+      "target_phase": "5_scenes.toml",
+      "introduces": { "locations": [], "npcs": ["npc_jolene"], "flags": ["jolene_trusts"] },
+      "produced_canvas_ids": [],
+      "decided_at": null
+    },
+    {
+      "id": "beat_0003",
+      "type": "npc_intro",
+      "title": "Meet Reggie — regular hub",
+      "desc": "Reggie peer on-ramp; the regular who tips and talks.",
+      "status": "planned",
+      "deps": ["beat_0001"],
+      "target_phase": "5_scenes.toml",
+      "introduces": { "locations": [], "npcs": ["npc_reggie"], "flags": [] },
+      "produced_canvas_ids": [],
+      "decided_at": null
+    },
+    {
+      "id": "beat_0004",
+      "type": "economic",
+      "title": "Work-shift host + job-lewd feeder ladder",
+      "desc": "Solo work-shift Lane-3 host (earns money, energy costs gate) + the corr-0/15/30 job-lewd feeder column. Marco corner walk-in dispatcher.",
+      "status": "planned",
+      "deps": ["beat_0001"],
+      "target_phase": "5_scenes.toml",
+      "introduces": { "locations": [], "npcs": [], "flags": ["shift_worked_today"] },
+      "produced_canvas_ids": [],
+      "decided_at": null
+    },
+    {
+      "id": "beat_0005",
+      "type": "arc_escalation",
+      "title": "Marco escalation rungs + ambient + backroom",
+      "desc": "Lane-1 tease/contact rungs (locked-visible), the 'he watches you' Lane-2 ambient, the after-close Type-A capstone that opens loc_spur_backroom.",
+      "status": "planned",
+      "deps": ["beat_0001", "beat_0004"],
+      "target_phase": "5_scenes.toml",
+      "introduces": { "locations": [], "npcs": [], "flags": ["marco_contact", "marco_backroom_done"] },
+      "produced_canvas_ids": [],
+      "decided_at": null
+    },
+    {
+      "id": "beat_0006",
+      "type": "capstone",
+      "title": "Marco signs the bar over (Act-1 leverage terminal)",
+      "desc": "Type-B leverage capstone at the office. Gate corr 45 + marco_arrangement + debt cleared. Sets marco_signed, opens loc_spur_office. Telegraphs Act-3 stable.",
+      "status": "planned",
+      "deps": ["beat_0005"],
+      "target_phase": "5_scenes.toml",
+      "introduces": { "locations": [], "npcs": [], "flags": ["marco_arrangement", "marco_signed"] },
+      "produced_canvas_ids": [],
+      "decided_at": null
+    }
+  ],
+  "structure_registry": {
+    "locations": [
+      { "id": "loc_dahlias_room", "category": "reachable" },
+      { "id": "loc_rooming_house_hall", "category": "reachable" },
+      { "id": "loc_city_street", "category": "reachable" },
+      { "id": "loc_spur_floor", "category": "reachable" },
+      { "id": "loc_spur_backroom", "category": "locked" },
+      { "id": "loc_spur_office", "category": "locked" },
+      { "id": "loc_thrift_store", "category": "reachable" },
+      { "id": "loc_marco_home", "category": "offscreen" }
+    ],
+    "npcs": ["npc_marco", "npc_jolene", "npc_reggie"],
+    "flags": ["first_morning_done"],
+    "schedules": [
+      "npc_marco@loc_spur_floor", "npc_marco@loc_spur_backroom", "npc_marco@loc_marco_home",
+      "npc_jolene@loc_spur_floor", "npc_jolene@loc_marco_home",
+      "npc_reggie@loc_spur_floor", "npc_reggie@loc_marco_home"
+    ]
+  },
+  "next_up": ["beat_0002", "beat_0003", "beat_0004", "beat_0005", "beat_0006"],
+  "decisions_log": [
+    { "turn": 1, "note": "Setup complete. scope_mode=slice (Marco gold + Jolene/Reggie minimum-contract + Sasha telegraph-only). Phase 2+ all deferred (slice, no Q&A). Clothing ON; rent/phone OFF (debt = money+flags). Scaffold = boot canvas + sleep router + spine quest card. Roadmap seeded 6 beats.", "book_revision": 1 },
+    { "turn": 2, "note": "Beat 0001 validated (npc_intro Marco). Authored canvas_marco_hire (Type-A auto-fire hire, sets hired_at_spur+marco_noticed) + canvas_marco_floor_hub (Lane-1 portrait hub, Pour/Lean/Curtain ladder, spine=player corruption) + M1 quest card. Merge OK, schema+flag-chains GREEN, fail-open grep guard 0.", "book_revision": 1 }
+  ]
+}

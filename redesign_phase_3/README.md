@@ -133,6 +133,41 @@ files are NOT being edited yet** (brainstorm/optimize mode).
   artifact stays at Step 6; (6) the per-increment rhythm = ideate → decide → write; (7) **casting = role + hook
   + rough sketch** (cross-NPC = light threads in the sketch, no formal web); (8) fix the stale step numbering in
   `01`. Plus open-verify **E1** (the `04` stat legs charisma/fitness must be confirmed real engine traits).
+- **`21_field_survey_and_skill_review.md`** — **the deep field survey + skill review (2026-06-10).** The
+  passage-source companion to `02` (which was top-level live-play). Engine-fingerprinted the real Twine
+  sandboxes on gamcore + mopoga (most "HTML" listings are Unity/VN/custom-JS fakes), then **mined the full
+  passage catalogs** of six games — Become Someone (3,228 passages — the scale exemplar), The Company (corruption
+  as a branching *tree* + reactive event deck), Gakko (walkthrough-as-sidebar + the dead-stat trap at scale),
+  Back to Freedom (neglect-rewards + global scheduler), Life at University (female-PC slutification ratchet,
+  newly live-played), Generic Porn Game (energy=fitness coupling + schedule-stalking). **Verdict: the shipped
+  skill's core doctrine is the field's actual grammar** (double-lock = universal rung; money gates 0.4–0.7% of
+  content; rich-core/light-periphery; throttle/odometer — all proven, don't relitigate). Isolates **six HIGH
+  gaps** to fold in: G1 guidance names place+time-window verbatim · G2 failure-states-as-content cascades · G3
+  world-initiated pull (neglect counters / sleep-hijack delivery) · G4 on-ramp stagger / season pacing · G5
+  cross-wiring as the depth driver · G6 post-capstone conquest→infrastructure. Plus 6 MEDIUM author-patterns, an
+  engine wishlist (OR-conditions, variant decks, gallery ledger, absolute-day predicate, live-event nav badge),
+  and divergences checked-and-kept (endless frontier > fixed run; hard game-overs only behind a cascade).
+  **Review only — no skill files edited.** Mirror: `game_explorations/sandbox_field_survey_2026-06-10.md`.
+- **`22_the_machine_interconnection.md`** — **the MACHINE (the G5 fix — cross-wiring as a designed top-level
+  layer), 2026-06-10.** The depth layer the pipeline was missing: the field survey (`21`) showed the deepest
+  sandboxes get depth not from clever single arcs but from **cross-wiring** — the game is **one machine**
+  where arcs + economy + the player's rise read/write a shared state and feed each other. Promotes cross-NPC
+  connections from optional "rough-sketch threads" (`06`) to a designed Step-2 layer (settled up front beside
+  the cascade/economy/frontier; arcs then plug in). **Scope: forms 1+2** — F1 arc→arc depth gate (milestone →
+  shared **player flag**; "how far" → **`<npc>_stage` player trait**; never a raw cross-NPC read), F2
+  arc↔economy circulation (2a money from arc A gates reaching B = the economy as connective tissue; 2b a
+  payout **banded** by an NPC's trait via **band-gated sibling choices**). **Form 3 (finished arc → resource)
+  = G6, deferred** (forward-pointer left). **Three disciplines:** D1 never gate an arc's ENTRY (cold-start
+  firewall — also breaks cycles); D2 the F1 wires form a **DAG** (roster `18` checks it); D3 every cross-gate
+  is a **locked-visible telegraph naming the other arc's state** (= `14` L7, the G1 seam). **No new ledger
+  field** — designed in the design book's `## The machine` section, enforced by ordinary beat `deps` +
+  `cross_npc`/`economic` beats; one-NPC-at-a-time authoring preserved (A reads a flag B will later set).
+  Refines `20` decision 7 (the "web" returns reconceived as the depth spine, not a bookkeeping diagram). **G1
+  (full guidance legibility) shipped alongside** — `14` L2 hardened to MANDATORY verbatim place+time-window+
+  requirement + NEW L7 (cross-gate names the other arc). **WIRED INTO THE SKILL 2026-06-10** (not review-only):
+  redesign `22` + amendments to `06`/`07`/`13`/`14`/`18`/`20`; skill `SKILL.md`, `step-2-toplevel.md` (§7),
+  `step-3-casting.md`, `step-4-npc-arcs.md` (R7 §8 = wiring contract), `step-5-roster.md`, `beat-authoring.md`,
+  `systems.md`.
 
 ## The pipeline (target)
 ```
@@ -151,8 +186,8 @@ files are NOT being edited yet** (brainstorm/optimize mode).
 - **Step 0** (good-game qualities): drafted (`05`).
 - **Step 1** (setup): LOCKED (`01`).
 - **Step 2** (top-level): progression engine LOCKED (`04`); desire ladder (`09`), reactive world (`11`),
-  economy (`13`), legibility+pacing (`14`), **frontier/endless model (`17`)** designed; only the explicit
-  story-spine/roadmap framing left (mostly subsumed by the desire ladder `09`).
+  economy (`13`), legibility+pacing (`14`), **frontier/endless model (`17`)**, **the machine (`22`)** designed;
+  only the explicit story-spine/roadmap framing left (mostly subsumed by the desire ladder `09`).
 - **Step 3** (casting): drafted (`06`).
 - **Step 4** (NPC arcs): drafted (`07`).
 - **Step 5** (roster): **re-homed (`18`)** — relocated into the pipeline + rewired to `07`/`09`/`11`/`13`/`17`/`16`.
@@ -164,6 +199,14 @@ files are NOT being edited yet** (brainstorm/optimize mode).
   `19`'s D1–D7 deltas + `20`'s 8 locked decisions) into `author-game/SKILL.md` and its references. Open-verify
   at wiring: **E1** (the `04` stat legs charisma/fitness must be confirmed real engine traits — don't assume).
   (Only a light story-spine framing is still optional, largely covered by the desire ladder `09`.)
+- **The machine (`22`, G5 forms 1+2) + G1 legibility: WIRED 2026-06-10.** Designed (`22`) + amended into
+  `06`/`07`/`13`/`14`/`18`/`20` and mirrored into the skill (`SKILL.md`, `step-2-toplevel.md` §7,
+  `step-3-casting.md`, `step-4-npc-arcs.md` §8, `step-5-roster.md`, `beat-authoring.md`, `systems.md`). Open
+  follow-ups from this gap set: **G6** (form 3 — finished arc → income/capability; reserves `13` E10 + amends
+  `09`/`17`); the other survey gaps **G2/G3/G4** (failure-cascades · world-initiated pull · on-ramp stagger)
+  remain unstarted. Engine-uncertainty deliberately walled off by doctrine: a foreign-canvas cross-NPC trait
+  read (`{subject="npc", npc_id="npc_OTHER"}`) is **forbidden until a shipped example exists** — F1 runs on
+  player-namespaced flags/stage-traits, F2b bands on the host trait or a player-mirror.
 
 ## Hard rules carried in
 - Scope is always **full game** (slice removed). Incremental = build ORDER, not size (`16`).

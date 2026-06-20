@@ -1,0 +1,108 @@
+===== SETUP BUILD — Bar Empire baseline =====
+
+### STEP 1: merge_toml_phases --validate
+warning: missing phase files: ['4_story_arc.toml', '6_dev_shortcuts.toml', '8_phone.toml']
+merged 5 phase(s) → games/eval_bar_empire_baseline/toml_phases/7_final_game.toml
+  size: 26,128 bytes
+  validation: OK (parsed cleanly)
+MERGE_EXIT=
+
+### STEP 2: package_from_toml --dev
+WARNING Location image not found: locations/spur_floor.jpg for The Velvet Spur — Floor
+WARNING Location image not found: locations/spur_backroom.jpg for The Velvet Spur — Back Room
+WARNING Location image not found: locations/spur_office.jpg for The Velvet Spur — Office
+WARNING Location image not found: locations/thrift_store.jpg for Second-Hand Threads
+🔧 Dev Mode: ENABLED (stat adjustment controls)
+📦 Loading TOML: games/eval_bar_empire_baseline/toml_phases/7_final_game.toml
+   ✓ TOML parsed successfully
+   ✓ Validation passed
+   ⚠️  HINT LINTER WARN engine.stage_helpers ('marco_stage_1_plus'): flag 'marco_noticed' is required for stage advancement but no non-dev canvas sets it. Players cannot advance through this stage in normal play. Either author the missing setter scene OR mark the helper as `dev_only = true` to silence this warning (acknowledges the stage is dev-shortcut-only in current scope).
+   ⚠️  HINT LINTER WARN engine.stage_helpers ('marco_stage_2_plus'): flag 'marco_contact' is required for stage advancement but no non-dev canvas sets it. Players cannot advance through this stage in normal play. Either author the missing setter scene OR mark the helper as `dev_only = true` to silence this warning (acknowledges the stage is dev-shortcut-only in current scope).
+   ⚠️  HINT LINTER WARN engine.stage_helpers ('marco_stage_3_plus'): flag 'marco_backroom_done' is required for stage advancement but no non-dev canvas sets it. Players cannot advance through this stage in normal play. Either author the missing setter scene OR mark the helper as `dev_only = true` to silence this warning (acknowledges the stage is dev-shortcut-only in current scope).
+   ⚠️  HINT LINTER WARN engine.stage_helpers ('marco_stage_5'): flag 'marco_signed' is required for stage advancement but no non-dev canvas sets it. Players cannot advance through this stage in normal play. Either author the missing setter scene OR mark the helper as `dev_only = true` to silence this warning (acknowledges the stage is dev-shortcut-only in current scope).
+   ⚠️  HINT LINTER WARN engine.stage_helpers ('hired_at_spur'): flag 'hired_at_spur' is required for stage advancement but no non-dev canvas sets it. Players cannot advance through this stage in normal play. Either author the missing setter scene OR mark the helper as `dev_only = true` to silence this warning (acknowledges the stage is dev-shortcut-only in current scope).
+
+📂 Creating project in database...
+   ✓ Project: Bar Empire
+
+🔗 Validating flag chains...
+   ✓ All flag chains valid
+
+🎮 Generating game package...
+   System: twee_comprehensive
+   Version: v2
+   Dev mode: Enabled (+/- stat controls)
+   Game folder (for approvals): output
+
+🧹 Database cleanup:
+   ✓ Project removed from database
+
+📊 Clip Statistics:
+   Total clips: 0
+   Copied: 0
+   Skipped: 0
+   Failed: 0
+   Bytes copied: 0
+   Bytes saved: 0
+
+📄 Package created:
+   HTML: /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/games/eval_bar_empire_baseline/output/index.html
+   Media: /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/games/eval_bar_empire_baseline/output/media
+
+🎉 Package ready! Open /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/games/eval_bar_empire_baseline/output/index.html in a browser.
+PACKAGE_EXIT=
+
+===== CONTINUE BEAT 0001 — validation =====
+### STEP 1: merge --validate
+warning: missing phase files: ['4_story_arc.toml', '6_dev_shortcuts.toml', '8_phone.toml']
+merged 5 phase(s) → games/eval_bar_empire_baseline/toml_phases/7_final_game.toml
+  size: 33,886 bytes
+  validation: OK (parsed cleanly)
+
+### grep guard: fail-open conditions (must be ZERO)
+games/eval_bar_empire_baseline/toml_phases/0_systems_spec.toml:0
+games/eval_bar_empire_baseline/toml_phases/1_metadata_and_locations.toml:0
+games/eval_bar_empire_baseline/toml_phases/3_activities.toml:0
+games/eval_bar_empire_baseline/toml_phases/2_one_shots.toml:0
+games/eval_bar_empire_baseline/toml_phases/5_scenes.toml:0
+games/eval_bar_empire_baseline/toml_phases/7_final_game.toml:0
+### STEP 2: package_from_toml --dev (beat 0001)
+WARNING Location image not found: locations/spur_floor.jpg for The Velvet Spur — Floor
+WARNING Location image not found: locations/spur_backroom.jpg for The Velvet Spur — Back Room
+WARNING Location image not found: locations/spur_office.jpg for The Velvet Spur — Office
+WARNING Location image not found: locations/thrift_store.jpg for Second-Hand Threads
+🔧 Dev Mode: ENABLED (stat adjustment controls)
+📦 Loading TOML: games/eval_bar_empire_baseline/toml_phases/7_final_game.toml
+   ✓ TOML parsed successfully
+   ✓ Validation passed
+   ⚠️  HINT LINTER WARN engine.stage_helpers ('marco_stage_3_plus'): flag 'marco_backroom_done' is required for stage advancement but no non-dev canvas sets it. Players cannot advance through this stage in normal play. Either author the missing setter scene OR mark the helper as `dev_only = true` to silence this warning (acknowledges the stage is dev-shortcut-only in current scope).
+   ⚠️  HINT LINTER WARN engine.stage_helpers ('marco_stage_5'): flag 'marco_signed' is required for stage advancement but no non-dev canvas sets it. Players cannot advance through this stage in normal play. Either author the missing setter scene OR mark the helper as `dev_only = true` to silence this warning (acknowledges the stage is dev-shortcut-only in current scope).
+
+📂 Creating project in database...
+   ✓ Project: Bar Empire
+
+🔗 Validating flag chains...
+   ✓ All flag chains valid
+
+🎮 Generating game package...
+   System: twee_comprehensive
+   Version: v2
+   Dev mode: Enabled (+/- stat controls)
+   Game folder (for approvals): output
+
+🧹 Database cleanup:
+   ✓ Project removed from database
+
+📊 Clip Statistics:
+   Total clips: 0
+   Copied: 0
+   Skipped: 0
+   Failed: 0
+   Bytes copied: 0
+   Bytes saved: 0
+
+📄 Package created:
+   HTML: /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/games/eval_bar_empire_baseline/output/index.html
+   Media: /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/games/eval_bar_empire_baseline/output/media
+
+🎉 Package ready! Open /Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/games/eval_bar_empire_baseline/output/index.html in a browser.

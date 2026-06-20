@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-06-02T18:27:30.357Z",
+  "captured_at": "2026-06-03T21:05:17.120Z",
   "engine": "sugarcube",
   "version": {
     "name": "SugarCube",
@@ -130,6 +130,11 @@
     "on_save_handlers": 0,
     "on_load_handlers": 0,
     "slots_metadata": [],
-    "autosave_metadata": null
+    "autosave_metadata": {
+      "id": "road-to-success-",
+      "title": null,
+      "date": "2026-06-02T18:27:32.720Z",
+      "description": null
+    }
   }
 }

@@ -1,0 +1,3631 @@
+{
+  "slug": "dol_clothing",
+  "url": "https://mopoga.com/degrees-of-lewdity",
+  "generated_at": "2026-06-18T13:18:12.569Z",
+  "engine": "sugarcube",
+  "pregame_auto_advance": {
+    "trail": [
+      {
+        "step": 0,
+        "passage": "Start",
+        "action": "clicked_forward",
+        "text": "Start Game!",
+        "tier": 1
+      },
+      {
+        "step": 1,
+        "passage": "Start2",
+        "action": "clicked_forward",
+        "text": "Next",
+        "tier": 4
+      },
+      {
+        "step": 2,
+        "passage": "Orphanage Intro",
+        "action": "clicked_forward",
+        "text": "Next",
+        "tier": 4
+      },
+      {
+        "step": 3,
+        "passage": "Bedroom",
+        "action": "terminated",
+        "reason": "no_forward_pattern_match"
+      }
+    ],
+    "terminated_at": {
+      "step": 3,
+      "passage": "Bedroom",
+      "action": "terminated",
+      "reason": "no_forward_pattern_match"
+    }
+  },
+  "regions_catalog": [
+    {
+      "pos_class": "floating",
+      "id": "ui-dialog",
+      "bbox": {
+        "x": 191,
+        "y": 50,
+        "w": 1056,
+        "h": 417
+      },
+      "cls": "closeBlocked open",
+      "collapsed": false,
+      "sections": [
+        {
+          "text": "Welcome to Degrees of Lewdity",
+          "tag": "h1",
+          "cls": ""
+        }
+      ],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Enter",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 589,
+            "y": 358,
+            "w": 260,
+            "h": 36
+          }
+        }
+      ],
+      "passive_text_samples": [
+        "Welcome to Degrees of Lewdity",
+        "This work of fiction is only intended for an adult audience.",
+        "Rape, Physical and Mental Abuse, Sex with Non-Humans, Forced",
+        "I confirm that I am 18 years of age or older"
+      ]
+    },
+    {
+      "pos_class": "left",
+      "id": "ui-bar",
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 281,
+        "h": 900
+      },
+      "cls": "gateBlur",
+      "collapsed": false,
+      "sections": [
+        {
+          "text": "Degrees of Lewdity",
+          "tag": "h1",
+          "cls": ""
+        }
+      ],
+      "menu_list": null,
+      "interactive": [
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "div",
+          "id": "stats",
+          "cls": "",
+          "text": "£5          07:00       Sun",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 0,
+            "y": 192,
+            "w": 280,
+            "h": 25
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "CHARACTERISTICS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 589,
+            "w": 270,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "SOCIAL",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 625,
+            "w": 270,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "TRAITS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 661,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "JOURNAL",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 661,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "STATS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 697,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "FEATS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 697,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "OPTIONS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 754,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "SAVES",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 754,
+            "w": 135,
+            "h": 36
+          }
+        }
+      ],
+      "passive_text_samples": [
+        "Degrees of Lewdity",
+        "You have school tomorrow.",
+        "You",
+        "are wearing  a  white sundress and  a pair of  pale white pl",
+        "Pain:",
+        "You feel okay.",
+        "Arousal:",
+        "You feel cold.",
+        "Fatigue:",
+        "You are refreshed.",
+        "Stress:",
+        "You are serene.",
+        "Trauma:",
+        "You are healthy.",
+        "Control:",
+        "You are confident.",
+        "Allure:",
+        "You attract glances.",
+        "Tip:",
+        "Some venues are safer to dance in than others."
+      ]
+    },
+    {
+      "pos_class": "floating",
+      "id": "gameVersionDisplay",
+      "bbox": {
+        "x": 1365,
+        "y": 33,
+        "w": 40,
+        "h": 17
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [],
+      "menu_list": null,
+      "interactive": [],
+      "passive_text_samples": [
+        "0.5.10.10"
+      ]
+    },
+    {
+      "pos_class": "floating",
+      "id": "gameVersionDisplay2",
+      "bbox": {
+        "x": 321,
+        "y": 653,
+        "w": 32,
+        "h": 15
+      },
+      "cls": "",
+      "collapsed": false,
+      "sections": [],
+      "menu_list": null,
+      "interactive": [],
+      "passive_text_samples": [
+        ".5.10.10"
+      ]
+    }
+  ],
+  "chrome_probes": [
+    {
+      "label": "Enter",
+      "bbox": {
+        "x": 589,
+        "y": 358,
+        "w": 260,
+        "h": 36
+      },
+      "region_id": "ui-dialog",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/dol_clothing/ui_probes/Enter.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 7616,
+      "panel_text": "This work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter",
+      "dialog_text": "This work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter",
+      "post_click_text": "WELCOME TO DEGREES OF LEWDITY\nThis work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter\n\n\n\n£5\n 07:00\n Sun\nYou have school tomorrow.\n\n\nYou are wearing a white sundress and a pair of pale white plain panties.\n\n\nPain: You feel okay.\nArousal: You feel cold.\nFatigue: You are refreshed.\nStress: You are serene.\nTrauma: You are healthy.\nControl: You are confident.\nAllure: You attract glances.\n\nTip: Some venues are safer to dance in than others.\n\n\nCHARACTERISTICS SOCIAL\nTRAITS\nJOURNAL\nSTATS\nFEATS\n\n\nOPTIONS\nSAVES\n\n\nYou are in your bedroom. Bleak walls protect you from the outside.\n\n Your basic desk and chair are wedged next to your wardrobe.\n\nThere is a thermometer outside your window. It reads 21°C. It's hot for this time of year.\n\nYour bed takes up most of the room.\n Strip and get in bed\n Wear Pyjamas and climb in bed\n\nYour clothes are kept in the creaky wardrobe.\n Wardrobe\n Mirror\n\nThe hallway outside connects to the rest of the orphanage.\n Bathroom (0:01)\n Kitchen (0:01)\n\n Main hall (0:01)\n Leave orphanage (0:01)\n\nGameplay Settings\nAttitudes\n\n0.5.10.10\n.5.10.10",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Enter",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 589,
+            "y": 358,
+            "w": 260,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "div",
+          "id": "stats",
+          "cls": "",
+          "text": "£5          07:00       Sun",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 0,
+            "y": 192,
+            "w": 280,
+            "h": 25
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "CHARACTERISTICS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 589,
+            "w": 270,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "SOCIAL",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 625,
+            "w": 270,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "TRAITS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 661,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "JOURNAL",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 661,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "STATS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 697,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "FEATS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 697,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "OPTIONS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 754,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "SAVES",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 754,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Strip and get in bed",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 199,
+            "w": 142,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Wear Pyjamas and climb in bed",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 229,
+            "w": 228,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Wardrobe",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 315,
+            "w": 73,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Mirror",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 346,
+            "w": 45,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Bathroom (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 432,
+            "w": 119,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Kitchen (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 462,
+            "w": 103,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Main hall (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 521,
+            "w": 113,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Leave orphanage (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 551,
+            "w": 174,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Gameplay Settings",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 432,
+            "y": 609,
+            "w": 138,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Attitudes",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 432,
+            "y": 637,
+            "w": 65,
+            "h": 35
+          }
+        }
+      ]
+    },
+    {
+      "label": "£5          07:00       Sun",
+      "bbox": {
+        "x": 0,
+        "y": 192,
+        "w": 280,
+        "h": 25
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/dol_clothing/ui_probes/_5_07_00_Sun.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 7474,
+      "panel_text": "This work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter",
+      "dialog_text": "This work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter",
+      "post_click_text": "WELCOME TO DEGREES OF LEWDITY\nThis work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter\n\n\n\n£5\n 07:00\n Sun\nYou have school tomorrow.\n\n\nYou are wearing a white sundress and a pair of pale white plain panties.\n\n\nPain: You feel okay.\nArousal: You feel cold.\nFatigue: You are refreshed.\nStress: You are serene.\nTrauma: You are healthy.\nControl: You are confident.\nAllure: You attract glances.\n\nTip: Tentacles can ejaculate a lot, but quickly tire when they do.\n\n\nCHARACTERISTICS SOCIAL\nTRAITS\nJOURNAL\nSTATS\nFEATS\n\n\nOPTIONS\nSAVES\n\n\nYou are in your bedroom. Bleak walls protect you from the outside.\n\n Your basic desk and chair are wedged next to your wardrobe.\n\nThere is a thermometer outside your window. It reads 21°C. It's hot for this time of year.\n\nYour bed takes up most of the room.\n Strip and get in bed\n Wear Pyjamas and climb in bed\n\nYour clothes are kept in the creaky wardrobe.\n Wardrobe\n Mirror\n\nThe hallway outside connects to the rest of the orphanage.\n Bathroom (0:01)\n Kitchen (0:01)\n\n Main hall (0:01)\n Leave orphanage (0:01)\n\nGameplay Settings\nAttitudes\n\n0.5.10.10\n.5.10.10",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Enter",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 589,
+            "y": 358,
+            "w": 260,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "div",
+          "id": "stats",
+          "cls": "",
+          "text": "£5          07:00       Sun",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 0,
+            "y": 192,
+            "w": 280,
+            "h": 25
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "CHARACTERISTICS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 589,
+            "w": 270,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "SOCIAL",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 625,
+            "w": 270,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "TRAITS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 661,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "JOURNAL",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 661,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "STATS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 697,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "FEATS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 697,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "OPTIONS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 754,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "SAVES",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 754,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Strip and get in bed",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 199,
+            "w": 142,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Wear Pyjamas and climb in bed",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 229,
+            "w": 228,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Wardrobe",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 315,
+            "w": 73,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Mirror",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 346,
+            "w": 45,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Bathroom (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 432,
+            "w": 119,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Kitchen (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 462,
+            "w": 103,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Main hall (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 521,
+            "w": 113,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Leave orphanage (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 551,
+            "w": 174,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Gameplay Settings",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 432,
+            "y": 609,
+            "w": 138,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Attitudes",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 432,
+            "y": 637,
+            "w": 65,
+            "h": 35
+          }
+        }
+      ]
+    },
+    {
+      "label": "CHARACTERISTICS",
+      "bbox": {
+        "x": 5,
+        "y": 589,
+        "w": 270,
+        "h": 36
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/dol_clothing/ui_probes/CHARACTERISTICS.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 4577,
+      "panel_text": "This work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter",
+      "dialog_text": "This work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter",
+      "post_click_text": "WELCOME TO DEGREES OF LEWDITY\nThis work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter\n\n\n\n£5\n 07:00\n Sun\nYou have school tomorrow.\n\n\nYou are wearing a white sundress and a pair of pale white plain panties.\n\n\nPain: You feel okay.\nArousal: You feel cold.\nFatigue: You are refreshed.\nStress: You are serene.\nTrauma: You are healthy.\nControl: You are confident.\nAllure: You attract glances.\n\nTip: Remember to wrap up warm against the cold.\n\n\nCHARACTERISTICS SOCIAL\nTRAITS\nJOURNAL\nSTATS\nFEATS\n\n\nOPTIONS\nSAVES\n\n\nYou are in your bedroom. Bleak walls protect you from the outside.\n\n Your basic desk and chair are wedged next to your wardrobe.\n\nThere is a thermometer outside your window. It reads 21°C. It's hot for this time of year.\n\nYour bed takes up most of the room.\n Strip and get in bed\n Wear Pyjamas and climb in bed\n\nYour clothes are kept in the creaky wardrobe.\n Wardrobe\n Mirror\n\nThe hallway outside connects to the rest of the orphanage.\n Bathroom (0:01)\n Kitchen (0:01)\n\n Main hall (0:01)\n Leave orphanage (0:01)\n\nGameplay Settings\nAttitudes\n\n0.5.10.10\n.5.10.10",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Enter",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 589,
+            "y": 358,
+            "w": 260,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "div",
+          "id": "stats",
+          "cls": "",
+          "text": "£5          07:00       Sun",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 0,
+            "y": 192,
+            "w": 280,
+            "h": 25
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "CHARACTERISTICS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 589,
+            "w": 270,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "SOCIAL",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 625,
+            "w": 270,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "TRAITS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 661,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "JOURNAL",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 661,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "STATS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 697,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "FEATS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 697,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "OPTIONS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 754,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "SAVES",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 754,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Strip and get in bed",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 199,
+            "w": 142,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Wear Pyjamas and climb in bed",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 229,
+            "w": 228,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Wardrobe",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 315,
+            "w": 73,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Mirror",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 346,
+            "w": 45,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Bathroom (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 432,
+            "w": 119,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Kitchen (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 462,
+            "w": 103,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Main hall (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 521,
+            "w": 113,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Leave orphanage (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 551,
+            "w": 174,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Gameplay Settings",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 432,
+            "y": 609,
+            "w": 138,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Attitudes",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 432,
+            "y": 637,
+            "w": 65,
+            "h": 35
+          }
+        }
+      ]
+    },
+    {
+      "label": "SOCIAL",
+      "bbox": {
+        "x": 5,
+        "y": 625,
+        "w": 270,
+        "h": 36
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/dol_clothing/ui_probes/SOCIAL.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 7420,
+      "panel_text": "This work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter",
+      "dialog_text": "This work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter",
+      "post_click_text": "WELCOME TO DEGREES OF LEWDITY\nThis work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter\n\n\n\n£5\n 07:00\n Sun\nYou have school tomorrow.\n\n\nYou are wearing a white sundress and a pair of pale white plain panties.\n\n\nPain: You feel okay.\nArousal: You feel cold.\nFatigue: You are refreshed.\nStress: You are serene.\nTrauma: You are healthy.\nControl: You are confident.\nAllure: You attract glances.\n\nTip: Turning yourself in to the police will make your punishment less severe.\n\n\nCHARACTERISTICS SOCIAL\nTRAITS\nJOURNAL\nSTATS\nFEATS\n\n\nOPTIONS\nSAVES\n\n\nYou are in your bedroom. Bleak walls protect you from the outside.\n\n Your basic desk and chair are wedged next to your wardrobe.\n\nThere is a thermometer outside your window. It reads 21°C. It's hot for this time of year.\n\nYour bed takes up most of the room.\n Strip and get in bed\n Wear Pyjamas and climb in bed\n\nYour clothes are kept in the creaky wardrobe.\n Wardrobe\n Mirror\n\nThe hallway outside connects to the rest of the orphanage.\n Bathroom (0:01)\n Kitchen (0:01)\n\n Main hall (0:01)\n Leave orphanage (0:01)\n\nGameplay Settings\nAttitudes\n\n0.5.10.10\n.5.10.10",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Enter",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 589,
+            "y": 358,
+            "w": 260,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "div",
+          "id": "stats",
+          "cls": "",
+          "text": "£5          07:00       Sun",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 0,
+            "y": 192,
+            "w": 280,
+            "h": 25
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "CHARACTERISTICS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 610,
+            "w": 270,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "SOCIAL",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 646,
+            "w": 270,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "TRAITS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 682,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "JOURNAL",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 682,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "STATS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 718,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "FEATS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 718,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "OPTIONS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 776,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "SAVES",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 776,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Strip and get in bed",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 199,
+            "w": 142,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Wear Pyjamas and climb in bed",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 229,
+            "w": 228,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Wardrobe",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 315,
+            "w": 73,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Mirror",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 346,
+            "w": 45,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Bathroom (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 432,
+            "w": 119,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Kitchen (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 462,
+            "w": 103,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Main hall (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 521,
+            "w": 113,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Leave orphanage (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 551,
+            "w": 174,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Gameplay Settings",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 432,
+            "y": 609,
+            "w": 138,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Attitudes",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 432,
+            "y": 637,
+            "w": 65,
+            "h": 35
+          }
+        }
+      ]
+    },
+    {
+      "label": "TRAITS",
+      "bbox": {
+        "x": 5,
+        "y": 661,
+        "w": 135,
+        "h": 36
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/dol_clothing/ui_probes/TRAITS.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 4565,
+      "panel_text": "This work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter",
+      "dialog_text": "This work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter",
+      "post_click_text": "WELCOME TO DEGREES OF LEWDITY\nThis work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter\n\n\n\n£5\n 07:00\n Sun\nYou have school tomorrow.\n\n\nYou are wearing a white sundress and a pair of pale white plain panties.\n\n\nPain: You feel okay.\nArousal: You feel cold.\nFatigue: You are refreshed.\nStress: You are serene.\nTrauma: You are healthy.\nControl: You are confident.\nAllure: You attract glances.\n\nTip: Try clicking on the \"money/time/day\" stats in the sidebar.\n\n\nCHARACTERISTICS SOCIAL\nTRAITS\nJOURNAL\nSTATS\nFEATS\n\n\nOPTIONS\nSAVES\n\n\nYou are in your bedroom. Bleak walls protect you from the outside.\n\n Your basic desk and chair are wedged next to your wardrobe.\n\nThere is a thermometer outside your window. It reads 21°C. It's hot for this time of year.\n\nYour bed takes up most of the room.\n Strip and get in bed\n Wear Pyjamas and climb in bed\n\nYour clothes are kept in the creaky wardrobe.\n Wardrobe\n Mirror\n\nThe hallway outside connects to the rest of the orphanage.\n Bathroom (0:01)\n Kitchen (0:01)\n\n Main hall (0:01)\n Leave orphanage (0:01)\n\nGameplay Settings\nAttitudes\n\n0.5.10.10\n.5.10.10",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Enter",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 589,
+            "y": 358,
+            "w": 260,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "div",
+          "id": "stats",
+          "cls": "",
+          "text": "£5          07:00       Sun",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 0,
+            "y": 192,
+            "w": 280,
+            "h": 25
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "CHARACTERISTICS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 589,
+            "w": 270,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "SOCIAL",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 625,
+            "w": 270,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "TRAITS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 661,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "JOURNAL",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 661,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "STATS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 697,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "FEATS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 697,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "OPTIONS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 754,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "SAVES",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 754,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Strip and get in bed",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 199,
+            "w": 142,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Wear Pyjamas and climb in bed",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 229,
+            "w": 228,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Wardrobe",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 315,
+            "w": 73,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Mirror",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 346,
+            "w": 45,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Bathroom (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 432,
+            "w": 119,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Kitchen (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 462,
+            "w": 103,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Main hall (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 521,
+            "w": 113,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Leave orphanage (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 551,
+            "w": 174,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Gameplay Settings",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 432,
+            "y": 609,
+            "w": 138,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Attitudes",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 432,
+            "y": 637,
+            "w": 65,
+            "h": 35
+          }
+        }
+      ]
+    },
+    {
+      "label": "JOURNAL",
+      "bbox": {
+        "x": 140,
+        "y": 661,
+        "w": 135,
+        "h": 36
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/dol_clothing/ui_probes/JOURNAL.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 4547,
+      "panel_text": "This work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter",
+      "dialog_text": "This work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter",
+      "post_click_text": "WELCOME TO DEGREES OF LEWDITY\nThis work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter\n\n\n\n£5\n 07:00\n Sun\nYou have school tomorrow.\n\n\nYou are wearing a white sundress and a pair of pale white plain panties.\n\n\nPain: You feel okay.\nArousal: You feel cold.\nFatigue: You are refreshed.\nStress: You are serene.\nTrauma: You are healthy.\nControl: You are confident.\nAllure: You attract glances.\n\nTip: Sleeping while naked or only wearing underwear, pyjamas or eerie accessories helps you sleep better.\n\n\nCHARACTERISTICS SOCIAL\nTRAITS\nJOURNAL\nSTATS\nFEATS\n\n\nOPTIONS\nSAVES\n\n\nYou are in your bedroom. Bleak walls protect you from the outside.\n\n Your basic desk and chair are wedged next to your wardrobe.\n\nThere is a thermometer outside your window. It reads 21°C. It's hot for this time of year.\n\nYour bed takes up most of the room.\n Strip and get in bed\n Wear Pyjamas and climb in bed\n\nYour clothes are kept in the creaky wardrobe.\n Wardrobe\n Mirror\n\nThe hallway outside connects to the rest of the orphanage.\n Bathroom (0:01)\n Kitchen (0:01)\n\n Main hall (0:01)\n Leave orphanage (0:01)\n\nGameplay Settings\nAttitudes\n\n0.5.10.10\n.5.10.10",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Enter",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 589,
+            "y": 358,
+            "w": 260,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "div",
+          "id": "stats",
+          "cls": "",
+          "text": "£5          07:00       Sun",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 0,
+            "y": 192,
+            "w": 280,
+            "h": 25
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "CHARACTERISTICS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 610,
+            "w": 270,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "SOCIAL",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 646,
+            "w": 270,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "TRAITS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 682,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "JOURNAL",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 682,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "STATS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 718,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "FEATS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 718,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "OPTIONS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 776,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "SAVES",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 776,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Strip and get in bed",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 199,
+            "w": 142,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Wear Pyjamas and climb in bed",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 229,
+            "w": 228,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Wardrobe",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 315,
+            "w": 73,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Mirror",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 346,
+            "w": 45,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Bathroom (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 432,
+            "w": 119,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Kitchen (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 462,
+            "w": 103,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Main hall (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 521,
+            "w": 113,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Leave orphanage (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 551,
+            "w": 174,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Gameplay Settings",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 432,
+            "y": 609,
+            "w": 138,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Attitudes",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 432,
+            "y": 637,
+            "w": 65,
+            "h": 35
+          }
+        }
+      ]
+    },
+    {
+      "label": "STATS",
+      "bbox": {
+        "x": 5,
+        "y": 697,
+        "w": 135,
+        "h": 36
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/dol_clothing/ui_probes/STATS.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 4546,
+      "panel_text": "This work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter",
+      "dialog_text": "This work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter",
+      "post_click_text": "WELCOME TO DEGREES OF LEWDITY\nThis work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter\n\n\n\n£5\n 07:00\n Sun\nYou have school tomorrow.\n\n\nYou are wearing a white sundress and a pair of pale white plain panties.\n\n\nPain: You feel okay.\nArousal: You feel cold.\nFatigue: You are refreshed.\nStress: You are serene.\nTrauma: You are healthy.\nControl: You are confident.\nAllure: You attract glances.\n\nTip: Stress increases when you are assaulted.\n\n\nCHARACTERISTICS SOCIAL\nTRAITS\nJOURNAL\nSTATS\nFEATS\n\n\nOPTIONS\nSAVES\n\n\nYou are in your bedroom. Bleak walls protect you from the outside.\n\n Your basic desk and chair are wedged next to your wardrobe.\n\nThere is a thermometer outside your window. It reads 21°C. It's hot for this time of year.\n\nYour bed takes up most of the room.\n Strip and get in bed\n Wear Pyjamas and climb in bed\n\nYour clothes are kept in the creaky wardrobe.\n Wardrobe\n Mirror\n\nThe hallway outside connects to the rest of the orphanage.\n Bathroom (0:01)\n Kitchen (0:01)\n\n Main hall (0:01)\n Leave orphanage (0:01)\n\nGameplay Settings\nAttitudes\n\n0.5.10.10\n.5.10.10",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Enter",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 589,
+            "y": 358,
+            "w": 260,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "div",
+          "id": "stats",
+          "cls": "",
+          "text": "£5          07:00       Sun",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 0,
+            "y": 192,
+            "w": 280,
+            "h": 25
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "CHARACTERISTICS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 589,
+            "w": 270,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "SOCIAL",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 625,
+            "w": 270,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "TRAITS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 661,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "JOURNAL",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 661,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "STATS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 697,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "FEATS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 697,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "OPTIONS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 754,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "SAVES",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 754,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Strip and get in bed",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 199,
+            "w": 142,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Wear Pyjamas and climb in bed",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 229,
+            "w": 228,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Wardrobe",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 315,
+            "w": 73,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Mirror",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 346,
+            "w": 45,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Bathroom (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 432,
+            "w": 119,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Kitchen (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 462,
+            "w": 103,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Main hall (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 521,
+            "w": 113,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Leave orphanage (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 551,
+            "w": 174,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Gameplay Settings",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 432,
+            "y": 609,
+            "w": 138,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Attitudes",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 432,
+            "y": 637,
+            "w": 65,
+            "h": 35
+          }
+        }
+      ]
+    },
+    {
+      "label": "FEATS",
+      "bbox": {
+        "x": 140,
+        "y": 697,
+        "w": 135,
+        "h": 36
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/dol_clothing/ui_probes/FEATS.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 7407,
+      "panel_text": "This work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter",
+      "dialog_text": "This work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter",
+      "post_click_text": "WELCOME TO DEGREES OF LEWDITY\nThis work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter\n\n\n\n£5\n 07:00\n Sun\nYou have school tomorrow.\n\n\nYou are wearing a white sundress and a pair of pale white plain panties.\n\n\nPain: You feel okay.\nArousal: You feel cold.\nFatigue: You are refreshed.\nStress: You are serene.\nTrauma: You are healthy.\nControl: You are confident.\nAllure: You attract glances.\n\nTip: The better your physique, the more effort needed to maintain and improve it.\n\n\nCHARACTERISTICS SOCIAL\nTRAITS\nJOURNAL\nSTATS\nFEATS\n\n\nOPTIONS\nSAVES\n\n\nYou are in your bedroom. Bleak walls protect you from the outside.\n\n Your basic desk and chair are wedged next to your wardrobe.\n\nThere is a thermometer outside your window. It reads 21°C. It's hot for this time of year.\n\nYour bed takes up most of the room.\n Strip and get in bed\n Wear Pyjamas and climb in bed\n\nYour clothes are kept in the creaky wardrobe.\n Wardrobe\n Mirror\n\nThe hallway outside connects to the rest of the orphanage.\n Bathroom (0:01)\n Kitchen (0:01)\n\n Main hall (0:01)\n Leave orphanage (0:01)\n\nGameplay Settings\nAttitudes\n\n0.5.10.10\n.5.10.10",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Enter",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 589,
+            "y": 358,
+            "w": 260,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "div",
+          "id": "stats",
+          "cls": "",
+          "text": "£5          07:00       Sun",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 0,
+            "y": 192,
+            "w": 280,
+            "h": 25
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "CHARACTERISTICS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 610,
+            "w": 270,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "SOCIAL",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 646,
+            "w": 270,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "TRAITS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 682,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "JOURNAL",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 682,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "STATS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 718,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "FEATS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 718,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "OPTIONS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 776,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "SAVES",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 776,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Strip and get in bed",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 199,
+            "w": 142,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Wear Pyjamas and climb in bed",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 229,
+            "w": 228,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Wardrobe",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 315,
+            "w": 73,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Mirror",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 346,
+            "w": 45,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Bathroom (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 432,
+            "w": 119,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Kitchen (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 462,
+            "w": 103,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Main hall (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 521,
+            "w": 113,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Leave orphanage (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 551,
+            "w": 174,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Gameplay Settings",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 432,
+            "y": 609,
+            "w": 138,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Attitudes",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 432,
+            "y": 637,
+            "w": 65,
+            "h": 35
+          }
+        }
+      ]
+    },
+    {
+      "label": "OPTIONS",
+      "bbox": {
+        "x": 5,
+        "y": 754,
+        "w": 135,
+        "h": 36
+      },
+      "region_id": "ui-bar",
+      "screenshot_path": "/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/game_explorations/dol_clothing/ui_probes/OPTIONS.png",
+      "click_ok": true,
+      "error": null,
+      "duration_ms": 4542,
+      "panel_text": "This work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter",
+      "dialog_text": "This work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter",
+      "post_click_text": "WELCOME TO DEGREES OF LEWDITY\nThis work of fiction is only intended for an adult audience. It contains themes of a sexual nature that may be disturbing to some players and is inappropriate for minors. All characters depicted in sexual situations are 18 years or older. By continuing, you agree that you are above the age of 18, and acknowledge that you are willing to be exposed to aspects of the game's writing that include depictions of themes including, but not limited to:\n\nRape, Physical and Mental Abuse, Sex with Non-Humans, Forced Pregnancy, Watersports, Asphyxiation, Soft Vore, Sex Slavery, Monsters, Monster People, Mindbreak, Hypnosis, and more. Many of these can be disabled prior to, or after, starting the game. Some story content may require specific fetishes to be enabled.\n\n\n I confirm that I am 18 years of age or older\n\nEnter\n\n\n\n£5\n 07:00\n Sun\nYou have school tomorrow.\n\n\nYou are wearing a white sundress and a pair of pale white plain panties.\n\n\nPain: You feel okay.\nArousal: You feel cold.\nFatigue: You are refreshed.\nStress: You are serene.\nTrauma: You are healthy.\nControl: You are confident.\nAllure: You attract glances.\n\nTip: Planting your feet with skill can help increase grip strength.\n\n\nCHARACTERISTICS SOCIAL\nTRAITS\nJOURNAL\nSTATS\nFEATS\n\n\nOPTIONS\nSAVES\n\n\nYou are in your bedroom. Bleak walls protect you from the outside.\n\n Your basic desk and chair are wedged next to your wardrobe.\n\nThere is a thermometer outside your window. It reads 21°C. It's hot for this time of year.\n\nYour bed takes up most of the room.\n Strip and get in bed\n Wear Pyjamas and climb in bed\n\nYour clothes are kept in the creaky wardrobe.\n Wardrobe\n Mirror\n\nThe hallway outside connects to the rest of the orphanage.\n Bathroom (0:01)\n Kitchen (0:01)\n\n Main hall (0:01)\n Leave orphanage (0:01)\n\nGameplay Settings\nAttitudes\n\n0.5.10.10\n.5.10.10",
+      "post_click_elements": [
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "Enter",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 589,
+            "y": 358,
+            "w": 260,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "ui-bar-toggle",
+          "cls": "",
+          "text": "",
+          "title": "Toggle the UI bar",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 248,
+            "y": 3,
+            "w": 32,
+            "h": 32
+          }
+        },
+        {
+          "tag": "div",
+          "id": "stats",
+          "cls": "",
+          "text": "£5          07:00       Sun",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 0,
+            "y": 192,
+            "w": 280,
+            "h": 25
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "CHARACTERISTICS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 589,
+            "w": 270,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "SOCIAL",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 625,
+            "w": 270,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "TRAITS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 661,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "JOURNAL",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 661,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "STATS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 697,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "FEATS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 697,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "OPTIONS",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 5,
+            "y": 754,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "cls": "link-internal macro-button",
+          "text": "SAVES",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 140,
+            "y": 754,
+            "w": 135,
+            "h": 36
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Strip and get in bed",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 199,
+            "w": 142,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Wear Pyjamas and climb in bed",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 229,
+            "w": 228,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Wardrobe",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 315,
+            "w": 73,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Mirror",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 346,
+            "w": 45,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Bathroom (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 432,
+            "w": 119,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Kitchen (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 462,
+            "w": 103,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Main hall (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 521,
+            "w": 113,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Leave orphanage (0:01)",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 466,
+            "y": 551,
+            "w": 174,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Gameplay Settings",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 432,
+            "y": 609,
+            "w": 138,
+            "h": 35
+          }
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "cls": "link-internal macro-link",
+          "text": "Attitudes",
+          "title": "",
+          "href": "",
+          "target": "",
+          "external": false,
+          "bbox": {
+            "x": 432,
+            "y": 637,
+            "w": 65,
+            "h": 35
+          }
+        }
+      ]
+    },
+    {
+      "label": "SAVES",
+      "bbox": {
+        "x": 140,
+        "y": 754,
+        "w": 135,
+        "h": 36
+      },
+      "region_id": "ui-bar",
+      "skipped_reason": "save_mutation"
+    }
+  ],
+  "regions": [
+    {
+      "pos_class": "floating",
+      "tag": "div",
+      "id": "ui-dialog",
+      "cls": "closeBlocked open",
+      "position_style": "fixed",
+      "z_index": "100100",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 191,
+        "y": 50,
+        "w": 1056,
+        "h": 417
+      },
+      "text_sample": "Welcome to Degrees of Lewdity\n\t\t\tThis work of fiction is only intended for an a"
+    },
+    {
+      "pos_class": "left",
+      "tag": "div",
+      "id": "ui-bar",
+      "cls": "gateBlur",
+      "position_style": "fixed",
+      "z_index": "300",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 281,
+        "h": 900
+      },
+      "text_sample": "Degrees of Lewdity\n\n\n\n\t\n\t\t\n\t\n\n\t\n\t\n\t\t\n\t\t\n\t\t\n\t\t\t                              \n\t"
+    },
+    {
+      "pos_class": "floating",
+      "tag": "img",
+      "id": "",
+      "cls": "icon infront",
+      "position_style": "absolute",
+      "z_index": "1",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 432,
+        "y": 60,
+        "w": 30,
+        "h": 30
+      },
+      "text_sample": ""
+    },
+    {
+      "pos_class": "floating",
+      "tag": "div",
+      "id": "gameVersionDisplay",
+      "cls": "",
+      "position_style": "fixed",
+      "z_index": "1000",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 1365,
+        "y": 33,
+        "w": 40,
+        "h": 17
+      },
+      "text_sample": "0.5.10.10"
+    },
+    {
+      "pos_class": "floating",
+      "tag": "div",
+      "id": "gameVersionDisplay2",
+      "cls": "",
+      "position_style": "fixed",
+      "z_index": "1000",
+      "collapsed": false,
+      "is_narrative": false,
+      "bbox": {
+        "x": 321,
+        "y": 653,
+        "w": 32,
+        "h": 15
+      },
+      "text_sample": ".5.10.10"
+    }
+  ],
+  "main_content": {
+    "tag": "div",
+    "id": "ui-overlay",
+    "cls": "open"
+  },
+  "chrome_probes_count": 9,
+  "ui_frame_hash": "c7603c060f287d04"
+}

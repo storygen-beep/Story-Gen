@@ -186,7 +186,7 @@ text = "Suck him"
 show_when_locked = true
 locked_text = "I need to know him better first"
 locked_text_threshold = "Maya's corruption: 35+"
-conditions = { items = [
+conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 35 },
 ] }
 nodeId = "loop_franks_bedroom_finisher"

@@ -1,13 +1,14 @@
 # Step 3 — casting (roles + hooks + rough sketch): every NPC earns its place
 
-The step between the engine (Step 2) and the per-NPC arcs (Step 4). The answer to "just randomly adding
-NPCs isn't good." **Before anyone designs an NPC's arc, that NPC must have a ROLE in the story/cascade and
-a HOOK that makes them desirable.** No role → cut or merge. Both *generative* (derive the roles the game
+The step between the world (Step 2's engine + Step 2b's designed map) and the per-NPC arcs (Step 4) — the
+stages already exist, so cast people onto them. The answer to "just randomly adding NPCs isn't good."
+**Before anyone designs an NPC's arc, that NPC must have a ROLE in the story/cascade and a HOOK that makes
+them desirable.** No role → cut or merge. Both *generative* (derive the roles the game
 needs, cast people into them) and a *filter* (reject roleless/off-fantasy NPCs). Answers to the 8 qualities
 (Step 0): coherence, desirable characters, the fantasy.
 
-Source: `redesign_phase_3/06`. Output: a `## Casting` section in `design_book.md`. Set `pipeline_phase =
-"npc_arcs"` when done.
+Output: a `## Casting` section in `design_book.md`. Set `pipeline_phase =
+"deep_design"` when done.
 
 ---
 
@@ -71,12 +72,22 @@ Why it earns its place:
 ## What casting assigns per NPC (the bridge to Step 4)
 For each cast member, record: **role(s) · hook · fantasy lane · depth (core vs peripheral) · arc-shape**
 (which implies the personal trait that will drive them — the spine menu, `references/trait-design.md`) **·
-rough sketch.** Step 4 details each one's locks/scenes; casting just sets *who they are and what they're for.*
+place in the machine** (core NPCs — below) **· rough sketch.** Step 4 details each one's locks/scenes;
+casting just sets *who they are and what they're for.*
+
+**Place in the machine (core NPCs — `step-2-toplevel.md` §7).** Step 2 designed the
+**core loop** (conquest → money/access → next conquest). Give each *core* NPC one phrase for its **node** in
+it — what it feeds, what feeds it: *"the boss = income node — corrupting him raises the floor wage that funds
+reaching Sal"* (form 2), or *"Rosa's deep rungs open only once the bar is seized"* (form 1). The rough-sketch
+threads are the seed; a load-bearing thread (it gates a rung or routes income) becomes a real place here and
+a wire in Step 4 §8. Peripherals/islands get none — the machine is the core's spine, not a quota. Disciplines
+(`step-2-toplevel.md` §7) bound it: a wire constrains an arc's *depth ordering*, never its *availability* (D1).
 
 ## The output artifact (a `## Casting` section in `design_book.md`)
-| NPC | role(s) | hook (dynamic + charge + want) | lane | depth | arc-shape | rough sketch (+ cross-NPC threads) |
-|---|---|---|---|---|---|---|
+| NPC | role(s) | hook (dynamic + charge + want) | lane | depth | arc-shape | place in machine (core) | rough sketch (+ cross-NPC threads) |
+|---|---|---|---|---|---|---|---|
 One row per NPC; the rough sketch is a loose few lines (write it under the table if it needs room).
+**Place in machine** = one phrase for each core NPC's node in the core loop (`step-2-toplevel.md` §7); blank for peripherals.
 
 ## Casting self-check (run before locking the cast)
 - **Structural coverage:** a pressure source? a corrupting on-ramp? at least ONE core target? *(dead cascade
@@ -87,10 +98,15 @@ One row per NPC; the rough sketch is a loose few lines (write it under the table
 - **Desire span delivered:** the cast covers the genders + flavors declared at Step 0; any conquest-target
   reads as wanted-as-conquest, not a cold instrument.
 - **No redundancy:** two NPCs with the same role + hook → merge or differentiate.
+- **Machine placed** (`step-2-toplevel.md` §7): the core loop is named and **every core NPC has a place in it** — the cast isn't
+  a set of islands. (The DAG is built at the blueprint + checked at the feedback review, `step-6-feedback.md`;
+  here it's just "is each core NPC wired in at all?")
 - **The 3-question test:** say the fantasy in one sentence? name what the player wants next? name *each*
   NPC's hook? If any NPC fails the third, fix or cut it.
 
 ## Cross-references
-`redesign_phase_3/06` (full detail) · `references/trait-design.md` (the arc-shape → spine menu each hook
-implies) · `references/lanes.md` (per-arc-shape budgets) · Step 4 = `references/step-4-npc-arcs.md` (builds
-the per-NPC arc on each cast row).
+`references/step-2-toplevel.md` §7 (the machine —
+the "place in the machine" each core NPC gets) · `references/trait-design.md` (the arc-shape → spine menu each
+hook implies) · `references/lanes.md` (per-arc-shape budgets) · Step 4 = `references/step-4-deep-design.md`
+(Pass 2 designs the per-NPC story on each cast row) · Step 5 = `references/step-5-blueprint.md` (structures it
+into the scene list, incl. the §8 wiring contract).

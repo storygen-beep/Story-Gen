@@ -138,7 +138,7 @@ Per Doc 49 + `doctrine/09_trait_catalog.md` §3.3 + §3.4:
 ### §4.2 — Progression-state — banded or hidden
 
 - **`corruption`** — render as `trait_words` (banded: Pure / Lewd / Slutty / Whore). Raw 0-100 number HIDDEN.
-- **`arousal`** — render as `trait_bar` (0-10 visual meter) with optional bands (Cold / Warm / Hot / Burning).
+- **`arousal`** — render as `trait_bar` (0-10 visual meter) with optional bands (Calm / Warm / Aroused / Hot / Burning — RTS-faithful: Calm 0 / Warm 1–2 / Aroused 3–5 / Hot 6–7 / Burning 8–10).
 - **`money`** — render as numeric ("$80") or `trait_words` if banded.
 - **`exhibitionism` / `fitness` / `intelligence` / `beauty`** — Tier 2 traits. Render only when the game's arc/setting uses them. `trait_bar` 0-100 OR hidden.
 
@@ -183,40 +183,54 @@ Per `doctrine/01_rts_principles.md` §3 audit, TLS sidebar currently has:
 
 `setup.getNpcLocation(npcId)` at `v2.py:2923` already computes NPC location from the NPC's `[[npcs.schedules]]` block. The engine surface is ready; sidebar authoring just needs to call it.
 
-**The blocker is the sidebar item type:** TLS doesn't yet have a `"npc_location"` sidebar item type. Doc 64 PRD specs this.
+**SHIPPED (2026-06-06):** the `npc_panel` sidebar item type does exactly this — it calls
+`setup.getNpcLocation` for the location row, so the per-NPC radar is now real.
 
 ---
 
-## §6 — Doc 64 PRD (Sidebar NPC Location Radar — held)
+## §6 — `npc_panel` sidebar card (SHIPPED — was Doc 64 PRD)
 
-Doc 64 PRD specs the sidebar item type for per-NPC location radar. Currently held per Doc 66 §10 (the prompts_v2/ rewrite pivot).
+The per-NPC HUD radar shipped as the `npc_panel` sidebar item (renderer in `v2.py`/`v1.py`
+`sidebarItems` widget; validation in `template_import.py`). It replaces the old PRD's proposed
+`npc_location` type — **author `npc_panel`, not `npc_location`**.
 
-### §6.1 — Proposed schema
+### §6.1 — Schema
 
 ```toml
 [[sidebar_items]]
-type = "npc_location"
+type   = "npc_panel"
 npc_id = "npc_frank"
-label = "Frank"
-# Optional secondary stat displays per arc-shape default
-stats = ["arousal", "corruption", "relation"]
+label  = "Frank"                                  # optional → NPC name
+rows   = ["arousal", "corruption", "location", "next"]    # ordered subset
+# optional: arousal_bands, corruption_max_value/_label, away_label, show_when
 ```
 
-The item renders:
+Renders an RTS House-card:
 ```
-Frank — Kitchen
-  Arousal: 🔥🔥  Corruption: 12  Relation: 8
+Frank
+  🔥 Arousal:    🔥🔥
+  🫦 Corruption:  12        (or "MAX" at/above corruption_max_value)
+  📍 Location:    Kitchen   (from setup.getNpcLocation — same source as the Schedule page)
+  ── next (mirrors the Quests goal block) ──
+  🎯 To advance:           (while climbing)
+  ◯ My corruption — 12/20
+  …or when ready…
+  🔓 Ready
+  📍 Kitchen                (the ready_canvas's location)
+  🕒 every day 22:00–02:00  (the ready_canvas's schedule)
 ```
+arousal → band glyph (default 0/1/2/3 → ❄️/🔥/🔥🔥/🔥🔥🔥); location is null-safe (`away_label`,
+default "Away"); respects `hidden=true` traits. The **`next`** row reuses `setup.renderQuestsGoalBlock`,
+so it shows the Quests-page goal block in full — `🎯 To advance` + ◯ live progress while climbing,
+`🔓 Ready / 📍 / 🕒` when ready, `✓ Arc complete` when terminal — **identical to the Quests page**, minus
+the flavor/tip prose.
 
-### §6.2 — When Doc 64 unlocks authoring
+### §6.2 — Authoring discipline
 
-Per Doc 65 §3 row: Doc 64 PRD scoped when:
-- Phase 2 polish prioritized OR
-- Lane 3 discoverability becomes a blocker in playtest
-
-For prompts_v2/ generated games: every game's `[[sidebar_items]]` block should emit `npc_location` items for in-scope NPCs from day 1. When Doc 64 ships, the data is already authored.
-
-**Authoring discipline:** assume Doc 64 ships. Author `npc_location` sidebar items in the brief's lane map. The validator will tolerate the type even before it's parsed.
+Emit `npc_panel` items for the NPCs whose state the player must read to plan (per the arc-shape
+table in §3.3 — family/ambient + slow-burn). Surface only the rows that are live for that NPC
+(e.g. a slow-burn NPC whose corruption stays 0 → `rows = ["arousal","location"]`). `stage` and
+antagonist `awareness` still NEVER surface.
 
 ---
 
@@ -239,9 +253,9 @@ For prompts_v2/ generated games: every game's `[[sidebar_items]]` block should e
 - **TLS per-arc-shape stat visibility.** RTS surfaces all stats for all family NPCs flat; TLS differentiates per arc shape per Doc 68 §8.
 - **TLS uses 24-hour clock** in slice. RTS uses 6-band model (EM/M/A/E/N/LN). Doc 30 §4.3 open question: keep 24-hour or migrate to bands.
 
-### §7.3 — What TLS SHOULD borrow when Doc 64 ships
+### §7.3 — Per-NPC radar (SHIPPED via `npc_panel`)
 
-- **Per-NPC location radar** — load-bearing per P10. Without it Lane 3 becomes undiscoverable.
+- **Per-NPC location radar** — load-bearing per P10; now available as the `npc_panel` `location` row.
 - **NPC arousal display per arc-shape default** — family/ambient (Frank) gets arousal surfaced; service (Marge) doesn't.
 - **Tick-frequency updates** — every passage transition, not just hourly.
 
@@ -266,17 +280,16 @@ For each new TLS slice / prompts_v2 generated game, the sidebar block should dec
 - [ ] `trait_bar` for intelligence (if school/study mechanic exists)
 - [ ] `trait_bar` for beauty (typically hidden — derived from worn_beauty)
 
-### §8.3 — Per-NPC radar (when Doc 64 ships — author against the future shape)
+### §8.3 — Per-NPC radar — `npc_panel` (SHIPPED)
 
-For each in-scope NPC:
+For each in-scope NPC whose state the player must read to plan:
 
-- [ ] `npc_location` item with `npc_id`
-- [ ] `stats` array per arc-shape default:
-  - Family/ambient: `["arousal", "corruption", "relation"]`
-  - Slow-burn family: `["arousal", "relation"]`
-  - Peer/dating: `["relation"]`
-  - Service: `["relation"]`
-  - Antagonist: `[]` (location only)
+- [ ] `npc_panel` item with `npc_id`
+- [ ] `rows` per arc-shape (subset of arousal/corruption/location/next):
+  - Family/ambient: `["arousal", "corruption", "location", "next"]`
+  - Slow-burn family: `["arousal", "location"]`
+  - Peer/dating + service: `["location"]` (+ relation via a `trait_owner="npc"` trait_bar if wanted)
+  - Antagonist: `["location"]` (awareness NEVER surfaces)
 
 ### §8.4 — DO NOT surface
 

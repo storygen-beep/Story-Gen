@@ -143,7 +143,7 @@ intelligence = 0
 **Default at game start:** 0
 **Decay:** None (per Doc 40 — arousal is always-climbing fuel meter; no daily decay)
 **Sidebar render:** `trait_bar` with optional bands
-**Bands (optional):** Cold (0–2) / Warm (3–5) / Hot (6–8) / Burning (9–10)
+**Bands (optional):** Calm (0) / Warm (1–2) / Aroused (3–5) / Hot (6–7) / Burning (8–10) — RTS-faithful (RTS derives the band as `level = arousal===0 ? 0 : min(ceil(arousal/maxArousal*4), 4)`).
 
 **What it tracks:** Maya's short-term sexual readiness — the per-attempt fuel meter for masturbation + lewd activities. Climbs from beats + days; resets to 0 on climax. Distinct from corruption (long-term progression).
 
@@ -260,6 +260,8 @@ intelligence = 0
 - Shower activity is the restore loop
 - Some NPC reactions at Filthy band (e.g., "you smell — go shower")
 
+**What it triggers (the routine, not a gate):** the point of hygiene is the *routine it drives*, not a wall it builds. Low hygiene should *pull* the player to the shower (a Filthy-band nudge or a low-hygiene auto-prompt) — and that shower is a **Lane 3 hijack host** (`doctrine/02` §4.5), so the decay loop is what *delivers the player into* catchable self-care. Likewise a self-care act run at high `arousal`/`corruption` can substitute a player-lewd feeder beat (the shower→masturbate fusion, §4.12). Hygiene earns its keep by being a body-state that *moves the player through the routine the world hijacks* — fully compatible with the soft-modifier rule below: it triggers a routine, it never hard-gates an arc.
+
 **Don't use it for:**
 - Hard-gating ALL NPC interactions (soft modifier; don't block entire arcs on hygiene)
 - Long-term progression (use `corruption`)
@@ -321,11 +323,7 @@ intelligence = 0
 ### §4.1 — `arousal` (NPC)
 
 **Tier:** 1 (canonical / required, per-NPC)
-**Range:**
-- **Family/ambient + slow-burn family NPCs:** 0–3 integer (per Doc 40 — RTS-faithful for family register)
-- **Peer/dating + career NPCs:** 0–10 integer (matches player range)
-- **Service NPCs:** 0–3 (workplace register stays bounded)
-- **Antagonist/witness:** N/A (antagonists don't track arousal — use awareness or hidden state instead)
+**Range:** 0–3 integer (per Doc 40 — RTS-faithful). NPC arousal is the willingness axis for **family/ambient, slow-burn, and escalation** arcs ONLY. **Peer/dating, service, and antagonist NPCs do NOT track arousal** — peer/service are relation-spined; antagonists use awareness/hidden state (per `doctrine/03` + the spine table in the skill's `trait-design.md`). RTS itself only tracks arousal on its family NPCs (Dad/Brother/Grandpa, 0–3); the earlier "peer 0–10 / service 0–3" ranges were a corpus over-generalization (an arousal meter on a relation-spined NPC is a dead meter) and are removed.
 
 **Default at game start:** 0
 **Decay:** None (no-decay per Doc 40 — both player + NPC arousal are always-climbing meters)
@@ -483,6 +481,16 @@ intelligence = 0
 > hidden = true   # hide-only entry; `label` may be omitted
 > ```
 > The engine emits these as `setup.hiddenTraits` and skips them via `<<continue>>` in every trait-dump loop, in BOTH dev and non-dev builds. **Limitation:** keyed by trait NAME only (not namespaced) — a hidden key hides for the player AND any NPC carrying a core_trait of that name (e.g. an antagonist's `awareness`, which is exactly the intent). See `schema/02` `[[traits.labels]]` and the `stages/02` §11 checklist item.
+
+> **🔁 SAME MECHANISM DE-DUPS A *VISIBLE* BANDED STAT.** `hidden = true` is not only for internal traits.
+> The playerTraits dump shows EVERY non-hidden `core_trait` as a number, so if you also BAND a stat in
+> `[[sidebar_items]]` (`trait_words`/`trait_bar`), that stat renders **twice** — once as the band word,
+> once as a raw number in the dump. Add a `hidden = true` label for the banded trait so it shows **once**
+> (as the band). **Safe:** the band renderers `trait_words` (`v2.py:14853`) and `trait_bar` (`v2.py:14744`)
+> read the trait directly and do NOT consult `hiddenTraits`, so the band survives — only the auto dump +
+> Stats page drop the number. The Inheritance hides `corruption` + `arousal` (both banded) for exactly
+> this. The full encode-by-type + de-dup rule (which stat → which type, and don't over-band) lives in
+> `schema/02 §9.0`.
 
 **When to use it:**
 - Lane 1 hub canvas selection (multiple canvases per location; engine picks by stage via `selectAutoFireCanvasForLocation`)
@@ -878,6 +886,13 @@ items = [
 ]
 ```
 
+> **⚠️ `version = "1.0"` is MANDATORY on the conditions block — omit it and the whole gate FAILS OPEN.**
+> `triggerConditionsSatisfied` (`v2.py:3312`) returns `true` immediately for any conditions object whose
+> `version !== '1.0'`, so the `items` are never evaluated and the gate always passes. No build error
+> fires. This applies to every condition block (trigger, per-choice, group `props.conditions`,
+> substitution, `entry_conditions`, stage-helper). The trap is most common on **per-choice** conditions
+> written inline as `conditions = { items = [...] }` — always write `{ version = "1.0", items = [...] }`.
+
 **Predicate field names:**
 - `type` — `"trait"`, `"flag"`, `"modifier"`, `"days_since_flag"`, `"clothing_slot"`, `"clothing_item"`, `"pass"`, `"item"`, `"stage"`, `"quest"`, `"worn_beauty"`, `"worn_corruption"`, `"worn_type"`, `"corruption_level"`
 - `subject` — `"player"` or `"npc"` (predicate uses `subject`; effects use `targetType`)
@@ -924,6 +939,12 @@ Per LO Q6: each NPC's design brief (R7 per Doc 56) declares which traits surface
 | **ALL arc shapes** | `stage` NEVER surfaces | Per LO Q1 + §9 — stage is internal-only across all NPCs. |
 
 ### Authoring rule (R7 brief addition)
+
+**Surfacing mechanism (SHIPPED 2026-06-06):** these surface via the **`npc_panel`** sidebar item
+(`rows = ["arousal","corruption","location","next"]`; location from the NPC schedule, same source as the
+Schedule page) plus `trait_owner="npc"` trait items for anything not in those three rows (e.g.
+`relation` via an npc `trait_bar`). This was the old Doc-64 gap — it's now real, so the table above is
+buildable, not aspirational. `stage`/`awareness` still NEVER surface.
 
 When writing an NPC's design brief, declare a "Sidebar surfaces" line:
 

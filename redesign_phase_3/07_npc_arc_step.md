@@ -78,6 +78,26 @@ NPC's own axis alone. So **late-act NPCs must be authored with a complete, self-
 own slow-burn from cold to capstone); they cannot borrow tension from a rising MC door the way Act-1 targets do.
 Build their pacing entirely into their own lock. (This is the per-NPC face of the endgame-stays-carnal rule — `14` P7 / `13` E9: a recruit is a full arc.)
 
+**3c. The arc's WIRING CONTRACT — its place in the machine (`22`).**
+Casting (`06`) gave each core NPC a **place in the machine** (its node in the core loop). Step 4 makes it
+concrete: the R7 brief's **§8 is the arc's wiring contract** — the player-namespaced signals this arc
+**SETS** (the milestone flags / `<this_npc>_stage` other arcs will read — e.g. Sal's first-night sets
+`sal_opened_up`; taking the bar sets `bar_seized`) and the ones it **READS** (another arc's flag/stage that
+gates one of *this* arc's mid/late rungs). Bound by the three disciplines (`22`):
+- **D1 — never gate this arc's ENTRY on another arc.** A cross-read may gate a mid/late rung or a capstone,
+  **never the on-ramp/first meeting.** The arc must stay enterable cold (the non-lewd on-ramp is ungated —
+  §3.2). This is the cold-start firewall (`04 §4`) and what keeps the cast acyclic.
+- **D2 — no cycle.** A cross-read points at a flag/stage *another* arc sets; never wire two arcs to mutually
+  gate each other's depth (the roster `18` runs the DAG check).
+- **D3 — legible.** Every cross-gated rung ships a **locked-visible telegraph naming the other arc's state**
+  ("Sal won't cross that line while the bar's still in jeopardy" — naming `bar_seized`). An invisible
+  cross-gate is a soft-lock (`14` L7 / `22` D3).
+- **Mechanism:** milestone → a shared **player flag**; "how far along" → the **`<npc>_stage` player trait**;
+  a wage/price **banded** by an NPC's trait → **band-gated sibling choices** (`22` realization). Never a raw
+  cross-NPC trait read. Record SETS/READS in §8 so Step 5 can trace the wires and Step 6 can author them as
+  `cross_npc` / `economic` beats with ordinary `deps`. (Scope: forms 1+2; a *finished* arc producing income/
+  capability is **G6**, deferred.)
+
 **4. Hold each NPC to the good-game qualities (`05`):**
 - **Legible pull (#2):** ship the escalation rungs **locked-visible** so the player sees the ladder ahead.
 - **Payoff (#4):** the capstones LAND (Tier-3 prose, the moment earned).
@@ -95,6 +115,10 @@ Build their pacing entirely into their own lock. (This is the per-NPC face of th
 - **The hook is visible** in the arc — voice + the NPC's want + real agency (resists/schemes).
 - **Legible-pull rungs** (locked-visible) + **capstone payoff** + **ceiling honored** (good-game `05`).
 - **Throttle off capstones**; **sex-loop core-only**; lanes sized to the arc-shape budget.
+- **Wiring contract written** (`22`/§3c): §8 records the player flags / `<npc>_stage` this arc SETS and
+  READS; every cross-**read** gates a mid/late rung (D1 — never entry), points at another arc (D2 — no
+  cycle), and ships a locked-visible telegraph naming that arc's state (D3 — `14` L7). Never a raw cross-NPC
+  trait read.
 - **Traits declared before use** (`doctrine/09` / `toml-gotchas.md`).
 
 ---
@@ -128,8 +152,9 @@ template gains a "seed = casting hook" line and §3 gains the double-lock wiring
 small — mostly relocation + the two bindings (hook→arc, double-lock).
 
 ## Cross-references
-- `06_casting_roles_step.md` — supplies the cast row (role/hook/depth/arc-shape).
+- `06_casting_roles_step.md` — supplies the cast row (role/hook/depth/arc-shape + place in the machine).
 - `04_progression_engine.md` — the cascade + double lock (§3/§4) this step wires each NPC into.
+- `22_the_machine_interconnection.md` — the cross-wiring layer; §8 of the brief is the arc's wiring contract (§3c).
 - `05_what_makes_a_good_game.md` — the qualities each arc is checked against.
 - Reused skill refs: `trait-design.md`, `lanes.md`, `sex-loop.md`, `setup-interview.md` (R7 brief), `doctrine/08`.
 - Feeds Step 5 (content roster) — each NPC's rungs/scenes become roster rows.

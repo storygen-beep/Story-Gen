@@ -1,0 +1,2890 @@
+# Phase 5/7 — 5_scenes.toml
+# Late Shifts — Lane 1 hubs + Lane 2 ambients + Lane 3 sub targets + quest cards
+# Save this file as: games/late_shifts/toml_phases/5_scenes.toml
+
+# ═════════════════════════════════════════════════════════════════════════════
+# LANE 1 HUBS
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Hank — diner front hub (22:00–01:30 weekdays)
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id          = "hank_diner_front_hub"
+name        = "Mel's — Hank"
+description = "Lane 1 hub. Hank at diner_front. Locked-visible escalation ladder from Day 1."
+
+[canvases.trigger]
+location      = "loc_diner_front"
+requires_npc  = "npc_hank"
+is_repeatable = true
+priority      = 8
+is_active     = true
+npc           = "npc_hank"
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "01:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Mel's — Hank"
+blocks = [
+  { type = "image", props = { file = "scenes/hank_diner_front_hub.jpg" } },
+  { type = "paragraph", content = "Hank behind the counter. He looks up when you come in from the floor. He doesn't say anything." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk."
+targetType = "node"
+nodeId = "hank_diner_front_hub.node_talk"
+time_progression_minutes = 5
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_hank_today", operator = "is_false" },
+] }
+effects = [
+  { targetType = "npc", npcId = "npc_hank", trait = "relation", op = "add", value = 1 },
+]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_hank_today", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Tease him."
+targetType = "node"
+nodeId = "hank_tease_diner.base"
+show_when_locked = true
+locked_text = "Not yet."
+locked_text_threshold = "Maya's corruption: 5+"
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 5 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Flash him."
+show_when_locked = true
+locked_text_threshold = "Maya's corruption: 15+"
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
+] }
+targetType = "node"
+nodeId = "hank_flash_diner.base"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Come to the office."
+show_when_locked = true
+locked_text_threshold = "Maya's corruption: 25+ AND first contact made"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption",      operator = "gte",     value = 25      },
+  { type = "flag",  subject = "player", flag_key  = "hank_first_contact", operator = "is_true" },
+] }
+targetType = "location"
+locationId = "loc_diner_office"
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.choices]]
+text = "Come in through the back."
+show_when_locked = true
+locked_text_threshold = "Maya's corruption: 50+ AND Hank's"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte",     value = 50      },
+  { type = "flag",  subject = "player", flag_key  = "hank_cracked",  operator = "is_true" },
+] }
+targetType = "node"
+nodeId = "hank_diner_front_hub.node_routine"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave."
+targetType = "location"
+locationId = "loc_diner_front"
+
+# Talk node
+[[canvases.nodes]]
+id   = "node_talk"
+name = "Talk to Hank"
+blocks = [
+  { type = "paragraph", content = "She says something about the shift. He says one sentence back. That's about how long it goes." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back to the floor."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_diner_front"
+time_progression_minutes = 5
+
+# Routine node (Stage 5)
+[[canvases.nodes]]
+id   = "node_routine"
+name = "Come in through the back"
+blocks = [
+  { type = "paragraph", content = "She goes around. He's already in the office. The arrangement is infrastructure now." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go in."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_diner_office"
+time_progression_minutes = 5
+effects = [
+  { targetType = "npc", npcId = "npc_hank", trait = "arousal", op = "add", value = 1, cap = 3 },
+  { targetType = "player", trait = "arousal", op = "add", value = 1, cap = 10 },
+]
+
+# ─── Hank tease stub (route-target only — no trigger block) ──────────────────
+[[canvases]]
+id          = "hank_tease_diner"
+name        = "Tease him at the counter"
+description = "Lane 1 route-target stub. No trigger. Reached via hank_diner_front_hub."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Tease"
+blocks = [
+  { type = "image", props = { file = "scenes/hank_tease_diner.jpg" } },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "hank_first_contact", operator = "is_false" },
+    ] }, blocks = [
+    { type = "paragraph", content = "She catches his eye over the counter and holds it. He's still looking when she looks away." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_hank" }, content = "Floor." },
+  ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "hank_first_contact", operator = "is_true" },
+      { type = "flag", subject = "player", flag_key = "hank_cracked",       operator = "is_false" },
+    ] }, blocks = [
+    { type = "paragraph", content = "She catches his eye. His gaze drops to her chest and stays there a beat." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_hank" }, content = "Don't start." },
+  ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "hank_cracked", operator = "is_true" },
+    ] }, blocks = [
+    { type = "paragraph", content = "She catches his eye. He sets the rag down and crosses to her, hand at her waist, brief, over the counter." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_hank" }, content = "After close." },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the floor."
+targetType = "location"
+locationId = "loc_diner_front"
+time_progression_minutes = 5
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 15 },
+] }
+effects = [
+  { targetType = "npc", npcId = "npc_hank", trait = "arousal", op = "add", value = 1, cap = 3 },
+  { targetType = "player", trait = "arousal",    op = "add", value = 1, cap = 10 },
+  { targetType = "player", trait = "corruption", op = "add", value = 1 },
+]
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the floor."
+targetType = "location"
+locationId = "loc_diner_front"
+time_progression_minutes = 5
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
+] }
+effects = [
+  { targetType = "npc", npcId = "npc_hank", trait = "arousal", op = "add", value = 1, cap = 3 },
+  { targetType = "player", trait = "arousal", op = "add", value = 1, cap = 10 },
+]
+
+# ─── Hank flash stub ─────────────────────────────────────────────────────────
+[[canvases]]
+id          = "hank_flash_diner"
+name        = "Flash him"
+description = "Lane 1 route-target stub. No trigger. Reached via hank_diner_front_hub."
+
+[[canvases.nodes]]
+id   = "base"
+name = "Flash"
+blocks = [
+  { type = "image", props = { file = "scenes/hank_flash_diner.jpg" } },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "hank_first_contact", operator = "is_false" },
+    ] }, blocks = [
+    { type = "paragraph", content = "She lifts the hem of her uniform top just far enough. He looks. He sets the coffee pot down." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_hank" }, content = "Go do your tables." },
+  ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "hank_first_contact", operator = "is_true" },
+    ] }, blocks = [
+    { type = "paragraph", content = "She pulls her top up in the pass-through. He's already coming around the counter." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_hank" }, content = "After close. Not before." },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back to the floor."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_diner_front"
+time_progression_minutes = 5
+effects = [
+  { targetType = "npc", npcId = "npc_hank", trait = "arousal", op = "add", value = 1, cap = 3 },
+  { targetType = "player", trait = "arousal",    op = "add", value = 2, cap = 10 },
+  { targetType = "player", trait = "corruption", op = "add", value = 1 },
+]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Hank — office hub (post-hank_first_contact)
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id          = "hank_office_hub"
+name        = "Mel's office — Hank"
+description = "Lane 1 hub. Hank's back office. Unlocked post-hank_first_contact."
+
+[canvases.trigger]
+location      = "loc_diner_office"
+requires_npc  = "npc_hank"
+is_repeatable = true
+priority      = 8
+is_active     = true
+npc           = "npc_hank"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "hank_first_contact", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "01:30"
+end_time   = "06:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Office"
+blocks = [
+  { type = "image", props = { file = "scenes/hank_office_hub.jpg" } },
+  { type = "paragraph", content = "Hank at his desk. Lamp on. He looks up." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk."
+targetType = "location"
+locationId = "loc_diner_office"
+time_progression_minutes = 10
+effects = [
+  { targetType = "npc", npcId = "npc_hank", trait = "relation", op = "add", value = 1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get on your knees."
+show_when_locked = true
+locked_text_threshold = "Maya's corruption: 25+ AND after close"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "hank_after_close_done", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "corruption",            operator = "gte", value = 25 },
+] }
+targetType = "node"
+nodeId = "hank_office_hub.node_oral_repeat"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Bend over the desk."
+show_when_locked = true
+locked_text_threshold = "Maya's corruption: 35+ AND first night done"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "hank_office_first_done", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "corruption",             operator = "gte", value = 35 },
+] }
+targetType = "node"
+nodeId = "hank_office_hub.node_sex_repeat"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave."
+targetType = "location"
+locationId = "loc_diner_front"
+
+# Repeat oral node — light pregnant-aware variant
+[[canvases.nodes]]
+id   = "node_oral_repeat"
+name = "Office — oral"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "trait", subject = "player", trait_key = "pregnancy", operator = "lt", value = 1 },
+    ] }, blocks = [
+    { type = "paragraph", content = "He turns his chair. She goes down. He keeps one hand in her hair. *'Good girl.'* He comes in her mouth. She stands up. He goes back to his paperwork." },
+  ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "trait", subject = "player", trait_key = "pregnancy", operator = "gte", value = 1 },
+    ] }, blocks = [
+    { type = "paragraph", content = "He turns his chair. She goes down — slower to kneel now, one hand bracing the desk. He keeps one hand in her hair and the other rests on the swell of her belly while she works. *'Good girl.'* He comes in her mouth and lets her up, palm still flat against the curve a second longer before he turns back to the paperwork." },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go home."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_diner_front"
+time_progression_minutes = 20
+effects = [
+  { targetType = "npc", npcId = "npc_hank", trait = "arousal", op = "set", value = 0 },
+  { targetType = "player", trait = "arousal", op = "set", value = 0 },
+  { targetType = "player", trait = "corruption", op = "add", value = 1 },
+]
+
+# Repeat sex node — pregnant-variant aware (breeding talk Tier 5 when pregnancy>=1)
+[[canvases.nodes]]
+id   = "node_sex_repeat"
+name = "Office — sex"
+blocks = [
+  # Not pregnant
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "trait", subject = "player", trait_key = "pregnancy", operator = "lt", value = 1 },
+    ] }, blocks = [
+    { type = "paragraph", content = "He bends her over the desk. Pulls her underwear down. Slides in bare. *'Good girl. Stay still.'* He fucks her until he comes inside her. Bareback, the way it always goes now." },
+  ] } },
+  # Pregnant — employer-authority breeding register (no daddy)
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "trait", subject = "player", trait_key = "pregnancy", operator = "gte", value = 1 },
+    ] }, blocks = [
+    { type = "paragraph", content = "He bends her over the desk the same as always, one hand flat on the small of her back, the other spread over the curve of her belly like he's checking his own work. He slides in bare. There was never a reason to stop and there's less of one now." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_hank" }, content = "Already took. Good girl. Doesn't change anything." },
+    { type = "paragraph", content = "He fucks her slow and finishes inside her, hand still on the belly, holding her against him a beat after. *'That's mine,'* he says, flat, like the inventory's been counted. He goes back to the desk." },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go home."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_diner_front"
+time_progression_minutes = 25
+effects = [
+  { targetType = "npc", npcId = "npc_hank", trait = "arousal", op = "set", value = 0 },
+  { targetType = "player", trait = "arousal",    op = "set", value = 0 },
+  { targetType = "player", trait = "corruption", op = "add", value = 1 },
+]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Ben — kitchen hub (Stage 1+)
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id          = "ben_kitchen_hub"
+name        = "Kitchen — Ben"
+description = "Lane 1 hub. Ben in kitchen. Stage 1+ only. Locked-visible escalation."
+
+[canvases.trigger]
+location      = "loc_shared_kitchen"
+requires_npc  = "npc_ben"
+is_repeatable = true
+priority      = 8
+is_active     = true
+npc           = "npc_ben"
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "05:30"
+end_time   = "07:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Kitchen — Ben"
+blocks = [
+  { type = "image", props = { file = "scenes/ben_kitchen_hub.jpg" } },
+  { type = "paragraph", content = "Ben at the counter with coffee. He looks up when she comes in." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk."
+targetType = "location"
+locationId = "loc_shared_kitchen"
+time_progression_minutes = 10
+effects = [
+  { targetType = "npc", npcId = "npc_ben", trait = "relation", op = "add", value = 1 },
+]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_ben_today", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Stay up with him."
+show_when_locked = true
+locked_text_threshold = "Maya's corruption: 15+"
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
+] }
+targetType = "location"
+locationId = "loc_shared_kitchen"
+time_progression_minutes = 20
+effects = [
+  { targetType = "npc", npcId = "npc_ben", trait = "relation",   op = "add", value = 2 },
+  { targetType = "player", trait = "arousal", op = "add", value = 1, cap = 10 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Come to his room."
+show_when_locked = true
+locked_text_threshold = "Ben's trust: 15+ AND first move made"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "ben_first_move_done", operator = "is_true" },
+  { type = "trait", subject = "npc",    npc_id    = "npc_ben", trait_key = "relation", operator = "gte", value = 15 },
+] }
+targetType = "location"
+locationId = "loc_bens_room"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go to bed."
+targetType = "location"
+locationId = "loc_shared_kitchen"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Ben — living room hub (Stage 1+)
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id          = "ben_living_room_hub"
+name        = "Living room — Ben"
+description = "Lane 1 hub. Ben in living room evenings."
+
+[canvases.trigger]
+location      = "loc_living_room"
+requires_npc  = "npc_ben"
+is_repeatable = true
+priority      = 8
+is_active     = true
+npc           = "npc_ben"
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "17:30"
+end_time   = "22:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Living room — Ben"
+blocks = [
+  { type = "image", props = { file = "scenes/ben_living_room_hub.jpg" } },
+  { type = "paragraph", content = "Ben on the couch with his book. He looks up." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sit with him."
+targetType = "location"
+locationId = "loc_living_room"
+time_progression_minutes = 20
+effects = [
+  { targetType = "npc", npcId = "npc_ben", trait = "relation", op = "add", value = 1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Touch his hand."
+show_when_locked = true
+locked_text_threshold = "Maya's corruption: 15+"
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
+] }
+targetType = "location"
+locationId = "loc_living_room"
+time_progression_minutes = 10
+effects = [
+  { targetType = "npc", npcId = "npc_ben", trait = "arousal",  op = "add", value = 1, cap = 3 },
+  { targetType = "player", trait = "arousal", op = "add", value = 1, cap = 10 },
+  { targetType = "player", trait = "corruption", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_pam", trait = "awareness", op = "add", value = 1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Come to his room."
+show_when_locked = true
+locked_text_threshold = "First move made"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "ben_first_move_done", operator = "is_true" },
+] }
+targetType = "location"
+locationId = "loc_bens_room"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go to your room."
+targetType = "location"
+locationId = "loc_mayas_apartment"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Ben — bedroom hub (Stage 3+)
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id          = "ben_room_hub"
+name        = "Ben's room"
+description = "Lane 1 hub. Ben's bedroom. Stage 3+ (post-first_move_done)."
+
+[canvases.trigger]
+location      = "loc_bens_room"
+requires_npc  = "npc_ben"
+is_repeatable = true
+priority      = 8
+is_active     = true
+npc           = "npc_ben"
+[[canvases.trigger.schedules]]
+weekdays   = [5, 6]
+start_time = "17:00"
+end_time   = "09:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Ben's room"
+blocks = [
+  { type = "image", props = { file = "scenes/ben_room_hub.jpg" } },
+  { type = "paragraph", content = "His room, his lamp on, him sitting on the edge of the bed. He doesn't pretend to be surprised she came in." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sit with him."
+targetType = "location"
+locationId = "loc_bens_room"
+time_progression_minutes = 15
+effects = [
+  { targetType = "npc", npcId = "npc_ben", trait = "relation", op = "add", value = 1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Touch him."
+show_when_locked = true
+locked_text_threshold = "Maya's corruption: 25+"
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 },
+] }
+targetType = "node"
+nodeId = "ben_room_hub.node_touch"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Have sex with him."
+show_when_locked = true
+locked_text_threshold = "Consummation done"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "ben_consummation_done", operator = "is_true" },
+] }
+targetType = "node"
+nodeId = "ben_room_hub.node_sex_repeat"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go to bed."
+targetType = "location"
+locationId = "loc_mayas_apartment"
+
+[[canvases.nodes]]
+id   = "node_touch"
+name = "Touch"
+blocks = [
+  { type = "paragraph", content = "She sits next to him and puts her hand on his thigh. He looks at it. He covers it with his." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ben" }, content = "Maya." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stay."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_bens_room"
+time_progression_minutes = 15
+effects = [
+  { targetType = "npc", npcId = "npc_ben", trait = "arousal",    op = "add", value = 1, cap = 3 },
+  { targetType = "player", trait = "arousal",    op = "add", value = 1, cap = 10 },
+  { targetType = "player", trait = "corruption", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_pam", trait = "awareness", op = "add", value = 1 },
+]
+
+[[canvases.nodes]]
+id   = "node_sex_repeat"
+name = "Sex"
+blocks = [
+  { type = "paragraph", content = "They don't need to say anything. He pulls her down onto the bed. He gets between her thighs and presses in bare. *'Little sister,'* he says into her throat. He fucks her slow. He comes inside her. They lie there after." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stay in his bed."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_bens_room"
+time_progression_minutes = 45
+effects = [
+  { targetType = "npc", npcId = "npc_ben", trait = "arousal",    op = "set", value = 0 },
+  { targetType = "player", trait = "arousal",    op = "set", value = 0 },
+  { targetType = "player", trait = "corruption", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_pam", trait = "awareness", op = "add", value = 1 },
+]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Cole — diner back hub
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id          = "cole_diner_back_hub"
+name        = "Kitchen — Cole"
+description = "Lane 1 hub. Cole at diner_back. Requires hired_at_diner."
+
+[canvases.trigger]
+location      = "loc_diner_back"
+requires_npc  = "npc_cole"
+is_repeatable = true
+priority      = 8
+is_active     = true
+npc           = "npc_cole"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "hired_at_diner", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "21:00"
+end_time   = "07:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Kitchen — Cole"
+blocks = [
+  { type = "image", props = { file = "scenes/cole_diner_back_hub.jpg" } },
+  { type = "paragraph", content = "@cole at the grill. He looks over." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk."
+targetType = "location"
+locationId = "loc_diner_back"
+time_progression_minutes = 5
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_cole_today", operator = "is_false" },
+] }
+effects = [
+  { targetType = "npc", npcId = "npc_cole", trait = "relation", op = "add", value = 1 },
+]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_cole_today", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Ask him to walk after shift."
+show_when_locked = true
+locked_text_threshold = "Once he's noticed you"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "cole_noticed", operator = "is_true" },
+] }
+targetType = "location"
+locationId = "loc_diner_back"
+time_progression_minutes = 5
+effects = [
+  { targetType = "npc", npcId = "npc_cole", trait = "relation", op = "add", value = 1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Ask him out."
+show_when_locked = true
+locked_text_threshold = "Post-shift walk done"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "cole_walk_done", operator = "is_true" },
+] }
+targetType = "location"
+locationId = "loc_diner_back"
+time_progression_minutes = 5
+effects = [
+  { targetType = "npc", npcId = "npc_cole", trait = "relation", op = "add", value = 2 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Come to his place."
+show_when_locked = true
+locked_text_threshold = "First date done"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "cole_date_done", operator = "is_true" },
+] }
+targetType = "location"
+locationId = "loc_cole_apartment"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the floor."
+targetType = "location"
+locationId = "loc_diner_front"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Cole — apartment hub (Stage 4 ongoing)
+# ─────────────────────────────────────────────────────────────────────────────
+# Cole's Stage-4 "ongoing" surface. The location loc_cole_apartment is access-gated
+# on cole_date_done; this hub gates on cole_first_night_done (priority 8 < the
+# first-night capstone's 9, so first_night fires until done, then the hub takes over).
+# NO requires_npc — Cole is never scheduled at his own apartment; it's implied-presence
+# (Maya visits her partner's place). The "Have sex" beat carries a pregnant variant.
+
+[[canvases]]
+id          = "cole_apartment_hub"
+name        = "Cole's apartment"
+description = "Lane 1 hub. Cole's place, Stage 4 ongoing. Gated cole_first_night_done. No requires_npc (partner's-home implied presence). Repeatable sex with pregnant variant."
+
+[canvases.trigger]
+location      = "loc_cole_apartment"
+is_repeatable = true
+priority      = 8
+is_active     = true
+npc           = "npc_cole"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Cole's apartment"
+blocks = [
+  { type = "image", props = { file = "scenes/cole_apartment_hub.jpg" } },
+  { type = "paragraph", content = "His studio, the drawings still going up faster than the wall has room for. He's at the little table with a pencil when she comes in, and he sets it down. His eyes go over her @player.body_type frame once, unhurried, the way they always do." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cole" }, content = "@player. Didn't think you'd come by." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk."
+targetType = "location"
+locationId = "loc_cole_apartment"
+time_progression_minutes = 15
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_cole_today", operator = "is_false" },
+] }
+effects = [
+  { targetType = "npc", npcId = "npc_cole", trait = "relation", op = "add", value = 1 },
+]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_cole_today", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Stay the night."
+targetType = "node"
+nodeId = "cole_apartment_hub.node_sex_repeat"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "cole_first_night_done", operator = "is_true" },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Head home."
+targetType = "location"
+locationId = "loc_main_street"
+
+# Repeat sex node — pregnant-variant aware (Cole: max-crude, sparse register)
+[[canvases.nodes]]
+id   = "node_sex_repeat"
+name = "Cole's apartment — sex"
+blocks = [
+  # Not pregnant
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "trait", subject = "player", trait_key = "pregnancy", operator = "lt", value = 1 },
+    ] }, blocks = [
+    { type = "paragraph", content = "They end up on the mattress the way they always do now. He gets her over onto her front, his cock against her cunt and then in, one hand on her hip, steady. *'Turn your hips up.'* He fucks her until he comes in her and lies back on the sheets without a word." },
+  ] } },
+  # Pregnant — crude + pregnant-aware, still sparse
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "trait", subject = "player", trait_key = "pregnancy", operator = "gte", value = 1 },
+    ] }, blocks = [
+    { type = "paragraph", content = "He works around the curve of her now — turns her on her side instead, slides in from behind with one hand spread over the swell of her belly. *'You're showing,'* he says, not a complaint, just noting it the way he notes a line that came out right." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cole" }, content = "Still fits. Stay still." },
+    { type = "paragraph", content = "He comes in her bare, no question about it, hand never leaving the belly. Lies back. Pulls her against him this time." },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Lie there."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_cole_apartment"
+time_progression_minutes = 60
+effects = [
+  { targetType = "npc", npcId = "npc_cole", trait = "relation", op = "add", value = 1 },
+  { targetType = "player", trait = "arousal",    op = "set", value = 0 },
+  { targetType = "player", trait = "corruption", op = "add", value = 1 },
+]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Rosa — diner front hub
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id          = "rosa_diner_front_hub"
+name        = "Mel's — Rosa"
+description = "Lane 1 hub. Rosa at diner_front. Service arc — no sexual escalation in current scope."
+
+[canvases.trigger]
+location      = "loc_diner_front"
+requires_npc  = "npc_rosa"
+is_repeatable = true
+priority      = 7
+is_active     = true
+npc           = "npc_rosa"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "rosa_trained_maya", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "17:00"
+end_time   = "01:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Mel's — Rosa"
+blocks = [
+  { type = "image", props = { file = "scenes/rosa_diner_front_hub.jpg" } },
+  { type = "paragraph", content = "Rosa at the counter, pencil behind her ear. She looks over." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk."
+targetType = "location"
+locationId = "loc_diner_front"
+time_progression_minutes = 5
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_rosa_today", operator = "is_false" },
+] }
+effects = [
+  { targetType = "npc", npcId = "npc_rosa", trait = "relation", op = "add", value = 1 },
+]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_rosa_today", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Ask about a regular."
+targetType = "location"
+locationId = "loc_diner_front"
+time_progression_minutes = 5
+effects = [
+  { targetType = "npc", npcId = "npc_rosa", trait = "relation", op = "add", value = 1 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Watch her work."
+targetType = "location"
+locationId = "loc_diner_front"
+time_progression_minutes = 10
+effects = [
+  { targetType = "npc", npcId = "npc_rosa", trait = "relation", op = "add", value = 1 },
+]
+
+# (Phase 3+ adultery-arc rungs removed with the dev canvases — their only unlock
+# path was dev_unlock_phase3, and phase_3_unlocked has no shipping setter. Rosa's
+# Phase 3+ arc remains deferred per the service-shape scope-out; it is simply not
+# telegraphed in the hub for this build.)
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave."
+targetType = "location"
+locationId = "loc_diner_front"
+
+# ═════════════════════════════════════════════════════════════════════════════
+# LANE 2 AMBIENTS
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ─── Hank ambients ───────────────────────────────────────────────────────────
+
+[[canvases]]
+id          = "ambient_hank_counter_alone"
+name        = "Mel's — Hank at the counter, lull"
+description = "Lane 2 ambient. Hank at counter during diner lull. T1+. Dice 25%."
+
+[canvases.trigger]
+location             = "loc_diner_front"
+is_repeatable        = true
+priority             = 6
+is_active            = true
+trigger_mode         = "random"
+chance               = 0.25
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "hank_opened_up", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "corruption",     operator = "gte", value = 5 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "23:00"
+end_time   = "01:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Lull"
+blocks = [
+  { type = "image", props = { file = "scenes/ambient_hank_counter_alone.jpg" } },
+  { type = "paragraph", content = "The diner's empty except for the trucker at the far booth. Hank is at the counter with coffee going cold, looking at the specials board. He doesn't look over when she comes to refill the condiments. He doesn't need to." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Keep working."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_diner_front"
+time_progression_minutes = 10
+effects = [
+  { targetType = "npc", npcId = "npc_hank", trait = "arousal", op = "add", value = 1, cap = 3 },
+  { targetType = "player", trait = "arousal", op = "add", value = 1, cap = 10 },
+]
+
+[[canvases]]
+id          = "ambient_hank_diner_observation"
+name        = "Mel's — Hank watches"
+description = "Lane 2 ambient. T0. Hank makes an observation about Maya's work. Dice 20%."
+
+[canvases.trigger]
+location             = "loc_diner_front"
+is_repeatable        = true
+priority             = 5
+is_active            = true
+trigger_mode         = "random"
+chance               = 0.20
+max_triggers_per_day = 1
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "hired_at_diner", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "22:00"
+end_time   = "01:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "He watches"
+blocks = [
+  { type = "image", props = { file = "scenes/ambient_hank_diner_observation.jpg" } },
+  { type = "paragraph", content = "She's clearing a booth when he says it from behind the counter — no preamble, like he's been watching for a while and just decided to speak." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_hank" }, content = "You're getting faster." },
+  { type = "paragraph", content = "She doesn't answer. He doesn't need her to." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Keep moving."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_diner_front"
+time_progression_minutes = 5
+effects = [
+  { targetType = "npc", npcId = "npc_hank", trait = "relation", op = "add", value = 1 },
+]
+
+[[canvases]]
+id          = "ambient_hank_mel_reference"
+name        = "Mel's — something about Mel"
+description = "Lane 2 ambient. T1+. One oblique Mel reference. Low repeat. Dice 15%."
+
+[canvases.trigger]
+location             = "loc_diner_front"
+is_repeatable        = true
+priority             = 5
+is_active            = true
+trigger_mode         = "random"
+chance               = 0.15
+max_triggers_per_day = 1
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "hank_opened_up", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "23:00"
+end_time   = "02:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Something about Mel"
+blocks = [
+  { type = "image", props = { file = "scenes/ambient_hank_mel_reference.jpg" } },
+  { type = "paragraph", content = "She's wiping down the counter near him. He says, not looking at her:" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_hank" }, content = "She'd have liked you." },
+  { type = "paragraph", content = "He picks up his coffee and goes back to the register." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Keep working."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_diner_front"
+time_progression_minutes = 5
+effects = [
+  { targetType = "npc", npcId = "npc_hank", trait = "relation", op = "add", value = 2 },
+  { targetType = "player", trait = "arousal", op = "add", value = 1, cap = 10 },
+]
+
+# ─── Ben ambients ────────────────────────────────────────────────────────────
+
+[[canvases]]
+id          = "ambient_ben_morning_crossover"
+name        = "Kitchen — 5:45am crossover"
+description = "Lane 2 ambient. S0+. Ben leaving for work, Maya arriving from shift. Dice 30%. The load-bearing slow-burn surface."
+
+[canvases.trigger]
+location             = "loc_shared_kitchen"
+is_repeatable        = true
+priority             = 6
+is_active            = true
+trigger_mode         = "random"
+chance               = 0.30
+max_triggers_per_day = 1
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "05:30"
+end_time   = "07:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "5:45am crossover"
+blocks = [
+  { type = "image", props = { file = "scenes/ambient_ben_morning_crossover.jpg" } },
+  { type = "paragraph", content = "He's in his work clothes, thermos in hand. She's just in — still in her diner uniform, smelling like coffee and the end of a shift. They pass in the kitchen." },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "ben_stage1", operator = "is_false" },
+    ] }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_ben" }, content = "Long night?" },
+    { type = "dialog", props = { speaker = "player" }, content = "Yeah." },
+    { type = "paragraph", content = "He nods. He goes." },
+  ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "ben_stage1", operator = "is_true" },
+    ] }, blocks = [
+    { type = "paragraph", content = "He doesn't say anything. He looks at her for a second the way he looks at her now — that particular way — then looks at his thermos." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_ben" }, content = "Coffee's fresh." },
+    { type = "paragraph", content = "He goes. She stands in the kitchen alone and pours the coffee." },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go to bed."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_shared_kitchen"
+time_progression_minutes = 10
+effects = [
+  { targetType = "npc", npcId = "npc_ben", trait = "relation", op = "add", value = 1 },
+]
+
+[[canvases]]
+id          = "ambient_ben_couch_reading"
+name        = "Living room — Ben reading"
+description = "Lane 2 ambient. S0+. Ben on couch, Maya in the room. Dice 25%."
+
+[canvases.trigger]
+location             = "loc_living_room"
+is_repeatable        = true
+priority             = 5
+is_active            = true
+trigger_mode         = "random"
+chance               = 0.25
+max_triggers_per_day = 1
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "17:30"
+end_time   = "21:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Ben reading"
+blocks = [
+  { type = "image", props = { file = "scenes/ambient_ben_couch_reading.jpg" } },
+  { type = "paragraph", content = "He's on the couch with his book. She comes in and he doesn't look up immediately." },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "ben_stage1", operator = "is_false" },
+    ] }, blocks = [
+    { type = "paragraph", content = "He reads. She sits in the armchair. The apartment has a quiet that doesn't need filling." },
+  ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "ben_stage1", operator = "is_true" },
+    ] }, blocks = [
+    { type = "paragraph", content = "He reads. Except after a minute he doesn't. He's looking at her over the top of the page and not pretending otherwise." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_ben" }, content = "You okay?" },
+    { type = "paragraph", content = "She says yes. He goes back to his book. He doesn't really go back to his book." },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stay a while."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_living_room"
+time_progression_minutes = 20
+effects = [
+  { targetType = "npc", npcId = "npc_ben", trait = "relation", op = "add", value = 1 },
+]
+
+# ─── Pam ambients ────────────────────────────────────────────────────────────
+
+[[canvases]]
+id          = "ambient_pam_building_neutral"
+name        = "Front steps — Pam (cold)"
+description = "Lane 2 ambient. Pam cold band (awareness 0–24). Neutral encounter on the steps as Maya heads out to her shift. Dice 20%."
+
+[canvases.trigger]
+location             = "loc_building_front"
+requires_npc         = "npc_pam"
+is_repeatable        = true
+priority             = 5
+is_active            = true
+trigger_mode         = "random"
+chance               = 0.20
+max_triggers_per_day = 1
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_pam", trait_key = "awareness", operator = "lt", value = 25 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "22:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Pam — front steps"
+blocks = [
+  { type = "image", props = { file = "scenes/ambient_pam_building_neutral.jpg" } },
+  { type = "paragraph", content = "Pam's on the bottom step with a cardigan over her shoulders, the way she sits out most evenings. She nods as Maya comes down." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_pam" }, content = "Off to the diner? Long hours they've got you on." },
+  { type = "dialog", props = { speaker = "player" }, content = "Yeah." },
+  { type = "paragraph", content = "She nods and goes back to watching the street." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Head to town."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_building_front"
+time_progression_minutes = 5
+
+[[canvases]]
+id          = "ambient_pam_building_loaded"
+name        = "Front steps — Pam (suspicious)"
+description = "Lane 2 ambient. Pam suspicious band (awareness 25–74). Pointed observations on the steps. Dice 25%."
+
+[canvases.trigger]
+location             = "loc_building_front"
+requires_npc         = "npc_pam"
+is_repeatable        = true
+priority             = 6
+is_active            = true
+trigger_mode         = "random"
+chance               = 0.25
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_pam", trait_key = "awareness", operator = "gte", value = 25 },
+  { type = "trait", subject = "npc", npc_id = "npc_pam", trait_key = "awareness", operator = "lt",  value = 75 },
+  { type = "flag",  subject = "player", flag_key = "pam_managed",          operator = "is_false" },
+  { type = "flag",  subject = "player", flag_key = "pam_escalated_to_ben", operator = "is_false" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "22:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Pam — pointed"
+blocks = [
+  { type = "image", props = { file = "scenes/ambient_pam_building_loaded.jpg" } },
+  { type = "paragraph", content = "Pam's on the step again. She watches Maya come down the way she's been watching her lately — slightly too long." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_pam" }, content = "Quiet building, mostly. Thin walls, though. I hear more than I'd like some nights." },
+  { type = "paragraph", content = "She didn't ask a question. She made a statement shaped like one and let it sit." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Head to town."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_building_front"
+time_progression_minutes = 5
+
+# ═════════════════════════════════════════════════════════════════════════════
+# LANE 3 SUBSTITUTION TARGETS
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ─── Hank subs ───────────────────────────────────────────────────────────────
+
+[[canvases]]
+id          = "scene_hank_passes_during_restock"
+name        = "Diner — Hank passes through"
+description = "Lane 3 sub. Sub on activity_diner_restock + activity_work_shift. T0+. requires_npc = npc_hank."
+
+[canvases.trigger]
+location             = "loc_diner_front"
+is_repeatable        = true
+priority             = 4
+is_active            = true
+substitution_only    = true
+requires_npc         = "npc_hank"
+max_triggers_per_day = 1
+
+[[canvases.nodes]]
+id   = "base"
+name = "Hank passes through"
+blocks = [
+  { type = "image", props = { file = "scenes/hank_passes_during_restock.jpg" } },
+  { type = "paragraph", content = "She's restocking the condiment caddies when Hank comes through the floor from the back. He doesn't take the straightest path." },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "hank_first_contact", operator = "is_false" },
+    ] }, blocks = [
+    { type = "paragraph", content = "He slows at the table she's at, reaches past her to straighten a salt shaker she hadn't touched. His arm just close enough." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_hank" }, content = "Counter needs it too." },
+  ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "hank_first_contact", operator = "is_true" },
+    ] }, blocks = [
+    { type = "paragraph", content = "He stops behind her in the aisle. Close enough. His hand at the small of her back — positioning, not lingering — then he moves on." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_hank" }, content = "Floor's clean." },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Keep working."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_diner_front"
+time_progression_minutes = 10
+effects = [
+  { targetType = "npc", npcId = "npc_hank", trait = "arousal", op = "add", value = 1, cap = 3 },
+  { targetType = "player", trait = "arousal",    op = "add", value = 1, cap = 10 },
+  { targetType = "player", trait = "corruption", op = "add", value = 1 },
+]
+
+[[canvases]]
+id          = "scene_hank_kitchen_doorway"
+name        = "Kitchen — Hank in the doorway"
+description = "Lane 3 sub. Sub on activity_diner_kitchen_prep. T1+ (corr 5+). requires_npc = npc_hank."
+
+[canvases.trigger]
+location             = "loc_diner_back"
+is_repeatable        = true
+priority             = 4
+is_active            = true
+substitution_only    = true
+requires_npc         = "npc_hank"
+max_triggers_per_day = 1
+
+[[canvases.nodes]]
+id   = "base"
+name = "Hank in the doorway"
+blocks = [
+  { type = "image", props = { file = "scenes/hank_kitchen_doorway.jpg" } },
+  { type = "paragraph", content = "She's at the prep table when she becomes aware of him in the kitchen doorway. She doesn't hear him — he was just there when she looked up. He's watching her work." },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "hank_after_close_done", operator = "is_false" },
+    ] }, blocks = [
+    { type = "paragraph", content = "She keeps working. He watches for ten seconds and then moves on. She doesn't know if that was a test." },
+  ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "hank_after_close_done", operator = "is_true" },
+    ] }, blocks = [
+    { type = "paragraph", content = "She looks up. He looks at her the way he looks at things he's decided about. He doesn't say anything. He goes back to the floor." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_hank" }, content = "After close." },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Keep prepping."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_diner_back"
+time_progression_minutes = 10
+effects = [
+  { targetType = "npc", npcId = "npc_hank", trait = "arousal", op = "add", value = 1, cap = 3 },
+  { targetType = "player", trait = "arousal",    op = "add", value = 1, cap = 10 },
+  { targetType = "player", trait = "corruption", op = "add", value = 1 },
+]
+
+[[canvases]]
+id          = "scene_hank_walkin_encounter"
+name        = "Walk-in — Hank appears"
+description = "Lane 3 sub. Sub on activity_diner_walkin_stock. T2+ (corr 15+). requires_npc = npc_hank."
+
+[canvases.trigger]
+location             = "loc_diner_back"
+is_repeatable        = true
+priority             = 4
+is_active            = true
+substitution_only    = true
+requires_npc         = "npc_hank"
+max_triggers_per_day = 1
+
+[[canvases.nodes]]
+id   = "base"
+name = "Walk-in"
+blocks = [
+  { type = "image", props = { file = "scenes/hank_walkin_encounter.jpg" } },
+  { type = "paragraph", content = "She's in the walk-in when the door opens. Hank. He doesn't explain why he's there — doesn't need to, it's his diner." },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "hank_first_contact", operator = "is_false" },
+    ] }, blocks = [
+    { type = "paragraph", content = "He goes to the back shelves. They're in there together for ninety seconds. Cold and close." },
+  ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "hank_first_contact", operator = "is_true" },
+    ] }, blocks = [
+    { type = "paragraph", content = "He comes to the back shelf where she is. The door clicks shut behind him. He doesn't reach for anything on the shelf." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_hank" }, content = "You missed a case." },
+    { type = "paragraph", content = "His hand finds her hip in the cold. Brief. He takes the case she missed and goes out." },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Come out."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_diner_back"
+time_progression_minutes = 10
+effects = [
+  { targetType = "npc", npcId = "npc_hank", trait = "arousal", op = "add", value = 1, cap = 3 },
+  { targetType = "player", trait = "arousal",    op = "add", value = 1, cap = 10 },
+  { targetType = "player", trait = "corruption", op = "add", value = 1 },
+]
+
+[[canvases]]
+id          = "scene_hank_storage_room"
+name        = "Storage — Hank appears"
+description = "Lane 3 sub. Sub on activity_diner_storage_stock. T3+ (corr 25+). requires_npc = npc_hank."
+
+[canvases.trigger]
+location             = "loc_diner_back"
+is_repeatable        = true
+priority             = 4
+is_active            = true
+substitution_only    = true
+requires_npc         = "npc_hank"
+max_triggers_per_day = 1
+
+[[canvases.nodes]]
+id   = "base"
+name = "Storage"
+blocks = [
+  { type = "image", props = { file = "scenes/hank_storage_room.jpg" } },
+  { type = "paragraph", content = "The storage room is narrow enough that two people have to turn sideways. She's at the back shelf when his shadow fills the doorway." },
+  { type = "paragraph", content = "He comes in. The room is the room. She doesn't move back and he doesn't stop moving until he's close — her between him and the shelves." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_hank" }, content = "What do you need?" },
+  { type = "paragraph", content = "He's not asking about the inventory." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Tell him."
+targetType = "location"
+locationId = "loc_diner_back"
+time_progression_minutes = 15
+effects = [
+  { targetType = "npc", npcId = "npc_hank", trait = "arousal",    op = "add", value = 1, cap = 3 },
+  { targetType = "player", trait = "arousal",    op = "add", value = 2, cap = 10 },
+  { targetType = "player", trait = "corruption", op = "add", value = 2 },
+]
+[[canvases.nodes.exit_block.choices]]
+text = "Name the inventory item. Go back to the kitchen."
+targetType = "location"
+locationId = "loc_diner_back"
+time_progression_minutes = 5
+effects = [
+  { targetType = "npc", npcId = "npc_hank", trait = "arousal", op = "add", value = 1, cap = 3 },
+  { targetType = "player", trait = "arousal", op = "add", value = 1, cap = 10 },
+]
+
+# ─── Ben subs ────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id          = "scene_ben_walks_in_kitchen"
+name        = "Kitchen — Ben appears"
+description = "Lane 3 sub. Sub on activity_make_tea + activity_make_coffee_solo. Stage 2+. requires_npc = npc_ben."
+
+[canvases.trigger]
+location             = "loc_shared_kitchen"
+is_repeatable        = true
+priority             = 4
+is_active            = true
+substitution_only    = true
+requires_npc         = "npc_ben"
+max_triggers_per_day = 1
+
+[[canvases.nodes]]
+id   = "base"
+name = "Ben in the kitchen"
+blocks = [
+  { type = "image", props = { file = "scenes/ben_walks_in_kitchen.jpg" } },
+  { type = "paragraph", content = "She's waiting on the kettle when she hears him in the hallway. He comes in for water — or that's what he says when he opens the cabinet. He takes a glass. He doesn't immediately fill it." },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "ben_first_move_done", operator = "is_false" },
+    ] }, blocks = [
+    { type = "paragraph", content = "He leans against the counter across from her. The kettle between them on the burner." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_ben" }, content = "Couldn't sleep." },
+    { type = "paragraph", content = "Not a question." },
+  ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "ben_first_move_done", operator = "is_true" },
+    ] }, blocks = [
+    { type = "paragraph", content = "He fills the glass but doesn't move to go back. He stands near her at the counter. She can feel the warmth of him from here." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_ben" }, content = "Maya." },
+    { type = "paragraph", content = "Just her name. She knows what it means now." },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Pour the tea."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_shared_kitchen"
+time_progression_minutes = 15
+effects = [
+  { targetType = "npc", npcId = "npc_ben", trait = "arousal", op = "add", value = 1, cap = 3 },
+  { targetType = "player", trait = "arousal",    op = "add", value = 1, cap = 10 },
+  { targetType = "player", trait = "corruption", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_pam", trait = "awareness", op = "add", value = 1 },
+]
+
+[[canvases]]
+id          = "scene_ben_couch_reveal"
+name        = "Living room — Ben sits"
+description = "Lane 3 sub. Sub on activity_watch_tv. Stage 1+. requires_npc = npc_ben."
+
+[canvases.trigger]
+location             = "loc_living_room"
+is_repeatable        = true
+priority             = 4
+is_active            = true
+substitution_only    = true
+requires_npc         = "npc_ben"
+max_triggers_per_day = 1
+
+[[canvases.nodes]]
+id   = "base"
+name = "He sits"
+blocks = [
+  { type = "image", props = { file = "scenes/ben_couch_reveal.jpg" } },
+  { type = "paragraph", content = "She's watching something she's not watching when he comes in from his room and sits on the couch. Not the armchair — the couch, closer than he needs to be." },
+  { type = "paragraph", content = "He looks at the TV. She looks at the TV. Neither of them is watching it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ben" }, content = "What are you watching." },
+  { type = "dialog", props = { speaker = "player" }, content = "Nothing." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_ben" }, content = "Yeah." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stay."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_living_room"
+time_progression_minutes = 30
+effects = [
+  { targetType = "npc", npcId = "npc_ben", trait = "arousal", op = "add", value = 1, cap = 3 },
+  { targetType = "npc", npcId = "npc_ben", trait = "relation", op = "add", value = 1 },
+  { targetType = "player", trait = "arousal", op = "add", value = 1, cap = 10 },
+  { targetType = "npc", npcId = "npc_pam", trait = "awareness", op = "add", value = 1 },
+]
+
+[[canvases]]
+id          = "scene_ben_walks_in_change"
+name        = "Maya's room — Ben in the doorway"
+description = "Lane 3 sub. Sub on activity_change_clothes. Stage 1+. Implied-presence walk-in — NO requires_npc (Ben can't be scheduled into Maya's room); instead time-gated to when Ben is home (weekday evenings + weekends). isCanvasValid enforces the schedule on the sub target."
+
+[canvases.trigger]
+location             = "loc_mayas_room"
+is_repeatable        = true
+priority             = 4
+is_active            = true
+substitution_only    = true
+max_triggers_per_day = 1
+# Fires only when Ben is plausibly home (so he can "wander to the ajar door").
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "17:30"
+end_time   = "22:00"
+[[canvases.trigger.schedules]]
+weekdays   = [5, 6]
+start_time = "09:00"
+end_time   = "22:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Ben in the doorway"
+blocks = [
+  { type = "image", props = { file = "scenes/ben_walks_in_change.jpg" } },
+  { type = "paragraph", content = "She's halfway through changing when she becomes aware of someone in the doorway. The door's ajar. Ben — he'd knocked maybe, she hadn't heard — standing there, and for a second he doesn't move." },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "ben_stage1", operator = "is_true" },
+    ] }, blocks = [
+    { type = "paragraph", content = "He sees exactly as much as he's going to see. He doesn't look away right away." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_ben" }, content = "Sorry." },
+    { type = "paragraph", content = "He pulls the door and it clicks. The word didn't sound like sorry." },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Finish getting dressed."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_mayas_room"
+time_progression_minutes = 10
+effects = [
+  { targetType = "npc", npcId = "npc_ben", trait = "arousal", op = "add", value = 1, cap = 3 },
+  { targetType = "player", trait = "arousal",    op = "add", value = 1, cap = 10 },
+  { targetType = "player", trait = "corruption", op = "add", value = 1 },
+]
+
+[[canvases]]
+id          = "ambient_pam_hallway_neutral"
+name        = "Building hallway — Pam"
+description = "Lane 2 ambient. Ungated base presence — Pam at the mailboxes in the morning. No flag gate (cold-start safe). Doc 72 dead-presence fix for loc_building_hallway. Dice 25%."
+
+[canvases.trigger]
+location             = "loc_building_hallway"
+requires_npc         = "npc_pam"
+is_repeatable        = true
+priority             = 5
+is_active            = true
+trigger_mode         = "random"
+chance               = 0.25
+max_triggers_per_day = 1
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "06:00"
+end_time   = "11:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Pam — hallway"
+blocks = [
+  { type = "image", props = { file = "scenes/ambient_pam_hallway_neutral.jpg" } },
+  { type = "paragraph", content = "Pam's at the bank of mailboxes when Maya comes through, sorting a thin stack of envelopes against her forearm. She looks up." },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_pam", trait_key = "awareness", operator = "lt", value = 25 },
+    ] }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_pam" }, content = "Morning. They've got you on nights, then." },
+  ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_pam", trait_key = "awareness", operator = "gte", value = 25 },
+    ] }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_pam" }, content = "Morning." },
+    { type = "paragraph", content = "She holds the look a beat longer than she used to, then goes back to her mail." },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Head out."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_building_hallway"
+time_progression_minutes = 5
+
+[[canvases]]
+id          = "ambient_cole_park_sketching"
+name        = "Town park — Cole"
+description = "Lane 2 ambient. Ungated base presence — Cole on a bench with his sketchpad, off-shift. No flag gate (cold-start safe). Doc 72 dead-presence fix for loc_town_park. Dice 25%."
+
+[canvases.trigger]
+location             = "loc_town_park"
+requires_npc         = "npc_cole"
+is_repeatable        = true
+priority             = 5
+is_active            = true
+trigger_mode         = "random"
+chance               = 0.25
+max_triggers_per_day = 1
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "14:00"
+end_time   = "20:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Cole — park bench"
+blocks = [
+  { type = "image", props = { file = "scenes/ambient_cole_park_sketching.jpg" } },
+  { type = "paragraph", content = "@cole's on the far bench with a sketchpad on one knee, a convenience-store coffee going cold beside him. He's got the loose, off-shift look of someone caught between sleep and work." },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "cole_noticed", operator = "is_false" },
+    ] }, blocks = [
+    { type = "paragraph", content = "He glances up the way you clock anyone on an empty path, then goes back to the page." },
+  ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "cole_noticed", operator = "is_true" },
+    ] }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cole" }, content = "Hey. Couldn't sleep either?" },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Move on."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_town_park"
+time_progression_minutes = 5
+
+[[canvases]]
+id          = "cole_park_hub"
+name        = "Town park — Cole"
+description = "Lane 1 hub. Cole on the bench off-shift. UNGATED (presence only) — the park is a real cold-start on-ramp into Cole's arc, independent of the diner job (Doc 72 R4). Meet -> build relation -> cole_walk_done, which feeds the existing scene_cole_first_date capstone at this same location."
+
+[canvases.trigger]
+location      = "loc_town_park"
+requires_npc  = "npc_cole"
+is_repeatable = true
+priority      = 8
+is_active     = true
+npc           = "npc_cole"
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "14:00"
+end_time   = "20:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Cole — park bench"
+blocks = [
+  { type = "image", props = { file = "scenes/cole_park_hub.jpg" } },
+  { type = "paragraph", content = "@cole's on the bench with the sketchpad, coffee gone cold beside him. He's easier to read in daylight than under the diner lights." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Introduce yourself."
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "cole_noticed", operator = "is_false" },
+] }
+targetType = "location"
+locationId = "loc_town_park"
+time_progression_minutes = 15
+effects = [
+  { targetType = "npc", npcId = "npc_cole", trait = "relation", op = "add", value = 5 },
+]
+flagEffects = [
+  { targetType = "player", flag = "cole_noticed", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sit and talk."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "cole_noticed",        operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "talked_to_cole_today", operator = "is_false" },
+] }
+targetType = "location"
+locationId = "loc_town_park"
+time_progression_minutes = 20
+effects = [
+  { targetType = "npc", npcId = "npc_cole", trait = "relation", op = "add", value = 3 },
+]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_cole_today", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Walk back together."
+show_when_locked = true
+locked_text_threshold = "Once you're closer (10+)"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "cole_noticed",   operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key  = "cole_walk_done", operator = "is_false" },
+  { type = "trait", subject = "npc",    npc_id    = "npc_cole", trait_key = "relation", operator = "gte", value = 10 },
+] }
+targetType = "location"
+locationId = "loc_town_park"
+time_progression_minutes = 30
+effects = [
+  { targetType = "npc", npcId = "npc_cole", trait = "relation", op = "add", value = 2 },
+]
+flagEffects = [
+  { targetType = "player", flag = "cole_walk_done", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Head off."
+targetType = "location"
+locationId = "loc_main_street"
+
+# ═════════════════════════════════════════════════════════════════════════════
+# QUEST CARDS
+# ═════════════════════════════════════════════════════════════════════════════
+# Quest card conditions use FLAT shape: { flag = "x", op = "is_true/is_false" }
+# or { trait = "x", subject = "player/npc", npc_id = "x", op = "gte/lt", value = N }
+# NOT the same as trigger predicate syntax.
+
+# ─── Hank quest chain ────────────────────────────────────────────────────────
+
+# H-M0: Pre-hire (points at canvas_hank_hire)
+[[quest_cards]]
+text         = "The diner two blocks down is hiring nights. I walked past the sign twice before I did anything about it."
+ready_text   = "He's at the register."
+tip          = "Walk in. Ask."
+npc_id       = "npc_hank"
+ready_canvas = "canvas_hank_hire"
+when = [
+  { flag = "hired_at_diner", op = "is_false" },
+]
+
+# H-M1: Hired, pre-slow-night-talk (points at scene_hank_slow_night_talk)
+[[quest_cards]]
+text         = "I work for him. He hired me in five minutes and hasn't said anything personal since."
+ready_text   = "Something's going to give one of these nights."
+tip          = "He stays late. Show up at the counter when it's quiet."
+npc_id       = "npc_hank"
+ready_canvas = "scene_hank_slow_night_talk"
+when = [
+  { flag = "hired_at_diner",  op = "is_true"  },
+  { flag = "hank_opened_up",  op = "is_false" },
+]
+goals = [
+  { trait = "corruption", subject = "player", op = "gte", value = 5, label = "Corruption" },
+]
+
+# H-M2: Post-opened-up, pre-first-contact
+[[quest_cards]]
+text         = "He told me something about Mel. One thing. I keep thinking about the way he said it."
+ready_text   = "Something's going to happen in that kitchen."
+tip          = "He's in there during the prep window. Be there."
+npc_id       = "npc_hank"
+ready_canvas = "scene_hank_first_contact_kitchen"
+when = [
+  { flag = "hank_opened_up",    op = "is_true"  },
+  { flag = "hank_first_contact", op = "is_false" },
+]
+goals = [
+  { trait = "corruption", subject = "player", op = "gte", value = 15, label = "Corruption" },
+]
+
+# H-M3: Post-first-contact, pre-after-close
+[[quest_cards]]
+text         = "His hand was on my waist for maybe three seconds. He didn't look sorry about it."
+ready_text   = "He's going to lock up one of these nights and tell me to stay."
+tip          = "Be on the floor late. Past 1am."
+npc_id       = "npc_hank"
+ready_canvas = "scene_hank_after_close"
+when = [
+  { flag = "hank_first_contact",   op = "is_true"  },
+  { flag = "hank_after_close_done", op = "is_false" },
+]
+goals = [
+  { trait = "corruption", subject = "player", op = "gte", value = 25, label = "Corruption" },
+]
+
+# H-M4: Post-after-close, pre-office-first
+[[quest_cards]]
+text         = "I was on my knees in his office. He said 'good girl' and meant it."
+ready_text   = "Next time he won't stop there."
+tip          = "Go to the office when the diner's empty."
+npc_id       = "npc_hank"
+ready_canvas = "scene_hank_office_first"
+when = [
+  { flag = "hank_after_close_done",  op = "is_true"  },
+  { flag = "hank_office_first_done", op = "is_false" },
+]
+goals = [
+  { trait = "corruption", subject = "player", op = "gte", value = 35, label = "Corruption" },
+]
+
+# H-M5: Post-office-first, pre-declaration
+[[quest_cards]]
+text         = "He fucked me over his desk and came inside me and went back to his paperwork."
+ready_text   = "He's going to name what this is."
+tip          = "The office. Late. When he's done with the books."
+npc_id       = "npc_hank"
+ready_canvas = "scene_hank_declaration"
+when = [
+  { flag = "hank_office_first_done", op = "is_true"  },
+  { flag = "hank_cracked",           op = "is_false" },
+]
+goals = [
+  { trait = "corruption", subject = "player", op = "gte", value = 50, label = "Corruption" },
+]
+
+# H-M6: Terminal
+[[quest_cards]]
+text         = "He said: you work here. You stay here. That's how it goes. I said okay. I meant it."
+npc_id       = "npc_hank"
+priority     = 1
+terminal     = true
+when = [
+  { flag = "hank_cracked", op = "is_true" },
+]
+
+# ─── Ben quest chain ─────────────────────────────────────────────────────────
+
+# B-M0: Pre-stage1 (no ready_canvas — mechanic card, stat-driven)
+# unlocks at ben_stage1 = true (either dual-path capstone)
+[[quest_cards]]
+# unlocks: ben_kitchen_hub + ben_living_room_hub Stage 1 content
+text = "He moved my boxes in without asking questions. We've been living around each other for weeks."
+tip  = "He's here evenings. We share a kitchen."
+npc_id = "npc_ben"
+when = [
+  { flag = "ben_stage1", op = "is_false" },
+]
+goals = [
+  { trait = "corruption", subject = "player", op = "gte", value = 5, label = "Corruption" },
+]
+
+# B-M1: Post-stage1, pre-charged-moment
+[[quest_cards]]
+text         = "He looked at me differently. I saw it happen. He looked away too late."
+ready_text   = "Something's going to happen between us."
+tip          = "Be in the living room with him. Let it sit."
+npc_id       = "npc_ben"
+ready_canvas = "scene_ben_stage2_charged_moment"
+when = [
+  { flag = "ben_stage1",         op = "is_true"  },
+  { flag = "ben_first_move_done", op = "is_false" },
+]
+goals = [
+  { trait = "corruption", subject = "player", op = "gte", value = 25, label = "Corruption" },
+  { trait = "relation", subject = "npc", npc_id = "npc_ben", op = "gte", value = 15, label = "Ben Relation" },
+]
+
+# B-M2: Post-first-move, pre-consummation
+[[quest_cards]]
+text         = "He took my hand and pressed his mouth to my knuckles and told me to go to bed."
+ready_text   = "We both know where this is going."
+tip          = "His room. Saturday or Sunday night."
+npc_id       = "npc_ben"
+ready_canvas = "scene_ben_consummation"
+when = [
+  { flag = "ben_first_move_done",   op = "is_true"  },
+  { flag = "ben_consummation_done", op = "is_false" },
+]
+goals = [
+  { trait = "corruption", subject = "player", op = "gte", value = 35, label = "Corruption" },
+]
+
+# B-M3: Terminal
+[[quest_cards]]
+text     = "He said 'my little sister' into my throat while he was inside me. Neither of us pretended it happened by accident."
+npc_id   = "npc_ben"
+priority = 1
+terminal = true
+when = [
+  { flag = "ben_consummation_done", op = "is_true" },
+]
+
+# ─── Cole quest chain ────────────────────────────────────────────────────────
+
+# C-M0: Pre-noticed
+[[quest_cards]]
+text         = "The cook on my shift barely speaks. He's been watching me work."
+ready_text   = "He's going to say something real one of these nights."
+tip          = "Talk to him on break. Ask something that isn't about work."
+npc_id       = "npc_cole"
+ready_canvas = "scene_cole_first_break_talk"
+when = [
+  { flag = "hired_at_diner", op = "is_true"  },
+  { flag = "cole_noticed",   op = "is_false" },
+]
+goals = [
+  { trait = "relation", subject = "npc", npc_id = "npc_cole", op = "gte", value = 5, label = "Closeness" },
+]
+
+# C-M1: Post-noticed, pre-walk
+[[quest_cards]]
+text         = "He told me he draws. Like it slipped out and he didn't take it back."
+ready_text   = "We're going to end up walking out of here together."
+tip          = "Leave shift at the same time. Don't take a different way."
+npc_id       = "npc_cole"
+ready_canvas = "scene_cole_post_shift_walk"
+when = [
+  { flag = "cole_noticed",   op = "is_true"  },
+  { flag = "cole_walk_done", op = "is_false" },
+]
+goals = [
+  { trait = "relation", subject = "npc", npc_id = "npc_cole", op = "gte", value = 10, label = "Closeness" },
+]
+
+# C-M2: Post-walk, pre-date
+[[quest_cards]]
+text         = "We walked to the edge of town in the dark. I asked to see the drawings. He said sure."
+ready_text   = "He's going to be there in the afternoon. Find him."
+tip          = "The park, mid-afternoon. He's usually there before shift."
+npc_id       = "npc_cole"
+ready_canvas = "scene_cole_first_date"
+when = [
+  { flag = "cole_walk_done", op = "is_true"  },
+  { flag = "cole_date_done", op = "is_false" },
+]
+goals = [
+  { trait = "relation", subject = "npc", npc_id = "npc_cole", op = "gte", value = 15, label = "Closeness" },
+]
+
+# C-M3: Post-date, pre-first-night
+[[quest_cards]]
+text         = "He showed me the view from his kitchen window. A fire escape and a water tower. He'd looked at it for a long time before he drew it."
+ready_text   = "He said: come see the rest. I said yeah."
+tip          = "Go to his apartment."
+npc_id       = "npc_cole"
+ready_canvas = "scene_cole_first_night"
+when = [
+  { flag = "cole_date_done",       op = "is_true"  },
+  { flag = "cole_first_night_done", op = "is_false" },
+]
+goals = [
+  { trait = "relation", subject = "npc", npc_id = "npc_cole", op = "gte", value = 25, label = "Closeness" },
+]
+
+# C-M4: Terminal
+[[quest_cards]]
+text     = "He said 'turn over' and I did. That was that."
+npc_id   = "npc_cole"
+priority = 1
+terminal = true
+when = [
+  { flag = "cole_first_night_done", op = "is_true" },
+]
+
+# ─── Rosa quest chain ────────────────────────────────────────────────────────
+
+# R-M0: Pre-hire (shared with Hank's M0 — hire is the same canvas)
+# No separate card needed — canvas_hank_hire also sets hired_at_diner which gates Rosa.
+
+# R-M1: Post-hire, pre-onboarding
+[[quest_cards]]
+text         = "He hired me. The head waitress is supposed to show me the floor."
+ready_text   = "Rosa will be there for the evening shift."
+tip          = "Come in during her shift."
+npc_id       = "npc_rosa"
+ready_canvas = "canvas_rosa_onboarding"
+when = [
+  { flag = "hired_at_diner",    op = "is_true"  },
+  { flag = "rosa_trained_maya", op = "is_false" },
+]
+
+# R-M2: Post-onboarding mechanic card
+# unlocks: Rosa T1 content + Rosa relation building
+[[quest_cards]]
+# unlocks at npc_rosa.relation >= 15: Rosa trusted-colleague content tier
+text = "She showed me the floor in two hours. Efficient. I'm starting to understand how this place works."
+tip  = "Work the shifts. Talk to her."
+npc_id = "npc_rosa"
+when = [
+  { flag = "rosa_trained_maya", op = "is_true" },
+  { trait = "relation", subject = "npc", npc_id = "npc_rosa", op = "lt", value = 15 },
+]
+goals = [
+  { trait = "relation", subject = "npc", npc_id = "npc_rosa", op = "gte", value = 15, label = "Rosa Relation" },
+]
+
+# R-M3: Terminal (colleague state)
+[[quest_cards]]
+text     = "She let me sit at the counter. Rosa's floor, Rosa's rules. She knows I'm good at this now."
+npc_id   = "npc_rosa"
+priority = 1
+terminal = true
+when = [
+  { trait = "relation", subject = "npc", npc_id = "npc_rosa", op = "gte", value = 15 },
+]
+
+# ─── Pam quest card ──────────────────────────────────────────────────────────
+
+# P-M0: Pre-confrontation
+[[quest_cards]]
+# unlocks: scene_pam_confrontation fires automatically at awareness >= 75
+text = "The neighbor in 2B is polite in a way that means she's paying attention."
+tip  = "Keep things quiet. Or don't."
+npc_id = "npc_pam"
+when = [
+  { flag = "pam_managed",          op = "is_false" },
+  { flag = "pam_escalated_to_ben", op = "is_false" },
+]
+
+# P-M1: Managed branch terminal
+[[quest_cards]]
+text     = "She said: I'm not interested in anybody's business. That means she is. We have an understanding."
+npc_id   = "npc_pam"
+priority = 1
+terminal = true
+when = [
+  { flag = "pam_managed", op = "is_true" },
+]
+
+# P-M2: Escalated branch terminal
+[[quest_cards]]
+text     = "She went to Ben's door. I heard her knock. I don't know what he said to her."
+npc_id   = "npc_pam"
+priority = 1
+terminal = true
+when = [
+  { flag = "pam_escalated_to_ben", op = "is_true" },
+]
+
+# ═════════════════════════════════════════════════════════════════════════════
+# RTS-FAITHFUL CLOTHING → PUBLIC CONTENT (2026-06-01)
+# Verified against Road-to-Success source: clothing routes PUBLIC/WORLD events
+# (live worn_corruption / worn_beauty read), NEVER NPC arcs. A separate persistent
+# `exhibitionism` meter (RTS getExb/AddExb) is raised by flash/expose acts and
+# gates payoff content alongside global corruption (RTS StreetChallenge1 shape).
+# WEAN: worn_* beats grant 0 global corruption; only flash ACTS mutate a stat (+exb).
+# Thresholds map RTS 15/30 → Late Shifts worn_corruption 15 (first notice) / 25-30
+# (overt); beauty 4 = social; exb gates at 10 / 30.  id-prefix: rts_public_clothing
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ── 1. Diner floor — customers clock the outfit (RTS ParkJog two-tier) ──────────
+[[canvases]]
+id          = "rts_public_clothing_diner_customers"
+name        = "Mel's — the floor notices"
+description = "Public worn_corruption beat (WEAN). Diner customers react to a revealing outfit on shift. Two tiers: >=15 glances/bigger tips, >=30 overt. Live outfit key — take it off, beat stops. 0 global corruption."
+
+[canvases.trigger]
+location             = "loc_diner_front"
+is_repeatable        = true
+priority             = 5
+is_active            = true
+trigger_mode         = "random"
+chance               = 0.35
+max_triggers_per_day = 1
+conditions = { version = "1.0", items = [
+  { type = "worn_corruption", operator = "gte", value = 15 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "22:00"
+end_time   = "01:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The floor notices"
+blocks = [
+  { type = "paragraph", content = "The regular at Table 6 looks up from his coffee a beat longer than the coffee warrants. The trucker at the counter watches her reach for the pot." },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "worn_corruption", operator = "lt", value = 30 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Nobody says anything. But the tip jar's heavier when she clears the booths, and she knows exactly why." },
+  ] } },
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "worn_corruption", operator = "gte", value = 30 },
+    ] }, blocks = [
+    { type = "paragraph", content = "The trucker doesn't pretend to look anywhere else. He follows the line of her down to the hem and back up, and when she sets his check down he tucks a folded twenty under the saucer without breaking eye contact. The regular's coffee goes cold while he watches her work the far booths." },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Keep working."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_diner_front"
+time_progression_minutes = 10
+
+# ── 2. Diner floor — dressed-up social reception (RTS Club beauty gate) ─────────
+[[canvases]]
+id          = "rts_public_clothing_diner_beauty"
+name        = "Mel's — she looks good tonight"
+description = "Public worn_BEAUTY beat (WEAN). Beauty is the SOCIAL key (RTS Club/ThomasPartyInvite >= 3 analog), distinct from corruption. A put-together outfit (worn_beauty >= 4) warms the room. 0 effects."
+
+[canvases.trigger]
+location             = "loc_diner_front"
+is_repeatable        = true
+priority             = 4
+is_active            = true
+trigger_mode         = "random"
+chance               = 0.30
+max_triggers_per_day = 1
+conditions = { version = "1.0", items = [
+  { type = "worn_beauty", operator = "gte", value = 4 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "22:00"
+end_time   = "01:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "She looks good tonight"
+blocks = [
+  { type = "paragraph", content = "It's a small thing — she put herself together before the shift, and the room reads it without being told. An old couple in the corner booth smiles at her instead of past her. The trucker says please and thank you. Someone leaves a five on a two-dollar coffee and calls her 'miss.'" },
+  { type = "paragraph", content = "Nothing happens. It's just easier, the whole night, being looked at like that." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Keep working."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_diner_front"
+time_progression_minutes = 10
+
+# ── 3. Town street — heads turn (RTS BeachSunbathe/street, worn_corruption) ─────
+[[canvases]]
+id          = "rts_public_clothing_street_stares"
+name        = "Main Street — heads turn"
+description = "Public worn_corruption beat (WEAN). Walking through town in a revealing outfit draws eyes. >= 25. Repeatable ambient on the town hub. 0 global corruption."
+
+[canvases.trigger]
+location             = "loc_main_street"
+is_repeatable        = true
+priority             = 4
+is_active            = true
+trigger_mode         = "random"
+chance               = 0.30
+max_triggers_per_day = 1
+conditions = { version = "1.0", items = [
+  { type = "worn_corruption", operator = "gte", value = 25 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "23:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Heads turn"
+blocks = [
+  { type = "paragraph", content = "Main Street isn't long. Long enough. A guy loading a truck outside the hardware store stops with a box half-lifted. Two men outside the bar turn their heads in unison, like she's pulled a string between them. A woman with a stroller looks, then very deliberately doesn't." },
+  { type = "paragraph", content = "She keeps walking. The looks land on her back the whole length of the block." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Keep walking."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_main_street"
+time_progression_minutes = 5
+
+# ── 4. Town park — jogger encounter (RTS ParkJog direct analog) ─────────────────
+[[canvases]]
+id          = "rts_public_clothing_park_jogger"
+name        = "Town Park — the jogger"
+description = "Public worn_corruption beat (WEAN). The clearest RTS ParkJog analog — a passer-by clocks the outfit on the quiet path. >= 15. 0 global corruption."
+
+[canvases.trigger]
+location             = "loc_town_park"
+is_repeatable        = true
+priority             = 4
+is_active            = true
+trigger_mode         = "random"
+chance               = 0.30
+max_triggers_per_day = 1
+conditions = { version = "1.0", items = [
+  { type = "worn_corruption", operator = "gte", value = 15 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "20:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The jogger"
+blocks = [
+  { type = "paragraph", content = "A jogger comes around the bend, earbuds in, and his stride stutters when he registers what she's wearing on a bench in a near-empty park. He recovers, runs on — and she counts the seconds until he loops back the same way, slower this time, taking the long look he didn't let himself take the first pass." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Move on."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_town_park"
+time_progression_minutes = 5
+
+# ── 5. Convenience store — the clerk recognizes the look (worn_corruption) ──────
+[[canvases]]
+id          = "rts_public_clothing_store_clerk"
+name        = "Convenience Store — the girl at the register"
+description = "Public worn_corruption beat (WEAN). 'The girl at the register knows everyone's name' (loc desc) — she clocks the outfit. >= 25. 0 global corruption."
+
+[canvases.trigger]
+location             = "loc_convenience_store"
+is_repeatable        = true
+priority             = 4
+is_active            = true
+trigger_mode         = "random"
+chance               = 0.35
+max_triggers_per_day = 1
+conditions = { version = "1.0", items = [
+  { type = "worn_corruption", operator = "gte", value = 25 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "23:59"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The girl at the register"
+blocks = [
+  { type = "paragraph", content = "Under the fluorescents there's nowhere to hide what she's wearing. The girl at the register — who knows everyone's name — clocks her from the door to the cooler and back. Rings up the energy drink slow. Doesn't say anything about the outfit, just lets her eyes say it, and a guy in line behind Maya forgets to move up when the lane clears." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Pay and go."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_convenience_store"
+time_progression_minutes = 5
+
+# ── 6. FLASH ACT — park bench (RTS AddExb). Requires revealing outfit, grants +exb ──
+[[canvases]]
+id          = "rts_public_clothing_flash_park"
+name        = "Town Park — give them something to see"
+description = "Exhibitionism ACT (RTS AddExb analog). Opportunity beat: requires a revealing outfit (worn_corruption >= 25) to appear; the flash CHOICE grants +10 exhibitionism (the only stat-mutating clothing content). Decline = free exit, 0 cost. RTS BusRandomEvent shape."
+
+[canvases.trigger]
+location             = "loc_town_park"
+is_repeatable        = true
+priority             = 6
+is_active            = true
+trigger_mode         = "random"
+chance               = 0.25
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "worn_corruption", operator = "gte", value = 25 },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "20:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Give them something to see"
+blocks = [
+  { type = "paragraph", content = "The path's empty except for a man on the far bench who keeps pretending to read. She's already dressed for being looked at. It would be nothing — a stretch, a recline, letting the hem ride where it wants — to give him the thing he's been stealing in glances." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him look."
+targetType = "node"
+nodeId = "rts_public_clothing_flash_park.node_flash"
+time_progression_minutes = 10
+effects = [
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 10, cap = 100 },
+  { targetType = "player", trait = "arousal", op = "add", value = 1, cap = 10 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Not here."
+targetType = "location"
+locationId = "loc_town_park"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "node_flash"
+name = "Let him look"
+blocks = [
+  { type = "paragraph", content = "She doesn't make it obvious — that's the trick of it. Just a slow recline, an arm along the back of the bench, a knee that falls open like an afterthought. The man's book stops being a prop. His eyes go where she's decided to let them go, and the heat that climbs her neck isn't shame, exactly. It's the opposite. She holds the pose a beat past comfortable, because she can, because he won't look away first." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done. Move on."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_town_park"
+time_progression_minutes = 5
+
+# ── 7. FLASH ACT — diner at 3am (RTS AddExb). Quiet floor, lone trucker ─────────
+[[canvases]]
+id          = "rts_public_clothing_flash_diner"
+name        = "Mel's — 3am, just the trucker"
+description = "Exhibitionism ACT (RTS AddExb). On a dead late shift with one customer; revealing outfit required (worn_corruption >= 25). Flash choice grants +10 exhibitionism. Decline = free. RTS AddExb."
+
+[canvases.trigger]
+location             = "loc_diner_front"
+is_repeatable        = true
+priority             = 6
+is_active            = true
+trigger_mode         = "random"
+chance               = 0.25
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "hired_at_diner", operator = "is_true" },
+  { type = "worn_corruption", operator = "gte", value = 25 },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "02:30"
+end_time   = "04:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "3am, just the trucker"
+blocks = [
+  { type = "paragraph", content = "Dead hour. One trucker nursing the bottomless cup in the corner booth, Hank in the back doing the books. The kind of empty where the next thing that happens is whatever she decides happens. The trucker's been watching her all night and pretending the newspaper's interesting." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Bend a little slower clearing his table."
+targetType = "node"
+nodeId = "rts_public_clothing_flash_diner.node_flash"
+time_progression_minutes = 10
+effects = [
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 10, cap = 100 },
+  { targetType = "player", trait = "arousal", op = "add", value = 1, cap = 10 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Just clear the table."
+targetType = "location"
+locationId = "loc_diner_front"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "node_flash"
+name = "Slower"
+blocks = [
+  { type = "paragraph", content = "She takes his plates one at a time when she could stack them. Reaches across the table when she could walk around it. The outfit does the rest — rides where it rides, gaps where it gaps — and the trucker forgets the newspaper entirely, coffee halfway to his mouth, watching her like the floor show he didn't know came with the pie. She straightens up unhurried, lets him see her see him looking, and carries the plates back to the dish station with her pulse going." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back to the floor."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_diner_front"
+time_progression_minutes = 5
+
+# ── 8. EXB PAYOFF (light) — RTS DiscountSex/BusRandomEvent exb>=10 ──────────────
+[[canvases]]
+id          = "rts_public_clothing_payoff_street"
+name        = "Main Street — someone's noticed the pattern"
+description = "Exhibitionism PAYOFF (light). RTS exb>=10 gate (DiscountSex/BusRandomEvent shape). Once she's flashed in public a few times (exhibitionism >= 10), a regular admirer surfaces. WEAN — recognition beat, 0 stat mutation."
+
+[canvases.trigger]
+location             = "loc_main_street"
+is_repeatable        = true
+priority             = 5
+is_active            = true
+trigger_mode         = "random"
+chance               = 0.25
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 10 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "23:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Someone's noticed the pattern"
+blocks = [
+  { type = "paragraph", content = "A man she's half-seen before — the bar, the park, she can't place it — slows as he passes and tips an imaginary hat. 'You're getting a reputation,' he says, not unkindly, and keeps walking before she can decide whether that's a warning or an invitation. It lands as both. She realizes the town is starting to keep a file on her, and that the part of her that minds is getting quieter." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Keep walking."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_main_street"
+time_progression_minutes = 5
+
+# ── 9. EXB PAYOFF (bold) — RTS StreetChallenge1 (exb>=30 AND corruption>=50) ────
+[[canvases]]
+id          = "rts_public_clothing_payoff_bold"
+name        = "Main Street — the dare"
+description = "Exhibitionism PAYOFF (bold). RTS StreetChallenge1 exact shape: getCorruptionLevel()>=4 && getExb()>=30 → here exhibitionism>=30 AND corruption>=50 (Slutty band). The grind + the spine, combined. The flash CHOICE grants +15 exhibitionism."
+
+[canvases.trigger]
+location             = "loc_main_street"
+is_repeatable        = true
+priority             = 7
+is_active            = true
+trigger_mode         = "random"
+chance               = 0.25
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 30 },
+  { type = "trait", subject = "player", trait_key = "corruption",    operator = "gte", value = 50 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "20:00"
+end_time   = "23:59"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The dare"
+blocks = [
+  { type = "paragraph", content = "Two guys outside the closed-up bar, half a six-pack in, recognize her now. 'Heard you don't mind an audience,' one calls — testing, grinning, expecting her to flush and hurry past like the old her would have. The street's dark and empty behind them. There's a streetlight, a brick wall, and the specific dare of being asked to prove the reputation she's built." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Give them the show."
+targetType = "node"
+nodeId = "rts_public_clothing_payoff_bold.node_show"
+time_progression_minutes = 15
+effects = [
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 15, cap = 100 },
+  { targetType = "player", trait = "arousal", op = "add", value = 2, cap = 10 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Not tonight."
+targetType = "location"
+locationId = "loc_main_street"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "node_show"
+name = "Give them the show"
+blocks = [
+  { type = "paragraph", content = "She doesn't hurry past. She stops under the streetlight where they can see her properly, and she takes her time about it — lets them look, lets them go quiet, turns the dare back on them until they're the ones not sure what happens next. By the time she walks off it's her call, not theirs, and the whistle that follows her down the block sounds more like surrender than catcall. Whatever was left of the grad student who flinched at a look is gone somewhere around the corner." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Walk it off."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId = "loc_main_street"
+time_progression_minutes = 5
+
+# End of phase 5. Reply "next" to receive phase 6 (dev shortcuts).
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# D72-R6/R7/R8 PRESENCE-FLOOR HUBS (2026-06-02)
+# One Lane 1 hub per [[npcs.schedules]] row. Base renders unconditionally (D72-R6).
+# Rung ceiling = location exposure (D72-R7): public = talk/look · semi-private =
+# + tease · private = full ladder. Reuses each NPC's existing rung names/gates/
+# voice (D72-R8); full ladder only where private. Lane 2 ambients ride on top.
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ─── Hank — daytime diner front (PUBLIC: customers → talk only) ───────────────
+[[canvases]]
+id          = "hank_diner_front_morning"
+name        = "Mel's — Hank, morning"
+description = "Presence hub (D72-R6). Public floor at the breakfast rush → talk only (D72-R7)."
+[canvases.trigger]
+location      = "loc_diner_front"
+requires_npc  = "npc_hank"
+is_repeatable = true
+priority      = 8
+is_active     = true
+npc           = "npc_hank"
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "06:00"
+end_time   = "09:00"
+[[canvases.nodes]]
+id   = "base"
+name = "Mel's — Hank, morning"
+blocks = [
+  { type = "image", props = { file = "scenes/hank_diner_front_morning.jpg" } },
+  { type = "paragraph", content = "Breakfast rush. Hank works the counter and the register both, ticket rail full, no time to look up for long." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Talk."
+targetType = "location"
+locationId = "loc_diner_front"
+time_progression_minutes = 5
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_hank_today", operator = "is_false" },
+] }
+effects = [ { targetType = "npc", npcId = "npc_hank", trait = "relation", op = "add", value = 1 } ]
+flagEffects = [ { targetType = "player", flag = "talked_to_hank_today", op = "set" } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Leave."
+targetType = "location"
+locationId = "loc_diner_front"
+
+[[canvases]]
+id          = "hank_diner_front_day"
+name        = "Mel's — Hank, day"
+description = "Presence hub (D72-R6). Public floor, daytime lull → talk only (D72-R7)."
+[canvases.trigger]
+location      = "loc_diner_front"
+requires_npc  = "npc_hank"
+is_repeatable = true
+priority      = 8
+is_active     = true
+npc           = "npc_hank"
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "09:00"
+end_time   = "17:00"
+[[canvases.nodes]]
+id   = "base"
+name = "Mel's — Hank, day"
+blocks = [
+  { type = "image", props = { file = "scenes/hank_diner_front_day.jpg" } },
+  { type = "paragraph", content = "Slow part of the afternoon. Hank refills the napkin dispensers down the counter, one booth of regulars nursing coffee in the corner." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Talk."
+targetType = "location"
+locationId = "loc_diner_front"
+time_progression_minutes = 5
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_hank_today", operator = "is_false" },
+] }
+effects = [ { targetType = "npc", npcId = "npc_hank", trait = "relation", op = "add", value = 1 } ]
+flagEffects = [ { targetType = "player", flag = "talked_to_hank_today", op = "set" } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Leave."
+targetType = "location"
+locationId = "loc_diner_front"
+
+[[canvases]]
+id          = "hank_diner_front_evening"
+name        = "Mel's — Hank, evening"
+description = "Presence hub (D72-R6). Public floor at the dinner stretch → talk only (D72-R7)."
+[canvases.trigger]
+location      = "loc_diner_front"
+requires_npc  = "npc_hank"
+is_repeatable = true
+priority      = 8
+is_active     = true
+npc           = "npc_hank"
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "22:00"
+[[canvases.nodes]]
+id   = "base"
+name = "Mel's — Hank, evening"
+blocks = [
+  { type = "image", props = { file = "scenes/hank_diner_front_evening.jpg" } },
+  { type = "paragraph", content = "Dinner stretch. Hank moves plates two at a time, the grill ticket rail loud behind him. He gives her a nod and keeps moving." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Talk."
+targetType = "location"
+locationId = "loc_diner_front"
+time_progression_minutes = 5
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_hank_today", operator = "is_false" },
+] }
+effects = [ { targetType = "npc", npcId = "npc_hank", trait = "relation", op = "add", value = 1 } ]
+flagEffects = [ { targetType = "player", flag = "talked_to_hank_today", op = "set" } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Leave."
+targetType = "location"
+locationId = "loc_diner_front"
+
+# ─── Hank — kitchen at close (SEMI-PRIVATE: + tease, no sex) ──────────────────
+[[canvases]]
+id          = "hank_diner_back_close"
+name        = "Mel's Kitchen — Hank, close"
+description = "Presence hub (D72-R6). Hank cashing out in back at close. Semi-private → talk + tease, no sex here (D72-R7). Tease reuses hank_tease_diner (D72-R8)."
+[canvases.trigger]
+location      = "loc_diner_back"
+requires_npc  = "npc_hank"
+is_repeatable = true
+priority      = 8
+is_active     = true
+npc           = "npc_hank"
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "22:30"
+end_time   = "00:30"
+[[canvases.nodes]]
+id   = "base"
+name = "Mel's Kitchen — Hank, close"
+blocks = [
+  { type = "image", props = { file = "scenes/hank_diner_back_close.jpg" } },
+  { type = "paragraph", content = "Back at close. Hank's at the prep table counting the drawer, sleeves shoved up, the grill ticking as it cools. Cole's already gone home." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Talk."
+targetType = "location"
+locationId = "loc_diner_back"
+time_progression_minutes = 5
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_hank_today", operator = "is_false" },
+] }
+effects = [ { targetType = "npc", npcId = "npc_hank", trait = "relation", op = "add", value = 1 } ]
+flagEffects = [ { targetType = "player", flag = "talked_to_hank_today", op = "set" } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Tease him."
+targetType = "node"
+nodeId = "hank_tease_diner.base"
+show_when_locked = true
+locked_text = "Not here, not yet."
+locked_text_threshold = "Maya's corruption: 5+"
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 5 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text = "Leave."
+targetType = "location"
+locationId = "loc_diner_back"
+
+# ─── Ben — bedroom, weeknight (PRIVATE: full ladder; reuses ben_room_hub nodes) ─
+[[canvases]]
+id          = "ben_room_night"
+name        = "Ben's room, weeknight"
+description = "Presence hub (D72-R6). Weeknight twin of ben_room_hub. Private → full ladder (D72-R7); Touch/Sex reuse ben_room_hub nodes (D72-R8). Base ungated."
+[canvases.trigger]
+location      = "loc_bens_room"
+requires_npc  = "npc_ben"
+is_repeatable = true
+priority      = 8
+is_active     = true
+npc           = "npc_ben"
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "20:30"
+end_time   = "05:30"
+[[canvases.nodes]]
+id   = "base"
+name = "Ben's room, weeknight"
+blocks = [
+  { type = "image", props = { file = "scenes/ben_room_hub.jpg" } },
+  { type = "paragraph", content = "Late on a weeknight, his lamp the only light down the hall. Work boots by the door, the book face-down on the nightstand. He looks up when she stops in the doorway." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Sit with him."
+targetType = "location"
+locationId = "loc_bens_room"
+time_progression_minutes = 15
+effects = [ { targetType = "npc", npcId = "npc_ben", trait = "relation", op = "add", value = 1 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Touch him."
+targetType = "node"
+nodeId = "ben_room_hub.node_touch"
+show_when_locked = true
+locked_text_threshold = "Maya's corruption: 25+"
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text = "Have sex with him."
+targetType = "node"
+nodeId = "ben_room_hub.node_sex_repeat"
+show_when_locked = true
+locked_text_threshold = "Consummation done"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "ben_consummation_done", operator = "is_true" },
+] }
+[[canvases.nodes.exit_block.choices]]
+text = "Go to bed."
+targetType = "location"
+locationId = "loc_mayas_apartment"
+
+# ─── Ben — living room, weekend day (SEMI-PRIVATE; twin of ben_living_room_hub) ─
+[[canvases]]
+id          = "ben_living_weekend_day"
+name        = "Living room — Ben, weekend"
+description = "Presence hub (D72-R6). Weekend-day twin of ben_living_room_hub (D72-R8). Semi-private. Base ungated."
+[canvases.trigger]
+location      = "loc_living_room"
+requires_npc  = "npc_ben"
+is_repeatable = true
+priority      = 8
+is_active     = true
+npc           = "npc_ben"
+[[canvases.trigger.schedules]]
+weekdays   = [5, 6]
+start_time = "09:00"
+end_time   = "14:00"
+[[canvases.nodes]]
+id   = "base"
+name = "Living room — Ben, weekend"
+blocks = [
+  { type = "image", props = { file = "scenes/ben_living_room_hub.jpg" } },
+  { type = "paragraph", content = "Weekend morning, no shift to get to. Ben's on the couch with his book and a second coffee, sock feet on the table. He looks up." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Sit with him."
+targetType = "location"
+locationId = "loc_living_room"
+time_progression_minutes = 20
+effects = [ { targetType = "npc", npcId = "npc_ben", trait = "relation", op = "add", value = 1 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Touch his hand."
+targetType = "location"
+locationId = "loc_living_room"
+time_progression_minutes = 10
+show_when_locked = true
+locked_text_threshold = "Maya's corruption: 15+"
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
+] }
+effects = [
+  { targetType = "npc", npcId = "npc_ben", trait = "arousal",  op = "add", value = 1, cap = 3 },
+  { targetType = "player", trait = "arousal", op = "add", value = 1, cap = 10 },
+  { targetType = "player", trait = "corruption", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_pam", trait = "awareness", op = "add", value = 1 },
+]
+[[canvases.nodes.exit_block.choices]]
+text = "Come to his room."
+targetType = "location"
+locationId = "loc_bens_room"
+show_when_locked = true
+locked_text_threshold = "First move made"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "ben_first_move_done", operator = "is_true" },
+] }
+[[canvases.nodes.exit_block.choices]]
+text = "Go to your room."
+targetType = "location"
+locationId = "loc_mayas_apartment"
+
+# ─── Ben — building front, weekend (PUBLIC: talk only) ────────────────────────
+[[canvases]]
+id          = "ben_building_front_weekend"
+name        = "Building front — Ben, weekend"
+description = "Presence hub (D72-R6). Ben out front on a weekend. Public → talk only (D72-R7)."
+[canvases.trigger]
+location      = "loc_building_front"
+requires_npc  = "npc_ben"
+is_repeatable = true
+priority      = 8
+is_active     = true
+npc           = "npc_ben"
+[[canvases.trigger.schedules]]
+weekdays   = [5, 6]
+start_time = "14:00"
+end_time   = "17:00"
+[[canvases.nodes]]
+id   = "base"
+name = "Building front — Ben, weekend"
+blocks = [
+  { type = "image", props = { file = "scenes/ben_building_front_weekend.jpg" } },
+  { type = "paragraph", content = "Ben on the front steps, sorting the week's mail against his knee, squinting in the afternoon sun. He lifts the stack at her in a small hello." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Talk."
+targetType = "location"
+locationId = "loc_building_front"
+time_progression_minutes = 10
+effects = [ { targetType = "npc", npcId = "npc_ben", trait = "relation", op = "add", value = 1 } ]
+flagEffects = [ { targetType = "player", flag = "talked_to_ben_today", op = "set" } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Head in."
+targetType = "location"
+locationId = "loc_building_front"
+
+# ─── Rosa — diner front, weekend day (PUBLIC service; twin of rosa hub) ───────
+[[canvases]]
+id          = "rosa_diner_front_weekend"
+name        = "Mel's — Rosa, weekend"
+description = "Presence hub (D72-R6). Weekend-day twin of rosa_diner_front_hub (D72-R8). Public service, no escalation. Base ungated."
+[canvases.trigger]
+location      = "loc_diner_front"
+requires_npc  = "npc_rosa"
+is_repeatable = true
+priority      = 7
+is_active     = true
+npc           = "npc_rosa"
+[[canvases.trigger.schedules]]
+weekdays   = [5, 6]
+start_time = "10:00"
+end_time   = "18:00"
+[[canvases.nodes]]
+id   = "base"
+name = "Mel's — Rosa, weekend"
+blocks = [
+  { type = "image", props = { file = "scenes/rosa_diner_front_hub.jpg" } },
+  { type = "paragraph", content = "Weekend day shift, the floor hers. Rosa's got two tables and the counter going at once, pencil behind her ear, and still finds a second to look over." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Talk."
+targetType = "location"
+locationId = "loc_diner_front"
+time_progression_minutes = 5
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_rosa_today", operator = "is_false" },
+] }
+effects = [ { targetType = "npc", npcId = "npc_rosa", trait = "relation", op = "add", value = 1 } ]
+flagEffects = [ { targetType = "player", flag = "talked_to_rosa_today", op = "set" } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Ask about a regular."
+targetType = "location"
+locationId = "loc_diner_front"
+time_progression_minutes = 5
+effects = [ { targetType = "npc", npcId = "npc_rosa", trait = "relation", op = "add", value = 1 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Watch her work."
+targetType = "location"
+locationId = "loc_diner_front"
+time_progression_minutes = 10
+effects = [ { targetType = "npc", npcId = "npc_rosa", trait = "relation", op = "add", value = 1 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Leave."
+targetType = "location"
+locationId = "loc_diner_front"
+
+# ─── Pam — hallway, morning (SEMI-PUBLIC neighbor: talk only) ─────────────────
+[[canvases]]
+id          = "pam_hallway_hub"
+name        = "Building hallway — Pam"
+description = "Presence hub (D72-R6). Pam working the building in the morning. Semi-public neighbor → talk only (D72-R7)."
+[canvases.trigger]
+location      = "loc_building_hallway"
+requires_npc  = "npc_pam"
+is_repeatable = true
+priority      = 8
+is_active     = true
+npc           = "npc_pam"
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "06:00"
+end_time   = "11:00"
+[[canvases.nodes]]
+id   = "base"
+name = "Building hallway — Pam"
+blocks = [
+  { type = "image", props = { file = "scenes/pam_hallway_hub.jpg" } },
+  { type = "paragraph", content = "Pam's got the stairwell door propped and her cart parked by the mailboxes, keys on her belt, working the corridor the way she does every morning. She clocks Maya without stopping." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Talk."
+targetType = "location"
+locationId = "loc_building_hallway"
+time_progression_minutes = 5
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_pam_today", operator = "is_false" },
+] }
+effects = [ { targetType = "npc", npcId = "npc_pam", trait = "relation", op = "add", value = 1 } ]
+flagEffects = [ { targetType = "player", flag = "talked_to_pam_today", op = "set" } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Head out."
+targetType = "location"
+locationId = "loc_building_hallway"
+
+# ─── Pam — building front, evening (PUBLIC neighbor: talk only) ───────────────
+[[canvases]]
+id          = "pam_building_front_hub"
+name        = "Building front — Pam"
+description = "Presence hub (D72-R6). Pam out front in the evening. Public neighbor → talk only (D72-R7). Shares talked_to_pam_today with pam_hallway_hub (D72-R8)."
+[canvases.trigger]
+location      = "loc_building_front"
+requires_npc  = "npc_pam"
+is_repeatable = true
+priority      = 8
+is_active     = true
+npc           = "npc_pam"
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "22:00"
+[[canvases.nodes]]
+id   = "base"
+name = "Building front — Pam"
+blocks = [
+  { type = "image", props = { file = "scenes/pam_building_front_hub.jpg" } },
+  { type = "paragraph", content = "Pam's out front hosing down the steps in the last of the light, one eye on the lot, a cigarette parked at the corner of her mouth." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Talk."
+targetType = "location"
+locationId = "loc_building_front"
+time_progression_minutes = 5
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_pam_today", operator = "is_false" },
+] }
+effects = [ { targetType = "npc", npcId = "npc_pam", trait = "relation", op = "add", value = 1 } ]
+flagEffects = [ { targetType = "player", flag = "talked_to_pam_today", op = "set" } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Leave."
+targetType = "location"
+locationId = "loc_building_front"

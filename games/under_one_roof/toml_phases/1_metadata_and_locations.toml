@@ -1,0 +1,3166 @@
+# ═══════════════════════════════════════════════════════════════
+# PHASE 1: METADATA, PLAYER, NPCs, LOCATIONS, SETTINGS & CLOTHING
+# ═══════════════════════════════════════════════════════════════
+# Source: Book Phases 1 (Foundation), 2 (Characters & Stats), 3 (World Design)
+# Game: Under One Roof
+# ═══════════════════════════════════════════════════════════════
+
+schema_version = "0.2"
+starting_canvas = "opening_arrival"
+
+# ═══════════════════════════════════════════════════════════════
+# PROJECT METADATA
+# ═══════════════════════════════════════════════════════════════
+
+[project]
+id = "under_one_roof"
+title = "Under One Roof"
+description = """
+Lily Chen, a 19-year-old art student, is stranded by circumstance at her new \
+step-father's isolated rural property with his two adult sons. Her dorm flooded. \
+Mom is overseas. She has $400 and nowhere else to go. Three men, thin walls, one \
+shared bathroom, and an economic math that forces escalation. The house is the \
+arena. Pride is the engine. Proximity does the rest.
+"""
+
+# ═══════════════════════════════════════════════════════════════
+# THEME (Visual Customization)
+# ═══════════════════════════════════════════════════════════════
+
+[theme]
+mode = "dark"
+primary = "#c49a5c"
+secondary = "#a67373"
+accent = "#7a9e7e"
+success = "#6aad6a"
+danger = "#c45c5c"
+warning = "#d4a04a"
+bg = "#1a1614"
+surface = "#2a2420"
+surface_alt = "#362f28"
+border = "#4a3f35"
+text = "#e8e0d8"
+text_muted = "#9a8e82"
+
+# ═══════════════════════════════════════════════════════════════
+# TIME SYSTEM
+# ═══════════════════════════════════════════════════════════════
+
+[time]
+enabled = true
+starting_hour = 17
+starting_day = "Saturday"
+starting_week = 1
+
+# ═══════════════════════════════════════════════════════════════
+# SIDEBAR
+# ═══════════════════════════════════════════════════════════════
+
+[[sidebar_items]]
+type = "hint"
+
+[[sidebar_items]]
+type = "passes"
+
+[[sidebar_items]]
+type = "inventory"
+
+# ═══════════════════════════════════════════════════════════════
+# PASSES (recurring time-limited purchases)
+# ═══════════════════════════════════════════════════════════════
+
+[[passes]]
+id = "gym_pass"
+name = "Gym Pass"
+cost = 30
+duration_days = 7
+icon = "🏋️"
+
+# ═══════════════════════════════════════════════════════════════
+# ITEMS (consumable inventory)
+# ═══════════════════════════════════════════════════════════════
+
+[[items]]
+id = "groceries"
+name = "Groceries"
+icon = "🛒"
+max_stack = 20
+
+# ═══════════════════════════════════════════════════════════════
+# PHONE SYSTEM
+# ═══════════════════════════════════════════════════════════════
+
+[phone]
+enabled = true
+
+[[phone.apps]]
+id = "messages"
+type = "chat"
+label = "Messages"
+
+[[phone.apps]]
+id = "flaunt"
+type = "social_feed"
+label = "Flaunt"
+
+# ── Jake Story Conversations ──
+
+# 1. After bathroom incident
+[[phone.conversations]]
+id = "jake_bathroom_sorry"
+app = "messages"
+npc = "npc_jake"
+
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "first_morning", operator = "is_true" }
+] }
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "hey"
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "sorry about this morning"
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "the lock is broken I keep telling dad"
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "No worries 😊", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 }], flagEffects = [{ targetType = "player", flag = "jake_friendly_start" }] },
+  { text = "Yeah I should've knocked. My bad.", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 }], flagEffects = [{ targetType = "player", flag = "jake_boundaries_set" }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "ok good"
+after_round = 1
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I thought you'd be mad"
+after_round = 1
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "yeah"
+after_round = 1
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I'll knock"
+after_round = 1
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "...sorry"
+after_round = 1
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 2
+after_round = 1
+choices = [
+  { text = "You settle in ok?", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 1 }] },
+  { text = "Night, Jake." }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "it's quiet out here"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "but the walls are thin"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you'll get used to it"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "good night lily"
+after_round = 2
+after_choice = 0
+
+# 2. Reference photo request
+[[phone.conversations]]
+id = "jake_reference_photo"
+app = "messages"
+npc = "npc_jake"
+
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "drawing_started", operator = "is_true" }
+] }
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "hey can I ask you something weird"
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "for the drawing"
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Weird how?" },
+  { text = "Sure" }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I'm trying to get your collarbone right"
+after_round = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "from memory it's not working"
+after_round = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "could you send me a photo? just the pose. for reference."
+after_round = 1
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 2
+after_round = 1
+choices = [
+  { text = "📷 Send selfie by the window", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 1 }], flagEffects = [{ targetType = "player", flag = "jake_has_photo_1" }] },
+  { text = "Just look at me tomorrow", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "..."
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "yeah that's"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "that's what I needed"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "the light on your neck"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 3
+after_round = 2
+after_choice = 0
+choices = [
+  { text = "You're blushing through text, Jake.", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 1 }, { targetType = "player", trait = "corruption", op = "add", value = 1 }] },
+  { text = "Glad I could help", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "right"
+after_round = 2
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "yeah that makes more sense"
+after_round = 2
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "sorry for asking"
+after_round = 2
+after_choice = 1
+
+# 3. Sketch reveal
+[[phone.conversations]]
+id = "jake_sketch_reveal"
+app = "messages"
+npc = "npc_jake"
+
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "drawing_1_complete", operator = "is_true" }
+] }
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I finished it"
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "the one from today"
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Can I see?" },
+  { text = "Tell me about it" }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "your jawline. I got it right finally."
+after_round = 1
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you have this thing where your chin tilts when you're thinking"
+after_round = 1
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "nobody else does that"
+after_round = 1
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "it's you looking out the window"
+after_round = 1
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you didn't know I was drawing that part"
+after_round = 1
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 2
+after_round = 1
+choices = [
+  { text = "You notice things nobody else does.", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 3 }], flagEffects = [{ targetType = "player", flag = "jake_encouraged" }] },
+  { text = "You draw me a lot, don't you?", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 1 }], flagEffects = [{ targetType = "player", flag = "jake_called_out" }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I notice you"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "sorry. that was"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "good night lily"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "...yeah"
+after_round = 2
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I do"
+after_round = 2
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "is that ok?"
+after_round = 2
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 3
+after_round = 2
+after_choice = 1
+choices = [
+  { text = "It's ok.", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 1 }, { targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 }] },
+  { text = "I don't know yet.", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 }] }
+]
+
+# 4. Wall confession
+[[phone.conversations]]
+id = "jake_wall_confession"
+app = "messages"
+npc = "npc_jake"
+
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 }
+] }
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "are you awake"
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Yeah" },
+  { text = "Depends" }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "can I tell you something"
+after_round = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I hear you through the wall sometimes"
+after_round = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "not in a weird way"
+after_round = 1
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 2
+after_round = 1
+choices = [
+  { text = "It IS a weird way, Jake.", effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1 }] },
+  { text = "I hear you too.", effects = [{ targetType = "player", trait = "corruption", op = "add", value = 2 }, { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 2 }], flagEffects = [{ targetType = "player", flag = "jake_mutual_confession" }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "ok yeah"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "it's a weird way"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 3
+after_round = 2
+after_choice = 0
+choices = [
+  { text = "I hear you too.", effects = [{ targetType = "player", trait = "corruption", op = "add", value = 2 }, { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 2 }], flagEffects = [{ targetType = "player", flag = "jake_mutual_confession" }] },
+  { text = "Good night, Jake.", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "...you do?"
+after_round = 2
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 3
+after_round = 2
+after_choice = 1
+choices = [
+  { text = "Everything.", effects = [{ targetType = "player", trait = "corruption", op = "add", value = 3 }, { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 3 }] },
+  { text = "Enough.", effects = [{ targetType = "player", trait = "corruption", op = "add", value = 2 }, { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 2 }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I think about you"
+after_round = 2
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "when I shouldn't"
+after_round = 2
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "good night lily"
+after_round = 2
+after_choice = 1
+
+# 5. Angle photo (mirror pic)
+[[phone.conversations]]
+id = "jake_angle_photo"
+app = "messages"
+npc = "npc_jake"
+
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "drawing_3_complete", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 45 }
+] }
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "lily"
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I need another reference"
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "the poses are getting harder from memory"
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "What do you need?" },
+  { text = "Come look in person", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 1 }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "your waist"
+after_round = 1
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "the way it curves when you sit on the bed"
+after_round = 1
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I just need the line right"
+after_round = 1
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 2
+after_round = 1
+after_choice = 0
+choices = [
+  { text = "📷 Send mirror pic", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 3 }, { targetType = "player", trait = "corruption", op = "add", value = 2 }], flagEffects = [{ targetType = "player", flag = "jake_has_photo_2" }] },
+  { text = "I'll pose tomorrow", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "lily"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I've been looking at this for ten minutes"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I need to draw this right now"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 3
+after_round = 2
+after_choice = 0
+choices = [
+  { text = "Then draw.", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 1 }] },
+  { text = "Go to sleep, Jake.", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 }] }
+]
+
+# 6. Towel "accident"
+[[phone.conversations]]
+id = "jake_towel_accident"
+app = "messages"
+npc = "npc_jake"
+
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "drawing_4_complete", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 70 }
+] }
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "hey how was your day"
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Long. Just got out of the shower." },
+  { text = "Fine. You?" }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "oh"
+after_round = 1
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "ok"
+after_round = 1
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 2
+after_round = 1
+after_choice = 0
+choices = [
+  { text = "📷 Send photo (in towel)", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 4 }, { targetType = "player", trait = "corruption", op = "add", value = 3 }], flagEffects = [{ targetType = "player", flag = "jake_has_towel_photo" }] },
+  { text = "What are you drawing tonight?" }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "lily"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you're in a towel"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 3
+after_round = 2
+after_choice = 0
+choices = [
+  { text = "Oh shit. Wrong photo. Delete it." },
+  { text = "I know.", effects = [{ targetType = "player", trait = "corruption", op = "add", value = 2 }, { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 2 }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I should delete it"
+after_round = 3
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I'm going to delete it"
+after_round = 3
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "..."
+after_round = 3
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I didn't delete it"
+after_round = 3
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I'm sorry"
+after_round = 3
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 4
+after_round = 3
+after_choice = 0
+choices = [
+  { text = "Don't be.", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 1 }] },
+  { text = "Delete it, Jake.", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I'm not going to be able to draw anything else tonight"
+after_round = 3
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "good night"
+after_round = 3
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I'm not deleting it"
+after_round = 3
+after_choice = 1
+
+# 7. Deliberate underwear photo
+[[phone.conversations]]
+id = "jake_deliberate_photo"
+app = "messages"
+npc = "npc_jake"
+
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "drawing_5_complete", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 85 }
+] }
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "the session today"
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you took your shirt off without me asking"
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I couldn't breathe"
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "I know." },
+  { text = "Was it ok?" }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "the drawings aren't just art anymore"
+after_round = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "they haven't been for a while"
+after_round = 1
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 2
+after_round = 1
+choices = [
+  { text = "📷 Send photo (underwear)", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 5 }, { targetType = "player", trait = "corruption", op = "add", value = 3 }], flagEffects = [{ targetType = "player", flag = "jake_has_underwear_photo" }] },
+  { text = "I know, Jake. I know.", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 3 }, { targetType = "player", trait = "corruption", op = "add", value = 1 }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "..."
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "lily"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "come to my room"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 3
+after_round = 2
+after_choice = 0
+choices = [
+  { text = "Now?", effects = [{ targetType = "player", trait = "corruption", op = "add", value = 2 }, { targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 2 }], flagEffects = [{ targetType = "player", flag = "jake_phone_invited" }] },
+  { text = "Tomorrow.", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 1 }] }
+]
+
+# 8. Everything (nude)
+[[phone.conversations]]
+id = "jake_everything"
+app = "messages"
+npc = "npc_jake"
+
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "jake_pencil_dropped", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 100 }
+] }
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I can't stop looking at the drawings"
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "all of them"
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "every photo you sent"
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "every pose"
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Which one's your favorite?" },
+  { text = "Jake..." }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "the towel one"
+after_round = 1
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "no. the last one."
+after_round = 1
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "no. all of them."
+after_round = 1
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "lily"
+after_round = 1
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I need you"
+after_round = 1
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 2
+after_round = 1
+choices = [
+  { text = "📷 Send everything", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 5 }, { targetType = "player", trait = "corruption", op = "add", value = 5 }], flagEffects = [{ targetType = "player", flag = "jake_has_nude" }] },
+  { text = "Come see for yourself.", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 3 }, { targetType = "player", trait = "corruption", op = "add", value = 3 }], flagEffects = [{ targetType = "player", flag = "jake_in_person_invite" }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I'm coming to your room"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "right now"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "is that ok"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 3
+after_round = 2
+after_choice = 0
+choices = [
+  { text = "The door's open.", flagEffects = [{ targetType = "player", flag = "jake_door_open" }] },
+  { text = "Draw me first.", effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 2 }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "now?"
+after_round = 2
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "lily I'm shaking"
+after_round = 2
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I'm coming"
+after_round = 2
+after_choice = 1
+
+# ── Jake Daily Topics ──
+
+[[phone.daily_topics]]
+npc = "npc_jake"
+id = "jake_d_morning"
+player_message = "Good morning"
+npc_response = "morning. coffee?"
+effects = [{ targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "first_morning", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_jake"
+id = "jake_d_sleep"
+player_message = "Did you sleep ok?"
+npc_response = "drew until 3am. so no."
+effects = [{ targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "first_morning", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_jake"
+id = "jake_d_house"
+player_message = "This house is weird"
+npc_response = "you get used to the creaks. mostly."
+effects = [{ targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "first_morning", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_jake"
+id = "jake_d_drawing"
+player_message = "What are you drawing?"
+npc_response = "just... stuff. you'll see it when it's done."
+effects = [{ targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "drawing_started", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_jake"
+id = "jake_d_music"
+player_message = "What are you listening to?"
+npc_response = "phoebe bridgers. don't judge me."
+effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "drawing_started", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_jake"
+id = "jake_d_pencils"
+player_message = "You go through a lot of pencils"
+npc_response = "only when the subject is hard to get right."
+effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "drawing_started", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_jake"
+id = "jake_d_thinking"
+player_message = "Thinking about you"
+npc_response = "...really?"
+effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 1 }, { targetType = "player", trait = "corruption", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "flirt_unlock", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_jake"
+id = "jake_d_tonight"
+player_message = "What are you doing tonight?"
+npc_response = "drawing. always drawing. you could come watch."
+effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "flirt_unlock", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_jake"
+id = "jake_d_miss"
+player_message = "I miss you"
+npc_response = "I'm literally through the wall."
+effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 1 }, { targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "flirt_unlock", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_jake"
+id = "jake_d_kiss_memory"
+player_message = "I keep thinking about the kiss"
+npc_response = "me too. I can still taste you."
+effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "kiss_unlock", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_jake"
+id = "jake_d_come_over"
+player_message = "Come over"
+npc_response = "give me five minutes."
+effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "kiss_unlock", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_jake"
+id = "jake_d_goodnight"
+player_message = "Good night, Jake"
+npc_response = "good night lily. I'll try not to draw you in my sleep."
+effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 1 }, { targetType = "npc", npcId = "npc_jake", trait = "trust", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "kiss_unlock", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_jake"
+id = "jake_d_need_you"
+player_message = "I need you"
+npc_response = "I'm here. I'm always here."
+effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 2 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "jake_pencil_dropped", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_jake"
+id = "jake_d_door_open"
+player_message = "My door's open"
+npc_response = "on my way."
+effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 2 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "jake_pencil_dropped", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_jake"
+id = "jake_d_draw_me"
+player_message = "Draw me again"
+npc_response = "I don't want to draw you anymore. I want you."
+effects = [{ targetType = "npc", npcId = "npc_jake", trait = "love", op = "add", value = 3 }, { targetType = "player", trait = "corruption", op = "add", value = 2 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "jake_pencil_dropped", operator = "is_true" }] }
+
+# ── Diana (Mom) Story Conversations ──
+
+[[phone.conversations]]
+id = "diana_arrival"
+app = "messages"
+npc = "npc_diana"
+
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "You settled in?"
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Frank is good people. His boys are good boys."
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Just until I'm back. Fifty-six days."
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "I'm fine mom.", flagEffects = [{ targetType = "player", flag = "mom_checked_in" }] },
+  { text = "It's weird being here with strangers.", effects = [{ targetType = "player", trait = "confidence", op = "add", value = 1 }], flagEffects = [{ targetType = "player", flag = "mom_checked_in" }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Call me if you need anything. Love you baby."
+after_round = 1
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 2
+after_round = 1
+choices = [
+  { text = "Love you too" },
+  { text = "When are you coming home?" }
+]
+
+# ---
+
+[[phone.conversations]]
+id = "diana_money_transfer"
+app = "messages"
+npc = "npc_diana"
+
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "money_crisis_realized", operator = "is_true" }
+] }
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Transfer sent. $200."
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I know it's not enough. I'm sorry baby."
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Thank you, Mom.", effects = [{ targetType = "player", trait = "money", op = "add", value = 200, clamp = false }] },
+  { text = "When are you actually coming home?", effects = [{ targetType = "player", trait = "money", op = "add", value = 200, clamp = false }], flagEffects = [{ targetType = "player", flag = "mom_guilt" }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Soon. I promise. I love you."
+after_round = 1
+
+# ---
+
+[[phone.conversations]]
+id = "diana_coming_home"
+app = "messages"
+npc = "npc_diana"
+
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "mom_returning", operator = "is_true" }
+] }
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Flight booked. One week."
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I can't wait to see you."
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Is everything ok there? You sound different lately."
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Everything's fine." },
+  { text = "A lot has changed, Mom.", flagEffects = [{ targetType = "player", flag = "mom_warned" }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "We'll talk when I'm home. I love you."
+after_round = 1
+
+# ── Diana Daily Topics ──
+
+[[phone.daily_topics]]
+npc = "npc_diana"
+id = "diana_d_dubai"
+player_message = "How's Dubai?"
+npc_response = "Hot. Busy. I miss you."
+effects = [{ targetType = "player", trait = "confidence", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_diana"
+id = "diana_d_ok"
+player_message = "I'm ok"
+npc_response = "Are you sure?"
+effects = [{ targetType = "player", trait = "confidence", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_diana"
+id = "diana_d_miss"
+player_message = "Miss you"
+npc_response = "Miss you more. Counting the days."
+effects = [{ targetType = "player", trait = "confidence", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "first_week_complete", operator = "is_true" }] }
+
+# ── Ryan Story Conversations ──
+
+[[phone.conversations]]
+id = "ryan_gym_invite"
+app = "messages"
+npc = "npc_ryan"
+
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "game_started", operator = "gte", value = 1 }
+] }
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "yo new roommate"
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "gym tomorrow 7am if you can handle it"
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "I'll be there.", effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 1 }], flagEffects = [{ targetType = "player", flag = "ryan_gym_accepted" }] },
+  { text = "I'll pass." }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "don't be late"
+after_round = 1
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "your loss"
+after_round = 1
+after_choice = 1
+
+# ---
+
+[[phone.conversations]]
+id = "ryan_shirtless_pic"
+app = "messages"
+npc = "npc_ryan"
+
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "town_access", operator = "is_true" }
+] }
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "new PR today"
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you should come spot me sometime"
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Is that what they're calling it now?", effects = [{ targetType = "player", trait = "corruption", op = "add", value = 2 }, { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 1 }] },
+  { text = "Congrats.", effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 1 }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you're trouble"
+after_round = 1
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 2
+after_round = 1
+after_choice = 0
+choices = [
+  { text = "Send gym selfie back", effects = [{ targetType = "player", trait = "corruption", op = "add", value = 2 }, { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 2 }], flagEffects = [{ targetType = "player", flag = "ryan_photo_exchanged" }] },
+  { text = "You have no idea", effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1 }, { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 1 }] }
+]
+
+# ---
+
+[[phone.conversations]]
+id = "ryan_you_up"
+app = "messages"
+npc = "npc_ryan"
+
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 }
+] }
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you up?"
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Depends who's asking.", effects = [{ targetType = "player", trait = "corruption", op = "add", value = 3 }, { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 2 }], flagEffects = [{ targetType = "player", flag = "ryan_flirty_text" }] },
+  { text = "No." }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "who else would it be"
+after_round = 1
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 2
+after_round = 1
+after_choice = 0
+choices = [
+  { text = "Checking what exactly?", effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1 }, { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 1 }] },
+  { text = "Good night, Ryan." }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "wouldn't you like to know"
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "sleep tight roommate"
+after_round = 2
+after_choice = 0
+
+# ---
+
+[[phone.conversations]]
+id = "ryan_leaving_text"
+app = "messages"
+npc = "npc_ryan"
+
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "ryan_secret_discovered", operator = "is_true" }
+] }
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you found the map didn't you"
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "I wasn't looking for it." },
+  { text = "Were you going to tell me?" }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I was going to tell you"
+after_round = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I'm leaving lily"
+after_round = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "real job. my own crew. my own life."
+after_round = 1
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 2
+after_round = 1
+choices = [
+  { text = "When?", effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 1 }] },
+  { text = "Take me with you.", effects = [{ targetType = "player", trait = "corruption", op = "add", value = 3 }, { targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 2 }], flagEffects = [{ targetType = "player", flag = "ryan_asked_to_leave" }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "...you mean that?"
+after_round = 2
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 3
+after_round = 2
+after_choice = 1
+choices = [
+  { text = "Yes.", flagEffects = [{ targetType = "player", flag = "ryan_leaving_together" }] },
+  { text = "I don't know." }
+]
+
+# ── Ryan Daily Topics ──
+
+[[phone.daily_topics]]
+npc = "npc_ryan"
+id = "ryan_d_morning"
+player_message = "Morning"
+npc_response = "yo"
+effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_ryan"
+id = "ryan_d_gym"
+player_message = "How's the gym?"
+npc_response = "Better if you showed up"
+effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_ryan"
+id = "ryan_d_doing"
+player_message = "What are you doing?"
+npc_response = "Truck stuff. You wouldn't get it."
+effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "trust", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_ryan"
+id = "ryan_d_annoying"
+player_message = "You're annoying"
+npc_response = "You love it"
+effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "ryan_flirt", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_ryan"
+id = "ryan_d_come_over"
+player_message = "Come over"
+npc_response = "On my way"
+effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "ryan_kiss", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_ryan"
+id = "ryan_d_thinking"
+player_message = "I can't stop thinking about you"
+npc_response = "Then don't"
+effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "love", op = "add", value = 2 }, { targetType = "player", trait = "corruption", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "ryan_kiss", operator = "is_true" }] }
+
+# ── Frank Story Conversations ──
+
+[[phone.conversations]]
+id = "frank_chores_payment"
+app = "messages"
+npc = "npc_frank"
+
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "chores_started", operator = "is_true" }
+] }
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Left $20 on the kitchen counter. For today."
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "You don't have to do the bathrooms. Ryan can do his own."
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Thank you, Frank.", effects = [{ targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 1 }] },
+  { text = "You don't have to pay me. I live here.", effects = [{ targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 2 }, { targetType = "npc", npcId = "npc_frank", trait = "love", op = "add", value = 1 }], flagEffects = [{ targetType = "player", flag = "frank_generous_lily" }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "You earn it."
+after_round = 1
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Same time Thursday."
+after_round = 1
+after_choice = 1
+
+# ---
+
+[[phone.conversations]]
+id = "frank_office_receipts"
+app = "messages"
+npc = "npc_frank"
+
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "bookkeeping_started", operator = "is_true" }
+] }
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Left the receipts on the desk. Door's open."
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "I'll get to it.", effects = [{ targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 1 }] },
+  { text = "Should I bring coffee?", effects = [{ targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 1 }, { targetType = "npc", npcId = "npc_frank", trait = "love", op = "add", value = 1 }], flagEffects = [{ targetType = "player", flag = "frank_coffee_offer" }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Black. No sugar."
+after_round = 1
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "You know that already."
+after_round = 1
+after_choice = 1
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 2
+after_round = 1
+after_choice = 1
+choices = [
+  { text = "I pay attention.", effects = [{ targetType = "npc", npcId = "npc_frank", trait = "love", op = "add", value = 1 }] },
+  { text = "See you at 7." }
+]
+
+# ---
+
+[[phone.conversations]]
+id = "frank_concern"
+app = "messages"
+npc = "npc_frank"
+
+[phone.conversations.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 30 }
+] }
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "You've been different lately."
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Different how?", effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1 }, { targetType = "npc", npcId = "npc_frank", trait = "love", op = "add", value = 1 }] },
+  { text = "You're imagining things.", effects = [{ targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 1 }] }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I notice things."
+after_round = 1
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "That's all."
+after_round = 1
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "reply"
+round = 2
+after_round = 1
+after_choice = 0
+choices = [
+  { text = "What do you notice?", effects = [{ targetType = "player", trait = "corruption", op = "add", value = 2 }, { targetType = "npc", npcId = "npc_frank", trait = "love", op = "add", value = 1 }] },
+  { text = "Good night, Frank." }
+]
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Enough."
+after_round = 2
+after_choice = 0
+
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Good night."
+after_round = 2
+after_choice = 0
+
+# ── Frank Daily Topics ──
+
+[[phone.daily_topics]]
+npc = "npc_frank"
+id = "frank_d_morning"
+player_message = "Good morning"
+npc_response = "Morning."
+effects = [{ targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_frank"
+id = "frank_d_town"
+player_message = "Need anything from town?"
+npc_response = "No. Be safe."
+effects = [{ targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "town_access", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_frank"
+id = "frank_d_books"
+player_message = "The books are done"
+npc_response = "Good work."
+effects = [{ targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "bookkeeping_started", operator = "is_true" }] }
+
+[[phone.daily_topics]]
+npc = "npc_frank"
+id = "frank_d_night"
+player_message = "Good night"
+npc_response = "Night."
+effects = [{ targetType = "npc", npcId = "npc_frank", trait = "trust", op = "add", value = 1 }]
+conditions = { version = "1.0", items = [{ type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }] }
+
+# ── Flaunt Social Feed Posts (all strangers) ──
+
+# --- Tier 0: Game Start (normal hot girl content) ---
+
+[[phone.posts]]
+id = "jess_gym_1"
+app = "flaunt"
+poster_name = "@jessicafit_"
+image = "social/jess_gym_1.jpg"
+caption = "5am grind. no days off. #legday"
+likes = 2341
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+
+[[phone.posts]]
+id = "mia_beach_1"
+app = "flaunt"
+poster_name = "@mia.xo"
+image = "social/mia_beach_1.jpg"
+caption = "golden hour hits different"
+likes = 4892
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+
+[[phone.posts]]
+id = "vanessa_mirror"
+app = "flaunt"
+poster_name = "@vanessav_"
+image = "social/vanessa_mirror.jpg"
+caption = "fit check before brunch"
+likes = 1203
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+
+[[phone.posts]]
+id = "kaylee_pool"
+app = "flaunt"
+poster_name = "@kayleenicole"
+image = "social/kaylee_pool.jpg"
+caption = "summer never ends if u don't let it"
+likes = 3567
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+
+[[phone.posts]]
+id = "brooklyn_club"
+app = "flaunt"
+poster_name = "@brooklynbaddie"
+image = "social/brooklyn_club.jpg"
+caption = "she's here and she's not leaving till 2am"
+likes = 5102
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" }
+] }
+
+# --- Tier 1: Day 2+ (slightly more suggestive) ---
+
+[[phone.posts]]
+id = "ember_tattoo"
+app = "flaunt"
+poster_name = "@ember.online"
+image = "social/ember_tattoo.jpg"
+caption = "new ink. took 3 hours. worth every second"
+likes = 1876
+
+[phone.posts.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "game_started", operator = "gte", value = 2 }
+] }
+
+[[phone.posts]]
+id = "tiffany_bedroom"
+app = "flaunt"
+poster_name = "@tiffanyrose_"
+image = "social/tiffany_bedroom.jpg"
+caption = "lazy sunday but make it cute"
+likes = 2654
+
+[phone.posts.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "game_started", operator = "gte", value = 2 }
+] }
+
+[[phone.posts]]
+id = "peachy_gym"
+app = "flaunt"
+poster_name = "@peachy.pam"
+image = "social/peachy_gym.jpg"
+caption = "squats don't lie. 3 months of consistency."
+likes = 8432
+
+[phone.posts.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "game_started", operator = "gte", value = 3 }
+] }
+
+[[phone.posts]]
+id = "jess_gym_2"
+app = "flaunt"
+poster_name = "@jessicafit_"
+image = "social/jess_gym_2.jpg"
+caption = "post-workout glow is real. sports bra barely holding on"
+likes = 3219
+
+[phone.posts.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "game_started", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "game_started", operator = "gte", value = 4 }
+] }
+
+# --- Tier 2: Corruption >= 5 (suggestive) ---
+
+[[phone.posts]]
+id = "natasha_lingerie"
+app = "flaunt"
+poster_name = "@natasha.peeks"
+image = "social/natasha_lingerie.jpg"
+caption = "felt cute. might delete. probably won't."
+likes = 6782
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 5 }
+] }
+
+[[phone.posts]]
+id = "lexi_towel"
+app = "flaunt"
+poster_name = "@lexiluv_"
+image = "social/lexi_towel.jpg"
+caption = "oops wrong camera roll... unless?"
+likes = 11203
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 5 }
+] }
+
+[[phone.posts]]
+id = "daisy_sheer"
+app = "flaunt"
+poster_name = "@daisychainxx"
+image = "social/daisy_sheer.jpg"
+caption = "too hot for layers"
+likes = 7891
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 6 }
+] }
+
+[[phone.posts]]
+id = "mia_bikini"
+app = "flaunt"
+poster_name = "@mia.xo"
+image = "social/mia_bikini.jpg"
+caption = "the smaller the bikini the better the tan"
+likes = 9456
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 7 }
+] }
+
+# --- Tier 3: Corruption >= 10 (overtly sexual) ---
+
+[[phone.posts]]
+id = "raven_underwear"
+app = "flaunt"
+poster_name = "@raven.raw"
+image = "social/raven_underwear.jpg"
+caption = "3am. can't sleep. here's why."
+likes = 14320
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 10 }
+] }
+
+[[phone.posts]]
+id = "samantha_bed"
+app = "flaunt"
+poster_name = "@samantha_x"
+image = "social/samantha_bed.jpg"
+caption = "come over. i'm bored."
+likes = 18765
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 11 }
+] }
+
+[[phone.posts]]
+id = "nikki_seethrough"
+app = "flaunt"
+poster_name = "@nikkisecrets"
+image = "social/nikki_seethrough.jpg"
+caption = "my secret is i don't wear much underneath"
+likes = 12543
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 12 }
+] }
+
+[[phone.posts]]
+id = "ember_bra"
+app = "flaunt"
+poster_name = "@ember.online"
+image = "social/ember_bra.jpg"
+caption = "new tattoo reveal. focus on the art please."
+likes = 9876
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 13 }
+] }
+
+# --- Tier 4: Corruption >= 15 (very lewd) ---
+
+[[phone.posts]]
+id = "amelia_tease"
+app = "flaunt"
+poster_name = "@ameliaafterhours"
+image = "social/amelia_tease.jpg"
+caption = "after hours only. you know where to find me."
+likes = 22341
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 }
+] }
+
+[[phone.posts]]
+id = "cherry_barely"
+app = "flaunt"
+poster_name = "@cherryontopxx"
+image = "social/cherry_barely.jpg"
+caption = "this set lasted about 30 seconds before..."
+likes = 31204
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 16 }
+] }
+
+[[phone.posts]]
+id = "lexi_bedroom"
+app = "flaunt"
+poster_name = "@lexiluv_"
+image = "social/lexi_bedroom.jpg"
+caption = "the things i do when i'm alone"
+likes = 27654
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 17 }
+] }
+
+[[phone.posts]]
+id = "jess_locker"
+app = "flaunt"
+poster_name = "@jessicafit_"
+image = "social/jess_locker.jpg"
+caption = "post-shower. no one's looking right?"
+likes = 19876
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 18 }
+] }
+
+# --- Tier 5: Corruption >= 20 (explicit) ---
+
+[[phone.posts]]
+id = "natasha_nude"
+app = "flaunt"
+poster_name = "@natasha.peeks"
+image = "social/natasha_nude.jpg"
+caption = "peek. that's all you get."
+likes = 45321
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }
+] }
+
+[[phone.posts]]
+id = "samantha_spread"
+app = "flaunt"
+poster_name = "@samantha_x"
+image = "social/samantha_spread.jpg"
+caption = "still bored. still waiting."
+likes = 38765
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 21 }
+] }
+
+[[phone.posts]]
+id = "raven_nude"
+app = "flaunt"
+poster_name = "@raven.raw"
+image = "social/raven_nude.jpg"
+caption = "art isn't supposed to be comfortable"
+likes = 29543
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 22 }
+] }
+
+[[phone.posts]]
+id = "tiffany_topless"
+app = "flaunt"
+poster_name = "@tiffanyrose_"
+image = "social/tiffany_topless.jpg"
+caption = "sunday funday went different this week"
+likes = 33210
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 23 }
+] }
+
+# --- Tier 6: Corruption >= 25 ---
+
+[[phone.posts]]
+id = "cherry_explicit"
+app = "flaunt"
+poster_name = "@cherryontopxx"
+image = "social/cherry_explicit.jpg"
+caption = "i told you it didn't stay on long"
+likes = 52876
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 }
+] }
+
+[[phone.posts]]
+id = "amelia_full"
+app = "flaunt"
+poster_name = "@ameliaafterhours"
+image = "social/amelia_full.jpg"
+caption = "the full after hours experience"
+likes = 61432
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 26 }
+] }
+
+[[phone.posts]]
+id = "peachy_nude"
+app = "flaunt"
+poster_name = "@peachy.pam"
+image = "social/peachy_nude.jpg"
+caption = "told you squats don't lie"
+likes = 48321
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 27 }
+] }
+
+# --- Tier 7: Corruption >= 30 ---
+
+[[phone.posts]]
+id = "lexi_explicit"
+app = "flaunt"
+poster_name = "@lexiluv_"
+image = "social/lexi_explicit.jpg"
+caption = "no more teasing. here's everything."
+likes = 71234
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 30 }
+] }
+
+[[phone.posts]]
+id = "daisy_nude"
+app = "flaunt"
+poster_name = "@daisychainxx"
+image = "social/daisy_nude.jpg"
+caption = "daisy chain. get it?"
+likes = 55876
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 32 }
+] }
+
+[[phone.posts]]
+id = "nikki_reveal"
+app = "flaunt"
+poster_name = "@nikkisecrets"
+image = "social/nikki_reveal.jpg"
+caption = "no more secrets"
+likes = 64321
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 35 }
+] }
+
+# --- Tier 8: Corruption >= 40 (hardcore) ---
+
+[[phone.posts]]
+id = "samantha_hardcore"
+app = "flaunt"
+poster_name = "@samantha_x"
+image = "social/samantha_hardcore.jpg"
+caption = "someone finally came over"
+likes = 89432
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }
+] }
+
+[[phone.posts]]
+id = "ember_explicit"
+app = "flaunt"
+poster_name = "@ember.online"
+image = "social/ember_explicit.jpg"
+caption = "new toy review. 10/10."
+likes = 76543
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 42 }
+] }
+
+[[phone.posts]]
+id = "cherry_video"
+app = "flaunt"
+poster_name = "@cherryontopxx"
+image = "social/cherry_video.jpg"
+caption = "link in bio. you're welcome."
+likes = 95210
+
+[phone.posts.trigger]
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 45 }
+] }
+
+# ═══════════════════════════════════════════════════════════════
+# PLAYER
+# ═══════════════════════════════════════════════════════════════
+
+[player]
+id = "lily"
+name = "Lily"
+description = "19-year-old art student. Dark hair, slim build, messy bun. Arrives in a hoodie and jeans with one suitcase. Looks younger than 19. Pride won't let her ask for help — she'll find her own solutions, even when those solutions pull her deeper."
+portrait = "lily.jpg"
+core_traits = { corruption = 0, confidence = 0, money = 400, energy = 100, fitness = 0, beauty = 0, intelligence = 0 }
+flag_keys = [
+  # ── System Flags ──
+  "game_started",
+  "unpacked",
+
+  # ── Phone Conversation Flags ──
+  "jake_friendly_start",
+  "jake_boundaries_set",
+  "jake_has_photo_1",
+  "jake_has_photo_2",
+  "jake_has_towel_photo",
+  "jake_has_underwear_photo",
+  "jake_has_nude",
+  "jake_encouraged",
+  "jake_called_out",
+  "jake_mutual_confession",
+  "jake_phone_invited",
+  "jake_in_person_invite",
+  "jake_door_open",
+  # Diana
+  "mom_checked_in",
+  "mom_guilt",
+  "mom_warned",
+  # Ryan
+  "ryan_gym_accepted",
+  "ryan_photo_exchanged",
+  "ryan_flirty_text",
+  "ryan_asked_to_leave",
+  "ryan_leaving_together",
+  # Frank
+  "frank_generous_lily",
+  "frank_coffee_offer",
+
+  # ── Gate Flags (Player-Level — "has Lily ever done X?") ──
+  "exposure_unlock",
+  "flirt_unlock",
+  "tease_unlock",
+  "kiss_unlock",
+  "handjob_unlock",
+  "blowjob_unlock",
+  "sex_unlock",
+
+  # ── Per-NPC Gate Progression (each NPC's own chain) ──
+  # Jake
+  "jake_awareness",
+  "jake_flirt",
+  "jake_tease",
+  "jake_kiss",
+  # Ryan
+  "ryan_awareness",
+  "ryan_flirt",
+  "ryan_tease",
+  "ryan_kiss",
+  "ryan_handjob",
+  # Frank
+  "frank_awareness",
+  "frank_flirt",
+  "frank_tease",
+  "frank_kiss",
+
+  # ── Progression Flags (Story Beat Completion) ──
+  "first_morning",
+  "bus_problem_discovered",
+  "mom_called",
+  "money_crisis_realized",
+  "first_week_complete",
+  "chores_started",
+  "drawing_started",
+  "truck_incident_complete",
+  "bookkeeping_started",
+  "first_swim",
+  "saw_jakes_art",
+  "frank_kitchen_moment",
+  "frank_repair_complete",
+  "jake_repair_complete",
+  "financial_crisis",
+  "brothers_discover",
+  "frank_offer",
+  "crisis_resolved",
+  "mom_returning",
+  "endgame_active",
+  "frank_crisis",
+  "frank_wine_night",
+
+  # ── Branch Flags (5 Permanent Forks — each sets ONE of the options) ──
+  # Fork 1: Ryan's Truck Incident
+  "ryan_resisted",
+  "ryan_allowed",
+  # Fork 2: Jake's Secret Sketches
+  "chose_tender_jake",
+  "chose_possessive_jake",
+  "jake_sketches_discovered",
+  # Fork 3: Frank's Financial Secret
+  "chose_confront_frank",
+  "frank_secret_complete",
+  # Fork 4: Ryan's Departure
+  "ryan_detour",
+  "ryan_phone_heard",
+  "ryan_secret_discovered",
+  "ryan_leaving_confirmed",
+  "ryan_ultimatum_complete",
+  "ryan_leaving",
+  "ryan_stayed",
+
+  # ── Cross-NPC Awareness Flags ──
+  "ryan_caught_her",
+
+  # ── Consequence Flags ──
+  "mom_suspicious",
+
+  # ── Drawing Progress Flags (Jake's Sketchbook mechanic) ──
+  "drawing_1_complete",
+  "drawing_2_complete",
+  "drawing_3_complete",
+  "drawing_4_complete",
+  "drawing_5_complete",
+  "jake_pencil_dropped",
+
+  # ── Group Events ──
+  "power_outage",
+
+  # ── Utility Flags ──
+  "town_access",
+  "has_art_supplies",
+
+]
+
+# ═══════════════════════════════════════════════════════════════
+# NPCs
+# ═══════════════════════════════════════════════════════════════
+
+[[npcs]]
+id = "npc_frank"
+name = "Frank"
+description = "45, broad shoulders, calloused hands, salt-and-pepper stubble, crow's feet around steady dark eyes. Smells like sawdust and black coffee. Flannels with rolled sleeves, work boots, jeans that fit right. The authority figure who tries to keep things appropriate — and fails."
+portrait = "frank.jpg"
+customizable = true
+relationship = "step-dad"
+relationship_options = ["step-dad", "mom's boyfriend", "landlord"]
+core_traits = { love = 0, trust = 5, corruption = 0 }
+flag_keys = []
+
+[npcs.trait_decay]
+love = 1.0
+trust = 1.0
+
+[[npcs]]
+id = "npc_ryan"
+name = "Ryan"
+description = "23, athletic, tanned from outdoor work, strong jaw, cocky grin. Thick arms from hauling lumber. Tank tops, work boots, jeans slung low. Faded scar on his forearm. Tests every boundary once to see what happens."
+portrait = "ryan.jpg"
+customizable = true
+relationship = "step-brother"
+relationship_options = ["step-brother", "housemate", "roommate"]
+core_traits = { love = 0, trust = 0, corruption = 10 }
+flag_keys = []
+
+[npcs.trait_decay]
+love = 1.0
+trust = 1.0
+
+[[npcs]]
+id = "npc_jake"
+name = "Jake"
+description = "20, lean, shaggy brown hair that falls in his eyes, glasses when drawing. Soft hands, graphite-stained fingertips. Faded band t-shirt and jeans. The quiet one. Draws constantly. Sees everything. Doesn't care about the new roommate. Yet."
+portrait = "jake.jpg"
+customizable = true
+relationship = "step-brother"
+relationship_options = ["step-brother", "housemate", "roommate"]
+core_traits = { love = 0, trust = 0, corruption = 0 }
+flag_keys = []
+
+[npcs.trait_decay]
+love = 1.0
+trust = 1.0
+
+[[npcs]]
+id = "npc_diana"
+name = "Diana"
+description = "Lily's mother. Overseas in Dubai on a nursing contract. Voice on the phone — tired, guilty, loving."
+portrait = ""
+core_traits = {}
+flag_keys = []
+
+# ═══════════════════════════════════════════════════════════════
+# LOCATIONS
+# ═══════════════════════════════════════════════════════════════
+
+# ─── PROPERTY CONTAINER ───
+
+[[locations]]
+id = "loc_property"
+name = "The Harmon Property"
+description = "A contractor's rural spread — main house, detached workshop, a yard that blurs into fields and trees. The gravel driveway crunches under every arrival and departure. The nearest neighbor is a ten-minute walk. At night, the property is so quiet you can hear the creek and every footstep in the hallway."
+image = "locations/property.jpg"
+image_search_queries = ["rural American contractor property house workshop gravel driveway isolated dusk"]
+is_container = true
+default_entry = "loc_hallway"
+entry_from = "loc_town"
+navigation_order = []
+
+[[locations]]
+id = "loc_hallway"
+name = "Hallway"
+description = "Narrow, uneven hardwood floors that creak with every step. @frank's boots by the front door. A coat rack holding three sizes of flannel. The bathroom door at the end — no lock that works properly. Lily's room is second on the right. @jake's room is right next to it. At 2 AM, every footstep is an announcement."
+image = "locations/hallway.jpg"
+image_search_queries = ["narrow farmhouse hallway hardwood floors coat rack boots dim night"]
+parent = "loc_property"
+navigation_order = ["loc_kitchen", "loc_living_room", "loc_bathroom", "loc_franks_office", "loc_lily_room", "loc_jakes_room", "loc_workshop", "loc_backyard"]
+clothing_rules = [
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Lily needs to get dressed before leaving her room." }
+]
+
+[[locations]]
+id = "loc_kitchen"
+name = "Kitchen"
+description = "The social hub. Butcher-block counters stained by decades of meals. A table that seats four but has five chairs — @frank added one when Lily arrived. The coffee maker starts at 5 AM. The window above the sink faces the backyard. At dinner, all three men are here. At 2 AM, it's just @frank with a whiskey and the refrigerator light."
+image = "locations/kitchen.jpg"
+image_search_queries = ["farmhouse kitchen butcher block counters wooden table warm lighting"]
+entry_from = "loc_hallway"
+clothing_rules = [
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Lily can't walk into the kitchen like this." }
+]
+
+[[locations]]
+id = "loc_living_room"
+name = "Living Room"
+description = "Worn leather couch that fits three if nobody cares about personal space. A TV on a stand older than @ryan. Bookshelves with more tools than books. A window seat where Lily reads when the couch is occupied. At night, the TV fills the room with blue light and whoever's watching sits in the glow."
+image = "locations/living_room.jpg"
+image_search_queries = ["farmhouse living room worn leather couch old TV bookshelves blue glow night"]
+entry_from = "loc_hallway"
+clothing_rules = [
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Lily can't sit on the couch like this." }
+]
+
+[[locations]]
+id = "loc_bathroom"
+name = "Shared Bathroom"
+description = "One bathroom for four people. The door lock is a hook-latch that doesn't always catch. Steam lingers for twenty minutes after a shower. @ryan's towel is always on the floor. @frank's razor is by the sink. The mirror is directly across from the door — whoever walks in sees everything reflected."
+image = "locations/bathroom.jpg"
+image_search_queries = ["small farmhouse bathroom single shower mirror facing door towels steam"]
+entry_from = "loc_hallway"
+
+[[locations]]
+id = "loc_franks_office"
+name = "Frank's Office"
+description = "The only room in the house with a lock that works. A heavy desk covered in invoices, a filing cabinet, a desk lamp that casts the room in amber. Smells like leather and old paper. The chair behind the desk is @frank's throne. The chair in front is where Lily sits for bookkeeping. When the door closes, the rest of the house disappears."
+image = "locations/franks_office.jpg"
+image_search_queries = ["contractor home office heavy desk invoices desk lamp amber leather chair"]
+entry_from = "loc_hallway"
+clothing_rules = [
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Lily can't walk into Frank's office like this." }
+]
+
+[[locations]]
+id = "loc_lily_room"
+name = "Lily's Room"
+description = "A single bed, a desk for homework, a closet too small for the wardrobe she's accumulating. The window faces the backyard — she can see the creek from here. The wall to her left is shared with @jake's room. At night, sound carries: pencil scratching paper, music through earbuds, the creak of a bedframe."
+image = "locations/lily_room.jpg"
+image_search_queries = ["simple bedroom single bed desk small closet window warm lamp young woman"]
+entry_from = "loc_hallway"
+
+[[locations]]
+id = "loc_jakes_room"
+name = "Jake's Room"
+description = "Art everywhere. Sketches pinned to the walls — landscapes, hands, the creek at different times of day. A desk buried under charcoal sticks and eraser shavings. The light is good in the afternoon — curtains open for natural light. The wall to his right is shared with Lily's room. His door is often cracked open."
+image = "locations/jakes_room.jpg"
+image_search_queries = ["young artist bedroom sketches pinned walls messy desk charcoal natural light"]
+entry_from = "loc_hallway"
+
+[[locations]]
+id = "loc_workshop"
+name = "Workshop"
+description = "Detached from the main house, connected by a gravel path. Table saw, hand tools on pegboard, sawhorses, the smell of cut wood and motor oil. @ryan's weights are in the corner — a bench press and dumbbells. This is where @frank starts his day at 5 AM and where the business runs."
+image = "locations/workshop.jpg"
+image_search_queries = ["detached workshop garage table saw pegboard tools weight bench sawdust"]
+entry_from = "loc_hallway"
+clothing_rules = [
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Lily can't go to the workshop like this." }
+]
+
+# ─── BACKYARD CONTAINER ───
+
+[[locations]]
+id = "loc_backyard"
+name = "Backyard"
+description = "Behind the house, the mowed grass gives way to wild growth within twenty feet. A clothesline between two posts. Beyond the yard, the property slopes down to the creek — a fifteen-minute walk through trees. From the kitchen window, you can see anyone who's out here."
+image = "locations/backyard.jpg"
+image_search_queries = ["rural farmhouse backyard clothesline overgrown garden tree line field"]
+is_container = true
+entry_from = "loc_hallway"
+navigation_order = ["loc_creek"]
+
+[[locations]]
+id = "loc_yard"
+name = "Yard"
+description = "The cleared area behind the house. Flat enough to jog loops. A clothesline running east-west. A bench by the garden where @frank sits on Sunday mornings. Sunbathing here means being visible from the kitchen window, @jake's window, and the workshop."
+image = "locations/yard.jpg"
+image_search_queries = ["farmhouse yard flat grass clothesline wooden bench visible from house"]
+parent = "loc_backyard"
+entry_from = "loc_backyard"
+
+[[locations]]
+id = "loc_creek"
+name = "Creek"
+description = "Fifteen minutes through trees from the house. Shallow enough to wade, deep enough at the bend to swim. Smooth rocks, overhanging branches, dappled light. Far enough that voices don't carry, close enough that anyone could walk down."
+image = "locations/creek.jpg"
+image_search_queries = ["rural creek swimming hole shallow water rocks overhanging trees dappled sunlight"]
+entry_from = "loc_backyard"
+
+# ─── MOBILE LOCATION ───
+
+[[locations]]
+id = "loc_ryans_truck"
+name = "Ryan's Truck"
+description = "A dented pickup that runs louder than it should. The cab smells like pine air freshener and whatever @ryan wore to the job site. Bench seat — no center console. The radio plays classic rock too loud. He drives with one hand on the wheel and the other on the gear shift, uncomfortably close to her knee."
+image = "locations/ryans_truck.jpg"
+image_search_queries = ["old pickup truck interior bench seat pine air freshener rural road"]
+entry_from = "loc_town"
+
+# ─── TOWN LOCATIONS ───
+
+[[locations]]
+id = "loc_town"
+name = "Town"
+description = "Forty minutes by bus, fifteen in @ryan's truck. A small college town with a main street, a campus, and not much else. If Lily takes the bus, nobody knows she was here. If @ryan drives, he knows everything. The price of independence is always $2."
+image = "locations/town.jpg"
+image_search_queries = ["small American college town main street shops campus afternoon"]
+navigation_order = ["loc_property", "loc_campus", "loc_clothing_store", "loc_general_store", "loc_gym", "loc_park", "loc_diner", "loc_trail_head", "loc_ryans_truck"]
+
+[[locations]]
+id = "loc_campus"
+name = "Campus"
+description = "A small state college — brick buildings, a quad with dying grass. Lily's art building has north-facing windows for natural light. Campus is the one place that has nothing to do with the Harmon household. @jake takes his community college art class two buildings over."
+image = "locations/campus.jpg"
+image_search_queries = ["small state college campus brick buildings grassy quad art building"]
+is_container = true
+default_entry = "loc_library"
+entry_from = "loc_town"
+navigation_order = []
+
+[[locations]]
+id = "loc_library"
+name = "Library"
+description = "Basement of the humanities building. Low ceilings, fluorescent lights, the smell of old paper. Study carrels along the walls, group tables in the middle. @jake comes here on afternoons when his class lets out early. The carrels are semi-private — close enough to whisper, close enough to touch under the divider."
+image = "locations/library.jpg"
+image_search_queries = ["college library basement low ceilings study carrels fluorescent lights"]
+parent = "loc_campus"
+
+[[locations]]
+id = "loc_clothing_store"
+name = "Clothing Store"
+description = "A boutique on main street — farm-practical to surprisingly fashionable. The owner doesn't judge what you buy but remembers everything. Two dressing rooms with curtains that don't fully close. If @ryan drove, he's outside watching the bags."
+image = "locations/clothing_store.jpg"
+image_search_queries = ["small town women clothing boutique racks dressing rooms main street"]
+entry_from = "loc_town"
+
+[[locations]]
+id = "loc_general_store"
+name = "General Store"
+description = "Narrow aisles, everything from groceries to art supplies to phone cards. The cashier knows every face in the county. Art supplies in the back — Lily's monthly expense she can't skip."
+image = "locations/general_store.jpg"
+image_search_queries = ["small town general store narrow aisles mixed goods local cashier"]
+entry_from = "loc_town"
+
+[[locations]]
+id = "loc_gym"
+name = "Gym"
+description = "Old equipment that works fine. Free weights, treadmills, a bench press that @ryan treats like a personal altar. A shared hallway between locker rooms. Bodies are unavoidable. Sweat is unavoidable."
+image = "locations/gym.jpg"
+image_search_queries = ["small town public gym free weights treadmill bench press fluorescent"]
+entry_from = "loc_town"
+
+[[locations]]
+id = "loc_park"
+name = "Park"
+description = "Jogging trail, benches, a pond with ducks nobody feeds. @jake comes here on weekends to sketch the water. Neutral territory — not the property, not @ryan's turf, not @frank's domain."
+image = "locations/park.jpg"
+image_search_queries = ["small town park jogging trail benches pond trees peaceful afternoon"]
+entry_from = "loc_town"
+
+[[locations]]
+id = "loc_diner"
+name = "Diner"
+description = "Vinyl booths, laminate tables, coffee that's been sitting too long. A bell on the door. The owner is always hiring because the pay is bad. $45 a shift if she's willing to skip dinner at home."
+image = "locations/diner.jpg"
+image_search_queries = ["small town American diner vinyl booths coffee pot evening lighting"]
+entry_from = "loc_town"
+
+# ─── HIKING TRAIL LOCATIONS ───
+
+[[locations]]
+id = "loc_trail_head"
+name = "Trail Head"
+description = "A dirt pulloff where @ryan parks the truck. A wooden sign with a faded trail map. Three miles through mixed forest. The group dynamic at the trailhead sets the tone: who walks with whom, who falls behind with Lily."
+image = "locations/trail_head.jpg"
+image_search_queries = ["hiking trail head dirt pulloff wooden sign forest entrance weekend"]
+is_container = true
+default_entry = "loc_rest_stop"
+entry_from = "loc_town"
+navigation_order = ["loc_isolated_creek"]
+
+[[locations]]
+id = "loc_rest_stop"
+name = "Rest Stop"
+description = "A flat area with a picnic table and a valley view. The table fits four. Seating arrangement matters — across from someone is safe, next to someone is proximity. Things said at altitude feel more real."
+image = "locations/rest_stop.jpg"
+image_search_queries = ["hiking trail rest stop picnic table valley view forest clearing"]
+parent = "loc_trail_head"
+
+[[locations]]
+id = "loc_isolated_creek"
+name = "Isolated Creek"
+description = "A swimming spot deeper in the trail, off the main path. Cold water, bigger rocks, more privacy than the property creek. Far enough that voices don't carry. Close enough that someone could walk up unannounced."
+image = "locations/isolated_creek.jpg"
+image_search_queries = ["secluded forest creek swimming hole deeper water mossy rocks private"]
+entry_from = "loc_trail_head"
+
+# ═══════════════════════════════════════════════════════════════
+# SETTINGS
+# ═══════════════════════════════════════════════════════════════
+
+[settings]
+clothing_enabled = true
+wardrobe_location = "loc_lily_room"
+shop_location = "loc_clothing_store"
+
+[settings.clothing_requirements]
+body_coverage = true
+always_required = ["shoes"]
+
+
+[settings.rent]
+enabled = true
+amount = 50
+due_day = "Monday"
+collector_npc = "npc_frank"
+grace_periods = 1
+
+# ═══════════════════════════════════════════════════════════════
+# CLOTHING — Starting Wardrobe (initial = true)
+# ═══════════════════════════════════════════════════════════════
+
+# ─── TOPS ───
+
+[[clothing]]
+id = "hoodie"
+name = "Hoodie"
+slot = "top"
+initial = true
+
+[[clothing]]
+id = "plain_tshirt_1"
+name = "Plain T-Shirt (Gray)"
+slot = "top"
+initial = true
+
+[[clothing]]
+id = "plain_tshirt_2"
+name = "Plain T-Shirt (White)"
+slot = "top"
+initial = true
+
+[[clothing]]
+id = "tank_top_basic"
+name = "Tank Top"
+slot = "top"
+initial = true
+
+# ─── BOTTOMS ───
+
+[[clothing]]
+id = "jeans"
+name = "Jeans"
+slot = "bottom"
+initial = true
+
+[[clothing]]
+id = "old_shorts"
+name = "Old Shorts"
+slot = "bottom"
+initial = true
+
+[[clothing]]
+id = "sweatpants"
+name = "Sweatpants"
+slot = "bottom"
+initial = true
+
+# ─── SHOES ───
+
+[[clothing]]
+id = "sneakers"
+name = "Sneakers"
+slot = "shoes"
+initial = true
+
+[[clothing]]
+id = "flip_flops"
+name = "Flip Flops"
+slot = "shoes"
+initial = true
+
+# ─── UNDERWEAR ───
+
+[[clothing]]
+id = "basic_bra"
+name = "Basic Bra"
+slot = "bra"
+initial = true
+
+[[clothing]]
+id = "sports_bra"
+name = "Sports Bra"
+slot = "bra"
+initial = true
+
+[[clothing]]
+id = "cotton_panties"
+name = "Cotton Panties"
+slot = "underwear"
+initial = true
+
+# ─── DRESSES (Starting) ───
+
+[[clothing]]
+id = "sundress_old"
+name = "Sundress (the nice one)"
+slot = "dress"
+initial = true
+
+# ═══════════════════════════════════════════════════════════════
+# CLOTHING — Basic Tier (no corruption gate, shop items)
+# ═══════════════════════════════════════════════════════════════
+
+[[clothing]]
+id = "basic_shorts"
+name = "Denim Shorts"
+slot = "bottom"
+price = 25
+
+[[clothing]]
+id = "basic_leggings"
+name = "Leggings"
+slot = "bottom"
+price = 20
+
+[[clothing]]
+id = "basic_vneck"
+name = "V-Neck Tee"
+slot = "top"
+price = 15
+
+[[clothing]]
+id = "basic_swimsuit_top"
+name = "Swimsuit Top (one-piece)"
+slot = "top"
+price = 30
+
+[[clothing]]
+id = "basic_swimsuit_bottom"
+name = "Swimsuit Bottom"
+slot = "bottom"
+price = 25
+
+[[clothing]]
+id = "basic_sleepshirt"
+name = "Sleep Shirt"
+slot = "top"
+price = 15
+
+[[clothing]]
+id = "basic_sleep_shorts"
+name = "Sleep Shorts"
+slot = "bottom"
+price = 10
+
+[[clothing]]
+id = "basic_sandals"
+name = "Sandals"
+slot = "shoes"
+price = 20
+
+# ═══════════════════════════════════════════════════════════════
+# CLOTHING — Cute Tier (corruption >= 45)
+# ═══════════════════════════════════════════════════════════════
+
+[[clothing]]
+id = "cute_sundress"
+name = "Floral Sundress"
+slot = "dress"
+price = 50
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 45 }
+] }
+
+[[clothing]]
+id = "cute_crop_top"
+name = "Crop Top"
+slot = "top"
+price = 25
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 45 }
+] }
+
+[[clothing]]
+id = "cute_skirt"
+name = "Above-the-Knee Skirt"
+slot = "bottom"
+price = 35
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 45 }
+] }
+
+[[clothing]]
+id = "cute_athletic_top"
+name = "Fitted Athletic Top"
+slot = "top"
+price = 30
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 45 }
+] }
+
+[[clothing]]
+id = "cute_athletic_shorts"
+name = "Athletic Shorts"
+slot = "bottom"
+price = 25
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 45 }
+] }
+
+[[clothing]]
+id = "cute_bikini_top"
+name = "Bikini Top"
+slot = "top"
+price = 35
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 45 }
+] }
+
+[[clothing]]
+id = "cute_bikini_bottom"
+name = "Bikini Bottom"
+slot = "bottom"
+price = 30
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 45 }
+] }
+
+[[clothing]]
+id = "cute_camisole"
+name = "Camisole (sleepwear)"
+slot = "top"
+price = 20
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 45 }
+] }
+
+[[clothing]]
+id = "cute_pajama_shorts"
+name = "Short Pajama Shorts"
+slot = "bottom"
+price = 15
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 45 }
+] }
+
+[[clothing]]
+id = "cute_lace_bra"
+name = "Lace Bra"
+slot = "bra"
+price = 30
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 45 }
+] }
+
+[[clothing]]
+id = "cute_lace_panties"
+name = "Lace Panties"
+slot = "underwear"
+price = 20
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 45 }
+] }
+
+[[clothing]]
+id = "cute_wedges"
+name = "Wedge Sandals"
+slot = "shoes"
+price = 35
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 45 }
+] }
+
+# ═══════════════════════════════════════════════════════════════
+# CLOTHING — Bold Tier (corruption >= 85)
+# ═══════════════════════════════════════════════════════════════
+
+[[clothing]]
+id = "bold_mini_skirt"
+name = "Mini Skirt"
+slot = "bottom"
+price = 40
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 85 }
+] }
+
+[[clothing]]
+id = "bold_halter_top"
+name = "Halter Top"
+slot = "top"
+price = 30
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 85 }
+] }
+
+[[clothing]]
+id = "bold_bodycon_dress"
+name = "Bodycon Dress"
+slot = "dress"
+price = 60
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 85 }
+] }
+
+[[clothing]]
+id = "bold_sports_bra_only"
+name = "Sports Bra (as outerwear)"
+slot = "top"
+price = 25
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 85 }
+] }
+
+[[clothing]]
+id = "bold_booty_shorts"
+name = "Booty Shorts"
+slot = "bottom"
+price = 20
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 85 }
+] }
+
+[[clothing]]
+id = "bold_string_bikini_top"
+name = "String Bikini Top"
+slot = "top"
+price = 35
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 85 }
+] }
+
+[[clothing]]
+id = "bold_string_bikini_bottom"
+name = "String Bikini Bottom"
+slot = "bottom"
+price = 30
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 85 }
+] }
+
+[[clothing]]
+id = "bold_silk_nightgown"
+name = "Silk Nightgown"
+slot = "dress"
+price = 45
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 85 }
+] }
+
+[[clothing]]
+id = "bold_push_up_bra"
+name = "Push-Up Bra"
+slot = "bra"
+price = 35
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 85 }
+] }
+
+[[clothing]]
+id = "bold_thong"
+name = "Thong"
+slot = "underwear"
+price = 20
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 85 }
+] }
+
+[[clothing]]
+id = "bold_heels"
+name = "Low Heels"
+slot = "shoes"
+price = 45
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 85 }
+] }
+
+# ═══════════════════════════════════════════════════════════════
+# CLOTHING — Daring Tier (corruption >= 135)
+# ═══════════════════════════════════════════════════════════════
+
+[[clothing]]
+id = "daring_micro_skirt"
+name = "Micro Skirt"
+slot = "bottom"
+price = 35
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 135 }
+] }
+
+[[clothing]]
+id = "daring_sheer_top"
+name = "Sheer Top"
+slot = "top"
+price = 40
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 135 }
+] }
+
+[[clothing]]
+id = "daring_backless_dress"
+name = "Backless Dress"
+slot = "dress"
+price = 70
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 135 }
+] }
+
+[[clothing]]
+id = "daring_micro_bikini_top"
+name = "Micro Bikini Top"
+slot = "top"
+price = 40
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 135 }
+] }
+
+[[clothing]]
+id = "daring_micro_bikini_bottom"
+name = "Micro Bikini Bottom"
+slot = "bottom"
+price = 35
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 135 }
+] }
+
+[[clothing]]
+id = "daring_babydoll"
+name = "Babydoll Lingerie"
+slot = "dress"
+price = 55
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 135 }
+] }
+
+[[clothing]]
+id = "daring_lace_bralette"
+name = "Lace Bralette"
+slot = "bra"
+price = 30
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 135 }
+] }
+
+[[clothing]]
+id = "daring_g_string"
+name = "G-String"
+slot = "underwear"
+price = 15
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 135 }
+] }
+
+[[clothing]]
+id = "daring_stilettos"
+name = "Stilettos"
+slot = "shoes"
+price = 60
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 135 }
+] }
+
+# ═══════════════════════════════════════════════════════════════
+# CLOTHING — NPC Gifts (added via wardrobeEffects in story canvases)
+# These items are NOT in the shop. They are gifted during story events.
+# ═══════════════════════════════════════════════════════════════
+
+[[clothing]]
+id = "jakes_flannel"
+name = "Jake's Flannel Shirt"
+slot = "top"
+price = 0
+
+[[clothing]]
+id = "ryan_bikini_gift"
+name = "Bikini (from Ryan)"
+slot = "dress"
+price = 0
+
+[[clothing]]
+id = "frank_nice_dress"
+name = "Nice Dress (from Frank)"
+slot = "dress"
+price = 0
+
+[[clothing]]
+id = "ryan_athletic_set_top"
+name = "Bold Athletic Top (from Ryan)"
+slot = "top"
+price = 0
+
+[[clothing]]
+id = "ryan_athletic_set_bottom"
+name = "Bold Athletic Shorts (from Ryan)"
+slot = "bottom"
+price = 0
+
+[[clothing]]
+id = "frank_lingerie_bra"
+name = "Lingerie Bra (from Frank)"
+slot = "bra"
+price = 0
+
+[[clothing]]
+id = "frank_lingerie_panties"
+name = "Lingerie Panties (from Frank)"
+slot = "underwear"
+price = 0
+
+# ═══════════════════════════════════════════════════════════════
+# END OF PHASE 1
+# ═══════════════════════════════════════════════════════════════

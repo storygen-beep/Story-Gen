@@ -1,0 +1,19 @@
+{
+  "session_id": 2,
+  "start_ts": "2026-06-03T16:09:19.657Z",
+  "start_epoch_ms": 1780502959657,
+  "end_ts": "2026-06-03T16:26:33.860Z",
+  "duration_s": 1034,
+  "clicks": 24,
+  "choices_explored": 24,
+  "arrow_advances": 0,
+  "unique_states_seen": 27,
+  "new_unique_states": 20,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "DAY SYSTEM live-verified (--skip-phase0, real 18:00 Mon start). (1) Schedule page renders ALL offscreen away blocks as named rows: Sal->Sal's place 'home off the clock', Marcus->Uptown (NOW badge correct when away), Rosa->Rosa's place 'home with grandkids', Dee->Across the river 'off the clock'; 'Your Activities' shows The Apartment->Sleep 00:00-14:00. (2) Sleep router FIRES: at 12:50 AM Tue entered loc_apartment fresh -> 'Sleep' activity appeared (schedule-gated 00:00-14:00 matched), clicked -> clock jumped 12:50 AM -> 9:50 AM (+540 min EXACT) + '+75 Energy' toast. (3) Reachability: from 9:50 AM walked bar->Main Street->The Depot (daytime depot REACHABLE — impossible pre-router; Dee's 10:00-17:00 presence no longer dead). (4) Sal hub correctly absent in daytime (schedule 17:00-02:00). GOTCHA confirmed: dev '+1hr' advances the clock but does NOT re-evaluate the current location's canvases — must LEAVE+RE-ENTER for schedule-gated activities to appear; not a game bug."
+  ]
+}

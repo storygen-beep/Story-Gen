@@ -1,0 +1,148 @@
+# Phase 5/7 — 5_scenes.toml
+# Bar Empire — scenes + quest cards. SCAFFOLD seeds the spine quest card; the first
+# authored BEAT (Sal's Lane-1 floor hub) lands below. Further beats append here.
+
+# ═════════════════════════════════════════════════════════════════════════════
+# SPINE QUEST CARD (scaffold) — the central pressure, "Story Goals"
+# ═════════════════════════════════════════════════════════════════════════════
+# No npc_id → top "Story Goals". Mechanic-mode (no ready_canvas): the current want
+# is "make rent on tips tonight" — measured by money. Shown while the bar isn't yours.
+[[quest_cards]]
+text  = "Forty dollars and three weeks behind. Tonight I work the floor — and I start figuring out how the man who owns this place can be made to want me more than he wants the bar."
+tip   = "Work Sal's floor. Dress for the tips. Turn his head."
+priority = 10
+when = [
+  { flag = "bar_owned", op = "is_false" },
+]
+goals = [
+  { trait = "money", subject = "player", op = "gte", value = 60, label = "Money" },
+]
+
+# ═════════════════════════════════════════════════════════════════════════════
+# BEAT_0001 — Sal's floor hub (npc_intro / Lane 1). Roster row: "Sal's shift".
+# Want served: "Turn Sal's head". Non-lewd Talk is UNGATED (builds his lock in Act 1);
+# escalation rungs are locked-visible and DOUBLE-LOCKED (player corruption door × sal.corruption).
+# ═════════════════════════════════════════════════════════════════════════════
+[[canvases]]
+id          = "sal_bar_floor_hub"
+name        = "The Velvet Rail — Sal"
+description = "Lane 1 hub. Sal at the bar floor, every night. Ungated Talk + locked-visible double-locked escalation ladder."
+
+[canvases.trigger]
+location      = "loc_bar_floor"
+requires_npc  = "npc_sal"
+is_repeatable = true
+priority      = 8
+is_active     = true
+npc           = "npc_sal"
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time   = "02:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The Velvet Rail — Sal"
+blocks = [
+  { type = "image", props = { file = "scenes/sal_bar_floor_hub.jpg" } },
+  { type = "paragraph", content = "Sal works the till with one eye on the floor and one on you. He talks to you like an employee and looks at you like a man who's started to forget you are one." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# Rung 0 — Talk. UNGATED (non-lewd; builds his relation/the lock). Daily-capped.
+[[canvases.nodes.exit_block.choices]]
+text       = "Talk to Sal."
+targetType = "node"
+nodeId     = "sal_bar_floor_hub.node_talk"
+time_progression_minutes = 5
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_sal_today", operator = "is_false" },
+] }
+effects = [
+  { targetType = "npc", npcId = "npc_sal", trait = "relation", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_sal", trait = "corruption", op = "add", value = 1, cap = 100 },
+]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_sal_today", op = "set" },
+]
+
+# Rung 1 — Flirt. DOUBLE LOCK: player corruption ≥ 15 (door) AND sal.corruption ≥ 5 (lock).
+[[canvases.nodes.exit_block.choices]]
+text       = "Lean over the till and let him look."
+targetType = "node"
+nodeId     = "sal_bar_floor_hub.node_flirt"
+show_when_locked = true
+locked_text = "Not yet."
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
+  { type = "trait", subject = "npc", npc_id = "npc_sal", trait_key = "corruption", operator = "gte", value = 5 },
+] }
+effects = [
+  { targetType = "npc", npcId = "npc_sal", trait = "arousal", op = "add", value = 1, cap = 3 },
+  { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 100 },
+]
+
+# Rung 2 — Storeroom (capstone C1 launch). DOUBLE LOCK: corruption ≥ 30 AND sal.corruption ≥ 10.
+# Greyed-visible seed (telegraphs the ladder); routes to the capstone, authored as its own beat later.
+[[canvases.nodes.exit_block.choices]]
+text       = "Follow him into the storeroom."
+targetType = "node"
+nodeId     = "sal_bar_floor_hub.node_locked_storeroom"
+show_when_locked = true
+locked_text = "Not yet — the storeroom comes later."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 30 },
+  { type = "trait", subject = "npc", npc_id = "npc_sal", trait_key = "corruption", operator = "gte", value = 10 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Back to the floor."
+targetType = "location"
+locationId = "loc_bar_floor"
+
+# Talk node (non-lewd)
+[[canvases.nodes]]
+id   = "node_talk"
+name = "Talk to Sal"
+blocks = [
+  { type = "paragraph", content = "You ask about the slow night. He gripes about the debt without meaning to, then catches himself and tells you to smile more — you'll make rent. There's a beat where he holds the look a second too long." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back to the floor."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "loc_bar_floor"
+time_progression_minutes = 5
+
+# Flirt node (Rung 1)
+[[canvases.nodes]]
+id   = "node_flirt"
+name = "Lean over the till"
+blocks = [
+  { type = "paragraph", content = "You count your tips slow, leaned across the bar so the low cut of the shirt he keeps not-quite-complaining about does the talking. Sal's hands go still on the register. He doesn't tell you to straighten up." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back to the floor."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "loc_bar_floor"
+time_progression_minutes = 5
+
+# Locked storeroom seed (route target only — the C1 capstone is its own future beat)
+[[canvases.nodes]]
+id   = "node_locked_storeroom"
+name = "The storeroom"
+blocks = [
+  { type = "paragraph", content = "Not yet. The storeroom door's still just a door — for now." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back to the floor."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "loc_bar_floor"

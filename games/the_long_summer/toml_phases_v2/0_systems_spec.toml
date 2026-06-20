@@ -1,0 +1,416 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+#                 PHASE 0 — SYSTEMS SERIALIZATION
+#                     Game: The Long Summer
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Source: book_phases/2b_systems_budget.md
+# Produced by: Session A of the TOML translation pipeline
+# References: prompts/toml_generation_prompt_v4.txt §7B (lines 2394–2711)
+#
+# NOTE ON ENGINE COVERAGE:
+# `template_import.py` does NOT currently parse [[whiteboard_goals]],
+# [[narrative_gates]], [[income_channels]], or npc.archetype. These are
+# v4-prompt-level design-discipline sections. They are safe in 6_final_game.toml
+# (TOML parser silently ignores unknown top-level arrays) and will be promoted
+# to engine-level semantics in a future engine pass. Downstream Phases 1–4 are
+# expected to MATCH these specs by hand (Phase 3 activities must pair with each
+# income_channel; Phase 4 arc nodes must carry the quest-arc structure declared
+# in comments below).
+#
+# NOTE ON WHITEBOARD GOAL COUNT:
+# The v4 prompt recommends 7–12 goals. The Long Summer's Book 2B §1 locks 5.
+# This is a deliberate design choice — the game ends on the Keep-Tier Fork, not
+# on a goal-completion checklist. Goals surface on the Guide Page when their
+# trigger conditions are close; they are NOT required to close Phase 1.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# NPC ARCHETYPE ROSTER (comment-only — emitted for real in Phase 1)
+# Source: Book 2B §2
+# ─────────────────────────────────────────────────────────────────────────────
+# npc_frank   → authority          (landlord, rule-enforcer; romance-adjacent via Phase B)
+# npc_ryan    → romance            (business-partner-into-romance arc)
+# npc_jake    → romance            (hostility-into-romance arc)
+# npc_diana   → safe_harbor        (household anchor; silent-witness track only in Phase 1)
+# npc_marge   → mentor             (diner employer; Thursday-key ambient-tilt milestone)
+# npc_cookie  → wildcard           (diner peer; female-voice texture)
+#
+# RESERVED SLOTS (Phase 1 has no NPC filling these — economic pressure is the clock):
+# - threat      : intentionally unfilled (ex does not return; shadow layer deferred)
+# - rival       : unfilled (Cookie is peer, not rival)
+# - clock       : filled by economic pressure ([[income_channels]] + [settings.rent])
+#                 rather than an NPC
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ─────────────────────────────────────────────────────────────────────────────
+# NPC QUEST ARC ROSTER (comment-only — emitted for real in Phase 4 via
+# story_arc.nodes with npc/linked_flag/requires_nodes/guide_hint fields)
+# Source: Book 2B §3
+# ─────────────────────────────────────────────────────────────────────────────
+# npc_frank:
+#   Q1 (node_frank_q1): Phase A rules — first rules-test beat passed
+#     linked_flag = frank_q1_done, linked_canvas = frank_phase_a_test
+#     guide_hint  = "Frank's porch at nine. He doesn't talk much but he notices when I sit down."
+#   Q2 (node_frank_q2): Trigger + Restrict + Tease under compliance
+#     linked_flag = frank_q2_done, linked_canvas = frank_restrict
+#     requires_nodes = [node_frank_q1]
+#     guide_hint  = "Every time he corrects me the correction is longer than it needs to be."
+#   Q3 (node_frank_q3): Crack + Call-out + Keep
+#     linked_flag = frank_q3_done, linked_canvas = frank_crack
+#     requires_nodes = [node_frank_q2]
+#     guide_hint  = "I could name it."
+#     (stage 3 linked_canvas exit_block also sets frank_arc_complete)
+#
+# npc_ryan:
+#   Q1 (node_ryan_q1): Meet + Help — first small-ticket witnessed
+#     linked_flag = ryan_q1_done, linked_canvas = ryan_shop_first_visit
+#     guide_hint  = "Ryan's in the yard with the belt sander. He could use a water."
+#   Q2 (node_ryan_q2): Partner — mid-ticket close with charm
+#     linked_flag = ryan_q2_done, linked_canvas = ryan_partner_first_close
+#     requires_nodes = [node_ryan_q1]
+#     guide_hint  = "He said the farmer's coming Saturday. Let's see what he folds at if I'm standing in the yard."
+#   Q3 (node_ryan_q3): Big deal + Beach + Keep
+#     linked_flag = ryan_q3_done, linked_canvas = ryan_beach
+#     requires_nodes = [node_ryan_q2]
+#     guide_hint  = "He wants an answer."
+#     (stage 3 linked_canvas exit_block also sets ryan_arc_complete)
+#
+# npc_jake:
+#   Q1 (node_jake_q1): Noticed — hands-stop-mid-line beat
+#     linked_flag = jake_q1_done, linked_canvas = jake_first_glance_noticed
+#     guide_hint  = "His hands stopped when I walked in. Not for long, but they stopped."
+#   Q2 (node_jake_q2): Peek + draw + Tease
+#     linked_flag = jake_q2_done, linked_canvas = jake_peek_discovery
+#     requires_nodes = [node_jake_q1]
+#     guide_hint  = "I heard him in the hallway when I was in the bathroom. I know I heard him."
+#   Q3 (node_jake_q3): Caught + Hand + Keep
+#     linked_flag = jake_q3_done, linked_canvas = jake_caught_and_hand
+#     requires_nodes = [node_jake_q2]
+#     guide_hint  = "I decide what happens next."
+#     (stage 3 linked_canvas exit_block also sets jake_arc_complete)
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ─────────────────────────────────────────────────────────────────────────────
+# EMOTION MAPPINGS / TRAIT_WORDS BANDS (comment-only — emitted for real in
+# Phase 1 sidebar_items and Phase 4 story_arc.emotion_mappings)
+# Source: Book 2B §5
+# ─────────────────────────────────────────────────────────────────────────────
+# player.corruption    : 4 bands (0-24 Closed / 25-49 Opening / 50-74 Operating / 75-100 Saturated)
+# player.calculation   : 4 bands (0-19 / 20-39 / 40-69 / 70-100)
+# npc_frank.trust      : 5 bands (0-19 / 20-39 / 40-59 / 60-79 / 80-100)
+# npc_frank.love       : 5 bands (same intervals)
+# npc_ryan.love        : 5 bands (same intervals)
+# npc_jake.love        : 5 bands (-20 to -1 hostile / 0-19 / 20-39 / 40-69 / 70-100)
+# npc_diana.awareness  : 4 bands — NOT a sidebar item; selected only by ambient
+#                        Diana-prose variant logic (0-24 / 25-49 / 50-74 / 75-100)
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ─────────────────────────────────────────────────────────────────────────────
+# HINT ROSTER (comment-only — emitted for real in Phase 4 story_arc.hints)
+# Source: Book 2B §6 — 40 hints authored, target 30–50
+# ─────────────────────────────────────────────────────────────────────────────
+# Backbone (rent/college/Diana/routine)  : 8 hints
+# Frank (Phase A / trigger / Phase B)    : 10 hints
+# Ryan (Help → Partner → Big deal → Beach): 10 hints
+# Jake (Noticed → Peek → Tease → Caught)  : 8 hints
+# Corruption-band preoccupations          : 4 hints
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# WHITEBOARD GOALS
+# ═══════════════════════════════════════════════════════════════════════════════
+# Source: Book 2B §1. Five goals — design-deliberate count. Guide-Page content.
+
+[[whiteboard_goals]]
+id = "wb_first_rent_paid"
+title = "First rent paid"
+description = "Maya hands Frank sixty dollars on a Sunday morning for the first time."
+completion_condition = { type = "flag", flag_key = "first_rent_paid" }
+visible_in_game = true
+contributing_systems = ["income_diner_t0", "income_diner_t1", "income_ryan_small"]
+# Hint surfaces when: Day 5 and money < 60
+
+[[whiteboard_goals]]
+id = "wb_first_ambient_tilt"
+title = "First ambient tilt — the Thursday key"
+description = "Marge trusts Maya enough to close Thursday alone."
+completion_condition = { type = "flag", flag_key = "first_ambient_tilt" }
+visible_in_game = true
+contributing_systems = ["income_diner_t1", "npc_marge"]
+# Hint surfaces when: Week 3 and hired_at_diner = true and rep_road rising
+
+[[whiteboard_goals]]
+id = "wb_one_npc_keep_reached"
+title = "One NPC arc to Keep tier"
+description = "At least one of Frank, Ryan, or Jake reaches its Keep-tier milestone."
+# OR-logic: completion fires when any of three routes is set. v4 schema shows
+# only single-flag / single-trait examples; extending with `any_flag` is safe
+# because the engine does not parse whiteboard_goals.
+completion_condition = { type = "any_flag", flag_keys = ["frank_keep_route", "ryan_keep_route", "jake_keep_route"] }
+visible_in_game = true
+contributing_systems = ["npc_frank", "npc_ryan", "npc_jake"]
+# Hint surfaces when: the corresponding Crack has fired
+
+[[whiteboard_goals]]
+id = "wb_brothers_discover"
+title = "Brothers discover"
+description = "The three men in the house register each other's awareness of Maya — Diana silent."
+completion_condition = { type = "flag", flag_key = "brothers_discover" }
+visible_in_game = true
+contributing_systems = ["npc_frank", "npc_ryan", "npc_jake", "npc_diana"]
+# Hint surfaces when: Late Phase 1 with ≥2 NPC arcs at or past mid-tier
+
+[[whiteboard_goals]]
+id = "wb_college_savings_1500"
+title = "College savings threshold approached"
+description = "Maya's tracked savings hit $1,500 — the stated tuition number on the brochure she took from the admin office."
+# Stretch goal. Depends on college_brochure_taken being set; that dependency is
+# documented here but not expressed in completion_condition (schema shows one
+# condition structure per goal). Engine does not enforce; Guide Page hint logic
+# in Phase 4 surfaces the money milestone only after brochure is taken.
+completion_condition = { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 1500 }
+visible_in_game = true
+contributing_systems = ["income_diner_t2", "income_diner_t3", "income_ryan_big"]
+# Hint surfaces when: savings cross $800 (any point)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# NARRATIVE GATES
+# ═══════════════════════════════════════════════════════════════════════════════
+# Source: Book 2B §7. Five Phase-1-visible, Phase-1-locked locations.
+# Every gate has: in-fiction justification, unlock event description, and a
+# flag/trait condition that OPENS it. The flags referenced below are Phase 2+
+# flags — they are intentionally NOT set in Phase 1, which is why these locations
+# stay visible-but-unenterable. delivery_canvas_id = "" on all five because
+# Book 2B §7 does not spec a Phase 1 delivery canvas; the justification is
+# in-fiction diegetic (signs, seasons, tuition), not delivered by an NPC beat.
+
+[[narrative_gates]]
+id = "gate_truck_stop_bar"
+gated_location_id = "loc_truck_stop_bar"
+gated_canvas_id = ""
+gate_condition = { type = "flag", flag_key = "phase_2_bar_unlocked" }
+justification_type = "rumor"
+justification_summary = "The diner does everything the bar does, legally, with Marge watching. The bar opens when she's chasing something the diner can't give her — or when a regular she knows from T2/T3 tells her come by Friday."
+delivery_canvas_id = ""
+delivery_npc_id = ""
+unlock_event_description = "Phase 2+ — a T3 regular invites Maya by name to the bar, setting phase_2_bar_unlocked. Not authored in Phase 1."
+
+[[narrative_gates]]
+id = "gate_fairground"
+gated_location_id = "loc_fairground"
+gated_canvas_id = ""
+gate_condition = { type = "flag", flag_key = "phase_2_fair_week_active" }
+justification_type = "sign"
+justification_summary = "Seasonal. The fair isn't on. Announcements in the Millhaven paper reference the August week."
+delivery_canvas_id = ""
+delivery_npc_id = ""
+unlock_event_description = "Phase 2+ — August fair-week calendar beat sets phase_2_fair_week_active. Not authored in Phase 1."
+
+[[narrative_gates]]
+id = "gate_hs_stadium"
+gated_location_id = "loc_hs_stadium"
+gated_canvas_id = ""
+gate_condition = { type = "flag", flag_key = "phase_2_football_season_started" }
+justification_type = "sign"
+justification_summary = "Friday night football hasn't started. First game is after Phase 1 closes."
+delivery_canvas_id = ""
+delivery_npc_id = ""
+unlock_event_description = "Phase 2+ — first Friday game of the season sets phase_2_football_season_started. Not authored in Phase 1."
+
+[[narrative_gates]]
+id = "gate_church_interior"
+gated_location_id = "loc_church_interior"
+gated_canvas_id = ""
+gate_condition = { type = "flag", flag_key = "phase_2_church_interior_unlocked" }
+justification_type = "sign"
+justification_summary = "Maya attends the front of the church (parking lot, lawn, front steps) for rep_church gains without entering. Interior entry requires a sustained attendance pattern that doesn't land in Phase 1's runtime."
+delivery_canvas_id = ""
+delivery_npc_id = ""
+unlock_event_description = "Phase 2+ — sustained rep_church ≥ 80 plus an invitation beat sets phase_2_church_interior_unlocked. Not authored in Phase 1."
+
+[[narrative_gates]]
+id = "gate_college_campus"
+gated_location_id = "loc_college_campus"
+gated_canvas_id = ""
+# Tuition-gated, not Phase-gated — college_campus opens the moment Maya can pay
+# admission. The flag college_paid_admission is set by a Phase 2 canvas that
+# consumes $1500 and sets this flag. In Phase 1 Maya can visit loc_college_admin
+# (the brochure counter) but not loc_college_campus itself.
+gate_condition = { type = "flag", flag_key = "college_paid_admission" }
+justification_type = "sign"
+justification_summary = "Maya has the brochure. She hasn't paid the admission fee. The admin office lets her in for one brochure visit and then sends her back to Main Street. The campus itself is visible through the gate but she has no student ID."
+delivery_canvas_id = ""
+delivery_npc_id = ""
+unlock_event_description = "Phase 2+ — admission-pay canvas consumes $1500 and sets college_paid_admission. Not authored in Phase 1."
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# INCOME CHANNELS
+# ═══════════════════════════════════════════════════════════════════════════════
+# Source: Book 2B §4. Six primary channels plus one optional post-trigger channel.
+# Phase 3 MUST produce a matching activity canvas for each channel (same location,
+# same npc, same skill_gate, same payout range, same time cost).
+#
+# skill_gate_condition uses the MOST RESTRICTIVE single gate per v4 schema. Tiers
+# with compound gates (T1, T2, T3) document the full gate stack in tier_description.
+# Payout ranges below are per-shift TOTAL — Book 2B §4 expresses tip tiers as
+# "on top of base $45"; here we flatten to total-per-shift for Phase 3 matching.
+
+[[income_channels]]
+id = "income_diner_t0"
+name = "Diner base wage (T0 Distance shift)"
+location_id = "loc_diner"
+npc_id = "npc_marge"
+skill_gate_condition = { type = "flag", flag_key = "hired_at_diner" }
+payout_min = 45
+payout_max = 45
+time_cost_minutes = 300
+narrative_tone = "respectable"
+tier_description = "Base $45 flat per 5-hour shift. Always available from hired_at_diner. 40 energy. No tier-mechanics."
+
+[[income_channels]]
+id = "income_diner_t1"
+name = "Diner tips (T1 Play along)"
+location_id = "loc_diner"
+npc_id = "npc_marge"
+skill_gate_condition = { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 }
+payout_min = 53
+payout_max = 65
+time_cost_minutes = 300
+narrative_tone = "grey"
+tier_description = "Base $45 + $8–20 tips. Gate: corruption ≥ 25 AND rep_road ≥ 15 AND beauty ≥ 45. 40 energy; higher hygiene decay per shift."
+
+[[income_channels]]
+id = "income_diner_t2"
+name = "Diner tips elevated (T2 Work the floor)"
+location_id = "loc_diner"
+npc_id = "npc_marge"
+skill_gate_condition = { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 50 }
+payout_min = 70
+payout_max = 105
+time_cost_minutes = 300
+narrative_tone = "grey"
+tier_description = "Base $45 + $25–60 tips. Gate: corruption ≥ 50 AND beauty ≥ 55. 50 energy (more active)."
+
+[[income_channels]]
+id = "income_diner_t3"
+name = "Diner extras (T3 Back booth after close)"
+location_id = "loc_diner_back_booth"
+npc_id = "npc_marge"
+skill_gate_condition = { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 75 }
+payout_min = 50
+payout_max = 200
+time_cost_minutes = 90
+narrative_tone = "corrupt"
+tier_description = "Scene-by-scene agency, NOT a mode toggle. $50–200 per scene. Gate: corruption ≥ 75 AND specific customer flags AND first_ambient_tilt = true. +25 energy on top of T2 shift."
+
+[[income_channels]]
+id = "income_ryan_small"
+name = "Ryan shop small-ticket cut"
+location_id = "loc_ryans_shop"
+npc_id = "npc_ryan"
+skill_gate_condition = { type = "flag", flag_key = "ryan_help_tier_open" }
+payout_min = 10
+payout_max = 25
+time_cost_minutes = 60
+narrative_tone = "respectable"
+tier_description = "$10–25 per close. Gate: ryan_help_tier_open (set when Maya first witnesses a small-ticket close). 15 energy per close."
+
+[[income_channels]]
+id = "income_ryan_big"
+name = "Ryan shop big-ticket cut"
+location_id = "loc_ryans_shop"
+npc_id = "npc_ryan"
+skill_gate_condition = { type = "flag", flag_key = "ryan_partner_open" }
+payout_min = 80
+payout_max = 300
+time_cost_minutes = 240
+narrative_tone = "grey"
+tier_description = "$80–300 per close. Gate: ryan_partner_open AND one of {customer_farmer_flag, customer_scrapper_flag, customer_divorcee_flag} AND corruption ≥ 50 for mid-ticket or corruption ≥ 75 for full big-ticket. 30 energy per close; may consume the whole afternoon."
+
+[[income_channels]]
+id = "income_frank_chores_optional"
+name = "Frank chores (post-Restrict supervision)"
+location_id = "loc_property"
+npc_id = "npc_frank"
+skill_gate_condition = { type = "flag", flag_key = "frank_restrict_declared" }
+payout_min = 5
+payout_max = 20
+time_cost_minutes = 45
+narrative_tone = "grey"
+tier_description = "Optional. $5–20 per task. Gate: frank_restrict_declared (Phase B trigger fired). Frank uses chores to keep Maya visible — the money is real, the purpose is supervision."
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 2 CONTENT INVENTORY (comment-only)
+# ═══════════════════════════════════════════════════════════════════════════════
+# The canvases and locations below must carry a whiteboard_complete gate or a
+# phase-2 flag gate when they are authored in a future phase of work. Phase 1
+# of THIS pipeline emits these locations as visible-but-gated (via the
+# [[narrative_gates]] above); Phase 2 STORY CANVASES reference only Phase 1
+# content, not the below.
+#
+# PHASE 2+ LOCATIONS (visible Phase 1, unenterable Phase 1):
+#   - loc_truck_stop_bar      — gate: phase_2_bar_unlocked
+#   - loc_fairground          — gate: phase_2_fair_week_active
+#   - loc_hs_stadium          — gate: phase_2_football_season_started
+#   - loc_church_interior     — gate: phase_2_church_interior_unlocked
+#   - loc_college_campus      — gate: college_paid_admission
+#
+# PHASE 2+ NPCS (deferred, not authored in Phase 1):
+#   - Diana's active arc (Diana stays silent-witness in Phase 1; diana_awareness
+#     accumulates but Diana does not confront)
+#   - Marge owner/appraisal sexual dynamic (Marge stays clean in Phase 1)
+#   - Peer deepening (Cookie has Phase 1 texture only; deeper peer arc deferred)
+#
+# PHASE 2+ CANVASES (not authored in Phase 1):
+#   - Diana first-husband-death reveal
+#   - Frank–Diana marriage strain beats (downstream of frank_keep_route)
+#   - Shadow-layer surface triggers (Ryan's sketchy buyer, etc.)
+#   - Friday football / Saturday market / August fair calendar beats
+#   - College campus interior scenes (post-admission)
+#
+# Phase 2 story canvases for Phase 1 (authored in this pipeline) are confined
+# to the 48 beats in session_state.yaml:coverage.story_beats (20 Prologue + 28
+# Phase 1). All 48 are set AT OR BEFORE keep_tier_fork, which closes Phase 1.
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DEFERRED SYSTEMS (comment-only — book-only design, not yet engine-rendered)
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# SHADOW LAYER (criminal/drug undercurrent):
+# - Reserved. Ryan's sketchy buyer could open the surface in Phase 2+. In Phase 1,
+#   all Ryan big-ticket buyers are legitimate customers — the edge is their
+#   treatment of Maya, not the legality of the transaction.
+#
+# DIANA ARC (Phase 2 activation):
+# - diana_awareness trait accumulates silently throughout Phase 1 via ambient
+#   Diana-prose variant selection (not a sidebar stat).
+# - Three design seeds for Phase 2:
+#     (a) first husband's death as backstory reveal
+#     (b) Frank–Diana strain as Frank's Keep route bleeds into the marriage
+#     (c) Diana finally speaking the sentence she has refused to speak in Phase 1
+#
+# OWNER/APPRAISAL DYNAMIC FOR MARGE:
+# - Reserved for Future_Considerations. Phase 1 Marge stays clean. The mentor
+#   archetype is load-bearing in Phase 1; promoting her to an arc NPC in Phase 2+
+#   would not invalidate Phase 1 content.
+#
+# MIDPOINT CRACK STRUCTURE:
+# - Locked placement between Ryan Beach and Frank Crack. Authored in Phase 4
+#   (canvas maya_midpoint_crack). Noted here because it depends on both prior
+#   arcs having fired — a structural constraint the income_channels + NPC arc
+#   gates above enforce in practice.
+#
+# PROCGEN / CALENDAR / PRESSURE / SAFETY-NET SYSTEMS:
+# - Not present in The Long Summer. The Book's Phase 2B has no §9–12 content.
+#   All cross-gating is expressed through flag chains + corruption/beauty bands
+#   + per-NPC trait thresholds already enumerated in Phase 1 (flag_keys,
+#   core_traits) and Phase 3 (activity canvas conditions).
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# End of Phase 0 — Systems Serialization
+# ═══════════════════════════════════════════════════════════════════════════════

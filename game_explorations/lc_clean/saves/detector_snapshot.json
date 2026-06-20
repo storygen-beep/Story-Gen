@@ -1,0 +1,2279 @@
+{
+  "generated_at": "2026-06-04T17:00:03.117Z",
+  "variables": {
+    "last_game_passage": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 6,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "Start",
+        "CustomizeCharacters",
+        "StartingCanvas_canvas_first_night_Node_1",
+        "Canvas_canvas_sal_ropes_first_Node_1",
+        "Canvas_canvas_collector_pressure_Node_1",
+        "Location_The_Last_Call",
+        "Canvas_canvas_sal_afterhours_hub_Node_1"
+      ]
+    },
+    "player.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "Nina"
+      ]
+    },
+    "player.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "nina.jpg"
+      ]
+    },
+    "player.current_location": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "",
+        "0f0216fd-7ce0-4599-91ba-de5c022cb486"
+      ]
+    },
+    "player.core_traits.corruption": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.arousal": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.energy": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 100,
+        "max": 100,
+        "first": 100,
+        "last": 100,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.hygiene": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 100,
+        "max": 100,
+        "first": 100,
+        "last": 100,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.money": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 80,
+        "max": 80,
+        "first": 80,
+        "last": 80,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.sal_stage": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 2,
+        "min": 0,
+        "max": 1,
+        "first": 0,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.marcus_stage": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.dee_stage": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.rosa_stage": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.fitness": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.beauty": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.exhibitionism": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.pregnancy": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.sex_stage": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.loop_npc_pleasure": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.loop_player_pleasure": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.sex_finisher_type": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.anal_active": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.sex_reactions": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.core_traits.sex_entry_origin": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "player.wardrobe.outfit_work_tee.id": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "outfit_work_tee"
+      ]
+    },
+    "player.wardrobe.outfit_work_tee.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "Plain work tee"
+      ]
+    },
+    "player.wardrobe.outfit_work_tee.slot": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "top"
+      ]
+    },
+    "player.wardrobe.outfit_work_tee.image": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        ""
+      ]
+    },
+    "player.wardrobe.outfit_work_jeans.id": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "outfit_work_jeans"
+      ]
+    },
+    "player.wardrobe.outfit_work_jeans.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "Work jeans"
+      ]
+    },
+    "player.wardrobe.outfit_work_jeans.slot": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "bottom"
+      ]
+    },
+    "player.wardrobe.outfit_work_jeans.image": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        ""
+      ]
+    },
+    "player.equipped.bra": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7
+    },
+    "player.equipped.underwear": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7
+    },
+    "player.equipped.top": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "outfit_work_tee"
+      ]
+    },
+    "player.equipped.bottom": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "outfit_work_jeans"
+      ]
+    },
+    "player.equipped.dress": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7
+    },
+    "player.equipped.legwear": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7
+    },
+    "player.equipped.shoes": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7
+    },
+    "player.body_type": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "average"
+      ]
+    },
+    "player.look": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "tired"
+      ]
+    },
+    "npcs.4af01c3e-c03d-4414-a8b8-df762c7679b4.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "Sal"
+      ]
+    },
+    "npcs.4af01c3e-c03d-4414-a8b8-df762c7679b4.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "sal.jpg"
+      ]
+    },
+    "npcs.4af01c3e-c03d-4414-a8b8-df762c7679b4.core_traits.arousal": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.4af01c3e-c03d-4414-a8b8-df762c7679b4.core_traits.corruption": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.4af01c3e-c03d-4414-a8b8-df762c7679b4.core_traits.relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.4af01c3e-c03d-4414-a8b8-df762c7679b4.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7
+    },
+    "npcs.4af01c3e-c03d-4414-a8b8-df762c7679b4.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        ""
+      ]
+    },
+    "npcs.3288f6d2-09ae-48de-bdc0-262b21c89f23.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "Marcus"
+      ]
+    },
+    "npcs.3288f6d2-09ae-48de-bdc0-262b21c89f23.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "marcus.jpg"
+      ]
+    },
+    "npcs.3288f6d2-09ae-48de-bdc0-262b21c89f23.core_traits.arousal": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.3288f6d2-09ae-48de-bdc0-262b21c89f23.core_traits.corruption": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.3288f6d2-09ae-48de-bdc0-262b21c89f23.core_traits.relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.3288f6d2-09ae-48de-bdc0-262b21c89f23.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7
+    },
+    "npcs.3288f6d2-09ae-48de-bdc0-262b21c89f23.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        ""
+      ]
+    },
+    "npcs.c2422902-9f91-4ddf-817c-5df32b894175.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "The Collector"
+      ]
+    },
+    "npcs.c2422902-9f91-4ddf-817c-5df32b894175.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "collector.jpg"
+      ]
+    },
+    "npcs.c2422902-9f91-4ddf-817c-5df32b894175.core_traits.awareness": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.c2422902-9f91-4ddf-817c-5df32b894175.core_traits.corruption": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.c2422902-9f91-4ddf-817c-5df32b894175.core_traits.relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.c2422902-9f91-4ddf-817c-5df32b894175.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7
+    },
+    "npcs.c2422902-9f91-4ddf-817c-5df32b894175.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        ""
+      ]
+    },
+    "npcs.ed39dccb-14ba-41b7-84b4-2ad2a471648d.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "Rosa"
+      ]
+    },
+    "npcs.ed39dccb-14ba-41b7-84b4-2ad2a471648d.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "rosa.jpg"
+      ]
+    },
+    "npcs.ed39dccb-14ba-41b7-84b4-2ad2a471648d.core_traits.relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.ed39dccb-14ba-41b7-84b4-2ad2a471648d.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7
+    },
+    "npcs.ed39dccb-14ba-41b7-84b4-2ad2a471648d.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        ""
+      ]
+    },
+    "npcs.db9bed8e-12a3-4241-99ab-126ccfcd446c.name": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "Dee"
+      ]
+    },
+    "npcs.db9bed8e-12a3-4241-99ab-126ccfcd446c.portrait": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "dee.jpg"
+      ]
+    },
+    "npcs.db9bed8e-12a3-4241-99ab-126ccfcd446c.core_traits.arousal": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.db9bed8e-12a3-4241-99ab-126ccfcd446c.core_traits.corruption": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.db9bed8e-12a3-4241-99ab-126ccfcd446c.core_traits.relation": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "npcs.db9bed8e-12a3-4241-99ab-126ccfcd446c.schedule": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7
+    },
+    "npcs.db9bed8e-12a3-4241-99ab-126ccfcd446c.relationship": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        ""
+      ]
+    },
+    "flags.bar_seized": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "bool_values": [
+        false
+      ]
+    },
+    "flags.game_started": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "bool_values": [
+        true
+      ]
+    },
+    "flags.debug_mode": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "bool_values": [
+        false
+      ]
+    },
+    "game_state.current_canvas": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 4,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "",
+        "4ec6ddef-c536-4868-b431-c0aad35fd7c0",
+        "f13b98cc-3b7d-481e-92cf-13729e643a13",
+        "52ec0f53-633a-4cc5-b6ca-716d63220ab4",
+        "f3f401ad-9519-44de-a5c8-99b94502fde8"
+      ]
+    },
+    "game_state.visited_locations": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7
+    },
+    "game_state.visited_nodes": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7
+    },
+    "game_state.scheduled": {
+      "types": [
+        "object"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7
+    },
+    "game_state.fast_jobs.xp": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.bank.balance": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.time_state.current_hour": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 2,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 3,
+        "min": 18,
+        "max": 23,
+        "first": 18,
+        "last": 23,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": false
+      }
+    },
+    "game_state.time_state.current_minute": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 2,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 2,
+        "min": 0,
+        "max": 30,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.time_state.current_day": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "string_samples": [
+        "Monday"
+      ]
+    },
+    "game_state.time_state.current_week": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.time_state.day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.rent_state.last_paid_week": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.rent_state.warnings": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "number_stats": {
+        "count": 19,
+        "unique_count": 1,
+        "min": 0,
+        "max": 0,
+        "first": 0,
+        "last": 0,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.rent_state.is_due": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591952228,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 7,
+      "bool_values": [
+        false
+      ]
+    },
+    "_click": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 2,
+      "first_ts": 1780591954006,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 6,
+      "string_samples": [
+        "clicked:✓ I am 18 or older - Enter Gam",
+        "clicked:Continue to Game",
+        "clicked:Ask about the envelope by the "
+      ]
+    },
+    "game_state.trigger_history.4ec6ddef-c536-4868-b431-c0aad35fd7c0.total": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591955404,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 5,
+      "number_stats": {
+        "count": 15,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.trigger_history.4ec6ddef-c536-4868-b431-c0aad35fd7c0.dayKey": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591955404,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 5,
+      "string_samples": [
+        "1:Monday"
+      ]
+    },
+    "game_state.trigger_history.4ec6ddef-c536-4868-b431-c0aad35fd7c0.dayCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591955404,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 5,
+      "number_stats": {
+        "count": 15,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.current_node": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 3,
+      "first_ts": 1780591955404,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 5,
+      "string_samples": [
+        "2d0aef57-9b56-4bcc-886b-e94efc1cbf90",
+        "1422d663-cd3e-4f1f-b273-01234e025445",
+        "85b9ef55-f69e-4904-81d9-b2c3efb76377",
+        "6afec889-8543-4cca-ab56-aaae9e4f9775"
+      ]
+    },
+    "_st": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780591963019,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 5,
+      "string_samples": [
+        "passage=StartingCanvas_canvas_first_night_Node_1 || npcCount=0 || first_night=undefined || sal_opened=undefined || hour="
+      ]
+    },
+    "_ch": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592000017,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 5,
+      "string_samples": [
+        "Pour yourself one and take stock. / Lock up and go up to bed."
+      ]
+    },
+    "flags.first_night_done": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592017049,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 4,
+      "bool_values": [
+        true
+      ]
+    },
+    "flags.debt_explained": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592017049,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 4,
+      "bool_values": [
+        true
+      ]
+    },
+    "flags_meta.first_night_done.set_day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592017049,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 4,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "flags_meta.debt_explained.set_day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592017049,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 4,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.trigger_history.f13b98cc-3b7d-481e-92cf-13729e643a13.total": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592017049,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 4,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 2,
+        "max": 2,
+        "first": 2,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.trigger_history.f13b98cc-3b7d-481e-92cf-13729e643a13.dayKey": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592017049,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 4,
+      "string_samples": [
+        "1:Monday"
+      ]
+    },
+    "game_state.trigger_history.f13b98cc-3b7d-481e-92cf-13729e643a13.dayCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592017049,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 4,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 2,
+        "max": 2,
+        "first": 2,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.activity_trigger_history.The Last Call — Sal.dayKey": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592017049,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 4,
+      "string_samples": [
+        "1:Monday"
+      ]
+    },
+    "game_state.activity_trigger_history.The Last Call — Sal.dayCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592017049,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 4,
+      "number_stats": {
+        "count": 11,
+        "unique_count": 1,
+        "min": 2,
+        "max": 2,
+        "first": 2,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "_st2": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592019033,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 4,
+      "string_samples": [
+        "passage=Canvas_canvas_sal_ropes_first_Node_1 || npcCount=0 || first_night=true || sal_opened=undefined || sal_arousal=un"
+      ]
+    },
+    "flags.sal_opened_up": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592047621,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 3,
+      "bool_values": [
+        true
+      ]
+    },
+    "flags.talked_to_sal_today": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592047621,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 3,
+      "bool_values": [
+        true
+      ]
+    },
+    "flags_meta.sal_opened_up.set_day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592047621,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 3,
+      "number_stats": {
+        "count": 9,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "flags_meta.talked_to_sal_today.set_day": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592047621,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 3,
+      "number_stats": {
+        "count": 9,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.trigger_history.52ec0f53-633a-4cc5-b6ca-716d63220ab4.total": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592047621,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 3,
+      "number_stats": {
+        "count": 9,
+        "unique_count": 1,
+        "min": 2,
+        "max": 2,
+        "first": 2,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.trigger_history.52ec0f53-633a-4cc5-b6ca-716d63220ab4.dayKey": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592047621,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 3,
+      "string_samples": [
+        "1:Monday"
+      ]
+    },
+    "game_state.trigger_history.52ec0f53-633a-4cc5-b6ca-716d63220ab4.dayCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592047621,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 3,
+      "number_stats": {
+        "count": 9,
+        "unique_count": 1,
+        "min": 2,
+        "max": 2,
+        "first": 2,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.activity_trigger_history.Collection night.dayKey": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592047621,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 3,
+      "string_samples": [
+        "1:Monday"
+      ]
+    },
+    "game_state.activity_trigger_history.Collection night.dayCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592047621,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 3,
+      "number_stats": {
+        "count": 9,
+        "unique_count": 1,
+        "min": 2,
+        "max": 2,
+        "first": 2,
+        "last": 2,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.random_cooldowns.0f0216fd-7ce0-4599-91ba-de5c022cb486": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 1,
+      "first_ts": 1780592047621,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 3,
+      "number_stats": {
+        "count": 9,
+        "unique_count": 2,
+        "min": 2,
+        "max": 3,
+        "first": 3,
+        "last": 2,
+        "is_monotonic_increasing": false,
+        "is_boolean_like": true
+      }
+    },
+    "_st3": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592049625,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 3,
+      "string_samples": [
+        "passage=Canvas_canvas_collector_pressure_Node_1 || npcCount=0 || sal_opened=true || sal_arousal=undefined || sal_first_d"
+      ]
+    },
+    "_np": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592078856,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 3,
+      "string_samples": [
+        "resolvedId=4af01c3e-c03d-4414-a8b8-df762c7679b4 || npc(sing)keys=0 || npcs(plur)keys=5 || salCT={\"arousal\":0,\"corruption"
+      ]
+    },
+    "npc_interacted_today.4af01c3e-c03d-4414-a8b8-df762c7679b4": {
+      "types": [
+        "boolean"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592123381,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 1,
+      "bool_values": [
+        true
+      ]
+    },
+    "game_state.trigger_history.f3f401ad-9519-44de-a5c8-99b94502fde8.total": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592123381,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 4,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.trigger_history.f3f401ad-9519-44de-a5c8-99b94502fde8.dayKey": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592123381,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 1,
+      "string_samples": [
+        "1:Monday"
+      ]
+    },
+    "game_state.trigger_history.f3f401ad-9519-44de-a5c8-99b94502fde8.dayCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592123381,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 4,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "game_state.activity_trigger_history.Sal — after the lock turns.dayKey": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592123381,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 1,
+      "string_samples": [
+        "1:Monday"
+      ]
+    },
+    "game_state.activity_trigger_history.Sal — after the lock turns.dayCount": {
+      "types": [
+        "number"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592123381,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 1,
+      "number_stats": {
+        "count": 4,
+        "unique_count": 1,
+        "min": 1,
+        "max": 1,
+        "first": 1,
+        "last": 1,
+        "is_monotonic_increasing": true,
+        "is_boolean_like": true
+      }
+    },
+    "_cl": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592123381,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 1,
+      "string_samples": [
+        "clicked Sal"
+      ]
+    },
+    "_bug": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592159644,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 1,
+      "string_samples": [
+        "sal_first_done=undefined || triggerEval(is_true)=true || takeBedLinks=1 [display=inline vis=visible]"
+      ]
+    },
+    "_cmp": {
+      "types": [
+        "string"
+      ],
+      "mutation_count": 0,
+      "first_ts": 1780592190388,
+      "last_ts": 1780592190388,
+      "passages_seen_on_count": 1,
+      "string_samples": [
+        "noVersion=true || withVersion=false"
+      ]
+    }
+  },
+  "prefix_clusters": {
+    "last": [
+      "last_game_passage",
+      "game_state.rent_state.last_paid_week"
+    ],
+    "name": [
+      "player.name",
+      "player.wardrobe.outfit_work_tee.name",
+      "player.wardrobe.outfit_work_jeans.name",
+      "npcs.4af01c3e-c03d-4414-a8b8-df762c7679b4.name",
+      "npcs.3288f6d2-09ae-48de-bdc0-262b21c89f23.name",
+      "npcs.c2422902-9f91-4ddf-817c-5df32b894175.name",
+      "npcs.ed39dccb-14ba-41b7-84b4-2ad2a471648d.name",
+      "npcs.db9bed8e-12a3-4241-99ab-126ccfcd446c.name"
+    ],
+    "portrait": [
+      "player.portrait",
+      "npcs.4af01c3e-c03d-4414-a8b8-df762c7679b4.portrait",
+      "npcs.3288f6d2-09ae-48de-bdc0-262b21c89f23.portrait",
+      "npcs.c2422902-9f91-4ddf-817c-5df32b894175.portrait",
+      "npcs.ed39dccb-14ba-41b7-84b4-2ad2a471648d.portrait",
+      "npcs.db9bed8e-12a3-4241-99ab-126ccfcd446c.portrait"
+    ],
+    "current": [
+      "player.current_location",
+      "game_state.current_canvas",
+      "game_state.time_state.current_hour",
+      "game_state.time_state.current_minute",
+      "game_state.time_state.current_day",
+      "game_state.time_state.current_week",
+      "game_state.current_node"
+    ],
+    "corruption": [
+      "player.core_traits.corruption",
+      "npcs.4af01c3e-c03d-4414-a8b8-df762c7679b4.core_traits.corruption",
+      "npcs.3288f6d2-09ae-48de-bdc0-262b21c89f23.core_traits.corruption",
+      "npcs.c2422902-9f91-4ddf-817c-5df32b894175.core_traits.corruption",
+      "npcs.db9bed8e-12a3-4241-99ab-126ccfcd446c.core_traits.corruption"
+    ],
+    "arousal": [
+      "player.core_traits.arousal",
+      "npcs.4af01c3e-c03d-4414-a8b8-df762c7679b4.core_traits.arousal",
+      "npcs.3288f6d2-09ae-48de-bdc0-262b21c89f23.core_traits.arousal",
+      "npcs.db9bed8e-12a3-4241-99ab-126ccfcd446c.core_traits.arousal"
+    ],
+    "sal": [
+      "player.core_traits.sal_stage",
+      "flags.sal_opened_up"
+    ],
+    "sex": [
+      "player.core_traits.sex_stage",
+      "player.core_traits.sex_finisher_type",
+      "player.core_traits.sex_reactions",
+      "player.core_traits.sex_entry_origin"
+    ],
+    "loop": [
+      "player.core_traits.loop_npc_pleasure",
+      "player.core_traits.loop_player_pleasure"
+    ],
+    "id": [
+      "player.wardrobe.outfit_work_tee.id",
+      "player.wardrobe.outfit_work_jeans.id"
+    ],
+    "slot": [
+      "player.wardrobe.outfit_work_tee.slot",
+      "player.wardrobe.outfit_work_jeans.slot"
+    ],
+    "image": [
+      "player.wardrobe.outfit_work_tee.image",
+      "player.wardrobe.outfit_work_jeans.image"
+    ],
+    "relation": [
+      "npcs.4af01c3e-c03d-4414-a8b8-df762c7679b4.core_traits.relation",
+      "npcs.3288f6d2-09ae-48de-bdc0-262b21c89f23.core_traits.relation",
+      "npcs.c2422902-9f91-4ddf-817c-5df32b894175.core_traits.relation",
+      "npcs.ed39dccb-14ba-41b7-84b4-2ad2a471648d.core_traits.relation",
+      "npcs.db9bed8e-12a3-4241-99ab-126ccfcd446c.core_traits.relation"
+    ],
+    "schedule": [
+      "npcs.4af01c3e-c03d-4414-a8b8-df762c7679b4.schedule",
+      "npcs.3288f6d2-09ae-48de-bdc0-262b21c89f23.schedule",
+      "npcs.c2422902-9f91-4ddf-817c-5df32b894175.schedule",
+      "npcs.ed39dccb-14ba-41b7-84b4-2ad2a471648d.schedule",
+      "npcs.db9bed8e-12a3-4241-99ab-126ccfcd446c.schedule"
+    ],
+    "relationship": [
+      "npcs.4af01c3e-c03d-4414-a8b8-df762c7679b4.relationship",
+      "npcs.3288f6d2-09ae-48de-bdc0-262b21c89f23.relationship",
+      "npcs.c2422902-9f91-4ddf-817c-5df32b894175.relationship",
+      "npcs.ed39dccb-14ba-41b7-84b4-2ad2a471648d.relationship",
+      "npcs.db9bed8e-12a3-4241-99ab-126ccfcd446c.relationship"
+    ],
+    "visited": [
+      "game_state.visited_locations",
+      "game_state.visited_nodes"
+    ],
+    "total": [
+      "game_state.trigger_history.4ec6ddef-c536-4868-b431-c0aad35fd7c0.total",
+      "game_state.trigger_history.f13b98cc-3b7d-481e-92cf-13729e643a13.total",
+      "game_state.trigger_history.52ec0f53-633a-4cc5-b6ca-716d63220ab4.total",
+      "game_state.trigger_history.f3f401ad-9519-44de-a5c8-99b94502fde8.total"
+    ],
+    "daykey": [
+      "game_state.trigger_history.4ec6ddef-c536-4868-b431-c0aad35fd7c0.dayKey",
+      "game_state.trigger_history.f13b98cc-3b7d-481e-92cf-13729e643a13.dayKey",
+      "game_state.activity_trigger_history.The Last Call — Sal.dayKey",
+      "game_state.trigger_history.52ec0f53-633a-4cc5-b6ca-716d63220ab4.dayKey",
+      "game_state.activity_trigger_history.Collection night.dayKey",
+      "game_state.trigger_history.f3f401ad-9519-44de-a5c8-99b94502fde8.dayKey",
+      "game_state.activity_trigger_history.Sal — after the lock turns.dayKey"
+    ],
+    "daycount": [
+      "game_state.trigger_history.4ec6ddef-c536-4868-b431-c0aad35fd7c0.dayCount",
+      "game_state.trigger_history.f13b98cc-3b7d-481e-92cf-13729e643a13.dayCount",
+      "game_state.activity_trigger_history.The Last Call — Sal.dayCount",
+      "game_state.trigger_history.52ec0f53-633a-4cc5-b6ca-716d63220ab4.dayCount",
+      "game_state.activity_trigger_history.Collection night.dayCount",
+      "game_state.trigger_history.f3f401ad-9519-44de-a5c8-99b94502fde8.dayCount",
+      "game_state.activity_trigger_history.Sal — after the lock turns.dayCount"
+    ],
+    "set": [
+      "flags_meta.first_night_done.set_day",
+      "flags_meta.debt_explained.set_day",
+      "flags_meta.sal_opened_up.set_day",
+      "flags_meta.talked_to_sal_today.set_day"
+    ]
+  },
+  "co_change": {
+    "game_state.current_canvas||last_game_passage": 4,
+    "game_state.time_state.current_minute||last_game_passage": 2,
+    "game_state.current_node||last_game_passage": 3,
+    "game_state.current_canvas||game_state.time_state.current_minute": 2,
+    "game_state.current_canvas||game_state.current_node": 3,
+    "game_state.current_node||game_state.time_state.current_minute": 2,
+    "game_state.time_state.current_hour||last_game_passage": 2
+  },
+  "passages": {
+    "Start": {
+      "first_ts": 1780591952228,
+      "visit_count": 3
+    },
+    "CustomizeCharacters": {
+      "first_ts": 1780591954006,
+      "visit_count": 1
+    },
+    "StartingCanvas_canvas_first_night_Node_1": {
+      "first_ts": 1780591955404,
+      "visit_count": 4
+    },
+    "Canvas_canvas_sal_ropes_first_Node_1": {
+      "first_ts": 1780592017049,
+      "visit_count": 2
+    },
+    "Canvas_canvas_collector_pressure_Node_1": {
+      "first_ts": 1780592047621,
+      "visit_count": 3
+    },
+    "Location_The_Last_Call": {
+      "first_ts": 1780592097944,
+      "visit_count": 2
+    },
+    "Canvas_canvas_sal_afterhours_hub_Node_1": {
+      "first_ts": 1780592123381,
+      "visit_count": 4
+    }
+  },
+  "choices": {
+    "total": 0,
+    "by_classification": {},
+    "price_observations": [],
+    "recent": []
+  },
+  "mutations": [
+    {
+      "ts": 1780591954006,
+      "passage": "CustomizeCharacters",
+      "state_hash": "171a1def2f09c3c8",
+      "var": "last_game_passage",
+      "before": "Start",
+      "after": "CustomizeCharacters"
+    },
+    {
+      "ts": 1780591955404,
+      "passage": "StartingCanvas_canvas_first_night_Node_1",
+      "state_hash": "943064bf24820cb2",
+      "var": "last_game_passage",
+      "before": "CustomizeCharacters",
+      "after": "StartingCanvas_canvas_first_night_Node_1"
+    },
+    {
+      "ts": 1780591955404,
+      "passage": "StartingCanvas_canvas_first_night_Node_1",
+      "state_hash": "943064bf24820cb2",
+      "var": "game_state.current_canvas",
+      "before": "",
+      "after": "4ec6ddef-c536-4868-b431-c0aad35fd7c0"
+    },
+    {
+      "ts": 1780591955404,
+      "passage": "StartingCanvas_canvas_first_night_Node_1",
+      "state_hash": "943064bf24820cb2",
+      "var": "_click",
+      "before": "clicked:✓ I am 18 or older - Enter Gam",
+      "after": "clicked:Continue to Game"
+    },
+    {
+      "ts": 1780591956795,
+      "passage": "StartingCanvas_canvas_first_night_Node_1",
+      "state_hash": "6766dc154e838937",
+      "var": "_click",
+      "before": "clicked:Continue to Game",
+      "after": "clicked:Ask about the envelope by the "
+    },
+    {
+      "ts": 1780592017049,
+      "passage": "Canvas_canvas_sal_ropes_first_Node_1",
+      "state_hash": "1dfe3d09d396be53",
+      "var": "last_game_passage",
+      "before": "StartingCanvas_canvas_first_night_Node_1",
+      "after": "Canvas_canvas_sal_ropes_first_Node_1"
+    },
+    {
+      "ts": 1780592017049,
+      "passage": "Canvas_canvas_sal_ropes_first_Node_1",
+      "state_hash": "1dfe3d09d396be53",
+      "var": "player.current_location",
+      "before": "",
+      "after": "0f0216fd-7ce0-4599-91ba-de5c022cb486"
+    },
+    {
+      "ts": 1780592017049,
+      "passage": "Canvas_canvas_sal_ropes_first_Node_1",
+      "state_hash": "1dfe3d09d396be53",
+      "var": "game_state.current_canvas",
+      "before": "4ec6ddef-c536-4868-b431-c0aad35fd7c0",
+      "after": "f13b98cc-3b7d-481e-92cf-13729e643a13"
+    },
+    {
+      "ts": 1780592017049,
+      "passage": "Canvas_canvas_sal_ropes_first_Node_1",
+      "state_hash": "1dfe3d09d396be53",
+      "var": "game_state.time_state.current_minute",
+      "before": 0,
+      "after": 30
+    },
+    {
+      "ts": 1780592017049,
+      "passage": "Canvas_canvas_sal_ropes_first_Node_1",
+      "state_hash": "1dfe3d09d396be53",
+      "var": "game_state.current_node",
+      "before": "2d0aef57-9b56-4bcc-886b-e94efc1cbf90",
+      "after": "1422d663-cd3e-4f1f-b273-01234e025445"
+    },
+    {
+      "ts": 1780592047621,
+      "passage": "Canvas_canvas_collector_pressure_Node_1",
+      "state_hash": "0d40eb5579c6b1c9",
+      "var": "last_game_passage",
+      "before": "Canvas_canvas_sal_ropes_first_Node_1",
+      "after": "Canvas_canvas_collector_pressure_Node_1"
+    },
+    {
+      "ts": 1780592047621,
+      "passage": "Canvas_canvas_collector_pressure_Node_1",
+      "state_hash": "0d40eb5579c6b1c9",
+      "var": "player.core_traits.sal_stage",
+      "before": 0,
+      "after": 1
+    },
+    {
+      "ts": 1780592047621,
+      "passage": "Canvas_canvas_collector_pressure_Node_1",
+      "state_hash": "0d40eb5579c6b1c9",
+      "var": "game_state.current_canvas",
+      "before": "f13b98cc-3b7d-481e-92cf-13729e643a13",
+      "after": "52ec0f53-633a-4cc5-b6ca-716d63220ab4"
+    },
+    {
+      "ts": 1780592047621,
+      "passage": "Canvas_canvas_collector_pressure_Node_1",
+      "state_hash": "0d40eb5579c6b1c9",
+      "var": "game_state.time_state.current_hour",
+      "before": 18,
+      "after": 19
+    },
+    {
+      "ts": 1780592047621,
+      "passage": "Canvas_canvas_collector_pressure_Node_1",
+      "state_hash": "0d40eb5579c6b1c9",
+      "var": "game_state.time_state.current_minute",
+      "before": 30,
+      "after": 0
+    },
+    {
+      "ts": 1780592047621,
+      "passage": "Canvas_canvas_collector_pressure_Node_1",
+      "state_hash": "0d40eb5579c6b1c9",
+      "var": "game_state.current_node",
+      "before": "1422d663-cd3e-4f1f-b273-01234e025445",
+      "after": "85b9ef55-f69e-4904-81d9-b2c3efb76377"
+    },
+    {
+      "ts": 1780592097944,
+      "passage": "Location_The_Last_Call",
+      "state_hash": "4bc79e438744068c",
+      "var": "last_game_passage",
+      "before": "Canvas_canvas_collector_pressure_Node_1",
+      "after": "Location_The_Last_Call"
+    },
+    {
+      "ts": 1780592097944,
+      "passage": "Location_The_Last_Call",
+      "state_hash": "4bc79e438744068c",
+      "var": "game_state.random_cooldowns.0f0216fd-7ce0-4599-91ba-de5c022cb486",
+      "before": 3,
+      "after": 2
+    },
+    {
+      "ts": 1780592097944,
+      "passage": "Location_The_Last_Call",
+      "state_hash": "4bc79e438744068c",
+      "var": "game_state.time_state.current_hour",
+      "before": 19,
+      "after": 23
+    },
+    {
+      "ts": 1780592123381,
+      "passage": "Canvas_canvas_sal_afterhours_hub_Node_1",
+      "state_hash": "1955c5acd9a449a3",
+      "var": "last_game_passage",
+      "before": "Location_The_Last_Call",
+      "after": "Canvas_canvas_sal_afterhours_hub_Node_1"
+    },
+    {
+      "ts": 1780592123381,
+      "passage": "Canvas_canvas_sal_afterhours_hub_Node_1",
+      "state_hash": "1955c5acd9a449a3",
+      "var": "game_state.current_canvas",
+      "before": "52ec0f53-633a-4cc5-b6ca-716d63220ab4",
+      "after": "f3f401ad-9519-44de-a5c8-99b94502fde8"
+    },
+    {
+      "ts": 1780592123381,
+      "passage": "Canvas_canvas_sal_afterhours_hub_Node_1",
+      "state_hash": "1955c5acd9a449a3",
+      "var": "game_state.current_node",
+      "before": "85b9ef55-f69e-4904-81d9-b2c3efb76377",
+      "after": "6afec889-8543-4cca-ab56-aaae9e4f9775"
+    }
+  ]
+}

@@ -1,0 +1,639 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 3 — ACTIVITIES (TEST SLICE)
+# Game: The Long Summer — Test Slice
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# 11 activities per plan §7.3. All single fixed paragraph + image-block with
+# 3–5 search_queries (image rotation is the variety mechanism per Doc 04
+# anti-pattern #4 — block_pool prose rotation is in the schema but forbidden by
+# the doctrine; doctrine wins for slice authoring).
+#
+# Density target per Doc 01 checklist: 30–80 words per arc-state. Activities in
+# this slice are mostly state-pumps (one arc-state) so one paragraph suffices.
+#
+# Activities are repeatable canvases at locations. Most have daily-cooldown via
+# `<x>_today` flags cleared by [engine.daily_tick]. activity_walk_past_jakes_door
+# also serves as the Jake "scene cascade" surface — the activity IS the scene
+# (the cascade group blocks live in the activity's body) since Jake's surface
+# isn't a separate hub.
+#
+# ─── INDEX ─────────────────────────────────────────────────────────────────────
+#   §1 — activity_sleep                  (loc_mayas_bedroom; 22:00–04:00)
+#   §2 — activity_shower                 (loc_mayas_bedroom; any time, daily-cooldown via hygiene state)
+#   §3 — activity_sketch                 (loc_mayas_bedroom; any time)
+#   §4 — activity_eat_from_fridge        (loc_kitchen; any time)
+#   §5 — activity_help_diana_kitchen     (loc_kitchen; DINPREP band)
+#   §7 — activity_help_ryan_in_yard      (loc_yard; A band, gates Ryan 0→1)
+#   §8 — activity_walk_past_jakes_door   (loc_hallway; A band — also the Jake scene cascade)
+#   §10 — activity_walk_to_town          (loc_hallway / loc_yard → loc_main_street_sidewalk)
+#   §11 — activity_walk_property         (loc_main_street_sidewalk → loc_hallway)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §1 — activity_sleep
+# ═══════════════════════════════════════════════════════════════════════════════
+# Resets energy. Day rollover happens during the 480-minute advance, which fires
+# [engine.daily_tick] and clears all `*_today` flags automatically. Single-band
+# (22:00–04:00 overnight). max_triggers_per_day = 1 prevents same-day re-sleep.
+
+[[canvases]]
+id          = "activity_sleep"
+name        = "Sleep"
+description = "Solo daily activity at loc_mayas_bedroom. Restores energy to 100, advances 8 hours, fires day rollover."
+
+[canvases.trigger]
+location      = "loc_mayas_bedroom"
+is_repeatable = true
+priority      = 4
+is_active     = true
+max_triggers_per_day = 1
+[[canvases.trigger.schedules]]
+start_time = "22:00"
+end_time   = "04:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Sleep"
+blocks = [
+  { type = "image", props = { file = "activities/sleep.jpg", description = "Maya's bedroom at night. Twin bed under a window, the quilt half-pushed back, an oscillating fan on the dresser, a small reading lamp on a sketchbook closed on the desk. The window cracked two inches at the bottom; cicadas through it. Late summer Southern night.", search_queries = [
+    "young woman small bedroom at night twin bed quilt fan oscillating sketchbook on desk",
+    "southern farmhouse guest bedroom night window cracked open cicadas summer reading lamp",
+    "rural alabama small bedroom twin bed late night window slightly open warm yellow lamp",
+    "young woman bedroom night small lamp window cracked summer fan quilt",
+  ] } },
+  { type = "paragraph", content = "She turned the lamp off. The fan moved the heat instead of cutting it. Through the wall, the slow tick of Jake's keyboard going quiet. The cicadas through the window-crack. Her hand under the pillow." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Lights off."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "trigger"
+locationId               = "loc_mayas_bedroom"
+time_progression_minutes = 480
+effects = [
+  { targetType = "player", trait = "energy", op = "set", value = 100 },
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §2 — activity_shower
+# ═══════════════════════════════════════════════════════════════════════════════
+# Hygiene + small beauty bump. Available any time at the bedroom (treating the
+# bathroom as accessible from the bedroom for slice simplicity — TLS has a
+# separate loc_bathroom but the slice doesn't declare it).
+
+[[canvases]]
+id          = "activity_shower"
+name        = "Shower"
+description = "Restores hygiene to 100, +1 beauty (capped at 80). 30-minute progression. Available daytime."
+
+[canvases.trigger]
+location      = "loc_mayas_bedroom"
+is_repeatable = true
+priority      = 3
+is_active     = true
+[[canvases.trigger.schedules]]
+start_time = "05:00"
+end_time   = "23:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Shower"
+blocks = [
+  { type = "image", props = { file = "activities/shower.jpg", description = "Bathroom interior with steam, a folded towel on the rim of the sink, soap in a clamshell dish, southern morning light through pebbled glass.", search_queries = [
+    "bathroom interior steam towel sink morning light pebbled glass",
+    "rural farmhouse bathroom shower steam southern morning",
+    "small bathroom shower steam towel sink morning warm light",
+    "southern home bathroom interior shower stall morning",
+    "young woman shower steam bathroom morning warm light folded towel",
+  ] } },
+  { type = "paragraph", content = "Hot until it ran lukewarm — about six minutes. The water pressure at Frank's was better than at the apartment. She used the shampoo Diana kept under the sink. The smell was the smell of being twelve again." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Towel off."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "trigger"
+locationId               = "loc_mayas_bedroom"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "hygiene", op = "set", value = 100 },
+  { targetType = "player", trait = "beauty",  op = "add", value = 1, clamp = true, cap = 80 },
+  { targetType = "player", trait = "energy",  op = "add", value = -3 },
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §3 — activity_sketch
+# ═══════════════════════════════════════════════════════════════════════════════
+# Small calculation + small beauty (artist's eye on her own face). Rest-mode —
+# no daily limit, costs minimal energy.
+
+[[canvases]]
+id          = "activity_sketch"
+name        = "Sketch"
+description = "+1 calculation, +1 beauty (capped 70), -2 energy. Rest activity in the bedroom."
+
+[canvases.trigger]
+location      = "loc_mayas_bedroom"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Sketch"
+blocks = [
+  { type = "image", props = { file = "activities/sketch.jpg", description = "Open sketchbook on the small desk under the window, pencil in hand, the page mid-drawing — a hand, a lampshade, the curve of a coffee cup. Afternoon light.", search_queries = [
+    "open sketchbook pencil drawing hand desk window afternoon light",
+    "young artist sketchbook drawing hand pencil bedroom desk",
+    "art student sketching desk window afternoon light small bedroom",
+    "sketchbook pencil drawing still life desk window southern light",
+    "young woman sketching drawing pencil bedroom desk warm light",
+  ] } },
+  { type = "paragraph", content = "She did the lampshade twice and the coffee cup once and the curve of her own hand on the desk three times. The third time was the one she didn't tear out. She closed the book and ran her thumb along the spine." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Close the book."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "trigger"
+locationId               = "loc_mayas_bedroom"
+time_progression_minutes = 60
+effects = [
+  { targetType = "player", trait = "calculation", op = "add", value = 1, clamp = true, cap = 100 },
+  { targetType = "player", trait = "beauty",      op = "add", value = 1, clamp = true, cap = 70 },
+  { targetType = "player", trait = "energy",      op = "add", value = -2 },
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §4 — activity_eat_from_fridge
+# ═══════════════════════════════════════════════════════════════════════════════
+# Quick energy + small money cost (groceries). Always available at the kitchen.
+
+[[canvases]]
+id          = "activity_eat_from_fridge"
+name        = "Eat from the fridge"
+description = "+5 energy, -$3 (groceries). 15 min."
+
+[canvases.trigger]
+location      = "loc_kitchen"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Eat from the fridge"
+blocks = [
+  { type = "image", props = { file = "activities/eat_from_fridge.jpg", description = "Open refrigerator, leftovers in foil, the inside of the fridge door with bottles. Southern household basics.", search_queries = [
+    "open refrigerator leftovers foil southern household interior kitchen",
+    "fridge interior leftovers foil bottles southern home kitchen",
+    "kitchen open fridge food leftovers warm light interior",
+    "rural farmhouse fridge interior food leftovers everyday",
+    "open fridge home food bottles condiments warm kitchen light",
+  ] } },
+  { type = "paragraph", content = "Cold chicken from Tuesday in the foil. Half an apple Diana had cut and forgotten. A glass of milk standing at the counter. The fridge ran loud the whole time." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "trigger"
+locationId               = "loc_kitchen"
+time_progression_minutes = 15
+effects = [
+  { targetType = "player", trait = "energy", op = "add", value = 5 },
+  { targetType = "player", trait = "money",  op = "add", value = -3 },
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §5 — activity_help_diana_kitchen
+# ═══════════════════════════════════════════════════════════════════════════════
+# Diana awareness DECREASES (closer connection). Daily-cooldown via
+# `helped_diana_today` flag. DINPREP band — Diana's at the stove.
+
+[[canvases]]
+id          = "activity_help_diana_kitchen"
+name        = "Help Diana with dinner"
+description = "-2 diana.awareness (clamped at 0), +2 trust. 60 min. Daily-cooldown."
+
+[canvases.trigger]
+location      = "loc_kitchen"
+is_repeatable = true
+priority      = 4
+is_active     = true
+npc           = "npc_diana"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "helped_diana_today", operator = "is_false" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "18:30"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Help Diana"
+blocks = [
+  { type = "image", props = { file = "activities/help_diana_kitchen.jpg", description = "Maya at the stove with Diana. Two women cooking in the same kitchen, knife work, the easy choreography of mother and daughter cooking together.", search_queries = [
+    "mother daughter cooking kitchen stove knife work southern",
+    "two women cooking together kitchen stove dinner preparation",
+    "young woman helping mother cook kitchen stove rural southern",
+    "mother daughter kitchen dinner prep cutting board knife",
+    "woman cooking kitchen stove southern family dinner together",
+  ] } },
+  { type = "paragraph", content = "Diana handed her the carrots. They worked the way they had worked since Maya was twelve — Diana at the stove, Maya at the cutting board, the rhythm older than either of them remembered being told. Diana didn't talk. Diana didn't have to." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Plate up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "trigger"
+locationId               = "loc_kitchen"
+time_progression_minutes = 60
+effects = [
+  { targetType = "npc", npcId = "npc_diana", trait = "awareness", op = "add", value = -2, clamp = true },
+  { targetType = "npc", npcId = "npc_diana", trait = "trust",     op = "add", value = 2 },
+  { targetType = "player",                    trait = "energy",    op = "add", value = -8 },
+]
+flagEffects = [
+  { targetType = "player", flag = "helped_diana_today",    op = "set" },
+  { targetType = "player", flag = "talked_to_diana_today", op = "set" },
+]
+[[canvases]]
+id          = "activity_help_ryan_in_yard"
+name        = "Help Ryan with the work"
+description = "+1 ryan.trust, +1 ryan_help_count. 60 min. Daily-cooldown via watched_ryan_today."
+
+[canvases.trigger]
+location      = "loc_yard"
+is_repeatable = true
+priority      = 5
+is_active     = true
+npc           = "npc_ryan"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "watched_ryan_today", operator = "is_false" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "08:00"
+end_time   = "15:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Help Ryan"
+blocks = [
+  { type = "image", props = { file = "activities/help_ryan_in_yard.jpg", description = "Maya holding the end of a board while Ryan runs the saw. The yard, the work table, the smell of cut cedar.", search_queries = [
+    "young woman holding board man working saw woodworking yard",
+    "young man young woman working yard project woodworking summer",
+    "two people working yard project saw lumber summer rural",
+    "young woman helping man cut wood saw outdoor workshop",
+    "rural backyard woodworking two people sawing cedar lumber summer",
+  ] } },
+  { type = "paragraph", content = "He gave her the end of the board to hold. She held it. He ran the saw. The smell of cut cedar in the yard, sawdust on her shoe. He didn't say much. He didn't need to. When he set the saw down he nodded once and that was the thanks." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Hand the board off."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "trigger"
+locationId               = "loc_yard"
+time_progression_minutes = 60
+effects = [
+  { targetType = "npc",    npcId = "npc_ryan", trait = "trust",          op = "add", value = 1 },
+  { targetType = "player",                      trait = "ryan_help_count", op = "add", value = 1 },
+  { targetType = "player",                      trait = "fitness",         op = "add", value = 1, clamp = true, cap = 80 },
+  { targetType = "player",                      trait = "energy",          op = "add", value = -10 },
+  { targetType = "player",                      trait = "hygiene",         op = "add", value = -5 },
+]
+flagEffects = [
+  { targetType = "player", flag = "watched_ryan_today",  op = "set" },
+  { targetType = "player", flag = "talked_to_ryan_today", op = "set" },
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §8 — activity_walk_past_jakes_door
+# ═══════════════════════════════════════════════════════════════════════════════
+# This activity IS the Jake scene cascade. Collapsing scene + activity into one
+# canvas because Jake's surface is the doorway, not a separate location. The
+# activity's body has stage-gated group blocks for Stage 0/1/2 (and dev-fragment
+# 3/4); each stage shows a different paragraph. Counter increments each time.
+#
+# Stage 1→2 transition: a one-time guard branch fires inside the Stage-1 group
+# when peek_count >= 3 AND corruption >= 30. The branch sets jake_peek_draw_revealed
+# AND writes npc_jake_stage = 2 directly (per plan §12.1 branch-inside-shell pattern).
+
+[[canvases]]
+id          = "activity_walk_past_jakes_door"
+name        = "Walk past Jake's door"
+description = "Hallway A-band activity. Stage cascade for Jake (0/1/2 natural; 3/4 dev-fragment). Increments jake_peek_count; daily-cooldown via walked_past_jakes_today."
+
+[canvases.trigger]
+location      = "loc_hallway"
+is_repeatable = true
+priority      = 4
+is_active     = true
+npc           = "npc_jake"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "walked_past_jakes_today", operator = "is_false" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "13:00"
+end_time   = "17:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Hallway — Jake's door"
+blocks = [
+  { type = "image", props = { file = "scenes/jakes_doorway.jpg", description = "Hallway view of Jake's cracked door, the angle of his face at the desk visible.", search_queries = [
+    "hallway view bedroom door cracked young man at desk drawing tablet",
+    "art student bedroom door cracked open hallway view drawing tablet",
+    "young man at drawing desk through cracked door dim hallway",
+    "rural farmhouse hallway view bedroom door cracked young man drawing",
+    "young man bedroom drawing through cracked door hallway evening",
+  ] } },
+
+  # ─── STAGE 0 — Hostile (default) + first-glance sub-branch ────────────────
+  # Audit §2.8 fix: canvas_jake_first_glance folded INTO this Stage 0 group as
+  # a flag-gated sub-branch per Doc 01 §"When to use a true one-shot" — first-time
+  # beats are branches inside repeatable shells, not separate one-shot canvases.
+  # The accompanying exit choices "Pass." (first-glance gated) and "Keep walking."
+  # (default gated) are mutually exclusive — only the right one shows depending
+  # on whether the player is in the first-glance moment or the default.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_jake_stage", operator = "eq", value = 0 },
+    ] }, blocks = [
+    # First-glance sub-branch — fires once when beauty crosses 40 and flag still false.
+    # The accompanying "Pass." choice (below) sets jake_first_glance_noticed.
+    # On next visit, helper jake_stage_1() clears (flag-path) and transition_jake_to_1
+    # pre-empts (priority 9 > activity 4).
+    { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+        { type = "flag",  subject = "player", flag_key  = "jake_first_glance_noticed", operator = "is_false" },
+        { type = "trait", subject = "player", trait_key = "beauty",                    operator = "gte",      value = 40 },
+      ] }, blocks = [
+      { type = "paragraph", content = "Jake's door was cracked. The angle of his face at the desk visible from the hallway, drawing tablet open, the curve of his hand on the stylus. His hand stopped. Not for long. The stylus paused above the screen for the count of a breath, then went back to the line he'd been drawing. He didn't lift his head. He didn't have to." },
+      # Outfit-aware additive beat (worn_beauty >= 4): dressing up sharpens the
+      # notice. Prose only — no effects, no trait change. Renders only inside the
+      # existing first-glance moment, so the flag/beauty mutex is untouched.
+      { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+          { type = "worn_beauty", operator = "gte", value = 4 },
+        ] }, blocks = [
+        { type = "paragraph", content = "And it was what she had on, today — the line of her she'd chosen to show before she left the bedroom. The stylus paused a second time. He caught himself doing it, and that was worse for him than the first." },
+      ] } },
+    ] } },
+    # Default Stage-0 — flag already set OR beauty hasn't crossed 40 yet.
+    { type = "group", props = { conditions = { version = "1.0", logic = "OR", items = [
+        { type = "flag",  subject = "player", flag_key  = "jake_first_glance_noticed", operator = "is_true" },
+        { type = "trait", subject = "player", trait_key = "beauty",                    operator = "lt",       value = 40 },
+      ] }, blocks = [
+      { type = "paragraph", content = "Jake's door pulled closed when she came down the hall. She heard the latch. She heard the chair scrape — not loud, not staged. He'd been listening for her step. He didn't want to be. He had been anyway." },
+    ] } },
+  ] } },
+
+  # ─── STAGE 1 — Noticed (hands stop briefly) ───────────────────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_jake_stage", operator = "eq", value = 1 },
+    ] }, blocks = [
+    # Stage 1→2 transition — one-time guard branch (peek_count >= 3 AND corruption >= 30)
+    { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+        { type = "flag",  subject = "player", flag_key  = "jake_peek_draw_revealed", operator = "is_false" },
+        { type = "trait", subject = "player", trait_key = "jake_peek_count",          operator = "gte",     value = 3 },
+        { type = "trait", subject = "player", trait_key = "corruption",              operator = "gte",     value = 30 },
+      ] }, blocks = [
+      { type = "paragraph", content = "Jake's door cracked an inch wider when she passed. He didn't pretend not to look this time. The drawing on the screen — his stylus paused over it — was a curve of a shoulder she recognized as her own from the angle of three days ago at the kitchen sink. He saw her see it. His hand went still on the stylus." },
+      { type = "dialog", props = { speaker = "npc", npcId = "npc_jake" }, content = "I — it's nothing. It's a study." },
+    ] } },
+
+    # Default Stage-1 (after the reveal, or before the gate clears)
+    { type = "group", props = { conditions = { version = "1.0", logic = "OR", items = [
+        { type = "flag", subject = "player", flag_key = "jake_peek_draw_revealed", operator = "is_true" },
+        { type = "trait", subject = "player", trait_key = "jake_peek_count",        operator = "lt",       value = 3 },
+        { type = "trait", subject = "player", trait_key = "corruption",            operator = "lt",       value = 30 },
+      ] }, blocks = [
+      { type = "paragraph", content = "Jake's door cracked an inch. The angle of his face at the desk visible — drawing tablet, the curve of his hand on the stylus. His hand stopped. Not for long. The stylus paused for a count of a breath, then went back to the line he'd been drawing." },
+    ] } },
+  ] } },
+
+  # ─── STAGE 2 — Peek/Draw (door cracked wider, lean possible) ──────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_jake_stage", operator = "eq", value = 2 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Jake's door open enough she could lean against the frame without having to ask. He didn't look up — he did look up — he did not pretend either way. The drawing on the screen this time was a hand. Her hand, holding a coffee cup at the angle she held one." },
+  ] } },
+
+  # ─── STAGE 3 — Tease (DEV FRAGMENT) ───────────────────────────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_jake_stage", operator = "eq", value = 3 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Jake's door open. He had stopped pretending the drawings weren't of her. He looked at her when she leaned in the frame and didn't look down. The stylus on the desk." },
+  ] } },
+
+  # ─── STAGE 4 — Caught (DEV FRAGMENT) ──────────────────────────────────────
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "npc_jake_stage", operator = "eq", value = 4 },
+    ] }, blocks = [
+    { type = "paragraph", content = "Jake's door open. He looked up before she'd reached it. He had been waiting for her to come down the hall." },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# Audit §2.8 fix — split Keep walking into two mutually-exclusive choices so the
+# first-glance flag only sets when the first-glance prose actually rendered.
+
+# "Pass." — only available during the first-glance sub-branch (Stage 0 + flag false + beauty>=40).
+# Sets jake_first_glance_noticed. Next visit, helper clears, transition fires.
+[[canvases.nodes.exit_block.choices]]
+text = "Pass."
+targetType = "trigger"
+time_progression_minutes = 5
+effects = [
+  { targetType = "player", trait = "jake_peek_count", op = "add", value = 1 },
+  { targetType = "player", trait = "energy",          op = "add", value = -1 },
+]
+flagEffects = [
+  { targetType = "player", flag = "walked_past_jakes_today",  op = "set" },
+  { targetType = "player", flag = "talked_to_jake_today",     op = "set" },
+  { targetType = "player", flag = "jake_first_glance_noticed", op = "set" },
+]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "npc_jake_stage",            operator = "eq",       value = 0 },
+  { type = "flag",  subject = "player", flag_key  = "jake_first_glance_noticed", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "beauty",                    operator = "gte",      value = 40 },
+] }
+
+# "Keep walking." — available outside the first-glance moment (Stage 0 default + Stage 1+ default).
+[[canvases.nodes.exit_block.choices]]
+text = "Keep walking."
+targetType = "trigger"
+time_progression_minutes = 5
+effects = [
+  { targetType = "player", trait = "jake_peek_count", op = "add", value = 1 },
+  { targetType = "player", trait = "energy",          op = "add", value = -1 },
+]
+flagEffects = [
+  { targetType = "player", flag = "walked_past_jakes_today", op = "set" },
+  { targetType = "player", flag = "talked_to_jake_today",    op = "set" },
+]
+conditions = { version = "1.0", logic = "OR", items = [
+  { type = "trait", subject = "player", trait_key = "npc_jake_stage",            operator = "gte",     value = 1 },
+  { type = "flag",  subject = "player", flag_key  = "jake_first_glance_noticed", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "beauty",                    operator = "lt",      value = 40 },
+] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Pause. Look longer."
+targetType = "trigger"
+time_progression_minutes = 5
+effects = [
+  { targetType = "player", trait = "jake_peek_count",        op = "add", value = 1 },
+  { targetType = "player", trait = "corruption",             op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_jake", trait = "arousal", op = "add", value = 2 },
+  { targetType = "player", trait = "energy",                 op = "add", value = -1 },
+]
+flagEffects = [
+  { targetType = "player", flag = "walked_past_jakes_today", op = "set" },
+  { targetType = "player", flag = "talked_to_jake_today",    op = "set" },
+]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "npc_jake_stage", operator = "gte", value = 1 },
+] }
+
+# Resolution branch: when the Stage 1→2 transition fires (jake_peek_draw_revealed
+# becomes true), advance the stage. Only available the visit the reveal happens.
+[[canvases.nodes.exit_block.choices]]
+text = "Don't say anything. Walk on."
+targetType = "trigger"
+time_progression_minutes = 5
+effects = [
+  { targetType = "player", trait = "npc_jake_stage", op = "set", value = 2 },
+  { targetType = "player", trait = "corruption",     op = "add", value = 2 },
+  { targetType = "npc", npcId = "npc_jake", trait = "arousal", op = "add", value = 5 },
+  { targetType = "player", trait = "energy",         op = "add", value = -2 },
+]
+flagEffects = [
+  { targetType = "player", flag = "jake_peek_draw_revealed", op = "set" },
+  { targetType = "player", flag = "walked_past_jakes_today", op = "set" },
+  { targetType = "player", flag = "talked_to_jake_today",    op = "set" },
+]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "npc_jake_stage",  operator = "eq",     value = 1 },
+  { type = "flag",  subject = "player", flag_key  = "jake_peek_draw_revealed", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "jake_peek_count", operator = "gte",    value = 3 },
+  { type = "trait", subject = "player", trait_key = "corruption",      operator = "gte",    value = 30 },
+] }
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §10 — activity_walk_to_town
+# ═══════════════════════════════════════════════════════════════════════════════
+# Bridges loc_hallway → loc_main_street_sidewalk. 60-minute progression. Costs
+# energy + hygiene. Available daytime.
+
+[[canvases]]
+id          = "activity_walk_to_town"
+name        = "Walk to town"
+description = "60-minute walk from the property to Main Street. -8 energy, -5 hygiene, +1 fitness."
+
+[canvases.trigger]
+location      = "loc_hallway"
+is_repeatable = true
+priority      = 3
+is_active     = true
+[[canvases.trigger.schedules]]
+start_time = "06:00"
+end_time   = "21:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Walk to town"
+blocks = [
+  { type = "image", props = { file = "activities/walk_to_town.jpg", description = "Maya walking the rural road from the property toward town, treeline, asphalt, summer heat.", search_queries = [
+    "young woman walking rural road treeline summer heat alabama",
+    "rural country road walking woman southern summer",
+    "country road walking young woman summer asphalt heat",
+    "rural alabama road walking summer treeline shoulder",
+    "young woman walking country road southern summer",
+  ] } },
+  { type = "paragraph", content = "Half an hour of asphalt and treeline. A truck or two passed. The diner sign visible from the bend in the road. The smell of the road tar in the heat." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Arrive at Main Street."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_main_street_sidewalk"
+time_progression_minutes = 60
+effects = [
+  { targetType = "player", trait = "energy",  op = "add", value = -8 },
+  { targetType = "player", trait = "hygiene", op = "add", value = -5 },
+  { targetType = "player", trait = "fitness", op = "add", value = 1, clamp = true, cap = 80 },
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# §11 — activity_walk_property
+# ═══════════════════════════════════════════════════════════════════════════════
+# Bridges loc_main_street_sidewalk → loc_hallway.
+
+[[canvases]]
+id          = "activity_walk_property"
+name        = "Walk back to the property"
+description = "60-minute walk from Main Street back to the house. -8 energy, -5 hygiene, +1 fitness."
+
+[canvases.trigger]
+location      = "loc_main_street_sidewalk"
+is_repeatable = true
+priority      = 3
+is_active     = true
+[[canvases.trigger.schedules]]
+start_time = "06:00"
+end_time   = "23:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Walk to the property"
+blocks = [
+  { type = "image", props = { file = "activities/walk_property.jpg", description = "Maya walking the road back from town toward the property at evening or afternoon.", search_queries = [
+    "young woman walking rural road home evening southern summer",
+    "country road walking young woman evening light treeline",
+    "rural alabama walking road evening light summer",
+    "young woman walking home country road evening heat",
+    "southern country road woman walking treeline evening",
+  ] } },
+  { type = "paragraph", content = "The walk back was the walk back. The driveway visible from the last bend, the porch light Diana turned on at sunset whether anyone was coming home or not." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Up the driveway."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_hallway"
+time_progression_minutes = 60
+effects = [
+  { targetType = "player", trait = "energy",  op = "add", value = -8 },
+  { targetType = "player", trait = "hygiene", op = "add", value = -5 },
+  { targetType = "player", trait = "fitness", op = "add", value = 1, clamp = true, cap = 80 },
+]

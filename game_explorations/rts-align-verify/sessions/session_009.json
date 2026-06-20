@@ -1,0 +1,19 @@
+{
+  "session_id": 9,
+  "start_ts": "2026-06-08T09:36:24.505Z",
+  "start_epoch_ms": 1780911384505,
+  "end_ts": "2026-06-08T09:37:57.768Z",
+  "duration_s": 93,
+  "clicks": 0,
+  "choices_explored": 0,
+  "arrow_advances": 0,
+  "unique_states_seen": 11,
+  "new_unique_states": 1,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "GAP-2 REACTIVE-WORLD research (RTS source, 2026-06-08): RTS 'world reacts' = STATE-GATED AMBIENT EVENT POOL. Ordinary actions roll for lewd events whose AVAILABILITY + INTENSITY scale with player corruption/exhibitionism/OUTFIT-corruption. Evidence: scene registry 'Bus Grope — Ride the bus' chance33 corr0 (passive: do neutral action → grope fires by chance); clothing gates 'outfit with at least 30 corruption' (Sunbathe Lotion / Pool Flash require a 30+ corruption outfit). flash=150 mentions, grope=16. NO generic 'reaction' system (the 24 'reaction' hits were Promise internals — false positive). So reactivity = (1) ambient lewd events fire on ordinary actions, gated by state+outfit; the more corrupt/underdressed you are, the more the world 'happens to' you. Confirms LO's hypothesis (less clothes → public groping). Other games: Lustbound momHouse Heat/CaughtCount/NudeStrike + Trust/Jealousy/Openness = being nude in the house raises heat/strikes → confrontation/consequences, mediated by the household's disposition (clearest nudity→reaction system). Become Someone / Back to Freedom = per-NPC demeanor shifts by relationship + your stats ('girls react to you differently depending on your stats'). Gakko fame = reputation reflected. LO's refinement (key): reaction should be PER-NPC-DISPOSITION (a corrupt/bold NPC gropes when underdressed; a respectful one looks away; an antagonist uses it) — richer than RTS's generic pool; ties reactivity to the casting HOOKS."
+  ]
+}

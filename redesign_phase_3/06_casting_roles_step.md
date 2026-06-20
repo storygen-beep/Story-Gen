@@ -70,8 +70,19 @@ span declared at Step 0a** (`05` 0a-3): the right genders + flavors across the a
 ## What casting assigns per NPC (the bridge to Step 4)
 For each cast member, record: **role(s) · hook · fantasy lane · depth (core vs peripheral) · arc-shape**
 (which implies the personal trait that will drive them — the spine menu, `02_GAME_SURVEY`) **· a rough
-sketch** (below). Step 4 (NPC arcs) then details each one's locks/scenes; casting just sets *who they
-are and what they're for.*
+sketch** (below) **· a place in the machine** (for *core* NPCs — below). Step 4 (NPC arcs) then details
+each one's locks/scenes; casting just sets *who they are and what they're for.*
+
+## Place in the machine (for core NPCs — `22`)
+The machine (`22`) — the game's cross-wiring, designed up front in Step 2 — needs each core NPC to have a
+**place in its core loop**: what it *feeds* and what *feeds it*. One phrase per core NPC, e.g. *"the boss is
+the income node — corrupting him raises the floor wage that funds reaching Sal"* (form 2a/2b), or *"Rosa's
+arc opens only once the bar is seized"* (form 1). This is the casting-level half of the machine: casting
+**places** each core NPC in the loop; Step 4's §8 (`07`) writes the actual reads/writes; Step 5 (`18`)
+checks the whole thing is a DAG and legible. Peripherals/islands need no place (the machine is the core's
+spine, not a quota on everyone). The three disciplines (`22`: never gate an arc's ENTRY · no cycles · every
+cross-gate legible) bound what a "place" may be — a wire constrains an arc's *depth ordering*, never its
+*availability*.
 
 ## The rough sketch (where each NPC roughly goes — and where cross-NPC lives) (`20` decision 7)
 Alongside the role + hook, give each NPC a **rough sketch** — a loose few lines of where the character
@@ -79,7 +90,10 @@ Alongside the role + hook, give each NPC a **rough sketch** — a loose few line
 connections**, kept deliberately light: *"she's got a friend who could become her own arc," "if she
 ends up pregnant it changes how Sal treats you," "she and Dee already know each other."* These are
 **ideas, not a format** — RTS-style organic threads (the brother's pregnancy rippling to the others; a
-sister's friend opening into an arc), **optional, not every NPC** (islands are fine).
+sister's friend opening into an arc), **optional, not every NPC** (islands are fine). The sketch threads
+are the **seed** of the machine (`22`): a thread that's load-bearing (it gates a rung or routes income)
+gets a real **place in the machine** (above) and becomes a wire in Step 4 §8; a thread that's pure flavor
+stays a thread. (`20` decision 7, refined.)
 
 Why the sketch earns its place:
 - **You sketch the whole cast in one sitting** → you *see the connections* while everyone's in front of
@@ -105,17 +119,21 @@ Why the sketch earns its place:
 - **Pressure escalates across acts** (`15` E): there's an Act-1 survival pressure source AND a late-act
   empire-threat (rival / cop / boss) so the squeeze never dies — not just one debt that vanishes when she's rich.
 - **No redundancy:** two NPCs with the same role + same hook → merge or differentiate.
+- **Machine placed** (`22`): the core loop is named (conquest → money/access → next conquest) and **every
+  core NPC has a place in it** (income node / gate / consumer) — the cast isn't a set of islands. (Full
+  DAG + legibility verification happens at the roster, `18`; here it's "is each core NPC wired in at all?")
 - **Desire spread:** there's a clear "favorite-able" core target that *is* the fantasy.
 - **The 3-question LC test (`05`):** can you say the fantasy in one sentence? name what the player wants next? name *each* NPC's hook? If any NPC fails the third, fix or cut it.
 
 ---
 
 ## Output artifact (a `## Casting` section in `design_book.md`)
-| NPC | role(s) | hook (dynamic + charge + want) | lane | depth | arc-shape | rough sketch (+ cross-NPC threads) |
-|---|---|---|---|---|---|---|
+| NPC | role(s) | hook (dynamic + charge + want) | lane | depth | arc-shape | place in machine (core) | rough sketch (+ cross-NPC threads) |
+|---|---|---|---|---|---|---|---|
 One row per NPC. The **rough sketch** is a loose few lines (not a table cell's worth — write it out
-under the table if it needs room), carrying any cross-NPC threads. This is the input to Step 4 (NPC
-arcs) and the coherence record for the whole game.
+under the table if it needs room), carrying any cross-NPC threads. **Place in machine** is one phrase for
+each *core* NPC (its node in the core loop — `22`); blank for peripherals/islands. This is the input to
+Step 4 (NPC arcs) and the coherence record for the whole game.
 
 ---
 
@@ -134,6 +152,7 @@ Every NPC is load-bearing. A proposed sixth bartender with no role and no hook �
 ## Cross-references
 - `05_what_makes_a_good_game.md` — the qualities every cast member is checked against (esp. #1/#5/#8).
 - `04_progression_engine.md` — the cascade that *demands* the structural roles.
+- `22_the_machine_interconnection.md` — the cross-wiring layer; casting assigns each core NPC its **place in the machine**.
 - `02_GAME_SURVEY_top_level.md` — the arc-shape / personal-trait menu each hook implies.
 - Feeds Step 4 (NPC arcs) — the per-NPC locks/scenes built on each cast row.
 - Existing skill to reconcile: `lanes.md` (per-arc-shape budgets), `setup-interview.md` R7 brief (the hook

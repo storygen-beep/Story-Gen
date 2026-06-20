@@ -1,0 +1,175 @@
+# Phase 5 — 5_scenes.toml
+# Bar Empire (baseline) — setup scaffold: the spine quest card ONLY.
+# Story canvases (hubs / ambients / capstones) are BEATS, appended here later.
+
+# ─── Spine quest card (no npc_id → top "Story Goals") ─────────────────────────
+# The central pressure from the premise/economy: get back on the floor, then take
+# the bar. Slice-setup ships the first rung (get hired); the chain extends per beat.
+
+[[quest_cards]]
+text       = "Twenty dollars and a month's rent due. The Velvet Spur is hiring its floor back — and the man who runs it is the one I have to get through."
+ready_text = "Marco's at the end of the bar."
+tip        = "Walk into the Spur. Ask for the floor back."
+when = [
+  { flag = "hired_at_spur", op = "is_false" },
+]
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# BEAT 0001 — npc_intro: Marco puts Dahlia back on the floor + Marco Lane-1 hub
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ── canvas_marco_hire — Type-A capstone (first-contact auto-fire) ─────────────
+# Runtime rule (lanes.md): a first-contact one-shot must AUTO-FIRE — is_repeatable=false,
+# priority>=9, NO npc/requires_npc (renderNpcPortraits skips non-repeatable canvases).
+# Fires on first Spur-floor entry when hired_at_spur=false. Sets hired_at_spur +
+# marco_noticed. Tier-3 prose earned (once-only). Cold-start: gated only on a flag.
+
+[[canvases]]
+id          = "canvas_marco_hire"
+name        = "The Velvet Spur — walking back in"
+description = "Hire capstone. Type A linear, auto-fire. Marco puts Dahlia back on the floor and makes sure she knows what it costs her. Sets hired_at_spur + marco_noticed. Opens the Marco floor hub + the work shift."
+
+[canvases.trigger]
+location      = "loc_spur_floor"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "hired_at_spur", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "intro"
+name = "The Velvet Spur — walking back in"
+blocks = [
+  { type = "paragraph", content = "The pink light hasn't changed and neither has the smell — spilled well-liquor and the fryer they never clean right. Marco's at the end of the bar where he always is, and he watches her cross the whole floor before he lets his face do anything at all. He sets down the glass he's been not-drinking from and looks at her the way a man looks at a number he's deciding whether to round up." },
+  { type = "paragraph", content = "\"Dahlia.\" He says it like he's confirming inventory. \"You came back. They always come back to me, eventually — the rent does it, or the boyfriend does it, or the city does it.\" The bottom half of his face smiles. The top half keeps counting. \"Floor's open. Same as before, except now you know exactly what kind of man you're working for, and you walked in anyway. I like knowing that about a girl on day one.\"" },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Ask what the split is.", blocks = [
+        { type = "paragraph", content = "\"Tips are yours. The rest is mine. And there's a tab you're carrying from before — don't look surprised, I keep every number in this place.\" He taps the bar once with the gold ring. \"You'll work it off. One way's the till. There's others. We'll see which kind of girl you turn out to be.\"" },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He thinks the leash runs one direction. Let him." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the apron."
+targetType = "location"
+locationId = "loc_spur_floor"
+time_progression_minutes = 10
+flagEffects = [
+  { targetType = "player", flag = "hired_at_spur", op = "set" },
+  { targetType = "player", flag = "marco_noticed", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "marco_stage", op = "set", value = 1 },
+]
+
+# ── canvas_marco_floor_hub — Lane 1 (repeatable portrait hub) ─────────────────
+# Fingerprint: trigger_mode=manual, is_repeatable=true, location+npc set, schedules
+# covering Marco's floor window. Base = one constant paragraph (D56-R1, not tiered).
+# Choices = the escalation ladder; tease/contact rungs locked-visible (greyed span,
+# no locked_text_threshold). Spine = player corruption odometer (+ marco arousal
+# throttle on the repeatable layer later). Cold-start: base + Talk always available.
+
+[[canvases]]
+id          = "canvas_marco_floor_hub"
+name        = "Marco — the end of the bar"
+description = "Marco Lane-1 hub. Spur floor, his evening window. Base + Talk ungated (presence floor). Tease (corr 5) + Lean across the bar (corr 15) locked-visible. Spine = player corruption."
+
+[canvases.trigger]
+location      = "loc_spur_floor"
+npc           = "npc_marco"
+trigger_mode  = "manual"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "hired_at_spur", operator = "is_true" },
+] }
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "22:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Marco — the end of the bar"
+blocks = [
+  { type = "image", props = { file = "scenes/marco_floor_hub.jpg" } },
+  { type = "paragraph", content = "Marco holds down his corner of the bar where the light's worst and the sightlines are best. He tracks her between tables without pretending he isn't — the new girl is just another line in the ledger he keeps behind those flat eyes, and he wants her to feel counted." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "💬 Pour his whiskey."
+targetType = "location"
+locationId = "loc_spur_floor"
+time_progression_minutes = 10
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "talked_to_marco_today", operator = "is_false" },
+] }
+flagEffects = [
+  { targetType = "player", flag = "talked_to_marco_today", op = "set" },
+]
+effects = [
+  { targetType = "npc", npcId = "npc_marco", trait = "relation", op = "add", value = 2 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "😏 Lean across the bar when you pour."
+targetType = "location"
+locationId = "loc_spur_floor"
+time_progression_minutes = 10
+show_when_locked = true
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 5 },
+] }
+effects = [
+  { targetType = "player", trait = "corruption", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_marco", trait = "arousal", op = "add", value = 1, cap = 3 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "🔥 Let him walk you to the curtain."
+targetType = "location"
+locationId = "loc_spur_floor"
+time_progression_minutes = 15
+show_when_locked = true
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
+] }
+flagEffects = [
+  { targetType = "player", flag = "marco_contact", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "corruption", op = "add", value = 2 },
+  { targetType = "player", trait = "marco_stage", op = "set", value = 2 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "↩️ Back to the floor."
+targetType = "location"
+locationId = "loc_spur_floor"
+time_progression_minutes = 0
+
+# ── M1 quest card — post-hire, points at the contact rung (retires the spine card)
+[[quest_cards]]
+text         = "I'm back on his floor. He hired me in two minutes and made sure I felt the hook go in. Now I work the angle he doesn't see coming."
+ready_text   = "He watches me every time I cross the floor."
+tip          = "Pour his whiskey. Lean in when you do. Let the corruption climb."
+npc_id       = "npc_marco"
+when = [
+  { flag = "hired_at_spur", op = "is_true"  },
+  { flag = "marco_contact", op = "is_false" },
+]
+goals = [
+  { trait = "corruption", subject = "player", op = "gte", value = 15, label = "Corruption" },
+]

@@ -1,0 +1,119 @@
+# Phase 0/7 — 0_systems_spec.toml
+# The Inheritance — system spec: project + time + settings + daily tick + sidebar
+# Scaffold (Step-7 entry). Systems: clothing ON; phone ON (table lands with its beat, 8_phone.toml);
+# rent OFF (control economy, not survival — the foreclosure pressure is bespoke money-milestone beats).
+
+schema_version = "1.0"
+
+[project]
+id              = "the_inheritance"
+title           = "The Inheritance"
+description     = "You left years ago, estranged and written off. Your mother Eleanor — who built the family's boutique hotel and raised you in the residence above it — is dead, and her will drags you home to the hotel you walked out of. The stepfather who can't run it through his grief, the brother who thinks it's all his, the aunt who moved in to take it, the baby sister who never stopped looking up to you. You came back to take it all: the hotel, the family floor above it, and every person under its roof."
+quests_engine   = "v2"
+starting_canvas = "canvas_arrival"
+
+[time]
+starting_hour = 9
+starting_day  = "Monday"
+starting_week = 1
+
+# ─── System scoping (each system reads its OWN table; never bare keys under [time]) ──
+#   clothing → [settings]        (clothing_enabled / wardrobe_location / shop_location)
+#   phone    → [phone]           (top-level; lands in 8_phone.toml with the phone beat)
+#   rent     → OFF by design (control economy). Foreclosure = bespoke money-milestone beats (Halloway).
+
+[settings]
+clothing_enabled  = true
+wardrobe_location = "loc_player_room"
+shop_location     = "loc_clothing_shop"
+
+[settings.clothing_requirements]
+body_coverage   = true
+always_required = []
+
+# ─── Engine daily tick ────────────────────────────────────────────────────────
+# Fires once at the start of each new game-day.
+# DECAY: energy −5/day passive (activities subtract more; sleep restores). NOTHING else decays —
+#   corruption / exhibitionism / NPC odometers / *_stage are one-way climbs (RTS no-decay, Doc 40).
+# RISE: player arousal +1/day cap 10; the three arcs WITH an arousal throttle (Audrey/Grayson/Richard)
+#   +1/day cap 10. Margaret + Lorna have NO arousal (not seduced / peripheral) — no tick.
+# Daily-CAP flag unsets (practice 2/day, servitude, daily talk) are added per beat as those beats land.
+
+[engine.daily_tick]
+traitEffects = [
+  { targetType = "player", trait = "energy",  op = "add", value = -5         },
+  { targetType = "player", trait = "arousal", op = "add", value = 1, cap = 10 },
+  { targetType = "npc", npcId = "npc_audrey",  trait = "arousal", op = "add", value = 1, cap = 10 },
+  { targetType = "npc", npcId = "npc_grayson", trait = "arousal", op = "add", value = 1, cap = 10 },
+  { targetType = "npc", npcId = "npc_richard", trait = "arousal", op = "add", value = 1, cap = 10 },
+]
+
+# ─── Sidebar items ────────────────────────────────────────────────────────────
+# Player dials only. NPC odometers/stages + Margaret's hidden scheming NEVER surface
+# (NPC state lives on the Quests page; scheming is a dramatic-surprise hidden accumulator).
+
+[[sidebar_items]]
+type  = "trait_words"
+trait = "corruption"
+label = "Corruption"
+bands = [
+  { min = 0,  max = 24,  text = "Pure",   icon = "✨" },
+  { min = 25, max = 49,  text = "Lewd",   icon = "💋" },
+  { min = 50, max = 74,  text = "Slutty", icon = "🔥" },
+  { min = 75, max = 100, text = "Whore",  icon = "💦" },
+]
+
+# Only the two QUALITATIVE arc-meters get a band — the stat whose word is the real read and
+# whose number is noise (RTS bands exactly these two of its nine). Everything countable
+# (energy / money / exhibitionism / hygiene) shows as a NUMBER in the Traits dump, not a band.
+# corruption + arousal are hidden=true below so they show ONLY as a band, never also a number.
+[[sidebar_items]]
+type  = "trait_bar"
+trait = "arousal"
+label = "Arousal"
+max   = 10
+hide_value = true   # band word on the bar (Cold/Warm/Hot/Burning), not the raw 0/10 — heat lives in the fill color, like RTS
+bands = [
+  { min = 0, max = 2,  text = "Cold"    },
+  { min = 3, max = 5,  text = "Warm"    },
+  { min = 6, max = 8,  text = "Hot"     },
+  { min = 9, max = 10, text = "Burning" },
+]
+
+# ─── Hidden traits ────────────────────────────────────────────────────────────
+# Internal stage/accumulator traits live in core_traits (engine reads+writes them) but
+# hidden=true suppresses them from ALL player-facing dumps (sidebar + Stats, dev + non-dev).
+
+# corruption + arousal ARE shown as sidebar bands (Pure / Cold…) — hidden here only so their raw
+# NUMBER doesn't ALSO show in the Traits dump. The band reads the trait directly and is unaffected
+# by hidden (trait_words/trait_bar don't consult hiddenTraits, verified v2.py:14744,14853). This
+# de-dupes the two kept bands so every stat shows exactly once.
+# NOTE: hidden is global — in a --dev build this also drops corruption/arousal from the +/- Traits
+# panel. Bump them via the dev Stats page / sandbox while testing, or comment these two out.
+[[traits.labels]]
+key = "corruption"
+hidden = true
+
+[[traits.labels]]
+key = "arousal"
+hidden = true
+
+[[traits.labels]]
+key = "audrey_stage"
+hidden = true
+
+[[traits.labels]]
+key = "grayson_stage"
+hidden = true
+
+[[traits.labels]]
+key = "richard_stage"
+hidden = true
+
+[[traits.labels]]
+key = "margaret_stage"
+hidden = true
+
+[[traits.labels]]
+key = "scheming"
+hidden = true

@@ -1,0 +1,214 @@
+{
+  "captured_at": "2026-06-14T22:47:21.897Z",
+  "ts": 1781477241897,
+  "engine": "sugarcube",
+  "engine_version": [
+    "(revive:eval)",
+    "(function(){var e=this.prerelease?\"-\"+this.prerelease:\"\";return this.title+\" (v\"+this.major+\".\"+this.minor+\".\"+this.patch+e+\")\"})"
+  ],
+  "passage": "Start",
+  "variables": {
+    "last_game_passage": "Start",
+    "player": {
+      "name": "Catherine",
+      "portrait": "catherine.jpg",
+      "current_location": "",
+      "core_traits": {
+        "corruption": 0,
+        "arousal": 0,
+        "energy": 100,
+        "hygiene": 100,
+        "money": 50,
+        "exhibitionism": 0,
+        "audrey_stage": 0,
+        "grayson_stage": 0,
+        "richard_stage": 0,
+        "margaret_stage": 0
+      },
+      "wardrobe": {
+        "in_bra": {
+          "id": "in_bra",
+          "name": "Plain Bra",
+          "slot": "bra",
+          "image": "./videos/clothing/in_bra.jpg"
+        },
+        "in_briefs": {
+          "id": "in_briefs",
+          "name": "Plain Briefs",
+          "slot": "underwear",
+          "image": "./videos/clothing/in_briefs.jpg"
+        },
+        "in_blouse": {
+          "id": "in_blouse",
+          "name": "Linen Blouse",
+          "slot": "top",
+          "image": "./videos/clothing/in_blouse.jpg"
+        },
+        "in_slacks": {
+          "id": "in_slacks",
+          "name": "Tailored Slacks",
+          "slot": "bottom",
+          "image": "./videos/clothing/in_slacks.jpg"
+        },
+        "in_flats": {
+          "id": "in_flats",
+          "name": "Flats",
+          "slot": "shoes",
+          "image": "./videos/clothing/in_flats.jpg"
+        },
+        "in_day_dress": {
+          "id": "in_day_dress",
+          "name": "Day Dress",
+          "slot": "dress",
+          "image": "./videos/clothing/in_day_dress.jpg"
+        }
+      },
+      "equipped": {
+        "bra": "in_bra",
+        "underwear": "in_briefs",
+        "top": "in_blouse",
+        "bottom": "in_slacks",
+        "dress": "in_day_dress",
+        "legwear": null,
+        "shoes": "in_flats"
+      },
+      "body_type": "average",
+      "look": "composed"
+    },
+    "npcs": {
+      "e98710f5-16b2-4246-bd99-29131caa1952": {
+        "name": "Audrey",
+        "portrait": "audrey.jpg",
+        "core_traits": {
+          "arousal": 0,
+          "corruption": 0,
+          "relation": 0
+        },
+        "flags": {},
+        "schedule": [],
+        "relationship": ""
+      },
+      "7203d22c-6797-4431-b5f9-fd6e96a2a1a0": {
+        "name": "Grayson",
+        "portrait": "grayson.jpg",
+        "core_traits": {
+          "arousal": 0,
+          "corruption": 0,
+          "relation": 0
+        },
+        "flags": {},
+        "schedule": [],
+        "relationship": ""
+      },
+      "4fda1602-e114-4064-b17d-b34b30fab032": {
+        "name": "Richard",
+        "portrait": "richard.jpg",
+        "core_traits": {
+          "arousal": 0,
+          "corruption": 0,
+          "relation": 0
+        },
+        "flags": {},
+        "schedule": [],
+        "relationship": ""
+      },
+      "d84f6036-4bc3-4ca1-882b-1672f898a206": {
+        "name": "Margaret",
+        "portrait": "margaret.jpg",
+        "core_traits": {
+          "relation": 0,
+          "scheming": 0
+        },
+        "flags": {},
+        "schedule": [],
+        "relationship": ""
+      },
+      "fc526f84-4527-4f11-8a10-9c3865ee1b72": {
+        "name": "Lorna",
+        "portrait": "lorna.jpg",
+        "core_traits": {
+          "relation": 0
+        },
+        "flags": {},
+        "schedule": [],
+        "relationship": ""
+      },
+      "4bb2c816-6c8d-4c2b-9f9b-97920be3a499": {
+        "name": "Danny",
+        "portrait": "danny.jpg",
+        "core_traits": {
+          "relation": 0
+        },
+        "flags": {},
+        "schedule": [],
+        "relationship": ""
+      },
+      "893e0c7f-12ea-4e7f-9f39-cc40386294fe": {
+        "name": "Mr. Halloway",
+        "portrait": "halloway.jpg",
+        "core_traits": {
+          "relation": 0
+        },
+        "flags": {},
+        "schedule": [],
+        "relationship": ""
+      }
+    },
+    "npc_interacted_today": {},
+    "flags": {
+      "game_started": true,
+      "debug_mode": true
+    },
+    "flags_meta": {},
+    "game_state": {
+      "current_canvas": "",
+      "visited_locations": [],
+      "visited_nodes": [],
+      "trigger_history": {},
+      "activity_trigger_history": {},
+      "visited_choices": {},
+      "active_modifiers": {},
+      "random_cooldowns": {},
+      "stage_advancement_log": {},
+      "quests": {},
+      "scheduled": [],
+      "fast_jobs": {
+        "xp": 0,
+        "cooldowns": {}
+      },
+      "bank": {
+        "balance": 0
+      },
+      "time_state": {
+        "current_hour": 9,
+        "current_minute": 0,
+        "current_day": "Monday",
+        "current_week": 1,
+        "day": 1
+      },
+      "inventory": {},
+      "phone": {
+        "triggered_conversations": {},
+        "read_conversations": {},
+        "replies": {},
+        "triggered_posts": {},
+        "viewed_feed": false,
+        "triggered_profiles": {},
+        "liked_profiles": {},
+        "passed_profiles": {},
+        "matches": {}
+      }
+    }
+  },
+  "save_caps": {
+    "stateMarshal": true,
+    "engineShow": true,
+    "serialize": true,
+    "slots": true,
+    "saveNamespace": "SugarCube.Save"
+  },
+  "state_hash": "a2a4c9f81ce35d8a",
+  "body_text": "The Inheritance\n\nYou left years ago, estranged and written off. Your mother Eleanor — who built the family's boutique hotel and raised you in the residence above it — is dead, and her will drags you home to the hotel you walked out of. The stepfather who can't run it through his grief, the brother who thinks it's all his, the aunt who moved in to take it, the baby sister who never stopped looking up to you. You came back to take it all: the hotel, the family floor above it, and every person under its roof.\n\nWe're a small indie studio crafting intimate, story-driven experiences. Every game is made with care, and your support helps us keep creating. If you enjoy our work, consider supporting us!\n\n👉 Support us on Patreon\n\n⚠️ This game contains adult content intended for players 18 years of age or older.\n\n✓ I am 18 or older - Enter Game\n✗ I am NOT 18 or older\n\nDeveloped by NutGames\n\n👉 Support us on Patreon",
+  "body_html": "<div class=\"game-intro\"> <h1>The Inheritance</h1> <p class=\"game-description\">You left years ago, estranged and written off. Your mother Eleanor — who built the family's boutique hotel and raised you in the residence above it — is dead, and her will drags you home to the hotel you walked out of. The stepfather who can't run it through his grief, the brother who thinks it's all his, the aunt who moved in to take it, the baby sister who never stopped looking up to you. You came back to take it all: the hotel, the family floor above it, and every person under its roof.</p> <div class=\"developer-intro\"> <p class=\"developer-about\">We're a small indie studio crafting intimate, story-driven experiences. Every game is made with care, and your support helps us keep creating. If you enjoy our work, consider supporting us!</p> <p class=\"support-link\">👉 <a href=\"https://www.patreon.com/cw/nutgames844\" target=\"_blank\" rel=\"noopener\" class=\"link-external\" tabindex=\"-2\" aria-hidden=\"true\">Support us on Patreon</a></p> </div> <div class=\"age-gate\"> <p class=\"age-warning\">⚠️ This game contains adult content intended for players 18 years of age or older.</p> <div class=\"age-buttons\"> <a data-passage=\"CustomizeCharacters\" class=\"link-internal\" tabindex=\"-2\" aria-hidden=\"true\">✓ I am 18 or older - Enter Game</a> <a data-passage=\"AgeBlocked\" class=\"link-internal\" tabindex=\"-2\" aria-hidden=\"true\">✗ I am NOT 18 or older</a> </div> </div> <div class=\"developer-footer\"> <p class=\"developer-credit\">Developed by <strong>NutGames</strong></p> <p class=\"support-link\">👉 <a href=\"https://www.patreon.com/cw/nutgames844\" target=\"_blank\" rel=\"noopener\" class=\"link-external\" tabindex=\"-2\" aria-hidden=\"true\">Support us on Patreon</a></p> </div> </div>",
+  "modal_text": "Are you sure that you want to restart? Unsaved progress will be lost.\n\nOKCancel"
+}

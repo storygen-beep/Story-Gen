@@ -1,0 +1,19 @@
+{
+  "session_id": 7,
+  "start_ts": "2026-06-07T08:27:05.180Z",
+  "start_epoch_ms": 1780820825180,
+  "end_ts": "2026-06-07T08:28:40.671Z",
+  "duration_s": 95,
+  "clicks": 0,
+  "choices_explored": 0,
+  "arrow_advances": 0,
+  "unique_states_seen": 9,
+  "new_unique_states": 1,
+  "frontier_size_start": 0,
+  "frontier_size_end": 0,
+  "reached_endings": [],
+  "completed": false,
+  "notes": [
+    "RTS CONTENT REGISTRY EXTRACTED (full, 71 scenes / 27 locations) → rts_scene_registry.json. Each scene = {location, key, title, chance, guide, requirementsMC:{exhibitionism,corruption}}. THIS is RTS's content-design artifact: a structured roster the skill is missing. Structure = LOCATION x TIER columns: each venue hosts an ESCALATING column of lewd activities unlocked by player corruption/exhibitionism odometers + a behavioral/clothing/career/story sub-gate. Tier ladder: corr0 (bootstrap+story-gated: bikini thief, bus grope, secretary, photoshoot[followers], lactation[pregnant], kidnapped[time]) / corr15+exb10 (the FLASH backbone — one per location: gym/mall/club/school/restaurant/bus flash) / corr30 (the SEX tier — public sex/job-promotion/gloryhole/pizza/discount/tutoring, the bulk) / corr45 (EXTREME public cap — strip club, restaurant VIP gangbang, pool/jogging sex, street challenge). chance: 25-50% = random ambient fire on base activity; 100 = deterministic quest beat. Plus solo self-acts NOT in registry (direct passages): WatchPorn/Live(camgirl)/Masturbate = ungated corr0 home bootstrap feeders. Archetypes: (1) location flash (2) location sex-escalation column (3) job/service lewd career ladder (4) Naked-Life-App public dares/challenges (5) solo self-act feeder (6) household ambient grope/tease/peep (7) voyeur (8) transit ambient (9) story/condition special. Use to derive author-game references/content-design.md."
+  ]
+}

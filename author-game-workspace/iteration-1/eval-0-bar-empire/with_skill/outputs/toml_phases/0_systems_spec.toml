@@ -1,0 +1,127 @@
+# Phase 0/7 — 0_systems_spec.toml
+# Bar Empire — system spec: project + time + settings (clothing) + phone + daily tick + sidebar
+# Save as: games/eval_bar_empire_wired/toml_phases/0_systems_spec.toml
+
+schema_version = "1.0"
+
+[project]
+id              = "eval_bar_empire_wired"
+title           = "Bar Empire"
+description      = "A broke waitress at the Velvet Rail seduces and corrupts the man who owns it, takes the bar out from under him, then builds it into her own empire — recruiting and corrupting other women into her stable until she's the madam the city answers to."
+quests_engine   = "v2"
+starting_canvas = "canvas_first_shift"
+
+[time]
+starting_hour = 18
+starting_day  = "Monday"
+starting_week = 1
+
+# ─── System scoping (each system reads its OWN table; never bare under [time]) ─
+#   clothing → [settings]      (clothing_enabled/wardrobe_location/shop_location)
+#   phone    → [phone]         (top-level table, key `enabled`)
+#   rent     → NOT USED (design book Step-1: the bar's debt is the pressure, not a landlord)
+
+[settings]
+clothing_enabled  = true
+wardrobe_location = "loc_apartment"
+shop_location     = "loc_apartment"   # thrift rack stub lives at the apartment until its own venue is authored
+
+[settings.clothing_requirements]
+body_coverage   = true
+always_required = []
+
+# Phone — the madam's contact channel (Act-2 recruiting). Enabled at the project
+# level; threads are authored in 8_phone.toml in later increments. Declared now so
+# the system is ON; no threads yet = empty phone, which is valid.
+[phone]
+enabled = true
+
+# ─── Engine daily tick ────────────────────────────────────────────────────────
+# Body-state decay (energy). Player arousal +1/day cap 10 (RTS no-decay; climax resets).
+# Sal arousal +1/day cap 3 (family/slow-burn ambient pattern). Per-day talk cooldowns unset.
+# Anti-pattern guard: NEVER decay corruption / influence / relation / npc corruption / stage.
+[engine.daily_tick]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_sal_today", op = "unset" },
+  { targetType = "player", flag = "shift_worked_today",  op = "unset" },
+]
+traitEffects = [
+  { targetType = "player", trait = "energy",  op = "add", value = -5 },
+  { targetType = "player", trait = "arousal", op = "add", value = 1, cap = 10 },
+  { targetType = "npc", npcId = "npc_sal", trait = "arousal", op = "add", value = 1, cap = 3 },
+]
+
+# ─── Sidebar items (player state; per-NPC state lives on the Quests page) ──────
+# Stage labels NEVER surface. influence is the custom madam-power leg.
+
+[[sidebar_items]]
+type  = "trait_words"
+trait = "corruption"
+label = "Corruption"
+bands = [
+  { min = 0,  max = 24,  text = "Waitress", icon = "✨" },
+  { min = 25, max = 49,  text = "Wanting",  icon = "💋" },
+  { min = 50, max = 74,  text = "Working",  icon = "🔥" },
+  { min = 75, max = 100, text = "Madam",    icon = "💦" },
+]
+
+[[sidebar_items]]
+type  = "trait_bar"
+trait = "exhibitionism"
+label = "Exhibitionism"
+max   = 100
+bands = [
+  { min = 0,  max = 24,  text = "Covered"   },
+  { min = 25, max = 49,  text = "Daring"    },
+  { min = 50, max = 74,  text = "Bold"      },
+  { min = 75, max = 100, text = "Shameless" },
+]
+
+[[sidebar_items]]
+type  = "trait_bar"
+trait = "arousal"
+label = "Arousal"
+max   = 10
+bands = [
+  { min = 0, max = 2,  text = "Cold"    },
+  { min = 3, max = 5,  text = "Warm"    },
+  { min = 6, max = 8,  text = "Hot"     },
+  { min = 9, max = 10, text = "Burning" },
+]
+
+[[sidebar_items]]
+type  = "trait_bar"
+trait = "influence"
+label = "Influence"
+max   = 100
+bands = [
+  { min = 0,  max = 24,  text = "Nobody"        },
+  { min = 25, max = 49,  text = "Known"         },
+  { min = 50, max = 74,  text = "Running it"    },
+  { min = 75, max = 100, text = "The city's madam" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "energy"
+bands = [
+  { min = 0,  max = 24,  text = "Exhausted", icon = "🪫" },
+  { min = 25, max = 49,  text = "Tired",     icon = "💤" },
+  { min = 50, max = 74,  text = "Fine",      icon = "🟢" },
+  { min = 75, max = 100, text = "Rested",    icon = "🔋" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "money"
+bands = [
+  { min = 0,   max = 49,  text = "Broke",      icon = "💸" },
+  { min = 50,  max = 149, text = "Scraping",   icon = "😬" },
+  { min = 150, max = 399, text = "Afloat",     icon = "💵" },
+  { min = 400, max = 9999, text = "Flush",     icon = "✅" },
+]
+
+# ─── Hidden traits (stage labels suppressed from all player-facing dumps) ──────
+[[traits.labels]]
+key = "sal_stage"
+hidden = true

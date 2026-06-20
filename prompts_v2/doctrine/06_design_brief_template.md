@@ -389,7 +389,7 @@ The brief follows the same 10-section template but with:
 
 - **§3 ladder:** Stage 0 (meet) → Stage 1 (notice) → Stage 2 (partner) → Stage 3+ (consummation, Phase 2+) → Stage 4 (relationship). Peer arcs don't use the universal 6-tier corruption ladder — they use relation-driven stages.
 - **§4 pretexts:** date contexts, shared activities, relation-build moments. Not sexual-tier shapes.
-- **§5 lanes:** L1 2–3 + L2 1–2 + **L3 = 0** + capstones 3–4. Peer doesn't interrupt private chores.
+- **§5 lanes:** L1 1–3 + L2 1–2 + **L3 = 0** + capstones 3–4. Peer doesn't interrupt private chores.
 - **§6 capstones:** Type A first-date + Type A second-date + Type B partner-commit (Phase 2+).
 - **§7 anti-patterns:** "Frank-cloning" (don't apply family/ambient saturation), "Lane 3 substitutions on a peer" (Doc 56 R3 violation).
 

@@ -107,7 +107,7 @@ text = "Tease him"
 show_when_locked = true
 locked_text = "Not yet."
 locked_text_threshold = "Maya's corruption: 15+"
-conditions = { items = [
+conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 15 },
 ] }
 nodeId = "tease_bedroom_general"
@@ -123,7 +123,7 @@ text = "Have sex with him"
 show_when_locked = true
 locked_text = "Not until I'm sure."
 locked_text_threshold = "Maya's corruption: 35+ AND Frank declared"
-conditions = { items = [
+conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 35 },
   { type = "flag", subject = "player", flag_key = "frank_cracked", operator = "is_true" },
 ] }
@@ -296,7 +296,7 @@ The crucial structural rule: **the parent activity must be authentically not-abo
 | Stepbrother Washing Dishes Sex | 3 | Go to the kitchen and wash the dishes | 20% |
 | (+ 2 pregnant variants) | 3 | (variant guides) | 20% |
 
-**Lane 3 is 20–33% chance.** Four parent activities (Study, Play Videogame, Shower→Masturbate, Wash Dishes) host the 7 substitution targets.
+**Lane 3 is 20–33% chance per attempt — but that constant is a floor, not the whole curve.** RTS holds each scene's chance fixed and adds NEW scenes as the arc deepens, so the felt *frequency* of being interrupted climbs across the game ("can't get through a chore without him"). On our engine the equivalent is **stacked, corruption-banded rules on the same host** — the hijack rate rises with the odometer Lane 1 drives (§4.11). Four parent activities (Study, Play Videogame, Shower→Masturbate, Wash Dishes) host the 7 substitution targets.
 
 ### §4.4 — The solo-activity host (Doc 67 §3)
 
@@ -338,6 +338,8 @@ Pattern A activities default to in-`exit_block` placement (NPC walk-in = chore n
 
 1/3 chance + Brother's stage check + presence check → NPC scene, else solo. ReturnButton outside the if/else; `<<GetDressed>>` runs on click.
 
+**This is the canonical FUSED unit — read it twice.** One canvas does three jobs at once: it is a *self-care chore* (Maya showers), a *player-corruption feeder* (the solo `else` branch — "You masturbate yourself. Corruption increased!" raises her odometer every time), AND a *Lane 3 hijack host* (the `if` branch — Brother walks in). The mundane routine is the carrier; the feeder is the floor that always pays out; the walk-in is the surprise on top. **Self-care chores — shower, bath, sleep, eat — are first-class hosts, not just "Wash Dishes / Study."** A self-care activity authored as a bare restore (no solo-lewd branch, no substitution) at a co-presence location is the dead-bath anti-pattern: it throws away the single highest-volume content surface in the game (§4.12, §6, `doctrine/04` §10).
+
 ### §4.6 — Multi-NPC dispatcher patterns (Doc 67 §4)
 
 When multiple NPCs could walk in on the same chore, three patterns exist. **The selection rule is fictional, not arbitrary.**
@@ -372,14 +374,14 @@ When multiple NPCs could walk in on the same chore, three patterns exist. **The 
 [[canvases.trigger.substitutions]]
 target_canvas_id = "scene_frank_kitchen_dishes"
 chance = 0.33
-conditions = { items = [
+conditions = { version = "1.0", items = [
   { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "stage", operator = "gte", value = 2 },
 ] }
 
 [[canvases.trigger.substitutions]]
 target_canvas_id = "scene_jake_kitchen_dishes"
 chance = 0.33
-conditions = { items = [
+conditions = { version = "1.0", items = [
   { type = "trait", subject = "npc", npc_id = "npc_jake", trait_key = "stage", operator = "gte", value = 2 },
 ] }
 ```
@@ -498,6 +500,8 @@ This is why same NPC at same location can fire on different lanes — it depends
 - Lane 3 walk-in: NPC's schedule has a meta-location or wide-scope entry resolving to "house"
 - Lane 2 entry-encounter: NPC's schedule has an entry at the exact canvas location during the same time window
 
+**Honest caveat on "loose" presence.** The engine has exactly one presence relation — the NPC is co-located with the player (`requires_npc` → `getNpcLocation(npc).location === player location`, `v2.py:4691`). "Loose `IsNpcAtHome`" is achieved by scheduling the NPC at a single meta-location ("the house") that resolves to where the player stands when the chore runs. That works — but it **conflicts with per-room modelling**: if "Home" is one location you get the cheap walk-in but lose distinct rooms; if you split rooms you can only fire when the NPC is in the player's *exact* room. The schedule's `activity` label (e.g. `"showering"`) is **display-only — no gate reads it** — so you cannot key a collision off it. The cross-room query RTS uses for peeping (`GetNpcLocation("Dad") == "Bathroom"` from the hallway) and "room is occupied" contention now ship via the **`npc_at_location`** condition type (`is_present`/`is_absent`, optional `npc_id`) — see `doctrine/04` §10.5 and the model spec `redesign_phase_3/25`. (The two-NPC co-presence case is still pending.)
+
 ### §4.9 — Per-day cooldowns (Doc 67 §3.6)
 
 Two mechanisms observed in RTS:
@@ -519,6 +523,47 @@ Two mechanisms observed in RTS:
 | **Antagonist/witness** | 0 own + appears as INTERRUPTOR in others' L3 endings | Diana doesn't have her own walk-ins; she's the THREAT in others' Lane 3 endings (the "Diana's floorboard" pattern). |
 
 **Overages flag as drift.** If a service NPC is gaining Lane 3 substitutions, either the brief is wrong OR the additions don't belong.
+
+**The budget counts NPC WALK-INS, not the solo activities themselves.** "Solo activities exist" is **universal** — every time-gated game has a daily loop (sleep, eat, bathe, the player's own self-care feeders, the earning chore), regardless of arc shape. What the table above budgets is *how many NPCs walk in on those chores*, which is correctly shape-gated. So **`Lane 3 = 0` for peer/service/antagonist means "this NPC doesn't barge into private chores," NOT "this game has no daily routine."** The solo hosts still exist and still pay out their feeder floor (§4.12); they just don't host *that* NPC's walk-in. This is the line that keeps the Marge anti-pattern intact (`doctrine/03` §2): charged routine, never filler routine.
+
+### §4.11 — Hijack frequency climbs with corruption (the saturation curve)
+
+RTS's felt experience is "early game the shower does nothing; late game I can't get through a chore without him." That is a *frequency* curve, and the doctrine above doesn't yet teach it — every chance shown is a fixed constant. RTS produces the curve by holding each scene's chance fixed and *adding new scenes* as corruption rises. Our engine produces it more directly: **stack several Pattern-A rules on the same host, one per corruption band, with the chance rising per band.** Make the bands disjoint (`gte`/`lt`) so exactly one rule is eligible at any odometer value — then the effective hijack rate is exactly that band's chance, and below the lowest band the chore is never interrupted (early-game peace).
+
+```toml
+# Same walk-in target on one shower host; rate climbs with the NPC's corruption.
+# Bands are disjoint (gte/lt) so exactly one rule is eligible — no compounding.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "scene_frank_shower_walkin"
+chance           = 0.70
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "corruption", operator = "gte", value = 60 },
+] }
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "scene_frank_shower_walkin"
+chance           = 0.40
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "corruption", operator = "gte", value = 35 },
+  { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "corruption", operator = "lt",  value = 60 },
+] }
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "scene_frank_shower_walkin"
+chance           = 0.15
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "corruption", operator = "gte", value = 15 },
+  { type = "trait", subject = "npc", npc_id = "npc_frank", trait_key = "corruption", operator = "lt",  value = 35 },
+] }
+```
+
+Order the rules high-band first; `version = "1.0"` is mandatory on every condition block (a version-less block fails open — `doctrine/09` §7.5). The same shape works gated on the *player's* `corruption` when the saturation should track the MC's depravity rather than one NPC's arc. Scene *depth* still scales separately inside each target (Pattern D); this axis is only about how OFTEN the hijack lands.
+
+### §4.12 — The solo host's other half: the player-corruption feeder
+
+The same solo activity that hosts an NPC walk-in (the `if` branch) is also the player's own corruption **feeder** (the solo `else` branch). In RTS's shower canvas the miss path is not nothing — it is "You masturbate yourself. Corruption increased!" The chore pays out a small odometer gain *every time*, hit or miss, and that supply is what makes the NPC seduction floors (the `requirementsMC` player-corruption gates) reachable. A game with rich NPC arcs but no feeder floor on its daily loop starves its own player odometer (the Last Call finding).
+
+So the canonical solo host is **one canvas, three jobs**: the chore (restore/earn), the feeder (solo-lewd `else` raising player `corruption`/`exhibitionism`), and the hijack (NPC `if` branch). Author them together, not as separate systems. The player-side design — which feeders exist, what each is worth, the supply-vs-demand check — lives in the skill's player thread (`references/content-framework.md` §2; `references/lanes.md` Lane 3 footnote); this section is the doctrine that the *host* and the *feeder* are the same unit.
 
 ---
 
@@ -764,6 +809,8 @@ This produces the "world fills out around me as I escalate" feeling. The player 
 
 **Even though Lane 2/3 outnumber Lane 1 by canvas count (10/15 of Brother's surfaces vs. 5/15), Lane 1 is the causal driver.** Without Lane 1 escalation, most Lane 2/3 content stays dormant.
 
+**"Consequence" does not mean "low-value."** Lane 3 is the causal *downstream* of Lane 1, but it is the **primary content surface by volume** for cohabitation shapes — Brother delivers 47% of his scenes there (§3.1). Lane 1 is the accelerant the player presses; Lane 3 is where that escalation is *spent*, on the daily loop. Read the dependency as sequencing, not priority: build the daily-routine hosts richly (every shared room, the player's own self-care — §4.5, §4.12), then let Lane 1 control how often they ignite (§4.11). Under-building Lane 3 because it "follows" is the most common way a game built on this doctrine ends up feeling dead — the world the player escalated into has nothing in it.
+
 The inverse design — "Lane 2/3 lead, Lane 1 follows" — produces a passive game where things keep happening to Maya regardless of her choices. RTS deliberately doesn't do this.
 
 **Cold-start on-ramp (Doc 72 R4).** Because Lane 1 leads, every arc must be *enterable* from a cold start — corruption 0, no flags set — through ordinary presence. The first beat of an arc needs only co-presence (Maya in the room with the NPC, who is there per schedule), and that co-presence is delivered by the NPC's Lane 1 hub at that location, which renders its base unconditionally (the presence floor, §2.8 / D72-R6); escalation conditions layer on *after* that first beat. Never gate an arc's entry on a stat that can only be raised by content downstream of that same arc — that circular gate (the **backwards on-ramp**, §8.12) leaves the cold-start player unable to begin. Location-entry gating is still fine where *entering is itself the first contact* (the diner behind "get hired" — walking in to ask for the job is the first interaction); the on-ramp rule targets people already in the player's everyday space (housemates, neighbours, coworkers-on-shift).
@@ -779,6 +826,8 @@ When one threshold crosses, MULTIPLE gates clear simultaneously:
 | Stage 4 (post-sleepover) | Bedroom hub unlocks | Bedroom door-open ambient | Wash-dishes dispatcher rolls Frank-behind-you at 33% | Diana confrontation capstone unlocks |
 
 **One stat threshold = multiple gates clear = "world feels alive."** Player doesn't think "the kitchen menu changed"; they think "Frank is suddenly everywhere." That perception is the doctrine producing player-felt effects.
+
+**The chances in the table above are starting floors, not constants.** Notice they sit flat (33% / 25% / 33%) — that is the gap to close. A crossing should raise not just *which* walk-ins are eligible but *how often* they fire: the same host carries corruption-banded rules whose rate climbs as the arc deepens (§4.11). "Frank is suddenly everywhere" lands fully only when the shower is interrupted occasionally at stage 2 and most nights at stage 4.
 
 ---
 
@@ -799,6 +848,8 @@ Within each lane, scene intensity scales with stat tier (Pattern D mechanism —
 - **Mix across all three lanes, all three tiers → alive**
 
 Lane 4 capstones sit OUTSIDE the grid — they're the once-only milestones that gate the stat tier crossings.
+
+**A fourth axis the grid doesn't show: hijack frequency.** The grid scales scene *depth* (cascade) with tier. It does not show that the *rate* at which Lane 3 walk-ins fire should also climb with the odometer — early arc the shower is almost never interrupted; late arc it's interrupted most visits. Author that with corruption-banded rules on the host (§4.11). Depth and frequency are independent axes: a late-arc walk-in is both deeper AND more frequent.
 
 ---
 

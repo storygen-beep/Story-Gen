@@ -1,0 +1,675 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+#  PHASE 1 — METADATA, PLAYER, NPCs, LOCATIONS, SIDEBAR, SETTINGS  (TEST SLICE)
+#  Game: The Long Summer — Test Slice
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Source: 28th_april_TLS_Phase2_Redesign/10_Test_Slice_10Day_Plan.md §4 (starting
+#         state), §5 (NPC stage chains), §7.1 (locations), §9 (sidebar), §11 (rent)
+# Sister to: games/the_long_summer/toml_phases_v2/1_metadata_and_locations.toml
+#            (the full game's metadata; this slice trims to slice scope)
+#
+# Engine features wired in this file:
+#   F1  trait_words sidebar (lifted from TLS) + new stage_label items (E11)
+#   F2  entry_conditions on locations (Frank's office gate)
+#   F3  player + npc trait_decay (lifted from TLS; stage traits excluded per E9)
+#   F4  rent + eviction_mode = flag_set (Day 7 Sunday validation)
+#   E11 stage_label sidebar items (3 entries — Frank/Ryan/Jake)
+#
+# Stage traits (E11 foundation):
+#   - npc_frank_stage / npc_ryan_stage / npc_jake_stage live in
+#     [player.core_traits] as integers (max 4 per arc_stages length)
+#   - NOT in [player.trait_decay] — validate() rejects (PRD 08 §11.2)
+#
+# Counter traits (E7 <<inc>> targets):
+#   - frank_bookkeeping_count, frank_tease_count, frank_chore_count
+#   - ryan_help_count
+#   - jake_peek_count
+#   - lean_by_desk_count   (dev-only, Stage 3+ verification)
+#
+# Pre-seeding strategy:
+#   The schema treats flag_keys as names only — all flags initialize to FALSE
+#   at runtime (v1.py:655). To start with prologue_complete + arrived_at_franks
+#   etc. = TRUE, the slice's intro one-shot (event_test_slice_intro in
+#   2_one_shots.toml) sets them via flagEffects on its exit_block. The flag
+#   names declared below just register them as known to the engine.
+
+# NOTE on top-level keys: when these phase files are concat'd into 7_final_game.toml,
+# any bare top-level assignment that appears AFTER a [section] gets nested into that
+# section by TOML parser scope rules. So `schema_version` and `starting_canvas` MUST
+# live inside [project] (which is unambiguously a top-level table), not as bare
+# top-level keys above [project]. The parser at template_import.py:844-847 falls back
+# to [project].starting_canvas when not at root level.
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PROJECT
+# ═══════════════════════════════════════════════════════════════════════════════
+
+[project]
+id              = "the_long_summer_test"
+title           = "The Long Summer — Test Slice"
+schema_version  = "0.2"
+# PRD 48 (2026-05-23) — opt into V2 Quests engine. Replaces V1's
+# [story_arc.hints.templates] + auto_goal/arc_closure_flag indirection with
+# [[quest_cards]] + author-on-template goals. See doc 48 PRD + bundle commit
+# 5c215a2 for engine surface. V1 stays untouched for other games.
+quests_engine   = "v2"
+starting_canvas = "event_test_slice_intro"
+description = """
+Engine-validation slice. 10 in-game days. Frank, Ryan, Jake at Stage 0→1→2 \
+naturally; Stage 3+ via dev buttons. Maya wakes in her bedroom on Day 1 morning \
+of her stay at Frank's place — Prologue + arrival skipped. Built against the \
+Phase 2 doctrine in 28th_april_TLS_Phase2_Redesign/01_Repeatable_First_Doctrine.md \
++ /04_Scene_Cascade_Pattern.md. Not a player-facing game; dev shortcuts visible.
+"""
+
+
+[theme]
+mode = "dark"
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TIME SYSTEM
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Day 1 = Monday. Day 7 = Sunday (rent due). Day 10 = Wednesday next week.
+# Starting hour 06:00 — Maya wakes in her bedroom. The intro one-shot routes to
+# hub_mayas_bedroom; her first action is to leave the room and start the day.
+
+[time]
+enabled        = true
+starting_hour  = 6
+starting_day   = "Monday"
+starting_week  = 1
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PLAYER (Maya)
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Stage traits + counters live in core_traits per E11 fixture pattern. Pre-Prologue
+# baseline values per Book 2B (corruption=22 sits in the Closed band 0–24, which
+# is the post-Prologue-revenge starting point per the design book).
+
+[player]
+id          = "maya"
+name        = "Maya"
+description = "Nineteen, just finished her first college year. Slim, dark-haired, sketchbook within reach. Arrives at Frank's already carrying her own line crossed in the Prologue. Pride won't let her ask Diana for help; the math is what cracks her open."
+portrait    = "maya.jpg"
+
+core_traits = { energy = 100, hygiene = 100, fitness = 30, beauty = 40, corruption = 22, arousal = 0, calculation = 20, money = 400, rep_church = 0, rep_road = 0, rep_college = 0, npc_frank_stage = 0, npc_ryan_stage = 0, npc_jake_stage = 0, frank_bookkeeping_count = 0, frank_tease_count = 0, frank_chore_count = 0, ryan_help_count = 0, jake_peek_count = 0, lean_by_desk_count = 0 }
+# doc 40 — `arousal` is Maya's RTS fuel meter (0–10): +1/lewd beat + +1/day,
+# no decay, climax `set 0`, gates self-acts at `gte 1`. Authoritative in 7_final_game.toml.
+
+flag_keys = [
+  # Pre-seeded by event_test_slice_intro exit flagEffects
+  "prologue_at_bed",
+  "prologue_saw_them",
+  "prologue_crossed_line",
+  "prologue_complete",
+  "arrived_at_franks",
+  "first_morning_kitchen_done",
+  "slice_started",
+
+  # Slice runtime — set during play
+  "hired_at_diner",
+  "first_t0_shift_done",
+  "group_settled_in",
+  "first_sunday_passed",
+  "first_rent_paid",
+  "attended_church_this_week",
+
+  # Frank chain
+  "frank_caught",
+  "frank_restrict_declared",
+  "frank_cracked",
+  "frank_keep_route_romantic",
+  "frank_keep_route_arrangement",
+  "frank_keep_route_rupture",
+  "frank_keep_route_power_inverted",
+
+  # Ryan chain
+  "ryan_help_tier_open",
+  "ryan_partner_open",
+  "ryan_big_deal_closed",
+  "ryan_beach_proposal",
+  "ryan_keep_route_yes_engaged",
+  "ryan_keep_route_not_yet",
+  "ryan_keep_route_no_withdrawn",
+
+  # Jake chain
+  "jake_first_glance_noticed",
+  "jake_peek_draw_revealed",
+  "jake_tease_open",
+  "jake_caught",
+  "jake_hand",
+  "jake_keep_route_owned",
+  "jake_keep_route_lovers",
+  "jake_keep_route_withdrawn",
+  "jake_keep_route_she_uses_him",
+
+  # Daily-reset (cleared by [engine.daily_tick] in 0_systems_spec.toml)
+  "talked_to_frank_today",
+  "talked_to_ryan_today",
+  "talked_to_jake_today",
+  "talked_to_diana_today",
+  "talked_to_marge_today",
+  "talked_to_cookie_today",
+  "helped_diana_today",
+  "did_morning_chore_today",
+  "walked_past_jakes_today",
+  "watched_ryan_today",
+
+  # Rent + eviction (F4)
+  "rent_evicted",
+
+  # Dev mode — gates dev shortcuts visibility (set by intro one-shot per --dev build)
+  "dev_mode_enabled",
+
+  # Phase-2-locked (declared so any conditional reference resolves; never set in slice)
+  "phase_2_bar_unlocked",
+  "phase_2_fair_week_active",
+  "phase_2_football_season_started",
+  "phase_2_church_interior_unlocked",
+  "college_paid_admission",
+]
+
+[player.trait_decay]
+hygiene = 3.0
+# CRITICAL: do NOT add npc_<slug>_stage entries here. Decay bypasses
+# applyAndNotifyTrait, which is where E9 hooks the advancement log
+# (v1.py:4017-4025). Validate() rejects the combination per PRD 08 §11.2.
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# NPCs — Frank, Ryan, Jake (deep arcs) + Diana, Marge, Cookie (ambient/peer)
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# arc_stages on Frank/Ryan/Jake per plan §5 (5 elements each, indices 0–4).
+# Diana/Marge/Cookie have no arc_stages — they're not on stage chains in the
+# slice (Diana's accumulator is Phase 2+ seed; Marge/Cookie are service).
+# Schedules emerge from canvas trigger declarations in 5_hubs_and_scenes.toml
+# (setup.getNpcLocation derives presence from canvas-linked schedules per
+# the existing engine convention).
+
+# ── Frank ─────────────────────────────────────────────────────────────────────
+
+[[npcs]]
+id          = "npc_frank"
+name        = "Frank"
+description = "Forty-eight. Broad through the shoulders, calloused hands with a web of small framing scars. Salt-and-pepper hair, work boots by the door. Addresses Maya by name — *Maya* — and the name lands like a door closing. Owns the property. The rent and the rules come from him."
+portrait    = "frank.jpg"
+core_traits = { love = 0, trust = 10, corruption = 0, arousal = 0 }
+flag_keys   = []
+arc_stages  = ["Suspicious", "Grudging warmth", "Restrict", "Tease", "Cracked"]
+
+[npcs.trait_decay]
+love  = 0.5
+trust = 0.3
+
+
+# ── Ryan ──────────────────────────────────────────────────────────────────────
+
+[[npcs]]
+id          = "npc_ryan"
+name        = "Ryan"
+description = "Twenty-five. Lean shoulders, strong back, tanned to the elbow. Eye contact rare but holds when it lands. Faded t-shirts, jeans with grease at the knee. Talks in fragments. Compliments sideways. Runs the failing shop at the edge of the property."
+portrait    = "ryan.jpg"
+core_traits = { love = 0, trust = 5, corruption = 0, arousal = 0 }
+flag_keys   = []
+arc_stages  = ["Stranger", "Helper", "Partner", "Closer", "After Beach"]
+
+[npcs.trait_decay]
+love    = 1.0
+trust   = 0.8
+
+
+# ── Jake ──────────────────────────────────────────────────────────────────────
+
+[[npcs]]
+id          = "npc_jake"
+name        = "Jake"
+description = "Twenty-one. Lean, narrower than Ryan. Glasses for drawing. Shaggy brown hair he pushes back with the inside of his wrist. Long sentences when comfortable, clipped when not. Draws. The door's mostly shut; the keyboard goes through the wall after midnight."
+portrait    = "jake.jpg"
+core_traits = { love = -5, trust = 0, corruption = 5, arousal = 0 }
+flag_keys   = []
+arc_stages  = ["Hostile", "Noticed", "Peek/Draw", "Tease", "Caught"]
+
+[npcs.trait_decay]
+love    = 1.5
+trust   = 1.2
+
+
+# ── Diana ─────────────────────────────────────────────────────────────────────
+# No arc_stages. `awareness` accumulates silently across the slice as a Phase 2+
+# seed per Doc 02 §"Diana — `diana_stage` (Phase 2+ deferred)". `helped_diana_today`
+# (the per-day reset) is the daily-tick flag; the awareness trait is the running total.
+
+[[npcs]]
+id          = "npc_diana"
+name        = "Diana"
+description = "Forty-six. Maya's mother. Holds the kitchen at 6:30 and 5:30. Reads on the porch on Sunday afternoons. The girl she raised against the town she now lives in. Quiet at the table is her loudest line."
+portrait    = "diana.jpg"
+core_traits = { awareness = 0, trust = 30 }
+flag_keys   = []
+hidden_from_ui = false
+
+
+# ── Marge ─────────────────────────────────────────────────────────────────────
+# Service NPC. `trust` only — steadiness axis. No arc, no sexual content.
+
+[[npcs]]
+id          = "npc_marge"
+name        = "Marge"
+description = "Diner owner. Late forties, broad and quick. Reads Maya within thirty seconds of the interview. Honest about the work — the wage, the floor, what tier the customer is sitting at. The Thursday key is hers to hand over; that takes weeks Maya doesn't have in the slice."
+portrait    = "marge.jpg"
+core_traits = { trust = 0 }
+flag_keys   = []
+hidden_from_ui = false
+
+
+# ── Cookie ────────────────────────────────────────────────────────────────────
+# Peer. Diner cook 17:00–22:00. Female-voice texture during shifts.
+
+[[npcs]]
+id          = "npc_cookie"
+name        = "Cookie"
+description = "Diner cook. Twenty-eight. Late shifts only. Cigarette behind one ear that she doesn't smoke at work. The peer voice in the kitchen — knows every regular, knows the gossip. Unfussed about the tier-3 trade because she tried it twice and walked."
+portrait    = "cookie.jpg"
+core_traits = { trust = 0 }
+flag_keys   = []
+hidden_from_ui = false
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# LOCATIONS (14 total)
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Layout: two top-level containers (loc_property, loc_main_street). Property has
+# the house cluster + yard. Main_street has diner_front + church_front. Walking
+# between them is via activities (activity_walk_to_town / activity_walk_property)
+# defined in 3_activities.toml — not via direct entry_from links.
+#
+# entry_from / navigation_order rules (per validate() at template_import.py:2046+):
+#   - Each child's `entry_from` = its parent in the nav graph (the location
+#     you came from to enter here)
+#   - `navigation_order` lists locations whose entry_from points HERE — these
+#     show up in the auto-nav menu when at this location
+#   - To leave a location toward an ancestor, the hub canvas at this location
+#     uses an exit_block choice with targetType = "location", locationId = "<parent>"
+#   - Containers (is_container = true) require default_entry pointing at a child
+#     whose parent matches the container
+
+# ── Containers ────────────────────────────────────────────────────────────────
+
+[[locations]]
+id               = "loc_property"
+name             = "Frank's Property"
+description      = "Two-story farmhouse on five acres outside Millhaven. Front yard, backyard sloping toward the creek. Ryan's shop at the far edge. Diana's garden along the south side."
+image            = "locations/property.jpg"
+image_search_queries = ["rural southern farmhouse two story front yard porch summer", "small alabama property creek treeline outbuilding shop"]
+is_container     = true
+default_entry    = "loc_front_porch"
+
+[[locations]]
+id               = "loc_main_street"
+name             = "Main Street"
+description      = "Three blocks of one-story brick storefronts. Diner at the middle, churches at the ends, stoplight that takes ninety seconds. Half an hour on foot from the property."
+image            = "locations/main_street.jpg"
+image_search_queries = ["small southern town main street brick storefronts diner stoplight summer", "rural alabama town center single block brick"]
+is_container     = true
+default_entry    = "loc_main_street_sidewalk"
+
+
+# ── Property cluster ──────────────────────────────────────────────────────────
+
+[[locations]]
+id               = "loc_front_porch"
+name             = "Front Porch"
+description      = "The arrival point. Wooden porch boards weathered grey, two rocking chairs, a screen door."
+image            = "locations/front_porch.jpg"
+image_search_queries = ["southern farmhouse front porch rocking chair screen door summer afternoon", "rural front porch weathered wood twin chairs"]
+parent           = "loc_property"
+navigation_order = ["loc_hallway"]
+
+[[locations]]
+id               = "loc_hallway"
+name             = "Home"
+description      = "Inside the house. Worn wood floors, a single overhead bulb. Bedroom doors and the bathroom down the corridor, the living-room arch one side, the kitchen at the end. Sound carries between rooms — Jake's typing through the wall, Frank's paper rustling, Diana's coffee maker before sunrise."
+image            = "locations/hallway.jpg"
+image_search_queries = ["wood paneled rural hallway bedroom doors single ceiling light dim", "farmhouse interior corridor summer evening bedroom doors"]
+parent           = "loc_property"
+entry_from       = "loc_front_porch"
+navigation_order = ["loc_kitchen", "loc_living_room", "loc_back_porch", "loc_mayas_bedroom", "loc_bathroom", "loc_jakes_room"]
+
+[[locations]]
+id               = "loc_kitchen"
+name             = "Kitchen"
+description      = "Butcher-block counter worn pale at the center. Five chairs at a four-person table — Frank added one when Maya moved in. The coffee maker starts at 6 a.m. because Diana stands over it. Window above the sink looks out on the back yard. Dinner is at 6:30 because Diana holds it at 6:30."
+image            = "locations/kitchen.jpg"
+image_search_queries = ["farmhouse kitchen butcher block counter coffee maker window over sink yard morning light", "rural southern kitchen wooden table morning light"]
+parent           = "loc_property"
+entry_from       = "loc_hallway"
+
+[[locations]]
+id               = "loc_living_room"
+name             = "Living Room"
+description      = "Television against the long wall. Couch deep enough to lie down on. Lamp Diana brought from the old house. Coffee table with coasters nobody uses. The porch visible through the front window. Frank reads here some evenings when the office gets stale."
+image            = "locations/living_room.jpg"
+image_search_queries = ["rural living room deep couch old television lamp porch window southern evening", "small farmhouse living room couch lamp coffee table"]
+parent           = "loc_property"
+entry_from       = "loc_hallway"
+
+[[locations]]
+id               = "loc_back_porch"
+name             = "Back Porch"
+description      = "Where Saturday dinners happen. Long outdoor table Frank built one summer. String lights Diana hung two summers back. Faces the yard; the creek trail starts from here."
+image            = "locations/back_porch.jpg"
+image_search_queries = ["southern back porch long dinner table string lights backyard view evening", "rural farmhouse back porch summer night string lights"]
+parent           = "loc_property"
+entry_from       = "loc_hallway"
+navigation_order = ["loc_yard"]
+
+[[locations]]
+id               = "loc_yard"
+name             = "Back Yard"
+description      = "Grass that holds up through August because Diana waters it. Ryan's work area at the far side — tarps, an ongoing project or two, the riding mower. The yard is visible from the kitchen window."
+image            = "locations/yard.jpg"
+image_search_queries = ["rural backyard grass distant work tarp creek treeline summer", "alabama farmhouse backyard work area tools tarps"]
+parent           = "loc_property"
+entry_from       = "loc_back_porch"
+
+[[locations]]
+id               = "loc_mayas_bedroom"
+name             = "Maya's Bedroom"
+description      = "Was a guest room. Twin bed against the far wall. Small desk Maya claimed for sketching. Window looks onto the front yard and the driveway. Shares a wall with Jake's room — thin enough that she can hear his keyboard after midnight."
+image            = "locations/mayas_bedroom.jpg"
+image_search_queries = ["small guest bedroom twin bed desk sketchbook window to driveway summer light", "young woman small bedroom rural farmhouse sketchbook window"]
+parent           = "loc_property"
+entry_from       = "loc_hallway"
+
+# Pass 7 (2026-05-12) — bathroom location declared. The hallway description
+# already mentions "the bathroom down the corridor"; this is the structural
+# canvas. Houses activity_shower (relocated from mayas_bedroom in Pass 7) +
+# activity_brush_teeth + the masturbate-at-shower dispatcher + the
+# scene_frank_walks_in_shower T3 walk-in (RTS BrotherShowerSex equivalent).
+[[locations]]
+id               = "loc_bathroom"
+name             = "Bathroom"
+description      = "Pebbled-glass shower stall, sink with a chipped porcelain corner, mirror that's never quite clear of steam after Diana's morning routine. Towel hooks behind the door. Down the hall from the bedrooms."
+image            = "locations/bathroom.jpg"
+image_search_queries = [
+  "rural farmhouse bathroom interior pebbled glass shower stall sink mirror warm",
+  "small farmhouse bathroom morning light tile sink folded towel quiet",
+  "southern alabama farmhouse bathroom interior shower sink mirror warm light",
+]
+parent           = "loc_property"
+entry_from       = "loc_hallway"
+
+[[locations]]
+id               = "loc_jakes_room"
+name             = "Jake's Room"
+description      = "Door cracked at night when he's awake; closed when he's out. Desk under the window — laptop, drawing tablet, sketchbooks stacked crooked. Smells like pencil shavings and the cheap coffee he drinks cold."
+image            = "locations/jakes_room.jpg"
+image_search_queries = ["young man room drawing desk tablet laptop sketchbooks stacked small bed", "art student bedroom drawing tablet laptop sketchbooks"]
+parent           = "loc_property"
+entry_from       = "loc_hallway"
+entry_conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "jake_tease_open", operator = "is_true" }
+] }
+blocked_message  = "Jake's door is shut. He has not given her any sign she is supposed to walk through it."
+
+
+# ── Main street cluster ───────────────────────────────────────────────────────
+
+[[locations]]
+id               = "loc_main_street_sidewalk"
+name             = "Main Street Sidewalk"
+description      = "Brick storefronts on both sides. The Baptist church at one end, the small Methodist one at the other. Heat coming up from the asphalt. The walk back to the property is half an hour."
+image            = "locations/main_street_sidewalk.jpg"
+image_search_queries = ["small town main street sidewalk brick storefronts summer heat", "rural alabama main street pedestrian sidewalk"]
+parent           = "loc_main_street"
+navigation_order = ["loc_diner_front", "loc_church_front", "loc_thrift_store"]
+# Town gate (clothing system): can't walk into town half-dressed. A dress
+# satisfies top+bottom (engine skips those slots when a dress is equipped).
+# Home interiors are intentionally ungated so robe/underdressed teases survive.
+clothing_rules = [
+  { slots_required = ["top", "bottom"], message = "She can't walk into town half-dressed. Back to the bedroom to put something on." }
+]
+
+[[locations]]
+id               = "loc_diner_front"
+name             = "Diner — Front Floor"
+description      = "Counter, booths, tables. Marge at the register most hours. Cookie in the kitchen evenings. Where Maya works."
+image            = "locations/diner_front.jpg"
+image_search_queries = ["american diner front floor booths counter grill southern", "small town diner interior counter waitress"]
+parent           = "loc_main_street"
+entry_from       = "loc_main_street_sidewalk"
+
+[[locations]]
+id               = "loc_church_front"
+name             = "Church Front"
+description      = "Brick steps, white double doors, a noticeboard with the week's hymns. The Sunday crowd lingers fifteen minutes after the service before drifting to their trucks. Maya can attend the front without going in — rep_church gain without the interior."
+image            = "locations/church_front.jpg"
+image_search_queries = ["small southern baptist church brick front steps white doors noticeboard sunday", "rural alabama church exterior front steps congregation"]
+parent           = "loc_main_street"
+entry_from       = "loc_main_street_sidewalk"
+
+# Clothing shop (clothing system, 2026-05-21). The engine auto-injects a
+# "Browse Clothes → ShopPage" link here because shop_location points to it.
+[[locations]]
+id               = "loc_thrift_store"
+name             = "Second-Hand Threads"
+description      = "A narrow consignment shop wedged between the hardware store and the pharmacy. Racks of summer dresses, a wall of folded denim, a bin of swimwear by the window. The bell over the door is too loud. Cash only, the hand-lettered sign says."
+image            = "locations/thrift_store.jpg"
+image_search_queries = ["small town second-hand clothing consignment shop interior racks dresses summer", "thrift store interior clothing racks denim wall warm light"]
+parent           = "loc_main_street"
+entry_from       = "loc_main_street_sidewalk"
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SIDEBAR ITEMS
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Layout per plan §9: 3 stage_label items (E11, NEW for slice) + lifted love-band
+# trait_words from TLS for each NPC + player corruption + standard hint/passes/
+# inventory + the resolution-locked "stage_label preempts love band" mechanism.
+#
+# Stagger budget per Book 2B §9: ≤4 items visible at once. Achieved by gating
+# love bands on the same flag as their stage_label, so love bands only show
+# BEFORE the stage_label reveals (corruption is always-on; calc/love/stage rotate).
+#
+# Show-when chain:
+#   - Frank stage_label visible when first_morning_kitchen_done == true (Day 1 pre-seeded)
+#   - Ryan stage_label visible when ryan_help_tier_open == true (Day 5)
+#   - Jake stage_label visible when jake_first_glance_noticed == true (Day 2)
+#   - Love bands stay visible UNTIL the stage_label takes the slot
+#     (gated by `_stage_label_visible == false` per the resolution; in this slice,
+#     since stage_label and love band reveal on the same flag, we just hide the
+#     love band when its stage_label appears — by gating love band on
+#     `<stage_label_flag> == false` in addition to its own reveal.)
+
+# ── Standard widgets ──────────────────────────────────────────────────────────
+
+[[sidebar_items]]
+type = "hint"
+
+[[sidebar_items]]
+type = "passes"
+
+[[sidebar_items]]
+type = "inventory"
+
+
+# ── Player: corruption (always on, lifted from TLS) ───────────────────────────
+
+[[sidebar_items]]
+type        = "trait_words"
+trait_owner = "player"
+trait       = "corruption"
+bands = [
+  { flag = "frank_cracked",         text = "He's not pretending." },
+  { flag = "frank_caught",          text = "He saw. He left." },
+  { flag = "first_rent_paid",       text = "Rent on the table." },
+  { flag = "arrived_at_franks",     text = "Different house. Same body." },
+  { flag = "prologue_complete",     text = "Driving south." },
+  { flag = "prologue_crossed_line", text = "Did the thing." },
+  { flag = "prologue_saw_them",     text = "Saw what Sarah was." },
+  { flag = "prologue_at_bed",       text = "Daniel's Sunday bed." },
+  { min = 0,  max = 24,  text = "Catching herself noticing." },
+  { min = 25, max = 49,  text = "Letting the looks land." },
+  { min = 50, max = 74,  text = "Picking the room." },
+  { min = 75, max = 100, text = "Speaks the language she made." },
+]
+
+
+# ── Frank: stage_label (E11) — always visible after first_morning_kitchen_done ─
+
+[[sidebar_items]]
+type    = "stage_label"
+npc_id  = "npc_frank"
+prefix  = "Frank"
+
+
+# ── Frank: love band (lifted, gated to hide once stage_label appears) ─────────
+# Resolution per plan §9: when both want the slot, hide love band. The
+# stage_label reveals on first_morning_kitchen_done (pre-seeded Day 1), so this
+# love band would only be relevant pre-slice. Kept here for completeness; gated
+# on `first_morning_kitchen_done == false` so it never actually renders in the
+# slice (stage_label takes the slot). Effectively dormant.
+
+[[sidebar_items]]
+type        = "trait_words"
+trait_owner = "npc"
+npc_id      = "npc_frank"
+trait       = "love"
+show_when   = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "first_morning_kitchen_done", operator = "is_false" },
+] }
+bands = [
+  { min = 0,  max = 19,  text = "Diana's girl. Rent due." },
+  { min = 20, max = 100, text = "Coffee for two, unasked." },
+]
+
+
+# ── Ryan: stage_label (E11) — visible after ryan_help_tier_open (Day 5) ───────
+
+[[sidebar_items]]
+type      = "stage_label"
+npc_id    = "npc_ryan"
+prefix    = "Ryan"
+show_when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "ryan_help_tier_open", operator = "is_true" },
+] }
+
+
+# ── Ryan: love band (kept, but only visible BEFORE stage_label reveals) ───────
+# Same logic as Frank. ryan_help_tier_open flips Day 5; before that, no Ryan
+# sidebar item shows. Once it flips, stage_label takes the slot.
+
+[[sidebar_items]]
+type        = "trait_words"
+trait_owner = "npc"
+npc_id      = "npc_ryan"
+trait       = "love"
+show_when   = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "ryan_help_tier_open", operator = "is_false" },
+] }
+bands = [
+  { min = 0,  max = 19,  text = "Calls her kid. Means it." },
+  { min = 20, max = 100, text = "Says her name in the shop." },
+]
+
+
+# ── Jake: stage_label (E11) — visible after jake_first_glance_noticed (Day 2) ─
+
+[[sidebar_items]]
+type      = "stage_label"
+npc_id    = "npc_jake"
+prefix    = "Jake"
+show_when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "jake_first_glance_noticed", operator = "is_true" },
+] }
+
+
+# ── Jake: love band (kept, but only visible BEFORE stage_label reveals) ───────
+
+[[sidebar_items]]
+type        = "trait_words"
+trait_owner = "npc"
+npc_id      = "npc_jake"
+trait       = "love"
+show_when   = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "jake_first_glance_noticed", operator = "is_false" },
+] }
+bands = [
+  { min = -20, max = -1,  text = "Sketchbook is a wall." },
+  { min = 0,   max = 100, text = "Hands pause when she walks in." },
+]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SETTINGS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Clothing system (RTS-style closet, 2026-05-21). Wardrobe in Maya's bedroom,
+# shop in town. Garments carry beauty/corruption; worn_* predicates route content.
+[settings]
+clothing_enabled  = true
+wardrobe_location = "loc_mayas_bedroom"
+shop_location     = "loc_thrift_store"
+
+# Coverage: the real "can't go out half-dressed" friction is the per-location
+# clothing_rules on the town hub (loc_main_street_sidewalk). body_coverage here
+# is documentation/forward-compat (engine's validateClothing has no call site,
+# so it never blocks at home — robe teases stay intact).
+[settings.clothing_requirements]
+body_coverage   = true
+always_required = []
+
+# NOTE: the [[clothing]] garment catalog (~22 items with beauty/corruption) is
+# authoritative in 7_final_game.toml's CLOTHING section — kept there (not
+# duplicated here) to avoid a 180-line copy that would inevitably drift. This
+# mirrors how the Frank Lane-2 ambients already live only in 7_final_game.toml.
+
+[settings.rent]
+enabled          = true
+amount           = 60
+due_day          = "Sunday"
+collector_npc    = "npc_frank"
+grace_periods    = 2
+start_after_flag = "first_sunday_passed"
+eviction_mode    = "flag_set"
+eviction_flag    = "rent_evicted"
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TIPS PAGE — game-level mechanics surface (RTS-style Walkthrough page)
+# ═══════════════════════════════════════════════════════════════════════════════
+# Universal mechanics live here, not on per-template hint tips. Sidebar shows
+# a "💡 Tips" button when this block is authored; player opens it to see how
+# the world actually works. Author writes raw HTML inside `content`.
+[ui.tips_page]
+title = "Tips"
+content = """
+<h3>Time</h3>
+<p>Most scenes take 30–60 minutes of in-game time. Sleeping advances to the next morning. Days end at midnight.</p>
+
+<h3>Trust</h3>
+<p>NPC trust climbs when you spend time on their stuff and decays roughly <strong>1.0/day</strong> when you ignore them. Whichever number is lower in your sidebar is the bottleneck — work that one.</p>
+
+<h3>Hygiene</h3>
+<p>Drops with sweat (work, intimate scenes, exercise). Below 40, the diner manager docks your tips. Shower in the Bathroom; the morning routine handles it free of charge.</p>
+
+<h3>Energy</h3>
+<p>Drops with effort. Below 30, activity outcomes shrink — bookkeeping pays less, work earns less. Sleep restores fully; a Nap is faster but costs hygiene.</p>
+
+<h3>Money</h3>
+<p>Two steady earners: <strong>Frank's bookkeeping</strong> (weekday afternoons, +$8 + trust) and <strong>diner shifts</strong> with Marge (evenings, larger payouts but tips depend on hygiene). Rent is due Sunday morning — miss it and you're out.</p>
+
+<h3>Corruption &amp; Beauty</h3>
+<p>Beauty rises when Maya showers and sketches &mdash; it shapes how NPCs first notice her. Corruption climbs as she pushes things further with Frank. Both gate certain scene branches, so keep an eye on the sidebar.</p>
+
+<h3>Reading the Quests page</h3>
+<p>Each card is a one-line journal thought. The thought changes as state changes — if Maya's voice shifts on the same arc, you've crossed a threshold worth following up on.</p>
+"""
+

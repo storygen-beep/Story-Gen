@@ -1,0 +1,413 @@
+{
+  "generated_at": "2026-06-07T22:11:12.142Z",
+  "indexing_coverage": "full",
+  "total_variables": 80,
+  "skipped_script_blocks": 0,
+  "skipped_widget_passages": 0,
+  "skipped_passages": 0,
+  "parse_errors": 0,
+  "complex_setter_count": 0,
+  "variables": {
+    "$return": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": "Start"
+    },
+    "$return2": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": "Start"
+    },
+    "$avatarmc": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 1
+    },
+    "$mcrel": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": "stepdad"
+    },
+    "$ginarel": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": "stepdaughter"
+    },
+    "$meganrel": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": "stepdaughter"
+    },
+    "$incest": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": "Off"
+    },
+    "$music": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": "On"
+    },
+    "$volume": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": "100%"
+    },
+    "$gallery": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": "Locked"
+    },
+    "$gallerymenu": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": true
+    },
+    "$angelalove": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 10
+    },
+    "$angelalust": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 10
+    },
+    "$ginalove": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 10
+    },
+    "$ginalust": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$meganlove": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 10
+    },
+    "$meganlust": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$adrianalove": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 5
+    },
+    "$adrianalust": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 5
+    },
+    "$avalove": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 5
+    },
+    "$avalust": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$haleylove": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$haleylust": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$abigaillove": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$abigaillust": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$blanchelove": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$blanchelust": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$amirahlove": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$amirahlust": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$jillianlove": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$jillianlust": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$lanalove": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$lanalust": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$jessalove": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$jessalust": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$kelsilove": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$kelsilust": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$alexislove": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$alexislust": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$brennalove": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$brennalust": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$jasonfriendship": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 5
+    },
+    "$dylanfriendship": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$mrreedrespect": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$corruption": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$money": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$flower": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$chocolate": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$teddybear": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$perfume": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$ring1": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$ring2": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$ring3": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$earring1": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$earring2": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$earring3": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$necklace1": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$necklace2": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$necklace3": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$lingerie": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$dildo": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$analplug": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$analgel": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$pinkpill": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$bluepill": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$greenpill": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$weed": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$coke": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$car": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$mcjob": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$pleasure1": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$pleasure2": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$climax": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$cum": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$tookbluepill": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": false
+    },
+    "$mchp": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 100
+    },
+    "$enemyhp": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 100
+    },
+    "$mcspecial": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 0
+    },
+    "$sbday": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 1
+    },
+    "$sbtime": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": 1
+    }
+  },
+  "complex_setters": []
+}

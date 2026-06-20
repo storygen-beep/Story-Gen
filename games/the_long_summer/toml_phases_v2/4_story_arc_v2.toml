@@ -1,0 +1,46 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 4 v2 — STORY ARC
+# Game: The Long Summer (rewrite v2)
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Phase A.0 sanity check (2026-04-28). Minimal stub. Just two journal nodes:
+# Prologue completion + Arrival at Frank's. Full story-arc rebuild deferred.
+
+[[story_arc.chapters]]
+id = "chapter_prologue"
+name = "Prologue"
+order = 0
+
+[[story_arc.chapters]]
+id = "chapter_phase_1_arrival"
+name = "Chapter 1 — Arrival"
+order = 1
+
+[[story_arc.nodes]]
+id = "node_prologue_root"
+name = "The Long Summer — Prologue"
+chapter = "chapter_prologue"
+linked_canvas = "prologue_morning_with_daniel"
+linked_flag = "prologue_complete"
+journal_entry = "I drove south."
+is_milestone = true
+
+[[story_arc.nodes]]
+id = "node_arrival"
+name = "Arrival at Frank's"
+chapter = "chapter_phase_1_arrival"
+linked_canvas = "event_arrival_at_franks"
+linked_flag = "arrived_at_franks"
+requires_nodes = ["node_prologue_root"]
+journal_entry = "I crossed the threshold."
+is_milestone = true
+
+[[story_arc.nodes]]
+id = "node_first_morning"
+name = "First Morning"
+chapter = "chapter_phase_1_arrival"
+linked_canvas = "event_first_morning_kitchen"
+linked_flag = "first_morning_kitchen_done"
+requires_nodes = ["node_arrival"]
+journal_entry = "Sixty a week. Sundays. The deal if I was staying."
+is_milestone = true

@@ -1,0 +1,113 @@
+{
+  "captured_at": "2026-06-08T05:24:48.811Z",
+  "engine": "sugarcube",
+  "version": {
+    "name": "SugarCube",
+    "major": 2,
+    "minor": 37,
+    "patch": 3,
+    "prerelease": null,
+    "build": 10338,
+    "short": "SugarCube (v2.37.3)",
+    "toString": "2.37.3+10338"
+  },
+  "config": {
+    "addVisitedLinkClass": false,
+    "cleanupWikifierOutput": false,
+    "debug": false,
+    "enableOptionalDebugging": false,
+    "loadDelay": 0,
+    "audio": {
+      "pauseOnFadeToZero": true,
+      "preloadMetadata": true
+    },
+    "history": {
+      "controls": true,
+      "maxStates": 4
+    },
+    "macros": {
+      "maxLoopIterations": 1000,
+      "typeSkipKey": " ",
+      "typeVisitedPassages": true,
+      "ifAssignmentError": "<deprecated>"
+    },
+    "navigation": {},
+    "passages": {
+      "displayTitles": false,
+      "nobr": false,
+      "start": "Init",
+      "descriptions": "<deprecated>"
+    },
+    "saves": {
+      "id": "GPG1O",
+      "maxAutoSaves": 0,
+      "maxSlotSaves": 8,
+      "version": 20,
+      "autosave": "<deprecated>",
+      "onLoad": "<deprecated>",
+      "onSave": "<deprecated>",
+      "slots": "<deprecated>",
+      "tryDiskOnMobile": true
+    },
+    "ui": {
+      "stowBarInitially": 800,
+      "updateStoryElements": true
+    }
+  },
+  "state": {
+    "turn": null,
+    "turns": 3,
+    "length": 3,
+    "bottom_title": "Init",
+    "active_title": "intro",
+    "temporary_keys": [
+      "mypatronus"
+    ],
+    "prng_present": true,
+    "prng_state": null,
+    "history_length": 3,
+    "history_first_entry_shape": {
+      "keys": [
+        "title",
+        "variables"
+      ],
+      "title": "Init"
+    },
+    "history_last_entry_shape": {
+      "keys": [
+        "title",
+        "variables"
+      ],
+      "title": "intro"
+    },
+    "has_marshalForSave": true,
+    "has_unmarshalForSave": true
+  },
+  "story": {
+    "name": "Generic Porn Game 1 - ORIGINATION",
+    "ifid": "C3408C17-C45F-4C96-AAB0-79519AC29E0E",
+    "format": "SugarCube",
+    "format_version": "2.37.3",
+    "creator": "Tweego",
+    "creator_version": "2.1.1+81d1d71",
+    "startnode": "34",
+    "options": null,
+    "tags": null,
+    "zoom": "1",
+    "engine_title": "Generic Porn Game 1 - ORIGINATION",
+    "engine_name": "Generic Porn Game 1 - ORIGINATION",
+    "engine_dom_id": "generic-porn-game-1-origination"
+  },
+  "settings": {},
+  "save_caps": {
+    "has_serialize": true,
+    "has_deserialize": true,
+    "has_slots": true,
+    "has_autosave": true,
+    "slot_count": 0,
+    "on_save_handlers": 1,
+    "on_load_handlers": 1,
+    "slots_metadata": [],
+    "autosave_metadata": null
+  }
+}

@@ -1,0 +1,3797 @@
+{
+  "generated_at": "2026-06-04T17:59:08.656Z",
+  "indexing_coverage": "partial",
+  "total_variables": 49,
+  "skipped_script_blocks": 573,
+  "skipped_widget_passages": 2,
+  "skipped_passages": 2,
+  "parse_errors": 14,
+  "complex_setter_count": 14,
+  "variables": {
+    "$player": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "{\n    \"name\": \"Nina\",\n    \"portrait\": \"nina.jpg\",\n    \"current_location\": \"\",\n    \"core_traits\": {\"corruption\": 0, \"arousal\": 0, \"energy\": 100, \"hygiene\": 100, \"money\": 80, \"sal_stage\": 0, \"marcus_stage\": 0, \"dee_stage\": 0, \"rosa_stage\": 0, \"fitness\": 0, \"beauty\": 0, \"exhibitionism\": 0, \"pregnancy\": 0, \"sex_stage\": 0, \"loop_npc_pleasure\": 0, \"loop_player_pleasure\": 0, \"sex_finisher_type\": 0, \"anal_active\": 0, \"sex_reactions\": 0, \"sex_entry_origin\": 0},\n    \"wardrobe\": {\"outfit_work_tee\": {\"id\": \"outfit_work_tee\", \"name\": \"Plain work tee\", \"slot\": \"top\", \"image\": \"\"}, \"outfit_work_jeans\": {\"id\": \"outfit_work_jeans\", \"name\": \"Work jeans\", \"slot\": \"bottom\", \"image\": \"\"}},\n    \"equipped\": {\"bra\": null, \"underwear\": null, \"top\": \"outfit_work_tee\", \"bottom\": \"outfit_work_jeans\", \"dress\": null, \"legwear\": null, \"shoes\": null},\n    \"body_type\": \"average\",\n    \"look\": \"tired\"\n}",
+          "passage": "Start",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".core_traits.money",
+          "op": "-=",
+          "value_expr": "_rent",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"b0c8a9e1-8998-4bb3-8ff1-89c71e5d6a87\"",
+          "passage": "Location_The_Last_Call",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"2f5dc0cf-1ad3-43e5-bc7d-2b4ffc2d2a5a\"",
+          "passage": "Location_The_Kitchen",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"5661a7c0-0faa-43f7-8855-53f5c6272564\"",
+          "passage": "Location_The_Back_Office",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"8d592234-2888-4a4a-852a-c8ff853ca7a6\"",
+          "passage": "Location_The_Cellar",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"9306e030-fd20-4d5a-9a63-03c1abfd2ec8\"",
+          "passage": "Location_The_Apartment",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"3568a580-1ef8-4657-ae1f-f8e0a52e2253\"",
+          "passage": "Location_Main_Street",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"cecf4537-b53b-4f1c-8afc-95ff39ee06a7\"",
+          "passage": "Location_The_Bank",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"d2b2a79a-cfec-44f8-9add-2d91ce0fac51\"",
+          "passage": "Location_Reece's",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"884c460b-7e14-4931-bd4b-8ef63453e37d\"",
+          "passage": "Location_The_Depot",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"9962bc72-c1cf-4be7-86f5-5139d7435d3e\"",
+          "passage": "Location_Sal's_place",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"f49bf6ed-5625-475a-bf36-2a4c6eaee61a\"",
+          "passage": "Location_Uptown",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"5c8d40e3-f809-47ee-bfbf-4c2ee0bc5b91\"",
+          "passage": "Location_Rosa's_place",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"d489f038-0681-40ec-ae6d-51bc07a61ecb\"",
+          "passage": "Location_Across_the_river",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"1345b7a7-7dcd-48db-a89e-d4a006d3716b\"",
+          "passage": "Location_Boyd's_Place",
+          "gate": [
+            {
+              "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"summoned_by_shark\", \"operator\": \"is_true\"}]})",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": [],
+      "initial_value": {
+        "name": "Nina",
+        "portrait": "nina.jpg",
+        "current_location": "",
+        "core_traits": {
+          "corruption": 0,
+          "arousal": 0,
+          "energy": 100,
+          "hygiene": 100,
+          "money": 80,
+          "sal_stage": 0,
+          "marcus_stage": 0,
+          "dee_stage": 0,
+          "rosa_stage": 0,
+          "fitness": 0,
+          "beauty": 0,
+          "exhibitionism": 0,
+          "pregnancy": 0,
+          "sex_stage": 0,
+          "loop_npc_pleasure": 0,
+          "loop_player_pleasure": 0,
+          "sex_finisher_type": 0,
+          "anal_active": 0,
+          "sex_reactions": 0,
+          "sex_entry_origin": 0
+        },
+        "wardrobe": {
+          "outfit_work_tee": {
+            "id": "outfit_work_tee",
+            "name": "Plain work tee",
+            "slot": "top",
+            "image": ""
+          },
+          "outfit_work_jeans": {
+            "id": "outfit_work_jeans",
+            "name": "Work jeans",
+            "slot": "bottom",
+            "image": ""
+          }
+        },
+        "equipped": {
+          "bra": null,
+          "underwear": null,
+          "top": "outfit_work_tee",
+          "bottom": "outfit_work_jeans",
+          "dress": null,
+          "legwear": null,
+          "shoes": null
+        },
+        "body_type": "average",
+        "look": "tired"
+      }
+    },
+    "$npcs": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "{\"2573398e-6ea5-49b1-bb7c-157637778fdb\": {\"name\": \"Sal\", \"portrait\": \"sal.jpg\", \"core_traits\": {\"arousal\": 0, \"corruption\": 0, \"relation\": 0}, \"flags\": {}, \"schedule\": [], \"relationship\": \"\"}, \"c97ac0e7-ed9f-4c2d-aad3-2ed9a2a44cf2\": {\"name\": \"Marcus\", \"portrait\": \"marcus.jpg\", \"core_traits\": {\"arousal\": 0, \"corruption\": 0, \"relation\": 0}, \"flags\": {}, \"schedule\": [], \"relationship\": \"\"}, \"c70aff52-3fe8-4efe-8a5a-d73c58decca1\": {\"name\": \"The Collector\", \"portrait\": \"collector.jpg\", \"core_traits\": {\"awareness\": 0, \"corruption\": 0, \"relation\": 0}, \"flags\": {}, \"schedule\": [], \"relationship\": \"\"}, \"edf717c5-0c77-4867-8c4e-1a5db1e5b307\": {\"name\": \"Rosa\", \"portrait\": \"rosa.jpg\", \"core_traits\": {\"relation\": 0}, \"flags\": {}, \"schedule\": [], \"relationship\": \"\"}, \"f0f3a75f-9eda-4fec-af5e-b8e89d126f51\": {\"name\": \"Dee\", \"portrait\": \"dee.jpg\", \"core_traits\": {\"arousal\": 0, \"corruption\": 0, \"relation\": 0}, \"flags\": {}, \"schedule\": [], \"relationship\": \"\"}}",
+          "passage": "Start",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": {
+        "2573398e-6ea5-49b1-bb7c-157637778fdb": {
+          "name": "Sal",
+          "portrait": "sal.jpg",
+          "core_traits": {
+            "arousal": 0,
+            "corruption": 0,
+            "relation": 0
+          },
+          "flags": {},
+          "schedule": [],
+          "relationship": ""
+        },
+        "c97ac0e7-ed9f-4c2d-aad3-2ed9a2a44cf2": {
+          "name": "Marcus",
+          "portrait": "marcus.jpg",
+          "core_traits": {
+            "arousal": 0,
+            "corruption": 0,
+            "relation": 0
+          },
+          "flags": {},
+          "schedule": [],
+          "relationship": ""
+        },
+        "c70aff52-3fe8-4efe-8a5a-d73c58decca1": {
+          "name": "The Collector",
+          "portrait": "collector.jpg",
+          "core_traits": {
+            "awareness": 0,
+            "corruption": 0,
+            "relation": 0
+          },
+          "flags": {},
+          "schedule": [],
+          "relationship": ""
+        },
+        "edf717c5-0c77-4867-8c4e-1a5db1e5b307": {
+          "name": "Rosa",
+          "portrait": "rosa.jpg",
+          "core_traits": {
+            "relation": 0
+          },
+          "flags": {},
+          "schedule": [],
+          "relationship": ""
+        },
+        "f0f3a75f-9eda-4fec-af5e-b8e89d126f51": {
+          "name": "Dee",
+          "portrait": "dee.jpg",
+          "core_traits": {
+            "arousal": 0,
+            "corruption": 0,
+            "relation": 0
+          },
+          "flags": {},
+          "schedule": [],
+          "relationship": ""
+        }
+      }
+    },
+    "$npc_interacted_today": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "{}",
+          "passage": "Start",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": {}
+    },
+    "$flags": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "{\"bar_seized\": false, \"game_started\": true, \"debug_mode\": false}",
+          "passage": "Start",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": {
+        "bar_seized": false,
+        "game_started": true,
+        "debug_mode": false
+      }
+    },
+    "$flags_meta": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "{}",
+          "passage": "Start",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": {}
+    },
+    "$game_state": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "{\n    \"current_canvas\": \"\",\n    \"visited_locations\": [],\n    \"visited_nodes\": [],\n    \"trigger_history\": {},\n    \"activity_trigger_history\": {},\n    \"visited_choices\": {},\n    \"active_modifiers\": {},\n    \"random_cooldowns\": {},\n    \"stage_advancement_log\": {},\n    \"quests\": {},\n    \"scheduled\": [],\n    \"fast_jobs\": { \"xp\": 0, \"cooldowns\": {} },\n    \"bank\": { \"balance\": 0 },\n    \"time_state\": {\n        \"current_hour\": 18,\n        \"current_minute\": 0,\n        \"current_day\": \"Monday\",\n        \"current_week\": 1,\n        \"day\": 1\n    },\n    \"rent_state\": {\n        \"last_paid_week\": 1,\n        \"warnings\": 0,\n        \"is_due\": false\n    }\n}",
+          "passage": "Start",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.last_paid_week",
+          "op": "to",
+          "value_expr": "$game_state.time_state.current_week",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.is_due",
+          "op": "to",
+          "value_expr": "false",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.warnings",
+          "op": "to",
+          "value_expr": "0",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.warnings",
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "$game_state.rent_state.warnings lt setup.rent_grace_periods",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.is_due",
+          "op": "to",
+          "value_expr": "false",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "$game_state.rent_state.warnings lt setup.rent_grace_periods",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.warnings",
+          "op": "to",
+          "value_expr": "0",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "!($game_state.rent_state.warnings lt setup.rent_grace_periods)",
+              "branch": "else"
+            },
+            {
+              "condition": "setup.rent_eviction_mode is \"flag_set\"",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.is_due",
+          "op": "to",
+          "value_expr": "false",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "!($game_state.rent_state.warnings lt setup.rent_grace_periods)",
+              "branch": "else"
+            },
+            {
+              "condition": "setup.rent_eviction_mode is \"flag_set\"",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"24218f8b-8fb8-4d4c-8ea1-a0c97bd7b7a2\"",
+          "passage": "StartingCanvas_canvas_first_night_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"0e43eef8-0978-494e-85b3-c9f90f42ae5d\"",
+          "passage": "StartingCanvas_canvas_first_night_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"90c68e15-776a-4c0e-9d78-80bb8242bb49\"",
+          "passage": "Canvas_sal_sex_finisher_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a37ab85e-2824-4a8d-a776-90b1c66fa918\"",
+          "passage": "Canvas_sal_sex_finisher_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ee76c0a7-c94a-460e-92f1-75f97eb53eb6\"",
+          "passage": "Canvas_sal_sex_loop_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"1cab2a1a-9c0f-48e2-91fa-42979a717bfd\"",
+          "passage": "Canvas_sal_sex_loop_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a527ce12-f237-4cf5-98f7-da66179907b2\"",
+          "passage": "Canvas_sal_sex_loop_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_4",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"723c17b6-5d00-4ec7-9184-1c24974864c1\"",
+          "passage": "Canvas_sal_sex_loop_Node_4",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_5",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"bcdb85e0-61f5-47e5-8e19-6f56370a0d45\"",
+          "passage": "Canvas_sal_sex_loop_Node_5",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_6",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6b2c0734-2af4-43c6-9b26-001a5bb86879\"",
+          "passage": "Canvas_sal_sex_loop_Node_6",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_7",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"41d6fa49-67fe-4364-902a-a59ea875e043\"",
+          "passage": "Canvas_sal_sex_loop_Node_7",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_8",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"26152946-ab83-40e9-ac3a-20b5fabd185e\"",
+          "passage": "Canvas_sal_sex_loop_Node_8",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_9",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"b7fb4679-c09c-4a5b-9f27-95a626334ac7\"",
+          "passage": "Canvas_sal_sex_loop_Node_9",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_10",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e1e60702-6724-4cce-b3b4-77267d4a8b76\"",
+          "passage": "Canvas_sal_sex_loop_Node_10",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_11",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"631364d1-fe60-44b7-851e-c3ec4ff08dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_11",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_12",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"29d0891c-523a-4ba6-90f3-78ae769be532\"",
+          "passage": "Canvas_sal_sex_loop_Node_12",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_13",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6c661b98-291b-4276-b570-721f8ee43b20\"",
+          "passage": "Canvas_sal_sex_loop_Node_13",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_14",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"fd893548-2cb0-4305-b147-2a7cdbe6953d\"",
+          "passage": "Canvas_sal_sex_loop_Node_14",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_15",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"c2b625d6-2016-4561-9619-455cd8ac641b\"",
+          "passage": "Canvas_sal_sex_loop_Node_15",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_16",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5bdb4e72-f9fd-442d-a009-29a99838d18d\"",
+          "passage": "Canvas_sal_sex_loop_Node_16",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_17",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d896d229-06a4-42cd-a0d6-d9f011f5ffeb\"",
+          "passage": "Canvas_sal_sex_loop_Node_17",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"154978d0-37d0-4d84-ad74-14cef1b11bba\"",
+          "passage": "Canvas_canvas_collision_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"b1a8ec45-55db-4577-b62f-ec338098c999\"",
+          "passage": "Canvas_canvas_collision_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6929f6bd-9e57-4a39-961e-981ba594ce97\"",
+          "passage": "Canvas_canvas_marcus_kept_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"13af1977-aace-4e86-853a-33fd4308fb3d\"",
+          "passage": "Canvas_canvas_marcus_kept_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"7fcff36e-ec8f-439e-a795-97cbdef718ba\"",
+          "passage": "Canvas_canvas_dee_standing_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"37d27d79-3fb6-48b2-92da-fd78927df467\"",
+          "passage": "Canvas_canvas_dee_standing_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5eeeb90b-7db2-4033-a9b9-8207d4bed30b\"",
+          "passage": "Canvas_canvas_sal_upstairs_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"dbed6239-9f94-4530-92f5-f016cdcea0c2\"",
+          "passage": "Canvas_canvas_sal_upstairs_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5a1ae218-c50b-435b-92af-35a0c5688db1\"",
+          "passage": "Canvas_canvas_collector_floorwalk_seized_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"80f90ac2-46f8-4be3-8fab-dc31c3d4104e\"",
+          "passage": "Canvas_canvas_collector_floorwalk_seized_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"11b5bb40-c260-4a8b-847b-45b523f88035\"",
+          "passage": "Canvas_canvas_collector_floorwalk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"3efcdf07-8146-421a-a763-3c97b64ecf97\"",
+          "passage": "Canvas_canvas_collector_floorwalk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"3d6f3d19-faf5-4b60-a3b2-aeba8d4e8205\"",
+          "passage": "Canvas_canvas_collector_coerce_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4174a861-90d5-4dae-b6b2-356f1a5c38cd\"",
+          "passage": "Canvas_canvas_collector_coerce_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"98f80784-a143-45ef-9d43-9aae8c07d54c\"",
+          "passage": "Canvas_canvas_collector_word_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ab753178-b7ff-40d5-9bfb-24e33aad3ec0\"",
+          "passage": "Canvas_canvas_collector_word_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"b4156014-722b-4345-bb12-d7252c0db78a\"",
+          "passage": "Canvas_canvas_collector_pressure_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"735059ed-fad5-4f33-bc9d-3a5fe3d6c28f\"",
+          "passage": "Canvas_canvas_collector_pressure_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"4861353a-3470-429e-ab94-7ac0a51c2887\"",
+          "passage": "Canvas_canvas_rosa_trust_talk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"796a71b6-6a88-4d29-911a-4938bfcdcee7\"",
+          "passage": "Canvas_canvas_rosa_trust_talk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d2f3a037-e2e7-4900-b7c3-618cf9f06f57\"",
+          "passage": "Canvas_canvas_rosa_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d91e82d0-d30f-4b26-bbc1-469ac809939a\"",
+          "passage": "Canvas_canvas_rosa_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"c59122d7-f4e2-4226-97ee-cc11f7431e58\"",
+          "passage": "Canvas_canvas_rosa_ropes_first_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"28339611-a467-4b6a-9d0e-2548377d9409\"",
+          "passage": "Canvas_canvas_rosa_ropes_first_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"e1d8f7f5-205c-4893-b112-b50e88e102ce\"",
+          "passage": "Canvas_canvas_marcus_arrangement_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a00ef4db-4dbd-4e2e-96d0-1796ae30d92d\"",
+          "passage": "Canvas_canvas_marcus_arrangement_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"442ee5d0-6668-46ad-98ef-bf03817c2aa7\"",
+          "passage": "Canvas_canvas_marcus_singled_out_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"540bf8ef-6d65-492b-8406-386ddbebd275\"",
+          "passage": "Canvas_canvas_marcus_singled_out_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"0d316103-66ae-4f56-a601-72a6b6fdf4ec\"",
+          "passage": "Canvas_canvas_marcus_ambient_hot_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d59fc366-b8d7-423b-97a9-8ddab098888b\"",
+          "passage": "Canvas_canvas_marcus_ambient_hot_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"abf21a10-414d-4d40-82e2-f4c637882974\"",
+          "passage": "Canvas_canvas_marcus_ambient_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"cdfb3e68-d00d-4451-838e-8fc01b777f8f\"",
+          "passage": "Canvas_canvas_marcus_ambient_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"66e222d4-9c08-49ca-8b39-4a9404ef98e5\"",
+          "passage": "Canvas_canvas_marcus_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"88615858-bdde-4971-8d33-dfd5cd3d15ea\"",
+          "passage": "Canvas_canvas_marcus_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"a16fc3c6-87a3-4379-ab19-ef3bb00f4748\"",
+          "passage": "Canvas_canvas_marcus_ropes_first_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"29d3f1d6-16ba-463b-b754-de586097ca44\"",
+          "passage": "Canvas_canvas_marcus_ropes_first_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"3fa6267e-d283-4a6e-b5a2-e1b291cd6a2f\"",
+          "passage": "Canvas_canvas_dee_dock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"23bbe05a-b6f6-4ad8-9b22-e31bacabe089\"",
+          "passage": "Canvas_canvas_dee_dock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"8b92e125-4118-425d-a8b7-ca9671c99081\"",
+          "passage": "Canvas_canvas_dee_terms_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"124765fe-4b43-454b-ac89-1f282d4133cd\"",
+          "passage": "Canvas_canvas_dee_terms_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"298ab42c-4c5f-45fa-a586-21d91b61761f\"",
+          "passage": "Canvas_canvas_dee_ambient_hot_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6aa8bf16-a00d-41da-990a-226e2320e8d2\"",
+          "passage": "Canvas_canvas_dee_ambient_hot_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"487d26d2-8cf8-447b-80d2-c7664fc207b5\"",
+          "passage": "Canvas_canvas_dee_ambient_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"bc7633a0-86d8-4cb8-abda-584bb33d053a\"",
+          "passage": "Canvas_canvas_dee_ambient_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"b8e423d2-6140-4f63-bf6b-6c0de0443396\"",
+          "passage": "Canvas_canvas_dee_cellar_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6034e001-8cd2-4658-8514-f6b44a2b2dbe\"",
+          "passage": "Canvas_canvas_dee_cellar_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5ae746e0-f8fc-4a84-a85f-cc0afe5d4cfa\"",
+          "passage": "Canvas_canvas_dee_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"1b08bf0e-6417-43f6-98db-88e1e9f638e5\"",
+          "passage": "Canvas_canvas_dee_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"52653aca-0119-40b0-8bdd-374891c80e42\"",
+          "passage": "Canvas_canvas_dee_ropes_first_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ab44b65e-9b5e-434f-8b94-8208565eb422\"",
+          "passage": "Canvas_canvas_dee_ropes_first_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"87c42578-b1ab-44cc-9e1b-f8cb424aae35\"",
+          "passage": "Canvas_canvas_shark_place_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"87b8aaba-2538-4958-81e7-1169196ad0da\"",
+          "passage": "Canvas_canvas_shark_place_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"dddded0f-4fb2-45b9-a873-5f972b3a022d\"",
+          "passage": "Canvas_canvas_shark_summons_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"80cd1077-0883-4e3e-8ece-d93c20402c02\"",
+          "passage": "Canvas_canvas_shark_summons_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"1b72bf4b-f836-4fcc-b9a2-49c0adf1c737\"",
+          "passage": "Canvas_canvas_bar_ambient_hot_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4de97f56-8c7f-49df-86fe-c56f084d8549\"",
+          "passage": "Canvas_canvas_bar_ambient_hot_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6a91def2-0256-4c97-8182-d3a819d377d1\"",
+          "passage": "Canvas_canvas_bar_ambient_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"bb88e1e2-5991-4845-9cdb-c308b0569550\"",
+          "passage": "Canvas_canvas_bar_ambient_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5bf08a04-0c13-413c-b8dc-14e935f157ae\"",
+          "passage": "Canvas_canvas_work_walkin_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ba6b687d-498f-492e-929e-ed9da913f75f\"",
+          "passage": "Canvas_canvas_work_walkin_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"e5334a25-edb1-45e0-bbea-f515a2b33b30\"",
+          "passage": "Canvas_canvas_work_shift_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"779f0d89-4586-4f74-a4dd-c53cbe277865\"",
+          "passage": "Canvas_canvas_work_shift_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"94e6ebfa-6ceb-4709-8b26-fd767c75f751\"",
+          "passage": "Canvas_canvas_sal_after_hours_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"8d728147-f095-4f20-b3db-8b9d4b41c837\"",
+          "passage": "Canvas_canvas_sal_after_hours_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ccdfa804-6665-49a0-adf0-fd40b6608016\"",
+          "passage": "Canvas_canvas_sal_afterhours_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"beec042f-a093-457b-ab36-3b9e9fc027dc\"",
+          "passage": "Canvas_canvas_sal_afterhours_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5aacdf10-fbb3-4d1d-a3e0-26842f075724\"",
+          "passage": "Canvas_canvas_sal_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"48578ef8-f6f9-497b-909a-37203776eca4\"",
+          "passage": "Canvas_canvas_sal_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"9bfdcb8e-6172-488d-ad85-ad12197b5adb\"",
+          "passage": "Canvas_canvas_sal_ropes_first_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e6a731e3-574a-4eb7-89c3-b39017b1073e\"",
+          "passage": "Canvas_canvas_sal_ropes_first_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"11158b31-5fa1-4727-8d4b-2ca57f6d799e\"",
+          "passage": "Canvas_canvas_reckoning_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"606f3baa-4ca0-4b68-b9b5-4a1ca877cd17\"",
+          "passage": "Canvas_canvas_reckoning_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ee8e84b0-f747-4bcc-8ae3-a45c2bdfc273\"",
+          "passage": "Canvas_activity_restock_cellar_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6b53f7ca-18ac-48ca-98ae-09423e49a3bf\"",
+          "passage": "Canvas_activity_restock_cellar_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"e1feefde-7db0-457e-88ee-d707b30cc382\"",
+          "passage": "Canvas_activity_clean_up_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"cab19cea-9cce-459d-b41b-93a9157ad35a\"",
+          "passage": "Canvas_activity_clean_up_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ed60f674-f018-4c97-bf22-bc00d48d6e39\"",
+          "passage": "Canvas_activity_shower_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ba0a8338-ef23-4676-84d3-140dd5b6c546\"",
+          "passage": "Canvas_activity_shower_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"076f610c-29fe-4c9b-86c1-b84242273001\"",
+          "passage": "Canvas_canvas_sleep_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"9d2e8eb6-2007-44f1-b02d-2c47a55b934b\"",
+          "passage": "Canvas_canvas_sleep_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"c6bc5ba3-0d10-40db-8ffe-e9064cccc69b\"",
+          "passage": "Canvas_canvas_ending_owned_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a8d5f2b5-c5b0-4076-98e3-f5685de07167\"",
+          "passage": "Canvas_canvas_ending_owned_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"a3b72f1e-b1e1-4f65-95fd-14da238b6bd8\"",
+          "passage": "Canvas_canvas_ending_kept_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"dba571c0-d735-4217-a285-8d35dc918001\"",
+          "passage": "Canvas_canvas_ending_kept_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5bbc596a-0d09-460b-be1e-b658e0d90c3e\"",
+          "passage": "Canvas_canvas_ending_clean_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4173f624-a011-4bc1-a08d-0278ae5c58ab\"",
+          "passage": "Canvas_canvas_ending_clean_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"87457dc6-d04c-482a-ad4a-82f7aa15eef2\"",
+          "passage": "Canvas_canvas_ending_clean_sal_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"56e77b26-4e87-4328-bd4b-a75503549ad2\"",
+          "passage": "Canvas_canvas_ending_clean_sal_Node_1",
+          "gate": []
+        }
+      ],
+      "unsetters": [],
+      "initial_value": {
+        "current_canvas": "",
+        "visited_locations": [],
+        "visited_nodes": [],
+        "trigger_history": {},
+        "activity_trigger_history": {},
+        "visited_choices": {},
+        "active_modifiers": {},
+        "random_cooldowns": {},
+        "stage_advancement_log": {},
+        "quests": {},
+        "scheduled": [],
+        "fast_jobs": {
+          "xp": 0,
+          "cooldowns": {}
+        },
+        "bank": {
+          "balance": 0
+        },
+        "time_state": {
+          "current_hour": 18,
+          "current_minute": 0,
+          "current_day": "Monday",
+          "current_week": 1,
+          "day": 1
+        },
+        "rent_state": {
+          "last_paid_week": 1,
+          "warnings": 0,
+          "is_due": false
+        }
+      }
+    },
+    "_goals": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.pickQuestsCards(\"story_goals\")",
+          "passage": "QuestsPage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_helpData": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.help_data || {}",
+          "passage": "QuestsPage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_hasNpcs": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "_helpData.npcs && Object.keys(_helpData.npcs).length > 0",
+          "passage": "QuestsPage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_slug": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.npcSlugForId(_npcId)",
+          "passage": "QuestsPage",
+          "gate": [
+            {
+              "condition": "_hasNpcs",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_card": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "_slug ? setup.pickQuestsCard(_slug) : null",
+          "passage": "QuestsPage",
+          "gate": [
+            {
+              "condition": "_hasNpcs",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_tp": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.tips_page || {}",
+          "passage": "TipsPage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_position": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.detectStoryPosition()",
+          "passage": "StoryJournal",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_hint": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.generateNarrativeHint()",
+          "passage": "StoryJournal",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_incompleteGroups": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "_position.active_groups.filter(function(g) { return !g.isComplete && g.completed > 0; })",
+          "passage": "StoryJournal",
+          "gate": [
+            {
+              "condition": "_position.active_groups.length > 0",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_state": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.interpretNpcState(_npcId)",
+          "passage": "StoryJournal",
+          "gate": [
+            {
+              "condition": "Object.keys($npcs).length > 0",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_money": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "$player.core_traits.money || 0",
+          "passage": "RentDay",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_rent": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.rent_amount",
+          "passage": "RentDay",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_rt": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.rent_text || {}",
+          "passage": "RentDay",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.rent_text || {}",
+          "passage": "RentDay_Paid",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.rent_text || {}",
+          "passage": "RentDay_Short",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_collectorName": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "\"the landlord\"",
+          "passage": "RentDay",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_npcData.name",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            },
+            {
+              "condition": "_npcData && _npcData.name",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "\"the landlord\"",
+          "passage": "RentDay_Paid",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_npcData.name",
+          "passage": "RentDay_Paid",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            },
+            {
+              "condition": "_npcData && _npcData.name",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "\"the landlord\"",
+          "passage": "RentDay_Short",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_npcData.name",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            },
+            {
+              "condition": "_npcData && _npcData.name",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_npcPortrait": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "\"\"",
+          "passage": "RentDay",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_npcData.portrait || \"\"",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            },
+            {
+              "condition": "_npcData && _npcData.name",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_npcId": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.npc_slug_map[setup.rent_collector_npc]",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.npc_slug_map[setup.rent_collector_npc]",
+          "passage": "RentDay_Paid",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.npc_slug_map[setup.rent_collector_npc]",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_npcInfo.id",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_npcData": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "$npcs[_npcId]",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "$npcs[_npcId]",
+          "passage": "RentDay_Paid",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "$npcs[_npcId]",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "setup.rent_collector_npc && setup.npc_slug_map[setup.rent_collector_npc]",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_payText": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "\"Pay $\" + _rent + \" rent\"",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$player.core_traits.money": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": ".core_traits.money",
+          "op": "-=",
+          "value_expr": "_rent",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$game_state.rent_state.last_paid_week": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.last_paid_week",
+          "op": "to",
+          "value_expr": "$game_state.time_state.current_week",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$game_state.rent_state.is_due": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.is_due",
+          "op": "to",
+          "value_expr": "false",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.is_due",
+          "op": "to",
+          "value_expr": "false",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "$game_state.rent_state.warnings lt setup.rent_grace_periods",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.is_due",
+          "op": "to",
+          "value_expr": "false",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "!($game_state.rent_state.warnings lt setup.rent_grace_periods)",
+              "branch": "else"
+            },
+            {
+              "condition": "setup.rent_eviction_mode is \"flag_set\"",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$game_state.rent_state.warnings": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.warnings",
+          "op": "to",
+          "value_expr": "0",
+          "passage": "RentDay",
+          "gate": [
+            {
+              "condition": "_money gte _rent",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.warnings",
+          "op": "+=",
+          "value_expr": "1",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "$game_state.rent_state.warnings lt setup.rent_grace_periods",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": ".rent_state.warnings",
+          "op": "to",
+          "value_expr": "0",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "!($game_state.rent_state.warnings lt setup.rent_grace_periods)",
+              "branch": "else"
+            },
+            {
+              "condition": "setup.rent_eviction_mode is \"flag_set\"",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_cantPayText": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "(_rt.cant_pay || \"Tell them you can't pay\")",
+          "passage": "RentDay",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_returnTo": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "(State.variables.last_game_passage || \"Navigation\")",
+          "passage": "RentDay_Paid",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "(State.variables.last_game_passage || \"Navigation\")",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "$game_state.rent_state.warnings lt setup.rent_grace_periods",
+              "branch": "if"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "(State.variables.last_game_passage || \"Navigation\")",
+          "passage": "RentDay_Short",
+          "gate": [
+            {
+              "condition": "!($game_state.rent_state.warnings lt setup.rent_grace_periods)",
+              "branch": "else"
+            },
+            {
+              "condition": "setup.rent_eviction_mode is \"flag_set\"",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_currentDay": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "$game_state.time_state.current_day",
+          "passage": "SchedulePage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_todayIndex": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "[\"Monday\", \"Tuesday\", \"Wednesday\", \"Thursday\", \"Friday\", \"Saturday\", \"Sunday\"].indexOf(_currentDay)",
+          "passage": "SchedulePage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_npcsWithSchedules": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.getNpcsWithSchedules()",
+          "passage": "SchedulePage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_npcName": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_npcInfo.name",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_currentLoc": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.getNpcLocation(_npcId)",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_allSchedules": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.getNpcAllSchedulesSorted(_npcId)",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_locName": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "(setup.locations[_currentLoc.location] && setup.locations[_currentLoc.location].name) || setup._locNameFromUuid(_currentLoc.location) || _currentLoc.location",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            },
+            {
+              "condition": "_currentLoc",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_isCurrent": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.isCurrentTimeSlot(_sch.start_time, _sch.end_time) && setup._weekdayMatches(_sch.weekdays, _todayIndex)",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            },
+            {
+              "condition": "!(_allSchedules.length === 0)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_rowClass": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_isCurrent ? \"current-slot\" : \"\"",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            },
+            {
+              "condition": "!(_allSchedules.length === 0)",
+              "branch": "else"
+            }
+          ]
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_act.isCurrent ? \"current-slot\" : \"\"",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "_soloActivities.length > 0",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_schLocName": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "(setup.locations[_sch.location] && setup.locations[_sch.location].name) || _sch.location",
+          "passage": "SchedulePage",
+          "gate": [
+            {
+              "condition": "!(_npcsWithSchedules.length === 0)",
+              "branch": "else"
+            },
+            {
+              "condition": "!(_allSchedules.length === 0)",
+              "branch": "else"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_soloActivities": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "setup.getSoloActivitiesAllSchedules()",
+          "passage": "SchedulePage",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "_gkeys": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "Object.keys($flags).sort()",
+          "passage": "FlagsPage",
+          "gate": [
+            {
+              "condition": "$flags && Object.keys($flags).length > 0",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_gk": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "to",
+          "value_expr": "_gkeys[_i]",
+          "passage": "FlagsPage",
+          "gate": [
+            {
+              "condition": "$flags && Object.keys($flags).length > 0",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "$game_state.current_canvas": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"24218f8b-8fb8-4d4c-8ea1-a0c97bd7b7a2\"",
+          "passage": "StartingCanvas_canvas_first_night_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"90c68e15-776a-4c0e-9d78-80bb8242bb49\"",
+          "passage": "Canvas_sal_sex_finisher_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_4",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_5",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_6",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_7",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_8",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_9",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_10",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_11",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_12",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_13",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_14",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_15",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_16",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ce448434-5e3e-4b50-8822-3b9a75567dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_17",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"154978d0-37d0-4d84-ad74-14cef1b11bba\"",
+          "passage": "Canvas_canvas_collision_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6929f6bd-9e57-4a39-961e-981ba594ce97\"",
+          "passage": "Canvas_canvas_marcus_kept_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"7fcff36e-ec8f-439e-a795-97cbdef718ba\"",
+          "passage": "Canvas_canvas_dee_standing_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5eeeb90b-7db2-4033-a9b9-8207d4bed30b\"",
+          "passage": "Canvas_canvas_sal_upstairs_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5a1ae218-c50b-435b-92af-35a0c5688db1\"",
+          "passage": "Canvas_canvas_collector_floorwalk_seized_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"11b5bb40-c260-4a8b-847b-45b523f88035\"",
+          "passage": "Canvas_canvas_collector_floorwalk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"3d6f3d19-faf5-4b60-a3b2-aeba8d4e8205\"",
+          "passage": "Canvas_canvas_collector_coerce_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"98f80784-a143-45ef-9d43-9aae8c07d54c\"",
+          "passage": "Canvas_canvas_collector_word_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"b4156014-722b-4345-bb12-d7252c0db78a\"",
+          "passage": "Canvas_canvas_collector_pressure_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"4861353a-3470-429e-ab94-7ac0a51c2887\"",
+          "passage": "Canvas_canvas_rosa_trust_talk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"d2f3a037-e2e7-4900-b7c3-618cf9f06f57\"",
+          "passage": "Canvas_canvas_rosa_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"c59122d7-f4e2-4226-97ee-cc11f7431e58\"",
+          "passage": "Canvas_canvas_rosa_ropes_first_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"e1d8f7f5-205c-4893-b112-b50e88e102ce\"",
+          "passage": "Canvas_canvas_marcus_arrangement_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"442ee5d0-6668-46ad-98ef-bf03817c2aa7\"",
+          "passage": "Canvas_canvas_marcus_singled_out_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"0d316103-66ae-4f56-a601-72a6b6fdf4ec\"",
+          "passage": "Canvas_canvas_marcus_ambient_hot_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"abf21a10-414d-4d40-82e2-f4c637882974\"",
+          "passage": "Canvas_canvas_marcus_ambient_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"66e222d4-9c08-49ca-8b39-4a9404ef98e5\"",
+          "passage": "Canvas_canvas_marcus_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"a16fc3c6-87a3-4379-ab19-ef3bb00f4748\"",
+          "passage": "Canvas_canvas_marcus_ropes_first_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"3fa6267e-d283-4a6e-b5a2-e1b291cd6a2f\"",
+          "passage": "Canvas_canvas_dee_dock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"8b92e125-4118-425d-a8b7-ca9671c99081\"",
+          "passage": "Canvas_canvas_dee_terms_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"298ab42c-4c5f-45fa-a586-21d91b61761f\"",
+          "passage": "Canvas_canvas_dee_ambient_hot_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"487d26d2-8cf8-447b-80d2-c7664fc207b5\"",
+          "passage": "Canvas_canvas_dee_ambient_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"b8e423d2-6140-4f63-bf6b-6c0de0443396\"",
+          "passage": "Canvas_canvas_dee_cellar_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5ae746e0-f8fc-4a84-a85f-cc0afe5d4cfa\"",
+          "passage": "Canvas_canvas_dee_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"52653aca-0119-40b0-8bdd-374891c80e42\"",
+          "passage": "Canvas_canvas_dee_ropes_first_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"87c42578-b1ab-44cc-9e1b-f8cb424aae35\"",
+          "passage": "Canvas_canvas_shark_place_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"dddded0f-4fb2-45b9-a873-5f972b3a022d\"",
+          "passage": "Canvas_canvas_shark_summons_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"1b72bf4b-f836-4fcc-b9a2-49c0adf1c737\"",
+          "passage": "Canvas_canvas_bar_ambient_hot_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"6a91def2-0256-4c97-8182-d3a819d377d1\"",
+          "passage": "Canvas_canvas_bar_ambient_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5bf08a04-0c13-413c-b8dc-14e935f157ae\"",
+          "passage": "Canvas_canvas_work_walkin_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"e5334a25-edb1-45e0-bbea-f515a2b33b30\"",
+          "passage": "Canvas_canvas_work_shift_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"94e6ebfa-6ceb-4709-8b26-fd767c75f751\"",
+          "passage": "Canvas_canvas_sal_after_hours_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ccdfa804-6665-49a0-adf0-fd40b6608016\"",
+          "passage": "Canvas_canvas_sal_afterhours_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5aacdf10-fbb3-4d1d-a3e0-26842f075724\"",
+          "passage": "Canvas_canvas_sal_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"9bfdcb8e-6172-488d-ad85-ad12197b5adb\"",
+          "passage": "Canvas_canvas_sal_ropes_first_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"11158b31-5fa1-4727-8d4b-2ca57f6d799e\"",
+          "passage": "Canvas_canvas_reckoning_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ee8e84b0-f747-4bcc-8ae3-a45c2bdfc273\"",
+          "passage": "Canvas_activity_restock_cellar_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"e1feefde-7db0-457e-88ee-d707b30cc382\"",
+          "passage": "Canvas_activity_clean_up_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"ed60f674-f018-4c97-bf22-bc00d48d6e39\"",
+          "passage": "Canvas_activity_shower_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"076f610c-29fe-4c9b-86c1-b84242273001\"",
+          "passage": "Canvas_canvas_sleep_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"c6bc5ba3-0d10-40db-8ffe-e9064cccc69b\"",
+          "passage": "Canvas_canvas_ending_owned_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"a3b72f1e-b1e1-4f65-95fd-14da238b6bd8\"",
+          "passage": "Canvas_canvas_ending_kept_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"5bbc596a-0d09-460b-be1e-b658e0d90c3e\"",
+          "passage": "Canvas_canvas_ending_clean_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_canvas",
+          "op": "=",
+          "value_expr": "\"87457dc6-d04c-482a-ad4a-82f7aa15eef2\"",
+          "passage": "Canvas_canvas_ending_clean_sal_Node_1",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$game_state.current_node": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"0e43eef8-0978-494e-85b3-c9f90f42ae5d\"",
+          "passage": "StartingCanvas_canvas_first_night_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a37ab85e-2824-4a8d-a776-90b1c66fa918\"",
+          "passage": "Canvas_sal_sex_finisher_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ee76c0a7-c94a-460e-92f1-75f97eb53eb6\"",
+          "passage": "Canvas_sal_sex_loop_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"1cab2a1a-9c0f-48e2-91fa-42979a717bfd\"",
+          "passage": "Canvas_sal_sex_loop_Node_2",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a527ce12-f237-4cf5-98f7-da66179907b2\"",
+          "passage": "Canvas_sal_sex_loop_Node_3",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"723c17b6-5d00-4ec7-9184-1c24974864c1\"",
+          "passage": "Canvas_sal_sex_loop_Node_4",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"bcdb85e0-61f5-47e5-8e19-6f56370a0d45\"",
+          "passage": "Canvas_sal_sex_loop_Node_5",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6b2c0734-2af4-43c6-9b26-001a5bb86879\"",
+          "passage": "Canvas_sal_sex_loop_Node_6",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"41d6fa49-67fe-4364-902a-a59ea875e043\"",
+          "passage": "Canvas_sal_sex_loop_Node_7",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"26152946-ab83-40e9-ac3a-20b5fabd185e\"",
+          "passage": "Canvas_sal_sex_loop_Node_8",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"b7fb4679-c09c-4a5b-9f27-95a626334ac7\"",
+          "passage": "Canvas_sal_sex_loop_Node_9",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e1e60702-6724-4cce-b3b4-77267d4a8b76\"",
+          "passage": "Canvas_sal_sex_loop_Node_10",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"631364d1-fe60-44b7-851e-c3ec4ff08dde\"",
+          "passage": "Canvas_sal_sex_loop_Node_11",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"29d0891c-523a-4ba6-90f3-78ae769be532\"",
+          "passage": "Canvas_sal_sex_loop_Node_12",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6c661b98-291b-4276-b570-721f8ee43b20\"",
+          "passage": "Canvas_sal_sex_loop_Node_13",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"fd893548-2cb0-4305-b147-2a7cdbe6953d\"",
+          "passage": "Canvas_sal_sex_loop_Node_14",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"c2b625d6-2016-4561-9619-455cd8ac641b\"",
+          "passage": "Canvas_sal_sex_loop_Node_15",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"5bdb4e72-f9fd-442d-a009-29a99838d18d\"",
+          "passage": "Canvas_sal_sex_loop_Node_16",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d896d229-06a4-42cd-a0d6-d9f011f5ffeb\"",
+          "passage": "Canvas_sal_sex_loop_Node_17",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"b1a8ec45-55db-4577-b62f-ec338098c999\"",
+          "passage": "Canvas_canvas_collision_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"13af1977-aace-4e86-853a-33fd4308fb3d\"",
+          "passage": "Canvas_canvas_marcus_kept_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"37d27d79-3fb6-48b2-92da-fd78927df467\"",
+          "passage": "Canvas_canvas_dee_standing_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"dbed6239-9f94-4530-92f5-f016cdcea0c2\"",
+          "passage": "Canvas_canvas_sal_upstairs_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"80f90ac2-46f8-4be3-8fab-dc31c3d4104e\"",
+          "passage": "Canvas_canvas_collector_floorwalk_seized_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"3efcdf07-8146-421a-a763-3c97b64ecf97\"",
+          "passage": "Canvas_canvas_collector_floorwalk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4174a861-90d5-4dae-b6b2-356f1a5c38cd\"",
+          "passage": "Canvas_canvas_collector_coerce_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ab753178-b7ff-40d5-9bfb-24e33aad3ec0\"",
+          "passage": "Canvas_canvas_collector_word_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"735059ed-fad5-4f33-bc9d-3a5fe3d6c28f\"",
+          "passage": "Canvas_canvas_collector_pressure_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"796a71b6-6a88-4d29-911a-4938bfcdcee7\"",
+          "passage": "Canvas_canvas_rosa_trust_talk_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d91e82d0-d30f-4b26-bbc1-469ac809939a\"",
+          "passage": "Canvas_canvas_rosa_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"28339611-a467-4b6a-9d0e-2548377d9409\"",
+          "passage": "Canvas_canvas_rosa_ropes_first_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a00ef4db-4dbd-4e2e-96d0-1796ae30d92d\"",
+          "passage": "Canvas_canvas_marcus_arrangement_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"540bf8ef-6d65-492b-8406-386ddbebd275\"",
+          "passage": "Canvas_canvas_marcus_singled_out_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"d59fc366-b8d7-423b-97a9-8ddab098888b\"",
+          "passage": "Canvas_canvas_marcus_ambient_hot_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"cdfb3e68-d00d-4451-838e-8fc01b777f8f\"",
+          "passage": "Canvas_canvas_marcus_ambient_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"88615858-bdde-4971-8d33-dfd5cd3d15ea\"",
+          "passage": "Canvas_canvas_marcus_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"29d3f1d6-16ba-463b-b754-de586097ca44\"",
+          "passage": "Canvas_canvas_marcus_ropes_first_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"23bbe05a-b6f6-4ad8-9b22-e31bacabe089\"",
+          "passage": "Canvas_canvas_dee_dock_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"124765fe-4b43-454b-ac89-1f282d4133cd\"",
+          "passage": "Canvas_canvas_dee_terms_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6aa8bf16-a00d-41da-990a-226e2320e8d2\"",
+          "passage": "Canvas_canvas_dee_ambient_hot_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"bc7633a0-86d8-4cb8-abda-584bb33d053a\"",
+          "passage": "Canvas_canvas_dee_ambient_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6034e001-8cd2-4658-8514-f6b44a2b2dbe\"",
+          "passage": "Canvas_canvas_dee_cellar_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"1b08bf0e-6417-43f6-98db-88e1e9f638e5\"",
+          "passage": "Canvas_canvas_dee_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ab44b65e-9b5e-434f-8b94-8208565eb422\"",
+          "passage": "Canvas_canvas_dee_ropes_first_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"87b8aaba-2538-4958-81e7-1169196ad0da\"",
+          "passage": "Canvas_canvas_shark_place_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"80cd1077-0883-4e3e-8ece-d93c20402c02\"",
+          "passage": "Canvas_canvas_shark_summons_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4de97f56-8c7f-49df-86fe-c56f084d8549\"",
+          "passage": "Canvas_canvas_bar_ambient_hot_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"bb88e1e2-5991-4845-9cdb-c308b0569550\"",
+          "passage": "Canvas_canvas_bar_ambient_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ba6b687d-498f-492e-929e-ed9da913f75f\"",
+          "passage": "Canvas_canvas_work_walkin_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"779f0d89-4586-4f74-a4dd-c53cbe277865\"",
+          "passage": "Canvas_canvas_work_shift_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"8d728147-f095-4f20-b3db-8b9d4b41c837\"",
+          "passage": "Canvas_canvas_sal_after_hours_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"beec042f-a093-457b-ab36-3b9e9fc027dc\"",
+          "passage": "Canvas_canvas_sal_afterhours_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"48578ef8-f6f9-497b-909a-37203776eca4\"",
+          "passage": "Canvas_canvas_sal_hub_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"e6a731e3-574a-4eb7-89c3-b39017b1073e\"",
+          "passage": "Canvas_canvas_sal_ropes_first_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"606f3baa-4ca0-4b68-b9b5-4a1ca877cd17\"",
+          "passage": "Canvas_canvas_reckoning_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"6b53f7ca-18ac-48ca-98ae-09423e49a3bf\"",
+          "passage": "Canvas_activity_restock_cellar_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"cab19cea-9cce-459d-b41b-93a9157ad35a\"",
+          "passage": "Canvas_activity_clean_up_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"ba0a8338-ef23-4676-84d3-140dd5b6c546\"",
+          "passage": "Canvas_activity_shower_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"9d2e8eb6-2007-44f1-b02d-2c47a55b934b\"",
+          "passage": "Canvas_canvas_sleep_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"a8d5f2b5-c5b0-4076-98e3-f5685de07167\"",
+          "passage": "Canvas_canvas_ending_owned_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"dba571c0-d735-4217-a285-8d35dc918001\"",
+          "passage": "Canvas_canvas_ending_kept_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"4173f624-a011-4bc1-a08d-0278ae5c58ab\"",
+          "passage": "Canvas_canvas_ending_clean_Node_1",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_node",
+          "op": "=",
+          "value_expr": "\"56e77b26-4e87-4328-bd4b-a75503549ad2\"",
+          "passage": "Canvas_canvas_ending_clean_sal_Node_1",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$player.current_location": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"b0c8a9e1-8998-4bb3-8ff1-89c71e5d6a87\"",
+          "passage": "Location_The_Last_Call",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"2f5dc0cf-1ad3-43e5-bc7d-2b4ffc2d2a5a\"",
+          "passage": "Location_The_Kitchen",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"5661a7c0-0faa-43f7-8855-53f5c6272564\"",
+          "passage": "Location_The_Back_Office",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"8d592234-2888-4a4a-852a-c8ff853ca7a6\"",
+          "passage": "Location_The_Cellar",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"9306e030-fd20-4d5a-9a63-03c1abfd2ec8\"",
+          "passage": "Location_The_Apartment",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"3568a580-1ef8-4657-ae1f-f8e0a52e2253\"",
+          "passage": "Location_Main_Street",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"cecf4537-b53b-4f1c-8afc-95ff39ee06a7\"",
+          "passage": "Location_The_Bank",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"d2b2a79a-cfec-44f8-9add-2d91ce0fac51\"",
+          "passage": "Location_Reece's",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"884c460b-7e14-4931-bd4b-8ef63453e37d\"",
+          "passage": "Location_The_Depot",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"9962bc72-c1cf-4be7-86f5-5139d7435d3e\"",
+          "passage": "Location_Sal's_place",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"f49bf6ed-5625-475a-bf36-2a4c6eaee61a\"",
+          "passage": "Location_Uptown",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"5c8d40e3-f809-47ee-bfbf-4c2ee0bc5b91\"",
+          "passage": "Location_Rosa's_place",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"d489f038-0681-40ec-ae6d-51bc07a61ecb\"",
+          "passage": "Location_Across_the_river",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": ".current_location",
+          "op": "=",
+          "value_expr": "\"1345b7a7-7dcd-48db-a89e-d4a006d3716b\"",
+          "passage": "Location_Boyd's_Place",
+          "gate": [
+            {
+              "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"summoned_by_shark\", \"operator\": \"is_true\"}]})",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_autoFire": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"b0c8a9e1-8998-4bb3-8ff1-89c71e5d6a87\")",
+          "passage": "Location_The_Last_Call",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"2f5dc0cf-1ad3-43e5-bc7d-2b4ffc2d2a5a\")",
+          "passage": "Location_The_Kitchen",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"5661a7c0-0faa-43f7-8855-53f5c6272564\")",
+          "passage": "Location_The_Back_Office",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"8d592234-2888-4a4a-852a-c8ff853ca7a6\")",
+          "passage": "Location_The_Cellar",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"9306e030-fd20-4d5a-9a63-03c1abfd2ec8\")",
+          "passage": "Location_The_Apartment",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"3568a580-1ef8-4657-ae1f-f8e0a52e2253\")",
+          "passage": "Location_Main_Street",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"cecf4537-b53b-4f1c-8afc-95ff39ee06a7\")",
+          "passage": "Location_The_Bank",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"d2b2a79a-cfec-44f8-9add-2d91ce0fac51\")",
+          "passage": "Location_Reece's",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"884c460b-7e14-4931-bd4b-8ef63453e37d\")",
+          "passage": "Location_The_Depot",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"9962bc72-c1cf-4be7-86f5-5139d7435d3e\")",
+          "passage": "Location_Sal's_place",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"f49bf6ed-5625-475a-bf36-2a4c6eaee61a\")",
+          "passage": "Location_Uptown",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"5c8d40e3-f809-47ee-bfbf-4c2ee0bc5b91\")",
+          "passage": "Location_Rosa's_place",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"d489f038-0681-40ec-ae6d-51bc07a61ecb\")",
+          "passage": "Location_Across_the_river",
+          "gate": []
+        },
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.getStoryCanvasRedirect(\"1345b7a7-7dcd-48db-a89e-d4a006d3716b\")",
+          "passage": "Location_Boyd's_Place",
+          "gate": [
+            {
+              "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"summoned_by_shark\", \"operator\": \"is_true\"}]})",
+              "branch": "if"
+            }
+          ]
+        }
+      ],
+      "unsetters": []
+    },
+    "_sub_target": {
+      "setters": [
+        {
+          "kind": "passage_body",
+          "path": null,
+          "op": "=",
+          "value_expr": "setup.checkAndSubstituteCanvas(\"e5334a25-edb1-45e0-bbea-f515a2b33b30\")",
+          "passage": "Canvas_canvas_work_shift_Node_1",
+          "gate": []
+        }
+      ],
+      "unsetters": []
+    },
+    "$last_game_passage": {
+      "setters": [],
+      "unsetters": [],
+      "initial_value": "Start"
+    }
+  },
+  "complex_setters": [
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"b0c8a9e1-8998-4bb3-8ff1-89c71e5d6a87\")",
+      "passage": "Location_The_Last_Call",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"b0c8a9e1-8998-4bb3-8ff1-89c71e5d6a87\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"2f5dc0cf-1ad3-43e5-bc7d-2b4ffc2d2a5a\")",
+      "passage": "Location_The_Kitchen",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"2f5dc0cf-1ad3-43e5-bc7d-2b4ffc2d2a5a\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"5661a7c0-0faa-43f7-8855-53f5c6272564\")",
+      "passage": "Location_The_Back_Office",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"5661a7c0-0faa-43f7-8855-53f5c6272564\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"8d592234-2888-4a4a-852a-c8ff853ca7a6\")",
+      "passage": "Location_The_Cellar",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"8d592234-2888-4a4a-852a-c8ff853ca7a6\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"9306e030-fd20-4d5a-9a63-03c1abfd2ec8\")",
+      "passage": "Location_The_Apartment",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"9306e030-fd20-4d5a-9a63-03c1abfd2ec8\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"3568a580-1ef8-4657-ae1f-f8e0a52e2253\")",
+      "passage": "Location_Main_Street",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"3568a580-1ef8-4657-ae1f-f8e0a52e2253\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"cecf4537-b53b-4f1c-8afc-95ff39ee06a7\")",
+      "passage": "Location_The_Bank",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"cecf4537-b53b-4f1c-8afc-95ff39ee06a7\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"d2b2a79a-cfec-44f8-9add-2d91ce0fac51\")",
+      "passage": "Location_Reece's",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"d2b2a79a-cfec-44f8-9add-2d91ce0fac51\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"884c460b-7e14-4931-bd4b-8ef63453e37d\")",
+      "passage": "Location_The_Depot",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"884c460b-7e14-4931-bd4b-8ef63453e37d\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"9962bc72-c1cf-4be7-86f5-5139d7435d3e\")",
+      "passage": "Location_Sal's_place",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"9962bc72-c1cf-4be7-86f5-5139d7435d3e\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"f49bf6ed-5625-475a-bf36-2a4c6eaee61a\")",
+      "passage": "Location_Uptown",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"f49bf6ed-5625-475a-bf36-2a4c6eaee61a\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"5c8d40e3-f809-47ee-bfbf-4c2ee0bc5b91\")",
+      "passage": "Location_Rosa's_place",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"5c8d40e3-f809-47ee-bfbf-4c2ee0bc5b91\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"d489f038-0681-40ec-ae6d-51bc07a61ecb\")",
+      "passage": "Location_Across_the_river",
+      "gate": [
+        {
+          "condition": "not $game_state.visited_locations.includes(\"d489f038-0681-40ec-ae6d-51bc07a61ecb\")",
+          "branch": "if"
+        }
+      ]
+    },
+    {
+      "kind": "passage_body",
+      "complex": true,
+      "raw_arg": "$game_state.visited_locations.push(\"1345b7a7-7dcd-48db-a89e-d4a006d3716b\")",
+      "passage": "Location_Boyd's_Place",
+      "gate": [
+        {
+          "condition": "setup.triggerConditionsSatisfied({\"version\": \"1.0\", \"items\": [{\"type\": \"flag\", \"subject\": \"player\", \"flag_key\": \"summoned_by_shark\", \"operator\": \"is_true\"}]})",
+          "branch": "if"
+        },
+        {
+          "condition": "not $game_state.visited_locations.includes(\"1345b7a7-7dcd-48db-a89e-d4a006d3716b\")",
+          "branch": "if"
+        }
+      ]
+    }
+  ]
+}

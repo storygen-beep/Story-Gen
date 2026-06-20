@@ -1,0 +1,1521 @@
+# Phase 3/7 — 3_activities.toml
+# The Inheritance — activities. Scaffold: the sleep/day-advance router only (the clock).
+# Solo feeders (porn TV/phone, mirror, masturbate), floor work, etc. are beats authored next.
+
+# ─── activity_sleep — the day-advance router (without it, daytime windows are unreachable) ──
+# Player's old room. Available evening through late night. +energy, advances ~8h.
+
+[[canvases]]
+id          = "activity_sleep"
+name        = "Sleep"
+description = "Solo. Your old room. No NPC sub. Energy +80, time +480 (8h). The day-advance router."
+
+[canvases.trigger]
+location      = "loc_player_room"
+is_repeatable = true
+priority      = 3
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "21:00"
+end_time   = "23:59"
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "00:00"
+end_time   = "06:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Sleep"
+blocks = [
+  { type = "image", props = { file = "activities/sleep.jpg", description = "A dim childhood bedroom with the curtain drawn against the dark, the bed turned down for the night.", search_queries = ["dark bedroom bed night curtain", "dim room bed lamp off"] } },
+  { type = "paragraph", content = "You draw the curtain and lie down in the room you grew up in. The hotel's quiet. Tomorrow there's the floor to work and the family to handle. You go under." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Wake up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_player_room"
+time_progression_minutes = 480
+effects = [
+  { targetType = "player", trait = "energy",  op = "add", value = 80  },
+  { targetType = "player", trait = "hygiene", op = "add", value = -10 },
+]
+
+# ═════════════════════════════════════════════════════════════════════════════
+# beat_0003 — PLAYER SOLO BOOTSTRAP (her room; no NPC; the feeder economy starts)
+# ═════════════════════════════════════════════════════════════════════════════
+# The arousal loop: porn (TV + phone) → +arousal; masturbate (gated arousal≥3) cashes
+# it into +corruption and resets arousal to 0; the mirror feeds +exhibitionism. All
+# corr-0 (Pure band), repeatable, solo-host (no npc/requires_npc), player-tier gated.
+# WANT: boredom + restlessness + the rot starting — not "raise a meter."
+
+# ── activity_porn_tv — the porn channel on the old set ──────────────────────────
+[[canvases]]
+id          = "activity_porn_tv"
+name        = "The late channel"
+description = "Solo. Your room. The scrambled channel that isn't, late. +arousal 2. Repeatable arousal feeder."
+
+[canvases.trigger]
+location      = "loc_player_room"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+# Lane 3 dispatcher: a walk-in may hijack this solo act. Rising-frequency (doctrine/02 §4.11) —
+# the same banded block sits on every bedroom self-act, so the interruption RATE climbs with her corruption.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "aud_room_walkin"
+chance           = 0.15
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 25 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "aud_room_walkin"
+chance           = 0.30
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 50 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "aud_room_walkin"
+chance           = 0.45
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 50 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gray_room_barge"
+chance           = 0.15
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 25 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gray_room_barge"
+chance           = 0.30
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 50 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gray_room_barge"
+chance           = 0.45
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 50 } ] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The late channel"
+blocks = [
+  { type = "image", props = { file = "activities/porn_tv.jpg", description = "A dark bedroom lit only by the glow of an old TV set, a young woman alone on the bed late at night.", search_queries = ["dark bedroom tv glow woman", "woman bed watching tv night"] } },
+  { type = "paragraph", content = "The old set still pulls the channels nobody admits to. Sound low, lamp off — and you don't pretend it's to fall asleep to. You're getting wet just watching it." },
+  { type = "video", props = { file = "scenes/act_porn_tv.webm", description = "Catherine watches the late channel in the dark, heat building with nothing to spend it on.", search_queries = ["bedroom woman watching tv night", "girl aroused bed dark glow"] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Turn it off."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_player_room"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "arousal", op = "add", value = 2 },
+]
+
+# ── activity_porn_phone — scrolling in bed ──────────────────────────────────────
+[[canvases]]
+id          = "activity_porn_phone"
+name        = "Scrolling"
+description = "Solo. Your room. Porn on her phone in bed. +arousal 2. Repeatable arousal feeder (alt to TV)."
+
+[canvases.trigger]
+location      = "loc_player_room"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "aud_room_walkin"
+chance           = 0.15
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 25 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "aud_room_walkin"
+chance           = 0.30
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 50 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "aud_room_walkin"
+chance           = 0.45
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 50 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gray_room_barge"
+chance           = 0.15
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 25 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gray_room_barge"
+chance           = 0.30
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 50 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gray_room_barge"
+chance           = 0.45
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 50 } ] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Scrolling"
+blocks = [
+  { type = "image", props = { file = "activities/porn_phone.jpg", description = "A young woman lies in a dark bedroom holding a phone over her face, its screen the only light.", search_queries = ["dark bedroom woman phone bed", "young woman scrolling phone night"] } },
+  { type = "paragraph", content = "Phone over your face in the dark, brightness down, one clip into the next. You stop choosing — just let it run warm through you and keep scrolling." },
+  { type = "video", props = { file = "scenes/act_porn_phone.webm", description = "Catherine scrolls porn on her phone in the dark, letting it run warm through her.", search_queries = ["woman phone bed dark night", "girl scrolling phone bed aroused"] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Put the phone down."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_player_room"
+time_progression_minutes = 25
+effects = [
+  { targetType = "player", trait = "arousal", op = "add", value = 2 },
+]
+
+# ── activity_mirror — bolder clothes, self-display ──────────────────────────────
+[[canvases]]
+id          = "activity_mirror"
+name        = "The mirror"
+description = "Solo. Your room. Trying the bolder things on, looking. +exhibitionism 2, +arousal 1. Repeatable exhibition feeder."
+
+[canvases.trigger]
+location      = "loc_player_room"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "aud_room_walkin"
+chance           = 0.15
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 25 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "aud_room_walkin"
+chance           = 0.30
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 50 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "aud_room_walkin"
+chance           = 0.45
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 50 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gray_room_barge"
+chance           = 0.15
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 25 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gray_room_barge"
+chance           = 0.30
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 50 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gray_room_barge"
+chance           = 0.45
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 50 } ] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The mirror"
+blocks = [
+  { type = "image", props = { file = "activities/mirror.jpg", description = "A young woman stands before a tall bedroom mirror in bold new clothes, turning to find the angle.", search_queries = ["bedroom woman tall mirror posing", "young woman mirror reflection outfit"] } },
+  { type = "paragraph", content = "You try the bolder things on at the long mirror, door shut, turning, finding the angle. You like how you look in them. More than you'd admit downstairs." },
+  { type = "video", props = { file = "scenes/act_mirror.webm", description = "Catherine tries the bolder things on at the long mirror, turning, finding the angle.", search_queries = ["woman lingerie mirror posing", "girl trying outfit mirror bedroom"] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get dressed properly."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_player_room"
+time_progression_minutes = 20
+effects = [
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 2 },
+  { targetType = "player", trait = "arousal",       op = "add", value = 1 },
+]
+
+# ── activity_masturbate — gated arousal≥3; cashes arousal → corruption; resets ───
+# Intra-loop gate (HIDES when not aroused — no show_when_locked). Climax sets arousal 0
+# (author-emitted reset — no engine macro). +corruption 2 (the act = the bootstrap rot).
+[[canvases]]
+id          = "activity_masturbate"
+name        = "Alone"
+description = "Solo. Your room. Gated arousal≥3. +corruption 2, resets arousal to 0. The act that cashes the loop."
+
+[canvases.trigger]
+location      = "loc_player_room"
+is_repeatable = true
+priority      = 2
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 3 },
+] }
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "aud_room_walkin"
+chance           = 0.15
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 25 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "aud_room_walkin"
+chance           = 0.30
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 50 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "aud_room_walkin"
+chance           = 0.45
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 50 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gray_room_barge"
+chance           = 0.15
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 25 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gray_room_barge"
+chance           = 0.30
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 50 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gray_room_barge"
+chance           = 0.45
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 50 } ] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Alone"
+blocks = [
+  { type = "image", props = { file = "activities/masturbate.jpg", description = "A young woman lies alone on a bed in a dark bedroom behind a locked door, one hand at her side.", search_queries = ["dark bedroom woman bed alone", "woman lying bed dim room"] } },
+  { type = "paragraph", content = "You get yourself off — quick, quiet, one hand, the door locked. It doesn't take long. After, you still want something, and it's not relief. It's the rooms down the hall." },
+  { type = "video", props = { file = "scenes/act_masturbate_solo.webm", description = "Catherine gets herself off quietly in the dark, one hand, the door locked.", search_queries = ["bedroom woman masturbating dark", "girl fingering herself solo bed"] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Lie back."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_player_room"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "corruption", op = "add", value = 2 },
+  { targetType = "player", trait = "arousal",    op = "set", value = 0 },
+]
+
+# ── activity_kitchen_meal — solo; loc_kitchen. Fills the dead kitchen (audit f9). ──
+# A "compulsory home room" the player actually uses. Light daytime energy top-up
+# (+12, ~20 min); sleep stays the big restore. No NPC, no gate. Time cost is the
+# natural throttle (spamming burns the day toward forced sleep) — no daily cap needed.
+[[canvases]]
+id          = "activity_kitchen_meal"
+name        = "Something to eat"
+description = "Solo. The kitchen. Make tea, eat standing at the counter. Energy +12, ~20 min. Repeatable, ungated."
+
+[canvases.trigger]
+location      = "loc_kitchen"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+# Wakes the dead kitchen (doctrine/04 §10.5): the shared-meal collision. When Richard's at the table
+# (his 18:00–19:00 supper) the meal may hijack to richard_kitchen — warm-the-mark, his only daily interaction surface.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "richard_kitchen"
+chance           = 0.50
+conditions = { version = "1.0", items = [ { type = "npc_at_location", npc_id = "npc_richard", location_id = "loc_kitchen", operator = "is_present" } ] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Something to eat"
+blocks = [
+  { type = "image", props = { file = "activities/kitchen_meal.jpg", description = "A young woman makes tea and eats standing up at the counter of a big old under-used kitchen.", search_queries = ["woman making tea old kitchen counter", "eating alone standing kitchen morning"] } },
+  { type = "paragraph", content = "You put the kettle on, find something in the cupboards, eat standing up at the counter. Nobody to cook for, nobody cooking for you. It's enough to keep going." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Rinse the cup."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_kitchen"
+time_progression_minutes = 20
+effects = [
+  { targetType = "player", trait = "energy", op = "add", value = 12 },
+]
+
+# ── activity_bath_soak — solo; loc_common_bathroom. Fills the dead bath (audit f9). ──
+# Restores hygiene (+40 — the counter to sleep's −10, the only hygiene source in the
+# game) + a little energy (+10). The not-quite-private shared bath earns exhibitionism
+# +1, which DELIVERS the room's written "lock doesn't catch / sightlines carry" line
+# (so its description stays honest, unchanged). ~35 min. No NPC, no gate.
+[[canvases]]
+id          = "activity_bath_soak"
+name        = "A long bath"
+description = "Solo. The upstairs bath. Soak in the clawfoot tub. Hygiene +40, energy +10, exhibitionism +1, ~35 min. Repeatable, ungated."
+
+[canvases.trigger]
+location      = "loc_common_bathroom"
+is_repeatable = true
+priority      = 2
+is_active     = true
+# Bathroom pilot: bathe only when the bath is EMPTY (occupancy gate). While a housemate showers you peep instead.
+conditions = { version = "1.0", items = [ { type = "npc_at_location", location_id = "loc_common_bathroom", operator = "is_absent" } ] }
+# Bathroom pilot (CAUGHT): while you soak, a housemate may walk in (dice). The targets carry the
+# who's-home gate (npc_at_location) + arc flag — NO clock window (catch-then-react, §6.3).
+# Rising-frequency (doctrine/02 §4.11): banded 0.20 → 0.35 → 0.50, Pattern A (first-match single-return).
+[[canvases.trigger.substitutions]]
+target_canvas_id = "aud_bath_walkin"
+chance           = 0.20
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 25 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "aud_bath_walkin"
+chance           = 0.35
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 50 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "aud_bath_walkin"
+chance           = 0.50
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 50 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gray_bath_walkin"
+chance           = 0.20
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 25 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gray_bath_walkin"
+chance           = 0.35
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 50 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gray_bath_walkin"
+chance           = 0.50
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 50 } ] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "A long bath"
+blocks = [
+  { type = "image", props = { file = "activities/bath_soak.jpg", description = "A young woman soaks in a clawfoot tub in a steamy old shared bathroom, the door not quite latched.", search_queries = ["woman soaking clawfoot tub steam", "relaxing bath old bathroom"] } },
+  { type = "paragraph", content = "You run the clawfoot tub hot and sink in. The lock doesn't quite catch — steam under the door, the sound of the water carrying down the hall. You stay in until it goes cold, in no hurry to cover up." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Towel off."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_common_bathroom"
+time_progression_minutes = 35
+effects = [
+  { targetType = "player", trait = "hygiene",       op = "add", value = 40 },
+  { targetType = "player", trait = "energy",        op = "add", value = 10 },
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 1 },
+]
+
+# ═════════════════════════════════════════════════════════════════════════════
+# beat_0004 — HOTEL FLOOR (earn) — activity_hostess_shift
+# ═════════════════════════════════════════════════════════════════════════════
+# The lowest, most respectable money — working her own failing hotel's floor.
+# No hire gate (she OWNS it — taking it in hand IS the premise). corr 0, repeatable.
+# Energy gated via costs (deducts + dims when too tired); pays scraps via exit effects.
+# WANT: don't get sold out from under me — make the first money (the spine card).
+
+[[canvases]]
+id          = "activity_hostess_shift"
+name        = "Work the floor"
+description = "beat_0004. Solo earn @ loc_hotel. Hostess a shift — greet, seat, run the desk. costs energy 15, pays $40, ~2h. corr 0, ungated (she owns the place). The lowest rung of the income ladder."
+
+[canvases.trigger]
+location      = "loc_hotel"
+is_repeatable = true
+priority      = 3
+is_active     = true
+
+# Lane 3 dispatcher on the hostess shift: Grayson drifts out / Lorna notices (exclusive_group).
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gray_floor_needle"
+chance           = 0.22
+exclusive_group  = "floor_event"
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "lorna_floor_notice"
+chance           = 0.22
+exclusive_group  = "floor_event"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Work the floor"
+blocks = [
+  { type = "image", props = { file = "activities/hostess_shift.jpg", description = "A young woman stands at a quiet hotel front desk in the lobby, greeting the few guests who wander in.", search_queries = ["hotel lobby front desk woman", "hotel reception hostess greeting guests"] } },
+  { type = "paragraph", content = "You take the desk because there's no one else to. Greet the few who wander in, seat them, run the card machine that works one time in three, smile at men who tip on the smile. It's scraps — but it's yours, earned on your own floor." },
+]
+
+# Two intensities: the respectable shift (always), and — once she owns + wears a bold
+# enough outfit (worn_corruption>=15, from the boutique) — working it in less for real tips.
+# costs are PER-CHOICE (multi-intensity exit). The flash tier is locked-visible.
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Close out the shift."
+costs      = [{ trait = "energy", value = 15 }]
+targetType = "location"
+locationId = "loc_hotel"
+time_progression_minutes = 120
+effects = [
+  { targetType = "player", trait = "money", op = "add", value = 40 },
+]
+
+# Flash tier routes to its OWN node (exhibitionism clip); respectable shift stays effect-only.
+[[canvases.nodes.exit_block.choices]]
+text             = "Work the floor in less 👀"
+show_when_locked = true
+locked_text      = "Work the floor in less 👀 (needs a bolder outfit)"
+conditions = { version = "1.0", items = [
+  { type = "worn_corruption", operator = "gte", value = 15 },
+] }
+costs      = [{ trait = "energy", value = 15 }]
+targetType = "node"
+nodeId     = "activity_hostess_shift.act_flash"
+
+# ── Flash-tier node — its own exhibitionism clip; money/effects/time ported from the old choice ──
+[[canvases.nodes]]
+id   = "act_flash"
+name = "Work the floor in less"
+blocks = [
+  { type = "video", props = { file = "scenes/hostess_flash.webm", description = "Catherine works the hotel floor in far less, playing the tips for real.", search_queries = ["waitress revealing outfit serving", "woman bar low cut tips"] } },
+  { type = "paragraph", content = "You work the floor in a good deal less tonight, and the tips jump. You take it and bank it like everything else." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Cash out the shift."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_hotel"
+time_progression_minutes = 120
+effects = [
+  { targetType = "player", trait = "money",         op = "add", value = 70 },
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 2  },
+  { targetType = "player", trait = "corruption",    op = "add", value = 1  },
+]
+
+# ═════════════════════════════════════════════════════════════════════════════
+# beat_0006 — INCOME LADDER: the comped favor (first transactional line) + photo-selling
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ── activity_comped_favor — the first line crossed (guest rooms) ─────────────────
+# Lorna planted it (lorna_idea_favors); you can stomach it at Lewd (corr>=25). Anonymous
+# guest, no named NPC → player-track earner. Pays real money; the act raises corruption.
+# Appears once unlocked; Lorna's planted line + the spine card carry the legibility.
+[[canvases]]
+id          = "activity_comped_favor"
+name        = "Comp a room"
+description = "beat_0006. Player earn @ loc_hotel_guest_rooms. The first transactional line — comp a guest a room for a 'favor'. Gate: lorna_idea_favors + corruption>=25 (Lewd). costs energy20, pays $150, +corruption2 +exhibitionism1. Repeatable."
+
+[canvases.trigger]
+location      = "loc_hotel_guest_rooms"
+is_repeatable = true
+priority      = 3
+is_active     = true
+costs = [{ trait = "energy", value = 20 }]
+conditions = { version = "1.0", items = [
+  { type = "flag",  subject = "player", flag_key  = "lorna_idea_favors", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "corruption",        operator = "gte", value = 25 },
+] }
+
+# Lane 3 dispatcher: Grayson may catch her transacting.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gray_guest_catch"
+chance           = 0.25
+
+[[canvases.nodes]]
+id   = "base"
+name = "Comp a room"
+blocks = [
+  { type = "image", props = { file = "activities/comped_favor.jpg", description = "A young woman hands a room key across the hotel desk to a waiting male guest in the empty lobby.", search_queries = ["hotel desk key handing man", "hotel lobby woman man guest"] } },
+  { type = "paragraph", content = "There's a guest who'll pay more for discretion than for the room. You give him a key that skips the books and follow him up. It's quick and transactional — eyes on the middle distance, mind on the math. The till's heavier when you come back down, and another line's behind you." },
+  { type = "video", props = { file = "scenes/act_comped_favor.webm", description = "Catherine gives a hotel guest the quick transactional favor he paid extra for.", search_queries = ["hotel room quick sex stranger", "woman client hotel bed fast"] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Pocket it and go back down."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_hotel_guest_rooms"
+time_progression_minutes = 90
+effects = [
+  { targetType = "player", trait = "money",         op = "add", value = 150 },
+  { targetType = "player", trait = "corruption",    op = "add", value = 2   },
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 1   },
+]
+
+# ── activity_sell_photos — phone photo-selling (tiered by corruption) ────────────
+# In her room for now (the phone system proper lands at its beat). Two tiers, locked-visible.
+[[canvases]]
+id          = "activity_sell_photos"
+name        = "Sell some photos"
+description = "beat_0006. Player earn @ loc_player_room (phone). Tiered: tasteful (corr>=25, $40) + bolder (corr>=50, $90, locked-visible). Raises exhibitionism; bolder raises corruption."
+
+[canvases.trigger]
+location      = "loc_player_room"
+is_repeatable = true
+priority      = 2
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 },
+] }
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "aud_room_walkin"
+chance           = 0.15
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 25 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "aud_room_walkin"
+chance           = 0.30
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 50 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "aud_room_walkin"
+chance           = 0.45
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 50 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gray_room_barge"
+chance           = 0.15
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 25 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gray_room_barge"
+chance           = 0.30
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 25 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 50 } ] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gray_room_barge"
+chance           = 0.45
+conditions = { version = "1.0", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 50 } ] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Sell some photos"
+blocks = [
+  { type = "image", props = { file = "activities/sell_photos.jpg", description = "A young woman sets her phone on the dresser and finds the light to shoot herself in her bedroom.", search_queries = ["bedroom woman phone dresser selfie", "young woman taking photo bedroom"] } },
+  { type = "paragraph", content = "There are sites for this, accounts that pay what the hotel floor takes all night to make. You set the phone on the dresser, find the light, and shoot yourself. You set the price. The inbox pays more the further you go." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# Each tier routes to its OWN per-tier node (unique clip); costs + gates stay on the choice.
+[[canvases.nodes.exit_block.choices]]
+text       = "Sell tasteful shots."
+costs      = [{ trait = "energy", value = 5 }]
+targetType = "node"
+nodeId     = "activity_sell_photos.act_tasteful"
+
+[[canvases.nodes.exit_block.choices]]
+text             = "Sell something bolder 👀"
+show_when_locked = true
+locked_text      = "Sell something bolder 👀 (needs corruption 50)"
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 50 },
+] }
+costs      = [{ trait = "energy", value = 5 }]
+targetType = "node"
+nodeId     = "activity_sell_photos.act_bolder"
+
+# ── Per-tier nodes — each its OWN unique clip; money + effects + time ported from the old choices ──
+[[canvases.nodes]]
+id   = "act_tasteful"
+name = "Tasteful shots"
+blocks = [
+  { type = "video", props = { file = "scenes/sell_photos_tasteful.webm", description = "Catherine shoots the tasteful tier for the camera — skin and suggestion, priced to keep the inbox hungry.", search_queries = ["woman lingerie selfie bedroom", "girl posing camera tasteful bed"] } },
+  { type = "paragraph", content = "You set the light and shoot the tasteful tier — skin and a little more, priced to keep them coming back for the next set." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Upload and cash out."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_player_room"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "money",         op = "add", value = 40 },
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 1  },
+]
+
+[[canvases.nodes]]
+id   = "act_bolder"
+name = "Something bolder"
+blocks = [
+  { type = "video", props = { file = "scenes/sell_photos_bolder.webm", description = "Catherine shoots something far bolder for the paying inbox, a little further past the line each time.", search_queries = ["woman nude selfie explicit bed", "girl explicit pose camera bedroom"] } },
+  { type = "paragraph", content = "You give the inbox what it's been begging for and charge for it — a bit more explicit each set, and the money's worth it." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Upload the set."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_player_room"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "money",         op = "add", value = 90 },
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 2  },
+  { targetType = "player", trait = "corruption",    op = "add", value = 1  },
+]
+
+# ═════════════════════════════════════════════════════════════════════════════
+# beat_0008 — ESCORT WORK (the next income rung — what the back rooms are for)
+# ═════════════════════════════════════════════════════════════════════════════
+# Reads the upgrade (upgrade_back_rooms) + the personal door (corr>=Slutty/50). A booked,
+# paid arrangement run through the discreet rooms — a real tier above the comped favor:
+# money up front, not a tip. costs energy 25, pays $400 (+corr 2, +exhib 1). Repeatable.
+# Anonymous client (no named NPC) → player-track earner.
+
+[[canvases]]
+id          = "activity_escort"
+name        = "Keep an appointment"
+description = "beat_0008. Player earn @ loc_hotel_guest_rooms. Escort arrangement through the discreet back rooms. Gate: upgrade_back_rooms is_true + corruption>=50 (Slutty). costs energy 25, pays $400, +corruption 2 +exhibitionism 1. Repeatable. The rung above comped_favor."
+
+[canvases.trigger]
+location      = "loc_hotel_guest_rooms"
+is_repeatable = true
+priority      = 3
+is_active     = true
+costs = [{ trait = "energy", value = 25 }]
+conditions = { version = "1.0", items = [
+  { type = "flag",  subject = "player", flag_key  = "upgrade_back_rooms", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "corruption",         operator = "gte", value = 50 },
+] }
+
+# Lane 3 dispatcher: Grayson may catch her transacting.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "gray_guest_catch"
+chance           = 0.25
+
+[[canvases.nodes]]
+id   = "base"
+name = "Keep an appointment"
+blocks = [
+  { type = "image", props = { file = "activities/escort.jpg", description = "A young woman meets a waiting male client at a discreet door in a quiet private hotel corridor.", search_queries = ["hotel corridor door woman man", "hotel hallway woman meeting man"] } },
+  { type = "paragraph", content = "The back rooms stay booked now. A name in the discreet ledger, an hour blocked, the money settled before the door closes — no comping, no pretending it's a favor. You meet the appointment in the private corridor where the desk can't see, and give him exactly what he paid for and not one minute more. Full price, up front — not a tip for a favor." },
+  { type = "video", props = { file = "scenes/act_escort.webm", description = "Catherine keeps a paid escort appointment in the discreet back rooms.", search_queries = ["escort hotel room client sex", "woman paid appointment hotel bed"] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Collect and go back down."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_hotel_guest_rooms"
+time_progression_minutes = 120
+effects = [
+  { targetType = "player", trait = "money",         op = "add", value = 400 },
+  { targetType = "player", trait = "corruption",    op = "add", value = 2   },
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 1   },
+]
+
+# ═════════════════════════════════════════════════════════════════════════════
+# beat_0011 — ADULT SHOP (buy the tools) — canvas_adult_shop
+# ═════════════════════════════════════════════════════════════════════════════
+# Repeatable, ungated, open day 1 (no dead-end for the item gates). Each buy = a choice
+# with costs (money, gates+deducts) + item_effects (action="add", grants the item) +
+# a `item ... lt 1` condition so it HIDES once owned. The drug is sold now too (Margaret
+# needs it later — buyable-ahead is by design). "Leave" always present so the exit isn't empty.
+
+[[canvases]]
+id          = "canvas_adult_shop"
+name        = "The tools"
+description = "beat_0011. Buy scene @ loc_adult_shop, repeatable, ungated. Sells dildo ($60) / strap_on ($90) / drug ($120). Each buy-choice: costs money + item_effects add + condition item lt 1 (hides when owned). The item economy the gates read."
+
+[canvases.trigger]
+location      = "loc_adult_shop"
+is_repeatable = true
+priority      = 3
+is_active     = true
+
+[[canvases.nodes]]
+id   = "shop"
+name = "The tools"
+blocks = [
+  { type = "image", props = { file = "scenes/canvas_adult_shop.jpg", description = "The interior of an adult shop with a frosted window, low shelves, and a clerk at the counter.", search_queries = ["adult shop interior shelves counter", "sex shop interior frosted window"] } },
+  { type = "paragraph", content = "The shop on the side street keeps its window frosted. The clerk doesn't look up from her crossword when the bell goes. The shelves are what they look like. You take your time — there's stuff here you came for that you can't do with your hands alone." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Buy the toy — $60"
+conditions = { version = "1.0", items = [ { type = "item", item_id = "dildo", operator = "lt", value = 1 } ] }
+costs      = [{ trait = "money", value = 60 }]
+targetType = "location"
+locationId = "loc_adult_shop"
+time_progression_minutes = 15
+itemEffects = [{ item_id = "dildo", action = "add", quantity = 1 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Buy the strap-on — $90"
+conditions = { version = "1.0", items = [ { type = "item", item_id = "strap_on", operator = "lt", value = 1 } ] }
+costs      = [{ trait = "money", value = 90 }]
+targetType = "location"
+locationId = "loc_adult_shop"
+time_progression_minutes = 15
+itemEffects = [{ item_id = "strap_on", action = "add", quantity = 1 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Buy the bottle — $120"
+conditions = { version = "1.0", items = [ { type = "item", item_id = "drug", operator = "lt", value = 1 } ] }
+costs      = [{ trait = "money", value = 120 }]
+targetType = "location"
+locationId = "loc_adult_shop"
+time_progression_minutes = 15
+itemEffects = [{ item_id = "drug", action = "add", quantity = 1 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave."
+targetType = "location"
+locationId = "loc_town"
+time_progression_minutes = 5
+
+# ═════════════════════════════════════════════════════════════════════════════
+# beat_0011 — PRACTICE WITH AUDREY — aud_practice (the readiness engine)
+# ═════════════════════════════════════════════════════════════════════════════
+# ONE unified repeatable loop, capped 2/day (max_triggers_per_day=2 — engine-enforced,
+# resets on day rollover). Each session = pick one unlocked pose → +1 npc_audrey.corruption
+# (her READINESS odometer) + arousal. Poses unlock as skills do (show_when_locked). This is
+# what paces the ladder: ~5 practices to climb a rung (gte 5/10/15 thresholds on the lessons).
+# Gate: audrey_skill_masturbate is_true (the first lesson opens practice), requires npc_audrey.
+
+[[canvases]]
+id          = "aud_practice"
+name        = "Practice with Audrey"
+description = "beat_0011. Repeatable readiness loop @ loc_audrey_room, requires npc_audrey, max_triggers_per_day=2. Gate audrey_skill_masturbate. Choices = unlocked poses (locked-visible): each +1 npc_audrey.corruption (readiness) +1 arousal. The engine that climbs the gte 5/10/15 rung thresholds."
+
+[canvases.trigger]
+location              = "loc_audrey_room"
+requires_npc          = "npc_audrey"
+npc           = "npc_audrey"
+is_repeatable         = true
+max_triggers_per_day  = 2
+priority              = 4
+is_active             = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "audrey_skill_masturbate", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "practice"
+name = "Practice with Audrey"
+blocks = [
+  { type = "image", props = { file = "activities/aud_practice.jpg", description = "A young woman closes her textbook on the edge of her bedroom bed as another woman sits beside her.", search_queries = ["bedroom two young women bed", "girl bedroom textbook study bed"] } },
+  { type = "paragraph", content = "Audrey closes her textbook the second you sit down. You decide what she practices today." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# RTS menu-only hub: base = banner + status line + this menu; each verb routes to its own scene node.
+# Each act choice routes to its OWN per-act node (unique clip); effects + time live on the node exit.
+# Masturbate practice — always available once the ladder's begun (the trigger gate)
+[[canvases.nodes.exit_block.choices]]
+text       = "Have her show you her homework 👀"
+targetType = "node"
+nodeId     = "aud_practice.act_masturbate"
+
+# Kiss practice — unlocked at the kiss lesson (locked-visible)
+[[canvases.nodes.exit_block.choices]]
+text             = "Practice kissing 💋"
+show_when_locked = true
+locked_text      = "Practice kissing 💋 (teach her the kiss first)"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "audrey_skill_kiss", operator = "is_true" },
+] }
+targetType = "node"
+nodeId     = "aud_practice.act_kiss"
+
+# Toy practice — unlocked at the toy lesson (locked-visible)
+[[canvases.nodes.exit_block.choices]]
+text             = "Practice with the toy 🍆"
+show_when_locked = true
+locked_text      = "Practice with the toy 🍆 (teach her the toy first)"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "audrey_skill_toy", operator = "is_true" },
+] }
+targetType = "node"
+nodeId     = "aud_practice.act_toy"
+
+# Blowjob practice — unlocked at the blowjob lesson (locked-visible)
+[[canvases.nodes.exit_block.choices]]
+text             = "Practice with her mouth 👄"
+show_when_locked = true
+locked_text      = "Practice with her mouth 👄 (teach her the next lesson first)"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "audrey_skill_blowjob", operator = "is_true" },
+] }
+targetType = "node"
+nodeId     = "aud_practice.act_blowjob"
+
+# Sex practice — unlocked at the first night (beat_0012, locked-visible)
+[[canvases.nodes.exit_block.choices]]
+text             = "Take her to bed 🔥"
+show_when_locked = true
+locked_text      = "Take her to bed 🔥 (the first night, first)"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "audrey_skill_sex", operator = "is_true" },
+] }
+targetType = "node"
+nodeId     = "aud_practice.act_sex"
+
+# Anal practice — unlocked at the top rung (beat_0013, locked-visible) — completes the menu
+[[canvases.nodes.exit_block.choices]]
+text             = "Take her the other way 🍑"
+show_when_locked = true
+locked_text      = "Take her the other way 🍑 (the top lesson, first)"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "audrey_skill_anal", operator = "is_true" },
+] }
+targetType = "node"
+nodeId     = "aud_practice.act_anal"
+
+# Leave without a lesson (doesn't consume readiness; still counts a daily use)
+[[canvases.nodes.exit_block.choices]]
+text       = "Not today — let her study 🚪"
+targetType = "location"
+locationId = "loc_audrey_room"
+time_progression_minutes = 5
+
+# ── Per-act nodes — each its OWN unique clip; effects + time ported from the old choices ──
+[[canvases.nodes]]
+id   = "act_masturbate"
+name = "Homework"
+blocks = [
+  { type = "video", props = { file = "scenes/aud_practice_masturbate.webm", description = "Audrey shows Catherine what she's practiced, finishing under her own hand while watched.", search_queries = ["bedroom girl fingering moan", "lesbian masturbation guided bed"] } },
+  { type = "paragraph", content = "She shows you what she's been practicing, eyes on your face the whole time, finishing under her own hand because you're watching." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_audrey" }, content = "Watch me. I practiced — I want you to see how good I got." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Tell her she did well."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_audrey_room"
+time_progression_minutes = 30
+effects = [
+  { targetType = "npc", npcId = "npc_audrey", trait = "corruption", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_audrey", trait = "arousal",    op = "add", value = 1 },
+]
+
+[[canvases.nodes]]
+id   = "act_kiss"
+name = "Practice kissing"
+blocks = [
+  { type = "video", props = { file = "scenes/aud_practice_kiss.webm", description = "Audrey kisses Catherine the way she was taught, unhurried and certain, half in her lap.", search_queries = ["bedroom girls kissing deep", "lesbian makeout bed close"] } },
+  { type = "paragraph", content = "She kisses you the way you taught her, unhurried and certain now, and doesn't stop until you do." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_audrey" }, content = "Mm. I could do this all day. Don't make me stop yet." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Break it off first."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_audrey_room"
+time_progression_minutes = 30
+effects = [
+  { targetType = "npc", npcId = "npc_audrey", trait = "corruption", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_audrey", trait = "arousal",    op = "add", value = 1 },
+]
+
+[[canvases.nodes]]
+id   = "act_toy"
+name = "Practice with the toy"
+blocks = [
+  { type = "video", props = { file = "scenes/aud_practice_toy.webm", description = "Audrey works the toy where Catherine tells her, watching for the nod, doing it well.", search_queries = ["bedroom girl dildo riding", "lesbian dildo play bed"] } },
+  { type = "paragraph", content = "She works the toy where you tell her, watching for your nod, doing it well." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_audrey" }, content = "Like this? Tell me when I've got it right." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Tell her to keep practicing."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_audrey_room"
+time_progression_minutes = 30
+effects = [
+  { targetType = "npc", npcId = "npc_audrey", trait = "corruption", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_audrey", trait = "arousal",    op = "add", value = 1 },
+]
+
+[[canvases.nodes]]
+id   = "act_blowjob"
+name = "Practice with her mouth"
+blocks = [
+  { type = "video", props = { file = "scenes/aud_practice_blowjob.webm", description = "On her knees, Audrey takes the strap-on mouth and hand together, eyes up for praise.", search_queries = ["bedroom strapon oral kneeling", "girl blowjob strapon pov"] } },
+  { type = "paragraph", content = "On her knees, mouth and hand together the way you drilled her, eyes up for praise." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_audrey" }, content = "Good? Am I being good for you?" },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let her finish."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_audrey_room"
+time_progression_minutes = 30
+effects = [
+  { targetType = "npc", npcId = "npc_audrey", trait = "corruption", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_audrey", trait = "arousal",    op = "add", value = 1 },
+]
+
+[[canvases.nodes]]
+id   = "act_sex"
+name = "Take her to bed"
+blocks = [
+  { type = "video", props = { file = "scenes/aud_practice_sex.webm", description = "Catherine takes Audrey with the strap-on on the bed; she comes apart saying your name.", search_queries = ["bedroom strapon lesbian sex", "girl pegged strapon bed"] } },
+  { type = "paragraph", content = "You take her slow and then not, and she comes apart with your name in her mouth and her ankles crossed at your back." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_audrey" }, content = "@player — yes, please, just like that—" },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Hold her after."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_audrey_room"
+time_progression_minutes = 40
+effects = [
+  { targetType = "npc", npcId = "npc_audrey", trait = "corruption", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_audrey", trait = "arousal",    op = "add", value = 1 },
+]
+
+[[canvases.nodes]]
+id   = "act_anal"
+name = "Take her the other way"
+blocks = [
+  { type = "video", props = { file = "scenes/aud_practice_anal.webm", description = "Catherine takes Audrey anally with the strap-on; she pushes back greedy and grateful.", search_queries = ["bedroom strapon anal lesbian", "anal strapon doggy bed"] } },
+  { type = "paragraph", content = "You open her up patient and thorough and she pushes back greedy for it, filthy and grateful." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_audrey" }, content = "Yes — like that, don't stop, please—" },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Lie down with her."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_audrey_room"
+time_progression_minutes = 40
+effects = [
+  { targetType = "npc", npcId = "npc_audrey", trait = "corruption", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_audrey", trait = "arousal",    op = "add", value = 1 },
+]
+
+# ═════════════════════════════════════════════════════════════════════════════
+# beat_0016 — GRAYSON SERVITUDE LOOP — gray_serve (the submission engine)
+# ═════════════════════════════════════════════════════════════════════════════
+# Mirror of aud_practice, grinding DOWN: ONE repeatable loop @ loc_drawing_room (his hub,
+# where the prey floor receded), requires npc_grayson, capped 2/day. Each session = a tier
+# choice -> +1 npc_grayson.corruption (his SUBMISSION odometer, never resets). Tiers unlock
+# as choices (show_when_locked): menial (always, grayson_serves) -> degrading (grayson_used).
+# ~3 menial services climbs submission to 3 -> gray_on_knees opens. (Deep use-loop / pegging
+# comes at beat_0017 with grayson_craves.)
+
+[[canvases]]
+id          = "gray_serve"
+name        = "Put him to work"
+description = "beat_0016. Repeatable submission loop @ loc_drawing_room, requires npc_grayson, max_triggers_per_day=2. Gate grayson_serves is_true. Choices: menial (always) + degrading (show_when_locked on grayson_used). Each +1 npc_grayson.corruption (submission). The engine that climbs the ~3/tier thresholds (on_knees @ submission 3)."
+
+[canvases.trigger]
+location              = "loc_drawing_room"
+requires_npc          = "npc_grayson"
+npc           = "npc_grayson"
+is_repeatable         = true
+max_triggers_per_day  = 2
+priority              = 4
+is_active             = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "grayson_serves", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "serve"
+name = "Put him to work"
+blocks = [
+  { type = "image", props = { file = "activities/gray_serve.jpg", description = "A man stands waiting and resentful in a grand drawing room while a woman watches him from across it.", search_queries = ["drawing room man standing woman", "man waiting grand room woman"] } },
+  { type = "paragraph", content = "Grayson's in the drawing room, resentful, waiting on you. You decide what the day costs him." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# RTS menu-only hub: base = banner + status line + this menu; each verb routes to its own scene node.
+# Menial tier — always available once he serves (non-sexual dignity-stripping)
+[[canvases.nodes.exit_block.choices]]
+text       = "Run him ragged 🧹"
+targetType = "node"
+nodeId     = "gray_serve.act_menial"
+
+# Each sexual tier routes to its OWN per-act node (unique clip); menial + dismiss stay effect-only.
+# Degrading tier — unlocked at gray_on_knees (locked-visible)
+[[canvases.nodes.exit_block.choices]]
+text             = "Make him beg for it on his knees 🙇"
+show_when_locked = true
+locked_text      = "Make him beg for it on his knees 🙇 (take him down first)"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "grayson_used", operator = "is_true" },
+] }
+targetType = "node"
+nodeId     = "gray_serve.act_degrade"
+
+# Use-his-body tier — unlocked at gray_on_knees (sexual use; the use-loop)
+[[canvases.nodes.exit_block.choices]]
+text             = "Use his body 🔥"
+show_when_locked = true
+locked_text      = "Use his body 🔥 (take him down first)"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "grayson_used", operator = "is_true" },
+] }
+targetType = "node"
+nodeId     = "gray_serve.act_use"
+
+# Cuckold-watch tier — unlocked at the turn (grayson_craves) — made to watch
+[[canvases.nodes.exit_block.choices]]
+text             = "Make him watch 👀"
+show_when_locked = true
+locked_text      = "Make him watch 👀 (he has to want it first)"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "grayson_craves", operator = "is_true" },
+] }
+targetType = "node"
+nodeId     = "gray_serve.act_cuckold"
+
+# Deep tier — pegging / chastity / orgasm control (grayson_craves; the full ceiling)
+[[canvases.nodes.exit_block.choices]]
+text             = "The deep things 🔒"
+show_when_locked = true
+locked_text      = "The deep things 🔒 (he has to want it first)"
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "grayson_craves", operator = "is_true" },
+] }
+targetType = "node"
+nodeId     = "gray_serve.act_deep"
+
+# Dismiss (no submission gain; still counts a daily use)
+[[canvases.nodes.exit_block.choices]]
+text       = "Dismiss him for now 🚪"
+targetType = "location"
+locationId = "loc_drawing_room"
+time_progression_minutes = 5
+
+# ── Per-act nodes — each its OWN unique clip; effects + time ported from the old choices ──
+# act_menial — the menial-tier scene (moved off the hub base when the hub went RTS menu-only).
+[[canvases.nodes]]
+id   = "act_menial"
+name = "Run him ragged"
+blocks = [
+  { type = "paragraph", content = "He shows up when you call — the alternative is a phone call to people who break fingers. The resentment's part of what you're buying. You run him ragged, fetch and carry and wait on you, in the room that used to be his." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_grayson" }, content = "Fine. Where do you want it." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Dismiss him."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_drawing_room"
+time_progression_minutes = 30
+effects = [
+  { targetType = "npc", npcId = "npc_grayson", trait = "corruption", op = "add", value = 1 },
+]
+
+[[canvases.nodes]]
+id   = "act_degrade"
+name = "On his knees"
+blocks = [
+  { type = "video", props = { file = "scenes/gray_serve_degrade.webm", description = "Grayson kneels and begs on Catherine's command, performing his own humiliation.", search_queries = ["man kneeling begging femdom", "submissive man on knees humiliation"] } },
+  { type = "paragraph", content = "He gets on his knees and begs the way you've taught him to, the words coming easier each time." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_grayson" }, content = "Please. Let me — let me show you I can be good. Please." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave him kneeling."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_drawing_room"
+time_progression_minutes = 30
+effects = [
+  { targetType = "npc", npcId = "npc_grayson", trait = "corruption", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_grayson", trait = "arousal",    op = "add", value = 1 },
+]
+
+[[canvases.nodes]]
+id   = "act_use"
+name = "Use his body"
+blocks = [
+  { type = "video", props = { file = "scenes/gray_serve_use.webm", description = "Catherine rides Grayson on her own terms, taking her pleasure and leaving him grateful.", search_queries = ["woman riding man on top", "cowgirl femdom riding chair"] } },
+  { type = "paragraph", content = "You use his body on your terms, riding him with your eyes somewhere else entirely, taking exactly what you want." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_grayson" }, content = "Take it. Take whatever you want — I'm yours for it." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Send him to clean up."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_drawing_room"
+time_progression_minutes = 40
+effects = [
+  { targetType = "npc", npcId = "npc_grayson", trait = "corruption", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_grayson", trait = "arousal",    op = "add", value = 1 },
+]
+
+[[canvases.nodes]]
+id   = "act_cuckold"
+name = "Make him watch"
+blocks = [
+  { type = "video", props = { file = "scenes/gray_serve_cuckold.webm", description = "Catherine takes another man while Grayson watches, kneeling and denied.", search_queries = ["cuckold watching man kneeling", "woman another man cuckold watch"] } },
+  { type = "paragraph", content = "You take someone else in front of him and make him watch, kneeling and denied — and hard despite himself." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_grayson" }, content = "I'm being good. I'm watching. When you're done with him — please use me." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let him stew."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_drawing_room"
+time_progression_minutes = 40
+effects = [
+  { targetType = "npc", npcId = "npc_grayson", trait = "corruption", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_grayson", trait = "arousal",    op = "add", value = 1 },
+]
+
+[[canvases.nodes]]
+id   = "act_deep"
+name = "The deep things"
+blocks = [
+  { type = "video", props = { file = "scenes/gray_serve_deep.webm", description = "Catherine pegs Grayson, locks him up, and leaves him aching on her schedule.", search_queries = ["femdom pegging man strapon", "woman strapon pegging chastity"] } },
+  { type = "paragraph", content = "You peg him slow and then not, lock him up after, and leave him aching on a schedule of your choosing." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_grayson" }, content = "Yes. Lock me up. However long you decide. Thank you." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Lock him up and go."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_drawing_room"
+time_progression_minutes = 50
+effects = [
+  { targetType = "npc", npcId = "npc_grayson", trait = "corruption", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_grayson", trait = "arousal",    op = "add", value = 1 },
+]
+
+# ═════════════════════════════════════════════════════════════════════════════
+# ── rich_study_hub — Richard's study hub (FOLDED: trust on-ramp + pursuit loop) ────
+# beat_0018 (sit-with trust loop) + beat_0019 (pursuit/reward loop) FOLDED into ONE repeatable
+# portrait hub @ loc_study to clear the two-repeatable-portrait overlap lint. They genuinely
+# overlapped post-open (sit_with was UNGATED, so it stayed live after rich_pursuit opened, and
+# the engine arbitrarily picked one). The fold routes on the single flag richard_opened — one
+# clean cutover: WARM sit-with while he's still grieving (richard_opened is_false), the
+# pursuit/reward loop once he's opened (richard_opened is_true). No canvas-level gate (eligible
+# whenever he's present at the study, as sit_with always was). group blocks route the body;
+# per-choice conditions route the exit. cap 2/day carries from both. Replaces rich_sit_with +
+# rich_pursuit (both ids retired; neither referenced elsewhere). The WARM arc — no money/coercion.
+# Trust odometer = npc_richard.corruption. ~3 sits -> trust 3 -> rich_confides auto-fires (sets
+# richard_opened) -> this hub flips to pursuit, climbing trust/arousal toward rich_first_night.
+[[canvases]]
+id          = "rich_study_hub"
+name        = "Richard"
+description = "beat_0018+0019 FOLDED. Richard study hub (L1/L3, repeatable) @ loc_study, requires npc_richard, max_triggers_per_day=2, no canvas gate (routes on richard_opened). Pre-open ('Sit with him'): warm trust on-ramp, +1 npc_richard.corruption (trust), non-lewd. Post-open ('He comes back to life'): pursuit/reward loop, +1 npc_richard.corruption +1 npc_richard.arousal, climbs toward rich_first_night. Mutually-exclusive by richard_opened (group-routed body + conditioned choices); never overlap."
+
+[canvases.trigger]
+location              = "loc_study"
+requires_npc          = "npc_richard"
+npc                   = "npc_richard"
+is_repeatable         = true
+max_triggers_per_day  = 2
+priority              = 4
+is_active             = true
+
+[[canvases.nodes]]
+id   = "hub"
+name = "Richard"
+
+# ── Trust on-ramp (still grieving, not yet opened) — "Sit with him" ──
+[[canvases.nodes.blocks]]
+type = "group"
+props.conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "richard_opened", operator = "is_false" } ] }
+props.blocks = [
+  { type = "image", props = { file = "activities/rich_sit_with.jpg", description = "An older man sits slumped in a wing chair by a cold grate in a book-lined study, a book open and untouched.", search_queries = ["study wing chair older man", "older man armchair library grieving"] } },
+  { type = "paragraph", content = "Richard's in the wing chair, where he always is now." },
+]
+
+# ── Pursuit / reward loop (opened) — "He comes back to life" ──
+[[canvases.nodes.blocks]]
+type = "group"
+props.conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "richard_opened", operator = "is_true" } ] }
+props.blocks = [
+  { type = "image", props = { file = "activities/rich_pursuit.jpg", description = "A woman leans over a study desk beside an older man working through ledgers spread open between them.", search_queries = ["study desk man woman ledgers", "older man woman leaning desk"] } },
+  { type = "paragraph", content = "Richard's at the desk, the hotel's books open in front of him." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# RTS menu-only hub: each state's verb routes to its own scene node; both states keep a leave exit.
+# Trust on-ramp verb (only while not yet opened) → act_sit_with.
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit with him 💬"
+targetType = "node"
+nodeId     = "rich_study_hub.act_sit_with"
+conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "richard_opened", operator = "is_false" } ] }
+
+# Pursuit/reward verb (only once opened) → act_pursuit.
+[[canvases.nodes.exit_block.choices]]
+text       = "Reward him ❤️"
+targetType = "node"
+nodeId     = "rich_study_hub.act_pursuit"
+conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "richard_opened", operator = "is_true" } ] }
+
+# Leave (unconditional escape, both states).
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave him be 🚪"
+targetType = "location"
+locationId = "loc_study"
+time_progression_minutes = 5
+
+# ── Scene nodes (moved off the hub base when the hub went RTS menu-only) ──
+[[canvases.nodes]]
+id   = "act_sit_with"
+name = "Sit with him"
+blocks = [
+  { type = "paragraph", content = "You don't make him talk; you come in, sit, move the plate closer, open the curtains. After a while he eats, because you're watching. You let it build. No hurry with this one." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_richard" }, content = "You don't have to keep coming in here. Nobody else does. ...I'm glad you do." },
+  { type = "thought_bubble", props = { speaker = "npc_richard" }, content = "She didn't have to come in. Nobody comes in. And yet here she is again, and the room is warmer for it, and I'd forgotten a room could be." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave him to it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_study"
+time_progression_minutes = 40
+effects = [
+  { targetType = "npc", npcId = "npc_richard", trait = "corruption", op = "add", value = 1 },
+]
+
+[[canvases.nodes]]
+id   = "act_pursuit"
+name = "Reward him"
+blocks = [
+  { type = "paragraph", content = "He does it for you. When you lean over the desk beside him he goes still. You reward the effort — a hand on his, your shoulder against his." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_richard" }, content = "Don't — don't go yet. Stay a minute. Please." },
+  { type = "video", props = { file = "scenes/rich_pursuit_act.webm", description = "Catherine leans over the desk beside Richard, rewarding his pursuit with closeness.", search_queries = ["woman leaning over man desk", "couple flirting desk office close"] } },
+  { type = "thought_bubble", props = { speaker = "npc_richard" }, content = "I'd run this place into the ground for grief and now I'd rebuild it brick by brick just to keep her leaning over my shoulder. I know what that makes me. I find I don't care." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let him get back to it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_study"
+time_progression_minutes = 45
+effects = [
+  { targetType = "npc", npcId = "npc_richard", trait = "corruption", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_richard", trait = "arousal",    op = "add", value = 1 },
+]
+
+# ═════════════════════════════════════════════════════════════════════════════
+# beat_0020 — RICHARD SEX-LOOP — rich_bed (tender repeatable; opens at first night)
+# ═════════════════════════════════════════════════════════════════════════════
+# Parity with aud_practice / gray_serve — every core NPC gets a repeatable loop. Tender
+# register (the warm arc). @ loc_richard_room at night, requires npc_richard, gate
+# richard_first_night, cap 2/day. +1 trust (feeds the_keys threshold) +1 his arousal.
+
+[[canvases]]
+id          = "rich_bed"
+name        = "His bed"
+description = "beat_0020. Richard sex-loop (L3, repeatable) @ loc_richard_room (night), requires npc_richard, max_triggers_per_day=2, gate richard_first_night is_true. Tender register. +1 npc_richard.corruption (attachment, climbs toward the_keys gte 10) +1 arousal."
+
+[canvases.trigger]
+location              = "loc_richard_room"
+requires_npc          = "npc_richard"
+npc           = "npc_richard"
+is_repeatable         = true
+max_triggers_per_day  = 2
+priority              = 4
+is_active             = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "richard_first_night", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "bed"
+name = "His bed"
+blocks = [
+  { type = "image", props = { file = "activities/rich_bed.jpg", description = "A dim bedroom at night with the lamp low, an older man waiting on the turned-down bed for a woman.", search_queries = ["dim bedroom older man bed", "bedroom night lamp man waiting"] } },
+  { type = "paragraph", content = "His room, after dark. He's waiting up for you." },
+]
+
+# RTS menu-only hub: the verb routes to the scene node; a leave exit keeps an unconditional escape.
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay the night with him 🔥"
+targetType = "node"
+nodeId     = "rich_bed.act_bed"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Not tonight 🚪"
+targetType = "location"
+locationId = "loc_richard_room"
+time_progression_minutes = 5
+
+# act_bed — the sex-loop scene (moved off the hub base when the hub went RTS menu-only).
+[[canvases.nodes]]
+id   = "act_bed"
+name = "His bed"
+blocks = [
+  { type = "video", props = { file = "scenes/act_rich_bed.webm", description = "Catherine and Richard, an older man, slow and warm in his bed at night.", search_queries = ["bedroom older man slow sex", "mature man woman bed night"] } },
+  { type = "paragraph", content = "He takes his time with you and lets you take yours with him, slow and warm. You let him believe it's love." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_richard" }, content = "Stay till morning. I sleep when you're here. I don't, otherwise." },
+  { type = "thought_bubble", props = { speaker = "npc_richard" }, content = "Every morning I tell myself I'll find the spine to end it. Every night I count the hours until she's back. I've made my peace with being ruined by her. It's the happiest I've been in years." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stay a while."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_richard_room"
+time_progression_minutes = 60
+effects = [
+  { targetType = "npc", npcId = "npc_richard", trait = "corruption", op = "add", value = 1 },
+  { targetType = "npc", npcId = "npc_richard", trait = "arousal",    op = "add", value = 1 },
+]
+
+# ═════════════════════════════════════════════════════════════════════════════
+# beat_0021 — PRIVATE FLOOR EARNER — activity_private_floor (the income/content ceiling)
+# ═════════════════════════════════════════════════════════════════════════════
+# Top of the income ladder (hostess $40 -> flash $70 -> favor $150 -> escort $400 -> HERE).
+# @ loc_hotel_private_floor (entry already gated on upgrade_private_floor). The earner gates
+# corr gte 75 (Whore — the deepest player door); 3 rungs escalating (client/VIP/headline),
+# locked-visible. Anal/group live here, EARNED. The empire's surface.
+
+[[canvases]]
+id          = "activity_private_floor"
+name        = "Work the private floor"
+description = "beat_0021. Player income ceiling @ loc_hotel_private_floor (entry-gated upgrade_private_floor), repeatable. Trigger corr gte 75 (Whore). 3 rungs: client ($800, corr 75) / VIP ($1500, corr 80) / headline ($3000, corr 90, locked-visible). costs energy per-choice. +corruption/exhibitionism. The dirtiest, best money she makes."
+
+[canvases.trigger]
+location      = "loc_hotel_private_floor"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 75 },
+] }
+
+[[canvases.nodes]]
+id   = "floor"
+name = "Work the private floor"
+blocks = [
+  { type = "image", props = { file = "activities/private_floor.jpg", description = "A woman in an upscale private hotel suite checks the evening's appointment book on the floor she owns.", search_queries = ["luxury hotel suite woman elegant", "hotel room woman appointment book"] } },
+  { type = "paragraph", content = "The book on the private floor is yours to fill and yours to price — discretion at numbers the old hotel never dreamed of. You're not comping favors up a service stair anymore; you're the headline as often as the management. You check the evening's appointments and decide what the night's worth." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+# Each rung routes to its OWN per-act node (unique clip); costs + gates stay on the choice,
+# money/effects/time move to the node exit. "Run the book" stays effect-only.
+# Rung 1 — a private client (corr 75, the Whore floor)
+[[canvases.nodes.exit_block.choices]]
+text       = "Take a private client."
+costs      = [{ trait = "energy", value = 30 }]
+targetType = "node"
+nodeId     = "activity_private_floor.act_client"
+
+# Rung 2 — a regular / VIP (corr 80, locked-visible)
+[[canvases.nodes.exit_block.choices]]
+text             = "Entertain a regular — the VIP treatment."
+show_when_locked = true
+locked_text      = "Entertain a regular (needs corruption 80)"
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 80 },
+] }
+costs      = [{ trait = "energy", value = 35 }]
+targetType = "node"
+nodeId     = "activity_private_floor.act_vip"
+
+# Rung 3 — the headline act (corr 90, locked-visible) — the dirtiest thing on the menu
+[[canvases.nodes.exit_block.choices]]
+text             = "Be the headline act 👀"
+show_when_locked = true
+locked_text      = "Be the headline act 👀 (needs corruption 90)"
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 90 },
+] }
+costs      = [{ trait = "energy", value = 40 }]
+targetType = "node"
+nodeId     = "activity_private_floor.act_headline"
+
+# Just manage tonight (no act; book the others in)
+[[canvases.nodes.exit_block.choices]]
+text       = "Just run the book tonight."
+targetType = "location"
+locationId = "loc_hotel_private_floor"
+time_progression_minutes = 30
+
+# ── Per-rung nodes — each its OWN unique clip; money + effects + time ported from the old choices ──
+[[canvases.nodes]]
+id   = "act_client"
+name = "A private client"
+blocks = [
+  { type = "video", props = { file = "scenes/private_floor_client.webm", description = "Catherine takes a paying private client in a room on the floor she now owns and prices.", search_queries = ["hotel room escort client sex", "woman client paid sex bed"] } },
+  { type = "paragraph", content = "You give the appointment exactly what he paid for and not one minute more, your eyes on the middle distance, the till heavier when you come back down." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Pocket the money."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_hotel_private_floor"
+time_progression_minutes = 120
+effects = [
+  { targetType = "player", trait = "money",         op = "add", value = 800 },
+  { targetType = "player", trait = "corruption",    op = "add", value = 1   },
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 1   },
+]
+
+[[canvases.nodes]]
+id   = "act_vip"
+name = "The VIP treatment"
+blocks = [
+  { type = "video", props = { file = "scenes/private_floor_vip.webm", description = "Catherine gives a regular the full VIP treatment in a private suite.", search_queries = ["hotel suite escort vip sex", "woman lingerie client luxury room"] } },
+  { type = "paragraph", content = "The regular pays for the illusion of being special and you sell it flawlessly — warm and attentive and entirely elsewhere, billing by the hour you decide." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Bill him and move on."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_hotel_private_floor"
+time_progression_minutes = 150
+effects = [
+  { targetType = "player", trait = "money",         op = "add", value = 1500 },
+  { targetType = "player", trait = "corruption",    op = "add", value = 2    },
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 1    },
+]
+
+[[canvases.nodes]]
+id   = "act_headline"
+name = "The headline act"
+blocks = [
+  { type = "video", props = { file = "scenes/private_floor_headline.webm", description = "Catherine is the headline act — the dirtiest, best-paid thing on the floor's book.", search_queries = ["hotel group sex woman gangbang", "woman multiple men party room"] } },
+  { type = "paragraph", content = "You're the headline tonight — the dirtiest, best-paid thing on the floor's book. You do it for the number, and the number's the biggest it's carried." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Count the night's take."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_hotel_private_floor"
+time_progression_minutes = 180
+effects = [
+  { targetType = "player", trait = "money",         op = "add", value = 3000 },
+  { targetType = "player", trait = "corruption",    op = "add", value = 2    },
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 2    },
+]
+
+# ═════════════════════════════════════════════════════════════════════════════
+# beat_0026 — THE FRONTIER: the Margaret slave loop (command the family slave).
+# FOLDED (turn 56) into the unified marg_drawing_room_hub in 5_scenes.toml — the slave menu
+# is now the `margaret_slave is_true` state of that one repeatable drawing-room hub (it shared
+# loc_drawing_room + npc_margaret + repeatable with the cold-war hub, which tripped the
+# two-repeatable-portrait overlap lint). No canvas here anymore; see 5_scenes.toml.
+# ═════════════════════════════════════════════════════════════════════════════

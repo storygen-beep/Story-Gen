@@ -1,0 +1,35 @@
+# Scope Brief — natasha_lingerie
+
+- item_id: natasha_lingerie
+- file_path: social/natasha_lingerie.jpg
+- type: social_post_image
+- category: Social Media
+- canvas_id: phone
+- order: 156
+- tier: t4
+- content_rating: nsfw
+- required_format: .jpg (static phone post)
+
+## Narrative
+- Poster: @natasha.peeks
+- Caption: felt cute. might delete. probably won't.
+- Hashtags: (none)
+
+## Rejection
+- Reject group shots (3+ people)
+- Reject professional studio portraits — must look like a candid phone selfie
+- Reject 2+ people (this is a solo selfie)
+- Reject content that contradicts the caption persona
+
+## Queries (synthesized)
+1. amateur+lingerie+mirror+selfie
+2. bedroom+lingerie+tease
+3. amateur+lingerie+pose+mirror
+
+## Mode
+- standard
+
+PHASE: scope_complete
+NEXT_PHASE: plan
+SCORED: no
+PACKAGED: no
