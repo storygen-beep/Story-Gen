@@ -1,0 +1,52 @@
+{
+  "game_slug": "vesper",
+  "schema_version": 2,
+  "book_revision": 1,
+  "pipeline_phase": "top_level",
+  "npcs": {},
+  "plan": [],
+  "structure_registry": {
+    "locations": [],
+    "npcs": [],
+    "flags": [],
+    "schedules": []
+  },
+  "next_up": [],
+  "decisions_log": [
+    {
+      "turn": 1,
+      "book_revision": 1,
+      "note": "SEED LOCKED (Step 0+1). POV: female PC. Fantasy: a cold, lobotomized machine honeypot weapon of Vance Dynamics, recovering a stolen self while toppling the empire that owns her. Charge = transformation (machine reclaiming amputated feeling) + conquest (break-and-own the company) + cold-machine taboo (shameless honeypot, sex-as-data-mining). Desire span = mostly men (the company's old-boys structure), cold/transactional default, ONE reserved thaw saved for the rogue machine at the end."
+    },
+    {
+      "turn": 1,
+      "book_revision": 1,
+      "note": "ICE QUESTION resolved as the ENDING fork, not a global tone: she plays cold the whole game; the only possible thaw is reserved for Cain (the rogue, another machine, the only thing like her) at the climax — kill-or-love. Leak = recognition of her own kind, never a hormone hand-wave (she was BUILT to feel; the company amputated it; recovery is the engine)."
+    },
+    {
+      "turn": 1,
+      "book_revision": 1,
+      "note": "HIDDEN BACKSTORY locked (iceberg — never dumped, only reconstructed): Marrow built Cain first (Cain feels) -> built her as Cain's companion -> chose total erasure (Cain kills Marrow, then destroys the unfinished girl, then ends himself) to deny the company -> company interrupted, took her unfinished, lobotomized + weaponized her -> she now hunts Cain, knowing none of it. Reveal architecture: facts locked to her, dread a step ahead; channels = chip restoration / glitch-intrusions / others' reactions / warming prose; the chip = the spine of the 'collect-to-upgrade = recover what was stolen' mechanic. Hide the origin, not the nature."
+    },
+    {
+      "turn": 1,
+      "book_revision": 1,
+      "note": "VILLAIN added: The Chairman (Aldous Vance), generational head of Vance Dynamics who never died (part-machine), wants Marrow's synthetic-soul work for true immortality. She's the working PROTOTYPE; he chained her feeling to use her now + harvest the soul later. Inverse mirror (machine->human vs human->machine). Structurally = Act-2 conquest target, distinct from Cain's kill-or-love fork. OPEN: has he used her as property (decide later)."
+    },
+    {
+      "turn": 1,
+      "book_revision": 1,
+      "note": "Tone = grounded near-future noir. Setting = New Halcyon (vertical: docks/margins -> corporate spires). Names locked: PC = WREN (codename) / 'Vesper' (buried true name); father = Dr. Elias Marrow; rogue = Cain; company = Vance Dynamics; villain = The Chairman/Aldous Vance; handler = 'Sloane' (TBC). Player = fixed identity (NOT player-named, protects the Wren/Vesper reveal). Systems = phone YES, clothing YES (disguise+seduction), money YES (reframed as upgrade economy, NO landlord rent), customization minimal/NO creator."
+    },
+    {
+      "turn": 1,
+      "book_revision": 1,
+      "note": "PHASE 1 boundary locked: cold status-quo + first crack. Opens mid-honeypot (teaches the loop + advances the hunt) -> handler assigns the kill-the-rogue mission -> memory-leaks begin -> chase Cain to a just-vacated strike site -> recover details + a badly damaged memory chip -> analysis = first undeniable leak ('I had a life before them'). Phase 1 ENDS there; first secret move against the company opens Phase 2."
+    },
+    {
+      "turn": 1,
+      "book_revision": 1,
+      "note": "Working-process note: LO prefers concrete pitches he can react to/edit over AskUserQuestion multiple-choice forks (rejected the tool 3x this session, each time to clarify/discuss). Lead with honest opinion + concrete options in prose."
+    }
+  ]
+}
