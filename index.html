@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Story-Gen — Games</title>
+  <style>
+    :root {
+      --bg: #0e0f13;
+      --surface: #16181f;
+      --surface-hover: #1d2029;
+      --border: #262a35;
+      --text: #e7e9ee;
+      --muted: #9aa0ab;
+      --accent: #c8a15a;
+      --accent-text: #11130f;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 56px 20px 80px; }
+    header { margin-bottom: 40px; }
+    h1 {
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      letter-spacing: -0.02em;
+      margin: 0 0 8px;
+    }
+    .tagline { color: var(--muted); margin: 0; font-size: 1rem; }
+    h2 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      font-weight: 600;
+      margin: 48px 0 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: background .15s ease, border-color .15s ease, transform .15s ease;
+    }
+    .card:hover {
+      background: var(--surface-hover);
+      border-color: #3a4150;
+      transform: translateY(-2px);
+    }
+    .card h3 { margin: 0 0 8px; font-size: 1.15rem; letter-spacing: -0.01em; }
+    .card p { margin: 0 0 18px; color: var(--muted); font-size: 0.92rem; flex: 1; }
+    .play {
+      align-self: flex-start;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--accent);
+    }
+    .card:hover .play { color: #e0bd78; }
+    .dev .card { opacity: 0.78; }
+    .dev .card h3 { font-size: 1rem; }
+    footer {
+      margin-top: 64px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Story-Gen — Games</h1>
+      <p class="tagline">Interactive sandbox fiction, built on the Story-Gen engine.</p>
+    </header>
+
+    <main class="grid">
+      <a class="card" href="games/jacks_world/output/index.html">
+        <h3>Jack's World</h3>
+        <p>Jack moves into his step-mom Angela's apartment, and over thirty days what started as practical becomes something neither expected.</p>
+        <span class="play">Play →</span>
+      </a>
+      <a class="card" href="games/last_call/output/index.html">
+        <h3>Last Call</h3>
+        <p>A woman in her mid-thirties inherits a failing bar and a debt she didn't sign for — weekly payments, romance, and survival.</p>
+        <span class="play">Play →</span>
+      </a>
+      <a class="card" href="games/late_shifts/output/index.html">
+        <h3>Late Shifts</h3>
+        <p>Maya, a 22-year-old linguistics dropout, returns home and works nights at a diner where she discovers power and corruption.</p>
+        <span class="play">Play →</span>
+      </a>
+      <a class="card" href="games/new_in_town/output/index.html">
+        <h3>New In Town</h3>
+        <p>Emma, a sheltered 23-year-old schoolteacher, moves to Millfield and awakens to power over four men through strategy and reputation.</p>
+        <span class="play">Play →</span>
+      </a>
+      <a class="card" href="games/the_inheritance/output/index.html">
+        <h3>The Inheritance</h3>
+        <p>Catherine returns home for a will reading, seducing family and outsiders to claim the estate and break her stepmother's control.</p>
+        <span class="play">Play →</span>
+      </a>
+      <a class="card" href="games/the_long_summer/output/index.html">
+        <h3>The Long Summer</h3>
+        <p>Maya, eighteen, arrives at her stepfather's rural Alabama property and learns to navigate corruption, desire, and survival math.</p>
+        <span class="play">Play →</span>
+      </a>
+      <a class="card" href="games/two_weeks/output/index.html">
+        <h3>Two Weeks</h3>
+        <p>You return home for your step-brother's wedding with fourteen days to act on feelings you buried before he says "I do."</p>
+        <span class="play">Play →</span>
+      </a>
+      <a class="card" href="games/under_one_roof/output/index.html">
+        <h3>Under One Roof</h3>
+        <p>Lily Chen, 19, is stranded at her step-father's isolated rural property with his two adult sons — economics and desire under one roof.</p>
+        <span class="play">Play →</span>
+      </a>
+    </main>
+
+    <h2>Dev / test builds</h2>
+    <section class="grid dev">
+      <a class="card" href="games/test_customize/output/index.html">
+        <h3>Coffee Shop Test</h3>
+        <p>A short test build for NPC name/relationship customization and variable syntax.</p>
+        <span class="play">Open →</span>
+      </a>
+      <a class="card" href="games/the_long_summer_test/output/index.html">
+        <h3>The Long Summer — Test Slice</h3>
+        <p>A 10-day engine-validation slice with dev buttons visible.</p>
+        <span class="play">Open →</span>
+      </a>
+    </section>
+
+    <footer>
+      Built with the Story-Gen engine.
+    </footer>
+  </div>
+</body>
+</html>
