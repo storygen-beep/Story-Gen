@@ -1,0 +1,50 @@
+# Phase 6/7 — 6_dev_shortcuts.toml
+# Mother's Place — dev-only test shortcuts (bump traits / set major flags). Available
+# in Your Room. Not story content; for live-testing gates and schedules.
+
+[[canvases]]
+id          = "dev_shortcuts"
+name        = "[DEV] Shortcuts"
+description = "Dev-only. Your Room. Bump traits + jump flags for testing."
+
+[canvases.trigger]
+location      = "loc_cora_room"
+is_repeatable = true
+priority      = 1
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "[DEV] Shortcuts"
+blocks = [
+  { type = "paragraph", content = "[DEV] Test shortcuts — bump stats and jump flags." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "[DEV] +10 Corruption"
+targetType = "location"
+locationId = "loc_cora_room"
+effects = [ { targetType = "player", trait = "corruption", op = "add", value = 10, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "[DEV] +10 Exhibitionism"
+targetType = "location"
+locationId = "loc_cora_room"
+effects = [ { targetType = "player", trait = "exhibitionism", op = "add", value = 10, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "[DEV] +50 Money"
+targetType = "location"
+locationId = "loc_cora_room"
+effects = [ { targetType = "player", trait = "money", op = "add", value = 50 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "[DEV] +100 Energy"
+targetType = "location"
+locationId = "loc_cora_room"
+effects = [ { targetType = "player", trait = "energy", op = "add", value = 100, cap = 100 } ]
+
+# End of phase 6.

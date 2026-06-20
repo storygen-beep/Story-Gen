@@ -1,0 +1,147 @@
+{
+  "game_slug": "mothers_place",
+  "schema_version": 2,
+  "book_revision": 7,
+  "pipeline_phase": "authoring",
+  "npcs": {
+    "npc_roy": { "arc_shape": "slow-burn family (tender)", "vocab_ceiling": "explicit", "lane_budget": { "L1": 6, "L2": 2, "L3": 5, "capstones": 4 } },
+    "npc_wes": { "arc_shape": "antagonist->owned (rivalry)", "vocab_ceiling": "explicit", "lane_budget": { "L1": 4, "L2": 1, "L3": 3, "capstones": 2 } },
+    "npc_maddie": { "arc_shape": "slow-burn family (grooming)", "vocab_ceiling": "explicit", "lane_budget": { "L1": 4, "L2": 1, "L3": 3, "capstones": 3 } },
+    "npc_lynn": { "arc_shape": "antagonist (displaced, not seduced)", "vocab_ceiling": "explicit", "lane_budget": { "L1": 1, "L2": 0, "L3": 0, "capstones": 5 } },
+    "npc_vic": { "arc_shape": "leverage/transactional", "vocab_ceiling": "explicit", "lane_budget": { "L1": 3, "L2": 0, "L3": 1, "capstones": 1 } },
+    "npc_brenda": { "arc_shape": "witness", "vocab_ceiling": "explicit", "lane_budget": { "L1": 0, "L2": 2, "L3": 0, "capstones": 1 } }
+  },
+  "map_design": {
+    "topology": "done",
+    "roles_access": "done",
+    "naming_travel": "done"
+  },
+  "deep_design": {
+    "player": "done",
+    "npcs": "done",
+    "world": "done",
+    "reactivity": "done"
+  },
+  "blueprint": {
+    "player": "done",
+    "npcs": "done",
+    "world": "done",
+    "wiring": "done"
+  },
+  "feedback": {
+    "subjects_reviewed": ["1", "2", "3", "4", "5"],
+    "open_gaps": [
+      { "id": "g1", "subject": "1", "note": "Lines IN/OUT declaration missing (act-scoped non-con prey beat undeclared)", "status": "fixed" },
+      { "id": "g2", "subject": "3", "note": "Voice carriage Rule 4 — hot beats committed to played dialog", "status": "fixed" },
+      { "id": "g3", "subject": "4", "note": "lean_household made flat+reversible (no decay spiral)", "status": "fixed" }
+    ]
+  },
+  "plan": [
+    { "id": "beat_0001", "type": "location_reveal", "title": "Scaffold + green build", "desc": "metadata, 13 locations, systems spec (player traits corruption/money/energy/exhibitionism + per-NPC corruption/arousal, clothing, customization, phone, sidebar bands), dev shortcuts; empty phases; prove green.", "status": "validated", "deps": [], "target_phase": "0_systems_spec.toml", "introduces": { "locations": ["loc_home","loc_cora_room","loc_kitchen","loc_living_room","loc_master_bedroom","loc_garage","loc_maddie_room","loc_bathroom","loc_backyard","loc_town","loc_roys_shop","loc_bar","loc_corner_store","loc_maddie_out","loc_vic_home","loc_brenda_home","loc_lynn_away"], "npcs": ["npc_roy","npc_wes","npc_maddie","npc_vic","npc_brenda","npc_lynn"], "flags": [] }, "produced_canvas_ids": ["activity_sleep","activity_walk_to_town","activity_walk_home","dev_shortcuts"], "decided_at": 1 },
+    { "id": "beat_0002", "type": "story_turn", "title": "Opening / boot + customization", "desc": "Auto-fire cold open on the porch (names cast+ties in prose), customization (name default Cora + look), first want card, land at Home; home+town hub skeleton + walk bridge.", "status": "validated", "deps": ["beat_0001"], "target_phase": "2_one_shots.toml", "introduces": { "locations": [], "npcs": [], "flags": ["game_started"] }, "produced_canvas_ids": ["canvas_homecoming"], "decided_at": 1 },
+    { "id": "beat_0003", "type": "economic", "title": "Player feeders (solo hosts)", "desc": "F1 touch herself, F2 cook, F3 shower, F4 mirror/dress; arousal/corruption/exhibitionism feeders; the §5H bathroom shower host (is_absent).", "status": "validated", "deps": ["beat_0002"], "target_phase": "3_activities.toml", "introduces": { "locations": [], "npcs": [], "flags": ["cooked_today","showered_today"] }, "produced_canvas_ids": ["feeder_touch","feeder_cook","feeder_shower","feeder_mirror"], "decided_at": 1 },
+    { "id": "beat_0004", "type": "npc_intro", "title": "Bar + Vic on-ramp", "desc": "loc_bar hub (V0), V1 hires Cora (auto), F6 regular shift (income host). Cold-start.", "status": "planned", "deps": ["beat_0002"], "target_phase": "5_scenes.toml", "introduces": { "locations": [], "npcs": ["npc_vic"], "flags": ["hired_at_bar"] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0005", "type": "economic", "title": "Exhibition + clothing", "desc": "F5 bold-at-home (L2), F7 revealing shift (gated vic_revealing+exhib), F11 town-bold (L2), F9 phone pics tier-1; clothing catalog (corner store cheap, phone-order revealing, Lynn's-closet free item).", "status": "planned", "deps": ["beat_0004"], "target_phase": "3_activities.toml", "introduces": { "locations": [], "npcs": [], "flags": ["vic_revealing"] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0006", "type": "npc_intro", "title": "Roy hub + cold-start", "desc": "R0 Living Room hub (eve), R0b Roy's Shop hub (day), R1 talk/sit. Presence floor; ungated.", "status": "planned", "deps": ["beat_0002"], "target_phase": "5_scenes.toml", "introduces": { "locations": [], "npcs": ["npc_roy"], "flags": [] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0007", "type": "arc_escalation", "title": "Roy build (grief opens)", "desc": "R2 talks about Lynn (sets roy_grief_shared), R3 comfort/hand-too-long (charged), R4 let-him-look (L2). Builds roy.corruption/arousal.", "status": "planned", "deps": ["beat_0006"], "target_phase": "5_scenes.toml", "introduces": { "locations": [], "npcs": [], "flags": ["roy_grief_shared"] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0008", "type": "arc_escalation", "title": "Roy §5H + walk-ins", "desc": "R5 bathroom peek (is_present roy), R11-14 Lane-3 walk-ins (cook/shower/shop/couch) band-scaled chance.", "status": "planned", "deps": ["beat_0007"], "target_phase": "5_scenes.toml", "introduces": { "locations": [], "npcs": [], "flags": [] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0009", "type": "capstone", "title": "Roy capstones", "desc": "R6 confession, R7 first kiss, R8 first time (Lynn's bed), R9 take-his-place. Sets took_dads_place (master flag).", "status": "planned", "deps": ["beat_0007"], "target_phase": "2_one_shots.toml", "introduces": { "locations": [], "npcs": [], "flags": ["roy_confessed","roy_kissed","roy_first_done","took_dads_place"] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0010", "type": "arc_escalation", "title": "Roy repeatable loop", "desc": "R10 loop_roys_bed (sex-loop menu, opens from R0 once roy_first_done; locked-visible).", "status": "planned", "deps": ["beat_0009"], "target_phase": "5_scenes.toml", "introduces": { "locations": [], "npcs": [], "flags": [] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0011", "type": "npc_intro", "title": "Wes hub + friction", "desc": "W0 Garage hub, W1 friction/cold-war, W3 compete (L2). Cold-start.", "status": "planned", "deps": ["beat_0002"], "target_phase": "5_scenes.toml", "introduces": { "locations": [], "npcs": ["npc_wes"], "flags": [] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0012", "type": "arc_escalation", "title": "Wes charged + truce + §5H", "desc": "W2 fight-too-close (charged), W4 cigarette truce (backyard, sets wes_truce + unlocks car fast-travel), W5 catch (bathroom/garage), W9-11 walk-ins.", "status": "planned", "deps": ["beat_0011"], "target_phase": "5_scenes.toml", "introduces": { "locations": [], "npcs": [], "flags": ["wes_truce"] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0013", "type": "capstone", "title": "Wes capstones (gated on Roy)", "desc": "W6 first time (fight flips; gated took_dads_place; locked-visible telegraph 'take Dad's place first'), W7 the break. Sets wes_broken.", "status": "planned", "deps": ["beat_0012","beat_0009"], "target_phase": "2_one_shots.toml", "introduces": { "locations": [], "npcs": [], "flags": ["wes_first_done","wes_broken"] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0014", "type": "arc_escalation", "title": "Wes repeatable loop", "desc": "W8 loop_garage (sex-loop; rougher register, she tops; opens once wes_first_done).", "status": "planned", "deps": ["beat_0013"], "target_phase": "5_scenes.toml", "introduces": { "locations": [], "npcs": [], "flags": [] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0015", "type": "npc_intro", "title": "Maddie hub + sister talk", "desc": "M0 her-room hub, M1 sister talk. Cold-start, ungated.", "status": "planned", "deps": ["beat_0002"], "target_phase": "5_scenes.toml", "introduces": { "locations": [], "npcs": ["npc_maddie"], "flags": [] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0016", "type": "arc_escalation", "title": "Maddie catch + curiosity", "desc": "M2 she catches Cora (auto; gated roy_kissed OR corr>=40; sets maddie_clocked_you), M3 curiosity/questions, M4 'let me show you' (charged grooming; raises maddie.corruption).", "status": "planned", "deps": ["beat_0015"], "target_phase": "5_scenes.toml", "introduces": { "locations": [], "npcs": [], "flags": ["maddie_clocked_you"] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0017", "type": "arc_escalation", "title": "Maddie §5H + grooming walk-ins", "desc": "M5 catch her (bathroom is_present), M10-12 grooming walk-ins band-scaled.", "status": "planned", "deps": ["beat_0016"], "target_phase": "5_scenes.toml", "introduces": { "locations": [], "npcs": [], "flags": [] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0018", "type": "capstone", "title": "Maddie capstones", "desc": "M6 storm-night first touch, M7 first time, M8 the share (gated maddie_first_done + (roy_first_done OR wes_first_done)). Sets maddie_in.", "status": "planned", "deps": ["beat_0016","beat_0009"], "target_phase": "2_one_shots.toml", "introduces": { "locations": [], "npcs": [], "flags": ["maddie_touched","maddie_first_done","maddie_in"] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0019", "type": "arc_escalation", "title": "Maddie repeatable loop", "desc": "M9 loop_maddies_room (sex-loop; soft/sapphic; she initiates more as she falls).", "status": "planned", "deps": ["beat_0018"], "target_phase": "5_scenes.toml", "introduces": { "locations": [], "npcs": [], "flags": [] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0020", "type": "economic", "title": "Backroom ceiling + phone pics", "desc": "V3 backroom offer (gated corr>=45+exhib>=35; sets vic_backroom), V4/F8 backroom work (the player ceiling), F9 photo tiers climb.", "status": "planned", "deps": ["beat_0005"], "target_phase": "5_scenes.toml", "introduces": { "locations": [], "npcs": [], "flags": ["vic_backroom"] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0021", "type": "cross_npc", "title": "Combined household scenes (Act 2)", "desc": "Maddie+Roy / Maddie+Wes / household combined beats; sets household_is_yours when took_dads_place + wes_broken + maddie_in. Gated corr>=70.", "status": "planned", "deps": ["beat_0009","beat_0013","beat_0018"], "target_phase": "5_scenes.toml", "introduces": { "locations": [], "npcs": [], "flags": ["household_is_yours"] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0022", "type": "story_turn", "title": "Phone system", "desc": "Family group chat (tone shifts post-milestone) + per-NPC threads (flags+elapsed-days only) + the photo-sale economy surface.", "status": "planned", "deps": ["beat_0007"], "target_phase": "8_phone.toml", "introduces": { "locations": [], "npcs": [], "flags": [] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0023", "type": "npc_intro", "title": "Brenda (witness)", "desc": "BR0 Town Lane-2 clothing reactions + hidden brenda_suspicion accumulator, BR1 suspicion setback. Cut if she doesn't earn.", "status": "planned", "deps": ["beat_0005"], "target_phase": "5_scenes.toml", "introduces": { "locations": [], "npcs": ["npc_brenda"], "flags": [] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0024", "type": "economic", "title": "Economy pressure + fail-state", "desc": "Household bill weekly event; lean_household cooling when money 0 + lapsed; shop foreclosure dated threat at Roy's Shop; recklessness/walk-in setback wiring.", "status": "planned", "deps": ["beat_0003","beat_0006"], "target_phase": "4_story_arc.toml", "introduces": { "locations": [], "npcs": [], "flags": ["lean_household"] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0025", "type": "location_reveal", "title": "Fast-travel valve", "desc": "Wes's car instant Home<->Town after wes_truce (the friction release valve).", "status": "planned", "deps": ["beat_0012"], "target_phase": "3_activities.toml", "introduces": { "locations": [], "npcs": [], "flags": [] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0026", "type": "story_turn", "title": "Lynn returns", "desc": "L0 auto (gated household_is_yours; sets lynn_returned + activates her schedule at the house), L1 tries the kitchen. Phone: Lynn texts before arriving.", "status": "planned", "deps": ["beat_0021"], "target_phase": "2_one_shots.toml", "introduces": { "locations": [], "npcs": ["npc_lynn"], "flags": ["lynn_returned"] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0027", "type": "capstone", "title": "Lynn reckoning", "desc": "L2 she tries Roy (he chooses Cora), L3 she tries the kids (they choose Cora). Builds lynn_reckoning.", "status": "planned", "deps": ["beat_0026"], "target_phase": "2_one_shots.toml", "introduces": { "locations": [], "npcs": [], "flags": [] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0028", "type": "capstone", "title": "Lynn displacement capstone", "desc": "L4 the dinner-table reckoning — the family lines up behind Cora; the frontier payoff. Sets lynn_displaced.", "status": "planned", "deps": ["beat_0027"], "target_phase": "2_one_shots.toml", "introduces": { "locations": [], "npcs": [], "flags": ["lynn_displaced"] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0029", "type": "story_turn", "title": "Frontier / plateau", "desc": "L5 frontier state (Lynn gone/kept broken), plateau narration ('you've taken the house — run your family, more to come'), greyed Uncle-Gary next-hook. Sets frontier_reached.", "status": "planned", "deps": ["beat_0028"], "target_phase": "4_story_arc.toml", "introduces": { "locations": [], "npcs": [], "flags": ["frontier_reached"] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0030", "type": "story_turn", "title": "Legibility polish", "desc": "Sidebar npc_panel rows (where + warmth + named next step w/ place+time), quest-card desire-ladder chain W0-W7, story-goals card; final legibility pass.", "status": "planned", "deps": ["beat_0009","beat_0013","beat_0018"], "target_phase": "4_story_arc.toml", "introduces": { "locations": [], "npcs": [], "flags": [] }, "produced_canvas_ids": [], "decided_at": null },
+    { "id": "beat_0031", "type": "story_turn", "title": "Presence-floor base hubs (fix)", "desc": "Brought NPC base hubs forward to fix nav-shows-NPC-but-room-empty. hub_roy_living/shop/bedroom, hub_wes_garage/shop, hub_maddie_room, hub_vic_bar (portrait hubs: npc+requires_npc, schedules per window, Talk builds arousal daily-capped) + ambient_brenda_porch (Lane-2 witness) + ambient_bathroom_occupied (is_present baseline). Caught 2 engine errors: exit type=continue invalid (->choices); end_time 24:00 invalid (->00:00). npcId emits for all 7 hubs; structural audit 0 present-but-empty.", "status": "validated", "deps": ["beat_0001"], "target_phase": "5_scenes.toml", "introduces": { "locations": [], "npcs": [], "flags": [] }, "produced_canvas_ids": ["hub_roy_living","hub_roy_shop","hub_roy_bedroom","hub_wes_garage","hub_wes_shop","hub_maddie_room","hub_vic_bar","ambient_brenda_porch","ambient_bathroom_occupied"], "decided_at": 2 }
+  ],
+  "structure_registry": {
+    "locations": [
+      { "id": "loc_home", "category": "reachable" },
+      { "id": "loc_cora_room", "category": "reachable" },
+      { "id": "loc_kitchen", "category": "reachable" },
+      { "id": "loc_living_room", "category": "reachable" },
+      { "id": "loc_master_bedroom", "category": "reachable" },
+      { "id": "loc_garage", "category": "reachable" },
+      { "id": "loc_maddie_room", "category": "reachable" },
+      { "id": "loc_bathroom", "category": "reachable" },
+      { "id": "loc_backyard", "category": "reachable" },
+      { "id": "loc_town", "category": "reachable" },
+      { "id": "loc_roys_shop", "category": "reachable" },
+      { "id": "loc_bar", "category": "reachable" },
+      { "id": "loc_corner_store", "category": "reachable" },
+      { "id": "loc_maddie_out", "category": "offscreen" },
+      { "id": "loc_vic_home", "category": "offscreen" },
+      { "id": "loc_brenda_home", "category": "offscreen" },
+      { "id": "loc_lynn_away", "category": "offscreen" }
+    ],
+    "npcs": ["npc_roy", "npc_wes", "npc_maddie", "npc_vic", "npc_brenda", "npc_lynn"],
+    "flags": ["game_started", "cooked_today", "showered_today", "talked_to_roy_today", "talked_to_wes_today", "talked_to_maddie_today"],
+    "schedules": ["npc_roy", "npc_wes", "npc_maddie", "npc_vic", "npc_brenda", "npc_lynn"]
+  },
+  "next_up": ["beat_0004", "beat_0005", "beat_0007"],
+  "decisions_log": [
+    {
+      "turn": 1,
+      "note": "Seed locked (driving everything per LO). Fantasy: female PC comes home broke to the house her mother walked out of a year ago; fills the absent-mother vacancy and becomes the matriarch — blood incest (father Roy, brother Wes, sister Maddie), with mother Lynn's Act-2 return as the displacement capstone. Differentiated from existing step-family games (under_one_roof, the_long_summer) and the estate game (the_inheritance): blood incest, absent-mother lever, caretaker->power inner arc. Systems: phone YES, clothing YES, customization YES (default name Cora), rent NO. Title 'Mother's Place' (working).",
+      "book_revision": 1
+    },
+    {
+      "turn": 1,
+      "note": "Step 2 top-level locked. Stats: corruption/money/energy/exhibitionism (4 legs; cut fitness/intelligence/charisma/career; beauty=clothing-derived). Double lock: Cora corruption (door) + per-member trait (Roy relation, Wes relation-via-friction, Maddie own-corruption). Desire ladder W0-W7 (cold start -> woman-of-the-house -> stop-hiding -> take Dad -> Wes power struggle -> groom Maddie -> run the house -> Lynn's return). Economy: bar corruption-ladder + phone pics + Roy's shop; sinks household/clothing/gifts; late pressure = shop foreclosure; rent system OFF. Machine: took_dads_place gates Wes-late; corruption+maddie_clocked_you gate Maddie-grooming; Form 2a economy tissue; DAG holds. Frontier: Lynn capstone -> plateau -> greyed Uncle Gary hook. Fail-state soft+real+recoverable.",
+      "book_revision": 2
+    },
+    {
+      "turn": 1,
+      "note": "Step 2b map locked. Nested-zones, two roots (Home + Town) bridged by a walk activity. 13 locations, all reachable, no door-locks (content gated by traits/flags/occupancy). Home: loc_home hub + cora_room/kitchen/living_room/master_bedroom/garage/maddie_room/bathroom/backyard. Town: loc_town hub + roys_shop/bar/corner_store. Naming: bare nouns for shared/public, possessive for personal (Your Room, Maddie's Room, Roy's Shop). Travel friction: Home<->Town walk costs ~30min+energy (schedules bite), intra-zone free, car fast-travel unlock later. Lynn's Act-2 location + Uncle Gary hook deferred to on-ramps.",
+      "book_revision": 3
+    },
+    {
+      "turn": 1,
+      "note": "Step 3 casting locked. 6 NPCs: Roy (core/foundation conquest, slow-burn tender, roy.corruption+arousal, capstone sets took_dads_place), Wes (core/power-struggle, antagonist->owned rivalry, wes.corruption-via-friction+arousal, late rung gated on took_dads_place), Maddie (core/protege, slow-burn grooming, maddie.corruption raised-by-Cora+arousal, gated on Cora corruption+maddie_clocked_you), Lynn (late pressure+frontier conquest, antagonist displaced-not-seduced, flag-chain, gated on household_is_yours), Vic (corrupting on-ramp+peripheral, leverage/transactional, money/corruption+flags, bar income node Form 2a cold-start), Brenda (light witness, public-exposure fail-state face, cut at blueprint if she doesn't earn). REFINEMENT: family cores use two-meter family spine (npc.corruption odo + npc.arousal throttle), NOT relation (corrected Step-2 sketch). DAG: Roy->took_dads_place->Wes-late; Cora-corr+maddie_clocked_you->Maddie; all-3->household_is_yours->Lynn; Vic no family deps. Uncle Gary deferred frontier hook.",
+      "book_revision": 4
+    },
+    {
+      "turn": 1,
+      "note": "Step 4 story design done (all 4 passes). Player thread: reactive survival want (collapse, stated in opening) + appetite corruption drive from caretaker-power discovery; exhibition backbone bar+house; economy bar/shop/phone with sinks clothes/household/gifts; ceiling = bar backroom; daily routines cook/shower/shift/quiet-hour as fused solo-host+hijack. Briefs: Roy (grief->tender->Lynn's bed, his confession/first-time/took-his-place), Wes (friction->fight-that-flips->break, gated on Roy), Maddie (catch->groom->first-time->share, the made protege), Lynn (return->reckoning->displaced not seduced), Vic (bar on-ramp/backroom income, light), Brenda (light witness/public tooth, cut at blueprint if unearned). Web: Roy->took_dads_place, Wes->wes_broken, Maddie->maddie_in, all->household_is_yours->Lynn frontier. World: place jobs+tracks, reactive public (bar predators/town prudes/Brenda schemer), days-not-afternoon cadence, foreclosure->Lynn clock. 5H bathroom CONFIRMED in play (peek/occupied/caught), bedrooms secondary. Reactivity 4A-4F wired in story; pregnancy = designed optional frontier body-state, build-decision deferred to blueprint; fail-state soft+real+recoverable.",
+      "book_revision": 5
+    },
+    {
+      "turn": 1,
+      "note": "Step 5 blueprint locked + plan seeded (30 beats). Corruption bands 0-24/25-49/50-74/75-100 (Settling In/Stop Hiding/Taking Over/Matriarch); double-lock floors: family tease corr>=25, first-time corr>=50, combined corr>=70 (+ each NPC's own corruption odometer). 11 player feeders (F1-F11), economy bar ladder $25->40->80->200 + phone pics, sinks household-bill/clothing/gifts, Lynn's closet free top-charge. Roy ~18 canvases (family/ambient density + slow-burn pacing, took_dads_place capstone), Wes ~12 (W6 gated took_dads_place), Maddie ~13 (gated corr+maddie_clocked_you, M8 gated roy/wes first-time), Lynn ~7 capstone-seq gated household_is_yours, Vic ~6 income node, Brenda ~4 witness. DAG acyclic+telegraphed; Maddie has independent corr>=40 path. Opening = boot+customization+first want+10min taste. Fail-state bites soft (lean_household, walk-in/Brenda setbacks). Pregnancy body-state DEFERRED (not v1). 5H bathroom built corrected (enterable, occupancy-gated activities). Build order: scaffold->opening->feeders->bar->clothing->Roy->Wes->Maddie->backroom->combined->phone->Brenda->economy->fast-travel->Lynn->frontier->polish.",
+      "book_revision": 6
+    },
+    {
+      "turn": 1,
+      "note": "Step 6 feedback done. Walked all 5 framework subjects vs the whole design book; mostly held. 3 refines found+fixed: g1 (lines IN/OUT declared incl. act-scoped non-con prey beat as a declared register, pregnancy deferred, all of-age), g2 (Rule 4 voice carriage committed — hot beats/capstones in played dialog), g3 (lean_household flat+reversible, no decay spiral). No major gap (game designed through the pipeline). -> authoring.",
+      "book_revision": 7
+    },
+    {
+      "turn": 1,
+      "note": "USER bug report: locations show an NPC present (nav avatar) but going in shows nothing. DIAGNOSED (not an engine bug): presence-on-nav is schedule-driven + free, but the scaffold registered all schedules while the Lane-1 hubs were future beats -> presence ahead of content (the presence-floor gap). FIXED via beat_0031 (base hubs brought forward). Also the bathroom: feeder_shower gated is_absent hides exactly when occupied + peek not yet authored -> added ambient_bathroom_occupied (is_present baseline). Verified: 7 portrait hubs emit npcId (Roy3/Wes2/Maddie1/Vic1), structural audit 0 present-but-empty, build green. Remaining empty rooms (backyard, corner_store) have NO NPC present (not this bug; content on roadmap)."
+    },
+    {
+      "turn": 2,
+      "note": "beat_0003 PLAYER FEEDERS built + GREEN. feeder_touch (corruption bootstrap, gated arousal>0, resets arousal), feeder_cook (cooked_today + lewd-exhib branch locked-visible), feeder_shower (is_absent §5H host, hygiene restore + exhib branch; peek/caught attach with NPC arcs), feeder_mirror (exhib bootstrap). The corruption/exhibitionism supply is live. next_up: beat_0004 bar/Vic, then the 3 NPC hubs (0006 Roy, 0011 Wes, 0015 Maddie)."
+    },
+    {
+      "turn": 1,
+      "note": "Step 7 SCAFFOLD built + GREEN (merge OK, schema OK, flag chains valid, index.html generated). 6 phase files: 0_systems_spec (project/time/clothing settings/daily_tick/sidebar/hidden awareness), 1_metadata (player Cora customizable + 6 NPCs w/ schedules + 16 locations [13 reachable + 4 offscreen] + starter clothing), 2_one_shots (canvas_homecoming cold-open names cast+premise), 3_activities (sleep router + walk_to_town/walk_home bridges, 30min friction), 4_story_arc (spine quest card), 6_dev_shortcuts. beat_0001 (scaffold) + beat_0002 (boot) validated. Only warnings = missing location images (expected, no media yet). next_up: beat_0003 feeders, beat_0004 bar/Vic, beat_0006 Roy hub.",
+      "book_revision": 7
+    }
+  ]
+}

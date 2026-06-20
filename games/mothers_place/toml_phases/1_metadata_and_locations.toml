@@ -1,0 +1,470 @@
+# Phase 1/7 — 1_metadata_and_locations.toml
+# Mother's Place — player + all NPCs (schedules + core_traits) + all locations
+# All [[npcs]] / [[npcs.schedules]] / [[npcs.core_traits]] MUST live in this one file.
+
+# ─── Player ───────────────────────────────────────────────────────────────────
+
+[player]
+id          = "player"
+name        = "Cora"
+description = "Mid-twenties. Came home with nothing — job gone, money gone, nowhere else to land. Back in the house she grew up in, the one her mother walked out of a year ago."
+portrait    = "cora.jpg"
+customizable = true
+
+[player.core_traits]
+corruption    = 0
+arousal       = 0
+energy        = 100
+hygiene       = 100
+money         = 20      # broke — the household pressure
+exhibitionism = 0
+
+# ─── Player customization (start-of-game screen; auto-rendered before the boot) ──
+# id="name" writes $player.name (the @player token); others write $player.<id>,
+# read in prose via @player.<id>. Family speaks @player; descriptions use @player.build.
+[[player.customization_fields]]
+id      = "name"
+type    = "text"
+label   = "Your name"
+default = "Cora"
+
+[[player.customization_fields]]
+id      = "build"
+type    = "select"
+label   = "Your build"
+default = "average"
+options = ["petite", "average", "curvy", "athletic", "thick"]
+
+[[player.customization_fields]]
+id            = "look"
+type          = "image_select"
+label         = "Your look"
+default       = "tired"
+sets_portrait = true
+options = [
+  { id = "tired",   image = "players/cora_tired.jpg",   label = "Worn out" },
+  { id = "pretty",  image = "players/cora_pretty.jpg",  label = "Pretty" },
+  { id = "sharp",   image = "players/cora_sharp.jpg",   label = "Sharp" },
+]
+
+# ─── NPCs ─────────────────────────────────────────────────────────────────────
+# Roy/Wes/Maddie — family cores: two-meter spine (corruption odometer + arousal
+#   throttle); NO relation (family default), NO passive arousal tick (slow-burn earned).
+# Vic — corrupting on-ramp/income node (relation, light). Brenda — witness (relation +
+#   hidden awareness). Lynn — frontier antagonist (relation; offscreen until Act 2).
+
+# ── Roy (father) ────────────────────────────────────────────────────────────────
+[[npcs]]
+id          = "npc_roy"
+name        = "Roy"
+description = "Your father. Fifties, broad and going soft, hands that still know an engine. Since your mother left he runs the shop into the ground by day and drinks the evenings flat. He looks at you doing her chores like something's coming loose behind his eyes."
+portrait    = "roy.jpg"
+core_traits = { corruption = 0, arousal = 0 }
+flag_keys   = []
+arc_stages  = [
+  "Grieving",       # 0 — drinking through the silence
+  "Opened up",      # 1 — roy_grief_shared
+  "Wants you",      # 2 — roy_confessed
+  "Crossed",        # 3 — roy_kissed
+  "Yours",          # 4 — roy_first_done
+  "Her place",      # 5 — took_dads_place
+]
+
+[[npcs.schedules]]
+location = "loc_master_bedroom"
+weekdays = [0,1,2,3,4,5,6]
+start_time = "23:00"
+end_time = "06:30"
+activity = "asleep — or not sleeping"
+
+[[npcs.schedules]]
+location = "loc_bathroom"
+weekdays = [0,1,2,3,4,5,6]
+start_time = "06:30"
+end_time = "07:00"
+activity = "morning shower"
+
+[[npcs.schedules]]
+location = "loc_roys_shop"
+weekdays = [0,1,2,3,4,5,6]
+start_time = "07:00"
+end_time = "17:00"
+activity = "running the shop into the ground"
+
+[[npcs.schedules]]
+location = "loc_living_room"
+weekdays = [0,1,2,3,4,5,6]
+start_time = "17:00"
+end_time = "23:00"
+activity = "drinking in front of the TV"
+
+# ── Wes (older brother) ─────────────────────────────────────────────────────────
+[[npcs]]
+id          = "npc_wes"
+name        = "Wes"
+description = "Your older brother. Late twenties, all shoulders and grievance. He's the one who stayed and held this family together when Mom left, and he hasn't forgiven any of you for it — least of all you, for walking back in like you get a say."
+portrait    = "wes.jpg"
+core_traits = { corruption = 0, arousal = 0 }
+flag_keys   = []
+arc_stages  = [
+  "Hostile",        # 0 — every word's a fight
+  "Charged",        # 1 — the friction heats
+  "Truce",          # 2 — wes_truce
+  "Yours",          # 3 — wes_first_done
+  "Broken",         # 4 — wes_broken
+]
+
+[[npcs.schedules]]
+location = "loc_garage"
+weekdays = [0,1,2,3,4,5,6]
+start_time = "00:00"
+end_time = "08:00"
+activity = "asleep in the garage"
+
+[[npcs.schedules]]
+location = "loc_roys_shop"
+weekdays = [0,1,2,3,4,5,6]
+start_time = "08:00"
+end_time = "12:00"
+activity = "covering for Dad at the shop"
+
+[[npcs.schedules]]
+location = "loc_garage"
+weekdays = [0,1,2,3,4,5,6]
+start_time = "12:00"
+end_time = "19:00"
+activity = "working on the car"
+
+[[npcs.schedules]]
+location = "loc_bathroom"
+weekdays = [0,1,2,3,4,5,6]
+start_time = "19:00"
+end_time = "19:30"
+activity = "washing the day off"
+
+[[npcs.schedules]]
+location = "loc_garage"
+weekdays = [0,1,2,3,4,5,6]
+start_time = "19:30"
+end_time = "00:00"
+activity = "beer and the radio"
+
+# ── Maddie (younger sister) ─────────────────────────────────────────────────────
+[[npcs]]
+id          = "npc_maddie"
+name        = "Maddie"
+description = "Your little sister. Just turned eighteen, out of school, going nowhere on purpose. Sullen one hour and reckless the next. She watches you with an expression you can't read — like she hasn't decided whether she wants to be you or get away from you."
+portrait    = "maddie.jpg"
+core_traits = { corruption = 0, arousal = 0 }
+flag_keys   = []
+arc_stages  = [
+  "Sullen",         # 0 — distance
+  "Watching",       # 1 — maddie_clocked_you
+  "Curious",        # 2 — the grooming starts
+  "Touched",        # 3 — maddie_touched
+  "Yours",          # 4 — maddie_first_done
+  "In on it",       # 5 — maddie_in
+]
+
+[[npcs.schedules]]
+location = "loc_maddie_room"
+weekdays = [0,1,2,3,4,5,6]
+start_time = "00:00"
+end_time = "10:00"
+activity = "asleep, curtains shut"
+
+[[npcs.schedules]]
+location = "loc_maddie_out"
+weekdays = [0,1,2,3,4,5,6]
+start_time = "10:00"
+end_time = "17:00"
+activity = "out, wherever"
+
+[[npcs.schedules]]
+location = "loc_maddie_room"
+weekdays = [0,1,2,3,4,5,6]
+start_time = "17:00"
+end_time = "21:00"
+activity = "in her room, music up"
+
+[[npcs.schedules]]
+location = "loc_bathroom"
+weekdays = [0,1,2,3,4,5,6]
+start_time = "21:00"
+end_time = "21:30"
+activity = "shower, door never quite shut"
+
+[[npcs.schedules]]
+location = "loc_maddie_room"
+weekdays = [0,1,2,3,4,5,6]
+start_time = "21:30"
+end_time = "00:00"
+activity = "up too late on her phone"
+
+# ── Vic (bar owner — corrupting on-ramp / income node) ──────────────────────────
+[[npcs]]
+id          = "npc_vic"
+name        = "Vic"
+description = "Owns the bar in town. Fifties, smooth, sees exactly what a girl is worth to his register before she's said a word. Useful, and never quite wrong about you."
+portrait    = "vic.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = [
+  "Boss",           # 0 — hired
+  "Pushing",        # 1 — vic_revealing
+  "The back room",  # 2 — vic_backroom
+]
+
+[[npcs.schedules]]
+location = "loc_vic_home"
+weekdays = [0,1,2,3,4,5,6]
+start_time = "00:00"
+end_time = "14:00"
+activity = "off the clock"
+
+[[npcs.schedules]]
+location = "loc_bar"
+weekdays = [0,1,2,3,4,5,6]
+start_time = "14:00"
+end_time = "00:00"
+activity = "running the bar"
+
+# ── Brenda (neighbor — witness) ─────────────────────────────────────────────────
+[[npcs]]
+id          = "npc_brenda"
+name        = "Brenda"
+description = "The neighbor. Always on her porch, always 'just asking,' a smile that's really a notebook. She clocked the day this house got interesting again."
+portrait    = "brenda.jpg"
+core_traits = { relation = 0, awareness = 0 }
+flag_keys   = []
+arc_stages  = []   # witness — awareness bands, no arc ladder
+
+[[npcs.schedules]]
+location = "loc_town"
+weekdays = [0,1,2,3,4,5,6]
+start_time = "08:00"
+end_time = "18:00"
+activity = "on the porch, watching the street"
+
+[[npcs.schedules]]
+location = "loc_brenda_home"
+weekdays = [0,1,2,3,4,5,6]
+start_time = "18:00"
+end_time = "08:00"
+activity = "inside, lights on"
+
+# ── Lynn (mother — frontier antagonist; OFFSCREEN until Act 2) ──────────────────
+# No standing hub: her Act-2 scenes are flag-gated auto-fire capstones at home
+# locations (gated lynn_returned), not schedule presence. Offscreen the whole game.
+[[npcs]]
+id          = "npc_lynn"
+name        = "Lynn"
+description = "Your mother. A year gone — ran off with a man and a forwarding address she never sent. The shape of her is still in this house: her clothes in the closet, her chair at the table, the woman everyone's waiting for. She has no idea you're becoming her."
+portrait    = "lynn.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = []
+
+[[npcs.schedules]]
+location = "loc_lynn_away"
+weekdays = [0,1,2,3,4,5,6]
+start_time = "00:00"
+end_time = "00:00"
+activity = "gone"
+
+# ─── Locations ────────────────────────────────────────────────────────────────
+# Nested-zones, TWO ROOTS (Home + Town) bridged by walk activities (phase 3).
+# Standing hubs are NOT is_container (containers swallow attached canvases).
+# All 13 reachable; no door-locks (content gated by traits/flags/occupancy).
+
+# ── Home root ────────────────────────────────────────────────────────────────
+[[locations]]
+id               = "loc_home"
+name             = "Home"
+description      = "The house you grew up in. It opens off a short front hall — the kitchen one way, the living room ahead, the bedrooms down the back. A year without your mother shows in every room: dishes, dust, the quiet of men who've stopped trying."
+navigation_order = [
+  "loc_cora_room",
+  "loc_kitchen",
+  "loc_living_room",
+  "loc_master_bedroom",
+  "loc_garage",
+  "loc_maddie_room",
+  "loc_bathroom",
+  "loc_backyard",
+]
+# Root: no entry_from (parallel to loc_town). Bridge = activity_walk_to_town (phase 3).
+
+[[locations]]
+id          = "loc_cora_room"
+name        = "Your Room"
+description = "Your old bedroom, more or less how you left it. A single bed, boxes you haven't unpacked, a mirror on the back of the door. It's yours again, for whatever that's worth."
+image       = "locations/cora_room.jpg"
+entry_from  = "loc_home"
+
+[[locations]]
+id          = "loc_kitchen"
+name        = "Kitchen"
+description = "Your mother's old kitchen. Nobody's run it right since she left — the fridge half-empty, the good pans put away wrong. It's the first place you can feel yourself filling a hole just by standing in it."
+image       = "locations/kitchen.jpg"
+entry_from  = "loc_home"
+
+[[locations]]
+id          = "loc_living_room"
+name        = "Living Room"
+description = "A sagging couch, a TV that's always on, a ring of empties around your father's chair. The light goes gold here in the evening and makes the room almost kind."
+image       = "locations/living_room.jpg"
+entry_from  = "loc_home"
+
+[[locations]]
+id          = "loc_master_bedroom"
+name        = "Master Bedroom"
+description = "Your parents' room. Your father sleeps on one side of the bed like she might still come back to the other. Her clothes are still in the closet. The whole room is holding its breath."
+image       = "locations/master_bedroom.jpg"
+entry_from  = "loc_home"
+
+[[locations]]
+id          = "loc_garage"
+name        = "Garage"
+description = "Cold concrete, a car up on ramps, a cot and a mini-fridge in the corner. Wes half-lives out here now — far enough from the house to call it his."
+image       = "locations/garage.jpg"
+entry_from  = "loc_home"
+
+[[locations]]
+id          = "loc_maddie_room"
+name        = "Maddie's Room"
+description = "Fairy lights and laundry on the floor, the bass coming through the door. Eighteen years old and shrinking into the one room that's hers."
+image       = "locations/maddie_room.jpg"
+entry_from  = "loc_home"
+
+[[locations]]
+id          = "loc_bathroom"
+name        = "Bathroom"
+description = "The one bathroom in the house. Thin door, a lock that's been broken so long nobody mentions it, a fan that doesn't clear the steam. Everyone's schedule runs through this room."
+image       = "locations/bathroom.jpg"
+entry_from  = "loc_home"
+
+[[locations]]
+id          = "loc_backyard"
+name        = "Backyard"
+description = "A patch of dead grass, two folding chairs, an ashtray on the step. Where the talks happen that can't happen inside."
+image       = "locations/backyard.jpg"
+entry_from  = "loc_home"
+
+# ── Town root ────────────────────────────────────────────────────────────────
+[[locations]]
+id               = "loc_town"
+name             = "Town"
+description      = "The main street — a bar, a corner store, your father's shop, and not much else. Brenda's porch is on the corner, and she's always on it."
+navigation_order = [
+  "loc_roys_shop",
+  "loc_bar",
+  "loc_corner_store",
+]
+# Root: no entry_from. Bridge home = activity_walk_home (phase 3). Brenda's surface.
+
+[[locations]]
+id          = "loc_roys_shop"
+name        = "Roy's Shop"
+description = "Your father's auto shop, two bays and a counter, more empty than not these days. The bell over the door hasn't rung enough lately, and the bills on the desk say so."
+image       = "locations/roys_shop.jpg"
+entry_from  = "loc_town"
+
+[[locations]]
+id          = "loc_bar"
+name        = "Bar"
+description = "Vic's place. Dim, sticky, busier than it has any right to be — the kind of bar where the tips depend on what the girl behind it is willing to let the regulars see."
+image       = "locations/bar.jpg"
+entry_from  = "loc_town"
+
+[[locations]]
+id          = "loc_corner_store"
+name        = "Corner Store"
+description = "Groceries, beer, a sad rack of cheap clothes in the back. Where the household money goes and where you put something on your back when you've got a few dollars."
+image       = "locations/corner_store.jpg"
+entry_from  = "loc_town"
+
+# ── Offscreen "away" labels (no nav card; exempt from presence floor) ──────────
+[[locations]]
+id          = "loc_maddie_out"
+name        = "Out somewhere"
+description = "Wherever Maddie goes when she's not here."
+offscreen   = true
+
+[[locations]]
+id          = "loc_vic_home"
+name        = "Vic's place"
+description = "Off the clock, somewhere across town."
+offscreen   = true
+
+[[locations]]
+id          = "loc_brenda_home"
+name        = "Brenda's house"
+description = "Next door, lights on, blinds at an angle."
+offscreen   = true
+
+[[locations]]
+id          = "loc_lynn_away"
+name        = "Gone"
+description = "Wherever your mother went a year ago. No address."
+offscreen   = true
+
+# ─── Clothing catalog (starter set; expanded at beat_0005) ──────────────────────
+# initial=true auto-equips. worn_corruption (the clothing exposure value) drives the
+# reactive world; never mutates global corruption. Lynn's clothes + revealing tiers
+# are added at beat_0005.
+
+[[clothing]]
+id = "plain_bra"
+name = "Plain Bra"
+slot = "bra"
+image = "clothing/plain_bra.jpg"
+initial = true
+beauty = 0
+corruption = 0
+
+[[clothing]]
+id = "plain_panties"
+name = "Plain Panties"
+slot = "underwear"
+image = "clothing/plain_panties.jpg"
+initial = true
+beauty = 0
+corruption = 0
+
+[[clothing]]
+id = "worn_tshirt"
+name = "Worn T-Shirt"
+slot = "top"
+image = "clothing/worn_tshirt.jpg"
+initial = true
+beauty = 1
+corruption = 0
+
+[[clothing]]
+id = "old_jeans"
+name = "Old Jeans"
+slot = "bottom"
+image = "clothing/old_jeans.jpg"
+initial = true
+beauty = 1
+corruption = 0
+
+[[clothing]]
+id = "flat_sneakers"
+name = "Flat Sneakers"
+slot = "shoes"
+image = "clothing/flat_sneakers.jpg"
+initial = true
+beauty = 0
+corruption = 0
+
+[[clothing]]
+id = "old_sundress"
+name = "Old Sundress"
+slot = "dress"
+image = "clothing/old_sundress.jpg"
+initial = true
+beauty = 2
+corruption = 5
+
+# End of phase 1.

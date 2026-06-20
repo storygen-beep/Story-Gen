@@ -1,0 +1,334 @@
+# Phase 5/7 — 5_scenes.toml
+# Mother's Place — NPC hubs + ambients. This pass = the COLD-START BASE HUBS for every
+# arc NPC at each reachable schedule row (the presence floor), so the nav's "someone's
+# here" always has content behind it. Escalation rungs / capstones / loops come in the
+# arc beats. Register: RTS-flat; Talk carries the NPC's own voice (Rule 4).
+#
+# Hub fingerprint: npc + requires_npc BOTH set (portrait), is_repeatable, schedules
+# covering the NPC's window there, low priority. Base node renders unconditionally
+# (presence floor); the Talk choice is daily-capped (hidden when used), builds warmth.
+
+# ═════════════════════════════════════════════════════════════════════════════
+# ROY — hubs at living room (eve), shop (day), master bedroom (night)
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "hub_roy_living"
+name        = "Roy"
+description = "Roy hub — Living Room, evenings. Presence floor + Talk (warmth)."
+[canvases.trigger]
+location      = "loc_living_room"
+npc           = "npc_roy"
+requires_npc  = "npc_roy"
+is_repeatable = true
+priority      = 5
+is_active     = true
+[[canvases.trigger.schedules]]
+weekdays = [0,1,2,3,4,5,6]
+start_time = "17:00"
+end_time = "23:00"
+[[canvases.nodes]]
+id = "base"
+name = "Roy"
+blocks = [
+  { type = "paragraph", content = "Your father's in his chair, the TV throwing light on a face that's given up arguing with it. A can sweats on the armrest. He looks over when you come in — that same beat where it takes him a second, and then it costs him something." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Sit with him a while."
+targetType = "location"
+locationId = "loc_living_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "talked_to_roy_today", operator = "is_false" } ] }
+flagEffects = [ { targetType = "player", flag = "talked_to_roy_today", op = "set" } ]
+effects = [ { targetType = "npc", npcId = "npc_roy", trait = "arousal", op = "add", value = 1, cap = 10 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Leave him to it."
+targetType = "location"
+locationId = "loc_home"
+
+[[canvases]]
+id          = "hub_roy_shop"
+name        = "Roy"
+description = "Roy hub — Roy's Shop, daytime."
+[canvases.trigger]
+location      = "loc_roys_shop"
+npc           = "npc_roy"
+requires_npc  = "npc_roy"
+is_repeatable = true
+priority      = 5
+is_active     = true
+[[canvases.trigger.schedules]]
+weekdays = [0,1,2,3,4,5,6]
+start_time = "07:00"
+end_time = "17:00"
+[[canvases.nodes]]
+id = "base"
+name = "Roy"
+blocks = [
+  { type = "paragraph", content = "Roy's behind the counter with the books open and nothing in the bays. He's got a pencil behind his ear he's not using and the look of a man doing the math one more time hoping it comes out different." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Keep him company."
+targetType = "location"
+locationId = "loc_roys_shop"
+time_progression_minutes = 30
+conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "talked_to_roy_today", operator = "is_false" } ] }
+flagEffects = [ { targetType = "player", flag = "talked_to_roy_today", op = "set" } ]
+effects = [ { targetType = "npc", npcId = "npc_roy", trait = "arousal", op = "add", value = 1, cap = 10 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Head out."
+targetType = "location"
+locationId = "loc_town"
+
+[[canvases]]
+id          = "hub_roy_bedroom"
+name        = "Roy"
+description = "Roy hub — Master Bedroom, night (asleep). Light presence + Lynn's-closet seed."
+[canvases.trigger]
+location      = "loc_master_bedroom"
+npc           = "npc_roy"
+requires_npc  = "npc_roy"
+is_repeatable = true
+priority      = 5
+is_active     = true
+[[canvases.trigger.schedules]]
+weekdays = [0,1,2,3,4,5,6]
+start_time = "23:00"
+end_time = "06:30"
+[[canvases.nodes]]
+id = "base"
+name = "Roy"
+blocks = [
+  { type = "paragraph", content = "He's asleep on his half of the bed, dead to the world, one arm thrown across the cold side like it might fill up again if he doesn't look. Her clothes are still in the closet. The whole room waits for a woman who isn't coming back." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Stand there a moment, then go."
+targetType = "location"
+locationId = "loc_home"
+
+# ═════════════════════════════════════════════════════════════════════════════
+# WES — hubs at garage (most of the day/night) + shop (mornings)
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "hub_wes_garage"
+name        = "Wes"
+description = "Wes hub — Garage, his territory. Friction Talk."
+[canvases.trigger]
+location      = "loc_garage"
+npc           = "npc_wes"
+requires_npc  = "npc_wes"
+is_repeatable = true
+priority      = 5
+is_active     = true
+[[canvases.trigger.schedules]]
+weekdays = [0,1,2,3,4,5,6]
+start_time = "12:00"
+end_time = "08:00"
+[[canvases.nodes]]
+id = "base"
+name = "Wes"
+blocks = [
+  { type = "paragraph", content = "Wes is under the hood with the radio low, a beer going warm on the workbench. He doesn't look up when you come in — just a flat \"what\" that's less a question than a door closing." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Try to talk to him."
+targetType = "location"
+locationId = "loc_garage"
+time_progression_minutes = 20
+conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "talked_to_wes_today", operator = "is_false" } ] }
+flagEffects = [ { targetType = "player", flag = "talked_to_wes_today", op = "set" } ]
+effects = [ { targetType = "npc", npcId = "npc_wes", trait = "arousal", op = "add", value = 1, cap = 10 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Don't bother."
+targetType = "location"
+locationId = "loc_home"
+
+[[canvases]]
+id          = "hub_wes_shop"
+name        = "Wes"
+description = "Wes hub — Roy's Shop, mornings (covering for Dad)."
+[canvases.trigger]
+location      = "loc_roys_shop"
+npc           = "npc_wes"
+requires_npc  = "npc_wes"
+is_repeatable = true
+priority      = 5
+is_active     = true
+[[canvases.trigger.schedules]]
+weekdays = [0,1,2,3,4,5,6]
+start_time = "08:00"
+end_time = "12:00"
+[[canvases.nodes]]
+id = "base"
+name = "Wes"
+blocks = [
+  { type = "paragraph", content = "Wes is working the one job that came in, sleeves shoved up, jaw set. Covering for Dad again, and making sure the silence says so." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Offer to help."
+targetType = "location"
+locationId = "loc_roys_shop"
+time_progression_minutes = 20
+conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "talked_to_wes_today", operator = "is_false" } ] }
+flagEffects = [ { targetType = "player", flag = "talked_to_wes_today", op = "set" } ]
+effects = [ { targetType = "npc", npcId = "npc_wes", trait = "arousal", op = "add", value = 1, cap = 10 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Leave him to it."
+targetType = "location"
+locationId = "loc_town"
+
+# ═════════════════════════════════════════════════════════════════════════════
+# MADDIE — hub at her room (evenings/night). Sister talk, ungated entry.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "hub_maddie_room"
+name        = "Maddie"
+description = "Maddie hub — her room, evenings. Sister talk."
+[canvases.trigger]
+location      = "loc_maddie_room"
+npc           = "npc_maddie"
+requires_npc  = "npc_maddie"
+is_repeatable = true
+priority      = 5
+is_active     = true
+[[canvases.trigger.schedules]]
+weekdays = [0,1,2,3,4,5,6]
+start_time = "17:00"
+end_time = "00:00"
+[[canvases.nodes]]
+id = "base"
+name = "Maddie"
+blocks = [
+  { type = "paragraph", content = "Maddie's cross-legged on her bed in the glow of her phone, fairy lights and laundry everywhere. She clocks you in the doorway and doesn't quite roll her eyes — which, from her, is practically an invitation." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Hang out a while."
+targetType = "location"
+locationId = "loc_maddie_room"
+time_progression_minutes = 25
+conditions = { version = "1.0", items = [ { type = "flag", subject = "player", flag_key = "talked_to_maddie_today", operator = "is_false" } ] }
+flagEffects = [ { targetType = "player", flag = "talked_to_maddie_today", op = "set" } ]
+effects = [ { targetType = "npc", npcId = "npc_maddie", trait = "arousal", op = "add", value = 1, cap = 10 } ]
+[[canvases.nodes.exit_block.choices]]
+text = "Leave her alone."
+targetType = "location"
+locationId = "loc_home"
+
+# ═════════════════════════════════════════════════════════════════════════════
+# VIC — hub at the bar. Base presence (the hire one-shot + shifts come in beat_0004).
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "hub_vic_bar"
+name        = "Vic"
+description = "Vic hub — the Bar. Base presence; hire + shifts in beat_0004."
+[canvases.trigger]
+location      = "loc_bar"
+npc           = "npc_vic"
+requires_npc  = "npc_vic"
+is_repeatable = true
+priority      = 5
+is_active     = true
+[[canvases.trigger.schedules]]
+weekdays = [0,1,2,3,4,5,6]
+start_time = "14:00"
+end_time = "00:00"
+[[canvases.nodes]]
+id = "base"
+name = "Vic"
+blocks = [
+  { type = "paragraph", content = "Vic's behind the bar wiping a glass that's already clean, watching the room like a man counting it. His eyes land on you and do a slow, frank inventory before they get to your face." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_vic" }, content = "Help you, doll? Or you looking for work — because you've got a look that'd move drinks." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Just looking around."
+targetType = "location"
+locationId = "loc_bar"
+time_progression_minutes = 10
+[[canvases.nodes.exit_block.choices]]
+text = "Head back out."
+targetType = "location"
+locationId = "loc_town"
+
+# ═════════════════════════════════════════════════════════════════════════════
+# BRENDA — Lane 2 witness ambient at Town (her shape = no Lane 1 hub).
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "ambient_brenda_porch"
+name        = "Brenda"
+description = "Brenda Lane-2 witness ambient — Town, daytime. Rolls on entry."
+[canvases.trigger]
+location      = "loc_town"
+requires_npc  = "npc_brenda"
+trigger_mode  = "random"
+chance        = 0.4
+is_repeatable = true
+priority      = 4
+is_active     = true
+[[canvases.trigger.schedules]]
+weekdays = [0,1,2,3,4,5,6]
+start_time = "08:00"
+end_time = "18:00"
+[[canvases.nodes]]
+id = "base"
+name = "Brenda"
+blocks = [
+  { type = "paragraph", content = "Brenda's on her porch with a glass of something and a clear view of the whole street. She lifts a hand as you pass — friendly as a hook." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_brenda" }, content = "Settling back in alright, hon? Your daddy must be glad of the company. Lord knows that house has been quiet." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Keep walking."
+targetType = "location"
+locationId = "loc_town"
+
+# ═════════════════════════════════════════════════════════════════════════════
+# BATHROOM — occupied acknowledgment (so it's not blank when someone's showering).
+# Gated npc_at_location is_present (any occupant). The per-NPC PEEK (lewd, gated) +
+# CAUGHT come in the §5H arc beats (0008/0012/0017); this is the baseline read.
+# ═════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "ambient_bathroom_occupied"
+name        = "Occupied"
+description = "Bathroom occupied acknowledgment. is_present (any). Baseline before the gated peeks."
+[canvases.trigger]
+location      = "loc_bathroom"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "npc_at_location", location_id = "loc_bathroom", operator = "is_present" },
+] }
+[[canvases.nodes]]
+id = "base"
+name = "Occupied"
+blocks = [
+  { type = "paragraph", content = "The water's running behind the door, the fan rattling, steam curling out through the gap where the latch never catches. Someone's in there. You could wait — or you couldn't help noticing how little that broken door actually closes." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text = "Give them a minute."
+targetType = "location"
+locationId = "loc_home"
+
+# End of phase 5.

@@ -1,0 +1,307 @@
+# Phase 3/7 — 3_activities.toml
+# Mother's Place — solo activities. Scaffold: the day-cycle router (sleep) + the two
+# walk bridges between the Home and Town roots. Feeders (cook/shower/bar/mirror/phone)
+# are added by their beats as Lane-3 hijack hosts.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# activity_sleep — the day-cycle router (Your Room, energy restore)
+# ─────────────────────────────────────────────────────────────────────────────
+# SOLO (no npc). schedule-gated to the night window BY DESIGN (you only sleep at night).
+# This is the router that carries the player across the clock so daytime windows are
+# reachable. energy full restore; small hygiene cost (shower restores it).
+[[canvases]]
+id          = "activity_sleep"
+name        = "Sleep"
+description = "Cora-solo. Your Room. The day-cycle router. Energy +100, hygiene -10, +8h."
+
+[canvases.trigger]
+location      = "loc_cora_room"
+is_repeatable = true
+priority      = 3
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [0,1,2,3,4,5,6]
+start_time = "21:00"
+end_time   = "04:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Sleep"
+blocks = [
+  { type = "image", props = { file = "activities/sleep.jpg" } },
+  { type = "paragraph", content = "You lie down in your childhood bed under the same water-stain you used to stare at, and the house ticks and settles around you. You go under." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sleep until morning."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_cora_room"
+time_progression_minutes = 480
+effects = [
+  { targetType = "player", trait = "energy",  op = "add", value = 100 },
+  { targetType = "player", trait = "hygiene", op = "add", value = -10 },
+]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# activity_walk_to_town — the Home→Town bridge (travel friction = 30 min)
+# ─────────────────────────────────────────────────────────────────────────────
+# SOLO, NO schedule (available whenever you're home). The 30-min cost is what makes
+# NPC schedules BITE. Fast-travel (Wes's car) unlocks at beat_0025 as the release valve.
+[[canvases]]
+id          = "activity_walk_to_town"
+name        = "Walk into town"
+description = "Cora-solo. Home->Town bridge. +30 min."
+
+[canvases.trigger]
+location      = "loc_home"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Walk into town"
+blocks = [
+  { type = "paragraph", content = "You head down the road into town. Twenty minutes on foot, longer in this heat." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Walk into town."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_town"
+time_progression_minutes = 30
+
+# ─────────────────────────────────────────────────────────────────────────────
+# activity_walk_home — the Town→Home bridge
+# ─────────────────────────────────────────────────────────────────────────────
+[[canvases]]
+id          = "activity_walk_home"
+name        = "Walk home"
+description = "Cora-solo. Town->Home bridge. +30 min."
+
+[canvases.trigger]
+location      = "loc_town"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Walk home"
+blocks = [
+  { type = "paragraph", content = "You walk back out of town toward the house, the light going long across the dead lawns." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Walk home."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "loc_home"
+time_progression_minutes = 30
+
+# ═════════════════════════════════════════════════════════════════════════════
+# beat_0003 — PLAYER FEEDERS (the corruption-feeder economy / daily-loop core)
+# Solo Lane-3 hosts. SOLO branches here raise the player odometers (the supply that
+# makes the family double-locks reachable). NPC walk-ins / the bathroom peek + caught
+# attach with each NPC arc (beats 0008/0012/0017). Register: RTS-flat, solo = narrated.
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ── F1 — Touch herself (Your Room): the off-zero corruption bootstrap ───────────
+# Gated on arousal>0 (her own throttle); raises corruption; resets arousal (climax).
+[[canvases]]
+id          = "feeder_touch"
+name        = "Lie down a while"
+description = "Cora-solo. Your Room. Bootstrap corruption feeder, gated arousal>0, resets arousal."
+
+[canvases.trigger]
+location      = "loc_cora_room"
+is_repeatable = true
+priority      = 4
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Lie down a while"
+blocks = [
+  { type = "paragraph", content = "The house is quiet for once. You lie back on the narrow bed you slept in as a girl and let your mind go where it's been going lately — to the way they look at you now, the three of them, like you're the only warm thing left in here." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get yourself off."
+targetType = "location"
+locationId = "loc_cora_room"
+time_progression_minutes = 20
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "arousal", operator = "gte", value = 1 },
+] }
+effects = [
+  { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 100 },
+  { targetType = "player", trait = "arousal", op = "set", value = 0 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Just lie there."
+targetType = "location"
+locationId = "loc_cora_room"
+time_progression_minutes = 10
+
+# ── F2 — Cook a meal (Kitchen): the filling-in chore + lewd-exhibition branch ────
+# Base = the caretaker act (sets cooked_today — family appreciation beats read it).
+# Lewd branch = cooking half-dressed (exhib feeder), locked-visible until exhib climbs.
+[[canvases]]
+id          = "feeder_cook"
+name        = "Cook for the house"
+description = "Cora-solo. Kitchen. Filling-in chore (cooked_today) + lewd-exhib branch. Family walk-ins attach with their arcs."
+
+[canvases.trigger]
+location      = "loc_kitchen"
+is_repeatable = true
+priority      = 4
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Cook for the house"
+blocks = [
+  { type = "image", props = { file = "activities/cook.jpg" } },
+  { type = "paragraph", content = "The fridge is half-empty and the good pans are put away wrong, but you find enough to make something real. The smell of it changes the house — you can feel them notice, even from the other rooms." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Make dinner."
+targetType = "location"
+locationId = "loc_kitchen"
+time_progression_minutes = 45
+flagEffects = [ { targetType = "player", flag = "cooked_today", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text          = "Cook in just an old shirt."
+targetType    = "location"
+locationId    = "loc_kitchen"
+time_progression_minutes = 45
+show_when_locked = true
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 10 },
+] }
+flagEffects = [ { targetType = "player", flag = "cooked_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 100 },
+  { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 100 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave the kitchen."
+targetType = "location"
+locationId = "loc_home"
+
+# ── F3 — Shower (Bathroom): hygiene restore + exhib branch (§5H host) ────────────
+# Trigger gated npc_at_location is_absent (only when the bathroom's empty). The PEEK
+# (is_present) + CAUGHT (substitution) attach with the NPC arcs. Restore = effects+.
+[[canvases]]
+id          = "feeder_shower"
+name        = "Shower"
+description = "Cora-solo. Bathroom (when empty). Hygiene restore + exhib branch. Peek/caught attach with NPC arcs (§5H)."
+
+[canvases.trigger]
+location      = "loc_bathroom"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "npc_at_location", location_id = "loc_bathroom", operator = "is_absent" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Shower"
+blocks = [
+  { type = "image", props = { file = "activities/shower.jpg" } },
+  { type = "paragraph", content = "The lock's been broken so long nobody mentions it. You get the water hot and stand under it, the steam fogging the one mirror, the fan rattling uselessly in the ceiling." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Wash up and get out."
+targetType = "location"
+locationId = "loc_bathroom"
+time_progression_minutes = 20
+flagEffects = [ { targetType = "player", flag = "showered_today", op = "set" } ]
+effects = [ { targetType = "player", trait = "hygiene", op = "add", value = 45, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text          = "Take your time. Leave the door open."
+targetType    = "location"
+locationId    = "loc_bathroom"
+time_progression_minutes = 30
+show_when_locked = true
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 10 },
+] }
+flagEffects = [ { targetType = "player", flag = "showered_today", op = "set" } ]
+effects = [
+  { targetType = "player", trait = "hygiene", op = "add", value = 45, cap = 100 },
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 100 },
+]
+
+# ── F4 — The mirror (Your Room): the off-zero exhibitionism bootstrap ────────────
+# Ungated base raises exhib from 0. The wardrobe (clothing UI) auto-renders here too.
+[[canvases]]
+id          = "feeder_mirror"
+name        = "The mirror"
+description = "Cora-solo. Your Room. Bootstrap exhibitionism feeder."
+
+[canvases.trigger]
+location      = "loc_cora_room"
+is_repeatable = true
+priority      = 4
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "The mirror"
+blocks = [
+  { type = "paragraph", content = "There's a mirror on the back of the door. You catch yourself in it more than you used to — turning, looking, taking stock of what you came home with that isn't in the duffel bag." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Try a few things on."
+targetType = "location"
+locationId = "loc_cora_room"
+time_progression_minutes = 15
+effects = [ { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text          = "Really look. Pose a little."
+targetType    = "location"
+locationId    = "loc_cora_room"
+time_progression_minutes = 15
+show_when_locked = true
+conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 },
+] }
+effects = [
+  { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 100 },
+  { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 100 },
+]
+
+# End of phase 3.

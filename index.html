@@ -74,6 +74,19 @@
       color: var(--accent);
     }
     .card:hover .play { color: #e0bd78; }
+    .badge {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-text);
+      background: var(--accent);
+      border-radius: 5px;
+      padding: 2px 7px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
     .dev .card { opacity: 0.78; }
     .dev .card h3 { font-size: 1rem; }
     footer {
@@ -89,13 +102,18 @@
   <div class="wrap">
     <header>
       <h1>Story-Gen — Games</h1>
-      <p class="tagline">Interactive sandbox fiction, built on the Story-Gen engine.</p>
+      <p class="tagline">Interactive sandbox fiction, built on the Story-Gen engine. Newest first.</p>
     </header>
 
     <main class="grid">
-      <a class="card" href="games/jacks_world/output/index.html">
-        <h3>Jack's World</h3>
-        <p>Jack moves into his step-mom Angela's apartment, and over thirty days what started as practical becomes something neither expected.</p>
+      <a class="card" href="games/mothers_place/output/index.html">
+        <h3>Mother's Place <span class="badge">New</span></h3>
+        <p>Cora, mid-twenties and broke, moves back into the house she grew up in a year after her mother walked out — and starts becoming the woman everyone's still waiting for.</p>
+        <span class="play">Play →</span>
+      </a>
+      <a class="card" href="games/the_inheritance/output/index.html">
+        <h3>The Inheritance</h3>
+        <p>Catherine returns home for a will reading, seducing family and outsiders to claim the estate and break her stepmother's control.</p>
         <span class="play">Play →</span>
       </a>
       <a class="card" href="games/last_call/output/index.html">
@@ -108,14 +126,9 @@
         <p>Maya, a 22-year-old linguistics dropout, returns home and works nights at a diner where she discovers power and corruption.</p>
         <span class="play">Play →</span>
       </a>
-      <a class="card" href="games/new_in_town/output/index.html">
-        <h3>New In Town</h3>
-        <p>Emma, a sheltered 23-year-old schoolteacher, moves to Millfield and awakens to power over four men through strategy and reputation.</p>
-        <span class="play">Play →</span>
-      </a>
-      <a class="card" href="games/the_inheritance/output/index.html">
-        <h3>The Inheritance</h3>
-        <p>Catherine returns home for a will reading, seducing family and outsiders to claim the estate and break her stepmother's control.</p>
+      <a class="card" href="games/under_one_roof/output/index.html">
+        <h3>Under One Roof</h3>
+        <p>Lily Chen, 19, is stranded at her step-father's isolated rural property with his two adult sons — economics and desire under one roof.</p>
         <span class="play">Play →</span>
       </a>
       <a class="card" href="games/the_long_summer/output/index.html">
@@ -123,28 +136,33 @@
         <p>Maya, eighteen, arrives at her stepfather's rural Alabama property and learns to navigate corruption, desire, and survival math.</p>
         <span class="play">Play →</span>
       </a>
+      <a class="card" href="games/jacks_world/output/index.html">
+        <h3>Jack's World</h3>
+        <p>Jack moves into his step-mom Angela's apartment, and over thirty days what started as practical becomes something neither expected.</p>
+        <span class="play">Play →</span>
+      </a>
       <a class="card" href="games/two_weeks/output/index.html">
         <h3>Two Weeks</h3>
         <p>You return home for your step-brother's wedding with fourteen days to act on feelings you buried before he says "I do."</p>
         <span class="play">Play →</span>
       </a>
-      <a class="card" href="games/under_one_roof/output/index.html">
-        <h3>Under One Roof</h3>
-        <p>Lily Chen, 19, is stranded at her step-father's isolated rural property with his two adult sons — economics and desire under one roof.</p>
+      <a class="card" href="games/new_in_town/output/index.html">
+        <h3>New In Town</h3>
+        <p>Emma, a sheltered 23-year-old schoolteacher, moves to Millfield and awakens to power over four men through strategy and reputation.</p>
         <span class="play">Play →</span>
       </a>
     </main>
 
     <h2>Dev / test builds</h2>
     <section class="grid dev">
-      <a class="card" href="games/test_customize/output/index.html">
-        <h3>Coffee Shop Test</h3>
-        <p>A short test build for NPC name/relationship customization and variable syntax.</p>
-        <span class="play">Open →</span>
-      </a>
       <a class="card" href="games/the_long_summer_test/output/index.html">
         <h3>The Long Summer — Test Slice</h3>
         <p>A 10-day engine-validation slice with dev buttons visible.</p>
+        <span class="play">Open →</span>
+      </a>
+      <a class="card" href="games/test_customize/output/index.html">
+        <h3>Coffee Shop Test</h3>
+        <p>A short test build for NPC name/relationship customization and variable syntax.</p>
         <span class="play">Open →</span>
       </a>
     </section>

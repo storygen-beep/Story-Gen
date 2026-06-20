@@ -1,0 +1,134 @@
+# Phase 0/7 — 0_systems_spec.toml
+# Mother's Place — system spec: project + time + settings + daily tick + sidebar
+#
+# Game: female PC (customizable, default Cora) comes home broke to the house her
+# mother walked out of a year ago; fills the absent-mother vacancy and becomes the
+# matriarch. Blood incest (Roy father / Wes brother / Maddie sister) + Lynn's Act-2
+# return. Systems: clothing ON, customization ON, phone ON (8_phone.toml); rent OFF.
+
+schema_version = "1.0"
+
+[project]
+id          = "mothers_place"
+title       = "Mother's Place"
+description = "You come home with nothing — broke, your life in pieces — to the house your mother walked out of a year ago. Your father drinks through the silence. Your older brother holds it together and hates that he has to. Your kid sister drifts. They need a woman in this house. You start by filling in. You finish by taking her place."
+quests_engine   = "v2"
+starting_canvas = "canvas_homecoming"
+
+[time]
+starting_hour = 16
+starting_day  = "Monday"
+starting_week = 1
+
+# ─── System scoping (each reads from its OWN table) ───────────────────────────
+#   clothing → [settings]   ·   phone → [phone] (8_phone.toml)   ·   rent → OFF
+# Household money pressure is the plain `money` trait + a bill EVENT (beat_0024),
+# NOT the rent system (she lives at home — no landlord).
+
+[settings]
+clothing_enabled  = true
+wardrobe_location = "loc_cora_room"
+shop_location     = "loc_corner_store"
+
+[settings.clothing_requirements]
+body_coverage   = true
+always_required = []
+
+# ─── Engine daily tick ────────────────────────────────────────────────────────
+# Body-state decay (energy/hygiene) + player arousal +1/day (RTS no-decay, cap 10).
+# NO passive NPC arousal climb — the family arcs are SLOW-BURN: willingness is EARNED
+# from charged beats, never ticked (trait-design slow-burn rule). Per-day cap unsets
+# for the Talk/cook/shift/shower gates so they don't lock out forever.
+[engine.daily_tick]
+flagEffects = [
+  { targetType = "player", flag = "talked_to_roy_today",    op = "unset" },
+  { targetType = "player", flag = "talked_to_wes_today",    op = "unset" },
+  { targetType = "player", flag = "talked_to_maddie_today", op = "unset" },
+  { targetType = "player", flag = "cooked_today",           op = "unset" },
+  { targetType = "player", flag = "worked_shift_today",     op = "unset" },
+  { targetType = "player", flag = "showered_today",         op = "unset" },
+]
+traitEffects = [
+  { targetType = "player", trait = "hygiene", op = "add", value = -10 },
+  { targetType = "player", trait = "energy",  op = "add", value = -5  },
+  { targetType = "player", trait = "arousal", op = "add", value = 1, cap = 10 },
+]
+
+# ─── Sidebar items ────────────────────────────────────────────────────────────
+# Player stats only. NPC state (arousal/corruption) lives on the Quests page
+# (npc_panel — added at the legibility beat). Brenda's `awareness` accumulator is
+# HIDDEN (antagonist/witness doctrine) — see [[traits.labels]] below.
+
+[[sidebar_items]]
+type  = "trait_words"
+trait = "corruption"
+label = "Corruption"
+bands = [
+  { min = 0,  max = 24,  text = "Settling In", icon = "🏠" },
+  { min = 25, max = 49,  text = "Stop Hiding",  icon = "💋" },
+  { min = 50, max = 74,  text = "Taking Over",  icon = "🔥" },
+  { min = 75, max = 100, text = "Matriarch",    icon = "👑" },
+]
+
+[[sidebar_items]]
+type  = "trait_bar"
+trait = "exhibitionism"
+label = "Exhibitionism"
+max   = 100
+bands = [
+  { min = 0,  max = 24,  text = "Covered"   },
+  { min = 25, max = 49,  text = "Daring"    },
+  { min = 50, max = 74,  text = "Bold"      },
+  { min = 75, max = 100, text = "Shameless" },
+]
+
+[[sidebar_items]]
+type  = "trait_bar"
+trait = "arousal"
+label = "Arousal"
+max   = 10
+bands = [
+  { min = 0, max = 2,  text = "Cold"    },
+  { min = 3, max = 5,  text = "Warm"    },
+  { min = 6, max = 8,  text = "Hot"     },
+  { min = 9, max = 10, text = "Aching"  },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "energy"
+bands = [
+  { min = 0,  max = 24,  text = "Exhausted", icon = "🪫" },
+  { min = 25, max = 49,  text = "Tired",     icon = "💤" },
+  { min = 50, max = 74,  text = "Fine",      icon = "🟢" },
+  { min = 75, max = 100, text = "Rested",    icon = "🔋" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "hygiene"
+bands = [
+  { min = 0,  max = 24,  text = "Filthy", icon = "🧫" },
+  { min = 25, max = 49,  text = "Grimy",  icon = "🌫️" },
+  { min = 50, max = 74,  text = "Fresh",  icon = "🪞" },
+  { min = 75, max = 100, text = "Clean",  icon = "🧼" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "money"
+bands = [
+  { min = 0,   max = 19,  text = "Broke",       icon = "💸" },
+  { min = 20,  max = 99,  text = "Scraping by", icon = "😬" },
+  { min = 100, max = 299, text = "Getting by",  icon = "💵" },
+  { min = 300, max = 999, text = "Comfortable", icon = "✅" },
+]
+
+# ─── Hidden traits ────────────────────────────────────────────────────────────
+# Brenda's awareness accumulator never surfaces (witness doctrine). Loop-state +
+# any stage traits get hidden at the beats that declare them.
+[[traits.labels]]
+key = "awareness"
+hidden = true
+
+# End of phase 0.
