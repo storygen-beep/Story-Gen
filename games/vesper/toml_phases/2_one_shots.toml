@@ -26,7 +26,7 @@ is_active     = true
 id   = "office"
 name = "The office"
 blocks = [
-  { type = "image", props = { file = "scenes/opening_office.jpg" } },
+  { type = "image", props = { file = "scenes/opening_office.jpg", description = "A line of identical android women on the black floor of a corporate office at night, a powerful man at the desk.", search_queries = ["office dark women standing line", "corporate office night man desk"] } },
   { type = "paragraph", content = "Four of them stand in a line on the black floor of Mercer's office. Vega, Lyra, Nova — chrome-perfect, hands at their sides, nothing moving behind their eyes. And Wren, at the end, the one that came back wrong." },
   { type = "cascade", props = { beats = [
     { advance_text = "Stand in it.", blocks = [
@@ -139,7 +139,7 @@ conditions = { version = "1.0", items = [
 id   = "night"
 name = "The cradle"
 blocks = [
-  { type = "image", props = { file = "scenes/opening_cradle.jpg" } },
+  { type = "image", props = { file = "scenes/opening_cradle.jpg", description = "A bare private room at night, a woman stepping back into a charging pod in the corner.", search_queries = ["dark bedroom woman alone night", "empty room woman standing night"] } },
   { type = "paragraph", content = "The asset level is quiet the way a kept place is quiet. She comes down through the Tower to her own floor, her own door, her own room with nothing on the walls. The cradle waits in the corner." },
   { type = "cascade", props = { beats = [
     { advance_text = "Power down.", blocks = [

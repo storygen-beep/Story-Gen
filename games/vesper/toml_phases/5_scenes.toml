@@ -32,7 +32,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The arrangement"
 blocks = [
-  { type = "image", props = { file = "scenes/mercer_penthouse.jpg" } },
+  { type = "image", props = { file = "scenes/mercer_penthouse.jpg", description = "A high-rise penthouse by daylight, a man at the floor-to-ceiling glass with a tablet, a woman entering behind him.", search_queries = ["penthouse window city daylight", "man apartment glass tablet"] } },
   { type = "paragraph", content = "The penthouse, by daylight. Mercer's at the glass with a tablet, and he doesn't turn when the elevator lets her in. He doesn't have to. She's company-issue, and she's here because being here is what she's for." },
   { type = "cascade", props = { beats = [
     { advance_text = "Wait for the order.", blocks = [
@@ -84,7 +84,7 @@ end_time   = "23:00"
 id   = "base"
 name = "Mercer's Penthouse"
 blocks = [
-  { type = "image", props = { file = "scenes/mercer_penthouse_hub.jpg" } },
+  { type = "image", props = { file = "scenes/mercer_penthouse_hub.jpg", description = "A penthouse interior, a man at his desk looking up as a woman comes in.", search_queries = ["penthouse interior man desk", "man office looking up woman"] } },
   { type = "paragraph", content = "Mercer's penthouse. He's at the desk or the glass, and whatever he's doing he can be interrupted to use her — that's what she's for, and they both know it. He looks up when she comes in. He doesn't smile. He never smiles." },
 ]
 
@@ -324,7 +324,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "Cheap hands"
 blocks = [
-  { type = "image", props = { file = "scenes/renner_anchor.jpg" } },
+  { type = "image", props = { file = "scenes/renner_anchor.jpg", description = "A dim run-down bar at night, a heavyset tired man at the end of the counter, a woman taking the next stool.", search_queries = ["dim bar man drinking night", "woman sitting bar stool man"] } },
   { type = "paragraph", content = "The Anchor is the kind of bar that's given up on its own neon. Renner's at the end of it — a big man gone soft and sour, three drinks into the evening and looking like the fourth won't help. He doesn't look up when she takes the stool beside him." },
   { type = "cascade", props = { beats = [
     { advance_text = "Make the pitch.", blocks = [
@@ -374,7 +374,7 @@ end_time   = "18:00"
 id   = "base"
 name = "Renner's Depot"
 blocks = [
-  { type = "image", props = { file = "scenes/renner_depot_floor.jpg" } },
+  { type = "image", props = { file = "scenes/renner_depot_floor.jpg", description = "A half-empty warehouse depot, sparse racks and an idle forklift under work light.", search_queries = ["empty warehouse depot interior", "warehouse racks forklift day"] } },
   { type = "paragraph", content = "Renner's depot. Half-empty racks, a forklift nobody's fixed, crates Cain's people left behind. He works the floor in a temper, and when he notices her at all it's to find fault. The work is the work." },
 ]
 
@@ -532,7 +532,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "Work the floor"
 blocks = [
-  { type = "image", props = { file = "activities/renner_menial.jpg" } },
+  { type = "image", props = { file = "activities/renner_menial.jpg", description = "A woman working a warehouse floor, hauling and sorting crates against a manifest.", search_queries = ["woman working warehouse crates", "girl sorting boxes warehouse"] } },
   { type = "paragraph", content = "She works the floor — hauling, sorting, logging crates against a manifest that hasn't matched reality since Cain came through. It's dull, and her body doesn't tire the way a real one would, so she's better at it than the last three hands he ran off. The pay is thin, counted out grudging. But she does it well, and well is a language even a man this far gone still reads." },
 ]
 
@@ -765,7 +765,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "Her mouth"
 blocks = [
-  { type = "image", props = { file = "sex/renner_blowjob.jpg" } },
+  { type = "video", props = { file = "sex/renner_blowjob.webm", description = "A woman on her knees in front of a seated man in an office, giving him oral.", search_queries = ["office blowjob kneeling", "desk chair blowjob office"] } },
   { type = "paragraph", content = "His wanting runs ahead of him all day now. She picks the afternoon — the door shut, the yard empty, his hands shaking around a pen that isn't writing anything. She crosses to him and goes down on her knees in front of the chair, and for once he doesn't pretend he doesn't know what's happening." },
   { type = "cascade", props = { beats = [
     { advance_text = "Take him out.", blocks = [
@@ -843,7 +843,7 @@ description = "Triggerless Renner sex loop. oral/vaginal/doggy(anal gated renner
 id   = "intro"
 name = "Take him"
 blocks = [
-  { type = "image", props = { file = "sex/renner_loop.jpg" } },
+  { type = "video", props = { file = "sex/renner_loop.webm", description = "A man and woman in a locked office, his hands on her as the clothes come off.", search_queries = ["office sex couple desk", "office quickie clothes off"] } },
   { type = "paragraph", content = "She locks the office door. He's already reaching for her — the cold boss gone, just a wrecked man who's spent all day waiting for the help to come and take him apart." },
 ]
 [canvases.nodes.exit_block]
@@ -1034,7 +1034,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The keys"
 blocks = [
-  { type = "image", props = { file = "sex/renner_anal.jpg" } },
+  { type = "video", props = { file = "sex/renner_anal.webm", description = "A man taking a woman from behind bent over an office desk in late-afternoon light.", search_queries = ["office desk sex from behind", "doggy bent over desk office"] } },
   { type = "paragraph", content = "She comes in commando and lets him find out halfway through the afternoon, and by the time the light's gone amber he has her bent over the desk with both hands on her hips, past asking, past the cold, taking the one thing he hasn't had yet because she let him think it was his idea." },
   { type = "paragraph", content = "He spends himself in her ass with his forehead pressed between her shoulder blades — and the fluid goes into him on the same beat, and she feels the lock turn. The first one. The keys, warm in her hand. She straightens up slowly and turns around, and the wrecked, grateful, dangerous man in the chair looks up at her with eyes that have just gone flat and open and entirely hers." },
 ]

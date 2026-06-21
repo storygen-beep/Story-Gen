@@ -163,7 +163,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "Walk the wreckage"
 blocks = [
-  { type = "image", props = { file = "locations/facility_ruins.jpg" } },
+  { type = "image", props = { file = "locations/facility_ruins.jpg", description = "A burned-out industrial facility at night, scorched frame and melted racks against dock lights.", search_queries = ["burned warehouse ruins night", "abandoned factory fire damage dark"] } },
   { type = "paragraph", content = "The facility is a black skeleton against the dock lights — scorched frame, melted racks, the smell of old smoke that never washed out. She walks it the way she walks everything, cataloguing: where the containment was, where the fire started, what the dead machines used to do. None of it matches the briefing. All of it was built to hold things that could feel — and someone came through and let them out before he burned it down. The dread-place. The first one." },
 ]
 
