@@ -12085,10 +12085,47 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                 trait_effects = self._get_trait_effects_for_node(node)
                 flag_effects = self._get_flag_effects_for_node(node)
                 wardrobe_effects_code = self._get_wardrobe_effects_for_node(node)
-                passage = (
-                    passage_header
-                    + f"{time_progression}\n{trait_effects}\n{flag_effects}\n{wardrobe_effects_code}\n[[{continue_text}->{next_passage}]]\n\n"
+                effects_block = (
+                    f"{time_progression}\n{trait_effects}\n"
+                    f"{flag_effects}\n{wardrobe_effects_code}\n"
                 )
+                exit_link = f"[[{continue_text}->{next_passage}]]\n"
+
+                # Cascade-aware exit routing for the single-Continue (location)
+                # exit — mirror of the choices-branch splice (~line 11971). When
+                # the node body carries a cascade-exit sentinel, the lone
+                # Continue link is spliced INTO the cascade's last advance-beat
+                # <<linkreplace>> body, so it appears only after the player has
+                # clicked all the way through the cascade — never at passage
+                # bottom beside the advance "show more" link. Without this, a
+                # cascade on a location-type node leaked its sentinel and
+                # rendered the exit immediately, letting the player skip the
+                # whole scene (the opening cold-open was skippable in one click).
+                # Node-level effects stay on entry (fire on load, unchanged).
+                # The SAFE sentinel (a gated beat can fail mid-cascade, ending it
+                # before its planted sentinel renders) is stripped and the exit
+                # kept at passage bottom so the player can't be stranded — same
+                # conservative rule as the choices branch. The sentinel lives
+                # inside node_content, which is already embedded in
+                # passage_header, so a string replace on passage_header handles
+                # it while preserving pre_substitution_macros / substitution_check
+                # (which the choices-branch rebuild drops). `.replace` swaps every
+                # occurrence, covering the multi-cascade (group-variant) case.
+                if _CASCADE_EXIT_INJECT_SAFE_SENTINEL in passage_header:
+                    passage_header = passage_header.replace(
+                        _CASCADE_EXIT_INJECT_SAFE_SENTINEL, ""
+                    )
+                    passage_header = passage_header.replace(
+                        _CASCADE_EXIT_INJECT_SENTINEL, ""
+                    )
+                    passage = passage_header + effects_block + exit_link + "\n"
+                elif _CASCADE_EXIT_INJECT_SENTINEL in passage_header:
+                    passage_header = passage_header.replace(
+                        _CASCADE_EXIT_INJECT_SENTINEL, exit_link
+                    )
+                    passage = passage_header + effects_block + "\n"
+                else:
+                    passage = passage_header + effects_block + exit_link + "\n"
 
             # Cost gate: wrap Node 1 of canvases with costs
             # If player can't afford costs, show blocked message instead of content

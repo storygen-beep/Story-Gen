@@ -2585,3 +2585,139 @@ class TravelFrictionAndLockProseTests(TestCase):
         # The passage backstop renders the same authored message the nav helper returns.
         self.assertIn("entry-blocked-narrative", twee)
         self.assertIn("It's locked.", twee)
+
+
+class CascadeLocationExitSpliceTests(TestCase):
+    """Regression (2026-06-22) — a cascade on a ``type="location"`` (single
+    "Continue") exit node must splice its exit link INTO the cascade's last
+    ``<<linkreplace>>`` beat, exactly like the ``type="choices"`` branch already
+    did.
+
+    Before the fix the cascade-exit splice ran ONLY in the ``exit_type=='choices'``
+    branch of ``_generate_canvas_node_passages``; the location/default branch
+    appended ``[[Continue->...]]`` at the passage bottom and never touched the
+    planted ``__CASCADE_EXIT_INJECT__`` sentinel. Result: the cascade's advance
+    "show more" link and the exit link rendered at the same time (exit visible
+    from the first beat), letting the player skip the whole scene in one click —
+    and the sentinel leaked into the built HTML un-substituted. Live-caught on
+    Vesper's opening cold-open (the cradle/morning canvases).
+    """
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = User.objects.create_user(
+            email="cascade-loc-exit@example.com", password="testpass123"
+        )
+
+    @staticmethod
+    def _para(text):
+        return {"type": "paragraph", "props": {},
+                "content": [{"type": "text", "text": text}]}
+
+    def _build_template(self, *, exit_type="location", gated_beat=False):
+        canvas_id = "canvas_cascade_test"
+        beats = [
+            {"blocks": [self._para("BEAT_ZERO_MARKER opens on entry.")]},
+            {"advance_text": "Show more.",
+             "blocks": [self._para("BEAT_ONE_MARKER revealed on click.")]},
+            {"advance_text": "And more.",
+             "blocks": [self._para("BEAT_TWO_MARKER the terminal beat.")]},
+        ]
+        if gated_beat:
+            # Any beat with a non-empty conditions.items forces the SAFE path.
+            beats[1]["conditions"] = {
+                "version": "1.0", "logic": "AND",
+                "items": [{"type": "trait", "trait": "energy",
+                           "operator": "gte", "value": 999}],
+            }
+        node = {"id": "n1", "name": "Cascade Node",
+                "blocks": [{"type": "cascade",
+                            "props": {"id": "test_cascade", "beats": beats}}]}
+        if exit_type == "location":
+            node["exit_block"] = {"type": "location", "config": {}}
+        else:
+            node["exit_block"] = {
+                "type": "choices",
+                "choices": [{"text": "Continue", "targetType": "location",
+                             "locationId": "loc_room"}],
+            }
+        return {
+            "schema_version": "1.0",
+            "project": {
+                "id": "cascade_loc_exit_test",
+                "title": "Cascade Location-Exit Fixture",
+                "description": "Minimal fixture for the cascade location-exit splice regression.",
+                "starting_canvas": canvas_id,
+            },
+            "time": {"enabled": True, "starting_hour": 8, "starting_day": "Monday"},
+            "locations": [{"id": "loc_room", "name": "Room", "description": "Test room"}],
+            "canvases": [{
+                "id": canvas_id, "name": "Cascade Test Canvas", "type": "scene",
+                "trigger": {"location": "loc_room", "is_active": True},
+                "nodes": [node],
+            }],
+        }
+
+    def _generate(self, raw):
+        import copy
+        from apps.projects.services.template_import import (
+            normalize, validate, create_project_from_template,
+        )
+        from apps.game_generation.twee_comprehensive.generators.v2 import (
+            TweeComprehensiveGeneratorV2,
+        )
+        template = normalize(copy.deepcopy(raw))
+        errors = validate(template)
+        self.assertEqual(errors, [], f"Fixture should validate clean: {errors}")
+        result = create_project_from_template(template, str(self.user.id))
+        project = Project.objects.get(id=result["project_id"])
+        return TweeComprehensiveGeneratorV2().generate(project)
+
+    def _node_passage(self, twee, marker="BEAT_ZERO_MARKER"):
+        for p in twee.split("\n:: "):
+            if marker in p:
+                return p
+        self.fail(f"No passage contained {marker}")
+
+    def test_location_exit_cascade_splices_exit_into_last_beat(self):
+        twee = self._generate(self._build_template(exit_type="location"))
+        # The sentinel must never leak — it is always substituted or stripped.
+        self.assertNotIn("__CASCADE_EXIT_INJECT__", twee,
+                         "cascade-exit sentinel leaked un-substituted into output")
+        passage = self._node_passage(twee)
+        self.assertIn("<<linkreplace", passage, "cascade should render linkreplace beats")
+        last_close = passage.rfind("<</linkreplace>>")
+        self.assertNotEqual(last_close, -1, "the cascade must close a linkreplace")
+        head, tail = passage[:last_close], passage[last_close:]
+        # Exit link spliced INSIDE the cascade (before the final close)...
+        self.assertRegex(head, r"\[\[[^\]]+->[^\]]+\]\]",
+                         "location-exit cascade must splice its exit INTO the last "
+                         "<<linkreplace>> beat")
+        # ...and NOT rendered at the passage bottom (after the cascade closes).
+        self.assertNotRegex(tail, r"\[\[[^\]]+->[^\]]+\]\]",
+                            "no exit link may render at passage bottom beside the "
+                            "advance 'show more' link")
+
+    def test_choices_exit_cascade_still_defers_exit(self):
+        """Control: the pre-existing choices-exit branch is unchanged — its
+        choice links still splice inside the cascade, none at passage bottom."""
+        twee = self._generate(self._build_template(exit_type="choices"))
+        self.assertNotIn("__CASCADE_EXIT_INJECT__", twee)
+        passage = self._node_passage(twee)
+        last_close = passage.rfind("<</linkreplace>>")
+        link_idx = passage.find("<<link")
+        self.assertTrue(0 <= link_idx < last_close,
+                        "choices-exit cascade should keep deferring exits inside the cascade")
+
+    def test_safe_path_gated_cascade_keeps_exit_at_bottom(self):
+        """A gated beat forces the SAFE path: the sentinel is stripped (never
+        leaks) and the single exit stays at passage bottom so the player can't
+        be stranded if the gate fails mid-cascade."""
+        twee = self._generate(self._build_template(exit_type="location", gated_beat=True))
+        self.assertNotIn("__CASCADE_EXIT_INJECT__", twee)
+        self.assertNotIn("__CASCADE_EXIT_INJECT_SAFE__", twee)
+        passage = self._node_passage(twee)
+        last_close = passage.rfind("<</linkreplace>>")
+        tail = passage[last_close:]
+        self.assertRegex(tail, r"\[\[[^\]]+->[^\]]+\]\]",
+                         "SAFE (gated) cascade must keep the exit reachable at passage bottom")
