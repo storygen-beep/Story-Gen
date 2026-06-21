@@ -122,7 +122,10 @@ NPC arcs/hubs/ambients/capstones are beats. Only the skeleton + boot + sleep + s
    beats give each present NPC a voiced moment (short volleys, no monologues). Narration is right
    **only when no one's actually there to speak**: solo activities, voyeur/peek where you're unseen, and the
    interior-monologue stretches of a capstone. An NPC who's *present* is not exempt — give them at least a
-   line, even a terse one (a mood glimpse can be a single spoken beat). **Before emitting, check
+   line, even a terse one (a mood glimpse can be a single spoken beat). **Media:** if the beat carries a
+   visual (most scene beats should — these games are image-first), author the `image`/`video` block per
+   `references/media.md` — in the text-media-text rhythm, with a `description` + 2 `search_queries` (a missing
+   media block with no queries renders nothing AND leaves no acquisition trail). **Before emitting, check
    `references/toml-gotchas.md`.** Append ONLY to the beat's `target_phase` file. Record new canvas ids in
    `produced_canvas_ids`.
 5. **Author/update the quest card** — if the beat introduces/advances a *player-facing goal* (an NPC arc

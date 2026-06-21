@@ -141,6 +141,10 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
 - `references/rts-design-philosophy.md` — the WHY (player-corruption-as-tier, two-axis gate, P1–P11).
 - `references/rts-flat-prose.md` — the HOW of register: the 8 mechanical prose rules, the three density
   tiers, choice-label discipline, the `thought_bubble` primitive. Read before writing any scene body.
+- `references/media.md` — the image-first layer: the three media block types (`image`/`video`/`clip`), the
+  extension-agnostic resolve law, the silent-skip-when-missing model, and **how to write `search_queries`**
+  (the acquisition layer). Read before authoring any beat that carries a visual, and when naming a scene's
+  media at Step 5.
 - `references/sex-loop.md` — the repeatable-explicit menu (triggerless node-routed canvas).
 - `references/systems.md` — the optional-systems dispatch hub (clothing/rent/phone/customization + HUD),
   each with its TOML home, **full in-skill reference** (`clothing.md` · `rent.md` · `phone.md` ·

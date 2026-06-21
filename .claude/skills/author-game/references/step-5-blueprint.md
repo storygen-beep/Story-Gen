@@ -76,6 +76,9 @@ Take one NPC's Step-4 story and compile it. This is the **mechanism half of the 
 - **Place** — give each scene a location + time-window + the NPC's schedule (the lane-by-lane map compiled to
   slots); check the reachability triad (NPC present ∩ window ∩ player there & awake) and the presence floor.
   *Provisional here* — the world schedule isn't final until Pass 3, so Pass 4 reconciles placement whole-map.
+- **Media** — name each placed scene's intended visual (the establishing shot; for a hot beat, the act clip),
+  one line per scene. These games are image-first, so what the picture is is a design decision, not a Step-7
+  afterthought (`references/media.md`).
 - **Wire** — the §8 contract: every flag this arc SETS and READS, bound by D1 (entry never gated) / D2 (no
   mutual lock) / D3 (every cross-gate telegraphed naming the other arc).
 - **The repeatable menu** — for a core NPC, spec the sex-loop menu (`sex-loop.md`); peripheral/service get none.

@@ -133,8 +133,9 @@ Each rule is a free-form dict (parsed `:1715-1735`):
 ### §2.5 — `[[canvases.nodes]]` body blocks + `exit_block`
 
 Block vocabulary (`canvases.nodes.blocks`, each `{type, …}`) — only these types are real: `paragraph`,
-`dialog` (`{type="dialog", npcId, content}`), `thought_bubble`, `image`/`video`/`clip` (`{props.file}`),
-`heading`, `group` (`{props.conditions, props.blocks}`), `block_pool`, `cascade`. A mistyped `type` does
+`dialog` (`{type="dialog", npcId, content}`), `thought_bubble`, `image`/`video` (`{props.file}`) / `clip`
+(`{props.clipId}` — a DB asset, NOT a file; full media shapes + the `search_queries` craft in
+`references/media.md`), `heading`, `group` (`{props.conditions, props.blocks}`), `block_pool`, `cascade`. A mistyped `type` does
 **NOT** ship silently: the importer **HARD-FAILS the build** on an unrecognized content block type, with a
 did-you-mean hint (`dialogue`→`dialog`, `speech`→`dialog`) — `_validate_content_block_types`,
 `template_import.py:2805` (error appended ~`:2826`). The "silent `<p>` degrade that drops the speaker"
@@ -316,7 +317,7 @@ Dataclass `TemplateLocation` at `template_import.py:135`; parsed at `template_im
 | Field | Read at | Type | Notes |
 |---|---|---|---|
 | `id` / `name` / `description` / `image` | `1627-1630` | str | basics |
-| `image_search_queries` | `1631` | list | Missing-Media page |
+| `image_search_queries` | `1631` | list | Missing-Media page. NOTE the key-name trap: a **location** uses `image_search_queries`; a **content block** uses bare `search_queries`. Query craft in `references/media.md`. |
 | `is_container` | `1632` | bool | **pure-nav wrapper — SWALLOWS attached canvases** (renders only the child menu). Never attach a canvas to a container. |
 | `offscreen` | `1633` | bool | **non-navigable "away" label** — no nav card, no hub; NPCs schedule here for home/sleep/work; exempt from presence floor + reachability. The 3rd location category. |
 | `parent` | `1634` | str | structural nesting only (canvas inheritance) — NOT navigation |

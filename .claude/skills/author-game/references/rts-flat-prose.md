@@ -109,6 +109,10 @@ makes that work.
 >   + his pose + your POV; the prose pins the exchange.
 > ✗ a 60-word paragraph repainting the warm light, the flannel, the two mugs, the softening face
 
+The `[image: …]` above is **shorthand for this rule only** — the engine has no such syntax. Author the real
+TOML media block (`{ type = "image", props = { file, description, search_queries } }`) with its
+`search_queries` acquisition layer per `references/media.md`.
+
 ---
 
 ## §3 — Choice-label discipline
