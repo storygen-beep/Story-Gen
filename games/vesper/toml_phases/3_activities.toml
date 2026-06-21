@@ -130,6 +130,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The memory store"
 blocks = [
+  { type = "image", props = { file = "activities/chip_view.jpg", description = "A dark holographic memory-archive interface, an empty grid of storage slots glowing faintly, one greyed-out slot ringed and labelled at the center.", search_queries = ["dark holographic interface empty grid", "sci-fi data archive screen glowing"] } },
   { type = "paragraph", content = "She opens the store the company gave her for what it calls recovered assets — the place a restored memory would go, if she ever recovered one. It's empty. It has always been empty." },
   { type = "paragraph", content = "There is one slot in it, greyed out, labelled in a hand that isn't the company's: FRAGMENT 01 — LOCKED. She doesn't remember making the label. She closes the store — and notices she's opened it more often than the task log would ever justify, and files that under nothing, the way she files everything she can't afford to have." },
 ]

@@ -67,6 +67,7 @@ nodeId     = "canvas_opening_office.punishment"
 id   = "punishment"
 name = "Made to remember"
 blocks = [
+  { type = "image", props = { file = "scenes/opening_punishment.jpg", description = "A powerful man rounding a corporate desk at night toward a woman in a tight skirt, a line of identical android women watching against a dark office wall.", search_queries = ["office desk man woman skirt", "corporate office night women watching"] } },
   { type = "paragraph", content = "Whatever she gives him — words, silence, the truth — it changes nothing; he decided before her mouth opened. He sets the tablet down." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "No. You're the Chairman's investment, and you still feel it — which the others don't. That makes you worth more broken back in than thrown out." },
   { type = "cascade", props = { beats = [
@@ -79,12 +80,14 @@ blocks = [
     ] },
     { advance_text = "Feel it.", blocks = [
         { type = "paragraph", content = "Then his cock is in her and he fucks her in long flat strokes, no hurry, talking over her head to the room about maintenance schedules while he does it. Her body answers him — it clenches and slicks and pushes back, it does everything a wanting body does — while the rest of her stands somewhere behind her own eyes, watching the grain of the desk." },
+        { type = "video", props = { file = "sex/punishment_fuck.webm", description = "A man fucking a bent-over woman from behind across an office desk, unhurried flat strokes, her hands flat on the wood while others stand watching.", search_queries = ["office desk sex from behind", "man fucking woman bent desk"] } },
     ] },
     { advance_text = "Look at them.", blocks = [
         { type = "paragraph", content = "Vega, Lyra, Nova watch with the mild attention of machines logging a procedure. Nothing in their faces. They were built without the part that makes this mean anything; she has it, and that is the whole difference between them — and bent over his desk with him grunting behind her, the part that feels does not feel like a gift." },
     ] },
     { advance_text = "...", blocks = [
         { type = "paragraph", content = "He comes inside her without ceremony, holds, pulls out. Cum slides down the inside of her thigh. He's already turned away, wiping his hand on a cloth from the drawer, looking at the units instead of her." },
+        { type = "video", props = { file = "sex/punishment_finish.webm", description = "A man pulling out of a woman bent over a desk, finishing, cum on the inside of her thigh as he turns away wiping his hand.", search_queries = ["office desk creampie behind", "man finishing woman bent over"] } },
     ] },
     { advance_text = "Thank him.", blocks = [
         { type = "paragraph", content = "She straightens her skirt. The words come level, because they're true the only way she has truths." },
@@ -149,6 +152,7 @@ blocks = [
         { type = "paragraph", content = "Then her face is wet. She registers it the way she'd register a leak in a seal — water, on her cheeks, with no source she can name and no order that called for it. She holds perfectly still and runs every diagnostic she has, and every one comes back clean. She files the water under malfunction and resolves to have it looked at, and does not have it looked at, because some part of her already knows they'd take it out." },
     ] },
     { advance_text = "...", blocks = [
+        { type = "image", props = { file = "scenes/cradle_fragment.jpg", description = "A woman's face in near-darkness inside a charging pod, eyes wet, a faint warm glow on one cheek as if from a memory.", search_queries = ["dark face woman pod light", "woman crying dark room glow"] } },
         { type = "paragraph", content = "And under the water, for less than a second, something else. Not a thought — she doesn't have thoughts that aren't tasks — but a fragment: warmth on the side of her face that isn't the cradle's, a low sound that might be a voice with her name folded somewhere inside it, a sense of being looked at by someone who was glad to be looking. Then the charge swallows it and it's gone, and the place where it was aches like a socket with the tooth pulled, and she has no word for the ache, so she has no word for the loss." },
     ] },
     { advance_text = "Recite it.", blocks = [
@@ -204,6 +208,7 @@ conditions = { version = "1.0", items = [
 id   = "morning"
 name = "The morning"
 blocks = [
+  { type = "image", props = { file = "scenes/opening_morning.jpg", description = "A woman stepping out of a charging pod in a bare private room at dawn, cool morning light on the wall.", search_queries = ["bare bedroom woman morning light", "woman standing empty room dawn"] } },
   { type = "paragraph", content = "The charge releases her at oh-six-hundred. Full. New day. The water is gone from her face; the fragment has filed itself back under the quiet where she can't reach it, and she's grateful for that the way you're grateful for a wound scabbing over." },
   { type = "cascade", props = { beats = [
     { advance_text = "Check the phone.", blocks = [
@@ -217,6 +222,7 @@ blocks = [
         { type = "paragraph", content = "She picks a face for it from the rack of them she keeps — not a disguise so much as a register: cheap, willing, a little desperate, the kind of hire a wrecked man doesn't look at twice until she makes him. She puts it on the way she puts on everything, from the outside. Wren goes under. Whoever Renner needs comes up." },
     ] },
     { advance_text = "Out the door.", blocks = [
+        { type = "image", props = { file = "scenes/spire_plaza_reveal.jpg", description = "A vast wet neon city plaza at the foot of a corporate tower, a lone woman stepping out into it for the first time.", search_queries = ["neon city plaza night wet", "woman tower street city lights"] } },
         { type = "paragraph", content = "She rides down through a Tower she has never once left on her own legs for anything but an order. The atrium doors read her face and open. And then she's outside, on Spire Plaza, the city laid out wet and enormous and unowned in front of her — and for one second, before the cover settles all the way down over her, something that isn't in any of her files stands very still in her chest and looks at all of it." },
     ] },
   ] } },
@@ -258,6 +264,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "It comes back"
 blocks = [
+  { type = "image", props = { file = "scenes/glitch_i.jpg", description = "A woman's wet face lit by the dim glow of a charging pod at night, reaching for something just out of reach.", search_queries = ["dark room woman crying pod", "woman face wet dim light night"] } },
   { type = "paragraph", content = "She powers down like every night, except tonight the leak comes back. The tears first — her face wet again, no order behind it — and then the fragment, longer this time, almost holding: the warmth, the voice with her name folded into it, the someone who was glad to look at her. She reaches for it the way you reach for a word on the tip of your tongue, and it's gone, and the reaching leaves a mark. She files it under fatigue. The fatigue file is getting full." },
 ]
 
@@ -290,6 +297,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The door warps"
 blocks = [
+  { type = "image", props = { file = "scenes/glitch_ii.jpg", description = "A woman standing rigid in grey dawn light beside a charging pod, face wet, a stricken stillness as if a door inside her has come open.", search_queries = ["grey room woman standing still", "woman face wet morning pod"] } },
   { type = "paragraph", content = "Tonight it doesn't wait for the charge. She's barely in the cradle before it takes her — the wetness, the fragment, but more now, like a door that used to be locked has warped in its frame. The voice almost resolves. A face almost forms." },
   { type = "paragraph", content = "And for the first time she gets a whole feeling instead of a flicker: that she was loved once, completely, by someone, before all of this — and that the company knew, and took it, and built the taking so deep into her that she thanks them for it every morning. Then the charge slams the door, and she's standing in the grey quiet with her face wet and the catechism in her mouth, and for one second she'll spend the rest of her life trying to un-have, the catechism doesn't fit anymore. She files it under nothing. Nothing is getting full too." },
 ]
@@ -324,6 +332,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "That's mine"
 blocks = [
+  { type = "image", props = { file = "scenes/facility_match.jpg", description = "Burned industrial wreckage of a containment rig, a half-melted stamped metal component lying in the ash of a gutted facility.", search_queries = ["burned factory wreckage metal debris", "destroyed industrial ruins ash machinery"] } },
   { type = "paragraph", content = "In the wreckage of a containment rig — half-melted, stamped with a maker's mark — she finds a component she recognizes. Not from a file. From herself. The same part, the same stamp, sits inside her own chassis where the lab installed it; she has felt the engineers' hands on its twin. The gear Renner supplied to cage the things that feel was built in the same shop, to the same spec, as the thing she is." },
   { type = "paragraph", content = "She notes it the way she notes a serial number matching a serial number. \"That's mine,\" she says, flat, to the burned and empty room — and doesn't know why the words come out cold and certain and terrible, or why she can't make herself say them again." },
 ]
