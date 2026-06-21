@@ -53,17 +53,27 @@ bands = [
   { min = 500, max = 9999, text = "Credits: Flush",  icon = "🟩" },
 ]
 
+# ─── NPC panel — Renner's seduction progress (the per-target axis, made visible) ──
+# The seduction CLIMB is npc_renner.corruption; surface it so the player can gauge how far
+# the cold boss has cracked (toward the drain at 20) + where he is. Renner only — Mercer
+# doesn't climb (no corruption, no panel). The 'next' row mirrors the Quests-page goal block.
+[[sidebar_items]]
+type   = "npc_panel"
+npc_id = "npc_renner"
+label  = "Renner"
+rows   = ["corruption", "location", "next"]
+corruption_max_value = 20
+corruption_max_label = "Broken"
+
 # ─── Trait labels ─────────────────────────────────────────────────────────────
 # Rename energy -> "Charge"; hide every dormant/internal trait from player-facing dumps.
 [[traits.labels]]
 key   = "energy"
 label = "Charge"
 
-# Dormant engine always-ons — NOT Vesper's ladder (her axis = the awakening, not a meter).
-# corruption is left DEAD (blueprint Player track, fork A); arousal/hygiene unused.
-[[traits.labels]]
-key    = "corruption"
-hidden = true
+# Dormant engine always-ons. corruption is NOT hidden — it's the NPCs' LIVE seduction axis
+# (Renner's corruption, shown in his npc_panel); the PLAYER's corruption stays dead at 0 (the
+# inversion — visibly stuck at zero while his climbs). arousal/hygiene unused + hidden.
 [[traits.labels]]
 key    = "arousal"
 hidden = true
