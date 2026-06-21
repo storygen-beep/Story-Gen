@@ -1,17 +1,118 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 1,
-  "pipeline_phase": "top_level",
-  "npcs": {},
+  "book_revision": 14,
+  "pipeline_phase": "deep_design",
+  "map_design": {
+    "topology": "done",
+    "roles_access": "done",
+    "naming_travel": "done"
+  },
+  "deep_design": {
+    "player": "done",
+    "npcs": "in_progress",
+    "world": "todo",
+    "reactivity": "todo"
+  },
+  "player": {
+    "chunk": "player thread §2 — designed Step 4 Pass 1 (authored after Mercer/Renner; LO approved under propose-first)",
+    "shape": "INVERTED protagonist — starts maxed-degraded, arc is AWAKENING not corruption; Phase 1 = first crack, ends fracturing not free",
+    "designed": [
+      "the inversion (no prudish->depraved ladder; surrender cracking open)",
+      "voice: flat/procedural/hollow, cracks LEAK not pour, Tier-3 only at glitches",
+      "sexuality ENTIRELY instrumental (no solo content; explicit lives in NPC chunks; awakening is non-sexual = dread)",
+      "single axis = awakening (chip fragments + glitch-dread); NO personal corruption ladder",
+      "the weapon = her only agency (proto used->user)",
+      "glitch model = involuntary leaks (grief/memory/recognition); embedded one-per-tentpole; NO standalone beats, NO name-reveal, NO conscience/flinch",
+      "§2 pieces: bootstrap inverted (glitch not arousal, reactive drive) / exhibition instrumental (cover ladder) / economy light leash (depot credits -> disguises+bribes+upgrades) / ceiling = the drain (peak degradation=peak power)",
+      "daily routine = the cradle (glitch walks in; mirror of Mercer's chore-hijack)",
+      "net-new solo content = cradle hub + chip/memories view + capability upgrades"
+    ],
+    "deferred_act2": ["solo want (sex for herself, once awake)", "personal exhibitionism", "dominance/used->user turned on Mercer", "broke->rich economy ignition"],
+    "none_by_design_p1": ["solo-sexual content (cut)", "personal corruption meter (dormant)", "feeling/humanity meter (cut)", "player-named identity", "warmth (reserved for Cain)"],
+    "open_blueprint": "dormant engine corruption/hygiene — leave corruption DEAD (lean: chip is the stronger ladder) vs reskin into a visible 'Awakening' meter"
+  },
+  "npcs": {
+    "npc_mercer": {
+      "chunk": "first (self-contained owner) — designed Step 4 Pass 2",
+      "arc": "NO arc — unchanging/oblivious owner; no relation/corruption lock; no climb",
+      "designed": [
+        "inside hub (fixed menu, no rungs)",
+        "full sex loop (his-POV 'he uses you'; NO control-canvas — immune)",
+        "chores (servitude hosts, NOT the money loop — he never pays her)",
+        "chore-hijack (Lane 3, flat chance — no escalation)",
+        "summons (Lane 3 on her cradle — routine)",
+        "invasion (in her room — rare; first=once-only scripted)",
+        "catch-with-another-asset (Lane 2 voyeurism, flat/unbothered)",
+        "establishing capstones (opening + first-Penthouse-service)"
+      ],
+      "deferred_cross_npc": ["debriefs (react to leads)", "later dispatches (open Bastien/Calloway)"],
+      "none_by_design": ["relation/corruption ladder", "stat-climbing loop", "shop/economy role", "customization"]
+    },
+    "npc_renner": {
+      "chunk": "first (self-contained Mission-1 target) — designed Step 4 Pass 2",
+      "arc": "infiltration CLIMB — relation (earn access: menial->office) + corruption (break him: tease->flash->blow->fuck->anal); cold-boss-cracks, NO emotional arc",
+      "fiction": "equipment quartermaster who supplied the facility's gear (never knew what for — deniable wall, doesn't know what she is); Cain gutted his business; she's hired as cheap hands to rebuild = the way in",
+      "weapon": "anal-only trigger; his loop is the FIRST control-canvas build (all targets reuse); drain payload = what the gear did + what Cain freed + supply leads = first crack in 'evil rogue'",
+      "designed": [
+        "Lane 1 hubs (depot work / office seduction / Anchor drinking; escalating menus)",
+        "mechanical seduction rungs (tease/flash-commando/grope; first VAGINAL sex mechanical)",
+        "Lane 3 (menial work hosts = light income + RISING walk-ins, stacked corruption bands)",
+        "Lane 2 Anchor (witness texture tiered + cheer-up sex hook, scaled to progress)",
+        "full sex loop + control canvas (anal finish = the drain)",
+        "3 scripted capstones (hire / first blowjob / first anal=drain) + morning-afters on the big crossings",
+        "facility_ruins investigation + the one-time MATCH beat (personal seed: a part matches her build, not a memory)",
+        "voice that escalates by REACTION not opener-rewrite (contempt->caught-looking->reluctant->wants her)"
+      ],
+      "deferred_cross_npc": ["drain opens Bastien/Calloway", "Mercer debrief after Renner", "the_site convergence", "wrong-note accumulation across targets"],
+      "none_by_design": ["caretaker/emotional arc (cut)", "shop/vendor role", "customization", "unchanging (he climbs)"],
+      "new_location": "renner_depot (The Reach) — work floor + his office; Cordon dropped from his chunk"
+    }
+  },
   "plan": [],
   "structure_registry": {
-    "locations": [],
-    "npcs": [],
+    "locations": [
+      { "id": "loc_spire", "category": "reachable", "note": "district hub" },
+      { "id": "spire_plaza", "category": "reachable", "note": "Spire street hub (ambient)" },
+      { "id": "vance_tower", "category": "reachable", "note": "home arcology (Spire)" },
+      { "id": "atrium", "category": "reachable", "note": "Tower lobby/gateway" },
+      { "id": "wren_floor", "category": "reachable" },
+      { "id": "wren_room", "category": "reachable" },
+      { "id": "cradle", "category": "reachable", "note": "charge / day-reset / memory leaks; player §2 HUB — glitch host + chip-memories/upgrades access" },
+      { "id": "lab", "category": "reachable", "note": "scientist; seeded (Act-2 arc)" },
+      { "id": "units_quarters", "category": "reachable", "note": "3 units; seeded (Act-2 arc)" },
+      { "id": "penthouse", "category": "reachable", "note": "Mercer (top floor)" },
+      { "id": "vance_securities", "category": "reachable", "note": "Calloway / Mission 3 (Spire)" },
+      { "id": "the_eyrie", "category": "reachable", "note": "rooftop exec club (ambient/honeypot)" },
+      { "id": "loc_midcity", "category": "reachable", "note": "district hub" },
+      { "id": "the_strip", "category": "reachable", "note": "Mid-City street hub (ambient + routine deploy)" },
+      { "id": "mirage", "category": "reachable", "note": "nightclub (honeypot/ambient)" },
+      { "id": "the_cordon", "category": "reachable", "note": "hotel (control canvas)" },
+      { "id": "the_long_hour", "category": "reachable", "note": "lounge (ambient/leads)" },
+      { "id": "loc_reach", "category": "reachable", "note": "district hub" },
+      { "id": "the_waterfront", "category": "reachable", "note": "Reach street hub (ambient)" },
+      { "id": "bastiens", "category": "reachable", "note": "Mission 2 (dealer)" },
+      { "id": "the_anchor", "category": "reachable", "note": "dive bar; Mission 1 anchor (Renner) + leads" },
+      { "id": "facility_ruins", "category": "reachable", "note": "Mission 1 investigation (dread-site)" },
+      { "id": "the_site", "category": "locked", "note": "the chip; unlocks on enough leads" },
+      { "id": "renner_depot", "category": "reachable", "note": "Renner's gutted equipment depot (The Reach) — Mission 1 work hub: work floor (Lane 3) + his office (seduction spine); NEW, added at Renner design (full def/schedule at build)" }
+    ],
+    "npcs": [
+      { "id": "npc_mercer", "role": "owner/handler — pressure source + on-ramp + inside relationship (NO late-act pressure — oblivious by design)", "depth": "core", "arc_shape": "owner/authority — unchanging/oblivious, flag-driven, no lock, no arc", "status": "first-chunk designed (Step 4 Pass 2); cross-NPC debriefs/dispatches deferred" },
+      { "id": "npc_renner", "role": "core target — Mission 1 (the way in); equipment quartermaster, cold boss she seduces from the bottom (hired-to-rebuild cover)", "depth": "core", "arc_shape": "infiltration CLIMB — relation (earn access) + corruption (break him); cold-boss-cracks, no emotional arc; anal-only drain (first control-canvas build)", "status": "first-chunk designed (Step 4 Pass 2); cross-NPC drain-unlock/debrief/convergence deferred" },
+      { "id": "npc_bastien", "role": "core target — Mission 2 (submissive cover)", "depth": "core", "arc_shape": "infiltration relation+corruption", "status": "cast" },
+      { "id": "npc_calloway", "role": "core target — Mission 3 (domme cover)", "depth": "core", "arc_shape": "infiltration relation+corruption", "status": "cast" },
+      { "id": "npc_cain", "role": "the hunt's object + reserved end (kill-or-love) + truth-bearer", "depth": "core-story / light-onscreen P1", "arc_shape": "mystery/reveal spine (no lock)", "status": "cast — footprint fork pending" },
+      { "id": "npc_pell", "role": "lab roboticist — upgrade vendor + (OPEN) glitch-noticing (Act-2 origin thread)", "depth": "light/seeded", "arc_shape": "thread NPC (flag)", "status": "cast — name placeholder; OPEN: does he notice glitches in P1 (nobody vs one faint seed)" },
+      { "id": "npc_vega", "role": "the units — complete-machine operative; opening-mention mirror/dread (Act-2)", "depth": "light/seeded", "arc_shape": "ambient dread (named, no arc)", "status": "cast" },
+      { "id": "npc_lyra", "role": "the units — complete-machine operative; opening-mention mirror/dread (Act-2)", "depth": "light/seeded", "arc_shape": "ambient dread (named, no arc)", "status": "cast" },
+      { "id": "npc_nova", "role": "the units — complete-machine operative; opening-mention mirror/dread (Act-2)", "depth": "light/seeded", "arc_shape": "ambient dread (named, no arc)", "status": "cast" },
+      { "id": "npc_sol", "role": "ambient anchor — city-life + leads-color", "depth": "light island", "arc_shape": "leads-color (no lock)", "status": "cast — name placeholder; add/cut fork pending" }
+    ],
     "flags": [],
     "schedules": []
   },
-  "next_up": [],
+  "next_up": ["deep_design Pass 2 continues — player §2 DONE; next NPC is LO's call (Bastien = natural follow: Renner's drain opens him)"],
   "decisions_log": [
     {
       "turn": 1,
@@ -47,6 +148,111 @@
       "turn": 1,
       "book_revision": 1,
       "note": "Working-process note: LO prefers concrete pitches he can react to/edit over AskUserQuestion multiple-choice forks (rejected the tool 3x this session, each time to clarify/discuss). Lead with honest opinion + concrete options in prose."
+    },
+    {
+      "turn": 2,
+      "book_revision": 2,
+      "note": "NATURE REVISION: she is HALF-HUMAN, not a pure machine. Marrow's breakthrough = human-derived beings (that's why they truly feel); Cain is half-human too. Her human memory is wiped ('whose human' stays buried, feeds the central reveal, never a forked subplot). THE LEAK: her body enjoys sex from the start and she doesn't know why = the one human thing the company couldn't suppress = a scene-one tell. DISCIPLINE: sensation NOT emotion (emotional thaw still reserved for the kill-or-love ending); never let bodily pleasure become a want she acts on (keeps surrender intact). Chairman SHARPENED: he wants to become a human-machine fusion (immortality WITH a feeling self); the half-human secret is exactly what he kills to get; she's the working prototype."
+    },
+    {
+      "turn": 2,
+      "book_revision": 2,
+      "note": "MENTAL STATE: she starts in TOTAL SURRENDER — a will-less owned servant who believes serving the company/boss is all she is; NO motive of her own; her motive = the company's. The whole game is her motive peeling away from theirs (zero -> her own will, against them). The surrender is itself a fantasy (owned/obedient), not just setup. OPENING (fixed): boss's bed (body responds, mind cold) -> dismissed -> her room -> charging cradle -> surrender thought + first glitch (she's THINKING about who she is). The charger = hub/day-reset AND where memories leak."
+    },
+    {
+      "turn": 2,
+      "book_revision": 2,
+      "note": "THE GAME-LAYER FIX (diagnosis: we'd designed a passive STORY, not a GAME — no player want/agency/loop). FIX: (1) player's driving want = HUNT THE 'EVIL' ROGUE — one clear mission; the 'evil' is the company's LIE so the want INVERTS at the reveal (kill -> love), wired to the ending. (2) Structure = an OPEN WEB of conquerable powerful men (not a line): each mark = conquest + clue + resources + sometimes a wrong-note; player chooses which thread/order = the agency. Engine-native (zones+NPCs+flags). (3) Two layers of want: directional (catch him) + visceral (own these men). (4) Capability DEMOTED to enabler (reach harder marks), not the want; body-upgrades mostly Act-2. KILLED the Integration/feeling meter. Chip = mystery recovered in pieces, not a humanity bar."
+    },
+    {
+      "turn": 2,
+      "book_revision": 2,
+      "note": "PHASE 1 WEB (rough, full casting next): nodes = Renner (witness, entry) -> Bastien (docks fixer) / Calloway (guarded Vance insider, the 'company is hiding something' node) in parallel; Lena (lie-seed, a burned ex-Vance researcher under Cain's protection, the one woman, NOT a conquest — plants 'he's not evil'). Enough leads -> the site Cain just vacated -> the damaged memory chip -> first fracture = Phase 1 END. OPEN CHOICE (pending): did Cain leave the chip for her on purpose (lean YES — fixes why the chip holds HER past, inverts the hunt) or just traces? STILL TO FORMALIZE in Step 2: full economy/sinks, pacing/frontier (arc-shaped kill-or-love peak + livable plateau), §8 fail-state (the company's leash tightening as she malfunctions)."
+    },
+    {
+      "turn": 3,
+      "book_revision": 3,
+      "note": "FANTASY REGISTER FIXED (the big 'something off' diagnosis): we were designing a DOMINANCE/conquest fantasy onto a SUBMISSIVE owned character — they fought. LOCKED: register is CONTEXTUAL/logical, not fixed. INSIDE the company = submission (she's a slave; the boss owns her — sex + chores; dominance there makes no sense). OUTSIDE = INFILTRATION: she can't appear as what she is, so she takes a COVER IDENTITY, slips into a target's life, plays whatever the cover/target needs (caretaker/submissive/domme — register flexes per man's weakness). The dominance/break-and-own conquest is EARNED LATE (used -> user), never the Phase-1 register. Desire span reframed from 'cold conquest' to an ARC from submission to agency."
+    },
+    {
+      "turn": 3,
+      "book_revision": 3,
+      "note": "CORE ADDITIONS LOCKED: (1) She LOVES sex — the ONE thing she feels; everything else is blank (NOT contentment — they hollowed her out, left one spark; the chip hints there was a whole person). (2) THE SECRET WEAPON: during the sex act she can DOSE a man pliable and DRAIN his secrets, and it RUNS ON HER OWN PLEASURE (she must mean it). This fuses fantasy+mission: she wins by submitting — he uses her while she empties him out. Exact dose/drain mechanics still to finalize. (3) The masks rhyme with the mystery: she wears a false self per mission while her real self is erased; the chip is her true identity surfacing under the covers — infiltration theme = awakening theme."
+    },
+    {
+      "turn": 3,
+      "book_revision": 3,
+      "note": "CAIN = GOOD, locked (consistency fix): a good man doesn't hit people for no reason. His 'attacks' are RIGHTEOUS resistance — sabotage/theft/freeing against Vance's EVIL operations — SPUN by the company as a 'vicious rogue' for the player. The hunt is a LIE from beat one; every mission quietly shows the opposite of the briefing. Cain LEFT THE CHIP FOR HER (locked) — he's reaching out, not running."
+    },
+    {
+      "turn": 3,
+      "book_revision": 3,
+      "note": "NAMES LOCKED + boss decided. Phase-1 mission targets: Renner (ran the EVIL FACILITY Cain destroyed; covers it up; caretaker cover) -> Bastien (docks dealer, Cain's supply; submissive cover) -> Calloway (Vance insider w/ the file, secretly craves submission; DOMME cover). THE BOSS = MERCER — her direct owner AND handler (owns her inside: sex+chores; runs her missions; cruel; knows ALL her secrets = the danger when she cracks); SEPARATE and BELOW the Chairman (keeps the Chairman the remote Act-2 apex + the 'who's behind this' mystery). The old separate Handler role is MERGED into Mercer. Lena retired (folded into the chip + Mission 1 cover-up). ECONOMY formalized in book: no rent; pressure = the leash + cost of going off-book; light in Phase 1, ignites Act 2, hunted endgame; one wallet; leash = the §8 fail-state."
+    },
+    {
+      "turn": 4,
+      "book_revision": 4,
+      "note": "WEAPON LOCKED (mechanics + engine implementation). She must MEAN the sex (her own pleasure powers it). Trigger = HE CLIMAXES INSIDE HER -> she passes a fluid -> FULL CONTROL of him. Both = drain his secrets AND command him. ENGINE IMPLEMENTATION (LO, no real timer — engine is canvas-based): his climax routes to a CONTROL CANVAS (she questions/commands/drains = the extraction); when that canvas ENDS, ~10 fiction-minutes have passed and HE REMEMBERS NOTHING (wakes clean, mark reusable). The control canvas = the payoff scene of EVERY infiltration. Used ONLY on targets, NEVER the boss in Phase 1 (she stays surrendered) — it's the one thing that's HERS. Act-2 seed: the day she turns it on Mercer, used->user. MERCER CONFIRMED by LO (separate boss below the Chairman)."
+    },
+    {
+      "turn": 5,
+      "book_revision": 5,
+      "note": "STAT SET LOCKED (every stat gates real content; LO trimmed aggressively). PLAYER METERS: money (credits, the one wallet) + charge (= engine energy reskinned; paces day, vulnerability when hunted). INVENTORY: capabilities/upgrades = items (buyable loadout, owns-gate) + chip/memories = items (collectibles + a memories view). PER-TARGET LOCK = relation + corruption (NPC built-in traits; exact use per character at casting): relation = the INFILTRATION (embedded under cover, works for him, trusted) ; corruption = the SEDUCTION (hooked/compromised -> extends to 'owned' in Act 2). Both high -> he beds her -> the weapon. NPC AROUSAL REMOVED. DELIBERATELY NONE: her arousal, a feeling/humanity meter, a heat/suspicion meter. KEY PRINCIPLE (LO): don't add a stat later that isn't used now — so corruption is present from Phase 1 (seduction->ownership), and heat/suspicion is REMOVED entirely (the company's leash/crackdown handled by STORY BEATS + FLAGS, not a meter). Stat set done; only pacing/frontier left in Step 2, then Step 2b map."
+    },
+    {
+      "turn": 6,
+      "book_revision": 6,
+      "note": "SCOPE + FRONTIER (LO): building PHASE 1 ONLY for now (up to the chip / the fracture). Phase 1 ends on a CLIFFHANGER (the fracture into Act 2), not a frontier-plateau — correct for a slice toward the whole. PACING/FRONTIER (kill-or-love peak + livable post-game plateau + endless-sandbox signpost) PARKED as a known open question for Act-2 design, NOT skipped. Phase-1 pacing already carried by the web (mission loop + escalating dread -> fracture). Step 2 effectively done for Phase 1. ADVANCED pipeline_phase -> map_design (Step 2b)."
+    },
+    {
+      "turn": 7,
+      "book_revision": 7,
+      "note": "COMPANY IDENTITY LOCKED (LO: public face = robotics/AI). Vance Dynamics, 3 layers: (1) PUBLIC = prestige robotics/AI megacorp (explains labs/scientists/thousands of staff); (2) REAL BUSINESS = OWNERSHIP — uses human-derived ASSETS like Wren to run the world's top intelligence-and-control op, owning the powerful via extracted secrets (the missions ARE the core business); (3) DEEPEST (Act-2) = the asset program is the Chairman's immortality machine. Theme = a company whose whole trade is OWNING PEOPLE; the PC is a person it owns, waking up. NEW SETUP (seeded for Act 2, light Phase-1 role): everyone LIVES INSIDE the company (a vertical TOWER/arcology; Chairman does NOT live here); a LAB SCIENTIST (in-house roboticist — upgrades + origin thread; Phase-1: flags her glitching); THREE UNITS (human-derived assets, better hardware/lesser minds/no soul — Wren is the irreplaceable ORIGINAL; 'only you can be better' = reclaim the soul = the awakening; Phase-1: a mirror/dread)."
+    },
+    {
+      "turn": 7,
+      "book_revision": 7,
+      "note": "MAP DESIGNED (Step 2b) — wrote '## Spatial graph & location model'. ARCHETYPE = two-root nested-zones: INSIDE = The Tower (Vance arcology, everyone lives in; floors: Mercer's Penthouse[top,active] / Units' Quarters[seeded] / The Lab[seeded] / Wren's Floor->Room->Cradle[active]) ‖ OUTSIDE = New Halcyon (targets' world — they don't know what she is; The Facility[Renner] / The Reach[Bastien, docks, +Marrow's lab Act-2] / Mid-City[Calloway] / The Site[LOCKED until leads -> the chip]). Bridged by deploy/return. TRAVEL FRICTION = LIGHT (deploy costs time+charge; return-to-cradle free) — flagged adjustable. NAMING: possessive for owned, 'The X'/bare for zones. structure_registry.locations SEEDED (12 ids, the_site=locked). map_design progress = done. CONFIRMED with LO: she still deploys OUT for missions (infiltration needs outsiders) — stated as the working structure. Pending LO review of the map before advancing pipeline_phase -> casting."
+    },
+    {
+      "turn": 8,
+      "book_revision": 8,
+      "note": "MAP REJECTED & REDESIGNED (LO: the two-root exact-needed map felt utilitarian, not a living world). Recorded the critique in games/vesper/location_design_note.md (the skill's 'exact-needed locations / room-content-floor as hard cut' rule is WRONG for a living-world game — candidate skill-doctrine fix later). Studied DoL (game_explorations/dol + sandbox-nav memory): living world = real traversed city + NPCs on their own schedules/arcs + world-remembers (reputation/consequence) + ambient events + density-over-breadth. NEW MAP (LO approved) = ONE living city, three districts, Tower is a BUILDING in the Spire: THE SPIRE (spire_plaza street-hub / vance_tower[floors: penthouse·units·lab·atrium·wren_floor->room->cradle] / vance_securities=Calloway/M3 / the_eyrie) ‖ MID-CITY (the_strip street-hub / mirage / the_cordon=hotel/control-canvas / the_long_hour) — the 'world beyond missions', no Cain mission here ‖ THE REACH (the_waterfront street-hub / bastiens=M2 / the_anchor=M1-Renner / facility_ruins=M1-investigation / the_site=chip[LOCKED]). LIVE via systems: schedules + ambient street events (the 3 street hubs) + light reactive-memory. Travel: spire<->midcity<->reach costed + fast-travel. structure_registry.locations RESEEDED (23 ids). Step 2b CLOSED; pipeline_phase -> CASTING (Step 3)."
+    },
+    {
+      "turn": 9,
+      "book_revision": 9,
+      "note": "CASTING DRAFT written (Step 3) — '## Casting' section + structure_registry.npcs seeded (8 ids). Roles formalized: COVERAGE ok — pressure source + on-ramp = Mercer (the leash + he issues every mission); core targets = Renner/Bastien/Calloway (3 distinct covers caretaker/submissive/domme = the submission->agency span, Calloway's domme = first taste of user-she's-becoming); late-act pressure = Mercer tightening + Pell flagging glitches. Arc-shapes: Mercer = owner/authority FLAG-DRIVEN (NOT a Phase-1 conquest, no relation/corruption lock — Act-2 seed is the day she turns the weapon on him); 3 targets = infiltration relation+corruption double-lock w/ personal spines (guilt->dependence / greed->control / control->release); Cain = mystery/reveal spine, no lock; Pell(placeholder) = upgrade-vendor + glitch-flag thread; Units = collective dread mirror; Sol(placeholder) = ambient leads-color island. MACHINE NODES placed: Mercer=inside hub / Renner=entry node(opens 2&3) / Bastien=supply node / Calloway=file node(unlocks the site) / Cain=convergence(leads->site->chip->fracture). THREE OPEN FORKS surfaced to LO before locking + advancing to deep_design: (1) Cain Phase-1 footprint — REC physically offstage, presence escalates lie->wrong-notes->'asked about you by name'->chip-left-for-her, fracture=first contact; alt = one direct brush. (2) Units collective+1-face [REC] vs 3 named. (3) ambient bartender Sol add-light [REC] vs cut. pipeline_phase STAYS 'casting' pending LO's fork calls + cast lock."
+    },
+    {
+      "turn": 10,
+      "book_revision": 10,
+      "note": "CAST LOCKED — 3 forks resolved by LO + a UNITS LORE REVISION. (1) CAIN physically OFFSTAGE for all of Phase 1 (LO: 'cain does not appear in phase 1'); presence escalates lie->wrong-notes->'asked about you by name'->chip-left-for-her; the chip = first contact; kill-or-love face-to-face saved for Act 2. (3) SOL (bartender) KEPT, light. (2) UNITS REVISED: LO clarified the three units are COMPLETE MACHINES — NO human base, no real feeling (RESOLVES the old contradictory 'human-derived but no soul' framing). They're the company's OWN field operatives (same line of work as Wren) but pure machines: great hardware, no Marrow soul (the company never had his human-base method — it died with him). SHARPENS the core: Wren is irreplaceable because the company literally cannot manufacture the human-derived soul (the units PROVE it), which is exactly what the Chairman is killing to harvest. NAMED individually (LO): VEGA, LYRA, NOVA (placeholder, renameable). Phase-1 role = MENTIONED ONLY AT THE OPENING (sets up the Act-2 mirror), not recurring. structure_registry.npcs updated (npc_units -> npc_vega/lyra/nova). Placeholders still open: Dr. Pell, Sol. pipeline_phase ADVANCED -> deep_design (Step 4)."
+    },
+    {
+      "turn": 11,
+      "book_revision": 10,
+      "note": "PROPOSE-FIRST RULE ADOPTED + DRAFTS PULLED. After the cast lock I entered Step 4 and drafted the PLAYER THREAD then the RENNER story brief straight into design_book.md turn-by-turn (the skill default = the design book is the running review surface). LO objected (are we directly apply changes??) — he wants to APPROVE each decision in chat BEFORE it is written to the design files; nothing was built or real, only planning text past the seed. RESOLUTION (LO: pull both out): removed the player-thread and Renner sections from design_book.md (back to rev-10 = cast locked), reset deep_design to all-todo, and dropped the turn-11/12 draft entries (this entry replaces them). The player-thread + Renner DESIGNS still exist only as CHAT PROPOSALS awaiting LO yes — re-author into the book only on approval. Cast registry (npc_* incl. renner) UNAFFECTED (casting was approved). GO-FORWARD: propose in chat -> LO approves -> THEN write. Saved as memory lo-propose-before-writing. pipeline_phase stays deep_design (Step 4 entered, no subject approved yet)."
+    },
+    {
+      "turn": 12,
+      "book_revision": 11,
+      "note": "OPENING DESIGNED + WRITTEN — LO approved (the first write under the propose-first rule). Added '## The opening (design)' to design_book.md. SHAPE = 3 beats, ~23 nodes, ON-RAILS (Continue) until ONE hinge node ('out the door') that opens the city — the cage mirrors her no-will state. SUPERSEDES the turn-2 bed->cradle opening sketch. BEAT 1 office (~12 nodes): failed op (she FROZE = the first glitch, read as a malfunction) -> threat to scrap -> she begs -> too-valuable ('the Chairman's investment', NAMES the Chairman) -> punishment-FUCK in front of the 3 units (she FEELS it, they're BLANK = the half-human mirror) -> gratitude -> reassignment (Vega/Lyra/Nova -> head-on hunt; her -> infiltration, 'useless with a gun but...') + MISSION FRAMING (the rogue MURDERED the CHAIRMAN'S WIFE, enemy of company+world) -> dismissed. Introduces Mercer/units/Chairman/rogue/her through ACTION, not exposition. BEAT 2 night (~7 nodes, FULLY LINEAR — LO killed the flavor-choices): walk back -> cradle (charge/save/day-reset) -> TEARS (her body cries, she can't explain it = the tell) -> memory LEAK (a fragment) -> CATECHISM (the lie she believes: machine, saved, owes, obeys) -> THE POWER (control at his climax, company-given; NEVER works on the boss, unquestioned) -> power-down (retreat into the leash). BEAT 3 morning (~4 nodes): power-up -> phone briefing -> the tip (Renner @ the Anchor) -> OUT THE DOOR (the hinge: cover/disguise + the map opens) -> Renner. CRAFT NOTES recorded: render-don't-dump (iceberg; a fragment, not a flashback) / crying=malfunction (preserves 'blank except the sex') / belief-vs-truth (write her self-concept straight, NEVER confirm it) / on-rails mirrors surrender. PARKED CHEKHOV GUNS: (1) what really happened to the Chairman's wife (the 'rogue killed her' = company LIE that keeps Cain good; truth TBD); (2) why the weapon fails on the boss [CANDIDATE, not locked: it needs a SELF to fire -> none present in total surrender -> wires the Act-2 used->user turn]; (3) the Chairman's motive = GRIEF [optional seed]. deep_design.player -> in_progress (opening/bootstrap done; the rest of the player thread — explicit wants/economy/ceiling/routines — still pending). book_revision -> 11."
+    },
+    {
+      "turn": 13,
+      "book_revision": 12,
+      "note": "MERCER FIRST-CHUNK DESIGNED + WRITTEN (Step 4 Pass 2, first NPC — LO approved under propose-first). LO chose NPCs-before-player-thread (her §2 is already carried by World setup/Top-level/opening). MAJOR REVISION: Mercer is now the UNCHANGING, OBLIVIOUS owner — LO KILLED the leash-tightening + late-act pressure + the big confrontation (all -> Act 2). He NEVER notices her crack in Phase 1 (the crack stays PRIVATE = hers); no arc, no climb, no relation/corruption lock — same cold ownership day 1 and at the fracture. Phase-1 'win' vs him = survival (stay hidden). Amended the now-stale Casting lines (coverage cascade 'late-act pressure', Mercer row/sketch tightening language, 'opens the game (his bed)'->office) for consistency. DESIGN = the four-violation use-scene model, each must land a DISTINCT note: hub (baseline/chosen) / chore-hijack (attention — he pulls her off a task, flat chance no escalation) / summons (downtime — Lane 3 on her cradle, routine) / invasion (sanctuary — in her room, rare, FIRST=once-only scripted) + catch-him-with-another-asset (Lane 2 voyeurism, she's one of many, flat/unbothered). SEX LOOP = full standard machine but his-POV 'he uses you' verbs/prose; NO control-canvas (immunity — the weapon bolts onto TARGETS' loops only). Chores = servitude hosts, NOT the money loop (he never pays her). Voice = clipped/calm/proprietary, PURE COLD (warmth reserved for Cain), calls her 'my investment'/'asset', spoken not narrated. Build map (lanes) settled early at LO's request (normally Blueprint). DEFERRED (cross-NPC, next chunks): debriefs + later dispatches (need Renner/Bastien/Calloway). STILL OPEN (not Mercer's — Pell's design): does ANYONE notice her glitches in P1 (nobody vs one faint unalarmed seed). deep_design.npcs -> in_progress. book_revision -> 12."
+    },
+    {
+      "turn": 14,
+      "book_revision": 13,
+      "note": "RENNER FIRST-CHUNK DESIGNED + WRITTEN (Step 4 Pass 2, 2nd NPC — LO approved under propose-first) + a GAME-WIDE weapon change. (A) WEAPON now ANAL-ONLY: his cum in her ass fires the control canvas, vaginal does NOT (locked, Option A); most-degrading-take = peak control (peak submission=peak power); by-design hook added to parked mysteries (her body built to deliver anally — company cruelty vs Marrow's hidden gift — beside the boss-immunity mystery); kills the pregnancy question; amended weapon desc in World setup + Top-level. (B) RENNER FICTION RECAST: from 'ran the evil facility / caretaker / comes as comfort' -> the QUARTERMASTER who SUPPLIED the facility's equipment, never knew what for (deniable wall = can't tell what she is); Cain GUTTED his business (a husk he claws at, broke/blacklisted/drinking); she's HIRED as cheap hands to rebuild = the way in; amended Cast list, Top-level web, Casting coverage/table/sketch (dropped 'caretaker' register for Renner game-wide). (C) ARC = cold-boss seduction, EMOTIONAL ARC CUT (she feels only the sex, gives temptation not comfort; guilt lives in Lane 2 ambient + the drain payload, never nursed): hired menial / cold+ignores her -> good work earns the OFFICE (relation=access) -> tease/flash commando (corruption) -> rude -> flirts back -> blowjob -> vaginal (routine, mechanical) -> takes her ass=the drain. Axes: relation=earn access (work->office), corruption=break him (tease->anal). (D) VOICE escalates by REACTION not opener-rewrite (contempt->caught-looking->reluctant->wants her; permanent, no yo-yo; she cool, he rattled). (E) CAPSTONES (final, TRIMMED to 3 scripted): hire / first blowjob / first anal=drain; first VAGINAL sex MECHANICAL; rest mechanical rungs/loop; morning-after hinges on the big crossings (blowjob+anal: 'did you like it, or not?' = corruption ratcheting). (F) LANE 2 = Anchor witness texture (tiered) + CHEER-UP SEX hook (walk in low -> sex scaled to progress; hot, player-experience-first, dropped the cold-only caveat). (G) LANE 3 now EXISTS (the hire bought it): menial work hosts (light income) + RISING walk-ins (stacked corruption bands vs Mercer's flat). (H) FACILITY dial = PERSONAL, refined to a PHYSICAL MATCH not a memory: at facility_ruins she notices a component/stamp matches her own build (cold 'that's mine'); ties to Renner (matching gear = what he supplied); one-time AUTO-FIRE beat (capstone-shape, no choice, built like the opening freeze/tears) riding on the investigation; SEED paid off at the chip; doesn't spoil chip (manufacture vs memory). (I) NEW LOCATION renner_depot (The Reach) = work floor + office; CORDON dropped from his chunk (uses her at the desk). (J) REGISTER 'caretaker' -> 'the underling who seduces the cold boss from the bottom' (active tempter; distinct from Bastien=passive bait / Calloway=domme). DEFERRED (cross-NPC): drain opens Bastien/Calloway + Mercer debrief + the_site convergence + wrong-note accumulation. Size ~16-20 canvases (biggest chunk so far). deep_design.npcs stays in_progress (Bastien/Calloway/Cain/Pell/units/Sol remain). book_revision -> 13."
+    },
+    {
+      "turn": 15,
+      "book_revision": 14,
+      "note": "PLAYER THREAD §2 DESIGNED + WRITTEN (Step 4 Pass 1, authored after Mercer/Renner — LO approved under propose-first). Added '### The player thread (Step 4 · §2)' to design_book.md, placed first (canonical §2-before-§3) though authored last. CORE = the INVERTED protagonist: every NPC climbs cold->surrender; SHE starts maxed-degraded (used by all, owned by Mercer, feels only the sex), so her thread is NOT a corruption ladder — it's SURRENDER CRACKING OPEN. Phase 1 = first crack, ends FRACTURING not free. VOICE = flat/procedural/hollow (RTS-flat = who she is), cracks LEAK not pour, Tier-3 ONLY at glitches. SEXUALITY ENTIRELY INSTRUMENTAL (LO cut solo masturbation 'for now' -> Act 2): no sex about her, no standalone explicit scene; her explicit content lives INSIDE the NPC chunks (Mercer uses her / she seduces targets); her own thread's awakening is NON-sexual (dread). SINGLE AXIS = awakening (chip fragments + accumulating glitch-dread), driven by mission-progress; NO personal corruption ladder (per-target relation/corruption are the TARGETS'). GLITCH MODEL (corrected this turn): glitches = INVOLUNTARY LEAKS of the buried self (grief/memory/recognition); the body does what the company didn't assign, she files it as a fault. LO REMOVED 'the name' (Vesper surfacing = pours the central reveal early; against reveal-architecture 'hide the origin / fragment not flashback / chip IS the ladder') + 'the flinch' (moral hesitation = a conscience/self she doesn't have yet; sentimental awakening; cheapens the Cain-specific freeze into generic mercy). RESULT: NO net-new standalone glitch beats — embedded ONE PER TENTPOLE (opening tears+fragment / each mission investigation = a recognition, Renner's 'that's mine' = template, Bastien+Calloway get their own / the fracture); cradle carries escalating RECURRENCES of the same leaks, not new categories. §2 PIECES mapped: 2A bootstrap INVERTED (nudge = glitch not arousal; reactive drive = buried self/Cain/chip, planted in opening) / 2B exhibition INSTRUMENTAL (cover ladder, not personal thrill) / 2C economy = the LIGHT LEASH (depot credits -> disguises+bribes+upgrades; not survival, not broke->rich=Act2) / 2D ceiling = THE INVERSION (the drain: submits to the most degrading act = seizes control; peak degradation=peak power; non-corruption ladder = chip+upgrades inventory). DAILY ROUTINE = the cradle (glitch walks in; mirror of Mercer's chore-hijack). NET-NEW SOLO CONTENT (lean by design — she's the protagonist, her real content IS the missions): the cradle HUB (existing loc) + the chip/memories VIEW + the capability UPGRADES; weight is in the WRITING (flat-with-cracks voice + Tier-3 glitches), not canvas count. TRAITS clarified (no change to the locked stat set): her live meters = money + charge; upgrades + chip = inventory; engine corruption + hygiene sit DORMANT. OPEN (Blueprint mechanism call): leave dormant corruption DEAD (lean — chip is the stronger ladder) vs reskin into a visible 'Awakening' meter. Added a top-level 'player' budget block to the ledger; cradle location note updated (now the §2 hub). deep_design.player -> DONE. book_revision -> 14. NEXT: deep_design Pass 2 continues — next NPC is LO's call (Bastien = natural follow)."
     }
   ]
 }

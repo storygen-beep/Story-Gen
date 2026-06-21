@@ -1,0 +1,107 @@
+# Phase 0/7 — 0_systems_spec.toml
+# Vesper — system spec: project + time + sidebar + dormant-trait hides.
+#
+# ── TEST SLICE scaffold ───────────────────────────────────────────────────────
+# This build is a VERTICAL SLICE to test what's designed so far: the opening +
+# Mercer's inside loop + Renner's Mission 1. By design it does NOT contain the
+# Phase-1 ending (the_site -> the chip -> the fracture, which needs all three
+# missions) nor Missions 2/3 (Bastien/Calloway). Those + the cross-NPC wiring are
+# DEFERRED and logged as known-open gaps.
+#
+# ── Systems ───────────────────────────────────────────────────────────────────
+# Each system reads its OWN table (never bare keys under [time]):
+#   clothing -> [settings]   ·   phone -> [phone] (8_phone.toml)
+# Vesper has NO rent (the economy = credits + capability upgrades, not a landlord).
+# Clothing (the disguise/cover system) and phone (the mission briefings) ARE used in
+# the design, but their catalog/threads are CONTENT — wired at their beats (the cover
+# beat / the briefing beat) at the correct homes, not in this skeleton. Scaffold stays
+# minimal so the first build proves green before any beat.
+
+schema_version = "1.0"
+
+[project]
+id          = "vesper"
+title       = "Vesper"
+description = "An owned half-human weapon who feels nothing but the sex she's used for. Inside Vance Dynamics she's the company's slave; outside, under a false face, she slips into powerful men's lives and drains them while they think they're using her — sent to hunt a rogue called Cain. [TEST SLICE: the opening + Mercer + Renner's Mission 1.]"
+quests_engine   = "v2"
+starting_canvas = "canvas_opening_office"   # the opening (Beat 1 — the office line-up). Replaces the scaffold boot.
+
+[time]
+starting_hour = 20        # the opening opens in the evening (Beat 1 — Mercer's office)
+starting_day  = "Monday"
+starting_week = 1
+
+# ─── Engine daily tick — daily-cap flag resets ────────────────────────────────
+# Fires once at the start of each new game-day (the cradle recharge rolls the day).
+# Charge isn't decayed here (it's spent on actions + restored at the cradle).
+[engine.daily_tick]
+flagEffects = [
+  { targetType = "player", flag = "talked_renner_today", op = "unset" },
+]
+
+# ─── Sidebar items ────────────────────────────────────────────────────────────
+# Vesper's LIVE player meters = Charge + Credits ONLY (locked stat set, design_book
+# Top-level). Per-target relation/corruption surface on the Quests page, not here.
+# Charge = the engine `energy` trait (spent on actions/travel, restored at the cradle).
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "energy"
+bands = [
+  { min = 0,  max = 24,  text = "Charge: Critical", icon = "🪫" },
+  { min = 25, max = 49,  text = "Charge: Low",      icon = "🔅" },
+  { min = 50, max = 74,  text = "Charge: Steady",   icon = "🔆" },
+  { min = 75, max = 100, text = "Charge: Full",     icon = "🔋" },
+]
+
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "money"
+bands = [
+  { min = 0,   max = 49,   text = "Credits: Empty",  icon = "▫️" },
+  { min = 50,  max = 199,  text = "Credits: Thin",   icon = "▪️" },
+  { min = 200, max = 499,  text = "Credits: Funded", icon = "🟦" },
+  { min = 500, max = 9999, text = "Credits: Flush",  icon = "🟩" },
+]
+
+# ─── Trait labels ─────────────────────────────────────────────────────────────
+# Rename energy -> "Charge" in player-facing dumps (the reskin, design_book Top-level).
+[[traits.labels]]
+key   = "energy"
+label = "Charge"
+
+# Hide the DORMANT engine always-on traits. The engine keeps corruption/arousal/hygiene
+# live on any player and the Stats page dumps every core_traits key; hidden=true suppresses
+# them from ALL player-facing dumps. Vesper's design uses none of these as the player's
+# ladder — her progression is the chip + upgrades (inventory), not a meter (design_book §2
+# player thread). NOTE: hiding `corruption` here implements the "leave it dead" default for
+# the open Blueprint fork (dormant vs reskin into an "Awakening" meter) — reversible if LO
+# picks the meter.
+[[traits.labels]]
+key    = "corruption"
+hidden = true
+
+[[traits.labels]]
+key    = "arousal"
+hidden = true
+
+[[traits.labels]]
+key    = "hygiene"
+hidden = true
+
+# Sex-loop state — internal numeric machine, never shown.
+[[traits.labels]]
+key    = "sex_stage"
+hidden = true
+
+[[traits.labels]]
+key    = "loop_npc_pleasure"
+hidden = true
+
+[[traits.labels]]
+key    = "sex_finisher_type"
+hidden = true
+
+[[traits.labels]]
+key    = "anal_active"
+hidden = true

@@ -1,0 +1,223 @@
+# Phase 1/7 — 1_metadata_and_locations.toml
+# Vesper — player (Wren) + Mercer & Renner (with schedules) + the TEST-SLICE map.
+#
+# IMPORTANT: All [[npcs]] + [[npcs.schedules]] + [[npcs.core_traits]] MUST live in
+# this single file (TOML scoping — splitting NPCs across phases breaks parsing).
+#
+# SLICE MAP = two districts the opening + Mercer + Renner touch:
+#   THE SPIRE (Tower interior)  ·  THE REACH (Renner's Mission 1).
+# Mid-City, the other Spire venues (lab/units/securities/eyrie), Bastien's, and the_site
+# are DEFERRED (not built) — added with Missions 2/3 + the ending. renner_office ships
+# OPEN here (its relation-lock + setter are added WHOLE with the office beat).
+
+# ─── Player ───────────────────────────────────────────────────────────────────
+
+[player]
+id          = "player"
+name        = "Wren"
+description = "A Vance Dynamics asset. She serves the company and the man who owns her, and she's good at it. The only thing she feels is the sex she's used for — everything else is quiet. She believes that's all she's ever been."
+portrait    = "wren.jpg"
+# Fixed identity — NOT player-named (protects the Wren / buried-Vesper reveal). No creator.
+customizable = false
+
+[player.core_traits]
+# LIVE meters (surfaced): energy = Charge, money = Credits.
+energy     = 100      # "Charge" — spent on actions/travel, restored at the cradle
+money      = 50       # "Credits" — deliberately light (a kept asset is provided for)
+# DORMANT engine always-ons (hidden via 0_systems traits.labels — not Vesper's ladder;
+# her progression is the chip + upgrades inventory, design_book §2 player thread).
+corruption = 0
+arousal    = 0
+hygiene    = 100
+# Sex-loop state (NUMERIC, not flags — a triggerless loop can't set a flag the chain-validator
+# would credit; reset to 0 on every loop entry + finisher exit). Hidden via 0_systems. Shared
+# machine for any NPC loop. sex_finisher_type: 0=facial · 1=inside(vaginal) · 2=ass(anal=the drain).
+sex_stage         = 0
+loop_npc_pleasure = 0
+sex_finisher_type = 0
+anal_active       = 0
+
+# ─── NPCs ─────────────────────────────────────────────────────────────────────
+# npc_mercer — owner/authority (UNCHANGING; no arc, no relation/corruption lock)
+# npc_renner — core target, infiltration CLIMB (relation = access, corruption = break him)
+
+# ── Mercer — her owner (inside) ───────────────────────────────────────────────
+
+[[npcs]]
+id          = "npc_mercer"
+name        = "Mercer"
+description = "Her direct owner and handler. He runs her missions and uses her as he pleases — sex and chores, however he orders it — and he knows every one of her secrets. Cold the way ownership is cold: she's an investment he maintains, not a person he sees."
+portrait    = "mercer.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = [
+  "Owner",   # he does not change across Phase 1 — same cold ownership day one and at the fracture
+]
+
+# Mercer holds the penthouse — his domain, where she serves him. Overnight he's offscreen
+# (she's at the cradle). Broad daytime/evening block so she can be summoned/used when home.
+[[npcs.schedules]]
+location   = "penthouse"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "23:00"
+activity   = "in his penthouse — running the assets"
+
+# ── Renner — Mission 1 target (the cold boss) ─────────────────────────────────
+
+[[npcs]]
+id          = "npc_renner"
+name        = "Renner"
+description = "The equipment supplier whose gear outfitted the facility Cain burned down — though he never knew what it was for. Cain gutted his business; now he's a husk of a man clawing at the wreck of it, broke and blacklisted and drinking. He hired cheap hands to help rebuild. He's mean to the help and he doesn't look twice at her. Yet."
+portrait    = "renner.jpg"
+core_traits = { relation = 0, corruption = 0 }
+flag_keys   = []
+arc_stages  = [
+  "Beneath notice",   # 0 — hired menial; cold, ignores her
+  "Useful",           # 1 — good work earns notice (relation)
+  "In the office",    # 2 — relation earns office access (the private climb opens)
+  "Cracking",         # 3 — he flirts back; the cold breaks (corruption)
+  "Her mouth",        # 4 — first blowjob
+  "Fucking",          # 5 — vaginal, the routine
+  "Drained",          # 6 — first anal = the drain (the weapon fires)
+]
+
+# Renner schedule — the depot by day, the Anchor by evening (the nav paints him where he is).
+# Overnight he's offscreen (drunk/asleep). The office (renner_office) sits inside the depot.
+[[npcs.schedules]]
+location   = "renner_depot"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "09:00"
+end_time   = "18:00"
+activity   = "working the depot floor"
+
+[[npcs.schedules]]
+location   = "the_anchor"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time   = "23:00"
+activity   = "drinking at the Anchor"
+
+# ─── Locations ────────────────────────────────────────────────────────────────
+# Two top-level district roots (is_container = pure nav, swallow no canvases):
+#   loc_spire  → spire_plaza (street hub) + vance_tower (the arcology)
+#   loc_reach  → the_waterfront (street hub) + the_anchor + renner_depot + facility_ruins
+# Districts bridged by the travel activities (phase 3): spire_plaza ⇄ the_waterfront.
+# Standing hubs are NON-container (so they can host canvases). "Leave X" follows entry_from.
+
+# ── THE SPIRE ─────────────────────────────────────────────────────────────────
+
+[[locations]]
+id               = "loc_spire"
+name             = "THE SPIRE"
+description      = "The corporate core — glass towers stacked into the clouds, the city's money and its cameras. Everything here is clean, lit, and watched."
+is_container     = true
+navigation_order = ["spire_plaza", "vance_tower"]
+
+[[locations]]
+id          = "spire_plaza"
+name        = "Spire Plaza"
+description = "The chrome public level at the foot of Vance Tower. Suits cross it without looking up. Cameras on every column. This is where you leave the company's world and step into the city."
+image       = "locations/spire_plaza.jpg"
+entry_from  = "loc_spire"
+# Street hub — the Spire's living surface + the travel anchor to the Reach (phase 3 activity).
+
+[[locations]]
+id               = "vance_tower"
+name             = "Vance Tower"
+description      = "The arcology. Staff, assets, and the man who owns them all live stacked inside one glass spine. You don't commute to the company — you live in it."
+image            = "locations/vance_tower.jpg"
+entry_from       = "loc_spire"
+is_container      = true
+navigation_order = ["atrium", "penthouse", "wren_floor"]
+
+[[locations]]
+id          = "atrium"
+name        = "The Atrium"
+description = "The Tower's inner lobby. Polished stone, a security desk that knows your face, elevators that only stop where your clearance says they can. The threshold between the cage and the street."
+image       = "locations/atrium.jpg"
+entry_from  = "vance_tower"
+
+[[locations]]
+id          = "penthouse"
+name        = "Mercer's Penthouse"
+description = "The top floor. Glass on three sides, the city laid out below like something he owns. This is where she's summoned, and where she serves."
+image       = "locations/penthouse.jpg"
+entry_from  = "vance_tower"
+
+[[locations]]
+id               = "wren_floor"
+name             = "Wren's Floor"
+description      = "The asset level — narrow corridors, numbered doors, no windows. Quiet the way a kept place is quiet."
+image            = "locations/wren_floor.jpg"
+entry_from       = "vance_tower"
+is_container      = true
+navigation_order = ["wren_room"]
+
+[[locations]]
+id               = "wren_room"
+name             = "Wren's Room"
+description      = "Hers, in the way a tool's drawer is the tool's. A bed she rarely uses, a charging cradle in the corner, nothing on the walls. Clean, bare, company-issue."
+image            = "locations/wren_room.jpg"
+entry_from       = "wren_floor"
+navigation_order = ["cradle"]
+
+[[locations]]
+id          = "cradle"
+name        = "The Cradle"
+description = "The charging cradle. She powers down here and wakes here — the reset, the start of every day. When something leaks through the quiet, it leaks here."
+image       = "locations/cradle.jpg"
+entry_from  = "wren_room"
+# Her home base: charge / sleep / day-reset (the day-router activity, phase 3) + the §2 glitch host.
+
+# ── THE REACH ─────────────────────────────────────────────────────────────────
+
+[[locations]]
+id               = "loc_reach"
+name             = "THE REACH"
+description      = "The docks underside — grit, salt, container stacks, and the parts of the city the Spire pretends it doesn't use. Cain's kind of place."
+is_container     = true
+navigation_order = ["the_waterfront", "the_anchor", "renner_depot", "facility_ruins"]
+
+[[locations]]
+id          = "the_waterfront"
+name        = "The Waterfront"
+description = "The docks strip — wet concrete, sodium lights, smuggler traffic that nobody logs. The Reach's open surface. The car back to the Spire waits at the curb."
+image       = "locations/the_waterfront.jpg"
+entry_from  = "loc_reach"
+# Street hub — the Reach's living surface + the travel anchor back to the Spire (phase 3 activity).
+
+[[locations]]
+id          = "the_anchor"
+name        = "The Anchor"
+description = "A dive bar two streets off the water. Dark wood, dead neon, a bartender who's seen everyone's worst night. Renner drowns his here, evenings, every evening."
+image       = "locations/the_anchor.jpg"
+entry_from  = "loc_reach"
+
+[[locations]]
+id               = "renner_depot"
+name             = "Renner's Depot"
+description      = "A gutted equipment yard — half-empty racks, crates Cain's people didn't bother to take, a forklift nobody's fixed. He's trying to rebuild it on cheap hands and credit he doesn't have. The work floor's out front; his office is in back."
+image            = "locations/renner_depot.jpg"
+entry_from       = "loc_reach"
+navigation_order = ["renner_office"]
+
+[[locations]]
+id          = "renner_office"
+name        = "Renner's Office"
+description = "A glassed-in box overlooking the work floor. A desk buried in unpaid invoices, a chair, a space heater. Where the boss sits and where, eventually, he stops being able to ignore her."
+image       = "locations/renner_office.jpg"
+entry_from  = "renner_depot"
+# Relation gates the SPACE (earn access); corruption gates the climb INSIDE it (the hub rungs).
+entry_conditions = { version = "1.0", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "relation", operator = "gte", value = 10 },
+] }
+blocked_message = "His office is his. She hasn't earned the inside of it yet."
+
+[[locations]]
+id          = "facility_ruins"
+name        = "The Facility"
+description = "What's left of the Vance asset-facility Cain burned to the ground — scorched frame, melted server racks, the smell of old smoke that never washed out. The first dread-place. Something in the wreckage is going to look like it belongs to her."
+image       = "locations/facility_ruins.jpg"
+entry_from  = "loc_reach"
+# Mission-1 investigation site. The one-time "that's mine" match beat rides here (design_book Renner brief).
