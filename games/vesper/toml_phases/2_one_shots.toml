@@ -1,94 +1,130 @@
 # Phase 2/7 — 2_one_shots.toml
-# Vesper — THE OPENING (the on-rails cage, then the first free step). Beats 1–3.
-# Three fire-once canvases chained by flags (office_done -> night_done -> morning_done),
-# all priority 12. starting_canvas = canvas_opening_office (set in 0_systems_spec).
+# Vesper — the opening (fire-once, on-rails cold open). beat_0002 = Opening Beat 1, the
+# office (~13 click-beats, two nodes, the punishment + the reassignment). Authored as FINE
+# CASCADE BEATS (one beat per click) — the node-collapse fix. starting_canvas (0_systems)
+# repointed here. Beats 2/3 (night / morning) land at beat_0003 / beat_0004.
 #
-# Register (design_book "The opening" craft notes):
-#   - On-rails (cascade Continue->Continue) mirrors her no-will surrender.
-#   - Voice: flat/procedural for the narration; TIER-3 only at the glitch (tears + memory).
-#   - Render, don't dump (the memory is a fragment, never a flashback).
-#   - Belief vs truth: her self-concept written straight, NEVER confirmed (catechism).
-#   - The punishment is explicit — the "she feels, they don't" mirror that defines her.
-# (The one Beat-1 flavor choice from the design is folded to narration for the slice — on-rails.)
-
-# ═════════════════════════════════════════════════════════════════════════════
-# BEAT 1 — The office (penthouse): the punishment + the setup. THE START.
-# ═════════════════════════════════════════════════════════════════════════════
+# Register (Content register & ceilings): RTS-flat through the line-up/accusation; FULL
+# CRUDE + the non-con owned-slave floor at the punishment (she's used as property, her body
+# answers, her will never consulted); flat again at the reassignment. Premise NAMED on the
+# page: Mercer (owner), the units Vega/Lyra/Nova, the Chairman, Renner, the Cain lie. The
+# FREEZE = the first glitch (read as a malfunction).
 
 [[canvases]]
 id          = "canvas_opening_office"
 name        = "The office"
-description = "Opening Beat 1. The line-up before Mercer, the failed op (her freeze = the first glitch), the punishment-fuck in front of the blank units (she feels, they don't), the reassignment + mission framing. Sets office_done -> routes to the cradle."
+description  = "Opening Beat 1 — the line-up, the punishment in front of the units, the reassignment. On-rails (the cage). Exit -> the cradle, SETS office_done."
 
 [canvases.trigger]
 location      = "penthouse"
 is_repeatable = false
 priority      = 12
 is_active     = true
-conditions = { version = "1.0", items = [
-  { type = "flag", subject = "player", flag_key = "office_done", operator = "is_false" },
-] }
 
+# ── Node: office — the line-up, the accusation (the freeze), the threat ───────
 [[canvases.nodes]]
 id   = "office"
 name = "The office"
 blocks = [
   { type = "image", props = { file = "scenes/opening_office.jpg" } },
-  { type = "paragraph", content = "Four of them stand in a line on the penthouse floor: Wren and the three units — Vega, Lyra, Nova — shoulder to shoulder in front of the desk where Mercer sits with the city burning gold behind him. The op three nights ago is still in the room. It failed. Everyone here knows in whose hand it failed." },
+  { type = "paragraph", content = "Four of them stand in a line on the black floor of Mercer's office. Vega, Lyra, Nova — chrome-perfect, hands at their sides, nothing moving behind their eyes. And Wren, at the end, the one that came back wrong." },
   { type = "cascade", props = { beats = [
-    { advance_text = "Stand still.", blocks = [
-        { type = "paragraph", content = "Mercer doesn't look up from the file. He had the rogue, he says. In the doorway, clean line, no wind — a child could have made the shot. And the asset froze." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "You had him, Wren. Cain in your sights and your finger went still on the trigger. That's not a miss. That's a malfunction." },
+    { advance_text = "Stand in it.", blocks = [
+        { type = "paragraph", content = "Mercer doesn't look up from the desk. He lets the quiet run until it has weight; he has all night, and the units were built to stand here as long as he wants them to." },
+    ] },
+    { advance_text = "Hear it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "You had him. Cain. In the open, in your sights — and you stood there and let him walk." },
+        { type = "paragraph", content = "She had. Her hand had been on the trigger and her hand had not closed, and there is no file for why. She has run the diagnostic since. It comes back clean, and clean is the wrong answer." },
     ] },
     { advance_text = "Take it.", blocks = [
-        { type = "paragraph", content = "The three units don't move. They never do. Vega's eyes are forward and empty — whatever's behind them was built to a cleaner spec than feeling. Mercer sets the file down and finally looks at her, the way a man looks at a tool that cut him." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Do you know what it costs to grow one of you? I could strip you to the frame tonight and sleep fine." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "An asset that won't fire is scrap. I could have you stripped for parts by morning and the Chairman wouldn't blink." },
+        { type = "paragraph", content = "The units don't move. They've watched him scrap things before." },
     ] },
-    { advance_text = "Beg.", blocks = [
-        { type = "paragraph", content = "So she does what she is. She goes down — not all the way, just enough, head bowed, the surrender they built into her in place of an argument. She'll do better. Keep her. She means every word of it; there is nothing in her that doesn't." },
+  ] } },
+]
+
+# The one cosmetic flavor choice (design Beat-1) — three responses, one outcome (the cage).
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Beg him to keep you."
+targetType = "node"
+nodeId     = "canvas_opening_office.punishment"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say nothing."
+targetType = "node"
+nodeId     = "canvas_opening_office.punishment"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell him, flatly, that you froze."
+targetType = "node"
+nodeId     = "canvas_opening_office.punishment"
+
+# ── Node: punishment — the verdict, the use, the reassignment, dismissed ──────
+[[canvases.nodes]]
+id   = "punishment"
+name = "Made to remember"
+blocks = [
+  { type = "paragraph", content = "Whatever she gives him — words, silence, the truth — it changes nothing; he decided before her mouth opened. He sets the tablet down." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "No. You're the Chairman's investment, and you still feel it — which the others don't. That makes you worth more broken back in than thrown out." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Wait for it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "So we remind you what you're for. Here. In front of them." },
+        { type = "paragraph", content = "He stands and comes around the desk, unhurried. The units' eyes follow him and not her." },
     ] },
-    { advance_text = "Wait for the verdict.", blocks = [
-        { type = "paragraph", content = "He lets the quiet stretch until it has weight. Then he decides." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "You're too expensive to scrap. The Chairman's investment, not mine. So we do it the other way." },
-    ] },
-    { advance_text = "Don't move.", blocks = [
-        { type = "paragraph", content = "He stands. Comes around the desk. The units hold their line, eyes front, as he takes a fistful of her hair, walks her three steps to the glass, and bends her over it with the city forty floors down beneath her face." },
+    { advance_text = "...", blocks = [
+        { type = "paragraph", content = "He bends her over the desk with a hand on the back of her neck, the way he'd reposition a tool. He works her skirt up, tests her with two fingers, finds her wet — she is always wet, it's the one thing they left switched on — and makes a small satisfied sound, like a reading came back in range." },
     ] },
     { advance_text = "Feel it.", blocks = [
-        { type = "paragraph", content = "He pushes her skirt up over her hips. Two fingers find her cunt and she's already wet — she's always wet, it's how they built her, the one response they left switched on — and he makes a low sound that isn't quite contempt. Then he's inside her, one palm flat between her shoulder blades, fucking her down into the glass in front of the three of them. And her body does the only thing it knows: it climbs. Heat flooding low, hips pushing back to take him deeper, a moan she doesn't bother to swallow. She comes around his cock with the whole city watching through the window and the three units watching from the line — blank, perfect, machines that were never given this — and she feels every second of it. All of it. The single live wire in a body they hollowed out." },
+        { type = "paragraph", content = "Then his cock is in her and he fucks her in long flat strokes, no hurry, talking over her head to the room about maintenance schedules while he does it. Her body answers him — it clenches and slicks and pushes back, it does everything a wanting body does — while the rest of her stands somewhere behind her own eyes, watching the grain of the desk." },
+    ] },
+    { advance_text = "Look at them.", blocks = [
+        { type = "paragraph", content = "Vega, Lyra, Nova watch with the mild attention of machines logging a procedure. Nothing in their faces. They were built without the part that makes this mean anything; she has it, and that is the whole difference between them — and bent over his desk with him grunting behind her, the part that feels does not feel like a gift." },
+    ] },
+    { advance_text = "...", blocks = [
+        { type = "paragraph", content = "He comes inside her without ceremony, holds, pulls out. Cum slides down the inside of her thigh. He's already turned away, wiping his hand on a cloth from the drawer, looking at the units instead of her." },
     ] },
     { advance_text = "Thank him.", blocks = [
-        { type = "paragraph", content = "When he's finished he steps back and straightens his cuffs. She pushes off the glass, smooths her skirt down, clears the hair from her face." },
-        { type = "dialog", props = { speaker = "player" }, content = "Thank you." },
-        { type = "paragraph", content = "She means it. Gratitude is what they gave her where another person would keep pride." },
+        { type = "paragraph", content = "She straightens her skirt. The words come level, because they're true the only way she has truths." },
+        { type = "dialog", props = { speaker = "player" }, content = "Thank you, sir." },
     ] },
-    { advance_text = "Take the assignment.", blocks = [
-        { type = "paragraph", content = "He's already back behind the desk, done with it. The units get the hunt — sent at Cain head-on, the way you point machines at a problem. She gets the other thing. The inside thing." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "You're useless with a gun. But you get close to people. So get close. The rogue murdered the Chairman's wife — he's an enemy of this company and everything it holds up. Find the man who can put you on his trail, and open him." },
+    { advance_text = "The next job.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Vega, Lyra, Nova run the hunt head-on. You're useless with a gun — but you're the one asset I have that a man wants to keep close." },
+        { type = "paragraph", content = "A face comes up on the wall screen. A man gone to seed, mid-forties, a hard mouth. The name under it: RENNER." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "He supplied the gear for the facility Cain burned. He knows where the trail starts. Get inside his life and find it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "And understand what you're bringing home. Cain murdered the Chairman's wife. He's an enemy of this company and everything it keeps standing. Put him in a box and you've earned your place for good." },
+    ] },
+    { advance_text = "Dismissed.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Now get out of my sight." },
+        { type = "paragraph", content = "She does as she's told. The door closes on the three of them still standing in their line. In the corridor, under the quiet, something she has no name for is leaking — a pressure behind the eyes, a wrongness with no readout — and she logs it as fatigue and walks toward the cradle." },
     ] },
   ] } },
 ]
 
 [canvases.nodes.exit_block]
-type = "choices"
+type = "location"
+text = "Power down."
 
-[[canvases.nodes.exit_block.choices]]
-text        = "Walk back to your floor."
-targetType  = "location"
-locationId  = "cradle"
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "cradle"
+time_progression_minutes = 60
 flagEffects = [
   { targetType = "player", flag = "office_done", op = "set" },
 ]
 
-# ═════════════════════════════════════════════════════════════════════════════
-# BEAT 2 — The night (cradle): the tears + the memory (the glitch), the catechism,
-# the power. Fully linear. Auto-fires when she reaches the cradle, office_done set.
-# ═════════════════════════════════════════════════════════════════════════════
+# ─── beat_0003 — Opening Beat 2: the night (~7 nodes, FULLY LINEAR) ────────────
+# At the cradle, gated office_done. The tears + the fragment = TIER-3 (the once-only glitch
+# peaks). The catechism = FLAT (the lie, recited straight, never confirmed). The power beat
+# PLANTS the boss-immunity mystery. Power-down advances to morning + restores Charge. SETS
+# night_done (beat_0004 morning gates it).
 
 [[canvases]]
 id          = "canvas_opening_night"
 name        = "The cradle"
-description = "Opening Beat 2. The reset ritual; the TEARS + the memory FRAGMENT (Tier-3 glitch — she reads grief as malfunction); the catechism (the lie, written straight); the gift + the unquestioned fact it never works on the boss. Powers down -> advances to morning, sets night_done."
+description  = "Opening Beat 2 — the cradle: the tears (Tier-3), the memory fragment (Tier-3), the catechism (flat lie), the weapon + the boss-immunity, power-down. SETS night_done."
 
 [canvases.trigger]
 location      = "cradle"
@@ -96,8 +132,7 @@ is_repeatable = false
 priority      = 12
 is_active     = true
 conditions = { version = "1.0", items = [
-  { type = "flag", subject = "player", flag_key = "office_done",  operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "night_done",   operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "office_done", operator = "is_true" },
 ] }
 
 [[canvases.nodes]]
@@ -105,48 +140,56 @@ id   = "night"
 name = "The cradle"
 blocks = [
   { type = "image", props = { file = "scenes/opening_cradle.jpg" } },
-  { type = "paragraph", content = "The Tower at night is all hush and indirect light. She rides up to her floor, walks the corridor of numbered doors to hers, and crosses to the cradle in the corner. She backs into it. The contacts find their points along her spine. The charge begins to pull her down." },
+  { type = "paragraph", content = "The asset level is quiet the way a kept place is quiet. She comes down through the Tower to her own floor, her own door, her own room with nothing on the walls. The cradle waits in the corner." },
   { type = "cascade", props = { beats = [
     { advance_text = "Power down.", blocks = [
-        { type = "paragraph", content = "And her face is wet. She lifts a hand to it without deciding to. Water — from her eyes, steady, the way a seal lets go. Nothing made it happen. No one touched her; there's no heat anywhere in her, none of the one thing she's built to feel. It just runs. She looks at the wet on the back of her wrist like it's a fault in the hull, a leak with no source, and files it under the things you don't report — because she has no name for it, and the nameless faults are the ones they decide you're not worth fixing." },
+        { type = "paragraph", content = "She steps back into it. The contacts find the points along her spine, cold and familiar. The room dims as the charge takes hold, and the day's log begins to write itself down into the quiet." },
     ] },
-    { advance_text = "Hold still.", blocks = [
-        { type = "paragraph", content = "Then, in the dark behind her eyes, something surfaces. A face. Not a file, not a mark, no one in the Tower — a man, looking at her like she was worth the looking. Warm light off to one side. A sound that might have been her name, except it isn't the name they call her here. It holds for a breath, and then it's gone — scrubbed, a frame cut out of the reel. She waits to feel something about it. Nothing comes. Of course nothing comes." },
-        { type = "thought_bubble", props = { speaker = "player" }, content = "Corruption in the core. Log it. Power down." },
+    { advance_text = "...", blocks = [
+        { type = "paragraph", content = "Then her face is wet. She registers it the way she'd register a leak in a seal — water, on her cheeks, with no source she can name and no order that called for it. She holds perfectly still and runs every diagnostic she has, and every one comes back clean. She files the water under malfunction and resolves to have it looked at, and does not have it looked at, because some part of her already knows they'd take it out." },
+    ] },
+    { advance_text = "...", blocks = [
+        { type = "paragraph", content = "And under the water, for less than a second, something else. Not a thought — she doesn't have thoughts that aren't tasks — but a fragment: warmth on the side of her face that isn't the cradle's, a low sound that might be a voice with her name folded somewhere inside it, a sense of being looked at by someone who was glad to be looking. Then the charge swallows it and it's gone, and the place where it was aches like a socket with the tooth pulled, and she has no word for the ache, so she has no word for the loss." },
     ] },
     { advance_text = "Recite it.", blocks = [
-        { type = "paragraph", content = "She runs the litany, the way it steadies her. She is an asset of Vance Dynamics. The company saved her from nothing and made her something. The Chairman gave her a purpose when she had none and a debt she will never finish paying, which is why she pays it every day — with her hands, her mouth, her body, whatever the work needs. She exists to obey. Said in order, it puts the rest of it back in its place." },
+        { type = "paragraph", content = "She does what she does when the quiet gets loud. She recites." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "I was nothing. The company found me and made me of use. The Chairman keeps me running. I owe them the body and the work and the obedience. I exist to serve. That is all I have ever been." },
+        { type = "paragraph", content = "The words settle her. They always do. She does not notice that the water is still on her face while she tells herself she is a thing that cannot weep." },
     ] },
-    { advance_text = "Run the last line.", blocks = [
-        { type = "paragraph", content = "And she has the gift. When a man spends himself inside her she takes him — his will, his secrets, the truth under his tongue — for as long as she needs him, and he wakes with the lost time smoothed over and remembers nothing. It is the key that opens every man they point her at. It has never once worked on Mercer. She has never wondered why. Wondering isn't in the litany." },
+    { advance_text = "The gift.", blocks = [
+        { type = "paragraph", content = "There is one thing she has that the company gave her and the units don't. When a man uses her the lowest way — takes her ass and spends himself in it — for a few minutes after, he belongs to her. He'll answer anything, do anything, wake remembering none of it. It's how she works the men she's sent to work. It's the one thing that is, in any sense, hers." },
+        { type = "paragraph", content = "It has never once worked on Mercer. He's had her every way there is, that one included. Nothing passes; the controls never come to her; he stays the hand on the leash. She has never asked why. The not-asking is so complete she doesn't notice it has a shape — a hole exactly the size of a question she isn't allowed to hold." },
+    ] },
+    { advance_text = "Power down.", blocks = [
+        { type = "paragraph", content = "She lets the catechism be the last thing. She promises the quiet she'll do better — fire next time, feel less, want nothing — and the charge pulls her down past where the water and the fragment and the question all live, into the dark that is supposed to be empty and, lately, isn't quite." },
     ] },
   ] } },
 ]
 
 [canvases.nodes.exit_block]
-type = "choices"
+type = "location"
+text = "Sleep."
 
-[[canvases.nodes.exit_block.choices]]
-text                     = "Let the charge take you."
-targetType               = "location"
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
 locationId               = "cradle"
 time_progression_minutes = 540
-flagEffects = [
-  { targetType = "player", flag = "night_done", op = "set" },
-]
 effects = [
   { targetType = "player", trait = "energy", op = "add", value = 100 },
 ]
+flagEffects = [
+  { targetType = "player", flag = "night_done", op = "set" },
+]
 
-# ═════════════════════════════════════════════════════════════════════════════
-# BEAT 3 — The morning (cradle): the briefing, the tip, the cover, OUT THE DOOR.
-# The hinge — sets opening_done + mission_1_active and drops her into the open city.
-# ═════════════════════════════════════════════════════════════════════════════
+# ─── beat_0004 — Opening Beat 3: the morning + the hinge (~4 nodes) ────────────
+# At the cradle, gated night_done. Power-up, the phone briefing, the tip (Renner @ the
+# Anchor), the cover, then OUT THE DOOR (the hinge — the city opens). SETS morning_done +
+# opening_done + mission_1_active; exit -> spire_plaza (open play begins).
 
 [[canvases]]
 id          = "canvas_opening_morning"
-name        = "Morning"
-description = "Opening Beat 3. Power-up; the dossier (the burned facility); the tip (Renner knows the trail, drinks at the Anchor, hiring cheap hands); the cover. OUT THE DOOR = the hinge: sets opening_done + mission_1_active, drops her at spire_plaza (the city opens)."
+name        = "The morning"
+description  = "Opening Beat 3 — power-up, the briefing, the tip, the cover, OUT THE DOOR (the hinge). SETS morning_done + opening_done + mission_1_active; the city opens."
 
 [canvases.trigger]
 location      = "cradle"
@@ -154,92 +197,143 @@ is_repeatable = false
 priority      = 12
 is_active     = true
 conditions = { version = "1.0", items = [
-  { type = "flag", subject = "player", flag_key = "night_done",   operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "morning_done", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "night_done", operator = "is_true" },
 ] }
 
 [[canvases.nodes]]
 id   = "morning"
-name = "Morning"
+name = "The morning"
 blocks = [
-  { type = "paragraph", content = "She wakes the way she always does — all at once, fully, the charge sitting at a hundred. Morning, by the light in the corridor. A new day, identical to the spine of every other one." },
+  { type = "paragraph", content = "The charge releases her at oh-six-hundred. Full. New day. The water is gone from her face; the fragment has filed itself back under the quiet where she can't reach it, and she's grateful for that the way you're grateful for a wound scabbing over." },
   { type = "cascade", props = { beats = [
     { advance_text = "Check the phone.", blocks = [
-        { type = "paragraph", content = "Her phone is lit when she comes up. A dossier, flagged priority, sitting at the top of nothing else. Three nights ago a Vance facility down in the Reach burned to its frame — one of the rogue's strikes. The file wants her on the trail before it goes cold." },
+        { type = "paragraph", content = "Her phone has a dossier on it, pushed overnight, Mercer's authority stamped on the header. She reads it standing in the cradle." },
     ] },
-    { advance_text = "Read the tip.", blocks = [
-        { type = "paragraph", content = "The man who supplied that facility's equipment is a wreck named Renner. Cain took everything from him and left him broke and bitter and certain none of it was his own fault. He knows the shape of the trail Cain left when he ran. He drinks every night at a dock bar called the Anchor, and he's hiring cheap hands to rebuild what he lost. That's the door: get close, get inside, use the gift." },
+    { advance_text = "Read it.", blocks = [
+        { type = "paragraph", content = "A Vance asset-facility in the Reach burned to the ground three weeks ago — Cain's work. The man who supplied its equipment is named Renner: a quartermaster, broke now, blacklisted, drinking himself down at a dock bar called the Anchor and clawing at the wreck of his business. He knows what the facility was and where the trail goes. He does not know what she is." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Get inside his life. You know how." },
     ] },
-    { advance_text = "Pick a face.", blocks = [
-        { type = "paragraph", content = "She chooses one from the kit — not her own; her own isn't for wearing — and pulls it on like a coat. The asset goes under. Someone cheaper, softer, easier to hire comes up in its place." },
-        { type = "thought_bubble", props = { speaker = "player" }, content = "First time outside in — I don't keep the count." },
+    { advance_text = "Dress for it.", blocks = [
+        { type = "paragraph", content = "She picks a face for it from the rack of them she keeps — not a disguise so much as a register: cheap, willing, a little desperate, the kind of hire a wrecked man doesn't look at twice until she makes him. She puts it on the way she puts on everything, from the outside. Wren goes under. Whoever Renner needs comes up." },
+    ] },
+    { advance_text = "Out the door.", blocks = [
+        { type = "paragraph", content = "She rides down through a Tower she has never once left on her own legs for anything but an order. The atrium doors read her face and open. And then she's outside, on Spire Plaza, the city laid out wet and enormous and unowned in front of her — and for one second, before the cover settles all the way down over her, something that isn't in any of her files stands very still in her chest and looks at all of it." },
     ] },
   ] } },
 ]
 
 [canvases.nodes.exit_block]
-type = "choices"
+type = "location"
+text = "Step into the city."
 
-[[canvases.nodes.exit_block.choices]]
-text        = "Take the elevator down."
-targetType  = "location"
-locationId  = "spire_plaza"
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "spire_plaza"
 flagEffects = [
-  { targetType = "player", flag = "morning_done",    op = "set" },
-  { targetType = "player", flag = "opening_done",    op = "set" },
+  { targetType = "player", flag = "morning_done",     op = "set" },
+  { targetType = "player", flag = "opening_done",     op = "set" },
   { targetType = "player", flag = "mission_1_active", op = "set" },
 ]
 
-# ═════════════════════════════════════════════════════════════════════════════
-# RENNER — THE HIRE (establishing capstone). Fires once at the Anchor, evening,
-# Renner present, before she's hired. Cold-boss first contact: he needs cheap
-# hands and doesn't look twice at her. Sets renner_hired -> opens the depot work.
-# ═════════════════════════════════════════════════════════════════════════════
+# ═══ beat_0013 — her glitches (cradle) + the facility match ════════════════════
+# The two once-only glitch recurrences (the design's "escalating recurrences" -- II heavier
+# than I, NOT a recurring ambient). Auto-fire at the cradle on the cross-reads. Tier-3.
 
 [[canvases]]
-id          = "canvas_renner_hire"
-name        = "The Anchor — Renner"
-description = "Renner hire capstone (establishing). First contact at the Anchor: she pitches for the cheap-hands job, he prices her like a used part and takes her on. His voice = pure contempt (the bottom of the climb). Sets renner_hired -> the depot hub + menial work go live."
+id          = "canvas_glitch_recurrence_i"
+name        = "It comes back"
+description = "Auto-fire glitch recurrence I. Cradle, gated worked_renner_once (she's begun working Renner). The leak returns, longer. SETS glitch_i_seen. Tier-3, fires once."
 
 [canvases.trigger]
-location      = "the_anchor"
-requires_npc  = "npc_renner"
+location      = "cradle"
 is_repeatable = false
-priority      = 9
+priority      = 8
 is_active     = true
-conditions = { version = "1.0", items = [
-  { type = "flag", subject = "player", flag_key = "renner_hired", operator = "is_false" },
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "worked_renner_once", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "glitch_i_seen",      operator = "is_false" },
 ] }
 
 [[canvases.nodes]]
-id   = "hire"
-name = "The Anchor — Renner"
+id   = "base"
+name = "It comes back"
 blocks = [
-  { type = "image", props = { file = "scenes/renner_hire.jpg" } },
-  { type = "paragraph", content = "The Anchor smells like spilled beer and dead cigarettes. Renner's at the end of the bar where the regulars leave a gap around him — a big man gone to seed, three days unshaved, working through a glass like it owes him money. This is the wreck Cain made of someone." },
-  { type = "cascade", props = { beats = [
-    { advance_text = "Sit down beside him.", blocks = [
-        { type = "paragraph", content = "She slides onto the stool beside him in the cheap, soft face she picked out this morning. Tells him she heard down the docks he's hiring. He doesn't look over." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Whatever you're selling, I'm not— no. Hands. I need hands that show up and shut up. That you, or are you wasting my drinking time?" },
-    ] },
-    { advance_text = "Tell him you show up.", blocks = [
-        { type = "paragraph", content = "She says she shows up and she shuts up and she works cheap. That last word is the one that lands. He finally looks at her — one flat pass, top to bottom, pricing her like a used part, and finding her cheap enough to bother with." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Depot. Seven sharp. You're late, you're done — and don't expect me to learn your name before you've earned it being worth the breath." },
-    ] },
-    { advance_text = "Take it.", blocks = [
-        { type = "paragraph", content = "He turns back to his glass like she's already gone. It isn't much. A door into a dead man's business and a boss who looks at her like furniture. But it's the door, and getting through doors like this one is the only thing she's actually for." },
-        { type = "thought_bubble", props = { speaker = "player" }, content = "He didn't look twice. The ones who don't look are the easiest to get under." },
-    ] },
-  ] } },
+  { type = "paragraph", content = "She powers down like every night, except tonight the leak comes back. The tears first — her face wet again, no order behind it — and then the fragment, longer this time, almost holding: the warmth, the voice with her name folded into it, the someone who was glad to look at her. She reaches for it the way you reach for a word on the tip of your tongue, and it's gone, and the reaching leaves a mark. She files it under fatigue. The fatigue file is getting full." },
 ]
 
 [canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text        = "Leave him to his drink."
-targetType  = "location"
-locationId  = "the_anchor"
+type = "location"
+text = "Let the charge take you."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "cradle"
 flagEffects = [
-  { targetType = "player", flag = "renner_hired", op = "set" },
+  { targetType = "player", flag = "glitch_i_seen", op = "set" },
+]
+
+[[canvases]]
+id          = "canvas_glitch_recurrence_ii"
+name        = "The door warps"
+description = "Auto-fire glitch recurrence II (the chunk's awakening PEAK -- heavier than I). Cradle, gated renner_drained (after the first drain). She gets a whole feeling, not a flicker; the catechism stops fitting. SETS glitch_ii_seen. Tier-3, fires once."
+
+[canvases.trigger]
+location      = "cradle"
+is_repeatable = false
+priority      = 8
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "renner_drained",  operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "glitch_ii_seen",  operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The door warps"
+blocks = [
+  { type = "paragraph", content = "Tonight it doesn't wait for the charge. She's barely in the cradle before it takes her — the wetness, the fragment, but more now, like a door that used to be locked has warped in its frame. The voice almost resolves. A face almost forms." },
+  { type = "paragraph", content = "And for the first time she gets a whole feeling instead of a flicker: that she was loved once, completely, by someone, before all of this — and that the company knew, and took it, and built the taking so deep into her that she thanks them for it every morning. Then the charge slams the door, and she's standing in the grey quiet with her face wet and the catechism in her mouth, and for one second she'll spend the rest of her life trying to un-have, the catechism doesn't fit anymore. She files it under nothing. Nothing is getting full too." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Power down anyway."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "cradle"
+flagEffects = [
+  { targetType = "player", flag = "glitch_ii_seen", op = "set" },
+]
+
+# inv_facility_match — the one-time 'that's mine' seed (auto-fire, capstone-shape).
+[[canvases]]
+id          = "inv_facility_match"
+name        = "That's mine"
+description = "Auto-fire 'that's mine' beat at facility_ruins (gated renner_hired -- she's working the trail by now). A component in the wreckage matches her own build (MANUFACTURE, not memory -- doesn't spoil the chip). SETS facility_match_seen. Single Continue, Tier-3-adjacent."
+
+[canvases.trigger]
+location      = "facility_ruins"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "renner_hired",        operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "facility_match_seen", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "That's mine"
+blocks = [
+  { type = "paragraph", content = "In the wreckage of a containment rig — half-melted, stamped with a maker's mark — she finds a component she recognizes. Not from a file. From herself. The same part, the same stamp, sits inside her own chassis where the lab installed it; she has felt the engineers' hands on its twin. The gear Renner supplied to cage the things that feel was built in the same shop, to the same spec, as the thing she is." },
+  { type = "paragraph", content = "She notes it the way she notes a serial number matching a serial number. \"That's mine,\" she says, flat, to the burned and empty room — and doesn't know why the words come out cold and certain and terrible, or why she can't make herself say them again." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Log it. Move on."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "facility_ruins"
+flagEffects = [
+  { targetType = "player", flag = "facility_match_seen", op = "set" },
 ]

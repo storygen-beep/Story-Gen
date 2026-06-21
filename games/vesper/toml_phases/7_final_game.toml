@@ -7,51 +7,40 @@
 # ══════════════════════════════════════════════════════════════════
 
 # Phase 0/7 — 0_systems_spec.toml
-# Vesper — system spec: project + time + sidebar + dormant-trait hides.
+# Vesper — system spec: project + time + sidebar HUD + dormant-trait hides + daily tick.
 #
-# ── TEST SLICE scaffold ───────────────────────────────────────────────────────
-# This build is a VERTICAL SLICE to test what's designed so far: the opening +
-# Mercer's inside loop + Renner's Mission 1. By design it does NOT contain the
-# Phase-1 ending (the_site -> the chip -> the fracture, which needs all three
-# missions) nor Missions 2/3 (Bastien/Calloway). Those + the cross-NPC wiring are
-# DEFERRED and logged as known-open gaps.
-#
-# ── Systems ───────────────────────────────────────────────────────────────────
-# Each system reads its OWN table (never bare keys under [time]):
-#   clothing -> [settings]   ·   phone -> [phone] (8_phone.toml)
-# Vesper has NO rent (the economy = credits + capability upgrades, not a landlord).
-# Clothing (the disguise/cover system) and phone (the mission briefings) ARE used in
-# the design, but their catalog/threads are CONTENT — wired at their beats (the cover
-# beat / the briefing beat) at the correct homes, not in this skeleton. Scaffold stays
-# minimal so the first build proves green before any beat.
+# Step 7 authoring, beat_0001 (the scaffold). Built from the blueprint (design_book.md
+# '## Blueprint (Step 5)'). Systems per the World blueprint §5F:
+#   HUD = Charge + Credits ONLY · Phone = Mission-1 briefing (minimal) · Money = credits
+#   Clothing = NARRATIVE in chunk (no worn-state system) · Customization = OFF.
+# starting_canvas is the placeholder canvas_boot for the scaffold; beat_0002 repoints it
+# to canvas_opening_office (the real cold open).
 
 schema_version = "1.0"
 
 [project]
 id          = "vesper"
 title       = "Vesper"
-description = "An owned half-human weapon who feels nothing but the sex she's used for. Inside Vance Dynamics she's the company's slave; outside, under a false face, she slips into powerful men's lives and drains them while they think they're using her — sent to hunt a rogue called Cain. [TEST SLICE: the opening + Mercer + Renner's Mission 1.]"
+description = "An owned half-human weapon who feels nothing but the sex she's used for. Inside Vance Dynamics she's the company's slave; outside, under a false face, she slips into powerful men's lives and drains them while they think they're using her — sent to hunt a rogue called Cain."
 quests_engine   = "v2"
-starting_canvas = "canvas_opening_office"   # the opening (Beat 1 — the office line-up). Replaces the scaffold boot.
+starting_canvas = "canvas_opening_office"   # the cold open (Beat 1 — the office)
 
 [time]
 starting_hour = 20        # the opening opens in the evening (Beat 1 — Mercer's office)
 starting_day  = "Monday"
 starting_week = 1
 
-# ─── Engine daily tick — daily-cap flag resets ────────────────────────────────
+# ─── Engine daily tick — reset the daily-cap cooldown flags ───────────────────
 # Fires once at the start of each new game-day (the cradle recharge rolls the day).
-# Charge isn't decayed here (it's spent on actions + restored at the cradle).
+# Both Renner odometers are player-paced by a daily cap (blueprint: relation +1/day via
+# the work shift, corruption +1/day via a charged rung) cleared here.
 [engine.daily_tick]
 flagEffects = [
-  { targetType = "player", flag = "talked_renner_today", op = "unset" },
+  { targetType = "player", flag = "renner_relation_today", op = "unset" },
+  { targetType = "player", flag = "renner_charged_today",  op = "unset" },
 ]
 
-# ─── Sidebar items ────────────────────────────────────────────────────────────
-# Vesper's LIVE player meters = Charge + Credits ONLY (locked stat set, design_book
-# Top-level). Per-target relation/corruption surface on the Quests page, not here.
-# Charge = the engine `energy` trait (spent on actions/travel, restored at the cradle).
-
+# ─── Sidebar items — the live HUD (Charge + Credits ONLY) ─────────────────────
 [[sidebar_items]]
 type  = "trait_status_text"
 trait = "energy"
@@ -73,45 +62,38 @@ bands = [
 ]
 
 # ─── Trait labels ─────────────────────────────────────────────────────────────
-# Rename energy -> "Charge" in player-facing dumps (the reskin, design_book Top-level).
+# Rename energy -> "Charge"; hide every dormant/internal trait from player-facing dumps.
 [[traits.labels]]
 key   = "energy"
 label = "Charge"
 
-# Hide the DORMANT engine always-on traits. The engine keeps corruption/arousal/hygiene
-# live on any player and the Stats page dumps every core_traits key; hidden=true suppresses
-# them from ALL player-facing dumps. Vesper's design uses none of these as the player's
-# ladder — her progression is the chip + upgrades (inventory), not a meter (design_book §2
-# player thread). NOTE: hiding `corruption` here implements the "leave it dead" default for
-# the open Blueprint fork (dormant vs reskin into an "Awakening" meter) — reversible if LO
-# picks the meter.
+# Dormant engine always-ons — NOT Vesper's ladder (her axis = the awakening, not a meter).
+# corruption is left DEAD (blueprint Player track, fork A); arousal/hygiene unused.
 [[traits.labels]]
 key    = "corruption"
 hidden = true
-
 [[traits.labels]]
 key    = "arousal"
 hidden = true
-
 [[traits.labels]]
 key    = "hygiene"
 hidden = true
 
-# Sex-loop state — internal numeric machine, never shown.
+# Sex-loop state — internal numeric machine, never shown (5 traits, blueprint Renner loop).
 [[traits.labels]]
 key    = "sex_stage"
 hidden = true
-
 [[traits.labels]]
 key    = "loop_npc_pleasure"
 hidden = true
-
 [[traits.labels]]
 key    = "sex_finisher_type"
 hidden = true
-
 [[traits.labels]]
 key    = "anal_active"
+hidden = true
+[[traits.labels]]
+key    = "sex_entry_origin"
 hidden = true
 
 # ══════════════════════════════════════════════════════════════════
@@ -119,16 +101,21 @@ hidden = true
 # ══════════════════════════════════════════════════════════════════
 
 # Phase 1/7 — 1_metadata_and_locations.toml
-# Vesper — player (Wren) + Mercer & Renner (with schedules) + the TEST-SLICE map.
+# Vesper — player (Wren) + Mercer & Renner (schedules) + the chunk map.
 #
-# IMPORTANT: All [[npcs]] + [[npcs.schedules]] + [[npcs.core_traits]] MUST live in
-# this single file (TOML scoping — splitting NPCs across phases breaks parsing).
+# IMPORTANT: All [[npcs]] + schedules + core_traits live in THIS one file (TOML scoping).
 #
-# SLICE MAP = two districts the opening + Mercer + Renner touch:
-#   THE SPIRE (Tower interior)  ·  THE REACH (Renner's Mission 1).
-# Mid-City, the other Spire venues (lab/units/securities/eyrie), Bastien's, and the_site
-# are DEFERRED (not built) — added with Missions 2/3 + the ending. renner_office ships
-# OPEN here (its relation-lock + setter are added WHOLE with the office beat).
+# MAP = the late_shifts NON-CONTAINER pattern (the shipped, proven shape): two parallel
+# top-level street hubs (spire_plaza / the_waterfront, NO entry_from), each nesting its
+# venues via entry_from + navigation_order. NO is_container wrappers — they cause the nav
+# double-print the audit caught AND swallow attached canvases. The two hubs are bridged by
+# the travel activities (3_activities). This SUPERSEDES the World-blueprint 'default_entry
+# on containers' note (engine-forced refinement — see ledger turn 22).
+#
+# CHUNK locations (11): SPIRE (spire_plaza · atrium · penthouse · wren_floor · wren_room ·
+# cradle) + REACH (the_waterfront · the_anchor · renner_depot[+folded office register] ·
+# facility_ruins · the_site[LOCKED frontier card]). Office is FOLDED into renner_depot
+# (Fork A) — NO separate renner_office node.
 
 # ─── Player ───────────────────────────────────────────────────────────────────
 
@@ -137,32 +124,28 @@ id          = "player"
 name        = "Wren"
 description = "A Vance Dynamics asset. She serves the company and the man who owns her, and she's good at it. The only thing she feels is the sex she's used for — everything else is quiet. She believes that's all she's ever been."
 portrait    = "wren.jpg"
-# Fixed identity — NOT player-named (protects the Wren / buried-Vesper reveal). No creator.
-customizable = false
+customizable = false   # fixed identity — protects the Wren / buried-Vesper reveal
 
 [player.core_traits]
 # LIVE meters (surfaced): energy = Charge, money = Credits.
 energy     = 100      # "Charge" — spent on actions/travel, restored at the cradle
 money      = 50       # "Credits" — deliberately light (a kept asset is provided for)
-# DORMANT engine always-ons (hidden via 0_systems traits.labels — not Vesper's ladder;
-# her progression is the chip + upgrades inventory, design_book §2 player thread).
+# DORMANT engine always-ons (hidden via 0_systems). corruption left DEAD (her axis = the
+# awakening, not a meter). arousal/hygiene unused.
 corruption = 0
 arousal    = 0
 hygiene    = 100
-# Sex-loop state (NUMERIC, not flags — a triggerless loop can't set a flag the chain-validator
-# would credit; reset to 0 on every loop entry + finisher exit). Hidden via 0_systems. Shared
-# machine for any NPC loop. sex_finisher_type: 0=facial · 1=inside(vaginal) · 2=ass(anal=the drain).
+# Sex-loop state (NUMERIC, hidden) — shared machine; reset to 0 on loop entry + finisher exit.
+# sex_finisher_type: 0=facial · 1=inside(vaginal) · 2=ass(anal=the drain) · 3=body.
 sex_stage         = 0
 loop_npc_pleasure = 0
 sex_finisher_type = 0
 anal_active       = 0
+sex_entry_origin  = 0
 
 # ─── NPCs ─────────────────────────────────────────────────────────────────────
-# npc_mercer — owner/authority (UNCHANGING; no arc, no relation/corruption lock)
-# npc_renner — core target, infiltration CLIMB (relation = access, corruption = break him)
 
-# ── Mercer — her owner (inside) ───────────────────────────────────────────────
-
+# ── Mercer — her owner (inside) — UNCHANGING, no lock ─────────────────────────
 [[npcs]]
 id          = "npc_mercer"
 name        = "Mercer"
@@ -170,12 +153,8 @@ description = "Her direct owner and handler. He runs her missions and uses her a
 portrait    = "mercer.jpg"
 core_traits = { relation = 0 }
 flag_keys   = []
-arc_stages  = [
-  "Owner",   # he does not change across Phase 1 — same cold ownership day one and at the fracture
-]
+arc_stages  = ["Owner"]
 
-# Mercer holds the penthouse — his domain, where she serves him. Overnight he's offscreen
-# (she's at the cradle). Broad daytime/evening block so she can be summoned/used when home.
 [[npcs.schedules]]
 location   = "penthouse"
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
@@ -183,27 +162,24 @@ start_time = "08:00"
 end_time   = "23:00"
 activity   = "in his penthouse — running the assets"
 
-# ── Renner — Mission 1 target (the cold boss) ─────────────────────────────────
-
+# ── Renner — Mission 1 target (the cold boss she seduces from the bottom) ─────
 [[npcs]]
 id          = "npc_renner"
 name        = "Renner"
 description = "The equipment supplier whose gear outfitted the facility Cain burned down — though he never knew what it was for. Cain gutted his business; now he's a husk of a man clawing at the wreck of it, broke and blacklisted and drinking. He hired cheap hands to help rebuild. He's mean to the help and he doesn't look twice at her. Yet."
 portrait    = "renner.jpg"
-core_traits = { relation = 0, corruption = 0 }
+core_traits = { relation = 0, corruption = 0, arousal = 0 }
 flag_keys   = []
 arc_stages  = [
   "Beneath notice",   # 0 — hired menial; cold, ignores her
   "Useful",           # 1 — good work earns notice (relation)
-  "In the office",    # 2 — relation earns office access (the private climb opens)
+  "In the office",    # 2 — relation earns office access (the register opens)
   "Cracking",         # 3 — he flirts back; the cold breaks (corruption)
   "Her mouth",        # 4 — first blowjob
   "Fucking",          # 5 — vaginal, the routine
   "Drained",          # 6 — first anal = the drain (the weapon fires)
 ]
 
-# Renner schedule — the depot by day, the Anchor by evening (the nav paints him where he is).
-# Overnight he's offscreen (drunk/asleep). The office (renner_office) sits inside the depot.
 [[npcs.schedules]]
 location   = "renner_depot"
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
@@ -218,60 +194,37 @@ start_time = "19:00"
 end_time   = "23:00"
 activity   = "drinking at the Anchor"
 
-# ─── Locations ────────────────────────────────────────────────────────────────
-# Two top-level district roots (is_container = pure nav, swallow no canvases):
-#   loc_spire  → spire_plaza (street hub) + vance_tower (the arcology)
-#   loc_reach  → the_waterfront (street hub) + the_anchor + renner_depot + facility_ruins
-# Districts bridged by the travel activities (phase 3): spire_plaza ⇄ the_waterfront.
-# Standing hubs are NON-container (so they can host canvases). "Leave X" follows entry_from.
-
-# ── THE SPIRE ─────────────────────────────────────────────────────────────────
+# ─── Locations — THE SPIRE (root: spire_plaza) ────────────────────────────────
 
 [[locations]]
-id               = "loc_spire"
-name             = "THE SPIRE"
-description      = "The corporate core — glass towers stacked into the clouds, the city's money and its cameras. Everything here is clean, lit, and watched."
-is_container     = true
-navigation_order = ["spire_plaza", "vance_tower"]
+id               = "spire_plaza"
+name             = "Spire Plaza"
+description      = "The chrome public level at the foot of Vance Tower. Suits cross it without looking up. Cameras on every column. THE SPIRE — the corporate core, clean and lit and watched. The company car waits at the curb to run her down to the Reach."
+image            = "locations/spire_plaza.jpg"
+navigation_order = ["atrium"]
+# Top-level street hub (NO entry_from) — the Spire's living surface + the travel anchor.
 
 [[locations]]
-id          = "spire_plaza"
-name        = "Spire Plaza"
-description = "The chrome public level at the foot of Vance Tower. Suits cross it without looking up. Cameras on every column. This is where you leave the company's world and step into the city."
-image       = "locations/spire_plaza.jpg"
-entry_from  = "loc_spire"
-# Street hub — the Spire's living surface + the travel anchor to the Reach (phase 3 activity).
-
-[[locations]]
-id               = "vance_tower"
-name             = "Vance Tower"
-description      = "The arcology. Staff, assets, and the man who owns them all live stacked inside one glass spine. You don't commute to the company — you live in it."
-image            = "locations/vance_tower.jpg"
-entry_from       = "loc_spire"
-is_container      = true
-navigation_order = ["atrium", "penthouse", "wren_floor"]
-
-[[locations]]
-id          = "atrium"
-name        = "The Atrium"
-description = "The Tower's inner lobby. Polished stone, a security desk that knows your face, elevators that only stop where your clearance says they can. The threshold between the cage and the street."
-image       = "locations/atrium.jpg"
-entry_from  = "vance_tower"
+id               = "atrium"
+name             = "The Atrium"
+description      = "The Tower's inner lobby. Polished stone, a security desk that knows her face, elevators that only stop where her clearance says they can. The threshold between the cage and the street."
+image            = "locations/atrium.jpg"
+entry_from       = "spire_plaza"
+navigation_order = ["penthouse", "wren_floor"]
 
 [[locations]]
 id          = "penthouse"
 name        = "Mercer's Penthouse"
 description = "The top floor. Glass on three sides, the city laid out below like something he owns. This is where she's summoned, and where she serves."
 image       = "locations/penthouse.jpg"
-entry_from  = "vance_tower"
+entry_from  = "atrium"
 
 [[locations]]
 id               = "wren_floor"
 name             = "Wren's Floor"
 description      = "The asset level — narrow corridors, numbered doors, no windows. Quiet the way a kept place is quiet."
 image            = "locations/wren_floor.jpg"
-entry_from       = "vance_tower"
-is_container      = true
+entry_from       = "atrium"
 navigation_order = ["wren_room"]
 
 [[locations]]
@@ -288,155 +241,186 @@ name        = "The Cradle"
 description = "The charging cradle. She powers down here and wakes here — the reset, the start of every day. When something leaks through the quiet, it leaks here."
 image       = "locations/cradle.jpg"
 entry_from  = "wren_room"
-# Her home base: charge / sleep / day-reset (the day-router activity, phase 3) + the §2 glitch host.
 
-# ── THE REACH ─────────────────────────────────────────────────────────────────
-
-[[locations]]
-id               = "loc_reach"
-name             = "THE REACH"
-description      = "The docks underside — grit, salt, container stacks, and the parts of the city the Spire pretends it doesn't use. Cain's kind of place."
-is_container     = true
-navigation_order = ["the_waterfront", "the_anchor", "renner_depot", "facility_ruins"]
+# ─── Locations — THE REACH (root: the_waterfront) ─────────────────────────────
 
 [[locations]]
-id          = "the_waterfront"
-name        = "The Waterfront"
-description = "The docks strip — wet concrete, sodium lights, smuggler traffic that nobody logs. The Reach's open surface. The car back to the Spire waits at the curb."
-image       = "locations/the_waterfront.jpg"
-entry_from  = "loc_reach"
-# Street hub — the Reach's living surface + the travel anchor back to the Spire (phase 3 activity).
+id               = "the_waterfront"
+name             = "The Waterfront"
+description      = "The docks strip — wet concrete, sodium lights, smuggler traffic that nobody logs. THE REACH — the city's underside, grit and salt and the parts the Spire pretends it doesn't use. The car back up to the Spire waits at the curb."
+image            = "locations/the_waterfront.jpg"
+navigation_order = ["the_anchor", "renner_depot", "facility_ruins", "the_site"]
+# Top-level street hub (NO entry_from) — the Reach's living surface + the travel anchor.
 
 [[locations]]
 id          = "the_anchor"
 name        = "The Anchor"
 description = "A dive bar two streets off the water. Dark wood, dead neon, a bartender who's seen everyone's worst night. Renner drowns his here, evenings, every evening."
 image       = "locations/the_anchor.jpg"
-entry_from  = "loc_reach"
+entry_from  = "the_waterfront"
 
 [[locations]]
-id               = "renner_depot"
-name             = "Renner's Depot"
-description      = "A gutted equipment yard — half-empty racks, crates Cain's people didn't bother to take, a forklift nobody's fixed. He's trying to rebuild it on cheap hands and credit he doesn't have. The work floor's out front; his office is in back."
-image            = "locations/renner_depot.jpg"
-entry_from       = "loc_reach"
-navigation_order = ["renner_office"]
-
-[[locations]]
-id          = "renner_office"
-name        = "Renner's Office"
-description = "A glassed-in box overlooking the work floor. A desk buried in unpaid invoices, a chair, a space heater. Where the boss sits and where, eventually, he stops being able to ignore her."
-image       = "locations/renner_office.jpg"
-entry_from  = "renner_depot"
-# Relation gates the SPACE (earn access); corruption gates the climb INSIDE it (the hub rungs).
-entry_conditions = { version = "1.0", items = [
-  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "relation", operator = "gte", value = 10 },
-] }
-blocked_message = "His office is his. She hasn't earned the inside of it yet."
+id          = "renner_depot"
+name        = "Renner's Depot"
+description = "A gutted equipment yard — half-empty racks, crates Cain's people didn't bother to take, a forklift nobody's fixed. He's trying to rebuild it on cheap hands and credit he doesn't have. The work floor's out front; his office is the glassed-in box in back, and you don't go in there until he wants you to."
+image       = "locations/renner_depot.jpg"
+entry_from  = "the_waterfront"
+# Office FOLDED here (Fork A) — a register-shift on the depot hub gated renner_office_open,
+# NOT a separate navigable room.
 
 [[locations]]
 id          = "facility_ruins"
 name        = "The Facility"
 description = "What's left of the Vance asset-facility Cain burned to the ground — scorched frame, melted server racks, the smell of old smoke that never washed out. The first dread-place. Something in the wreckage is going to look like it belongs to her."
 image       = "locations/facility_ruins.jpg"
-entry_from  = "loc_reach"
-# Mission-1 investigation site. The one-time "that's mine" match beat rides here (design_book Renner brief).
+entry_from  = "the_waterfront"
+
+# ── the_site — LOCKED frontier card (the chip / Phase-1 end) ──────────────────
+# Telegraphed locked-visible (renders greyed with blocked_message inline). Gated on a flag
+# that is NEVER set in this chunk (it needs all three missions' leads). version="1.0" or
+# the lock fails OPEN.
+[[locations]]
+id          = "the_site"
+name        = "The Site"
+description = "Somewhere out past the container stacks — the place Cain just walked away from. She doesn't have it yet."
+image       = "locations/the_site.jpg"
+entry_from  = "the_waterfront"
+entry_conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "the_site_open", operator = "is_true" },
+] }
+blocked_message = "You don't know where he went — yet. Not until the leads point somewhere."
 
 # ══════════════════════════════════════════════════════════════════
 # Phase: 2_one_shots.toml
 # ══════════════════════════════════════════════════════════════════
 
 # Phase 2/7 — 2_one_shots.toml
-# Vesper — THE OPENING (the on-rails cage, then the first free step). Beats 1–3.
-# Three fire-once canvases chained by flags (office_done -> night_done -> morning_done),
-# all priority 12. starting_canvas = canvas_opening_office (set in 0_systems_spec).
+# Vesper — the opening (fire-once, on-rails cold open). beat_0002 = Opening Beat 1, the
+# office (~13 click-beats, two nodes, the punishment + the reassignment). Authored as FINE
+# CASCADE BEATS (one beat per click) — the node-collapse fix. starting_canvas (0_systems)
+# repointed here. Beats 2/3 (night / morning) land at beat_0003 / beat_0004.
 #
-# Register (design_book "The opening" craft notes):
-#   - On-rails (cascade Continue->Continue) mirrors her no-will surrender.
-#   - Voice: flat/procedural for the narration; TIER-3 only at the glitch (tears + memory).
-#   - Render, don't dump (the memory is a fragment, never a flashback).
-#   - Belief vs truth: her self-concept written straight, NEVER confirmed (catechism).
-#   - The punishment is explicit — the "she feels, they don't" mirror that defines her.
-# (The one Beat-1 flavor choice from the design is folded to narration for the slice — on-rails.)
-
-# ═════════════════════════════════════════════════════════════════════════════
-# BEAT 1 — The office (penthouse): the punishment + the setup. THE START.
-# ═════════════════════════════════════════════════════════════════════════════
+# Register (Content register & ceilings): RTS-flat through the line-up/accusation; FULL
+# CRUDE + the non-con owned-slave floor at the punishment (she's used as property, her body
+# answers, her will never consulted); flat again at the reassignment. Premise NAMED on the
+# page: Mercer (owner), the units Vega/Lyra/Nova, the Chairman, Renner, the Cain lie. The
+# FREEZE = the first glitch (read as a malfunction).
 
 [[canvases]]
 id          = "canvas_opening_office"
 name        = "The office"
-description = "Opening Beat 1. The line-up before Mercer, the failed op (her freeze = the first glitch), the punishment-fuck in front of the blank units (she feels, they don't), the reassignment + mission framing. Sets office_done -> routes to the cradle."
+description  = "Opening Beat 1 — the line-up, the punishment in front of the units, the reassignment. On-rails (the cage). Exit -> the cradle, SETS office_done."
 
 [canvases.trigger]
 location      = "penthouse"
 is_repeatable = false
 priority      = 12
 is_active     = true
-conditions = { version = "1.0", items = [
-  { type = "flag", subject = "player", flag_key = "office_done", operator = "is_false" },
-] }
 
+# ── Node: office — the line-up, the accusation (the freeze), the threat ───────
 [[canvases.nodes]]
 id   = "office"
 name = "The office"
 blocks = [
   { type = "image", props = { file = "scenes/opening_office.jpg" } },
-  { type = "paragraph", content = "Four of them stand in a line on the penthouse floor: Wren and the three units — Vega, Lyra, Nova — shoulder to shoulder in front of the desk where Mercer sits with the city burning gold behind him. The op three nights ago is still in the room. It failed. Everyone here knows in whose hand it failed." },
+  { type = "paragraph", content = "Four of them stand in a line on the black floor of Mercer's office. Vega, Lyra, Nova — chrome-perfect, hands at their sides, nothing moving behind their eyes. And Wren, at the end, the one that came back wrong." },
   { type = "cascade", props = { beats = [
-    { advance_text = "Stand still.", blocks = [
-        { type = "paragraph", content = "Mercer doesn't look up from the file. He had the rogue, he says. In the doorway, clean line, no wind — a child could have made the shot. And the asset froze." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "You had him, Wren. Cain in your sights and your finger went still on the trigger. That's not a miss. That's a malfunction." },
+    { advance_text = "Stand in it.", blocks = [
+        { type = "paragraph", content = "Mercer doesn't look up from the desk. He lets the quiet run until it has weight; he has all night, and the units were built to stand here as long as he wants them to." },
+    ] },
+    { advance_text = "Hear it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "You had him. Cain. In the open, in your sights — and you stood there and let him walk." },
+        { type = "paragraph", content = "She had. Her hand had been on the trigger and her hand had not closed, and there is no file for why. She has run the diagnostic since. It comes back clean, and clean is the wrong answer." },
     ] },
     { advance_text = "Take it.", blocks = [
-        { type = "paragraph", content = "The three units don't move. They never do. Vega's eyes are forward and empty — whatever's behind them was built to a cleaner spec than feeling. Mercer sets the file down and finally looks at her, the way a man looks at a tool that cut him." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Do you know what it costs to grow one of you? I could strip you to the frame tonight and sleep fine." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "An asset that won't fire is scrap. I could have you stripped for parts by morning and the Chairman wouldn't blink." },
+        { type = "paragraph", content = "The units don't move. They've watched him scrap things before." },
     ] },
-    { advance_text = "Beg.", blocks = [
-        { type = "paragraph", content = "So she does what she is. She goes down — not all the way, just enough, head bowed, the surrender they built into her in place of an argument. She'll do better. Keep her. She means every word of it; there is nothing in her that doesn't." },
+  ] } },
+]
+
+# The one cosmetic flavor choice (design Beat-1) — three responses, one outcome (the cage).
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Beg him to keep you."
+targetType = "node"
+nodeId     = "canvas_opening_office.punishment"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say nothing."
+targetType = "node"
+nodeId     = "canvas_opening_office.punishment"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell him, flatly, that you froze."
+targetType = "node"
+nodeId     = "canvas_opening_office.punishment"
+
+# ── Node: punishment — the verdict, the use, the reassignment, dismissed ──────
+[[canvases.nodes]]
+id   = "punishment"
+name = "Made to remember"
+blocks = [
+  { type = "paragraph", content = "Whatever she gives him — words, silence, the truth — it changes nothing; he decided before her mouth opened. He sets the tablet down." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "No. You're the Chairman's investment, and you still feel it — which the others don't. That makes you worth more broken back in than thrown out." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Wait for it.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "So we remind you what you're for. Here. In front of them." },
+        { type = "paragraph", content = "He stands and comes around the desk, unhurried. The units' eyes follow him and not her." },
     ] },
-    { advance_text = "Wait for the verdict.", blocks = [
-        { type = "paragraph", content = "He lets the quiet stretch until it has weight. Then he decides." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "You're too expensive to scrap. The Chairman's investment, not mine. So we do it the other way." },
-    ] },
-    { advance_text = "Don't move.", blocks = [
-        { type = "paragraph", content = "He stands. Comes around the desk. The units hold their line, eyes front, as he takes a fistful of her hair, walks her three steps to the glass, and bends her over it with the city forty floors down beneath her face." },
+    { advance_text = "...", blocks = [
+        { type = "paragraph", content = "He bends her over the desk with a hand on the back of her neck, the way he'd reposition a tool. He works her skirt up, tests her with two fingers, finds her wet — she is always wet, it's the one thing they left switched on — and makes a small satisfied sound, like a reading came back in range." },
     ] },
     { advance_text = "Feel it.", blocks = [
-        { type = "paragraph", content = "He pushes her skirt up over her hips. Two fingers find her cunt and she's already wet — she's always wet, it's how they built her, the one response they left switched on — and he makes a low sound that isn't quite contempt. Then he's inside her, one palm flat between her shoulder blades, fucking her down into the glass in front of the three of them. And her body does the only thing it knows: it climbs. Heat flooding low, hips pushing back to take him deeper, a moan she doesn't bother to swallow. She comes around his cock with the whole city watching through the window and the three units watching from the line — blank, perfect, machines that were never given this — and she feels every second of it. All of it. The single live wire in a body they hollowed out." },
+        { type = "paragraph", content = "Then his cock is in her and he fucks her in long flat strokes, no hurry, talking over her head to the room about maintenance schedules while he does it. Her body answers him — it clenches and slicks and pushes back, it does everything a wanting body does — while the rest of her stands somewhere behind her own eyes, watching the grain of the desk." },
+    ] },
+    { advance_text = "Look at them.", blocks = [
+        { type = "paragraph", content = "Vega, Lyra, Nova watch with the mild attention of machines logging a procedure. Nothing in their faces. They were built without the part that makes this mean anything; she has it, and that is the whole difference between them — and bent over his desk with him grunting behind her, the part that feels does not feel like a gift." },
+    ] },
+    { advance_text = "...", blocks = [
+        { type = "paragraph", content = "He comes inside her without ceremony, holds, pulls out. Cum slides down the inside of her thigh. He's already turned away, wiping his hand on a cloth from the drawer, looking at the units instead of her." },
     ] },
     { advance_text = "Thank him.", blocks = [
-        { type = "paragraph", content = "When he's finished he steps back and straightens his cuffs. She pushes off the glass, smooths her skirt down, clears the hair from her face." },
-        { type = "dialog", props = { speaker = "player" }, content = "Thank you." },
-        { type = "paragraph", content = "She means it. Gratitude is what they gave her where another person would keep pride." },
+        { type = "paragraph", content = "She straightens her skirt. The words come level, because they're true the only way she has truths." },
+        { type = "dialog", props = { speaker = "player" }, content = "Thank you, sir." },
     ] },
-    { advance_text = "Take the assignment.", blocks = [
-        { type = "paragraph", content = "He's already back behind the desk, done with it. The units get the hunt — sent at Cain head-on, the way you point machines at a problem. She gets the other thing. The inside thing." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "You're useless with a gun. But you get close to people. So get close. The rogue murdered the Chairman's wife — he's an enemy of this company and everything it holds up. Find the man who can put you on his trail, and open him." },
+    { advance_text = "The next job.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Vega, Lyra, Nova run the hunt head-on. You're useless with a gun — but you're the one asset I have that a man wants to keep close." },
+        { type = "paragraph", content = "A face comes up on the wall screen. A man gone to seed, mid-forties, a hard mouth. The name under it: RENNER." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "He supplied the gear for the facility Cain burned. He knows where the trail starts. Get inside his life and find it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "And understand what you're bringing home. Cain murdered the Chairman's wife. He's an enemy of this company and everything it keeps standing. Put him in a box and you've earned your place for good." },
+    ] },
+    { advance_text = "Dismissed.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Now get out of my sight." },
+        { type = "paragraph", content = "She does as she's told. The door closes on the three of them still standing in their line. In the corridor, under the quiet, something she has no name for is leaking — a pressure behind the eyes, a wrongness with no readout — and she logs it as fatigue and walks toward the cradle." },
     ] },
   ] } },
 ]
 
 [canvases.nodes.exit_block]
-type = "choices"
+type = "location"
+text = "Power down."
 
-[[canvases.nodes.exit_block.choices]]
-text        = "Walk back to your floor."
-targetType  = "location"
-locationId  = "cradle"
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "cradle"
+time_progression_minutes = 60
 flagEffects = [
   { targetType = "player", flag = "office_done", op = "set" },
 ]
 
-# ═════════════════════════════════════════════════════════════════════════════
-# BEAT 2 — The night (cradle): the tears + the memory (the glitch), the catechism,
-# the power. Fully linear. Auto-fires when she reaches the cradle, office_done set.
-# ═════════════════════════════════════════════════════════════════════════════
+# ─── beat_0003 — Opening Beat 2: the night (~7 nodes, FULLY LINEAR) ────────────
+# At the cradle, gated office_done. The tears + the fragment = TIER-3 (the once-only glitch
+# peaks). The catechism = FLAT (the lie, recited straight, never confirmed). The power beat
+# PLANTS the boss-immunity mystery. Power-down advances to morning + restores Charge. SETS
+# night_done (beat_0004 morning gates it).
 
 [[canvases]]
 id          = "canvas_opening_night"
 name        = "The cradle"
-description = "Opening Beat 2. The reset ritual; the TEARS + the memory FRAGMENT (Tier-3 glitch — she reads grief as malfunction); the catechism (the lie, written straight); the gift + the unquestioned fact it never works on the boss. Powers down -> advances to morning, sets night_done."
+description  = "Opening Beat 2 — the cradle: the tears (Tier-3), the memory fragment (Tier-3), the catechism (flat lie), the weapon + the boss-immunity, power-down. SETS night_done."
 
 [canvases.trigger]
 location      = "cradle"
@@ -444,8 +428,7 @@ is_repeatable = false
 priority      = 12
 is_active     = true
 conditions = { version = "1.0", items = [
-  { type = "flag", subject = "player", flag_key = "office_done",  operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "night_done",   operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "office_done", operator = "is_true" },
 ] }
 
 [[canvases.nodes]]
@@ -453,186 +436,35 @@ id   = "night"
 name = "The cradle"
 blocks = [
   { type = "image", props = { file = "scenes/opening_cradle.jpg" } },
-  { type = "paragraph", content = "The Tower at night is all hush and indirect light. She rides up to her floor, walks the corridor of numbered doors to hers, and crosses to the cradle in the corner. She backs into it. The contacts find their points along her spine. The charge begins to pull her down." },
+  { type = "paragraph", content = "The asset level is quiet the way a kept place is quiet. She comes down through the Tower to her own floor, her own door, her own room with nothing on the walls. The cradle waits in the corner." },
   { type = "cascade", props = { beats = [
     { advance_text = "Power down.", blocks = [
-        { type = "paragraph", content = "And her face is wet. She lifts a hand to it without deciding to. Water — from her eyes, steady, the way a seal lets go. Nothing made it happen. No one touched her; there's no heat anywhere in her, none of the one thing she's built to feel. It just runs. She looks at the wet on the back of her wrist like it's a fault in the hull, a leak with no source, and files it under the things you don't report — because she has no name for it, and the nameless faults are the ones they decide you're not worth fixing." },
+        { type = "paragraph", content = "She steps back into it. The contacts find the points along her spine, cold and familiar. The room dims as the charge takes hold, and the day's log begins to write itself down into the quiet." },
     ] },
-    { advance_text = "Hold still.", blocks = [
-        { type = "paragraph", content = "Then, in the dark behind her eyes, something surfaces. A face. Not a file, not a mark, no one in the Tower — a man, looking at her like she was worth the looking. Warm light off to one side. A sound that might have been her name, except it isn't the name they call her here. It holds for a breath, and then it's gone — scrubbed, a frame cut out of the reel. She waits to feel something about it. Nothing comes. Of course nothing comes." },
-        { type = "thought_bubble", props = { speaker = "player" }, content = "Corruption in the core. Log it. Power down." },
+    { advance_text = "...", blocks = [
+        { type = "paragraph", content = "Then her face is wet. She registers it the way she'd register a leak in a seal — water, on her cheeks, with no source she can name and no order that called for it. She holds perfectly still and runs every diagnostic she has, and every one comes back clean. She files the water under malfunction and resolves to have it looked at, and does not have it looked at, because some part of her already knows they'd take it out." },
+    ] },
+    { advance_text = "...", blocks = [
+        { type = "paragraph", content = "And under the water, for less than a second, something else. Not a thought — she doesn't have thoughts that aren't tasks — but a fragment: warmth on the side of her face that isn't the cradle's, a low sound that might be a voice with her name folded somewhere inside it, a sense of being looked at by someone who was glad to be looking. Then the charge swallows it and it's gone, and the place where it was aches like a socket with the tooth pulled, and she has no word for the ache, so she has no word for the loss." },
     ] },
     { advance_text = "Recite it.", blocks = [
-        { type = "paragraph", content = "She runs the litany, the way it steadies her. She is an asset of Vance Dynamics. The company saved her from nothing and made her something. The Chairman gave her a purpose when she had none and a debt she will never finish paying, which is why she pays it every day — with her hands, her mouth, her body, whatever the work needs. She exists to obey. Said in order, it puts the rest of it back in its place." },
+        { type = "paragraph", content = "She does what she does when the quiet gets loud. She recites." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "I was nothing. The company found me and made me of use. The Chairman keeps me running. I owe them the body and the work and the obedience. I exist to serve. That is all I have ever been." },
+        { type = "paragraph", content = "The words settle her. They always do. She does not notice that the water is still on her face while she tells herself she is a thing that cannot weep." },
     ] },
-    { advance_text = "Run the last line.", blocks = [
-        { type = "paragraph", content = "And she has the gift. When a man spends himself inside her she takes him — his will, his secrets, the truth under his tongue — for as long as she needs him, and he wakes with the lost time smoothed over and remembers nothing. It is the key that opens every man they point her at. It has never once worked on Mercer. She has never wondered why. Wondering isn't in the litany." },
+    { advance_text = "The gift.", blocks = [
+        { type = "paragraph", content = "There is one thing she has that the company gave her and the units don't. When a man uses her the lowest way — takes her ass and spends himself in it — for a few minutes after, he belongs to her. He'll answer anything, do anything, wake remembering none of it. It's how she works the men she's sent to work. It's the one thing that is, in any sense, hers." },
+        { type = "paragraph", content = "It has never once worked on Mercer. He's had her every way there is, that one included. Nothing passes; the controls never come to her; he stays the hand on the leash. She has never asked why. The not-asking is so complete she doesn't notice it has a shape — a hole exactly the size of a question she isn't allowed to hold." },
     ] },
-  ] } },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Let the charge take you."
-targetType               = "location"
-locationId               = "cradle"
-time_progression_minutes = 540
-flagEffects = [
-  { targetType = "player", flag = "night_done", op = "set" },
-]
-effects = [
-  { targetType = "player", trait = "energy", op = "add", value = 100 },
-]
-
-# ═════════════════════════════════════════════════════════════════════════════
-# BEAT 3 — The morning (cradle): the briefing, the tip, the cover, OUT THE DOOR.
-# The hinge — sets opening_done + mission_1_active and drops her into the open city.
-# ═════════════════════════════════════════════════════════════════════════════
-
-[[canvases]]
-id          = "canvas_opening_morning"
-name        = "Morning"
-description = "Opening Beat 3. Power-up; the dossier (the burned facility); the tip (Renner knows the trail, drinks at the Anchor, hiring cheap hands); the cover. OUT THE DOOR = the hinge: sets opening_done + mission_1_active, drops her at spire_plaza (the city opens)."
-
-[canvases.trigger]
-location      = "cradle"
-is_repeatable = false
-priority      = 12
-is_active     = true
-conditions = { version = "1.0", items = [
-  { type = "flag", subject = "player", flag_key = "night_done",   operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "morning_done", operator = "is_false" },
-] }
-
-[[canvases.nodes]]
-id   = "morning"
-name = "Morning"
-blocks = [
-  { type = "paragraph", content = "She wakes the way she always does — all at once, fully, the charge sitting at a hundred. Morning, by the light in the corridor. A new day, identical to the spine of every other one." },
-  { type = "cascade", props = { beats = [
-    { advance_text = "Check the phone.", blocks = [
-        { type = "paragraph", content = "Her phone is lit when she comes up. A dossier, flagged priority, sitting at the top of nothing else. Three nights ago a Vance facility down in the Reach burned to its frame — one of the rogue's strikes. The file wants her on the trail before it goes cold." },
-    ] },
-    { advance_text = "Read the tip.", blocks = [
-        { type = "paragraph", content = "The man who supplied that facility's equipment is a wreck named Renner. Cain took everything from him and left him broke and bitter and certain none of it was his own fault. He knows the shape of the trail Cain left when he ran. He drinks every night at a dock bar called the Anchor, and he's hiring cheap hands to rebuild what he lost. That's the door: get close, get inside, use the gift." },
-    ] },
-    { advance_text = "Pick a face.", blocks = [
-        { type = "paragraph", content = "She chooses one from the kit — not her own; her own isn't for wearing — and pulls it on like a coat. The asset goes under. Someone cheaper, softer, easier to hire comes up in its place." },
-        { type = "thought_bubble", props = { speaker = "player" }, content = "First time outside in — I don't keep the count." },
+    { advance_text = "Power down.", blocks = [
+        { type = "paragraph", content = "She lets the catechism be the last thing. She promises the quiet she'll do better — fire next time, feel less, want nothing — and the charge pulls her down past where the water and the fragment and the question all live, into the dark that is supposed to be empty and, lately, isn't quite." },
     ] },
   ] } },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text        = "Take the elevator down."
-targetType  = "location"
-locationId  = "spire_plaza"
-flagEffects = [
-  { targetType = "player", flag = "morning_done",    op = "set" },
-  { targetType = "player", flag = "opening_done",    op = "set" },
-  { targetType = "player", flag = "mission_1_active", op = "set" },
-]
-
-# ═════════════════════════════════════════════════════════════════════════════
-# RENNER — THE HIRE (establishing capstone). Fires once at the Anchor, evening,
-# Renner present, before she's hired. Cold-boss first contact: he needs cheap
-# hands and doesn't look twice at her. Sets renner_hired -> opens the depot work.
-# ═════════════════════════════════════════════════════════════════════════════
-
-[[canvases]]
-id          = "canvas_renner_hire"
-name        = "The Anchor — Renner"
-description = "Renner hire capstone (establishing). First contact at the Anchor: she pitches for the cheap-hands job, he prices her like a used part and takes her on. His voice = pure contempt (the bottom of the climb). Sets renner_hired -> the depot hub + menial work go live."
-
-[canvases.trigger]
-location      = "the_anchor"
-requires_npc  = "npc_renner"
-is_repeatable = false
-priority      = 9
-is_active     = true
-conditions = { version = "1.0", items = [
-  { type = "flag", subject = "player", flag_key = "renner_hired", operator = "is_false" },
-] }
-
-[[canvases.nodes]]
-id   = "hire"
-name = "The Anchor — Renner"
-blocks = [
-  { type = "image", props = { file = "scenes/renner_hire.jpg" } },
-  { type = "paragraph", content = "The Anchor smells like spilled beer and dead cigarettes. Renner's at the end of the bar where the regulars leave a gap around him — a big man gone to seed, three days unshaved, working through a glass like it owes him money. This is the wreck Cain made of someone." },
-  { type = "cascade", props = { beats = [
-    { advance_text = "Sit down beside him.", blocks = [
-        { type = "paragraph", content = "She slides onto the stool beside him in the cheap, soft face she picked out this morning. Tells him she heard down the docks he's hiring. He doesn't look over." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Whatever you're selling, I'm not— no. Hands. I need hands that show up and shut up. That you, or are you wasting my drinking time?" },
-    ] },
-    { advance_text = "Tell him you show up.", blocks = [
-        { type = "paragraph", content = "She says she shows up and she shuts up and she works cheap. That last word is the one that lands. He finally looks at her — one flat pass, top to bottom, pricing her like a used part, and finding her cheap enough to bother with." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Depot. Seven sharp. You're late, you're done — and don't expect me to learn your name before you've earned it being worth the breath." },
-    ] },
-    { advance_text = "Take it.", blocks = [
-        { type = "paragraph", content = "He turns back to his glass like she's already gone. It isn't much. A door into a dead man's business and a boss who looks at her like furniture. But it's the door, and getting through doors like this one is the only thing she's actually for." },
-        { type = "thought_bubble", props = { speaker = "player" }, content = "He didn't look twice. The ones who don't look are the easiest to get under." },
-    ] },
-  ] } },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text        = "Leave him to his drink."
-targetType  = "location"
-locationId  = "the_anchor"
-flagEffects = [
-  { targetType = "player", flag = "renner_hired", op = "set" },
-]
-
-# ══════════════════════════════════════════════════════════════════
-# Phase: 3_activities.toml
-# ══════════════════════════════════════════════════════════════════
-
-# Phase 3/7 — 3_activities.toml
-# Vesper scaffold — the day-router (cradle recharge) + inter-district travel (Spire ⇄ Reach).
-# These are the structural movement/time spine. Content activities (Renner's depot work,
-# Mercer's chores, the §2 glitch beats) are authored onto these hosts in the beat tasks.
-
-# ─── The day-router: power down at the cradle, wake charged ───────────────────
-# The day-cycle ROUTER. Without it, daytime windows (Renner's depot 09:00–18:00) are
-# unreachable from the evening start. Powers her down, advances the clock, restores charge.
-# Schedule window 19:00–05:00 = she can power down through the night. The cradle = the free
-# reset (design_book). The §2 glitch-intrusion beats attach to this host later.
-
-[[canvases]]
-id          = "activity_recharge"
-name        = "Power down"
-description = "Wren-solo. The cradle. The day-cycle router — powers down, advances ~9h, wakes her charged. Charge restored to full."
-
-[canvases.trigger]
-location      = "cradle"
-is_repeatable = true
-priority      = 3
-is_active     = true
-
-[[canvases.trigger.schedules]]
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "19:00"
-end_time   = "05:00"
-
-[[canvases.nodes]]
-id   = "base"
-name = "Power down"
-blocks = [
-  { type = "paragraph", content = "She settles back into the cradle. The contacts find their points along her spine. The room dims as the charge takes her down, and the quiet closes over the top of her like water." },
 ]
 
 [canvases.nodes.exit_block]
 type = "location"
-text = "Power up."
+text = "Sleep."
 
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
@@ -641,12 +473,182 @@ time_progression_minutes = 540
 effects = [
   { targetType = "player", trait = "energy", op = "add", value = 100 },
 ]
+flagEffects = [
+  { targetType = "player", flag = "night_done", op = "set" },
+]
 
-# ─── Travel: Spire → Reach ────────────────────────────────────────────────────
+# ─── beat_0004 — Opening Beat 3: the morning + the hinge (~4 nodes) ────────────
+# At the cradle, gated night_done. Power-up, the phone briefing, the tip (Renner @ the
+# Anchor), the cover, then OUT THE DOOR (the hinge — the city opens). SETS morning_done +
+# opening_done + mission_1_active; exit -> spire_plaza (open play begins).
+
+[[canvases]]
+id          = "canvas_opening_morning"
+name        = "The morning"
+description  = "Opening Beat 3 — power-up, the briefing, the tip, the cover, OUT THE DOOR (the hinge). SETS morning_done + opening_done + mission_1_active; the city opens."
+
+[canvases.trigger]
+location      = "cradle"
+is_repeatable = false
+priority      = 12
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "night_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "morning"
+name = "The morning"
+blocks = [
+  { type = "paragraph", content = "The charge releases her at oh-six-hundred. Full. New day. The water is gone from her face; the fragment has filed itself back under the quiet where she can't reach it, and she's grateful for that the way you're grateful for a wound scabbing over." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Check the phone.", blocks = [
+        { type = "paragraph", content = "Her phone has a dossier on it, pushed overnight, Mercer's authority stamped on the header. She reads it standing in the cradle." },
+    ] },
+    { advance_text = "Read it.", blocks = [
+        { type = "paragraph", content = "A Vance asset-facility in the Reach burned to the ground three weeks ago — Cain's work. The man who supplied its equipment is named Renner: a quartermaster, broke now, blacklisted, drinking himself down at a dock bar called the Anchor and clawing at the wreck of his business. He knows what the facility was and where the trail goes. He does not know what she is." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Get inside his life. You know how." },
+    ] },
+    { advance_text = "Dress for it.", blocks = [
+        { type = "paragraph", content = "She picks a face for it from the rack of them she keeps — not a disguise so much as a register: cheap, willing, a little desperate, the kind of hire a wrecked man doesn't look at twice until she makes him. She puts it on the way she puts on everything, from the outside. Wren goes under. Whoever Renner needs comes up." },
+    ] },
+    { advance_text = "Out the door.", blocks = [
+        { type = "paragraph", content = "She rides down through a Tower she has never once left on her own legs for anything but an order. The atrium doors read her face and open. And then she's outside, on Spire Plaza, the city laid out wet and enormous and unowned in front of her — and for one second, before the cover settles all the way down over her, something that isn't in any of her files stands very still in her chest and looks at all of it." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Step into the city."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "spire_plaza"
+flagEffects = [
+  { targetType = "player", flag = "morning_done",     op = "set" },
+  { targetType = "player", flag = "opening_done",     op = "set" },
+  { targetType = "player", flag = "mission_1_active", op = "set" },
+]
+
+# ═══ beat_0013 — her glitches (cradle) + the facility match ════════════════════
+# The two once-only glitch recurrences (the design's "escalating recurrences" -- II heavier
+# than I, NOT a recurring ambient). Auto-fire at the cradle on the cross-reads. Tier-3.
+
+[[canvases]]
+id          = "canvas_glitch_recurrence_i"
+name        = "It comes back"
+description = "Auto-fire glitch recurrence I. Cradle, gated worked_renner_once (she's begun working Renner). The leak returns, longer. SETS glitch_i_seen. Tier-3, fires once."
+
+[canvases.trigger]
+location      = "cradle"
+is_repeatable = false
+priority      = 8
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "worked_renner_once", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "glitch_i_seen",      operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "It comes back"
+blocks = [
+  { type = "paragraph", content = "She powers down like every night, except tonight the leak comes back. The tears first — her face wet again, no order behind it — and then the fragment, longer this time, almost holding: the warmth, the voice with her name folded into it, the someone who was glad to look at her. She reaches for it the way you reach for a word on the tip of your tongue, and it's gone, and the reaching leaves a mark. She files it under fatigue. The fatigue file is getting full." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let the charge take you."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "cradle"
+flagEffects = [
+  { targetType = "player", flag = "glitch_i_seen", op = "set" },
+]
+
+[[canvases]]
+id          = "canvas_glitch_recurrence_ii"
+name        = "The door warps"
+description = "Auto-fire glitch recurrence II (the chunk's awakening PEAK -- heavier than I). Cradle, gated renner_drained (after the first drain). She gets a whole feeling, not a flicker; the catechism stops fitting. SETS glitch_ii_seen. Tier-3, fires once."
+
+[canvases.trigger]
+location      = "cradle"
+is_repeatable = false
+priority      = 8
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "renner_drained",  operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "glitch_ii_seen",  operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The door warps"
+blocks = [
+  { type = "paragraph", content = "Tonight it doesn't wait for the charge. She's barely in the cradle before it takes her — the wetness, the fragment, but more now, like a door that used to be locked has warped in its frame. The voice almost resolves. A face almost forms." },
+  { type = "paragraph", content = "And for the first time she gets a whole feeling instead of a flicker: that she was loved once, completely, by someone, before all of this — and that the company knew, and took it, and built the taking so deep into her that she thanks them for it every morning. Then the charge slams the door, and she's standing in the grey quiet with her face wet and the catechism in her mouth, and for one second she'll spend the rest of her life trying to un-have, the catechism doesn't fit anymore. She files it under nothing. Nothing is getting full too." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Power down anyway."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "cradle"
+flagEffects = [
+  { targetType = "player", flag = "glitch_ii_seen", op = "set" },
+]
+
+# inv_facility_match — the one-time 'that's mine' seed (auto-fire, capstone-shape).
+[[canvases]]
+id          = "inv_facility_match"
+name        = "That's mine"
+description = "Auto-fire 'that's mine' beat at facility_ruins (gated renner_hired -- she's working the trail by now). A component in the wreckage matches her own build (MANUFACTURE, not memory -- doesn't spoil the chip). SETS facility_match_seen. Single Continue, Tier-3-adjacent."
+
+[canvases.trigger]
+location      = "facility_ruins"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "renner_hired",        operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "facility_match_seen", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "That's mine"
+blocks = [
+  { type = "paragraph", content = "In the wreckage of a containment rig — half-melted, stamped with a maker's mark — she finds a component she recognizes. Not from a file. From herself. The same part, the same stamp, sits inside her own chassis where the lab installed it; she has felt the engineers' hands on its twin. The gear Renner supplied to cage the things that feel was built in the same shop, to the same spec, as the thing she is." },
+  { type = "paragraph", content = "She notes it the way she notes a serial number matching a serial number. \"That's mine,\" she says, flat, to the burned and empty room — and doesn't know why the words come out cold and certain and terrible, or why she can't make herself say them again." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Log it. Move on."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "facility_ruins"
+flagEffects = [
+  { targetType = "player", flag = "facility_match_seen", op = "set" },
+]
+
+# ══════════════════════════════════════════════════════════════════
+# Phase: 3_activities.toml
+# ══════════════════════════════════════════════════════════════════
+
+# Phase 3/7 — 3_activities.toml
+# Vesper — solo activities / structural movement. beat_0001 (scaffold): the two travel
+# activities that bridge the parallel street-hub roots (Spire Plaza <-> The Waterfront) so
+# the map is connected and the build proves green. The day-router (cradle), Renner's depot
+# work, and the rest land at their plan beats (0006 / 0007).
+
+# ─── Travel: Spire -> Reach ───────────────────────────────────────────────────
 [[canvases]]
 id          = "activity_travel_to_reach"
 name        = "Take the car to the Reach"
-description = "Wren-solo. Spire Plaza → The Waterfront. Costs time + charge (the leash bites — schedules matter). Ungated in the slice (no hard charge-block — refine later)."
+description = "Wren-solo. Spire Plaza -> The Waterfront. Costs time + charge (the leash bites — schedules matter)."
 
 [canvases.trigger]
 location      = "spire_plaza"
@@ -673,11 +675,11 @@ effects = [
   { targetType = "player", trait = "energy", op = "add", value = -10 },
 ]
 
-# ─── Travel: Reach → Spire ────────────────────────────────────────────────────
+# ─── Travel: Reach -> Spire ───────────────────────────────────────────────────
 [[canvases]]
 id          = "activity_travel_to_spire"
 name        = "Take the car to the Spire"
-description = "Wren-solo. The Waterfront → Spire Plaza. Costs time + charge. Ungated in the slice."
+description = "Wren-solo. The Waterfront -> Spire Plaza. Costs time + charge."
 
 [canvases.trigger]
 location      = "the_waterfront"
@@ -704,21 +706,483 @@ effects = [
   { targetType = "player", trait = "energy", op = "add", value = -10 },
 ]
 
-# ─── Renner — the menial work (Lane 3 host): the trust grind + light credits ──
-# Gated renner_hired. Raises Renner's relation (the way in — relation gates the
-# office) + a thin credit payout (the early income loop). The rising Renner
-# walk-ins (the escalating chore-hijack) attach to THIS host in the next increment.
+# ─── beat_0006 — Home base: the cradle ────────────────────────────────────────
+# The day-router (the ongoing free reset — power down, advance ~9h, wake charged) + the
+# chip/memories view (seeded-empty, the greyed FRAGMENT 01 slot = the visible next rung).
+# Both gated opening_done (after the on-rails opening hands the city over).
+
+# The day-router — power down at the cradle, wake charged. The reset that makes the daytime
+# (Renner's depot 09:00-18:00) reachable from an evening start.
 [[canvases]]
-id          = "activity_renner_menial"
-name        = "Work the floor"
-description = "Wren-solo (Lane 3 host). Depot, 09:00–18:00, gated renner_hired. Haul/sort/log — earns Renner relation (the trust grind) + light credits. Energy cost. Host for the rising Renner walk-ins (added next increment)."
+id          = "activity_recharge"
+name        = "Power down"
+description = "Wren-solo. The cradle. The day-cycle reset — powers down, advances ~9h, wakes her at full Charge. Gated opening_done; the opening's night/morning one-shots run first."
 
 [canvases.trigger]
-location      = "renner_depot"
+location      = "cradle"
 is_repeatable = true
 priority      = 3
 is_active     = true
-conditions = { version = "1.0", items = [
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time   = "05:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Power down"
+blocks = [
+  { type = "paragraph", content = "She settles back into the cradle. The contacts find their points along her spine, cold and familiar. The room dims as the charge takes her down, and the quiet closes over the top of her like water." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Power up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "cradle"
+time_progression_minutes = 540
+effects = [
+  { targetType = "player", trait = "energy", op = "add", value = 100 },
+]
+
+# The chip / memories view — seeded-empty, the greyed FRAGMENT 01 slot (the visible next
+# rung; fills at the_site, frontier). The unconscious self-labelling = the awakening seed.
+[[canvases]]
+id          = "canvas_chip_view"
+name        = "The memory store"
+description = "Wren-solo at the cradle. The memories UI — EMPTY in chunk, one greyed locked slot (FRAGMENT 01). The chip fills at the_site (frontier). Repeatable; gated opening_done."
+
+[canvases.trigger]
+location      = "cradle"
+is_repeatable = true
+priority      = 2
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The memory store"
+blocks = [
+  { type = "paragraph", content = "She opens the store the company gave her for what it calls recovered assets — the place a restored memory would go, if she ever recovered one. It's empty. It has always been empty." },
+  { type = "paragraph", content = "There is one slot in it, greyed out, labelled in a hand that isn't the company's: FRAGMENT 01 — LOCKED. She doesn't remember making the label. She closes the store — and notices she's opened it more often than the task log would ever justify, and files that under nothing, the way she files everything she can't afford to have." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Close it."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "cradle"
+
+# ─── beat_0013 — the facility investigation host (Lane-3 solo) ─────────────────
+# The Mission-1 location leg. Repeatable explore; the one-time 'that's mine' match beat
+# (inv_facility_match, 2_one_shots) auto-fires on entry once renner_hired.
+[[canvases]]
+id          = "inv_facility_explore"
+name        = "Walk the wreckage"
+description = "Wren-solo Lane-3 investigation at facility_ruins. The dread-place. Gated opening_done. The 'that's mine' match beat fires separately (auto-fire, once renner_hired)."
+
+[canvases.trigger]
+location      = "facility_ruins"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Walk the wreckage"
+blocks = [
+  { type = "image", props = { file = "locations/facility_ruins.jpg" } },
+  { type = "paragraph", content = "The facility is a black skeleton against the dock lights — scorched frame, melted racks, the smell of old smoke that never washed out. She walks it the way she walks everything, cataloguing: where the containment was, where the fire started, what the dead machines used to do. None of it matches the briefing. All of it was built to hold things that could feel — and someone came through and let them out before he burned it down. The dread-place. The first one." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done here."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "facility_ruins"
+
+# ══════════════════════════════════════════════════════════════════
+# Phase: 5_scenes.toml
+# ══════════════════════════════════════════════════════════════════
+
+# Phase 5/7 — 5_scenes.toml — the NPC scenes (Mercer + Renner).
+# beat_0005 = Mercer's home base: the first-Penthouse-service capstone (SETS mercer_hub_open)
+# + the inside hub (Lane-1 portrait, FIXED menu Report/Serve/Leave) + the his-POV serve loop
+# (full machine, NO control canvas = the immunity). Renner's content lands at beats 0007-0013.
+#
+# Register (Content register & ceilings): ownership-degradation CRUDE at the serve peaks
+# (cock/cum), his-POV "he uses you", the non-con owned-slave floor (she's his, used, her body
+# answers); RTS-flat per act (~40w). The ANAL finish shows the BOSS-IMMUNITY: he finishes,
+# nothing passes to her (the planted mystery, made concrete in play).
+#
+# Loop = sex-loop.md pattern: triggerless, numeric-trait state (declared 1_metadata + hidden
+# 0_systems), reset on entry (hub Serve rung) + on finisher exit. NO drain on Mercer.
+
+# ═══ cap_first_penthouse_service — the establishing capstone (auto-fire) ═══════
+[[canvases]]
+id          = "cap_first_penthouse_service"
+name        = "The arrangement"
+description = "Auto-fire capstone — the first time she serves Mercer at the penthouse in open play. Establishes the ongoing use. SETS mercer_hub_open (switches the inside hub on)."
+
+[canvases.trigger]
+location      = "penthouse"
+requires_npc  = "npc_mercer"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done",   operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "mercer_hub_open", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The arrangement"
+blocks = [
+  { type = "image", props = { file = "scenes/mercer_penthouse.jpg" } },
+  { type = "paragraph", content = "The penthouse, by daylight. Mercer's at the glass with a tablet, and he doesn't turn when the elevator lets her in. He doesn't have to. She's company-issue, and she's here because being here is what she's for." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Wait for the order.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "On your knees. I've got a call in ten." },
+    ] },
+    { advance_text = "Kneel.", blocks = [
+        { type = "paragraph", content = "She goes down without a word. He takes the call one-handed, her mouth around his cock, the other hand resting in her hair the way a man rests his hand on a tool he isn't using yet. He finishes before the call does. She swallows, because that's tidy, and tidy is what's expected." },
+    ] },
+    { advance_text = "Hear the terms.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Good. You come up when I want you, and you're like this when you do. That's the arrangement. It was always the arrangement." },
+        { type = "paragraph", content = "It was. She straightens, wipes her mouth, and the shape of the days settles over her — the same shape as all the days behind it: the cradle, the call, the kneeling. World without end." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stand up."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "penthouse"
+flagEffects = [
+  { targetType = "player", flag = "mercer_hub_open", op = "set" },
+]
+
+# ═══ mercer_penthouse_hub — the inside hub (Lane 1, FIXED menu) ════════════════
+[[canvases]]
+id          = "mercer_penthouse_hub"
+name        = "Mercer's Penthouse"
+description = "Lane-1 portrait hub. FIXED menu (no rungs, no climb — he never changes): Report / Serve / Leave. Gated mercer_hub_open."
+
+[canvases.trigger]
+location      = "penthouse"
+requires_npc  = "npc_mercer"
+npc           = "npc_mercer"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "mercer_hub_open", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "23:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Mercer's Penthouse"
+blocks = [
+  { type = "image", props = { file = "scenes/mercer_penthouse_hub.jpg" } },
+  { type = "paragraph", content = "Mercer's penthouse. He's at the desk or the glass, and whatever he's doing he can be interrupted to use her — that's what she's for, and they both know it. He looks up when she comes in. He doesn't smile. He never smiles." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Report."
+targetType = "node"
+nodeId     = "mercer_penthouse_hub.report"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Kneel and serve him."
+targetType = "node"
+nodeId     = "mercer_serve.intro"
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave."
+targetType = "location"
+locationId = "atrium"
+
+# ── Node: report — the flat check-in (non-lewd, ungated) ──────────────────────
+[[canvases.nodes]]
+id   = "report"
+name = "Report"
+blocks = [
+  { type = "paragraph", content = "She gives him what she has — the Renner approach, the angle, the timeline. He listens the way he listens to a status light: for whether it's green." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Don't bring me progress. Bring me the man's secrets or bring me nothing. Go make yourself useful to someone who can't see what you are." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "penthouse"
+
+# ═══ mercer_serve — the his-POV serve loop (triggerless, NO drain) ═════════════
+[[canvases]]
+id          = "mercer_serve"
+name        = "Serve him"
+description = "Triggerless sex loop (reached only from the hub Serve rung). His-POV use. Poses knees(0)/desk(1)/glass(2). NO control canvas — every finish just ends (the immunity). State = numeric traits, reset on entry + finisher exit."
+
+[[canvases.nodes]]
+id   = "intro"
+name = "Serve him"
+blocks = [
+  { type = "paragraph", content = "He's already unbuckling when she crosses to him; there's never preamble. He uses her the way he uses anything he owns — fully, without thanks, his mind somewhere else the whole time." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Down on your knees."
+targetType = "node"
+nodeId     = "base_knees"
+
+# ── Pose: knees (oral, sex_stage 0) ───────────────────────────────────────────
+[[canvases.nodes]]
+id   = "base_knees"
+name = "On your knees"
+blocks = [
+  { type = "paragraph", content = "On her knees on the floor, his cock in her mouth, his hand setting the pace by her hair. He watches the city and not her, talking to no one — a maintenance note, a time he wants a thing done. She services him." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep sucking his cock."
+targetType = "node"
+nodeId     = "base_knees"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him bend you over the desk."
+targetType = "node"
+nodeId     = "base_desk"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Present your ass against the glass."
+targetType = "node"
+nodeId     = "base_glass"
+effects = [
+  { targetType = "player", trait = "sex_stage",   op = "set", value = 2, clamp = false },
+  { targetType = "player", trait = "anal_active", op = "set", value = 1, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish in your mouth."
+targetType = "node"
+nodeId     = "mercer_finisher.climax"
+show_when_locked = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false } ]
+
+# ── Pose: desk (vaginal, sex_stage 1) ─────────────────────────────────────────
+[[canvases.nodes]]
+id   = "base_desk"
+name = "Over the desk"
+blocks = [
+  { type = "paragraph", content = "Bent over the desk, his hand flat between her shoulder blades to keep her down, he fucks her from behind — unhurried, proprietary. Her body answers the way it always does, and he notes that it does, the way you'd note a gauge reading true." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Take it."
+targetType = "node"
+nodeId     = "base_desk"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Back down on your knees."
+targetType = "node"
+nodeId     = "base_knees"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 0, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him take your ass."
+targetType = "node"
+nodeId     = "base_glass"
+effects = [
+  { targetType = "player", trait = "sex_stage",   op = "set", value = 2, clamp = false },
+  { targetType = "player", trait = "anal_active", op = "set", value = 1, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish inside you."
+targetType = "node"
+nodeId     = "mercer_finisher.climax"
+show_when_locked = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 1, clamp = false } ]
+
+# ── Pose: glass (anal, sex_stage 2) — the immunity foreshadowed in the pose ────
+[[canvases.nodes]]
+id   = "base_glass"
+name = "Against the glass"
+blocks = [
+  { type = "paragraph", content = "Against the glass wall, the lit city laid out under them, he takes her ass in long deliberate strokes, both hands on her hips. This is the act that hands her the controls of any other man alive. She braces on the glass and waits to feel it start — the give, the opening. It doesn't come. It never comes with him." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Take it in the ass."
+targetType = "node"
+nodeId     = "base_glass"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Back over the desk."
+targetType = "node"
+nodeId     = "base_desk"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish in your ass."
+targetType = "node"
+nodeId     = "mercer_finisher.climax"
+show_when_locked = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+  { type = "trait", subject = "player", trait_key = "anal_active",       operator = "gte", value = 1  },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 2, clamp = false } ]
+
+# ═══ mercer_finisher — the climax (triggerless, [group] by type, NO drain) ════
+[[canvases]]
+id          = "mercer_finisher"
+name        = "He finishes"
+description = "Triggerless finisher. [group] blocks by sex_finisher_type (0 facial / 1 inside / 2 ass). ALL just end (the immunity — even the ass finish passes nothing to her). Exit resets all loop traits -> penthouse."
+
+[[canvases.nodes]]
+id   = "climax"
+name = "He finishes"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He pulls out and finishes on her face, holding her there by the jaw until he's done, then letting go the way you drop a thing back in a drawer. He's already turned to the window." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He finishes inside her, holds, pulls out without comment. His cum slides down the inside of her thigh. He wipes himself on a cloth from the drawer and checks the time." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He finishes in her ass — and nothing comes. No give, no opening, no man-belonging-to-her. Just his weight and his cum and then his absence as he steps back. The same nothing as every time. She files it where she files the other things she isn't allowed to ask, and straightens up." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Straighten up."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "penthouse"
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# RENNER — Mission 1. The cold boss she seduces from the bottom.
+# beat_0007 = the on-ramp: hire (Anchor first-contact) + depot work hub + the menial grind
+# (relation-fast, charge-paced) + the Anchor evening hub.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ═══ cap_renner_hired — first contact at the Anchor (auto-fire) ════════════════
+# RECONCILED to the_anchor (blueprint said renner_depot; the opening tip sends her to the
+# Anchor, where he is evenings — align the hire with the tip). SETS renner_hired.
+[[canvases]]
+id          = "cap_renner_hired"
+name        = "Cheap hands"
+description = "Auto-fire first-contact at the Anchor (the opening tip's location). The mean drunk boss hires her as cheap hands. SETS renner_hired -> opens the depot work + the hubs."
+
+[canvases.trigger]
+location      = "the_anchor"
+requires_npc  = "npc_renner"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "renner_hired", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Cheap hands"
+blocks = [
+  { type = "image", props = { file = "scenes/renner_anchor.jpg" } },
+  { type = "paragraph", content = "The Anchor is the kind of bar that's given up on its own neon. Renner's at the end of it — a big man gone soft and sour, three drinks into the evening and looking like the fourth won't help. He doesn't look up when she takes the stool beside him." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Make the pitch.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Whatever you're selling, I'm broke. Whatever you're offering, I've had it." },
+        { type = "paragraph", content = "She tells him she heard he's rebuilding. That she works cheap, doesn't ask questions, doesn't tire. He looks at her then — not the way men look, the way a man counting his last dollars looks at a price that's almost low enough." },
+    ] },
+    { advance_text = "Wait.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "...Depot. Nine sharp. You're late, you're gone. You steal, I break your hands. Now buy your own drink or get off my stool." },
+        { type = "paragraph", content = "He goes back to the glass. It isn't much. But she's in — and being in, day after day, until a man like this stops noticing she's there, is the whole way the job gets done." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave him to it."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_anchor"
+flagEffects = [
+  { targetType = "player", flag = "renner_hired", op = "set" },
+]
+
+# ═══ hub_depot_floor — Lane-1 work hub (office register opens at beat_0008) ════
+[[canvases]]
+id          = "hub_depot_floor"
+name        = "Renner's Depot"
+description = "Lane-1 portrait hub at the depot floor. Pre-office: check in (flavor) + head out. The office seduction register surfaces here once renner_office_open (beat_0008). Gated renner_hired."
+
+[canvases.trigger]
+location      = "renner_depot"
+requires_npc  = "npc_renner"
+npc           = "npc_renner"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "renner_hired", operator = "is_true" },
 ] }
 [[canvases.trigger.schedules]]
@@ -728,10 +1192,168 @@ end_time   = "18:00"
 
 [[canvases.nodes]]
 id   = "base"
+name = "Renner's Depot"
+blocks = [
+  { type = "image", props = { file = "scenes/renner_depot_floor.jpg" } },
+  { type = "paragraph", content = "Renner's depot. Half-empty racks, a forklift nobody's fixed, crates Cain's people left behind. He works the floor in a temper, and when he notices her at all it's to find fault. The work is the work." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Check in with him."
+targetType = "node"
+nodeId     = "hub_depot_floor.check_in"
+
+# ── The office seduction register (gated renner_office_open). Double-locked: office (access)
+# + npc_renner.corruption (the tier). Corruption-slow: +2/day, daily-capped via
+# renner_charged_today (the flag lives HERE on the located choice, NOT in the triggerless
+# rung canvas). Reaction prose lives in the rung's [group] bands. ──
+[[canvases.nodes.exit_block.choices]]
+text       = "Tease him."
+targetType = "node"
+nodeId     = "rung_renner_tease.base"
+show_when_locked = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "renner_office_open",   operator = "is_true"  },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 0 },
+  { type = "flag",  subject = "player", flag_key = "renner_charged_today", operator = "is_false" },
+] }
+effects = [
+  { targetType = "npc", npcId = "npc_renner", trait = "corruption", op = "add", value = 2 },
+  { targetType = "npc", npcId = "npc_renner", trait = "arousal",    op = "add", value = 3 },
+]
+flagEffects = [
+  { targetType = "player", flag = "renner_charged_today", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Flash him — work commando."
+targetType = "node"
+nodeId     = "rung_renner_flash.base"
+show_when_locked = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "renner_office_open",   operator = "is_true"  },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 4 },
+  { type = "flag",  subject = "player", flag_key = "renner_charged_today", operator = "is_false" },
+] }
+effects = [
+  { targetType = "npc", npcId = "npc_renner", trait = "corruption", op = "add", value = 2 },
+  { targetType = "npc", npcId = "npc_renner", trait = "arousal",    op = "add", value = 4 },
+]
+flagEffects = [
+  { targetType = "player", flag = "renner_charged_today", op = "set" },
+  { targetType = "player", flag = "renner_flirts_back",   op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get your hands on him."
+targetType = "node"
+nodeId     = "rung_renner_grope.base"
+show_when_locked = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "renner_office_open",   operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "renner_flirts_back",   operator = "is_true"  },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 8 },
+  { type = "flag",  subject = "player", flag_key = "renner_charged_today", operator = "is_false" },
+] }
+effects = [
+  { targetType = "npc", npcId = "npc_renner", trait = "corruption", op = "add", value = 2 },
+  { targetType = "npc", npcId = "npc_renner", trait = "arousal",    op = "add", value = 5 },
+]
+flagEffects = [
+  { targetType = "player", flag = "renner_charged_today", op = "set" },
+]
+
+# The loop entry (gated corruption>=16 + renner_oral_once). Resets the 5 loop traits + SETS
+# renner_fucked_once (first time). NOT daily-capped (the loop is the repeatable surface).
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him in the office."
+targetType = "node"
+nodeId     = "loop_renner_office_sex.intro"
+show_when_locked = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "renner_office_open", operator = "is_true" },
+  { type = "flag",  subject = "player", flag_key = "renner_oral_once",   operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 16 },
+] }
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
+flagEffects = [
+  { targetType = "player", flag = "renner_fucked_once", op = "set" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Head out."
+targetType = "location"
+locationId = "the_waterfront"
+
+[[canvases.nodes]]
+id   = "check_in"
+name = "Check in"
+blocks = [
+  { type = "paragraph", content = "She checks in. He grunts something about the manifest and doesn't look up. It's not much — but she lets him not-look, lets him get used to the shape of her in his yard. That's the work under the work." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back to it."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "renner_depot"
+
+# ═══ work_depot_haul — Lane-3 menial work (relation-fast, charge-paced) ════════
+[[canvases]]
+id          = "work_depot_haul"
+name        = "Work the floor"
+description = "Wren-solo Lane-3 host at the depot. Haul/sort/log -> +relation (the access feeder, relation-fast) + light credits; costs Charge (the natural pace -- multi-shift/day, no daily flag). SETS worked_renner_once (cross-read: player glitch I + Mercer first-invasion). Gated renner_hired, sched 09-18."
+
+[canvases.trigger]
+location      = "renner_depot"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "renner_hired", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "09:00"
+end_time   = "18:00"
+
+# Rising Renner walk-ins (substitute on the work roll). 3 disjoint corruption bands, rising
+# chance (lingers-watching -> crowds -> pulls-her-off-the-task). Pattern A first-match: low band first.
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_renner_depot"
+chance           = 0.10
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 8 },
+] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_renner_depot"
+chance           = 0.35
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 8  },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt",  value = 16 },
+] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_renner_depot"
+chance           = 0.70
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 16 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
 name = "Work the floor"
 blocks = [
   { type = "image", props = { file = "activities/renner_menial.jpg" } },
-  { type = "paragraph", content = "She works the floor — hauling, sorting, logging crates against a manifest that hasn't matched reality since Cain came through. It's menial and dull, and her body doesn't tire the way a real one would, so she's better at it than the last three hands he ran off. The pay is thin, a handful of credits counted out grudging at the end of the day. But she does it well, and well is a language even a man this far gone still reads." },
+  { type = "paragraph", content = "She works the floor — hauling, sorting, logging crates against a manifest that hasn't matched reality since Cain came through. It's dull, and her body doesn't tire the way a real one would, so she's better at it than the last three hands he ran off. The pay is thin, counted out grudging. But she does it well, and well is a language even a man this far gone still reads." },
 ]
 
 [canvases.nodes.exit_block]
@@ -743,649 +1365,730 @@ destinationType          = "specific"
 locationId               = "renner_depot"
 time_progression_minutes = 120
 effects = [
-  { targetType = "npc",    npcId = "npc_renner", trait = "relation", op = "add", value = 2  },
+  { targetType = "npc",    npcId = "npc_renner", trait = "relation", op = "add", value = 3   },
   { targetType = "player", trait = "money",  op = "add", value = 8   },
   { targetType = "player", trait = "energy", op = "add", value = -15 },
 ]
+flagEffects = [
+  { targetType = "player", flag = "worked_renner_once", op = "set" },
+]
 
-# ══════════════════════════════════════════════════════════════════
-# Phase: 5_scenes.toml
-# ══════════════════════════════════════════════════════════════════
+# ═══ hub_anchor_renner — Lane-1 evening hub (Lane-2 ambients land at beat_0012) ═
+[[canvases]]
+id          = "hub_anchor_renner"
+name        = "The Anchor"
+description = "Lane-1 portrait hub at the Anchor, evenings. Light off-duty register (sit / leave). Lane-2 witness + cheer-up ambients substitute here at beat_0012. Gated renner_hired."
 
-# Phase 5/7 — 5_scenes.toml
-# Vesper scaffold — the spine quest card (Story Goals = Mission 1).
-# The NPC arc beats (Mercer's hub, Renner's climb) append their canvases + cards here.
-# The card shows from the start until Renner is drained — `when renner_drained is_false`
-# (an is_false guard, exempt from the flag-chain validator; the drain beat sets the flag).
-# The briefing beat can later tighten this to also require mission_1_active.
+[canvases.trigger]
+location      = "the_anchor"
+requires_npc  = "npc_renner"
+npc           = "npc_renner"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "renner_hired", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time   = "23:00"
 
+[[canvases.nodes]]
+id   = "base"
+name = "The Anchor"
+blocks = [
+  { type = "paragraph", content = "Renner's at his end of the bar, working on the evening's ruin. Off the clock he's quieter and worse — less temper, more rot. He tolerates her sitting near him now, which is its own kind of progress." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit with him a while."
+targetType = "node"
+nodeId     = "hub_anchor_renner.sit"
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave."
+targetType = "location"
+locationId = "the_waterfront"
+
+[[canvases.nodes]]
+id   = "sit"
+name = "Sit with him"
+blocks = [
+  { type = "paragraph", content = "She sits. He doesn't talk and doesn't tell her to go. The bartender refills him without being asked. Somewhere in the quiet she files what she sees — the blacklist letters he doesn't hide anymore, the way his hands shake until the second drink — and lets him think it's company." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Head out."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_anchor"
+
+# ═══ beat_0008 — access opens ═════════════════════════════════════════════════
+
+# cap_renner_noticed — relation earns the office (auto-fire, SETS renner_office_open).
+# The engine has no trait->flag primitive; the relation crossing GATES this located setter.
+[[canvases]]
+id          = "cap_renner_noticed"
+name        = "Into the office"
+description = "Auto-fire when npc_renner.relation >= 15 (relation-fast). The cold boss waves her into the back office — the proximity that unlocks the seduction register. SETS renner_office_open."
+
+[canvases.trigger]
+location      = "renner_depot"
+requires_npc  = "npc_renner"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "renner_hired",      operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "renner_office_open", operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "relation", operator = "gte", value = 15 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Into the office"
+blocks = [
+  { type = "paragraph", content = "It takes a week of good work before he stops finding fault just to have something to say to her. Then one grey afternoon he jerks his head at the glassed-in box at the back of the yard — his office — and doesn't quite look at her when he says it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Invoices are three months behind and I can't read my own writing. You'll do them in here. Heater works, door shuts, and I don't have to watch the help breathe." },
+  { type = "paragraph", content = "It's the closest thing to trust a man this gutted has left to give. The door clicks shut behind her, and the public yard with its cameras and its cold becomes, for the length of a workday, a small private room with one wrecked man in it. Everything she's here to do starts now." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get to work."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "renner_depot"
+flagEffects = [
+  { targetType = "player", flag = "renner_office_open", op = "set" },
+]
+
+# rung_renner_tease — TRIGGERLESS (reached from the hub; the hub choice sets corruption +
+# the daily-cap). Reaction-band [group] on npc_renner.corruption: contempt -> caught-looking.
+[[canvases]]
+id          = "rung_renner_tease"
+name        = "Tease him"
+description = "Triggerless seduction rung. Reaction climbs by npc_renner.corruption band (contempt < 4 / caught-looking >= 4). Sets nothing (corruption + daily-cap live on the hub choice)."
+[[canvases.nodes]]
+id   = "base"
+name = "Tease him"
+blocks = [
+  { type = "paragraph", content = "In the office now, the door shut. She works close — leans across him for a file she doesn't need, lets her body say the thing her mouth won't." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 4 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Filing's in the cabinet. Not on my desk." },
+    { type = "paragraph", content = "He doesn't look up. But he moves his chair back an inch, and the inch costs him something." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 4 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "His eyes go to her and snap away, and a muscle works in his jaw." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "...You do that on purpose." },
+    { type = "paragraph", content = "It isn't quite a question, and he doesn't tell her to stop." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back to the invoices."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "renner_depot"
+
+# rung_renner_flash — TRIGGERLESS. Bands: caught < 8 / reluctant-wants >= 8.
+[[canvases]]
+id          = "rung_renner_flash"
+name        = "Flash him"
+description = "Triggerless seduction rung (commando). Reaction band: looks-then-shuts-it-down < 8 / openly-rattled >= 8."
+[[canvases.nodes]]
+id   = "base"
+name = "Flash him"
+blocks = [
+  { type = "paragraph", content = "She's wearing nothing under the coveralls today, and she makes sure the moment comes where he can't not see it — bending slow for a low crate while he's looking." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 8 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He looks. He looks longer than a man pretending not to. Then he turns hard to the window." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Get back to work." },
+    { type = "paragraph", content = "His voice has gone rough. He doesn't mean the window." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 8 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Christ. Come here." },
+    { type = "paragraph", content = "He says it low, half to himself, and doesn't finish the order — doesn't know what he'd do with her if she came. The wanting's ahead of the nerve. But it's there now, plain, and they both felt it land." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back to the invoices."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "renner_depot"
+
+# rung_renner_grope — TRIGGERLESS. Bands: still-fights-it < 12 / lets-her-take-him >= 12.
+[[canvases]]
+id          = "rung_renner_grope"
+name        = "Get your hands on him"
+description = "Triggerless seduction rung (contact). Reaction band: catches-himself < 12 / lets-her >= 12. Gated renner_flirts_back on the hub choice."
+[[canvases.nodes]]
+id   = "base"
+name = "Get your hands on him"
+blocks = [
+  { type = "paragraph", content = "She stops pretending the contact is accidental — a hand on his thigh while he signs something, sliding up, letting him feel that she means it." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 12 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He goes still. The pen stops. For a second the gutted business and the blacklist and the drinking are gone and there's just her hand and his breathing." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "...don't stop." },
+    { type = "paragraph", content = "Then he catches himself and pulls back, and hates that he had to." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 12 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He doesn't pretend anymore. He covers her hand with his and presses it harder against him, his head going back, the cold boss just a man in a chair letting the help take him apart." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Whatever this is. Don't — don't stop doing it." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back to the invoices."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "renner_depot"
+
+# ═══ beat_0009 — first blowjob (capstone) + morning-after A (the ratchet) ══════
+
+# cap_renner_blowjob — auto-fire once corruption + flirts_back are met. She initiates.
+# SETS renner_oral_once (opens the loop's oral pose at beat_0010 + arms the morning-after).
+[[canvases]]
+id          = "cap_renner_blowjob"
+name        = "Her mouth"
+description = "Auto-fire capstone (first explicit rung — she initiates). Gated renner_office_open + renner_flirts_back + npc_renner.corruption>=12. SETS renner_oral_once. Tier-3."
+
+[canvases.trigger]
+location      = "renner_depot"
+requires_npc  = "npc_renner"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "renner_office_open", operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "renner_flirts_back", operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "renner_oral_once",   operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 12 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Her mouth"
+blocks = [
+  { type = "image", props = { file = "sex/renner_blowjob.jpg" } },
+  { type = "paragraph", content = "His wanting runs ahead of him all day now. She picks the afternoon — the door shut, the yard empty, his hands shaking around a pen that isn't writing anything. She crosses to him and goes down on her knees in front of the chair, and for once he doesn't pretend he doesn't know what's happening." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "Take him out.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "...you don't have to." },
+        { type = "paragraph", content = "It's the first kind thing he's said to her, and it's a lie, and they both let it be one. She takes his cock out and takes him in her mouth, and the cold boss makes a sound like something giving way under load." },
+    ] },
+    { advance_text = "Work him.", blocks = [
+        { type = "paragraph", content = "She works him slow, the way she's learned men like him want it — not skilled exactly, but devoted, like he's the only thing in the room worth her mouth. He finishes with his fist in her hair and the false name she's working under coming out of him broken in half. She swallows, and files the shape of what just cracked in him under progress, where she files everything." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Wipe your mouth, get back to work."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "renner_depot"
+flagEffects = [
+  { targetType = "player", flag = "renner_oral_once", op = "set" },
+]
+
+# ma_renner_blowjob — auto-fire the NEXT day. The corruption RATCHET (escalation, not flavor).
+[[canvases]]
+id          = "ma_renner_blowjob"
+name        = "Did you like it"
+description = "Auto-fire morning-after (next day after the blowjob). 'Did you like it, or not' -- the surrender in having to answer. BUMPS npc_renner.corruption (the ratchet). SETS ma_blowjob_seen."
+
+[canvases.trigger]
+location      = "renner_depot"
+requires_npc  = "npc_renner"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "renner_oral_once", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "ma_blowjob_seen",  operator = "is_false" },
+  { type = "days_since_flag", subject = "player", flag_key = "renner_oral_once", operator = "gte", value = 1 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Did you like it"
+blocks = [
+  { type = "paragraph", content = "Next afternoon, the office, like nothing happened — except she won't let it be like nothing happened. She waits until he's mid-sentence about a shipment, then asks him level, watching his face:" },
+  { type = "dialog", props = { speaker = "player" }, content = "Did you like it. Yesterday. Or not." },
+  { type = "paragraph", content = "He can't get out of it. She watches him try — the bluster, the deflection, the reach for the cold he used to have — and watches all of it fail, because the answer's already on him, plain. \"You know I did,\" he says at last, like it's dragged out of him. And that's the thing she came for: not the yes, the surrender in having to say it. He's further in than he was, and he can feel it too." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave it sitting on him."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "renner_depot"
+effects = [
+  { targetType = "npc", npcId = "npc_renner", trait = "corruption", op = "add", value = 3 },
+]
+flagEffects = [
+  { targetType = "player", flag = "ma_blowjob_seen", op = "set" },
+]
+
+# ═══ beat_0010 — the sex loop (triggerless; reset on the hub entry rung + finisher exit) ══
+# Poses oral(0)/vaginal(1)/doggy-anal(2). The doggy pose-switch is gated renner_anal_once
+# (only after the scripted first anal = cap_renner_anal_drain). The ass finish routes to the
+# control canvas (the repeatable drain); facial/inside just end. NO flags set in the loop.
+[[canvases]]
+id          = "loop_renner_office_sex"
+name        = "Take him"
+description = "Triggerless Renner sex loop. oral/vaginal/doggy(anal gated renner_anal_once). climax-elect pleasure>=50. Reached from the hub 'Take him in the office' rung (which resets traits + SETS renner_fucked_once)."
+
+[[canvases.nodes]]
+id   = "intro"
+name = "Take him"
+blocks = [
+  { type = "image", props = { file = "sex/renner_loop.jpg" } },
+  { type = "paragraph", content = "She locks the office door. He's already reaching for her — the cold boss gone, just a wrecked man who's spent all day waiting for the help to come and take him apart." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Get on your knees."
+targetType = "node"
+nodeId     = "base_oral_r"
+
+# Pose: oral (sex_stage 0)
+[[canvases.nodes]]
+id   = "base_oral_r"
+name = "On your knees"
+blocks = [
+  { type = "paragraph", content = "On her knees between the chair and the desk, his cock in her mouth, his hand gentler in her hair than Mercer's hand has ever been. Renner holds on like he's afraid she'll stop." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep sucking his cock."
+targetType = "node"
+nodeId     = "base_oral_r"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Climb on his cock."
+targetType = "node"
+nodeId     = "base_vaginal_r"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish in your mouth."
+targetType = "node"
+nodeId     = "loop_renner_finisher.climax"
+show_when_locked = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false } ]
+
+# Pose: vaginal (sex_stage 1)
+[[canvases.nodes]]
+id   = "base_vaginal_r"
+name = "Ride him"
+blocks = [
+  { type = "paragraph", content = "She rides him in the office chair, slow, watching the last of his composure go. He says things he'll be ashamed of — please, and the false name she works under, and don't stop, don't ever stop." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him."
+targetType = "node"
+nodeId     = "base_vaginal_r"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Back down on his cock."
+targetType = "node"
+nodeId     = "base_oral_r"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 0, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Turn around — give him your ass."
+targetType = "node"
+nodeId     = "base_doggy_r"
+show_when_locked = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "renner_anal_once", operator = "is_true" },
+] }
+effects = [
+  { targetType = "player", trait = "sex_stage",   op = "set", value = 2, clamp = false },
+  { targetType = "player", trait = "anal_active", op = "set", value = 1, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish inside you."
+targetType = "node"
+nodeId     = "loop_renner_finisher.climax"
+show_when_locked = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 1, clamp = false } ]
+
+# Pose: doggy / anal (sex_stage 2) — the drain pose, gated renner_anal_once
+[[canvases.nodes]]
+id   = "base_doggy_r"
+name = "Give him your ass"
+blocks = [
+  { type = "paragraph", content = "Bent over his own desk, his cock in her ass, his hands shaking on her hips. This is the act that hands her the keys — and now that she's turned it on him once, she can take them again whenever she likes." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Take it in the ass."
+targetType = "node"
+nodeId     = "base_doggy_r"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Back on his cock."
+targetType = "node"
+nodeId     = "base_vaginal_r"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish in your ass."
+targetType = "node"
+nodeId     = "loop_renner_finisher.climax"
+show_when_locked = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+  { type = "trait", subject = "player", trait_key = "anal_active",       operator = "gte", value = 1  },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 2, clamp = false } ]
+
+# ═══ loop_renner_finisher — facial/inside END; ass -> the drain (control canvas) ══════════
+[[canvases]]
+id          = "loop_renner_finisher"
+name        = "He finishes"
+description = "Triggerless finisher. [group] by sex_finisher_type. facial(0)/inside(1) reset+exit to depot. ass(2) resets + routes to renner_control_canvas (the repeatable drain)."
+[[canvases.nodes]]
+id   = "climax"
+name = "He finishes"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He finishes on her face with a groan that's half a sob, one hand cradling the back of her head like she's something he can't believe he's allowed. He'd give her anything right now. He doesn't know yet how much that's going to cost him." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He finishes inside her, holding her down on him, shaking. For a moment after he just breathes into her shoulder, wrecked and grateful, and she lets him have the moment because letting him have it is how she keeps him." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He finishes in her ass — and this time she feels it start: the give, the opening, the controls sliding warm into her hand. The same act that hands her nothing with Mercer hands her everything with him." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Straighten up."
+targetType = "location"
+locationId = "renner_depot"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "lt", value = 2 },
+] }
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the keys."
+targetType = "node"
+nodeId     = "renner_control_canvas.intro"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
+] }
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
+
+# ═══ beat_0011 — the WEAPON ═══════════════════════════════════════════════════
+# cap_renner_anal_drain — the FIRST anal (scripted commando-shove). Auto-fire once
+# renner_fucked_once + corruption>=20. Routes INTO the control canvas. The LOCATED setter for
+# the drain flags (a triggerless canvas can't credit a flag-set).
+[[canvases]]
+id          = "cap_renner_anal_drain"
+name        = "The keys"
+description = "Auto-fire capstone — the weapon's FIRST fire (the commando-shove). Routes into renner_control_canvas. SETS renner_drained + renner_leads_extracted + renner_anal_once. Gated renner_fucked_once + corruption>=20."
+
+[canvases.trigger]
+location      = "renner_depot"
+requires_npc  = "npc_renner"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "renner_fucked_once", operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "renner_drained",     operator = "is_false" },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 20 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The keys"
+blocks = [
+  { type = "image", props = { file = "sex/renner_anal.jpg" } },
+  { type = "paragraph", content = "She comes in commando and lets him find out halfway through the afternoon, and by the time the light's gone amber he has her bent over the desk with both hands on her hips, past asking, past the cold, taking the one thing he hasn't had yet because she let him think it was his idea." },
+  { type = "paragraph", content = "He spends himself in her ass with his forehead pressed between her shoulder blades — and the fluid goes into him on the same beat, and she feels the lock turn. The first one. The keys, warm in her hand. She straightens up slowly and turns around, and the wrecked, grateful, dangerous man in the chair looks up at her with eyes that have just gone flat and open and entirely hers." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Use them."
+targetType = "node"
+nodeId     = "renner_control_canvas.intro"
+flagEffects = [
+  { targetType = "player", flag = "renner_drained",         op = "set" },
+  { targetType = "player", flag = "renner_leads_extracted", op = "set" },
+  { targetType = "player", flag = "renner_anal_once",       op = "set" },
+]
+
+# renner_control_canvas — the drain payload. TRIGGERLESS, NO flags (set on the capstone).
+# Voice carriage: the extraction is PLAYED as Q&A in HIS dialog, not narrated summary.
+[[canvases]]
+id          = "renner_control_canvas"
+name        = "The drain"
+description = "The control canvas (the reusable pattern's first build). Reached from cap_renner_anal_drain (first) + the loop's ass finish (repeat). The mission payload as Q&A in HIS dialog. Sets NO flags (triggerless). Exit -> renner_depot; ~10 min pass, he remembers nothing."
+
+[[canvases.nodes]]
+id   = "intro"
+name = "The drain"
+blocks = [
+  { type = "paragraph", content = "He'll answer anything now, and remember none of it. She crouches to his eye level and asks, quiet, the way you'd read a meter." },
+  { type = "cascade", props = { beats = [
+    { advance_text = "What did the gear build?", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "The gear you sold Vance. What did it build?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Containment. Restraint rigs, suppression fields, a wet lab built to hold things that aren't supposed to be holdable. I didn't ask what. They paid on time and I had a business to save." },
+    ] },
+    { advance_text = "What did Cain take?", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "When Cain hit the facility. What did he take?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Nothing. He freed it. Whatever they were holding in there, he let it out before he burned the place. The manifests after didn't add up — they were short bodies that weren't bodies. He wasn't robbing them. He was emptying a cage." },
+        { type = "paragraph", content = "She files it somewhere the cradle can't reach. The monster she's sent to kill broke into the worst place these people built and let the prisoners walk out. It doesn't fit the briefing. Nothing about him fits the briefing, and the not-fitting is starting to have a shape." },
+    ] },
+    { advance_text = "Where did he go?", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Who would know where he went?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Suppliers talk. There's a dealer on the docks — Bastien — moves the kind of gear Cain runs on. And a Vance man, Calloway, runs the hunt from the inside; he'd have the files. That's all I... that's all I have." },
+    ] },
+    { advance_text = "Tell him to forget.", blocks = [
+        { type = "paragraph", content = "She tells him to forget, and he will. In a few minutes he'll surface blinking, his cock going soft and no memory of the last ten, certain only that the new hire is very good and he should keep her close. She fixes her clothes while the man who just handed her everything stares at nothing." },
+    ] },
+  ] } },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave him to come back to himself."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "renner_depot"
+
+# ═══ beat_0012 — the texture ══════════════════════════════════════════════════
+
+# walkin_renner_depot — RISING walk-ins (substitution target of work_depot_haul). One canvas,
+# [group]-banded by corruption to match the 3 substitution bands. substitution_only.
+[[canvases]]
+id          = "walkin_renner_depot"
+name        = "He comes over"
+description = "Substitution-only walk-in (target of work_depot_haul's 3 rising bands). Reaction escalates by npc_renner.corruption: lingers-watching < 8 / crowds-her 8-16 / pulls-her-off-the-task >= 16. Pure texture."
+
+[canvases.trigger]
+location             = "renner_depot"
+requires_npc         = "npc_renner"
+substitution_only    = true
+max_triggers_per_day = 1
+is_repeatable        = true
+is_active            = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "He comes over"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 8 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She's halfway up a ladder with a crate when she feels it — Renner, stopped at the bottom, not pretending to check a manifest, just watching her work. He looks away when she looks down. But he was watching, and now they both know he was." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 8  },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt",  value = 16 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He finds reasons to be where she is — stands too close at the racks, hands her tools she didn't ask for, lets the backs of his fingers find her arm. \"You're good at this,\" he says, like it costs him, and doesn't move away when he's said it." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 16 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He doesn't bother with the pretext anymore. He takes the crate out of her hands, sets it down, and backs her into the shelving with his whole ruined weight against her. \"Leave it,\" he says against her neck. \"The invoices can wait. Come in the back.\"" },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "..."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "renner_depot"
+
+# amb_renner_anchor_ruin — Lane-2 witness texture (random ambient at the Anchor). His guilt,
+# tiered by corruption. The seduction never processes it; the player sees the rot.
+[[canvases]]
+id          = "amb_renner_anchor_ruin"
+name        = "The ruin under the boss"
+description = "Lane-2 random ambient at the Anchor (evenings). Witness texture, tiered [group] by npc_renner.corruption. Pure texture (sets nothing)."
+
+[canvases.trigger]
+location             = "the_anchor"
+requires_npc         = "npc_renner"
+trigger_mode         = "random"
+chance               = 0.25
+max_triggers_per_day = 1
+is_repeatable        = true
+is_active            = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "renner_hired", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time   = "23:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The ruin under the boss"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 8 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Two stools down he's telling the bartender a story about the depot before Cain — when it was something, when he was something. The bartender's heard it. So has she. Renner doesn't notice either of them stopped listening a while ago." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 8  },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt",  value = 16 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "There's a letter on the bar in front of him tonight he keeps not reading — blacklist stationery, the third this month. He drinks around it. When he catches her looking he turns it face-down, too late, and orders another." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 16 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He's further gone tonight than she's seen him — talking too much, too loud, the rot all the way to the surface. What they made him part of. What burned. What he signed for and told himself he didn't understand. He won't remember saying any of it tomorrow. She'll remember all of it. It's the guilt the seduction never has to touch." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let him drink."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_anchor"
+
+# amb_renner_cheerup — Lane-2 cheer-up sex (random ambient at the Anchor). Scaled by spine
+# flags. Corruption floor (gte 4) so it can't surface the instant the office opens.
+[[canvases]]
+id          = "amb_renner_cheerup"
+name        = "Cheer him up"
+description = "Lane-2 random ambient at the Anchor. Walk in on him wrecked -> sex-as-comfort, SCALED by spine flags ([group]: tease pre-oral / blow him post-oral / take it post-anal). The one real thing she has, deployed not felt. Gated renner_office_open + corruption floor."
+
+[canvases.trigger]
+location             = "the_anchor"
+requires_npc         = "npc_renner"
+trigger_mode         = "random"
+chance               = 0.20
+max_triggers_per_day = 1
+is_repeatable        = true
+is_active            = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "renner_office_open", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 4 },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time   = "23:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Cheer him up"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "renner_anal_once", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He's wrecked tonight, and she does the thing that works. She gets him out of the bar and into the dark behind it and gives him whatever he needs — on her knees on the filthy concrete, or bent over a crate, the cold boss falling apart and the help putting him back together with her mouth and her ass. It's the one real thing she has, and she spends it on him like it's nothing, because it is." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "renner_oral_once", operator = "is_true"  },
+      { type = "flag", subject = "player", flag_key = "renner_anal_once", operator = "is_false" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He's low tonight. She slips off the stool and into the dark beside the cigarette machine and takes his cock in her mouth right there, fast and devoted, the bartender pointedly not looking. He comes with his hand in her hair saying her work-name like a man saying his prayers wrong." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "renner_oral_once", operator = "is_false" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He's low tonight — too low to do anything but sit in it. She sits closer than she needs to, lets her thigh press his, lets her hand rest high on his leg where the wanting has somewhere to go. It's not much. But it makes the worst of the night about her instead of about the wreck of his life, and that's the seed of everything that comes after." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave him steadier."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_anchor"
+
+# ═══ beat_0014 — the Mission-1 quest card + the frontier-seed card ═════════════
+
+# Spine — Mission 1 (Renner). Story Goals on Renner's own meters (relation = the office,
+# corruption = the drain). Shows while mission_1_active && !renner_drained.
 [[quest_cards]]
-text     = "Get close to Renner. Cain gutted his business and now he's broke, blacklisted, and hiring cheap hands to rebuild his depot in the Reach — that's the way in. Work it, earn the office, break him, drain him."
-tip      = "Renner's at the depot days (9 to 6), the Anchor evenings. Earn his trust, then his bed — the drain does the rest."
-priority = 10
+priority   = 10
+text       = "Mission 1: Renner. The quartermaster who outfitted the facility Cain burned. Get inside his life and drain him for what he knows — what the gear built, where the trail goes. The company wants the rogue dead. She wants the way in."
+ready_text = "Renner's drained. The trail points onward — and the briefing is starting not to fit what she's finding."
+tip        = "Work his depot to earn the office (his trust). Break the cold boss until he beds you (his want). Take it in the ass when he finishes — that's when the weapon fires and he gives up everything."
 when = [
   { flag = "mission_1_active", op = "is_true"  },
   { flag = "renner_drained",   op = "is_false" },
 ]
 goals = [
-  { trait = "relation",   subject = "npc", npc_id = "npc_renner", op = "gte", value = 10, label = "Renner Trust" },
-  { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 10, label = "Renner Corruption" },
+  { trait = "relation",   subject = "npc", npc_id = "npc_renner", op = "gte", value = 15, label = "Earn the office" },
+  { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 20, label = "Break him to the drain" },
 ]
 
-# ═════════════════════════════════════════════════════════════════════════════
-# MERCER — the inside loop (owned slave / unchanging owner). Lane 1 hub + the
-# his-POV use-scene (NO control-canvas — he's IMMUNE: the weapon bolts onto
-# TARGETS only, and his immunity is shown + planted as the mystery) + the summons.
-# Voice: clipped, calm, proprietary, PURE COLD — he calls her his investment/asset.
-# Mercer does NOT change across Phase 1 (no rungs, no relation/corruption gate).
-# ═════════════════════════════════════════════════════════════════════════════
-
-# ── Lane 1 — the penthouse hub (fixed menu, one constant opener — NOT tiered) ──
-[[canvases]]
-id          = "mercer_penthouse_hub"
-name        = "The Penthouse — Mercer"
-description = "Lane 1 hub. Mercer at the penthouse, 08:00–23:00. UNCHANGING — fixed menu (serve / leave), no escalation rungs (he owns her; she serves, he never climbs). His cold proprietary voice."
-
-[canvases.trigger]
-location      = "penthouse"
-requires_npc  = "npc_mercer"
-is_repeatable = true
-priority      = 8
-is_active     = true
-npc           = "npc_mercer"
-[[canvases.trigger.schedules]]
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "08:00"
-end_time   = "23:00"
-
-[[canvases.nodes]]
-id   = "base"
-name = "The Penthouse — Mercer"
-blocks = [
-  { type = "image", props = { file = "scenes/mercer_penthouse_hub.jpg" } },
-  { type = "paragraph", content = "Mercer's penthouse. He's at the glass with his back to the door, the city laid out under him, a drink on the sill he isn't drinking. He knows it's her without turning — he always knows. To him she's furniture that works: the investment, the asset, a line the Chairman's money keeps on the books. She waits to be used or dismissed." },
+# Frontier seed — the leads (telegraphed locked-visible). Shows after the drain; the goal is
+# the_site, which never unlocks in this chunk (needs all three missions' leads).
+[[quest_cards]]
+priority   = 9
+text       = "Renner gave up two names before he forgot he'd said them: Bastien, a dealer on the docks, and Calloway, the company man running the hunt. The trail forks from here — but neither door is open to her yet, and the Site where Cain went stays dark until the leads run all the way down."
+ready_text = "The way to the Site is open."
+tip        = "Bastien and Calloway are Act-2 work. For now, the leads are logged and the Site stays locked."
+when = [
+  { flag = "renner_leads_extracted", op = "is_true" },
+  { flag = "the_site_open",          op = "is_false" },
 ]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Kneel and serve him."
-targetType               = "node"
-nodeId                   = "mercer_serve.intro"
-time_progression_minutes = 0
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Leave."
-targetType               = "location"
-locationId               = "atrium"
-time_progression_minutes = 5
-
-# ── The use-scene (his-POV, repeatable, explicit). IMMUNE — no drain. ──────────
-[[canvases]]
-id          = "mercer_serve"
-name        = "Serving Mercer"
-description = "Mercer's repeatable use-scene — his-POV 'he uses you', cold and proprietary. The weapon does NOT fire (he's immune; the nothing is shown + the mystery planted: she never lets herself wonder why). Triggerless — reached only via the hub's serve rung."
-# NO [canvases.trigger] — sub-menu only (reached via nodeId).
-
-[[canvases.nodes]]
-id   = "intro"
-name = "Serving Mercer"
-blocks = [
-  { type = "image", props = { file = "sex/mercer_serve.jpg" } },
-  { type = "paragraph", content = "She crosses to him and goes to her knees on the cold floor without being told, because that's the shape of it between them and has been since the beginning." },
-  { type = "cascade", props = { beats = [
-    { advance_text = "Open your mouth.", blocks = [
-        { type = "paragraph", content = "He turns, unzips, takes a fistful of her hair and feeds his cock into her mouth the way a man does a thing he's done a thousand times — because he has. He uses her throat at his own pace, not cruel, not kind, not anything. She takes it. Her body, traitor that it is, warms to it anyway, the one wire they left live." },
-    ] },
-    { advance_text = "Let him have you.", blocks = [
-        { type = "paragraph", content = "When he's bored of her mouth he stands her up and bends her over the desk and fucks her without ceremony, one flat hand on the back of her neck, his eyes off somewhere on the skyline. She comes — of course she comes, she always comes, it's the only thing in her that still works — and he doesn't notice, or doesn't count it." },
-    ] },
-    { advance_text = "Feel him finish.", blocks = [
-        { type = "paragraph", content = "He finishes inside her with a low breath and holds there, spent. And she waits for the gift to open the way it opens in every other man — the click, the door swinging wide, his will spread out for her to walk through and take. Nothing. The same nothing as always. He's the one man alive she cannot take, and she has never once let herself ask why. He pulls out, tucks himself away, already done with her." },
-        { type = "thought_bubble", props = { speaker = "player" }, content = "Nothing. There's never anything in him. Don't wonder. Wondering isn't in the litany." },
-    ] },
-  ] } },
+goals = [
+  { flag = "the_site_open", subject = "player", op = "is_true", label = "Find where Cain went (locked — the trail isn't complete)" },
 ]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Straighten up."
-targetType               = "location"
-locationId               = "penthouse"
-time_progression_minutes = 20
-
-# ── The summons (Lane 3 — he pulls her off her downtime at the cradle) ─────────
-[[canvases]]
-id          = "mercer_summons"
-name        = "Summoned"
-description = "Lane 3 walk-in (random ambient at the cradle, after the opening). Mercer summons her off her downtime — flat, routine, no escalation. Routes her to the penthouse."
-
-[canvases.trigger]
-location      = "cradle"
-is_repeatable = true
-priority      = 5
-is_active     = true
-trigger_mode  = "random"
-chance        = 0.4
-conditions = { version = "1.0", items = [
-  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
-] }
-
-[[canvases.nodes]]
-id   = "base"
-name = "Summoned"
-blocks = [
-  { type = "paragraph", content = "Her phone buzzes against the cradle housing. One word from Mercer, no greeting: Up. He wants her in the penthouse. Whether she wants to go isn't a weight she was built to set against being wanted — she's already moving before the thought finishes." },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Go to him."
-targetType               = "location"
-locationId               = "penthouse"
-time_progression_minutes = 10
-
-# ═════════════════════════════════════════════════════════════════════════════
-# RENNER — Lane 1 depot hub (the work register). Gated renner_hired. His cold-boss
-# voice, contempt at the bottom of the climb. The seduction rungs (tease/flash/
-# office/blowjob) escalate by REACTION and are added in the seduction increment;
-# 8a ships the check-in (relation flavor) + back-to-work. The menial-work activity
-# (the real relation grind + light credits) is a separate solo-link at the depot.
-# ═════════════════════════════════════════════════════════════════════════════
-
-[[canvases]]
-id          = "renner_depot_hub"
-name        = "The Depot — Renner"
-description = "Lane 1 hub. Renner on the depot floor 09:00–18:00, gated renner_hired. Cold-boss register. 8a menu: check in + back to work (the climb rungs added next increment)."
-
-[canvases.trigger]
-location      = "renner_depot"
-requires_npc  = "npc_renner"
-is_repeatable = true
-priority      = 8
-is_active     = true
-npc           = "npc_renner"
-conditions = { version = "1.0", items = [
-  { type = "flag", subject = "player", flag_key = "renner_hired", operator = "is_true" },
-] }
-[[canvases.trigger.schedules]]
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "09:00"
-end_time   = "18:00"
-
-[[canvases.nodes]]
-id   = "base"
-name = "The Depot — Renner"
-blocks = [
-  { type = "image", props = { file = "scenes/renner_depot_hub.jpg" } },
-  { type = "paragraph", content = "Renner's depot by day: half-empty racks, crates Cain's crew didn't bother hauling off, the dead forklift in the corner. Renner's out on the floor with a clipboard and a hangover, running what's left of a business like he's furious at it. He gives orders without looking up. To him she's a pair of hands he's renting by the hour, and cheap." },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Check in with him."
-targetType               = "node"
-nodeId                   = "renner_depot_hub.node_talk"
-time_progression_minutes = 5
-conditions = { version = "1.0", items = [
-  { type = "flag", subject = "player", flag_key = "talked_renner_today", operator = "is_false" },
-] }
-flagEffects = [
-  { targetType = "player", flag = "talked_renner_today", op = "set" },
-]
-effects = [
-  { targetType = "npc", npcId = "npc_renner", trait = "relation", op = "add", value = 1 },
-]
-
-[[canvases.nodes.exit_block.choices]]
-text                  = "Tease him."
-targetType            = "node"
-nodeId                = "renner_tease.base"
-show_when_locked      = true
-locked_text_threshold = "Renner's trust: 6+"
-conditions = { version = "1.0", items = [
-  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "relation", operator = "gte", value = 6 },
-] }
-
-[[canvases.nodes.exit_block.choices]]
-text                  = "Flash him."
-targetType            = "node"
-nodeId                = "renner_flash.base"
-show_when_locked      = true
-locked_text_threshold = "Renner's trust: 8+ and he's cracking"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "relation",   operator = "gte", value = 8 },
-  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 6 },
-] }
-
-[[canvases.nodes.exit_block.choices]]
-text                  = "Go down on him."
-targetType            = "node"
-nodeId                = "renner_blowjob.base"
-show_when_locked      = true
-locked_text_threshold = "Renner's trust: 10+ and corruption: 15+"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "npc",    npc_id = "npc_renner", trait_key = "relation",   operator = "gte",     value = 10 },
-  { type = "trait", subject = "npc",    npc_id = "npc_renner", trait_key = "corruption", operator = "gte",     value = 15 },
-  { type = "flag",  subject = "player", flag_key = "renner_blowjob_done",                operator = "is_false"            },
-] }
-flagEffects = [
-  { targetType = "player", flag = "renner_blowjob_done", op = "set" },
-]
-
-[[canvases.nodes.exit_block.choices]]
-text                  = "Take him in the office."
-targetType            = "node"
-nodeId                = "renner_sex_loop.intro"
-show_when_locked      = true
-locked_text_threshold = "After the first time"
-conditions = { version = "1.0", items = [
-  { type = "flag", subject = "player", flag_key = "renner_blowjob_done", operator = "is_true" },
-] }
-effects = [
-  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0 },
-  { targetType = "player", trait = "sex_stage",         op = "set", value = 0 },
-  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0 },
-  { targetType = "player", trait = "anal_active",       op = "set", value = 0 },
-]
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Get back to work."
-targetType               = "location"
-locationId               = "renner_depot"
-time_progression_minutes = 0
-
-[[canvases.nodes]]
-id   = "node_talk"
-name = "The Depot — Renner"
-blocks = [
-  { type = "paragraph", content = "She finds him by the loading door, marking a crate that isn't going anywhere. She asks what he needs. He doesn't look up from the clipboard." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "What I need is for Cain to hand me back four years. Short of that — those pallets, sorted, against the wall. And quit hovering. I'm not paying you to breathe at me." },
-  { type = "paragraph", content = "She goes and does it, exactly and well. He doesn't say thanks. But the next order comes a degree less sharp than the last one. She files that away. It's the only ledger that matters." },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Back to it."
-targetType               = "location"
-locationId               = "renner_depot"
-time_progression_minutes = 0
-
-# ── Tease (repeatable Lane 1 rung) — builds his corruption; reaction TIERS ─────
-# His register escalates by REACTION, not by rewriting an opener: contempt (corr<5)
-# -> caught-looking (5–11) -> flirts back (12+). Each play raises npc_renner.corruption.
-[[canvases]]
-id          = "renner_tease"
-name        = "Teasing Renner"
-description = "Lane 1 seduction rung (repeatable). She teases; Renner's reaction tiers on his corruption (contempt -> caught-looking -> flirts back) via group blocks. Raises his corruption. Triggerless — reached from the depot hub."
-
-[[canvases.nodes]]
-id   = "base"
-name = "Teasing Renner"
-blocks = [
-  { type = "paragraph", content = "She finds a reason to lean across his desk for the far clipboard — slow, the coverall gapping at the collar — and lets her eyes hold his a half-second past any reason to." },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 5 },
-    ] }, blocks = [
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Eyes on the work. I didn't hire decoration, I hired hands — so use them, or don't bother coming in." },
-    { type = "paragraph", content = "He takes the clipboard out of her hand and drops it on the far side of the desk, where she'll have to come around for it. Pure contempt. She files it and goes around." },
-  ] } },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 5 },
-      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt",  value = 12 },
-    ] }, blocks = [
-    { type = "paragraph", content = "His eyes drop to the gap before he can stop them — and he knows she caught it, and it makes him angry in a way that isn't quite at her. He looks back down at the manifest too hard." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Don't you have somewhere to be." },
-    { type = "paragraph", content = "It isn't a question and it isn't an order. It's a man losing a step and hating it." },
-  ] } },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 12 },
-    ] }, blocks = [
-    { type = "paragraph", content = "This time he doesn't look away. He lets his eyes go down the gap and back up, unhurried, and the thing in his face isn't contempt anymore." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "You do that on purpose." },
-    { type = "paragraph", content = "Not a complaint. She doesn't answer him, which is its own kind of answer, and he knows it." },
-  ] } },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Get back to it."
-targetType               = "location"
-locationId               = "renner_depot"
-time_progression_minutes = 10
-effects = [
-  { targetType = "npc", npcId = "npc_renner", trait = "corruption", op = "add", value = 3 },
-]
-
-# ── Flash (Lane 1 rung, gated higher) — commando; builds more corruption ───────
-[[canvases]]
-id          = "renner_flash"
-name        = "Flashing Renner"
-description = "Lane 1 seduction rung (repeatable, gated higher than tease). She works commando and gives him the view. Reaction tiers (rattled -> open want). Raises his corruption. Triggerless."
-
-[[canvases.nodes]]
-id   = "base"
-name = "Flashing Renner"
-blocks = [
-  { type = "paragraph", content = "She's been working with nothing under the coverall for a week. When she bends to the bottom rack in front of his office window she takes her time about it, and the coverall does the rest." },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 16 },
-    ] }, blocks = [
-    { type = "paragraph", content = "Through the glass she watches him go still over the desk. He doesn't call her on it. He doesn't look away fast enough, either. When she straightens, he's become very interested in a drawer that didn't need opening." },
-  ] } },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 16 },
-    ] }, blocks = [
-    { type = "paragraph", content = "He's stopped pretending he isn't watching. When she straightens and turns, he's looking at her dead-on through the glass — and he tips his head a fraction toward the office door, once, before he makes himself go back to the paperwork. The door she's been building toward, held open like it costs him nothing." },
-  ] } },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text                     = "Back to work."
-targetType               = "location"
-locationId               = "renner_depot"
-time_progression_minutes = 10
-effects = [
-  { targetType = "npc", npcId = "npc_renner", trait = "corruption", op = "add", value = 4 },
-]
-
-# ── First blowjob (CAPSTONE — once-only, the first explicit rung; she initiates) ─
-# Gated relation + corruption. Sets renner_blowjob_done -> opens the office sex loop
-# (next increment) + the morning-after. The cold fully cracks here.
-[[canvases]]
-id          = "renner_blowjob"
-name        = "The office — her mouth"
-description = "Renner first-blowjob CAPSTONE (once-only). She catches his hard-on and goes down on him — the first explicit rung, she initiates. Sets renner_blowjob_done. The cold cracks for good. Triggerless — reached from the hub at the relation+corruption gate."
-
-[[canvases.nodes]]
-id   = "base"
-name = "The office — her mouth"
-blocks = [
-  { type = "image", props = { file = "sex/renner_blowjob.jpg" } },
-  { type = "paragraph", content = "She comes into the office with a question she doesn't need answered and finds him at the desk with a hard-on he can't hide and has stopped trying to. He looks at her. She looks at it. The pretense between them goes out of the room, and they both feel it leave." },
-  { type = "cascade", props = { beats = [
-    { advance_text = "Lock the door.", blocks = [
-        { type = "paragraph", content = "She turns the bolt. His breath changes at the sound of it. She crosses to him, sinks to her knees between his, and gets him out of his slacks — thick, flushed, already leaking — and takes him into her mouth without making him ask, because making it easy is the whole craft of her. He swears, low, one hand fisting into her hair." },
-    ] },
-    { advance_text = "Take him apart.", blocks = [
-        { type = "paragraph", content = "She works him slow and filthy, the way that unmakes a man who's spent a year holding himself together with nothing but anger. Somewhere in it he stops being the boss. When he comes it's down her throat with her name — the cheap one, the cover — said like it means something, and she swallows and looks up and lets him watch her do it." },
-    ] },
-    { advance_text = "Let it land.", blocks = [
-        { type = "paragraph", content = "He sits back, wrecked, staring at her like the floor moved under him. She wipes her mouth with the back of her hand. The cold man is gone out of his face. What's left is a man who's going to spend the rest of this needing her — and doesn't know yet that the needing is the trap." },
-        { type = "thought_bubble", props = { speaker = "player" }, content = "There. Now he's mine to take apart." },
-    ] },
-  ] } },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text        = "Get up."
-targetType  = "location"
-locationId  = "renner_office"
-# (renner_blowjob_done is set by the LOCATED hub rung that enters this scene — a
-# triggerless canvas can't be the credited setter for an is_true gate; sex-loop.md.)
-
-# ═════════════════════════════════════════════════════════════════════════════
-# RENNER — THE SEX LOOP (the machine) + THE FINISHER + THE DRAIN (the weapon).
-# Triggerless — reached from the depot hub's routine rung (gated renner_blowjob_done),
-# which resets all loop traits on entry. Poses: foreplay -> vaginal -> anal. The ANAL
-# finish routes to the control canvas (the drain); facial/inside finish normally.
-# Voice: the seduction register (she's breaking him), bare+crude in-loop labels, RTS-flat.
-# ═════════════════════════════════════════════════════════════════════════════
-
-[[canvases]]
-id          = "renner_sex_loop"
-name        = "The office — Renner"
-description = "Renner's repeatable sex loop. Poses foreplay/vaginal/anal; act-results raise loop_npc_pleasure; climax-elect appears at pleasure >= 50 and sets sex_finisher_type. Anal sets anal_active. Triggerless."
-
-[[canvases.nodes]]
-id   = "intro"
-name = "The office — Renner"
-blocks = [
-  { type = "image", props = { file = "sex/renner_loop.jpg" } },
-  { type = "paragraph", content = "The bolt goes home behind her. He's already up out of the chair, already reaching — none of the boss left in him in here, just a man who's stopped being able to last a day without this. She lets him pull her in. This is the routine now. This is where she takes him apart by the inch." },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Get to work on him."
-targetType = "node"
-nodeId     = "renner_sex_loop.base_foreplay"
-
-# ── Pose: foreplay ────────────────────────────────────────────────────────────
-[[canvases.nodes]]
-id   = "base_foreplay"
-name = "The office — Renner"
-blocks = [
-  { type = "paragraph", content = "On her knees again, or his hands shoved up under the coverall — it goes the way it goes, his breath already ragged, her mouth and her hands doing the patient cruel work of making him need it more than he means to." },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Suck his cock."
-targetType = "node"
-nodeId     = "renner_sex_loop.base_foreplay"
-effects = [
-  { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = 15 },
-]
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Climb onto his cock."
-targetType = "node"
-nodeId     = "renner_sex_loop.base_vaginal"
-effects = [
-  { targetType = "player", trait = "sex_stage", op = "set", value = 2 },
-]
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Let him finish on your face."
-targetType = "node"
-nodeId     = "renner_finisher.climax"
-show_when_locked = true
-locked_text_threshold = "Get him close first"
-conditions = { version = "1.0", items = [
-  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
-] }
-effects = [
-  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0 },
-]
-
-# ── Pose: vaginal ─────────────────────────────────────────────────────────────
-[[canvases.nodes]]
-id   = "base_vaginal"
-name = "The office — Renner"
-blocks = [
-  { type = "paragraph", content = "He's got her on the desk, on his lap, bent over the chair — wherever there's purchase. He fucks her like a man making up for a year of having nothing, and her body answers it the way it answers everything, climbing whether she wills it or not. She keeps her head enough to keep him hers." },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Ride him."
-targetType = "node"
-nodeId     = "renner_sex_loop.base_vaginal"
-effects = [
-  { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = 15 },
-]
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Give him your ass."
-targetType = "node"
-nodeId     = "renner_sex_loop.base_anal"
-effects = [
-  { targetType = "player", trait = "sex_stage",   op = "set", value = 3 },
-  { targetType = "player", trait = "anal_active", op = "set", value = 1 },
-]
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Let him cum inside you."
-targetType = "node"
-nodeId     = "renner_finisher.climax"
-show_when_locked = true
-locked_text_threshold = "Get him close first"
-conditions = { version = "1.0", items = [
-  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
-] }
-effects = [
-  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 1 },
-]
-
-# ── Pose: anal (anal_active = 1) — the finish that arms the weapon ─────────────
-[[canvases.nodes]]
-id   = "base_anal"
-name = "The office — Renner"
-blocks = [
-  { type = "paragraph", content = "She's working commando, the way she's worked for weeks, and when she bends over the desk and reaches back to spread herself for him he makes a sound like the last of his discipline tearing. He takes her ass slow and then not slow at all. It's the most degrading thing she lets them do — which is exactly why it's the one that hands her the keys." },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Take it deeper."
-targetType = "node"
-nodeId     = "renner_sex_loop.base_anal"
-effects = [
-  { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = 15 },
-]
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Let him cum in your ass."
-targetType = "node"
-nodeId     = "renner_finisher.climax"
-show_when_locked = true
-locked_text_threshold = "Get him close first"
-conditions = { version = "1.0", items = [
-  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
-] }
-effects = [
-  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 2 },
-]
-
-# ── The finisher (triggerless): group-blocked by finisher_type. Anal -> the drain. ─
-[[canvases]]
-id          = "renner_finisher"
-name        = "The office — Renner, finishing"
-description = "The loop finisher. Renders the finish by sex_finisher_type (0 facial / 1 inside / 2 ass). Facial + inside finish normally (vaginal does NOT fire the weapon). Ass routes to the drain. All loop traits reset on exit. Triggerless."
-
-[[canvases.nodes]]
-id   = "climax"
-name = "The office — Renner, finishing"
-blocks = [
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
-    ] }, blocks = [
-    { type = "paragraph", content = "She takes him in her hand the last stroke and lets him finish on her face, mouth open, looking up at him while he comes apart. He watches her like she's the only thing left that's real. She files the look. It's worth more than the mess." },
-  ] } },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
-    ] }, blocks = [
-    { type = "paragraph", content = "He finishes inside her with her name in his mouth and shakes through it, holding her too tight. She waits, the way she always waits, for the click — for the door to open. Nothing comes. Of course not; he didn't take her the way that opens it. He's wrecked and grateful and still entirely his own. Not yet, then. Soon." },
-  ] } },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
-    ] }, blocks = [
-    { type = "paragraph", content = "He buries himself in her ass and finishes there with a broken sound, both hands locked on her hips. And at the exact moment he spends — deep, where it counts — her body does the one thing it was actually built for." },
-  ] } },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-# Non-anal finish (facial/inside): normal exit, reset loop state. The weapon stayed silent.
-[[canvases.nodes.exit_block.choices]]
-text       = "Straighten up."
-targetType = "location"
-locationId = "renner_office"
-time_progression_minutes = 30
-conditions = { version = "1.0", items = [
-  { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "lt", value = 2 },
-] }
-effects = [
-  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0 },
-  { targetType = "player", trait = "sex_stage",         op = "set", value = 0 },
-  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0 },
-  { targetType = "player", trait = "anal_active",       op = "set", value = 0 },
-]
-
-# Anal finish: the weapon fires -> route to the drain (control canvas). Reset loop state.
-[[canvases.nodes.exit_block.choices]]
-text       = "Feel the door open."
-targetType = "node"
-nodeId     = "renner_drain.intro"
-conditions = { version = "1.0", items = [
-  { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
-] }
-effects = [
-  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0 },
-  { targetType = "player", trait = "sex_stage",         op = "set", value = 0 },
-  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0 },
-  { targetType = "player", trait = "anal_active",       op = "set", value = 0 },
-]
-
-# ═════════════════════════════════════════════════════════════════════════════
-# THE DRAIN — the control canvas (the weapon's payoff). Anal-creampie only.
-# She passes the fluid, takes full control ~10 fiction-minutes, drains the Mission-1
-# payload, commands him to forget; he wakes clean. Sets renner_drained (the lead-flag;
-# the downstream unlock of Bastien/Calloway is DEFERRED) + the first crack in "evil rogue".
-# ═════════════════════════════════════════════════════════════════════════════
-
-[[canvases]]
-id          = "renner_drain"
-name        = "Control"
-description = "The control canvas / the drain (the weapon). Reached ONLY from the anal finisher. She takes control, extracts the Mission-1 payload (what the gear did + what Cain really did = the first crack + the supply lead), commands him to forget. Sets renner_drained. Triggerless."
-
-[[canvases.nodes]]
-id   = "intro"
-name = "Control"
-blocks = [
-  { type = "image", props = { file = "scenes/renner_drain.jpg" } },
-  { type = "paragraph", content = "The fluid passes from her into him on the last pulse of his climax, and the world goes quiet and slow and entirely hers. The click. The door in him swings wide. Renner — slumped over her back, spent, breathing hard — is suddenly a room she can walk through and read off the walls. There's no clock in here. There's as much time as she needs." },
-  { type = "cascade", props = { beats = [
-    { advance_text = "Go in.", blocks = [
-        { type = "paragraph", content = "She asks, and he answers, because in here he can't not. The gear he supplied — restraint rigs, containment, things he told himself were for a private security contract. The facility it furnished. What it was for. He never let himself know, and now she knows it through him, and it's worse than he let himself imagine." },
-    ] },
-    { advance_text = "Pull the thread.", blocks = [
-        { type = "paragraph", content = "And Cain. What Cain actually did the night the place burned. Not a slaughter — the opposite. He came for what was kept in those rigs and he got it out and then he torched the evidence of what it had been. The trail he left runs through the docks, through a dealer named Bastien. She takes all of it, clean." },
-        { type = "thought_bubble", props = { speaker = "player" }, content = "The briefing said monster. The wreck in my hands says the man set people loose. Those don't fit. File it. Don't feel it. There's nothing to feel it with." },
-    ] },
-    { advance_text = "Close him up.", blocks = [
-        { type = "paragraph", content = "She tells him, quiet, what he'll remember: a good hour, nothing more, the new girl who's the only soft thing in his ruined year. She tells him to forget the rest. The door swings shut. The slow quiet lifts. He surfaces blinking, easy, none the wiser, his hand finding the small of her back like she's something he gets to keep." },
-    ] },
-  ] } },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text        = "Leave him to it."
-targetType  = "location"
-locationId  = "renner_office"
-time_progression_minutes = 30
-flagEffects = [
-  { targetType = "player", flag = "renner_drained", op = "set" },
-]
-
 

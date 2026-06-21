@@ -1,54 +1,14 @@
 # Phase 3/7 — 3_activities.toml
-# Vesper scaffold — the day-router (cradle recharge) + inter-district travel (Spire ⇄ Reach).
-# These are the structural movement/time spine. Content activities (Renner's depot work,
-# Mercer's chores, the §2 glitch beats) are authored onto these hosts in the beat tasks.
+# Vesper — solo activities / structural movement. beat_0001 (scaffold): the two travel
+# activities that bridge the parallel street-hub roots (Spire Plaza <-> The Waterfront) so
+# the map is connected and the build proves green. The day-router (cradle), Renner's depot
+# work, and the rest land at their plan beats (0006 / 0007).
 
-# ─── The day-router: power down at the cradle, wake charged ───────────────────
-# The day-cycle ROUTER. Without it, daytime windows (Renner's depot 09:00–18:00) are
-# unreachable from the evening start. Powers her down, advances the clock, restores charge.
-# Schedule window 19:00–05:00 = she can power down through the night. The cradle = the free
-# reset (design_book). The §2 glitch-intrusion beats attach to this host later.
-
-[[canvases]]
-id          = "activity_recharge"
-name        = "Power down"
-description = "Wren-solo. The cradle. The day-cycle router — powers down, advances ~9h, wakes her charged. Charge restored to full."
-
-[canvases.trigger]
-location      = "cradle"
-is_repeatable = true
-priority      = 3
-is_active     = true
-
-[[canvases.trigger.schedules]]
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "19:00"
-end_time   = "05:00"
-
-[[canvases.nodes]]
-id   = "base"
-name = "Power down"
-blocks = [
-  { type = "paragraph", content = "She settles back into the cradle. The contacts find their points along her spine. The room dims as the charge takes her down, and the quiet closes over the top of her like water." },
-]
-
-[canvases.nodes.exit_block]
-type = "location"
-text = "Power up."
-
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "cradle"
-time_progression_minutes = 540
-effects = [
-  { targetType = "player", trait = "energy", op = "add", value = 100 },
-]
-
-# ─── Travel: Spire → Reach ────────────────────────────────────────────────────
+# ─── Travel: Spire -> Reach ───────────────────────────────────────────────────
 [[canvases]]
 id          = "activity_travel_to_reach"
 name        = "Take the car to the Reach"
-description = "Wren-solo. Spire Plaza → The Waterfront. Costs time + charge (the leash bites — schedules matter). Ungated in the slice (no hard charge-block — refine later)."
+description = "Wren-solo. Spire Plaza -> The Waterfront. Costs time + charge (the leash bites — schedules matter)."
 
 [canvases.trigger]
 location      = "spire_plaza"
@@ -75,11 +35,11 @@ effects = [
   { targetType = "player", trait = "energy", op = "add", value = -10 },
 ]
 
-# ─── Travel: Reach → Spire ────────────────────────────────────────────────────
+# ─── Travel: Reach -> Spire ───────────────────────────────────────────────────
 [[canvases]]
 id          = "activity_travel_to_spire"
 name        = "Take the car to the Spire"
-description = "Wren-solo. The Waterfront → Spire Plaza. Costs time + charge. Ungated in the slice."
+description = "Wren-solo. The Waterfront -> Spire Plaza. Costs time + charge."
 
 [canvases.trigger]
 location      = "the_waterfront"
@@ -106,46 +66,110 @@ effects = [
   { targetType = "player", trait = "energy", op = "add", value = -10 },
 ]
 
-# ─── Renner — the menial work (Lane 3 host): the trust grind + light credits ──
-# Gated renner_hired. Raises Renner's relation (the way in — relation gates the
-# office) + a thin credit payout (the early income loop). The rising Renner
-# walk-ins (the escalating chore-hijack) attach to THIS host in the next increment.
+# ─── beat_0006 — Home base: the cradle ────────────────────────────────────────
+# The day-router (the ongoing free reset — power down, advance ~9h, wake charged) + the
+# chip/memories view (seeded-empty, the greyed FRAGMENT 01 slot = the visible next rung).
+# Both gated opening_done (after the on-rails opening hands the city over).
+
+# The day-router — power down at the cradle, wake charged. The reset that makes the daytime
+# (Renner's depot 09:00-18:00) reachable from an evening start.
 [[canvases]]
-id          = "activity_renner_menial"
-name        = "Work the floor"
-description = "Wren-solo (Lane 3 host). Depot, 09:00–18:00, gated renner_hired. Haul/sort/log — earns Renner relation (the trust grind) + light credits. Energy cost. Host for the rising Renner walk-ins (added next increment)."
+id          = "activity_recharge"
+name        = "Power down"
+description = "Wren-solo. The cradle. The day-cycle reset — powers down, advances ~9h, wakes her at full Charge. Gated opening_done; the opening's night/morning one-shots run first."
 
 [canvases.trigger]
-location      = "renner_depot"
+location      = "cradle"
 is_repeatable = true
 priority      = 3
 is_active     = true
-conditions = { version = "1.0", items = [
-  { type = "flag", subject = "player", flag_key = "renner_hired", operator = "is_true" },
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
 ] }
 [[canvases.trigger.schedules]]
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "09:00"
-end_time   = "18:00"
+start_time = "19:00"
+end_time   = "05:00"
 
 [[canvases.nodes]]
 id   = "base"
-name = "Work the floor"
+name = "Power down"
 blocks = [
-  { type = "image", props = { file = "activities/renner_menial.jpg" } },
-  { type = "paragraph", content = "She works the floor — hauling, sorting, logging crates against a manifest that hasn't matched reality since Cain came through. It's menial and dull, and her body doesn't tire the way a real one would, so she's better at it than the last three hands he ran off. The pay is thin, a handful of credits counted out grudging at the end of the day. But she does it well, and well is a language even a man this far gone still reads." },
+  { type = "paragraph", content = "She settles back into the cradle. The contacts find their points along her spine, cold and familiar. The room dims as the charge takes her down, and the quiet closes over the top of her like water." },
 ]
 
 [canvases.nodes.exit_block]
 type = "location"
-text = "Knock off for now."
+text = "Power up."
 
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "renner_depot"
-time_progression_minutes = 120
+locationId               = "cradle"
+time_progression_minutes = 540
 effects = [
-  { targetType = "npc",    npcId = "npc_renner", trait = "relation", op = "add", value = 2  },
-  { targetType = "player", trait = "money",  op = "add", value = 8   },
-  { targetType = "player", trait = "energy", op = "add", value = -15 },
+  { targetType = "player", trait = "energy", op = "add", value = 100 },
 ]
+
+# The chip / memories view — seeded-empty, the greyed FRAGMENT 01 slot (the visible next
+# rung; fills at the_site, frontier). The unconscious self-labelling = the awakening seed.
+[[canvases]]
+id          = "canvas_chip_view"
+name        = "The memory store"
+description = "Wren-solo at the cradle. The memories UI — EMPTY in chunk, one greyed locked slot (FRAGMENT 01). The chip fills at the_site (frontier). Repeatable; gated opening_done."
+
+[canvases.trigger]
+location      = "cradle"
+is_repeatable = true
+priority      = 2
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The memory store"
+blocks = [
+  { type = "paragraph", content = "She opens the store the company gave her for what it calls recovered assets — the place a restored memory would go, if she ever recovered one. It's empty. It has always been empty." },
+  { type = "paragraph", content = "There is one slot in it, greyed out, labelled in a hand that isn't the company's: FRAGMENT 01 — LOCKED. She doesn't remember making the label. She closes the store — and notices she's opened it more often than the task log would ever justify, and files that under nothing, the way she files everything she can't afford to have." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Close it."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "cradle"
+
+# ─── beat_0013 — the facility investigation host (Lane-3 solo) ─────────────────
+# The Mission-1 location leg. Repeatable explore; the one-time 'that's mine' match beat
+# (inv_facility_match, 2_one_shots) auto-fires on entry once renner_hired.
+[[canvases]]
+id          = "inv_facility_explore"
+name        = "Walk the wreckage"
+description = "Wren-solo Lane-3 investigation at facility_ruins. The dread-place. Gated opening_done. The 'that's mine' match beat fires separately (auto-fire, once renner_hired)."
+
+[canvases.trigger]
+location      = "facility_ruins"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Walk the wreckage"
+blocks = [
+  { type = "image", props = { file = "locations/facility_ruins.jpg" } },
+  { type = "paragraph", content = "The facility is a black skeleton against the dock lights — scorched frame, melted racks, the smell of old smoke that never washed out. She walks it the way she walks everything, cataloguing: where the containment was, where the fire started, what the dead machines used to do. None of it matches the briefing. All of it was built to hold things that could feel — and someone came through and let them out before he burned it down. The dread-place. The first one." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done here."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "facility_ruins"

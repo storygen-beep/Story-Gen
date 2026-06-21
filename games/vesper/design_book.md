@@ -4,7 +4,7 @@
 > translation of what's written here. Grown one section per pipeline step.
 >
 > Working title: **Vesper** (also the PC's buried true name — hidden in plain sight; rename freely).
-> Book revision 13 (Renner's first chunk designed + the weapon's anal trigger locked; Step 4 continuing).
+> Book revision 15 (Step 5 begun — the A→A.5 chunk's player track blueprinted; Mercer / Renner / world / wiring next).
 
 ---
 
@@ -744,3 +744,309 @@ nothing from him) · no customization · not unchanging (the whole point is he f
 two-stage consummation, the investigation + the match beat).
 
 ---
+
+## Blueprint (Step 5) — the gated, placed, lane-tagged scene list
+
+> Step 4 said *what happens*; this turns it into the exact scene list — each scene named, given a lane, a gate,
+> a place, and its wiring — so Step 7 builds TOML without re-deciding anything. Built **subject by subject**
+> (player → Mercer → Renner → the chunk's world → the holistic wiring), propose-first.
+>
+> **Scope — build-order, not a cut.** We blueprint the deep-designed **A→A.5 chunk** (the player thread,
+> Mercer, Renner, and the locations they touch) to **full depth**. Everything not yet deep-designed — Bastien,
+> Calloway, Cain, Pell, Sol, the units; Mid-City; the world §5 + reactivity §4; *the_site / chip / fracture* —
+> is the **frontier**: telegraphed here as locked-visible seeds, blueprinted when its Step-4 design exists.
+> This is *not* a slice — each subject in the chunk is built to its full designed budget.
+> *(Re-entry after the removed batch build; see ledger turn 16 + the audit `wf_e8f36ff0-f84`.)*
+
+### Player blueprint (Pass 1)
+
+**The spine decision (locked — LO chose A).** She has **no personal corruption ladder.** The engine's
+always-on `corruption` stat is **left DEAD** — *not* reskinned into an "Awakening" meter — because a meter that
+gates nothing is decoration (against the locked "every stat gates real content" rule), and her real ladder is
+the chip + the felt dread, not a number. **Her live meters are Charge + Credits only.** Her one progression
+axis is the **awakening** (chip fragments + accumulating glitch-dread), driven by mission-progress flags — and
+in this chunk the chip is **un-fed** (its first fragment is at *the_site*, the Phase-1 end), so **she carries no
+visible personal bar through the chunk, by design** (the inversion: she's the still point; the targets fall).
+
+**The feeder economy dissolves.** With no player-corruption door, the usual supply→demand check (does the
+player have enough corruption to unlock an NPC) **doesn't apply** — every NPC rung gates on the *NPC's own*
+relation/corruption, built by playing that NPC. There is no player-feeder count to close.
+
+**The scenes (player-side, in-chunk):**
+
+| Scene | Lane | Gate / trigger | Place | Notes |
+|---|---|---|---|---|
+| **Cradle — power down (day-router)** | Lane 3 solo host | schedule 19:00–05:00; ungated | `cradle` | wake +~9h, Charge→full, day-reset. The reset that makes the daytime (Renner's depot) reachable from the evening start. |
+| **Cradle — glitch recurrence I** | auto-fire, capstone-shape (Tier-3) | flag `worked_renner_once` is_true + guard `glitch_i_seen` is_false → SETS `glitch_i_seen` (fires once) | `cradle` | the tears / a fragment return — escalation rung 1. Single Continue. |
+| **Cradle — glitch recurrence II** | auto-fire, capstone-shape (Tier-3) | flag `renner_drained` is_true + guard `glitch_ii_seen` is_false → SETS `glitch_ii_seen` (fires once) | `cradle` | the leak worse, fragments stacking — escalation rung 2 (lands **heavier than I** — the design's "escalating recurrences", delivered by the two beats, not a recurring ambient). The chunk's awakening peak (the fracture proper is frontier). |
+| **Chip / memories view** | UI access (seeded) | always; **empty state** in chunk | `cradle` | the inventory screen for fragments; fills at *the_site* (frontier). Built as access + **one greyed named locked slot** ("FRAGMENT 01 — locked: recover at the site") so the awakening ladder shows a visible next rung, not a blank screen. |
+| **Capability upgrades** | economy sink (seeded) | **no vendor in chunk** | (Pell / lab — frontier) | nothing buyable yet; the sink opens when Pell is designed. |
+| **The drain / control canvas** | Lane 4 payoff | anal finish on a target's loop | (Renner's office) | her one act of agency; **specced in Renner's blueprint** — the first build of the reusable pattern. |
+| **Travel — Spire ⇄ Reach** | Lane 3 solo links | ungated; `costs` time + a little Charge | `spire_plaza` ⇄ `the_waterfront` | the leash that makes schedules bite; fast-travel once known. |
+
+**Economy (shape locked; exact numbers settled at authoring):**
+- **Income:** Renner depot work — light credits per shift (the only source in the chunk).
+- **Sinks:** none real in-chunk (the cover is handed over in the opening; the disguise shop + Pell's upgrades
+  are frontier). Credits accumulate — consistent with "a kept asset is provided for; Phase 1 deliberately
+  light." **No filler sink invented** (LO). Credits are a **primed-but-dormant gauge** — the first real spend
+  is the Mission-2 disguise shop; stated so Step 7 doesn't ship an idle HUD number.
+- **Charge:** paces the day (costs on actions/travel), refilled free at the cradle.
+- **Fail-state:** **none in the chunk** (LO). The leash → enforcers → hunt is a Phase-1-wide ramp that needs
+  the full mission web; here Charge is a *soft pace* (run low → reset), not a lose condition. Wired when more of
+  Phase 1 exists.
+
+**Frontier seeds (telegraphed, deferred — never silent gaps):** the chip/memories view (fed at *the_site*) ·
+the upgrades sink (Pell's lab) · the leash fail-state (full web). Each has a built, visible, empty-or-locked
+home in the chunk.
+
+**Reachability:** the cradle is where she wakes each day (always reachable); the day-router's 19:00–05:00
+window carries her from the evening start to the depot's daytime. ✓
+
+---
+
+### Mercer blueprint (Pass 2a)
+
+**The shape — the exemption.** No climb, no ladder, no relation/corruption lock — she starts already fully his
+and he never changes, so there's no descent list to order, just the **home base of the loop** + his four
+distinct use-scenes. His content gates on **one flag** (`mercer_hub_open`) + his presence, never a threshold.
+
+**The scenes:**
+
+| Scene | Lane | Gate / trigger | Place | Note |
+|---|---|---|---|---|
+| **First Penthouse service** | Lane 4 capstone (once) | `opening_done` + first visit to penthouse → sets `mercer_hub_open` | penthouse | switches the inside hub on. |
+| **The inside hub** | Lane 1 hub (portrait, **fixed** menu) | `mercer_hub_open` + present (08:00–23:00) | penthouse | Report · Serve → loop · Leave. Same all game, no rungs. |
+| **The serve loop** | Lane 1 sex loop (his-POV, full machine) | via the hub "Serve" | penthouse | poses → pleasure → climax → finisher; every finish just ends — **NO drain** (immunity). |
+| **Chore-hijack** | Lane 3 chore host + walk-in | present + on the chore; **flat chance** | penthouse | pulled off the task → use. Violates *attention*. No escalation. |
+| **The summons** | Lane 3 walk-in | at cradle, 19:00–23:00, `mercer_hub_open`; routine chance | cradle → penthouse | dragged out of *downtime*. The frequent one. |
+| **The invasion (first)** | Lane 4 capstone (once-only scripted) | `mercer_hub_open` + `worked_renner_once`; guard `mercer_invaded_once` is_false | wren_room | the gut-punch — into her *sanctuary*. |
+| **The invasion (repeat)** | Lane 3 walk-in (rare) | `mercer_invaded_once` + low chance | wren_room | cold, rare echo. |
+| **Catch him with another asset** | Lane 2 ambient (voyeur) | `mercer_hub_open` + low random chance | penthouse | walks in mid-use; flat/unbothered — *one of many*. |
+
+**The serve-loop menu.** Poses are the his-POV use positions — on her knees · bent over the desk · used
+against the glass — `sex_stage` switched by *him*, not earned; the finishes (in her mouth / on her / inside)
+**all route to "just ends — NO drain"** (the immunity). Anti-stale levers (he never escalates, so the loop
+can't lean on rising stats): the ownership-diction varies ("my investment" / "asset" / talking past her to a
+call), and which frame colors the session (bored · making a point · between meetings). The distinctness is the
+cold ownership, not variety of acts.
+
+**Gate philosophy — the sanctioned exemption.** Mercer is the deliberate exception to the double-lock: his
+lewd content carries **no player-corruption door** (she's already his) and **no NPC climb** — only
+`mercer_hub_open` + presence + the once-only guards. Non-lewd "Report" is fully ungated.
+
+**Locked calls:** no daily cap on serving (home base, no stat to grind); the first invasion fires after
+`worked_renner_once` (lands once the routine exists to violate); the serve loop is his-POV "he uses you" with
+**no control canvas** (the immunity — the weapon bolts onto the *targets'* loops only).
+
+**Reachability:** penthouse 08:00–23:00 (offscreen overnight; the nav paints him up there). The summons fires
+in the 19:00–23:00 overlap at the cradle; the invasion is a scripted intrusion into wren_room (*he* comes to
+*her*, not schedule-bound).
+
+**Frontier (telegraphed, deferred):** his **debriefs** (reacting to each mission's leads) + **later
+dispatches** (opening Bastien/Calloway after Renner's drain) — need the other targets; seeded, not built. The
+Renner dispatch is the opening's morning phone briefing (done).
+
+---
+
+### Renner blueprint (Pass 2b)
+
+> The biggest chunk — **19 canvases (seduction spine) + 2 (the facility leg)**, full ~16–20. Compiled +
+> adversarially verified (`wf_cfc47034-9c5`): nothing from the brief dropped; two engine traps caught and
+> rerouted before TOML (the office unlock had no setter; the drain's flags can't sit on the triggerless
+> control canvas). **Fork A resolved (LO): the office is FOLDED into the depot hub as a register-shift** — not
+> a separate navigable room (one location, one schedule, the portrait always renders).
+
+**The spine — two axes on HIS meters (the double-lock variant).** She has no corruption door (left dead), so
+both axes are Renner's own: **AXIS 1 — access** = `npc_renner.relation` (an odometer built by the *ungated*
+"good work / check in" + each work shift) earns the office; **AXIS 2 — seduction** = `npc_renner.corruption`
+(his willingness, +1 daily-capped per charged rung) gates the lewd rungs; `npc_renner.arousal` is the loop
+throttle only (never gates progression). Every lewd rung double-locks on **office-open (access) + his
+corruption (the tier)**. **Pacing (Fork B): relation-fast / corruption-slow** — noticed quickly, broken
+slowly; numbers tuned after the first build. His voice climbs by **reaction** to the same provocation
+(contempt → caught-looking → reluctant → wants her), **pinned to disjoint corruption bands on the rungs** so
+the crack is authored, not luck — the base opener stays one constant paragraph.
+
+**The scenes (19 + 2):**
+
+| # | Scene | Lane | Gate | Place |
+|---|---|---|---|---|
+| 1 | **hub_depot_floor** | L1 hub | unconditional base; "good work" (ungated relation feeder) + "work a shift"; once `renner_office_open`, the **office seduction register** surfaces here | renner_depot 09–18 |
+| 2 | **cap_renner_noticed** | L4 auto-fire | entry + `npc_renner.relation ≥ noticed-tier` + guard `renner_office_open` is_false → **SETS `renner_office_open`** | renner_depot |
+| 3 | **hub_anchor_renner** | L1 hub | unconditional; light off-duty/drunk register | the_anchor 19–23 |
+| 4 | **rung_renner_tease** | L1 rung | `renner_office_open` + corruption ≥ tease-tier; locked-visible; reaction-band [group] | office register |
+| 5 | **rung_renner_flash** | L1 rung | + corruption ≥ flash-tier → **SETS `renner_flirts_back`** at the band | office register |
+| 6 | **rung_renner_grope** | L1 rung | + corruption ≥ grope-tier + `renner_flirts_back` | office register |
+| 7 | **rung_renner_fuck** | L1 rung (loop entry) | + corruption ≥ sex-tier + `renner_oral_once` → **SETS `renner_fucked_once`**, resets loop traits, routes into the loop | office register |
+| 8 | **work_depot_haul** | L3 host | ungated; +credits +relation (daily-capped) + costs charge; **SETS `worked_renner_once`** on first completion (sole owner) | renner_depot |
+| 9 | **walkin_renner_depot** | L3 walk-in | substitution of #8; **rising bands 10/35/70%** on his corruption (lingers → crowds → pulls off the task) | renner_depot |
+| 10 | **amb_renner_anchor_ruin** | L2 ambient | random ~25%, requires_npc; tiered [group] on his corruption (the ruin showing) | the_anchor 19–23 |
+| 11 | **amb_renner_cheerup** | L2 ambient | `renner_office_open` + corruption floor + low chance; scaled by spine flags (tease / blow / take it) | the_anchor 19–23 |
+| 12 | **loop_renner_office_sex** | sex-loop | triggerless; poses oral→vaginal→anal (anal gated corruption ≥ anal-tier); pleasure climb; climax-elect ≥ 50 | office register |
+| 13 | **loop_renner_finisher** | sex-loop | [group] by `sex_finisher_type`; inside/oral → reset + exit; **anal → control canvas** | office register |
+| 14 | **renner_control_canvas** | control | the drain — payload prose (no flags; triggerless); reached from the capstone (first) + the loop (repeat) | office register |
+| 15 | **cap_renner_hired** | L4 auto-fire | first depot entry + `opening_done` + guard → **SETS `renner_hired`** | renner_depot |
+| 16 | **cap_renner_blowjob** | L4 capstone | office + corruption ≥ blow-tier + `renner_flirts_back` + guard → **SETS `renner_oral_once`** | office register |
+| 17 | **cap_renner_anal_drain** | L4 capstone | `renner_fucked_once` + corruption ≥ anal-tier + guard → **SETS `renner_drained` + `renner_leads_extracted` + `renner_anal_once`**, routes into the control canvas | office register |
+| 18 | **ma_renner_blowjob** | L4 auto-fire | next day: `renner_oral_once` + `days_since_flag ≥ 1` + guard → bumps his corruption | renner_depot/office |
+| 19 | **ma_renner_anal** | L4 auto-fire | next day: `renner_anal_once` + `days_since_flag ≥ 1` + guard → bumps corruption to the ceiling band | renner_depot/office |
+| F1 | **inv_facility_explore** | L3 host | ungated investigation; accrues lead evidence | facility_ruins |
+| F2 | **inv_facility_match** | L4 auto-fire | entry + `renner_hired` + guard → **SETS `facility_match_seen`** (the "that's mine" seed) | facility_ruins |
+
+**The sex loop + drain (the reusable pattern's first build).** Triggerless, node-routed from "Fuck him." State
+is **numeric traits only** — `sex_stage` (0 oral / 1 vaginal / 2 anal), `loop_npc_pleasure`,
+`sex_finisher_type`, `anal_active`, `sex_entry_origin` — all in `[player.core_traits]`, hidden, **reset to 0
+on entry AND on every finisher exit**. Poses raise pleasure; the climax-elect (≥ 50) sets the finisher type;
+the **anal elect is itself gated `anal_active` ≥ 1** (so you can't pick the ass finish from the oral pose).
+Inside/oral finish → reset + exit. **Anal finish → the control canvas (the drain).** The drain's flags are set
+on the **located capstone (#17)**, never on the triggerless canvas — copy this discipline to every future
+target.
+
+**Flag chain (acyclic; each flag one located setter; every condition block `version="1.0"`):** `opening_done`
+→ `renner_hired` (#15) → `worked_renner_once` (#8, sole owner) → `renner_office_open` (#2) →
+`renner_flirts_back` (#5) → `renner_oral_once` (#16) → `renner_fucked_once` (#7) → `renner_drained` +
+`renner_leads_extracted` + `renner_anal_once` (#17). Both odometers daily-capped via cooldown flags cleared on
+the daily tick.
+
+**Frontier (telegraphed, deferred — never silent).** The drain sets **`renner_leads_extracted`** → opens
+Bastien (`bastiens`) + Calloway (`vance_securities`); their on-ramps render greyed citing "Renner's leads"
+until then. Mercer's "Report" reads `renner_drained` for his debrief. `renner_leads_extracted` is one lead
+toward unlocking **the_site** (the chip). The facility match + the drain payload are Renner's "wrong-note"
+toward the first crack in "evil rogue." All seeded, none built — blueprinted when their Step-4 design exists.
+
+---
+
+### World blueprint (Pass 3)
+
+> Mostly consolidation — the schedules + ceilings fell out of the NPC passes; this pass places them on the map,
+> settles the systems, and fixes the engine container double-print. **Map scope (LO): build the chunk's ~11
+> locations; leave Mid-City + the other venues frontier** (build-order, not a cut — the city breathes more as
+> Missions 2/3 land).
+
+**The chunk's map (built):**
+- **THE SPIRE** — `spire_plaza` (street hub / travel anchor) · `vance_tower` → `atrium` · `penthouse` (Mercer)
+  · `wren_floor` → `wren_room` → `cradle` (her hub).
+- **THE REACH** — `the_waterfront` (street hub / travel anchor) · `the_anchor` (Renner, evenings) ·
+  `renner_depot` (Renner, days + the folded office register) · `facility_ruins` (investigation).
+
+**Location tags (the dead-room gate).** The four **containers** — `loc_spire`, `vance_tower`, `wren_floor`,
+`loc_reach` — are pure-nav (default_entry set, host no canvas, exempt). The **standing hubs** all earn their
+click: `penthouse` (Mercer), `cradle` (her), `the_anchor` + `renner_depot` (Renner), `facility_ruins`
+(investigation), and `spire_plaza` + `the_waterfront` (each hosts the travel-bridge activity). `atrium` is a
+**named threshold** (the gate between the cage and the street) — a deliberate thin pass-through; its ambient
+corporate life is a telegraphed frontier seed, not a silent dead room.
+
+**Frontier (NOT built; telegraphed where it counts):**
+- `the_site` — a **locked-visible nav card** in the Reach ("unlocks on enough leads" — the chip / Phase-1 end).
+- `bastiens` (Mission 2) + `vance_securities` (Calloway / Mission 3) — **greyed seeds** that light when
+  Renner's drain sets `renner_leads_extracted` (exact telegraph form settled at authoring).
+- All of **Mid-City** (`the_strip` · `mirage` · `the_cordon` · `the_long_hour`), `the_eyrie`, `lab` (Pell),
+  `units_quarters` — pure frontier (no chunk content; built with their mission/Act content, not as empty rooms).
+
+**Schedules (5D):** Mercer `penthouse` 08:00–23:00 (offscreen overnight) · Renner `renner_depot` 09:00–18:00 +
+`the_anchor` 19:00–23:00 (offscreen overnight) · player day-router at `cradle` 19:00–05:00. The nav paints each
+NPC where he's scheduled.
+
+**Ceilings (5B — author-encoded in `conditions`, no location attribute):** depot floor = **public/work only** ·
+the office register = **the full ladder** · penthouse = Mercer's domain · cradle / wren_room = her space (the
+invasion intrudes) · the Anchor = public (witness + cheer-up) · facility_ruins = investigation.
+
+**Systems (5F):**
+- **Phone** — Mission 1's morning briefing (the Renner tip); minimal in-chunk.
+- **Money** — credits (Renner depot income, the only source); the disguise shop + Pell's upgrades are frontier
+  sinks (Player blueprint).
+- **HUD** — Charge + Credits only (band text per `0_systems`). **Quest card** — Mission 1: get close → drain →
+  extract the leads (shows while `mission_1_active` && !`renner_drained`).
+- **Clothing** — **narrative in the chunk** (the cover is established in prose; "commando" lives in the flash
+  rung's text, not a worn-state gate). The disguise system (covers per mission + a shop) lands with more missions.
+- **Customization** — none (fixed identity). **Shared-private peep/occupancy (5H)** — **none** (the invasion is
+  a scripted intrusion, not a co-presence mechanic).
+
+**Access + travel (5G):**
+- **Travel-friction:** `spire_plaza` ⇄ `the_waterfront` is the one bridge — it `costs` time + a little Charge;
+  fast-travel once a place is known. The cost is what makes Renner's daytime schedule bite.
+- **The container double-print FIX** (the audit's engine bug — children printed twice): **drop the
+  `is_container` district-wrappers entirely; build the map as NON-container standing hubs** — the shipped
+  `late_shifts` pattern: two parallel top-level street-hub roots (`spire_plaza` / `the_waterfront`, no
+  `entry_from`) bridged by the travel activities, venues nested via `entry_from` + `navigation_order`.
+  Containers were the cause (they double-print AND swallow attached canvases); the non-container shape
+  sidesteps both. **Verified clean at beat_0001** — each child renders once. (Supersedes the earlier
+  `default_entry`-on-containers idea — engine-forced, see ledger turn 22.)
+- **Locks as prose:** `the_site` carries `entry_conditions` + `blocked_message` (`version="1.0"` or it fails
+  open); the office register's access is the `renner_office_open` gate, not a hard door (Fork A fold).
+
+**Reachability (the triad holds):** each scheduled NPC has a presence-floor hub where he's scheduled; she
+reaches the Reach via the travel bridge after the cradle day-reset; the daytime/evening windows overlap her
+waking hours. ✓
+
+---
+
+### Wiring, opening & plan (Pass 4)
+
+**The chunk DAG — it closes.** One spine, a few cross-reads; acyclic, every gate has a located setter, every
+cross-arc reach telegraphed.
+- **Spine (monotone):** `opening_done` → `renner_hired` → `worked_renner_once` → `renner_office_open` →
+  `renner_flirts_back` → `renner_oral_once` → `renner_fucked_once` → `renner_drained` (+
+  `renner_leads_extracted` + `renner_anal_once`). Mercer's `mercer_hub_open` (first service) runs independent
+  of the spine.
+- **Cross-reads (the one-world seam — all one-directional reads, D2-safe):**
+  - `worked_renner_once` → player **glitch-recurrence I** (cradle) + arms Mercer's **first invasion**.
+  - `renner_drained` → player **glitch-recurrence II** (cradle) + (frontier) Mercer's **debrief**.
+  - `renner_leads_extracted` → (frontier) Bastien/Calloway on-ramps + the_site lead-count. The frontier reads
+    render as greyed seeds (D3).
+- **D1 (cold-start):** the opening runs from boot → the city opens; Renner's hire (first depot visit) +
+  Mercer's hub (first penthouse visit) are the ungated on-ramps; the cradle is always reachable.
+- **The core loop:** cradle reset → out (work → seduce → drain Renner) → back (serve Mercer) → cradle (the
+  glitch waits) → repeat. The drain is the chunk's climax.
+- **Fail-state:** none in the chunk (Charge = soft pace). **Supply→demand:** dissolved — no player-corruption
+  door, so every NPC rung self-supplies via his own traits.
+
+**The opening — its real node structure (~23 clicks, one beat per click).** Authored as **fine cascade beats**
+in the three beat-canvases (one paragraph or one exchange per click, 2-sentence cap — the fix for the prior
+collapse):
+- **Beat 1 — the office (~12):** line-up · accusation · threat · she begs · verdict ("the Chairman's
+  investment") · punishment set-up · punishment ×3 (he takes her → the act → the units blank) · gratitude ·
+  reassignment (the units + her job + the mission lie) · dismissed. *Plants the freeze as the first glitch.*
+- **Beat 2 — the night (~7):** walk back · the cradle · the tears · the memory fragment · the catechism · the
+  power (never works on the boss) · power-down. *Plants the awakening + the boss-immunity.*
+- **Beat 3 — the morning (~4):** power-up · the briefing · the tip (Renner @ the Anchor) · **out the door**
+  (the hinge). *Sets `opening_done` + `mission_1_active`; the city opens; hands to Renner.*
+
+**The build plan (seeded — Step 7 authors one beat per turn, green each time):** 14 beats —
+scaffold → opening (×3) → home base (Mercer + cradle) → Renner (×6) → texture → glitches/facility → verify.
+Full ordered list in `authoring_state.json` `plan`.
+
+---
+
+### Content register & ceilings (the authoring contract)
+
+> The crudeness ceiling + the non-con floor, declared before authoring (`kink-ceilings.md` — a scene that
+> touches an *undeclared* ceiling doesn't ship). Step 7 reads this before writing any hot beat.
+
+**Vocabulary ceiling — per NPC, per tier (full crude EARNED at the peaks):**
+- **Renner** — maximum/rough at the peaks: real anatomical words (cock, cunt, cum, ass) at the office sex, the
+  loop, and the anal-drain. The soft rungs (tease / flash / the cold-boss early beats) stay **un-crude** — the
+  crudeness is earned by the climb, off at the bottom.
+- **Mercer** — maximum/rough at the punishment + serve-loop peaks; his register is **ownership-degradation**
+  ("my investment," "asset," used like furniture), crude where he uses her, never warm.
+- **The soft / non-sexual surfaces** (hubs, ambients, work, the cradle) stay flat and clean — no gratuitous
+  crude on a re-readable everyday beat.
+
+**Non-con / dubcon FLOOR (the owned-slave register).** She is **property, used at others' will** — Mercer owns
+her (she cannot refuse), the targets believe they're using her. Her **body responds while her will is never
+consulted** (the opening punishment is the template: "her body answering" while she's used in front of the
+units). The prose may depict the ownership, the degradation, the can't-refuse — that's the floor. It stops at
+**used-and-degraded, not brutalized-for-gore** (no torture/mutilation unless re-specced). The opening office
+scene is the first canvas that needs this floor.
+
+**The control-canvas (the drain) — voice carriage (Rule 4).** The extraction is **played as a Q&A exchange in
+HIS own dialog** — his answers under her command, his voice breaking — **not narrated summary** ("she drains
+the payload"). It's the hottest target beat; it must be spoken. The reusable pattern carries this note, so
+Bastien/Calloway inherit it.
+
+**Wren's interior (the flat surfaces).** Her in-the-moment reads (the cradle, the glitch beats) sit in a single
+`thought_bubble`, flat and terse; **Tier-3 is spent ONLY on the two once-only glitch capstones** (glitch II
+heavier than I). The recurring cradle-leak ambient was considered and **cut** — her thread stays lean: rarity
+is the punch.
+
+---
+
