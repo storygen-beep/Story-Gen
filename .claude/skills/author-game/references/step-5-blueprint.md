@@ -116,7 +116,8 @@ Invents no new scenes. It **orders and wires the whole inventory**, and seeds th
   every gate has a reachable setter. Wire the §4 reactivity ("when she falls the sister gets easier") as
   ordinary `cross_npc`/`economic` deps.
 - **The opening as concrete scenes** — the boot, the start location, the 2–3 things doable at zero, the first
-  named want, the 10-minute taste, and every arc's ungated cold-start on-ramp.
+  named want, the 10-minute taste, and every arc's ungated cold-start on-ramp. Author it as the **linear
+  funnel** that surfaces each live system once — `references/onboarding.md` (the method + the Step-6 rubric).
 - **The fail-state ripple** (§4F) — confirm the pressure clock bites on expiry, or record the one-line "no
   failure by design."
 - **Close supply-vs-demand** (§2E) — the final whole-game feeders-vs-floors count.

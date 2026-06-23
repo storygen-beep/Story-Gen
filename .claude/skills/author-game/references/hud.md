@@ -10,7 +10,8 @@ the doubling trap) it does NOT restate that — it lives in `references/trait-ca
 code, **the code wins** and the divergence is flagged inline `*(code-vs-lore note: …)*`.
 
 ## Contents
-- §1 — The design intent: the HUD exists so the player can PLAN Lane 3
+- §1 — The design intent: the HUD exists so the player can PLAN Lane 3 *(and it's the player's persistent
+  tutorial — populate every enabled system's band at value-zero on frame one; `references/onboarding.md` §2.4)*
 - §2 — The `npc_panel` House-card (the per-NPC radar)
 - §3 — Per-arc-shape sidebar VISIBILITY table (which NPC axes surface)
 - §4 — Body-state vs progression surfacing + the away/offscreen label

@@ -136,6 +136,13 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
   location model (`entry_from`/`parent`/`is_container`), the naming contract, reachability, travel-friction
   + lock-as-prose, and the room-content floor + pre-ship audit. Read before any location add/move (and it's
   what Step 2b runs).
+- `references/onboarding.md` — the opening as a **linear funnel** that teaches the machine: surface each live
+  system once in a fiction beat, light the sidebar at value-zero, name the next action on frame one, the
+  why-locked surfaces, the win/fail contract — plus the **hard-gate Step-6 onboarding rubric**. Read when
+  blueprinting (Step 5) and authoring (Step 7) the opening.
+- `references/npc-intro.md` — the **first encounter as a designed beat** (pretext + name-on-page +
+  hook-as-want → fire once → open the hub; the 7-step Renner template, the cold-spawn anti-pattern). The
+  dramatic layer on top of the `lanes.md` mechanical on-ramp. Read before any NPC's first appearance.
 - `references/trait-design.md` — the gating spine by arc-shape; throttle vs odometer; per-NPC odometer;
   dead-meter/split-spine; reserve the rich model for the core.
 - `references/rts-design-philosophy.md` — the WHY (player-corruption-as-tier, two-axis gate, P1–P11).

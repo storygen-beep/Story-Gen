@@ -68,6 +68,14 @@ a silent cut.
   (solo, unseen voyeur, a capstone's interior stretches); an ambient where the NPC is *present* should still
   give them a line.
 - **Systems declared** (§1E) — every optional system is on/off on purpose; none half-wired.
+- **Onboarding teaches the machine** (`references/onboarding.md`) — the opening is a linear funnel that
+  surfaces each live system once (a fiction beat or a value-zero sidebar item), names the next action on
+  frame one, shows a reason on every greyed gate, and states the win/fail contract. HARD rows: every system
+  surfaced · named next action · no reason-less gate · every condition `version="1.0"` · onboarding canvases
+  off containers.
+- **Every NPC has a real entrance** (`references/npc-intro.md`) — each navigable NPC's hub sits behind a
+  dramatized auto-fire first-contact (pretext + name-on-page + hook-as-want, sets `<npc>_opened_up`); no bare
+  cold-spawn hub (the Hank shape). Checked per NPC met after the opening.
 - **Archetypes & places fit the premise** · **ceilings honored** (player-track rows touching an NPC sit at that
   NPC's `references/kink-ceilings.md` ceiling) · **forced content only where the place ceiling allows** (§5B).
 - **No silent caps** — deferred content is a telegraphed locked-visible seed, counted and logged.

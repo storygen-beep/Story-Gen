@@ -369,7 +369,7 @@ The location screen renders four separate paths; a canvas only appears if it mat
   decide if the trip is worth the hour.)
 
 ## Beat type → lanes (what a beat authors)
-- `npc_intro` → establish the NPC's **Lane 1 hub(s)** (one per schedule row) + optionally the first **Lane 2** ambient. Cold-start enterable.
+- `npc_intro` → a **designed first-encounter beat** (pretext + name-on-page + hook-as-want → fire once → open the hub — the 7-step Renner template, `references/npc-intro.md`), THEN the NPC's **Lane 1 hub(s)** (one per schedule row) + optionally the first **Lane 2** ambient. Cold-start enterable; the dramatized auto-fire one-shot is the introduction, the repeatable hub follows it gated on `<npc>_opened_up` (runtime shape: Runtime rendering rules above).
 - `arc_escalation` → add **Lane 1 rungs** (locked-visible) AND the **Lane 2/3** content that lights up at those thresholds — per the shape's budget, respecting empty cells.
 - `economic` → usually a **solo work activity** (Lane 3 host that earns money) + its dispatcher; keep it OUT of any NPC hub (the work-is-a-separate-canvas rule).
 - `cross_npc` → an NPC as interruptor in another's **Lane 3** ending, or a shared scene.

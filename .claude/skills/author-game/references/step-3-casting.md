@@ -50,7 +50,8 @@ Every cast NPC gets a one-line **hook** = **a specific charged dynamic + a WANT*
 
 A hook is "the strict bar-owner's wife you want to break, who's bored and craves danger" — NOT "Family
 arc-shape #3." If you can't write the hook in one hungry line, the character isn't ready. The cast as a
-whole must deliver the **desire span declared at Step 0**.
+whole must deliver the **desire span declared at Step 0**. The hook is also what the NPC's **first encounter**
+must land on the page — casting's want becomes the meeting's first voiced line (`references/npc-intro.md`).
 
 ## The rough sketch (where each NPC roughly goes — and where cross-NPC lives)
 Alongside role + hook, give each NPC a **rough sketch** — a loose few lines of where the character *roughly*

@@ -197,6 +197,9 @@ paper; each closes a real blind spot.
   10-minute-taste test — a brand-new player comes away knowing what this game IS (the core charge, not just
   chores). If anyone (player or NPC) is **customizable**, name where the value appears and confirm the game
   *speaks it back* (`@player`/`@npc` tokens, never baked into labels — `references/customization.md`).
+  *(§8 declares WHAT the opening must teach; the **method** that authors it — the linear funnel, surface each
+  live system once, the why-locked surfaces, the win/fail contract — and the hard-gate Step-6 rubric live in
+  `references/onboarding.md`.)*
 - **The systems in play (§1E).** Declare which optional engine systems this game switches **ON** (phone /
   rent-debt clock / clothing wardrobe / customization) and which it leaves **OFF** — each named in or out, so
   none is half-wired by accident and none silently forgotten (`references/systems.md`).

@@ -164,7 +164,10 @@ Run with the repo venv active, in order; emit a PASS/FAIL line for each:
      who the player is, who this person is to her, the tie between them, the hook — not lean on
      metadata, the Start/Customize copy, or a button label to carry it; a player reading only the story
      should grasp the premise from the page. Keep it RTS-flat: state the facts, don't ritualize them
-     (`last_call` says "Sully's niece" in the cold open and stops there).
+     (`last_call` says "Sully's niece" in the cold open and stops there). And a repeatable NPC hub MUST sit
+     behind a **dramatized auto-fire first-contact** that names the NPC and lands one hook (the
+     `references/npc-intro.md` template, sets `<npc>_opened_up`) — a hub whose base node is the de-facto
+     introduction is the forbidden cold-spawn (Late Shifts' Hank).
    - **double lock on lewd rungs** — every **lewd** rung gates on BOTH the
      **player-corruption door** (the cascade tier) AND **the NPC's own lock** (its built personal trait);
      **non-lewd interaction is ungated** (it builds the lock in Act 1). This is the "two-axis core gate"

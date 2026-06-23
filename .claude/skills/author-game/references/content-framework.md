@@ -59,7 +59,10 @@ overlap.
 - How does the world TEACH her how to play without a tutorial — how does she learn what's possible, where to go, and that there's a climb ahead, just by looking at the screen?
 - If a brand-new player only played for ten minutes, would they come away knowing what this game IS — a taste of the core charge, not just chores and setup?
 - Is the player herself, or any NPC, customizable — her name, her body, her look, an NPC's name or relationship label? And wherever a customized value appears — prose, the quest card, a location name, a sidebar label, a phone contact — does the game actually speak it back, or print the raw default?
-- Does the whole setup actually LAND in the opening prose itself — who she is, who the people around her are, the ties between them, the hook pulling her in — or would a player reading only the STORY arrive confused because the premise is parked in metadata, the Start/Customize screens, or a cascade button label? Read the cold open as a stranger who skipped the menus: are who-she-is and who-these-people-are NAMED on the page, plainly? *(Clarity, not flourish — state the cast and the ties flat; the opening stays terse, it just can't make the player infer the premise from UI. Models: `last_call` cold-reads "Sully's niece" in the opening; `the_long_summer`'s prologue names the cast; `the_inheritance`'s will-reading names each relationship in prose.)*
+- Does the whole setup actually LAND in the opening prose itself — who she is, who the people around her are, the ties between them, the hook pulling her in — or would a player reading only the STORY arrive confused because the premise is parked in metadata, the Start/Customize screens, or a cascade button label? Read the cold open as a stranger who skipped the menus: are who-she-is and who-these-people-are NAMED on the page, plainly? *(Clarity, not flourish — state the cast and the ties flat; the opening stays terse, it just can't make the player infer the premise from UI. Models: `last_call` cold-reads "Sully's niece" in the opening; `the_long_summer`'s prologue names the cast; `the_inheritance`'s will-reading names each relationship in prose.)* *(That is the STORY half. The MACHINE
+half — teaching navigation, the economy, the day-cycle, and what the HUD bands mean — is owned by
+`references/onboarding.md`: a stranger who skipped the menus must also learn what's clickable and what the
+sidebar says, surfaced in the opening, not inferred.)*
 - **The systems ON/OFF declaration:** which optional engine systems does this game switch ON — phone, rent/debt clock, clothing wardrobe, customization — and which is it deliberately leaving OFF? Name each one in or out, so no system is half-wired by accident and none silently forgotten. *(Cite `systems.md`.)*
 
 **F — The frontier** (the ladder's last rung)
@@ -119,7 +122,8 @@ answer is the story brief (`step-4-deep-design.md` Pass 2), structured into the 
 - How do they have teeth — where do they resist, push back, set a price, or almost out-play you? Or are they the willing one who comes to you?
 - How deep is this person — a full, central figure, or a lighter flavor (a flirt, an ally, a one-note obstacle)? Be honest: not everyone earns a full arc.
 
-**B — How you meet them** (the on-ramp: ungated, non-lewd, cold-start enterable)
+**B — How you meet them** (the on-ramp: ungated, non-lewd, cold-start enterable — and a *designed first
+encounter*, not a bare hub: `references/npc-intro.md`)
 - In the very first session — fresh start, no stats, no flags — how do you first cross paths with this person, and is that first meeting something you can simply walk into?
 - Is that first meeting clean of sex and clean of any other person's story — can you build the early bond through ordinary talk and presence, before any corruption and without needing another arc advanced first?
 
