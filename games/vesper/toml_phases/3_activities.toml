@@ -95,7 +95,7 @@ end_time   = "05:00"
 id   = "base"
 name = "Power down"
 blocks = [
-  { type = "paragraph", content = "She settles back into the cradle. The contacts find their points along her spine, cold and familiar. The room dims as the charge takes her down, and the quiet closes over the top of her like water." },
+  { type = "paragraph", content = "She settles back into the cradle. The contacts find their points along her spine, cold and familiar. The room dims as the charge takes her down, and the quiet closes over the top of her like water. When it lets her go it's morning again — a new day, the charge full, the hours she spent out there walked back into her." },
 ]
 
 [canvases.nodes.exit_block]

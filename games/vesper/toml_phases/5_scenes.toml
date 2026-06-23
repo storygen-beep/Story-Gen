@@ -183,6 +183,7 @@ text       = "Let him finish in your mouth."
 targetType = "node"
 nodeId     = "mercer_finisher.climax"
 show_when_locked = true
+locked_text = "He's not close enough yet."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
 ] }
@@ -221,6 +222,7 @@ text       = "Let him finish inside you."
 targetType = "node"
 nodeId     = "mercer_finisher.climax"
 show_when_locked = true
+locked_text = "He's not close enough yet."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
 ] }
@@ -251,6 +253,7 @@ text       = "Let him finish in your ass."
 targetType = "node"
 nodeId     = "mercer_finisher.climax"
 show_when_locked = true
+locked_text = "Not till he's close — and you've taken him there."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
   { type = "trait", subject = "player", trait_key = "anal_active",       operator = "gte", value = 1  },
@@ -402,6 +405,7 @@ text       = "Tease him."
 targetType = "node"
 nodeId     = "rung_renner_tease.base"
 show_when_locked = true
+locked_text = "Not on the floor — earn the office first."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "renner_office_open",   operator = "is_true"  },
   { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 0 },
@@ -420,6 +424,7 @@ text       = "Flash him — work commando."
 targetType = "node"
 nodeId     = "rung_renner_flash.base"
 show_when_locked = true
+locked_text = "He's barely warmed to you yet."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "renner_office_open",   operator = "is_true"  },
   { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 4 },
@@ -439,6 +444,7 @@ text       = "Get your hands on him."
 targetType = "node"
 nodeId     = "rung_renner_grope.base"
 show_when_locked = true
+locked_text = "Not till he's flirting back and wants your hands on him."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "renner_office_open",   operator = "is_true"  },
   { type = "flag",  subject = "player", flag_key = "renner_flirts_back",   operator = "is_true"  },
@@ -460,6 +466,7 @@ text       = "Take him in the office."
 targetType = "node"
 nodeId     = "loop_renner_office_sex.intro"
 show_when_locked = true
+locked_text = "He needs you badly first — and he hasn't had your mouth yet."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "renner_office_open", operator = "is_true" },
   { type = "flag",  subject = "player", flag_key = "renner_oral_once",   operator = "is_true" },
@@ -891,6 +898,7 @@ text       = "Let him finish in your mouth."
 targetType = "node"
 nodeId     = "loop_renner_finisher.climax"
 show_when_locked = true
+locked_text = "He's not close enough yet."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
 ] }
@@ -921,6 +929,7 @@ text       = "Turn around — give him your ass."
 targetType = "node"
 nodeId     = "base_doggy_r"
 show_when_locked = true
+locked_text = "He hasn't taken you there yet — that comes first."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "renner_anal_once", operator = "is_true" },
 ] }
@@ -933,6 +942,7 @@ text       = "Let him finish inside you."
 targetType = "node"
 nodeId     = "loop_renner_finisher.climax"
 show_when_locked = true
+locked_text = "He's not close enough yet."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
 ] }
@@ -963,6 +973,7 @@ text       = "Let him finish in your ass."
 targetType = "node"
 nodeId     = "loop_renner_finisher.climax"
 show_when_locked = true
+locked_text = "He's not close enough — and you're not open for that yet."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
   { type = "trait", subject = "player", trait_key = "anal_active",       operator = "gte", value = 1  },

@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 21,
+  "book_revision": 22,
   "pipeline_phase": "authoring",
   "map_design": {
     "topology": "done",
@@ -381,6 +381,11 @@
       "turn": 33,
       "book_revision": 21,
       "note": "NPC-PANEL FIX (post-ship, LO-flagged 'I don't see corruption for NPCs'). DIAGNOSIS: npc_renner.corruption gates the whole seduction climb (25 refs) + is the Mission-1 quest goal, but was INVISIBLE -- the global [[traits.labels]] corruption hidden=true (added to suppress the PLAYER's dead corruption) ALSO blanks the engine's npc_panel corruption row (v2.py ~15080: '<<if not hiddenTraits.includes(\"corruption\")>>'). FIX (0_systems_spec.toml): (1) removed corruption from the hidden list -- it's the NPCs' LIVE axis, not the player's; the player's stays dead at 0 (the inversion, now visibly stuck while his climbs). (2) Added an npc_panel sidebar_item for npc_renner: rows=[corruption, location, next], label='Renner', corruption_max_value=20 corruption_max_label='Broken' -- surfaces his seduction progress (0->20->Broken) + where he is + the next-goal block. Mercer gets NO panel (no corruption, doesn't climb, per LO). Verified vs engine (npc_panel rows = arousal/corruption/location/next; corruption row needs the trait in core_traits). BUILD GREEN; artifact-verified: corruption out of hiddenTraits, Renner panel renders corruption + location rows + 'Broken' cap. A DESIGN ADJUSTMENT to the 'HUD = Charge+Credits only' call (LO asked to see the per-target seduction axis). Committed + pushed to main."
+    },
+    {
+      "turn": 34,
+      "book_revision": 22,
+      "note": "ONBOARDING DOGFOOD -- applied the new references/onboarding.md + references/npc-intro.md doctrine (skill written + verified earlier this session) to the A->A.5 opening. Rubric dry-run: the opening PASSED sidebar-at-value-zero, named-next-action (Mission-1 quest card live at the hinge), day-router, and BOTH NPC entrances (Renner assigned-target->travel->hire; Mercer motivated owner). It FAILED 'no greyed gate without a reason' (11 show_when_locked rungs, 0 locked_text) and under-armed the economy in prose. FIXES (TOML only, no engine change): (1) locked_text on all 11 rungs (5_scenes.toml -- seduction ladder + sex-loop finishers, each keyed to its gate); (2) Charge armed in the cradle night beat (spend/refill/vulnerability) + the repeatable cradle now reads the day-flip ('morning again -- a new day') (2_one_shots + 3_activities); (3) Credits armed as a cover allowance in the dossier (2_one_shots); (4) the leash/win-fail axis surfaced lightly in the office (2_one_shots) -- legibility only; the fail-state MECHANIC stays deferred to the full Phase-1 web. Remaining 8 cast get the entrance checklist recorded in design_book (Beat-3 onboarding section). Plan-approved; propose-first honored."
     }
   ]
 }

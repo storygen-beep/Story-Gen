@@ -4,7 +4,7 @@
 > translation of what's written here. Grown one section per pipeline step.
 >
 > Working title: **Vesper** (also the PC's buried true name — hidden in plain sight; rename freely).
-> Book revision 15 (Step 5 begun — the A→A.5 chunk's player track blueprinted; Mercer / Renner / world / wiring next).
+> Book revision 22 (Step 5 + authoring; the A→A.5 chunk built. Latest: onboarding dogfood — the opening now *arms the machine* (Charge / Credits / the leash named in-fiction), every greyed rung carries a reason, per `references/onboarding.md`.)
 
 ---
 
@@ -423,6 +423,17 @@ real choices switch on). The twenty-odd Continue screens before it are the point
 - **Crying = malfunction.** She feels *nothing but the sex* — so the tears are a thing her body does that she can't explain and would hide. The player sees grief; she sees a fault. (Same as the freeze.)
 - **Belief vs. truth.** Write her self-concept *straight* (machine, saved, owes them, obeys) and **never confirm it.** The gap between what she says and what the player suspects is the engine.
 - **The cage mirrors her.** On-rails = she has no will yet, so the player doesn't either. Agency switches on with her first free step.
+
+### Onboarding — the funnel teaches the machine (per `references/onboarding.md`)
+The opening is the linear funnel; besides the story it now **arms each live system once, in-fiction**:
+- **Charge** — named at the cradle as what the day spends out of her and the cradle gives back (run too low → the body fails in ways a man notices). The repeatable cradle also reads the day-flip ("morning again — a new day").
+- **Credits** — named in the dossier as a company cover allowance (clothes, drink, a way into a man's evening).
+- **The leash (win/fail)** — surfaced lightly in the office: everything she does feeds back to the Tower; an asset that slips gets pulled in and looked at. (The fail-state *mechanic* stays deferred to the full Phase-1 web — this just makes the negative axis legible, per §8's declared leash.)
+- **Next action + the HUD** — already there: the Mission-1 quest card (goals + tip) goes live at the hinge; the sidebar shows Charge / Credits / Renner at value-zero from frame one.
+- **Every greyed gate states its reason** — all 11 `show_when_locked` rungs carry a `locked_text` (the seduction ladder + the sex-loop finishers).
+
+### Entrances (per `references/npc-intro.md`) — the bar for the unbuilt cast
+Renner (assigned-target → travel → hire-on-arrival) and Mercer (motivated owner) are the two built entrances; both pass. **The remaining cast (Bastien, Calloway, Pell, Sol, …) must each clear the entrance checklist when built:** a pretext (name-planted upstream OR a staged caused-arrival), name-on-the-page + a one-line read, a first voiced line that IS their want (the casting hook), and the fire-once → `<npc>_opened_up` → gated repeatable hub shape. No bare cold-spawn hubs.
 
 ### Parked mysteries (Chekhov's guns — planted here, paid off later, not resolved)
 - **The Chairman's wife.** The "rogue murdered her" story is the company's **lie / propaganda** (it keeps Cain good). What *really* happened to her is a later reveal. *(Truth: TBD.)*

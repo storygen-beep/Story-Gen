@@ -98,6 +98,7 @@ blocks = [
         { type = "paragraph", content = "A face comes up on the wall screen. A man gone to seed, mid-forties, a hard mouth. The name under it: RENNER." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "He supplied the gear for the facility Cain burned. He knows where the trail starts. Get inside his life and find it." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "And understand what you're bringing home. Cain murdered the Chairman's wife. He's an enemy of this company and everything it keeps standing. Put him in a box and you've earned your place for good." },
+        { type = "paragraph", content = "She understands the leash without being told it: everything she does out there feeds back to the Tower, and an asset that slips — that lets the malfunction show, that fails to bring the work home — gets pulled in and looked at. She does not intend to be looked at." },
     ] },
     { advance_text = "Dismissed.", blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Now get out of my sight." },
@@ -146,7 +147,7 @@ blocks = [
   { type = "paragraph", content = "The asset level is quiet the way a kept place is quiet. She comes down through the Tower to her own floor, her own door, her own room with nothing on the walls. The cradle waits in the corner." },
   { type = "cascade", props = { beats = [
     { advance_text = "Power down.", blocks = [
-        { type = "paragraph", content = "She steps back into it. The contacts find the points along her spine, cold and familiar. The room dims as the charge takes hold, and the day's log begins to write itself down into the quiet." },
+        { type = "paragraph", content = "She steps back into it. The contacts find the points along her spine, cold and familiar. The room dims as the charge takes hold, and the day's log begins to write itself down into the quiet. Whatever the day spent out of her — every street walked, every shift worked — the cradle gives it back by morning; let the charge run too low out there and the body starts to fail in ways a man's hands would notice." },
     ] },
     { advance_text = "...", blocks = [
         { type = "paragraph", content = "Then her face is wet. She registers it the way she'd register a leak in a seal — water, on her cheeks, with no source she can name and no order that called for it. She holds perfectly still and runs every diagnostic she has, and every one comes back clean. She files the water under malfunction and resolves to have it looked at, and does not have it looked at, because some part of her already knows they'd take it out." },
@@ -217,6 +218,7 @@ blocks = [
     { advance_text = "Read it.", blocks = [
         { type = "paragraph", content = "A Vance asset-facility in the Reach burned to the ground three weeks ago — Cain's work. The man who supplied its equipment is named Renner: a quartermaster, broke now, blacklisted, drinking himself down at a dock bar called the Anchor and clawing at the wreck of his business. He knows what the facility was and where the trail goes. He does not know what she is." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Get inside his life. You know how." },
+        { type = "paragraph", content = "There's a cover allowance stamped under the dossier — company credits, for clothes and drink and whatever else buys a way into a man's evening. The kind of money she's meant to spend like she intends to come home with him." },
     ] },
     { advance_text = "Dress for it.", blocks = [
         { type = "paragraph", content = "She picks a face for it from the rack of them she keeps — not a disguise so much as a register: cheap, willing, a little desperate, the kind of hire a wrecked man doesn't look at twice until she makes him. She puts it on the way she puts on everything, from the outside. Wren goes under. Whoever Renner needs comes up." },
