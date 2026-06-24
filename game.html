@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Story-Gen — Game</title>
+  <link rel="stylesheet" href="portal.css">
+  <script src="games-data.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="index.html">← All games</a>
+    <div id="detail"></div>
+  </div>
+
+  <script>
+    (function () {
+      var id = new URLSearchParams(location.search).get("id");
+      var game = (window.GAMES || []).find(function (g) { return g.slug === id; });
+      var root = document.getElementById("detail");
+
+      if (!game) {
+        document.title = "Game not found — Story-Gen";
+        var msg = document.createElement("p");
+        msg.className = "notfound";
+        msg.textContent = "That game doesn't exist. Head back to the list and pick one.";
+        root.appendChild(msg);
+        return;
+      }
+
+      document.title = game.title + " — Story-Gen";
+
+      var h1 = document.createElement("h1");
+      h1.className = "detail-title";
+      h1.textContent = game.title;
+      if (game.badge) {
+        var badge = document.createElement("span");
+        badge.className = "badge";
+        badge.textContent = game.badge;
+        h1.appendChild(document.createTextNode(" "));
+        h1.appendChild(badge);
+      }
+
+      var summary = document.createElement("p");
+      summary.className = "detail-summary";
+      summary.textContent = game.summary;
+
+      var play = document.createElement("a");
+      play.className = "play-btn";
+      play.href = "games/" + game.slug + "/output/index.html";
+      play.textContent = game.dev ? "Open" : "Play";
+
+      var detail = document.createElement("div");
+      detail.className = "detail";
+      detail.append(h1, summary, play);
+      root.appendChild(detail);
+    })();
+  </script>
+</body>
+</html>
