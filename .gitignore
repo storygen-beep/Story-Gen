@@ -195,3 +195,14 @@ game_explorations/*/profile/
 game_explorations/*/screenshots/live/
 game_explorations/*/archive/
 game_explorations/*/.live/
+
+# ============================================================
+# Vesper — playable output media is TRACKED (the portal needs it).
+# Overrides the blanket videos/ + media-extension ignores above.
+# Re-include the dir first, then its contents — git cannot
+# re-include a file whose parent directory is still excluded.
+# Vesper is the ONLY game whose media is tracked; all other
+# games' media was cleaned off disk (see games/ media policy).
+# ============================================================
+!games/vesper/output/videos/
+!games/vesper/output/videos/**
