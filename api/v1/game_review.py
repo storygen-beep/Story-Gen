@@ -237,6 +237,35 @@ def _process_canvas(canvas: dict) -> dict:
     return result
 
 
+def _iter_media_blocks(blocks: list[dict]):
+    """Yield every image/video block reachable in `blocks`, descending into the
+    nested-block containers the game generator actually renders.
+
+    A flat walk over `node["blocks"]` only sees media that are DIRECT children of a
+    node. But the hottest content is always nested one level deeper:
+      - sex-loop FINISHERS + ambient sex  → `group` blocks   (`block["blocks"]`)
+      - OPENING / first-time sex          → `cascade` beats   (`props["beats"][*]["blocks"]`)
+      - random-still pools                → `block_pool`      (`props["blocks"]`)
+    The flat walk missed all of it, so those files never reached the missing-media
+    list and shipped without art while the audit reported "0 missing". This mirrors
+    v2.py `_convert_blocks_to_game_html`'s descent so the list matches the real build.
+    """
+    for block in blocks:
+        if not isinstance(block, dict):
+            continue
+        if (block.get("type") or "").strip() in ("image", "video"):
+            yield block
+        props = block.get("props") or {}
+        # group (and any block carrying a direct child list)
+        yield from _iter_media_blocks(block.get("blocks") or [])
+        # block_pool — children under props.blocks
+        yield from _iter_media_blocks(props.get("blocks") or [])
+        # cascade — children under props.beats[*].blocks
+        for beat in (props.get("beats") or []):
+            if isinstance(beat, dict):
+                yield from _iter_media_blocks(beat.get("blocks") or [])
+
+
 def _extract_missing_media(data: dict, game_name: str) -> dict:
     """Extract all media references from TOML, split into found vs missing.
 
@@ -306,10 +335,10 @@ def _extract_missing_media(data: dict, game_name: str) -> dict:
         canvas_id = canvas.get("id", "")
         canvas_name = canvas.get("name", canvas_id)
         for node in canvas.get("nodes", []):
-            for block in node.get("blocks", []):
+            # Recurse into nested containers (group / cascade / block_pool) — the
+            # flat `node["blocks"]` walk was blind to finishers + opening sex.
+            for block in _iter_media_blocks(node.get("blocks", [])):
                 btype = block.get("type", "")
-                if btype not in ("image", "video"):
-                    continue
                 props = block.get("props", {})
                 file_path = props.get("file", "")
                 if not file_path:
