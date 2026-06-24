@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Media Review — Story-Gen</title>
+  <link rel="stylesheet" href="portal.css">
+  <script src="games-data.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="index.html">← All games</a>
+    <div class="review-head"><h1 id="title">Media Review</h1></div>
+    <p class="review-sub" id="sub"></p>
+    <div id="filters" class="filters" hidden></div>
+    <div id="content"></div>
+  </div>
+
+  <script>
+  (function () {
+    // Local authoring tool — talks to the Django dev server.
+    var API = "http://localhost:8000";
+    var GAME = new URLSearchParams(location.search).get("id") || "";
+    var game = (window.GAMES || []).find(function (g) { return g.slug === GAME; });
+    var titleEl = document.getElementById("title");
+    var subEl = document.getElementById("sub");
+    var filtersEl = document.getElementById("filters");
+    var contentEl = document.getElementById("content");
+
+    var LANE_LABEL = {
+      location: "Locations", npc: "NPC", solo: "Solo",
+      story: "Story", clothing: "Clothing", phone: "Phone", other: "Other"
+    };
+    var FILTERS = [
+      { key: "all", label: "All", test: function () { return true; } },
+      { key: "approved", label: "Approved", test: function (i) { return i.status === "approved"; } },
+      { key: "disapproved", label: "Disapproved", test: function (i) { return i.status === "disapproved"; } },
+      { key: "needs", label: "Needs review", test: function (i) { return i.found && !i.status; } },
+      { key: "missing", label: "Missing", test: function (i) { return !i.found; } }
+    ];
+
+    var state = { items: [], laneOrder: [], filter: "all", toml: "", expanded: new Set() };
+
+    document.title = (game ? game.title : GAME) + " — Media Review";
+    titleEl.textContent = (game ? game.title : GAME);
+
+    if (!GAME) {
+      subEl.textContent = "";
+      contentEl.innerHTML = '<p class="notfound">No game id. Go back and pick a game.</p>';
+      return;
+    }
+
+    function el(tag, cls, text) {
+      var e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (text != null) e.textContent = text;
+      return e;
+    }
+
+    function mediaUrl(item) { return API + item.media_url; }
+
+    // ---- save a review (simple request: no custom headers -> no CORS preflight) ----
+    // Optimistic, but rolls back item state on failure and only fires onOk (the UI
+    // flip) when the server actually persisted — so the card never lies about what's saved.
+    function saveReview(item, status, note, tickEl, onOk) {
+      var prevStatus = item.status, prevNote = item.note;
+      item.status = status;
+      item.note = note;
+      if (tickEl) tickEl.textContent = "saving…";
+      return fetch(API + "/api/v1/dev/media-review/reviews?game=" + encodeURIComponent(GAME), {
+        method: "POST",
+        body: JSON.stringify({ file: item.file, status: status, note: note })
+      }).then(function (r) {
+        if (!r.ok) throw new Error("save failed");
+        if (tickEl) { tickEl.textContent = "saved ✓"; setTimeout(function () { tickEl.textContent = ""; }, 1400); }
+        if (onOk) onOk();
+      }).catch(function () {
+        item.status = prevStatus;   // roll back — nothing was persisted
+        item.note = prevNote;
+        if (tickEl) tickEl.textContent = "save failed — is the server up?";
+      });
+    }
+
+    function buildCard(item) {
+      var card = el("div", "media-card");
+      function reflectStatus() {
+        card.classList.toggle("approved", item.status === "approved");
+        card.classList.toggle("disapproved", item.status === "disapproved");
+      }
+
+      // media / placeholder
+      if (item.found && item.media_url) {
+        if (item.media_type === "video") {
+          var v = el("video", "media-thumb");
+          v.src = mediaUrl(item);
+          v.controls = true; v.loop = true; v.muted = true; v.playsInline = true; v.preload = "metadata";
+          card.appendChild(v);
+        } else {
+          var img = el("img", "media-thumb");
+          img.src = mediaUrl(item); img.loading = "lazy"; img.alt = item.description || item.file;
+          card.appendChild(img);
+        }
+      } else {
+        card.appendChild(el("div", "media-thumb missing", "no media yet"));
+      }
+
+      var body = el("div", "media-body");
+
+      var queries = (item.search_queries && item.search_queries.length)
+        ? item.search_queries.join("  ·  ")
+        : "(no search query)";
+      body.appendChild(el("div", "media-query", queries));
+
+      // meta lines
+      var meta = el("div", "media-meta");
+      function metaLine(k, v) {
+        if (!v) return;
+        var line = el("div");
+        line.appendChild(el("span", "k", k + ": "));
+        line.appendChild(document.createTextNode(v));
+        meta.appendChild(line);
+      }
+      if (item.canvas_name && item.lane !== "location") metaLine("canvas", item.canvas_name);
+      metaLine("location", item.location_name);
+      if (item.lane === "npc") metaLine("npc", item.npc_name + (item.ambient ? " (ambient)" : ""));
+      if (item.reused_in && item.reused_in.length) metaLine("also in", item.reused_in.join(", "));
+      if (item.description) metaLine("desc", item.description);
+
+      var fileLine = el("div");
+      fileLine.appendChild(el("span", "k", "file: "));
+      fileLine.appendChild(document.createTextNode(item.file + " "));
+      var badge = el("span", "type-badge" + (item.media_type === "video" ? " vid" : ""), item.media_type);
+      fileLine.appendChild(badge);
+      meta.appendChild(fileLine);
+      body.appendChild(meta);
+
+      // review controls (found items only)
+      if (item.found) {
+        var tick = el("div", "saved-tick", "");
+        var row = el("div", "review-row");
+        var approve = el("button", "rev-btn approve", "Approve");
+        var disapprove = el("button", "rev-btn disapprove", "Disapprove");
+        function reflectButtons() {
+          approve.classList.toggle("on", item.status === "approved");
+          disapprove.classList.toggle("on", item.status === "disapproved");
+        }
+        var note = el("textarea", "media-note");
+        note.placeholder = "note…";
+        note.value = item.note || "";
+
+        approve.addEventListener("click", function () {
+          var next = item.status === "approved" ? null : "approved";
+          saveReview(item, next, note.value, tick, function () { reflectButtons(); reflectStatus(); });
+        });
+        disapprove.addEventListener("click", function () {
+          var next = item.status === "disapproved" ? null : "disapproved";
+          saveReview(item, next, note.value, tick, function () { reflectButtons(); reflectStatus(); });
+        });
+        note.addEventListener("blur", function () {
+          if (note.value !== (item.note || "")) saveReview(item, item.status || null, note.value, tick);
+        });
+
+        row.append(approve, disapprove);
+        body.append(row, note, tick);
+        reflectButtons();
+      }
+
+      reflectStatus();
+      card.appendChild(body);
+      return card;
+    }
+
+    function render() {
+      contentEl.innerHTML = "";
+      var f = FILTERS.find(function (x) { return x.key === state.filter; });
+      var visible = state.items.filter(f.test);
+
+      // filter bar with live counts
+      filtersEl.innerHTML = "";
+      filtersEl.hidden = false;
+      FILTERS.forEach(function (flt) {
+        var n = state.items.filter(flt.test).length;
+        var b = el("button", "filter-btn" + (state.filter === flt.key ? " active" : ""));
+        b.appendChild(document.createTextNode(flt.label));
+        b.appendChild(el("span", "count", String(n)));
+        b.addEventListener("click", function () { state.filter = flt.key; render(); });
+        filtersEl.appendChild(b);
+      });
+
+      if (!visible.length) {
+        contentEl.appendChild(el("p", "empty", "Nothing matches this filter."));
+        return;
+      }
+
+      state.laneOrder.forEach(function (lane) {
+        var laneItems = visible.filter(function (i) { return i.lane === lane; });
+        if (!laneItems.length) return;
+
+        // Collapsed by default; a non-"All" filter force-expands so results show.
+        var expanded = (state.filter !== "all") || state.expanded.has(lane);
+
+        var section = el("div", "lane-section");
+        var header = el("button", "lane-title" + (expanded ? " open" : ""));
+        header.appendChild(el("span", "chev", expanded ? "▼" : "▶"));
+        header.appendChild(el("span", "lane-name", LANE_LABEL[lane] || lane));
+        header.appendChild(el("span", "lane-count", String(laneItems.length)));
+        header.addEventListener("click", function () {
+          if (state.expanded.has(lane)) state.expanded.delete(lane);
+          else state.expanded.add(lane);
+          render();
+        });
+        section.appendChild(header);
+
+        // Lazy: only build the media DOM (and trigger loads) when expanded.
+        if (expanded) {
+          var body = el("div", "lane-body");
+          if (lane === "npc") {
+            // sub-group per character, preserving first-seen order
+            var order = [], byNpc = {};
+            laneItems.forEach(function (i) {
+              var key = i.npc_name || "—";
+              if (!byNpc[key]) { byNpc[key] = []; order.push(key); }
+              byNpc[key].push(i);
+            });
+            order.forEach(function (key) {
+              body.appendChild(el("div", "npc-subhead", key));
+              var grid = el("div", "media-grid");
+              byNpc[key].forEach(function (i) { grid.appendChild(buildCard(i)); });
+              body.appendChild(grid);
+            });
+          } else {
+            var grid2 = el("div", "media-grid");
+            laneItems.forEach(function (i) { grid2.appendChild(buildCard(i)); });
+            body.appendChild(grid2);
+          }
+          section.appendChild(body);
+        }
+        contentEl.appendChild(section);
+      });
+    }
+
+    function showOffline() {
+      filtersEl.hidden = true;
+      subEl.textContent = "";
+      var box = el("div", "offline");
+      box.innerHTML =
+        "This is a <strong>local authoring tool</strong>. It reads your games and media from " +
+        "the Django dev server, which isn't reachable.<br><br>Start it with " +
+        "<code>python manage.py runserver</code> (from <code>story_gen_django/</code>), then reload.";
+      contentEl.innerHTML = "";
+      contentEl.appendChild(box);
+    }
+
+    // The server answered but with an error (e.g. unknown game / no TOML) — show
+    // the real reason rather than the misleading "server is down" panel.
+    function showError(msg) {
+      filtersEl.hidden = true;
+      subEl.textContent = "";
+      var box = el("div", "offline");
+      box.appendChild(el("strong", null, "Couldn't load this game. "));
+      box.appendChild(document.createTextNode(msg || "Unknown error."));
+      contentEl.innerHTML = "";
+      contentEl.appendChild(box);
+    }
+
+    // ---- load ----
+    fetch(API + "/api/v1/dev/media-review/list?game=" + encodeURIComponent(GAME))
+      .then(function (r) {
+        if (!r.ok) {
+          return r.json().catch(function () { return {}; }).then(function (j) {
+            var e = new Error(j.error || ("HTTP " + r.status));
+            e.http = true;  // the server answered — not a connectivity problem
+            throw e;
+          });
+        }
+        return r.json();
+      })
+      .then(function (data) {
+        state.items = (data.items || []).slice().sort(function (a, b) { return (a.order || 0) - (b.order || 0); });
+        state.laneOrder = data.lane_order || ["location", "npc", "solo", "story", "clothing", "phone", "other"];
+        state.toml = data.toml || "";
+        var c = data.counts || {};
+        subEl.textContent = (c.found || 0) + " media · " + (c.missing || 0) + " missing · " +
+          (c.approved || 0) + " approved · " + (c.disapproved || 0) + " disapproved" +
+          (state.toml ? "  ·  " + state.toml : "");
+        render();
+      })
+      .catch(function (err) {
+        if (err && err.http) showError(err.message); else showOffline();
+      });
+  })();
+  </script>
+</body>
+</html>

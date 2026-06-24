@@ -1,7 +1,7 @@
 """
 Game Review — dev tool for reviewing TOML game structure and progression.
 
-Parses 6_final_game.toml and renders an interactive overview showing:
+Parses the game's merged *_final_game.toml and renders an interactive overview showing:
 - Story arc flow (chapters, nodes, flag chains)
 - Activity canvases with conditional choices
 - Trait/flag control panel for testing unlock states
@@ -22,6 +22,32 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
 
 GAMES_ROOT = Path(settings.BASE_DIR) / "games"
+
+
+def _resolve_final_toml(game_dir: Path) -> Path | None:
+    """Find a game's merged final TOML, whatever its phase number.
+
+    Games are packaged to ``<n>_final_game.toml`` where n varies (older games
+    use 6_, the newest 7_). Pick the highest *numeric* prefix so the newest merge
+    wins — by integer value, not lexical order, so a future 10_ beats 7_. Names
+    whose prefix isn't purely digits (e.g. ``backup_7_final_game.toml``) are
+    ignored. Returns None if none exists.
+    """
+    phases_dir = game_dir / "toml_phases"
+    if not phases_dir.is_dir():
+        return None
+    suffix = "_final_game.toml"
+    best, best_n = None, -1
+    for f in phases_dir.iterdir():
+        if not f.name.endswith(suffix):
+            continue
+        prefix = f.name[: -len(suffix)]
+        if not prefix.isdigit():  # excludes backup_7_, draft_, etc.
+            continue
+        n = int(prefix)
+        if n > best_n:
+            best_n, best = n, f
+    return best
 
 
 # =============================================================================
@@ -211,8 +237,11 @@ def _process_canvas(canvas: dict) -> dict:
     return result
 
 
-def _extract_missing_media(data: dict, game_name: str) -> list[dict]:
-    """Extract all media references from TOML and check which files are missing."""
+def _extract_missing_media(data: dict, game_name: str) -> dict:
+    """Extract all media references from TOML, split into found vs missing.
+
+    Returns {"missing": [...], "found": [...]}.
+    """
     missing = []
     found = []
     game_dir = GAMES_ROOT / game_name
@@ -400,7 +429,7 @@ def _extract_missing_media(data: dict, game_name: str) -> list[dict]:
 
 @require_GET
 def list_games(request):
-    """Return list of games that have a 6_final_game.toml."""
+    """Return list of games that have a merged *_final_game.toml."""
     if not GAMES_ROOT.exists():
         return JsonResponse({"games": []})
 
@@ -408,8 +437,8 @@ def list_games(request):
     for game_dir in sorted(GAMES_ROOT.iterdir()):
         if not game_dir.is_dir():
             continue
-        toml_path = game_dir / "toml_phases" / "6_final_game.toml"
-        if toml_path.exists():
+        toml_path = _resolve_final_toml(game_dir)
+        if toml_path is not None:
             games.append({"name": game_dir.name, "toml_path": str(toml_path)})
     return JsonResponse({"games": games})
 
@@ -421,16 +450,17 @@ def load_game(request):
     if not game:
         return JsonResponse({"error": "Missing game parameter"}, status=400)
 
-    toml_path = GAMES_ROOT / game / "toml_phases" / "6_final_game.toml"
-    # Path traversal check
+    game_dir = GAMES_ROOT / game
+    # Path traversal check (is_relative_to avoids the sibling-prefix bypass that a
+    # bare startswith allows, e.g. ../games_secret).
     try:
-        resolved = toml_path.resolve()
-        if not str(resolved).startswith(str(GAMES_ROOT.resolve())):
+        if not game_dir.resolve().is_relative_to(GAMES_ROOT.resolve()):
             return JsonResponse({"error": "Invalid path"}, status=400)
     except Exception:
         return JsonResponse({"error": "Invalid path"}, status=400)
 
-    if not toml_path.exists():
+    toml_path = _resolve_final_toml(game_dir)
+    if toml_path is None or not toml_path.exists():
         return JsonResponse({"error": "TOML file not found"}, status=404)
 
     try:

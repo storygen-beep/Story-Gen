@@ -45,6 +45,8 @@ urlpatterns = [
     path("dev/video-browser/", include("api.v1.video_browser")),
     # Game review dev tool
     path("dev/game-review/", include("api.v1.game_review")),
+    # Media review dev tool (approve / disapprove / note per asset)
+    path("dev/media-review/", include("api.v1.media_review")),
     # Media finder dev tool
     path("dev/media-finder/", include("api.v1.media_finder")),
 ]

@@ -51,9 +51,19 @@
       play.href = "games/" + game.slug + "/output/index.html";
       play.textContent = game.dev ? "Open" : "Play";
 
+      // Local authoring tool — review the game's media (needs the Django dev server).
+      var review = document.createElement("a");
+      review.className = "play-btn secondary";
+      review.href = "media.html?id=" + encodeURIComponent(game.slug);
+      review.textContent = "Review media";
+
+      var actions = document.createElement("div");
+      actions.className = "actions";
+      actions.append(play, review);
+
       var detail = document.createElement("div");
       detail.className = "detail";
-      detail.append(h1, summary, play);
+      detail.append(h1, summary, actions);
       root.appendChild(detail);
     })();
   </script>
