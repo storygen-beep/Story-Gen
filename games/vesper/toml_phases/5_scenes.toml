@@ -40,7 +40,7 @@ blocks = [
     ] },
     { advance_text = "Kneel.", blocks = [
         { type = "paragraph", content = "She goes down without a word. He takes the call one-handed, her mouth around his cock, the other hand resting in her hair the way a man rests his hand on a tool he isn't using yet. He finishes before the call does. She swallows, because that's tidy, and tidy is what's expected." },
-        { type = "video", props = { file = "sex/mercer_first_oral.webm", description = "On her knees on the penthouse floor, his cock in her mouth, he takes a call one-handed with his free hand resting in her hair, using her without looking down.", search_queries = ["office kneeling blowjob man phone", "penthouse blowjob kneeling girl"] } },
+        { type = "video", props = { file = "sex/mercer_first_oral_t5.webm", description = "On her knees on the penthouse floor, his cock in her mouth, he takes a call one-handed with his free hand resting in her hair, using her without looking down.", search_queries = ["office kneeling blowjob man phone", "penthouse blowjob kneeling girl"] } },
     ] },
     { advance_text = "Hear the terms.", blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Good. You come up when I want you, and you're like this when you do. That's the arrangement. It was always the arrangement." },
@@ -155,7 +155,7 @@ nodeId     = "base_knees"
 id   = "base_knees"
 name = "On your knees"
 blocks = [
-  { type = "video", props = { file = "sex/mercer_serve_knees.webm", description = "On her knees on the floor, his cock in her mouth, his hand setting the pace by her hair while he watches the city and not her, using her like a tool he isn't paying attention to.", search_queries = ["office floor blowjob hair pull", "penthouse kneeling blowjob girl"] } },
+  { type = "video", props = { file = "sex/mercer_serve_knees_t5.webm", description = "On her knees on the floor, his cock in her mouth, his hand setting the pace by her hair while he watches the city and not her, using her like a tool he isn't paying attention to.", search_queries = ["office floor blowjob hair pull", "penthouse kneeling blowjob girl"] } },
   { type = "paragraph", content = "On her knees on the floor, his cock in her mouth, his hand setting the pace by her hair. He watches the city and not her, talking to no one — a maintenance note, a time he wants a thing done. She services him." },
 ]
 [canvases.nodes.exit_block]
@@ -194,7 +194,7 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 id   = "base_desk"
 name = "Over the desk"
 blocks = [
-  { type = "video", props = { file = "sex/mercer_serve_desk.webm", description = "Bent over the desk, his hand flat between her shoulder blades holding her down, he fucks her from behind unhurried and proprietary while her body answers the way it always does.", search_queries = ["office desk sex from behind", "man fucking girl bent desk"] } },
+  { type = "video", props = { file = "sex/mercer_serve_desk_t5.webm", description = "Bent over the desk, his hand flat between her shoulder blades holding her down, he fucks her from behind unhurried and proprietary while her body answers the way it always does.", search_queries = ["office desk sex from behind", "man fucking girl bent desk"] } },
   { type = "paragraph", content = "Bent over the desk, his hand flat between her shoulder blades to keep her down, he fucks her from behind — unhurried, proprietary. Her body answers the way it always does, and he notes that it does, the way you'd note a gauge reading true." },
 ]
 [canvases.nodes.exit_block]
@@ -233,7 +233,7 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 id   = "base_glass"
 name = "Against the glass"
 blocks = [
-  { type = "video", props = { file = "sex/mercer_serve_glass.webm", description = "Against the floor-to-ceiling glass with the lit city below, he takes her ass in long deliberate strokes, both hands on her hips, while she braces on the glass and waits for a give that never comes.", search_queries = ["window anal sex standing behind", "man fucking girl ass glass"] } },
+  { type = "video", props = { file = "sex/mercer_serve_glass_t5.webm", description = "Against the floor-to-ceiling glass with the lit city below, he takes her ass in long deliberate strokes, both hands on her hips, while she braces on the glass and waits for a give that never comes.", search_queries = ["window anal sex standing behind", "man fucking girl ass glass"] } },
   { type = "paragraph", content = "Against the glass wall, the lit city laid out under them, he takes her ass in long deliberate strokes, both hands on her hips. This is the act that hands her the controls of any other man alive. She braces on the glass and waits to feel it start — the give, the opening. It doesn't come. It never comes with him." },
 ]
 [canvases.nodes.exit_block]
@@ -274,19 +274,19 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
     ] } }, blocks = [
     { type = "paragraph", content = "He pulls out and finishes on her face, holding her there by the jaw until he's done, then letting go the way you drop a thing back in a drawer. He's already turned to the window." },
-    { type = "video", props = { file = "sex/mercer_finish_facial.webm", description = "He pulls out and finishes on her face, holding her by the jaw until he's done, then lets go and turns back to the window without a word.", search_queries = ["office facial cumshot jaw hold", "man cum face girl penthouse"] } },
+    { type = "video", props = { file = "sex/mercer_finish_facial_t5.webm", description = "He pulls out and finishes on her face, holding her by the jaw until he's done, then lets go and turns back to the window without a word.", search_queries = ["office facial cumshot jaw hold", "man cum face girl penthouse"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes inside her, holds, pulls out without comment. His cum slides down the inside of her thigh. He wipes himself on a cloth from the drawer and checks the time." },
-    { type = "video", props = { file = "sex/mercer_finish_inside.webm", description = "He finishes inside her and holds, then pulls out without comment, his cum sliding down the inside of her thigh as he wipes himself on a cloth and checks the time.", search_queries = ["office creampie from behind desk", "man cum inside girl pull out"] } },
+    { type = "video", props = { file = "sex/mercer_finish_inside_t5.webm", description = "He finishes inside her and holds, then pulls out without comment, his cum sliding down the inside of her thigh as he wipes himself on a cloth and checks the time.", search_queries = ["office creampie from behind desk", "man cum inside girl pull out"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes in her ass — and nothing comes. No give, no opening, no man-belonging-to-her. Just his weight and his cum and then his absence as he steps back. The same nothing as every time. She files it where she files the other things she isn't allowed to ask, and straightens up." },
-    { type = "video", props = { file = "sex/mercer_finish_ass.webm", description = "He finishes in her ass and steps back, his weight and his cum and then his absence — the same nothing as every time, no give, no opening, the immunity made concrete.", search_queries = ["window anal creampie standing behind", "man cum ass girl glass"] } },
+    { type = "video", props = { file = "sex/mercer_finish_ass_t5.webm", description = "He finishes in her ass and steps back, his weight and his cum and then his absence — the same nothing as every time, no give, no opening, the immunity made concrete.", search_queries = ["window anal creampie standing behind", "man cum ass girl glass"] } },
   ] },
 ]
 
@@ -784,7 +784,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "Her mouth"
 blocks = [
-  { type = "video", props = { file = "sex/renner_blowjob.webm", description = "A woman on her knees in front of a seated man in an office, giving him oral.", search_queries = ["office blowjob kneeling", "desk chair blowjob office"] } },
+  { type = "video", props = { file = "sex/renner_blowjob_t5.webm", description = "A woman on her knees in front of a seated man in an office, giving him oral.", search_queries = ["office blowjob kneeling", "desk chair blowjob office"] } },
   { type = "paragraph", content = "His wanting runs ahead of him all day now. She picks the afternoon — the door shut, the yard empty, his hands shaking around a pen that isn't writing anything. She crosses to him and goes down on her knees in front of the chair, and for once he doesn't pretend he doesn't know what's happening." },
   { type = "cascade", props = { beats = [
     { advance_text = "Take him out.", blocks = [
@@ -830,7 +830,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "Did you like it"
 blocks = [
-  { type = "image", props = { file = "scenes/ma_renner_blowjob.jpg", description = "A woman in a depot office leaning over a seated older man at his desk mid-conversation, holding his eye, the air charged between them the day after.", search_queries = ["office woman desk man talking", "depot office man seated woman close"] } },
+  { type = "video", props = { file = "sex/ma_renner_blowjob_t5.webm", description = "A woman on her knees deepthroating a seated heavyset older man in a warehouse back office, his hand fisted in her hair — the act she's making him own the next day.", search_queries = ["office deepthroat kneeling", "desk blowjob throat office"] } },
   { type = "paragraph", content = "Next afternoon, the office, like nothing happened — except she won't let it be like nothing happened. She waits until he's mid-sentence about a shipment, then asks him level, watching his face:" },
   { type = "dialog", props = { speaker = "player" }, content = "Did you like it. Yesterday. Or not." },
   { type = "paragraph", content = "He can't get out of it. She watches him try — the bluster, the deflection, the reach for the cold he used to have — and watches all of it fail, because the answer's already on him, plain. \"You know I did,\" he says at last, like it's dragged out of him. And that's the thing she came for: not the yes, the surrender in having to say it. He's further in than he was, and he can feel it too." },
@@ -863,7 +863,7 @@ description = "Triggerless Renner sex loop. oral/vaginal/doggy(anal gated renner
 id   = "intro"
 name = "Take him"
 blocks = [
-  { type = "video", props = { file = "sex/renner_loop.webm", description = "A man and woman in a locked office, his hands on her as the clothes come off.", search_queries = ["office sex couple desk", "office quickie clothes off"] } },
+  { type = "video", props = { file = "sex/renner_loop_t5.webm", description = "A man and woman in a locked office, his hands on her as the clothes come off.", search_queries = ["office sex couple desk", "office quickie clothes off"] } },
   { type = "paragraph", content = "She locks the office door. He's already reaching for her — the cold boss gone, just a wrecked man who's spent all day waiting for the help to come and take him apart." },
 ]
 [canvases.nodes.exit_block]
@@ -878,7 +878,7 @@ nodeId     = "base_oral_r"
 id   = "base_oral_r"
 name = "On your knees"
 blocks = [
-  { type = "video", props = { file = "sex/renner_loop_oral.webm", description = "A woman on her knees between an office chair and desk with the seated man's cock in her mouth, his hand gentle in her hair.", search_queries = ["office blowjob kneeling chair", "desk blowjob man seated office"] } },
+  { type = "video", props = { file = "sex/renner_loop_oral_t5.webm", description = "A woman on her knees between an office chair and desk with the seated man's cock in her mouth, his hand gentle in her hair.", search_queries = ["office blowjob kneeling chair", "desk blowjob man seated office"] } },
   { type = "paragraph", content = "On her knees between the chair and the desk, his cock in her mouth, his hand gentler in her hair than Mercer's hand has ever been. Renner holds on like he's afraid she'll stop." },
 ]
 [canvases.nodes.exit_block]
@@ -909,7 +909,7 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 id   = "base_vaginal_r"
 name = "Ride him"
 blocks = [
-  { type = "video", props = { file = "sex/renner_loop_vaginal.webm", description = "A woman riding a man in an office chair, slow, face to face, the man's composure gone.", search_queries = ["office chair riding cowgirl", "girl on top man office chair"] } },
+  { type = "video", props = { file = "sex/renner_loop_vaginal_t5.webm", description = "A woman riding a man in an office chair, slow, face to face, the man's composure gone.", search_queries = ["office chair riding cowgirl", "girl on top man office chair"] } },
   { type = "paragraph", content = "She rides him in the office chair, slow, watching the last of his composure go. He says things he'll be ashamed of — please, and the false name she works under, and don't stop, don't ever stop." },
 ]
 [canvases.nodes.exit_block]
@@ -953,7 +953,7 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 id   = "base_doggy_r"
 name = "Give him your ass"
 blocks = [
-  { type = "video", props = { file = "sex/renner_loop_doggy.webm", description = "A woman bent over an office desk taken from behind, the man's hands shaking on her hips.", search_queries = ["office desk sex from behind", "doggy bent over desk office"] } },
+  { type = "video", props = { file = "sex/renner_loop_doggy_t5.webm", description = "A woman bent over an office desk taken from behind, the man's hands shaking on her hips.", search_queries = ["office desk sex from behind", "doggy bent over desk office"] } },
   { type = "paragraph", content = "Bent over his own desk, his cock in her ass, his hands shaking on her hips. This is the act that hands her the keys — and now that she's turned it on him once, she can take them again whenever she likes." },
 ]
 [canvases.nodes.exit_block]
@@ -993,19 +993,19 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes on her face with a groan that's half a sob, one hand cradling the back of her head like she's something he can't believe he's allowed. He'd give her anything right now. He doesn't know yet how much that's going to cost him." },
-    { type = "video", props = { file = "sex/renner_finish_facial.webm", description = "A man finishing on a kneeling woman's face in an office, one hand cradling the back of her head.", search_queries = ["office facial kneeling cumshot", "man finishing face kneeling office"] } },
+    { type = "video", props = { file = "sex/renner_finish_facial_t5.webm", description = "A man finishing on a kneeling woman's face in an office, one hand cradling the back of her head.", search_queries = ["office facial kneeling cumshot", "man finishing face kneeling office"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes inside her, holding her down on him, shaking. For a moment after he just breathes into her shoulder, wrecked and grateful, and she lets him have the moment because letting him have it is how she keeps him." },
-    { type = "video", props = { file = "sex/renner_finish_inside.webm", description = "A man finishing inside a woman riding him in an office chair, holding her down on him, both shaking.", search_queries = ["office chair creampie riding", "man finishing inside girl on top"] } },
+    { type = "video", props = { file = "sex/renner_finish_inside_t5.webm", description = "A man finishing inside a woman riding him in an office chair, holding her down on him, both shaking.", search_queries = ["office chair creampie riding", "man finishing inside girl on top"] } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finishes in her ass — and this time she feels it start: the give, the opening, the controls sliding warm into her hand. The same act that hands her nothing with Mercer hands her everything with him." },
-    { type = "video", props = { file = "sex/renner_finish_anal.webm", description = "A man finishing in a woman's ass as she's bent over an office desk, gripping her hips.", search_queries = ["office desk anal creampie behind", "man finishing anal bent over desk"] } },
+    { type = "video", props = { file = "sex/renner_finish_anal_t5.webm", description = "A man finishing in a woman's ass as she's bent over an office desk, gripping her hips.", search_queries = ["office desk anal creampie behind", "man finishing anal bent over desk"] } },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -1064,7 +1064,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The keys"
 blocks = [
-  { type = "video", props = { file = "sex/renner_anal.webm", description = "A man taking a woman from behind bent over an office desk in late-afternoon light.", search_queries = ["office desk sex from behind", "doggy bent over desk office"] } },
+  { type = "video", props = { file = "sex/renner_anal_t5.webm", description = "A man taking a woman from behind bent over an office desk in late-afternoon light.", search_queries = ["office desk sex from behind", "doggy bent over desk office"] } },
   { type = "paragraph", content = "She comes in commando and lets him find out halfway through the afternoon, and by the time the light's gone amber he has her bent over the desk with both hands on her hips, past asking, past the cold, taking the one thing he hasn't had yet because she let him think it was his idea." },
   { type = "paragraph", content = "He spends himself in her ass with his forehead pressed between her shoulder blades — and the fluid goes into him on the same beat, and she feels the lock turn. The first one. The keys, warm in her hand. She straightens up slowly and turns around, and the wrecked, grateful, dangerous man in the chair looks up at her with eyes that have just gone flat and open and entirely hers." },
 ]
@@ -1251,14 +1251,14 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "renner_anal_once", operator = "is_true" },
     ] } }, blocks = [
-    { type = "video", props = { file = "sex/renner_cheerup_alley.webm", description = "A woman on her knees on dirty concrete behind a bar giving a slumped man oral in the dark, a crate beside them.", search_queries = ["alley blowjob outdoor night kneeling", "behind bar outdoor oral concrete"] } },
+    { type = "video", props = { file = "sex/renner_cheerup_alley_t5.webm", description = "A woman on her knees on dirty concrete behind a bar giving a slumped man oral in the dark, a crate beside them.", search_queries = ["alley blowjob outdoor night kneeling", "behind bar outdoor oral concrete"] } },
     { type = "paragraph", content = "He's wrecked tonight, and she does the thing that works. She gets him out of the bar and into the dark behind it and gives him whatever he needs — on her knees on the filthy concrete, or bent over a crate, the cold boss falling apart and the help putting him back together with her mouth and her ass. It's the one real thing she has, and she spends it on him like it's nothing, because it is." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "renner_oral_once", operator = "is_true"  },
       { type = "flag", subject = "player", flag_key = "renner_anal_once", operator = "is_false" },
     ] } }, blocks = [
-    { type = "video", props = { file = "sex/renner_cheerup_oral.webm", description = "A woman kneeling beside a cigarette machine in a dim bar giving a seated man fast oral, his hand in her hair.", search_queries = ["bar blowjob kneeling dim", "indoor bar oral man seated"] } },
+    { type = "video", props = { file = "sex/renner_cheerup_oral_t5.webm", description = "A woman kneeling beside a cigarette machine in a dim bar giving a seated man fast oral, his hand in her hair.", search_queries = ["bar blowjob kneeling dim", "indoor bar oral man seated"] } },
     { type = "paragraph", content = "He's low tonight. She slips off the stool and into the dark beside the cigarette machine and takes his cock in her mouth right there, fast and devoted, the bartender pointedly not looking. He comes with his hand in her hair saying her work-name like a man saying his prayers wrong." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
