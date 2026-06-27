@@ -4,7 +4,7 @@
 > translation of what's written here. Grown one section per pipeline step.
 >
 > Working title: **Vesper** (also the PC's buried true name — hidden in plain sight; rename freely).
-> Book revision 22 (Step 5 + authoring; the A→A.5 chunk built. Latest: onboarding dogfood — the opening now *arms the machine* (Charge / Credits / the leash named in-fiction), every greyed rung carries a reason, per `references/onboarding.md`.)
+> Book revision 23 (Step 5 + authoring; the A→A.5 chunk built. Latest: the **cover / disguise** pulled from prose into a real **worn-state system** — the company *issues* the Mission-1 cover, she must wear it or the mark reacts wrong; full spec in *## The cover / disguise system*. Prior: onboarding dogfood — the opening *arms the machine* (Charge / Credits / the leash named in-fiction), every greyed rung carries a reason.)
 
 ---
 
@@ -107,8 +107,9 @@ fork. Remote and mythic — she doesn't reach him until late.
 
 **Player.** **Fixed identity — not player-named** (Wren / buried Vesper). In-world disguises are content.
 
-**Systems:** **Phone** YES · **Clothing** YES (disguise + the covers) · **Money/economy** YES (resources, not
-rent) · **Customization** minimal / no creator.
+**Systems:** **Phone** YES · **Clothing** YES (a **worn-state cover system** — disguise + the covers; see
+*## The cover / disguise system*) · **Money/economy** YES (resources, not rent) · **Customization** minimal /
+no creator.
 
 ---
 
@@ -415,7 +416,7 @@ real choices switch on). The twenty-odd Continue screens before it are the point
 1. **Power-up** — she wakes in the cradle, charged, a new day. *(the day-cycle / morning start)*
 2. **The briefing** — a dossier waiting on her phone. *(the phone)*
 3. **The tip** — what happened (a facility burned), why her (Renner knows the trail), what she can do (get close, the gift), where (the Anchor).
-4. **Out the door** *(the hinge)* — she takes a cover and steps out of the Tower for the first time → **the city opens.** → the Anchor / meet Renner.
+4. **Out the door** *(the hinge)* — the cover is **issued** (couriered to her quarters, not yet worn); she steps out of the Tower for the first time **as herself** → **the city opens.** → put the cover on at the rack, then the Anchor / Renner. *(Worn-state cover system — see `## The cover / disguise system`; out of cover the mark reacts wrong.)*
 - **Introduces:** the loop (out → get close → drain → bring back the lead) + the cover/disguise + moving the map. **Hands off to:** Renner.
 
 ### Craft notes (how it must be written)
@@ -797,10 +798,12 @@ relation/corruption, built by playing that NPC. There is no player-feeder count 
 
 **Economy (shape locked; exact numbers settled at authoring):**
 - **Income:** Renner depot work — light credits per shift (the only source in the chunk).
-- **Sinks:** none real in-chunk (the cover is handed over in the opening; the disguise shop + Pell's upgrades
-  are frontier). Credits accumulate — consistent with "a kept asset is provided for; Phase 1 deliberately
-  light." **No filler sink invented** (LO). Credits are a **primed-but-dormant gauge** — the first real spend
-  is the Mission-2 disguise shop; stated so Step 7 doesn't ship an idle HUD number.
+- **Sinks:** none real in-chunk. The Mission-1 cover is **issued by the boss, not bought** (a real worn-state
+  garment now — see *## The cover / disguise system* — granted to her wardrobe at the briefing, equipped at the
+  rack; it costs no credits). The disguise *shop* + Pell's upgrades stay frontier. Credits accumulate —
+  consistent with "a kept asset is provided for; Phase 1 deliberately light." **No filler sink invented** (LO).
+  Credits are a **primed-but-dormant gauge** — the first real spend is the Mission-2 disguise shop; stated so
+  Step 7 doesn't ship an idle HUD number.
 - **Charge:** paces the day (costs on actions/travel), refilled free at the cradle.
 - **Fail-state:** **none in the chunk** (LO). The leash → enforcers → hunt is a Phase-1-wide ramp that needs
   the full mission web; here Charge is a *soft pace* (run low → reset), not a lose condition. Wired when more of
@@ -967,8 +970,11 @@ invasion intrudes) · the Anchor = public (witness + cheer-up) · facility_ruins
   sinks (Player blueprint).
 - **HUD** — Charge + Credits only (band text per `0_systems`). **Quest card** — Mission 1: get close → drain →
   extract the leads (shows while `mission_1_active` && !`renner_drained`).
-- **Clothing** — **narrative in the chunk** (the cover is established in prose; "commando" lives in the flash
-  rung's text, not a worn-state gate). The disguise system (covers per mission + a shop) lands with more missions.
+- **Clothing** — **a worn-state cover system** (added during authoring — full spec in *## The cover / disguise
+  system*). The company **issues** the Mission-1 cover (no shop — the boss provides it); she equips it at the
+  rack (`wren_room`) before a mission, and the Renner surfaces gate on `clothing_item … equipped`. Out of cover
+  → the mark reacts wrong (no hire / suspicion). ("Commando" still lives in the flash rung's text.) Per-mission
+  covers for Bastien/Calloway stay frontier (granted as their missions open, tagged by `worn_type`).
 - **Customization** — none (fixed identity). **Shared-private peep/occupancy (5H)** — **none** (the invasion is
   a scripted intrusion, not a co-presence mechanic).
 
@@ -1058,6 +1064,82 @@ Bastien/Calloway inherit it.
 `thought_bubble`, flat and terse; **Tier-3 is spent ONLY on the two once-only glitch capstones** (glitch II
 heavier than I). The recurring cradle-leak ambient was considered and **cut** — her thread stays lean: rarity
 is the punch.
+
+---
+
+## The cover / disguise system (worn-state) — added during authoring
+
+> Pulls the disguise from prose into a real **worn-state mechanic**, in Mission 1 (Renner). **LO's call: the
+> cover is *issued by the company, not bought*** — she's owned; the boss provides her kit. This supersedes the
+> World-blueprint §5F "clothing = narrative in the chunk" line and pulls the disguise system forward from the
+> frontier. Every engine claim is code-verified (`v2.py`, cited).
+
+**The idea (one line).** The cover is a garment she has to **put on** before a mission. In cover, the mark
+treats her as the hire and the mission runs. Out of cover, she's a well-dressed stranger asking a broke man
+about his business — and the world reacts wrong.
+
+**Two states the engine gives us** (the `clothing_item` predicate, `v2.py:3587-3608`):
+- **owns it** — `{ type = "clothing_item", item_id = "cover_dockhand", operator = "owned" }` (did the boss give it to her).
+- **wearing it** — `{ … operator = "equipped" }` (is it on her body right now). This is the gate that matters.
+
+**The loop (no shop — the boss provides):**
+1. **Issue** — the morning briefing node hands her the cover with the dossier. Engine-native grant:
+   `exit_block.config.wardrobeEffects = [ { action = "add", item_id = "cover_dockhand" } ]` (`v2.py:12503-12511`)
+   — **`add`, not `equip`**, so it lands in her wardrobe **un-worn** and she must dress herself (this is what
+   keeps the "not dressed" path alive — LO's locked pick).
+2. **Dress** — she goes to the **rack in her room** (the wardrobe screen at `wren_room` — the "rack of faces"
+   from the opening) and puts the cover on.
+3. **Go** — in cover, she heads to Renner; the mission runs.
+
+**What it gates (the mission surfaces, not every rung).** The cover is the key to the door, not the staircase
+behind it: it gates the Renner **entry** (the hire + the depot/Anchor hubs); the seduction climb itself still
+rides on the NPC's own **relation + corruption** as designed. Same one cover for the whole Renner mission.
+- `cap_renner_hired` gains a third trigger condition: `{ type = "clothing_item", item_id = "cover_dockhand", operator = "equipped" }`.
+- The depot + Anchor Renner hubs gate the same way.
+
+**★ How it reacts when she is NOT dressed (the point of the system):**
+- **Before hired, out of cover** — the hire won't fire. A clean, expensive-looking woman leaning on a
+  blacklisted wreck reads as a *threat* (cop / fed / Vance). He clams up and waves her off (*"Whatever you are,
+  off my stool"*). No access — the cover is exactly what makes her not worth a second look.
+- **After hired, out of cover** — the work + seduction options are hidden with the reason shown (the engine
+  auto-prints *"Wearing: Dock-work coveralls"* on the greyed option, `v2.py:7332`), and a short fallback beat
+  fires instead: Renner squints at the nice clothes — *"The hell are you dressed like that for? …Do I know
+  you?"* — the suspicion the cover exists to kill. The day stalls until she's back in cover.
+- **The rule, plain:** cover on → invisible-useful, the mission runs. Cover off → the doors stay shut and
+  people react to a stranger who doesn't belong. **No alarm / fail-state in Phase 1** (the leash is parked for
+  Act 2) — out-of-cover is a *stall + a wrong look*, not a loss.
+
+**Clothing equipped is sticky** (`player.equipped` persists; nothing resets it daily) — so the lesson lands
+once (first outing, undressed → wrong reaction), and after she dresses she stays covered until she changes.
+*(Optional future flavor, not built now: inside the Tower she's in her own/asset self for Mercer, and swaps
+into the cover to go out.)*
+
+**What it deliberately is NOT.** Not a wear-to-level grind — it's a binary identity key (in cover / not),
+issued free, gating ENTRY only, never the escalation rungs (those stay on the arc spine). This keeps it on the
+right side of the clothing two-part rule (`references/clothing.md` §2 — that rule forbids gating an arc on
+`worn_corruption`/revealingness; gating *identity/access* on a specific issued garment is a different,
+legitimate use). No "underdressed"/exhibitionism axis — the cover is about *who she's pretending to be*, not
+how much skin shows.
+
+**Build notes (Step 7):**
+- **Enable clothing** in `[settings]` (the scoping trap — keys under `[settings]`, not bare):
+  `clothing_enabled = true`, `wardrobe_location = "wren_room"`. **No `shop_location`** (no shopping → no shop UI
+  emitted, `v2.py:1478`).
+- **Full starting outfit** — every slot has an `initial = true` item (her own/asset self) so she's never
+  naked/blocked and "out of cover" = "in her own clothes" (`references/clothing.md` §7).
+- **The cover** — one `[[clothing]]` item, `slot = "dress"`, no price, **not** `initial` (granted at the briefing).
+- **The grant** — `wardrobeEffects = [{ action = "add", item_id = "cover_dockhand" }]` on the morning briefing
+  node's exit.
+- **Onboarding** — the briefing tells her to wear it ("your cover's in your quarters, put it on before you go")
+  so dressing is a taught step; the not-dressed beats are the backstop, never a dead screen.
+- **The gate + fallbacks** — add the `equipped` condition to the hire + the two Renner hubs; author the two
+  out-of-cover reaction beats above.
+- Every `conditions` block carries `version = "1.0"` (or it fails open).
+
+**Scaling (frontier).** Bastien's and Calloway's covers are granted when their missions open, tagged by
+**category** (`worn_type`, e.g. `"cover_dockwork"` / `"cover_pa"`) so each mission gates on "wearing the right
+*kind* of cover" — wrong cover at the wrong mark = wrong reaction. One issued garment per mission; still no
+shop.
 
 ---
 

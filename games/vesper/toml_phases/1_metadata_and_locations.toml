@@ -92,6 +92,61 @@ start_time = "19:00"
 end_time   = "23:00"
 activity   = "drinking at the Anchor"
 
+# ─── Clothing — the worn-state COVER catalog (beat_0015) ──────────────────────
+# Two "dress"-slot looks she swaps between at the rack (wardrobe page @ wren_room):
+#   • her DEFAULT "asset self" (initial=true, equipped at start) = the out-of-cover state
+#     ("her own clothes" — what Renner squints at). The bra/briefs/flats just keep her from
+#     reading naked in the wardrobe UI; the dress slot is the one that matters.
+#   • the COVER (cover_dockhand) — NOT initial, NO price: the boss ISSUES it at the morning
+#     briefing (wardrobeEffects add, 2_one_shots). She equips it to become "the hire."
+# The Renner content gates on `clothing_item cover_dockhand equipped` (5_scenes). beauty/
+# corruption stay 0 — we don't use the worn_beauty/worn_corruption axes. Images omitted (the
+# wardrobe shows names; add via find-media later). worn_type tagging is for the frontier
+# covers (Bastien/Calloway) — Mission 1 gates on the exact id.
+[[clothing]]
+id         = "company_grays"
+name       = "Company grays"
+slot       = "dress"
+image      = "clothing/company_grays.jpg"
+initial    = true
+beauty     = 1
+corruption = 0
+
+[[clothing]]
+id         = "plain_bra"
+name       = "Plain bra"
+slot       = "bra"
+image      = "clothing/plain_bra.jpg"
+initial    = true
+beauty     = 0
+corruption = 0
+
+[[clothing]]
+id         = "plain_briefs"
+name       = "Plain briefs"
+slot       = "underwear"
+image      = "clothing/plain_briefs.jpg"
+initial    = true
+beauty     = 0
+corruption = 0
+
+[[clothing]]
+id         = "flat_shoes"
+name       = "Flats"
+slot       = "shoes"
+image      = "clothing/flat_shoes.jpg"
+initial    = true
+beauty     = 0
+corruption = 0
+
+[[clothing]]
+id         = "cover_dockhand"
+name       = "Dock-work coveralls"
+slot       = "dress"
+image      = "clothing/cover_dockhand.jpg"
+beauty     = 0
+corruption = 0
+
 # ─── Locations — THE SPIRE (root: spire_plaza) ────────────────────────────────
 
 [[locations]]

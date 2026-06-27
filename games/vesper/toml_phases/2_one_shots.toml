@@ -218,14 +218,15 @@ blocks = [
     { advance_text = "Read it.", blocks = [
         { type = "paragraph", content = "A Vance asset-facility in the Reach burned to the ground three weeks ago — Cain's work. The man who supplied its equipment is named Renner: a quartermaster, broke now, blacklisted, drinking himself down at a dock bar called the Anchor and clawing at the wreck of his business. He knows what the facility was and where the trail goes. He does not know what she is." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Get inside his life. You know how." },
-        { type = "paragraph", content = "There's a cover allowance stamped under the dossier — company credits, for clothes and drink and whatever else buys a way into a man's evening. The kind of money she's meant to spend like she intends to come home with him." },
+        { type = "paragraph", content = "There's a cover allowance stamped under the dossier — company credits, for drink and whatever else buys a way into a man's evening. The kind of money she's meant to spend like she intends to come home with him." },
+        { type = "paragraph", content = "A kit's logged with it — couriered down to her quarters, cheap and worn, the part she's to play. Put it on before the Anchor. She does not walk up to a man like Renner wearing anything the Tower would recognize." },
     ] },
-    { advance_text = "Dress for it.", blocks = [
-        { type = "paragraph", content = "She picks a face for it from the rack of them she keeps — not a disguise so much as a register: cheap, willing, a little desperate, the kind of hire a wrecked man doesn't look at twice until she makes him. She puts it on the way she puts on everything, from the outside. Wren goes under. Whoever Renner needs comes up." },
+    { advance_text = "The part.", blocks = [
+        { type = "paragraph", content = "She knows the shape of it without being told — not a disguise so much as a register: cheap, willing, a little desperate, the kind of hire a wrecked man doesn't look at twice until she makes him. When she puts it on she'll put it on the way she puts on everything, from the outside. Wren goes under. Whoever Renner needs comes up." },
     ] },
     { advance_text = "Out the door.", blocks = [
         { type = "image", props = { file = "scenes/spire_plaza_reveal.jpg", description = "A vast wet neon city plaza at the foot of a corporate tower, a lone woman stepping out into it for the first time.", search_queries = ["neon city plaza night wet", "woman tower street city lights"] } },
-        { type = "paragraph", content = "She rides down through a Tower she has never once left on her own legs for anything but an order. The atrium doors read her face and open. And then she's outside, on Spire Plaza, the city laid out wet and enormous and unowned in front of her — and for one second, before the cover settles all the way down over her, something that isn't in any of her files stands very still in her chest and looks at all of it." },
+        { type = "paragraph", content = "She rides down through a Tower she has never once left on her own legs for anything but an order. The atrium doors read her face and open. And then she's outside, on Spire Plaza, the city laid out wet and enormous and unowned in front of her — and for one second, with no cover on her yet, nothing between her and it, something that isn't in any of her files stands very still in her chest and looks at all of it." },
     ] },
   ] } },
 ]
@@ -241,6 +242,11 @@ flagEffects = [
   { targetType = "player", flag = "morning_done",     op = "set" },
   { targetType = "player", flag = "opening_done",     op = "set" },
   { targetType = "player", flag = "mission_1_active", op = "set" },
+]
+# The boss ISSUES the cover here — granted UN-worn, so she must equip it at the rack in
+# wren_room before Renner reads her right (design_book '## The cover / disguise system').
+wardrobeEffects = [
+  { action = "add", item_id = "cover_dockhand" },
 ]
 
 # ═══ beat_0013 — her glitches (cradle) + the facility match ════════════════════

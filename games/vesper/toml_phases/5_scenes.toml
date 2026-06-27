@@ -328,6 +328,7 @@ is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "renner_hired", operator = "is_false" },
+  { type = "clothing_item", item_id = "cover_dockhand", operator = "equipped" },   # beat_0015 — in cover only; out of cover -> react_renner_threat
 ] }
 
 [[canvases.nodes]]
@@ -379,6 +380,15 @@ conditions = { version = "1.0", logic = "AND", items = [
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "09:00"
 end_time   = "18:00"
+
+# beat_0015 — out of cover, clicking the hub goes to the squint (he doesn't recognize her).
+# chance 1.0 = always when not in cover; the hub renders normally in cover (condition false).
+[[canvases.trigger.substitutions]]
+target_canvas_id = "react_renner_nocover_depot"
+chance           = 1.0
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "clothing_item", item_id = "cover_dockhand", operator = "unequipped" },
+] }
 
 [[canvases.nodes]]
 id   = "base"
@@ -514,6 +524,7 @@ priority      = 3
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "renner_hired", operator = "is_true" },
+  { type = "clothing_item", item_id = "cover_dockhand", operator = "equipped" },   # beat_0015 — no working the floor out of cover
 ] }
 [[canvases.trigger.schedules]]
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
@@ -588,6 +599,14 @@ weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "19:00"
 end_time   = "23:00"
 
+# beat_0015 — out of cover, clicking the hub goes to the squint (he doesn't recognize her).
+[[canvases.trigger.substitutions]]
+target_canvas_id = "react_renner_nocover_anchor"
+chance           = 1.0
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "clothing_item", item_id = "cover_dockhand", operator = "unequipped" },
+] }
+
 [[canvases.nodes]]
 id   = "base"
 name = "The Anchor"
@@ -638,6 +657,7 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "renner_hired",      operator = "is_true"  },
   { type = "flag",  subject = "player", flag_key = "renner_office_open", operator = "is_false" },
   { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "relation", operator = "gte", value = 15 },
+  { type = "clothing_item", item_id = "cover_dockhand", operator = "equipped" },   # beat_0015 — Renner content only in cover
 ] }
 
 [[canvases.nodes]]
@@ -703,7 +723,7 @@ description = "Triggerless seduction rung (commando). Reaction band: looks-then-
 id   = "base"
 name = "Flash him"
 blocks = [
-  { type = "image", props = { file = "scenes/rung_renner_flash_t3.jpg", description = "A woman in unzipped warehouse coveralls bending forward over a low crate, exposing herself, a seated man watching from his desk.", search_queries = ["warehouse woman bending coveralls", "girl bending over man watching"] } },
+  { type = "video", props = { file = "scenes/rung_renner_flash_t3.webm", description = "A woman in unzipped warehouse coveralls bending forward over a low crate, exposing herself, a seated man watching from his desk.", search_queries = ["woman flashing tits bending over", "girl undressing coveralls strip tease"] } },
   { type = "paragraph", content = "She's wearing nothing under the coveralls today, and she makes sure the moment comes where he can't not see it — bending slow for a low crate while he's looking." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 8 },
@@ -735,7 +755,7 @@ description = "Triggerless seduction rung (contact). Reaction band: catches-hims
 id   = "base"
 name = "Get your hands on him"
 blocks = [
-  { type = "image", props = { file = "scenes/rung_renner_grope_t4.jpg", description = "A woman's hand on a seated man's thigh, sliding toward his crotch while he signs paperwork in an office, his body going still.", search_queries = ["office woman hand man thigh", "girl touching man lap desk"] } },
+  { type = "video", props = { file = "scenes/rung_renner_grope_t4.webm", description = "A woman's hand on a seated man's thigh, sliding toward his crotch while he signs paperwork in an office, his body going still.", search_queries = ["office handjob desk stockings", "secretary hand on man crotch office"] } },
   { type = "paragraph", content = "She stops pretending the contact is accidental — a hand on his thigh while he signs something, sliding up, letting him feel that she means it." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 12 },
@@ -778,6 +798,7 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "renner_flirts_back", operator = "is_true"  },
   { type = "flag",  subject = "player", flag_key = "renner_oral_once",   operator = "is_false" },
   { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 12 },
+  { type = "clothing_item", item_id = "cover_dockhand", operator = "equipped" },   # beat_0015 — Renner content only in cover
 ] }
 
 [[canvases.nodes]]
@@ -824,6 +845,7 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "renner_oral_once", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "ma_blowjob_seen",  operator = "is_false" },
   { type = "days_since_flag", subject = "player", flag_key = "renner_oral_once", operator = "gte", value = 1 },
+  { type = "clothing_item", item_id = "cover_dockhand", operator = "equipped" },   # beat_0015 — Renner content only in cover
 ] }
 
 [[canvases.nodes]]
@@ -1058,6 +1080,7 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "renner_fucked_once", operator = "is_true"  },
   { type = "flag",  subject = "player", flag_key = "renner_drained",     operator = "is_false" },
   { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 20 },
+  { type = "clothing_item", item_id = "cover_dockhand", operator = "equipped" },   # beat_0015 — Renner content only in cover
 ] }
 
 [[canvases.nodes]]
@@ -1092,7 +1115,6 @@ description = "The control canvas (the reusable pattern's first build). Reached 
 id   = "intro"
 name = "The drain"
 blocks = [
-  { type = "image", props = { file = "scenes/renner_control_canvas.jpg", description = "A slack-faced man slumped in an office chair, half-dressed and emptied out, a woman crouched to his eye level beside him.", search_queries = ["office man slumped chair dazed", "man undressed office chair woman crouching"] } },
   { type = "paragraph", content = "He'll answer anything now, and remember none of it. She crouches to his eye level and asks, quiet, the way you'd read a meter." },
   { type = "cascade", props = { beats = [
     { advance_text = "What did the gear build?", blocks = [
@@ -1157,7 +1179,6 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 16 },
     ] } }, blocks = [
-    { type = "image", props = { file = "activities/walkin_renner_depot_t3.jpg", description = "A man backing a woman into warehouse shelving with his weight against her, his face at her neck, a set-down crate beside them.", search_queries = ["warehouse man woman against shelves", "depot couple pinned shelving"] } },
     { type = "paragraph", content = "He doesn't bother with the pretext anymore. He takes the crate out of her hands, sets it down, and backs her into the shelving with his whole ruined weight against her. \"Leave it,\" he says against her neck. \"The invoices can wait. Come in the back.\"" },
   ] },
 ]
@@ -1185,6 +1206,7 @@ is_repeatable        = true
 is_active            = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "renner_hired", operator = "is_true" },
+  { type = "clothing_item", item_id = "cover_dockhand", operator = "equipped" },   # beat_0015 — Renner content only in cover
 ] }
 [[canvases.trigger.schedules]]
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
@@ -1238,6 +1260,7 @@ is_active            = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "renner_office_open", operator = "is_true" },
   { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 4 },
+  { type = "clothing_item", item_id = "cover_dockhand", operator = "equipped" },   # beat_0015 — Renner content only in cover
 ] }
 [[canvases.trigger.schedules]]
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
@@ -1270,6 +1293,108 @@ blocks = [
 [canvases.nodes.exit_block]
 type = "location"
 text = "Leave him steadier."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_anchor"
+
+# ═══ beat_0015 — the cover wrong-reactions ════════════════════════════════════
+# Every Renner-facing canvas above now requires the dock-work cover equipped. These are what
+# she gets out of cover: the pre-hire threat-read (solo-link) + the post-hire squint (the
+# substitution target of each Renner hub). All set NOTHING — a stall + a wrong look, never a
+# fail-state (the leash is Act-2). See design_book '## The cover / disguise system'.
+
+# react_renner_threat — PRE-HIRE, out of cover. Solo-link at the Anchor (repeatable, no auto-
+# loop). The hire (cap_renner_hired) requires the cover; this is the cold shoulder instead.
+[[canvases]]
+id          = "react_renner_threat"
+name        = "Try him cold"
+description = "Pre-hire out-of-cover reaction at the Anchor. Solo-link. Gated opening_done + renner_hired is_false + cover UNEQUIPPED (mutually exclusive with cap_renner_hired's cover-EQUIPPED gate). A clean, expensive-looking woman quizzing a blacklisted wreck reads as a threat. Sets nothing."
+
+[canvases.trigger]
+location      = "the_anchor"
+requires_npc  = "npc_renner"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "renner_hired", operator = "is_false" },
+  { type = "clothing_item", item_id = "cover_dockhand", operator = "unequipped" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Try him cold"
+blocks = [
+  { type = "image", props = { file = "scenes/renner_anchor.jpg", description = "A dim run-down bar at night, a heavyset tired man at the end of the counter turning a wary shoulder to a well-dressed woman.", search_queries = ["dim bar man drinking night", "man bar turning away woman"] } },
+  { type = "paragraph", content = "Renner's at the end of the bar. She takes the stool and starts in — heard he's rebuilding, looking for work — and watches it land wrong. She's too clean. Too put-together for a woman who'd want a dock-rat's wages. He looks at her the way a man with enemies looks at a stranger who knows his business." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Whatever you are — cop, fed, one of theirs — I've got nothing to say to it. Off my stool." },
+  { type = "paragraph", content = "He turns his shoulder and that's the end of it. Dressed like this she's not cheap hands; she's a question, and a man this far down doesn't answer questions. She'd have to come at him as something that doesn't get a second look — the cover's in her quarters, and it does her no good on the rack." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave it."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_anchor"
+
+# react_renner_nocover_depot — POST-HIRE squint at the depot (substitution target of the depot
+# hub when out of cover). He hired "the help"; this isn't her.
+[[canvases]]
+id          = "react_renner_nocover_depot"
+name        = "Wrong skin for the yard"
+description = "Substitution-only. Reached from hub_depot_floor when cover_dockhand is NOT equipped. The hired help doesn't look like this — Renner squints, the day stalls. Sets nothing. Exit -> renner_depot."
+
+[canvases.trigger]
+location          = "renner_depot"
+requires_npc      = "npc_renner"
+substitution_only = true
+is_repeatable     = true
+is_active         = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Wrong skin for the yard"
+blocks = [
+  { type = "paragraph", content = "She comes onto the floor and Renner's head comes up wrong. The coveralls aren't on her — she's in her own clothes, the clean expensive line of them all out of place against the racks — and for a second he doesn't place her at all. Then the wariness: not recognition. Suspicion." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "...the hell are you dressed like that for. Do I know you?" },
+  { type = "paragraph", content = "Wrong skin for this yard. Whatever she'd get done here today, she won't get it done looking like this. The cover's back in her quarters; it does her no good on the rack." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get out before he looks harder."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "renner_depot"
+
+# react_renner_nocover_anchor — POST-HIRE squint at the Anchor (substitution target of the
+# evening hub when out of cover).
+[[canvases]]
+id          = "react_renner_nocover_anchor"
+name        = "Wrong face tonight"
+description = "Substitution-only. Reached from hub_anchor_renner when cover_dockhand is NOT equipped. Sets nothing. Exit -> the_anchor."
+
+[canvases.trigger]
+location          = "the_anchor"
+requires_npc      = "npc_renner"
+substitution_only = true
+is_repeatable     = true
+is_active         = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Wrong face tonight"
+blocks = [
+  { type = "paragraph", content = "She slides onto the stool beside him and it's wrong before she's said a word. Out of the coveralls, in her own clean clothes, she's not the dock-rat who hauls his crates — she's a stranger sitting too close, and his bleary eyes narrow on her with the old wariness coming up through the drink." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "...do I know you? You don't look like you tonight." },
+  { type = "paragraph", content = "Even three drinks down he knows the shape of her is off. Nothing she wants from him happens while she's wearing the wrong face. The cover's back in her quarters, where it does her no good." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave before he sobers on it."
 [canvases.nodes.exit_block.config]
 destinationType = "specific"
 locationId      = "the_anchor"

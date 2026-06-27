@@ -4,7 +4,8 @@
 # Step 7 authoring, beat_0001 (the scaffold). Built from the blueprint (design_book.md
 # '## Blueprint (Step 5)'). Systems per the World blueprint §5F:
 #   HUD = Charge + Credits ONLY · Phone = Mission-1 briefing (minimal) · Money = credits
-#   Clothing = NARRATIVE in chunk (no worn-state system) · Customization = OFF.
+#   Clothing = WORN-STATE cover system (beat_0015 — the boss-issued Renner cover; see
+#     design_book '## The cover / disguise system') · Customization = OFF.
 # starting_canvas is the placeholder canvas_boot for the scaffold; beat_0002 repoints it
 # to canvas_opening_office (the real cold open).
 
@@ -31,6 +32,15 @@ flagEffects = [
   { targetType = "player", flag = "renner_relation_today", op = "unset" },
   { targetType = "player", flag = "renner_charged_today",  op = "unset" },
 ]
+
+# ─── Clothing / wardrobe — the worn-state COVER system (beat_0015) ─────────────
+# The disguise is a real garment now. The boss ISSUES the Mission-1 cover (granted un-worn at
+# the morning briefing — see 2_one_shots) and she equips it at the rack (the wardrobe page the
+# engine injects at wren_room). NO shop_location = no buying, no shop UI (the cover is provided;
+# the disguise shop is a frontier sink). Customization stays OFF (independent of clothing).
+[settings]
+clothing_enabled  = true
+wardrobe_location = "wren_room"
 
 # ─── Sidebar items — the live HUD (Charge + Credits ONLY) ─────────────────────
 [[sidebar_items]]
