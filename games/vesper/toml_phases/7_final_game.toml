@@ -1586,7 +1586,7 @@ description = "Triggerless seduction rung. Reaction climbs by npc_renner.corrupt
 id   = "base"
 name = "Tease him"
 blocks = [
-  { type = "video", props = { file = "scenes/rung_renner_tease_t2.webm", description = "In a cramped office a woman strips out of her clothes down to her underwear at a man's desk, teasing him close while he tries not to look.", search_queries = ["office striptease at desk", "woman stripping to lingerie office desk tease"] } },
+  { type = "video", props = { file = "scenes/rung_renner_tease_t2.webm", description = "In a cramped office a woman teases close — lifting her skirt to flash the underwear beneath while a seated man tries not to look (stays clothed, withheld).", search_queries = ["clothed skirt lift tease panties", "office tease skirt flash underwear"] } },
   { type = "paragraph", content = "In the office now, the door shut. She works close — leans across him for a file she doesn't need, lets her body say the thing her mouth won't." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 4 },
