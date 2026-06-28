@@ -3,7 +3,7 @@
 #
 # Step 7 authoring, beat_0001 (the scaffold). Built from the blueprint (design_book.md
 # '## Blueprint (Step 5)'). Systems per the World blueprint §5F:
-#   HUD = Charge + Credits ONLY · Phone = Mission-1 briefing (minimal) · Money = credits
+#   HUD = Charge ONLY (Credits tracked internally, not surfaced) · Phone = Mission-1 briefing (minimal)
 #   Clothing = WORN-STATE cover system (beat_0015 — the boss-issued Renner cover; see
 #     design_book '## The cover / disguise system') · Customization = OFF.
 # starting_canvas is the placeholder canvas_boot for the scaffold; beat_0002 repoints it
@@ -42,7 +42,9 @@ flagEffects = [
 clothing_enabled  = true
 wardrobe_location = "wren_room"
 
-# ─── Sidebar items — the live HUD (Charge + Credits ONLY) ─────────────────────
+# ─── Sidebar items — the live HUD (Charge ONLY) ───────────────────────────────
+# Credits is tracked internally (the depot economy uses `money`) but NOT surfaced in the
+# sidebar — LO's call. To re-show it, add back a `money` trait_status_text block here.
 [[sidebar_items]]
 type  = "trait_status_text"
 trait = "energy"
@@ -51,16 +53,6 @@ bands = [
   { min = 25, max = 49,  text = "Charge: Low",      icon = "🔅" },
   { min = 50, max = 74,  text = "Charge: Steady",   icon = "🔆" },
   { min = 75, max = 100, text = "Charge: Full",     icon = "🔋" },
-]
-
-[[sidebar_items]]
-type  = "trait_status_text"
-trait = "money"
-bands = [
-  { min = 0,   max = 49,   text = "Credits: Empty",  icon = "▫️" },
-  { min = 50,  max = 199,  text = "Credits: Thin",   icon = "▪️" },
-  { min = 200, max = 499,  text = "Credits: Funded", icon = "🟦" },
-  { min = 500, max = 9999, text = "Credits: Flush",  icon = "🟩" },
 ]
 
 # ─── NPC panel — Renner's seduction progress (the per-target axis, made visible) ──
