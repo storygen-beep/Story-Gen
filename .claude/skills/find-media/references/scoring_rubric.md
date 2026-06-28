@@ -65,7 +65,7 @@ Apply these before anything else. A candidate that triggers ANY filter gets 0 an
 
 For each candidate that survives hard rejection:
 
-1. **View the thumbnail** with the Read tool. You are multimodal — actually look at it, don't guess from the title.
+1. **View the CLIP montage** with the Read tool — one image, top-K tiles labeled A, B, C…. CLIP pre-ranked the tiles but does NOT score them; you do. On NSFW, CLIP ranked only setting/people (25–31% on acts), so **re-judge the act on every tile**. Map a chosen tile letter back to its candidate id via the `clip_shortlist.py` JSON `ranked[].montage_label`. (If CLIP was unavailable — exit 3 — fall back to viewing each thumbnail directly, as before.)
 2. **Score each criterion** 0 to its weight maximum. Don't inflate — if setting is "kitchen" and the thumbnail shows a generic bed, setting scores 0 to 5 out of 30, not 15.
 3. **Sum the criteria** for the overall score.
 4. **Record to `scores.jsonl`** — even losing scores are kept, for telemetry and resume.

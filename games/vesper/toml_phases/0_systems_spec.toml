@@ -25,12 +25,12 @@ starting_week = 1
 
 # ─── Engine daily tick — reset the daily-cap cooldown flags ───────────────────
 # Fires once at the start of each new game-day (the cradle recharge rolls the day).
-# Both Renner odometers are player-paced by a daily cap (blueprint: relation +1/day via
-# the work shift, corruption +1/day via a charged rung) cleared here.
+# The corruption daily cap was REMOVED (LO's call) — the charged rungs are freely repeatable
+# now, so renner_charged_today is no longer cleared here. renner_relation_today is left as a
+# harmless no-op (it's blueprinted but never set anywhere — dead flag).
 [engine.daily_tick]
 flagEffects = [
   { targetType = "player", flag = "renner_relation_today", op = "unset" },
-  { targetType = "player", flag = "renner_charged_today",  op = "unset" },
 ]
 
 # ─── Clothing / wardrobe — the worn-state COVER system (beat_0015) ─────────────

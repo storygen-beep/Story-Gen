@@ -206,3 +206,21 @@ game_explorations/*/.live/
 # ============================================================
 !games/vesper/output/videos/
 !games/vesper/output/videos/**
+
+# ============================================================
+# find-media working evidence (harvest dumps, montages, candidate
+# jsonl, raw transcripts) — large + transient, never source.
+# ============================================================
+**/.find-media/
+
+# ============================================================
+# Heavy experiments / scratch — local only, not part of the engine.
+# ============================================================
+test_blender/
+avatar_prototype/
+games/media_testbed/
+game_explorations/vesper_coverplay/
+game_explorations/vesper_wardrobe/
+
+# playwright-skill temp execution files (transient)
+**/.temp-execution-*.js

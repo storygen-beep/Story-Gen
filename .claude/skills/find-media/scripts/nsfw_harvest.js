@@ -27,6 +27,12 @@ const path = require('path');
 
 const PREVIEW_DIR = '/tmp/nsfw_previews';
 
+// PornHub's video CDN (el2.phncdn.com) returns 410 Gone to requests with no browser
+// User-Agent → every .webm saves as 0 bytes. UA + Referer fixes it. The thumbnail CDN
+// tolerates a missing UA, but we send the same headers there for parity/robustness.
+const BROWSER_UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+const REFERER = 'https://www.pornhub.com/';
+
 // ============ EDIT THIS FOR EACH BATCH ============
 const QUERIES = [
   { name: 'cherry_video',         search: 'amateur+nude+promo+tease+selfie',     desc: 'Nude promo tease link in bio selfie' },
@@ -123,7 +129,7 @@ async function harvestFromSearchPage(page, search) {
       const thumbPath = path.join(subdir, `${i}_${r.gifId}.jpg`);
       try {
         execSync(
-          `curl -s --socks5-hostname 127.0.0.1:9050 -o "${thumbPath}" "${r.thumbnail}" --max-time 10`,
+          `curl -s --socks5-hostname 127.0.0.1:9050 -H "User-Agent: ${BROWSER_UA}" -H "Referer: ${REFERER}" -o "${thumbPath}" "${r.thumbnail}" --max-time 10`,
           { timeout: 15000 }
         );
         const size = fs.statSync(thumbPath).size;
@@ -140,11 +146,16 @@ async function harvestFromSearchPage(page, search) {
         const videoPath = path.join(subdir, `${i}_${r.gifId}.webm`);
         try {
           execSync(
-            `curl -s --socks5-hostname 127.0.0.1:9050 -o "${videoPath}" "${r.videoUrl}" --max-time 30`,
+            `curl -s --socks5-hostname 127.0.0.1:9050 -H "User-Agent: ${BROWSER_UA}" -H "Referer: ${REFERER}" -o "${videoPath}" "${r.videoUrl}" --max-time 30`,
             { timeout: 35000 }
           );
           const vSize = fs.statSync(videoPath).size;
-          console.log(`  [${i}] ${r.gifId} "${r.title}" — ✓ ${(vSize/1024).toFixed(0)}KB`);
+          if (vSize < 50000) {
+            fs.unlinkSync(videoPath);
+            console.log(`  [${i}] ${r.gifId} "${r.title}" — ✗ video ${vSize}B (<50KB), removed`);
+          } else {
+            console.log(`  [${i}] ${r.gifId} "${r.title}" — ✓ ${(vSize/1024).toFixed(0)}KB`);
+          }
         } catch (e) {
           console.log(`  [${i}] ${r.gifId} "${r.title}" — ✗ video download failed`);
         }

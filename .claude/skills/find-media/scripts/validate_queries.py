@@ -109,6 +109,32 @@ ANIMATED_KEYWORDS = {
     "cum", "creampie", "orgasm", "climax",
 }
 
+# Content-RATING buckets — drive the SFW/NSFW routing decision (which pipeline).
+# PURPOSE-BUILT and deliberately NOT the format ANIMATED_KEYWORDS set: format lumps
+# "kiss"/"bath" with "fuck" because all three are motion; rating must keep them apart
+# because a clothed kiss is stock-findable while a sex act is not. The routing question
+# is "is there nudity or a sex act?" — not "is it motion?".
+RATING_NUDITY = {
+    "nude", "naked", "topless", "bottomless",
+    "undress", "undressing", "strip", "stripping", "flash", "flashing",
+}
+# Stock genuinely can't serve these → confident NSFW.
+RATING_HARD_NSFW = SEXUAL_TERMS_FOR_SFW_CHECK | RATING_NUDITY | {"anal", "deepthroat"}
+# Clothed→explicit span; only the author knows the heat → default to ASK.
+RATING_BORDERLINE = {
+    "kiss", "kissing", "makeout", "make out", "making out", "snog", "french kiss",
+    "tease", "teasing", "seduce", "seducing", "grind", "grinding",
+    "caress", "grope", "fondle", "straddle", "in bed", "lingerie",
+    "bathe", "bathing", "bath", "shower", "showering", "washing",
+}
+# Vanilla → stock is fine.
+RATING_SFW = STATIC_KEYWORDS | {
+    "flirt", "flirting", "hug", "hugging", "embrace", "holding hands", "hold hands",
+    "cuddle", "cuddling", "smile", "date", "greet", "wave",
+}
+
+NON_CANVAS_TYPES = {"location_image", "clothing_image", "social_post_image", "dating_profile_photo"}
+
 ANIMATED_EXTENSIONS = {".webm", ".mp4", ".gif"}
 STATIC_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp"}
 
@@ -136,15 +162,38 @@ class FormatCheck:
     message: str
 
 
-def infer_tier(file_path: str) -> str:
-    """Extract tier from filename like breakfast_ethan_t5.webm → t5."""
+@dataclass
+class TagProposal:
+    file: str
+    current_tag: str
+    was_tagged: bool
+    content_signal: str  # "hard_nsfw" | "borderline" | "sfw" | "unknown"
+    matched: list[str]
+    proposed_tag: str | None  # the _tN to write (or suggested default for an ask); None for leave
+    action: str  # "auto_retag" | "ask" | "leave"
+    reason: str
+
+
+def infer_tier_tagged(file_path: str) -> tuple[str, bool]:
+    """Extract tier from a filename → (tier, was_tagged).
+
+    breakfast_ethan_t5.webm → ("t5", True); couch_kiss_base.jpg → ("base", True);
+    couch_kiss.webm → ("base", False). was_tagged distinguishes an untagged file
+    (which silently defaults to base) from one deliberately tagged _base — the whole
+    point of the audit, so a forgotten tag can be told apart from an intentional one.
+    """
     stem = Path(file_path).stem
     m = re.search(r"_t([0-8])$", stem)
     if m:
-        return f"t{m.group(1)}"
+        return f"t{m.group(1)}", True
     if stem.endswith("_base"):
-        return "base"
-    return "base"
+        return "base", True
+    return "base", False
+
+
+def infer_tier(file_path: str) -> str:
+    """Back-compat wrapper — tier only."""
+    return infer_tier_tagged(file_path)[0]
 
 
 def strip_banned(query: str) -> tuple[str, list[str]]:
@@ -296,6 +345,66 @@ def check_format_alignment(file_path: str, description: str, search_queries: lis
     )
 
 
+def classify_content_rating(description: str, search_queries: list[str]) -> tuple[str, list[str]]:
+    """Suggest the SFW/NSFW rating from scene meaning. Returns (signal, matched).
+
+    signal ∈ {hard_nsfw, borderline, sfw, unknown}. This is the ROUTING evidence
+    (which pipeline) — separate from classify_content_family (the still-vs-animated
+    FORMAT axis). hard_nsfw wins, then borderline, then sfw, else unknown.
+    """
+    blob = " ".join([description] + list(search_queries)).lower()
+
+    def hits(words: set[str]) -> list[str]:
+        return sorted({w for w in words if re.search(rf"\b{re.escape(w)}\b", blob)})
+
+    hard = hits(RATING_HARD_NSFW)
+    if hard:
+        return "hard_nsfw", hard
+    border = hits(RATING_BORDERLINE)
+    if border:
+        return "borderline", border
+    sfw = hits(RATING_SFW)
+    if sfw:
+        return "sfw", sfw
+    return "unknown", []
+
+
+def propose_tag(file_path: str, tier: str, was_tagged: bool, signal: str,
+                matched: list[str], item_type: str | None = None) -> TagProposal:
+    """Reconcile the author's tag against the content signal → a retag proposal.
+
+    Content leads the SFW/NSFW routing; the tag grades the heat. Up-grades on explicit
+    content are confident (auto); down-grades and all borderline calls are asked (the
+    author owns the heat grade). See references/content_rating.md for the full matrix.
+    """
+    def mk(proposed: str | None, action: str, reason: str) -> TagProposal:
+        return TagProposal(file=file_path, current_tag=tier, was_tagged=was_tagged,
+                           content_signal=signal, matched=matched,
+                           proposed_tag=proposed, action=action, reason=reason)
+
+    if item_type in NON_CANVAS_TYPES:
+        return mk(None, "leave", "non-canvas type — always SFW, never retagged")
+
+    cue = ", ".join(matched[:3])
+    tag_is_sfw = tier in SFW_TIERS
+    tag_is_nsfw = tier in BORDERLINE_TIERS or tier in NSFW_TIERS
+
+    if not was_tagged:
+        if signal == "hard_nsfw":
+            return mk("t5", "auto_retag", f"untagged but description is explicit ({cue}) → NSFW")
+        if signal == "borderline":
+            return mk("t4", "ask", f"untagged borderline ({cue}) — confirm heat: t3 peck / t4 makeout / t5+ explicit")
+        return mk(None, "leave", "untagged, reads SFW — default base is correct")
+
+    if tag_is_sfw and signal == "hard_nsfw":
+        return mk("t5", "auto_retag", f"tagged {tier} (SFW) but description is explicit ({cue}) → NSFW")
+    if tag_is_sfw and signal == "borderline":
+        return mk("t4", "ask", f"tagged {tier} (SFW) but borderline content ({cue}) — confirm")
+    if tag_is_nsfw and signal == "sfw":
+        return mk("base", "ask", f"tagged {tier} (NSFW) but content reads vanilla ({cue}) — confirm down-grade")
+    return mk(None, "leave", "tag consistent with content")
+
+
 def load_items_from_api_json(json_path: Path, item_filter: str | None = None) -> list[dict]:
     """Read missing_media from a JSON file produced by the game-review API.
 
@@ -404,13 +513,16 @@ def main() -> int:
 
     all_results: list[ValidationResult] = []
     format_checks: list[FormatCheck] = []
+    proposals: list[TagProposal] = []
     for item in items:
-        tier = infer_tier(item["file"])
+        tier, was_tagged = infer_tier_tagged(item["file"])
         for q in item["search_queries"]:
             all_results.append(validate_query(q, tier, item["file"]))
         format_checks.append(
             check_format_alignment(item["file"], item.get("description", ""), item["search_queries"])
         )
+        signal, matched = classify_content_rating(item.get("description", ""), item["search_queries"])
+        proposals.append(propose_tag(item["file"], tier, was_tagged, signal, matched, item.get("type")))
 
     flagged = [r for r in all_results if r.needs_narrative_context or r.rewritten is None]
     rewritten = [
@@ -421,11 +533,14 @@ def main() -> int:
     unchanged = [r for r in all_results if not r.rules_applied and r.tier_check_passed]
     tier_issues = [r for r in all_results if not r.tier_check_passed and r.rewritten]
     format_issues = [fc for fc in format_checks if not fc.passed]
+    retag_auto = [p for p in proposals if p.action == "auto_retag"]
+    retag_ask = [p for p in proposals if p.action == "ask"]
 
     if args.json:
         print(json.dumps({
             "queries": [asdict(r) for r in all_results],
             "format_checks": [asdict(fc) for fc in format_checks],
+            "tag_proposals": [asdict(p) for p in proposals],
         }, indent=2))
         return 0
 
@@ -468,10 +583,20 @@ def main() -> int:
             print(f"    {fc.message}")
             print()
 
+    if retag_auto or retag_ask:
+        print(f"⚠️  TIER RETAG ({len(retag_auto)} confident auto, {len(retag_ask)} need your call):\n")
+        for p in retag_auto:
+            print(f"  [AUTO → _{p.proposed_tag}] {p.file}")
+            print(f"    {p.reason}")
+        for p in retag_ask:
+            print(f"  [ASK  → suggest _{p.proposed_tag}] {p.file}")
+            print(f"    {p.reason}")
+        print()
+
     print(f"✅ OK: {len(unchanged)} queries pass without changes.")
     print(f"   Format OK: {sum(1 for fc in format_checks if fc.passed)}/{len(format_checks)} items.")
 
-    return 1 if flagged or tier_issues or format_issues else 0
+    return 1 if flagged or tier_issues or format_issues or retag_auto or retag_ask else 0
 
 
 if __name__ == "__main__":

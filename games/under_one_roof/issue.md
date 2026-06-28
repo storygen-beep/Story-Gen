@@ -669,3 +669,34 @@ work the floor, what happens in it, hotel room and booking I think I want someth
 
 
 [DONE]claude.md ignore v1 game gen engine. Ignore Prompts v2. 
+
+
+
+
+
+I have got an idea, we have made her cold, she does nt feel anything, but from starting she always felt sex, she does nt know why but she enjoys it, she likes to fuck, and the secret is she is half human, but her memory as human is no more.
+
+
+
+
+
+**21 June**
+
+ideas, to generate SFW photos using claude code cloud / claude code + chatgpt on web
+
+
+**28 June**
+
+[DONE]Can player tease renner only once in a day.
+
+[PROGRESS]Clothing system: change bra underware and shoes image with the real product image, you can change the source to find a good one.
+
+[PROGRESS]Renner Tease Image: It should be teasing physically like bending down or something.
+
+[DONE]Is there anything telling her that mercer has given her the disguise clothing, now she should wear it everytime she goes to the renner?
+
+[DONE]What is in the game telling player that, she is half human half robot.
+
+[DONE]change the player portrait to be a beautiful girl.
+
+[DONE]earn the office / break him these doesnt shows the actual trait names

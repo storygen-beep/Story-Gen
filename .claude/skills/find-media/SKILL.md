@@ -27,6 +27,7 @@ Do NOT trigger on: general questions about game design, TOML schema questions, q
    ```
    Extract `missing_media` — if empty, report and stop. The API enumerates all 5 categories (canvas blocks, locations, clothing, phone posts, dating profiles) and checks three disk roots (`output/`, game root, `videos/`) to confirm absence. The list is authoritative; don't re-scan. See `references/game_review_api.md` for the contract. **Fallback** if Django is unreachable: use `scripts/validate_queries.py --toml games/<game>/toml_phases/6_final_game.toml` (walker mode; misses locations, clothing, and phone posts without queries — the 58-item blind spot the API fixes).
 4. Classify each missing item by `type` (from the API). If any have tier t5+ (canvas NSFW) — derived from the canvas items' filename `_tN` suffix — also verify Tor + Playwright + ffmpeg prerequisites (see `references/nsfw_pipeline.md` §Prerequisites). Non-canvas types (`location_image`, `clothing_image`, `social_post_image`, `dating_profile_photo`) are always SFW.
+5. **Tier audit + retag (before SCOPE).** Routing rides on the author's `_tN` suffix, which can be missing or wrong. Run `validate_queries.py` and read its `tag_proposals`: take the confident `auto_retag`s, **ASK the user** on every `ask` (borderline / down-grade), then `apply_retags.py` writes the corrected `_tN` into `toml_phases/*.toml` → re-merge + re-package + re-fetch the missing list. The corrected suffix then drives all routing. Full buckets, matrix, and commands in `references/content_rating.md`. Skip if the audit returns no proposals.
 
 ## Paths — source vs compiled
 
@@ -73,7 +74,7 @@ Batched loop (phases 3-6)
 - **Harvest-to-eval gap stays tight.** If you harvest 50 NSFW items and then evaluate 50, you're looking at thumbnails 30+ minutes after they were harvested. If CRITIQUE decides an item needs a re-harvest with a new query, you're also re-harvesting under a stale Tor circuit with possibly-dead cookies. Batch-of-5 keeps that gap to minutes.
 - **Progress is durable.** After each batch completes, 5 items are fully downloaded, verified, deduped, and written to `run_manifest.json`. If the session crashes or the user interrupts, you have 5/10/15 complete — not 50 half-processed items with no final files on disk.
 - **Critique loops stay local.** When CRITIQUE triggers a delta-query and re-harvest, it's for items WITHIN the current batch, running against a still-warm Tor circuit. Across batches, the critique loop counter resets.
-- **Token budget stays sane.** Viewing 5 thumbnails per batch × harvested candidates (≤15 each) ≈ 75 image reads per batch. Viewing 50 items × 15 = 750 image reads in one go blows through context.
+- **Token budget stays sane.** CLIP ranks each item's ≤15 candidates and you view ONE montage of the top-K — so a batch of 5 is ~5 montage reads, not the ~75 individual thumbnail reads the old flow required. The 5-item cap stays for the reasons above (Tor circuits, durable progress, critique locality), but the token driver is now montage reads. See `references/clip_preranking.md`.
 - **Tor circuits match the work unit.** One circuit should ideally complete one batch. Across batches, you can request a fresh circuit (`kill -HUP $(pgrep tor)`) between groups if needed — clean rotation.
 
 ### Explicit rule
@@ -148,21 +149,26 @@ Never run a query the validator flagged as unfixable — surface it to the user 
 ### 3. RETRIEVE
 
 Route by content_rating:
-- **SFW** → spawn `sfw-searcher` subagent per source (DuckDuckGo, Unsplash, Pexels in parallel). Details in `references/sfw_pipeline.md`.
+- **SFW** → inline WebSearch (2–3 queries, **no per-source subagents**) → download candidates to `evidence/<item_id>/candidates/`. Details in `references/sfw_pipeline.md`.
 - **NSFW** → batch 3–5 items into `scripts/nsfw_harvest.js` (Playwright + Tor + PornHub GIF search, single-page harvest extracts thumbnails + video URLs in one load). Details in `references/nsfw_pipeline.md`.
 
-All candidates persist to `games/<game>/.find-media/evidence/<item_id>/candidates.jsonl` as they arrive. This makes Tor circuit drops and mid-batch crashes recoverable.
+All candidates persist to `games/<game>/.find-media/evidence/<item_id>/candidates.jsonl` as they arrive (SFW: downloaded JPGs; NSFW: harvested thumbs + clips). This makes Tor circuit drops and mid-batch crashes recoverable. CLIP then pre-ranks them before EVALUATE — see §EVALUATE and `references/clip_preranking.md`.
 
 ### 4. EVALUATE
 
-For each candidate:
-1. Run `scripts/dedup_tracker.py --check <gif_id_or_url> --game <game>`. If already used in this game (or globally, if the user opted in), skip.
-2. Apply hard-rejection filters from `references/scoring_rubric.md` (3+ people, solo, wrong setting, etc.).
-3. View survivors using the Read tool (you are multimodal — actually look at the thumbnails).
-4. Score each with the 30/40/20/10 rubric (setting / action / appearance / quality). Write scores to `games/<game>/.find-media/evidence/<item_id>/scores.jsonl`.
-5. Pick the highest-scoring candidate above threshold (60 for NSFW, 70 for SFW).
+CLIP pre-ranks the candidates so you view ONE montage instead of every thumbnail.
+CLIP is a pre-filter — it never replaces a gate and never makes the final pick. Full
+doctrine + exact script invocations in `references/clip_preranking.md`.
 
-Do NOT auto-pick the top-titled result. PornHub/GIPHY titles are user-generated noise. The visual score is the decision.
+1. **Dedup** — `scripts/dedup_tracker.py --check <gif_id_or_url> --game <game>`; drop already-used candidates before ranking.
+2. **Pre-rank with CLIP** (exit 3 → CLIP/ffmpeg unavailable → fall back to viewing thumbnails directly, exactly as the old flow did — never crash the run):
+   - **SFW** → `clip_shortlist.py --candidates-dir evidence/<item>/candidates --caption "<top validated query>" --top-k 5 --montage-out evidence/<item>/montage_shortlist.jpg`. CLIP is a strong SFW shortlister (top-3 = 88%).
+   - **NSFW** → first `video_frames.py --mode rep` (a still per clip), then `clip_shortlist.py --caption "<setting + people, NOT the act>" --top-k 6 --montage-out evidence/<item>/montage_cull.jpg`. CLIP only **culls** 15→6 here (25–31% on acts).
+3. **View the ONE montage.** Apply hard-rejection filters from `references/scoring_rubric.md` (3+ people, solo, wrong setting, etc.) across the tiles; on NSFW **judge the act yourself** — CLIP did not.
+4. **Score** each surviving tile with the rubric (SFW 40/30/30, NSFW 30/40/20/10); write to `games/<game>/.find-media/evidence/<item_id>/scores.jsonl`. Map the chosen tile letter back to its candidate id via the `clip_shortlist.py` JSON `ranked[].montage_label`.
+5. **Pick** the highest above threshold (60 NSFW / 70 SFW). For an NSFW video pick, build a `video_frames.py --mode strip` and confirm the act holds across the loop before PACKAGE.
+
+Do NOT auto-pick the top-titled result, and do NOT treat CLIP's #1 as the winner — CLIP ranks, you decide. PornHub/GIPHY titles are user-generated noise. The visual score is the decision.
 
 ### 5. CRITIQUE + REFINE (only on failure)
 
@@ -187,14 +193,13 @@ For each winning candidate:
 
 ## Subagent dispatch
 
-Spawn subagents with focused briefs per Anthropic's multi-agent guidance — objective, output format, tool guidance, task boundaries. Vague briefs cause duplicate work.
+Spawn subagents with focused briefs per Anthropic's multi-agent guidance — objective, output format, tool guidance, task boundaries. Vague briefs cause duplicate work. **SFW retrieval no longer uses a per-source subagent** — run WebSearch inline on the main thread (see §RETRIEVE). The table below is the current set.
 
 | Subagent | Objective | Output format | Tool guidance | Boundaries |
 |----------|-----------|---------------|---------------|------------|
 | `query-rewriter` | Read narrative context + raw queries, produce ranked rewrites | JSON list `[{query, rank, reason}]` | Read, validate_queries.py | Don't search, don't invent facts |
-| `sfw-searcher` | Search ONE source with ranked queries | JSON list `[{url, source, query_used}]` | WebSearch only | One source per subagent — parallel dispatch, not serial |
 | `nsfw-harvester` | Run harvest script for 3–5 items | Paths to `/tmp/nsfw_previews/<item>/` | Bash (node nsfw_harvest.js) | Never edits scoring — that's EVALUATE |
-| `candidate-evaluator` | View thumbnails, score, pick winner | `{winner_id, score, rubric_breakdown}` | Read (multimodal), dedup_tracker.py | Reject hard-fail candidates before scoring |
+| `candidate-evaluator` | View the CLIP montage, score, pick winner | `{winner_id, score, rubric_breakdown}` | Read (the montage JPG), dedup_tracker.py | CLIP pre-ranked the tiles; reject hard-fails and **judge the act yourself** |
 | `fail-triage` | Diagnose why no candidate passed | `{diagnosis, delta_queries, retry_source}` | Read (TOML), sequential-thinking if available | Only spawned after first RETRIEVE fails |
 
 ## Evidence and persistence
@@ -252,10 +257,12 @@ Failing any gate drops the candidate back to EVALUATE with an explanation, not t
 Load additional context on demand:
 - Running SFW batch → read `references/sfw_pipeline.md`
 - Running NSFW batch → read `references/nsfw_pipeline.md`
+- Pre-ranking candidates with CLIP, building a montage, or extracting video frames → read `references/clip_preranking.md`
+- Deciding SFW vs NSFW, or handling a missing/wrong tier tag (the audit + retag) → read `references/content_rating.md`
 - Writing or validating a query, or synthesizing queries for empty `search_queries` → read `references/query_rewriting.md`
 - Scoring candidates → read `references/scoring_rubric.md`
 - Something broke and you need to debug a site → read `references/playwright_diagnostic.md`
 - Confused about why the API saved a different extension than the TOML asked for → read `references/api_behavior.md`
 - Confused about what fields the game-review API returns, or need the full `missing_media` entry schema → read `references/game_review_api.md`
 
-Don't load all seven upfront. The router above is enough to start.
+Don't load all nine upfront. The router above is enough to start.

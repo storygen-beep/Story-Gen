@@ -1,0 +1,15 @@
+# Dependencies for clip_shortlist.py (CLIP pre-ranking + montage). NOT auto-installed.
+# These are NOT needed for the rest of find-media — the other scripts are stdlib-only.
+# If absent, clip_shortlist.py exits 3 and the skill falls back to direct thumbnail viewing.
+#
+# Install ONCE, on the torch-bearing interpreter (the global Framework python here,
+# NOT the django venv). First model fetch needs network; afterwards it runs offline.
+#
+#   /Library/Frameworks/Python.framework/Versions/3.10/bin/python3 -m pip install \
+#       -r .claude/skills/find-media/scripts/requirements.txt
+#
+# The CLIP weights (~600MB, openai/clip-vit-base-patch32) download to ~/.cache/huggingface
+# on first run of clip_shortlist.py. Versions below are the validated set on this machine.
+torch==2.8.0
+transformers==4.56.0
+Pillow==11.3.0

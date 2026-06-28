@@ -873,10 +873,12 @@ Renner dispatch is the opening's morning phone briefing (done).
 **The spine — two axes on HIS meters (the double-lock variant).** She has no corruption door (left dead), so
 both axes are Renner's own: **AXIS 1 — access** = `npc_renner.relation` (an odometer built by the *ungated*
 "good work / check in" + each work shift) earns the office; **AXIS 2 — seduction** = `npc_renner.corruption`
-(his willingness, +1 daily-capped per charged rung) gates the lewd rungs; `npc_renner.arousal` is the loop
+(his willingness, +2 per charged rung) gates the lewd rungs; `npc_renner.arousal` is the loop
 throttle only (never gates progression). Every lewd rung double-locks on **office-open (access) + his
-corruption (the tier)**. **Pacing (Fork B): relation-fast / corruption-slow** — noticed quickly, broken
-slowly; numbers tuned after the first build. His voice climbs by **reaction** to the same provocation
+corruption (the tier)**. **Pacing (Fork B): relation-fast / corruption player-paced** — noticed quickly;
+the charged rungs are freely repeatable (the once-per-day corruption cap was removed, LO's call), so the
+seduction climbs as fast as the player works it, gated only by the disjoint corruption bands. Numbers tuned
+after the first build. His voice climbs by **reaction** to the same provocation
 (contempt → caught-looking → reluctant → wants her), **pinned to disjoint corruption bands on the rungs** so
 the crack is authored, not luck — the base opener stays one constant paragraph.
 
@@ -918,8 +920,8 @@ target.
 **Flag chain (acyclic; each flag one located setter; every condition block `version="1.0"`):** `opening_done`
 → `renner_hired` (#15) → `worked_renner_once` (#8, sole owner) → `renner_office_open` (#2) →
 `renner_flirts_back` (#5) → `renner_oral_once` (#16) → `renner_fucked_once` (#7) → `renner_drained` +
-`renner_leads_extracted` + `renner_anal_once` (#17). Both odometers daily-capped via cooldown flags cleared on
-the daily tick.
+`renner_leads_extracted` + `renner_anal_once` (#17). The corruption daily cap was removed (LO's call) — the
+charged rungs are freely repeatable, so the seduction odometer is no longer throttled by a cooldown flag.
 
 **Frontier (telegraphed, deferred — never silent).** The drain sets **`renner_leads_extracted`** → opens
 Bastien (`bastiens`) + Calloway (`vance_securities`); their on-ramps render greyed citing "Renner's leads"

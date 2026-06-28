@@ -5,9 +5,9 @@ For media items where tier is `t4`, `t5`, `t6`, `t7`, or `t8`. Routing is Playwr
 This pipeline has TWO mandatory phases that cannot be combined into one automated script:
 
 1. **Harvest phase (script)** — `scripts/nsfw_harvest.js` extracts 10–15 candidates per query, downloads thumbnails AND videos in one pass
-2. **Evaluation phase (visual)** — you view each thumbnail with the Read tool and score it per `references/scoring_rubric.md`
+2. **Evaluation phase (CLIP cull + visual judging)** — `video_frames.py` makes a representative still per clip, `clip_shortlist.py` culls 15→6 on **setting/people** (CLIP can't judge acts — 25–31%), you view the ONE cull montage and **judge the act yourself**, then verify the pick with a frame strip. See `references/clip_preranking.md`.
 
-The script ONLY harvests. The visual evaluation is what picks the winner. Skipping the visual step is the #1 cause of bad matches.
+The script ONLY harvests. CLIP only culls. The visual act-judging is what picks the winner — skipping it is the #1 cause of bad matches.
 
 **Hard cap: max 5 items per harvest batch.** The script enforces this at runtime and exits if `QUERIES.length > 5`.
 
@@ -107,17 +107,39 @@ The script writes to `/tmp/nsfw_previews/<name>/`:
 - `{i}_{gifId}.webm` — video (downloaded in-line because URLs expire in ~4 hours)
 - `{i}_{gifId}.json` — metadata (id, title, videoUrl, thumbnail)
 
-### Step 3 — Evaluate every thumbnail (MANDATORY — DO NOT SKIP)
+### Step 3 — CLIP coarse-cull → view ONE montage → judge the act (DO NOT SKIP the judging)
 
-For each harvested item, View every `.jpg` in `/tmp/nsfw_previews/<name>/` using the Read tool.
+CLIP cannot judge NSFW acts (25–31% — see `references/clip_preranking.md`). It culls
+garbage; **you** judge the act on the survivors.
 
-1. Apply hard-rejection filters from `references/scoring_rubric.md` (3+ people, solo, same-sex, BDSM, mature/MILF when character is young, etc.) — drop these before scoring
-2. Score survivors: Setting (30) + Action (40) + Appearance (20) + Quality (10)
-3. Record every score to `games/<game>/.find-media/evidence/<item_id>/scores.jsonl`
-4. Pick the highest-scoring candidate above 60. If all below 60, trigger CRITIQUE.
+1. **Rep frames** — a GIF loop has no meaningful poster, so make a representative still per clip:
+   ```bash
+   "${FIND_MEDIA_PY:-/Library/Frameworks/Python.framework/Versions/3.10/bin/python3}" \
+     .claude/skills/find-media/scripts/video_frames.py \
+     --videos-dir /tmp/nsfw_previews/<name> --mode rep --frames 3 \
+     --out-dir /tmp/nsfw_previews/<name>/frames
+   ```
+   (exit 3 → ffmpeg missing → fall back to the harvested `.jpg` posters.)
+2. **Dedup** — `dedup_tracker.py --check <gifId>` each; drop already-used before ranking.
+3. **Coarse cull** — rank the rep frames with CLIP, caption on **SETTING + people, NOT the act**, keep top-6 (extra tile for margin, since CLIP's act-blindness can sink a good clip to rank 6):
+   ```bash
+   "${FIND_MEDIA_PY:-…python3}" .claude/skills/find-media/scripts/clip_shortlist.py \
+     --candidates-dir /tmp/nsfw_previews/<name>/frames \
+     --caption "<setting + people — e.g. 'a man and woman having sex on a kitchen counter'>" \
+     --top-k 6 --item-id <item_id> \
+     --montage-out games/<game>/.find-media/evidence/<item_id>/montage_cull.jpg --json
+   ```
+   (exit 3 → CLIP unavailable → fall back to viewing every `.jpg` directly, as before.)
+4. **View the ONE montage** (`montage_cull.jpg`). Apply the hard-rejection filters from
+   `references/scoring_rubric.md` (3+ people, solo, same-sex, BDSM, mature/MILF when the
+   character is young, etc.) and **judge the act yourself** on each tile — the step CLIP
+   can't do. Score Setting (30) + Action (40) + Appearance (20) + Quality (10); record
+   every score to `evidence/<item_id>/scores.jsonl`. Pick the highest above 60; if all
+   below 60, trigger CRITIQUE. Map the chosen tile letter back to its `gifId` via the
+   `clip_shortlist.py` JSON `ranked[].montage_label`.
 
 **Never pick based on title alone.** PornHub titles are user-generated noise.
-**Never write a script that auto-selects.** You must view the images yourself.
+**CLIP ranks, it does not score — you do.** The montage order is a hint, not the decision.
 
 ### Step 4 — Use the already-downloaded media
 
@@ -142,13 +164,16 @@ curl --socks5-hostname 127.0.0.1:9050 \
 - File size: images > 1KB, videos > 50KB
 - For t5+ files: `file <path>` must show WebM/MP4/GIF, NOT "JPEG image data". If it's a JPEG at t5+, DELETE and report FAIL — a 10KB thumbnail is useless as a video placeholder.
 - `scripts/tier_format_check.py --file <path> --tier <tier>` enforces this as a hard gate before PACKAGE.
-- For videos, extract a verification frame to double-check content:
+- For videos, build a multi-frame act-verification **strip** (one frame can mislead — the act may not be at 00:00:02):
 
 ```bash
-ffmpeg -y -i <file> -ss 00:00:02 -vframes 1 -q:v 2 /tmp/verify.jpg
+"${FIND_MEDIA_PY:-/Library/Frameworks/Python.framework/Versions/3.10/bin/python3}" \
+  .claude/skills/find-media/scripts/video_frames.py --video <file> --mode strip --frames 4 \
+  --out games/<game>/.find-media/evidence/<item_id>/verify_strip.jpg
 ```
 
-View `/tmp/verify.jpg` to confirm content matches the description.
+View the strip to confirm the act holds across the loop and matches the description.
+This supersedes the old single-frame `ffmpeg -ss 00:00:02 -vframes 1` check.
 
 ### Step 6 — If no match, CRITIQUE cycle
 

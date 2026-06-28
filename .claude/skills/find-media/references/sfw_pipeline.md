@@ -8,21 +8,27 @@ Same batch-as-pipeline-slice rule as NSFW (see SKILL.md §Batching). Group missi
 
 SFW has no URL-expiration concern (Unsplash/Pexels links are durable), but the batch rule still applies because:
 - Incremental progress: each batch's 5 files are packaged before you start the next
-- Subagent token budget: parallel `sfw-searcher` dispatches scale per batch, not per total
+- Token budget: CLIP ranks the candidates and you view one montage per item (not 15 thumbnails) — the budget is montage reads, scoped per batch
 - Failure isolation: if one item triggers 3 critique cycles, only the 5 items in that batch wait on it
 
-## Source priority
+## Source priority — inline WebSearch, no per-source subagents
 
-Dispatch parallel `sfw-searcher` subagents — one per source — so results arrive concurrently rather than serial.
+Run WebSearch **inline on the main thread**. Do NOT spawn one `sfw-searcher` subagent
+per source — that old fan-out (4 subagents per item) multiplied token cost with no
+benefit now that CLIP does the ranking. You only need a modest pool of ~8–15 candidate
+URLs for CLIP to rank; breadth no longer needs parallel agents.
 
 | Priority | Source | How to search | Notes |
 |----------|--------|---------------|-------|
-| 1 | DuckDuckGo images | WebSearch with query | Broad, good for lifestyle scenes |
-| 2 | Unsplash | `site:unsplash.com <query>` via WebSearch | High-quality, Creative Commons, prefer for locations |
-| 3 | Pexels | `site:pexels.com <query>` via WebSearch | Similar to Unsplash, different catalog |
-| 4 | Pixabay | `site:pixabay.com <query>` via WebSearch | Fallback when 1–3 return nothing usable |
+| 1 | Unsplash | `site:unsplash.com <query>` via WebSearch | High-quality, Creative Commons, durable URLs, best for locations |
+| 2 | Pexels | `site:pexels.com <query>` via WebSearch | Similar to Unsplash, different catalog |
+| 3 | DuckDuckGo images | WebSearch with query | Broad, good for lifestyle scenes |
+| 4 | Pixabay | `site:pixabay.com <query>` via WebSearch | CRITIQUE-only fallback when 1–3 return nothing usable |
 
-All four sources are attempted in parallel for the top-ranked query. Drop to sequential only if the first query failed everywhere — then try query #2 on Unsplash+Pexels first (highest signal for domestic scenes).
+Issue 2–3 inline queries (`<query>`, `site:unsplash.com <query>`, `site:pexels.com <query>`)
+and collect candidate image URLs. Use the **validated top search query** as the text —
+that same query becomes CLIP's caption (see `references/clip_preranking.md` §Caption policy;
+the query beats narrative prose 60% vs 32%).
 
 ## Query enhancement by content type
 
@@ -75,11 +81,28 @@ Apply before any scoring. Drop these before they reach the visual evaluator.
 
 **Minimum score: 70** to auto-accept. Below 70 → critique cycle.
 
-## Download
+## Download candidates BEFORE evaluation (CLIP needs files on disk)
 
-- `curl -L -o <output_dir>/<file>` — SFW sources don't need Tor
-- Create parent directories with `mkdir -p`
-- Verify file exists and is > 1KB before PACKAGE
+Unlike the old flow (which only curled the winner at PACKAGE), CLIP scores local
+files — so download every candidate URL into the item's evidence dir first:
+
+```bash
+mkdir -p games/<game>/.find-media/evidence/<item>/candidates
+# for each candidate URL, zero-padded index cNN:
+curl -sL --max-time 15 -o games/<game>/.find-media/evidence/<item>/candidates/cNN.jpg "<url>"
+# append {id, url, source, query_used, local_path} to evidence/<item>/candidates.jsonl
+# skip any file < 1KB (same size floor as the quality gate)
+```
+
+These are small stock JPGs on durable URLs — downloading ~8–15 per item is the cheap
+precondition for the token win. Then run `clip_shortlist.py --candidates-dir …` (see
+`references/clip_preranking.md`); SFW uses `--top-k 5` (top-3 hit 88%).
+
+## Package the winner
+
+After you pick the winning tile from the montage, package it via the dev API exactly
+as before (`POST /api/v1/dev/media-capture` — see SKILL.md §6 PACKAGE). SFW sources
+don't need Tor. The `tier_format_check.py` + size gates still run post-download.
 
 ## SFW-specific rules
 
