@@ -166,6 +166,20 @@
         reflectButtons();
       }
 
+      // Find media — on every card (fill a missing slot, or replace this one).
+      var findRow = el("div", "review-row");
+      var findLink = el("a", "rev-btn find", "🔎 Find media");
+      findLink.style.textAlign = "center";
+      findLink.style.textDecoration = "none";
+      var fparams = new URLSearchParams({
+        id: GAME,
+        file: item.file || "",
+        q: (item.search_queries || []).join(" | ")
+      });
+      findLink.href = "find.html?" + fparams.toString();
+      findRow.appendChild(findLink);
+      body.appendChild(findRow);
+
       reflectStatus();
       card.appendChild(body);
       return card;

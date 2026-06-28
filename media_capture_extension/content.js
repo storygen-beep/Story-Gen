@@ -1,10 +1,12 @@
 /**
- * Twine Media Capture - Content Script
- * Injects download buttons on images and videos for easy asset capture.
+ * Find-Media Options Capture - Content Script
+ * Injects a capture button on images/videos; clicking it stores the media URL as
+ * an OPTION for the active slot (set via _tmc_game/_tmc_scene URL params by the
+ * Find-media page). No download here — the find page downloads the chosen option.
  */
 
 // Configuration
-const API_ENDPOINT = 'http://localhost:8000/api/v1/dev/media-capture';
+const API_ENDPOINT = 'http://localhost:8000/api/v1/dev/media-finder/options/add';
 const MIN_SIZE = 50; // Minimum dimension in pixels to show button
 const PROCESSED_ATTR = 'data-twine-capture';
 
@@ -166,63 +168,55 @@ function createCaptureButton(mediaUrl, mediaType) {
 }
 
 /**
- * Show the scene_id input form
+ * Show the media-type popup. The slot is already known (currentScene, from the
+ * _tmc_scene URL param the Find-media page sets), so we don't ask for it — we just
+ * ask what KIND of media is being moved. Clicking a type button submits.
  */
 function showCaptureForm(mediaUrl, mediaType, anchorButton) {
-    // Close any existing form
     closeActiveForm();
 
-    // Create form container
     const form = document.createElement('div');
     form.className = 'twine-capture-form';
+    const wrapper = anchorButton.parentElement;
 
-    // Build form HTML with optional game context
-    let gameContextHtml = '';
-    if (currentGame) {
-        gameContextHtml = `<div class="twine-capture-game-context">Game: <strong>${currentGame}</strong></div>`;
+    // No slot context = nothing to attach the option to.
+    if (!currentScene) {
+        form.innerHTML = `
+            <div class="twine-capture-form-label">No target slot</div>
+            <div class="twine-capture-game-context">Open this tab from the Find-media page — it sets the slot via the URL.</div>
+            <div class="twine-capture-form-buttons">
+                <button type="button" class="twine-capture-form-btn cancel">Close</button>
+            </div>`;
+        wrapper.appendChild(form);
+        form.querySelector('.cancel').addEventListener('click', (e) => { e.stopPropagation(); closeActiveForm(); });
+        activeForm = form;
+        return;
     }
 
+    const defaultType = mediaType === 'video' ? 'video' : 'image';
+    const ctx = (currentGame ? `Game: <strong>${currentGame}</strong> · ` : '') + `Slot: <strong>${currentScene}</strong>`;
     form.innerHTML = `
-        ${gameContextHtml}
-        <div class="twine-capture-form-label">Scene ID:</div>
-        <input type="text" class="twine-capture-input" placeholder="e.g. bedroom_morning" value="${currentScene || ''}" />
+        <div class="twine-capture-game-context">${ctx}</div>
+        <div class="twine-capture-form-label">Move as:</div>
+        <div class="twine-capture-type-row">
+            <button type="button" class="twine-capture-type-btn" data-type="image">Image</button>
+            <button type="button" class="twine-capture-type-btn" data-type="gif">GIF</button>
+            <button type="button" class="twine-capture-type-btn" data-type="video">Video</button>
+        </div>
         <div class="twine-capture-form-buttons">
             <button type="button" class="twine-capture-form-btn cancel">Cancel</button>
-            <button type="button" class="twine-capture-form-btn submit">Save</button>
-        </div>
-    `;
+        </div>`;
 
-    // Position near the button
-    const wrapper = anchorButton.parentElement;
     wrapper.appendChild(form);
 
-    // Focus input and select text if pre-filled
-    const input = form.querySelector('.twine-capture-input');
-    input.focus();
-    if (currentScene) {
-        input.select();
-    }
-
-    // Handle enter key
-    input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            submitCapture(mediaUrl, input.value, form);
-        } else if (e.key === 'Escape') {
-            closeActiveForm();
-        }
+    form.querySelectorAll('.twine-capture-type-btn').forEach((b) => {
+        if (b.dataset.type === defaultType) b.classList.add('on');
+        b.addEventListener('click', (e) => {
+            e.stopPropagation();
+            submitCapture(mediaUrl, b.dataset.type, form, b);
+        });
     });
-
-    // Handle buttons
-    form.querySelector('.cancel').addEventListener('click', (e) => {
-        e.stopPropagation();
-        closeActiveForm();
-    });
-
-    form.querySelector('.submit').addEventListener('click', (e) => {
-        e.stopPropagation();
-        submitCapture(mediaUrl, input.value, form);
-    });
+    form.querySelector('.cancel').addEventListener('click', (e) => { e.stopPropagation(); closeActiveForm(); });
 
     activeForm = form;
 }
@@ -238,55 +232,42 @@ function closeActiveForm() {
 }
 
 /**
- * Submit capture request to Django backend
+ * Store the captured URL as an option for the active slot (no download).
  */
-async function submitCapture(url, sceneId, formElement) {
-    // Validate
-    if (!sceneId.trim()) {
-        showToast('error', 'Please enter a scene ID');
-        return;
-    }
-
-    // Show loading state
-    const submitBtn = formElement.querySelector('.submit');
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = '...';
-    submitBtn.disabled = true;
+async function submitCapture(url, type, formElement, typeBtn) {
+    const mediaKind = type === 'video' ? 'video' : 'img';  // gif/image both render as <img>
+    const buttons = formElement.querySelectorAll('.twine-capture-type-btn, .cancel');
+    const originalText = typeBtn.textContent;
+    typeBtn.textContent = '...';
+    buttons.forEach((b) => (b.disabled = true));
 
     try {
-        // Build request body with optional game parameter
-        const requestBody = {
-            url: url,
-            scene_id: sceneId.trim()
-        };
-
-        // Add game if we have context
-        if (currentGame) {
-            requestBody.game = currentGame;
-        }
-
         const response = await fetch(API_ENDPOINT, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestBody)
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                game: currentGame,
+                file: currentScene,
+                url: url,
+                type: type,
+                media_kind: mediaKind
+            })
         });
 
         const data = await response.json();
 
-        if (data.success) {
-            showToast('success', `Saved: ${data.file_path}`);
+        if (data.ok) {
+            showToast('success', data.duplicate ? 'Already in options' : `Added to options (${data.count})`);
             closeActiveForm();
         } else {
-            showToast('error', data.error || 'Download failed');
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
+            showToast('error', data.error || 'Failed to add option');
+            typeBtn.textContent = originalText;
+            buttons.forEach((b) => (b.disabled = false));
         }
     } catch (err) {
         showToast('error', `Request failed: ${err.message}`);
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
+        typeBtn.textContent = originalText;
+        buttons.forEach((b) => (b.disabled = false));
     }
 }
 

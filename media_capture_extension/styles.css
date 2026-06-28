@@ -106,6 +106,43 @@
     box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2) !important;
 }
 
+/* Media-type picker row */
+.twine-capture-type-row {
+    display: flex !important;
+    gap: 6px !important;
+    margin-bottom: 10px !important;
+}
+
+.twine-capture-type-btn {
+    flex: 1 !important;
+    padding: 8px 6px !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 6px !important;
+    background: #f9fafb !important;
+    color: #374151 !important;
+    cursor: pointer !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    font-family: system-ui, -apple-system, sans-serif !important;
+    transition: all 0.12s ease !important;
+}
+
+.twine-capture-type-btn:hover {
+    border-color: #3b82f6 !important;
+    color: #3b82f6 !important;
+}
+
+.twine-capture-type-btn.on {
+    background: #3b82f6 !important;
+    border-color: #3b82f6 !important;
+    color: white !important;
+}
+
+.twine-capture-type-btn:disabled {
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+}
+
 /* Button container */
 .twine-capture-form-buttons {
     display: flex !important;

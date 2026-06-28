@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Find Media — Story-Gen</title>
+  <link rel="stylesheet" href="portal.css">
+  <style>
+    .find-head { margin-bottom: 4px; }
+    .find-head h1 { font-size: 1.5rem; }
+    .find-sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 18px; }
+    .find-sub .mono { font-family: ui-monospace, Menlo, monospace; color: var(--accent); }
+
+    .toolbar {
+      display: flex; flex-direction: column; gap: 12px;
+      padding: 14px; margin-bottom: 18px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    }
+    .searchrow { display: flex; gap: 8px; }
+    .searchrow input {
+      flex: 1; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 9px; padding: 11px 14px; color: var(--text); font-size: 0.95rem; outline: none;
+    }
+    .searchrow input:focus { border-color: var(--accent); }
+    .go-btn {
+      font-weight: 700; font-size: 0.9rem; border: none; border-radius: 9px;
+      padding: 0 20px; cursor: pointer; background: var(--accent); color: var(--accent-text); white-space: nowrap;
+    }
+    .hint { color: var(--muted); font-size: 0.8rem; line-height: 1.5; }
+    .hint b { color: var(--text); }
+
+    .opt-head {
+      display: flex; align-items: center; gap: 10px; margin: 6px 0 12px;
+      font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--accent); font-weight: 700;
+    }
+    .opt-count { color: var(--muted); font-weight: 600; letter-spacing: 0; text-transform: none; }
+    .refresh-btn {
+      margin-left: auto; font-size: 0.72rem; color: var(--muted); background: var(--surface);
+      border: 1px solid var(--border); border-radius: 999px; padding: 4px 12px; cursor: pointer;
+      text-transform: none; letter-spacing: 0;
+    }
+    .refresh-btn:hover { color: var(--text); border-color: var(--accent); }
+
+    .find-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px; margin-top: 4px;
+    }
+    .tile {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden; display: flex; flex-direction: column;
+    }
+    .tile-media {
+      width: 100%; aspect-ratio: 4 / 3; background: #0b0c10; object-fit: cover;
+      display: block; cursor: zoom-in;
+    }
+    .tile-media.broken { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.72rem; }
+    .tile-body { padding: 8px 10px 10px; display: flex; flex-direction: column; gap: 6px; }
+    .tile-meta { font-size: 0.68rem; color: var(--muted); line-height: 1.4; word-break: break-all; }
+    .type-badge {
+      display: inline-block; font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
+      color: var(--accent-text); background: var(--accent); border-radius: 4px; padding: 1px 6px;
+    }
+    .type-badge.vid { background: #7a9ec8; }
+    .tile-actions { display: flex; gap: 6px; }
+    .use-btn, .rm-btn {
+      font-size: 0.78rem; font-weight: 700; border: 1px solid var(--border);
+      border-radius: 7px; padding: 7px; cursor: pointer; background: var(--surface-hover); color: var(--text);
+    }
+    .use-btn { flex: 1; }
+    .use-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .rm-btn { color: var(--muted); }
+    .rm-btn:hover { border-color: #c2554e; color: #c2554e; }
+    .use-btn:disabled { opacity: 0.6; cursor: default; }
+    .tile-status { font-size: 0.7rem; }
+    .tile-status.ok { color: #5fae6e; }
+    .tile-status.err { color: #c2554e; }
+
+    .empty { color: var(--muted); font-size: 0.9rem; padding: 28px 4px; line-height: 1.6; }
+
+    .overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 1000;
+      display: flex; align-items: center; justify-content: center; cursor: zoom-out; padding: 24px;
+    }
+    .overlay img, .overlay video { max-width: 92vw; max-height: 92vh; border-radius: 8px; }
+
+    .toast {
+      position: fixed; bottom: 22px; right: 22px; z-index: 2000;
+      padding: 11px 18px; border-radius: 9px; font-size: 0.85rem; font-weight: 600;
+    }
+    .toast.ok { background: #2f5d39; color: #d7f0dd; }
+    .toast.err { background: #5d2f2f; color: #f0d7d7; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" id="back" href="index.html">← Back to review</a>
+    <div class="find-head"><h1>Find media</h1></div>
+    <div class="find-sub" id="sub"></div>
+
+    <div class="toolbar">
+      <div class="searchrow">
+        <input id="q" type="text" placeholder="Search query…" autocomplete="off">
+        <button class="go-btn" id="go">🔎 Search Google Images ↗</button>
+      </div>
+      <div class="hint">
+        Opens Google Images in a new tab (the slot is passed along). Hover any result, click the
+        blue capture button, pick a <b>type</b> — it lands in <b>Options</b> below. Then <b>Use this</b>
+        downloads it into the game, replacing the current media.
+      </div>
+    </div>
+
+    <div class="opt-head">
+      <span>Options</span><span class="opt-count" id="count"></span>
+      <button class="refresh-btn" id="refresh">↻ Refresh</button>
+    </div>
+    <div id="options"></div>
+  </div>
+
+  <script>
+  (function () {
+    var API = "http://localhost:8000";
+    var P = new URLSearchParams(location.search);
+    var GAME = P.get("id") || "";
+    var FILE = P.get("file") || "";
+    var QUERIES = (P.get("q") || "").split(" | ").map(function (s) { return s.trim(); }).filter(Boolean);
+
+    var backEl = document.getElementById("back");
+    var subEl = document.getElementById("sub");
+    var qEl = document.getElementById("q");
+    var countEl = document.getElementById("count");
+    var optionsEl = document.getElementById("options");
+
+    function el(tag, cls, text) {
+      var e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (text != null) e.textContent = text;
+      return e;
+    }
+
+    backEl.href = "media.html?id=" + encodeURIComponent(GAME);
+    document.title = (FILE || GAME) + " — Find media";
+    qEl.value = QUERIES[0] || "";
+
+    if (FILE) {
+      subEl.appendChild(document.createTextNode("Filling slot "));
+      subEl.appendChild(el("span", "mono", FILE));
+      subEl.appendChild(document.createTextNode(" in " + (GAME || "—")));
+    } else {
+      subEl.textContent = "No target slot — open this from a review card.";
+    }
+
+    // ---- proxy preview (browser never hits the source domain directly) ----
+    function proxied(u) {
+      if (!u) return u;
+      var src = /redgifs\.com/i.test(u) ? "redgifs" : "";
+      return API + "/api/v1/dev/media-finder/proxy?url=" + encodeURIComponent(u) + "&source=" + src;
+    }
+
+    // ---- Google Images launcher (hands the slot to the capture extension) ----
+    document.getElementById("go").addEventListener("click", function () {
+      var q = (qEl.value || "").trim();
+      if (!q) { toast("Type a search query first", "err"); return; }
+      var url = "https://www.google.com/search?tbm=isch&q=" + encodeURIComponent(q) +
+        "&_tmc_game=" + encodeURIComponent(GAME) + "&_tmc_scene=" + encodeURIComponent(FILE);
+      window.open(url, "_blank");
+    });
+    qEl.addEventListener("keydown", function (e) { if (e.key === "Enter") document.getElementById("go").click(); });
+    document.getElementById("refresh").addEventListener("click", loadOptions);
+
+    // ---- options list (polled; only rebuilds when the set changes) ----
+    var lastSig = null;
+    function loadOptions() {
+      fetch(API + "/api/v1/dev/media-finder/options/list?game=" +
+        encodeURIComponent(GAME) + "&file=" + encodeURIComponent(FILE))
+        .then(function (r) { return r.json(); })
+        .then(function (j) { renderOptions(j.options || []); })
+        .catch(function () {
+          if (lastSig !== "__offline__") {
+            lastSig = "__offline__";
+            optionsEl.innerHTML = "";
+            optionsEl.appendChild(el("p", "empty", "Server unreachable — is the dev server running?"));
+          }
+        });
+    }
+
+    function renderOptions(opts) {
+      var sig = opts.map(function (o) { return o.url; }).join("|");
+      if (sig === lastSig) return;  // unchanged — don't rebuild (avoids preview flicker)
+      lastSig = sig;
+
+      countEl.textContent = opts.length ? "(" + opts.length + ")" : "";
+      optionsEl.innerHTML = "";
+      if (!opts.length) {
+        optionsEl.appendChild(el("p", "empty",
+          "No options yet. Click “Search Google Images”, then capture results with the extension — they appear here."));
+        return;
+      }
+      var grid = el("div", "find-grid");
+      opts.forEach(function (opt) { grid.appendChild(buildTile(opt)); });
+      optionsEl.appendChild(grid);
+    }
+
+    function buildTile(opt) {
+      var isVideo = opt.media_kind === "video";
+      var tile = el("div", "tile");
+
+      var thumb = el(isVideo ? "video" : "img", "tile-media");
+      thumb.src = proxied(opt.url);
+      if (isVideo) { thumb.muted = true; thumb.loop = true; thumb.playsInline = true; thumb.preload = "metadata"; }
+      else { thumb.loading = "lazy"; thumb.referrerPolicy = "no-referrer"; }
+      thumb.addEventListener("click", function () { preview(opt); });
+      thumb.addEventListener("error", function () {
+        var ph = el("div", "tile-media broken", isVideo ? "▶ video" : "no preview");
+        ph.addEventListener("click", function () { preview(opt); });
+        tile.replaceChild(ph, thumb);
+      });
+      tile.appendChild(thumb);
+
+      var body = el("div", "tile-body");
+      var meta = el("div", "tile-meta");
+      meta.appendChild(el("span", "type-badge" + (isVideo ? " vid" : ""), opt.type || "image"));
+      meta.appendChild(document.createTextNode(" " + domainOf(opt.url)));
+      body.appendChild(meta);
+
+      var status = el("div", "tile-status");
+      var row = el("div", "tile-actions");
+      var use = el("button", "use-btn", "Use this");
+      if (!FILE) { use.disabled = true; use.title = "No target slot"; }
+      use.addEventListener("click", function () { useOption(opt, use, status); });
+      var rm = el("button", "rm-btn", "✕");
+      rm.title = "Remove from options";
+      rm.addEventListener("click", function () { removeOption(opt); });
+      row.append(use, rm);
+      body.append(row, status);
+      tile.appendChild(body);
+      return tile;
+    }
+
+    function domainOf(u) {
+      try { return new URL(u).hostname.replace(/^www\./, ""); } catch (e) { return ""; }
+    }
+
+    function useOption(opt, btn, statusEl) {
+      btn.disabled = true;
+      statusEl.className = "tile-status";
+      statusEl.textContent = "saving…";
+      var source = /redgifs\.com/i.test(opt.url) ? "redgifs" : "";
+      fetch(API + "/api/v1/dev/media-finder/grab", {
+        method: "POST",
+        body: JSON.stringify({ game: GAME, file: FILE, url: opt.url, source: source })
+      }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) {
+          if (!res.ok || !res.j.success) {
+            statusEl.className = "tile-status err";
+            statusEl.textContent = (res.j && res.j.error) ? res.j.error : "grab failed";
+            btn.disabled = false;
+            toast("Grab failed", "err");
+            return;
+          }
+          statusEl.className = "tile-status ok";
+          statusEl.textContent = "saved → " + res.j.file_path;
+          btn.textContent = "Saved ✓";
+          toast("Saved to " + res.j.file_path, "ok");
+          clearReviewStatus();
+        })
+        .catch(function () {
+          statusEl.className = "tile-status err";
+          statusEl.textContent = "server unreachable";
+          btn.disabled = false;
+          toast("Server unreachable", "err");
+        });
+    }
+
+    function removeOption(opt) {
+      fetch(API + "/api/v1/dev/media-finder/options/remove", {
+        method: "POST",
+        body: JSON.stringify({ game: GAME, file: FILE, url: opt.url })
+      }).then(function () { lastSig = null; loadOptions(); })
+        .catch(function () { toast("Remove failed", "err"); });
+    }
+
+    // Reset the slot's review decision so the replacement shows as "needs review".
+    function clearReviewStatus() {
+      if (!FILE) return;
+      var note = "replaced via finder " + new Date().toISOString().slice(0, 10);
+      fetch(API + "/api/v1/dev/media-review/reviews?game=" + encodeURIComponent(GAME), {
+        method: "POST",
+        body: JSON.stringify({ file: FILE, status: null, note: note })
+      }).catch(function () { /* non-fatal: the grab already landed */ });
+    }
+
+    function preview(opt) {
+      var overlay = el("div", "overlay");
+      overlay.addEventListener("click", function () { overlay.remove(); });
+      var media;
+      if (opt.media_kind === "video") {
+        media = el("video");
+        media.src = proxied(opt.url);
+        media.controls = true; media.autoplay = true; media.loop = true; media.muted = true; media.playsInline = true;
+      } else {
+        media = el("img");
+        media.src = proxied(opt.url);
+        media.referrerPolicy = "no-referrer";
+      }
+      overlay.appendChild(media);
+      document.body.appendChild(overlay);
+    }
+
+    function toast(msg, kind) {
+      var t = el("div", "toast " + (kind || "ok"), msg);
+      document.body.appendChild(t);
+      setTimeout(function () { t.remove(); }, 2600);
+    }
+
+    // ---- init ----
+    if (!GAME) {
+      subEl.textContent = "No game id. Open this from a review card.";
+      return;
+    }
+    loadOptions();
+    setInterval(loadOptions, 3000);  // captures from the Google tab appear within a few seconds
+  })();
+  </script>
+</body>
+</html>

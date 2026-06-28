@@ -201,16 +201,20 @@ def is_video_platform(url: str) -> bool:
     return any(platform in domain for platform in VIDEO_PLATFORMS)
 
 
-def download_direct(url: str, output_path: Path, progress_callback=None, max_retries=5) -> tuple[bool, str]:
+def download_direct(url: str, output_path: Path, progress_callback=None, max_retries=5, extra_headers: dict | None = None) -> tuple[bool, str]:
     """
     Attempt direct download of media file with resume support.
     Returns (success, error_message).
     progress_callback(percent: int, phase: str) is called periodically if provided.
     Automatically retries and resumes from partial file on network errors.
+    extra_headers (optional) are merged into every request — e.g. an auth Bearer
+    token for sources like RedGIFs whose CDN rejects the bare UA.
     """
     base_headers = {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
     }
+    if extra_headers:
+        base_headers.update(extra_headers)
 
     # First request: check content type and get total size
     try:
