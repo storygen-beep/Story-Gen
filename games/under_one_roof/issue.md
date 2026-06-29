@@ -700,3 +700,31 @@ ideas, to generate SFW photos using claude code cloud / claude code + chatgpt on
 [DONE]change the player portrait to be a beautiful girl.
 
 [DONE]earn the office / break him these doesnt shows the actual trait names
+
+
+[DONE]everytime renner cums inside ass the key one gets triggered
+
+[DONE]renner progress looked very easy I think relation 15 and corruption 20 unlocks everything. There isnt much feels of grind happening, share your honest thoughts.
+
+[DONE]In the Quests, when the current progress is completed and nothing to progress it should simply say something like More coming in future updates, you can reframe / rewrite this properly but nothing like Act 2.
+
+[PROGRESS]Content depth and more content:
+    DONE: FIGHTING SKILL AND STEALTH SKILL AND BUILDING THEM
+    DONE: RENNER DEPOT BURNT PLACE FINDING OUT THINGS
+    DONE: UNDERWORLD 
+    DONE: CLEANUP AFTER SEX (SOMETHING SIMILAR TO HEIGINE), DRAIN WEAPON RELOAD AFTER USE, SAME WITH AROUSAL WEAPON
+    DONE: Arousal Weapon
+    Fighting Spit
+
+[DONE] separate writing renner quests into story goals
+
+[DONE]renner hub choices when locked shows a different text when it is unlocked / available instead it should simply show the same text as unlocked with the (requirements) and grey locked choice (same design as of now just same text).
+
+
+[DONE] Energy goes into minus value
+
+Quests write properly to also show how much stealth is required
+
+[DONE]brothel sex to be a full sex loop
+
+Fight how it works

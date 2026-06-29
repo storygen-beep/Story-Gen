@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 36,
+  "book_revision": 38,
   "pipeline_phase": "authoring",
   "map_design": {
     "topology": "done",
@@ -589,6 +589,36 @@
         "Added one sentence to the underworld_gate_check base paragraph (3_activities.toml): 'The coin he wants isn't company credits -- it's underworld scrip: earned down here, spent down here, worth nothing up top.' Teaches what coin IS at its first point of relevance (arm-at-first-relevance, onboarding.md §2.3) + gracefully explains the cold-first-visit toll (coin only exists down there -> first entry via fight/weapon).",
         "SCOPE: P3 resolved MINIMALLY per LO. The other proposed touches (opening Condition line, opening Training line, Underworld briefing line, Underworld quest card) were DROPPED -- the sidebar already surfaces Condition/Fighting/Stealth/Coin as banded cards from frame one (onboarding.md §2.4 bare hard-gate satisfied). Arousal weapon stays taught at acquisition (yard find), not the opening.",
         "Prose-only, no mechanics change. (merge + production build + verify in this turn.)"
+      ]
+    },
+    {
+      "id": "beat_0027",
+      "status": "validated",
+      "target_phase": "5",
+      "title": "LOCKED-CHOICE LABELS (Option A): depot seduction rungs show bare action label when locked",
+      "introduces": [
+        "The 4 Renner depot rungs (Tease / Flash / Get your hands on him / Take him in the office) now show their OWN action label greyed when locked, matching the unlocked link -- removed the hand-written locked_text prose that the engine was swapping in (v2.py:11762)."
+      ],
+      "canvases": [
+        "5_scenes.toml hub_depot_floor: deleted locked_text on the 4 office-seduction rungs (kept show_when_locked + conditions + costs). Conditions-lock now falls back to choice_text; energy-cost lock already showed 'label (Requires 15 ...)'. Both greyed states now agree with the unlocked label.",
+        "SCOPE: depot hub only (LO's call). Same locked_text-swap pattern remains, by design, on the Renner sex loop (loop_renner_office_sex, 4), Mercer serve menu (mercer_serve, 3), and one travel gate (3_activities) -- conditions-only, no competing cost label, prose reads better mid-scene.",
+        "ENGINE FACT recorded (no change made): conditions gates never auto-derive a requirement string (only resource costs do, via getCostBlockedMessage v2.py:4242). The dormant setup.describeUnmetConditions helper (v2.py:1495, shop-only) could make it automatic game-wide but needs an npc-trait read + skip-vacuous fix -- deferred (LO declined).",
+        "Merge + production build (no --dev/--debug) green: validation passed, all flag chains valid, 0 failures. Artifact-verified. No commit/push; held media untouched."
+      ]
+    },
+    {
+      "id": "beat_0028",
+      "status": "validated",
+      "target_phase": "3",
+      "title": "BROTHEL -> FULL SEX LOOP (oral/vaginal/anal, Mercer-shape, coin-on-finish)",
+      "introduces": [
+        "The House (underworld_brothel) is now a full sex loop: oral(0)/vaginal(1)/anal(2) pose ladder -> loop_npc_pleasure climbs -> elected finish (mouth/inside/ass). Reached from the 'Take a client' menu rung (entry reset). Coin pays once on the finisher exit (was an entry-choice faucet)."
+      ],
+      "canvases": [
+        "3_activities.toml: reworked underworld_brothel_work base 'Take a client' choice into the loop entry rung (kept costs energy 15, removed +10 coin, re-point to underworld_brothel_loop.intro, added 5-trait entry reset). Deleted the old single 'client' node.",
+        "NEW triggerless canvas underworld_brothel_loop (intro + base_oral/base_vaginal/base_anal). base_vaginal reuses sex/brothel_client.webm. Self-loop adds loop_npc_pleasure random 8-14; pose-switches set sex_stage/anal_active; climax-elect show_when_locked gated loop_npc_pleasure gte 50 (+anal_active gte 1 for ass) sets sex_finisher_type.",
+        "NEW triggerless canvas underworld_brothel_finisher (climax: 3 [group] by sex_finisher_type; exit -> underworld_brothel +120 min, effects +10 coin + -30 hygiene clamp + reset all 5 loop traits). Mercer-shape (no control canvas).",
+        "Authoring-only, ZERO engine. Merge + production build GREEN (validation passed, all flag chains valid, 0 failures). Verified: coin once on finish, double reset, flag-free, version=1.0 gates, no [VIDEO MISSING]. Cold register kept. PENDING: find-media for 5 new t5 clips (silent-skipped meanwhile). No commit/push; held media untouched."
       ]
     }
   ],
@@ -1233,6 +1263,16 @@
       "turn": 57,
       "book_revision": 36,
       "note": "ONBOARDING -- content-depth audit P3, resolved MINIMALLY per LO's call. Investigated read-only (2 Explore agents): KEY FINDING -- all six systems (Charge, Condition, Fighting, Stealth, Coin, Renner panel) already render on the sidebar from frame one, so the bare 'surface each live system once' hard-gate (onboarding.md §2.4) is already satisfied; the real gaps were the §2.3 'armed-in-fiction' half + the Underworld being an open hub with no pointer. I proposed 3 opening teaching lines (Condition/Training/Underworld) + an Underworld quest card. LO declined all of those ('nothing is needed') EXCEPT: teach COIN at the gate, where it first matters. DONE: added one sentence to the underworld_gate_check base paragraph (3_activities.toml) -- 'The coin he wants isn't company credits -- it's underworld scrip: earned down here, spent down here, worth nothing up top.' This arms coin in-fiction at its first point of relevance AND gracefully explains the audit's coin-toll-cold-first-visit oddity (coin only exists down there, so first entry is via fight/weapon; the toll works once she's earning). Kept it timeless (no 'she has none yet' -- the greyed 'Pay the toll (Requires 5 Coin)' handles affordability). DROPPED per LO: the opening Condition line, the opening Training/drill line, the Underworld briefing line, and the Underworld Story-Goals quest card. Arousal weapon stays taught at acquisition (yard find), not the opening (doctrine: teach a mid-game tool when acquired). STILL OPEN from the audit: P3's deeper 'arm Condition/Training in fiction' (LO is relying on the sidebar, a legit §2.4 call) + the C/D/E ledger items (_active_beat / next_up stale, flags-registry incomplete) + F (no live-play of 0016-0024). book rev 35->36. Files: 3_activities, design_book, ledger. No commit/push; held media untouched."
+    },
+    {
+      "turn": 58,
+      "book_revision": 37,
+      "note": "LOCKED-CHOICE LABELS -- the 4 Renner depot seduction rungs (hub_depot_floor: Tease / Flash / Get your hands on him / Take him in the office; 5_scenes.toml) showed DIFFERENT text when locked vs unlocked, because each carried a hand-written locked_text prose string that the engine swaps in for the action label (v2.py:11762 escaped_locked = locked_text or choice_text). LO wanted the locked card to show the SAME label as unlocked, greyed, like the energy gate already does. Investigated read-only (workflow wf_2d319f95-c93 + direct verify): the swap is AUTHORING, not engine -- the engine fully supports same-label-greyed (omit locked_text -> falls back to choice_text). Swept the whole game: the ONLY true NPC hub with this is the depot; the same pattern also lives in the Renner sex loop (loop_renner_office_sex: 4) + Mercer serve menu (mercer_serve: 3) + one travel gate (3_activities), but those are conditions-only (no competing cost label) so left untouched. LO first picked Option B (label + hand-written requirement), then PIVOTED to Option A and asked whether 'Tease him (x>10)' is automatic. CONFIRMED read-only it is NOT: a conditions gate never auto-derives a reason (triggerConditionsSatisfied is boolean, v2.py:3398); the only auto '(Requires N ...)' is for resource costs via getCostBlockedMessage (v2.py:4242). NOTE FOR LATER: the engine DOES contain a conditions->text helper setup.describeUnmetConditions (v2.py:1495) but it's wired ONLY into the shop buy button, not locked choices, and it can't read NPC-subject traits (Renner's tier is npc corruption) + would print vacuous gates (corruption>=0 -> 'Corruption 0+'); wiring it cleanly into locked choices = a real engine+doctrine task (LO declined for now). DONE (Option A): deleted the 4 locked_text lines on the depot rungs; show_when_locked/conditions/costs intact. Now both greyed states show the bare label -- conditions-lock -> 'Tease him.', energy-lock -> 'Tease him. (Requires 15 Energy ...)'. Merge OK; production build (no --dev/--debug) green: validation passed, ALL flag chains valid, Failed 0. Artifact-verified: 4 old prose strings gone (0 each), each label renders as both a clickable <<link>> and a locked-choice span; 7 sex-loop/serve locked_text untouched. Pre-existing unrelated build WARNINGs noted (trait-effects extraction on 'Take him'/'Serve him' canvases -- not touched by this change, predates it; flagged to LO). book rev 36->37. Files: 5_scenes.toml, 7_final_game.toml (regen), output/index.html (production), design_book.md, ledger. No commit/push; held media untouched."
+    },
+    {
+      "turn": 59,
+      "book_revision": 38,
+      "note": "BROTHEL -> FULL SEX LOOP. Issue 'brothel sex to be a full sex loop'. Investigated read-only (workflow wf_f026ab03-408 + direct reads): the brothel (underworld_brothel_work, 3_activities.toml) was ALREADY a repeatable loop but SHALLOW -- one pose, one clip, one paragraph repeated. LO wanted the Renner/Mercer pose-ladder shape with oral/vaginal/anal. LO confirmed the hub-vs-loop split (the 'Take a client' menu choice TRIGGERS the loop, like Renner's 'Take him in the office' rung -> loop_renner_office_sex.intro) and approved the recommended plan (Mercer-shape, 3 poses, anonymous john, coin-on-finish, -30 Condition on exit, structure-first/media-later). Plan mode -> approved. DONE (authoring-only, ZERO engine; all in 3_activities.toml): (1) reworked the 'Take a client' choice into the loop ENTRY rung -- kept costs energy 15, REMOVED the +10 coin (was paid on the entry choice = a faucet), re-pointed to underworld_brothel_loop.intro, added the entry reset of all 5 loop traits to 0. (2) deleted the old single 'client' node. (3) added NEW triggerless canvas underworld_brothel_loop (intro + base_oral(0)/base_vaginal(1)/base_anal(2); each = self-loop +loop_npc_pleasure random 8-14, pose-switches set sex_stage/anal_active, climax-elect show_when_locked gated loop_npc_pleasure gte 50 [+anal_active gte 1 for ass] sets sex_finisher_type). base_vaginal REUSES the existing sex/brothel_client.webm. (4) added NEW triggerless canvas underworld_brothel_finisher (climax node, 3 [group] blocks by sex_finisher_type 0/1/2, each its own cold paragraph+clip; exit type=location -> underworld_brothel, +120 min, effects = +10 coin + -30 hygiene clamp + reset all 5 loop traits). Copied the Mercer mercer_serve/mercer_finisher shape exactly (no control canvas -- no drain down here). Register: cold/transactional throughout (the declared Underworld ceiling, design_book:1213); loop_npc_pleasure is HIS pleasure, never hers. Merge + production build (no --dev/--debug) GREEN: validation passed, ALL flag chains valid, Failed 0. Verified (greps + artifact): coin op=add appears EXACTLY once (finisher exit); entry rung + finisher exit each reset all 5 loop traits; 0 flags on the triggerless canvases; 6x version=1.0 (3 climax-elects + 3 finish groups); ass finish gated anal_active gte 1; new prose renders; vaginal reuses brothel_client.webm; NO [VIDEO MISSING] in the production build (5 new clips silent-skip, play text-only). Benign WARNING 'extracting trait effects... The client' = the {type=random} pleasure effect, same as the existing Renner/Mercer loops (runtime fine). PENDING (separate, non-blocking): find-media for 5 new t5 clips -- brothel_oral_t5, brothel_anal_t5, brothel_finish_facial_t5 (mouth), brothel_finish_inside_t5, brothel_finish_ass_t5 (dim red-room transactional/john-POV band). book rev 37->38. Files: 3_activities.toml, 7_final_game.toml (regen), output/index.html (production), design_book.md, ledger. No commit/push; held media untouched."
     }
   ]
 }

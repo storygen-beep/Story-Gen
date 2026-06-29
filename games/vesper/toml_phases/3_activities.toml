@@ -840,7 +840,7 @@ locationId      = "the_waterfront"
 [[canvases]]
 id          = "underworld_brothel_work"
 name        = "Take a shift"
-description = "Wren-solo work loop at underworld_brothel. Take a client -> sex content -> +coin (effects). costs 15 Charge (per-choice) + 120 min. Repeatable. Her own coin = the second life."
+description = "The House hub menu (location-triggered, repeatable). 'Take a client' -> the full sex loop (underworld_brothel_loop). costs 15 Charge + entry reset; coin/Condition/time land on the finisher exit. Her own coin = the second life."
 [canvases.trigger]
 location      = "underworld_brothel"
 is_repeatable = true
@@ -857,29 +857,199 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text       = "Take a client."
 targetType = "node"
-nodeId     = "underworld_brothel_work.client"
+nodeId     = "underworld_brothel_loop.intro"
 costs      = [{ trait = "energy", value = 15 }]
-effects    = [{ targetType = "player", trait = "coin", op = "add", value = 10 }]
+# Entry reset — a fresh client starts the loop clean. NO coin here (coin pays on the finisher exit).
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
 [[canvases.nodes.exit_block.choices]]
 text       = "Not tonight."
 targetType = "location"
 locationId = "underworld_brothel"
+# ═══ underworld_brothel_loop — full sex loop (triggerless; reached only from "Take a client") ════
+# His-POV use; cold/transactional (the declared Underworld ceiling). Poses oral(0)/vaginal(1)/anal(2)
+# -> loop_npc_pleasure climbs -> elected finish. State = numeric loop traits, reset on entry (the rung)
+# + finisher exit. Coin pays on the finisher exit ONLY (no faucet).
+[[canvases]]
+id          = "underworld_brothel_loop"
+name        = "The client"
+description = "Triggerless brothel sex loop (reached only from the 'Take a client' rung). Anonymous john, cold register. Poses oral(0)/vaginal(1)/anal(2) -> pleasure meter -> elected finish. No coin here; coin + Condition + reset live on the finisher exit."
+
 [[canvases.nodes]]
-id   = "client"
+id   = "intro"
 name = "The client"
 blocks = [
-  { type = "video", props = { file = "sex/brothel_client.webm", description = "A woman straddling and riding a man on a bed in a dim red-lit room, sex from the side.", search_queries = ["brothel sex riding pov red room", "escort client sex bed dim light"] } },
-  { type = "paragraph", content = "She climbs on and takes his cock without ceremony — a few hard strokes of her hand, then she sits down on it and rides, hips keeping a rhythm that has nothing to do with her. He paws at her tits and fucks up into her; she gives him the small sounds the trade expects and feels none of them. He finishes inside her with a grunt. She waits the polite beat, lifts off, his cum sliding down her thigh, and counts the coin into her palm. The next one's already on the stairs." },
+  { type = "paragraph", content = "The madam points her at a door. The man inside doesn't look up from his drink until she's undressed — then he looks her over the way men look over rented things, deciding where to start. No name, no preamble. He paid for the hour and means to use it." },
 ]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Down on your knees."
+targetType = "node"
+nodeId     = "base_oral"
+
+# ── Pose: oral (sex_stage 0) ──────────────────────────────────────────────────
+[[canvases.nodes]]
+id   = "base_oral"
+name = "On your knees"
+blocks = [
+  { type = "video", props = { file = "sex/brothel_oral_t5.webm", description = "On her knees in a dim red-lit room, an anonymous client's cock in her mouth, his hand fisted in her hair setting the pace while she services him flatly.", search_queries = ["brothel blowjob red room pov", "escort kneeling blowjob dim light"] } },
+  { type = "paragraph", content = "On her knees between his, she takes his cock in her mouth and works it the way the trade taught her — steady, practiced, her eyes somewhere past his hip. He fists a hand in her hair and sets the pace. She lets him. None of it reaches her." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep sucking him."
+targetType = "node"
+nodeId     = "base_oral"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Climb on and ride him."
+targetType = "node"
+nodeId     = "base_vaginal"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Turn around and give him your ass."
+targetType = "node"
+nodeId     = "base_anal"
+effects = [
+  { targetType = "player", trait = "sex_stage",   op = "set", value = 2, clamp = false },
+  { targetType = "player", trait = "anal_active", op = "set", value = 1, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish in your mouth."
+targetType = "node"
+nodeId     = "underworld_brothel_finisher.climax"
+show_when_locked = true
+locked_text = "He's not done with you yet."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false } ]
+
+# ── Pose: vaginal (sex_stage 1) — reuses the existing ride clip ────────────────
+[[canvases.nodes]]
+id   = "base_vaginal"
+name = "Ride him"
+blocks = [
+  { type = "video", props = { file = "sex/brothel_client.webm", description = "A woman straddling and riding a man on a bed in a dim red-lit room, sex from the side.", search_queries = ["brothel sex riding pov red room", "escort client sex bed dim light"] } },
+  { type = "paragraph", content = "She climbs on and takes his cock without ceremony, sinks down and rides, hips keeping a rhythm that has nothing to do with her. He paws at her tits and fucks up into her; she gives him the small sounds the trade expects and feels none of them." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep riding him."
+targetType = "node"
+nodeId     = "base_vaginal"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Back down on your knees."
+targetType = "node"
+nodeId     = "base_oral"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 0, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him have your ass."
+targetType = "node"
+nodeId     = "base_anal"
+effects = [
+  { targetType = "player", trait = "sex_stage",   op = "set", value = 2, clamp = false },
+  { targetType = "player", trait = "anal_active", op = "set", value = 1, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish inside you."
+targetType = "node"
+nodeId     = "underworld_brothel_finisher.climax"
+show_when_locked = true
+locked_text = "He's not done with you yet."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 1, clamp = false } ]
+
+# ── Pose: anal (sex_stage 2) ──────────────────────────────────────────────────
+[[canvases.nodes]]
+id   = "base_anal"
+name = "Give him your ass"
+blocks = [
+  { type = "video", props = { file = "sex/brothel_anal_t5.webm", description = "Bent over the edge of a bed in a dim red-lit room, an anonymous client takes her ass in long flat strokes, both hands clamped on her hips.", search_queries = ["brothel anal from behind red room", "escort anal bent over bed dim"] } },
+  { type = "paragraph", content = "Bent over the edge of the bed, she takes him in the ass in long flat strokes, both his hands clamped on her hips. Just more friction down a body that gives nothing back. She braces and waits it out, counting somewhere behind her own face what the hour's worth." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Take it."
+targetType = "node"
+nodeId     = "base_anal"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Back onto his cock."
+targetType = "node"
+nodeId     = "base_vaginal"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish in your ass."
+targetType = "node"
+nodeId     = "underworld_brothel_finisher.climax"
+show_when_locked = true
+locked_text = "Not till he's close — and you've taken him there."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+  { type = "trait", subject = "player", trait_key = "anal_active",       operator = "gte", value = 1  },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 2, clamp = false } ]
+
+# ═══ underworld_brothel_finisher — the climax (triggerless, [group] by finish type) ════
+# Exit pays +10 coin, drops -30 Condition, resets all 5 loop traits, returns to The House (+120 min).
+[[canvases]]
+id          = "underworld_brothel_finisher"
+name        = "He finishes"
+description = "Triggerless brothel finisher. [group] blocks by sex_finisher_type (0 mouth / 1 inside / 2 ass). Exit pays +10 coin, -30 Condition, resets all 5 loop traits, returns to underworld_brothel (+120 min)."
+
+[[canvases.nodes]]
+id   = "climax"
+name = "He finishes"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He holds her head still and finishes in her mouth; she takes it, swallows because the trade expects it, and sits back on her heels. He's already reaching for his drink." },
+    { type = "video", props = { file = "sex/brothel_finish_facial_t5.webm", description = "An anonymous client holds her head still and finishes in her mouth in a dim red-lit room; she swallows and sits back on her heels as he reaches for his drink.", search_queries = ["brothel cum in mouth swallow pov", "escort facial mouth red room"] } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He finishes inside her with a grunt, holds, then pulls out. His cum slides down the inside of her thigh. She waits the polite beat and lifts off, and counts the coin into her palm." },
+    { type = "video", props = { file = "sex/brothel_finish_inside_t5.webm", description = "An anonymous client finishes inside her and pulls out in a dim red-lit room, his cum sliding down the inside of her thigh as she lifts off.", search_queries = ["brothel creampie pull out thigh", "escort cum inside red room"] } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He finishes in her ass and stays a moment, breathing, then steps back. His weight and his cum and then nothing — the same nothing as every man down here. She straightens. The next one's already on the stairs." },
+    { type = "video", props = { file = "sex/brothel_finish_ass_t5.webm", description = "An anonymous client finishes in her ass and steps back in a dim red-lit room, his cum and his weight and then his absence as she straightens up.", search_queries = ["brothel anal creampie from behind", "escort anal cum red room"] } },
+  ] },
+]
+
 [canvases.nodes.exit_block]
 type = "location"
 text = "Clean up. Collect."
+
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "underworld_brothel"
 time_progression_minutes = 120
 effects = [
-  { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true },
+  { targetType = "player", trait = "coin",              op = "add", value = 10 },
+  { targetType = "player", trait = "hygiene",           op = "add", value = -30, clamp = true },
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
 ]
 
 # ── The Pit — fight earns coin (the payoff for Fighting); tiered purse, deterministic by skill ──
