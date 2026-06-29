@@ -697,7 +697,7 @@ destinationType          = "specific"
 locationId               = "cradle"
 time_progression_minutes = 540
 effects = [
-  { targetType = "player", trait = "energy", op = "add", value = 100 },
+  { targetType = "player", trait = "energy", op = "add", value = 100, clamp = true },   # cap at 100
 ]
 flagEffects = [
   { targetType = "player", flag = "night_done", op = "set" },
@@ -927,7 +927,7 @@ destinationType          = "specific"
 locationId               = "the_waterfront"
 time_progression_minutes = 30
 effects = [
-  { targetType = "player", trait = "energy", op = "add", value = -10 },
+  { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true },   # travel: floor at 0, never block (locomotion mustn't soft-lock)
 ]
 
 # ─── Travel: Reach -> Spire ───────────────────────────────────────────────────
@@ -958,7 +958,7 @@ destinationType          = "specific"
 locationId               = "spire_plaza"
 time_progression_minutes = 30
 effects = [
-  { targetType = "player", trait = "energy", op = "add", value = -10 },
+  { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true },   # travel: floor at 0, never block — the ONLY way back to the cradle
 ]
 
 # ─── beat_0006 — Home base: the cradle ────────────────────────────────────────
@@ -1002,7 +1002,7 @@ destinationType          = "specific"
 locationId               = "cradle"
 time_progression_minutes = 540
 effects = [
-  { targetType = "player", trait = "energy", op = "add", value = 100 },
+  { targetType = "player", trait = "energy", op = "add", value = 100, clamp = true },   # cap at 100 (no over-cap -> Charge card never vanishes on the high end)
   { targetType = "player", trait = "drain_charge", op = "set", value = 1 },
   { targetType = "player", trait = "arousal_charge", op = "set", value = 3 },
 ]
@@ -1036,7 +1036,7 @@ destinationType          = "specific"
 locationId               = "cradle"
 time_progression_minutes = 120
 effects = [
-  { targetType = "player", trait = "energy", op = "add", value = 100 },
+  { targetType = "player", trait = "energy", op = "add", value = 100, clamp = true },   # cap at 100
   { targetType = "player", trait = "drain_charge", op = "set", value = 1 },
   { targetType = "player", trait = "arousal_charge", op = "set", value = 3 },
 ]
@@ -2362,10 +2362,10 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "renner_office_open",   operator = "is_true"  },
   { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 0 },
 ] }
+costs = [{ trait = "energy", value = 15 }]   # Charge spend, GATED — too tired -> greyed "(Requires 15 …)", not negative
 effects = [
   { targetType = "npc", npcId = "npc_renner", trait = "corruption", op = "add", value = 2 },
   { targetType = "npc", npcId = "npc_renner", trait = "arousal",    op = "add", value = 3 },
-  { targetType = "player", trait = "energy", op = "add", value = -15 },
 ]
 
 [[canvases.nodes.exit_block.choices]]
@@ -2378,10 +2378,10 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "renner_office_open",   operator = "is_true"  },
   { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 10 },
 ] }
+costs = [{ trait = "energy", value = 15 }]   # Charge spend, GATED
 effects = [
   { targetType = "npc", npcId = "npc_renner", trait = "corruption", op = "add", value = 2 },
   { targetType = "npc", npcId = "npc_renner", trait = "arousal",    op = "add", value = 4 },
-  { targetType = "player", trait = "energy", op = "add", value = -15 },
 ]
 flagEffects = [
   { targetType = "player", flag = "renner_flirts_back",   op = "set" },
@@ -2398,10 +2398,10 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "renner_flirts_back",   operator = "is_true"  },
   { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 20 },
 ] }
+costs = [{ trait = "energy", value = 15 }]   # Charge spend, GATED
 effects = [
   { targetType = "npc", npcId = "npc_renner", trait = "corruption", op = "add", value = 2 },
   { targetType = "npc", npcId = "npc_renner", trait = "arousal",    op = "add", value = 5 },
-  { targetType = "player", trait = "energy", op = "add", value = -15 },
 ]
 
 # The loop entry (gated corruption>=40 + renner_oral_once). Resets the 5 loop traits + SETS
@@ -2462,6 +2462,7 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "renner_hired", operator = "is_true" },
   { type = "clothing_item", item_id = "cover_dockhand", operator = "equipped" },   # beat_0015 — no working the floor out of cover
 ] }
+costs = [{ trait = "energy", value = 15 }]   # canvas-ENTRY Charge gate — too tired -> work greys on the depot nav, no negative
 [[canvases.trigger.schedules]]
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "09:00"
@@ -2508,7 +2509,6 @@ time_progression_minutes = 120
 effects = [
   { targetType = "npc",    npcId = "npc_renner", trait = "relation", op = "add", value = 3   },
   { targetType = "player", trait = "money",  op = "add", value = 8   },
-  { targetType = "player", trait = "energy", op = "add", value = -15 },
 ]
 flagEffects = [
   { targetType = "player", flag = "worked_renner_once", op = "set" },
@@ -3400,21 +3400,49 @@ text = "Leave before he sobers on it."
 destinationType = "specific"
 locationId      = "the_anchor"
 
-# ═══ beat_0014 — the Mission-1 quest card + the frontier-seed card ═════════════
+# ═══ beat_0014 — the Quests page: two tiers (Story Goals + Renner's chain) ══════
+# Tier 1 = Story Goals (no npc_id): the MISSION. Spine (below) + the Burned Yard + the
+# end-of-content card. Tier 2 = Renner's own section (npc_id="npc_renner"): his seduction
+# as a one-card-at-a-time chain on his own meters/flags. The Renner sidebar npc_panel
+# 'next' row mirrors whichever Renner card is live (pickQuestsCard, v2.py:15138).
 
-# Spine — Mission 1 (Renner). Story Goals on Renner's own meters (relation = the office,
-# corruption = the drain). Shows while mission_1_active && !renner_drained.
+# Tier 1 spine — Mission 1 orientation. No goals/ready_text: the granular relation/corruption
+# steps live under Renner now. Shows while mission_1_active && !renner_drained.
 [[quest_cards]]
 priority   = 10
-text       = "Wear the dock-work coveralls from your room before you go near him — out of cover he just sees a stranger and won't deal with her. Mission 1: Renner. The quartermaster who outfitted the facility Cain burned. Get inside his life and drain him for what he knows — what the gear built, where the trail goes. The company wants the rogue dead. She wants the way in."
-ready_text = "Renner's drained. The trail points onward — and the briefing is starting not to fit what she's finding."
-tip        = "First, put the coveralls on at the rack in your room. Work his depot to earn the office (his trust). Break the cold boss until he beds you (his want). Take it in the ass when he finishes — that's when the weapon fires and he gives up everything."
+text       = "Mission 1: Renner. The quartermaster who outfitted the facility Cain burned — get inside his life and drain him for what he knows: what the gear built, where the trail goes. The company wants the rogue dead. She wants the way in. (His seduction tracks under Renner, below.)"
+tip        = "Wear the dock-work coveralls from your room before you go near him — out of cover he just sees a stranger and won't deal with her. Then find him at the Anchor."
 when = [
   { flag = "mission_1_active", op = "is_true"  },
   { flag = "renner_drained",   op = "is_false" },
 ]
+
+# Tier 2 — Renner's chain (one card live at a time, gated on his own flags; no new flags).
+# Stage A: from hire until the office opens (relation 21 auto-sets renner_office_open via cap_renner_noticed).
+[[quest_cards]]
+priority   = 11
+npc_id     = "npc_renner"
+text       = "Beneath his notice. Earn the cold boss's trust from the bottom — good hands get noticed."
+tip        = "Coveralls on. Work the depot haul to push his relation. At 21 he waves you into the back office — that's where the seduction opens."
+when = [
+  { flag = "renner_hired",       op = "is_true"  },
+  { flag = "renner_office_open", op = "is_false" },
+]
 goals = [
-  { trait = "relation",   subject = "npc", npc_id = "npc_renner", op = "gte", value = 21, label = "Earn the office (relation)" },
+  { trait = "relation", subject = "npc", npc_id = "npc_renner", op = "gte", value = 21, label = "Earn the office (relation)" },
+]
+
+# Stage B: from the office until the drain (corruption 50 + the fuck auto-set renner_drained via cap_renner_anal_drain).
+[[quest_cards]]
+priority   = 12
+npc_id     = "npc_renner"
+text       = "In the office. Break the cold boss until he beds you — then take the drain."
+tip        = "Run the rungs in his office — tease, flash, grope — to push his corruption. He cracks and fucks you; the weapon fires when he finishes in your ass and gives up everything."
+when = [
+  { flag = "renner_office_open", op = "is_true"  },
+  { flag = "renner_drained",     op = "is_false" },
+]
+goals = [
   { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 50, label = "Break him to the drain (corruption)" },
 ]
 

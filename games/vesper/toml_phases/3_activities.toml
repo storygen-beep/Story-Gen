@@ -49,7 +49,7 @@ destinationType          = "specific"
 locationId               = "the_waterfront"
 time_progression_minutes = 30
 effects = [
-  { targetType = "player", trait = "energy", op = "add", value = -10 },
+  { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true },   # travel: floor at 0, never block (locomotion mustn't soft-lock)
 ]
 
 # ─── Travel: Reach -> Spire ───────────────────────────────────────────────────
@@ -80,7 +80,7 @@ destinationType          = "specific"
 locationId               = "spire_plaza"
 time_progression_minutes = 30
 effects = [
-  { targetType = "player", trait = "energy", op = "add", value = -10 },
+  { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true },   # travel: floor at 0, never block — the ONLY way back to the cradle
 ]
 
 # ─── beat_0006 — Home base: the cradle ────────────────────────────────────────
@@ -124,7 +124,7 @@ destinationType          = "specific"
 locationId               = "cradle"
 time_progression_minutes = 540
 effects = [
-  { targetType = "player", trait = "energy", op = "add", value = 100 },
+  { targetType = "player", trait = "energy", op = "add", value = 100, clamp = true },   # cap at 100 (no over-cap -> Charge card never vanishes on the high end)
   { targetType = "player", trait = "drain_charge", op = "set", value = 1 },
   { targetType = "player", trait = "arousal_charge", op = "set", value = 3 },
 ]
@@ -158,7 +158,7 @@ destinationType          = "specific"
 locationId               = "cradle"
 time_progression_minutes = 120
 effects = [
-  { targetType = "player", trait = "energy", op = "add", value = 100 },
+  { targetType = "player", trait = "energy", op = "add", value = 100, clamp = true },   # cap at 100
   { targetType = "player", trait = "drain_charge", op = "set", value = 1 },
   { targetType = "player", trait = "arousal_charge", op = "set", value = 3 },
 ]

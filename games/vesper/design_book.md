@@ -4,7 +4,7 @@
 > translation of what's written here. Grown one section per pipeline step.
 >
 > Working title: **Vesper** (also the PC's buried true name — hidden in plain sight; rename freely).
-> Book revision 30 (Step 5 + authoring; the A→A.5 chunk built. Latest: the **arousal weapon's use is now a real beat** — arouse → fuck → he *passes out* (non-lethal) → she slips by; it's sex, so it drops Condition (see *## Reset & reload*). Prior: **reset & reload** (Condition + the two weapon reloads + Charge up); **The Underworld** (coin economy / second life); The Burned Yard; the Training activity; the Renner grind retune.)
+> Book revision 32 (Step 5 + authoring; the A→A.5 chunk built. Latest: **Quests restructured into two tiers** — the top **Story Goals** carry the mission (Mission 1 + the Burned Yard); **Renner's own section** carries his seduction as a one-card-at-a-time chain (*Earn the office* → *Break him to the drain*), which also lights the Renner sidebar panel's *next* row (see *### Quests page — two tiers*). Prior: **BUGFIX — Charge (energy) was sliding negative**; spends moved onto gated `costs`/clamp so Charge is now bounded 0–100 and the rungs/work block when too tired (travel never blocks; see *## Reset & reload*). Prior: the **arousal weapon's use is now a real beat** — arouse → fuck → he *passes out* (non-lethal) → she slips by; it's sex, so it drops Condition (see *## Reset & reload*). Prior: **reset & reload** (Condition + the two weapon reloads + Charge up); **The Underworld** (coin economy / second life); The Burned Yard; the Training activity; the Renner grind retune.)
 
 ---
 
@@ -430,8 +430,11 @@ The opening is the linear funnel; besides the story it now **arms each live syst
 - **Charge** — named at the cradle as what the day spends out of her and the cradle gives back (run too low → the body fails in ways a man notices). The repeatable cradle also reads the day-flip ("morning again — a new day").
 - **Credits** — named in the dossier as a company cover allowance (clothes, drink, a way into a man's evening).
 - **The leash (win/fail)** — surfaced lightly in the office: everything she does feeds back to the Tower; an asset that slips gets pulled in and looked at. (The fail-state *mechanic* stays deferred to the full Phase-1 web — this just makes the negative axis legible, per §8's declared leash.)
-- **Next action + the HUD** — already there: the Mission-1 quest card (goals + tip) goes live at the hinge; the sidebar shows Charge / Credits / Renner at value-zero from frame one.
+- **Next action + the HUD** — already there: the Quests page goes live at the hinge — the top **Story Goals** name the mission, **Renner's section** names his next step (goals + tip); the sidebar shows Charge / Credits / Renner at value-zero from frame one (the Renner panel's *next* row mirrors his live quest stage).
 - **Every greyed gate states its reason** — all 11 `show_when_locked` rungs carry a `locked_text` (the seduction ladder + the sex-loop finishers).
+
+### Quests page — two tiers (per `references/beat-authoring.md`)
+**Tier 1 — Story Goals** (cards with no `npc_id`): the *mission*. The spine (Mission 1 — get inside Renner, drain him, find the trail) + the Burned Yard investigation + the end-of-content card. **Tier 2 — Renner's own section** (`npc_id = npc_renner`): his seduction as a **one-card-at-a-time chain** — *Earn the office* (relation → 21) then *Break him to the drain* (corruption → 50). The chain rides Renner's own flags (`renner_office_open`, `renner_drained`), so exactly one stage shows at a time and it retires itself as he cracks; the Renner sidebar `npc_panel` *next* row mirrors whichever stage is live. Body stats (Charge) stay on the sidebar, never on a quest card — the quests-vs-sidebar split.
 
 ### Entrances (per `references/npc-intro.md`) — the bar for the unbuilt cast
 Renner (assigned-target → travel → hire-on-arrival) and Mercer (motivated owner) are the two built entrances; both pass. **The remaining cast (Bastien, Calloway, Pell, Sol, …) must each clear the entrance checklist when built:** a pretext (name-planted upstream OR a staged caused-arrival), name-on-the-page + a one-line read, a first voiced line that IS their want (the casting hook), and the fire-once → `<npc>_opened_up` → gated repeatable hub shape. No bare cold-spawn hubs.
@@ -1262,5 +1265,12 @@ one; at empty she **recharges.** So it's a limited tool, not an infinite skeleto
 So her home base now has three beats: **Wash** (Condition), **Charge up** (Charge + weapon reloads), and
 **Power down** (the day). The wash is also her one private, unscheduled moment — a small thread of the
 awakening.
+
+**Charge is a real throttle, bounded 0–100.** Spending it is gated, not cosmetic: the three Renner rungs
+and the depot work **block when she's too drained** (greyed, "(Requires 15 …)") — she recharges at the
+cradle and comes back. Two deliberate exceptions: **travel never blocks** (it only floors at 0), because the
+ride back to the Spire is the *only* way to the cradle and blocking it would strand her; and the cradle
+restores **cap at 100** (no overshoot). Earlier these all ran as ungated effects, so Charge could slide
+below 0 (the HUD card silently vanished) or past 100 — both fixed by routing spends through `costs`/clamp.
 
 ---

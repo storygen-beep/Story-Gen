@@ -180,7 +180,7 @@ destinationType          = "specific"
 locationId               = "cradle"
 time_progression_minutes = 540
 effects = [
-  { targetType = "player", trait = "energy", op = "add", value = 100 },
+  { targetType = "player", trait = "energy", op = "add", value = 100, clamp = true },   # cap at 100
 ]
 flagEffects = [
   { targetType = "player", flag = "night_done", op = "set" },

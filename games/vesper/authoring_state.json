@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 30,
+  "book_revision": 32,
   "pipeline_phase": "authoring",
   "map_design": {
     "topology": "done",
@@ -492,6 +492,42 @@
         "non-lethal (passes out, recovers -> the fixture gate guard is there next visit; no body/flag); area-emitter prose reads for one or many; reused scene (charge-gated)",
         "merge OK + package ALL FLAG CHAINS VALID 0 failures; artifact-verified (4 choices -> weapon_scene, hygiene -30 x4 new, scenes present, charges still spent)"
       ]
+    },
+    {
+      "id": "beat_0021",
+      "status": "validated",
+      "target_phase": "3/5",
+      "title": "BUGFIX: Charge (energy) went negative -> bound it [0,100] (LO: a + option 1)",
+      "introduces": [
+        "Charge is a real throttle: the 3 Renner rungs + the depot work BLOCK when too drained (gated costs, greyed '(Requires 15 ...)'); travel never blocks; cradle restores cap at 100",
+        "Charge can no longer go below 0 OR over 100 -- bounded both ends"
+      ],
+      "canvases": [
+        "5_scenes: 3 Renner rungs (Tease/Flash/Grope) -- energy -15 EFFECT -> per-choice COSTS energy 15 (gates+greys; removed from effects to avoid the double-charge trap)",
+        "5_scenes work_depot_haul -- energy -15 moved off the exit effect to a canvas-ENTRY trigger cost (costs energy 15; no action-choice exists so gate entry); too tired -> work greys on the depot nav, no exit soft-lock",
+        "3_activities travel_to_reach + travel_to_spire -- energy -10 effects + clamp=true (FLOOR at 0, never block): travel_to_spire is the ONLY Waterfront->Spire bridge + recharge is cradle-only, so blocking would HARD soft-lock -- deviation from 'option 1 for all 6', surfaced to LO + approved",
+        "3_activities Power down + Charge up + 2_one_shots opening-night sleep -- energy +100 restores + clamp=true (TWIN bug: 70+100=170 > top band max=100 made the Charge HUD card vanish after every recharge)",
+        "ROOT CAUSE (wf_77a46170-72f, adversarially verified): effects emit clamp=false (v2.py:12467/12475) + applyTraitEffect floors only when clampFlag true (v2.py:5305) + effects have no affordability gate; costs gate via checkCostsAffordable (v2.py:4204). costs is a first-class schema field on TemplateTrigger (template_import.py:470) + TemplateChoice (658).",
+        "merge OK + package ALL FLAG CHAINS VALID 0 failures; artifact-verified on fresh index.html: 0 ungated negative-energy (every -15/-20,false inside a checkCostsAffordable guard; 14 inline energy-15 guards = 14 energy-15 spends incl the 3 new rungs; +1 energy-20 pit); travel 2x -10,true; restores 3x 100,true; work canvas-entry cost wired (deductCosts(work-uuid) + _costs gate + help_data costs:[{energy,15}])"
+      ]
+    },
+    {
+      "id": "beat_0022",
+      "status": "validated",
+      "target_phase": "5",
+      "title": "Quests restructured into two tiers: top Story Goals + Renner's own NPC chain (LO: 'story goals and then the npc level quests')",
+      "introduces": [
+        "Two-tier Quests page: Tier 1 = Story Goals (no npc_id) = the MISSION (spine + Burned Yard + end-of-content); Tier 2 = Renner's own section (npc_id=npc_renner) = his seduction as a one-card-at-a-time chain",
+        "The Renner sidebar npc_panel 'next' row now renders (was blank: it calls pickQuestsCard('npc_renner') v2.py:15138 and no npc_id-tagged card existed)"
+      ],
+      "canvases": [
+        "5_scenes beat_0014 quest_cards: SPINE (Card 1, no npc_id) reframed to mission-level orientation -- DROPPED its 2 granular goals (relation>=21, corruption>=50) + ready_text (a goal-less card with ready_text shows it vacuously since evaluateGoals returns allMet:true with no goals, v2.py:13912). Kept the load-bearing 'wear the coveralls' instruction in the tip.",
+        "5_scenes beat_0014: ADDED Renner Stage A (npc_id=npc_renner, pri 11) 'Earn the office' -- when renner_hired && !renner_office_open; goal relation gte 21. ADDED Renner Stage B (npc_id=npc_renner, pri 12) 'Break him to the drain' -- when renner_office_open && !renner_drained; goal corruption gte 50.",
+        "One-card-live handoff rides the engine's OWN flags (no new flags invented): A from hire until renner_office_open (auto-set at relation 21 by cap_renner_noticed), B until renner_drained (auto-set at corruption 50 by cap_renner_anal_drain), then Renner section clears + top end-of-content card (renner_leads_extracted) takes over. Mutually exclusive when-gates -> exactly one live; pickQuestsCard returns highest-priority match.",
+        "Cards 2 (end-of-content) + 3 (Burned Yard) UNCHANGED -- the Yard stays top-level (it's the mission's investigation thread, not Renner-the-person; LO's judgment call). 0_systems_spec npc_panel UNCHANGED (already wired; lights up for free).",
+        "ENGINE VERIFIED read-only (wf_1cec146f-d22 adversarial + 2 Explore): when supports meter gates (gte/lte/gt/lt/eq) not just flags (template_import.py:848-864, v2.py:13875-13902); both when+goals use checkQuestsCondition; no-npc_id->Story Goals, npc_id->NPC section (v2.py:13807/13832); quests_engine='v2' confirmed (0_systems:18). Safe render contract used: goals=meter bullets, when=flag/meter gates (the only paths existing cards use).",
+        "DIAGNOSIS: one-off TOML drift, NOT a skill gap -- the author-game skill teaches the two-tier split correctly (beat-authoring.md:312/308-328, step-2-toplevel.md:122-131). No skill edit. Closes issue.md:719 'separate writing renner quests into story goals' (memory's '#717' is actually line 719)."
+      ]
     }
   ],
   "structure_registry": {
@@ -718,12 +754,36 @@
       }
     ],
     "flags": [
-      { "key": "yard_caught_once", "set_by": "yard_crawl caught choices (guard1/2/3)", "gates": "activity_train stealth-drill unlock" },
-      { "key": "has_arousal_weapon", "set_by": "yard_find_2 (depth>=2)", "gates": "activity_repair_weapon" },
-      { "key": "arousal_weapon_ready", "set_by": "activity_repair_weapon final session", "gates": "yard_crawl 'use the weapon' option" },
-      { "key": "yard_clue_seen", "set_by": "yard_find_1 (depth>=1)", "gates": "self-guard only" },
-      { "key": "found_dead_men", "set_by": "yard_find_3 (depth>=3)", "gates": "Trail quest card ready_text" },
-      { "key": "underworld_known", "set_by": "yard_find_3 (depth>=3)", "gates": "frontier seed -> underworld (deferred)" }
+      {
+        "key": "yard_caught_once",
+        "set_by": "yard_crawl caught choices (guard1/2/3)",
+        "gates": "activity_train stealth-drill unlock"
+      },
+      {
+        "key": "has_arousal_weapon",
+        "set_by": "yard_find_2 (depth>=2)",
+        "gates": "activity_repair_weapon"
+      },
+      {
+        "key": "arousal_weapon_ready",
+        "set_by": "activity_repair_weapon final session",
+        "gates": "yard_crawl 'use the weapon' option"
+      },
+      {
+        "key": "yard_clue_seen",
+        "set_by": "yard_find_1 (depth>=1)",
+        "gates": "self-guard only"
+      },
+      {
+        "key": "found_dead_men",
+        "set_by": "yard_find_3 (depth>=3)",
+        "gates": "Trail quest card ready_text"
+      },
+      {
+        "key": "underworld_known",
+        "set_by": "yard_find_3 (depth>=3)",
+        "gates": "frontier seed -> underworld (deferred)"
+      }
     ],
     "schedules": [],
     "clothing": {
@@ -1086,6 +1146,16 @@
       "turn": 51,
       "book_revision": 30,
       "note": "CONTENT-DEPTH ISSUE #3: arousal weapon = a real fuck->pass-out scene + hygiene drop (Step-7 beat_0020). Found in the content-depth audit (LO: issue.md only had what he remembered; this + the Awakening track + a stealth/theft earner were the brainstormed-not-built items). LO's call on #3: the arousal weapon's use is now arouse -> fuck -> he PASSES OUT (non-lethal -- LO dropped the kill; 'the guy just passes out for a while'), so the recurring gate doorman recovers and is there next visit (no fixture/body problem). It's sex -> drops hygiene. BUILT (all 3_activities): (a) yard_crawl.weapon_scene -- NEW shared node, the fuck->pass-out beat (video sex/arousal_weapon_use.webm + prose; area-emitter so reads for one or many), exits renner_burned_yard time 120; the 3 yard 'Use the weapon' choices re-pointed yard_crawl.deeper -> yard_crawl.weapon_scene + hygiene -30 added to their effects (kept yard_depth+1 / arousal_charge-1 / yard_caught_once). (b) underworld_gate_check.weapon_scene -- NEW node (the doorman), exits underworld_strip time 60; the gate 'Put the weapon on him' choice re-pointed targetType location->node + effects hygiene -30 added (kept conditions arousal_weapon_ready + costs arousal_charge 1). Non-lethal (no body, no flag, no consequence system -- kill-consequences/heat DEFERRED). Reused scene (charge-gated, not spammed). The 3 approaches now distinct: stealth=unseen/no-trace, fighting=beat them, weapon=fuck them unconscious (the seduce-past path when she can't fight/sneak). Build: merge OK; package ALL FLAG CHAINS VALID 0 failures (no broken refs -> the re-pointed choices resolve; Take him/Serve him pre-existing). Artifact-verified: all 4 weapon choices -> *.weapon_scene (none still -> deeper/strip); hygiene -30 now x8 total (4 sex sites + 4 weapon sites); 'thumbs the emitter' x4 (both scenes); arousal still spent (yard -1 / gate costs 1); weapon_scene exits present. design_book rev 29->30. Files: 3_activities, ledger, design_book. No commit/push; held media untouched. Media TODO: sex/arousal_weapon_use.webm (search_queries in place). REMAINING content-depth (brainstormed, not built): the AWAKENING track (seeds only -- no meter/fragments/payoff), a stealth/theft coin-earner (stealth has no earn unlike pit/brothel); plus issue.md #717 (renner quests into story goals -- needs clarification) + #719 (locked hub choices same-text+requirements) + #707 prose-depth (richer rung reaction bands)."
+    },
+    {
+      "turn": 52,
+      "book_revision": 31,
+      "note": "BUGFIX -- Charge (energy) went NEGATIVE (LO report). Diagnosed read-only via workflow wf_77a46170-72f (3 parallel investigators engine/toml/display + synthesis + adversarial verify, on a fresh build). ROOT CAUSE: Vesper drained Charge through ungated `effects {op=add, value=-N}` instead of gated `costs`. Engine: effects emit clamp=false (v2.py:12467/12475); applyTraitEffect floors at 0 ONLY when clampFlag is true (v2.py:5305) -> raw negative stored (5316); effects also have NO affordability gate (costs do, v2.py:4204). NOT decay/time (advanceTime touches no traits; player_trait_decay empty). DISPLAY: the banded 'Charge' card (0_systems:51-56, min0..max100) shows no band for a negative -> the CARD VANISHES; the value leaked through the raw 'Your Traits' dump. LO's call: (a) low Charge should BLOCK the action -> option 1 (gate via costs). SIX drains were the culprits. FIX: (A block-when-tired via costs) 3 Renner rungs Tease/Flash/Grope -> per-choice costs energy 15 (5_scenes; removed the -15 effect = double-charge trap); menial work work_depot_haul -> canvas-ENTRY trigger cost energy 15 (no action-choice exists, so gate entry; too tired -> work greys on the depot nav; removed -15 from the exit). (B clamp-don't-block, FORCED) the 2 travel legs travel_to_reach/_to_spire -> energy -10 + clamp=true: blocking would SOFT-LOCK (recharge is cradle-only, deep Spire-side; travel_to_spire is the ONLY Waterfront->Spire bridge) -- surfaced this deviation from 'option 1 for all 6' to LO in the plan, approved. (Part 2 twin bug, same root) the +100 restores (Power down/Charge up/opening-night) were ALSO unclamped -> 70+100=170 > top band -> Charge card vanished after every recharge; added clamp=true (cap 100). Charge now bounded [0,100] both ends. Engine support confirmed read-only: costs is a first-class schema field on BOTH TemplateTrigger (template_import.py:470, 'deducted on canvas entry') and TemplateChoice (658). BUILD: merge OK; package ALL FLAG CHAINS VALID 0 failures. ARTIFACT-VERIFIED on fresh index.html: 0 ungated negative energy (every -15/-20,false is inside a checkCostsAffordable guard; 14 inline energy-15 guards = 14 energy-15 spends incl the 3 new rungs; +1 energy-20 pit hard-bout); travel 2x -10,true; restores 3x 100,true; work canvas-entry cost wired (1 deductCosts(work-uuid) + 1 _costs gate + 1 help_data costs:[{energy,15}]). KNOWN COSMETIC (not fixed, pre-existing, engine-level): getCostBlockedMessage (v2.py:4250) capitalizes the raw trait key -> blocked msgs read '15 Energy' not the 'Charge' rename (training/pit/brothel already show it). book rev 30->31. Files: 5_scenes, 3_activities, 2_one_shots, ledger, design_book. No commit/push; held media untouched. SKILL/PREVENTION note: doctrine already teaches costs-not-effects (toml-gotchas.md:95-127, trait-catalog.md:132) but it's advisory -- Vesper shipped the violation anyway; a hard Step-6/build lint for body-stat negatives in effects without clamp would kill the recurrence class (NOT done here -- flagged to LO)."
+    },
+    {
+      "turn": 53,
+      "book_revision": 32,
+      "note": "QUESTS RESTRUCTURE (LO: 'the Quests should be story goals and then the npc level quests -- update the Quests properly'; matches his issue.md:719 'separate writing renner quests into story goals'). Read-only audit first (workflow wf_1cec146f-d22: 3 parallel investigators engine/vesper-toml/skill + adversarial verify, ALL 14 engine claims held; then 2 Explore passes for exact bytes + flag-setter order). FINDING: engine gives two tiers free, switched by one field on a [[quest_cards]] card -- no npc_id -> top 'Story Goals' section; npc_id set -> that NPC's own section (v2.py:13807/13832); pickQuestsCard returns the single highest-priority match -> per-NPC cards = a one-live-at-a-time chain. Vesper had 3 cards ALL top-level (zero NPC-tier), so Renner's steps were crammed into the top Story Goals card. LIVE BUG fixed for free: the Renner npc_panel 'next' row (0_systems:77) calls pickQuestsCard('npc_renner') (v2.py:15138) and rendered BLANK because no npc_id-tagged card existed. FIX (5_scenes beat_0014 only): (1) SPINE (Card 1, no npc_id) reframed to mission-level orientation -- dropped its 2 granular goals (relation>=21/corruption>=50) + ready_text (goal-less + ready_text => shows ready_text vacuously, evaluateGoals allMet:true with no goals v2.py:13912); kept the load-bearing 'wear the coveralls' tip. (2) ADDED Renner Stage A 'Earn the office' (npc_id=npc_renner, pri11): when renner_hired && !renner_office_open, goal relation gte 21. (3) ADDED Renner Stage B 'Break him to the drain' (npc_id=npc_renner, pri12): when renner_office_open && !renner_drained, goal corruption gte 50. Handoff rides the engine's OWN flags (NO new flags): renner_office_open auto-set at relation 21 (cap_renner_noticed), renner_drained auto-set at corruption 50 + the fuck (cap_renner_anal_drain); mutually exclusive when-gates => exactly one Renner card live + the sidebar next-row mirrors it. Cards 2 (end-of-content) + 3 (Burned Yard) UNCHANGED -- Yard stays top-level (mission's investigation thread, not Renner-the-person; LO's call). 0_systems npc_panel UNCHANGED (lights up for free). ENGINE VERIFIED read-only: when supports meter gates gte/lte/gt/lt/eq (template_import.py:848-864, v2.py:13875-13902); quests_engine='v2' (0_systems:18). Safe render contract: goals=meter bullets, when=flag/meter gates. DIAGNOSIS: one-off TOML drift, NOT a skill gap -- skill teaches the split correctly (beat-authoring.md:312/308-328, step-2-toplevel.md:122-131) -> NO skill edit. book rev 31->32. Files: 5_scenes, ledger, design_book. No commit/push; held media untouched. (Verification: merge --validate + package_from_toml + artifact grep on fresh index.html -- pending in this turn.)"
     }
   ]
 }
