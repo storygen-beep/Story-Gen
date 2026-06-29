@@ -407,9 +407,10 @@ targetType = "node"
 nodeId     = "hub_depot_floor.check_in"
 
 # ── The office seduction register (gated renner_office_open). Double-locked: office (access)
-# + npc_renner.corruption (the tier). Each charged rung adds +2 corruption and is FREELY
-# REPEATABLE — the once-per-day cap (renner_charged_today) was removed (LO's call), so the
-# climb is now player-paced, not throttled. Reaction prose lives in the rung's [group] bands. ──
+# + npc_renner.corruption (the tier). Each charged rung adds +2 corruption and COSTS 15 Charge
+# (here) + 180 min (on the rung canvas's own exit). No daily-flag cap: the 09:00-18:00 office
+# window (hub_depot_floor schedule) caps it at ~3 rungs/day — the workday ends, she sleeps,
+# recharges, returns. Diegetic throttle, not a counter. Reaction prose lives in the [group] bands. ──
 [[canvases.nodes.exit_block.choices]]
 text       = "Tease him."
 targetType = "node"
@@ -423,6 +424,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 effects = [
   { targetType = "npc", npcId = "npc_renner", trait = "corruption", op = "add", value = 2 },
   { targetType = "npc", npcId = "npc_renner", trait = "arousal",    op = "add", value = 3 },
+  { targetType = "player", trait = "energy", op = "add", value = -15 },
 ]
 
 [[canvases.nodes.exit_block.choices]]
@@ -433,11 +435,12 @@ show_when_locked = true
 locked_text = "He's barely warmed to you yet."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "renner_office_open",   operator = "is_true"  },
-  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 4 },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 10 },
 ] }
 effects = [
   { targetType = "npc", npcId = "npc_renner", trait = "corruption", op = "add", value = 2 },
   { targetType = "npc", npcId = "npc_renner", trait = "arousal",    op = "add", value = 4 },
+  { targetType = "player", trait = "energy", op = "add", value = -15 },
 ]
 flagEffects = [
   { targetType = "player", flag = "renner_flirts_back",   op = "set" },
@@ -452,14 +455,15 @@ locked_text = "Not till he's flirting back and wants your hands on him."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "renner_office_open",   operator = "is_true"  },
   { type = "flag",  subject = "player", flag_key = "renner_flirts_back",   operator = "is_true"  },
-  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 8 },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 20 },
 ] }
 effects = [
   { targetType = "npc", npcId = "npc_renner", trait = "corruption", op = "add", value = 2 },
   { targetType = "npc", npcId = "npc_renner", trait = "arousal",    op = "add", value = 5 },
+  { targetType = "player", trait = "energy", op = "add", value = -15 },
 ]
 
-# The loop entry (gated corruption>=16 + renner_oral_once). Resets the 5 loop traits + SETS
+# The loop entry (gated corruption>=40 + renner_oral_once). Resets the 5 loop traits + SETS
 # renner_fucked_once (first time). NOT daily-capped (the loop is the repeatable surface).
 [[canvases.nodes.exit_block.choices]]
 text       = "Take him in the office."
@@ -470,7 +474,7 @@ locked_text = "He needs you badly first — and he hasn't had your mouth yet."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "renner_office_open", operator = "is_true" },
   { type = "flag",  subject = "player", flag_key = "renner_oral_once",   operator = "is_true" },
-  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 16 },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 40 },
 ] }
 effects = [
   { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
@@ -478,6 +482,7 @@ effects = [
   { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "hygiene",           op = "add", value = -30 },
 ]
 flagEffects = [
   { targetType = "player", flag = "renner_fucked_once", op = "set" },
@@ -527,20 +532,20 @@ end_time   = "18:00"
 target_canvas_id = "walkin_renner_depot"
 chance           = 0.10
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 8 },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 20 },
 ] }
 [[canvases.trigger.substitutions]]
 target_canvas_id = "walkin_renner_depot"
 chance           = 0.35
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 8  },
-  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt",  value = 16 },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 20  },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt",  value = 40 },
 ] }
 [[canvases.trigger.substitutions]]
 target_canvas_id = "walkin_renner_depot"
 chance           = 0.70
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 16 },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 40 },
 ] }
 
 [[canvases.nodes]]
@@ -646,7 +651,7 @@ is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "renner_hired",      operator = "is_true"  },
   { type = "flag",  subject = "player", flag_key = "renner_office_open", operator = "is_false" },
-  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "relation", operator = "gte", value = 15 },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "relation", operator = "gte", value = 21 },
   { type = "clothing_item", item_id = "cover_dockhand", operator = "equipped" },   # beat_0015 — Renner content only in cover
 ] }
 
@@ -672,11 +677,12 @@ flagEffects = [
 ]
 
 # rung_renner_tease — TRIGGERLESS (reached from the hub; the hub choice sets corruption +
-# the daily-cap). Reaction-band [group] on npc_renner.corruption: contempt -> caught-looking.
+# the 15 Charge cost; +180 min on this canvas's exit). Reaction-band [group] on
+# npc_renner.corruption: contempt -> caught-looking.
 [[canvases]]
 id          = "rung_renner_tease"
 name        = "Tease him"
-description = "Triggerless seduction rung. Reaction climbs by npc_renner.corruption band (contempt < 4 / caught-looking >= 4). Sets nothing (corruption + daily-cap live on the hub choice)."
+description = "Triggerless seduction rung. Reaction climbs by npc_renner.corruption band (contempt < 10 / caught-looking >= 10). Sets nothing (corruption + Charge cost live on the hub choice; +180 min on this exit)."
 [[canvases.nodes]]
 id   = "base"
 name = "Tease him"
@@ -684,13 +690,13 @@ blocks = [
   { type = "video", props = { file = "scenes/rung_renner_tease_t2.webm", description = "In a cramped office a woman teases close — lifting her skirt to flash the underwear beneath while a seated man tries not to look (stays clothed, withheld).", search_queries = ["clothed skirt lift tease panties", "office tease skirt flash underwear"] } },
   { type = "paragraph", content = "In the office now, the door shut. She works close — leans across him for a file she doesn't need, lets her body say the thing her mouth won't." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 4 },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 10 },
     ] } }, blocks = [
     { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Filing's in the cabinet. Not on my desk." },
     { type = "paragraph", content = "He doesn't look up. But he moves his chair back an inch, and the inch costs him something." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 4 },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 10 },
     ] } }, blocks = [
     { type = "paragraph", content = "His eyes go to her and snap away, and a muscle works in his jaw." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "...You do that on purpose." },
@@ -703,12 +709,12 @@ text = "Back to the invoices."
 [canvases.nodes.exit_block.config]
 destinationType = "specific"
 locationId      = "renner_depot"
-
-# rung_renner_flash — TRIGGERLESS. Bands: caught < 8 / reluctant-wants >= 8.
+time_progression_minutes = 180
+# rung_renner_flash — TRIGGERLESS. Bands: caught < 20 / reluctant-wants >= 20.
 [[canvases]]
 id          = "rung_renner_flash"
 name        = "Flash him"
-description = "Triggerless seduction rung (commando). Reaction band: looks-then-shuts-it-down < 8 / openly-rattled >= 8."
+description = "Triggerless seduction rung (commando). Reaction band: looks-then-shuts-it-down < 20 / openly-rattled >= 20."
 [[canvases.nodes]]
 id   = "base"
 name = "Flash him"
@@ -716,14 +722,14 @@ blocks = [
   { type = "video", props = { file = "scenes/rung_renner_flash_t3.webm", description = "A woman in unzipped warehouse coveralls bending forward over a low crate, exposing herself, a seated man watching from his desk.", search_queries = ["woman flashing tits bending over", "girl undressing coveralls strip tease"] } },
   { type = "paragraph", content = "She's wearing nothing under the coveralls today, and she makes sure the moment comes where he can't not see it — bending slow for a low crate while he's looking." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 8 },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 20 },
     ] } }, blocks = [
     { type = "paragraph", content = "He looks. He looks longer than a man pretending not to. Then he turns hard to the window." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Get back to work." },
     { type = "paragraph", content = "His voice has gone rough. He doesn't mean the window." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 8 },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 20 },
     ] } }, blocks = [
     { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Christ. Come here." },
     { type = "paragraph", content = "He says it low, half to himself, and doesn't finish the order — doesn't know what he'd do with her if she came. The wanting's ahead of the nerve. But it's there now, plain, and they both felt it land." },
@@ -735,12 +741,12 @@ text = "Back to the invoices."
 [canvases.nodes.exit_block.config]
 destinationType = "specific"
 locationId      = "renner_depot"
-
-# rung_renner_grope — TRIGGERLESS. Bands: still-fights-it < 12 / lets-her-take-him >= 12.
+time_progression_minutes = 180
+# rung_renner_grope — TRIGGERLESS. Bands: still-fights-it < 30 / lets-her-take-him >= 30.
 [[canvases]]
 id          = "rung_renner_grope"
 name        = "Get your hands on him"
-description = "Triggerless seduction rung (contact). Reaction band: catches-himself < 12 / lets-her >= 12. Gated renner_flirts_back on the hub choice."
+description = "Triggerless seduction rung (contact). Reaction band: catches-himself < 30 / lets-her >= 30. Gated renner_flirts_back on the hub choice."
 [[canvases.nodes]]
 id   = "base"
 name = "Get your hands on him"
@@ -748,14 +754,14 @@ blocks = [
   { type = "video", props = { file = "scenes/rung_renner_grope_t4.webm", description = "A woman's hand on a seated man's thigh, sliding toward his crotch while he signs paperwork in an office, his body going still.", search_queries = ["office handjob desk stockings", "secretary hand on man crotch office"] } },
   { type = "paragraph", content = "She stops pretending the contact is accidental — a hand on his thigh while he signs something, sliding up, letting him feel that she means it." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 12 },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 30 },
     ] } }, blocks = [
     { type = "paragraph", content = "He goes still. The pen stops. For a second the gutted business and the blacklist and the drinking are gone and there's just her hand and his breathing." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "...don't stop." },
     { type = "paragraph", content = "Then he catches himself and pulls back, and hates that he had to." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 12 },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 30 },
     ] } }, blocks = [
     { type = "paragraph", content = "He doesn't pretend anymore. He covers her hand with his and presses it harder against him, his head going back, the cold boss just a man in a chair letting the help take him apart." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Whatever this is. Don't — don't stop doing it." },
@@ -767,7 +773,7 @@ text = "Back to the invoices."
 [canvases.nodes.exit_block.config]
 destinationType = "specific"
 locationId      = "renner_depot"
-
+time_progression_minutes = 180
 # ═══ beat_0009 — first blowjob (capstone) + morning-after A (the ratchet) ══════
 
 # cap_renner_blowjob — auto-fire once corruption + flirts_back are met. She initiates.
@@ -775,7 +781,7 @@ locationId      = "renner_depot"
 [[canvases]]
 id          = "cap_renner_blowjob"
 name        = "Her mouth"
-description = "Auto-fire capstone (first explicit rung — she initiates). Gated renner_office_open + renner_flirts_back + npc_renner.corruption>=12. SETS renner_oral_once. Tier-3."
+description = "Auto-fire capstone (first explicit rung — she initiates). Gated renner_office_open + renner_flirts_back + npc_renner.corruption>=30. SETS renner_oral_once. Tier-3."
 
 [canvases.trigger]
 location      = "renner_depot"
@@ -787,7 +793,7 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "renner_office_open", operator = "is_true"  },
   { type = "flag",  subject = "player", flag_key = "renner_flirts_back", operator = "is_true"  },
   { type = "flag",  subject = "player", flag_key = "renner_oral_once",   operator = "is_false" },
-  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 12 },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 30 },
   { type = "clothing_item", item_id = "cover_dockhand", operator = "equipped" },   # beat_0015 — Renner content only in cover
 ] }
 
@@ -815,6 +821,9 @@ text = "Wipe your mouth, get back to work."
 [canvases.nodes.exit_block.config]
 destinationType = "specific"
 locationId      = "renner_depot"
+effects = [
+  { targetType = "player", trait = "hygiene", op = "add", value = -30 },
+]
 flagEffects = [
   { targetType = "player", flag = "renner_oral_once", op = "set" },
 ]
@@ -1016,7 +1025,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
-    { type = "paragraph", content = "He finishes in her ass — and this time she feels it start: the give, the opening, the controls sliding warm into her hand. The same act that hands her nothing with Mercer hands her everything with him." },
+    { type = "paragraph", content = "He finishes in her ass, and the controls slide warm into her hand — the give, the opening, his whole ruined weight gone pliant against her back. The same act that hands her nothing with Mercer hands her everything with him." },
     { type = "video", props = { file = "sex/renner_finish_anal_t5.webm", description = "A man finishing in a woman's ass as she's bent over an office desk, gripping her hips.", search_queries = ["office desk anal creampie behind", "man finishing anal bent over desk"] } },
   ] },
 ]
@@ -1036,12 +1045,31 @@ effects = [
   { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
 ]
+# Repeat drain — gated on a loaded weapon (drain_charge). Spent -> the no-drain fallback below shows instead.
 [[canvases.nodes.exit_block.choices]]
 text       = "Take the keys."
 targetType = "node"
-nodeId     = "renner_control_canvas.intro"
+nodeId     = "renner_control_canvas.again"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
+  { type = "trait", subject = "player", trait_key = "drain_charge",      operator = "gte", value = 1 },
+] }
+effects = [
+  { targetType = "player", trait = "drain_charge",      op = "set", value = 0 },
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
+# No-drain fallback (weapon spent): the anal finish still resolves, but there's nothing to take.
+[[canvases.nodes.exit_block.choices]]
+text       = "Let it go — you're drained."
+targetType = "location"
+locationId = "renner_depot"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
+  { type = "trait", subject = "player", trait_key = "drain_charge",      operator = "lt", value = 1 },
 ] }
 effects = [
   { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
@@ -1053,12 +1081,12 @@ effects = [
 
 # ═══ beat_0011 — the WEAPON ═══════════════════════════════════════════════════
 # cap_renner_anal_drain — the FIRST anal (scripted commando-shove). Auto-fire once
-# renner_fucked_once + corruption>=20. Routes INTO the control canvas. The LOCATED setter for
+# renner_fucked_once + corruption>=50. Routes INTO the control canvas. The LOCATED setter for
 # the drain flags (a triggerless canvas can't credit a flag-set).
 [[canvases]]
 id          = "cap_renner_anal_drain"
 name        = "The keys"
-description = "Auto-fire capstone — the weapon's FIRST fire (the commando-shove). Routes into renner_control_canvas. SETS renner_drained + renner_leads_extracted + renner_anal_once. Gated renner_fucked_once + corruption>=20."
+description = "Auto-fire capstone — the weapon's FIRST fire (the commando-shove). Routes into renner_control_canvas. SETS renner_drained + renner_leads_extracted + renner_anal_once. Gated renner_fucked_once + corruption>=50."
 
 [canvases.trigger]
 location      = "renner_depot"
@@ -1069,7 +1097,7 @@ is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "renner_fucked_once", operator = "is_true"  },
   { type = "flag",  subject = "player", flag_key = "renner_drained",     operator = "is_false" },
-  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 20 },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 50 },
   { type = "clothing_item", item_id = "cover_dockhand", operator = "equipped" },   # beat_0015 — Renner content only in cover
 ] }
 
@@ -1088,6 +1116,12 @@ type = "choices"
 text       = "Use them."
 targetType = "node"
 nodeId     = "renner_control_canvas.intro"
+# The first drain spends the weapon's charge (drain_charge 1 -> 0); recharge at the cradle to drain again.
+# The anal sex also drops hygiene (cleanup-after-sex).
+effects = [
+  { targetType = "player", trait = "drain_charge", op = "set", value = 0 },
+  { targetType = "player", trait = "hygiene",      op = "add", value = -30 },
+]
 flagEffects = [
   { targetType = "player", flag = "renner_drained",         op = "set" },
   { targetType = "player", flag = "renner_leads_extracted", op = "set" },
@@ -1134,6 +1168,42 @@ text = "Leave him to come back to himself."
 destinationType = "specific"
 locationId      = "renner_depot"
 
+# Repeat drain (the loop's ass-finish lands HERE, not .intro). She's drained him again and already
+# has the leads, so offer a CHOICE — re-ask or leave — instead of replaying the full extraction.
+[[canvases.nodes]]
+id   = "again"
+name = "The keys, again"
+blocks = [
+  { type = "paragraph", content = "He goes soft and open the second she's done, the controls warm in her hand again — hers for a few minutes, and he won't remember a second of it. She already has what he knew. There's nothing left in him she needs; there's only what she feels like taking." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him again."
+targetType = "node"
+nodeId     = "renner_control_canvas.again_ask"
+[[canvases.nodes.exit_block.choices]]
+text       = "Just leave him."
+targetType = "location"
+locationId = "renner_depot"
+
+# The trimmed re-ask (flavor B) — the same names, nothing new. The one-time revelations live ONLY in
+# .intro (the first extraction); this repeat path never re-dumps them.
+[[canvases.nodes]]
+id   = "again_ask"
+name = "Nothing new"
+blocks = [
+  { type = "paragraph", content = "She crouches to his eye level and asks anyway — the gear, the facility, where the man went." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Bastien — he's on the docks. Calloway runs the hunt from inside Vance. That's everything I had. I swear it." },
+  { type = "paragraph", content = "The same names, in the same order. He doesn't know he's said them before, and he never will. Nothing she didn't already have — but watching the wrecked man empty himself out for her on command is its own kind of confirmation. She fixes her clothes and leaves him to surface alone." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave him to come back to himself."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "renner_depot"
+
 # ═══ beat_0012 — the texture ══════════════════════════════════════════════════
 
 # walkin_renner_depot — RISING walk-ins (substitution target of work_depot_haul). One canvas,
@@ -1141,7 +1211,7 @@ locationId      = "renner_depot"
 [[canvases]]
 id          = "walkin_renner_depot"
 name        = "He comes over"
-description = "Substitution-only walk-in (target of work_depot_haul's 3 rising bands). Reaction escalates by npc_renner.corruption: lingers-watching < 8 / crowds-her 8-16 / pulls-her-off-the-task >= 16. Pure texture."
+description = "Substitution-only walk-in (target of work_depot_haul's 3 rising bands). Reaction escalates by npc_renner.corruption: lingers-watching < 20 / crowds-her 20-40 / pulls-her-off-the-task >= 40. Pure texture."
 
 [canvases.trigger]
 location             = "renner_depot"
@@ -1156,18 +1226,18 @@ id   = "base"
 name = "He comes over"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 8 },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 20 },
     ] } }, blocks = [
     { type = "paragraph", content = "She's halfway up a ladder with a crate when she feels it — Renner, stopped at the bottom, not pretending to check a manifest, just watching her work. He looks away when she looks down. But he was watching, and now they both know he was." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 8  },
-      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt",  value = 16 },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 20  },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt",  value = 40 },
     ] } }, blocks = [
     { type = "paragraph", content = "He finds reasons to be where she is — stands too close at the racks, hands her tools she didn't ask for, lets the backs of his fingers find her arm. \"You're good at this,\" he says, like it costs him, and doesn't move away when he's said it." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 16 },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 40 },
     ] } }, blocks = [
     { type = "paragraph", content = "He doesn't bother with the pretext anymore. He takes the crate out of her hands, sets it down, and backs her into the shelving with his whole ruined weight against her. \"Leave it,\" he says against her neck. \"The invoices can wait. Come in the back.\"" },
   ] },
@@ -1209,18 +1279,18 @@ name = "The ruin under the boss"
 blocks = [
   { type = "image", props = { file = "scenes/amb_renner_anchor_ruin.jpg", description = "A heavyset older man hunched alone at a dim dive-bar counter with a drink, talking too much, a bartender half-listening.", search_queries = ["dive bar man drinking alone", "bar counter older man drunk talking"] } },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 8 },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt", value = 20 },
     ] } }, blocks = [
     { type = "paragraph", content = "Two stools down he's telling the bartender a story about the depot before Cain — when it was something, when he was something. The bartender's heard it. So has she. Renner doesn't notice either of them stopped listening a while ago." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 8  },
-      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt",  value = 16 },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 20  },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "lt",  value = 40 },
     ] } }, blocks = [
     { type = "paragraph", content = "There's a letter on the bar in front of him tonight he keeps not reading — blacklist stationery, the third this month. He drinks around it. When he catches her looking he turns it face-down, too late, and orders another." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 16 },
+      { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 40 },
     ] } }, blocks = [
     { type = "paragraph", content = "He's further gone tonight than she's seen him — talking too much, too loud, the rot all the way to the surface. What they made him part of. What burned. What he signed for and told himself he didn't understand. He won't remember saying any of it tomorrow. She'll remember all of it. It's the guilt the seduction never has to touch." },
   ] },
@@ -1233,7 +1303,7 @@ destinationType = "specific"
 locationId      = "the_anchor"
 
 # amb_renner_cheerup — Lane-2 cheer-up sex (random ambient at the Anchor). Scaled by spine
-# flags. Corruption floor (gte 4) so it can't surface the instant the office opens.
+# flags. Corruption floor (gte 10) so it can't surface the instant the office opens.
 [[canvases]]
 id          = "amb_renner_cheerup"
 name        = "Cheer him up"
@@ -1249,7 +1319,7 @@ is_repeatable        = true
 is_active            = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "renner_office_open", operator = "is_true" },
-  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 4 },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 10 },
   { type = "clothing_item", item_id = "cover_dockhand", operator = "equipped" },   # beat_0015 — Renner content only in cover
 ] }
 [[canvases.trigger.schedules]]
@@ -1403,21 +1473,34 @@ when = [
   { flag = "renner_drained",   op = "is_false" },
 ]
 goals = [
-  { trait = "relation",   subject = "npc", npc_id = "npc_renner", op = "gte", value = 15, label = "Earn the office (relation)" },
-  { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 20, label = "Break him to the drain (corruption)" },
+  { trait = "relation",   subject = "npc", npc_id = "npc_renner", op = "gte", value = 21, label = "Earn the office (relation)" },
+  { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 50, label = "Break him to the drain (corruption)" },
 ]
 
-# Frontier seed — the leads (telegraphed locked-visible). Shows after the drain; the goal is
-# the_site, which never unlocks in this chunk (needs all three missions' leads).
+# End-of-content card — shows after the drain, once the leads are logged. NO goal: this is the
+# "you've reached the end of the current build" state, not a live objective. (The_site never
+# unlocks in this build, so a goal bullet here would dangle forever as a fake objective — and
+# the engine renders a goal-less, ready_text-less card as flavor + tip only; see v2.py:13961.)
 [[quest_cards]]
 priority   = 9
-text       = "Renner gave up two names before he forgot he'd said them: Bastien, a dealer on the docks, and Calloway, the company man running the hunt. The trail forks from here — but neither door is open to her yet, and the Site where Cain went stays dark until the leads run all the way down."
-ready_text = "The way to the Site is open."
-tip        = "Bastien and Calloway are Act-2 work. For now, the leads are logged and the Site stays locked."
+text       = "Renner's trail is logged — Bastien on the docks, Calloway inside Vance. The hunt picks up from here in a future update."
+tip        = "You've reached the end of the current build. More of the hunt is coming."
 when = [
   { flag = "renner_leads_extracted", op = "is_true" },
   { flag = "the_site_open",          op = "is_false" },
 ]
+
+# The Trail — the burned-yard crawl (a parallel goal to the seduction). Active once she's in Renner's
+# orbit (renner_hired); the goal tracks yard_depth (0->3). Flips to its payoff (ready_text) at depth 3,
+# where the deep find sets found_dead_men + underworld_known (the frontier seed -> the underworld, deferred).
+[[quest_cards]]
+priority   = 8
+text       = "Renner's old yard — the one Cain torched — is still watched by his men. Guarded means there's something out there worth finding. Get in past the guards and work deeper."
+ready_text = "The yard gave up its heart: two of Renner's own people, killed with their families, and the thread that ties them to the underworld. That's where the trail runs now — but the way in is still shut to her. (More of the hunt is coming.)"
+tip        = "Sneak into the Burned Yard, off the Waterfront. Slip past the guards (Stealth) or beat them (Fighting) — drill at your room if you can't get past. Each push gets you deeper; the arousal weapon's down there too."
+when = [
+  { flag = "renner_hired", op = "is_true" },
+]
 goals = [
-  { flag = "the_site_open", subject = "player", op = "is_true", label = "Find where Cain went (locked — the trail isn't complete)" },
+  { trait = "yard_depth", subject = "player", op = "gte", value = 3, label = "Search the burned yard" },
 ]

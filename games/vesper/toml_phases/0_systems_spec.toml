@@ -55,17 +55,63 @@ bands = [
   { min = 75, max = 100, text = "Charge: Full",     icon = "🔋" },
 ]
 
+# ─── Condition (hygiene) — cleanup after sex. Drops with sex, restored by a Wash. Below 40 = Filthy,
+# which blocks going out in cover (gate on activity_travel_to_reach). Revived from the dormant trait. ───
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "hygiene"
+bands = [
+  { min = 0,  max = 39,  text = "Condition: Filthy", icon = "🩸" },
+  { min = 40, max = 74,  text = "Condition: Used",   icon = "💧" },
+  { min = 75, max = 100, text = "Condition: Clean",  icon = "✨" },
+]
+
 # ─── NPC panel — Renner's seduction progress (the per-target axis, made visible) ──
 # The seduction CLIMB is npc_renner.corruption; surface it so the player can gauge how far
-# the cold boss has cracked (toward the drain at 20) + where he is. Renner only — Mercer
+# the cold boss has cracked (toward the drain at 50) + where he is. Renner only — Mercer
 # doesn't climb (no corruption, no panel). The 'next' row mirrors the Quests-page goal block.
 [[sidebar_items]]
 type   = "npc_panel"
 npc_id = "npc_renner"
 label  = "Renner"
 rows   = ["corruption", "location", "next"]
-corruption_max_value = 20
+corruption_max_value = 50
 corruption_max_label = "Broken"
+
+# ─── Capability bars — Fighting + Stealth (now LIVE: the Burned Yard guards read them) ─────────
+# Surfaced now that something gates on them (the yard crawl) — before that they'd be dead-meter bars.
+# trait_bar over a banded word (max 50; drilled at the cradle, proven in the field).
+[[sidebar_items]]
+type  = "trait_bar"
+trait = "fighting"
+label = "Fighting"
+max   = 50
+bands = [
+  { min = 0,  max = 14, text = "Untrained" },
+  { min = 15, max = 29, text = "Trained"   },
+  { min = 30, max = 44, text = "Sharp"     },
+  { min = 45, max = 50, text = "Lethal"    },
+]
+[[sidebar_items]]
+type  = "trait_bar"
+trait = "stealth"
+label = "Stealth"
+max   = 50
+bands = [
+  { min = 0,  max = 14, text = "Seen"   },
+  { min = 15, max = 29, text = "Quiet"  },
+  { min = 30, max = 44, text = "Unseen" },
+  { min = 45, max = 50, text = "Ghost"  },
+]
+
+# ─── Underworld coin — her own money (the second life). A numeric counter (shows the figure). ───
+# Earned at the brothel/pit, spent at the gate toll + black market. max is a nominal display ceiling.
+[[sidebar_items]]
+type       = "trait_bar"
+trait      = "coin"
+label      = "Coin"
+max        = 300
+hide_value = false
 
 # ─── Trait labels ─────────────────────────────────────────────────────────────
 # Rename energy -> "Charge"; hide every dormant/internal trait from player-facing dumps.
@@ -81,7 +127,7 @@ key    = "arousal"
 hidden = true
 [[traits.labels]]
 key    = "hygiene"
-hidden = true
+label  = "Condition"
 
 # Sex-loop state — internal numeric machine, never shown (5 traits, blueprint Renner loop).
 [[traits.labels]]
@@ -98,4 +144,30 @@ key    = "anal_active"
 hidden = true
 [[traits.labels]]
 key    = "sex_entry_origin"
+hidden = true
+
+# Capability bars render via the trait_bar items above — hide their raw auto-dump number (the band
+# still shows). yard_depth/weapon_repair are internal crawl state — fully hidden.
+[[traits.labels]]
+key    = "fighting"
+hidden = true
+[[traits.labels]]
+key    = "stealth"
+hidden = true
+[[traits.labels]]
+key    = "yard_depth"
+hidden = true
+[[traits.labels]]
+key    = "weapon_repair"
+hidden = true
+# coin shows via its trait_bar above — hide the raw auto-dump number (no doubling).
+[[traits.labels]]
+key    = "coin"
+hidden = true
+# Weapon charges — internal; the fire choices' locked_text / hide-when-empty communicate the state.
+[[traits.labels]]
+key    = "drain_charge"
+hidden = true
+[[traits.labels]]
+key    = "arousal_charge"
 hidden = true

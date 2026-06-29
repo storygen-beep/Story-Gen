@@ -28,6 +28,24 @@ customizable = false   # fixed identity — protects the Wren / buried-Vesper re
 # LIVE meters (surfaced): energy = Charge, money = Credits.
 energy     = 100      # "Charge" — spent on actions/travel, restored at the cradle
 money      = 50       # "Credits" — deliberately light (a kept asset is provided for)
+# CAPABILITY (Tier-3 custom) — she drills these in secret (activity_train, 3_activities). The want:
+# stop being helpless / get where she can't yet. NOT yet surfaced as sidebar bars: held until the
+# Facility guard READS them (the dead-meter rule — bars + reader land together, next piece).
+# fighting = win a guard fight; stealth = slip past / go deeper.
+fighting   = 0
+stealth    = 0
+# BURNED-YARD crawl state (internal, hidden): yard_depth = how deep she's pushed (odometer 0->3,
+# gates the finds); weapon_repair = sessions spent fixing the found arousal weapon (0->3 -> ready).
+yard_depth    = 0
+weapon_repair = 0
+# UNDERWORLD currency — her own money, the company can't see. Earned (brothel/pit), spent (gate toll +
+# black market). Surfaced as a counter (0_systems). The "second life" — no leash on what's hers.
+coin          = 0
+# WEAPON CHARGES (internal, hidden) — each weapon holds shots; firing spends, the cradle (Charge up /
+# Power down) reloads. drain_charge = the truth-drain (1 shot). arousal_charge = the emitter (3 shots;
+# starts 0, set to 3 when the weapon is repaired). Separate from hygiene (the body) — these are the gear.
+drain_charge   = 1
+arousal_charge = 0
 # DORMANT engine always-ons (hidden via 0_systems). corruption left DEAD (her axis = the
 # awakening, not a meter). arousal/hygiene unused.
 corruption = 0
@@ -202,7 +220,7 @@ id               = "the_waterfront"
 name             = "The Waterfront"
 description      = "The docks strip — wet concrete, sodium lights, smuggler traffic that nobody logs. THE REACH — the city's underside, grit and salt and the parts the Spire pretends it doesn't use. The car back up to the Spire waits at the curb."
 image            = "locations/the_waterfront.jpg"
-navigation_order = ["the_anchor", "renner_depot", "facility_ruins", "the_site"]
+navigation_order = ["the_anchor", "renner_depot", "facility_ruins", "renner_burned_yard", "underworld_gate"]
 # Top-level street hub (NO entry_from) — the Reach's living surface + the travel anchor.
 
 [[locations]]
@@ -237,8 +255,72 @@ id          = "the_site"
 name        = "The Site"
 description = "Somewhere out past the container stacks — the place Cain just walked away from. She doesn't have it yet."
 image       = "locations/the_site.jpg"
-entry_from  = "the_waterfront"
+# RE-PARENTED: the deep end of the underworld now (where Cain is), not a Waterfront card. Still locked
+# on the_site_open (never set this chunk) — the frontier far end, reached THROUGH the underworld strip.
+entry_from  = "underworld_strip"
 entry_conditions = { version = "1.0", items = [
   { type = "flag", subject = "player", flag_key = "the_site_open", operator = "is_true" },
 ] }
-blocked_message = "You don't know where he went — yet. Not until the leads point somewhere."
+blocked_message = "Past the strip the city goes dark and deep, and that's where he is. The way down isn't open to her yet."
+
+# ── renner_burned_yard — the Trail crawl site (Cain's REVENGE burning, NOT the Facility) ──────
+# A second burned site: Renner's own yard, torched by Cain in revenge for the families Renner killed.
+# His MEN guard the wreck (he's salvaging gear / burying evidence) — so she sneaks past Renner's guards
+# (narrative, NOT declared NPCs; the encounter resolves on her fighting/stealth). Locked until she has
+# reason to be there (renner_hired = she's in his orbit; cap_renner_hired sets it). version="1.0" or the
+# lock fails open. The depth-crawl + finds + the broken arousal weapon live here (3_activities).
+[[locations]]
+id          = "renner_burned_yard"
+name        = "The Burned Yard"
+description = "Renner's old yard, three streets past the depot — what Cain left of it. Torched to the slab, fence down, but his men still walk it with lights, turning back anyone who comes to pick the bones. Whatever he's keeping out here, he keeps it watched."
+image       = "locations/renner_burned_yard.jpg"
+entry_from  = "the_waterfront"
+entry_conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "renner_hired", operator = "is_true" },
+] }
+blocked_message = "You've no reason to be out at his burned yard — not yet. Get inside his world first."
+
+# ── THE UNDERWORLD — the dark city the hunt points to (her second life) ────────────────────────
+# Always available (gated only opening_done). The gate is cleared EVERY visit (pay coin / fight / weapon —
+# NO stealth); the strip is reached ONLY via the gate canvas (so the guard can't be bypassed). Inside: a
+# coin economy (brothel + pit earn; gate toll + black market spend). Deep end = the_site (re-parented above,
+# locked). Guards/bartender/don = narrative or deferred; NO NPCs declared here.
+[[locations]]
+id          = "underworld_gate"
+name        = "The Underworld Gate"
+description = "A freight door under the docks that isn't on any manifest, and a man in front of it who is. Past him the city goes down instead of up — the part of the Reach the Spire pretends doesn't exist. He doesn't move for free."
+image       = "locations/underworld_gate.jpg"
+entry_from  = "the_waterfront"
+entry_conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+# The strip — the underworld hub. ROOT location (no entry_from): reached ONLY via the gate canvas's exit,
+# so the guard is unavoidable. Its own children are the brothel/pit/market + the locked deep end (the_site).
+[[locations]]
+id               = "underworld_strip"
+name             = "The Underground"
+description      = "Down past the gate the city turns inside out — wet brick, red light, stalls selling what the Spire outlaws and bodies selling what it pretends to. Nobody here knows what she is, and nobody here owns her. For the length of a visit she's just another face with coin to make. The way back up is the gate."
+image            = "locations/underworld_strip.jpg"
+navigation_order = ["underworld_brothel", "underworld_pit", "underworld_market", "the_site"]
+
+[[locations]]
+id          = "underworld_brothel"
+name        = "The House"
+description = "A working house off the strip — rooms by the hour, a madam who counts heads and coin. They'll take her on a shift; down here the thing the company uses her for is just a trade, and the coin is hers."
+image       = "locations/underworld_brothel.jpg"
+entry_from  = "underworld_strip"
+
+[[locations]]
+id          = "underworld_pit"
+name        = "The Pit"
+description = "A sunken ring under a warehouse, a crowd around it laying bets. They'll match her against whoever's standing. Win and the purse is coin; lose and you crawl out. Down here her fists earn the same as her body."
+image       = "locations/underworld_pit.jpg"
+entry_from  = "underworld_strip"
+
+[[locations]]
+id          = "underworld_market"
+name        = "The Black Market"
+description = "Stalls and back-rooms where coin buys what's off every shelf above — weapons, gear, and people, penned at the far end like the rest of the stock. She knows the look of the merchandise better than she'd like."
+image       = "locations/underworld_market.jpg"
+entry_from  = "underworld_strip"

@@ -20,13 +20,30 @@ is_active     = true
 id   = "base"
 name = "Take the car to the Reach"
 blocks = [
-  { type = "paragraph", content = "A company car waits at the curb, engine idling. She gives the docks address and it pulls out without a word. The Spire's glass falls away behind her; the city gets lower, wetter, dirtier the whole way down." },
+  { type = "paragraph", content = "A company car idles at the curb, waiting to run her down to the docks." },
 ]
+[canvases.nodes.exit_block]
+type = "choices"
+# Hygiene gate (public/cover only): filthy -> the cover won't hold; wash up before going out. Locked-visible.
+[[canvases.nodes.exit_block.choices]]
+text       = "Ride down to the Waterfront."
+targetType = "node"
+nodeId     = "activity_travel_to_reach.riding"
+show_when_locked = true
+locked_text = "Not like this — you're filthy, and the cover won't hold with the docks able to smell it on you. Wash up first."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "hygiene", operator = "gte", value = 40 },
+] }
 
+[[canvases.nodes]]
+id   = "riding"
+name = "Ride down"
+blocks = [
+  { type = "paragraph", content = "She gives the docks address and the car pulls out without a word. The Spire's glass falls away behind her; the city gets lower, wetter, dirtier the whole way down." },
+]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Ride down to the Waterfront."
-
+text = "Down to the Waterfront."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "the_waterfront"
@@ -108,6 +125,42 @@ locationId               = "cradle"
 time_progression_minutes = 540
 effects = [
   { targetType = "player", trait = "energy", op = "add", value = 100 },
+  { targetType = "player", trait = "drain_charge", op = "set", value = 1 },
+  { targetType = "player", trait = "arousal_charge", op = "set", value = 3 },
+]
+
+# Charge up — the SPLIT from Power down (LO's B): top up Charge + RELOAD the weapons, WITHOUT sleeping the
+# day forward. Anytime at the cradle (no schedule). Costs ~2h (time stays the throttle). This is the weapon
+# reload home base (drain_charge -> 1, arousal_charge -> 3). Power down also reloads (a full reset).
+[[canvases]]
+id          = "activity_charge_up"
+name        = "Charge up"
+description = "Wren-solo at the cradle. Top up Charge + reload both weapons (drain_charge=1, arousal_charge=3), 120 min, NO day advance. Separate from Power down (sleep). Gated opening_done."
+[canvases.trigger]
+location      = "cradle"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Charge up"
+blocks = [
+  { type = "paragraph", content = "Not a full night — just a couple hours hooked to the cradle's feed line, eyes open. Her cells pull back to full; the drain rebuilds its charge; the emitter's cell tops off. Then she unhooks, loaded, the day still going." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Unhook. Back to it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "cradle"
+time_progression_minutes = 120
+effects = [
+  { targetType = "player", trait = "energy", op = "add", value = 100 },
+  { targetType = "player", trait = "drain_charge", op = "set", value = 1 },
+  { targetType = "player", trait = "arousal_charge", op = "set", value = 3 },
 ]
 
 # The chip / memories view — seeded-empty, the greyed FRAGMENT 01 slot (the visible next
@@ -143,6 +196,138 @@ text = "Close it."
 destinationType = "specific"
 locationId      = "cradle"
 
+# ─── beat_0016 — Training (Lane-3 self-feeder): Fighting + Stealth ─────────────
+# Wren-solo in her room. She drills the body the company built, sharpening it past her file — the one
+# thing here that's only hers (the WANT: stop being helpless / get where she can't yet). Two drills:
+# Combat (+fighting) / Stealth (+stealth). Cost = 15 Charge via `costs` (gates+deducts; the choice hides
+# when she's too drained) + 120 min on the result exit. Soft cap: +3 while <30, +1 while 30-50 (drill
+# plateaus; field-mastery comes from real use). Result prose tiers by the trait = feedback. Stealth drill
+# unlocks after the first Burned-Yard catch (yard_caught_once). The bars are LIVE now (0_systems) and the
+# READER is the Burned-Yard crawl (beat_0017) — the dead-meter loop is closed.
+[[canvases]]
+id          = "activity_train"
+name        = "Drill"
+description = "Wren-solo at wren_room. Combat/Stealth drills -> +fighting/+stealth. costs 15 Charge (per-choice, gates+deducts) + 120 min. Soft cap +3<30 / +1 30-50. Gated opening_done; stealth drill gated yard_caught_once. Bars live (0_systems); read by the Burned-Yard crawl (beat_0017)."
+
+[canvases.trigger]
+location      = "wren_room"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Drill"
+blocks = [
+  { type = "paragraph", content = "The floor's empty, the door shut. No one watches an asset in its own quarters. She uses the hour the way the company never told her to — drilling the body they built, sharpening it past the spec on her file. It's the one thing here that's only hers." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+
+# Combat drill — early band (+3 while < 30)
+[[canvases.nodes.exit_block.choices]]
+text       = "Combat drill."
+targetType = "node"
+nodeId     = "activity_train.combat"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "lt", value = 30 },
+] }
+costs   = [{ trait = "energy", value = 15 }]
+effects = [{ targetType = "player", trait = "fighting", op = "add", value = 3 }]
+
+# Combat drill — plateau band (+1 while 30–50)
+[[canvases.nodes.exit_block.choices]]
+text       = "Combat drill."
+targetType = "node"
+nodeId     = "activity_train.combat"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 30 },
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "lt",  value = 50 },
+] }
+costs   = [{ trait = "energy", value = 15 }]
+effects = [{ targetType = "player", trait = "fighting", op = "add", value = 1 }]
+
+# Stealth drill — early band (+3 while < 30)
+[[canvases.nodes.exit_block.choices]]
+text       = "Stealth drill."
+targetType = "node"
+nodeId     = "activity_train.stealth"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "yard_caught_once", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 30 },
+] }
+costs   = [{ trait = "energy", value = 15 }]
+effects = [{ targetType = "player", trait = "stealth", op = "add", value = 3 }]
+
+# Stealth drill — plateau band (+1 while 30–50)
+[[canvases.nodes.exit_block.choices]]
+text       = "Stealth drill."
+targetType = "node"
+nodeId     = "activity_train.stealth"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "yard_caught_once", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "stealth", operator = "gte", value = 30 },
+  { type = "trait", subject = "player", trait_key = "stealth", operator = "lt",  value = 50 },
+] }
+costs   = [{ trait = "energy", value = 15 }]
+effects = [{ targetType = "player", trait = "stealth", op = "add", value = 1 }]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Enough for now."
+targetType = "location"
+locationId = "wren_room"
+
+# Combat result — prose tiers by fighting (clumsy -> sharp). Exit burns the 120 min.
+[[canvases.nodes]]
+id   = "combat"
+name = "Combat drill"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "fighting", operator = "lt", value = 25 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She runs the forms against the empty air — strikes, breaks, the throw that ends a man. Her body obeys a half-beat slow, the way a tool obeys before it's been worked hard. Clumsy still. But the half-beat is shorter than it was yesterday." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 25 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "No hesitation now. The forms come fast and flat and final — strike, break, the throw — each one landing where a throat or a knee would be. Whatever they built her for, this wasn't on the spec. She's better than the file says. She keeps that to herself." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Rack it. Catch your breath."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "wren_room"
+time_progression_minutes = 120
+
+# Stealth result — prose tiers by stealth (fumbling -> ghost). Exit burns the 120 min.
+[[canvases.nodes]]
+id   = "stealth"
+name = "Stealth drill"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 25 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She practices the small things — weight rolled onto the outside of the foot, breath dropped low, the timing of a turned back. Her own joints betray her with a tick of sound she'd never have caught a week ago. She catches it now. That's the start of it." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "stealth", operator = "gte", value = 25 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She moves through her own quarters and the room doesn't register her — no sound, no shift of air, nothing for a camera to hold. A thing that can't be seen can go where it isn't allowed. She files that thought where she files the others." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Ease off. Settle."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "wren_room"
+time_progression_minutes = 120
+
 # ─── beat_0013 — the facility investigation host (Lane-3 solo) ─────────────────
 # The Mission-1 location leg. Repeatable explore; the one-time 'that's mine' match beat
 # (inv_facility_match, 2_one_shots) auto-fires on entry once renner_hired.
@@ -174,3 +359,700 @@ text = "Done here."
 [canvases.nodes.exit_block.config]
 destinationType = "specific"
 locationId      = "facility_ruins"
+
+# ═══ beat_0017 — The Burned Yard: the Trail crawl (stealth/fight depth) + the arousal weapon ═══
+# Renner's torched yard (Cain's revenge). She sneaks past his GUARDS (narrative, NOT declared NPCs —
+# the encounter resolves on HER stealth/fighting) and pushes DEEPER (yard_depth odometer 0->3). Each push
+# costs Charge; resolution costs time. Slip (stealth>=S) or beat the guard (fighting>=F), else the weapon
+# (once ready) or run (flee). First time caught -> yard_caught_once (unlocks the Stealth drill). Finds
+# auto-fire on return (yard_find_*). This is where Fighting/Stealth finally READ (bars live, 0_systems).
+[[canvases]]
+id          = "yard_crawl"
+name        = "Work the burned yard"
+description = "Wren-solo crawl at renner_burned_yard. Push deeper (yard_depth) past a guard: Slip (stealth>=S) / Take him (fighting>=F) / weapon (ready) / run (flee). costs Charge per push + time on resolution. Guard S/F rise with depth (10/25/40). Finds auto-fire on return. The location lock (renner_hired) gates access."
+
+[canvases.trigger]
+location      = "renner_burned_yard"
+is_repeatable = true
+priority      = 3
+is_active     = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Work the burned yard"
+blocks = [
+  { type = "image", props = { file = "locations/renner_burned_yard.jpg", description = "A torched industrial yard at night, scorched slab and downed fencing, a guard's flashlight sweeping the dark.", search_queries = ["burned yard night flashlight guard", "torched warehouse lot dark security"] } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 1 } ] } }, blocks = [
+    { type = "paragraph", content = "The fence is down on the water side. Past it the yard is black glass and bent steel — and a guard with a torch, walking the line where the gate used to be. Getting in means getting past him." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 1 }, { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 3 } ] } }, blocks = [
+    { type = "paragraph", content = "She's inside the outer line now. Deeper in there are more lights and more men — Renner doesn't watch a dead yard this hard for nothing. Whatever's worth guarding is further back." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 3 } ] } }, blocks = [
+    { type = "paragraph", content = "She's been all the way to the back of it. There's nothing left in the yard she hasn't already put her hands on." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Push in past the gate."
+targetType = "node"
+nodeId     = "yard_crawl.guard1"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 1 } ] }
+costs      = [{ trait = "energy", value = 15 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Work deeper in."
+targetType = "node"
+nodeId     = "yard_crawl.guard2"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 1 }, { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 2 } ] }
+costs      = [{ trait = "energy", value = 15 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Push to the back of it."
+targetType = "node"
+nodeId     = "yard_crawl.guard3"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 2 }, { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 3 } ] }
+costs      = [{ trait = "energy", value = 15 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Slip back out."
+targetType = "location"
+locationId = "the_waterfront"
+
+# guard1 — depth 0->1 (S=F=10): the easy one
+[[canvases.nodes]]
+id   = "guard1"
+name = "The gate guard"
+blocks = [
+  { type = "paragraph", content = "One man, one torch, bored and slow — the easy one, the test before the real ones. He hasn't seen her yet." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Slip past him, unseen."
+targetType = "node"
+nodeId     = "yard_crawl.deeper"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "gte", value = 10 } ] }
+effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him down."
+targetType = "node"
+nodeId     = "yard_crawl.deeper"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 10 }, { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 10 } ] }
+effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Use the weapon on him."
+targetType = "node"
+nodeId     = "yard_crawl.weapon_scene"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 10 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 } ] }
+effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30 }]
+flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
+[[canvases.nodes.exit_block.choices]]
+text       = "He's on you — break and run."
+targetType = "node"
+nodeId     = "yard_crawl.flee"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 10 } ] }
+flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
+
+# guard2 — depth 1->2 (S=F=25)
+[[canvases.nodes]]
+id   = "guard2"
+name = "The inner men"
+blocks = [
+  { type = "paragraph", content = "Two of them here, awake and armed, working a pattern between the racks. Past the easy line — these ones would hurt her if she let them." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Slip past them, unseen."
+targetType = "node"
+nodeId     = "yard_crawl.deeper"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "gte", value = 25 } ] }
+effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Take them down."
+targetType = "node"
+nodeId     = "yard_crawl.deeper"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 25 }, { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 25 } ] }
+effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Use the weapon on them."
+targetType = "node"
+nodeId     = "yard_crawl.weapon_scene"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 25 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 } ] }
+effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30 }]
+flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Too many — break and run."
+targetType = "node"
+nodeId     = "yard_crawl.flee"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 25 } ] }
+flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
+
+# guard3 — depth 2->3 (S=F=40): the back, where the real thing is
+[[canvases.nodes]]
+id   = "guard3"
+name = "The back of the yard"
+blocks = [
+  { type = "paragraph", content = "The heaviest watch is here, at the back — a knot of his best men around a strongroom the fire didn't reach. Whatever Renner's keeping, it's behind them." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Ghost straight through them."
+targetType = "node"
+nodeId     = "yard_crawl.deeper"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "gte", value = 40 } ] }
+effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Cut through them."
+targetType = "node"
+nodeId     = "yard_crawl.deeper"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 40 }, { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 40 } ] }
+effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Use the weapon on them."
+targetType = "node"
+nodeId     = "yard_crawl.weapon_scene"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 40 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 } ] }
+effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30 }]
+flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Not yet — break and run."
+targetType = "node"
+nodeId     = "yard_crawl.flee"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 40 } ] }
+flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
+
+# deeper — shared WIN node (yard_depth already +1 on the choice). Prose by NEW depth. Find auto-fires on return.
+[[canvases.nodes]]
+id   = "deeper"
+name = "Deeper in"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 2 } ] } }, blocks = [
+    { type = "paragraph", content = "She's through the gate and into the outer yard, the guard behind her none the wiser or none the able. The dark swallows her." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 2 }, { type = "trait", subject = "player", trait_key = "yard_depth", operator = "lt", value = 3 } ] } }, blocks = [
+    { type = "paragraph", content = "Deeper now, in among the racks where the lights are — and past the men who'd have stopped her. She keeps to the shadow and goes on." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 3 } ] } }, blocks = [
+    { type = "paragraph", content = "The back of the yard, the strongroom, the thing they were all standing around. She's in." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "See what's here."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "renner_burned_yard"
+time_progression_minutes = 120
+
+# weapon_scene — the arousal weapon's USE: arouse -> fuck -> he passes out (non-lethal). Shared by the 3
+# guard tiers (the field is an area emitter, so it reads for one or many). +yard_depth already on the choice;
+# hygiene already dropped on the choice. Exits deeper into the yard (find auto-fires on return).
+[[canvases.nodes]]
+id   = "weapon_scene"
+name = "Put them under"
+blocks = [
+  { type = "video", props = { file = "sex/arousal_weapon_use.webm", description = "A woman straddling and riding a slumped, half-conscious man against a wall in a dim industrial space, his head lolling back.", search_queries = ["woman riding dazed man against wall", "femdom limp man industrial dark"] } },
+  { type = "paragraph", content = "She thumbs the emitter and the field rolls out ahead of her. Whoever's in reach goes stupid with it inside a breath — pupils blown, breath gone ragged, the gun forgotten in a slack hand. She takes the nearest one by the belt and rides him hard against the nearest surface while the others sway on their feet, and works him past the edge until he drops boneless and out. The rest fold a beat later. By the time any of them surface she's long gone, deeper in — and they'll wake with nothing but the memory of a heat that was never theirs." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Step over them. On."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "renner_burned_yard"
+time_progression_minutes = 120
+
+# flee — shared LOSE/retreat node. No depth gained. Out to the waterfront.
+[[canvases.nodes]]
+id   = "flee"
+name = "Break and run"
+blocks = [
+  { type = "paragraph", content = "It goes against her — too many, or too sharp, or her own body too slow. She breaks for the downed fence and is over the water side before the torches swing round. Nothing gained tonight. She files what it cost her and walks it off." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get clear."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_waterfront"
+time_progression_minutes = 60
+
+# ── Finds — auto-fire on return to the yard, one per depth tier (priority 9, one-shot) ──────────
+# yard_find_1 (depth>=1): the clue.
+[[canvases]]
+id          = "yard_find_1"
+name        = "What the yard was"
+description = "Auto-fire on yard entry at yard_depth>=1, once. SETS yard_clue_seen. The first Trail clue."
+[canvases.trigger]
+location      = "renner_burned_yard"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 1 },
+  { type = "flag",  subject = "player", flag_key = "yard_clue_seen", operator = "is_false" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "What the yard was"
+blocks = [
+  { type = "paragraph", content = "Inside the outer line she finds the shape of it under the burn: not just a storage yard. Loading bays built for things heavier than crates, restraint points set into a slab, a billing wall scorched but legible — shipments logged out to the same Vance facility she's already walked the ashes of. Renner moved more than equipment through here. He just never asked what for." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Log it. Keep moving."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "renner_burned_yard"
+flagEffects = [{ targetType = "player", flag = "yard_clue_seen", op = "set" }]
+
+# yard_find_2 (depth>=2): the broken arousal weapon.
+[[canvases]]
+id          = "yard_find_2"
+name        = "The broken thing"
+description = "Auto-fire on yard entry at yard_depth>=2, once. SETS has_arousal_weapon (broken). The arousal-weapon find -> repaired at wren_room (activity_repair_weapon)."
+[canvases.trigger]
+location      = "renner_burned_yard"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 2 },
+  { type = "flag",  subject = "player", flag_key = "has_arousal_weapon", operator = "is_false" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "The broken thing"
+blocks = [
+  { type = "image", props = { file = "activities/arousal_weapon.jpg", description = "A small fire-damaged sci-fi handheld device on a workbench, casing cracked open, fine emitter components inside, faintly lit.", search_queries = ["broken sci-fi handheld device cracked", "damaged futuristic gadget internals glowing"] } },
+  { type = "paragraph", content = "In a melted equipment locker, half-slagged but whole at the core, is a device she knows in her hands before she knows in her head — the same build as the thing inside her, the one that makes a body want against its own sense. A field emitter. Renner had one off the line and never fired it. Heat-warped, dead. But the core is sound. She pockets it. Fixed, it's a way past any man who'd otherwise put her down." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take it. Get out clean."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "renner_burned_yard"
+flagEffects = [{ targetType = "player", flag = "has_arousal_weapon", op = "set" }]
+
+# yard_find_3 (depth>=3): the two dead men + the underworld link + a memory flicker (frontier seed).
+[[canvases]]
+id          = "yard_find_3"
+name        = "The heart of it"
+description = "Auto-fire on yard entry at yard_depth>=3, once. SETS found_dead_men + underworld_known (frontier -> the underworld, deferred). A memory flicker (awakening seed)."
+[canvases.trigger]
+location      = "renner_burned_yard"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "yard_depth", operator = "gte", value = 3 },
+  { type = "flag",  subject = "player", flag_key = "found_dead_men", operator = "is_false" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "The heart of it"
+blocks = [
+  { type = "paragraph", content = "The strongroom is what he saved. Two personnel files, a man each — his own people, the two who moved the materials. Both stamped CLOSED. Under each, a death notice, and under that, more notices: wives, children, the whole line, the dates all the same night. Renner didn't just fire them. He erased them. And paperclipped to the back, the thing he's really hiding: where the two men came from before Vance — the same name twice, a place down in the city that isn't on any map. The underworld. That's the thread Cain followed back. That's where it goes." },
+  { type = "paragraph", content = "Standing in it, something turns over in her — not a thought, a feeling, brief and uninvited: she has stood in a room like this before, on the other side of the file. Then it's gone, filed under nothing, the way she files everything she can't afford to keep." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take what matters. Go."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "renner_burned_yard"
+flagEffects = [
+  { targetType = "player", flag = "found_dead_men",  op = "set" },
+  { targetType = "player", flag = "underworld_known", op = "set" },
+]
+
+# ── activity_repair_weapon — fix the found weapon at her room, over a few sessions (wren_room) ──
+# Gated has_arousal_weapon (found) + arousal_weapon_ready is_false (not done). weapon_repair 0->3;
+# the 3rd session SETS arousal_weapon_ready -> the weapon becomes the "get past a guard" option.
+[[canvases]]
+id          = "activity_repair_weapon"
+name        = "Fix the emitter"
+description = "Wren-solo at wren_room. Repair the found arousal weapon over 3 sessions (weapon_repair 0->3). costs 15 Charge + 120 min/session. Final session SETS arousal_weapon_ready. Gated has_arousal_weapon + !arousal_weapon_ready + opening_done."
+[canvases.trigger]
+location      = "wren_room"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "has_arousal_weapon", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_false" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Fix the emitter"
+blocks = [
+  { type = "paragraph", content = "The emitter sits on her bench, casing off, guts exposed. She knows the architecture of it the way she knows her own — because it is her own, scaled down to a handheld. Heat-warp on the field coils, a cracked driver. Slow work, and hers alone." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Work on it."
+targetType = "node"
+nodeId     = "activity_repair_weapon.progress"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "weapon_repair", operator = "lt", value = 2 } ] }
+costs      = [{ trait = "energy", value = 15 }]
+effects    = [{ targetType = "player", trait = "weapon_repair", op = "add", value = 1 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Finish it."
+targetType = "node"
+nodeId     = "activity_repair_weapon.done"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "weapon_repair", operator = "gte", value = 2 }, { type = "trait", subject = "player", trait_key = "weapon_repair", operator = "lt", value = 3 } ] }
+costs      = [{ trait = "energy", value = 15 }]
+effects    = [{ targetType = "player", trait = "weapon_repair", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "set", value = 3 }]
+flagEffects = [{ targetType = "player", flag = "arousal_weapon_ready", op = "set" }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it for now."
+targetType = "location"
+locationId = "wren_room"
+
+[[canvases.nodes]]
+id   = "progress"
+name = "Coming together"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "weapon_repair", operator = "lt", value = 2 } ] } }, blocks = [
+    { type = "paragraph", content = "She straightens the field coils, one pass, and tests the draw. Dead still — but cleaner dead than it was. More to do." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "weapon_repair", operator = "gte", value = 2 } ] } }, blocks = [
+    { type = "paragraph", content = "Driver reseated, coils true. It draws a charge now and holds it — a flicker of the field crossing her own skin, the faint unwanted warmth of it. Almost. One more pass and it fires." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Set it down."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "wren_room"
+time_progression_minutes = 120
+
+[[canvases.nodes]]
+id   = "done"
+name = "It fires"
+blocks = [
+  { type = "paragraph", content = "Last pass. She powers it and the field comes up clean, a low hum she feels in her teeth — and, testing it on herself a half-second too long, a heat low in her belly she didn't ask for and shuts off fast. It works. A second weapon now, hers, that the company never issued and doesn't know she has. A way past any man she can't fight." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stow it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "wren_room"
+time_progression_minutes = 120
+
+# ═══ beat_0018 — THE UNDERWORLD: the dark city, a coin economy, her second life ═══════════════
+# Always available (gate gated opening_done). The guard is cleared EVERY visit (pay coin / fight / weapon
+# — NO stealth). The strip is reached ONLY via this gate canvas (underworld_strip is a root location, not
+# nav-linked), so the guard can't be bypassed. Inside: brothel + pit EARN coin; gate toll + black market
+# SPEND it. Guards = narrative (not NPCs). Deep end = the_site (re-parented, locked). M2 story deferred.
+
+# ── The gate — clear the guard every visit ─────────────────────────────────────────────────────
+[[canvases]]
+id          = "underworld_gate_check"
+name        = "The man at the door"
+description = "The underworld gate guard, every visit. Pay coin (toll) / force past (fighting>=15) / arousal weapon -> route to underworld_strip; or turn back -> the_waterfront. NO stealth. Narrative guard, not an NPC."
+[canvases.trigger]
+location      = "underworld_gate"
+is_repeatable = true
+priority      = 5
+is_active     = true
+[[canvases.nodes]]
+id   = "base"
+name = "The man at the door"
+blocks = [
+  { type = "image", props = { file = "locations/underworld_gate.jpg", description = "A heavy unmarked freight door under the docks at night, a big man standing before it, one hand out.", search_queries = ["bouncer unmarked door night", "guard freight door dark dockside"] } },
+  { type = "paragraph", content = "The man at the door doesn't ask her name. He looks her over the way a turnstile would and holds out a hand. \"Coin,\" he says. \"Or you're not my problem.\" Behind him the stairs go down into red light and noise. There's more than one way through a man like this." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Pay the toll."
+targetType = "location"
+locationId = "underworld_strip"
+costs      = [{ trait = "coin", value = 5 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Force past him."
+targetType = "location"
+locationId = "underworld_strip"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 15 } ] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Put the weapon on him."
+targetType = "node"
+nodeId     = "underworld_gate_check.weapon_scene"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" } ] }
+costs      = [{ trait = "arousal_charge", value = 1 }]
+effects    = [{ targetType = "player", trait = "hygiene", op = "add", value = -30 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Turn back."
+targetType = "location"
+locationId = "the_waterfront"
+
+# weapon_scene — the gate doorman: arouse -> fuck -> he passes out (non-lethal; he recovers, so the fixture
+# guard is there next visit). hygiene already dropped + arousal_charge spent on the choice. Exits to the strip.
+[[canvases.nodes]]
+id   = "weapon_scene"
+name = "Put him under"
+blocks = [
+  { type = "video", props = { file = "sex/arousal_weapon_use.webm", description = "A woman straddling and riding a slumped, half-conscious man against a wall in a dim space, his head lolling back.", search_queries = ["woman riding dazed man against wall", "femdom limp man dark"] } },
+  { type = "paragraph", content = "She thumbs the emitter and the doorman's whole face changes — the bored menace gone, breath gone short, the hand that wanted coin wanting something else now. She walks him back into the shadow of the stair and rides him there, fast and clinical, until he sags against the wall with his eyes rolling white and goes under. He'll wake on the steps in an hour, no memory, and never know she walked past him. The stairs are open." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Down into the strip."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_strip"
+time_progression_minutes = 60
+
+# ── The strip hub — flavor + the way back out (the children brothel/pit/market/the_site are nav) ─
+[[canvases]]
+id          = "underworld_strip_hub"
+name        = "The Underground"
+description = "Hub flavor at underworld_strip + the leave-route back up to the_waterfront. The brothel/pit/market/the_site are nav children."
+[canvases.trigger]
+location      = "underworld_strip"
+is_repeatable = true
+priority      = 3
+is_active     = true
+[[canvases.nodes]]
+id   = "base"
+name = "The Underground"
+blocks = [
+  { type = "image", props = { file = "locations/underworld_strip.jpg", description = "A crowded underground market street at night, red light, stalls, bodies, neon in a language that isn't quite any language.", search_queries = ["underground night market red light crowd", "cyberpunk black market alley neon"] } },
+  { type = "paragraph", content = "The strip runs under the docks for as far as the light does — the house, the pit, the market, and past them the dark where the real city keeps its teeth. Up here nobody's looking for her. It's the closest thing to free she's felt." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Climb back up to the docks."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_waterfront"
+
+# ── The House — sex work earns coin (her own money) ─────────────────────────────────────────────
+[[canvases]]
+id          = "underworld_brothel_work"
+name        = "Take a shift"
+description = "Wren-solo work loop at underworld_brothel. Take a client -> sex content -> +coin (effects). costs 15 Charge (per-choice) + 120 min. Repeatable. Her own coin = the second life."
+[canvases.trigger]
+location      = "underworld_brothel"
+is_repeatable = true
+priority      = 3
+is_active     = true
+[[canvases.nodes]]
+id   = "base"
+name = "Take a shift"
+blocks = [
+  { type = "paragraph", content = "The madam counts her with one look and tips her head at the rooms. No contract, no company, no Mercer signing her out — just a door, a client, and coin at the end that goes in her pocket and nowhere else. The thing she's built for, sold for once, on her own account." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Take a client."
+targetType = "node"
+nodeId     = "underworld_brothel_work.client"
+costs      = [{ trait = "energy", value = 15 }]
+effects    = [{ targetType = "player", trait = "coin", op = "add", value = 10 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Not tonight."
+targetType = "location"
+locationId = "underworld_brothel"
+[[canvases.nodes]]
+id   = "client"
+name = "The client"
+blocks = [
+  { type = "video", props = { file = "sex/brothel_client.webm", description = "A woman straddling and riding a man on a bed in a dim red-lit room, sex from the side.", search_queries = ["brothel sex riding pov red room", "escort client sex bed dim light"] } },
+  { type = "paragraph", content = "She works the client the way the trade wants — efficient, convincing, gone behind her own eyes the whole time the way she always is. He finishes; she collects; she's already cataloguing the next one. The only new thing is the coin, and that the coin is hers." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Clean up. Collect."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_brothel"
+time_progression_minutes = 120
+effects = [
+  { targetType = "player", trait = "hygiene", op = "add", value = -30 },
+]
+
+# ── The Pit — fight earns coin (the payoff for Fighting); tiered purse, deterministic by skill ──
+[[canvases]]
+id          = "underworld_pit_fight"
+name        = "Take a bout"
+description = "Wren-solo at underworld_pit. Fight for coin (Fighting stat-check, deterministic). Low bout fighting>=10 (+8); hard bout fighting>=30 (+20). costs Charge + 120 min. Only winnable bouts show (no lose-state here)."
+[canvases.trigger]
+location      = "underworld_pit"
+is_repeatable = true
+priority      = 3
+is_active     = true
+[[canvases.nodes]]
+id   = "base"
+name = "Take a bout"
+blocks = [
+  { type = "paragraph", content = "The ring is a pit of packed dirt under a single bulb, the crowd three deep around it laying coin on the next body to fall. The matchmaker looks her up and down, unimpressed, and asks what she thinks she can take. Down here her fists pay the same as the rest of her." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Take a low bout."
+targetType = "node"
+nodeId     = "underworld_pit_fight.win_low"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 10 } ] }
+costs      = [{ trait = "energy", value = 15 }]
+effects    = [{ targetType = "player", trait = "coin", op = "add", value = 8 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Take a hard bout."
+targetType = "node"
+nodeId     = "underworld_pit_fight.win_hard"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 30 } ] }
+costs      = [{ trait = "energy", value = 20 }]
+effects    = [{ targetType = "player", trait = "coin", op = "add", value = 20 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Just watch tonight."
+targetType = "location"
+locationId = "underworld_pit"
+[[canvases.nodes]]
+id   = "win_low"
+name = "The bout"
+blocks = [
+  { type = "paragraph", content = "They put a brawler in with her, slow and heavy. She lets him swing, reads the half-beat, and ends it with the kind of economy the crowd doesn't cheer because it scared them. The matchmaker pays out without meeting her eyes." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the purse."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_pit"
+time_progression_minutes = 120
+[[canvases.nodes]]
+id   = "win_hard"
+name = "The hard bout"
+blocks = [
+  { type = "paragraph", content = "This one's real — fast, trained, in it to hurt her. For a few seconds it's almost a fight. Then the thing they built her to be takes over, and what's left on the dirt isn't getting up. The crowd goes quiet. The purse is heavy. Someone in the dark is watching her now, and filing it." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the purse."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_pit"
+time_progression_minutes = 120
+
+# ── The Black Market — spend coin (weapons/gear) + the humans pen (witness/awakening, no buy) ────
+[[canvases]]
+id          = "underworld_market_shop"
+name        = "Work the stalls"
+description = "Wren-solo at underworld_market. Coin SINK: buy a weapon edge (coin 40 -> +fighting 5) / infiltration gear (coin 30 -> +stealth 5). The humans pen = a witness/awakening beat (no buy). costs coin (per buy)."
+[canvases.trigger]
+location      = "underworld_market"
+is_repeatable = true
+priority      = 3
+is_active     = true
+[[canvases.nodes]]
+id   = "base"
+name = "Work the stalls"
+blocks = [
+  { type = "image", props = { file = "locations/underworld_market.jpg", description = "Dim black-market stalls under a low ceiling, weapons and gear laid on cloth, cages further back.", search_queries = ["black market weapons stall dim", "underground arms bazaar cages back"] } },
+  { type = "paragraph", content = "Coin moves here for everything the Spire pretends doesn't exist. Blades and field-gear on the near tables; further back, behind chain, the part she doesn't look at directly. She has coin now. She can leave with an edge." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Buy a weapon — something with an edge."
+targetType = "node"
+nodeId     = "underworld_market_shop.weapon"
+costs      = [{ trait = "coin", value = 40 }]
+effects    = [{ targetType = "player", trait = "fighting", op = "add", value = 5 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Buy infiltration gear."
+targetType = "node"
+nodeId     = "underworld_market_shop.gear"
+costs      = [{ trait = "coin", value = 30 }]
+effects    = [{ targetType = "player", trait = "stealth", op = "add", value = 5 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Walk the pens."
+targetType = "node"
+nodeId     = "underworld_market_shop.pens"
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave the stalls."
+targetType = "location"
+locationId = "underworld_market"
+[[canvases.nodes]]
+id   = "weapon"
+name = "A weapon"
+blocks = [
+  { type = "paragraph", content = "She buys a blade the way a soldier does — by balance, not by looks — and a thing to hide it in. Her hands are deadlier leaving than they were coming in. Coin well spent." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stow it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_market"
+time_progression_minutes = 30
+[[canvases.nodes]]
+id   = "gear"
+name = "Gear"
+blocks = [
+  { type = "paragraph", content = "Soft soles, a light that isn't a light, a tool roll that opens what's meant to stay shut. The kind of kit that turns a careful woman into one nobody sees. Coin well spent." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Pack it away."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_market"
+time_progression_minutes = 30
+[[canvases.nodes]]
+id   = "pens"
+name = "The pens"
+blocks = [
+  { type = "paragraph", content = "Behind the chain they keep people the way the market keeps anything — by weight and condition, tagged, waiting on a buyer. She walks the line because she makes herself walk it. Most are just people, stolen and sold. But one of them, a girl too still, too even, watches her back with eyes that don't track quite right — and something in Wren's chest does a thing it has no name for, a recognition she shuts off before it finishes. She's looked at her own reflection in a cage. She files it under nothing and walks out." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Don't look again."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_market"
+time_progression_minutes = 30
+
+# ── Wash — restore hygiene (cleanup after sex). At her room; the one active upkeep. ─────────────
+# Below 40 hygiene she can't go out in cover (the travel-out gate). Also her one private washing —
+# not on the company's schedule — a small awakening beat. Gated opening_done.
+[[canvases]]
+id          = "activity_wash"
+name        = "Wash up"
+description = "Wren-solo at wren_room. Restore hygiene -> 100. costs ~30 min. The cleanup-after-sex upkeep; gates the travel-out (public/cover) when filthy. Gated opening_done."
+[canvases.trigger]
+location      = "wren_room"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Wash up"
+blocks = [
+  { type = "paragraph", content = "She strips and stands under the water until whatever the work left on her is gone — sweat, a client's hands, the smell of the docks. The company keeps her maintained; this part she does for herself, the one washing that isn't on anyone's schedule. She comes out clean, and for a minute, almost new." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Dry off. Dressed."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "wren_room"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "hygiene", op = "add", value = 100 },
+]

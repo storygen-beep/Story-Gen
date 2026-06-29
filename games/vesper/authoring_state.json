@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 24,
+  "book_revision": 30,
   "pipeline_phase": "authoring",
   "map_design": {
     "topology": "done",
@@ -399,6 +399,99 @@
         "2 out-of-cover reaction beats (pre-hire: reads as a threat, no hire / post-hire: squint-suspicion, day stalls)",
         "version=1.0 everywhere; re-merge + re-package + read-the-artifact verify green"
       ]
+    },
+    {
+      "id": "beat_0016",
+      "status": "validated",
+      "target_phase": "3",
+      "title": "Training activity + Fighting/Stealth capability traits (day-depth, piece 1)",
+      "introduces": [
+        "player traits fighting + stealth (Tier-3 custom)",
+        "the Drill self-activity (wren_room)"
+      ],
+      "canvases": [
+        "[player.core_traits] fighting=0 + stealth=0 (1_metadata)",
+        "activity_train at wren_room: Combat/Stealth drills, per-choice costs energy 15 (gates+deducts), +120 min, soft cap +3<30 / +1 30-50, result prose tiers by trait",
+        "HELD per LO (don't implement #4 yet): the sidebar bars + the Facility-guard reader + the stealth-drill unlock-on-catch (dead-meter rule -> bars + reader must land together, next piece)",
+        "merge OK + package ALL FLAG CHAINS VALID; artifact-verified: traits declared, costs/time/+3/+1 gains wired, NO bars surfaced"
+      ]
+    },
+    {
+      "id": "beat_0017",
+      "status": "validated",
+      "target_phase": "3",
+      "title": "The Burned Yard — the Trail crawl (stealth/fight depth) + the arousal weapon + bars go live",
+      "introduces": [
+        "new location renner_burned_yard (Cain's revenge burning; Renner's guards, narrative not NPCs)",
+        "the depth-crawl (yard_depth) + the arousal weapon (found broken -> repaired)",
+        "Fighting/Stealth bars surfaced (now read)"
+      ],
+      "canvases": [
+        "renner_burned_yard location built whole (def/lock renner_hired/blocked_message/nav order) — 1_metadata",
+        "yard_crawl host + guard1/2/3 (stealth>=S slip / fighting>=F fight / weapon / run->flee; S,F=10/25/40) + deeper + flee nodes; per-push costs energy 15 + time; first catch sets yard_caught_once",
+        "yard_find_1/2/3 auto-fires by depth (clue / broken arousal weapon / two dead men + underworld_known + memory flicker)",
+        "activity_repair_weapon at wren_room (weapon_repair 0->3, final sets arousal_weapon_ready)",
+        "re-added stealth-drill unlock gate (yard_caught_once) to activity_train; surfaced fighting/stealth trait_bars (0_systems) + hid raw dump; declared yard_depth/weapon_repair traits",
+        "Trail quest card (5_scenes): goal yard_depth>=3, flips to payoff at depth 3",
+        "merge OK + package ALL FLAG CHAINS VALID 0 failures; artifact-verified"
+      ]
+    },
+    {
+      "id": "beat_0018",
+      "status": "validated",
+      "target_phase": "3",
+      "title": "The Underworld — the dark city, a coin economy, her second life",
+      "introduces": [
+        "5 new locations (underworld gate/strip/brothel/pit/market) + re-parent the_site as the deep end",
+        "underworld coin currency (earn brothel/pit, spend gate-toll/market)",
+        "the second-life sandbox: sex-work + fight-for-coin earns, black-market spends"
+      ],
+      "canvases": [
+        "5 underworld locations built whole (1_metadata); the_site re-parented entry_from underworld_strip; waterfront nav the_site->underworld_gate; declared coin trait",
+        "underworld_gate_check: clear the guard every visit (pay coin 5 / fight>=15 / weapon; NO stealth) -> routes to the floating strip; turn back -> waterfront",
+        "underworld_strip_hub: flavor + the way back up (the strip is root-reached-only-via-the-gate)",
+        "underworld_brothel_work: sex work -> +10 coin (costs 15 Charge + 120 min)",
+        "underworld_pit_fight: Fighting stat-check bouts (>=10 -> +8 / >=30 -> +20 coin); the earn payoff for Fighting",
+        "underworld_market_shop: weapon buy (coin 40 -> +5 fighting) / gear buy (coin 30 -> +5 stealth) + the humans pen (witness/awakening, no buy)",
+        "coin surfaced (0_systems trait_bar max 300, raw hidden)",
+        "merge OK + package ALL FLAG CHAINS VALID 0 failures; artifact-verified (5 locs, coin earn/spend, market buys, gate gating, the_site re-parented)"
+      ]
+    },
+    {
+      "id": "beat_0019",
+      "status": "validated",
+      "target_phase": "3",
+      "title": "Reset & reload — hygiene (cleanup after sex) + drain reload + arousal reload (3 separate systems)",
+      "introduces": [
+        "hygiene revived as 'Condition' (drops after sex, washed, gates public/cover)",
+        "drain_charge + arousal_charge (weapon reloads via the cradle)",
+        "the cradle split: Charge up (reload) vs Power down (sleep)"
+      ],
+      "canvases": [
+        "declared drain_charge=1 + arousal_charge=0 (1_metadata); un-hid hygiene -> 'Condition' + trait_status_text bands (Clean/Used/Filthy) (0_systems); hid the 2 charges",
+        "Wash beat (activity_wash, wren_room): hygiene->100, 30 min; hygiene -30 on the 4 sex sites (cap drain / loop entry / blowjob capstone / brothel client)",
+        "travel-out gate: activity_travel_to_reach restructured to a locked-visible choice gated hygiene>=40 (-> riding node carries time/energy)",
+        "cradle SPLIT: Power down (sleep, +day) + NEW Charge up (no day, 120min) -- both reload drain_charge=1/arousal_charge=3",
+        "drain reload: cap 'Use them' spends drain_charge->0; loop 'Take the keys' gated drain_charge>=1 + spends + a no-drain fallback 'Let it go' when spent (disjoint, no soft-lock)",
+        "arousal reload: repair-final sets arousal_charge=3; yard guard 'Use the weapon' gated arousal_charge>=1 + effects -1; underworld gate 'Put the weapon' via costs arousal_charge 1",
+        "merge OK + package ALL FLAG CHAINS VALID 0 failures; artifact-verified"
+      ]
+    },
+    {
+      "id": "beat_0020",
+      "status": "validated",
+      "target_phase": "3",
+      "title": "Arousal weapon = fuck -> pass-out scene (+ hygiene drop) -- content-depth issue #3",
+      "introduces": [
+        "the arousal weapon's USE is now a real beat (arouse -> fuck -> non-lethal pass-out), not a one-line bypass",
+        "using it drops hygiene (it's sex)"
+      ],
+      "canvases": [
+        "yard_crawl.weapon_scene (NEW node): the fuck->pass-out beat, video + prose, exits renner_burned_yard (time 120); the 3 yard 'Use the weapon' choices re-pointed deeper->weapon_scene + hygiene -30 added",
+        "underworld_gate_check.weapon_scene (NEW node): the doorman fuck->pass-out, exits underworld_strip (time 60); the gate 'Put the weapon' choice re-pointed location->node + effects hygiene -30 (keeps costs arousal_charge 1)",
+        "non-lethal (passes out, recovers -> the fixture gate guard is there next visit; no body/flag); area-emitter prose reads for one or many; reused scene (charge-gated)",
+        "merge OK + package ALL FLAG CHAINS VALID 0 failures; artifact-verified (4 choices -> weapon_scene, hygiene -30 x4 new, scenes present, charges still spent)"
+      ]
     }
   ],
   "structure_registry": {
@@ -520,6 +613,36 @@
         "id": "renner_depot",
         "category": "reachable",
         "note": "Renner's gutted equipment depot (The Reach) — Mission 1 work hub: work floor (Lane 3) + his office (seduction spine); NEW, added at Renner design (full def/schedule at build)"
+      },
+      {
+        "id": "renner_burned_yard",
+        "category": "locked",
+        "note": "the Trail crawl site (Cain's REVENGE burning, NOT the Facility) — Renner's torched yard; locked on renner_hired; guarded by narrative (non-NPC) guards; the depth-crawl + finds + broken arousal weapon (beat_0017)"
+      },
+      {
+        "id": "underworld_gate",
+        "category": "reachable",
+        "note": "underworld entry off the_waterfront (gated opening_done); the guard cleared EVERY visit (pay coin / fight>=15 / weapon; NO stealth); narrative guard, not an NPC (beat_0018)"
+      },
+      {
+        "id": "underworld_strip",
+        "category": "reachable",
+        "note": "underworld hub — ROOT location, reached ONLY via the gate canvas exit (guard unavoidable); children = brothel/pit/market/the_site; the 'second life' (beat_0018)"
+      },
+      {
+        "id": "underworld_brothel",
+        "category": "reachable",
+        "note": "sex-work earn loop -> +coin (beat_0018)"
+      },
+      {
+        "id": "underworld_pit",
+        "category": "reachable",
+        "note": "fight-for-coin (Fighting stat-check, tiered purse) -> +coin; the earn payoff for Fighting (beat_0018)"
+      },
+      {
+        "id": "underworld_market",
+        "category": "reachable",
+        "note": "black market — coin SINK: weapon (+fighting)/gear (+stealth) buys + the humans pen (witness/awakening, no buy) (beat_0018)"
       }
     ],
     "npcs": [
@@ -594,7 +717,14 @@
         "status": "cast — name placeholder; add/cut fork pending"
       }
     ],
-    "flags": [],
+    "flags": [
+      { "key": "yard_caught_once", "set_by": "yard_crawl caught choices (guard1/2/3)", "gates": "activity_train stealth-drill unlock" },
+      { "key": "has_arousal_weapon", "set_by": "yard_find_2 (depth>=2)", "gates": "activity_repair_weapon" },
+      { "key": "arousal_weapon_ready", "set_by": "activity_repair_weapon final session", "gates": "yard_crawl 'use the weapon' option" },
+      { "key": "yard_clue_seen", "set_by": "yard_find_1 (depth>=1)", "gates": "self-guard only" },
+      { "key": "found_dead_men", "set_by": "yard_find_3 (depth>=3)", "gates": "Trail quest card ready_text" },
+      { "key": "underworld_known", "set_by": "yard_find_3 (depth>=3)", "gates": "frontier seed -> underworld (deferred)" }
+    ],
     "schedules": [],
     "clothing": {
       "enabled": true,
@@ -916,6 +1046,46 @@
       "turn": 43,
       "book_revision": 24,
       "note": "QUEST GOAL LABELS now name the trait (LO call, Option A: TOML-only label edit). The v2 goal renderer prints label||trait (v2.py:13996), so an author label hid the trait name; baked the raw trait key into the two Renner trait-goals (5_scenes.toml:1406-1407): 'Earn the office' -> 'Earn the office (relation)', 'Break him to the drain' -> 'Break him to the drain (corruption)'. Renders '(c) Earn the office (relation) -- 7 / 15' on the Quests page AND the sidebar npc_panel 'next' row (shared renderQuestsGoalBlock). Frontier-seed card's goal is flag-based (the_site_open) -- no trait, left as-is. Chose A (Vesper-only, zero engine) over B (engine-wide renderer auto-append, all v2 games) per LO. Re-merged + re-packaged (build green, ALL FLAG CHAINS VALID, 0 failures). Artifact-verified: both new labels present in output/index.html, bare labels gone. No commit/push (not requested)."
+    },
+    {
+      "turn": 44,
+      "book_revision": 24,
+      "note": "DRAIN REPEAT -> CHOICE, not forced replay (LO call, Option 2B). Bug: the drain payload renner_control_canvas.intro (the 4-question lead extraction) was reached from BOTH the first-anal capstone (once) AND the office-loop's anal finish (every time), so every repeat anal finish replayed the identical interrogation -- and re-asked leads already extracted (renner_leads_extracted). Fix is route-based (renner_leads_extracted can't distinguish first/repeat -- the cap sets it on entry): cap still -> .intro (full extraction, UNCHANGED); the loop finisher's 'Take the keys' choice (5_scenes.toml) re-pointed .intro -> .again (kept its finisher_type==2 condition + the 5 loop-trait resets). Added 2 nodes to renner_control_canvas: 'again' (menu: 'Ask him again.' -> .again_ask / 'Just leave him.' -> renner_depot) + 'again_ask' (trimmed re-ask, flavor B: same names Bastien/Calloway, nothing new, no re-dump of the one-time revelations). Also reworded the loop ass-finisher group line (was 'this time she feels it start' -- first-time framing that only ever showed on repeats). Root cause = one-off authoring miss (a once-only plot payload wired into a reusable slot); engine innocent. Re-merged + re-packaged (validation OK, ALL FLAG CHAINS VALID, 0 failures). Artifact-verified: routing cap->intro / loop->again / menu->again_ask; new choices+prose present; old first-time line gone; first extraction intact. The '2' grep counts = real passage + dev-mode CanvasReview page (benign). No commit/push (not requested)."
+    },
+    {
+      "turn": 45,
+      "book_revision": 24,
+      "note": "QUESTS END-OF-CONTENT CARD: kill 'Act-2' + the fake objective (LO call, Option B). After the drain, the Quests page swaps to the frontier-seed card (5_scenes.toml ~:1446-1456) -- the 'nothing left to progress' screen. Two defects: (1) 'Bastien and Calloway are Act-2 work' = dev structure language leaked into a player tip (the ONLY player-facing 'Act-2' in the game; grep-confirmed -- other chunk/frontier hits are authoring description fields that never render); (2) it dangled a live 'To advance: Find where Cain went (locked)' bullet whose goal (the_site_open) never flips in this build, reading as a fake objective forever. Fix: removed the goals array + the dead ready_text ('The way to the Site is open.'); reworded text -> 'Renner's trail is logged -- Bastien on the docks, Calloway inside Vance. The hunt picks up from here in a future update.' and tip -> 'You've reached the end of the current build. More of the hunt is coming.' (kept the two earned lead names so the drain still pays off; NOT 'Act 2', NOT a 'Arc complete' badge per LO). Engine renders a goal-less + ready_text-less + non-terminal card as flavor+tip only (renderQuestsGoalBlock returns '' -- v2.py:13961). Kept priority=9 + the when gate (renner_leads_extracted && !the_site_open). Spine card untouched. Root cause = one-off authoring miss; engine innocent (it has a terminal frame for exactly this). Re-merged + re-packaged (validation OK, ALL FLAG CHAINS VALID, 0 failures). Artifact-verified in output/index.html: 'Act-2'=0, old goal label 'Find where Cain went'=0, dead ready_text=0, new flavor=1, new tip=1 (count 1 not 2 -- quest cards serialize once, no CanvasReview duplicate). No commit/push (not requested); held media untouched."
+    },
+    {
+      "turn": 46,
+      "book_revision": 25,
+      "note": "RENNER GRIND RETUNE -- cost the rungs (A) + x2.5 threshold ladder (B). LO: breaking Renner felt too easy -- the 3 seduction rungs (Tease/Flash/Grope) were FREE + INSTANT (no Charge, no time) and the bar was low (relation 15 / corruption 20 with +2/+3 increments ~= 5 + ~10 clicks); removing the daily cap (turn 41) had stripped the last throttle. Fix has TWO genuinely-new mechanics + renumbering. NEW BEHAVIOR (6 lines): each rung now costs (i) 180 min via time_progression_minutes on its canvas exit (rung_renner_tease/flash/grope, the return-to-depot exits) -- THE load-bearing change: hub_depot_floor is schedule-gated 09:00-18:00 (540 min), so ~3 rungs fill the day -> office closes (schedule fails on re-entry), a diegetic cap not a counter; (ii) -15 Charge (energy) added beside the corruption+2 on each rung's hub choice. RENUMBERING (math only): every Renner CORRUPTION threshold x2.5 (4->10, 8->20, 12->30, 16->40, 20->50) across 25 comparison sites in 5_scenes.toml (rung unlock gates, walk-in substitution+reaction bands, Anchor witness ambient tiers, cheerup floor, blowjob/loop/drain gates) -- done via scoped perl on trait_key=\"corruption\" lines (descending order to avoid chaining; the +2/+3 ADD effects use trait= not trait_key= so untouched). Relation gate 15->21 (NOT x2.5 -- single repeated work-floor paragraph, 12 identical shifts = tedium; held modest per LO). Increments UNCHANGED (rungs +2, work-floor relation +3, morning-after +3) so click-count scales with the bar. UI/targets realigned: npc_panel corruption_max_value 20->50 (0_systems_spec); quest goals relation 15->21 + corruption 20->50 (5_scenes :1446-47). Resulting ladder: flash 10/grope 20/blowjob 30/loop 40/drain 50; ~14 rung-clicks ~5 office-days + ~7 work-shifts ~2 days ~= ~7-10 in-game-day campaign. NO new prose (deferred per LO's 'for now' -- the 3 rungs x 2 reaction bands will repeat across the longer climb; deepen later if thin). Stale authoring docs refreshed (comments/descriptions citing old band numbers x2.5'd; tease 'daily-cap' note -> Charge+time). design_book economy paragraphs + scene table note + header (rev 23->25) updated. Build: merge validation OK, ALL FLAG CHAINS VALID 0 failures (the 'Take him'/'Serve him' dict-vs-int warnings are PRE-EXISTING loop-canvas warnings, not from this change). Artifact-verified in output/index.html: drain corruption gte 50, office relation gte 21, gauge corruption_max_value 50 (old 20=0), quest goals value 21/50, energy -15 x4 (3 rungs + work-floor), time 180 present, old loop gate gte 16 = 0 -> gte 40 present. No commit/push; held media batch untouched. Open: live-play (RESTART not load) to confirm the ~3-rung office close + watch repetition feel."
+    },
+    {
+      "turn": 47,
+      "book_revision": 26,
+      "note": "DAY-DEPTH PIECE 1: Training activity + Fighting/Stealth traits (author-game skill, Step-7 beat_0016). LO direction: add things to DO per day besides the Renner grind; first piece = a self-feeder that builds two capability traits. Implemented PER THE SKILL: (a) fighting + stealth declared as Tier-3 CUSTOM traits in [player.core_traits] (1_metadata) -- not engine built-ins, gated by the ordinary trait predicate; (b) activity_train canvas at wren_room (3_activities): base node -> two choices 'Combat drill'(+fighting)/'Stealth drill'(+stealth), each band-gated soft cap (+3 while <30, +1 while 30-50, capped 50), Charge spend via per-choice `costs=[{trait=energy,value=15}]` (the SKILL way -- gates+deducts; unaffordable choice hides; v2.py:4068/4231 + test_v2_choice_costs_wired confirm the shape), 120 min via time_progression on each result node's exit, result prose tiers by trait (clumsy->sharp / fumbling->ghost) = feedback. The WANT (not 'raise a meter'): she drills the body the company built, past her file -- the one thing that's hers. LO MID-IMPLEMENTATION CALL: 'DONT IMPLEMENT THE 4TH YET' -> the planned light first-use (a guard check on inv_facility_explore that READS the traits) is DEFERRED. Consequence handled per the dead-meter rule: (1) sidebar bars for fighting/stealth NOT surfaced (a bar nothing reads = the loudest dead-meter); (2) the stealth-drill unlock-on-first-catch gate dropped for now (its setter facility_caught_once lives in #4 -> would fail flag-chain), so BOTH drills are available from the start; both re-add when #4 lands. So fighting/stealth currently climb + read nothing until the Facility use -- a deliberate transient, feedback carried by the drill prose meanwhile. Build: merge OK; package ALL FLAG CHAINS VALID 0 failures (Take him/Serve him dict-vs-int = pre-existing). Artifact-verified output/index.html: fighting:0/stealth:0 declared; Combat/Stealth drill choices present; per-choice costs energy 15 wired; time 120; gains serialize as applyAndNotifyTrait('player',null,'fighting'/'stealth','add',3/1); band gates 25/30/50 present; NO trait_bar for fighting/stealth (bars correctly held). Files: 1_metadata, 3_activities, design_book (rev 25->26), this ledger. No commit/push; held media untouched. NEXT (was #4): the Facility-guard first-use that reads both traits + surfaces the bars + restores the stealth unlock-on-catch."
+    },
+    {
+      "turn": 48,
+      "book_revision": 27,
+      "note": "DAY-DEPTH PIECE 2: The Burned Yard — the Trail crawl + the arousal weapon + bars go live (author-game skill, Step-7 beat_0017). The deferred reader for piece-1's Fighting/Stealth. LO calls: NEW location (Cain's REVENGE burning, distinct from The Facility) · Renner's guards · guard is NARRATIVE not an NPC (the encounter resolves on HER stealth/fighting; inv_facility_explore proves canvases run NPC-free) · real depth meter · multi-session repair · fight = a stat CHECK (a conditions branch on fighting, the proven trait-check pattern) · lost/can't-win fight = run away. BUILT: (A) renner_burned_yard built WHOLE (1_metadata) — def + entry_from the_waterfront + nav order + lock (entry_conditions renner_hired is_true, version=1.0) + blocked_message. (B) yard_crawl host (3_activities) at the yard: base 'Push deeper' (band-gated by yard_depth, costs energy 15) -> guard1/2/3 (S=F = 10/25/40): Slip [stealth>=S] / Take-down [stealth<S, fighting>=F] / Use-weapon [stealth<S, arousal_weapon_ready] -> deeper node (+yard_depth 1, time 120, return -> find auto-fires); or Run [stealth<S] -> flee node (the_waterfront, time 60, no depth). Caught choices set yard_caught_once. (C) finds yard_find_1/2/3 (priority 9, one-shot, auto-fire on yard entry by yard_depth tier): clue (yard_clue_seen) / broken arousal weapon (has_arousal_weapon) / two dead men + underworld_known + a memory flicker (found_dead_men; the awakening + frontier seed). (D) activity_repair_weapon at wren_room (gated has_arousal_weapon + !arousal_weapon_ready): weapon_repair 0->3 (costs energy 15 + time/session), final session sets arousal_weapon_ready -> the weapon becomes the crawl's 'use the weapon' option. (E) bars go LIVE: surfaced fighting/stealth trait_bars (max 50, banded) in 0_systems (now that the yard READS them -> dead-meter rule satisfied) + hid their raw auto-dump; declared yard_depth/weapon_repair (hidden); re-added the stealth-drill unlock gate (yard_caught_once) to activity_train. (F) Trail quest card (5_scenes): Story Goal, goal yard_depth>=3, flips to payoff ready_text at depth 3. Spend via `costs` (per skill), gains/time via effects. NOT a wall: doable at 0/0 (caught -> run; first catch unlocks stealth drill). Build: merge OK; package ALL FLAG CHAINS VALID 0 failures (every new flag has a reachable setter; Take him/Serve him dict-vs-int = pre-existing). Artifact-verified output/index.html: renner_burned_yard + nav; crawl reads stealth/fighting at 10/25/40; trait_bars fighting/stealth present (max 50, hidden raw); yard_depth +1 x9, weapon_repair +1 x2 (applyAndNotifyTrait); all 6 new flags have setters. Registered in structure_registry (location + 6 flags). design_book rev 26->27. Files: 1_metadata, 3_activities, 0_systems, 5_scenes, this ledger, design_book. No commit/push; held media untouched. Media TODO: locations/renner_burned_yard.jpg + activities/arousal_weapon.jpg (search_queries in place). NEXT options: live-play the crawl; the case board; Mercer beats; or the underworld (M2)."
+    },
+    {
+      "turn": 49,
+      "book_revision": 28,
+      "note": "DAY-DEPTH PIECE 3: The Underworld — the dark city + a coin economy + her second life (author-game skill, Step-7 beat_0018). The destination the whole hunt points to. LO's settled calls: underworld ALWAYS available · clear the guard EVERY visit (pay coin / fight / weapon; NO stealth) · coin = a real currency · whore house = earn coin (sex work) · fighting pit = earn coin (Fighting) · black market sells weapons/gear/humans · humans = a witness/awakening beat (no buy) · no bar/bartender, no don's turf (deferred). BUILT: (A) 5 new locations built whole (1_metadata): underworld_gate (off the_waterfront, gated opening_done), underworld_strip (ROOT location reached ONLY via the gate canvas -> guard unbypassable), underworld_brothel/pit/market (entry_from strip). Re-parented the_site -> entry_from underworld_strip (the locked deep end = where Cain is); waterfront nav the_site -> underworld_gate; strip nav = brothel/pit/market/the_site. (B) underworld_gate_check (3_activities): the guard every visit -> Pay the toll (costs coin 5) / Force past (fighting>=15) / Put the weapon on him (arousal_weapon_ready) -> route to strip; Turn back -> waterfront. NO stealth. Narrative guard. Chicken-egg handled: no coin early -> fight/weapon in. (C) underworld_strip_hub: flavor + leave-route to waterfront. (D) underworld_brothel_work: take a client -> explicit sex scene -> +10 coin, costs 15 Charge + 120 min. (E) underworld_pit_fight: tiered Fighting stat-check bouts (>=10 -> +8 / >=30 -> +20 coin), costs Charge + 120 min; deterministic, only winnable bouts show (the earn payoff for Fighting). (F) underworld_market_shop: coin SINK -- weapon (costs coin 40 -> +5 fighting), gear (costs coin 30 -> +5 stealth) + the humans pen (witness/awakening: she sees one like her caged, recognition she shuts off -- no buy/flag, dark texture). (G) coin declared + surfaced (0_systems trait_bar max 300, raw hidden). COIN ECONOMY (no dead meter): sources = brothel + pit; sinks = gate toll + market. FIGHTING fully looped: drill (home) -> use (yard/gate) -> EARN (pit) -> BUY-INTO (market). Spend via costs, gains/time via effects (per skill). Build: merge OK; package ALL FLAG CHAINS VALID 0 failures (floating strip built clean -- no unreachable error; Take him/Serve him = pre-existing). Artifact-verified: 5 underworld locations; coin trait_bar (max 300); coin +10/+8/+20 earn, costs 5/30/40 spend; market +5 fighting/+5 stealth; gate fighting>=15 + arousal_weapon_ready (no stealth); the_site entry_from underworld_strip + still locked; waterfront nav updated. Registered 5 locations. design_book rev 27->28. Files: 1_metadata, 0_systems, 3_activities, ledger, design_book. No commit/push; held media untouched. Media TODO: locations/underworld_gate.jpg, underworld_strip.jpg, underworld_market.jpg + sex/brothel_client.webm (queries in place). DEFERRED (M2/telegraphed): Cain, the don (weekend/back-office seed), deep services, buying-and-using humans, deeper coin sinks, the case board, Mercer beats."
+    },
+    {
+      "turn": 50,
+      "book_revision": 29,
+      "note": "RESET & RELOAD: hygiene (cleanup after sex) + drain reload + arousal reload (author-game skill, Step-7 beat_0019). LO was emphatic these are THREE SEPARATE systems (hygiene != weapon reload; even the drain is a RELOAD not cleanup). Settled: hygiene gates public/cover ONLY (not the rungs); cradle splits into Charge up (reload) vs Power down (sleep) -- LO's 'B'; drain = 1 shot, arousal = 3 shots; weapon reloads ride the cradle (Charge up + Power down). BUILT: (1) HYGIENE -- revived the dormant engine trait as 'Condition' (un-hid; trait_status_text bands Clean/Used/Filthy, 0_systems); drops -30 on the 4 major sex sites (cap drain 'Use them' / loop entry 'Take him in the office' / blowjob capstone / brothel client); restored by a NEW Wash beat (activity_wash @ wren_room, hygiene->100, 30min); GATE = public/cover only via activity_travel_to_reach restructured to a locked-visible choice (hygiene>=40, show_when_locked + locked_text 'wash up first', routing to a 'riding' node that carries the 30min/-10 energy). The maintenance treadmill (wash before each outing); rungs untouched. (2) CRADLE SPLIT (3_activities): Power down (sleep, +540min/day) + NEW Charge up (no day advance, 120min) -- BOTH refill energy + reload weapons (drain_charge set 1, arousal_charge set 3). Charge up = mid-day top-up; time stays the throttle. (3) DRAIN RELOAD (drain_charge, new trait start 1): the first-drain cap 'Use them' spends it (set 0, + hygiene -30); the loop repeat 'Take the keys' gated drain_charge>=1 + spends (set 0), with a disjoint no-drain fallback 'Let it go -- you're drained' (drain_charge<1) so the anal finish never soft-locks. (4) AROUSAL RELOAD (arousal_charge, new trait start 0): the repair-final session sets arousal_charge=3 (comes loaded); the yard guard 'Use the weapon' choices gated arousal_charge>=1 + effects -1 (node-routed); the underworld gate 'Put the weapon on him' via `costs` arousal_charge=1 (location-routed). Out of charges -> the weapon option hides (fall back to fight/stealth/coin). Idiom note: yard uses conditions+effects (node choices), gate uses costs (location choice) -- both gate+spend; forced by routing. Lean guard honored: only the 2 weapons + the once-per-outing wash add friction; rungs/brothel/pit untouched. Build: merge OK; package ALL FLAG CHAINS VALID 0 failures (Take him/Serve him = pre-existing). Artifact-verified: Condition bands; hygiene -30 x4; wash +100; travel gated hygiene>=40 + 'Wash up first'; Power down + Charge up both reload (drain 1/arousal 3); drain set 0 x2 (cap+loop); 'Let it go' fallback; arousal -1 (yard) + costs 1 (gate); repair sets arousal_charge=3; both charges declared in core_traits. design_book rev 28->29. Files: 1_metadata, 0_systems, 3_activities, 5_scenes, ledger, design_book. No commit/push; held media untouched. Media TODO: none new (reused beats). NEXT: live-play the reset loops; or Mercer beats / the case board / M2."
+    },
+    {
+      "turn": 51,
+      "book_revision": 30,
+      "note": "CONTENT-DEPTH ISSUE #3: arousal weapon = a real fuck->pass-out scene + hygiene drop (Step-7 beat_0020). Found in the content-depth audit (LO: issue.md only had what he remembered; this + the Awakening track + a stealth/theft earner were the brainstormed-not-built items). LO's call on #3: the arousal weapon's use is now arouse -> fuck -> he PASSES OUT (non-lethal -- LO dropped the kill; 'the guy just passes out for a while'), so the recurring gate doorman recovers and is there next visit (no fixture/body problem). It's sex -> drops hygiene. BUILT (all 3_activities): (a) yard_crawl.weapon_scene -- NEW shared node, the fuck->pass-out beat (video sex/arousal_weapon_use.webm + prose; area-emitter so reads for one or many), exits renner_burned_yard time 120; the 3 yard 'Use the weapon' choices re-pointed yard_crawl.deeper -> yard_crawl.weapon_scene + hygiene -30 added to their effects (kept yard_depth+1 / arousal_charge-1 / yard_caught_once). (b) underworld_gate_check.weapon_scene -- NEW node (the doorman), exits underworld_strip time 60; the gate 'Put the weapon on him' choice re-pointed targetType location->node + effects hygiene -30 added (kept conditions arousal_weapon_ready + costs arousal_charge 1). Non-lethal (no body, no flag, no consequence system -- kill-consequences/heat DEFERRED). Reused scene (charge-gated, not spammed). The 3 approaches now distinct: stealth=unseen/no-trace, fighting=beat them, weapon=fuck them unconscious (the seduce-past path when she can't fight/sneak). Build: merge OK; package ALL FLAG CHAINS VALID 0 failures (no broken refs -> the re-pointed choices resolve; Take him/Serve him pre-existing). Artifact-verified: all 4 weapon choices -> *.weapon_scene (none still -> deeper/strip); hygiene -30 now x8 total (4 sex sites + 4 weapon sites); 'thumbs the emitter' x4 (both scenes); arousal still spent (yard -1 / gate costs 1); weapon_scene exits present. design_book rev 29->30. Files: 3_activities, ledger, design_book. No commit/push; held media untouched. Media TODO: sex/arousal_weapon_use.webm (search_queries in place). REMAINING content-depth (brainstormed, not built): the AWAKENING track (seeds only -- no meter/fragments/payoff), a stealth/theft coin-earner (stealth has no earn unlike pit/brothel); plus issue.md #717 (renner quests into story goals -- needs clarification) + #719 (locked hub choices same-text+requirements) + #707 prose-depth (richer rung reaction bands)."
     }
   ]
 }

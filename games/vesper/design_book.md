@@ -4,7 +4,7 @@
 > translation of what's written here. Grown one section per pipeline step.
 >
 > Working title: **Vesper** (also the PC's buried true name — hidden in plain sight; rename freely).
-> Book revision 23 (Step 5 + authoring; the A→A.5 chunk built. Latest: the **cover / disguise** pulled from prose into a real **worn-state system** — the company *issues* the Mission-1 cover, she must wear it or the mark reacts wrong; full spec in *## The cover / disguise system*. Prior: onboarding dogfood — the opening *arms the machine* (Charge / Credits / the leash named in-fiction), every greyed rung carries a reason.)
+> Book revision 30 (Step 5 + authoring; the A→A.5 chunk built. Latest: the **arousal weapon's use is now a real beat** — arouse → fuck → he *passes out* (non-lethal) → she slips by; it's sex, so it drops Condition (see *## Reset & reload*). Prior: **reset & reload** (Condition + the two weapon reloads + Charge up); **The Underworld** (coin economy / second life); The Burned Yard; the Training activity; the Renner grind retune.)
 
 ---
 
@@ -875,10 +875,11 @@ both axes are Renner's own: **AXIS 1 — access** = `npc_renner.relation` (an od
 "good work / check in" + each work shift) earns the office; **AXIS 2 — seduction** = `npc_renner.corruption`
 (his willingness, +2 per charged rung) gates the lewd rungs; `npc_renner.arousal` is the loop
 throttle only (never gates progression). Every lewd rung double-locks on **office-open (access) + his
-corruption (the tier)**. **Pacing (Fork B): relation-fast / corruption player-paced** — noticed quickly;
-the charged rungs are freely repeatable (the once-per-day corruption cap was removed, LO's call), so the
-seduction climbs as fast as the player works it, gated only by the disjoint corruption bands. Numbers tuned
-after the first build. His voice climbs by **reaction** to the same provocation
+corruption (the tier)**. **Pacing (Fork B): relation-fast / corruption a paced campaign** — noticed quickly
+(office at `relation ≥ 21`), but the drain is a grind (`corruption ≥ 50`, the whole ladder ×2.5). Each charged
+rung **COSTS 15 Charge + 180 min**, so the 09:00–18:00 office window caps it at **~3 rungs/day** — the workday
+ends, she sleeps, recharges, returns. No daily-flag cap; the throttle is diegetic (Charge + the office clock).
+Full ladder: flash 10 / grope 20 / blowjob 30 / loop 40 / drain 50. His voice climbs by **reaction** to the same provocation
 (contempt → caught-looking → reluctant → wants her), **pinned to disjoint corruption bands on the rungs** so
 the crack is authored, not luck — the base opener stays one constant paragraph.
 
@@ -893,7 +894,7 @@ the crack is authored, not luck — the base opener stays one constant paragraph
 | 5 | **rung_renner_flash** | L1 rung | + corruption ≥ flash-tier → **SETS `renner_flirts_back`** at the band | office register |
 | 6 | **rung_renner_grope** | L1 rung | + corruption ≥ grope-tier + `renner_flirts_back` | office register |
 | 7 | **rung_renner_fuck** | L1 rung (loop entry) | + corruption ≥ sex-tier + `renner_oral_once` → **SETS `renner_fucked_once`**, resets loop traits, routes into the loop | office register |
-| 8 | **work_depot_haul** | L3 host | ungated; +credits +relation (daily-capped) + costs charge; **SETS `worked_renner_once`** on first completion (sole owner) | renner_depot |
+| 8 | **work_depot_haul** | L3 host | ungated; +relation (+3) +credits, costs charge + time (no daily cap; paced by the 09–18 window); **SETS `worked_renner_once`** on first completion (sole owner) | renner_depot |
 | 9 | **walkin_renner_depot** | L3 walk-in | substitution of #8; **rising bands 10/35/70%** on his corruption (lingers → crowds → pulls off the task) | renner_depot |
 | 10 | **amb_renner_anchor_ruin** | L2 ambient | random ~25%, requires_npc; tiered [group] on his corruption (the ruin showing) | the_anchor 19–23 |
 | 11 | **amb_renner_cheerup** | L2 ambient | `renner_office_open` + corruption floor + low chance; scaled by spine flags (tease / blow / take it) | the_anchor 19–23 |
@@ -920,8 +921,9 @@ target.
 **Flag chain (acyclic; each flag one located setter; every condition block `version="1.0"`):** `opening_done`
 → `renner_hired` (#15) → `worked_renner_once` (#8, sole owner) → `renner_office_open` (#2) →
 `renner_flirts_back` (#5) → `renner_oral_once` (#16) → `renner_fucked_once` (#7) → `renner_drained` +
-`renner_leads_extracted` + `renner_anal_once` (#17). The corruption daily cap was removed (LO's call) — the
-charged rungs are freely repeatable, so the seduction odometer is no longer throttled by a cooldown flag.
+`renner_leads_extracted` + `renner_anal_once` (#17). No corruption cooldown flag — the charged rungs are
+throttled instead by their **cost** (15 Charge + 180 min each) against the **09:00–18:00 office window**
+(~3/day), and the bar is the ×2.5 ladder (drain `corruption ≥ 50`, office `relation ≥ 21`).
 
 **Frontier (telegraphed, deferred — never silent).** The drain sets **`renner_leads_extracted`** → opens
 Bastien (`bastiens`) + Calloway (`vance_securities`); their on-ramps render greyed citing "Renner's leads"
@@ -1145,3 +1147,120 @@ shop.
 
 ---
 
+
+## Capability — Fighting & Stealth (day-depth, added during authoring)
+
+The first piece of **day-depth**: things to *do* per day besides seducing Renner. Two **capability traits**
+the player builds for herself:
+
+- **Fighting** — win a straight fight (against guards). Always available, weak at first.
+- **Stealth** — move unseen: slip past, go deeper, steal.
+
+**How she builds them — the Training activity (`activity_train`, her room).** She drills in secret —
+sharpening the body the company built, past the spec on her file; the one thing here that's only hers
+(*the want:* stop being helpless / get where she can't yet). Two drills, Combat / Stealth, **+3 a session**
+slowing to **+1** past 30 (drilling plateaus around 50; the top comes later from real use). Each drill
+**costs 15 Charge** (it gates — she can't drill when too drained) and **120 minutes**, so training competes
+with the rest of her day. The drill's prose escalates as the trait climbs (clumsy → sharp / fumbling →
+ghost) so progress reads even before the bars exist.
+
+**Now live (piece 2):** the **sidebar bars** for Fighting/Stealth and the **thing that reads them** — the
+Burned Yard guards (below) — shipped together, so the bars are honest. The Stealth drill now unlocks the
+first time she's caught at the yard.
+
+---
+
+## The Burned Yard (day-depth, piece 2 — the Trail crawl)
+
+A new locked location off the Waterfront: **Renner's own yard**, the one **Cain torched in revenge** for
+the two of Renner's people he killed (and their families). Distinct from The Facility (her origin site) —
+this one is Renner's, so **his men guard the wreck** (he's salvaging gear / burying what he did). The
+guards are **narrative, not characters** — the encounter is decided by *her* skills, not theirs.
+
+**The crawl (this is where Fighting & Stealth pay off).** She sneaks in and **pushes deeper** (a hidden
+depth meter, 0→3). Each push hits a guard, and she gets past one of three ways:
+- **Slip past** (high enough **Stealth**) — unseen,
+- **Take him down** (high enough **Fighting**) — caught, but she wins,
+- **Use the arousal weapon** (once repaired) — caught, but she walks through,
+- or **she can't, and runs** (flee — no progress, try again after training).
+
+Guards get **tougher the deeper she goes** (10 / 25 / 50-ish), so she trains up to push further. It's
+**doable untrained** — you just get caught and run — so it's a difficulty, not a wall. The first time
+she's caught unlocks the **Stealth drill** back home.
+
+**What's down there (one find per depth):**
+- shallow — a **clue** (what the yard really was: shipments to the Facility — Renner moved more than he knew);
+- mid — the **broken arousal weapon** (same tech as what's inside her), which she **repairs over a few
+  sessions** at her room until it works (then it's the "walk past a guard" option above);
+- deep — the **heart of it**: the two dead men + their families, erased, and the **thread to the
+  underworld** (the frontier seed — that's where the trail runs next; the underworld itself is deferred).
+  Standing in it, a **memory flickers** (the awakening).
+
+A **Trail quest card** tracks it (a parallel goal to the seduction): *get into the yard, work deeper.*
+
+---
+
+## The Underworld (day-depth, piece 3 — the dark city, her second life)
+
+The hidden criminal city the whole hunt points to — where Cain is. The burned yard already names it; this
+build makes it a **place she can go and live in**, with its own **money**. It's the opposite of the cradle:
+up top she's owned; down here **no one knows what she is, and her coin is her own.** (The deep end — where
+Cain actually is — stays locked: *The Site*, re-parented as the underworld's far end.)
+
+**Getting in (every visit).** A gate off the Waterfront, always there. The guard wants **coin** — but she
+can also **fight** him or **use the arousal weapon** (no sneaking past this one). First visits, with no coin,
+she forces in; once she's earning, she just pays the toll. Clearing the guard is the *only* way to the strip.
+
+**The coin economy (her second life).**
+- **Earn — two ways, her two natures:**
+  - **The House** (brothel) — she works a client → coin. The thing she's used for, sold now on *her* account.
+  - **The Pit** — she fights for a purse → coin. The **payoff for training Fighting** (drill it at home, use
+    it at the yard/gate, *earn* with it here). Tougher bouts pay more.
+- **Spend:**
+  - **The gate toll** (the clean way in),
+  - **The Black Market** — coin buys **weapons** (a fighting edge) and **gear** (a stealth edge); the coin-fast
+    alternative to drilling.
+
+**The black market also sells people.** Behind the chain, the **pens** — bodies bought and sold by weight.
+She can't buy here (deferred), but she *walks the line*, and among the merchandise is **one like her**, caged,
+watching back wrong. A recognition she shuts off before it lands — the awakening, and a seed of what Cain
+fights (the trafficking). Dark texture, not a transaction.
+
+**Frontier.** The deep underworld — the don (a weekend back-office seed), the real services, and **where Cain
+is** (The Site) — stays locked → *"you're in; the hunt runs deeper from here — more coming."*
+
+---
+
+## Reset & reload (cleanup + the two weapon reloads — three separate upkeep systems)
+
+After she uses her body/powers hard, she's spent and has to reset. **Three distinct things** (kept lean so
+it's rhythm, not chores):
+
+**1. Condition (hygiene) — cleanup after sex.** A meter that **drops when she has sex** (the drain, the
+brothel, the Renner loop). **Washed** at her room. Its one job: being **presentable to go out in cover** —
+if she's filthy she **can't ride down to the Reach** until she washes (the cover won't hold). It does **not**
+touch the seduction rungs — it's just *wash before each outing.*
+
+**2. The drain weapon reloads.** Her truth-drain holds **one shot.** Fire it (the anal-finish extraction)
+and it's **spent** — she can't drain again until she **recharges.** (If she takes him in the ass while
+spent, the act still happens; there's just nothing to take.)
+
+**3. The arousal weapon reloads.** The emitter holds **three shots.** Each time she zaps a guard it uses
+one; at empty she **recharges.** So it's a limited tool, not an infinite skeleton key.
+
+> **Firing it is a real beat (not a bypass).** Using the weapon plays out: she floods them with the field,
+> **fucks** the one in her way, and **he passes out** (non-lethal — he wakes later, no memory, so a recurring
+> guard like the gate doorman is still there next time). Because it's sex, it **drops Condition** like any
+> other. So the three ways past a guard read distinctly: **Stealth** = unseen / no trace · **Fighting** = beat
+> them down · **the weapon** = fuck them unconscious (the seduce-past path for when she can't fight or sneak).
+
+**Where the weapons recharge — the cradle, split in two:**
+- **Charge up** (new) — a couple hours on the feed line: tops up her Charge **and reloads both weapons.**
+  No day lost.
+- **Power down / sleep** — advances the day (and also reloads, as a full reset).
+
+So her home base now has three beats: **Wash** (Condition), **Charge up** (Charge + weapon reloads), and
+**Power down** (the day). The wash is also her one private, unscheduled moment — a small thread of the
+awakening.
+
+---
