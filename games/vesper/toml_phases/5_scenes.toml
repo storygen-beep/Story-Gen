@@ -482,7 +482,7 @@ effects = [
   { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "hygiene",           op = "add", value = -30 },
+  { targetType = "player", trait = "hygiene",           op = "add", value = -30, clamp = true },
 ]
 flagEffects = [
   { targetType = "player", flag = "renner_fucked_once", op = "set" },
@@ -822,7 +822,7 @@ text = "Wipe your mouth, get back to work."
 destinationType = "specific"
 locationId      = "renner_depot"
 effects = [
-  { targetType = "player", trait = "hygiene", op = "add", value = -30 },
+  { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true },
 ]
 flagEffects = [
   { targetType = "player", flag = "renner_oral_once", op = "set" },
@@ -1120,7 +1120,7 @@ nodeId     = "renner_control_canvas.intro"
 # The anal sex also drops hygiene (cleanup-after-sex).
 effects = [
   { targetType = "player", trait = "drain_charge", op = "set", value = 0 },
-  { targetType = "player", trait = "hygiene",      op = "add", value = -30 },
+  { targetType = "player", trait = "hygiene",      op = "add", value = -30, clamp = true },
 ]
 flagEffects = [
   { targetType = "player", flag = "renner_drained",         op = "set" },

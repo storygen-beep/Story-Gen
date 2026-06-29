@@ -460,6 +460,7 @@ id          = "renner_burned_yard"
 name        = "The Burned Yard"
 description = "Renner's old yard, three streets past the depot — what Cain left of it. Torched to the slab, fence down, but his men still walk it with lights, turning back anyone who comes to pick the bones. Whatever he's keeping out here, he keeps it watched."
 image       = "locations/renner_burned_yard.jpg"
+image_search_queries = ["burned yard night flashlight guard", "torched warehouse lot dark security"]
 entry_from  = "the_waterfront"
 entry_conditions = { version = "1.0", items = [
   { type = "flag", subject = "player", flag_key = "renner_hired", operator = "is_true" },
@@ -476,6 +477,7 @@ id          = "underworld_gate"
 name        = "The Underworld Gate"
 description = "A freight door under the docks that isn't on any manifest, and a man in front of it who is. Past him the city goes down instead of up — the part of the Reach the Spire pretends doesn't exist. He doesn't move for free."
 image       = "locations/underworld_gate.jpg"
+image_search_queries = ["bouncer unmarked door night", "guard freight door dark dockside"]
 entry_from  = "the_waterfront"
 entry_conditions = { version = "1.0", items = [
   { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
@@ -488,6 +490,7 @@ id               = "underworld_strip"
 name             = "The Underground"
 description      = "Down past the gate the city turns inside out — wet brick, red light, stalls selling what the Spire outlaws and bodies selling what it pretends to. Nobody here knows what she is, and nobody here owns her. For the length of a visit she's just another face with coin to make. The way back up is the gate."
 image            = "locations/underworld_strip.jpg"
+image_search_queries = ["underground night market red light crowd", "cyberpunk black market alley neon"]
 navigation_order = ["underworld_brothel", "underworld_pit", "underworld_market", "the_site"]
 
 [[locations]]
@@ -495,6 +498,7 @@ id          = "underworld_brothel"
 name        = "The House"
 description = "A working house off the strip — rooms by the hour, a madam who counts heads and coin. They'll take her on a shift; down here the thing the company uses her for is just a trade, and the coin is hers."
 image       = "locations/underworld_brothel.jpg"
+image_search_queries = ["brothel interior red light hallway", "old bordello parlor dim velvet"]
 entry_from  = "underworld_strip"
 
 [[locations]]
@@ -502,6 +506,7 @@ id          = "underworld_pit"
 name        = "The Pit"
 description = "A sunken ring under a warehouse, a crowd around it laying bets. They'll match her against whoever's standing. Win and the purse is coin; lose and you crawl out. Down here her fists earn the same as her body."
 image       = "locations/underworld_pit.jpg"
+image_search_queries = ["underground fight pit crowd betting", "sunken fighting ring warehouse spectators"]
 entry_from  = "underworld_strip"
 
 [[locations]]
@@ -509,6 +514,7 @@ id          = "underworld_market"
 name        = "The Black Market"
 description = "Stalls and back-rooms where coin buys what's off every shelf above — weapons, gear, and people, penned at the far end like the rest of the stock. She knows the look of the merchandise better than she'd like."
 image       = "locations/underworld_market.jpg"
+image_search_queries = ["black market weapons stall dim", "underground arms bazaar cages back"]
 entry_from  = "underworld_strip"
 
 # ══════════════════════════════════════════════════════════════════
@@ -1322,7 +1328,7 @@ text       = "Use the weapon on him."
 targetType = "node"
 nodeId     = "yard_crawl.weapon_scene"
 conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 10 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 } ] }
-effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30 }]
+effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
 text       = "He's on you — break and run."
@@ -1358,7 +1364,7 @@ text       = "Use the weapon on them."
 targetType = "node"
 nodeId     = "yard_crawl.weapon_scene"
 conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 25 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 } ] }
-effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30 }]
+effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
 text       = "Too many — break and run."
@@ -1394,7 +1400,7 @@ text       = "Use the weapon on them."
 targetType = "node"
 nodeId     = "yard_crawl.weapon_scene"
 conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 40 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 } ] }
-effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30 }]
+effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
 text       = "Not yet — break and run."
@@ -1668,7 +1674,7 @@ targetType = "node"
 nodeId     = "underworld_gate_check.weapon_scene"
 conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" } ] }
 costs      = [{ trait = "arousal_charge", value = 1 }]
-effects    = [{ targetType = "player", trait = "hygiene", op = "add", value = -30 }]
+effects    = [{ targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
 [[canvases.nodes.exit_block.choices]]
 text       = "Turn back."
 targetType = "location"
@@ -1758,7 +1764,7 @@ destinationType          = "specific"
 locationId               = "underworld_brothel"
 time_progression_minutes = 120
 effects = [
-  { targetType = "player", trait = "hygiene", op = "add", value = -30 },
+  { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true },
 ]
 
 # ── The Pit — fight earns coin (the payoff for Fighting); tiered purse, deterministic by skill ──
@@ -1932,7 +1938,7 @@ destinationType          = "specific"
 locationId               = "wren_room"
 time_progression_minutes = 30
 effects = [
-  { targetType = "player", trait = "hygiene", op = "add", value = 100 },
+  { targetType = "player", trait = "hygiene", op = "add", value = 100, clamp = true },
 ]
 
 # ══════════════════════════════════════════════════════════════════
@@ -2423,7 +2429,7 @@ effects = [
   { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "hygiene",           op = "add", value = -30 },
+  { targetType = "player", trait = "hygiene",           op = "add", value = -30, clamp = true },
 ]
 flagEffects = [
   { targetType = "player", flag = "renner_fucked_once", op = "set" },
@@ -2763,7 +2769,7 @@ text = "Wipe your mouth, get back to work."
 destinationType = "specific"
 locationId      = "renner_depot"
 effects = [
-  { targetType = "player", trait = "hygiene", op = "add", value = -30 },
+  { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true },
 ]
 flagEffects = [
   { targetType = "player", flag = "renner_oral_once", op = "set" },
@@ -3061,7 +3067,7 @@ nodeId     = "renner_control_canvas.intro"
 # The anal sex also drops hygiene (cleanup-after-sex).
 effects = [
   { targetType = "player", trait = "drain_charge", op = "set", value = 0 },
-  { targetType = "player", trait = "hygiene",      op = "add", value = -30 },
+  { targetType = "player", trait = "hygiene",      op = "add", value = -30, clamp = true },
 ]
 flagEffects = [
   { targetType = "player", flag = "renner_drained",         op = "set" },

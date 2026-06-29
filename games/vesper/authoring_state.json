@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 32,
+  "book_revision": 33,
   "pipeline_phase": "authoring",
   "map_design": {
     "topology": "done",
@@ -527,6 +527,22 @@
         "Cards 2 (end-of-content) + 3 (Burned Yard) UNCHANGED -- the Yard stays top-level (it's the mission's investigation thread, not Renner-the-person; LO's judgment call). 0_systems_spec npc_panel UNCHANGED (already wired; lights up for free).",
         "ENGINE VERIFIED read-only (wf_1cec146f-d22 adversarial + 2 Explore): when supports meter gates (gte/lte/gt/lt/eq) not just flags (template_import.py:848-864, v2.py:13875-13902); both when+goals use checkQuestsCondition; no-npc_id->Story Goals, npc_id->NPC section (v2.py:13807/13832); quests_engine='v2' confirmed (0_systems:18). Safe render contract used: goals=meter bullets, when=flag/meter gates (the only paths existing cards use).",
         "DIAGNOSIS: one-off TOML drift, NOT a skill gap -- the author-game skill teaches the two-tier split correctly (beat-authoring.md:312/308-328, step-2-toplevel.md:122-131). No skill edit. Closes issue.md:719 'separate writing renner quests into story goals' (memory's '#717' is actually line 719)."
+      ]
+    },
+    {
+      "id": "beat_0023",
+      "status": "validated",
+      "target_phase": "3/5",
+      "title": "BUGFIX: Condition (hygiene) over-capped/went-negative -> bound it [0,100] (the Charge-bug twin the content-depth audit caught)",
+      "introduces": [
+        "Condition (hygiene) is now bounded [0,100] like Charge -- the sidebar card no longer vanishes off either end",
+        "Wash caps at 100; the 8 sex/weapon-scene drops floor at 0"
+      ],
+      "canvases": [
+        "ROOT CAUSE (audit wf_b7b691be-1b7, adversarially verified): the same clamp class as beat_0021 (energy), left open for hygiene. effects emit clamp=false by default (v2.py:12467/12475) + applyTraitEffect floors only when clampFlag true (v2.py:5305); the Condition card bands cover only 0-39/40-74/75-100 (0_systems:62-66), so any value <0 or >100 matches NO band -> the card silently disappears (the same disappearing-HUD symptom Charge had).",
+        "FIX: added clamp=true to all 9 hygiene op=add effects. 3_activities: the 3 yard 'Use the weapon' drops (447/483/519), the underworld-gate weapon_scene drop (793), the underworld_brothel_work drop (883), the Wash RESTORE +100 (1057). 5_scenes: the drain-cap (485), loop-entry (825), anal-capstone (1123) drops. Mirrors the energy clamp idiom (3_activities:127/161). Hygiene is a side-effect not a spend -> clamp on effects, NOT a costs conversion; the travel-out gate (hygiene gte 40, 3_activities:35) is unchanged.",
+        "BUILD: merge OK; package ALL FLAG CHAINS VALID 0 failures; production (no --dev). ARTIFACT-VERIFIED on fresh index.html: 8x applyAndNotifyTrait(...hygiene...add...-30.0, true...) + 1x (...100.0, true...); ZERO hygiene add with clamp=false remaining (was 9 unclamped). Condition bounded [0,100] both ends.",
+        "SCOPE: P2 only (LO's call). P1 media deferred (find-media re-run later via existing search_queries). The arousal_charge spend-idiom inconsistency + onboarding/prose/ledger findings (P3/P4/P5) NOT done here."
       ]
     }
   ],
@@ -1156,6 +1172,11 @@
       "turn": 53,
       "book_revision": 32,
       "note": "QUESTS RESTRUCTURE (LO: 'the Quests should be story goals and then the npc level quests -- update the Quests properly'; matches his issue.md:719 'separate writing renner quests into story goals'). Read-only audit first (workflow wf_1cec146f-d22: 3 parallel investigators engine/vesper-toml/skill + adversarial verify, ALL 14 engine claims held; then 2 Explore passes for exact bytes + flag-setter order). FINDING: engine gives two tiers free, switched by one field on a [[quest_cards]] card -- no npc_id -> top 'Story Goals' section; npc_id set -> that NPC's own section (v2.py:13807/13832); pickQuestsCard returns the single highest-priority match -> per-NPC cards = a one-live-at-a-time chain. Vesper had 3 cards ALL top-level (zero NPC-tier), so Renner's steps were crammed into the top Story Goals card. LIVE BUG fixed for free: the Renner npc_panel 'next' row (0_systems:77) calls pickQuestsCard('npc_renner') (v2.py:15138) and rendered BLANK because no npc_id-tagged card existed. FIX (5_scenes beat_0014 only): (1) SPINE (Card 1, no npc_id) reframed to mission-level orientation -- dropped its 2 granular goals (relation>=21/corruption>=50) + ready_text (goal-less + ready_text => shows ready_text vacuously, evaluateGoals allMet:true with no goals v2.py:13912); kept the load-bearing 'wear the coveralls' tip. (2) ADDED Renner Stage A 'Earn the office' (npc_id=npc_renner, pri11): when renner_hired && !renner_office_open, goal relation gte 21. (3) ADDED Renner Stage B 'Break him to the drain' (npc_id=npc_renner, pri12): when renner_office_open && !renner_drained, goal corruption gte 50. Handoff rides the engine's OWN flags (NO new flags): renner_office_open auto-set at relation 21 (cap_renner_noticed), renner_drained auto-set at corruption 50 + the fuck (cap_renner_anal_drain); mutually exclusive when-gates => exactly one Renner card live + the sidebar next-row mirrors it. Cards 2 (end-of-content) + 3 (Burned Yard) UNCHANGED -- Yard stays top-level (mission's investigation thread, not Renner-the-person; LO's call). 0_systems npc_panel UNCHANGED (lights up for free). ENGINE VERIFIED read-only: when supports meter gates gte/lte/gt/lt/eq (template_import.py:848-864, v2.py:13875-13902); quests_engine='v2' (0_systems:18). Safe render contract: goals=meter bullets, when=flag/meter gates. DIAGNOSIS: one-off TOML drift, NOT a skill gap -- skill teaches the split correctly (beat-authoring.md:312/308-328, step-2-toplevel.md:122-131) -> NO skill edit. book rev 31->32. Files: 5_scenes, ledger, design_book. No commit/push; held media untouched. (Verification: merge --validate + package_from_toml + artifact grep on fresh index.html -- pending in this turn.)"
+    },
+    {
+      "turn": 54,
+      "book_revision": 33,
+      "note": "BUGFIX -- Condition (hygiene) over-capped past 100 (Wash +100) and went negative (sex drops -30), both UNCLAMPED -> the banded Condition HUD card silently vanished off either end (bands 0_systems:62-66 cover only 0-100; a value outside matches no band). This is the EXACT same clamp class as the Charge/energy fix (beat_0021) -- surfaced by the content-depth audit (workflow wf_b7b691be-1b7, 5 dimensions, adversarially verified; the wash-overcap was a MAJOR confirmed finding, the negative-drops a confirmed minor). LO triaged the audit: P1 (7 missing media files) = NOT an issue (intentionally deferred to a later find-media run via their search_queries); P2 (these two clamp bugs) = resolve first. FIX: added clamp=true to all 9 hygiene op=add effects -- 3_activities 447/483/519 (yard weapon drops), 793 (gate weapon_scene), 883 (brothel), 1057 (Wash restore +100); 5_scenes 485/825/1123 (drain-cap/loop-entry/anal-capstone drops). Mirrors the energy clamp idiom (3_activities:127/161, 2_one_shots:183). Hygiene is a side-effect, NOT a spend, so clamp on the effects is correct (NOT a costs conversion -- costs would wrongly BLOCK sex when filthy); the only hygiene GATE, the travel-out condition hygiene gte 40 (3_activities:35), is untouched. BUILD: merge OK; package ALL FLAG CHAINS VALID 0 failures; production build (no --dev/--debug). ARTIFACT-VERIFIED on fresh index.html: 8x hygiene add -30.0 clamp=true + 1x add 100.0 clamp=true; 0 hygiene add with clamp=false remaining; dev mode off (devMode/stat-control = 0). Condition now bounded [0,100] both ends -- card never vanishes. book rev 32->33. Files: 3_activities, 5_scenes, ledger, design_book. No commit/push; held media untouched. SKILL/PREVENTION note (recurring class, NOT fixed here): this is the SECOND time the unclamped-body-stat-effect bug shipped (energy=beat_0021, hygiene=now). The audit's doctrine dimension flagged it; a hard Step-6/build lint (fail when a banded body-stat appears in an op=add effect without clamp) would kill the recurrence class -- still flagged to LO, still not actioned."
     }
   ]
 }

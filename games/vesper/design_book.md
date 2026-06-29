@@ -4,7 +4,7 @@
 > translation of what's written here. Grown one section per pipeline step.
 >
 > Working title: **Vesper** (also the PC's buried true name — hidden in plain sight; rename freely).
-> Book revision 32 (Step 5 + authoring; the A→A.5 chunk built. Latest: **Quests restructured into two tiers** — the top **Story Goals** carry the mission (Mission 1 + the Burned Yard); **Renner's own section** carries his seduction as a one-card-at-a-time chain (*Earn the office* → *Break him to the drain*), which also lights the Renner sidebar panel's *next* row (see *### Quests page — two tiers*). Prior: **BUGFIX — Charge (energy) was sliding negative**; spends moved onto gated `costs`/clamp so Charge is now bounded 0–100 and the rungs/work block when too tired (travel never blocks; see *## Reset & reload*). Prior: the **arousal weapon's use is now a real beat** — arouse → fuck → he *passes out* (non-lethal) → she slips by; it's sex, so it drops Condition (see *## Reset & reload*). Prior: **reset & reload** (Condition + the two weapon reloads + Charge up); **The Underworld** (coin economy / second life); The Burned Yard; the Training activity; the Renner grind retune.)
+> Book revision 33 (Step 5 + authoring; the A→A.5 chunk built. Latest: **BUGFIX — Condition (hygiene) was over-capping past 100 (Wash) and going negative (sex drops)**, both making the banded Condition card vanish; clamped all 9 hygiene effects so Condition is bounded 0–100 like Charge (the Charge-bug twin the content-depth audit caught; see *## Reset & reload*). Prior: **Quests restructured into two tiers** — the top **Story Goals** carry the mission (Mission 1 + the Burned Yard); **Renner's own section** carries his seduction as a one-card-at-a-time chain (*Earn the office* → *Break him to the drain*), which also lights the Renner sidebar panel's *next* row (see *### Quests page — two tiers*). Prior: **BUGFIX — Charge (energy) was sliding negative**; spends moved onto gated `costs`/clamp so Charge is now bounded 0–100 and the rungs/work block when too tired (travel never blocks; see *## Reset & reload*). Prior: the **arousal weapon's use is now a real beat** — arouse → fuck → he *passes out* (non-lethal) → she slips by; it's sex, so it drops Condition (see *## Reset & reload*). Prior: **reset & reload** (Condition + the two weapon reloads + Charge up); **The Underworld** (coin economy / second life); The Burned Yard; the Training activity; the Renner grind retune.)
 
 ---
 
@@ -1242,7 +1242,9 @@ it's rhythm, not chores):
 **1. Condition (hygiene) — cleanup after sex.** A meter that **drops when she has sex** (the drain, the
 brothel, the Renner loop). **Washed** at her room. Its one job: being **presentable to go out in cover** —
 if she's filthy she **can't ride down to the Reach** until she washes (the cover won't hold). It does **not**
-touch the seduction rungs — it's just *wash before each outing.*
+touch the seduction rungs — it's just *wash before each outing.* **Bounded 0–100** like Charge: the sex/weapon
+drops floor at 0 and the Wash caps at 100 (clamped), so the Condition card never slides off a band and
+vanishes.
 
 **2. The drain weapon reloads.** Her truth-drain holds **one shot.** Fire it (the anal-finish extraction)
 and it's **spent** — she can't drain again until she **recharges.** (If she takes him in the ass while

@@ -444,7 +444,7 @@ text       = "Use the weapon on him."
 targetType = "node"
 nodeId     = "yard_crawl.weapon_scene"
 conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 10 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 } ] }
-effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30 }]
+effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
 text       = "He's on you — break and run."
@@ -480,7 +480,7 @@ text       = "Use the weapon on them."
 targetType = "node"
 nodeId     = "yard_crawl.weapon_scene"
 conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 25 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 } ] }
-effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30 }]
+effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
 text       = "Too many — break and run."
@@ -516,7 +516,7 @@ text       = "Use the weapon on them."
 targetType = "node"
 nodeId     = "yard_crawl.weapon_scene"
 conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 40 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 } ] }
-effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30 }]
+effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
 text       = "Not yet — break and run."
@@ -790,7 +790,7 @@ targetType = "node"
 nodeId     = "underworld_gate_check.weapon_scene"
 conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" } ] }
 costs      = [{ trait = "arousal_charge", value = 1 }]
-effects    = [{ targetType = "player", trait = "hygiene", op = "add", value = -30 }]
+effects    = [{ targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
 [[canvases.nodes.exit_block.choices]]
 text       = "Turn back."
 targetType = "location"
@@ -880,7 +880,7 @@ destinationType          = "specific"
 locationId               = "underworld_brothel"
 time_progression_minutes = 120
 effects = [
-  { targetType = "player", trait = "hygiene", op = "add", value = -30 },
+  { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true },
 ]
 
 # ── The Pit — fight earns coin (the payoff for Fighting); tiered purse, deterministic by skill ──
@@ -1054,5 +1054,5 @@ destinationType          = "specific"
 locationId               = "wren_room"
 time_progression_minutes = 30
 effects = [
-  { targetType = "player", trait = "hygiene", op = "add", value = 100 },
+  { targetType = "player", trait = "hygiene", op = "add", value = 100, clamp = true },
 ]
