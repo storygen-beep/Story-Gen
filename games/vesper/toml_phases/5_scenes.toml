@@ -285,7 +285,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
-    { type = "paragraph", content = "He finishes in her ass — and nothing comes. No give, no opening, no man-belonging-to-her. Just his weight and his cum and then his absence as he steps back. The same nothing as every time. She files it where she files the other things she isn't allowed to ask, and straightens up." },
+    { type = "paragraph", content = "He finishes in her ass — and nothing comes. No give, no opening, no man-belonging-to-her. Just his weight and his cum and then his absence as he steps back. The same nothing as every time. She sets it aside with the other things she isn't allowed to ask, and straightens up." },
     { type = "video", props = { file = "sex/mercer_finish_ass_t5.webm", description = "He finishes in her ass and steps back, his weight and his cum and then his absence — the same nothing as every time, no give, no opening, the immunity made concrete.", search_queries = ["window anal creampie standing behind", "man cum ass girl glass"] } },
   ] },
 ]
@@ -624,7 +624,7 @@ locationId = "the_waterfront"
 id   = "sit"
 name = "Sit with him"
 blocks = [
-  { type = "paragraph", content = "She sits. He doesn't talk and doesn't tell her to go. The bartender refills him without being asked. Somewhere in the quiet she files what she sees — the blacklist letters he doesn't hide anymore, the way his hands shake until the second drink — and lets him think it's company." },
+  { type = "paragraph", content = "She sits. He doesn't talk and doesn't tell her to go. The bartender refills him without being asked. Somewhere in the quiet she clocks what she sees — the blacklist letters he doesn't hide anymore, the way his hands shake until the second drink — and lets him think it's company." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -809,7 +809,7 @@ blocks = [
         { type = "paragraph", content = "It's the first kind thing he's said to her, and it's a lie, and they both let it be one. She takes his cock out and takes him in her mouth, and the cold boss makes a sound like something giving way under load." },
     ] },
     { advance_text = "Work him.", blocks = [
-        { type = "paragraph", content = "She works him slow, the way she's learned men like him want it — not skilled exactly, but devoted, like he's the only thing in the room worth her mouth. He finishes with his fist in her hair and the false name she's working under coming out of him broken in half. She swallows, and files the shape of what just cracked in him under progress, where she files everything." },
+        { type = "paragraph", content = "She works him slow, the way she's learned men like him want it — not skilled exactly, but devoted, like he's the only thing in the room worth her mouth. He finishes with his fist in her hair and the false name she's working under coming out of him broken in half. She swallows, and clocks the shape of what just cracked in him." },
     ] },
   ] } },
 ]
@@ -1520,7 +1520,7 @@ when = [
 
 # The Trail — the burned-yard crawl (a parallel goal to the seduction). Active once she's in Renner's
 # orbit (renner_hired); the goal tracks yard_depth (0->3). Flips to its payoff (ready_text) at depth 3,
-# where the deep find sets found_dead_men + underworld_known (the frontier seed -> the underworld, deferred).
+# where the deep find sets found_dead_men (the thread to the Underworld, which is reachable off the Waterfront).
 [[quest_cards]]
 priority   = 8
 text       = "Renner's old yard — the one Cain torched — is still watched by his men. Guarded means there's something out there worth finding. Get in past the guards and work deeper."

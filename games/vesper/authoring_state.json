@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 33,
+  "book_revision": 36,
   "pipeline_phase": "authoring",
   "map_design": {
     "topology": "done",
@@ -544,6 +544,52 @@
         "BUILD: merge OK; package ALL FLAG CHAINS VALID 0 failures; production (no --dev). ARTIFACT-VERIFIED on fresh index.html: 8x applyAndNotifyTrait(...hygiene...add...-30.0, true...) + 1x (...100.0, true...); ZERO hygiene add with clamp=false remaining (was 9 unclamped). Condition bounded [0,100] both ends.",
         "SCOPE: P2 only (LO's call). P1 media deferred (find-media re-run later via existing search_queries). The arousal_charge spend-idiom inconsistency + onboarding/prose/ledger findings (P3/P4/P5) NOT done here."
       ]
+    },
+    {
+      "id": "beat_0024",
+      "status": "validated",
+      "target_phase": "3/5",
+      "title": "PROSE PASS (content-depth audit P4): Underworld sex -> cold-but-explicit (Option B) + rationed the two interior tics",
+      "introduces": [
+        "Underworld sex now reads at the ceiling (cock/cum/tits, the act on the page) but COLD/transactional -- a declared register, the opposite of the Renner/Mercer heat",
+        "The 'files it under nothing' / 'the way she does everything' interior tics are rationed to their load-bearing beats (no longer a crutch)"
+      ],
+      "canvases": [
+        "ISSUE 2 (Option B, LO's call) -- rewrote the 3 Underworld sex paragraphs in 3_activities.toml: yard weapon_scene (:559 multi-guard), gate weapon_scene (:806 doorman), brothel client (:873). Each was vague/uncrude (zero anatomical vocab while Renner/Mercer hold the crude ceiling); now explicit (6 cock/cum/tits hits across the 3) but written COLD -- transactional, detached, 'nothing in her face', a body/weapon not a seduction. Declared the Underworld sex ceiling in design_book ## The Underworld (kink-ceilings.md: don't ship a blank ceiling).",
+        "ISSUE 1 -- rationed two interior tics (audit: tic-1 ~13x, tic-2 ~14x, several stacking). KEPT the load-bearing uses: the OPENING glitch escalation (2_one_shots:153 malfunction -> :276 fatigue/'getting full' -> :310 nothing/'getting full too' -- a crafted progression, the motif's home) + the yard dead-men awakening payoff (3_activities:661, kept 'filed under nothing', dropped the 'the way she files everything' tail) + the distinct 5_scenes:1151 ('somewhere the cradle can't reach'). FLATTENED/VARIED the routine reuses: 3_activities:188 (chip store), :320 (stealth thought), :353 ('the way she walks everything'->'slowly'), :574 ('files what it cost her'->'walks it off'), :939 (dropped 'and filing it'), :1018 (cage girl -> 'shuts it down and walks out'); 5_scenes:288 (Mercer immunity finisher -> 'sets it aside'), :627 (intel 'files'->'clocks'), :812 (Renner blowjob -> 'clocks', dropped 'where she files everything').",
+        "VERIFIED: tic-1 down from ~13 to 5 (the opening cluster + 661 + 1151); 'the way she walks everything' gone; the 3 Underworld scenes now carry crude vocab (was 0). Prose-only -- NO mechanics change. (merge + production build + artifact grep -- in this turn.)",
+        "SCOPE: P4 only. P1 media deferred; P3 onboarding + P5 ledger-drift/orphan-flag + the arousal_charge idiom + the skill build-lint NOT done here."
+      ]
+    },
+    {
+      "id": "beat_0025",
+      "status": "validated",
+      "target_phase": "3/5",
+      "title": "CLEANUP (content-depth audit P5, A+B only): removed the dead flag underworld_known + the stale 'deferred' notes",
+      "introduces": [
+        "underworld_known (set, read by nothing) removed -- the Underworld shipped reachable in beat_0018, so the unlock-seed was dead",
+        "The 'underworld is deferred' notes corrected to 'reachable' (its deep end / Cain still locked)"
+      ],
+      "canvases": [
+        "A -- removed the underworld_known SETTER (3_activities yard_find_3 exit flagEffects; kept found_dead_men which IS read by the Trail quest-card ready_text) + its mention in the yard_find_3 description; removed its entry from structure_registry.flags (6->5). No readers existed anywhere (audit-confirmed orphan), so no flag-chain break.",
+        "B -- fixed the stale 'deferred' notes contradicted by shipped beat_0018: design_book.md:1199 ('the underworld itself is deferred' -> 'reachable off the Waterfront; its deep end, where Cain is, stays locked') + the 5_scenes:1523 Trail-card comment + the 3_activities yard_find_3 description. Left the legit DEEPER-frontier deferral (Cain/The Site, design_book ~1232) untouched.",
+        "SCOPE: A+B ONLY (LO's call). NOT done: C (_active_beat stale), D (next_up stale), E (flags-registry completeness for coin/charges/condition/underworld), F (live-play of 0016-0024). Prose/mechanics otherwise unchanged.",
+        "Audit note correction: the scope-pass claim 'content-depth beats not in decisions_log' was FALSE at audit time too -- the log is complete through turn 56."
+      ]
+    },
+    {
+      "id": "beat_0026",
+      "status": "validated",
+      "target_phase": "3",
+      "title": "ONBOARDING (content-depth audit P3, minimal per LO): teach coin at the Underworld gate",
+      "introduces": [
+        "Coin is established in-fiction the first time it matters (the gate toll) as closed underworld-only scrip — earned/spent only down there, worthless up top"
+      ],
+      "canvases": [
+        "Added one sentence to the underworld_gate_check base paragraph (3_activities.toml): 'The coin he wants isn't company credits -- it's underworld scrip: earned down here, spent down here, worth nothing up top.' Teaches what coin IS at its first point of relevance (arm-at-first-relevance, onboarding.md §2.3) + gracefully explains the cold-first-visit toll (coin only exists down there -> first entry via fight/weapon).",
+        "SCOPE: P3 resolved MINIMALLY per LO. The other proposed touches (opening Condition line, opening Training line, Underworld briefing line, Underworld quest card) were DROPPED -- the sidebar already surfaces Condition/Fighting/Stealth/Coin as banded cards from frame one (onboarding.md §2.4 bare hard-gate satisfied). Arousal weapon stays taught at acquisition (yard find), not the opening.",
+        "Prose-only, no mechanics change. (merge + production build + verify in this turn.)"
+      ]
     }
   ],
   "structure_registry": {
@@ -794,11 +840,6 @@
         "key": "found_dead_men",
         "set_by": "yard_find_3 (depth>=3)",
         "gates": "Trail quest card ready_text"
-      },
-      {
-        "key": "underworld_known",
-        "set_by": "yard_find_3 (depth>=3)",
-        "gates": "frontier seed -> underworld (deferred)"
       }
     ],
     "schedules": [],
@@ -1177,6 +1218,21 @@
       "turn": 54,
       "book_revision": 33,
       "note": "BUGFIX -- Condition (hygiene) over-capped past 100 (Wash +100) and went negative (sex drops -30), both UNCLAMPED -> the banded Condition HUD card silently vanished off either end (bands 0_systems:62-66 cover only 0-100; a value outside matches no band). This is the EXACT same clamp class as the Charge/energy fix (beat_0021) -- surfaced by the content-depth audit (workflow wf_b7b691be-1b7, 5 dimensions, adversarially verified; the wash-overcap was a MAJOR confirmed finding, the negative-drops a confirmed minor). LO triaged the audit: P1 (7 missing media files) = NOT an issue (intentionally deferred to a later find-media run via their search_queries); P2 (these two clamp bugs) = resolve first. FIX: added clamp=true to all 9 hygiene op=add effects -- 3_activities 447/483/519 (yard weapon drops), 793 (gate weapon_scene), 883 (brothel), 1057 (Wash restore +100); 5_scenes 485/825/1123 (drain-cap/loop-entry/anal-capstone drops). Mirrors the energy clamp idiom (3_activities:127/161, 2_one_shots:183). Hygiene is a side-effect, NOT a spend, so clamp on the effects is correct (NOT a costs conversion -- costs would wrongly BLOCK sex when filthy); the only hygiene GATE, the travel-out condition hygiene gte 40 (3_activities:35), is untouched. BUILD: merge OK; package ALL FLAG CHAINS VALID 0 failures; production build (no --dev/--debug). ARTIFACT-VERIFIED on fresh index.html: 8x hygiene add -30.0 clamp=true + 1x add 100.0 clamp=true; 0 hygiene add with clamp=false remaining; dev mode off (devMode/stat-control = 0). Condition now bounded [0,100] both ends -- card never vanishes. book rev 32->33. Files: 3_activities, 5_scenes, ledger, design_book. No commit/push; held media untouched. SKILL/PREVENTION note (recurring class, NOT fixed here): this is the SECOND time the unclamped-body-stat-effect bug shipped (energy=beat_0021, hygiene=now). The audit's doctrine dimension flagged it; a hard Step-6/build lint (fail when a banded body-stat appears in an op=add effect without clamp) would kill the recurrence class -- still flagged to LO, still not actioned."
+    },
+    {
+      "turn": 55,
+      "book_revision": 34,
+      "note": "PROSE PASS -- content-depth audit P4 (the two adversarially-confirmed prose-quality findings; audit wf_b7b691be-1b7). LO triage: P1 media NOT an issue (deferred); P2 clamp bugs DONE (turn 54); now P4. ISSUE 2 (underworld-sex-uncrude) -- LO chose OPTION B (cold-but-explicit) after I showed A/B examples: the 3 Underworld sex paragraphs (3_activities yard weapon_scene :559, gate weapon_scene :806, brothel client :873) were vague and used ZERO crude vocab while Renner/Mercer hold the crude ceiling. Rewrote all 3 to be explicit AT the ceiling (cock/cum/tits, the act on the page -- 6 hits across the 3) but COLD: transactional, detached, 'nothing in her face', she's a body for rent / a weapon being used -- deliberately the OPPOSITE of the Renner/Mercer seduction heat. Declared that register in design_book ## The Underworld (kink-ceilings.md says don't ship a blank ceiling). ISSUE 1 (files-tic-overuse + the verifier-caught 'the way X' second tic) -- rationed, didn't delete (rts-flat-prose.md Rule 5). KEPT: the opening glitch escalation 2_one_shots:153->276->310 (malfunction->fatigue->nothing, the 'getting full' payoff -- a deliberate crafted progression, the motif's home), the yard awakening payoff 3_activities:661 ('filed under nothing'; dropped the 'the way she files everything she can't afford to keep' tail to de-stack tic-2), and the distinct 5_scenes:1151. FLATTENED/VARIED the routine reuses: 3_activities:188/320/353/574/939/1018 + 5_scenes:288/627/812 (files->clocks/sets-aside/shuts-down/walks-off; 'the way she walks everything'->'slowly'). RESULT (grep-verified): tic-1 from ~13 -> 5 load-bearing; 'the way she walks everything' = 0; the 3 underworld scenes now carry crude vocab. Prose-only, NO mechanics/flag change. BUILD: merge + production package (no --dev) -- to run + artifact-verify in this turn. book rev 33->34. Files: 3_activities, 5_scenes, design_book, ledger (2_one_shots NOT edited -- its opening tics are the KEEP set). No commit/push; held media untouched. SCOPE: P4 only; P3 onboarding + P5 ledger-drift + arousal_charge idiom + skill build-lint still open."
+    },
+    {
+      "turn": 56,
+      "book_revision": 35,
+      "note": "CLEANUP -- content-depth audit P5, A+B ONLY (LO: 'remove the dead flag and the stale notes'). A (orphan flag): underworld_known was SET at yard_find_3 (the dead-men find) but read by ZERO conditions (audit wf_b7b691be confirmed). It was authored (beat_0017) as the seed to unlock a then-deferred Underworld; beat_0018 shipped the Underworld reachable via opening_done, orphaning the seed. Removed the setter (3_activities yard_find_3 exit flagEffects -- kept found_dead_men, which IS read by the Trail quest-card ready_text) + the underworld_known mention in the yard_find_3 description + its structure_registry.flags entry (6->5 flags). No readers anywhere, so no flag-chain break. B (stale 'deferred' notes, contradicted by shipped beat_0018): fixed design_book.md:1199 ('the underworld itself is deferred' -> 'the Underworld is reachable off the Waterfront; its deep end, where Cain is, stays locked'), the 5_scenes:1523 Trail-card comment, and the 3_activities yard_find_3 description. LEFT the legit deeper-frontier deferral (Cain / The Site, design_book ~1232) -- that IS still deferred. SCOPE: A+B only; C (_active_beat frozen at beat_0015/rev23/turn36), D (next_up stale), E (flags-registry missing coin/drain_charge/arousal_charge/condition/underworld flags), F (no live-play of 0016-0024) all LEFT for later per LO. Also corrected an audit error: the scope-pass claim that content-depth beats aren't in decisions_log is false -- the log is complete (turns 1-56). book rev 34->35. Files: 3_activities, 5_scenes, design_book, ledger. (merge + production build + verify in this turn.) No commit/push; held media untouched."
+    },
+    {
+      "turn": 57,
+      "book_revision": 36,
+      "note": "ONBOARDING -- content-depth audit P3, resolved MINIMALLY per LO's call. Investigated read-only (2 Explore agents): KEY FINDING -- all six systems (Charge, Condition, Fighting, Stealth, Coin, Renner panel) already render on the sidebar from frame one, so the bare 'surface each live system once' hard-gate (onboarding.md §2.4) is already satisfied; the real gaps were the §2.3 'armed-in-fiction' half + the Underworld being an open hub with no pointer. I proposed 3 opening teaching lines (Condition/Training/Underworld) + an Underworld quest card. LO declined all of those ('nothing is needed') EXCEPT: teach COIN at the gate, where it first matters. DONE: added one sentence to the underworld_gate_check base paragraph (3_activities.toml) -- 'The coin he wants isn't company credits -- it's underworld scrip: earned down here, spent down here, worth nothing up top.' This arms coin in-fiction at its first point of relevance AND gracefully explains the audit's coin-toll-cold-first-visit oddity (coin only exists down there, so first entry is via fight/weapon; the toll works once she's earning). Kept it timeless (no 'she has none yet' -- the greyed 'Pay the toll (Requires 5 Coin)' handles affordability). DROPPED per LO: the opening Condition line, the opening Training/drill line, the Underworld briefing line, and the Underworld Story-Goals quest card. Arousal weapon stays taught at acquisition (yard find), not the opening (doctrine: teach a mid-game tool when acquired). STILL OPEN from the audit: P3's deeper 'arm Condition/Training in fiction' (LO is relying on the sidebar, a legit §2.4 call) + the C/D/E ledger items (_active_beat / next_up stale, flags-registry incomplete) + F (no live-play of 0016-0024). book rev 35->36. Files: 3_activities, design_book, ledger. No commit/push; held media untouched."
     }
   ]
 }

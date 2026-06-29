@@ -4,7 +4,7 @@
 > translation of what's written here. Grown one section per pipeline step.
 >
 > Working title: **Vesper** (also the PC's buried true name — hidden in plain sight; rename freely).
-> Book revision 33 (Step 5 + authoring; the A→A.5 chunk built. Latest: **BUGFIX — Condition (hygiene) was over-capping past 100 (Wash) and going negative (sex drops)**, both making the banded Condition card vanish; clamped all 9 hygiene effects so Condition is bounded 0–100 like Charge (the Charge-bug twin the content-depth audit caught; see *## Reset & reload*). Prior: **Quests restructured into two tiers** — the top **Story Goals** carry the mission (Mission 1 + the Burned Yard); **Renner's own section** carries his seduction as a one-card-at-a-time chain (*Earn the office* → *Break him to the drain*), which also lights the Renner sidebar panel's *next* row (see *### Quests page — two tiers*). Prior: **BUGFIX — Charge (energy) was sliding negative**; spends moved onto gated `costs`/clamp so Charge is now bounded 0–100 and the rungs/work block when too tired (travel never blocks; see *## Reset & reload*). Prior: the **arousal weapon's use is now a real beat** — arouse → fuck → he *passes out* (non-lethal) → she slips by; it's sex, so it drops Condition (see *## Reset & reload*). Prior: **reset & reload** (Condition + the two weapon reloads + Charge up); **The Underworld** (coin economy / second life); The Burned Yard; the Training activity; the Renner grind retune.)
+> Book revision 36 (Step 5 + authoring; the A→A.5 chunk built. Latest: **ONBOARDING (audit P3, minimal)** — coin is now established in-fiction at the Underworld gate as closed underworld-only scrip (earned/spent only down there, worthless up top); this also explains why the toll can't be paid on a cold first visit. Per LO, the other P3 touches were dropped (the sidebar already surfaces Condition/Fighting/Stealth/Coin from frame one). Prior: **CLEANUP (audit P5 A+B)** — removed the dead `underworld_known` flag (set, read by nothing — the Underworld shipped reachable) and corrected the stale "underworld is deferred" notes to "reachable" (its deep end / Cain still locked). Prior: **PROSE PASS — Underworld sex rewritten to a declared cold-but-explicit register** (graphic at the ceiling, transactional/detached — the opposite of the Renner/Mercer heat; see *## The Underworld*), and the two interior tics ("files it under nothing" / "the way she does everything") **rationed** to their load-bearing beats. Prior: **BUGFIX — Condition (hygiene) was over-capping past 100 (Wash) and going negative (sex drops)**, both making the banded Condition card vanish; clamped all 9 hygiene effects so Condition is bounded 0–100 like Charge (the Charge-bug twin the content-depth audit caught; see *## Reset & reload*). Prior: **Quests restructured into two tiers** — the top **Story Goals** carry the mission (Mission 1 + the Burned Yard); **Renner's own section** carries his seduction as a one-card-at-a-time chain (*Earn the office* → *Break him to the drain*), which also lights the Renner sidebar panel's *next* row (see *### Quests page — two tiers*). Prior: **BUGFIX — Charge (energy) was sliding negative**; spends moved onto gated `costs`/clamp so Charge is now bounded 0–100 and the rungs/work block when too tired (travel never blocks; see *## Reset & reload*). Prior: the **arousal weapon's use is now a real beat** — arouse → fuck → he *passes out* (non-lethal) → she slips by; it's sex, so it drops Condition (see *## Reset & reload*). Prior: **reset & reload** (Condition + the two weapon reloads + Charge up); **The Underworld** (coin economy / second life); The Burned Yard; the Training activity; the Renner grind retune.)
 
 ---
 
@@ -1196,8 +1196,8 @@ she's caught unlocks the **Stealth drill** back home.
 - mid — the **broken arousal weapon** (same tech as what's inside her), which she **repairs over a few
   sessions** at her room until it works (then it's the "walk past a guard" option above);
 - deep — the **heart of it**: the two dead men + their families, erased, and the **thread to the
-  underworld** (the frontier seed — that's where the trail runs next; the underworld itself is deferred).
-  Standing in it, a **memory flickers** (the awakening).
+  underworld** (where the trail runs next — the Underworld is reachable off the Waterfront; its deep end,
+  where Cain is, stays locked). Standing in it, a **memory flickers** (the awakening).
 
 A **Trail quest card** tracks it (a parallel goal to the seduction): *get into the yard, work deeper.*
 
@@ -1209,6 +1209,14 @@ The hidden criminal city the whole hunt points to — where Cain is. The burned 
 build makes it a **place she can go and live in**, with its own **money**. It's the opposite of the cradle:
 up top she's owned; down here **no one knows what she is, and her coin is her own.** (The deep end — where
 Cain actually is — stays locked: *The Site*, re-parented as the underworld's far end.)
+
+**Sex register down here (declared ceiling).** The Underworld sex (brothel work, the arousal-weapon
+pass-bys) is **explicit at the ceiling** (cock/cum/tits, the act on the page — no fade) but **COLD**:
+transactional, detached, no performed pleasure — a body for rent, a weapon being used. This is *deliberately
+the opposite* of the Renner/Mercer seduction heat (where she's working a man open); down here she's gone
+behind her own eyes and the coldness is the point. (Interior-tic note: the "files it under nothing" / "the
+way she does everything" reflexes are **rationed** — kept for the opening glitch escalation and the yard
+awakening payoff, flattened everywhere they'd gone routine.)
 
 **Getting in (every visit).** A gate off the Waterfront, always there. The guard wants **coin** — but she
 can also **fight** him or **use the arousal weapon** (no sneaking past this one). First visits, with no coin,

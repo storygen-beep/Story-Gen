@@ -185,7 +185,7 @@ name = "The memory store"
 blocks = [
   { type = "image", props = { file = "activities/chip_view.jpg", description = "A dark holographic memory-archive interface, an empty grid of storage slots glowing faintly, one greyed-out slot ringed and labelled at the center.", search_queries = ["dark holographic interface empty grid", "sci-fi data archive screen glowing"] } },
   { type = "paragraph", content = "She opens the store the company gave her for what it calls recovered assets — the place a restored memory would go, if she ever recovered one. It's empty. It has always been empty." },
-  { type = "paragraph", content = "There is one slot in it, greyed out, labelled in a hand that isn't the company's: FRAGMENT 01 — LOCKED. She doesn't remember making the label. She closes the store — and notices she's opened it more often than the task log would ever justify, and files that under nothing, the way she files everything she can't afford to have." },
+  { type = "paragraph", content = "There is one slot in it, greyed out, labelled in a hand that isn't the company's: FRAGMENT 01 — LOCKED. She doesn't remember making the label. She closes the store — and notices she's opened it more often than the task log would ever justify. She closes that thought too." },
 ]
 
 [canvases.nodes.exit_block]
@@ -317,7 +317,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "stealth", operator = "gte", value = 25 },
     ] } }, blocks = [
-    { type = "paragraph", content = "She moves through her own quarters and the room doesn't register her — no sound, no shift of air, nothing for a camera to hold. A thing that can't be seen can go where it isn't allowed. She files that thought where she files the others." },
+    { type = "paragraph", content = "She moves through her own quarters and the room doesn't register her — no sound, no shift of air, nothing for a camera to hold. A thing that can't be seen can go where it isn't allowed. She doesn't let the thought finish." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -350,7 +350,7 @@ id   = "base"
 name = "Walk the wreckage"
 blocks = [
   { type = "image", props = { file = "locations/facility_ruins.jpg", description = "A burned-out industrial facility at night, scorched frame and melted racks against dock lights.", search_queries = ["burned warehouse ruins night", "abandoned factory fire damage dark"] } },
-  { type = "paragraph", content = "The facility is a black skeleton against the dock lights — scorched frame, melted racks, the smell of old smoke that never washed out. She walks it the way she walks everything, cataloguing: where the containment was, where the fire started, what the dead machines used to do. None of it matches the briefing. All of it was built to hold things that could feel — and someone came through and let them out before he burned it down. The dread-place. The first one." },
+  { type = "paragraph", content = "The facility is a black skeleton against the dock lights — scorched frame, melted racks, the smell of old smoke that never washed out. She walks it slowly, cataloguing: where the containment was, where the fire started, what the dead machines used to do. None of it matches the briefing. All of it was built to hold things that could feel — and someone came through and let them out before he burned it down. The dread-place. The first one." },
 ]
 
 [canvases.nodes.exit_block]
@@ -556,7 +556,7 @@ id   = "weapon_scene"
 name = "Put them under"
 blocks = [
   { type = "video", props = { file = "sex/arousal_weapon_use.webm", description = "A woman straddling and riding a slumped, half-conscious man against a wall in a dim industrial space, his head lolling back.", search_queries = ["woman riding dazed man against wall", "femdom limp man industrial dark"] } },
-  { type = "paragraph", content = "She thumbs the emitter and the field rolls out ahead of her. Whoever's in reach goes stupid with it inside a breath — pupils blown, breath gone ragged, the gun forgotten in a slack hand. She takes the nearest one by the belt and rides him hard against the nearest surface while the others sway on their feet, and works him past the edge until he drops boneless and out. The rest fold a beat later. By the time any of them surface she's long gone, deeper in — and they'll wake with nothing but the memory of a heat that was never theirs." },
+  { type = "paragraph", content = "She thumbs the emitter and the field rolls out ahead of her. Whoever's in reach goes stupid with it inside a breath — pupils blown, breath ragged, the gun forgotten in a slack hand. She picks the nearest, drags his cock out of his fatigues, and sinks down onto it against the crates, riding him in hard flat strokes while the others sway on their feet. There's nothing in it on her side — just leverage; she works him until he spills into her and drops boneless and out. The rest fold a beat later. By the time any of them surface she's gone, deeper in, his cum drying on her thigh and nothing in her face at all." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -571,7 +571,7 @@ time_progression_minutes = 120
 id   = "flee"
 name = "Break and run"
 blocks = [
-  { type = "paragraph", content = "It goes against her — too many, or too sharp, or her own body too slow. She breaks for the downed fence and is over the water side before the torches swing round. Nothing gained tonight. She files what it cost her and walks it off." },
+  { type = "paragraph", content = "It goes against her — too many, or too sharp, or her own body too slow. She breaks for the downed fence and is over the water side before the torches swing round. Nothing gained tonight. She walks it off." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -643,7 +643,7 @@ flagEffects = [{ targetType = "player", flag = "has_arousal_weapon", op = "set" 
 [[canvases]]
 id          = "yard_find_3"
 name        = "The heart of it"
-description = "Auto-fire on yard entry at yard_depth>=3, once. SETS found_dead_men + underworld_known (frontier -> the underworld, deferred). A memory flicker (awakening seed)."
+description = "Auto-fire on yard entry at yard_depth>=3, once. SETS found_dead_men (the Trail payoff + the thread to the now-reachable Underworld). A memory flicker (awakening seed)."
 [canvases.trigger]
 location      = "renner_burned_yard"
 is_repeatable = false
@@ -658,7 +658,7 @@ id   = "base"
 name = "The heart of it"
 blocks = [
   { type = "paragraph", content = "The strongroom is what he saved. Two personnel files, a man each — his own people, the two who moved the materials. Both stamped CLOSED. Under each, a death notice, and under that, more notices: wives, children, the whole line, the dates all the same night. Renner didn't just fire them. He erased them. And paperclipped to the back, the thing he's really hiding: where the two men came from before Vance — the same name twice, a place down in the city that isn't on any map. The underworld. That's the thread Cain followed back. That's where it goes." },
-  { type = "paragraph", content = "Standing in it, something turns over in her — not a thought, a feeling, brief and uninvited: she has stood in a room like this before, on the other side of the file. Then it's gone, filed under nothing, the way she files everything she can't afford to keep." },
+  { type = "paragraph", content = "Standing in it, something turns over in her — not a thought, a feeling, brief and uninvited: she has stood in a room like this before, on the other side of the file. Then it's gone, filed under nothing." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -668,7 +668,6 @@ destinationType = "specific"
 locationId      = "renner_burned_yard"
 flagEffects = [
   { targetType = "player", flag = "found_dead_men",  op = "set" },
-  { targetType = "player", flag = "underworld_known", op = "set" },
 ]
 
 # ── activity_repair_weapon — fix the found weapon at her room, over a few sessions (wren_room) ──
@@ -770,7 +769,7 @@ id   = "base"
 name = "The man at the door"
 blocks = [
   { type = "image", props = { file = "locations/underworld_gate.jpg", description = "A heavy unmarked freight door under the docks at night, a big man standing before it, one hand out.", search_queries = ["bouncer unmarked door night", "guard freight door dark dockside"] } },
-  { type = "paragraph", content = "The man at the door doesn't ask her name. He looks her over the way a turnstile would and holds out a hand. \"Coin,\" he says. \"Or you're not my problem.\" Behind him the stairs go down into red light and noise. There's more than one way through a man like this." },
+  { type = "paragraph", content = "The man at the door doesn't ask her name. He looks her over the way a turnstile would and holds out a hand. \"Coin,\" he says. \"Or you're not my problem.\" Behind him the stairs go down into red light and noise. There's more than one way through a man like this. The coin he wants isn't company credits — it's underworld scrip: earned down here, spent down here, worth nothing up top." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -803,7 +802,7 @@ id   = "weapon_scene"
 name = "Put him under"
 blocks = [
   { type = "video", props = { file = "sex/arousal_weapon_use.webm", description = "A woman straddling and riding a slumped, half-conscious man against a wall in a dim space, his head lolling back.", search_queries = ["woman riding dazed man against wall", "femdom limp man dark"] } },
-  { type = "paragraph", content = "She thumbs the emitter and the doorman's whole face changes — the bored menace gone, breath gone short, the hand that wanted coin wanting something else now. She walks him back into the shadow of the stair and rides him there, fast and clinical, until he sags against the wall with his eyes rolling white and goes under. He'll wake on the steps in an hour, no memory, and never know she walked past him. The stairs are open." },
+  { type = "paragraph", content = "She thumbs the emitter and the doorman's whole face changes — the bored menace gone, breath short, the hand that wanted coin wanting something else now. She walks him back into the shadow of the stair, gets his cock out, and rides him against the wall in quick flat strokes, fast and clinical, giving him nothing but the friction. He spills into her with his eyes rolling white and sags down the bricks, under. He'll wake on the steps in an hour with no memory, and never know she walked past him. The stairs are open." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -870,7 +869,7 @@ id   = "client"
 name = "The client"
 blocks = [
   { type = "video", props = { file = "sex/brothel_client.webm", description = "A woman straddling and riding a man on a bed in a dim red-lit room, sex from the side.", search_queries = ["brothel sex riding pov red room", "escort client sex bed dim light"] } },
-  { type = "paragraph", content = "She works the client the way the trade wants — efficient, convincing, gone behind her own eyes the whole time the way she always is. He finishes; she collects; she's already cataloguing the next one. The only new thing is the coin, and that the coin is hers." },
+  { type = "paragraph", content = "She climbs on and takes his cock without ceremony — a few hard strokes of her hand, then she sits down on it and rides, hips keeping a rhythm that has nothing to do with her. He paws at her tits and fucks up into her; she gives him the small sounds the trade expects and feels none of them. He finishes inside her with a grunt. She waits the polite beat, lifts off, his cum sliding down her thigh, and counts the coin into her palm. The next one's already on the stairs." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -936,7 +935,7 @@ time_progression_minutes = 120
 id   = "win_hard"
 name = "The hard bout"
 blocks = [
-  { type = "paragraph", content = "This one's real — fast, trained, in it to hurt her. For a few seconds it's almost a fight. Then the thing they built her to be takes over, and what's left on the dirt isn't getting up. The crowd goes quiet. The purse is heavy. Someone in the dark is watching her now, and filing it." },
+  { type = "paragraph", content = "This one's real — fast, trained, in it to hurt her. For a few seconds it's almost a fight. Then the thing they built her to be takes over, and what's left on the dirt isn't getting up. The crowd goes quiet. The purse is heavy. Someone in the dark is watching her now." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -1015,7 +1014,7 @@ time_progression_minutes = 30
 id   = "pens"
 name = "The pens"
 blocks = [
-  { type = "paragraph", content = "Behind the chain they keep people the way the market keeps anything — by weight and condition, tagged, waiting on a buyer. She walks the line because she makes herself walk it. Most are just people, stolen and sold. But one of them, a girl too still, too even, watches her back with eyes that don't track quite right — and something in Wren's chest does a thing it has no name for, a recognition she shuts off before it finishes. She's looked at her own reflection in a cage. She files it under nothing and walks out." },
+  { type = "paragraph", content = "Behind the chain they keep people the way the market keeps anything — by weight and condition, tagged, waiting on a buyer. She walks the line because she makes herself walk it. Most are just people, stolen and sold. But one of them, a girl too still, too even, watches her back with eyes that don't track quite right — and something in Wren's chest does a thing it has no name for, a recognition she shuts off before it finishes. She's looked at her own reflection in a cage. She shuts it down and walks out." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
