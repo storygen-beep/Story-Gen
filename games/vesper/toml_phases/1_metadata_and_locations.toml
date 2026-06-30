@@ -41,9 +41,13 @@ weapon_repair = 0
 # UNDERWORLD currency — her own money, the company can't see. Earned (brothel/pit), spent (gate toll +
 # black market). Surfaced as a counter (0_systems). The "second life" — no leash on what's hers.
 coin          = 0
-# WEAPON CHARGES (internal, hidden) — each weapon holds shots; firing spends, the cradle (Charge up /
-# Power down) reloads. drain_charge = the truth-drain (1 shot). arousal_charge = the emitter (3 shots;
-# starts 0, set to 3 when the weapon is repaired). Separate from hygiene (the body) — these are the gear.
+# WEAPON LOADOUT + CHARGES (internal, hidden). equipped_weapon = which weapon she's carrying: 1 = drain,
+# 2 = emitter — ONE at a time (one core feeds one weapon; swap at the bench in wren_room). Starts on the
+# drain (her only weapon until the emitter is found in the burned yard + repaired). Each weapon holds shots;
+# firing spends; reloaded at the cradle via the two dedicated Recharge actions (NOT Power down / Charge up).
+# drain_charge = the truth-drain (1 shot). arousal_charge = the emitter (3 shots; starts 0, set to 3 when
+# the weapon is repaired). Separate from hygiene (the body) — these are the gear.
+equipped_weapon = 1
 drain_charge   = 1
 arousal_charge = 0
 # DORMANT engine always-ons (hidden via 0_systems). corruption left DEAD (her axis = the

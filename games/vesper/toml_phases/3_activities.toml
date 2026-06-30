@@ -93,7 +93,7 @@ effects = [
 [[canvases]]
 id          = "activity_recharge"
 name        = "Power down"
-description = "Wren-solo. The cradle. The day-cycle reset — powers down, advances ~9h, wakes her at full Charge. Gated opening_done; the opening's night/morning one-shots run first."
+description = "Wren-solo. The cradle. The day-cycle reset — powers down, advances ~9h, wakes her at full Charge. Does NOT reload weapons (use the dedicated Recharge actions). Gated opening_done; the opening's night/morning one-shots run first."
 
 [canvases.trigger]
 location      = "cradle"
@@ -125,17 +125,14 @@ locationId               = "cradle"
 time_progression_minutes = 540
 effects = [
   { targetType = "player", trait = "energy", op = "add", value = 100, clamp = true },   # cap at 100 (no over-cap -> Charge card never vanishes on the high end)
-  { targetType = "player", trait = "drain_charge", op = "set", value = 1 },
-  { targetType = "player", trait = "arousal_charge", op = "set", value = 3 },
 ]
 
-# Charge up — the SPLIT from Power down (LO's B): top up Charge + RELOAD the weapons, WITHOUT sleeping the
-# day forward. Anytime at the cradle (no schedule). Costs ~2h (time stays the throttle). This is the weapon
-# reload home base (drain_charge -> 1, arousal_charge -> 3). Power down also reloads (a full reset).
+# Charge up — top up Charge WITHOUT sleeping the day forward. Anytime at the cradle (no schedule). Costs ~2h
+# (time stays the throttle). Charge-only — weapons reload at the two dedicated Recharge actions below, NOT here.
 [[canvases]]
 id          = "activity_charge_up"
 name        = "Charge up"
-description = "Wren-solo at the cradle. Top up Charge + reload both weapons (drain_charge=1, arousal_charge=3), 120 min, NO day advance. Separate from Power down (sleep). Gated opening_done."
+description = "Wren-solo at the cradle. Top up Charge (energy), 120 min, NO day advance. Does NOT reload weapons (use the dedicated Recharge actions). Separate from Power down (sleep). Gated opening_done."
 [canvases.trigger]
 location      = "cradle"
 is_repeatable = true
@@ -148,7 +145,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "Charge up"
 blocks = [
-  { type = "paragraph", content = "Not a full night — just a couple hours hooked to the cradle's feed line, eyes open. Her cells pull back to full; the drain rebuilds its charge; the emitter's cell tops off. Then she unhooks, loaded, the day still going." },
+  { type = "paragraph", content = "Not a full night — just a couple hours hooked to the cradle's feed line, eyes open. Her cells pull back to full. Then she unhooks, the day still going." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -159,7 +156,66 @@ locationId               = "cradle"
 time_progression_minutes = 120
 effects = [
   { targetType = "player", trait = "energy", op = "add", value = 100, clamp = true },   # cap at 100
+]
+
+# ─── Weapon reload — split per-weapon (LO's call: weapons reload ONLY here, not at Power down / Charge up).
+# Each is a cheap cradle action off the feed line. drain = 1 shot; emitter = 3 (gated arousal_weapon_ready).
+[[canvases]]
+id          = "activity_recharge_drain"
+name        = "Recharge the drain"
+description = "Wren-solo at the cradle. Reload the drain weapon (drain_charge -> 1). 60 min, NO day advance. Gated opening_done."
+[canvases.trigger]
+location      = "cradle"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Recharge the drain"
+blocks = [
+  { type = "paragraph", content = "A few minutes on the feed line and the drain rebuilds its one shot. Loaded. She unhooks." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "cradle"
+time_progression_minutes = 60
+effects = [
   { targetType = "player", trait = "drain_charge", op = "set", value = 1 },
+]
+
+[[canvases]]
+id          = "activity_recharge_emitter"
+name        = "Recharge the emitter"
+description = "Wren-solo at the cradle. Reload the emitter (arousal_charge -> 3). 60 min, NO day advance. Gated opening_done + arousal_weapon_ready (only once she has it)."
+[canvases.trigger]
+location      = "cradle"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done",         operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Recharge the emitter"
+blocks = [
+  { type = "paragraph", content = "She bleeds the cradle's charge into the emitter's cell until it reads full — three. Then she pockets it and goes." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Done."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "cradle"
+time_progression_minutes = 60
+effects = [
   { targetType = "player", trait = "arousal_charge", op = "set", value = 3 },
 ]
 
@@ -443,7 +499,7 @@ flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 text       = "Use the weapon on him."
 targetType = "node"
 nodeId     = "yard_crawl.weapon_scene"
-conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 10 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 } ] }
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 10 }, { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 } ] }
 effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -479,7 +535,7 @@ flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 text       = "Use the weapon on them."
 targetType = "node"
 nodeId     = "yard_crawl.weapon_scene"
-conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 25 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 } ] }
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 25 }, { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 } ] }
 effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -515,7 +571,7 @@ flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 text       = "Use the weapon on them."
 targetType = "node"
 nodeId     = "yard_crawl.weapon_scene"
-conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 40 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 } ] }
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "stealth", operator = "lt", value = 40 }, { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "arousal_charge", operator = "gte", value = 1 } ] }
 effects    = [{ targetType = "player", trait = "yard_depth", op = "add", value = 1 }, { targetType = "player", trait = "arousal_charge", op = "add", value = -1 }, { targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "yard_caught_once", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -748,6 +804,52 @@ destinationType          = "specific"
 locationId               = "wren_room"
 time_progression_minutes = 120
 
+# ═══ Switch weapon — the loadout swap (one core feeds one weapon; never both) ════════════════════
+# Solo activity at wren_room (her bench, beside the repair). equipped_weapon: 1 = drain, 2 = emitter.
+# Gated opening_done + arousal_weapon_ready (only appears once she has a second weapon to choose). Free swap.
+[[canvases]]
+id          = "activity_swap_weapon"
+name        = "Switch weapon"
+description = "Wren-solo at wren_room. Swap equipped_weapon (1 drain <-> 2 emitter). One core feeds one weapon at a time. Gated opening_done + arousal_weapon_ready."
+[canvases.trigger]
+location      = "wren_room"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done",         operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Switch weapon"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 } ] } }, blocks = [
+    { type = "paragraph", content = "The emitter sits charged on the bench. One core, one weapon — it feeds the drain inside her or the thing in her hand, never both at once. Right now it's the drain." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 } ] } }, blocks = [
+    { type = "paragraph", content = "The emitter's live in her hand, the drain inside her gone quiet behind it. One core, one weapon. Right now it's the emitter." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Run the emitter instead."
+targetType = "location"
+locationId = "wren_room"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 } ] }
+effects    = [{ targetType = "player", trait = "equipped_weapon", op = "set", value = 2 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Go back to the drain."
+targetType = "location"
+locationId = "wren_room"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 } ] }
+effects    = [{ targetType = "player", trait = "equipped_weapon", op = "set", value = 1 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it."
+targetType = "location"
+locationId = "wren_room"
+
 # ═══ beat_0018 — THE UNDERWORLD: the dark city, a coin economy, her second life ═══════════════
 # Always available (gate gated opening_done). The guard is cleared EVERY visit (pay coin / fight / weapon
 # — NO stealth). The strip is reached ONLY via this gate canvas (underworld_strip is a root location, not
@@ -787,7 +889,7 @@ conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subje
 text       = "Put the weapon on him."
 targetType = "node"
 nodeId     = "underworld_gate_check.weapon_scene"
-conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" } ] }
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 }, { type = "flag", subject = "player", flag_key = "arousal_weapon_ready", operator = "is_true" } ] }
 costs      = [{ trait = "arousal_charge", value = 1 }]
 effects    = [{ targetType = "player", trait = "hygiene", op = "add", value = -30, clamp = true }]
 [[canvases.nodes.exit_block.choices]]

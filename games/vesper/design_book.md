@@ -4,7 +4,7 @@
 > translation of what's written here. Grown one section per pipeline step.
 >
 > Working title: **Vesper** (also the PC's buried true name — hidden in plain sight; rename freely).
-> Book revision 38 (Step 5 + authoring; the A→A.5 chunk built. Latest: **BROTHEL → FULL SEX LOOP** — The House promoted from a single-variant repeat to the Renner/Mercer pose-ladder shape (oral/vaginal/anal → his pleasure climbs → elected finish: mouth/inside/ass), and **coin moved to finish-only** (it was paid on the entry choice — a faucet). Two new triggerless canvases (`underworld_brothel_loop` + `underworld_brothel_finisher`), authoring-only, cold register kept. 5 new t5 clips pending find-media (engine silent-skips → plays text-only meanwhile; vaginal reuses the existing ride clip). Prior: **LOCKED-CHOICE LABELS — the 4 Renner depot seduction rungs now show their own action label greyed when locked** (was distinct prose via `locked_text`), so the locked and unlocked text agree and it matches the energy gate's "(Requires 15 …)" look. Per LO (Option A): bare same-label, no hand-written requirement — the engine can't auto-derive a reason from `conditions` (only resource `costs` do, via `getCostBlockedMessage`). The 7 sex-loop/serve finishers keep their prose `locked_text` (reads better mid-scene). Prior: **ONBOARDING (audit P3, minimal)** — coin is now established in-fiction at the Underworld gate as closed underworld-only scrip (earned/spent only down there, worthless up top); this also explains why the toll can't be paid on a cold first visit. Per LO, the other P3 touches were dropped (the sidebar already surfaces Condition/Fighting/Stealth/Coin from frame one). Prior: **CLEANUP (audit P5 A+B)** — removed the dead `underworld_known` flag (set, read by nothing — the Underworld shipped reachable) and corrected the stale "underworld is deferred" notes to "reachable" (its deep end / Cain still locked). Prior: **PROSE PASS — Underworld sex rewritten to a declared cold-but-explicit register** (graphic at the ceiling, transactional/detached — the opposite of the Renner/Mercer heat; see *## The Underworld*), and the two interior tics ("files it under nothing" / "the way she does everything") **rationed** to their load-bearing beats. Prior: **BUGFIX — Condition (hygiene) was over-capping past 100 (Wash) and going negative (sex drops)**, both making the banded Condition card vanish; clamped all 9 hygiene effects so Condition is bounded 0–100 like Charge (the Charge-bug twin the content-depth audit caught; see *## Reset & reload*). Prior: **Quests restructured into two tiers** — the top **Story Goals** carry the mission (Mission 1 + the Burned Yard); **Renner's own section** carries his seduction as a one-card-at-a-time chain (*Earn the office* → *Break him to the drain*), which also lights the Renner sidebar panel's *next* row (see *### Quests page — two tiers*). Prior: **BUGFIX — Charge (energy) was sliding negative**; spends moved onto gated `costs`/clamp so Charge is now bounded 0–100 and the rungs/work block when too tired (travel never blocks; see *## Reset & reload*). Prior: the **arousal weapon's use is now a real beat** — arouse → fuck → he *passes out* (non-lethal) → she slips by; it's sex, so it drops Condition (see *## Reset & reload*). Prior: **reset & reload** (Condition + the two weapon reloads + Charge up); **The Underworld** (coin economy / second life); The Burned Yard; the Training activity; the Renner grind retune.)
+> Book revision 39 (Step 5 + authoring; the A→A.5 chunk built. Latest: **WEAPON LOADOUT — one weapon carried at a time** (new hidden trait `equipped_weapon`: 1 = drain, 2 = emitter; one core feeds one weapon). She swaps at the bench in her room (*Switch weapon*, free); which she carries gates use — the drain only fires the Renner extraction, the emitter only zaps guards (yard/gate). The **first drain is not exempt** — the capstone trigger waits until the drain is carried, and the quest page directs her (flipping to "switch back to the drain" if she's on the emitter). The **two weapon reloads are now separate dedicated cradle actions** (*Recharge the drain* / *Recharge the emitter*); **Power down / Charge up no longer reload weapons** (Charge only). Authoring-only, zero engine change (a literal clothing-slot weapon was engine-blocked — `VALID_CLOTHING_SLOTS` is hardcoded to 7). Prior: **BROTHEL → FULL SEX LOOP** — The House promoted from a single-variant repeat to the Renner/Mercer pose-ladder shape (oral/vaginal/anal → his pleasure climbs → elected finish: mouth/inside/ass), and **coin moved to finish-only** (it was paid on the entry choice — a faucet). Two new triggerless canvases (`underworld_brothel_loop` + `underworld_brothel_finisher`), authoring-only, cold register kept. 5 new t5 clips pending find-media (engine silent-skips → plays text-only meanwhile; vaginal reuses the existing ride clip). Prior: **LOCKED-CHOICE LABELS — the 4 Renner depot seduction rungs now show their own action label greyed when locked** (was distinct prose via `locked_text`), so the locked and unlocked text agree and it matches the energy gate's "(Requires 15 …)" look. Per LO (Option A): bare same-label, no hand-written requirement — the engine can't auto-derive a reason from `conditions` (only resource `costs` do, via `getCostBlockedMessage`). The 7 sex-loop/serve finishers keep their prose `locked_text` (reads better mid-scene). Prior: **ONBOARDING (audit P3, minimal)** — coin is now established in-fiction at the Underworld gate as closed underworld-only scrip (earned/spent only down there, worthless up top); this also explains why the toll can't be paid on a cold first visit. Per LO, the other P3 touches were dropped (the sidebar already surfaces Condition/Fighting/Stealth/Coin from frame one). Prior: **CLEANUP (audit P5 A+B)** — removed the dead `underworld_known` flag (set, read by nothing — the Underworld shipped reachable) and corrected the stale "underworld is deferred" notes to "reachable" (its deep end / Cain still locked). Prior: **PROSE PASS — Underworld sex rewritten to a declared cold-but-explicit register** (graphic at the ceiling, transactional/detached — the opposite of the Renner/Mercer heat; see *## The Underworld*), and the two interior tics ("files it under nothing" / "the way she does everything") **rationed** to their load-bearing beats. Prior: **BUGFIX — Condition (hygiene) was over-capping past 100 (Wash) and going negative (sex drops)**, both making the banded Condition card vanish; clamped all 9 hygiene effects so Condition is bounded 0–100 like Charge (the Charge-bug twin the content-depth audit caught; see *## Reset & reload*). Prior: **Quests restructured into two tiers** — the top **Story Goals** carry the mission (Mission 1 + the Burned Yard); **Renner's own section** carries his seduction as a one-card-at-a-time chain (*Earn the office* → *Break him to the drain*), which also lights the Renner sidebar panel's *next* row (see *### Quests page — two tiers*). Prior: **BUGFIX — Charge (energy) was sliding negative**; spends moved onto gated `costs`/clamp so Charge is now bounded 0–100 and the rungs/work block when too tired (travel never blocks; see *## Reset & reload*). Prior: the **arousal weapon's use is now a real beat** — arouse → fuck → he *passes out* (non-lethal) → she slips by; it's sex, so it drops Condition (see *## Reset & reload*). Prior: **reset & reload** (Condition + the two weapon reloads + Charge up); **The Underworld** (coin economy / second life); The Burned Yard; the Training activity; the Renner grind retune.)
 
 ---
 
@@ -1242,7 +1242,7 @@ is** (The Site) — stays locked → *"you're in; the hunt runs deeper from here
 
 ---
 
-## Reset & reload (cleanup + the two weapon reloads — three separate upkeep systems)
+## Reset & reload (cleanup + the loadout + the two weapon reloads — separate upkeep systems)
 
 After she uses her body/powers hard, she's spent and has to reset. **Three distinct things** (kept lean so
 it's rhythm, not chores):
@@ -1255,11 +1255,13 @@ drops floor at 0 and the Wash caps at 100 (clamped), so the Condition card never
 vanishes.
 
 **2. The drain weapon reloads.** Her truth-drain holds **one shot.** Fire it (the anal-finish extraction)
-and it's **spent** — she can't drain again until she **recharges.** (If she takes him in the ass while
-spent, the act still happens; there's just nothing to take.)
+and it's **spent** — she can't drain again until she **recharges** at the cradle (*Recharge the drain*). (If
+she takes him in the ass while spent — or while carrying the wrong weapon — the act still happens; there's
+just nothing to take.)
 
 **3. The arousal weapon reloads.** The emitter holds **three shots.** Each time she zaps a guard it uses
-one; at empty she **recharges.** So it's a limited tool, not an infinite skeleton key.
+one; at empty she **recharges** at the cradle (*Recharge the emitter*). So it's a limited tool, not an
+infinite skeleton key.
 
 > **Firing it is a real beat (not a bypass).** Using the weapon plays out: she floods them with the field,
 > **fucks** the one in her way, and **he passes out** (non-lethal — he wakes later, no memory, so a recurring
@@ -1267,14 +1269,26 @@ one; at empty she **recharges.** So it's a limited tool, not an infinite skeleto
 > other. So the three ways past a guard read distinctly: **Stealth** = unseen / no trace · **Fighting** = beat
 > them down · **the weapon** = fuck them unconscious (the seduce-past path for when she can't fight or sneak).
 
-**Where the weapons recharge — the cradle, split in two:**
-- **Charge up** (new) — a couple hours on the feed line: tops up her Charge **and reloads both weapons.**
-  No day lost.
-- **Power down / sleep** — advances the day (and also reloads, as a full reset).
+**4. One weapon at a time — the loadout (`equipped_weapon`).** Her core powers **one weapon at a time**: the
+drain is the system inside her; the emitter is the same build scaled to her hand, drawing off that same core.
+So she **carries one or the other, never both** — slot the emitter live and the internal drain goes quiet;
+stow it and the drain wakes. She **swaps at the bench in her room** (*Switch weapon* — free, but it means a
+trip home). Which weapon she carries decides what she can do: the **drain** only fires the Renner anal
+extraction; the **emitter** only zaps guards (the yard, the gate). She **starts on the drain** (her only
+weapon until she finds + repairs the emitter in the burned yard). **The first drain is no exception** — even
+Renner's scripted first drain waits until she's carrying the drain weapon; the **quest page tells her when
+he's ready and which weapon to bring** (it flips to "switch back to the drain" if she's holding the emitter).
 
-So her home base now has three beats: **Wash** (Condition), **Charge up** (Charge + weapon reloads), and
-**Power down** (the day). The wash is also her one private, unscheduled moment — a small thread of the
-awakening.
+**Where the weapons recharge — the cradle, two dedicated actions:**
+- **Recharge the drain** — a few minutes on the feed line: reloads the drain (its one shot). No day lost.
+- **Recharge the emitter** — bleeds the cradle's charge into the emitter's cell (three shots). No day lost;
+  only available once she's repaired it.
+- **Charge up** and **Power down / sleep** restore her **Charge** (energy) but **no longer reload the
+  weapons** (LO's call: weapon reload is its own deliberate act — the three upkeep systems stay separate).
+
+So her home base beats: **Wash** (Condition), **Charge up** (Charge), **Power down** (the day + Charge), the
+**two weapon recharges**, and **Switch weapon** at the bench. The wash is also her one private, unscheduled
+moment — a small thread of the awakening.
 
 **Charge is a real throttle, bounded 0–100.** Spending it is gated, not cosmetic: the three Renner rungs
 and the depot work **block when she's too drained** (greyed, "(Requires 15 …)") — she recharges at the

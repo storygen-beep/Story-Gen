@@ -1048,6 +1048,7 @@ targetType = "node"
 nodeId     = "renner_control_canvas.again"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
+  { type = "trait", subject = "player", trait_key = "equipped_weapon",   operator = "eq",  value = 1 },
   { type = "trait", subject = "player", trait_key = "drain_charge",      operator = "gte", value = 1 },
 ] }
 effects = [
@@ -1058,14 +1059,31 @@ effects = [
   { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
 ]
-# No-drain fallback (weapon spent): the anal finish still resolves, but there's nothing to take.
+# No-drain fallback (drain carried but spent): the anal finish still resolves, but there's nothing to take.
 [[canvases.nodes.exit_block.choices]]
 text       = "Let it go — you're drained."
 targetType = "location"
 locationId = "renner_depot"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
+  { type = "trait", subject = "player", trait_key = "equipped_weapon",   operator = "eq", value = 1 },
   { type = "trait", subject = "player", trait_key = "drain_charge",      operator = "lt", value = 1 },
+] }
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
+# Wrong-gear fallback (carrying the emitter, not the drain): the anal finish resolves, nothing to take.
+[[canvases.nodes.exit_block.choices]]
+text       = "Let it go — wrong gear."
+targetType = "location"
+locationId = "renner_depot"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
+  { type = "trait", subject = "player", trait_key = "equipped_weapon",   operator = "eq", value = 2 },
 ] }
 effects = [
   { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
@@ -1082,7 +1100,7 @@ effects = [
 [[canvases]]
 id          = "cap_renner_anal_drain"
 name        = "The keys"
-description = "Auto-fire capstone — the weapon's FIRST fire (the commando-shove). Routes into renner_control_canvas. SETS renner_drained + renner_leads_extracted + renner_anal_once. Gated renner_fucked_once + corruption>=50."
+description = "Auto-fire capstone — the weapon's FIRST fire (the commando-shove). Routes into renner_control_canvas. SETS renner_drained + renner_leads_extracted + renner_anal_once. Gated renner_fucked_once + corruption>=50 + drain weapon carried (equipped_weapon=1) + in cover. NOT exempt from the loadout rule — waits until she's carrying the drain; the quest card directs her."
 
 [canvases.trigger]
 location      = "renner_depot"
@@ -1094,6 +1112,7 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "renner_fucked_once", operator = "is_true"  },
   { type = "flag",  subject = "player", flag_key = "renner_drained",     operator = "is_false" },
   { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 50 },
+  { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 },   # the drain weapon must be carried (loadout) — waits + quest directs if not
   { type = "clothing_item", item_id = "cover_dockhand", operator = "equipped" },   # beat_0015 — Renner content only in cover
 ] }
 
@@ -1499,6 +1518,34 @@ when = [
 ]
 goals = [
   { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 50, label = "Break him to the drain (corruption)" },
+]
+
+# Stage B — READY (loadout-aware; LO's ask: the quest page directs her to the drain weapon). Once he's
+# broken (corruption>=50) AND she's bedded him (renner_fucked_once), priority 13 overrides the climb card
+# (12) with a directive keyed to what she's carrying. Two cards, mutually exclusive on equipped_weapon.
+[[quest_cards]]
+priority   = 13
+npc_id     = "npc_renner"
+text       = "He's broken and ready. Take him in the office and finish in his ass — the drain fires and he gives up everything."
+tip        = "You're carrying the drain weapon. Get him to the desk, in cover."
+when = [
+  { flag = "renner_office_open", op = "is_true"  },
+  { flag = "renner_drained",     op = "is_false" },
+  { flag = "renner_fucked_once", op = "is_true"  },
+  { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 50 },
+  { trait = "equipped_weapon", subject = "player", op = "eq", value = 1 },
+]
+[[quest_cards]]
+priority   = 13
+npc_id     = "npc_renner"
+text       = "He's broken and ready to drain — but you're carrying the emitter, not the drain."
+tip        = "Switch back to the drain weapon at your bench in your room, then take him in the office and finish in his ass."
+when = [
+  { flag = "renner_office_open", op = "is_true"  },
+  { flag = "renner_drained",     op = "is_false" },
+  { flag = "renner_fucked_once", op = "is_true"  },
+  { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 50 },
+  { trait = "equipped_weapon", subject = "player", op = "eq", value = 2 },
 ]
 
 # End-of-content card — shows after the drain, once the leads are logged. NO goal: this is the

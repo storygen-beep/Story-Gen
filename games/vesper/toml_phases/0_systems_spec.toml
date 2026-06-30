@@ -171,3 +171,8 @@ hidden = true
 [[traits.labels]]
 key    = "arousal_charge"
 hidden = true
+# Weapon loadout — internal. equipped_weapon = which weapon she's carrying (1 = drain, 2 = emitter).
+# One at a time (one core feeds one weapon); the swap activity + the fire gates communicate the state.
+[[traits.labels]]
+key    = "equipped_weapon"
+hidden = true
