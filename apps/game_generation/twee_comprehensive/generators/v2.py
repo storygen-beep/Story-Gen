@@ -9236,7 +9236,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 <h2>Missing Media Files</h2>
 <p>No missing media files found.</p>
 
-<<link "← Back">><<run Engine.play(State.variables.last_game_passage || "Navigation")>><</link>>
+<<link "← Back">><<run setup.smartBack()>><</link>>
 """
 
         # Group missing media by category
@@ -9307,7 +9307,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 
         # Add back link
         content += """
-<<link "← Back">><<run Engine.play(State.variables.last_game_passage || "Navigation")>><</link>>
+<<link "← Back">><<run setup.smartBack()>><</link>>
 """
 
         return content
@@ -13747,7 +13747,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
   <div class="no-quests">No active quests.</div>
 <</if>>
 <</nobr>>
-<<link "← Back">><<run Engine.play(State.variables.last_game_passage || "Navigation")>><</link>>
+<<link "← Back">><<run setup.smartBack()>><</link>>
 """
 
     def _quests_v2_overlay(self) -> str:
@@ -14131,7 +14131,7 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
   <div class="no-quests">No active quests.</div>
 <</if>>
 <</nobr>>
-<<link "← Back">><<run Engine.play(State.variables.last_game_passage || "Navigation")>><</link>>
+<<link "← Back">><<run setup.smartBack()>><</link>>
 """
 
     def _generate_time_system(self) -> str:
@@ -14280,6 +14280,28 @@ window.devGoBack = function() {
         info_nav_script = """:: InfoPageNav [script]
 // Track the last non-info-page passage so info page back buttons always work.
 // Fixes softlock when history fills with info pages and Engine.backward() loops.
+
+// Info/sidebar page titles, exposed once so the last_game_passage tracker below
+// AND setup.smartBack() share ONE list (they can't drift apart).
+setup.infoPages = """ + info_pages_list + """;
+
+// State-restoring "Back" for sidebar/info pages. Engine.play() navigates FORWARD
+// and RE-RUNS the target passage — on a one-time auto-fire canvas that re-fires
+// its advanceTime/flag scripts and bloats history (the reported bug: "going back
+// doesn't work from one-time canvases"). Instead, restore the last NON-info
+// moment already in the history stack via Engine.goTo, which rolls state back
+// first so the passage's scripts net correctly and no new moment is added. Fall
+// back to the stored passage only when history can't reach a real one (e.g. right
+// after a save-load, when the previous moment isn't in the stack).
+setup.smartBack = function () {
+    var hist = State.history, active = State.activeIndex;
+    for (var i = active - 1; i >= 0; i--) {
+        var t = hist[i] && hist[i].title;
+        if (t && setup.infoPages.indexOf(t) === -1) { Engine.goTo(i); return; }
+    }
+    Engine.play(State.variables.last_game_passage || "Navigation");
+};
+
 $(document).on(':passagestart', function(ev) {
     // One-time legacy save migration: $player.flags retired 2026-05-06.
     // Saves made before the consolidation have $player.flags populated with
@@ -14299,7 +14321,7 @@ $(document).on(':passagestart', function(ev) {
         delete sv.player.flags;
     }
     var psg = ev.passage.title;
-    var infoPages = """ + info_pages_list + """;
+    var infoPages = setup.infoPages;
 """ + rent_redirect_block + clothing_redirect_block + travel_cost_block + """    if (infoPages.indexOf(psg) === -1) {
         State.variables.last_game_passage = psg;
     }
@@ -14516,7 +14538,7 @@ $(document).on(':passagestart', function(ev) {
   <p><em>No NPCs found.</em></p>
 <</if>>
 <</nobr>>
-<<link "← Back">><<run Engine.play(State.variables.last_game_passage || "Navigation")>><</link>>"""
+<<link "← Back">><<run setup.smartBack()>><</link>>"""
         else:
             stats_page = f""":: StatsPage
 <<nobr>>
@@ -14583,7 +14605,7 @@ $(document).on(':passagestart', function(ev) {
   <p><em>No NPCs found.</em></p>
 <</if>>
 <</nobr>>
-<<link "← Back">><<run Engine.play(State.variables.last_game_passage || "Navigation")>><</link>>"""
+<<link "← Back">><<run setup.smartBack()>><</link>>"""
 
         # Wardrobe page and clothing block (only if clothing enabled)
         wardrobe_page = ""
@@ -14603,7 +14625,7 @@ if (clothingMsg) {
     var el = document.getElementById('wardrobe-warning');
     if (el) { el.innerHTML = clothingMsg; el.style.display = 'block'; }
 } else {
-    Engine.play(dest);
+    setup.smartBack();
 }
 <</script>><</link>>"""
 
@@ -14645,7 +14667,7 @@ if (clothingMsg) {
 <h2>Clothing Store</h2>
 <<= setup.renderShopPage()>>
 <</nobr>>
-<<link "\u2190 Back">><<run Engine.play(State.variables.last_game_passage || "Navigation")>><</link>>"""
+<<link "\u2190 Back">><<run setup.smartBack()>><</link>>"""
 
         # Rent day page (only if rent enabled)
         rent_page = ""
@@ -17301,7 +17323,7 @@ if (clothingMsg) {
   </div>
 </div>
 <</nobr>>
-<<link "← Back">><<run Engine.play(State.variables.last_game_passage || "Navigation")>><</link>>
+<<link "← Back">><<run setup.smartBack()>><</link>>
 
 :: StoryJournalStyles [stylesheet]
 /* Story Journal Styles - Immersive narrative presentation */
@@ -17641,7 +17663,7 @@ if (clothingMsg) {
 </table>
 </div>
 <</if>>
-<<link "← Back">><<run Engine.play(State.variables.last_game_passage || "Navigation")>><</link>>
+<<link "← Back">><<run setup.smartBack()>><</link>>
 <</nobr>>
 
 <style>
@@ -17759,7 +17781,7 @@ if (clothingMsg) {
 <</if>>
 </div>
 
-<<link "← Back">><<run Engine.play(State.variables.last_game_passage || "Navigation")>><</link>>
+<<link "← Back">><<run setup.smartBack()>><</link>>
 <</nobr>>
 
 <style>
