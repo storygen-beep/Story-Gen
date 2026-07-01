@@ -74,17 +74,11 @@ bands = [
   { min = 75, max = 100, text = "Condition: Clean",  icon = "✨" },
 ]
 
-# ─── NPC panel — Renner's seduction progress (the per-target axis, made visible) ──
-# The seduction CLIMB is npc_renner.corruption; surface it so the player can gauge how far
-# the cold boss has cracked (toward the drain at 50) + where he is. Renner only — Mercer
-# doesn't climb (no corruption, no panel). The 'next' row mirrors the Quests-page goal block.
-[[sidebar_items]]
-type   = "npc_panel"
-npc_id = "npc_renner"
-label  = "Renner"
-rows   = ["corruption", "location", "next"]
-corruption_max_value = 50
-corruption_max_label = "Broken"
+# ─── NPC panel — REMOVED per LO (2026-07-01) ──────────────────────────────────
+# The Renner sidebar npc_panel (corruption / location / quest-goal rows) was removed — early
+# game it read as uninformative clutter ("Corruption 0 / Location Away"). Renner's seduction
+# progress now lives on the Quests page only (fed by the quest_cards in 5_scenes.toml). To
+# restore it, re-add an npc_panel sidebar_item with npc_id = "npc_renner".
 
 # ─── Fighting / Stealth / Coin — surfaced in the auto Traits list, NOT as HUD bars (LO's call) ───
 # These three are declared player core_traits (1_metadata) and stay UN-hidden below, so the
@@ -98,7 +92,7 @@ key   = "energy"
 label = "Charge"
 
 # Dormant engine always-ons. corruption is NOT hidden — it's the NPCs' LIVE seduction axis
-# (Renner's corruption, shown in his npc_panel); the PLAYER's corruption stays dead at 0 (the
+# (Renner's corruption, surfaced on the Quests page); the PLAYER's corruption stays dead at 0 (the
 # inversion — visibly stuck at zero while his climbs). arousal/hygiene unused + hidden.
 [[traits.labels]]
 key    = "arousal"
