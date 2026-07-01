@@ -728,3 +728,19 @@ Quests write properly to also show how much stealth is required
 [DONE]brothel sex to be a full sex loop
 
 Fight how it works
+
+
+**1 July**
+
+[DONE] All gaurd emitter weapon when used have same sex video
+ 
+[DONE]When renner drain is triggered it is a one time canvas, which directly shows anal, sounds a bit stupid or wierd, that player directly goes to anal one video, but I would say it can be a sex loop, we might can use the same sex loop with anal in it. and thie drain renner canvas shouldnt mention bastien and calloway instead it should tell the story that cain burnt his place because renner killed two people and there family (these two people who betrayed renner and was working with cain to provide him supplies). For more info, he should just say that she can investigate in the underworld, just this much.
+
+
+[DONE]Renner sidebar quets say reach corruption 50 but things in the hub also unlocks incrementally, the question is, is this how it should be shown or we should show it like step by step moving upwards, like x unlocks tease. Or one more question is should we even show the sidebar quests, are they aligned with the Quests page quests.
+
+[DONE]Fighting stealth coin remove them from sidebar as bar and they should come under player traits list in the sidebar
+
+[KEEP]Dont mention mission 1 in the quests page
+
+[DONE]confirm emitter and drain weapon have proper explanations.

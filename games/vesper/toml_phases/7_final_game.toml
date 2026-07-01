@@ -86,40 +86,10 @@ rows   = ["corruption", "location", "next"]
 corruption_max_value = 50
 corruption_max_label = "Broken"
 
-# ─── Capability bars — Fighting + Stealth (now LIVE: the Burned Yard guards read them) ─────────
-# Surfaced now that something gates on them (the yard crawl) — before that they'd be dead-meter bars.
-# trait_bar over a banded word (max 50; drilled at the cradle, proven in the field).
-[[sidebar_items]]
-type  = "trait_bar"
-trait = "fighting"
-label = "Fighting"
-max   = 50
-bands = [
-  { min = 0,  max = 14, text = "Untrained" },
-  { min = 15, max = 29, text = "Trained"   },
-  { min = 30, max = 44, text = "Sharp"     },
-  { min = 45, max = 50, text = "Lethal"    },
-]
-[[sidebar_items]]
-type  = "trait_bar"
-trait = "stealth"
-label = "Stealth"
-max   = 50
-bands = [
-  { min = 0,  max = 14, text = "Seen"   },
-  { min = 15, max = 29, text = "Quiet"  },
-  { min = 30, max = 44, text = "Unseen" },
-  { min = 45, max = 50, text = "Ghost"  },
-]
-
-# ─── Underworld coin — her own money (the second life). A numeric counter (shows the figure). ───
-# Earned at the brothel/pit, spent at the gate toll + black market. max is a nominal display ceiling.
-[[sidebar_items]]
-type       = "trait_bar"
-trait      = "coin"
-label      = "Coin"
-max        = 300
-hide_value = false
+# ─── Fighting / Stealth / Coin — surfaced in the auto Traits list, NOT as HUD bars (LO's call) ───
+# These three are declared player core_traits (1_metadata) and stay UN-hidden below, so the
+# <<playerTraits>> "Traits" dump lists them as raw key + number (fighting/stealth/coin). No bars, no
+# word-bands — the trait_bar blocks were removed. The Burned-Yard crawl / Pit / gate toll still read them.
 
 # ─── Trait labels ─────────────────────────────────────────────────────────────
 # Rename energy -> "Charge"; hide every dormant/internal trait from player-facing dumps.
@@ -154,23 +124,13 @@ hidden = true
 key    = "sex_entry_origin"
 hidden = true
 
-# Capability bars render via the trait_bar items above — hide their raw auto-dump number (the band
-# still shows). yard_depth/weapon_repair are internal crawl state — fully hidden.
-[[traits.labels]]
-key    = "fighting"
-hidden = true
-[[traits.labels]]
-key    = "stealth"
-hidden = true
+# fighting/stealth/coin are NO LONGER hidden — they now surface in the auto Traits list (bars removed).
+# yard_depth/weapon_repair stay hidden — internal crawl state, never player-facing.
 [[traits.labels]]
 key    = "yard_depth"
 hidden = true
 [[traits.labels]]
 key    = "weapon_repair"
-hidden = true
-# coin shows via its trait_bar above — hide the raw auto-dump number (no doubling).
-[[traits.labels]]
-key    = "coin"
 hidden = true
 # Weapon charges — internal; the fire choices' locked_text / hide-when-empty communicate the state.
 [[traits.labels]]
@@ -183,6 +143,12 @@ hidden = true
 # One at a time (one core feeds one weapon); the swap activity + the fire gates communicate the state.
 [[traits.labels]]
 key    = "equipped_weapon"
+hidden = true
+# Drain counter — internal. +1 on each Renner drain (first + repeats). Gates the post-drain awakening
+# (glitch_recurrence_ii) as a TRAIT so the validator doesn't demand a located flag-setter (the drain now
+# fires inside the triggerless hub loop).
+[[traits.labels]]
+key    = "drains_done"
 hidden = true
 
 # ══════════════════════════════════════════════════════════════════
@@ -253,6 +219,8 @@ loop_npc_pleasure = 0
 sex_finisher_type = 0
 anal_active       = 0
 sex_entry_origin  = 0
+# Renner drain counter (hidden). +1 each drain (first + repeats); gates the post-drain awakening.
+drains_done       = 0
 
 # ─── NPCs ─────────────────────────────────────────────────────────────────────
 
@@ -314,8 +282,8 @@ activity   = "drinking at the Anchor"
 #     briefing (wardrobeEffects add, 2_one_shots). She equips it to become "the hire."
 # The Renner content gates on `clothing_item cover_dockhand equipped` (5_scenes). beauty/
 # corruption stay 0 — we don't use the worn_beauty/worn_corruption axes. Images omitted (the
-# wardrobe shows names; add via find-media later). worn_type tagging is for the frontier
-# covers (Bastien/Calloway) — Mission 1 gates on the exact id.
+# wardrobe shows names; add via find-media later). worn_type tagging is for future frontier
+# covers (the underworld trail past Renner) — Mission 1 gates on the exact id.
 [[clothing]]
 id         = "company_grays"
 name       = "Company grays"
@@ -821,7 +789,7 @@ flagEffects = [
 [[canvases]]
 id          = "canvas_glitch_recurrence_ii"
 name        = "The door warps"
-description = "Auto-fire glitch recurrence II (the chunk's awakening PEAK -- heavier than I). Cradle, gated renner_drained (after the first drain). She gets a whole feeling, not a flicker; the catechism stops fitting. SETS glitch_ii_seen. Tier-3, fires once."
+description = "Auto-fire glitch recurrence II (the chunk's awakening PEAK -- heavier than I). Cradle, gated drains_done>=1 (after the first drain -- a TRAIT, not the renner_drained flag, so the validator doesn't demand a located setter: the drain now fires inside the triggerless hub loop). She gets a whole feeling, not a flicker; the catechism stops fitting. SETS glitch_ii_seen. Tier-3, fires once."
 
 [canvases.trigger]
 location      = "cradle"
@@ -829,8 +797,8 @@ is_repeatable = false
 priority      = 8
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "renner_drained",  operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "glitch_ii_seen",  operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "drains_done",   operator = "gte", value = 1 },
+  { type = "flag",  subject = "player", flag_key = "glitch_ii_seen", operator = "is_false" },
 ] }
 
 [[canvases.nodes]]
@@ -1504,7 +1472,7 @@ time_progression_minutes = 120
 id   = "weapon_scene"
 name = "Put them under"
 blocks = [
-  { type = "video", props = { file = "sex/arousal_weapon_use.webm", description = "A woman straddling and riding a slumped, half-conscious man against a wall in a dim industrial space, his head lolling back.", search_queries = ["woman riding dazed man against wall", "femdom limp man industrial dark"] } },
+  { type = "video", props = { file = "sex/yard_emitter_fire_t5.webm", description = "A woman riding a slack, dazed man on the ground in a dim industrial yard while other limp men slump nearby.", search_queries = ["dark warehouse riding limp man amateur", "dim garage cowgirl riding slumped man", "night alley riding man on the ground amateur"] } },
   { type = "paragraph", content = "She thumbs the emitter and the field rolls out ahead of her. Whoever's in reach goes stupid with it inside a breath — pupils blown, breath ragged, the gun forgotten in a slack hand. She picks the nearest, drags his cock out of his fatigues, and sinks down onto it against the crates, riding him in hard flat strokes while the others sway on their feet. There's nothing in it on her side — just leverage; she works him until he spills into her and drops boneless and out. The rest fold a beat later. By the time any of them surface she's gone, deeper in, his cum drying on her thigh and nothing in her face at all." },
 ]
 [canvases.nodes.exit_block]
@@ -3095,13 +3063,14 @@ flagEffects = [
 ]
 
 # ═══ beat_0010 — the sex loop (triggerless; reset on the hub entry rung + finisher exit) ══
-# Poses oral(0)/vaginal(1)/doggy-anal(2). The doggy pose-switch is gated renner_anal_once
-# (only after the scripted first anal = cap_renner_anal_drain). The ass finish routes to the
-# control canvas (the repeatable drain); facial/inside just end. NO flags set in the loop.
+# Poses oral(0)/vaginal(1)/doggy-anal(2). The doggy pose opens on npc_renner.corruption>=50 + in cover
+# (she's broken to the drain-line) — NOT on the weapon; it also SETS renner_anal_once (the Anchor cheerup
+# marker). The ass finish IS the drain: first equipped+charged finish routes to renner_control_canvas.intro
+# + sets the drain flags (folds in the old capstone); repeats route to .again. facial/inside just end.
 [[canvases]]
 id          = "loop_renner_office_sex"
 name        = "Take him"
-description = "Triggerless Renner sex loop. oral/vaginal/doggy(anal gated renner_anal_once). climax-elect pleasure>=50. Reached from the hub 'Take him in the office' rung (which resets traits + SETS renner_fucked_once)."
+description = "Triggerless Renner sex loop. oral/vaginal/doggy(anal opens at npc corruption>=50 + cover). climax-elect pleasure>=50. The ass finish fires the drain (equipped_weapon=1 + drain_charge>=1). Reached from the hub 'Take him in the office' rung (which resets traits + SETS renner_fucked_once)."
 
 [[canvases.nodes]]
 id   = "intro"
@@ -3173,13 +3142,20 @@ text       = "Turn around — give him your ass."
 targetType = "node"
 nodeId     = "base_doggy_r"
 show_when_locked = true
-locked_text = "He hasn't taken you there yet — that comes first."
+locked_text = "Not yet — he has to be all the way broken first."
+# Anal opens on escalation (broken to the drain-line) + in cover — NOT on the weapon. She can take him here
+# carrying either gear; whether it DRAINS him is the finisher's call (equipped_weapon + drain_charge). Sets
+# renner_anal_once the moment she goes anal (the marker the Anchor cheerup bands read).
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "renner_anal_once", operator = "is_true" },
+  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 50 },
+  { type = "clothing_item", item_id = "cover_dockhand", operator = "equipped" },
 ] }
 effects = [
   { targetType = "player", trait = "sex_stage",   op = "set", value = 2, clamp = false },
   { targetType = "player", trait = "anal_active", op = "set", value = 1, clamp = false },
+]
+flagEffects = [
+  { targetType = "player", flag = "renner_anal_once", op = "set" },
 ]
 [[canvases.nodes.exit_block.choices]]
 text       = "Let him finish inside you."
@@ -3192,7 +3168,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 ] }
 effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 1, clamp = false } ]
 
-# Pose: doggy / anal (sex_stage 2) — the drain pose, gated renner_anal_once
+# Pose: doggy / anal (sex_stage 2) — the drain pose; opened at npc corruption>=50 + cover (see base_vaginal_r)
 [[canvases.nodes]]
 id   = "base_doggy_r"
 name = "Give him your ass"
@@ -3228,7 +3204,7 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 [[canvases]]
 id          = "loop_renner_finisher"
 name        = "He finishes"
-description = "Triggerless finisher. [group] by sex_finisher_type. facial(0)/inside(1) reset+exit to depot. ass(2) resets + routes to renner_control_canvas (the repeatable drain)."
+description = "Triggerless finisher. [group] by sex_finisher_type. facial(0)/inside(1) reset+exit to depot. ass(2) IS the drain (equipped_weapon=1 + drain_charge>=1): FIRST time (drains_done<1) routes to renner_control_canvas.intro + sets renner_drained/renner_leads_extracted, repeats route to .again; spent/emitter -> no-drain exit to depot."
 [[canvases.nodes]]
 id   = "climax"
 name = "He finishes"
@@ -3268,17 +3244,24 @@ effects = [
   { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
 ]
-# Repeat drain — gated on a loaded weapon (drain_charge). Spent -> the no-drain fallback below shows instead.
+# ── Ass finish → the DRAIN. FIRST time (renner_drained false) = the full extraction (.intro); every
+# repeat = the short re-ask (.again). Both require the drain WORN (equipped_weapon=1) + CHARGED
+# (drain_charge>=1); spent -> "drain's empty", emitter -> "wrong gear" (the anal resolves, no drain).
+# drains_done +=1 on each drain (gates the post-drain awakening, glitch_recurrence_ii). All 6 states
+# (drained F/T × gear × charge) resolve to exactly one exit — no dead-end, no overlap.
+# FIRST drain — the full extraction. Sets the drain flags (the retired capstone used to; they live here now).
 [[canvases.nodes.exit_block.choices]]
 text       = "Take the keys."
 targetType = "node"
-nodeId     = "renner_control_canvas.again"
+nodeId     = "renner_control_canvas.intro"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
+  { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq",  value = 2 },
+  { type = "trait", subject = "player", trait_key = "drains_done",       operator = "lt",  value = 1 },   # first drain (branch on the TRAIT, not renner_drained — keeps the flag out of is_true validator checks)
   { type = "trait", subject = "player", trait_key = "equipped_weapon",   operator = "eq",  value = 1 },
   { type = "trait", subject = "player", trait_key = "drain_charge",      operator = "gte", value = 1 },
 ] }
 effects = [
+  { targetType = "player", trait = "drains_done",       op = "add", value = 1 },
   { targetType = "player", trait = "drain_charge",      op = "set", value = 0 },
   { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
@@ -3286,9 +3269,33 @@ effects = [
   { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
 ]
-# No-drain fallback (drain carried but spent): the anal finish still resolves, but there's nothing to take.
+flagEffects = [
+  { targetType = "player", flag = "renner_drained",         op = "set" },
+  { targetType = "player", flag = "renner_leads_extracted", op = "set" },
+]
+# REPEAT drain — she already has what he knew; the short re-ask.
 [[canvases.nodes.exit_block.choices]]
-text       = "Let it go — you're drained."
+text       = "Take the keys."
+targetType = "node"
+nodeId     = "renner_control_canvas.again"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq",  value = 2 },
+  { type = "trait", subject = "player", trait_key = "drains_done",       operator = "gte", value = 1 },   # repeat drain (branch on the TRAIT)
+  { type = "trait", subject = "player", trait_key = "equipped_weapon",   operator = "eq",  value = 1 },
+  { type = "trait", subject = "player", trait_key = "drain_charge",      operator = "gte", value = 1 },
+] }
+effects = [
+  { targetType = "player", trait = "drains_done",       op = "add", value = 1 },
+  { targetType = "player", trait = "drain_charge",      op = "set", value = 0 },
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
+# No-drain: the drain's empty (carried but spent). The anal resolves; recharge at the cradle to drain.
+[[canvases.nodes.exit_block.choices]]
+text       = "Let it go — the drain's empty. Recharge it at the cradle."
 targetType = "location"
 locationId = "renner_depot"
 conditions = { version = "1.0", logic = "AND", items = [
@@ -3303,7 +3310,7 @@ effects = [
   { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
 ]
-# Wrong-gear fallback (carrying the emitter, not the drain): the anal finish resolves, nothing to take.
+# Wrong-gear: carrying the emitter, not the drain. The anal resolves, nothing to take.
 [[canvases.nodes.exit_block.choices]]
 text       = "Let it go — wrong gear."
 targetType = "location"
@@ -3320,62 +3327,20 @@ effects = [
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
 ]
 
-# ═══ beat_0011 — the WEAPON ═══════════════════════════════════════════════════
-# cap_renner_anal_drain — the FIRST anal (scripted commando-shove). Auto-fire once
-# renner_fucked_once + corruption>=50. Routes INTO the control canvas. The LOCATED setter for
-# the drain flags (a triggerless canvas can't credit a flag-set).
-[[canvases]]
-id          = "cap_renner_anal_drain"
-name        = "The keys"
-description = "Auto-fire capstone — the weapon's FIRST fire (the commando-shove). Routes into renner_control_canvas. SETS renner_drained + renner_leads_extracted + renner_anal_once. Gated renner_fucked_once + corruption>=50 + drain weapon carried (equipped_weapon=1) + in cover. NOT exempt from the loadout rule — waits until she's carrying the drain; the quest card directs her."
-
-[canvases.trigger]
-location      = "renner_depot"
-requires_npc  = "npc_renner"
-is_repeatable = false
-priority      = 9
-is_active     = true
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag",  subject = "player", flag_key = "renner_fucked_once", operator = "is_true"  },
-  { type = "flag",  subject = "player", flag_key = "renner_drained",     operator = "is_false" },
-  { type = "trait", subject = "npc", npc_id = "npc_renner", trait_key = "corruption", operator = "gte", value = 50 },
-  { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 },   # the drain weapon must be carried (loadout) — waits + quest directs if not
-  { type = "clothing_item", item_id = "cover_dockhand", operator = "equipped" },   # beat_0015 — Renner content only in cover
-] }
-
-[[canvases.nodes]]
-id   = "base"
-name = "The keys"
-blocks = [
-  { type = "video", props = { file = "sex/renner_anal_t5.webm", description = "A man taking a woman from behind bent over an office desk in late-afternoon light.", search_queries = ["office desk sex from behind", "doggy bent over desk office"] } },
-  { type = "paragraph", content = "She comes in commando and lets him find out halfway through the afternoon, and by the time the light's gone amber he has her bent over the desk with both hands on her hips, past asking, past the cold, taking the one thing he hasn't had yet because she let him think it was his idea." },
-  { type = "paragraph", content = "He spends himself in her ass with his forehead pressed between her shoulder blades — and the fluid goes into him on the same beat, and she feels the lock turn. The first one. The keys, warm in her hand. She straightens up slowly and turns around, and the wrecked, grateful, dangerous man in the chair looks up at her with eyes that have just gone flat and open and entirely hers." },
-]
-
-[canvases.nodes.exit_block]
-type = "choices"
-[[canvases.nodes.exit_block.choices]]
-text       = "Use them."
-targetType = "node"
-nodeId     = "renner_control_canvas.intro"
-# The first drain spends the weapon's charge (drain_charge 1 -> 0); recharge at the cradle to drain again.
-# The anal sex also drops hygiene (cleanup-after-sex).
-effects = [
-  { targetType = "player", trait = "drain_charge", op = "set", value = 0 },
-  { targetType = "player", trait = "hygiene",      op = "add", value = -30, clamp = true },
-]
-flagEffects = [
-  { targetType = "player", flag = "renner_drained",         op = "set" },
-  { targetType = "player", flag = "renner_leads_extracted", op = "set" },
-  { targetType = "player", flag = "renner_anal_once",       op = "set" },
-]
+# ═══ beat_0011 — the WEAPON (folded into beat_0010) ═══════════════════════════
+# The first drain is no longer a separate auto-fire scene (was cap_renner_anal_drain — retired 2026-07-01).
+# It now happens INSIDE the hub sex loop: the FIRST equipped + charged anal finish (loop_renner_finisher,
+# above) fires the drain, sets renner_drained + renner_leads_extracted, bumps drains_done, and routes to
+# renner_control_canvas.intro (the full extraction). Player-driven, not forced; the Stage-B quest cards
+# direct her to carry the drain + finish in his ass. The old standalone clip sex/renner_anal_t5.webm is now
+# unused (the loop's own renner_loop_doggy / renner_finish_anal carry the visual) — left on disk.
 
 # renner_control_canvas — the drain payload. TRIGGERLESS, NO flags (set on the capstone).
 # Voice carriage: the extraction is PLAYED as Q&A in HIS dialog, not narrated summary.
 [[canvases]]
 id          = "renner_control_canvas"
 name        = "The drain"
-description = "The control canvas (the reusable pattern's first build). Reached from cap_renner_anal_drain (first) + the loop's ass finish (repeat). The mission payload as Q&A in HIS dialog. Sets NO flags (triggerless). Exit -> renner_depot; ~10 min pass, he remembers nothing."
+description = "The control canvas (the reusable pattern's first build). Reached from the loop's ass finish — .intro on the FIRST drain (full extraction), .again on repeats (short). The mission payload as Q&A in HIS dialog. Sets NO flags here (the drain flags are set on the loop finisher's first-drain choice). Exit -> renner_depot; ~10 min pass, he remembers nothing."
 
 [[canvases.nodes]]
 id   = "intro"
@@ -3392,9 +3357,14 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Nothing. He freed it. Whatever they were holding in there, he let it out before he burned the place. The manifests after didn't add up — they were short bodies that weren't bodies. He wasn't robbing them. He was emptying a cage." },
         { type = "paragraph", content = "She files it somewhere the cradle can't reach. The monster she's sent to kill broke into the worst place these people built and let the prisoners walk out. It doesn't fit the briefing. Nothing about him fits the briefing, and the not-fitting is starting to have a shape." },
     ] },
-    { advance_text = "Where did he go?", blocks = [
-        { type = "dialog", props = { speaker = "player" }, content = "Who would know where he went?" },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Suppliers talk. There's a dealer on the docks — Bastien — moves the kind of gear Cain runs on. And a Vance man, Calloway, runs the hunt from the inside; he'd have the files. That's all I... that's all I have." },
+    { advance_text = "Why did Cain burn you down?", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Cain didn't just walk away from you. He came for you. Why?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Two of my people. They moved my materials — and they were moving them to him too, feeding Cain off my own floor. When I found out I didn't just cut them loose. I did them, and everyone in their houses, the same night. He burned me to the slab for it. We've been at each other since." },
+        { type = "paragraph", content = "She keeps her face a meter-reader's blank. So the burned yard she's been picking through wasn't collateral in someone else's war — it was the answer, and the two files she pulled out there are the men he's confessing to now. The wreck of him has a shape after all, and the shape is a debt." },
+    ] },
+    { advance_text = "Where is he now?", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Where would he go to ground?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "I don't know. But those two came up out of the underworld before they ever came to me — that's where their kind runs. If Cain's anywhere, he's down there. That's all I... that's all I have." },
     ] },
     { advance_text = "Tell him to forget.", blocks = [
         { type = "paragraph", content = "She tells him to forget, and he will. In a few minutes he'll surface blinking, his cock going soft and no memory of the last ten, certain only that the new hire is very good and he should keep her close. She fixes her clothes while the man who just handed her everything stares at nothing." },
@@ -3435,9 +3405,9 @@ locationId = "renner_depot"
 id   = "again_ask"
 name = "Nothing new"
 blocks = [
-  { type = "paragraph", content = "She crouches to his eye level and asks anyway — the gear, the facility, where the man went." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Bastien — he's on the docks. Calloway runs the hunt from inside Vance. That's everything I had. I swear it." },
-  { type = "paragraph", content = "The same names, in the same order. He doesn't know he's said them before, and he never will. Nothing she didn't already have — but watching the wrecked man empty himself out for her on command is its own kind of confirmation. She fixes her clothes and leaves him to surface alone." },
+  { type = "paragraph", content = "She crouches to his eye level and asks anyway — the gear, the two he buried, where the man went." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Two of mine, feeding him off my floor. I did them and theirs, and he burned me for it. Where he went — down. It's all down in the underworld. That's everything I had. I swear it." },
+  { type = "paragraph", content = "The same confession, in the same order. He doesn't know he's said it before, and he never will. Nothing she didn't already have — but watching the wrecked man empty himself out for her on command is its own kind of confirmation. She fixes her clothes and leaves him to surface alone." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -3733,18 +3703,110 @@ goals = [
   { trait = "relation", subject = "npc", npc_id = "npc_renner", op = "gte", value = 21, label = "Earn the office (relation)" },
 ]
 
-# Stage B: from the office until the drain (corruption 50 + the fuck auto-set renner_drained via cap_renner_anal_drain).
+# Stage B: from the office until the drain — a STEPPED corruption ladder, one banded rung live at a time
+# (the picker swaps cards as npc_renner.corruption crosses each band; ranges are exclusive so exactly one
+# matches — no priority race). The current lever lives in each rung's goal LABEL, because the Renner sidebar
+# 'next' row renders only the goal block (v2.py:15142), not text/tip — those carry the fuller Quests-page
+# coaching. Each goal value = the next threshold, so the number reads N / 10, N / 20 ... (LO: keep the number).
+# The real content unlocks mirror these bands: tease 0 / flash 10 / grope 20 / first-oral 30 / loop 40 / anal-drain 50.
+
+# Rung 1 — tease (corruption 0–9)
 [[quest_cards]]
 priority   = 12
 npc_id     = "npc_renner"
-text       = "In the office. Break the cold boss until he beds you — then take the drain."
-tip        = "Run the rungs in his office — tease, flash, grope — to push his corruption. He cracks and fucks you; the weapon fires when he finishes in your ass and gives up everything."
+text       = "Get his eyes on you. He won't look up from the manifest — so make him. Tease him across the desk."
+tip        = "In cover, in his office: run the tease rung. Every rung pushes his corruption toward breaking."
 when = [
   { flag = "renner_office_open", op = "is_true"  },
   { flag = "renner_drained",     op = "is_false" },
+  { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "lt", value = 10 },
+]
+goals = [
+  { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 10, label = "Get his eyes on you — tease him" },
+]
+
+# Rung 2 — flash (corruption 10–19)
+[[quest_cards]]
+priority   = 12
+npc_id     = "npc_renner"
+text       = "He looked. Now make it worse — flash him while you work, let him see there's nothing under the coveralls."
+tip        = "The flash rung's open now. Keep pushing his corruption."
+when = [
+  { flag = "renner_office_open", op = "is_true"  },
+  { flag = "renner_drained",     op = "is_false" },
+  { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 10 },
+  { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "lt",  value = 20 },
+]
+goals = [
+  { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 20, label = "Make him look — flash him" },
+]
+
+# Rung 3 — grope (corruption 20–29)
+[[quest_cards]]
+priority   = 12
+npc_id     = "npc_renner"
+text       = "He's watching for it now. Get your hands on him — a grip, a stroke — make him feel it before he can decide to stop you."
+tip        = "The grope rung's open. Every rung climbs his corruption toward the break."
+when = [
+  { flag = "renner_office_open", op = "is_true"  },
+  { flag = "renner_drained",     op = "is_false" },
+  { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 20 },
+  { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "lt",  value = 30 },
+]
+goals = [
+  { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 30, label = "Get your hands on him" },
+]
+
+# Rung 4 — he cracks / first oral, push to the loop (corruption 30–39; the loop opens at 40)
+[[quest_cards]]
+priority   = 12
+npc_id     = "npc_renner"
+text       = "He broke enough to take your mouth. He's not all the way yours yet — keep at him until he'll do anything."
+tip        = "Keep running the rungs. At his limit he'll pull you into the office and fuck you."
+when = [
+  { flag = "renner_office_open", op = "is_true"  },
+  { flag = "renner_drained",     op = "is_false" },
+  { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 30 },
+  { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "lt",  value = 40 },
+]
+goals = [
+  { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 40, label = "He's cracking — keep working him" },
+]
+
+# Rung 5 — the loop is open; break him the rest of the way to 50 (corruption 40–49).
+[[quest_cards]]
+priority   = 12
+npc_id     = "npc_renner"
+text       = "He'll fuck you in the office now. Break him the rest of the way — then finish him in the ass and take the drain."
+tip        = "Take him in the office (repeatable). At corruption 50, in cover, the anal pose opens — finish there with the drain worn and charged, and the weapon fires."
+when = [
+  { flag = "renner_office_open", op = "is_true"  },
+  { flag = "renner_drained",     op = "is_false" },
+  { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 40 },
+  { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "lt",  value = 50 },
 ]
 goals = [
   { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 50, label = "Break him to the drain (corruption)" },
+]
+
+# Rung 6 — he's broken (corruption 50+) but not yet bedded. The corruption number is maxed, so the live step
+# is the action, not a meter: bed him (the loop sets renner_fucked_once), after which the priority-13 READY pair
+# takes over. Priority 13 to outrank Rung 5; mutually exclusive with READY on renner_fucked_once. Without this
+# card the 'next' row would go BLANK here — Frame 3 only renders while a goal is unmet (v2.py:13988) and Rung 5's
+# corruption goal is already met at 50. This is the only rung with no number (fucked_once is binary, not a meter).
+[[quest_cards]]
+priority   = 13
+npc_id     = "npc_renner"
+text       = "He's broken — all the way down. Now bed him and take the drain."
+tip        = "Take him in the office, in cover, carrying the drain — finish in his ass and the weapon fires."
+when = [
+  { flag = "renner_office_open", op = "is_true"  },
+  { flag = "renner_drained",     op = "is_false" },
+  { flag = "renner_fucked_once", op = "is_false" },
+  { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 50 },
+]
+goals = [
+  { flag = "renner_fucked_once", op = "is_true", label = "Take him to bed" },
 ]
 
 # Stage B — READY (loadout-aware; LO's ask: the quest page directs her to the drain weapon). Once he's
@@ -3781,8 +3843,8 @@ when = [
 # the engine renders a goal-less, ready_text-less card as flavor + tip only; see v2.py:13961.)
 [[quest_cards]]
 priority   = 9
-text       = "Renner's trail is logged — Bastien on the docks, Calloway inside Vance. The hunt picks up from here in a future update."
-tip        = "You've reached the end of the current build. More of the hunt is coming."
+text       = "Renner's trail is logged — the two he buried came up out of the underworld, and that's where Cain's gone to ground. The hunt runs down past the gate from here. (More coming in a future update.)"
+tip        = "You've reached the end of the current build. The underworld's open off the Waterfront — more of the hunt is coming."
 when = [
   { flag = "renner_leads_extracted", op = "is_true" },
   { flag = "the_site_open",          op = "is_false" },

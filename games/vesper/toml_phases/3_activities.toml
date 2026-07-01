@@ -611,7 +611,7 @@ time_progression_minutes = 120
 id   = "weapon_scene"
 name = "Put them under"
 blocks = [
-  { type = "video", props = { file = "sex/arousal_weapon_use.webm", description = "A woman straddling and riding a slumped, half-conscious man against a wall in a dim industrial space, his head lolling back.", search_queries = ["woman riding dazed man against wall", "femdom limp man industrial dark"] } },
+  { type = "video", props = { file = "sex/yard_emitter_fire_t5.webm", description = "A woman riding a slack, dazed man on the ground in a dim industrial yard while other limp men slump nearby.", search_queries = ["dark warehouse riding limp man amateur", "dim garage cowgirl riding slumped man", "night alley riding man on the ground amateur"] } },
   { type = "paragraph", content = "She thumbs the emitter and the field rolls out ahead of her. Whoever's in reach goes stupid with it inside a breath — pupils blown, breath ragged, the gun forgotten in a slack hand. She picks the nearest, drags his cock out of his fatigues, and sinks down onto it against the crates, riding him in hard flat strokes while the others sway on their feet. There's nothing in it on her side — just leverage; she works him until he spills into her and drops boneless and out. The rest fold a beat later. By the time any of them surface she's gone, deeper in, his cum drying on her thigh and nothing in her face at all." },
 ]
 [canvases.nodes.exit_block]

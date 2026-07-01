@@ -78,40 +78,10 @@ rows   = ["corruption", "location", "next"]
 corruption_max_value = 50
 corruption_max_label = "Broken"
 
-# ─── Capability bars — Fighting + Stealth (now LIVE: the Burned Yard guards read them) ─────────
-# Surfaced now that something gates on them (the yard crawl) — before that they'd be dead-meter bars.
-# trait_bar over a banded word (max 50; drilled at the cradle, proven in the field).
-[[sidebar_items]]
-type  = "trait_bar"
-trait = "fighting"
-label = "Fighting"
-max   = 50
-bands = [
-  { min = 0,  max = 14, text = "Untrained" },
-  { min = 15, max = 29, text = "Trained"   },
-  { min = 30, max = 44, text = "Sharp"     },
-  { min = 45, max = 50, text = "Lethal"    },
-]
-[[sidebar_items]]
-type  = "trait_bar"
-trait = "stealth"
-label = "Stealth"
-max   = 50
-bands = [
-  { min = 0,  max = 14, text = "Seen"   },
-  { min = 15, max = 29, text = "Quiet"  },
-  { min = 30, max = 44, text = "Unseen" },
-  { min = 45, max = 50, text = "Ghost"  },
-]
-
-# ─── Underworld coin — her own money (the second life). A numeric counter (shows the figure). ───
-# Earned at the brothel/pit, spent at the gate toll + black market. max is a nominal display ceiling.
-[[sidebar_items]]
-type       = "trait_bar"
-trait      = "coin"
-label      = "Coin"
-max        = 300
-hide_value = false
+# ─── Fighting / Stealth / Coin — surfaced in the auto Traits list, NOT as HUD bars (LO's call) ───
+# These three are declared player core_traits (1_metadata) and stay UN-hidden below, so the
+# <<playerTraits>> "Traits" dump lists them as raw key + number (fighting/stealth/coin). No bars, no
+# word-bands — the trait_bar blocks were removed. The Burned-Yard crawl / Pit / gate toll still read them.
 
 # ─── Trait labels ─────────────────────────────────────────────────────────────
 # Rename energy -> "Charge"; hide every dormant/internal trait from player-facing dumps.
@@ -146,23 +116,13 @@ hidden = true
 key    = "sex_entry_origin"
 hidden = true
 
-# Capability bars render via the trait_bar items above — hide their raw auto-dump number (the band
-# still shows). yard_depth/weapon_repair are internal crawl state — fully hidden.
-[[traits.labels]]
-key    = "fighting"
-hidden = true
-[[traits.labels]]
-key    = "stealth"
-hidden = true
+# fighting/stealth/coin are NO LONGER hidden — they now surface in the auto Traits list (bars removed).
+# yard_depth/weapon_repair stay hidden — internal crawl state, never player-facing.
 [[traits.labels]]
 key    = "yard_depth"
 hidden = true
 [[traits.labels]]
 key    = "weapon_repair"
-hidden = true
-# coin shows via its trait_bar above — hide the raw auto-dump number (no doubling).
-[[traits.labels]]
-key    = "coin"
 hidden = true
 # Weapon charges — internal; the fire choices' locked_text / hide-when-empty communicate the state.
 [[traits.labels]]
@@ -175,4 +135,10 @@ hidden = true
 # One at a time (one core feeds one weapon); the swap activity + the fire gates communicate the state.
 [[traits.labels]]
 key    = "equipped_weapon"
+hidden = true
+# Drain counter — internal. +1 on each Renner drain (first + repeats). Gates the post-drain awakening
+# (glitch_recurrence_ii) as a TRAIT so the validator doesn't demand a located flag-setter (the drain now
+# fires inside the triggerless hub loop).
+[[traits.labels]]
+key    = "drains_done"
 hidden = true

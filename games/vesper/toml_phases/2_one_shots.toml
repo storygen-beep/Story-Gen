@@ -289,7 +289,7 @@ flagEffects = [
 [[canvases]]
 id          = "canvas_glitch_recurrence_ii"
 name        = "The door warps"
-description = "Auto-fire glitch recurrence II (the chunk's awakening PEAK -- heavier than I). Cradle, gated renner_drained (after the first drain). She gets a whole feeling, not a flicker; the catechism stops fitting. SETS glitch_ii_seen. Tier-3, fires once."
+description = "Auto-fire glitch recurrence II (the chunk's awakening PEAK -- heavier than I). Cradle, gated drains_done>=1 (after the first drain -- a TRAIT, not the renner_drained flag, so the validator doesn't demand a located setter: the drain now fires inside the triggerless hub loop). She gets a whole feeling, not a flicker; the catechism stops fitting. SETS glitch_ii_seen. Tier-3, fires once."
 
 [canvases.trigger]
 location      = "cradle"
@@ -297,8 +297,8 @@ is_repeatable = false
 priority      = 8
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "renner_drained",  operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "glitch_ii_seen",  operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "drains_done",   operator = "gte", value = 1 },
+  { type = "flag",  subject = "player", flag_key = "glitch_ii_seen", operator = "is_false" },
 ] }
 
 [[canvases.nodes]]
