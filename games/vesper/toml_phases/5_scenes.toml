@@ -182,8 +182,6 @@ effects = [
 text       = "Let him finish in your mouth."
 targetType = "node"
 nodeId     = "mercer_finisher.climax"
-show_when_locked = true
-locked_text = "He's not close enough yet."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
 ] }
@@ -221,8 +219,6 @@ effects = [
 text       = "Let him finish inside you."
 targetType = "node"
 nodeId     = "mercer_finisher.climax"
-show_when_locked = true
-locked_text = "He's not close enough yet."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
 ] }
@@ -252,8 +248,6 @@ effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1,
 text       = "Let him finish in your ass."
 targetType = "node"
 nodeId     = "mercer_finisher.climax"
-show_when_locked = true
-locked_text = "Not till he's close — and you've taken him there."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
   { type = "trait", subject = "player", trait_key = "anal_active",       operator = "gte", value = 1  },
@@ -915,8 +909,6 @@ effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1,
 text       = "Let him finish in your mouth."
 targetType = "node"
 nodeId     = "loop_renner_finisher.climax"
-show_when_locked = true
-locked_text = "He's not close enough yet."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
 ] }
@@ -966,8 +958,6 @@ flagEffects = [
 text       = "Let him finish inside you."
 targetType = "node"
 nodeId     = "loop_renner_finisher.climax"
-show_when_locked = true
-locked_text = "He's not close enough yet."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
 ] }
@@ -997,8 +987,6 @@ effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1,
 text       = "Let him finish in your ass."
 targetType = "node"
 nodeId     = "loop_renner_finisher.climax"
-show_when_locked = true
-locked_text = "He's not close enough — and you're not open for that yet."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
   { type = "trait", subject = "player", trait_key = "anal_active",       operator = "gte", value = 1  },
