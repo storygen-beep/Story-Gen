@@ -163,6 +163,10 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
 - `references/engine-reference.md` — the **code-verified** engine field/trigger/effect/condition tables.
   The source of truth for what knobs exist; ground every option here, and never invent a field the engine
   lacks. (This is now the skill's own source of truth — it no longer depends on any external corpus.)
+- `references/dev-console-jump.md` — **(generate ONLY when the user explicitly asks)** browser-console
+  jump/arm scripts to fast-forward a built game to a gated state for testing (`SugarCube` API handle, the
+  `player.core_traits`/`flags`/`npcs[slug]` write paths, `Canvas_<id>_Node_<n>` naming, serve over
+  `python3 -m http.server 8080`). Dev convenience, never part of the authoring flow.
 - `games/late_shifts/toml_phases/` — a complete shipped game to copy concrete blocks from (the canonical
   worked TOML; `engine-reference.md` §9 has a minimal skeleton).
 

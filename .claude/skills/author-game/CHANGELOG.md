@@ -13,6 +13,17 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-07-01
+- NEW `references/dev-console-jump.md` + one index line in `SKILL.md` — LO asked to save the browser-console
+  "jump/arm" testing technique (fast-forward a built game to a gated state via `State.variables`) as a
+  reference, **on-request only**. Documents: serve over `python3 -m http.server 8080` (not `file://`) +
+  console context = `top` (not an extension); the `SugarCube` API handle (this build hides bare
+  `State`/`Engine`/`setup` globals); the code-verified write paths (`player.core_traits.<k>`,
+  `flags.<k>`, `setup.resolveNpcId(slug)`→`npcs[uuid].core_traits`, `Object.values(player.equipped)` for
+  equip); `Canvas_<authoredId>_Node_<n>` passage naming (authored ids, stable — NPC uuids are not); ARM vs
+  FIRE + the "leave/re-enter to re-eval" caveat; Renner-drain worked example. All paths verified by grepping
+  the live `games/vesper/output/index.html` (evaluator branches, passage-name stems all authored-id, no
+  uuid). Dev convenience, explicitly gated off the authoring flow.
 ## 2026-06-23
 - NEW `references/onboarding.md` + `references/npc-intro.md` — closed two recurring doctrine gaps an
   adversarially-verified audit found behind LO's "set the player up properly / a new character can't start
