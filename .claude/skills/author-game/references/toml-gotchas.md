@@ -122,7 +122,9 @@ against the shipped `games/late_shifts/toml_phases/`.
   lives in `costs` OR `effects`, never both. When converting, DELETE the `effects` energy line AND any
   energy clause you put in `conditions`.
 - **Restores stay effects.** `costs` only models a positive spend; a Sleep/Shower energy *gain* is a
-  normal `effects { op = "add", value = +N }`. And a gate is only meaningful if there's a restore to
+  normal `effects { op = "add", value = +N, cap = 100 }` — **cap the restore** (`energy`/`hygiene` are banded,
+  and an unclamped top-up past 100 vanishes the sidebar card; see `references/trait-catalog.md` §4). And a gate
+  is only meaningful if there's a restore to
   earn back through — wire the day-cycle Sleep restore (see "Day System shapes" below) alongside any
   energy gate, or the player dead-ends.
 

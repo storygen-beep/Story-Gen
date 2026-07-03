@@ -46,6 +46,10 @@ a silent cut.
   bare restore (the dead-bath / dead-kitchen gap). ≥1 body-stat (hygiene/energy) *triggers* a routine, not
   just colors prose (`references/trait-catalog.md`). A self-care chore that hooks into nothing where someone is home —
   or a housemate's home block left offscreen so nothing can collide with it — is a gap.
+- **No unclamped banded stat (the vanishing-HUD lint)** — every `op=add` on a banded body-need/resource stat
+  (`energy`/`hygiene`/`charge`/`coin`) clamps or caps into its band range; unbounded, the value leaves its bands
+  and the sidebar card silently disappears (`references/trait-catalog.md` §4). Reads as a *missing* HUD element,
+  not a wrong number — this bug shipped twice before the lint existed.
 - **Shared-private-space (occupancy) beats are built right** (`references/lanes.md` Lane 3 shared-space) — for a confirmed
   shared room (a bathroom): (a) the room stays **enterable** (NO hard `entry_conditions` unless genuinely
   sealed — a hard lock makes a dead-end screen); (b) occupancy gates the **activities** (bath `is_absent`,

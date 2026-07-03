@@ -282,6 +282,11 @@ Run with the repo venv active, in order; emit a PASS/FAIL line for each:
      {op=add, value=-N}` (decrements without gating → cosmetic meter), NEVER gate with `conditions` +
      `locked_text_threshold` (renders a clickable toast-button). `effects` carries only gains (money/relation)
      + `time_progression_minutes`; restores (sleep/shower) stay `effects`-positive.
+   - **banded stats never leave their bands** — every `effects {op=add}` on a bounded banded stat
+     (`energy`/`hygiene`/a custom `charge`/`coin`) carries `clamp=true` (a drop that could pass 0) or `cap=N`
+     (a restore that could pass its ceiling). Unclamped, the value leaves its bands and the sidebar **card
+     renders BLANK** — a *missing* HUD card, not a wrong number, so a quick playtest misses it
+     (`references/trait-catalog.md` §4). Shipped twice in Vesper.
    - **sidebar visibility per arc shape** — a beat that adds an NPC surfaces its traits by shape (family:
      arousal+corruption+relation; slow-burn: arousal+relation; peer/service: relation; antagonist:
      location-only); `stage` + antagonist `awareness` NEVER surface.

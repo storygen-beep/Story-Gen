@@ -131,7 +131,8 @@ Both are 0–100, default 100, and are the body-need axes — they DECAY and RES
 
 - **`energy`** — capacity to act. **Spend it through `costs`, not `effects`** — an `effects` deduction moves
   the number but gates nothing (cosmetic bar); `costs` both gates *and* deducts (`references/toml-gotchas.md`
-  "Resource gating"). Restore via a sleep/nap activity (`effects { op = "add", value = +N }`). No engine daily
+  "Resource gating"). Restore via a sleep/nap activity (`effects { op = "add", value = +N, cap = 100 }` — cap it;
+  `energy` is banded, so an unclamped restore past 100 vanishes the card, see §4 clamp rule above). No engine daily
   decay — sleep is the loop. Don't gate Lane 1 NPC escalation on energy (wrong axis); gate chores/activities.
 - **`hygiene`** — cleanliness. Daily decay only if you author it in `[engine.daily_tick].traitEffects`
   (`value = -N`); restore via shower. A **soft modifier** on NPC-interaction quality — it COLORS scenes
@@ -140,12 +141,25 @@ Both are 0–100, default 100, and are the body-need axes — they DECAY and RES
   — and that shower is a Lane 3 hijack host (`references/lanes.md`), so the decay loop is what delivers the
   player into catchable self-care. Energy + hygiene MUST surface (the player needs to know when to sleep/shower).
 
-`op` is `add` (negative value = decay; there is **no `sub` op**) or `set`. **`clamp = true` clamps the result
-to 0–100 (floor at 0 AND ceiling at 100) — but it is NOT the default:** the effect path passes `eff.clamp ||
-false`, so an effect that omits `clamp` is **unbounded** (correct for `money` and corruption ladders that pass
-100; see `references/engine-reference.md`). To keep a 0–100 body-stat in range, pass **`clamp = true`** (or
-`cap = N` for a per-effect ceiling); clamp/cap math is in `applyTraitEffect` (`v2.py:5304-5313`). `cap = 100`
-or `clamp = true` recommended on a restore so a top-up doesn't overshoot.
+`op` is `add` (negative value = decay; there is **no `sub` op**) or `set`. **Effects are UNBOUNDED by default —
+you opt IN to bounding.** The effect path passes `eff.clamp || false`, so an `op=add` that omits `clamp` applies
+the raw delta with no 0–100 bound (the "Clamp trap" — full mechanism in `references/engine-reference.md`). That is
+correct for the *value* of a one-way climber: `money` (no cap) or a `corruption` odometer meant to pass its
+nominal top.
+
+**But a *banded* stat must never leave its bands, or its sidebar card silently VANISHES.** The band only draws
+when the value lands inside one — `trait_words` matches a **closed** `[min, max]` (`v2.py:15252`);
+`trait_status_text` treats an omitted `min`/`max` as **open** (∓1e9, `v2.py:15183`). A value outside every band
+renders **nothing** — for a text card (`trait_words` / `trait_status_text`) the whole card disappears (§5), which
+reads as a *missing HUD element*, not a wrong number, so a quick playtest sails past it. Guarantee a match two ways:
+- **Bound the value** — every `op=add` on a bounded body-need/resource stat (`energy` · `hygiene` · a custom
+  `charge`/`coin`) carries **`clamp = true`** (a drop that could pass 0) or **`cap = N`** (a restore that could
+  pass its ceiling). Clamp/cap math lives in `_traitClamp` / `applyAndNotifyTrait` (mechanism in
+  `references/engine-reference.md`); `costs` deductions already floor at 0. *(This shipped broken twice in Vesper — Charge went negative, Condition over-capped; both
+  cards vanished.)*
+- **Cover the whole range** — a one-way odometer (`corruption`) whose *value* climbs unbounded still needs its top
+  band to cover wherever it lands: `trait_status_text` can omit the top `max` (open top); `trait_words` needs an
+  explicit high `max` (or `cap` the terminal add), or the word vanishes past the top band.
 
 ---
 
@@ -159,7 +173,7 @@ but only if you suppress the auto number, or it prints twice.
 |---|---|---|---|---|
 | **Identity / qualitative state** | `corruption` | `trait_words` + author `bands` | The player thinks in a word ("Slutty"), not a number — a one-way identity ladder | `v2.py:14997-15032` |
 | **Transient mood** | `arousal` | `trait_bar` + `bands` + `hide_value=true` | A dial that climbs and resets — show the heat band/glyph, hide the volatile raw number | `v2.py:14887-14933` (`hide_value`, `bands`) |
-| **Body-need** | `energy`, `hygiene` | `trait_status_text` + author `bands` | Passive banded body-state; renders **nothing** when no band matches | `v2.py:14934-14962` |
+| **Body-need** | `energy`, `hygiene` | `trait_status_text` + author `bands` | Passive banded body-state; renders **nothing** when the value leaves its bands — clamp/cap every `op=add` (§4 clamp rule) or the card silently vanishes | `v2.py:14934-14962` |
 | **Countable resource** | `money` | `trait_bar`, `hide_value=false`, **NO `bands`** | You want the exact figure ($80), not a word — don't band a thing the player counts | `v2.py:14887-14924` |
 
 There is **no dedicated number/money sidebar type** — a plain resource renders through `trait_bar` with

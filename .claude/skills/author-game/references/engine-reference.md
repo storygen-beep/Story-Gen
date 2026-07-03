@@ -51,7 +51,8 @@ distinction → **`references/trait-catalog.md`**. Which trait spines which arc 
 > `{ trait = "money", op = "add", value = 45 }` — runs with `clamp = false` and applies the raw delta with
 > **no 0–100 bound**. That's correct for `money` (it climbs past 100 freely — `trait-catalog.md`'s "no cap" is
 > right). The flip side: a 0–100 stat (corruption, etc.) will ALSO exceed 100 if you over-add, because nothing
-> auto-clamps it. To BOUND a stat, pass **`clamp = true`** (clamps 0–100) or **`cap = N`** (per-effect ceiling,
+> auto-clamps it — and if a **banded** stat leaves its bands, its sidebar card silently vanishes
+> (`trait-catalog.md` §4). To BOUND a stat, pass **`clamp = true`** (clamps 0–100) or **`cap = N`** (per-effect ceiling,
 > `v2.py:5309-5313`). Spending via per-choice/canvas **`costs`** hardcodes `clamp = true` (`v2.py:4231`), so
 > deductions floor at 0. Bottom line: in TOML, unbounded is the default — clamp/cap is something you add.
 
