@@ -614,7 +614,7 @@ class TweeComprehensiveGeneratorV2:
             nodes = self._get_canvas_nodes_ordered(self.project.starting_canvas)
             canvas_prefix = self._sanitize_canvas_name(self._get_canvas_slug(self.project.starting_canvas))
             for i, node in enumerate(nodes):
-                passage_name = f"StartingCanvas_{canvas_prefix}_Node_{i+1}"
+                passage_name = self._node_passage_name("StartingCanvas", canvas_prefix, node)
                 self.passage_name_map[str(node.id)] = passage_name
 
         # Map included story canvas nodes (by creation order)
@@ -622,7 +622,7 @@ class TweeComprehensiveGeneratorV2:
             nodes = self._get_canvas_nodes_ordered(canvas)
             canvas_prefix = self._sanitize_canvas_name(self._get_canvas_slug(canvas))
             for i, node in enumerate(nodes):
-                passage_name = f"Canvas_{canvas_prefix}_Node_{i+1}"
+                passage_name = self._node_passage_name("Canvas", canvas_prefix, node)
                 self.passage_name_map[str(node.id)] = passage_name
 
     def _build_game_config(self) -> dict[str, Any]:
@@ -676,9 +676,9 @@ class TweeComprehensiveGeneratorV2:
                 # Check if starting canvas has nodes
                 nodes = self._get_canvas_nodes_ordered(self.project.starting_canvas)
                 if nodes:
-                    # Point directly to first node
+                    # Point directly to first node (by stable node slug)
                     canvas_name = self._sanitize_canvas_name(self._get_canvas_slug(self.project.starting_canvas))
-                    start_target = f"StartingCanvas_{canvas_name}_Node_1"
+                    start_target = self._node_passage_name("StartingCanvas", canvas_name, nodes[0])
                 # If no nodes, keep default "StartingCanvas"
             except (AttributeError, TypeError) as e:
                 logger.warning(
@@ -897,7 +897,7 @@ class TweeComprehensiveGeneratorV2:
         for loc in self.locations:
             loc_props = getattr(loc, 'properties', None) or {}
             loc_slug = loc_props.get("slug") or f"loc_{loc.id}"
-            passage_name = f"Location_{loc.name.replace(' ', '_')}"
+            passage_name = self._location_passage_name(loc)
             passage_to_location[passage_name] = loc_slug
         passage_to_location_json = json.dumps(passage_to_location)
 
@@ -944,6 +944,43 @@ class TweeComprehensiveGeneratorV2:
         flags_init_map["game_started"] = True
         flags_init_map["debug_mode"] = bool(self.debug)
         flags_init_json = json.dumps(flags_init_map)
+
+        # ── Save-migration seam (fill-if-absent backfill for cross-release saves) ──
+        # SugarCube never re-runs :: Start on load, so a returning player's save
+        # (from an earlier release) is missing any $npcs / trait / flag a new
+        # release added. setup.stateDefaults carries the current defaults — built
+        # from the SAME dicts Start serializes, so they can't drift — and the
+        # :passagestart handler deep-merges MISSING keys only into loaded state.
+        state_defaults = {
+            "player_core_traits": player_traits,
+            "npcs": npc_map_for_json,
+            "flags": flags_init_map,
+        }
+        state_defaults_json = json.dumps(state_defaults)
+        # Schema signature stamped into every save via Config.saves.version, so a
+        # future build can detect an incompatible save (changes when the trait/flag
+        # key surface or corruption tiers change). The reject-on-mismatch handler is
+        # a deferred follow-up — today the stamp is recorded but inert.
+        import hashlib as _hashlib
+        _schema_sig_src = json.dumps(
+            {
+                "player_traits": sorted(player_traits.keys()),
+                "npc_traits": {
+                    u: sorted((e.get("core_traits") or {}).keys())
+                    for u, e in npc_map_for_json.items()
+                },
+                "flags": sorted(flags_init_map.keys()),
+                "tiers": self.project.metadata.get("corruption_tiers"),
+            },
+            sort_keys=True,
+        )
+        saves_version = int(_hashlib.sha1(_schema_sig_src.encode()).hexdigest()[:8], 16)
+        # Stable save id — pin to the template slug (rename-safe), NOT the default
+        # slugify(StoryTitle), which orphans saves when the game title changes.
+        saves_id = (self.project.metadata.get("template", {}) or {}).get("slug") or str(
+            self.project.id
+        )
+        saves_id_json = json.dumps(saves_id)
 
         # Story arc data for narrative journal
         story_arc_json = self._build_story_arc_json()
@@ -2769,8 +2806,15 @@ if (typeof setup === 'undefined') {{
 // Allow multi-step back navigation (SugarCube default is 40; 20 is a good balance)
 Config.history.maxStates = 20;
 
+// Save identity + version. id is pinned to the stable template slug (rename-safe),
+// not the default slugify(StoryTitle) which orphans saves on a title change.
+// version is a schema signature so a future build can detect an incompatible save.
+Config.saves.id = {saves_id_json};
+Config.saves.version = {saves_version};
+
 // Static lookup data — stored on setup (not State.variables) to avoid deep-clone on every passage transition
 setup.help_data = {help_data_json};
+setup.stateDefaults = {state_defaults_json};
 setup.npc_slug_map = {npc_slug_map_json};
 setup.hiddenNpcs = {hidden_npcs_json};
 setup.locations = {locations_map_json};
@@ -9075,7 +9119,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 """
             for location in self.locations:
                 location_name = location.name.replace(' ', '_')
-                content += f"""    [[{location.name}->Location_{location_name}]]<br>\n"""
+                content += f"""    [[{location.name}->{self._location_passage_for_name(location_name)}]]<br>\n"""
             content += """</div>"""
             return content
 
@@ -9086,7 +9130,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
             "<p>Return to your current location to explore nearby places.</p>",
         ]
         for loc in self.locations:
-            pass_name = f"Location_{loc.name.replace(' ', '_')}"
+            pass_name = self._location_passage_name(loc)
             lines.append(
                 f'<<if $player.current_location == "{loc.id}">>[[Back to {loc.name}->{pass_name}]]<</if>>'
             )
@@ -9095,7 +9139,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         lines.append("<div class=\"location-list\">")
         for location in self.locations:
             location_name = location.name.replace(' ', '_')
-            lines.append(f"    [[{location.name}->Location_{location_name}]]<br>")
+            lines.append(f"    [[{location.name}->{self._location_passage_for_name(location_name)}]]<br>")
         lines.append("</div>")
         lines.append("<</if>>")
         return "\n".join(lines)
@@ -9149,14 +9193,14 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                 if default_entry:
                     # Container WITH default entry: Auto-redirect
                     default_name = default_entry.name.replace(' ', '_')
-                    content += f""":: Location_{location_name}
+                    content += f""":: {self._location_passage_name(location)}
 <!-- Container with default entry: Auto-redirect -->
-<<goto "Location_{default_name}">>
+<<goto "{self._location_passage_for_name(default_name)}">>
 
 """
                 else:
                     # Container WITHOUT default entry: Show inner locations
-                    content += f""":: Location_{location_name}
+                    content += f""":: {self._location_passage_name(location)}
 <h2>{location.name}</h2>
 <p>Choose where to go in {location.name}:</p>\
 <<nobr>>
@@ -9174,10 +9218,10 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         if getattr(connected_loc, 'is_container', False) and getattr(connected_loc, 'default_entry_location', None):
                             # If destination is container with default_entry, go to default_entry directly
                             default_entry_name = connected_loc.default_entry_location.name.replace(' ', '_')
-                            content += f"[[{connected_loc.name}->Location_{default_entry_name}]]<br>\n"
+                            content += f"[[{connected_loc.name}->{self._location_passage_for_name(default_entry_name)}]]<br>\n"
                         else:
                             # Regular location or container without default_entry
-                            content += f"[[{connected_loc.name}->Location_{connected_name}]]<br>\n"
+                            content += f"[[{connected_loc.name}->{self._location_passage_for_name(connected_name)}]]<br>\n"
 
                     # Add normal hierarchical navigation for containers without default_entry
                     content += """<div class="location-navigation">
@@ -9209,7 +9253,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     if self.clothing_enabled and self.shop_location_slug and loc_slug_ec == self.shop_location_slug:
                         shop_link_ec = '[[Browse Clothes->ShopPage]]<br>\n'
 
-                    content += f""":: Location_{location_name}
+                    content += f""":: {self._location_passage_name(location)}
 <<if setup.triggerConditionsSatisfied({entry_cond_json})>>\
 <<nobr>>
 <<set $player.current_location = "{location_id}">>
@@ -9227,7 +9271,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 """
                     navigation_options = self._generate_hierarchical_navigation(location)
                     content += navigation_options
-                    go_back_target = f"Location_{parent_name}" if parent_name else "Start"
+                    go_back_target = self._location_passage_for_name(parent_name) if parent_name else "Start"
                     if blocked_message:
                         resolved_blocked = self._resolve_at_references(blocked_message)
                         blocked_html = f'<p class="entry-blocked-narrative">{resolved_blocked}</p>'
@@ -9257,7 +9301,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     if self.clothing_enabled and self.shop_location_slug and loc_slug == self.shop_location_slug:
                         shop_link = '[[Browse Clothes->ShopPage]]<br>\n'
 
-                    content += f""":: Location_{location_name}
+                    content += f""":: {self._location_passage_name(location)}
 <<nobr>>
 <<set $player.current_location = "{location_id}">>
 <<if not $game_state.visited_locations.includes("{location_id}")>>
@@ -10436,7 +10480,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         for loc in self.locations:
             loc_props = getattr(loc, 'properties', None) or {}
             loc_slug = loc_props.get("slug") or f"loc_{loc.id}"
-            slug_to_passage_name[loc_slug] = f"Location_{loc.name.replace(' ', '_')}"
+            slug_to_passage_name[loc_slug] = self._location_passage_name(loc)
 
         # Build locationCanvases mapping for navigation indicators
         # Maps location_id -> list of canvas metadata for availability checking
@@ -10476,9 +10520,13 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                 # Get priority for priority-based selection (default 0 for backward compatibility)
                 priority = getattr(trigger, 'priority', 0) if trigger else 0
 
-                # Build passage name for dynamic rendering
+                # Build passage name for dynamic rendering (stable node slug)
                 canvas_prefix = self._sanitize_canvas_name(self._get_canvas_slug(canvas))
-                first_node_passage = f"Canvas_{canvas_prefix}_Node_1"
+                _cv_nodes = self._get_canvas_nodes_ordered(canvas)
+                first_node_passage = (
+                    self._node_passage_name("Canvas", canvas_prefix, _cv_nodes[0])
+                    if _cv_nodes else f"Canvas_{canvas_prefix}"
+                )
 
                 # Check if inherited
                 inherited_from = canvas_info.get('inherited_from')
@@ -10539,6 +10587,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     "name": canvas.name,  # For grouping tiers by activity name
                     "displayName": display_name,  # For link display
                     "passageName": first_node_passage,  # For link target
+                    "canvasSlug": canvas_prefix,  # Explicit slug (was parsed from passageName; now node slugs make that ambiguous)
                     "priority": priority,  # For priority-based selection
                     "hasSchedules": canvas_info['has_schedules'],
                     "scheduleParams": schedule_params,
@@ -11194,6 +11243,40 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         """Sanitize canvas name for use in Twee passage names."""
         return canvas_name.replace(' ', '_').replace('-', '_').replace("'", "").replace('"', '')
 
+    def _node_passage_name(self, passage_prefix, canvas_prefix, node):
+        """Twee passage name for a node — STABLE across releases.
+
+        Uses the node SLUG (its TOML id, unique within the canvas), NOT its
+        positional ordinal. So inserting/reordering/deleting a node in a shipped
+        canvas no longer shifts other nodes' passage names → a returning player's
+        save (which stores the passage name) still resolves to the same scene.
+        """
+        node_slug = self._sanitize_canvas_name(
+            ((node.node_data or {}).get("slug") or "node")
+        )
+        return f"{passage_prefix}_{canvas_prefix}_Node_{node_slug}"
+
+    def _location_passage_name(self, loc):
+        """Twee passage name for a location — STABLE across releases.
+
+        Uses the location SLUG, not its display name, so renaming a room no
+        longer moves its passage → a save parked there still resolves.
+        """
+        return f"Location_{self._location_nav_slug(loc)}"
+
+    def _location_passage_for_name(self, name_underscored):
+        """Map a display-name-derived string (``loc.name.replace(' ','_')``) to the
+        slug-based Location passage name, for the many link/goto sites that only
+        have the name string in scope. Falls back to the old form if unknown."""
+        cache = getattr(self, '_loc_passage_name_cache', None)
+        if cache is None:
+            cache = {
+                loc.name.replace(' ', '_'): self._location_passage_name(loc)
+                for loc in self.locations
+            }
+            self._loc_passage_name_cache = cache
+        return cache.get(name_underscored, f"Location_{name_underscored}")
+
     def _slugify(self, name: str) -> str:
         """Convert a name to a URL-safe slug (lowercase, underscores)."""
         import re
@@ -11505,7 +11588,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
             if hasattr(canvas, 'trigger') and canvas.trigger and canvas.trigger.location_id:
                 location = self._get_location_by_id(canvas.trigger.location_id)
                 if location:
-                    return f"Location_{location.name.replace(' ', '_')}"
+                    return self._location_passage_name(location)
         except (AttributeError, TypeError) as e:
             logger.warning("Error determining return location for canvas: %s", e)
 
@@ -11559,14 +11642,14 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 
         # Loop config for this canvas (if any)
         loop_config = self._get_loop_config(canvas)
-        base_passage_name = f"{passage_prefix}_{canvas_prefix}_Node_1" if loop_config else None
+        base_passage_name = self._node_passage_name(passage_prefix, canvas_prefix, nodes[0]) if (loop_config and nodes) else None
 
         # Build node map for loop_terminal checks (keyed by UUID string)
         canvas_node_map = {str(n.id): n for n in nodes} if loop_config else {}
 
         # Map of node.id -> passage name is already built; use it for links
         for i, node in enumerate(nodes):
-            node_passage_name = f"{passage_prefix}_{canvas_prefix}_Node_{i+1}"
+            node_passage_name = self._node_passage_name(passage_prefix, canvas_prefix, node)
             node_content = self._extract_node_content(node)
 
             # Dev mode: show canvas/node info at top of passage
@@ -12428,7 +12511,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         if location_id:
                             loc = self._get_location_by_id(location_id)
                             if loc:
-                                target_passage = f"Location_{loc.name.replace(' ', '_')}"
+                                target_passage = self._location_passage_name(loc)
                             else:
                                 target_passage = BROKEN_EXIT
                                 logger.error(f"BROKEN EXIT — choice in node {node.id} references unknown locationId {location_id!r} (validator should have caught this)")
@@ -12494,7 +12577,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                         # Resolve by ID and format using the location's name (matches passage naming)
                         loc = self._get_location_by_id(location_id)
                         if loc:
-                            next_passage = f"Location_{loc.name.replace(' ', '_')}"
+                            next_passage = self._location_passage_name(loc)
                         else:
                             next_passage = BROKEN_EXIT
                             logger.error(f"BROKEN EXIT — exit_block for node {node.id} references unknown locationId {location_id!r} (validator should have caught this)")
@@ -14115,12 +14198,10 @@ setup.lookupCanvasBySlug = function(slug) {
         for (var i = 0; i < list.length; i++) {
             var c = list[i];
             if (!c) continue;
-            // Primary match: parse slug from passageName ("Canvas_<slug>_Node_<n>").
-            if (c.passageName) {
-                var canvasSlug = c.passageName.replace(/^Canvas_/, "").replace(/_Node_\d+$/, "");
-                if (canvasSlug === slug) {
-                    return { canvas: c, locUuid: locUuid };
-                }
+            // Primary match: explicit canvasSlug field (node passages are now
+            // Canvas_<slug>_Node_<nodeSlug>, so re-parsing the name is ambiguous).
+            if (c.canvasSlug && c.canvasSlug === slug) {
+                return { canvas: c, locUuid: locUuid };
             }
             // Fallback: direct id match (covers any future canvas indexing by slug).
             if (c.id === slug) {
@@ -14460,6 +14541,40 @@ window.devGoBack = function() {
 // AND setup.smartBack() share ONE list (they can't drift apart).
 setup.infoPages = """ + info_pages_list + """;
 
+// Cross-release save migration: fill-if-absent deep-merge of the current default
+// skeleton (setup.stateDefaults) into a loaded save's State.variables. Adds any
+// $npcs / core_trait / flag a newer release introduced (SugarCube never re-runs
+// :: Start on load); NEVER overwrites an earned value. Idempotent. Called from the
+// :passagestart handler below on every passage (fresh play = no-op, all present).
+setup.backfillStateDefaults = function (sv) {
+    var sd = setup.stateDefaults;
+    if (!sd || !sv) return;
+    if (!sv.flags) sv.flags = {};
+    var df = sd.flags || {};
+    for (var fk in df) { if (!(fk in sv.flags)) sv.flags[fk] = df[fk]; }
+    if (sv.player) {
+        if (!sv.player.core_traits) sv.player.core_traits = {};
+        var pt = sd.player_core_traits || {};
+        for (var tk in pt) { if (!(tk in sv.player.core_traits)) sv.player.core_traits[tk] = pt[tk]; }
+    }
+    if (!sv.npcs) sv.npcs = {};
+    var dn = sd.npcs || {};
+    for (var ns in dn) {
+        var def = dn[ns];
+        if (!sv.npcs[ns]) {
+            sv.npcs[ns] = JSON.parse(JSON.stringify(def));  // whole new NPC (deep-copy off setup; JSON-safe)
+        } else {
+            var cur = sv.npcs[ns];
+            if (!cur.core_traits) cur.core_traits = {};
+            var dct = def.core_traits || {};
+            for (var ct in dct) { if (!(ct in cur.core_traits)) cur.core_traits[ct] = dct[ct]; }
+            if (!cur.flags) cur.flags = {};
+            var dfl = def.flags || {};
+            for (var cf in dfl) { if (!(cf in cur.flags)) cur.flags[cf] = dfl[cf]; }
+        }
+    }
+};
+
 // State-restoring "Back" for sidebar/info pages. Engine.play() navigates FORWARD
 // and RE-RUNS the target passage — on a one-time auto-fire canvas that re-fires
 // its advanceTime/flag scripts and bloats history (the reported bug: "going back
@@ -14495,6 +14610,10 @@ $(document).on(':passagestart', function(ev) {
         }
         delete sv.player.flags;
     }
+    // Cross-release save backfill: fill-if-absent from setup.stateDefaults so a
+    // save from an earlier release picks up any NPC / trait / flag a newer release
+    // added (SugarCube never re-runs :: Start on load). See setup.backfillStateDefaults.
+    if (setup.backfillStateDefaults) { setup.backfillStateDefaults(sv); }
     var psg = ev.passage.title;
     var infoPages = setup.infoPages;
 """ + rent_redirect_block + clothing_redirect_block + travel_cost_block + """    if (infoPages.indexOf(psg) === -1) {
@@ -18113,7 +18232,7 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
         the in-world reason. A travel-cost tag rides along when the location has costs."""
         loc_id = str(loc.id)
         slug = self._location_nav_slug(loc)
-        passage_name = f"Location_{loc.name.replace(' ', '_')}"
+        passage_name = self._location_passage_name(loc)
         safe_name = html.escape(loc.name)
         image = self.location_images.get(loc_id, "")
         if image:
@@ -18142,7 +18261,7 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
         """Text-mode sibling of _render_location_nav_card (lock-as-prose + cost tag)."""
         loc_id = str(loc.id)
         slug = self._location_nav_slug(loc)
-        link_name = f"Location_{loc.name.replace(' ', '_')}"
+        link_name = self._location_passage_name(loc)
         cost_tag = f'<<if setup.getLocationCostTag("{slug}")>> <span class="nav-cost-tag"><<= setup.getLocationCostTag("{slug}")>></span><</if>>'
         open_link = (
             f'[[{loc.name}->{link_name}]]'
@@ -18230,7 +18349,7 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
                 # Exit to container's entry_from location if it exists
                 if container.entry_from:
                     exit_destination_name = container.entry_from.name.replace(' ', '_')
-                    exit_destination = f"Location_{exit_destination_name}"
+                    exit_destination = self._location_passage_for_name(exit_destination_name)
                     exit_links.append(f"    [[Exit {container.name}->{exit_destination}]]<br>\n")
 
         # Add exit links section if any exist
@@ -18292,11 +18411,11 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
             # If exit location would auto-redirect, go to its default_entry directly
             default_entry = exit_location.default_entry_location
             default_entry_name = default_entry.name.replace(' ', '_')
-            return f"Location_{default_entry_name}"
+            return self._location_passage_for_name(default_entry_name)
         else:
             # Normal direct exit
             exit_name = exit_location.name.replace(' ', '_')
-            return f"Location_{exit_name}"
+            return self._location_passage_for_name(exit_name)
 
     def _generate_exit_navigation(self, container):
         """Generate exit navigation options with bidirectional connection discovery.
@@ -18324,10 +18443,10 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
                 if getattr(dest, 'is_container', False) and getattr(dest, 'default_entry_location', None):
                     # If destination is container with default_entry, go to default_entry directly
                     default_entry_name = dest.default_entry_location.name.replace(' ', '_')
-                    navigation_html += f"[[{dest.name}->Location_{default_entry_name}]]<br>\n"
+                    navigation_html += f"[[{dest.name}->{self._location_passage_for_name(default_entry_name)}]]<br>\n"
                 else:
                     # Regular location or container without default_entry
-                    navigation_html += f"[[{dest.name}->Location_{dest_name}]]<br>\n"
+                    navigation_html += f"[[{dest.name}->{self._location_passage_for_name(dest_name)}]]<br>\n"
 
         # Add inbound connection (where this container came from)
         if inbound_connection:
@@ -18337,10 +18456,10 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
             if getattr(inbound_connection, 'is_container', False) and getattr(inbound_connection, 'default_entry_location', None):
                 # If inbound is container with default_entry, go to default_entry directly
                 default_entry_name = inbound_connection.default_entry_location.name.replace(' ', '_')
-                navigation_html += f"[[Back to {inbound_connection.name}->Location_{default_entry_name}]]<br>\n"
+                navigation_html += f"[[Back to {inbound_connection.name}->{self._location_passage_for_name(default_entry_name)}]]<br>\n"
             else:
                 # Regular location or container without default_entry
-                navigation_html += f"[[Back to {inbound_connection.name}->Location_{inbound_name}]]<br>\n"
+                navigation_html += f"[[Back to {inbound_connection.name}->{self._location_passage_for_name(inbound_name)}]]<br>\n"
 
         # Add re-enter container option (to cancel exit and go back inside)
         navigation_html += "<p><strong>Or stay inside:</strong></p>\n"
@@ -18350,10 +18469,10 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
             # Container WITH default_entry: go to default_entry location
             default_entry = container.default_entry_location
             default_entry_name = default_entry.name.replace(' ', '_')
-            navigation_html += f"[[Re-enter {container.name}->Location_{default_entry_name}]]<br>\n"
+            navigation_html += f"[[Re-enter {container.name}->{self._location_passage_for_name(default_entry_name)}]]<br>\n"
         else:
             # Container WITHOUT default_entry: go to main container passage
-            navigation_html += f"[[Re-enter {container.name}->Location_{container_name}]]<br>\n"
+            navigation_html += f"[[Re-enter {container.name}->{self._location_passage_for_name(container_name)}]]<br>\n"
 
         # Add fallback navigation if no connections found
         if not navigation_html:
