@@ -14,6 +14,17 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 -->
 
 ## 2026-07-04
+- **kink-ceilings.md — "a character truth is a writing LENS, not a content GATE"** (backlog #14) — the skill's
+  explicit-content doctrine covered vocabulary crudeness (§1 deliver-don't-soft-pedal, §8 anti-patterns) but not
+  the reflex LO stopped twice in Vesper's Renner round: using a characterization note ("she feels only the sex,
+  never comfort") to VETO/narrow a hot beat (cheer-him-up-with-sex → "cold help only"; a "but never I care about
+  you" asterisk) — "this is not a society-helpful game, we are building an adult porn game." Added a §1 subsection
+  (the lens/gate split + why + the reconciliation that the DECLARED caps — vocab ceiling §2, place ceiling §5,
+  tier gate §4, `lanes.md` honest empty cells — stay legitimate; the rule bans only ad-hoc keyboard-time purity
+  narrowing), citing the existing precedent `trait-design.md` (throttle-keyed prose is heat-not-status); + a §8
+  anti-pattern bullet ("Character-purity restraint reflex"); + a Contents pointer. Reconciled against a skill-wide
+  sweep's 4 tension points so it can't be read as overriding "consummation if vocab allows" (`lanes.md`). Doctrine
+  only, zero engine change.
 - **NEW `references/system-patterns.md`** + wiring — reframes backlog item #1 (the "systems invented after the
   game was called done" root cause). Root problem: the skill's only "systems" moment was `step-2-toplevel.md §8`,
   which declared **engine toggles only** and implied systems are decided up front — but ~half of Vesper's systems

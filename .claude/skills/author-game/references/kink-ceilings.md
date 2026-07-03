@@ -12,7 +12,7 @@ explicit register, so it doesn't flinch: the examples below use the real words b
 must use the real words.
 
 ## Contents
-- §1 — The default: deliver at the ceiling, don't soft-pedal
+- §1 — The default: deliver at the ceiling, don't soft-pedal (+ a character truth = lens, not gate)
 - §2 — The kink-area ceiling table (the spec)
 - §3 — The maximum-explicit default (when a NEW kink area surfaces)
 - §4 — Tier-GATED, not tier-LINEAR (the ceiling is a cap, not a forced grid)
@@ -43,6 +43,25 @@ prose goes **crude and anatomical** — real terms (`cock`, `cunt`, `tits`, `ass
 + crude is the target; flat + coy is the failure.
 
 **Deliver, don't soft-pedal** — the one line to carry into every Tier 4+ scene.
+
+### A character truth is a writing LENS, not a content GATE
+
+One soft-pedal disguises itself as good writing: using a character's nature to *narrow the content.* "She's cold
+— she feels nothing but the sex" becomes the excuse to collapse a cheer-him-up-with-sex beat into "cold help
+only," or to bolt a *"but never 'I care about you'"* asterisk onto a hot scene for character-purity. That reflex
+is a **brake on the product** — this is an adult game built for player experience; **lead with the hot version.**
+
+The split: a character's emotional truth (cold, detached, broken, feels only the sex) is a **LENS** — it colors
+HOW a scene reads (her interior blankness, the flat register, no tenderness in her *voice*). It is **never a
+GATE** on WHAT content exists or how explicit it gets. Coldness changes the delivery, not the deliverable. Same
+shape as the arousal rule (`references/trait-design.md`: throttle-keyed prose stays *heat-of-the-moment*, never
+rewrites the permanent content) — a state colors the prose, it doesn't cut it.
+
+This does **not** loosen the **declared** caps — the vocab ceiling (§2), the place ceiling (§5), the tier gate
+(§4), an arc's honest empty cells (`references/lanes.md`). Those are chosen on purpose at brief/blueprint time and
+they stay. What the rule bans is the *ad-hoc, keyboard-time* narrowing you invent in the name of character purity.
+If a scene genuinely shouldn't exist, that's a design call made in the open (a ceiling, a budget) — never a purity
+reflex mid-draft.
 
 ---
 
@@ -246,6 +265,12 @@ whose ceiling demands them is a positive failure. Run it; it's the cheapest catc
 - **Reframing the kink as a wholesome dynamic.** A cuckold branch resolved as "they became close friends"; a
   non-con beat softened into reluctant-but-into-it. *Fix:* the kink IS the resolution — play it at the row's
   ceiling, don't sand it down.
+
+- **Character-purity restraint reflex.** Using a character truth ("she's cold / feels only the sex / never
+  comfort") to VETO or narrow a hot beat — collapsing a cheer-him-up-with-sex scene to "cold help only," or
+  tacking a *"but never 'I care about you'"* asterisk onto explicit content. *Fix:* §1 — a character truth is a
+  writing LENS (it colors the voice), never a content GATE; lead with the hot version, let the coldness color the
+  delivery, not cut it. (Distinct from the DECLARED caps in §2/§4/§5, which stay.)
 
 - **Treating outdoor as a location label.** "He takes her in the yard" with no risk-frame. *Fix:* the public
   row says FULL RISK + ONLOOKER AWARENESS — name the visibility; the risk is the kink.

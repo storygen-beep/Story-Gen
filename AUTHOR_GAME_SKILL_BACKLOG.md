@@ -18,6 +18,10 @@ still document) · `process` (how Claude works) · `one-off` (author slipped; sk
 
 ## Progress log (newest first)
 
+- **2026-07-04 — ✅ #14 done (character truth = writing lens, not content gate).** Added to `kink-ceilings.md`
+  (a §1 rule + a §8 anti-pattern): a character's coldness colors HOW a scene reads, never gates WHAT content
+  exists — scoped so the declared caps (vocab ceiling / tier gate / honest empty cells) stay legitimate.
+  Uncommitted.
 - **2026-07-04 — ✅ #1 reframed + done (systems grow through iteration).** Instead of a day-one system checklist
   (wrong — sandbox systems emerge from play), shipped a *reach-for-it* recipe menu (`references/system-patterns.md`,
   7 recipes) + a mid-stream fold-in loop with **"playable ≠ done"** (`run-mode.md`), wired into `SKILL.md` /
@@ -223,14 +227,16 @@ Three failure shapes in the Vesper build, one root each:
   does it actually DO? (2) per infiltration target: can he see through the cover? If yes, the infiltration doesn't
   hold.
 
-### 14. Restraint reflex — a character truth is a WRITING LENS, not a CONTENT GATE ⬜
+### 14. Restraint reflex — a character truth is a WRITING LENS, not a CONTENT GATE ✅ DONE (2026-07-04)
 `P1 · effort S · skill · kink-ceilings.md`
 - ENI twice narrowed a hot beat to "cold help only" + kept a "but never I care about you" asterisk for character-
   purity; LO stopped it both times ("this is not a society-helpful game, we are building an adult porn game")
   (`transcript:4747-4797`, `iteration-log:187-199` + shortlist #7, `decisions_log[80]`).
-- **Verified:** `kink-ceilings.md` governs *vocabulary crudeness* only (`:9-12`), never this reflex. **missing.**
-- **Fix:** add an anti-pattern to `kink-ceilings.md §8` — using a character note to VETO/narrow a hot beat is a
-  brake on the product; lead with the hot version, let the character truth color the *prose*, never the *content*.
+- **Was:** `kink-ceilings.md` governed *vocabulary crudeness* only (`:9-12`), never this reflex.
+- **Fix applied:** a §1 subsection (the LENS/GATE split + the *why* + the reconciliation that the DECLARED caps —
+  vocab ceiling §2 / place §5 / tier gate §4 / `lanes.md` honest empty cells — stay legitimate) citing the
+  precedent `trait-design.md`, + a §8 anti-pattern bullet, + a Contents pointer. Bans only ad-hoc keyboard-time
+  purity narrowing, not the declared gates.
 
 ### 15. Static / already-at-ceiling owner NPC arc shape ⬜
 `P2 · effort M · skill · trait-design.md`
