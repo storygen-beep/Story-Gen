@@ -78,9 +78,13 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
   (see also the engine ground-truth below).
 - **Structure is stable-and-extensible:** it may grow (new location/NPC/flag), but ONLY via an explicit
   amendment done WHOLE (location → def + lock + schedule + unlock beat; NPC → schedule + open on-ramp; flag
-  → reachable setter) and registered in `structure_registry`. Never a bare dangling reference. And on a
-  **shipped** game (players may have saves) *extend* only — never **rename** an existing `id`, live flag/trait
-  key, stat scale, or the title, or you orphan their saves (`references/save-safety.md`).
+  → reachable setter) and registered in `structure_registry`. Never a bare dangling reference. A whole new
+  **system** grows the same way, **mid-stream** — most systems EMERGE from play, not the seed, so a playable
+  build is *keep iterating*, not *done*; fold each in through its quick design→place→build→fold passes
+  (`references/run-mode.md` "Systems grow through iteration"), reaching for a ready recipe in
+  `references/system-patterns.md`. And on a **shipped** game (players may have saves) *extend* only — never
+  **rename** an existing `id`, live flag/trait key, stat scale, or the title, or you orphan their saves
+  (`references/save-safety.md`).
 - **Engine-forced changes bounce UP to the design book**, surfaced — never silently patched into TOML.
 - **Register authority lives here, not in CLAUDE.md.** Lane 1/2/3 = RTS-flat default; Lane 4
   capstones = Tier-3 earned (voice register in `references/lanes.md`). The CLAUDE.md ENI persona
@@ -164,6 +168,11 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
 - `references/systems.md` — the optional-systems dispatch hub (clothing/rent/phone/customization + HUD),
   each with its TOML home, **full in-skill reference** (`clothing.md` · `rent.md` · `phone.md` ·
   `customization.md` · `hud.md`), and signature trap.
+- `references/system-patterns.md` — the **grow-a-system menu**: reach-for-it recipes for the AUTHORED
+  subsystems a game grows into as you iterate (disguise/cover · capability track · crawl · second economy ·
+  reload upkeep · loadout · day-depth). Distinct from `systems.md` (the ENGINE toggles) — these you do NOT pick
+  at the seed; you reach for one when play reveals a gap, then fold it in via `run-mode.md` "Systems grow
+  through iteration." Read when a game feels like it needs a new system.
 - `references/trait-catalog.md` — every built-in trait's range/default/decay/bands + the encode-by-type
   sidebar mapping (the DATA layer; `trait-design.md` is the design layer).
 - `references/kink-ceilings.md` — the per-arc kink/vocabulary explicit-ceiling model (default-to-maximum).

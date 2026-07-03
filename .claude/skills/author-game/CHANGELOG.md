@@ -13,6 +13,27 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-07-04
+- **NEW `references/system-patterns.md`** + wiring — reframes backlog item #1 (the "systems invented after the
+  game was called done" root cause). Root problem: the skill's only "systems" moment was `step-2-toplevel.md §8`,
+  which declared **engine toggles only** and implied systems are decided up front — but ~half of Vesper's systems
+  (disguise, capability/skill track, the underworld coin economy, weapon reload, loadout, day-depth) legitimately
+  **emerged from play** and then got jammed in raw as Step-7 beats, skipping the design passes, after the ledger
+  had effectively said "done." Fix is NOT "decide earlier" (that fights how sandbox design works); it's (a) a
+  reach-for-it **recipe menu** of the common authored subsystems, framed explicitly as *not* a seed-time
+  checklist, and (b) a first-class **mid-stream fold-in loop** so a discovered system still gets its quick
+  design→place→build→fold passes instead of duct-tape, with **"playable ≠ done"** made doctrine. `system-patterns.md`
+  carries 7 starter recipes (disguise/cover · capability · crawl · second economy · reload upkeep · loadout ·
+  day-depth), each with when-you-reach-for-it / the shape / the trap, cross-linked to the owning references and
+  the #8 clamp rule; engine facts kept to stable anchors (no brittle line cites, since the engine was just
+  renumbered by `8446b3d`). Wiring: `run-mode.md` NEW section "Systems grow through iteration — playable ≠ done"
+  (the 4-pass loop); `SKILL.md` operating rule "Structure is stable-and-extensible" extended from
+  location/NPC/flag to whole systems + a doctrine-library bullet; `step-2-toplevel.md §8` reframed to declare
+  engine toggles now but let authored subsystems emerge; `systems.md` gains a pointer distinguishing ENGINE
+  toggles from these AUTHORED patterns. Doctrine only, zero engine change. Verified: grep-consistency (every new
+  cross-ref resolves); the menu is deliberately distinct from `systems.md`. Also updates the root
+  `AUTHOR_GAME_SKILL_BACKLOG.md` (#1 reframed; #2–#7 now have starter recipes, deepen on demand).
+
 ## 2026-07-03
 - **NEW `references/save-safety.md`** + wiring in `SKILL.md` (Engine-ground-truth item 9, a Knowledge-base
   index bullet, and a reinforcement on the "Structure is stable-and-extensible" operating rule) — the skill

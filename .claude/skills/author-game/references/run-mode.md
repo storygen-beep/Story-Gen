@@ -107,6 +107,32 @@ The point: never barrel down a locked plan — show the board (what's done / wha
 piece, keep the choice with the user. The proposal is always offered; accepting it is one word, so it never
 becomes death-by-questions.
 
+## Systems grow through iteration — playable ≠ done
+The pipeline gets you to a **playable** game; it does not get you to a **finished** one. A playable build is
+*"playable, keep iterating,"* not *"done."* You will NOT have decided every system at the seed — most **emerge**
+only once the game is concrete and you've played it and *felt* a gap ("this day is thin," "she needs a way to
+pass as staff," "the fight needs stakes"). That is normal, good design — not a planning failure.
+
+What matters is HOW a discovered system gets folded in. The failure mode (the first games) is jamming it
+straight into TOML as a raw Step-7 beat — skipping the design passes — after the project has quietly decided
+it's "done." Instead, give a mid-stream system the **same quick passes a day-one system gets**, just entered
+where you are:
+1. **What / why / how it feels** — a short design-book note: what the system is, why the game needs it now, how
+   it should FEEL. *(the Step-4 story pass, in miniature)*
+2. **Place it** — which locations / traits / gates, how it wires into the machine and the day; register the new
+   pieces in `structure_registry`. *(the Step-5 blueprint pass, in miniature)*
+3. **Build + verify green** — author it, build, live-check it. *(Step 7)*
+4. **Fold the ripple back** — update the design book + ledger so the record still matches the game.
+
+Before inventing a system live, open `references/system-patterns.md` — the menu of common ones (disguise,
+capability, crawl, second economy, reload, loadout, day-depth) with a ready recipe each. Grab the recipe, run
+it through the four passes above.
+
+On a **shipped** game (players may hold saves), a mid-stream system may only ADD — never rename a live
+id/flag/trait key, rescale a stat, or change the title (`references/save-safety.md`).
+
+> Discovering a system late is fine; *duct-taping* it is not. Same rigor, entered mid-stream.
+
 ## The anti-hallucination contract (Law 3, made concrete)
 - **Unsure on a creative/identity call → ASK (Mode A), don't guess.**
 - **Engine/reference facts → VERIFY against the files** before relying on them. (Agents hallucinate doc

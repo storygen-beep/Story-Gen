@@ -200,9 +200,14 @@ paper; each closes a real blind spot.
   *(§8 declares WHAT the opening must teach; the **method** that authors it — the linear funnel, surface each
   live system once, the why-locked surfaces, the win/fail contract — and the hard-gate Step-6 rubric live in
   `references/onboarding.md`.)*
-- **The systems in play (§1E).** Declare which optional engine systems this game switches **ON** (phone /
+- **The systems in play (§1E).** Declare which optional **engine** systems this game switches **ON** (phone /
   rent-debt clock / clothing wardrobe / customization) and which it leaves **OFF** — each named in or out, so
-  none is half-wired by accident and none silently forgotten (`references/systems.md`).
+  none is half-wired by accident (`references/systems.md`). *Mind the split:* those coarse engine toggles are
+  worth settling now, but the finer **authored** subsystems (a disguise, a skill track, a second economy, a
+  reload loop, day-depth) are **not** all decided here — most EMERGE once the game is concrete and you've played
+  it and felt a gap. Name any you already know you want; **leave the rest to grow in through play** — don't
+  force a full systems list at the seed (the menu + the fold-in loop: `references/system-patterns.md` +
+  `references/run-mode.md` "Systems grow through iteration").
 - **The fail-state declaration (§1C).** Declare whether **failure exists at all**: when she refuses a beat,
   neglects a person for days, lets the deadline lapse, or runs out of money, does anything get **worse**, **close
   off**, or **push back** — or is forward the only direction? A forward-only ratchet is a legitimate
