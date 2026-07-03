@@ -64,6 +64,11 @@ class TweeComprehensiveGeneratorV2:
 
     def __init__(self):
         self.project = None
+        # No-DB build (the DEFAULT): when set, the generator reads this in-memory
+        # object graph instead of querying the ORM (see game_graph.build_game_graph).
+        # The `if self.graph is None:` ORM fallback branches throughout are the
+        # DEPRECATED legacy DB path, kept for the web API / elora / test callers.
+        self.graph = None
         self.locations = []
         self.connections = []
         self._adjacency = {}
@@ -92,18 +97,26 @@ class TweeComprehensiveGeneratorV2:
         self.location_images = {}  # location_id -> resolved image path (only found files)
         self.location_image_defined = set()  # location_ids with image path defined (found or missing)
 
-    def generate(self, project: Project, options: Optional[dict] = None) -> str:
+    def generate(
+        self,
+        project: Project,
+        options: Optional[dict] = None,
+        graph: Optional[object] = None,
+    ) -> str:
         """
         Generate comprehensive Twee content.
 
         Args:
             project: Django Project instance
             options: Optional generation options
+            graph: Optional in-memory GameGraph for the no-DB build path. When
+                provided, all data intake reads the graph instead of the ORM.
 
         Returns:
             str: Complete Twee content with all features
         """
         self.project = project
+        self.graph = graph
         self.options = options or {}
 
         # Load video files if video_folder is provided
@@ -310,6 +323,24 @@ class TweeComprehensiveGeneratorV2:
 
     def _load_project_data(self):
         """Load project data including story canvases with schedule information."""
+        if self.graph is not None:
+            # No-DB path: read the in-memory graph instead of the ORM.
+            self.locations = self.graph.locations
+            self.clips_by_id = {}
+            starting_id = (
+                str(self.project.starting_canvas.id)
+                if self.project.starting_canvas else None
+            )
+            # Mirror StoryCanvas.Meta.ordering ["display_order"(=0), "-created_at"]
+            # = reverse insertion order (canvases minted in template order).
+            ordered = sorted(self.graph.canvases, key=lambda c: c._seq, reverse=True)
+            self.story_canvases = [
+                c for c in ordered
+                if str(c.id) != starting_id
+                and getattr(c, 'trigger', None) and c.trigger.location_id
+            ]
+            return
+
         from apps.stories.models import StoryCanvas
         from apps.world.models import Location
 
@@ -388,6 +419,12 @@ class TweeComprehensiveGeneratorV2:
         Bulk load clips with SECURITY CRITICAL owner filtering.
         PERFORMANCE: Single query to avoid N+1 problem.
         """
+        if self.graph is not None:
+            # No-DB / local-media builds don't reference AssetClip UUID blocks;
+            # media resolves from the filesystem video-folder instead.
+            self.clips_by_id = {}
+            return
+
         from apps.assets.models import AssetClip
         from apps.stories.models import StoryCanvas
         import uuid as uuid_module
@@ -404,7 +441,7 @@ class TweeComprehensiveGeneratorV2:
         ).prefetch_related('nodes')
 
         for canvas in canvases:
-            for node in canvas.nodes.all():
+            for node in self._get_canvas_nodes_ordered(canvas):
                 if not hasattr(node, 'node_data') or not node.node_data:
                     continue
                 blocks = node.node_data.get('blocks', [])
@@ -443,6 +480,10 @@ class TweeComprehensiveGeneratorV2:
 
     def _compute_included_canvases(self):
         """Compute the full set of canvases to include: starting, triggered, and any referenced by node-target choices."""
+        if self.graph is not None:
+            self._compute_included_canvases_graph()
+            return
+
         from apps.stories.models import StoryCanvas, StoryNode
 
         included_ids = set()
@@ -483,7 +524,7 @@ class TweeComprehensiveGeneratorV2:
                             included_ids.add(str(target_canvas.id))
                             changed = True
 
-                for node in canvas.nodes.all():
+                for node in self._get_canvas_nodes_ordered(canvas):
                     try:
                         exit_block = getattr(node, 'exit_block', None) or {}
                         if exit_block.get('type') == 'choices':
@@ -514,6 +555,57 @@ class TweeComprehensiveGeneratorV2:
             included_ids.discard(str(self.project.starting_canvas.id))
         from apps.stories.models import StoryCanvas as SC
         self.story_canvases = list(SC.objects.filter(id__in=list(included_ids)))
+
+    def _compute_included_canvases_graph(self):
+        """No-DB twin of _compute_included_canvases: walk the closure over the
+        in-memory graph (canvas_by_slug / node_by_id) instead of the ORM."""
+        g = self.graph
+        by_id = {str(c.id): c for c in g.canvases}
+
+        included_ids = set()
+        if self.project.starting_canvas:
+            included_ids.add(str(self.project.starting_canvas.id))
+        for c in self.story_canvases:
+            included_ids.add(str(c.id))
+
+        changed = True
+        while changed:
+            changed = False
+            for cid in list(included_ids):
+                canvas = by_id.get(cid)
+                if canvas is None:
+                    continue
+                trigger = getattr(canvas, 'trigger', None)
+                if trigger:
+                    subs = (trigger.metadata or {}).get('substitutions') or []
+                    for rule in subs:
+                        target_slug = rule.get('target_canvas_id') if isinstance(rule, dict) else None
+                        if not target_slug:
+                            continue
+                        target_canvas = g.canvas_by_slug.get(target_slug)
+                        if target_canvas and str(target_canvas.id) not in included_ids:
+                            included_ids.add(str(target_canvas.id))
+                            changed = True
+                for node in self._get_canvas_nodes_ordered(canvas):
+                    exit_block = getattr(node, 'exit_block', None) or {}
+                    if exit_block.get('type') == 'choices':
+                        for choice in exit_block.get('choices', []) or []:
+                            if choice.get('targetType') == 'node':
+                                target_node_id = choice.get('nodeId')
+                                if target_node_id:
+                                    target_node = g.node_by_id.get(target_node_id)
+                                    if target_node and str(target_node.canvas_id) not in included_ids:
+                                        included_ids.add(str(target_node.canvas_id))
+                                        changed = True
+
+        self.included_canvas_ids = included_ids.copy()
+        if self.project.starting_canvas:
+            included_ids.discard(str(self.project.starting_canvas.id))
+        # Mirror the ORM Meta.ordering (-created_at = reverse insertion order).
+        self.story_canvases = [
+            c for c in sorted(g.canvases, key=lambda c: c._seq, reverse=True)
+            if str(c.id) in included_ids
+        ]
 
     def _build_passage_name_map(self):
         """Build mapping of node IDs to Twee passage names for cross-canvas references."""
@@ -677,7 +769,7 @@ class TweeComprehensiveGeneratorV2:
         try:
             from apps.npcs.models import NPC
 
-            for n in NPC.objects.filter(project=self.project, deleted_at__isnull=True):
+            for n in self._all_npcs():
                 flags_map = {}
                 try:
                     for k in (getattr(n, 'flag_keys', []) or []):
@@ -7936,7 +8028,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         for canvas in (self.story_canvases or []):
             cv_id = str(getattr(canvas, "id", "") or "")
             try:
-                cv_nodes = list(canvas.nodes.all())
+                cv_nodes = list(self._get_canvas_nodes_ordered(canvas))
             except Exception:
                 cv_nodes = []
             for node in cv_nodes:
@@ -8006,7 +8098,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                 except Exception:
                     pass
             try:
-                cv_nodes = list(canvas.nodes.all())
+                cv_nodes = list(self._get_canvas_nodes_ordered(canvas))
             except Exception:
                 cv_nodes = []
             for node in cv_nodes:
@@ -8065,7 +8157,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
             if not parent_id:
                 continue
             try:
-                cv_nodes = list(canvas.nodes.all())
+                cv_nodes = list(self._get_canvas_nodes_ordered(canvas))
             except Exception:
                 cv_nodes = []
             for node in cv_nodes:
@@ -8086,7 +8178,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     # raw UUID (after template_import resolves "canvas_id.node_id")
                     # or still in the dotted form pre-resolution. Try UUID first.
                     try:
-                        target_node = StoryNode.objects.filter(id=target_node_id).only("canvas_id").first()
+                        target_node = self._node_by_id(target_node_id)
                         if not target_node:
                             continue
                         child_id = str(target_node.canvas_id)
@@ -9075,8 +9167,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 <</nobr>>
 """
                     # Add destinations (all connected locations)
-                    from apps.world.models import Location
-                    connected_locations = Location.objects.filter(entry_from=location)
+                    connected_locations = self._locations_entered_from(location)
                     for connected_loc in connected_locations:
                         connected_name = connected_loc.name.replace(' ', '_')
                         # Handle destination containers with default_entry appropriately
@@ -9819,7 +9910,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         for canvas in self.story_canvases:
             if hasattr(canvas, 'trigger') and canvas.trigger and str(canvas.trigger.location_id) == str(location_id):
                 # Get schedules for this trigger (already prefetched)
-                schedules = list(canvas.trigger.schedules.all())
+                schedules = self._trigger_schedules(canvas.trigger)
                 canvases_with_schedules.append({
                     'canvas': canvas,
                     'schedules': schedules,
@@ -9965,9 +10056,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         from apps.stories.models import StoryCanvas
 
         # Build slug→UUID lookup once across all included canvases
-        all_canvases = list(StoryCanvas.objects.filter(
-            project=self.project, deleted_at__isnull=True
-        ).select_related('trigger'))
+        all_canvases = list(self._all_canvases())
         slug_to_uuid = {}
         for c in all_canvases:
             slug = (c.metadata or {}).get("slug")
@@ -10018,9 +10107,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
             return self._canvases_with_subs_cache
 
         cache: Dict[str, str] = {}
-        all_canvases = StoryCanvas.objects.filter(
-            project=self.project, deleted_at__isnull=True
-        ).select_related('trigger')
+        all_canvases = self._all_canvases()
         for canvas in all_canvases:
             trigger = getattr(canvas, 'trigger', None)
             if not trigger:
@@ -10072,7 +10159,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         npc_lookup = {}
         hidden_npc_ids: set = set()
         try:
-            for npc in NPC.objects.filter(project=self.project, deleted_at__isnull=True):
+            for npc in self._all_npcs():
                 npc_info = {"id": str(npc.id), "name": npc.name}
                 # Index by name-based slug (legacy)
                 name_slug = npc.name.lower().strip().replace(' ', '_') if npc.name else str(npc.id)
@@ -10091,9 +10178,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         from apps.stories.models import StoryCanvas
         canvas_by_slug = {}
         canvas_by_name = {}
-        all_canvases = StoryCanvas.objects.filter(
-            project=self.project, deleted_at__isnull=True
-        ).select_related('trigger')
+        all_canvases = self._all_canvases()
         for canvas in all_canvases:
             canvas_by_name[canvas.name] = canvas
             # Index by slug from metadata (matches TOML canvas IDs)
@@ -10166,7 +10251,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                                 location_name = loc.name
                                 break
                     # Get schedule text
-                    if hasattr(trigger, 'schedules') and trigger.schedules.exists():
+                    if self._trigger_has_schedules(trigger):
                         schedule_text = self._format_schedule_human_readable(trigger)
 
             # Extract trait effects from canvas nodes (tiered + flat fallback)
@@ -10291,7 +10376,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     location_name = location_lookup.get(str(trigger.location_id))
 
                 # Get schedule
-                if hasattr(trigger, 'schedules') and trigger.schedules.exists():
+                if self._trigger_has_schedules(trigger):
                     schedule_text = self._format_schedule_human_readable(trigger)
 
                 # Get canvas trigger conditions (for filtering tiered activities)
@@ -10484,7 +10569,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                 conditional_choices = []
                 cc_idx = 0
                 try:
-                    for node in canvas.nodes.all().order_by('created_at'):
+                    for node in self._get_canvas_nodes_ordered(canvas):
                         eb = getattr(node, 'exit_block', None) or {}
                         if eb.get('type') != 'choices':
                             continue
@@ -10519,10 +10604,10 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 
     def _format_schedule_human_readable(self, trigger) -> str:
         """Format trigger schedules as human-readable text like 'between 8 AM - 12 PM or 7 PM - 10 PM'."""
-        if not hasattr(trigger, 'schedules') or not trigger.schedules.exists():
+        if not self._trigger_has_schedules(trigger):
             return None
 
-        schedules = list(trigger.schedules.all())
+        schedules = self._trigger_schedules(trigger)
         if not schedules:
             return None
 
@@ -10593,7 +10678,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         try:
             # Build slug-to-UUID map for this canvas's nodes
             node_uuid_by_slug = {}
-            for node in canvas.nodes.all():
+            for node in self._get_canvas_nodes_ordered(canvas):
                 slug = (node.node_data or {}).get("slug", "")
                 if slug:
                     node_uuid_by_slug[slug] = str(node.id)
@@ -10603,7 +10688,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                 return None
 
             # Search all nodes for a choice that targets this node
-            for node in canvas.nodes.all():
+            for node in self._get_canvas_nodes_ordered(canvas):
                 exit_block = node.exit_block or {}
                 choices = exit_block.get("choices", [])
                 for choice in choices:
@@ -10627,7 +10712,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         """
         effects = []
         try:
-            for node in canvas.nodes.all():
+            for node in self._get_canvas_nodes_ordered(canvas):
                 exit_block = node.exit_block or {}
 
                 # Check effects in choices (for "choices" type exit blocks)
@@ -10675,7 +10760,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         base_node = None
 
         try:
-            for node in canvas.nodes.all():
+            for node in self._get_canvas_nodes_ordered(canvas):
                 node_map[str(node.id)] = node
                 eb = node.exit_block or {}
                 if eb.get("type") == "choices":
@@ -10744,7 +10829,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
             if trigger and not is_starting_canvas:
                 if trigger.location_id:
                     location_name = location_lookup.get(str(trigger.location_id))
-                if hasattr(trigger, 'schedules') and trigger.schedules.exists():
+                if self._trigger_has_schedules(trigger):
                     schedule_text = self._format_schedule_human_readable(trigger)
                 cond = getattr(trigger, 'conditions', None)
                 if cond and isinstance(cond, dict) and cond.get('items'):
@@ -10752,7 +10837,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 
             # Extract flagEffects from all nodes
             try:
-                for node in canvas.nodes.all():
+                for node in self._get_canvas_nodes_ordered(canvas):
                     exit_block = node.exit_block or {}
 
                     # Check flagEffects in choices (for "choices" type exit blocks)
@@ -10905,15 +10990,13 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 
         # Build the flag unlock map
         location_lookup = {str(loc.id): loc.name for loc in self.locations}
-        all_canvases = StoryCanvas.objects.filter(
-            project=self.project, deleted_at__isnull=True
-        ).select_related('trigger').prefetch_related('nodes')
+        all_canvases = self._all_canvases()
 
         # Build canvas_npc_map for NPC association validation
         canvas_npc_map = {}
         npc_lookup = {}
 
-        for npc in NPC.objects.filter(project=self.project, deleted_at__isnull=True):
+        for npc in self._all_npcs():
             npc_info = {"id": str(npc.id), "name": npc.name}
             name_slug = npc.name.lower().strip().replace(' ', '_') if npc.name else str(npc.id)
             npc_lookup[name_slug] = npc_info
@@ -11006,7 +11089,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 
         # 2b. Choice-level flag conditions (exit_block choices with conditions)
         for canvas in all_canvases:
-            for node in canvas.nodes.all():
+            for node in self._get_canvas_nodes_ordered(canvas):
                 exit_block = node.exit_block or {}
                 for choice in exit_block.get("choices", []):
                     conditions = choice.get("conditions", {})
@@ -11052,7 +11135,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         # Map: flag_key -> canvas that sets it
         flag_to_setter_canvas = {}
         for canvas in all_canvases:
-            for node in canvas.nodes.all():
+            for node in self._get_canvas_nodes_ordered(canvas):
                 exit_block = node.exit_block or {}
                 # Check config.effects
                 config = exit_block.get("config", {})
@@ -11238,8 +11321,95 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
     # ========== NODE CHAIN HELPER METHODS ==========
 
     def _get_canvas_nodes_ordered(self, canvas):
-        """Get canvas nodes ordered by creation time."""
+        """Get canvas nodes ordered by creation time (insertion order).
+
+        No-DB path: canvas._nodes is a plain list already in insertion order,
+        which is exactly what order_by('created_at') yields for the DB path
+        (nodes are minted in template order; StoryNode has no Meta.ordering).
+        """
+        if self.graph is not None:
+            return canvas._nodes
         return canvas.nodes.all().order_by('created_at')
+
+    def _trigger_schedules(self, trigger):
+        """Reverse-manager stand-in: trigger.schedules as a plain list."""
+        if trigger is None:
+            return []
+        if self.graph is not None:
+            return getattr(trigger, '_schedules', [])
+        return list(trigger.schedules.all())
+
+    def _trigger_has_schedules(self, trigger):
+        """Reverse-manager stand-in: trigger.schedules.exists()."""
+        if trigger is None:
+            return False
+        if self.graph is not None:
+            return bool(getattr(trigger, '_schedules', []))
+        return hasattr(trigger, 'schedules') and trigger.schedules.exists()
+
+    def _locations_entered_from(self, location):
+        """Reverse-filter stand-in: Location.objects.filter(entry_from=location)."""
+        if self.graph is not None:
+            return self.graph.children_by_entry_from.get(str(location.id), [])
+        from apps.world.models import Location
+        return list(Location.objects.filter(entry_from=location))
+
+    def _all_npcs(self):
+        """Project NPCs — graph list in no-DB mode, else the ORM queryset."""
+        if self.graph is not None:
+            return self.graph.npcs
+        from apps.npcs.models import NPC
+        return NPC.objects.filter(project=self.project, deleted_at__isnull=True)
+
+    def _all_canvases(self):
+        """All project canvases (graph order = reverse insertion, mirroring the
+        ORM Meta.ordering) in no-DB mode, else the ORM queryset."""
+        if self.graph is not None:
+            return sorted(self.graph.canvases, key=lambda c: c._seq, reverse=True)
+        from apps.stories.models import StoryCanvas
+        return StoryCanvas.objects.filter(
+            project=self.project, deleted_at__isnull=True
+        )
+
+    def _node_by_id(self, node_id):
+        """Resolve a node id to its StoryNode — graph index in no-DB mode."""
+        if self.graph is not None:
+            return self.graph.node_by_id.get(node_id)
+        from apps.stories.models import StoryNode
+        return StoryNode.objects.filter(id=node_id).only('canvas_id').first()
+
+    def _ordered_navigation(self, location):
+        """Ordered nav destinations for a location.
+
+        No-DB twin of Location.get_ordered_navigation (apps/world/models.py),
+        which internally queries Location.objects.filter(entry_from=self)
+        .exclude(parent_location=self). Reproduces the same set + ordering from
+        the in-memory graph. children_by_entry_from is in created_at order
+        (Location.Meta.ordering), matching the ORM.
+        """
+        if self.graph is None:
+            return location.get_ordered_navigation()
+
+        loc_id = str(location.id)
+        destinations = [
+            d for d in self.graph.children_by_entry_from.get(loc_id, [])
+            if not (d.parent_location is not None and str(d.parent_location.id) == loc_id)
+        ]
+        nav_order = location.navigation_order
+        if nav_order and len(nav_order) > 0:
+            dest_by_id = {str(loc.id): loc for loc in destinations}
+            ordered = []
+            for oid in nav_order:
+                if str(oid) in dest_by_id:
+                    ordered.append(dest_by_id[str(oid)])
+                    del dest_by_id[str(oid)]
+            ordered.extend(dest_by_id.values())
+            return ordered
+        direct = [d for d in destinations if not d.is_container]
+        containers = [d for d in destinations if d.is_container]
+        direct.sort(key=lambda x: x.name.lower())
+        containers.sort(key=lambda x: x.name.lower())
+        return direct + containers
 
     def _build_node_chain(self, nodes):
         """Build linear node chain following connections."""
@@ -12064,7 +12234,12 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
             else:
                 # Location type - if outgoing connections exist, continue to first outgoing node
                 next_passage = None
-                outgoing = list(getattr(node, 'outgoing_connections', []).all()) if hasattr(node, 'outgoing_connections') else []
+                # NodeConnection is never created on this pipeline (dead relation);
+                # in no-DB mode the reverse manager would query an empty table.
+                if self.graph is not None:
+                    outgoing = []
+                else:
+                    outgoing = list(getattr(node, 'outgoing_connections', []).all()) if hasattr(node, 'outgoing_connections') else []
                 if outgoing:
                     first_conn = outgoing[0]
                     target_id = str(first_conn.target_node_id)
@@ -18003,7 +18178,7 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
         # Offscreen locations are never navigable destinations (NPC "away" labels).
         def _loc_offscreen(_l):
             return bool((getattr(_l, 'properties', None) or {}).get('offscreen'))
-        ordered_destinations = [d for d in location.get_ordered_navigation() if not _loc_offscreen(d)]
+        ordered_destinations = [d for d in self._ordered_navigation(location) if not _loc_offscreen(d)]
 
         if ordered_destinations:
             # Check if ANY destination has an image path defined (enables visual mode)
@@ -18132,19 +18307,18 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
         Returns:
             HTML string with navigation options
         """
-        from apps.world.models import Location
         navigation_html = ""
 
         # Find outbound connections: locations that can be entered FROM this container
-        outbound_connections = Location.objects.filter(entry_from=container)
+        outbound_connections = self._locations_entered_from(container)
 
         # Find inbound connection: where this container can be entered from
         inbound_connection = getattr(container, 'entry_from', None)
 
         # Add outbound destinations
-        if outbound_connections.exists():
+        if outbound_connections:
             navigation_html += "<strong>Available destinations:</strong><br>\n"
-            for dest in outbound_connections.order_by('name'):
+            for dest in sorted(outbound_connections, key=lambda l: l.name):
                 dest_name = dest.name.replace(' ', '_')
                 # Handle destination containers with default_entry appropriately
                 if getattr(dest, 'is_container', False) and getattr(dest, 'default_entry_location', None):
@@ -18208,7 +18382,7 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
             for canvas in self.story_canvases:
                 if hasattr(canvas, 'trigger') and canvas.trigger and str(canvas.trigger.location_id) == str(current_location.id):
                     # Get schedules for this trigger
-                    schedules = list(canvas.trigger.schedules.all())
+                    schedules = self._trigger_schedules(canvas.trigger)
                     canvases_with_schedules.append({
                         'canvas': canvas,
                         'schedules': schedules,

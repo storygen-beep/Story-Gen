@@ -44,8 +44,9 @@ class Command(BaseCommand):
         parser.add_argument(
             "--owner-id",
             type=str,
-            required=True,
-            help="Owner UUID for the project",
+            required=False,
+            default=None,
+            help="Owner UUID for the project (only needed with --use-db)",
         )
         parser.add_argument(
             "--output",
@@ -81,6 +82,15 @@ class Command(BaseCommand):
             "--local-media",
             action="store_true",
             help="Use local media files instead of R2 URLs for offline playback",
+        )
+        parser.add_argument(
+            "--use-db",
+            action="store_true",
+            help=(
+                "Legacy: build through the database (writes/reads/deletes DB rows, "
+                "requires --owner-id). The DEFAULT is the no-DB in-memory graph "
+                "build — zero database interaction, no owner, nothing persisted."
+            ),
         )
 
         # Video folder for file-based videos
@@ -153,6 +163,11 @@ class Command(BaseCommand):
         dry_run = options["dry_run"]
         dev_mode = options["dev"]
         generate_chart = options.get("chart", False)
+        # No-DB (in-memory graph) is the DEFAULT; --use-db opts into the legacy
+        # database build path (which requires an owner and persists rows).
+        no_db = not options.get("use_db", False)
+        if not no_db and not owner_id:
+            raise CommandError("--use-db requires --owner-id (the legacy DB build path).")
 
         # Validate video folder if provided (used for validation/copying)
         if video_folder:
@@ -179,9 +194,13 @@ class Command(BaseCommand):
 
         if dev_mode:
             self.stdout.write(self.style.WARNING("🔧 Dev Mode: ENABLED (stat adjustment controls)"))
+        if no_db:
+            self.stdout.write("🚫 No-DB build (in-memory graph, nothing persisted)")
+        else:
+            self.stdout.write(self.style.WARNING("🗄  Legacy DB build (--use-db): writing/reading DB rows"))
 
-        # Phase 1: Validate owner
-        owner = self._get_owner(owner_id)
+        # Phase 1: Validate owner (DB path only — no owner needed for the no-DB default)
+        owner = None if no_db else self._get_owner(owner_id)
 
         # Phase 2: Load and validate TOML
         template = self._load_toml(file_path)
@@ -195,11 +214,17 @@ class Command(BaseCommand):
                 self.stdout.write(f"\n📊 Chart generated: {chart_path}")
             return
 
-        # Phase 4: Create project in database
-        project = self._create_project(template, owner, name_override)
+        # Phase 4: Build the game — in-memory graph (no-DB) or persisted project (DB).
+        if no_db:
+            from apps.projects.services.game_graph import build_game_graph
+            graph = build_game_graph(template, name_override)
+            project = graph.project
+        else:
+            graph = None
+            project = self._create_project(template, owner, name_override)
 
         # Phase 4.5: Validate flag chains
-        self._validate_flag_chains(project, system_type, version)
+        self._validate_flag_chains(project, system_type, version, graph=graph)
 
         # Phase 5: Package game
         # Resolve output_dir to absolute path and get game folder name
@@ -214,20 +239,23 @@ class Command(BaseCommand):
             package_result = self._package_game(
                 project, str(output_path), system_type, version, force_copy, verify_checksums, local_media,
                 video_folder=video_folder, video_path=video_path, debug=debug, dev_mode=dev_mode,
-                game_folder=game_folder_name  # Pass resolved game folder name for approvals
+                game_folder=game_folder_name,  # Pass resolved game folder name for approvals
+                graph=graph,
             )
         except Exception as e:
-            # Keep project for debugging on packaging failure
-            self.stdout.write("")
-            self.stdout.write(
-                self.style.WARNING(
-                    f"⚠️  Packaging failed but project kept for debugging: {project.id}"
+            # Keep project for debugging on packaging failure (DB path only —
+            # nothing is persisted in no-DB mode).
+            if not no_db:
+                self.stdout.write("")
+                self.stdout.write(
+                    self.style.WARNING(
+                        f"⚠️  Packaging failed but project kept for debugging: {project.id}"
+                    )
                 )
-            )
             raise CommandError(f"Packaging failed: {e}")
 
-        # Phase 6: Optional cleanup
-        if not keep_project:
+        # Phase 6: Optional cleanup (nothing persisted in no-DB mode)
+        if not no_db and not keep_project:
             self._cleanup_project(project)
 
         # Phase 6.5: Generate chart if requested
@@ -319,7 +347,7 @@ class Command(BaseCommand):
         except Exception as e:
             raise CommandError(f"Failed to create project: {e}")
 
-    def _validate_flag_chains(self, project: Project, system_type: str, version: str):
+    def _validate_flag_chains(self, project: Project, system_type: str, version: str, graph=None):
         """Validate flag chains before packaging."""
         self.stdout.write("")
         self.stdout.write("🔗 Validating flag chains...")
@@ -349,7 +377,11 @@ class Command(BaseCommand):
                 f"Unknown gen-version {version!r}. Supported: v1, v2."
             )
         generator.project = project
-        generator.locations = list(Location.objects.filter(project=project))
+        if graph is not None:
+            generator.graph = graph
+            generator.locations = graph.locations
+        else:
+            generator.locations = list(Location.objects.filter(project=project))
         errors = generator.validate_flag_chains()
 
         if errors:
@@ -382,6 +414,7 @@ class Command(BaseCommand):
         debug: bool = False,
         dev_mode: bool = False,
         game_folder: str = None,
+        graph=None,
     ) -> dict:
         """Package game using GameService."""
         self.stdout.write("")
@@ -421,6 +454,7 @@ class Command(BaseCommand):
             video_path=video_path,
             debug=debug,
             options=options if options else None,
+            graph=graph,
         )
 
     def _cleanup_project(self, project: Project):

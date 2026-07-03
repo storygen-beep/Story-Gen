@@ -21,7 +21,11 @@ class TweeComprehensiveService:
     """
 
     def generate(
-        self, project: Project, version: str = "v2", options: Optional[dict] = None
+        self,
+        project: Project,
+        version: str = "v2",
+        options: Optional[dict] = None,
+        graph: Optional[object] = None,
     ) -> str:
         """
         Generate comprehensive game using the specified version.
@@ -48,22 +52,29 @@ class TweeComprehensiveService:
                 f"Version {version} not found for twee_comprehensive system"
             )
 
-        # Validate project before generation
-        validation_result = self.validate_project(project)
-        if validation_result["has_errors"]:
-            raise ValueError(
-                f"Project validation failed: {validation_result['errors']}"
-            )
+        # Validate project before generation. The no-DB graph path already
+        # validated the template during build_game_graph, and validate_project
+        # queries the ORM (which the unsaved graph project isn't in), so skip it.
+        if graph is None:
+            validation_result = self.validate_project(project)
+            if validation_result["has_errors"]:
+                raise ValueError(
+                    f"Project validation failed: {validation_result['errors']}"
+                )
 
         # Store generator reference for asset tracking
         self._last_generator = generator
 
         # Generate content
-        return generator.generate(project, options)
+        return generator.generate(project, options, graph=graph)
 
     def validate_project(self, project: Project) -> dict[str, Any]:
         """
         Validate if project is suitable for comprehensive game generation.
+
+        DEPRECATED for the no-DB build path (which validates the template during
+        build_game_graph and skips this); queries the ORM for a persisted
+        Project. Kept for the web-API / elora / legacy DB callers.
 
         Args:
             project: Project to validate

@@ -52,6 +52,7 @@ class GameService:
         system_type: str,
         version: str = "v2",
         options: Optional[dict] = None,
+        graph: Optional[object] = None,
     ) -> str:
         """
         Generate game using specified system and version.
@@ -78,7 +79,11 @@ class GameService:
         # Get system service
         service = self._get_system_service(system_type)
 
-        # Delegate generation to specific system
+        # Delegate generation to specific system. Only the twee_comprehensive
+        # system supports the no-DB graph; pass it through only when present so
+        # other systems' generate() signatures stay untouched.
+        if graph is not None:
+            return service.generate(project, version, options, graph=graph)
         return service.generate(project, version, options)
 
     def validate_project(self, project: Project, system_type: str) -> dict[str, Any]:
@@ -361,6 +366,7 @@ class GameService:
         video_folder: Optional[str] = None,
         video_path: Optional[str] = None,
         debug: bool = False,
+        graph: Optional[object] = None,
     ) -> dict[str, Any]:
         """
         Generate complete game package with HTML + media assets.
@@ -426,7 +432,7 @@ class GameService:
         options["debug"] = debug
 
         # Step 1: Generate Twee content
-        twee_content = self.generate_game(project, system_type, version, options)
+        twee_content = self.generate_game(project, system_type, version, options, graph=graph)
 
         # Step 2: Compile to HTML
         html_content = self.compile_twee_to_html(twee_content, project.name)

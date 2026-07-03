@@ -5403,6 +5403,7 @@ def _normalize_block_list(
     raw_blocks: Any,
     max_depth: int = 4,
     _depth: int = 0,
+    _prefix: str = "b",
 ) -> List[Dict[str, Any]]:
     """Recursively normalize a list of TOML block dicts to the canonical safe shape.
 
@@ -5442,12 +5443,15 @@ def _normalize_block_list(
         return []
 
     safe: List[Dict[str, Any]] = []
-    for b in raw_blocks:
+    for i, b in enumerate(raw_blocks):
         if not isinstance(b, dict):
             continue
         b_type = str(b.get("type", "")).strip()
         if not b_type:
             continue
+        # Deterministic fallback id (position-based) for blocks with no TOML id —
+        # keeps builds reproducible (was uuid4, which churned every build).
+        _bid = f"{_prefix}{i}"
         props = b.get("props") or {}
         if not isinstance(props, dict):
             props = {}
@@ -5470,7 +5474,7 @@ def _normalize_block_list(
                 props["conditions"] = cond
             inner_raw = b.get("blocks") or props.get("blocks") or []
             inner_safe = _normalize_block_list(
-                inner_raw, max_depth=max_depth, _depth=_depth + 1
+                inner_raw, max_depth=max_depth, _depth=_depth + 1, _prefix=f"{_bid}."
             )
             # Nested groups are PRESERVED (2026-05-17). A stage group wrapping
             # flag-gated sub-branch groups is a legitimate shape; the renderer
@@ -5481,7 +5485,7 @@ def _normalize_block_list(
         elif b_type == "block_pool":
             inner_raw = b.get("blocks") or props.get("blocks") or []
             inner_safe = _normalize_block_list(
-                inner_raw, max_depth=max_depth, _depth=_depth + 1
+                inner_raw, max_depth=max_depth, _depth=_depth + 1, _prefix=f"{_bid}."
             )
             # Preserve original same-type-skip rule: drop any nested pools.
             inner_safe = [ib for ib in inner_safe if ib.get("type") != "block_pool"]
@@ -5496,13 +5500,13 @@ def _normalize_block_list(
         elif b_type == "cascade":
             # S7 — multi-beat linkreplace cascade. Reads `id` + `beats` from
             # top-level OR `props` (same bug-fix-pattern as group/pool).
-            cascade_id = b.get("id") or props.get("id") or str(uuid.uuid4())
+            cascade_id = b.get("id") or props.get("id") or _bid
             props["id"] = str(cascade_id)
             raw_beats = b.get("beats") or props.get("beats") or []
             if not isinstance(raw_beats, list):
                 raw_beats = []
             safe_beats: List[Dict[str, Any]] = []
-            for beat in raw_beats:
+            for bi, beat in enumerate(raw_beats):
                 if not isinstance(beat, dict):
                     continue
                 beat_blocks_raw = beat.get("blocks") or []
@@ -5510,7 +5514,8 @@ def _normalize_block_list(
                 # blocks can themselves contain groups, pools, thought
                 # bubbles, or even nested cascades — depth cap protects.
                 beat_blocks_safe = _normalize_block_list(
-                    beat_blocks_raw, max_depth=max_depth, _depth=_depth + 1
+                    beat_blocks_raw, max_depth=max_depth, _depth=_depth + 1,
+                    _prefix=f"{_bid}.beat{bi}.",
                 )
                 beat_conditions = beat.get("conditions")
                 if beat_conditions is not None and not isinstance(beat_conditions, dict):
@@ -5533,7 +5538,7 @@ def _normalize_block_list(
 
         safe.append(
             {
-                "id": str(b.get("id") or uuid.uuid4()),
+                "id": str(b.get("id") or _bid),
                 "type": b_type,
                 "props": props,
                 "content": str(b.get("content", "")),
@@ -5543,18 +5548,12 @@ def _normalize_block_list(
     return safe
 
 
-@transaction.atomic
-def create_project_from_template(
-    template: GameTemplate, owner_id: str, name_override: Optional[str] = None
-) -> Dict[str, Any]:
-    owner = _ensure_user(owner_id)
 
-    # Project
-    project = Project(
-        name=name_override or template.project.title,
-        description=template.project.description,
-        owner=owner,
-    )
+def _assemble_project_metadata(project, template):
+    """Assemble project.metadata from the parsed template (pure; no DB).
+
+    Extracted so the DB path and the no-DB build_game_graph share one copy.
+    """
     project.metadata = project.metadata or {}
     project.metadata["time_settings"] = {
         "enabled": template.time.enabled,
@@ -5924,6 +5923,28 @@ def create_project_from_template(
                 for g in phone.gallery_items
             ],
         }
+
+@transaction.atomic
+def create_project_from_template(
+    template: GameTemplate, owner_id: str, name_override: Optional[str] = None
+) -> Dict[str, Any]:
+    """DEPRECATED for game builds — the legacy DB path (writes/reads DB rows).
+
+    The default build path is now the no-DB `game_graph.build_game_graph`
+    (zero database interaction, constant slug ids, reproducible). This is kept
+    for the web-API `generate-game` endpoint, the standalone
+    `create_project_from_template` management command, elora tooling, and the
+    existing test suite, which still rely on a persisted Project.
+    """
+    owner = _ensure_user(owner_id)
+
+    # Project
+    project = Project(
+        name=name_override or template.project.title,
+        description=template.project.description,
+        owner=owner,
+    )
+    _assemble_project_metadata(project, template)
     project.save()
 
     # Player
