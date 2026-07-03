@@ -18,6 +18,9 @@ still document) · `process` (how Claude works) · `one-off` (author slipped; sk
 
 ## Progress log (newest first)
 
+- **2026-07-04 — ✅ #13 done (pressure-test the premise).** Added to `content-framework.md §1A` + the casting
+  self-check: what does the central institution actually DO, and (for infiltration premises) would each mark see
+  through the cover? Both premise holes LO caught in Vesper. Uncommitted.
 - **2026-07-04 — ✅ #14 done (character truth = writing lens, not content gate).** Added to `kink-ceilings.md`
   (a §1 rule + a §8 anti-pattern): a character's coldness colors HOW a scene reads, never gates WHAT content
   exists — scoped so the declared caps (vocab ceiling / tier gate / honest empty cells) stay legitimate.
@@ -216,16 +219,15 @@ Three failure shapes in the Vesper build, one root each:
 
 ## GROUP F — design-coherence & writing-judgment doctrine
 
-### 13. "What does the central institution DO?" + infiltration/cover coherence ⬜
-`P1 · effort S · skill · content-framework.md`
+### 13. "What does the central institution DO?" + infiltration/cover coherence ✅ DONE (2026-07-04)
+`P1 · effort S · skill · content-framework.md + step-3-casting.md`
 - Two holes LO caught, not the author: the company's actual function was undefined after missions/tower/villain
   were built; and Renner-as-company-insider broke the honeypot (a man running the asset facility would *recognize*
   what she is) → recast to a deniable outside supplier (`iteration-log:124-129, 206-212`).
-- **Verified:** `content-framework.md §1A:32-34` asks only the *player's* role; `§1E:62` checks only that the
-  opening *lands* in prose. **missing.**
-- **Fix:** add two §1 questions — (1) if the game hangs missions/factions/a villain off a named institution, what
-  does it actually DO? (2) per infiltration target: can he see through the cover? If yes, the infiltration doesn't
-  hold.
+- **Was:** `content-framework.md §1A` asked only the *player's* role; casting had no cover-coherence test.
+- **Fix applied:** a §1A "pressure-test the premise's internal logic" bullet (both questions + the why — the
+  engine builds an incoherent premise green, catch it at the premise), a per-target "cover holds" line in the
+  casting self-check (cross-ref §1A), and a pointer from the `system-patterns.md` disguise recipe.
 
 ### 14. Restraint reflex — a character truth is a WRITING LENS, not a CONTENT GATE ✅ DONE (2026-07-04)
 `P1 · effort S · skill · kink-ceilings.md`

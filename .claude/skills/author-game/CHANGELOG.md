@@ -14,6 +14,16 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 -->
 
 ## 2026-07-04
+- **content-framework.md §1A + step-3-casting.md — pressure-test the premise's internal logic** (backlog #13) —
+  two premise holes LO caught in Vesper, not the author: the central institution (Vance Dynamics) had a tower,
+  boss, villain, and missions built on it with no defined FUNCTION ("what is this company even about?"), and the
+  infiltration cover didn't hold — Renner was cast as a company insider who'd recognize what she is on sight
+  (recast to a deniable outside supplier who never knew what his gear was for). §1A (the premise/hook) asked only
+  the PLAYER's role, never what the institution DOES; casting had a "serves the fantasy" coherence check but no
+  cover-coherence test. Added a §1A bullet ("pressure-test the premise's internal logic") carrying both questions
+  + the "engine builds an incoherent premise green, catch it at the premise" why (§1 is owned by Step 2, re-run at
+  Step 6 — both touches inherit it); a per-target "cover holds" line in the casting self-check (cross-ref §1A);
+  and a one-line pointer from the `system-patterns.md` disguise recipe. Doctrine only, zero engine change.
 - **kink-ceilings.md — "a character truth is a writing LENS, not a content GATE"** (backlog #14) — the skill's
   explicit-content doctrine covered vocabulary crudeness (§1 deliver-don't-soft-pedal, §8 anti-patterns) but not
   the reflex LO stopped twice in Vesper's Renner round: using a characterization note ("she feels only the sex,

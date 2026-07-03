@@ -25,7 +25,8 @@ the menu grows.
   on wearing it. Out of cover → author a **wrong-reaction fallback** (the mark reacts wrong, you're turned away,
   a guard clocks you). The cover gates **access**, never the escalation.
 - **The trap:** clothing's two-part rule still holds — **never gate an NPC's arc spine on worn state** (that's the
-  backwards on-ramp). The cover gates the *door*; the arc runs on its own trait. → `references/clothing.md`.
+  backwards on-ramp). The cover gates the *door*; the arc runs on its own trait. → `references/clothing.md`. And
+  pressure-test the mark: an insider who'd recognize what she is breaks the premise (`content-framework.md` §1A).
 
 ## 2. Capability / skill track — *a stat you train*
 - **When:** the game should reward practice — fighting, stealth, a craft, a seduction skill.

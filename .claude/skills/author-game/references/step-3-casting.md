@@ -95,6 +95,9 @@ One row per NPC; the rough sketch is a loose few lines (write it under the table
   without all three.)* And a **late-act pressure** role so the squeeze escalates.
 - **Every NPC has a role AND a hook** — no roleless character (cut/merge), no shapeless one (no hook → not ready).
 - **Coherence:** every NPC serves the core fantasy — no off-theme character.
+- **Cover holds (infiltration premises):** if a target sits behind a disguise/cover, would he **see through** it —
+  recognize what she really is? An insider who'd clock her breaks the honeypot; recast him as a deniable outsider
+  or change the cover (`references/content-framework.md` §1A — the premise pressure-test).
 - **Variety:** the cast spans different fantasy lanes/dynamics — not five of the same; each core target a *distinct* desire.
 - **Desire span delivered:** the cast covers the genders + flavors declared at Step 0; any conquest-target
   reads as wanted-as-conquest, not a cold instrument.
