@@ -38,7 +38,7 @@ passage is emitted at `v2.py:8683`. You author **zero** passage plumbing.
 - **NPC customization** — per-NPC, the player **renames** the character and picks a
   **relationship label** from a list you supply (`step-dad` / `mom's boyfriend` /
   `landlord`). The genre's relationship toggle: the same arc, reframed by player choice. The
-  chosen name lands in `$npcs[uuid].name`, the relationship in `$npcs[uuid].relationship`.
+  chosen name lands in `$npcs[slug].name`, the relationship in `$npcs[slug].relationship`.
 
 ---
 
@@ -52,8 +52,8 @@ render path:
 |---|---|---|
 | `@player` | `<<print $player.name>>` | the player's chosen name |
 | `@player.<field>` | `<<print $player.<field> \|\| "">>` | any player field (`@player.build`) |
-| `@<npc>` | `<<print $npcs["uuid"].name>>` | that NPC's chosen name |
-| `@<npc>.rel` | `<<print $npcs["uuid"].relationship \|\| "">>` | that NPC's relationship label |
+| `@<npc>` | `<<print $npcs["<slug>"].name>>` | that NPC's chosen name |
+| `@<npc>.rel` | `<<print $npcs["<slug>"].relationship \|\| "">>` | that NPC's relationship label |
 
 `<npc>` is the slug **without** the `npc_` prefix — `@cole` for `npc_cole`, `@frank` for
 `npc_frank`. **An unrecognized `@word` is left untouched** (`if not uuid: return
@@ -76,10 +76,11 @@ The token grammar is `@(\w+(?:\.\w+)?)` in both. The difference is *who runs it*
 gen-time `_resolve_at_references` never touches it — that's why a **runtime twin**
 (`setup.resolveAtRefs`, `v2.py:2789`) exists and is now wired into every phone render point
 above. So `@<npc>` / `@player` tokens **do** resolve in phone `notify` / message `content` /
-`daily_topics`. The thread title, avatar, and preview read live `$npcs[uuid].name`, so they
+`daily_topics`. The thread title, avatar, and preview read live `$npcs[slug].name`, so they
 honor a rename even *without* a token.
 
-Both resolvers rely on `setup.npc_slug_map` (slug→uuid), populated at `v2.py:710`/`:714` and
+Both resolvers rely on `setup.npc_slug_map` (slug→canonical slug — identity now that npc ids ARE slugs; it
+also maps bare aliases like `"renner"`→`"npc_renner"`), populated at `v2.py:710`/`:714` and
 emitted to JS at `v2.py:2682` — so `@<npc>` works the same gen-time and runtime.
 
 > **Rule R1 — if a character is `customizable`, EVERY player-visible mention of their name in

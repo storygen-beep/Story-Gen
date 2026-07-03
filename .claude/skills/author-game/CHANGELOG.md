@@ -13,6 +13,49 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-07-03
+- **NEW `references/save-safety.md`** + wiring in `SKILL.md` (Engine-ground-truth item 9, a Knowledge-base
+  index bullet, and a reinforcement on the "Structure is stable-and-extensible" operating rule) — the skill
+  had **no** release/save-safety doctrine, so after the engine shipped slug passage names + constant slug ids
+  + a save-migration seam, nothing told an author which changes still break a *returning player's* save on an
+  update. Documents the four join keys that must stay fixed on a shipped game (immutable slugs/ids · never
+  rename/repurpose a live flag or trait key · don't rescale a stat range or move tier/stage thresholds · don't
+  change the game title) + a pre-update grep-guard checklist + what IS safe (add content, insert/reorder/delete
+  beats, rename display names). Verified: every `file:line` cite grepped against the shipped
+  `games/vesper/output/index.html` + `v2.py` — slug passage naming (`_node_passage_name` :11246 /
+  `_location_passage_name` :11259), `$npcs` slug keying + `npc_slug_map` identity, `Config.saves.id`/`version`
+  (:2812), `setup.stateDefaults`/`backfillStateDefaults` (:14549), `npc.id = <slug>` (`game_graph.py:144`).
+- **Corrected now-stale engine facts** the same fixes obsoleted (the skill must not teach false engine facts):
+  `references/dev-console-jump.md` — node passages are `Node_<nodeSlug>` not the 1-based `Node_<n>`; `$npcs` is
+  keyed by slug not `npcs[uuid]`; retired the "NPC uuids regenerate every build → stale-save" framing (the bug
+  is fixed); fixed the grep guard (`[0-9]+`→`[a-z_0-9]+`) and the Renner worked example
+  (`Node_4`→`Node_base_doggy_r`). `SKILL.md` — the dev-console bullet's `Canvas_<id>_Node_<n>`→`Node_<nodeSlug>`.
+  `references/customization.md` — `$npcs[uuid]`→`$npcs[slug]`; `npc_slug_map` `slug→uuid`→identity. Doctrine +
+  fact-correction only, zero engine change (the engine work shipped in commits 8446b3d + 1d9ce93).
+
+## 2026-07-02
+- **clamp-or-vanish lint** (backlog item #8 from the Vesper→skill analysis) — hardened the banded-stat clamp
+  doctrine across 5 files after an unclamped banded body-stat shipped a **blank HUD twice** in Vesper
+  (`decisions_log[64]` Charge went negative; `[66]` Condition/hygiene over-capped AND went negative — `[66]`
+  records it as the SECOND time and asks for a lint that was never actioned). Root cause: effects run
+  `eff.clamp || false` (unbounded by default), and a banded sidebar card only draws when the value lands inside a
+  band (`trait_words` closed-match `v2.py:15252`; `trait_status_text` open-on-omit `v2.py:15183`) — out of range
+  it renders **nothing**, reading as a *missing* HUD element, not a wrong number, so a quick playtest sails past
+  it. Changes: (1) `references/trait-catalog.md` §4 — replaced the advisory "clamp recommended on a restore" with
+  the hard two-part rule (bound the value on body-need/resource stats · cover the range for unbounded odometers),
+  cross-citing the `engine-reference.md` Clamp trap; fixed the bare-`+N` energy-restore example to `cap = 100`;
+  turned the §5 "renders nothing when no band matches" cell into an active pointer to the rule. (2)
+  `references/beat-authoring.md` — added a hard clamp row to the Step-7 resource self-audit. (3)
+  `references/step-6-feedback.md` — added the review-time "no unclamped banded stat" lint (the hard lint begged
+  for twice). (4) `references/toml-gotchas.md` — capped the bare-`+N` Sleep/Shower restore example so it stops
+  contradicting the rule. (5) `references/engine-reference.md` — one-clause pointer at the corruption Clamp-trap
+  line so mechanism + application agree. Reconciles the "unbounded is correct for corruption" carve-out
+  (completes it — the value may climb, but the top band must still cover it) rather than contradicting it; `money`
+  stays exempt (unbanded number, never vanishes). Verified: engine facts read from `v2.py` this session;
+  grep-consistency across `references/` (no surviving "recommended on a restore" or bare-`+N` counter-example);
+  the two load-bearing engine cites re-checked against the current `v2.py` after HEAD moved to `8446b3d`
+  (`trait_words` closed-match `:15252`, `trait_status_text` open-bound `:15183`). Doctrine only, zero engine change.
+
 ## 2026-07-01
 - NEW `references/dev-console-jump.md` + one index line in `SKILL.md` — LO asked to save the browser-console
   "jump/arm" testing technique (fast-forward a built game to a gated state via `State.variables`) as a

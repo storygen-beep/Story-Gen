@@ -67,20 +67,22 @@ var State = SC.State, Engine = SC.Engine, setup = SC.setup;
 |---|---|---|
 | Player trait | `State.variables.player.core_traits.<key>` | every `subject:"player"` trait (money, `corruption`, and custom ones like `equipped_weapon`, `drain_charge`, `loop_npc_pleasure`, `sex_stage`, `anal_active`, `drains_done`) |
 | Flag | `State.variables.flags.<key> = true` | object keyed by flag name; truthy = set. `is_false` gates want the key absent/false |
-| NPC record | `setup.resolveNpcId("<slug>")` → uuid → `State.variables.npcs[uuid].core_traits.<key>` | **NPC UUIDs regenerate every build** (memory `rebuild-regenerates-uuids-stale-save`) — ALWAYS resolve by slug, never hardcode a uuid |
+| NPC record | `State.variables.npcs["<slug>"].core_traits.<key>` (or `setup.resolveNpcId("<slug>")` → canonical slug, then index) | `$npcs` is keyed by the npc **slug** — stable across builds. `setup.npc_slug_map` is identity for canonical slugs + maps bare aliases (`"renner"`→`"npc_renner"`). Ids no longer regenerate, so old saves carry forward |
 | Clothing equipped | `Object.values(State.variables.player.equipped).indexOf("<item_id>") !== -1` | the engine's `operator:"equipped"` test. Force-equip by assigning any slot key: `player.equipped.top = "<item_id>"` |
-| Jump to a passage | `Engine.play("Canvas_<canvasId>_Node_<n>")` | see naming below |
+| Jump to a passage | `Engine.play("Canvas_<canvasId>_Node_<nodeSlug>")` | see naming below |
 
-### Passage naming — stable, no UUIDs
-Canvas node passages are `Canvas_<canvasId>_Node_<n>`:
-- `<canvasId>` = the canvas's **authored `id`** string (e.g. `loop_renner_office_sex`) — **stable across
-  builds** (unlike NPC uuids).
-- `<n>` = the **1-based position** of the node in that canvas's `[[canvases.nodes]]` list (intro = `Node_1`,
-  second node = `Node_2`, …).
+### Passage naming — stable slugs, no UUIDs, no positions
+Canvas node passages are `Canvas_<canvasId>_Node_<nodeSlug>`:
+- `<canvasId>` = the canvas's **authored `id`** string (e.g. `loop_renner_office_sex`) — **stable across builds**.
+- `<nodeSlug>` = the node's **authored `id`** (e.g. `intro`, `base_doggy_r`) — also stable. (It used to be the
+  node's 1-based *position*; that was changed to the slug so inserting/reordering a beat can't shift other
+  nodes' passage names and break returning players' saves — see `references/save-safety.md`.)
+
+Location passages are `Location_<locSlug>` (the location's authored `id`, not its display name).
 
 Always confirm the exact name against the current build:
 ```bash
-grep -oE 'name="Canvas_<canvasId>_Node_[0-9]+"' output/index.html
+grep -oE 'name="Canvas_<canvasId>_Node_[a-z_0-9]+"' output/index.html
 ```
 
 ---
@@ -95,7 +97,7 @@ grep -oE 'name="Canvas_<canvasId>_Node_[0-9]+"' output/index.html
    (hub visibility → register unlock → pose/tier unlock → finish condition).
 3. **Set precisely those.** Don't over-set — but do set the whole chain for ARM, or the beat won't be
    reachable by walking in.
-4. **ARM:** stop here (no `Engine.play`). **FIRE:** `Engine.play("Canvas_<id>_Node_<n>")` into the node
+4. **ARM:** stop here (no `Engine.play`). **FIRE:** `Engine.play("Canvas_<id>_Node_<nodeSlug>")` into the node
    whose on-screen choice is the payload.
 5. **ASCII only, straight quotes.** Rendered smart-quotes/em-dashes paste as invalid tokens. If Chrome
    refuses the paste, type `allow pasting` once (its self-XSS guard).
@@ -140,12 +142,12 @@ The drain fires inside `loop_renner_finisher`: the **ass** finish with `drains_d
 ```
 
 **FIRE** (one click from the drain) — add the loop-internal traits and jump onto the doggy pose
-(`base_doggy_r` = `Node_4` of `loop_renner_office_sex`):
+(node `base_doggy_r` of `loop_renner_office_sex`):
 
 ```js
   // ... same gear + flags + npc as above, plus:
   t.loop_npc_pleasure = 50; t.sex_stage = 2; t.anal_active = 1;   // he's close; anal allowed
-  Engine.play("Canvas_loop_renner_office_sex_Node_4");            // on-screen "finish in your ass" -> drain
+  Engine.play("Canvas_loop_renner_office_sex_Node_base_doggy_r"); // on-screen "finish in your ass" -> drain
 ```
 
 (The FIRE build also needs `renner_fucked_once`/`renner_anal_once` flags set only if a *later* gate reads

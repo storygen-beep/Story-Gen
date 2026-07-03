@@ -78,7 +78,9 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
   (see also the engine ground-truth below).
 - **Structure is stable-and-extensible:** it may grow (new location/NPC/flag), but ONLY via an explicit
   amendment done WHOLE (location → def + lock + schedule + unlock beat; NPC → schedule + open on-ramp; flag
-  → reachable setter) and registered in `structure_registry`. Never a bare dangling reference.
+  → reachable setter) and registered in `structure_registry`. Never a bare dangling reference. And on a
+  **shipped** game (players may have saves) *extend* only — never **rename** an existing `id`, live flag/trait
+  key, stat scale, or the title, or you orphan their saves (`references/save-safety.md`).
 - **Engine-forced changes bounce UP to the design book**, surfaced — never silently patched into TOML.
 - **Register authority lives here, not in CLAUDE.md.** Lane 1/2/3 = RTS-flat default; Lane 4
   capstones = Tier-3 earned (voice register in `references/lanes.md`). The CLAUDE.md ENI persona
@@ -121,6 +123,12 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
    bite; put it on the **bridges** between zones + pair with a fast-travel activity. A locked location
    (`entry_conditions` + `blocked_message`, with `version = "1.0"`) now renders its `blocked_message`
    **inline on the greyed nav card**, not only on the blocked passage. (v1 generator is deprecated — v2 only.)
+9. **The save join is immutable on a *shipped* game.** Passages, `$npcs`, and item state are keyed by your
+   authored **slugs** (not regenerated ids); flags/traits by their **key**; tiers by the stat's **range**;
+   in-browser saves by the **title**. Once a game is published you may ADD (scenes/NPCs/traits/flags — a
+   migration backfill carries them into old saves) and rename display names freely, but **never** change an
+   `id`, a live flag/trait key, a stat's scale/thresholds, or the title — that orphans returning players'
+   saves. Full rules + pre-update checklist: `references/save-safety.md`.
 
 ## Knowledge base (read what you need, when you need it)
 **Per-step references** (one per `pipeline_phase`): `step-0-1-seed.md` · `step-2-toplevel.md` ·
@@ -160,12 +168,16 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
   sidebar mapping (the DATA layer; `trait-design.md` is the design layer).
 - `references/kink-ceilings.md` — the per-arc kink/vocabulary explicit-ceiling model (default-to-maximum).
 - `references/toml-gotchas.md` — emission build-breakers. CHECK before emitting TOML.
+- `references/save-safety.md` — what you may NOT change once a game has shipped (immutable slugs / ids, live
+  flag & trait keys, stat scales & tier thresholds, the game title) so an update doesn't orphan players'
+  saves. Build-breakers fail loudly; these pass the build and only break a *returning player's* save. **Read
+  before editing an already-released game** (the Dispatch "continue writing" path on a published game).
 - `references/engine-reference.md` — the **code-verified** engine field/trigger/effect/condition tables.
   The source of truth for what knobs exist; ground every option here, and never invent a field the engine
   lacks. (This is now the skill's own source of truth — it no longer depends on any external corpus.)
 - `references/dev-console-jump.md` — **(generate ONLY when the user explicitly asks)** browser-console
   jump/arm scripts to fast-forward a built game to a gated state for testing (`SugarCube` API handle, the
-  `player.core_traits`/`flags`/`npcs[slug]` write paths, `Canvas_<id>_Node_<n>` naming, serve over
+  `player.core_traits`/`flags`/`npcs[slug]` write paths, `Canvas_<id>_Node_<nodeSlug>` naming, serve over
   `python3 -m http.server 8080`). Dev convenience, never part of the authoring flow.
 - `games/late_shifts/toml_phases/` — a complete shipped game to copy concrete blocks from (the canonical
   worked TOML; `engine-reference.md` §9 has a minimal skeleton).
