@@ -107,6 +107,9 @@ One row per NPC; the rough sketch is a loose few lines (write it under the table
   here it's just "is each core NPC wired in at all?")
 - **The 3-question test:** say the fantasy in one sentence? name what the player wants next? name *each*
   NPC's hook? If any NPC fails the third, fix or cut it.
+- **Not every NPC is a climb.** Most hooks imply a rising arc, but an owner/spouse/regular you *already have* is
+  the **static** shape (no climb) and an infiltration mark is the **honeypot** shape (the climb is on HIM, not the
+  player) — both are rows in `trait-design.md`'s arc-shape table. Don't force a static/honeypot NPC onto a climb row.
 
 ## Cross-references
 `references/step-2-toplevel.md` §7 (the machine —

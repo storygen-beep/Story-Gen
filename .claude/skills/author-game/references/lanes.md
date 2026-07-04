@@ -59,6 +59,7 @@ guidelines, not quotas (the NPC's design brief commits to a specific number with
 | **Peer/dating** | **8–12** | Quest-chain progression; capstones do the heavy lifting. No Lane 3. |
 | **Service** | **6–10** | Bounded by workplace register. No Lane 2 or 3. |
 | **Antagonist/witness** | **6–10 standalone** | + cross-appearances in others' arcs. Standalone count is low; presence saturates the family arcs' lanes. |
+| **Static / already-at-ceiling owner** | **6–12** | No T1→T3 climb (nothing escalates). Budget = a fixed hub (Report/Serve/Leave) + a handful of distinct use-scenes + an already-consummated Lane-3 loop + possession/decay/sharing capstones. The distinctness is the fixed dynamic, not a rising ladder. *(The **honeypot** reuses the climb budget of whatever base shape fits — Service/Peer/Family — just run on the NPC's own two meters; no new column.)* |
 
 How the skill applies that budget:
 

@@ -30,7 +30,10 @@ a specific NPC's progression. **Note these RTS scenes are REPEATABLE** — that'
 "Throttle vs odometer" below.
 
 ## Pick the SPINE by arc shape
-The spine is the trait whose thresholds gate the arc's rungs and capstones. Choose it from the shape:
+The spine is the trait whose thresholds gate the arc's rungs and capstones. Choose it from the shape. The rows
+differ on **who provides the climb** — the default rows put a **player-corruption floor** under the NPC's own
+odometer; the **honeypot** puts *both* axes on the NPC (the player contributes zero); the **static owner** has
+*nobody* climb. (That "who climbs?" axis is chosen at Step 2 — `content-framework.md §1B`.)
 
 | Arc shape | Spine (what gates the rungs) | Notes |
 |---|---|---|
@@ -39,6 +42,8 @@ The spine is the trait whose thresholds gate the arc's rungs and capstones. Choo
 | **Leverage / transactional** | `money` / debt + `corruption` | the pressure is economic, not affection — don't gate it on `relation`. |
 | **Service** | `npc.relation` (trust) | workplace bond; `arousal`/`corruption` don't apply (empty, per `lanes.md`). |
 | **Antagonist / witness** | a hidden `awareness` accumulator | never `relation`; never surfaced (spoils the confrontation). |
+| **Static / already-at-ceiling owner** | **none — no threshold climb** | the owner/master/spouse/regular you *already* HAVE, not a conquest you climb. Gate on **presence + one opened flag**, never a rising meter; give it **no climbing meter at all** (a meter that gates nothing is the dead-meter trap). Register varies by **pose / diction / framing** (bored · making a point), not by climb. Budget = a fixed hub + a few use-scenes + an already-consummated Lane-3 loop (`lanes.md`). Exemplars: a spouse, an owner/handler (Vesper's Mercer), an established regular (Last Call), a mentor/domme in charge. |
+| **Infiltration / honeypot (still-point player)** | *the NPC's OWN two meters* — `npc.relation` = **ACCESS** (menial → trusted → into-the-room) + `npc.corruption` = **SEDUCTION** (tease → … → fuck); `npc.arousal` = throttle only | the player is the **still point**; HE falls. **No player-corruption floor** — the double-lock *variant*: both locks are the NPC's (access-earned + willingness-tier). See "Engine spine note" (already prefers a per-NPC odometer) + `content-framework.md §1B` "Who climbs?". Exemplars: a spy/honeypot, an owned weapon (Vesper's Renner), an already-corrupt veteran, a domme-corrupter. |
 
 ### Reserve the RICH two-meter model for the core — most NPCs run LIGHT
 The full **odometer + throttle** treatment (the Family/slow-burn row: his `corruption` + his `arousal`)

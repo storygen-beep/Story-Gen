@@ -33,6 +33,14 @@ door, the NPCs you invested in are already unlocked. This is RTS's two-axis gate
 `references/trait-design.md` (the NPC's own axis gates rungs; player corruption is the secondary floor on
 the most explicit beats) — Step 4 wires each NPC into it.
 
+**The still-point variant (when the player doesn't climb).** "Corrupt yourself first" is the *default*, not a
+law — player `corruption` is a **convention, not an engine requirement** (no trait is mandatory; a declared-but-
+dead trait is legal, `engine-reference.md`). In an **infiltration / honeypot / owned-weapon** game the player is
+the **still point** (she starts maxed or owned; her global `corruption` is legitimately DEAD), and the double lock
+becomes **both locks on the NPC**: `npc.relation` = access-earned **+** `npc.corruption` = willingness-tier, with
+zero player floor. Then the self-corruption feeders don't exist and §2's feeder economy dissolves by design
+(`content-framework.md §1B` "Who climbs?" + §2F). Choose the model here at Step 2.
+
 ### The stat set (each leg owns ONE job — no dead stats)
 A stat exists ONLY to gate a content domain the game actually has. **Test for any proposed stat: "name the
 specific content this gates."** No answer → dead stat, cut it. The test is **temporal as well as spatial:**
@@ -40,8 +48,9 @@ name the content it gates **in the act/build you are authoring now** — a meter
 act is a dead stat *now*. Lock the full meter set here at Step 2 and model later-act pressure with beats +
 flags; don't introduce a core meter mid-game (it reads as incoherent — "if corruption isn't used now, no sense
 adding it later"). Derive the count from the game's content, never a target number.
-- **Always-present:** **corruption** (the lewd door — the cascade) · **money** (survival + purchases +
-  the pressure that drives corrupting) · **energy** (paces the day; spend via `costs`, restore by sleep).
+- **Always-present:** **corruption** (the lewd door — the cascade; *the one legit exception to "no dead stats" —
+  it may be left dormant BY DESIGN in a still-point game, see the variant above*) · **money** (survival +
+  purchases + the pressure that drives corrupting) · **energy** (paces the day; spend via `costs`, restore by sleep).
 - **Add a leg only for a real domain** — and respect what's a built-in vs a custom trait:
   - public/exhibition content → **`exhibitionism`** (built-in); a body/looks arc → **`fitness`** (built-in);
     an academic domain → **`intelligence`** (built-in).

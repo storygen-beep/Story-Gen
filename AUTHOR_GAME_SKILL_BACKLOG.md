@@ -18,6 +18,11 @@ still document) · `process` (how Claude works) · `one-off` (author slipped; sk
 
 ## Progress log (newest first)
 
+- **2026-07-04 — ✅ #15 + #16 done (final pair): the "who climbs?" axis.** Named 2 first-class shapes the skill
+  had no row for — the static/already-at-ceiling OWNER NPC (#15: arc-shape row + lane-budget row) and the
+  still-point/infiltration PLAYER (#16: the "Who climbs?" question at `content-framework.md §1B` + the double-lock
+  variant at step-2 + P1/P3 notes), unified on one 4-position axis. Multi-exemplar (Vesper cited second, not the
+  definition). Zero engine change (player-corruption is a convention, not an engine requirement). Uncommitted.
 - **2026-07-04 — ✅ #12 done (4th big-rock): location-design aliveness.** Folded in the corrected principle from
   `games/vesper/location_design_note.md` (never integrated): a "how alive?" content-budget fork at step-2b
   (mission-slice ↔ living city, lean living for a sandbox) + `location-design.md` §2/§6 reworked so "earns its
@@ -265,7 +270,7 @@ Three failure shapes in the Vesper build, one root each:
   precedent `trait-design.md`, + a §8 anti-pattern bullet, + a Contents pointer. Bans only ad-hoc keyboard-time
   purity narrowing, not the declared gates.
 
-### 15. Static / already-at-ceiling owner NPC arc shape ⬜
+### 15. Static / already-at-ceiling owner NPC arc shape ✅ DONE (2026-07-04)
 `P2 · effort M · skill · trait-design.md`
 - Mercer (a pre-existing owner the PC already serves) has an open sex loop from scene one, no rungs, no climbing
   odometer, a flat hijack chance — improvised because every arc-shape row is a *climb*
@@ -274,7 +279,7 @@ Three failure shapes in the Vesper build, one root each:
 - **Fix:** add a 6th row — "Static / already-at-ceiling": spine = NONE, full loop live, no rungs, no climbing
   odometer, register shifts by pose/verb variety, no dead corruption meter.
 
-### 16. Still-point player / two-axes-on-the-NPC model ⬜
+### 16. Still-point player / two-axes-on-the-NPC model ✅ DONE (2026-07-04)
 `P2 · effort M · skill · step-2-toplevel.md, trait-design.md`
 - The honeypot inverts the default: the player is the constant; BOTH progression axes live on the NPC doing
   *different* jobs (relation = ACCESS, corruption = SEDUCTION rungs, double-locked), and global player corruption is

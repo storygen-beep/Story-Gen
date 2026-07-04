@@ -14,6 +14,25 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 -->
 
 ## 2026-07-04
+- **#15 + #16 the "who climbs?" axis (static-owner NPC + still-point player)** — the skill taught exactly ONE
+  progression model: the player climbs a corruption ladder + each NPC climbs their own odometer on top. The
+  arc-shape table (`trait-design.md:35-41`) had 5 rows, ALL climbs — no row for a static/already-at-ceiling owner
+  (Vesper's Mercer, hand-rolled as "the exemption" / "the sanctioned exception to the double-lock") — and
+  `step-2-toplevel.md` + `rts-design-philosophy.md` baked in a player-corruption spine as the master "lewd door",
+  with no room for a still-point player (Vesper's honeypot: player is the constant, global `corruption`
+  legitimately DEAD, both axes on the NPC — `relation` = ACCESS + `corruption` = SEDUCTION, the "double-lock
+  variant"). Both are GENERAL, field-recognized shapes (`nonlinear_rpg_skill_research`'s #1 gap "no
+  player-identity axis"; `writing_craft` §5 fantasy-position; player-corruption is a CONVENTION not an engine
+  requirement — `engine-reference.md:41-49`), so they're now named as first-class shapes on ONE **"who climbs?"**
+  axis (both-climb / player-climbs-NPC-fixed / **player-fixed-NPC-climbs = still-point** / **neither-climbs =
+  static owner**). Added: 2 arc-shape rows + a framing line (`trait-design.md`); the **"Who climbs?"**
+  player-position question (`content-framework.md §1B`, linking §2F); the still-point **double-lock variant** +
+  the "corruption may be legit-dead" exception (`step-2-toplevel.md`); a static-owner budget row (`lanes.md`);
+  P1/P3 variant one-liners (`rts-design-philosophy.md`); a "not every NPC is a climb" note (`step-3-casting.md`).
+  Anti-overfit: each shape lists ≥3 exemplars (spy / veteran / domme; spouse / regular / mentor) with Vesper cited
+  SECOND, not as the definition. Grounded in 3 research agents (Mercer + the Renner honeypot + the field survey).
+  Doctrine only, zero engine change (both compose existing machinery — an odometer initialized at ceiling / a
+  flag; the per-NPC `relation`+`corruption` odometers already exist).
 - **#12 location-design aliveness calibration** — `location-design.md` was created this build but its
   room-content-floor was a PURE-PLOT filter: "content" = a firing canvas, and it explicitly disqualified
   atmosphere ("a kitchen with nothing to do is not 'atmosphere,' it's a dead end"), so a zone whose only job is

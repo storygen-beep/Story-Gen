@@ -21,6 +21,8 @@ nearly every scene carries a `requirementsMC.corruption`.
 at all** across the whole game (a depravity ceiling on the player). It is NOT a measure of any one
 relationship. Using it as the per-relationship progression is the **corruption-on-everything trap**;
 RTS keeps relationship progression on per-NPC / flag axes instead.
+*(Variant: the master tier can be **dead** when the player is a **still-point** — a honeypot / owned weapon whose
+own corruption never climbs; then both axes live on the NPC. See `trait-design.md`'s honeypot row + `content-framework.md §1B`.)*
 
 ## P2 — Two KINDS of meter: ODOMETER (permanent) vs THROTTLE (resets)
 **Verified:** `arousal` resets to 0 at climax (`finishSex`→`ResetArousal`); `corruption`/`relation`
@@ -37,6 +39,8 @@ neither axis alone unlocks. Scenes carry `requirements` (the NPC's own axes) AND
 player's).
 **Intent:** content unlocks at the **intersection** of "how far HE's come" and "how far SHE'll go" —
 a two-sided relationship. One party's state alone is never sufficient.
+*(Variant — the double-lock **on the NPC**: when the player is a still-point, BOTH axes can be the NPC's own
+(`relation` = access + `corruption` = willingness), with no player floor. Same two-sided intersection, both sides HIS.)*
 
 ## P4 — Per-NPC odometers: each arc progresses on what you build WITH THAT PERSON
 **Verified:** each family NPC has its OWN `corruption`; `StageN` reads `npc.corruption`, never the
