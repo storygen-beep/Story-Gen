@@ -64,25 +64,25 @@ trait declared in the NPC's `core_traits`** or it's a hard import error (`:3377-
 the old draft cited the row validation at ~3373 — that's the row-loop line; the `elif itype == "npc_panel"`
 block opens at `template_import.py:3355`.)*
 
-**Render** (`v2.py:15058-15116`, the `sidebarItems` widget's `npc_panel` branch). The NPC object is resolved
-via `setup.npc_slug_map` (`v2.py:15062`); if it can't resolve, the whole card is skipped (`:15063`). Each row:
+**Render** (`v2.py:15411-15466`, the `sidebarItems` widget's `npc_panel` branch). The NPC object is resolved
+via `setup.npc_slug_map` (`v2.py:15415`); if it can't resolve, the whole card is skipped (`:15416`, the `<<if _npObj>>` guard). Each row:
 
 | Row | What it renders | Verified |
 |---|---|---|
-| **`arousal`** | A band **glyph**, default `0→❄️ / 1→🔥 / 2→🔥🔥 / 3→🔥🔥🔥` (override with `arousal_bands` `[{min,max,text}]`). Label `🔥 Arousal`. The RTS-faithful range is 0–3 (`references/trait-catalog.md` §3). | `v2.py:15070-15082` |
-| **`corruption`** | A **number**. At/above `corruption_max_value` it prints `corruption_max_label` (default `"MAX"`). Label `🫦 Corruption`. | `v2.py:15083-15091` |
-| **`location`** | `setup.getNpcLocation(npc_id)` → the location name (`v2.py:3005`). **Same schedule source as the Schedule page** — both read `setup.npcSchedules` (Schedule page via `getNpcDaySchedule`/`getNpcAllSchedulesSorted`, `v2.py:3076`,`:3237`). Null-safe → `away_label` (default `"Away"`). Label `📍 Location`. | `v2.py:15092-15095` |
-| **`next`** | The **Quests-page goal block, verbatim** — reuses `setup.renderQuestsGoalBlock` (`v2.py:15096-15108`), so the card shows the identical block the Quests page shows, minus flavor/tip prose. | `v2.py:15096-15108` |
+| **`arousal`** | A band **glyph**, default `0→❄️ / 1→🔥 / 2→🔥🔥 / 3→🔥🔥🔥` (override with `arousal_bands` `[{min,max,text}]`). Label `🔥 Arousal`. The RTS-faithful range is 0–3 (`references/trait-catalog.md` §3). | `v2.py:15423-15435` |
+| **`corruption`** | A **number**. At/above `corruption_max_value` it prints `corruption_max_label` (default `"MAX"`). Label `🫦 Corruption`. | `v2.py:15436-15444` |
+| **`location`** | `setup.getNpcLocation(npc_id)` → the location name (`v2.py:3141`). **Same schedule source as the Schedule page** — both read `setup.npcSchedules` (Schedule page via `getNpcDaySchedule`/`getNpcAllSchedulesSorted`, `v2.py:3212`,`:3373`). Null-safe → `away_label` (default `"Away"`). Label `📍 Location`. | `v2.py:15445-15448` |
+| **`next`** | The **Quests-page goal block, verbatim** — reuses `setup.renderQuestsGoalBlock` (`v2.py:15449-15461`), so the card shows the identical block the Quests page shows, minus flavor/tip prose. | `v2.py:15449-15461` |
 
 **The `next` row is the planning payload** — it names PLACE + TIME-WINDOW + REQUIREMENT, not a vague "get
-closer." `renderQuestsGoalBlock` (`v2.py:13924-13974`) emits exactly three frames:
+closer." `renderQuestsGoalBlock` (`v2.py:14217-14269`) emits exactly three frames:
 
 - **🎯 To advance:** + a `◯`/`✓` bullet per goal, each with **live progress** while climbing
-  (`◯ My corruption — 12 / 20`, the `currentValue / value` print at `v2.py:13962-13963`).
+  (`◯ My corruption — 12 / 20`, the `currentValue / value` print at `v2.py:14257-14258`).
 - **🔓 Ready** + `📍 <location>` + `🕒 <schedule window>` once all goals are met and a `ready_canvas` is set —
   the place and time-window come from the `ready_canvas` itself (`_locNameFromUuid` + `_formatCanvasSchedule`,
-  `v2.py:13937-13947`).
-- **✓ Arc complete** when the card is `terminal` (`v2.py:13928-13932`).
+  `v2.py:14233-14234`).
+- **✓ Arc complete** when the card is `terminal` (`v2.py:14221-14227`).
 
 So a panel with `rows = ["arousal","corruption","location","next"]` reads, live:
 
@@ -130,7 +130,7 @@ WHICH of an NPC's axes the player gets to see is **per arc shape** — not "show
 two surfacing axes use a per-NPC `trait_*` item:
 
 - **relation** → a `trait_bar` (or `trait_words`) with `trait_owner = "npc"` + `npc_id` (the per-NPC variant,
-  `references/trait-catalog.md` §5; render `v2.py:14887`+ honors `trait_owner`). Add this for peer/dating +
+  `references/trait-catalog.md` §5; render `v2.py:15241`+ honors `trait_owner`). Add this for peer/dating +
   service NPCs (who get no `npc_panel` arousal/corruption rows) and for family NPCs whose relation you want shown.
 - **location** → the `npc_panel` `location` row (every in-scope NPC should have at least this).
 
@@ -162,15 +162,15 @@ same key or it prints twice) is **owned by `references/trait-catalog.md` §5** �
 
 ### §4.3 — Internal-only (NEVER surface)
 `<slug>_stage` and antagonist `awareness` never render anywhere. The mechanism: a `[[traits.labels]]` entry
-with `hidden = true` becomes `setup.hiddenTraits` (`v2.py:950-953`, emitted `:2730`), which the trait-dump
-loops honor (`v2.py:14315`,`:14341`,`:14362`+) so the number never prints. The player feels stage progression
+with `hidden = true` becomes `setup.hiddenTraits` (`v2.py:1079-1082`, emitted `:2866`), which the trait-dump
+loops honor (`v2.py:14668`,`:14694`,`:14715`+) so the number never prints. The player feels stage progression
 through what the world DOES — new menu items, shifted NPC behavior, opened locations — not a number.
 `<slug>_stage` is additionally impossible to put on an `npc_panel` (not an allowed row), so it's doubly safe.
 
 ### §4.4 — The away / offscreen label
 When `getNpcLocation` returns null — the NPC has a declared schedule but **no entry matches the current
-day+time** (`v2.py:3032`), i.e. he's genuinely absent/offscreen — the `location` row prints
-`away_label` (default `"Away"`, `v2.py:15094`). Set a flavored one per NPC so the radar reads in-world:
+day+time** (`v2.py:3168`, `getNpcLocation` returns null on declared-but-no-match), i.e. he's genuinely absent/offscreen — the `location` row prints
+`away_label` (default `"Away"`, `v2.py:15447`). Set a flavored one per NPC so the radar reads in-world:
 
 ```toml
 rows      = ["arousal", "corruption", "location", "next"]
@@ -190,8 +190,8 @@ a named place when scheduled, your `away_label` when truly gone — never a dead
 A real code behavior to plan around. The `npc_panel` `arousal` and `corruption` rows each gate on
 `setup.hiddenTraits` by **bare trait name**, not per-NPC namespace:
 
-- arousal row: `<<if not (setup.hiddenTraits && setup.hiddenTraits.includes("arousal"))>>` (`v2.py:15071`)
-- corruption row: `<<if not (setup.hiddenTraits && setup.hiddenTraits.includes("corruption"))>>` (`v2.py:15084`)
+- arousal row: `<<if not (setup.hiddenTraits && setup.hiddenTraits.includes("arousal"))>>` (`v2.py:15424`)
+- corruption row: `<<if not (setup.hiddenTraits && setup.hiddenTraits.includes("corruption"))>>` (`v2.py:15437`)
 
 So if you `[[traits.labels]] hidden = true` the **player's** `corruption` to kill the §5 doubling
 (`references/trait-catalog.md` §5), you ALSO suppress the `corruption` row on **every** `npc_panel` —
@@ -203,7 +203,7 @@ the same name, hidden globally, hides everywhere. Same for `arousal`.
   you can't share the key name through the simple hide. Options: (a) accept that hiding player `corruption`
   drops NPC corruption rows and lean on the `next` row / Quests page to convey NPC progress; or (b) keep
   player `corruption` un-hidden and de-dup another way (band only NPC-side, or live with the player number).
-- The **`location`** and **`next`** rows are NOT gated by `hiddenTraits` (`v2.py:15092`,`:15096`) — they
+- The **`location`** and **`next`** rows are NOT gated by `hiddenTraits` (`v2.py:15445`,`:15449`) — they
   always render regardless of any hidden label. So the location radar survives any hide.
 
 *(Code-vs-lore note: no corpus draft documented this name-collision — the §5 doubling fix and the §3

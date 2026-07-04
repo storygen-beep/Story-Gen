@@ -14,6 +14,20 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 -->
 
 ## 2026-07-04
+- **#20 (beat vs node) + #26 (engine-citation sweep).**
+  · **#20** `beat-authoring.md` — named the two granularities under "beat": the Step-7 beat = a PLAN unit (a story
+  chunk authored/verified per turn), which explodes into many single-click NODES (the `rts-flat-prose.md` Rule-2
+  sense) — "design in beats, build in nodes; 3 beats → ~23 nodes; one beat per turn ≠ one screen." Closes the
+  jargon trap that helped collapse Vesper's 23-node opening to 3.
+  · **#26** — swept ALL engine-code `file:line` cites after the no-DB/save-safety renumber left them stale (one
+  change shifted `v2.py` +5→+294 across 67 hunks). A per-file verify-and-fix workflow (18 agents, one per file)
+  grep-confirmed each cite's claimed symbol against the CURRENT engine and corrected the line: **262 corrected ·
+  204 already-correct · 62 load-bearing cites given a stable function-name anchor · 0 unresolved.** Finding: only
+  `v2.py` renumbered — every `template_import.py`/`package_from_toml.py` cite was grep-confirmed still exact.
+  Deliberate "old corpus cited the WRONG line" examples were preserved as historical prose. Added a standing note
+  to `engine-reference.md` (line-cites are approximate — grep the named symbol). Verified: 12/12 random
+  spot-checks (incl. template_import "unchanged" cites) resolve to the claimed symbol in live code. Cite-accuracy
+  + one doctrine note; zero engine change.
 - **Batch: 7 small backlog fixes** (#22, #23, #21, #19, #18, #17, #6) — verified against the CURRENT engine
   FIRST (renumbered by the no-DB/save-safety commits), which corrected three stale premises before writing:
   · **#22** `SKILL.md` — built-in traits `(always-on)` → "(engine-privileged, NOT auto-created — declare each)";

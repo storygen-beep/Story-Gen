@@ -9,7 +9,7 @@ against the shipped `games/late_shifts/toml_phases/`.
   `tomllib` and fails the merge parse — the single most common build-breaker. Keep every inline
   table on one line (arrays-of-tables `[[x]]` blocks can span lines; inline `{}` cannot).
 - **Every `conditions` block needs `version = "1.0"` or it FAILS OPEN.** The engine evaluator
-  (`triggerConditionsSatisfied`, v2.py:3398) opens with `if (!conditions.version || conditions.version
+  (`triggerConditionsSatisfied`, v2.py:3534) opens with `if (!conditions.version || conditions.version
   !== '1.0') return true;` — a `conditions` object lacking `version = "1.0"` is treated as
   **satisfied** (always-pass), the items never checked. **No build error, no validator catch.** This
   bites *choice-level* gates most (authors write `conditions = { items = [...] }`): the gate silently
@@ -66,7 +66,7 @@ set inside a triggerless canvas — use a **hidden trait counter** and gate the 
   OMIT it (and `locked_text`) for a plain greyed span showing the action text (the TLS look; `lanes.md`).
 - **Item grant on a choice uses `itemEffects` (camelCase) — snake `item_effects` is silently
   dropped.** The importer reads `ch.get("itemEffects")` ONLY (`template_import.py:1915`), storing it
-  internally as `item_effects` (what the generator reads, `v2.py:12108`). Write snake `item_effects`
+  internally as `item_effects` (what the generator reads, `v2.py:12492`, `choice.get('item_effects')`). Write snake `item_effects`
   in the TOML and the importer never sees it: the buy choice still charges `costs`/money but grants
   **no item**, no build error. Inner shape is `{ item_id, action, quantity }` — `action` =
   `"add"`/`"remove"` (default `"add"`), `quantity` = int (default `1`); `op`/`count` are NOT honored
@@ -90,12 +90,12 @@ set inside a triggerless canvas — use a **hidden trait counter** and gate the 
   ignored (e.g. a misplaced `substitution_only` → the canvas wrongly shows as a normal activity
   button). Live-verified 2026-06-03.
 - **`requires_npc` ≠ `npc` — separate fields; an NPC hub needs BOTH.** `npc = "npc_x"` is the
-  **portrait** field → `npcId` (`template_import.py:1688` → `v2.py:10463`); only a repeatable canvas
+  **portrait** field → `npcId` (`template_import.py:1688` → `v2.py:10597`, `"npcId": npc_id` emit); only a repeatable canvas
   with `npcId` renders as an NPC portrait→menu (`selectNpcPortraitCanvasesForLocation` skips
-  `!c.npcId`, `v2.py:4065`). `requires_npc = "npc_x"` is **presence only** (`template_import.py:1740`)
+  `!c.npcId`, `v2.py:4201`). `requires_npc = "npc_x"` is **presence only** (`template_import.py:1740`)
   and does NOT set `npcId`. A repeatable hub with `requires_npc` but no `npc` has no `npcId`, so it
   drops to the **solo-link bucket** (`selectSoloActivityCanvasesForLocation` takes `!c.npcId`,
-  `v2.py:4096`) — a flat activity link, not the portrait. **No build error; only live-play shows it.**
+  `v2.py:4232`) — a flat activity link, not the portrait. **No build error; only live-play shows it.**
   Lane 2 ambients have the twin trap: they need `trigger_mode = "random"` + `chance` or they render as
   solo links instead of rolling on entry (`checkRandomEncounters`). Set BOTH on every Lane 1 hub; set
   random+chance on every ambient. HTML-grep the built game for `npcId` to confirm portraits emitted.
@@ -215,7 +215,7 @@ set inside a triggerless canvas — use a **hidden trait counter** and gate the 
 ## Phone gate nesting (the all-threads-fire trap)
 - **A phone conversation/post gate nests ONE level deeper than a canvas trigger:
   `trigger.conditions`, not the flat `trigger` shape.** The evaluator reads `conv.trigger.conditions`
-  (`v2.py:1740`) and `post.trigger.conditions` (`:1755`); the whole `trigger` table is stored as-is
+  (`v2.py:1869`) and `post.trigger.conditions` (`:1884`); the whole `trigger` table is stored as-is
   (`template_import.py:2455/2473`) and the engine looks specifically for a `.conditions` child. Author
   it the canvas way — `version`/`items` flat under `[phone.conversations.trigger]` — and
   `trigger.conditions` is **undefined**, the gate is skipped, and **every thread fires at game start**

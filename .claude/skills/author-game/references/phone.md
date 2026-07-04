@@ -53,24 +53,24 @@ You author config + content; the engine owns all the logic.
 
 - **The device + gate.** A sidebar 📱 Phone button renders when `phone_enabled` AND
   (`purchase_flag === ''` OR `flags[purchase_flag]` is set); an unread count shows as a `9+`-capped
-  badge (widget `phoneButton`, `v2.py:15124-15134`). §6.
+  badge (widget `phoneButton`, `v2.py:15477-15487`). §6.
 - **Delivery scan.** `setup.checkPhoneConversations()` runs on every passage render (called from the
-  caption build, `v2.py:14270-14271`). It scans conversations, posts, and profiles; marks any whose
+  caption build, `v2.py:14623-14624` — the `StoryCaption` call site). It scans conversations, posts, and profiles; marks any whose
   trigger is now satisfied as triggered; and — after a baseline first scan — fires a toast using the
-  item's `notify` string (`v2.py:1726-1770`). No author loop: content arrives the render its conditions
-  go true. The first scan is silent so you don't get a wall of toasts at game start (`:1733`).
+  item's `notify` string (`v2.py:1855-1900` — `checkPhoneConversations`). No author loop: content arrives the render its conditions
+  go true. The first scan is silent so you don't get a wall of toasts at game start (`:1862` — `_firstScan` gate).
 - **Threads.** Chat conversations group by NPC into threads (name + portrait + unread count), newest
-  thread first, oldest message first within a thread (`getPhoneThreads`, `v2.py:1789-1837`). Each thread
+  thread first, oldest message first within a thread (`getPhoneThreads`, `v2.py:1918-1966`). Each thread
   renders blocks as bubbles + reply buttons with a typing animation for pending NPC messages
-  (`openChatThread`, `v2.py:2039+`).
+  (`openChatThread`, `v2.py:2168+`).
 - **Reply effects.** A reply choice applies `effects` (traits), `flagEffects`, `questEffects`, and
   `scheduleEffects`, shows a toast, marks the conversation read, and re-renders (`sendPhoneReply`,
-  `v2.py:1839-1904`) — the same effect primitives as a canvas choice.
+  `v2.py:1968-2033`) — the same effect primitives as a canvas choice.
 - **Daily small-talk + photo actions.** `daily_topics` give repeatable per-day chat with cooldown +
-  corruption gating (`sendDailyChat`, `v2.py:1912-1960`; render `v2.py:2128-2187`).
+  corruption gating (`sendDailyChat`, `v2.py:2041-2090`; render `v2.py:2258-2316`).
 - **Other apps.** `social_feed` (read NPC posts + player posting via `post_actions`), `dating`
   (swipe/match on `profiles`), `gallery`, `custom` (renders an author passage), `quests`, `fast_jobs`,
-  `bank` — all author-configured, dispatched by `openPhoneApp` (`v2.py:1990-2004`).
+  `bank` — all author-configured, dispatched by `openPhoneApp` (`v2.py:2119-2134`).
 - **Persisted state** in `$game_state.phone` (triggered/read conversations, replies, posts, profiles,
   matches, daily_chats, posted_days).
 
@@ -88,41 +88,41 @@ NO day-of-week, NO clock time, NO location, NO random. For time-relative deliver
 
 This is the section that prevents a real, easy-to-make bug. Conversations, posts, profiles, gallery
 items, AND daily_topics all evaluate their gate through the **one** shared evaluator
-`setup.triggerConditionsSatisfied` (`v2.py:3394`). It is the same evaluator canvases use — but the phone
+`setup.triggerConditionsSatisfied` (`v2.py:3530`). It is the same evaluator canvases use — but the phone
 delivery path passes it only what's in `trigger.conditions`, and that path can't inject the day/time
 context the canvas path has. The supported `items[].type` set is **exactly** the `type === '…'` branches
-in that function (`v2.py:3460-3728`):
+in that function (`v2.py:3596-3864`):
 
 | `type` | `v2.py` line | What it reads |
 |---|---|---|
-| `flag` | `:3460` | `$flags[key]` (player) or `npc.flags[key]` — `is_true`/`is_false`/`exists` |
-| `trait` | `:3508` | a player or NPC `core_traits[key]` vs `value` (`gte`/`lt`/`eq`/…) |
-| `days_since_flag` | `:3533` | days elapsed since a flag's `set_day` (§4) |
-| `modifier` | `:3499` | a temporary modifier active/inactive |
-| `pass` | `:3649` | a recurring pass active |
-| `item` | `:3659` | inventory item count |
-| `stage` | `:3672` | a named composite gate (`engine.stage_helpers`) — one-level recurse |
-| `quest` | `:3688` | quest `active` / `completed` / `step_gte` |
-| `corruption_level` | `:3700` | the banded corruption tier (`gte`/`lt`/`eq`) |
-| `clothing_slot` | `:3570` | a slot equipped/unequipped *(clothing-enabled builds only)* |
-| `clothing_item` | `:3587` | a specific item equipped/owned *(clothing-enabled only)* |
-| `worn_beauty` / `worn_corruption` | `:3615` | MAX stat across the worn outfit *(clothing-enabled only)* |
-| `worn_type` | `:3630` | an outfit category equipped *(clothing-enabled only)* |
-| `npc_at_location` | `:3711` | cross-room presence — NPC present/absent at a location |
+| `flag` | `:3596` | `$flags[key]` (player) or `npc.flags[key]` — `is_true`/`is_false`/`exists` |
+| `trait` | `:3644` | a player or NPC `core_traits[key]` vs `value` (`gte`/`lt`/`eq`/…) |
+| `days_since_flag` | `:3669` | days elapsed since a flag's `set_day` (§4) |
+| `modifier` | `:3635` | a temporary modifier active/inactive |
+| `pass` | `:3785` | a recurring pass active |
+| `item` | `:3795` | inventory item count |
+| `stage` | `:3808` | a named composite gate (`engine.stage_helpers`) — one-level recurse |
+| `quest` | `:3824` | quest `active` / `completed` / `step_gte` |
+| `corruption_level` | `:3836` | the banded corruption tier (`gte`/`lt`/`eq`) |
+| `clothing_slot` | `:3706` | a slot equipped/unequipped *(clothing-enabled builds only)* |
+| `clothing_item` | `:3723` | a specific item equipped/owned *(clothing-enabled only)* |
+| `worn_beauty` / `worn_corruption` | `:3751` | MAX stat across the worn outfit *(clothing-enabled only)* |
+| `worn_type` | `:3766` | an outfit category equipped *(clothing-enabled only)* |
+| `npc_at_location` | `:3847` | cross-room presence — NPC present/absent at a location |
 
 **NOT supported here — these never match, no build error:** `day`, `time`, `weekday`, `hour`, `location`,
 `random`. They do not appear as branches in the evaluator (the final `// Unknown type` falls through to
-`results.push(false)`, `v2.py:3730-3731`). Do not author a phone thread that fires "on Friday" or "at
+`results.push(false)`, `v2.py:3866-3867`). Do not author a phone thread that fires "on Friday" or "at
 night" — the item evaluates false forever and the thread is dead weight.
 
 *(Code-vs-lore note: the old corpus draft's vocabulary list was close but **stale in two ways** — it
-omitted `npc_at_location` (it was added 2026-06-17, `v2.py:3711`), and it is the cross-room
+omitted `npc_at_location` (it was added 2026-06-17, `v2.py:3847`), and it is the cross-room
 presence gate, so a thread CAN now fire on "she's home" / "the kitchen is empty". Older drafts than that
 listed `day`/`time`/`location`/`random` as phone types — those are fictional for this path and always
 were. The table above is the live branch set; trust nothing else.)*
 
 **The fail-open backstop you still must respect:** the evaluator opens with
-`if (!conditions.version || conditions.version !== '1.0') return true;` (`v2.py:3398`). A `conditions`
+`if (!conditions.version || conditions.version !== '1.0') return true;` (`v2.py:3534`). A `conditions`
 block lacking `version = "1.0"` is treated as **satisfied** — the items never checked. For a phone
 thread that means it fires at game start. **Every `conditions` block needs `version = "1.0"`** (the
 house-wide trap — `references/toml-gotchas.md`).
@@ -135,9 +135,9 @@ house-wide trap — `references/toml-gotchas.md`).
 the honest substitute for the day-of-week trigger the phone doesn't have.**
 
 The phone evaluator can't read the calendar, but it CAN read how long ago a flag went true.
-`days_since_flag` compares `currentDay − flag.set_day` against `value` (`v2.py:3533-3565`); the set-day
+`days_since_flag` compares `currentDay − flag.set_day` against `value` (`v2.py:3669-3703`); the set-day
 comes from `$flags_meta[key].set_day`, recorded when the flag is set, so it only works on a flag that was
-actually set in play (an unset flag → condition fails, `v2.py:3558`).
+actually set in play (an unset flag → condition fails, `v2.py:3694` — `!flagValue || setDay === null`).
 
 ```toml
 [phone.conversations.trigger]
@@ -160,10 +160,10 @@ arc/system flag for the *event* — is the pattern for any time-relative phone c
 `trigger.conditions = { version, items }`. The flat canvas shape leaves `conditions` undefined → every
 thread fires at game start.**
 
-The delivery scan reads `conv.trigger.conditions` (`v2.py:1740-1741`), `post.trigger.conditions`
-(`:1755-1756`), and `prof.trigger.conditions` (`:1766-1767`). The importer stores the whole `trigger`
+The delivery scan reads `conv.trigger.conditions` (`v2.py:1869-1870`), `post.trigger.conditions`
+(`:1884-1885`), and `prof.trigger.conditions` (`:1895-1896`). The importer stores the whole `trigger`
 table verbatim (`template_import.py:2433/2455` for conversations, `:2473` posts, `:2491` profiles) and
-passes it through to `metadata["phone_settings"]` unchanged (`:5859`). So the engine looks specifically
+passes it through to `metadata["phone_settings"]` unchanged (`:5845`). So the engine looks specifically
 for a `.conditions` **child** of `trigger`. Author it the canvas way — `version`/`items` flat directly
 under `[phone.conversations.trigger]` — and `trigger.conditions` is `undefined`, the `if (trigCond && …)`
 guard skips the check, and the thread is treated as already-satisfied. Result: every thread fires turn 1
@@ -204,7 +204,7 @@ purchase_flag = "phone_active"
 ```
 
 **`purchase_flag` — the earned device.** When set, the sidebar 📱 button is hidden until
-`flags[purchase_flag]` is true (`v2.py:15125`; flag read from `phone_purchase_flag`, `v2.py:1002` /
+`flags[purchase_flag]` is true (`v2.py:15478`; flag read from `phone_purchase_flag`, `v2.py:1131` /
 `template_import.py:2533`). Empty string = button always shown (phone from frame one). RTS-faithful pacing
 buys the phone (a "phone arrives" beat) instead of assuming it: Late Shifts sets `purchase_flag =
 "phone_active"`, flipped at the diner hire alongside `hired_at_diner` — Maya's cut-off phone reconnects
@@ -255,10 +255,10 @@ shape (`TemplatePhoneConversationBlock`, `template_import.py:208-217`):
 
 - **`type = "message"`** — one bubble. Needs `sender = "npc"` or `"player"` and `content` (both validated,
   §10). `@player` / `@<npc>` tokens in `content`/`notify` resolve via `resolveAtRefs` at render
-  (`v2.py:1748`, `:2124`).
+  (`v2.py:1877`, `:2217`).
 - **`type = "reply"`** — presents `choices` (validated non-empty). Each choice carries `text` + the canvas
   effect primitives: `effects` (traits), `flagEffects`, `questEffects`, `scheduleEffects` — applied by
-  `sendPhoneReply` (`v2.py:1868-1894`).
+  `sendPhoneReply` (`v2.py:1997-2023`).
 - **Multi-round / branch.** A `reply` block carries `round = N`; a later `message` block gates on
   `after_round = N` + `after_choice = K` so it shows only if the player picked choice K in round N
   (`template_import.py:215-217`; shipped branch: `8_phone.toml:69-80`). Keep branches short — a thread is
@@ -282,18 +282,18 @@ Two parallel mechanisms, both corruption-gated and daily-capped, both reading pl
 directly:
 
 **Photo quick-actions (in a chat thread) — `daily_topics` with `cooldown = "per_topic"`.** Each action is
-its own once-per-day cap, so selfie + lewd + nude can each fire once daily (`v2.py:1930`, render
-`:2153-2160`). The RTS-faithful ladder is **selfie (no gate) → lewd (`corruption_min = 45`) → nude
+its own once-per-day cap, so selfie + lewd + nude can each fire once daily (`v2.py:2059` — `per_topic` cooldown, render
+`:2282-2289`). The RTS-faithful ladder is **selfie (no gate) → lewd (`corruption_min = 45`) → nude
 (`corruption_min = 85`)** (Late Shifts `8_phone.toml:351-390`). A locked rung renders as
-`🔒 [player_message]` so the player sees the next requirement (`v2.py:2155-2156`). Effects climb with the
+`🔒 [player_message]` so the player sees the next requirement (`v2.py:2285-2287` — `phone-daily-locked`). Effects climb with the
 tier (player arousal/corruption + NPC arousal) and target only traits the NPC carries (§8). Distinguish
 from **small-talk** `daily_topics` (no `cooldown` field) — those are the legacy per-NPC 1/day side-channel
 (low-stakes chatter, `relation ±1`), arc-flag gated, ambient warmth not plot (`8_phone.toml:319-341`).
 Each `daily_topic` may also carry its own `conditions` gate (`version = "1.0"` required, §3) checked at
-render (`v2.py:2149`).
+render (`v2.py:2278` — `ptp.conditions` render check).
 
 **Player feed posting — `post_actions` on a `social_feed` app.** The selfie/lewd/nude analogue for a
-follower economy (`v2.py:2251-2272`, `sendSocialPost` `:2308-2332`). Each action:
+follower economy (`v2.py:2380-2402`, `sendSocialPost` `:2437-2463`). Each action:
 `{ label, corruption_min?, daily_cap?, followers_min, followers_max, counter_trait }`. It's corruption-
 gated (`🔒 label` when locked), daily-capped (default 1), and increments an author-named follower trait by
 a random `followers_min..followers_max` (`counter_trait`, default `followers`). Reach for this only when a

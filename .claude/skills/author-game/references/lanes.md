@@ -161,25 +161,25 @@ The hardest lane; RTS's biggest. Two canvases per activity:
    only the *gains* (money/relation) + `time_progression_minutes`. See `toml-gotchas.md` "Resource gating".
 2. **Dispatcher:** rolls dice + checks NPC conditions → HIT routes to the NPC scene, MISS plays solo
    content. The host declares its `substitutions = [...]` rules in `[canvases.trigger]` metadata; on
-   entry the engine rolls them (`setup.checkAndSubstituteCanvas`, `v2.py:4875`) and, on a hit, jumps to
+   entry the engine rolls them (`setup.checkAndSubstituteCanvas`, `v2.py:5011`) and, on a hit, jumps to
    the target's passage. **Each substitution target canvas ships ALL FOUR of:**
    - `substitution_only = true` — keeps it out of the Lane 1/2 location selectors (serialized as
-     `substitutionOnly`; the selectors skip it at `v2.py:4034/4064/4095`).
+     `substitutionOnly`; the selectors skip it at `v2.py:4170/4200/4231` (`if (c.substitutionOnly) continue`)).
    - `max_triggers_per_day = 1` — once-per-day is the felt cadence (a walk-in that can fire twice in one
-     day reads as spam). Serialized as `maxPerDay`, read at `v2.py:10389`.
-   - `is_repeatable = true` — so it can fire again on later days (`isRepeatable`, `v2.py:10388`).
+     day reads as spam). Serialized as `maxPerDay`, read at `v2.py:10596`.
+   - `is_repeatable = true` — so it can fire again on later days (`isRepeatable`, `v2.py:10595`).
    - a `location` — **load-bearing.** The dispatcher resolves its target via
-     `setup.getCanvasById(target)` (`v2.py:2751`), whose lookup is built **only** from
+     `setup.getCanvasById(target)` (`v2.py:2887`), whose lookup is built **only** from
      `help_data.locationCanvases` — the per-location registry assembled by iterating `self.locations`
-     (`v2.py:10358`+). A target with no `location` never lands in any bucket, so `getCanvasById` returns
+     (`v2.py:10487`+, `locationCanvases` build loop over `self.locations`). A target with no `location` never lands in any bucket, so `getCanvasById` returns
      `null` and the dispatcher silently misses (no build error). This is the single most common dead-Lane-3 bug.
 
    All four are required; missing any is a silent anti-pattern that a green build will NOT catch.
    - **Multiple mutually-exclusive variants at one activity (Pattern B):** give each rule the same
      `exclusive_group = "<name>"` string → ONE shared dice roll partitioned into cumulative buckets,
-     fall-to-solo on a claimed-but-failed slot (engine: `v2.py:4919`+, the group branch of
+     fall-to-solo on a claimed-but-failed slot (engine: `v2.py:5055`+ (`exclusive_group` Pattern B loop), the group branch of
      `checkAndSubstituteCanvas`). Do NOT approximate with summed Pattern A `chance` values — Pattern A
-     rules each roll their OWN independent dice (`v2.py:4946`), so summed chances over-fire and the
+     rules each roll their OWN independent dice (`v2.py:5082`, `Math.random() < chance`), so summed chances over-fire and the
      "mutually exclusive" intent is lost.
    - **Walk-in direction:** Lane 3 walk-ins use a *loose* presence check (NPC is around — "is he home"
      style); a *strict* exact-location match (NPC must be in this very room) is Lane 2's flavor, not a
@@ -226,7 +226,7 @@ The hardest lane; RTS's biggest. Two canvases per activity:
      - **Overhear** = the same occupancy gate, authored audio-only (no image).
 
      Engine: the `npc_at_location` condition type lives in `setup.triggerConditionsSatisfied`
-     (`v2.py:3711`) — operator `is_present`/`is_absent`, optional `npc_id` (omitted = the room itself
+     (`v2.py:3847`, `type === 'npc_at_location'`) — operator `is_present`/`is_absent`, optional `npc_id` (omitted = the room itself
      occupied/empty). It evaluates in canvas, choice, substitution, AND `entry_conditions` (one canonical
      evaluator). The condition block needs `version = "1.0"` or it fails OPEN. Register stays RTS-flat
      (~30w base, scheme in a `thought_bubble`); the capstone it routes into is where density is earned.
@@ -254,13 +254,13 @@ The hardest lane; RTS's biggest. Two canvases per activity:
      ]
      ```
      Each band item is the engine's typed `trait` condition (`subject = "player"`, `trait_key`,
-     `operator`, `value` — verified `v2.py:3508`; `gte`/`lt` are real operators, `v2.py:3420`). Because
+     `operator`, `value` — verified `v2.py:3644` (`type === 'trait'`); `gte`/`lt` are real operators, `v2.py:3556` (`op gte`/`lt` compare)). Because
      the bands are disjoint, only the matching band's rule passes `_tryRule`, and each Pattern A rule rolls
-     its OWN `Math.random() < chance` (`v2.py:4946`) — so the felt frequency steps up band by band. (Each
+     its OWN `Math.random() < chance` (`v2.py:5082`) — so the felt frequency steps up band by band. (Each
      `conditions` block needs `version = "1.0"` or it fails OPEN. This is the Pattern A path, NOT
      `exclusive_group` — these rules don't share a dice roll; they're gated apart by band so only one is
      ever live. To gate on the corruption *tier* 0–5 instead of the raw 0–100 odometer, use
-     `type = "corruption_level"` — `v2.py:3700` — but for a saturation curve the raw-trait bands above are
+     `type = "corruption_level"` — `v2.py:3836` — but for a saturation curve the raw-trait bands above are
      what you want.)
 - **Vocabulary:** he walks in (mid-activity), he arrives while she's vulnerable, innocent setup →
   charged shift. The setup is genuinely a chore; the seduction happens *to* her.
@@ -342,7 +342,7 @@ explicit surface that follows (opened from the hub once the first-night flag is 
 The location screen renders four separate paths; a canvas only appears if it matches the right one:
 - **An NPC hub needs `npc` set, not just `requires_npc` — separate fields.** `requires_npc` gates
   presence only; `npc` sets the `npcId` that `renderNpcPortraits` requires
-  (`selectNpcPortraitCanvasesForLocation` skips `!c.npcId`, `v2.py:4065`). A repeatable hub with
+  (`selectNpcPortraitCanvasesForLocation` skips `!c.npcId`, `v2.py:4201`). A repeatable hub with
   `requires_npc` but no `npc` renders as a flat **solo link**, not a portrait. Lane 2 ambients likewise
   need `trigger_mode = "random"` + `chance` or they render as links instead of rolling on entry. Set
   both on hubs; random+chance on ambients. (Full engine trace + grep guard: `toml-gotchas.md`.)

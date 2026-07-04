@@ -18,6 +18,11 @@ still document) · `process` (how Claude works) · `one-off` (author slipped; sk
 
 ## Progress log (newest first)
 
+- **2026-07-04 — ✅ #20 + #26 done.** #20: `beat-authoring.md` now names design-beat (plan unit) vs build-node
+  (screen) — "3 beats → ~23 nodes." #26: swept ALL engine cites after the renumber — a per-file workflow (18
+  agents) grep-confirmed each symbol against current code and fixed **262**, confirmed **204** already-correct,
+  anchored **62** load-bearing cites, **0** unresolved; + a standing "grep the symbol, not the line" note in
+  `engine-reference.md`. Only `v2.py` had drifted. 12/12 spot-checks pass. Uncommitted.
 - **2026-07-04 — ✅ batch: 7 small fixes done (#22, #23, #21, #19, #18, #17, #6).** Verified engine facts first
   (the engine moved under us) — which corrected 3 stale premises: #17 had no `./media` myth (real risk = missing
   `--video-folder`) + stale `--owner-id`; #18's failure is `MISSING HINT`, not `NEVER SET`; `media.md` cites had
@@ -296,7 +301,7 @@ Three failure shapes in the Vesper build, one root each:
 
 ## GROUP H — small doctrine / wording fixes
 
-### 20. "Beat" is overloaded — design-beat (story chunk) vs build-node (screen) ⬜
+### 20. "Beat" is overloaded — design-beat (story chunk) vs build-node (screen) ✅ DONE (2026-07-04)
 `P2 · effort S · skill · beat-authoring.md`
 - A design-beat is a story chunk; it explodes into MANY single-Continue nodes (opening = 3 beats → ~23 nodes). The
   "1 beat = 1 screen" framing caused a jargon detour (`iteration-log Loop 9`) and helped license collapsing the
@@ -349,7 +354,7 @@ Three failure shapes in the Vesper build, one root each:
 
 ## FOLLOW-UP (discovered during #8)
 
-### 26. `v2.py` citation-drift sweep after the engine renumber ⬜
+### 26. `v2.py` citation-drift sweep after the engine renumber ✅ DONE (2026-07-04)
 `P2 · effort M · skill (fact-accuracy) · engine-reference.md + any file citing v2.py lines`
 - The engine commits `8446b3d`/`1d9ce93` renumbered `v2.py`. `6b07567` already fixed the **slug/save** cites
   (`dev-console-jump.md`, `customization.md`, `SKILL.md`). But other line-cites likely drifted — e.g.

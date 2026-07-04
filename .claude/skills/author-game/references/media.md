@@ -35,9 +35,9 @@ called out — the corpus is recovered for its craft, not trusted for its engine
 Media is authored as a content block inside a canvas node's `blocks = [...]`, alongside `paragraph` and
 `dialog`. Three media types are real: **`image`**, **`video`**, **`clip`**. (An unknown `type` is **not**
 silently dropped — the importer **hard-fails the build** with a did-you-mean hint; `img`/`picture` → `image`.
-`template_import.py:2786-2789`. So a typo is caught at build, not in the shipped HTML.)
+`template_import.py:2786-2831` (`_CONTENT_BLOCK_TYPE_SUGGESTIONS` img/picture→image + did-you-mean hint). So a typo is caught at build, not in the shipped HTML.)
 
-**`image`** — a still (renders `<img>`). `v2.py:13197-13401`.
+**`image`** — a still (renders `<img>`). `v2.py:13455-13659` (`block_type == "image"` handler).
 ```toml
 { type = "image", props = {
     file = "scenes/penthouse_morning.jpg",   # path under the media folder (extension is advisory — see §2)
@@ -52,9 +52,9 @@ Optional props the engine also reads: `url` (a verbatim external URL instead of 
     description = "...", search_queries = ["...", "..."] } }
 ```
 `files` (a string array) **wins over `file`** and emits `either(...)` so a different image shows on each visit —
-replay variety for a repeatable scene. Image-only; a non-image entry in the pool is skipped. `v2.py:13205-13231`.
+replay variety for a repeatable scene. Image-only; a non-image entry in the pool is skipped. `v2.py:13463-13543` (`files` pool wins over `file` → `either()`).
 
-**`video`** — a looping clip from a file (renders `<video autoplay muted loop>`). `v2.py:13403+`. Same props as
+**`video`** — a looping clip from a file (renders `<video autoplay muted loop>`). `v2.py:13661-13769` (`block_type == "video"` handler; `<video autoplay muted loop>` at `:13758`). Same props as
 image minus `files`/`alt`/`caption`:
 ```toml
 { type = "video", props = {
@@ -71,7 +71,7 @@ wrong. A clip carries **`clipId` only** — no `file`, no `search_queries`:
 ```
 The id resolves to a database asset (`AssetClip.file_url`), **scoped to the project owner**, and renders a
 hosted `<video>`. There is no disk file and no find-media handoff; if the id isn't accessible it's skipped
-silently (not added to the missing list). `v2.py:13514-13559`. Use `clip` only when you're handed a clip UUID
+silently (not added to the missing list). `v2.py:13772-13817` (`block_type == "clip"`; `clips_by_id` → `AssetClip.file_url`). Use `clip` only when you're handed a clip UUID
 from a library — **preserve the UUID exactly**. For art you intend to *find*, use `image`/`video`, not `clip`.
 
 > ⚠️ **Corpus lie #1:** old `prompts_v2/schema/02` says clip uses `props.file`. False. Clip is `props.clipId`.
@@ -83,7 +83,7 @@ from a library — **preserve the UUID exactly**. For art you intend to *find*, 
 This is the one engine fact that trips everyone, so internalize it: **the engine ignores the extension you
 write.** When it resolves `file`, it strips the extension and matches on the base path (folder + stem), then
 looks at the **actual file on disk** to decide everything: `<img>` vs `<video>`, and the `images/` vs `videos/`
-copy folder. `_find_media_file`, `v2.py:11135-11176`.
+copy folder. `_find_media_file`, `v2.py:11301-11342`.
 
 So `file = "scenes/intro.mp4"` happily resolves to `scenes/intro.webm` on disk — and a file you *labelled*
 `type = "video"` but that resolves to a `.jpg` renders as an `<img>`. The `type=` you write and the extension
@@ -103,10 +103,10 @@ added to the build's **missing-media list** and then:
 
 - **normal build → renders nothing.** The block silently vanishes. This is why a game with no real art looks
   like it has no media at all even when the references are correct. `v2.py:13606` (image `# else: skip
-  silently`; the video path is the sibling near `:13689`).
+  silently`; the video path is the sibling near `:13723` (video `# else: skip silently`)).
 - **`--debug` build → an `[IMAGE MISSING] <path>` placeholder** (dashed box) with the `description` and, if you
   gave `search_queries`, clickable search links (`v2.py:13571` gate, text `:13578`; video `[VIDEO MISSING]`
-  `:13689`). **This text is baked into the HTML at BUILD time** — it does not re-check, so a `--debug` build
+  `:13695`). **This text is baked into the HTML at BUILD time** — it does not re-check, so a `--debug` build
   ships the `[IMAGE MISSING]` text even if you add the media later without rebuilding. `--debug` is a QA
   affordance ONLY (see "QA vs publish build" below).
 

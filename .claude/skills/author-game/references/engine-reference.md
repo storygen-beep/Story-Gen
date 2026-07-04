@@ -8,6 +8,13 @@ reads / renders" table. **Every row is verified against live code** — the impo
 here, the engine almost certainly doesn't read it — **don't invent a knob.** Where this file and the older
 corpus drafts disagree, **the code wins**; the divergence is flagged inline as *(code-vs-lore: …)*.
 
+> **`file:line` cites are approximate — grep the named symbol, don't trust the number.** The generated engine
+> (`v2.py`) is regenerated and RENUMBERS often — a citation drifts the moment code is inserted above it (one
+> engine change shifted lines +5 near the top to +294 near the bottom, across 67 hunks). Every cite names its
+> **symbol** (a function, a variable, a quoted string) precisely because that's what survives a renumber: if a
+> line looks wrong, `grep -n` the symbol in the current engine file and use the line it reports. Number = hint,
+> symbol = truth.
+
 This file is the **field mechanics**. The DESIGN decisions — which trait spines an arc, which lane to
 reach for, how a map is shaped, when to enable a system — live in the sibling references. Cross-links are
 explicit; nothing is duplicated. For the silent build-breakers and grep guards, `references/toml-gotchas.md`
@@ -45,15 +52,15 @@ For each trait's range / default / decay / which sidebar primitive renders it, a
 distinction → **`references/trait-catalog.md`**. Which trait spines which arc → `references/trait-design.md`.
 
 > **Clamp trap — effects are UNBOUNDED by default; you opt IN to clamping.** The low-level
-> `applyAndNotifyTrait` defaults `clamp = true` (`v2.py:5303-5306`, `next = window._traitClamp(next, 0, 100)`)
-> — BUT the effect-application path overrides it: it calls with `eff.clamp || false` (`v2.py:1955`, also
-> `:1872`), and job income hardcodes `false` (`:2545`). So a TOML effect that OMITS `clamp` — e.g.
+> `applyAndNotifyTrait` defaults `clamp = true` (`v2.py:5440-5442`, `next = window._traitClamp(next, 0, 100)`)
+> — BUT the effect-application path overrides it: it calls with `eff.clamp || false` (`v2.py:2084`, also
+> `:2001`), and job income hardcodes `false` (`:2674`). So a TOML effect that OMITS `clamp` — e.g.
 > `{ trait = "money", op = "add", value = 45 }` — runs with `clamp = false` and applies the raw delta with
 > **no 0–100 bound**. That's correct for `money` (it climbs past 100 freely — `trait-catalog.md`'s "no cap" is
 > right). The flip side: a 0–100 stat (corruption, etc.) will ALSO exceed 100 if you over-add, because nothing
 > auto-clamps it — and if a **banded** stat leaves its bands, its sidebar card silently vanishes
 > (`trait-catalog.md` §4). To BOUND a stat, pass **`clamp = true`** (clamps 0–100) or **`cap = N`** (per-effect ceiling,
-> `v2.py:5309-5313`). Spending via per-choice/canvas **`costs`** hardcodes `clamp = true` (`v2.py:4231`), so
+> `v2.py:5444-5450`). Spending via per-choice/canvas **`costs`** hardcodes `clamp = true` (`v2.py:4367`), so
 > deductions floor at 0. Bottom line: in TOML, unbounded is the default — clamp/cap is something you add.
 
 ---
@@ -140,14 +147,14 @@ Block vocabulary (`canvases.nodes.blocks`, each `{type, …}`) — only these ty
 **NOT** ship silently: the importer **HARD-FAILS the build** on an unrecognized content block type, with a
 did-you-mean hint (`dialogue`→`dialog`, `speech`→`dialog`) — `_validate_content_block_types`,
 `template_import.py:2805` (error appended ~`:2826`). The "silent `<p>` degrade that drops the speaker"
-(`v2.py:13628-13641`) is only the GENERATOR's fallback for non-importer entry points (e.g. the editor), not
+(`v2.py:13923-13936`) is only the GENERATOR's fallback for non-importer entry points (e.g. the editor), not
 the build path. **Dialogue MUST be `type="dialog"`** — `type="dialogue"`/`"speech"` fail the build
 (`references/toml-gotchas.md` for the grep guard).
 
 `exit_block` (`TemplateExitBlock` at `:662`): `type` = `"location"` or `"choices"`.
 - `type="location"` → single return button; `config = {destinationType, locationId, time_progression_minutes}`.
   `destinationType` must be `"trigger"`, `"specific"`, or `"node"` (validated `:3900`; default `"trigger"`,
-  `v2.py:12272`).
+  `v2.py:12567`).
 - `type="choices"` → the menu (Lane 1 hub) — §3.
 
 ---
@@ -211,7 +218,7 @@ validators at `template_import.py:1093`/`:1114` catch *some* cases as warnings, 
 ### §4.1 — Trait effect (mutation)
 
 Dataclass `TemplateChoiceEffect` at `template_import.py:514`. Applied by `applyAndNotifyTrait`
-(`v2.py:5403` → `applyTraitEffect` `v2.py:5259`).
+(`v2.py:5539` → `applyTraitEffect` `v2.py:5395`).
 
 ```toml
 { targetType = "player", trait = "corruption", op = "add", value = 1 }
@@ -226,15 +233,15 @@ Dataclass `TemplateChoiceEffect` at `template_import.py:514`. Applied by `applyA
 | `targetType` | yes | `"player"` / `"npc"` |
 | `npcId` | when npc | NPC slug (NOT `npc_id`) |
 | `trait` | yes | trait name (NOT `trait_key`) |
-| `op` | yes | `"add"` or `"set"` — **there is NO `"sub"` op** (`v2.py:5294-5300`; unknown op = no-op). Negative `value` decays. |
+| `op` | yes | `"add"` or `"set"` — **there is NO `"sub"` op** (`v2.py:5430-5437`; unknown op = no-op). Negative `value` decays. |
 | `value` | yes | integer |
-| `clamp` | no | The effect path passes `eff.clamp \|\| false` (`v2.py:1955`), so an OMITTED `clamp` = **`false` = unbounded** (the low-level fn defaults `true`, but the effect path overrides it). Set **`clamp = true`** to bound a stat to 0–100. |
-| `cap` | no | per-effect upper bound (`v2.py:5309-5313`) |
+| `clamp` | no | The effect path passes `eff.clamp \|\| false` (`v2.py:2084`), so an OMITTED `clamp` = **`false` = unbounded** (the low-level fn defaults `true`, but the effect path overrides it). Set **`clamp = true`** to bound a stat to 0–100. |
+| `cap` | no | per-effect upper bound (`v2.py:5444-5450`) |
 | `conditions` | no | gate this effect (used on `[engine.daily_tick]` entries) |
 
 **Stage advancement** uses the **player** namespace: `{ targetType = "player", trait = "<slug>_stage",
 op = "set", value = N }`. The engine special-cases `/^([a-z_]+)_stage$/` and logs an upward delta to
-`stage_advancement_log` (`v2.py:5413-5418`). Never `targetType="npc"`. Predicate side: `{ type = "trait",
+`stage_advancement_log` (`v2.py:5548-5554`). Never `targetType="npc"`. Predicate side: `{ type = "trait",
 subject = "player", trait_key = "<slug>_stage", operator = "gte", value = N }`. (`references/toml-gotchas.md`,
 `trait-catalog.md` §3.)
 
@@ -252,15 +259,15 @@ Dataclass `TemplateFlagEffect` at `template_import.py:532`.
 
 ### §4.3 — Predicate (condition) — the typed `{version, logic, items}` block
 
-Evaluated by `triggerConditionsSatisfied` (`v2.py:3394`). Used on `[canvases.trigger.conditions]`,
+Evaluated by `triggerConditionsSatisfied` (`v2.py:3530`). Used on `[canvases.trigger.conditions]`,
 per-choice `conditions`, group-block `props.conditions`, substitution-rule `conditions`,
 location `entry_conditions`, stage-helper `conditions`, and phone `trigger.conditions`.
 
 > **⚠️ `version = "1.0"` IS MANDATORY — omit it and the gate FAILS OPEN.** The evaluator opens with
-> `if (!conditions.version || conditions.version !== '1.0') return true;` (**`v2.py:3398`**). A block
+> `if (!conditions.version || conditions.version !== '1.0') return true;` (**`v2.py:3534`**). A block
 > missing `version` is treated as satisfied — items never checked. No build error, no validator catch. The
-> whole function ALSO fails open on any thrown exception (`v2.py:3737-3739`). *(code-vs-lore: the corpus +
-> `toml-gotchas.md` cite this at `v2.py:3312` — the real line is **3398**. The rule is right; the line was
+> whole function ALSO fails open on any thrown exception (`v2.py:3873-3875`). *(code-vs-lore: the corpus +
+> `toml-gotchas.md` cite this at `v2.py:3312` — the real line is **3534**. The rule is right; the line was
 > stale. The behavior table here supersedes it.)* Grep guard + full trap: `references/toml-gotchas.md`.
 
 ```toml
@@ -270,31 +277,31 @@ conditions = { version = "1.0", logic = "AND", items = [
 ] }
 ```
 
-`logic` = `"AND"` (default) or `"OR"` (`v2.py:3401`, `:3735-3736`). `subject` = `"player"` or `"npc"` (npc
+`logic` = `"AND"` (default) or `"OR"` (`v2.py:3537`, `:3871-3872`). `subject` = `"player"` or `"npc"` (npc
 requires `npc_id`).
 
-**The complete live condition `type` set (16 — verified `v2.py:3460-3728`).** Anything else → the item is
-`false` (`v2.py:3730-3731`).
+**The complete live condition `type` set (16 — verified `v2.py:3596-3864`).** Anything else → the item is
+`false` (`v2.py:3866-3867`).
 
 | `type` | Required fields | Operators / behavior | Code |
 |---|---|---|---|
-| `flag` | `subject`, `flag_key` | `is_true` / `is_false` (missing reads false) / `exists` | `:3460` |
-| `modifier` | `modifier_key` | `is_active` (else negated) | `:3499` |
-| `trait` | `subject`, `trait_key`, `operator`, `value` | `eq`/`ne`/`gt`/`gte`/`lt`/`lte` (numeric) · `in`/`not_in` · `contains`/`not_contains` · `exists`/`not_exists` | `:3508`, ops `:3417-3448` |
-| `days_since_flag` | `subject`, `flag_key`, `operator`, `value` | numeric — days since the flag's `set_day` | `:3533` |
-| `clothing_slot` | `slot`, `operator` | `equipped` / `unequipped` (clothing-enabled only) | `:3570` |
-| `clothing_item` | `item_id`, `operator` | `equipped` / `unequipped` / `owned` / `not_owned` | `:3587` |
-| `worn_beauty` | `operator`, `value` | numeric — MAX beauty across equipped | `:3615` |
-| `worn_corruption` | `operator`, `value` | numeric — MAX corruption across equipped (content router; ≠ player.corruption) | `:3615` |
-| `worn_type` | `operator`, `value` | `eq` / `neq` against an outfit category string | `:3630` |
-| `pass` | `pass_id`, `operator` | `is_active` (else negated) | `:3649` |
-| `item` | `item_id`, `operator`, `value` | numeric inventory count | `:3659` |
-| `stage` | `helper`, `operator` | resolves a named `[[engine.stage_helpers]]`, recursively evaluates; `is_false` negates | `:3672` |
-| `quest` | `quest_id`/`quest`, `operator` | `active` / `completed` / `step_gte` | `:3688` |
-| `corruption_level` | `operator`, `value` | banded 0–4 from tiers `[0,5,15,30,45]` (override `[engine].corruption_tiers`); `gte`/`lt`/`eq` | `:3700`, tiers `v2.py:5486-5492` |
-| `npc_at_location` | `location_id` (`npc_id` optional), `operator` | `is_present` / `is_absent`; with `npc_id` → that NPC at the location, without → any NPC (room occupied/empty) | `:3711` |
+| `flag` | `subject`, `flag_key` | `is_true` / `is_false` (missing reads false) / `exists` | `:3596` |
+| `modifier` | `modifier_key` | `is_active` (else negated) | `:3635` |
+| `trait` | `subject`, `trait_key`, `operator`, `value` | `eq`/`ne`/`gt`/`gte`/`lt`/`lte` (numeric) · `in`/`not_in` · `contains`/`not_contains` · `exists`/`not_exists` | `:3644`, ops `:3553-3585` |
+| `days_since_flag` | `subject`, `flag_key`, `operator`, `value` | numeric — days since the flag's `set_day` | `:3669` |
+| `clothing_slot` | `slot`, `operator` | `equipped` / `unequipped` (clothing-enabled only) | `:3706` |
+| `clothing_item` | `item_id`, `operator` | `equipped` / `unequipped` / `owned` / `not_owned` | `:3723` |
+| `worn_beauty` | `operator`, `value` | numeric — MAX beauty across equipped | `:3751` |
+| `worn_corruption` | `operator`, `value` | numeric — MAX corruption across equipped (content router; ≠ player.corruption) | `:3751` |
+| `worn_type` | `operator`, `value` | `eq` / `neq` against an outfit category string | `:3766` |
+| `pass` | `pass_id`, `operator` | `is_active` (else negated) | `:3785` |
+| `item` | `item_id`, `operator`, `value` | numeric inventory count | `:3795` |
+| `stage` | `helper`, `operator` | resolves a named `[[engine.stage_helpers]]`, recursively evaluates; `is_false` negates | `:3808` |
+| `quest` | `quest_id`/`quest`, `operator` | `active` / `completed` / `step_gte` | `:3824` |
+| `corruption_level` | `operator`, `value` | banded 0–4 from tiers `[0,5,15,30,45]` (override `[engine].corruption_tiers`); `gte`/`lt`/`eq` | `:3836`, tiers `v2.py:5622-5628` |
+| `npc_at_location` | `location_id` (`npc_id` optional), `operator` | `is_present` / `is_absent`; with `npc_id` → that NPC at the location, without → any NPC (room occupied/empty) | `:3847` |
 
-*(code-vs-lore: `npc_at_location` IS live (`:3711`) — older corpus drafts omit it entirely, and miss
+*(code-vs-lore: `npc_at_location` IS live (`:3847`) — older corpus drafts omit it entirely, and miss
 `contains`/`not_contains` on `trait`. Treat this code-verified table as the set.)*
 
 ### §4.4 — Quest-card conditions are a DIFFERENT, flat shape
@@ -325,7 +332,7 @@ Dataclass `TemplateLocation` at `template_import.py:135`; parsed at `template_im
 | `entry_from` | `1635` | str | navigation parent — "Leave X" links here |
 | `default_entry` | `1636` | str | (containers) child to auto-redirect into |
 | `navigation_order` | `1637` | list | ordered child slugs; each MUST have `entry_from` = this location, or the build rejects it (`:3581`) |
-| `entry_conditions` | `1638` | table | `{version, items}` — deny entry when it fails. **Needs `version="1.0"` or it fails OPEN** (§4.3). Visible-but-blocked; no native time lock. Evaluated `v2.py:4321`. |
+| `entry_conditions` | `1638` | table | `{version, items}` — deny entry when it fails. **Needs `version="1.0"` or it fails OPEN** (§4.3). Visible-but-blocked; no native time lock. Evaluated `v2.py:4457` (`navDestUnlocked` → `triggerConditionsSatisfied`). |
 | `blocked_message` | `1639` | str | rendered inline on the greyed nav card AND the blocked passage (one source) |
 | `costs` | `1640` | table | per-ENTRY travel friction: `time` (minutes, advances the clock) + any other key deducts that player trait. Empty = free. |
 | `clothing_rules` | `1641` | list | per-location coverage gate; `slots_required` must be **non-empty** + every slot in `VALID_CLOTHING_SLOTS` or the import HARD-FAILS (validator `:3586-3597`; `VALID_CLOTHING_SLOTS` = `bra/underwear/top/bottom/dress/legwear/shoes`, `:158`) |
@@ -355,7 +362,7 @@ Dataclass `TemplateNPC` at `template_import.py:107`; parsed at `template_import.
 
 `[[npcs.schedules]]` (`TemplateNPCSchedule` `:94`): `location` (slug→UUID at build), `weekdays`
 (0=Mon…6=Sun, empty=all), `start_time`/`end_time` (`HH:MM`), `activity` (author-side label). The NPC's
-location is **derived** by `getNpcLocation` (`v2.py:3005`, returns `{location, activity}`) — there is no stored location field. Keep rows
+location is **derived** by `getNpcLocation` (`v2.py:3141`, returns `{location, activity}`) — there is no stored location field. Keep rows
 non-overlapping. The **co-location / meta-location** model (an NPC scheduled at the exact canvas location vs
 a shared meta-location) drives the `requires_npc` walk-in direction — design in `references/lanes.md` /
 `references/location-design.md`.

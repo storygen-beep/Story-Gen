@@ -53,16 +53,16 @@ clean assigned-target → travel → meet entrance. Mirror its shape.
 3. **Auto-fire at the reachable, open location.** The first-contact is a one-shot, authored like the boot
    canvas (`lanes.md:349-353`): `is_repeatable=false`, `priority≥9`, `requires_npc` set so it fires where the
    NPC is, **no `npc=`** (an `npc=` one-shot renders nowhere — `renderNpcPortraits` skips non-repeatables,
-   `v2.py:4065`), gated on `<arc>_precondition is_true` + `<npc>_met is_false`, **`version="1.0"`** (a
-   versionless gate fails open and cold-spawns the beat at game start, `v2.py:3398`). It auto-fires on entry
-   (`selectAutoFireCanvasForLocation`, `v2.py:4025`). The on-ramp stays cold-start-enterable — never gate the
+   `v2.py:4677`), gated on `<arc>_precondition is_true` + `<npc>_met is_false`, **`version="1.0"`** (a
+   versionless gate fails open and cold-spawns the beat at game start, `v2.py:3534` (`triggerConditionsSatisfied` — no/≠"1.0" version ⇒ returns true)). It auto-fires on entry
+   (`selectAutoFireCanvasForLocation`, `v2.py:4161`). The on-ramp stays cold-start-enterable — never gate the
    *first* meeting on a stat only that arc raises (the backwards-on-ramp ban, `beat-authoring.md:160`).
 
 4. **Name them on the page + a one-line character read** in the first paragraph. State who they are, their
    state, the angle — render, don't dump: *"Renner's at the end of it — a big man gone soft and sour, three
    drinks into the evening and looking like the fourth won't help."* Where the player can't yet know the name,
    use `speaker="unknown"` — the engine prints **"Stranger:"** until names are exchanged, then switch to the
-   NPC speaker (`v2.py:13590-13596`). Description-as-reward, not a stat-block on sight.
+   NPC speaker (`v2.py:13848-13854` — the `speaker=="unknown"` → "Stranger:" branch). Description-as-reward, not a stat-block on sight.
 
 5. **Land the hook as a WANT in the first voiced line.** The character's first line states their need or role —
    the Step-3 casting hook spoken aloud (`step-3-casting.md`), not a bio. Renner's refusal-then-hire gives him
@@ -79,7 +79,7 @@ clean assigned-target → travel → meet entrance. Mirror its shape.
    punctuation mark (immediate cast in the opening; later NPCs earned through story flags). For a **mid-game
    arrival**, the meet-canvas *is* this one-shot, gated on a progression flag — and **withhold the NPC's
    schedule until the meet fires**, because `getNpcsWithSchedules` leaks every scheduled NPC onto the Schedule
-   page from Day 1 regardless of unlock (`v2.py:3132-3139`); a schedule given early spoils the entrance.
+   page from Day 1 regardless of unlock (`v2.py:3268-3274` — `getNpcsWithSchedules` declared-schedule registry surfaces every declared NPC); a schedule given early spoils the entrance.
 
 ---
 
@@ -141,6 +141,6 @@ Run at Step 6, per NPC (for NPCs met **after** the opening; opening-cast naming 
 - **Plant the name before the face**; stage the meeting with a reason; **never a bare teleport-in.**
 - **Land the hook as the first voiced line** — a person with a want, not a meter-waiting yes-man.
 - **Sequence in waves**; mid-game arrivals withhold their schedule until the meet (else `getNpcsWithSchedules`
-  spoils them, `v2.py:3132-3139`).
+  spoils them, `v2.py:3268-3274` — `getNpcsWithSchedules` declared-schedule registry).
 - **Forbidden:** the bare cold-spawn hub whose base node is the introduction (Hank,
   `late_shifts/5_scenes.toml:14-35`).

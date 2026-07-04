@@ -6,6 +6,13 @@ is **the next beat in the living plan**. A beat is any story development: `npc_i
 validate it, then stop. This is `run-mode.md`'s "ideate → decide → write → **verify green**" rhythm in
 engineering form — and the first step that produces TOML.
 
+> **Two granularities under one word — don't conflate them.** This Step-7 **beat** is the PLAN unit: a *story
+> chunk* you author + verify in one turn (a scene, an escalation, an intro). It is **not one screen.** A scripted
+> beat **explodes into many single-click NODES** — the "one click reveals new content" beat of
+> `references/rts-flat-prose.md` Rule 2 — each a ~2-sentence cascade node. **Design in beats (plan-units), build
+> in nodes (screens):** Vesper's opening = **3 beats → ~23 nodes**. "One beat per turn" ≠ "one screen" — a rich
+> beat is many.
+
 ---
 
 ## Step-7 ENTRY — the scaffold + first green build (do ONCE, before the beat loop)

@@ -57,8 +57,8 @@ with a named next action waiting (§2.5).
 
 ### 2.1 Build the opening as a node-chain at full size
 The `starting_canvas` is a **required** artifact — the importer hard-errors if `[project].starting_canvas`
-names a canvas that doesn't exist (`template_import.py:6104-6118`). Author it at full size; its nodes play back
-as a chain of single-Continue passages on their own (`v2.py:11359`, `12064-12092`). You do not collapse the
+names a canvas that doesn't exist (`template_import.py:6126-6130`, `starting_canvas` not-found raise). Author it at full size; its nodes play back
+as a chain of single-Continue passages on their own (`v2.py:11497` `_build_node_chain`, `12350-12352` single-Continue node exit). You do not collapse the
 design to make it feel linear — the chain *is* linear.
 
 ### 2.2 Split the boot from the capstone
@@ -70,7 +70,7 @@ Two canvases, not one:
 
 The flag gate guarantees order without a schedule. Both auto-fire on entry via
 `selectAutoFireCanvasForLocation`, which fires the highest-priority non-repeatable valid canvas and skips
-repeatables (`v2.py:4025-4045`). (Worked pattern: `the_inheritance/2_one_shots.toml`.)
+repeatables (`v2.py:4161-4181` `selectAutoFireCanvasForLocation`). (Worked pattern: `the_inheritance/2_one_shots.toml`.)
 
 ### 2.3 Arm each live system once, inside a fiction beat (surface-once)
 Walk the chain and wire **every switched-ON system** to a story beat at its first point of relevance — the
@@ -78,7 +78,7 @@ player meets the mechanic and the reason for it fused, never a cold rule:
 - **the economy** — name what the currency buys the first time it matters (DoL arms its rent mechanic *inside
   Bailey's speech*; Late Shifts arms economy + phone *inside the hire scene*);
 - **a rent/debt clock** — arm it with `[settings.rent].start_after_flag` set to a flag the opening raises
-  (`template_import.py:329`, `2405`, `5743`; `last_call/0_systems_spec.toml:127` uses
+  (`template_import.py:329`, `2405`, `5742`; `last_call/0_systems_spec.toml:127` uses
   `start_after_flag="debt_explained"`), so the first session is **pressure-free** — no collector knocks, no
   debt modal fires turn one, before the player has been taught the rules;
 - **phone / clothing / customization** — each gets one beat that proves it exists (the phone buzzes once; she
@@ -89,9 +89,9 @@ The rule: **a system the player never sees taught is a system you might as well 
 ### 2.4 Pre-populate the sidebar at value-zero
 The sidebar is the **persistent tutorial** — it replaces a teach screen forever after. On frame one, every live
 system shows as a banded item with a visible ceiling:
-- a stat band — `trait_bar` (`v2.py:14924`) or `trait_words` (`v2.py:15034`) — reading near-empty against its
+- a stat band — `trait_bar` (`v2.py:15240`) or `trait_words` (`v2.py:15350`) — reading near-empty against its
   max ("Corruption 0/45"); the empty-bar-with-a-ceiling **is** the "there's a climb ahead" read;
-- the per-NPC `npc_panel` House-card (`v2.py:15095`) listing the cast and their meters.
+- the per-NPC `npc_panel` House-card (`v2.py:15411`) listing the cast and their meters.
 
 Encode each stat by the right primitive (`references/hud.md`, `trait-catalog.md` §5). The whole machine should
 be legible at a glance from the first screen.
@@ -99,7 +99,7 @@ be legible at a glance from the first screen.
 ### 2.5 Name the next action on frame one
 The player must never be handed an empty open hub. Give the spine a **quest card** with `goals` +
 `ready_canvas` + `tip` populated; the engine derives the self-updating 🎯→🔓→✓ "what next / where / when"
-surface from them (`template_import.py:938-968`; `v2.py:13760-13826`). The `tip` states the loop in plain words
+surface from them (`template_import.py:938-968`; `v2.py:14217-14267` `renderQuestsGoalBlock`). The `tip` states the loop in plain words
 ("Work his depot to earn the office — that's how you get in"). There is always exactly one obvious thing to
 click. This is what kills cold-start paralysis.
 
@@ -112,8 +112,8 @@ path, "go make money" is indistinguishable from playing the game (`last_call`; `
 
 ### 2.7 Teach the day-cycle by necessity, not by lecture
 There is **no "jump to morning" primitive.** `advanceTime(minutes)` is the only time mutation, and
-`advanceDay()` / the daily tick fire *only* when minutes roll past 24h (`v2.py:4958-4999`; the roll-over loop is
-`4969-4971`, `advanceDay` at `4991`). So the day-cycle teaches itself: ship the sleep activity as the
+`advanceDay()` / the daily tick fire *only* when minutes roll past 24h (`v2.py:5094-5142` `advanceTime`/`advanceDay`; the roll-over loop is
+`5105-5108` (`while current_hour >= 24 → advanceDay()`), `advanceDay` at `5127`). So the day-cycle teaches itself: ship the sleep activity as the
 day-router — a time cost large enough to roll past midnight, energy restored on exit — and the player who crashes
 after the first night *must* sleep to reach the next day's content. Self-explaining. (It also prevents the
 dead-window bug where a needed NPC is only present at a time the player can't reach.)
@@ -121,11 +121,11 @@ dead-window bug where a needed NPC is only present at a time the player can't re
 ### 2.8 Surface why-locked everywhere a gate shows
 A gate the player can **see the reason for** is a goal; a gate with no reason is a dead end. Every locked thing
 states why:
-- a teased rung → `locked_text` on a `show_when_locked` choice (`v2.py:11762`) — the in-world tease ("She'd
+- a teased rung → `locked_text` on a `show_when_locked` choice (`v2.py:12013-12015`) — the in-world tease ("She'd
   never let you do that sober");
-- a too-expensive action → the cost message via `getCostBlockedMessage` (`v2.py:11756`) ("Requires 15 Charge —
+- a too-expensive action → the cost message via `getCostBlockedMessage` (`v2.py:12009`) ("Requires 15 Charge —
   you have 6");
-- a place she can't enter yet → `blocked_message` on the greyed nav card (`v2.py:4329`) ("You don't know where
+- a place she can't enter yet → `blocked_message` on the greyed nav card (`v2.py:4465` `navDestBlockedReason`) ("You don't know where
   he went — yet").
 
 ### 2.9 State the win/fail contract up front
@@ -150,7 +150,7 @@ authoring. The **advisory** rows are judgment, flagged not blocked.
 - **No greyed gate without a reason** — every `show_when_locked` rung has `locked_text`, every cost-blocked rung
   shows its cost, every locked nav card has a `blocked_message` (§2.8).
 - **All condition blocks carry `version="1.0"`** — a versionless `conditions` object **fails open**
-  (`triggerConditionsSatisfied` returns true, `v2.py:3398`), so a gate you think you set cold-spawns its beat
+  (`triggerConditionsSatisfied` returns true, `v2.py:3534`), so a gate you think you set cold-spawns its beat
   at game start. Every trigger/choice/group/substitution condition needs the version.
 - **Onboarding canvases sit on a NON-container hub** — an `is_container` location swallows attached canvases
   (`template_import.py:3506`), so a boot/opening canvas on a container goes dead. Anchor them on a standing hub.
@@ -191,7 +191,7 @@ The deprecated corpus has onboarding craft worth lifting, but check it against t
 inventing facts:
 - **"Any triggerless canvas auto-fires" — FALSE.** Only the `starting_canvas` is special-cased to open the
   game; a normal triggerless canvas does not auto-fire. Auto-fire is `selectAutoFireCanvasForLocation` picking a
-  non-repeatable, high-priority canvas on entry (`v2.py:4025`). Build the opening capstone as that shape (§2.2),
+  non-repeatable, high-priority canvas on entry (`v2.py:4161`). Build the opening capstone as that shape (§2.2),
   not as "a canvas with no trigger."
 - **The quantified Day-1 budget is an observation, not a law.** The corpus's ">=2 Lane 2 encounters + >=1
   Tier-3 intro + 1 taboo beat in the first 30 minutes" is an RTS live-log reading, not an engine guarantee.

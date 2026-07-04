@@ -31,7 +31,7 @@ reference: `references/engine-reference.md`):
 |---|---|---|
 | `entry_from` | **Navigation.** "You can reach me from here." The **"Leave X" link points to `X.entry_from`**, and a hub's child cards are every location whose `entry_from` points at it (ordered by `navigation_order`). | not hierarchy |
 | `parent` | **Structure only** — canvas inheritance + visual grouping. A location's `parent` and `entry_from` may differ. | NOT used for nav links |
-| `is_container` + `default_entry` | A **pure-nav wrapper** that auto-redirects into a child and holds no content. | NEVER hosts a canvas — a container **swallows** any attached canvas (it emits only child-nav). Attach canvases to a NON-container standing hub instead. **And always set `default_entry`:** a container with NO `default_entry` **double-prints** its child nav — once as choice links, once in the nav block (`v2.py:9201-9233`) — so set `default_entry` or use a non-container standing hub. |
+| `is_container` + `default_entry` | A **pure-nav wrapper** that auto-redirects into a child and holds no content. | NEVER hosts a canvas — a container **swallows** any attached canvas (it emits only child-nav). Attach canvases to a NON-container standing hub instead. **And always set `default_entry`:** a container with NO `default_entry` **double-prints** its child nav — once as choice links, once in the nav block (`v2.py:9213-9229` — container-no-`default_entry`: choice-links loop + `_generate_hierarchical_navigation`) — so set `default_entry` or use a non-container standing hub. |
 
 The player walks the **`entry_from` chain**; `parent` is bookkeeping. A top-level location (no
 `entry_from`) is a **root** — it emits no "Leave" link and is reached only via a walk-activity bridge
@@ -117,8 +117,8 @@ contract is spelled out in §4.1 below):
 A schedule row at a **locked** location is a *deferred* hub promise. A locked location is a
 `[[locations]]` with `entry_conditions` (a flag predicate) + `blocked_message`; the engine's lock is
 **visible-but-blocked** — the room still shows on the nav as a greyed card with its `blocked_message`
-printed in place (`v2.py:17900` `location-card-locked` + `navDestBlockedReason`), and the passage-entry
-guard re-checks on click (`v2.py:9122`). It is legitimate **only** when the lock reads as "haven't met /
+printed in place (`v2.py:18254-18256` `location-card-locked` + `navDestBlockedReason`), and the passage-entry
+guard re-checks on click (`v2.py:9257` `triggerConditionsSatisfied(entry_conditions)` re-check). It is legitimate **only** when the lock reads as "haven't met /
 been invited yet" **and** the unlocking beat is reachable at an OPEN location. The lock represents the
 social fact; the meeting is the key. There is **no native time-of-day location lock** — the only lock is
 this flag gate, so don't invent a door field the engine lacks; put any time/exposure axis on the hub via
@@ -137,7 +137,7 @@ Every locked schedule row falls into exactly one case:
 The failure to avoid is an NPC shunted into a locked room during a window the player **routinely shares**,
 with no open fallback and/or an illegible gate → "where did they go?" And never leave an away/offscreen
 block pointing at a reachable hub. Every condition block in `entry_conditions` needs `version = "1.0"` or
-it **fails open** — the door silently unlocks (`v2.py:3398`; same trap as §5).
+it **fails open** — the door silently unlocks (`v2.py:3534` `triggerConditionsSatisfied` version guard; same trap as §5).
 
 *(code-vs-lore note: the Schedule page renders declared `[[npcs.schedules]]` rows regardless of the
 door lock, so it will list the NPC at a locked location. With the visible-but-blocked model that's

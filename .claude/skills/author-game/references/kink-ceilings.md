@@ -208,7 +208,7 @@ carriage), you read the NPC's row in §2 + its voice spec and **translate** the 
 NOT re-decide it (a missing ceiling is a stop: bounce to the brief, don't improvise a register). Per-tier
 register variants within one scene are carried by **`[group]` blocks** keyed on the gating trait — consecutive
 group blocks with `conditions` render as a `<<if>>/<<elseif>>/<<else>>` variant chain at runtime
-(`v2.py:12703-12731`), so a single sex canvas can run the softer register below the gate and the full register
+(`v2.py:12998-13038` — `_render_group_chain`), so a single sex canvas can run the softer register below the gate and the full register
 above it from the same canvas.
 
 ---

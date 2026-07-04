@@ -44,22 +44,22 @@ You author config + prose; the engine owns the logic. The full loop, traced thro
 
 | Beat | What happens | Where (`file:line`) |
 |---|---|---|
-| **The clock** | On each day rollover, `advanceDay()` advances the weekday; when the new day matches `due_day` (and `start_after_flag` is satisfied, if set), it sets `rent_state.is_due = true`. Once per week. | `v2.py:4991` (`advanceDay`), due-trigger at `:5008-5015` |
-| **The intercept** | While `rent_state.is_due`, entering any `Location_*` passage or `Navigation` redirects to `RentDay` before the player can act. Saves the current passage to return to. | `v2.py:14176-14187` (redirect block) |
-| **The branch** | `RentDay` → **pay** (`RentDay_Paid`, if money ≥ amount) or **short** (`RentDay_Short`). | `v2.py:14617-14660` (RentDay), `:14662` / `:14690` |
-| **Grace** | In `RentDay_Short`, if `warnings < grace_periods` → a warning beat, `warnings += 1`, `is_due = false`, week survived. Else → eviction (§5). | `v2.py:14702-14753` |
-| **The collector** | If `collector_npc` is set, RentDay looks the NPC up by slug for **name + portrait**; otherwise prints "the landlord". | `v2.py:14624-14631` |
-| **The prose** | Every printed line has an author override via `[settings.rent.text]`; the engine defaults are generic placeholders (§4). | `v2.py:14633-14747` |
+| **The clock** | On each day rollover, `advanceDay()` advances the weekday; when the new day matches `due_day` (and `start_after_flag` is satisfied, if set), it sets `rent_state.is_due = true`. Once per week. | `v2.py:5127` (`advanceDay`), due-trigger at `:5144-5151` (`dueDay` match) |
+| **The intercept** | While `rent_state.is_due`, entering any `Location_*` passage or `Navigation` redirects to `RentDay` before the player can act. Saves the current passage to return to. | `v2.py:14470-14479` (`Rent intercept` redirect block) |
+| **The branch** | `RentDay` → **pay** (`RentDay_Paid`, if money ≥ amount) or **short** (`RentDay_Short`). | `v2.py:14970-15013` (RentDay), `:15015` / `:15043` |
+| **Grace** | In `RentDay_Short`, if `warnings < grace_periods` → a warning beat, `warnings += 1`, `is_due = false`, week survived. Else → eviction (§5). | `v2.py:15055-15106` (`warnings lt` grace_periods) |
+| **The collector** | If `collector_npc` is set, RentDay looks the NPC up by slug for **name + portrait**; otherwise prints "the landlord". | `v2.py:14977-14984` (`rent_collector_npc` lookup) |
+| **The prose** | Every printed line has an author override via `[settings.rent.text]`; the engine defaults are generic placeholders (§4). | `v2.py:14986-15100` (`_rt.<key>` reads) |
 
 **The due-trigger logic (the Monday-bug fix).** `advanceDay` does
 `var dueDay = setup.rent_due_day || "Monday"; if (days[nextIndex] === dueDay && setup.rent_enabled) {…}`
-(`v2.py:5008-5009`). It compares the **new weekday against the configured `due_day`** — it does NOT
+(`v2.py:5144-5145`). It compares the **new weekday against the configured `due_day`** — it does NOT
 assume Monday. *(Code-vs-lore note: an earlier engine ignored `due_day` and always fired Monday; the
-fix shipped 2026-06-01 and is the current behavior — confirmed at `v2.py:5008`. Set `due_day` to a real
+fix shipped 2026-06-01 and is the current behavior — confirmed at `v2.py:5144` (`dueDay` compare). Set `due_day` to a real
 day and frame the prose around it.)*
 
 **State lives in `$game_state.rent_state`** — `{ last_paid_week, warnings, is_due }`, seeded at init
-(`v2.py:1131-1140`). Pay resets `last_paid_week` + zeroes `warnings`; a warning increments `warnings`.
+(`v2.py:1264-1269`, `rent_state` seed). Pay resets `last_paid_week` + zeroes `warnings`; a warning increments `warnings`.
 
 **What the engine does NOT give you:** a "first rent paid" flag, a quest card, or any first-time
 framing. Those are authoring (§7 hybrid pattern). The engine sets only `eviction_flag`, and only under
@@ -95,7 +95,7 @@ real validation block is `:4306-4331`.)*
 **Rule: author every printed line — the engine defaults are generic. Use the EXACT keys below; the
 corpus once listed fictional ones.**
 
-These are the complete set of `_rt.<key>` reads across the RentDay passages (`v2.py:14633-14747`,
+These are the complete set of `_rt.<key>` reads across the RentDay passages (`v2.py:14986-15100`,
 extracted live). Authored as a **`[settings.rent.text]` sub-table** (a header, not a multi-line inline
 table — inline `{…}` across newlines breaks `tomllib`, see `toml-gotchas.md`). The importer reads the
 whole table verbatim (`template_import.py:2406`).
@@ -119,7 +119,7 @@ whole table verbatim (`template_import.py:2406`).
 | `eviction_response_soft` | soft eviction collector line, falls back to `eviction_response` | "a different conversation from here on out" |
 | `eviction_closing_soft` | soft eviction closing, falls back to `eviction_closing` | "the terms have changed" |
 
-**Fallback chain (verified `v2.py:14726-14734`):** under `flag_set`, each soft line is
+**Fallback chain (verified `v2.py:15079-15087`, `eviction_*_soft` fallback):** under `flag_set`, each soft line is
 `_rt.X_soft || _rt.X || <default>`. So a `flag_set` game authors only the `_soft` trio; a `game_end`
 game authors only the plain `eviction_*` trio. The shipped `games/late_shifts/toml_phases/0_systems_spec.toml:65-78`
 is the gold-standard block — `flag_set`, so it writes the three `_soft` variants and omits the hard
@@ -137,8 +137,8 @@ changes and play continues. Both are first-class.**
 
 | Mode | What the engine does | Use when |
 |---|---|---|
-| `game_end` | Prints the hard `eviction_*` prose + "GAME OVER" + a "Start Over" → `Engine.restart()` link (`v2.py:14738-14752`). | Failure is terminal — a roguelike/survival framing where losing the roof ends the story. A hard wall; the player loses progress. |
-| `flag_set` | Sets `eviction_flag` via `applyAndNotifyFlag` (`v2.py:14721-14724`), zeroes `warnings`/`is_due`, plays the `_soft` prose, and offers a "Continue" link back into the game. | Failure should have *narrative* consequence, not a wall — the collector's leverage, a downgrade, a debt, a different arrangement. |
+| `game_end` | Prints the hard `eviction_*` prose + "GAME OVER" + a "Start Over" → `Engine.restart()` link (`v2.py:15092-15104`). | Failure is terminal — a roguelike/survival framing where losing the roof ends the story. A hard wall; the player loses progress. |
+| `flag_set` | Sets `eviction_flag` via `applyAndNotifyFlag` (`v2.py:15075-15077`), zeroes `warnings`/`is_due`, plays the `_soft` prose, and offers a "Continue" link back into the game. | Failure should have *narrative* consequence, not a wall — the collector's leverage, a downgrade, a debt, a different arrangement. |
 
 `flag_set` is the richer choice for an arc-driven adult game: a missed payment doesn't kick the player
 out, it hands the collector leverage. **`eviction_flag` is a real promise** — author at least one
@@ -156,7 +156,7 @@ relationship that can be leveraged.**
 
 A faceless "the landlord" works (it's the engine fallback), but a named collector turns a number into a
 scene. `collector_npc` is an NPC slug that **must exist in `[[npcs]]`** (validator `:4313-4318`). The
-RentDay passages look the NPC up by slug for **name + portrait** (`v2.py:14624-14631`); the
+RentDay passages look the NPC up by slug for **name + portrait** (`v2.py:14977-14984`); the
 `[settings.rent.text]` lines carry that NPC's voice.
 
 **The collector does NOT need a schedule.** RentDay resolves the NPC by slug, not by presence — the
@@ -181,7 +181,7 @@ flag so the opening is rent-free.**
 A fresh player has the starting balance and no income yet. If rent arms on the first due day, you can
 evict someone before they've earned a dollar — a frustration, not a drive. The due-trigger gates on the
 flag: `var flagOk = !setup.rent_start_after_flag || State.variables.flags[setup.rent_start_after_flag]`
-(`v2.py:5011-5012`) — the whole cycle stays dormant until that flag is set.
+(`v2.py:5147-5148`) — the whole cycle stays dormant until that flag is set.
 
 - **Late Shifts:** `start_after_flag = "hired_at_diner"`. Rent is dormant until Maya gets the job; the
   first Friday after hire is the first due date (`0_systems_spec.toml:59`).

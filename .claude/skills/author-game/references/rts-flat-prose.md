@@ -165,8 +165,8 @@ same tier?"* If "RTS would never ship this — it reads like a literary novel," 
 ## §5 — The `thought_bubble` primitive
 
 A real content block type — the private-thought glimpse. Renders as an italic bubble distinct from
-speech: a 💭 glyph + "is thinking:" label, dashed border, muted color (`v2.py:13583`; player/NPC/unknown
-speaker variants resolve through the same path, `v2.py:13590-13627`). It is **orthogonal to the three
+speech: a 💭 glyph + "is thinking:" label, dashed border, muted color (`v2.py:13878` — `elif block_type == "thought_bubble"` render; player/NPC/unknown
+speaker variants resolve through the same path, `v2.py:13885-13922` — `speaker = props.get(...)` branches). It is **orthogonal to the three
 tiers** — it adds character interiority through a styled UI element, NOT through prose density, so the
 surrounding prose stays RTS-flat.
 

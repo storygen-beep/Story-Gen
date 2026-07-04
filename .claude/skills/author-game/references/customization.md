@@ -28,8 +28,8 @@ importer/validator). Cross-link: the one-line trap is the Customization row in
 
 Two independent, opt-in surfaces. If **either** exists, the engine inserts an auto-built
 `CustomizeCharacters` passage and redirects `Start` to it — `if customizable_npcs or
-has_player_customization: start_target = "CustomizeCharacters"` (`v2.py:841-842`); the
-passage is emitted at `v2.py:8683`. You author **zero** passage plumbing.
+has_player_customization: start_target = "CustomizeCharacters"` (`v2.py:933-934`); the
+passage is emitted at `v2.py:8729` (`_generate_customize_passage`). You author **zero** passage plumbing.
 
 - **Player customization** — a start-of-game screen where the player sets fields you declare
   (`name`, `build`, a portrait `look`). The RTS-genre opener: name yourself, pick a body
@@ -57,7 +57,7 @@ render path:
 
 `<npc>` is the slug **without** the `npc_` prefix — `@cole` for `npc_cole`, `@frank` for
 `npc_frank`. **An unrecognized `@word` is left untouched** (`if not uuid: return
-match.group(0)`, `v2.py:13008-13009`) — safe to write literal `@`s, but see the handle
+match.group(0)`, `v2.py:13303-13304`) — safe to write literal `@`s, but see the handle
 collision below. **Possessives just work:** `@cole's place` → `<<print …name>>'s place` →
 "Jamie's place". Dialog **speaker labels** are already dynamic (rendered from `npcId`) —
 tokenize only the dialog *body*, never the speaker tag.
@@ -68,20 +68,20 @@ The token grammar is `@(\w+(?:\.\w+)?)` in both. The difference is *who runs it*
 
 | Render path | Resolver | `file:line` | Surfaces it covers |
 |---|---|---|---|
-| **Passage-body text** (gen-time, → `<<print>>` macro) | `_resolve_at_references` | `v2.py:12971`; called on block content `v2.py:13529`, location description `v2.py:9132`/`:9179`, blocked-message `v2.py:9141` | paragraph / heading / **dialog body** / location description / blocked-passage message |
-| **`<<link>>` / choice text** (gen-time, → JS concat expr) | `_resolve_at_references_expr` | `v2.py:13018`; called `v2.py:11646` | choice / link button text (can't take `<<print>>`, so it builds a JS string expression) |
-| **Phone authored text** (runtime, JS — rendered as DATA, not a passage body) | `setup.resolveAtRefs` | `v2.py:2789`; called at every phone render point — notify toasts `v2.py:1748`/`:1759`, message bubbles `:2088`, reply buttons `:2113`, daily-chat `:2124`/`:2126`, daily-topic buttons `:2158`/`:2178`, thread preview `:2024` | phone `notify`, message `content`, `daily_topics`, reply text |
+| **Passage-body text** (gen-time, → `<<print>>` macro) | `_resolve_at_references` | `v2.py:13266`; called on block content `v2.py:13824`, location description `v2.py:9267`/`:9314`, blocked-message `v2.py:9276` | paragraph / heading / **dialog body** / location description / blocked-passage message |
+| **`<<link>>` / choice text** (gen-time, → JS concat expr) | `_resolve_at_references_expr` | `v2.py:13313`; called `v2.py:11899` | choice / link button text (can't take `<<print>>`, so it builds a JS string expression) |
+| **Phone authored text** (runtime, JS — rendered as DATA, not a passage body) | `setup.resolveAtRefs` | `v2.py:2925`; called at every phone render point — notify toasts `v2.py:1877`/`:1888`, message bubbles `:2217`, reply buttons `:2242`, daily-chat `:2253`/`:2255`, daily-topic buttons `:2287`/`:2307`, thread preview `:2153` | phone `notify`, message `content`, `daily_topics`, reply text |
 
 *The phone is the latent leak site.* Phone content renders as JavaScript data, so the
 gen-time `_resolve_at_references` never touches it — that's why a **runtime twin**
-(`setup.resolveAtRefs`, `v2.py:2789`) exists and is now wired into every phone render point
+(`setup.resolveAtRefs`, `v2.py:2925`) exists and is now wired into every phone render point
 above. So `@<npc>` / `@player` tokens **do** resolve in phone `notify` / message `content` /
 `daily_topics`. The thread title, avatar, and preview read live `$npcs[slug].name`, so they
 honor a rename even *without* a token.
 
 Both resolvers rely on `setup.npc_slug_map` (slug→canonical slug — identity now that npc ids ARE slugs; it
-also maps bare aliases like `"renner"`→`"npc_renner"`), populated at `v2.py:710`/`:714` and
-emitted to JS at `v2.py:2682` — so `@<npc>` works the same gen-time and runtime.
+also maps bare aliases like `"renner"`→`"npc_renner"`), populated at `v2.py:802`/`:806` and
+emitted to JS at `v2.py:2818` — so `@<npc>` works the same gen-time and runtime.
 
 > **Rule R1 — if a character is `customizable`, EVERY player-visible mention of their name in
 > prose MUST be the token.** Renamed-Cole game with a hardcoded "Cole" left in a paragraph =
@@ -101,10 +101,10 @@ rewrite.
 The `@`-token fires only where a resolver runs (§2). It does **NOT** reach structural labels
 the engine prints **raw**. Verified raw surfaces:
 
-- **Location names** — `<h2>{location.name}</h2>` (`v2.py:9068`, `:9131`, `:9151`, `:9178`)
+- **Location names** — `<h2>{location.name}</h2>` (`v2.py:9204`, `:9266`, `:9286`, `:9313`)
   is the literal TOML name; no resolver in the title path. (The location *description* below
-  it IS resolved, `v2.py:9132` — so the prose tokenizes, the title doesn't.)
-- **Sidebar item `label`s** — printed as raw text content (e.g. the `trait_bar` label at `v2.py:14898`),
+  it IS resolved, `v2.py:9267` — so the prose tokenizes, the title doesn't.)
+- **Sidebar item `label`s** — printed as raw text content (e.g. the `trait_bar` label at `v2.py:15275`, `<<print _traitLabel>>` raw),
   never wrapped in `resolveAtRefs`. A `"Cole Relation"` bar label stays "Cole Relation".
 - **Quest / stage / arc_stage display strings** — printed raw.
 - The customize-screen NPC `description` intro — printed raw (html-escaped).
@@ -201,8 +201,8 @@ The corpus draft's line numbers had drifted; these are read from current code.
 All raise through the validator's `errors.append(...)` path → the import fails (not a silent
 no-op). *(Code-vs-lore note: the corpus cited reserved-IDs ~3005 ✓ exact, NPC hard-fail
 ~3420-3429 → real block is `3417-3429`, `sets_portrait` ~3037 → `3037-3038`. The token
-processor it placed at `v2.py:12658` is now `v2.py:12971`, and the JS twin `v2.py:2722` is
-now `v2.py:2789`. Code wins; numbers above are live.)*
+processor it placed at `v2.py:12658` is now `v2.py:13266`, and the JS twin `v2.py:2722` is
+now `v2.py:2925`. Code wins; numbers above are live.)*
 
 ---
 
@@ -235,7 +235,7 @@ Keep it **narrow + non-destructive**. The cheap, natural wins:
 4. Every structural label that named the character → genericized (R2): location names,
    sidebar labels, quest/stage strings.
 5. No engine wiring — the `CustomizeCharacters` screen and the `Start` redirect are automatic
-   (`v2.py:841`).
+   (`v2.py:933`).
 
 **Pre-build greps:** for each customizable NPC slug, `grep -n '\bCole\b'
 games/<slug>/toml_phases/*.toml` should return only structural-label lines you deliberately

@@ -30,16 +30,16 @@ consequences that the old corpus draft got wrong — the code is the source of t
   "always-on" set below is a *convention*, not an engine constant — you still type every line.
 - **No daily passive is hardcoded.** The arousal "+1/day climb" and the `energy`/`hygiene` daily decay
   are NOT in the engine. `advanceDay` just iterates whatever you put in `[engine.daily_tick].traitEffects`
-  and applies it through the normal effect path (`v2.py:5115-5139`). *(Code-vs-lore note: older drafts
+  and applies it through the normal effect path (`v2.py:5255-5275`, `daily_tick.traitEffects` loop → `applyAndNotifyTrait`). *(Code-vs-lore note: older drafts
   claimed a "hardcoded daily climb" for family NPCs. The engine hardcodes nothing — if you want the
   climb, you author the tick. If you want a slow burn, you simply don't.)*
 - **No band names are hardcoded.** "Pure / Lewd / Slutty / Whore" is NOT in the engine. What the engine
   ships for corruption is (a) a raw 0–100 number and (b) a derived discrete **level 0–4** from tier
-  thresholds `[0, 5, 15, 30, 45]` (`getCorruptionLevel`, `v2.py:5486-5492`; override via
+  thresholds `[0, 5, 15, 30, 45]` (`getCorruptionLevel`, `v2.py:5622-5628`; override via
   `[engine].corruption_tiers`, parsed at `template_import.py:2543-2545`, read by the generator at
-  `v2.py:931-932`). The *word* bands you see on the
+  `v2.py:1060-1061` (`self.corruption_tiers` metadata read)). The *word* bands you see on the
   sidebar are author-supplied `bands` on a `trait_words` item (each `{min, max, text}`), matched at
-  `v2.py:15009-15025`. *(Code-vs-lore note: older drafts presented Pure 0–24 / Lewd 25–49 / Slutty 50–74 /
+  `v2.py:15362-15379` (`trait_words` band-match loop). *(Code-vs-lore note: older drafts presented Pure 0–24 / Lewd 25–49 / Slutty 50–74 /
   Whore 75–100 as canonical. The 0–100 range is real and a fine 4-band scheme, but those exact boundaries
   are your authored choice, not an engine fact — and they don't line up with the engine's `corruption_level`
   tiers `[0,5,15,30,45]`. If a gate uses `corruption_level`, band your `trait_words` on the SAME tier
@@ -69,7 +69,7 @@ So: the engine is a generic numeric-trait + author-supplied-band machine. The ta
 
 **`corruption` (player)** — the global depravity odometer; the cross-arc content-tier currency. One-way:
 no engine decay, and *declining* a taboo action neither adds nor subtracts it (the gated-action toast is a
-UI hint, not a mutator — `showEffectNotification`, `v2.py:5518+`). It is the **global** tier, NOT a per-NPC
+UI hint, not a mutator — `showEffectNotification`, `v2.py:5654+`). It is the **global** tier, NOT a per-NPC
 relationship clock — gating a specific NPC's milestone *only* on player corruption while that NPC's own
 built axis goes unread is the corruption-as-universal-spine bug (`references/trait-design.md`). Locked to
 0–100, 4 bands by convention; author the bands on the same boundaries your `corruption_level` gates use.
@@ -119,7 +119,7 @@ brief. (Reset at climax is author-emitted for BOTH player and npc — no engine 
 **`<slug>_stage`** — the per-NPC arc milestone is NOT an NPC trait. It's stored as a **player** trait keyed by
 slug (`player.core_traits.<slug>_stage`, integer), advanced by `op = "set"` only (never `add`), and the engine
 special-cases it: `applyAndNotifyTrait` matches `/^([a-z_]+)_stage$/` and writes
-`game_state.stage_advancement_log[slug]` on an upward delta (`v2.py:5413-5418`). **INTERNAL-ONLY — never
+`game_state.stage_advancement_log[slug]` on an upward delta (`v2.py:5549-5554`). **INTERNAL-ONLY — never
 surfaces to any sidebar or player-facing text.** Full storage/mutation contract: `references/toml-gotchas.md`
 (stage-trait mutation uses the PLAYER namespace).
 
@@ -148,8 +148,8 @@ correct for the *value* of a one-way climber: `money` (no cap) or a `corruption`
 nominal top.
 
 **But a *banded* stat must never leave its bands, or its sidebar card silently VANISHES.** The band only draws
-when the value lands inside one — `trait_words` matches a **closed** `[min, max]` (`v2.py:15252`);
-`trait_status_text` treats an omitted `min`/`max` as **open** (∓1e9, `v2.py:15183`). A value outside every band
+when the value lands inside one — `trait_words` matches a **closed** `[min, max]` (`v2.py:15371`, `_twBand.min`/`.max` closed match);
+`trait_status_text` treats an omitted `min`/`max` as **open** (∓1e9, `v2.py:15302`, `_bMin`/`_bMax` default). A value outside every band
 renders **nothing** — for a text card (`trait_words` / `trait_status_text`) the whole card disappears (§5), which
 reads as a *missing HUD element*, not a wrong number, so a quick playtest sails past it. Guarantee a match two ways:
 - **Bound the value** — every `op=add` on a bounded body-need/resource stat (`energy` · `hygiene` · a custom
@@ -171,10 +171,10 @@ but only if you suppress the auto number, or it prints twice.
 
 | Stat KIND | Example | Sidebar type | Why | Verified |
 |---|---|---|---|---|
-| **Identity / qualitative state** | `corruption` | `trait_words` + author `bands` | The player thinks in a word ("Slutty"), not a number — a one-way identity ladder | `v2.py:14997-15032` |
-| **Transient mood** | `arousal` | `trait_bar` + `bands` + `hide_value=true` | A dial that climbs and resets — show the heat band/glyph, hide the volatile raw number | `v2.py:14887-14933` (`hide_value`, `bands`) |
-| **Body-need** | `energy`, `hygiene` | `trait_status_text` + author `bands` | Passive banded body-state; renders **nothing** when the value leaves its bands — clamp/cap every `op=add` (§4 clamp rule) or the card silently vanishes | `v2.py:14934-14962` |
-| **Countable resource** | `money` | `trait_bar`, `hide_value=false`, **NO `bands`** | You want the exact figure ($80), not a word — don't band a thing the player counts | `v2.py:14887-14924` |
+| **Identity / qualitative state** | `corruption` | `trait_words` + author `bands` | The player thinks in a word ("Slutty"), not a number — a one-way identity ladder | `v2.py:15350-15385` |
+| **Transient mood** | `arousal` | `trait_bar` + `bands` + `hide_value=true` | A dial that climbs and resets — show the heat band/glyph, hide the volatile raw number | `v2.py:15240-15286` (`hide_value`, `bands`) |
+| **Body-need** | `energy`, `hygiene` | `trait_status_text` + author `bands` | Passive banded body-state; renders **nothing** when the value leaves its bands — clamp/cap every `op=add` (§4 clamp rule) or the card silently vanishes | `v2.py:15287-15315` (`trait_status_text` render) |
+| **Countable resource** | `money` | `trait_bar`, `hide_value=false`, **NO `bands`** | You want the exact figure ($80), not a word — don't band a thing the player counts | `v2.py:15240-15277` (`trait_bar` number render) |
 
 There is **no dedicated number/money sidebar type** — a plain resource renders through `trait_bar` with
 `hide_value` false and no bands (it shows `Label: N / max`). *(Code-vs-lore note: older drafts implied a
@@ -192,13 +192,13 @@ key    = "corruption"
 hidden = true   # drops the auto-dump number; the trait_words band still renders
 ```
 
-This is safe precisely because the band renderers ignore `hiddenTraits` (`v2.py:14887`, `:14997`) while the
+This is safe precisely because the band renderers ignore `hiddenTraits` (`v2.py:15240` `trait_bar`, `:15350` `trait_words`) while the
 dump loops honor it. Band a stat ⇒ hide the same key. *(Side effect: a hidden key is also dropped from the dev
 +/- panel — fine for ship builds.)* `<slug>_stage` and antagonist `awareness` are hidden by the same mechanism
 (they must never surface at all).
 
 **One cross-panel catch.** `hiddenTraits` matches by **bare global name**, and the `npc_panel` arousal/corruption
-rows check the SAME global key (`v2.py:15071` / `:15084`) — so hiding the *player's* banded `corruption`/`arousal`
+rows check the SAME global key (`v2.py:15424` / `:15437`, `hiddenTraits.includes`) — so hiding the *player's* banded `corruption`/`arousal`
 to kill the doubling trap ALSO blanks that row on **every NPC House card**. If you surface `npc_panel`
 corruption/arousal rows, read `references/hud.md` §5 for the workaround before you band-and-hide the colliding key.
 
