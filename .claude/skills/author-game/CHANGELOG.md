@@ -14,6 +14,21 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 -->
 
 ## 2026-07-04
+- **#12 location-design aliveness calibration** — `location-design.md` was created this build but its
+  room-content-floor was a PURE-PLOT filter: "content" = a firing canvas, and it explicitly disqualified
+  atmosphere ("a kitchen with nothing to do is not 'atmosphere,' it's a dead end"), so a zone whose only job is
+  AMBIENT LIFE (street events, NPC routines you cross, a place to just *be*) had no way to earn its keep — and the
+  only sizing axis was SCALE, never how ALIVE. That's how Vesper's first map shipped "utilitarian, not a living
+  world" (`decisions_log[19,20]`, `iteration-log` Loop 7). Folds in the corrected principle LO logged in
+  `games/vesper/location_design_note.md` (never integrated until now): (1) a **"how alive?" content-budget fork**
+  at `step-2b-map-design.md` (sizing move + Mode-A + self-check) — tight mission-slice ↔ living city, set on
+  purpose, leaning living for a sandbox; (2) `location-design.md` §2 reworked so **sizing is scale × aliveness**
+  + **depth over breadth**; (3) §6 floor + audit reworked so **"earns its keep" counts ambient life** (a solo
+  activity / street event / NPC routine) — only an **empty-dead** room (neither plot nor ambient) is cut, plus a
+  new audit line that the map delivers the declared aliveness. Reconciled the surface tension with `lanes.md`
+  (world ambient life ≠ padding an NPC's arc-shape cell — different axes). Grounded in 3 research agents (Vesper
+  decisions_log + the best-games living-world model). Doctrine only, zero engine change; the mechanical half
+  (presence-on-nav, travel-friction) already lived in §5.
 - **#10 the day-breadth audit (`content-framework.md` §2F "walk a representative day")** — every content audit in
   the skill counted feeder DEPTH vertically (§2E, per corruption band) or checked each chore's fusion QUALITY;
   nothing counted HORIZONTALLY how many distinct non-grind threads a representative day offers, so a lean

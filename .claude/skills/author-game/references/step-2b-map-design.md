@@ -28,7 +28,9 @@ geography as a map they can picture, not as field syntax.
 
 1. **Pick a topology archetype** (`location-design.md §2`) from the premise — nested-zones (default for
    a town + home), two-hub, map-image-hotspots, street-graph, or the time-slot anti-map. Name it and say
-   *why this premise wants this shape*. Size it to the cast — add zones only where content will live.
+   *why this premise wants this shape*. **Size it two ways:** *scale* (add zones the cast needs) AND
+   *aliveness* — a tight mission-slice (only what beats need) vs a living city (extra ambient zones), a
+   content-budget fork you set on purpose (`location-design.md §2`; lean living for a sandbox).
 2. **Lay out the spatial graph.** The roots (top-level, no `entry_from`), the containment + layering
    (private unit ≠ shared building ≠ town), and the travel graph (which `entry_from` chains connect
    what; which roots are bridged by walk activities). Draw it as a small tree/list the user can read down
@@ -48,15 +50,16 @@ Then seed `structure_registry.locations` (id + category reachable/locked/offscre
 room-content + reachability lines of the §6 self-audit against the graph you just drew.
 
 ## Interaction — propose, don't just draw (per `run-mode.md`)
-The **archetype + the roots/layering** are identity-setting — they change how the whole game feels to
-move through. Surface them **Mode A** (2–4 options + a recommendation): "a two-root town-and-home
-nested map, or a single two-hub home/work?" The routine rooms (the bedrooms, the obvious venues) are
+The **archetype, the roots/layering, AND how alive the world should feel** are identity-setting — they change
+how the whole game feels to move through. Surface them **Mode A** (2–4 options + a recommendation): "a two-root
+town-and-home nested map, or a single two-hub home/work? — and a tight mission-slice, or a living city?" The routine rooms (the bedrooms, the obvious venues) are
 **Mode B** — name them in a line and move on. Propose the shape, explain *why* in plain words, settle
 the real forks together, then write the section. Never commit the map silently; never ask about every
 room.
 
 ## Self-check before casting
-- The topology is one named archetype, sized to the cast; roots + layering are coherent.
+- The topology is one named archetype; **scale AND aliveness are chosen on purpose** (mission-slice ↔ living
+  city, `location-design.md §2`), not drifted into; roots + layering are coherent.
 - Every location has a one-line dramatic job (the room-content floor holds — no dead rooms planned).
 - Every place is one access category, and every locked place has a named, reachable unlock beat.
 - Naming is one consistent contract.

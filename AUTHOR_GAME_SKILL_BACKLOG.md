@@ -18,6 +18,10 @@ still document) · `process` (how Claude works) · `one-off` (author slipped; sk
 
 ## Progress log (newest first)
 
+- **2026-07-04 — ✅ #12 done (4th big-rock): location-design aliveness.** Folded in the corrected principle from
+  `games/vesper/location_design_note.md` (never integrated): a "how alive?" content-budget fork at step-2b
+  (mission-slice ↔ living city, lean living for a sandbox) + `location-design.md` §2/§6 reworked so "earns its
+  keep" counts AMBIENT LIFE (only empty-dead rooms cut) + depth-over-breadth. Uncommitted.
 - **2026-07-04 — ✅ #10 done (3rd big-rock): the day-breadth audit.** `content-framework.md` §2F "walk a
   representative day" — a horizontal count of distinct non-grind daily threads (7-category checklist,
   feeder/texture, floor ~2–3) that bites even when §2E is vacuous (Vesper's inverted no-feeder protagonist).
@@ -224,7 +228,7 @@ Three failure shapes in the Vesper build, one root each:
 
 ## GROUP E — map / world
 
-### 12. Complete `location-design.md` — aliveness calibration ⬜
+### 12. Complete `location-design.md` — aliveness calibration ✅ DONE (2026-07-04)
 `P1 · effort M · skill · location-design.md, step-2b-map-design.md`
 - `location-design.md` was added this build, but its "cut any room with no content" hard-cut biases toward a
   lifeless scene-holder — the map LO **rejected** (`decisions_log[20]`, `iteration-log Loop 7`,

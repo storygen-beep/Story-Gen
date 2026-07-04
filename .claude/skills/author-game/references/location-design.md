@@ -59,7 +59,20 @@ map — `Town (root) → Hotel (venue) → floors (sub-hubs) → rooms`. The eng
 multi-building geometry with ordinary **named hubs + `entry_from`** (a "floor" is just a non-container
 hub; there is no floor primitive and none is needed). Don't cap a world at "one floor / one unit" when
 the premise is bigger — design the real geography. Do match the *size* to the cast: a tiny cast does
-not need a sprawling city; add zones only where content lives.
+not need a sprawling city; add zones only where content lives — where "content" includes **ambient life** (§6),
+not just a plot canvas.
+
+**Sizing is TWO axes: scale AND aliveness.** Scale = how many zones (match the cast). Aliveness = how *lived-in*
+the world feels: a **tight mission-slice** (only the locations a beat needs) at one end, a **living city** (extra
+atmospheric zones carrying street events, NPC routines, self-care loops the player didn't trigger) at the other.
+It's a **content-budget fork, not a quality dial** — every ambient zone is content you fund. A tight slice is
+legitimate *when chosen on purpose*; the failure is **drifting** into a lifeless scene-holder because no one asked
+"how alive?" (Vesper's first map shipped "utilitarian, not a living world" exactly this way — the anti-sprawl rule
+followed off a cliff). Decide the point up front (`step-2b-map-design.md`), and for a sandbox **lean toward the
+living end** — the genre runs on a world that breathes. **Depth over breadth:** a small, dense, genuinely-alive
+slice beats a sprawling map of thin places. *(This ambient life is WORLD texture — street events, self-care,
+routines you cross — NOT padding an NPC's arc-shape budget with fake relational beats; empty NPC arc cells stay
+honest, `lanes.md`.)*
 
 **Two roots, bridged by walk activities.** A home-exterior root and a town root are SEPARATE top-level
 locations with no `entry_from`, connected by walk-activity canvases (`activity_walk_to_town` /
@@ -176,9 +189,13 @@ Four moves that make a map feel alive. Two are pure authoring; two are real engi
 **The room-content floor (the rule the old audit couldn't express):** *every navigable
 (non-container, non-offscreen) location must host at least one canvas — an activity, ambient, hub, or
 capstone — OR be a deliberately-locked deferred shell whose unlock beat is on the roadmap.* A
-reachable, empty room is dead space the player walks into and bounces off. If a room has no content and
-no near-term plan, **cut it** (a kitchen with nothing to do is not "atmosphere," it's a dead end) — or
-give it a solo activity (eat, bathe, rest) so it earns the click. This is distinct from the
+reachable, **empty-dead** room (no plot AND no ambient — the player walks in and bounces off) is the failure.
+But "earns its keep" counts **ambient life, not only plot function**: a zone that hosts a solo activity (eat,
+bathe, rest), a random **street/ambient event**, or an NPC routine you cross earns the click **even with no
+mission attached** — that texture is what makes a world feel lived-in, and cutting it is how a map reads
+"utilitarian, not a living world." Cut only a room with **neither** plot **nor** ambient life and no near-term
+plan. ("A kitchen with nothing to do" is a dead end; "a kitchen where you make a meal and your housemate
+sometimes walks in" is content.) This is distinct from the
 activity-scoped "dead-bath" check: it quantifies over the *location set*, so it catches a room with no
 NPC and no activity at all.
 
@@ -189,7 +206,11 @@ Run this before delivery — none of it is caught by the build:
       shared-building ≠ town; two roots bridged by walk activities).
 - [ ] Every `navigation_order` slug has `entry_from` pointing back here.
 - [ ] Naming follows one consistent contract (§3) — no mixed prefixed/bare siblings.
-- [ ] **Every navigable room hosts ≥1 canvas OR is a deliberate locked shell with a roadmap setter (§6).**
+- [ ] **Every navigable room earns its keep — a plot canvas OR authored ambient life (a solo activity / street
+      event / NPC routine you cross) OR a deliberate locked shell with a roadmap setter (§6); only empty-dead
+      rooms (neither plot nor ambient) are cut.**
+- [ ] **Aliveness delivered (§2):** the map matches the declared point on the mission-slice ↔ living-city line —
+      a "living city" carries ≥1 ambient/texture zone (a street hub, a place to just be) beyond the plot rooms.
 - [ ] Reachability triad holds for every NPC ambient/capstone; portrait hubs are schedule-present (§4).
 - [ ] Every schedule row is exactly one category — reachable (hub) / locked (unlock contract) /
       offscreen — and no away block points at a reachable location without a hub.
