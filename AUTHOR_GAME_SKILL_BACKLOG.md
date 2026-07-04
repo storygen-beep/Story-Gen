@@ -18,6 +18,10 @@ still document) · `process` (how Claude works) · `one-off` (author slipped; sk
 
 ## Progress log (newest first)
 
+- **2026-07-04 — ✅ #9 done (2nd big-rock): grind-tuning throttle menu.** `trait-design.md` "Slow-burn pacing"
+  now teaches all 4 throttle levers with trade-offs (threshold spacing / window-sized time cost / counted daily
+  cap / conditional energy cost) + "combine, don't rely on one." Wired into Step 5, P8, and a §5E bridge row;
+  reconciled the trait-catalog energy contradiction. Engine re-verified (3 agents). Uncommitted.
 - **2026-07-04 — ✅ #11 done (first big-rock): NEW `references/quests.md`.** Designs the Quests page as one
   surface (Story-Goals spine + per-NPC ladder sections + end card), teaches both ladder shapes (milestone chain
   vs stepped trait-band), the Frame-3-blank trap, and the sidebar==Quests parity. Wired into Step 2 / Step 5 §5F.1
@@ -177,7 +181,7 @@ Three failure shapes in the Vesper build, one root each:
   is correct" carve-out (completes it) instead of contradicting it; money stays exempt.
 - *Engine truth verified:* `trait_words` closed-match `v2.py:15252`; `trait_status_text` open-on-omit `v2.py:15183`.
 
-### 9. Grind-tuning / rung-pacing discipline ⬜
+### 9. Grind-tuning / rung-pacing discipline ✅ DONE (2026-07-04)
 `P1 · effort M · skill · rts-design-philosophy.md, trait-design.md`
 - The seduction climb broke on first play (rungs free + instant, thresholds bunched); the fix — a *diegetic* time
   cost that closes the NPC's schedule window (= a natural day-cap) + energy per rung + ~×2.5 threshold spacing —

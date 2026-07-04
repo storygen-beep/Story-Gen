@@ -14,6 +14,22 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 -->
 
 ## 2026-07-04
+- **#9 grind-tuning / rung-pacing throttle menu** — a repeatable escalation rung with no throttle trivializes an
+  arc (Vesper's Renner climb broke on first play; it collapsed the instant its single daily-cap flag was removed,
+  `decisions_log[53]`→`[58]`). The skill taught the PRINCIPLE (`rts-design-philosophy.md` P8) and `§5E` even asked
+  "what stops her maxing him out in an afternoon?" but that compiled to NO knob (no §5E bridge row), only ONE
+  lever was taught (the daily-cap flag, brittleness un-noted), and threshold spacing wasn't taught at all. Added
+  a **throttle menu** to `trait-design.md` "Slow-burn pacing": (1) ~×2.5 threshold spacing (don't over-space a
+  thin repeated beat), (2) a diegetic time cost that closes the NPC's schedule window — the fiction-friendly cap,
+  SIZED to the window (a window is not a one-shot; Vesper 180/540 ≈ 3/day vs a 3-min cost farmable ~50×), (3) a
+  counted daily cap (`max_triggers_per_day` / a `_today` flag) — robust backstop but brittle alone, (4) a
+  conditional per-rung energy `costs`; with the recipe "spacing **+** at least one hard throttle, never one flag
+  alone." Wired: `step-5-blueprint.md` (both Gate bullets — spacing + pick-a-throttle), `rts-design-philosophy.md`
+  P8 (pointer), `content-framework.md` §5E bridge-table row (cadence now compiles to a knob). Reconciled the
+  contradiction at `trait-catalog.md:136` — energy is the wrong PRIMARY gate for NPC escalation, but a legitimate
+  per-rung throttle-COST when the fiction supports it. Engine re-verified this session (3 agents): time-cost
+  `advanceTime`/`getNpcLocation` window-close, per-choice `costs` gate-enforced by `checkCostsAffordable` (not
+  clamped), `max_triggers_per_day` `canTriggerCanvas`. Doctrine only, zero engine change.
 - **NEW `references/quests.md`** + wiring (backlog #11) — the Quests page was authored as per-beat plumbing, never
   designed as a surface (Step 2 designed the desire-ladder CONTENT; Step 7 authored cards one at a time; Step 5
   buried "the quest-card chain" in a 5-system bullet). No pass laid out the whole page — which cost Vesper 5

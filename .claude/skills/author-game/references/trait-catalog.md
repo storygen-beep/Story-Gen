@@ -133,7 +133,11 @@ Both are 0–100, default 100, and are the body-need axes — they DECAY and RES
   the number but gates nothing (cosmetic bar); `costs` both gates *and* deducts (`references/toml-gotchas.md`
   "Resource gating"). Restore via a sleep/nap activity (`effects { op = "add", value = +N, cap = 100 }` — cap it;
   `energy` is banded, so an unclamped restore past 100 vanishes the card, see §4 clamp rule above). No engine daily
-  decay — sleep is the loop. Don't gate Lane 1 NPC escalation on energy (wrong axis); gate chores/activities.
+  decay — sleep is the loop. Energy is the wrong **primary gate** for an NPC's escalation ("too tired to flirt"
+  is bad fiction — the lock is the corruption/relation trait); gate chores/activities with it. **But** a per-rung
+  `costs` energy spend is a legitimate *throttle* on a repeatable charged rung when the fiction supports it (a
+  machine powered by charge, a stamina economy) — see the throttle menu, `references/trait-design.md` "Slow-burn
+  pacing".
 - **`hygiene`** — cleanliness. Daily decay only if you author it in `[engine.daily_tick].traitEffects`
   (`value = -N`); restore via shower. A **soft modifier** on NPC-interaction quality — it COLORS scenes
   (low-hygiene prose variants, an occasional "go shower" reaction), it does **not** hard-gate an arc. Block at

@@ -173,6 +173,36 @@ player-driven and paced. Flag it in the brief as a deliberate deviation from the
 (`references/trait-catalog.md` §3), and reach the cap only through play. (Daily-cap cheaply via the
 NPC's existing once-per-day flag, e.g. `talked_to_<npc>_today`, shared across the raise sources.)
 
+### The throttle menu — a repeatable rung needs a brake, and a daily-cap flag alone is brittle
+A repeatable charged rung with **no throttle** trivializes the arc — a determined player clicks it to max in one
+sitting. (Vesper's whole seduction climb broke on first play the instant its single daily-cap flag was removed —
+one deleted line, nothing left throttling it.) So **don't lean on one throttle — combine.** The four levers:
+
+1. **Threshold spacing (always-on).** Widen the gap between rungs (**~×2.5** is a good default) while keeping the
+   per-beat increment FIXED, so the climb takes in-game *days* — the near lever stays visible (`flash 10 / grope
+   20 / oral 30 / loop 40 / drain 50`), the far ones cost many clicks. *Don't over-space a **thin repeated
+   beat*** — if the rung is one recycled paragraph, a huge bar is just tedium (hold it modest).
+2. **A diegetic time cost that closes the NPC's window** (`time_progression_minutes` on the rung's exit) — the
+   best throttle: it reads as *fiction*, not a mechanic ("his office closes at 6; come back tomorrow"), and can't
+   be deleted by one flag-flip. **But size it to the window** — a schedule window is a window, not a one-shot, so
+   it only day-caps when the per-rung time is a big fraction of it (Vesper's 180 min against a 09:00–18:00 office
+   ≈ 3 rungs/day; a 3-min cost against a 2.5-hour window is farmable ~50×). Advancing time past the NPC's
+   `[[npcs.schedules]]` window makes `getNpcLocation` return null → the `requires_npc` rung can't fire again until
+   the next window (`v2.py` `getNpcLocation` + the presence gate).
+3. **A counted daily cap** — `max_triggers_per_day` on the trigger (the true engine primitive, resets per day-key,
+   `v2.py` `canTriggerCanvas`) or a shared `_today` flag cleared in `[engine.daily_tick]`. Robust, but a single
+   removable flag is **brittle** as the *only* throttle (removing it is what broke Vesper) — use it to *back* a
+   spacing/time throttle, not alone. (Caveat: a time cost that rolls past midnight resets the counter, so don't
+   pair a midnight-crossing rung with `max_triggers_per_day` as the sole cap.)
+4. **A resource cost per rung** (`costs`, e.g. energy) — *conditional.* Energy is the wrong *primary gate* for an
+   NPC arc ("too tired to seduce him" is bad fiction; the primary lock is the corruption/relation trait) — but a
+   per-rung `costs` deduction is a legitimate *throttle* **when the fiction supports it** (Vesper's Charge = the
+   machine's own energy powering her). A `costs` spend is gate-enforced (`checkCostsAffordable` greys the rung
+   when short), pacing it against the sleep/recharge loop. See `references/trait-catalog.md` §4.
+
+**The recipe:** spacing (always) **+ at least one hard throttle** (a window-sized time cost, or a counted cap).
+Vesper's fixed climb stacked all four → a ~7–10 in-game-day campaign (live-verified).
+
 ## Cross-cutting axes (not per-NPC)
 `corruption` (global content tier), `exhibitionism` (public/display — a natural fit for bar/club/
 service premises; gate the public floor on it), and `money` are **player-global**, not owned by one

@@ -75,6 +75,9 @@ capped (once/day); arousal's passive bump is +1/day.
 **Intent:** you can't spam a meter to max in one sitting. Progress accrues over in-game **days** — the
 slow burn is enforced by the **cadence**, not only by the size of thresholds. (Deeper content is gated
 by higher thresholds, i.e. more days, not by bigger per-act jumps.)
+**How to throttle a repeatable rung** — the concrete menu (threshold spacing / a window-sized time cost / a
+counted daily cap / a conditional energy cost, and why one removable flag is brittle) is in
+`references/trait-design.md` "Slow-burn pacing".
 
 ## P9 — Early intimacy is CHEAP; the global tier only bites at the DEEP/PUBLIC end
 **Verified:** the `requirementsMC.corruption` ladder — grope **0**, tease/flash **5**, peep **15**,

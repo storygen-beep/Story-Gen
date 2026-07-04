@@ -259,6 +259,7 @@ and pressure clock, and how the player can tell where to go.*
 | §3 THEM | the scene list; the double lock; spine by arc-shape (odometer + throttle); the repeatable loop | `step-5-blueprint.md` Pass 2 · `trait-design.md` · `sex-loop.md` |
 | §4 What Changes When | `cross_npc`/`economic` beat types + `deps`; the machine wires (SETS/READS flags + `<npc>_stage`); per-canvas `conditions`; hidden-trait flags; **forced = auto-fire capstone-shape canvas (no zero-choice primitive)** | `step-5-blueprint.md` Pass 4 |
 | §5 The World | `structure_registry` locations + schedules; **place ceiling = author-encoded in canvas `conditions`, not a location attribute**; clothing `worn_corruption` gates PUBLIC content only; `[phone]` (flags + elapsed-days only); `[[sidebar_items]]` (`npc_panel`; hidden meters via hidden-trait flag); **§5H shared-private perception = `npc_at_location` occupancy predicate, user-confirmed per place** | `systems.md` · `lanes.md` |
+| **§5E Cadence** (throttle a repeatable rung) | threshold spacing (~×2.5, increments fixed) **+** a hard throttle — a window-sized `time_progression_minutes` (closes the NPC's schedule window), `max_triggers_per_day`, or a conditional `costs` spend; **never one removable `_today` flag alone** | `trait-design.md` "Slow-burn pacing" |
 
 Only real engine knobs (see `SKILL.md` "Engine ground-truth"). A question whose answer can't land on one of
 these is prose that won't build — flag it at review (Step 6), don't invent a field.

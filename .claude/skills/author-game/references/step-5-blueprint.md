@@ -56,7 +56,8 @@ Take Step 4's player story and decide its structure. Output: a **`### Player blu
   A host at a co-presence location with no walk-in and no feeder is the dead-bath gap — catch it now.
 - **Gate** — the actual `corruption`/`exhibitionism` value each rung needs (§2D thresholds); the resource
   `costs`; the locked-visible telegraph text. **The trait-spine decision lives here** — odometer vs throttle,
-  which trait drives, per `trait-design.md`.
+  which trait drives, per `trait-design.md`. Space repeatable rungs (~×2.5, increments fixed) + pick a throttle
+  from the menu (`trait-design.md` "Slow-burn pacing"); never leave one free + instant.
 - **Economy made real** — the income-ladder values, the wanted sinks, the key-item costs + what each unlocks,
   the pressure clock **and whether it bites** (the fail-state — wire it or write the one-line "no failure").
 - **Seed the feeder count** (§2E) — start the band-by-band tally; close it at the end of Pass 2.
@@ -73,6 +74,9 @@ Take one NPC's Step-4 story and compile it. This is the **mechanism half of the 
 - **Gate** — the stat ladder + spine (`trait-design.md`); the **double lock** on every lewd rung (the
   player-corruption door + the NPC's own trait lock; non-lewd stays ungated); the capstone triggers +
   thresholds + flags (odometer, never the `arousal` throttle); the costs; the locked-visible telegraph.
+  **Pace the repeatable rungs:** space the thresholds (~×2.5, increments fixed) **+** pick at least one hard
+  throttle from the menu (`trait-design.md` "Slow-burn pacing") — a window-sized time cost or a counted daily
+  cap; a repeatable charged rung is never free + instant (the Vesper-Renner break).
 - **Place** — give each scene a location + time-window + the NPC's schedule (the lane-by-lane map compiled to
   slots); check the reachability triad (NPC present ∩ window ∩ player there & awake) and the presence floor.
   *Provisional here* — the world schedule isn't final until Pass 3, so Pass 4 reconciles placement whole-map.
