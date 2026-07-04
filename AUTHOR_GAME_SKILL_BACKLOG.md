@@ -18,6 +18,10 @@ still document) · `process` (how Claude works) · `one-off` (author slipped; sk
 
 ## Progress log (newest first)
 
+- **2026-07-04 — ✅ batch: 7 small fixes done (#22, #23, #21, #19, #18, #17, #6).** Verified engine facts first
+  (the engine moved under us) — which corrected 3 stale premises: #17 had no `./media` myth (real risk = missing
+  `--video-folder`) + stale `--owner-id`; #18's failure is `MISSING HINT`, not `NEVER SET`; `media.md` cites had
+  drifted. Doctrine only, zero engine change. Uncommitted.
 - **2026-07-04 — ✅ #13 done (pressure-test the premise).** Added to `content-framework.md §1A` + the casting
   self-check: what does the central institution actually DO, and (for infiltration premises) would each mark see
   through the cover? Both premise holes LO caught in Vesper. Uncommitted.
@@ -127,7 +131,7 @@ Three failure shapes in the Vesper build, one root each:
 - **Fix:** generalize the spend idiom in `toml-gotchas.md §95` to "any spent resource incl. discrete consumable/
   ammo," give the one canonical deplete/reload shape, add the "upkeep loops stay separate" rule.
 
-### 6. Anonymous / paid-service sex venue variant ⬜
+### 6. Anonymous / paid-service sex venue variant ✅ DONE (2026-07-04)
 `P2 · effort S · skill · sex-loop.md`
 - The brothel needed the full pose-ladder loop for an anonymous john with no arc — pay-**on-finish** (not the
   entry faucet, a bug Vesper hit + fixed), upkeep drop on exit, cold register — copied by hand from Mercer
@@ -263,7 +267,7 @@ Three failure shapes in the Vesper build, one root each:
 
 ## GROUP G — engine gotchas to fold into the skill (skill+engine)
 
-### 17. QA-build vs deploy-build commands ⬜
+### 17. QA-build vs deploy-build commands ✅ DONE (2026-07-04)
 `P1 · effort S · skill+engine · media.md, beat-authoring.md`
 - `--debug` defaults to `./media` (so without `--video-folder` every clip 404s) AND bakes literal
   `[IMAGE MISSING] <path>` **text** into the HTML — a deploy build must **drop `--dev` and `--debug`** or stale
@@ -272,7 +276,7 @@ Three failure shapes in the Vesper build, one root each:
   build cmd in `--dev`, no deploy variant. **partial.**
 - **Fix:** add a "QA build vs deploy build" subsection to `media.md` + fix the build cmds in `beat-authoring.md`.
 
-### 18. Milestone flag folded into a triggerless loop → build HARD-FAILS ⬜
+### 18. Milestone flag folded into a triggerless loop → build HARD-FAILS ✅ DONE (2026-07-04)
 `P1 · effort S · skill+engine · sex-loop.md, toml-gotchas.md`
 - The flag-chain validator hard-fails ("MISSING HINT", `CommandError package_from_toml.py:364`) a flag required
   `is_true` by a downstream trigger/choice whose only setter is a triggerless canvas — fixed by re-expressing the
@@ -281,7 +285,7 @@ Three failure shapes in the Vesper build, one root each:
   the failure mode *wrong* ("reads ✗ NEVER SET"; actually the fatal is MISSING HINT). **partial + one wrong line.**
 - **Fix:** correct rule #1 in `sex-loop.md` and teach the milestone-flag-in-loop case with the exact error text.
 
-### 19. Container double-emit symptom ⬜
+### 19. Container double-emit symptom ✅ DONE (2026-07-04)
 `P3 · effort S · skill · location-design.md`
 - An `is_container` location with no `default_entry` double-emits its link (once in nav, once as a choice link),
   `v2.py:9079-9095` (memory `slice_frame_naivety`).
@@ -301,7 +305,7 @@ Three failure shapes in the Vesper build, one root each:
   `rts-flat-prose.md:55` prose-beat. Unreconciled overload. **partial.**
 - **Fix:** add a 3-line reconciliation lifting Vesper's "design in beats, build in nodes."
 
-### 21. Temporal dead-stat rule — don't introduce a core meter mid-game ⬜
+### 21. Temporal dead-stat rule — don't introduce a core meter mid-game ✅ DONE (2026-07-04)
 `P2 · effort S · skill · step-2-toplevel.md`
 - Lock the full meter set at Step 2; a meter that only pays off in Act 2 is a dead stat *now* (`iteration-log:129-130`,
   `decisions_log[50]`, `transcript:2305`).
@@ -309,7 +313,7 @@ Three failure shapes in the Vesper build, one root each:
   **partial.**
 - **Fix:** add the temporal clause to the dead-stat test.
 
-### 22. SKILL.md bare-asserts "(always-on)" ⬜
+### 22. SKILL.md bare-asserts "(always-on)" ✅ DONE (2026-07-04)
 `P2 · effort S · skill · SKILL.md`
 - The exact line that seeded the "is arousal always-on / does a machine get hormones" hallucination (Loop 2,
   `transcript:300-386`). Built-in traits are engine-*privileged* but NOT auto-initialized.
@@ -317,7 +321,7 @@ Three failure shapes in the Vesper build, one root each:
   engine constant"). Entry-point contradicts its own reference. **partial.**
 - **Fix:** change `SKILL.md:93` to "(engine-privileged — still declare each)".
 
-### 23. Pipeline one-liner omits Step 2b ⬜
+### 23. Pipeline one-liner omits Step 2b ✅ DONE (2026-07-04)
 `P3 · effort S · skill · SKILL.md`
 - **Verified:** `SKILL.md:8` enumerates "fantasy → seed → top-level → casting → design → blueprint → feedback →
   authoring" — **drops map-design**, while the dispatch table `SKILL.md:40-49` lists `map_design` (2b). **partial

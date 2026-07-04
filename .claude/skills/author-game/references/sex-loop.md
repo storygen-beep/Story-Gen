@@ -23,10 +23,16 @@ finisher canvas:
 
 ## The two non-obvious rules (these are why it's a separate pattern)
 
-**1. State is NUMERIC TRAITS, never flags.** A triggerless canvas has no trigger for the flag-chain
-validator to credit, so any *flag* its nodes set reads as `✗ NEVER SET` and fails the build. Numeric
-traits aren't flag-chain-checked, so loop state uses traits. Declare them in `[player.core_traits]`
-and hide them from the sidebar with `[[traits.labels]] hidden = true`. Canonical set:
+**1. State is NUMERIC TRAITS, never flags.** A flag whose only setter is a triggerless (node-routed) canvas
+DOES register as set — but with no location/schedule — so if any downstream canvas **trigger** or **choice**
+requires it `is_true`, the build HARD-FAILS with `MISSING HINT - set by '<canvas>' but no location/schedule`
+(`v2.py:11135`/`:11165`, raised as a `CommandError`, `package_from_toml.py:396`). (Not `NEVER SET` — the
+canvas *is* credited as a setter; it just has no located hint.) Numeric traits aren't flag-chain-checked, so
+loop state uses traits. Declare them in `[player.core_traits]` and hide them from the sidebar with
+`[[traits.labels]] hidden = true`. **A milestone the loop must record** (e.g. "the drain happened") is the
+same trap — express it as a hidden trait *counter* and gate the reader on the trait, not a flag. (`is_false`
+guards, `[group]` conds, and quest `when` blocks are exempt — only trigger/choice `is_true` flag gates are
+location-checked; trait conditions never are.) Canonical set:
 
 | trait | meaning |
 |---|---|
@@ -65,6 +71,23 @@ The loop opens from the NPC's **Lane-1 hub** (or the after-close hub) as a rung 
 first-night flag the capstone set (`<npc>_first_done`). Make that rung **locked-visible**
 (`show_when_locked = true`, no `locked_text_threshold` — see `lanes.md`) so the repeatable layer reads
 as a coming destination rather than appearing from nowhere. The rung's `effects` do the entry reset.
+
+## Variant: anonymous / paid service venue (no NPC arc)
+The scoping line at the top (an NPC's full arc, "not service/antagonist") has ONE exception: a **paid/anonymous
+venue** — a brothel, a bathhouse, a glory-hole hallway — runs the *exact same triggerless pose-ladder loop* for
+a partner with no arc. Only the entry/exit wiring changes:
+- **No NPC gate.** No `npc`/portrait, no `relation`/`corruption` gate on the loop. Gate the *venue* on access
+  (a location/flag) + **coin** (can she afford it) + optionally **hygiene**; the partner is anonymous ("a john,"
+  "a stranger"), so the loop traits carry no relationship state.
+- **Pay ON FINISH, never the entry faucet.** Put the coin change in the **finisher's exit** effect, not the
+  entry rung — an entry-charge (or entry-payout) is a faucet the player games by entering and bailing (a bug
+  Vesper's brothel shipped and fixed). She earns/pays when the scene *completes*.
+- **Upkeep drop on exit.** Hang the hygiene (and coin) change on the existing exit-reset (rule 2 — the finisher
+  already zeroes the loop traits), so it's one clean place.
+- **Cold register.** Extends the Voice section below — transactional, detached; graphic at the ceiling but no
+  warmth, no relationship beats.
+Everything else — the triggerless canvas, the trait-state rules (#1), pose gating, the `[group]` finisher — is
+identical to the gold-arc loop above.
 
 ## Voice
 In-loop labels are **bare + crude at the NPC's ceiling** (`Suck his cock`, `Bend over`, `Let him cum

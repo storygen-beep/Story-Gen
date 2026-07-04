@@ -14,6 +14,31 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 -->
 
 ## 2026-07-04
+- **Batch: 7 small backlog fixes** (#22, #23, #21, #19, #18, #17, #6) — verified against the CURRENT engine
+  FIRST (renumbered by the no-DB/save-safety commits), which corrected three stale premises before writing:
+  · **#22** `SKILL.md` — built-in traits `(always-on)` → "(engine-privileged, NOT auto-created — declare each)";
+  the false line seeded an arousal-always-on hallucination in Vesper.
+  · **#23** `SKILL.md` — the one-line pipeline summary omitted map design; added `→ map` to match the dispatch table.
+  · **#21** `step-2-toplevel.md` + `trait-design.md` — the dead-stat test was spatial only; added the TEMPORAL
+  clause (a meter that only pays off in a later act is a dead stat *now*; lock the set at Step 2, don't add a core
+  meter mid-game — LO's "if corruption isn't used now, no sense adding it later").
+  · **#19** `location-design.md` — added the container **double-emit** symptom (no `default_entry` → child nav
+  prints twice, `v2.py:9201-9233`) beside the existing swallow note.
+  · **#18** `sex-loop.md` rule 1 + NEW `toml-gotchas.md` "Flag-chain hard-fail" section — CORRECTED the wrong
+  error label (a flag set only by a triggerless canvas is NOT `NEVER SET`; it hard-fails with
+  `MISSING HINT - set by '<canvas>' but no location/schedule`, `v2.py:11135`/`:11165`, `CommandError`
+  `package_from_toml.py:396`) + taught the milestone-flag-in-loop case (hidden trait counter) + the exempt sources.
+  · **#17** `beat-authoring.md` + `media.md` — the build examples hardcoded a now-optional `--owner-id` (no-DB is
+  the default) and showed no deploy build; added a labelled PUBLISH build (drop `--dev`+`--debug`, keep
+  `--video-folder`), documented that `--debug` bakes `[IMAGE MISSING]`/`[VIDEO MISSING]` TEXT into the HTML at
+  build time (frozen — ships even after media is added), corrected the "--debug picks ./media" myth (real 404
+  risk = missing `--video-folder`, in ANY build), and fixed `media.md`'s drifted `v2.py` cites (`:13348`/`:13313`
+  → `:13606`/`:13571`).
+  · **#6** `sex-loop.md` NEW "Variant: anonymous / paid service venue" — the same triggerless pose-ladder loop for
+  an anonymous john: no NPC/relation gate (access+coin+hygiene), **pay ON FINISH not the entry faucet** (a bug
+  Vesper's brothel fixed), upkeep drop on the exit-reset, cold register.
+  Doctrine only, zero engine change. Facts verified against v2.py/package_from_toml.py this session (3 parallel
+  grounding agents); grep-consistency across `references/`.
 - **content-framework.md §1A + step-3-casting.md — pressure-test the premise's internal logic** (backlog #13) —
   two premise holes LO caught in Vesper, not the author: the central institution (Vance Dynamics) had a tower,
   boss, villain, and missions built on it with no defined FUNCTION ("what is this company even about?"), and the

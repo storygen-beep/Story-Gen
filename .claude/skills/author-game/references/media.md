@@ -102,10 +102,13 @@ A `file`/`url` that can't be resolved does **not** error and does **not** show a
 added to the build's **missing-media list** and then:
 
 - **normal build → renders nothing.** The block silently vanishes. This is why a game with no real art looks
-  like it has no media at all even when the references are correct. `v2.py:13348` (image), `13465` (video):
-  `# else: skip silently`.
+  like it has no media at all even when the references are correct. `v2.py:13606` (image `# else: skip
+  silently`; the video path is the sibling near `:13689`).
 - **`--debug` build → an `[IMAGE MISSING] <path>` placeholder** (dashed box) with the `description` and, if you
-  gave `search_queries`, clickable search links. `v2.py:13313-13347`.
+  gave `search_queries`, clickable search links (`v2.py:13571` gate, text `:13578`; video `[VIDEO MISSING]`
+  `:13689`). **This text is baked into the HTML at BUILD time** — it does not re-check, so a `--debug` build
+  ships the `[IMAGE MISSING]` text even if you add the media later without rebuilding. `--debug` is a QA
+  affordance ONLY (see "QA vs publish build" below).
 
 The **Missing-Media page** (a generated shopping list of every needed asset, each with its description +
 queries) is **always built**, but its nav button only shows in `--debug`. So in a player build the gaps are
@@ -118,6 +121,16 @@ Two other media surfaces degrade differently — know them so you don't confuse 
 
 The lesson: **coverage matters, and it's invisible in a normal build.** Give every media block a `description`
 and `search_queries` so the missing-media page is a usable list, and check coverage with a `--debug` build.
+
+### QA build vs publish build
+- **QA (while authoring):** `--dev` (stat/canvas dev controls) + `--debug` (the `[IMAGE MISSING]` placeholders +
+  the Missing-Media nav button). Always pass **`--video-folder <media-dir>`** or every clip 404s — the src
+  resolves to an unpopulated copy path in ANY build (folder-independent; `--debug` does NOT switch folders —
+  that older belief is wrong).
+- **PUBLISH (for players):** DROP `--dev` AND `--debug` (keep `--video-folder`). `--debug` freezes the
+  `[IMAGE MISSING]`/`[VIDEO MISSING]` text into the file; `--dev` leaks dev controls. Minimal publish build:
+  `python manage.py package_from_toml --file <toml> --output <dir> --video-folder <media-dir>` (no `--owner-id`
+  — the no-DB build is the default).
 
 ---
 

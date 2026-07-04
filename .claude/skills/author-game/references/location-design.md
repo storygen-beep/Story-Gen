@@ -31,7 +31,7 @@ reference: `references/engine-reference.md`):
 |---|---|---|
 | `entry_from` | **Navigation.** "You can reach me from here." The **"Leave X" link points to `X.entry_from`**, and a hub's child cards are every location whose `entry_from` points at it (ordered by `navigation_order`). | not hierarchy |
 | `parent` | **Structure only** — canvas inheritance + visual grouping. A location's `parent` and `entry_from` may differ. | NOT used for nav links |
-| `is_container` + `default_entry` | A **pure-nav wrapper** that auto-redirects into a child and holds no content. | NEVER hosts a canvas — a container **swallows** any attached canvas (it emits only child-nav). Attach canvases to a NON-container standing hub instead. |
+| `is_container` + `default_entry` | A **pure-nav wrapper** that auto-redirects into a child and holds no content. | NEVER hosts a canvas — a container **swallows** any attached canvas (it emits only child-nav). Attach canvases to a NON-container standing hub instead. **And always set `default_entry`:** a container with NO `default_entry` **double-prints** its child nav — once as choice links, once in the nav block (`v2.py:9201-9233`) — so set `default_entry` or use a non-container standing hub. |
 
 The player walks the **`entry_from` chain**; `parent` is bookkeeping. A top-level location (no
 `entry_from`) is a **root** — it emits no "Leave" link and is reached only via a walk-activity bridge

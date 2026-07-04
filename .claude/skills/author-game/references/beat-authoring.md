@@ -50,13 +50,16 @@ NPC arcs/hubs/ambients/capstones are beats. Only the skeleton + boot + sleep + s
    ```bash
    python scripts/merge_toml_phases.py games/<slug> --validate
    python manage.py package_from_toml --file games/<slug>/toml_phases/7_final_game.toml \
-     --owner-id 15b35759-e67f-4bab-be10-5a27dd7ddc7a --output games/<slug>/output --dev
+     --output games/<slug>/output --video-folder games/<slug>/videos --dev
    ```
    The second command does the REAL validation (schema + flag chains) and builds `index.html`; both must
-   pass before the first beat. **Owner-id note:** `--owner-id` must be an existing DB user. The UUID above
-   is this repo's known owner. On `Owner with ID ... not found`, find a real one
-   (`python manage.py shell -c "from apps.authentication.models import User; print(User.objects.first().id)"`)
-   or `createsuperuser`, and use that id.
+   pass before the first beat. **Build flags:** the no-DB in-memory build is now the DEFAULT — **no `--owner-id`
+   needed** (that flag is only for the legacy `--use-db` path). `--dev` adds the stat/canvas dev controls (QA
+   only). Pass **`--video-folder <media-dir>`** or every clip 404s (the src resolves to an unpopulated copy
+   path — folder-independent, `--debug` does NOT switch folders). **To PUBLISH for players, drop `--dev` AND
+   `--debug`** (keep `--video-folder`): `--debug` bakes `[IMAGE MISSING]`/`[VIDEO MISSING]` TEXT into the HTML at
+   build time, so a debug build ships those placeholders even after the media is added; `--dev` leaks dev
+   controls (`references/media.md` "QA vs publish build").
 
 **Which phase file a beat's content goes in** (set `target_phase`; when unsure, check where
 `games/late_shifts/toml_phases/` put the analogous content):
@@ -146,9 +149,10 @@ the source of truth.
 Run with the repo venv active, in order; emit a PASS/FAIL line for each:
 1. `python scripts/merge_toml_phases.py games/<slug> --validate` — **syntax only**: assembles
    `7_final_game.toml` and `tomllib`-parses it. Does NOT check flags/references.
-2. `python manage.py package_from_toml --file games/<slug>/toml_phases/7_final_game.toml --owner-id 15b35759-e67f-4bab-be10-5a27dd7ddc7a --output games/<slug>/output --dev` — **the real validation**: schema,
-   broken references, flag chains, plus it builds `index.html`. Never skip it. (`--owner-id` must be an
-   existing user; on `Owner with ID ... not found`, see the Step-7 ENTRY owner-id note above.)
+2. `python manage.py package_from_toml --file games/<slug>/toml_phases/7_final_game.toml --output games/<slug>/output --video-folder games/<slug>/videos --dev` — **the real validation**: schema,
+   broken references, flag chains, plus it builds `index.html`. Never skip it. (No-DB is the default — no
+   `--owner-id` needed; `--video-folder` keeps clips from 404ing. To publish, drop `--dev`/`--debug` — see the
+   Step-7 ENTRY build-flags note above.)
 3. **Doctrine self-audit** — check each against what THIS beat authored (the in-skill `references/*.md`
    own each rule cited below):
    - **the beat serves a WANT** — name the desire-ladder rung it pursues; a beat

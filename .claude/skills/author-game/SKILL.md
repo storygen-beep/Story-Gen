@@ -5,7 +5,7 @@ description: Use when starting, continuing, or expanding an RTS-shape sandbox in
 
 # Author Game — the 8-step authoring pipeline
 
-Drives game authoring as an **8-step pipeline** (fantasy → seed → top-level → casting → design → blueprint →
+Drives game authoring as an **8-step pipeline** (fantasy → seed → top-level → map → casting → design → blueprint →
 feedback → authoring), run **incrementally**: after the seed, the game is built **one verified piece at a
 time**, with
 the user steering at the crucial forks and **nothing invented blind**. This replaces blind one-shot
@@ -96,7 +96,8 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
   interior) stay narrated.
 
 ## Engine ground-truth (verified — so no reference reinvents a knob)
-1. **Real built-in player traits:** `corruption`, `arousal`, `energy`, `hygiene`, `money` (always-on) +
+1. **Real built-in player traits:** `corruption`, `arousal`, `energy`, `hygiene`, `money` (engine-privileged,
+   but NOT auto-created — you still declare each in `[player.core_traits]`; `references/trait-catalog.md`) +
    `exhibitionism`, `fitness`, `intelligence` (optional). Per-NPC: `relation`, `corruption`, `arousal`.
 2. **`beauty` is NOT a raisable stat** — it's *derived read-only from worn clothing* (`worn_beauty`). Owned
    by the clothing system; raise `fitness` instead.

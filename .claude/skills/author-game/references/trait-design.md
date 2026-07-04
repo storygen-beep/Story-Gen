@@ -151,7 +151,9 @@ and the solo branch of a Lane 3 host (`references/lanes.md`): arousal throttles
 A trait that **climbs but gates nothing** is a bug, not flavor — and it's worse when it's a visible
 sidebar bar, because the player reads progress that isn't real (a common miss: an `npc.arousal` or
 `exhibitionism` meter that ticks up but no gate ever reads it). Rule: **every trait you raise must
-either gate something or be cut.** When you add a `+trait` effect, name what reads it; if nothing does, delete the
+either gate something or be cut.** The check is **temporal** too: gate something in the act you're building
+NOW — a meter reserved for a later act is a dead meter today (lock the set at Step 2, don't add a core meter
+mid-game). When you add a `+trait` effect, name what reads it; if nothing does, delete the
 effect or add the gate. (Sidebar bars are the loudest offenders — only surface a trait the player can
 act on.) And when you DO surface one, **encode by type and don't over-band** (`references/trait-catalog.md`
 §5): the auto Traits dump already shows every trait as a number, so a band is an upgrade — `trait_words` for

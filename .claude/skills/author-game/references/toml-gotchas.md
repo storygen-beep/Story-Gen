@@ -49,6 +49,15 @@ against the shipped `games/late_shifts/toml_phases/`.
   Gate the TOWN/exit location this way; leave home interiors ungated so robe/underdressed teases survive.
   (Full clothing model: `references/clothing.md`.)
 
+## Flag-chain hard-fail — `MISSING HINT`
+A flag required `is_true` by a canvas **trigger** or a **choice** must be set by a canvas that HAS a
+location/schedule — a triggerless, node-routed canvas doesn't. Otherwise the build hard-fails:
+`MISSING HINT - set by '<canvas>' but no location/schedule` (`v2.py:11135`/`:11165`, raised `CommandError`
+`package_from_toml.py:396`). Fix: set the flag from a located/scheduled canvas, OR — for loop/milestone state
+set inside a triggerless canvas — use a **hidden trait counter** and gate the reader on the trait
+(`references/sex-loop.md` rule 1). Only trigger-`is_true` and choice-`is_true` flag gates are checked;
+`is_false` guards, `[group]` conds, quest `when`, and trait conditions are exempt.
+
 ## Right shapes (get these exact)
 - **Choice (`exit_block.choices`) field set** — see `references/engine-reference.md` §3 for the full `TemplateChoice`
   table (`targetType` + `locationId`/`nodeId`, `conditions`, `effects`, `flagEffects`,

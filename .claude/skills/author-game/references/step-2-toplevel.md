@@ -35,8 +35,11 @@ the most explicit beats) — Step 4 wires each NPC into it.
 
 ### The stat set (each leg owns ONE job — no dead stats)
 A stat exists ONLY to gate a content domain the game actually has. **Test for any proposed stat: "name the
-specific content this gates."** No answer → dead stat, cut it. Derive the count from the game's content,
-never a target number.
+specific content this gates."** No answer → dead stat, cut it. The test is **temporal as well as spatial:**
+name the content it gates **in the act/build you are authoring now** — a meter that only pays off in a later
+act is a dead stat *now*. Lock the full meter set here at Step 2 and model later-act pressure with beats +
+flags; don't introduce a core meter mid-game (it reads as incoherent — "if corruption isn't used now, no sense
+adding it later"). Derive the count from the game's content, never a target number.
 - **Always-present:** **corruption** (the lewd door — the cascade) · **money** (survival + purchases +
   the pressure that drives corrupting) · **energy** (paces the day; spend via `costs`, restore by sleep).
 - **Add a leg only for a real domain** — and respect what's a built-in vs a custom trait:
