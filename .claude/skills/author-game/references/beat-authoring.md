@@ -334,7 +334,9 @@ status (the quests-vs-sidebar split); the card shape follows the capstone/mechan
   (`ready_canvas` → Ready frame launches the one-shot); *terminal* (`terminal = true`).
 - **Milestone chain:** one card per arc stage, each gated `when` the prior stage's flag is set and this
   stage's completion flag is not — so exactly one card shows per NPC at a time. The frontier card narrates
-  the current peak honestly, never blank.
+  the current peak honestly, never blank. *(One of two chain shapes — for an arc riding ONE climbing trait use a
+  **stepped trait-band ladder** instead. The whole-page design (Story-Goals spine + per-NPC sections + end card),
+  both ladder shapes, and the Frame-3-blank trap live in `references/quests.md`, designed at Step 5.)*
 - **Name place + time-window + requirement verbatim.** The active card's `text`/`tip` (and
   the `npc_panel` `next` block, `references/systems.md`) carries the **next concrete action** with the
   location + the schedule window + what's needed, in words ("work the floor for tips at the bar, evenings

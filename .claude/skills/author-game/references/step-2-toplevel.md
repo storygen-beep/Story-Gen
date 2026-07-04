@@ -73,8 +73,9 @@ the next want. **The meter is backstage; desire is onstage.**
 - **The ladder is OPEN-TOPPED** (the frontier, §6) — the top rung is the current edge of authored content,
   not a wall.
 
-Author the desire ladder as the design book's player-facing spine (surfaced later via quest cards). Each
-rung: a concrete want + what clearing it unlocks (the next want).
+Author the desire ladder as the design book's player-facing spine — it becomes the **Story-Goals column** of the
+Quests page (laid out as one surface at Step 5, `references/quests.md`). Each rung: a concrete want + what
+clearing it unlocks (the next want).
 
 ---
 

@@ -59,6 +59,10 @@ a silent cut.
   one `thought_bubble`, **no interior-monologue aphorisms on a daily-repeat surface** (`references/rts-flat-prose.md`);
   dialog + density only at the once-per-arc deepest tier.
 - **Every scene serves a WANT** (the desire ladder) — no meter-exercise content.
+- **The Quests page reads as one surface** (`references/quests.md`) — the Story-Goals spine + a section per arc'd
+  NPC (each a one-live-at-a-time milestone or stepped-band chain) + an end-of-content card; **no card sits on a
+  met numeric goal with no `ready_canvas`/`terminal`** (the Frame-3 blank-sidebar trap), no dangling fake
+  objective, no dev-speak. The `npc_panel` `next` row mirrors it for free.
 - **Tiers populated** — bootstrap (`corr 0`) + flash (`corr 15`) feeders exist, not just deep capstones.
 - **Economy balanced** (§2E confirmed) — every NPC floor reachable through ordinary feeder play.
 - **The machine verified** (§4E — a REAL check): core loop closed · every core NPC placed · DAG no cycle · no

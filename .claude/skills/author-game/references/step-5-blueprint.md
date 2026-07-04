@@ -96,7 +96,11 @@ geography. Output: a **`### World blueprint`** block; updates the `structure_reg
   (there is no location attribute for it) + how it act-scopes out as she gains power.
 - **5D schedules** — who's where, when; tag each row reachable / locked / **offscreen**.
 - **5F systems** — phone threads (fire on flags + elapsed days only), the clothing catalog, the rent schedule,
-  the sidebar `npc_panel` rows + the quest-card chain, customization fields (`systems.md`).
+  the sidebar `npc_panel` rows, customization fields (`systems.md`).
+- **5F.1 the Quests page** — lay out the WHOLE page as one surface, not per-beat cards: the **Story-Goals spine
+  column** (from the desire ladder), **one section per arc'd NPC** (choose a milestone-chain or a stepped
+  trait-band ladder), and the **end-of-content card**; confirm each is non-stale (no Frame-3-blank dead end) and
+  parity-matched to its `npc_panel` `next` row. `references/quests.md`.
 - **5G access** — locks + travel + the locked-visible map; confirm the Step-2b travel-friction (`costs` on
   the zone bridges) + its fast-travel valve, and that locks are lock-as-prose (`entry_conditions` +
   `blocked_message`, `version="1.0"`) — `location-design.md` §5.

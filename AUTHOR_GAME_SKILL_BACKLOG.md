@@ -18,6 +18,10 @@ still document) · `process` (how Claude works) · `one-off` (author slipped; sk
 
 ## Progress log (newest first)
 
+- **2026-07-04 — ✅ #11 done (first big-rock): NEW `references/quests.md`.** Designs the Quests page as one
+  surface (Story-Goals spine + per-NPC ladder sections + end card), teaches both ladder shapes (milestone chain
+  vs stepped trait-band), the Frame-3-blank trap, and the sidebar==Quests parity. Wired into Step 2 / Step 5 §5F.1
+  / Step 6 / beat-authoring / hud. Engine re-verified (3 research agents); Vesper = proof (28/28). Uncommitted.
 - **2026-07-04 — ✅ #20 + #26 done.** #20: `beat-authoring.md` now names design-beat (plan unit) vs build-node
   (screen) — "3 beats → ~23 nodes." #26: swept ALL engine cites after the renumber — a per-file workflow (18
   agents) grep-confirmed each symbol against current code and fixed **262**, confirmed **204** already-correct,
@@ -197,7 +201,7 @@ Three failure shapes in the Vesper build, one root each:
 
 ## GROUP D — the quest system
 
-### 11. Design the Quests page as ONE system ⬜
+### 11. Design the Quests page as ONE system ✅ DONE (2026-07-04)
 `P1 · effort M · skill · beat-authoring.md`
 - **Five** post-ship quest reworks (`decisions_log[54,55,57,65,73,75]`): no step designs the whole page (story-goal
   spine + per-NPC ladders + end-of-content card) up front. The stepped trait-band ladder (disjoint `gte X`+`lt Y`,

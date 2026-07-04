@@ -14,6 +14,24 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 -->
 
 ## 2026-07-04
+- **NEW `references/quests.md`** + wiring (backlog #11) — the Quests page was authored as per-beat plumbing, never
+  designed as a surface (Step 2 designed the desire-ladder CONTENT; Step 7 authored cards one at a time; Step 5
+  buried "the quest-card chain" in a 5-system bullet). No pass laid out the whole page — which cost Vesper 5
+  reworks (`decisions_log[54,55,57,65,75]`). `quests.md` owns it: the two-tier layout (Story-Goals spine +
+  per-NPC sections via the `npc_id` field), the two ladder shapes (flag-milestone chain vs NEW stepped trait-band
+  ladder — exclusive `gte X`+`lt Y` bands, coaching in `goals[].label`), the three render frames + the
+  **Frame-3-blank trap** (a met numeric top rung with no `ready_canvas`/`terminal` → blank sidebar; fix = a
+  flag-goal/`ready_canvas` card), the end-of-content card (no fake objective, no dev-speak), the
+  sidebar-`next` == Quests-page single-renderer fact, and the design-the-page process (the Step-5 deliverable).
+  Wired: `SKILL.md` doctrine library; `step-2-toplevel.md` (desire ladder = the Story-Goals column);
+  `step-5-blueprint.md` §5F.1 (elevated the buried clause into a design-the-page sub-pass); `step-6-feedback.md`
+  (NEW page-as-a-surface rubric row); `beat-authoring.md` (pointer + the stepped-ladder alternative); `hud.md`
+  (cross-ref). Every engine claim re-verified against the CURRENT `v2.py` this session (3 research agents):
+  `renderQuestsGoalBlock:14217`, `pickQuestsCard:14065`, `checkQuestsCondition:14131` (ops gte/lte/gt/lt/eq, NO
+  version key), Frame-3 blank `:14244/:14266`, sidebar parity `:15449`. Corrected 3 stale memory facts
+  (`computeHintGoal` is a SEPARATE stage-hint engine `:6709`; the table is `[[quest_cards]]` not `[[quests]]`;
+  there is no `title` field). Doctrine only, zero engine change; Vesper is the proof-of-concept (6-rung ladder,
+  28/28 live-test).
 - **#20 (beat vs node) + #26 (engine-citation sweep).**
   · **#20** `beat-authoring.md` — named the two granularities under "beat": the Step-7 beat = a PLAN unit (a story
   chunk authored/verified per turn), which explodes into many single-click NODES (the `rts-flat-prose.md` Rule-2

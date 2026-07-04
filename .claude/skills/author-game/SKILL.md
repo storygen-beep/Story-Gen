@@ -166,6 +166,10 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
   (the acquisition layer). Read before authoring any beat that carries a visual, and when naming a scene's
   media at Step 5.
 - `references/sex-loop.md` — the repeatable-explicit menu (triggerless node-routed canvas).
+- `references/quests.md` — the **Quests page as a designed surface**: the two-tier layout (Story-Goals spine +
+  per-NPC sections), the two ladder shapes (flag-milestone chain vs stepped trait-band ladder), the three render
+  frames + the Frame-3-blank trap, the end-of-content card, and the sidebar-`next` == Quests-page parity. Design
+  the page as one thing at Step 5; author each card at Step 7.
 - `references/systems.md` — the optional-systems dispatch hub (clothing/rent/phone/customization + HUD),
   each with its TOML home, **full in-skill reference** (`clothing.md` · `rent.md` · `phone.md` ·
   `customization.md` · `hud.md`), and signature trap.

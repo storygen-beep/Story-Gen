@@ -75,7 +75,8 @@ via `setup.npc_slug_map` (`v2.py:15415`); if it can't resolve, the whole card is
 | **`next`** | The **Quests-page goal block, verbatim** — reuses `setup.renderQuestsGoalBlock` (`v2.py:15449-15461`), so the card shows the identical block the Quests page shows, minus flavor/tip prose. | `v2.py:15449-15461` |
 
 **The `next` row is the planning payload** — it names PLACE + TIME-WINDOW + REQUIREMENT, not a vague "get
-closer." `renderQuestsGoalBlock` (`v2.py:14217-14269`) emits exactly three frames:
+closer." It IS the Quests page (the same renderer, one card) — design both surfaces together in
+`references/quests.md`. `renderQuestsGoalBlock` (`v2.py:14217-14269`) emits exactly three frames:
 
 - **🎯 To advance:** + a `◯`/`✓` bullet per goal, each with **live progress** while climbing
   (`◯ My corruption — 12 / 20`, the `currentValue / value` print at `v2.py:14257-14258`).
