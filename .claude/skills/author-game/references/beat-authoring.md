@@ -89,8 +89,16 @@ NPC arcs/hubs/ambients/capstones are beats. Only the skeleton + boot + sleep + s
 2. `python scripts/merge_toml_phases.py games/<slug> --validate` — assembles `7_final_game.toml`.
 3. **Drift check:** for each beat with status `authored`/`validated`, confirm its `produced_canvas_ids`
    appear in the merged TOML. If any are missing, STOP and report — the ledger and build diverged; fix
-   before authoring anything new.
-4. Report: where we are, the `next_up` queue, what changed since last session.
+   before authoring anything new. *(Counting rendered clicks to sanity-check a `cascade`? Its beat[0] merges
+   into the node lead and shows no advance link, so visible clicks = beats − 1 — a "dropped first beat" is the
+   expected merge, not drift. See `engine-reference.md` cascade contract.)*
+4. **Ledger hygiene (reverse sweep):** beyond the ledger→TOML drift check, sweep the other direction —
+   (a) a `structure_registry` flag **set but read by NO** trigger/choice/group condition or quest `when` is an
+   **orphan**, safe to prune; (b) a `deferred`/`next_up`/`decisions_log` note **contradicted by since-shipped
+   content** must be reconciled — an orphan flag is harmless, but a stale note actively misleads the next
+   session; (c) an `_active_beat` still marked active (or pointing at an old beat) while work has moved on must
+   be advanced. Cheap hygiene, not a content gate.
+5. Report: where we are, the `next_up` queue, what changed since last session.
 
 ## The beat loop
 1. **Propose the next beat — ideate, then ask-or-inform (`references/run-mode.md`).** Take the head of

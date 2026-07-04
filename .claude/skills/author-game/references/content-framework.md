@@ -116,6 +116,10 @@ she climbs, and the anti-starvation audit. Authored BEFORE the NPCs so supply is
   NOT advancing the single main-NPC grind.** If that list is essentially one thread (grind the gold NPC + a
   chore), the day is thin — **even when each thread is well-built.** Floor: **~2–3 live non-grind threads**,
   scaled to game size.
+- **Thin-on-purpose ≠ thin-by-accident.** Before flagging a thin day, ask whether the leanness is a *declared
+  design choice* — a deliberately-quiet thread, or a still-point protagonist whose day is meant to be spare
+  (§1B). A declared lean is fine; **say so on purpose** (same as the §1 fail-state and systems-ON/OFF
+  declarations) — don't auto-fatten it. Only an *unintended* thin day is the gap.
 - **The category checklist** — which are LIVE on a representative day? Tag each **feeder** (raises the player's own
   odometer) vs **texture** (world / progression). *(You won't hit all seven; the point is the day isn't ONLY the
   last one.)*

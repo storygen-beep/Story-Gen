@@ -233,7 +233,8 @@ The hardest lane; RTS's biggest. Two canvases per activity:
      (~30w base, scheme in a `thought_bubble`); the capstone it routes into is where density is earned.
      *(Note: two-NPC co-presence — "catch two of them together" — needs a separate engine feature the
      renderer doesn't have yet; only the player-is-a-party configs above are buildable today.)*
-   - **Rising frequency (the saturation curve):** a single substitution rule's `chance` is a fixed
+   - **Rising frequency (the saturation curve):** *(for REPEATABLE ambients only — never a scripted rare beat,
+     whose punch IS its scarcity; escalate those by weight, `rts-flat-prose.md`.)* a single substitution rule's `chance` is a fixed
      constant, so one rule = a flat hijack rate forever — the tell of a routine that never escalates. To
      make the hijack **climb** (early = never; late = most visits), **stack several Pattern A rules on the
      same host**, one per corruption band, with **disjoint `gte`/`lt` conditions** so exactly one band is

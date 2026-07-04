@@ -151,11 +151,24 @@ did-you-mean hint (`dialogue`→`dialog`, `speech`→`dialog`) — `_validate_co
 the build path. **Dialogue MUST be `type="dialog"`** — `type="dialogue"`/`"speech"` fail the build
 (`references/toml-gotchas.md` for the grep guard).
 
+**The `cascade` beat-0 contract.** A `cascade` reveals its beats one click at a time, but **beat[0] is special:
+it renders unconditionally as part of the node's opening prose and its `advance_text` (the click label) is
+silently ignored** — only beats[1..] are click-gated. So visible click count = **(number of beats − 1)**. Two
+consequences: (1) don't author a click-gated payload as beat[0] — it merges into the lead and its advance label
+never shows; put the first *gated* reveal in beat[1]. (2) a beat-count spot-check expecting one click per beat
+will **false-alarm** on the merge — a "dropped first beat" is the expected behavior, not a bug.
+
 `exit_block` (`TemplateExitBlock` at `:662`): `type` = `"location"` or `"choices"`.
 - `type="location"` → single return button; `config = {destinationType, locationId, time_progression_minutes}`.
   `destinationType` must be `"trigger"`, `"specific"`, or `"node"` (validated `:3900`; default `"trigger"`,
   `v2.py:12567`).
 - `type="choices"` → the menu (Lane 1 hub) — §3.
+
+**No real-time timer.** The engine advances time ONLY as click-driven minutes (`time_progression_minutes` /
+a `costs.time`) — there is **no wall-clock / countdown primitive.** Any "window of control / it lasts N minutes"
+fiction is narrated at a canvas boundary and built as a **route to a follow-up canvas** (e.g. trigger-at-climax
+→ control-canvas → drain, via `targetType="node"` — cross-canvas with `"canvas_id.node_id"`), never a live
+timer counting down in the background.
 
 ---
 

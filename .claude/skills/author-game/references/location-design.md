@@ -143,7 +143,7 @@ Every locked schedule row falls into exactly one case:
 |---|---|---|
 | **A — private place, the meeting unlocks it** | The locked location *is* the NPC's private space (his apartment); the player meets them at an **open** on-ramp, and that beat sets the unlock flag. | **OK.** Keep the locked row; the unlock beat sets the flag. Do **not** separately flag-gate the hub — the door already gates it (double-gating is the bug). |
 | **B — a deeper room of an already-reachable NPC** | A secondary room the NPC routes into (his bedroom off the shared flat); they're meetable elsewhere meanwhile. | **Acceptable only if all three hold:** (1) the lock is **legible** — visible-but-blocked, reads as a closed door, not a disappearance; (2) **co-gated** (the door flag *is* the flag that gates the player's access to that window → zero dead window) **or off-hours + bracketing presence** (a later flag, but the window sits in hours the player doesn't routinely share AND the NPC has open-location presence bracketing it); (3) the locked row is **not** the NPC's only/primary presence. |
-| **C — reachable ONLY via a locked location** | The NPC is *only ever* at locked location(s), **or** the unlock flag has no reachable setter — incl. chicken-and-egg: the door is gated on a flag only settable behind the door. | **The bug — unreachable NPC.** Fix: open an on-ramp at a reachable OPEN location with a reachable flag-setter, or start the location unlocked and gate the *canvas/choices* instead of the door. |
+| **C — reachable ONLY via a locked location** | The NPC is *only ever* at locked location(s), **or** the unlock flag has no reachable setter — incl. chicken-and-egg: the door is gated on a flag only settable behind the door — **or the resource variant: a toll payable only in currency earnable *past* the toll** (floor-not-block it, §5). | **The bug — unreachable NPC.** Fix: open an on-ramp at a reachable OPEN location with a reachable flag-setter, or start the location unlocked and gate the *canvas/choices* instead of the door. |
 
 **The legible-lock principle.** A present-but-unreachable place must read as a *closed/locked door* (via
 `blocked_message`), distinct from **dead presence** (an NPC at a *reachable* location rendering nothing).
@@ -170,6 +170,11 @@ Four moves that make a map feel alive. Two are pure authoring; two are real engi
   between zones (the commute), not on every room. Empty = a free move. Pair it with a paid instant
   **fast-travel** (a walk/taxi/bus activity, unlocked once destinations are discovered) so friction
   never becomes tedium. Unaffordable destinations grey on the nav and bounce with the reason on click.
+  **The refill-path exception (floor-not-block):** if a costed bridge/action is the **only** route to where its
+  own resource refills or is earned, a *blocking* `costs` strands the player — so **floor the cost instead of
+  gating it** (let the effect deduct and clamp at 0; don't make affordability a gate on that one move). A toll
+  payable only in currency earnable *past* the toll needs a non-currency bootstrap (a fight/stealth/tool route)
+  on the first crossing. This is the resource variant of §4 Case C.
 - **Lock-as-prose** — a locked location (`entry_conditions` + `blocked_message`) now shows its
   `blocked_message` **inline on the greyed nav card**, not only on the blocked passage. So the lock
   reads as in-world prose at the point of choice ("The dining room's been dark since the staff went").

@@ -186,7 +186,7 @@ set inside a triggerless canvas — use a **hidden trait counter** and gate the 
   - `costs` is what makes NPC schedules BITE — if crossing town costs an hour, *where someone is at a given
     hour matters.* Put it on the **bridges** between zones, not on every room, and pair it with a paid
     fast-travel activity so friction never becomes tedium. An unaffordable destination greys on the nav and
-    bounces with the reason on click.
+    bounces with the reason on click. **Exception:** if a costed move is the ONLY path to where its resource refills, floor the cost (deduct + clamp at 0) instead — a blocking toll on the refill path strands the player (`location-design.md` §5).
   - `entry_conditions` **MUST carry `version = "1.0"`** or it fails OPEN (the door silently unlocks — the
     house-wide version-less-conditions trap). `blocked_message` renders inline on the greyed nav card AND on
     the blocked passage — one source, so they never disagree. (v2 only; the v1 generator is deprecated.)

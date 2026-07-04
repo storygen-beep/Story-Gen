@@ -14,6 +14,29 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 -->
 
 ## 2026-07-04
+- **Vesper-history gap sweep — 6 doctrine follow-ups (batch 8).** An exhaustive workflow sweep (`wf_84dd0761`:
+  231 raw candidate lessons mined across the 76-entry decisions_log / design_book / iteration-log / 10k-line
+  transcript, deduped, adversarially verified) confirmed the just-closed backlog covered the vast majority; **6
+  survived as genuinely-missed.** All doctrine-only, zero engine change (each composes primitives the skill
+  already documents):
+  - **Cascade beat-0 contract** (`engine-reference.md` + `beat-authoring.md` drift-check note) — beat[0] renders
+    into the node lead and its `advance_text` is silently ignored; visible clicks = beats−1; a beat-count
+    "dropped first beat" is the expected merge, not a bug (the Vesper turn-23 false-alarm). Kills a false-alarm
+    class.
+  - **Distinct-violation axis** (`trait-design.md` static-owner row) — differentiate stacked use-scenes by WHAT
+    each violates (attention/downtime/sanctuary/status), not only pose/diction. Follows on #15.
+  - **Rarity is the punch + thin-on-purpose** (`rts-flat-prose.md` + `lanes.md`; `content-framework.md §2F` +
+    `step-6-feedback.md`) — a scarce beat escalates by WEIGHT not FREQUENCY (the rising-frequency curve is for
+    repeatable ambients only); a *declared*-lean day is thin-on-purpose (say so, like the fail-state / systems
+    declarations), not an auto-fatten gap. **Corrects the #10 day-breadth audit.**
+  - **Floor-not-block refill path** (`location-design.md §5` + `§4 Case C` + `toml-gotchas.md`) — a costed move
+    that's the ONLY route to its own refill must floor the cost (deduct + clamp), not gate it; a blocking toll
+    strands the player. Kills a softlock class + removes a travel-friction contradiction.
+  - **No real-time timer** (`engine-reference.md`) — time is click-driven minutes only; a "lasts N minutes"
+    fiction is canvas-routed (`targetType="node"`), never a live countdown.
+  - **Reverse ledger hygiene** (`beat-authoring.md` resume + `ledger-schema.md`) — on resume, also prune orphan
+    flags, reconcile stale deferred notes, and advance a frozen `_active_beat`.
+  Dropped a phantom `content-framework §G` cross-ref the verify agent mis-cited (that section doesn't exist).
 - **#15 + #16 the "who climbs?" axis (static-owner NPC + still-point player)** — the skill taught exactly ONE
   progression model: the player climbs a corruption ladder + each NPC climbs their own odometer on top. The
   arc-shape table (`trait-design.md:35-41`) had 5 rows, ALL climbs — no row for a static/already-at-ceiling owner

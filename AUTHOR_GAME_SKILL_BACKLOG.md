@@ -18,6 +18,12 @@ still document) · `process` (how Claude works) · `one-off` (author slipped; sk
 
 ## Progress log (newest first)
 
+- **2026-07-04 — ✅ Vesper-history gap sweep → 6 doctrine follow-ups (batch 8).** An exhaustive workflow sweep
+  (`wf_84dd0761`; 231 raw candidates → adversarially verified) confirmed the backlog covered the rest; 6
+  genuinely-missed shipped: cascade beat-0 contract · distinct-violation axis (follows #15) ·
+  rarity=weight-not-frequency + thin-on-purpose (**corrects #10**) · floor-not-block refill path ·
+  no-real-time-timer · reverse ledger-hygiene. 12 edits across 10 reference files; doctrine-only, zero engine.
+  Dropped a phantom `§G` cross-ref. Uncommitted.
 - **2026-07-04 — ✅ #15 + #16 done (final pair): the "who climbs?" axis.** Named 2 first-class shapes the skill
   had no row for — the static/already-at-ceiling OWNER NPC (#15: arc-shape row + lane-budget row) and the
   still-point/infiltration PLAYER (#16: the "Who climbs?" question at `content-framework.md §1B` + the double-lock

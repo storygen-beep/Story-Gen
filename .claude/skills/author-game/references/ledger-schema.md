@@ -102,4 +102,7 @@ but the alias removes all risk). `schema_version` stays **2** — these are addi
 same turn you author it). **Drift** = any `validated`/`authored` beat whose `produced_canvas_ids`
 are missing from the merged TOML; the skill spot-checks this on resume — the real per-beat safety
 net is `package_from_toml` (schema + flag-chain + broken-reference validation; `merge_toml_phases
---validate` only syntax-parses the merged file).
+--validate` only syntax-parses the merged file). **Reverse hygiene (on resume):** the drift check is
+one-directional (ledger→TOML); also **prune orphan flags** (set, read by no condition/quest `when`),
+**reconcile** `deferred`/`next_up` notes contradicted by since-shipped content, and **advance a frozen
+`_active_beat`** — see `beat-authoring.md` "Resume & reconcile".

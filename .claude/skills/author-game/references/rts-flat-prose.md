@@ -39,6 +39,12 @@ A Lane 2 ambient authored at Tier-3 costs the same density EACH time the player 
 read the language feels performative. A capstone fires ONCE — the prose can spend. That asymmetry is the
 whole reason for the split.
 
+**Rarity is its own punch — escalate a scarce beat by WEIGHT, not FREQUENCY.** When a beat lands *because* it's
+rare (a once-only gut-punch, an involuntary crack, a glitch peak), resist giving it a recurring/ambient version —
+recurrence dilutes the scarcity that was the whole effect. The rising-frequency saturation curve (`lanes.md`
+Lane 2/3) is for **repeatable ambients**; it does NOT apply to a scripted rare beat. Make the *next* one hit
+harder (weight/depth), don't make it happen more often. (Cf. `kink-ceilings.md` — repetition erodes intensity.)
+
 ---
 
 ## §2 — The 8 mechanical prose rules (Lane 1/2/3 RTS-flat)
