@@ -29,6 +29,12 @@ These were the load-bearing parts of the old Step 5; they survive as framework c
   exists). Trace the F1 cross-reads: **core loop closed** · **every core NPC placed** (no island) · **DAG, no
   cycle** (every arc cold-start-reachable — D2) · **no arc ENTRY gated** (D1) · **every cross-gate telegraphed**
   naming the gating arc (D3). **A cycle is a deadlock the build won't catch.**
+- **Day-breadth (§2F).** Walk a representative mid-game day and count the DISTINCT threads the player can choose
+  that aren't the main-NPC grind (solo self-care · exhibition · a capability/skill ladder · a second economy · an
+  exploration crawl · ambient walk-ins). A day that is **one chore + one NPC** is a thin-day gap **even when each
+  is fused** — it passes every per-item row below, so it's caught only here. Bites even when §2E is vacuous (an
+  inverted protagonist with no feeder economy still needs a day worth living). Floor ~2–3 live threads; fix with
+  the day-depth menu (`references/system-patterns.md` §7).
 
 ## Surfacing & fixing gaps (the navigation)
 **Propose the gaps as choices** (`run-mode.md` → "Navigation at junctions"): which gap to fix first — **Mode A**

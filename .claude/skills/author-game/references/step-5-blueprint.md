@@ -60,7 +60,9 @@ Take Step 4's player story and decide its structure. Output: a **`### Player blu
   from the menu (`trait-design.md` "Slow-burn pacing"); never leave one free + instant.
 - **Economy made real** — the income-ladder values, the wanted sinks, the key-item costs + what each unlocks,
   the pressure clock **and whether it bites** (the fail-state — wire it or write the one-line "no failure").
-- **Seed the feeder count** (§2E) — start the band-by-band tally; close it at the end of Pass 2.
+- **Seed the feeder count** (§2E) — start the band-by-band tally; close it at the end of Pass 2. **+ the
+  day-breadth count** (§2F) — list the distinct non-grind daily threads (solo / exhibition / capability / economy
+  / exploration); confirm ≥2–3 are live at a representative day, not just the main grind.
 - **Ledger:** `blueprint.player = "done"`.
 
 ## Pass 2 — each NPC: the descent list, lane-tagged, gated, placed (§3 mechanism) — ONE at a time

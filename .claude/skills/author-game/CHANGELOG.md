@@ -14,6 +14,21 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 -->
 
 ## 2026-07-04
+- **#10 the day-breadth audit (`content-framework.md` §2F "walk a representative day")** — every content audit in
+  the skill counted feeder DEPTH vertically (§2E, per corruption band) or checked each chore's fusion QUALITY;
+  nothing counted HORIZONTALLY how many distinct non-grind threads a representative day offers, so a lean
+  single-thread game (one NPC grind + one fused chore) passed every Step-6 row green. Worse: when a game has NO
+  player-feeder economy (Vesper's inverted, already-degraded protagonist) §2E passes VACUOUSLY — exactly how
+  Vesper shipped a thin day ("grind Renner + serve Mercer"): the feeder axis was zero by design
+  (`decisions_log[27,28]`), Step 6 graded GO (`[33]`), and the emptiness surfaced only in play → the whole
+  post-ship day-depth rescue (`[59]`–`[63]`, beats 0016–0020). Added **§2F** (the horizontal sibling to §2E):
+  walk a representative mid-game day, enumerate every distinct non-grind thread against a 7-category checklist
+  (solo self-care / exhibition / capability ladder / second economy / exploration / ambient walk-ins / the main
+  grind), tagged feeder-vs-texture, floor ~2–3 live threads; **bites even when §2E is vacuous.** Wired:
+  `step-5-blueprint.md` (seed the day-breadth count beside the feeder count), `step-6-feedback.md` (a new
+  whole-game-check row — day-breadth is caught only here, not by the per-item rows), `system-patterns.md` §7 (the
+  day-depth recipe now points back to §2F as its review-time trigger). Grounded in Vesper's decisions_log + the
+  RTS content-design model (3 research agents). Doctrine only, zero engine change.
 - **#9 grind-tuning / rung-pacing throttle menu** — a repeatable escalation rung with no throttle trivializes an
   arc (Vesper's Renner climb broke on first play; it collapsed the instant its single daily-cap flag was removed,
   `decisions_log[53]`→`[58]`). The skill taught the PRINCIPLE (`rts-design-philosophy.md` P8) and `§5E` even asked

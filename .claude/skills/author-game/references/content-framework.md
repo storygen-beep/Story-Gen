@@ -109,6 +109,30 @@ she climbs, and the anti-starvation audit. Authored BEFORE the NPCs so supply is
 - Read each feeder once more: does every paying or escalating thing she does answer to something she WANTS right now — or is there a row whose only reason to exist is to make a number go up?
 - **Roster each solo activity as a host (the fused unit).** For every repeated solo activity — self-care (shower/bath/sleep/eat), exhibition, earning — name three things: the restore/want it serves, the player-lewd solo branch it carries (the feeder), and which NPC(s) walk in on it (the Lane 3 hijack). A self-care chore at a shared location that hooks into **nothing** (bare restore, no feeder, no walk-in) is the dead-bath gap — flag it here. The chore, the feeder, and the walk-in are ONE canvas (`references/lanes.md` Lane 3), so design them together, not as separate passes.
 
+**2F — The day-breadth audit (walk a representative day)** *(the horizontal sibling to §2E's vertical count)*
+- §2E counts feeder DEPTH *down one ladder*; this counts BREADTH *across a day*. Pick a **representative mid-game
+  day** (not day one, not the frontier) and enumerate every **distinct thing the player can choose to do that is
+  NOT advancing the single main-NPC grind.** If that list is essentially one thread (grind the gold NPC + a
+  chore), the day is thin — **even when each thread is well-built.** Floor: **~2–3 live non-grind threads**,
+  scaled to game size.
+- **The category checklist** — which are LIVE on a representative day? Tag each **feeder** (raises the player's own
+  odometer) vs **texture** (world / progression). *(You won't hit all seven; the point is the day isn't ONLY the
+  last one.)*
+  1. **Solo self-care** (shower/bath/sleep/eat as the fused unit) — *feeder* · 2. **Exhibition / being-seen** —
+  *feeder* · 3. **A capability / skill ladder** (a trained trait, a rank) — *texture* · 4. **A secondary-economy
+  job** (earning-is-corrupting; a *second* earning option, not one shift-button reskinned) — *feeder + texture* ·
+  5. **Exploration / a crawl** (new places, a depth thread) — *texture* · 6. **Ambient events / NPC walk-ins**
+  (Lane 2 atmosphere; the Lane 3 hijack miss-branch) — *texture + feeder* · 7. **the main NPC grind(s)** — the
+  DEMAND spine, the one thread the day must not be *only*.
+- **This audit bites even when §2E doesn't.** A game with **no player-corruption feeder economy** (an inverted or
+  already-degraded protagonist) makes §2E *vacuous* — nothing to count — yet the day still needs breadth (texture,
+  capability, exploration, a second economy). Vesper shipped a thin day exactly this way: the feeder axis was zero
+  by design, §2E passed vacuously, Step 6 graded GO, and "grind Renner + serve Mercer" surfaced only *in play* →
+  the whole post-ship day-depth rescue. §2F is the check that catches it at design time.
+- **Fix a thin day** with the day-depth menu (`references/system-patterns.md` §7): a solo feeder, a capability
+  drill, a second economy, an exploration crawl — each shipped *with its reward*, never a bar with no content
+  behind it. §2D's "other ladders" feed the texture threads.
+
 ---
 
 ## §3 — THEM: the people (Step 4 · Pass 2 — one NPC at a time)

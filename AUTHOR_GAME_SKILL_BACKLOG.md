@@ -18,6 +18,10 @@ still document) · `process` (how Claude works) · `one-off` (author slipped; sk
 
 ## Progress log (newest first)
 
+- **2026-07-04 — ✅ #10 done (3rd big-rock): the day-breadth audit.** `content-framework.md` §2F "walk a
+  representative day" — a horizontal count of distinct non-grind daily threads (7-category checklist,
+  feeder/texture, floor ~2–3) that bites even when §2E is vacuous (Vesper's inverted no-feeder protagonist).
+  Wired into Step 5 (seed the count), Step 6 (whole-game row), and system-patterns §7. Uncommitted.
 - **2026-07-04 — ✅ #9 done (2nd big-rock): grind-tuning throttle menu.** `trait-design.md` "Slow-burn pacing"
   now teaches all 4 throttle levers with trade-offs (threshold spacing / window-sized time cost / counted daily
   cap / conditional energy cost) + "combine, don't rely on one." Wired into Step 5, P8, and a §5E bridge row;
@@ -191,7 +195,7 @@ Three failure shapes in the Vesper build, one root each:
 - **Fix:** replace the daily-cap-only framing with an explicit **throttle menu** (daily-cap flag / resource cost
   per rung / threshold spacing) + their trade-offs.
 
-### 10. Day-BREADTH audit — "walk a representative day" ⬜
+### 10. Day-BREADTH audit — "walk a representative day" ✅ DONE (2026-07-04)
 `P1 · effort M · skill · content-framework.md`
 - Vesper's lean player thread made the vertical feeder-depth audit (§2E) *vacuously* pass, and Step 6 graded the
   ship "GO" — the day was "grind Renner + serve Mercer," and the thinness only surfaced when LO played it, forcing

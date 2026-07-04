@@ -68,7 +68,9 @@ the menu grows.
   8th. A loadout is a **trait**, not a slot. → `references/trait-catalog.md`.
 
 ## 7. Day-depth — *a non-arc daily layer*
-- **When:** the day feels thin — "there's nothing to do but grind the main NPC."
+- **When:** the day feels thin — "there's nothing to do but grind the main NPC." (The **§2F day-breadth audit**,
+  `references/content-framework.md`, is the review-time check that surfaces this *before* ship, not just in play;
+  this section is the recipe to fix what it finds.)
 - **The shape:** **parallel things to DO** each day that aren't the main climb — a solo activity, a capability
   drill (#2), a second-economy job (#4), an exploration crawl (#3) — each either a real **feeder** (raises a
   player stat toward content) or a **texture beat**. This is the "walk a representative day" breadth the day
