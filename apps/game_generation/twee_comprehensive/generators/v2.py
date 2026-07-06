@@ -1125,6 +1125,46 @@ class TweeComprehensiveGeneratorV2:
         self._auto_emit_decay_warning_sidebar_items()
         sidebar_items_json = json.dumps(self.sidebar_items)
 
+        # Player-portrait config (state-reactive sidebar image, opt-in). Images are
+        # prefixed with video_path and tracked as assets for copying (like clothing at
+        # ~1013); getPlayerPortrait() returns the ready path and the widget uses it directly.
+        pp_settings = (self.project.metadata or {}).get("player_portrait", {})
+        self.player_portrait_enabled = bool(pp_settings.get("enabled", False))
+        player_portrait_json = "null"
+        if self.player_portrait_enabled:
+            pp_prefix = (self.video_path or "./media").rstrip("/")
+            pp_cfg = dict(pp_settings)
+            for _pk in ("naked_image", "topless_image", "bottomless_image",
+                        "underwear_image", "default_image"):
+                _pv = pp_cfg.get(_pk, "")
+                if _pv:
+                    self.used_assets['external_images'].add(_pv)
+                    pp_cfg[_pk] = f"{pp_prefix}/{_pv}"
+            _pp_outfits = []
+            for _po in (pp_settings.get("outfits") or []):
+                _pimg = _po.get("image", "")
+                if _pimg:
+                    self.used_assets['external_images'].add(_pimg)
+                    _pimg = f"{pp_prefix}/{_pimg}"
+                _pp_outfits.append({"image": _pimg, "when": _po.get("when", {})})
+            pp_cfg["outfits"] = _pp_outfits
+            # Also track Preg-variant files (dressed images get the suffix inserted at
+            # runtime by getPlayerPortrait). Only track ones that actually exist in the
+            # media folder so a game without Preg art doesn't log spurious copy failures.
+            if pp_settings.get("pregnancy_trait"):
+                _suffix = pp_settings.get("pregnancy_suffix", "Preg") or "Preg"
+                _dressed_raw = [pp_settings.get("default_image", "")] + [
+                    _po.get("image", "") for _po in (pp_settings.get("outfits") or [])
+                ]
+                for _draw in _dressed_raw:
+                    if not _draw:
+                        continue
+                    _dot = _draw.rfind(".")
+                    _preg_raw = (_draw[:_dot] + _suffix + _draw[_dot:]) if _dot > -1 else (_draw + _suffix)
+                    if _preg_raw in self.video_files:
+                        self.used_assets['external_images'].add(_preg_raw)
+            player_portrait_json = json.dumps(pp_cfg)
+
         # Phone system data
         phone_settings = (self.project.metadata or {}).get("phone_settings", {})
         self.phone_enabled = phone_settings.get("enabled", False)
@@ -1404,6 +1444,80 @@ setup.getWornTypes = function() {
         }
     }
     return types;
+};
+
+// State-reactive player portrait (opt-in). getUndressLevel() derives the undress
+// state from equipped slots (null when clothing is off so the resolver skips the
+// undress branch). getPlayerPortrait() resolves ONE ready-prefixed image path:
+// undress-override -> outfit rule (dominant-slot type + corruption LEVEL/flag) ->
+// Preg suffix (dressed images only). Returns '' when nothing resolves.
+setup.getUndressLevel = function() {
+    if (!setup.clothing_enabled) return null;
+    var eq = ((State.variables.player || {}).equipped) || {};
+    var hasTop = !!(eq.top || eq.dress);
+    var hasBottom = !!(eq.bottom || eq.dress);
+    var hasUnder = !!(eq.bra || eq.underwear);
+    if (!hasTop && !hasBottom) return hasUnder ? 'underwear' : 'naked';
+    if (!hasTop && hasBottom) return 'topless';
+    if (hasTop && !hasBottom) return 'bottomless';
+    return 'dressed';
+};
+
+setup.getPlayerPortrait = function() {
+    var cfg = setup.player_portrait;
+    if (!setup.player_portrait_enabled || !cfg) return '';
+    var sv = State.variables;
+    var img = '';
+    var fromUndress = false;
+    // 1. undress override (only when clothing enabled; getUndressLevel is null otherwise)
+    var u = setup.getUndressLevel();
+    if (u === 'naked' && cfg.naked_image) { img = cfg.naked_image; fromUndress = true; }
+    else if (u === 'underwear' && cfg.underwear_image) { img = cfg.underwear_image; fromUndress = true; }
+    else if (u === 'topless' && cfg.topless_image) { img = cfg.topless_image; fromUndress = true; }
+    else if (u === 'bottomless' && cfg.bottomless_image) { img = cfg.bottomless_image; fromUndress = true; }
+    // 2. dressed / clothing-off -> outfit rules, dominant-slot keyed (dress || top || bottom)
+    if (!img) {
+        var domType = '';
+        if (setup.clothing_enabled) {
+            var eq = ((sv.player || {}).equipped) || {};
+            var domId = eq.dress || eq.top || eq.bottom;
+            if (domId) {
+                var cdata = setup.clothing_data || [];
+                for (var i = 0; i < cdata.length; i++) {
+                    if (cdata[i].id === domId) { domType = cdata[i].type || ''; break; }
+                }
+            }
+        }
+        var lvl = setup.getCorruptionLevel();
+        var flags = sv.flags || {};
+        var outfits = cfg.outfits || [];
+        for (var j = 0; j < outfits.length; j++) {
+            var w = outfits[j].when || {};
+            var ok = true;
+            if (w.worn_type && w.worn_type !== domType) ok = false;
+            if (ok && w.corruption) {
+                var op = w.corruption.operator || 'gte';
+                var val = w.corruption.value || 0;
+                if (op === 'gte') ok = (lvl >= val);
+                else if (op === 'lt') ok = (lvl < val);
+                else if (op === 'lte') ok = (lvl <= val);
+                else if (op === 'gt') ok = (lvl > val);
+                else if (op === 'eq') ok = (lvl === val);
+            }
+            if (ok && w.flag && !flags[w.flag]) ok = false;
+            if (ok) { img = outfits[j].image; break; }
+        }
+        if (!img) img = cfg.default_image || '';
+    }
+    // 3. pregnancy suffix — dressed images only (undress overrides skip it)
+    if (img && !fromUndress && cfg.pregnancy_trait) {
+        var preg = ((sv.player || {}).core_traits || {})[cfg.pregnancy_trait];
+        if (preg) {
+            var dot = img.lastIndexOf('.');
+            if (dot > -1) img = img.slice(0, dot) + (cfg.pregnancy_suffix || 'Preg') + img.slice(dot);
+        }
+    }
+    return img || '';
 };
 
 setup.isSlotDisabled = function(slotName) {
@@ -2834,6 +2948,8 @@ setup.rent_enabled = {"true" if self.rent_enabled else "false"};
 {f'setup.rent_eviction_mode = "{self.rent_eviction_mode}";' if self.rent_enabled else ''}
 {f'setup.rent_eviction_flag = "{self.rent_eviction_flag}";' if self.rent_enabled else ''}
 setup.sidebar_items = {sidebar_items_json};
+setup.player_portrait_enabled = {"true" if self.player_portrait_enabled else "false"};
+setup.player_portrait = {player_portrait_json};
 setup.passes = {json.dumps(self.passes)};
 setup.passes_map = {{}};
 for (var _pi = 0; _pi < setup.passes.length; _pi++) {{
@@ -14730,9 +14846,11 @@ $(document).on(':passagestart', function(ev) {
 
         # StoryCaption with optional dev indicator and missing media button
         phone_btn_line = "\n<<phoneButton>>" if self.phone_enabled else ""
+        # State-reactive player portrait — mounts TOP-MOST (first body line), opt-in.
+        portrait_line = "<<playerPortrait>>\n" if self.player_portrait_enabled else ""
         if self.dev_mode:
             story_caption = f""":: StoryCaption
-<<devIndicator>>
+{portrait_line}<<devIndicator>>
 <<reviewButton>>
 <<missingMediaButton>>
 <<timeDisplay>>
@@ -14748,7 +14866,7 @@ $(document).on(':passagestart', function(ev) {
 <<patreonButton>>"""
         else:
             story_caption = f""":: StoryCaption
-<<missingMediaButton>>
+{portrait_line}<<missingMediaButton>>
 <<timeDisplay>>
 <<sidebarItems>>{phone_btn_line}
 <<activeModifiers>>
@@ -15488,6 +15606,23 @@ if (clothingMsg) {
 
 """
 
+        # State-reactive player portrait widget (opt-in). Renders one image chosen by
+        # setup.getPlayerPortrait(); the temp-var @src="_pimg" directive interpolates the
+        # ready-prefixed path (NOT src="@_pimg"). Missing file hides via onerror.
+        player_portrait_widget = ""
+        if self.player_portrait_enabled:
+            player_portrait_widget = """
+<<widget "playerPortrait">>
+<<if setup.player_portrait_enabled and setup.player_portrait>>
+<<set _pimg to setup.getPlayerPortrait()>>
+<<if _pimg>>
+<div class="sidebar-player-portrait"><img @src="_pimg" @alt="$player.name" onerror="this.style.display='none';"></div>
+<</if>>
+<</if>>
+<</widget>>
+
+"""
+
         active_modifiers_widget = """
 <<widget "activeModifiers">>
 <<if $game_state && $game_state.active_modifiers && Object.keys($game_state.active_modifiers).length gt 0>>
@@ -15523,7 +15658,7 @@ if (clothingMsg) {
 
 """
 
-        return info_nav_script + dev_script_passage + time_widgets_start + dev_indicator + review_button + time_display_widget + sidebar_items_widget + phone_widget + active_modifiers_widget + counter_widgets + player_traits_widget + npc_traits_widget + """
+        return info_nav_script + dev_script_passage + time_widgets_start + dev_indicator + review_button + time_display_widget + sidebar_items_widget + phone_widget + player_portrait_widget + active_modifiers_widget + counter_widgets + player_traits_widget + npc_traits_widget + """
 
 <<widget "playerFlags">>
 <div id="flags-widget" class="traits-display">

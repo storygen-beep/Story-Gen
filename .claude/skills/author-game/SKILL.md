@@ -134,6 +134,11 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
    migration backfill carries them into old saves) and rename display names freely, but **never** change an
    `id`, a live flag/trait key, a stat's scale/thresholds, or the title — that orphans returning players'
    saves. Full rules + pre-update checklist: `references/save-safety.md`.
+10. **State-reactive player portrait** (`references/player-portrait.md`, shipped 2026-07-06): the OPT-IN
+   top-level `[player_portrait]` block emits a TOP-MOST sidebar `<img>` (`setup.getPlayerPortrait()`) that
+   swaps by undress / dominant-outfit-`type` / corruption-**LEVEL (0–4, not points)** / pregnancy-suffix.
+   Undress overrides need `clothing_enabled`; outfit rules are first-match on `dress||top||bottom`. Off
+   unless the block is authored — the reactive extension of the static `$player.portrait` (customization).
 
 ## Knowledge base (read what you need, when you need it)
 **Per-step references** (one per `pipeline_phase`): `step-0-1-seed.md` · `step-2-toplevel.md` ·
@@ -170,9 +175,9 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
   per-NPC sections), the two ladder shapes (flag-milestone chain vs stepped trait-band ladder), the three render
   frames + the Frame-3-blank trap, the end-of-content card, and the sidebar-`next` == Quests-page parity. Design
   the page as one thing at Step 5; author each card at Step 7.
-- `references/systems.md` — the optional-systems dispatch hub (clothing/rent/phone/customization + HUD),
-  each with its TOML home, **full in-skill reference** (`clothing.md` · `rent.md` · `phone.md` ·
-  `customization.md` · `hud.md`), and signature trap.
+- `references/systems.md` — the optional-systems dispatch hub (clothing/rent/phone/customization/player-portrait
+  + HUD), each with its TOML home, **full in-skill reference** (`clothing.md` · `rent.md` · `phone.md` ·
+  `customization.md` · `player-portrait.md` · `hud.md`), and signature trap.
 - `references/system-patterns.md` — the **grow-a-system menu**: reach-for-it recipes for the AUTHORED
   subsystems a game grows into as you iterate (disguise/cover · capability track · crawl · second economy ·
   reload upkeep · loadout · day-depth). Distinct from `systems.md` (the ENGINE toggles) — these you do NOT pick

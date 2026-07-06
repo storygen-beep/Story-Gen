@@ -214,8 +214,8 @@ paper; each closes a real blind spot.
   live system once, the why-locked surfaces, the win/fail contract — and the hard-gate Step-6 rubric live in
   `references/onboarding.md`.)*
 - **The systems in play (§1E).** Declare which optional **engine** systems this game switches **ON** (phone /
-  rent-debt clock / clothing wardrobe / customization) and which it leaves **OFF** — each named in or out, so
-  none is half-wired by accident (`references/systems.md`). *Mind the split:* those coarse engine toggles are
+  rent-debt clock / clothing wardrobe / customization / player portrait) and which it leaves **OFF** — each
+  named in or out, so none is half-wired by accident (`references/systems.md`). *Mind the split:* those coarse engine toggles are
   worth settling now, but the finer **authored** subsystems (a disguise, a skill track, a second economy, a
   reload loop, day-depth) are **not** all decided here — most EMERGE once the game is concrete and you've played
   it and felt a gap. Name any you already know you want; **leave the rest to grow in through play** — don't

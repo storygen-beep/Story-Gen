@@ -347,6 +347,8 @@ class GameTemplate:
     # doc 45 G9 — economy: fast jobs + bank
     fast_jobs: List["TemplateFastJob"] = field(default_factory=list)
     bank: Optional["TemplateBank"] = None
+    # State-reactive player portrait (opt-in) — sidebar image reacts to outfit/undress/corruption/pregnancy
+    player_portrait: Optional["TemplatePlayerPortrait"] = None
     # Consumable items (groceries, art supplies, etc.)
     items: List[TemplateItem] = field(default_factory=list)
     # Visual theme
@@ -575,6 +577,31 @@ class TemplateBank:
     enabled: bool = False
     interest_rate: float = 0.01
     money_trait: str = "money"
+
+
+@dataclass
+class TemplatePlayerPortraitOutfit:
+    """One outfit rule for the state-reactive portrait: `image` shown when `when` matches.
+    `when` = { worn_type?, corruption?: {operator, value(LEVEL 0-4)}, flag? } — first-match wins."""
+    image: str = ""
+    when: Dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass
+class TemplatePlayerPortrait:
+    """State-reactive sidebar portrait (opt-in). setup.getPlayerPortrait() resolves in priority:
+    undress-override (naked/topless/bottomless/underwear, only when clothing_enabled) ->
+    outfit rule (dominant-slot type + corruption/flag) -> Preg suffix. Off unless `[player_portrait]`
+    with enabled=true is authored."""
+    enabled: bool = False
+    naked_image: str = ""
+    topless_image: str = ""
+    bottomless_image: str = ""
+    underwear_image: str = ""
+    default_image: str = ""
+    pregnancy_trait: str = ""
+    pregnancy_suffix: str = "Preg"
+    outfits: List["TemplatePlayerPortraitOutfit"] = field(default_factory=list)
 
 
 @dataclass
@@ -2353,6 +2380,32 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
             money_trait=_require_str(bank_raw, "money_trait", "money") or "money",
         )
 
+    # ── Player portrait (state-reactive sidebar image, opt-in) ──
+    player_portrait_obj: Optional[TemplatePlayerPortrait] = None
+    pp_raw = data.get("player_portrait")
+    if isinstance(pp_raw, dict) and _require_bool(pp_raw, "enabled", True):
+        pp_outfits: List[TemplatePlayerPortraitOutfit] = []
+        for od in (pp_raw.get("outfits") or []):
+            if not isinstance(od, dict):
+                continue
+            pp_outfits.append(
+                TemplatePlayerPortraitOutfit(
+                    image=_require_str(od, "image", ""),
+                    when=od.get("when") if isinstance(od.get("when"), dict) else {},
+                )
+            )
+        player_portrait_obj = TemplatePlayerPortrait(
+            enabled=True,
+            naked_image=_require_str(pp_raw, "naked_image", ""),
+            topless_image=_require_str(pp_raw, "topless_image", ""),
+            bottomless_image=_require_str(pp_raw, "bottomless_image", ""),
+            underwear_image=_require_str(pp_raw, "underwear_image", ""),
+            default_image=_require_str(pp_raw, "default_image", ""),
+            pregnancy_trait=_require_str(pp_raw, "pregnancy_trait", ""),
+            pregnancy_suffix=_require_str(pp_raw, "pregnancy_suffix", "Preg") or "Preg",
+            outfits=pp_outfits,
+        )
+
     # ── Items (consumable inventory) ──
     items_raw = data.get("items", []) or []
     items: List[TemplateItem] = []
@@ -2690,6 +2743,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         corruption_tiers=corruption_tiers_obj,
         fast_jobs=fast_jobs,
         bank=bank_obj,
+        player_portrait=player_portrait_obj,
         trait_labels=trait_labels,
         flag_labels=flag_labels,
         tips_page=tips_page_obj,
@@ -2875,6 +2929,29 @@ def validate(template: GameTemplate) -> List[str]:
         ci.type for ci in (template.clothing_items or []) if ci.type
     }
     _validate_warnings: List[str] = []
+
+    # Player-portrait <-> clothing type-coverage drift (WARN, not block — mirrors clothing's own
+    # worn_type typo-warn). If the portrait is on with outfit rules, a clothing `type` the player
+    # can wear that has NO matching rule shows default_image (a silent wrong-picture as the wardrobe
+    # grows); and a rule whose `worn_type` no clothing item carries is a dead rule.
+    if (template.player_portrait is not None and template.player_portrait.enabled
+            and template.clothing_enabled):
+        _pp_rule_types = {
+            (o.when or {}).get("worn_type")
+            for o in (template.player_portrait.outfits or [])
+            if isinstance(o.when, dict) and o.when.get("worn_type")
+        }
+        for _ct in sorted(_known_clothing_types):
+            if _ct not in _pp_rule_types:
+                _validate_warnings.append(
+                    f"player_portrait: clothing type '{_ct}' has no outfit rule — wearing it falls "
+                    f"back to default_image (add a [[player_portrait.outfits]] with when.worn_type = '{_ct}')"
+                )
+        for _rt in sorted(t for t in _pp_rule_types if t not in _known_clothing_types):
+            _validate_warnings.append(
+                f"player_portrait: outfit rule worn_type '{_rt}' matches no [[clothing]] item's type "
+                f"— dead rule (fix the tag or remove it)"
+            )
 
     def _check_cond_block(cond_block: Any, ctx: str) -> None:
         """Closure helper — apply both validators to one conditions block."""
@@ -4278,6 +4355,21 @@ def validate(template: GameTemplate) -> List[str]:
                 errors.append(f"duplicate clothing id: {ci.id}")
             seen_clothing_ids.add(ci.id)
 
+    # ===== Player-portrait validation (optional) =====
+    if template.player_portrait is not None:
+        pp = template.player_portrait
+        # At least one image must resolve or the sidebar renders nothing but the onerror SVG.
+        if not (pp.default_image or pp.naked_image or pp.outfits):
+            errors.append(
+                "player_portrait is enabled but declares no images "
+                "(need default_image and/or outfits and/or the undress-override images)"
+            )
+        for oi, o in enumerate(pp.outfits):
+            if not o.image:
+                errors.append(f"player_portrait.outfits[{oi}].image is required")
+        # Soft: unknown worn_type / trait refs are not blocked — the resolver falls through to
+        # default_image, matching clothing's warn-not-block policy for the `type` tag (Doc 72).
+
     # ===== Passes validation =====
     seen_pass_ids: Set[str] = set()
     for i, p in enumerate(template.passes):
@@ -5635,6 +5727,21 @@ def _assemble_project_metadata(project, template):
             "enabled": template.bank.enabled,
             "interest_rate": template.bank.interest_rate,
             "money_trait": template.bank.money_trait,
+        }
+    # Store player-portrait config (state-reactive sidebar image). Key == block name so
+    # v2.py's (metadata).get("player_portrait") round-trips (mirror bank, NOT phone_settings).
+    if template.player_portrait is not None:
+        pp = template.player_portrait
+        project.metadata["player_portrait"] = {
+            "enabled": pp.enabled,
+            "naked_image": pp.naked_image,
+            "topless_image": pp.topless_image,
+            "bottomless_image": pp.bottomless_image,
+            "underwear_image": pp.underwear_image,
+            "default_image": pp.default_image,
+            "pregnancy_trait": pp.pregnancy_trait,
+            "pregnancy_suffix": pp.pregnancy_suffix,
+            "outfits": [{"image": o.image, "when": o.when} for o in pp.outfits],
         }
     # Store quests if defined (doc 45 G4)
     if template.quests:

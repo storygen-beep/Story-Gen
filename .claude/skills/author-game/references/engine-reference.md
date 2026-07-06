@@ -396,6 +396,7 @@ reads as disabled **with no error** — a silent failure that has shipped dead s
 | **Clothing** | `clothing_enabled` in `[settings]` (+ `wardrobe_location`, `shop_location`) | `template_import.py:2241-2244` | `[[clothing]]` items; `[settings.clothing_requirements]` (`:2268`); per-location `clothing_rules` |
 | **Rent** | `enabled` in `[settings.rent]` | `:2399-2400` | `[settings.rent]`: `amount`/`due_day`/`collector_npc`/`grace_periods`/`start_after_flag`/`eviction_mode`/`eviction_flag`/`text` (`:2401-2408`) |
 | **Phone** | `enabled` in **top-level `[phone]`** (defaults `true` when the table is present) | `:2411-2415` | `[[phone.apps]]`, `[[phone.conversations]]`, `[[phone.posts]]`, … |
+| **Player portrait** | `enabled` in **top-level `[player_portrait]`** (state-reactive sidebar image) | `:2385` | `[[player_portrait.outfits]]` (`{image, when}`) + `naked_image`/`topless_image`/`bottomless_image`/`underwear_image`/`default_image` + `pregnancy_trait`/`pregnancy_suffix`. Resolves to ONE top-of-sidebar `<img>` via `setup.getPlayerPortrait()` (`v2.py:1466`) — undress from `setup.getUndressLevel()` (`v2.py:1454`, null when clothing off), outfit from the **dominant garment's `type`** (`equipped.dress\|\|top\|\|bottom`), corruption via **LEVEL 0-4** (`getCorruptionLevel`, NOT raw points), pregnancy via a `<suffix>` filename insert (dressed images only). Widget `<<playerPortrait>>` mounts TOP-MOST in StoryCaption (`v2.py:14850`); config emitted UNCONDITIONALLY as `setup.player_portrait` (`v2.py:2951`). Full model → `references/player-portrait.md`. |
 | **Time** | `[time]` (`enabled`/`starting_hour`/`starting_day`/`starting_week`) | `:1481` | — |
 
 *(code-vs-lore: there is **no** bare `phone_enabled`, `rent_enabled`, or `rent_amount` key — those forms are
@@ -409,6 +410,8 @@ clothing_enabled = true
 [settings.rent]       # rent
 enabled = true
 [phone]               # phone — top-level, NOT under [settings]
+enabled = true
+[player_portrait]     # state-reactive sidebar image — top-level, opt-in
 enabled = true
 ```
 

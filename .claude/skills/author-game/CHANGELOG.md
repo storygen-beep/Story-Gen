@@ -13,6 +13,34 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-07-06
+- **NEW `references/player-portrait.md` + wiring — state-reactive player portrait (ENGINE CHANGE, not
+  doctrine-only).** The RTS discrete-swap portrait is now a real OPT-IN engine feature: a top-level
+  `[player_portrait]` block emits a TOP-MOST sidebar `<img>` that swaps by undress / dominant-outfit-`type` /
+  corruption-LEVEL / pregnancy-suffix, resolved by `setup.getPlayerPortrait()`. The skill had ZERO doctrine
+  for it. `player-portrait.md` owns it: the four axes, the resolver priority + dominant-slot keying, the
+  `[player_portrait]` TOML, the traps, the budget, the enabling checklist — every claim cited `file:line`
+  against the CURRENT `v2.py`/`template_import.py` (implemented + verified this session).
+  - wired it in (`engine-reference.md` §7 new home-map row + `[player_portrait]` TOML example;
+    `systems.md` new dispatch row + intro count five→six/four→five + Seed yes/no bullet; `SKILL.md`
+    knowledge-base full-reference list + Engine-ground-truth item 10; `step-0-1-seed.md` item 4,
+    `step-2-toplevel.md` §8, `step-5-blueprint.md` §5F, `beat-authoring.md` system-homes + optional-system
+    trap; `customization.md` + `hud.md` cross-refs) — why: a reference is dead unless the steps cite it where
+    the author works; grep-verified every new pointer resolves to `player-portrait.md`.
+  - **Engine (not this skill, logged for the trail):** `v2.py` = `getUndressLevel`/`getPlayerPortrait`
+    helpers, unconditional `setup.player_portrait` emit, `<<playerPortrait>>` widget mounted first in
+    StoryCaption, Preg-variant asset tracking; `template_import.py` = `TemplatePlayerPortrait` dataclass +
+    `[player_portrait]` parse/validate/serialize (key mirrors `[bank]`). Verified: **live-play 9/9** in the
+    built SugarCube game (undress/outfit/corruption/pregnancy/dress-exclusivity + DOM render) + a
+    no-`[player_portrait]` game builds byte-identical (feature off). Signature trap taught: `corruption.value`
+    is a LEVEL 0–4, not raw points (`value = 30` never fires).
+- **player_portrait ↔ clothing sync-drift guard** (follow-up) — a new clothing `type` with no matching
+  portrait outfit rule silently showed `default_image` (drift as the wardrobe grows). Closed both ways:
+  doctrine (`player-portrait.md` §4 "keep `worn_type` coverage in sync" rule + §6 checklist reminder;
+  `clothing.md` §6 cross-warning at the `type`-tag site) + a build-time **WARNING** in `template_import.py`
+  (clothing type with no portrait rule → warn; a rule whose `worn_type` no clothing carries → dead-rule
+  warn). Verified: covered type = no warning; an uncovered `school` type = the warning fires.
+
 ## 2026-07-04
 - **Vesper-history gap sweep — 6 doctrine follow-ups (batch 8).** An exhaustive workflow sweep (`wf_84dd0761`:
   231 raw candidate lessons mined across the 76-entry decisions_log / design_book / iteration-log / 10k-line

@@ -246,6 +246,9 @@ in a `[[locations]] name` or `[[sidebar_items]] label`.
 
 ## Cross-references
 - **The one-line trap + system index:** `references/systems.md` (Customization row).
+- **The reactive extension of `$player.portrait`** — a top-of-sidebar image that re-renders every passage,
+  swapping by undress / outfit / corruption / pregnancy — vs the single static portrait that this file's
+  `image_select` + `sets_portrait` sets once at creation → `references/player-portrait.md`.
 - **Sibling opt-in systems** (same "declare-the-input, write-the-output" shape):
   `references/clothing.md`, `references/toml-gotchas.md` (rent `[settings.rent]`, phone
   `[phone]`, day-system shapes).

@@ -155,6 +155,10 @@ predicate at `v2.py:3766-3782`). `operator` is `eq` (member) or `neq` (not membe
   any string you like; the warning is a typo-catch, not a rule.
 - This is the "right costume for the scene" gate — orthogonal to corruption/beauty. Optional; most games
   don't need it.
+- **If the state-reactive player portrait is on, the same `type` tag also drives the portrait image.** Add
+  a new outfit `type` and you must add a matching `[[player_portrait.outfits]]` rule + image, or wearing it
+  silently shows the portrait's `default_image` (the importer warns at build). See
+  `references/player-portrait.md` §4.
 
 ---
 

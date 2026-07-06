@@ -62,9 +62,10 @@ technical:
    (Step 3) will derive the roles the cascade needs and reshape this list; here it's just names.
 3. **World map — the locations.** The places the game happens (the bar, the back room, the apartment, the
    docks). Creative geography only — no `is_container` / lock / schedule decisions (those are authoring).
-4. **Which systems exist — yes/no only.** Does the game use **phone** / **clothing** / **rent**? A pure
-   scope choice ("this game has a phone"). Not the wiring/TOML homes (those are authoring). Clothing is
-   worth flagging early since the **reactive world** (Step 2) rides it.
+4. **Which systems exist — yes/no only.** Does the game use **phone** / **clothing** / **rent** /
+   **player portrait** (a state-reactive sidebar image)? A pure scope choice ("this game has a phone").
+   Not the wiring/TOML homes (those are authoring). Clothing is worth flagging early since the
+   **reactive world** (Step 2) — and the player portrait's undress axis — ride it.
 
 There is **no scope question** — every game is the full game (slice was removed).
 

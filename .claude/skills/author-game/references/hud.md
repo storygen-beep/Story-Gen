@@ -238,3 +238,5 @@ before hiding a key that an `npc_panel` also reads.)*
   shape** → `references/toml-gotchas.md`.
 - **Lane 3 dispatcher + self-care hijack hosts the radar exists to support** → `references/lanes.md`.
 - **The HUD-always-on system row** → `references/systems.md`.
+- **The state-reactive player portrait** (the opt-in top-of-sidebar image that mounts ABOVE the HUD, swapping
+  by undress/outfit/corruption/pregnancy) → `references/player-portrait.md`.

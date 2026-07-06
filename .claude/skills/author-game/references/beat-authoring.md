@@ -231,12 +231,13 @@ Run with the repo venv active, in order; emit a PASS/FAIL line for each:
      activity (sleep restores energy; mirror it for hygiene etc.) — not optional polish.
    - **locked-location unlock contract** — any NPC at a locked location is meetable at an open on-ramp and
      the unlock flag has a reachable setter (Cases A/B/C).
-   - **system scoping** — three homes (`references/engine-reference.md`): clothing → `[settings]`, rent → `[settings.rent]`,
-     phone → **top-level `[phone]`**. Never bare keys under `[time]`.
-   - **optional-system doctrine** — if this beat wires clothing / rent / phone / customization, honor its
-     signature trap (`references/systems.md`): clothing's **two-part rule** (triggers public reactive events;
-     never gates an NPC arc spine); rent arms after an income flag; phone triggers can't use `day`/`time`/
-     `location`/`random`; customizable names emit as `@`-tokens, never hardcoded.
+   - **system scoping** — the homes (`references/engine-reference.md`): clothing → `[settings]`, rent → `[settings.rent]`,
+     phone + player-portrait → **top-level `[phone]` / `[player_portrait]`**. Never bare keys under `[time]`.
+   - **optional-system doctrine** — if this beat wires clothing / rent / phone / customization / player-portrait,
+     honor its signature trap (`references/systems.md`): clothing's **two-part rule** (triggers public reactive
+     events; never gates an NPC arc spine); rent arms after an income flag; phone triggers can't use `day`/`time`/
+     `location`/`random`; customizable names emit as `@`-tokens, never hardcoded; player-portrait `corruption` is a
+     **LEVEL 0–4, not points** + outfit rules are first-match on the dominant garment (`dress||top||bottom`).
    - **`is_container` swallow** — no activity/ambient/capstone attached to a container location.
    - **engine-set flag gating** — the flag-chain validator accepts a flag as gate-satisfiable only if
      *something* sets it (incl. engine setters: the rent `eviction_flag` and `[engine.daily_tick]`
