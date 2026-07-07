@@ -374,7 +374,9 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
     --journal-text-muted: #a89070;
     --journal-border: #3a2f20;
     --journal-accent: #8b7355;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* twine-user-script #1: "GameEngine" */
+}
+/* Custom CSS */
+#ui-bar #title { display: none !important; } #story-caption { margin-top: 0 !important; }</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* twine-user-script #1: "GameEngine" */
 // Initialize setup object and time management functions
 if (typeof setup === 'undefined') {
     window.setup = {};
@@ -399,7 +401,7 @@ setup.story_arc = {"version": "1.0", "chapters": [], "nodes": [], "groups": [], 
 setup.quests_cards = [{"text": "Mission 1: Renner. The quartermaster who outfitted the facility Cain burned \u2014 get inside his life and drain him for what he knows: what the gear built, where the trail goes. The company wants the rogue dead. She wants the way in. (His seduction tracks under Renner, below.)", "priority": 10, "when": [{"flag": "mission_1_active", "op": "is_true"}, {"flag": "renner_drained", "op": "is_false"}], "tip": "Wear the dock-work coveralls from your room before you go near him \u2014 out of cover he just sees a stranger and won't deal with her. Then find him at the Anchor."}, {"text": "Beneath his notice. Earn the cold boss's trust from the bottom \u2014 good hands get noticed.", "priority": 11, "when": [{"flag": "renner_hired", "op": "is_true"}, {"flag": "renner_office_open", "op": "is_false"}], "tip": "Coveralls on. Work the depot haul to push his relation. At 21 he waves you into the back office \u2014 that's where the seduction opens.", "npc_id": "npc_renner", "goals": [{"trait": "relation", "subject": "npc", "npc_id": "npc_renner", "op": "gte", "value": 21, "label": "Earn the office (relation)"}]}, {"text": "Get his eyes on you. He won't look up from the manifest \u2014 so make him. Tease him across the desk.", "priority": 12, "when": [{"flag": "renner_office_open", "op": "is_true"}, {"flag": "renner_drained", "op": "is_false"}, {"trait": "corruption", "subject": "npc", "npc_id": "npc_renner", "op": "lt", "value": 10}], "tip": "In cover, in his office: run the tease rung. Every rung pushes his corruption toward breaking.", "npc_id": "npc_renner", "goals": [{"trait": "corruption", "subject": "npc", "npc_id": "npc_renner", "op": "gte", "value": 10, "label": "Get his eyes on you \u2014 tease him"}]}, {"text": "He looked. Now make it worse \u2014 flash him while you work, let him see there's nothing under the coveralls.", "priority": 12, "when": [{"flag": "renner_office_open", "op": "is_true"}, {"flag": "renner_drained", "op": "is_false"}, {"trait": "corruption", "subject": "npc", "npc_id": "npc_renner", "op": "gte", "value": 10}, {"trait": "corruption", "subject": "npc", "npc_id": "npc_renner", "op": "lt", "value": 20}], "tip": "The flash rung's open now. Keep pushing his corruption.", "npc_id": "npc_renner", "goals": [{"trait": "corruption", "subject": "npc", "npc_id": "npc_renner", "op": "gte", "value": 20, "label": "Make him look \u2014 flash him"}]}, {"text": "He's watching for it now. Get your hands on him \u2014 a grip, a stroke \u2014 make him feel it before he can decide to stop you.", "priority": 12, "when": [{"flag": "renner_office_open", "op": "is_true"}, {"flag": "renner_drained", "op": "is_false"}, {"trait": "corruption", "subject": "npc", "npc_id": "npc_renner", "op": "gte", "value": 20}, {"trait": "corruption", "subject": "npc", "npc_id": "npc_renner", "op": "lt", "value": 30}], "tip": "The grope rung's open. Every rung climbs his corruption toward the break.", "npc_id": "npc_renner", "goals": [{"trait": "corruption", "subject": "npc", "npc_id": "npc_renner", "op": "gte", "value": 30, "label": "Get your hands on him"}]}, {"text": "He broke enough to take your mouth. He's not all the way yours yet \u2014 keep at him until he'll do anything.", "priority": 12, "when": [{"flag": "renner_office_open", "op": "is_true"}, {"flag": "renner_drained", "op": "is_false"}, {"trait": "corruption", "subject": "npc", "npc_id": "npc_renner", "op": "gte", "value": 30}, {"trait": "corruption", "subject": "npc", "npc_id": "npc_renner", "op": "lt", "value": 40}], "tip": "Keep running the rungs. At his limit he'll pull you into the office and fuck you.", "npc_id": "npc_renner", "goals": [{"trait": "corruption", "subject": "npc", "npc_id": "npc_renner", "op": "gte", "value": 40, "label": "He's cracking \u2014 keep working him"}]}, {"text": "He'll fuck you in the office now. Break him the rest of the way \u2014 then finish him in the ass and take the drain.", "priority": 12, "when": [{"flag": "renner_office_open", "op": "is_true"}, {"flag": "renner_drained", "op": "is_false"}, {"trait": "corruption", "subject": "npc", "npc_id": "npc_renner", "op": "gte", "value": 40}, {"trait": "corruption", "subject": "npc", "npc_id": "npc_renner", "op": "lt", "value": 50}], "tip": "Take him in the office (repeatable). At corruption 50, in cover, the anal pose opens \u2014 finish there with the drain worn and charged, and the weapon fires.", "npc_id": "npc_renner", "goals": [{"trait": "corruption", "subject": "npc", "npc_id": "npc_renner", "op": "gte", "value": 50, "label": "Break him to the drain (corruption)"}]}, {"text": "He's broken \u2014 all the way down. Now bed him and take the drain.", "priority": 13, "when": [{"flag": "renner_office_open", "op": "is_true"}, {"flag": "renner_drained", "op": "is_false"}, {"flag": "renner_fucked_once", "op": "is_false"}, {"trait": "corruption", "subject": "npc", "npc_id": "npc_renner", "op": "gte", "value": 50}], "tip": "Take him in the office, in cover, carrying the drain \u2014 finish in his ass and the weapon fires.", "npc_id": "npc_renner", "goals": [{"flag": "renner_fucked_once", "op": "is_true", "label": "Take him to bed"}]}, {"text": "He's broken and ready. Take him in the office and finish in his ass \u2014 the drain fires and he gives up everything.", "priority": 13, "when": [{"flag": "renner_office_open", "op": "is_true"}, {"flag": "renner_drained", "op": "is_false"}, {"flag": "renner_fucked_once", "op": "is_true"}, {"trait": "corruption", "subject": "npc", "npc_id": "npc_renner", "op": "gte", "value": 50}, {"trait": "equipped_weapon", "subject": "player", "op": "eq", "value": 1}], "tip": "You're carrying the drain weapon. Get him to the desk, in cover.", "npc_id": "npc_renner"}, {"text": "He's broken and ready to drain \u2014 but you're carrying the emitter, not the drain.", "priority": 13, "when": [{"flag": "renner_office_open", "op": "is_true"}, {"flag": "renner_drained", "op": "is_false"}, {"flag": "renner_fucked_once", "op": "is_true"}, {"trait": "corruption", "subject": "npc", "npc_id": "npc_renner", "op": "gte", "value": 50}, {"trait": "equipped_weapon", "subject": "player", "op": "eq", "value": 2}], "tip": "Switch back to the drain weapon at your bench in your room, then take him in the office and finish in his ass.", "npc_id": "npc_renner"}, {"text": "Renner's trail is logged \u2014 the two he buried came up out of the underworld, and that's where Cain's gone to ground. The hunt runs down past the gate from here. (More coming in a future update.)", "priority": 9, "when": [{"flag": "renner_leads_extracted", "op": "is_true"}, {"flag": "the_site_open", "op": "is_false"}], "tip": "You've reached the end of the current build. The underworld's open off the Waterfront \u2014 more of the hunt is coming."}, {"text": "Renner's old yard \u2014 the one Cain torched \u2014 is still watched by his men. Guarded means there's something out there worth finding. Get in past the guards and work deeper.", "priority": 8, "when": [{"flag": "renner_hired", "op": "is_true"}], "ready_text": "The yard gave up its heart: two of Renner's own people, killed with their families, and the thread that ties them to the underworld. That's where the trail runs now \u2014 but the way in is still shut to her. (More of the hunt is coming.)", "tip": "Sneak into the Burned Yard, off the Waterfront. Slip past the guards (Stealth) or beat them (Fighting) \u2014 drill at your room if you can't get past. Each push gets you deeper; the arousal weapon's down there too.", "goals": [{"trait": "yard_depth", "subject": "player", "op": "gte", "value": 3, "label": "Search the burned yard"}]}];
 setup.clothing_enabled = true;
 setup.passage_to_location = {"Location_spire_plaza": "spire_plaza", "Location_atrium": "atrium", "Location_penthouse": "penthouse", "Location_wren_floor": "wren_floor", "Location_wren_room": "wren_room", "Location_cradle": "cradle", "Location_the_waterfront": "the_waterfront", "Location_the_anchor": "the_anchor", "Location_renner_depot": "renner_depot", "Location_facility_ruins": "facility_ruins", "Location_the_site": "the_site", "Location_renner_burned_yard": "renner_burned_yard", "Location_underworld_gate": "underworld_gate", "Location_underworld_strip": "underworld_strip", "Location_underworld_brothel": "underworld_brothel", "Location_underworld_pit": "underworld_pit", "Location_underworld_market": "underworld_market"};
-setup.clothing_data = [{"id": "company_grays", "name": "Company grays", "slot": "dress", "image": "./videos/clothing/company_grays.jpg", "initial": true, "conditions": {}, "price": 0, "beauty": 1, "corruption": 0, "type": ""}, {"id": "plain_bra", "name": "Plain bra", "slot": "bra", "image": "./videos/clothing/plain_bra.jpg", "initial": true, "conditions": {}, "price": 0, "beauty": 0, "corruption": 0, "type": ""}, {"id": "plain_briefs", "name": "Plain briefs", "slot": "underwear", "image": "./videos/clothing/plain_briefs.jpg", "initial": true, "conditions": {}, "price": 0, "beauty": 0, "corruption": 0, "type": ""}, {"id": "flat_shoes", "name": "Flats", "slot": "shoes", "image": "./videos/clothing/flat_shoes.jpg", "initial": true, "conditions": {}, "price": 0, "beauty": 0, "corruption": 0, "type": ""}, {"id": "cover_dockhand", "name": "Dock-work coveralls", "slot": "dress", "image": "./videos/clothing/cover_dockhand.jpg", "initial": false, "conditions": {}, "price": 0, "beauty": 0, "corruption": 0, "type": ""}];
+setup.clothing_data = [{"id": "company_grays", "name": "Company grays", "slot": "dress", "image": "./videos/clothing/company_grays.jpg", "initial": true, "conditions": {}, "price": 0, "beauty": 1, "corruption": 0, "type": ""}, {"id": "plain_bra", "name": "Plain bra", "slot": "bra", "image": "./videos/clothing/plain_bra.jpg", "initial": true, "conditions": {}, "price": 0, "beauty": 0, "corruption": 0, "type": ""}, {"id": "plain_briefs", "name": "Plain briefs", "slot": "underwear", "image": "./videos/clothing/plain_briefs.jpg", "initial": true, "conditions": {}, "price": 0, "beauty": 0, "corruption": 0, "type": ""}, {"id": "flat_shoes", "name": "Flats", "slot": "shoes", "image": "./videos/clothing/flat_shoes.jpg", "initial": true, "conditions": {}, "price": 0, "beauty": 0, "corruption": 0, "type": ""}, {"id": "cover_dockhand", "name": "Dock-work coveralls", "slot": "dress", "image": "./videos/clothing/cover_dockhand.jpg", "initial": false, "conditions": {}, "price": 0, "beauty": 0, "corruption": 0, "type": "cover"}];
 setup.clothingRequirements = {};
 setup.rent_enabled = false;
 
@@ -411,6 +413,8 @@ setup.rent_enabled = false;
 
 
 setup.sidebar_items = [{"type": "trait_status_text", "trait": "energy", "bands": [{"min": 0, "max": 24, "text": "Charge: Critical", "icon": "\ud83e\udeab"}, {"min": 25, "max": 49, "text": "Charge: Low", "icon": "\ud83d\udd05"}, {"min": 50, "max": 74, "text": "Charge: Steady", "icon": "\ud83d\udd06"}, {"min": 75, "max": 100, "text": "Charge: Full", "icon": "\ud83d\udd0b"}]}, {"type": "trait_status_text", "trait": "hygiene", "bands": [{"min": 0, "max": 39, "text": "Condition: Filthy", "icon": "\ud83e\ude78"}, {"min": 40, "max": 74, "text": "Condition: Used", "icon": "\ud83d\udca7"}, {"min": 75, "max": 100, "text": "Condition: Clean", "icon": "\u2728"}]}];
+setup.player_portrait_enabled = true;
+setup.player_portrait = {"enabled": true, "naked_image": "./videos/portraits/wren_naked.jpg", "topless_image": "./videos/portraits/wren_topless.jpg", "bottomless_image": "./videos/portraits/wren_bottomless.jpg", "underwear_image": "./videos/portraits/wren_underwear.jpg", "default_image": "./videos/portraits/wren_grays.jpg", "pregnancy_trait": "", "pregnancy_suffix": "Preg", "outfits": [{"image": "./videos/portraits/wren_cover.jpg", "when": {"worn_type": "cover"}}]};
 setup.passes = [];
 setup.passes_map = {};
 for (var _pi = 0; _pi < setup.passes.length; _pi++) {
@@ -1559,6 +1563,83 @@ setup.getWornTypes = function() {
         }
     }
     return types;
+};
+
+// State-reactive player portrait (opt-in). getUndressLevel() derives the undress
+// state from equipped slots (null when clothing is off so the resolver skips the
+// undress branch). getPlayerPortrait() resolves ONE ready-prefixed image path:
+// undress-override -> outfit rule (dominant-slot type + corruption LEVEL/flag) ->
+// Preg suffix (dressed images only). Returns '' when nothing resolves.
+setup.getUndressLevel = function() {
+    if (!setup.clothing_enabled) return null;
+    var eq = ((State.variables.player || {}).equipped) || {};
+    // An area is "bare" only when NOTHING covers it — including the underwear layer.
+    // Top is covered by a top / dress / bra; bottom by a bottom / dress / underwear(briefs).
+    var topCovered    = !!(eq.top || eq.dress || eq.bra);
+    var bottomCovered = !!(eq.bottom || eq.dress || eq.underwear);
+    var hasOuter      = !!(eq.top || eq.bottom || eq.dress);
+    if (!topCovered && !bottomCovered) return 'naked';       // nothing anywhere
+    if (!topCovered)    return 'topless';                    // breasts bare (not even a bra), bottom covered
+    if (!bottomCovered) return 'bottomless';                 // crotch bare (not even briefs), top covered
+    if (!hasOuter)      return 'underwear';                  // both covered by ONLY bra/briefs, no outer garment
+    return 'dressed';                                        // an outer garment covers her
+};
+
+setup.getPlayerPortrait = function() {
+    var cfg = setup.player_portrait;
+    if (!setup.player_portrait_enabled || !cfg) return '';
+    var sv = State.variables;
+    var img = '';
+    var fromUndress = false;
+    // 1. undress override (only when clothing enabled; getUndressLevel is null otherwise)
+    var u = setup.getUndressLevel();
+    if (u === 'naked' && cfg.naked_image) { img = cfg.naked_image; fromUndress = true; }
+    else if (u === 'underwear' && cfg.underwear_image) { img = cfg.underwear_image; fromUndress = true; }
+    else if (u === 'topless' && cfg.topless_image) { img = cfg.topless_image; fromUndress = true; }
+    else if (u === 'bottomless' && cfg.bottomless_image) { img = cfg.bottomless_image; fromUndress = true; }
+    // 2. dressed / clothing-off -> outfit rules, dominant-slot keyed (dress || top || bottom)
+    if (!img) {
+        var domType = '';
+        if (setup.clothing_enabled) {
+            var eq = ((sv.player || {}).equipped) || {};
+            var domId = eq.dress || eq.top || eq.bottom;
+            if (domId) {
+                var cdata = setup.clothing_data || [];
+                for (var i = 0; i < cdata.length; i++) {
+                    if (cdata[i].id === domId) { domType = cdata[i].type || ''; break; }
+                }
+            }
+        }
+        var lvl = setup.getCorruptionLevel();
+        var flags = sv.flags || {};
+        var outfits = cfg.outfits || [];
+        for (var j = 0; j < outfits.length; j++) {
+            var w = outfits[j].when || {};
+            var ok = true;
+            if (w.worn_type && w.worn_type !== domType) ok = false;
+            if (ok && w.corruption) {
+                var op = w.corruption.operator || 'gte';
+                var val = w.corruption.value || 0;
+                if (op === 'gte') ok = (lvl >= val);
+                else if (op === 'lt') ok = (lvl < val);
+                else if (op === 'lte') ok = (lvl <= val);
+                else if (op === 'gt') ok = (lvl > val);
+                else if (op === 'eq') ok = (lvl === val);
+            }
+            if (ok && w.flag && !flags[w.flag]) ok = false;
+            if (ok) { img = outfits[j].image; break; }
+        }
+        if (!img) img = cfg.default_image || '';
+    }
+    // 3. pregnancy suffix — dressed images only (undress overrides skip it)
+    if (img && !fromUndress && cfg.pregnancy_trait) {
+        var preg = ((sv.player || {}).core_traits || {})[cfg.pregnancy_trait];
+        if (preg) {
+            var dot = img.lastIndexOf('.');
+            if (dot > -1) img = img.slice(0, dot) + (cfg.pregnancy_suffix || 'Preg') + img.slice(dot);
+        }
+    }
+    return img || '';
 };
 
 setup.isSlotDisabled = function(slotName) {
@@ -5970,6 +6051,16 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;&lt;/widget&gt;&gt;
 
 
+&lt;&lt;widget &quot;playerPortrait&quot;&gt;&gt;
+&lt;&lt;if setup.player_portrait_enabled and setup.player_portrait&gt;&gt;
+&lt;&lt;set _pimg to setup.getPlayerPortrait()&gt;&gt;
+&lt;&lt;if _pimg&gt;&gt;
+&lt;div class=&quot;sidebar-player-portrait&quot;&gt;&lt;img @src=&quot;_pimg&quot; @alt=&quot;$player.name&quot; onerror=&quot;this.style.display=&#39;none&#39;;&quot;&gt;&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/widget&gt;&gt;
+
+
 &lt;&lt;widget &quot;activeModifiers&quot;&gt;&gt;
 &lt;&lt;if $game_state &amp;&amp; $game_state.active_modifiers &amp;&amp; Object.keys($game_state.active_modifiers).length gt 0&gt;&gt;
 &lt;div id=&quot;sidebar-modifiers-widget&quot; class=&quot;traits-display&quot;&gt;
@@ -6105,6 +6196,7 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 &lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="StoryCaption" tags="" position="600,100" size="100,100">&lt;&lt;missingMediaButton&gt;&gt;
 &lt;&lt;timeDisplay&gt;&gt;
+&lt;&lt;playerPortrait&gt;&gt;
 &lt;&lt;sidebarItems&gt;&gt;
 &lt;&lt;activeModifiers&gt;&gt;
 &lt;&lt;journalButton&gt;&gt;
@@ -6296,6 +6388,26 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
 }
 /* Sidebar spacing is margin-driven, not &lt;br&gt;-driven (kill stray empty-widget breaks). */
 #story-caption br { display: none; }
+
+/* State-reactive player portrait (opt-in) — the TOP-MOST sidebar image. The theme&#39;s
+   global img rule does not reach sidebar imgs, so without this the raw image renders at
+   natural size and overflows the narrow sidebar (you&#39;d see a background edge, not the
+   face). Constrain to the sidebar width and frame it as a 3:4 portrait crop centred a bit
+   high, so a square or tall source shows the face/torso rather than the legs/background. */
+.sidebar-player-portrait {
+    margin: 0 0 12px 0;
+    text-align: center;
+}
+.sidebar-player-portrait img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: 50% 18%;
+    border-radius: 6px;
+}
 
 /* Patreon Button in Sidebar */
 #patreon-btn-widget {

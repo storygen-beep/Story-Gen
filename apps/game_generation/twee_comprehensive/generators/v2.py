@@ -1132,7 +1132,7 @@ class TweeComprehensiveGeneratorV2:
         self.player_portrait_enabled = bool(pp_settings.get("enabled", False))
         player_portrait_json = "null"
         if self.player_portrait_enabled:
-            pp_prefix = (self.video_path or "./media").rstrip("/")
+            pp_prefix = (self.video_path or "./videos").rstrip("/")
             pp_cfg = dict(pp_settings)
             for _pk in ("naked_image", "topless_image", "bottomless_image",
                         "underwear_image", "default_image"):
@@ -1454,13 +1454,16 @@ setup.getWornTypes = function() {
 setup.getUndressLevel = function() {
     if (!setup.clothing_enabled) return null;
     var eq = ((State.variables.player || {}).equipped) || {};
-    var hasTop = !!(eq.top || eq.dress);
-    var hasBottom = !!(eq.bottom || eq.dress);
-    var hasUnder = !!(eq.bra || eq.underwear);
-    if (!hasTop && !hasBottom) return hasUnder ? 'underwear' : 'naked';
-    if (!hasTop && hasBottom) return 'topless';
-    if (hasTop && !hasBottom) return 'bottomless';
-    return 'dressed';
+    // An area is "bare" only when NOTHING covers it — including the underwear layer.
+    // Top is covered by a top / dress / bra; bottom by a bottom / dress / underwear(briefs).
+    var topCovered    = !!(eq.top || eq.dress || eq.bra);
+    var bottomCovered = !!(eq.bottom || eq.dress || eq.underwear);
+    var hasOuter      = !!(eq.top || eq.bottom || eq.dress);
+    if (!topCovered && !bottomCovered) return 'naked';       // nothing anywhere
+    if (!topCovered)    return 'topless';                    // breasts bare (not even a bra), bottom covered
+    if (!bottomCovered) return 'bottomless';                 // crotch bare (not even briefs), top covered
+    if (!hasOuter)      return 'underwear';                  // both covered by ONLY bra/briefs, no outer garment
+    return 'dressed';                                        // an outer garment covers her
 };
 
 setup.getPlayerPortrait = function() {
@@ -14846,15 +14849,16 @@ $(document).on(':passagestart', function(ev) {
 
         # StoryCaption with optional dev indicator and missing media button
         phone_btn_line = "\n<<phoneButton>>" if self.phone_enabled else ""
-        # State-reactive player portrait — mounts TOP-MOST (first body line), opt-in.
+        # State-reactive player portrait — mounts just below the time display (time stays at the
+        # very top of the sidebar), above the HUD/stat items. Opt-in.
         portrait_line = "<<playerPortrait>>\n" if self.player_portrait_enabled else ""
         if self.dev_mode:
             story_caption = f""":: StoryCaption
-{portrait_line}<<devIndicator>>
+<<devIndicator>>
 <<reviewButton>>
 <<missingMediaButton>>
 <<timeDisplay>>
-<<sidebarItems>>{phone_btn_line}
+{portrait_line}<<sidebarItems>>{phone_btn_line}
 <<activeModifiers>>
 <<journalButton>>
 <<tipsButton>>
@@ -14866,9 +14870,9 @@ $(document).on(':passagestart', function(ev) {
 <<patreonButton>>"""
         else:
             story_caption = f""":: StoryCaption
-{portrait_line}<<missingMediaButton>>
+<<missingMediaButton>>
 <<timeDisplay>>
-<<sidebarItems>>{phone_btn_line}
+{portrait_line}<<sidebarItems>>{phone_btn_line}
 <<activeModifiers>>
 <<journalButton>>
 <<tipsButton>>
@@ -15929,6 +15933,26 @@ if (clothingMsg) {
 }
 /* Sidebar spacing is margin-driven, not <br>-driven (kill stray empty-widget breaks). */
 #story-caption br { display: none; }
+
+/* State-reactive player portrait (opt-in) — the TOP-MOST sidebar image. The theme's
+   global img rule does not reach sidebar imgs, so without this the raw image renders at
+   natural size and overflows the narrow sidebar (you'd see a background edge, not the
+   face). Constrain to the sidebar width and frame it as a 3:4 portrait crop centred a bit
+   high, so a square or tall source shows the face/torso rather than the legs/background. */
+.sidebar-player-portrait {
+    margin: 0 0 12px 0;
+    text-align: center;
+}
+.sidebar-player-portrait img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: 50% 18%;
+    border-radius: 6px;
+}
 
 /* Patreon Button in Sidebar */
 #patreon-btn-widget {

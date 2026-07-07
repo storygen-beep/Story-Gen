@@ -496,6 +496,27 @@ class Command(BaseCommand):
             self.stdout.write(f"   Failed: {video_stats['failed']}")
             self.stdout.write(f"   Bytes copied: {video_stats.get('bytes_copied', 0):,}")
 
+        # Loud warning: external assets referenced but not copied (no --video-folder given).
+        # The build otherwise looks green while every portrait / NPC / location image 404s.
+        if video_stats and video_stats.get("skipped_no_video_folder"):
+            n = video_stats["skipped_no_video_folder"]
+            self.stdout.write("")
+            self.stdout.write(
+                self.style.ERROR(
+                    f"⚠️  {n} external media file(s) referenced but NOT copied — no --video-folder given."
+                )
+            )
+            self.stdout.write(
+                self.style.ERROR(
+                    "   Sidebar portraits / NPC / location images will be BROKEN in this build."
+                )
+            )
+            self.stdout.write(
+                self.style.WARNING(
+                    "   Re-run with:  --video-folder <path to the game's media dir>"
+                )
+            )
+
         # Performance tip
         total_saved = stats.get("bytes_saved", 0)
         if video_stats:

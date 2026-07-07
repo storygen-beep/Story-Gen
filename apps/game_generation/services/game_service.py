@@ -5,6 +5,7 @@ This is the single API interface for all game generation systems.
 It delegates to specific isolated systems based on the requested type.
 """
 
+import logging
 import os
 import shutil
 import subprocess
@@ -15,6 +16,8 @@ from typing import Any, Optional
 from PIL import Image
 
 from apps.projects.models import Project
+
+logger = logging.getLogger(__name__)
 
 
 class GameService:
@@ -489,6 +492,22 @@ class GameService:
                 video_files=external_files,
                 output_dir=video_output_dir,
                 force_copy=force_copy,
+            )
+        elif external_files and not video_folder:
+            # The game references external images/videos (portraits, NPC/location art, clothing)
+            # but no source folder was given, so NONE were copied — the build LOOKS green while
+            # every one of those <img>/<video> tags will 404. Surface it loudly rather than ship
+            # a silently-broken package. Re-run with --video-folder <path-to-media>.
+            external_video_stats["skipped_no_video_folder"] = len(external_files)
+            external_video_stats["errors"].append(
+                f"{len(external_files)} external media file(s) referenced but NOT copied — "
+                f"no --video-folder given. Sidebar portraits / NPC / location images will be "
+                f"broken. Re-run with --video-folder <media dir>."
+            )
+            logger.warning(
+                "package_game: %d external media files referenced but no video_folder "
+                "provided — they were NOT copied (broken images in output).",
+                len(external_files),
             )
 
         # Step 6.6: Localize R2 URLs if requested

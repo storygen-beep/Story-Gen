@@ -131,6 +131,8 @@ activity   = "drinking at the Anchor"
 id         = "company_grays"
 name       = "Company grays"
 slot       = "dress"
+# no type tag needed — grays is the portrait's default_image (only cover_dockhand carries a
+# worn_type tag, for its outfit rule); tagging grays would trip the "type has no rule" build warning
 image      = "clothing/company_grays.jpg"
 initial    = true
 beauty     = 1
@@ -167,6 +169,7 @@ corruption = 0
 id         = "cover_dockhand"
 name       = "Dock-work coveralls"
 slot       = "dress"
+type       = "cover"                        # portrait axis: her disguise face (cover outfit rule)
 image      = "clothing/cover_dockhand.jpg"
 beauty     = 0
 corruption = 0

@@ -3,8 +3,8 @@
 Read this when the game shows a **player portrait in the sidebar that changes with state** — a different
 finished image as she dresses/undresses, changes outfit, corrupts, or gets pregnant (the Road-to-Success
 discrete-swap pattern: one finished image per state, NOT a layered paperdoll). It is an **opt-in** engine
-feature: author a `[player_portrait]` block and it appears TOP-MOST in the sidebar; omit it and the game is
-byte-identical (feature off, no error). It is the reactive *extension* of the single static
+feature: author a `[player_portrait]` block and it appears in the sidebar just below the time display; omit it
+and the game is byte-identical (feature off, no error). It is the reactive *extension* of the single static
 `$player.portrait` that `references/customization.md` owns (that one is set once at character creation and
 only renders on the Stats page; this one re-renders every passage).
 
@@ -32,12 +32,20 @@ The portrait resolves ONE image filename from up to four axes:
 | **Corruption** | `$player.core_traits.corruption` bucketed to a **LEVEL 0–4** | `setup.getCorruptionLevel()` (`v2.py:5622`, tiers `[0,5,15,30,45]`) |
 | **Pregnancy** | a hidden `$player.core_traits.<pregnancy_trait>` int (declared + suppressed like any stage trait) | read directly in the resolver |
 
-**It renders as the first line of `StoryCaption`** — above the stats and the configurable `<<sidebarItems>>`
-— via the `<<playerPortrait>>` widget (`v2.py:15615`), mounted by a `portrait_line` fragment gated on the
-enable flag (`v2.py:14850`), the exact idiom the phone button uses. The widget is a thin
+**It renders in `StoryCaption` just below the `<<timeDisplay>>`** (the time/clock stays at the very top) and
+above the stats + the configurable `<<sidebarItems>>` — via the `<<playerPortrait>>` widget (`v2.py:15615`),
+mounted by a `portrait_line` fragment gated on the enable flag (`v2.py:14850`), the exact idiom the phone
+button uses. The widget is a thin
 `<img @src="_pimg">` (SugarCube attribute directive — `@src="_pimg"`, NEVER `src="@_pimg"`, `v2.py:14778`)
 that hides itself via `onerror` if a file is missing. The engine emits `setup.player_portrait` +
 `setup.player_portrait_enabled` **unconditionally** (`v2.py:2951`) so a disabled game never throws.
+
+**Framing (baked into the engine, `.sidebar-player-portrait img`).** The widget carries its own CSS: the image
+is fit to the sidebar width and cropped to a **3:4 portrait box, `object-fit: cover`, centred a touch high
+(`object-position: 50% 18%`)** — so a square or tall source shows the **face/torso**, not the legs or a
+background edge (without this the raw img renders at natural size and overflows the narrow sidebar). **Author
+implication:** source portrait-composition art — subject centred, face in the upper third — and any aspect works;
+a full-figure or landscape shot will be cropped to her middle-upper region.
 
 ---
 
@@ -45,12 +53,16 @@ that hides itself via `onerror` if a file is missing. The engine emits `setup.pl
 
 The engine walks these in order and returns the FIRST image it resolves (then applies the Preg suffix):
 
-1. **Undress override — only when `clothing_enabled`.** `getUndressLevel()` reads `$player.equipped`
-   (`hasTop = top||dress`, `hasBottom = bottom||dress`, `hasUnder = bra||underwear`; the dress↔top/bottom
-   exclusivity the engine enforces at `v2.py:1327-1333` makes these mutually exclusive): nothing-outer +
-   no underwear → `naked_image`; nothing-outer + underwear → `underwear_image`; `!hasTop && hasBottom` →
-   `topless_image`; `hasTop && !hasBottom` → `bottomless_image`; else **dressed** (fall through). When
-   clothing is off this whole branch is skipped (there is no `equipped` object).
+1. **Undress override — only when `clothing_enabled`.** `getUndressLevel()` reads `$player.equipped` and asks,
+   per body-area, *is anything covering it?* — **the bra covers the top, the briefs (`underwear` slot) cover the
+   bottom**, and a `top`/`bottom`/`dress` covers the corresponding outer area (`v2.py:1454`):
+   `topCovered = top||dress||bra`, `bottomCovered = bottom||dress||underwear`, `hasOuter = top||bottom||dress`.
+   → both bare → `naked_image`; top bare (not even a bra) → `topless_image`; bottom bare (not even briefs) →
+   `bottomless_image`; both covered by ONLY bra/briefs (no outer) → `underwear_image`; else **dressed** (fall
+   through). So on a dress+bra+briefs wardrobe: dress off = underwear, + bra off = topless, + briefs off =
+   bottomless, all off = naked — no split top/bottom garments required. When clothing is off this whole branch
+   is skipped (there is no `equipped` object). *(Fires only if that image key is declared — an undeclared axis
+   falls through to the outfit rules / `default_image`.)*
 2. **Dressed → the outfit rules.** One canonical outfit type is taken from the **dominant slot**
    (`equipped.dress || top || bottom`) → its `.type` in `setup.clothing_data`. The engine walks
    `[[player_portrait.outfits]]` **first-match-wins**; each rule's `when` = `{ worn_type?,

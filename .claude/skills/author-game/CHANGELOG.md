@@ -13,7 +13,33 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-07-07
+- **`references/player-portrait.md` §1 — portrait now mounts BELOW the time display, not top-most (ENGINE, `v2.py:14853`).**
+  LO's call: the time/clock stays at the very top of the sidebar; the portrait sits just under it, above the HUD/stat
+  items. Moved the `{portrait_line}` fragment from the first StoryCaption line to just after `<<timeDisplay>>` in both
+  the dev and non-dev blocks. Doc + Vesper design-book/config comments updated from "top-most" to "below the time
+  display". Live-confirmed (DOM order + screenshot).
+- **`references/player-portrait.md` §2 — undress model changed (ENGINE change to `getUndressLevel`, `v2.py:1454`).**
+  Old logic keyed topless/bottomless off the OUTER slots only (`top||dress`, `bottom||dress`) and lumped
+  `bra||underwear` into one `hasUnder` flag — so a game with only a one-piece dress (+ bra/briefs) could reach
+  only `underwear` and `naked`, never topless/bottomless (dogfooded on Vesper; LO wanted bra-off = topless).
+  New model asks *is this body-area bare?* per area: **bra covers the top, briefs (`underwear` slot) cover the
+  bottom**; `topCovered=top||dress||bra`, `bottomCovered=bottom||dress||underwear`; topless = top bare (not even
+  a bra), bottomless = bottom bare (not even briefs), underwear = both covered by only bra/briefs, naked = both
+  bare. Verified `getUndressLevel` has ONE consumer (the portrait resolver) — no game gates on it, so the
+  semantic change is contained. Live-proven on Vesper: all 4 undress stills now reachable from a dress+bra+briefs
+  wardrobe (unequip dress→underwear, +bra→topless, +briefs→bottomless, all→naked), faithful wardrobe-UI test +
+  10-state matrix green. Also updated the doc's "fires only if the image key is declared" note.
+
 ## 2026-07-06
+- **`references/player-portrait.md` §1 — added the render-framing note (portrait-composition author
+  implication).** First real-game application (Vesper) surfaced two Phase-A ENGINE gaps, both fixed in `v2.py`
+  (engine, not skill): (1) the media prefix defaulted to `./media` while every other generator path uses
+  `./videos` → portrait 404'd (fixed `v2.py:1135`); (2) the `<<playerPortrait>>` widget shipped with **no CSS**,
+  so the `<img>` rendered at natural size and overflowed the ~232px sidebar (background edge, not face) → added
+  a `.sidebar-player-portrait img` rule (3:4 `object-fit:cover`, `object-position:50% 18%`). Skill doc updated
+  so authors source portrait-composition art (subject centred, face upper-third). Verified: rebuilt Vesper +
+  headless live test (img 232×309, face reads, resolver green, undress falls through to default).
 - **NEW `references/player-portrait.md` + wiring — state-reactive player portrait (ENGINE CHANGE, not
   doctrine-only).** The RTS discrete-swap portrait is now a real OPT-IN engine feature: a top-level
   `[player_portrait]` block emits a TOP-MOST sidebar `<img>` that swaps by undress / dominant-outfit-`type` /

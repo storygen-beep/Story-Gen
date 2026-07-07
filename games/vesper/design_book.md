@@ -1156,6 +1156,67 @@ shop.
 ---
 
 
+## The player portrait (state-reactive sidebar face) — added during authoring
+
+Wren's face, in the sidebar **just below the time display** (above the Charge/Condition HUD) — the reactive extension of the
+static `$player.portrait`, which until now only showed on the Stats page. Opt-in engine feature
+(`references/player-portrait.md`): a `[player_portrait]` block in `0_systems_spec.toml`, emitted as a
+`<<playerPortrait>>` widget whose `<img>` src comes from `setup.getPlayerPortrait()`.
+
+**Shipped state: REACTIVE (two faces + naked-during-sex), live-proven.** Six portraits in
+`videos/portraits/`. Corruption is DEAD by design (player frozen at 0 — the inversion) and there's no
+pregnancy trait, so those two resolver axes don't apply here. What's live:
+
+- **The two faces** — `default_image = wren_grays.jpg` (her asset-self, company grays) and an outfit rule
+  `worn_type = "cover"` → `wren_cover.jpg` (the dock-work disguise). The two `[[clothing]]` dress items carry
+  `type = "grays"` / `type = "cover"` (`1_metadata`), so the sidebar face swaps the moment she equips the cover
+  at the rack. Both SFW, Gemini-generated from `wren.jpg` → the same woman, consistent.
+- **Undress — CLOTHING-ONLY (the wardrobe rack).** The portrait tracks undress purely from what she's actually
+  wearing, via the engine's native `naked_image` / `underwear_image` / `topless_image` / `bottomless_image`
+  overrides. When she unequips a slot at the rack, `getUndressLevel()` (`v2.py:1454`) returns the state and the
+  matching image shows *live*. **All four states are reachable from her dress+bra+briefs wardrobe** (per the
+  2026-07-07 engine change — an area counts bare only when NOTHING covers it, bra=top-cover, briefs=bottom-cover):
+  dress off + bra&briefs = **underwear**; + bra off = **topless**; + briefs off = **bottomless**; all off =
+  **naked**. Strip her at the rack, the picture changes — and nothing else moves it.
+
+  **The sex loops do NOT undress the portrait (LO's call, 2026-07-07).** The Renner/brothel/Mercer loops undress
+  her in *prose only* (equipped stays full), so during a scene the sidebar reads as her **worn outfit** — the
+  cover face on a mission, grays inside — not naked. An earlier build wired a `pp_naked` flag to force naked
+  during sex (set on each intro-pose, cleared on the finisher exits); that whole mechanism was **removed** — the
+  portrait is clothing-driven, period. Live-proven (headless): the wardrobe matrix
+  (grays/cover/underwear/topless/bottomless/naked) all resolve, and setting `pp_naked` with her dressed returns
+  the worn outfit, not naked. 0 page errors.
+
+**Reachability note:** all four undress stills LO downloaded are **live from the wardrobe** — `underwear`
+(dress off), `topless` (bra off too), `bottomless` (briefs off instead), `naked` (all off). This required the
+2026-07-07 `getUndressLevel` change (bra=top-cover, briefs=bottom-cover; an area is bare only when nothing covers
+it), because the old logic lumped bra+briefs into a single `underwear` state and keyed topless/bottomless off
+outer garments Vesper doesn't have.
+
+**Adversarial verification (workflow wf_2d0b29a5-86c, 4 tracers, done while the sex-flag still existed).**
+Confirmed the state matrix and surfaced 4 items, all addressed at the time: a MED build-footgun (below, fixed),
+a sex-loop portrait-timing quirk, a dead `daily_tick` unset trio, and the bra-only/briefs-only collapse. The
+timing quirk + the whole flag mechanism are now moot — the sex-loop trigger was removed (portrait is
+clothing-only); the bra/briefs collapse was fixed by the `getUndressLevel` rewrite above.
+
+**Engine notes (Phase-A gaps caught on real builds, all fixed — benefit every game).**
+1. The player-portrait media prefix defaulted to `./media` (wrong — every other generator media path uses
+   `./videos`); portrait 404'd → fixed to `./videos` at `v2.py:1135`.
+2. The `<<playerPortrait>>` widget shipped with **no CSS**, so the raw `<img>` rendered at natural size (2048px)
+   and overflowed the ~232px sidebar — you saw a background edge, not her face. Added a `.sidebar-player-portrait
+   img` rule (`v2.py` sidebar CSS): width 100%, a 3:4 `object-fit: cover` portrait crop centred high
+   (`object-position: 50% 18%`) so a square/tall source frames the face/torso. Live-confirmed: img now 232×309,
+   her face reads.
+3. **Silent broken build when `--video-folder` is omitted** (`game_service.py:481` gated the external-asset copy
+   on the flag). A rebuild without it copied nothing yet exited green → every portrait/NPC/location `<img>` 404s.
+   Now the build **warns loudly** (`game_service.py` + `package_from_toml.py`): "N external media file(s)
+   referenced but NOT copied — re-run with `--video-folder`". The Vesper build path always passes it.
+4. `game_service.py` referenced `logger` at two sites but never defined it (a latent crash on any warning path,
+   incl. the new one above) — added the module-level `logging.getLogger(__name__)`.
+
+---
+
+
 ## Capability — Fighting & Stealth (day-depth, added during authoring)
 
 The first piece of **day-depth**: things to *do* per day besides seducing Renner. Two **capability traits**

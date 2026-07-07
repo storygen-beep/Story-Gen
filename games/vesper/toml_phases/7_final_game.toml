@@ -31,6 +31,19 @@ starting_hour = 20        # the opening opens in the evening (Beat 1 — Mercer'
 starting_day  = "Monday"
 starting_week = 1
 
+# ─── Theme — dark (Vesper's default look) + custom CSS ────────────────────────
+# `mode = "dark"` is REQUIRED here: adding a [theme] block routes through the importer, whose
+# mode default is "light" — without this the sidebar would flip light. Every other field is left
+# at its default (identical to the no-block look). custom_css hides the "Vesper" story title +
+# its separator from the sidebar top (the name is already on the age-gate page + browser tab; the
+# sidebar now starts at the clock).
+[theme]
+mode       = "dark"
+# Hide the WHOLE title header wrapper (#ui-bar #title = the story name + subtitle/author + separator):
+# hiding only #story-title left the <header> wrapper occupying ~32px of blank space. Removing the
+# wrapper reclaims it, so the sidebar content (clock → portrait → HUD) rides right up under the nav row.
+custom_css = "#ui-bar #title { display: none !important; } #story-caption { margin-top: 0 !important; }"
+
 # ─── Engine daily tick — reset the daily-cap cooldown flags ───────────────────
 # Fires once at the start of each new game-day (the cradle recharge rolls the day).
 # The corruption daily cap was REMOVED (LO's call) — the charged rungs are freely repeatable
@@ -49,6 +62,36 @@ flagEffects = [
 [settings]
 clothing_enabled  = true
 wardrobe_location = "wren_room"
+
+# ─── Player portrait — the state-reactive sidebar face (opt-in engine feature) ─
+# Wren's face, in the sidebar just below the time display (above the Charge/Condition HUD) — the reactive
+# extension of the static $player.portrait (which only shows on the Stats page). Paths relative
+# to videos/. Corruption is DEAD here (player frozen at 0 — the inversion) and there's no
+# pregnancy trait, so those two resolver axes don't apply. What's live:
+#   • THE TWO FACES — default = her asset-self (company grays); the dock-work COVER swaps it via
+#     the worn_type outfit rule below (the two dress items carry type tags, 1_metadata). SFW, Gemini.
+#   • UNDRESS (equipped-based, the wardrobe rack — the ONLY undress trigger) — the overrides fire the
+#     instant she's actually stripped: unequip at the rack and getUndressLevel() (v2.py:1454) returns the
+#     state -> the matching image. An area is bare only when NOTHING covers it (bra covers the top, briefs
+#     the bottom): dress off + bra&briefs on = `underwear`; take the BRA off too = `topless`; take the
+#     BRIEFS off instead = `bottomless`; everything off = `naked`. All four reachable from her
+#     dress+bra+briefs wardrobe — no split top/bottom garments needed.
+# The portrait is CLOTHING-ONLY (LO's call): the sex loops do NOT undress it — during a scene she reads
+# as whatever she's wearing (the cover on a mission, grays inside). There is no pp_naked flag anymore.
+[player_portrait]
+enabled          = true
+default_image    = "portraits/wren_grays.jpg"      # asset-self face (company grays)
+# equipped-based undress overrides — fire when a slot is actually cleared (the wardrobe rack)
+naked_image      = "portraits/wren_naked.jpg"
+topless_image    = "portraits/wren_topless.jpg"
+bottomless_image = "portraits/wren_bottomless.jpg"
+underwear_image  = "portraits/wren_underwear.jpg"
+
+# THE TWO FACES — in the dock-work cover, show the cover face (dominant dress type = "cover");
+# otherwise she falls through to default_image (the company-grays asset-self face).
+[[player_portrait.outfits]]
+image = "portraits/wren_cover.jpg"
+when  = { worn_type = "cover" }
 
 # ─── Sidebar items — the live HUD (Charge ONLY) ───────────────────────────────
 # Credits is tracked internally (the depot economy uses `money`) but NOT surfaced in the
@@ -282,6 +325,8 @@ activity   = "drinking at the Anchor"
 id         = "company_grays"
 name       = "Company grays"
 slot       = "dress"
+# no type tag needed — grays is the portrait's default_image (only cover_dockhand carries a
+# worn_type tag, for its outfit rule); tagging grays would trip the "type has no rule" build warning
 image      = "clothing/company_grays.jpg"
 initial    = true
 beauty     = 1
@@ -318,6 +363,7 @@ corruption = 0
 id         = "cover_dockhand"
 name       = "Dock-work coveralls"
 slot       = "dress"
+type       = "cover"                        # portrait axis: her disguise face (cover outfit rule)
 image      = "clothing/cover_dockhand.jpg"
 beauty     = 0
 corruption = 0
