@@ -943,6 +943,11 @@ class TweeComprehensiveGeneratorV2:
         flags_init_map = {str(k): False for k in player_flag_keys}
         flags_init_map["game_started"] = True
         flags_init_map["debug_mode"] = bool(self.debug)
+        # Dev jumps: --dev builds flip this on so any dev-shortcut canvas (trigger
+        # gated on dev_mode_enabled) is live and the sidebar <<devJumps>> list can
+        # reach it. Never set in a shipped build → dev shortcuts stay inert there.
+        if self.dev_mode:
+            flags_init_map["dev_mode_enabled"] = True
         flags_init_json = json.dumps(flags_init_map)
 
         # ── Save-migration seam (fill-if-absent backfill for cross-release saves) ──
@@ -8225,6 +8230,53 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     index.setdefault(npc_slug, {})[int(val)] = cv_id
         return index
 
+    def _is_dev_shortcut_canvas(self, canvas) -> bool:
+        """True if this canvas is a DEV SHORTCUT — a jump/teleport authored for
+        testing, gated on the `dev_mode_enabled` flag in its trigger.
+
+        The flag is set at StoryInit ONLY in `--dev` builds (see flags_init_map),
+        so these canvases never fire in a shipped game. The trigger condition is a
+        MARKER, not a real gate: the sidebar `<<devJumps>>` widget reaches them by
+        direct Engine.play, and the flag-chain validator + hint index both SKIP
+        them (a dev jump is not a narrative node — it must not win as a flag setter,
+        pollute quest guidance, or trip the located-setter check). Single source of
+        truth for all three call sites.
+        """
+        trigger = getattr(canvas, "trigger", None)
+        if not trigger:
+            return False
+        try:
+            conds = trigger.conditions or {}
+            items = conds.get("items", []) if isinstance(conds, dict) else []
+            return any(
+                isinstance(it, dict)
+                and it.get("flag_key") == "dev_mode_enabled"
+                and it.get("operator") == "is_true"
+                for it in items
+            )
+        except Exception:
+            return False
+
+    def _dev_shortcut_jumps(self) -> list:
+        """List of {label, passage} for every dev-shortcut canvas, for the sidebar
+        `<<devJumps>>` widget. Each entry links to the canvas's FIRST node passage
+        (Engine.play jumps straight in, bypassing the trigger). Empty when there are
+        no dev shortcuts. Only consulted in `--dev` builds."""
+        jumps = []
+        for canvas in (self.story_canvases or []):
+            if not self._is_dev_shortcut_canvas(canvas):
+                continue
+            try:
+                nodes = list(self._get_canvas_nodes_ordered(canvas))
+            except Exception:
+                nodes = []
+            if not nodes:
+                continue
+            canvas_prefix = self._sanitize_canvas_name(self._get_canvas_slug(canvas))
+            passage = self._node_passage_name("Canvas", canvas_prefix, nodes[0])
+            jumps.append({"label": canvas.name or canvas_prefix, "passage": passage})
+        return jumps
+
     def _build_flag_setter_canvases_index(self) -> dict:
         """Pattern 2 v2.1 (2026-05-04): scan canvases for flag-setter effects.
 
@@ -8244,22 +8296,9 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         index: Dict[str, str] = {}
         for canvas in (self.story_canvases or []):
             cv_id = str(getattr(canvas, "id", "") or "")
-            # Skip dev-shortcut canvases — gated on dev_mode_enabled flag.
-            trigger = getattr(canvas, "trigger", None)
-            if trigger:
-                try:
-                    trigger_conds = trigger.conditions or {}
-                    items = trigger_conds.get("items", []) if isinstance(trigger_conds, dict) else []
-                    is_dev = any(
-                        isinstance(it, dict)
-                        and it.get("flag_key") == "dev_mode_enabled"
-                        and it.get("operator") == "is_true"
-                        for it in items
-                    )
-                    if is_dev:
-                        continue
-                except Exception:
-                    pass
+            # Skip dev-shortcut canvases — a dev jump must not win as a flag setter.
+            if self._is_dev_shortcut_canvas(canvas):
+                continue
             try:
                 cv_nodes = list(self._get_canvas_nodes_ordered(canvas))
             except Exception:
@@ -10983,6 +11022,12 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         canvas_npc_map = canvas_npc_map or {}
 
         for canvas in all_canvases:
+            # Dev shortcuts never register as flag setters — they're invisible to
+            # flag-chain validation (same skip as _build_flag_setter_canvases_index
+            # and the requirer loops in validate_flag_chains). A dev jump that seeds
+            # a real story flag must not shadow that flag's real located setter.
+            if self._is_dev_shortcut_canvas(canvas):
+                continue
             # Skip location/schedule extraction for starting canvas (it plays automatically)
             is_starting_canvas = (
                 self.project.starting_canvas and
@@ -11219,6 +11264,12 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 
         # Find all flag requirements from canvas trigger conditions
         for canvas in all_canvases:
+            # Dev-shortcut canvases are invisible to flag-chain validation: their
+            # trigger's `dev_mode_enabled is_true` is a marker, not a real gate
+            # (the flag is init-set only in --dev builds), so it has no located
+            # setter and would false-positive as NEVER SET.
+            if self._is_dev_shortcut_canvas(canvas):
+                continue
             trigger = getattr(canvas, 'trigger', None)
             if not trigger:
                 continue
@@ -11257,6 +11308,8 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 
         # 2b. Choice-level flag conditions (exit_block choices with conditions)
         for canvas in all_canvases:
+            if self._is_dev_shortcut_canvas(canvas):
+                continue
             for node in self._get_canvas_nodes_ordered(canvas):
                 exit_block = node.exit_block or {}
                 for choice in exit_block.get("choices", []):
@@ -14766,6 +14819,36 @@ $(document).on(':passagestart', function(ev) {
 <</widget>>
 """
 
+        # Dev jumps widget — one link per dev-shortcut canvas (trigger gated on
+        # dev_mode_enabled). Clicking Engine.plays straight into the canvas's first
+        # node, bypassing its trigger; the canvas itself seeds state + bounces to
+        # the target. Dev builds only. Empty list → a muted "author one" hint so the
+        # section is discoverable even before any jump exists.
+        dev_jumps_widget = ""
+        if self.dev_mode:
+            jumps = self._dev_shortcut_jumps()
+            if jumps:
+                jumps_body = "\n".join(
+                    '  <div class="dev-jump-row"><<link "{label}" "{passage}">><</link>></div>'.format(
+                        label=(j["label"] or "Jump").replace('\\', '').replace('"', "'"),
+                        passage=j["passage"],
+                    )
+                    for j in jumps
+                )
+            else:
+                jumps_body = (
+                    '  <div style="opacity:0.65;font-size:11px;">No dev jumps yet — '
+                    'author a canvas gated on flag <code>dev_mode_enabled</code>.</div>'
+                )
+            dev_jumps_widget = """
+<<widget "devJumps">>
+<div id="dev-jumps-widget" style="background:#212529;color:#fff;border:1px solid #dc3545;border-radius:4px;padding:6px 8px;margin-bottom:8px;">
+<div style="font-weight:bold;font-size:11px;color:#ffc107;margin-bottom:4px;">&#9193; DEV JUMPS</div>
+""" + jumps_body + """
+</div>
+<</widget>>
+"""
+
         # Dev mode time controls (extra shortcuts)
         dev_time_controls = ""
         if self.dev_mode:
@@ -14856,6 +14939,7 @@ $(document).on(':passagestart', function(ev) {
             story_caption = f""":: StoryCaption
 <<devIndicator>>
 <<reviewButton>>
+<<devJumps>>
 <<missingMediaButton>>
 <<timeDisplay>>
 {portrait_line}<<sidebarItems>>{phone_btn_line}
@@ -15662,7 +15746,7 @@ if (clothingMsg) {
 
 """
 
-        return info_nav_script + dev_script_passage + time_widgets_start + dev_indicator + review_button + time_display_widget + sidebar_items_widget + phone_widget + player_portrait_widget + active_modifiers_widget + counter_widgets + player_traits_widget + npc_traits_widget + """
+        return info_nav_script + dev_script_passage + time_widgets_start + dev_indicator + review_button + dev_jumps_widget + time_display_widget + sidebar_items_widget + phone_widget + player_portrait_widget + active_modifiers_widget + counter_widgets + player_traits_widget + npc_traits_widget + """
 
 <<widget "playerFlags">>
 <div id="flags-widget" class="traits-display">

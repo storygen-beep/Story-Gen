@@ -1,0 +1,60 @@
+# ════════════════════════════════════════════════════════════════════════════
+# 6_dev_shortcuts.toml — DEV JUMPS (testing only)
+#
+# Every canvas here is gated on flag `dev_mode_enabled is_true`. That flag is set
+# at StoryInit ONLY in `--dev` builds (package_from_toml --dev), so these canvases
+# are completely inert in a shipped game. The v2 engine treats a canvas with that
+# trigger flag as a "dev shortcut": the flag-chain validator, hint index, and
+# flag-setter index all SKIP it, and the sidebar `<<devJumps>>` widget renders a
+# link to its entry node (reached by direct Engine.play — the trigger is a marker,
+# not a real gate). See memory: dev_jumps_engine.
+#
+# To add a jump: copy a block, point the exit at the node/location you want, and
+# list the flag/trait sets that make that spot coherent. Rebuild with --dev.
+# ════════════════════════════════════════════════════════════════════════════
+
+# ─── ▶ Renner drain — seeds a first-drain state and lands on the drain payload ───
+[[canvases]]
+id          = "dev_jump_renner_drain"
+name        = "▶ Renner drain"
+description = "DEV JUMP. Seeds a coherent first-drain state (drain worn + spent, names delivered, Renner corruption 60, drain flags set) and jumps straight to renner_control_canvas.intro. Gated dev_mode_enabled; inert in shipped builds."
+
+# Anchored to a real location so the canvas emits its passages (an unanchored canvas
+# is pruned as unreachable and the sidebar link would 404). It renders as a card on the
+# depot page in --dev, does NOT auto-hijack the room (verified), and the primary path is
+# always the sidebar <<devJumps>> link (direct Engine.play, ignores this trigger). The
+# dev_mode_enabled condition is the MARKER the engine keys on to tag this a dev shortcut.
+[canvases.trigger]
+location      = "renner_depot"
+is_repeatable = true
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "dev_mode_enabled", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "seed"
+name = "Renner drain (dev)"
+blocks = [
+  { type = "paragraph", content = "Dev jump: seeding the drain state and dropping into the payload." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Jump to the drain"
+targetType = "node"
+nodeId     = "renner_control_canvas.intro"
+effects = [
+  { targetType = "player", trait = "equipped_weapon", op = "set", value = 1 },
+  { targetType = "player", trait = "drain_charge",     op = "set", value = 0 },
+  { targetType = "player", trait = "drains_done",      op = "set", value = 1 },
+  { targetType = "player", trait = "names_known",      op = "set", value = 1 },
+  { targetType = "npc", npcId = "npc_renner", trait = "corruption", op = "set", value = 60 },
+]
+flagEffects = [
+  { targetType = "player", flag = "opening_done",           op = "set" },
+  { targetType = "player", flag = "renner_fucked_once",     op = "set" },
+  { targetType = "player", flag = "renner_anal_once",       op = "set" },
+  { targetType = "player", flag = "renner_drained",         op = "set" },
+  { targetType = "player", flag = "renner_leads_extracted", op = "set" },
+]
