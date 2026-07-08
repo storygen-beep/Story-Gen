@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 51,
+  "book_revision": 57,
   "pipeline_phase": "authoring",
   "map_design": {
     "topology": "done",
@@ -635,6 +635,87 @@
         "Authoring-only, ZERO engine. Gates/economy intact -- the three stay declared player core_traits (1_metadata:35/36/43); still read by the Burned-Yard crawl / Pit / gate toll / market (fighting 9x + stealth 15x trait_key; coin via costs/effects). E18 auto-emit only re-bars _count/_done keys, so coin won't reappear. Merge OK + package (--dev) GREEN, all flag chains valid.",
         "ARTIFACT-VERIFIED on fresh index.html: setup.hiddenTraits no longer lists fighting/stealth/coin (yard_depth/weapon_repair remain); setup.sidebar_items = only energy+hygiene trait_status_text + Renner npc_panel (no bars); widget-simulation confirms the Traits list renders coin/corruption/energy/fighting/hygiene/money/stealth, none as bars. No commit/push."
       ]
+    },
+    {
+      "id": "beat_0030",
+      "status": "validated",
+      "target_phase": "2",
+      "title": "Underworld Hunt 1 — the two names at the drain",
+      "introduces": [
+        "Doss + Rourke (the two dead men, named-only)",
+        "names_known (hidden TRAIT, default 0)"
+      ],
+      "canvases": [
+        "EXTEND renner_control_canvas: weave Doss+Rourke into .intro (~5_scenes:1155-1160) AND .again_ask (~1195-1202) prose (currently nameless 'two of my people').",
+        "SET names_known=1 (op=set, NOT add) on BOTH loop_renner_finisher drain-routing choices: first-drain (drains_done lt 1, ~5_scenes:1057-1067) AND repeat-drain (drains_done gte 1, ~1081). Returning players (drains_done>=1) only reach the repeat path — must set there too or old saves are walled out.",
+        "names_known declared in 0_systems_spec [player.core_traits] hidden. TRAIT not flag (triggerless drain setter = flag-chain validator hard-fail). Extend-only; no rename."
+      ]
+    },
+    {
+      "id": "beat_0031",
+      "status": "validated",
+      "target_phase": "2",
+      "title": "Underworld Hunt 2 — the lead (Sol at The Anchor)",
+      "introduces": [
+        "Sol (promoted placeholder -> the informant)",
+        "hunt_lead (flag)",
+        "Marsh named + 'The House, Sundays' telegraph"
+      ],
+      "canvases": [
+        "NEW canvas at the_anchor: bring the names -> Sol points at Marsh + 'The House, every Sunday'. Lane 1 talk-hub. conditions names_known>=1 (version='1.0'). SETS hunt_lead. Located setter -> flag legal.",
+        "Register Sol at the_anchor (light presence; he tends the bar). Reconcile: the design_book 'Long Hour' name retires into the built 'The Anchor'.",
+        "Telegraph 'Marsh — The House, Sundays' on the quest/nav so the player knows when to come."
+      ]
+    },
+    {
+      "id": "beat_0032",
+      "status": "validated",
+      "target_phase": "2",
+      "title": "Underworld Hunt 3 — Sunday at The House (pay Rue + serve/drain Marsh)",
+      "introduces": [
+        "Marsh (the fixer, one-off drain)",
+        "Rue (House girl, Axis A — pay-off then persists)",
+        "crew_known (flag)",
+        "rue_met (flag)",
+        "coin's first real SINK (pay Rue ~25)"
+      ],
+      "canvases": [
+        "NEW canvas at underworld_brothel with trigger.schedules=[{weekdays=[6], start_time, end_time}] — Sundays only (real weekday support; time_state.current_day cycles Mon-Sun). NOT a [[npcs.schedules]] row (would leak Marsh onto the Schedule page).",
+        "Flow: conditions hunt_lead is_true (version='1.0') -> Rue's up for Marsh -> pay Rue ~25 coin to yield the slot (coin sink) -> take the slot -> Marsh arrives -> serve -> DRAIN (gate the drain step on equipped_weapon=1 + drain_charge>=1, reuse the Renner pattern) -> he gives up the crew's place. SETS crew_known + rue_met.",
+        "Marsh = one-off, NO relation/corruption ladder (service-NPC anti-pattern). Rue persists after as a light wary face (rue_met self-guard). Cold/transactional brothel register.",
+        "Player sleeps (Power down) to reach Sunday. Media: brothel serve/drain clip (silent-skip if missing)."
+      ]
+    },
+    {
+      "id": "beat_0033",
+      "status": "validated",
+      "target_phase": "2",
+      "title": "Underworld Hunt 4 — the crew's place",
+      "introduces": [
+        "crew_den (NEW location, off underworld_strip)",
+        "bastien_found (flag)",
+        "the name BASTIEN surfaces"
+      ],
+      "canvases": [
+        "NEW location crew_den: def + entry_from=underworld_strip + entry_conditions crew_known (blocked_message, version='1.0') — locked-visible until crew_known. Room-content floor = the search IS the scene (ransacked hideout).",
+        "NEW search canvas at crew_den: conditions crew_known (version='1.0') -> she finds the name Bastien. SETS bastien_found. Located setter -> flag legal.",
+        "Media: ransacked hideout still."
+      ]
+    },
+    {
+      "id": "beat_0034",
+      "status": "validated",
+      "target_phase": "2",
+      "title": "Underworld Hunt 5 — the grab (capstone, chunk-end)",
+      "introduces": [
+        "Bastien REVEALED (owner, capture-and-flip; arc = next chunk)",
+        "bastien_revealed (flag)"
+      ],
+      "canvases": [
+        "NEW auto-fire capstone at crew_den: priority>=9, is_repeatable=false, BARE (no npc=/requires_npc — an npc= one-shot renders nowhere). conditions bastien_found (version='1.0'). His people grab her -> face-to-face with Bastien (he knows she's Mercer's via his connections, NOT Cain; Cain-alliance stays OFF — saved reveal) -> single Continue. SETS bastien_revealed. Chunk ENDS on his question hanging.",
+        "NO new fail-state (the capture is scripted, not a game-over). Register: confrontation in dialog blocks, Tier-3 earned prose (once-only capstone).",
+        "Media: grab / face-to-face still."
+      ]
     }
   ],
   "structure_registry": {
@@ -735,7 +816,7 @@
       {
         "id": "bastiens",
         "category": "reachable",
-        "note": "Mission 2 (dealer)"
+        "note": "Mission 2 — PARKED for Bastien's OWN domain (his arc, next chunk); re-cast dealer→owner (rev 52). NOT the crew den (that's crew_den). Frontier seed, not built."
       },
       {
         "id": "the_anchor",
@@ -786,6 +867,11 @@
         "id": "underworld_market",
         "category": "reachable",
         "note": "black market — coin SINK: weapon (+fighting)/gear (+stealth) buys + the humans pen (witness/awakening, no buy) (beat_0018)"
+      },
+      {
+        "id": "crew_den",
+        "category": "locked",
+        "note": "NEW (Underworld Hunt, rev 53) — the dead crew's hideout, off underworld_strip; unlocked by crew_known (from draining Marsh). Content floor = search + find 'Bastien' + the grab capstone fires here. Def/lock/room-content at build (beat_0033/0034)."
       }
     ],
     "npcs": [
@@ -805,10 +891,10 @@
       },
       {
         "id": "npc_bastien",
-        "role": "core target — Mission 2 (submissive cover)",
+        "role": "core target — Mission 2; the underworld's quiet owner (bar + brothel), the wall the Underworld Hunt hits",
         "depth": "core",
-        "arc_shape": "infiltration relation+corruption",
-        "status": "cast"
+        "arc_shape": "CAPTURE-AND-FLIP (re-cast from seduce-in, turn 73/rev 52) — NO relation/corruption infiltration climb; REVEALED at the kidnap that caps the hunt (his people grab her; he already knows she's Mercer's via his connections, NOT Cain); his flip + drain = LATER chunk; secretly Cain's ally = SAVED reveal kept off the kidnap",
+        "status": "re-cast (Underworld Hunt reconcile) — revealed this chunk, arc deferred"
       },
       {
         "id": "npc_calloway",
@@ -854,10 +940,24 @@
       },
       {
         "id": "npc_sol",
-        "role": "ambient anchor — city-life + leads-color",
+        "role": "ambient anchor + THE INFORMANT (leads-color made concrete) — the Underworld Hunt's talk-hub",
         "depth": "light island",
-        "arc_shape": "leads-color (no lock)",
-        "status": "cast — name placeholder; add/cut fork pending"
+        "arc_shape": "leads-color → hunt pointer (no lock, no arc); turns Renner's two names (Doss + Rourke) into a lead on the fixer Marsh at The House",
+        "status": "KEPT — add/cut fork RESOLVED (promoted to informant, turn 73/rev 52)"
+      },
+      {
+        "id": "npc_marsh",
+        "role": "the fixer — Doss's surviving partner; the Underworld Hunt's mark (books Rue at The House on Sundays)",
+        "depth": "light (one beat)",
+        "arc_shape": "ONE-OFF DRAIN — no relation/corruption climb; serve-in-her-place + drain yields the crew's place; his watcher seeds Bastien's grab; spent after",
+        "status": "cast (Underworld Hunt, turn 73/rev 52)"
+      },
+      {
+        "id": "npc_rue",
+        "role": "the House girl (Axis A) — Marsh's Sunday booking; paid off the slot, then a standing underworld contact",
+        "depth": "light island",
+        "arc_shape": "obstacle → standing thread — schemed off the slot with coin (the underworld coin's first real sink), then PERSISTS as a named face (the roster fix in miniature)",
+        "status": "cast (Underworld Hunt, turn 73/rev 52)"
       }
     ],
     "flags": [
@@ -885,8 +985,34 @@
         "key": "found_dead_men",
         "set_by": "yard_find_3 (depth>=3)",
         "gates": "Trail quest card ready_text"
+      },
+      {
+        "key": "hunt_lead",
+        "set_by": "the_anchor Sol lead canvas (beat_0031, gated names_known>=1)",
+        "gates": "the Sunday House beat (beat_0032) + the 'Marsh — The House, Sundays' telegraph"
+      },
+      {
+        "key": "crew_known",
+        "set_by": "Sunday House serve+drain-Marsh (beat_0032)",
+        "gates": "crew_den unlock (beat_0033)"
+      },
+      {
+        "key": "bastien_found",
+        "set_by": "crew_den search (beat_0033)",
+        "gates": "the grab auto-fire capstone (beat_0034)"
+      },
+      {
+        "key": "bastien_revealed",
+        "set_by": "the grab capstone (beat_0034)",
+        "gates": "chunk-end marker; the hook into Bastien's arc (next chunk)"
+      },
+      {
+        "key": "rue_met",
+        "set_by": "Sunday House Rue pay-off (beat_0032)",
+        "gates": "Rue's light persisting presence at the brothel (self-guard)"
       }
     ],
+    "_new_trait_note": "names_known (TRAIT, default 0, hidden) — set=1 on BOTH loop_renner_finisher drain choices (.intro first-drain + .again repeat); gates the whole hunt (Sol lead reads names_known>=1). A TRAIT not a flag because the drain setter is triggerless (flag-chain validator). Not in the flags[] list above; registered here + in beat_0030 introduces. Other unregistered trait counters (coin/drain_charge/arousal_charge/etc.) remain known-incomplete in this registry.",
     "schedules": [],
     "clothing": {
       "enabled": true,
@@ -925,11 +1051,12 @@
     }
   },
   "next_up": [
+    "UNDERWORLD HUNT (Act-2 on-ramp — the ACTIVE work). CASTING (rev 52) + BLUEPRINT (rev 53) DONE; Step 4 scoped down (Bastien's arc deferred to next chunk — LO's 'not past the lock' line); plan seeded beat_0030-0034 (see plan[] + design_book Blueprint block). REMAINING: (Step 6) mini day-breadth check (prove Rue/brothel/underworld persist as live threads, not a corridor); (Step 7) author one beat/turn, green build + live-test BOTH cohorts. Build law: names_known = a TRAIT set on BOTH drain-routing choices (loop_renner_finisher first-drain ~5_scenes:1057-1067 AND repeat-drain ~1081) + the two names into the .intro (~1155) and .again_ask (~1195) prose; version='1.0' on every new conditions block; Sunday = a canvas trigger.schedules weekdays=[6] (weekdays VERIFIED native in v2.py — time_state.current_day cycles Mon-Sun; NOT a conditions predicate, none exists; NOT a [[npcs.schedules]] row — schedule-page spoiler leak); extend-only; clamp any coin op=add. SEPARATE non-blocking track: patch the author-game skill (still-point cast-floor §1B, thin-day exemption §2F, lewd-payoff cadence floor §5E) so the next still-point game doesn't re-ship this review.",
     "PLAYER PORTRAIT open items: (1) DECIDE the 3 dormant partials (pp_underwear/topless/bottomless) — add a tease/strip beat that sets pp_underwear before the naked pose (uses 1-2 more of LO's images), or drop them. (2) Topless pick is low-res (296px Google thumbnail) — swap for a sharper one if kept. (3) The naked/undress stills are downloaded amateurs = a DIFFERENT woman than the blonde-cyborg SFW faces (accepted mismatch). (4) NOT committed; NOT deployed to the portal.",
     "PLAYER PORTRAIT reactive art (follow-on, NOT AI-gen): source 4 DOWNLOADED photos of the SAME woman as wren.jpg (naked/topless/bottomless/underwear), drop into videos/portraits/, uncomment the 4 image lines in the [player_portrait] block (0_systems_spec.toml), re-merge+rebuild. They resolve immediately + degrade via onerror. Optional two-faces later: add worn_type tags to company_grays/cover_dockhand + a distinct in-cover portrait.",
     "beat_0015 DONE + green + live-verified + WARDROBE ART sourced+live-verified (turn 38). Open: DEPLOY to the portal (storygen-beep/Story-Gen) when LO wants it live (still local). FUTURE Act work (the A.5->B frontier): Bastien/Calloway deep-design+build (covers granted + tagged by worn_type so wrong-cover-at-wrong-mark = wrong reaction), the_site/chip ending, the disguise SHOP + Pell upgrades (the credits sink)."
   ],
-  "_active_beat": "Portrait CLOTHING-ONLY (turn 72, rev 51): pp_naked sex-scene trigger fully removed; portrait moves ONLY on wardrobe changes (grays/cover/underwear/topless/bottomless/naked). During sex she reads as her worn outfit. Prior: Portrait COMPLETE + all 4 undress states live (turn 68, rev 47). Engine getUndressLevel rewritten so bra=top-cover, briefs=bottom-cover -> topless(bra off)/bottomless(briefs off) reachable from the dress+bra+briefs wardrobe. 6 states proven (grays/cover/underwear/topless/bottomless/naked) + sex-loop naked. Prior: Portrait: wardrobe undress FIXED + verification pass done (turn 67, rev 46). Engine fixes: --video-folder build-warning + logger def (game_service.py). Known limit: brothel/mercer cum-shot + drain-Q&A re-dress a beat early (LOCATION-exit config fires on ENTRY not click; Renner=choices so its drain act is naked). Prior: PORTRAIT BUG FIXED + live-proven (turn 66, rev 45): wardrobe undress was dead (I'd dropped the engine equipped-based override images when switching to the pp_naked flag). Restored naked/underwear/topless/bottomless_image (equipped-based, the wardrobe) + kept pp_naked flag (sex loops only). Full matrix PASS. Prior: PLAYER PORTRAIT fully reactive + LIVE-PROVEN (turn 65, book rev 44): two SFW faces (grays default + cover rule, Gemini) + naked-during-sex (pp_naked flag wired into the 3 strip loops, cleared on finisher exits + daily_tick). 6 portraits in videos/portraits/. Engine fixes v2.py:1135 (./media->./videos) + new .sidebar-player-portrait CSS. 3 partial-undress images dormant (no beat sets them). Prior: PLAYER PORTRAIT (static) SHIPPED + GREEN + LIVE-PROVEN (turn 64, book rev 43). Top-most sidebar portrait via opt-in [player_portrait] block; static wren.jpg for now, reactive undress art = downloaded-photo follow-on. Engine fix v2.py:1135 (./media->./videos prefix). Prior: A->A.5 CHUNK (14/14) + the cover/disguise WORN-STATE system (beat_0015) BUILT + GREEN + ARTIFACT-VERIFIED (turn 36, book rev 23). Boss-issued cover (no shop), granted un-worn at the morning briefing, equipped at the wren_room rack; gates all 8 Renner surfaces; out of cover = 3 wrong-reactions (threat / 2 squints). LIVE-PLAY PASSED (turn 37, real Chromium via twine-game-explorer): grant -> threat-read out of cover -> equip at the rack -> hire in cover -> depot works in cover / squints out of cover, all confirmed. Then (future Act work): the A.5->B frontier — Bastien/Calloway deep-design+build (covers via worn_type), the_site/chip ending, the disguise SHOP + Pell upgrades (the credits sink). NOT deployed to the portal.",
+  "_active_beat": "UNDERWORLD HUNT — ALL 5 SCENES BUILT + LIVE-VERIFIED (turn 77, rev 57). Full chain proven end-to-end: beat_0030 two names @drain (names_known, both cohorts) -> 0031 Sol lead @Anchor (hunt_lead) -> 0032 Sunday @House (de-grinded Rue deal -> rue_met + Rue persists via hunt_rue_hub; serve+drain Marsh -> crew_known; soft-lock guard: drain choice hidden when empty, graceful exit, crew_known stays false; Sunday-window = weekdays=[6] 00:00-23:59 shows Sun/hidden Mon) -> 0033 crew_den search (locked-visible until crew_known; find Bastien -> bastien_found) -> 0034 grab capstone (bare auto-fire, gated bastien_found + bastien_revealed is_false = fires ONCE, no re-kidnap; face-to-face, Cain-alliance OFF; -> bastien_revealed, dumped @the_waterfront). Quest trail (FIX #3): stale 'end of build' card RE-GATED to a returning-player re-drain nudge; 3 breadcrumb rungs + end card; PROVEN exactly-one-card-live across all 5 states (no Frame-3 blank). FIX #1 (Rue persists) + FIX #2 (de-grind) both live-verified. New: npc_sol, npc_bastien (minimal, dialog speakers), crew_den location. Playwright: every beat green + zero JS errors. sol.jpg/bastien.jpg + house/crew media pending find-media (silent-skip). Production output REBUILT this turn. NEXT: LO to review/deploy; then Bastien's ARC chunk (captivity/flip/Cain reveal) where the grind->content cure lands. Prior: UNDERWORLD HUNT — LO chose BRIDGE + 3 in-lock fixes; beat_0031 (the lead) BUILT + LIVE-VERIFIED (turn 76, rev 55). npc_sol declared (bartender @the_anchor, ambient, no arc); hunt_sol_lead canvas gated names_known>=1 + hunt_lead is_false -> names Marsh (The House, Sundays) + carry-the-drain telegraph -> SETS hunt_lead; retires once taken (gating proven). FIX #3 (quest trail): the stale priority-9 'end of the build' card RE-GATED to names_known<1 = a returning-player re-drain nudge; hunt breadcrumb rung 1 added (names_known>=1 + hunt_lead is_false -> points to the Anchor); yard Trail ready_text de-staled. Playwright: Sol renders, Marsh+Sundays+carry all present, hunt_lead flips, canvas retires, zero errors, build GREEN. Pre-existing brothel trait-effect warnings ('Take him'/'Serve him', dict>int) NOT mine — noted for beat_0032. sol.jpg pending media (silent-skip). NEXT: beat_0032 (the big one) = Sunday @underworld_brothel (trigger.schedules weekdays=[6] with start=00:00 end=23:59 per the review's point-trigger trap), de-grinded pay-Rue (fix #2: costs not effects, trivial/waivable), serve+drain Marsh (reuse Renner drain pattern; soft-lock guard = persistent paid flag + graceful under-geared exit), watcher-seed, Rue-persist recurring beat (fix #1) -> crew_known. Prior: UNDERWORLD HUNT — beat_0030 (the two names) BUILT + LIVE-VERIFIED (turn 75, rev 54): names_known TRAIT declared (0_systems label + 1_metadata core_trait, inits 0); Doss+Rourke woven into the drain .intro (cascade) + .again_ask; names_known=1 set on BOTH loop_renner_finisher drain choices. Playwright headless proof (both cohorts): cohort A first-drain drains_done 0->1 + names_known 0->1; cohort B repeat-drain (returning player) drains_done 1->2 + names_known 0->1; names render live in .again_ask + present in .intro cascade source; ZERO js errors; merge+scratch-build GREEN. Production output NOT rebuilt yet (holding until the chunk is further along). NEXT: beats 0031-0034 — BLOCKED on LO's day-breadth framing call (bridge vs invest; Rue-persist; de-grind the coin gate; fix the stale 'end of build' quest card + add a hunt trail) per the Step-6 review. Prior: UNDERWORLD HUNT — Step-5 BLUEPRINT DONE + plan seeded (turn 74, rev 53): 5 scenes planned (beat_0030-0034): two names @drain (names_known TRAIT, both branches) -> Sol lead @The Anchor (hunt_lead) -> Sunday @The House (pay Rue ~25 coin + serve/drain Marsh -> crew_known) -> crew_den search (bastien_found) -> grab auto-fire capstone (bastien_revealed, chunk-end). Chain linear/acyclic/cold-start-reachable. Engine-verified: weekdays native (Sunday = canvas trigger.schedules weekdays=[6], NOT a schedule row/conditions). Registered: crew_den + flags hunt_lead/crew_known/bastien_found/bastien_revealed/rue_met + names_known trait; design_book Blueprint block + header(rev53). LO's line held: nothing past the locked reveal (Bastien's arc = next chunk). NO TOML. NEXT: Step-6 quick day-breadth check, then author beat_0030 (the two names) first. Prior: UNDERWORLD HUNT — Step-3 CASTING reconcile DONE (turn 73, rev 52): the Act-2 hunt that reveals Bastien is diagnosed + cast. Locked + registered: Bastien re-cast (dealer→owner, seduce-in→capture-and-flip, supply→secret Cain-alliance); Sol promoted placeholder→informant (add/cut fork resolved = kept); Marsh (one-off drain fixer) + Rue (House girl, Axis A, persists) added; Doss+Rourke = named-only dead men. design_book Casting table + sketches + coverage line + header(rev52) reconciled; ledger npcs + decisions_log(turn 73) + book_revision synced. Deeper 'submissive dealer' arc-refs marked superseded-pending-Step-4. NO TOML — design only. NEXT: Step-4 deep-design (Bastien full brief incl. captivity/flip/Cain-reveal destination; light sketches Sol/Marsh/Rue) → Step-5 blueprint (gate on names_known TRAIT, Sunday as tip-gated beat NOT a schedule row, kidnap = auto-fire capstone) → Step-6 mini day-breadth check → Step-7 authoring (extend-only; version='1.0'; names+names_known on BOTH drain branches). Prior: Portrait CLOTHING-ONLY (turn 72, rev 51): pp_naked sex-scene trigger fully removed; portrait moves ONLY on wardrobe changes (grays/cover/underwear/topless/bottomless/naked). During sex she reads as her worn outfit. Prior: Portrait COMPLETE + all 4 undress states live (turn 68, rev 47). Engine getUndressLevel rewritten so bra=top-cover, briefs=bottom-cover -> topless(bra off)/bottomless(briefs off) reachable from the dress+bra+briefs wardrobe. 6 states proven (grays/cover/underwear/topless/bottomless/naked) + sex-loop naked. Prior: Portrait: wardrobe undress FIXED + verification pass done (turn 67, rev 46). Engine fixes: --video-folder build-warning + logger def (game_service.py). Known limit: brothel/mercer cum-shot + drain-Q&A re-dress a beat early (LOCATION-exit config fires on ENTRY not click; Renner=choices so its drain act is naked). Prior: PORTRAIT BUG FIXED + live-proven (turn 66, rev 45): wardrobe undress was dead (I'd dropped the engine equipped-based override images when switching to the pp_naked flag). Restored naked/underwear/topless/bottomless_image (equipped-based, the wardrobe) + kept pp_naked flag (sex loops only). Full matrix PASS. Prior: PLAYER PORTRAIT fully reactive + LIVE-PROVEN (turn 65, book rev 44): two SFW faces (grays default + cover rule, Gemini) + naked-during-sex (pp_naked flag wired into the 3 strip loops, cleared on finisher exits + daily_tick). 6 portraits in videos/portraits/. Engine fixes v2.py:1135 (./media->./videos) + new .sidebar-player-portrait CSS. 3 partial-undress images dormant (no beat sets them). Prior: PLAYER PORTRAIT (static) SHIPPED + GREEN + LIVE-PROVEN (turn 64, book rev 43). Top-most sidebar portrait via opt-in [player_portrait] block; static wren.jpg for now, reactive undress art = downloaded-photo follow-on. Engine fix v2.py:1135 (./media->./videos prefix). Prior: A->A.5 CHUNK (14/14) + the cover/disguise WORN-STATE system (beat_0015) BUILT + GREEN + ARTIFACT-VERIFIED (turn 36, book rev 23). Boss-issued cover (no shop), granted un-worn at the morning briefing, equipped at the wren_room rack; gates all 8 Renner surfaces; out of cover = 3 wrong-reactions (threat / 2 squints). LIVE-PLAY PASSED (turn 37, real Chromium via twine-game-explorer): grant -> threat-read out of cover -> equip at the rack -> hire in cover -> depot works in cover / squints out of cover, all confirmed. Then (future Act work): the A.5->B frontier — Bastien/Calloway deep-design+build (covers via worn_type), the_site/chip ending, the disguise SHOP + Pell upgrades (the credits sink). NOT deployed to the portal.",
   "decisions_log": [
     {
       "turn": 1,
@@ -1355,6 +1482,26 @@
       "turn": 72,
       "book_revision": 51,
       "note": "LO: remove the sex-scene trigger — portrait is CLOTHING-ONLY now. Deleted the entire pp_naked flag mechanism (13 source refs): the [[player_portrait.outfits]] flag rule + daily_tick unset (0_systems_spec), the SET on all 3 loop intro-poses + the UNSET on all finisher exits (Renner 5 exits incl. the drain-array line, brothel+mercer configs). Kept naked_image/topless/bottomless/underwear (equipped-based) + cover rule. Consequence (intended): during Renner/brothel/Mercer scenes the sidebar shows her WORN outfit (cover on mission, grays inside), not naked. Rebuilt PRODUCTION green, flag chains valid, 0 pp_naked in built HTML, DEV MODE=0. Live-proven (test_clothing_only.js): wardrobe matrix all 6 states resolve + pp_naked-set-while-dressed returns the worn outfit (NOT naked). design_book updated to one mechanism; drain-timing limitation now moot (removed)."
+    },
+    {
+      "turn": 73,
+      "book_revision": 52,
+      "note": "UNDERWORLD HUNT (Act-2 on-ramp) — DIAGNOSIS + CASTING locked (Step 3). mopoga review ('grind not content / lacks content') diagnosed as PLACEMENT+RATIO+ROSTER, not word-count: only 2 developed NPCs, Act 2 designed-but-unbuilt, so the story runs out of people (full record: design_analysis_underworld_hunt.md). Fix = breadth of PEOPLE via the hunt that REVEALS Bastien. LOCKED beats: Renner drain gives TWO NAMES (Doss + Rourke, NEW, both drain branches) → Sol (informant) points at fixer Marsh (books Rue at The House Sundays) → pay Rue off the slot (coin's first real sink) + serve + DRAIN Marsh → the crew's place → find BASTIEN + his people GRAB her → face-to-face (he knows she's Mercer's via his connections, NOT Cain). LO's approved calls ('go with your calls'): names = Doss+Rourke; Sol PROMOTED to informant (resolves his add/cut fork, stays Long Hour bartender, no relocation); underworld = BREADCRUMB not a new grind/currency; scheme = PAY Rue off, she PERSISTS; Marsh = one-off drain, no meters; Bastien RE-CAST dealer→owner(bar+brothel), submissive-cover→CAPTURE-AND-FLIP, supply→secret Cain-alliance (saved reveal, off the kidnap). Bastien's flip/drain arc = NEXT chunk (revealed only here). Registered: npc_bastien re-cast, npc_sol kept+re-cast, npc_marsh + npc_rue added; design_book Casting table + sketches + coverage-line + header(rev52) reconciled; deeper 'submissive dealer' arc-refs (§Cast L153, §Spatial L200, §Top-level L258) marked SUPERSEDED-pending-Step-4. Build constraints carried forward: names_known = a TRAIT (triggerless-setter validator) on BOTH drain choices; version='1.0' on every new conditions block; extend-only (shipped); Sunday = tip-gated wait-for-Sunday beat NOT a declared [[npcs.schedules]] row (day-of-week primitive unverified + schedule-page spoiler-leak). NO TOML yet — casting/design only. NEXT: Step 4 deep-design (Bastien full brief + light sketches for Sol/Marsh/Rue) → Step 5 blueprint → Step 6 mini-check → Step 7 authoring."
+    },
+    {
+      "turn": 74,
+      "book_revision": 53,
+      "note": "UNDERWORLD HUNT — Step 4 SCOPED DOWN + Step 5 BLUEPRINT written + plan seeded. LO drew a hard line: 'we are not writing further to what we have locked' — so Bastien gets NO arc-design now (his flip/ownership/Cain-reveal = next chunk); Step 4 pulled back to the light story the locked reveal needs. Step 5 blueprint (propose-first, LO approved 'go ahead, write it in'): 5 scenes = beat_0030 two names @drain (names_known TRAIT on BOTH drain choices) / 0031 Sol lead @the_anchor (hunt_lead) / 0032 Sunday @underworld_brothel (pay Rue ~25 coin + serve+drain Marsh -> crew_known; drain step gated equipped_weapon=1+drain_charge>=1) / 0033 crew_den search (NEW location off underworld_strip -> bastien_found) / 0034 grab auto-fire capstone (bare, priority>=9, is_repeatable=false -> bastien_revealed, chunk ends). Chain linear/acyclic/cold-start-reachable; every setter located except names_known (trait). ENGINE FACT CORRECTED (verified in v2.py): weekdays ARE native (time_state.current_day cycles Mon-Sun; advanceDay %7); 'every Sunday' = a canvas trigger.schedules weekdays=[6] (NOT a conditions predicate — none exists; NOT a [[npcs.schedules]] row — that leaks Marsh onto the Schedule page). LO-approved forks: crew_den = NEW (bastiens parked for Bastien's domain next chunk); Sol lives at the built The Anchor (design_book 'Long Hour' name retires); pay Rue ~25 coin (coin's first real sink). Registered: crew_den location, flags hunt_lead/crew_known/bastien_found/bastien_revealed/rue_met, names_known trait note; design_book Blueprint section + header(rev53). NO fail-state added (capture scripted). NO TOML yet. NEXT: Step 6 quick day-breadth check -> Step 7 author beat_0030 first (the two names)."
+    },
+    {
+      "turn": 75,
+      "book_revision": 54,
+      "note": "STEP-6 REVIEW (4 skeptical lenses, independent) + beat_0030 BUILT+VERIFIED. Review verdict = GO-WITH-FIXES (NOT go): the hunt as blueprinted is a CORRIDOR that adds zero repeatable day-content -> reveals Bastien but does NOT itself cure the mopoga 'grind not content' review (day-breadth critic FAIL, earned). Concrete bugs it caught: (1) the quest ladder's priority-9 'You've reached the end of the current build' card (5_scenes:1637, gated renner_leads_extracted is_true + the_site_open is_false; the_site_open set NOWHERE) stays live through the whole hunt + fires the moment the drain sets renner_leads_extracted -> tells the player to STOP exactly when the hunt opens; nothing points to Sol; returning cohort gets no re-drain nudge. (2) Sunday window trap: a bare trigger.schedules weekdays=[6] with null end_time = a 1-hour point-trigger (template_import:1699 / v2:3136) -> House shows only 00:00-00:59; must pin start_time='00:00' end_time='23:59'. (3) reveal gated behind ~25 coin = re-running the cold coin loops = the exact grind complaint. (4) House soft-lock: paid-but-can't-drain re-pays every Sunday. (5) rue_met gates nothing (dead flag = the thin-ship defect). My recommendation to LO: treat this as a BRIDGE (respects his 'not past the lock' line) — reveals Bastien, re-opens the story; the grind->content cure lands with Bastien's arc — + 3 in-lock fixes (make Rue's persist real OR drop it; de-grind the coin gate; retire the end-card + add a hunt trail); Sunday-window + soft-lock = build-time bakes. AWAITING LO's framing call for 0031-0034. beat_0030 (two names) authored + Playwright-verified both cohorts (names_known 0->1 on first AND repeat drain; names render; zero errors; build green); status=validated. Production output NOT rebuilt yet."
+    },
+    {
+      "turn": 77,
+      "book_revision": 57,
+      "note": "UNDERWORLD HUNT CHUNK COMPLETE — LO chose BRIDGE + 3 in-lock fixes; all 5 scenes (beat_0030-0034) authored + Playwright-verified + production output rebuilt. Scenes: 0030 two names @drain (verified both cohorts); 0031 Sol lead @the_anchor (npc_sol declared; hunt_lead; retires when taken); 0032 Sunday @underworld_brothel (weekdays=[6] 00:00-23:59 — shows Sun/hidden Mon; FIX #2 de-grind = free Rue deal + optional coin tip via costs; FIX #1 Rue persists = hunt_rue_hub live after rue_met; serve+drain Marsh -> crew_known; soft-lock GUARD verified = drain choice hidden when charge<1, graceful nodrain exit, crew_known stays false; watcher seed); 0033 crew_den (NEW locked-visible location, entry_conditions crew_known; search finds Bastien -> bastien_found -> routes to grab); 0034 grab capstone (npc_bastien declared; bare auto-fire gated bastien_found + bastien_revealed is_false = FIRES ONCE, no re-kidnap; face-to-face, he knows via connections NOT Cain, Cain-alliance stays OFF as saved reveal; -> bastien_revealed, dumped @the_waterfront, chunk ends). FIX #3 quest trail: stale 'end of build' card re-gated to returning-player re-drain nudge (names_known<1); 3 breadcrumb rungs + end card; PROVEN exactly-one-card-live across all 5 states (returning/drain/Sol/Marsh/reveal) — no Frame-3 blank. Every merge+build GREEN (no MISSING HINT, flag chains valid), zero JS errors across all hunt nodes. Pending media (silent-skip): sol.jpg, bastien.jpg, scenes/anchor_bartender, scenes/house_sunday, sex/house_marsh_serve, scenes/crew_den_interior — join the next find-media pass. Per LO: design docs (design_analysis_underworld_hunt.md + design_book blueprint) deliberately NOT reconciled to the bridge/fixes (LO: 'dont update the doc'); the ledger carries the current truth. NEXT: LO review/deploy (portal push is a separate manual step, still local); then Bastien's ARC chunk (captivity/flip/the Cain reveal) — where the grind->content cure actually lands + the day-breadth load sits. Separate non-blocking track still open: the author-game SKILL defect (still-point cast-floor / thin-day exemption / lewd-payoff cadence)."
     }
   ]
 }

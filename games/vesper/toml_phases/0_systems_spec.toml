@@ -179,3 +179,7 @@ hidden = true
 [[traits.labels]]
 key    = "drains_done"
 hidden = true
+# Underworld Hunt gate marker — internal. Set=1 at the drain (both branches); gates the hunt. Never player-facing.
+[[traits.labels]]
+key    = "names_known"
+hidden = true

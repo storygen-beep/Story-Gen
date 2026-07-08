@@ -110,6 +110,13 @@ One row per NPC; the rough sketch is a loose few lines (write it under the table
 - **Not every NPC is a climb.** Most hooks imply a rising arc, but an owner/spouse/regular you *already have* is
   the **static** shape (no climb) and an infiltration mark is the **honeypot** shape (the climb is on HIM, not the
   player) — both are rows in `trait-design.md`'s arc-shape table. Don't force a static/honeypot NPC onto a climb row.
+- **Still-point cast floor** *(§1B protagonists).* If the protagonist is a **still-point** — her own feeder economy
+  dormant *by design* (§1B: spy/honeypot, an owned weapon, an already-corrupt veteran, a domme) — then ALL of the
+  game's day-breadth lives on the NPCs, so **the cast size IS the content budget.** One flat owner + one target
+  (the Vesper thin-ship shape) cannot clear the §2F day-breadth floor (~2–3 live threads on a representative day),
+  because there's no player-lewd feeder to carry a thread on its own. A still-point game needs enough *developed*
+  NPCs to supply that breadth — catch a too-thin still-point cast **here, at casting**, not at the Step-6 feedback
+  review (`content-framework.md` §1B/§2F).
 
 ## Cross-references
 `references/step-2-toplevel.md` §7 (the machine —

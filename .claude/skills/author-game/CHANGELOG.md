@@ -13,7 +13,18 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
-## 2026-07-07
+## 2026-07-09
+- **`references/step-3-casting.md` — added a "Still-point cast floor" bullet to the casting self-check.** Root
+  cause: Vesper (a still-point / owned-weapon protagonist) shipped thin with only 2 developed NPCs and drew a
+  mopoga "lacks content / grind not content" verdict. §2F (the day-breadth audit) already catches this at Step 6
+  and names Vesper as its example (added earlier, `#10`) — but *casting* didn't proactively floor cast SIZE for
+  still-point games, where the player's feeder economy is dormant so ALL day-breadth must come from the NPCs and
+  the cast size IS the content budget. The new bullet catches a too-thin still-point cast at Step 3 (casting)
+  rather than only at the Step-6 review. Doc-only; ties to `content-framework.md` §1B/§2F. This **closes the
+  "author-game skill defect" track** opened during the Vesper Underworld-Hunt work: the primary §2F day-breadth
+  patch was already in and proved itself this session by failing the hunt blueprint at the Step-6 review (which is
+  how the corridor was caught before building); LO's call was to add this one early-catch corollary and close the
+  track. (LO chose to leave the secondary "time-to-first-payoff cadence" floor unwritten — §2F suffices.)
 - **`references/player-portrait.md` §1 — portrait now mounts BELOW the time display, not top-most (ENGINE, `v2.py:14853`).**
   LO's call: the time/clock stays at the very top of the sidebar; the portrait sits just under it, above the HUD/stat
   items. Moved the `{portrait_line}` fragment from the first StoryCaption line to just after `<<timeDisplay>>` in both

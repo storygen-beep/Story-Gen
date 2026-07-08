@@ -1061,6 +1061,7 @@ effects = [
   { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "names_known",       op = "set", value = 1 },   # Underworld Hunt — names delivered (first drain)
 ]
 flagEffects = [
   { targetType = "player", flag = "renner_drained",         op = "set" },
@@ -1085,6 +1086,7 @@ effects = [
   { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "names_known",       op = "set", value = 1 },   # Underworld Hunt — names delivered (repeat drain; the returning-player path)
 ]
 # No-drain: the drain's empty (carried but spent). The anal resolves; recharge at the cradle to drain.
 [[canvases.nodes.exit_block.choices]]
@@ -1152,7 +1154,7 @@ blocks = [
     ] },
     { advance_text = "Why did Cain burn you down?", blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "Cain didn't just walk away from you. He came for you. Why?" },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Two of my people. They moved my materials — and they were moving them to him too, feeding Cain off my own floor. When I found out I didn't just cut them loose. I did them, and everyone in their houses, the same night. He burned me to the slab for it. We've been at each other since." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Two of my people. Doss and Rourke. They moved my materials — and they were moving them to him too, feeding Cain off my own floor. When I found out I didn't just cut them loose. I did them, and everyone in their houses, the same night. He burned me to the slab for it. We've been at each other since." },
         { type = "paragraph", content = "She keeps her face a meter-reader's blank. So the burned yard she's been picking through wasn't collateral in someone else's war — it was the answer, and the two files she pulled out there are the men he's confessing to now. The wreck of him has a shape after all, and the shape is a debt." },
     ] },
     { advance_text = "Where is he now?", blocks = [
@@ -1199,8 +1201,8 @@ id   = "again_ask"
 name = "Nothing new"
 blocks = [
   { type = "paragraph", content = "She crouches to his eye level and asks anyway — the gear, the two he buried, where the man went." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Two of mine, feeding him off my floor. I did them and theirs, and he burned me for it. Where he went — down. It's all down in the underworld. That's everything I had. I swear it." },
-  { type = "paragraph", content = "The same confession, in the same order. He doesn't know he's said it before, and he never will. Nothing she didn't already have — but watching the wrecked man empty himself out for her on command is its own kind of confirmation. She fixes her clothes and leaves him to surface alone." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_renner" }, content = "Two of mine — Doss and Rourke — feeding him off my floor. I did them and theirs, and he burned me for it. Where he went — down. It's all down in the underworld. That's everything I had. I swear it." },
+  { type = "paragraph", content = "The same confession, in the same order — but this time she keeps the two names. He doesn't know he's said it before, and he never will. Whatever she already had, watching the wrecked man empty himself out for her on command is its own kind of confirmation. She fixes her clothes and leaves him to surface alone." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -1630,17 +1632,18 @@ when = [
   { trait = "equipped_weapon", subject = "player", op = "eq", value = 2 },
 ]
 
-# End-of-content card — shows after the drain, once the leads are logged. NO goal: this is the
-# "you've reached the end of the current build" state, not a live objective. (The_site never
-# unlocks in this build, so a goal bullet here would dangle forever as a fake objective — and
-# the engine renders a goal-less, ready_text-less card as flavor + tip only; see v2.py:13961.)
+# RETURNING-PLAYER re-drain nudge (was the "end of the build" card — retired at the Underworld
+# Hunt, rev 54). A returning player who drained pre-update has renner_leads_extracted but
+# names_known=0 (backfilled) -> this points them back to re-drain for the names. A NEW player
+# gets names_known=1 on the same drain, so this never shows for them. Retires at names_known>=1,
+# where hunt rung 1 (beat_0031) takes over. Both priority 9, mutually exclusive on names_known.
 [[quest_cards]]
 priority   = 9
-text       = "Renner's trail is logged — the two he buried came up out of the underworld, and that's where Cain's gone to ground. The hunt runs down past the gate from here. (More coming in a future update.)"
-tip        = "You've reached the end of the current build. The underworld's open off the Waterfront — more of the hunt is coming."
+text       = "Renner gave up the shape of it — two of his own people dead, and a trail down into the underworld. But you never got their names, and without them the trail's cold. Take him again and press him for it."
+tip        = "Go back to Renner and get him to the drain once more — this time make him name the two he buried."
 when = [
-  { flag = "renner_leads_extracted", op = "is_true" },
-  { flag = "the_site_open",          op = "is_false" },
+  { flag  = "renner_leads_extracted", op = "is_true" },
+  { trait = "names_known", subject = "player", op = "lt", value = 1 },
 ]
 
 # The Trail — the burned-yard crawl (a parallel goal to the seduction). Active once she's in Renner's
@@ -1649,11 +1652,407 @@ when = [
 [[quest_cards]]
 priority   = 8
 text       = "Renner's old yard — the one Cain torched — is still watched by his men. Guarded means there's something out there worth finding. Get in past the guards and work deeper."
-ready_text = "The yard gave up its heart: two of Renner's own people, killed with their families, and the thread that ties them to the underworld. That's where the trail runs now — but the way in is still shut to her. (More of the hunt is coming.)"
+ready_text = "The yard gave up its heart: two of Renner's own people, killed with their families, and the thread that ties them to the underworld. Doss and Rourke — that's where the trail runs now, down past the gate."
 tip        = "Sneak into the Burned Yard, off the Waterfront. Slip past the guards (Stealth) or beat them (Fighting) — drill at your room if you can't get past. Each push gets you deeper; the arousal weapon's down there too."
 when = [
   { flag = "renner_hired", op = "is_true" },
 ]
 goals = [
   { trait = "yard_depth", subject = "player", op = "gte", value = 3, label = "Search the burned yard" },
+]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# UNDERWORLD HUNT (Act-2 on-ramp, rev 54+) — the trail that REVEALS Bastien.
+# BRIDGE chunk: reveals Bastien + re-opens the story; his arc is a LATER chunk.
+# Gate chain (every conditions block version="1.0"): names_known (TRAIT, @drain) ->
+#   hunt_lead (@Anchor/Sol) -> crew_known (@House/Marsh) -> bastien_found (@crew_den) ->
+#   bastien_revealed (kidnap capstone). Every setter LOCATED except names_known (trait).
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ═══ beat_0031 — THE LEAD (Sol at the Anchor) ═════════════════════════════════
+# Plain location canvas at the_anchor (NOT requires_npc — Sol is scenery + the speaker),
+# gated names_known>=1 + hunt_lead is_false. Sol knew Doss; points at the surviving fixer
+# Marsh (The House, Sundays) + the carry-the-drain telegraph (soft-lock guard). SETS
+# hunt_lead (located). Priority 8 -> surfaces over the evening Renner hub (priority 5).
+[[canvases]]
+id          = "hunt_sol_lead"
+name        = "The bartender"
+description = "The Underworld Hunt lead. Off Doss's name, Sol names the surviving fixer Marsh (The House, Sundays) + tells her to carry the drain. SETS hunt_lead; retires once taken. Gated names_known>=1 + hunt_lead is_false."
+
+[canvases.trigger]
+location      = "the_anchor"
+is_repeatable = true
+priority      = 8
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "names_known", operator = "gte", value = 1 },
+  { type = "flag",  subject = "player", flag_key  = "hunt_lead",   operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The bartender"
+blocks = [
+  { type = "image", props = { file = "scenes/anchor_bartender.jpg", description = "A tired dockside dive bar at night, an old bartender working the taps at the dim end, unhurried.", search_queries = ["old bartender dive bar night", "dim dockside bar counter bartender"] } },
+  { type = "paragraph", content = "Sol works the taps at the Anchor's dead end, wiping a glass that's already clean. He's outlasted every owner this bar has had, and he looks at her the way he looks at regulars — not an owner, not a mark. He hears everything said over his counter and repeats none of it, unless you're the kind he's decided he likes." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Set two names on the bar. Doss. Rourke."
+targetType = "node"
+nodeId     = "hunt_sol_lead.ask"
+[[canvases.nodes.exit_block.choices]]
+text       = "Not tonight."
+targetType = "location"
+locationId = "the_anchor"
+
+[[canvases.nodes]]
+id   = "ask"
+name = "The bartender"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "Two men. Doss and Rourke. They came up out of the underworld before they ever ran for Renner. You'd have known them." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Doss I knew. Ran cargo for the company back when it still pretended it didn't. Renner made an example of him — him and Rourke both, and it took. But Doss ran with a third. A fixer, name of Marsh. Careful little man, and still breathing." },
+  { type = "dialog", props = { speaker = "player" }, content = "Where." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "He keeps one habit. The House, every Sunday — same girl, like clockwork. That's the only place Marsh surfaces. A man with one habit's got one weakness." },
+  { type = "paragraph", content = "He sets the clean glass down. A name, a day, a door — the whole of it. Then, not looking up: \"Whatever you carry that does your quiet work — carry it Sunday. Marsh doesn't talk twice.\"" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Sundays, then. Carry the drain."
+targetType = "location"
+locationId = "the_anchor"
+flagEffects = [
+  { targetType = "player", flag = "hunt_lead", op = "set" },
+]
+
+# ── Hunt breadcrumb — Rung 1 (Story-Goals tier, priority 9). Points to the Anchor. Mutually
+# exclusive with the returning-player re-drain card (names_known<1) via names_known>=1; retires
+# at hunt_lead (rung 2 lands with beat_0032).
+[[quest_cards]]
+priority   = 9
+text       = "Two names — Doss and Rourke — and Renner's word they came up out of the underworld. Someone in the Reach knew them. Work the bar."
+tip        = "Ask around at the Anchor — the bartender hears everything. Bring the drain when the trail turns; you'll need it worn and charged."
+when = [
+  { trait = "names_known", subject = "player", op = "gte", value = 1 },
+  { flag  = "hunt_lead",   op = "is_false" },
+]
+
+# ═══ beat_0032 — SUNDAY AT THE HOUSE (Marsh's drain + Rue) ═════════════════════
+# Solo canvas at underworld_brothel, SUNDAYS ONLY (trigger.schedules weekdays=[6], full-day
+# window 00:00-23:59 — a bare/null end_time = a 1-hour point-trigger, review-caught). Gated
+# hunt_lead is_true + crew_known is_false. Deal Rue off the slot (DE-GRINDED: free path + an
+# OPTIONAL small coin tip — reaching Marsh is NOT gated on earning coin) -> serve Marsh -> drain
+# (gated equipped_weapon=1 + drain_charge>=1, mirrors the Renner weapon-state fork) -> he gives
+# the crew's place -> SETS crew_known + the watcher seed. Under-geared = graceful exit (slot stays
+# hers via rue_met; come back Sunday with the drain). rue_met (set at the Rue deal) persists her.
+[[canvases]]
+id          = "hunt_house_sunday"
+name        = "Sunday at The House"
+description = "Marsh's drain, Sundays only. Deal Rue off the slot (free or optional coin tip -> rue_met), serve + drain Marsh (weapon-state fork) -> crew_known + watcher seed. Under-geared = graceful come-back. Retires at crew_known."
+[canvases.trigger]
+location      = "underworld_brothel"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "hunt_lead",  operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "crew_known", operator = "is_false" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "00:00"
+end_time   = "23:59"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Sunday at The House"
+blocks = [
+  { type = "image", props = { file = "scenes/house_sunday.jpg", description = "A dim red-lit brothel floor, a tired working girl waiting near the rooms for a regular client.", search_queries = ["dim brothel floor red light waiting", "escort waiting rooms red light"] } },
+  { type = "paragraph", content = "Sunday, and The House keeps its one clock. Marsh's girl is already out by the rooms — Rue, the madam calls her — dressed for the booking she takes every week, waiting on a man who's never once been late. If Sol's right, a careful little fixer is about to walk in for the only appointment he keeps." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Have a word with Rue before he shows."
+targetType = "node"
+nodeId     = "hunt_house_sunday.rue"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "rue_met", operator = "is_false" },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Take her slot — Marsh is due."
+targetType = "node"
+nodeId     = "hunt_house_sunday.marsh"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "rue_met", operator = "is_true" },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Not today."
+targetType = "location"
+locationId = "underworld_strip"
+
+# ── Rue deal — DE-GRINDED. Free path (talk her into it) + an optional coin tip (flavor/goodwill,
+# NOT a gate). Both SET rue_met (the slot is hers going forward + Rue persists) -> .marsh.
+[[canvases.nodes]]
+id   = "rue"
+name = "Rue"
+blocks = [
+  { type = "paragraph", content = "Rue reads her the way working girls read each other — fast, flat, no illusions. \"You want my Sunday.\" Not a question. \"He's regular, he's quiet, he pays and he doesn't linger. You can have him if you want him that bad. I could use a night that's mine.\"" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the night — it's yours."
+targetType = "node"
+nodeId     = "hunt_house_sunday.marsh"
+flagEffects = [
+  { targetType = "player", flag = "rue_met", op = "set" },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Slip her coin to make it easy."
+targetType = "node"
+nodeId     = "hunt_house_sunday.marsh"
+costs      = [{ trait = "coin", value = 10 }]
+flagEffects = [
+  { targetType = "player", flag = "rue_met", op = "set" },
+]
+
+# ── Marsh — serve, then the drain (weapon-state fork, mirrors the Renner finisher). ──
+[[canvases.nodes]]
+id   = "marsh"
+name = "Marsh"
+blocks = [
+  { type = "video", props = { file = "sex/house_marsh_serve.webm", description = "A cold transactional brothel encounter, a small neat man using a woman in a dim red-lit room, her face flat and elsewhere.", search_queries = ["brothel client sex pov cold red room", "escort serving client dim light"] } },
+  { type = "paragraph", content = "Marsh comes in on the hour, exact. A small neat man who checks the room's exits before he checks the girl, and takes the one the madam points him to without a word — her, tonight, in Rue's place. He doesn't notice the swap, or doesn't care; he wants the hour he paid for. She gives it to him, quiet and practiced, her hands doing the work while her eyes read him for where a careful man keeps his softness. He finishes in her with a grunt and goes slack, spent and open. What she does with him now is only a question of what she's carrying." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Put the drain to the back of his neck."
+targetType = "node"
+nodeId     = "hunt_house_sunday.drain"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq",  value = 1 },
+  { type = "trait", subject = "player", trait_key = "drain_charge",    operator = "gte", value = 1 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Take his money and go — the drain's spent."
+targetType = "node"
+nodeId     = "hunt_house_sunday.nodrain"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 },
+  { type = "trait", subject = "player", trait_key = "drain_charge",    operator = "lt", value = 1 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Take his money and go — you're carrying the wrong gear."
+targetType = "node"
+nodeId     = "hunt_house_sunday.nodrain"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 },
+] }
+
+# ── The drain fires — Marsh gives up the crew's place. SETS crew_known (located). Watcher seed. ──
+[[canvases.nodes]]
+id   = "drain"
+name = "The drain"
+blocks = [
+  { type = "paragraph", content = "The drain wakes against his skin and the careful goes out of him all at once, loose and honest. She asks the only thing she came for: where the crew lived — Doss, Rourke, the rest of them. He tells her. A dead man's rooms down past the market, nobody's cleared them, the door still answers to a key under the third stair. In a few minutes he'll surface remembering a good hour and nothing else." },
+  { type = "paragraph", content = "On her way out a man at the bar folds his paper and watches her go — not the madam's muscle, someone else's, patient about it. She clocks him clocking her and files it. Careful men keep careful company; someone just paid attention to the wrong girl asking the wrong questions." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the address and go."
+targetType = "location"
+locationId = "underworld_strip"
+flagEffects = [
+  { targetType = "player", flag = "crew_known", op = "set" },
+]
+
+# ── Under-geared exit (soft-lock GUARD). Slot stays hers (rue_met set); come back with the drain. ──
+[[canvases.nodes]]
+id   = "nodrain"
+name = "Nothing to take"
+blocks = [
+  { type = "paragraph", content = "She takes what he leaves on the side table and goes. Without the drain worn and charged he's just a spent john with a careful face — everything he knows still locked behind it. The slot's hers now, though; Rue's off it for good. Recharge the drain at the cradle, carry it, and take his Sunday again — the truth's a touch away once the weapon's on her." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Head back up."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_strip"
+
+# ═══ Rue persists (FIX #1) — light recurring face at The House once dealt off Marsh's slot. ═══
+# Solo canvas at underworld_brothel, gated rue_met is_true. Low priority (2) — sits under the work
+# hub (3) and the Sunday scene (6) in the button list. Wary, owed; a little underworld color.
+[[canvases]]
+id          = "hunt_rue_hub"
+name        = "Rue"
+description = "Rue persists after the slot deal (rue_met). A light recurring trade-a-word beat at The House — wary credit, underworld rumor. No conquest, no meters."
+[canvases.trigger]
+location      = "underworld_brothel"
+is_repeatable = true
+priority      = 2
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "rue_met", operator = "is_true" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Rue"
+blocks = [
+  { type = "paragraph", content = "Rue's by the rooms most nights now, off Marsh's Sunday for good. She nods when she sees her — not warmth, exactly, but the wary credit of someone who got a night back and didn't forget who handed it over." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Trade a word."
+targetType = "node"
+nodeId     = "hunt_rue_hub.talk"
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave her to it."
+targetType = "location"
+locationId = "underworld_strip"
+[[canvases.nodes]]
+id   = "talk"
+name = "Rue"
+blocks = [
+  { type = "paragraph", content = "She trades what she hears, the small weather of the underworld — which men are talking, who's asking after who, whose protection got thinner this week. \"You didn't hear it off me,\" she says, every time, and tells her anyway. It isn't much. But it's a face down here that isn't a mark and isn't an owner, and there aren't many of those." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Head back up."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_strip"
+
+# ── Hunt breadcrumb — Rung 2 (Story-Goals, priority 9). Points to The House, Sundays. Mutually
+# exclusive with rung 1 via hunt_lead (rung 1: is_false; rung 2: is_true). Retires at crew_known
+# (rung 3 lands with beat_0033).
+[[quest_cards]]
+priority   = 9
+text       = "A fixer named Marsh keeps one habit — The House, every Sunday, for the same girl. Take her slot, serve him, and drain him for where the crew went to ground."
+tip        = "Go to The House (down in the underworld) on a Sunday, the drain worn and charged. Deal his girl Rue off the slot, take it, and drain him. Sleep to reach Sunday if you have to."
+when = [
+  { flag = "hunt_lead",  op = "is_true"  },
+  { flag = "crew_known", op = "is_false" },
+]
+
+# ═══ beat_0033 — THE CREW'S ROOMS (find Bastien) ═══════════════════════════════
+# Solo canvas at crew_den (unlocked by crew_known). The search IS the scene (content floor). Finds
+# the name Bastien -> SETS bastien_found -> routes DIRECTLY to the grab (beat_0034) — deterministic,
+# no reliance on auto-fire timing (the grab is ALSO an auto-fire on bastien_found, as a fallback).
+# Gated crew_known is_true + bastien_found is_false.
+[[canvases]]
+id          = "hunt_crew_den_search"
+name        = "The crew's rooms"
+description = "Search the dead crew's rooms -> the name Bastien surfaces. SETS bastien_found + routes to the grab. Gated crew_known + bastien_found is_false."
+[canvases.trigger]
+location      = "crew_den"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "crew_known",    operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "bastien_found", operator = "is_false" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "The crew's rooms"
+blocks = [
+  { type = "image", props = { file = "scenes/crew_den_interior.jpg", description = "A ransacked dead-still tenement room, dust and abandoned belongings, dim light through a boarded window.", search_queries = ["abandoned ransacked room dim dust", "cleared out tenement dark boarded window"] } },
+  { type = "paragraph", content = "The key's under the third stair, like Marsh said. Inside, the rooms have the stillness of a place people left fast and never came back to — a card game abandoned mid-hand, a coat that fits no one now, a fridge that gave out weeks ago and was never opened since. Doss and Rourke lived here, and died somewhere else. She takes the place apart the way she takes everything apart: cold, thorough, patient." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the place apart."
+targetType = "node"
+nodeId     = "hunt_crew_den_search.find"
+[[canvases.nodes.exit_block.choices]]
+text       = "Not yet."
+targetType = "location"
+locationId = "underworld_strip"
+
+[[canvases.nodes]]
+id   = "find"
+name = "A name"
+blocks = [
+  { type = "paragraph", content = "It's in a strongbox behind the water heater — the one thing in the place worth locking. A run of ledgers, tallies of cargo that never touched a legal dock, and a name at the top of every page: the man the crew answered to, whose coin moved through Doss's hands and out into the company's blind spots. Not Cain. Someone she's never heard of. Bastien." },
+  { type = "paragraph", content = "She has it now — a person at the end of the trail, a place to put the hunt. She pockets the ledger and turns for the stair." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Bastien. Take the ledger and go."
+targetType = "node"
+nodeId     = "hunt_the_grab.base"
+flagEffects = [
+  { targetType = "player", flag = "bastien_found", op = "set" },
+]
+
+# ── Hunt breadcrumb — Rung 3 (Story-Goals, priority 9). Points to the crew's rooms. Retires at
+# bastien_found (-> the grab -> the end card). Mutually exclusive with rung 2 via crew_known.
+[[quest_cards]]
+priority   = 9
+text       = "Marsh gave up where the crew lived — a dead man's rooms down past the market. Get in and take the place apart; whatever ties Doss and Rourke together is in there."
+tip        = "The crew's rooms are open now, off the underworld strip (past the market). Search them."
+when = [
+  { flag = "crew_known",    op = "is_true"  },
+  { flag = "bastien_found", op = "is_false" },
+]
+
+# ═══ beat_0034 — THE GRAB (kidnap capstone — CHUNK END) ════════════════════════
+# BARE auto-fire at crew_den (priority 9, is_repeatable=false, NO npc=/requires_npc — an npc= one-shot
+# renders nowhere). Also reached DIRECTLY from the search's find. Gated bastien_found. His people take
+# her; face-to-face with Bastien (he knows she's Mercer's via his CONNECTIONS, NOT Cain; the Cain
+# alliance stays OFF — a saved reveal). SETS bastien_revealed. Single exit -> the_waterfront (dumped,
+# released). Ends on his question hanging. NO fail-state (scripted plot beat).
+[[canvases]]
+id          = "hunt_the_grab"
+name        = "The grab"
+description = "Kidnap capstone. Auto-fire at crew_den on bastien_found (+ reached directly from the search). Bare, single-exit. Face-to-face with Bastien -> SETS bastien_revealed -> dumped at the_waterfront, chunk ends. Cain-alliance stays OFF (saved reveal)."
+[canvases.trigger]
+location      = "crew_den"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "bastien_found",    operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "bastien_revealed", operator = "is_false" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "The grab"
+blocks = [
+  { type = "paragraph", content = "She doesn't hear the door. One second she's got the ledger under her arm and the stair in front of her; the next there's a bag over her head, a knee in her back, and hands that know exactly how much pressure a body takes before it stops fighting. Nobody says a word — professionals. The last thing she registers before the dark is a man at the foot of the stair folding his newspaper, the same patient watcher from The House, stepping aside to let them carry her past." },
+  { type = "paragraph", content = "She comes to upright in a chair that isn't restraining her, which is its own kind of message. A back room, warm light, a door that's shut and not locked. Across a plain table a man watches her with the patience of someone who owns the building and everything in it — unhurried, certain, a voice that will never have to be raised because the room is already his." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Wren. That's the file Mercer keeps you under, so it's the one I'll use. You've been busy. Doss. Rourke. My man Marsh, who woke up Monday poorer and stupider and can't tell me why. A great deal of digging, for one of Mercer's assets — into people who are mine." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Don't reach for whatever cover you had ready. I knew you were Mercer's before you finished your first drink down here; I hear things before they're said. That isn't what interests me." },
+  { type = "paragraph", content = "He leans in, unhurried, and doesn't threaten her — doesn't reach for anything. He looks at her the way you'd look at the first genuinely interesting thing to cross your desk in years." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "What interests me is that when my man watched you leave The House, he swore the girl who walked out wasn't quite a girl. And my people are very rarely wrong about the things that unsettle them. So before I decide what you're worth — to me, and to the people I answer to, who'd pay a great deal for the honest answer — I'll ask you plainly. What are you, really?" },
+  { type = "paragraph", content = "The question hangs. She has covers for men who want her body and men who want her obedience, and none at all for a man who wants the one thing under the chip she can't reach herself. Somewhere below the amputation, something turns over at being seen. She doesn't answer. He reads the not-answering, nods as though it told him plenty, and lifts two fingers — and the bag comes down again." },
+  { type = "paragraph", content = "She wakes on the waterfront at dawn, sore and whole and released, the ledger gone from under her arm. He has her name, her face, and a question she can't answer; she has his. Bastien. The hunt has a person at the end of it now — and the person has her." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Get up off the dock."
+targetType = "location"
+locationId = "the_waterfront"
+flagEffects = [
+  { targetType = "player", flag = "bastien_revealed", op = "set" },
+]
+
+# ── Hunt END card (Story-Goals, priority 9) — the chunk's end-of-content. Shows once Bastien's
+# revealed; his arc (captivity/flip/the Cain reveal) is a later update. Retires rung 3 via bastien_found.
+[[quest_cards]]
+priority   = 9
+text       = "There's a name at the end of the trail now — Bastien, the man the underworld answers to — and he has yours. He let you walk, this once, with a question you couldn't answer. Whatever comes next comes from him."
+tip        = "You've reached the end of the current build. Bastien's story — and what he wants from you — is coming in a future update."
+when = [
+  { flag = "bastien_revealed", op = "is_true" },
 ]
