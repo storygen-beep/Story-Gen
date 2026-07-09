@@ -1,6 +1,0 @@
-{"ts":"2026-06-07T21:30:33.222Z","step":0,"passage":"Start","action":"clicked_forward","text":"Start","tier":1}
-{"ts":"2026-06-07T21:30:33.222Z","step":1,"passage":"0","action":"clicked_forward","text":"begin","tier":1}
-{"ts":"2026-06-07T21:30:33.222Z","step":2,"passage":"1","action":"clicked_forward","text":"start","tier":1}
-{"ts":"2026-06-07T21:30:33.222Z","step":3,"passage":"2","action":"clicked_forward","text":"Party time!","tier":5}
-{"ts":"2026-06-07T21:30:33.222Z","step":4,"passage":"resort","action":"clicked_forward","text":"this place","tier":5}
-{"ts":"2026-06-07T21:30:33.222Z","step":5,"passage":"hotel","action":"terminated","reason":"no_forward_pattern_match"}

@@ -1,3 +1,0 @@
-{"ts":1779018597361,"hash":"0d2b1a59ae19f9ee","passage":"Start","session":1,"kind":"start","new_unique_state":true}
-{"ts":1779018627638,"hash":"03b58437da3546f6","passage":"Start","session":1,"diff_full":{"changed":{},"added":{},"removed":{}},"diff_changed":[],"diff_added":[],"diff_removed":[],"kind":"observe","new_unique_state":false}
-{"ts":1779018662521,"hash":"18461f328db230e2","passage":"Start","session":1,"diff_full":{"changed":{"flags.group_settled_in":{"before":false,"after":true},"flags.first_sunday_passed":{"before":false,"after":true}},"added":{},"removed":{}},"diff_changed":["flags.group_settled_in","flags.first_sunday_passed"],"diff_added":[],"diff_removed":[],"kind":"observe","new_unique_state":true}

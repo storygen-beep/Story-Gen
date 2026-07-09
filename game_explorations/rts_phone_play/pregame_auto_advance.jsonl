@@ -1,6 +1,0 @@
-{"ts":"2026-06-01T18:10:10.142Z","step":0,"passage":"Menu","action":"clicked_forward","text":"Play ▶️","tier":1}
-{"ts":"2026-06-01T18:10:10.142Z","step":1,"passage":"WarningGame","action":"clicked_forward","text":"I understand","tier":2}
-{"ts":"2026-06-01T18:10:10.142Z","step":2,"passage":"Preferences","action":"clicked_forward","text":"🎮 Continue","tier":4}
-{"ts":"2026-06-01T18:10:10.142Z","step":3,"passage":"GameMechanics","action":"clicked_forward","text":"📚 History","tier":5}
-{"ts":"2026-06-01T18:10:10.142Z","step":4,"passage":"History","action":"clicked_forward","text":"🚀 Start Your Journey","tier":1}
-{"ts":"2026-06-01T18:10:10.142Z","step":5,"passage":"Bedroom","action":"terminated","reason":"no_forward_pattern_match"}

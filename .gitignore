@@ -219,6 +219,12 @@ game_explorations/*/.live/
 test_blender/
 avatar_prototype/
 games/media_testbed/
+# The WHOLE research corpus is local-only now (2026-07-09). It was 806 MB of the ~1.0 GB tracked tree,
+# which pushed the published GitHub Pages site over its 1 GB hard limit -> every build after b067942
+# failed with "Page build failed". Untracked with `git rm -r --cached` (files kept on disk, and the
+# history still has them), so the portal publishes ~263 MB and builds again. Supersedes the two
+# sub-dir entries below.
+game_explorations/
 game_explorations/vesper_coverplay/
 game_explorations/vesper_wardrobe/
 

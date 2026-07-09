@@ -1,9 +1,0 @@
-{"ts":"2026-06-04T15:15:43.135Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"Start","state_hash":"67fa3e3c4e033771"}
-{"ts":"2026-06-04T15:15:53.531Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"Start","state_hash":"67fa3e3c4e033771"}
-{"ts":"2026-06-04T15:16:32.874Z","session_id":1,"cmd":"eval","args":{},"ok":false,"error":"eval requires a JS expression or statement body"}
-{"ts":"2026-06-04T15:16:32.992Z","session_id":1,"cmd":"eval","args":{},"ok":false,"error":"eval requires a JS expression or statement body"}
-{"ts":"2026-06-04T15:16:55.499Z","session_id":1,"cmd":"eval","args":{"positional":["(function(){var a=document.querySelector('[data-passage]'); var t=a?(a.getAttribute('data-passage')||a.textContent.trim()):'none'; if(a)a.click(); return 'start_link='+t;})()"]},"ok":true,"passage":"QuestsPage","state_hash":"5e075886281d8048"}
-{"ts":"2026-06-04T15:16:56.914Z","session_id":1,"cmd":"eval","args":{"positional":["(function(){try{return 'passage='+(typeof State!=='undefined'?State.passage:'noState');}catch(e){return 'err:'+e.message;}})()"]},"ok":true,"passage":"QuestsPage","state_hash":"5e075886281d8048"}
-{"ts":"2026-06-04T15:17:11.900Z","session_id":1,"cmd":"eval","args":{"positional":["(function(){try{return JSON.stringify({passage: State.passage, varkeys: Object.keys(State.variables).slice(0,40)});}catch(e){return 'err:'+e.message;}})()"]},"ok":true,"passage":"QuestsPage","state_hash":"5e075886281d8048"}
-{"ts":"2026-06-04T15:17:29.988Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"QuestsPage","state_hash":"5e075886281d8048"}
-{"ts":"2026-06-04T15:17:54.373Z","session_id":1,"cmd":"stop","args":{},"ok":true}

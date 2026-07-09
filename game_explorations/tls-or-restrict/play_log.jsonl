@@ -1,4 +1,0 @@
-{"ts":"2026-05-03T16:49:44.311Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"Start","state_hash":"248bfa27542ca12b"}
-{"ts":"2026-05-03T16:49:44.593Z","session_id":1,"cmd":"eval","args":{"positional":["\nvar v = SugarCube.State.variables;\nvar setup = SugarCube.setup;\nv.player.core_traits.npc_jake_stage = 0;\nv.player.core_traits.beauty = 40;\nv.flags.jake_first_glance_noticed = false;\nSugarCube.Engine.play('QuestsPage');\n'set';\n"]},"ok":true,"passage":"QuestsPage","state_hash":"8bab7c56ee2ff00c"}
-{"ts":"2026-05-03T16:49:45.003Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"QuestsPage","state_hash":"8bab7c56ee2ff00c"}
-{"ts":"2026-05-03T16:50:26.601Z","session_id":1,"cmd":"stop","args":{},"ok":true}

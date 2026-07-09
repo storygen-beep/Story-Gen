@@ -1,5 +1,0 @@
-{"ts":1778995383994,"hash":"c97ad224a3dfa272","passage":"Start","session":1,"kind":"start","new_unique_state":true}
-{"ts":1778995422233,"hash":"05f81c3c3572a31a","passage":"Start","session":1,"diff_full":{"changed":{},"added":{},"removed":{}},"diff_changed":[],"diff_added":[],"diff_removed":[],"kind":"observe","new_unique_state":false}
-{"ts":1778995433597,"hash":"05f81c3c3572a31a","passage":"Start","session":1,"diff_full":{"changed":{},"added":{},"removed":{}},"diff_changed":[],"diff_added":[],"diff_removed":[],"kind":"observe","new_unique_state":false}
-{"ts":1778995441571,"hash":"0bce5fcb8c6dec11","passage":"QuestsPage","session":1,"diff_full":{"changed":{},"added":{},"removed":{}},"diff_changed":[],"diff_added":[],"diff_removed":[],"kind":"observe","new_unique_state":true}
-{"ts":1778995461086,"hash":"beb45712aa5c6bba","passage":"QuestsPage","session":1,"diff_full":{"changed":{"flags.first_rent_paid":{"before":false,"after":true}},"added":{},"removed":{}},"diff_changed":["flags.first_rent_paid"],"diff_added":[],"diff_removed":[],"kind":"observe","new_unique_state":true}

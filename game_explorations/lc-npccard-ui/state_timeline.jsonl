@@ -1,6 +1,0 @@
-{"ts":1780689792557,"hash":"7abe930fbb2fedf1","passage":"Start","session":1,"kind":"start","new_unique_state":true}
-{"ts":1780689836700,"hash":"7abe930fbb2fedf1","passage":"Start","session":1,"diff_full":{"changed":{},"added":{},"removed":{}},"diff_changed":[],"diff_added":[],"diff_removed":[],"kind":"branch","new_unique_state":false}
-{"ts":1780689842947,"hash":"7abe930fbb2fedf1","passage":"Start","session":1,"diff_full":{"changed":{},"added":{},"removed":{}},"diff_changed":[],"diff_added":[],"diff_removed":[],"kind":"observe","new_unique_state":false}
-{"ts":1780689896840,"hash":"7abe930fbb2fedf1","passage":"Start","session":1,"diff_full":{"changed":{},"added":{},"removed":{}},"diff_changed":[],"diff_added":[],"diff_removed":[],"kind":"branch","new_unique_state":false}
-{"ts":1780689903068,"hash":"7abe930fbb2fedf1","passage":"Start","session":1,"diff_full":{"changed":{},"added":{},"removed":{}},"diff_changed":[],"diff_added":[],"diff_removed":[],"kind":"observe","new_unique_state":false}
-{"ts":1780689903438,"hash":"36dd5ca1ab7668db","passage":"Bedroom","session":1,"diff_full":{"changed":{"last_game_passage":{"before":"Start","after":"Bedroom"}},"added":{},"removed":{}},"diff_changed":["last_game_passage"],"diff_added":[],"diff_removed":[],"kind":"observe","new_unique_state":true}

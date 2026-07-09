@@ -1,9 +1,0 @@
-{"ts":"2026-05-17T05:23:16.946Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"Start","state_hash":"05f81c3c3572a31a"}
-{"ts":"2026-05-17T05:23:26.047Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"Start","state_hash":"05f81c3c3572a31a"}
-{"ts":"2026-05-17T05:23:37.105Z","session_id":1,"cmd":"eval","args":{"positional":["var sv=SugarCube.State.variables; return JSON.stringify({passage: SugarCube.State.passage, hasPlayer: !!sv.player, keys: Object.keys(sv).slice(0,15)});"]},"ok":true,"passage":"Start","state_hash":"05f81c3c3572a31a"}
-{"ts":"2026-05-17T05:23:48.486Z","session_id":1,"cmd":"eval","args":{"positional":["var sv=SugarCube.State.variables; return JSON.stringify({passage: SugarCube.State.passage, hasPlayer: !!sv.player, keys: Object.keys(sv)});"]},"ok":true,"passage":"Start","state_hash":"05f81c3c3572a31a"}
-{"ts":"2026-05-17T05:24:01.323Z","session_id":1,"cmd":"eval","args":{"positional":["SugarCube.Engine.play('QuestsPage'); return 'ok';"]},"ok":true,"passage":"QuestsPage","state_hash":"0bce5fcb8c6dec11"}
-{"ts":"2026-05-17T05:24:01.866Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"QuestsPage","state_hash":"0bce5fcb8c6dec11"}
-{"ts":"2026-05-17T05:24:20.848Z","session_id":1,"cmd":"eval","args":{"positional":["SugarCube.State.variables.flags.first_rent_paid = true; SugarCube.Engine.play('QuestsPage'); return 'set';"]},"ok":true,"passage":"QuestsPage","state_hash":"beb45712aa5c6bba"}
-{"ts":"2026-05-17T05:24:21.415Z","session_id":1,"cmd":"peek","args":{},"ok":true,"passage":"QuestsPage","state_hash":"beb45712aa5c6bba"}
-{"ts":"2026-05-17T05:24:32.217Z","session_id":1,"cmd":"stop","args":{},"ok":true}

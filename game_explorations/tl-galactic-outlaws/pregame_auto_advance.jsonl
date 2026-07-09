@@ -1,4 +1,0 @@
-{"ts":"2026-06-07T21:48:32.350Z","step":0,"passage":"start","action":"clicked_forward","text":"Start","tier":1}
-{"ts":"2026-06-07T21:48:32.350Z","step":1,"passage":"mc_create1","action":"clicked_forward","text":"Continue","tier":4}
-{"ts":"2026-06-07T21:48:32.350Z","step":2,"passage":"mc_create2","action":"filled_name","value":"Player"}
-{"ts":"2026-06-07T21:48:32.350Z","step":3,"passage":"mc_create2","action":"terminated","reason":"no_forward_pattern_match"}
