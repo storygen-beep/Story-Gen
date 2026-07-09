@@ -739,8 +739,11 @@ Fight how it works
 
 [DONE]Renner sidebar quets say reach corruption 50 but things in the hub also unlocks incrementally, the question is, is this how it should be shown or we should show it like step by step moving upwards, like x unlocks tease. Or one more question is should we even show the sidebar quests, are they aligned with the Quests page quests.
 
-[DONE]Fighting stealth coin remove them from sidebar as bar and they should come under player traits list in the sidebar
+[DONE]Fighting stealth coin remove them from sidebar as bar and they should come under player traits list in the sidebar.
 
-[KEEP]Dont mention mission 1 in the quests page
+[KEEP]Dont mention mission 1 in the quests page.
 
 [DONE]confirm emitter and drain weapon have proper explanations.
+
+[DONE]going back does nt work from the one time canvases from the sidebar
+
