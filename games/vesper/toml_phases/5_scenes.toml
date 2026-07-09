@@ -1739,126 +1739,415 @@ when = [
   { flag  = "hunt_lead",   op = "is_false" },
 ]
 
-# ═══ beat_0032 — SUNDAY AT THE HOUSE (Marsh's drain + Rue) ═════════════════════
-# Solo canvas at underworld_brothel, SUNDAYS ONLY (trigger.schedules weekdays=[6], full-day
-# window 00:00-23:59 — a bare/null end_time = a 1-hour point-trigger, review-caught). Gated
-# hunt_lead is_true + crew_known is_false. Deal Rue off the slot (DE-GRINDED: free path + an
-# OPTIONAL small coin tip — reaching Marsh is NOT gated on earning coin) -> serve Marsh -> drain
-# (gated equipped_weapon=1 + drain_charge>=1, mirrors the Renner weapon-state fork) -> he gives
-# the crew's place -> SETS crew_known + the watcher seed. Under-geared = graceful exit (slot stays
-# hers via rue_met; come back Sunday with the drain). rue_met (set at the Rue deal) persists her.
+# ═══════════════════════════════════════════════════════════════════════════════
+# THE HOUSE — Rue (the madam) + Marsh (her Sunday exclusive) — rev 59
+# Rue is a REAL NPC now (npc_rue, present ~08:00-03:00, two schedule entries span the 3am close).
+# Her intro auto-fires once (rue_intro); her hub (rue_hub) carries ask-to-work (brothel_hired ->
+# gates "Take a shift", 3_activities) + the Marsh-slot arrangement (rue_met, needs hunt_lead) + the
+# daily word. Marsh is a REAL NPC too (npc_marsh, Sunday 20:00-23:59); his serve loop is a real
+# multi-pose scene and the drain fires the NORMAL way — his ANAL finish, drain worn+charged ->
+# crew_known + the watcher seed (NO neck-gadget). Repeatable Sunday regular after (extraction once,
+# gated crew_known). crew_known is set INSIDE this triggered canvas (located) — a triggerless finisher
+# would hard-fail the flag-chain validator. Every conditions block version="1.0".
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ═══ beat_0032a — RUE'S INTRODUCTION (auto-fire once, first brothel visit) ═════
+# BARE auto-fire (priority 9, is_repeatable=false, NO npc=), gated rue_introduced is_false + Rue
+# present (npc_at_location). She names herself, the House, the exclusive-client setup, the ask-to-work
+# contract. SETS rue_introduced (located) -> her hub opens.
 [[canvases]]
-id          = "hunt_house_sunday"
-name        = "Sunday at The House"
-description = "Marsh's drain, Sundays only. Deal Rue off the slot (free or optional coin tip -> rue_met), serve + drain Marsh (weapon-state fork) -> crew_known + watcher seed. Under-geared = graceful come-back. Retires at crew_known."
+id          = "rue_intro"
+name        = "The madam"
+description = "Rue introduces herself on the first brothel visit (auto-fire, once). Runs The House, keeps a few exclusive clients, the trade down here is the girl's own — you ask her in. SETS rue_introduced -> rue_hub opens. Gated rue_introduced is_false + Rue present."
 [canvases.trigger]
 location      = "underworld_brothel"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "rue_introduced", operator = "is_false" },
+  { type = "npc_at_location", location_id = "underworld_brothel", npc_id = "npc_rue", operator = "is_present" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "The madam"
+blocks = [
+  { type = "image", props = { file = "scenes/rue_madam.jpg", description = "A composed older woman in a dim red-lit brothel parlor, watching the room from a worn velvet chair, a ledger and a cash box at her elbow.", search_queries = ["brothel madam red light parlor seated", "older woman bordello velvet chair dim"] } },
+  { type = "paragraph", content = "The woman by the rooms takes her measure before she's three steps in — the flat, unhurried read of someone who's priced a thousand bodies and is rarely wrong by much. She doesn't get up." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "Rue. I run this house. Not the muscle, not the owner — the floor. Which means I decide who works my rooms and who serves the few names worth keeping. You've got the look of someone who's been used for it before and stopped feeling it. Down here that's not a mark against you. That's the job." },
+  { type = "paragraph", content = "She tips her head at the rooms behind her — the offer plain, no contract, no company, nobody signing the girl out at the end of it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "Coin's yours when you're done, and nobody up top hears a word of it from me. You want in, you ask me. Simple as that." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Take her measure back."
+targetType = "location"
+locationId = "underworld_brothel"
+flagEffects = [
+  { targetType = "player", flag = "rue_introduced", op = "set" },
+]
+
+# ═══ beat_0032b — RUE'S HUB (recurring; ask-to-work / cover-Sunday / the word) ══
+# requires_npc portrait canvas (shows "Rue" when she's present), gated rue_introduced. Three stateful
+# rungs: "Ask her for work" (brothel_hired is_false -> SETS brothel_hired, opens Take a shift) · "Ask
+# about her Sunday regular" (brothel_hired + hunt_lead + rue_met is_false -> SETS rue_met, arranges the
+# Marsh cover = the tip-off) · "Trade a word" (brothel_hired, daily rumor). Work/Sunday route back to
+# base so the player can chain; the word ends on the floor.
+[[canvases]]
+id          = "rue_hub"
+name        = "Rue"
+description = "Rue's recurring hub (requires_npc, gated rue_introduced). Ask for work -> brothel_hired (gates Take a shift). Ask about the Sunday regular (needs hunt_lead) -> rue_met (arranges the Marsh cover). Trade a word -> daily underworld rumor. No conquest, no meters."
+[canvases.trigger]
+location      = "underworld_brothel"
+requires_npc  = "npc_rue"
+npc           = "npc_rue"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "rue_introduced", operator = "is_true" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Rue"
+blocks = [
+  { type = "paragraph", content = "Rue keeps her chair by the rooms, ledger open, watching the floor the way a dealer watches a table. She nods when she sees her — not warmth, just the level look of one working woman clocking another." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask her for work."
+targetType = "node"
+nodeId     = "rue_hub.work"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "brothel_hired", operator = "is_false" },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask about her Sunday regular."
+targetType = "node"
+nodeId     = "rue_hub.sunday"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "brothel_hired", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "hunt_lead",     operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "rue_met",       operator = "is_false" },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Trade a word."
+targetType = "node"
+nodeId     = "rue_hub.talk"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "brothel_hired", operator = "is_true" },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave her to it."
+targetType = "location"
+locationId = "underworld_brothel"
+
+# ── Ask for work -> hired. SETS brothel_hired (located) -> "Take a shift" opens (3_activities). ──
+[[canvases.nodes]]
+id   = "work"
+name = "Rue"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "I want the work. The rooms." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "Course you do. They all do, once they've been down here long enough to stop pretending otherwise." },
+  { type = "paragraph", content = "She writes something in the ledger without looking up — a name, or a mark against one — and tips her head at the rooms. That's the whole hiring. No contract, no questions." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "Rooms are yours when you want them. Coin's yours after. Don't make me regret the chair I didn't get up from." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "You won't."
+targetType = "node"
+nodeId     = "rue_hub.base"
+flagEffects = [
+  { targetType = "player", flag = "brothel_hired", op = "set" },
+]
+
+# ── Cover the Sunday regular (the tip-off). Needs hunt_lead (Sol named Marsh). SETS rue_met -> the
+#    Marsh Sunday scene opens. Rue gets her night off; the player gets the booking. ──
+[[canvases.nodes]]
+id   = "sunday"
+name = "Rue"
+blocks = [
+  { type = "dialog", props = { speaker = "player" }, content = "Your Sunday standing. The careful little man, same hour every week. I want it." },
+  { type = "paragraph", content = "That gets her attention — a slow look up from the ledger, reassessing. She knows exactly who the girl means, and she doesn't ask why." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "Marsh. Quiet money, tips fair, never any trouble — the kind of regular you don't hand off. But I could use a Sunday that's mine for once, and you've got the look of someone who wants him for more than the coin." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "So take him. Sunday night, on the hour, the far room. Whatever your business is with him, keep it off my floor — and he never hears from me that the girl got swapped." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Sunday night, then."
+targetType = "node"
+nodeId     = "rue_hub.base"
+flagEffects = [
+  { targetType = "player", flag = "rue_met", op = "set" },
+]
+
+# ── The daily word — light underworld rumor, repeatable. No state. ──
+[[canvases.nodes]]
+id   = "talk"
+name = "Rue"
+blocks = [
+  { type = "paragraph", content = "She trades what she hears, the small weather of the underworld — which men are talking, whose protection got thinner this week, who's asking after who. \"You didn't get it off me,\" she says every time, and tells her anyway. It isn't much. But it's a face down here that isn't a mark and isn't an owner, and there aren't many of those." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Good talking."
+targetType = "location"
+locationId = "underworld_brothel"
+
+# ═══ beat_0032d — DEAD-ROOM GUARD (rev 59 review) ══════════════════════════════
+# Rue's off-hours are 03:00-08:00 (her two schedule entries leave that gap). A not-yet-hired first-timer
+# who wanders in then would get NO intro (present-gated), NO Rue hub (requires_npc), and NO 'Take a shift'
+# (brothel_hired gated) — a dead room. This low-priority flavor fills it + points them back. Gated Rue
+# ABSENT + brothel_hired is_false (a hired player still has 'Take a shift'; once introduced, Rue's hub
+# covers her hours). Pure ADD, no gate changes elsewhere.
+[[canvases]]
+id          = "brothel_offhours"
+name        = "The quiet floor"
+description = "Off-hours flavor at The House when Rue's away (~03:00-08:00) and the player isn't hired yet — keeps the room from reading dead. Gated npc_rue is_absent + brothel_hired is_false. Priority 1."
+[canvases.trigger]
+location      = "underworld_brothel"
+is_repeatable = true
+priority      = 1
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "brothel_hired", operator = "is_false" },
+  { type = "npc_at_location", location_id = "underworld_brothel", npc_id = "npc_rue", operator = "is_absent" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "The quiet floor"
+blocks = [
+  { type = "paragraph", content = "The floor's quiet this hour — a girl asleep in a chair, a lamp left burning low, the rooms all shut. The madam runs the House by day; nothing moves through here until she's back at her post. Come back when she's in, if it's work you're after." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Head back up."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "underworld_strip"
+
+# ═══ beat_0032c — MARSH, THE SUNDAY EXCLUSIVE (serve loop + on-contract drain) ══
+# ONE triggered canvas (crew_known set here MUST be located -> loop inlined as nodes, NOT a triggerless
+# finisher; the flag-chain validator hard-fails a triggerless is_true setter). requires_npc npc_marsh
+# (present Sunday 20:00-23:59), gated rue_met is_true (crew_known NOT on the trigger -> stays a repeatable
+# Sunday regular after the drain). Poses oral/vaginal/anal (loop_npc_pleasure climbs, finish at >=50).
+# The ANAL finish IS the drain — the game's one drain rule (equipped_weapon=1 + drain_charge>=1): crew_known
+# is_false + geared -> the extraction (SETS crew_known + watcher seed); already-drained / under-geared ->
+# a normal paid finish. mouth/inside finishes just pay + end. All four anal-finish choices partition the
+# {crew_known × gear × charge} space -> exactly one shows per state (no gap, no overlap).
+[[canvases]]
+id          = "hunt_marsh_sunday"
+name        = "Marsh"
+description = "Rue's Sunday-night exclusive, served as a real loop. requires_npc npc_marsh + rue_met. Poses oral/vaginal/anal -> elected finish. The ANAL finish fires the drain the normal way (equipped_weapon=1 + drain_charge>=1, crew_known is_false) -> SETS crew_known + watcher seed. Repeatable after (drain once, gated crew_known). Under-geared/already-drained anal = a paid finish. Every conditions block version=1.0."
+[canvases.trigger]
+location      = "underworld_brothel"
+requires_npc  = "npc_marsh"
+npc           = "npc_marsh"
 is_repeatable = true
 priority      = 6
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "hunt_lead",  operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "crew_known", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "rue_met", operator = "is_true" },
 ] }
-[[canvases.trigger.schedules]]
-weekdays   = [6]
-start_time = "00:00"
-end_time   = "23:59"
 
 [[canvases.nodes]]
 id   = "base"
-name = "Sunday at The House"
+name = "Marsh"
 blocks = [
-  { type = "image", props = { file = "scenes/house_sunday.jpg", description = "A dim red-lit brothel floor, a tired working girl waiting near the rooms for a regular client.", search_queries = ["dim brothel floor red light waiting", "escort waiting rooms red light"] } },
-  { type = "paragraph", content = "Sunday, and The House keeps its one clock. Marsh's girl is already out by the rooms — Rue, the madam calls her — dressed for the booking she takes every week, waiting on a man who's never once been late. If Sol's right, a careful little fixer is about to walk in for the only appointment he keeps." },
+  { type = "image", props = { file = "scenes/marsh_booking.jpg", description = "A small, neat, careful man stepping into a dim red-lit brothel room, checking the exits before he looks at the woman waiting.", search_queries = ["small neat man entering brothel room dim", "careful client doorway red light room"] } },
+  { type = "paragraph", content = "Marsh comes in on the hour, exact. A small neat man who checks the room's exits before he checks the girl, and takes the one the madam pointed him to without a word — her, tonight, in Rue's place. He doesn't notice the swap, or doesn't care; he wants the hour he paid for. Whatever a careful man keeps behind his face, she'll have to work him loose for it — and she knows the one act that opens him." },
+  # Drain-cold warning (crew_known false + drain worn but spent) — telegraph BEFORE the loop so an
+  # unprepared player doesn't silently waste Marsh's once-a-week window (rev 59 review, the drain trap).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",  subject = "player", flag_key  = "crew_known",      operator = "is_false"       },
+      { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq",  value = 1 },
+      { type = "trait", subject = "player", trait_key = "drain_charge",    operator = "lt",  value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The drain sits cold against her hip — spent on Renner, never recharged. She can take Marsh's hour for the coin, but the truth stays locked behind his face until the weapon's live. Recharge it at the cradle and take his next Sunday." },
+  ] },
+  # Wrong-gear warning (crew_known false + carrying the emitter).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",  subject = "player", flag_key  = "crew_known",      operator = "is_false"       },
+      { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq",  value = 2 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She's carrying the emitter, not the drain — wrong weapon for this work. She can take Marsh's hour for the coin, but she'll get nothing out of him. Swap to the drain at her bench and take his next Sunday." },
+  ] },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
 [[canvases.nodes.exit_block.choices]]
-text       = "Have a word with Rue before he shows."
+text       = "Take him — earn the hour."
 targetType = "node"
-nodeId     = "hunt_house_sunday.rue"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "rue_met", operator = "is_false" },
-] }
+nodeId     = "hunt_marsh_sunday.oral"
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
+# Bail — leave without spending the hour (base had no exit but "Take him"; lets an under-geared
+# player back out and go charge/swap instead of committing the window).
 [[canvases.nodes.exit_block.choices]]
-text       = "Take her slot — Marsh is due."
-targetType = "node"
-nodeId     = "hunt_house_sunday.marsh"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "rue_met", operator = "is_true" },
-] }
-[[canvases.nodes.exit_block.choices]]
-text       = "Not today."
+text       = "Not tonight."
 targetType = "location"
 locationId = "underworld_strip"
 
-# ── Rue deal — DE-GRINDED. Free path (talk her into it) + an optional coin tip (flavor/goodwill,
-# NOT a gate). Both SET rue_met (the slot is hers going forward + Rue persists) -> .marsh.
+# ── Pose: oral (sex_stage 0) ──
 [[canvases.nodes]]
-id   = "rue"
-name = "Rue"
+id   = "oral"
+name = "On your knees"
 blocks = [
-  { type = "paragraph", content = "Rue reads her the way working girls read each other — fast, flat, no illusions. \"You want my Sunday.\" Not a question. \"He's regular, he's quiet, he pays and he doesn't linger. You can have him if you want him that bad. I could use a night that's mine.\"" },
+  { type = "video", props = { file = "sex/marsh_oral.webm", description = "A woman on her knees in a dim red-lit room servicing a small neat client, her hands and mouth working him while she watches his face.", search_queries = ["brothel blowjob kneeling red room pov", "escort kneeling blowjob client dim"] } },
+  { type = "paragraph", content = "On her knees, she takes him in her mouth and works him the way the trade taught her, but slower, watching — reading where the careful in him loosens and where it doesn't. He rests a hand in her hair, polite even here, and lets his head go back. Getting there." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
 [[canvases.nodes.exit_block.choices]]
-text       = "Take the night — it's yours."
+text       = "Keep working him."
 targetType = "node"
-nodeId     = "hunt_house_sunday.marsh"
-flagEffects = [
-  { targetType = "player", flag = "rue_met", op = "set" },
+nodeId     = "hunt_marsh_sunday.oral"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Climb on and ride him."
+targetType = "node"
+nodeId     = "hunt_marsh_sunday.vaginal"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Turn around — give him your ass."
+targetType = "node"
+nodeId     = "hunt_marsh_sunday.anal"
+effects = [
+  { targetType = "player", trait = "sex_stage",   op = "set", value = 2, clamp = false },
+  { targetType = "player", trait = "anal_active", op = "set", value = 1, clamp = false },
 ]
 [[canvases.nodes.exit_block.choices]]
-text       = "Slip her coin to make it easy."
+text       = "Let him finish in your mouth."
 targetType = "node"
-nodeId     = "hunt_house_sunday.marsh"
-costs      = [{ trait = "coin", value = 10 }]
-flagEffects = [
-  { targetType = "player", flag = "rue_met", op = "set" },
-]
+nodeId     = "hunt_marsh_sunday.finish_soft"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false } ]
 
-# ── Marsh — serve, then the drain (weapon-state fork, mirrors the Renner finisher). ──
+# ── Pose: vaginal (sex_stage 1) ──
 [[canvases.nodes]]
-id   = "marsh"
-name = "Marsh"
+id   = "vaginal"
+name = "Ride him"
 blocks = [
-  { type = "video", props = { file = "sex/house_marsh_serve.webm", description = "A cold transactional brothel encounter, a small neat man using a woman in a dim red-lit room, her face flat and elsewhere.", search_queries = ["brothel client sex pov cold red room", "escort serving client dim light"] } },
-  { type = "paragraph", content = "Marsh comes in on the hour, exact. A small neat man who checks the room's exits before he checks the girl, and takes the one the madam points him to without a word — her, tonight, in Rue's place. He doesn't notice the swap, or doesn't care; he wants the hour he paid for. She gives it to him, quiet and practiced, her hands doing the work while her eyes read him for where a careful man keeps his softness. He finishes in her with a grunt and goes slack, spent and open. What she does with him now is only a question of what she's carrying." },
+  { type = "video", props = { file = "sex/marsh_ride.webm", description = "A woman riding a small neat client on a bed in a dim red-lit room, setting the pace, watching his composure go.", search_queries = ["brothel riding cowgirl red room pov", "escort riding client bed dim light"] } },
+  { type = "paragraph", content = "She climbs on and rides him slow, keeping the pace hers, watching the careful man forget to be careful. He grips her hips and lets go of something — not much, but she's not after much. She's after the one thing men give up when she takes them the last way." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
 [[canvases.nodes.exit_block.choices]]
-text       = "Put the drain to the back of his neck."
+text       = "Keep riding him."
 targetType = "node"
-nodeId     = "hunt_house_sunday.drain"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq",  value = 1 },
-  { type = "trait", subject = "player", trait_key = "drain_charge",    operator = "gte", value = 1 },
-] }
+nodeId     = "hunt_marsh_sunday.vaginal"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
 [[canvases.nodes.exit_block.choices]]
-text       = "Take his money and go — the drain's spent."
+text       = "Back down on your knees."
 targetType = "node"
-nodeId     = "hunt_house_sunday.nodrain"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 },
-  { type = "trait", subject = "player", trait_key = "drain_charge",    operator = "lt", value = 1 },
-] }
+nodeId     = "hunt_marsh_sunday.oral"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 0, clamp = false } ]
 [[canvases.nodes.exit_block.choices]]
-text       = "Take his money and go — you're carrying the wrong gear."
+text       = "Turn around — give him your ass."
 targetType = "node"
-nodeId     = "hunt_house_sunday.nodrain"
+nodeId     = "hunt_marsh_sunday.anal"
+effects = [
+  { targetType = "player", trait = "sex_stage",   op = "set", value = 2, clamp = false },
+  { targetType = "player", trait = "anal_active", op = "set", value = 1, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish inside you."
+targetType = "node"
+nodeId     = "hunt_marsh_sunday.finish_soft"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 2 },
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
 ] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 1, clamp = false } ]
 
-# ── The drain fires — Marsh gives up the crew's place. SETS crew_known (located). Watcher seed. ──
+# ── Pose: anal (sex_stage 2) — THE DRAIN POSE. The finish forks on crew_known + gear + charge. ──
+[[canvases.nodes]]
+id   = "anal"
+name = "Give him your ass"
+blocks = [
+  { type = "video", props = { file = "sex/marsh_anal.webm", description = "A woman bent over the edge of a bed in a dim red-lit room, taken from behind by a small neat client gripping her hips.", search_queries = ["brothel anal from behind red room", "escort anal bent over bed dim"] } },
+  { type = "paragraph", content = "She turns and gives him her ass, and he takes it the way careful men take the thing they'd never ask for out loud — slow, greedy, undone by it. This is the act that opens him. Bent over the bed with his hands clamped on her hips, she waits for the moment his whole guarded weight goes soft, and reaches, if she's carrying it, for the drain." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Take it — work him to the edge."
+targetType = "node"
+nodeId     = "hunt_marsh_sunday.anal"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Back onto his cock."
+targetType = "node"
+nodeId     = "hunt_marsh_sunday.vaginal"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+# THE DRAIN — first extraction: crew_known is_false + drain worn (1) + charged (>=1). SETS crew_known.
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish in your ass — take the drain."
+targetType = "node"
+nodeId     = "hunt_marsh_sunday.drain"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+  { type = "trait", subject = "player", trait_key = "anal_active",       operator = "gte", value = 1  },
+  { type = "flag",  subject = "player", flag_key  = "crew_known",        operator = "is_false"        },
+  { type = "trait", subject = "player", trait_key = "equipped_weapon",   operator = "eq",  value = 1  },
+  { type = "trait", subject = "player", trait_key = "drain_charge",      operator = "gte", value = 1  },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 2, clamp = false } ]
+# Already drained — he's a paid regular now; the anal finish just ends (no more to take).
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish in your ass."
+targetType = "node"
+nodeId     = "hunt_marsh_sunday.finish_ass_paid"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+  { type = "trait", subject = "player", trait_key = "anal_active",       operator = "gte", value = 1  },
+  { type = "flag",  subject = "player", flag_key  = "crew_known",        operator = "is_true"         },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 2, clamp = false } ]
+# Under-geared — drain spent (weapon 1, charge < 1). He finishes; nothing taken; come back charged.
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish in your ass — the drain's spent."
+targetType = "node"
+nodeId     = "hunt_marsh_sunday.finish_ass_nodrain"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+  { type = "trait", subject = "player", trait_key = "anal_active",       operator = "gte", value = 1  },
+  { type = "flag",  subject = "player", flag_key  = "crew_known",        operator = "is_false"        },
+  { type = "trait", subject = "player", trait_key = "equipped_weapon",   operator = "eq",  value = 1  },
+  { type = "trait", subject = "player", trait_key = "drain_charge",      operator = "lt",  value = 1  },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 2, clamp = false } ]
+# Wrong gear — carrying the emitter (weapon 2), charge irrelevant. He finishes; nothing taken.
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish in your ass — you're carrying the wrong gear."
+targetType = "node"
+nodeId     = "hunt_marsh_sunday.finish_ass_nodrain"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+  { type = "trait", subject = "player", trait_key = "anal_active",       operator = "gte", value = 1  },
+  { type = "flag",  subject = "player", flag_key  = "crew_known",        operator = "is_false"        },
+  { type = "trait", subject = "player", trait_key = "equipped_weapon",   operator = "eq",  value = 2  },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 2, clamp = false } ]
+
+# ── THE DRAIN FIRES (anal finish, geared) — Marsh gives up the crew's rooms. SETS crew_known + watcher. ──
 [[canvases.nodes]]
 id   = "drain"
 name = "The drain"
 blocks = [
-  { type = "paragraph", content = "The drain wakes against his skin and the careful goes out of him all at once, loose and honest. She asks the only thing she came for: where the crew lived — Doss, Rourke, the rest of them. He tells her. A dead man's rooms down past the market, nobody's cleared them, the door still answers to a key under the third stair. In a few minutes he'll surface remembering a good hour and nothing else." },
+  { type = "paragraph", content = "He finishes in her ass, and the drain wakes with him — the same act that hands her nothing with a paying man hands her everything with this one. The careful goes out of him all at once, loose and honest, his guarded weight gone soft against her back. She asks the only thing she came for: where the crew lived — Doss, Rourke, the rest. He tells her. A dead man's rooms down past the market, nobody's cleared them, the door still answers to a key under the third stair. In a few minutes he'll surface remembering a good hour and nothing else." },
   { type = "paragraph", content = "On her way out a man at the bar folds his paper and watches her go — not the madam's muscle, someone else's, patient about it. She clocks him clocking her and files it. Careful men keep careful company; someone just paid attention to the wrong girl asking the wrong questions." },
 ]
 [canvases.nodes.exit_block]
@@ -1867,75 +2156,98 @@ type = "choices"
 text       = "Take the address and go."
 targetType = "location"
 locationId = "underworld_strip"
+effects = [
+  { targetType = "player", trait = "coin",              op = "add", value = 15 },
+  { targetType = "player", trait = "drain_charge",      op = "set", value = 0 },   # the drain is a 1-shot — spend it (mirrors loop_renner_finisher:1058/1083)
+  { targetType = "player", trait = "hygiene",           op = "add", value = -30, clamp = true },
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
 flagEffects = [
   { targetType = "player", flag = "crew_known", op = "set" },
 ]
 
-# ── Under-geared exit (soft-lock GUARD). Slot stays hers (rue_met set); come back with the drain. ──
+# ── Soft finish (mouth/inside) — a paid hour, no extraction. Come back for the ass when geared. ──
 [[canvases.nodes]]
-id   = "nodrain"
-name = "Nothing to take"
+id   = "finish_soft"
+name = "He finishes"
 blocks = [
-  { type = "paragraph", content = "She takes what he leaves on the side table and goes. Without the drain worn and charged he's just a spent john with a careful face — everything he knows still locked behind it. The slot's hers now, though; Rue's off it for good. Recharge the drain at the cradle, carry it, and take his Sunday again — the truth's a touch away once the weapon's on her." },
+  { type = "paragraph", content = "He finishes the way he came in — quiet, contained, already reaching for his coat before his breath's back. A careful man keeps his softness behind him when he doesn't lose the last of himself, and the mouth and the cunt don't cost him that. She takes the coin he leaves and lets him go. Whatever he knows is still behind his face. It's the ass that opens him — she'll need him again, and the drain worn and charged." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Head back up."
+text = "Clean up. Collect."
 [canvases.nodes.exit_block.config]
-destinationType = "specific"
-locationId      = "underworld_strip"
-
-# ═══ Rue persists (FIX #1) — light recurring face at The House once dealt off Marsh's slot. ═══
-# Solo canvas at underworld_brothel, gated rue_met is_true. Low priority (2) — sits under the work
-# hub (3) and the Sunday scene (6) in the button list. Wary, owed; a little underworld color.
-[[canvases]]
-id          = "hunt_rue_hub"
-name        = "Rue"
-description = "Rue persists after the slot deal (rue_met). A light recurring trade-a-word beat at The House — wary credit, underworld rumor. No conquest, no meters."
-[canvases.trigger]
-location      = "underworld_brothel"
-is_repeatable = true
-priority      = 2
-is_active     = true
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "rue_met", operator = "is_true" },
-] }
-[[canvases.nodes]]
-id   = "base"
-name = "Rue"
-blocks = [
-  { type = "paragraph", content = "Rue's by the rooms most nights now, off Marsh's Sunday for good. She nods when she sees her — not warmth, exactly, but the wary credit of someone who got a night back and didn't forget who handed it over." },
+destinationType          = "specific"
+locationId               = "underworld_brothel"
+time_progression_minutes = 120
+effects = [
+  { targetType = "player", trait = "coin",              op = "add", value = 15 },
+  { targetType = "player", trait = "hygiene",           op = "add", value = -30, clamp = true },
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
 ]
-[canvases.nodes.exit_block]
-type = "choices"
-[[canvases.nodes.exit_block.choices]]
-text       = "Trade a word."
-targetType = "node"
-nodeId     = "hunt_rue_hub.talk"
-[[canvases.nodes.exit_block.choices]]
-text       = "Leave her to it."
-targetType = "location"
-locationId = "underworld_strip"
+
+# ── Anal finish, already drained — he's a paid regular now, nothing left to take. ──
 [[canvases.nodes]]
-id   = "talk"
-name = "Rue"
+id   = "finish_ass_paid"
+name = "He finishes"
 blocks = [
-  { type = "paragraph", content = "She trades what she hears, the small weather of the underworld — which men are talking, who's asking after who, whose protection got thinner this week. \"You didn't hear it off me,\" she says, every time, and tells her anyway. It isn't much. But it's a face down here that isn't a mark and isn't an owner, and there aren't many of those." },
+  { type = "paragraph", content = "He finishes in her ass and goes slack against her, spent and honest and empty of anything she still needs — she took what was behind his face already, and a man only has the one secret worth the drain. Now he's just a careful regular with a standing Sunday, tipping fair, none the wiser. She straightens, takes the coin, and lets him go." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Head back up."
+text = "Clean up. Collect."
 [canvases.nodes.exit_block.config]
-destinationType = "specific"
-locationId      = "underworld_strip"
+destinationType          = "specific"
+locationId               = "underworld_brothel"
+time_progression_minutes = 120
+effects = [
+  { targetType = "player", trait = "coin",              op = "add", value = 15 },
+  { targetType = "player", trait = "hygiene",           op = "add", value = -30, clamp = true },
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
 
-# ── Hunt breadcrumb — Rung 2 (Story-Goals, priority 9). Points to The House, Sundays. Mutually
-# exclusive with rung 1 via hunt_lead (rung 1: is_false; rung 2: is_true). Retires at crew_known
-# (rung 3 lands with beat_0033).
+# ── Anal finish, under-geared (drain spent / wrong gear) — he opens, she can't take it. Come back geared. ──
+[[canvases.nodes]]
+id   = "finish_ass_nodrain"
+name = "He finishes"
+blocks = [
+  { type = "paragraph", content = "He finishes in her ass and the careful goes out of him — loose, open, everything he knows a touch away — and she's got nothing on her to take it with. Without the drain worn and charged he's just a spent john with a soft face and a secret still locked behind it. She takes his coin and files the miss. Recharge the drain at the cradle, carry it, take his Sunday again — the truth's a touch away once the weapon's on her." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Clean up. Collect."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_brothel"
+time_progression_minutes = 120
+effects = [
+  { targetType = "player", trait = "coin",              op = "add", value = 15 },
+  { targetType = "player", trait = "hygiene",           op = "add", value = -30, clamp = true },
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+]
+
+# ── Hunt breadcrumb — Rung 2 (Story-Goals, priority 9). Points to Rue + the Sunday drain. Mutually
+# exclusive with rung 1 via hunt_lead; retires at crew_known (rung 3 lands with beat_0033).
 [[quest_cards]]
 priority   = 9
-text       = "A fixer named Marsh keeps one habit — The House, every Sunday, for the same girl. Take her slot, serve him, and drain him for where the crew went to ground."
-tip        = "Go to The House (down in the underworld) on a Sunday, the drain worn and charged. Deal his girl Rue off the slot, take it, and drain him. Sleep to reach Sunday if you have to."
+text       = "The fixer Marsh keeps one habit — The House, every Sunday night, Rue's standing booking. Get the madam to take you on, arrange to cover his Sunday, then serve him and drain him — finish in his ass, the drain worn and charged — for where the crew went to ground."
+tip        = "At The House (down in the underworld): meet Rue, ask her for work, then ask to cover her Sunday regular. FIRST recharge the drain at your cradle — the Renner drain emptied it. Marsh is there Sunday nights, 20:00 to close; Power down advances whole days, so sleep to reach Sunday, then fill the day until evening (don't sleep past evening or you'll skip him a week). Take him, finish in his ass — the drain fires."
 when = [
   { flag = "hunt_lead",  op = "is_true"  },
   { flag = "crew_known", op = "is_false" },

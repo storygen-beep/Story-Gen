@@ -152,6 +152,58 @@ core_traits = { relation = 0, corruption = 0, arousal = 0 }
 flag_keys   = []
 arc_stages  = ["Revealed"]
 
+# ── Rue — the madam who runs The House (brothel-work's face + the Marsh on-ramp) — rev 59 ──
+# Promoted from the anonymous "madam" already in the brothel-work prose (3_activities) to a real NPC.
+# Runs the House, keeps a few exclusive clients, gates the shift work (you ask her in first). NOT a
+# conquest — the one straight dealer down here. Present daytime into the small hours: TWO schedule
+# entries span the ~3am close across the midnight boundary (a single window can't wrap). Her hub
+# (rue_hub, 5_scenes) carries ask-to-work (brothel_hired) + the Marsh-slot arrangement (rue_met) + the
+# daily word. Her intro (rue_intro, 5_scenes) auto-fires once on the first brothel visit.
+[[npcs]]
+id          = "npc_rue"
+name        = "Rue"
+description = "The madam of The House — counts heads and coin, decides who serves her few exclusive clients. Took the underworld the hard way and deals straight with whoever deals straight back. Not a mark, and not for sale herself: the one steady face down here. She's the door to the work, and to the Sunday regular the hunt needs."
+portrait    = "rue.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = ["Madam"]
+
+[[npcs.schedules]]
+location   = "underworld_brothel"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "23:59"
+activity   = "running the House"
+
+[[npcs.schedules]]
+location   = "underworld_brothel"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "00:00"
+end_time   = "03:00"
+activity   = "running the House into the small hours"
+
+# ── Marsh — the surviving fixer, Rue's Sunday-night exclusive (the hunt's drain target) — rev 59 ──
+# Promoted from prose to a real NPC so his "one habit" IS the schedule: present ONLY Sunday night at
+# The House (weekdays=[6], 20:00-23:59 — a real night window, not the null-end_time point-trigger trap).
+# Reached by covering Rue's booking (rue_met). The drain fires the NORMAL way — his anal finish, drain
+# worn + charged — and gives up the crew's rooms (crew_known). Repeatable Sunday regular after. Dialog
+# speaker + scheduled presence; no conquest arc.
+[[npcs]]
+id          = "npc_marsh"
+name        = "Marsh"
+description = "A careful little fixer who ran cargo with Doss and Rourke and outlived them both. Keeps one habit — the same girl at The House every Sunday night, exact to the hour, checks a room's exits before he checks the girl. Whatever a careful man knows he keeps behind a quiet face; the drain is the only thing that opens it."
+portrait    = "marsh.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = ["The Sunday regular"]
+
+[[npcs.schedules]]
+location   = "underworld_brothel"
+weekdays   = [6]
+start_time = "20:00"
+end_time   = "23:59"
+activity   = "his standing Sunday booking"
+
 # ─── Clothing — the worn-state COVER catalog (beat_0015) ──────────────────────
 # Two "dress"-slot looks she swaps between at the rack (wardrobe page @ wren_room):
 #   • her DEFAULT "asset self" (initial=true, equipped at start) = the out-of-cover state

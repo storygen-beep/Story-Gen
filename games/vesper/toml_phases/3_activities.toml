@@ -939,15 +939,22 @@ destinationType = "specific"
 locationId      = "the_waterfront"
 
 # ── The House — sex work earns coin (her own money) ─────────────────────────────────────────────
+# GATED behind Rue (rev 59): the shift work only opens once the madam has taken her on (brothel_hired,
+# set at rue_hub's "ask her for work" — 5_scenes). A returning player who worked shifts pre-update meets
+# Rue on their next visit (rue_intro auto-fires, is_repeatable=false) and asks in once — no progress lost;
+# I chose the one-time re-ask over a coin heuristic (which would mis-hire pit-only earners).
 [[canvases]]
 id          = "underworld_brothel_work"
 name        = "Take a shift"
-description = "The House hub menu (location-triggered, repeatable). 'Take a client' -> the full sex loop (underworld_brothel_loop). costs 15 Charge + entry reset; coin/Condition/time land on the finisher exit. Her own coin = the second life."
+description = "The House hub menu (location-triggered, repeatable). Gated brothel_hired (ask Rue in first). 'Take a client' -> the full sex loop (underworld_brothel_loop). costs 15 Charge + entry reset; coin/Condition/time land on the finisher exit. Her own coin = the second life."
 [canvases.trigger]
 location      = "underworld_brothel"
 is_repeatable = true
 priority      = 3
 is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "brothel_hired", operator = "is_true" },
+] }
 [[canvases.nodes]]
 id   = "base"
 name = "Take a shift"
