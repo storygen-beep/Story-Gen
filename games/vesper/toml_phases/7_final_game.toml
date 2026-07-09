@@ -4359,7 +4359,7 @@ locationId = "underworld_strip"
 id   = "oral"
 name = "On your knees"
 blocks = [
-  { type = "video", props = { file = "sex/marsh_oral.webm", description = "A woman on her knees in a dim red-lit room servicing a small neat client, her hands and mouth working him while she watches his face.", search_queries = ["brothel blowjob kneeling red room pov", "escort kneeling blowjob client dim"] } },
+  { type = "video", props = { file = "sex/marsh_oral_t5.webm", description = "A woman on her knees in a dim red-lit room servicing a small neat client, her hands and mouth working him while she watches his face.", search_queries = ["brothel blowjob kneeling red room pov", "escort kneeling blowjob client dim"] } },
   { type = "paragraph", content = "On her knees, she takes him in her mouth and works him the way the trade taught her, but slower, watching — reading where the careful in him loosens and where it doesn't. He rests a hand in her hair, polite even here, and lets his head go back. Getting there." },
 ]
 [canvases.nodes.exit_block]
@@ -4396,7 +4396,7 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 id   = "vaginal"
 name = "Ride him"
 blocks = [
-  { type = "video", props = { file = "sex/marsh_ride.webm", description = "A woman riding a small neat client on a bed in a dim red-lit room, setting the pace, watching his composure go.", search_queries = ["brothel riding cowgirl red room pov", "escort riding client bed dim light"] } },
+  { type = "video", props = { file = "sex/marsh_ride_t5.webm", description = "A woman riding a small neat client on a bed in a dim red-lit room, setting the pace, watching his composure go.", search_queries = ["brothel riding cowgirl red room pov", "escort riding client bed dim light"] } },
   { type = "paragraph", content = "She climbs on and rides him slow, keeping the pace hers, watching the careful man forget to be careful. He grips her hips and lets go of something — not much, but she's not after much. She's after the one thing men give up when she takes them the last way." },
 ]
 [canvases.nodes.exit_block]
@@ -4433,7 +4433,7 @@ effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", va
 id   = "anal"
 name = "Give him your ass"
 blocks = [
-  { type = "video", props = { file = "sex/marsh_anal.webm", description = "A woman bent over the edge of a bed in a dim red-lit room, taken from behind by a small neat client gripping her hips.", search_queries = ["brothel anal from behind red room", "escort anal bent over bed dim"] } },
+  { type = "video", props = { file = "sex/marsh_anal_t5.webm", description = "A woman bent over the edge of a bed in a dim red-lit room, taken from behind by a small neat client gripping her hips.", search_queries = ["brothel anal from behind red room", "escort anal bent over bed dim"] } },
   { type = "paragraph", content = "She turns and gives him her ass, and he takes it the way careful men take the thing they'd never ask for out loud — slow, greedy, undone by it. This is the act that opens him. Bent over the bed with his hands clamped on her hips, she waits for the moment his whole guarded weight goes soft, and reaches, if she's carrying it, for the drain." },
 ]
 [canvases.nodes.exit_block]
