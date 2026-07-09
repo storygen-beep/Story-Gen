@@ -1665,22 +1665,22 @@ goals = [
 # UNDERWORLD HUNT (Act-2 on-ramp, rev 54+) — the trail that REVEALS Bastien.
 # BRIDGE chunk: reveals Bastien + re-opens the story; his arc is a LATER chunk.
 # Gate chain (every conditions block version="1.0"): names_known (TRAIT, @drain) ->
-#   hunt_lead (@Anchor/Sol) -> crew_known (@House/Marsh) -> bastien_found (@crew_den) ->
+#   hunt_lead (@underworld_bar/Sol) -> crew_known (@House/Marsh) -> bastien_found (@crew_den) ->
 #   bastien_revealed (kidnap capstone). Every setter LOCATED except names_known (trait).
 # ═══════════════════════════════════════════════════════════════════════════════
 
-# ═══ beat_0031 — THE LEAD (Sol at the Anchor) ═════════════════════════════════
-# Plain location canvas at the_anchor (NOT requires_npc — Sol is scenery + the speaker),
-# gated names_known>=1 + hunt_lead is_false. Sol knew Doss; points at the surviving fixer
-# Marsh (The House, Sundays) + the carry-the-drain telegraph (soft-lock guard). SETS
-# hunt_lead (located). Priority 8 -> surfaces over the evening Renner hub (priority 5).
+# ═══ beat_0031 — THE LEAD (Sol at the underworld bar) ═════════════════════════
+# Plain location canvas at underworld_bar = The Undertow (NOT requires_npc — Sol is scenery + the
+# speaker), gated names_known>=1 + hunt_lead is_false. Sol knew Doss; points at the surviving fixer
+# Marsh (The House, Sundays) + the carry-the-drain telegraph (soft-lock guard). SETS hunt_lead (located).
+# Priority 8. (Moved from the_anchor -> the underworld bar so the whole hunt is one underworld descent.)
 [[canvases]]
 id          = "hunt_sol_lead"
 name        = "The bartender"
 description = "The Underworld Hunt lead. Off Doss's name, Sol names the surviving fixer Marsh (The House, Sundays) + tells her to carry the drain. SETS hunt_lead; retires once taken. Gated names_known>=1 + hunt_lead is_false."
 
 [canvases.trigger]
-location      = "the_anchor"
+location      = "underworld_bar"
 is_repeatable = true
 priority      = 8
 is_active     = true
@@ -1693,8 +1693,8 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The bartender"
 blocks = [
-  { type = "image", props = { file = "scenes/anchor_bartender.jpg", description = "A tired dockside dive bar at night, an old bartender working the taps at the dim end, unhurried.", search_queries = ["old bartender dive bar night", "dim dockside bar counter bartender"] } },
-  { type = "paragraph", content = "Sol works the taps at the Anchor's dead end, wiping a glass that's already clean. He's outlasted every owner this bar has had, and he looks at her the way he looks at regulars — not an owner, not a mark. He hears everything said over his counter and repeats none of it, unless you're the kind he's decided he likes." },
+  { type = "image", props = { file = "scenes/underworld_bar_bartender.jpg", description = "A dim underground bar, red light, an old bartender working the taps at the quiet end, unhurried.", search_queries = ["dim underground speakeasy bartender red light", "noir back-alley bar bartender low light"] } },
+  { type = "paragraph", content = "Sol works the taps at the dim end of the bar, wiping a glass that's already clean. He's outlasted every owner this place has had — and it's had a few, though the one it answers to now never shows his face. He looks at her the way he looks at regulars, not an owner, not a mark. He hears everything said over his counter down here and repeats none of it, unless you're the kind he's decided he likes." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -1705,7 +1705,7 @@ nodeId     = "hunt_sol_lead.ask"
 [[canvases.nodes.exit_block.choices]]
 text       = "Not tonight."
 targetType = "location"
-locationId = "the_anchor"
+locationId = "underworld_bar"
 
 [[canvases.nodes]]
 id   = "ask"
@@ -1722,18 +1722,18 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text       = "Sundays, then. Carry the drain."
 targetType = "location"
-locationId = "the_anchor"
+locationId = "underworld_bar"
 flagEffects = [
   { targetType = "player", flag = "hunt_lead", op = "set" },
 ]
 
-# ── Hunt breadcrumb — Rung 1 (Story-Goals tier, priority 9). Points to the Anchor. Mutually
+# ── Hunt breadcrumb — Rung 1 (Story-Goals tier, priority 9). Points to the underworld bar. Mutually
 # exclusive with the returning-player re-drain card (names_known<1) via names_known>=1; retires
 # at hunt_lead (rung 2 lands with beat_0032).
 [[quest_cards]]
 priority   = 9
-text       = "Two names — Doss and Rourke — and Renner's word they came up out of the underworld. Someone in the Reach knew them. Work the bar."
-tip        = "Ask around at the Anchor — the bartender hears everything. Bring the drain when the trail turns; you'll need it worn and charged."
+text       = "Two names — Doss and Rourke — and Renner's word they came up out of the underworld. Someone down there knew them. Work the bar."
+tip        = "Find the bartender at The Undertow, down in the underworld — he hears everything. Bring the drain when the trail turns; you'll need it worn and charged."
 when = [
   { trait = "names_known", subject = "player", op = "gte", value = 1 },
   { flag  = "hunt_lead",   op = "is_false" },
