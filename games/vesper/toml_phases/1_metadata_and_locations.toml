@@ -317,8 +317,12 @@ id               = "the_waterfront"
 name             = "The Waterfront"
 description      = "The docks strip — wet concrete, sodium lights, smuggler traffic that nobody logs. THE REACH — the city's underside, grit and salt and the parts the Spire pretends it doesn't use. The car back up to the Spire waits at the curb."
 image            = "locations/the_waterfront.jpg"
-navigation_order = ["the_anchor", "renner_depot", "facility_ruins", "renner_burned_yard", "underworld_gate"]
+navigation_order = ["the_anchor", "renner_depot", "facility_ruins", "renner_burned_yard"]
 # Top-level street hub (NO entry_from) — the Reach's living surface + the travel anchor.
+# The Underworld is NO LONGER a door on this street (rev 60) — it's a car destination now
+# (activity_travel_to_reach/to_spire offer it; the return rides live at the strip). Removed
+# underworld_gate from nav_order so the underworld reads as a place you DRIVE to, not a peer of
+# Renner's depot.
 
 [[locations]]
 id          = "the_anchor"
@@ -389,10 +393,13 @@ name        = "The Underworld Gate"
 description = "A freight door under the docks that isn't on any manifest, and a man in front of it who is. Past him the city goes down instead of up — the part of the Reach the Spire pretends doesn't exist. He doesn't move for free."
 image       = "locations/underworld_gate.jpg"
 image_search_queries = ["bouncer unmarked door night", "guard freight door dark dockside"]
+# rev 60: reached via the travel car (activity_travel_to_reach / activity_travel_to_spire drop you here).
+# entry_from + parent BOTH = the_waterfront: entry_from gives the gate a "Leave -> the docks" exit (so its
+# nav is a real back-link, not the engine's full-map fallback that fires on a nav-less location);
+# parent (the_waterfront is NOT a container) EXCLUDES the gate from the_waterfront's nav grid
+# (_ordered_navigation drops children whose parent == the hub) — so it is NOT a door on Renner's street.
 entry_from  = "the_waterfront"
-entry_conditions = { version = "1.0", items = [
-  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
-] }
+parent      = "the_waterfront"
 
 # The strip — the underworld hub. ROOT location (no entry_from): reached ONLY via the gate canvas's exit,
 # so the guard is unavoidable. Its own children are the brothel/pit/market + the locked deep end (the_site).

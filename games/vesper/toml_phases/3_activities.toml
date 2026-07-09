@@ -7,8 +7,8 @@
 # ─── Travel: Spire -> Reach ───────────────────────────────────────────────────
 [[canvases]]
 id          = "activity_travel_to_reach"
-name        = "Take the car to the Reach"
-description = "Wren-solo. Spire Plaza -> The Waterfront. Costs time + charge (the leash bites — schedules matter)."
+name        = "Take the car"
+description = "Wren-solo travel picker @ spire_plaza (rev 60). Down to the Reach (the_waterfront) OR down to the Underworld (underworld_gate -> the toll -> the strip). Costs time + charge; Reach hygiene-gated (cover), Underworld gated opening_done (no cover needed down there)."
 
 [canvases.trigger]
 location      = "spire_plaza"
@@ -18,21 +18,29 @@ is_active     = true
 
 [[canvases.nodes]]
 id   = "base"
-name = "Take the car to the Reach"
+name = "Take the car"
 blocks = [
-  { type = "paragraph", content = "A company car idles at the curb, waiting to run her down to the docks." },
+  { type = "paragraph", content = "A company car idles at the curb. Down to the Reach and the docks, or further down still — under them, to the half of the city that never comes up in daylight." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
-# Hygiene gate (public/cover only): filthy -> the cover won't hold; wash up before going out. Locked-visible.
+# To the Reach — hygiene gate (public/cover only): filthy -> the cover won't hold; wash first. Locked-visible.
 [[canvases.nodes.exit_block.choices]]
-text       = "Ride down to the Waterfront."
+text       = "Ride down to the Reach."
 targetType = "node"
 nodeId     = "activity_travel_to_reach.riding"
 show_when_locked = true
 locked_text = "Not like this — you're filthy, and the cover won't hold with the docks able to smell it on you. Wash up first."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "hygiene", operator = "gte", value = 40 },
+] }
+# To the Underworld — no cover needed down there (she's nobody down there); gated opening_done.
+[[canvases.nodes.exit_block.choices]]
+text       = "Ride down to the Underworld."
+targetType = "node"
+nodeId     = "activity_travel_to_reach.riding_underworld"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
 ] }
 
 [[canvases.nodes]]
@@ -52,11 +60,28 @@ effects = [
   { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true },   # travel: floor at 0, never block (locomotion mustn't soft-lock)
 ]
 
+[[canvases.nodes]]
+id   = "riding_underworld"
+name = "Ride down"
+blocks = [
+  { type = "paragraph", content = "She gives an address that isn't on any manifest. The car takes her down past the docks and lets her out at a freight door under everything, where the city goes down instead of up. The driver doesn't wait to see her through it." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out at the gate."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_gate"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true },
+]
+
 # ─── Travel: Reach -> Spire ───────────────────────────────────────────────────
 [[canvases]]
 id          = "activity_travel_to_spire"
-name        = "Take the car to the Spire"
-description = "Wren-solo. The Waterfront -> Spire Plaza. Costs time + charge."
+name        = "Take the car"
+description = "Wren-solo travel picker @ the_waterfront (rev 60). Up to the Spire (spire_plaza) OR down under the docks to the Underworld (underworld_gate -> the toll -> the strip). Spire = car (time+charge); Underworld = a short local descent (opening_done)."
 
 [canvases.trigger]
 location      = "the_waterfront"
@@ -66,15 +91,34 @@ is_active     = true
 
 [[canvases.nodes]]
 id   = "base"
-name = "Take the car to the Spire"
+name = "Take the car"
+blocks = [
+  { type = "paragraph", content = "The car idles at the curb where the docks meet the road. Up to the towers — or down under the boards, into the other half of the Reach, the part that doesn't come up in daylight." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Ride up to the Spire."
+targetType = "node"
+nodeId     = "activity_travel_to_spire.riding_spire"
+# Down under the docks to the underworld gate — local descent, no car; gated opening_done.
+[[canvases.nodes.exit_block.choices]]
+text       = "Down under the docks — the Underworld."
+targetType = "node"
+nodeId     = "activity_travel_to_spire.riding_under"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "riding_spire"
+name = "Ride up"
 blocks = [
   { type = "paragraph", content = "She calls the car. The docks recede behind her; the towers climb back up until the glass swallows the sky again. Home, if that's the word for the place that owns you." },
 ]
-
 [canvases.nodes.exit_block]
 type = "location"
 text = "Ride up to the Plaza."
-
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "spire_plaza"
@@ -82,6 +126,20 @@ time_progression_minutes = 30
 effects = [
   { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true },   # travel: floor at 0, never block — the ONLY way back to the cradle
 ]
+
+[[canvases.nodes]]
+id   = "riding_under"
+name = "Down under"
+blocks = [
+  { type = "paragraph", content = "She leaves the car and goes down on foot — off the lit strip, past the boards, to the freight door under the docks where the man already has his hand out." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Down to the gate."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_gate"
+time_progression_minutes = 10
 
 # ─── beat_0006 — Home base: the cradle ────────────────────────────────────────
 # The day-router (the ongoing free reset — power down, advance ~9h, wake charged) + the
@@ -931,12 +989,35 @@ blocks = [
   { type = "image", props = { file = "locations/underworld_strip.jpg", description = "A crowded underground market street at night, red light, stalls, bodies, neon in a language that isn't quite any language.", search_queries = ["underground night market red light crowd", "cyberpunk black market alley neon"] } },
   { type = "paragraph", content = "The strip runs under the docks for as far as the light does — the house, the pit, the market, and past them the dark where the real city keeps its teeth. Up here nobody's looking for her. It's the closest thing to free she's felt." },
 ]
+# Two ways back out (rev 60): climb up to the docks (the Reach, free/local) OR call the car straight up
+# to the Spire (time + charge). No return toll — the guard only tolls the way IN.
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Climb back up to the docks."
+targetType = "location"
+locationId = "the_waterfront"
+[[canvases.nodes.exit_block.choices]]
+text       = "Call the car up to the Spire."
+targetType = "node"
+nodeId     = "underworld_strip_hub.to_spire"
+
+[[canvases.nodes]]
+id   = "to_spire"
+name = "Up and out"
+blocks = [
+  { type = "paragraph", content = "She climbs up out of the red light and the noise, back to the docks, and calls the car. The underworld closes over behind her; the towers rise up ahead until the glass takes the sky again." },
+]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Climb back up to the docks."
+text = "Ride up to the Spire."
 [canvases.nodes.exit_block.config]
-destinationType = "specific"
-locationId      = "the_waterfront"
+destinationType          = "specific"
+locationId               = "spire_plaza"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true },
+]
 
 # ── The House — sex work earns coin (her own money) ─────────────────────────────────────────────
 # GATED behind Rue (rev 59): the shift work only opens once the madam has taken her on (brothel_hired,

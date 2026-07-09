@@ -44,6 +44,11 @@ custom_css = "#ui-bar #title { display: none !important; } #story-caption { marg
 [engine.daily_tick]
 flagEffects = [
   { targetType = "player", flag = "renner_relation_today", op = "unset" },
+  # rev 61 — the Marsh scheme is WEEKLY. rue_met is set by hunt_marsh_scheme (Sunday daytime) and wiped on
+  # every day-rollover, so it only survives the Sunday it was struck. Scheme + serve must happen the SAME
+  # Sunday (sleeping in between lapses it); an undrained week means re-scheming Rue next Sunday. Once Marsh
+  # is drained, crew_known (permanent) carries hunt_marsh_sunday instead, so this wipe is harmless after.
+  { targetType = "player", flag = "rue_met", op = "unset" },
 ]
 
 # ─── Clothing / wardrobe — the worn-state COVER system (beat_0015) ─────────────

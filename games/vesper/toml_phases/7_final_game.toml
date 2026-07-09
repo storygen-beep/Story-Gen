@@ -52,6 +52,11 @@ custom_css = "#ui-bar #title { display: none !important; } #story-caption { marg
 [engine.daily_tick]
 flagEffects = [
   { targetType = "player", flag = "renner_relation_today", op = "unset" },
+  # rev 61 — the Marsh scheme is WEEKLY. rue_met is set by hunt_marsh_scheme (Sunday daytime) and wiped on
+  # every day-rollover, so it only survives the Sunday it was struck. Scheme + serve must happen the SAME
+  # Sunday (sleeping in between lapses it); an undrained week means re-scheming Rue next Sunday. Once Marsh
+  # is drained, crew_known (permanent) carries hunt_marsh_sunday instead, so this wipe is harmless after.
+  { targetType = "player", flag = "rue_met", op = "unset" },
 ]
 
 # ─── Clothing / wardrobe — the worn-state COVER system (beat_0015) ─────────────
@@ -515,8 +520,12 @@ id               = "the_waterfront"
 name             = "The Waterfront"
 description      = "The docks strip — wet concrete, sodium lights, smuggler traffic that nobody logs. THE REACH — the city's underside, grit and salt and the parts the Spire pretends it doesn't use. The car back up to the Spire waits at the curb."
 image            = "locations/the_waterfront.jpg"
-navigation_order = ["the_anchor", "renner_depot", "facility_ruins", "renner_burned_yard", "underworld_gate"]
+navigation_order = ["the_anchor", "renner_depot", "facility_ruins", "renner_burned_yard"]
 # Top-level street hub (NO entry_from) — the Reach's living surface + the travel anchor.
+# The Underworld is NO LONGER a door on this street (rev 60) — it's a car destination now
+# (activity_travel_to_reach/to_spire offer it; the return rides live at the strip). Removed
+# underworld_gate from nav_order so the underworld reads as a place you DRIVE to, not a peer of
+# Renner's depot.
 
 [[locations]]
 id          = "the_anchor"
@@ -587,10 +596,13 @@ name        = "The Underworld Gate"
 description = "A freight door under the docks that isn't on any manifest, and a man in front of it who is. Past him the city goes down instead of up — the part of the Reach the Spire pretends doesn't exist. He doesn't move for free."
 image       = "locations/underworld_gate.jpg"
 image_search_queries = ["bouncer unmarked door night", "guard freight door dark dockside"]
+# rev 60: reached via the travel car (activity_travel_to_reach / activity_travel_to_spire drop you here).
+# entry_from + parent BOTH = the_waterfront: entry_from gives the gate a "Leave -> the docks" exit (so its
+# nav is a real back-link, not the engine's full-map fallback that fires on a nav-less location);
+# parent (the_waterfront is NOT a container) EXCLUDES the gate from the_waterfront's nav grid
+# (_ordered_navigation drops children whose parent == the hub) — so it is NOT a door on Renner's street.
 entry_from  = "the_waterfront"
-entry_conditions = { version = "1.0", items = [
-  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
-] }
+parent      = "the_waterfront"
 
 # The strip — the underworld hub. ROOT location (no entry_from): reached ONLY via the gate canvas's exit,
 # so the guard is unavoidable. Its own children are the brothel/pit/market + the locked deep end (the_site).
@@ -1028,8 +1040,8 @@ flagEffects = [
 # ─── Travel: Spire -> Reach ───────────────────────────────────────────────────
 [[canvases]]
 id          = "activity_travel_to_reach"
-name        = "Take the car to the Reach"
-description = "Wren-solo. Spire Plaza -> The Waterfront. Costs time + charge (the leash bites — schedules matter)."
+name        = "Take the car"
+description = "Wren-solo travel picker @ spire_plaza (rev 60). Down to the Reach (the_waterfront) OR down to the Underworld (underworld_gate -> the toll -> the strip). Costs time + charge; Reach hygiene-gated (cover), Underworld gated opening_done (no cover needed down there)."
 
 [canvases.trigger]
 location      = "spire_plaza"
@@ -1039,21 +1051,29 @@ is_active     = true
 
 [[canvases.nodes]]
 id   = "base"
-name = "Take the car to the Reach"
+name = "Take the car"
 blocks = [
-  { type = "paragraph", content = "A company car idles at the curb, waiting to run her down to the docks." },
+  { type = "paragraph", content = "A company car idles at the curb. Down to the Reach and the docks, or further down still — under them, to the half of the city that never comes up in daylight." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
-# Hygiene gate (public/cover only): filthy -> the cover won't hold; wash up before going out. Locked-visible.
+# To the Reach — hygiene gate (public/cover only): filthy -> the cover won't hold; wash first. Locked-visible.
 [[canvases.nodes.exit_block.choices]]
-text       = "Ride down to the Waterfront."
+text       = "Ride down to the Reach."
 targetType = "node"
 nodeId     = "activity_travel_to_reach.riding"
 show_when_locked = true
 locked_text = "Not like this — you're filthy, and the cover won't hold with the docks able to smell it on you. Wash up first."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "hygiene", operator = "gte", value = 40 },
+] }
+# To the Underworld — no cover needed down there (she's nobody down there); gated opening_done.
+[[canvases.nodes.exit_block.choices]]
+text       = "Ride down to the Underworld."
+targetType = "node"
+nodeId     = "activity_travel_to_reach.riding_underworld"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
 ] }
 
 [[canvases.nodes]]
@@ -1073,11 +1093,28 @@ effects = [
   { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true },   # travel: floor at 0, never block (locomotion mustn't soft-lock)
 ]
 
+[[canvases.nodes]]
+id   = "riding_underworld"
+name = "Ride down"
+blocks = [
+  { type = "paragraph", content = "She gives an address that isn't on any manifest. The car takes her down past the docks and lets her out at a freight door under everything, where the city goes down instead of up. The driver doesn't wait to see her through it." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out at the gate."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_gate"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true },
+]
+
 # ─── Travel: Reach -> Spire ───────────────────────────────────────────────────
 [[canvases]]
 id          = "activity_travel_to_spire"
-name        = "Take the car to the Spire"
-description = "Wren-solo. The Waterfront -> Spire Plaza. Costs time + charge."
+name        = "Take the car"
+description = "Wren-solo travel picker @ the_waterfront (rev 60). Up to the Spire (spire_plaza) OR down under the docks to the Underworld (underworld_gate -> the toll -> the strip). Spire = car (time+charge); Underworld = a short local descent (opening_done)."
 
 [canvases.trigger]
 location      = "the_waterfront"
@@ -1087,15 +1124,34 @@ is_active     = true
 
 [[canvases.nodes]]
 id   = "base"
-name = "Take the car to the Spire"
+name = "Take the car"
+blocks = [
+  { type = "paragraph", content = "The car idles at the curb where the docks meet the road. Up to the towers — or down under the boards, into the other half of the Reach, the part that doesn't come up in daylight." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Ride up to the Spire."
+targetType = "node"
+nodeId     = "activity_travel_to_spire.riding_spire"
+# Down under the docks to the underworld gate — local descent, no car; gated opening_done.
+[[canvases.nodes.exit_block.choices]]
+text       = "Down under the docks — the Underworld."
+targetType = "node"
+nodeId     = "activity_travel_to_spire.riding_under"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "riding_spire"
+name = "Ride up"
 blocks = [
   { type = "paragraph", content = "She calls the car. The docks recede behind her; the towers climb back up until the glass swallows the sky again. Home, if that's the word for the place that owns you." },
 ]
-
 [canvases.nodes.exit_block]
 type = "location"
 text = "Ride up to the Plaza."
-
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "spire_plaza"
@@ -1103,6 +1159,20 @@ time_progression_minutes = 30
 effects = [
   { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true },   # travel: floor at 0, never block — the ONLY way back to the cradle
 ]
+
+[[canvases.nodes]]
+id   = "riding_under"
+name = "Down under"
+blocks = [
+  { type = "paragraph", content = "She leaves the car and goes down on foot — off the lit strip, past the boards, to the freight door under the docks where the man already has his hand out." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Down to the gate."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_gate"
+time_progression_minutes = 10
 
 # ─── beat_0006 — Home base: the cradle ────────────────────────────────────────
 # The day-router (the ongoing free reset — power down, advance ~9h, wake charged) + the
@@ -1952,12 +2022,35 @@ blocks = [
   { type = "image", props = { file = "locations/underworld_strip.jpg", description = "A crowded underground market street at night, red light, stalls, bodies, neon in a language that isn't quite any language.", search_queries = ["underground night market red light crowd", "cyberpunk black market alley neon"] } },
   { type = "paragraph", content = "The strip runs under the docks for as far as the light does — the house, the pit, the market, and past them the dark where the real city keeps its teeth. Up here nobody's looking for her. It's the closest thing to free she's felt." },
 ]
+# Two ways back out (rev 60): climb up to the docks (the Reach, free/local) OR call the car straight up
+# to the Spire (time + charge). No return toll — the guard only tolls the way IN.
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Climb back up to the docks."
+targetType = "location"
+locationId = "the_waterfront"
+[[canvases.nodes.exit_block.choices]]
+text       = "Call the car up to the Spire."
+targetType = "node"
+nodeId     = "underworld_strip_hub.to_spire"
+
+[[canvases.nodes]]
+id   = "to_spire"
+name = "Up and out"
+blocks = [
+  { type = "paragraph", content = "She climbs up out of the red light and the noise, back to the docks, and calls the car. The underworld closes over behind her; the towers rise up ahead until the glass takes the sky again." },
+]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Climb back up to the docks."
+text = "Ride up to the Spire."
 [canvases.nodes.exit_block.config]
-destinationType = "specific"
-locationId      = "the_waterfront"
+destinationType          = "specific"
+locationId               = "spire_plaza"
+time_progression_minutes = 30
+effects = [
+  { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true },
+]
 
 # ── The House — sex work earns coin (her own money) ─────────────────────────────────────────────
 # GATED behind Rue (rev 59): the shift work only opens once the madam has taken her on (brothel_hired,
@@ -4055,7 +4148,7 @@ blocks = [
 [canvases.nodes.exit_block]
 type = "choices"
 [[canvases.nodes.exit_block.choices]]
-text       = "Set two names on the bar. Doss. Rourke."
+text       = "Ask him about Doss and Rourke."
 targetType = "node"
 nodeId     = "hunt_sol_lead.ask"
 [[canvases.nodes.exit_block.choices]]
@@ -4179,15 +4272,8 @@ nodeId     = "rue_hub.work"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "brothel_hired", operator = "is_false" },
 ] }
-[[canvases.nodes.exit_block.choices]]
-text       = "Ask about her Sunday regular."
-targetType = "node"
-nodeId     = "rue_hub.sunday"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "brothel_hired", operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "hunt_lead",     operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "rue_met",       operator = "is_false" },
-] }
+# (rev 61) The Marsh scheme MOVED OUT of this everyday hub -> hunt_marsh_scheme, a Sunday-daytime-only
+# canvas (trigger.schedules weekdays=[6] 00:00-19:59). Conditions can't test the weekday; a canvas schedule can.
 [[canvases.nodes.exit_block.choices]]
 text       = "Trade a word."
 targetType = "node"
@@ -4220,26 +4306,8 @@ flagEffects = [
   { targetType = "player", flag = "brothel_hired", op = "set" },
 ]
 
-# ── Cover the Sunday regular (the tip-off). Needs hunt_lead (Sol named Marsh). SETS rue_met -> the
-#    Marsh Sunday scene opens. Rue gets her night off; the player gets the booking. ──
-[[canvases.nodes]]
-id   = "sunday"
-name = "Rue"
-blocks = [
-  { type = "dialog", props = { speaker = "player" }, content = "Your Sunday standing. The careful little man, same hour every week. I want it." },
-  { type = "paragraph", content = "That gets her attention — a slow look up from the ledger, reassessing. She knows exactly who the girl means, and she doesn't ask why." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "Marsh. Quiet money, tips fair, never any trouble — the kind of regular you don't hand off. But I could use a Sunday that's mine for once, and you've got the look of someone who wants him for more than the coin." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "So take him. Sunday night, on the hour, the far room. Whatever your business is with him, keep it off my floor — and he never hears from me that the girl got swapped." },
-]
-[canvases.nodes.exit_block]
-type = "choices"
-[[canvases.nodes.exit_block.choices]]
-text       = "Sunday night, then."
-targetType = "node"
-nodeId     = "rue_hub.base"
-flagEffects = [
-  { targetType = "player", flag = "rue_met", op = "set" },
-]
+# (rev 61) The old rue_hub.sunday node is GONE — the scheme is now hunt_marsh_scheme (Sunday daytime only,
+# re-done every week until Marsh is drained; rue_met is wiped by the daily tick).
 
 # ── The daily word — light underworld rumor, repeatable. No state. ──
 [[canvases.nodes]]
@@ -4287,6 +4355,57 @@ text = "Head back up."
 destinationType = "specific"
 locationId      = "underworld_strip"
 
+# ═══ beat_0032e — THE SCHEME (Sunday daytime, BEFORE Marsh) — rev 61 ═══════════
+# A WEEKLY ritual, not a one-time unlock. Solo canvas at underworld_brothel, gated to Sunday BEFORE Marsh's
+# 20:00 slot via trigger.schedules (weekdays=[6], 00:00-19:59) — the conditions system can't test the weekday,
+# a canvas schedule can. Rue hands over TONIGHT's booking only. SETS rue_met (located setter). The daily tick
+# (0_systems_spec [engine.daily_tick]) WIPES rue_met on every day-rollover, so a Sunday you don't drain him
+# lapses and you must scheme her again next week. Retires for good at crew_known (drained -> he's just her
+# regular, and hunt_marsh_sunday then opens on crew_known instead). Everything behind brothel_hired.
+[[canvases]]
+id          = "hunt_marsh_scheme"
+name        = "Rue's Sunday"
+description = "The WEEKLY scheme. Sunday daytime only (trigger.schedules weekdays=[6] 00:00-19:59, before Marsh's 20:00). Rue gives up TONIGHT's booking -> SETS rue_met. The daily tick wipes rue_met, so an undrained week means re-scheming next Sunday. Gated brothel_hired + hunt_lead + crew_known is_false + rue_met is_false."
+[canvases.trigger]
+location      = "underworld_brothel"
+is_repeatable = true
+priority      = 7
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "brothel_hired", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "hunt_lead",     operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "crew_known",    operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "rue_met",       operator = "is_false" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [6]
+start_time = "00:00"
+end_time   = "19:59"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Rue's Sunday"
+blocks = [
+  { type = "paragraph", content = "Sunday, and the House keeps its one clock. Rue's at her chair with the ledger open to tonight's page, the far room already blocked out in her own hand. A few hours yet before the careful little man walks in expecting her." },
+  { type = "dialog", props = { speaker = "player" }, content = "Your Sunday standing. The careful little man, same hour every week. I want tonight." },
+  { type = "paragraph", content = "A slow look up from the ledger, reassessing. She knows exactly who the girl means, and she doesn't ask why." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "Marsh. Quiet money, tips fair, never any trouble — the kind of regular you don't hand off. But I could use a night that's mine, and you've got the look of someone who wants him for more than the coin." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "So take tonight. Tonight, mind — not my Sundays. He's on the hour, the far room. Whatever your business is, keep it off my floor, and he never hears from me that the girl got swapped. You want him again, you come ask me again." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Tonight, then. The far room."
+targetType = "location"
+locationId = "underworld_brothel"
+flagEffects = [
+  { targetType = "player", flag = "rue_met", op = "set" },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Not this week."
+targetType = "location"
+locationId = "underworld_brothel"
+
 # ═══ beat_0032c — MARSH, THE SUNDAY EXCLUSIVE (serve loop + on-contract drain) ══
 # ONE triggered canvas (crew_known set here MUST be located -> loop inlined as nodes, NOT a triggerless
 # finisher; the flag-chain validator hard-fails a triggerless is_true setter). requires_npc npc_marsh
@@ -4307,8 +4426,13 @@ npc           = "npc_marsh"
 is_repeatable = true
 priority      = 6
 is_active     = true
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "rue_met", operator = "is_true" },
+# (rev 61) OR-gate: PRE-drain you must have schemed Rue THIS Sunday (rue_met — wiped nightly by the daily
+# tick); POST-drain (crew_known) he's simply your Sunday regular and needs NO re-scheme. Both flags are
+# transitively behind brothel_hired (rue_met only set by the scheme, which requires hired; crew_known only
+# set by the drain, which requires rue_met) — so "she works here first" still holds without nested AND/OR.
+conditions = { version = "1.0", logic = "OR", items = [
+  { type = "flag", subject = "player", flag_key = "rue_met",    operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "crew_known", operator = "is_true" },
 ] }
 
 [[canvases.nodes]]
@@ -4602,8 +4726,8 @@ effects = [
 # exclusive with rung 1 via hunt_lead; retires at crew_known (rung 3 lands with beat_0033).
 [[quest_cards]]
 priority   = 9
-text       = "The fixer Marsh keeps one habit — The House, every Sunday night, Rue's standing booking. Get the madam to take you on, arrange to cover his Sunday, then serve him and drain him — finish in his ass, the drain worn and charged — for where the crew went to ground."
-tip        = "At The House (down in the underworld): meet Rue, ask her for work, then ask to cover her Sunday regular. FIRST recharge the drain at your cradle — the Renner drain emptied it. Marsh is there Sunday nights, 20:00 to close; Power down advances whole days, so sleep to reach Sunday, then fill the day until evening (don't sleep past evening or you'll skip him a week). Take him, finish in his ass — the drain fires."
+text       = "The fixer Marsh keeps one habit — The House, every Sunday night, Rue's standing booking. Get the madam to take you on, and each Sunday she'll hand you that night's booking if you ask. Serve him and drain him — finish in his ass, the drain worn and charged — for where the crew went to ground."
+tip        = "One Sunday, start to finish. FIRST recharge the drain at your cradle — the Renner drain emptied it. Then, at The House (down in the underworld): meet Rue, ask her for work, and on a SUNDAY BEFORE 20:00 ask her for that night's booking — she only gives you the one night, so ask again any week you miss. Marsh arrives 20:00 to close: take him, finish in his ass, the drain fires. Don't power down between arranging it and serving him — sleeping rolls the day and the arrangement lapses."
 when = [
   { flag = "hunt_lead",  op = "is_true"  },
   { flag = "crew_known", op = "is_false" },
