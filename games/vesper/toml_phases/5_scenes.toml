@@ -2552,7 +2552,7 @@ destinationType = "specific"
 locationId      = "captive_room"
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# CAPTIVITY — the shelf, scenes 1-4 (beat_0039). Nominal x2, Hot x2.
+# CAPTIVITY — the shelf, scenes 1-8 (beat_0039/0040, RE-SCRIPTED rev 64). Nominal/Hot/Faulting/Failing x2.
 #
 # MECHANISM (verified, v2.py): trigger_mode="random" + is_repeatable=FALSE is legal and SELF-RETIRING.
 #   • selectAutoFireCanvasForLocation SKIPS triggerMode=="random" (v2.py:4293) -> auto-fire can't hijack them.
@@ -2568,20 +2568,26 @@ locationId      = "captive_room"
 # scene fires the next 3 entries roll nothing. random_cooldowns is NOT an author knob. The only lever is
 # chance (0.5 here) + the per-day cap, which one-shots don't need.
 #
-# VOICE: Bastien in `dialog` blocks (his portrait renders). His register is ownership-as-curiosity —
-# maximum crude, spoken FLAT, clinical not hot; he does not degrade her, he OPERATES her. The crew are
-# FACELESS: they speak in quoted lines inside `paragraph` blocks, never as named speakers — a dialog
-# block with speaker="unknown" renders a hardcoded "Stranger:" label (v2.py:14020-14026).
-# Hot beats are PLAYED, never summarized (Rule 4). Her interior: at most one thought_bubble.
+# VOICE (rev 64 — HOT & DEGRADING, LO's call): Bastien in `dialog` blocks (his portrait renders). He gets
+# off on her and says so — slut, hole, bought-and-paid-for, filthy machine; full crude; his cold
+# ownership-curiosity (still writing numbers) runs as subtext UNDER the meanness, never a brake. The crew are
+# FACELESS BUT LOUD — a jeering pack, decoupled from his register — speaking in quoted lines inside
+# `paragraph` blocks, never named speakers (a speaker="unknown" dialog renders a hardcoded "Stranger:" label,
+# v2.py:14020-14026). Her interior: ONE clipped thought_bubble per scene.
+#
+# STRUCTURE (rev 64): each scene is a scripted MULTI-BEAT PURE-WITNESS CHAIN (approach -> strip -> inspection
+# -> the acts -> finish -> read-out), advanced on one forward choice per node; the terminal read-out node
+# carries the +12 strain / -energy exit ONCE. Media = one clip per beat (many NEW -> find-media harvest; the 8
+# original clips are reused on each scene's core act). NOT the flat one-clip captions of the rev-63 draft.
 #
 # NO npc=/requires_npc — npc_bastien has no schedule row, and a requires_npc canvas would never fire.
 # ═══════════════════════════════════════════════════════════════════════════════
 
-# ── SCENE 1 — Nominal. "The inventory." ────────────────────────────────────────────────────────────
+# ── SCENE 1 — Nominal. "The inventory" (rev64 witness chain). ──────────────────
 [[canvases]]
 id          = "cell_use_inventory"
 name        = "The inventory"
-description = "beat_0039. Shelf scene 1/8 (Nominal). One-shot random @captive_room, core_strain lt 24. He strips her the way you check a machine in, finds the socket empty because he emptied it, and fucks her on the table while he talks. +12 strain, -10 Charge."
+description = "beat_0039, RE-SCRIPTED rev 64 (pure-witness chain). Scene 1/8 (Nominal). One-shot random @captive_room, core_strain lt 24. 7 beats: The order -> Strip on command -> The inspection -> He fucks her throat -> He fucks her cunt -> He takes her ass -> He finishes + the read-out. +12 strain / -10 energy applied ONCE on the terminal read-out exit. Reuse ['sex/cell_inventory.webm']; other clips NEW (find-media). Enters at nodes[0] (base)."
 [canvases.trigger]
 location      = "captive_room"
 trigger_mode  = "random"
@@ -2593,16 +2599,116 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "captivity_broken",  operator = "is_false" },
   { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt", value = 24 },
 ] }
+
 [[canvases.nodes]]
 id   = "base"
-name = "The inventory"
+name = "The order"
 blocks = [
-  { type = "video", props = { file = "sex/cell_inventory.webm", description = "A woman bent forward over a bare table in a dim concrete room, a fully-dressed man behind her taking his time, one hand flat between her shoulder blades.", search_queries = ["bent over table from behind dim room", "woman bent over table man behind slow"] } },
-  { type = "paragraph", content = "He comes in alone and puts a folding chair by the table and does not sit in it. He takes her clothes off her the way you'd unwrap a delivery, checking as he goes — the seam at her spine, the ports behind her knees, the plate under her sternum that everyone finds eventually. When he gets to the empty socket he stops and puts his thumb in it." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "That's what you do it with. My man watched you walk out of The House and swore the girl who came out wasn't the girl who went in, and he was right, and this is where you keep it. It's in a drawer upstairs now. I've had it out on the desk and turned it over and turned it over, and I still don't know what it's for." },
-  { type = "paragraph", content = "Then he bends her over the table and fucks her, unhurried, one hand flat between her shoulder blades to hold her down against nothing, because she isn't fighting. He goes at it the way a man saws a board he intends to use. When he comes in her cunt he doesn't make a sound." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There. Now let's see what that does." },
-  { type = "paragraph", content = "The charge goes into her and stops, and she lies with her cheek on the table feeling it turn over somewhere under the plate, looking for the way out, not finding it." },
+  { type = "image", props = { file = "scenes/cell_inventory_the_order.jpg", description = "clothed man sitting in chair facing naked woman bare concrete room", search_queries = ["clothed man sitting in chair facing naked woman bare concrete room", "man seated watching woman stand undress dim cell"] } },
+  { type = "paragraph", content = "The door lets him in and no one else. He has a folding chair under one arm; he snaps it open a body-length from her and drops into it like a man come to look over stock he already owns. No hurry in him. He sits with his knees apart and looks her up and down the way you'd look at a crate you paid too much for and mean to get your money's worth out of, and lets the quiet sit until it's clear the quiet is his too." },
+  { type = "paragraph", content = "She stands where the room keeps her. He takes his time getting to the point, because taking his time is part of it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Take it off. All of it. Let's see what I paid for." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Slow. I've got a whole drawer of notes on you upstairs and not one of them tells me what a thing like you is worth. So I'll price you myself." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n2"
+
+[[canvases.nodes]]
+id   = "n2"
+name = "Strip on command"
+blocks = [
+  { type = "video", props = { file = "sex/cell_inventory_strip_on_command.webm", description = "woman slowly stripping herself for seated man watching", search_queries = ["woman slowly stripping herself for seated man watching", "woman undressing on command man cock out chair pov"] } },
+  { type = "paragraph", content = "She does it herself, one seam at a time, because the once she didn't he tore it off her at the shoulder and called her a stupid fucking machine for making him work for it. So now her own hands undress her while he watches from the chair with his cock already out, working it slow, in no rush at all." },
+  { type = "paragraph", content = "He makes her go piece by piece — makes her stand there between layers with the cold on her skin, so the stripping is the thing and not just the getting-naked. Every scrap she peels off she sets on the floor, because there's nowhere else, and when she's bare she stays bare in front of him and waits, because that too is something she does now." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Look at that. Bought and paid for." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "See how easy it goes when you don't make me work for it. Good machine." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n3"
+
+[[canvases.nodes]]
+id   = "n3"
+name = "The inspection"
+blocks = [
+  { type = "video", props = { file = "sex/cell_inventory_the_inspection.webm", description = "man spreading woman from behind fingers in cunt and ass rough inspection", search_queries = ["man spreading woman from behind fingers in cunt and ass rough inspection", "man two fingers pussy one finger ass bent over inspecting"] } },
+  { type = "paragraph", content = "He gets up only when she's bare. He checks her over like stock — turns her by the hip, spreads her open with both thumbs, works two fingers up into her cunt and a third into her ass in the same breath, no interest at all in whether she's ready for any of it." },
+  { type = "paragraph", content = "She doesn't answer him, so he spits in her face, unhurried, right across the cheek, and wipes his wet hand off on her tits. Then his thumb finds the empty socket at the base of her spine, and he stops, and works the tip of it into the hole, and laughs." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Nice and tight for a thing that's been passed round half the docks. They tell me you were a fixture in a whorehouse. Doesn't feel used up. Yet." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There it is. That's where the party trick lived. Empty as a robbed till. Somebody's had it out of you — so now you're just holes and a bill." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n4"
+
+[[canvases.nodes]]
+id   = "n4"
+name = "He fucks her throat"
+blocks = [
+  { type = "video", props = { file = "sex/cell_inventory_he_fucks_her_throat.webm", description = "rough forced deepthroat hair pulled gagging drool tears", search_queries = ["rough forced deepthroat hair pulled gagging drool tears", "face fuck throat held down gagging drool ropes off chin"] } },
+  { type = "paragraph", content = "He doesn't ask her to suck it. He fists a handful of her hair, drags her down onto his cock, and fucks it straight down her throat — holds her there past the gag, past the point her eyes run and drool ropes off her chin onto her tits, then hauls her up for one wet breath and shoves her back down onto it." },
+  { type = "paragraph", content = "He uses her face like it owes him money, both hands in her hair now, driving her throat down the length of him at his own pace and holding her there each time until her whole body kicks. She takes all of it, because taking it is the only thing left that she does." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There's a good hole." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "That's it. Choke on it. That part of you still works, at least." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n5"
+
+[[canvases.nodes]]
+id   = "n5"
+name = "He fucks her cunt"
+blocks = [
+  { type = "video", props = { file = "sex/cell_inventory.webm", description = "A woman bent forward over a bare table in a dim concrete room, a fully-dressed man behind her taking his time, one hand flat between her shoulder blades.", search_queries = [] } },
+  { type = "paragraph", content = "He pulls her up off his cock, turns her, and folds her over the table with one hand flat between her shoulder blades, holding her down against nothing because she isn't fighting. Then he pushes into her cunt and fucks her the way a man saws a board he means to use — unhurried, all the way through, hand pressing her cheek to the wood." },
+  { type = "paragraph", content = "When he spends himself in her he doesn't make a sound. The charge comes off him and goes into her and stops. It climbs up behind the plate under her sternum and stacks there against the wall of the stripped socket, turning over, looking for the way out, and not finding one." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "That's one in the tank. Now let's see if any of it goes anywhere." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n6"
+
+[[canvases.nodes]]
+id   = "n6"
+name = "He takes her ass"
+blocks = [
+  { type = "video", props = { file = "sex/cell_inventory_he_takes_her_ass.webm", description = "anal from behind bent over table rough slow entry", search_queries = ["anal from behind bent over table rough slow entry", "man working cock into woman ass bent over holding hips"] } },
+  { type = "paragraph", content = "He pulls out of her cunt still hard, works the head against her ass, and pushes in slow. It takes him longer here, and it's tighter, and he doesn't care. He holds her by the hips and drives up into her ass an inch from the empty socket at the base of her spine — the hole that used to be the drain, the thing that TOOK, that reached down a man's spine and pulled something loose." },
+  { type = "paragraph", content = "Now it only fills her. Every stroke stacks the charge higher with nowhere for it to run, and when he empties himself into her ass she gets all of it and there is nothing on the far end of the take — no man gone soft and honest and hers — just his cum in her and the meter behind her sternum jumping." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "That used to be the good one, didn't it. The one that emptied a man out and left him yours. Look at it now — just another hole I get to use." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "readout"
+
+[[canvases.nodes]]
+id   = "readout"
+name = "He finishes + the read-out"
+blocks = [
+  { type = "video", props = { file = "sex/cell_inventory_he_finishes_the_read_out.webm", description = "anal creampie finish cum running out slow pull out", search_queries = ["anal creampie finish cum running out slow pull out", "cum in ass close up after anal bent over table"] } },
+  { type = "paragraph", content = "He stays buried in her ass a beat after he finishes, breathing, then pulls out and lets it run. He wipes his cock off on the curve of her ass and steps back to look at her — bent over his table, cheek on the wood, holding what he put in her." },
+  { type = "paragraph", content = "The read-out on the plate under her sternum ticks up one, and does not tick back down. It never ticks back down now. He watches the number, not her; takes the notebook out of his coat, and writes it in the column beside the others." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There. Up, and holding. Whatever's meant to bleed that off isn't working — because I've got the part that does it sitting in a drawer upstairs. You just fill." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Good. We'll run it again once you've settled." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -2615,11 +2721,11 @@ effects = [
   { targetType = "player", trait = "energy",      op = "add", value = -10, clamp = true },
 ]
 
-# ── SCENE 2 — Nominal. "Charge test." ──────────────────────────────────────────────────────────────
+# ── SCENE 2 — Nominal. "Charge test" (rev64 witness chain). ──────────────────
 [[canvases]]
 id          = "cell_use_charge_test"
 name        = "Charge test"
-description = "beat_0039. Shelf scene 2/8 (Nominal). One-shot random @captive_room, core_strain lt 24. He makes her come to watch the read-out move, and writes the number down. +12 strain, -10 Charge."
+description = "beat_0039, RE-SCRIPTED rev 64 (pure-witness chain). Scene 2/8 (Nominal). One-shot random @captive_room, core_strain lt 24. 5 beats: The notebook -> He works her -> She comes / degraded for it -> Again — overstim + slaps -> \"Again\" + read-out. +12 strain / -10 energy applied ONCE on the terminal read-out exit. Reuse ['sex/cell_charge_test.webm']; other clips NEW (find-media). Enters at nodes[0] (base)."
 [canvases.trigger]
 location      = "captive_room"
 trigger_mode  = "random"
@@ -2631,16 +2737,85 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "captivity_broken",  operator = "is_false" },
   { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt", value = 24 },
 ] }
+
 [[canvases.nodes]]
 id   = "base"
-name = "Charge test"
+name = "The notebook"
 blocks = [
-  { type = "video", props = { file = "sex/cell_charge_test.webm", description = "A woman on her back on a bed, a clothed man kneeling beside her working her with his hand, watching her face rather than her body.", search_queries = ["man fingering woman watching her face", "woman on back bed man hand between legs close"] } },
-  { type = "paragraph", content = "This time he brings a notebook. He sits on the edge of the bed with it open on his knee and works her with his hand, and he is good at it, and that is the worst part — he is careful and unhurried and entirely uninterested in her, watching her face the way you'd watch a needle come round." },
-  { type = "paragraph", content = "She comes with her fists in the mattress. The charge in her goes up a step, and behind her sternum the pressure finds the wall it always finds now, and something in her chest makes a sound that is not a heartbeat." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There. Say it did the same thing when you had the socket filled. Say it went somewhere. Where." },
-  { type = "paragraph", content = "She doesn't answer. He writes something down anyway, and turns the page, and puts his hand back." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Again." },
+  { type = "image", props = { file = "scenes/cell_charge_test_the_notebook.jpg", description = "clothed man seated chair pen notebook watching nude restrained woman cell", search_queries = ["clothed man seated chair pen notebook watching nude restrained woman cell", "male observer sitting writing naked female captive inspection dim room still"] } },
+  { type = "paragraph", content = "The notebook comes in before he does — a cheap spiral thing he sets on the crate, squares up with the edge, uncaps a pen. Then he drags the chair round to face her and sits, not close, the way a man settles in to watch a gauge rather than fuck a woman. 'Not fucking you today,' he says, almost bored. He taps his own sternum, where hers carries the plate. 'Today I want to see the needle move. You come, that thing counts it. So we're going to find out how many I can get out of you before it complains.'" },
+  { type = "paragraph", content = "He leans in and reads the read-out under her sternum through the strip of grime, and he writes that number down before he's laid a hand on her — a baseline, neat, underlined twice. Cold about it. Curious. 'Filthy little machine,' he says, unhurried, more to the page than to her. 'Let's see what you do.'" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Not fucking you today. Today I want to see the needle move." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "You come, that thing counts it. We're going to find out how many I can get out of you before it complains." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Filthy little machine. Let's see what you do." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n2"
+
+[[canvases.nodes]]
+id   = "n2"
+name = "He works her"
+blocks = [
+  { type = "video", props = { file = "sex/cell_charge_test.webm", description = "A woman on her back on a bed, a clothed man kneeling beside her working her with his hand, watching her face rather than her body.", search_queries = [] } },
+  { type = "paragraph", content = "He works two fingers into her cunt without ceremony and starts — not for her, never for her, his eyes stay up on the plate the whole time. Slow, patient, the heel of his hand grinding a circle while his thumb finds the spot and stays on it. He isn't trying to please her. He's trying to trip a switch. 'There it is,' he murmurs, feeling her clench around him, and he doesn't sound pleased so much as confirmed. 'Wet already. Built to. You can strip everything out of a thing and it still slicks up on command like a good little hole.'" },
+  { type = "paragraph", content = "When the fingers stall he puts his mouth on her too — tongue flat and mean and efficient, spit and friction, throttling her up the way you'd rev an engine — and the whole time one eye stays on the read-out under her sternum, waiting for the twitch. 'That's it. Right up to it.' He pulls back a fraction and keeps her hanging there, deliberate. 'I want the number, not you. Don't matter what you want.'" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There it is. Wet already. Built to. You can strip everything out of a thing and it still slicks up on command like a good little hole." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "That's it. Right up to it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "I want the number, not you. Don't matter what you want." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n3"
+
+[[canvases.nodes]]
+id   = "n3"
+name = "She comes / degraded for it"
+blocks = [
+  { type = "video", props = { file = "sex/cell_charge_test_she_comes_degraded_for_it.webm", description = "forced orgasm fingering pov woman hips jerking cunt clenching close up", search_queries = ["forced orgasm fingering pov woman hips jerking cunt clenching close up", "female orgasm rubbing clit fingers moaning cumming hard first person"] } },
+  { type = "paragraph", content = "It goes off without her say-so — her cunt clamps down on his fingers and she comes, hard, hips jerking up into a hand that owns her, a sound tearing out of her that isn't a choice. He doesn't ease off through it; he holds her on the edge and wrings it out, watching her body betray her from the inside. 'There she is,' he breathes. 'Look at you. Filthy little machine, creaming all over my hand, gagging for it — didn't even ask you nice.'" },
+  { type = "paragraph", content = "Under her sternum the read-out jumps — not a crawl, a jump, the forced one spiking it the way the slow ones never do — and the charge it books has nowhere to go: the socket at the base of her spine sits empty where the drain used to seat, so it just stacks, hot, behind the plate. He watches the number leap and grins and writes it down. Not her face. The number. He wipes his fingers off on her thigh and reads the new digits out loud like a score." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There she is. Look at you. Filthy little machine, creaming all over my hand, gagging for it — didn't even ask you nice." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n4"
+
+[[canvases.nodes]]
+id   = "n4"
+name = "Again — overstim + slaps"
+blocks = [
+  { type = "video", props = { file = "sex/cell_charge_test_again_overstim_slaps.webm", description = "pussy slapping overstimulation rough fingering woman close up pov", search_queries = ["pussy slapping overstimulation rough fingering woman close up pov", "cunt slap thigh spank forced orgasm overstim red handprint"] } },
+  { type = "paragraph", content = "He goes straight back down on her before the first has finished ringing out, and this time it's too much and that's the point — fingers hard on a clit still fizzing, no mercy in it, dragging her up the raw wall of it while she's still shaking. When she flinches away he slaps her for it, open-handed, across the cunt — a wet crack — then again across the inside of her thigh, watching the red bloom up under his palm. 'Hold still. You'll move the number or you'll wear my hand, machine. Pick one.'" },
+  { type = "paragraph", content = "The second one hurts coming out — the overflow's got nowhere to sit and it turns the pleasure to a hot ache behind her ribs — but he forces it anyway, that's the whole trick, the forced ones move it fastest. She comes with a bruise already coming up on her thigh and a handprint on her cunt, jerking against a grip that doesn't care, and the read-out climbs again. He checks the plate before he checks anything else. 'Good. Again.'" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Hold still. You'll move the number or you'll wear my hand, machine. Pick one." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Good. Again." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "readout"
+
+[[canvases.nodes]]
+id   = "readout"
+name = "\"Again\" + read-out"
+blocks = [
+  { type = "video", props = { file = "sex/cell_charge_test_again_read_out.webm", description = "post orgasm aftermath twitching pussy fingers close up pov trembling", search_queries = ["post orgasm aftermath twitching pussy fingers close up pov trembling", "woman shaking after forced orgasm hand between legs overstim first person"] } },
+  { type = "paragraph", content = "He sits back on his heels, flexes his slick hand, and writes the new figure under the last — a little column building down the page now, each line higher than the one above it. He tips the plate toward the light with two fingers under her chin, not to see her, to read her, comparing the digits against the number he set down at the start. Then he turns the page. 'Climbed,' he says, satisfied, tapping the pen. 'You went up three just now. Nice steep little curve you've got.'" },
+  { type = "paragraph", content = "It doesn't drop back. That's the thing he's writing down and she isn't saying: the read-out ticks up and it stays up, every one he forces out of her stacked behind the sternum plate with the socket at her spine sitting empty and useless to bleed any of it off. He caps the pen, uncaps it again, gets comfortable on the crate. 'We've got all the time in the world,' he says, and puts his hand back between her legs. 'Again.'" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Climbed. You went up three just now. Nice steep little curve you've got." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "We've got all the time in the world. Again." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -2653,11 +2828,11 @@ effects = [
   { targetType = "player", trait = "energy",      op = "add", value = -10, clamp = true },
 ]
 
-# ── SCENE 3 — Hot. "The first three." ──────────────────────────────────────────────────────────────
+# ── SCENE 3 — Hot. "The first three" (rev64 witness chain). ──────────────────
 [[canvases]]
 id          = "cell_use_first_three"
 name        = "The first three"
-description = "beat_0039. Shelf scene 3/8 (Hot). One-shot random @captive_room, core_strain 24-47. He opens the door, lets three of them in, and sits down. His voice stays in the room; theirs are noise. +12 strain, -12 Charge."
+description = "beat_0039, RE-SCRIPTED rev 64 (pure-witness chain). Scene 3/8 (Hot). One-shot random @captive_room, core_strain gte 24 lt 48. 6 beats: He lets three in -> Manhandled -> Spitroast -> DP -> They finish on/in her -> The read-out. +12 strain / -12 energy applied ONCE on the terminal read-out exit. Reuse ['sex/cell_first_three.webm']; other clips NEW (find-media). Enters at nodes[0] (base)."
 [canvases.trigger]
 location      = "captive_room"
 trigger_mode  = "random"
@@ -2668,23 +2843,120 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "captivity_entered", operator = "is_true"  },
   { type = "flag",  subject = "player", flag_key = "captivity_broken",  operator = "is_false" },
   { type = "trait", subject = "player", trait_key = "core_strain",      operator = "gte", value = 24 },
-  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt",  value = 48 },
+  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt", value = 48 },
 ] }
+
 [[canvases.nodes]]
 id   = "base"
-name = "The first three"
+name = "He lets three in"
 blocks = [
-  { type = "video", props = { file = "sex/cell_first_three.webm", description = "A woman used by several men in a bare room while another man sits apart in a chair, watching, fully dressed.", search_queries = ["gangbang bare room men watching", "woman used by three men one seated watching"] } },
-  { type = "paragraph", content = "He holds the door and three of them come in past him, and then he sits down in the chair and crosses one leg over the other. They look at him first. That is the thing she keeps: they look at him first, every time, before they touch her." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "She doesn't need warming up and she can't be damaged the way you're thinking. Use her. I want to see the reading with three." },
-  { type = "paragraph", content = "After that it is hands. One gets her mouth open with a thumb and she takes his cock because there is no reason not to; one is behind her with his fingers in her cunt and then his cock, and the third stands and waits his turn with his hands on her tits like a man holding a rail. \"Christ,\" one of them says. \"She's warm.\" \"She's supposed to be warm.\" \"No — she's warm.\"" },
-  { type = "paragraph", content = "They fill her mouth and her cunt and one finishes across her back, and each time a man spends himself in her the charge goes up another step and stays there, and by the time the third one is done she can taste hot metal at the back of her throat." },
-  { type = "paragraph", content = "Bastien has not moved. He is looking at the flat of her sternum, where the light under the skin is doing something new." },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "Three of them and none of it went anywhere." },
+  { type = "image", props = { file = "scenes/cell_first_three_he_lets_three_in.jpg", description = "nude woman standing bare concrete cell surrounded by clothed men", search_queries = ["nude woman standing bare concrete cell surrounded by clothed men", "clothed man seated in chair watching naked woman in room"] } },
+  { type = "paragraph", content = "The bolt drags back and for once it isn't just him in the gap. He holds the door open with one hand and lets three of them file past his shoulder into the cell, then crosses to the chair against the wall and sits, one ankle up on his knee, the notebook already open on his thigh. The three spread out around her the way men spread out around something cornered — looking, deciding what she is before a single hand's on her." },
+  { type = "paragraph", content = "That's where she stops being a person. Three sets of eyes, three sets of hands, and the one in the chair who only wants the number after." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Go on. She's bought and paid for — there's nothing in there you can wear out that I'm precious about." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Mind the plate on her chest, though. I want to read it when you're done with her." },
+  { type = "paragraph", content = "'This the one? Christ.'" },
+  { type = "paragraph", content = "'They really do build 'em with a hole for everything.'" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n2"
+
+[[canvases.nodes]]
+id   = "n2"
+name = "Manhandled"
+blocks = [
+  { type = "video", props = { file = "sex/cell_first_three_manhandled.webm", description = "rough gangbang woman manhandled by hair multiple men grabbing", search_queries = ["rough gangbang woman manhandled by hair multiple men grabbing", "three men grope spit slap naked woman rough handling"] } },
+  { type = "paragraph", content = "They don't wait for him to finish talking. A fist knots in her hair and turns her by it; another catches her wrists and wrenches them back; a third checks her over rougher than Bastien ever bothers — grabs her jaw, thumbs her mouth open, slaps her tits just to watch them move. Spit lands on her cheek and nobody wipes it off. A hand closes on her throat and squeezes, not to choke, just to feel her take it and hold there." },
+  { type = "paragraph", content = "Bruises come up under the grips — handprints going red on her hips, on her arms, a mark on her jaw where a thumb dug in. First time it's more than one pair of hands. They pass her between them like they're testing she'll hold together." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Marks are fine. Nothing that opens the casing — she stays sealed." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Filthy machine's been handled worse than you three. Watch — she won't even flinch." },
+  { type = "paragraph", content = "'Hold still, machine.'" },
+  { type = "paragraph", content = "'She don't even blink — spit on her, watch.'" },
+  { type = "paragraph", content = "'Grab-marks come up lovely on this one.'" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n3"
+
+[[canvases.nodes]]
+id   = "n3"
+name = "Spitroast"
+blocks = [
+  { type = "video", props = { file = "sex/cell_first_three.webm", description = "A woman used by several men in a bare room while another man sits apart in a chair, watching, fully dressed.", search_queries = [] } },
+  { type = "paragraph", content = "They put her on her knees and open her at both ends at once. One fists her hair and feeds his cock down her throat till she gags around it, holds her there while drool ropes off her chin onto her tits; the other's behind her with his cock buried to the root in her cunt, driving her back onto the first with every thrust so she can't pull off either. She's a length of holes stretched between two men and worked from both directions." },
+  { type = "paragraph", content = "Every stroke into her charges the core. The read-out under her sternum ticks up with it — and it does not tick back down. Bastien watches from the chair, writes one line, watches again." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "She was built to be used at both ends, weren't you. Filthy fucking thing." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Charge is climbing on penetration alone — note that. Nobody's even made her come yet." },
+  { type = "paragraph", content = "'Look at her take it both ends.'" },
+  { type = "paragraph", content = "'Push her — there, all the way down, that's a good hole.'" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n4"
+
+[[canvases.nodes]]
+id   = "n4"
+name = "DP"
+blocks = [
+  { type = "video", props = { file = "sex/cell_first_three_dp.webm", description = "double penetration DP three men one woman gangbang all holes", search_queries = ["double penetration DP three men one woman gangbang all holes", "dp spitroast three men triple penetration woman"] } },
+  { type = "paragraph", content = "The third doesn't wait his turn. They stack her — one under her with his cock in her cunt, one still fucking her throat, and the third lines up behind and shoves into her ass. The stripped socket sits empty at the base of her spine, right above where he's splitting her open. The ass used to be the drain — the part that TOOK something out of a man. Now it only fills her, the whole thing running backwards, and every cock in her stacks the charge higher." },
+  { type = "paragraph", content = "Then one reaches under and works her clit while she's plugged at all three, forces the orgasm up out of her whether she'd give it or not — and that's when the plate jumps. A come wrung out of her spikes it worse than any thrust. At this load it isn't pleasure landing anymore; it's charge with nowhere to go, the overflow gone hot and wrong under her sternum, and it climbs and climbs." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There it is. Every hole loaded and the number won't stop." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Make her come — that's the one. Forced spikes it hardest. Confirmed." },
+  { type = "paragraph", content = "'All three holes — she's fuckin' full.'" },
+  { type = "paragraph", content = "'Feel that? Something's buzzing inside her.'" },
+  { type = "paragraph", content = "'Machine's overheating — don't stop, wring it out of her.'" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n5"
+
+[[canvases.nodes]]
+id   = "n5"
+name = "They finish on/in her"
+blocks = [
+  { type = "video", props = { file = "sex/cell_first_three_they_finish_on_in_her.webm", description = "gangbang cumshot compilation multiple men facial cum on face woman", search_queries = ["gangbang cumshot compilation multiple men facial cum on face woman", "bukkake cum on back and face multiple men one woman finish"] } },
+  { type = "paragraph", content = "They finish where they like. One pulls out of her throat and empties across her face — cum in her lashes, on her lips, dripping off her chin. One comes deep in her cunt and one across her back, ropes of it laid over the handprints they left there. They wipe their cocks clean on her tits and her hair when they're done with her." },
+  { type = "paragraph", content = "She kneels there striped and dripping and does not move. Bastien counts the loads off the plate — every one of them registered, every one banked, none of it going anywhere." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Look at the state of you. Passed round and filled up like the thing you are." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Every load logged on the plate. She banks all of it — nothing drains." },
+  { type = "paragraph", content = "'Open your mouth, machine — there, hold it.'" },
+  { type = "paragraph", content = "'All over her back, look at that.'" },
+  { type = "paragraph", content = "'Leave it on her. Let him see what he paid for.'" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "readout"
+
+[[canvases.nodes]]
+id   = "readout"
+name = "The read-out"
+blocks = [
+  { type = "image", props = { file = "scenes/cell_first_three_the_read_out.jpg", description = "glowing sci-fi implant readout on woman chest sternum close up", search_queries = ["glowing sci-fi implant readout on woman chest sternum close up", "hand writing numbers in notebook clinical close up"] } },
+  { type = "paragraph", content = "When they've filed out he crosses the cell, crouches in front of her, and wipes a smear of cum off the plate under her sternum with his thumb to read it clean. The read-out has climbed hard — further in one session than in a week of just him alone. He doesn't look at her face. He looks at the number, writes it down, and underlines it." },
+  { type = "paragraph", content = "The strain's up with it. The charge stacks behind the plate with nowhere to go, hotter each load, and the meter only ever runs one direction." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Three at once and forced to come — fastest climb yet. Good." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Charge has nowhere to go and it's stacking. Note the strain." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Wait for them to go."
+text = "Stay on the floor."
 [canvases.nodes.exit_block.config]
 destinationType = "specific"
 locationId      = "captive_room"
@@ -2693,11 +2965,11 @@ effects = [
   { targetType = "player", trait = "energy",      op = "add", value = -12, clamp = true },
 ]
 
-# ── SCENE 4 — Hot. "Turns." (the drain, inverted) ──────────────────────────────────────────────────
+# ── SCENE 4 — Hot. "Turns" (rev64 witness chain). ──────────────────
 [[canvases]]
 id          = "cell_use_turns"
 name        = "Turns"
-description = "beat_0039. Shelf scene 4/8 (Hot). One-shot random @captive_room, core_strain 24-47. A queue, and he times it. Someone finishes in her ass — the thing that used to TAKE something — and it only fills her. +12 strain, -12 Charge."
+description = "beat_0039, RE-SCRIPTED rev 64 (pure-witness chain). Scene 4/8 (Hot). One-shot random @captive_room, core_strain gte 24 lt 48. 5 beats: The queue -> Passed down the line -> Her ass — the drain inverted -> Used and pissed on -> The read-out. +12 strain / -12 energy applied ONCE on the terminal read-out exit. Reuse ['sex/cell_turns.webm']; other clips NEW (find-media). Enters at nodes[0] (base)."
 [canvases.trigger]
 location      = "captive_room"
 trigger_mode  = "random"
@@ -2708,22 +2980,99 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "captivity_entered", operator = "is_true"  },
   { type = "flag",  subject = "player", flag_key = "captivity_broken",  operator = "is_false" },
   { type = "trait", subject = "player", trait_key = "core_strain",      operator = "gte", value = 24 },
-  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt",  value = 48 },
+  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt", value = 48 },
 ] }
+
 [[canvases.nodes]]
 id   = "base"
-name = "Turns"
+name = "The queue"
 blocks = [
-  { type = "video", props = { file = "sex/cell_turns.webm", description = "A line of men taking turns with a woman bent over a bed in a bare room, one man checking a watch.", search_queries = ["men taking turns queue bare room", "woman bent over bed line of men waiting"] } },
-  { type = "paragraph", content = "There are more of them than there were, and Bastien has a watch out. He runs it like a shift. When one is finished the next one steps up, and nobody talks to her, and the only voice that carries is his, saying now, and saying that's enough, and once saying not there, and being obeyed." },
-  { type = "paragraph", content = "Then one of them puts it in her ass, and everything in her that used to be a hand closes on nothing." },
-  { type = "paragraph", content = "It is the drain. It is exactly the drain: the same lowest way, the same few minutes on the other side of it when a man belongs to her and will answer anything. She feels the shape of it come up out of her out of pure habit — the reach, the open, the take — and there is nothing on the end of her arm. He empties himself into her ass and she gets all of it and none of it goes out, and the charge slams up two steps at once and sits there glowing." },
-  { type = "paragraph", content = "\"That's got her,\" somebody says, backing off, wiping his hand on his thigh. \"Feel that. She's hot enough to cook on.\"" },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Yes. Do it again." },
+  { type = "image", props = { file = "scenes/cell_turns_the_queue.jpg", description = "line of naked men waiting turn woman kneeling on floor gangbang pov", search_queries = ["line of naked men waiting turn woman kneeling on floor gangbang pov", "woman on knees surrounded by group of men waiting queue bare room"] } },
+  { type = "paragraph", content = "By the time she's down on her knees in the middle of the concrete, the crew's already strung out along the wall in a loose line, waiting their turn like it's a thing they've done before. Bastien doesn't get in the line. He hauls the chair round so it faces the whole row of them, sits, and clicks a timer open in his palm. His cock's already out. His eyes are on the plate under her sternum, not on her." },
+  { type = "paragraph", content = "'Thirty a man to start,' he says to the room. 'Move her down the line, don't crowd. I want to see how fast this thing climbs when you keep it fed.' The first man's already got a fist in her hair, waiting on the word. Bastien thumbs the timer. 'Go.'" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Thirty a man. Don't crowd her — I want it steady, not a pile-on. Not yet." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Look at it. Bought and paid for, and it takes a line better than a turnstile." },
+  { type = "paragraph", content = "'Fuckin' finally. Been standing here with it out.'" },
+  { type = "paragraph", content = "'Save some, she's not going anywhere.'" },
+  { type = "paragraph", content = "'It's got more holes than the three of us need. Line moves.'" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n2"
+
+[[canvases.nodes]]
+id   = "n2"
+name = "Passed down the line"
+blocks = [
+  { type = "video", props = { file = "sex/cell_turns_passed_down_the_line.webm", description = "gangbang train multiple men taking turns mouth and pussy line", search_queries = ["gangbang train multiple men taking turns mouth and pussy line", "woman passed around group used blowjob and fucked one after another"] } },
+  { type = "paragraph", content = "The first one fucks her mouth till he's done and pulls out to finish across her cheek, and before she's coughed it clear the next man's already stepping up and turning her by the jaw. Mouth, then cunt, then mouth again — whoever's up takes whichever hole he wants and the crew calls it out while they wait. One holds her hips and fucks her through it kneeling; the next just wants her face and uses it. Nobody waits for her to be ready. Ready was never on the list." },
+  { type = "paragraph", content = "It stacks on her and in her as it goes. Cum on her cheek, roped off her chin, a load left in her cunt that the next man just shoves back up into her with his own. By the fourth turn she's slick and dripping and the line hasn't even thinned. Bastien clicks the timer over at every swap and reads the plate, not her face, calling the number out loud like a man calling races." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Next. Don't be gentle — it doesn't get you a better number." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There it goes. Half a point a load. Keep it moving, it's finally earning its keep." },
+  { type = "paragraph", content = "'Turn it round, I want the cunt.'" },
+  { type = "paragraph", content = "'Swallowed that one — good little hole.'" },
+  { type = "paragraph", content = "'Hurry up, I'm not done looking at what I'm getting.'" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n3"
+
+[[canvases.nodes]]
+id   = "n3"
+name = "Her ass — the drain inverted"
+blocks = [
+  { type = "video", props = { file = "sex/cell_turns.webm", description = "A line of men taking turns with a woman bent over a bed in a bare room, one man checking a watch.", search_queries = [] } },
+  { type = "paragraph", content = "Someone gets tired of the line and bends her over a knee, spreads her ass open with both thumbs, and works into the one hole that used to do the taking. He fucks it rough and finishes deep and doesn't pull out till he's soft. And that's the joke of her nobody in the room knows: the drain lived here once, at the base of her spine, and the ass was the thing that TOOK something out of a man. The socket's stripped now. Empty. So it only fills her — the drain run backwards, a load in the ass that goes nowhere but up." },
+  { type = "paragraph", content = "Someone else reaches under and works her clit while the first man's still buried in her, mean and deliberate, forcing her over whether she wants it or not — and when she clenches and comes the plate jumps, a hard tick, faster than any load did. Bastien sees it. 'There,' he says. 'That's the one that moves it.' He writes the number down. The charge climbs with nowhere left to go, and the stripped socket at the base of her spine does nothing at all." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "In the ass — that's where the good reading is. Trust me on that one." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There. Forced, it spikes. Make the machine come, don't just fuck it — climbs twice as fast." },
+  { type = "paragraph", content = "'Rip that little hole open, watch it just take it.'" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n4"
+
+[[canvases.nodes]]
+id   = "n4"
+name = "Used and pissed on"
+blocks = [
+  { type = "video", props = { file = "sex/cell_turns_used_and_pissed_on.webm", description = "group of men pissing on woman degradation golden shower gangbang", search_queries = ["group of men pissing on woman degradation golden shower gangbang", "men pee on used woman face and body laughing bare room"] } },
+  { type = "paragraph", content = "By the time the line's thinned she's a mess on the floor, leaking out of both holes, cum drying tight on her tits and her face. One of them steps up like it's his turn again, but he doesn't get hard — he just plants his feet over her, takes his cock in his hand, and pisses on her instead. Down her chest, into her open mouth, across the plate under her sternum, hosing off what the others left like she's a thing you rinse and not a person." },
+  { type = "paragraph", content = "The crew loses it. Someone tips her chin up by the hair so it runs across her face and she has to hold it. Nobody stops him. When he's done he shakes it off on her and steps back into what's left of the line, and she kneels there in the wet of it, dripping, used up, a thing to empty into and onto and nothing more." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Christ. Fine — it rinses off same as anything else. Doesn't move the number, though. Do that on your own time." },
+  { type = "paragraph", content = "'Open up, machine — waste not.'" },
+  { type = "paragraph", content = "'Look at it just take that too.'" },
+  { type = "paragraph", content = "'Rinse and reuse, boys.'" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "readout"
+
+[[canvases.nodes]]
+id   = "readout"
+name = "The read-out"
+blocks = [
+  { type = "image", props = { file = "scenes/cell_turns_the_read_out.jpg", description = "used woman covered in cum kneeling aftermath gangbang exhausted", search_queries = ["used woman covered in cum kneeling aftermath gangbang exhausted", "woman covered cum and marks bruises after group bare concrete room"] } },
+  { type = "paragraph", content = "When the last of them steps back the room goes quiet except for her breathing. Bastien crouches in front of her — the only time he gets close — and wipes the plate under her sternum clean with his thumb so he can read it. The number's higher than when they started. A lot higher. It went up with every load and it jumped with the ones they forced, and it hasn't shed a single point, because there's nothing left in her that lets it." },
+  { type = "paragraph", content = "He looks at it a long moment. Not at her — through her, at the reading, the way you'd check a gauge creeping toward a line you drew yourself. He clicks the pen and writes it down. He caps it. He doesn't look at her face once." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Higher than the last count, and it didn't drop a point. Nothing drains out of you anymore, does it. Good." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Faster than I thought. We'll do this again before it's had time to sit." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Lie still."
+text = "Wait for the next one."
 [canvases.nodes.exit_block.config]
 destinationType = "specific"
 locationId      = "captive_room"
@@ -2732,29 +3081,11 @@ effects = [
   { targetType = "player", trait = "energy",      op = "add", value = -12, clamp = true },
 ]
 
-# ═══════════════════════════════════════════════════════════════════════════════
-# CAPTIVITY — the shelf, scenes 5-8 (beat_0040). Faulting x2, Failing x2.
-#
-# Same mechanism as beat_0039 (one-shot random, self-retiring, band-gated, +12 strain each).
-# Bands: 5-6 = gte 48 lt 72 (Faulting — she is being OPERATED, not fucked)
-#        7-8 = gte 72 lt 96 (Failing — the machine coming apart)
-# Scene 8's exit takes strain to 96, which is the break's gate (beat_0041).
-#
-# CEILING (design_book "RE-SPEC — the captivity ceiling"): the damage is to the MACHINE, not the meat.
-# No gore, no mutilation, no permanent bodily injury. She fails the way a machine fails — a leg that
-# stops answering, a hum with a wrong pitch, heat with nowhere to go. The horror is the READ-OUT.
-#
-# SCENE 8 IS THE MORAL HINGE. It is a sex scene AND the beat that earns Cain's anger: Bastien sees the
-# machine failing, in front of witnesses, and does not stop. Bastien's alignment with Cain stays OFF the
-# page (the saved reveal) — but his CHOICE TO KEEP GOING is what makes the next chunk's bombshell land.
-# A crew member is the one who balks. That is deliberate: it makes his refusal visible by contrast.
-# ═══════════════════════════════════════════════════════════════════════════════
-
-# ── SCENE 5 — Faulting. "The frame." ───────────────────────────────────────────────────────────────
+# ── SCENE 5 — Faulting. "The frame" (rev64 witness chain). ──────────────────
 [[canvases]]
 id          = "cell_use_frame"
 name        = "The frame"
-description = "beat_0040. Shelf scene 5/8 (Faulting). One-shot random @captive_room, core_strain 48-71. A rig. She isn't held down, she's POSITIONED. Hands adjust her between uses like tuning. +12 strain, -12 Charge."
+description = "beat_0040, RE-SCRIPTED rev 64 (pure-witness chain). Scene 5/8 (Faulting). One-shot random @captive_room, core_strain gte 48 lt 72. 5 beats: Strapped into the rig -> Positioned / tuned -> Used down the line -> Held inside + marks -> The read-out. +12 strain / -12 energy applied ONCE on the terminal read-out exit. Reuse ['sex/cell_frame.webm']; other clips NEW (find-media). Enters at nodes[0] (base)."
 [canvases.trigger]
 location      = "captive_room"
 trigger_mode  = "random"
@@ -2765,18 +3096,95 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "captivity_entered", operator = "is_true"  },
   { type = "flag",  subject = "player", flag_key = "captivity_broken",  operator = "is_false" },
   { type = "trait", subject = "player", trait_key = "core_strain",      operator = "gte", value = 48 },
-  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt",  value = 72 },
+  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt", value = 72 },
 ] }
+
 [[canvases.nodes]]
 id   = "base"
-name = "The frame"
+name = "Strapped into the rig"
 blocks = [
-  { type = "video", props = { file = "sex/cell_frame.webm", description = "A woman restrained face-down over a padded metal frame in a bare room, a man adjusting the height of it before using her.", search_queries = ["bdsm restrained bent over frame bench", "woman strapped face down bench used"] } },
-  { type = "paragraph", content = "They bring in a frame and bolt it to the floor beside the drain, and after that they stop holding her. She is put over it face-down and strapped at the waist and the thighs, and the straps are not there to stop her fighting, because she has not fought once. The straps are there to hold the angle." },
-  { type = "paragraph", content = "Somebody raises the near end two notches. Somebody else opens her wider with a hand on each knee and looks at Bastien, and Bastien nods, and only then does anybody touch her." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Not like that. Straight in, and hold it when you're done. I want it in her for a full minute after, every time. It goes somewhere and I want to know where." },
-  { type = "paragraph", content = "So they fuck her in a line, in her cunt and her ass by turns, and each of them stays buried in her afterwards while somebody counts, and the pressure behind her sternum goes up a step at every count and never once comes down. Nobody speaks to her. A man's hand adjusts her hip mid-fuck, the way you'd square up a workpiece, and goes back to the man's own thigh." },
-  { type = "paragraph", content = "\"It's getting warm in here,\" one of them says, and he isn't talking about the room." },
+  { type = "video", props = { file = "sex/cell_frame_strapped_into_the_rig.webm", description = "woman strapped face down bent over bondage frame rear", search_queries = ["woman strapped face down bent over bondage frame rear", "restrained bent over metal frame ass up bdsm rough"] } },
+  { type = "paragraph", content = "The frame is bolted to the floor before she's brought to it — a waist-high steel jig with a padded bar and cuffs at the four corners, built to hold something down while it gets worked on. They don't wrestle her into it. They set her. Fold her over the bar, feed her wrists into the cuffs, wrench the strap across the small of her back and crank it until she's fixed face-down at the exact angle they want, ass up, knees spread by the frame's own geometry, the empty socket at the base of her spine sitting open to the room." },
+  { type = "paragraph", content = "Not held down. Positioned. Locked to spec, like a part dropped into a machine that's about to run — no hands needed once the straps bite, because a fixture doesn't get to move. Someone tests it with a shove and she doesn't shift an inch. The frame takes it for her." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Bolt it down. I don't want the machine wandering off while it does its job." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Ass up, hole open, spine to the ceiling. That's the only shape it's good for now — so lock it there and leave it." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n2"
+
+[[canvases.nodes]]
+id   = "n2"
+name = "Positioned / tuned"
+blocks = [
+  { type = "video", props = { file = "sex/cell_frame_positioned_tuned.webm", description = "hands positioning spreading bound woman doggy rear bdsm", search_queries = ["hands positioning spreading bound woman doggy rear bdsm", "adjusting restrained woman hips ass spread from behind rough"] } },
+  { type = "paragraph", content = "A crank on the side of the frame lifts the bar an inch; a boot hooks her knee and drags it wider until the cunt and the empty ass sit at the height a standing man wants. A fist takes her hair and tips her head off the frame to clear the throat, lets it drop, tips it again — checking the line. They talk over her the whole time, the way men talk over a bench they're setting up. Not to her. About her." },
+  { type = "paragraph", content = "Someone works two fingers into her ass and spreads, eyes the angle, wipes the hand off on her thigh. Someone else thumbs her cunt open, lets it close, satisfied. Nobody asks if she's ready because ready isn't a setting the rig has. Tuned. Zeroed. Set to spec and left waiting at the height of the line." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Zero the readout before anyone touches it. I want a clean count off this run — every load logged, none of it wasted." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Height's good. Now it's just a hole at the right elevation. Start the line." },
+  { type = "paragraph", content = "Bring her up an inch — I'm not squatting for a machine." },
+  { type = "paragraph", content = "There. That's the height. Lock it." },
+  { type = "paragraph", content = "Spread's good. Both holes on the same level, take your pick." },
+  { type = "paragraph", content = "Wipe your hand on it, it's not gonna complain." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n3"
+
+[[canvases.nodes]]
+id   = "n3"
+name = "Used down the line"
+blocks = [
+  { type = "video", props = { file = "sex/cell_frame.webm", description = "A woman restrained face-down over a padded metal frame in a bare room, a man adjusting the height of it before using her.", search_queries = [] } },
+  { type = "paragraph", content = "Then they run her. One after another down the line — cunt, then ass, then whichever's nearest, no order to it, the frame absorbing every shove so she never moves off her mark. Each one fucks until he's finished and then stays, buried to the root, leaning his weight down on the small of her back to catch his breath, using her like a place to rest before he pulls out and the next steps up into the gap. Nobody talks to her. She's the bench they're all taking a turn on." },
+  { type = "paragraph", content = "And every load that goes in lands with nowhere to go. The socket at the base of her spine sits empty where the drain used to bolt in — the ass that used to TAKE something out of a man now just filling, over and over, the drain inverted. Each one that gets held in her feeds the plate under her sternum. The charge stacks behind it and climbs, and the read-out ticks and does not drop." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "That's it — hold it in when you're done. Every one you leave sitting in there winds the number tighter than the fuck did." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Don't rush the line. It's not going anywhere. It's a fitting." },
+  { type = "paragraph", content = "Furniture with a hole. Best kind." },
+  { type = "paragraph", content = "Move — my turn. And don't pull out slow, leave it in there for the meter." },
+  { type = "paragraph", content = "Still tight after all that? Machine earns its keep." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n4"
+
+[[canvases.nodes]]
+id   = "n4"
+name = "Held inside + marks"
+blocks = [
+  { type = "video", props = { file = "sex/cell_frame_held_inside_marks.webm", description = "held deep from behind hand around throat choke rough marks", search_queries = ["held deep from behind hand around throat choke rough marks", "ass grab handprints bruises rough anal held inside bdsm"] } },
+  { type = "paragraph", content = "One of them doesn't pull out at all. He drives in to the root and stops, grinds her down flat onto the bar and just holds there — a full beat, two, hips flush to her ass — while his hands go to work on everything else. A fistful of hair cranks her head back off the frame. The other hand wraps her throat from behind and squeezes until the read-out jumps, then lets go and leaves the print of every finger behind on her skin." },
+  { type = "paragraph", content = "He slaps the ass he's still buried in, hard, twice, watches the handprint bloom red and stay. Digs his thumbs into her hips until they bruise, marking his grip where the next man can see it. By the time he finally pulls out she's covered — handprints across both cheeks, choke-marks coming up at her throat, drool dried on her chin, thumb-bruises on her hips. A machine handled rough and left marked all over, so anyone in the room can read exactly where it's been." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Choke it while you're seated in. The readout spikes when it can't breathe — fastest way to run the number up is to make the thing come while it's strangling." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Mark it up. I want to be able to see everywhere it's been, from across the room." },
+  { type = "paragraph", content = "Look at that print come up. Take a picture." },
+  { type = "paragraph", content = "Leave your grip on it — save the next guy a handhold." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "readout"
+
+[[canvases.nodes]]
+id   = "readout"
+name = "The read-out"
+blocks = [
+  { type = "image", props = { file = "scenes/cell_frame_the_read_out.jpg", description = "glowing sci-fi chest implant sternum readout gauge climbing", search_queries = ["glowing sci-fi chest implant sternum readout gauge climbing", "cyberpunk chest plate glowing number display meter close up"] } },
+  { type = "paragraph", content = "When they're finally done and the frame's cranked back and she's left bent over it — dripping, marked, still bolted to spec — the only thing in the room still doing work is the plate under her sternum. The read-out glows in the dim, and the number on it is higher than it was. A lot higher. It climbed with every load that got held in her and it did not come back down, because there is nowhere for it to go." },
+  { type = "paragraph", content = "Bastien crouches at the front of the frame to read it. Not her face — the number. He watches it settle, holds a light to it, writes it down." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Up again. Big jump off this run. It takes it in and it can't give any of it back — that's the whole trick of the thing." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Nowhere near topped out. Log it, reset the frame. We're not done running numbers off it." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -2789,11 +3197,11 @@ effects = [
   { targetType = "player", trait = "energy",      op = "add", value = -12, clamp = true },
 ]
 
-# ── SCENE 6 — Faulting. "Overflow." ────────────────────────────────────────────────────────────────
+# ── SCENE 6 — Faulting. "Overflow" (rev64 witness chain). ──────────────────
 [[canvases]]
 id          = "cell_use_overflow"
 name        = "Overflow"
-description = "beat_0040. Shelf scene 6/8 (Faulting). One-shot random @captive_room, core_strain 48-71. She comes and it hurts — the heat has nowhere to go. The crew find that funny. Bastien watches the read-out, not her. +12 strain, -14 Charge."
+description = "beat_0040, RE-SCRIPTED rev 64 (pure-witness chain). Scene 6/8 (Faulting). One-shot random @captive_room, core_strain gte 48 lt 72. 5 beats: Legs held open -> Forced orgasm on a cock -> It hurts — the overflow -> They keep going -> The read-out. +12 strain / -14 energy applied ONCE on the terminal read-out exit. Reuse ['sex/cell_overflow.webm']; other clips NEW (find-media). Enters at nodes[0] (base)."
 [canvases.trigger]
 location      = "captive_room"
 trigger_mode  = "random"
@@ -2804,21 +3212,101 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "captivity_entered", operator = "is_true"  },
   { type = "flag",  subject = "player", flag_key = "captivity_broken",  operator = "is_false" },
   { type = "trait", subject = "player", trait_key = "core_strain",      operator = "gte", value = 48 },
-  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt",  value = 72 },
+  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt", value = 72 },
 ] }
+
 [[canvases.nodes]]
 id   = "base"
-name = "Overflow"
+name = "Legs held open"
 blocks = [
-  { type = "video", props = { file = "sex/cell_overflow.webm", description = "A woman on her back arching hard, coming while two men hold her legs, a third watching from a chair without touching her.", search_queries = ["woman orgasm held down two men", "forced orgasm arching bare room"] } },
-  { type = "paragraph", content = "It has stopped being a thing that happens to her body and started being a thing that happens to her core. When she comes now it goes off behind her sternum like a fault in a line, and the heat that used to go out through the drain runs back up into her chest and sits there with the rest of it." },
-  { type = "paragraph", content = "So she comes, on somebody's cock, with two of them holding her legs open at the knee, and it hurts. Not the way a body hurts. It hurts the way an engine sounds wrong. She makes a noise she has never made, and one of them laughs. \"Listen to that. She's finally into it.\" The others laugh too, because they cannot hear what she can hear." },
-  { type = "paragraph", content = "Bastien can. He has moved his chair. He is not watching her face or her cunt or the man in her; he is watching the plate under her sternum, where the light has stopped being steady, and his own face has nothing in it at all." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Do that again. The noise, not the coming. I want to hear whether it's the same note twice." },
+  { type = "video", props = { file = "sex/cell_overflow_legs_held_open.webm", description = "woman legs held open pinned by two men bare room", search_queries = ["woman legs held open pinned by two men bare room", "spread pinned held down on mattress two men each leg"] } },
+  { type = "paragraph", content = "The crew are already in the room when it starts. No unwrapping, no chair pulled up slow — that part's over, she's been stripped since before they came in. Two of them take a leg each and fold her open on the mattress, a knee pinned to the concrete on either side, a forearm braced across each thigh, a hand clamped on each ankle. She's spread and she's held and nothing's inside her yet." },
+  { type = "paragraph", content = "That's the point of holding her first. What they're about to do works better if she can't close on it, so they get her open and locked before a single cock touches her. The plate under her sternum reads high enough today to be worth the trouble, and every man in the room knows what a high reading means: she's easy to push over now, and pushing her over is the whole job." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Hold her open. I want the reading clean when she goes." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Look at it — a machine that fills up like a cheap whore and can't even spill what's in it. Bought and paid for, and it doesn't even work." },
+  { type = "paragraph", content = "\"Get the legs — spread the filthy thing wide.\"" },
+  { type = "paragraph", content = "\"It can't even close, look at it, it's just held there.\"" },
+  { type = "paragraph", content = "\"Stay still, hole. You're gonna want to be real still for this.\"" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n2"
+
+[[canvases.nodes]]
+id   = "n2"
+name = "Forced orgasm on a cock"
+blocks = [
+  { type = "video", props = { file = "sex/cell_overflow.webm", description = "A woman on her back arching hard, coming while two men hold her legs, a third watching from a chair without touching her.", search_queries = [] } },
+  { type = "paragraph", content = "A man kneels into the gap they've made her hold and pushes into her cunt, and he doesn't fuck her so much as work her — a thumb set on her clit, a rhythm picked cold, not to get himself off but to get her off, because that's the order he was given. They're not here to come in her. They're here to make her come. A forced orgasm spikes the read-out harder than anything else they can do to a body like hers, and every man in the room has learned that now, and they're grinning at it." },
+  { type = "paragraph", content = "She holds against it because there is nothing else left to do with her hands full and her legs locked, and it doesn't matter. The machine comes when it's made to. He works her over the edge with the flat patience of a man doing paid work, and behind her sternum something starts to climb toward the wall it always finds now." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Make her spill. Doesn't matter what the thing wants — a machine comes when it's made to, and the number jumps every time it does." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There. Force it out of her. That reading's worth twice what just fucking her is — so make the filthy thing come, and mind you get it all the way." },
+  { type = "paragraph", content = "\"Come on, machine, give it up.\"" },
+  { type = "paragraph", content = "\"Look at it fight — it doesn't want to, that's the best part.\"" },
+  { type = "paragraph", content = "\"Doesn't matter what it wants, does it. Push it over.\"" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n3"
+
+[[canvases.nodes]]
+id   = "n3"
+name = "It hurts — the overflow"
+blocks = [
+  { type = "video", props = { file = "sex/cell_overflow_it_hurts_the_overflow.webm", description = "woman screaming forced orgasm overstimulation held down", search_queries = ["woman screaming forced orgasm overstimulation held down", "painful forced orgasm crying arching pinned bare room"] } },
+  { type = "paragraph", content = "And she comes, and it's wrong. The charge goes off behind her sternum and slams into a wall that a body built right doesn't have — the heat that used to run out through the drain at the base of her spine has nowhere to run, so it turns and runs back up into her chest and stacks on top of the last load, and the coming stops being pleasure halfway through and becomes a fault firing down a line. She screams. Not the noise a whore makes on cue — a real one, torn out of her, the sound of a thing overloading with the vents shut." },
+  { type = "paragraph", content = "The crew think it's the funniest thing they've seen all week. She screamed coming, and it clearly hurt her, and that just makes them want another one out of her. Someone's laughing hard enough to lean on the wall." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "That's the overflow. No channel — it's got nowhere to put itself, so it puts it in her. Scream all you want, filthy thing. The number doesn't care, and I paid for the number." },
+  { type = "paragraph", content = "\"Ha — hear that? It hurts it! It hurts the machine to come!\"" },
+  { type = "paragraph", content = "\"It's crying, look — do it again, make it scream again.\"" },
+  { type = "paragraph", content = "\"Whores don't scream when they come, sweetheart. You're broke.\"" },
+  { type = "paragraph", content = "\"Doesn't even work right and we're still using it.\"" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n4"
+
+[[canvases.nodes]]
+id   = "n4"
+name = "They keep going"
+blocks = [
+  { type = "video", props = { file = "sex/cell_overflow_they_keep_going.webm", description = "gangbang woman used by group of men taking turns bare room", search_queries = ["gangbang woman used by group of men taking turns bare room", "woman used held down multiple men one after another"] } },
+  { type = "paragraph", content = "It changes nothing. They take turns on her. One pulls out and the next kneels straight in, her cunt then her ass by turns, and every load that goes into her adds a step to the thing stacked behind her sternum and takes nothing back out. The socket at the base of her spine sits empty through all of it — the one thing that ever drew any of this back out of her, stripped clean and gone — so her ass isn't a drain any more, it's just another hole that fills her. It only ever adds now. Nothing leaves." },
+  { type = "paragraph", content = "Bastien has dragged his chair up close. He is not watching her face, or her cunt, or the man buried in her. He is watching the plate under her sternum, where the light has stopped sitting steady and started to climb and hold, and he is writing the number down in a book propped on his knee, checking it against her chest between loads the way a man reads a gauge that's running hot." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Keep her going. It stacks — nothing comes back out of a machine with its drain pulled, so pour it all in." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Filthy overfilled thing. You'll take every one of them and hold every drop, and the reading goes up each time. That's all you're for now." },
+  { type = "paragraph", content = "\"Next — get in the hole, it can't spill.\"" },
+  { type = "paragraph", content = "\"Fill it right up, it's got nowhere to put it.\"" },
+  { type = "paragraph", content = "\"Passed round like it's nothing, this one — and it takes it every time.\"" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "readout"
+
+[[canvases.nodes]]
+id   = "readout"
+name = "The read-out"
+blocks = [
+  { type = "image", props = { file = "scenes/cell_overflow_the_read_out.jpg", description = "glowing readout gauge meter climbing red overload close up", search_queries = ["glowing readout gauge meter climbing red overload close up", "sci-fi chest plate meter number rising warning glow"] } },
+  { type = "paragraph", content = "When they finally leave her spread and slack on the mattress, the plate under her sternum is not doing what it did before they started. The light in it has stopped being steady and gone to a pulse, higher than she has ever seen it read, and it does not come down. It sits there, lit, climbing on nothing, with no drain to bleed it off." },
+  { type = "paragraph", content = "Bastien crouches over her and looks at it — only at it. He reads the number, writes the number, and the number is the whole reason he came. It went up. It does not go down. Out of everything that was done to her in this room, that is the one thing that changed, and it is the only thing in here that he counts as changed at all." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There's the reading. Higher than the last. You're closer now, machine — and every hole they put in you drives it up another notch and it never once falls." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Get your breath."
+text = "Come down off it."
 [canvases.nodes.exit_block.config]
 destinationType = "specific"
 locationId      = "captive_room"
@@ -2827,11 +3315,11 @@ effects = [
   { targetType = "player", trait = "energy",      op = "add", value = -14, clamp = true },
 ]
 
-# ── SCENE 7 — Failing. "The stutter." ──────────────────────────────────────────────────────────────
+# ── SCENE 7 — Failing. "The stutter" (rev64 witness chain). ──────────────────
 [[canvases]]
 id          = "cell_use_stutter"
 name        = "The stutter"
-description = "beat_0040. Shelf scene 7/8 (Failing). One-shot random @captive_room, core_strain 72-95. Mid-use her left leg stops answering. Nobody stops. Bastien leans in, interested. +12 strain, -14 Charge."
+description = "beat_0040, RE-SCRIPTED rev 64 (pure-witness chain). Scene 7/8 (Failing). One-shot random @captive_room, core_strain gte 72 lt 96. 5 beats: Used from behind -> Her leg dies -> He keeps going -> Bastien leans in -> The read-out. +12 strain / -14 energy applied ONCE on the terminal read-out exit. Reuse ['sex/cell_stutter.webm']; other clips NEW (find-media). Enters at nodes[0] (base)."
 [canvases.trigger]
 location      = "captive_room"
 trigger_mode  = "random"
@@ -2842,23 +3330,90 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "captivity_entered", operator = "is_true"  },
   { type = "flag",  subject = "player", flag_key = "captivity_broken",  operator = "is_false" },
   { type = "trait", subject = "player", trait_key = "core_strain",      operator = "gte", value = 72 },
-  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt",  value = 96 },
+  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt", value = 96 },
 ] }
+
 [[canvases.nodes]]
 id   = "base"
-name = "The stutter"
+name = "Used from behind"
 blocks = [
-  { type = "video", props = { file = "sex/cell_stutter.webm", description = "A woman being used from behind on a bare mattress, one leg gone slack and dragging, a seated man leaning forward with his elbows on his knees to look closer.", search_queries = ["woman used from behind limp exhausted", "man leaning forward watching closely bare room"] } },
-  { type = "paragraph", content = "Halfway through the second one her left leg stops answering." },
-  { type = "paragraph", content = "It doesn't hurt and it doesn't cramp. It simply is not hers any more — it lies where it was put, and when she tells it to move, the instruction goes out and nothing comes back, the way a call goes out on a dead line. The man in her doesn't notice for a while. When he does he laughs and hooks it up over his arm anyway, because it works better like that." },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "That's a whole leg. That's a whole leg, and it just went." },
-  { type = "paragraph", content = "Bastien gets up out of the chair. For the first time in the room he comes close enough that she can see the pores in his skin, and he crouches by the frame and looks at her leg, and then at the plate under her sternum, and then, briefly, at her face — the way a man checks the reading and then checks the gauge." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There. That's the first thing you've done that I didn't ask for." },
-  { type = "paragraph", content = "He goes back to the chair. The man finishes in her and the charge goes up and the hum in her chest changes pitch, and someone else takes his place." },
+  { type = "video", props = { file = "sex/cell_stutter.webm", description = "A woman being used from behind on a bare mattress, one leg gone slack and dragging, a seated man leaning forward with his elbows on his knees to look closer.", search_queries = [] } },
+  { type = "paragraph", content = "The mattress lost its sheet a long stretch ago. She's face-down on the bare ticking, hips hauled up, and the man behind her has both hands clamped on her waist, fucking into her cunt at a flat bored pace — the pace of a thing he's used long enough to stop looking at. He isn't working for it. He's just emptying himself into a hole that's been left open for him." },
+  { type = "paragraph", content = "Under her sternum the plate that used to burn clean white sits dim now — a dull ember guttering through her skin with every shove, the charge stacked so high behind it that it's stopped glowing right. Each time his cock bottoms out, the read-out over the plate strobes and climbs another notch. Nobody in the room is bothering to read it yet. They will." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Look at it take that. Filthy machine doesn't even need telling anymore — just lies there and lets itself get bred." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Barely lit. Whole thing's running on fumes. Good." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n2"
+
+[[canvases.nodes]]
+id   = "n2"
+name = "Her leg dies"
+blocks = [
+  { type = "video", props = { file = "sex/cell_stutter_her_leg_dies.webm", description = "doggystyle woman leg buckles collapses flat on bed pov", search_queries = ["doggystyle woman leg buckles collapses flat on bed pov", "face down ass up leg goes limp slides off mattress rough from behind"] } },
+  { type = "paragraph", content = "It goes between one thrust and the next. Her left leg — braced, taking her weight on the knee — simply stops. The muscle lets go all at once, the joint unlocks, and the leg slides out flat across the ticking, dead weight, slack from hip to heel. No twitch. No shudder back to life. It just quits." },
+  { type = "paragraph", content = "Her hip drops crooked with nothing under it holding the line, and the man's next stroke shoves her sideways across the mattress because half of what used to brace her isn't answering anymore. Somewhere under the skin a thing that was supposed to keep working has gone dark and stayed dark, and the rest of her body keeps getting fucked around the failure like it never happened." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n3"
+
+[[canvases.nodes]]
+id   = "n3"
+name = "He keeps going"
+blocks = [
+  { type = "video", props = { file = "sex/cell_stutter_he_keeps_going.webm", description = "man holding one leg up over arm fucking woman from behind on mattress pov", search_queries = ["man holding one leg up over arm fucking woman from behind on mattress pov", "rough doggystyle leg hooked up limp swinging pov point of view"] } },
+  { type = "paragraph", content = "He doesn't stop. He barely slows — just reaches down, catches the dead leg under the knee, and hooks it up over his forearm to get the crooked hip back where he wants it. Then he fucks her exactly as before, harder if anything, the slack limb swinging loose off his arm with every drive of his cock like a thing that's already been thrown out." },
+  { type = "paragraph", content = "The rest of the room watches a machine's leg give out and does the only arithmetic that matters to them: it's still a hole, and the hole still works. Nobody moves to stop it. Nobody would. They lean in closer instead, to see." },
+  { type = "paragraph", content = "\"Its fuckin' leg just died — keep going, keep going, don't you dare stop!\"" },
+  { type = "paragraph", content = "\"Leg's dead, hole's not. Who cares.\"" },
+  { type = "paragraph", content = "\"Ride it till the next bit falls off.\"" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n4"
+
+[[canvases.nodes]]
+id   = "n4"
+name = "Bastien leans in"
+blocks = [
+  { type = "image", props = { file = "scenes/cell_stutter_bastien_leans_in.jpg", description = "man crouching watching intently dim room noir close observation", search_queries = ["man crouching watching intently dim room noir close observation", "clothed man leaning in cold intense expression low light shadow"] } },
+  { type = "paragraph", content = "Bastien comes off the wall and crouches at the edge of the mattress, close, elbows on his knees, watching the dead leg swing where it hangs off the man's arm. Not her face — her face has never been the thing. He watches the failure. He reaches out and pushes two fingers deep into the slack meat of her thigh, testing, feeling for a tone that isn't there anymore, and something moves behind his eyes that has nothing to do with mercy." },
+  { type = "paragraph", content = "He's interested. He's always most interested when a part of her stops. He keeps his fingers buried in the dead muscle a moment longer than he needs to, thumb pressing, reading her by hand while the man's cock keeps working her hole two inches away." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There it goes. Left side's dropping out — right on the number I said it would." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Don't you fucking stop. I want to see what quits next." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Look at that. Bought a machine, and it's coming apart while it gets used. Beautiful." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "readout"
+
+[[canvases.nodes]]
+id   = "readout"
+name = "The read-out"
+blocks = [
+  { type = "image", props = { file = "scenes/cell_stutter_the_read_out.jpg", description = "glowing chest implant readout display sci-fi close up dim", search_queries = ["glowing chest implant readout display sci-fi close up dim", "cyborg woman sternum panel flickering number gauge low light"] } },
+  { type = "paragraph", content = "On the sternum plate the read-out has climbed again — one more increment, logged the second the man's pace picked back up. Every stroke into her stacks a little more charge behind a plate that has nowhere left to send it. The socket at the base of her spine, where the drain used to bleed it off — where anal used to take something out of a man instead of pour it into her — sits empty and cold, a dead port in the small of her back that nothing plugs anymore." },
+  { type = "paragraph", content = "The number does not fall. It has never once fallen. Bastien's eyes go straight to it and stay there — not on the swinging leg, not on the crew, not on her — on the count. He takes out the little book and writes the new figure under all the others, unhurried, while behind the number the plate flickers like it's finally getting tired." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Higher. Every time it fails, the number still climbs. That's the part they never believe." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Keep filling it. It's got nowhere to put any of it." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Wait for the leg."
+text = "Stay where she's dropped."
 [canvases.nodes.exit_block.config]
 destinationType = "specific"
 locationId      = "captive_room"
@@ -2867,14 +3422,11 @@ effects = [
   { targetType = "player", trait = "energy",      op = "add", value = -14, clamp = true },
 ]
 
-# ── SCENE 8 — Failing. "He does not stop." (THE MORAL HINGE) ───────────────────────────────────────
-# The crew member balks. Bastien does not. That contrast IS the beat: it makes his choice visible, and
-# it is the reason Cain arrives furious. Nothing here names Cain or hints at the alliance.
-# Her interior stays SILENT — no thought_bubble. The silence is the point.
+# ── SCENE 8 — Failing. "He does not stop" (rev64 witness chain). ──────────────────
 [[canvases]]
 id          = "cell_use_he_does_not_stop"
 name        = "He does not stop"
-description = "beat_0040. Shelf scene 8/8 (Failing) — THE MORAL HINGE. One-shot random @captive_room, core_strain 72-95. He sees the machine failing, in front of witnesses, and keeps going. Its exit takes strain to 96 = the break's gate. +12 strain, -14 Charge."
+description = "beat_0040, RE-SCRIPTED rev 64 (pure-witness chain). Scene 8/8 (Failing). One-shot random @captive_room, core_strain gte 72 lt 96. 5 beats: She's failing, lit up -> A crew man balks -> Bastien orders them on -> Used past failure -> The read-out → the break. +12 strain / -14 energy applied ONCE on the terminal read-out exit. Reuse ['sex/cell_he_does_not_stop.webm']; other clips NEW (find-media). Enters at nodes[0] (base)."
 [canvases.trigger]
 location      = "captive_room"
 trigger_mode  = "random"
@@ -2885,25 +3437,96 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key = "captivity_entered", operator = "is_true"  },
   { type = "flag",  subject = "player", flag_key = "captivity_broken",  operator = "is_false" },
   { type = "trait", subject = "player", trait_key = "core_strain",      operator = "gte", value = 72 },
-  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt",  value = 96 },
+  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt", value = 96 },
 ] }
+
 [[canvases.nodes]]
 id   = "base"
-name = "He does not stop"
+name = "She's failing, lit up"
 blocks = [
-  { type = "video", props = { file = "sex/cell_he_does_not_stop.webm", description = "A woman limp and shaking on a mattress while a man keeps using her, another standing back with his hands raised, unwilling.", search_queries = ["exhausted woman still being used man hesitating", "man stepping back refusing bare room"] } },
-  { type = "paragraph", content = "The hum is loud enough now that the man on top of her can feel it in his hands. He gets off her halfway through and stands there holding himself, looking down at her chest." },
-  { type = "paragraph", content = "\"Boss. Boss, come and look at this.\" And then, when nobody answers him: \"It's not right. Whatever she is. That's not — boss, that's not it working.\"" },
-  { type = "paragraph", content = "Bastien comes and looks. He takes his time about it, the way he takes his time about everything. The plate under her sternum is not lit any more so much as flickering, and the light of it is coming up through the skin between her ribs where no light has ever been, and her left hand has curled and won't open, and she is looking at the ceiling and breathing like something that has been run too far." },
-  { type = "paragraph", content = "He puts two fingers flat on her sternum and holds them there a moment, the way you'd feel a housing for heat. Then he wipes his hand on his trousers." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "No. That's not it working. Go on anyway." },
-  { type = "paragraph", content = "The man doesn't move. \"We've got what we came for, though. Haven't we.\" Somebody at the back of the room, not wanting an answer. Bastien doesn't raise his voice, because he has never once had to." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "I've learned this much: fucking her charges her, and she has no way to spend it. I don't know what she is, and I have never in my life had a thing in a room I couldn't put a name to. If it comes apart, I'll know what it was made of. Go on." },
-  { type = "paragraph", content = "So they go on. Somebody takes her by the ankles and turns her over, and her legs go where they're put and stay there, gone slack, past answering, and behind her sternum the pressure finds the last of the room it has and fills it." },
+  { type = "video", props = { file = "sex/cell_he_does_not_stop.webm", description = "A woman limp and shaking on a mattress while a man keeps using her, another standing back with his hands raised, unwilling.", search_queries = [] } },
+  { type = "paragraph", content = "There's a line of them and it hasn't thinned. Someone's got her by the hips on the concrete and is working into her cunt at a flat, bored pace, and the man before him left her open and slick enough that it goes easy. That isn't the part they've stopped watching for. Under her sternum the plate has started to stutter — light coming up between her ribs in pulses, off-time with the fucking, a dull red that wasn't there when they started and won't settle back down. Every load one of them put in her ticked it higher. It has nowhere to go. She's lit from the inside like something left switched on." },
+  { type = "paragraph", content = "The socket at the base of her spine sits empty — a dry seam in the metal where the drain used to seat. That was the part that took. Stripped out, there's only the filling: cock after cock stacking charge behind the plate with no line out, and the read-out on her chest climbs while the man fucking her doesn't notice, chasing his own thing, watching her tits move with it. The glow throbs up out of her skin and nobody backs off. They just wait their turn and fill her hotter." },
+  { type = "paragraph", content = "'The fuck is she doing, she's lighting up.'" },
+  { type = "paragraph", content = "'Who cares, she's still tight — go, go, you're up.'" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n2"
+
+[[canvases.nodes]]
+id   = "n2"
+name = "A crew man balks"
+blocks = [
+  { type = "video", props = { file = "sex/cell_he_does_not_stop_a_crew_man_balks.webm", description = "rough gangbang one man pulls out steps back from woman", search_queries = ["rough gangbang one man pulls out steps back from woman", "group sex man stops staring at used woman on floor"] } },
+  { type = "paragraph", content = "The one in her cunt pulls out mid-stroke. Not finished — he just steps back off her, cock still hard and shining, staring at the light going through her ribs like it's finally reached him what he's been putting himself into. She keeps twitching where he left her, hips still tipped up because nobody told them to come down. The glow pulses again, brighter, and something under the plate makes a sound — a thin electric whine climbing pitch — and it's the machine, not her, because her face hasn't changed at all. Her face stopped changing a while back." },
+  { type = "paragraph", content = "He backs another step and won't go near her again, cock going soft in his fist, looking around at the others like one of them's going to explain it. None of them do. The whine keeps rising out of her chest and the red bar under her sternum flickers, gutters, catches — a light with a short in it — and still she lies open on the floor the exact way the last man left her, ass up, thighs slack, waiting to be used by whoever's next." },
+  { type = "paragraph", content = "'Boss. Boss, that's — that's not right.'" },
+  { type = "paragraph", content = "'Whatever the fuck she is, that ain't it working. That's it breaking.'" },
+  { type = "paragraph", content = "'She's glowing, man, look at her chest, I'm not putting my dick back in that.'" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n3"
+
+[[canvases.nodes]]
+id   = "n3"
+name = "Bastien orders them on"
+blocks = [
+  { type = "image", props = { file = "scenes/cell_he_does_not_stop_bastien_orders_them_on.jpg", description = "clothed man crouching over naked woman on floor dim room pov", search_queries = ["clothed man crouching over naked woman on floor dim room pov", "dominant man in shirt watching cold standing over used woman"] } },
+  { type = "paragraph", content = "Bastien crosses the floor unhurried and crouches at her chest to look — not at her face, at the read-out, at the number climbing behind the flicker. He watches it the way he watches everything about her: like a figure going into a ledger. He lays two fingers flat on the plate, feels the heat coming off it, the whine buzzing up through the metal into his hand, and he doesn't pull them away. He turns his head and looks at the man who stepped back, then at the rest of them standing there with their cocks out, gone uncertain." },
+  { type = "paragraph", content = "Then he takes his fingers off the plate, wipes the heat off on her tit, and stands, and tells them to get back in her. He's not curious out loud. He's curious in the eyes — but his mouth is only cruel, and the two don't argue with each other in him." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "'It's not breaking. It's filling. There's a difference and I've been watching it fill for a while now.'" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "'You fuck her, it charges her — and somebody pulled the one part off her that let her spend it. So now it just goes in. Stacks up. Nowhere out. That's what the light is.'" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "'Which means if she comes apart, I finally get to see what they built her out of. And there's exactly one way to reach that number. So finish. All of you. Back in her.'" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "'She doesn't get to keep it, and she doesn't get to hold anything back either. Fill the filthy machine till it can't take another drop.'" },
+  { type = "paragraph", content = "'You heard him. Turn her over.'" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "n4"
+
+[[canvases.nodes]]
+id   = "n4"
+name = "Used past failure"
+blocks = [
+  { type = "video", props = { file = "sex/cell_he_does_not_stop_used_past_failure.webm", description = "rough anal from behind woman face down ass up group pov", search_queries = ["rough anal from behind woman face down ass up group pov", "hard doggy gangbang limp woman turned over held down"] } },
+  { type = "paragraph", content = "They turn her over. Someone hooks her by the ankle and folds her onto her front, and she goes where she's put — arms loose under her, cheek flat to the concrete — and then there's weight across her back and someone's in her ass now, driving hard the second the boss said go. Her legs stay where they set them, knees shoved apart, ass tipped up, because she's stopped bracing, stopped everything that isn't the plate. And it's her ass — the socket right there above the crack, dead and empty, the drain that used to take pulled out of it. Nothing takes now. Every thrust into her only feeds the thing that fills. The red bar between her ribs has stopped pulsing and gone solid, a level rising, and each grunt and each load somebody empties into her walks it up toward the top." },
+  { type = "paragraph", content = "One of them reaches under her and works her clit rough while the man behind fucks her, because the boss said the fast way is to make her come — and when it wrenches through her the read-out jumps three marks at once and something under the plate flares white. It isn't pleasure on her at that point. It's overflow with no drain, and it burns; the charge climbing through her with nowhere to be, cooking her from the plate out. She makes a sound she hasn't made — thin, mechanical, wrong — and they laugh and hold her down and drag it out of her again." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "'Make her come. That's what moves it. Anyone can just fuck her — I want her spiking.'" },
+  { type = "paragraph", content = "'There it goes — you see it jump? Do it again, rub her out.'" },
+  { type = "paragraph", content = "'Hold her, hold her, she's going, she's fucking going—'" },
+  { type = "paragraph", content = "'Look at that light, it don't stop where the last one did.'" },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Continue"
+targetType = "node"
+nodeId     = "readout"
+
+[[canvases.nodes]]
+id   = "readout"
+name = "The read-out → the break"
+blocks = [
+  { type = "image", props = { file = "scenes/cell_he_does_not_stop_the_read_out_the_break.jpg", description = "cyborg woman glowing chest plate overload sci-fi red light", search_queries = ["cyborg woman glowing chest plate overload sci-fi red light", "android light through skin cracks glowing chest overheating"] } },
+  { type = "paragraph", content = "The read-out reaches the top of its climb and stops — not because they've stopped, but because there is no higher left for it to go. The bar under her sternum is full end to end, a hard flat line of light burning through the skin between her ribs, too bright now to look at straight. The whine has gone past sound into a pressure you feel in your teeth. Everywhere else she's dark: face slack, eyes open on nothing, body still moving only because the man behind her is still moving it, hips still working her onto him out of habit and weight. Every small resistance the machine ever had — gone at once, given up together." },
+  { type = "paragraph", content = "Bastien stands over the top of her head watching the plate, not her, the way he has the whole time. Charged to the top. No socket. No out. Something in her has to give with all that light and nowhere for it, and under the flat glare of the full read-out — while a man is still emptying into her ass and doesn't even notice — it does." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "'There. Top of the gauge. Now we find out what they were hiding in you.'" },
+  { type = "paragraph", content = "'Boss — boss, it's not moving anymore, it's just—'" },
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Hold on."
+text = "Take the last of it."
 [canvases.nodes.exit_block.config]
 destinationType = "specific"
 locationId      = "captive_room"

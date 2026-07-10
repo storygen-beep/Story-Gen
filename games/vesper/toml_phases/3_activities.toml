@@ -1437,8 +1437,9 @@ effects = [
 # the scene — exactly the same edges the random shelf-scenes use (beat_0039/0040). The ladder is
 # monotonic however the dice fall.
 #
-# TEXT-ONLY, deliberately: she's half under. The eight authored shelf-scenes carry the media budget;
-# this is the compressed one she surfaces during and cannot hold onto.
+# ONE CLIP PER BAND + compressed prose (rev 64): she's half under, so this stays terse vs the eight full
+# shelf-scenes, but it now carries a representative clip per band (find-media harvest). Register is
+# hot/degrading like the shelf; the crew let themselves in from the Hot band up.
 [[canvases]]
 id          = "cell_sleep"
 name        = "Lie down"
@@ -1460,38 +1461,55 @@ name = "Lie down"
 blocks = [
   { type = "paragraph", content = "The light doesn't go off, so she turns her face to the wall and powers down anyway. The bed is bolted down and the mattress smells of other people. She goes under fast, the way she always does, and it doesn't matter at all, because the door opens in the night. It always opens in the night." },
 
-  # ── Nominal (strain < 24) — Bastien alone. Ownership, established.
+  # ── Nominal — Bastien alone — hot & degrading.
   { type = "group", props = { conditions = { version = "1.0", items = [
       { type = "trait", subject = "player", trait_key = "core_strain", operator = "lt", value = 24 },
     ] } }, blocks = [
-    { type = "paragraph", content = "She comes half up to a hand turning her onto her back, and it's him, unhurried, already unbuckling. He doesn't wake her properly. He works into her cunt while she's still surfacing and he takes his time about it, watching her face the way you'd watch a needle." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Go back to sleep. You don't have to be anywhere." },
-    { type = "paragraph", content = "He finishes in her and the warmth of it spreads up through her and finds nowhere to go, and she lies in the dark afterwards feeling the charge sit in her like a swallowed coal." },
+    { type = "video", props = { file = "sex/cell_sleep_nominal.webm", description = "man fucking sleeping woman from behind in dark bedroom pov", search_queries = ["man fucking sleeping woman from behind in dark bedroom pov"] } },
+    { type = "paragraph", content = "She's down on the mat with her back to the wall, trying to drop under, when the weight settles in behind her and Bastien starts using her before she's all the way awake — cock worked into her cunt from behind, unhurried, one hand laid flat on the sternum plate so he can feel it tick while he does it. The charge climbs with every slow shove and runs down to the empty socket at the base of her spine and stops there, nowhere to go, stacking behind the plate in the dark." },
+    { type = "paragraph", content = "He finishes inside her and the read-out clicks up one notch and holds — it never drops — and he wipes off on the small of her back and leaves her where she lies. *Logged as rest. It isn't.*" },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Don't mind me. Go back under, filthy thing — I'm just reading you." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There it goes. One more on the count and nowhere for it to run. Bought that too." },
   ] },
 
-  # ── Hot (24–47) — he conducts.
+  # ── Hot — the crew let themselves in in the dark.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "core_strain", operator = "gte", value = 24 },
       { type = "trait", subject = "player", trait_key = "core_strain", operator = "lt",  value = 48 },
     ] } }, blocks = [
-    { type = "paragraph", content = "She wakes to weight — two of them, one at her hips and one kneeling up by her face, and the chair scraping as Bastien sits down to watch. Nobody hurries. They fuck her in the dark by turns, and when one of them finishes across her tits another takes his place before she's got her breath back." },
-    { type = "paragraph", content = "\"She's hot,\" one of them says, hand flat between her breasts, and he doesn't mean it the way men usually mean it. Somebody laughs. Bastien doesn't." },
+    { type = "video", props = { file = "sex/cell_sleep_hot.webm", description = "multiple men using woman in bed at night gangbang dark pov", search_queries = ["multiple men using woman in bed at night gangbang dark pov"] } },
+    { type = "paragraph", content = "She surfaces because there are hands on her that aren't one man's — the crew have let themselves in in the dark, and she wakes already being used, a cock working her cunt while another feeds itself into her mouth and a third pair of hands just paws her tits like they're checking she's still warm. She can't tell how many; they pass her between them in the black, laughing low, and every load that goes in stacks up behind the plate with the drain gone and the socket empty, filling and filling with nowhere to send it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Left the door open for the lads. She sleeps better with a hole full — don't you, slut." },
+    { type = "paragraph", content = "\"She's awake — watch, the little machine's awake.\"" },
+    { type = "paragraph", content = "\"Doesn't matter if she is. Open, bought-and-paid-for.\"" },
+    { type = "paragraph", content = "\"Pass her down, I've not had a turn.\"" },
   ] },
 
-  # ── Faulting (48–71) — she is being operated, not fucked.
+  # ── Faulting — won't let her stay under; the drain inverted.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "core_strain", operator = "gte", value = 48 },
       { type = "trait", subject = "player", trait_key = "core_strain", operator = "lt",  value = 72 },
     ] } }, blocks = [
-    { type = "paragraph", content = "She doesn't surface for the start of it. She surfaces for a hand adjusting the angle of her hips, and another opening her thighs a little wider, the way you'd square up a workpiece. Someone is in her ass. Someone else is timing it. The heat behind her sternum has stopped feeling like heat and started feeling like pressure, and every time a man empties into her it goes up a step and stays there." },
+    { type = "video", props = { file = "sex/cell_sleep_faulting.webm", description = "rough gangbang woman held down spitroast marked bed dark", search_queries = ["rough gangbang woman held down spitroast marked bed dark"] } },
+    { type = "paragraph", content = "They don't let her stay under at all now — every time she starts to slip they haul her back onto her knees and use her hard, one fisting her hair down onto his cock till she gags and drools, another driving into her from behind, handprints coming up on her ass and a set of fingermarks banding her throat. Then they flip her and take her in the ass — the drain inverted, the thing that used to TAKE from a man now only pouring INTO her — and Bastien holds her jaw and makes her come on it because forcing it spikes the read-out fastest, and the number jumps two, three, climbing in the dark while she can't tell sleep from being fucked." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Make her come — that's what moves the count, not the fucking. Force it. Watch the plate, not her." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Up it goes. Look at that. Passed round all night and still filling." },
+    { type = "paragraph", content = "\"She's shaking — do it again, it likes it.\"" },
+    { type = "paragraph", content = "\"Hold her mouth, she's trying to check out.\"" },
+    { type = "paragraph", content = "\"Mark her up, no one's counting bruises.\"" },
   ] },
 
-  # ── Failing (72+) — the machine coming apart.
+  # ── Failing — used while the machine half-quits.
   { type = "group", props = { conditions = { version = "1.0", items = [
       { type = "trait", subject = "player", trait_key = "core_strain", operator = "gte", value = 72 },
     ] } }, blocks = [
-    { type = "paragraph", content = "She isn't sure she was asleep. There's a man in her and a hum in the room that she works out, slowly, is coming from inside her own chest. Her left hand won't close. He finishes and pulls out and she feels the charge go up and hears the hum change pitch, and someone in the dark says that can't be right, and nobody stops." },
-    { type = "thought_bubble", props = { speaker = "player" }, content = "Something is going to give. It isn't going to be them." },
+    { type = "video", props = { file = "sex/cell_sleep_failing.webm", description = "exhausted limp woman used rough gangbang dark heavy", search_queries = ["exhausted limp woman used rough gangbang dark heavy"] } },
+    { type = "paragraph", content = "By the small hours her body's half-quitting under them — legs gone loose, breath sawing, the sternum plate flickering its read-out where it should hold steady — and none of them slow down for it. The charge has stacked up so high with nowhere to drain that every load now lands as a wet flare of pain instead of anything else, and they force her over the edge anyway, again, the pleasure coming out the wrong way and hurting, the plate stuttering the number up past where the light stays on. She's limp between them, used front and back, drooled-on and slack, and Bastien just leans in close to read the flicker off her chest and not her face at all." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "It's browning out. Good — keep going. I want to see how high it climbs before the light won't hold." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Not her, idiot — the plate. Watch the plate. She's just the socket." },
+    { type = "paragraph", content = "\"Something's wrong with it — look, it's flickering.\"" },
+    { type = "paragraph", content = "\"Boss says keep going, so keep going.\"" },
+    { type = "paragraph", content = "\"Still warm, still open. Who cares if it's breaking.\"" },
   ] },
 ]
 
