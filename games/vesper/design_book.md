@@ -4,7 +4,7 @@
 > translation of what's written here. Grown one section per pipeline step.
 >
 > Working title: **Vesper** (also the PC's buried true name — hidden in plain sight; rename freely).
-> Book revision 53 (Step 5 + authoring; the A→A.5 chunk built. **Header changelog resumed at 52** — the ledger `book_revision` advanced 43–51 through portrait/quest tweaks without a header note; caught up here. Latest: **UNDERWORLD HUNT — Act-2 on-ramp, DESIGN landed (Steps 3+5 — casting + blueprint)** — the fix for the mopoga *"grind not content / lacks content"* review, whose real cause was **roster**: only 2 developed NPCs and Act 2 designed-but-unbuilt, so the story ran out of people. Locked the **Underworld Hunt** (the trail that *reveals* Bastien) and did its casting. Beats: Renner's drain will hand her **two dead men's names** (Doss + Rourke, NEW) → **Sol promoted from placeholder to the informant** (resolves his add/cut fork) → the fixer **Marsh** (one-off drain) books **Rue** at The House on Sundays → she pays Rue off the slot (the underworld coin's first real *use*), serves + drains Marsh → the crew's place → finds **Bastien**, whose people **grab her**. **Bastien re-cast**: dealer→owner (bar + brothel), submissive-cover→**capture-and-flip**, supply-transaction→secret Cain-alliance (saved reveal). His *arc* (flip/drain) = next chunk; this one only reveals him. The underworld is a **breadcrumb, not a new grind** (no second currency; every stop is a scene). Casting table + sketches reconciled; deeper "submissive dealer" arc-refs marked superseded-pending-Step-4. **Blueprint seeded (Step 5): 5 scenes (plan beat_0030–0034) gated on `names_known` (a TRAIT — triggerless drain setter) + a located flag chain (`hunt_lead`/`crew_known`/`bastien_found`); Sunday via a canvas `trigger.schedules weekdays=[6]` (NOT an NPC schedule row — spoiler); the grab = an auto-fire capstone that ends the chunk; one new room `crew_den`; Rue pay-off = the coin's first real sink. Design-only; Step-6 quick-check next; no TOML yet.** Prior: **RENNER QUEST → STEPPED CORRUPTION LADDER** — the single Renner objective (*Break him to the drain — N / 50*) is replaced by a chain of corruption-banded quest cards that name the CURRENT lever, so the goal finally matches the real stepped unlock (tease 0 / flash 10 / grope 20 / first-oral 30 / loop 40 / anal-drain 50) instead of hiding it behind one far-off number. Six rungs, one live at a time — the picker swaps as `npc_renner.corruption` crosses each band; ranges are exclusive via `gte`+`lt` so exactly one matches: R1 tease → R2 flash → R3 grope → R4 he-cracks → R5 break-to-50 → R6 *take him to bed* (the 50-but-not-yet-bedded step, the only numberless rung — it also closes a pre-existing blank-*next*-row dead-spot where a met goal + no `ready_canvas` rendered nothing, engine `renderQuestsGoalBlock` Frame 3 v2.py:13988). The **sidebar *next* row and the Quests page are the same renderer** (`pickQuestsCard`→`renderQuestsGoalBlock`, v2.py:15137-15145) — there was never a separate "sidebar quest" to align; both step together for free. Per LO: **keep the number** (each rung shows *N / next-threshold*; the coaching verb rides in the goal LABEL because the sidebar renders only the goal block, not text/tip). READY pair + Story-Goal tier untouched. Authoring-only, zero engine change; build green (no new flags → flag chains still valid) + 28/28 headless live-test. Prior: **DRAIN FOLDED INTO THE HUB SEX LOOP + underworld lore** — the first Renner drain is no longer a separate cold auto-fire anal scene (retired `cap_renner_anal_drain` + its standalone clip `sex/renner_anal_t5.webm`). It now happens INSIDE the office sex loop like every repeat: oral→vaginal→anal, and the **anal finish IS the drain** — she builds up instead of jump-cutting straight to anal. It's **player-driven** (no longer force-fired) and gated on the drain weapon being **worn** (`equipped_weapon=1`) + **charged** (`drain_charge>=1`); carry the emitter or run dry and the anal still resolves but doesn't drain (reload at the cradle). **First** drain = the full Q&A extraction; every **repeat** = the short "ask again." The anal pose opens on his corruption≥50 + in cover (was gated on the retired first-anal flag). **Lore swap:** the drain no longer names the two unbuilt targets (Bastien/Calloway) — Renner now confesses the real feud (two of his own people betrayed him, feeding Cain supplies off his own floor; he killed them and their families; Cain torched his yard for it) and points her at the **underworld** (already built + reachable off the Waterfront), converging with the burned-yard evidence thread (the two dead men + the underworld origin). *(D2: the broader Bastien/Calloway Mission 2/3 references elsewhere in this book stay as future-frontier intent, now underworld-first — reconcile when those targets are built.)* Engine note: the post-drain awakening (glitch II) was re-gated onto a new hidden `drains_done` trait counter so the flag-chain validator doesn't demand a located setter (the drain now fires in a triggerless loop). Authoring-only, zero engine change; build green + 22/22 headless live-test. Prior: **EMITTER-FIRE VIDEOS SPLIT** — the two arousal-weapon fire beats no longer share one clip: the **gate** doorman keeps `sex/arousal_weapon_use.webm`, and the **burned-yard** area-fire now points at a new `sex/yard_emitter_fire_t5.webm`. The prose already differed (one bored doorman vs. a knot of men going slack); now the video does too. Engine silent-skips the missing yard clip → the yard beat shows its prose + the find-media search-links until the clip is harvested (the slot joins the next find-media pass). Authoring-only, one TOML video block retargeted, gate left as-is. Prior: **WEAPON LOADOUT — one weapon carried at a time** (new hidden trait `equipped_weapon`: 1 = drain, 2 = emitter; one core feeds one weapon). She swaps at the bench in her room (*Switch weapon*, free); which she carries gates use — the drain only fires the Renner extraction, the emitter only zaps guards (yard/gate). The **first drain is not exempt** — the capstone trigger waits until the drain is carried, and the quest page directs her (flipping to "switch back to the drain" if she's on the emitter). The **two weapon reloads are now separate dedicated cradle actions** (*Recharge the drain* / *Recharge the emitter*); **Power down / Charge up no longer reload weapons** (Charge only). Authoring-only, zero engine change (a literal clothing-slot weapon was engine-blocked — `VALID_CLOTHING_SLOTS` is hardcoded to 7). Prior: **BROTHEL → FULL SEX LOOP** — The House promoted from a single-variant repeat to the Renner/Mercer pose-ladder shape (oral/vaginal/anal → his pleasure climbs → elected finish: mouth/inside/ass), and **coin moved to finish-only** (it was paid on the entry choice — a faucet). Two new triggerless canvases (`underworld_brothel_loop` + `underworld_brothel_finisher`), authoring-only, cold register kept. 5 new t5 clips pending find-media (engine silent-skips → plays text-only meanwhile; vaginal reuses the existing ride clip). Prior: **LOCKED-CHOICE LABELS — the 4 Renner depot seduction rungs now show their own action label greyed when locked** (was distinct prose via `locked_text`), so the locked and unlocked text agree and it matches the energy gate's "(Requires 15 …)" look. Per LO (Option A): bare same-label, no hand-written requirement — the engine can't auto-derive a reason from `conditions` (only resource `costs` do, via `getCostBlockedMessage`). The 7 sex-loop/serve finishers keep their prose `locked_text` (reads better mid-scene). Prior: **ONBOARDING (audit P3, minimal)** — coin is now established in-fiction at the Underworld gate as closed underworld-only scrip (earned/spent only down there, worthless up top); this also explains why the toll can't be paid on a cold first visit. Per LO, the other P3 touches were dropped (the sidebar already surfaces Condition/Fighting/Stealth/Coin from frame one). Prior: **CLEANUP (audit P5 A+B)** — removed the dead `underworld_known` flag (set, read by nothing — the Underworld shipped reachable) and corrected the stale "underworld is deferred" notes to "reachable" (its deep end / Cain still locked). Prior: **PROSE PASS — Underworld sex rewritten to a declared cold-but-explicit register** (graphic at the ceiling, transactional/detached — the opposite of the Renner/Mercer heat; see *## The Underworld*), and the two interior tics ("files it under nothing" / "the way she does everything") **rationed** to their load-bearing beats. Prior: **BUGFIX — Condition (hygiene) was over-capping past 100 (Wash) and going negative (sex drops)**, both making the banded Condition card vanish; clamped all 9 hygiene effects so Condition is bounded 0–100 like Charge (the Charge-bug twin the content-depth audit caught; see *## Reset & reload*). Prior: **Quests restructured into two tiers** — the top **Story Goals** carry the mission (Mission 1 + the Burned Yard); **Renner's own section** carries his seduction as a one-card-at-a-time chain (*Earn the office* → *Break him to the drain*), which also lights the Renner sidebar panel's *next* row (see *### Quests page — two tiers*). Prior: **BUGFIX — Charge (energy) was sliding negative**; spends moved onto gated `costs`/clamp so Charge is now bounded 0–100 and the rungs/work block when too tired (travel never blocks; see *## Reset & reload*). Prior: the **arousal weapon's use is now a real beat** — arouse → fuck → he *passes out* (non-lethal) → she slips by; it's sex, so it drops Condition (see *## Reset & reload*). Prior: **reset & reload** (Condition + the two weapon reloads + Charge up); **The Underworld** (coin economy / second life); The Burned Yard; the Training activity; the Renner grind retune.)
+> Book revision 62 (Step 5 + authoring; the A→A.5 chunk built. **Header changelog resumed at 52** — the ledger `book_revision` advanced 43–51 through portrait/quest tweaks without a header note; caught up here. Latest: **CAPTIVITY — THE ROOM (Act 2 · Bastien's arc, part 1) — the STORY folded into the book (see `## Captivity — The Room`)** — the chunk where the mopoga *"grind not content"* cure fully lands: the densest erotic stretch in the game, zero grind, and the third distinct conquest verb (**she is taken**). Bastien's grab no longer releases her — it ports her into a **sealed cell** with two verbs (sleep · attend), where he and a **faceless crew** use her across three days while `core_strain` climbs (sex *charges* her; he stripped the drain, so the input has nowhere to go and the core cooks). At the break, **Cain** arrives, argues with Bastien behind a door **we never show**, and frees her without saying why. She leaves with her gear back and a fault that does not heal — the `Core: Failing` row in her sidebar is the promise the repair chunk pays. Two ceilings **declared** this revision (both previously blank): **Bastien's vocab register** — *ownership-as-curiosity*, maximum from the first scene, clinical rather than hot (he doesn't degrade her, he **operates** her) — and a scoped **RE-SPEC of the non-con floor**, which until now read *"no torture/mutilation unless re-specced."* Inside the cell the ceiling lifts to restraint/BDSM, gangbang, sustained non-con, and her machine broken; **the damage is to the machine, not the meat**, and the lift is scoped to the cell only. Design/story only — no TOML this revision; the blueprint (the named scene table) is next. Prior: **UNDERWORLD HUNT — Act-2 on-ramp, DESIGN landed (Steps 3+5 — casting + blueprint)** — the fix for the mopoga *"grind not content / lacks content"* review, whose real cause was **roster**: only 2 developed NPCs and Act 2 designed-but-unbuilt, so the story ran out of people. Locked the **Underworld Hunt** (the trail that *reveals* Bastien) and did its casting. Beats: Renner's drain will hand her **two dead men's names** (Doss + Rourke, NEW) → **Sol promoted from placeholder to the informant** (resolves his add/cut fork) → the fixer **Marsh** (one-off drain) books **Rue** at The House on Sundays → she pays Rue off the slot (the underworld coin's first real *use*), serves + drains Marsh → the crew's place → finds **Bastien**, whose people **grab her**. **Bastien re-cast**: dealer→owner (bar + brothel), submissive-cover→**capture-and-flip**, supply-transaction→secret Cain-alliance (saved reveal). His *arc* (flip/drain) = next chunk; this one only reveals him. The underworld is a **breadcrumb, not a new grind** (no second currency; every stop is a scene). Casting table + sketches reconciled; deeper "submissive dealer" arc-refs marked superseded-pending-Step-4. **Blueprint seeded (Step 5): 5 scenes (plan beat_0030–0034) gated on `names_known` (a TRAIT — triggerless drain setter) + a located flag chain (`hunt_lead`/`crew_known`/`bastien_found`); Sunday via a canvas `trigger.schedules weekdays=[6]` (NOT an NPC schedule row — spoiler); the grab = an auto-fire capstone that ends the chunk; one new room `crew_den`; Rue pay-off = the coin's first real sink. Design-only; Step-6 quick-check next; no TOML yet.** Prior: **RENNER QUEST → STEPPED CORRUPTION LADDER** — the single Renner objective (*Break him to the drain — N / 50*) is replaced by a chain of corruption-banded quest cards that name the CURRENT lever, so the goal finally matches the real stepped unlock (tease 0 / flash 10 / grope 20 / first-oral 30 / loop 40 / anal-drain 50) instead of hiding it behind one far-off number. Six rungs, one live at a time — the picker swaps as `npc_renner.corruption` crosses each band; ranges are exclusive via `gte`+`lt` so exactly one matches: R1 tease → R2 flash → R3 grope → R4 he-cracks → R5 break-to-50 → R6 *take him to bed* (the 50-but-not-yet-bedded step, the only numberless rung — it also closes a pre-existing blank-*next*-row dead-spot where a met goal + no `ready_canvas` rendered nothing, engine `renderQuestsGoalBlock` Frame 3 v2.py:13988). The **sidebar *next* row and the Quests page are the same renderer** (`pickQuestsCard`→`renderQuestsGoalBlock`, v2.py:15137-15145) — there was never a separate "sidebar quest" to align; both step together for free. Per LO: **keep the number** (each rung shows *N / next-threshold*; the coaching verb rides in the goal LABEL because the sidebar renders only the goal block, not text/tip). READY pair + Story-Goal tier untouched. Authoring-only, zero engine change; build green (no new flags → flag chains still valid) + 28/28 headless live-test. Prior: **DRAIN FOLDED INTO THE HUB SEX LOOP + underworld lore** — the first Renner drain is no longer a separate cold auto-fire anal scene (retired `cap_renner_anal_drain` + its standalone clip `sex/renner_anal_t5.webm`). It now happens INSIDE the office sex loop like every repeat: oral→vaginal→anal, and the **anal finish IS the drain** — she builds up instead of jump-cutting straight to anal. It's **player-driven** (no longer force-fired) and gated on the drain weapon being **worn** (`equipped_weapon=1`) + **charged** (`drain_charge>=1`); carry the emitter or run dry and the anal still resolves but doesn't drain (reload at the cradle). **First** drain = the full Q&A extraction; every **repeat** = the short "ask again." The anal pose opens on his corruption≥50 + in cover (was gated on the retired first-anal flag). **Lore swap:** the drain no longer names the two unbuilt targets (Bastien/Calloway) — Renner now confesses the real feud (two of his own people betrayed him, feeding Cain supplies off his own floor; he killed them and their families; Cain torched his yard for it) and points her at the **underworld** (already built + reachable off the Waterfront), converging with the burned-yard evidence thread (the two dead men + the underworld origin). *(D2: the broader Bastien/Calloway Mission 2/3 references elsewhere in this book stay as future-frontier intent, now underworld-first — reconcile when those targets are built.)* Engine note: the post-drain awakening (glitch II) was re-gated onto a new hidden `drains_done` trait counter so the flag-chain validator doesn't demand a located setter (the drain now fires in a triggerless loop). Authoring-only, zero engine change; build green + 22/22 headless live-test. Prior: **EMITTER-FIRE VIDEOS SPLIT** — the two arousal-weapon fire beats no longer share one clip: the **gate** doorman keeps `sex/arousal_weapon_use.webm`, and the **burned-yard** area-fire now points at a new `sex/yard_emitter_fire_t5.webm`. The prose already differed (one bored doorman vs. a knot of men going slack); now the video does too. Engine silent-skips the missing yard clip → the yard beat shows its prose + the find-media search-links until the clip is harvested (the slot joins the next find-media pass). Authoring-only, one TOML video block retargeted, gate left as-is. Prior: **WEAPON LOADOUT — one weapon carried at a time** (new hidden trait `equipped_weapon`: 1 = drain, 2 = emitter; one core feeds one weapon). She swaps at the bench in her room (*Switch weapon*, free); which she carries gates use — the drain only fires the Renner extraction, the emitter only zaps guards (yard/gate). The **first drain is not exempt** — the capstone trigger waits until the drain is carried, and the quest page directs her (flipping to "switch back to the drain" if she's on the emitter). The **two weapon reloads are now separate dedicated cradle actions** (*Recharge the drain* / *Recharge the emitter*); **Power down / Charge up no longer reload weapons** (Charge only). Authoring-only, zero engine change (a literal clothing-slot weapon was engine-blocked — `VALID_CLOTHING_SLOTS` is hardcoded to 7). Prior: **BROTHEL → FULL SEX LOOP** — The House promoted from a single-variant repeat to the Renner/Mercer pose-ladder shape (oral/vaginal/anal → his pleasure climbs → elected finish: mouth/inside/ass), and **coin moved to finish-only** (it was paid on the entry choice — a faucet). Two new triggerless canvases (`underworld_brothel_loop` + `underworld_brothel_finisher`), authoring-only, cold register kept. 5 new t5 clips pending find-media (engine silent-skips → plays text-only meanwhile; vaginal reuses the existing ride clip). Prior: **LOCKED-CHOICE LABELS — the 4 Renner depot seduction rungs now show their own action label greyed when locked** (was distinct prose via `locked_text`), so the locked and unlocked text agree and it matches the energy gate's "(Requires 15 …)" look. Per LO (Option A): bare same-label, no hand-written requirement — the engine can't auto-derive a reason from `conditions` (only resource `costs` do, via `getCostBlockedMessage`). The 7 sex-loop/serve finishers keep their prose `locked_text` (reads better mid-scene). Prior: **ONBOARDING (audit P3, minimal)** — coin is now established in-fiction at the Underworld gate as closed underworld-only scrip (earned/spent only down there, worthless up top); this also explains why the toll can't be paid on a cold first visit. Per LO, the other P3 touches were dropped (the sidebar already surfaces Condition/Fighting/Stealth/Coin from frame one). Prior: **CLEANUP (audit P5 A+B)** — removed the dead `underworld_known` flag (set, read by nothing — the Underworld shipped reachable) and corrected the stale "underworld is deferred" notes to "reachable" (its deep end / Cain still locked). Prior: **PROSE PASS — Underworld sex rewritten to a declared cold-but-explicit register** (graphic at the ceiling, transactional/detached — the opposite of the Renner/Mercer heat; see *## The Underworld*), and the two interior tics ("files it under nothing" / "the way she does everything") **rationed** to their load-bearing beats. Prior: **BUGFIX — Condition (hygiene) was over-capping past 100 (Wash) and going negative (sex drops)**, both making the banded Condition card vanish; clamped all 9 hygiene effects so Condition is bounded 0–100 like Charge (the Charge-bug twin the content-depth audit caught; see *## Reset & reload*). Prior: **Quests restructured into two tiers** — the top **Story Goals** carry the mission (Mission 1 + the Burned Yard); **Renner's own section** carries his seduction as a one-card-at-a-time chain (*Earn the office* → *Break him to the drain*), which also lights the Renner sidebar panel's *next* row (see *### Quests page — two tiers*). Prior: **BUGFIX — Charge (energy) was sliding negative**; spends moved onto gated `costs`/clamp so Charge is now bounded 0–100 and the rungs/work block when too tired (travel never blocks; see *## Reset & reload*). Prior: the **arousal weapon's use is now a real beat** — arouse → fuck → he *passes out* (non-lethal) → she slips by; it's sex, so it drops Condition (see *## Reset & reload*). Prior: **reset & reload** (Condition + the two weapon reloads + Charge up); **The Underworld** (coin economy / second life); The Burned Yard; the Training activity; the Renner grind retune.)
 
 ---
 
@@ -1111,6 +1111,87 @@ Entry = the drain (both new **and** returning players reach it; returning player
 
 **Plan seed:** `beat_0030` (names) · `beat_0031` (Sol lead) · `beat_0032` (Sunday House — Rue + Marsh) · `beat_0033` (crew_den) · `beat_0034` (grab capstone). All `status=planned`, `target_phase=2`.
 
+### Captivity blueprint (The Room — Step 5, rev 63)
+
+> The locked story (`## Captivity — The Room`, rev 62) compiled to the buildable scene list. **Structure
+> only.** Build law: shipped game = **extend-only**; `version="1.0"` on every new `conditions`; the cell door
+> is gated on a **TRAIT** (`cell_door`), never a flag — a flag `is_true` gate demands a located setter or the
+> flag-chain validator hard-fails. One engine change (`Config.history.controls = false`).
+
+**The ladder.** `+12` strain per use · 8 uses · the break at `>= 96` · `clamp = true` bounds it 0–100 and it
+freezes at 96. Each scene gates on the band it is **about to be played in**, so the sidebar row the player is
+staring at names the shelf that comes next — the read-out becomes a countdown.
+
+| Sidebar row | Band | The shelf it predicts | Scene gate | Scenes |
+|---|---|---|---|---|
+| *(hidden)* | 0 | Nominal | `lt 24` | 1 · 2 |
+| `Core: Nominal` | 1–23 | Hot | `gte 24` `lt 48` | 3 · 4 |
+| `Core: Hot` | 24–47 | Faulting | `gte 48` `lt 72` | 5 · 6 |
+| `Core: Faulting` | 48–71 | Failing | `gte 72` `lt 96` | 7 · 8 |
+| `Core: Failing` | 72+ *(no `max`)* | — | `gte 96` | **the break** |
+
+**Days are emergent, never named.** Sleep guarantees ≥1 use a night; `attend` adds more. Attend and she
+breaks in ~3 days; hide in the bed and it takes ~8. **Hiding doesn't save her — it makes it last longer.**
+No prose in the chunk names a day count.
+
+**The scenes** — all at `captive_room`, `trigger_mode="random"`, `is_repeatable=false` (**one-shot: the
+engine retires a non-repeatable canvas after one fire, and auto-fire skips random-mode canvases — so no
+per-scene "seen" flags exist**), `chance=0.5`, `+12 core_strain` / `−energy`, both `clamp=true`. Bastien in
+every one, in `dialog`; the crew in quoted lines inside `paragraph` blocks (a `speaker="unknown"` dialog
+block renders a literal `Stranger:` label). Mechanism = Lane 2 random ambient; register = RTS-flat.
+
+| # | Scene | Shelf | The want | Media |
+|---|---|---|---|---|
+| 1 | **The inventory** — he strips her the way you check a machine in, finds the drain socket empty because he emptied it, then fucks her on the table, unhurried, talking while he works | Nominal | know what he wants | `sex/cell_inventory.webm` |
+| 2 | **Charge test** — he makes her come to see whether the read-out moves. It moves. He notes the number. She feels it go in and go nowhere | Nominal | understand the fault | `sex/cell_charge_test.webm` |
+| 3 | **The first three** — he opens the door, lets three of them in, and sits. His voice stays in the room; theirs are noise | Hot | survive being handed over | `sex/cell_first_three.webm` |
+| 4 | **Turns** — a queue, and he times it. Someone finishes in her ass — the thing that used to *take* something — and it only fills her | Hot | the drain, inverted | `sex/cell_turns.webm` |
+| 5 | **The frame** — a rig. She isn't held down, she's *positioned*. Hands adjust her between uses like tuning | Faulting | be a thing being operated | `sex/cell_frame.webm` |
+| 6 | **Overflow** — she comes and it hurts. The heat has nowhere to go. The crew find that funny. Bastien watches the read-out, not her | Faulting | feel the overload | `sex/cell_overflow.webm` |
+| 7 | **The stutter** — mid-use her left leg stops answering. Nobody stops. Bastien leans in, *interested* | Failing | the body quits | `sex/cell_stutter.webm` |
+| 8 | **He does not stop** — he sees it failing. He keeps going | Failing | **earns Cain's anger** | `sex/cell_he_does_not_stop.webm` |
+
+Scene 8 is a sex scene **and** the moral hinge of Bastien's arc, deliberately: it must cost him something to
+be *watched* doing it. That's what the next chunk's bombshell hangs on.
+
+**The two verbs**
+- **Sleep** — repeatable, **no schedule**. Day advance · `energy +100 clamp=true` (the `activity_recharge`
+  shape) · a **scripted, guaranteed night use**: `+12 core_strain` with band-selected prose via `group`
+  blocks. Not random, so it **bypasses the visit-cooldown**. Sleep cannot outrun the ladder.
+  *(Engine-forced, bounced up at `beat_0038`: the cradle's sleep is gated 19:00–05:00, but nothing in the
+  cell is schedule-gated and the cell has no windows. A night window would strand a player grabbed at
+  09:00 behind ~20 `attend` clicks just to reach bedtime. She sleeps when she wants; the day still rolls.)*
+- **Attend** (~30 min) — three exits, the only things in the room with edges: *listen at the door* · *watch
+  the man on the chair* · *hold still and feel the fault*. **Glitch III** rides the last one inside a `group`
+  gated `glitch_iii_seen is_false`; the choice sets the flag, so the Tier-3 spend fires **once** on a
+  repeatable verb. Returning from `attend` re-enters the room ⇒ a fresh roll. *That is the chance mechanic.*
+
+**The chain (linear, acyclic, both cohorts reachable):**
+`bastien_found → the grab (rewritten: no release) → captivity_entered + equipped_weapon=0 → [cell] 8 uses ×
++12 → core_strain ≥ 96 → the break (captivity_broken) → Cain: the argument behind the door → the release
+(captivity_done, equipped_weapon=1, loop traits reset) → the_waterfront.`
+Returning players already hold `bastien_revealed` and stand on the waterfront ⇒ a **recovery auto-fire**
+there (`bastien_revealed is_true` + `captivity_entered is_false`) is mandatory, or they never reach the
+chunk. **Two doors, one room.**
+
+**Structure amendments (whole):**
+- **Locations** — `captive_room` (**no `entry_from`, no `parent`**; teleport-only. A `parent` here silently
+  unseals it and the build stays green) + `captive_door` (`entry_from = captive_room`, `entry_conditions`
+  `cell_door gte 1` — never satisfied). The door's real job is to give the room a **non-empty nav**, or the
+  generator falls back to listing the whole map.
+- **Traits** — `core_strain` (0, hidden, the banded row) · `cell_door` (0, hidden, never set).
+- **Flags** — `captivity_entered` · `captivity_broken` · `captivity_done` · `glitch_iii_seen`.
+- **NPCs** — none. `npc_bastien` already exists (minimal, **no schedule** — correct). The cell must **not**
+  use `npc =` / `requires_npc`, which gate on a schedule he doesn't have.
+- **Quests** — the shipped end-of-content card fires on `bastien_revealed is_true`, which the rewritten grab
+  still sets *on the way into the cell*; it is upper-gated with `captivity_entered is_false`, a captivity
+  card takes the page, and a new end card seeds the repair chunk **locked-visible**.
+
+**Plan seed:** `beat_0035` (engine + systems) · `beat_0036` (geography) · `beat_0037` (entry + the two
+doors) · `beat_0038` (the two verbs + Glitch III) · `beat_0039` (scenes 1–4) · `beat_0040` (scenes 5–8) ·
+`beat_0041` (the break) · `beat_0042` (Cain + the release) · `beat_0043` (quests) · `beat_0044` (dev jumps +
+clean publish). All `status=planned`.
+
 ### Content register & ceilings (the authoring contract)
 
 > The crudeness ceiling + the non-con floor, declared before authoring (`kink-ceilings.md` — a scene that
@@ -1122,6 +1203,15 @@ Entry = the drain (both new **and** returning players reach it; returning player
   crudeness is earned by the climb, off at the bottom.
 - **Mercer** — maximum/rough at the punishment + serve-loop peaks; his register is **ownership-degradation**
   ("my investment," "asset," used like furniture), crude where he uses her, never warm.
+- **Bastien** *(declared rev 62 — he carries the captivity chunk's three days)* — **maximum, from the first
+  scene.** There are no soft rungs in the cell; she arrives at his ceiling. But his register is neither
+  Renner's cracking heat nor Mercer's ownership-degradation: it's **ownership-as-curiosity**. He does not
+  degrade her — he **operates** her, and that is worse. Full crude at the peaks (cock, cunt, cum, ass),
+  spoken flat and unhurried, a man reading an instrument. He never raises his voice. Crude in his mouth is
+  **clinical, not hot** — which is the whole horror of him.
+- **The crew** — **faceless.** No names, no NPC records, no portraits. They are hands and voices. They
+  *speak* (the hot beats are played, never summarized), but as quoted lines in the narration, never as
+  named speakers. Their ceiling is Bastien's; their character is that they have none.
 - **The soft / non-sexual surfaces** (hubs, ambients, work, the cradle) stay flat and clean — no gratuitous
   crude on a re-readable everyday beat.
 
@@ -1131,6 +1221,21 @@ consulted** (the opening punishment is the template: "her body answering" while 
 units). The prose may depict the ownership, the degradation, the can't-refuse — that's the floor. It stops at
 **used-and-degraded, not brutalized-for-gore** (no torture/mutilation unless re-specced). The opening office
 scene is the first canvas that needs this floor.
+
+**RE-SPEC — the captivity ceiling (rev 62; see `## Captivity — The Room`).** The clause above reserved the
+right to go further *"unless re-specced."* This is that re-spec, and it is **scoped to the cell only.**
+Inside `captive_room`, the ceiling lifts to: **restraint and BDSM · gangbang · sustained non-con (she is
+taken, not seduced) · her body used until the machine inside it breaks.** Nothing is softened, nothing is
+cut away from, no scene fades. The chunk exists to be the game's hardest stretch.
+
+Two lines the re-spec does **not** cross, because they'd break the fiction rather than the taste:
+- **The damage is to the machine, not the meat.** Her *core* fails — overloaded, cooked. This is not gore,
+  mutilation, or permanent bodily injury; she walks out whole and broken in the way a machine breaks. The
+  horror is the read-out, not the wound.
+- **It stays scoped.** The lifted ceiling applies in the cell and nowhere else. Mercer's, Renner's and the
+  brothel's registers are unchanged. She leaves the room; the room does not leave with her.
+
+*Everything outside the cell keeps the original floor.*
 
 **The control-canvas (the drain) — voice carriage (Rule 4).** The extraction is **played as a Q&A exchange in
 HIS own dialog** — his answers under her command, his voice breaking — **not narrated summary** ("she drains
@@ -1430,5 +1535,197 @@ cradle and comes back. Two deliberate exceptions: **travel never blocks** (it on
 ride back to the Spire is the *only* way to the cradle and blocking it would strand her; and the cradle
 restores **cap at 100** (no overshoot). Earlier these all ran as ungated effects, so Charge could slide
 below 0 (the HUD card silently vanished) or past 100 — both fixed by routing spends through `costs`/clamp.
+
+---
+
+## Captivity — The Room (Act 2 · Bastien's arc, part 1) — added during authoring
+
+> **What this is.** The chunk where the mopoga review's cure finally lands. That review said *"gameplay
+> boiled down to resource grinding rather than focusing on the adult content."* The Underworld Hunt fixed
+> the **roster** (the game had run out of people). This chunk fixes the **ratio**: it is the densest erotic
+> stretch in the game and it contains **zero grind.**
+>
+> Full engine record + the verified findings: `games/vesper/design_captivity_the_room.md`. This section is
+> the intent. Book revision 62.
+
+### Why it exists
+
+It is the third *distinct* conquest verb, and that's the point:
+
+| NPC | Verb |
+|---|---|
+| Renner | seduce-in |
+| Marsh | scheme-and-serve |
+| **Bastien** | **she is taken** |
+
+Three identical infiltrations would be exactly the repetition we're trying to kill.
+
+### The three tests any beat here must survive
+
+1. **Is the player getting a scene, or filling a bar?** A meter that rises by *repeating* scenes is a grind
+   bar with porn on it — it would re-ship the review inside the chunk built to cure it.
+2. **Does the room have a verb?** A protagonist with no agency, given no input for three days, is a
+   cutscene with a timer.
+3. **Does she leave changed?** *"And then something happened"* is not an ending.
+
+### The beat chain (locked)
+
+1. **The grab is rewritten.** Today's capstone ends *"She wakes on the waterfront at dawn, sore and whole
+   and released."* That release was wrongly authored and is **deleted.** Bastien takes her and she **stays
+   taken.**
+2. **She is ported into a sealed room.** No walk, no approach. She wakes there.
+3. **She is disarmed.** Bastien strips the drain. This is the injury, not a detail.
+4. **Three days of use**, escalating, Bastien present throughout.
+5. **The break.** Mid-scene, her body stops answering.
+6. **Cain.** He arrives furious, argues with Bastien behind a door, and **we never show the argument.**
+   He frees her.
+7. **She leaves broken.** Her gear returns; the fault does not. ← *the chunk ends here.*
+
+Why Cain did it, the repair of her core, and Bastien's alignment with Cain are **all later chunks.**
+
+### The room
+
+One location she cannot leave, plus **The Door** — a locked card reading *the door does not open for her*.
+The door never opens. Cain walks her out; she does not walk herself out. It exists to be looked at.
+
+**Two verbs, and only two:**
+
+- **Sleep.** Advances the day, restores Charge. It also carries a **guaranteed scripted night use**, so the
+  ladder always climbs. Sleep cannot be used to outrun the chunk.
+- **Attend** (~30 min). *Listen at the door. Watch the man on the chair. Hold still and feel the fault.*
+  This is the **chance-rolled** action: sometimes nothing, sometimes someone comes in.
+
+That pairing is the room's whole thesis:
+
+> **The only way to learn anything is to make yourself available.**
+
+The player who fills her days sees more and breaks faster. The player who hides in the bed sees less and
+breaks anyway. Both roads lead to Cain. Nobody is punished — the choice is *how much you look at it.*
+
+**What the room does not have:** no coin, no fighting, no travel, no shop, no NPC schedule, no
+Charge-throttled repeatable actions. *If the player can spam an action in that room, it is the wrong action.*
+
+### The physics — overload, not depletion
+
+Vesper's established fiction: **sex is what charges her.** The drain fires on an anal finish — a man
+finishing in her ass is how she *takes* something. She is a machine that eats sex.
+
+A gangbang therefore does not drain her. **It force-feeds her.** Bastien has taken the drain, so everything
+they pump into her has nowhere to go, and the core cooks.
+
+This is why *this* breaks her when a hundred men at The House did not: **the weapon is gone.** Being
+disarmed is the injury. The rape is the pressure. It is the drain, inverted — which rhymes with the
+capture-instead-of-seduce inversion at the chunk level.
+
+Each use also costs Charge. The bed restores Charge and **cannot touch the fault.** Two numbers moving
+opposite ways; the bed fixes exactly one. *Overloaded in the core, exhausted in the body.*
+
+### The meter she can watch but never spend against
+
+`core_strain` is **visible** — a banded sidebar row, like Charge and Condition. Hidden meters work when the
+player has agency to spend against them. She has none. What she has is a dial she can watch go wrong, and
+that dial is the horror of the room.
+
+| Band | Sidebar | The shelf |
+|---|---|---|
+| 1–24 | `Core: Nominal` | Bastien alone. Ownership established. |
+| 25–48 | `Core: Hot` | He conducts; the crew uses her; he watches. |
+| 49–72 | `Core: Faulting` | She is being *operated*, not fucked. |
+| 73+ | `Core: Failing` | The machine is coming apart. |
+| ≥ 96 | — | **The break** fires. |
+
+The row is **invisible for the entire game before captivity**, appears the instant she is first used, and
+would vanish again if the fault were ever cured. Random rolls pick *which* scene; the band picks *which
+shelf it may pick from* — so escalation stays monotonic no matter how the dice fall.
+
+**Eight uses across three days, +12 strain each.** Two distinct scenes per band. **Nothing repeats** — that
+is test 1, enforced by arithmetic.
+
+### The scenes
+
+**Budget: eight distinct scenes.** This is the real cost of the chunk and it is the correct cost. *If it is
+three scenes rolled ten times, we have rebuilt the Renner rungs.*
+
+**Bastien is present all three days** — LO's call, and it makes him carry the chunk instead of vanishing
+from his own arc. A distinct role per shelf, or he is wallpaper:
+
+- **Nominal** — he uses her himself. Ownership, established.
+- **Hot** — he conducts. He hands her to the crew and watches. His voice stays in the room.
+- **Faulting** — **he sees the machine failing, and does not stop.**
+
+That last line is load-bearing. It is the reason Cain is angry: **Bastien broke something Cain wanted
+intact.** Bastien's alignment with Cain stays off the page (the saved reveal) — but his *choice to keep
+going* is what makes the next chunk's bombshell land.
+
+**The crew are faceless** (LO's call). No names, no records. The room has exactly one face in it —
+Bastien's — and every other body is meat. This is a stronger read than "which one flinches," and it means
+`attend` pays off in the three things that *do* have edges: **the man on the chair**, **the door**, and
+**her own fault.**
+
+### Cain, and the argument we do not show
+
+He arrives in the Failing band, after the break. He is furious and **cannot** explain himself — not won't,
+*can't* — in a way she registers and does not understand.
+
+The argument happens behind a door and is never dramatised. But *not showing it* and *not rendering her
+failing to hear it* are different things. It is written as **her failing perception**: two men on the other
+side of a wall, and she is too cooked to hold the thread. She catches perhaps **four words.** One of them
+is a name, or a word that should not fit.
+
+That is free suspense, and it is the once-only place the prose may spend.
+
+Then he frees her. He does not say why. **The chunk ends.**
+
+He is never a speaker on the page — no record, no portrait, no dialogue. Cain is a shape behind a door and
+four words she cannot hold onto.
+
+### What she carries out
+
+**Her gear comes back.** Bastien stripped the drain to disarm her *in the room*; she leaves with it. Correct
+fiction — **the body is damaged, not the equipment** — and a hard engineering requirement besides.
+
+**The fault does not heal.** `core_strain` freezes where it stopped. The Cradle takes her Charge back to
+full and **cannot settle the fault** — that's prose, not a number.
+
+**No mechanical teeth this release.** A permanent debuff with no cure, in a shipped sandbox, is a nerf the
+player can never answer. The damage is a **promise**, and the `Core: Failing` row sitting in the sidebar on
+every screen is that promise, visible, until the next update pays it. The repair chunk then opens on exactly
+this hook instead of starting cold.
+
+**And four words she cannot hold onto.**
+
+She walks out onto the waterfront and back into the same sandbox — Mercer, Renner, the Sunday brothel — with
+a broken machine and no way to fix it. The last thing the player has to do is *go back to work*. Whether
+that reads as bleak-and-correct or as anticlimax rests entirely on the end card. **Spend the prose there.**
+
+### Register
+
+- **The room's ambients, the two verbs, the eight shelf scenes** → **RTS-flat.** Terse, specific, crude,
+  re-readable. Real anatomical language. No environmental sensory ritual. *Specificity, not literary density.*
+- **Glitch III, the break, the argument behind the door, the release, the end card** → **Tier-3, earned.**
+  These are once-only. The prose may spend.
+
+Bastien speaks in his own voice throughout (see the ceiling above). The crew speak too — the hot beats are
+**played, not summarized** — but as quoted lines inside the narration, never as named speakers.
+
+### Engine realities that shaped the design (bounced up from the build, not patched into TOML)
+
+- **The sealed room needs no engine work.** A location with no way in and one trait-gated child seals
+  correctly. Proven by probe build and live browser.
+- **One engine change, one line.** SugarCube's undo button (`←`) is the *only* hatch a sealed room cannot
+  close from TOML. It gets disabled.
+- **The `Core: Failing` row must not close its top band**, or it vanishes at exactly the moment the design
+  promises it becomes permanent. The band runs `73+` with no upper bound.
+- **The Quests page must be re-gated.** Today's end-of-content card fires on the same flag the grab sets on
+  the way *into* the cell — so without a fix the page tells the player the game is over while they are
+  inside the newest content in it.
+- **Interruption pacing has one dial, not two** (a per-day cap). The visit-cooldown is fixed in the engine.
+
+### Deferred (not this chunk)
+
+Why Cain freed her · **repairing the core** (the repair chunk inherits `Core: Failing` as its on-ramp — and
+when it is built: *two or three repair sessions, each a scene, not a bar*; the chunk that cures the grind
+must not exit into one) · Bastien's alignment with Cain (the saved bombshell) · Calloway, The Site, the chip
+ending.
 
 ---

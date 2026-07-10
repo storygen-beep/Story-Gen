@@ -114,6 +114,31 @@ bands = [
   { min = 75, max = 100, text = "Condition: Clean",  icon = "✨" },
 ]
 
+# ─── Core strain (captivity) — the overload read-out. beat_0035. ──────────────
+# Sex CHARGES her; in the cell Bastien has stripped the drain, so the input has nowhere to go and the
+# core cooks. She has NO agency to spend against this meter — what she has is a dial she can watch go
+# wrong, and that dial is the horror of the room. So it is VISIBLE, not hidden.
+#
+# TWO band rules, both load-bearing (v2.py:15500-15520):
+#   1. Bands start at min=1. The renderer emits NOTHING when no band matches, so at core_strain=0 the row
+#      is ABSENT — invisible for the entire game before captivity, appearing the instant she is first used
+#      (and it would vanish again if the fault were ever cured). Zero engine work.
+#   2. The TOP band carries NO `max`. An unset max defaults to 1e9 (v2.py:15508), so the frozen end-state
+#      (96) still matches. A closed 72-95 band would make "Core: Failing" VANISH at exactly the moment the
+#      design promises it becomes permanent — the row IS the promise the repair chunk pays.
+#
+# Edges are set so each band names the shelf that comes NEXT (+12 per use): at "Core: Nominal" (12) the
+# next scene is still Nominal; at "Core: Hot" (24) the crew comes in. The read-out is a countdown.
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "core_strain"
+bands = [
+  { min = 1,  max = 23, text = "Core: Nominal",  icon = "○" },
+  { min = 24, max = 47, text = "Core: Hot",      icon = "◔" },
+  { min = 48, max = 71, text = "Core: Faulting", icon = "◑" },
+  { min = 72,           text = "Core: Failing",  icon = "◕" },   # NO max — survives the frozen 96
+]
+
 # ─── NPC panel — REMOVED per LO (2026-07-01) ──────────────────────────────────
 # The Renner sidebar npc_panel (corruption / location / quest-goal rows) was removed — early
 # game it read as uninformative clutter ("Corruption 0 / Location Away"). Renner's seduction
@@ -187,4 +212,15 @@ hidden = true
 # Underworld Hunt gate marker — internal. Set=1 at the drain (both branches); gates the hunt. Never player-facing.
 [[traits.labels]]
 key    = "names_known"
+hidden = true
+# CAPTIVITY (beat_0035). Both hidden from the <<playerTraits>> dump. `hidden` is consulted ONLY by the
+# dump widgets (v2.py:14870/14896/14917) — the trait_status_text renderer reads $player.core_traits
+# directly and never checks it, so core_strain still draws its sidebar row. Verified, not assumed.
+# core_strain: the overload meter — the player reads it as the banded row above, never as a raw number.
+[[traits.labels]]
+key    = "core_strain"
+hidden = true
+# cell_door: the sealed door's gate. Never set by anything. Pure internal machinery.
+[[traits.labels]]
+key    = "cell_door"
 hidden = true

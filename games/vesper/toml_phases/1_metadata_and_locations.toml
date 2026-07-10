@@ -68,6 +68,16 @@ drains_done       = 0
 # (the Sol lead reads names_known>=1). A TRAIT not a flag: the drain setter (loop_renner_finisher) is
 # triggerless, so a triggerless is_true FLAG would hard-fail the flag-chain validator; a gte trait is exempt.
 names_known       = 0
+# CAPTIVITY — the overload meter (beat_0035). Sex CHARGES her; Bastien strips the drain, so the input has
+# nowhere to go and the core cooks. +12 per use (clamp=true bounds it 0-100), 8 uses -> 96 -> the break,
+# where it FREEZES. Hidden from the traits dump; surfaced ONLY as the banded sidebar row (0_systems_spec).
+# The bands select which shelf of use-scenes may fire, so escalation stays monotonic however the dice fall.
+core_strain       = 0
+# CAPTIVITY — the sealed door's gate (beat_0035). NOTHING EVER SETS THIS. captive_door's entry_conditions
+# require `cell_door gte 1`, so the door is permanently locked: it exists to be looked at, and to keep the
+# room's nav non-empty (an empty nav makes the generator render the WHOLE MAP as clickable cards).
+# A TRAIT not a flag — a flag `is_true` gate demands a located setter or the flag-chain validator hard-fails.
+cell_door         = 0
 
 # ─── NPCs ─────────────────────────────────────────────────────────────────────
 
@@ -462,3 +472,62 @@ entry_conditions = { version = "1.0", items = [
   { type = "flag", subject = "player", flag_key = "crew_known", operator = "is_true" },
 ] }
 blocked_message = "There's a crew that holed up down past the market — but she doesn't have the address yet. Marsh has it."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CAPTIVITY — the sealed room (beat_0036). Bastien's cell.
+#
+# She is PORTED here (the rewritten grab, beat_0037) and ported out (Cain's release, beat_0042).
+# She never walks in and never walks out. Two locations enforce that between them:
+#
+#   captive_room  — NO entry_from, NO parent. A fourth ROOT. Vesper's other three roots
+#                   (spire_plaza / the_waterfront / underworld_strip) never list each other —
+#                   they're bridged by the travel activities — and _ordered_navigation lists
+#                   children BY entry_from. So nothing points here: it appears in no nav, anywhere.
+#                   No entry_from also means NO "Leave The Room" link (v2.py:18570 emits that raw,
+#                   UNGATED exit link only `if location.entry_from`).
+#
+#   captive_door  — the child that makes the seal hold. Its ONLY job is to keep the room's nav
+#                   NON-EMPTY: when nav comes out empty, _generate_hierarchical_navigation
+#                   (v2.py:18606) FAILS OPEN and renders EVERY location as a clickable card.
+#                   The door is permanently locked, so the room has exactly one destination and
+#                   it can never be taken.
+#
+# ⚠️ THREE TRAPS, all of which build GREEN:
+#   1. NEVER give captive_door a `parent` — _ordered_navigation (v2.py:11651) excludes children
+#      whose parent_location == the location, the nav empties, and the whole-map fallback unseals
+#      the room. Attach it with entry_from ONLY.
+#   2. The gate is a TRAIT (cell_door), not a flag. A flag `is_true` gate requires a LOCATED setter
+#      or the flag-chain validator hard-fails — and nothing may ever set this one.
+#   3. version = "1.0" or triggerConditionsSatisfied returns TRUE for the whole block (v2.py:3658)
+#      and the door stands open.
+#
+# Both carry an `image`: with no image on any destination the nav drops to TEXT mode and prints the
+# header "Available destinations:" above a locked door (v2.py:18560-18564) — a lie in a sealed room.
+# With one, it renders a single greyed, non-clickable card with the blocked_message inline. The door
+# exists to be looked at.
+#
+# STILL OPEN: SugarCube's undo arrow (#history-backward) walks her straight out. See beat_0045 —
+# LO parked the scoping call. The room is NOT sealed until that lands.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+[[locations]]
+id          = "captive_room"
+name        = "The Room"
+description = "Concrete, painted once, a long time ago. A bed bolted to the floor and a chair that isn't. A table with nothing on it. A drain in the middle of the floor, because whoever built this expected to hose it out. The light stays on. There is a door."
+image       = "locations/captive_room.jpg"
+image_search_queries = ["bare concrete basement room single bed harsh light", "windowless holding cell mattress drain floor"]
+
+# The Door. cell_door is declared 0 (beat_0035) and NOTHING SETS IT — the gate can never pass.
+# A deliberate exception to the locked-location unlock contract: there is no unlock beat, by design.
+# Cain walks her out; she does not walk herself out.
+[[locations]]
+id          = "captive_door"
+name        = "The Door"
+description = "Steel, and newer than the room. It opens when they want it to."
+image       = "locations/captive_door.jpg"
+image_search_queries = ["heavy steel door dim concrete corridor", "riveted metal cell door locked interior"]
+entry_from  = "captive_room"
+entry_conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "cell_door", operator = "gte", value = 1 },
+] }
+blocked_message = "The door does not open for her."

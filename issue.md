@@ -29,6 +29,6 @@ One more thing wrong going here, there is no sex loop with this guy, drain can o
 Underworld available from the renner's depot is a bit wierd, what do you think?? Answer honestly, dont make any code changes yet.
 
 
-bast
+Underworld man at the door, turn back, takes player to the renners place not the actual place that canvas was in.
 
 

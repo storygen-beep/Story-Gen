@@ -58,3 +58,97 @@ flagEffects = [
   { targetType = "player", flag = "renner_drained",         op = "set" },
   { targetType = "player", flag = "renner_leads_extracted", op = "set" },
 ]
+
+# ─── ▶ Bastien grab — seeds the whole hunt chain and lands on the kidnap capstone ───
+# beat_0044 (per design_captivity_the_room.md §16.2). hunt_the_grab.base now ports into the cell
+# (beat_0037). Seeds equipped_weapon=1 so Bastien has something to strip. Stops SHORT of
+# bastien_revealed — the capstone sets that itself.
+[[canvases]]
+id          = "dev_jump_bastien_grab"
+name        = "▶ Bastien grab"
+description = "DEV JUMP. Seeds the full Underworld Hunt chain and jumps to the kidnap capstone (hunt_the_grab.base), which ports her into the cell. Gated dev_mode_enabled; inert in shipped builds."
+
+[canvases.trigger]
+location      = "crew_den"          # anchor only — the sidebar link bypasses the trigger
+is_repeatable = true                # never auto-fires (selectAutoFireCanvasForLocation skips repeatable)
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "dev_mode_enabled", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "seed"
+name = "Bastien grab (dev)"
+blocks = [
+  { type = "paragraph", content = "Dev jump: seeding the hunt chain and dropping into the grab." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Jump to the grab"
+targetType = "node"
+nodeId     = "hunt_the_grab.base"
+effects = [
+  { targetType = "player", trait = "equipped_weapon", op = "set", value = 1 },
+  { targetType = "player", trait = "drain_charge",     op = "set", value = 1 },
+  { targetType = "player", trait = "drains_done",      op = "set", value = 1 },
+  { targetType = "player", trait = "names_known",      op = "set", value = 1 },
+  { targetType = "npc", npcId = "npc_renner", trait = "corruption", op = "set", value = 60 },
+]
+flagEffects = [
+  { targetType = "player", flag = "opening_done",           op = "set" },
+  { targetType = "player", flag = "renner_fucked_once",     op = "set" },
+  { targetType = "player", flag = "renner_anal_once",       op = "set" },
+  { targetType = "player", flag = "renner_drained",         op = "set" },
+  { targetType = "player", flag = "renner_leads_extracted", op = "set" },
+  { targetType = "player", flag = "hunt_lead",              op = "set" },
+  { targetType = "player", flag = "brothel_hired",          op = "set" },
+  { targetType = "player", flag = "crew_known",             op = "set" },
+  { targetType = "player", flag = "bastien_found",          op = "set" },
+]
+
+# ─── ▶ Captivity: the break — lands INSIDE the cell one use short of the threshold ───
+# beat_0044 (per §16.3). Seeds everything Jump A does, plus bastien_revealed + captivity_entered +
+# disarmed (equipped_weapon=0) + core_strain=95 + low energy. Exits to captive_room so the cell renders
+# normally. From 95, one 'Lie down' (the guaranteed +12 night use) tips it to 100 -> the break auto-fires
+# -> Cain follows. (First render will show captivity_intro once; dismiss it.)
+[[canvases]]
+id          = "dev_jump_captivity_break"
+name        = "▶ Captivity: the break"
+description = "DEV JUMP. Drops into the sealed cell at core_strain=95, disarmed, one use short of the break — so one Lie-down tips it to the break + Cain. Gated dev_mode_enabled; inert in shipped builds."
+
+[canvases.trigger]
+location      = "captive_room"      # anchor + the real destination
+is_repeatable = true
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "dev_mode_enabled", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "seed"
+name = "Captivity break (dev)"
+blocks = [
+  { type = "paragraph", content = "Dev jump: seeding a near-broken captivity state and dropping into the cell. Lie down once to tip the break." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Into the cell."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "captive_room"
+effects = [
+  { targetType = "player", trait = "equipped_weapon", op = "set", value = 0 },
+  { targetType = "player", trait = "core_strain",     op = "set", value = 95 },
+  { targetType = "player", trait = "energy",          op = "set", value = 30 },
+  { targetType = "player", trait = "names_known",     op = "set", value = 1 },
+]
+flagEffects = [
+  { targetType = "player", flag = "opening_done",      op = "set" },
+  { targetType = "player", flag = "renner_drained",    op = "set" },
+  { targetType = "player", flag = "hunt_lead",         op = "set" },
+  { targetType = "player", flag = "crew_known",        op = "set" },
+  { targetType = "player", flag = "bastien_found",     op = "set" },
+  { targetType = "player", flag = "bastien_revealed",  op = "set" },
+  { targetType = "player", flag = "captivity_entered", op = "set" },
+]

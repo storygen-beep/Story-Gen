@@ -2348,16 +2348,24 @@ when = [
   { flag = "bastien_found", op = "is_false" },
 ]
 
-# ═══ beat_0034 — THE GRAB (kidnap capstone — CHUNK END) ════════════════════════
+# ═══ beat_0034 — THE GRAB (kidnap capstone) ════════════════════════════════════
+# REWRITTEN at beat_0037. It used to end "She wakes on the waterfront at dawn, sore and whole and
+# released" and dump her at the_waterfront. That release was wrongly authored: Bastien takes her and
+# she STAYS TAKEN. The tail now goes dark and the single exit PORTS her into captive_room.
+#
+# SAVE-SAFETY: the canvas keeps its `id` and keeps SETTING bastien_revealed. Only the tail prose and the
+# exit target changed — so a returning player's save still reads the same flag. What it CANNOT do is
+# carry them into the chunk: every shipped player already holds bastien_revealed and is standing on the
+# waterfront, so `captivity_recovery` below is their door in. Two doors, one room.
+#
 # BARE auto-fire at crew_den (priority 9, is_repeatable=false, NO npc=/requires_npc — an npc= one-shot
-# renders nowhere). Also reached DIRECTLY from the search's find. Gated bastien_found. His people take
-# her; face-to-face with Bastien (he knows she's Mercer's via his CONNECTIONS, NOT Cain; the Cain
-# alliance stays OFF — a saved reveal). SETS bastien_revealed. Single exit -> the_waterfront (dumped,
-# released). Ends on his question hanging. NO fail-state (scripted plot beat).
+# renders nowhere). Also reached DIRECTLY from the search's find. Gated bastien_found. Face-to-face with
+# Bastien (he knows she's Mercer's via his CONNECTIONS, NOT Cain; the Cain alliance stays OFF — a saved
+# reveal). NO fail-state (scripted plot beat).
 [[canvases]]
 id          = "hunt_the_grab"
 name        = "The grab"
-description = "Kidnap capstone. Auto-fire at crew_den on bastien_found (+ reached directly from the search). Bare, single-exit. Face-to-face with Bastien -> SETS bastien_revealed -> dumped at the_waterfront, chunk ends. Cain-alliance stays OFF (saved reveal)."
+description = "Kidnap capstone. Auto-fire at crew_den on bastien_found (+ reached directly from the search). Bare, single-exit. Face-to-face with Bastien -> SETS bastien_revealed + captivity_entered, strips the drain (equipped_weapon=0), resets the shared sex-loop traits -> PORTS her into captive_room. Cain-alliance stays OFF (saved reveal)."
 [canvases.trigger]
 location      = "crew_den"
 is_repeatable = false
@@ -2378,24 +2386,662 @@ blocks = [
   { type = "paragraph", content = "He leans in, unhurried, and doesn't threaten her — doesn't reach for anything. He looks at her the way you'd look at the first genuinely interesting thing to cross your desk in years." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "What interests me is that when my man watched you leave The House, he swore the girl who walked out wasn't quite a girl. And my people are very rarely wrong about the things that unsettle them. So before I decide what you're worth — to me, and to the people I answer to, who'd pay a great deal for the honest answer — I'll ask you plainly. What are you, really?" },
   { type = "paragraph", content = "The question hangs. She has covers for men who want her body and men who want her obedience, and none at all for a man who wants the one thing under the chip she can't reach herself. Somewhere below the amputation, something turns over at being seen. She doesn't answer. He reads the not-answering, nods as though it told him plenty, and lifts two fingers — and the bag comes down again." },
-  { type = "paragraph", content = "She wakes on the waterfront at dawn, sore and whole and released, the ledger gone from under her arm. He has her name, her face, and a question she can't answer; she has his. Bastien. The hunt has a person at the end of it now — and the person has her." },
+  { type = "paragraph", content = "Hands under her arms. A stair, and then further down than a stair should go. The salt smell of the docks thins out and stops. Somewhere in the dark someone finds the seam at the base of her spine, working it the way a man works a jar lid, patient, until it gives — and the weight of the drain comes off her and does not come back. She goes under before she can count the turns." },
 ]
+# The exit PORTS her into the cell. equipped_weapon=0 is the disarm — the injury, not a detail: the drain
+# fires on an anal finish, so being disarmed is what turns a gangbang from a meal into an overload.
+# ⚠️ equipped_weapon=0 is an unrecoverable dead state (the swap activity gates both choices on eq 1 / eq 2,
+# 3_activities.toml) — the Cain release (beat_0042) MUST restore it to 1.
+# The 5 shared sex-loop traits reset here or captivity state bleeds into Marsh's Sunday.
 [canvases.nodes.exit_block]
 type = "choices"
 [[canvases.nodes.exit_block.choices]]
-text       = "Get up off the dock."
+text       = "Go under."
 targetType = "location"
-locationId = "the_waterfront"
+locationId = "captive_room"
 flagEffects = [
-  { targetType = "player", flag = "bastien_revealed", op = "set" },
+  { targetType = "player", flag = "bastien_revealed",  op = "set" },
+  { targetType = "player", flag = "captivity_entered", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "equipped_weapon",   op = "set", value = 0 },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0 },
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0 },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0 },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0 },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0 },
 ]
 
-# ── Hunt END card (Story-Goals, priority 9) — the chunk's end-of-content. Shows once Bastien's
-# revealed; his arc (captivity/flip/the Cain reveal) is a later update. Retires rung 3 via bastien_found.
+# ── Hunt END card (Story-Goals, priority 9) — the OLD end-of-content, shown in the WINDOW between the
+# grab revealing Bastien and captivity starting. beat_0043 upper-gated it with `captivity_entered is_false`:
+# the grab now sets bastien_revealed on the way INTO the cell, so without this gate the tip "you've reached
+# the end of the current build" would fire DURING captivity — telling the player the game is over while
+# they stand in the newest content in it. For a NEW player bastien_revealed + captivity_entered are set in
+# the same exit, so this never shows for them; it survives only for the SHIPPED cohort, between loading
+# their old save and stepping onto the waterfront where the recovery pulls them in. Retires permanently
+# once captivity_entered is set (never unset). The tip is de-dev-speaked (no "current build").
 [[quest_cards]]
 priority   = 9
 text       = "There's a name at the end of the trail now — Bastien, the man the underworld answers to — and he has yours. He let you walk, this once, with a question you couldn't answer. Whatever comes next comes from him."
-tip        = "You've reached the end of the current build. Bastien's story — and what he wants from you — is coming in a future update."
+tip        = "Bastien knows your face and your file now. Whatever he wants, it comes to find you — you won't have to go looking."
 when = [
-  { flag = "bastien_revealed", op = "is_true" },
+  { flag = "bastien_revealed",  op = "is_true"  },
+  { flag = "captivity_entered", op = "is_false" },
+]
+
+# ── Captivity card (Story-Goals, priority 10) — live WHILE she is held (captivity_entered is_true +
+# captivity_done is_false). She has no agency here and no goal to pursue, so this is a STATUS card, not a
+# goal: text + tip, NO `goals` and NO `ready_canvas` (a story-goal card renders its text unconditionally,
+# v2.py:14451; the goal block is optional, so no blank-row). It replaces the hunt END card during the
+# cell (that card is now gated off), so exactly one of the two shows at any time. Honest, not a walkthrough:
+# the tip names the two verbs without pretending either is a way out.
+[[quest_cards]]
+priority   = 10
+text       = "You are somewhere under the Reach, in a room with a drain in the floor and a door that does not open for you. Bastien is unhurried and Bastien is patient and Bastien wants to know what you are, and he has decided to find out by running you until you come apart. There is no plan in here. There is only the machine, keeping count."
+tip        = "Nothing you do in the cell is escape. Lie down to weather it, or pay attention to what's on the other side of the wall — either way the core climbs, and either way it ends the same. Someone else decides when."
+when = [
+  { flag = "captivity_entered", op = "is_true"  },
+  { flag = "captivity_done",    op = "is_false" },
+]
+
+# ── Frontier card (Story-Goals, priority 10) — after the release (captivity_done is_true). The NEW
+# end-of-content. Narrates the current peak HONESTLY (the frozen fault) and telegraphs the deferred repair
+# as a locked-visible seed — never blank, never dev-speak (per beat-authoring.md frontier + quests.md).
+[[quest_cards]]
+priority   = 10
+text       = "You walked out of the Reach on a machine that will not run right again. The core sits faulted where it stopped — you can read it in the sidebar, Failing, and it does not move. You still don't know who came through that door, or why a stranger would tear a place apart to pull you out of it. You went back to work. There was nothing else to do."
+tip        = "The fault won't heal on its own — there's no fixing it yet. Finding a way to mend the core, and finding out who freed you, both wait for a later chapter. For now: back to Mercer, back to the depot, back to the Sunday work, carrying it."
+when = [
+  { flag = "captivity_done", op = "is_true" },
+]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CAPTIVITY — entry (beat_0037). TWO DOORS, ONE ROOM.
+#
+# Door 1 = the rewritten grab (above). New players walk the hunt and get taken.
+#
+# Door 2 = captivity_recovery, below. MANDATORY, not polish: every player of the SHIPPED build already
+# holds bastien_revealed and is standing on the waterfront, because the old grab released them there.
+# Repointing the grab's exit does nothing for them — its trigger is `bastien_revealed is_false`, so it
+# can never fire again. Without this canvas the entire chunk is unreachable for the existing cohort.
+#
+# It cannot double-fire: is_repeatable=false, and captivity_entered guards it (set on the way in, and
+# still true after the release).
+# ═══════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "captivity_recovery"
+name        = "They came back for her"
+description = "beat_0037. The RETURNING-PLAYER door into captivity. Bare one-shot auto-fire at the_waterfront, gated bastien_revealed is_true + captivity_entered is_false — i.e. exactly the shipped cohort the old grab dumped on the dock. Same payload as the grab's exit: SETS captivity_entered, strips the drain (equipped_weapon=0), resets the 5 shared sex-loop traits, PORTS her into captive_room. New players never see it."
+
+[canvases.trigger]
+location      = "the_waterfront"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "bastien_revealed",  operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "captivity_entered", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "They came back for her"
+blocks = [
+  { type = "image", props = { file = "scenes/captivity_taken.jpg", description = "A dark van idling on a wet dock at night, two men waiting beside the open side door.", search_queries = ["black van idling wet dock night", "men waiting beside open van door dark alley"] } },
+  { type = "paragraph", content = "It's the newspaper she notices, half a street back — folded the same way, held by the same patient man who stepped aside to let them carry her past. He doesn't hurry. He doesn't need to. The van is already at the kerb behind her and the dock is long and there is nowhere on it to go that isn't further out." },
+  { type = "paragraph", content = "This time nobody bothers with the bag until she's inside. A hand finds the seam at the base of her spine and works it, patient, the way a man works a jar lid, until it gives. The weight of the drain comes off her. Somebody says something about the boss wanting a proper look this time, and somebody else laughs, and then the bag." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Go under."
+targetType = "location"
+locationId = "captive_room"
+flagEffects = [
+  { targetType = "player", flag = "captivity_entered", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "equipped_weapon",   op = "set", value = 0 },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0 },
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0 },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0 },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0 },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0 },
+]
+
+# ── The cell, first sight (beat_0037). Bare one-shot auto-fire at captive_room. ─────────────────────
+# Priority 9. The break (beat_0041) will sit at priority 10 in the same room: both are non-repeatable,
+# non-random, so selectAutoFireCanvasForLocation takes the highest-priority VALID one. On arrival
+# core_strain=0, so the break's conditions fail and this wins. Afterwards it is retired (one-shot).
+#
+# She is alone: no NPC is here to speak, so this is the one place narration is right (Rule 4 exempts
+# solo beats). Her interior sits in a SINGLE thought_bubble — the shipped Wren convention. RTS-flat;
+# Tier-3 is not spent here, it is reserved for Glitch III, the break, the argument, the release.
+[[canvases]]
+id          = "captivity_intro"
+name        = "The room"
+description = "beat_0037. Bare one-shot auto-fire at captive_room, gated captivity_entered. She wakes disarmed in the cell. Establishes the geography (bed, chair, table, floor drain, the door), the missing weight at the base of her spine, and the two verbs. Sets nothing."
+
+[canvases.trigger]
+location      = "captive_room"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "captivity_entered", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The room"
+blocks = [
+  { type = "paragraph", content = "She comes up out of it slowly, which is new. There is a ceiling, painted a long time ago, and a light in a cage that does not turn off. A bed bolted to the floor. A chair that isn't. A table with nothing on it. In the middle of the floor there is a drain, because whoever built this room expected to hose it out." },
+  { type = "paragraph", content = "She reaches back and finds the seam at the base of her spine open and empty. It doesn't hurt. That's the part she keeps checking — it doesn't hurt, the way a missing tooth doesn't hurt, and her hand goes back to it three times before she makes it stop." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Charge comes in. Charge has to go somewhere." },
+  { type = "paragraph", content = "There is a door. It is steel and newer than the room, and it has no handle on this side. She sits on the edge of the bed with her hands in her lap and listens to men moving on the other side of it, and she works out, without any particular feeling about it, that she can lie down or she can pay attention, and that those are the two things there are." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sit up."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "captive_room"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CAPTIVITY — the shelf, scenes 1-4 (beat_0039). Nominal x2, Hot x2.
+#
+# MECHANISM (verified, v2.py): trigger_mode="random" + is_repeatable=FALSE is legal and SELF-RETIRING.
+#   • selectAutoFireCanvasForLocation SKIPS triggerMode=="random" (v2.py:4293) -> auto-fire can't hijack them.
+#   • the random path runs isCanvasValid -> canTriggerCanvas, which returns false once total>=1.
+# So each scene fires exactly ONCE and needs NO per-scene "seen" flag. Two one-shots share each band;
+# the Fisher-Yates shuffle (v2.py:5090) reorders the pair between playthroughs.
+#
+# THE LADDER: +12 strain per use. Bands are the same edges the sleep night-use reads:
+#   lt 24 -> Nominal (scenes 1,2)   24-47 -> Hot (3,4)   48-71 -> Faulting (5,6)   72-95 -> Failing (7,8)
+# Strain is only ever a multiple of 12, so each band holds exactly two uses. NOTHING REPEATS.
+#
+# PACING: cooldowns[locKey]=3 is HARDCODED (v2.py:5105) and decremented one per room entry — after any
+# scene fires the next 3 entries roll nothing. random_cooldowns is NOT an author knob. The only lever is
+# chance (0.5 here) + the per-day cap, which one-shots don't need.
+#
+# VOICE: Bastien in `dialog` blocks (his portrait renders). His register is ownership-as-curiosity —
+# maximum crude, spoken FLAT, clinical not hot; he does not degrade her, he OPERATES her. The crew are
+# FACELESS: they speak in quoted lines inside `paragraph` blocks, never as named speakers — a dialog
+# block with speaker="unknown" renders a hardcoded "Stranger:" label (v2.py:14020-14026).
+# Hot beats are PLAYED, never summarized (Rule 4). Her interior: at most one thought_bubble.
+#
+# NO npc=/requires_npc — npc_bastien has no schedule row, and a requires_npc canvas would never fire.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ── SCENE 1 — Nominal. "The inventory." ────────────────────────────────────────────────────────────
+[[canvases]]
+id          = "cell_use_inventory"
+name        = "The inventory"
+description = "beat_0039. Shelf scene 1/8 (Nominal). One-shot random @captive_room, core_strain lt 24. He strips her the way you check a machine in, finds the socket empty because he emptied it, and fucks her on the table while he talks. +12 strain, -10 Charge."
+[canvases.trigger]
+location      = "captive_room"
+trigger_mode  = "random"
+chance        = 0.5
+is_repeatable = false
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "captivity_entered", operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "captivity_broken",  operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt", value = 24 },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "The inventory"
+blocks = [
+  { type = "video", props = { file = "sex/cell_inventory.webm", description = "A woman bent forward over a bare table in a dim concrete room, a fully-dressed man behind her taking his time, one hand flat between her shoulder blades.", search_queries = ["bent over table from behind dim room", "woman bent over table man behind slow"] } },
+  { type = "paragraph", content = "He comes in alone and puts a folding chair by the table and does not sit in it. He takes her clothes off her the way you'd unwrap a delivery, checking as he goes — the seam at her spine, the ports behind her knees, the plate under her sternum that everyone finds eventually. When he gets to the empty socket he stops and puts his thumb in it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "That's what you do it with. My man watched you walk out of The House and swore the girl who came out wasn't the girl who went in, and he was right, and this is where you keep it. It's in a drawer upstairs now. I've had it out on the desk and turned it over and turned it over, and I still don't know what it's for." },
+  { type = "paragraph", content = "Then he bends her over the table and fucks her, unhurried, one hand flat between her shoulder blades to hold her down against nothing, because she isn't fighting. He goes at it the way a man saws a board he intends to use. When he comes in her cunt he doesn't make a sound." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There. Now let's see what that does." },
+  { type = "paragraph", content = "The charge goes into her and stops, and she lies with her cheek on the table feeling it turn over somewhere under the plate, looking for the way out, not finding it." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get up off the table."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "captive_room"
+effects = [
+  { targetType = "player", trait = "core_strain", op = "add", value = 12,  clamp = true },
+  { targetType = "player", trait = "energy",      op = "add", value = -10, clamp = true },
+]
+
+# ── SCENE 2 — Nominal. "Charge test." ──────────────────────────────────────────────────────────────
+[[canvases]]
+id          = "cell_use_charge_test"
+name        = "Charge test"
+description = "beat_0039. Shelf scene 2/8 (Nominal). One-shot random @captive_room, core_strain lt 24. He makes her come to watch the read-out move, and writes the number down. +12 strain, -10 Charge."
+[canvases.trigger]
+location      = "captive_room"
+trigger_mode  = "random"
+chance        = 0.5
+is_repeatable = false
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "captivity_entered", operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "captivity_broken",  operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt", value = 24 },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Charge test"
+blocks = [
+  { type = "video", props = { file = "sex/cell_charge_test.webm", description = "A woman on her back on a bed, a clothed man kneeling beside her working her with his hand, watching her face rather than her body.", search_queries = ["man fingering woman watching her face", "woman on back bed man hand between legs close"] } },
+  { type = "paragraph", content = "This time he brings a notebook. He sits on the edge of the bed with it open on his knee and works her with his hand, and he is good at it, and that is the worst part — he is careful and unhurried and entirely uninterested in her, watching her face the way you'd watch a needle come round." },
+  { type = "paragraph", content = "She comes with her fists in the mattress. The charge in her goes up a step, and behind her sternum the pressure finds the wall it always finds now, and something in her chest makes a sound that is not a heartbeat." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There. Say it did the same thing when you had the socket filled. Say it went somewhere. Where." },
+  { type = "paragraph", content = "She doesn't answer. He writes something down anyway, and turns the page, and puts his hand back." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Again." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let him finish writing."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "captive_room"
+effects = [
+  { targetType = "player", trait = "core_strain", op = "add", value = 12,  clamp = true },
+  { targetType = "player", trait = "energy",      op = "add", value = -10, clamp = true },
+]
+
+# ── SCENE 3 — Hot. "The first three." ──────────────────────────────────────────────────────────────
+[[canvases]]
+id          = "cell_use_first_three"
+name        = "The first three"
+description = "beat_0039. Shelf scene 3/8 (Hot). One-shot random @captive_room, core_strain 24-47. He opens the door, lets three of them in, and sits down. His voice stays in the room; theirs are noise. +12 strain, -12 Charge."
+[canvases.trigger]
+location      = "captive_room"
+trigger_mode  = "random"
+chance        = 0.5
+is_repeatable = false
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "captivity_entered", operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "captivity_broken",  operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "gte", value = 24 },
+  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt",  value = 48 },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "The first three"
+blocks = [
+  { type = "video", props = { file = "sex/cell_first_three.webm", description = "A woman used by several men in a bare room while another man sits apart in a chair, watching, fully dressed.", search_queries = ["gangbang bare room men watching", "woman used by three men one seated watching"] } },
+  { type = "paragraph", content = "He holds the door and three of them come in past him, and then he sits down in the chair and crosses one leg over the other. They look at him first. That is the thing she keeps: they look at him first, every time, before they touch her." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "She doesn't need warming up and she can't be damaged the way you're thinking. Use her. I want to see the reading with three." },
+  { type = "paragraph", content = "After that it is hands. One gets her mouth open with a thumb and she takes his cock because there is no reason not to; one is behind her with his fingers in her cunt and then his cock, and the third stands and waits his turn with his hands on her tits like a man holding a rail. \"Christ,\" one of them says. \"She's warm.\" \"She's supposed to be warm.\" \"No — she's warm.\"" },
+  { type = "paragraph", content = "They fill her mouth and her cunt and one finishes across her back, and each time a man spends himself in her the charge goes up another step and stays there, and by the time the third one is done she can taste hot metal at the back of her throat." },
+  { type = "paragraph", content = "Bastien has not moved. He is looking at the flat of her sternum, where the light under the skin is doing something new." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Three of them and none of it went anywhere." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Wait for them to go."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "captive_room"
+effects = [
+  { targetType = "player", trait = "core_strain", op = "add", value = 12,  clamp = true },
+  { targetType = "player", trait = "energy",      op = "add", value = -12, clamp = true },
+]
+
+# ── SCENE 4 — Hot. "Turns." (the drain, inverted) ──────────────────────────────────────────────────
+[[canvases]]
+id          = "cell_use_turns"
+name        = "Turns"
+description = "beat_0039. Shelf scene 4/8 (Hot). One-shot random @captive_room, core_strain 24-47. A queue, and he times it. Someone finishes in her ass — the thing that used to TAKE something — and it only fills her. +12 strain, -12 Charge."
+[canvases.trigger]
+location      = "captive_room"
+trigger_mode  = "random"
+chance        = 0.5
+is_repeatable = false
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "captivity_entered", operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "captivity_broken",  operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "gte", value = 24 },
+  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt",  value = 48 },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Turns"
+blocks = [
+  { type = "video", props = { file = "sex/cell_turns.webm", description = "A line of men taking turns with a woman bent over a bed in a bare room, one man checking a watch.", search_queries = ["men taking turns queue bare room", "woman bent over bed line of men waiting"] } },
+  { type = "paragraph", content = "There are more of them than there were, and Bastien has a watch out. He runs it like a shift. When one is finished the next one steps up, and nobody talks to her, and the only voice that carries is his, saying now, and saying that's enough, and once saying not there, and being obeyed." },
+  { type = "paragraph", content = "Then one of them puts it in her ass, and everything in her that used to be a hand closes on nothing." },
+  { type = "paragraph", content = "It is the drain. It is exactly the drain: the same lowest way, the same few minutes on the other side of it when a man belongs to her and will answer anything. She feels the shape of it come up out of her out of pure habit — the reach, the open, the take — and there is nothing on the end of her arm. He empties himself into her ass and she gets all of it and none of it goes out, and the charge slams up two steps at once and sits there glowing." },
+  { type = "paragraph", content = "\"That's got her,\" somebody says, backing off, wiping his hand on his thigh. \"Feel that. She's hot enough to cook on.\"" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Yes. Do it again." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Lie still."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "captive_room"
+effects = [
+  { targetType = "player", trait = "core_strain", op = "add", value = 12,  clamp = true },
+  { targetType = "player", trait = "energy",      op = "add", value = -12, clamp = true },
+]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CAPTIVITY — the shelf, scenes 5-8 (beat_0040). Faulting x2, Failing x2.
+#
+# Same mechanism as beat_0039 (one-shot random, self-retiring, band-gated, +12 strain each).
+# Bands: 5-6 = gte 48 lt 72 (Faulting — she is being OPERATED, not fucked)
+#        7-8 = gte 72 lt 96 (Failing — the machine coming apart)
+# Scene 8's exit takes strain to 96, which is the break's gate (beat_0041).
+#
+# CEILING (design_book "RE-SPEC — the captivity ceiling"): the damage is to the MACHINE, not the meat.
+# No gore, no mutilation, no permanent bodily injury. She fails the way a machine fails — a leg that
+# stops answering, a hum with a wrong pitch, heat with nowhere to go. The horror is the READ-OUT.
+#
+# SCENE 8 IS THE MORAL HINGE. It is a sex scene AND the beat that earns Cain's anger: Bastien sees the
+# machine failing, in front of witnesses, and does not stop. Bastien's alignment with Cain stays OFF the
+# page (the saved reveal) — but his CHOICE TO KEEP GOING is what makes the next chunk's bombshell land.
+# A crew member is the one who balks. That is deliberate: it makes his refusal visible by contrast.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ── SCENE 5 — Faulting. "The frame." ───────────────────────────────────────────────────────────────
+[[canvases]]
+id          = "cell_use_frame"
+name        = "The frame"
+description = "beat_0040. Shelf scene 5/8 (Faulting). One-shot random @captive_room, core_strain 48-71. A rig. She isn't held down, she's POSITIONED. Hands adjust her between uses like tuning. +12 strain, -12 Charge."
+[canvases.trigger]
+location      = "captive_room"
+trigger_mode  = "random"
+chance        = 0.5
+is_repeatable = false
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "captivity_entered", operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "captivity_broken",  operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "gte", value = 48 },
+  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt",  value = 72 },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "The frame"
+blocks = [
+  { type = "video", props = { file = "sex/cell_frame.webm", description = "A woman restrained face-down over a padded metal frame in a bare room, a man adjusting the height of it before using her.", search_queries = ["bdsm restrained bent over frame bench", "woman strapped face down bench used"] } },
+  { type = "paragraph", content = "They bring in a frame and bolt it to the floor beside the drain, and after that they stop holding her. She is put over it face-down and strapped at the waist and the thighs, and the straps are not there to stop her fighting, because she has not fought once. The straps are there to hold the angle." },
+  { type = "paragraph", content = "Somebody raises the near end two notches. Somebody else opens her wider with a hand on each knee and looks at Bastien, and Bastien nods, and only then does anybody touch her." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Not like that. Straight in, and hold it when you're done. I want it in her for a full minute after, every time. It goes somewhere and I want to know where." },
+  { type = "paragraph", content = "So they fuck her in a line, in her cunt and her ass by turns, and each of them stays buried in her afterwards while somebody counts, and the pressure behind her sternum goes up a step at every count and never once comes down. Nobody speaks to her. A man's hand adjusts her hip mid-fuck, the way you'd square up a workpiece, and goes back to the man's own thigh." },
+  { type = "paragraph", content = "\"It's getting warm in here,\" one of them says, and he isn't talking about the room." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let them unstrap her."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "captive_room"
+effects = [
+  { targetType = "player", trait = "core_strain", op = "add", value = 12,  clamp = true },
+  { targetType = "player", trait = "energy",      op = "add", value = -12, clamp = true },
+]
+
+# ── SCENE 6 — Faulting. "Overflow." ────────────────────────────────────────────────────────────────
+[[canvases]]
+id          = "cell_use_overflow"
+name        = "Overflow"
+description = "beat_0040. Shelf scene 6/8 (Faulting). One-shot random @captive_room, core_strain 48-71. She comes and it hurts — the heat has nowhere to go. The crew find that funny. Bastien watches the read-out, not her. +12 strain, -14 Charge."
+[canvases.trigger]
+location      = "captive_room"
+trigger_mode  = "random"
+chance        = 0.5
+is_repeatable = false
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "captivity_entered", operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "captivity_broken",  operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "gte", value = 48 },
+  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt",  value = 72 },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Overflow"
+blocks = [
+  { type = "video", props = { file = "sex/cell_overflow.webm", description = "A woman on her back arching hard, coming while two men hold her legs, a third watching from a chair without touching her.", search_queries = ["woman orgasm held down two men", "forced orgasm arching bare room"] } },
+  { type = "paragraph", content = "It has stopped being a thing that happens to her body and started being a thing that happens to her core. When she comes now it goes off behind her sternum like a fault in a line, and the heat that used to go out through the drain runs back up into her chest and sits there with the rest of it." },
+  { type = "paragraph", content = "So she comes, on somebody's cock, with two of them holding her legs open at the knee, and it hurts. Not the way a body hurts. It hurts the way an engine sounds wrong. She makes a noise she has never made, and one of them laughs. \"Listen to that. She's finally into it.\" The others laugh too, because they cannot hear what she can hear." },
+  { type = "paragraph", content = "Bastien can. He has moved his chair. He is not watching her face or her cunt or the man in her; he is watching the plate under her sternum, where the light has stopped being steady, and his own face has nothing in it at all." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Do that again. The noise, not the coming. I want to hear whether it's the same note twice." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get your breath."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "captive_room"
+effects = [
+  { targetType = "player", trait = "core_strain", op = "add", value = 12,  clamp = true },
+  { targetType = "player", trait = "energy",      op = "add", value = -14, clamp = true },
+]
+
+# ── SCENE 7 — Failing. "The stutter." ──────────────────────────────────────────────────────────────
+[[canvases]]
+id          = "cell_use_stutter"
+name        = "The stutter"
+description = "beat_0040. Shelf scene 7/8 (Failing). One-shot random @captive_room, core_strain 72-95. Mid-use her left leg stops answering. Nobody stops. Bastien leans in, interested. +12 strain, -14 Charge."
+[canvases.trigger]
+location      = "captive_room"
+trigger_mode  = "random"
+chance        = 0.5
+is_repeatable = false
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "captivity_entered", operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "captivity_broken",  operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "gte", value = 72 },
+  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt",  value = 96 },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "The stutter"
+blocks = [
+  { type = "video", props = { file = "sex/cell_stutter.webm", description = "A woman being used from behind on a bare mattress, one leg gone slack and dragging, a seated man leaning forward with his elbows on his knees to look closer.", search_queries = ["woman used from behind limp exhausted", "man leaning forward watching closely bare room"] } },
+  { type = "paragraph", content = "Halfway through the second one her left leg stops answering." },
+  { type = "paragraph", content = "It doesn't hurt and it doesn't cramp. It simply is not hers any more — it lies where it was put, and when she tells it to move, the instruction goes out and nothing comes back, the way a call goes out on a dead line. The man in her doesn't notice for a while. When he does he laughs and hooks it up over his arm anyway, because it works better like that." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "That's a whole leg. That's a whole leg, and it just went." },
+  { type = "paragraph", content = "Bastien gets up out of the chair. For the first time in the room he comes close enough that she can see the pores in his skin, and he crouches by the frame and looks at her leg, and then at the plate under her sternum, and then, briefly, at her face — the way a man checks the reading and then checks the gauge." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There. That's the first thing you've done that I didn't ask for." },
+  { type = "paragraph", content = "He goes back to the chair. The man finishes in her and the charge goes up and the hum in her chest changes pitch, and someone else takes his place." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Wait for the leg."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "captive_room"
+effects = [
+  { targetType = "player", trait = "core_strain", op = "add", value = 12,  clamp = true },
+  { targetType = "player", trait = "energy",      op = "add", value = -14, clamp = true },
+]
+
+# ── SCENE 8 — Failing. "He does not stop." (THE MORAL HINGE) ───────────────────────────────────────
+# The crew member balks. Bastien does not. That contrast IS the beat: it makes his choice visible, and
+# it is the reason Cain arrives furious. Nothing here names Cain or hints at the alliance.
+# Her interior stays SILENT — no thought_bubble. The silence is the point.
+[[canvases]]
+id          = "cell_use_he_does_not_stop"
+name        = "He does not stop"
+description = "beat_0040. Shelf scene 8/8 (Failing) — THE MORAL HINGE. One-shot random @captive_room, core_strain 72-95. He sees the machine failing, in front of witnesses, and keeps going. Its exit takes strain to 96 = the break's gate. +12 strain, -14 Charge."
+[canvases.trigger]
+location      = "captive_room"
+trigger_mode  = "random"
+chance        = 0.5
+is_repeatable = false
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key = "captivity_entered", operator = "is_true"  },
+  { type = "flag",  subject = "player", flag_key = "captivity_broken",  operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "gte", value = 72 },
+  { type = "trait", subject = "player", trait_key = "core_strain",      operator = "lt",  value = 96 },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "He does not stop"
+blocks = [
+  { type = "video", props = { file = "sex/cell_he_does_not_stop.webm", description = "A woman limp and shaking on a mattress while a man keeps using her, another standing back with his hands raised, unwilling.", search_queries = ["exhausted woman still being used man hesitating", "man stepping back refusing bare room"] } },
+  { type = "paragraph", content = "The hum is loud enough now that the man on top of her can feel it in his hands. He gets off her halfway through and stands there holding himself, looking down at her chest." },
+  { type = "paragraph", content = "\"Boss. Boss, come and look at this.\" And then, when nobody answers him: \"It's not right. Whatever she is. That's not — boss, that's not it working.\"" },
+  { type = "paragraph", content = "Bastien comes and looks. He takes his time about it, the way he takes his time about everything. The plate under her sternum is not lit any more so much as flickering, and the light of it is coming up through the skin between her ribs where no light has ever been, and her left hand has curled and won't open, and she is looking at the ceiling and breathing like something that has been run too far." },
+  { type = "paragraph", content = "He puts two fingers flat on her sternum and holds them there a moment, the way you'd feel a housing for heat. Then he wipes his hand on his trousers." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "No. That's not it working. Go on anyway." },
+  { type = "paragraph", content = "The man doesn't move. \"We've got what we came for, though. Haven't we.\" Somebody at the back of the room, not wanting an answer. Bastien doesn't raise his voice, because he has never once had to." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "I've learned this much: fucking her charges her, and she has no way to spend it. I don't know what she is, and I have never in my life had a thing in a room I couldn't put a name to. If it comes apart, I'll know what it was made of. Go on." },
+  { type = "paragraph", content = "So they go on. Somebody takes her by the ankles and turns her over, and her legs go where they're put and stay there, gone slack, past answering, and behind her sternum the pressure finds the last of the room it has and fills it." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Hold on."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "captive_room"
+effects = [
+  { targetType = "player", trait = "core_strain", op = "add", value = 12,  clamp = true },
+  { targetType = "player", trait = "energy",      op = "add", value = -14, clamp = true },
+]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CAPTIVITY — the break (beat_0041). The capstone of the overload.
+#
+# Auto-fire @captive_room, priority 10, is_repeatable=false, gated core_strain gte 96 + captivity_broken
+# is_false. At 96 it out-prioritises the (already-retired) intro and pre-empts every random shelf-scene
+# (they gate lt 96). Sets captivity_broken -> which gates OFF both verbs and all 8 use-scenes, so nothing
+# uses her after she breaks. Single Continue (capstone shape — no refuse/accept branch).
+#
+# REGISTER: TIER-3, EARNED. This is one of the chunk's once-only beats; the prose may spend. The flat
+# register the whole cell has held — her interior rationed to a bare thought_bubble — opens HERE, because
+# the thing that opens is the fault itself. Still: the damage is to the MACHINE not the meat (no gore),
+# and NO day count.
+#
+# It ends on her going dark and the door. Cain (beat_0042) is the next auto-fire; until that lands the
+# post-break room is intentionally a held breath.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "captivity_break"
+name        = "The break"
+description = "beat_0041. The overload capstone. Auto-fire @captive_room, priority 10, one-shot, gated core_strain gte 96 + captivity_broken is_false. Her core fails mid-use — machine failure, not injury. SETS captivity_broken (gates off the verbs + all use-scenes). Tier-3. Ends on her going under; Cain follows."
+
+[canvases.trigger]
+location      = "captive_room"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "core_strain",     operator = "gte", value = 96 },
+  { type = "flag",  subject = "player", flag_key  = "captivity_broken", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The break"
+blocks = [
+  { type = "paragraph", content = "It doesn't happen the way she has been bracing for. There is no tearing, nothing gives, no part of her comes off in anyone's hand. What happens is quieter and much worse: the charge fills the last of the room it has, and then it keeps coming, and there is simply nowhere left for it to be." },
+  { type = "paragraph", content = "The man in her feels it before she does — feels the whole housing of her go rigid under him, feels the hum climb past anything a body makes — and he is already scrambling back off the frame when the light goes. Not out. Up. Every seam of her, every port and plate and the long empty line of the socket Bastien stripped, all of it comes up white at once through the skin, so that for a moment she is lit from the inside like a room with the lamp knocked over, and the men are on their feet and against the walls and one of them is saying oh Christ oh Christ and none of it reaches her." },
+  { type = "paragraph", content = "Because inside, where she has spent her whole life being quiet, it has finally gone loud. Every door she was built with is open at once. Everything the company filed away where she couldn't reach it is standing in the light — not memories, she has no memories, only the shape of the places they were cut out of, a hundred hollows all shrieking the same note. She has been a thing that feels nothing but the sex it's used for. She feels this. She feels all of it, for one white unsurvivable second, the entire amputated size of herself, and there is no word in her for what it is except that it is hers and they took it." },
+  { type = "paragraph", content = "Then the safeties she doesn't own throw themselves, the way a station drops its own breakers before the fire, and it all goes black from the top down. The light under her skin dies. The hum falls out of the air. Her held-open eyes lose the ceiling." },
+  { type = "paragraph", content = "The last thing that reaches her, from very far away, is the sound of the door — not the men's door, the far one, the one that has never once opened while she was awake — coming off its hinges." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go dark."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "captive_room"
+flagEffects = [
+  { targetType = "player", flag = "captivity_broken", op = "set" },
+]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CAPTIVITY — Cain, the argument we do not show, and the release (beat_0042).
+#
+# Auto-fire @captive_room, priority 10, one-shot, gated captivity_broken is_true + captivity_done is_false.
+# The break sets captivity_broken and exits to captive_room, so THIS fires on the very next room render —
+# it closes the held-breath dead-end the break opens. captivity_break's own gate is now false (is_false),
+# so no priority clash.
+#
+# THE ARGUMENT IS NEVER DRAMATISED. It is written as HER FAILING PERCEPTION: two voices through a wall,
+# and she is too cooked to hold the thread. FOUR WORDS reach her. It must NOT leak the Cain-Bastien
+# alliance (the saved reveal) and it must NOT tell her who Cain is.
+#
+# ⚠️ THE FOUR WORDS ARE A FLAGGED OPEN FORK (design_captivity_the_room.md §13; design_book §Captivity).
+# This is the REVEAL-SAFE version: one of the four is a NAME that fits her like a socket she didn't know
+# was empty — but the word itself ("Vesper", her buried true name) is kept OFF THE PAGE, so the reveal
+# and its timing stay LO's to make. LO can swap the exact words without touching the mechanism. What is
+# load-bearing and must survive any rewrite: (a) one voice is Bastien's, flat even now; (b) the other she
+# has never heard, furious with GRIEF under it — nobody has ever been angry on her account; (c) a name
+# that lands wrong-and-right; (d) she cannot keep it.
+#
+# THE RELEASE (on the exit): restore equipped_weapon=1 (⚠️ 0 is an unrecoverable dead state — the swap
+# activity gates both choices on eq 1/eq 2, 3_activities:899), reset the 5 shared sex-loop traits, set
+# captivity_done, teleport to the_waterfront. The FAULT does not heal: core_strain stays frozen at 96, so
+# the "Core: Failing" sidebar row rides out of the chunk as the promise the repair chunk pays. Restoring
+# the drain gives the backed-up charge somewhere to go (the acute crisis passes, the leg answers again,
+# slow) but the core is already scarred — that's why the drain back does NOT lower core_strain.
+#
+# Cain is a SHAPE, never a speaker: NO npc_cain, no portrait, no dialog block. Tier-3, earned.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+[[canvases]]
+id          = "captivity_cain"
+name        = "The far door"
+description = "beat_0042. Auto-fire @captive_room, priority 10, one-shot, gated captivity_broken is_true + captivity_done is_false. Cain (unshown, unnamed) breaks in, argues with Bastien through a wall (her failing perception — four words, one a name kept off-page), and frees her without a reason. RELEASE: equipped_weapon=1, loop-trait reset, captivity_done, teleport to the_waterfront. The fault stays frozen. Tier-3."
+
+[canvases.trigger]
+location      = "captive_room"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "captivity_broken", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "captivity_done",   operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The far door"
+blocks = [
+  { type = "paragraph", content = "She comes back a little at a time, into a room that has changed. The men are gone. The near door stands open on an empty corridor. The frame she was strapped to is on its side where somebody knocked it going out fast. She is on the floor by the grate they meant to hose her over, and her left leg will not answer, and the light under her skin is out — properly out, not flickering, dark the way a cooled coal is dark." },
+  { type = "paragraph", content = "Through the wall, two men are arguing." },
+  { type = "paragraph", content = "One of them is Bastien. She would know that voice anywhere now, and it has not changed — flat, unhurried, reasonable, a man explaining a position he sees no reason to raise his voice about. The other voice she has never heard in her life, and it goes through her wrong, because it is furious, and the fury has something under it she has no file for. It takes her a long muddled moment to find the word for the thing under it, and the word she finds is grief, and that makes no sense at all, because nobody has ever once been angry on her account, let alone torn up about it." },
+  { type = "paragraph", content = "She is too far gone to hold any of it. The words come apart before they reach her. Four get through the whole of it and no more. One is Bastien's, and it is a word she knows the shape of because it is a word men use about her: an ownership word, said the way you'd say the price of a thing. And three come across in the other voice, and one of those three is a name — she is nearly certain it is a name — and it goes into her somewhere below the amputation and fits, the way a key fits the one lock in a house that was left, a lock she did not know she had, and she cannot for her life say what the name was or why a stranger saying it should make the empty places in her ache like frostbite coming warm. And the last word, in that same broken voice, is one that has no business anywhere near a room like this, a word you say over a grave and not over a thing you are haggling for. She reaches for all four of them and they slide out of her hands." },
+  { type = "paragraph", content = "The arguing stops. Not trails off — stops, the way it stops when one man has said the thing there is no answer to." },
+  { type = "paragraph", content = "Then the door — the far one, off its hinges already — and he comes in, and she cannot make him hold still. He is a shape against the bad light and a smell of old smoke, and he crosses the room fast and goes down on one knee beside her, and she flinches, because everyone who has knelt beside her in this room has done it to use her. He doesn't. He turns her, careful of the dead leg, the way you'd turn something you already knew the weight of, and he finds the seam at the base of her spine without looking for it — without searching, his hand going straight to it in the dark like a hand going to its own pocket — and he puts the weight back." },
+  { type = "paragraph", content = "The drain seats home. She feels it take, feels the terrible backed-up pressure behind her sternum find, at last, the door it has been beating on, and begin — slowly, agonisingly — to bleed off down a channel that is hers again. It is not relief. It is too late for relief. But it is the difference between a thing that is failing and a thing that is going to fail, and her leg, somewhere very far away, twitches once and remembers most of itself." },
+  { type = "paragraph", content = "He is already up. Whatever he came to do, it was not to talk to her; or he cannot; or there is no time. He puts two fingers against the side of her face for exactly as long as it takes to be sure she has come back, and even that is not a stranger's touch, and then he is a shape in the doorway and then he is gone, and she is alone in a broken room with her weapon back in her spine and no idea on God's earth why any of it just happened." },
+  { type = "paragraph", content = "She wakes on the waterfront at dawn. Sore, and not whole — the fault sits in her core where it stopped and does not move, and she already knows, the way you know a scar before you've seen it, that it is not going to move again. But the drain is in its socket. Her leg carries her. The city is exactly where she left it, indifferent, the gulls going and the tide out, Mercer's work waiting and Renner's depot waiting and Sunday coming around again the way Sunday does." },
+  { type = "paragraph", content = "And four words she cannot hold, and cannot stop reaching for, and one of them a name that fit a lock she didn't know was hers." },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get up off the dock."
+
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "the_waterfront"
+flagEffects = [
+  { targetType = "player", flag = "captivity_done", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "equipped_weapon",   op = "set", value = 1 },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0 },
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0 },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0 },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0 },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0 },
 ]

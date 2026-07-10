@@ -1409,3 +1409,210 @@ time_progression_minutes = 30
 effects = [
   { targetType = "player", trait = "hygiene", op = "add", value = 100, clamp = true },
 ]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CAPTIVITY — the room's two verbs (beat_0038). There are only two, and that is the design.
+#
+#   Lie down  — the day-router. Restores Charge and carries a GUARANTEED, band-selected night use.
+#               Sleep cannot be used to outrun the ladder.
+#   Pay attention — the chance-roll host. Not a resource action; the bed already handles resources.
+#
+# THE ROOM'S THESIS: the only way to learn anything is to make yourself available. The player who fills
+# her days sees more and breaks faster; the player who hides in the bed sees less and it lasts LONGER.
+# Both roads lead to Cain. Nobody is punished — the choice is how much you look at it.
+#
+# ⚠️ NO SCHEDULE on the sleep verb (a deliberate departure from the cradle's 19:00–05:00 window).
+# Nothing in the cell is schedule-gated, and the cell has no windows. A night gate would strand a
+# player grabbed at 09:00 behind ~20 `Pay attention` clicks just to reach bedtime. Bounced up to the
+# ledger, not silently patched.
+#
+# Both verbs are guarded `captivity_broken is_false`. The break (beat_0041) auto-fires at
+# core_strain >= 96 and Cain (beat_0042) follows it, so the guard costs nothing in the happy path —
+# but without it a mis-gated Cain canvas would leave her able to sleep in the cell forever at a
+# pinned 96. `is_false` guards are exempt from the flag-chain validator.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ── LIE DOWN — the day-router + the guaranteed night use ───────────────────────────────────────────
+# The band groups render BEFORE the exit applies +12, so the band she is in when she lies down selects
+# the scene — exactly the same edges the random shelf-scenes use (beat_0039/0040). The ladder is
+# monotonic however the dice fall.
+#
+# TEXT-ONLY, deliberately: she's half under. The eight authored shelf-scenes carry the media budget;
+# this is the compressed one she surfaces during and cannot hold onto.
+[[canvases]]
+id          = "cell_sleep"
+name        = "Lie down"
+description = "beat_0038. Wren-solo @captive_room. The cell's day-router: advances ~9h, restores Charge (clamp=true caps at 100), and carries a GUARANTEED band-selected night use (+12 core_strain). Not random -> bypasses the hardcoded visit-cooldown. Sleep cannot outrun the ladder. Guarded captivity_broken is_false."
+
+[canvases.trigger]
+location      = "captive_room"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "captivity_entered", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "captivity_broken",  operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Lie down"
+blocks = [
+  { type = "paragraph", content = "The light doesn't go off, so she turns her face to the wall and powers down anyway. The bed is bolted down and the mattress smells of other people. She goes under fast, the way she always does, and it doesn't matter at all, because the door opens in the night. It always opens in the night." },
+
+  # ── Nominal (strain < 24) — Bastien alone. Ownership, established.
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "trait", subject = "player", trait_key = "core_strain", operator = "lt", value = 24 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She comes half up to a hand turning her onto her back, and it's him, unhurried, already unbuckling. He doesn't wake her properly. He works into her cunt while she's still surfacing and he takes his time about it, watching her face the way you'd watch a needle." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Go back to sleep. You don't have to be anywhere." },
+    { type = "paragraph", content = "He finishes in her and the warmth of it spreads up through her and finds nowhere to go, and she lies in the dark afterwards feeling the charge sit in her like a swallowed coal." },
+  ] },
+
+  # ── Hot (24–47) — he conducts.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "core_strain", operator = "gte", value = 24 },
+      { type = "trait", subject = "player", trait_key = "core_strain", operator = "lt",  value = 48 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She wakes to weight — two of them, one at her hips and one kneeling up by her face, and the chair scraping as Bastien sits down to watch. Nobody hurries. They fuck her in the dark by turns, and when one of them finishes across her tits another takes his place before she's got her breath back." },
+    { type = "paragraph", content = "\"She's hot,\" one of them says, hand flat between her breasts, and he doesn't mean it the way men usually mean it. Somebody laughs. Bastien doesn't." },
+  ] },
+
+  # ── Faulting (48–71) — she is being operated, not fucked.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "core_strain", operator = "gte", value = 48 },
+      { type = "trait", subject = "player", trait_key = "core_strain", operator = "lt",  value = 72 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She doesn't surface for the start of it. She surfaces for a hand adjusting the angle of her hips, and another opening her thighs a little wider, the way you'd square up a workpiece. Someone is in her ass. Someone else is timing it. The heat behind her sternum has stopped feeling like heat and started feeling like pressure, and every time a man empties into her it goes up a step and stays there." },
+  ] },
+
+  # ── Failing (72+) — the machine coming apart.
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "trait", subject = "player", trait_key = "core_strain", operator = "gte", value = 72 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She isn't sure she was asleep. There's a man in her and a hum in the room that she works out, slowly, is coming from inside her own chest. Her left hand won't close. He finishes and pulls out and she feels the charge go up and hears the hum change pitch, and someone in the dark says that can't be right, and nobody stops." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "Something is going to give. It isn't going to be them." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "location"
+text = "Wake up."
+
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "captive_room"
+time_progression_minutes = 540
+effects = [
+  { targetType = "player", trait = "energy",      op = "add", value = 100, clamp = true },   # cap at 100
+  { targetType = "player", trait = "core_strain", op = "add", value = 12,  clamp = true },   # the guaranteed night use
+]
+
+# ── PAY ATTENTION — the chance-roll host (~30 min). Three things in the room have edges. ───────────
+# Returning from any of these re-enters captive_room -> a fresh random roll (beat_0039/0040). THAT is
+# the chance mechanic; this canvas does not roll anything itself.
+# NOT a resource action: no energy cost. The bed handles resources.
+[[canvases]]
+id          = "cell_attend"
+name        = "Pay attention"
+description = "beat_0038. Wren-solo @captive_room, repeatable, ~30 min, no cost. Three exits: listen at the door / watch the man on the chair / hold still and feel the fault. Glitch III (Tier-3, once-only) rides the hold-still exit behind a glitch_iii_seen is_false group. Returning to the room re-rolls the random shelf-scenes. Guarded captivity_broken is_false."
+
+[canvases.trigger]
+location      = "captive_room"
+is_repeatable = true
+priority      = 2
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "captivity_entered", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "captivity_broken",  operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Pay attention"
+blocks = [
+  { type = "paragraph", content = "There is nothing in the room to do. There are three things in it to notice." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Listen at the door."
+targetType = "node"
+nodeId     = "cell_attend.listen"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Watch the man on the chair."
+targetType = "node"
+nodeId     = "cell_attend.watch"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Hold still and feel the fault."
+targetType = "node"
+nodeId     = "cell_attend.hold_still"
+
+[[canvases.nodes]]
+id   = "listen"
+name = "Listen at the door"
+blocks = [
+  { type = "paragraph", content = "Steel carries. She sits with her shoulder against it and counts: five voices, six, one that comes and goes and never finishes a sentence because the others stop talking when it does. Cards, some nights. A radio. A long argument about a boat that she thinks is not about a boat." },
+  { type = "paragraph", content = "Nothing about her. That's the part she keeps turning over. Whatever she is to them, she isn't a thing they discuss." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sit back."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "captive_room"
+time_progression_minutes = 30
+
+[[canvases.nodes]]
+id   = "watch"
+name = "Watch the man on the chair"
+blocks = [
+  { type = "paragraph", content = "There's always one, and it's always the chair. He doesn't talk to her. He reads, or he doesn't, and he watches the way a man watches a pot. When she looks back at him he holds it, bored, and eventually she is the one who looks away, and she notes that too, because a month ago she would not have." },
+  { type = "paragraph", content = "Sometimes it's Bastien in the chair. He never reads. He sits with his hands still and studies her the way he studied her across the table, patient, waiting for the answer to a question he has not asked again." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Look away."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "captive_room"
+time_progression_minutes = 30
+
+# Glitch III — Tier-3, once-only. The group is gated glitch_iii_seen is_false and the EXIT sets the flag,
+# so the spend fires exactly once on a repeatable verb. Matches the shipped glitch_i_seen / glitch_ii_seen
+# convention. It must NOT leak the Cain–Bastien alliance: what surfaces is warmth without a face.
+[[canvases.nodes]]
+id   = "hold_still"
+name = "Hold still and feel the fault"
+blocks = [
+  { type = "paragraph", content = "She lies on her back and stops doing anything at all, and listens to herself the way she listened to the door. The charge sits under her sternum with nowhere to be. It has a sound. It has, she realises, started to have a smell — hot dust, the inside of a machine that has been run too long." },
+
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "glitch_iii_seen", operator = "is_false" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "And then the fault opens, the way a badly-set bone opens, and something comes up through it that was never filed anywhere she can reach." },
+    { type = "paragraph", content = "A hand at the back of her neck. Not holding her — resting there, the thumb moving once, slowly, along the seam. Somebody standing behind her while she looks at something she cannot see, and in the whole of her body, in the whole of the record, no fear at all. Not permitted absence of fear. The other kind. The kind that is simply not there because there is nothing in the room that could hurt her." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "Whose hand." },
+    { type = "paragraph", content = "It closes. It goes back down wherever it lives. She lies in a room she cannot leave with men on the other side of the door and she finds that she is holding the back of her own neck, and that her eyes have gone wet, and that she has no idea, none, whose hand that was." },
+  ] },
+
+  { type = "group", props = { conditions = { version = "1.0", items = [
+      { type = "flag", subject = "player", flag_key = "glitch_iii_seen", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She reaches for it again — the hand, the seam, the quiet — and it isn't there. The fault doesn't open twice for the same thing. What's left is the pressure, and the hot-dust smell, and the certainty that it is worse than it was." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let it go."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "captive_room"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "glitch_iii_seen", op = "set" },
+]
