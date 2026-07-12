@@ -5398,13 +5398,13 @@ nodeId     = "n2"
 
 [[canvases.nodes]]
 id   = "n2"
-name = "Strip on command"
+name = "He tears it off her"
 blocks = [
-  { type = "video", props = { file = "sex/cell_inventory_strip_on_command.webm", description = "woman slowly stripping herself for seated man watching", search_queries = ["woman slowly stripping herself for seated man watching", "woman undressing on command man cock out chair pov"] } },
-  { type = "paragraph", content = "She does it herself, one seam at a time, because the once she didn't he tore it off her at the shoulder and called her a stupid fucking machine for making him work for it. So now her own hands undress her while he watches from the chair with his cock already out, working it slow, in no rush at all." },
-  { type = "paragraph", content = "He makes her go piece by piece — makes her stand there between layers with the cold on her skin, so the stripping is the thing and not just the getting-naked. Every scrap she peels off she sets on the floor, because there's nowhere else, and when she's bare she stays bare in front of him and waits, because that too is something she does now." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Look at that. Bought and paid for." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "See how easy it goes when you don't make me work for it. Good machine." },
+  { type = "video", props = { file = "sex/cell_inventory_strip_on_command.webm", description = "man tearing ripping woman clothes off her rough forced stripped", search_queries = ["man ripping tearing woman clothes off rough forced", "clothes torn ripped off woman forced stripped bare man"] } },
+  { type = "paragraph", content = "Her hands don't go to the collar fast enough — a second's hesitation, a beat too long deciding whether to obey — and that's the whole of the excuse he wants. He comes up out of the chair and he's on her before the pause is done, gets a fist in the cloth at her shoulder and tears it down off her in one hard pull, seam giving with a rip, already grabbing the next piece before the first has hit the floor. He strips her the way you'd tear the wrap off stock you paid too much for and can't be bothered to unpick — rough, fast, cloth going in his hands — until she's bare and the torn scraps are around her feet." },
+  { type = "paragraph", content = "He doesn't do it because he has to. He does it because making her do it herself is slower, and because tearing it off her tells her what she is here quicker than any order could — a thing to be unwrapped, not a thing to be asked. When she's bare he steps back to the chair, cock already out, and looks her over like he's checking he got what he paid for." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Too slow. When I say off, it comes off. I'll not ask a machine twice." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There. Bought and paid for, and not even worth the wrapping. Let's see what's under it." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -5766,7 +5766,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The queue"
 blocks = [
-  { type = "image", props = { file = "scenes/cell_turns_the_queue.jpg", description = "line of naked men waiting turn woman kneeling on floor gangbang pov", search_queries = ["line of naked men waiting turn woman kneeling on floor gangbang pov", "woman on knees surrounded by group of men waiting queue bare room"] } },
+  { type = "video", props = { file = "scenes/cell_turns_the_queue.webm", description = "line of men waiting their turn while a woman kneels used on the floor, one gripping her hair, dim room", search_queries = ["gangbang line men waiting turn woman kneeling", "woman on knees group of men waiting queue bare room"] } },
   { type = "paragraph", content = "By the time she's down on her knees in the middle of the concrete, the crew's already strung out along the wall in a loose line, waiting their turn like it's a thing they've done before. Bastien doesn't get in the line. He hauls the chair round so it faces the whole row of them, sits, and clicks a timer open in his palm. His cock's already out. His eyes are on the plate under her sternum, not on her." },
   { type = "paragraph", content = "'Thirty a man to start,' he says to the room. 'Move her down the line, don't crowd. I want to see how fast this thing climbs when you keep it fed.' The first man's already got a fist in her hair, waiting on the word. Bastien thumbs the timer. 'Go.'" },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Thirty a man. Don't crowd her — I want it steady, not a pile-on. Not yet." },
@@ -6166,7 +6166,7 @@ nodeId     = "n4"
 id   = "n4"
 name = "Bastien leans in"
 blocks = [
-  { type = "image", props = { file = "scenes/cell_stutter_bastien_leans_in.jpg", description = "man crouching watching intently dim room noir close observation", search_queries = ["man crouching watching intently dim room noir close observation", "clothed man leaning in cold intense expression low light shadow"] } },
+  { type = "video", props = { file = "scenes/cell_stutter_bastien_leans_in.webm", description = "woman used from behind while a clothed man sits close watching, not participating, dim room", search_queries = ["clothed man watching woman used cuckold dim room", "woman fucked from behind man observing close not touching"] } },
   { type = "paragraph", content = "Bastien comes off the wall and crouches at the edge of the mattress, close, elbows on his knees, watching the dead leg swing where it hangs off the man's arm. Not her face — her face has never been the thing. He watches the failure. He reaches out and pushes two fingers deep into the slack meat of her thigh, testing, feeling for a tone that isn't there anymore, and something moves behind his eyes that has nothing to do with mercy." },
   { type = "paragraph", content = "He's interested. He's always most interested when a part of her stops. He keeps his fingers buried in the dead muscle a moment longer than he needs to, thumb pressing, reading her by hand while the man's cock keeps working her hole two inches away." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There it goes. Left side's dropping out — right on the number I said it would." },
@@ -6184,7 +6184,7 @@ nodeId     = "readout"
 id   = "readout"
 name = "The read-out"
 blocks = [
-  { type = "image", props = { file = "scenes/cell_stutter_the_read_out.jpg", description = "glowing chest implant readout display sci-fi close up dim", search_queries = ["glowing chest implant readout display sci-fi close up dim", "cyborg woman sternum panel flickering number gauge low light"] } },
+  { type = "video", props = { file = "scenes/cell_stutter_the_read_out.webm", description = "rough from-behind still running, woman slack and worn under it, hand at her throat, dim room", search_queries = ["rough doggy from behind worn out limp woman dim", "woman used from behind slack exhausted hand on throat"] } },
   { type = "paragraph", content = "On the sternum plate the read-out has climbed again — one more increment, logged the second the man's pace picked back up. Every stroke into her stacks a little more charge behind a plate that has nowhere left to send it. The socket at the base of her spine, where the drain used to bleed it off — where anal used to take something out of a man instead of pour it into her — sits empty and cold, a dead port in the small of her back that nothing plugs anymore." },
   { type = "paragraph", content = "The number does not fall. It has never once fallen. Bastien's eyes go straight to it and stay there — not on the swinging leg, not on the crew, not on her — on the count. He takes out the little book and writes the new figure under all the others, unhurried, while behind the number the plate flickers like it's finally getting tired." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Higher. Every time it fails, the number still climbs. That's the part they never believe." },
@@ -6297,7 +6297,7 @@ nodeId     = "readout"
 id   = "readout"
 name = "The read-out → the break"
 blocks = [
-  { type = "image", props = { file = "scenes/cell_he_does_not_stop_the_read_out_the_break.jpg", description = "cyborg woman glowing chest plate overload sci-fi red light", search_queries = ["cyborg woman glowing chest plate overload sci-fi red light", "android light through skin cracks glowing chest overheating"] } },
+  { type = "video", props = { file = "scenes/cell_he_does_not_stop_the_read_out_the_break.webm", description = "spent limp woman still being used by a group past collapse, dazed, dim room", search_queries = ["exhausted limp woman still being used group gangbang", "spent woman used past collapse dazed dim room"] } },
   { type = "paragraph", content = "The read-out reaches the top of its climb and stops — not because they've stopped, but because there is no higher left for it to go. The bar under her sternum is full end to end, a hard flat line of light burning through the skin between her ribs, too bright now to look at straight. The whine has gone past sound into a pressure you feel in your teeth. Everywhere else she's dark: face slack, eyes open on nothing, body still moving only because the man behind her is still moving it, hips still working her onto him out of habit and weight. Every small resistance the machine ever had — gone at once, given up together." },
   { type = "paragraph", content = "Bastien stands over the top of her head watching the plate, not her, the way he has the whole time. Charged to the top. No socket. No out. Something in her has to give with all that light and nowhere for it, and under the flat glare of the full read-out — while a man is still emptying into her ass and doesn't even notice — it does." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "'There. Top of the gauge. Now we find out what they were hiding in you.'" },
