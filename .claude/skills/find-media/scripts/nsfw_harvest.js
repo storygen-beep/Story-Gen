@@ -35,15 +35,31 @@ const REFERER = 'https://www.pornhub.com/';
 
 // ============ EDIT THIS FOR EACH BATCH ============
 const QUERIES = [
-  { name: 'cherry_video',         search: 'amateur+nude+promo+tease+selfie',     desc: 'Nude promo tease link in bio selfie' },
+  { name: 'cell_sleep_nominal',                           search: 'spooning',          desc: 'single man behind, woman passive on side, bed' },
+  { name: 'cell_he_does_not_stop_bastien_orders_them_on', search: 'used+and+abused',   desc: 'STILL: nude used woman + clothed man over her' },
 ];
 // ==================================================
 
 async function harvestFromSearchPage(page, search) {
-  await page.goto(
-    `https://www.pornhub.com/gifs/search?search=${search}`,
-    { waitUntil: 'domcontentloaded', timeout: 45000 }
-  );
+  // Tor circuits degrade; a single slow navigation must not kill the whole batch.
+  // Retry the initial nav up to 3x, rotating the Tor circuit between attempts.
+  let lastErr = null;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      await page.goto(
+        `https://www.pornhub.com/gifs/search?search=${search}`,
+        { waitUntil: 'domcontentloaded', timeout: 90000 }
+      );
+      lastErr = null;
+      break;
+    } catch (e) {
+      lastErr = e;
+      console.error(`  goto attempt ${attempt}/3 failed (${(e.message||'').split('\n')[0]}); rotating Tor circuit...`);
+      try { execSync('kill -HUP $(pgrep -x tor)', { timeout: 5000 }); } catch (_) {}
+      await page.waitForTimeout(4000);
+    }
+  }
+  if (lastErr) throw lastErr;
 
   // Dismiss age gate if present
   try {
@@ -114,12 +130,18 @@ async function harvestFromSearchPage(page, search) {
 
   for (const q of QUERIES) {
     console.log(`\n=== ${q.name}: "${q.desc}" ===`);
+    let results;
+    try {
+      results = await harvestFromSearchPage(page, q.search);
+    } catch (e) {
+      console.error(`[${q.name}] harvest failed after retries: ${(e.message||'').split('\n')[0]} — skipping this item (any prior data kept)`);
+      continue;
+    }
     const subdir = path.join(PREVIEW_DIR, q.name);
-    // Clean only THIS item's subdir — preserve sibling items' data
+    // Clean only THIS item's subdir — preserve sibling items' data. Cleared only
+    // AFTER a successful harvest, so a failed/timed-out item never wipes good data.
     if (fs.existsSync(subdir)) fs.rmSync(subdir, { recursive: true });
     fs.mkdirSync(subdir, { recursive: true });
-
-    const results = await harvestFromSearchPage(page, q.search);
     console.log(`Found ${results.length} candidates with thumbnails+video URLs`);
 
     for (let i = 0; i < results.length; i++) {
@@ -145,9 +167,12 @@ async function harvestFromSearchPage(page, search) {
       if (r.videoUrl) {
         const videoPath = path.join(subdir, `${i}_${r.gifId}.webm`);
         try {
+          // --max-time 60 (was 30): a degraded Tor exit can't pull a 3MB webm in 30s,
+          // so every download failed and the batch saved 0 files. --retry 2 rides out
+          // transient circuit hiccups mid-transfer.
           execSync(
-            `curl -s --socks5-hostname 127.0.0.1:9050 -H "User-Agent: ${BROWSER_UA}" -H "Referer: ${REFERER}" -o "${videoPath}" "${r.videoUrl}" --max-time 30`,
-            { timeout: 35000 }
+            `curl -s --socks5-hostname 127.0.0.1:9050 --retry 2 -H "User-Agent: ${BROWSER_UA}" -H "Referer: ${REFERER}" -o "${videoPath}" "${r.videoUrl}" --max-time 60`,
+            { timeout: 65000 }
           );
           const vSize = fs.statSync(videoPath).size;
           if (vSize < 50000) {

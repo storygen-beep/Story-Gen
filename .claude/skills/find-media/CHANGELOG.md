@@ -13,6 +13,29 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-07-13 — nsfw_harvest video download timeout (30s→60s + curl --retry)
+
+- `scripts/nsfw_harvest.js` — bumped the inline video-download curl from `--max-time 30`
+  (execSync timeout 35s) to `--max-time 60` (timeout 65s) and added `--retry 2`. Root cause:
+  a degraded Tor exit takes >30s to pull a 3–4MB webm, so `curl` hit its deadline, the file
+  came back <50KB and got unlinked, and a batch that had already FOUND 15 valid candidates
+  saved zero of them (observed live: `Found 15 candidates` immediately followed by
+  `✗ video download failed`). The 60s ceiling + 2 retries lets slow-but-alive circuits finish
+  the transfer. Verified: `node -c` parses clean.
+
+## 2026-07-13 — nsfw_harvest batch resilience (goto retry + harvest-before-wipe)
+
+- `scripts/nsfw_harvest.js` — two fixes to stop one flaky Tor navigation from destroying a
+  whole batch. (1) `harvestFromSearchPage` now retries `page.goto` up to 3× (timeout raised
+  45s→90s), rotating the Tor circuit (`kill -HUP tor`) between attempts, and only throws if
+  all three fail. (2) The main loop wraps each item's harvest in try/catch and `continue`s on
+  failure, and — critically — moved the `rmSync(subdir)` wipe to run only AFTER a successful
+  harvest. Root cause: a degraded circuit made the FIRST query's `goto` time out; the throw was
+  uncaught in the per-item loop, so the whole batch died — and because each subdir was wiped
+  BEFORE harvesting, a failed item destroyed any candidate pool already sitting there (this
+  silently ate three separate Vesper batches this session). Verified: `node -c` parses clean;
+  re-run of a 5-item batch survives a first-query timeout and proceeds to the rest.
+
 ## 2026-06-24 — nsfw_harvest video download fix (browser User-Agent)
 
 - `scripts/nsfw_harvest.js` — added `BROWSER_UA` + `REFERER` consts and sent both as `-H`
