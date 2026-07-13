@@ -5727,7 +5727,6 @@ nodeId     = "readout"
 id   = "readout"
 name = "The read-out"
 blocks = [
-  { type = "image", props = { file = "scenes/cell_first_three_the_read_out.jpg", description = "glowing sci-fi implant readout on woman chest sternum close up", search_queries = ["glowing sci-fi implant readout on woman chest sternum close up", "hand writing numbers in notebook clinical close up"] } },
   { type = "paragraph", content = "When they've filed out he crosses the cell, crouches in front of her, and wipes a smear of cum off the plate under her sternum with his thumb to read it clean. The read-out has climbed hard — further in one session than in a week of just him alone. He doesn't look at her face. He looks at the number, writes it down, and underlines it." },
   { type = "paragraph", content = "The strain's up with it. The charge stacks behind the plate with nowhere to go, hotter each load, and the meter only ever runs one direction." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Three at once and forced to come — fastest climb yet. Good." },
@@ -5959,7 +5958,6 @@ nodeId     = "readout"
 id   = "readout"
 name = "The read-out"
 blocks = [
-  { type = "image", props = { file = "scenes/cell_frame_the_read_out.jpg", description = "glowing sci-fi chest implant sternum readout gauge climbing", search_queries = ["glowing sci-fi chest implant sternum readout gauge climbing", "cyberpunk chest plate glowing number display meter close up"] } },
   { type = "paragraph", content = "When they're finally done and the frame's cranked back and she's left bent over it — dripping, marked, still bolted to spec — the only thing in the room still doing work is the plate under her sternum. The read-out glows in the dim, and the number on it is higher than it was. A lot higher. It climbed with every load that got held in her and it did not come back down, because there is nowhere for it to go." },
   { type = "paragraph", content = "Bastien crouches at the front of the frame to read it. Not her face — the number. He watches it settle, holds a light to it, writes it down." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Up again. Big jump off this run. It takes it in and it can't give any of it back — that's the whole trick of the thing." },
@@ -6078,7 +6076,6 @@ nodeId     = "readout"
 id   = "readout"
 name = "The read-out"
 blocks = [
-  { type = "image", props = { file = "scenes/cell_overflow_the_read_out.jpg", description = "glowing readout gauge meter climbing red overload close up", search_queries = ["glowing readout gauge meter climbing red overload close up", "sci-fi chest plate meter number rising warning glow"] } },
   { type = "paragraph", content = "When they finally leave her spread and slack on the mattress, the plate under her sternum is not doing what it did before they started. The light in it has stopped being steady and gone to a pulse, higher than she has ever seen it read, and it does not come down. It sits there, lit, climbing on nothing, with no drain to bleed it off." },
   { type = "paragraph", content = "Bastien crouches over her and looks at it — only at it. He reads the number, writes the number, and the number is the whole reason he came. It went up. It does not go down. Out of everything that was done to her in this room, that is the one thing that changed, and it is the only thing in here that he counts as changed at all." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "There's the reading. Higher than the last. You're closer now, machine — and every hole they put in you drives it up another notch and it never once falls." },
