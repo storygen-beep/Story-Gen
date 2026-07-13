@@ -5521,7 +5521,6 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The notebook"
 blocks = [
-  { type = "image", props = { file = "scenes/cell_charge_test_the_notebook.jpg", description = "clothed man seated chair pen notebook watching nude restrained woman cell", search_queries = ["clothed man seated chair pen notebook watching nude restrained woman cell", "male observer sitting writing naked female captive inspection dim room still"] } },
   { type = "paragraph", content = "The notebook comes in before he does — a cheap spiral thing he sets on the crate, squares up with the edge, uncaps a pen. Then he drags the chair round to face her and sits, not close, the way a man settles in to watch a gauge rather than fuck a woman. 'Not fucking you today,' he says, almost bored. He taps his own sternum, where hers carries the plate. 'Today I want to see the needle move. You come, that thing counts it. So we're going to find out how many I can get out of you before it complains.'" },
   { type = "paragraph", content = "He leans in and reads the read-out under her sternum through the strip of grime, and he writes that number down before he's laid a hand on her — a baseline, neat, underlined twice. Cold about it. Curious. 'Filthy little machine,' he says, unhurried, more to the page than to her. 'Let's see what you do.'" },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Not fucking you today. Today I want to see the needle move." },
