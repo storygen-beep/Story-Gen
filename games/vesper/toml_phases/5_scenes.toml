@@ -2850,7 +2850,6 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "He lets three in"
 blocks = [
-  { type = "image", props = { file = "scenes/cell_first_three_he_lets_three_in.jpg", description = "nude woman standing bare concrete cell surrounded by clothed men", search_queries = ["nude woman standing bare concrete cell surrounded by clothed men", "clothed man seated in chair watching naked woman in room"] } },
   { type = "paragraph", content = "The bolt drags back and for once it isn't just him in the gap. He holds the door open with one hand and lets three of them file past his shoulder into the cell, then crosses to the chair against the wall and sits, one ankle up on his knee, the notebook already open on his thigh. The three spread out around her the way men spread out around something cornered — looking, deciding what she is before a single hand's on her." },
   { type = "paragraph", content = "That's where she stops being a person. Three sets of eyes, three sets of hands, and the one in the chair who only wants the number after." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Go on. She's bought and paid for — there's nothing in there you can wear out that I'm precious about." },
