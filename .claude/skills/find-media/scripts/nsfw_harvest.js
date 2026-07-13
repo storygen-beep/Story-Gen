@@ -35,8 +35,7 @@ const REFERER = 'https://www.pornhub.com/';
 
 // ============ EDIT THIS FOR EACH BATCH ============
 const QUERIES = [
-  { name: 'cell_sleep_nominal',                           search: 'spooning',          desc: 'single man behind, woman passive on side, bed' },
-  { name: 'cell_he_does_not_stop_bastien_orders_them_on', search: 'used+and+abused',   desc: 'STILL: nude used woman + clothed man over her' },
+  { name: 'cherry_video',         search: 'amateur+nude+promo+tease+selfie',     desc: 'Nude promo tease link in bio selfie' },
 ];
 // ==================================================
 

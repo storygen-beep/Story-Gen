@@ -6255,7 +6255,7 @@ nodeId     = "n3"
 id   = "n3"
 name = "Bastien orders them on"
 blocks = [
-  { type = "image", props = { file = "scenes/cell_he_does_not_stop_bastien_orders_them_on.jpg", description = "clothed man crouching over naked woman on floor dim room pov", search_queries = ["clothed man crouching over naked woman on floor dim room pov", "dominant man in shirt watching cold standing over used woman"] } },
+  { type = "image", props = { file = "scenes/cell_he_does_not_stop_bastien_orders_them_on.jpg", description = "naked woman used on the floor with the crew standing around her, several men, cocks out, dim room", search_queries = ["gangbang men standing around one woman", "blowbang crew standing around kneeling woman"] } },
   { type = "paragraph", content = "Bastien crosses the floor unhurried and crouches at her chest to look — not at her face, at the read-out, at the number climbing behind the flicker. He watches it the way he watches everything about her: like a figure going into a ledger. He lays two fingers flat on the plate, feels the heat coming off it, the whine buzzing up through the metal into his hand, and he doesn't pull them away. He turns his head and looks at the man who stepped back, then at the rest of them standing there with their cocks out, gone uncertain." },
   { type = "paragraph", content = "Then he takes his fingers off the plate, wipes the heat off on her tit, and stands, and tells them to get back in her. He's not curious out loud. He's curious in the eyes — but his mouth is only cruel, and the two don't argue with each other in him." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "'It's not breaking. It's filling. There's a difference and I've been watching it fill for a while now.'" },
