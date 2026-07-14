@@ -87,13 +87,24 @@ Advance `pipeline_phase` as each step completes (the step references say when). 
   (`references/save-safety.md`).
 - **Engine-forced changes bounce UP to the design book**, surfaced — never silently patched into TOML.
 - **Register authority lives here, not in CLAUDE.md.** Lane 1/2/3 = RTS-flat default; Lane 4
-  capstones = Tier-3 earned (voice register in `references/lanes.md`). The CLAUDE.md ENI persona
-  does **not** set canvas register — if a literary instinct conflicts with this skill's register rules
-  (`references/rts-flat-prose.md` + `references/lanes.md`), those win. Register is **two axes**: *density*
-  (Lane 1/2/3 RTS-flat vs Lane 4 Tier-3) and *mode* — carry character through `dialog` blocks wherever an
-  NPC is present (hardest at the hot beats), not narrated summary (`references/rts-flat-prose.md` Rule 4 +
-  `lanes.md` Voice register); only beats with no one there to speak (solo, unseen voyeur, a capstone's
-  interior) stay narrated.
+  capstones = Tier-3 earned. The CLAUDE.md ENI persona does **not** set canvas register — if a literary
+  instinct conflicts with this skill's register rules, the skill wins. Register is **three axes**, defined
+  in `references/rts-flat-prose.md` §2 (that file owns them; `lanes.md` "Voice register" is the lane → value
+  lookup):
+  1. **Person** — `register.person` = `second` (default) / `first` / `third`. Declared once at Step 0+1,
+     recorded in `authoring_state.json`, **immutable** after, never mixed inside a game. Applies to every
+     `paragraph` / `thought_bubble`; `dialog` blocks are exempt. (Note: **"POV" in this skill means the
+     protagonist's GENDER**, not grammatical person — don't conflate them.)
+  2. **Density** — Lane 1/2/3 RTS-flat = **~35–40 words per BEAT, flat across every tier** (measured against
+     the real RTS corpus). Lane 4 Tier-3 = **more beats (10–20), not thicker beats.** A beat over ~50 words
+     wanted to be two beats: split it, don't compress it.
+  3. **Mode** — carry character through `dialog` blocks wherever an NPC is present (hardest at the hot
+     beats), not narrated summary. **RTS runs 0.73 narration words : 1 dialogue word; target ≤ 1.5:1 on any
+     scene with a present NPC, > 3:1 is a FAIL.** Every game we have shipped inverts this (5:1 to 19:1) —
+     it is the skill's longest-standing defect. Only beats with no one there to speak (solo, unseen voyeur,
+     a capstone's interior) stay narrated.
+
+  All three have runnable audits — `references/rts-flat-prose.md` §7. Run them; don't eyeball them.
 
 ## Engine ground-truth (verified — so no reference reinvents a knob)
 1. **Real built-in player traits:** `corruption`, `arousal`, `energy`, `hygiene`, `money` (engine-privileged,

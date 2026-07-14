@@ -13,6 +13,91 @@ Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 - reworded dispatch note (`SKILL.md`) — clarified phase resume — n/a
 -->
 
+## 2026-07-14
+- **`references/rts-flat-prose.md` — REWRITTEN. The register doctrine was partly false, and it had never once
+  been obeyed.** Root cause found by re-measuring the register claims against the **real** Road-to-Success
+  source (`game_explorations/road_to_success/archive/2026-06-02T18-27-18-582Z/passage_catalog.json` — 364
+  passages, 273 prose-bearing) instead of the inherited prompts_v2 summary. Three defects, all load-bearing:
+  - **Rule 8's headline stat was an artifact.** "Half of RTS scenes are 25 words or less" → **actually 28%**,
+    and those are Tier-1 one-liners; the **median RTS scene is 126 words**. The original figure (137 chars,
+    `prompts_v2/doctrine/05_rts_flat_prose.md:121`) came from a **rendered-DOM capture**, and SugarCube
+    `<<linkreplace>>` beats aren't in the DOM until clicked — so it measured **beat 0** and called it the
+    scene. Retired explicitly in the file, with its root cause, so it can't come back.
+  - **The real invariant is PER-BEAT and FLAT: ~35–40 words/beat across every tier** (1 beat → 15w · 2–4 → 27
+    · 5–9 → 35 · 10+ → 38). **Tier scales BEAT COUNT, not prose density** — RTS's biggest scene is 24 beats of
+    ~25 words. The old doctrine implied Tier-3 = thicker prose, which is exactly how we shipped 3-beat
+    capstones of 90-word paragraphs. New §5 (tiers = beat counts) + §6 (canvas budget = beats × 35–40).
+    Deliberately did **NOT** restore the recovered prompts_v2 caps (Lane 1 ≤200 / L2 ≤100 / L3 ≤150 per
+    canvas): measured against RTS, the **Lane-2 cap is 2.6× tighter than RTS's own ambients** (median 270w),
+    and a flat cap forces the wrong fix (compress the beat) over the right one (cut a beat).
+  - **THE BIG ONE — the drift is MODE, not length.** Narration:dialogue — **RTS 0.73 : 1** (more dialogue than
+    narration, and its *deepest* scenes are its most spoken: `PriestVisit`, 19 beats → 0.40:1) vs **every game
+    we have ever shipped**: last_call 5.77 · the_inheritance 5.79 · vesper 7.25 · late_shifts 15.04 ·
+    mothers_place 19.34. Our block *lengths* were roughly right all along; **we narrate where RTS speaks.**
+    Rule 4 already said "dialogue does the character work" — with no number and no audit, so it had no teeth.
+    It now carries a **gate** (≤1.5:1 on any scene with a present NPC; **>3:1 = FAIL**; ≤2:1 whole-game) and a
+    runnable check. Root cause of the toothlessness found too: `rts-flat-prose.md` said "the full mode rule is
+    in `lanes.md`" while `lanes.md:336` said "the full rule is in `rts-flat-prose.md`" — a **citation cycle
+    with no owner.** Broken: `rts-flat-prose.md` §2 now OWNS all three axes; `lanes.md` "Voice register" is
+    demoted to the lane → value lookup.
+  - **Rule 3 restated: ban the ROOM, require the BODY.** "Zero environmental sensory detail" read as "no
+    sensory anything," but RTS writes body sensation constantly (*"Heat flares in your belly"* is verbatim
+    RTS; it uses the body to encode **reluctance** as readily as arousal) and paints a room almost never — 25
+    environmental lines in 364 passages, and the room-painting ones are all **location cards** on a fixed
+    ~25-word formula. Authors were hitting a rule that contradicted the corpus and quietly ignoring the file.
+    The room now has exactly one home (the location card → `location-design.md`); one exception survives
+    inside a body: a sensory detail that is a **gate signal** (the shower running = someone's in there).
+  - **NEW §1 (the measured shape of RTS)** — every number now cited, none asserted. **NEW §7** — three runnable
+    audits (declared-person grep · per-beat density grep · the narration:dialogue script). **NEW §8** — the
+    skill had **zero verbatim RTS**; every ✓ example was an invented Frank/Maya line, i.e. we asked authors to
+    hit a voice we never showed them. Now pasted: `BedroomStudy` (Tier-1, 7 words) · `PeepBrotherSex` (Tier-2
+    cascade at 41 w/beat — doubles as Rule 3's body exhibit AND Rule 4's *exemption* exhibit, since she's alone
+    behind a door) · **`MeetEmma`** (a whole NPC intro in 68 words: 15 narrated, 53 spoken — the Rule-4
+    hammer) · `PriestVisit` (Tier-3 = more beats AND more dialogue) · `Church` (the location card) · plus the
+    BEFORE/AFTER drift rewrites and the Marge case study recovered from the deprecated corpus.
+  - Rule numbers **1–8 kept** deliberately — `beat-authoring.md` and `lanes.md` cite them by number.
+- **Person is now a DECLARED, per-game choice (`register.person`) — was hardcoded to second.** LO's call.
+  Rule 1 read *"Second-person voice. 'You,' not 'she.'"* while `vesper` shipped **third** (568 third-person
+  narration blocks) — so the doctrine branded a deliberate game a permanent violation, and nothing checked
+  consistency either way. Worse, the grep turned up **`late_shifts` mixing both persons in one file** — it is
+  a *third*-person game (362 of 398 paragraphs narrate "she") that leaks second person (*"He looks up when
+  **you** come in from the floor"*, same `5_scenes.toml`). Nobody chose that; nobody noticed; no build gate
+  can see it. Person is now declared once at the seed,
+  immutable after, and the self-audit greps against the **declared** value — so it *protects* each game's
+  choice instead of attacking it. Density and mode stay **non-optional** (making person a choice must not
+  launder the literary drift).
+  - wired it in: `SKILL.md` register-authority block ("two axes" → **three**, with the numbers);
+    `references/lanes.md` "Voice register" (new person bullet + demoted to lane→value lookup + the mode gate);
+    `references/beat-authoring.md:135` ("two axes" → three) **and its per-beat self-audit** (four new checks —
+    declared person · per-beat density · tier=beat-count · body-yes-room-no; Rule-4 bullet given the ratio +
+    the §7 command); `references/step-0-1-seed.md` (**new seed item 5 — "Voice — the person"**, Mode A, with
+    the explicit **"person is NOT POV"** note: POV in this skill has always meant protagonist *gender*, and
+    the collision would have caused exactly the confusion it now prevents); `references/ledger-schema.md`
+    (new top-level `register.person`, `schema_version` stays **2** — additive; plus a **back-compat rule**: a
+    ledger with no `register` must **detect** the person by running §7 check 1, never assume `second`).
+    Grep-verified every new pointer resolves.
+  - stale figure swept: `~30-word caption` → `~35–40 words per beat` in `references/kink-ceilings.md`,
+    `references/media.md`, `references/lanes.md`, `references/step-5-blueprint.md`,
+    `references/step-6-feedback.md` (grep-verified zero residual `30-word` refs).
+  - **ENGINE — `[settings] narration_person` SHIPPED (same session).** The engine hardcoded
+    `<strong>You:</strong>` on every player dialog line and `💭 You are thinking:` on every player thought
+    bubble, so `vesper`'s shipped build rendered "**You:**" ×10 and "💭 You are thinking:" ×3 **directly
+    under third-person prose** — the mismatch was live, not hypothetical. New `[settings] narration_person`
+    (`second` default / `first` / `third`), enum-validated in `template_import.validate()` so a typo
+    **fails the build** rather than silently falling back to "You:"; read in `v2.generate()`; consumed by a
+    new `v2._get_player_speech_labels()` at the two player-speaker render sites. Third person emits the
+    **runtime macro** `<<print $player.name>>` (not the build-time name) so a renamed customizable PC still
+    resolves — the NPC branch of the same renderer already did this. Gotcha found while building: the
+    portrait **`alt` text is HTML-escaped downstream**, so the macro can't go there — the helper returns a
+    separate plain-text `alt_label`. Documented in `engine-reference.md` §7.
+    **Deliberately OUT of scope:** the ~40 UI-chrome strings (`Your money`, `Your Traits`, `Your Activities`,
+    `(you have 6)`, `Your Boldness ≥ 40`) and the rent/clothing/travel default messages (already
+    author-overridable). Chrome reads fine in any person; the *scene body* is what contradicted itself.
+    **Verified:** vesper rebuilt → `You:` ×0, name-labelled player lines ×10, thought bubbles ×3, portrait
+    alt = "Wren". `late_shifts` rebuilt with **no** setting → `You:` ×6 still renders (default intact, no
+    regression). Enum test: `"secnod"` / `"You"` fail the build; absent key → `"second"`. Display strings
+    only — no ids/flags/traits/title touched, so **save-safe**.
+
 ## 2026-07-09
 - **`references/step-3-casting.md` — added a "Still-point cast floor" bullet to the casting self-check.** Root
   cause: Vesper (a still-point / owned-weapon protagonist) shipped thin with only 2 developed NPCs and drew a

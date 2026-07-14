@@ -132,10 +132,15 @@ NPC arcs/hubs/ambients/capstones are beats. Only the skeleton + boot + sleep + s
      **repeatable explicit** content (after a first-night capstone) the loop menu is `references/sex-loop.md`.
    An NPC arc is built *across* lanes per its shape (never Lane-1-only); keep the NPC hub (Lane 1) separate
    from any solo-work activity (Lane 3 host) — pronoun test: a menu verb with no NPC object is solo work.
-   Voice — two axes. *Density:* Lane 1/2/3 RTS-flat (~30 words) at the NPC's ceiling, Lane 4 Tier-3.
+   Voice — **three axes** (defined in `references/rts-flat-prose.md` §2). *Person:* every `paragraph` /
+   `thought_bubble` is in the game's declared `register.person` (read it from `authoring_state.json` —
+   `second` by default; `dialog` blocks exempt). *Density:* Lane 1/2/3 RTS-flat — **~35–40 words per BEAT**,
+   flat across every tier — at the NPC's ceiling; Lane 4 Tier-3 = **more beats (10–20), not thicker ones**.
+   A beat over ~50 words wanted to be two beats: **split it, don't compress it.**
    *Mode:* when the player and an NPC are in a scene together and something gets said, play it in `dialog`
    blocks (their words do the character work) instead of narrating the exchange ("she asks how long he's
-   worked here, he says four years") — `references/rts-flat-prose.md` Rule 4. Lean hardest at the **hot beats**: a capstone, sex scene, or confrontation that
+   worked here, he says four years") — `references/rts-flat-prose.md` Rule 4. **RTS runs 0.73 narration
+   words : 1 dialogue word; target ≤ 1.5:1 on any scene with a present NPC, > 3:1 is a FAIL.** Lean hardest at the **hot beats**: a capstone, sex scene, or confrontation that
    narrates the encounter as summary is the worst drift there is — play those, don't report them. Multi-party
    beats give each present NPC a voiced moment (short volleys, no monologues). Narration is right
    **only when no one's actually there to speak**: solo activities, voyeur/peek where you're unseen, and the
@@ -261,10 +266,19 @@ Run with the repo venv active, in order; emit a PASS/FAIL line for each:
      no Lane 2/3). The hub holds only NPC-object verbs; solo work/chores are their own canvases. Each Lane 3
      substitution canvas ships `substitution_only=true` + `max_triggers_per_day=1` + `is_repeatable=true` +
      a `location`. Hub base opener is one constant paragraph (not tiered).
-   - **dialogue carries character (Rule 4)** — for any beat where the player and an NPC actually interact,
-     is the character built from what they *say* (`dialog` blocks — their voice, their refusals, their
-     scheming) or narrated *about* (a summary of the exchange)? Play it. The flat register caps *density*,
-     not speech — RTS plays dialogue even in its sex scenes. **Push hardest at the hot beats:** a capstone,
+   - **declared person (Rule 1)** — every `paragraph` / `thought_bubble` this beat wrote is in the game's
+     `register.person` (read it from `authoring_state.json`; `dialog` blocks are exempt). **Run
+     `references/rts-flat-prose.md` §7 check 1** — one grep. A mixed-person game is a reader-facing bug and
+     nothing else in the pipeline catches it (`late_shifts` ships "He looks up when **you** come in" and
+     "**She** says something about the shift" in the same file).
+   - **dialogue carries character (Rule 4) — THE ONE WE ALWAYS FAIL** — for any beat where the player and an
+     NPC actually interact, is the character built from what they *say* (`dialog` blocks — their voice, their
+     refusals, their scheming) or narrated *about* (a summary of the exchange)? Play it. The flat register
+     caps *density*, not speech — **RTS runs 0.73 narration words : 1 dialogue word across its whole corpus,
+     and its deepest sex scenes are its MOST spoken.** Every game this skill has shipped inverts that
+     (vesper 7.25:1 · the_inheritance 5.79:1 · late_shifts 15.04:1). **Target ≤ 1.5:1 on any scene with a
+     present NPC; > 3:1 is a FAIL — run `references/rts-flat-prose.md` §7 check 3 and report the number at
+     every milestone build.** **Push hardest at the hot beats:** a capstone,
      sex scene, or confrontation that narrates the encounter ("she asks, he answers") instead of voicing it
      is the single worst drift — those are the beats the player waited for, so play them, don't report them.
      Multi-party → each present NPC gets a line — short volleys, no monologues (`references/rts-flat-prose.md`
@@ -272,6 +286,17 @@ Run with the repo venv active, in order; emit a PASS/FAIL line for each:
      actually there to speak**: solo activities, voyeur/peek where you're unseen, and the interior-monologue
      stretches of a capstone. An NPC who's *present* is not exempt — give them at least a line (a mood
      glimpse can be one terse spoken beat).
+   - **per-beat density (Rule 2)** — each **beat** (not each block — a beat is often a `dialog` + a
+     `paragraph`, and beat 0 includes the node's lead blocks) carries **~35–40 words**. **Over ~50 → SPLIT it
+     into two beats, don't compress it.** The click is the fix. `references/rts-flat-prose.md` §7 check 2.
+   - **tier = beat COUNT, not prose thickness (§5)** — a Lane-4 capstone runs **10–20 beats**; under 10 it's a
+     Tier-2 ambient wearing a capstone's badge. A Lane-2 ambient over 9 beats will grate on the third
+     re-read. RTS's biggest scene is 24 beats of ~25 words. Escalate by **adding beats**, never by fattening
+     them.
+   - **body yes, room no (Rule 3)** — did a scene body describe the *location*? Cut it; the location card
+     already did that once. Did a hot beat carry **no body sensation**? That's under-written, not disciplined
+     — RTS writes the body constantly ("Heat flares in your belly"), and body sensation encodes reluctance as
+     readily as arousal.
    - **vocab ceiling honored** — explicit content sits at the NPC's declared per-tier ceiling (design brief);
      default to the MOST explicit reading. **Contraception language is `pregnancy`-conditional** (slice was
      removed, so it's now a single axis): ship **bareback** (no contraception language, so a pregnancy

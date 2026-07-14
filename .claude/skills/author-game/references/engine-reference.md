@@ -398,6 +398,7 @@ reads as disabled **with no error** — a silent failure that has shipped dead s
 | **Phone** | `enabled` in **top-level `[phone]`** (defaults `true` when the table is present) | `:2411-2415` | `[[phone.apps]]`, `[[phone.conversations]]`, `[[phone.posts]]`, … |
 | **Player portrait** | `enabled` in **top-level `[player_portrait]`** (state-reactive sidebar image) | `:2385` | `[[player_portrait.outfits]]` (`{image, when}`) + `naked_image`/`topless_image`/`bottomless_image`/`underwear_image`/`default_image` + `pregnancy_trait`/`pregnancy_suffix`. Resolves to ONE top-of-sidebar `<img>` via `setup.getPlayerPortrait()` (`v2.py:1466`) — undress from `setup.getUndressLevel()` (`v2.py:1454`, null when clothing off), outfit from the **dominant garment's `type`** (`equipped.dress\|\|top\|\|bottom`), corruption via **LEVEL 0-4** (`getCorruptionLevel`, NOT raw points), pregnancy via a `<suffix>` filename insert (dressed images only). Widget `<<playerPortrait>>` mounts TOP-MOST in StoryCaption (`v2.py:14850`); config emitted UNCONDITIONALLY as `setup.player_portrait` (`v2.py:2951`). Full model → `references/player-portrait.md`. |
 | **Time** | `[time]` (`enabled`/`starting_hour`/`starting_day`/`starting_week`) | `:1481` | — |
+| **Narrative person** | `narration_person` in `[settings]` — `"second"` (default) \| `"first"` \| `"third"` | `template_import.py` (`VALID_NARRATION_PERSONS`; enum-validated in `validate()` — a typo **fails the build**) → `project.metadata["narration_person"]` → `v2.py` `generate()` | Not a system — a **voice constant**. Labels the player's OWN `dialog` / `thought_bubble` blocks via `_get_player_speech_labels()` (`v2.py`): `second` → `You:` / `💭 You are thinking:` · `first` → `Me:` / `💭 I'm thinking:` · `third` → `<<print $player.name>>:` / `💭 <name> is thinking:` (runtime macro, so a renamed customizable PC still resolves). **Mirror the game's `register.person`** (`ledger-schema.md`) — a third-person game left on the default stamps "**You:**" over prose that says "she". Everything else (sidebar, quest chips, shop) stays person-neutral by design. |
 
 *(code-vs-lore: there is **no** bare `phone_enabled`, `rent_enabled`, or `rent_amount` key — those forms are
 dead config the importer never reads. Rent keys are `enabled`/`amount`, not `rent_enabled`/`rent_amount`.)*
@@ -407,6 +408,7 @@ The design model for each system (when to enable, the patterns) → `references/
 ```toml
 [settings]            # clothing
 clothing_enabled = true
+narration_person = "second"   # voice constant, not a system — mirror the ledger's register.person
 [settings.rent]       # rent
 enabled = true
 [phone]               # phone — top-level, NOT under [settings]

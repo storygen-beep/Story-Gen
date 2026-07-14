@@ -1,6 +1,6 @@
 # Media — images, video, clips (the image-first layer)
 
-These games are **image-first**: the visual asset carries the scene and the prose is the ~30-word caption
+These games are **image-first**: the visual asset carries the scene and the prose is the ~35–40-word beat
 hung off it (`references/rts-flat-prose.md` Rule 8). A scene with no media plan is a scene that ships blank —
 a missing content image renders **nothing** to the player, silently. So media is not decoration you add at the
 end; it's part of authoring the beat.
@@ -267,7 +267,8 @@ Two engine features worth using:
 
 ## 9. Exemplar + anti-example
 
-**Copy this** — `games/the_inheritance/toml_phases/3_activities.toml:97-104`, the establishing-image →
+**Copy this** — `archive/the_inheritance_v1/toml_phases/3_activities.toml:97-104` (the v1 build, archived
+2026-07-14 while the game is re-authored), the establishing-image →
 paragraph → act-video rhythm in one node, each media block carrying a description + 2 queries:
 ```toml
 blocks = [

@@ -37,7 +37,7 @@ Why this is the default and not "be moderate": left without a per-arc ceiling, d
 and medium-explicit DRIFTS soft under repetition. The corrective is the ceiling: name what full intensity is
 for this arc, then write to it.
 
-The register stays **RTS-flat** at the everyday tiers (Lane 1/2/3 — ~30-word captions, re-readable, no
+The register stays **RTS-flat** at the everyday tiers (Lane 1/2/3 — ~35–40 words per beat, re-readable, no
 literary ritual; `references/lanes.md`). Flat is about DENSITY, not euphemism. At the explicit tiers the flat
 prose goes **crude and anatomical** — real terms (`cock`, `cunt`, `tits`, `ass`, `cum`), not euphemism. Flat
 + crude is the target; flat + coy is the failure.

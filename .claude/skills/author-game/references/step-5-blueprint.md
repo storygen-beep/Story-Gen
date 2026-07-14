@@ -115,7 +115,7 @@ geography. Output: a **`### World blueprint`** block; updates the `structure_reg
   hard `entry_conditions` lock makes its screen a dead-end), give it a **dynamic occupant description**, and
   gate the ACTIVITIES by occupancy — the player's self-care shows `is_absent`, the **peek lives ON the room
   canvas** gated `is_present`. Caught = catch-then-react on the player's shower (chance, gated who's-home,
-  not a clock). Register: RTS-flat (~30w base, scheme in a `thought_bubble`), density only at the once-per-arc
+  not a clock). Register: RTS-flat (~35–40w per beat, scheme in a `thought_bubble`), density only at the once-per-arc
   tier. Never author a place that wasn't confirmed.
 - **Ledger:** `blueprint.world = "done"`.
 

@@ -51,7 +51,7 @@ or fixed.
 
 ## Step 1 — the seed (the bare creative skeleton)
 A short interview (one question at a time via AskUserQuestion, 2–4 options + a recommendation; skip
-anything the concept already answers — state the default, don't ask). Four plain-words things, nothing
+anything the concept already answers — state the default, don't ask). Five plain-words things, nothing
 technical:
 
 1. **Premise / setting / player.** Who the player is, where, the central hook. The POV is **inherited from
@@ -66,6 +66,20 @@ technical:
    **player portrait** (a state-reactive sidebar image)? A pure scope choice ("this game has a phone").
    Not the wiring/TOML homes (those are authoring). Clothing is worth flagging early since the
    **reactive world** (Step 2) — and the player portrait's undress axis — ride it.
+5. **Voice — the PERSON the game is written in.** One word, and it is **locked for the life of the game**:
+   - **`second` — "You take the stool."** The DEFAULT. It's what Road to Success does, and it's what every
+     rule and example in `references/rts-flat-prose.md` is written in. Pick it unless there's a real reason.
+   - **`first` — "I take the stool."** A confessional / diary-voiced protagonist.
+   - **`third` — "She takes the stool."** A protagonist the player *watches* rather than *inhabits* (the
+     still-point / owned-weapon PC — `vesper`). It costs second-person immediacy; buy it on purpose.
+
+   > **"Person" is NOT "POV."** In this skill **POV** means the protagonist's **gender** (Step 0 above).
+   > This is the *grammar*. They're different questions and both get asked.
+
+   Ask it (Mode A) — it changes every line of prose in the game and **cannot be changed later** without a
+   full-corpus rewrite. Record it as `register.person` in the ledger, and set `narration_person` in the
+   game's TOML `[settings]` so the engine labels player dialogue to match (a `third`-person game with the
+   default setting renders "**You:**" over prose that says "she" — that shipped once already).
 
 There is **no scope question** — every game is the full game (slice was removed).
 
@@ -73,14 +87,15 @@ There is **no scope question** — every game is the full game (slice was remove
 
 ## Born here: the ledger (phase tracker)
 At the end of this conversation, create `games/<slug>/authoring_state.json` from `references/ledger-schema.md`
-with **`pipeline_phase` set** (it advances as the pipeline proceeds). `structure_registry` / `plan` stay
+with **`pipeline_phase` set** and **`register.person` set** (the two fields the seed is responsible for; the
+phase advances as the pipeline proceeds, the person never changes). `structure_registry` / `plan` stay
 **empty** — there's no structure yet. The ledger is bookkeeping JSON: it compiles nothing, can't fail a
 build, and lets the skill resume at the right step. (The dispatch reads `pipeline_phase`, not "does the file
 exist.")
 
 ## Output (only the seed sections of `design_book.md`)
-- **World setup** — the fantasy (POV · the 3-part-bar fantasy line · the desire span), premise, player,
-  the systems-in-use yes/no.
+- **World setup** — the fantasy (POV · the 3-part-bar fantasy line · the desire span), **the register
+  (person)**, premise, player, the systems-in-use yes/no.
 - **Cast** — names + roles.
 - **Locations** — the map.
 
@@ -95,9 +110,11 @@ creative seat; the engine translation happens later, by the agent.
 ## Self-check
 - POV picked **before** the fantasy; the fantasy clears the **3-part bar** (not just "one sentence").
 - The desire span is **declared** (genders + flavors across acts), not stumbled into.
-- The seed has all four: premise/player · cast (names+roles only) · map · systems yes/no.
+- The seed has all five: premise/player · cast (names+roles only) · map · systems yes/no · **person**.
+- The **person** is declared (`second` unless argued otherwise) and understood to be immutable — and it is
+  NOT the same question as POV (gender).
 - **No** arc shapes / stats / TOML / green build authored here.
-- The ledger exists with `pipeline_phase`; `design_book.md` has the seed sections.
+- The ledger exists with `pipeline_phase` + `register.person`; `design_book.md` has the seed sections.
 - Hand off: *"Seed locked — moving to top-level design (the engine + economy + desire ladder)."* → Step 2.
 
 ## Cross-references

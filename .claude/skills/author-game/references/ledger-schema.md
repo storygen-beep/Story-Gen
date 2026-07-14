@@ -9,6 +9,15 @@ not managed by any code module. Follow the invariants below when editing it.
   "game_slug": "late_shifts",       // matches games/<slug>/
   "schema_version": 2,
   "book_revision": 1,               // bumped when design_book.md is amended
+  "register": {                     // the game's VOICE constants — set at the SEED, then IMMUTABLE.
+    "person": "second"              //   "second" (default) | "first" | "third". Every paragraph /
+  },                                //   thought_bubble in the game is in this person; dialog blocks are
+                                    //   exempt. Mirror it into the TOML as [settings] narration_person so
+                                    //   the engine labels player dialogue to match. Changing it later =
+                                    //   rewriting every line of prose (and on a SHIPPED game, rewriting
+                                    //   prose players have already read). Density and mode are NOT ledger
+                                    //   fields — they're per-canvas / per-beat, derived from the lane and
+                                    //   from who's in the room (`rts-flat-prose.md` §2).
   "pipeline_phase": "authoring",    // which pipeline step we're in — the phase-aware dispatch reads THIS,
                                     //   not "does the file exist". One of: "setup" | "top_level" |
                                     //   "map_design" | "casting" | "deep_design" | "blueprint" |
@@ -76,6 +85,21 @@ not managed by any code module. Follow the invariants below when editing it.
   ]
 }
 ```
+
+**`register`** (the voice constants): `register.person` is one of `"second"` (default) / `"first"` /
+`"third"`, chosen at Step 0+1 (`step-0-1-seed.md` item 5) and **immutable thereafter** — every `paragraph`
+and `thought_bubble` in the game is in it (`dialog` blocks are exempt), so a change is a full-corpus
+rewrite. Mirror it into the game TOML as `[settings] narration_person` so the engine labels player dialogue
+to match; a `third`-person game left on the default renders "**You:**" over prose that says "she" (that
+shipped once). The other two register axes — *density* and *mode* — are deliberately **not** ledger fields:
+they're per-canvas and per-beat, derived from the lane and from who's in the room (`rts-flat-prose.md` §2).
+
+> **Back-compat — a ledger with no `register`:** do NOT assume `second`. On the first continue turn,
+> **detect** the game's actual person by running `rts-flat-prose.md` §7 check 1 over its existing TOML,
+> write the result into the ledger, and tell the user what you found. (Games predating this field:
+> `vesper` = `third`; `last_call`, `the_inheritance`, `mothers_place` = `second`; **`late_shifts` is
+> genuinely MIXED** — 362 of 398 paragraphs narrate in third, the rest address "you" — so it needs a
+> decision from the user and a prose pass, not a detection.)
 
 **`pipeline_phase` + `npcs`** (v2): `pipeline_phase` is set when the ledger is created at setup and
 updated as the pipeline advances; the **phase-aware dispatch reads it** to resume at the right step

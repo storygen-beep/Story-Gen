@@ -63,7 +63,7 @@ a silent cut.
   sealed — a hard lock makes a dead-end screen); (b) occupancy gates the **activities** (bath `is_absent`,
   peek `is_present`), and the **peek lives ON the room canvas**, not a hallway; (c) the room has a **dynamic
   occupant description**; (d) caught = **catch-then-react** on the shower (chance, gated who's-home, **not** a
-  fixed time window); (e) **register is RTS-flat** — peek/caught base beats ≈30 words, the player's read in
+  fixed time window); (e) **register is RTS-flat** — peek/caught base beats ≈35–40 words per beat, the player's read in
   one `thought_bubble`, **no interior-monologue aphorisms on a daily-repeat surface** (`references/rts-flat-prose.md`);
   dialog + density only at the once-per-arc deepest tier.
 - **Every scene serves a WANT** (the desire ladder) — no meter-exercise content.

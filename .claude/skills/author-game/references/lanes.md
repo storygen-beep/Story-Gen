@@ -230,7 +230,7 @@ The hardest lane; RTS's biggest. Two canvases per activity:
      (`v2.py:3847`, `type === 'npc_at_location'`) — operator `is_present`/`is_absent`, optional `npc_id` (omitted = the room itself
      occupied/empty). It evaluates in canvas, choice, substitution, AND `entry_conditions` (one canonical
      evaluator). The condition block needs `version = "1.0"` or it fails OPEN. Register stays RTS-flat
-     (~30w base, scheme in a `thought_bubble`); the capstone it routes into is where density is earned.
+     (~35–40w per beat, scheme in a `thought_bubble`); the capstone it routes into is where the BEATS are earned.
      *(Note: two-NPC co-presence — "catch two of them together" — needs a separate engine feature the
      renderer doesn't have yet; only the player-is-a-party configs above are buildable today.)*
    - **Rising frequency (the saturation curve):** *(for REPEATABLE ambients only — never a scripted rare beat,
@@ -323,22 +323,38 @@ explicit surface that follows (opened from the hub once the first-night flag is 
 **sex-loop menu** — its own pattern, see `references/sex-loop.md`.
 
 ## Voice register
-- **Lane 1 / 2 / 3:** RTS-flat default — ~30-word caption density, direct/crude diction per the NPC's
-  **per-tier vocab ceiling** (declared in its design brief; the ceiling model is
-  `references/kink-ceilings.md`, default-to-maximum-explicit). Re-readable (these repeat).
-- **Lane 4 capstones:** Tier-3 EARNED — interior monologue + layered sensory detail +
-  character-distinguishing diction. Once-only, so the prose can spend.
+
+> **This section is the lane → value LOOKUP.** The three register axes are **defined** in
+> `references/rts-flat-prose.md` §2 (person · density · mode) — that file owns them, with the measured
+> numbers and the runnable audits. Read it before writing any scene body; read this for which value
+> *your lane* takes.
+
+- **Person (whole game, not per-lane):** every `paragraph` and `thought_bubble` is in the game's declared
+  `register.person` — `second` (default) / `first` / `third`, locked at Step 0+1 and recorded in
+  `authoring_state.json`. Never mixed. `dialog` blocks are exempt (a speaker says "you" regardless).
+  (`rts-flat-prose.md` Rule 1.)
+- **Lane 1 / 2 / 3:** RTS-flat default — **~35–40 words per BEAT** (flat across every tier; RTS measured),
+  direct/crude diction per the NPC's **per-tier vocab ceiling** (declared in its design brief; the ceiling
+  model is `references/kink-ceilings.md`, default-to-maximum-explicit). Re-readable (these repeat). A beat
+  over ~50 words wanted to be **two beats** — split it, don't compress it.
+- **Lane 4 capstones:** Tier-3 EARNED — **more beats (10–20), not thicker beats.** Interior monologue,
+  inferential character work (the Rule-5 ban lifts here, once), composed rhythm across beats. Once-only,
+  so it can spend **clicks**. RTS's Tier-3 runs the same ~38 words/beat as its Tier-2 — and is its *most*
+  dialogue-heavy tier. A capstone under 10 beats is a Tier-2 wearing a badge.
 - **Choice labels** are tighter than the prose — label = action, no subtext, crude-in-label at the
   ceiling, emoji on menu buttons / bare on in-loop beats (Lane 1 above + `references/sex-loop.md`).
-- **Mode, not just density.** The flat register governs how *dense* the prose is, not whether people
-  speak. Where a beat is an actual exchange — player ↔ NPC, or a group in one room — carry it in `dialog`
-  blocks (their words, interruptions, refusals), not a narrated summary of what was said; RTS plays
-  dialogue even in its explicit scenes (the full mode-not-density rule is `references/rts-flat-prose.md`).
+- **Mode, not just density — and this is the axis we have failed in every game.** The flat register
+  governs how *dense* the prose is, not whether people speak. Where a beat is an actual exchange — player
+  ↔ NPC, or a group in one room — carry it in `dialog` blocks (their words, interruptions, refusals), not
+  a narrated summary of what was said. RTS runs **0.73 narration words : 1 dialogue word** across its whole
+  corpus, and its deepest sex scenes are its most spoken. **Target: ≤ 1.5 : 1 on any scene with a present
+  NPC; > 3 : 1 is a FAIL.** (Ours: vesper 7.25:1, the_inheritance 5.79:1, late_shifts 15.04:1.)
   **Lean hardest at the hot beats** (capstones, sex, confrontations): narrating the encounter as summary
   is the worst drift — play them. Multi-party beats give each present NPC a voiced moment under the
   no-monologue cap (one terse beat each, not a speech). EXEMPT only when **no one's there to speak**:
   solo activities, voyeur/peek where you're unseen, and the interior-monologue stretches of a capstone.
   A present NPC is not exempt — even a mood glimpse gives them one terse line.
+  **Full rule + the runnable audit: `references/rts-flat-prose.md` Rule 4 + §7 check 3.**
 
 ## Runtime rendering rules (live-verified — these bite even when the build is green)
 The location screen renders four separate paths; a canvas only appears if it matches the right one:
