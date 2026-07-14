@@ -42,6 +42,15 @@
         h1.appendChild(badge);
       }
 
+      // The published release currently live in output/ — this is the number the storefronts ask for.
+      if (game.version) {
+        var ver = document.createElement("span");
+        ver.className = "detail-version";
+        ver.textContent = "v" + game.version;
+        h1.appendChild(document.createTextNode(" "));
+        h1.appendChild(ver);
+      }
+
       var summary = document.createElement("p");
       summary.className = "detail-summary";
       summary.textContent = game.summary;

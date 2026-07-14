@@ -8,11 +8,17 @@
 //   summary (required) — one-paragraph player-facing teaser (the curated portal copy)
 //   badge   (optional) — small tag shown next to the title, e.g. "New"
 //   dev     (optional) — true → renders in the "Dev / test builds" section, "Open" affordance
+//   version (optional) — the PUBLISHED release currently live at games/<slug>/output/, e.g. "0.1.3".
+//                        Bump it in the same commit that rebuilds output/, and archive that build to
+//                        games/<slug>/releases/v<version>.html. This is the number the storefronts
+//                        (gamcore/mopoga/itch) ask for, so it must track what actually shipped —
+//                        NOT whatever is currently half-built in the working tree.
 window.GAMES = [
   {
     slug: "vesper",
     title: "Vesper",
     badge: "New",
+    version: "0.1.3",
     summary: `An owned half-human weapon — the company's slave inside its tower, a false face outside — slips into powerful men's lives and drains them while they think they're using her, hunting a "rogue" who may be the one person who ever loved her. Phase 1: the cold open, her owner, and the wrecked boss she seduces and drains for the truth.`,
   },
   {

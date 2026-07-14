@@ -107,6 +107,16 @@ footer {
   margin: 0 0 18px;
 }
 .detail-title .badge { font-size: 0.7rem; vertical-align: middle; }
+/* Published release number — quiet, next to the badge; it's a fact, not a shout. */
+.detail-version {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted, #8a8a8a);
+  margin-left: 8px;
+  vertical-align: middle;
+}
 .detail-summary {
   color: var(--muted);
   font-size: 1.05rem;
