@@ -1002,6 +1002,13 @@ class TweeComprehensiveGeneratorV2:
             (self.project.metadata or {}).get("quests_cards", [])
         )
 
+        # Narrative person — labels the player's own dialog / thought-bubble blocks so
+        # they agree with the prose. A third-person game left on the default renders
+        # "You:" directly under a paragraph that says "she".
+        self.narration_person = (self.project.metadata or {}).get(
+            "narration_person", "second"
+        )
+
         # Clothing system data
         clothing_settings = (self.project.metadata or {}).get("clothing_settings", {})
         self.clothing_enabled = clothing_settings.get("enabled", False)
@@ -2875,19 +2882,31 @@ jQuery(document).on('click', '.phone-back', function() {
     if (target === 'home') setup.openPhone();
     else if (target === 'threadList') setup.openPhoneApp(setup._phoneApp);
 });
+// The phone is rendered INSIDE the current passage — every handler below mutates state and
+// then re-renders the phone frame by hand, navigating nowhere. So each one commits a moment
+// (setup.commitMoment) or its effect would live only in the active moment: Save and a page
+// refresh would both replay the state from before the tap. bankTransfer is the sharpest case —
+// it moves money, so without a commit a refresh can hand the balance back.
+// The commit is CONDITIONAL: setup.commitMoment no-ops on a canvas node, because committing a
+// post-render state there would make the node's own advanceTime/trait scripts re-fire on every
+// reload. Phoning mid-scene therefore still doesn't survive a refresh — deliberately.
+// .phone-gallery-link is exempt: it Engine.plays, so the navigation commits for it.
 jQuery(document).on('click', '.phone-reply-btn', function(e) {
     e.preventDefault();
     setup.sendPhoneReply(jQuery(this).data('conv-id'), parseInt(jQuery(this).data('choice'), 10), parseInt(jQuery(this).data('round'), 10) || 1);
+    setup.commitMoment();
 });
 // Daily chat handlers
 jQuery(document).on('click', '.phone-daily-btn', function(e) {
     e.preventDefault();
     setup.sendDailyChat(String(jQuery(this).data('npc')), String(jQuery(this).data('topic-id')));
+    setup.commitMoment();
 });
 // Dating app handlers
 jQuery(document).on('click', '.phone-post-btn', function(e) {
     e.preventDefault();
     setup.sendSocialPost(jQuery(this).data('app-id'), parseInt(jQuery(this).data('action-idx'), 10));
+    setup.commitMoment();
 });
 jQuery(document).on('click', '.phone-gallery-link', function(e) {
     e.preventDefault();
@@ -2897,18 +2916,22 @@ jQuery(document).on('click', '.phone-gallery-link', function(e) {
 jQuery(document).on('click', '.phone-job-btn', function(e) {
     e.preventDefault();
     setup.doFastJob(String(jQuery(this).data('job-id')));
+    setup.commitMoment();
 });
 jQuery(document).on('click', '.phone-bank-btn', function(e) {
     e.preventDefault();
     setup.bankTransfer(String(jQuery(this).data('bank')));
+    setup.commitMoment();
 });
 jQuery(document).on('click', '.phone-dating-like', function(e) {
     e.preventDefault();
     setup.likeProfile(jQuery(this).data('profile-id'));
+    setup.commitMoment();
 });
 jQuery(document).on('click', '.phone-dating-pass', function(e) {
     e.preventDefault();
     setup.passProfile(jQuery(this).data('profile-id'));
+    setup.commitMoment();
 });
 jQuery(document).on('click', '.phone-match-dismiss', function(e) {
     e.preventDefault();
@@ -3091,6 +3114,8 @@ jQuery(document).on('click', '.player-img-option', function(e) {{
     $el.siblings('.player-img-option').removeClass('player-img-selected');
     $el.addClass('player-img-selected');
     setup.selectPlayerField(fieldId, value, image, setsPortrait);
+    // Navigates nowhere — commit, or the pick is lost on save/refresh (see setup.commitMoment).
+    if (setup.commitMoment) {{ setup.commitMoment(); }}
 }});
 
 // Time period calculation function
@@ -5010,6 +5035,20 @@ setup.checkRandomEncounters = function(locationId) {{
         var locationCanvases = helpData.locationCanvases || {{}};
         var canvasList = locationCanvases[String(locationId)] || [];
 
+        // Coming back from a sidebar/info page is NOT an arrival — the player never walked in,
+        // they closed a menu. Bail before the roll AND before the cooldown decrement below:
+        // a re-render must neither draw a fresh encounter nor burn a tick of the cooldown that
+        // spaces encounters out. Without this, "← Back" re-rolls at full chance every press
+        // (a MISS records nothing), which yanked players into once-only scenes they never
+        // entered the room for.
+        //
+        // This is the always-on FLOOR of the RTS rule below (RTS gates room ambients on
+        // previous() == the adjacent room). It composes with, and does not replace, the
+        // per-canvas opt-in entryOnlyFromPassages gate further down.
+        var prevP = '';
+        try {{ prevP = previous() || ''; }} catch (eP) {{}}
+        if (prevP && setup.infoPages && setup.infoPages.indexOf(prevP) !== -1) return null;
+
         // Cooldown: after a random event fires, skip N visits before rolling again
         var cooldowns = sv.game_state.random_cooldowns = sv.game_state.random_cooldowns || {{}};
         var locKey = String(locationId);
@@ -5246,6 +5285,19 @@ window.advanceTime = function(minutes) {{
 
     // Update display
     updateTimeDisplay();
+}};
+
+// The sidebar wait buttons' entry point: advance the clock, then COMMIT a moment.
+//
+// advanceTime() deliberately does NOT commit — deductLocationCosts() calls it mid-navigation
+// from :passagestart, where the in-flight navigation commits for us and an extra moment would
+// be spurious. But a wait BUTTON navigates nowhere, so its change would live only in the
+// active moment: Save (which serializes the history) and a page refresh would both replay the
+// OLD clock. Committing here publishes it. This covers the whole daily tick too — advanceDay,
+// trait decay, arousal rise and bank interest all run inside advanceTime.
+window.waitTime = function(minutes) {{
+    window.advanceTime(minutes);
+    if (setup.commitMoment) {{ setup.commitMoment(); }}
 }};
 
 window.advanceDay = function() {{
@@ -13132,6 +13184,29 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
             '</svg>'
         )
 
+    def _get_player_speech_labels(self) -> tuple[str, str, str]:
+        """Speaker labels for the player's own dialog and thought-bubble blocks.
+
+        Returns (dialog_label, thought_label, alt_label) for the game's
+        `narration_person`.
+
+        Third person emits the SugarCube macro rather than a build-time constant so a
+        customizable player who renames themselves still sees their own name — the NPC
+        branch of the same renderer already resolves speakers this way.
+
+        `alt_label` is a separate PLAIN-TEXT variant: `_render_portrait` HTML-escapes its
+        alt text, so a macro placed there would render as the literal string
+        "<<print $player.name>>" instead of the name.
+        """
+        person = getattr(self, "narration_person", "second")
+        if person == "first":
+            return "Me", "💭 I'm thinking:", "Me"
+        if person == "third":
+            name = "<<print $player.name>>"
+            alt = getattr(self, "player_name", "") or "Player"
+            return name, f"💭 {name} is thinking:", alt
+        return "You", "💭 You are thinking:", "You"
+
     def _render_portrait(self, portrait_path: str, alt_text: str) -> str:
         """Render portrait image with fallback placeholder.
 
@@ -14007,14 +14082,16 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     speaker = props.get("speaker", "npc")
 
                     if speaker == "player":
-                        # Player dialog with portrait support
+                        # Player dialog with portrait support. The label follows the
+                        # game's narration_person so it agrees with the prose around it.
+                        player_label, _, alt_label = self._get_player_speech_labels()
                         player_portrait = getattr(self, 'player_portrait', '') or ''
-                        portrait_html = self._render_portrait(player_portrait, "You") if player_portrait else ''
+                        portrait_html = self._render_portrait(player_portrait, alt_label) if player_portrait else ''
                         html_parts.append(
                             f'<div class="dialog-block dialog-player">'
                             f'{portrait_html}'
                             f'<div class="dialog-content">'
-                            f'<strong>You:</strong> {content}'
+                            f'<strong>{player_label}:</strong> {content}'
                             f'</div></div>'
                         )
                     elif speaker == "unknown":
@@ -14056,13 +14133,14 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     # distinct from speech (💭 glyph, dashed border, muted color).
                     speaker = props.get("speaker", "npc")
                     if speaker == "player":
+                        _, thought_label, alt_label = self._get_player_speech_labels()
                         player_portrait = getattr(self, 'player_portrait', '') or ''
-                        portrait_html = self._render_portrait(player_portrait, "You") if player_portrait else ''
+                        portrait_html = self._render_portrait(player_portrait, alt_label) if player_portrait else ''
                         html_parts.append(
                             f'<div class="thought-bubble thought-bubble-player">'
                             f'{portrait_html}'
                             f'<div class="thought-bubble-content">'
-                            f'<em>💭 You are thinking:</em> {content}'
+                            f'<em>{thought_label}</em> {content}'
                             f'</div></div>'
                         )
                     elif speaker == "unknown" or not speaker.startswith(("npc_", "npc")):
@@ -14570,8 +14648,10 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
         if self.dev_mode:
             dev_script_passage = """:: DevModeInit [script]
 // ===== DEV MODE HELPER FUNCTIONS =====
-// Dev trait modifications are stored in sessionStorage and reapplied on every
-// passage start. This ensures changes persist across all navigation (back/forward).
+// These mutate $player / $npcs and hand-patch the DOM without navigating, so each one
+// commits a moment (setup.commitMoment) to publish the change into the history — otherwise
+// it lives only in the active moment and a save or refresh replays the old value.
+// (The previous comment here claimed sessionStorage persistence; no such code ever existed.)
 
 window.devAdjustNpcTrait = function(npcId, trait, delta) {
     var npc = State.variables.npcs[npcId];
@@ -14601,14 +14681,18 @@ window.devAdjustPlayerTrait = function(trait, delta) {
     }
 };
 
+// Dev clock buttons navigate nowhere, so they must commit (see setup.commitMoment) or the
+// jump is lost on save/refresh. waitTime() already commits; devNextDay writes past advanceDay
+// and has to commit for itself.
 window.devAdvanceHour = function() {
-    window.advanceTime(60);
+    window.waitTime(60);
 };
 
 window.devNextDay = function() {
     window.advanceDay();
     State.variables.game_state.time_state.current_hour = 6;
     State.variables.game_state.time_state.current_minute = 0;
+    if (setup.commitMoment) { setup.commitMoment(); }
 };
 
 // Event delegation for dev mode trait adjustment buttons
@@ -14617,12 +14701,14 @@ document.addEventListener('click', function(e) {
         var trait = e.target.dataset.trait;
         var delta = parseInt(e.target.dataset.delta, 10);
         window.devAdjustPlayerTrait(trait, delta);
+        if (setup.commitMoment) { setup.commitMoment(); }
     }
     if (e.target.matches('.dev-npc-trait-btn')) {
         var npcId = e.target.dataset.npc;
         var trait = e.target.dataset.trait;
         var delta = parseInt(e.target.dataset.delta, 10);
         window.devAdjustNpcTrait(npcId, trait, delta);
+        if (setup.commitMoment) { setup.commitMoment(); }
     }
 });
 
@@ -14698,7 +14784,10 @@ window.devGoBack = function() {
     }
 """
 
-        info_pages_list = '["QuestsPage", "TipsPage", "StatsPage", "SchedulePage", "MissingMediaPage", "StoryJournal", "WardrobePage", "ShopPage", "ClothingBlock"'
+        # FlagsPage belongs here too: it has a smartBack back-link and a sidebar button, so
+        # omitting it let the tracker record it as $last_game_passage and let smartBack land
+        # back INSIDE it.
+        info_pages_list = '["QuestsPage", "TipsPage", "StatsPage", "SchedulePage", "MissingMediaPage", "StoryJournal", "WardrobePage", "ShopPage", "ClothingBlock", "FlagsPage"'
         if self.rent_enabled:
             info_pages_list += ', "RentDay", "RentDay_Paid", "RentDay_Short"'
         if has_location_costs:
@@ -14747,21 +14836,87 @@ setup.backfillStateDefaults = function (sv) {
     }
 };
 
-// State-restoring "Back" for sidebar/info pages. Engine.play() navigates FORWARD
-// and RE-RUNS the target passage — on a one-time auto-fire canvas that re-fires
-// its advanceTime/flag scripts and bloats history (the reported bug: "going back
-// doesn't work from one-time canvases"). Instead, restore the last NON-info
-// moment already in the history stack via Engine.goTo, which rolls state back
-// first so the passage's scripts net correctly and no new moment is added. Fall
-// back to the stored passage only when history can't reach a real one (e.g. right
-// after a save-load, when the previous moment isn't in the stack).
+// "Back" for sidebar/info pages.
+//
+// SugarCube snapshots a moment's variables at passage START. Engine.goTo(i) re-activates
+// an EARLIER moment, which restores that moment's variables — so it discards everything
+// the player changed since the current passage rendered. That silently ate the wardrobe:
+// equip an outfit, press Back, and the equip was rolled away. In Vesper it made the game
+// unfinishable (the cover is granted un-worn and 13 canvases gate on it being equipped).
+//
+// So we navigate FORWARD to the stored passage instead, which is what Road to Success does
+// (`<<goto previous()>>`): a new moment is created and it carries the player's changes.
+// $last_game_passage is maintained by the :passagestart handler below and already excludes
+// every info page, so it is exactly the "previous real passage" we want.
+//
+// Engine.goTo survives ONLY for canvas nodes. Forward-playing INTO a canvas node re-runs its
+// body — re-firing its advanceTime/flag scripts (the original bug this function was written
+// for: "going back doesn't work from one-time canvases"). Rolling state back is the lesser
+// evil there, and it costs nothing the player can see: the only info pages that MUTATE state
+// (Wardrobe/Shop) are reachable solely from a location, never from mid-canvas.
 setup.smartBack = function () {
+    var dest = State.variables.last_game_passage || "Navigation";
+    // Locations and the nav screen are safe to re-render (see setup.isRerenderSafe): auto-fire
+    // is idempotent via markCanvasTriggered, entry costs are guarded (destLoc.id !== curLoc),
+    // and the random roll is gated on entry provenance (see checkRandomEncounters). Go FORWARD
+    // so the player's changes ride along.
+    if (setup.isRerenderSafe(dest) && setup.infoPages.indexOf(dest) === -1) {
+        Engine.play(dest);
+        return;
+    }
     var hist = State.history, active = State.activeIndex;
     for (var i = active - 1; i >= 0; i--) {
         var t = hist[i] && hist[i].title;
         if (t && setup.infoPages.indexOf(t) === -1) { Engine.goTo(i); return; }
     }
-    Engine.play(State.variables.last_game_passage || "Navigation");
+    // dest is a canvas node AND its moment has been evicted (maxStates). Forward-playing it
+    // would re-run its body — re-firing advanceTime and additive trait effects. Bounce to the
+    // hub instead: losing your place beats silently re-applying a scene's effects.
+    Engine.play("Navigation");
+};
+
+// May a passage safely carry a COMMITTED post-render state?
+//
+// This is the load-bearing invariant of SugarCube's state model: a moment stores the
+// variables as of passage ARRIVAL (State.create snapshots before Passage.render runs), and
+// on save-load / refresh the engine RE-RENDERS the active passage from that snapshot. So a
+// moment is only sound if re-running its passage body from the stored state is a no-op.
+//
+// Locations, Navigation and the info pages qualify — their bodies are pure renders, or their
+// writes are guarded (visited_locations by .includes, entry costs by an id-equality check).
+// CANVAS NODES DO NOT: their bodies carry render-time advanceTime() script macros and additive
+// trait effects (75 of Vesper's 160 nodes). Commit a post-render state on one and every reload
+// re-applies them — verified: the clock drifts forward on each refresh, forever.
+// (NB: never write a literal closing-script-macro in these comments — the raw text would close
+// the emitted HTML <script> element early and truncate the whole engine. It has happened.)
+setup.isRerenderSafe = function (title) {
+    if (!title) return false;
+    if (title === "Navigation") return true;
+    if (title.indexOf("Location_") === 0) return true;
+    return setup.infoPages.indexOf(title) !== -1;
+};
+
+// Commit a history moment WITHOUT navigating or re-rendering.
+//
+// Both Save and the refresh-restore serialize State.history, not the live variables object.
+// A handler that mutates state without navigating (the sidebar wait buttons, the phone, the
+// dev trait buttons) therefore leaves its change in the active moment only — invisible to
+// save and lost on refresh. Committing publishes it into the history.
+//
+// Gated by isRerenderSafe: on a canvas node we deliberately DON'T commit. That keeps the
+// pre-fix behaviour there (a wait made mid-canvas still won't survive a refresh) — which is
+// the right trade, because the alternative is a save that re-fires the scene's effects on
+// every load. A lost 10-minute wait beats a corrupted save.
+//
+// Call it LAST in a handler: State.create re-clones the active variables, so any object
+// reference held across this call is detached and later writes through it are lost.
+setup.commitMoment = function () {
+    try {
+        var t = State.passage;
+        if (!setup.isRerenderSafe(t)) return false;
+        State.create(t);
+        return true;
+    } catch (e) { return false; }
 };
 
 $(document).on(':passagestart', function(ev) {
@@ -15393,7 +15548,7 @@ if (clothingMsg) {
         <span id="time-display"><<timeFormatted>></span> | <span id="current-day"><<print $game_state.time_state.current_day>></span> | <span id="day-count" style="color:#dc3545;font-weight:bold;">Day <<print $game_state.time_state.day>></span>
     </div>
     <div class="control-line">
-        <button class="time-btn" onclick="advanceTime(10)" title="Advance 10 minutes">></button> | <button class="time-btn" onclick="advanceTime(60)" title="Advance 1 hour">>></button> | <button class="time-btn" onclick="advanceTime(1440)" title="Advance 1 day">>>>>></button>
+        <button class="time-btn" onclick="waitTime(10)" title="Advance 10 minutes">></button> | <button class="time-btn" onclick="waitTime(60)" title="Advance 1 hour">>></button> | <button class="time-btn" onclick="waitTime(1440)" title="Advance 1 day">>>>>></button>
     </div>""" + dev_time_controls + """
 </div>
 <</widget>>
@@ -15406,7 +15561,7 @@ if (clothingMsg) {
         <span id="time-display"><<timeFormatted>></span> | <span id="current-day"><<print $game_state.time_state.current_day>></span>
     </div>
     <div class="control-line">
-        <button class="time-btn" onclick="advanceTime(10)" title="Advance 10 minutes">></button> | <button class="time-btn" onclick="advanceTime(60)" title="Advance 1 hour">>></button> | <button class="time-btn" onclick="advanceTime(1440)" title="Advance 1 day">>>>>></button>
+        <button class="time-btn" onclick="waitTime(10)" title="Advance 10 minutes">></button> | <button class="time-btn" onclick="waitTime(60)" title="Advance 1 hour">>></button> | <button class="time-btn" onclick="waitTime(1440)" title="Advance 1 day">>>>>></button>
     </div>""" + dev_time_controls + """
 </div>
 <</widget>>
