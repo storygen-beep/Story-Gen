@@ -57,6 +57,11 @@ flagEffects = [
 # engine injects at wren_room). NO shop_location = no buying, no shop UI (the cover is provided;
 # the disguise shop is a frontier sink). Customization stays OFF (independent of clothing).
 [settings]
+# Vesper is narrated in THIRD person — Wren is watched, not inhabited (the still-point /
+# owned-weapon PC). Declared so the engine labels her own dialogue with her name instead of
+# the default "You:", which read as a contradiction over prose that says "she".
+# Register doctrine: .claude/skills/author-game/references/rts-flat-prose.md Rule 1.
+narration_person  = "third"
 clothing_enabled  = true
 wardrobe_location = "wren_room"
 

@@ -2,6 +2,9 @@
   "game_slug": "vesper",
   "schema_version": 2,
   "book_revision": 64,
+  "register": {
+    "person": "third"
+  },
   "pipeline_phase": "authoring",
   "map_design": {
     "topology": "done",

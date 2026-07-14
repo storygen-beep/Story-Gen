@@ -16,6 +16,19 @@ she's a submissive slave (dominance there makes no sense); *outside* on missions
 whatever a target needs. The **dominance / taking-control** is where she's *headed* as she wakes up
 (used → user) — earned, not the start.
 
+**Register — PERSON: `third`.** (Retro-declared 2026-07-14; `authoring_state.json` → `register.person`, and
+`narration_person = "third"` in `[settings]`.) Wren is **watched, not inhabited** — the still-point PC, a
+tool narrating its own tasks. Every `paragraph` and `thought_bubble` is "she", never "you"; `dialog` blocks
+are exempt. This was always the game's voice, it just was never written down — so the engine stamped "**You:**"
+on her own dialogue for the whole of its shipped life. **Locked: never mix in a "you."** (Person is the first
+of the three register axes — `.claude/skills/author-game/references/rts-flat-prose.md` Rule 1.)
+
+> **Known register debt (not fixed here — LO's call pending).** Vesper's narration:dialogue ratio is
+> **7.25 : 1**; Road to Success runs **0.73 : 1**. We *narrate* where RTS *speaks*. The word budget is fine
+> (~45-word blocks vs RTS's 35–40/beat); the **mode** is inverted, and the cascades are under-beated
+> (~3.5 beats median where an RTS peak runs 10–24). Any new Vesper beat must clear the Rule-4 gate
+> (≤1.5:1 with a present NPC); the existing corpus is a separate prose pass if we want it.
+
 **What she is (the core — read this first):**
 - **Half-human, not a pure machine.** Marrow's breakthrough was building his creations on a *living human
   base* — that's *why* they can truly feel. She (and Cain) are human-derived. Her human memory is wiped; she
