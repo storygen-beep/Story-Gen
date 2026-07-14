@@ -467,3 +467,97 @@ cost is what makes the household's schedules bite: *leaving the building means m
 Choosing to go shopping is choosing not to catch Richard alone in the study. The cost sits on the single
 bridge that matters (Town ↔ Lobby, both directions), which is also the only bridge — so no fast-travel valve
 is needed; the bridge *is* the valve.
+
+---
+
+## Casting (Step 3) — every NPC's role, hook & place in the machine
+
+**The cast is small on purpose: four core targets, one ally, two props.** Every person under this roof is
+either someone you take or someone who teaches you how. Nobody is scenery.
+
+> **MAP AMENDMENT (bounced up from casting, done whole).** **Halloway & Sons is CUT** — 21 rooms → **20**.
+> Halloway's only role in v1 was the foreclosure clock, and Step 2 cut the clock (no fail-state). A room whose
+> only inhabitant is a prop has no job, and the room-content floor is a gate. The will now lives entirely
+> under the roof: **read** in the Drawing Room (Margaret already in your mother's chair — the opening frame),
+> **signed** in the Study (Richard, at his own desk, after you've hollowed him out), **contested** by Margaret
+> in your face. This is *more* on-fantasy, not less: the premise is "every person under its roof," and the
+> lawyer was the one person who wasn't.
+
+### Structural coverage ✅
+
+| Required role | Who fills it |
+|---|---|
+| **Pressure source** | **Margaret.** With no fail-state, pressure can't be a squeeze that takes things — it's a **rival who is beating you, visibly, in your mother's house.** Status, not confiscation. |
+| **Corrupting on-ramp** | **Lorna** + the hotel floor itself. She hands you the first dirty idea and every bigger one after it. |
+| **Core target(s)** | **Audrey · Grayson · Richard · Margaret** — the whole household. |
+| **Late-act pressure** | **Margaret**, escalating: the prize gets bigger, never the danger. |
+| **Gatekeeper** | **Richard** — he holds the deed. (Also a core target; one character can hold two roles.) |
+| **Ally / enabler** | **Lorna.** |
+
+### The cast
+
+| NPC | Role(s) | Hook — dynamic · charge · want | Register | Depth | Arc-shape (budget) | Place in the machine |
+|---|---|---|---|---|---|---|
+| **Audrey** | Core target (entry) + **GATEWAY** | The baby sister who never stopped looking up to you — broke, terrified of losing her place at college, so hungry to be *taken care of* that gratitude curdles into something she won't name. **Want:** land the boy (Danny). **Charge:** corruption-as-mentorship — she wins *and* she's yours. | Vulnerable → groomed · cold sapphic | Core / gold | **family/ambient — DENSE (25–35)** | **Tuition hook** (Form 2a) + the **group-content gateway**. The first family unlock. |
+| **Margaret** | Core target (**APEX**) + **pressure source** + late-act pressure | Eleanor's sister, moved in "to help" — sharp, patient, already counting the silver, and reading you as the only real threat in the building. **Want:** the will, the hotel, the family under her. **Charge:** conquest of the apex who came to conquer *you*. | Dominant antagonist → taken · cold sapphic | Core / gold | **family/ambient — DENSE (25–35)** ⚠️ **RE-SHAPED** | **Apex node.** Her late rungs gate on `richard_signed` + `grayson_bought_out` (Form 1) — **breaking the men is what breaks her.** She is also the standing humiliation (§4). |
+| **Grayson** | Core target + obstacle + **the prey-phase predator** | Your brother — entitled, useless, certain the inheritance is his and you're beneath him. Certain enough to put his hands on you while you're still nobody. **Want:** the money without earning it; dominance over you. **Charge:** humiliation — break the arrogance, bring the prick to heel. | Arrogant rival → heeled · domination | Core | **family/ambient — DENSE (25–35)** ⚠️ **RE-SHAPED** — *density lives in **Lane 3** (the prey phase), not in a long seduction ladder* | **Obstacle → bought out.** He is the in-house face of the **forced/prey-early** mode; his subjugation sets `grayson_bought_out` (Form 1 → Margaret's apex gate). |
+| **Richard** | Core target + **will gatekeeper** | Eleanor's widower, hollowed out, drifting through a hotel he can't run, holding the deed and forgetting why. **Want:** Eleanor back. Comfort. To hold the family together. **Charge:** console-into-own the broken king. | Tender-predatory / fill-the-void · widower seduction | Core | **slow-burn family (10–15)** *(v1 got this right)* | **Gatekeeper node.** Seduced → signs control over, setting `richard_signed` (Form 1 → Margaret's apex gate + hotel control). |
+| **Lorna** | **Corrupting on-ramp** (structural) + ally/enabler + **the mirror** | The hotel's lifer bartender who's seen what this place was and what it could be after dark — worldly, unshockable, glad to teach the new owner how a room like this *really* turns a profit. **Want:** the hotel alive, and her cut. **Charge:** she hands you the first dirty idea. | Knowing mentor · transactional | **Light / peripheral** | **service (6–10)** | **On-ramp node.** She opens each rung of the income ladder: tips → comped favors → escort → the private floor. |
+| **Danny** | Prop — Audrey's payoff | The ordinary college boy Audrey is hopeless over. Sweet, clueless, no idea what he's walked into. **Want:** Audrey. **Charge:** none of his own — he's *her* win, and the body in the group content. | — | Prop | — (2–3) | Audrey's payoff. **Relocated: he now visits the house** (v1 staged him in "Out & About", which is cut). |
+| **Mr. Halloway** | **Prop — one scene** | Eleanor's executor. Starched, correct, reads the will and leaves. | — | Prop | — (1) | None. **Not a character** — the will reading needs a formal voice, not a person. *(Was v1's "deadline with a face"; the deadline is gone.)* |
+
+### ⚠️ The casting error that sank v1 — named, so it can't repeat
+
+**Margaret was not under-built. She was MIS-CAST — and then built correctly to the wrong budget.**
+
+| | v1 built | cast as | that shape's budget |
+|---|---|---|---|
+| Audrey | 20 | family/ambient | 25–35 |
+| Grayson | 14 | **antagonist** | 6–10 |
+| Richard | 13 | slow-burn | 10–15 ✓ |
+| **Margaret** | **8** | **antagonist** | **6–10 ✓ (in budget!)** |
+| Lorna | 5 | service | 6–10 |
+
+The author obeyed the matrix. **Margaret came in *inside* her budget.** The bug was upstream: *antagonist/witness*
+is the shape for an obstacle who **never becomes a target** — and Margaret is the game's **apex conquest.** An
+apex needs a climb, and 6–10 canvases cannot carry one. Same error on Grayson.
+
+**Both are re-shaped to family/ambient (dense).** They live in this house, they are in front of you constantly,
+and they are the last two things you take.
+
+### The honest budget
+
+Four core arcs at these shapes = **~93–133 NPC canvases**, plus the player track (floor work, the feeders, the
+economy ladder, the hotel upgrades, the opening, the phone) at roughly **30–40**. Call it **~125–170 canvases**.
+
+**v1 shipped 76.** This is close to double, and that is simply what *"own the whole household"* costs. Stated
+here, at casting, so the blueprint cannot quietly shrink it back into a corridor.
+
+### Rough sketches & cross-NPC threads
+
+**Audrey — the gateway.** The load-bearing thread. She's the first one fully open, so her late content unlocks
+the **group routes** (Danny, then Richard, then Grayson). The more you have Audrey (`audrey_stage`), the more
+group content lights up. Her want (*land Danny*) is what makes her corruptible: you teach her how to get him,
+and **the teaching is the corruption.**
+
+**Richard ↔ Margaret — the will.** Richard nominally holds control; Margaret is prying it out of his grief.
+Owning Richard first (he signs to *you*) strips Margaret's claim and detonates the apex. Both feed the will.
+
+**Grayson — the early predator, the late grovel.** In the prey phase he's the in-house face of the liberties you
+**can't refuse** (Step 2 §5). His arc is the inversion that pays that off: the man who put his hands on you when
+you were nobody ends up bought and heeled. He bridges the reactive world and the humiliation arc — which is
+exactly why his density lives in Lane 3.
+
+**Lorna — the mirror.** *(Role unchanged from v1, on LO's call.)* She is the **one person you never take**, and
+that's the point: everyone else in this house you own, and she's the one who's on your side by choice. She's
+what you're **becoming, already arrived** — and the way that lands is the recurring beat v1 designed and then
+**never built**: you catch **Lorna with a customer** (behind the bar after close, in the guest rooms). She
+catches your eye, winks, doesn't stop. Voyeuristic only; never pull the player in.
+
+> **The Lorna build correction (not a role change — a shape change).** v1 gave her 5 canvases and **4 of them
+> fire exactly once**: meet her · take the books · the Grayson tip · the partnership. After a couple of hours
+> she was a woman behind a bar with nothing left to say — and the **structural on-ramp died with her.** Same
+> light budget; spent differently: her hub is **repeatable and TIERED**, escalating with the business — *"there's
+> a guest in 12 who tips if you're friendly"* → *"comp him the room, he'll pay it back"* → *"I know girls who'd
+> work a floor like this"* → *"the top floor's been empty a long time."* Plus the mirror beats, which are the
+> thing that makes her a person instead of a menu. **Keep her light. Never gold-plate her. Never bed her.**

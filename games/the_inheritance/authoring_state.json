@@ -1,12 +1,87 @@
 {
   "game_slug": "the_inheritance",
   "schema_version": 2,
-  "book_revision": 3,
+  "book_revision": 4,
   "register": {
     "person": "second"
   },
-  "pipeline_phase": "casting",
-  "npcs": {},
+  "pipeline_phase": "deep_design",
+  "npcs": {
+    "npc_audrey": {
+      "role": "core target (entry) + GATEWAY",
+      "arc_shape": "family/ambient",
+      "lane_budget": {
+        "total": "25-35"
+      },
+      "depth": "core/gold",
+      "vocab_ceiling": "TBD (Step 4)",
+      "register": "cold sapphic — vulnerable, groomed"
+    },
+    "npc_margaret": {
+      "role": "core target APEX + pressure source + late-act pressure",
+      "arc_shape": "family/ambient",
+      "lane_budget": {
+        "total": "25-35"
+      },
+      "depth": "core/gold",
+      "vocab_ceiling": "TBD (Step 4)",
+      "register": "cold sapphic — dominant antagonist taken",
+      "RESHAPED": "v1 cast her ANTAGONIST (6-10) and built 8 — IN BUDGET. The shape was the bug: antagonist/witness is for an obstacle who never becomes a target, and she is the APEX CONQUEST. An apex needs a climb."
+    },
+    "npc_grayson": {
+      "role": "core target + obstacle + the prey-phase predator",
+      "arc_shape": "family/ambient",
+      "lane_budget": {
+        "total": "25-35",
+        "note": "density lives in LANE 3 (the prey phase), not a long seduction ladder"
+      },
+      "depth": "core",
+      "vocab_ceiling": "TBD (Step 4)",
+      "register": "domination / humiliation",
+      "RESHAPED": "v1 cast him ANTAGONIST (6-10) and built 14. Same error as Margaret."
+    },
+    "npc_richard": {
+      "role": "core target + will gatekeeper",
+      "arc_shape": "slow-burn family",
+      "lane_budget": {
+        "total": "10-15"
+      },
+      "depth": "core",
+      "vocab_ceiling": "TBD (Step 4)",
+      "register": "widower seduction — console-into-own"
+    },
+    "npc_lorna": {
+      "role": "corrupting on-ramp (STRUCTURAL) + ally/enabler + the mirror",
+      "arc_shape": "service",
+      "lane_budget": {
+        "total": "6-10"
+      },
+      "depth": "light/peripheral",
+      "vocab_ceiling": "n/a — NOT a sexual target",
+      "register": "knowing mentor, transactional",
+      "ROLE_UNCHANGED_FROM_V1": "LO's call. NEVER bedded, never gold-plated. The v1 failure was BUILD, not role: 4 of her 5 canvases fired ONCE, so the structural on-ramp died with her. Fix = a REPEATABLE, TIERED hub that escalates with the business + the MIRROR beats (catch her with a customer) that v1 designed and never built."
+    },
+    "npc_danny": {
+      "role": "prop — Audrey's payoff + the group-content body",
+      "arc_shape": "prop",
+      "lane_budget": {
+        "total": "2-3"
+      },
+      "depth": "prop",
+      "register": "—",
+      "note": "RELOCATED: he now visits the house (v1 staged him in 'Out & About', which is cut)."
+    },
+    "npc_halloway": {
+      "role": "prop — ONE scene (reads the will)",
+      "arc_shape": "prop",
+      "lane_budget": {
+        "total": "1"
+      },
+      "depth": "prop",
+      "register": "—",
+      "note": "Was v1's 'deadline with a face'. The deadline is gone (no fail-state), so the character is gone. No hub, no room."
+    }
+  },
   "map_design": {
     "archetype": "nested-zones",
     "aliveness": "dense/living (chosen — depth over breadth)",
@@ -14,8 +89,10 @@
     "naming": "articled/old-money house style applied evenly; possessive for private interiors",
     "cut_from_v1": [
       "loc_hotel_dining (locked on a flag set 0 times — unreachable forever, zero content)",
-      "loc_outings (vague catch-all, 1 canvas)"
-    ]
+      "loc_outings (vague catch-all, 1 canvas)",
+      "loc_bank / Halloway & Sons (cut at CASTING — his only role was the foreclosure clock, and Step 2 cut the clock. The will now lives entirely under the roof: read in the Drawing Room, signed in the Study, contested by Margaret in your face.)"
+    ],
+    "room_count": 20
   },
   "deep_design": {},
   "blueprint": {},
@@ -43,13 +120,6 @@
         "entry_from": "loc_town",
         "access": "open",
         "job": "the tools — key items that gate rungs, locked-visible"
-      },
-      {
-        "id": "loc_bank",
-        "name": "Halloway & Sons",
-        "entry_from": "loc_town",
-        "access": "open",
-        "job": "the lawyer — the WILL's machinery. NOT a doom clock (no fail-state)"
       },
       {
         "id": "loc_college",
@@ -178,9 +248,9 @@
     "quests": []
   },
   "next_up": [
-    "Step 3 (casting): every NPC's role, hook, and place in the machine. Cast onto the 21 stages just designed.",
-    "TWO HOLES casting MUST close: (1) the money/will pressure has NO FACE (v1's banker = 3 one-shots + an empty room); (2) LORNA DIES AFTER 4 BEATS despite being the mentor the whole player-corruption track hangs on.",
-    "Budget warning from the map audit: Margaret is the APEX and v1 gave her 3 canvases in her own bedroom; Grayson got 1. Casting sets arc shapes -> lane budgets; do not repeat that."
+    "Step 4 (deep design): the STORY, one subject at a time — player thread (§2) -> each NPC's story brief (§3) -> the world (§5) -> reactivity-as-experience (§4). STORY only, no structure.",
+    "Order is enforced: don't start the NPC briefs until the PLAYER thread is done.",
+    "BUDGET, stated at casting so the blueprint cannot quietly shrink it: ~93-133 NPC canvases + ~30-40 player track = ~125-170 total. v1 shipped 76. That is what 'own the whole household' costs."
   ],
   "decisions_log": [
     {
@@ -242,6 +312,24 @@
       "step": "2b map design",
       "decision": "Nested-zones, DENSE/LIVING, 21 rooms, every one with a stated job. Free movement inside the building; TIME cost on the single Town<->Lobby bridge. Articled house style, applied evenly.",
       "why": "v1's map was not dead, it was LOPSIDED: Audrey's Room 19 canvases vs Grayson's 1, Richard's 3, and MARGARET'S (the apex) 3; the Private Floor (the endgame venue) 1. Three rooms (The Residence, The Grand Stair, Town) had ZERO canvases and v1 declared no containers — so the player could walk into all three and find nothing. The Dining Room was gated on hotel_dining_reopened, a flag set ZERO times in the entire game: unreachable forever, shipped anyway. Topology was never the problem; JOBS were. CUT the Dining Room + Out & About. Gave real jobs to the three empty stages: the Grand Stair = the threshold between her two selves (off-shift in a bold outfit, meeting family coming down); The Residence = the presence/landing surface (npc_at_location: occupied bath, peek, caught); Town = the street's DIFFERENT place ceiling. The Boutique gets a MIRROR — v1 bought the reactive dial and never dramatized turning it. Travel: charging her to climb her own stairs is friction with no drama; the Town cost is what makes schedules bite (leaving the building = missing someone in it)."
+    },
+    {
+      "date": "2026-07-15",
+      "step": "3 casting",
+      "decision": "Cast LOCKED: 4 core targets (Audrey, Margaret, Grayson, Richard) + Lorna (ally, NOT a target, light) + 2 props (Danny, Halloway). MARGARET AND GRAYSON RE-SHAPED antagonist -> family/ambient (dense).",
+      "why": "THE ROOT CAUSE OF V1, FOUND: Margaret was not under-built — she was MIS-CAST and then built correctly to the wrong budget. v1 cast her 'antagonist' (budget 6-10) and shipped 8 — INSIDE budget. But antagonist/witness is the shape for an obstacle who NEVER BECOMES A TARGET, and she is the game's APEX CONQUEST. An apex needs a climb; 6-10 canvases cannot carry one. Same error on Grayson (cast antagonist, built 14). Both are family/ambient dense (25-35) — they live in the house, they're in front of you constantly, and they are the last two things you take. Grayson's density lives in LANE 3 (he is the in-house face of the forced/prey-early mode), not in a seduction ladder."
+    },
+    {
+      "date": "2026-07-15",
+      "step": "3 casting",
+      "decision": "MAP AMENDMENT (done whole): Halloway & Sons CUT. 21 -> 20 rooms. Halloway demoted to a one-scene prop (reads the will).",
+      "why": "His v1 hook read, verbatim, 'Charge: none — he's the deadline with a face.' Step 2 cut the deadline (no fail-state), so he became a roleless NPC — and the taxonomy says roleless = cut or merge. A room whose only inhabitant is a prop fails the room-content floor. The will now lives ENTIRELY under the roof: READ in the Drawing Room (Margaret already in your mother's chair — the opening frame), SIGNED in the Study (Richard, at his own desk, after you've hollowed him out), CONTESTED by Margaret in your face. More on-fantasy, not less: the premise is 'every person under its roof', and the lawyer was the one person who wasn't. LO's call (one-scene prop)."
+    },
+    {
+      "date": "2026-07-15",
+      "step": "3 casting",
+      "decision": "Pressure source = MARGARET (not a banker). Corrupting on-ramp = LORNA.",
+      "why": "With no fail-state, the pressure-source role cannot be a squeeze that TAKES things. It is a RIVAL who is beating you, visibly, in your mother's house — status pressure, not confiscation. Margaret holds pressure source + late-act pressure + apex target. Structural coverage holds: pressure ✓ on-ramp ✓ core targets ✓ late-act ✓."
     }
   ]
 }
