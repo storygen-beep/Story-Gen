@@ -153,6 +153,15 @@ class TemplateLocation:
     clothing_rules: List[Dict[str, Any]] = field(default_factory=list)
 
 
+# -------- Narrative person --------
+
+# Which grammatical person the game's prose is written in. Set once per game via
+# `[settings] narration_person`; the generator uses it to label the player's own
+# dialog and thought-bubble blocks. Without it the engine assumed second person and
+# stamped "You:" onto every player line — which reads as a contradiction in a game
+# narrated in third ("she") or first ("I").
+VALID_NARRATION_PERSONS = {"second", "first", "third"}
+
 # -------- Clothing System Data Shapes --------
 
 VALID_CLOTHING_SLOTS = {"bra", "underwear", "top", "bottom", "dress", "legwear", "shoes"}
@@ -314,6 +323,11 @@ class GameTemplate:
     canvases: List["TemplateCanvas"] = field(default_factory=list)
     # Story arc for narrative journal (v0.3)
     story_arc: Optional["TemplateStoryArc"] = None
+    # Narrative person — which grammatical person the game's prose is written in.
+    # The engine labels the player's own dialogue/thought blocks to match: a game
+    # narrated in third person would otherwise render "You:" over prose saying "she".
+    # "second" (default, RTS-native) | "first" | "third".
+    narration_person: str = "second"
     # Clothing system
     clothing_enabled: bool = False
     clothing_items: List[TemplateClothingItem] = field(default_factory=list)
@@ -2266,6 +2280,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
 
     # ── Settings & Clothing ──
     settings_raw = data.get("settings", {}) or {}
+    narration_person = _require_str(settings_raw, "narration_person", "second")
     clothing_enabled = _require_bool(settings_raw, "clothing_enabled", False)
     wardrobe_location = _require_str(settings_raw, "wardrobe_location", "")
     shop_location = _require_str(settings_raw, "shop_location", "")
@@ -2716,6 +2731,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         starting_canvas=starting_canvas,
         canvases=canvases,
         story_arc=story_arc_obj,
+        narration_person=narration_person,
         clothing_enabled=clothing_enabled,
         clothing_items=clothing_items,
         wardrobe_location=wardrobe_location or None,
@@ -2909,6 +2925,15 @@ def validate(template: GameTemplate) -> List[str]:
     # so authors fix syntax problems before semantic validation runs.
     if getattr(template, "_parse_errors", None):
         errors.extend(template._parse_errors)
+
+    # Narrative person must be one of the three the generator knows how to label.
+    # A typo here would silently fall back to "You:" over third-person prose —
+    # exactly the mismatch this setting exists to prevent — so fail the build.
+    if template.narration_person not in VALID_NARRATION_PERSONS:
+        errors.append(
+            f"[settings] narration_person = '{template.narration_person}' is not valid. "
+            f"Expected one of: {', '.join(sorted(VALID_NARRATION_PERSONS))}."
+        )
 
     # Doc 69 Item 3 — predicate-context field-name validation. Walks every
     # `conditions = {version, logic, items}` block stored on parsed dataclasses
@@ -5660,6 +5685,9 @@ def _assemble_project_metadata(project, template):
     # PRD 48 — surface the Quests engine version onto project metadata so the
     # generator can dispatch (V1 default vs V2 opt-in) at emission time.
     project.metadata["quests_engine"] = template.project.quests_engine
+    # Narrative person — the generator reads this to label the player's own dialog
+    # and thought-bubble blocks ("You:" / "Me:" / the character's name).
+    project.metadata["narration_person"] = template.narration_person
     # PRD 48 — serialize V2 cards onto project.metadata. Empty list for v1
     # games (their hints stay in project.metadata["story_arc"]["hints"]).
     if template.project.quests_engine == "v2":
