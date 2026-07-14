@@ -1,0 +1,247 @@
+{
+  "game_slug": "the_inheritance",
+  "schema_version": 2,
+  "book_revision": 3,
+  "register": {
+    "person": "second"
+  },
+  "pipeline_phase": "casting",
+  "npcs": {},
+  "map_design": {
+    "archetype": "nested-zones",
+    "aliveness": "dense/living (chosen — depth over breadth)",
+    "travel": "free inside the building; TIME-costed on the single Town<->Lobby bridge (so schedules bite: going out = missing someone in)",
+    "naming": "articled/old-money house style applied evenly; possessive for private interiors",
+    "cut_from_v1": [
+      "loc_hotel_dining (locked on a flag set 0 times — unreachable forever, zero content)",
+      "loc_outings (vague catch-all, 1 canvas)"
+    ]
+  },
+  "deep_design": {},
+  "blueprint": {},
+  "feedback": {},
+  "plan": [],
+  "structure_registry": {
+    "locations": [
+      {
+        "id": "loc_town",
+        "name": "Town",
+        "entry_from": null,
+        "access": "open",
+        "job": "the street — a DIFFERENT place ceiling than the hotel"
+      },
+      {
+        "id": "loc_clothing_shop",
+        "name": "The Boutique",
+        "entry_from": "loc_town",
+        "access": "open",
+        "job": "buy the dial — AND turn it, at the mirror (the exhibitionism ratchet's first rung)"
+      },
+      {
+        "id": "loc_adult_shop",
+        "name": "The Adult Shop",
+        "entry_from": "loc_town",
+        "access": "open",
+        "job": "the tools — key items that gate rungs, locked-visible"
+      },
+      {
+        "id": "loc_bank",
+        "name": "Halloway & Sons",
+        "entry_from": "loc_town",
+        "access": "open",
+        "job": "the lawyer — the WILL's machinery. NOT a doom clock (no fail-state)"
+      },
+      {
+        "id": "loc_college",
+        "name": "The College",
+        "entry_from": null,
+        "access": "offscreen",
+        "job": "Audrey's away-label. Never navigable"
+      },
+      {
+        "id": "loc_hotel",
+        "name": "The Hotel — Lobby",
+        "entry_from": "loc_town",
+        "access": "open",
+        "job": "the public stage; floor work; Margaret behind your mother's desk on frame one"
+      },
+      {
+        "id": "loc_hotel_bar",
+        "name": "The Bar",
+        "entry_from": "loc_hotel",
+        "access": "open",
+        "job": "Lorna — the one ally; how bad it really is; loosen guests"
+      },
+      {
+        "id": "loc_hotel_guest_rooms",
+        "name": "The Guest Rooms",
+        "entry_from": "loc_hotel",
+        "access": "open",
+        "job": "the transactional line — a comped favor needs somewhere to happen"
+      },
+      {
+        "id": "loc_grand_stair",
+        "name": "The Grand Stair",
+        "entry_from": "loc_hotel",
+        "access": "open",
+        "job": "THE THRESHOLD between your two selves — off-shift in a bold outfit, meeting family coming down"
+      },
+      {
+        "id": "loc_hotel_back_office",
+        "name": "The Back Office",
+        "entry_from": "loc_hotel",
+        "access": "locked",
+        "job": "take the hotel's purse. UNLOCK: Richard hands you the ledger"
+      },
+      {
+        "id": "loc_hotel_private_floor",
+        "name": "The Private Floor",
+        "entry_from": "loc_hotel",
+        "access": "locked",
+        "job": "run the vice-house. UNLOCK: hotel control + the upgrade bought"
+      },
+      {
+        "id": "loc_residence",
+        "name": "The Residence",
+        "entry_from": "loc_grand_stair",
+        "access": "open",
+        "job": "the landing — who's home, who's behind which door (the npc_at_location surface)"
+      },
+      {
+        "id": "loc_drawing_room",
+        "name": "The Drawing Room",
+        "entry_from": "loc_residence",
+        "access": "open",
+        "job": "watch Margaret hold court IN YOUR MOTHER'S CHAIR — the status humiliation you want to erase"
+      },
+      {
+        "id": "loc_study",
+        "name": "The Study",
+        "entry_from": "loc_residence",
+        "access": "open",
+        "job": "Richard where his grief lives, the deed in the drawer beside him"
+      },
+      {
+        "id": "loc_kitchen",
+        "name": "The Kitchen",
+        "entry_from": "loc_residence",
+        "access": "open",
+        "job": "catch the family unarmored at odd hours — the one room where they're people, not positions"
+      },
+      {
+        "id": "loc_common_bathroom",
+        "name": "The Upstairs Bath",
+        "entry_from": "loc_residence",
+        "access": "open",
+        "job": "the shared private space — occupy / walk in on / be walked in on"
+      },
+      {
+        "id": "loc_player_room",
+        "name": "Your Old Room",
+        "entry_from": "loc_residence",
+        "access": "open",
+        "job": "sleep, dress, look at yourself, the phone, the solo feeders that open the door"
+      },
+      {
+        "id": "loc_audrey_room",
+        "name": "Audrey's Room",
+        "entry_from": "loc_residence",
+        "access": "open",
+        "job": "work the sister with the most to lose and the least power to refuse"
+      },
+      {
+        "id": "loc_grayson_room",
+        "name": "Grayson's Room",
+        "entry_from": "loc_residence",
+        "access": "open",
+        "job": "work the brother. v1 GAVE THIS ROOM ONE SCENE for a core target — the worst hole in the map"
+      },
+      {
+        "id": "loc_richard_room",
+        "name": "Richard's Room",
+        "entry_from": "loc_residence",
+        "access": "open",
+        "job": "the widower in private — as distinct from the Study, his grief in public"
+      },
+      {
+        "id": "loc_margaret_room",
+        "name": "Margaret's Room",
+        "entry_from": "loc_residence",
+        "access": "open",
+        "job": "work the APEX. v1 gave the final conquest THREE scenes in her own bedroom"
+      }
+    ],
+    "canvases": [],
+    "flags": [],
+    "traits": [],
+    "items": [],
+    "quests": []
+  },
+  "next_up": [
+    "Step 3 (casting): every NPC's role, hook, and place in the machine. Cast onto the 21 stages just designed.",
+    "TWO HOLES casting MUST close: (1) the money/will pressure has NO FACE (v1's banker = 3 one-shots + an empty room); (2) LORNA DIES AFTER 4 BEATS despite being the mentor the whole player-corruption track hangs on.",
+    "Budget warning from the map audit: Margaret is the APEX and v1 gave her 3 canvases in her own bedroom; Grayson got 1. Casting sets arc shapes -> lane budgets; do not repeat that."
+  ],
+  "decisions_log": [
+    {
+      "date": "2026-07-14",
+      "step": "0+1 seed",
+      "decision": "RE-AUTHOR, not a patch. v1 archived at archive/the_inheritance_v1/ (book rev 72) and de-listed from games-data.js (it was live on the GitHub Pages portal). Borrow Steps 0-4 as raw material; generate Step 5 (blueprint) onward FRESH.",
+      "why": "v1's premise/cast/map/machine are good (the skill cites its map by name as canonical). Its failures are entirely below the blueprint: 47% one-shot canvases, 7 Lane-2 ambients in the whole game (Audrey: zero), 8 Lane-3 walk-ins re-registered 41x, NPCs scheduled into rooms with no canvases, 88/102 nodes with no choice. Importing the v1 blueprint would import the corridor."
+    },
+    {
+      "date": "2026-07-14",
+      "step": "0+1 seed",
+      "decision": "register.person = \"second\" (LOCKED, immutable).",
+      "why": "LO's call. RTS-native, the skill's default, and what v1 already wrote well ('You draw the curtain and lie down in the room you grew up in'). Explicitly NOT Vesper's third person, which drifted literary and shipped 'You:' labels over 'she' prose. Mirror as [settings] narration_person = \"second\" at authoring."
+    },
+    {
+      "date": "2026-07-14",
+      "step": "0+1 seed",
+      "decision": "Fantasy KEPT as-is from v1 (Mode A, LO chose 'keep it').",
+      "why": "Clears the 3-part bar: POV-fit (female-PC takeover from within), sharp charge (power-reversal + incest taboo, conquest not longing), built-in two acts (take the hotel as leverage -> pick them off). The specific wound (Eleanor chose her second family, then died before any reckoning was possible) is what lifts it above the generic 'inherit the house' category."
+    },
+    {
+      "date": "2026-07-14",
+      "step": "0+1 seed",
+      "decision": "Systems: clothing YES, phone YES, money-as-CONTROL-economy YES, player_portrait YES.",
+      "why": "First three carried from v1 unchanged. The player portrait is NEW (engine feature shipped 2026-07-06, after v1 was written) — LO's call to include it: the game has clothing, a customizable PC, and a corruption spine, which is exactly what the portrait's three axes feed on, and 'watch yourself become someone else' is the game's whole spine. Cost acknowledged: ~15-30 consistent images, sourced at authoring."
+    },
+    {
+      "date": "2026-07-14",
+      "step": "0+1 seed",
+      "decision": "Two cast holes flagged for Step 3 (casting) to close.",
+      "why": "v1 gave the money pressure NO FACE (its banker was 3 one-shots and an empty bank room) and let Lorna die after 4 beats despite her being the mentor the whole player-corruption track hangs on. Margaret also needs ~3x her v1 canvas count or she is not an apex."
+    },
+    {
+      "date": "2026-07-14",
+      "step": "2 top-level",
+      "decision": "FAIL-STATE: none, by design (LO's call, Mode A). Nothing is ever confiscated.",
+      "why": "Declared, not defaulted. CONSEQUENCE, and it is load-bearing: v1's foreclosure clock is CUT, not softened — the skill cites this game BY NAME as its example of 'an advertised threat that could never bite' (step-2-toplevel.md). Pressure is rebuilt from desire instead: the hotel's decline is an OPPORTUNITY (a lever on the floor), and Margaret is a RACE you are visibly losing in your mother's house — the negative axis is STATUS, never property. Pressure escalates by raising the PRIZE, never the danger. Also forces [settings.rent] OFF — turning it on would smuggle the cut fail-state back in through the engine."
+    },
+    {
+      "date": "2026-07-14",
+      "step": "2 top-level",
+      "decision": "BODY-STATE: pregnancy IN, as a late/frontier axis (LO's call, Mode A).",
+      "why": "v1 flagged it as an open gap and never resolved it across 72 revisions. It lands where the charge already points — Grayson (blood half-brother: the breeding taboo) and Richard (the widower: she replaces Eleanor in the house, so 'becoming the new woman of the house' stops being a metaphor). Rides the engine's existing pregnancy axis (player-portrait pregnancy_suffix + a hidden trait). LAW: always a payoff she CHOOSES, never a punishment — a punitive pregnancy would smuggle the cut fail-state back in."
+    },
+    {
+      "date": "2026-07-14",
+      "step": "2 top-level",
+      "decision": "Borrowed from v1 largely intact: cascade + double lock, stat set, desire ladder, reactive world (incl. the act-scoped FORCED prey-early mode), economy-as-corruption-ladder, THE MACHINE (Margaret's power routed THROUGH Richard + Grayson), pacing, frontier. No renown meter (v1 killed it; stays dead).",
+      "why": "v1's Step 2 was genuinely good — its failures were all below the blueprint. Re-run through the gates rather than re-invented. ONE clarification v1 never wrote down: exhibitionism vs worn_corruption are NOT duplicates — the outfit is a DIAL you can turn back, exhibitionism is a RATCHET that only climbs. Without that stated, exhibitionism reads as a dead stat and someone cuts it."
+    },
+    {
+      "date": "2026-07-14",
+      "step": "2 top-level",
+      "decision": "§8 declarations written (v1 predated all three): the opening/cold-start, the systems on/off list, the fail-state.",
+      "why": "Opening = you walk into the lobby and Margaret is behind YOUR MOTHER'S front desk giving orders to her staff — the whole game in one frame (the house is being taken, and not by you). First want: 'Get your hands on this place.' Systems ON: clothing, phone, player portrait, customization. OFF: rent."
+    },
+    {
+      "date": "2026-07-14",
+      "step": "2b map design",
+      "decision": "Nested-zones, DENSE/LIVING, 21 rooms, every one with a stated job. Free movement inside the building; TIME cost on the single Town<->Lobby bridge. Articled house style, applied evenly.",
+      "why": "v1's map was not dead, it was LOPSIDED: Audrey's Room 19 canvases vs Grayson's 1, Richard's 3, and MARGARET'S (the apex) 3; the Private Floor (the endgame venue) 1. Three rooms (The Residence, The Grand Stair, Town) had ZERO canvases and v1 declared no containers — so the player could walk into all three and find nothing. The Dining Room was gated on hotel_dining_reopened, a flag set ZERO times in the entire game: unreachable forever, shipped anyway. Topology was never the problem; JOBS were. CUT the Dining Room + Out & About. Gave real jobs to the three empty stages: the Grand Stair = the threshold between her two selves (off-shift in a bold outfit, meeting family coming down); The Residence = the presence/landing surface (npc_at_location: occupied bath, peek, caught); Town = the street's DIFFERENT place ceiling. The Boutique gets a MIRROR — v1 bought the reactive dial and never dramatized turning it. Travel: charging her to climb her own stairs is friction with no drama; the Town cost is what makes schedules bite (leaving the building = missing someone in it)."
+    }
+  ]
+}
