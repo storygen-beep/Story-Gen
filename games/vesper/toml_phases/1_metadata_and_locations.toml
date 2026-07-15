@@ -216,6 +216,13 @@ core_traits = { relation = 0 }
 flag_keys   = []
 arc_stages  = ["The Sunday regular"]
 
+[[npcs.schedules]]
+location   = "underworld_brothel"
+weekdays   = [6]
+start_time = "20:00"
+end_time   = "23:59"
+activity   = "his standing Sunday booking"
+
 # ── Kess — the off-books fixer (Salvage) — beat_0049 ─────────────────────────────
 # The dockside synth-mechanic / ship-breaker who repairs Wren's core. Reads bodies as HARDWARE. NOT a
 # conquest (no relation/corruption climb, no meters). NO [[npcs.schedules]] — chunk-scripted at kess_berth,
@@ -230,13 +237,6 @@ portrait    = "kess.jpg"
 core_traits = { relation = 0 }
 flag_keys   = []
 arc_stages  = ["The fixer"]
-
-[[npcs.schedules]]
-location   = "underworld_brothel"
-weekdays   = [6]
-start_time = "20:00"
-end_time   = "23:59"
-activity   = "his standing Sunday booking"
 
 # ─── Clothing — the worn-state COVER catalog (beat_0015) ──────────────────────
 # Two "dress"-slot looks she swaps between at the rack (wardrobe page @ wren_room):

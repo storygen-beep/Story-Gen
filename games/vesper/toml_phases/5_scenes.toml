@@ -2478,7 +2478,7 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "You walk on a core that runs again — Locked now, not Failing; the fixer bought back your body but not the thing sealed inside it. That needs your own build file, and Vance keeps those. Mercer's handed you the way in without knowing it: Calloway, Vance Securities, a file room nobody audits — the same room that holds what you are."
-tip        = "Mission 3: get inside Calloway at Vance Securities, and into his file room. That's the next chapter — the way in isn't open yet. For now: back to the work, owing Kess her sixty, carrying a name you still can't say."
+tip        = "Mission 3: get inside Calloway at Vance Securities, and into his file room. That's the next chapter — the way in isn't open yet. For now: back to the work, owing Kess her forty, carrying a name you still can't say."
 when = [
   { flag = "salvage_done", op = "is_true" },
 ]
@@ -3964,7 +3964,7 @@ blocks = [
         { type = "paragraph", content = "He finishes and the drain takes it — takes him — a pull behind her sternum like a circuit closing, and for a second she has the whole shape of him, everything he's carried down company halls, laid open." },
     ] },
     { advance_text = "Take it.", blocks = [
-        { type = "paragraph", content = "The words come up out of him without him, the drain walking them out: the classified build specs — Calloway keeps them, his file room at Vance Securities, everything on the Cain program in there. Then he's blinking on the floor, mouth dry, not sure what he said." },
+        { type = "paragraph", content = "The words come up out of him without him, the drain walking them out: the classified build specs — Calloway keeps them, his file room at Vance Securities. The sealed ones, all of them, in there. Then he's blinking on the floor, mouth dry, not sure what he said." },
     ] },
     { advance_text = "Hold the name.", blocks = [
         { type = "paragraph", content = "Calloway. The name's nothing to her yet and everything to the thing behind her sternum: a room with her build in it. The file that says what she is. The fault she can't reach, maybe written down somewhere she could walk into." },
@@ -4005,7 +4005,7 @@ effects = [
 [[canvases]]
 id          = "salvage_verdict"
 name        = "What she can do"
-description = "beat_0052. THE VERDICT — the meter flip + Tier-3 end card. Auto-fire @kess_berth, pri 10, one-shot, gated salvage_stage_b_done is_true + salvage_done is_false. Kess: function restored, but the true fault is a sealed partition only her own build file opens (which she now knows is in Calloway's room). The flip fires on the exit: core_strain->0 (Failing vanishes) + core_sealed=1 (Locked lights); sets salvage_done + mission_3_active; teleports to the_waterfront. She walks owing sixty coin, carrying Calloway + the un-held leak-name."
+description = "beat_0052. THE VERDICT — the meter flip + Tier-3 end card. Auto-fire @kess_berth, pri 10, one-shot, gated salvage_stage_b_done is_true + salvage_done is_false. Kess: function restored, but the true fault is a sealed partition only her own build file opens (which she now knows is in Calloway's room). The flip fires on the exit: core_strain->0 (Failing vanishes) + core_sealed=1 (Locked lights); sets salvage_done + mission_3_active; teleports to the_waterfront. She walks owing forty coin, carrying Calloway + the un-held leak-name."
 
 [canvases.trigger]
 location      = "kess_berth"
@@ -4030,13 +4030,13 @@ blocks = [
     ] },
     { advance_text = "Ask what opens it.", blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "Then what opens it." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Your own build file. The one that says how you were made — Vance keeps those, classified, locked up. But you already know where that sits, don't you. You went somewhere on my cradle and came back holding a name." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Your own build file. The one that says how you were made — Vance keeps those, classified, locked up. But you already know the room, don't you. That courier gave it up on my cradle — you came back with a name." },
     ] },
     { advance_text = "Feel it go quiet.", blocks = [
         { type = "paragraph", content = "And the thing behind her sternum that's screamed since the cell goes quiet under Kess's last touch. Not gone. She can feel exactly where it sits now — a sealed door where the scream was. She'll carry it. It beats dying by inches." },
     ] },
     { advance_text = "Settle up.", blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Book says sixty. I'll find you when I want it — don't make me look hard. Go on. You've got somewhere to be." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Book says forty. I'll find you when I want it — don't make me look hard. Go on. You've got somewhere to be." },
     ] },
     { advance_text = "Stand up.", blocks = [
         { type = "paragraph", content = "She stands off the cradle. The leg holds. The drain sits true. She has a name she can use — Calloway — and a room to find it in. And under Mercer's next order, for the first time, a reason that's hers." },
